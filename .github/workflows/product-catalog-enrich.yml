@@ -44,7 +44,7 @@ jobs:
           - { group: lvlup,           stores: "https://www.lvlupgaming.co.uk" }
           - { group: merlins,         stores: "https://merlinsminiatures.co.uk" }
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-dotnet@v5
         with:
@@ -97,7 +97,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Download all enrichment artifacts
         uses: actions/download-artifact@v8
