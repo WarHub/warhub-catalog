@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://warhub.github.io/warhub-catalog/schema/index.json",
+  "title": "WarHub Catalog Partition Index",
+  "description": "Lists the available partitions for a catalog (game systems for products, brands for paints).",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "version", "generatedAt", "partitionType", "total", "partitions"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "kind": { "enum": ["product-index", "paint-index"] },
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "partitionType": { "type": "string" },
+    "total": { "type": "integer", "minimum": 0 },
+    "partitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "label", "records", "file"],
+        "properties": {
+          "key": { "type": "string" },
+          "label": { "type": "string" },
+          "records": { "type": "integer", "minimum": 0 },
+          "file": { "type": "string" }
+        }
+      }
+    }
+  }
+}

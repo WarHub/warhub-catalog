@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://warhub.github.io/warhub-catalog/schema/paint-catalog.json",
+  "title": "WarHub Paint Catalog",
+  "description": "A consolidated or per-brand paint catalog document. Cross-brand Delta-E equivalents are embedded per paint.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "version", "generatedAt", "counts", "source", "paints"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "kind": { "enum": ["paint-catalog", "paint-catalog-partition"] },
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "gitCommit": { "type": "string" },
+    "partition": { "$ref": "#/$defs/partition" },
+    "counts": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "source": { "$ref": "#/$defs/source" },
+    "paints": { "type": "array", "items": { "$ref": "#/$defs/paint" } }
+  },
+  "$defs": {
+    "paint": {
+      "type": "object",
+      "required": ["id", "brand", "name", "hex", "equivalents"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+$" },
+        "brand": { "type": "string" },
+        "range": { "type": "string" },
+        "name": { "type": "string" },
+        "hex": { "type": "string", "pattern": "^#[0-9a-f]{6}$" },
+        "type": { "type": "string" },
+        "finish": { "type": "string" },
+        "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }
+      }
+    },
+    "equivalent": {
+      "type": "object",
+      "required": ["id", "deltaE"],
+      "properties": {
+        "id": { "type": "string" },
+        "deltaE": { "type": "number", "minimum": 0 },
+        "tier": { "type": "string" }
+      }
+    },
+    "partition": {
+      "type": "object",
+      "required": ["type", "key", "label"],
+      "properties": {
+        "type": { "type": "string" },
+        "key": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["repo"],
+      "properties": {
+        "repo": { "type": "string" },
+        "release": {
+          "type": "object",
+          "required": ["tag", "url"],
+          "properties": { "tag": { "type": "string" }, "url": { "type": "string" } }
+        },
+        "pageUrl": { "type": "string" }
+      }
+    }
+  }
+}

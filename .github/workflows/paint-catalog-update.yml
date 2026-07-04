@@ -1,0 +1,102 @@
+name: Paint Catalog Update
+
+# Regenerates the paint source data under data/paints/ (incl. cross-brand Delta-E
+# equivalences) from Arcturus5404/miniature-paints, then opens a sticky PR.
+# Merging that PR triggers catalog-publish.yml.
+
+on:
+  workflow_dispatch:
+    inputs:
+      sample:
+        description: 'Sample N paints per brand (0 = all)'
+        required: false
+        default: '0'
+        type: string
+      brand:
+        description: 'Process specific brand only (empty = all)'
+        required: false
+        default: ''
+        type: string
+      scrape:
+        description: 'Enable web scraping (Scalemates, Shopify)'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+      direct-push:
+        description: 'Push directly to main (instead of a PR)'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['true', 'false']
+  schedule:
+    - cron: '0 4 * * 0'   # weekly, Sunday 04:00 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.x'
+          dotnet-quality: 'preview'
+
+      - name: Build and test tool
+        run: |
+          dotnet build tools/WarHub.PaintCatalog.Tool.Tests -c Release -v:q
+          dotnet test tools/WarHub.PaintCatalog.Tool.Tests -c Release -v:q --no-build
+
+      - name: Clone source data
+        run: git clone --depth 1 https://github.com/Arcturus5404/miniature-paints.git /tmp/miniature-paints
+
+      - name: Run paint catalog tool
+        run: |
+          ARGS="--source /tmp/miniature-paints/paints --output data/paints"
+          ARGS="$ARGS --overrides data/paints/overrides.yaml --equivalences"
+          ARGS="$ARGS --sample ${{ github.event.inputs.sample || '0' }} --verbose"
+          [ -n "${{ github.event.inputs.brand }}" ] && ARGS="$ARGS --brand '${{ github.event.inputs.brand }}'"
+          [ "${{ github.event.inputs.scrape || 'true' }}" = "true" ] && ARGS="$ARGS --scrape"
+          eval dotnet run --project tools/WarHub.PaintCatalog.Tool -c Release -- $ARGS
+
+      - name: Summary
+        run: |
+          git add -A data/paints
+          echo "### 🎨 Paint Catalog Update" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          git diff --cached --stat -- data/paints | tail -30 >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          git reset -q HEAD
+
+      - name: Create or update sticky PR
+        if: github.event.inputs.direct-push != 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: data/paints
+          branch: catalog/paint-update
+          base: main
+          title: 'Update paint catalog data'
+          body: |
+            Automated paint data regeneration (incl. cross-brand equivalences).
+
+            **Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            **Trigger:** ${{ github.event_name }}
+          commit-message: 'Update paint catalog data'
+          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          delete-branch: true
+
+      - name: Direct push
+        if: github.event.inputs.direct-push == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/paints
+          git diff --cached --quiet || git commit -m "Update paint catalog data"
+          git push

@@ -1,0 +1,908 @@
+toolVersion: 1.0.0.0
+totalProducts: 12799
+manufacturers:
+- name: Atomic Mass Games
+  slug: atomic-mass-games
+  productCount: 337
+  gameSystems:
+  - name: Marvel Crisis Protocol
+    slug: marvel-crisis-protocol
+    productCount: 137
+    factions:
+    - name: General
+      slug: general
+      productCount: 137
+  - name: Star Wars Armada
+    slug: star-wars-armada
+    productCount: 11
+    factions:
+    - name: General
+      slug: general
+      productCount: 11
+  - name: Star Wars Legion
+    slug: star-wars-legion
+    productCount: 107
+    factions:
+    - name: General
+      slug: general
+      productCount: 107
+  - name: Star Wars Shatterpoint
+    slug: star-wars-shatterpoint
+    productCount: 49
+    factions:
+    - name: General
+      slug: general
+      productCount: 49
+  - name: Star Wars X-Wing
+    slug: star-wars-x-wing
+    productCount: 33
+    factions:
+    - name: General
+      slug: general
+      productCount: 33
+- name: CMON
+  slug: cmon
+  productCount: 152
+  gameSystems:
+  - name: A Song of Ice and Fire
+    slug: asoiaf
+    productCount: 152
+    factions:
+    - name: Baratheon
+      slug: baratheon
+      productCount: 20
+    - name: Bolton
+      slug: bolton
+      productCount: 6
+    - name: Free Folk
+      slug: free-folk
+      productCount: 21
+    - name: General
+      slug: general
+      productCount: 5
+    - name: Greyjoy
+      slug: greyjoy
+      productCount: 13
+    - name: Lannister
+      slug: lannister
+      productCount: 19
+    - name: Martell
+      slug: martell
+      productCount: 12
+    - name: Neutral
+      slug: neutral
+      productCount: 20
+    - name: Stark
+      slug: stark
+      productCount: 21
+    - name: Targaryen
+      slug: targaryen
+      productCount: 15
+- name: Corvus Belli
+  slug: corvus-belli
+  productCount: 314
+  gameSystems:
+  - name: Aristeia!
+    slug: aristeia
+    productCount: 15
+    factions:
+    - name: General
+      slug: general
+      productCount: 15
+  - name: Infinity
+    slug: infinity
+    productCount: 298
+    factions:
+    - name: ALEPH
+      slug: aleph
+      productCount: 9
+    - name: Ariadna
+      slug: ariadna
+      productCount: 3
+    - name: Combined Army
+      slug: combined-army
+      productCount: 2
+    - name: General
+      slug: general
+      productCount: 268
+    - name: Haqqislam
+      slug: haqqislam
+      productCount: 5
+    - name: Nomads
+      slug: nomads
+      productCount: 2
+    - name: O-12
+      slug: o-12
+      productCount: 6
+    - name: PanOceania
+      slug: panoceania
+      productCount: 2
+    - name: Yu Jing
+      slug: yu-jing
+      productCount: 1
+  - name: Warcrow
+    slug: warcrow
+    productCount: 1
+    factions:
+    - name: General
+      slug: general
+      productCount: 1
+- name: Games Workshop
+  slug: games-workshop
+  productCount: 2990
+  gameSystems:
+  - name: Age of Sigmar
+    slug: age-of-sigmar
+    productCount: 659
+    factions:
+    - name: Armies of Chaos
+      slug: armies-of-chaos
+      productCount: 16
+    - name: Gaming Rules
+      slug: gaming-rules
+      productCount: 1
+    - name: General
+      slug: general
+      productCount: 1
+    - name: Grand Alliance Chaos
+      slug: grand-alliance-chaos
+      productCount: 180
+    - name: Grand Alliance Death
+      slug: grand-alliance-death
+      productCount: 111
+    - name: Grand Alliance Destruction
+      slug: grand-alliance-destruction
+      productCount: 105
+    - name: Grand Alliance Order
+      slug: grand-alliance-order
+      productCount: 235
+    - name: Race
+      slug: race
+      productCount: 1
+    - name: Scenery
+      slug: scenery
+      productCount: 8
+    - name: Ways to Play
+      slug: ways-to-play
+      productCount: 1
+  - name: Horus Heresy
+    slug: horus-heresy
+    productCount: 440
+    factions:
+    - name: Accessories
+      slug: accessories
+      productCount: 24
+    - name: Armies of Chaos
+      slug: armies-of-chaos
+      productCount: 2
+    - name: Armies of the Imperium
+      slug: armies-of-the-imperium
+      productCount: 14
+    - name: Armies of the Warmaster
+      slug: armies-of-the-warmaster
+      productCount: 5
+    - name: Characters
+      slug: characters
+      productCount: 59
+    - name: Command
+      slug: command
+      productCount: 4
+    - name: Elites
+      slug: elites
+      productCount: 10
+    - name: Fast Attack
+      slug: fast-attack
+      productCount: 2
+    - name: Forces of The Emperor
+      slug: forces-of-the-emperor
+      productCount: 12
+    - name: General
+      slug: general
+      productCount: 31
+    - name: Heavy Assault
+      slug: heavy-assault
+      productCount: 3
+    - name: Heavy Support
+      slug: heavy-support
+      productCount: 4
+    - name: High Command
+      slug: high-command
+      productCount: 4
+    - name: HQ
+      slug: hq
+      productCount: 6
+    - name: Knights
+      slug: knights
+      productCount: 6
+    - name: Legiones Astartes
+      slug: legiones-astartes
+      productCount: 14
+    - name: Lords of War
+      slug: lords-of-war
+      productCount: 3
+    - name: Loyalist Legiones Astartes
+      slug: loyalist-legiones-astartes
+      productCount: 84
+    - name: Mechanicum
+      slug: mechanicum
+      productCount: 33
+    - name: Monstrous Creatures
+      slug: monstrous-creatures
+      productCount: 1
+    - name: Primarchs
+      slug: primarchs
+      productCount: 1
+    - name: Retinues
+      slug: retinues
+      productCount: 1
+    - name: Rules & Army Books
+      slug: rules-army-books
+      productCount: 1
+    - name: Traitor Legiones Astartes
+      slug: traitor-legiones-astartes
+      productCount: 85
+    - name: Transports
+      slug: transports
+      productCount: 1
+    - name: Troops
+      slug: troops
+      productCount: 3
+    - name: Vehicles
+      slug: vehicles
+      productCount: 27
+  - name: Middle-earth
+    slug: middle-earth
+    productCount: 295
+    factions:
+    - name: General
+      slug: general
+      productCount: 2
+    - name: Heroes
+      slug: heroes
+      productCount: 48
+    - name: Middle-earth™ Scenery
+      slug: middle-earth-scenery
+      productCount: 6
+    - name: Monsters
+      slug: monsters
+      productCount: 5
+    - name: The Hobbit™ - Evil
+      slug: the-hobbit-evil
+      productCount: 18
+    - name: The Hobbit™ - Good
+      slug: the-hobbit-good
+      productCount: 32
+    - name: The Lord of the Rings™ - Evil
+      slug: the-lord-of-the-rings-evil
+      productCount: 71
+    - name: The Lord of the Rings™ - Good
+      slug: the-lord-of-the-rings-good
+      productCount: 89
+    - name: War Machine
+      slug: war-machine
+      productCount: 3
+    - name: Warriors
+      slug: warriors
+      productCount: 21
+  - name: Other Games
+    slug: other-games
+    productCount: 409
+    factions:
+    - name: Adeptus Titanicus
+      slug: adeptus-titanicus
+      productCount: 4
+    - name: Aeronautica Imperialis
+      slug: aeronautica-imperialis
+      productCount: 1
+    - name: Armies of Chaos
+      slug: armies-of-chaos
+      productCount: 6
+    - name: Blood Bowl
+      slug: blood-bowl
+      productCount: 104
+    - name: Genestealer Cults
+      slug: genestealer-cults
+      productCount: 4
+    - name: Grand Alliance Chaos
+      slug: grand-alliance-chaos
+      productCount: 2
+    - name: Grand Alliance Death
+      slug: grand-alliance-death
+      productCount: 2
+    - name: Grand Alliance Destruction
+      slug: grand-alliance-destruction
+      productCount: 2
+    - name: Grand Alliance Order
+      slug: grand-alliance-order
+      productCount: 2
+    - name: Kill Team
+      slug: kill-team
+      productCount: 4
+    - name: Legions Imperialis
+      slug: legions-imperialis
+      productCount: 96
+    - name: Necromunda
+      slug: necromunda
+      productCount: 164
+    - name: Space Marines
+      slug: space-marines
+      productCount: 4
+    - name: Warhammer Underworlds
+      slug: warhammer-underworlds
+      productCount: 14
+  - name: The Old World
+    slug: the-old-world
+    productCount: 266
+    factions:
+    - name: Beastman Brayherds
+      slug: beastman-brayherds
+      productCount: 19
+    - name: Characters
+      slug: characters
+      productCount: 10
+    - name: Chariots
+      slug: chariots
+      productCount: 1
+    - name: Dwarfen Mountain Holds
+      slug: dwarfen-mountain-holds
+      productCount: 29
+    - name: Empire of Man
+      slug: empire-of-man
+      productCount: 23
+    - name: General
+      slug: general
+      productCount: 4
+    - name: Grand Cathay
+      slug: grand-cathay
+      productCount: 10
+    - name: High Elf Realms
+      slug: high-elf-realms
+      productCount: 25
+    - name: Kingdom Of Bretonnia
+      slug: kingdom-of-bretonnia
+      productCount: 27
+    - name: Orc and Goblin Tribes
+      slug: orc-and-goblin-tribes
+      productCount: 37
+    - name: Scenery
+      slug: scenery
+      productCount: 6
+    - name: Tomb Kings Of Khemri
+      slug: tomb-kings-of-khemri
+      productCount: 25
+    - name: Warriors of Chaos
+      slug: warriors-of-chaos
+      productCount: 27
+    - name: Wood Elf Realms
+      slug: wood-elf-realms
+      productCount: 23
+  - name: Warhammer 40,000
+    slug: warhammer-40k
+    productCount: 921
+    factions:
+    - name: Aeldari
+      slug: aeldari
+      productCount: 65
+    - name: Armies of Chaos
+      slug: armies-of-chaos
+      productCount: 161
+    - name: Armies of the Imperium
+      slug: armies-of-the-imperium
+      productCount: 181
+    - name: Chaos
+      slug: chaos
+      productCount: 1
+    - name: Drukhari
+      slug: drukhari
+      productCount: 19
+    - name: General
+      slug: general
+      productCount: 4
+    - name: Genestealer Cults
+      slug: genestealer-cults
+      productCount: 47
+    - name: Grand Alliance Chaos
+      slug: grand-alliance-chaos
+      productCount: 12
+    - name: Kill Team
+      slug: kill-team
+      productCount: 4
+    - name: Leagues of Votann
+      slug: leagues-of-votann
+      productCount: 25
+    - name: Necrons
+      slug: necrons
+      productCount: 47
+    - name: Orks
+      slug: orks
+      productCount: 59
+    - name: Psyker
+      slug: psyker
+      productCount: 1
+    - name: Space Marines
+      slug: space-marines
+      productCount: 177
+    - name: T'au Empire
+      slug: tau-empire
+      productCount: 48
+    - name: Terrain
+      slug: terrain
+      productCount: 14
+    - name: Titanic
+      slug: titanic
+      productCount: 4
+    - name: Tyranids
+      slug: tyranids
+      productCount: 50
+    - name: Ways to Play
+      slug: ways-to-play
+      productCount: 2
+- name: Mantic Games
+  slug: mantic-games
+  productCount: 1601
+  gameSystems:
+  - name: Armada
+    slug: armada
+    productCount: 107
+    factions:
+    - name: General
+      slug: general
+      productCount: 107
+  - name: Deadzone
+    slug: deadzone
+    productCount: 235
+    factions:
+    - name: General
+      slug: general
+      productCount: 235
+  - name: DreadBall
+    slug: dreadball
+    productCount: 87
+    factions:
+    - name: General
+      slug: general
+      productCount: 87
+  - name: Firefight
+    slug: firefight
+    productCount: 125
+    factions:
+    - name: General
+      slug: general
+      productCount: 125
+  - name: 'Halo: Flashpoint'
+    slug: halo-flashpoint
+    productCount: 74
+    factions:
+    - name: General
+      slug: general
+      productCount: 74
+  - name: Kings of War
+    slug: kings-of-war
+    productCount: 748
+    factions:
+    - name: General
+      slug: general
+      productCount: 748
+  - name: 'The Walking Dead: All Out War'
+    slug: walking-dead-all-out-war
+    productCount: 225
+    factions:
+    - name: General
+      slug: general
+      productCount: 225
+- name: Para Bellum
+  slug: para-bellum
+  productCount: 367
+  gameSystems:
+  - name: Conquest
+    slug: conquest
+    productCount: 367
+    factions:
+    - name: City States
+      slug: city-states
+      productCount: 34
+    - name: Dweghom
+      slug: dweghom
+      productCount: 39
+    - name: General
+      slug: general
+      productCount: 65
+    - name: Hundred Kingdoms
+      slug: hundred-kingdoms
+      productCount: 47
+    - name: Nords
+      slug: nords
+      productCount: 39
+    - name: Old Dominion
+      slug: old-dominion
+      productCount: 34
+    - name: Sorcerer Kings
+      slug: sorcerer-kings
+      productCount: 26
+    - name: Spires
+      slug: spires
+      productCount: 38
+    - name: Weaver Courts
+      slug: weaver-courts
+      productCount: 19
+    - name: Yoroni
+      slug: yoroni
+      productCount: 26
+- name: Steamforged Games
+  slug: steamforged-games
+  productCount: 558
+  gameSystems:
+  - name: Epic Encounters
+    slug: epic-encounters
+    productCount: 71
+    factions:
+    - name: General
+      slug: general
+      productCount: 71
+  - name: Godtear
+    slug: godtear
+    productCount: 70
+    factions:
+    - name: General
+      slug: general
+      productCount: 47
+    - name: Guardian
+      slug: guardian
+      productCount: 6
+    - name: Maelstrom
+      slug: maelstrom
+      productCount: 5
+    - name: Shaper
+      slug: shaper
+      productCount: 6
+    - name: Slayer
+      slug: slayer
+      productCount: 6
+  - name: Guild Ball
+    slug: guild-ball
+    productCount: 107
+    factions:
+    - name: General
+      slug: general
+      productCount: 107
+  - name: Warmachine
+    slug: warmachine
+    productCount: 310
+    factions:
+    - name: Crucible Guard
+      slug: crucible-guard
+      productCount: 9
+    - name: Cryx
+      slug: cryx
+      productCount: 22
+    - name: Cygnar
+      slug: cygnar
+      productCount: 41
+    - name: Dusk
+      slug: dusk
+      productCount: 29
+    - name: General
+      slug: general
+      productCount: 36
+    - name: Gravediggers
+      slug: gravediggers
+      productCount: 7
+    - name: Khador
+      slug: khador
+      productCount: 28
+    - name: Khymaera
+      slug: khymaera
+      productCount: 26
+    - name: Mercenary
+      slug: mercenary
+      productCount: 17
+    - name: Old Umbrey
+      slug: old-umbrey
+      productCount: 23
+    - name: Orgoth
+      slug: orgoth
+      productCount: 29
+    - name: Southern Kriels
+      slug: southern-kriels
+      productCount: 43
+- name: Warlord Games
+  slug: warlord-games
+  productCount: 5854
+  gameSystems:
+  - name: Achtung Panzer!
+    slug: achtung-panzer
+    productCount: 33
+    factions:
+    - name: British
+      slug: british
+      productCount: 18
+    - name: Finnish
+      slug: finnish
+      productCount: 1
+    - name: General
+      slug: general
+      productCount: 4
+    - name: German
+      slug: german
+      productCount: 6
+    - name: Soviet
+      slug: soviet
+      productCount: 4
+  - name: Black Powder
+    slug: black-powder
+    productCount: 456
+    factions:
+    - name: American
+      slug: american
+      productCount: 40
+    - name: British
+      slug: british
+      productCount: 101
+    - name: French
+      slug: french
+      productCount: 114
+    - name: General
+      slug: general
+      productCount: 201
+  - name: Black Seas
+    slug: black-seas
+    productCount: 89
+    factions:
+    - name: British
+      slug: british
+      productCount: 38
+    - name: French
+      slug: french
+      productCount: 11
+    - name: General
+      slug: general
+      productCount: 40
+  - name: Blood Red Skies
+    slug: blood-red-skies
+    productCount: 143
+    factions:
+    - name: British
+      slug: british
+      productCount: 2
+    - name: General
+      slug: general
+      productCount: 113
+    - name: Soviet
+      slug: soviet
+      productCount: 28
+  - name: Bolt Action
+    slug: bolt-action
+    productCount: 3899
+    factions:
+    - name: American
+      slug: american
+      productCount: 48
+    - name: British
+      slug: british
+      productCount: 430
+    - name: Finnish
+      slug: finnish
+      productCount: 16
+    - name: French
+      slug: french
+      productCount: 149
+    - name: General
+      slug: general
+      productCount: 2507
+    - name: German
+      slug: german
+      productCount: 412
+    - name: Hungarian
+      slug: hungarian
+      productCount: 3
+    - name: Italian
+      slug: italian
+      productCount: 99
+    - name: Japanese
+      slug: japanese
+      productCount: 64
+    - name: Partisan
+      slug: partisan
+      productCount: 3
+    - name: Polish
+      slug: polish
+      productCount: 39
+    - name: Soviet
+      slug: soviet
+      productCount: 129
+  - name: Cruel Seas
+    slug: cruel-seas
+    productCount: 38
+    factions:
+    - name: British
+      slug: british
+      productCount: 9
+    - name: General
+      slug: general
+      productCount: 22
+    - name: Soviet
+      slug: soviet
+      productCount: 7
+  - name: Epic Black Powder
+    slug: epic-black-powder
+    productCount: 64
+    factions:
+    - name: American
+      slug: american
+      productCount: 5
+    - name: British
+      slug: british
+      productCount: 23
+    - name: French
+      slug: french
+      productCount: 19
+    - name: General
+      slug: general
+      productCount: 17
+  - name: Epic Hail Caesar
+    slug: epic-hail-caesar
+    productCount: 46
+    factions:
+    - name: General
+      slug: general
+      productCount: 46
+  - name: Epic Pike & Shotte
+    slug: epic-pike-and-shotte
+    productCount: 46
+    factions:
+    - name: American
+      slug: american
+      productCount: 1
+    - name: General
+      slug: general
+      productCount: 45
+  - name: Beyond the Gates of Antares
+    slug: gates-of-antares
+    productCount: 130
+    factions:
+    - name: General
+      slug: general
+      productCount: 130
+  - name: Hail Caesar
+    slug: hail-caesar
+    productCount: 259
+    factions:
+    - name: General
+      slug: general
+      productCount: 248
+    - name: German
+      slug: german
+      productCount: 11
+  - name: Judge Dredd
+    slug: judge-dredd
+    productCount: 24
+    factions:
+    - name: General
+      slug: general
+      productCount: 24
+  - name: Konflikt '47
+    slug: konflikt-47
+    productCount: 184
+    factions:
+    - name: British
+      slug: british
+      productCount: 46
+    - name: General
+      slug: general
+      productCount: 40
+    - name: German
+      slug: german
+      productCount: 57
+    - name: Italian
+      slug: italian
+      productCount: 1
+    - name: Japanese
+      slug: japanese
+      productCount: 20
+    - name: Soviet
+      slug: soviet
+      productCount: 20
+  - name: Pike & Shotte
+    slug: pike-and-shotte
+    productCount: 219
+    factions:
+    - name: General
+      slug: general
+      productCount: 161
+    - name: Italian
+      slug: italian
+      productCount: 58
+  - name: SPQR
+    slug: spqr
+    productCount: 8
+    factions:
+    - name: General
+      slug: general
+      productCount: 7
+    - name: German
+      slug: german
+      productCount: 1
+  - name: Stargrave
+    slug: stargrave
+    productCount: 4
+    factions:
+    - name: General
+      slug: general
+      productCount: 4
+  - name: Victory at Sea
+    slug: victory-at-sea
+    productCount: 159
+    factions:
+    - name: British
+      slug: british
+      productCount: 32
+    - name: French
+      slug: french
+      productCount: 11
+    - name: General
+      slug: general
+      productCount: 116
+  - name: Warlords of Erehwon
+    slug: warlords-of-erehwon
+    productCount: 53
+    factions:
+    - name: General
+      slug: general
+      productCount: 53
+- name: Wyrd Games
+  slug: wyrd-games
+  productCount: 626
+  gameSystems:
+  - name: Malifaux
+    slug: malifaux
+    productCount: 550
+    factions:
+    - name: Arcanists
+      slug: arcanists
+      productCount: 48
+    - name: Bayou
+      slug: bayou
+      productCount: 48
+    - name: Explorer's Society
+      slug: explorers-society
+      productCount: 20
+    - name: General
+      slug: general
+      productCount: 243
+    - name: Guild
+      slug: guild
+      productCount: 37
+    - name: Neverborn
+      slug: neverborn
+      productCount: 39
+    - name: Outcasts
+      slug: outcasts
+      productCount: 37
+    - name: Resurrectionists
+      slug: resurrectionists
+      productCount: 45
+    - name: Ten Thunders
+      slug: ten-thunders
+      productCount: 33
+  - name: The Other Side
+    slug: the-other-side
+    productCount: 76
+    factions:
+    - name: Abyssinia
+      slug: abyssinia
+      productCount: 16
+    - name: Cult of the Burning Man
+      slug: cult-of-the-burning-man
+      productCount: 15
+    - name: General
+      slug: general
+      productCount: 17
+    - name: Gibbering Hordes
+      slug: gibbering-hordes
+      productCount: 13
+    - name: Kimon
+      slug: kimon
+      productCount: 4
+    - name: King's Empire
+      slug: kings-empire
+      productCount: 11

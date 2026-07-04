@@ -1,0 +1,81 @@
+name: Publish Catalog
+
+# Bundles the source YAML under data/ into the versioned JSON catalog and publishes it
+# two ways: immutable GitHub Release assets, and the GitHub Pages "latest" URL.
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write   # create releases + tags
+  pages: write      # deploy Pages
+  id-token: write   # Pages OIDC
+
+concurrency:
+  group: catalog-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0   # need tags for same-day version suffixing
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.x'
+          dotnet-quality: 'preview'
+
+      - name: Compute version
+        id: ver
+        run: |
+          base="$(date -u +%Y.%-m.%-d)"
+          existing="$(git tag -l "v$base" "v$base.*" | wc -l)"
+          if [ "$existing" -eq 0 ]; then version="$base"; else version="$base.$((existing + 1))"; fi
+          echo "version=$version"       >> "$GITHUB_OUTPUT"
+          echo "tag=v$version"          >> "$GITHUB_OUTPUT"
+
+      - name: Bundle catalog
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          TAG: ${{ steps.ver.outputs.tag }}
+          PAGES: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: |
+          dotnet run --project tools/WarHub.Catalog.Publish -c Release -- \
+            --catalog-version "$VERSION" \
+            --git-commit "$GITHUB_SHA" \
+            --generated-at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --repo "$GITHUB_REPOSITORY" \
+            --release-tag "$TAG" \
+            --page-base-url "$PAGES"
+
+      - name: Package partitions
+        run: tar -czf catalog-${{ steps.ver.outputs.version }}.tar.gz -C dist .
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.ver.outputs.tag }}" \
+            --title "Catalog ${{ steps.ver.outputs.version }}" \
+            --notes "Automated catalog build from ${GITHUB_SHA:0:7}. Fetch \`manifest.json\` first — it lists every file with size + sha256." \
+            dist/manifest.json dist/products.json dist/paints.json \
+            "catalog-${{ steps.ver.outputs.version }}.tar.gz"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+      - name: Deploy to Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

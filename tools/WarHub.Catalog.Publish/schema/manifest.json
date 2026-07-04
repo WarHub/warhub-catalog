@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://warhub.github.io/warhub-catalog/schema/manifest.json",
+  "title": "WarHub Catalog Manifest",
+  "description": "Discovery document: fetch this first. Describes the release, where files live, and lists every published document with size + sha256.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "version", "generatedAt", "source", "counts", "files"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "kind": { "const": "manifest" },
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "gitCommit": { "type": "string" },
+    "source": {
+      "type": "object",
+      "required": ["repo"],
+      "properties": {
+        "repo": { "type": "string" },
+        "release": {
+          "type": "object",
+          "required": ["tag", "url"],
+          "properties": { "tag": { "type": "string" }, "url": { "type": "string" } }
+        },
+        "pageUrl": { "type": "string" }
+      }
+    },
+    "counts": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "kind", "bytes", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "kind": { "type": "string" },
+          "partition": { "type": "string" },
+          "records": { "type": "integer" },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    }
+  }
+}

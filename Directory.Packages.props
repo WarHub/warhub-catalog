@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- Pin transitive dependencies so security advisories can be resolved centrally -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Catalog tools -->
+    <PackageVersion Include="Microsoft.Playwright" Version="1.61.0" />
+    <PackageVersion Include="ReverseMarkdown" Version="5.4.0" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.9" />
+    <PackageVersion Include="YamlDotNet" Version="18.1.0" />
+    <!-- Publisher: JSON Schema authoring + validation of generated artifacts -->
+    <PackageVersion Include="JsonSchema.Net" Version="7.3.4" />
+    <!-- Tests -->
+    <PackageVersion Include="coverlet.collector" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+  </ItemGroup>
+</Project>

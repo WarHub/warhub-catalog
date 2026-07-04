@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://warhub.github.io/warhub-catalog/schema/product-catalog.json",
+  "title": "WarHub Product Catalog",
+  "description": "A consolidated or per-game-system product catalog document.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "version", "generatedAt", "counts", "source", "products"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "kind": { "enum": ["product-catalog", "product-catalog-partition"] },
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "gitCommit": { "type": "string" },
+    "partition": { "$ref": "#/$defs/partition" },
+    "counts": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "source": { "$ref": "#/$defs/source" },
+    "products": { "type": "array", "items": { "$ref": "#/$defs/product" } }
+  },
+  "$defs": {
+    "product": {
+      "type": "object",
+      "required": ["name", "quantity"],
+      "properties": {
+        "ean": { "type": "string" },
+        "name": { "type": "string" },
+        "gameSystem": { "type": "string" },
+        "faction": { "type": "string" },
+        "quantity": { "type": "integer", "minimum": 1 },
+        "productCode": { "type": "string" },
+        "url": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      }
+    },
+    "partition": {
+      "type": "object",
+      "required": ["type", "key", "label"],
+      "properties": {
+        "type": { "type": "string" },
+        "key": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["repo"],
+      "properties": {
+        "repo": { "type": "string" },
+        "release": {
+          "type": "object",
+          "required": ["tag", "url"],
+          "properties": { "tag": { "type": "string" }, "url": { "type": "string" } }
+        },
+        "pageUrl": { "type": "string" }
+      }
+    }
+  }
+}

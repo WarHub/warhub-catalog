@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WarHub.Catalog.Publish.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSchema.Net" />
+    <PackageReference Include="System.CommandLine" />
+    <PackageReference Include="YamlDotNet" />
+  </ItemGroup>
+
+  <!-- Reuse the tools' YAML model records for reading the source-of-truth data. -->
+  <ItemGroup>
+    <ProjectReference Include="..\WarHub.ProductCatalog.Tool\WarHub.ProductCatalog.Tool.csproj" />
+    <ProjectReference Include="..\WarHub.PaintCatalog.Tool\WarHub.PaintCatalog.Tool.csproj" />
+  </ItemGroup>
+
+  <!-- Published JSON Schemas: authored here, copied into dist/schema, and used to validate output. -->
+  <ItemGroup>
+    <Content Include="schema\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>schema\%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
+
+</Project>
