@@ -40,6 +40,14 @@ public class CatalogSerializerTests
     [InlineData("null")]
     [InlineData("2026-07-07")]
     [InlineData("12.5")]
+    [InlineData(".5")]
+    [InlineData("1e10")]
+    [InlineData(".inf")]
+    [InlineData(".nan")]
+    [InlineData("0x1A")]
+    [InlineData("0o17")]
+    [InlineData("+42")]
+    [InlineData("2026-07-07 12:00:00")]
     public void Serialize_AmbiguousScalars_AreQuoted(string value)
     {
         var serializer = CatalogSerializer.CreateSerializer();
@@ -55,5 +63,18 @@ public class CatalogSerializerTests
         var obj = new Sample { Ean = "1", Plain = "x", Note = null };
         string yaml = serializer.Serialize(obj);
         Assert.DoesNotContain("note:", yaml);
+    }
+
+    [Theory]
+    [InlineData("Space Marines")]
+    [InlineData("Episode 4")]
+    [InlineData("Product 123")]
+    [InlineData("Wardens of the North")]
+    public void Serialize_PlainProse_IsNotQuoted(string value)
+    {
+        var serializer = CatalogSerializer.CreateSerializer();
+        var obj = new Sample { Ean = "1", Plain = value };
+        string yaml = serializer.Serialize(obj);
+        Assert.Contains($"plain: {value}", yaml);
     }
 }

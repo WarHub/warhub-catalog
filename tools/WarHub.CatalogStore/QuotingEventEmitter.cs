@@ -14,9 +14,10 @@ namespace WarHub.CatalogStore;
 /// </summary>
 public sealed partial class QuotingEventEmitter(IEventEmitter next) : ChainedEventEmitter(next)
 {
-    // Core-schema-ambiguous plain scalars: int, float, bool, null, and ISO-ish dates.
+    // Core-schema-ambiguous plain scalars: integers (incl. leading zeros, hex, octal),
+    // floats (incl. leading-dot, exponent, .inf/.nan), booleans, nulls, and dates/timestamps.
     [GeneratedRegex(
-        @"^(-?\d+(\.\d+)?|true|false|null|~|yes|no|on|off|\d{4}-\d{2}-\d{2}([Tt].*)?)$",
+        @"^([-+]?\d+|0x[0-9a-fA-F]+|0o[0-7]+|[-+]?(\d+\.\d*|\.\d+)([eE][-+]?\d+)?|[-+]?\d+[eE][-+]?\d+|[-+]?\.(inf|nan)|true|false|yes|no|on|off|null|~|\d{4}-\d{2}-\d{2}([Tt ].*)?)$",
         RegexOptions.IgnoreCase)]
     private static partial Regex Ambiguous();
 
