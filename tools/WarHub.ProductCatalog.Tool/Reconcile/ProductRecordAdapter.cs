@@ -23,7 +23,7 @@ public sealed class ProductRecordAdapter : ICatalogRecordAdapter<Product>
         // discontinued/delisted can only come from an override, so it wins. Otherwise the
         // archived lifecycle is sticky (ledger transitions + overrides are the only mutators).
         Status = fresh.Status is "discontinued" or "delisted" ? fresh.Status : existing.Status,
-        Availability = Pick(fresh.Availability, existing.Availability)!,
+        Availability = Pick(fresh.Availability, existing.Availability) ?? "unknown",
         PriceGbp = fresh.PriceGbp ?? existing.PriceGbp,
         PriceUsd = fresh.PriceUsd ?? existing.PriceUsd,
         PriceEur = fresh.PriceEur ?? existing.PriceEur,
