@@ -171,4 +171,43 @@ public class CatalogReconcilerTests
             first.Records.Select(r => (r.Name, r.Price, r.FirstSeen)),
             second.Records.Select(r => (r.Name, r.Price, r.FirstSeen)));
     }
+
+    [Fact]
+    public void TwoFreshRecordsSharingUrl_DoNotCollapse()
+    {
+        // Existing A (key "alpha", url u1). Fresh = an update to A (same key, same url)
+        // plus a DIFFERENT product B that happens to share the same url.
+        var existing = new List<Rec> { new() { Name = "Alpha", Url = "http://x/1", Price = "10", FirstSeen = "2020-01-01" } };
+        var fresh = new List<Rec>
+        {
+            new() { Name = "Alpha", Url = "http://x/1", Price = "11" }, // ordinary update, matches by key
+            new() { Name = "Beta", Url = "http://x/1", Price = "5" },   // distinct product sharing the url
+        };
+
+        ReconcileResult<Rec> result = NewReconciler().Reconcile(existing, fresh, NoAliases, NoRetract, "2026-07-07");
+
+        Assert.Equal(2, result.Records.Count);
+        Assert.Contains(result.Records, r => r.Name == "Alpha" && r.Price == "11");
+        Assert.Contains(result.Records, r => r.Name == "Beta");
+    }
+
+    [Fact]
+    public void AliasTarget_AlreadyMatchedByKey_IsNotStolen()
+    {
+        // Existing A (key "alpha"). Fresh = an update to A (key alpha) plus a record whose
+        // alias points at "alpha"; the alias must NOT steal the already-matched A.
+        var existing = new List<Rec> { new() { Name = "Alpha", Price = "10", FirstSeen = "2020-01-01" } };
+        var fresh = new List<Rec>
+        {
+            new() { Name = "Alpha", Price = "11" },
+            new() { Name = "Gamma", Price = "7" },
+        };
+        var aliases = new Dictionary<string, string> { ["gamma"] = "alpha" };
+
+        ReconcileResult<Rec> result = NewReconciler().Reconcile(existing, fresh, aliases, NoRetract, "2026-07-07");
+
+        Assert.Equal(2, result.Records.Count);
+        Assert.Contains(result.Records, r => r.Name == "Alpha" && r.Price == "11");
+        Assert.Contains(result.Records, r => r.Name == "Gamma");
+    }
 }

@@ -1,6 +1,7 @@
 namespace WarHub.CatalogStore.Reconcile;
 
 /// <summary>Merged records (sorted by identity key) plus the keys seen this run.</summary>
+/// <remarks><see cref="SeenKeys"/> are identity keys matched or inserted this run and are NOT guaranteed to all appear in <see cref="Records"/> (a key can be seen yet removed by <c>retracted</c>).</remarks>
 public sealed record ReconcileResult<T>(IReadOnlyList<T> Records, IReadOnlySet<string> SeenKeys);
 
 /// <summary>
@@ -30,6 +31,10 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
         }
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
+        // Keys already matched or inserted this run cannot be re-consumed by a later
+        // fresh record's URL/alias fallback — this prevents two distinct fresh records
+        // that happen to share a URL/alias from collapsing into one output record.
+        var consumed = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (T freshRec in fresh)
         {
@@ -40,29 +45,34 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
             {
                 byKey[freshKey] = adapter.Merge(existingByKey, freshRec);
                 seen.Add(freshKey);
+                consumed.Add(freshKey);
                 continue;
             }
 
-            // 2. URL fallback → rename.
+            // 2. URL fallback → rename (only if the target has not been consumed this run).
             string? freshUrl = adapter.Url(freshRec);
             if (!string.IsNullOrEmpty(freshUrl) && byUrl.TryGetValue(freshUrl, out string? renamedKey)
+                && !consumed.Contains(renamedKey)
                 && byKey.TryGetValue(renamedKey, out T? existingByUrl))
             {
                 byKey.Remove(renamedKey);
-                T renamed = adapter.ApplyRename(existingByUrl, freshRec);
-                byKey[freshKey] = renamed;
+                byKey[freshKey] = adapter.ApplyRename(existingByUrl, freshRec);
                 seen.Add(freshKey);
+                consumed.Add(renamedKey);
+                consumed.Add(freshKey);
                 continue;
             }
 
-            // 3. Alias override → rename (freshKey -> canonical existing key).
+            // 3. Alias override → rename (only if the canonical target has not been consumed).
             if (aliases.TryGetValue(freshKey, out string? canonicalKey)
+                && !consumed.Contains(canonicalKey)
                 && byKey.TryGetValue(canonicalKey, out T? existingByAlias))
             {
                 byKey.Remove(canonicalKey);
-                T renamed = adapter.ApplyRename(existingByAlias, freshRec);
-                byKey[freshKey] = renamed;
+                byKey[freshKey] = adapter.ApplyRename(existingByAlias, freshRec);
                 seen.Add(freshKey);
+                consumed.Add(canonicalKey);
+                consumed.Add(freshKey);
                 continue;
             }
 
@@ -70,6 +80,7 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
             T inserted = adapter.HasFirstSeen(freshRec) ? freshRec : adapter.WithFirstSeen(freshRec, today);
             byKey[freshKey] = inserted;
             seen.Add(freshKey);
+            consumed.Add(freshKey);
         }
 
         // Apply retractions, then order deterministically.
