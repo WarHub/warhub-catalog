@@ -99,11 +99,10 @@ public class SampleModeTests
             {
                 ToolVersion = "1.0.0",
                 SourceRepo = "Arcturus5404/miniature-paints",
-                TotalPaints = vallejoPaints.Count + citadelPaints.Count,
                 Brands =
                 [
-                    new BrandSummary { Name = "Vallejo", Slug = "vallejo", PaintCount = vallejoPaints.Count, HasProductCodes = true },
-                    new BrandSummary { Name = "Citadel Colour", Slug = "citadel-colour", PaintCount = citadelPaints.Count, HasProductCodes = false }
+                    new BrandSummary { Name = "Vallejo", Slug = "vallejo", HasProductCodes = true },
+                    new BrandSummary { Name = "Citadel Colour", Slug = "citadel-colour", HasProductCodes = false }
                 ]
             };
             await YamlCatalogWriter.WriteManifestAsync(manifest, outputDir);

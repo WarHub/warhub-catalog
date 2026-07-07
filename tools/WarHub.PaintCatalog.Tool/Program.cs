@@ -1,12 +1,15 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.Reflection;
+using WarHub.CatalogStore.Ledger;
+using WarHub.CatalogStore.Reconcile;
 using WarHub.PaintCatalog.Tool.Configuration;
 using WarHub.PaintCatalog.Tool.Enrichment;
 using WarHub.PaintCatalog.Tool.Equivalence;
 using WarHub.PaintCatalog.Tool.Models;
 using WarHub.PaintCatalog.Tool.Output;
 using WarHub.PaintCatalog.Tool.Parsing;
+using WarHub.PaintCatalog.Tool.Reconcile;
 using WarHub.PaintCatalog.Tool.Scraping;
 
 Option<DirectoryInfo?> sourceOption = new("--source")
@@ -101,7 +104,21 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     string toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
     var brandSummaries = new List<BrandSummary>();
     var allCatalogs = new List<BrandCatalog>();
-    int totalPaints = 0;
+
+    // Every brand's final flat Paints (post all enrichment, including Shopify) plus whether its
+    // source succeeded this run. A single finalization pass below maps -> loads -> reconciles ->
+    // ledgers -> writes each brand exactly once, after both phases below have contributed to it.
+    var pendingBrands = new Dictionary<string, (string Brand, string BrandSlug, string Source, string License, List<Paint> Paints, bool Succeeded)>(
+        StringComparer.OrdinalIgnoreCase);
+
+    string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+    string ledgerPath = Path.Combine(outputDir, "_liveness.yaml");
+    LivenessLedger ledger = await LedgerStore.LoadAsync(ledgerPath, cancellationToken);
+
+    // Only a full, unsampled run may drive the liveness ledger. A --sample run is not
+    // representative — miss-counting its absent records would spuriously flag real paints as
+    // discontinued in the archive. A --brand run only touches its own source, so it is safe.
+    bool authoritativeRun = sample == 0;
 
     if (verbose) Console.WriteLine($"Source: {source?.FullName ?? "(none)"}");
     if (verbose) Console.WriteLine($"Output: {outputDir}");
@@ -174,18 +191,17 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             Paints = paints.ToList()
         };
 
-        await YamlCatalogWriter.WriteBrandAsync(catalog, outputDir);
         allCatalogs.Add(catalog);
+        pendingBrands[brandInfo.Slug] = (
+            catalog.Brand, catalog.BrandSlug, catalog.Source, catalog.License,
+            paints.ToList(), Succeeded: paints.Count > 0);
 
         brandSummaries.Add(new BrandSummary
         {
             Name = brandInfo.DisplayName,
             Slug = brandInfo.Slug,
-            PaintCount = paints.Count,
             HasProductCodes = hasProductCodes
         });
-
-        totalPaints += paints.Count;
 
         if (verbose) Console.WriteLine($" {paints.Count} paints");
     }
@@ -250,18 +266,17 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                 Paints = scrapedPaints.ToList()
             };
 
-            await YamlCatalogWriter.WriteBrandAsync(catalog, outputDir);
             allCatalogs.Add(catalog);
+            pendingBrands[slug] = (
+                catalog.Brand, catalog.BrandSlug, catalog.Source, catalog.License,
+                scrapedPaints.ToList(), Succeeded: true);
 
             brandSummaries.Add(new BrandSummary
             {
                 Name = scrapedBrand.DisplayName,
                 Slug = slug,
-                PaintCount = scrapedPaints.Count,
                 HasProductCodes = hasProductCodes
             });
-
-            totalPaints += scrapedPaints.Count;
 
             if (verbose) Console.WriteLine($" {scrapedPaints.Count} paints");
         }
@@ -326,11 +341,89 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             int idx = allCatalogs.IndexOf(matchingCatalog);
             if (idx >= 0) allCatalogs[idx] = updatedCatalog;
 
-            // Re-write the YAML with enriched data
-            await YamlCatalogWriter.WriteBrandAsync(updatedCatalog, outputDir);
+            // Carry the enrichment into the pending write: the brand's file is written exactly
+            // once, in the finalization pass below, after all enrichment for it is complete.
+            if (pendingBrands.TryGetValue(storeSlug, out var pendingEntry))
+            {
+                pendingBrands[storeSlug] = (
+                    pendingEntry.Brand, pendingEntry.BrandSlug, pendingEntry.Source, pendingEntry.License,
+                    enrichedPaints, pendingEntry.Succeeded);
+            }
 
             if (verbose) Console.WriteLine($" enriched {enriched}/{matchingCatalog.PaintCount} paints");
         }
+    }
+
+    // Finalization: for each brand (after all working-model enrichment, including Shopify, is
+    // complete), map its final flat Paints to archival PaintRecords, reconcile them against the
+    // existing archive (append-only), update the shared liveness ledger, apply auto-flag /
+    // reactivation transitions, and write the brand file exactly once.
+    if (verbose) Console.WriteLine("\n--- Finalizing brands (reconcile + ledger + write) ---");
+
+    var adapter = new PaintRecordAdapter();
+    var reconciler = new CatalogReconciler<PaintRecord>(adapter);
+    int totalPaints = 0;
+
+    foreach (var (brandSlug, pending) in pendingBrands.OrderBy(kvp => kvp.Key, StringComparer.Ordinal))
+    {
+        List<PaintRecord> fresh = pending.Paints.Select(PaintRecordMapper.ToRecord).ToList();
+        string brandFilePath = Path.Combine(outputDir, "brands", $"{brandSlug}.yaml");
+        IReadOnlyList<PaintRecord> existing = await BrandArchiveWriter.LoadAsync(brandFilePath, cancellationToken);
+
+        (IReadOnlyDictionary<string, string> aliases, ISet<string> retracted) =
+            PaintOverrideAliases.Load(overridesPath, brandSlug);
+
+        ReconcileResult<PaintRecord> reconciled = reconciler.Reconcile(existing, fresh, aliases, retracted, today);
+
+        List<PaintRecord> finalRecords;
+        if (authoritativeRun)
+        {
+            var seenLedgerKeys = reconciled.SeenKeys
+                .Select(k => $"{brandSlug}/{k}").ToHashSet(StringComparer.Ordinal);
+            var knownLedgerKeys = reconciled.Records
+                .Select(p => $"{brandSlug}/{adapter.IdentityKey(p)}").ToList();
+            var currentlyFlagged = reconciled.Records
+                .Where(p => p.Status == "suspected-discontinued")
+                .Select(p => $"{brandSlug}/{adapter.IdentityKey(p)}")
+                .ToHashSet(StringComparer.Ordinal);
+
+            LivenessUpdate live = LivenessUpdater.Apply(
+                ledger, brandSlug, sourceSucceeded: pending.Succeeded, scrapedCount: pending.Paints.Count,
+                seenKeys: seenLedgerKeys, knownKeysForSource: knownLedgerKeys,
+                today: today, currentlyFlaggedKeys: currentlyFlagged);
+            ledger = live.Ledger;
+
+            // Apply auto-flag / reactivation status transitions onto the records.
+            finalRecords = reconciled.Records.Select(p =>
+            {
+                string lk = $"{brandSlug}/{adapter.IdentityKey(p)}";
+                if (live.Flagged.Contains(lk) && p.Status == "current")
+                    // A paint that vanished from the source has genuinely-unknown availability,
+                    // not whatever it last reported.
+                    return p with { Status = "suspected-discontinued", Availability = "unknown" };
+                if (live.Reactivated.Contains(lk) && p.Status == "suspected-discontinued")
+                    return p with { Status = "current" };
+                return p;
+            }).ToList();
+        }
+        else
+        {
+            finalRecords = reconciled.Records.ToList();
+        }
+
+        var archive = new BrandArchive
+        {
+            Brand = pending.Brand,
+            BrandSlug = brandSlug,
+            Source = pending.Source,
+            License = pending.License,
+            Paints = finalRecords,
+        };
+
+        await BrandArchiveWriter.WriteAsync(archive, outputDir, cancellationToken);
+        totalPaints += finalRecords.Count;
+
+        if (verbose) Console.WriteLine($"  {brandSlug}: {finalRecords.Count} archived records ({fresh.Count} fresh this run)");
     }
 
     // Write manifest
@@ -338,11 +431,13 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     {
         ToolVersion = toolVersion,
         SourceRepo = "Arcturus5404/miniature-paints",
-        TotalPaints = totalPaints,
         Brands = brandSummaries
     };
 
     await YamlCatalogWriter.WriteManifestAsync(manifest, outputDir);
+
+    if (authoritativeRun)
+        await LedgerStore.SaveAsync(ledgerPath, ledger, cancellationToken);
 
     Console.WriteLine($"Done! Generated catalog: {totalPaints} paints across {brandSummaries.Count} brands → {outputDir}");
 
