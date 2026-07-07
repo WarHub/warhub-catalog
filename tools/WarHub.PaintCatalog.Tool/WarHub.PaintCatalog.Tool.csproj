@@ -16,4 +16,8 @@
     <PackageReference Include="YamlDotNet" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WarHub.CatalogStore\WarHub.CatalogStore.csproj" />
+  </ItemGroup>
+
 </Project>
