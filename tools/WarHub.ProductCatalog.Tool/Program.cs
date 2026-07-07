@@ -539,6 +539,26 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     return 0;
 });
 
+Option<string> migrateDataDirOption = new("--data-dir")
+{
+    Description = "Path to data/products",
+    Required = true
+};
+
+Command migrateCommand = new("migrate", "One-time migration of existing data to the new schema")
+{
+    migrateDataDirOption,
+};
+
+migrateCommand.SetAction(async (parseResult, cancellationToken) =>
+{
+    string dir = parseResult.GetValue(migrateDataDirOption)!;
+    string date = DateTime.UtcNow.ToString("yyyy-MM-dd");
+    return await WarHub.ProductCatalog.Tool.Migration.ProductMigrator.MigrateAsync(dir, date, cancellationToken);
+});
+
+rootCommand.Add(migrateCommand);
+
 return rootCommand.Parse(args).Invoke();
 
 // --- Data source helper methods ---
