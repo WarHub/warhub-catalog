@@ -1,4 +1,3 @@
-using WarHub.ProductCatalog.Tool.Configuration;
 using WarHub.ProductCatalog.Tool.Models;
 
 namespace WarHub.ProductCatalog.Tool.Enrichment;
