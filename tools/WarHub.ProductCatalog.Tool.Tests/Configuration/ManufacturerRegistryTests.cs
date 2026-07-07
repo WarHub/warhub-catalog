@@ -160,20 +160,4 @@ public class ManufacturerRegistryTests
         string result = ManufacturerRegistry.NormalizeProductType(input);
         Assert.Equal(expected, result);
     }
-
-    [Theory]
-    [InlineData("current", "current")]
-    [InlineData("available", "current")]
-    [InlineData("discontinued", "discontinued")]
-    [InlineData("pre-order", "pre_order")]
-    [InlineData("preorder", "pre_order")]
-    [InlineData("limited", "limited")]
-    [InlineData("out of stock", "out_of_stock")]
-    [InlineData(null, "current")]
-    [InlineData("", "current")]
-    public void NormalizeStatus_HandlesVariousInputs(string? input, string expected)
-    {
-        string result = ManufacturerRegistry.NormalizeStatus(input);
-        Assert.Equal(expected, result);
-    }
 }

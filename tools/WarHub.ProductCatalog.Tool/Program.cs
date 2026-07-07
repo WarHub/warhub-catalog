@@ -384,6 +384,12 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     string ledgerPath = Path.Combine(outputDir, "_liveness.yaml");
     LivenessLedger ledger = await LedgerStore.LoadAsync(ledgerPath, cancellationToken);
 
+    // Only a full, live scrape may drive the liveness ledger. A sampled run
+    // (--sample) or a scrape-skipping run (--skip-scrape / enrich-only) is not
+    // representative — miss-counting its absent records would spuriously flag
+    // real products as discontinued in the archive.
+    bool authoritativeRun = !skipScrape && sample == 0;
+
     var mfgScrapedTotals = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
     foreach (var group in grouped)
@@ -434,34 +440,46 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             existingProducts, enriched.ToList(), aliases, retracted, today);
 
         // Ledger update (per faction contributes to a per-manufacturer source entry).
-        string sourceKey = mfgSlug;
-        var seenLedgerKeys = reconciled.SeenKeys
-            .Select(k => $"{mfgSlug}/{gsSlug}/{factionSlug}/{k}").ToHashSet(StringComparer.Ordinal);
-        var knownLedgerKeys = reconciled.Records
-            .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}").ToList();
-        var currentlyFlagged = reconciled.Records
-            .Where(p => p.Status == "suspected-discontinued")
-            .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}")
-            .ToHashSet(StringComparer.Ordinal);
-
-        mfgScrapedTotals[mfgSlug] = mfgScrapedTotals.GetValueOrDefault(mfgSlug) + enriched.Count;
-
-        LivenessUpdate live = LivenessUpdater.Apply(
-            ledger, sourceKey, sourceSucceeded: sourceHealthy, scrapedCount: mfgScrapedTotals[mfgSlug],
-            seenKeys: seenLedgerKeys, knownKeysForSource: knownLedgerKeys,
-            today: today, currentlyFlaggedKeys: currentlyFlagged);
-        ledger = live.Ledger;
-
-        // Apply auto-flag / reactivation status transitions onto the records.
-        var finalProducts = reconciled.Records.Select(p =>
+        // Gated on authoritativeRun: only a full, live scrape may drive the ledger
+        // (see the authoritativeRun comment above).
+        List<Product> finalProducts;
+        if (authoritativeRun)
         {
-            string lk = $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}";
-            if (live.Flagged.Contains(lk) && p.Status == "current")
-                return p with { Status = "suspected-discontinued" };
-            if (live.Reactivated.Contains(lk) && p.Status == "suspected-discontinued")
-                return p with { Status = "current" };
-            return p;
-        }).ToList();
+            string sourceKey = mfgSlug;
+            var seenLedgerKeys = reconciled.SeenKeys
+                .Select(k => $"{mfgSlug}/{gsSlug}/{factionSlug}/{k}").ToHashSet(StringComparer.Ordinal);
+            var knownLedgerKeys = reconciled.Records
+                .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}").ToList();
+            var currentlyFlagged = reconciled.Records
+                .Where(p => p.Status == "suspected-discontinued")
+                .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}")
+                .ToHashSet(StringComparer.Ordinal);
+
+            mfgScrapedTotals[mfgSlug] = mfgScrapedTotals.GetValueOrDefault(mfgSlug) + enriched.Count;
+
+            LivenessUpdate live = LivenessUpdater.Apply(
+                ledger, sourceKey, sourceSucceeded: sourceHealthy, scrapedCount: mfgScrapedTotals[mfgSlug],
+                seenKeys: seenLedgerKeys, knownKeysForSource: knownLedgerKeys,
+                today: today, currentlyFlaggedKeys: currentlyFlagged);
+            ledger = live.Ledger;
+
+            // Apply auto-flag / reactivation status transitions onto the records.
+            finalProducts = reconciled.Records.Select(p =>
+            {
+                string lk = $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}";
+                if (live.Flagged.Contains(lk) && p.Status == "current")
+                    // A product that vanished from the scrape has genuinely-unknown
+                    // availability, not whatever it last reported (e.g. "in_stock").
+                    return p with { Status = "suspected-discontinued", Availability = "unknown" };
+                if (live.Reactivated.Contains(lk) && p.Status == "suspected-discontinued")
+                    return p with { Status = "current" };
+                return p;
+            }).ToList();
+        }
+        else
+        {
+            finalProducts = reconciled.Records.ToList();
+        }
 
         var catalog = new FactionCatalog
         {
@@ -530,7 +548,8 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     };
 
     await YamlCatalogWriter.WriteManifestAsync(manifest, outputDir);
-    await LedgerStore.SaveAsync(ledgerPath, ledger, cancellationToken);
+    if (authoritativeRun)
+        await LedgerStore.SaveAsync(ledgerPath, ledger, cancellationToken);
 
     eanEnricher?.LogSummary();
     eanEnricher?.Dispose();

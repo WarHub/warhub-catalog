@@ -406,19 +406,6 @@ public static partial class ManufacturerRegistry
         return ProductTypes.Contains(normalized) ? normalized : "unknown";
     }
 
-    public static string NormalizeStatus(string? status)
-    {
-        return status?.Trim().ToLowerInvariant() switch
-        {
-            "current" or "available" or "in stock" => "current",
-            "discontinued" or "no longer available" => "discontinued",
-            "pre-order" or "preorder" or "pre order" => "pre_order",
-            "limited" or "limited edition" or "made to order" => "limited",
-            "out of stock" or "temporarily out of stock" => "out_of_stock",
-            _ => "current",
-        };
-    }
-
     public static string NormalizeAvailability(string? status)
     {
         return status?.Trim().ToLowerInvariant() switch

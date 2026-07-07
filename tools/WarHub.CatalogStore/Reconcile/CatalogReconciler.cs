@@ -51,7 +51,9 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
             if (retracted.Contains(freshKey))
                 continue;
 
-            // 1. Composite key match.
+            // 1. Composite key match. If two fresh records share the same identity key
+            // within this run, they are intentionally collapsed into one merged record —
+            // the composite-name-key identity model treats same-key records as the same product.
             if (byKey.TryGetValue(freshKey, out T? existingByKey))
             {
                 byKey[freshKey] = adapter.Merge(existingByKey, freshRec);

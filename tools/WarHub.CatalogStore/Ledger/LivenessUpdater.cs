@@ -13,6 +13,11 @@ public sealed record LivenessUpdate(
 /// </summary>
 public static class LivenessUpdater
 {
+    /// <remarks>
+    /// Mutates the passed-in <paramref name="ledger"/> in place (writes into
+    /// its <c>Sources</c>/<c>Records</c> dictionaries) and returns that same
+    /// instance via <see cref="LivenessUpdate.Ledger"/> for convenience chaining.
+    /// </remarks>
     public static LivenessUpdate Apply(
         LivenessLedger ledger,
         string sourceKey,
