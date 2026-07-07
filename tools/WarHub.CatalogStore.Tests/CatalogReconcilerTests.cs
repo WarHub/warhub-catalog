@@ -233,4 +233,32 @@ public class CatalogReconcilerTests
         Assert.Equal("11", alpha.Price);
         Assert.Equal("2026-07-07", beta.FirstSeen);  // thief is new, did NOT inherit Alpha's history
     }
+
+    [Fact]
+    public void RetractedIdentity_StillScraped_IsSuppressedFromOutput()
+    {
+        var existing = new List<Rec> { new() { Name = "Bad", FirstSeen = "2020-01-01" } };
+        var fresh = new List<Rec> { new() { Name = "Bad", Price = "5" } }; // still live on source
+        var retract = new HashSet<string> { "bad" };
+
+        ReconcileResult<Rec> result = NewReconciler().Reconcile(existing, fresh, NoAliases, retract, "2026-07-07");
+
+        Assert.Empty(result.Records);
+        Assert.DoesNotContain("bad", result.SeenKeys);
+    }
+
+    [Fact]
+    public void RetractedRecord_IsNotResurrectedByUrlRename()
+    {
+        var existing = new List<Rec> { new() { Name = "Bad", Url = "http://x/1", FirstSeen = "2020-01-01" } };
+        var fresh = new List<Rec> { new() { Name = "Good", Url = "http://x/1" } }; // shares URL, different name
+        var retract = new HashSet<string> { "bad" };
+
+        ReconcileResult<Rec> result = NewReconciler().Reconcile(existing, fresh, NoAliases, retract, "2026-07-07");
+
+        Assert.DoesNotContain(result.Records, r => r.Name == "Bad");
+        Assert.Contains(result.Records, r => r.Name == "Good"); // inserted as new, not a rename of Bad
+        Rec good = result.Records.Single(r => r.Name == "Good");
+        Assert.Equal("2026-07-07", good.FirstSeen); // new record, did NOT inherit Bad's 2020 firstSeen
+    }
 }

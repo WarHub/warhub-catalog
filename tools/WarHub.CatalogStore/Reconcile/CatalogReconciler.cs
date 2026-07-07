@@ -32,11 +32,8 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
 
-        // Keys the URL/alias fallback must never steal. Seed up front with every key
-        // that some fresh record will claim via exact composite match this run, so the
-        // outcome is independent of the order fresh records are iterated. Fallback and
-        // insert branches add to this set as they go, so two fresh records sharing a
-        // URL/alias cannot both claim the same archived record.
+        // Keys the URL/alias fallback must never steal; seeded with every key a fresh record
+        // will composite-match this run, so the outcome is independent of fresh iteration order.
         var consumed = new HashSet<string>(StringComparer.Ordinal);
         foreach (T freshRec in fresh)
         {
@@ -49,6 +46,11 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
         {
             string freshKey = adapter.IdentityKey(freshRec);
 
+            // 0. Retracted identities are suppressed on input — never allowed into the catalog
+            // while listed, so a bad record still live on the source cannot reappear as new.
+            if (retracted.Contains(freshKey))
+                continue;
+
             // 1. Composite key match.
             if (byKey.TryGetValue(freshKey, out T? existingByKey))
             {
@@ -57,10 +59,11 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
                 continue;
             }
 
-            // 2. URL fallback → rename (only if the target is not owned/consumed this run).
+            // 2. URL fallback → rename (skip consumed or retracted targets).
             string? freshUrl = adapter.Url(freshRec);
             if (!string.IsNullOrEmpty(freshUrl) && byUrl.TryGetValue(freshUrl, out string? renamedKey)
                 && !consumed.Contains(renamedKey)
+                && !retracted.Contains(renamedKey)
                 && byKey.TryGetValue(renamedKey, out T? existingByUrl))
             {
                 byKey.Remove(renamedKey);
@@ -71,9 +74,10 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
                 continue;
             }
 
-            // 3. Alias override → rename (only if the canonical target is not owned/consumed).
+            // 3. Alias override → rename (skip consumed or retracted targets).
             if (aliases.TryGetValue(freshKey, out string? canonicalKey)
                 && !consumed.Contains(canonicalKey)
+                && !retracted.Contains(canonicalKey)
                 && byKey.TryGetValue(canonicalKey, out T? existingByAlias))
             {
                 byKey.Remove(canonicalKey);
@@ -91,7 +95,7 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
             consumed.Add(freshKey);
         }
 
-        // Apply retractions, then order deterministically.
+        // Drop retracted identities from the output (covers archived records no longer scraped).
         var ordered = byKey
             .Where(kvp => !retracted.Contains(kvp.Key))
             .OrderBy(kvp => kvp.Key, StringComparer.Ordinal)
