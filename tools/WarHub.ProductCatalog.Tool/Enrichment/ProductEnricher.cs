@@ -14,23 +14,25 @@ public static class ProductEnricher
     /// </summary>
     public static Product Enrich(RawProduct raw)
     {
-        string productType = ClassifyProductType(raw);
+        var (category, packaging) = CategoryClassifier.Classify(raw);
         string status = ManufacturerRegistry.NormalizeStatus(raw.Status);
 
         return new Product
         {
             Name = raw.Name.Trim(),
-            ProductCode = raw.ProductCode?.Trim(),
-            Sku = raw.Sku?.Trim(),
+            Category = category,
+            Packaging = packaging,
+            Status = status,
+            FirstSeen = null, // stamped by the reconciler
             Ean = raw.Ean?.Trim(),
-            ProductType = productType,
+            Sku = raw.Sku?.Trim(),
+            ProductCode = raw.ProductCode?.Trim(),
             PriceGbp = RoundPrice(raw.PriceGbp),
             PriceUsd = RoundPrice(raw.PriceUsd),
             PriceEur = RoundPrice(raw.PriceEur),
             Url = raw.Url?.Trim(),
             ImageUrl = raw.ImageUrl?.Trim(),
             ReleaseDate = raw.ReleaseDate?.Trim(),
-            Status = status,
             Description = raw.Description?.Trim(),
             Contents = raw.Contents,
         };
