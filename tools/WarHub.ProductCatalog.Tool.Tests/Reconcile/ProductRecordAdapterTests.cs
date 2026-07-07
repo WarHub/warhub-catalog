@@ -66,4 +66,28 @@ public class ProductRecordAdapterTests
         Assert.Equal("2020-01-01", renamed.FirstSeen);
         Assert.Equal(5m, renamed.PriceUsd);
     }
+
+    [Fact]
+    public void Merge_PreservesDelistedStatus_AgainstFreshCurrent()
+    {
+        Product existing = P("A", status: "delisted");
+        Product merged = _adapter.Merge(existing, P("A", status: "current"));
+        Assert.Equal("delisted", merged.Status);
+    }
+
+    [Fact]
+    public void Merge_PreservesSuspectedDiscontinued_AgainstFreshCurrent()
+    {
+        Product existing = P("A", status: "suspected-discontinued");
+        Product merged = _adapter.Merge(existing, P("A", status: "current"));
+        Assert.Equal("suspected-discontinued", merged.Status);
+    }
+
+    [Fact]
+    public void Merge_AllowsFreshStatus_WhenExistingIsNotManaged()
+    {
+        Product existing = P("A", status: "current");
+        Product merged = _adapter.Merge(existing, P("A", status: "discontinued"));
+        Assert.Equal("discontinued", merged.Status);
+    }
 }

@@ -306,6 +306,10 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         if (verbose) Console.WriteLine($"  Loaded {seedProducts.Count} products from seed data");
     }
 
+    // Manufacturers whose live fetch threw this run — their archived records must NOT
+    // be miss-counted (a degraded scrape must never auto-flag products as discontinued).
+    var degradedManufacturers = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
     // Phase 2: Fetch from live sources (if not skipped)
     if (!skipScrape)
     {
@@ -356,6 +360,7 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                 }
                 catch (Exception ex)
                 {
+                    degradedManufacturers.Add(mfgInfo.Slug);
                     if (verbose) Console.WriteLine($"    Warning: Fetch failed: {ex.Message}");
                 }
             }
@@ -378,14 +383,8 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
     string ledgerPath = Path.Combine(outputDir, "_liveness.yaml");
     LivenessLedger ledger = await LedgerStore.LoadAsync(ledgerPath, cancellationToken);
-    // A source is healthy when its scrape produced any products; scrapers that threw
-    // above leave allRawProducts empty for that source. Per-source success is tracked
-    // by whether the manufacturer produced any grouped products this run.
-    var healthyManufacturers = grouped
-        .Where(g => g.Any())
-        .Select(g => ManufacturerRegistry.GetManufacturer(g.Key.Manufacturer)?.Slug
-            ?? ManufacturerRegistry.Slugify(g.Key.Manufacturer))
-        .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+    var mfgScrapedTotals = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
     foreach (var group in grouped)
     {
@@ -420,7 +419,7 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         if (eanEnricher is not null)
             enriched = await eanEnricher.EnrichAsync(enriched, mfgName, cancellationToken);
 
-        bool sourceHealthy = healthyManufacturers.Contains(mfgSlug);
+        bool sourceHealthy = !degradedManufacturers.Contains(mfgSlug);
 
         // Reconcile fresh scrape against the archived faction file (append-only).
         string factionPath = Path.Combine(outputDir, "manufacturers", mfgSlug, gsSlug, $"{factionSlug}.yaml");
@@ -445,8 +444,10 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}")
             .ToHashSet(StringComparer.Ordinal);
 
+        mfgScrapedTotals[mfgSlug] = mfgScrapedTotals.GetValueOrDefault(mfgSlug) + enriched.Count;
+
         LivenessUpdate live = LivenessUpdater.Apply(
-            ledger, sourceKey, sourceSucceeded: sourceHealthy, scrapedCount: enriched.Count,
+            ledger, sourceKey, sourceSucceeded: sourceHealthy, scrapedCount: mfgScrapedTotals[mfgSlug],
             seenKeys: seenLedgerKeys, knownKeysForSource: knownLedgerKeys,
             today: today, currentlyFlaggedKeys: currentlyFlagged);
         ledger = live.Ledger;

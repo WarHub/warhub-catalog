@@ -19,7 +19,9 @@ public sealed class ProductRecordAdapter : ICatalogRecordAdapter<Product>
         Sku = Pick(fresh.Sku, existing.Sku),
         ProductCode = Pick(fresh.ProductCode, existing.ProductCode),
         Packaging = string.IsNullOrWhiteSpace(fresh.Packaging) ? existing.Packaging : fresh.Packaging,
-        Status = string.IsNullOrWhiteSpace(fresh.Status) ? existing.Status : fresh.Status,
+        Status = IsManagedStatus(existing.Status) || string.IsNullOrWhiteSpace(fresh.Status)
+            ? existing.Status
+            : fresh.Status,
         PriceGbp = fresh.PriceGbp ?? existing.PriceGbp,
         PriceUsd = fresh.PriceUsd ?? existing.PriceUsd,
         PriceEur = fresh.PriceEur ?? existing.PriceEur,
@@ -39,4 +41,9 @@ public sealed class ProductRecordAdapter : ICatalogRecordAdapter<Product>
 
     private static string? Pick(string? fresh, string? existing) =>
         string.IsNullOrWhiteSpace(fresh) ? existing : fresh;
+
+    // Statuses a scrape must never override: 'delisted' is human/override-only and
+    // 'suspected-discontinued' is managed by the liveness ledger's auto-flag/reactivation.
+    private static bool IsManagedStatus(string status) =>
+        status is "delisted" or "suspected-discontinued";
 }
