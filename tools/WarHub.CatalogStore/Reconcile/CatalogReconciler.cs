@@ -31,10 +31,19 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
         }
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
-        // Keys already matched or inserted this run cannot be re-consumed by a later
-        // fresh record's URL/alias fallback — this prevents two distinct fresh records
-        // that happen to share a URL/alias from collapsing into one output record.
+
+        // Keys the URL/alias fallback must never steal. Seed up front with every key
+        // that some fresh record will claim via exact composite match this run, so the
+        // outcome is independent of the order fresh records are iterated. Fallback and
+        // insert branches add to this set as they go, so two fresh records sharing a
+        // URL/alias cannot both claim the same archived record.
         var consumed = new HashSet<string>(StringComparer.Ordinal);
+        foreach (T freshRec in fresh)
+        {
+            string k = adapter.IdentityKey(freshRec);
+            if (byKey.ContainsKey(k))
+                consumed.Add(k);
+        }
 
         foreach (T freshRec in fresh)
         {
@@ -45,11 +54,10 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
             {
                 byKey[freshKey] = adapter.Merge(existingByKey, freshRec);
                 seen.Add(freshKey);
-                consumed.Add(freshKey);
                 continue;
             }
 
-            // 2. URL fallback → rename (only if the target has not been consumed this run).
+            // 2. URL fallback → rename (only if the target is not owned/consumed this run).
             string? freshUrl = adapter.Url(freshRec);
             if (!string.IsNullOrEmpty(freshUrl) && byUrl.TryGetValue(freshUrl, out string? renamedKey)
                 && !consumed.Contains(renamedKey)
@@ -63,7 +71,7 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
                 continue;
             }
 
-            // 3. Alias override → rename (only if the canonical target has not been consumed).
+            // 3. Alias override → rename (only if the canonical target is not owned/consumed).
             if (aliases.TryGetValue(freshKey, out string? canonicalKey)
                 && !consumed.Contains(canonicalKey)
                 && byKey.TryGetValue(canonicalKey, out T? existingByAlias))

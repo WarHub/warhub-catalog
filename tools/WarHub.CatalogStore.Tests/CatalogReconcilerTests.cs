@@ -210,4 +210,27 @@ public class CatalogReconcilerTests
         Assert.Contains(result.Records, r => r.Name == "Alpha" && r.Price == "11");
         Assert.Contains(result.Records, r => r.Name == "Gamma");
     }
+
+    [Fact]
+    public void SharedUrl_ThiefProcessedFirst_OwnerKeepsHistory_ThiefIsNew()
+    {
+        // The record that will steal via URL fallback is iterated BEFORE its rightful
+        // composite-match owner. The fix must be order-independent: owner keeps its
+        // real FirstSeen; the thief becomes a brand-new record, not a rename.
+        var existing = new List<Rec> { new() { Name = "Alpha", Url = "http://x/1", Price = "10", FirstSeen = "2020-01-01" } };
+        var fresh = new List<Rec>
+        {
+            new() { Name = "Beta", Url = "http://x/1", Price = "5" },   // thief FIRST
+            new() { Name = "Alpha", Url = "http://x/1", Price = "11" }, // real owner SECOND
+        };
+
+        ReconcileResult<Rec> result = NewReconciler().Reconcile(existing, fresh, NoAliases, NoRetract, "2026-07-07");
+
+        Assert.Equal(2, result.Records.Count);
+        Rec alpha = result.Records.Single(r => r.Name == "Alpha");
+        Rec beta = result.Records.Single(r => r.Name == "Beta");
+        Assert.Equal("2020-01-01", alpha.FirstSeen); // owner keeps real history
+        Assert.Equal("11", alpha.Price);
+        Assert.Equal("2026-07-07", beta.FirstSeen);  // thief is new, did NOT inherit Alpha's history
+    }
 }
