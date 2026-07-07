@@ -82,10 +82,16 @@ public class ProductMigratorTests
             string file = Path.Combine(dir, "manufacturers", "cmon", "asoiaf", "baratheon.yaml");
             string first = await File.ReadAllTextAsync(file);
 
+            string livenessFile = Path.Combine(dir, "_liveness.yaml");
+            string livenessFirst = await File.ReadAllTextAsync(livenessFile);
+
             await ProductMigrator.MigrateAsync(dir, "2099-01-01", default); // different date must NOT change firstSeen
             string second = await File.ReadAllTextAsync(file);
 
+            string livenessSecond = await File.ReadAllTextAsync(livenessFile);
+
             Assert.Equal(first, second);
+            Assert.Equal(livenessFirst, livenessSecond);
         }
         finally { Directory.Delete(dir, recursive: true); }
     }

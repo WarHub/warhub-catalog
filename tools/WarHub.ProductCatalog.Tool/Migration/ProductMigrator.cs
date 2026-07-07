@@ -93,7 +93,8 @@ public static class ProductMigrator
                 };
 
                 string ledgerKey = $"{legacy.ManufacturerSlug}/{legacy.GameSystemSlug}/{legacy.FactionSlug}/{NameNormalizer.Normalize(lp.Name)}";
-                ledger.Records[ledgerKey] = new LedgerRecord { LastSeen = migrationDate, MissStreak = 0 };
+                if (!ledger.Records.ContainsKey(ledgerKey))
+                    ledger.Records[ledgerKey] = new LedgerRecord { LastSeen = migrationDate, MissStreak = 0 };
                 return product;
             })
             .OrderBy(p => NameNormalizer.Normalize(p.Name), StringComparer.Ordinal)
