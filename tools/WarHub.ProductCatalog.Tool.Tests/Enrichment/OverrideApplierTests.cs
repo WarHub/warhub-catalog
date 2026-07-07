@@ -118,14 +118,16 @@ public class OverrideApplierTests
             new Product
             {
                 Name = "Intercessors",
-                ProductType = "single_kit",
+                Category = "miniatures",
+                Packaging = "single",
                 PriceGbp = 35.00m,
                 Status = "current",
             },
             new Product
             {
                 Name = "Necron Warriors",
-                ProductType = "single_kit",
+                Category = "miniatures",
+                Packaging = "single",
                 PriceGbp = 29.00m,
                 Status = "current",
             },

@@ -41,7 +41,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("combat_patrol", result.ProductType);
+        Assert.Equal("miniatures", result.Category);
+        Assert.Equal("box", result.Packaging);
     }
 
     [Fact]
@@ -58,7 +59,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("battleforce", result.ProductType);
+        Assert.Equal("miniatures", result.Category);
+        Assert.Equal("box", result.Packaging);
     }
 
     [Fact]
@@ -75,7 +77,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("army_box", result.ProductType);
+        Assert.Equal("miniatures", result.Category);
+        Assert.Equal("box", result.Packaging);
     }
 
     [Fact]
@@ -92,7 +95,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("book", result.ProductType);
+        Assert.Equal("book", result.Category);
+        Assert.Equal("single", result.Packaging);
     }
 
     [Fact]
@@ -110,7 +114,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("character", result.ProductType);
+        Assert.Equal("miniatures", result.Category);
+        Assert.Equal("single", result.Packaging);
     }
 
     [Fact]
@@ -132,7 +137,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("box_set", result.ProductType);
+        Assert.Equal("miniatures", result.Category);
+        Assert.Equal("box", result.Packaging);
     }
 
     [Fact]
@@ -148,7 +154,8 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("terrain", result.ProductType);
+        Assert.Equal("terrain", result.Category);
+        Assert.Equal("single", result.Packaging);
     }
 
     [Fact]
@@ -195,6 +202,7 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("box_set", result.ProductType);
+        Assert.Equal("miniatures", result.Category);
+        Assert.Equal("box", result.Packaging);
     }
 }

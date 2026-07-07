@@ -1,9 +1,13 @@
 using System.CommandLine;
 using System.Reflection;
+using WarHub.CatalogStore;
+using WarHub.CatalogStore.Ledger;
+using WarHub.CatalogStore.Reconcile;
 using WarHub.ProductCatalog.Tool.Configuration;
 using WarHub.ProductCatalog.Tool.Enrichment;
 using WarHub.ProductCatalog.Tool.Models;
 using WarHub.ProductCatalog.Tool.Output;
+using WarHub.ProductCatalog.Tool.Reconcile;
 using WarHub.ProductCatalog.Tool.Scraping;
 
 Option<DirectoryInfo> outputOption = new("--output")
@@ -246,7 +250,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             {
                 Name = catalog.Faction,
                 Slug = catalog.FactionSlug,
-                ProductCount = products.Count,
             });
 
             if (verbose && updated > 0)
@@ -257,7 +260,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         var enrichManifest = new Manifest
         {
             ToolVersion = toolVersion,
-            TotalProducts = totalEnriched,
             Manufacturers = enrichedManufacturerSummaries.Select(kvp =>
             {
                 var (mfgInfo, gameSystems) = kvp.Value;
@@ -265,7 +267,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                 {
                     Name = mfgInfo.Name,
                     Slug = mfgInfo.Slug,
-                    ProductCount = gameSystems.Sum(gs => gs.Value.Factions.Sum(f => f.ProductCount)),
                     GameSystems = gameSystems.Select(gsKvp =>
                     {
                         var (gsInfo, factions) = gsKvp.Value;
@@ -273,7 +274,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                         {
                             Name = gsInfo.Name,
                             Slug = gsInfo.Slug,
-                            ProductCount = factions.Sum(f => f.ProductCount),
                             Factions = factions,
                         };
                     }).ToList(),
@@ -375,6 +375,18 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     var manufacturerSummaries = new Dictionary<string, (ManufacturerInfo Info, Dictionary<string, (GameSystemInfo GsInfo, List<FactionSummary> Factions)> GameSystems)>();
     int totalProducts = 0;
 
+    string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+    string ledgerPath = Path.Combine(outputDir, "_liveness.yaml");
+    LivenessLedger ledger = await LedgerStore.LoadAsync(ledgerPath, cancellationToken);
+    // A source is healthy when its scrape produced any products; scrapers that threw
+    // above leave allRawProducts empty for that source. Per-source success is tracked
+    // by whether the manufacturer produced any grouped products this run.
+    var healthyManufacturers = grouped
+        .Where(g => g.Any())
+        .Select(g => ManufacturerRegistry.GetManufacturer(g.Key.Manufacturer)?.Slug
+            ?? ManufacturerRegistry.Slugify(g.Key.Manufacturer))
+        .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
     foreach (var group in grouped)
     {
         string mfgName = group.Key.Manufacturer;
@@ -400,10 +412,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         // Apply overrides
         enriched = OverrideApplier.Apply(enriched, mfgSlug, gsSlug, overridesPath);
 
-        // Merge existing EAN data (preserves across re-scrapes)
-        if (existingEanLookup is not null)
-            enriched = MergeExistingEans(enriched, existingEanLookup, mfgSlug, gsSlug, factionSlug);
-
         // Apply Shopify EANs
         if (shopifyEans is not null)
             enriched = ApplyShopifyEans(enriched, shopifyEans);
@@ -412,7 +420,48 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         if (eanEnricher is not null)
             enriched = await eanEnricher.EnrichAsync(enriched, mfgName, cancellationToken);
 
-        // Write faction catalog
+        bool sourceHealthy = healthyManufacturers.Contains(mfgSlug);
+
+        // Reconcile fresh scrape against the archived faction file (append-only).
+        string factionPath = Path.Combine(outputDir, "manufacturers", mfgSlug, gsSlug, $"{factionSlug}.yaml");
+        IReadOnlyList<Product> existingProducts = await LoadExistingFactionProductsAsync(factionPath, cancellationToken);
+
+        var adapter = new ProductRecordAdapter();
+        var reconciler = new CatalogReconciler<Product>(adapter);
+        (IReadOnlyDictionary<string, string> aliases, ISet<string> retracted) =
+            OverrideAliases.Load(overridesPath, mfgSlug, gsSlug, factionSlug);
+
+        ReconcileResult<Product> reconciled = reconciler.Reconcile(
+            existingProducts, enriched.ToList(), aliases, retracted, today);
+
+        // Ledger update (per faction contributes to a per-manufacturer source entry).
+        string sourceKey = mfgSlug;
+        var seenLedgerKeys = reconciled.SeenKeys
+            .Select(k => $"{mfgSlug}/{gsSlug}/{factionSlug}/{k}").ToHashSet(StringComparer.Ordinal);
+        var knownLedgerKeys = reconciled.Records
+            .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}").ToList();
+        var currentlyFlagged = reconciled.Records
+            .Where(p => p.Status == "suspected-discontinued")
+            .Select(p => $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}")
+            .ToHashSet(StringComparer.Ordinal);
+
+        LivenessUpdate live = LivenessUpdater.Apply(
+            ledger, sourceKey, sourceSucceeded: sourceHealthy, scrapedCount: enriched.Count,
+            seenKeys: seenLedgerKeys, knownKeysForSource: knownLedgerKeys,
+            today: today, currentlyFlaggedKeys: currentlyFlagged);
+        ledger = live.Ledger;
+
+        // Apply auto-flag / reactivation status transitions onto the records.
+        var finalProducts = reconciled.Records.Select(p =>
+        {
+            string lk = $"{mfgSlug}/{gsSlug}/{factionSlug}/{adapter.IdentityKey(p)}";
+            if (live.Flagged.Contains(lk) && p.Status == "current")
+                return p with { Status = "suspected-discontinued" };
+            if (live.Reactivated.Contains(lk) && p.Status == "suspected-discontinued")
+                return p with { Status = "current" };
+            return p;
+        }).ToList();
+
         var catalog = new FactionCatalog
         {
             Manufacturer = mfgName,
@@ -421,12 +470,11 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             GameSystemSlug = gsSlug,
             Faction = factionName,
             FactionSlug = factionSlug,
-            ProductCount = enriched.Count,
-            Products = enriched.ToList(),
+            Products = finalProducts,
         };
 
         await YamlCatalogWriter.WriteFactionAsync(catalog, outputDir);
-        totalProducts += enriched.Count;
+        totalProducts += finalProducts.Count;
 
         // Track summaries
         if (!manufacturerSummaries.ContainsKey(mfgName))
@@ -450,17 +498,15 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         {
             Name = factionName,
             Slug = factionSlug,
-            ProductCount = enriched.Count,
         });
 
-        if (verbose) Console.WriteLine($"  {mfgName} / {gsName} / {factionName}: {enriched.Count} products");
+        if (verbose) Console.WriteLine($"  {mfgName} / {gsName} / {factionName}: {finalProducts.Count} products");
     }
 
     // Build manifest
     var manifest = new Manifest
     {
         ToolVersion = toolVersion,
-        TotalProducts = totalProducts,
         Manufacturers = manufacturerSummaries.Select(kvp =>
         {
             var (mfgInfo, gameSystems) = kvp.Value;
@@ -468,7 +514,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
             {
                 Name = mfgInfo.Name,
                 Slug = mfgInfo.Slug,
-                ProductCount = gameSystems.Sum(gs => gs.Value.Factions.Sum(f => f.ProductCount)),
                 GameSystems = gameSystems.Select(gsKvp =>
                 {
                     var (gsInfo, factions) = gsKvp.Value;
@@ -476,7 +521,6 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                     {
                         Name = gsInfo.Name,
                         Slug = gsInfo.Slug,
-                        ProductCount = factions.Sum(f => f.ProductCount),
                         Factions = factions,
                     };
                 }).ToList(),
@@ -485,6 +529,7 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     };
 
     await YamlCatalogWriter.WriteManifestAsync(manifest, outputDir);
+    await LedgerStore.SaveAsync(ledgerPath, ledger, cancellationToken);
 
     eanEnricher?.LogSummary();
     eanEnricher?.Dispose();
@@ -582,40 +627,16 @@ static async Task<(Dictionary<string, (string? Ean, string Source)> EanLookup, H
 }
 
 /// <summary>
-/// Merges existing EAN data from a lookup into freshly scraped products.
-/// Preserves EAN + EanSource from previous runs.
-/// Uses SKU/ProductCode as primary key, with name-based fallback for products
-/// without SKU (e.g., CMON).
+/// Loads the products from an existing faction catalog YAML file, for reconciliation
+/// against the freshly-enriched scrape. Returns an empty list if the file doesn't exist yet.
 /// </summary>
-static IReadOnlyList<Product> MergeExistingEans(
-    IReadOnlyList<Product> products,
-    Dictionary<string, (string? Ean, string Source)> lookup,
-    string mfgSlug, string gsSlug, string factionSlug)
+static async Task<IReadOnlyList<Product>> LoadExistingFactionProductsAsync(string factionPath, CancellationToken ct)
 {
-    return products.Select(p =>
-    {
-        if (!string.IsNullOrWhiteSpace(p.Ean) || !string.IsNullOrWhiteSpace(p.EanSource))
-            return p;
-
-        // Try SKU/ProductCode first
-        string? key = p.ProductCode ?? p.Sku;
-        if (!string.IsNullOrWhiteSpace(key) && lookup.TryGetValue(key, out var existing))
-            return ApplyExisting(p, existing);
-
-        // Fallback: name-based key for products without SKU (e.g., CMON)
-        string nameKey = $"name:{mfgSlug}/{gsSlug}/{factionSlug}:{p.Name.Trim()}";
-        if (lookup.TryGetValue(nameKey, out existing))
-            return ApplyExisting(p, existing);
-
-        return p;
-
-        static Product ApplyExisting(Product p, (string? Ean, string Source) existing)
-        {
-            if (!string.IsNullOrWhiteSpace(existing.Ean))
-                return p with { Ean = existing.Ean, EanSource = existing.Source };
-            return p with { EanSource = existing.Source };
-        }
-    }).ToList();
+    if (!File.Exists(factionPath))
+        return [];
+    string yaml = await File.ReadAllTextAsync(factionPath, ct);
+    FactionCatalog? catalog = CatalogSerializer.CreateDeserializer().Deserialize<FactionCatalog>(yaml);
+    return catalog?.Products ?? [];
 }
 
 /// <summary>

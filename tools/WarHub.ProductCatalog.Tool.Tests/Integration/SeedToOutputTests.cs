@@ -90,7 +90,6 @@ public class SeedToOutputTests
                     GameSystemSlug = "warhammer-40k",
                     Faction = group.Key.Item3,
                     FactionSlug = group.Key.Item3.ToLowerInvariant().Replace(' ', '-'),
-                    ProductCount = enriched.Count,
                     Products = enriched.ToList(),
                 };
 
@@ -109,16 +108,17 @@ public class SeedToOutputTests
             FactionCatalog smCatalog = YamlDeserializer.Deserialize<FactionCatalog>(smYaml);
 
             Assert.Equal("Games Workshop", smCatalog.Manufacturer);
-            Assert.Equal(1, smCatalog.ProductCount);
+            Assert.Single(smCatalog.Products);
             Assert.Equal("Combat Patrol: Space Marines", smCatalog.Products[0].Name);
-            Assert.Equal("combat_patrol", smCatalog.Products[0].ProductType);
+            Assert.Equal("miniatures", smCatalog.Products[0].Category);
+            Assert.Equal("box", smCatalog.Products[0].Packaging);
             Assert.Equal(85.00m, smCatalog.Products[0].PriceGbp);
             Assert.Equal(3, smCatalog.Products[0].Contents!.Count);
 
             // Validate Necrons catalog
             string necronYaml = await File.ReadAllTextAsync(necronPath);
             FactionCatalog necronCatalog = YamlDeserializer.Deserialize<FactionCatalog>(necronYaml);
-            Assert.Equal(1, necronCatalog.ProductCount);
+            Assert.Single(necronCatalog.Products);
         }
         finally
         {
