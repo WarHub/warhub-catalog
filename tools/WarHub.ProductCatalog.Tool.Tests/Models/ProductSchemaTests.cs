@@ -13,6 +13,7 @@ public class ProductSchemaTests
             Category = "miniatures",
             Packaging = "single",
             Status = "current",
+            Availability = "in_stock",
             FirstSeen = "2026-07-07",
         };
 
@@ -31,5 +32,11 @@ public class ProductSchemaTests
     public void Product_HasNoProductTypeProperty()
     {
         Assert.Null(typeof(Product).GetProperty("ProductType"));
+    }
+
+    [Fact]
+    public void Product_HasAvailabilityProperty()
+    {
+        Assert.NotNull(typeof(Product).GetProperty("Availability"));
     }
 }

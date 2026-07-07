@@ -159,7 +159,7 @@ public class ProductEnricherTests
     }
 
     [Fact]
-    public void Enrich_DiscontinuedStatus_NormalizedCorrectly()
+    public void Enrich_NoLongerAvailableStatus_KeepsLifecycleCurrentMapsAvailabilityOutOfStock()
     {
         var raw = new RawProduct
         {
@@ -171,11 +171,29 @@ public class ProductEnricherTests
 
         Product result = ProductEnricher.Enrich(raw);
 
-        Assert.Equal("discontinued", result.Status);
+        Assert.Equal("current", result.Status);
+        Assert.Equal("out_of_stock", result.Availability);
     }
 
     [Fact]
-    public void Enrich_NullStatus_DefaultsToCurrent()
+    public void Enrich_PreOrderStatus_MapsAvailabilityToPreOrder()
+    {
+        var raw = new RawProduct
+        {
+            Name = "Upcoming Kit",
+            Manufacturer = "Games Workshop",
+            GameSystem = "Warhammer 40,000",
+            Status = "pre-order",
+        };
+
+        Product result = ProductEnricher.Enrich(raw);
+
+        Assert.Equal("current", result.Status);
+        Assert.Equal("pre_order", result.Availability);
+    }
+
+    [Fact]
+    public void Enrich_NullStatus_DefaultsToCurrentStatusAndUnknownAvailability()
     {
         var raw = new RawProduct
         {
@@ -187,6 +205,7 @@ public class ProductEnricherTests
         Product result = ProductEnricher.Enrich(raw);
 
         Assert.Equal("current", result.Status);
+        Assert.Equal("unknown", result.Availability);
     }
 
     [Fact]

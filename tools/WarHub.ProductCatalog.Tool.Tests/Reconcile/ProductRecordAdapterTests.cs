@@ -6,9 +6,9 @@ namespace WarHub.ProductCatalog.Tool.Tests.Reconcile;
 public class ProductRecordAdapterTests
 {
     private static Product P(string name, string? ean = null, decimal? usd = null, string? desc = null,
-        string? firstSeen = null, string? url = null, string status = "current") => new()
+        string? firstSeen = null, string? url = null, string status = "current", string availability = "in_stock") => new()
     {
-        Name = name, Category = "miniatures", Packaging = "single", Status = status,
+        Name = name, Category = "miniatures", Packaging = "single", Status = status, Availability = availability,
         FirstSeen = firstSeen, Ean = ean, PriceUsd = usd, Description = desc, Url = url,
     };
 
@@ -88,6 +88,38 @@ public class ProductRecordAdapterTests
     {
         Product existing = P("A", status: "current");
         Product merged = _adapter.Merge(existing, P("A", status: "discontinued"));
+        Assert.Equal("discontinued", merged.Status);
+    }
+
+    [Fact]
+    public void Merge_Availability_UpdatesPresent()
+    {
+        Product existing = P("A", availability: "in_stock");
+        Product merged = _adapter.Merge(existing, P("A", availability: "out_of_stock"));
+        Assert.Equal("out_of_stock", merged.Availability);
+    }
+
+    [Fact]
+    public void Merge_Availability_KeepsOnEmpty()
+    {
+        Product existing = P("A", availability: "in_stock");
+        Product merged = _adapter.Merge(existing, P("A", availability: ""));
+        Assert.Equal("in_stock", merged.Availability);
+    }
+
+    [Fact]
+    public void Merge_Status_OverrideDelistedWins()
+    {
+        Product existing = P("A", status: "current");
+        Product merged = _adapter.Merge(existing, P("A", status: "delisted"));
+        Assert.Equal("delisted", merged.Status);
+    }
+
+    [Fact]
+    public void Merge_Status_StickyDiscontinued_AgainstFreshCurrent()
+    {
+        Product existing = P("A", status: "discontinued");
+        Product merged = _adapter.Merge(existing, P("A", status: "current"));
         Assert.Equal("discontinued", merged.Status);
     }
 }

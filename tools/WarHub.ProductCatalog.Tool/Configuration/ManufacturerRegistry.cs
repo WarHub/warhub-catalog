@@ -418,6 +418,19 @@ public static partial class ManufacturerRegistry
             _ => "current",
         };
     }
+
+    public static string NormalizeAvailability(string? status)
+    {
+        return status?.Trim().ToLowerInvariant() switch
+        {
+            "current" or "available" or "in stock" => "in_stock",
+            "pre-order" or "preorder" or "pre order" => "pre_order",
+            "limited" or "limited edition" or "made to order" => "limited",
+            "out of stock" or "temporarily out of stock" => "out_of_stock",
+            "discontinued" or "no longer available" => "out_of_stock",
+            _ => "unknown",
+        };
+    }
 }
 
 public record ManufacturerInfo(

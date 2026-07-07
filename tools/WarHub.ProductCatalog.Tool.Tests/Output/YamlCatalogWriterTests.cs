@@ -16,7 +16,7 @@ public class YamlCatalogWriterTests
     private static Product P(string name, string? ean) => new()
     {
         Name = name, Category = "miniatures", Packaging = "single",
-        Status = "current", FirstSeen = "2026-07-07", Ean = ean,
+        Status = "current", Availability = "in_stock", FirstSeen = "2026-07-07", Ean = ean,
     };
 
     [Fact]

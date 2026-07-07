@@ -122,6 +122,7 @@ public class OverrideApplierTests
                 Packaging = "single",
                 PriceGbp = 35.00m,
                 Status = "current",
+                Availability = "in_stock",
             },
             new Product
             {
@@ -130,6 +131,7 @@ public class OverrideApplierTests
                 Packaging = "single",
                 PriceGbp = 29.00m,
                 Status = "current",
+                Availability = "in_stock",
             },
         ];
     }

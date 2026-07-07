@@ -15,14 +15,14 @@ public static class ProductEnricher
     public static Product Enrich(RawProduct raw)
     {
         var (category, packaging) = CategoryClassifier.Classify(raw);
-        string status = ManufacturerRegistry.NormalizeStatus(raw.Status);
 
         return new Product
         {
             Name = raw.Name.Trim(),
             Category = category,
             Packaging = packaging,
-            Status = status,
+            Status = "current",
+            Availability = ManufacturerRegistry.NormalizeAvailability(raw.Status),
             FirstSeen = null, // stamped by the reconciler
             Ean = raw.Ean?.Trim(),
             Sku = raw.Sku?.Trim(),

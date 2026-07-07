@@ -14,8 +14,11 @@ public record Product
     /// <summary>How it is sold: single | bundle | box | starter.</summary>
     public required string Packaging { get; init; }
 
-    /// <summary>current | suspected-discontinued | discontinued | delisted.</summary>
+    /// <summary>Archival lifecycle: current | suspected-discontinued | discontinued | delisted.</summary>
     public required string Status { get; init; }
+
+    /// <summary>Volatile purchasability: in_stock | out_of_stock | pre_order | limited | unknown.</summary>
+    public required string Availability { get; init; }
 
     /// <summary>Write-once ISO yyyy-MM-dd date the record was first archived.</summary>
     public string? FirstSeen { get; init; }
