@@ -26,17 +26,22 @@ public sealed class PublishFixture : IDisposable
             gameSystemSlug: test-system
             faction: General
             factionSlug: general
-            productCount: 2
             products:
             - name: Alpha Box
-              productCode: PRODA
+              category: miniatures
+              packaging: single
+              status: current
+              availability: in_stock
+              firstSeen: '2026-07-07'
               ean: '5011921142361'
-              productType: single_kit
-              status: current
+              productCode: PRODA
             - name: Beta Box
+              category: miniatures
+              packaging: box
+              status: discontinued
+              availability: out_of_stock
+              firstSeen: '2026-07-07'
               sku: SKUB
-              productType: single_kit
-              status: current
             """);
 
         WriteFile(Path.Combine(paints, "brands", "citadel.yaml"), """

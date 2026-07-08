@@ -30,10 +30,13 @@ internal sealed record ProductRecord(
     [property: JsonPropertyOrder(2)] string Name,
     [property: JsonPropertyOrder(3)] string? GameSystem,
     [property: JsonPropertyOrder(4)] string? Faction,
-    [property: JsonPropertyOrder(5)] int Quantity,
-    [property: JsonPropertyOrder(6)] string? ProductCode,
-    [property: JsonPropertyOrder(7)] string? Url,
-    [property: JsonPropertyOrder(8)] string? ImageUrl);
+    [property: JsonPropertyOrder(5)] string Category,
+    [property: JsonPropertyOrder(6)] string Status,
+    [property: JsonPropertyOrder(7)] string Availability,
+    [property: JsonPropertyOrder(8)] int Quantity,
+    [property: JsonPropertyOrder(9)] string? ProductCode,
+    [property: JsonPropertyOrder(10)] string? Url,
+    [property: JsonPropertyOrder(11)] string? ImageUrl);
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>
 internal sealed record PaintEquivalent(

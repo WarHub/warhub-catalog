@@ -27,6 +27,19 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     }
 
     [Fact]
+    public void Product_surfaces_category_status_availability()
+    {
+        JsonElement products = Doc("products.json").GetProperty("products");
+        JsonElement alpha = products.EnumerateArray().First(p => p.GetProperty("name").GetString() == "Alpha Box");
+        JsonElement beta = products.EnumerateArray().First(p => p.GetProperty("name").GetString() == "Beta Box");
+        Assert.Equal("miniatures", alpha.GetProperty("category").GetString());
+        Assert.Equal("current", alpha.GetProperty("status").GetString());
+        Assert.Equal("in_stock", alpha.GetProperty("availability").GetString());
+        Assert.Equal("discontinued", beta.GetProperty("status").GetString());
+        Assert.Equal("out_of_stock", beta.GetProperty("availability").GetString());
+    }
+
+    [Fact]
     public void Paint_ids_and_range_map_from_set()
     {
         var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
