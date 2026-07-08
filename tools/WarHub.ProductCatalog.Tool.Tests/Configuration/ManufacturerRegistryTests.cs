@@ -160,4 +160,36 @@ public class ManufacturerRegistryTests
         string result = ManufacturerRegistry.NormalizeProductType(input);
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    // in_stock
+    [InlineData("current", "in_stock")]
+    [InlineData("available", "in_stock")]
+    [InlineData("in stock", "in_stock")]
+    // pre_order
+    [InlineData("pre-order", "pre_order")]
+    [InlineData("preorder", "pre_order")]
+    [InlineData("pre order", "pre_order")]
+    // limited
+    [InlineData("limited", "limited")]
+    [InlineData("limited edition", "limited")]
+    [InlineData("made to order", "limited")]
+    // out_of_stock
+    [InlineData("out of stock", "out_of_stock")]
+    [InlineData("temporarily out of stock", "out_of_stock")]
+    [InlineData("discontinued", "out_of_stock")]
+    [InlineData("no longer available", "out_of_stock")]
+    // unknown / default
+    [InlineData(null, "unknown")]
+    [InlineData("", "unknown")]
+    [InlineData("   ", "unknown")]
+    [InlineData("something else entirely", "unknown")]
+    // case/whitespace normalization
+    [InlineData("  In Stock ", "in_stock")]
+    [InlineData("DISCONTINUED", "out_of_stock")]
+    public void NormalizeAvailability_HandlesEveryBranch(string? input, string expected)
+    {
+        string result = ManufacturerRegistry.NormalizeAvailability(input);
+        Assert.Equal(expected, result);
+    }
 }
