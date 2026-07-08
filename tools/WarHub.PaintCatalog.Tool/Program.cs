@@ -459,5 +459,25 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     return 0;
 });
 
+Option<DirectoryInfo> migrateDataOption = new("--data")
+{
+    Description = "Path to data/paints",
+    Required = true
+};
+
+Command migrateCommand = new("migrate", "One-time idempotent migration of data/paints to the new schema")
+{
+    migrateDataOption,
+};
+
+migrateCommand.SetAction(async (parseResult, cancellationToken) =>
+{
+    DirectoryInfo dir = parseResult.GetValue(migrateDataOption)!;
+    string date = DateTime.UtcNow.ToString("yyyy-MM-dd");
+    return await WarHub.PaintCatalog.Tool.Migration.PaintMigrator.MigrateAsync(dir.FullName, date, cancellationToken);
+});
+
+rootCommand.Add(migrateCommand);
+
 return rootCommand.Parse(args).Invoke();
 
