@@ -364,6 +364,23 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     var reconciler = new CatalogReconciler<PaintRecord>(adapter);
     int totalPaints = 0;
 
+    // A "full" run additionally requires no --brand filter — a filtered run only
+    // touches one brand's source, so orphan GC under it would wrongly conclude that
+    // every other, untouched brand's records are gone.
+    bool fullRun = authoritativeRun && string.IsNullOrEmpty(brandFilter);
+
+    var liveLedgerKeys = new HashSet<string>(StringComparer.Ordinal);
+    var prunableSources = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    // Snapshot each brand's last-good ProductCount BEFORE the loop, because
+    // LivenessUpdater.Apply mutates ledger.Sources in place — reading the prior count
+    // mid-loop could let an earlier brand's write leak into a later brand's "prior".
+    // Each brand is its own source and is processed exactly once below, so this is
+    // technically safe either way, but snapshotting is the robust pattern (mirrors the
+    // product tool's mfgPriorCounts).
+    var priorCounts = ledger.Sources.ToDictionary(
+        kvp => kvp.Key, kvp => kvp.Value.ProductCount, StringComparer.OrdinalIgnoreCase);
+
     foreach (var (brandSlug, pending) in pendingBrands.OrderBy(kvp => kvp.Key, StringComparer.Ordinal))
     {
         List<PaintRecord> fresh = pending.Paints.Select(PaintRecordMapper.ToRecord).ToList();
@@ -387,8 +404,24 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                 .Select(p => $"{brandSlug}/{adapter.IdentityKey(p)}")
                 .ToHashSet(StringComparer.Ordinal);
 
+            // A brand whose fresh scrape came back implausibly smaller than its
+            // last-good count (per the ledger) is treated as unhealthy: it must not
+            // drive miss-flagging this run, and it is excluded from orphan GC below.
+            int priorCount = priorCounts.GetValueOrDefault(brandSlug);
+            bool healthy = pending.Succeeded && !LedgerMaintenance.IsImplausibleDrop(priorCount, pending.Paints.Count);
+
+            // Orphan-GC bookkeeping: every reconciled record's ledger key is "live"
+            // regardless of this brand's health (pruning is separately gated per-source
+            // via prunableSources below).
+            foreach (string key in knownLedgerKeys)
+                liveLedgerKeys.Add(key);
+            if (healthy)
+                prunableSources.Add(brandSlug);
+            else
+                prunableSources.Remove(brandSlug);
+
             LivenessUpdate live = LivenessUpdater.Apply(
-                ledger, brandSlug, sourceSucceeded: pending.Succeeded, scrapedCount: pending.Paints.Count,
+                ledger, brandSlug, sourceSucceeded: healthy, scrapedCount: pending.Paints.Count,
                 seenKeys: seenLedgerKeys, knownKeysForSource: knownLedgerKeys,
                 today: today, currentlyFlaggedKeys: currentlyFlagged);
             ledger = live.Ledger;
@@ -435,6 +468,16 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     };
 
     await YamlCatalogWriter.WriteManifestAsync(manifest, outputDir);
+
+    // Orphan GC: only a full, authoritative run (no --sample, no --brand filter) may
+    // prune the ledger — a sampled or brand-filtered run only observed a subset of
+    // records/sources, so it must not conclude that anything unseen is gone.
+    if (fullRun)
+    {
+        IReadOnlyList<string> pruned = LedgerMaintenance.PruneOrphans(ledger, liveLedgerKeys, prunableSources);
+        if (verbose && pruned.Count > 0)
+            Console.WriteLine($"Ledger GC: pruned {pruned.Count} orphaned records.");
+    }
 
     if (authoritativeRun)
         await LedgerStore.SaveAsync(ledgerPath, ledger, cancellationToken);
