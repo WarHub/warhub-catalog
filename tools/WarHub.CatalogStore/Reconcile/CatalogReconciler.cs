@@ -32,17 +32,20 @@ public sealed class CatalogReconciler<T>(ICatalogRecordAdapter<T> adapter)
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
 
+        // Deterministic order so URL/alias rename claims don't depend on scrape order.
+        var orderedFresh = fresh.OrderBy(adapter.IdentityKey, StringComparer.Ordinal).ToList();
+
         // Keys the URL/alias fallback must never steal; seeded with every key a fresh record
         // will composite-match this run, so the outcome is independent of fresh iteration order.
         var consumed = new HashSet<string>(StringComparer.Ordinal);
-        foreach (T freshRec in fresh)
+        foreach (T freshRec in orderedFresh)
         {
             string k = adapter.IdentityKey(freshRec);
             if (byKey.ContainsKey(k))
                 consumed.Add(k);
         }
 
-        foreach (T freshRec in fresh)
+        foreach (T freshRec in orderedFresh)
         {
             string freshKey = adapter.IdentityKey(freshRec);
 
