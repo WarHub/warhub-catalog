@@ -9,6 +9,7 @@ using WarHub.ProductCatalog.Tool.Models;
 using WarHub.ProductCatalog.Tool.Output;
 using WarHub.ProductCatalog.Tool.Reconcile;
 using WarHub.ProductCatalog.Tool.Scraping;
+using YamlDotNet.Serialization;
 
 Option<DirectoryInfo> outputOption = new("--output")
 {
@@ -390,7 +391,18 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     // real products as discontinued in the archive.
     bool authoritativeRun = !skipScrape && sample == 0;
 
+    // A "full" run additionally requires every configured source to have been
+    // scraped this run — a --manufacturer/--game-system filter only touches a
+    // subset, so orphan GC under a filtered run would prune nothing for the
+    // excluded sources while wrongly having the opportunity to prune the
+    // included ones from a non-representative pass. The product tool has no
+    // other partial-processing mode (no seed-only switch), so this is the
+    // complete filter set to check.
+    bool fullRun = authoritativeRun && manufacturerFilter is null && gameSystemFilter is null;
+
     var mfgScrapedTotals = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+    var liveLedgerKeys = new HashSet<string>(StringComparer.Ordinal);
+    var prunableSources = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
     foreach (var group in grouped)
     {
@@ -425,7 +437,16 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         if (eanEnricher is not null)
             enriched = await eanEnricher.EnrichAsync(enriched, mfgName, cancellationToken);
 
-        bool sourceHealthy = !degradedManufacturers.Contains(mfgSlug);
+        // A source whose fresh scrape came back implausibly smaller than its last-good
+        // count (per the ledger) is treated the same as a degraded fetch: it must not
+        // drive miss-flagging this run. The comparison uses the manufacturer's running
+        // scraped total (mfgScrapedTotals), i.e. the same accumulated value that will be
+        // passed to LivenessUpdater.Apply as scrapedCount below, plus this faction's own
+        // enriched count (not yet folded into the running total at this point).
+        int priorMfgCount = ledger.Sources.GetValueOrDefault(mfgSlug)?.ProductCount ?? 0;
+        bool implausibleDrop = LedgerMaintenance.IsImplausibleDrop(
+            priorMfgCount, mfgScrapedTotals.GetValueOrDefault(mfgSlug) + enriched.Count);
+        bool sourceHealthy = !degradedManufacturers.Contains(mfgSlug) && !implausibleDrop;
 
         // Reconcile fresh scrape against the archived faction file (append-only).
         string factionPath = Path.Combine(outputDir, "manufacturers", mfgSlug, gsSlug, $"{factionSlug}.yaml");
@@ -456,6 +477,18 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
                 .ToHashSet(StringComparer.Ordinal);
 
             mfgScrapedTotals[mfgSlug] = mfgScrapedTotals.GetValueOrDefault(mfgSlug) + enriched.Count;
+
+            // Orphan-GC bookkeeping: every reconciled record's ledger key is "live"
+            // regardless of this faction's source health (pruning is separately gated
+            // per-source via prunableSources below). A manufacturer is prunable only if
+            // every faction processed for it this run was healthy — one unhealthy faction
+            // withdraws the whole manufacturer from this run's GC, conservatively.
+            foreach (string key in knownLedgerKeys)
+                liveLedgerKeys.Add(key);
+            if (sourceHealthy)
+                prunableSources.Add(mfgSlug);
+            else
+                prunableSources.Remove(mfgSlug);
 
             LivenessUpdate live = LivenessUpdater.Apply(
                 ledger, sourceKey, sourceSucceeded: sourceHealthy, scrapedCount: mfgScrapedTotals[mfgSlug],
@@ -548,6 +581,17 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     };
 
     await YamlCatalogWriter.WriteManifestAsync(manifest, outputDir);
+
+    // Orphan GC: only a full, authoritative run may prune the ledger — a sampled,
+    // scrape-skipping, or --manufacturer/--game-system-filtered run only observed a
+    // subset of records/sources, so it must not conclude that anything unseen is gone.
+    if (authoritativeRun && fullRun)
+    {
+        IReadOnlyList<string> pruned = LedgerMaintenance.PruneOrphans(ledger, liveLedgerKeys, prunableSources);
+        if (verbose && pruned.Count > 0)
+            Console.WriteLine($"Ledger GC: pruned {pruned.Count} orphaned records.");
+    }
+
     if (authoritativeRun)
         await LedgerStore.SaveAsync(ledgerPath, ledger, cancellationToken);
 
@@ -675,7 +719,7 @@ static async Task<IReadOnlyList<Product>> LoadExistingFactionProductsAsync(strin
     if (!File.Exists(factionPath))
         return [];
     string yaml = await File.ReadAllTextAsync(factionPath, ct);
-    FactionCatalog? catalog = CatalogSerializer.CreateDeserializer().Deserialize<FactionCatalog>(yaml);
+    FactionCatalog? catalog = ProductToolYaml.Deserializer.Deserialize<FactionCatalog>(yaml);
     return catalog?.Products ?? [];
 }
 
@@ -1146,4 +1190,14 @@ static async Task<IReadOnlyList<RawProduct>> FetchSteamforgedGamesAllProducts(
     return allProducts
         .Where(p => p.ProductType != "__skip__")
         .ToList();
+}
+
+/// <summary>
+/// Holds the YAML deserializer shared by top-level statements in this file, so it isn't
+/// rebuilt on every <c>LoadExistingFactionProductsAsync</c> call (once per faction, per run).
+/// A file-scoped type is used because top-level statements can't declare their own fields.
+/// </summary>
+file static class ProductToolYaml
+{
+    public static readonly IDeserializer Deserializer = CatalogSerializer.CreateDeserializer();
 }
