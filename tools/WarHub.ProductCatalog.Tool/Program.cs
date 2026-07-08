@@ -376,7 +376,8 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         .GroupBy(p => (p.Manufacturer, p.GameSystem, p.Faction ?? "General"))
         .OrderBy(g => g.Key.Manufacturer)
         .ThenBy(g => g.Key.GameSystem)
-        .ThenBy(g => g.Key.Item3);
+        .ThenBy(g => g.Key.Item3)
+        .ToList(); // materialized: enumerated by the complete-total pre-pass and the main loop
 
     var manufacturerSummaries = new Dictionary<string, (ManufacturerInfo Info, Dictionary<string, (GameSystemInfo GsInfo, List<FactionSummary> Factions)> GameSystems)>();
     int totalProducts = 0;
@@ -412,6 +413,14 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
     // the first-processed faction spuriously failing the guard against the full prior
     // count while only its own slice had been counted so far.
     Dictionary<string, int> mfgCompleteScraped = ComputeManufacturerCompleteScrapedTotals(grouped, sample);
+
+    // Snapshot each source's last-good ProductCount BEFORE the loop, because
+    // LivenessUpdater.Apply mutates ledger.Sources in place as factions are processed —
+    // reading the prior fresh mid-loop would let an earlier faction's write become a
+    // later faction's "prior" (the same running-state hazard the complete-total pre-pass
+    // above eliminates on the scraped side).
+    var mfgPriorCounts = ledger.Sources.ToDictionary(
+        kvp => kvp.Key, kvp => kvp.Value.ProductCount, StringComparer.OrdinalIgnoreCase);
 
     foreach (var group in grouped)
     {
@@ -453,7 +462,7 @@ rootCommand.SetAction(async (parseResult, cancellationToken) =>
         // every faction of a multi-faction manufacturer gets the same verdict — not a
         // running partial that makes the first-processed faction look like a huge drop
         // against the full prior manufacturer count.
-        int priorMfgCount = ledger.Sources.GetValueOrDefault(mfgSlug)?.ProductCount ?? 0;
+        int priorMfgCount = mfgPriorCounts.GetValueOrDefault(mfgSlug);
         bool implausibleDrop = LedgerMaintenance.IsImplausibleDrop(
             priorMfgCount, mfgCompleteScraped.GetValueOrDefault(mfgSlug));
         bool sourceHealthy = !degradedManufacturers.Contains(mfgSlug) && !implausibleDrop;
