@@ -62,7 +62,8 @@ public static class LivenessUpdater
         }
 
         // Known-but-unseen records: increment streak; flag on crossing the threshold.
-        foreach (string key in knownKeysForSource)
+        // Distinct() guards against a duplicate key double-incrementing its miss streak.
+        foreach (string key in knownKeysForSource.Distinct())
         {
             if (seenKeys.Contains(key))
                 continue;
