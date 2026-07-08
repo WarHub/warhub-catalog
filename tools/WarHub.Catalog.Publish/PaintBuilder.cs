@@ -1,5 +1,3 @@
-using WarHub.PaintCatalog.Tool.Models;
-
 namespace WarHub.Catalog.Publish;
 
 /// <summary>
@@ -9,13 +7,13 @@ namespace WarHub.Catalog.Publish;
 /// </summary>
 internal static class PaintBuilder
 {
-    private sealed record Entry(string BrandSlug, string Brand, Paint Paint);
+    private sealed record Entry(string BrandSlug, string Brand, PaintYaml Paint);
 
     private static string NaturalKey(string brandSlug, string name, string set, string? code) =>
         $"{brandSlug}|{name}|{set}|{code ?? ""}";
 
     public static int Build(
-        IReadOnlyList<BrandCatalog> brands,
+        IReadOnlyList<BrandFile> brands,
         EquivFile? equivalences,
         Provenance prov,
         CatalogWriter writer)
@@ -23,11 +21,11 @@ internal static class PaintBuilder
         // 1. Flatten, de-duplicating exact natural-key repeats.
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var entries = new List<Entry>();
-        foreach (BrandCatalog brand in brands)
+        foreach (BrandFile brand in brands)
         {
-            foreach (Paint p in brand.Paints)
+            foreach (PaintYaml p in brand.Paints)
             {
-                if (seen.Add(NaturalKey(brand.BrandSlug, p.Name, p.Set, p.ProductCode)))
+                if (seen.Add(NaturalKey(brand.BrandSlug, p.Name, p.Details.Set, p.ProductCode)))
                 {
                     entries.Add(new Entry(brand.BrandSlug, brand.Brand, p));
                 }
@@ -44,25 +42,30 @@ internal static class PaintBuilder
             .OrderBy(g => g.Key, StringComparer.Ordinal))
         {
             var ordered = group
-                .OrderBy(e => e.Paint.Set, StringComparer.Ordinal)
+                .OrderBy(e => e.Paint.Details.Set, StringComparer.Ordinal)
                 .ThenBy(e => e.Paint.ProductCode ?? "", StringComparer.Ordinal)
-                .ThenBy(e => e.Paint.Hex, StringComparer.Ordinal)
+                .ThenBy(e => e.Paint.Details.Hex, StringComparer.Ordinal)
                 .ToList();
 
             for (int i = 0; i < ordered.Count; i++)
             {
                 Entry e = ordered[i];
                 string id = i == 0 ? group.Key : $"{group.Key}-{i + 1}";
-                idByNaturalKey[NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Set, e.Paint.ProductCode)] = id;
+                idByNaturalKey[NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode)] = id;
                 equivById[id] = new Dictionary<string, (double, string?)>(StringComparer.Ordinal);
                 recordById[id] = new PaintRecord(
                     Id: id,
                     Brand: e.Brand,
-                    Range: string.IsNullOrWhiteSpace(e.Paint.Set) ? null : e.Paint.Set,
+                    Category: e.Paint.Category,
+                    Range: string.IsNullOrWhiteSpace(e.Paint.Details.Set) ? null : e.Paint.Details.Set,
                     Name: e.Paint.Name,
-                    Hex: NormalizeHex(e.Paint.Hex),
-                    Type: e.Paint.Type,
-                    Finish: e.Paint.Finish,
+                    Hex: NormalizeHex(e.Paint.Details.Hex),
+                    Type: e.Paint.Details.Type,
+                    Finish: e.Paint.Details.Finish,
+                    VolumeMl: e.Paint.Details.VolumeMl,
+                    Container: e.Paint.Details.Container,
+                    Status: e.Paint.Status,
+                    Availability: e.Paint.Availability,
                     Equivalents: []); // filled below
             }
         }

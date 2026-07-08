@@ -50,6 +50,20 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     }
 
     [Fact]
+    public void Paint_surfaces_category_status_volume_container()
+    {
+        JsonElement paints = Doc("paints.json").GetProperty("paints");
+        JsonElement abaddon = paints.EnumerateArray().First(p => p.GetProperty("id").GetString() == "citadel/abaddon-black");
+        Assert.Equal("paint", abaddon.GetProperty("category").GetString());
+        Assert.Equal("current", abaddon.GetProperty("status").GetString());
+        Assert.Equal("unknown", abaddon.GetProperty("availability").GetString());
+        Assert.Equal(12, abaddon.GetProperty("volumeMl").GetInt32());
+        Assert.Equal("pot", abaddon.GetProperty("container").GetString());
+        // discontinued paints are still published (include-everything).
+        Assert.Contains(paints.EnumerateArray(), p => p.GetProperty("status").GetString() == "discontinued");
+    }
+
+    [Fact]
     public void Equivalents_are_bidirectional()
     {
         var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();

@@ -1,4 +1,3 @@
-using WarHub.PaintCatalog.Tool.Models;
 using WarHub.ProductCatalog.Tool.Models;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
@@ -39,7 +38,7 @@ internal static class YamlSource
     }
 
     /// <summary>Loads every brand catalog under <c>{paintsDir}/brands/*.yaml</c>.</summary>
-    public static IEnumerable<BrandCatalog> LoadBrands(string paintsDir)
+    public static IEnumerable<BrandFile> LoadBrands(string paintsDir)
     {
         string brands = Path.Combine(paintsDir, "brands");
         if (!Directory.Exists(brands))
@@ -51,7 +50,7 @@ internal static class YamlSource
             .EnumerateFiles(brands, "*.yaml", SearchOption.TopDirectoryOnly)
             .OrderBy(f => f, StringComparer.Ordinal))
         {
-            var catalog = Deserializer.Deserialize<BrandCatalog>(File.ReadAllText(file));
+            var catalog = Deserializer.Deserialize<BrandFile>(File.ReadAllText(file));
             if (catalog is not null)
             {
                 yield return catalog;
