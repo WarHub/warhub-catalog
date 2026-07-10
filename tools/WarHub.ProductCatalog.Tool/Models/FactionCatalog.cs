@@ -11,6 +11,5 @@ public record FactionCatalog
     public required string GameSystemSlug { get; init; }
     public required string Faction { get; init; }
     public required string FactionSlug { get; init; }
-    public required int ProductCount { get; init; }
     public required List<Product> Products { get; init; }
 }

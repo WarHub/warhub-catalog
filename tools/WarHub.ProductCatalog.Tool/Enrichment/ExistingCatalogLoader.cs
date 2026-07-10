@@ -1,6 +1,6 @@
+using WarHub.CatalogStore;
 using WarHub.ProductCatalog.Tool.Models;
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace WarHub.ProductCatalog.Tool.Enrichment;
 
@@ -10,10 +10,7 @@ namespace WarHub.ProductCatalog.Tool.Enrichment;
 /// </summary>
 public static class ExistingCatalogLoader
 {
-    private static readonly IDeserializer YamlDeserializer = new DeserializerBuilder()
-        .WithNamingConvention(CamelCaseNamingConvention.Instance)
-        .IgnoreUnmatchedProperties()
-        .Build();
+    private static readonly IDeserializer YamlDeserializer = CatalogSerializer.CreateDeserializer();
 
     /// <summary>
     /// Loads all FactionCatalog YAML files from the output directory.
@@ -68,7 +65,7 @@ public static class ExistingCatalogLoader
         }
 
         if (verbose)
-            Console.WriteLine($"  [Enrich] Loaded {catalogs.Count} catalogs ({catalogs.Sum(c => c.ProductCount)} products)");
+            Console.WriteLine($"  [Enrich] Loaded {catalogs.Count} catalogs ({catalogs.Sum(c => c.Products.Count)} products)");
 
         return catalogs;
     }

@@ -52,7 +52,6 @@ public static class OverrideApplier
                 ProductCode = over.ProductCode ?? p.ProductCode,
                 Sku = over.Sku ?? p.Sku,
                 Ean = over.Ean ?? p.Ean,
-                ProductType = over.ProductType ?? p.ProductType,
                 PriceGbp = over.PriceGbp ?? p.PriceGbp,
                 PriceUsd = over.PriceUsd ?? p.PriceUsd,
                 PriceEur = over.PriceEur ?? p.PriceEur,
