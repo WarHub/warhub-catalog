@@ -30,10 +30,13 @@ internal sealed record ProductRecord(
     [property: JsonPropertyOrder(2)] string Name,
     [property: JsonPropertyOrder(3)] string? GameSystem,
     [property: JsonPropertyOrder(4)] string? Faction,
-    [property: JsonPropertyOrder(5)] int Quantity,
-    [property: JsonPropertyOrder(6)] string? ProductCode,
-    [property: JsonPropertyOrder(7)] string? Url,
-    [property: JsonPropertyOrder(8)] string? ImageUrl);
+    [property: JsonPropertyOrder(5)] string Category,
+    [property: JsonPropertyOrder(6)] string Status,
+    [property: JsonPropertyOrder(7)] string Availability,
+    [property: JsonPropertyOrder(8)] int Quantity,
+    [property: JsonPropertyOrder(9)] string? ProductCode,
+    [property: JsonPropertyOrder(10)] string? Url,
+    [property: JsonPropertyOrder(11)] string? ImageUrl);
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>
 internal sealed record PaintEquivalent(
@@ -45,12 +48,17 @@ internal sealed record PaintEquivalent(
 internal sealed record PaintRecord(
     [property: JsonPropertyOrder(1)] string Id,
     [property: JsonPropertyOrder(2)] string Brand,
-    [property: JsonPropertyOrder(3)] string? Range,
-    [property: JsonPropertyOrder(4)] string Name,
-    [property: JsonPropertyOrder(5)] string Hex,
-    [property: JsonPropertyOrder(6)] string? Type,
-    [property: JsonPropertyOrder(7)] string? Finish,
-    [property: JsonPropertyOrder(8)] IReadOnlyList<PaintEquivalent> Equivalents);
+    [property: JsonPropertyOrder(3)] string Category,
+    [property: JsonPropertyOrder(4)] string? Range,
+    [property: JsonPropertyOrder(5)] string Name,
+    [property: JsonPropertyOrder(6)] string Hex,
+    [property: JsonPropertyOrder(7)] string? Type,
+    [property: JsonPropertyOrder(8)] string? Finish,
+    [property: JsonPropertyOrder(9)] int? VolumeMl,
+    [property: JsonPropertyOrder(10)] string? Container,
+    [property: JsonPropertyOrder(11)] string Status,
+    [property: JsonPropertyOrder(12)] string Availability,
+    [property: JsonPropertyOrder(13)] IReadOnlyList<PaintEquivalent> Equivalents);
 
 // ---- Envelope-bearing documents ------------------------------------------------
 

@@ -27,6 +27,19 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     }
 
     [Fact]
+    public void Product_surfaces_category_status_availability()
+    {
+        JsonElement products = Doc("products.json").GetProperty("products");
+        JsonElement alpha = products.EnumerateArray().First(p => p.GetProperty("name").GetString() == "Alpha Box");
+        JsonElement beta = products.EnumerateArray().First(p => p.GetProperty("name").GetString() == "Beta Box");
+        Assert.Equal("miniatures", alpha.GetProperty("category").GetString());
+        Assert.Equal("current", alpha.GetProperty("status").GetString());
+        Assert.Equal("in_stock", alpha.GetProperty("availability").GetString());
+        Assert.Equal("discontinued", beta.GetProperty("status").GetString());
+        Assert.Equal("out_of_stock", beta.GetProperty("availability").GetString());
+    }
+
+    [Fact]
     public void Paint_ids_and_range_map_from_set()
     {
         var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
@@ -34,6 +47,20 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
         Assert.Equal("Base", abaddon.GetProperty("range").GetString());
         Assert.Equal("#231f20", abaddon.GetProperty("hex").GetString());     // normalized lowercase
         Assert.Contains(paints, p => p.GetProperty("id").GetString() == "vallejo/black");
+    }
+
+    [Fact]
+    public void Paint_surfaces_category_status_volume_container()
+    {
+        JsonElement paints = Doc("paints.json").GetProperty("paints");
+        JsonElement abaddon = paints.EnumerateArray().First(p => p.GetProperty("id").GetString() == "citadel/abaddon-black");
+        Assert.Equal("paint", abaddon.GetProperty("category").GetString());
+        Assert.Equal("current", abaddon.GetProperty("status").GetString());
+        Assert.Equal("unknown", abaddon.GetProperty("availability").GetString());
+        Assert.Equal(12, abaddon.GetProperty("volumeMl").GetInt32());
+        Assert.Equal("pot", abaddon.GetProperty("container").GetString());
+        // discontinued paints are still published (include-everything).
+        Assert.Contains(paints.EnumerateArray(), p => p.GetProperty("status").GetString() == "discontinued");
     }
 
     [Fact]

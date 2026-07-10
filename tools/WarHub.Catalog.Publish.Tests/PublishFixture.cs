@@ -26,52 +26,82 @@ public sealed class PublishFixture : IDisposable
             gameSystemSlug: test-system
             faction: General
             factionSlug: general
-            productCount: 2
             products:
             - name: Alpha Box
-              productCode: PRODA
+              category: miniatures
+              packaging: single
+              status: current
+              availability: in_stock
+              firstSeen: '2026-07-07'
               ean: '5011921142361'
-              productType: single_kit
-              status: current
+              productCode: PRODA
             - name: Beta Box
+              category: miniatures
+              packaging: box
+              status: discontinued
+              availability: out_of_stock
+              firstSeen: '2026-07-07'
               sku: SKUB
-              productType: single_kit
-              status: current
             """);
 
         WriteFile(Path.Combine(paints, "brands", "citadel.yaml"), """
             brand: Citadel
             brandSlug: citadel
-            paintCount: 2
+            source: Arcturus5404/miniature-paints
+            license: MIT
             paints:
             - name: Abaddon Black
+              category: paint
+              status: current
+              availability: unknown
+              firstSeen: '2026-07-07'
               productCode: C1
-              set: Base
-              r: 35
-              g: 31
-              b: 32
-              hex: '#231F20'
+              details:
+                set: Base
+                r: 35
+                g: 31
+                b: 32
+                hex: '#231F20'
+                volumeMl: 12
+                container: pot
+                type: Base
+                finish: Matte
             - name: Mephiston Red
+              category: paint
+              status: discontinued
+              availability: out_of_stock
+              firstSeen: '2026-07-07'
               productCode: C2
-              set: Base
-              r: 154
-              g: 17
-              b: 21
-              hex: '#9A1115'
+              details:
+                set: Base
+                r: 154
+                g: 17
+                b: 21
+                hex: '#9A1115'
+                volumeMl: 12
+                container: pot
             """);
 
         WriteFile(Path.Combine(paints, "brands", "vallejo.yaml"), """
             brand: Vallejo
             brandSlug: vallejo
-            paintCount: 1
+            source: Arcturus5404/miniature-paints
+            license: MIT
             paints:
             - name: Black
+              category: paint
+              status: current
+              availability: unknown
+              firstSeen: '2026-07-07'
               productCode: V1
-              set: Model Color
-              r: 35
-              g: 35
-              b: 35
-              hex: '#232323'
+              details:
+                set: Model Color
+                r: 35
+                g: 35
+                b: 35
+                hex: '#232323'
+                volumeMl: 17
+                container: dropper
             """);
 
         WriteFile(Path.Combine(paints, "equivalences.yaml"), """
