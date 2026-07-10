@@ -261,4 +261,47 @@ public class CatalogReconcilerTests
         Rec good = result.Records.Single(r => r.Name == "Good");
         Assert.Equal("2026-07-07", good.FirstSeen); // new record, did NOT inherit Bad's 2020 firstSeen
     }
+
+    [Fact]
+    public void Reconcile_UrlRename_IsOrderIndependent()
+    {
+        // Two fresh records, neither matching the archived key by identity, both carrying
+        // the archived record's URL. Whichever wins the rename claim must NOT depend on
+        // which order they appear in the fresh scrape — only on identity-key order.
+        var existing = new List<Rec> { new() { Name = "Old Name", Url = "http://x/1", FirstSeen = "2020-01-01" } };
+        var a = new Rec { Name = "Amy", Url = "http://x/1", Price = "1" };
+        var b = new Rec { Name = "Bob", Url = "http://x/1", Price = "2" };
+
+        ReconcileResult<Rec> resultAB = NewReconciler().Reconcile(existing, new List<Rec> { a, b }, NoAliases, NoRetract, "2026-07-07");
+        ReconcileResult<Rec> resultBA = NewReconciler().Reconcile(existing, new List<Rec> { b, a }, NoAliases, NoRetract, "2026-07-07");
+
+        Assert.Equal(
+            resultAB.Records.Select(r => (r.Name, r.Price, r.FirstSeen)),
+            resultBA.Records.Select(r => (r.Name, r.Price, r.FirstSeen)));
+
+        // "amy" sorts before "bob" ordinally, so Amy deterministically wins the rename
+        // (inherits the archived FirstSeen); Bob is deterministically treated as new.
+        Rec amy = resultAB.Records.Single(r => r.Name == "Amy");
+        Rec bob = resultAB.Records.Single(r => r.Name == "Bob");
+        Assert.Equal("2020-01-01", amy.FirstSeen);
+        Assert.Equal("2026-07-07", bob.FirstSeen);
+    }
+
+    [Fact]
+    public void Reconcile_Alias_SkipsRetractedTarget()
+    {
+        // Mirrors RetractedRecord_IsNotResurrectedByUrlRename but for the alias fallback path:
+        // an alias pointing at a retracted target must not resurrect it.
+        var existing = new List<Rec> { new() { Name = "Old Name", FirstSeen = "2020-01-01" } };
+        var fresh = new List<Rec> { new() { Name = "New Name" } };
+        var aliases = new Dictionary<string, string> { ["new name"] = "old name" };
+        var retract = new HashSet<string> { "old name" };
+
+        ReconcileResult<Rec> result = NewReconciler().Reconcile(existing, fresh, aliases, retract, "2026-07-07");
+
+        Assert.DoesNotContain(result.Records, r => r.Name == "Old Name");
+        Assert.Contains(result.Records, r => r.Name == "New Name"); // inserted as new, not a rename of Old Name
+        Rec newRec = result.Records.Single(r => r.Name == "New Name");
+        Assert.Equal("2026-07-07", newRec.FirstSeen); // new record, did NOT inherit Old Name's 2020 firstSeen
+    }
 }

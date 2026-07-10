@@ -4,6 +4,9 @@ using WarHub.PaintCatalog.Tool.Models;
 using WarHub.PaintCatalog.Tool.Output;
 using WarHub.PaintCatalog.Tool.Reconcile;
 
+// PaintRecordMapper.ToRecord(Paint) is reused below to build the not-yet-migrated
+// branch's record, so the migrator can never drift from the live reconcile mapping.
+
 namespace WarHub.PaintCatalog.Tool.Migration;
 
 /// <summary>
@@ -150,29 +153,26 @@ public static class PaintMigrator
             };
         }
 
-        // Not yet migrated: map exactly as PaintRecordMapper.ToRecord would, then backfill firstSeen.
-        return new PaintRecord
+        // Not yet migrated: build the flat Paint the same shape the live scraper would
+        // produce and hand it to PaintRecordMapper.ToRecord, so this can never drift
+        // from the reconcile-path mapping. The mapper leaves FirstSeen null; backfill it.
+        var paint = new Paint
         {
             Name = lp.Name,
-            Category = "paint",
-            Status = lp.IsDiscontinued ? "discontinued" : "current",
-            Availability = lp.IsDiscontinued ? "out_of_stock" : "unknown",
-            FirstSeen = firstSeen,
             ProductCode = lp.ProductCode,
+            Set = lp.Set ?? "",
+            R = lp.R,
+            G = lp.G,
+            B = lp.B,
+            Hex = lp.Hex ?? "",
+            VolumeMl = lp.VolumeMl,
+            Packaging = lp.Packaging,
             Ean = lp.Ean,
+            IsDiscontinued = lp.IsDiscontinued,
+            Type = lp.Type,
+            Finish = lp.Finish,
             ImageUrl = lp.ImageUrl,
-            Details = new PaintDetails
-            {
-                Set = lp.Set ?? "",
-                R = lp.R,
-                G = lp.G,
-                B = lp.B,
-                Hex = lp.Hex ?? "",
-                VolumeMl = lp.VolumeMl,
-                Container = lp.Packaging,
-                Type = lp.Type,
-                Finish = lp.Finish,
-            },
         };
+        return PaintRecordMapper.ToRecord(paint) with { FirstSeen = firstSeen };
     }
 }

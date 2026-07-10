@@ -77,4 +77,41 @@ public class CatalogSerializerTests
         string yaml = serializer.Serialize(obj);
         Assert.Contains($"plain: {value}", yaml);
     }
+
+    [Fact]
+    public void Quotes_RealDate()
+    {
+        var serializer = CatalogSerializer.CreateSerializer();
+        var obj = new Sample { Ean = "2026-07-08", Plain = "x" };
+        string yaml = serializer.Serialize(obj);
+        Assert.Contains("ean: '2026-07-08'", yaml);
+    }
+
+    [Fact]
+    public void Quotes_Timestamp()
+    {
+        var serializer = CatalogSerializer.CreateSerializer();
+        var obj = new Sample { Ean = "2026-07-08T12:00:00Z", Plain = "x" };
+        string yaml = serializer.Serialize(obj);
+        Assert.Contains("ean: '2026-07-08T12:00:00Z'", yaml);
+    }
+
+    [Fact]
+    public void DoesNotQuote_DatePrefixedTitle()
+    {
+        var serializer = CatalogSerializer.CreateSerializer();
+        var obj = new Sample { Ean = "1", Plain = "2024-01-01 Anniversary Edition" };
+        string yaml = serializer.Serialize(obj);
+        Assert.Contains("plain: 2024-01-01 Anniversary Edition", yaml);
+        Assert.DoesNotContain("plain: '2024-01-01 Anniversary Edition'", yaml);
+    }
+
+    [Fact]
+    public void Quotes_SignedHex()
+    {
+        var serializer = CatalogSerializer.CreateSerializer();
+        var obj = new Sample { Ean = "-0x1A", Plain = "x" };
+        string yaml = serializer.Serialize(obj);
+        Assert.Contains("ean: '-0x1A'", yaml);
+    }
 }

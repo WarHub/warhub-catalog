@@ -16,7 +16,7 @@ public sealed partial class QuotingEventEmitter(IEventEmitter next) : ChainedEve
     // Core-schema-ambiguous plain scalars: integers (incl. leading zeros, hex, octal),
     // floats (incl. leading-dot, exponent, .inf/.nan), booleans, nulls, and dates/timestamps.
     [GeneratedRegex(
-        @"^([-+]?\d+|0x[0-9a-fA-F]+|0o[0-7]+|[-+]?(\d+\.\d*|\.\d+)([eE][-+]?\d+)?|[-+]?\d+[eE][-+]?\d+|[-+]?\.(inf|nan)|true|false|yes|no|on|off|null|~|\d{4}-\d{2}-\d{2}([Tt ].*)?)$",
+        @"^([-+]?\d+|[-+]?0x[0-9a-fA-F]+|[-+]?0o[0-7]+|[-+]?(\d+\.\d*|\.\d+)([eE][-+]?\d+)?|[-+]?\d+[eE][-+]?\d+|[-+]?\.(inf|nan)|true|false|yes|no|on|off|null|~|\d{4}-\d{2}-\d{2}([Tt]\S*|\s+\d{1,2}:\d{2}\S*)?)$",
         RegexOptions.IgnoreCase)]
     private static partial Regex Ambiguous();
 
