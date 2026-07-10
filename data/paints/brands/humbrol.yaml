@@ -2,1385 +2,1844 @@ brand: Humbrol
 brandSlug: humbrol
 source: Arcturus5404/miniature-paints
 license: MIT
-paintCount: 115
 paints:
-- name: Aluminium
-  productCode: 56
-  set: Humbrol Acrylics - Metallics
-  r: 202
-  g: 209
-  b: 215
-  hex: '#CAD1D7'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Aluminium
-  productCode: S56
-  set: Humbrol Aerosol Sprays
-  r: 191
-  g: 201
-  b: 210
-  hex: '#BFC9D2'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Antique Bronze
-  productCode: 171
-  set: Humbrol Acrylics - Metallics
-  r: 161
-  g: 103
-  b: 66
-  hex: '#A16742'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Army Green
-  productCode: 102
-  set: Humbrol Acrylics - Matt
-  r: 105
-  g: 115
-  b: 81
-  hex: '#697351'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Beige Green
-  productCode: S90
-  set: Humbrol Aerosol Sprays - Matt
-  r: 218
-  g: 233
-  b: 194
-  hex: '#DAE9C2'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
 - name: Black
-  productCode: 85
-  set: Humbrol Acrylics - Satin
-  r: 23
-  g: 19
-  b: 16
-  hex: '#171310'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Satin
-- name: Black
-  productCode: 21
-  set: Humbrol Acrylics - Gloss
-  r: 0
-  g: 0
-  b: 0
-  hex: '#000000'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Black
-  productCode: 33
-  set: Humbrol Acrylics - Matt
-  r: 0
-  g: 0
-  b: 0
-  hex: '#000000'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Black Gloss
-  productCode: S21
-  set: Humbrol Aerosol Sprays
-  r: 0
-  g: 0
-  b: 0
-  hex: '#000000'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Black Matt
-  productCode: S33
-  set: Humbrol Aerosol Sprays
-  r: 33
-  g: 32
-  b: 33
-  hex: '#212021'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Black Satin
-  productCode: S85
-  set: Humbrol Aerosol Sprays
-  r: 41
-  g: 37
-  b: 38
-  hex: '#292526'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Satin
-- name: Blue
-  productCode: 25
-  set: Humbrol Acrylics - Matt
-  r: 34
-  g: 56
-  b: 129
-  hex: '#223881'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Brass
-  productCode: S54
-  set: Humbrol Aerosol Sprays
-  r: 223
-  g: 146
-  b: 40
-  hex: '#DF9228'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Brass Metallic
-  productCode: 54
-  set: Humbrol Acrylics - Metallics
-  r: 226
-  g: 146
-  b: 7
-  hex: '#E29207'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Bright Green
-  productCode: 37
-  set: Humbrol Acrylics - Matt
-  r: 90
-  g: 170
-  b: 49
-  hex: '#5AAA31'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Bronze Metallic
-  productCode: 55
-  set: Humbrol Acrylics - Metallics
-  r: 180
-  g: 88
-  b: 21
-  hex: '#B45815'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Brown
-  productCode: 186
-  set: Humbrol Acrylics - Matt
-  r: 135
-  g: 83
-  b: 59
-  hex: '#87533B'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Brunswick Green
-  productCode: 3
-  set: Humbrol Acrylics - Matt
-  r: 33
-  g: 60
-  b: 29
-  hex: '#213C1D'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Brunswick Green
-  productCode: S3
-  set: Humbrol Aerosol Sprays
-  r: 18
-  g: 59
-  b: 29
-  hex: '#123B1D'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Chocolate
-  productCode: 98
-  set: Humbrol Acrylics - Matt
-  r: 119
-  g: 81
-  b: 60
-  hex: '#77513C'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Chrome Silver
-  productCode: 191
-  set: Humbrol Acrylics - Metallics
-  r: 229
-  g: 233
-  b: 236
-  hex: '#E5E9EC'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Chrome Silver
-  productCode: S191
-  set: Humbrol Aerosol Sprays
-  r: 228
-  g: 235
-  b: 241
-  hex: '#E4EBF1'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Copper
-  productCode: 12
-  set: Humbrol Acrylics - Metallics
-  r: 164
-  g: 79
-  b: 24
-  hex: '#A44F18'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Cream
-  productCode: 103
-  set: Humbrol Acrylics - Matt
-  r: 236
-  g: 214
-  b: 138
-  hex: '#ECD68A'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '21'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 0
+    g: 0
+    b: 0
+    hex: '#000000'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Crimson
-  productCode: 20
-  set: Humbrol Acrylics - Gloss
-  r: 147
-  g: 22
-  b: 30
-  hex: '#93161E'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Dark Brown
-  productCode: S29
-  set: Humbrol Aerosol Sprays
-  r: 236
-  g: 219
-  b: 203
-  hex: '#ECDBCB'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '20'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 147
+    g: 22
+    b: 30
+    hex: '#93161E'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Dark Camouflage Grey Satin
-  productCode: 156
-  set: Humbrol Acrylics - Gloss
-  r: 130
-  g: 119
-  b: 115
-  hex: '#827773'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Dark Earth
-  productCode: 29
-  set: Humbrol Acrylics - Matt
-  r: 132
-  g: 102
-  b: 78
-  hex: '#84664E'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '156'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 130
+    g: 119
+    b: 115
+    hex: '#827773'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Dark Green
-  productCode: S163
-  set: Humbrol Aerosol Sprays - Satin
-  r: 28
-  g: 29
-  b: 21
-  hex: '#1C1D15'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Satin
-- name: Dark Green
-  productCode: S30
-  set: Humbrol Aerosol Sprays
-  r: 26
-  g: 105
-  b: 73
-  hex: '#1A6949'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark Green
-  productCode: 30
-  set: Humbrol Acrylics - Matt
-  r: 30
-  g: 104
-  b: 71
-  hex: '#1E6847'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark Green
-  productCode: 163
-  set: Humbrol Acrylics - Gloss
-  r: 35
-  g: 43
-  b: 19
-  hex: '#232B13'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Dark Grey
-  productCode: 32
-  set: Humbrol Acrylics - Matt
-  r: 65
-  g: 68
-  b: 75
-  hex: '#41444B'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Desert Tan
-  productCode: S237
-  set: Humbrol Aerosol Sprays
-  r: 183
-  g: 168
-  b: 137
-  hex: '#B7A889'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Desert Yellow
-  productCode: S93
-  set: Humbrol Aerosol Sprays
-  r: 191
-  g: 147
-  b: 82
-  hex: '#BF9352'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Desert Yellow
-  productCode: 93
-  set: Humbrol Acrylics - Matt
-  r: 198
-  g: 151
-  b: 73
-  hex: '#C69749'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Duck Egg Blue
-  productCode: 23
-  set: Humbrol Acrylics - Matt
-  r: 213
-  g: 236
-  b: 228
-  hex: '#D5ECE4'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '163'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 35
+    g: 43
+    b: 19
+    hex: '#232B13'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Emerald Green
-  productCode: 2
-  set: Humbrol Acrylics - Gloss
-  r: 3
-  g: 124
-  b: 53
-  hex: '#037C35'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '2'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 3
+    g: 124
+    b: 53
+    hex: '#037C35'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Extra Dark Sea Grey
-  productCode: 123
-  set: Humbrol Acrylics - Gloss
-  r: 110
-  g: 109
-  b: 117
-  hex: '#6E6D75'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '123'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 110
+    g: 109
+    b: 117
+    hex: '#6E6D75'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Fire Orange
-  productCode: 209
-  set: Humbrol Acrylics - Gloss
-  r: 224
-  g: 24
-  b: 27
-  hex: '#E0181B'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Flesh
-  productCode: 61
-  set: Humbrol Acrylics - Matt
-  r: 236
-  g: 143
-  b: 84
-  hex: '#EC8F54'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '209'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 224
+    g: 24
+    b: 27
+    hex: '#E0181B'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Fluorescent Signal Green
-  productCode: 208
-  set: Humbrol Acrylics - Gloss
-  r: 90
-  g: 170
-  b: 49
-  hex: '#5AAA31'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '208'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 90
+    g: 170
+    b: 49
+    hex: '#5AAA31'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: French Blue
-  productCode: 14
-  set: Humbrol Acrylics - Gloss
-  r: 14
-  g: 69
-  b: 149
-  hex: '#0E4595'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: German Camouflage Red
-  productCode: 160
-  set: Humbrol Acrylics - Matt
-  r: 98
-  g: 51
-  b: 25
-  hex: '#623319'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gloss Purple
-  productCode: S68
-  set: Humbrol Aerosol Sprays
-  r: 72
-  g: 58
-  b: 94
-  hex: '#483A5E'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '14'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 14
+    g: 69
+    b: 149
+    hex: '#0E4595'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Gloss Varnish
-  productCode: 35
-  set: Humbrol Acrylics - Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Gold
-  productCode: S16
-  set: Humbrol Aerosol Sprays
-  r: 224
-  g: 172
-  b: 37
-  hex: '#E0AC25'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Gold
-  productCode: 16
-  set: Humbrol Acrylics - Metallics
-  r: 226
-  g: 174
-  b: 0
-  hex: '#E2AE00'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Grass Green
-  productCode: 80
-  set: Humbrol Acrylics - Matt
-  r: 106
-  g: 113
-  b: 69
-  hex: '#6A7145'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Grass Green
-  productCode: S80
-  set: Humbrol Aerosol Sprays
-  r: 103
-  g: 111
-  b: 72
-  hex: '#676F48'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Grey
-  productCode: S64
-  set: Humbrol Aerosol Sprays
-  r: 153
-  g: 156
-  b: 163
-  hex: '#999CA3'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gun Metal
-  productCode: S53
-  set: Humbrol Aerosol Sprays
-  r: 42
-  g: 43
-  b: 27
-  hex: '#2A2B1B'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gunmetal
-  productCode: 53
-  set: Humbrol Acrylics - Metallics
-  r: 42
-  g: 42
-  b: 42
-  hex: '#2A2A2A'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Insignia Red
-  productCode: 153
-  set: Humbrol Acrylics - Matt
-  r: 178
-  g: 31
-  b: 37
-  hex: '#B21F25'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Insignia Yellow
-  productCode: 154
-  set: Humbrol Acrylics - Matt
-  r: 249
-  g: 180
-  b: 0
-  hex: '#F9B400'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Italian Racing Red
-  productCode: S220
-  set: Humbrol Aerosol Sprays
-  r: 195
-  g: 32
-  b: 37
-  hex: '#C32025'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '35'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Ivory
-  productCode: 41
-  set: Humbrol Acrylics - Gloss
-  r: 248
-  g: 244
-  b: 199
-  hex: '#F8F4C7'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Khaki
-  productCode: 26
-  set: Humbrol Acrylics - Matt
-  r: 155
-  g: 104
-  b: 23
-  hex: '#9B6817'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Khaki Drill
-  productCode: 72
-  set: Humbrol Acrylics - Matt
-  r: 173
-  g: 147
-  b: 122
-  hex: '#AD937A'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Leather
-  productCode: 62
-  set: Humbrol Acrylics - Matt
-  r: 173
-  g: 81
-  b: 40
-  hex: '#AD5128'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Lemon
-  productCode: 99
-  set: Humbrol Acrylics - Matt
-  r: 248
-  g: 224
-  b: 0
-  hex: '#F8E000'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light Grey
-  productCode: 64
-  set: Humbrol Acrylics - Matt
-  r: 207
-  g: 208
-  b: 210
-  hex: '#CFD0D2'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light Olive
-  productCode: S86
-  set: Humbrol Aerosol Sprays
-  r: 102
-  g: 92
-  b: 64
-  hex: '#665C40'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '41'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 248
+    g: 244
+    b: 199
+    hex: '#F8F4C7'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Lime
-  productCode: 38
-  set: Humbrol Acrylics - Gloss
-  r: 126
-  g: 173
-  b: 43
-  hex: '#7EAD2B'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Lime Green
-  productCode: S38
-  set: Humbrol Aerosol Sprays
-  r: 192
-  g: 208
-  b: 161
-  hex: '#C0D0A1'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Magenta
-  productCode: 58
-  set: Humbrol Acrylics - Matt
-  r: 188
-  g: 73
-  b: 150
-  hex: '#BC4996'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Matt Olive Drab
-  productCode: 155
-  set: Humbrol Acrylics - Matt
-  r: 82
-  g: 81
-  b: 35
-  hex: '#525123'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Matt Tank Grey
-  productCode: 67
-  set: Humbrol Acrylics - Matt
-  r: 43
-  g: 58
-  b: 61
-  hex: '#2B3A3D'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '38'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 126
+    g: 173
+    b: 43
+    hex: '#7EAD2B'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Mediterranean Blue
-  productCode: 48
-  set: Humbrol Acrylics - Gloss
-  r: 50
-  g: 138
-  b: 176
-  hex: '#328AB0'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Medium Sea Grey
-  productCode: S165
-  set: Humbrol Aerosol Sprays - Satin
-  r: 155
-  g: 162
-  b: 170
-  hex: '#9BA2AA'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Satin
-- name: Middle Blue
-  productCode: 89
-  set: Humbrol Acrylics - Matt
-  r: 69
-  g: 152
-  b: 192
-  hex: '#4598C0'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '48'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 50
+    g: 138
+    b: 176
+    hex: '#328AB0'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Midnight Blue
-  productCode: 15
-  set: Humbrol Acrylics - Gloss
-  r: 33
-  g: 47
-  b: 94
-  hex: '#212F5E'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Midnight Blue
-  productCode: S15
-  set: Humbrol Aerosol Sprays
-  r: 29
-  g: 49
-  b: 99
-  hex: '#1D3163'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Natural Wood
-  productCode: 110
-  set: Humbrol Acrylics - Matt
-  r: 153
-  g: 103
-  b: 70
-  hex: '#996746'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Oak
-  productCode: 71
-  set: Humbrol Acrylics - Satin
-  r: 242
-  g: 223
-  b: 183
-  hex: '#F2DFB7'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Satin
-- name: Ocean Grey
-  productCode: 106
-  set: Humbrol Acrylics - Matt
-  r: 110
-  g: 115
-  b: 83
-  hex: '#6E7353'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive Drab
-  productCode: S155
-  set: Humbrol Aerosol Sprays - Matt
-  r: 76
-  g: 78
-  b: 38
-  hex: '#4C4E26'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive Green
-  productCode: 86
-  set: Humbrol Acrylics - Matt
-  r: 111
-  g: 95
-  b: 62
-  hex: '#6F5F3E'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '15'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 33
+    g: 47
+    b: 94
+    hex: '#212F5E'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Orange
-  productCode: 18
-  set: Humbrol Acrylics - Gloss
-  r: 231
-  g: 101
-  b: 13
-  hex: '#E7650D'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Orange
-  productCode: S18
-  set: Humbrol Aerosol Sprays
-  r: 228
-  g: 110
-  b: 40
-  hex: '#E46E28'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pastel Blue
-  productCode: 44
-  set: Humbrol Acrylics - Matt
-  r: 194
-  g: 215
-  b: 242
-  hex: '#C2D7F2'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pastel Green
-  productCode: 36
-  set: Humbrol Acrylics - Matt
-  r: 202
-  g: 226
-  b: 166
-  hex: '#CAE2A6'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pastel Violet
-  productCode: 42
-  set: Humbrol Acrylics - Matt
-  r: 205
-  g: 169
-  b: 207
-  hex: '#CDA9CF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pink
-  productCode: 57
-  set: Humbrol Acrylics - Matt
-  r: 239
-  g: 174
-  b: 180
-  hex: '#EFAEB4'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Primer
-  productCode: 1
-  set: Humbrol Acrylics - Matt
-  r: 87
-  g: 91
-  b: 90
-  hex: '#575B5A'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Primer
-  productCode: S1
-  set: Humbrol Aerosol Sprays
-  r: 82
-  g: 93
-  b: 87
-  hex: '#525D57'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '18'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 231
+    g: 101
+    b: 13
+    hex: '#E7650D'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Purple
-  productCode: 68
-  set: Humbrol Acrylics - Gloss
-  r: 42
-  g: 23
-  b: 68
-  hex: '#2A1744'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: RAF Blue
-  productCode: 96
-  set: Humbrol Acrylics - Matt
-  r: 103
-  g: 114
-  b: 144
-  hex: '#677290'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '68'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 42
+    g: 23
+    b: 68
+    hex: '#2A1744'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Red
-  productCode: 19
-  set: Humbrol Acrylics - Gloss
-  r: 216
-  g: 13
-  b: 32
-  hex: '#D80D20'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Red
-  productCode: S19
-  set: Humbrol Aerosol Sprays
-  r: 222
-  g: 29
-  b: 46
-  hex: '#DE1D2E'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Rust
-  productCode: 113
-  set: Humbrol Acrylics - Matt
-  r: 174
-  g: 106
-  b: 87
-  hex: '#AE6A57'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Sand
-  productCode: 63
-  set: Humbrol Acrylics - Matt
-  r: 214
-  g: 156
-  b: 74
-  hex: '#D69C4A'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Sand
-  productCode: S63
-  set: Humbrol Aerosol Sprays
-  r: 209
-  g: 150
-  b: 81
-  hex: '#D19651'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '19'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 216
+    g: 13
+    b: 32
+    hex: '#D80D20'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Satin Varnish
-  productCode: 135
-  set: Humbrol Acrylics - Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Scarlet
-  productCode: 60
-  set: Humbrol Acrylics - Matt
-  r: 186
-  g: 24
-  b: 22
-  hex: '#BA1816'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Sea Grey
-  productCode: S27
-  set: Humbrol Aerosol Sprays
-  r: 80
-  g: 86
-  b: 84
-  hex: '#505654'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Sea Grey
-  productCode: 27
-  set: Humbrol Acrylics - Matt
-  r: 88
-  g: 89
-  b: 84
-  hex: '#585954'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '135'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Service Brown
-  productCode: 10
-  set: Humbrol Acrylics - Gloss
-  r: 67
-  g: 51
-  b: 35
-  hex: '#433323'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '10'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 67
+    g: 51
+    b: 35
+    hex: '#433323'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Signal Red
-  productCode: 174
-  set: Humbrol Acrylics - Gloss
-  r: 211
-  g: 44
-  b: 25
-  hex: '#D32C19'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Silver
-  productCode: S11
-  set: Humbrol Aerosol Sprays
-  r: 208
-  g: 209
-  b: 211
-  hex: '#D0D1D3'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Silver
-  productCode: 11
-  set: Humbrol Acrylics - Metallics
-  r: 218
-  g: 218
-  b: 218
-  hex: '#DADADA'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '174'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 211
+    g: 44
+    b: 25
+    hex: '#D32C19'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: Tan
-  productCode: 9
-  set: Humbrol Acrylics - Gloss
-  r: 176
-  g: 83
-  b: 24
-  hex: '#B05318'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Tank Grey
-  productCode: S67
-  set: Humbrol Aerosol Sprays
-  r: 36
-  g: 56
-  b: 63
-  hex: '#24383F'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '9'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 176
+    g: 83
+    b: 24
+    hex: '#B05318'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
+- name: White
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '130'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
+- name: White
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '22'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
+- name: Yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '69'
+  details:
+    set: Humbrol Acrylics - Gloss
+    r: 252
+    g: 219
+    b: 0
+    hex: '#FCDB00'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
+- name: Army Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '102'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 105
+    g: 115
+    b: 81
+    hex: '#697351'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '33'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 0
+    g: 0
+    b: 0
+    hex: '#000000'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '25'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 34
+    g: 56
+    b: 129
+    hex: '#223881'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Bright Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '37'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 90
+    g: 170
+    b: 49
+    hex: '#5AAA31'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '186'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 135
+    g: 83
+    b: 59
+    hex: '#87533B'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Brunswick Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '3'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 33
+    g: 60
+    b: 29
+    hex: '#213C1D'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Chocolate
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '98'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 119
+    g: 81
+    b: 60
+    hex: '#77513C'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Cream
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '103'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 236
+    g: 214
+    b: 138
+    hex: '#ECD68A'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Dark Earth
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '29'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 132
+    g: 102
+    b: 78
+    hex: '#84664E'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Dark Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '30'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 30
+    g: 104
+    b: 71
+    hex: '#1E6847'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Dark Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '32'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 65
+    g: 68
+    b: 75
+    hex: '#41444B'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Desert Yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '93'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 198
+    g: 151
+    b: 73
+    hex: '#C69749'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Duck Egg Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '23'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 213
+    g: 236
+    b: 228
+    hex: '#D5ECE4'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Flesh
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '61'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 236
+    g: 143
+    b: 84
+    hex: '#EC8F54'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: German Camouflage Red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '160'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 98
+    g: 51
+    b: 25
+    hex: '#623319'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Grass Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '80'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 106
+    g: 113
+    b: 69
+    hex: '#6A7145'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Insignia Red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '153'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 178
+    g: 31
+    b: 37
+    hex: '#B21F25'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Insignia Yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '154'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 249
+    g: 180
+    b: 0
+    hex: '#F9B400'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Khaki Drill
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '72'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 173
+    g: 147
+    b: 122
+    hex: '#AD937A'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Khaki
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '26'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 155
+    g: 104
+    b: 23
+    hex: '#9B6817'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Leather
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '62'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 173
+    g: 81
+    b: 40
+    hex: '#AD5128'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Lemon
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '99'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 248
+    g: 224
+    b: 0
+    hex: '#F8E000'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Light Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '64'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 207
+    g: 208
+    b: 210
+    hex: '#CFD0D2'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Magenta
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '58'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 188
+    g: 73
+    b: 150
+    hex: '#BC4996'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Matt Olive Drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '155'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 82
+    g: 81
+    b: 35
+    hex: '#525123'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Matt Tank Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '67'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 43
+    g: 58
+    b: 61
+    hex: '#2B3A3D'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Middle Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '89'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 69
+    g: 152
+    b: 192
+    hex: '#4598C0'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Natural Wood
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '110'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 153
+    g: 103
+    b: 70
+    hex: '#996746'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Ocean Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '106'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 110
+    g: 115
+    b: 83
+    hex: '#6E7353'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Olive Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '86'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 111
+    g: 95
+    b: 62
+    hex: '#6F5F3E'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Pastel Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '44'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 194
+    g: 215
+    b: 242
+    hex: '#C2D7F2'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Pastel Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '36'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 202
+    g: 226
+    b: 166
+    hex: '#CAE2A6'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Pastel Violet
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '42'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 205
+    g: 169
+    b: 207
+    hex: '#CDA9CF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Pink
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '57'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 239
+    g: 174
+    b: 180
+    hex: '#EFAEB4'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Primer
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '1'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 87
+    g: 91
+    b: 90
+    hex: '#575B5A'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: RAF Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '96'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 103
+    g: 114
+    b: 144
+    hex: '#677290'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Rust
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '113'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 174
+    g: 106
+    b: 87
+    hex: '#AE6A57'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Sand
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '63'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 214
+    g: 156
+    b: 74
+    hex: '#D69C4A'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Scarlet
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '60'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 186
+    g: 24
+    b: 22
+    hex: '#BA1816'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Sea Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '27'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 88
+    g: 89
+    b: 84
+    hex: '#585954'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
 - name: Trainer Yellow
-  productCode: 24
-  set: Humbrol Acrylics - Matt
-  r: 248
-  g: 193
-  b: 41
-  hex: '#F8C129'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: US Ghost Grey
-  productCode: 127
-  set: Humbrol Acrylics - Satin
-  r: 173
-  g: 191
-  b: 201
-  hex: '#ADBFC9'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Satin
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '24'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 248
+    g: 193
+    b: 41
+    hex: '#F8C129'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
 - name: US Light Green
-  productCode: 117
-  set: Humbrol Acrylics - Matt
-  r: 86
-  g: 100
-  b: 65
-  hex: '#566441'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '117'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 86
+    g: 100
+    b: 65
+    hex: '#566441'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
 - name: US Tan
-  productCode: 118
-  set: Humbrol Acrylics - Matt
-  r: 180
-  g: 126
-  b: 88
-  hex: '#B47E58'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '118'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 180
+    g: 126
+    b: 88
+    hex: '#B47E58'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: White
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '34'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
 - name: WWI Blue
-  productCode: 109
-  set: Humbrol Acrylics - Matt
-  r: 93
-  g: 127
-  b: 175
-  hex: '#5D7FAF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: White
-  productCode: 22
-  set: Humbrol Acrylics - Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: White
-  productCode: 34
-  set: Humbrol Acrylics - Matt
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: White
-  productCode: 130
-  set: Humbrol Acrylics - Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '109'
+  details:
+    set: Humbrol Acrylics - Matt
+    r: 93
+    g: 127
+    b: 175
+    hex: '#5D7FAF'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Aluminium
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '56'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 202
+    g: 209
+    b: 215
+    hex: '#CAD1D7'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Antique Bronze
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '171'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 161
+    g: 103
+    b: 66
+    hex: '#A16742'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Brass Metallic
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '54'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 226
+    g: 146
+    b: 7
+    hex: '#E29207'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Bronze Metallic
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '55'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 180
+    g: 88
+    b: 21
+    hex: '#B45815'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Chrome Silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '191'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 229
+    g: 233
+    b: 236
+    hex: '#E5E9EC'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Copper
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '12'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 164
+    g: 79
+    b: 24
+    hex: '#A44F18'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '16'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 226
+    g: 174
+    b: 0
+    hex: '#E2AE00'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Gunmetal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '53'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 42
+    g: 42
+    b: 42
+    hex: '#2A2A2A'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '11'
+  details:
+    set: Humbrol Acrylics - Metallics
+    r: 218
+    g: 218
+    b: 218
+    hex: '#DADADA'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '85'
+  details:
+    set: Humbrol Acrylics - Satin
+    r: 23
+    g: 19
+    b: 16
+    hex: '#171310'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Satin
+- name: Oak
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '71'
+  details:
+    set: Humbrol Acrylics - Satin
+    r: 242
+    g: 223
+    b: 183
+    hex: '#F2DFB7'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Satin
+- name: US Ghost Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: '127'
+  details:
+    set: Humbrol Acrylics - Satin
+    r: 173
+    g: 191
+    b: 201
+    hex: '#ADBFC9'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Satin
+- name: Beige Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S90
+  details:
+    set: Humbrol Aerosol Sprays - Matt
+    r: 218
+    g: 233
+    b: 194
+    hex: '#DAE9C2'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Olive Drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S155
+  details:
+    set: Humbrol Aerosol Sprays - Matt
+    r: 76
+    g: 78
+    b: 38
+    hex: '#4C4E26'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Dark Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S163
+  details:
+    set: Humbrol Aerosol Sprays - Satin
+    r: 28
+    g: 29
+    b: 21
+    hex: '#1C1D15'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Satin
+- name: Medium Sea Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S165
+  details:
+    set: Humbrol Aerosol Sprays - Satin
+    r: 155
+    g: 162
+    b: 170
+    hex: '#9BA2AA'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Satin
+- name: Aluminium
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S56
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 191
+    g: 201
+    b: 210
+    hex: '#BFC9D2'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Black Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S21
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 0
+    g: 0
+    b: 0
+    hex: '#000000'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
+- name: Black Matt
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S33
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 33
+    g: 32
+    b: 33
+    hex: '#212021'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Black Satin
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S85
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 41
+    g: 37
+    b: 38
+    hex: '#292526'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Satin
+- name: Brass
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S54
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 223
+    g: 146
+    b: 40
+    hex: '#DF9228'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Brunswick Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S3
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 18
+    g: 59
+    b: 29
+    hex: '#123B1D'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Chrome Silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S191
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 228
+    g: 235
+    b: 241
+    hex: '#E4EBF1'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Dark Brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S29
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 236
+    g: 219
+    b: 203
+    hex: '#ECDBCB'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Dark Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S30
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 26
+    g: 105
+    b: 73
+    hex: '#1A6949'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Desert Tan
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S237
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 183
+    g: 168
+    b: 137
+    hex: '#B7A889'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Desert Yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S93
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 191
+    g: 147
+    b: 82
+    hex: '#BF9352'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Gloss Purple
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S68
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 72
+    g: 58
+    b: 94
+    hex: '#483A5E'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
+- name: Gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S16
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 224
+    g: 172
+    b: 37
+    hex: '#E0AC25'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Grass Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S80
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 103
+    g: 111
+    b: 72
+    hex: '#676F48'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S64
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 153
+    g: 156
+    b: 163
+    hex: '#999CA3'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Gun Metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S53
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 42
+    g: 43
+    b: 27
+    hex: '#2A2B1B'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Italian Racing Red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S220
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 195
+    g: 32
+    b: 37
+    hex: '#C32025'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Light Olive
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S86
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 102
+    g: 92
+    b: 64
+    hex: '#665C40'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Lime Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S38
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 192
+    g: 208
+    b: 161
+    hex: '#C0D0A1'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Midnight Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S15
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 29
+    g: 49
+    b: 99
+    hex: '#1D3163'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S18
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 228
+    g: 110
+    b: 40
+    hex: '#E46E28'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Primer
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S1
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 82
+    g: 93
+    b: 87
+    hex: '#525D57'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S19
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 222
+    g: 29
+    b: 46
+    hex: '#DE1D2E'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Sand
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S63
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 209
+    g: 150
+    b: 81
+    hex: '#D19651'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Sea Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S27
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 80
+    g: 86
+    b: 84
+    hex: '#505654'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
+- name: Silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S11
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 208
+    g: 209
+    b: 211
+    hex: '#D0D1D3'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Metallic
+- name: Tank Grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: S67
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 36
+    g: 56
+    b: 63
+    hex: '#24383F'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
 - name: White Gloss
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: S22
-  set: Humbrol Aerosol Sprays
-  r: 243
-  g: 239
-  b: 238
-  hex: '#F3EFEE'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 243
+    g: 239
+    b: 238
+    hex: '#F3EFEE'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Gloss
 - name: White Matt
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: S34
-  set: Humbrol Aerosol Sprays
-  r: 50
-  g: 50
-  b: 50
-  hex: '#323232'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 50
+    g: 50
+    b: 50
+    hex: '#323232'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte
 - name: Yellow
-  productCode: 69
-  set: Humbrol Acrylics - Gloss
-  r: 252
-  g: 219
-  b: 0
-  hex: '#FCDB00'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: S69
-  set: Humbrol Aerosol Sprays
-  r: 252
-  g: 218
-  b: 6
-  hex: '#FCDA06'
-  volumeMl: 14
-  packaging: tin
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Humbrol Aerosol Sprays
+    r: 252
+    g: 218
+    b: 6
+    hex: '#FCDA06'
+    volumeMl: 14
+    container: tin
+    type: Standard
+    finish: Matte

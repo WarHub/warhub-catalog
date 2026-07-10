@@ -2,3845 +2,5124 @@ brand: Tamiya
 brandSlug: tamiya
 source: Arcturus5404/miniature-paints
 license: MIT
-paintCount: 320
 paints:
-- name: Acrylic thinner
-  productCode: X-20A
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Bare-metal silver
-  productCode: AS-12
-  set: Aircraft Spray
-  r: 194
-  g: 200
-  b: 202
-  hex: '#C2C8CA'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Base white
-  productCode: TS-101
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Black
-  productCode: LP-1
-  set: Lacquer Paint
-  r: 4
-  g: 0
-  b: 0
-  hex: '#040000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Black
-  productCode: X-1
-  set: Acrylics Mini Gloss
-  r: 0
-  g: 0
-  b: 0
-  hex: '#000000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Black
-  productCode: TS-14
-  set: Tamiya Spray
-  r: 51
-  g: 51
-  b: 51
-  hex: '#333333'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
 - name: Black green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-27
-  set: Acrylics Mini Flat
-  r: 0
-  g: 38
-  b: 15
-  hex: '#00260F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Blue
-  productCode: TS-15
-  set: Tamiya Spray
-  r: 9
-  g: 52
-  b: 123
-  hex: '#09347B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Blue
-  productCode: X-4
-  set: Acrylics Mini Gloss
-  r: 9
-  g: 52
-  b: 123
-  hex: '#09347B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Blue violet
-  productCode: TS-57
-  set: Tamiya Spray
-  r: 81
-  g: 114
-  b: 179
-  hex: '#5172B3'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Bright mica red
-  productCode: TS-85
-  set: Tamiya Spray
-  r: 229
-  g: 0
-  b: 18
-  hex: '#E50012'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Bright orange
-  productCode: TS-31
-  set: Tamiya Spray
-  r: 254
-  g: 27
-  b: 14
-  hex: '#FE1B0E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Bright red
-  productCode: TS-49
-  set: Tamiya Spray
-  r: 255
-  g: 0
-  b: 0
-  hex: '#FF0000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Bright red
-  productCode: LP-50
-  set: Lacquer Paint
-  r: 229
-  g: 0
-  b: 20
-  hex: '#E50014'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Brilliant blue
-  productCode: TS-44
-  set: Tamiya Spray
-  r: 8
-  g: 96
-  b: 168
-  hex: '#0860A8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Brilliant orange
-  productCode: TS-56
-  set: Tamiya Spray
-  r: 255
-  g: 127
-  b: 0
-  hex: '#FF7F00'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: British green
-  productCode: TS-9
-  set: Tamiya Spray
-  r: 0
-  g: 43
-  b: 17
-  hex: '#002B11'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Bronze
-  productCode: X-33
-  set: Acrylics Mini Gloss
-  r: 103
-  g: 38
-  b: 34
-  hex: '#672622'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Brown
-  productCode: X-9
-  set: Acrylics Mini Gloss
-  r: 77
-  g: 34
-  b: 7
-  hex: '#4D2207'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 0
+    g: 38
+    b: 15
+    hex: '#00260F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Brown (JGSDF)
-  productCode: LP-25
-  set: Lacquer Paint
-  r: 113
-  g: 90
-  b: 61
-  hex: '#715A3D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Brown (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-72
-  set: Acrylics Mini Flat
-  r: 115
-  g: 76
-  b: 12
-  hex: '#734C0C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Brown (JGSDF)
-  productCode: TS-90
-  set: Tamiya Spray
-  r: 130
-  g: 102
-  b: 54
-  hex: '#826636'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 115
+    g: 76
+    b: 12
+    hex: '#734C0C'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Buff
-  productCode: LP-75
-  set: Lacquer Paint
-  r: 204
-  g: 167
-  b: 123
-  hex: '#CCA77B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Buff
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-57
-  set: Acrylics Mini Flat
-  r: 184
-  g: 179
-  b: 106
-  hex: '#B8B36A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Camel yellow
-  productCode: TS-34
-  set: Tamiya Spray
-  r: 255
-  g: 179
-  b: 0
-  hex: '#FFB300'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Candy lime green
-  productCode: TS-52
-  set: Tamiya Spray
-  r: 77
-  g: 172
-  b: 38
-  hex: '#4DAC26'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Champagne gold
-  productCode: LP-71
-  set: Lacquer Paint
-  r: 210
-  g: 199
-  b: 154
-  hex: '#D2C79A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Champagne gold
-  productCode: TS-75
-  set: Tamiya Spray
-  r: 195
-  g: 184
-  b: 126
-  hex: '#C3B87E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Chrome silver
-  productCode: X-11
-  set: Acrylics Mini Gloss
-  r: 194
-  g: 200
-  b: 202
-  hex: '#C2C8CA'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Chrome yellow
-  productCode: TS-47
-  set: Tamiya Spray
-  r: 255
-  g: 204
-  b: 0
-  hex: '#FFCC00'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Clear
-  productCode: TS-13
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Clear
-  productCode: LP-9
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Clear
-  productCode: X-22
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Clear blue
-  productCode: X-23
-  set: Acrylics Mini Gloss
-  r: 52
-  g: 179
-  b: 209
-  hex: '#34B3D1'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Clear blue
-  productCode: LP-68
-  set: Lacquer Paint
-  r: 0
-  g: 166
-  b: 234
-  hex: '#00A6EA'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Clear blue
-  productCode: TS-72
-  set: Tamiya Spray
-  r: 52
-  g: 176
-  b: 185
-  hex: '#34B0B9'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Clear green
-  productCode: X-25
-  set: Acrylics Mini Gloss
-  r: 26
-  g: 150
-  b: 65
-  hex: '#1A9641'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Clear orange
-  productCode: X-26
-  set: Acrylics Mini Gloss
-  r: 254
-  g: 140
-  b: 20
-  hex: '#FE8C14'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Clear orange
-  productCode: TS-73
-  set: Tamiya Spray
-  r: 255
-  g: 115
-  b: 0
-  hex: '#FF7300'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Clear orange
-  productCode: LP-53
-  set: Lacquer Paint
-  r: 240
-  g: 137
-  b: 0
-  hex: '#F08900'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Clear red
-  productCode: LP-52
-  set: Lacquer Paint
-  r: 229
-  g: 0
-  b: 127
-  hex: '#E5007F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Clear red
-  productCode: X-27
-  set: Acrylics Mini Gloss
-  r: 250
-  g: 0
-  b: 38
-  hex: '#FA0026'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Clear red
-  productCode: TS-74
-  set: Tamiya Spray
-  r: 240
-  g: 2
-  b: 127
-  hex: '#F0027F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Clear yellow
-  productCode: LP-69
-  set: Lacquer Paint
-  r: 255
-  g: 229
-  b: 0
-  hex: '#FFE500'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Clear yellow
-  productCode: X-24
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 230
-  b: 0
-  hex: '#FFE600'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 184
+    g: 179
+    b: 106
+    hex: '#B8B36A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Cockpit green (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-71
-  set: Acrylics Mini Flat
-  r: 116
-  g: 146
-  b: 93
-  hex: '#74925D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 116
+    g: 146
+    b: 93
+    hex: '#74925D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Copper
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-6
-  set: Acrylics Mini Flat
-  r: 204
-  g: 92
-  b: 3
-  hex: '#CC5C03'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Coral blue
-  productCode: TS-41
-  set: Tamiya Spray
-  r: 78
-  g: 184
-  b: 163
-  hex: '#4EB8A3'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark blue
-  productCode: TS-55
-  set: Tamiya Spray
-  r: 2
-  g: 20
-  b: 46
-  hex: '#02142E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 204
+    g: 92
+    b: 3
+    hex: '#CC5C03'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
 - name: Dark copper
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-28
-  set: Acrylics Mini Flat
-  r: 153
-  g: 95
-  b: 59
-  hex: '#995F3B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Dark earth
-  productCode: AS-22
-  set: Aircraft Spray
-  r: 103
-  g: 75
-  b: 43
-  hex: '#674B2B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark ghost gray
-  productCode: LP-36
-  set: Lacquer Paint
-  r: 128
-  g: 161
-  b: 176
-  hex: '#80A1B0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark ghost grey
-  productCode: AS-25
-  set: Aircraft Spray
-  r: 108
-  g: 137
-  b: 142
-  hex: '#6C898E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green
-  productCode: TS-2
-  set: Tamiya Spray
-  r: 26
-  g: 45
-  b: 15
-  hex: '#1A2D0F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green
-  productCode: XF-61
-  set: Acrylics Mini Flat
-  r: 26
-  g: 45
-  b: 15
-  hex: '#1A2D0F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark green
-  productCode: AS-1
-  set: Aircraft Spray
-  r: 17
-  g: 57
-  b: 21
-  hex: '#113915'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green
-  productCode: AS-9
-  set: Aircraft Spray
-  r: 46
-  g: 72
-  b: 20
-  hex: '#2E4814'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green (IJA)
-  productCode: AS-17
-  set: Aircraft Spray
-  r: 24
-  g: 67
-  b: 22
-  hex: '#184316'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 153
+    g: 95
+    b: 59
+    hex: '#995F3B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
 - name: Dark green (JGSDF)
-  productCode: TS-91
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-73
-  set: Acrylics Mini Flat
-  r: 26
-  g: 67
-  b: 22
-  hex: '#1A4316'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark green (JGSDF).jpeg
-  productCode: LP-26
-  set: Lacquer Paint
-  r: 61
-  g: 89
-  b: 63
-  hex: '#3D593F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark green (Luftwaffe)
-  productCode: AS-24
-  set: Aircraft Spray
-  r: 24
-  g: 40
-  b: 13
-  hex: '#18280D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green 2
-  productCode: LP-56
-  set: Lacquer Paint
-  r: 91
-  g: 131
-  b: 97
-  hex: '#5B8361'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark green 2
-  productCode: XF-70
-  set: Acrylics Mini Flat
-  r: 0
-  g: 37
-  b: 15
-  hex: '#00250F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark green 2
-  productCode: XF-89
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark green 2
-  productCode: AS-30
-  set: Aircraft Spray
-  r: 53
-  g: 85
-  b: 51
-  hex: '#355533'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green 2 (IJN)
-  productCode: AS-21
-  set: Aircraft Spray
-  r: 0
-  g: 44
-  b: 18
-  hex: '#002C12'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dark green 2 (IJN)
-  productCode: LP-31
-  set: Lacquer Paint
-  r: 0
-  g: 66
-  b: 52
-  hex: '#004234'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 26
+    g: 67
+    b: 22
+    hex: '#1A4316'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Dark green 2 (RAF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-81
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark green 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-70
+  details:
+    set: Acrylics Mini Flat
+    r: 0
+    g: 37
+    b: 15
+    hex: '#00250F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark green 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-89
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-61
+  details:
+    set: Acrylics Mini Flat
+    r: 26
+    g: 45
+    b: 15
+    hex: '#1A2D0F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Dark grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-24
-  set: Acrylics Mini Flat
-  r: 62
-  g: 68
-  b: 72
-  hex: '#3E4448'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 62
+    g: 68
+    b: 72
+    hex: '#3E4448'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Dark iron
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-84
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Dark iron
-  productCode: LP-54
-  set: Lacquer Paint
-  r: 83
-  g: 67
-  b: 52
-  hex: '#534334'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Dark mica blue
-  productCode: TS-64
-  set: Tamiya Spray
-  r: 10
-  g: 20
-  b: 35
-  hex: '#0A1423'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
 - name: Dark sea grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-54
-  set: Acrylics Mini Flat
-  r: 92
-  g: 93
-  b: 97
-  hex: '#5C5D61'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark yellow
-  productCode: XF-60
-  set: Acrylics Mini Flat
-  r: 199
-  g: 177
-  b: 64
-  hex: '#C7B140'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark yellow
-  productCode: TS-3
-  set: Tamiya Spray
-  r: 203
-  g: 175
-  b: 91
-  hex: '#CBAF5B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 92
+    g: 93
+    b: 97
+    hex: '#5C5D61'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Dark yellow 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-88
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dark yellow 2
-  productCode: LP-55
-  set: Lacquer Paint
-  r: 201
-  g: 180
-  b: 75
-  hex: '#C9B44B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-60
+  details:
+    set: Acrylics Mini Flat
+    r: 199
+    g: 177
+    b: 64
+    hex: '#C7B140'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Deck tan
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-55
-  set: Acrylics Mini Flat
-  r: 183
-  g: 177
-  b: 135
-  hex: '#B7B187'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 183
+    g: 177
+    b: 135
+    hex: '#B7B187'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Deep green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-26
-  set: Acrylics Mini Flat
-  r: 46
-  g: 31
-  b: 9
-  hex: '#2E1F09'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Deep metallic blue
-  productCode: TS-53
-  set: Tamiya Spray
-  r: 17
-  g: 33
-  b: 53
-  hex: '#112135'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 46
+    g: 31
+    b: 9
+    hex: '#2E1F09'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Desert yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-59
-  set: Acrylics Mini Flat
-  r: 216
-  g: 156
-  b: 66
-  hex: '#D89C42'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Dull red
-  productCode: TS-33
-  set: Tamiya Spray
-  r: 102
-  g: 0
-  b: 0
-  hex: '#660000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Dull red.jpeg
-  productCode: LP-18
-  set: Lacquer Paint
-  r: 123
-  g: 69
-  b: 56
-  hex: '#7B4538'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 216
+    g: 156
+    b: 66
+    hex: '#D89C42'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Field blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-50
-  set: Acrylics Mini Flat
-  r: 54
-  g: 65
-  b: 70
-  hex: '#364146'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 54
+    g: 65
+    b: 70
+    hex: '#364146'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Field grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-65
-  set: Acrylics Mini Flat
-  r: 103
-  g: 134
-  b: 107
-  hex: '#67866B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Field grey
-  productCode: TS-78
-  set: Tamiya Spray
-  r: 79
-  g: 108
-  b: 86
-  hex: '#4F6C56'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 103
+    g: 134
+    b: 107
+    hex: '#67866B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat aluminum
-  productCode: LP-38
-  set: Lacquer Paint
-  r: 220
-  g: 222
-  b: 221
-  hex: '#DCDEDD'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat aluminum
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-16
-  set: Acrylics Mini Flat
-  r: 204
-  g: 204
-  b: 204
-  hex: '#CCCCCC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat base
-  productCode: LP-22
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 254
-  hex: '#FFFFFE'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat base
-  productCode: X-21
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 204
+    g: 204
+    b: 204
+    hex: '#CCCCCC'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat black
-  productCode: LP-3
-  set: Lacquer Paint
-  r: 4
-  g: 0
-  b: 0
-  hex: '#040000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-1
-  set: Acrylics Mini Flat
-  r: 51
-  g: 51
-  b: 51
-  hex: '#333333'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 51
+    g: 51
+    b: 51
+    hex: '#333333'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat blue
-  productCode: LP-78
-  set: Lacquer Paint
-  r: 0
-  g: 106
-  b: 148
-  hex: '#006A94'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-8
-  set: Acrylics Mini Flat
-  r: 40
-  g: 76
-  b: 123
-  hex: '#284C7B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 40
+    g: 76
+    b: 123
+    hex: '#284C7B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-10
-  set: Acrylics Mini Flat
-  r: 62
-  g: 42
-  b: 9
-  hex: '#3E2A09'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 62
+    g: 42
+    b: 9
+    hex: '#3E2A09'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat clear
-  productCode: LP-23
-  set: Lacquer Paint
-  r: 157
-  g: 179
-  b: 191
-  hex: '#9DB3BF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-86
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat clear
-  productCode: TS-80
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat earth
-  productCode: LP-74
-  set: Lacquer Paint
-  r: 153
-  g: 71
-  b: 47
-  hex: '#99472F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat earth
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-52
-  set: Acrylics Mini Flat
-  r: 115
-  g: 72
-  b: 52
-  hex: '#734834'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 115
+    g: 72
+    b: 52
+    hex: '#734834'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat flesh
-  productCode: TS-77
-  set: Tamiya Spray
-  r: 253
-  g: 192
-  b: 134
-  hex: '#FDC086'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Flat flesh
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-15
-  set: Acrylics Mini Flat
-  r: 253
-  g: 205
-  b: 161
-  hex: '#FDCDA1'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat flesh
-  productCode: LP-66
-  set: Lacquer Paint
-  r: 250
-  g: 204
-  b: 142
-  hex: '#FACC8E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 253
+    g: 205
+    b: 161
+    hex: '#FDCDA1'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-5
-  set: Acrylics Mini Flat
-  r: 36
-  g: 67
-  b: 19
-  hex: '#244313'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 36
+    g: 67
+    b: 19
+    hex: '#244313'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat red
-  productCode: LP-79
-  set: Lacquer Paint
-  r: 230
-  g: 0
-  b: 28
-  hex: '#E6001C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-7
-  set: Acrylics Mini Flat
-  r: 255
-  g: 0
-  b: 0
-  hex: '#FF0000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 0
+    b: 0
+    hex: '#FF0000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat white
-  productCode: LP-4
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-2
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Flat yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-3
-  set: Acrylics Mini Flat
-  r: 255
-  g: 204
-  b: 0
-  hex: '#FFCC00'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Flat yellow
-  productCode: LP-80
-  set: Lacquer Paint
-  r: 254
-  g: 225
-  b: 1
-  hex: '#FEE101'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Fluorescent orange
-  productCode: TS-96
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Fluorescent red
-  productCode: TS-36
-  set: Tamiya Spray
-  r: 252
-  g: 0
-  b: 25
-  hex: '#FC0019'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: French blue
-  productCode: TS-10
-  set: Tamiya Spray
-  r: 54
-  g: 144
-  b: 192
-  hex: '#3690C0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: German gray
-  productCode: LP-27
-  set: Lacquer Paint
-  r: 65
-  g: 88
-  b: 98
-  hex: '#415862'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 204
+    b: 0
+    hex: '#FFCC00'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: German grey
-  productCode: TS-4
-  set: Tamiya Spray
-  r: 62
-  g: 71
-  b: 74
-  hex: '#3E474A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: German grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-63
-  set: Acrylics Mini Flat
-  r: 62
-  g: 71
-  b: 74
-  hex: '#3E474A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gloss aluminum
-  productCode: TS-17
-  set: Tamiya Spray
-  r: 194
-  g: 200
-  b: 202
-  hex: '#C2C8CA'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Gloss
-- name: Gloss aluminum
-  productCode: LP-70
-  set: Lacquer Paint
-  r: 220
-  g: 222
-  b: 221
-  hex: '#DCDEDD'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Gold
-  productCode: TS-21
-  set: Tamiya Spray
-  r: 204
-  g: 162
-  b: 8
-  hex: '#CCA208'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Gold leaf
-  productCode: X-12
-  set: Acrylics Mini Gloss
-  r: 204
-  g: 162
-  b: 8
-  hex: '#CCA208'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Gray green
-  productCode: AS-3
-  set: Aircraft Spray
-  r: 37
-  g: 58
-  b: 46
-  hex: '#253A2E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 62
+    g: 71
+    b: 74
+    hex: '#3E474A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Gray green (IJN)
-  productCode: LP-33
-  set: Lacquer Paint
-  r: 185
-  g: 196
-  b: 166
-  hex: '#B9C4A6'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gray green (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-76
-  set: Acrylics Mini Flat
-  r: 184
-  g: 195
-  b: 167
-  hex: '#B8C3A7'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gray green (IJN)
-  productCode: AS-29
-  set: Aircraft Spray
-  r: 184
-  g: 195
-  b: 167
-  hex: '#B8C3A7'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Gray violet
-  productCode: AS-4
-  set: Aircraft Spray
-  r: 64
-  g: 83
-  b: 103
-  hex: '#405367'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Green
-  productCode: X-5
-  set: Acrylics Mini Gloss
-  r: 0
-  g: 68
-  b: 27
-  hex: '#00441B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Green
-  productCode: AS-13
-  set: Aircraft Spray
-  r: 22
-  g: 49
-  b: 38
-  hex: '#163126'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Gun metal
-  productCode: LP-19
-  set: Lacquer Paint
-  r: 77
-  g: 78
-  b: 77
-  hex: '#4D4E4D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Gun metal
-  productCode: X-10
-  set: Acrylics Mini Gloss
-  r: 80
-  g: 85
-  b: 87
-  hex: '#505557'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Gun metal
-  productCode: TS-38
-  set: Tamiya Spray
-  r: 80
-  g: 85
-  b: 87
-  hex: '#505557'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Gunship gray 2
-  productCode: AS-27
-  set: Aircraft Spray
-  r: 61
-  g: 78
-  b: 89
-  hex: '#3D4E59'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Gunship grey
-  productCode: TS-48
-  set: Tamiya Spray
-  r: 70
-  g: 74
-  b: 75
-  hex: '#464A4B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Haze grey
-  productCode: TS-32
-  set: Tamiya Spray
-  r: 123
-  g: 142
-  b: 146
-  hex: '#7B8E92'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 184
+    g: 195
+    b: 167
+    hex: '#B8C3A7'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Hull red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-9
-  set: Acrylics Mini Flat
-  r: 62
-  g: 14
-  b: 2
-  hex: '#3E0E02'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 62
+    g: 14
+    b: 2
+    hex: '#3E0E02'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: IJN gray (Kure Arsenal)
-  productCode: TS-66
-  set: Tamiya Spray
-  r: 130
-  g: 141
-  b: 147
-  hex: '#828D93'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: IJN gray (Kure Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-75
-  set: Acrylics Mini Flat
-  r: 130
-  g: 141
-  b: 147
-  hex: '#828D93'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 130
+    g: 141
+    b: 147
+    hex: '#828D93'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: IJN gray (Maizuru Arsenal)
-  productCode: TS-99
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: IJN gray (Maizuru Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-87
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: IJN gray (Sasebo Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-77
-  set: Acrylics Mini Flat
-  r: 104
-  g: 109
-  b: 113
-  hex: '#686D71'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 104
+    g: 109
+    b: 113
+    hex: '#686D71'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: IJN gray (Yokosuka Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-91
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: IJN gray<br>(Kure Arsenal)
-  productCode: LP-12
-  set: Lacquer Paint
-  r: 113
-  g: 123
-  b: 133
-  hex: '#717B85'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: IJN gray<br>(Maizuru Arsenal)
-  productCode: LP-14
-  set: Lacquer Paint
-  r: 125
-  g: 128
-  b: 135
-  hex: '#7D8087'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: IJN gray<br>(Sasebo Arsenal)
-  productCode: LP-13
-  set: Lacquer Paint
-  r: 83
-  g: 87
-  b: 96
-  hex: '#535760'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: IJN gray<br>(Yokosuka Arsenal)
-  productCode: LP-15
-  set: Lacquer Paint
-  r: 100
-  g: 107
-  b: 117
-  hex: '#646B75'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: IJN graySasebo Arsenal
-  productCode: TS-67
-  set: Tamiya Spray
-  r: 104
-  g: 109
-  b: 113
-  hex: '#686D71'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Insignia white
-  productCode: LP-35
-  set: Lacquer Paint
-  r: 221
-  g: 220
-  b: 215
-  hex: '#DDDCD7'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Insignia white
-  productCode: AS-20
-  set: Aircraft Spray
-  r: 242
-  g: 242
-  b: 229
-  hex: '#F2F2E5'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Intermediate blue
-  productCode: AS-19
-  set: Aircraft Spray
-  r: 91
-  g: 142
-  b: 152
-  hex: '#5B8E98'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Italian red
-  productCode: LP-21
-  set: Lacquer Paint
-  r: 198
-  g: 56
-  b: 52
-  hex: '#C63834'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Italian red
-  productCode: TS-8
-  set: Tamiya Spray
-  r: 255
-  g: 0
-  b: 0
-  hex: '#FF0000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: J.A. green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-13
-  set: Acrylics Mini Flat
-  r: 51
-  g: 74
-  b: 31
-  hex: '#334A1F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 51
+    g: 74
+    b: 31
+    hex: '#334A1F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: J.A. grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-14
-  set: Acrylics Mini Flat
-  r: 179
-  g: 202
-  b: 142
-  hex: '#B3CA8E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 179
+    g: 202
+    b: 142
+    hex: '#B3CA8E'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: J.N. green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-11
-  set: Acrylics Mini Flat
-  r: 38
-  g: 51
-  b: 11
-  hex: '#26330B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 38
+    g: 51
+    b: 11
+    hex: '#26330B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: J.N. grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-12
-  set: Acrylics Mini Flat
-  r: 179
-  g: 203
-  b: 174
-  hex: '#B3CBAE'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Khaki
-  productCode: LP-73
-  set: Lacquer Paint
-  r: 154
-  g: 143
-  b: 51
-  hex: '#9A8F33'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Khaki
-  productCode: XF-49
-  set: Acrylics Mini Flat
-  r: 126
-  g: 120
-  b: 63
-  hex: '#7E783F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 179
+    g: 203
+    b: 174
+    hex: '#B3CBAE'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Khaki drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-51
-  set: Acrylics Mini Flat
-  r: 41
-  g: 51
-  b: 14
-  hex: '#29330E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Lacquer thinner
-  productCode: LP-10
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Lavender
-  productCode: TS-37
-  set: Tamiya Spray
-  r: 106
-  g: 41
-  b: 144
-  hex: '#6A2990'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Lemon yellow
-  productCode: X-8
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 230
-  b: 0
-  hex: '#FFE600'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 41
+    g: 51
+    b: 14
+    hex: '#29330E'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Khaki
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-49
+  details:
+    set: Acrylics Mini Flat
+    r: 126
+    g: 120
+    b: 63
+    hex: '#7E783F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Light blue
-  productCode: TS-23
-  set: Tamiya Spray
-  r: 40
-  g: 174
-  b: 207
-  hex: '#28AECF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light blue
-  productCode: AS-5
-  set: Aircraft Spray
-  r: 153
-  g: 194
-  b: 181
-  hex: '#99C2B5'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-23
-  set: Acrylics Mini Flat
-  r: 143
-  g: 181
-  b: 173
-  hex: '#8FB5AD'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light brown (DAK 1941)
-  productCode: LP-77
-  set: Lacquer Paint
-  r: 229
-  g: 179
-  b: 110
-  hex: '#E5B36E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light ghost gray
-  productCode: LP-37
-  set: Lacquer Paint
-  r: 152
-  g: 180
-  b: 192
-  hex: '#98B4C0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light ghost grey
-  productCode: AS-26
-  set: Aircraft Spray
-  r: 133
-  g: 160
-  b: 163
-  hex: '#85A0A3'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light gray
-  productCode: AS-2
-  set: Aircraft Spray
-  r: 163
-  g: 170
-  b: 150
-  hex: '#A3AA96'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light gray
-  productCode: LP-34
-  set: Lacquer Paint
-  r: 208
-  g: 204
-  b: 192
-  hex: '#D0CCC0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light gray
-  productCode: AS-16
-  set: Aircraft Spray
-  r: 204
-  g: 212
-  b: 188
-  hex: '#CCD4BC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light gray (IJA)
-  productCode: AS-18
-  set: Aircraft Spray
-  r: 161
-  g: 183
-  b: 167
-  hex: '#A1B7A7'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light gray (IJN)
-  productCode: LP-32
-  set: Lacquer Paint
-  r: 201
-  g: 209
-  b: 194
-  hex: '#C9D1C2'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light green
-  productCode: X-15
-  set: Acrylics Mini Gloss
-  r: 102
-  g: 184
-  b: 33
-  hex: '#66B821'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Light green
-  productCode: TS-22
-  set: Tamiya Spray
-  r: 127
-  g: 195
-  b: 28
-  hex: '#7FC31C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light green (Luftwaffe)
-  productCode: AS-23
-  set: Aircraft Spray
-  r: 51
-  g: 112
-  b: 31
-  hex: '#33701F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 143
+    g: 181
+    b: 173
+    hex: '#8FB5AD'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Light grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-66
-  set: Acrylics Mini Flat
-  r: 102
-  g: 118
-  b: 121
-  hex: '#667679'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light gun metal
-  productCode: LP-20
-  set: Lacquer Paint
-  r: 119
-  g: 119
-  b: 118
-  hex: '#777776'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light gun metal
-  productCode: TS-42
-  set: Tamiya Spray
-  r: 115
-  g: 122
-  b: 124
-  hex: '#737A7C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light metallic blue
-  productCode: TS-54
-  set: Tamiya Spray
-  r: 16
-  g: 102
-  b: 122
-  hex: '#10667A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Light sand
-  productCode: LP-30
-  set: Lacquer Paint
-  r: 209
-  g: 171
-  b: 124
-  hex: '#D1AB7C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Light sand
-  productCode: TS-46
-  set: Tamiya Spray
-  r: 203
-  g: 164
-  b: 88
-  hex: '#CBA458'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 102
+    g: 118
+    b: 121
+    hex: '#667679'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Light sea grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-25
-  set: Acrylics Mini Flat
-  r: 122
-  g: 139
-  b: 169
-  hex: '#7A8BA9'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 122
+    g: 139
+    b: 169
+    hex: '#7A8BA9'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Linoleum deck brown
-  productCode: TS-69
-  set: Tamiya Spray
-  r: 92
-  g: 33
-  b: 5
-  hex: '#5C2105'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Linoleum deck brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-79
-  set: Acrylics Mini Flat
-  r: 120
-  g: 70
-  b: 41
-  hex: '#784629'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Linoleum deck brown.jpeg
-  productCode: LP-17
-  set: Lacquer Paint
-  r: 86
-  g: 74
-  b: 58
-  hex: '#564A3A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Maroon
-  productCode: TS-11
-  set: Tamiya Spray
-  r: 77
-  g: 18
-  b: 2
-  hex: '#4D1202'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Matt black
-  productCode: TS-6
-  set: Tamiya Spray
-  r: 51
-  g: 51
-  b: 51
-  hex: '#333333'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Matt white
-  productCode: TS-27
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 120
+    g: 70
+    b: 41
+    hex: '#784629'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Medium blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-18
-  set: Acrylics Mini Flat
-  r: 72
-  g: 91
-  b: 95
-  hex: '#485B5F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Medium gray
-  productCode: AS-28
-  set: Aircraft Spray
-  r: 114
-  g: 125
-  b: 125
-  hex: '#727D7D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 72
+    g: 91
+    b: 95
+    hex: '#485B5F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Medium grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-20
-  set: Acrylics Mini Flat
-  r: 163
-  g: 170
-  b: 150
-  hex: '#A3AA96'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Medium sea gray
-  productCode: AS-11
-  set: Aircraft Spray
-  r: 143
-  g: 157
-  b: 135
-  hex: '#8F9D87'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Medium sea gray 2
-  productCode: AS-32
-  set: Aircraft Spray
-  r: 170
-  g: 190
-  b: 185
-  hex: '#AABEB9'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 163
+    g: 170
+    b: 150
+    hex: '#A3AA96'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Medium sea gray 2 (RAF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-83
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Metallic black
-  productCode: TS-40
-  set: Tamiya Spray
-  r: 57
-  g: 61
-  b: 62
-  hex: '#393D3E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Metallic black
-  productCode: LP-40
-  set: Lacquer Paint
-  r: 63
-  g: 59
-  b: 58
-  hex: '#3F3B3A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Metallic blue
-  productCode: X-13
-  set: Acrylics Mini Gloss
-  r: 30
-  g: 116
-  b: 151
-  hex: '#1E7497'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Metallic blue
-  productCode: TS-19
-  set: Tamiya Spray
-  r: 10
-  g: 80
-  b: 161
-  hex: '#0A50A1'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Metallic brown
-  productCode: X-34
-  set: Acrylics Mini Gloss
-  r: 153
-  g: 63
-  b: 6
-  hex: '#993F06'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Metallic gold
-  productCode: TS-84
-  set: Tamiya Spray
-  r: 221
-  g: 210
-  b: 157
-  hex: '#DDD29D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Metallic gray
-  productCode: TS-94
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Metallic gray
-  productCode: LP-61
-  set: Lacquer Paint
-  r: 114
-  g: 112
-  b: 113
-  hex: '#727071'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Metallic green
-  productCode: TS-20
-  set: Tamiya Spray
-  r: 39
-  g: 158
-  b: 79
-  hex: '#279E4F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Metallic grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-56
-  set: Acrylics Mini Flat
-  r: 92
-  g: 98
-  b: 100
-  hex: '#5C6264'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Metallic orange
-  productCode: TS-92
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Metallic orange
-  productCode: LP-44
-  set: Lacquer Paint
-  r: 239
-  g: 120
-  b: 0
-  hex: '#EF7800'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Metallic red
-  productCode: TS-18
-  set: Tamiya Spray
-  r: 227
-  g: 0
-  b: 23
-  hex: '#E30017'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Metallic silver
-  productCode: TS-83
-  set: Tamiya Spray
-  r: 217
-  g: 218
-  b: 222
-  hex: '#D9DADE'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Mica blue
-  productCode: LP-41
-  set: Lacquer Paint
-  r: 1
-  g: 57
-  b: 142
-  hex: '#01398E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Mica blue
-  productCode: TS-50
-  set: Tamiya Spray
-  r: 11
-  g: 58
-  b: 139
-  hex: '#0B3A8B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Mica red
-  productCode: LP-42
-  set: Lacquer Paint
-  r: 200
-  g: 23
-  b: 29
-  hex: '#C8171D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Mica red
-  productCode: TS-39
-  set: Tamiya Spray
-  r: 230
-  g: 0
-  b: 0
-  hex: '#E60000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Mica silver
-  productCode: LP-72
-  set: Lacquer Paint
-  r: 212
-  g: 217
-  b: 220
-  hex: '#D4D9DC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Mica silver
-  productCode: TS-76
-  set: Tamiya Spray
-  r: 204
-  g: 204
-  b: 204
-  hex: '#CCCCCC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Mixing blue
-  productCode: LP-81
-  set: Lacquer Paint
-  r: 32
-  g: 42
-  b: 103
-  hex: '#202A67'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Mixing red
-  productCode: LP-82
-  set: Lacquer Paint
-  r: 200
-  g: 17
-  b: 61
-  hex: '#C8113D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Mixing yellow
-  productCode: LP-83
-  set: Lacquer Paint
-  r: 254
-  g: 215
-  b: 0
-  hex: '#FED700'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 92
+    g: 98
+    b: 100
+    hex: '#5C6264'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: NATO black
-  productCode: LP-60
-  set: Lacquer Paint
-  r: 0
-  g: 0
-  b: 0
-  hex: '#000000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: NATO black
-  productCode: TS-63
-  set: Tamiya Spray
-  r: 34
-  g: 36
-  b: 36
-  hex: '#222424'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: NATO black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-69
-  set: Acrylics Mini Flat
-  r: 34
-  g: 36
-  b: 36
-  hex: '#222424'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 34
+    g: 36
+    b: 36
+    hex: '#222424'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: NATO brown
-  productCode: LP-59
-  set: Lacquer Paint
-  r: 106
-  g: 74
-  b: 49
-  hex: '#6A4A31'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: NATO brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-68
-  set: Acrylics Mini Flat
-  r: 115
-  g: 48
-  b: 7
-  hex: '#733007'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: NATO brown
-  productCode: TS-62
-  set: Tamiya Spray
-  r: 115
-  g: 48
-  b: 7
-  hex: '#733007'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 115
+    g: 48
+    b: 7
+    hex: '#733007'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: NATO green
-  productCode: LP-58
-  set: Lacquer Paint
-  r: 41
-  g: 84
-  b: 56
-  hex: '#295438'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: NATO green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-67
-  set: Acrylics Mini Flat
-  r: 51
-  g: 96
-  b: 26
-  hex: '#33601A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: NATO green
-  productCode: TS-61
-  set: Tamiya Spray
-  r: 51
-  g: 96
-  b: 26
-  hex: '#33601A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Navy blue
-  productCode: AS-8
-  set: Aircraft Spray
-  r: 40
-  g: 66
-  b: 94
-  hex: '#28425E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Neutral gray
-  productCode: AS-7
-  set: Aircraft Spray
-  r: 126
-  g: 135
-  b: 137
-  hex: '#7E8789'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 51
+    g: 96
+    b: 26
+    hex: '#33601A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Neutral grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-53
-  set: Acrylics Mini Flat
-  r: 108
-  g: 120
-  b: 123
-  hex: '#6C787B'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Ocean gray
-  productCode: AS-10
-  set: Aircraft Spray
-  r: 82
-  g: 90
-  b: 95
-  hex: '#525A5F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Ocean gray 2
-  productCode: AS-31
-  set: Aircraft Spray
-  r: 108
-  g: 140
-  b: 153
-  hex: '#6C8C99'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 108
+    g: 120
+    b: 123
+    hex: '#6C787B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Ocean gray 2 (RAF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-82
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive drab
-  productCode: XF-62
-  set: Acrylics Mini Flat
-  r: 64
-  g: 75
-  b: 19
-  hex: '#404B13'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive drab
-  productCode: LP-28
-  set: Lacquer Paint
-  r: 77
-  g: 86
-  b: 65
-  hex: '#4D5641'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive drab
-  productCode: TS-5
-  set: Tamiya Spray
-  r: 64
-  g: 75
-  b: 19
-  hex: '#404B13'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Olive drab
-  productCode: AS-6
-  set: Aircraft Spray
-  r: 64
-  g: 75
-  b: 19
-  hex: '#404B13'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Olive drab (JGSDF)
-  productCode: LP-64
-  set: Lacquer Paint
-  r: 41
-  g: 84
-  b: 56
-  hex: '#295438'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive drab (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-74
-  set: Acrylics Mini Flat
-  r: 51
-  g: 64
-  b: 18
-  hex: '#334012'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive drab (JGSDF)
-  productCode: TS-70
-  set: Tamiya Spray
-  r: 46
-  g: 65
-  b: 18
-  hex: '#2E4112'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Olive drab 2
-  productCode: TS-28
-  set: Tamiya Spray
-  r: 77
-  g: 86
-  b: 19
-  hex: '#4D5613'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Olive drab 2
-  productCode: LP-29
-  set: Lacquer Paint
-  r: 71
-  g: 87
-  b: 62
-  hex: '#47573E'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 51
+    g: 64
+    b: 18
+    hex: '#334012'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Olive drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-62
+  details:
+    set: Acrylics Mini Flat
+    r: 64
+    g: 75
+    b: 19
+    hex: '#404B13'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Olive green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-58
-  set: Acrylics Mini Flat
-  r: 26
-  g: 59
-  b: 20
-  hex: '#1A3B14'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Olive green
-  productCode: AS-14
-  set: Aircraft Spray
-  r: 51
-  g: 80
-  b: 22
-  hex: '#335016'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Orange
-  productCode: X-6
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 127
-  b: 0
-  hex: '#FF7F00'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Orange
-  productCode: TS-12
-  set: Tamiya Spray
-  r: 255
-  g: 89
-  b: 0
-  hex: '#FF5900'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Park green
-  productCode: X-28
-  set: Acrylics Mini Gloss
-  r: 51
-  g: 164
-  b: 77
-  hex: '#33A44D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Park green
-  productCode: TS-35
-  set: Tamiya Spray
-  r: 51
-  g: 162
-  b: 61
-  hex: '#33A23D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl blue
-  productCode: LP-47
-  set: Lacquer Paint
-  r: 1
-  g: 59
-  b: 143
-  hex: '#013B8F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pearl blue
-  productCode: TS-89
-  set: Tamiya Spray
-  r: 12
-  g: 62
-  b: 128
-  hex: '#0C3E80'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl clear
-  productCode: LP-49
-  set: Lacquer Paint
-  r: 247
-  g: 249
-  b: 248
-  hex: '#F7F9F8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pearl clear
-  productCode: TS-65
-  set: Tamiya Spray
-  r: 230
-  g: 230
-  b: 207
-  hex: '#E6E6CF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl green
-  productCode: TS-60
-  set: Tamiya Spray
-  r: 153
-  g: 202
-  b: 144
-  hex: '#99CA90'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl light blue
-  productCode: TS-58
-  set: Tamiya Spray
-  r: 115
-  g: 150
-  b: 186
-  hex: '#7396BA'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl light red
-  productCode: TS-59
-  set: Tamiya Spray
-  r: 204
-  g: 134
-  b: 163
-  hex: '#CC86A3'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl white
-  productCode: LP-43
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pearl white
-  productCode: TS-45
-  set: Tamiya Spray
-  r: 242
-  g: 242
-  b: 229
-  hex: '#F2F2E5'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pearl yellow
-  productCode: TS-97
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pink
-  productCode: TS-25
-  set: Tamiya Spray
-  r: 250
-  g: 154
-  b: 184
-  hex: '#FA9AB8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pink
-  productCode: X-17
-  set: Acrylics Mini Gloss
-  r: 248
-  g: 129
-  b: 172
-  hex: '#F881AC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Pure blue
-  productCode: LP-6
-  set: Lacquer Paint
-  r: 0
-  g: 91
-  b: 172
-  hex: '#005BAC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pure blue
-  productCode: TS-93
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pure metallic red
-  productCode: TS-95
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pure metallic red
-  productCode: LP-46
-  set: Lacquer Paint
-  r: 223
-  g: 0
-  b: 18
-  hex: '#DF0012'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pure orange
-  productCode: LP-51
-  set: Lacquer Paint
-  r: 241
-  g: 141
-  b: 1
-  hex: '#F18D01'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pure orange
-  productCode: TS-98
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pure red
-  productCode: LP-7
-  set: Lacquer Paint
-  r: 231
-  g: 0
-  b: 18
-  hex: '#E70012'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Pure red
-  productCode: TS-86
-  set: Tamiya Spray
-  r: 229
-  g: 0
-  b: 18
-  hex: '#E50012'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pure white
-  productCode: TS-26
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Pure yellow
-  productCode: LP-8
-  set: Lacquer Paint
-  r: 255
-  g: 240
-  b: 1
-  hex: '#FFF001'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Purple
-  productCode: X-16
-  set: Acrylics Mini Gloss
-  r: 71
-  g: 75
-  b: 160
-  hex: '#474BA0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Purple
-  productCode: TS-24
-  set: Tamiya Spray
-  r: 71
-  g: 75
-  b: 160
-  hex: '#474BA0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: RLM grey
-  productCode: XF-22
-  set: Acrylics Mini Flat
-  r: 123
-  g: 141
-  b: 125
-  hex: '#7B8D7D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Racing blue
-  productCode: LP-45
-  set: Lacquer Paint
-  r: 1
-  g: 59
-  b: 143
-  hex: '#013B8F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Racing blue
-  productCode: TS-51
-  set: Tamiya Spray
-  r: 14
-  g: 30
-  b: 125
-  hex: '#0E1E7D'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Racing green
-  productCode: TS-43
-  set: Tamiya Spray
-  r: 24
-  g: 67
-  b: 22
-  hex: '#184316'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Racing white
-  productCode: TS-7
-  set: Tamiya Spray
-  r: 230
-  g: 230
-  b: 230
-  hex: '#E6E6E6'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Racing white
-  productCode: LP-39
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Red
-  productCode: X-7
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 0
-  b: 0
-  hex: '#FF0000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Red brown
-  productCode: TS-1
-  set: Tamiya Spray
-  r: 102
-  g: 55
-  b: 10
-  hex: '#66370A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Red brown
-  productCode: XF-64
-  set: Acrylics Mini Flat
-  r: 102
-  g: 55
-  b: 10
-  hex: '#66370A'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 26
+    g: 59
+    b: 20
+    hex: '#1A3B14'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Red brown 2
-  productCode: LP-57
-  set: Lacquer Paint
-  r: 79
-  g: 55
-  b: 51
-  hex: '#4F3733'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Red brown 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-90
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Royal blue
-  productCode: X-3
-  set: Acrylics Mini Gloss
-  r: 29
-  g: 45
-  b: 83
-  hex: '#1D2D53'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Red brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-64
+  details:
+    set: Acrylics Mini Flat
+    r: 102
+    g: 55
+    b: 10
+    hex: '#66370A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: RLM grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-22
+  details:
+    set: Acrylics Mini Flat
+    r: 123
+    g: 141
+    b: 125
+    hex: '#7B8D7D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Royal light gray
-  productCode: TS-81
-  set: Tamiya Spray
-  r: 193
-  g: 202
-  b: 200
-  hex: '#C1CAC8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Royal light gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-80
-  set: Acrylics Mini Flat
-  r: 193
-  g: 202
-  b: 200
-  hex: '#C1CAC8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 193
+    g: 202
+    b: 200
+    hex: '#C1CAC8'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Rubber black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-85
-  set: Acrylics Mini Flat
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Rubber black
-  productCode: LP-65
-  set: Lacquer Paint
-  r: 0
-  g: 0
-  b: 0
-  hex: '#000000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Rubber black
-  productCode: TS-82
-  set: Tamiya Spray
-  r: 68
-  g: 70
-  b: 72
-  hex: '#444648'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Sea blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-17
-  set: Acrylics Mini Flat
-  r: 46
-  g: 59
-  b: 67
-  hex: '#2E3B43'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Semi gloss black
-  productCode: TS-29
-  set: Tamiya Spray
-  r: 51
-  g: 51
-  b: 51
-  hex: '#333333'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Gloss
-- name: Semi gloss black
-  productCode: LP-5
-  set: Lacquer Paint
-  r: 4
-  g: 0
-  b: 0
-  hex: '#040000'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Semi gloss black
-  productCode: X-18
-  set: Acrylics Mini Gloss
-  r: 51
-  g: 51
-  b: 51
-  hex: '#333333'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Semi gloss clear
-  productCode: TS-79
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Gloss
-- name: Semi gloss clear
-  productCode: LP-24
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 254
-  hex: '#FFFFFE'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Semi-gloss bright gun metal
-  productCode: TS-100
-  set: Tamiya Spray
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Gloss
-- name: Semi-gloss clear
-  productCode: X-35
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Silver
-  productCode: LP-11
-  set: Lacquer Paint
-  r: 223
-  g: 223
-  b: 223
-  hex: '#DFDFDF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Silver leaf
-  productCode: TS-30
-  set: Tamiya Spray
-  r: 204
-  g: 204
-  b: 204
-  hex: '#CCCCCC'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Sky
-  productCode: XF-21
-  set: Acrylics Mini Flat
-  r: 184
-  g: 190
-  b: 119
-  hex: '#B8BE77'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Sky blue
-  productCode: X-14
-  set: Acrylics Mini Gloss
-  r: 29
-  g: 153
-  b: 196
-  hex: '#1D99C4'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 46
+    g: 59
+    b: 67
+    hex: '#2E3B43'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Sky grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-19
-  set: Acrylics Mini Flat
-  r: 173
-  g: 183
-  b: 192
-  hex: '#ADB7C0'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Smoke
-  productCode: LP-67
-  set: Lacquer Paint
-  r: 199
-  g: 201
-  b: 200
-  hex: '#C7C9C8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Smoke
-  productCode: X-19
-  set: Acrylics Mini Gloss
-  r: 143
-  g: 145
-  b: 140
-  hex: '#8F918C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
-- name: Smoke
-  productCode: TS-71
-  set: Tamiya Spray
-  r: 179
-  g: 170
-  b: 174
-  hex: '#B3AAAE'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Sparkling silver
-  productCode: LP-48
-  set: Lacquer Paint
-  r: 222
-  g: 224
-  b: 223
-  hex: '#DEE0DF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Tan
-  productCode: AS-15
-  set: Aircraft Spray
-  r: 166
-  g: 131
-  b: 84
-  hex: '#A68354'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Titanium gold
-  productCode: X-31
-  set: Acrylics Mini Gloss
-  r: 203
-  g: 187
-  b: 114
-  hex: '#CBBB72'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Titanium gold
-  productCode: TS-87
-  set: Tamiya Spray
-  r: 199
-  g: 186
-  b: 130
-  hex: '#C7BA82'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Titanium gold
-  productCode: LP-62
-  set: Lacquer Paint
-  r: 218
-  g: 201
-  b: 147
-  hex: '#DAC993'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Titanium silver
-  productCode: TS-88
-  set: Tamiya Spray
-  r: 198
-  g: 205
-  b: 194
-  hex: '#C6CDC2'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Metallic
-- name: Titanium silver
-  productCode: LP-63
-  set: Lacquer Paint
-  r: 219
-  g: 220
-  b: 206
-  hex: '#DBDCCE'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: Titanium silver
-  productCode: X-32
-  set: Acrylics Mini Gloss
-  r: 204
-  g: 204
-  b: 184
-  hex: '#CCCCB8'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Metallic
-- name: White
-  productCode: LP-2
-  set: Lacquer Paint
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: White
-  productCode: X-2
-  set: Acrylics Mini Gloss
-  r: 255
-  g: 255
-  b: 255
-  hex: '#FFFFFF'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Gloss
+  details:
+    set: Acrylics Mini Flat
+    r: 173
+    g: 183
+    b: 192
+    hex: '#ADB7C0'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Sky
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: XF-21
+  details:
+    set: Acrylics Mini Flat
+    r: 184
+    g: 190
+    b: 119
+    hex: '#B8BE77'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Wooden deck tan
-  productCode: LP-16
-  set: Lacquer Paint
-  r: 172
-  g: 161
-  b: 132
-  hex: '#ACA184'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Wooden deck tan
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-78
-  set: Acrylics Mini Flat
-  r: 211
-  g: 182
-  b: 133
-  hex: '#D3B685'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
-- name: Wooden deck tan
-  productCode: TS-68
-  set: Tamiya Spray
-  r: 203
-  g: 164
-  b: 108
-  hex: '#CBA46C'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
-- name: Yellow
-  productCode: TS-16
-  set: Tamiya Spray
-  r: 255
-  g: 230
-  b: 0
-  hex: '#FFE600'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Spray
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 211
+    g: 182
+    b: 133
+    hex: '#D3B685'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Yellow green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: XF-4
-  set: Acrylics Mini Flat
-  r: 179
-  g: 198
-  b: 15
-  hex: '#B3C60F'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Acrylics Mini Flat
+    r: 179
+    g: 198
+    b: 15
+    hex: '#B3C60F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Acrylic thinner
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-20A
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-1
+  details:
+    set: Acrylics Mini Gloss
+    r: 0
+    g: 0
+    b: 0
+    hex: '#000000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-4
+  details:
+    set: Acrylics Mini Gloss
+    r: 9
+    g: 52
+    b: 123
+    hex: '#09347B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Bronze
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-33
+  details:
+    set: Acrylics Mini Gloss
+    r: 103
+    g: 38
+    b: 34
+    hex: '#672622'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-9
+  details:
+    set: Acrylics Mini Gloss
+    r: 77
+    g: 34
+    b: 7
+    hex: '#4D2207'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Chrome silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-11
+  details:
+    set: Acrylics Mini Gloss
+    r: 194
+    g: 200
+    b: 202
+    hex: '#C2C8CA'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Clear blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-23
+  details:
+    set: Acrylics Mini Gloss
+    r: 52
+    g: 179
+    b: 209
+    hex: '#34B3D1'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Clear green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-25
+  details:
+    set: Acrylics Mini Gloss
+    r: 26
+    g: 150
+    b: 65
+    hex: '#1A9641'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Clear orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-26
+  details:
+    set: Acrylics Mini Gloss
+    r: 254
+    g: 140
+    b: 20
+    hex: '#FE8C14'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Clear red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-27
+  details:
+    set: Acrylics Mini Gloss
+    r: 250
+    g: 0
+    b: 38
+    hex: '#FA0026'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Clear yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-24
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 230
+    b: 0
+    hex: '#FFE600'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-22
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Flat base
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-21
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Gold leaf
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-12
+  details:
+    set: Acrylics Mini Gloss
+    r: 204
+    g: 162
+    b: 8
+    hex: '#CCA208'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-5
+  details:
+    set: Acrylics Mini Gloss
+    r: 0
+    g: 68
+    b: 27
+    hex: '#00441B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Gun metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-10
+  details:
+    set: Acrylics Mini Gloss
+    r: 80
+    g: 85
+    b: 87
+    hex: '#505557'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Lemon yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-8
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 230
+    b: 0
+    hex: '#FFE600'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Light green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-15
+  details:
+    set: Acrylics Mini Gloss
+    r: 102
+    g: 184
+    b: 33
+    hex: '#66B821'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Metallic blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-13
+  details:
+    set: Acrylics Mini Gloss
+    r: 30
+    g: 116
+    b: 151
+    hex: '#1E7497'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Metallic brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-34
+  details:
+    set: Acrylics Mini Gloss
+    r: 153
+    g: 63
+    b: 6
+    hex: '#993F06'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-6
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 127
+    b: 0
+    hex: '#FF7F00'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Park green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-28
+  details:
+    set: Acrylics Mini Gloss
+    r: 51
+    g: 164
+    b: 77
+    hex: '#33A44D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Pink
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-17
+  details:
+    set: Acrylics Mini Gloss
+    r: 248
+    g: 129
+    b: 172
+    hex: '#F881AC'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Purple
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-16
+  details:
+    set: Acrylics Mini Gloss
+    r: 71
+    g: 75
+    b: 160
+    hex: '#474BA0'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-7
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 0
+    b: 0
+    hex: '#FF0000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Royal blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-3
+  details:
+    set: Acrylics Mini Gloss
+    r: 29
+    g: 45
+    b: 83
+    hex: '#1D2D53'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Semi gloss black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-18
+  details:
+    set: Acrylics Mini Gloss
+    r: 51
+    g: 51
+    b: 51
+    hex: '#333333'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Semi-gloss clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-35
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Sky blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-14
+  details:
+    set: Acrylics Mini Gloss
+    r: 29
+    g: 153
+    b: 196
+    hex: '#1D99C4'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Smoke
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-19
+  details:
+    set: Acrylics Mini Gloss
+    r: 143
+    g: 145
+    b: 140
+    hex: '#8F918C'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Titanium gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-31
+  details:
+    set: Acrylics Mini Gloss
+    r: 203
+    g: 187
+    b: 114
+    hex: '#CBBB72'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Titanium silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-32
+  details:
+    set: Acrylics Mini Gloss
+    r: 204
+    g: 204
+    b: 184
+    hex: '#CCCCB8'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: White
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: X-2
+  details:
+    set: Acrylics Mini Gloss
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Bare-metal silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-12
+  details:
+    set: Aircraft Spray
+    r: 194
+    g: 200
+    b: 202
+    hex: '#C2C8CA'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Dark earth
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-22
+  details:
+    set: Aircraft Spray
+    r: 103
+    g: 75
+    b: 43
+    hex: '#674B2B'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark ghost grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-25
+  details:
+    set: Aircraft Spray
+    r: 108
+    g: 137
+    b: 142
+    hex: '#6C898E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green (IJA)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-17
+  details:
+    set: Aircraft Spray
+    r: 24
+    g: 67
+    b: 22
+    hex: '#184316'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green (Luftwaffe)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-24
+  details:
+    set: Aircraft Spray
+    r: 24
+    g: 40
+    b: 13
+    hex: '#18280D'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green 2 (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-21
+  details:
+    set: Aircraft Spray
+    r: 0
+    g: 44
+    b: 18
+    hex: '#002C12'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-30
+  details:
+    set: Aircraft Spray
+    r: 53
+    g: 85
+    b: 51
+    hex: '#355533'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-1
+  details:
+    set: Aircraft Spray
+    r: 17
+    g: 57
+    b: 21
+    hex: '#113915'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-9
+  details:
+    set: Aircraft Spray
+    r: 46
+    g: 72
+    b: 20
+    hex: '#2E4814'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Gray green (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-29
+  details:
+    set: Aircraft Spray
+    r: 184
+    g: 195
+    b: 167
+    hex: '#B8C3A7'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Gray green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-3
+  details:
+    set: Aircraft Spray
+    r: 37
+    g: 58
+    b: 46
+    hex: '#253A2E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Gray violet
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-4
+  details:
+    set: Aircraft Spray
+    r: 64
+    g: 83
+    b: 103
+    hex: '#405367'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-13
+  details:
+    set: Aircraft Spray
+    r: 22
+    g: 49
+    b: 38
+    hex: '#163126'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Gunship gray 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-27
+  details:
+    set: Aircraft Spray
+    r: 61
+    g: 78
+    b: 89
+    hex: '#3D4E59'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Insignia white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-20
+  details:
+    set: Aircraft Spray
+    r: 242
+    g: 242
+    b: 229
+    hex: '#F2F2E5'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Intermediate blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-19
+  details:
+    set: Aircraft Spray
+    r: 91
+    g: 142
+    b: 152
+    hex: '#5B8E98'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-5
+  details:
+    set: Aircraft Spray
+    r: 153
+    g: 194
+    b: 181
+    hex: '#99C2B5'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light ghost grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-26
+  details:
+    set: Aircraft Spray
+    r: 133
+    g: 160
+    b: 163
+    hex: '#85A0A3'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light gray (IJA)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-18
+  details:
+    set: Aircraft Spray
+    r: 161
+    g: 183
+    b: 167
+    hex: '#A1B7A7'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-16
+  details:
+    set: Aircraft Spray
+    r: 204
+    g: 212
+    b: 188
+    hex: '#CCD4BC'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-2
+  details:
+    set: Aircraft Spray
+    r: 163
+    g: 170
+    b: 150
+    hex: '#A3AA96'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light green (Luftwaffe)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-23
+  details:
+    set: Aircraft Spray
+    r: 51
+    g: 112
+    b: 31
+    hex: '#33701F'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Medium gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-28
+  details:
+    set: Aircraft Spray
+    r: 114
+    g: 125
+    b: 125
+    hex: '#727D7D'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Medium sea gray 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-32
+  details:
+    set: Aircraft Spray
+    r: 170
+    g: 190
+    b: 185
+    hex: '#AABEB9'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Medium sea gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-11
+  details:
+    set: Aircraft Spray
+    r: 143
+    g: 157
+    b: 135
+    hex: '#8F9D87'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Navy blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-8
+  details:
+    set: Aircraft Spray
+    r: 40
+    g: 66
+    b: 94
+    hex: '#28425E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Neutral gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-7
+  details:
+    set: Aircraft Spray
+    r: 126
+    g: 135
+    b: 137
+    hex: '#7E8789'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Ocean gray 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-31
+  details:
+    set: Aircraft Spray
+    r: 108
+    g: 140
+    b: 153
+    hex: '#6C8C99'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Ocean gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-10
+  details:
+    set: Aircraft Spray
+    r: 82
+    g: 90
+    b: 95
+    hex: '#525A5F'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Olive drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-6
+  details:
+    set: Aircraft Spray
+    r: 64
+    g: 75
+    b: 19
+    hex: '#404B13'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Olive green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-14
+  details:
+    set: Aircraft Spray
+    r: 51
+    g: 80
+    b: 22
+    hex: '#335016'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Tan
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: AS-15
+  details:
+    set: Aircraft Spray
+    r: 166
+    g: 131
+    b: 84
+    hex: '#A68354'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-1
+  details:
+    set: Lacquer Paint
+    r: 4
+    g: 0
+    b: 0
+    hex: '#040000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Bright red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-50
+  details:
+    set: Lacquer Paint
+    r: 229
+    g: 0
+    b: 20
+    hex: '#E50014'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Brown (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-25
+  details:
+    set: Lacquer Paint
+    r: 113
+    g: 90
+    b: 61
+    hex: '#715A3D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Buff
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-75
+  details:
+    set: Lacquer Paint
+    r: 204
+    g: 167
+    b: 123
+    hex: '#CCA77B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Champagne gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-71
+  details:
+    set: Lacquer Paint
+    r: 210
+    g: 199
+    b: 154
+    hex: '#D2C79A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Clear blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-68
+  details:
+    set: Lacquer Paint
+    r: 0
+    g: 166
+    b: 234
+    hex: '#00A6EA'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Clear orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-53
+  details:
+    set: Lacquer Paint
+    r: 240
+    g: 137
+    b: 0
+    hex: '#F08900'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Clear red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-52
+  details:
+    set: Lacquer Paint
+    r: 229
+    g: 0
+    b: 127
+    hex: '#E5007F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Clear yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-69
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 229
+    b: 0
+    hex: '#FFE500'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-9
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark ghost gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-36
+  details:
+    set: Lacquer Paint
+    r: 128
+    g: 161
+    b: 176
+    hex: '#80A1B0'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark green (JGSDF).jpeg
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-26
+  details:
+    set: Lacquer Paint
+    r: 61
+    g: 89
+    b: 63
+    hex: '#3D593F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark green 2 (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-31
+  details:
+    set: Lacquer Paint
+    r: 0
+    g: 66
+    b: 52
+    hex: '#004234'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark green 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-56
+  details:
+    set: Lacquer Paint
+    r: 91
+    g: 131
+    b: 97
+    hex: '#5B8361'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dark iron
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-54
+  details:
+    set: Lacquer Paint
+    r: 83
+    g: 67
+    b: 52
+    hex: '#534334'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Dark yellow 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-55
+  details:
+    set: Lacquer Paint
+    r: 201
+    g: 180
+    b: 75
+    hex: '#C9B44B'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Dull red.jpeg
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-18
+  details:
+    set: Lacquer Paint
+    r: 123
+    g: 69
+    b: 56
+    hex: '#7B4538'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat aluminum
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-38
+  details:
+    set: Lacquer Paint
+    r: 220
+    g: 222
+    b: 221
+    hex: '#DCDEDD'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat base
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-22
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 254
+    hex: '#FFFFFE'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-3
+  details:
+    set: Lacquer Paint
+    r: 4
+    g: 0
+    b: 0
+    hex: '#040000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-78
+  details:
+    set: Lacquer Paint
+    r: 0
+    g: 106
+    b: 148
+    hex: '#006A94'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-23
+  details:
+    set: Lacquer Paint
+    r: 157
+    g: 179
+    b: 191
+    hex: '#9DB3BF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat earth
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-74
+  details:
+    set: Lacquer Paint
+    r: 153
+    g: 71
+    b: 47
+    hex: '#99472F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat flesh
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-66
+  details:
+    set: Lacquer Paint
+    r: 250
+    g: 204
+    b: 142
+    hex: '#FACC8E'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-79
+  details:
+    set: Lacquer Paint
+    r: 230
+    g: 0
+    b: 28
+    hex: '#E6001C'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-4
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Flat yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-80
+  details:
+    set: Lacquer Paint
+    r: 254
+    g: 225
+    b: 1
+    hex: '#FEE101'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: German gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-27
+  details:
+    set: Lacquer Paint
+    r: 65
+    g: 88
+    b: 98
+    hex: '#415862'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Gloss aluminum
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-70
+  details:
+    set: Lacquer Paint
+    r: 220
+    g: 222
+    b: 221
+    hex: '#DCDEDD'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Gray green (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-33
+  details:
+    set: Lacquer Paint
+    r: 185
+    g: 196
+    b: 166
+    hex: '#B9C4A6'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Gun metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-19
+  details:
+    set: Lacquer Paint
+    r: 77
+    g: 78
+    b: 77
+    hex: '#4D4E4D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: IJN gray<br>(Kure Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-12
+  details:
+    set: Lacquer Paint
+    r: 113
+    g: 123
+    b: 133
+    hex: '#717B85'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: IJN gray<br>(Maizuru Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-14
+  details:
+    set: Lacquer Paint
+    r: 125
+    g: 128
+    b: 135
+    hex: '#7D8087'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: IJN gray<br>(Sasebo Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-13
+  details:
+    set: Lacquer Paint
+    r: 83
+    g: 87
+    b: 96
+    hex: '#535760'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: IJN gray<br>(Yokosuka Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-15
+  details:
+    set: Lacquer Paint
+    r: 100
+    g: 107
+    b: 117
+    hex: '#646B75'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Insignia white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-35
+  details:
+    set: Lacquer Paint
+    r: 221
+    g: 220
+    b: 215
+    hex: '#DDDCD7'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Italian red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-21
+  details:
+    set: Lacquer Paint
+    r: 198
+    g: 56
+    b: 52
+    hex: '#C63834'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Khaki
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-73
+  details:
+    set: Lacquer Paint
+    r: 154
+    g: 143
+    b: 51
+    hex: '#9A8F33'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Lacquer thinner
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-10
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Light brown (DAK 1941)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-77
+  details:
+    set: Lacquer Paint
+    r: 229
+    g: 179
+    b: 110
+    hex: '#E5B36E'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Light ghost gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-37
+  details:
+    set: Lacquer Paint
+    r: 152
+    g: 180
+    b: 192
+    hex: '#98B4C0'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Light gray (IJN)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-32
+  details:
+    set: Lacquer Paint
+    r: 201
+    g: 209
+    b: 194
+    hex: '#C9D1C2'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Light gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-34
+  details:
+    set: Lacquer Paint
+    r: 208
+    g: 204
+    b: 192
+    hex: '#D0CCC0'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Light gun metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-20
+  details:
+    set: Lacquer Paint
+    r: 119
+    g: 119
+    b: 118
+    hex: '#777776'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Light sand
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-30
+  details:
+    set: Lacquer Paint
+    r: 209
+    g: 171
+    b: 124
+    hex: '#D1AB7C'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Linoleum deck brown.jpeg
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-17
+  details:
+    set: Lacquer Paint
+    r: 86
+    g: 74
+    b: 58
+    hex: '#564A3A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Metallic black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-40
+  details:
+    set: Lacquer Paint
+    r: 63
+    g: 59
+    b: 58
+    hex: '#3F3B3A'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Metallic gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-61
+  details:
+    set: Lacquer Paint
+    r: 114
+    g: 112
+    b: 113
+    hex: '#727071'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Metallic orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-44
+  details:
+    set: Lacquer Paint
+    r: 239
+    g: 120
+    b: 0
+    hex: '#EF7800'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Mica blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-41
+  details:
+    set: Lacquer Paint
+    r: 1
+    g: 57
+    b: 142
+    hex: '#01398E'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Mica red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-42
+  details:
+    set: Lacquer Paint
+    r: 200
+    g: 23
+    b: 29
+    hex: '#C8171D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Mica silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-72
+  details:
+    set: Lacquer Paint
+    r: 212
+    g: 217
+    b: 220
+    hex: '#D4D9DC'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Mixing blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-81
+  details:
+    set: Lacquer Paint
+    r: 32
+    g: 42
+    b: 103
+    hex: '#202A67'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Mixing red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-82
+  details:
+    set: Lacquer Paint
+    r: 200
+    g: 17
+    b: 61
+    hex: '#C8113D'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Mixing yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-83
+  details:
+    set: Lacquer Paint
+    r: 254
+    g: 215
+    b: 0
+    hex: '#FED700'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: NATO black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-60
+  details:
+    set: Lacquer Paint
+    r: 0
+    g: 0
+    b: 0
+    hex: '#000000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: NATO brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-59
+  details:
+    set: Lacquer Paint
+    r: 106
+    g: 74
+    b: 49
+    hex: '#6A4A31'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: NATO green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-58
+  details:
+    set: Lacquer Paint
+    r: 41
+    g: 84
+    b: 56
+    hex: '#295438'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Olive drab (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-64
+  details:
+    set: Lacquer Paint
+    r: 41
+    g: 84
+    b: 56
+    hex: '#295438'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Olive drab 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-29
+  details:
+    set: Lacquer Paint
+    r: 71
+    g: 87
+    b: 62
+    hex: '#47573E'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Olive drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-28
+  details:
+    set: Lacquer Paint
+    r: 77
+    g: 86
+    b: 65
+    hex: '#4D5641'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pearl blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-47
+  details:
+    set: Lacquer Paint
+    r: 1
+    g: 59
+    b: 143
+    hex: '#013B8F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pearl clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-49
+  details:
+    set: Lacquer Paint
+    r: 247
+    g: 249
+    b: 248
+    hex: '#F7F9F8'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pearl white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-43
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pure blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-6
+  details:
+    set: Lacquer Paint
+    r: 0
+    g: 91
+    b: 172
+    hex: '#005BAC'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pure metallic red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-46
+  details:
+    set: Lacquer Paint
+    r: 223
+    g: 0
+    b: 18
+    hex: '#DF0012'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pure orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-51
+  details:
+    set: Lacquer Paint
+    r: 241
+    g: 141
+    b: 1
+    hex: '#F18D01'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pure red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-7
+  details:
+    set: Lacquer Paint
+    r: 231
+    g: 0
+    b: 18
+    hex: '#E70012'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Pure yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-8
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 240
+    b: 1
+    hex: '#FFF001'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Racing blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-45
+  details:
+    set: Lacquer Paint
+    r: 1
+    g: 59
+    b: 143
+    hex: '#013B8F'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Racing white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-39
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Red brown 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-57
+  details:
+    set: Lacquer Paint
+    r: 79
+    g: 55
+    b: 51
+    hex: '#4F3733'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Rubber black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-65
+  details:
+    set: Lacquer Paint
+    r: 0
+    g: 0
+    b: 0
+    hex: '#000000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Semi gloss black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-5
+  details:
+    set: Lacquer Paint
+    r: 4
+    g: 0
+    b: 0
+    hex: '#040000'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Semi gloss clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-24
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 254
+    hex: '#FFFFFE'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Gloss
+- name: Silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-11
+  details:
+    set: Lacquer Paint
+    r: 223
+    g: 223
+    b: 223
+    hex: '#DFDFDF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Smoke
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-67
+  details:
+    set: Lacquer Paint
+    r: 199
+    g: 201
+    b: 200
+    hex: '#C7C9C8'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Sparkling silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-48
+  details:
+    set: Lacquer Paint
+    r: 222
+    g: 224
+    b: 223
+    hex: '#DEE0DF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Titanium gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-62
+  details:
+    set: Lacquer Paint
+    r: 218
+    g: 201
+    b: 147
+    hex: '#DAC993'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: Titanium silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-63
+  details:
+    set: Lacquer Paint
+    r: 219
+    g: 220
+    b: 206
+    hex: '#DBDCCE'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Metallic
+- name: White
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-2
+  details:
+    set: Lacquer Paint
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Wooden deck tan
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: LP-16
+  details:
+    set: Lacquer Paint
+    r: 172
+    g: 161
+    b: 132
+    hex: '#ACA184'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
 - name: Yellow-brown (DAK 1941)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
   productCode: LP-76
-  set: Lacquer Paint
-  r: 177
-  g: 129
-  b: 80
-  hex: '#B18150'
-  volumeMl: 10
-  packaging: jar
-  isDiscontinued: false
-  type: Standard
-  finish: Matte
+  details:
+    set: Lacquer Paint
+    r: 177
+    g: 129
+    b: 80
+    hex: '#B18150'
+    volumeMl: 10
+    container: jar
+    type: Standard
+    finish: Matte
+- name: Base white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-101
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-14
+  details:
+    set: Tamiya Spray
+    r: 51
+    g: 51
+    b: 51
+    hex: '#333333'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Blue violet
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-57
+  details:
+    set: Tamiya Spray
+    r: 81
+    g: 114
+    b: 179
+    hex: '#5172B3'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-15
+  details:
+    set: Tamiya Spray
+    r: 9
+    g: 52
+    b: 123
+    hex: '#09347B'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Bright mica red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-85
+  details:
+    set: Tamiya Spray
+    r: 229
+    g: 0
+    b: 18
+    hex: '#E50012'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Bright orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-31
+  details:
+    set: Tamiya Spray
+    r: 254
+    g: 27
+    b: 14
+    hex: '#FE1B0E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Bright red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-49
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 0
+    b: 0
+    hex: '#FF0000'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Brilliant blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-44
+  details:
+    set: Tamiya Spray
+    r: 8
+    g: 96
+    b: 168
+    hex: '#0860A8'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Brilliant orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-56
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 127
+    b: 0
+    hex: '#FF7F00'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: British green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-9
+  details:
+    set: Tamiya Spray
+    r: 0
+    g: 43
+    b: 17
+    hex: '#002B11'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Brown (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-90
+  details:
+    set: Tamiya Spray
+    r: 130
+    g: 102
+    b: 54
+    hex: '#826636'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Camel yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-34
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 179
+    b: 0
+    hex: '#FFB300'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Candy lime green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-52
+  details:
+    set: Tamiya Spray
+    r: 77
+    g: 172
+    b: 38
+    hex: '#4DAC26'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Champagne gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-75
+  details:
+    set: Tamiya Spray
+    r: 195
+    g: 184
+    b: 126
+    hex: '#C3B87E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Chrome yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-47
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 204
+    b: 0
+    hex: '#FFCC00'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Clear blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-72
+  details:
+    set: Tamiya Spray
+    r: 52
+    g: 176
+    b: 185
+    hex: '#34B0B9'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Clear orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-73
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 115
+    b: 0
+    hex: '#FF7300'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Clear red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-74
+  details:
+    set: Tamiya Spray
+    r: 240
+    g: 2
+    b: 127
+    hex: '#F0027F'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-13
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Coral blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-41
+  details:
+    set: Tamiya Spray
+    r: 78
+    g: 184
+    b: 163
+    hex: '#4EB8A3'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-55
+  details:
+    set: Tamiya Spray
+    r: 2
+    g: 20
+    b: 46
+    hex: '#02142E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-91
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-2
+  details:
+    set: Tamiya Spray
+    r: 26
+    g: 45
+    b: 15
+    hex: '#1A2D0F'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark mica blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-64
+  details:
+    set: Tamiya Spray
+    r: 10
+    g: 20
+    b: 35
+    hex: '#0A1423'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dark yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-3
+  details:
+    set: Tamiya Spray
+    r: 203
+    g: 175
+    b: 91
+    hex: '#CBAF5B'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Deep metallic blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-53
+  details:
+    set: Tamiya Spray
+    r: 17
+    g: 33
+    b: 53
+    hex: '#112135'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Dull red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-33
+  details:
+    set: Tamiya Spray
+    r: 102
+    g: 0
+    b: 0
+    hex: '#660000'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Field grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-78
+  details:
+    set: Tamiya Spray
+    r: 79
+    g: 108
+    b: 86
+    hex: '#4F6C56'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Flat clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-80
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Flat flesh
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-77
+  details:
+    set: Tamiya Spray
+    r: 253
+    g: 192
+    b: 134
+    hex: '#FDC086'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Fluorescent orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-96
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Fluorescent red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-36
+  details:
+    set: Tamiya Spray
+    r: 252
+    g: 0
+    b: 25
+    hex: '#FC0019'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: French blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-10
+  details:
+    set: Tamiya Spray
+    r: 54
+    g: 144
+    b: 192
+    hex: '#3690C0'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: German grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-4
+  details:
+    set: Tamiya Spray
+    r: 62
+    g: 71
+    b: 74
+    hex: '#3E474A'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Gloss aluminum
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-17
+  details:
+    set: Tamiya Spray
+    r: 194
+    g: 200
+    b: 202
+    hex: '#C2C8CA'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Gloss
+- name: Gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-21
+  details:
+    set: Tamiya Spray
+    r: 204
+    g: 162
+    b: 8
+    hex: '#CCA208'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Gun metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-38
+  details:
+    set: Tamiya Spray
+    r: 80
+    g: 85
+    b: 87
+    hex: '#505557'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Gunship grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-48
+  details:
+    set: Tamiya Spray
+    r: 70
+    g: 74
+    b: 75
+    hex: '#464A4B'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Haze grey
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-32
+  details:
+    set: Tamiya Spray
+    r: 123
+    g: 142
+    b: 146
+    hex: '#7B8E92'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: IJN gray (Kure Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-66
+  details:
+    set: Tamiya Spray
+    r: 130
+    g: 141
+    b: 147
+    hex: '#828D93'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: IJN gray (Maizuru Arsenal)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-99
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: IJN graySasebo Arsenal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-67
+  details:
+    set: Tamiya Spray
+    r: 104
+    g: 109
+    b: 113
+    hex: '#686D71'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Italian red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-8
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 0
+    b: 0
+    hex: '#FF0000'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Lavender
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-37
+  details:
+    set: Tamiya Spray
+    r: 106
+    g: 41
+    b: 144
+    hex: '#6A2990'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-23
+  details:
+    set: Tamiya Spray
+    r: 40
+    g: 174
+    b: 207
+    hex: '#28AECF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-22
+  details:
+    set: Tamiya Spray
+    r: 127
+    g: 195
+    b: 28
+    hex: '#7FC31C'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light gun metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-42
+  details:
+    set: Tamiya Spray
+    r: 115
+    g: 122
+    b: 124
+    hex: '#737A7C'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light metallic blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-54
+  details:
+    set: Tamiya Spray
+    r: 16
+    g: 102
+    b: 122
+    hex: '#10667A'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Light sand
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-46
+  details:
+    set: Tamiya Spray
+    r: 203
+    g: 164
+    b: 88
+    hex: '#CBA458'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Linoleum deck brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-69
+  details:
+    set: Tamiya Spray
+    r: 92
+    g: 33
+    b: 5
+    hex: '#5C2105'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Maroon
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-11
+  details:
+    set: Tamiya Spray
+    r: 77
+    g: 18
+    b: 2
+    hex: '#4D1202'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Matt black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-6
+  details:
+    set: Tamiya Spray
+    r: 51
+    g: 51
+    b: 51
+    hex: '#333333'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Matt white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-27
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-40
+  details:
+    set: Tamiya Spray
+    r: 57
+    g: 61
+    b: 62
+    hex: '#393D3E'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-19
+  details:
+    set: Tamiya Spray
+    r: 10
+    g: 80
+    b: 161
+    hex: '#0A50A1'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-84
+  details:
+    set: Tamiya Spray
+    r: 221
+    g: 210
+    b: 157
+    hex: '#DDD29D'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Metallic gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-94
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-20
+  details:
+    set: Tamiya Spray
+    r: 39
+    g: 158
+    b: 79
+    hex: '#279E4F'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-92
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-18
+  details:
+    set: Tamiya Spray
+    r: 227
+    g: 0
+    b: 23
+    hex: '#E30017'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Metallic silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-83
+  details:
+    set: Tamiya Spray
+    r: 217
+    g: 218
+    b: 222
+    hex: '#D9DADE'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Mica blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-50
+  details:
+    set: Tamiya Spray
+    r: 11
+    g: 58
+    b: 139
+    hex: '#0B3A8B'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Mica red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-39
+  details:
+    set: Tamiya Spray
+    r: 230
+    g: 0
+    b: 0
+    hex: '#E60000'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Mica silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-76
+  details:
+    set: Tamiya Spray
+    r: 204
+    g: 204
+    b: 204
+    hex: '#CCCCCC'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: NATO black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-63
+  details:
+    set: Tamiya Spray
+    r: 34
+    g: 36
+    b: 36
+    hex: '#222424'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: NATO brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-62
+  details:
+    set: Tamiya Spray
+    r: 115
+    g: 48
+    b: 7
+    hex: '#733007'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: NATO green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-61
+  details:
+    set: Tamiya Spray
+    r: 51
+    g: 96
+    b: 26
+    hex: '#33601A'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Olive drab (JGSDF)
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-70
+  details:
+    set: Tamiya Spray
+    r: 46
+    g: 65
+    b: 18
+    hex: '#2E4112'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Olive drab 2
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-28
+  details:
+    set: Tamiya Spray
+    r: 77
+    g: 86
+    b: 19
+    hex: '#4D5613'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Olive drab
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-5
+  details:
+    set: Tamiya Spray
+    r: 64
+    g: 75
+    b: 19
+    hex: '#404B13'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-12
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 89
+    b: 0
+    hex: '#FF5900'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Park green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-35
+  details:
+    set: Tamiya Spray
+    r: 51
+    g: 162
+    b: 61
+    hex: '#33A23D'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-89
+  details:
+    set: Tamiya Spray
+    r: 12
+    g: 62
+    b: 128
+    hex: '#0C3E80'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-65
+  details:
+    set: Tamiya Spray
+    r: 230
+    g: 230
+    b: 207
+    hex: '#E6E6CF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-60
+  details:
+    set: Tamiya Spray
+    r: 153
+    g: 202
+    b: 144
+    hex: '#99CA90'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl light blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-58
+  details:
+    set: Tamiya Spray
+    r: 115
+    g: 150
+    b: 186
+    hex: '#7396BA'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl light red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-59
+  details:
+    set: Tamiya Spray
+    r: 204
+    g: 134
+    b: 163
+    hex: '#CC86A3'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-45
+  details:
+    set: Tamiya Spray
+    r: 242
+    g: 242
+    b: 229
+    hex: '#F2F2E5'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pearl yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-97
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pink
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-25
+  details:
+    set: Tamiya Spray
+    r: 250
+    g: 154
+    b: 184
+    hex: '#FA9AB8'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pure blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-93
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pure metallic red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-95
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pure orange
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-98
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pure red
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-86
+  details:
+    set: Tamiya Spray
+    r: 229
+    g: 0
+    b: 18
+    hex: '#E50012'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Pure white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-26
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Purple
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-24
+  details:
+    set: Tamiya Spray
+    r: 71
+    g: 75
+    b: 160
+    hex: '#474BA0'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Racing blue
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-51
+  details:
+    set: Tamiya Spray
+    r: 14
+    g: 30
+    b: 125
+    hex: '#0E1E7D'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Racing green
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-43
+  details:
+    set: Tamiya Spray
+    r: 24
+    g: 67
+    b: 22
+    hex: '#184316'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Racing white
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-7
+  details:
+    set: Tamiya Spray
+    r: 230
+    g: 230
+    b: 230
+    hex: '#E6E6E6'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Red brown
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-1
+  details:
+    set: Tamiya Spray
+    r: 102
+    g: 55
+    b: 10
+    hex: '#66370A'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Royal light gray
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-81
+  details:
+    set: Tamiya Spray
+    r: 193
+    g: 202
+    b: 200
+    hex: '#C1CAC8'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Rubber black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-82
+  details:
+    set: Tamiya Spray
+    r: 68
+    g: 70
+    b: 72
+    hex: '#444648'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Semi gloss black
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-29
+  details:
+    set: Tamiya Spray
+    r: 51
+    g: 51
+    b: 51
+    hex: '#333333'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Gloss
+- name: Semi gloss clear
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-79
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Gloss
+- name: Semi-gloss bright gun metal
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-100
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 255
+    b: 255
+    hex: '#FFFFFF'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Gloss
+- name: Silver leaf
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-30
+  details:
+    set: Tamiya Spray
+    r: 204
+    g: 204
+    b: 204
+    hex: '#CCCCCC'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Smoke
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-71
+  details:
+    set: Tamiya Spray
+    r: 179
+    g: 170
+    b: 174
+    hex: '#B3AAAE'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Titanium gold
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-87
+  details:
+    set: Tamiya Spray
+    r: 199
+    g: 186
+    b: 130
+    hex: '#C7BA82'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Titanium silver
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-88
+  details:
+    set: Tamiya Spray
+    r: 198
+    g: 205
+    b: 194
+    hex: '#C6CDC2'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Metallic
+- name: Wooden deck tan
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-68
+  details:
+    set: Tamiya Spray
+    r: 203
+    g: 164
+    b: 108
+    hex: '#CBA46C'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
+- name: Yellow
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-07-10'
+  productCode: TS-16
+  details:
+    set: Tamiya Spray
+    r: 255
+    g: 230
+    b: 0
+    hex: '#FFE600'
+    volumeMl: 10
+    container: jar
+    type: Spray
+    finish: Matte
