@@ -185,7 +185,7 @@ git commit -m "feat(acquisition): carry raw sku on canonical products"
     - `archived = False`; `extractor` as given.
     - `hints`: `gameSystem` = gameSystemSlug, `faction` = factionSlug, plus `category`, `packaging`, `status`, and — only when present — `description`, `eanSource`, `legacyProductCode` (from the record's `productCode`).
   - Label maps are accumulated across headers; a label mapping to two different slugs raises `ValueError` naming the label and both slugs.
-  - A record missing a required key (`name`, `firstSeen`, …) is recorded in `invalid_records` with file + index and skipped — the count feeds the verifier (expected: zero on real data).
+  - A record missing a required key (`name`, `firstSeen`, …) is recorded in `invalid_records` with file + index and skipped — the count feeds the verifier (expected: zero on real data). Bookkeeping (collision suffixes, seen keys) happens only after a record fully parses, so invalid records can never leave phantom collision entries.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -293,6 +293,38 @@ def test_invalid_record_is_reported_not_fatal(tmp_path: Path) -> None:
     assert len(extraction.invalid_records) == 1
 
 
+def test_colliding_invalid_record_leaves_no_phantom_collision(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+    }
+    extraction = read_legacy_products(
+        make_faction_file(
+            tmp_path,
+            products=[
+                {**base, "name": "Foo!"},
+                {"name": "Foo?"},  # collides AND is invalid (missing required fields)
+            ],
+        )
+    )
+    assert [o.key for o in extraction.observations] == [
+        "legacy-catalog:games-workshop/warhammer-40k/space-marines/foo"
+    ]
+    assert extraction.key_collisions == []          # no phantom entry
+    assert len(extraction.invalid_records) == 1
+
+
+def test_non_numeric_price_is_invalid_not_fatal(tmp_path: Path) -> None:
+    base = {
+        "name": "Bar", "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+        "priceGbp": "N/A",
+    }
+    extraction = read_legacy_products(make_faction_file(tmp_path, products=[base]))
+    assert extraction.observations == []
+    assert len(extraction.invalid_records) == 1
+
+
 def test_conflicting_label_raises(tmp_path: Path) -> None:
     import pytest
 
@@ -373,16 +405,8 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
         prefix = f"legacy-catalog:{data['manufacturerSlug']}/{data['gameSystemSlug']}/{data['factionSlug']}"
         for index, record in enumerate(data.get("products") or []):
             try:
-                base_key = f"{prefix}/{slugify(record['name'])}"
-                key = base_key
-                suffix = 2
-                while key in seen_keys:
-                    key = f"{base_key}-{suffix}"
-                    suffix += 1
-                if key != base_key:
-                    extraction.key_collisions.append(
-                        {"type": "key-collision", "key": key, "name": record["name"]}
-                    )
+                # Read all fallible fields and build candidate dict
+                name = record["name"]
                 hints: dict[str, object] = {
                     "gameSystem": data["gameSystemSlug"],
                     "faction": data["factionSlug"],
@@ -394,29 +418,45 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
                         hints[hint] = record[hint]
                 if record.get("productCode") is not None:
                     hints["legacyProductCode"] = record["productCode"]
-                observation = Observation(
-                    key=key,
-                    url=record["url"],
-                    manufacturer=data["manufacturerSlug"],
-                    name=record["name"],
-                    sku=record.get("sku"),
-                    ean=record.get("ean"),
-                    priceGbp=float(record["priceGbp"]) if record.get("priceGbp") is not None else None,
-                    priceUsd=float(record["priceUsd"]) if record.get("priceUsd") is not None else None,
-                    priceEur=float(record["priceEur"]) if record.get("priceEur") is not None else None,
-                    availability=record["availability"],
-                    imageUrl=record.get("imageUrl"),
-                    hints=hints,
-                    firstSeen=record["firstSeen"],
-                    lastSeen=record["firstSeen"],
-                    extractor=extractor,
-                )
-            except (KeyError, TypeError) as error:
+                # All float conversions (may raise ValueError)
+                priceGbp = float(record["priceGbp"]) if record.get("priceGbp") is not None else None
+                priceUsd = float(record["priceUsd"]) if record.get("priceUsd") is not None else None
+                priceEur = float(record["priceEur"]) if record.get("priceEur") is not None else None
+                # Build candidate dict with sentinel key (will be replaced)
+                candidate = {
+                    "url": record["url"],
+                    "manufacturer": data["manufacturerSlug"],
+                    "name": name,
+                    "sku": record.get("sku"),
+                    "ean": record.get("ean"),
+                    "priceGbp": priceGbp,
+                    "priceUsd": priceUsd,
+                    "priceEur": priceEur,
+                    "availability": record["availability"],
+                    "imageUrl": record.get("imageUrl"),
+                    "hints": hints,
+                    "firstSeen": record["firstSeen"],
+                    "lastSeen": record["firstSeen"],
+                    "extractor": extractor,
+                }
+            except (KeyError, TypeError, ValueError) as error:
                 extraction.invalid_records.append(
                     {"file": str(path), "index": index, "error": repr(error)}
                 )
                 continue
+            # Bookkeeping only after successful record parsing
+            base_key = f"{prefix}/{slugify(name)}"
+            key = base_key
+            suffix = 2
+            while key in seen_keys:
+                key = f"{base_key}-{suffix}"
+                suffix += 1
+            if key != base_key:
+                extraction.key_collisions.append(
+                    {"type": "key-collision", "key": key, "name": name}
+                )
             seen_keys.add(key)
+            observation = Observation(key=key, **candidate)
             extraction.observations.append(observation)
     extraction.observations.sort(key=lambda o: o.key)
     return extraction

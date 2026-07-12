@@ -100,6 +100,38 @@ def test_invalid_record_is_reported_not_fatal(tmp_path: Path) -> None:
     assert len(extraction.invalid_records) == 1
 
 
+def test_colliding_invalid_record_leaves_no_phantom_collision(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+    }
+    extraction = read_legacy_products(
+        make_faction_file(
+            tmp_path,
+            products=[
+                {**base, "name": "Foo!"},
+                {"name": "Foo?"},  # collides AND is invalid (missing required fields)
+            ],
+        )
+    )
+    assert [o.key for o in extraction.observations] == [
+        "legacy-catalog:games-workshop/warhammer-40k/space-marines/foo"
+    ]
+    assert extraction.key_collisions == []          # no phantom entry
+    assert len(extraction.invalid_records) == 1
+
+
+def test_non_numeric_price_is_invalid_not_fatal(tmp_path: Path) -> None:
+    base = {
+        "name": "Bar", "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+        "priceGbp": "N/A",
+    }
+    extraction = read_legacy_products(make_faction_file(tmp_path, products=[base]))
+    assert extraction.observations == []
+    assert len(extraction.invalid_records) == 1
+
+
 def test_conflicting_label_raises(tmp_path: Path) -> None:
     import pytest
 
