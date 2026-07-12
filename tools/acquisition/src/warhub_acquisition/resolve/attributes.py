@@ -64,4 +64,6 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
     patch = overrides.products.get(product.id)
     if not patch:
         return product
-    return product.model_copy(update=dict(patch))
+    # revalidate the merged record so an unknown key or wrong-typed value in
+    # human-edited overrides.yaml fails loudly instead of being dropped
+    return CanonicalProduct.model_validate({**product.model_dump(), **patch})

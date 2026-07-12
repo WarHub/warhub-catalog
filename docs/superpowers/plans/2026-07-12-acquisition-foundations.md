@@ -398,7 +398,7 @@ git commit -m "feat(acquisition): deterministic YAML writer with safe quoting"
     `manufacturer: str | None` (manufacturer slug, mapped at acquire time),
     `name: str`, `sku: str | None`, `ean: str | None` (as asserted, unvalidated),
     `priceGbp: float | None`, `priceUsd: float | None`, `priceEur: float | None`,
-    `availability: str | None`, `hints: dict[str, object]` (default `{}`),
+    `imageUrl: str | None`, `availability: str | None`, `hints: dict[str, object]` (default `{}`),
     `firstSeen: str`, `lastSeen: str` (ISO dates), `missStreak: int = 0`,
     `archived: bool = False`, `extractor: str`.
   - `Observation.source_id` property → `key.split(":", 1)[0]`.
@@ -1572,14 +1572,17 @@ git commit -m "feat(acquisition): EAN corroboration with confidence and conflict
     - Field precedence: first non-`None` value walking members in their (already sorted) kind-priority order — for `name, availability, url, imageUrl, priceGbp/Usd/Eur, description`(from `hints["description"]`), `gameSystem`/`faction`/`category`/`packaging`/`quantity` (from `hints` of the same names).
     - `category` defaults to `"miniatures"` when no hint supplies it.
     - `firstSeen` = min over members; `evidence` = sorted member keys.
-    - Lifecycle: live members = `archived == False`; scraped-live additionally excludes curated-kind sources (curated observations are never re-scraped, so they never participate in miss-streak logic). No live members → `status="discontinued"`. No scraped-live members (curated-only entity) → trust the curated `hints["status"]` claim, defaulting to `"current"`. Any scraped-live member with `missStreak < miss_threshold` → `"current"`; otherwise `"suspected-discontinued"` and `availability="unknown"`. Finally, a curated `discontinued`/`delisted` hint always wins over derivation (a curated `current` does not resurrect a live-source `suspected-discontinued`).
-  - `apply_overrides(product: CanonicalProduct, overrides: Overrides) -> CanonicalProduct` — per-field replacement (validated by pydantic).
+    - Lifecycle: live members = `archived == False`; scraped-live additionally excludes curated-kind sources (curated observations are never re-scraped, so they never participate in miss-streak logic). No live members → `status="discontinued"`. No scraped-live members (curated-only entity) → trust the curated `hints["status"]` claim, defaulting to `"current"`. Any scraped-live member with `missStreak < miss_threshold` → `"current"`; otherwise `"suspected-discontinued"` and `availability="unknown"`. Finally, a curated `discontinued`/`delisted` hint always wins over derivation (a curated `current` does not resurrect a live-source `suspected-discontinued`). A curated discontinued/delisted hint that wins after the suspected-discontinued branch leaves availability='unknown' — intended: availability is unknowable for products no longer scraped.
+  - `apply_overrides(product: CanonicalProduct, overrides: Overrides) -> CanonicalProduct` — per-field replacement revalidated via model_validate — unknown keys or wrong-typed values raise ValidationError (loud, since overrides.yaml is human-edited).
   - Retract is enforced by the resolver (Task 10): retracted entity ids are dropped after join, and alias targets pointing at retracted ids raise `ValueError`.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```python
 # tools/acquisition/tests/test_attributes.py
+import pytest
+from pydantic import ValidationError
+
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.attributes import apply_overrides, resolve_attributes
@@ -1655,6 +1658,28 @@ def test_apply_overrides_replaces_fields() -> None:
     assert overridden.quantity == 11
     untouched = apply_overrides(product, Overrides())
     assert untouched == product
+
+
+def test_apply_overrides_unknown_field_raises() -> None:
+    product = resolve_attributes("e", members_sorted(), KINDS, NO_EAN, None)
+    with pytest.raises(ValidationError):
+        apply_overrides(product, Overrides(products={"e": {"qauntity": 11}}))
+
+
+def test_apply_overrides_bad_value_raises() -> None:
+    product = resolve_attributes("e", members_sorted(), KINDS, NO_EAN, None)
+    with pytest.raises(ValidationError):
+        apply_overrides(product, Overrides(products={"e": {"quantity": "ten"}}))
+
+
+def test_curated_current_does_not_resurrect_suspected() -> None:
+    members = [
+        obs("legacy-catalog:a", hints={"status": "current"}),
+        obs("mfr-gw:b", missStreak=3),
+    ]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, None)
+    assert product.status == "suspected-discontinued"
+    assert product.availability == "unknown"
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -1770,7 +1795,9 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
     patch = overrides.products.get(product.id)
     if not patch:
         return product
-    return product.model_copy(update=dict(patch))
+    # revalidate the merged record so an unknown key or wrong-typed value in
+    # human-edited overrides.yaml fails loudly instead of being dropped
+    return CanonicalProduct.model_validate({**product.model_dump(), **patch})
 ```
 
 - [ ] **Step 4: Run tests to verify they pass**

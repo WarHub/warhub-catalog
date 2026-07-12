@@ -1,3 +1,6 @@
+import pytest
+from pydantic import ValidationError
+
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.attributes import apply_overrides, resolve_attributes
@@ -73,3 +76,25 @@ def test_apply_overrides_replaces_fields() -> None:
     assert overridden.quantity == 11
     untouched = apply_overrides(product, Overrides())
     assert untouched == product
+
+
+def test_apply_overrides_unknown_field_raises() -> None:
+    product = resolve_attributes("e", members_sorted(), KINDS, NO_EAN, None)
+    with pytest.raises(ValidationError):
+        apply_overrides(product, Overrides(products={"e": {"qauntity": 11}}))
+
+
+def test_apply_overrides_bad_value_raises() -> None:
+    product = resolve_attributes("e", members_sorted(), KINDS, NO_EAN, None)
+    with pytest.raises(ValidationError):
+        apply_overrides(product, Overrides(products={"e": {"quantity": "ten"}}))
+
+
+def test_curated_current_does_not_resurrect_suspected() -> None:
+    members = [
+        obs("legacy-catalog:a", hints={"status": "current"}),
+        obs("mfr-gw:b", missStreak=3),
+    ]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, None)
+    assert product.status == "suspected-discontinued"
+    assert product.availability == "unknown"
