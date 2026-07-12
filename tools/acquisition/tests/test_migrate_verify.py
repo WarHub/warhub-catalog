@@ -21,6 +21,14 @@ def test_migrate_verifies_and_writes_report(tmp_path: Path, capsys) -> None:
     assert "eanConfidence: confirmed" in catalog  # curated-kind assertion
 
 
+def test_report_table_includes_record_counts(tmp_path: Path, capsys) -> None:
+    data, legacy, seed_dir = seed_repo(tmp_path)
+    main(["migrate", "--data", str(data), "--legacy-dir", str(legacy), "--seed-dir", str(seed_dir)])
+    report = (data / "review" / "migration-report.md").read_text(encoding="utf-8")
+    assert "| manufacturer | records | entities | with EAN | confirmed |" in report
+    assert "| games-workshop | 2 | 1 | 1 | 1 |" in report  # 1 legacy + 1 seed obs -> 1 entity
+
+
 def test_violation_exits_3(tmp_path: Path, capsys, monkeypatch) -> None:
     data, legacy, seed_dir = seed_repo(tmp_path)
     import warhub_acquisition.migrate.verify as verify_module

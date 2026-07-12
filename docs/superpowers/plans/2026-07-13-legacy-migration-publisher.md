@@ -925,7 +925,7 @@ git commit -m "feat(acquisition): migrate CLI verb orchestrating the legacy impo
     2. **No lost EANs:** every distinct *valid* EAN (via `canonical_ean`) asserted in evidence appears either on some canonical product or inside a conflict payload in `review/conflicts.yaml`.
     3. **Counts:** evidence observation total == `summary.legacy_count + summary.seed_count`.
     4. **Invalid records:** `summary.invalid_records` must be empty.
-  - The markdown report contains: totals, per-manufacturer table (legacy records → entities, dedup delta, products with EAN, confirmed count), distinct-valid-EAN count, invalid-EAN-value count (asserted but failing checksum — reported, not a violation), key collisions, conflicts count.
+  - The markdown report contains: totals, per-manufacturer table (records → entities dedup, with EAN, confirmed), distinct-valid-EAN count, invalid-EAN-value count (asserted but failing checksum — reported, not a violation), key collisions, conflicts count.
   - CLI: `migrate` gains `--report <path>` (default `<data>/review/migration-report.md`); after migration it runs verification, writes the report, prints `verification: OK` or the violations, and exits **3** on any violation.
 
 - [ ] **Step 1: Write the failing tests**
@@ -953,6 +953,14 @@ def test_migrate_verifies_and_writes_report(tmp_path: Path, capsys) -> None:
     assert "quantity: 1" in catalog          # from seed contents
     assert "ean: '5011921140862'" in catalog
     assert "eanConfidence: confirmed" in catalog  # curated-kind assertion
+
+
+def test_report_table_includes_record_counts(tmp_path: Path, capsys) -> None:
+    data, legacy, seed_dir = seed_repo(tmp_path)
+    main(["migrate", "--data", str(data), "--legacy-dir", str(legacy), "--seed-dir", str(seed_dir)])
+    report = (data / "review" / "migration-report.md").read_text(encoding="utf-8")
+    assert "| manufacturer | records | entities | with EAN | confirmed |" in report
+    assert "| games-workshop | 2 | 1 | 1 | 1 |" in report  # 1 legacy + 1 seed obs -> 1 entity
 
 
 def test_violation_exits_3(tmp_path: Path, capsys, monkeypatch) -> None:
@@ -1034,6 +1042,14 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         1 for source in evidence.values() for obs in source.values()
         if obs.ean and canonical_ean(obs.ean) is None
     )
+
+    # Count observations (records) by manufacturer
+    records_by_manufacturer: dict[str, int] = {}
+    for source in evidence.values():
+        for obs in source.values():
+            if obs.manufacturer:
+                records_by_manufacturer[obs.manufacturer] = records_by_manufacturer.get(obs.manufacturer, 0) + 1
+
     lines = [
         "# Migration report", "",
         f"- observations: {total} (legacy {summary.legacy_count}, seed {summary.seed_count})",
@@ -1043,13 +1059,14 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         f"- key collisions: {len(summary.key_collisions)}",
         f"- conflicts: {len(conflicts)}",
         f"- violations: {len(violations)}", "",
-        "| manufacturer | entities | with EAN | confirmed |", "|---|---|---|---|",
+        "| manufacturer | records | entities | with EAN | confirmed |", "|---|---|---|---|---|",
     ]
     for manufacturer in sorted(catalog):
         records = catalog[manufacturer]
         with_ean = [p for p in records if p.ean]
         confirmed = [p for p in with_ean if p.eanConfidence == "confirmed"]
-        lines.append(f"| {manufacturer} | {len(records)} | {len(with_ean)} | {len(confirmed)} |")
+        record_count = records_by_manufacturer.get(manufacturer, 0)
+        lines.append(f"| {manufacturer} | {record_count} | {len(records)} | {len(with_ean)} | {len(confirmed)} |")
     if violations:
         lines += ["", "## Violations", *[f"- {v}" for v in violations]]
     return violations, "\n".join(lines) + "\n"

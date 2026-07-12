@@ -52,6 +52,14 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         1 for source in evidence.values() for obs in source.values()
         if obs.ean and canonical_ean(obs.ean) is None
     )
+
+    # Count observations (records) by manufacturer
+    records_by_manufacturer: dict[str, int] = {}
+    for source in evidence.values():
+        for obs in source.values():
+            if obs.manufacturer:
+                records_by_manufacturer[obs.manufacturer] = records_by_manufacturer.get(obs.manufacturer, 0) + 1
+
     lines = [
         "# Migration report", "",
         f"- observations: {total} (legacy {summary.legacy_count}, seed {summary.seed_count})",
@@ -61,13 +69,14 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         f"- key collisions: {len(summary.key_collisions)}",
         f"- conflicts: {len(conflicts)}",
         f"- violations: {len(violations)}", "",
-        "| manufacturer | entities | with EAN | confirmed |", "|---|---|---|---|",
+        "| manufacturer | records | entities | with EAN | confirmed |", "|---|---|---|---|---|",
     ]
     for manufacturer in sorted(catalog):
         records = catalog[manufacturer]
         with_ean = [p for p in records if p.ean]
         confirmed = [p for p in with_ean if p.eanConfidence == "confirmed"]
-        lines.append(f"| {manufacturer} | {len(records)} | {len(with_ean)} | {len(confirmed)} |")
+        record_count = records_by_manufacturer.get(manufacturer, 0)
+        lines.append(f"| {manufacturer} | {record_count} | {len(records)} | {len(with_ean)} | {len(confirmed)} |")
     if violations:
         lines += ["", "## Violations", *[f"- {v}" for v in violations]]
     return violations, "\n".join(lines) + "\n"
