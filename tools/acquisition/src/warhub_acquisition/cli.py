@@ -14,6 +14,10 @@ def main(argv: list[str] | None = None) -> int:
     for name in ("resolve", "report"):
         sub = subparsers.add_parser(name)
         sub.add_argument("--data", type=Path, default=Path("data"))
+    migrate = subparsers.add_parser("migrate")
+    migrate.add_argument("--data", type=Path, default=Path("data"))
+    migrate.add_argument("--legacy-dir", type=Path, default=Path("data/products/manufacturers"))
+    migrate.add_argument("--seed-dir", type=Path, default=Path("data/products/seed"))
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
     if not paths.root.is_dir():
@@ -26,6 +30,16 @@ def main(argv: list[str] | None = None) -> int:
         conflicts = read_yaml(paths.conflicts)["conflicts"]
         print(f"resolved {total} products across {len(catalog)} manufacturers; {len(conflicts)} conflicts")
         return 2 if conflicts else 0
+
+    if args.command == "migrate":
+        from warhub_acquisition.migrate.runner import run_migration
+
+        summary = run_migration(paths, args.legacy_dir, args.seed_dir)
+        print(
+            f"migrated {summary.legacy_count} legacy + {summary.seed_count} seed observations; "
+            f"{len(summary.key_collisions)} key collisions; {len(summary.invalid_records)} invalid records"
+        )
+        return 0
 
     print(build_report(paths), end="")
     return 0
