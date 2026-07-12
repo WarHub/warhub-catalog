@@ -1,0 +1,12 @@
+conflicts:
+  - type: ean-mismatch
+    entity: games-workshop/99120110053
+    chosen: '5011921139170'
+    assertions:
+      - ean: '5011921138609'
+        sources:
+          - legacy-catalog
+      - ean: '5011921139170'
+        sources:
+          - legacy-catalog
+          - seed-curated
