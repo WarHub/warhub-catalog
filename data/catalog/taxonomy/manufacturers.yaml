@@ -1,0 +1,40 @@
+manufacturers:
+  - slug: games-workshop
+    name: Games Workshop
+    codePattern: '\d{11}'
+    codeStrip: [GWS, GW-]
+    gs1Prefixes: ['5011921']
+    vendorNames: [Games Workshop, Citadel, Forge World]
+  - slug: atomic-mass-games
+    name: Atomic Mass Games
+    codePattern: '(SWL|SWP|SWM|CP|AMG)[A-Z]?\d+[A-Z]*'
+    vendorNames: [Atomic Mass Games, Asmodee]
+  - slug: cmon
+    name: CMON
+    codePattern: 'CMN[A-Z0-9]+'
+    vendorNames: [CMON, Cool Mini or Not]
+  - slug: corvus-belli
+    name: Corvus Belli
+    codePattern: '\d{6}'
+    codeStrip: [COR]
+    vendorNames: [Corvus Belli]
+  - slug: mantic-games
+    name: Mantic Games
+    codePattern: '[A-Z]{2,10}\d{2,6}[A-Z]*'
+    vendorNames: [Mantic Games, Mantic]
+  - slug: para-bellum
+    name: Para Bellum
+    codePattern: 'PB[A-Z]?\w+'
+    vendorNames: [Para Bellum, Para Bellum Wargames]
+  - slug: steamforged-games
+    name: Steamforged Games
+    codePattern: 'SF[A-Z0-9-]+'
+    vendorNames: [Steamforged Games, Steamforged]
+  - slug: warlord-games
+    name: Warlord Games
+    codePattern: '[0-9]{9,12}|[A-Z0-9-]{6,}'
+    vendorNames: [Warlord Games]
+  - slug: wyrd-games
+    name: Wyrd Games
+    codePattern: 'WYR\d+[A-Z ]*'
+    vendorNames: [Wyrd Games, Wyrd Miniatures]
