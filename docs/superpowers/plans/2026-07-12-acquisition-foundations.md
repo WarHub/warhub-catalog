@@ -980,7 +980,7 @@ git commit -m "feat(acquisition): entity identity derivation (code-first, slug f
   - `Matches` (pydantic): `joins: dict[str, str] = {}` (observation key → entity id), `aliases: dict[str, str] = {}` (old entity id → surviving entity id). Loaded from `matches.yaml` by the resolver (Task 10).
   - `JoinResult` (dataclass): `entities: dict[str, list[Observation]]` (entity id → observations, both deterministically sorted), `ambiguous: list[dict]` (conflict payloads for review).
   - `join_observations(observations: list[Observation], taxonomy: Taxonomy, kinds: dict[str, str], matches: Matches) -> JoinResult` where `kinds` maps source id → descriptor kind.
-  - Join rules, strongest first: shared `(manufacturer, normalized code)` → same entity; shared validated EAN → same entity; `matches.joins` forces an observation into a named entity. Name-only observations (no code, no valid EAN) attach to an existing same-manufacturer entity when exactly one has the same name slug; if several match, the observation forms its own slug entity and an `ambiguous-join` payload is emitted. Observations without a manufacturer are skipped with an `unattributed` payload.
+  - Join rules, strongest first: shared `(manufacturer, normalized code)` → same entity; shared validated EAN → same entity; `matches.joins` forces an observation into a named entity. Name-only observations (no code, no valid EAN) attach to an existing same-manufacturer entity when exactly one has the same name slug; if several match, the observation forms its own slug entity and an `ambiguous-join` payload is emitted. Observations without a manufacturer are skipped with an `unattributed` payload. Observations with no code/EAN/forced-join and an empty name slug are excluded and reported as `degenerate-name` payloads.
   - Entity id: from the group's best code — priority (KIND_PRIORITY of source kind, source id, code), i.e. manufacturer-kind sources win; else the best name slug by the same priority. `matches.aliases` remaps any resulting id.
 
 - [ ] **Step 1: Write the failing tests**
@@ -1083,6 +1083,15 @@ def test_deterministic_ordering() -> None:
         "games-workshop/99120110077",
         "games-workshop/99120110078",
     ]
+
+
+def test_degenerate_name_is_excluded_and_reported() -> None:
+    result = join_observations(
+        [obs("mfr-gw:a", sku="99120110077"), obs("ret-goblin:x", sku=None, name="!!!")],
+        TAXONOMY, KINDS, Matches(),
+    )
+    assert list(result.entities) == ["games-workshop/99120110077"]
+    assert {"type": "degenerate-name", "key": "ret-goblin:x", "name": "!!!"} in result.ambiguous
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -1147,21 +1156,34 @@ def join_observations(
 ) -> JoinResult:
     result = JoinResult()
     ordered = sorted(observations, key=lambda o: _priority(o, kinds))
-    attributed = []
+
+    # classify: unattributed (no manufacturer), degenerate (no code/EAN/forced-join and empty
+    # name slug -- would otherwise form a bogus "manufacturer/" entity), else attributed.
+    attributed: list[Observation] = []
+    codes: dict[str, str | None] = {}
+    eans: dict[str, str | None] = {}
     for observation in ordered:
-        if observation.manufacturer:
-            attributed.append(observation)
-        else:
+        if not observation.manufacturer:
             result.ambiguous.append({"type": "unattributed", "key": observation.key, "name": observation.name})
+            continue
+        code = taxonomy.normalize_code(observation.manufacturer, observation.sku)
+        ean = canonical_ean(observation.ean)
+        forced = matches.joins.get(observation.key)
+        if code is None and ean is None and not forced and slugify(observation.name) == "":
+            result.ambiguous.append(
+                {"type": "degenerate-name", "key": observation.key, "name": observation.name}
+            )
+            continue
+        codes[observation.key] = code
+        eans[observation.key] = ean
+        attributed.append(observation)
 
     uf = _UnionFind()
     code_index: dict[tuple[str, str], str] = {}
     ean_index: dict[str, str] = {}
-    codes: dict[str, str | None] = {}
     for observation in attributed:
-        code = taxonomy.normalize_code(observation.manufacturer, observation.sku)
-        codes[observation.key] = code
-        ean = canonical_ean(observation.ean)
+        code = codes[observation.key]
+        ean = eans[observation.key]
         if code is not None:
             anchor = code_index.setdefault((observation.manufacturer, code), observation.key)
             uf.union(anchor, observation.key)
@@ -1215,7 +1237,7 @@ def join_observations(
                 slug_index.setdefault((members[0].manufacturer, slug), []).append(root)
 
     for root, members in sorted(groups.items()):
-        if any(codes[m.key] is not None or canonical_ean(m.ean) for m in members):
+        if any(codes[m.key] is not None or eans[m.key] is not None for m in members):
             continue
         if any(matches.joins.get(m.key) for m in members):
             continue
