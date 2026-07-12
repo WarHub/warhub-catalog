@@ -50,6 +50,7 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
             try:
                 # Read all fallible fields and build candidate dict
                 name = record["name"]
+                slug = slugify(name)
                 hints: dict[str, object] = {
                     "gameSystem": data["gameSystemSlug"],
                     "faction": data["factionSlug"],
@@ -88,7 +89,7 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
                 )
                 continue
             # Bookkeeping only after successful record parsing
-            base_key = f"{prefix}/{slugify(name)}"
+            base_key = f"{prefix}/{slug}"
             key = base_key
             suffix = 2
             while key in seen_keys:

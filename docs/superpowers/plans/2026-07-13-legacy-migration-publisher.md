@@ -325,6 +325,18 @@ def test_non_numeric_price_is_invalid_not_fatal(tmp_path: Path) -> None:
     assert len(extraction.invalid_records) == 1
 
 
+def test_non_string_name_is_invalid_not_fatal(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+    }
+    extraction = read_legacy_products(
+        make_faction_file(tmp_path, products=[{**base, "name": 40000}])
+    )
+    assert extraction.observations == []
+    assert len(extraction.invalid_records) == 1
+
+
 def test_conflicting_label_raises(tmp_path: Path) -> None:
     import pytest
 
@@ -407,6 +419,7 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
             try:
                 # Read all fallible fields and build candidate dict
                 name = record["name"]
+                slug = slugify(name)
                 hints: dict[str, object] = {
                     "gameSystem": data["gameSystemSlug"],
                     "faction": data["factionSlug"],
@@ -445,7 +458,7 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
                 )
                 continue
             # Bookkeeping only after successful record parsing
-            base_key = f"{prefix}/{slugify(name)}"
+            base_key = f"{prefix}/{slug}"
             key = base_key
             suffix = 2
             while key in seen_keys:
