@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Warnings fail the build, locally and in CI alike. Obsolete APIs and nullability
+         holes surfaced by a dependency bump have to be fixed, not merged past. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>
