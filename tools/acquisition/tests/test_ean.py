@@ -11,9 +11,11 @@ from warhub_acquisition.ean import canonical_ean, is_valid_ean, normalize_ean
         (" 5011921 194285 ", "5011921194285"),
         ("501-1921-194285", "5011921194285"),
         ("0", None),
+        ("0000000000000", None),               # all-zero rejection test
         ("", None),
         (None, None),
         ("not-a-code", None),
+        ("501192119428²", None),               # non-decimal digit regression test
         ("12345", None),                       # too short
         ("50119211942850000", None),           # too long
     ],

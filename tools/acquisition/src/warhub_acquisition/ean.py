@@ -4,7 +4,7 @@
 def normalize_ean(raw: str | None) -> str | None:
     if not raw:
         return None
-    digits = "".join(ch for ch in raw if ch.isdigit())
+    digits = "".join(ch for ch in raw if ch.isdecimal())
     if digits != "".join(ch for ch in raw if ch not in " -"):
         return None  # contained non-digit junk beyond separators
     if len(digits) == 12:
