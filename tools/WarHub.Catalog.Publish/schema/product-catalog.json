@@ -22,6 +22,7 @@
       "required": ["name", "quantity"],
       "properties": {
         "ean": { "type": "string" },
+        "eanConfidence": { "type": "string", "enum": ["confirmed", "provisional", "conflicted"] },
         "name": { "type": "string" },
         "gameSystem": { "type": "string" },
         "faction": { "type": "string" },

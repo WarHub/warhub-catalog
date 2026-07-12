@@ -1,42 +1,60 @@
-using WarHub.ProductCatalog.Tool.Models;
-
 namespace WarHub.Catalog.Publish;
 
 /// <summary>
-/// Turns the per-faction product YAML into the consolidated + per-game-system JSON
-/// documents. Every product is included; <c>ean</c> is optional.
+/// Turns the canonical per-manufacturer product YAML into the consolidated +
+/// per-game-system JSON documents. Every product is included; <c>ean</c> is optional.
 /// </summary>
 internal static class ProductBuilder
 {
     private sealed record PartitionData(string Label, List<ProductRecord> Products);
 
-    public static int Build(IEnumerable<FactionCatalog> factions, Provenance prov, CatalogWriter writer)
+    public static int Build(
+        IEnumerable<CanonicalProductCatalog> catalogs,
+        TaxonomyLabels labels,
+        Provenance prov,
+        CatalogWriter writer)
     {
         var partitions = new Dictionary<string, PartitionData>(StringComparer.Ordinal);
-
-        foreach (FactionCatalog faction in factions)
+        foreach (var catalog in catalogs)
         {
-            string key = Slug.Make(faction.GameSystemSlug is { Length: > 0 } gss ? gss : faction.GameSystem);
-            if (!partitions.TryGetValue(key, out PartitionData? data))
+            foreach (var p in catalog.Products)
             {
-                data = new PartitionData(faction.GameSystem, []);
-                partitions[key] = data;
-            }
-
-            foreach (Product p in faction.Products)
-            {
-                data.Products.Add(new ProductRecord(
-                    Ean: string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
-                    Name: p.Name,
-                    GameSystem: faction.GameSystem,
-                    Faction: faction.Faction,
-                    Category: p.Category,
-                    Status: p.Status,
-                    Availability: p.Availability,
-                    Quantity: 1,
-                    ProductCode: p.ProductCode ?? p.Sku,
-                    Url: p.Url,
-                    ImageUrl: p.ImageUrl));
+                if (string.IsNullOrEmpty(p.GameSystem))
+                {
+                    throw new InvalidOperationException($"product {p.Id} has no gameSystem");
+                }
+                string key = Slug.Make(p.GameSystem);
+                if (!labels.GameSystems.TryGetValue(key, out string? label))
+                {
+                    throw new InvalidOperationException($"no label for game system slug '{key}' (product {p.Id})");
+                }
+                string? factionLabel = null;
+                if (!string.IsNullOrEmpty(p.Faction))
+                {
+                    if (!labels.Factions.TryGetValue(p.Faction, out factionLabel))
+                    {
+                        throw new InvalidOperationException($"no label for faction slug '{p.Faction}' (product {p.Id})");
+                    }
+                }
+                if (!partitions.TryGetValue(key, out var data))
+                {
+                    partitions[key] = data = new PartitionData(label, []);
+                }
+                data.Products.Add(new ProductRecord
+                {
+                    Ean = string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
+                    EanConfidence = p.EanConfidence,
+                    Name = p.Name,
+                    GameSystem = label,
+                    Faction = factionLabel,
+                    Category = p.Category ?? "miniatures",
+                    Status = p.Status,
+                    Availability = p.Availability ?? "unknown",
+                    Quantity = p.Quantity ?? 1,
+                    ProductCode = p.ProductCode ?? p.Sku,
+                    Url = p.Url,
+                    ImageUrl = p.ImageUrl,
+                });
             }
         }
 

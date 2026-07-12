@@ -1,10 +1,10 @@
 using System.CommandLine;
 using WarHub.Catalog.Publish;
 
-Option<DirectoryInfo> productsDirOption = new("--products-dir")
+Option<DirectoryInfo> catalogDirOption = new("--catalog-dir")
 {
-    Description = "Source product data directory (contains manufacturers/**/*.yaml)",
-    DefaultValueFactory = _ => new DirectoryInfo(Path.Combine("data", "products")),
+    Description = "Source canonical catalog directory (contains products/*.yaml, taxonomy/*.yaml)",
+    DefaultValueFactory = _ => new DirectoryInfo(Path.Combine("data", "catalog")),
 };
 Option<DirectoryInfo> paintsDirOption = new("--paints-dir")
 {
@@ -34,13 +34,13 @@ Option<string?> pageBaseUrlOption = new("--page-base-url") { Description = "Page
 
 RootCommand root = new("WarHub Catalog Publisher — bundles source YAML into the versioned JSON catalog")
 {
-    productsDirOption, paintsDirOption, outOption, versionOption, gitCommitOption,
+    catalogDirOption, paintsDirOption, outOption, versionOption, gitCommitOption,
     generatedAtOption, repoOption, releaseTagOption, releaseUrlOption, pageBaseUrlOption,
 };
 
 root.SetAction(parseResult =>
 {
-    string productsDir = parseResult.GetValue(productsDirOption)!.FullName;
+    string catalogDir = parseResult.GetValue(catalogDirOption)!.FullName;
     string paintsDir = parseResult.GetValue(paintsDirOption)!.FullName;
     string outDir = parseResult.GetValue(outOption)!.FullName;
     string version = parseResult.GetValue(versionOption)!;
@@ -67,7 +67,7 @@ root.SetAction(parseResult =>
     };
 
     string schemaDir = Path.Combine(AppContext.BaseDirectory, "schema");
-    PublishResult result = Publisher.Run(new PublishOptions(productsDir, paintsDir, outDir, schemaDir, prov));
+    PublishResult result = Publisher.Run(new PublishOptions(catalogDir, paintsDir, outDir, schemaDir, prov));
 
     Console.WriteLine($"Published catalog {version}: {result.Products} products, {result.Paints} paints, "
         + $"{result.Files} files → {outDir}");

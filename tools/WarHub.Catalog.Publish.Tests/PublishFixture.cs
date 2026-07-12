@@ -16,32 +16,47 @@ public sealed class PublishFixture : IDisposable
     {
         Root = Path.Combine(Path.GetTempPath(), "warhub-catalog-tests", Guid.NewGuid().ToString("N"));
         Dist = Path.Combine(Root, "dist");
-        string products = Path.Combine(Root, "data", "products");
+        string catalog = Path.Combine(Root, "data", "catalog");
         string paints = Path.Combine(Root, "data", "paints");
 
-        WriteFile(Path.Combine(products, "manufacturers", "test-mfg", "test-system", "general.yaml"), """
-            manufacturer: Test Manufacturer
-            manufacturerSlug: test-mfg
-            gameSystem: Test System
-            gameSystemSlug: test-system
-            faction: General
-            factionSlug: general
+        WriteFile(Path.Combine(catalog, "products", "test-mfg.yaml"), """
+            manufacturer: test-mfg
             products:
-            - name: Alpha Box
-              category: miniatures
-              packaging: single
-              status: current
-              availability: in_stock
-              firstSeen: '2026-07-07'
-              ean: '5011921142361'
-              productCode: PRODA
-            - name: Beta Box
-              category: miniatures
-              packaging: box
-              status: discontinued
-              availability: out_of_stock
-              firstSeen: '2026-07-07'
-              sku: SKUB
+              - id: test-mfg/alpha
+                name: Alpha Box
+                manufacturer: test-mfg
+                productCode: PRODA
+                ean: '5011921142361'
+                eanConfidence: provisional
+                gameSystem: test-system
+                faction: general
+                category: miniatures
+                quantity: 2
+                status: current
+                availability: in_stock
+                firstSeen: '2026-07-07'
+              - id: test-mfg/beta
+                name: Beta Box
+                manufacturer: test-mfg
+                sku: SKUB
+                gameSystem: test-system
+                faction: general
+                category: miniatures
+                status: discontinued
+                availability: out_of_stock
+                firstSeen: '2026-07-07'
+            """);
+
+        WriteFile(Path.Combine(catalog, "taxonomy", "game-systems.yaml"), """
+            gameSystems:
+              - slug: test-system
+                label: Test System
+            """);
+
+        WriteFile(Path.Combine(catalog, "taxonomy", "factions.yaml"), """
+            factions:
+              - slug: general
+                label: General
             """);
 
         WriteFile(Path.Combine(paints, "brands", "citadel.yaml"), """
@@ -140,7 +155,7 @@ public sealed class PublishFixture : IDisposable
         };
 
         string schemaDir = Path.Combine(AppContext.BaseDirectory, "schema");
-        Result = Publisher.Run(new PublishOptions(products, paints, Dist, schemaDir, prov));
+        Result = Publisher.Run(new PublishOptions(catalog, paints, Dist, schemaDir, prov));
     }
 
     public string ReadDist(string relPath) => File.ReadAllText(Path.Combine(Dist, relPath.Replace('/', Path.DirectorySeparatorChar)));

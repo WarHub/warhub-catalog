@@ -25,18 +25,21 @@ internal sealed record ReleaseRef(string Tag, string Url);
 internal sealed record SourceRef(string Repo, ReleaseRef? Release = null, string? PageUrl = null);
 
 /// <summary>A retail product. <c>ean</c> is optional — not every product carries a barcode.</summary>
-internal sealed record ProductRecord(
-    [property: JsonPropertyOrder(1)] string? Ean,
-    [property: JsonPropertyOrder(2)] string Name,
-    [property: JsonPropertyOrder(3)] string? GameSystem,
-    [property: JsonPropertyOrder(4)] string? Faction,
-    [property: JsonPropertyOrder(5)] string Category,
-    [property: JsonPropertyOrder(6)] string Status,
-    [property: JsonPropertyOrder(7)] string Availability,
-    [property: JsonPropertyOrder(8)] int Quantity,
-    [property: JsonPropertyOrder(9)] string? ProductCode,
-    [property: JsonPropertyOrder(10)] string? Url,
-    [property: JsonPropertyOrder(11)] string? ImageUrl);
+internal sealed record ProductRecord
+{
+    [JsonPropertyOrder(1)] public string? Ean { get; init; }
+    [JsonPropertyOrder(2)] public required string Name { get; init; }
+    [JsonPropertyOrder(3)] public string? GameSystem { get; init; }
+    [JsonPropertyOrder(4)] public string? Faction { get; init; }
+    [JsonPropertyOrder(5)] public required string Category { get; init; }
+    [JsonPropertyOrder(6)] public required string Status { get; init; }
+    [JsonPropertyOrder(7)] public required string Availability { get; init; }
+    [JsonPropertyOrder(8)] public int Quantity { get; init; }
+    [JsonPropertyOrder(9)] public string? ProductCode { get; init; }
+    [JsonPropertyOrder(10)] public string? Url { get; init; }
+    [JsonPropertyOrder(11)] public string? ImageUrl { get; init; }
+    [JsonPropertyOrder(12)] public string? EanConfidence { get; init; }
+}
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>
 internal sealed record PaintEquivalent(

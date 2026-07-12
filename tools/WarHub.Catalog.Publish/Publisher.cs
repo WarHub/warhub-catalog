@@ -3,7 +3,7 @@ using System.Text.Json;
 namespace WarHub.Catalog.Publish;
 
 internal sealed record PublishOptions(
-    string ProductsDir, string PaintsDir, string OutDir, string SchemaDir, Provenance Prov);
+    string CatalogDir, string PaintsDir, string OutDir, string SchemaDir, Provenance Prov);
 
 internal sealed record PublishResult(int Products, int Paints, int Files);
 
@@ -25,7 +25,8 @@ internal static class Publisher
 
         var writer = new CatalogWriter(o.OutDir, validator);
 
-        int products = ProductBuilder.Build(YamlSource.LoadFactions(o.ProductsDir), o.Prov, writer);
+        int products = ProductBuilder.Build(
+            YamlSource.LoadCanonicalCatalogs(o.CatalogDir), YamlSource.LoadTaxonomyLabels(o.CatalogDir), o.Prov, writer);
         int paints = PaintBuilder.Build(
             [.. YamlSource.LoadBrands(o.PaintsDir)], YamlSource.LoadEquivalences(o.PaintsDir), o.Prov, writer);
 

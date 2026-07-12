@@ -18,12 +18,6 @@
     <PackageReference Include="YamlDotNet" />
   </ItemGroup>
 
-  <!-- Reuse the product tool's YAML model records for reading product data. Paints are
-       read via this project's own local DTOs (PaintSource.cs), so no paint-tool reference. -->
-  <ItemGroup>
-    <ProjectReference Include="..\WarHub.ProductCatalog.Tool\WarHub.ProductCatalog.Tool.csproj" />
-  </ItemGroup>
-
   <!-- Published JSON Schemas: authored here, copied into dist/schema, and used to validate output. -->
   <ItemGroup>
     <Content Include="schema\*.json">
