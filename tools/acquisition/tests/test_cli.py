@@ -20,4 +20,12 @@ def test_report_command(tmp_path: Path, capsys) -> None:
     out = capsys.readouterr().out
     assert exit_code == 0
     assert "| games-workshop | 1 | 1 | 100.0% | 0.0% |" in out
-    assert "mfr-gw: 1" in out
+    assert "- mfr-gw: 1 observations" in out
+
+
+def test_missing_data_dir_is_loud(tmp_path: Path, capsys) -> None:
+    missing = tmp_path / "nope"
+    assert main(["report", "--data", str(missing)]) == 1
+    assert main(["resolve", "--data", str(missing)]) == 1
+    err = capsys.readouterr().err
+    assert "data directory not found" in err

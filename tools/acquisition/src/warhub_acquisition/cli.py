@@ -1,5 +1,6 @@
 """warhub-data CLI: resolve and report (acquire/migrate arrive in later plans)."""
 import argparse
+import sys
 from pathlib import Path
 
 from warhub_acquisition.report import build_report
@@ -15,6 +16,9 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("--data", type=Path, default=Path("data"))
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
+    if not paths.root.is_dir():
+        print(f"error: data directory not found: {paths.root}", file=sys.stderr)
+        return 1
 
     if args.command == "resolve":
         catalog = resolve_catalog(paths)

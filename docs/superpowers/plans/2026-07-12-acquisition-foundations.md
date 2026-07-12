@@ -2074,6 +2074,7 @@ git commit -m "feat(acquisition): pure resolver with golden end-to-end test"
 - Produces:
   - `warhub-data resolve --data <dir>` — runs `resolve_catalog`, prints `resolved N products across M manufacturers; K conflicts`, exit 0 (exit 2 when conflicts exist — loud but distinguishable from crash).
   - `warhub-data report --data <dir>` — prints a markdown coverage report: per manufacturer `products / with EAN / % / confirmed %`, plus per-source observation counts; pure read, exit 0.
+  - Both verbs exit 1 with a stderr message when --data does not exist (a typo'd path must not look like zero coverage).
   - `build_report(paths: DataPaths) -> str` in `report.py` (reused by Plan 3's PR-body generation).
   - `main(argv: list[str] | None = None) -> int` argparse entry point wired to the `warhub-data` console script.
 
@@ -2103,7 +2104,15 @@ def test_report_command(tmp_path: Path, capsys) -> None:
     out = capsys.readouterr().out
     assert exit_code == 0
     assert "| games-workshop | 1 | 1 | 100.0% | 0.0% |" in out
-    assert "mfr-gw: 1" in out
+    assert "- mfr-gw: 1 observations" in out
+
+
+def test_missing_data_dir_is_loud(tmp_path: Path, capsys) -> None:
+    missing = tmp_path / "nope"
+    assert main(["report", "--data", str(missing)]) == 1
+    assert main(["resolve", "--data", str(missing)]) == 1
+    err = capsys.readouterr().err
+    assert "data directory not found" in err
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -2143,6 +2152,7 @@ def build_report(paths: DataPaths) -> str:
 # tools/acquisition/src/warhub_acquisition/cli.py
 """warhub-data CLI: resolve and report (acquire/migrate arrive in later plans)."""
 import argparse
+import sys
 from pathlib import Path
 
 from warhub_acquisition.report import build_report
@@ -2158,6 +2168,9 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("--data", type=Path, default=Path("data"))
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
+    if not paths.root.is_dir():
+        print(f"error: data directory not found: {paths.root}", file=sys.stderr)
+        return 1
 
     if args.command == "resolve":
         catalog = resolve_catalog(paths)
