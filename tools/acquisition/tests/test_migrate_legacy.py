@@ -132,13 +132,24 @@ def test_non_numeric_price_is_invalid_not_fatal(tmp_path: Path) -> None:
     assert len(extraction.invalid_records) == 1
 
 
-def test_non_string_name_is_invalid_not_fatal(tmp_path: Path) -> None:
+def test_bare_numeric_name_is_accepted_verbatim(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+    }
+    extraction = read_legacy_products(make_faction_file(tmp_path, products=[{**base, "name": 40000}]))
+    [observation] = extraction.observations
+    assert observation.name == "40000"
+    assert extraction.invalid_records == []
+
+
+def test_non_scalar_name_is_invalid_not_fatal(tmp_path: Path) -> None:
     base = {
         "category": "miniatures", "packaging": "single", "status": "current",
         "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
     }
     extraction = read_legacy_products(
-        make_faction_file(tmp_path, products=[{**base, "name": 40000}])
+        make_faction_file(tmp_path, products=[{**base, "name": ["not", "a", "name"]}])
     )
     assert extraction.observations == []
     assert len(extraction.invalid_records) == 1
@@ -159,6 +170,38 @@ def test_conflicting_label_raises(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="warhammer-40k"):
         read_legacy_products(tmp_path)
+
+
+def test_underscore_sku_preserved_verbatim(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "url": "https://x",
+    }
+    directory = tmp_path / "wyrd-games" / "malifaux"
+    directory.mkdir(parents=True)
+    (directory / "general.yaml").write_text(
+        "manufacturer: Wyrd Games\nmanufacturerSlug: wyrd-games\n"
+        "gameSystem: Malifaux\ngameSystemSlug: malifaux\n"
+        "faction: General\nfactionSlug: general\n"
+        "products:\n"
+        "  - name: Some Box\n"
+        "    category: miniatures\n    packaging: single\n    status: current\n"
+        "    availability: in_stock\n    firstSeen: '2026-07-07'\n"
+        "    sku: 3991439_10187\n"
+        "    priceUsd: 45\n"
+        "    url: https://x\n",
+        encoding="utf-8", newline="\n",
+    )
+    extraction = read_legacy_products(tmp_path)
+    [observation] = extraction.observations
+    assert observation.sku == "3991439_10187"   # verbatim, not int-mangled
+    assert observation.priceUsd == 45.0          # prices still coerce
+
+
+def test_unquoted_numeric_price_still_floats(tmp_path: Path) -> None:
+    extraction = read_legacy_products(make_faction_file(tmp_path))
+    [observation] = extraction.observations
+    assert observation.priceGbp == 29.0
 
 
 def test_tab_in_scalar_is_tolerated(tmp_path: Path) -> None:

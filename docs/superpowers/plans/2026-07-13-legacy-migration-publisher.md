@@ -184,7 +184,7 @@ git commit -m "feat(acquisition): carry raw sku on canonical products"
     - `firstSeen = lastSeen = record["firstSeen"]` (determinism: no wall clock).
     - `archived = False`; `extractor` as given.
     - `hints`: `gameSystem` = gameSystemSlug, `faction` = factionSlug, plus `category`, `packaging`, `status`, and — only when present — `description`, `eanSource`, `legacyProductCode` (from the record's `productCode`).
-  - Raw file text is tab-normalized before parsing — the legacy emitter leaked literal tabs into 3 scraped names.
+  - Raw file text is tab-normalized before parsing — the legacy emitter leaked literal tabs into 3 scraped names. Parsing uses a resolver-stripped loader so untagged int/float/timestamp scalars stay verbatim strings — the legacy emitter left sku values like 3991439_10187 unquoted, which YAML 1.1 would int-mangle.
   - Label maps are accumulated across headers; a label mapping to two different slugs raises `ValueError` naming the label and both slugs.
   - A record missing a required key (`name`, `firstSeen`, …) is recorded in `invalid_records` with file + index and skipped — the count feeds the verifier (expected: zero on real data). Bookkeeping (collision suffixes, seen keys) happens only after a record fully parses, so invalid records can never leave phantom collision entries.
 
@@ -326,16 +326,59 @@ def test_non_numeric_price_is_invalid_not_fatal(tmp_path: Path) -> None:
     assert len(extraction.invalid_records) == 1
 
 
-def test_non_string_name_is_invalid_not_fatal(tmp_path: Path) -> None:
+def test_bare_numeric_name_is_accepted_verbatim(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
+    }
+    extraction = read_legacy_products(make_faction_file(tmp_path, products=[{**base, "name": 40000}]))
+    [observation] = extraction.observations
+    assert observation.name == "40000"
+    assert extraction.invalid_records == []
+
+
+def test_non_scalar_name_is_invalid_not_fatal(tmp_path: Path) -> None:
     base = {
         "category": "miniatures", "packaging": "single", "status": "current",
         "availability": "in_stock", "firstSeen": "2026-07-07", "sku": "1", "url": "https://x",
     }
     extraction = read_legacy_products(
-        make_faction_file(tmp_path, products=[{**base, "name": 40000}])
+        make_faction_file(tmp_path, products=[{**base, "name": ["not", "a", "name"]}])
     )
     assert extraction.observations == []
     assert len(extraction.invalid_records) == 1
+
+
+def test_underscore_sku_preserved_verbatim(tmp_path: Path) -> None:
+    base = {
+        "category": "miniatures", "packaging": "single", "status": "current",
+        "availability": "in_stock", "firstSeen": "2026-07-07", "url": "https://x",
+    }
+    directory = tmp_path / "wyrd-games" / "malifaux"
+    directory.mkdir(parents=True)
+    (directory / "general.yaml").write_text(
+        "manufacturer: Wyrd Games\nmanufacturerSlug: wyrd-games\n"
+        "gameSystem: Malifaux\ngameSystemSlug: malifaux\n"
+        "faction: General\nfactionSlug: general\n"
+        "products:\n"
+        "  - name: Some Box\n"
+        "    category: miniatures\n    packaging: single\n    status: current\n"
+        "    availability: in_stock\n    firstSeen: '2026-07-07'\n"
+        "    sku: 3991439_10187\n"
+        "    priceUsd: 45\n"
+        "    url: https://x\n",
+        encoding="utf-8", newline="\n",
+    )
+    extraction = read_legacy_products(tmp_path)
+    [observation] = extraction.observations
+    assert observation.sku == "3991439_10187"   # verbatim, not int-mangled
+    assert observation.priceUsd == 45.0          # prices still coerce
+
+
+def test_unquoted_numeric_price_still_floats(tmp_path: Path) -> None:
+    extraction = read_legacy_products(make_faction_file(tmp_path))
+    [observation] = extraction.observations
+    assert observation.priceGbp == 29.0
 
 
 def test_conflicting_label_raises(tmp_path: Path) -> None:
@@ -408,6 +451,25 @@ _HINT_KEYS = ("category", "packaging", "status")
 _OPTIONAL_HINT_KEYS = ("description", "eanSource")
 
 
+class _LegacyLoader(yaml.SafeLoader):
+    """YAML 1.1 implicit typing mangles legacy scalars (e.g. unquoted sku
+    3991439_10187 -> int via digit-separator underscores); parse untagged
+    int/float/timestamp scalars as verbatim strings instead. Prices are
+    float-coerced explicitly by the record mapping."""
+
+
+_STRIPPED_TAGS = frozenset({
+    "tag:yaml.org,2002:int",
+    "tag:yaml.org,2002:float",
+    "tag:yaml.org,2002:timestamp",
+})
+
+_LegacyLoader.yaml_implicit_resolvers = {
+    key: [(tag, regexp) for tag, regexp in resolvers if tag not in _STRIPPED_TAGS]
+    for key, resolvers in yaml.SafeLoader.yaml_implicit_resolvers.items()
+}
+
+
 @dataclass
 class LegacyExtraction:
     observations: list[Observation] = field(default_factory=list)
@@ -435,9 +497,12 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
     seen_keys: set[str] = set()
     for path in sorted(manufacturers_dir.glob("*/*/*.yaml")):
         # the legacy .NET pipeline emitted literal tabs inside a handful of
-        # scraped name scalars; PyYAML rejects them, so normalize to spaces
-        # before parsing (migration-reader-only leniency)
-        data = yaml.safe_load(path.read_text(encoding="utf-8").replace("\t", " "))
+        # scraped name scalars (PyYAML rejects them) and unquoted skus like
+        # 3991439_10187 that YAML 1.1's int resolver would int-mangle; tabs
+        # are normalized to spaces and _LegacyLoader keeps untagged
+        # int/float/timestamp scalars as verbatim strings (migration-reader-
+        # only leniency)
+        data = yaml.load(path.read_text(encoding="utf-8").replace("\t", " "), Loader=_LegacyLoader)
         _register_label(
             extraction.game_system_labels, extraction.label_to_game_system,
             data["gameSystemSlug"], data["gameSystem"],

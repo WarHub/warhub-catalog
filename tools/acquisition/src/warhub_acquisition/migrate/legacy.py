@@ -11,6 +11,25 @@ _HINT_KEYS = ("category", "packaging", "status")
 _OPTIONAL_HINT_KEYS = ("description", "eanSource")
 
 
+class _LegacyLoader(yaml.SafeLoader):
+    """YAML 1.1 implicit typing mangles legacy scalars (e.g. unquoted sku
+    3991439_10187 -> int via digit-separator underscores); parse untagged
+    int/float/timestamp scalars as verbatim strings instead. Prices are
+    float-coerced explicitly by the record mapping."""
+
+
+_STRIPPED_TAGS = frozenset({
+    "tag:yaml.org,2002:int",
+    "tag:yaml.org,2002:float",
+    "tag:yaml.org,2002:timestamp",
+})
+
+_LegacyLoader.yaml_implicit_resolvers = {
+    key: [(tag, regexp) for tag, regexp in resolvers if tag not in _STRIPPED_TAGS]
+    for key, resolvers in yaml.SafeLoader.yaml_implicit_resolvers.items()
+}
+
+
 @dataclass
 class LegacyExtraction:
     observations: list[Observation] = field(default_factory=list)
@@ -38,9 +57,12 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
     seen_keys: set[str] = set()
     for path in sorted(manufacturers_dir.glob("*/*/*.yaml")):
         # the legacy .NET pipeline emitted literal tabs inside a handful of
-        # scraped name scalars; PyYAML rejects them, so normalize to spaces
-        # before parsing (migration-reader-only leniency)
-        data = yaml.safe_load(path.read_text(encoding="utf-8").replace("\t", " "))
+        # scraped name scalars (PyYAML rejects them) and unquoted skus like
+        # 3991439_10187 that YAML 1.1's int resolver would int-mangle; tabs
+        # are normalized to spaces and _LegacyLoader keeps untagged
+        # int/float/timestamp scalars as verbatim strings (migration-reader-
+        # only leniency)
+        data = yaml.load(path.read_text(encoding="utf-8").replace("\t", " "), Loader=_LegacyLoader)
         _register_label(
             extraction.game_system_labels, extraction.label_to_game_system,
             data["gameSystemSlug"], data["gameSystem"],
