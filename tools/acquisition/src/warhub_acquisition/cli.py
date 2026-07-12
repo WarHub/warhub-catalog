@@ -3,6 +3,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from warhub_acquisition.migrate.verify import verify_migration
 from warhub_acquisition.report import build_report
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
 from warhub_acquisition.yamlio import read_yaml
@@ -18,6 +19,7 @@ def main(argv: list[str] | None = None) -> int:
     migrate.add_argument("--data", type=Path, default=Path("data"))
     migrate.add_argument("--legacy-dir", type=Path, default=Path("data/products/manufacturers"))
     migrate.add_argument("--seed-dir", type=Path, default=Path("data/products/seed"))
+    migrate.add_argument("--report", type=Path, default=None)
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
     if not paths.root.is_dir():
@@ -39,6 +41,15 @@ def main(argv: list[str] | None = None) -> int:
             f"migrated {summary.legacy_count} legacy + {summary.seed_count} seed observations; "
             f"{len(summary.key_collisions)} key collisions; {len(summary.invalid_records)} invalid records"
         )
+        violations, report = verify_migration(paths, summary)
+        report_path = args.report or (args.data / "review" / "migration-report.md")
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(report, encoding="utf-8", newline="\n")
+        if violations:
+            for violation in violations:
+                print(f"VIOLATION: {violation}")
+            return 3
+        print("verification: OK")
         return 0
 
     print(build_report(paths), end="")
