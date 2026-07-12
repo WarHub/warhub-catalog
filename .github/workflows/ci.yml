@@ -59,3 +59,15 @@ jobs:
           name: test-results
           path: test-results/
           retention-days: 7
+
+  python:
+    name: Python tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/acquisition
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - run: uv run pytest -v
