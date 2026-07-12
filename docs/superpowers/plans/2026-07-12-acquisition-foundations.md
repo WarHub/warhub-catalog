@@ -315,7 +315,9 @@ from pathlib import Path
 
 import yaml
 
-_ALL_DIGITS = re.compile(r"\d+")
+# anything a YAML 1.2 core-schema consumer could read as a number:
+# ints (incl. leading-zero), floats, scientific notation, hex, octal
+_NUMERIC_LIKE = re.compile(r"[-+]?(\.\d+|\d+(\.\d*)?)([eE][-+]?\d+)?|0[xX][0-9a-fA-F]+|0[oO][0-7]+")
 
 
 class _Dumper(yaml.SafeDumper):
@@ -327,10 +329,11 @@ class _Dumper(yaml.SafeDumper):
 def _represent_str(dumper: yaml.SafeDumper, value: str) -> yaml.ScalarNode:
     if "\n" in value:
         return dumper.represent_scalar("tag:yaml.org,2002:str", value, style="|")
-    if _ALL_DIGITS.fullmatch(value):
-        # PyYAML would leave e.g. "0812152031524" unquoted (it fails YAML 1.1
-        # int patterns), but YAML 1.2 consumers parse it as int and drop the
-        # leading zero -- force-quote every all-digit string
+    if _NUMERIC_LIKE.fullmatch(value):
+        # PyYAML's YAML 1.1 resolver misses several shapes a YAML 1.2
+        # consumer would read as numbers (leading-zero ints like
+        # "0812152031524", dotless scientific notation like "5e3") --
+        # force-quote everything number-shaped
         return dumper.represent_scalar("tag:yaml.org,2002:str", value, style="'")
     return dumper.represent_scalar("tag:yaml.org,2002:str", value)
 
@@ -362,7 +365,7 @@ def read_yaml(path: Path) -> object:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 ```
 
-Note: PyYAML's resolver-driven quoting is NOT sufficient on its own: an all-digit string with a leading zero and a digit 8/9 (e.g. `'0812152031524'`) fails PyYAML's YAML 1.1 int patterns, so PyYAML emits it unquoted — and a YAML 1.2 consumer would then read it as an integer, destroying the leading zero. Hence the explicit force-quote of every all-digit string in `_represent_str`; the tests in Step 1 pin this.
+Note: PyYAML's resolver-driven quoting is NOT sufficient on its own: an all-digit string with a leading zero and a digit 8/9 (e.g. `'0812152031524'`) fails PyYAML's YAML 1.1 int patterns, so PyYAML emits it unquoted — and a YAML 1.2 consumer would then read it as an integer, destroying the leading zero. Hence the explicit force-quote of every number-shaped string (ints incl. leading-zero, floats, scientific notation, hex, octal) in `_represent_str`; the tests in Step 1 pin this.
 
 - [ ] **Step 4: Run tests to verify they pass**
 

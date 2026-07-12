@@ -37,3 +37,13 @@ def test_long_urls_not_wrapped() -> None:
 def test_nested_lists_are_indented() -> None:
     text = dump_yaml({"products": [{"id": "a", "name": "X"}]})
     assert text == "products:\n  - id: a\n    name: X\n"
+
+
+def test_yaml12_numeric_like_strings_are_quoted() -> None:
+    text = dump_yaml({"a": "5e3", "b": "1E10", "c": "-3e-2", "d": "1.5e10", "e": "0x1A", "f": "0o17"})
+    assert "a: '5e3'" in text
+    assert "b: '1E10'" in text
+    assert "c: '-3e-2'" in text
+    assert "d: '1.5e10'" in text
+    assert "e: '0x1A'" in text
+    assert "f: '0o17'" in text
