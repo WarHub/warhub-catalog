@@ -1,0 +1,61 @@
+name: CI
+
+# Builds and tests the .NET tooling under tools/. Runs on every PR and main push that
+# touches source, so regressions (incl. dependency bumps) are caught before merge.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/**'
+      - 'Directory.Build.props'
+      - 'Directory.Packages.props'
+      - 'WarHub.Catalog.slnx'
+      - 'global.json'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    paths:
+      - 'tools/**'
+      - 'Directory.Build.props'
+      - 'Directory.Packages.props'
+      - 'WarHub.Catalog.slnx'
+      - 'global.json'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      # Warnings fail the build (TreatWarningsAsErrors in Directory.Build.props), so this
+      # is identical to what a local `dotnet build` does.
+      - name: Build
+        run: dotnet build -c Release --no-restore
+
+      - name: Test
+        run: dotnet test -c Release --no-build --logger trx --results-directory test-results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 7
