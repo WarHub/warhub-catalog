@@ -2,9 +2,10 @@
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import yaml
+
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.identity import slugify
-from warhub_acquisition.yamlio import read_yaml
 
 _HINT_KEYS = ("category", "packaging", "status")
 _OPTIONAL_HINT_KEYS = ("description", "eanSource")
@@ -36,7 +37,10 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
     extraction = LegacyExtraction()
     seen_keys: set[str] = set()
     for path in sorted(manufacturers_dir.glob("*/*/*.yaml")):
-        data = read_yaml(path)
+        # the legacy .NET pipeline emitted literal tabs inside a handful of
+        # scraped name scalars; PyYAML rejects them, so normalize to spaces
+        # before parsing (migration-reader-only leniency)
+        data = yaml.safe_load(path.read_text(encoding="utf-8").replace("\t", " "))
         _register_label(
             extraction.game_system_labels, extraction.label_to_game_system,
             data["gameSystemSlug"], data["gameSystem"],

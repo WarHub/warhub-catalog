@@ -174,7 +174,7 @@ git commit -m "feat(acquisition): carry raw sku on canonical products"
 - Test: `tools/acquisition/tests/test_migrate_legacy.py`
 
 **Interfaces:**
-- Consumes: `yamlio.read_yaml`, `Observation`, `resolve.identity.slugify`.
+- Consumes: `yaml.safe_load`, `Observation`, `resolve.identity.slugify`.
 - Produces:
   - `LegacyExtraction` (dataclass): `observations: list[Observation]` (sorted by key), `game_system_labels: dict[str, str]` (slug → label), `faction_labels: dict[str, str]` (slug → label), `label_to_game_system: dict[str, str]` (label → slug), `label_to_faction: dict[str, str]` (label → slug), `key_collisions: list[dict]`, `invalid_records: list[dict]`.
   - `read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catalog@1") -> LegacyExtraction`.
@@ -184,6 +184,7 @@ git commit -m "feat(acquisition): carry raw sku on canonical products"
     - `firstSeen = lastSeen = record["firstSeen"]` (determinism: no wall clock).
     - `archived = False`; `extractor` as given.
     - `hints`: `gameSystem` = gameSystemSlug, `faction` = factionSlug, plus `category`, `packaging`, `status`, and — only when present — `description`, `eanSource`, `legacyProductCode` (from the record's `productCode`).
+  - Raw file text is tab-normalized before parsing — the legacy emitter leaked literal tabs into 3 scraped names.
   - Label maps are accumulated across headers; a label mapping to two different slugs raises `ValueError` naming the label and both slugs.
   - A record missing a required key (`name`, `firstSeen`, …) is recorded in `invalid_records` with file + index and skipped — the count feeds the verifier (expected: zero on real data). Bookkeeping (collision suffixes, seen keys) happens only after a record fully parses, so invalid records can never leave phantom collision entries.
 
@@ -352,6 +353,33 @@ def test_conflicting_label_raises(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="warhammer-40k"):
         read_legacy_products(tmp_path)
+
+
+def test_tab_in_scalar_is_tolerated(tmp_path: Path) -> None:
+    directory = tmp_path / "mantic-games" / "deadzone"
+    directory.mkdir(parents=True)
+    (directory / "general.yaml").write_text(
+        "manufacturer: Mantic Games\n"
+        "manufacturerSlug: mantic-games\n"
+        "gameSystem: Deadzone\n"
+        "gameSystemSlug: deadzone\n"
+        "faction: General\n"
+        "factionSlug: general\n"
+        "products:\n"
+        "  - name: Enforcer Pathfinder\tMono Cycle\n"
+        "    category: miniatures\n"
+        "    packaging: single\n"
+        "    status: current\n"
+        "    availability: in_stock\n"
+        "    firstSeen: '2026-07-07'\n"
+        "    sku: MGDZM103\n"
+        "    url: https://example/pathfinder\n",
+        encoding="utf-8", newline="\n",
+    )
+    extraction = read_legacy_products(tmp_path)
+    [observation] = extraction.observations
+    assert observation.name == "Enforcer Pathfinder Mono Cycle"
+    assert extraction.invalid_records == []
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -371,9 +399,10 @@ Expected: FAIL with `ModuleNotFoundError`.
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import yaml
+
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.identity import slugify
-from warhub_acquisition.yamlio import read_yaml
 
 _HINT_KEYS = ("category", "packaging", "status")
 _OPTIONAL_HINT_KEYS = ("description", "eanSource")
@@ -405,7 +434,10 @@ def read_legacy_products(manufacturers_dir: Path, extractor: str = "legacy-catal
     extraction = LegacyExtraction()
     seen_keys: set[str] = set()
     for path in sorted(manufacturers_dir.glob("*/*/*.yaml")):
-        data = read_yaml(path)
+        # the legacy .NET pipeline emitted literal tabs inside a handful of
+        # scraped name scalars; PyYAML rejects them, so normalize to spaces
+        # before parsing (migration-reader-only leniency)
+        data = yaml.safe_load(path.read_text(encoding="utf-8").replace("\t", " "))
         _register_label(
             extraction.game_system_labels, extraction.label_to_game_system,
             data["gameSystemSlug"], data["gameSystem"],

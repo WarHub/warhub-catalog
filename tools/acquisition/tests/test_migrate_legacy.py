@@ -159,3 +159,30 @@ def test_conflicting_label_raises(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="warhammer-40k"):
         read_legacy_products(tmp_path)
+
+
+def test_tab_in_scalar_is_tolerated(tmp_path: Path) -> None:
+    directory = tmp_path / "mantic-games" / "deadzone"
+    directory.mkdir(parents=True)
+    (directory / "general.yaml").write_text(
+        "manufacturer: Mantic Games\n"
+        "manufacturerSlug: mantic-games\n"
+        "gameSystem: Deadzone\n"
+        "gameSystemSlug: deadzone\n"
+        "faction: General\n"
+        "factionSlug: general\n"
+        "products:\n"
+        "  - name: Enforcer Pathfinder\tMono Cycle\n"
+        "    category: miniatures\n"
+        "    packaging: single\n"
+        "    status: current\n"
+        "    availability: in_stock\n"
+        "    firstSeen: '2026-07-07'\n"
+        "    sku: MGDZM103\n"
+        "    url: https://example/pathfinder\n",
+        encoding="utf-8", newline="\n",
+    )
+    extraction = read_legacy_products(tmp_path)
+    [observation] = extraction.observations
+    assert observation.name == "Enforcer Pathfinder Mono Cycle"
+    assert extraction.invalid_records == []
