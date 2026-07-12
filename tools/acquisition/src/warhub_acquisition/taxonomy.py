@@ -49,3 +49,16 @@ class Taxonomy:
             code = code.removeprefix(prefix.upper())
         code = code.removesuffix("-EN")
         return code if re.fullmatch(spec.codePattern, code, flags=re.IGNORECASE) else None
+
+
+def load_labels(taxonomy_dir: Path) -> tuple[dict[str, str], dict[str, str]]:
+    def read_map(path: Path, key: str) -> dict[str, str]:
+        if not path.exists():
+            return {}
+        data = read_yaml(path)
+        return {entry["slug"]: entry["label"] for entry in data[key]}
+
+    return (
+        read_map(taxonomy_dir / "game-systems.yaml", "gameSystems"),
+        read_map(taxonomy_dir / "factions.yaml", "factions"),
+    )
