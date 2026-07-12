@@ -104,3 +104,56 @@ def test_degenerate_name_is_excluded_and_reported() -> None:
     )
     assert list(result.entities) == ["games-workshop/99120110077"]
     assert {"type": "degenerate-name", "key": "ret-goblin:x", "name": "!!!"} in result.ambiguous
+
+
+def test_same_slug_anchorless_groups_merge() -> None:
+    result = join_observations(
+        [obs("ret-goblin:x", sku=None), obs("ret-radaddel:y", sku=None)],
+        TAXONOMY, KINDS, Matches(),
+    )
+    assert list(result.entities) == ["games-workshop/combat-patrol-necrons"]
+    assert [m.key for m in result.entities["games-workshop/combat-patrol-necrons"]] == ["ret-goblin:x", "ret-radaddel:y"]
+    assert result.ambiguous == []
+
+
+def test_alias_merge_combines_observations() -> None:
+    matches = Matches(aliases={"games-workshop/99120110078": "games-workshop/99120110077"})
+    result = join_observations(
+        [obs("mfr-gw:a", sku="99120110077"), obs("mfr-gw:b", sku="99120110078", name="Other Name")],
+        TAXONOMY, KINDS, matches,
+    )
+    assert list(result.entities) == ["games-workshop/99120110077"]
+    assert sorted(m.key for m in result.entities["games-workshop/99120110077"]) == ["mfr-gw:a", "mfr-gw:b"]
+
+
+def test_unresolved_forced_join_reported_and_name_join_falls_back() -> None:
+    matches = Matches(joins={"ret-goblin:x": "games-workshop/nonexistent"})
+    result = join_observations(
+        [obs("mfr-gw:a", sku="99120110077"), obs("ret-goblin:x", sku=None)],
+        TAXONOMY, KINDS, matches,
+    )
+    assert list(result.entities) == ["games-workshop/99120110077"]  # name-join still works
+    assert {"type": "unresolved-forced-join", "key": "ret-goblin:x", "target": "games-workshop/nonexistent"} in result.ambiguous
+
+
+def test_forced_join_target_resolved_through_alias() -> None:
+    matches = Matches(
+        joins={"ret-goblin:x": "games-workshop/old-id"},
+        aliases={"games-workshop/old-id": "games-workshop/99120110077"},
+    )
+    result = join_observations(
+        [obs("mfr-gw:a", sku="99120110077"), obs("mfr-gw:b", sku="99120110078"), obs("ret-goblin:x", sku=None)],
+        TAXONOMY, KINDS, matches,
+    )
+    assert sorted(m.key for m in result.entities["games-workshop/99120110077"]) == ["mfr-gw:a", "ret-goblin:x"]
+    assert result.ambiguous == []
+
+
+def test_degenerate_name_forced_join_still_works() -> None:
+    matches = Matches(joins={"ret-goblin:x": "games-workshop/99120110077"})
+    result = join_observations(
+        [obs("mfr-gw:a", sku="99120110077"), obs("ret-goblin:x", sku=None, name="!!!")],
+        TAXONOMY, KINDS, matches,
+    )
+    assert [m.key for m in result.entities["games-workshop/99120110077"]] == ["mfr-gw:a", "ret-goblin:x"]
+    assert result.ambiguous == []

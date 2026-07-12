@@ -87,17 +87,6 @@ def join_observations(
             anchor = ean_index.setdefault(ean, observation.key)
             uf.union(anchor, observation.key)
 
-    # forced joins from matches.yaml: union with any member already carrying that entity id target
-    forced_targets: dict[str, str] = {}  # entity id -> anchor key
-    for observation in attributed:
-        target = matches.joins.get(observation.key)
-        if target:
-            forced_targets.setdefault(target, observation.key)
-
-    groups: dict[str, list[Observation]] = {}
-    for observation in attributed:
-        groups.setdefault(uf.find(observation.key), []).append(observation)
-
     # provisional entity id per group
     def group_entity_id(members: list[Observation]) -> str:
         best_code = min(
@@ -112,20 +101,58 @@ def join_observations(
         raw = entity_id(anchor.manufacturer, best_code[1] if best_code else None, anchor.name)
         return matches.aliases.get(raw, raw)
 
-    provisional: dict[str, str] = {root: group_entity_id(members) for root, members in groups.items()}
+    def current_groups_and_ids() -> tuple[dict[str, list[Observation]], dict[str, str]]:
+        current: dict[str, list[Observation]] = {}
+        for observation in attributed:
+            current.setdefault(uf.find(observation.key), []).append(observation)
+        return current, {root: group_entity_id(members) for root, members in current.items()}
 
-    # apply forced joins: merge groups whose provisional id equals a forced target
-    for target, anchor_key in sorted(forced_targets.items()):
-        for root, eid in sorted(provisional.items()):
-            if eid == target:
-                uf.union(root, anchor_key)
+    # forced joins from matches.yaml: resolve targets through aliases (targets written as old
+    # ids follow the alias like everything else), then apply as a fixpoint -- unioning a forced
+    # key's group into whichever group currently carries the resolved target id, recomputing
+    # groups/provisional ids after each successful union so chained forced joins (where one
+    # union changes another group's provisional id) still resolve. Bounded by len(entries) + 1
+    # full passes.
+    attributed_keys = {observation.key for observation in attributed}
+    forced_entries = sorted(
+        (key, target) for key, target in matches.joins.items() if key in attributed_keys
+    )
 
-    # name-join pass for anchorless observations (no code, no valid EAN, not forced)
-    groups = {}
-    for observation in attributed:
-        groups.setdefault(uf.find(observation.key), []).append(observation)
-    provisional = {root: group_entity_id(members) for root, members in groups.items()}
+    groups, provisional = current_groups_and_ids()
+    for _ in range(len(forced_entries) + 1):
+        pass_changed = False
+        for key, target in forced_entries:
+            resolved_target = matches.aliases.get(target, target)
+            root = uf.find(key)
+            if provisional.get(root) == resolved_target:
+                continue
+            match_root = next(
+                (
+                    other_root
+                    for other_root, eid in sorted(provisional.items())
+                    if eid == resolved_target and other_root != root
+                ),
+                None,
+            )
+            if match_root is not None:
+                uf.union(root, match_root)
+                pass_changed = True
+                groups, provisional = current_groups_and_ids()
+        if not pass_changed:
+            break
 
+    # a forced join has "resolved" once its observation's group carries the (alias-resolved)
+    # target id -- record which group roots that applies to, so the name-join pass below only
+    # skips groups whose forced join actually took effect (an unresolved forced join must not
+    # suppress the name-join fallback).
+    resolved_forced_roots: set[str] = set()
+    for key, target in forced_entries:
+        resolved_target = matches.aliases.get(target, target)
+        root = uf.find(key)
+        if provisional.get(root) == resolved_target:
+            resolved_forced_roots.add(root)
+
+    # name-join pass for anchorless observations (no code, no valid EAN, no resolved forced join)
     slug_index: dict[tuple[str, str], list[str]] = {}
     for root, members in groups.items():
         if any(codes[m.key] is not None for m in members):
@@ -135,7 +162,7 @@ def join_observations(
     for root, members in sorted(groups.items()):
         if any(codes[m.key] is not None or eans[m.key] is not None for m in members):
             continue
-        if any(matches.joins.get(m.key) for m in members):
+        if root in resolved_forced_roots:
             continue
         candidates = sorted(
             {r for m in members for r in slug_index.get((m.manufacturer, slugify(m.name)), [])}
@@ -152,12 +179,31 @@ def join_observations(
                 }
             )
 
-    # final grouping + ids
+    # final grouping + ids -- distinct union-find components can still resolve to the same
+    # final id (alias collapsing two coded groups, or two anchorless groups sharing a
+    # manufacturer+name-slug that name-join never merges since it only joins anchorless INTO
+    # coded groups). Merge member lists on collision instead of silently dropping one group.
     final_groups: dict[str, list[Observation]] = {}
     for observation in attributed:
         final_groups.setdefault(uf.find(observation.key), []).append(observation)
+    entities: dict[str, list[Observation]] = {}
     for members in final_groups.values():
+        entities.setdefault(group_entity_id(members), []).extend(members)
+    for members in entities.values():
         members.sort(key=lambda m: _priority(m, kinds))
-    entities = {group_entity_id(members): members for members in final_groups.values()}
     result.entities = dict(sorted(entities.items()))
+
+    # report matches.joins entries that never resolved: the observation exists but did not end
+    # up in an entity whose id equals the (alias-resolved) target.
+    observation_by_key = {observation.key: observation for observation in observations}
+    key_to_entity = {
+        member.key: eid for eid, members in result.entities.items() for member in members
+    }
+    for key, target in sorted(matches.joins.items()):
+        if key not in observation_by_key:
+            continue
+        resolved_target = matches.aliases.get(target, target)
+        if key_to_entity.get(key) != resolved_target:
+            result.ambiguous.append({"type": "unresolved-forced-join", "key": key, "target": target})
+
     return result
