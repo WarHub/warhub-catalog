@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from warhub_acquisition.taxonomy import Taxonomy
 from warhub_acquisition.yamlio import write_yaml
 
@@ -37,3 +39,17 @@ def test_normalize_code_strips_and_matches(tmp_path: Path) -> None:
     assert taxonomy.normalize_code("games-workshop", "49-04") is None  # short code: not identity-grade
     assert taxonomy.normalize_code("wyrd-games", "wyr21331") == "WYR21331"
     assert taxonomy.normalize_code("games-workshop", None) is None
+
+
+def test_duplicate_vendor_name_raises(tmp_path: Path) -> None:
+    write_yaml(
+        tmp_path / "manufacturers.yaml",
+        {
+            "manufacturers": [
+                {"slug": "a-corp", "name": "A Corp", "vendorNames": ["Shared Vendor"]},
+                {"slug": "b-corp", "name": "B Corp", "vendorNames": ["shared vendor"]},
+            ]
+        },
+    )
+    with pytest.raises(ValueError, match="Shared Vendor|shared vendor"):
+        Taxonomy.load(tmp_path)
