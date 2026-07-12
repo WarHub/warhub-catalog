@@ -94,3 +94,52 @@ def test_alias_onto_retracted_raises(tmp_path: Path) -> None:
     write_yaml(paths.matches, {"joins": {}, "aliases": {"games-workshop/old": "games-workshop/99120110077"}})
     with pytest.raises(ValueError, match="retracted"):
         resolve_catalog(paths)
+
+
+def test_unknown_evidence_source_raises(tmp_path: Path) -> None:
+    import pytest
+
+    paths = seed(tmp_path)
+    rogue = paths.evidence_products / "rogue-src" / "observations.jsonl"
+    rogue.parent.mkdir(parents=True)
+    rogue.write_text(
+        '{"extractor":"t@1","firstSeen":"2026-07-12","key":"rogue-src:x","lastSeen":"2026-07-12","manufacturer":"games-workshop","name":"X"}\n',
+        encoding="utf-8", newline="\n",
+    )
+    with pytest.raises(ValueError, match="rogue-src"):
+        resolve_catalog(paths)
+
+
+def test_empty_evidence_refuses_to_wipe_existing_catalog(tmp_path: Path) -> None:
+    import shutil
+
+    import pytest
+
+    paths = seed(tmp_path)
+    resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+    shutil.rmtree(paths.evidence_products)
+    with pytest.raises(ValueError, match="refusing to wipe"):
+        resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+
+
+def test_stale_manufacturer_file_removed_on_rerun(tmp_path: Path) -> None:
+    from warhub_acquisition.yamlio import write_yaml as _write_yaml
+
+    paths = seed(tmp_path)
+    resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+    _write_yaml(paths.overrides, {"retract": ["games-workshop/99120110077"], "products": {}})
+    resolve_catalog(paths)
+    assert not (paths.catalog_products / "games-workshop.yaml").exists()
+
+
+def test_join_onto_retracted_raises(tmp_path: Path) -> None:
+    import pytest
+
+    paths = seed(tmp_path)
+    write_yaml(paths.overrides, {"retract": ["games-workshop/99120110077"], "products": {}})
+    write_yaml(paths.matches, {"joins": {"ret-goblin:cp-necrons": "games-workshop/99120110077"}, "aliases": {}})
+    with pytest.raises(ValueError, match="retracted"):
+        resolve_catalog(paths)

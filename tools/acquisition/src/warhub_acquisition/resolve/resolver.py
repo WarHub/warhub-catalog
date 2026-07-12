@@ -55,6 +55,12 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
+
+    evidence = EvidenceStore(paths.evidence_products).load_all()
+    unknown = set(evidence) - set(descriptors)
+    if unknown:
+        raise ValueError(f"evidence sources without a descriptor: {sorted(unknown)}")
+
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     overrides: Overrides = _load_optional(paths.overrides, Overrides, Overrides())
 
@@ -62,18 +68,22 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     for alias_target in matches.aliases.values():
         if alias_target in retracted:
             raise ValueError(f"matches.yaml alias targets retracted entity {alias_target!r}")
+    for join_target in matches.joins.values():
+        if join_target in retracted:
+            raise ValueError(f"matches.yaml join targets retracted entity {join_target!r}")
 
-    observations = [
-        observation
-        for source in EvidenceStore(paths.evidence_products).load_all().values()
-        for observation in source.values()
-    ]
+    observations = [observation for source in evidence.values() for observation in source.values()]
+
+    if not observations and any(paths.catalog_products.glob("*.yaml")):
+        raise ValueError("no evidence loaded but catalog files exist; refusing to wipe the catalog")
+
     joined = join_observations(observations, taxonomy, kinds, matches)
 
     conflicts: list[dict] = list(joined.ambiguous)
     ean_resolutions = {}
     products: dict[str, list[CanonicalProduct]] = {}
     for entity, members in joined.entities.items():
+        # retracted entities are fully suppressed -- including from the ean-shared check below
         if entity in retracted:
             continue
         ean = resolve_ean(entity, members, kinds)

@@ -1394,7 +1394,7 @@ git commit -m "feat(acquisition): deterministic entity join with manual match ov
 - Produces:
   - `EanResolution` (dataclass): `ean: str | None`, `confidence: str | None` (`"confirmed" | "provisional" | "conflicted"`), `conflicts: list[dict]`.
   - `resolve_ean(entity: str, members: list[Observation], kinds: dict[str, str]) -> EanResolution`.
-  - Rules: collect `(source_id, kind, canonical_ean)` assertions, dedupe by source id (a source asserts one EAN per observation set — if one source asserts two different EANs for the entity, that's a conflict too). `confirmed` = any manufacturer/curated-kind assertion OR ≥2 distinct non-barcode-db sources agreeing. `provisional` = exactly one non-barcode-db assertion, or barcode-db-only assertions. Distinct EAN values → `conflicted`: pick the value with (best kind priority, most asserting sources, lexicographic) and emit an `ean-mismatch` conflict payload listing all assertions.
+  - Rules: collect `(source_id, kind, canonical_ean)` assertions, dedupe by source id (a source asserts one EAN per observation set — if one source asserts two different EANs for the entity, that's a conflict too). `confirmed` = any manufacturer/curated-kind assertion OR ≥2 distinct sources agreeing of which at least one is not a barcode-db. `provisional` = a single non-authoritative source, or barcode-db-only assertions (any count). Distinct EAN values → `conflicted`: pick the value with (best kind priority, most asserting sources, lexicographic) and emit an `ean-mismatch` conflict payload listing all assertions.
   - `find_shared_eans(resolutions: dict[str, EanResolution]) -> list[dict]` — same EAN resolved on ≥2 entities → `ean-shared` conflict payloads.
 
 - [ ] **Step 1: Write the failing tests**
@@ -1574,7 +1574,7 @@ git commit -m "feat(acquisition): EAN corroboration with confidence and conflict
     - `firstSeen` = min over members; `evidence` = sorted member keys.
     - Lifecycle: live members = `archived == False`; scraped-live additionally excludes curated-kind sources (curated observations are never re-scraped, so they never participate in miss-streak logic). No live members → `status="discontinued"`. No scraped-live members (curated-only entity) → trust the curated `hints["status"]` claim, defaulting to `"current"`. Any scraped-live member with `missStreak < miss_threshold` → `"current"`; otherwise `"suspected-discontinued"` and `availability="unknown"`. Finally, a curated `discontinued`/`delisted` hint always wins over derivation (a curated `current` does not resurrect a live-source `suspected-discontinued`). A curated discontinued/delisted hint that wins after the suspected-discontinued branch leaves availability='unknown' — intended: availability is unknowable for products no longer scraped.
   - `apply_overrides(product: CanonicalProduct, overrides: Overrides) -> CanonicalProduct` — per-field replacement revalidated via model_validate — unknown keys or wrong-typed values raise ValidationError (loud, since overrides.yaml is human-edited).
-  - Retract is enforced by the resolver (Task 10): retracted entity ids are dropped after join, and alias targets pointing at retracted ids raise `ValueError`.
+  - Retract is enforced by the resolver (Task 10): retracted entity ids are dropped after join, and `matches.aliases`/`matches.joins` targets pointing at retracted ids raise `ValueError`.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -1824,7 +1824,7 @@ git commit -m "feat(acquisition): attribute resolution, lifecycle derivation, ov
 - Consumes: everything from Tasks 4–9.
 - Produces:
   - `DataPaths` (dataclass): `root: Path` with properties `evidence_products` (`root/evidence/products`), `catalog_products` (`root/catalog/products`), `sources` (`root/catalog/sources`), `taxonomy` (`root/catalog/taxonomy`), `matches` (`root/catalog/matches.yaml`), `overrides` (`root/catalog/overrides.yaml`), `conflicts` (`root/review/conflicts.yaml`).
-  - `resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]` — loads everything, joins, corroborates, resolves attributes, applies overrides, drops retracted entities (and raises `ValueError` if `matches.aliases` targets a retracted id), writes one YAML file per manufacturer to `catalog/products/<manufacturer>.yaml` shaped `{manufacturer: <slug>, products: [...]}` (products sorted by id, `exclude_none` fields), writes `review/conflicts.yaml` shaped `{conflicts: [...]}` (deterministically sorted; empty list when clean), removes stale manufacturer files it no longer produces. Returns the catalog keyed by manufacturer slug.
+  - `resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]` — loads everything, joins, corroborates, resolves attributes, applies overrides, drops retracted entities (and raises `ValueError` if `matches.aliases` or `matches.joins` targets a retracted id), writes one YAML file per manufacturer to `catalog/products/<manufacturer>.yaml` shaped `{manufacturer: <slug>, products: [...]}` (products sorted by id, `exclude_none` fields), writes `review/conflicts.yaml` shaped `{conflicts: [...]}` (deterministically sorted; empty list when clean), removes stale manufacturer files it no longer produces. Raises `ValueError` if any evidence source directory has no matching descriptor in `catalog/sources`, and raises `ValueError` instead of writing when zero observations were loaded but `catalog/products` already contains YAML files (refuses to wipe an existing catalog on an empty-evidence run). Returns the catalog keyed by manufacturer slug.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1926,6 +1926,55 @@ def test_alias_onto_retracted_raises(tmp_path: Path) -> None:
     write_yaml(paths.matches, {"joins": {}, "aliases": {"games-workshop/old": "games-workshop/99120110077"}})
     with pytest.raises(ValueError, match="retracted"):
         resolve_catalog(paths)
+
+
+def test_unknown_evidence_source_raises(tmp_path: Path) -> None:
+    import pytest
+
+    paths = seed(tmp_path)
+    rogue = paths.evidence_products / "rogue-src" / "observations.jsonl"
+    rogue.parent.mkdir(parents=True)
+    rogue.write_text(
+        '{"extractor":"t@1","firstSeen":"2026-07-12","key":"rogue-src:x","lastSeen":"2026-07-12","manufacturer":"games-workshop","name":"X"}\n',
+        encoding="utf-8", newline="\n",
+    )
+    with pytest.raises(ValueError, match="rogue-src"):
+        resolve_catalog(paths)
+
+
+def test_empty_evidence_refuses_to_wipe_existing_catalog(tmp_path: Path) -> None:
+    import shutil
+
+    import pytest
+
+    paths = seed(tmp_path)
+    resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+    shutil.rmtree(paths.evidence_products)
+    with pytest.raises(ValueError, match="refusing to wipe"):
+        resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+
+
+def test_stale_manufacturer_file_removed_on_rerun(tmp_path: Path) -> None:
+    from warhub_acquisition.yamlio import write_yaml as _write_yaml
+
+    paths = seed(tmp_path)
+    resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+    _write_yaml(paths.overrides, {"retract": ["games-workshop/99120110077"], "products": {}})
+    resolve_catalog(paths)
+    assert not (paths.catalog_products / "games-workshop.yaml").exists()
+
+
+def test_join_onto_retracted_raises(tmp_path: Path) -> None:
+    import pytest
+
+    paths = seed(tmp_path)
+    write_yaml(paths.overrides, {"retract": ["games-workshop/99120110077"], "products": {}})
+    write_yaml(paths.matches, {"joins": {"ret-goblin:cp-necrons": "games-workshop/99120110077"}, "aliases": {}})
+    with pytest.raises(ValueError, match="retracted"):
+        resolve_catalog(paths)
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -1994,6 +2043,12 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
+
+    evidence = EvidenceStore(paths.evidence_products).load_all()
+    unknown = set(evidence) - set(descriptors)
+    if unknown:
+        raise ValueError(f"evidence sources without a descriptor: {sorted(unknown)}")
+
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     overrides: Overrides = _load_optional(paths.overrides, Overrides, Overrides())
 
@@ -2001,18 +2056,22 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     for alias_target in matches.aliases.values():
         if alias_target in retracted:
             raise ValueError(f"matches.yaml alias targets retracted entity {alias_target!r}")
+    for join_target in matches.joins.values():
+        if join_target in retracted:
+            raise ValueError(f"matches.yaml join targets retracted entity {join_target!r}")
 
-    observations = [
-        observation
-        for source in EvidenceStore(paths.evidence_products).load_all().values()
-        for observation in source.values()
-    ]
+    observations = [observation for source in evidence.values() for observation in source.values()]
+
+    if not observations and any(paths.catalog_products.glob("*.yaml")):
+        raise ValueError("no evidence loaded but catalog files exist; refusing to wipe the catalog")
+
     joined = join_observations(observations, taxonomy, kinds, matches)
 
     conflicts: list[dict] = list(joined.ambiguous)
     ean_resolutions = {}
     products: dict[str, list[CanonicalProduct]] = {}
     for entity, members in joined.entities.items():
+        # retracted entities are fully suppressed -- including from the ean-shared check below
         if entity in retracted:
             continue
         ean = resolve_ean(entity, members, kinds)
