@@ -16,13 +16,14 @@ class MigrationSummary:
     seed_count: int = 0
     key_collisions: list[dict] = field(default_factory=list)
     invalid_records: list[dict] = field(default_factory=list)
+    minted_factions: dict[str, str] = field(default_factory=dict)
 
 
 def run_migration(paths: DataPaths, legacy_dir: Path, seed_dir: Path) -> MigrationSummary:
     taxonomy = Taxonomy.load(paths.taxonomy)
     extraction = read_legacy_products(legacy_dir)
-    seed_observations = read_seed_products(
-        seed_dir, taxonomy, extraction.label_to_game_system, extraction.label_to_faction
+    seed_observations, minted = read_seed_products(
+        seed_dir, taxonomy, extraction.label_to_game_system, extraction.label_to_faction, extraction.faction_labels
     )
     store = EvidenceStore(paths.evidence_products)
     for observation in extraction.observations:
@@ -31,10 +32,12 @@ def run_migration(paths: DataPaths, legacy_dir: Path, seed_dir: Path) -> Migrati
         store.upsert("seed-curated", observation)
     store.save("legacy-catalog")
     store.save("seed-curated")
-    write_label_files(paths.taxonomy, extraction.game_system_labels, extraction.faction_labels)
+    all_faction_labels = {**extraction.faction_labels, **minted}
+    write_label_files(paths.taxonomy, extraction.game_system_labels, all_faction_labels)
     return MigrationSummary(
         legacy_count=len(extraction.observations),
         seed_count=len(seed_observations),
         key_collisions=extraction.key_collisions,
         invalid_records=extraction.invalid_records,
+        minted_factions=minted,
     )

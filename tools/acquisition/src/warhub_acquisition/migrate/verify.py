@@ -17,6 +17,10 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
     for product in products:
         for key in product.evidence:
             covered[key] = covered.get(key, 0) + 1
+    # NOTE: retracted entities (overrides.yaml retract:) are suppressed by the
+    # resolver, so their evidence keys will appear here as 'missing'. Retract is
+    # unused during migration; if it gains real use, exempt retracted entities'
+    # keys from this invariant.
     missing = sorted(all_keys - set(covered))
     if missing:
         violations.append(f"{len(missing)} observation keys not covered by any entity (first: {missing[:5]})")
@@ -67,6 +71,7 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         f"- distinct valid EANs asserted: {len(asserted)}",
         f"- asserted EAN values failing validation: {invalid_ean_count}",
         f"- key collisions: {len(summary.key_collisions)}",
+        f"- minted factions: {len(summary.minted_factions)}",
         f"- conflicts: {len(conflicts)}",
         f"- violations: {len(violations)}", "",
         "| manufacturer | records | entities | with EAN | confirmed |", "|---|---|---|---|---|",

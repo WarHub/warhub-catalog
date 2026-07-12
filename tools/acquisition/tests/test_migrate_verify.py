@@ -13,6 +13,7 @@ def test_migrate_verifies_and_writes_report(tmp_path: Path, capsys) -> None:
     report = (data / "review" / "migration-report.md").read_text(encoding="utf-8")
     assert "games-workshop" in report
     assert "| manufacturer |" in report
+    assert "- minted factions: 0" in report
     # the legacy Adrax and the seed Adrax share sku 99120101293 -> one entity
     catalog = (data / "catalog" / "products" / "games-workshop.yaml").read_text(encoding="utf-8")
     assert catalog.count("- id:") == 1

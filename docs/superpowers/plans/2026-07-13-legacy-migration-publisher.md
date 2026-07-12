@@ -593,10 +593,11 @@ git commit -m "feat(acquisition): legacy faction-file reader for migration"
 
 **Interfaces:**
 - Consumes: `yamlio.read_yaml`, `Observation`, `slugify`, `Taxonomy.manufacturer_for_vendor`, and Task 3's `label_to_game_system` / `label_to_faction` maps.
-- Produces: `read_seed_products(seed_dir: Path, taxonomy: Taxonomy, label_to_game_system: dict[str, str], label_to_faction: dict[str, str], extractor: str = "seed-curated@1") -> list[Observation]` (sorted by key).
+- Produces: `read_seed_products(seed_dir: Path, taxonomy: Taxonomy, label_to_game_system: dict[str, str], label_to_faction: dict[str, str], faction_labels: dict[str, str], extractor: str = "seed-curated@1") -> tuple[list[Observation], dict[str, str]]` (observations sorted by key, plus minted faction slug→label pairs).
   - `key = f"seed-curated:{manufacturer_slug}/{slugify(name)}"`; duplicate key across seed files → `ValueError` (seed is hand-curated; a dup is an authoring error, loud).
   - `manufacturer` label → slug via `taxonomy.manufacturer_for_vendor`; unmapped → `ValueError` naming the label.
-  - `gameSystem` label → slug via `label_to_game_system`; unmapped → `ValueError`. `faction` label → slug via `label_to_faction` when non-null; unmapped non-null → `ValueError`; null → no faction hint.
+  - `gameSystem` label → slug via `label_to_game_system`; unmapped → `ValueError`. `faction` label → slug via `label_to_faction` when non-null; null → no faction hint.
+  - Unmapped non-null `faction` label: seed data is curated and may be MORE precise than the legacy scrape's taxonomy (legacy AoS only had Grand Alliance-level factions), so an unmapped faction label MINTS a new faction rather than erroring: `slug = slugify(faction_label)`; if `slug` already exists in `faction_labels` under a DIFFERENT label → `ValueError` (ambiguous, human call); otherwise the mint is recorded in the returned `minted` dict (`minted[slug] = faction_label`) and `slug` is used as the hint. `gameSystem` and `manufacturer` remain strict errors — only `faction` mints.
   - `hints`: `gameSystem`, `faction` (if any), `status` (when present), `productType` (when present), `contents` (verbatim list, when present), `quantity` = sum of `contents[].quantity` (when contents present).
   - `firstSeen = lastSeen = "2026-07-12"` (fixed epoch for seed data: the plan-1 merge date; constant `SEED_FIRST_SEEN` — no wall clock).
   - `sku`, `ean`, prices (float-coerced), `url`, `imageUrl` copied when present.
@@ -618,6 +619,7 @@ TAXONOMY = Taxonomy(
 )
 GS = {"Warhammer 40,000": "warhammer-40k"}
 FACTIONS = {"Space Marines": "space-marines"}
+FACTION_LABELS = {"space-marines": "Space Marines"}
 
 
 def make_seed(tmp_path: Path, records: list) -> Path:
@@ -639,7 +641,11 @@ def seed_record(**kw: object) -> dict:
 
 
 def test_maps_seed_record(tmp_path: Path) -> None:
-    [observation] = read_seed_products(make_seed(tmp_path, [seed_record()]), TAXONOMY, GS, FACTIONS)
+    observations, minted = read_seed_products(
+        make_seed(tmp_path, [seed_record()]), TAXONOMY, GS, FACTIONS, FACTION_LABELS
+    )
+    [observation] = observations
+    assert minted == {}
     assert observation.key == "seed-curated:games-workshop/intercessors"
     assert observation.manufacturer == "games-workshop"
     assert observation.ean == "5011921142439"
@@ -653,22 +659,44 @@ def test_maps_seed_record(tmp_path: Path) -> None:
 
 
 def test_null_faction_omits_hint(tmp_path: Path) -> None:
-    [observation] = read_seed_products(
+    observations, _minted = read_seed_products(
         make_seed(tmp_path, [seed_record(name="Ultimate Starter Set", faction=None, contents=None)]),
-        TAXONOMY, GS, FACTIONS,
+        TAXONOMY, GS, FACTIONS, FACTION_LABELS,
     )
+    [observation] = observations
     assert "faction" not in observation.hints
     assert "quantity" not in observation.hints
 
 
 def test_unmapped_game_system_label_raises(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="Age of Sigmar"):
-        read_seed_products(make_seed(tmp_path, [seed_record(gameSystem="Age of Sigmar")]), TAXONOMY, GS, FACTIONS)
+        read_seed_products(
+            make_seed(tmp_path, [seed_record(gameSystem="Age of Sigmar")]), TAXONOMY, GS, FACTIONS, FACTION_LABELS
+        )
 
 
 def test_duplicate_seed_key_raises(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="intercessors"):
-        read_seed_products(make_seed(tmp_path, [seed_record(), seed_record()]), TAXONOMY, GS, FACTIONS)
+        read_seed_products(
+            make_seed(tmp_path, [seed_record(), seed_record()]), TAXONOMY, GS, FACTIONS, FACTION_LABELS
+        )
+
+
+def test_unmapped_faction_label_mints_new_slug(tmp_path: Path) -> None:
+    observations, minted = read_seed_products(
+        make_seed(tmp_path, [seed_record(faction="Stormcast Eternals")]),
+        TAXONOMY, GS, FACTIONS, FACTION_LABELS,
+    )
+    assert observations[0].hints["faction"] == "stormcast-eternals"
+    assert minted == {"stormcast-eternals": "Stormcast Eternals"}
+
+
+def test_minted_slug_colliding_with_different_label_raises(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="stormcast-eternals"):
+        read_seed_products(
+            make_seed(tmp_path, [seed_record(faction="Stormcast  Eternals")]),  # slugifies same, label text differs
+            TAXONOMY, GS, FACTIONS, {"stormcast-eternals": "Stormcast Eternals"},
+        )
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -695,9 +723,11 @@ def read_seed_products(
     taxonomy: Taxonomy,
     label_to_game_system: dict[str, str],
     label_to_faction: dict[str, str],
+    faction_labels: dict[str, str],
     extractor: str = "seed-curated@1",
-) -> list[Observation]:
+) -> tuple[list[Observation], dict[str, str]]:
     observations: dict[str, Observation] = {}
+    minted: dict[str, str] = {}
     for path in sorted(seed_dir.glob("*.yaml")):
         for record in read_yaml(path) or []:
             manufacturer = taxonomy.manufacturer_for_vendor(record["manufacturer"])
@@ -711,7 +741,18 @@ def read_seed_products(
             if faction_label is not None:
                 faction = label_to_faction.get(faction_label)
                 if faction is None:
-                    raise ValueError(f"seed faction label not in legacy headers: {faction_label!r} ({path})")
+                    # seed data is curated and may be MORE precise than the legacy
+                    # scrape's taxonomy (e.g. Stormcast Eternals vs Grand Alliance
+                    # Order); mint a new faction slug rather than erroring.
+                    slug = slugify(faction_label)
+                    existing_label = faction_labels.get(slug)
+                    if existing_label is not None and existing_label != faction_label:
+                        raise ValueError(
+                            f"minted faction slug {slug!r} for label {faction_label!r} collides with "
+                            f"existing label {existing_label!r} ({path})"
+                        )
+                    minted[slug] = faction_label
+                    faction = slug
                 hints["faction"] = faction
             for hint in ("status", "productType"):
                 if record.get(hint) is not None:
@@ -739,7 +780,7 @@ def read_seed_products(
                 lastSeen=SEED_FIRST_SEEN,
                 extractor=extractor,
             )
-    return [observations[key] for key in sorted(observations)]
+    return [observations[key] for key in sorted(observations)], minted
 ```
 
 - [ ] **Step 4: Run tests to verify they pass**
@@ -855,7 +896,7 @@ git commit -m "feat(acquisition): taxonomy label files for publisher slug->label
 **Interfaces:**
 - Consumes: Tasks 3–5, `EvidenceStore`, `Taxonomy.load`, `DataPaths`.
 - Produces:
-  - `run_migration(paths: DataPaths, legacy_dir: Path, seed_dir: Path) -> MigrationSummary` — dataclass with `legacy_count: int`, `seed_count: int`, `key_collisions: list[dict]`, `invalid_records: list[dict]`. Orchestrates: `Taxonomy.load(paths.taxonomy)` → `read_legacy_products(legacy_dir)` → `read_seed_products(seed_dir, ...)` → upsert+save both sources into `EvidenceStore(paths.evidence_products)` → `write_label_files(paths.taxonomy, ...)`.
+  - `run_migration(paths: DataPaths, legacy_dir: Path, seed_dir: Path) -> MigrationSummary` — dataclass with `legacy_count: int`, `seed_count: int`, `key_collisions: list[dict]`, `invalid_records: list[dict]`, `minted_factions: dict[str, str]`. Orchestrates: `Taxonomy.load(paths.taxonomy)` → `read_legacy_products(legacy_dir)` → `read_seed_products(seed_dir, ..., extraction.faction_labels)` → upsert+save both sources into `EvidenceStore(paths.evidence_products)` → merge minted faction labels into `extraction.faction_labels` (`all_faction_labels = {**extraction.faction_labels, **minted}`) → `write_label_files(paths.taxonomy, extraction.game_system_labels, all_faction_labels)`.
   - CLI: `warhub-data migrate --data <dir> --legacy-dir <dir> --seed-dir <dir>` (defaults `data`, `data/products/manufacturers`, `data/products/seed`) — prints `migrated N legacy + M seed observations; K key collisions; J invalid records`, exit 0 (invalid records are surfaced by Task 7's verifier, not here).
   - Idempotence: running twice yields byte-identical `observations.jsonl` and taxonomy label files (test pins it). Upsert semantics make this hold because `firstSeen == lastSeen` never moves.
 
@@ -923,6 +964,21 @@ def test_migrate_is_idempotent(tmp_path: Path, capsys) -> None:
     before = [f.read_bytes() for f in files]
     run_migrate(data, legacy, seed_dir)
     assert [f.read_bytes() for f in files] == before
+
+
+def test_seed_faction_absent_from_legacy_mints_slug(tmp_path: Path, capsys) -> None:
+    data, legacy, seed_dir = seed_repo(tmp_path)
+    write_yaml(
+        seed_dir / "gw-age-of-sigmar.yaml",
+        [{"name": "Lord-Celestant", "sku": "99120101999", "manufacturer": "Games Workshop",
+          "gameSystem": "Warhammer 40,000", "faction": "Stormcast Eternals", "status": "current",
+          "contents": [{"unitName": "Lord-Celestant", "quantity": 1, "baseSize": "40mm"}]}],
+    )
+    assert run_migrate(data, legacy, seed_dir) == 0
+    paths = DataPaths(data)
+    factions = (paths.taxonomy / "factions.yaml").read_text(encoding="utf-8")
+    assert "space-marines" in factions
+    assert "stormcast-eternals" in factions
 ```
 
 - [ ] **Step 2: Run to verify failure** — `uv run pytest tests/test_migrate_runner.py -v` → argparse error (unknown command `migrate`).
@@ -949,13 +1005,14 @@ class MigrationSummary:
     seed_count: int = 0
     key_collisions: list[dict] = field(default_factory=list)
     invalid_records: list[dict] = field(default_factory=list)
+    minted_factions: dict[str, str] = field(default_factory=dict)
 
 
 def run_migration(paths: DataPaths, legacy_dir: Path, seed_dir: Path) -> MigrationSummary:
     taxonomy = Taxonomy.load(paths.taxonomy)
     extraction = read_legacy_products(legacy_dir)
-    seed_observations = read_seed_products(
-        seed_dir, taxonomy, extraction.label_to_game_system, extraction.label_to_faction
+    seed_observations, minted = read_seed_products(
+        seed_dir, taxonomy, extraction.label_to_game_system, extraction.label_to_faction, extraction.faction_labels
     )
     store = EvidenceStore(paths.evidence_products)
     for observation in extraction.observations:
@@ -964,12 +1021,14 @@ def run_migration(paths: DataPaths, legacy_dir: Path, seed_dir: Path) -> Migrati
         store.upsert("seed-curated", observation)
     store.save("legacy-catalog")
     store.save("seed-curated")
-    write_label_files(paths.taxonomy, extraction.game_system_labels, extraction.faction_labels)
+    all_faction_labels = {**extraction.faction_labels, **minted}
+    write_label_files(paths.taxonomy, extraction.game_system_labels, all_faction_labels)
     return MigrationSummary(
         legacy_count=len(extraction.observations),
         seed_count=len(seed_observations),
         key_collisions=extraction.key_collisions,
         invalid_records=extraction.invalid_records,
+        minted_factions=minted,
     )
 ```
 
@@ -1022,7 +1081,7 @@ git commit -m "feat(acquisition): migrate CLI verb orchestrating the legacy impo
     2. **No lost EANs:** every distinct *valid* EAN (via `canonical_ean`) asserted in evidence appears either on some canonical product or inside a conflict payload in `review/conflicts.yaml`.
     3. **Counts:** evidence observation total == `summary.legacy_count + summary.seed_count`.
     4. **Invalid records:** `summary.invalid_records` must be empty.
-  - The markdown report contains: totals, per-manufacturer table (records → entities dedup, with EAN, confirmed), distinct-valid-EAN count, invalid-EAN-value count (asserted but failing checksum — reported, not a violation), key collisions, conflicts count.
+  - The markdown report contains: totals, per-manufacturer table (records → entities dedup, with EAN, confirmed), distinct-valid-EAN count, invalid-EAN-value count (asserted but failing checksum — reported, not a violation), key collisions, minted factions count, conflicts count.
   - CLI: `migrate` gains `--report <path>` (default `<data>/review/migration-report.md`); after migration it runs verification, writes the report, prints `verification: OK` or the violations, and exits **3** on any violation.
 
 - [ ] **Step 1: Write the failing tests**
@@ -1044,6 +1103,7 @@ def test_migrate_verifies_and_writes_report(tmp_path: Path, capsys) -> None:
     report = (data / "review" / "migration-report.md").read_text(encoding="utf-8")
     assert "games-workshop" in report
     assert "| manufacturer |" in report
+    assert "- minted factions: 0" in report
     # the legacy Adrax and the seed Adrax share sku 99120101293 -> one entity
     catalog = (data / "catalog" / "products" / "games-workshop.yaml").read_text(encoding="utf-8")
     assert catalog.count("- id:") == 1
@@ -1104,6 +1164,10 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
     for product in products:
         for key in product.evidence:
             covered[key] = covered.get(key, 0) + 1
+    # NOTE: retracted entities (overrides.yaml retract:) are suppressed by the
+    # resolver, so their evidence keys will appear here as 'missing'. Retract is
+    # unused during migration; if it gains real use, exempt retracted entities'
+    # keys from this invariant.
     missing = sorted(all_keys - set(covered))
     if missing:
         violations.append(f"{len(missing)} observation keys not covered by any entity (first: {missing[:5]})")
@@ -1154,6 +1218,7 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         f"- distinct valid EANs asserted: {len(asserted)}",
         f"- asserted EAN values failing validation: {invalid_ean_count}",
         f"- key collisions: {len(summary.key_collisions)}",
+        f"- minted factions: {len(summary.minted_factions)}",
         f"- conflicts: {len(conflicts)}",
         f"- violations: {len(violations)}", "",
         "| manufacturer | records | entities | with EAN | confirmed |", "|---|---|---|---|---|",

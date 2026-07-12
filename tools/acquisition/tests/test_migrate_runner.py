@@ -58,3 +58,18 @@ def test_migrate_is_idempotent(tmp_path: Path, capsys) -> None:
     before = [f.read_bytes() for f in files]
     run_migrate(data, legacy, seed_dir)
     assert [f.read_bytes() for f in files] == before
+
+
+def test_seed_faction_absent_from_legacy_mints_slug(tmp_path: Path, capsys) -> None:
+    data, legacy, seed_dir = seed_repo(tmp_path)
+    write_yaml(
+        seed_dir / "gw-age-of-sigmar.yaml",
+        [{"name": "Lord-Celestant", "sku": "99120101999", "manufacturer": "Games Workshop",
+          "gameSystem": "Warhammer 40,000", "faction": "Stormcast Eternals", "status": "current",
+          "contents": [{"unitName": "Lord-Celestant", "quantity": 1, "baseSize": "40mm"}]}],
+    )
+    assert run_migrate(data, legacy, seed_dir) == 0
+    paths = DataPaths(data)
+    factions = (paths.taxonomy / "factions.yaml").read_text(encoding="utf-8")
+    assert "space-marines" in factions
+    assert "stormcast-eternals" in factions

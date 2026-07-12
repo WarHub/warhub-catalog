@@ -14,9 +14,11 @@ def read_seed_products(
     taxonomy: Taxonomy,
     label_to_game_system: dict[str, str],
     label_to_faction: dict[str, str],
+    faction_labels: dict[str, str],
     extractor: str = "seed-curated@1",
-) -> list[Observation]:
+) -> tuple[list[Observation], dict[str, str]]:
     observations: dict[str, Observation] = {}
+    minted: dict[str, str] = {}
     for path in sorted(seed_dir.glob("*.yaml")):
         for record in read_yaml(path) or []:
             manufacturer = taxonomy.manufacturer_for_vendor(record["manufacturer"])
@@ -30,7 +32,18 @@ def read_seed_products(
             if faction_label is not None:
                 faction = label_to_faction.get(faction_label)
                 if faction is None:
-                    raise ValueError(f"seed faction label not in legacy headers: {faction_label!r} ({path})")
+                    # seed data is curated and may be MORE precise than the legacy
+                    # scrape's taxonomy (e.g. Stormcast Eternals vs Grand Alliance
+                    # Order); mint a new faction slug rather than erroring.
+                    slug = slugify(faction_label)
+                    existing_label = faction_labels.get(slug)
+                    if existing_label is not None and existing_label != faction_label:
+                        raise ValueError(
+                            f"minted faction slug {slug!r} for label {faction_label!r} collides with "
+                            f"existing label {existing_label!r} ({path})"
+                        )
+                    minted[slug] = faction_label
+                    faction = slug
                 hints["faction"] = faction
             for hint in ("status", "productType"):
                 if record.get(hint) is not None:
@@ -58,4 +71,4 @@ def read_seed_products(
                 lastSeen=SEED_FIRST_SEEN,
                 extractor=extractor,
             )
-    return [observations[key] for key in sorted(observations)]
+    return [observations[key] for key in sorted(observations)], minted
