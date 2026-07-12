@@ -47,6 +47,7 @@ products:
     name: 'Combat Patrol: Necrons'
     manufacturer: games-workshop
     productCode: '99120110077'
+    sku: '99120110077'
     ean: '5011921194285'
     eanConfidence: provisional
     gameSystem: warhammer-40k
