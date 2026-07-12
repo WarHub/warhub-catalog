@@ -10,12 +10,15 @@ internal static partial class HtmlCleaner
 {
     private const int DefaultMaxLength = 10000;
 
+    // GithubFlavored enables GFM extras (pipe tables, ~~strikethrough~~). It is NOT the same
+    // as Flavor = MarkdownFlavor.GitHub, which selects the round-trip-faithful GitHub writer
+    // that preserves raw HTML — that would emit <strong>x</strong> instead of **x**.
     private static readonly Converter MarkdownConverter = new(new Config
     {
-        UnknownTags = Config.UnknownTagsOption.Drop,
         GithubFlavored = true,
-        RemoveComments = true,
-        SmartHrefHandling = true,
+        Tags = { Unknown = Config.UnknownTagsOption.Drop },
+        Formatting = { RemoveComments = true },
+        Links = { SmartHref = true },
     });
 
     /// <summary>

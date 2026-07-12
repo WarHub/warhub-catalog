@@ -1,4 +1,4 @@
-using System.Text.Json.Nodes;
+using System.Text.Json;
 using Json.Schema;
 
 namespace WarHub.Catalog.Publish;
@@ -15,10 +15,15 @@ internal sealed class SchemaValidator
 
     public static SchemaValidator LoadFrom(string schemaDir)
     {
+        // Build into a registry owned by this instance. The default is a process-wide global
+        // registry that refuses to re-register an $id, which would make a second LoadFrom in
+        // the same process throw.
+        var options = new BuildOptions { SchemaRegistry = new SchemaRegistry() };
+
         var v = new SchemaValidator();
         foreach (string file in Directory.EnumerateFiles(schemaDir, "*.json"))
         {
-            v._schemas[Path.GetFileNameWithoutExtension(file)] = JsonSchema.FromText(File.ReadAllText(file));
+            v._schemas[Path.GetFileNameWithoutExtension(file)] = JsonSchema.FromText(File.ReadAllText(file), options);
         }
 
         return v;
@@ -31,12 +36,12 @@ internal sealed class SchemaValidator
             throw new InvalidOperationException($"No schema '{schemaName}' loaded (validating {relPath}).");
         }
 
-        JsonNode? node = JsonNode.Parse(json);
-        EvaluationResults results = schema.Evaluate(node, new EvaluationOptions { OutputFormat = OutputFormat.List });
+        using JsonDocument doc = JsonDocument.Parse(json);
+        EvaluationResults results = schema.Evaluate(doc.RootElement, new EvaluationOptions { OutputFormat = OutputFormat.List });
         if (!results.IsValid)
         {
-            IEnumerable<string> errors = results.Details
-                .Where(d => d.HasErrors)
+            IEnumerable<string> errors = (results.Details ?? [])
+                .Where(d => d.Errors is { Count: > 0 })
                 .SelectMany(d => d.Errors!.Select(e => $"{d.InstanceLocation}: {e.Value}"))
                 .Distinct()
                 .Take(10);
