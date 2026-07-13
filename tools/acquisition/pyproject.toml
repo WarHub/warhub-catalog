@@ -10,6 +10,15 @@ dependencies = [
     "pyyaml>=6.0",
 ]
 
+[project.optional-dependencies]
+# Only needed by acquire/strategies/playwright_wp.py's REAL browser fetcher (Task 10, CMON --
+# a Cloudflare-walled marketing site that 403s to curl/httpx and needs a JS-capable client). Kept
+# out of the base dependency set deliberately: descriptor validation, the strategy registry, and
+# the full non-live test suite must all work with playwright absent (the module's own docstring
+# explains the lazy-import seam). `uv sync --extra browser` + `playwright install chromium` to use
+# the live path.
+browser = ["playwright>=1.40"]
+
 [project.scripts]
 warhub-data = "warhub_acquisition.cli:main"
 
