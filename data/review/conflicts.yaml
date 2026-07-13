@@ -291,9 +291,11 @@ conflicts:
         sources:
           - legacy-catalog
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060393706489'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
   - type: ean-mismatch
     entity: steamforged-games/SFEE-LL005
     chosen: '5060453697184'
@@ -465,6 +467,7 @@ conflicts:
       - ean: '9781911281580'
         sources:
           - legacy-catalog
+          - ret-radaddel
       - ean: '9781911281603'
         sources:
           - mfr-warlord-store
@@ -503,7 +506,7 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60010199071
     names:
-      - 'Kill Team: Starter Set'
+      - 'Warhammer 40K Kill Team: Starter Set (KT24)'
   - type: unclassified-entity
     entity: games-workshop/60010199079
     names:
@@ -511,7 +514,7 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60010199080
     names:
-      - 'Warhammer 40000: Armageddon'
+      - 'Warhammer 40K: Armageddon - 11th Edition Box Set'
   - type: unclassified-entity
     entity: games-workshop/60010199082
     names:
@@ -563,11 +566,11 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60030101062
     names:
-      - 'Codex Supplement: Dark Angels 10th Edition'
+      - 'Warhammer 40K: Codex Supplement: Dark Angels (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030101063
     names:
-      - 'Codex: Blood Angels (10th Edition)'
+      - 'Warhammer 40K: Blood Angels - Codex Supplement (10E)'
   - type: unclassified-entity
     entity: games-workshop/60030101064
     names:
@@ -575,7 +578,7 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60030101065
     names:
-      - 'Codex Supplement: Black Templars'
+      - 'Warhammer 40K: Black Templars - Codex Supplement (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030102030
     names:
@@ -583,11 +586,11 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60030102031
     names:
-      - 'Codex: Chaos Knights'
+      - 'Warhammer 40K: Chaos Knights - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030102032
     names:
-      - 'Codex: Death Guard (10th Edition)'
+      - 'Warhammer 40K: Death Guard - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030102033
     names:
@@ -595,75 +598,75 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60030102034
     names:
-      - 'Codex: World Eaters (10th Edition)'
+      - 'Warhammer 40K: Codex - World Eaters (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030102035
     names:
-      - 'Codex: Emperor''s Children (10th Edition)'
+      - 'Warhammer 40K: Emperor''s Children - Codex'
   - type: unclassified-entity
     entity: games-workshop/60030103013
     names:
-      - 'Codex: Orks (10th Edition)'
+      - 'Warhammer 40K: Orks - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030104013
     names:
-      - 'Codex: Aeldari (10th Edition)'
+      - 'Warhammer 40K: Aeldari - Codex (10E)'
   - type: unclassified-entity
     entity: games-workshop/60030105013
     names:
-      - 'Codex: Astra Militarum (10th Edition)'
+      - 'Warhammer 40K: Astra Militarum - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030106010
     names:
-      - 'Codex: Tyranids (10th Edition)'
+      - 'Warhammer 40K: Codex - Tyranids (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030107008
     names:
-      - 'Codex: Grey Knights'
+      - 'Warhammer 40K: Grey Knights - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030108019
     names:
-      - 'Codex: Adeptus Custodes (10th Edition)'
+      - 'Warhammer 40K: Adeptus Custodes - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030108020
     names:
-      - 'Codex: Adepta Sororitas (Hb) (10th Edition)'
+      - 'Warhammer 40K: Codex - Adepta Sororitas (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030108021
     names:
-      - 'Codex: Imperial Agents (English)'
+      - 'Warhammer 40K: Codex - Imperial Agents'
   - type: unclassified-entity
     entity: games-workshop/60030108022
     names:
-      - 'Codex: Imperial Knights (10th Edition)'
+      - 'Warhammer 40K: Imperial Knights - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030110008
     names:
-      - 'Codex: Necrons (10th Edition)'
+      - 'Warhammer 40K: Codex - Necrons (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030112009
     names:
-      - 'Codex: Drukhari'
+      - 'Warhammer 40K: Drukhari - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030113014
     names:
-      - 'Codex: T''au Empire (10th Edition)'
+      - 'Warhammer 40K: Codex - T''au Empire (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030116008
     names:
-      - 'Codex: Adeptus Mechanicus 10th Edition'
+      - 'Warhammer 40K: Codex - Adeptus Mechanicus (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030117005
     names:
-      - 'Codex: Genestealer Cults (10th Edition)'
+      - 'Warhammer 40K: Codex - Genestealer Cults (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030118002
     names:
-      - Codex Leagues Of Votann (10th Edition)
+      - 'Warhammer 40K: Leagues of Votann - Codex (10th Edition)'
   - type: unclassified-entity
     entity: games-workshop/60030199045
     names:
-      - 'Kill Team: Nachmund (Book)'
+      - 'Warhammer 40K Kill Team: Nachmund (Softcover)'
   - type: unclassified-entity
     entity: games-workshop/60030199048
     names:
@@ -879,39 +882,39 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60040199175
     names:
-      - 'Boarding Actions: Warhammer 40000'
+      - 'Warhammer 40K: Boarding Action'
   - type: unclassified-entity
     entity: games-workshop/60040199176
     names:
-      - 'Kill Team: Core Book (English)'
+      - 'Warhammer 40K Kill Team: Core Book (2024)'
   - type: unclassified-entity
     entity: games-workshop/60040199178
     names:
-      - Nachmund Gauntlet Crusade Campaign Book
+      - 'Warhammer 40K: Crusade - Nachmund Gauntlet'
   - type: unclassified-entity
     entity: games-workshop/60040199184
     names:
-      - '500 Worlds: Titus'
+      - 'Warhammer 40K: 500 Worlds: Titus - The Battle for Unity Begins'
   - type: unclassified-entity
     entity: games-workshop/60040199186
     names:
-      - 'Kill Team: Nemesis Operatives'
+      - 'Warhammer 40K: Kill Team - Nemesis Operatives'
   - type: unclassified-entity
     entity: games-workshop/60040199189
     names:
-      - 'Eye Of Terror: Reign Of Iron'
+      - 'Warhammer 40K: Eye of Terror - Reign of Iron - War for the Cadian Gate'
   - type: unclassified-entity
     entity: games-workshop/60040199190
     names:
-      - 'Armageddon: The Return Of Yarrick - War Without End'
+      - 'Warhammer 40K: Armageddon - The Return of Yarrick - War Without End (Hardcover)'
   - type: unclassified-entity
     entity: games-workshop/60040199194
     names:
-      - 'Warhammer 40K: Core Rules (11th Edition)'
+      - 'Warhammer 40K: Core Rules (11th Edition) (Softcover)'
   - type: unclassified-entity
     entity: games-workshop/60040199201
     names:
-      - Combat Patrol Companion - Warhammer 40000
+      - 'Warhammer 40K: Combat Patrol Companion (Softcover)'
   - type: unclassified-entity
     entity: games-workshop/60040281092
     names:
@@ -1219,11 +1222,11 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050101023
     names:
-      - Phobos Strike Team Datacards - Kill Team
+      - 'Warhammer 40K Kill Team: Phobos Strike Team – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050101024
     names:
-      - Scout Squad Datacards - Kill Team (Eng)
+      - 'Warhammer 40K Kill Team: Scout Squad - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050101025
     names:
@@ -1239,11 +1242,11 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050102017
     names:
-      - 'Datasheet Cards: Emperor''s Children'
+      - 'Warhammer 40K: Emperor''s Children - Datasheet Cards'
   - type: unclassified-entity
     entity: games-workshop/60050102018
     names:
-      - Goremongers Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Goremongers - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050102019
     names:
@@ -1255,19 +1258,19 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050102021
     names:
-      - Blooded Datacards - Kill Team (Eng)
+      - 'Warhammer 40K Kill Team: Blooded - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050102022
     names:
-      - Fellgor Ravagers Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Fellgor Ravagers – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050102023
     names:
-      - Nemesis Claw Datacards - Kill Team (Eng)
+      - 'Warhammer 40K Kill Team: Nemesis Claw - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050102024
     names:
-      - Chaos Cult Datacards - Kill Team
+      - 'Warhammer 40K Kill Team: Chaos Cult – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050102025
     names:
@@ -1275,27 +1278,27 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050103005
     names:
-      - 'Kill Team Datacards: Wrecka Krew (Eng)'
+      - 'Warhammer 40K: Kill Team - Wrecka Krew - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050104005
     names:
-      - Blades of Khaine Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Blades of Khaine – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050105003
     names:
-      - Tempestus Aquilons Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Tempestus Aquilons – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050105005
     names:
-      - 'Kill Team Datacards: Ratlings (Eng)'
+      - 'Warhammer 40K: Kill Team - Ratlings - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050105006
     names:
-      - Death Korps Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Death Korps – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050105007
     names:
-      - Kasrkin Datacards - Kill Team
+      - 'Warhammer 40K Kill Team: Kasrkin – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050106004
     names:
@@ -1303,31 +1306,31 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050107003
     names:
-      - 'Datasheet Cards: Grey Knights'
+      - 'Warhammer 40K: Grey Knights - Datasheet Cards'
   - type: unclassified-entity
     entity: games-workshop/60050108011
     names:
-      - 'Imperial Agents: Datasheet Cards (10th Edition)'
+      - 'Warhammer 40K: Datasheet Cards - Imperial Agents'
   - type: unclassified-entity
     entity: games-workshop/60050108012
     names:
-      - 'Datasheet Cards: Imperial Knights'
+      - 'Warhammer 40K: Imperial Knights - Datasheet Cards'
   - type: unclassified-entity
     entity: games-workshop/60050108013
     names:
-      - Sanctifiers Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Sanctifiers - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050108015
     names:
-      - Imperial Navy Breachers Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Imperial Navy Breachers – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050108016
     names:
-      - Exaction Squad Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Exaction Squad – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050108017
     names:
-      - Inquisitorial Agents Datacards - Kill Team
+      - 'Warhammer 40K Kill Team: Inquisitorial Agents – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050108018
     names:
@@ -1339,23 +1342,23 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050110003
     names:
-      - Hierotek Circle Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Hierotek Circle – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050110004
     names:
-      - Canoptek Circle Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Canoptek Circle Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050112004
     names:
-      - 'Datasheet Cards: Drukhari'
+      - 'Warhammer 40K: Drukhari - Datasheet Cards'
   - type: unclassified-entity
     entity: games-workshop/60050112005
     names:
-      - Hand of the Archon Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Hand of the Archon – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050112006
     names:
-      - Mandrakes Datacards - Kill Team (Eng)
+      - 'Warhammer 40K Kill Team: Mandrakes - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050113004
     names:
@@ -1363,11 +1366,11 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050113006
     names:
-      - Farstalker Kinband Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Farstalker Kinband – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050116004
     names:
-      - 'Datacards: Battleclade - Kill Team'
+      - 'Warhammer 40K: Kill Team - Battleclade - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050117002
     names:
@@ -1375,15 +1378,15 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050117003
     names:
-      - Brood Brothers Datacards - Kill Team (Eng)
+      - 'Warhammer 40K Kill Team: Brood Brothers - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050118003
     names:
-      - Hearthkyn Salvagers Datacards - Kill Team
+      - 'Warhammer 40K: Kill Team - Hearthkyn Salvagers – Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050118004
     names:
-      - Hernkyn Yaegirs Datacards - Kill Team (Eng)
+      - 'Warhammer 40K Kill Team: Hernkyn Yaegirs - Datacards'
   - type: unclassified-entity
     entity: games-workshop/60050118005
     names:
@@ -1391,19 +1394,19 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/60050199059
     names:
-      - 'Chapter Approved: Mission Deck 2025-26'
+      - 'Warhammer 40K: Chapter Approved 2025-26 - Mission Deck'
   - type: unclassified-entity
     entity: games-workshop/60050199060
     names:
-      - 'Kill Team: Approved Ops Cards Pack 2025'
+      - 'Warhammer 40K: Kill Team - Approved Ops Card Pack 2025'
   - type: unclassified-entity
     entity: games-workshop/60050199061
     names:
-      - Chapter Approved Armageddon Mission Deck
+      - 'Warhammer 40K: Chapter Approved 2026-27 - Mission Deck'
   - type: unclassified-entity
     entity: games-workshop/60050199062
     names:
-      - Dominatus - Armageddon
+      - 'Warhammer 40K: Dominatus - Narrative Campaign Deck'
   - type: unclassified-entity
     entity: games-workshop/60050201005
     names:
@@ -2119,7 +2122,7 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/99120101411
     names:
-      - Dark Angels Upgrades And Transfers
+      - 'Warhammer 40K: Dark Angels - Upgrades & Transfers'
   - type: unclassified-entity
     entity: games-workshop/99120101429
     names:
@@ -2147,7 +2150,7 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/99120102261
     names:
-      - 'Emperor''s Children: Lords Of Excess Battleforce'
+      - 'Warhammer 40K: Emperor''s Children Battleforce - Lords of Excess'
   - type: unclassified-entity
     entity: games-workshop/99120102262
     names:
@@ -2167,7 +2170,7 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/99120118029
     names:
-      - 'Leagues Of Votann: Cthonian Prospect Battleforce'
+      - 'Warhammer 40K: Leagues of Votann Battleforce - Cthonian Prospect'
   - type: unclassified-entity
     entity: games-workshop/99120199039
     names:
@@ -2331,19 +2334,19 @@ conflicts:
   - type: unclassified-entity
     entity: games-workshop/99220101038
     names:
-      - 'Warhammer 40000: Iron Hands Dice'
+      - 'Warhammer 40K: Iron Hands - Dice Set'
   - type: unclassified-entity
     entity: games-workshop/99220102025
     names:
-      - 'Kill Team: Fellgor Ravagers Dice Set'
+      - 'Warhammer 40K Kill Team: Fellgor Ravagers Dice Set'
   - type: unclassified-entity
     entity: games-workshop/99220104012
     names:
-      - Aeldari Corsairs Dice
+      - 'Warhammer 40K: Aeldari - Corsairs - Dice Set'
   - type: unclassified-entity
     entity: games-workshop/99220112005
     names:
-      - 'Warhammer 40000: Drukhari Dice'
+      - 'Warhammer 40K: Drukhari - Dice Set'
   - type: unclassified-entity
     entity: games-workshop/99220199009
     names:
@@ -2761,10 +2764,6 @@ conflicts:
     names:
       - 'Aeldari: Codex (deutsch) von Games Workshop | Radaddel | Radaddel Tabletop Shop'
   - type: unclassified-entity
-    entity: games-workshop/aeldari-datasheet-cards-englisch-von-games-workshop-radaddel-radaddel-tabletop-shop
-    names:
-      - 'Aeldari: Datasheet Cards (englisch) von Games Workshop | Radaddel | Radaddel Tabletop Shop'
-  - type: unclassified-entity
     entity: games-workshop/aeldari-datenblattkarten-deutsch-von-games-workshop-radaddel-radaddel-tabletop-shop
     names:
       - 'Aeldari: Datenblattkarten (deutsch) von Games Workshop | Radaddel | Radaddel Tabletop Shop'
@@ -2885,9 +2884,93 @@ conflicts:
     names:
       - 'Air: Valdor Gold (24ml) 28-77 von Games Workshop | Radaddel | Radaddel Tabletop Shop'
   - type: unclassified-entity
+    entity: games-workshop/amdur-lord-of-blades-lotr-evil-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - Amdur Lord of Blades (LOTR - Evil) von Games Workshop | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/anvils-of-the-heldenhammer-the-ancients-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Anvils of the Heldenhammer: The Ancients | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/aos-elder-gnarloak-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - 'AoS: Elder Gnarloak von Games Workshop | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/aos-general-s-handbook-2019-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - 'AoS: General´s Handbook 2019 von Games Workshop | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/aos-generals-handbook-2023-season-1-englisch-radaddel-radaddel-tabletop-shop
+    names:
+      - AoS Generals Handbook 2023 - Season 1 (englisch) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/aos-generals-handbook-2024-englisch-radaddel-radaddel-tabletop-shop
+    names:
+      - AoS Generals Handbook 2024 (englisch) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/aos-handbuch-des-generals-2024-deutsch-radaddel-radaddel-tabletop-shop
+    names:
+      - AoS Handbuch des Generals 2024 (deutsch) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/aos-paint-set-skaven-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - AoS Paint Set Skaven von Games Workshop | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/aos-paint-set-stormcast-eternals-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - AoS Paint Set Stormcast Eternals von Games Workshop | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/aos-paints-amp-amp-tools-set-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - AoS Paints &amp;amp; Tools Set von Games Workshop | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/aragorn-the-black-gate-lotr-good-radaddel-radaddel-tabletop-shop
+    names:
+      - Aragorn (The Black Gate) (LOTR - Good) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/arks-of-omen-angron-englisch-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Arks Of Omen: Angron (englisch) von Games Workshop | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/arks-of-omen-farsight-englisch-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Arks of Omen: Farsight (englisch) von Games Workshop | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/armageddon-yarricks-ruckkehr-deutsch-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Armageddon: Yarricks Rückkehr (deutsch) | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/armageddon-zeit-des-feuers-deutsch-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Armageddon: Zeit des Feuers (deutsch) | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/army-of-the-dead-banner-bearer-lotr-good-radaddel-radaddel-tabletop-shop
+    names:
+      - Army of the Dead Banner Bearer (LOTR - Good) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/arwen-evenstar-foot-amp-amp-mounted-lotr-good-radaddel-radaddel-tabletop-shop
+    names:
+      - Arwen Evenstar (Foot &amp;amp; Mounted) (LOTR - Good) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: games-workshop/astra-militarum-codex-deutsch-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Astra Militarum: Codex (deutsch) von Games Workshop | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/astra-militarum-commissar-yarrick-dice-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Astra Militarum: Commissar Yarrick Dice | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: games-workshop/astra-militarum-datasheet-cards-englisch-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Astra Militarum: Datasheet Cards (englisch) | Radaddel | Radaddel Tabletop Shop'
+  - type: unclassified-entity
     entity: games-workshop/chaos-black-spray-aerosol
     names:
       - Chaos Black Spray (Aerosol)
+  - type: unclassified-entity
+    entity: games-workshop/chaos-space-marines-defiler-von-games-workshop-radaddel-radaddel-tabletop-shop
+    names:
+      - 'Chaos Space Marines: Defiler von Games Workshop | Radaddel | Radaddel Tabletop Shop'
   - type: unclassified-entity
     entity: games-workshop/citadel-12mm-dice-cube
     names:
@@ -4360,6 +4443,522 @@ conflicts:
     entity: games-workshop/retributor-armour-spray-aerosol
     names:
       - Retributor Armour Spray (Aerosol)
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-10th-edition-core-book
+    names:
+      - 'Warhammer 40K 10th Edition: Core Book'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-500-worlds-battalion-necrons
+    names:
+      - 'Warhammer 40K: 500 Worlds Battalion - Necrons'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-9th-edition-core-rule-book-hardcover
+    names:
+      - 'Warhammer 40K: 9th Edition Core Rule Book (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-9th-edition-datacards-chaos-daemons
+    names:
+      - 'Warhammer 40K 9th Edition: Datacards - Chaos Daemons'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adepta-sororitas-battleforce-penitent-crusade-host
+    names:
+      - 'Warhammer 40K: Adepta Sororitas Battleforce - Penitent Crusade Host'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adepta-sororitas-canoness
+    names:
+      - 'Warhammer 40K: Adepta Sororitas - Canoness'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adepta-sororitas-engines-of-redemption
+    names:
+      - 'Warhammer 40K: Adepta Sororitas - Engines of Redemption'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adeptus-astartes-mark-iii-space-marines-the-horus-heresy
+    names:
+      - 'Warhammer 40K: Adeptus Astartes - Mark III Space Marines (The Horus Heresy)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adeptus-custodes-watchers-of-the-gate
+    names:
+      - 'Warhammer 40K: Adeptus Custodes – Watchers of The Gate'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adeptus-mechanicus-archaeopter
+    names:
+      - 'Warhammer 40K: Adeptus Mechanicus - Archaeopter'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adeptus-mechanicus-pteraxii
+    names:
+      - 'Warhammer 40K: Adeptus Mechanicus - Pteraxii'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-adeptus-mechanicus-serberys-raiders
+    names:
+      - 'Warhammer 40K: Adeptus Mechanicus - Serberys Raiders'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-aeldari-datasheet-cards-10e
+    names:
+      - 'Warhammer 40K: Aeldari - Datasheet Cards (10E)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-aeldari-dice-set
+    names:
+      - 'Warhammer 40K: Aeldari - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-age-of-sigmar-daemons-of-khorne-bloodthirster-3rd-edition
+    names:
+      - 'Warhammer 40K/Age of Sigmar: Daemons of Khorne - Bloodthirster (3rd Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-age-of-sigmar-daemons-of-nurgle-spoilpox-scrivener
+    names:
+      - 'Warhammer 40K/Age of Sigmar: Daemons of Nurgle - Spoilpox Scrivener'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse
+    names:
+      - 'Warhammer 40K: Apocalypse'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-32mm-movement-trays
+    names:
+      - 'Warhammer 40K: Apocalypse - 32mm Movement Trays'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-aeldari-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Aeldari Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-astra-militarum-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Astra Militarum Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-chaos-daemons-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Chaos Daemons Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-chaos-space-marines-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Chaos Space Marines Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-necrons-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Necrons Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-orks-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Orks Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-t-au-empire-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - T''au Empire Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-apocalypse-tyranids-genestealer-cults-datasheet-cards
+    names:
+      - 'Warhammer 40K: Apocalypse - Tyranids & Genestealer Cults Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-arks-of-omen-abaddon
+    names:
+      - 'Warhammer 40K: Arks of Omen - Abaddon'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-arks-of-omen-vashtorr-dice-set
+    names:
+      - 'Warhammer 40K: Arks of Omen - Vashtorr Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-armageddon-battalion-astra-militarum
+    names:
+      - 'Warhammer 40K: Armageddon Battalion - Astra Militarum'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-astra-militarum-hell-s-last
+    names:
+      - 'Warhammer 40K: Astra Militarum - Hell''s Last'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-astra-militarum-provisionally-prepared-commemorative-series
+    names:
+      - 'Warhammer 40K: Astra Militarum - Provisionally Prepared (Commemorative Series)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-battle-journal
+    names:
+      - 'Warhammer 40K: Battle Journal'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-battlezone-fronteris-stc-hab-bunker-stockades
+    names:
+      - 'Warhammer 40K: Battlezone Fronteris – STC Hab-Bunker & Stockades'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-battlezone-fronteris-vox-antenna-and-auspex-shrine
+    names:
+      - 'Warhammer 40K: Battlezone Fronteris - Vox-Antenna and Auspex Shrine'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-battlezone-manufactorum-conservators
+    names:
+      - 'Warhammer 40K: Battlezone - Manufactorum – Conservators'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-battlezone-manufactorum-terrain-datasheet-cards
+    names:
+      - 'Warhammer 40K: Battlezone - Manufactorum - Terrain Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-battlezone-mechanicus-ferratonic-furnace
+    names:
+      - 'Warhammer 40K: Battlezone Mechanicus – Ferratonic Furnace'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-blood-angels-datasheet-cards
+    names:
+      - 'Warhammer 40K: Blood Angels - Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-daemons-datacards
+    names:
+      - 'Warhammer 40K: Chaos Daemons Datacards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-knights-datasheet-cards
+    names:
+      - 'Warhammer 40K: Chaos Knights - Datasheet Cards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-knights-dice-set
+    names:
+      - 'Warhammer 40K: Chaos Knights - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-space-marines-dark-apostle
+    names:
+      - 'Warhammer 40K: Chaos Space Marines - Dark Apostle'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-space-marines-datacards-2017
+    names:
+      - 'Warhammer 40K: Chaos Space Marines Datacards (2017)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-space-marines-dice-set
+    names:
+      - 'Warhammer 40K: Chaos Space Marines Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-space-marines-iron-warriors-dice-set-16ct
+    names:
+      - 'Warhammer 40K: Chaos Space Marines - Iron Warriors - Dice Set (16ct)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-space-marines-legionaries
+    names:
+      - 'Warhammer 40K: Chaos Space Marines - Legionaries'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chaos-space-marines-red-corsairs-dice-set
+    names:
+      - 'Warhammer 40K: Chaos Space Marines - Red Corsairs - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chapter-approved-2017-edition-softcover
+    names:
+      - 'Warhammer 40K: Chapter Approved - 2017 Edition (Softcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chapter-approved-grand-tournament-2020-mission-pack-softcover-clearance
+    names:
+      - 'Warhammer 40K: Chapter Approved - Grand Tournament 2020 Mission Pack (Softcover) (Clearance)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chapter-approved-grand-tournament-2021-mission-pack-munitorum-field-manual-2021-mkii
+    names:
+      - 'Warhammer 40K: Chapter Approved - Grand Tournament 2021 Mission Pack & Munitorum Field Manual 2021 MkII'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chapter-approved-mission-pack-arks-of-omen-grand-tournament
+    names:
+      - 'Warhammer 40K: Chapter Approved Mission Pack - Arks of Omen - Grand Tournament'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chapter-approved-mission-pack-tactical-deployment
+    names:
+      - 'Warhammer 40K: Chapter Approved Mission Pack - Tactical Deployment'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-chapter-approved-mission-pack-war-zone-nachmund-grand-tournament-munitorum-field-manual-2022
+    names:
+      - 'Warhammer 40K: Chapter Approved Mission Pack - War Zone Nachmund Grand Tournament & Munitorum Field Manual 2022'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-citadel-combat-cards-space-marines-chaos
+    names:
+      - 'Warhammer 40K: Citadel Combat Cards Space Marines / Chaos'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-adeptus-custodes-2022-hardcover
+    names:
+      - 'Warhammer 40K: Codex - Adeptus Custodes (2022) (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-aeldari-hardcover
+    names:
+      - 'Warhammer 40K: Codex - Aeldari (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-chaos-space-marines-ii
+    names:
+      - 'Warhammer 40K: Codex - Chaos Space Marines II'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-craftworlds-hardcover
+    names:
+      - 'Warhammer 40K: Codex - Craftworlds (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-drukhari-9th-edition
+    names:
+      - 'Warhammer 40K: Codex - Drukhari (9th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-genestealer-cults
+    names:
+      - 'Warhammer 40K: Codex - Genestealer Cults'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-genestealer-cults-2022-hardcover
+    names:
+      - 'Warhammer 40K: Codex - Genestealer Cults (2022) (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-codex-t-au-empire-hardcover-2022
+    names:
+      - 'Warhammer 40K: Codex - T''au Empire (Hardcover) (2022)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-combat-patrol-chaos-space-marines-iron-warriors
+    names:
+      - 'Warhammer 40K Combat Patrol: Chaos Space Marines - Iron Warriors'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-combat-patrol-iron-hands
+    names:
+      - 'Warhammer 40K Combat Patrol: Iron Hands'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-craftworlds-datacards
+    names:
+      - 'Warhammer 40K: Craftworlds Datacards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-craftworlds-hemlock-wraithfighter-9th-edition
+    names:
+      - 'Warhammer 40K: Craftworlds - Hemlock Wraithfighter (9th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-crusade-armageddon-hardcover
+    names:
+      - 'Warhammer 40K: Crusade - Armageddon (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-crusade-journal
+    names:
+      - 'Warhammer 40K: Crusade Journal'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-crusade-mission-pack-containment
+    names:
+      - 'Warhammer 40K: Crusade - Mission Pack - Containment'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-crusade-mission-pack-plague-purge
+    names:
+      - 'Warhammer 40K: Crusade Mission Pack - Plague Purge'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-crusade-mission-pack-wars-of-faith
+    names:
+      - 'Warhammer 40K: Crusade Mission Pack - Wars of Faith'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-daemonifuge-ephrael-stern-kyganil
+    names:
+      - 'Warhammer 40K: Daemonifuge – Ephrael Stern & Kyganil'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-dark-angels-datacards
+    names:
+      - 'Warhammer 40K: Dark Angels Datacards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-dark-eldar-archon
+    names:
+      - 'Warhammer 40K: Dark Eldar Archon'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-darktide-the-miniatures-game
+    names:
+      - 'Warhammer 40K: Darktide - The Miniatures Game'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-astra-militarum-2017
+    names:
+      - 'Warhammer 40K: Datacards - Astra Militarum (2017)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-blood-angels-old-version
+    names:
+      - 'Warhammer 40K: Datacards Blood Angels (Old Version)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-death-guard
+    names:
+      - 'Warhammer 40K: Datacards - Death Guard'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-deathwatch-old-version
+    names:
+      - 'Warhammer 40K: Datacards - Deathwatch (Old Version)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-drukhari-9th-edition
+    names:
+      - 'Warhammer 40K: Datacards - Drukhari (9th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-genestealer-cults
+    names:
+      - 'Warhammer 40K: Datacards - Genestealer Cults'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-harlequins
+    names:
+      - 'Warhammer 40K: Datacards - Harlequins'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-leagues-of-votann-9th-edition
+    names:
+      - 'Warhammer 40K: Datacards - Leagues of Votann (9th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-space-wolves
+    names:
+      - 'Warhammer 40K: Datacards - Space Wolves'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-white-scars
+    names:
+      - 'Warhammer 40K: Datacards - White Scars'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-datacards-world-eaters
+    names:
+      - 'Warhammer 40K: Datacards - World Eaters'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-eye-of-terror-battalion-sons-of-dorn
+    names:
+      - 'Warhammer 40K: Eye of Terror Battalion - Sons of Dorn'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-abominant
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Abominant'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-achilles-ridgerunner
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Achilles Ridgerunner'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-acolyte-hybrids
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Acolyte Hybrids'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-biophagus
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Biophagus'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-clamavus
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Clamavus'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-datacards-2022
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Datacards (2022)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-jackal-alphus
+    names:
+      - 'Warhammer 40K: Genestealer Cults -Jackal Alphus'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-kelermorph
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Kelermorph'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-locus
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Locus'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-magus
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Magus'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-nexos
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Nexos'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-genestealer-cults-sanctus
+    names:
+      - 'Warhammer 40K: Genestealer Cults - Sanctus'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-grey-knights-dice-set-16-10th-edition
+    names:
+      - 'Warhammer 40K: Grey Knights - Dice Set (16) (10th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-haemotrope-reactor
+    names:
+      - 'Warhammer 40K: Haemotrope Reactor'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-hero-bases
+    names:
+      - 'Warhammer 40K: Hero Bases'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-imperial-fists-dice-set
+    names:
+      - 'Warhammer 40K: Imperial Fists - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-imperial-guard-chimera
+    names:
+      - 'Warhammer 40K: Imperial Guard Chimera'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-imperial-knights-datacards
+    names:
+      - 'Warhammer 40K: Imperial Knights - Datacards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-imperial-knights-dice-set-10th-edition
+    names:
+      - 'Warhammer 40K: Imperial Knights - Dice Set (10th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-imperium-nihilus-vigilus-ablaze
+    names:
+      - 'Warhammer 40K: Imperium Nihilus - Vigilus Ablaze'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-imperium-nihilus-vigilus-defiant-hardcover
+    names:
+      - 'Warhammer 40K: Imperium Nihilus - Vigilus Defiant (Hardcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-introductory-set
+    names:
+      - 'Warhammer 40K: Introductory Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-adeptus-astartes-dice-set
+    names:
+      - 'Warhammer 40K: Kill Team - Adeptus Astartes Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-annual-2022
+    names:
+      - 'Warhammer 40K Kill Team: Annual 2022'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-chalnath-softcover
+    names:
+      - 'Warhammer 40K Kill Team: Chalnath (Softcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-chaotica-dice-set
+    names:
+      - 'Warhammer 40K: Kill Team - Chaotica Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-commanders-expansion-set
+    names:
+      - 'Warhammer 40K Kill Team: Commanders Expansion Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-corsair-voidscarred-datacards
+    names:
+      - 'Warhammer 40K Kill Team: Corsair Voidscarred - Datacards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-corsair-voidscarred-dice-set
+    names:
+      - 'Warhammer 40K Kill Team: Corsair Voidscarred - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-farstalker-kinband-dice-set
+    names:
+      - 'Warhammer 40K Kill Team: Farstalker Kinband - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-imperial-navy-breachers-dice-set
+    names:
+      - 'Warhammer 40K Kill Team: Imperial Navy Breachers - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-killzone-octarius
+    names:
+      - 'Warhammer 40K: Kill Team - Killzone Octarius'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-killzones-lethal-mission-environments-softcover
+    names:
+      - 'Warhammer 40K Kill Team: Killzones - Lethal Mission Environments (Softcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-legionaries-dice-set
+    names:
+      - 'Warhammer 40K Kill Team: Legionaries - Dice Set'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-octarius-softcover
+    names:
+      - 'Warhammer 40K: Kill Team - Octarius (Softcover)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-pathfinders-datacards
+    names:
+      - 'Warhammer 40K Kill Team: Pathfinders – Datacards'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-phobos-strike-team-kt24
+    names:
+      - 'Warhammer 40K Kill Team: Phobos Strike Team (KT24)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-kill-team-terror-on-devlan
+    names:
+      - 'Warhammer 40K: Kill Team - Terror on Devlan'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-leagues-of-votann-the-ancestors-wrath
+    names:
+      - 'Warhammer 40K: Leagues of Votann - The Ancestors'' Wrath'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-necrons-destroyer-cult-dice
+    names:
+      - 'Warhammer 40K: Necrons - Destroyer Cult Dice'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-orks-datacards-8th-edition
+    names:
+      - 'Warhammer 40K: Orks - Datacards (8th Edition)'
+  - type: unclassified-entity
+    entity: games-workshop/warhammer-40k-orks-datacards-9th-edition
+    names:
+      - 'Warhammer 40K: Orks - Datacards (9th Edition)'
   - type: unclassified-entity
     entity: games-workshop/warhammer-base-abaddon-black-12ml
     names:
@@ -10032,6 +10631,26 @@ conflicts:
     entity: warlord-games/aichi-d3a-val-amp-amp-nakajima-b5n-kate-squadron-radaddel-radaddel-tabletop-shop
     names:
       - Aichi D3A Val &amp;amp; Nakajima B5N Kate Squadron | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: warlord-games/albion-triumphant-pt1-the-peninsular-campaign-englisch-radad-radaddel-tabletop-shop
+    names:
+      - 'Albion Triumphant Pt1: The Peninsular Campaign (englisch) | Radad | Radaddel Tabletop Shop'
+  - type: unclassified-entity
+    entity: warlord-games/allied-star-dice-bag-von-warlord-games-radaddel-radaddel-tabletop-shop
+    names:
+      - Allied Star Dice Bag von Warlord Games | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: warlord-games/american-civil-war-casualty-markers-von-warlord-games-radaddel-radaddel-tabletop-shop
+    names:
+      - American Civil War Casualty Markers von Warlord Games | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: warlord-games/armeebuch-deutschland-dritte-edition-deutsch-radaddel-radaddel-tabletop-shop
+    names:
+      - Armeebuch Deutschland Dritte Edition (deutsch) | Radaddel | Radaddel Tabletop Shop
+  - type: unclassified-entity
+    entity: warlord-games/as42-sahariana-von-warlord-games-radaddel-radaddel-tabletop-shop
+    names:
+      - AS42 Sahariana von Warlord Games | Radaddel | Radaddel Tabletop Shop
   - type: unclassified-entity
     entity: wyrd-games/WYR21301
     names:
