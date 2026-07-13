@@ -1,0 +1,6 @@
+# Archive scaffold: cdx_archive.py's gw-legacy builder does not consult mapping gameSystem/faction
+# tables at all (old-GW webstore pages carry no per-product hierarchy to map) -- this file exists
+# only so the repo-data tests (test_repo_mappings_parse_when_present et al.) have a mapping file
+# to validate per source. Kept empty until/unless that changes.
+gameSystem: {}
+faction: {}

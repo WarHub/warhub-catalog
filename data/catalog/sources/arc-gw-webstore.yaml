@@ -1,0 +1,42 @@
+id: arc-gw-webstore
+kind: archive
+strategy: cdx-archive
+baseUrl: https://web.archive.org
+scope:
+  # Old (pre-~2019) GW webstore product URLs are clean single-segment slugs under /en-GB/, e.g.
+  # /en-GB/10-man-kill-team -- see docs/research/2026-07-12-source-probe-webarchive.md and
+  # cdx_archive.py's module docstring (gw-legacy extractor).
+  cdxUrlPattern: games-workshop.com/en-GB/*
+  extractor: gw-legacy
+  # 2014-2019: the probe doc's confirmed old-webstore era with plentiful 200 captures; GW's
+  # webstore migrated to the current Algolia-backed site (mfr-gw-algolia) after this window.
+  snapshotFrom: "2014"
+  snapshotTo: "2019"
+  # gw-legacy PINS the manufacturer (old-GW pages carry no per-product vendor field) -- "Games
+  # Workshop" is a vendorName on taxonomy/manufacturers.yaml's games-workshop entry, resolved via
+  # Taxonomy.manufacturer_for_vendor (same mechanism mfr-gw-algolia.yaml uses). NOTE: this must be
+  # the vendor NAME string, not the taxonomy slug -- manufacturer_for_vendor looks up
+  # name/vendorNames, not slugs.
+  manufacturer: Games Workshop
+  # Derived from a REAL CDX sample (games-workshop.com/en-GB/*, from=2014&to=2019, limit=100,
+  # fetched 2026-07-13, tests/fixtures or scratch -- see task-3-report.md for the full row dump
+  # and survival-fraction breakdown). Requires a single path segment directly under /en-GB/
+  # (word-chars/hyphens only, terminated by end-of-string, `?`, or `;`) -- this alone excludes
+  # every nested-path asset/gallery URL (.../40kuniverse/battlefleetgothic/.../*.gif) and every
+  # dotted-extension file (foo.jpg/foo.png), as a side effect of `.` not being a word character.
+  # It intentionally does NOT try to distinguish product-detail pages from same-shaped
+  # category/landing pages by name alone (e.g. "1000-Webstore-Exclusive-Products") -- almost all
+  # real category/campaign URLs in the sample return 301/302 and are already excluded by the
+  # strategy's mandatory statuscode==200 filter (independent of this pattern); the rare 200-status
+  # landing page that slips through just fails gw-legacy extraction (no skuid found) and is
+  # counted under stats.extraction_failed, not corrupted into a bad record.
+  urlInclude: 'games-workshop\.com(?::\d+)?/en-GB/[\w][\w-]*(?:[?;]|$)'
+politeness:
+  rps: 1.0
+contract:
+  minCount: 0
+  maxDropPct: 30
+  requiredFieldRates:
+    # gw-legacy pages carry no EAN/barcode at all (probe-confirmed) -- sku (the GW 11-digit code)
+    # is the field this extractor actually guarantees on a successful parse.
+    sku: 0.8
