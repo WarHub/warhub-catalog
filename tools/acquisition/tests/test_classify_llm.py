@@ -173,6 +173,48 @@ def test_default_budget_and_model_constants() -> None:
     assert DEFAULT_MODEL == "claude-haiku-4-5-20251001"
 
 
+# --- candidates homogeneity guard -------------------------------------------------------------
+# queue.py currently guarantees one shared `candidates` object for the whole queue, and the system
+# prompt is built once from the first pending item's candidates. These tests cover what happens if
+# that invariant is ever violated (queue.py bug or a hand-edited queue file).
+
+
+def test_mismatched_candidates_across_queue_items_raises_value_error_naming_entity(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    other_candidates = {"gameSystems": [*CANDIDATES["gameSystems"], "necromunda"], "factions": CANDIDATES["factions"]}
+    item0 = make_item(0, candidates=CANDIDATES)
+    item1 = make_item(1, candidates=other_candidates)
+    write_queue(paths, [item0, item1])
+
+    client = RecordingClient(_accept_all())
+    with pytest.raises(ValueError, match=item1["entity"]):
+        run_llm_classification(paths, run_date="2026-07-12", client=client)
+
+    assert client.calls == []  # must fail before ever sending a request with a wrong-for-item1 prompt
+
+
+def test_equal_but_distinct_candidates_dicts_do_not_trigger_guard_and_validate_per_item(tmp_path: Path) -> None:
+    """Distinct dict objects with equal content must NOT trip the homogeneity guard (it compares
+    by equality, not identity), and each item's decision must validate against its OWN candidates
+    dict rather than a shared/batch-level reference.
+    """
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    candidates_copy = json.loads(json.dumps(CANDIDATES))  # equal by value, distinct object
+    assert candidates_copy == CANDIDATES
+    assert candidates_copy is not CANDIDATES
+    item0 = make_item(0, candidates=CANDIDATES)
+    item1 = make_item(1, candidates=candidates_copy)
+    write_queue(paths, [item0, item1])
+
+    client = RecordingClient(_accept_all())
+    summary = run_llm_classification(paths, run_date="2026-07-12", client=client)
+
+    assert summary.accepted == 2
+    assert summary.unknown == 0
+
+
 # --- cache hit skip ------------------------------------------------------------------------
 
 
@@ -256,6 +298,30 @@ def test_per_item_salvage_on_partial_batch_response(tmp_path: Path) -> None:
     assert entries[items[2]["entity"]]["decision"] == "unknown"
 
 
+def test_duplicate_entity_in_response_last_occurrence_wins(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    items = [make_item(0)]
+    write_queue(paths, items)
+
+    def respond(call, n):
+        entities = _batch_entities(call)
+        return json.dumps(
+            [
+                {"entity": entities[0], "gameSystem": "kings-of-war", "faction": None, "confidence": 0.6},
+                {"entity": entities[0], "gameSystem": "age-of-sigmar", "faction": None, "confidence": 0.9},
+            ]
+        )
+
+    client = RecordingClient(respond)
+    summary = run_llm_classification(paths, run_date="2026-07-12", client=client)
+
+    assert summary.accepted == 1
+    entries = cache_lines(paths)
+    assert entries[0]["gameSystem"] == "age-of-sigmar"
+    assert entries[0]["confidence"] == 0.9
+
+
 def test_response_wrapped_in_markdown_fence_is_parsed(tmp_path: Path) -> None:
     paths = DataPaths(tmp_path)
     seed_taxonomy(paths)
@@ -319,6 +385,27 @@ def test_unknown_faction_slug_rejects_whole_item(tmp_path: Path) -> None:
     # necrons is not a candidate faction for age-of-sigmar -- never guessed, whole item unknown
     assert summary.unknown == 1
     assert summary.accepted == 0
+
+
+def test_boolean_confidence_rejected_as_non_numeric(tmp_path: Path) -> None:
+    # isinstance(True, int) is True in Python -- confidence=True must not be silently coerced into
+    # a "valid" numeric confidence.
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    items = [make_item(0)]
+    write_queue(paths, items)
+
+    def respond(call, n):
+        entities = _batch_entities(call)
+        return json.dumps([{"entity": entities[0], "gameSystem": "age-of-sigmar", "faction": None, "confidence": True}])
+
+    client = RecordingClient(respond)
+    summary = run_llm_classification(paths, run_date="2026-07-12", client=client)
+
+    assert summary.unknown == 1
+    assert summary.accepted == 0
+    entries = cache_lines(paths)
+    assert entries[0]["decision"] == "unknown"
 
 
 def test_literal_unknown_game_system_string_is_unknown_decision(tmp_path: Path) -> None:

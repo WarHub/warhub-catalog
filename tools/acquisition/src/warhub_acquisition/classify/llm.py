@@ -297,7 +297,19 @@ def run_llm_classification(
 
     system_prompt = None
     if pending:
-        system_prompt = build_system_prompt(pending[0][0]["candidates"], game_system_labels, faction_labels)
+        base_candidates = pending[0][0]["candidates"]
+        mismatched = [item["entity"] for item, _ in pending if item["candidates"] != base_candidates]
+        if mismatched:
+            # The system prompt is built ONCE from the first pending item's candidates and reused
+            # for every batch's request. queue.py currently guarantees one shared candidates
+            # object for the whole queue, but a queue.py change or a hand-edited queue file could
+            # silently violate that -- and a mismatched item would then be judged against a
+            # system prompt describing the WRONG candidate set. Fail loud instead of guessing.
+            raise ValueError(
+                "classification queue items do not share one candidates set; the system prompt "
+                "would misdescribe candidates for: " + ", ".join(mismatched)
+            )
+        system_prompt = build_system_prompt(base_candidates, game_system_labels, faction_labels)
 
     queried = 0
     accepted = 0
@@ -311,7 +323,6 @@ def run_llm_classification(
             break
         batch = pending[batch_start : batch_start + _BATCH_SIZE]
         entities = [item["entity"] for item, _ in batch]
-        candidates = batch[0][0]["candidates"]
 
         user_content = json.dumps(
             [_item_for_prompt(item) for item, _ in batch], sort_keys=True, separators=(",", ":")
@@ -331,7 +342,10 @@ def run_llm_classification(
         entries: list[CacheEntry] = []
         for item, input_hash in batch:
             entity = item["entity"]
-            entry = _decide(parsed.get(entity), candidates, model, run_date, input_hash, entity)
+            # Validate against THIS item's own candidates, not a batch-wide/shared reference --
+            # see the homogeneity guard above for why the two are expected to be equal but must
+            # never be assumed identical.
+            entry = _decide(parsed.get(entity), item["candidates"], model, run_date, input_hash, entity)
             entries.append(entry)
             cache[entry.inputHash] = entry
             if entry.decision == "unknown":

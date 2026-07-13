@@ -5,6 +5,7 @@ import os
 import sys
 from pathlib import Path
 
+from warhub_acquisition.classify.llm import DEFAULT_BUDGET, DEFAULT_MODEL
 from warhub_acquisition.migrate.verify import verify_migration
 from warhub_acquisition.report import build_report, check_ean_guard, render_ean_guard_section
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
@@ -186,8 +187,8 @@ def main(argv: list[str] | None = None) -> int:
     classify_mode.add_argument("--emit-queue", action="store_true")
     classify_mode.add_argument("--apply", action="store_true")
     classify_mode.add_argument("--llm", action="store_true")
-    classify.add_argument("--budget", type=int, default=500)
-    classify.add_argument("--model", default="claude-haiku-4-5-20251001")
+    classify.add_argument("--budget", type=int, default=DEFAULT_BUDGET)
+    classify.add_argument("--model", default=DEFAULT_MODEL)
     classify.add_argument("--run-date", default=None)
 
     args = parser.parse_args(argv)
