@@ -77,7 +77,7 @@ tools/
   WarHub.ProductCatalog.Tool/    # scrapes vendor sites -> data/products YAML
   WarHub.PaintCatalog.Tool/      # parses paint lists, computes Delta-E -> data/paints YAML
   WarHub.Catalog.Publish/        # bundles data/ YAML -> dist/ JSON (the published catalog)
-  acquisition/                   # python: migrate/resolve/report (acquire arrives in Plan 3)
+  acquisition/                   # python: acquire/migrate/resolve/report
 data/
   evidence/                      # source of truth: per-source observations (evidence ledger)
   catalog/                       # source of truth: resolved canonical catalog (products/, taxonomy/)
