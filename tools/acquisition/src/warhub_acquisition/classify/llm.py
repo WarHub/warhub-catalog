@@ -10,24 +10,47 @@ guarantees an item is never re-queried while its inputs (including its candidate
 unchanged: `compute_input_hash` hashes the ENTIRE queue item -- including `candidates` -- so a
 taxonomy change that adds/removes a candidate slug naturally invalidates the cache entry (new
 decision space = new hash = re-queried), with no separate versioning scheme required.
+
+Batching, hashing, cache read/append, response parsing, and the SDK call wrapper are shared with
+`classify/joins.py` (Task 6) via `classify/_llm_common.py` -- see that module's docstring. This
+module owns only the classification-specific decision space: the candidate-validated prompt, the
+`CacheEntry` schema, and the gameSystem/faction acceptance logic.
 """
-import hashlib
-import json
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Literal, Protocol
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
+from warhub_acquisition.classify._llm_common import (
+    ACCEPT_THRESHOLD,
+    AnthropicClient,
+    DEFAULT_BATCH_SIZE,
+    DEFAULT_MAX_TOKENS,
+    DEFAULT_MODEL,
+    append_cache_lines,
+    batch_pending,
+    call_batch,
+    compute_input_hash,
+    extract_text,
+    load_cache,
+    parse_response,
+)
 from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.taxonomy import load_labels
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
-DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 DEFAULT_BUDGET = 500
-_BATCH_SIZE = 20
-_ACCEPT_THRESHOLD = 0.8
-_MAX_TOKENS = 4096
+
+__all__ = [
+    "DEFAULT_BUDGET",
+    "DEFAULT_MODEL",
+    "AnthropicClient",
+    "CacheEntry",
+    "LlmRunSummary",
+    "build_system_prompt",
+    "compute_input_hash",
+    "run_llm_classification",
+]
 
 
 class CacheEntry(BaseModel):
@@ -56,31 +79,6 @@ class LlmRunSummary:
             f"queried={self.queried} cached-skips={self.cached_skips} "
             f"accepted={self.accepted} unknown={self.unknown} low-confidence={self.low_confidence}"
         )
-
-
-class _MessagesResource(Protocol):
-    def create(self, **kwargs: object) -> object: ...
-
-
-class AnthropicClient(Protocol):
-    """The one SDK surface this module calls -- `client.messages.create(...)`. This is the mock
-    boundary for tests: inject any object with a `.messages.create(**kwargs)` callable.
-    """
-
-    messages: _MessagesResource
-
-
-# --- input hash --------------------------------------------------------------------------------
-
-
-def compute_input_hash(item: dict) -> str:
-    """sha256 of the canonical queue-item JSON: sorted keys, compact separators, over the WHOLE
-    item -- entity/name/manufacturer/url/description/hints AND candidates. Including candidates
-    is deliberate: a new candidate gameSystem/faction slug is a new decision space, so it must
-    produce a new hash and force a re-query rather than silently reusing a stale cached decision.
-    """
-    canonical = json.dumps(item, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 # --- prompt --------------------------------------------------------------------------------
@@ -154,50 +152,6 @@ def _item_for_prompt(item: dict) -> dict:
     return {key: value for key, value in item.items() if key != "candidates"}
 
 
-# --- response parsing (defensive) -----------------------------------------------------------
-
-
-def _strip_code_fences(text: str) -> str:
-    stripped = text.strip()
-    if stripped.startswith("```"):
-        lines = stripped.splitlines()
-        if lines and lines[0].startswith("```"):
-            lines = lines[1:]
-        if lines and lines[-1].strip().startswith("```"):
-            lines = lines[:-1]
-        stripped = "\n".join(lines)
-    return stripped
-
-
-def _extract_text(response: object) -> str:
-    for block in getattr(response, "content", []) or []:
-        if getattr(block, "type", None) == "text":
-            return block.text
-    return ""
-
-
-def _parse_response(text: str, entities: list[str]) -> dict[str, dict | None]:
-    """Per-item salvage: returns entity -> raw dict (possibly malformed) for every entity found
-    in a parseable response array, entity -> None for everything else (missing from the response,
-    or the response wasn't a parseable JSON array at all -- in which case every entity maps to
-    None, since there is nothing to salvage from unparseable text).
-    """
-    results: dict[str, dict | None] = {entity: None for entity in entities}
-    try:
-        data = json.loads(_strip_code_fences(text))
-    except (json.JSONDecodeError, TypeError):
-        return results
-    if not isinstance(data, list):
-        return results
-    for raw in data:
-        if not isinstance(raw, dict):
-            continue
-        entity = raw.get("entity")
-        if entity in results:
-            results[entity] = raw
-    return results
-
-
 def _decide(
     raw: dict | None, candidates: dict, model: str, run_date: str, input_hash: str, entity: str
 ) -> CacheEntry:
@@ -233,30 +187,8 @@ def _decide(
 # --- cache -----------------------------------------------------------------------------------
 
 
-def _cache_path(paths: DataPaths) -> Path:
+def _cache_path(paths: DataPaths):
     return paths.root / "review" / "classification-cache.jsonl"
-
-
-def _load_cache(path: Path) -> dict[str, CacheEntry]:
-    cache: dict[str, CacheEntry] = {}
-    if not path.exists():
-        return cache
-    for line in path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        entry = CacheEntry.model_validate(json.loads(line))
-        cache[entry.inputHash] = entry
-    return cache
-
-
-def _append_cache_lines(path: Path, entries: list[CacheEntry]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8", newline="\n") as handle:
-        for entry in entries:
-            handle.write(json.dumps(entry.model_dump(mode="json"), sort_keys=True, separators=(",", ":")))
-            handle.write("\n")
-        handle.flush()
 
 
 # --- classifications/products.yaml -----------------------------------------------------------
@@ -284,7 +216,7 @@ def run_llm_classification(
 
     game_system_labels, faction_labels = load_labels(paths.taxonomy)
     cache_path = _cache_path(paths)
-    cache = _load_cache(cache_path)
+    cache = load_cache(cache_path, CacheEntry)
 
     pending: list[tuple[dict, str]] = []
     cached_skips = 0
@@ -318,26 +250,21 @@ def run_llm_classification(
     requests_made = 0
     new_decisions: dict[str, dict] = {}
 
-    for batch_start in range(0, len(pending), _BATCH_SIZE):
-        if requests_made >= budget:
-            break
-        batch = pending[batch_start : batch_start + _BATCH_SIZE]
+    batches = batch_pending(pending, DEFAULT_BATCH_SIZE, budget)
+    for batch in batches:
         entities = [item["entity"] for item, _ in batch]
 
-        user_content = json.dumps(
-            [_item_for_prompt(item) for item, _ in batch], sort_keys=True, separators=(",", ":")
-        )
-        response = client.messages.create(
+        response = call_batch(
+            client,
             model=model,
-            max_tokens=_MAX_TOKENS,
-            temperature=0,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_content}],
+            system_prompt=system_prompt,
+            items=[_item_for_prompt(item) for item, _ in batch],
+            max_tokens=DEFAULT_MAX_TOKENS,
         )
         requests_made += 1
         queried += len(batch)
 
-        parsed = _parse_response(_extract_text(response), entities)
+        parsed = parse_response(extract_text(response), entities)
 
         entries: list[CacheEntry] = []
         for item, input_hash in batch:
@@ -350,7 +277,7 @@ def run_llm_classification(
             cache[entry.inputHash] = entry
             if entry.decision == "unknown":
                 unknown += 1
-            elif entry.confidence is not None and entry.confidence >= _ACCEPT_THRESHOLD:
+            elif entry.confidence is not None and entry.confidence >= ACCEPT_THRESHOLD:
                 accepted += 1
                 new_decisions[entry.entity] = {
                     "gameSystem": entry.gameSystem,
@@ -364,7 +291,7 @@ def run_llm_classification(
                 low_confidence += 1
 
         # incremental flush -- a crash on the NEXT request must not lose this batch's decisions.
-        _append_cache_lines(cache_path, entries)
+        append_cache_lines(cache_path, entries)
 
     if new_decisions:
         _write_classifications(paths, new_decisions)
