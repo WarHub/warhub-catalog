@@ -1,0 +1,55 @@
+id: arc-tistaminis
+kind: archive
+strategy: cdx-archive
+baseUrl: https://web.archive.org
+scope:
+  # Same cdx-archive/shopify-jsonld shape as arc-goblingaming/arc-gw-webstore -- see
+  # cdx_archive.py's module docstring. tistaminis.com is ALSO a live retailer source
+  # (ret-tistaminis, un-scoped in Plan 5 Task 1); this archive source recovers
+  # delisted-since-capture products the live sweep can never see.
+  cdxUrlPattern: tistaminis.com/products/*
+  extractor: shopify-jsonld
+  # Live-verified 2026-07-13 (docs/research/2026-07-13-coverage-arithmetic.md section C):
+  # a real archived product page carries JSON-LD gtin13 -- example
+  # "1/35 Scale Model Kit Batmobile (Batman Ver.) New", gtin13 4573102621856, capture
+  # 20221001055446 (fetched live via the id_ replay form this task, JSON-LD offers[0].gtin13
+  # confirmed byte-for-byte). CDX showNumPages for tistaminis.com/products/* = 10 pages
+  # (full-history, unbounded).
+  # snapshotFrom "2021" biases toward barcode-era captures (goblin-archive lesson: older
+  # captures predate a store's barcode theme) while comfortably PRE-dating the confirmed
+  # 2022-10-01 capture above -- verified this bound does not exclude it. No snapshotTo: unlike
+  # arc-goblingaming (which deliberately stops at end-2023 to avoid re-observing the live
+  # goblin harvest), tistaminis's live retailer source only reaches Shopify's 25,000-product
+  # enumeration cap (see ret-tistaminis.yaml) -- recent archived captures may legitimately
+  # duplicate still-live products, which is harmless (the resolver corroborates, not
+  # conflicts) and this strategy's out-of-print recovery is still real for anything the live
+  # cap missed or that has since been delisted.
+  snapshotFrom: "2021"
+  # tistaminis is a GENERALIST hobby store, confirmed live 2026-07-13 by sampling CDX page 0
+  # (1,704 rows, alphabetically first by slug): scale-model car kits (amt-branded 1:25 kits),
+  # Gundam kits, sports-card booster boxes, dice, and WWII-wargaming ranges of unclear
+  # manufacturer dominate the alphabetically-early slugs, alongside real tracked-brand hits
+  # ("age-of-sigmar" x40, "warlord" x1, "corvus" x3 in that single page). This is exactly the
+  # goblin-archive lesson (unfiltered sweep burns budget on alphabetically-first
+  # off-catalog items) -- unlike wargameportal (a small, name-implied wargaming specialist),
+  # tistaminis needs a tracked-brand urlInclude filter to concentrate its 10-page budget.
+  # Term list = arc-goblingaming's GW terms + Plan 5 Task 2's cross-manufacturer term list
+  # (bolt-action/warlord/mantic/corvus/wyrd/steamforged/etc.), reused rather than invented so
+  # both filters stay derived from the same taxonomy-driven source of truth.
+  urlInclude: warhammer|40k|aos|age-of-sigmar|sigmar|kill-team|necromunda|blood-bowl|middle-earth|horus|citadel|combat-patrol|battletome|codex|underworlds|stormcast|space-marine|adeptus|astra|tyranid|necron|aeldari|drukhari|tau-|ork|chaos|skaven|seraphon|slaves-to-darkness|soulblight|nighthaunt|gloomspite|lumineth|idoneth|sylvaneth|fyreslayer|kharadron|ogor|sons-of-behemat|daughters-of-khaine|cities-of-sigmar|maggotkin|blades-of-khorne|disciples-of-tzeentch|hedonites|beasts-of-chaos|leagues-of-votann|genestealer|deathwatch|grey-knights|thousand-sons|death-guard|world-eaters|black-templars|blood-angels|dark-angels|space-wolves|imperial|white-dwarf|forge-world|primaris|dominion|leviathan|indomitus|warlord|bolt-action|epic-battles|black-powder|hail-caesar|victory-at-sea|cruel-seas|blood-red-skies|konflikt|mantic|kings-of-war|deadzone|firefight|dreadball|armada|malifaux|wyrd|corvus|infinity|marvel-crisis|star-wars-legion|shatterpoint|guild-ball|godtear|warmachine|steamforged|epic-encounters|atomic-mass|cmon|para-bellum
+politeness:
+  rps: 1.0
+  # Wayback CDX data pages are 200KB+ and took 3-7s+ in live controller probes (2026-07-13);
+  # httpx's 5s default made every page fetch time out (fix wave 2, cdx_archive.py). PoliteClient
+  # default is 30s; 60s here gives slow CDX pages ample headroom.
+  timeoutSeconds: 60
+contract:
+  # Archived-only recovery: no population floor to enforce (an empty result on any given run is
+  # not a failure signal the way a live-storefront sweep would be).
+  minCount: 0
+  maxDropPct: 30
+  requiredFieldRates:
+    # Live-verified 2026-07-13: the confirmed archived Shopify page carries JSON-LD gtin13 in
+    # offers[0] -- same "archived Shopify carries gtin13" pattern arc-goblingaming's 0.5 floor
+    # is built on. 0.5 floor pending full-harvest evidence.
+    ean: 0.5

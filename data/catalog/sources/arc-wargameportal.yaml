@@ -1,0 +1,51 @@
+id: arc-wargameportal
+kind: archive
+strategy: cdx-archive
+baseUrl: https://web.archive.org
+scope:
+  # Same cdx-archive/shopify-jsonld shape as arc-goblingaming/arc-gw-webstore/arc-tistaminis --
+  # see cdx_archive.py's module docstring. wargameportal.com has no live retailer source in this
+  # repo (new find, docs/research/2026-07-13-coverage-arithmetic.md section C) -- archive-only.
+  cdxUrlPattern: wargameportal.com/products/*
+  extractor: shopify-jsonld
+  # Live-verified 2026-07-13 (coverage-arithmetic.md section C, and re-confirmed this task via a
+  # direct id_-replay fetch): the archived "Achilles Ridgerunner" page (real GW Genestealer
+  # Cults kit, SKU 51-61) carries JSON-LD gtin13 5011921171996 in offers[0] -- capture
+  # 20241208110155. Note the page's Shopify vendor field is "GW_NA_TRD", NOT one of
+  # games-workshop's existing taxonomy vendorNames, but manufacturer resolution still succeeds
+  # via _resolve_manufacturer's GS1-prefix fallback: 5011921171996 starts with games-workshop's
+  # registered gs1Prefixes: ['5011921'] (data/catalog/taxonomy/manufacturers.yaml). No taxonomy
+  # change needed for this example; a "GW_NA_TRD" vendorNames alias may still be worth adding
+  # later if a full harvest surfaces GW products whose EAN falls outside that one prefix.
+  # CDX showNumPages for wargameportal.com/products/* = 2 pages (full-history, unbounded) --
+  # small archive.
+  # snapshotFrom "2023" biases toward barcode-era captures (goblin-archive lesson) while
+  # comfortably PRE-dating the confirmed 2024-12-08 capture above -- verified this bound does
+  # not exclude it. No snapshotTo: no live wargameportal source exists to avoid overlapping
+  # with, so no upper bound is needed.
+  # NO urlInclude filter: unlike tistaminis (confirmed generalist hobby store), this store's
+  # archive is only 2 CDX pages total -- the goblin-archive "unfiltered sweep burns budget"
+  # lesson is about a 500+-page/500-budget mismatch, which does not apply at this volume (a
+  # full unfiltered sweep of 2 pages costs nothing extra). The store's own name and its one
+  # sampled product (a first-party GW kit) both point toward wargaming-specialist inventory
+  # rather than tistaminis's confirmed car-kit/Gundam/sports-card mix, but this was NOT
+  # independently verified by slug sampling -- doing so would have exceeded this task's ≤6
+  # polite-request budget (already spent confirming both stores' gtin13). If a first harvest
+  # shows meaningful off-catalog noise, add a filter matching arc-tistaminis's then.
+  snapshotFrom: "2023"
+politeness:
+  rps: 1.0
+  # Wayback CDX data pages are 200KB+ and took 3-7s+ in live controller probes (2026-07-13);
+  # httpx's 5s default made every page fetch time out (fix wave 2, cdx_archive.py). PoliteClient
+  # default is 30s; 60s here gives slow CDX pages ample headroom.
+  timeoutSeconds: 60
+contract:
+  # Archived-only recovery: no population floor to enforce (an empty result on any given run is
+  # not a failure signal the way a live-storefront sweep would be).
+  minCount: 0
+  maxDropPct: 30
+  requiredFieldRates:
+    # Live-verified 2026-07-13: the confirmed archived Shopify page carries JSON-LD gtin13 in
+    # offers[0] -- same "archived Shopify carries gtin13" pattern arc-goblingaming's 0.5 floor
+    # is built on. 0.5 floor pending full-harvest evidence.
+    ean: 0.5

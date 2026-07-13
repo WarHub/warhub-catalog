@@ -1,0 +1,6 @@
+# Archive scaffold: cdx_archive.py's shopify-jsonld builder does not consult mapping gameSystem/
+# faction tables at all (archived Shopify JSON-LD carries no game-system hierarchy) -- this file
+# exists only so the repo-data tests (test_repo_mappings_parse_when_present et al.) have a
+# mapping file to validate per source. Kept empty until/unless that changes.
+gameSystem: {}
+faction: {}
