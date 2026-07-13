@@ -1,7 +1,9 @@
 id: ret-goblingaming
 kind: retailer
 strategy: shopify
-baseUrl: https://goblingaming.co.uk
+# www is required: the apex host serves /products.json but 301-redirects
+# /products/<handle>.js to www, and the client does not follow redirects.
+baseUrl: https://www.goblingaming.co.uk
 scope:
   vendors:
     - Games Workshop
