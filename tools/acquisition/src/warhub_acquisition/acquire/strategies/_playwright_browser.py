@@ -35,6 +35,15 @@ return correct content for BOTH the XML sitemaps (37,770 bytes, matching `resp.b
 ordinary HTML product pages (74,948 bytes; `page.content()`'s 76,311 differed only by Chromium's own
 whitespace/DOCTYPE reformatting, not missing content) -- so this is a strict, mimetype-agnostic
 improvement, not a headed-only workaround.
+
+**The two bugs above are INDEPENDENT, and the headless block is REAL.** Directly probed 2026-07-13
+AFTER the `response.text()` fix landed: `headless=True` still gets Cloudflare's challenge on both
+URLs (sitemap 6,221 bytes / ZERO `<loc>` tags, product page 6,200 bytes / no `<h1>`, both containing
+"Just a moment") while `headless=False` gets the real 37,770-byte sitemap and a full product page.
+So the fetcher bug did NOT cause (nor even contribute to) the original BLOCKED verdict -- that
+verdict was correct on its own terms, and `headless=False` is genuinely load-bearing, not a
+cargo-culted workaround for the XML bug. Consequence: CMON CANNOT run in headless CI. It is a
+local-only source until Cloudflare's policy changes.
 """
 from contextlib import contextmanager
 from typing import Iterator

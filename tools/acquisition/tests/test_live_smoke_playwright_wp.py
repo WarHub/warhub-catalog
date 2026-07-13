@@ -33,13 +33,20 @@ body with no interstitial at all. `mfr-cmon.yaml` therefore now carries `scope.h
 came back clean: 320/320 pages fetched, 0 fetch_errors, 0 extraction_failed_name. The `xfail` is
 consequently REMOVED -- this test is expected to pass on the live path now.
 
-(Two Cloudflare-adjacent traps this test would NOT have caught on its own, both fixed in
-`_playwright_browser.py`: `page.content()` returns an EMPTY string for an `application/xml` response
-because Chromium renders XML through its tree-viewer widget rather than as a plain-text DOM -- which
-enumerated zero products and looked *exactly* like a Cloudflare block from the caller's side, right
-down to tripping `minCount=272` with `actual=0`. The fetcher now uses `response.text()`, the raw
-buffered HTTP body, which is correct for both XML and HTML. Politeness line still held throughout:
-no stealth plugins, no fingerprint spoofing, no UA impersonation -- just a visible window.)
+A SECOND, independent bug had to be fixed to get here (`_playwright_browser.py`): `page.content()`
+returns an EMPTY string for an `application/xml` response, because Chromium renders XML through its
+tree-viewer widget rather than as a plain-text DOM. That enumerated zero products and looked
+*exactly* like a Cloudflare block from the caller's side, right down to tripping `minCount=272` with
+`actual=0`. The fetcher now uses `response.text()` (the raw buffered HTTP body), correct for both
+XML and HTML.
+
+The two are genuinely independent, and it matters which is which: probed directly AFTER the
+`response.text()` fix, `headless=True` STILL gets the challenge (sitemap: 6,221 bytes, zero `<loc>`;
+product page: 6,200 bytes, no `<h1>`; both say "Just a moment") while `headless=False` gets the real
+content. So the headless block is real, `scope.headless: false` is load-bearing rather than a
+cargo-culted workaround -- and **CMON cannot run in headless CI**, which is why this test is
+`live`-marked (opt-in) rather than part of the default suite. Politeness line held throughout: no
+stealth plugins, no fingerprint spoofing, no UA impersonation -- just a visible window.
 """
 from pathlib import Path
 

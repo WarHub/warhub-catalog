@@ -10,9 +10,13 @@ scope:
   manufacturer: CMON
   # Cloudflare evidence (task-10-report.md, confirmed live 2026-07-13): vanilla headless Chromium
   # got the "Just a moment..." managed-challenge interstitial 3/3 independent attempts, no
-  # cf_clearance cookie ever set. Plan-5 task-5 recon confirmed a HEADED browser clears the same
-  # challenge live. `headless` defaults True in `_playwright_browser.py`/`playwright_wp.py` for
-  # every other caller/CI -- this is the one descriptor overriding it.
+  # cf_clearance cookie ever set. A HEADED browser clears it outright (status 200, cf-cache-status
+  # BYPASS, real 37,770-byte sitemap, no interstitial). Re-probed 2026-07-13 AFTER the unrelated
+  # response.text()/XML fetcher fix: headless STILL gets the challenge (zero <loc> tags) while
+  # headed still gets real content -- so this override is load-bearing, not a workaround for that
+  # other bug. CONSEQUENCE: this source cannot run in headless CI; it is local-only.
+  # `headless` defaults True in `_playwright_browser.py`/`playwright_wp.py` for every other
+  # caller/CI -- this is the one descriptor overriding it.
   headless: false
 politeness:
   rps: 0.5
