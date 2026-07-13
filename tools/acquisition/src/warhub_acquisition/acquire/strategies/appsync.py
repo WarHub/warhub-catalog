@@ -42,11 +42,14 @@ unique per product, and (per live evidence) always present on every real product
 missing BOTH `slug` and `reference` (never observed live) has no stable identity at all and is
 skipped, counted under `stats["skipped_missing_identifier"]`.
 
-**Availability: the .NET 3-state `DetermineStatus`, ported as-is** (`"pre_order"` when `preorder`
-is not null, `"out_of_stock"` when `outstock` is true, else `"current"`) -- a genuine 3-state
-model from the real payload, not force-fit into algolia.py/woo.py's 2-state
-`"in_stock"`/`"out_of_stock"` convention (those strategies' payloads never carried a pre-order
-signal at all).
+**Availability: the .NET 3-state `DetermineStatus` signal, mapped onto the established 2-state
+`Observation.availability` vocabulary** (final fix wave, item 6 -- see `_status`'s docstring for
+the full rationale). `preorder` not null OR `outstock` true -> `"out_of_stock"`; else
+`"in_stock"`. An earlier revision emitted a literal `"pre_order"` value, conflating this one
+strategy's richer .NET-status axis (a genuine 3-state model from the real payload) with the
+`"in_stock"`/`"out_of_stock"` vocabulary every other strategy (shopify.py/woo.py/algolia.py) and
+every downstream consumer treats as binary -- fixed to map onto that established vocabulary
+instead of introducing a third value nothing else in the pipeline understands.
 
 No detail fetches, no budget: every product already carries everything this strategy extracts
 directly in the `listProducts` response -- `context.budget` is ignored entirely (per the task
@@ -162,13 +165,22 @@ def _extract_faction(seo: list | None, name: str, candidates: list[str]) -> str 
 
 
 def _status(product: dict) -> str:
-    """Port of `CorvusBelliProductSource.DetermineStatus`: a genuine 3-state model from the real
-    payload (`preorder` not null -> pre-order; else `outstock` -> out of stock; else current)."""
+    """Port of `CorvusBelliProductSource.DetermineStatus`'s 3-state RAW signal (`preorder` not
+    null -> pre-order; else `outstock` -> out of stock; else current), then mapped onto
+    `Observation.availability`'s established 2-state vocabulary (final fix wave, item 6):
+    shopify.py/woo.py/algolia.py all only ever emit `"in_stock"`/`"out_of_stock"` -- no other
+    strategy emits `"pre_order"`, so inventing a third value here would conflate this one
+    strategy's richer .NET-status axis with a vocabulary every downstream consumer (resolve,
+    catalog, review) treats as binary. `"current"` -> `"in_stock"` is a direct match. A pre-order
+    item is deliberately mapped to `"out_of_stock"`, not `"in_stock"`: it is not yet available for
+    immediate purchase/fulfilment the way an in-stock item is, and `"out_of_stock"` is the closer
+    of the two established values (the alternative -- inventing `"pre_order"` as a new vocabulary
+    value -- was rejected since nothing else in the pipeline consumes it)."""
     if product.get("preorder") is not None:
-        return "pre_order"
+        return "out_of_stock"
     if product.get("outstock"):
         return "out_of_stock"
-    return "current"
+    return "in_stock"
 
 
 def _image_url(product: dict) -> str | None:

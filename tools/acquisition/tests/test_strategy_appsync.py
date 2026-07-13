@@ -152,7 +152,7 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
     assert phalanx.url == "https://store.corvusbelli.com/en/wargames/infinity/steel-phalanx-action-pack"
     assert phalanx.priceEur == 92.5
     assert phalanx.imageUrl == "https://store.corvusbelli.com/media/catalog/product/steel-phalanx-action-pack.png"
-    assert phalanx.availability == "current"  # outstock=false, preorder=null
+    assert phalanx.availability == "in_stock"  # outstock=false, preorder=null
     assert phalanx.ean is None
     assert phalanx.extractor == "appsync@1"
     assert phalanx.manufacturer == "corvus-belli"
@@ -171,7 +171,7 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
     bases = by_key["mfr-corvus-belli:infinity:55mm-scenery-bases-epsilon-series"]
     assert bases.sku == "285090-1092"
     assert bases.priceEur == 13.5
-    assert bases.availability == "current"
+    assert bases.availability == "in_stock"
     assert bases.hints == {"gameSystem": "infinity"}
 
     assert result.full_sweep is True
@@ -213,10 +213,13 @@ def test_shared_ref_stem_products_keep_distinct_full_skus() -> None:
 
 
 def test_status_mapping() -> None:
-    assert _status({"preorder": None, "outstock": False}) == "current"
+    """Mapped onto the established 2-state availability vocabulary (final fix wave, item 6):
+    "current" -> "in_stock"; a pre-order product -> "out_of_stock" (not the invented "pre_order"
+    value shopify.py/woo.py/algolia.py never emit) -- see _status's docstring for the rationale."""
+    assert _status({"preorder": None, "outstock": False}) == "in_stock"
     assert _status({"preorder": None, "outstock": True}) == "out_of_stock"
-    assert _status({"preorder": {"from": "2026-01-01"}, "outstock": False}) == "pre_order"
-    assert _status({"preorder": {}, "outstock": True}) == "pre_order"  # preorder wins over outstock
+    assert _status({"preorder": {"from": "2026-01-01"}, "outstock": False}) == "out_of_stock"
+    assert _status({"preorder": {}, "outstock": True}) == "out_of_stock"  # preorder wins over outstock
 
 
 def test_extract_faction_seo_priority_over_name_and_order() -> None:
@@ -438,7 +441,7 @@ def test_no_ean_invariant_holds_even_when_price_and_seo_absent() -> None:
     assert observation.priceEur is None
     assert observation.imageUrl is None
     assert observation.sku is None
-    assert observation.availability == "current"
+    assert observation.availability == "in_stock"
 
 
 def test_mapping_unmapped_game_system_and_faction_are_counted_not_guessed() -> None:
