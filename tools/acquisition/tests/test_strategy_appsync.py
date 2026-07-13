@@ -7,11 +7,9 @@ import httpx
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
 from warhub_acquisition.acquire.strategies.appsync import (
-    API_HEADERS,
     API_KEY,
     GAME_SYSTEMS,
     GRAPHQL_ENDPOINT,
-    _extract_cb_ref,
     _extract_faction,
     _parse_int_field,
     _status,
@@ -143,7 +141,6 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
     assert result.stats["skipped_unknown_vendor"] == 0
     assert result.stats["skipped_missing_name"] == 0
     assert result.stats["skipped_missing_identifier"] == 0
-    assert result.stats["malformed_reference"] == 1  # "Death Song" -- WHP-005 isn't a 6-digit REF
     assert result.stats["unmapped_hints"] == 0
     assert len(result.observations) == 3
 
@@ -151,7 +148,7 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
 
     phalanx = by_key["mfr-corvus-belli:infinity:steel-phalanx-action-pack"]
     assert phalanx.name == "Steel Phalanx Action Pack"
-    assert phalanx.sku == "280888"  # 6-digit REF before the "-1149" variant suffix
+    assert phalanx.sku == "280888-1149"  # RAW reference, dash suffix intact (fix wave 1)
     assert phalanx.url == "https://store.corvusbelli.com/en/wargames/infinity/steel-phalanx-action-pack"
     assert phalanx.priceEur == 92.5
     assert phalanx.imageUrl == "https://store.corvusbelli.com/media/catalog/product/steel-phalanx-action-pack.png"
@@ -164,7 +161,7 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
 
     death_song = by_key["mfr-corvus-belli:infinity:death-song"]
     assert death_song.name == "Death Song  "  # trailing whitespace preserved -- NOT trimmed
-    assert death_song.sku is None  # "WHP-005" is not a 6-digit REF
+    assert death_song.sku == "WHP-005"  # raw reference, kept verbatim (books have no \d{6} REF)
     assert death_song.priceEur == 19.0
     assert death_song.availability == "out_of_stock"  # outstock=true
     # No Infinity faction candidate appears in seo or name -- no faction hint, and NOT counted
@@ -172,7 +169,7 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
     assert death_song.hints == {"gameSystem": "infinity"}
 
     bases = by_key["mfr-corvus-belli:infinity:55mm-scenery-bases-epsilon-series"]
-    assert bases.sku == "285090"
+    assert bases.sku == "285090-1092"
     assert bases.priceEur == 13.5
     assert bases.availability == "current"
     assert bases.hints == {"gameSystem": "infinity"}
@@ -181,15 +178,38 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
     assert result.cursor == {}
 
 
-def test_ref_extraction_valid_and_edge_cases() -> None:
-    assert _extract_cb_ref("280888-1149") == "280888"  # 6-digit REF + variant suffix
-    assert _extract_cb_ref("281246") == "281246"  # bare 6-digit REF, no suffix
-    assert _extract_cb_ref("WHP-005") is None  # non-miniature catalog code
-    assert _extract_cb_ref("12345-99") is None  # only 5 digits before the dash
-    assert _extract_cb_ref("1234567-1149") is None  # 7 digits before the dash, not exactly 6
-    assert _extract_cb_ref(None) is None
-    assert _extract_cb_ref("") is None
-    assert _extract_cb_ref("   ") is None
+def test_shared_ref_stem_products_keep_distinct_full_skus() -> None:
+    """Regression (review fix wave 1): the dash suffix in `reference` is identity-bearing. Real
+    committed data (`data/catalog/products/corvus-belli.yaml`) has two UNRELATED products sharing
+    the 6-digit stem 280034 -- `betrayal-characters-pack` (280034-0837) and `operation-kaldstrom`
+    (280034-0878). An earlier revision truncated both to "280034", which resolve's code-based
+    identity join would have merged into one corrupted entity. Both must emerge as separate
+    observations carrying their exact, full, untruncated references as sku."""
+    products = [
+        {
+            "shortname": "Betrayal Characters Pack",
+            "reference": "280034-0837",
+            "slug": "betrayal-characters-pack",
+            "price": 30.0,
+        },
+        {
+            "shortname": "Operation Kaldstrom",
+            "reference": "280034-0878",
+            "slug": "operation-kaldstrom",
+            "price": 89.95,
+        },
+    ]
+    client = PoliteClient(
+        transport=multi_game_transport({"infinity": products}), base_url=None, sleep=lambda s: None
+    )
+    result = appsync_strategy(descriptor(), client, {}, context(cb_taxonomy()))
+
+    assert len(result.observations) == 2  # never merged locally
+    skus = {observation.key: observation.sku for observation in result.observations}
+    assert skus == {
+        "mfr-corvus-belli:infinity:betrayal-characters-pack": "280034-0837",
+        "mfr-corvus-belli:infinity:operation-kaldstrom": "280034-0878",
+    }
 
 
 def test_status_mapping() -> None:
@@ -298,36 +318,26 @@ def test_pagination_stops_early_on_empty_products_page() -> None:
     assert len(result.observations) == 1
 
 
-def test_malformed_reference_product_is_kept_with_no_sku_and_counted() -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
-        body = json.loads(request.content)
-        variables = body["variables"]
-        if variables["category"]["game"] != "infinity" or variables["page"] != 1:
-            return httpx.Response(
-                200, json={"data": {"products": {"products": [], "pages": 0, "currentPage": 1, "total": 0}}}
-            )
-        return httpx.Response(
-            200,
-            json={
-                "data": {
-                    "products": {
-                        "products": [
-                            {"shortname": "Weird Item", "reference": "not-a-ref", "slug": "weird-item", "price": 9.99}
-                        ],
-                        "pages": 1,
-                        "currentPage": 1,
-                        "total": 1,
-                    }
-                }
-            },
-        )
-
-    client = PoliteClient(transport=httpx.MockTransport(handler), base_url=None, sleep=lambda s: None)
+def test_reference_is_kept_verbatim_trim_only() -> None:
+    """sku = raw reference, unparsed (fix wave 1: `Sku = product.Reference` in the .NET source,
+    trim at most) -- non-\\d{6} formats like book codes pass through verbatim (taxonomy's
+    codePattern fullmatch handles code-identity downstream); whitespace-only becomes None."""
+    products = [
+        {"shortname": "Weird Item", "reference": "  not-a-ref ", "slug": "weird-item", "price": 9.99},
+        {"shortname": "Blank Ref Item", "reference": "   ", "slug": "blank-ref-item", "price": 1.0},
+    ]
+    client = PoliteClient(
+        transport=multi_game_transport({"infinity": products}), base_url=None, sleep=lambda s: None
+    )
     result = appsync_strategy(descriptor(), client, {}, context(cb_taxonomy()))
 
-    assert len(result.observations) == 1
-    assert result.observations[0].sku is None
-    assert result.stats["malformed_reference"] == 1
+    assert len(result.observations) == 2
+    skus = {observation.key: observation.sku for observation in result.observations}
+    assert skus == {
+        "mfr-corvus-belli:infinity:weird-item": "not-a-ref",
+        "mfr-corvus-belli:infinity:blank-ref-item": None,
+    }
+    assert "malformed_reference" not in result.stats  # bookkeeping removed with the parser
 
 
 def test_product_with_no_name_is_skipped_and_counted() -> None:

@@ -31,9 +31,8 @@ contract:
   maxDropPct: 30
   requiredFieldRates:
     name: 1.0
-    # Live sample: 8/12 Infinity page-1 products parsed a valid 6-digit REF (4 were Winged Hussar
-    # Publishing novels carrying a "WHP-xxx" catalog code, not the miniature \d{6} REF format at
-    # all) -- 0.667 observed. Set conservatively below that (0.6), not at the algolia/para-bellum
-    # default 0.8-0.9, because Corvus Belli's own catalog genuinely mixes miniatures (always
-    # \d{6}) with books/accessories that never carry that format -- see task-10-report.md.
-    sku: 0.6
+    # sku is the RAW `reference` string, unparsed (fix wave 1: truncating it to the 6-digit stem
+    # was an identity-join hazard -- see task-10-report.md). Raw reference was present on ALL 12
+    # live page-1 products, including the 4 "WHP-xxx" books, so 0.9 is a safe honest floor
+    # pending full-harvest evidence.
+    sku: 0.9

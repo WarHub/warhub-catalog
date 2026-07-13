@@ -22,16 +22,17 @@ selection set (`availability`, `itemAvailability`, `price`, `seo`, `shortname`, 
 `labels`, `outstock`, `rating`, `slug`, `preorder`, `category`, `img`, `meta` -- checked against
 the ported query verbatim). `Observation.ean` is always `None`, never invented.
 
-**REF -> sku IS parsed here, unlike the literal .NET source.** `MapToRawProduct` in the .NET file
-assigns `Sku = product.Reference` verbatim, with NO parsing at all. Live evidence (single capture,
-2026-07-13, Infinity/wargames page 1) shows `reference` is NOT uniformly a bare 6-digit code:
-miniatures/accessories carry `"<6-digit REF>-<variant suffix>"` (e.g. `"280888-1149"`), while
-non-miniature products (Winged Hussar Publishing novels, in this catalog) carry an unrelated
-`"WHP-005"`-style code. `corvus-belli`'s own `taxonomy/manufacturers.yaml` entry declares
-`codePattern: '\d{6}'` -- so `_extract_cb_ref` extracts exactly that leading 6-digit REF (before a
-dash or end of string) and returns `None` (never the raw, non-conforming string) when it isn't
-there, counting `stats["malformed_reference"]`. Same "never guess" convention as
-algolia.py's `_extract_gw_sku`/woo.py's malformed-gtin handling.
+**sku = raw `reference`, unparsed (trim only) -- exactly like the .NET source.** `MapToRawProduct`
+assigns `Sku = product.Reference` verbatim (the .NET enricher then applies `raw.Sku?.Trim()`);
+this port does the same. An earlier revision of this file truncated `reference` to its leading
+6-digit REF (to satisfy corvus-belli's `codePattern: '\d{6}'`) -- REVERTED as an identity-join
+hazard, review fix wave 1: the dash suffix is load-bearing. Real committed evidence
+(`data/catalog/products/corvus-belli.yaml`): two UNRELATED products share the 6-digit stem
+`280034` -- `betrayal-characters-pack` (`sku: 280034-0837`) and `operation-kaldstrom`
+(`sku: 280034-0878`). Truncation would normalize both to code `"280034"` and resolve would union
+them into one corrupted entity. The repo convention (most legacy corvus-belli entries) is the raw
+dash-suffixed reference as sku; `Taxonomy.normalize_code`'s `\d{6}` fullmatch naturally returns
+`None` for those and identity falls back to name-slug -- safe, no corruption possible.
 
 **Local identifier: `slug` (falling back to raw `reference`), not a .NET `Id` field.** The .NET
 `RawProduct` record has NO identity field at all (no `Id`/`ProductCode` populated for Corvus
@@ -53,7 +54,6 @@ brief), and enumeration is always complete (each of the 3 game-system sweeps pag
 end), so `full_sweep` is always `True` and the cursor is always `{}`.
 """
 import html
-import re
 
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, StrategyResult
@@ -112,22 +112,6 @@ PRODUCTS_QUERY = """query products($category: ICategory!, $lang: LANG!, $filters
         total
     }
 }"""
-
-# Matches a leading 6-digit REF followed by a dash (variant suffix) or end of string -- corvus-
-# belli's own taxonomy/manufacturers.yaml codePattern is exactly `\d{6}`.
-_REF_RE = re.compile(r"^(\d{6})(?:-|$)")
-
-
-def _extract_cb_ref(reference: str | None) -> str | None:
-    """Port+parse of the .NET `reference` field (see module docstring for why this port DOES
-    parse, unlike the literal .NET `Sku = product.Reference` assignment). Real examples:
-    `"280888-1149"` -> `"280888"`; a bare 6-digit code with no suffix -> itself unchanged;
-    `"WHP-005"` (a non-miniature catalog code) -> `None`, never the raw string."""
-    if not reference:
-        return None
-    match = _REF_RE.match(reference.strip())
-    return match.group(1) if match else None
-
 
 def _parse_int_field(value: object) -> int | None:
     """Port of `CbProductList.ParseJsonInt`: `pages`/`total` can arrive as a JSON number (live
@@ -245,7 +229,7 @@ def _build_candidate(
     `WebUtility.HtmlDecode(product.Shortname)` call, which the .NET map path never actually
     guards -- see `test_hit_with_no_name_is_skipped_and_counted`'s equivalent test for why this
     port DOES guard it: an unnamed product is unusable downstream, mirrors algolia.py/woo.py)."""
-    deltas = {"skipped_missing_name": 0, "malformed_reference": 0, "unmapped_hints": 0}
+    deltas = {"skipped_missing_name": 0, "unmapped_hints": 0}
 
     raw_name = product.get("shortname")
     if not raw_name or not str(raw_name).strip():
@@ -257,9 +241,12 @@ def _build_candidate(
     # "Death Song  ", confirmed live), which this port faithfully preserves rather than "fixing".
     name = html.unescape(str(raw_name))
 
-    sku = _extract_cb_ref(product.get("reference"))
-    if sku is None:
-        deltas["malformed_reference"] = 1
+    # sku = raw reference, unparsed except a trim (`Sku = product.Reference` in the .NET map,
+    # `raw.Sku?.Trim()` in its enricher). NEVER truncated to the 6-digit stem: the dash suffix is
+    # identity-bearing -- see module docstring's fix-wave-1 note (real committed products
+    # 280034-0837 and 280034-0878 are unrelated and differ only by suffix).
+    reference = product.get("reference")
+    sku = str(reference).strip() or None if reference is not None else None
 
     slug = product.get("slug")
     url = f"{SITE_BASE}/en/{category_type}/{api_game}/{slug}" if slug else None
@@ -344,7 +331,6 @@ def appsync_strategy(
         "skipped_unknown_vendor": 0,
         "skipped_missing_name": 0,
         "skipped_missing_identifier": 0,
-        "malformed_reference": 0,
         "unmapped_hints": 0,
     }
 
