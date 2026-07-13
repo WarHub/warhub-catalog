@@ -1,8 +1,27 @@
-r"""Robots.txt compliance preflight: fetch and enforce a source's published crawl policy BEFORE
-any strategy runs. This closes a real gap -- the pipeline harvested 13+ sources for two plans and
-never once checked robots.txt (a controller audit, 2026-07-13, found every current source happens
-to permit us, but that was luck plus memory, not enforcement -- one candidate source,
-fantasywelt.de, explicitly disallows our crawler by name).
+r"""Robots.txt compliance: fetch a source's published crawl policy and enforce it on EVERY request
+a strategy makes, not just its `baseUrl`. This closes a real gap -- the pipeline harvested 13+
+sources for two plans and never once checked robots.txt (a controller audit, 2026-07-13, found
+every current source happens to permit us, but that was luck plus memory, not enforcement -- one
+candidate source, fantasywelt.de, explicitly disallows our crawler by name).
+
+**Two enforcement points, one policy (fix wave 1, 2026-07-13)**: the FIRST version of this module
+only checked `descriptor.baseUrl` once, in `runner.run_source`, before any strategy ran -- a real
+compliance hole, since a site can publish a robots.txt that allows `/` (the site root, i.e.
+`baseUrl`) while disallowing a specific path a strategy actually fetches (e.g. `/products.json` or
+`/search`). Nothing in this repo's current sources hit that hole (verified live), but nothing
+structurally prevented a future one from doing so. The fix moved enforcement into
+`PoliteClient._request` (`acquire/client.py`) -- the single choke point EVERY request from EVERY
+strategy already passes through -- so the guarantee is now "every fetched URL is checked," not
+"the base URL happened to be checked and every other URL was assumed fine." The two checks now
+work together, not redundantly:
+
+1. `runner.run_source`'s base-URL preflight (unchanged in spirit, still runs first): a fast, loud,
+   early failure -- if `baseUrl` itself is disallowed, we know before any strategy-specific work
+   (enumeration, pagination, detail fetches) starts, with a clear "this source's root is blocked"
+   error rather than whatever the strategy's first fetch happens to be.
+2. `PoliteClient._request`'s per-request check (the REAL guarantee): the `RobotsPolicy` fetched by
+   the preflight is attached to the strategy's `PoliteClient` (`robots=` constructor param) and
+   re-checked against the fully-resolved URL of every single subsequent request, base URL or not.
 
 **Fetching (`fetch_policy`)**: always goes THROUGH the caller's `PoliteClient` -- paced, retried,
 UA-bearing, exactly like every other request this codebase makes. `GET <baseUrl>/robots.txt`:
@@ -143,8 +162,10 @@ class RobotsPolicy:
 
     def disallowed_by(self, url: str, user_agent: str) -> tuple[str, str | None] | None:
         """Returns `(token, rule_or_None)` for the FIRST checked token (in `allows`'s own order)
-        that disallows `url`, or `None` if every token is allowed. Used by callers (`runner.py`) to
-        build a specific `RobotsDisallowedError` message -- `allows()` alone only exposes the bool.
+        that disallows `url`, or `None` if every token is allowed. Used by both enforcement points
+        (see module docstring) to build a specific `RobotsDisallowedError` message once `allows()`
+        has already said no -- `runner.run_source`'s base-URL preflight, and `PoliteClient._request`
+        for every other request -- `allows()` alone only exposes the bool.
         """
         if self._parser is None:
             return None

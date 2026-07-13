@@ -363,6 +363,70 @@ def test_run_source_no_base_url_skips_the_check_entirely(
     assert health.contract_ok is True
 
 
+def test_run_source_strategy_fetch_of_disallowed_path_blocked_despite_permissive_base_url(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """THE HOLE THIS FIX CLOSES, end to end (fix wave 1, 2026-07-13): robots.txt allows '/' -- so
+    the base-URL preflight (checking `descriptor.baseUrl`, i.e. the root) passes cleanly -- but
+    specifically disallows '/products.json', a path the strategy itself fetches. Before this fix,
+    only `descriptor.baseUrl` was ever checked, so this strategy fetch would have silently violated
+    robots.txt on every run. Now `PoliteClient._request` checks every request the strategy's client
+    makes (the policy fetched once by the preflight, attached to that client -- see runner.py), so
+    this is caught."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return robots_response("User-agent: *\nAllow: /\nDisallow: /products.json\n")
+        return httpx.Response(200, json={"ok": True})
+
+    def strategy(desc, client, cursor, ctx):
+        client.get_json("/products.json")  # the disallowed path -- must raise before returning
+        return toy_result()
+
+    register("toy-robots-hole", strategy, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-robots-hole", kind="retailer", strategy="toy-robots-hole", baseUrl="https://example.test"
+    )
+
+    with pytest.raises(RobotsDisallowedError) as excinfo:
+        run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=httpx.MockTransport(handler))
+
+    assert excinfo.value.details["type"] == "robots-disallowed"
+    assert excinfo.value.details["url"] == "https://example.test/products.json"
+    assert excinfo.value.details["rule"] == "Disallow: /products.json"
+    # Raised by PoliteClient._request (the per-request check), not runner.py's base-URL preflight
+    # -- which has no complaint about "/" -- so this has no "source" key (see client.py's
+    # RobotsDisallowedError docstring).
+    assert "source" not in excinfo.value.details
+
+
+def test_run_source_strategy_fetch_of_allowed_path_proceeds_under_same_disallowing_policy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Companion to the hole-closing test above: the SAME policy (allows '/', disallows
+    '/products.json') still lets the strategy fetch an unrelated, allowed path normally."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return robots_response("User-agent: *\nAllow: /\nDisallow: /products.json\n")
+        return httpx.Response(200, json={"ok": True})
+
+    captured: dict = {}
+
+    def strategy(desc, client, cursor, ctx):
+        captured["result"] = client.get_json("/catalog.json")
+        return toy_result()
+
+    register("toy-robots-hole-ok", strategy, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-robots-hole-ok", kind="retailer", strategy="toy-robots-hole-ok", baseUrl="https://example.test"
+    )
+
+    health = run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=httpx.MockTransport(handler))
+    assert health.contract_ok is True
+    assert captured["result"] == {"ok": True}
+
+
 def test_run_source_honors_slower_robots_crawl_delay(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Crawl-delay (5s) SLOWER than the descriptor's own politeness.rps (1.0 => 1s interval) must
     be honored: the client actually used by the strategy paces at the slower rate. Asserted via the
@@ -437,7 +501,9 @@ def test_run_source_does_not_slow_down_when_robots_crawl_delay_is_faster_than_co
     )
 
     assert "robots_crawl_delay_applied" not in health.stats
-    # No client rebuild happens here (unlike the slower-crawl-delay test), so the SAME client
-    # instance paces the robots.txt fetch AND both strategy requests: robots.txt itself paces
-    # nothing (no prior request), then /a and /b each wait the full configured 10s interval.
-    assert sleeps == [pytest.approx(10.0, abs=0.2), pytest.approx(10.0, abs=0.2)]
+    # Fix wave 1 (per-request robots checking): the strategy always gets a freshly constructed
+    # PoliteClient (with the robots policy attached) built AFTER the robots.txt probe fetch,
+    # regardless of whether a crawl-delay override changed its rps -- so pacing starts fresh for
+    # strategy requests, same as the slower-crawl-delay test above: /a (first request on the fresh
+    # client) doesn't wait, then /b waits the full configured 10s interval.
+    assert sleeps == [pytest.approx(10.0, abs=0.2)]

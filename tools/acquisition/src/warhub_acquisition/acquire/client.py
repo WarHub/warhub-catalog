@@ -1,8 +1,13 @@
 """Polite HTTP client: the single place politeness (UA, pacing, retry) is enforced."""
 import time
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
 
 import httpx
+
+if TYPE_CHECKING:
+    # Only for the `robots` type hint below -- a runtime import here would cycle (robots.py
+    # already imports FetchError/PoliteClient from this module).
+    from warhub_acquisition.acquire.robots import RobotsPolicy
 
 UA = "warhub-catalog-bot/1.0 (+https://github.com/WarHub/warhub-catalog)"
 
@@ -30,6 +35,30 @@ class FetchError(Exception):
         super().__init__(f"failed to fetch {url} (status={status})")
 
 
+class RobotsDisallowedError(Exception):
+    """A robots.txt policy disallows fetching a URL. Carries machine-readable details, mirroring
+    `SourceContractError`/`FetchError`'s `message, details: dict` shape.
+
+    Raised from two places, deliberately:
+
+    1. `runner.run_source`'s base-URL preflight (BEFORE any strategy runs, checking only
+       `descriptor.baseUrl`) -- a fast, loud, early failure that gives a better error before any
+       strategy-specific work happens. Its `details` includes `"source"` (the descriptor id),
+       since `runner.py` knows which source it's checking.
+    2. `PoliteClient._request` (below) -- the REAL guarantee this closes: EVERY outgoing request,
+       for every strategy, is checked against whatever policy is attached to the client (see
+       `PoliteClient.__init__`'s `robots` parameter), not just the base URL. A site that allows
+       `/` but disallows some path a strategy actually fetches (e.g. `/products.json`) is caught
+       HERE, even though the base-URL preflight alone would have missed it. Its `details` has no
+       `"source"` key -- `PoliteClient` is a generic HTTP client with no notion of which
+       descriptor it belongs to.
+    """
+
+    def __init__(self, message: str, details: dict) -> None:
+        self.details = details
+        super().__init__(message)
+
+
 class PoliteClient:
     def __init__(
         self,
@@ -39,6 +68,7 @@ class PoliteClient:
         transport: httpx.BaseTransport | None = None,
         sleep: Callable[[float], None] = time.sleep,
         timeout: float = 30.0,
+        robots: "RobotsPolicy | None" = None,
     ) -> None:
         # Explicit timeout, default 30s -- httpx's own default is 5s, which real slow-but-healthy
         # endpoints blow through: Wayback CDX data pages are 200KB+ and took 3-7s+ in live
@@ -49,6 +79,13 @@ class PoliteClient:
         self._min_interval = 1.0 / rps if rps > 0 else 0.0
         self._sleep = sleep
         self._last_request_at: float | None = None
+        self._user_agent = user_agent
+        # `None` (the default) means "no robots checking" -- used for tests, for the bare probe
+        # client `runner.run_source` uses to fetch robots.txt itself (checking robots against the
+        # robots.txt fetch would be nonsensical), and for `ignoreRobots: true` descriptors (see
+        # acquire/robots.py's module docstring). When set, EVERY request this client makes is
+        # checked in `_request` below -- the per-request guarantee, not just a base-URL preflight.
+        self._robots = robots
         self._client = httpx.Client(
             base_url=base_url or "",
             headers={"User-Agent": user_agent},
@@ -81,6 +118,26 @@ class PoliteClient:
         json_body: object | None = None,
         headers: dict | None = None,
     ) -> httpx.Response:
+        # Per-request robots.txt enforcement -- BEFORE pacing/sending, and before the retry loop
+        # (the target URL doesn't change across retries, so there's nothing to re-check). This is
+        # the real compliance guarantee: a base-URL-only preflight (see runner.run_source) can
+        # miss a site that allows `/` but disallows a specific path a strategy actually fetches
+        # (e.g. `/products.json`); checking HERE, at the single choke point every request already
+        # passes through, means every fetched URL is checked, not just the base URL. Cheap: no
+        # network call, `build_request` only resolves the final URL (relative `url` merged against
+        # `self._client`'s `base_url`, exactly as the real request will resolve it) and
+        # `RobotsPolicy.allows` is a pure in-memory check over the already-parsed policy.
+        if self._robots is not None:
+            full_url = str(self._client.build_request(method, url, params=params).url)
+            if not self._robots.allows(full_url, self._user_agent):
+                disallow = self._robots.disallowed_by(full_url, self._user_agent)
+                token, rule = disallow if disallow is not None else (self._user_agent, None)
+                rule_detail = f" ({rule})" if rule else ""
+                raise RobotsDisallowedError(
+                    f"robots.txt disallows fetching {full_url} for user-agent {token!r}{rule_detail}",
+                    {"type": "robots-disallowed", "url": full_url, "userAgent": token, "rule": rule},
+                )
+
         last_status: int | None = None
         for attempt in range(_MAX_ATTEMPTS):
             self._pace()

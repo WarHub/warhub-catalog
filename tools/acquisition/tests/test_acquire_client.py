@@ -1,10 +1,20 @@
 """PoliteClient: pacing, retry-with-backoff, and error surfacing over an injected transport."""
 import json
+import urllib.robotparser
 
 import httpx
 import pytest
 
-from warhub_acquisition.acquire.client import UA, FetchError, PoliteClient
+from warhub_acquisition.acquire.client import UA, FetchError, PoliteClient, RobotsDisallowedError
+from warhub_acquisition.acquire.robots import RobotsPolicy
+
+
+def _policy(robots_txt: str) -> RobotsPolicy:
+    """Build a `RobotsPolicy` directly from robots.txt text, without a network fetch -- mirrors
+    exactly what `robots.fetch_policy` does on a 200 response (`RobotFileParser().parse(...)`)."""
+    parser = urllib.robotparser.RobotFileParser()
+    parser.parse(robots_txt.splitlines())
+    return RobotsPolicy(parser)
 
 
 def test_user_agent_constant() -> None:
@@ -396,3 +406,110 @@ def test_timeout_constructor_param_overrides_default() -> None:
         timeout=60.0,
     )
     assert client._client.timeout == httpx.Timeout(60.0)
+
+
+# =================================================================================================
+# Per-request robots enforcement (fix wave 1, 2026-07-13): `PoliteClient._request` is the single
+# choke point every request passes through, so this is where robots.txt is actually enforced now --
+# not just once against `descriptor.baseUrl` (see runner.py's preflight, which stays as a fast
+# early check but is no longer the real guarantee). See acquire/robots.py's module docstring for
+# the full rationale.
+# =================================================================================================
+
+
+def test_robots_disallowed_path_blocked_even_though_root_is_allowed() -> None:
+    """THE HOLE THIS FIX CLOSES (headline test): a base-URL-only preflight checking just '/' would
+    see this policy as fully permissive -- '/' is explicitly allowed -- but '/products.json' is
+    specifically disallowed. A client carrying this policy must still refuse to fetch it."""
+    policy = _policy("User-agent: *\nAllow: /\nDisallow: /products.json\n")
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+        robots=policy,
+    )
+
+    with pytest.raises(RobotsDisallowedError) as excinfo:
+        client.get_json("/products.json")
+
+    assert excinfo.value.details["type"] == "robots-disallowed"
+    assert excinfo.value.details["url"] == "https://example.test/products.json"
+    assert excinfo.value.details["userAgent"] == UA
+    assert excinfo.value.details["rule"] == "Disallow: /products.json"
+    # PoliteClient has no notion of which descriptor/source it belongs to -- unlike the base-URL
+    # preflight's RobotsDisallowedError (raised in runner.py), this one never has a "source" key.
+    assert "source" not in excinfo.value.details
+    assert calls == []  # never reached the network -- checked BEFORE pacing/sending
+
+
+def test_robots_allowed_path_succeeds_under_the_same_disallowing_policy() -> None:
+    """Sanity check paired with the headline test above: the SAME policy that blocks
+    '/products.json' still lets an allowed path through normally -- the check is per-URL, not a
+    blanket block once any policy is attached."""
+    policy = _policy("User-agent: *\nAllow: /\nDisallow: /products.json\n")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+        robots=policy,
+    )
+    assert client.get_json("/catalog.json") == {"ok": True}
+
+
+def test_robots_none_default_means_no_per_request_checking() -> None:
+    """`robots=None` (the default -- used for tests and for `ignoreRobots: true` descriptors, see
+    runner.run_source) means every request proceeds regardless of any policy content: no policy is
+    ever consulted."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    assert client.get_json("/anything") == {"ok": True}
+
+
+def test_robots_explicit_none_also_means_no_per_request_checking() -> None:
+    """Same as above but passing `robots=None` explicitly -- distinguishes 'default omitted' from
+    'explicitly no policy' at the call site, both must behave identically."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+        robots=None,
+    )
+    assert client.get_json("/anything") == {"ok": True}
+
+
+def test_robots_check_uses_the_clients_own_user_agent() -> None:
+    """The per-request check is run against `self._user_agent` (the UA this client actually
+    sends), not a hardcoded module constant -- matches robots.py's module docstring point 1."""
+    policy = _policy("User-agent: custom-bot\nDisallow: /blocked\n")
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(lambda r: httpx.Response(200, json={"ok": True})),
+        sleep=lambda seconds: None,
+        user_agent="custom-bot",
+        robots=policy,
+    )
+    with pytest.raises(RobotsDisallowedError) as excinfo:
+        client.get_json("/blocked")
+    assert excinfo.value.details["userAgent"] == "custom-bot"
