@@ -32,12 +32,23 @@ def resolve_attributes(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]
     )
     live = [member for member in members if not member.archived]
-    scraped_live = [member for member in live if kinds.get(member.source_id) != "curated"]
+    # barcode-db members never run a full_sweep -- their strategy only ever corroborates EAN, so
+    # their missStreak is permanently frozen at 0. Counting them toward scraped_live would let a
+    # single bdb member keep `any(missStreak < miss_threshold)` true forever, pinning status:
+    # current even after every REAL scraped source has decayed past the threshold. bdb members
+    # still count toward `live` (they influence EAN confidence and the curated-only branch below
+    # is unaffected by them either way -- bdb isn't curated), just never toward lifecycle.
+    scraped_live = [
+        member for member in live if kinds.get(member.source_id) not in ("curated", "barcode-db")
+    ]
     if not live:
         status = "discontinued"
     elif not scraped_live:
-        # curated-only entity (e.g. legacy import not yet re-observed live):
-        # trust the curated claim; curated sources are never miss-flagged
+        # curated-only OR curated+bdb-only entity (e.g. legacy import not yet re-observed live,
+        # or a legacy entity corroborated only by a barcode-db EAN lookup): trust the curated
+        # claim if one exists; curated sources are never miss-flagged. Note a bdb-only entity
+        # with NO curated member also lands here (scraped_live empty, curated_status None) and
+        # falls through to "current" -- consistent with bdb never driving lifecycle on its own.
         status = str(curated_status) if curated_status else "current"
     elif any(member.missStreak < miss_threshold for member in scraped_live):
         status = "current"

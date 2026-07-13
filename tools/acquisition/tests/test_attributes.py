@@ -6,7 +6,13 @@ from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.attributes import apply_overrides, resolve_attributes
 from warhub_acquisition.resolve.corroborate import EanResolution
 
-KINDS = {"legacy-catalog": "curated", "mfr-gw": "manufacturer", "ret-a": "retailer", "arc-x": "archive"}
+KINDS = {
+    "legacy-catalog": "curated",
+    "mfr-gw": "manufacturer",
+    "ret-a": "retailer",
+    "arc-x": "archive",
+    "bdb-upcitemdb": "barcode-db",
+}
 NO_EAN = EanResolution(None, None, [])
 
 
@@ -118,6 +124,33 @@ def test_price_cad_folds_like_other_currencies() -> None:
     ]
     product = resolve_attributes("games-workshop/99120110077", members, KINDS, NO_EAN, "99120110077")
     assert product.priceCad == 105.0  # manufacturer wins, same precedence as priceGbp
+
+
+def test_barcode_db_member_never_keeps_a_decayed_entity_current() -> None:
+    # bdb strategies never run a full_sweep, so their missStreak is permanently frozen at 0.
+    # Before excluding barcode-db from scraped_live, this single bdb member's missStreak==0 kept
+    # `any(missStreak < miss_threshold)` true forever even though the only REAL scraped source
+    # (the retailer) has fully decayed -- pinning status: current indefinitely. It must decay
+    # like a bdb-less entity would.
+    members = [obs("ret-a:a", missStreak=3), obs("bdb-upcitemdb:a", missStreak=0)]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, None)
+    assert product.status == "suspected-discontinued"
+    assert product.availability == "unknown"
+
+
+def test_curated_plus_barcode_db_only_entity_still_trusts_curated_status() -> None:
+    # A legacy entity corroborated ONLY by a barcode-db EAN lookup (no live scraped source at
+    # all) has an empty scraped_live (bdb is excluded, same as curated) -- this is the documented
+    # consequence of the fix: it falls into the curated-only branch and trusts the curated claim,
+    # exactly as a curated-only entity with no bdb member would. bdb never drives lifecycle on its
+    # own, so its presence alongside a curated member changes nothing here.
+    members = [obs("legacy-catalog:a", hints={"status": "current"}), obs("bdb-upcitemdb:a", missStreak=0)]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, None)
+    assert product.status == "current"
+
+    members_delisted = [obs("legacy-catalog:a", hints={"status": "delisted"}), obs("bdb-upcitemdb:a", missStreak=0)]
+    product_delisted = resolve_attributes("e", members_delisted, KINDS, NO_EAN, None)
+    assert product_delisted.status == "delisted"
 
 
 def test_sku_is_resolved_first_non_none() -> None:
