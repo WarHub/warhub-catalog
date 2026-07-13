@@ -170,12 +170,16 @@ jobs:
         working-directory: tools/acquisition
         run: uv sync --locked
 
+      # actions/download-artifact@v4 has no `if-no-artifact-found` input (that was a v3-only
+      # input; v4's action.yml only accepts name/artifact-ids/path/pattern/merge-multiple/
+      # github-token/repository/run-id -- verified against the action's own action.yml, final fix
+      # wave item 4). v4 already doesn't fail the step when a pattern matches zero artifacts (e.g.
+      # every acquire matrix job was skipped), so no replacement input is needed.
       - name: Download acquisition artifacts
         uses: actions/download-artifact@v4
         with:
           pattern: acquire-data-*
           path: artifacts
-          if-no-artifact-found: warn
 
       # Disjoint by source (each matrix group only ever staged its own sources), so this is a
       # plain copy -- no merge logic needed.
@@ -309,8 +313,43 @@ jobs:
           author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
           delete-branch: true
 
-      - name: Fail job if confirmed-EAN guard found hits
-        if: steps.guard.outputs.exit_code == '5'
+      # Runs AFTER the PR step (mirrors the ean-guard's original fail-after-PR pattern) so a
+      # sticky PR carrying the run's findings always gets opened/updated before the job is marked
+      # failed. Covers two previously-quiet failure modes, both final fix wave item 4:
+      #   1. resolve/report exiting outside their documented code sets ({0,2} / {0,5}) -- a crash
+      #      (uncaught exception, interpreter fault, mid-write abort) previously only earned a
+      #      soft ":warning:" line in the PR body; `steps.report.outputs.exit_code` was captured
+      #      but never actually read anywhere. Now any unexpected exit code fails the job loudly.
+      #   2. the confirmed-EAN guard's own exit-5 "hits found" case, unchanged in substance from
+      #      before, just folded into this single combined check.
+      - name: Fail job on unexpected resolve/report/guard exit codes
         run: |
-          echo "::error::Confirmed-EAN guard found hits this run -- see the sticky PR body and data/review for details. Failing job so this is loud in Checks."
-          exit 5
+          resolve_exit="${{ steps.resolve.outputs.exit_code }}"
+          report_exit="${{ steps.report.outputs.exit_code }}"
+          guard_exit="${{ steps.guard.outputs.exit_code }}"
+
+          crashed=0
+
+          if [ "$resolve_exit" != "0" ] && [ "$resolve_exit" != "2" ]; then
+            echo "::error::resolve exited $resolve_exit (expected 0 or 2) -- possible crash, possibly mid-write. See the sticky PR body / job log for details."
+            crashed=1
+          fi
+
+          if [ "$report_exit" != "0" ] && [ "$report_exit" != "5" ]; then
+            echo "::error::report (coverage) exited $report_exit (expected 0 or 5) -- possible crash. See the sticky PR body / job log for details."
+            crashed=1
+          fi
+
+          if [ "$guard_exit" != "0" ] && [ "$guard_exit" != "5" ]; then
+            echo "::error::Confirmed-EAN guard report exited $guard_exit (expected 0 or 5) -- possible crash. See the job log for details."
+            crashed=1
+          fi
+
+          if [ "$crashed" = "1" ]; then
+            exit 1
+          fi
+
+          if [ "$guard_exit" = "5" ]; then
+            echo "::error::Confirmed-EAN guard found hits this run -- see the sticky PR body and data/review for details. Failing job so this is loud in Checks."
+            exit 5
+          fi
