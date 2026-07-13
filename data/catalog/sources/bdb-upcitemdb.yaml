@@ -1,0 +1,19 @@
+id: bdb-upcitemdb
+kind: barcode-db
+strategy: barcode-db
+baseUrl: https://api.upcitemdb.com
+scope:
+  db: upcitemdb
+politeness:
+  rps: 0.5
+budget:
+  # Free trial quota is ~100 requests/day (probe-verified 2026-07-12, see
+  # docs/research/2026-07-12-source-probe-retailers-barcodedb.md). This field is documentation
+  # only -- barcode_db.py never reads descriptor.budget; the actual per-run cap is
+  # context.budget (the acquire CLI's --budget flag), exactly like every other strategy.
+  requestsPerRun: 80
+contract:
+  # Corroboration-only source: an empty result on any given run (e.g. no provisional entities
+  # left to query, or a quota-exhausted day) is not a failure signal.
+  minCount: 0
+  requiredFieldRates: {}

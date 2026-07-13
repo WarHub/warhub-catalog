@@ -146,6 +146,86 @@ def test_join_onto_retracted_raises(tmp_path: Path) -> None:
         resolve_catalog(paths)
 
 
+def test_barcode_db_source_corroborates_provisional_ean_to_confirmed(tmp_path: Path) -> None:
+    """End-to-end: seed() produces a `provisional` ean (a single retailer source). Adding a
+    barcode-db observation asserting the SAME ean for the SAME entity must flip it to
+    `confirmed` (retailer + barcode-db = two independent sources, at least one non-barcode-db --
+    see resolve/corroborate.py's resolve_ean) -- proving the kind-priority wiring end to end
+    through the real resolve pipeline, not just the corroborate.py/join.py unit tests."""
+    paths = seed(tmp_path)
+    write_yaml(
+        paths.sources / "bdb-upcitemdb.yaml",
+        {"id": "bdb-upcitemdb", "kind": "barcode-db", "strategy": "barcode-db"},
+    )
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    bdb = paths.evidence_products / "bdb-upcitemdb" / "observations.jsonl"
+    bdb.parent.mkdir(parents=True)
+    bdb.write_text(
+        line({"key": "bdb-upcitemdb:5011921194285", "name": "Some DB-sourced title",
+              "manufacturer": "games-workshop", "ean": "5011921194285",
+              "firstSeen": "2026-07-13", "lastSeen": "2026-07-13", "extractor": "barcode-db@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+
+    resolve_catalog(paths)
+    data = read_yaml(paths.catalog_products / "games-workshop.yaml")
+    product = next(p for p in data["products"] if p["id"] == "games-workshop/99120110077")
+    assert product["eanConfidence"] == "confirmed"
+    assert product["ean"] == "5011921194285"
+    assert set(product["evidence"]) == {"mfr-gw:necrons", "ret-goblin:cp-necrons", "bdb-upcitemdb:5011921194285"}
+
+
+def test_barcode_db_alone_two_sources_stays_provisional_not_confirmed(tmp_path: Path) -> None:
+    """Two barcode-db observations asserting the same ean, with no non-barcode-db assertion, must
+    neither mint an entity (join.py's unjoined guard) nor confirm (corroborate.py's non-
+    barcode-db requirement) -- this is the negative counterpart to the test above."""
+    paths = seed(tmp_path)
+    write_yaml(
+        paths.sources / "bdb-upcitemdb.yaml",
+        {"id": "bdb-upcitemdb", "kind": "barcode-db", "strategy": "barcode-db"},
+    )
+    write_yaml(
+        paths.sources / "bdb-goupc.yaml",
+        {"id": "bdb-goupc", "kind": "barcode-db", "strategy": "barcode-db"},
+    )
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    orphan_ean = "5011921142361"  # not asserted by any non-barcode-db source in this seed
+    upc = paths.evidence_products / "bdb-upcitemdb" / "observations.jsonl"
+    upc.parent.mkdir(parents=True)
+    upc.write_text(
+        line({"key": f"bdb-upcitemdb:{orphan_ean}", "name": "Primaris Intercessors",
+              "manufacturer": "games-workshop", "ean": orphan_ean,
+              "firstSeen": "2026-07-13", "lastSeen": "2026-07-13", "extractor": "barcode-db@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    goupc = paths.evidence_products / "bdb-goupc" / "observations.jsonl"
+    goupc.parent.mkdir(parents=True)
+    goupc.write_text(
+        line({"key": f"bdb-goupc:{orphan_ean}", "name": "Primaris Intercessors",
+              "manufacturer": "games-workshop", "ean": orphan_ean,
+              "firstSeen": "2026-07-13", "lastSeen": "2026-07-13", "extractor": "barcode-db@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+
+    catalog = resolve_catalog(paths)
+    ids = [p.id for records in catalog.values() for p in records]
+    # the two orphaned barcode-db observations must not have minted a new entity
+    assert not any(orphan_ean in p.ean for p in [p for records in catalog.values() for p in records] if p.ean)
+    conflicts = read_yaml(paths.conflicts)["conflicts"]
+    unjoined = [c for c in conflicts if c.get("type") == "barcode-db-unjoined"]
+    assert {c["key"] for c in unjoined} == {f"bdb-upcitemdb:{orphan_ean}", f"bdb-goupc:{orphan_ean}"}
+    # the original seeded entity is untouched -- still provisional
+    data = read_yaml(paths.catalog_products / "games-workshop.yaml")
+    product = next(p for p in data["products"] if p["id"] == "games-workshop/99120110077")
+    assert product["eanConfidence"] == "provisional"
+
+
 def test_unclassified_entity_is_parked(tmp_path: Path) -> None:
     paths = seed(tmp_path)
     rogue = paths.evidence_products / "ret-goblin" / "observations.jsonl"
