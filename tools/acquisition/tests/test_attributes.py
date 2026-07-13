@@ -138,6 +138,16 @@ def test_barcode_db_member_never_keeps_a_decayed_entity_current() -> None:
     assert product.availability == "unknown"
 
 
+def test_barcode_db_corroboration_never_revives_an_archived_only_entity() -> None:
+    # Final-review N1 repro: an archive-recovered OOP entity (archived-only -> discontinued)
+    # gets its provisional EAN corroborated by a weekly bdb lookup. The bdb member is
+    # archived=False with a permanently-frozen missStreak, but it says nothing about liveness --
+    # it must not make `live` non-empty and flip a 2016-delisted product back to current.
+    members = [obs("arc-x:a", archived=True), obs("bdb-upcitemdb:a", missStreak=0)]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, None)
+    assert product.status == "discontinued"
+
+
 def test_curated_plus_barcode_db_only_entity_still_trusts_curated_status() -> None:
     # A legacy entity corroborated ONLY by a barcode-db EAN lookup (no live scraped source at
     # all) has an empty scraped_live (bdb is excluded, same as curated) -- this is the documented

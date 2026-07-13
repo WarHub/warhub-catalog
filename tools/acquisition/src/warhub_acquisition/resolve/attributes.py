@@ -31,16 +31,18 @@ def resolve_attributes(
     curated_status = _first(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]
     )
-    live = [member for member in members if not member.archived]
     # barcode-db members never run a full_sweep -- their strategy only ever corroborates EAN, so
-    # their missStreak is permanently frozen at 0. Counting them toward scraped_live would let a
-    # single bdb member keep `any(missStreak < miss_threshold)` true forever, pinning status:
-    # current even after every REAL scraped source has decayed past the threshold. bdb members
-    # still count toward `live` (they influence EAN confidence and the curated-only branch below
-    # is unaffected by them either way -- bdb isn't curated), just never toward lifecycle.
-    scraped_live = [
-        member for member in live if kinds.get(member.source_id) not in ("curated", "barcode-db")
+    # their missStreak is permanently frozen at 0 and their presence says NOTHING about liveness
+    # in either direction. They are excluded from BOTH lifecycle collections: from scraped_live
+    # (a frozen missStreak would keep `any(missStreak < miss_threshold)` true forever, pinning
+    # status: current after every real source decayed) AND from live (a weekly bdb corroboration
+    # of a recovered archived-only entity's provisional EAN must not flip discontinued->current).
+    live = [
+        member
+        for member in members
+        if not member.archived and kinds.get(member.source_id) != "barcode-db"
     ]
+    scraped_live = [member for member in live if kinds.get(member.source_id) != "curated"]
     if not live:
         status = "discontinued"
     elif not scraped_live:
