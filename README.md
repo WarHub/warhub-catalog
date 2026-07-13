@@ -84,8 +84,6 @@ data/
   products/                      # legacy, retired by the evidence-ledger pipeline; removal tracked for Plan 5
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
-  product-catalog-update.yml     # weekly: refresh product data (PR)
-  product-catalog-enrich.yml     # daily: parallel EAN enrichment (PR)
   paint-catalog-update.yml       # weekly: regenerate paint data + equivalences (PR)
   catalog-publish.yml            # on data change: bundle -> Release + Pages
 ```
