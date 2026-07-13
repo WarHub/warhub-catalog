@@ -1,0 +1,36 @@
+manufacturer: games-workshop
+products:
+  - id: games-workshop/99120110052
+    name: 'Combat Patrol: Necrons'
+    manufacturer: games-workshop
+    productCode: '99120110052'
+    sku: '99120110052'
+    ean: '5011921194506'
+    eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: necrons
+    category: miniatures
+    quantity: 3
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-01'
+    priceGbp: 76.5
+    evidence:
+      - curated-warhub:necrons
+      - mfr-gw-algolia:necrons
+  - id: games-workshop/boarding-patrol-death-guard
+    name: 'Boarding Patrol: Death Guard'
+    manufacturer: games-workshop
+    sku: BOARD-DG
+    ean: '5011921194605'
+    eanConfidence: provisional
+    gameSystem: warhammer-40k
+    category: miniatures
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-01'
+    priceGbp: 65.0
+    url: https://goblingaming/boarding-patrol-death-guard
+    evidence:
+      - mfr-gw-algolia:boarding-patrol-death-guard
+      - ret-goblin:boarding-patrol-death-guard
