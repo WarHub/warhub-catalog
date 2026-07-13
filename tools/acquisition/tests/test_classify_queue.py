@@ -16,8 +16,8 @@ def _line(payload: dict) -> str:
 
 def seed(tmp_path: Path) -> DataPaths:
     """Two classified products (seeding real gameSystem/faction pairs into the resolved
-    catalog) plus two parked ('unclassified-entity') products: one two-source entity with
-    hints/url/description on different members, one bare single-source entity."""
+    catalog) plus two null-gameSystem products: one two-source entity with hints/url/description
+    on different members, one bare single-source entity."""
     paths = DataPaths(tmp_path)
     write_yaml(
         paths.taxonomy / "manufacturers.yaml",
@@ -81,18 +81,14 @@ def seed(tmp_path: Path) -> DataPaths:
     return paths
 
 
-def test_build_queue_shape_for_parked_entities(tmp_path: Path) -> None:
+def test_build_queue_shape_for_null_game_system_products(tmp_path: Path) -> None:
     paths = seed(tmp_path)
     catalog = resolve_catalog(paths)
-    assert list(catalog) == ["games-workshop"]  # sanity: the 2 classified products resolved
+    assert list(catalog) == ["games-workshop"]  # sanity: all 4 products resolved (2 classified + 2 null-gameSystem)
 
-    conflicts = read_yaml(paths.conflicts)["conflicts"]
-    assert len(conflicts) == 2
-    assert all(c["type"] == "unclassified-entity" for c in conflicts)
-
-    # inject an unrelated non-"unclassified-entity" conflict to verify build_queue filters by type
-    conflicts.append({"type": "ean-mismatch", "entity": "games-workshop/irrelevant", "chosen": "x", "assertions": []})
-    write_yaml(paths.conflicts, {"conflicts": conflicts})
+    # gameSystem is optional now -- the resolver publishes null-gameSystem products instead of
+    # parking them, so conflicts.yaml carries no unclassified-entity rows at all.
+    assert read_yaml(paths.conflicts) == {"conflicts": []}
 
     queue = build_queue(paths)
 
@@ -143,7 +139,7 @@ def test_build_queue_is_deterministic_and_sorted_by_entity(tmp_path: Path) -> No
     assert [item["entity"] for item in first] == sorted(item["entity"] for item in first)
 
 
-def test_build_queue_no_parked_entities_is_empty(tmp_path: Path) -> None:
+def test_build_queue_no_null_game_system_products_is_empty(tmp_path: Path) -> None:
     paths = DataPaths(tmp_path)
     write_yaml(paths.taxonomy / "manufacturers.yaml", {"manufacturers": []})
     write_yaml(paths.taxonomy / "game-systems.yaml", {"gameSystems": []})
@@ -151,15 +147,25 @@ def test_build_queue_no_parked_entities_is_empty(tmp_path: Path) -> None:
     assert build_queue(paths) == []
 
 
-def test_build_queue_missing_evidence_for_conflict_raises(tmp_path: Path) -> None:
+def test_build_queue_missing_evidence_for_null_game_system_product_raises(tmp_path: Path) -> None:
     paths = DataPaths(tmp_path)
     write_yaml(paths.taxonomy / "manufacturers.yaml", {"manufacturers": []})
     write_yaml(paths.taxonomy / "game-systems.yaml", {"gameSystems": []})
     write_yaml(paths.taxonomy / "factions.yaml", {"factions": []})
-    write_yaml(paths.sources / "mfr-gw.yaml", {"id": "mfr-gw", "kind": "manufacturer", "strategy": "algolia"})
     write_yaml(
-        paths.conflicts,
-        {"conflicts": [{"type": "unclassified-entity", "entity": "games-workshop/ghost", "names": ["Ghost"]}]},
+        paths.catalog_products / "games-workshop.yaml",
+        {
+            "manufacturer": "games-workshop",
+            "products": [
+                {
+                    "id": "games-workshop/ghost",
+                    "name": "Ghost",
+                    "manufacturer": "games-workshop",
+                    "status": "current",
+                    "firstSeen": "2026-01-01",
+                }
+            ],
+        },
     )
     with pytest.raises(ValueError, match="games-workshop/ghost"):
         build_queue(paths)
@@ -189,7 +195,7 @@ def test_cli_emit_queue_writes_review_file(tmp_path: Path, capsys) -> None:
 REPO_DATA = Path(__file__).resolve().parents[3] / "data"
 
 
-def test_repo_build_queue_covers_all_parked_entities() -> None:
+def test_repo_build_queue_covers_all_null_game_system_products() -> None:
     if not REPO_DATA.exists():
         pytest.skip("no repo data directory found (package built/tested outside the monorepo)")
     paths = DataPaths(REPO_DATA)
@@ -197,11 +203,19 @@ def test_repo_build_queue_covers_all_parked_entities() -> None:
 
     queue = build_queue(paths)
 
-    # Self-consistency, not a literal: the parked count changes with every committed harvest.
-    conflicts = read_yaml(paths.conflicts)["conflicts"]
-    parked = sum(1 for c in conflicts if c.get("type") == "unclassified-entity")
-    assert len(queue) == parked
-    assert parked > 0
+    # Self-consistency, not a literal: count of null-gameSystem products in the RESOLVED
+    # catalog changes with every committed `resolve` run. Note this is commonly 0 in this repo
+    # today -- gameSystem becoming optional is a code change, not a data migration; the
+    # committed data/catalog/products/*.yaml was last resolved under the old parking behavior,
+    # and stays that way until the controller re-runs `resolve` (out of scope here).
+    null_game_system = 0
+    if paths.catalog_products.exists():
+        for path in paths.catalog_products.glob("*.yaml"):
+            data = read_yaml(path) or {}
+            null_game_system += sum(
+                1 for p in (data.get("products") or []) if p.get("gameSystem") is None
+            )
+    assert len(queue) == null_game_system
     for item in queue:
         assert item["name"]
         assert item["manufacturer"] in taxonomy.manufacturers

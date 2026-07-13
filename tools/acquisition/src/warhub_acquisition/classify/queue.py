@@ -1,5 +1,8 @@
-"""Build the classification queue: parked ('unclassified-entity') conflicts awaiting a
-gameSystem/faction decision, with enough context for an LLM (Task 5) to classify each one.
+"""Build the classification queue: published products with a null gameSystem (gameSystem is
+optional -- a product genuinely belonging to no game system, e.g. a base, gaming mat, paint/tool
+bundle, dice, or advent calendar, publishes with gameSystem: null rather than being parked out of
+the catalog) awaiting an OPTIONAL gameSystem/faction decision, with enough context for an LLM
+(Task 5) to classify each one.
 """
 from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.descriptor import load_descriptors
@@ -10,9 +13,10 @@ from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.yamlio import read_yaml
 
 _DESCRIPTION_LIMIT = 300
-# gameSystem/faction are definitionally absent on a parked entity's members (that's *why* it's
-# parked -- no source hinted a gameSystem the resolver could use); description gets its own
-# dedicated, truncated field below, so it is excluded from the generic raw-hints list too.
+# gameSystem/faction are excluded here because a null-gameSystem entity's members typically
+# never carried a gameSystem hint in the first place (that's why it resolved to null); description
+# gets its own dedicated, truncated field below, so it is excluded from the generic raw-hints
+# list too.
 _EXCLUDED_HINT_KEYS = {"gameSystem", "faction", "description"}
 
 
@@ -27,10 +31,13 @@ def _load_matches(paths: DataPaths) -> Matches:
 
 
 def _joined_entities(paths: DataPaths) -> dict[str, list[Observation]]:
-    """Re-run the resolver's join step (evidence + taxonomy + matches -> entity -> members) so
-    a parked entity's full member-observation set is available. resolve_catalog does not expose
-    this itself (it only returns finished CanonicalProducts and writes conflicts.yaml), so the
-    join is repeated here rather than duplicating queue-building into resolver.py.
+    """Re-run the resolver's join step (evidence + taxonomy + matches -> entity -> members) so a
+    null-gameSystem entity's full member-observation set is available. The resolved
+    CanonicalProduct only keeps a handful of folded hint fields (category/packaging/quantity/
+    description), not the raw per-source hints dict this queue's "hints" field needs, and
+    resolve_catalog does not expose joined members itself (it only returns finished
+    CanonicalProducts and writes conflicts.yaml) -- so the join is repeated here rather than
+    duplicating queue-building into resolver.py.
     """
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
@@ -41,13 +48,20 @@ def _joined_entities(paths: DataPaths) -> dict[str, list[Observation]]:
     return joined.entities
 
 
-def _parked_entity_ids(paths: DataPaths) -> list[str]:
-    if not paths.conflicts.exists():
+def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
+    """Every product id in the RESOLVED catalog (data/catalog/products/*.yaml) whose gameSystem
+    is null. gameSystem is optional now -- the resolver publishes these products instead of
+    parking them -- but they still await an OPTIONAL classification decision.
+    """
+    if not paths.catalog_products.exists():
         return []
-    conflicts = read_yaml(paths.conflicts) or {}
-    return sorted(
-        {c["entity"] for c in conflicts.get("conflicts") or [] if c.get("type") == "unclassified-entity"}
-    )
+    ids: set[str] = set()
+    for path in sorted(paths.catalog_products.glob("*.yaml")):
+        data = read_yaml(path) or {}
+        for record in data.get("products") or []:
+            if record.get("gameSystem") is None:
+                ids.add(record["id"])
+    return sorted(ids)
 
 
 def _observed_factions_by_game_system(paths: DataPaths, known_factions: set[str]) -> dict[str, list[str]]:
@@ -82,9 +96,10 @@ def _raw_hints(members: list[Observation]) -> list[str]:
 
 
 def build_queue(paths: DataPaths) -> list[dict]:
-    """One queue item per unclassified-entity conflict, sorted by entity id for determinism."""
-    parked = _parked_entity_ids(paths)
-    if not parked:
+    """One queue item per null-gameSystem product in the resolved catalog, sorted by entity id
+    for determinism."""
+    unclassified = _unclassified_entity_ids(paths)
+    if not unclassified:
         return []
 
     entities = _joined_entities(paths)
@@ -98,10 +113,10 @@ def build_queue(paths: DataPaths) -> list[dict]:
     }
 
     queue: list[dict] = []
-    for entity in parked:
+    for entity in unclassified:
         members = entities.get(entity)
         if not members:
-            raise ValueError(f"unclassified-entity {entity!r} in conflicts.yaml has no matching evidence")
+            raise ValueError(f"null-gameSystem product {entity!r} has no matching evidence")
         description = _first([member.hints.get("description") for member in members])
         queue.append(
             {

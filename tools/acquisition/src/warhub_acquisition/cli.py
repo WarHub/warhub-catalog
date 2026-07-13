@@ -207,7 +207,8 @@ def main(argv: list[str] | None = None) -> int:
     classify = subparsers.add_parser(
         "classify",
         description=(
-            "Classification pipeline for entities the resolver parked (null gameSystem). "
+            "Classification pipeline for published products with a null gameSystem (optional -- "
+            "these publish as-is, but a decision here gives one a gameSystem/faction). "
             "--emit-queue writes data/review/classification-queue.yaml for a classifier "
             "(human or LLM) to work through; --apply reads committed decisions from "
             "data/catalog/classifications/products.yaml and merges them into "
@@ -217,8 +218,8 @@ def main(argv: list[str] | None = None) -> int:
             "sends each to an Anthropic model for a same-product verdict, and writes "
             "data/review/join-proposals.yaml for human/controller review -- it NEVER edits "
             "matches.yaml itself. Neither --emit-queue/--apply/--llm nor --propose-joins re-runs "
-            "`resolve` itself -- run `warhub-data resolve` afterwards to actually un-park "
-            "classified entities or apply promoted joins."
+            "`resolve` itself -- run `warhub-data resolve` afterwards for classified gameSystem/"
+            "faction decisions or promoted joins to actually appear on the published catalog."
         ),
     )
     classify.add_argument("--data", type=Path, default=Path("data"))

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using WarHub.Catalog.Publish;
 
 namespace WarHub.Catalog.Publish.Tests;
@@ -5,19 +6,22 @@ namespace WarHub.Catalog.Publish.Tests;
 /// <summary>
 /// ProductBuilder must fail loudly (not silently drop or default) when a canonical product
 /// references taxonomy that isn't there -- these are data-integrity bugs (a bad slug, a
-/// resolver defect that let a gameSystem-less product through) that should stop the build,
-/// not produce a quietly wrong catalog.
+/// missing faction label) that should stop the build, not produce a quietly wrong catalog. A
+/// null gameSystem is NOT one of these -- it is a valid, expected state (a product genuinely
+/// belonging to no game system) and must publish, not throw.
 /// </summary>
 public sealed class ProductBuilderGuardTests
 {
     private static readonly TaxonomyLabels EmptyLabels = new(
         new Dictionary<string, string>(), new Dictionary<string, string>());
 
-    private static CatalogWriter Writer()
+    private static CatalogWriter Writer() => WriterWithDist().Writer;
+
+    private static (CatalogWriter Writer, string Dist) WriterWithDist()
     {
         string schemaDir = Path.Combine(AppContext.BaseDirectory, "schema");
         string dist = Path.Combine(Path.GetTempPath(), "warhub-catalog-guard-tests", Guid.NewGuid().ToString("N"));
-        return new CatalogWriter(dist, SchemaValidator.LoadFrom(schemaDir));
+        return (new CatalogWriter(dist, SchemaValidator.LoadFrom(schemaDir)), dist);
     }
 
     private static Provenance Prov() => new()
@@ -34,7 +38,7 @@ public sealed class ProductBuilderGuardTests
     };
 
     [Fact]
-    public void Null_game_system_throws_naming_the_product_id()
+    public void Null_game_system_publishes_and_is_excluded_from_by_system_partitions()
     {
         var product = new CanonicalProduct
         {
@@ -45,10 +49,19 @@ public sealed class ProductBuilderGuardTests
             GameSystem = null,
         };
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ProductBuilder.Build([CatalogOf(product)], EmptyLabels, Prov(), Writer()));
+        (CatalogWriter writer, string dist) = WriterWithDist();
 
-        Assert.Contains("test-mfg/no-game-system", ex.Message, StringComparison.Ordinal);
+        int total = ProductBuilder.Build([CatalogOf(product)], EmptyLabels, Prov(), writer);
+
+        Assert.Equal(1, total);
+        // no by-system partition file was written at all -- the product belongs to none.
+        Assert.DoesNotContain(writer.Files, f => f.Path.StartsWith("products/by-system/", StringComparison.Ordinal));
+
+        string productsJson = File.ReadAllText(Path.Combine(dist, "products.json"));
+        using JsonDocument doc = JsonDocument.Parse(productsJson);
+        JsonElement onlyProduct = Assert.Single(doc.RootElement.GetProperty("products").EnumerateArray());
+        Assert.Equal("Mystery Box", onlyProduct.GetProperty("name").GetString());
+        Assert.False(onlyProduct.TryGetProperty("gameSystem", out _)); // null -> omitted, not published as null
     }
 
     [Fact]

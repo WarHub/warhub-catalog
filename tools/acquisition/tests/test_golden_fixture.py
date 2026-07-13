@@ -2,10 +2,14 @@
 
 Proves the Python canonical-YAML writer (``resolve_catalog``) and the .NET publisher
 (``YamlSource`` + ``ProductBuilder``) agree byte-for-byte on the same small catalog: two
-products covering the ean/confidence matrix (confirmed via a curated assertion,
+game-system products covering the ean/confidence matrix (confirmed via a curated assertion,
 provisional via a lone retailer assertion), quantity present/absent (publisher defaults
 to 1 when absent), faction present/null, and priceCad present (Necrons) / absent
-(Boarding Patrol) alongside priceGbp.
+(Boarding Patrol) alongside priceGbp -- plus one system-less product (Citadel Painting
+Handle: a tool, like real-world bases/gaming mats/paints/dice/advent calendars, belongs to
+no game system) carrying a confirmed EAN, proving gameSystem: null publishes instead of
+being parked and is excluded from every products/by-system/*.json partition while still
+appearing in products.json.
 
 The committed fixture lives at
 ``tools/WarHub.Catalog.Publish.Tests/fixtures/canonical-golden/`` and is consumed
@@ -112,6 +116,15 @@ def _seed(tmp_path: Path) -> DataPaths:
             "manufacturer": "games-workshop", "sku": "BOARD-DG", "priceGbp": 65.0,
             "availability": "in_stock", "hints": {"gameSystem": "warhammer-40k"},
             "firstSeen": "2026-07-01", "lastSeen": "2026-07-12", "extractor": "algolia@1",
+        }) + "\n"
+        # Product C: Citadel Painting Handle -- system-less tool. No gameSystem hint on its
+        # only observation, a manufacturer-source EAN asserted directly (single authoritative
+        # source -> confirmed, same as Necrons' curated assertion; see resolve_ean).
+        + _line({
+            "key": "mfr-gw-algolia:painting-handle", "name": "Citadel Painting Handle",
+            "manufacturer": "games-workshop", "sku": "60040199014", "ean": "5011921194803",
+            "priceGbp": 6.0, "availability": "in_stock", "hints": {"category": "tools"},
+            "firstSeen": "2026-07-01", "lastSeen": "2026-07-12", "extractor": "algolia@1",
         }) + "\n",
         encoding="utf-8", newline="\n",
     )
@@ -155,9 +168,12 @@ def test_golden_fixture_matches_committed_output(tmp_path: Path) -> None:
     paths = _seed(tmp_path)
     catalog = resolve_catalog(paths)
     assert [p.id for p in catalog["games-workshop"]] == [
+        "games-workshop/60040199014",
         "games-workshop/99120110052",
         "games-workshop/boarding-patrol-death-guard",
     ]
+    painting_handle = next(p for p in catalog["games-workshop"] if p.id == "games-workshop/60040199014")
+    assert painting_handle.gameSystem is None
 
     generated = _generated_files(paths)
 

@@ -2,7 +2,12 @@ namespace WarHub.Catalog.Publish;
 
 /// <summary>
 /// Turns the canonical per-manufacturer product YAML into the consolidated +
-/// per-game-system JSON documents. Every product is included; <c>ean</c> is optional.
+/// per-game-system JSON documents. Every product is included; <c>ean</c> is optional, and so is
+/// <c>gameSystem</c> -- a product genuinely belonging to no game system (a base, a gaming mat, a
+/// paint/tool bundle, dice, an advent calendar, ...) has a null <c>GameSystem</c>. Such a
+/// product is published in <c>products.json</c> / <c>products/index.json</c> like everything
+/// else, but is excluded from every <c>products/by-system/*.json</c> partition -- it belongs to
+/// none of them.
 /// </summary>
 internal static class ProductBuilder
 {
@@ -15,18 +20,20 @@ internal static class ProductBuilder
         CatalogWriter writer)
     {
         var partitions = new Dictionary<string, PartitionData>(StringComparer.Ordinal);
+        var systemless = new List<ProductRecord>();
         foreach (var catalog in catalogs)
         {
             foreach (var p in catalog.Products)
             {
-                if (string.IsNullOrEmpty(p.GameSystem))
+                string? gameSystemKey = null;
+                string? gameSystemLabel = null;
+                if (!string.IsNullOrEmpty(p.GameSystem))
                 {
-                    throw new InvalidOperationException($"product {p.Id} has no gameSystem");
-                }
-                string key = Slug.Make(p.GameSystem);
-                if (!labels.GameSystems.TryGetValue(key, out string? label))
-                {
-                    throw new InvalidOperationException($"no label for game system slug '{key}' (product {p.Id})");
+                    gameSystemKey = Slug.Make(p.GameSystem);
+                    if (!labels.GameSystems.TryGetValue(gameSystemKey, out gameSystemLabel))
+                    {
+                        throw new InvalidOperationException($"no label for game system slug '{gameSystemKey}' (product {p.Id})");
+                    }
                 }
                 string? factionLabel = null;
                 if (!string.IsNullOrEmpty(p.Faction))
@@ -36,11 +43,8 @@ internal static class ProductBuilder
                         throw new InvalidOperationException($"no label for faction slug '{p.Faction}' (product {p.Id})");
                     }
                 }
-                if (!partitions.TryGetValue(key, out var data))
-                {
-                    partitions[key] = data = new PartitionData(label, []);
-                }
-                data.Products.Add(new ProductRecord
+
+                var record = new ProductRecord
                 {
                     Ean = string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
                     EanConfidence = p.EanConfidence,
@@ -49,7 +53,7 @@ internal static class ProductBuilder
                     PriceEur = p.PriceEur,
                     PriceCad = p.PriceCad,
                     Name = p.Name,
-                    GameSystem = label,
+                    GameSystem = gameSystemLabel,
                     Faction = factionLabel,
                     Category = p.Category ?? "miniatures",
                     Status = p.Status,
@@ -58,22 +62,39 @@ internal static class ProductBuilder
                     ProductCode = p.ProductCode ?? p.Sku,
                     Url = p.Url,
                     ImageUrl = p.ImageUrl,
-                });
+                };
+
+                if (gameSystemKey is null)
+                {
+                    systemless.Add(record);
+                    continue;
+                }
+
+                if (!partitions.TryGetValue(gameSystemKey, out var data))
+                {
+                    partitions[gameSystemKey] = data = new PartitionData(gameSystemLabel!, []);
+                }
+                data.Products.Add(record);
             }
+        }
+
+        static int CompareProducts(ProductRecord a, ProductRecord b)
+        {
+            int c = string.CompareOrdinal(a.Name, b.Name);
+            return c != 0 ? c : string.CompareOrdinal(a.Ean ?? "", b.Ean ?? "");
         }
 
         // Deterministic ordering everywhere for reproducible output / stable sha256.
         foreach (PartitionData data in partitions.Values)
         {
-            data.Products.Sort(static (a, b) =>
-            {
-                int c = string.CompareOrdinal(a.Name, b.Name);
-                return c != 0 ? c : string.CompareOrdinal(a.Ean ?? "", b.Ean ?? "");
-            });
+            data.Products.Sort(CompareProducts);
         }
+        systemless.Sort(CompareProducts);
 
         var orderedKeys = partitions.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
-        var allProducts = orderedKeys.SelectMany(k => partitions[k].Products).ToList();
+        // Systemless products sort after every partitioned game system in the consolidated
+        // list -- they have no partition key to order them alongside.
+        var allProducts = orderedKeys.SelectMany(k => partitions[k].Products).Concat(systemless).ToList();
         int total = allProducts.Count;
 
         // Consolidated
