@@ -6,8 +6,16 @@ strategy: shopify
 # cart_currency=CAD cookie, content-language: en-CA).
 baseUrl: https://tistaminis.com
 scope:
+  # Live-verified 2026-07-13 (controller probes after a zero-observation contract violation):
+  # this store carries NO plain "Games Workshop" vendor. New GW stock is vendored "GW-Local"
+  # (observed both casings across the catalog; combat-patrol-necrons.js -> vendor "GW-Local",
+  # barcode 5011921194285 populated). "Games Workshop Used" is deliberately EXCLUDED: those
+  # are one-off second-hand listings (unique -aNN handle suffixes) that would flood evidence
+  # with unjoinable single-item entities while duplicating new-stock barcodes.
   vendors:
     - Games Workshop
+    - GW-Local
+    - GW-LOCAL
   currency: cad
 politeness:
   rps: 0.5

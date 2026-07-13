@@ -4,7 +4,9 @@ manufacturers:
     codePattern: '\d{11}'
     codeStrip: [GWS, GW-]
     gs1Prefixes: ['5011921']
-    vendorNames: [Games Workshop, Citadel, Forge World]
+    # GW-Local: tistaminis.com vendors its new GW stock this way (taxonomy matching is
+    # casefolded, so one spelling also covers GW-LOCAL). Live-verified 2026-07-13.
+    vendorNames: [Games Workshop, Citadel, Forge World, GW-Local]
   - slug: atomic-mass-games
     name: Atomic Mass Games
     codePattern: '(SWL|SWP|SWM|CP|AMG)[A-Z]?\d+[A-Z]*'

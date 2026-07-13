@@ -13,6 +13,11 @@ scope:
   # Value is passed through str() unchanged into the CDX query -- CDX partial-timestamp convention
   # (a bare year pads to the END of that year for a `to` bound), matching cdx_archive.py exactly.
   snapshotTo: "2023"
+  # First 500-snapshot harvest (2026-07-13) burned the whole budget on alphabetically-first
+  # accessory pages (dice/bases/gift cards): 2 EANs from 500 fetches. This filter concentrates
+  # budget on GW-relevant slugs; recall vs the live store's 2,923 real GW handles = 1,656 (57%) --
+  # the misses are generic-named accessories (bases etc.) with negligible archive-EAN value.
+  urlInclude: warhammer|40k|aos|age-of-sigmar|sigmar|kill-team|necromunda|blood-bowl|middle-earth|horus|citadel|combat-patrol|battletome|codex|underworlds|stormcast|space-marine|adeptus|astra|tyranid|necron|aeldari|drukhari|tau-|ork|chaos|skaven|seraphon|slaves-to-darkness|soulblight|nighthaunt|gloomspite|lumineth|idoneth|sylvaneth|fyreslayer|kharadron|ogor|sons-of-behemat|daughters-of-khaine|cities-of-sigmar|maggotkin|blades-of-khorne|disciples-of-tzeentch|hedonites|beasts-of-chaos|leagues-of-votann|genestealer|deathwatch|grey-knights|thousand-sons|death-guard|world-eaters|black-templars|blood-angels|dark-angels|space-wolves|imperial|white-dwarf|forge-world|primaris|dominion|leviathan|indomitus
 politeness:
   rps: 1.0
   # Wayback CDX data pages are 200KB+ and took 3-7s+ in live controller probes (2026-07-13);
