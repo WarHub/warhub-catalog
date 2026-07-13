@@ -43,6 +43,13 @@ EXTRACTOR = "shopify@1"
 PAGE_LIMIT = 250
 DETAIL_MISS_CAP = 3
 
+# Shopify's /products.json enforces a platform-wide cap: any request where page * limit
+# exceeds 25000 fails with HTTP 400 ("Page * Limit exceeds the 25000 limit."), regardless of
+# how many products the store actually has. Live-verified twice against ret-tistaminis
+# (>25k products): enumeration never reaches an empty page before the cap, so it must stop
+# itself at the last in-bounds page rather than let the 400 kill the whole source.
+PLATFORM_MAX_PAGES = 25_000 // PAGE_LIMIT
+
 _PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur", "cad": "priceCad"}
 
 
@@ -172,13 +179,34 @@ def shopify_strategy(
         "out_of_scope_vendor": 0,
         "unmapped_hints": 0,
         "detail_fetch_errors": 0,
+        "enumeration_capped": 0,
+        "enumeration_capped_by_400": 0,
     }
 
-    # --- Enumerate: always full, cheap pages. ---
+    # scope.maxEnumerationPages only ever LOWERS the platform cap -- it can never raise
+    # enumeration past the 25k-product limit Shopify itself enforces.
+    max_pages = PLATFORM_MAX_PAGES
+    scoped_max_pages = descriptor.scope.get("maxEnumerationPages")
+    if isinstance(scoped_max_pages, int):
+        max_pages = min(max_pages, scoped_max_pages)
+
+    # --- Enumerate: always full, cheap pages -- until an empty page or the platform cap. ---
     products: dict[str, dict] = {}
     page = 1
-    while True:
-        payload = client.get_json("/products.json", params={"limit": PAGE_LIMIT, "page": page})
+    enumeration_capped = False
+    while page <= max_pages:
+        try:
+            payload = client.get_json("/products.json", params={"limit": PAGE_LIMIT, "page": page})
+        except FetchError as error:
+            if error.status == 400:
+                # Defensive: a 400 mid-enumeration means the platform cap moved (or this store
+                # is already past it on page 1). Treat exactly like reaching the cap cleanly --
+                # never kill the whole source over it. A store that 400s on page 1 yields 0
+                # observations, which fires the minCount contract loudly instead.
+                stats["enumeration_capped_by_400"] += 1
+                enumeration_capped = True
+                break
+            raise
         stats["fetched_pages"] += 1
         page_products = payload.get("products") if isinstance(payload, dict) else None
         page_products = page_products or []
@@ -187,6 +215,14 @@ def shopify_strategy(
         for product in page_products:
             products[product["handle"]] = product
         page += 1
+    else:
+        # Loop exhausted max_pages without an empty page or a 400 -- enumeration hit the
+        # platform (or scope-lowered) cap cleanly. The store almost certainly has more
+        # products beyond this point that were never observed.
+        enumeration_capped = True
+
+    if enumeration_capped:
+        stats["enumeration_capped"] = 1
 
     stats["products_seen"] = len(products)
 
@@ -298,7 +334,11 @@ def shopify_strategy(
         observations.append(observation)
 
     pending_details = sorted(set(detail_queue) - refreshed_this_run)
-    full_sweep = not pending_details
+    # A cap-ended enumeration never observed the store's full population -- an empty
+    # pending_details here just means the budgeted detail queue emptied, not that every
+    # product was seen. Force full_sweep False so run_source's mark_missed never runs and
+    # inflates missStreak on products this run simply couldn't reach past the platform cap.
+    full_sweep = not pending_details and not enumeration_capped
 
     result_cursor = {
         "updated_at": new_updated_at,

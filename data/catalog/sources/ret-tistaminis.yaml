@@ -17,10 +17,18 @@ budget:
   # budget for this source (wired into .github/workflows/catalog-acquire.yml separately,
   # out of Task-8's BUILD scope).
   detailsPerRun: 1500
+# Live-verified twice (2026-07-13): Shopify's /products.json enforces a platform-wide cap --
+# any request where page * limit exceeds 25000 fails with HTTP 400 ("Page * Limit exceeds the
+# 25000 limit."). This store has >25k products and never returns an empty page before hitting
+# that cap, so shopify.py's enumeration stops itself cleanly at page 100 (25000 / PAGE_LIMIT
+# 250) instead of enumerating the full catalog. Coverage of this source is therefore partial
+# by design -- the shopify strategy forces full_sweep=False whenever enumeration ends via the
+# cap, so a capped run never inflates missStreak on the store's unobserved remainder.
 contract:
   # No live enumeration run yet (Task-8 BUILD is scoped to descriptor + stack plumbing
   # only; the harvest is a separate EXECUTE step). Conservative floor pending first live
-  # sweep; raise from evidence after Task-8 EXECUTE.
+  # sweep; raise from evidence after Task-8 EXECUTE. Left unchanged despite the 25k
+  # enumeration cap above -- the first ~25k-product slice comfortably clears 1000.
   minCount: 1000
   maxDropPct: 30
   requiredFieldRates:

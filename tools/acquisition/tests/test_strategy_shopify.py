@@ -7,7 +7,11 @@ import pytest
 
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
-from warhub_acquisition.acquire.strategies.shopify import _price_field, shopify_strategy
+from warhub_acquisition.acquire.strategies.shopify import (
+    PLATFORM_MAX_PAGES,
+    _price_field,
+    shopify_strategy,
+)
 from warhub_acquisition.models.descriptor import SourceDescriptor
 from warhub_acquisition.taxonomy import Manufacturer, Taxonomy
 
@@ -615,6 +619,115 @@ def test_updated_at_change_resets_detail_misses_and_requeues_despite_cap() -> No
     assert result.stats["details_fetched"] == 1  # the updated_at change re-queued it despite the cap
     assert result.cursor["updated_at"]["changed"]["detailMisses"] == 1  # reset to 0, then this miss -> 1
     assert result.cursor["pending_details"] == ["changed"]
+    assert result.full_sweep is False
+
+
+def test_enumeration_stops_at_platform_cap_without_requesting_beyond() -> None:
+    """Shopify's /products.json 400s once page * limit exceeds 25000 (verified live against
+    ret-tistaminis). A store with no natural empty page before that boundary must never be
+    asked for page PLATFORM_MAX_PAGES + 1."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        page = int(request.url.params.get("page"))
+        assert page <= PLATFORM_MAX_PAGES, f"requested page {page} beyond the platform cap"
+        return httpx.Response(
+            200, json={"products": [_quiet_product(f"item-{page}", "2026-07-01T00:00:00+00:00")]}
+        )
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert len(calls) == PLATFORM_MAX_PAGES == 100
+    assert result.stats["fetched_pages"] == PLATFORM_MAX_PAGES
+    assert result.stats["products_seen"] == PLATFORM_MAX_PAGES
+    assert result.stats["enumeration_capped"] == 1
+    assert result.stats["enumeration_capped_by_400"] == 0
+    assert result.full_sweep is False
+
+
+def test_scope_max_enumeration_pages_lowers_platform_cap() -> None:
+    """`scope.maxEnumerationPages` narrows the bound further -- never raises it."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        page = request.url.params.get("page")
+        assert page == "1", f"requested page {page}, must never go past the scoped bound of 1"
+        return httpx.Response(
+            200, json={"products": [_quiet_product("known", "2026-07-01T00:00:00+00:00")]}
+        )
+
+    # "known" already carries a confirmed ean at the current bulk updated_at -- nothing left
+    # to (re)fetch, so pending_details would naturally end up empty.
+    cursor = {
+        "updated_at": {"known": {"updatedAt": "2026-07-01T00:00:00+00:00", "ean": "1234567890123"}},
+        "pending_details": [],
+    }
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(
+        descriptor(maxEnumerationPages=1), client, cursor, context(warlord_taxonomy())
+    )
+
+    assert len(calls) == 1  # stopped after page 1, never requested page 2
+    assert result.stats["fetched_pages"] == 1
+    assert result.stats["enumeration_capped"] == 1
+    assert result.cursor["pending_details"] == []
+    # capped enumeration forces full_sweep False even though pending_details is empty --
+    # this store's remainder past page 1 was never observed, not confirmed absent.
+    assert result.full_sweep is False
+
+
+def test_400_mid_enumeration_treated_as_cap_end_not_source_error() -> None:
+    """Defensive: if the platform's cap boundary ever moves and a 400 arrives mid-enumeration,
+    treat it as a clean cap-end rather than letting FetchError kill the whole source."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        page = int(request.url.params.get("page"))
+        if page <= 3:
+            return httpx.Response(
+                200, json={"products": [_quiet_product(f"item-{page}", "2026-07-01T00:00:00+00:00")]}
+            )
+        return httpx.Response(400, json={"errors": "Page 4 Limit exceeds the 25000 limit."})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert result.stats["fetched_pages"] == 3
+    assert result.stats["products_seen"] == 3
+    assert result.stats["enumeration_capped_by_400"] == 1
+    assert result.stats["enumeration_capped"] == 1
+    assert result.full_sweep is False
+    # exactly 4 requests: 3 successful pages + the one that 400'd -- no exception propagated,
+    # and no retry storm on the 400 (PoliteClient only retries 429/5xx/transport errors).
+    assert len(calls) == 4
+
+
+def test_400_on_first_page_yields_zero_observations_not_a_crash() -> None:
+    """A store that already exceeds the cap on page 1 (e.g. limit itself misconfigured) must
+    still complete cleanly -- zero observations lets the minCount contract fire loudly instead
+    of a strategy crash masking the real signal."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(400, json={"errors": "Page 1 Limit exceeds the 25000 limit."})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy()))
+
+    assert result.observations == []
+    assert result.stats["fetched_pages"] == 0
+    assert result.stats["enumeration_capped_by_400"] == 1
     assert result.full_sweep is False
 
 
