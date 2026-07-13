@@ -197,7 +197,11 @@ def test_repo_build_queue_covers_all_parked_entities() -> None:
 
     queue = build_queue(paths)
 
-    assert len(queue) == 2486
+    # Self-consistency, not a literal: the parked count changes with every committed harvest.
+    conflicts = read_yaml(paths.conflicts)["conflicts"]
+    parked = sum(1 for c in conflicts if c.get("type") == "unclassified-entity")
+    assert len(queue) == parked
+    assert parked > 0
     for item in queue:
         assert item["name"]
         assert item["manufacturer"] in taxonomy.manufacturers
