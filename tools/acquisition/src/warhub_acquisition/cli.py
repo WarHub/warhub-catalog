@@ -11,7 +11,7 @@ from warhub_acquisition.yamlio import read_yaml
 
 
 def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
-    from warhub_acquisition.acquire.health import SourceFailure, build_health_report
+    from warhub_acquisition.acquire.health import SourceError, SourceFailure, build_health_report
     from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, SourceContractError, run_source
     from warhub_acquisition.models.descriptor import load_descriptors
     from warhub_acquisition.taxonomy import Taxonomy
@@ -44,23 +44,34 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
 
     healths = []
     failures = []
-    for source_id in source_ids:
-        try:
-            health = run_source(descriptors[source_id], paths, context)
-        except SourceContractError as exc:
-            failures.append(SourceFailure(source_id=source_id, details=exc.details))
-            print(f"CONTRACT VIOLATION {source_id}: {exc.details}")
-            continue
-        healths.append(health)
-        stats = " ".join(f"{k}={v}" for k, v in sorted(health.stats.items()))
-        print(f"{source_id}: ok {stats}".rstrip())
+    errors = []
+    try:
+        for source_id in source_ids:
+            try:
+                health = run_source(descriptors[source_id], paths, context)
+            except SourceContractError as exc:
+                failures.append(SourceFailure(source_id=source_id, details=exc.details))
+                print(f"CONTRACT VIOLATION {source_id}: {exc.details}")
+                continue
+            except Exception as exc:
+                # Per-source isolation: a source blowing up mid-run (e.g. FetchError after retry
+                # exhaustion) must not abort the whole acquire command -- later sources still run,
+                # and already-collected results still get flushed to the health report below.
+                errors.append(SourceError(source_id=source_id, exc_type=type(exc).__name__, message=str(exc)))
+                print(f"SOURCE ERROR {source_id}: {type(exc).__name__}: {exc}")
+                continue
+            healths.append(health)
+            stats = " ".join(f"{k}={v}" for k, v in sorted(health.stats.items()))
+            print(f"{source_id}: ok {stats}".rstrip())
+    finally:
+        # Always write the health report once the loop has run, even if every source failed --
+        # successful sources' results must never be silently lost because a later source raised.
+        report_text = build_health_report(healths, failures, errors, skipped)
+        report_path = paths.root / "review" / "acquisition-health.md"
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(report_text, encoding="utf-8", newline="\n")
 
-    report_text = build_health_report(healths, failures, skipped)
-    report_path = paths.root / "review" / "acquisition-health.md"
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(report_text, encoding="utf-8", newline="\n")
-
-    return 4 if failures else 0
+    return 4 if (failures or errors) else 0
 
 
 def main(argv: list[str] | None = None) -> int:

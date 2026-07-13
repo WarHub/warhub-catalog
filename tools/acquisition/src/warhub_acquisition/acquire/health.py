@@ -16,9 +16,24 @@ class SourceFailure:
     details: dict
 
 
+@dataclass
+class SourceError:
+    """A source that raised some other (non-contract) exception during acquire.
+
+    Distinct from SourceFailure: this is an unexpected error (e.g. FetchError after retry
+    exhaustion) rather than a declared-contract violation, and is rendered differently in the
+    health report so the two failure kinds stay distinguishable at a glance.
+    """
+
+    source_id: str
+    exc_type: str
+    message: str
+
+
 def build_health_report(
     healths: list[SourceHealth],
     failures: list[SourceFailure],
+    errors: list[SourceError],
     skipped: list[str],
 ) -> str:
     lines = [
@@ -42,6 +57,10 @@ def build_health_report(
         details = ", ".join(f"{k}={v}" for k, v in sorted(failure.details.items()))
         rows.append(
             (failure.source_id, f"| {failure.source_id} | CONTRACT VIOLATION |  |  |  | {details} |")
+        )
+    for error in errors:
+        rows.append(
+            (error.source_id, f"| {error.source_id} | ERROR |  |  |  | {error.exc_type}: {error.message} |")
         )
     for _, row in sorted(rows, key=lambda r: r[0]):
         lines.append(row)

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from warhub_acquisition.acquire.client import FetchError
 from warhub_acquisition.acquire.runner import STRATEGIES, StrategyResult
 from warhub_acquisition.cli import main
 from warhub_acquisition.models.observation import Observation
@@ -86,6 +87,73 @@ def test_acquire_contract_violation_exits_4_and_other_sources_still_run(
 
     health = (tmp_path / "review" / "acquisition-health.md").read_text(encoding="utf-8")
     assert "toy-fail" in health
+    assert "toy-ok" in health
+
+
+def test_acquire_source_error_isolated_other_sources_still_run(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
+) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    write_descriptor(paths, "toy-broken", "toy-broken")
+    write_descriptor(paths, "toy-ok", "toy-ok")
+
+    def raise_value_error(desc, client, cursor, ctx):
+        raise ValueError("boom")
+
+    monkeypatch.setitem(STRATEGIES, "toy-broken", raise_value_error)
+    register(
+        monkeypatch,
+        "toy-ok",
+        StrategyResult(observations=[obs("toy-ok:a")], full_sweep=True, stats={"fetched": 1}, cursor={}),
+    )
+
+    exit_code = main(["acquire", "--data", str(tmp_path), "--run-date", "2026-07-13"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 4
+    assert "SOURCE ERROR toy-broken: ValueError: boom" in out
+    assert "toy-ok: ok fetched=1" in out
+    assert not (paths.evidence_products / "toy-broken" / "observations.jsonl").exists()
+    assert (paths.evidence_products / "toy-ok" / "observations.jsonl").exists()
+
+    health = (tmp_path / "review" / "acquisition-health.md").read_text(encoding="utf-8")
+    assert "toy-broken" in health
+    assert "ERROR" in health
+    assert "toy-ok" in health
+    assert "ok" in health
+
+
+def test_acquire_fetch_error_isolated_and_exits_4(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
+) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    write_descriptor(paths, "toy-broken", "toy-broken")
+    write_descriptor(paths, "toy-ok", "toy-ok")
+
+    def raise_fetch_error(desc, client, cursor, ctx):
+        raise FetchError("https://example.test/list", 503)
+
+    monkeypatch.setitem(STRATEGIES, "toy-broken", raise_fetch_error)
+    register(
+        monkeypatch,
+        "toy-ok",
+        StrategyResult(observations=[obs("toy-ok:a")], full_sweep=True, stats={"fetched": 1}, cursor={}),
+    )
+
+    exit_code = main(["acquire", "--data", str(tmp_path), "--run-date", "2026-07-13"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 4
+    assert "SOURCE ERROR toy-broken: FetchError" in out
+    assert "toy-ok: ok fetched=1" in out
+    assert not (paths.evidence_products / "toy-broken" / "observations.jsonl").exists()
+    assert (paths.evidence_products / "toy-ok" / "observations.jsonl").exists()
+
+    health = (tmp_path / "review" / "acquisition-health.md").read_text(encoding="utf-8")
+    assert "toy-broken" in health
+    assert "ERROR" in health
     assert "toy-ok" in health
 
 
