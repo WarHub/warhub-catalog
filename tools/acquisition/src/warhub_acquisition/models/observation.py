@@ -14,6 +14,7 @@ class Observation(BaseModel):
     priceGbp: float | None = None
     priceUsd: float | None = None
     priceEur: float | None = None
+    priceCad: float | None = None
     imageUrl: str | None = None
     availability: str | None = None
     hints: dict[str, object] = Field(default_factory=dict)

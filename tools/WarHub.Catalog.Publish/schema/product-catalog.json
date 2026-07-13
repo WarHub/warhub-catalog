@@ -23,6 +23,10 @@
       "properties": {
         "ean": { "type": "string" },
         "eanConfidence": { "type": "string", "enum": ["confirmed", "provisional", "conflicted"] },
+        "priceGbp": { "type": "number" },
+        "priceUsd": { "type": "number" },
+        "priceEur": { "type": "number" },
+        "priceCad": { "type": "number" },
         "name": { "type": "string" },
         "gameSystem": { "type": "string" },
         "faction": { "type": "string" },

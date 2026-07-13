@@ -43,7 +43,7 @@ EXTRACTOR = "shopify@1"
 PAGE_LIMIT = 250
 DETAIL_MISS_CAP = 3
 
-_PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur"}
+_PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur", "cad": "priceCad"}
 
 
 def _price_field(currency: object) -> str:

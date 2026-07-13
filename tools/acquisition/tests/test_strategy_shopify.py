@@ -7,7 +7,7 @@ import pytest
 
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
-from warhub_acquisition.acquire.strategies.shopify import shopify_strategy
+from warhub_acquisition.acquire.strategies.shopify import _price_field, shopify_strategy
 from warhub_acquisition.models.descriptor import SourceDescriptor
 from warhub_acquisition.taxonomy import Manufacturer, Taxonomy
 
@@ -68,6 +68,37 @@ def fixture_transport(calls: list[str] | None = None) -> httpx.MockTransport:
 
 def test_strategy_is_registered() -> None:
     assert STRATEGIES["shopify"] is shopify_strategy
+
+
+def test_price_field_maps_currency_to_field() -> None:
+    assert _price_field("gbp") == "priceGbp"
+    assert _price_field("usd") == "priceUsd"
+    assert _price_field("eur") == "priceEur"
+    assert _price_field("cad") == "priceCad"
+    assert _price_field("CAD") == "priceCad"  # casefolded before lookup
+    assert _price_field("xyz") == "priceGbp"  # unknown currency defaults to gbp
+
+
+def test_cad_scoped_descriptor_populates_price_cad() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(200, json=two_known_products_page())
+        return httpx.Response(200, json={"products": []})
+
+    client = PoliteClient(
+        "https://tistaminis.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    # budget=0: bulk-only observations, no detail fetch -- isolates the currency mapping.
+    result = shopify_strategy(descriptor(currency="cad"), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert len(result.observations) == 2
+    by_handle = {o.key.rsplit(":", 1)[1]: o for o in result.observations}
+    assert by_handle["alpha"].priceCad == pytest.approx(10.00)
+    assert by_handle["bravo"].priceCad == pytest.approx(20.00)
+    for observation in result.observations:
+        assert observation.priceGbp is None
+        assert observation.priceUsd is None
+        assert observation.priceEur is None
 
 
 def test_enumeration_and_detail_fetch_produces_ean_from_fixture() -> None:

@@ -111,6 +111,15 @@ def test_curated_current_does_not_resurrect_suspected() -> None:
     assert product.availability == "unknown"
 
 
+def test_price_cad_folds_like_other_currencies() -> None:
+    members = [
+        obs("mfr-gw:necrons", priceCad=105.0, url="https://gw/necrons"),
+        obs("ret-a:necrons", name="Necrons Combat Patrol (GW)", priceCad=99.0),
+    ]
+    product = resolve_attributes("games-workshop/99120110077", members, KINDS, NO_EAN, "99120110077")
+    assert product.priceCad == 105.0  # manufacturer wins, same precedence as priceGbp
+
+
 def test_sku_is_resolved_first_non_none() -> None:
     members = [
         obs("mfr-gw:necrons", sku=None),
