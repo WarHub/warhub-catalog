@@ -41,6 +41,20 @@ def test_normalize_code_strips_and_matches(tmp_path: Path) -> None:
     assert taxonomy.normalize_code("games-workshop", None) is None
 
 
+def test_warlord_pattern_rejects_ean13_and_letterless_junk(tmp_path: Path) -> None:
+    write_yaml(
+        tmp_path / "manufacturers.yaml",
+        {"manufacturers": [{"slug": "warlord-games", "name": "Warlord Games",
+                            "codePattern": '[0-9]{9,12}(-[0-9]{1,2})?|(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{6,}'}]},
+    )
+    taxonomy = Taxonomy.load(tmp_path)
+    assert taxonomy.normalize_code("warlord-games", "5060393709671") is None      # EAN-13
+    assert taxonomy.normalize_code("warlord-games", "402615006") == "402615006"    # 9-digit own-store sku
+    assert taxonomy.normalize_code("warlord-games", "WGB-AI-02") == "WGB-AI-02"
+    assert taxonomy.normalize_code("warlord-games", "------") is None              # letterless junk
+    assert taxonomy.normalize_code("warlord-games", "219910001-01") == "219910001-01"  # variant dash-code
+
+
 def test_duplicate_vendor_name_raises(tmp_path: Path) -> None:
     write_yaml(
         tmp_path / "manufacturers.yaml",

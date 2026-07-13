@@ -32,7 +32,7 @@ manufacturers:
     vendorNames: [Steamforged Games, Steamforged]
   - slug: warlord-games
     name: Warlord Games
-    codePattern: '[0-9]{9,12}|[A-Z0-9-]{6,}'
+    codePattern: '[0-9]{9,12}(-[0-9]{1,2})?|(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{6,}'
     vendorNames: [Warlord Games]
   - slug: wyrd-games
     name: Wyrd Games
