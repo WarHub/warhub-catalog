@@ -144,3 +144,20 @@ def test_join_onto_retracted_raises(tmp_path: Path) -> None:
     write_yaml(paths.matches, {"joins": {"ret-goblin:cp-necrons": "games-workshop/99120110077"}, "aliases": {}})
     with pytest.raises(ValueError, match="retracted"):
         resolve_catalog(paths)
+
+
+def test_unclassified_entity_is_parked(tmp_path: Path) -> None:
+    paths = seed(tmp_path)
+    rogue = paths.evidence_products / "ret-goblin" / "observations.jsonl"
+    line = json.dumps(
+        {"key": "ret-goblin:mystery", "name": "Mystery Box No System", "manufacturer": "games-workshop",
+         "sku": "99999999999", "firstSeen": "2026-07-12", "lastSeen": "2026-07-12",
+         "extractor": "t@1"},
+        sort_keys=True, separators=(",", ":"),
+    )
+    rogue.write_text(rogue.read_text(encoding="utf-8") + line + "\n", encoding="utf-8", newline="\n")
+    catalog = resolve_catalog(paths)
+    ids = [p.id for records in catalog.values() for p in records]
+    assert "games-workshop/99999999999" not in ids
+    conflicts = read_yaml(paths.conflicts)["conflicts"]
+    assert any(c.get("type") == "unclassified-entity" and c.get("entity") == "games-workshop/99999999999" for c in conflicts)
