@@ -1,6 +1,7 @@
 """warhub-data CLI: resolve, report, migrate, acquire, classify."""
 import argparse
 import datetime
+import os
 import sys
 from pathlib import Path
 
@@ -82,6 +83,44 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     return 4 if (failures or errors) else 0
 
 
+def _run_classify_llm(args: argparse.Namespace, paths: DataPaths) -> int:
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print(
+            "error: ANTHROPIC_API_KEY environment variable is required for `classify --llm`",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not args.run_date:
+        print("error: --run-date is required for `classify --llm`", file=sys.stderr)
+        return 1
+    try:
+        datetime.date.fromisoformat(args.run_date)
+    except ValueError:
+        print(f"error: --run-date must be YYYY-MM-DD, got {args.run_date!r}", file=sys.stderr)
+        return 1
+
+    queue_path = paths.root / "review" / "classification-queue.yaml"
+    if not queue_path.exists():
+        print(
+            f"error: queue file not found: {queue_path}; run `warhub-data classify --emit-queue` first",
+            file=sys.stderr,
+        )
+        return 1
+
+    import anthropic
+
+    from warhub_acquisition.classify.llm import run_llm_classification
+
+    client = anthropic.Anthropic(api_key=api_key)
+    summary = run_llm_classification(
+        paths, run_date=args.run_date, client=client, budget=args.budget, model=args.model
+    )
+    print(summary.render())
+    return 0
+
+
 def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
     from warhub_acquisition.classify.apply import apply_classifications
     from warhub_acquisition.classify.queue import build_queue
@@ -93,6 +132,9 @@ def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
             write_yaml(queue_path, {"queue": queue})
             print(f"wrote {len(queue)} queue items to {queue_path}")
             return 0
+
+        if args.llm:
+            return _run_classify_llm(args, paths)
 
         count = apply_classifications(paths)
         print(
@@ -143,6 +185,10 @@ def main(argv: list[str] | None = None) -> int:
     classify_mode = classify.add_mutually_exclusive_group(required=True)
     classify_mode.add_argument("--emit-queue", action="store_true")
     classify_mode.add_argument("--apply", action="store_true")
+    classify_mode.add_argument("--llm", action="store_true")
+    classify.add_argument("--budget", type=int, default=500)
+    classify.add_argument("--model", default="claude-haiku-4-5-20251001")
+    classify.add_argument("--run-date", default=None)
 
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
