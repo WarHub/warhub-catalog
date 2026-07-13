@@ -3,7 +3,13 @@
 Cursor schema (as-built -- see task-5-report.md for the full rationale):
 
     {
-      "updated_at": {"<handle>": {"updatedAt": "<bulk updated_at ISO>", "ean": "<digits>"}},
+      "updated_at": {
+        "<handle>": {
+          "updatedAt": "<bulk updated_at ISO>",
+          "ean": "<digits>",          # present only once a barcode has been confirmed
+          "detailMisses": <int>,      # present only while ean is unknown and count > 0
+        }
+      },
       "pending_details": ["<handle>", ...],
     }
 
@@ -16,6 +22,17 @@ whose ean is already known -- because this run's budget didn't reach it -- would
 that ean on upsert. Storing the ean itself (not just the timestamp) inside the cursor's
 `updated_at` map lets every run's candidate carry forward a previously-confirmed ean without a
 fresh detail fetch, closing that data-loss hole while keeping the same two top-level keys/intent.
+
+Give-up mechanism (task 7): a detail fetch that SUCCEEDS but finds no barcode increments the
+handle's `detailMisses`. At `detailMisses >= DETAIL_MISS_CAP` the handle stops entering the
+missing-ean queue bucket -- it is still enumerated and observed every run (bulk data only), just
+never re-fetched for a detail page again. A bulk `updated_at` change newer than what's recorded
+resets `detailMisses` to 0 (the product changed upstream -- worth re-checking regardless of past
+misses) and re-queues the handle via the existing staleness bucket. `FetchError` never touches
+`detailMisses` (transient, handled entirely by the pre-existing preserve-on-error path). A
+capped-out handle is absent from `pending_details` exactly like a barcode-carrying one, so it
+counts as "resolved" for `full_sweep` -- a source where every remaining detail-less product is
+capped can reach `full_sweep=True` (this is intended; see task-7-report.md).
 """
 from warhub_acquisition.acquire.client import FetchError, PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, StrategyResult
@@ -24,6 +41,7 @@ from warhub_acquisition.models.observation import Observation
 
 EXTRACTOR = "shopify@1"
 PAGE_LIMIT = 250
+DETAIL_MISS_CAP = 3
 
 _PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur"}
 
@@ -200,7 +218,14 @@ def shopify_strategy(
         recorded = old_updated_at.get(handle)
         if recorded is not None:
             if bulk_updated_at > recorded.get("updatedAt", ""):
+                # Product changed upstream since the last recorded value -- worth re-checking
+                # regardless of past misses (this is also where a capped-out handle's
+                # detailMisses effectively resets: see the fetch-outcome branch below).
                 stale_candidates.append(handle)
+            elif not recorded.get("ean") and recorded.get("detailMisses", 0) < DETAIL_MISS_CAP:
+                missing_ean_candidates.append(handle)
+            # else: ean already known (nothing to do), or detailMisses hit the cap with an
+            # unchanged updated_at -- given up, excluded from every queue bucket.
         elif handle in old_pending:
             missing_ean_candidates.append(handle)
         else:
@@ -239,13 +264,28 @@ def shopify_strategy(
                 new_updated_at[handle] = old_updated_at[handle]
             continue
 
+        bulk_updated_at = product.get("updated_at") or ""
         barcode = _extract_barcode(detail if isinstance(detail, dict) else {})
         if barcode:
             stats["barcodes_found"] += 1
-            new_updated_at[handle] = {"updatedAt": product.get("updated_at") or "", "ean": barcode}
+            new_updated_at[handle] = {"updatedAt": bulk_updated_at, "ean": barcode}
             refreshed_this_run.add(handle)
-        # else: detail fetch succeeded but no barcode -- any previously-known ean for this
-        # handle is dropped (the live response is the freshest truth) and it re-queues below.
+        else:
+            # Detail fetch succeeded but no barcode -- any previously-known ean for this handle
+            # is dropped (the live response is the freshest truth). Track/increment the give-up
+            # counter: a bulk updated_at newer than what was last recorded resets it to 0 (fresh
+            # start for a changed product) before this run's own miss brings it back to 1; an
+            # unchanged updated_at just carries the prior count forward and increments it.
+            previous = old_updated_at.get(handle)
+            if previous is not None and bulk_updated_at <= previous.get("updatedAt", ""):
+                misses = previous.get("detailMisses", 0)
+            else:
+                misses = 0
+            new_updated_at[handle] = {"updatedAt": bulk_updated_at, "detailMisses": misses + 1}
+            # not added to refreshed_this_run -- re-queues below via pending_details unless the
+            # new count just hit the cap, in which case the classification loop above will
+            # exclude it from every bucket on the NEXT run (this run's pending_details entry is
+            # unaffected -- see full_sweep consequence note in the module docstring).
 
     observations: list[Observation] = []
     for handle in sorted(kept_handles):

@@ -25,9 +25,22 @@ Cursor schema:
     {
       "gtin": {"<product id>": "<digits>"},
       "pending_details": ["<product id>", ...],
+      "detailMisses": {"<product id>": <int>},
     }
 
 `last_good_count` / `last_run_date` are added by `run_source`, never written here.
+
+Give-up mechanism (task 7): a detail fetch that SUCCEEDS but finds no gtin increments the
+product's `detailMisses`. At `detailMisses >= DETAIL_MISS_CAP` the id stops entering the
+missing-gtin queue bucket -- still enumerated/observed every run, just never re-fetched for a
+detail page again. Unlike shopify.py, Woo's Store API carries no modification timestamp (see
+above), so there is no staleness signal to reset the counter on: once capped, a Woo product's
+give-up is permanent until a gtin is found for it some other way (e.g. a join/backfill), which
+would clear the entry the same way a successful in-strategy fetch does. `FetchError` never
+touches `detailMisses` (transient). A capped-out id is absent from `pending_details` exactly like
+a gtin-carrying one, so it counts as "resolved" for `full_sweep` -- a source where every remaining
+detail-less product is capped can reach `full_sweep=True` (this is intended; see
+task-7-report.md).
 """
 import json
 import re
@@ -40,6 +53,7 @@ from warhub_acquisition.models.observation import Observation
 EXTRACTOR = "woo@1"
 PRODUCTS_PATH = "/wp-json/wc/store/products"
 PAGE_SIZE = 100
+DETAIL_MISS_CAP = 3
 
 _PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur"}
 
@@ -249,20 +263,43 @@ def woo_strategy(
     # --- Detail queue / budget: missing-gtin-first, only when scope.gtinFromJsonLd is set. No
     # staleness bucket exists -- see module docstring for why. ---
     new_gtin_map: dict[str, str] = {}
+    new_detail_misses: dict[str, int] = {}
     pending_details: list[str] = []
 
     if gtin_enabled and kept_ids:
         old_gtin: dict[str, str] = dict(cursor.get("gtin") or {})
         old_pending: set[str] = {str(pid) for pid in (cursor.get("pending_details") or [])}
+        old_detail_misses: dict[str, int] = dict(cursor.get("detailMisses") or {})
 
         new_ids = sorted((pid for pid in kept_ids if pid not in old_gtin and pid not in old_pending), key=int)
-        missing_ids = sorted((pid for pid in kept_ids if pid not in old_gtin and pid in old_pending), key=int)
+        # Given up: a previously-queued id whose miss count already hit the cap never re-enters
+        # the queue -- no staleness signal exists for Woo (see module docstring), so this is
+        # permanent until a gtin appears for the id some other way.
+        missing_ids = sorted(
+            (
+                pid
+                for pid in kept_ids
+                if pid not in old_gtin
+                and pid in old_pending
+                and old_detail_misses.get(pid, 0) < DETAIL_MISS_CAP
+            ),
+            key=int,
+        )
         detail_queue = new_ids + missing_ids
 
         budget = context.budget
         to_fetch = detail_queue if budget is None else detail_queue[: max(budget, 0)]
+        to_fetch_set = set(to_fetch)
 
         new_gtin_map = {pid: old_gtin[pid] for pid in kept_ids if pid in old_gtin}
+        # Carry forward every kept id's give-up counter unless it's being (re)fetched this run --
+        # a capped id that fell out of the queue, or a queued-but-budget-skipped id, keeps its
+        # count untouched.
+        new_detail_misses = {
+            pid: old_detail_misses[pid]
+            for pid in kept_ids
+            if pid in old_detail_misses and pid not in to_fetch_set
+        }
         refreshed: set[str] = set()
         for pid in to_fetch:
             product = products[pid]
@@ -274,6 +311,9 @@ def woo_strategy(
                 html = client.get_text(permalink)
             except FetchError:
                 stats["detail_fetch_errors"] += 1
+                # Transient: preserve any prior miss count and leave the id queued for retry.
+                if pid in old_detail_misses:
+                    new_detail_misses[pid] = old_detail_misses[pid]
                 continue
 
             gtin = _extract_gtin(html)
@@ -281,7 +321,11 @@ def woo_strategy(
                 stats["gtins_found"] += 1
                 new_gtin_map[pid] = gtin
                 refreshed.add(pid)
-            # else: fetched successfully but no gtin in the page's JSON-LD -- re-queues below.
+                # give-up counter cleared: pid is simply absent from new_detail_misses.
+            else:
+                # Fetched successfully but no gtin -- increment the permanent-until-resolved
+                # give-up counter; not added to refreshed, so it re-queues below unless capped.
+                new_detail_misses[pid] = old_detail_misses.get(pid, 0) + 1
 
         pending_details = sorted(set(detail_queue) - refreshed, key=int)
 
@@ -300,6 +344,7 @@ def woo_strategy(
     result_cursor = {
         "gtin": new_gtin_map,
         "pending_details": pending_details,
+        "detailMisses": new_detail_misses,
     }
 
     return StrategyResult(

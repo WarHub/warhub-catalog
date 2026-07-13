@@ -365,7 +365,7 @@ def test_para_bellum_never_fetches_details_even_without_a_budget_cap() -> None:
     assert result.stats["details_fetched"] == 0
     assert result.stats["gtins_found"] == 0
     assert all(observation.ean is None for observation in result.observations)
-    assert result.cursor == {"gtin": {}, "pending_details": []}
+    assert result.cursor == {"gtin": {}, "pending_details": [], "detailMisses": {}}
     assert result.full_sweep is True
 
     by_key = {observation.key: observation for observation in result.observations}
@@ -502,3 +502,94 @@ def test_mapping_file_applies_category_hints_from_para_bellum_fixture() -> None:
     assert by_key["mfr-para-bellum:2"].hints == {}
     # "Random Accessory" has non-empty categories with no match in either map -> +2
     assert result.stats["unmapped_hints"] == 2
+
+
+ALPHA_PERMALINK = "https://www.manticgames.com/alpha/"
+
+
+def test_detail_fetch_success_with_no_gtin_increments_detail_misses() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/wp-json/wc/store/products":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(200, json=two_known_products_page()[:1], headers={"X-WP-Total": "1"})
+            return httpx.Response(200, json=[])
+        if str(request.url) == ALPHA_PERMALINK:
+            return httpx.Response(200, text=NO_GTIN_HTML)
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    result = woo_strategy(mantic_descriptor(), client, {}, context(mantic_taxonomy()))
+
+    assert result.stats["details_fetched"] == 1
+    assert result.stats["gtins_found"] == 0
+    assert result.observations[0].ean is None
+    assert result.cursor["detailMisses"] == {"100": 1}
+    assert result.cursor["pending_details"] == ["100"]
+    assert result.full_sweep is False
+
+
+def test_fetch_error_does_not_increment_detail_misses() -> None:
+    cursor_with_misses = {"gtin": {}, "pending_details": ["100"], "detailMisses": {"100": 2}}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/wp-json/wc/store/products":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(200, json=two_known_products_page()[:1], headers={"X-WP-Total": "1"})
+            return httpx.Response(200, json=[])
+        return httpx.Response(500, text="down")  # every detail fetch attempt fails
+
+    client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    result = woo_strategy(mantic_descriptor(), client, cursor_with_misses, context(mantic_taxonomy()))
+
+    assert result.stats["detail_fetch_errors"] == 1
+    assert result.cursor["detailMisses"] == {"100": 2}  # unchanged, not incremented
+    assert result.cursor["pending_details"] == ["100"]
+    assert result.full_sweep is False
+
+
+def test_detail_misses_cap_excludes_id_from_queue_and_reaches_full_sweep() -> None:
+    capped_cursor = {"gtin": {}, "pending_details": ["100"], "detailMisses": {"100": 3}}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/wp-json/wc/store/products":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(200, json=two_known_products_page()[:1], headers={"X-WP-Total": "1"})
+            return httpx.Response(200, json=[])
+        raise AssertionError(f"unexpected request: {request.url} (capped id must never be fetched)")
+
+    client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    result = woo_strategy(mantic_descriptor(), client, capped_cursor, context(mantic_taxonomy()))
+
+    assert result.stats["details_fetched"] == 0
+    assert result.observations[0].ean is None
+    assert result.cursor["detailMisses"] == {"100": 3}  # carried forward unchanged
+    # excluded from every queue bucket -> pending_details empties out -> counts as resolved,
+    # exactly like a gtin-carrying id, for the full_sweep calculation.
+    assert result.cursor["pending_details"] == []
+    assert result.full_sweep is True
+
+
+def test_gtin_success_clears_detail_misses_counter() -> None:
+    cursor_with_misses = {"gtin": {}, "pending_details": ["100"], "detailMisses": {"100": 2}}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/wp-json/wc/store/products":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(200, json=two_known_products_page()[:1], headers={"X-WP-Total": "1"})
+            return httpx.Response(200, json=[])
+        if str(request.url) == ALPHA_PERMALINK:
+            return httpx.Response(
+                200,
+                text='<script type="application/ld+json">'
+                '{"@type": "Product", "gtin": "5000000000000"}</script>',
+            )
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    result = woo_strategy(mantic_descriptor(), client, cursor_with_misses, context(mantic_taxonomy()))
+
+    assert result.stats["gtins_found"] == 1
+    assert result.cursor["gtin"] == {"100": "5000000000000"}
+    assert "100" not in result.cursor["detailMisses"]
+    assert result.cursor["pending_details"] == []
+    assert result.full_sweep is True
