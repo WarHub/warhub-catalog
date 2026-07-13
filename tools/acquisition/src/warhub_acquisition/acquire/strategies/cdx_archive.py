@@ -165,14 +165,37 @@ def _cdx_base_params(descriptor: SourceDescriptor) -> dict[str, str]:
     return params
 
 
-def _show_num_pages(client: PoliteClient, base_params: dict[str, str]) -> int:
+def _show_num_pages(client: PoliteClient, descriptor: SourceDescriptor, base_params: dict[str, str]) -> int:
     """`showNumPages=true`'s response body is a bare plain-text integer, NOT JSON (probe-verified
-    live) -- `get_response(...).text`, not `get_json`."""
-    text = client.get_response(CDX_PATH, params={**base_params, "showNumPages": "true"}).text
+    live) -- `get_response(...).text`, not `get_json`.
+
+    Fix wave 1 (review finding, Task 2): a body that doesn't parse as a non-negative integer MUST
+    raise, never silently return 0. A silent 0 here is indistinguishable from a genuinely-empty
+    CDX index (`"0"` is a real, valid body -- see the sibling test) and gets cached straight into
+    the cursor as `cdx_num_pages=0`/`cdx_pages_fetched=0`; `_should_reenumerate` then treats that
+    as a *complete* enumeration and won't retry until `reEnumerateAfterDays` (default 30) elapses
+    -- a single transient garbled 200 would suppress this source's enumeration for a month with no
+    signal anything went wrong. Raising instead propagates uncaught out of `_enumerate_cdx` /
+    `cdx_archive_strategy` through `run_source` to `cli.py`'s per-source `except Exception` handler
+    (`cli.py` `_run_acquire`), which records a loud `SOURCE ERROR {source_id}: ValueError: ...`,
+    sets the command's exit code to 4, and -- critically -- never reaches the cursor write (that
+    happens only after the strategy call returns), so no cache poisoning occurs. Other sources in
+    the same run are unaffected (per-source isolation, same handler)."""
+    response = client.get_response(CDX_PATH, params={**base_params, "showNumPages": "true"})
+    text = response.text.strip()
     try:
-        return int(text.strip())
+        num_pages = int(text)
     except ValueError:
-        return 0
+        num_pages = None
+    if num_pages is None or num_pages < 0:
+        body_repr = repr(text)
+        if len(body_repr) > 80:
+            body_repr = body_repr[:77] + "..."
+        raise ValueError(
+            f"{descriptor.id}: showNumPages response from {response.url} did not parse as a "
+            f"non-negative integer: {body_repr}"
+        )
+    return num_pages
 
 
 def _fetch_cdx_page(client: PoliteClient, base_params: dict[str, str], page: int) -> list[list[str]]:
@@ -192,7 +215,7 @@ def _enumerate_cdx(
     `filter=` -- probe: 60s timeouts on real domains), filtered and deduped-by-path-keeping-newest
     locally. Returns `(url_index, pages_fetched, num_pages)`."""
     base_params = _cdx_base_params(descriptor)
-    num_pages = _show_num_pages(client, base_params)
+    num_pages = _show_num_pages(client, descriptor, base_params)
 
     url_include = descriptor.scope.get("urlInclude")
     pattern = re.compile(str(url_include)) if url_include else None

@@ -20,9 +20,10 @@ built from and `cdx_archive.py`'s module docstring for full detail:
 from pathlib import Path
 
 import httpx
+import pytest
 
 from warhub_acquisition.acquire.client import PoliteClient
-from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
+from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, run_source
 from warhub_acquisition.acquire.strategies.cdx_archive import (
     _enumerate_cdx,
     _extract_gw_legacy,
@@ -30,6 +31,7 @@ from warhub_acquisition.acquire.strategies.cdx_archive import (
     cdx_archive_strategy,
 )
 from warhub_acquisition.models.descriptor import SourceDescriptor
+from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.taxonomy import Manufacturer, Taxonomy
 
 FIXTURES = Path(__file__).parent / "fixtures" / "cdx"
@@ -166,7 +168,68 @@ def test_show_num_pages_parses_real_captured_plain_text_body() -> None:
         return httpx.Response(200, text=load_text("goblin-shownumpages.txt"))
 
     client = PoliteClient(WAYBACK_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
-    assert _show_num_pages(client, {"url": "goblingaming.co.uk/products/*"}) == 8
+    assert _show_num_pages(client, goblin_descriptor(), {"url": "goblingaming.co.uk/products/*"}) == 8
+
+
+def test_show_num_pages_zero_body_is_a_valid_empty_index() -> None:
+    """A literal `0` (with the trailing newline curl output has) means a genuinely-empty CDX
+    index -- must return 0, not raise. Fix wave 1 regression guard alongside the garbled-body
+    test below: zero-pages-because-empty and zero-pages-because-garbled must NOT be conflated."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text="0\n")
+
+    client = PoliteClient(WAYBACK_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    assert _show_num_pages(client, goblin_descriptor(), {"url": "goblingaming.co.uk/products/*"}) == 0
+
+
+def test_show_num_pages_garbled_body_raises_value_error_naming_source_url_and_body() -> None:
+    """Fix wave 1 (review finding, Task 2): a non-numeric showNumPages body must raise, not
+    silently return 0 -- see `_show_num_pages`'s docstring for why a silent 0 is dangerous
+    (indistinguishable from a real empty index, suppresses re-enumeration for a month)."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text="<html>oops")
+
+    client = PoliteClient(WAYBACK_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    with pytest.raises(ValueError) as excinfo:
+        _show_num_pages(client, goblin_descriptor(), {"url": "goblingaming.co.uk/products/*"})
+    message = str(excinfo.value)
+    assert "arch-goblingaming" in message  # source id
+    assert "showNumPages" in message
+    assert "<html>oops" in message  # truncated repr of the garbled body
+
+
+def test_show_num_pages_negative_body_raises() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text="-3")
+
+    client = PoliteClient(WAYBACK_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    with pytest.raises(ValueError):
+        _show_num_pages(client, goblin_descriptor(), {"url": "goblingaming.co.uk/products/*"})
+
+
+def test_garbled_shownumpages_via_full_strategy_run_does_not_poison_cursor(tmp_path: Path) -> None:
+    """End-to-end (via `run_source`, matching `cli.py`'s call path): a garbled showNumPages body
+    must raise ValueError uncaught, and -- because `run_source` only writes the cursor AFTER the
+    strategy call returns -- the cursor file for this source must never be written. This is the
+    "no cache poisoning" guarantee: a transient garbled 200 must never get cached as
+    `cdx_num_pages=0` and silently suppress enumeration for `reEnumerateAfterDays`."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/cdx/search/cdx" and request.url.params.get("showNumPages") == "true":
+            return httpx.Response(200, text="<html>oops")
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    paths = DataPaths(tmp_path)
+    desc = goblin_descriptor()
+
+    with pytest.raises(ValueError) as excinfo:
+        run_source(desc, paths, context(), transport=httpx.MockTransport(handler))
+
+    assert "arch-goblingaming" in str(excinfo.value)
+    assert not (paths.evidence_products / "arch-goblingaming" / "cursor.yaml").exists()
+    assert not (paths.evidence_products / "arch-goblingaming" / "observations.jsonl").exists()
 
 
 # --- CDX enumeration: paging + local filtering + urlkey dedupe-newest ---------------------------
