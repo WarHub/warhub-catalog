@@ -11,7 +11,7 @@ apart. Targets: the Tier-3 "blocked" list and CMON section from
 | Target | Reachable w/ real browser | Enumeration | EAN source | Est. harvestable | Effort |
 |---|---|---|---|---|---|
 | Wayland Games | **Yes**, but PerimeterX "Press & Hold" challenge fires after ~6-7 rapid navigations even in a headed browser | Sitemap open: 12 sub-sitemaps × ~7,123 URLs ≈ 85k URLs (mixed category+product) | JSON-LD `Product.sku`/`.mpn` present; **no `gtin13` field on GW or Mantic products checked**. One non-GW accessory brand (e-Raptor) had a valid EAN embedded as a literal substring of `sku`/URL slug (checksum-verified) — not generalizable | Low-moderate (mostly SKU/MPN, not EAN) | Medium-high: need real browser + slow pacing + likely occasional human captcha-solve for sustained crawls |
-| Fantasywelt | **Yes** — Cloudflare "Just a moment" auto-clears in ~5s in a real browser, no interaction needed | Site claims "über 70.000 Artikel"; `/sitemap.xml` errored in-browser (blocked/absent); on-site keyword search (`?sSearch=`) is broken/returns near-whole-catalog regardless of query — would need category-tree crawling instead | **Confirmed**: `<span itemprop="gtin13">` inside `<li class="product-ean">` — clean microdata, present even for plain accessories (paint pot, third-party 3D-printed base) | High (broad EAN coverage across product types, if enumeration solved) | Medium: browser needed only to clear Cloudflare once per session; scraping itself is trivial microdata; biggest blocker is a working enumeration path (search is broken, sitemap unclear) |
+| Fantasywelt | **Yes** — Cloudflare "Just a moment" auto-clears in ~5s in a real browser, no interaction needed | **DROPPED (Plan 5 Task 4, 2026-07-13)** — enumeration itself turned out to be solved: `/export/sitemap_index.xml` + 7 `.xml.gz` children are curl-fetchable, un-walled, ~154,640 URLs (~70-80k distinct products, confirms the site's own claim). But every detail page stays Cloudflare-walled for plain HTTP (needs a browser or unverified cookie-reuse), AND `robots.txt` explicitly `Disallow`s `ClaudeBot` by name (Cloudflare AI Crawl Control, opt-in) — decisive on its own. See "Fantasywelt enumeration — attempted and dropped" below | **Confirmed**: `<span itemprop="gtin13">` inside `<li class="product-ean">` — clean microdata, present even for plain accessories (paint pot, third-party 3D-printed base) **and** confirmed live on both Warlord Games (`5060393709336`) and Mantic Games (`5060208869873`) products | N/A — dropped | N/A — dropped |
 | CMON | **Yes** — re-verified headed (`headless=False` equivalent; this IS a real, visible Chrome window). Loaded `cmon.com/products/bug-hunt/` cleanly, no Cloudflare interstitial, no captcha | `wp-sitemap-posts-products-1.xml` = 320 product URLs (curl-open, confirmed unchanged) | **None** — confirmed again: zero `<script type="application/ld+json">`, no ean/gtin/upc/barcode string anywhere in page text or HTML. Marketing-only page (rules PDFs, component list, no SKU) | 0 (not a source of EAN data regardless of reachability) | Low reachability effort now proven, but moot — CMON is not an EAN source at any access level |
 | Element Games | **Yes**, plain curl even works for these URLs (200) | No sitemap; name search (`/search?q=`) works | EAN-as-URL **partially confirmed**: `elementgames.co.uk/5060200840474` resolves to a real (delisted/"Image Coming Soon") product page whose `SKU / Product Code` field = the EAN. But this is a **legacy artifact only** — tried the same pattern with a live, in-stock EAN (`5011921194285`, Combat Patrol: Necrons) and got a genuine 404. Live GW products use name/category slugs (e.g. `/games-workshop/warhammer-40k/necrons/mbat-patrol-necrons-2`), not EAN slugs. No JSON-LD/gtin/microdata on any product page, live or legacy | Reverse-lookup only useful for a subset of old/discontinued SKUs, not a live corroboration mechanism | Low value: don't build a live EAN→product lookup on this; only useful for opportunistic corroboration of already-known legacy EANs |
 | Miniature Market | **Yes**, curl already worked (no walling) | 1 sitemap gz, 48,949 URLs (unchanged from prior probe) | Re-checked two product types (board game core set, Citadel paint pot) — **still `"productEAN":""` / `gtin:""` empty in both cases**. Field exists in the page JS schema but is unpopulated store-wide, not just for one product category | 0 today | Not worth polling repeatedly; field is structurally dead, not intermittently empty |
@@ -161,3 +161,122 @@ Miniature Market do **not** help close the accessories gap (EAN absent structura
 both, independent of product category), so they shouldn't be prioritized for this
 specific goal even though Wayland is technically reachable and Miniature Market is
 technically curl-friendly.
+
+## Fantasywelt enumeration — attempted and dropped (Plan 5 Task 4, 2026-07-13)
+
+Timeboxed recon per the Task 4 brief: find a clean enumeration path or drop the source
+with written evidence. **Conclusion: the source is dropped.** The technical enumeration
+puzzle actually turned out to be solvable (see below) — but a decisive, independent
+finding overrides that: **fantasywelt.de's `robots.txt` explicitly disallows `ClaudeBot`
+by name.** This recon, and any harvest strategy built on top of it, is being executed by
+Claude. Routing around a rule that specifically names Claude's own crawler by using a
+different UA string is not something this task will do; it is flagged here instead and
+the source is dropped on that basis, independent of the technical findings.
+
+### (a) Platform / API
+
+No `/store-api/`, no `window.__` Shopware-6-style state blob, no `sw-`-prefixed CSS
+classes found on a live product page. A quick in-page JS probe
+(`document.querySelector('meta[name="generator"]')`, script-src scan for
+`shopware`/`sw-`) found no generator meta tag and no Shopware script bundle, but the
+rendered `<body>` carries an `is-nova` class, consistent with the earlier recon's
+"Shopware 5-derived" read (a "Nova"-named theme is a known Shopware 5 custom-theme
+convention). No machine-readable product API was found or hunted further once (b)
+produced a working path and (the robots.txt finding, below) made further API-hunting
+moot.
+
+### (b) Sitemap variants — SOLVED, but detail pages remain Cloudflare-walled
+
+`robots.txt` (fetched live via `curl.exe`, bot UA, 2026-07-13) declares **no `Sitemap:`
+line at all**. The obvious guesses are inconsistently walled:
+
+| URL tried | Result |
+|---|---|
+| `/sitemap.xml` | HTTP 403, Cloudflare "Just a moment..." interstitial body (JS challenge page, not a real 404/500) |
+| `/sitemap_index.xml` | same 403 interstitial |
+| `/sitemap/index.xml` | same 403 interstitial |
+| `/sitemap.xml.gz` | same 403 interstitial |
+| `/export/sitemap.xml` | HTTP 404 (genuine, empty body — not walled, just wrong path) |
+| **`/export/sitemap_index.xml`** | **HTTP 200, clean `text/xml`, un-walled by plain `curl.exe`** — a `<sitemapindex>` listing 7 children: `/export/sitemap_0.xml.gz` … `/export/sitemap_6.xml.gz`, `lastmod` dated today (fresh, live-generated) |
+
+All 7 children were fetched with plain `curl.exe` (bot UA, ~1 request/second, no browser
+needed) — real gzip files (`Content-Type: application/octet-stream`, sniffed via magic
+bytes exactly like Radaddel's `.xml.gz`), each a valid `<urlset>` with `<loc>`/
+`<image:image>`/`<lastmod>`/`<changefreq>`/`<priority>` per entry — the same shape the
+existing `sitemap-structured-data` strategy already parses. Counts: sitemap_0–5 = 25,000
+`<loc>` entries each (the sitemap-protocol per-file cap), sitemap_6 = 4,640 → **154,640
+total URL entries**. Roughly half are `_1`/`_N`-suffixed duplicate/variant pages per base
+product (an EN/DE or SKU-variant convention observed in the slugs), which reconciles with
+the site's claimed "über 70.000 Artikel" (~154,640 / 2 ≈ 77,320 ≈ that figure). So
+**enumeration is fully solved without a browser**: `/export/sitemap_index.xml` +
+children give a clean, live, curl-fetchable URL list of ~70-80k distinct products
+(~150k page URLs including variants).
+
+The catch: **every individual product detail page is still Cloudflare-JS-walled for a
+plain HTTP client.** `curl.exe` (same bot UA) against a real, live product URL
+(`https://www.fantasywelt.de/Citadel-Base-Corax-White-21-52`) returned HTTP 403 with the
+same "Just a moment..." interstitial — confirmed live, matching the original recon's
+browser-only finding. A real browser (claude-in-chrome) still clears it in ~5s with no
+interaction, confirmed again live on both a GW paint accessory and two new product pages
+(see (c) below). This means the existing `sitemap-structured-data` strategy — a
+pure-`PoliteClient`/HTTP strategy with no browser — **cannot fetch Fantasywelt's detail
+pages as-is**. A working harvest would need a new browser-driving strategy (something
+between `sitemap-structured-data`'s sitemap parsing and `playwright-wp`'s browser
+machinery, but sitemap-enumerated rather than WP-sitemap-enumerated) — a real
+engineering addition, not a descriptor-only change. Whether a single browser-cleared
+session's `cf_clearance` cookie could be extracted and replayed against subsequent plain
+HTTP requests (which would collapse the cost back down to the existing strategy's shape)
+was **not tested**: the claude-in-chrome tool blocks reading `document.cookie`
+(`[BLOCKED: Cookie/query string data]`, a deliberate tool-level privacy guardrail), and
+Cloudflare's JS-challenge cookies are commonly bound to the requesting IP/UA (and
+sometimes finer TLS fingerprinting), so cross-client reuse is not something to assume
+works without evidence. This remains an open, unverified question rather than a
+confirmed cheap path.
+
+### (c) Store contents — Warlord and Mantic confirmed, with barcodes
+
+Grepping sitemap_0.xml's product slugs for distinctive game-system terms (to sidestep
+the broken on-site search) found strong representation of both target manufacturers:
+`bolt-action` × 44, `kings-of-war` × 72, `deadzone` × 68, `warpath` × 28, `konflikt` × 40
+— in just 1 of 7 sitemap files. Spot-checked two live product pages (browser, Cloudflare
+cleared once, session reused for both):
+
+- `https://www.fantasywelt.de/Bolt-Action-US-Airborne-Jeep-1944-45` — **Hersteller:
+  Warlord Games**, EAN `5060393709336`, Artikelnummer `405113101`.
+- `https://www.fantasywelt.de/Deadzone-Enforcer-Peacekeepers` — **Hersteller: Mantic
+  Games**, EAN `5060208869873`, Artikelnummer `MGWPE303`.
+
+Both confirmed populated, checksum-plausible EANs under `Hersteller: <brand>` +
+`EAN: <13 digits>` page text (the same `itemprop="gtin13"` microdata field the earlier
+recon found on GW/third-party accessories). Fantasywelt would have addressed the
+Warlord/Mantic gap had it been built.
+
+### Why dropped
+
+1. **`robots.txt` explicitly disallows `ClaudeBot`** (fetched live, 2026-07-13) — part of
+   Cloudflare's opt-in "AI Crawl Control" managed block list (`Amazonbot`,
+   `Applebot-Extended`, `Bytespider`, `CCBot`, **`ClaudeBot`**,
+   `CloudflareBrowserRenderingCrawler`, `Google-Extended`, `GPTBot`,
+   `meta-externalagent`, each `Disallow: /`). This is an opt-in feature — the site
+   operator specifically chose to block AI-company crawlers, and named Anthropic's by
+   name. The generic `User-agent: *` block (`Content-Signal: search=yes,ai-train=no,
+   use=reference`, `Allow: /`) would technically admit our custom
+   `warhub-catalog-bot/1.0` UA string, but this task is being carried out by Claude, and
+   using a UA string that isn't literally "ClaudeBot" to route around a rule that exists
+   specifically to keep Claude out is not a workaround this task will take. That is
+   reported here rather than engineered around, and is sufficient by itself to drop the
+   source regardless of the technical answer below.
+2. Even setting (1) aside, detail-page harvesting is not the "clean enumeration path"
+   the task asked for: enumeration (the sitemap) is solved and browser-free, but every
+   single detail fetch needs a real, Cloudflare-clearing browser (or an unverified
+   cookie-reuse trick), which is a materially different — and heavier — engineering
+   shape than the existing `sitemap-structured-data` strategy this task was hoping to
+   reuse unchanged. Building that new strategy was not attempted, consistent with the
+   brief's "assess the cost honestly and report it rather than building a half-thing;
+   the controller decides" — except here the controller-decision question is moot given
+   (1).
+
+**No descriptor, mapping, or strategy code was added for Fantasywelt.** No further
+requests were made against fantasywelt.de once (1) was confirmed (total footprint: ~20
+`curl.exe` requests to root-level paths + robots.txt, 1 browser session with 3-4 page
+navigations — reconnaissance-scale, seconds apart, well under the politeness budget).
