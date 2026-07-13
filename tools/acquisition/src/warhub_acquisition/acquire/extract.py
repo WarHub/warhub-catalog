@@ -64,12 +64,47 @@ def _jsonld_brand(raw: object) -> str | None:
     return _clean(raw)
 
 
+_GTIN_FIELDS = ("gtin13", "gtin", "gtin12", "gtin8")
+
+
+def _first_gtin(source: dict) -> object:
+    for field in _GTIN_FIELDS:
+        value = source.get(field)
+        if value:
+            return value
+    return None
+
+
+def _node_gtin(node: dict) -> object:
+    """gtin13/gtin/gtin12/gtin8, checked in that order, on the Product node's own top level
+    FIRST (unchanged precedence). Many Shopify themes instead (or additionally) nest the gtin
+    inside the Product's `offers` -- a single Offer object OR a list of them (probe-confirmed:
+    tistaminis.com's archived pages carry gtin13 only inside `offers`, not at the Product's top
+    level, which is why the top-level-only lookup this function replaces returned a null ean for
+    a page whose HTML plainly contains the barcode). When the top level has no usable gtin, each
+    offer is checked in list order and the first one carrying a usable gtin field wins."""
+    raw_gtin = _first_gtin(node)
+    if raw_gtin:
+        return raw_gtin
+    offers = node.get("offers")
+    if isinstance(offers, dict):
+        offers = [offers]
+    if isinstance(offers, list):
+        for offer in offers:
+            if isinstance(offer, dict):
+                raw_gtin = _first_gtin(offer)
+                if raw_gtin:
+                    return raw_gtin
+    return None
+
+
 def _extract_jsonld(html: str) -> dict[str, str | None] | None:
     """First `Product` node found across every `<script type="application/ld+json">` block
     (malformed blocks are skipped, not fatal -- a later valid block can still match), unwrapping
     `@graph` nesting. Returns None only when no Product node with a usable `name` is found at
     all -- a Product node with a `name` but no gtin field still counts as a hit (`ean` is None in
-    that case), matching the field-merge design of both callers."""
+    that case), matching the field-merge design of both callers. gtin lookup: see `_node_gtin`
+    for the top-level-then-offers precedence."""
     for block in _LDJSON_RE.findall(html):
         try:
             data = json.loads(block)
@@ -91,7 +126,7 @@ def _extract_jsonld(html: str) -> dict[str, str | None] | None:
             name = _clean(node.get("name"))
             if not name:
                 continue
-            raw_gtin = node.get("gtin13") or node.get("gtin") or node.get("gtin12")
+            raw_gtin = _node_gtin(node)
             return {
                 "name": name,
                 "sku": _clean(node.get("sku")),

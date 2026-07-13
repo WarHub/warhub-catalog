@@ -227,6 +227,61 @@ def test_jsonld_extraction_skips_malformed_block_and_finds_later_valid_one() -> 
     assert _extract_jsonld(html)["ean"] == "1234567890123"
 
 
+def test_jsonld_extraction_finds_gtin_nested_in_a_single_offers_dict() -> None:
+    """Real bug (2026-07-13, tistaminis.com archived-page diagnosis): many Shopify themes put the
+    barcode inside the Product's `offers`, not at the Product node's own top level. `offers` can be
+    a single Offer object -- this must still be found."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@type": "Product", "name": "Widget", "sku": "W-1",'
+        ' "offers": {"@type": "Offer", "price": "9.99", "gtin13": "1234567890123"}}'
+        "</script>"
+    )
+    assert _extract_jsonld(html) == {
+        "name": "Widget",
+        "sku": "W-1",
+        "ean": "1234567890123",
+        "brand": None,
+    }
+
+
+def test_jsonld_extraction_finds_gtin_nested_in_a_list_of_offers_first_match_wins() -> None:
+    """`offers` can also be a LIST of Offer objects (real shape: Shopify variants) -- the first
+    offer carrying a usable gtin field wins."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@type": "Product", "name": "Widget", "offers": ['
+        '{"@type": "Offer", "sku": "V1"},'
+        '{"@type": "Offer", "sku": "V2", "gtin13": "1234567890123"},'
+        '{"@type": "Offer", "sku": "V3", "gtin13": "9999999999999"}'
+        "]}"
+        "</script>"
+    )
+    assert _extract_jsonld(html)["ean"] == "1234567890123"
+
+
+def test_jsonld_extraction_top_level_gtin_wins_over_offers_gtin() -> None:
+    """Precedence: the Product node's own top-level gtin field is checked BEFORE `offers` -- no
+    regression for pages whose gtin IS top-level (the common/original case)."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@type": "Product", "name": "Widget", "gtin13": "1111111111111",'
+        ' "offers": {"gtin13": "2222222222222"}}'
+        "</script>"
+    )
+    assert _extract_jsonld(html)["ean"] == "1111111111111"
+
+
+def test_jsonld_extraction_offers_present_but_no_gtin_anywhere_leaves_ean_none() -> None:
+    html = (
+        '<script type="application/ld+json">'
+        '{"@type": "Product", "name": "Widget", "sku": "W-1",'
+        ' "offers": {"@type": "Offer", "price": "9.99"}}'
+        "</script>"
+    )
+    assert _extract_jsonld(html) == {"name": "Widget", "sku": "W-1", "ean": None, "brand": None}
+
+
 def test_jsonld_extraction_returns_none_without_a_product_node() -> None:
     html = '<script type="application/ld+json">{"@type": "WebPage", "name": "Home"}</script>'
     assert _extract_jsonld(html) is None

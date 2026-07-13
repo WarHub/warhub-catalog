@@ -16,6 +16,15 @@ built from and `cdx_archive.py`'s module docstring for full detail:
 - `gw-legacy-product.html`: the probe doc's `10-man-kill-team` 2016 capture, `id_` form, trimmed
   to the primary product's title/skuid/price block. Real `data-skuid="99020109002"`, `£44`, title
   `"10-Man Kill Team | Games Workshop Webstore"`.
+- `tistaminis-archived-product.html`: REAL, captured LIVE 2026-07-13 (single polite request, UA
+  `warhub-catalog-bot/1.0`) via `https://web.archive.org/web/20250323050632id_/https://
+  tistaminis.com/products/adeptus-custodes-blade-champion`, trimmed to its two `ld+json` blocks + a
+  body skeleton. This is the regression fixture for the offers-nested-gtin bug (Task 3b, 2026-07-13):
+  `_extract_jsonld` used to read gtin13/gtin/gtin12 ONLY from the Product node's own top level, but
+  this page's first (and matching) Product node -- injected by a "Booster Apps Seo" widget, ahead of
+  Shopify's own native Product JSON-LD later in the page -- carries `gtin13` only inside a LIST-
+  shaped `offers`, not at the Product node's top level. Real `gtin13: "5011921163106"`, `sku:
+  "01-17"`, `brand: "GW-Local"`, `name: "ADEPTUS CUSTODES: BLADE CHAMPION"`.
 """
 from pathlib import Path
 
@@ -49,6 +58,14 @@ GW_NAME = "10-Man Kill Team"
 GW_PRICE_GBP = 44.0
 GW_ORIGINAL = "https://www.games-workshop.com/en-GB/10-man-kill-team"
 GW_TIMESTAMP = "20160826220543"
+
+# Real values captured live 2026-07-13 -- see module docstring's tistaminis-archived-product.html
+# provenance note (offers-nested-gtin regression fixture).
+TISTAMINIS_GTIN13 = "5011921163106"
+TISTAMINIS_SKU = "01-17"
+TISTAMINIS_NAME = "ADEPTUS CUSTODES: BLADE CHAMPION"
+TISTAMINIS_ORIGINAL = "https://tistaminis.com/products/adeptus-custodes-blade-champion"
+TISTAMINIS_TIMESTAMP = "20250323050632"
 
 
 def load_text(name: str) -> str:
@@ -104,12 +121,32 @@ def gw_descriptor(**scope_overrides: object) -> SourceDescriptor:
     )
 
 
+def tistaminis_descriptor(**scope_overrides: object) -> SourceDescriptor:
+    scope: dict[str, object] = {
+        "cdxUrlPattern": "tistaminis.com/products/*",
+        "urlInclude": r"/products/adeptus-custodes-blade-champion$",
+        "extractor": "shopify-jsonld",
+        "snapshotFrom": "2020",
+        "snapshotTo": "2026",
+    }
+    scope.update(scope_overrides)
+    return SourceDescriptor(
+        id="arch-tistaminis", kind="archive", strategy="cdx-archive", baseUrl=WAYBACK_BASE, scope=scope
+    )
+
+
 GOBLIN_SNAPSHOT_PATH = f"/web/{GOBLIN_TIMESTAMP}id_/{GOBLIN_ORIGINAL}"
 GW_SNAPSHOT_PATH = f"/web/{GW_TIMESTAMP}id_/{GW_ORIGINAL}"
+TISTAMINIS_SNAPSHOT_PATH = f"/web/{TISTAMINIS_TIMESTAMP}id_/{TISTAMINIS_ORIGINAL}"
 
 GW_CDX_PAGE = (
     '[["original","timestamp","statuscode"],'
     f'["{GW_ORIGINAL}","{GW_TIMESTAMP}","200"]]'
+)
+
+TISTAMINIS_CDX_PAGE = (
+    '[["original","timestamp","statuscode"],'
+    f'["{TISTAMINIS_ORIGINAL}","{TISTAMINIS_TIMESTAMP}","200"]]'
 )
 
 
@@ -148,6 +185,27 @@ def gw_transport(calls: list[str] | None = None, product_response: httpx.Respons
             if product_response is not None:
                 return product_response
             return httpx.Response(200, text=load_text("gw-legacy-product.html"))
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    return httpx.MockTransport(handler)
+
+
+def tistaminis_transport(
+    calls: list[str] | None = None, product_response: httpx.Response | None = None
+) -> httpx.MockTransport:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if calls is not None:
+            calls.append(str(request.url))
+        path = request.url.path
+        params = request.url.params
+        if path == "/cdx/search/cdx":
+            if params.get("showNumPages") == "true":
+                return httpx.Response(200, text="1")
+            return httpx.Response(200, text=TISTAMINIS_CDX_PAGE)
+        if path == TISTAMINIS_SNAPSHOT_PATH:
+            if product_response is not None:
+                return product_response
+            return httpx.Response(200, text=load_text("tistaminis-archived-product.html"))
         raise AssertionError(f"unexpected request: {request.url}")
 
     return httpx.MockTransport(handler)
@@ -529,6 +587,35 @@ def test_shopify_jsonld_extracts_real_gtin_sku_name_from_real_archived_fixture()
     assert obs.hints["archiveTimestamp"] == GOBLIN_TIMESTAMP
     assert obs.availability is None
     assert obs.extractor == "cdx-archive@1"
+    assert result.full_sweep is False
+
+
+def test_shopify_jsonld_extracts_gtin_nested_in_offers_from_real_tistaminis_fixture() -> None:
+    """Regression guard for Task 3b (2026-07-13): `_extract_jsonld` used to read gtin13/gtin/
+    gtin12 ONLY from the Product node's top level, so this real archived page -- whose barcode is
+    nested inside `offers` (a list), not at the Product node's top level -- yielded `ean: None`
+    despite the gtin being plainly present in the page's HTML (live-diagnosed on
+    arc-tistaminis: 0.0 EAN fill). `GW-Local` doesn't match any taxonomy vendor name, so
+    resolution here goes through the GS1-prefix fallback on the gtin13 itself -- proving the fix
+    also unblocks manufacturer attribution, not just the raw extraction."""
+    client = PoliteClient(WAYBACK_BASE, transport=tistaminis_transport(), sleep=lambda s: None)
+    result = cdx_archive_strategy(tistaminis_descriptor(), client, {}, context())
+
+    assert result.stats["snapshots_fetched"] == 1
+    assert result.stats["eans_found"] == 1
+    assert result.stats["extraction_failed"] == 0
+    assert result.stats["skipped_unknown_manufacturer"] == 0
+
+    by_key = {o.key: o for o in result.observations}
+    assert list(by_key) == ["arch-tistaminis:/products/adeptus-custodes-blade-champion"]
+    obs = by_key["arch-tistaminis:/products/adeptus-custodes-blade-champion"]
+    assert obs.name == TISTAMINIS_NAME
+    assert obs.sku == TISTAMINIS_SKU
+    assert obs.ean == TISTAMINIS_GTIN13 == "5011921163106"
+    assert obs.manufacturer == "games-workshop"  # via GS1 prefix "5011921", "GW-Local" is not a vendor name
+    assert obs.url == TISTAMINIS_ORIGINAL
+    assert obs.archived is True
+    assert obs.hints["archiveTimestamp"] == TISTAMINIS_TIMESTAMP
     assert result.full_sweep is False
 
 
