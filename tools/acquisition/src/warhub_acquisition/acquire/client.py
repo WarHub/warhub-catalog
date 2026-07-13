@@ -9,6 +9,18 @@ UA = "warhub-catalog-bot/1.0 (+https://github.com/WarHub/warhub-catalog)"
 _MAX_ATTEMPTS = 3
 
 
+def _parses_as_json(response: httpx.Response) -> bool:
+    try:
+        response.json()
+    except ValueError:
+        # Poison 2xx body (e.g. an empty response from a misbehaving edge/CDN): never let
+        # json.JSONDecodeError escape the client's FetchError contract. Shared by every
+        # JSON-accepting method (get_json_response, post_json) so there is exactly one
+        # "does this 2xx body actually parse" check in the whole client.
+        return False
+    return True
+
+
 class FetchError(Exception):
     """Raised when a URL could not be fetched after retries."""
 
@@ -57,12 +69,15 @@ class PoliteClient:
         url: str,
         params: dict | None = None,
         accept: Callable[[httpx.Response], bool] | None = None,
+        method: str = "GET",
+        json_body: object | None = None,
+        headers: dict | None = None,
     ) -> httpx.Response:
         last_status: int | None = None
         for attempt in range(_MAX_ATTEMPTS):
             self._pace()
             try:
-                response = self._client.get(url, params=params)
+                response = self._client.request(method, url, params=params, json=json_body, headers=headers)
             except httpx.TransportError:
                 last_status = None
                 if attempt < _MAX_ATTEMPTS - 1:
@@ -124,16 +139,7 @@ class PoliteClient:
         now a thin wrapper over this so there is exactly one retry+accept code path for the
         JSON case; its signature/behavior is unchanged.
         """
-        def parses_as_json(response: httpx.Response) -> bool:
-            try:
-                response.json()
-            except ValueError:
-                # Poison 2xx body (e.g. an empty response from a misbehaving edge/CDN):
-                # never let json.JSONDecodeError escape the client's FetchError contract.
-                return False
-            return True
-
-        response = self._request(url, params, accept=parses_as_json)
+        response = self._request(url, params, accept=_parses_as_json)
         return response.json(), response.headers
 
     def get_json(self, url: str, params: dict | None = None) -> object:
@@ -141,3 +147,16 @@ class PoliteClient:
 
     def get_text(self, url: str) -> str:
         return self.get_response(url).text
+
+    def post_json(self, url: str, json_body: object, headers: dict | None = None) -> object:
+        """POST a JSON body, return the parsed JSON response body.
+
+        Added for the algolia strategy (Task 9): Algolia's search endpoint is a POST, and needs
+        two auth headers per request (`x-algolia-application-id`/`x-algolia-api-key`) rather than
+        the client-wide `User-Agent` default. Goes through the exact same `_request`
+        retry/pacing/accept machinery every other method uses (same poison-2xx-body protection as
+        `get_json_response`, via the shared `_parses_as_json` check) -- no separate request path,
+        no separate httpx.Client instance.
+        """
+        response = self._request(url, method="POST", json_body=json_body, headers=headers, accept=_parses_as_json)
+        return response.json()

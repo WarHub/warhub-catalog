@@ -1,4 +1,6 @@
 """PoliteClient: pacing, retry-with-backoff, and error surfacing over an injected transport."""
+import json
+
 import httpx
 import pytest
 
@@ -301,6 +303,58 @@ def test_get_json_response_empty_body_200_retried_then_raises_fetch_error() -> N
     with pytest.raises(FetchError) as excinfo:
         client.get_json_response("/wp-json/wc/store/products")
     assert len(calls) == 3  # retried through all attempts, same as get_json
+    assert excinfo.value.status == 200
+
+
+def test_post_json_sends_method_body_and_extra_headers() -> None:
+    """Added for the algolia strategy (Task 9): Algolia's search endpoint is a POST with a JSON
+    body and two auth headers that aren't part of the client's default headers."""
+    seen: dict = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen["method"] = request.method
+        seen["body"] = json.loads(request.content)
+        seen["x-algolia-application-id"] = request.headers.get("x-algolia-application-id")
+        seen["x-algolia-api-key"] = request.headers.get("x-algolia-api-key")
+        seen["user-agent"] = request.headers.get("user-agent")
+        return httpx.Response(200, json={"hits": [], "nbPages": 1})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    body = client.post_json(
+        "https://m5ziqznq2h-dsn.algolia.net/1/indexes/prod-lazarus-product-en-gb/query",
+        {"query": "", "hitsPerPage": 100, "page": 0, "filters": "productType:miniatureKit"},
+        headers={"x-algolia-application-id": "M5ZIQZNQ2H", "x-algolia-api-key": "secret"},
+    )
+    assert body == {"hits": [], "nbPages": 1}
+    assert seen["method"] == "POST"
+    assert seen["body"] == {"query": "", "hitsPerPage": 100, "page": 0, "filters": "productType:miniatureKit"}
+    assert seen["x-algolia-application-id"] == "M5ZIQZNQ2H"
+    assert seen["x-algolia-api-key"] == "secret"
+    # per-request headers add to, not replace, the client's own default UA header
+    assert seen["user-agent"] == UA
+
+
+def test_post_json_empty_body_200_retried_then_raises_fetch_error() -> None:
+    """post_json shares the same poison-2xx-body retry/accept path as get_json_response."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(200, text="")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.post_json("/query", {"query": ""})
+    assert len(calls) == 3
     assert excinfo.value.status == 200
 
 
