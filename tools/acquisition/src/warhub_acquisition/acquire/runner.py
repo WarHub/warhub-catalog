@@ -46,6 +46,7 @@ class SourceHealth:
     contract_ok: bool
     observation_count: int
     stats: dict[str, int] = field(default_factory=dict)
+    marked_missed: int = 0
 
 
 def _check_contract(descriptor: SourceDescriptor, result: StrategyResult, cursor: dict) -> None:
@@ -122,8 +123,9 @@ def run_source(
         store.upsert(descriptor.id, fresh)
         seen_keys.add(fresh.key)
 
+    marked_missed = 0
     if result.full_sweep:
-        store.mark_missed(descriptor.id, seen_keys)
+        marked_missed = store.mark_missed(descriptor.id, seen_keys)
 
     store.save(descriptor.id)
 
@@ -138,4 +140,5 @@ def run_source(
         contract_ok=True,
         observation_count=len(result.observations),
         stats=result.stats,
+        marked_missed=marked_missed,
     )

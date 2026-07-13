@@ -91,6 +91,7 @@ def test_healthy_full_sweep_writes_evidence_and_updates_miss_streaks(
     assert health.contract_ok is True
     assert health.observation_count == 2
     assert health.stats == {"fetched": 2, "skipped_unknown_vendor": 0}
+    assert health.marked_missed == 1  # only toy-src:unseen was not observed this sweep
 
     reloaded = EvidenceStore(paths.evidence_products).load("toy-src")
     assert reloaded["toy-src:seen"].missStreak == 0
@@ -126,6 +127,7 @@ def test_budgeted_partial_run_never_increments_miss_streak(tmp_path: Path, monke
     health = run_source(desc, paths, context(tmp_path, budget=1))
 
     assert health.full_sweep is False
+    assert health.marked_missed == 0  # mark_missed is never invoked on a partial run
     reloaded = EvidenceStore(paths.evidence_products).load("toy-src")
     assert reloaded["toy-src:unseen"].missStreak == 0  # untouched by a partial sweep
 
