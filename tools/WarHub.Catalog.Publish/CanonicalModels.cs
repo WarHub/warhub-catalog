@@ -31,6 +31,7 @@ public sealed record CanonicalProduct
     public decimal? PriceGbp { get; init; }
     public decimal? PriceUsd { get; init; }
     public decimal? PriceEur { get; init; }
+    public decimal? PriceCad { get; init; }
     public string? Url { get; init; }
     public string? ImageUrl { get; init; }
     public string? Description { get; init; }

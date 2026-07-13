@@ -1,0 +1,21 @@
+id: mfr-cmon
+kind: manufacturer
+strategy: playwright-wp
+baseUrl: https://www.cmon.com
+scope:
+  # CMON's site has no per-product vendor field at all (no store, marketing pages only) -- every
+  # enumerated page IS cmon.com's own catalog, pinned the same way woo.py pins mfr-manticgames's
+  # manufacturer. Resolved through Taxonomy.manufacturer_for_vendor against
+  # taxonomy/manufacturers.yaml's cmon entry (vendorNames: [CMON, Cool Mini or Not]).
+  manufacturer: CMON
+politeness:
+  rps: 0.5
+contract:
+  # Evidence-based floor (0.85 x observed): live wp-sitemap-posts-products-1.xml, 2026-07-13
+  # (fetched via an authenticated browser session -- Cloudflare walls this XML to curl/httpx too,
+  # see docs/research/2026-07-12-source-probe-manufacturers.md's CMON section and
+  # task-10-report.md) read exactly 320 <url> entries. 320 * 0.85 = 272.
+  minCount: 272
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0

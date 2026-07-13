@@ -1,13 +1,15 @@
-"""warhub-data CLI: resolve, report, migrate, acquire."""
+"""warhub-data CLI: resolve, report, migrate, acquire, classify."""
 import argparse
 import datetime
+import os
 import sys
 from pathlib import Path
 
+from warhub_acquisition.classify.llm import DEFAULT_BUDGET, DEFAULT_MODEL
 from warhub_acquisition.migrate.verify import verify_migration
 from warhub_acquisition.report import build_report, check_ean_guard, render_ean_guard_section
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
-from warhub_acquisition.yamlio import read_yaml
+from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 
 def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
@@ -82,6 +84,103 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     return 4 if (failures or errors) else 0
 
 
+def _run_classify_llm(args: argparse.Namespace, paths: DataPaths) -> int:
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print(
+            "error: ANTHROPIC_API_KEY environment variable is required for `classify --llm`",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not args.run_date:
+        print("error: --run-date is required for `classify --llm`", file=sys.stderr)
+        return 1
+    try:
+        datetime.date.fromisoformat(args.run_date)
+    except ValueError:
+        print(f"error: --run-date must be YYYY-MM-DD, got {args.run_date!r}", file=sys.stderr)
+        return 1
+
+    queue_path = paths.root / "review" / "classification-queue.yaml"
+    if not queue_path.exists():
+        print(
+            f"error: queue file not found: {queue_path}; run `warhub-data classify --emit-queue` first",
+            file=sys.stderr,
+        )
+        return 1
+
+    import anthropic
+
+    from warhub_acquisition.classify.llm import run_llm_classification
+
+    client = anthropic.Anthropic(api_key=api_key)
+    summary = run_llm_classification(
+        paths, run_date=args.run_date, client=client, budget=args.budget, model=args.model
+    )
+    print(summary.render())
+    return 0
+
+
+def _run_classify_propose_joins(args: argparse.Namespace, paths: DataPaths) -> int:
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print(
+            "error: ANTHROPIC_API_KEY environment variable is required for `classify --propose-joins`",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not args.run_date:
+        print("error: --run-date is required for `classify --propose-joins`", file=sys.stderr)
+        return 1
+    try:
+        datetime.date.fromisoformat(args.run_date)
+    except ValueError:
+        print(f"error: --run-date must be YYYY-MM-DD, got {args.run_date!r}", file=sys.stderr)
+        return 1
+
+    import anthropic
+
+    from warhub_acquisition.classify.joins import run_join_proposals
+
+    client = anthropic.Anthropic(api_key=api_key)
+    summary = run_join_proposals(
+        paths, run_date=args.run_date, client=client, budget=args.budget, model=args.model
+    )
+    print(summary.render())
+    return 0
+
+
+def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
+    from warhub_acquisition.classify.apply import apply_classifications
+    from warhub_acquisition.classify.queue import build_queue
+
+    try:
+        if args.emit_queue:
+            queue = build_queue(paths)
+            queue_path = paths.root / "review" / "classification-queue.yaml"
+            write_yaml(queue_path, {"queue": queue})
+            print(f"wrote {len(queue)} queue items to {queue_path}")
+            return 0
+
+        if args.llm:
+            return _run_classify_llm(args, paths)
+
+        if args.propose_joins:
+            return _run_classify_propose_joins(args, paths)
+
+        count = apply_classifications(paths)
+        print(
+            f"applied {count} classification{'s' if count != 1 else ''} to catalog/overrides.yaml; "
+            "run `warhub-data resolve` to un-park the classified entities"
+        )
+        return 0
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="warhub-data")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -104,6 +203,33 @@ def main(argv: list[str] | None = None) -> int:
     acquire.add_argument("--source", action="append", default=None)
     acquire.add_argument("--budget", type=int, default=None)
     acquire.add_argument("--run-date", required=True)
+
+    classify = subparsers.add_parser(
+        "classify",
+        description=(
+            "Classification pipeline for entities the resolver parked (null gameSystem). "
+            "--emit-queue writes data/review/classification-queue.yaml for a classifier "
+            "(human or LLM) to work through; --apply reads committed decisions from "
+            "data/catalog/classifications/products.yaml and merges them into "
+            "data/catalog/overrides.yaml. --llm sends the emitted queue to an Anthropic model for "
+            "gameSystem/faction decisions. --propose-joins deterministically finds suspected "
+            "duplicate-entity pairs (shared EAN / normalized name / legacy-code-to-sku match), "
+            "sends each to an Anthropic model for a same-product verdict, and writes "
+            "data/review/join-proposals.yaml for human/controller review -- it NEVER edits "
+            "matches.yaml itself. Neither --emit-queue/--apply/--llm nor --propose-joins re-runs "
+            "`resolve` itself -- run `warhub-data resolve` afterwards to actually un-park "
+            "classified entities or apply promoted joins."
+        ),
+    )
+    classify.add_argument("--data", type=Path, default=Path("data"))
+    classify_mode = classify.add_mutually_exclusive_group(required=True)
+    classify_mode.add_argument("--emit-queue", action="store_true")
+    classify_mode.add_argument("--apply", action="store_true")
+    classify_mode.add_argument("--llm", action="store_true")
+    classify_mode.add_argument("--propose-joins", action="store_true")
+    classify.add_argument("--budget", type=int, default=DEFAULT_BUDGET)
+    classify.add_argument("--model", default=DEFAULT_MODEL)
+    classify.add_argument("--run-date", default=None)
 
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
@@ -139,6 +265,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "acquire":
         return _run_acquire(args, paths)
+
+    if args.command == "classify":
+        return _run_classify(args, paths)
 
     report_text = build_report(paths)
     exit_code = 0

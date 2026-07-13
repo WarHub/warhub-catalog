@@ -4,7 +4,7 @@ from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
 
 _HINT_FIELDS = ("gameSystem", "faction", "category", "packaging", "quantity", "description")
-_DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur")
+_DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur", "priceCad")
 
 
 def _first(values: list[object | None]) -> object | None:
@@ -31,13 +31,26 @@ def resolve_attributes(
     curated_status = _first(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]
     )
-    live = [member for member in members if not member.archived]
+    # barcode-db members never run a full_sweep -- their strategy only ever corroborates EAN, so
+    # their missStreak is permanently frozen at 0 and their presence says NOTHING about liveness
+    # in either direction. They are excluded from BOTH lifecycle collections: from scraped_live
+    # (a frozen missStreak would keep `any(missStreak < miss_threshold)` true forever, pinning
+    # status: current after every real source decayed) AND from live (a weekly bdb corroboration
+    # of a recovered archived-only entity's provisional EAN must not flip discontinued->current).
+    live = [
+        member
+        for member in members
+        if not member.archived and kinds.get(member.source_id) != "barcode-db"
+    ]
     scraped_live = [member for member in live if kinds.get(member.source_id) != "curated"]
     if not live:
         status = "discontinued"
     elif not scraped_live:
-        # curated-only entity (e.g. legacy import not yet re-observed live):
-        # trust the curated claim; curated sources are never miss-flagged
+        # curated-only OR curated+bdb-only entity (e.g. legacy import not yet re-observed live,
+        # or a legacy entity corroborated only by a barcode-db EAN lookup): trust the curated
+        # claim if one exists; curated sources are never miss-flagged. Note a bdb-only entity
+        # with NO curated member also lands here (scraped_live empty, curated_status None) and
+        # falls through to "current" -- consistent with bdb never driving lifecycle on its own.
         status = str(curated_status) if curated_status else "current"
     elif any(member.missStreak < miss_threshold for member in scraped_live):
         status = "current"

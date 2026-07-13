@@ -1,0 +1,50 @@
+# Left as an empty scaffold rather than guessed (same precedent as mfr-manticgames.yaml). Live
+# evidence, 2026-07-13 (see task-10-report.md for full provenance): CMON's product lines are their
+# own WordPress post type (`wp-sitemap-posts-products-line-1.xml`, 24 real URLs, fetched via an
+# authenticated browser session since Cloudflare walls this XML to curl/httpx too), each with a
+# `<h1>` display name. Checked every one of the 24 real line names against every label in
+# taxonomy/game-systems.yaml (~47 entries, all historical/skirmish miniatures systems -- Games
+# Workshop, Warlord Games, Corvus Belli, etc.) for an EXACT string match:
+#
+#   A Song of Ice & Fire: TMG
+#   Marvel Zombies: A Zombicide Game
+#   Broken Compass
+#   Assassin's Creed Roleplaying Game
+#   Twilight Imperium
+#   A Song of Ice and Fire: Tactics - A Tabletop Skirmish Game
+#   Cyberpunk 2077: Gangs of Night City
+#   DCeased
+#   Trudvang Legends
+#   The Dead Keep
+#   Collect!
+#   Zombicide
+#   Wrath of Kings
+#   Dark Age
+#   Bloodborne: The Card Game
+#   The Grizzled
+#   Modern Art
+#   The World of SMOG
+#   Gizmos
+#   Massive Darkness
+#   Munchkin Dungeon
+#   Bloodborne: The Board Game
+#   Marvel United
+#   Mayhem System
+#
+# ZERO exact matches. CMON publishes board/dungeon-crawl games (Zombicide, Massive Darkness, Marvel
+# United, Bloodborne, ...) -- an entirely different genre from the existing taxonomy's
+# historical/skirmish miniatures systems, so this is expected, not a mapping gap to chase. The one
+# thematically-adjacent name ("A Song of Ice & Fire: TMG") still fails an exact match against the
+# existing `asoiaf` label ("A Song of Ice and Fire"): different ampersand-vs-"and", plus a ": TMG"
+# suffix -- and the OTHER, separate CMON line ("A Song of Ice and Fire: Tactics - A Tabletop
+# Skirmish Game") uses "and" but carries its own long suffix, so neither maps either. Guessing
+# either onto `asoiaf` would conflate two distinct, differently-licensed CMON product lines with
+# one GW/CMON-unrelated existing slug.
+#
+# Every playwright-wp product observation whose line has no entry here still carries
+# hints.productLine = <raw line name> (not silently dropped) -- see acquire/strategies/
+# playwright_wp.py's module docstring: this surfaces the real names to the classification queue
+# (classify/queue.py's _raw_hints) for a *future* task to add real CMON game-system taxonomy
+# entries + map them here, without this task inventing any.
+gameSystem: {}
+faction: {}

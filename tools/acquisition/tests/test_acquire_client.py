@@ -378,3 +378,21 @@ def test_5xx_backoff_durations_follow_exponential_formula() -> None:
     assert client.get_json("/flaky") == {"ok": True}
     assert attempts["n"] == 3
     assert sleeps == [1.0, 2.0]  # 2**0, 2**1 for the first two (failed) attempts
+
+
+def test_default_timeout_is_30_seconds() -> None:
+    """Fix wave 2 (live-run defect, 2026-07-13): httpx's own 5s default timed out on real Wayback
+    CDX data pages (200KB+, 3-7s+ observed live in controller probes) -- three straight transport
+    timeouts produced the observed `FetchError(status=None)` and killed both arc-* sources'
+    first harvest. PoliteClient now sets an explicit 30s default on its httpx.Client."""
+    client = PoliteClient("https://example.test", transport=httpx.MockTransport(lambda r: httpx.Response(200)))
+    assert client._client.timeout == httpx.Timeout(30.0)
+
+
+def test_timeout_constructor_param_overrides_default() -> None:
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(lambda r: httpx.Response(200)),
+        timeout=60.0,
+    )
+    assert client._client.timeout == httpx.Timeout(60.0)

@@ -39,6 +39,10 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(10)] public string? Url { get; init; }
     [JsonPropertyOrder(11)] public string? ImageUrl { get; init; }
     [JsonPropertyOrder(12)] public string? EanConfidence { get; init; }
+    [JsonPropertyOrder(13)] public decimal? PriceGbp { get; init; }
+    [JsonPropertyOrder(14)] public decimal? PriceUsd { get; init; }
+    [JsonPropertyOrder(15)] public decimal? PriceEur { get; init; }
+    [JsonPropertyOrder(16)] public decimal? PriceCad { get; init; }
 }
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>

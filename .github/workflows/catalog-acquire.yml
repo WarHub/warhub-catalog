@@ -4,22 +4,55 @@ name: Nightly Acquisition
 # (data/evidence/), resolves it into the canonical catalog (data/catalog/), and opens/updates a
 # sticky PR. Merging that PR triggers catalog-publish.yml.
 #
-# Source roster (only these have descriptors today; ret-tistaminis / ret-miniaturicum are
-# deferred and deliberately absent):
-#   group A: mfr-warlord-store, mfr-steamforged, mfr-wyrd-store       (budget 6000)
-#   group B: mfr-gw-algolia, mfr-manticgames, mfr-para-bellum,
-#            mfr-corvus-belli                                        (budget 3000)
-#   group C: ret-goblingaming                                        (budget 3000)
-#   group D: ret-radaddel, ret-gamenerdz                              (budget 1000)
+# Source roster (only these have descriptors today; ret-miniaturicum -- site 520s -- and
+# mfr-cmon -- Cloudflare-blocked, Plan-5 alternative pending -- are deferred and deliberately
+# absent):
+#   group A1: mfr-warlord-store                                       (budget 3000 nightly)
+#   group A2: mfr-steamforged, mfr-wyrd-store                         (budget 1000 nightly)
+#   group B:  mfr-gw-algolia, mfr-manticgames, mfr-para-bellum,
+#             mfr-corvus-belli                                        (budget 3000)
+#   group C:  ret-goblingaming, ret-tistaminis                        (budget 1500 nightly)
+#   group D:  ret-radaddel, ret-gamenerdz                             (budget 1000 nightly,
+#                                                                       2500 weekly override)
+#   group E:  arc-goblingaming, arc-gw-webstore -- WEEKLY ONLY        (budget 500 each; same
+#             host, web.archive.org -- naturally sequential+paced within one job since `acquire`
+#             already loops sources one at a time in-process, never in parallel)
+#   group F:  bdb-upcitemdb (budget 80), bdb-goupc (budget 50) -- WEEKLY ONLY, always these
+#             explicit per-source budgets, never the global `budget` dispatch override --
+#             upcitemdb's trial quota is ~100 requests/day and must never be blown by an
+#             unrelated global override.
 #
-# Deliberate deviation from the original spec: no separate weekly deep-sweep workflow. The
-# nightly run already does full (cheap) enumeration plus budgeted detail fetches with persistent
-# cursors, which converges to full coverage across nights. Weekly cadence returns in Plan 4 as the
-# archive-mining driver.
+# GitHub-runner IPs are heavily throttled by Shopify/Cloudflare (observed first real nightly run,
+# 29229516710): the pre-split group A and group C both hit the 120-minute timeout; group B took
+# ~90 min. Splitting A into A1/A2 and lowering C's budget reduces load, but the underlying reality
+# doesn't go away -- a throttled job hitting timeout-minutes is a DEGRADED run, not a broken one.
+# Every source's cursor persists in data/evidence/products/<source>/cursor.yaml, so forward
+# progress accrues and converges to full coverage across multiple nights regardless of whether any
+# single run finishes inside its timeout.
+#
+# Weekly deep-sweep mode: the Saturday-02:00-UTC schedule (or workflow_dispatch mode=weekly) adds
+# groups E and F above and raises group D's budget to 2500 (converges its ~14k-URL backlog in
+# ~3 weeks). Nightly runs (the Sun-Fri 04:00 UTC schedule, or workflow_dispatch mode=nightly/unset)
+# never include E or F. The nightly cron deliberately EXCLUDES Saturday: weekly mode already runs
+# every nightly group PLUS E/F, so a Saturday nightly run at 04:00 (2h after the 02:00 weekly run
+# starts) would gain nothing -- and integrate's create-pull-request step force-resets
+# catalog/acquisition from main + its own artifacts, so a same-day nightly run would silently
+# destroy that Saturday's archive/barcode-db evidence before the weekly PR could ever be reviewed
+# or merged. This is mode-gated within the SAME workflow/matrix rather than a separate
+# workflow file: GitHub Actions matrices can't be conditionally composed at the strategy level, so
+# every group is always listed in `strategy.matrix.include`, and weekly-only groups instead get
+# `run_sources` forced empty (same "ran=false" skip path already used for an empty dispatch
+# override) whenever the derived MODE isn't "weekly". LLM spend (classification) stays entirely
+# out of this workflow -- see classify.yml, which is workflow_dispatch-only and never runs on a
+# schedule.
 
 on:
   schedule:
-    - cron: '0 4 * * *'
+    # Sun-Fri only (day-of-week 0-5) -- Saturday is covered exclusively by the weekly schedule
+    # below; see the roster comment above for why a same-day nightly run would destroy the
+    # weekly run's evidence.
+    - cron: '0 4 * * 0-5'
+    - cron: '0 2 * * 6'
   workflow_dispatch:
     inputs:
       sources:
@@ -27,9 +60,17 @@ on:
         required: false
         type: string
       budget:
-        description: 'Override budget for every group (empty = per-group default)'
+        description: 'Override budget for every group (empty = per-group default; never applies to group F -- see roster comment above)'
         required: false
         type: string
+      mode:
+        description: 'nightly (default) or weekly -- weekly adds the archive/barcode-db groups and raises group D''s budget; auto-selected on the Saturday 02:00 UTC schedule regardless of this input'
+        required: false
+        type: choice
+        options:
+          - nightly
+          - weekly
+        default: nightly
 
 permissions:
   contents: read
@@ -47,18 +88,41 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - group: A
-            sources: mfr-warlord-store mfr-steamforged mfr-wyrd-store
-            budget: 6000
+          - group: A1
+            sources: mfr-warlord-store
+            budget: 3000
+            weeklyBudget: ''
+            weeklyOnly: false
+          - group: A2
+            sources: mfr-steamforged mfr-wyrd-store
+            budget: 1000
+            weeklyBudget: ''
+            weeklyOnly: false
           - group: B
             sources: mfr-gw-algolia mfr-manticgames mfr-para-bellum mfr-corvus-belli
             budget: 3000
+            weeklyBudget: ''
+            weeklyOnly: false
           - group: C
-            sources: ret-goblingaming
-            budget: 3000
+            sources: ret-goblingaming ret-tistaminis
+            budget: 1500
+            weeklyBudget: ''
+            weeklyOnly: false
           - group: D
             sources: ret-radaddel ret-gamenerdz
             budget: 1000
+            weeklyBudget: 2500
+            weeklyOnly: false
+          - group: E
+            sources: arc-goblingaming arc-gw-webstore
+            budget: 500
+            weeklyBudget: ''
+            weeklyOnly: true
+          - group: F
+            sources: bdb-upcitemdb bdb-goupc
+            budget: 0
+            weeklyBudget: ''
+            weeklyOnly: true
     defaults:
       run:
         working-directory: tools/acquisition
@@ -78,9 +142,37 @@ jobs:
           GROUP: ${{ matrix.group }}
           GROUP_SOURCES: ${{ matrix.sources }}
           GROUP_BUDGET: ${{ matrix.budget }}
+          GROUP_WEEKLY_BUDGET: ${{ matrix.weeklyBudget }}
+          GROUP_WEEKLY_ONLY: ${{ matrix.weeklyOnly }}
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE_EXPR: ${{ github.event.schedule }}
+          DISPATCH_MODE: ${{ github.event.inputs.mode }}
           OVERRIDE_SOURCES: ${{ github.event.inputs.sources }}
           OVERRIDE_BUDGET: ${{ github.event.inputs.budget }}
         run: |
+          # MODE: weekly if the Saturday-02:00-UTC cron fired, or workflow_dispatch explicitly
+          # asked for it; nightly otherwise. Weekly-only groups (E, F) are skipped below by
+          # forcing run_sources empty -- the SAME "ran=false" path already used when a dispatch
+          # `sources` override selects nothing from this group -- rather than a separate branch,
+          # so every downstream step's existing `if: steps.plan.outputs.ran == 'true'` guard just
+          # works unchanged.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$DISPATCH_MODE" = "weekly" ]; then
+            MODE="weekly"
+          elif [ "$SCHEDULE_EXPR" = "0 2 * * 6" ]; then
+            MODE="weekly"
+          else
+            MODE="nightly"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+
+          if [ "$GROUP_WEEKLY_ONLY" = "true" ] && [ "$MODE" != "weekly" ]; then
+            echo "run_sources=" >> "$GITHUB_OUTPUT"
+            echo "budget=" >> "$GITHUB_OUTPUT"
+            echo "ran=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Group $GROUP: weekly-only group, MODE=$MODE; skipping."
+            exit 0
+          fi
+
           if [ -n "$OVERRIDE_SOURCES" ]; then
             RUN_SOURCES=""
             for s in $OVERRIDE_SOURCES; do
@@ -93,8 +185,13 @@ jobs:
             RUN_SOURCES="$GROUP_SOURCES"
           fi
 
-          BUDGET="$OVERRIDE_BUDGET"
-          if [ -z "$BUDGET" ]; then BUDGET="$GROUP_BUDGET"; fi
+          if [ -n "$OVERRIDE_BUDGET" ]; then
+            BUDGET="$OVERRIDE_BUDGET"
+          elif [ "$MODE" = "weekly" ] && [ -n "$GROUP_WEEKLY_BUDGET" ]; then
+            BUDGET="$GROUP_WEEKLY_BUDGET"
+          else
+            BUDGET="$GROUP_BUDGET"
+          fi
 
           echo "run_sources=$RUN_SOURCES" >> "$GITHUB_OUTPUT"
           echo "budget=$BUDGET" >> "$GITHUB_OUTPUT"
@@ -115,14 +212,53 @@ jobs:
         env:
           RUN_SOURCES: ${{ steps.plan.outputs.run_sources }}
           BUDGET: ${{ steps.plan.outputs.budget }}
+          GROUP: ${{ matrix.group }}
         run: |
-          SRC_ARGS=""
-          for s in $RUN_SOURCES; do
-            SRC_ARGS="$SRC_ARGS --source $s"
-          done
-          uv run warhub-data acquire --data ../../data $SRC_ARGS \
-            --budget "$BUDGET" \
-            --run-date "$(date -u +%F)"
+          if [ "$GROUP" = "F" ]; then
+            # Group F (barcode-db) needs distinct, always-explicit per-source budgets --
+            # upcitemdb=80, go-upc=50 -- because `acquire --budget N` applies N to every source in
+            # a single invocation (AcquireContext.budget is one shared value), not divided across
+            # sources. data/review/acquisition-health.md is a TRACKED committed file (always
+            # present from checkout), so its mere existence after an invocation can't signal
+            # freshness on its own -- it's rm -f'd immediately before EACH of the two
+            # sub-invocations, so the post-invocation `-f` check genuinely means "this invocation
+            # produced/updated the file" (and a pre-try/finally crash before any write correctly
+            # yields no stash for that source, instead of mislabelling stale/other-source content
+            # as fresh). Each surviving per-source stash is concatenated below. $BUDGET
+            # (steps.plan.outputs.budget) is deliberately ignored here -- see the roster comment at
+            # the top of this file.
+            shopt -s nullglob
+            crashed=0
+            ran_any=0
+            for entry in "bdb-upcitemdb:80" "bdb-goupc:50"; do
+              src="${entry%%:*}"
+              bud="${entry##*:}"
+              case " $RUN_SOURCES " in
+                *" $src "*)
+                  rm -f ../../data/review/acquisition-health.md
+                  uv run warhub-data acquire --data ../../data --source "$src" \
+                    --budget "$bud" \
+                    --run-date "$(date -u +%F)" || crashed=1
+                  if [ -f ../../data/review/acquisition-health.md ]; then
+                    cp ../../data/review/acquisition-health.md "../../_health-F-$src.md"
+                  fi
+                  ran_any=1
+                  ;;
+              esac
+            done
+            if [ "$ran_any" = "1" ]; then
+              { for f in ../../_health-F-*.md; do cat "$f"; echo; echo "---"; echo; done; } > ../../data/review/acquisition-health.md
+            fi
+            [ "$crashed" = "0" ] || exit 4
+          else
+            SRC_ARGS=""
+            for s in $RUN_SOURCES; do
+              SRC_ARGS="$SRC_ARGS --source $s"
+            done
+            uv run warhub-data acquire --data ../../data $SRC_ARGS \
+              --budget "$BUDGET" \
+              --run-date "$(date -u +%F)"
+          fi
 
       # Stage exactly this group's evidence dirs (cursor.yaml + observations.jsonl live together
       # under data/evidence/products/<source>/) plus its own health file, under a group-distinct
@@ -199,19 +335,20 @@ jobs:
       # KNOWN GAP: `acquire` overwrites data/review/acquisition-health.md with only its own run's
       # rows, and each matrix job runs a disjoint source set. Since matrix jobs can't share a
       # single working tree, the combined health state is regenerated here by concatenating each
-      # group's staged health file (deterministic group-letter order A-D) rather than by rerunning
+      # group's staged health file (deterministic group-letter order A1-F) rather than by rerunning
       # `acquire` (which would require live network access again, defeating the point).
       - name: Combine health reports
         run: |
           shopt -s nullglob
           mkdir -p data/review
           # Bash glob results are lexicographically sorted, so this naturally comes out in group
-          # letter order (health-A.md < health-B.md < health-C.md < health-D.md).
+          # order (health-A1.md < health-A2.md < health-B.md < health-C.md < health-D.md <
+          # health-E.md < health-F.md).
           health_files=(artifacts/acquire-data-*/health-*.md)
           {
             echo "# Acquisition health (combined)"
             echo
-            echo "_Nightly run $(date -u +%F) -- combined per-group reports, group letter order A-D._"
+            echo "_Run $(date -u +%F) -- combined per-group reports, group order A1-F._"
             if [ "${#health_files[@]}" -eq 0 ]; then
               echo
               echo "_No matrix group reported a health file this run (no sources were selected)._"

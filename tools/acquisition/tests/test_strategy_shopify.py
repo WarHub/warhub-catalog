@@ -7,7 +7,11 @@ import pytest
 
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
-from warhub_acquisition.acquire.strategies.shopify import shopify_strategy
+from warhub_acquisition.acquire.strategies.shopify import (
+    PLATFORM_MAX_PAGES,
+    _price_field,
+    shopify_strategy,
+)
 from warhub_acquisition.models.descriptor import SourceDescriptor
 from warhub_acquisition.taxonomy import Manufacturer, Taxonomy
 
@@ -68,6 +72,37 @@ def fixture_transport(calls: list[str] | None = None) -> httpx.MockTransport:
 
 def test_strategy_is_registered() -> None:
     assert STRATEGIES["shopify"] is shopify_strategy
+
+
+def test_price_field_maps_currency_to_field() -> None:
+    assert _price_field("gbp") == "priceGbp"
+    assert _price_field("usd") == "priceUsd"
+    assert _price_field("eur") == "priceEur"
+    assert _price_field("cad") == "priceCad"
+    assert _price_field("CAD") == "priceCad"  # casefolded before lookup
+    assert _price_field("xyz") == "priceGbp"  # unknown currency defaults to gbp
+
+
+def test_cad_scoped_descriptor_populates_price_cad() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(200, json=two_known_products_page())
+        return httpx.Response(200, json={"products": []})
+
+    client = PoliteClient(
+        "https://tistaminis.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    # budget=0: bulk-only observations, no detail fetch -- isolates the currency mapping.
+    result = shopify_strategy(descriptor(currency="cad"), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert len(result.observations) == 2
+    by_handle = {o.key.rsplit(":", 1)[1]: o for o in result.observations}
+    assert by_handle["alpha"].priceCad == pytest.approx(10.00)
+    assert by_handle["bravo"].priceCad == pytest.approx(20.00)
+    for observation in result.observations:
+        assert observation.priceGbp is None
+        assert observation.priceUsd is None
+        assert observation.priceEur is None
 
 
 def test_enumeration_and_detail_fetch_produces_ean_from_fixture() -> None:
@@ -463,3 +498,252 @@ def test_detail_fetch_error_on_stale_refresh_preserves_previously_known_ean() ->
     assert result.cursor["updated_at"]["flaky"]["ean"] == "1111111111111"
     assert result.cursor["pending_details"] == ["flaky"]  # still queued for a future retry
     assert result.full_sweep is False
+
+
+def _quiet_product(handle: str = "quiet", updated_at: str = "2026-07-01T00:00:00+00:00") -> dict:
+    return {
+        "id": 1,
+        "handle": handle,
+        "title": "Quiet",
+        "vendor": "Warlord Games",
+        "product_type": "",
+        "tags": [],
+        "updated_at": updated_at,
+        "variants": [{"sku": "Q1", "price": "1.00"}],
+        "images": [],
+    }
+
+
+def test_detail_fetch_success_with_no_barcode_increments_detail_misses() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/products.json":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(200, json={"products": [_quiet_product()]})
+            return httpx.Response(200, json={"products": []})
+        if request.url.path == "/products/quiet.js":
+            return httpx.Response(200, json={"variants": [{"sku": "Q1"}]})  # no barcode field
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy()))
+
+    assert result.stats["details_fetched"] == 1
+    assert result.stats["barcodes_found"] == 0
+    assert result.observations[0].ean is None
+    assert result.cursor["updated_at"]["quiet"]["detailMisses"] == 1
+    assert "ean" not in result.cursor["updated_at"]["quiet"]
+    assert result.cursor["pending_details"] == ["quiet"]
+    assert result.full_sweep is False
+
+
+def test_fetch_error_does_not_increment_detail_misses() -> None:
+    cursor_with_misses = {
+        "updated_at": {"flaky": {"updatedAt": "2026-07-01T00:00:00+00:00", "detailMisses": 2}},
+        "pending_details": ["flaky"],
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/products.json":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(
+                    200, json={"products": [_quiet_product("flaky", "2026-07-01T00:00:00+00:00")]}
+                )
+            return httpx.Response(200, json={"products": []})
+        return httpx.Response(500, text="down")  # every detail fetch attempt fails
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, cursor_with_misses, context(warlord_taxonomy()))
+
+    assert result.stats["detail_fetch_errors"] == 1
+    assert result.cursor["updated_at"]["flaky"]["detailMisses"] == 2  # unchanged, not incremented
+    assert result.cursor["pending_details"] == ["flaky"]
+    assert result.full_sweep is False
+
+
+def test_detail_misses_cap_excludes_handle_from_queue_and_reaches_full_sweep() -> None:
+    capped_cursor = {
+        "updated_at": {"capped": {"updatedAt": "2026-07-01T00:00:00+00:00", "detailMisses": 3}},
+        "pending_details": ["capped"],
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/products.json":
+            if request.url.params.get("page") == "1":
+                return httpx.Response(
+                    200, json={"products": [_quiet_product("capped", "2026-07-01T00:00:00+00:00")]}
+                )
+            return httpx.Response(200, json={"products": []})
+        raise AssertionError(f"unexpected request: {request.url} (capped handle must never be fetched)")
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, capped_cursor, context(warlord_taxonomy()))
+
+    assert result.stats["details_fetched"] == 0
+    assert result.observations[0].ean is None
+    assert result.cursor["updated_at"]["capped"]["detailMisses"] == 3  # carried forward unchanged
+    # excluded from every queue bucket -> pending_details empties out -> counts as resolved,
+    # exactly like a barcode-carrying handle, for the full_sweep calculation.
+    assert result.cursor["pending_details"] == []
+    assert result.full_sweep is True
+
+
+def test_updated_at_change_resets_detail_misses_and_requeues_despite_cap() -> None:
+    capped_cursor = {
+        "updated_at": {"changed": {"updatedAt": "2020-01-01T00:00:00+00:00", "detailMisses": 3}},
+        "pending_details": [],
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/products.json":
+            if request.url.params.get("page") == "1":
+                # bulk updated_at is newer than what's recorded -> stale, re-queued despite cap
+                return httpx.Response(
+                    200, json={"products": [_quiet_product("changed", "2026-07-01T00:00:00+00:00")]}
+                )
+            return httpx.Response(200, json={"products": []})
+        if request.url.path == "/products/changed.js":
+            return httpx.Response(200, json={"variants": [{"sku": "Q1"}]})  # still no barcode
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, capped_cursor, context(warlord_taxonomy()))
+
+    assert result.stats["details_fetched"] == 1  # the updated_at change re-queued it despite the cap
+    assert result.cursor["updated_at"]["changed"]["detailMisses"] == 1  # reset to 0, then this miss -> 1
+    assert result.cursor["pending_details"] == ["changed"]
+    assert result.full_sweep is False
+
+
+def test_enumeration_stops_at_platform_cap_without_requesting_beyond() -> None:
+    """Shopify's /products.json 400s once page * limit exceeds 25000 (verified live against
+    ret-tistaminis). A store with no natural empty page before that boundary must never be
+    asked for page PLATFORM_MAX_PAGES + 1."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        page = int(request.url.params.get("page"))
+        assert page <= PLATFORM_MAX_PAGES, f"requested page {page} beyond the platform cap"
+        return httpx.Response(
+            200, json={"products": [_quiet_product(f"item-{page}", "2026-07-01T00:00:00+00:00")]}
+        )
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert len(calls) == PLATFORM_MAX_PAGES == 100
+    assert result.stats["fetched_pages"] == PLATFORM_MAX_PAGES
+    assert result.stats["products_seen"] == PLATFORM_MAX_PAGES
+    assert result.stats["enumeration_capped"] == 1
+    assert result.stats["enumeration_capped_by_400"] == 0
+    assert result.full_sweep is False
+
+
+def test_scope_max_enumeration_pages_lowers_platform_cap() -> None:
+    """`scope.maxEnumerationPages` narrows the bound further -- never raises it."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        page = request.url.params.get("page")
+        assert page == "1", f"requested page {page}, must never go past the scoped bound of 1"
+        return httpx.Response(
+            200, json={"products": [_quiet_product("known", "2026-07-01T00:00:00+00:00")]}
+        )
+
+    # "known" already carries a confirmed ean at the current bulk updated_at -- nothing left
+    # to (re)fetch, so pending_details would naturally end up empty.
+    cursor = {
+        "updated_at": {"known": {"updatedAt": "2026-07-01T00:00:00+00:00", "ean": "1234567890123"}},
+        "pending_details": [],
+    }
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(
+        descriptor(maxEnumerationPages=1), client, cursor, context(warlord_taxonomy())
+    )
+
+    assert len(calls) == 1  # stopped after page 1, never requested page 2
+    assert result.stats["fetched_pages"] == 1
+    assert result.stats["enumeration_capped"] == 1
+    assert result.cursor["pending_details"] == []
+    # capped enumeration forces full_sweep False even though pending_details is empty --
+    # this store's remainder past page 1 was never observed, not confirmed absent.
+    assert result.full_sweep is False
+
+
+def test_400_mid_enumeration_treated_as_cap_end_not_source_error() -> None:
+    """Defensive: if the platform's cap boundary ever moves and a 400 arrives mid-enumeration,
+    treat it as a clean cap-end rather than letting FetchError kill the whole source."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        page = int(request.url.params.get("page"))
+        if page <= 3:
+            return httpx.Response(
+                200, json={"products": [_quiet_product(f"item-{page}", "2026-07-01T00:00:00+00:00")]}
+            )
+        return httpx.Response(400, json={"errors": "Page 4 Limit exceeds the 25000 limit."})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert result.stats["fetched_pages"] == 3
+    assert result.stats["products_seen"] == 3
+    assert result.stats["enumeration_capped_by_400"] == 1
+    assert result.stats["enumeration_capped"] == 1
+    assert result.full_sweep is False
+    # exactly 4 requests: 3 successful pages + the one that 400'd -- no exception propagated,
+    # and no retry storm on the 400 (PoliteClient only retries 429/5xx/transport errors).
+    assert len(calls) == 4
+
+
+def test_400_on_first_page_yields_zero_observations_not_a_crash() -> None:
+    """A store that already exceeds the cap on page 1 (e.g. limit itself misconfigured) must
+    still complete cleanly -- zero observations lets the minCount contract fire loudly instead
+    of a strategy crash masking the real signal."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(400, json={"errors": "Page 1 Limit exceeds the 25000 limit."})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy()))
+
+    assert result.observations == []
+    assert result.stats["fetched_pages"] == 0
+    assert result.stats["enumeration_capped_by_400"] == 1
+    assert result.full_sweep is False
+
+
+def test_barcode_success_clears_detail_misses_counter() -> None:
+    cursor_with_misses = {
+        "updated_at": {"p40-medium-tank": {"updatedAt": "2020-01-01T00:00:00+00:00", "detailMisses": 2}},
+        "pending_details": ["p40-medium-tank"],
+    }
+    calls: list[str] = []
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=fixture_transport(calls), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, cursor_with_misses, context(warlord_taxonomy()))
+
+    assert result.stats["barcodes_found"] == 1
+    assert result.cursor["updated_at"]["p40-medium-tank"]["ean"] == "5060917997751"
+    assert "detailMisses" not in result.cursor["updated_at"]["p40-medium-tank"]
+    assert result.cursor["pending_details"] == []
+    assert result.full_sweep is True

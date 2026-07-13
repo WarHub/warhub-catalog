@@ -1,0 +1,36 @@
+id: arc-goblingaming
+kind: archive
+strategy: cdx-archive
+baseUrl: https://web.archive.org
+scope:
+  # Both the CDX endpoint and the snapshot server live on baseUrl -- cdxUrlPattern is the CDX
+  # `url=` query target, scoped to /products/* (Shopify product pages only, no category noise) --
+  # see docs/research/2026-07-12-source-probe-webarchive.md and cdx_archive.py's module docstring.
+  cdxUrlPattern: goblingaming.co.uk/products/*
+  extractor: shopify-jsonld
+  # snapshotTo bounds the CDX `to=` param: captures at/before end-of-2023, predating the current
+  # live shopify harvest (ret-goblingaming) so this source recovers products delisted since then.
+  # Value is passed through str() unchanged into the CDX query -- CDX partial-timestamp convention
+  # (a bare year pads to the END of that year for a `to` bound), matching cdx_archive.py exactly.
+  snapshotTo: "2023"
+  # First 500-snapshot harvest (2026-07-13) burned the whole budget on alphabetically-first
+  # accessory pages (dice/bases/gift cards): 2 EANs from 500 fetches. This filter concentrates
+  # budget on GW-relevant slugs; recall vs the live store's 2,923 real GW handles = 1,656 (57%) --
+  # the misses are generic-named accessories (bases etc.) with negligible archive-EAN value.
+  urlInclude: warhammer|40k|aos|age-of-sigmar|sigmar|kill-team|necromunda|blood-bowl|middle-earth|horus|citadel|combat-patrol|battletome|codex|underworlds|stormcast|space-marine|adeptus|astra|tyranid|necron|aeldari|drukhari|tau-|ork|chaos|skaven|seraphon|slaves-to-darkness|soulblight|nighthaunt|gloomspite|lumineth|idoneth|sylvaneth|fyreslayer|kharadron|ogor|sons-of-behemat|daughters-of-khaine|cities-of-sigmar|maggotkin|blades-of-khorne|disciples-of-tzeentch|hedonites|beasts-of-chaos|leagues-of-votann|genestealer|deathwatch|grey-knights|thousand-sons|death-guard|world-eaters|black-templars|blood-angels|dark-angels|space-wolves|imperial|white-dwarf|forge-world|primaris|dominion|leviathan|indomitus
+politeness:
+  rps: 1.0
+  # Wayback CDX data pages are 200KB+ and took 3-7s+ in live controller probes (2026-07-13);
+  # httpx's 5s default made every page fetch time out (fix wave 2). PoliteClient default is 30s;
+  # 60s here gives slow CDX pages ample headroom.
+  timeoutSeconds: 60
+contract:
+  # Archived-only recovery of out-of-print products: no population floor to enforce (an empty
+  # result on any given run is not a failure signal the way a live-storefront sweep would be).
+  minCount: 0
+  maxDropPct: 30
+  requiredFieldRates:
+    # Live-verified 2026-07-13 (task-2-report.md): the real captured Goblin Gaming Shopify page
+    # carries JSON-LD gtin13 -- this is the probe doc's confirmed "archived Shopify retailers are
+    # the primary archived-EAN source" pattern. 0.5 floor pending full-harvest evidence.
+    ean: 0.5

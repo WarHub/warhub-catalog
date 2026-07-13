@@ -3,7 +3,13 @@
 Cursor schema (as-built -- see task-5-report.md for the full rationale):
 
     {
-      "updated_at": {"<handle>": {"updatedAt": "<bulk updated_at ISO>", "ean": "<digits>"}},
+      "updated_at": {
+        "<handle>": {
+          "updatedAt": "<bulk updated_at ISO>",
+          "ean": "<digits>",          # present only once a barcode has been confirmed
+          "detailMisses": <int>,      # present only while ean is unknown and count > 0
+        }
+      },
       "pending_details": ["<handle>", ...],
     }
 
@@ -16,6 +22,17 @@ whose ean is already known -- because this run's budget didn't reach it -- would
 that ean on upsert. Storing the ean itself (not just the timestamp) inside the cursor's
 `updated_at` map lets every run's candidate carry forward a previously-confirmed ean without a
 fresh detail fetch, closing that data-loss hole while keeping the same two top-level keys/intent.
+
+Give-up mechanism (task 7): a detail fetch that SUCCEEDS but finds no barcode increments the
+handle's `detailMisses`. At `detailMisses >= DETAIL_MISS_CAP` the handle stops entering the
+missing-ean queue bucket -- it is still enumerated and observed every run (bulk data only), just
+never re-fetched for a detail page again. A bulk `updated_at` change newer than what's recorded
+resets `detailMisses` to 0 (the product changed upstream -- worth re-checking regardless of past
+misses) and re-queues the handle via the existing staleness bucket. `FetchError` never touches
+`detailMisses` (transient, handled entirely by the pre-existing preserve-on-error path). A
+capped-out handle is absent from `pending_details` exactly like a barcode-carrying one, so it
+counts as "resolved" for `full_sweep` -- a source where every remaining detail-less product is
+capped can reach `full_sweep=True` (this is intended; see task-7-report.md).
 """
 from warhub_acquisition.acquire.client import FetchError, PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, StrategyResult
@@ -24,8 +41,16 @@ from warhub_acquisition.models.observation import Observation
 
 EXTRACTOR = "shopify@1"
 PAGE_LIMIT = 250
+DETAIL_MISS_CAP = 3
 
-_PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur"}
+# Shopify's /products.json enforces a platform-wide cap: any request where page * limit
+# exceeds 25000 fails with HTTP 400 ("Page * Limit exceeds the 25000 limit."), regardless of
+# how many products the store actually has. Live-verified twice against ret-tistaminis
+# (>25k products): enumeration never reaches an empty page before the cap, so it must stop
+# itself at the last in-bounds page rather than let the 400 kill the whole source.
+PLATFORM_MAX_PAGES = 25_000 // PAGE_LIMIT
+
+_PRICE_FIELDS = {"gbp": "priceGbp", "usd": "priceUsd", "eur": "priceEur", "cad": "priceCad"}
 
 
 def _price_field(currency: object) -> str:
@@ -154,13 +179,34 @@ def shopify_strategy(
         "out_of_scope_vendor": 0,
         "unmapped_hints": 0,
         "detail_fetch_errors": 0,
+        "enumeration_capped": 0,
+        "enumeration_capped_by_400": 0,
     }
 
-    # --- Enumerate: always full, cheap pages. ---
+    # scope.maxEnumerationPages only ever LOWERS the platform cap -- it can never raise
+    # enumeration past the 25k-product limit Shopify itself enforces.
+    max_pages = PLATFORM_MAX_PAGES
+    scoped_max_pages = descriptor.scope.get("maxEnumerationPages")
+    if isinstance(scoped_max_pages, int):
+        max_pages = min(max_pages, scoped_max_pages)
+
+    # --- Enumerate: always full, cheap pages -- until an empty page or the platform cap. ---
     products: dict[str, dict] = {}
     page = 1
-    while True:
-        payload = client.get_json("/products.json", params={"limit": PAGE_LIMIT, "page": page})
+    enumeration_capped = False
+    while page <= max_pages:
+        try:
+            payload = client.get_json("/products.json", params={"limit": PAGE_LIMIT, "page": page})
+        except FetchError as error:
+            if error.status == 400:
+                # Defensive: a 400 mid-enumeration means the platform cap moved (or this store
+                # is already past it on page 1). Treat exactly like reaching the cap cleanly --
+                # never kill the whole source over it. A store that 400s on page 1 yields 0
+                # observations, which fires the minCount contract loudly instead.
+                stats["enumeration_capped_by_400"] += 1
+                enumeration_capped = True
+                break
+            raise
         stats["fetched_pages"] += 1
         page_products = payload.get("products") if isinstance(payload, dict) else None
         page_products = page_products or []
@@ -169,6 +215,14 @@ def shopify_strategy(
         for product in page_products:
             products[product["handle"]] = product
         page += 1
+    else:
+        # Loop exhausted max_pages without an empty page or a 400 -- enumeration hit the
+        # platform (or scope-lowered) cap cleanly. The store almost certainly has more
+        # products beyond this point that were never observed.
+        enumeration_capped = True
+
+    if enumeration_capped:
+        stats["enumeration_capped"] = 1
 
     stats["products_seen"] = len(products)
 
@@ -200,7 +254,14 @@ def shopify_strategy(
         recorded = old_updated_at.get(handle)
         if recorded is not None:
             if bulk_updated_at > recorded.get("updatedAt", ""):
+                # Product changed upstream since the last recorded value -- worth re-checking
+                # regardless of past misses (this is also where a capped-out handle's
+                # detailMisses effectively resets: see the fetch-outcome branch below).
                 stale_candidates.append(handle)
+            elif not recorded.get("ean") and recorded.get("detailMisses", 0) < DETAIL_MISS_CAP:
+                missing_ean_candidates.append(handle)
+            # else: ean already known (nothing to do), or detailMisses hit the cap with an
+            # unchanged updated_at -- given up, excluded from every queue bucket.
         elif handle in old_pending:
             missing_ean_candidates.append(handle)
         else:
@@ -239,13 +300,28 @@ def shopify_strategy(
                 new_updated_at[handle] = old_updated_at[handle]
             continue
 
+        bulk_updated_at = product.get("updated_at") or ""
         barcode = _extract_barcode(detail if isinstance(detail, dict) else {})
         if barcode:
             stats["barcodes_found"] += 1
-            new_updated_at[handle] = {"updatedAt": product.get("updated_at") or "", "ean": barcode}
+            new_updated_at[handle] = {"updatedAt": bulk_updated_at, "ean": barcode}
             refreshed_this_run.add(handle)
-        # else: detail fetch succeeded but no barcode -- any previously-known ean for this
-        # handle is dropped (the live response is the freshest truth) and it re-queues below.
+        else:
+            # Detail fetch succeeded but no barcode -- any previously-known ean for this handle
+            # is dropped (the live response is the freshest truth). Track/increment the give-up
+            # counter: a bulk updated_at newer than what was last recorded resets it to 0 (fresh
+            # start for a changed product) before this run's own miss brings it back to 1; an
+            # unchanged updated_at just carries the prior count forward and increments it.
+            previous = old_updated_at.get(handle)
+            if previous is not None and bulk_updated_at <= previous.get("updatedAt", ""):
+                misses = previous.get("detailMisses", 0)
+            else:
+                misses = 0
+            new_updated_at[handle] = {"updatedAt": bulk_updated_at, "detailMisses": misses + 1}
+            # not added to refreshed_this_run -- re-queues below via pending_details unless the
+            # new count just hit the cap, in which case the classification loop above will
+            # exclude it from every bucket on the NEXT run (this run's pending_details entry is
+            # unaffected -- see full_sweep consequence note in the module docstring).
 
     observations: list[Observation] = []
     for handle in sorted(kept_handles):
@@ -258,7 +334,11 @@ def shopify_strategy(
         observations.append(observation)
 
     pending_details = sorted(set(detail_queue) - refreshed_this_run)
-    full_sweep = not pending_details
+    # A cap-ended enumeration never observed the store's full population -- an empty
+    # pending_details here just means the budgeted detail queue emptied, not that every
+    # product was seen. Force full_sweep False so run_source's mark_missed never runs and
+    # inflates missStreak on products this run simply couldn't reach past the platform cap.
+    full_sweep = not pending_details and not enumeration_capped
 
     result_cursor = {
         "updated_at": new_updated_at,

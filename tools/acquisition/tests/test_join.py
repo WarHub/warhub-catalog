@@ -208,6 +208,80 @@ def test_cross_manufacturer_ean_keys_include_all_owner_observations() -> None:
     } in result.ambiguous
 
 
+def test_barcode_db_joins_when_ean_matches_existing_entity() -> None:
+    kinds = {**KINDS, "db-upc": "barcode-db"}
+    result = join_observations(
+        [
+            obs("mfr-gw:a", sku="99120110077", ean="5011921194285"),
+            obs("db-upc:x", sku=None, ean="5011921194285", name="DB-sourced title"),
+        ],
+        TAXONOMY, kinds, Matches(),
+    )
+    assert list(result.entities) == ["games-workshop/99120110077"]
+    assert [m.key for m in result.entities["games-workshop/99120110077"]] == ["mfr-gw:a", "db-upc:x"]
+    assert result.ambiguous == []
+
+
+def test_barcode_db_unjoined_ean_is_dropped_not_name_joined() -> None:
+    """A barcode-db observation whose ean matches no OTHER source's assertion for this
+    manufacturer must never mint (or name-join into) an entity -- it is dropped and reported.
+    Structurally this should never happen in production (the strategy only ever emits eans read
+    straight from an existing catalog entity), but join.py enforces it defensively anyway."""
+    kinds = {**KINDS, "db-upc": "barcode-db"}
+    result = join_observations(
+        [obs("db-upc:orphan", sku=None, ean="5011921194285", name="Combat Patrol: Necrons")],
+        TAXONOMY, kinds, Matches(),
+    )
+    assert result.entities == {}
+    assert result.ambiguous == [
+        {
+            "type": "barcode-db-unjoined",
+            "key": "db-upc:orphan",
+            "name": "Combat Patrol: Necrons",
+            "ean": "5011921194285",
+        }
+    ]
+
+
+def test_barcode_db_unjoined_no_ean_at_all_is_also_dropped() -> None:
+    kinds = {**KINDS, "db-upc": "barcode-db"}
+    result = join_observations(
+        [obs("db-upc:orphan", sku=None, ean=None, name="Combat Patrol: Necrons")],
+        TAXONOMY, kinds, Matches(),
+    )
+    assert result.entities == {}
+    assert {"type": "barcode-db-unjoined", "key": "db-upc:orphan", "name": "Combat Patrol: Necrons", "ean": None} in result.ambiguous
+
+
+def test_two_barcode_dbs_alone_never_join_or_mint_an_entity() -> None:
+    """Two barcode-db observations sharing an ean, with no other (non-barcode-db) source
+    asserting it, must NOT join each other into a new entity -- corroboration requires at least
+    one non-barcode-db source (see resolve/corroborate.py), and join.py must not silently create
+    an entity the confidence rule would then refuse to confirm."""
+    kinds = {**KINDS, "db-upc": "barcode-db", "db-goupc": "barcode-db"}
+    result = join_observations(
+        [
+            obs("db-upc:x", sku=None, ean="5011921194285", name="Combat Patrol: Necrons"),
+            obs("db-goupc:y", sku=None, ean="5011921194285", name="Combat Patrol: Necrons"),
+        ],
+        TAXONOMY, kinds, Matches(),
+    )
+    assert result.entities == {}
+    assert {t["key"] for t in result.ambiguous} == {"db-upc:x", "db-goupc:y"}
+    assert all(t["type"] == "barcode-db-unjoined" for t in result.ambiguous)
+
+
+def test_barcode_db_forced_join_bypasses_unjoined_guard() -> None:
+    matches = Matches(joins={"db-upc:x": "games-workshop/99120110077"})
+    kinds = {**KINDS, "db-upc": "barcode-db"}
+    result = join_observations(
+        [obs("mfr-gw:a", sku="99120110077"), obs("db-upc:x", sku=None, name="Some DB Title")],
+        TAXONOMY, kinds, matches,
+    )
+    assert [m.key for m in result.entities["games-workshop/99120110077"]] == ["mfr-gw:a", "db-upc:x"]
+    assert result.ambiguous == []
+
+
 def test_degenerate_name_forced_join_still_works() -> None:
     matches = Matches(joins={"ret-goblin:x": "games-workshop/99120110077"})
     result = join_observations(

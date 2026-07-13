@@ -53,8 +53,24 @@ def join_observations(
     result = JoinResult()
     ordered = sorted(observations, key=lambda o: _priority(o, kinds))
 
-    # classify: unattributed (no manufacturer), degenerate (no code/EAN/forced-join and empty
-    # name slug -- would otherwise form a bogus "manufacturer/" entity), else attributed.
+    # barcode-db observations must never MINT an entity -- they exist only to corroborate an
+    # ean some OTHER (non-barcode-db) source already asserted for the same manufacturer. Collect
+    # every (manufacturer, ean) pair asserted by a non-barcode-db observation up front, so the
+    # classify loop below can tell a barcode-db observation that is genuinely joining an existing
+    # entity from one whose ean matches nothing -- the latter must be dropped, not name-joined.
+    non_barcode_db_eans: dict[str, set[str]] = {}
+    for observation in ordered:
+        if not observation.manufacturer:
+            continue
+        if kinds.get(observation.source_id, "barcode-db") == "barcode-db":
+            continue
+        ean = canonical_ean(observation.ean)
+        if ean is not None:
+            non_barcode_db_eans.setdefault(observation.manufacturer, set()).add(ean)
+
+    # classify: unattributed (no manufacturer), unjoined barcode-db (ean matches no other
+    # source's assertion for this manufacturer -- see above), degenerate (no code/EAN/forced-join
+    # and empty name slug -- would otherwise form a bogus "manufacturer/" entity), else attributed.
     attributed: list[Observation] = []
     codes: dict[str, str | None] = {}
     eans: dict[str, str | None] = {}
@@ -65,6 +81,21 @@ def join_observations(
         code = taxonomy.normalize_code(observation.manufacturer, observation.sku)
         ean = canonical_ean(observation.ean)
         forced = matches.joins.get(observation.key)
+        is_barcode_db = kinds.get(observation.source_id, "barcode-db") == "barcode-db"
+        if (
+            is_barcode_db
+            and not forced
+            and ean not in non_barcode_db_eans.get(observation.manufacturer, set())
+        ):
+            result.ambiguous.append(
+                {
+                    "type": "barcode-db-unjoined",
+                    "key": observation.key,
+                    "name": observation.name,
+                    "ean": observation.ean,
+                }
+            )
+            continue
         if code is None and ean is None and not forced and slugify(observation.name) == "":
             result.ambiguous.append(
                 {"type": "degenerate-name", "key": observation.key, "name": observation.name}

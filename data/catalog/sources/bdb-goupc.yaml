@@ -1,0 +1,13 @@
+id: bdb-goupc
+kind: barcode-db
+strategy: barcode-db
+baseUrl: https://go-upc.com
+scope:
+  db: go-upc
+politeness:
+  # Extra polite -- anonymous/guest web scraping of go-upc.com's search page (no official API
+  # used here), unlike upcitemdb's documented trial endpoint.
+  rps: 0.25
+contract:
+  minCount: 0
+  requiredFieldRates: {}

@@ -48,6 +48,10 @@ class DataPaths:
     def conflicts(self) -> Path:
         return self.root / "review" / "conflicts.yaml"
 
+    @property
+    def classifications(self) -> Path:
+        return self.root / "catalog" / "classifications" / "products.yaml"
+
 
 def _load_optional(path: Path, model: type, default: object) -> object:
     if path.exists():

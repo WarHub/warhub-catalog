@@ -44,6 +44,10 @@ internal static class ProductBuilder
                 {
                     Ean = string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
                     EanConfidence = p.EanConfidence,
+                    PriceGbp = p.PriceGbp,
+                    PriceUsd = p.PriceUsd,
+                    PriceEur = p.PriceEur,
+                    PriceCad = p.PriceCad,
                     Name = p.Name,
                     GameSystem = label,
                     Faction = factionLabel,

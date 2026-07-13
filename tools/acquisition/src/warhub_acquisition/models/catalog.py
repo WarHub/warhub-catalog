@@ -23,6 +23,7 @@ class CanonicalProduct(BaseModel):
     priceGbp: float | None = None
     priceUsd: float | None = None
     priceEur: float | None = None
+    priceCad: float | None = None
     url: str | None = None
     imageUrl: str | None = None
     description: str | None = None

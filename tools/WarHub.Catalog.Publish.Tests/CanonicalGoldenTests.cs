@@ -114,4 +114,16 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
         Assert.Equal("current", Necrons.GetProperty("status").GetString());
         Assert.Equal("in_stock", Necrons.GetProperty("availability").GetString());
     }
+
+    [Fact]
+    public void Price_cad_flows_through_alongside_price_gbp_and_absent_price_cad_is_omitted()
+    {
+        // Necrons: priceGbp from the manufacturer observation, priceCad added alongside it
+        // (Task 8) -- proves the new currency round-trips through canonical YAML into the
+        // published product exactly like the pre-existing currencies.
+        Assert.Equal(76.5m, Necrons.GetProperty("priceGbp").GetDecimal());
+        Assert.Equal(129.99m, Necrons.GetProperty("priceCad").GetDecimal());
+        // Boarding Patrol: no priceCad in the source data -> omitted, not published as null.
+        Assert.False(DeathGuard.TryGetProperty("priceCad", out _));
+    }
 }

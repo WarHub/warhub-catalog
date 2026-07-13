@@ -4,7 +4,8 @@ Proves the Python canonical-YAML writer (``resolve_catalog``) and the .NET publi
 (``YamlSource`` + ``ProductBuilder``) agree byte-for-byte on the same small catalog: two
 products covering the ean/confidence matrix (confirmed via a curated assertion,
 provisional via a lone retailer assertion), quantity present/absent (publisher defaults
-to 1 when absent), and faction present/null.
+to 1 when absent), faction present/null, and priceCad present (Necrons) / absent
+(Boarding Patrol) alongside priceGbp.
 
 The committed fixture lives at
 ``tools/WarHub.Catalog.Publish.Tests/fixtures/canonical-golden/`` and is consumed
@@ -97,6 +98,9 @@ def _seed(tmp_path: Path) -> DataPaths:
         _line({
             "key": "mfr-gw-algolia:necrons", "name": "Combat Patrol: Necrons",
             "manufacturer": "games-workshop", "sku": "99120110052", "priceGbp": 76.5,
+            # priceCad proves the currency joins the fold identically to priceGbp/Usd/Eur
+            # (Task 8) and flows through canonical YAML -> .NET publish end to end.
+            "priceCad": 129.99,
             "availability": "in_stock",
             "hints": {"gameSystem": "warhammer-40k", "faction": "necrons", "quantity": 3},
             "firstSeen": "2026-07-01", "lastSeen": "2026-07-12", "extractor": "algolia@1",

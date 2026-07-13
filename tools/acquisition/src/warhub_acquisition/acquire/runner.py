@@ -1,5 +1,5 @@
 """Contract-enforcing source runner: invoke a strategy, gate writes on its contract, persist."""
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Callable
 
@@ -47,6 +47,12 @@ class AcquireContext:
     mappings: dict[str, dict]
     run_date: str
     budget: int | None = None
+    # Additive field (Task 4, barcode-db strategy): the resolved catalog directory
+    # (`paths.catalog_products`), needed by INVERTED-flow strategies that read the current
+    # catalog rather than a source's own listing. `None` unless `run_source` has populated it
+    # (see below) -- callers constructing an AcquireContext directly (most existing strategy
+    # tests) never need to set this.
+    catalog_dir: Path | None = None
 
 
 Strategy = Callable[[SourceDescriptor, PoliteClient, dict, AcquireContext], StrategyResult]
@@ -133,13 +139,27 @@ def run_source(
     transport=None,
 ) -> SourceHealth:
     politeness = descriptor.politeness or {}
-    client = PoliteClient(descriptor.baseUrl, rps=politeness.get("rps", 0.5), transport=transport)
+    client = PoliteClient(
+        descriptor.baseUrl,
+        rps=politeness.get("rps", 0.5),
+        # Explicit per-source timeout override (seconds). PoliteClient's own default is 30s; slow
+        # bulk endpoints (Wayback CDX: 200KB+ pages, 3-7s+ observed live) declare a higher value,
+        # e.g. arc-*.yaml's `timeoutSeconds: 60`.
+        timeout=float(politeness.get("timeoutSeconds", 30.0)),
+        transport=transport,
+    )
 
     cursor_store = CursorStore(paths.evidence_products)
     cursor = cursor_store.load(descriptor.id)
 
+    # `paths.catalog_products` is always available (it's a property, not a filesystem check) --
+    # every strategy call gets a context carrying it, not just barcode-db's. `replace` (never
+    # mutating the caller's context in place) so a single AcquireContext instance reused across
+    # every source in a run (cli.py builds one) is never surprised by another source's call.
+    strategy_context = replace(context, catalog_dir=paths.catalog_products)
+
     strategy = STRATEGIES[descriptor.strategy]
-    result = strategy(descriptor, client, cursor, context)
+    result = strategy(descriptor, client, cursor, strategy_context)
 
     # All contract checks run BEFORE any evidence or cursor write: a failed source must never
     # delete or decay existing evidence, it can only fail to refresh it.

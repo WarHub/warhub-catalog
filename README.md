@@ -84,7 +84,8 @@ data/
   products/                      # legacy, retired by the evidence-ledger pipeline; removal tracked for Plan 5
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
-  catalog-acquire.yml            # nightly: harvest live sources -> evidence -> resolve -> sticky PR
+  catalog-acquire.yml            # nightly + weekly deep-sweep: harvest live sources -> evidence -> resolve -> sticky PR
+  classify.yml                   # manual (workflow_dispatch only): LLM classify / join-adjudication -> sticky PR
   paint-catalog-update.yml       # weekly: regenerate paint data + equivalences (PR)
   catalog-publish.yml            # on catalog/paint data change: bundle -> Release + Pages
 ```
@@ -93,23 +94,51 @@ data/
 
 1. Product data flows through an **evidence ledger**: per-source observations under
    `data/evidence/` are resolved into the canonical catalog under `data/catalog/`
-   (`tools/acquisition`). **`catalog-acquire.yml`** runs nightly (04:00 UTC): a job matrix
-   harvests each live source group into `data/evidence/`, then an integrate job merges the
-   evidence, runs `resolve`/`report`/`report --ean-guard`, and opens or updates a sticky PR
-   (`catalog/acquisition`) with the combined health report, coverage table, and any
+   (`tools/acquisition`). **`catalog-acquire.yml`** runs nightly (04:00 UTC, Sun-Fri -- Saturday
+   is deliberately skipped so the nightly run never clobbers that day's weekly-sweep evidence)
+   and does a **weekly deep sweep** (Saturdays, 02:00 UTC, or `workflow_dispatch` with
+   `mode: weekly`): a
+   job matrix harvests each live source group into `data/evidence/`, then an integrate job
+   merges the evidence, runs `resolve`/`report`/`report --ean-guard`, and opens or updates a
+   sticky PR (`catalog/acquisition`) with the combined health report, coverage table, and any
    confirmed-EAN guard findings. It supersedes the legacy `product-catalog-update.yml` /
-   `product-catalog-enrich.yml` generation workflows. Deliberate deviation from the original
-   plan: there is no separate weekly deep-sweep workflow — the nightly run already does full
-   (cheap) enumeration plus budgeted detail fetches with persistent per-source cursors, which
-   converges to full coverage across nights; the weekly cadence returns in Plan 4 as the
-   archive-mining driver. Live-source strategies are covered by `pytest -m live` smoke tests
-   under `tools/acquisition/tests/` (opt-in real-network checks, excluded from the default
-   test run — see `test_live_smoke.py` / `test_live_smoke_woo.py`).
-2. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
+   `product-catalog-enrich.yml` generation workflows. Every nightly run does full (cheap)
+   enumeration plus budgeted detail fetches with persistent per-source cursors, converging to
+   full coverage across nights; the weekly sweep additionally runs two source kinds that are too
+   slow/quota-limited for nightly cadence: **archive mining** (`arc-*` sources, e.g. Wayback
+   Machine snapshots of goblingaming/gw-webstore — one shared host, budgeted and paced
+   accordingly) and **barcode-db corroboration** (`bdb-*` sources, e.g. upcitemdb/Go-UPC —
+   always small, explicit per-source budgets, since upcitemdb's trial tier is quota-limited to
+   ~100 requests/day). It also temporarily raises the slower retailer sources' budgets on the
+   weekly run to converge their backlog faster. Live-source strategies are covered by
+   `pytest -m live` smoke tests under `tools/acquisition/tests/` (opt-in real-network checks,
+   excluded from the default test run — see `test_live_smoke.py` / `test_live_smoke_woo.py`).
+2. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
+   duplicate-entity adjudication go through **`classify.yml`**, a **`workflow_dispatch`-only**
+   workflow (never scheduled — LLM spend stays human-triggered) with a `mode` input:
+   `classify` builds the review queue, sends it to an Anthropic model for `gameSystem`/`faction`
+   decisions, applies accepted decisions to `data/catalog/overrides.yaml`, then re-runs
+   `resolve`/`report`; `propose-joins` finds suspected duplicate-entity pairs (shared EAN /
+   normalized name / legacy-code match) and sends them to the model for a same-product verdict,
+   writing `data/review/join-proposals.yaml` for human/controller review only — it never edits
+   `data/catalog/matches.yaml` itself; promoting a proposed join stays a manual step. Each mode
+   opens or updates its OWN mode-suffixed sticky PR branch — `classify` uses
+   `catalog/classification`, `propose-joins` uses `catalog/classification-joins` — kept separate
+   (from each other and from `catalog/acquisition`) so a propose-joins dispatch's
+   force-reset-from-`main` PR step can never clobber an unmerged classify-mode PR, or vice versa.
+   **Requires the `ANTHROPIC_API_KEY` repository secret** — the workflow fails fast with a clear
+   error if it isn't configured, before spending any budget.
+3. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
    then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only
    watches `data/catalog/**` and `data/paints/**`, so evidence-only or legacy-tree churn never
    mints a release.
+
+Both `catalog-acquire.yml` and `classify.yml` use **sticky PRs** (one persistent branch each,
+updated in place rather than opened fresh every run): cursor/queue progress from a given run only
+actually lands in `data/` — and so only becomes visible to the *next* run — once that sticky PR is
+merged. An unmerged sticky PR means the next scheduled/dispatched run still starts from the
+previously-merged state, not from what's sitting in the open PR.
 
 ## Build locally
 

@@ -1,0 +1,317 @@
+name: Classification
+
+# Human-triggered LLM classification / duplicate-join-adjudication pass over the catalog's
+# parked entities (null gameSystem) and suspected-duplicate entity pairs. See
+# tools/acquisition/src/warhub_acquisition/classify/ (llm.py, joins.py) and
+# .superpowers/sdd/task-5-report.md / task-6-report.md for the underlying module contracts.
+#
+# workflow_dispatch ONLY -- this workflow never runs on a schedule. Classification spends
+# Anthropic API budget, so a human/controller decides when that spend happens; catalog-acquire.yml
+# (nightly + weekly-deep-sweep harvesting) never triggers it.
+#
+# mode=classify (default): emit-queue -> `classify --llm` -> `classify --apply` -> `resolve` ->
+#   `report`, committing catalog/overrides.yaml + classification-cache.jsonl changes to the sticky
+#   PR branch `catalog/classification`.
+# mode=propose-joins: `classify --propose-joins`, committing join-proposals.yaml +
+#   join-cache.jsonl only. This mode NEVER touches matches.yaml or catalog/overrides.yaml --
+#   promoting a proposed join into matches.yaml stays a manual, spot-checked human/controller step
+#   (see task-6-report.md); there is no `emit-queue`/`apply`/`resolve`/`report` step for this mode
+#   -- propose-joins never reads classification-queue.yaml. Its sticky PR branch is the
+#   MODE-SUFFIXED `catalog/classification-joins`, deliberately SEPARATE from classify mode's
+#   `catalog/classification`: both modes used to share one sticky branch, so a propose-joins
+#   dispatch's create-pull-request step (which force-resets its branch from `main`) would blow
+#   away an unmerged classify-mode PR's still-pending overrides/apply changes, and vice versa.
+#   The branch name is derived from MODE via the `branch` env step below -- see the "Create or
+#   update sticky PR" step.
+#
+# Requires the ANTHROPIC_API_KEY repository secret. The "Check ANTHROPIC_API_KEY secret" step
+# below fails fast, before any budget-relevant work happens, if it's missing.
+
+on:
+  workflow_dispatch:
+    inputs:
+      budget:
+        description: 'Request budget (batches of up to 20 items/pairs per request)'
+        required: false
+        type: string
+        default: '500'
+      mode:
+        description: 'classify (LLM gameSystem/faction decisions, applies to the catalog) or propose-joins (duplicate-entity adjudication, review-only output)'
+        required: false
+        type: choice
+        options:
+          - classify
+          - propose-joins
+        default: classify
+
+concurrency:
+  group: catalog-classify
+  cancel-in-progress: false
+
+jobs:
+  classify:
+    name: Classify (${{ github.event.inputs.mode }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      # Mode-suffixed sticky branch: classify mode keeps `catalog/classification`,
+      # propose-joins gets its own `catalog/classification-joins` -- see the header comment above
+      # for why sharing one branch is unsafe (create-pull-request force-resets its branch from
+      # `main` on every dispatch).
+      - name: Derive mode-suffixed branch
+        id: branch
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          if [ "$MODE" = "propose-joins" ]; then
+            echo "name=catalog/classification-joins" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=catalog/classification" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: uv sync
+        working-directory: tools/acquisition
+        run: uv sync --locked
+
+      # Fail fast, before any budget-relevant work happens, if the secret isn't configured.
+      - name: Check ANTHROPIC_API_KEY secret
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY secret is not configured on this repository. Add it before running the classify workflow."
+            exit 1
+          fi
+
+      # `set +e` + captured exit code (not a hard step failure) on this step and every
+      # budget/data-mutating step below, same convention as catalog-acquire.yml's integrate job:
+      # build_queue()/llm.py/joins.py can raise (e.g. build_queue()'s ValueError on evidence
+      # mismatch) or flush partial progress mid-run (task-5-report.md:
+      # "incremental-flush-survives-crash"), so a crash here still leaves whatever made it to disk
+      # available for the sticky PR, instead of every later step -- including the sticky-PR step
+      # itself -- being skipped by an early job abort. The final step fails the job loudly, after
+      # the PR is opened. Gated to mode=classify: propose-joins never reads
+      # classification-queue.yaml, so an irrelevant queue failure must not kill a joins run.
+      - name: Emit classification queue
+        id: emit_queue
+        if: github.event.inputs.mode == 'classify'
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data classify --data ../../data --emit-queue > ../../_emit_queue.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_emit_queue.txt
+
+      # Inputs (github.event.inputs.*) are routed through env: rather than interpolated directly
+      # into the script body -- same injection-hardening pattern as catalog-acquire.yml.
+      - name: LLM classify
+        id: llm
+        if: github.event.inputs.mode == 'classify'
+        working-directory: tools/acquisition
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BUDGET: ${{ github.event.inputs.budget }}
+        run: |
+          set +e
+          # Empty string (explicitly-cleared input) falls back to the default budget -- same
+          # empty-string fallback pattern as catalog-acquire.yml's OVERRIDE_BUDGET handling;
+          # otherwise argparse receives --budget "" and errors.
+          BUDGET="${BUDGET:-500}"
+          uv run warhub-data classify --data ../../data --llm \
+            --budget "$BUDGET" \
+            --run-date "$(date -u +%F)" > ../../_llm.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_llm.txt
+
+      - name: Propose joins
+        id: joins
+        if: github.event.inputs.mode == 'propose-joins'
+        working-directory: tools/acquisition
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BUDGET: ${{ github.event.inputs.budget }}
+        run: |
+          set +e
+          # Empty string (explicitly-cleared input) falls back to the default budget -- same
+          # empty-string fallback pattern as catalog-acquire.yml's OVERRIDE_BUDGET handling;
+          # otherwise argparse receives --budget "" and errors.
+          BUDGET="${BUDGET:-500}"
+          uv run warhub-data classify --data ../../data --propose-joins \
+            --budget "$BUDGET" \
+            --run-date "$(date -u +%F)" > ../../_joins.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_joins.txt
+
+      - name: Apply classifications
+        id: apply
+        if: github.event.inputs.mode == 'classify'
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data classify --data ../../data --apply > ../../_apply.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_apply.txt
+
+      # Conflicts (exit 2) are expected review material, same convention as catalog-acquire.yml.
+      - name: Resolve catalog
+        id: resolve
+        if: github.event.inputs.mode == 'classify'
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data resolve --data ../../data > ../../_resolve.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_resolve.txt
+
+      - name: Coverage report
+        id: report
+        if: github.event.inputs.mode == 'classify'
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data report --data ../../data > ../../_report.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_report.txt
+
+      - name: Build PR body
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          BUDGET: ${{ github.event.inputs.budget }}
+        run: |
+          {
+            echo "Automated classification run (mode: \`$MODE\`, budget: $BUDGET requests)."
+            echo
+            echo "**Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "**Trigger:** ${{ github.event_name }}"
+            echo
+            if [ "$MODE" = "classify" ]; then
+              echo "### Emit classification queue"
+              echo
+              cat _emit_queue.txt
+              if [ "${{ steps.emit_queue.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`classify --emit-queue\` exited ${{ steps.emit_queue.outputs.exit_code }} (expected 0) -- possible crash."
+              fi
+              echo
+              echo "### LLM classify"
+              echo
+              cat _llm.txt
+              if [ "${{ steps.llm.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`classify --llm\` exited ${{ steps.llm.outputs.exit_code }} (expected 0) -- possible crash; cached decisions up to that point are still included below via the incremental cache flush."
+              fi
+              echo
+              echo "### Apply classifications"
+              echo
+              cat _apply.txt
+              if [ "${{ steps.apply.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`classify --apply\` exited ${{ steps.apply.outputs.exit_code }} (expected 0) -- possible crash."
+              fi
+              echo
+              echo "### Resolve"
+              echo
+              cat _resolve.txt
+              if [ "${{ steps.resolve.outputs.exit_code }}" = "2" ]; then
+                echo
+                echo "> Conflicts detected -- see \`data/review/conflicts.yaml\`; treat as review material, not a failure."
+              elif [ -n "${{ steps.resolve.outputs.exit_code }}" ] && [ "${{ steps.resolve.outputs.exit_code }}" != "0" ] && [ "${{ steps.resolve.outputs.exit_code }}" != "2" ]; then
+                echo
+                echo "> :warning: \`resolve\` exited ${{ steps.resolve.outputs.exit_code }} (expected 0 or 2)."
+              fi
+              echo
+              echo "### Coverage report"
+              echo
+              cat _report.txt
+              if [ "${{ steps.report.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`report\` exited ${{ steps.report.outputs.exit_code }} (expected 0) -- possible crash."
+              fi
+            else
+              echo "### Propose joins"
+              echo
+              cat _joins.txt
+              if [ "${{ steps.joins.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`classify --propose-joins\` exited ${{ steps.joins.outputs.exit_code }} (expected 0) -- possible crash; cached verdicts up to that point are still included below via the incremental cache flush."
+              fi
+              echo
+              echo "See \`data/review/join-proposals.yaml\` for candidate duplicate-entity pairs and their LLM verdicts."
+              echo
+              echo "> This workflow never edits \`matches.yaml\`. Promoting a proposed join is a manual, spot-checked human/controller step."
+            fi
+          } > tools/acquisition/pr-body.md
+
+      - name: Create or update sticky PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: data
+          branch: ${{ steps.branch.outputs.name }}
+          base: main
+          title: "${{ github.event.inputs.mode == 'propose-joins' && 'Classification: proposed joins' || 'Classification update' }}"
+          body-path: tools/acquisition/pr-body.md
+          commit-message: 'Classification update (${{ github.event.inputs.mode }})'
+          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          delete-branch: true
+
+      # Mirrors catalog-acquire.yml's fail-after-PR pattern: the sticky PR is always
+      # opened/updated with whatever this run produced before the job is marked failed, so
+      # findings are never hidden behind a red X with nothing to show for it.
+      - name: Fail job on unexpected exit codes
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          crashed=0
+
+          if [ "$MODE" = "classify" ]; then
+            emit_queue_exit="${{ steps.emit_queue.outputs.exit_code }}"
+            llm_exit="${{ steps.llm.outputs.exit_code }}"
+            apply_exit="${{ steps.apply.outputs.exit_code }}"
+            resolve_exit="${{ steps.resolve.outputs.exit_code }}"
+            report_exit="${{ steps.report.outputs.exit_code }}"
+
+            if [ "$emit_queue_exit" != "0" ]; then
+              echo "::error::classify --emit-queue exited $emit_queue_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
+              crashed=1
+            fi
+            if [ "$llm_exit" != "0" ]; then
+              echo "::error::classify --llm exited $llm_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
+              crashed=1
+            fi
+            if [ "$apply_exit" != "0" ]; then
+              echo "::error::classify --apply exited $apply_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
+              crashed=1
+            fi
+            if [ "$resolve_exit" != "0" ] && [ "$resolve_exit" != "2" ]; then
+              echo "::error::resolve exited $resolve_exit (expected 0 or 2) -- possible crash, possibly mid-write. See the sticky PR body / job log for details."
+              crashed=1
+            fi
+            if [ "$report_exit" != "0" ]; then
+              echo "::error::report (coverage) exited $report_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
+              crashed=1
+            fi
+          else
+            joins_exit="${{ steps.joins.outputs.exit_code }}"
+            if [ "$joins_exit" != "0" ]; then
+              echo "::error::classify --propose-joins exited $joins_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
+              crashed=1
+            fi
+          fi
+
+          if [ "$crashed" = "1" ]; then
+            exit 1
+          fi
