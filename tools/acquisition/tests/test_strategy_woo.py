@@ -569,6 +569,39 @@ def test_detail_misses_cap_excludes_id_from_queue_and_reaches_full_sweep() -> No
     assert result.full_sweep is True
 
 
+def test_product_name_is_html_unescaped() -> None:
+    """Woo's Store API returns `name` HTML-entity-encoded (real evidence: `10 Square Bases
+    Plastic Frame 20mm x 20mm &#8211; DISCONTINUED`) -- the observation must carry the decoded
+    text, not the raw entity."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(
+                200,
+                json=[
+                    {
+                        "id": 1,
+                        "name": "Foo &#8211; Bar &amp; Baz",
+                        "sku": "F1",
+                        "permalink": "https://www.manticgames.com/foo/",
+                        "prices": {"price": "1000", "currency_minor_unit": 2},
+                        "images": [],
+                        "categories": [],
+                        "is_in_stock": True,
+                    }
+                ],
+                headers={"X-WP-Total": "1"},
+            )
+        return httpx.Response(200, json=[])
+
+    client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    result = woo_strategy(
+        mantic_descriptor(gtinFromJsonLd=False), client, {}, context(mantic_taxonomy(), budget=0)
+    )
+
+    assert result.observations[0].name == "Foo – Bar & Baz"
+
+
 def test_gtin_success_clears_detail_misses_counter() -> None:
     cursor_with_misses = {"gtin": {}, "pending_details": ["100"], "detailMisses": {"100": 2}}
 

@@ -1,9 +1,13 @@
 """Deterministic candidate-pair generation + LLM join adjudication (Task 6): scans the RESOLVED
-catalog (`data/catalog/products/*.yaml`) and the parked entities in `data/review/conflicts.yaml`
-(`type: unclassified-entity`) for same-manufacturer entity pairs that are suspiciously likely to be
-the SAME real-world product living as two separate catalog entities -- a retailer-minted duplicate
-the deterministic join machinery (`resolve/join.py`) did not (and structurally could not) merge on
-its own, because the two sides never shared a code/ean anchor at join time.
+catalog (`data/catalog/products/*.yaml`, which since gameSystem became optional now includes
+null-gameSystem products too) and, for backward compatibility with any conflicts.yaml that still
+carries them, entities under an `unclassified-entity` conflict type (the resolver no longer emits
+this type -- it published null-gameSystem products directly instead of parking them -- but this
+module tolerates the type if a hand-edited or stale conflicts.yaml still has it) for
+same-manufacturer entity pairs that are suspiciously likely to be the SAME real-world product
+living as two separate catalog entities -- a retailer-minted duplicate the deterministic join
+machinery (`resolve/join.py`) did not (and structurally could not) merge on its own, because the
+two sides never shared a code/ean anchor at join time.
 
 Three deterministic rules generate candidates (no LLM involved yet):
   (a) ean    -- both entities assert the same GS1-validated EAN under the same manufacturer.

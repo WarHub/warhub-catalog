@@ -101,13 +101,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             taxonomy.normalize_code(m.manufacturer, m.sku) == entity.split("/", 1)[1] for m in members
         ) else None
         product = apply_overrides(resolve_attributes(entity, members, kinds, ean, code), overrides)
-        if product.gameSystem is None:
-            # the publisher throws on a null gameSystem -- park the entity out of the
-            # written catalog instead, surfaced via the review queue for mapping.
-            conflicts.append(
-                {"type": "unclassified-entity", "entity": entity, "names": [members[0].name]}
-            )
-            continue
+        # gameSystem is OPTIONAL: a product genuinely belonging to no game system (a base, a
+        # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
+        # gameSystem: null rather than being parked out of the catalog. classify/queue.py
+        # surfaces every such product from the resolved catalog for optional classification.
         products.setdefault(product.manufacturer, []).append(product)
 
     conflicts.extend(find_shared_eans(ean_resolutions))

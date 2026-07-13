@@ -27,6 +27,7 @@ import pytest
 
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
+from warhub_acquisition.acquire.extract import _fallback_name
 from warhub_acquisition.acquire.strategies.sitemap_sd import (
     _extract_bcdata,
     _extract_jsonld,
@@ -295,6 +296,32 @@ def test_extraction_fails_cleanly_when_no_extractor_finds_anything() -> None:
 def test_ean_digits_only_normalization_strips_non_digits() -> None:
     html = '<script type="application/ld+json">{"@type": "Product", "name": "Widget", "gtin13": "501-192-1194285 "}</script>'
     assert _extract_jsonld(html)["ean"] == "5011921194285"
+
+
+# --- HTML-entity unescaping (every text field funnels through extract._clean) -------------------
+
+
+def test_jsonld_extraction_unescapes_html_entities_in_name() -> None:
+    html = (
+        '<script type="application/ld+json">'
+        '{"@type": "Product", "name": "Foo &#8211; Bar &amp; Baz", "sku": "ABC"}'
+        "</script>"
+    )
+    assert _extract_jsonld(html)["name"] == "Foo – Bar & Baz"
+
+
+def test_microdata_extraction_unescapes_html_entities_in_name() -> None:
+    html = (
+        '<div itemscope itemtype="https://schema.org/Product">'
+        '<span itemprop="name">Foo &#8211; Bar &amp; Baz</span>'
+        "</div>"
+    )
+    assert _extract_microdata(html)["name"] == "Foo – Bar & Baz"
+
+
+def test_fallback_name_unescapes_html_entities_from_h1() -> None:
+    html = "<html><body><h1>Foo &#8211; Bar &amp; Baz</h1></body></html>"
+    assert _fallback_name(html) == "Foo – Bar & Baz"
 
 
 # --- GS1-prefix manufacturer attribution --------------------------------------------------------

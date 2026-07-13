@@ -1,11 +1,10 @@
 """Materialize committed classification decisions (data/catalog/classifications/products.yaml)
-as catalog overrides, un-parking the entities they classify.
+as catalog overrides, giving a previously null-gameSystem entity a gameSystem/faction.
 
-apply_classifications does not itself re-run `resolve` -- the resolver already applies
-overrides.products.<entity>.gameSystem/faction *before* it checks for a null gameSystem to park
-an entity (see resolve/resolver.py resolve_catalog: apply_overrides then the `if
-product.gameSystem is None` park check), so writing the override here is sufficient; the
-operator re-runs `resolve` afterwards to actually un-park the entities.
+apply_classifications does not itself re-run `resolve` -- overrides.products.<entity> is applied
+unconditionally by resolve_attributes/apply_overrides in resolve/resolver.py's resolve_catalog, so
+writing the override here is sufficient; the operator re-runs `resolve` afterwards for the
+classified gameSystem/faction to actually appear on the published product.
 """
 from typing import Literal
 

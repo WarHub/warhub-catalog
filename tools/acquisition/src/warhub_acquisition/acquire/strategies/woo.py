@@ -42,6 +42,7 @@ a gtin-carrying one, so it counts as "resolved" for `full_sweep` -- a source whe
 detail-less product is capped can reach `full_sweep=True` (this is intended; see
 task-7-report.md).
 """
+import html
 import json
 import re
 
@@ -187,7 +188,11 @@ def _build_candidate(
         key=f"{descriptor.id}:{product['id']}",
         url=product.get("permalink"),
         manufacturer=manufacturer,
-        name=product["name"],
+        # Woo's Store API returns `name` HTML-entity-encoded (e.g. `&#8211;` for a dash) -- every
+        # other strategy that pulls free text out of an HTML-flavored payload unescapes it
+        # (appsync.py's `html.unescape(product.Shortname)`), this one didn't. Never guessed:
+        # unescaping plain text with no entities in it is a no-op.
+        name=html.unescape(product["name"]),
         sku=product.get("sku") or None,
         ean=gtin,
         imageUrl=_image_url(product),

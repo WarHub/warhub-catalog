@@ -226,7 +226,10 @@ def test_barcode_db_alone_two_sources_stays_provisional_not_confirmed(tmp_path: 
     assert product["eanConfidence"] == "provisional"
 
 
-def test_unclassified_entity_is_parked(tmp_path: Path) -> None:
+def test_null_game_system_entity_publishes_with_no_conflict(tmp_path: Path) -> None:
+    """gameSystem is optional: a product no source ever hinted a gameSystem for (a base, a
+    gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
+    gameSystem: null instead of being parked out of the catalog, and raises no conflict."""
     paths = seed(tmp_path)
     rogue = paths.evidence_products / "ret-goblin" / "observations.jsonl"
     line = json.dumps(
@@ -237,7 +240,11 @@ def test_unclassified_entity_is_parked(tmp_path: Path) -> None:
     )
     rogue.write_text(rogue.read_text(encoding="utf-8") + line + "\n", encoding="utf-8", newline="\n")
     catalog = resolve_catalog(paths)
-    ids = [p.id for records in catalog.values() for p in records]
-    assert "games-workshop/99999999999" not in ids
-    conflicts = read_yaml(paths.conflicts)["conflicts"]
-    assert any(c.get("type") == "unclassified-entity" and c.get("entity") == "games-workshop/99999999999" for c in conflicts)
+    products = {p.id: p for records in catalog.values() for p in records}
+    assert "games-workshop/99999999999" in products
+    assert products["games-workshop/99999999999"].gameSystem is None
+    assert read_yaml(paths.conflicts) == {"conflicts": []}
+    # gameSystem: null is omitted (exclude_none), not written as an explicit null in the YAML
+    data = read_yaml(paths.catalog_products / "games-workshop.yaml")
+    record = next(p for p in data["products"] if p["id"] == "games-workshop/99999999999")
+    assert "gameSystem" not in record

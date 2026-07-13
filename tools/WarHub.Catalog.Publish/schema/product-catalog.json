@@ -28,7 +28,7 @@
         "priceEur": { "type": "number" },
         "priceCad": { "type": "number" },
         "name": { "type": "string" },
-        "gameSystem": { "type": "string" },
+        "gameSystem": { "type": ["string", "null"] },
         "faction": { "type": "string" },
         "category": { "type": "string" },
         "status": { "type": "string" },

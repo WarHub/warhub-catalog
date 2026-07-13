@@ -53,10 +53,37 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
     private JsonElement DeathGuard =>
         fx.Products.EnumerateArray().Single(p => p.GetProperty("name").GetString() == "Boarding Patrol: Death Guard");
 
+    private JsonElement PaintingHandle =>
+        fx.Products.EnumerateArray().Single(p => p.GetProperty("name").GetString() == "Citadel Painting Handle");
+
     [Fact]
-    public void Both_products_are_published()
+    public void All_three_products_are_published()
     {
-        Assert.Equal(2, fx.Result.Products);
+        Assert.Equal(3, fx.Result.Products);
+    }
+
+    [Fact]
+    public void Null_game_system_product_publishes_with_gameSystem_omitted_and_no_partition()
+    {
+        // gameSystem is optional -- a system-less product (here, a painting tool; in the real
+        // catalog also bases, gaming mats, dice, advent calendars, ...) publishes in the
+        // consolidated catalog with its confirmed ean, but gameSystem itself is omitted (never
+        // written as a literal null), same as every other optional field in this schema.
+        Assert.False(PaintingHandle.TryGetProperty("gameSystem", out _));
+        Assert.Equal("5011921194803", PaintingHandle.GetProperty("ean").GetString());
+        Assert.Equal("confirmed", PaintingHandle.GetProperty("eanConfidence").GetString());
+
+        string byStemDir = Path.Combine(fx.Dist, "products", "by-system");
+        if (Directory.Exists(byStemDir))
+        {
+            foreach (string file in Directory.EnumerateFiles(byStemDir, "*.json"))
+            {
+                JsonElement partitionProducts = JsonDocument.Parse(File.ReadAllText(file))
+                    .RootElement.GetProperty("products");
+                Assert.DoesNotContain(partitionProducts.EnumerateArray(),
+                    p => p.GetProperty("name").GetString() == "Citadel Painting Handle");
+            }
+        }
     }
 
     [Fact]

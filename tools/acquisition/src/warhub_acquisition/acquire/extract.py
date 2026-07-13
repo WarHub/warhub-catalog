@@ -14,6 +14,7 @@ warhub_acquisition.acquire.strategies.sitemap_sd import _extract_jsonld`) is una
 `from ... import _extract_jsonld` binds the name into `sitemap_sd`'s namespace just as if it were
 still defined there.
 """
+import html
 import json
 import re
 
@@ -37,9 +38,15 @@ def _digits(value: object) -> str | None:
 
 
 def _clean(value: object) -> str | None:
+    """Strip + HTML-entity-unescape. Every text value this module extracts (JSON-LD `name`/`sku`
+    via `_jsonld_brand`, microdata `itemprop` text/content via `_microdata_value`, and the
+    `<h1>`/`<title>` fallback name) funnels through here -- real pages carry entity-encoded text
+    in all three shapes (JSON-LD strings included: some CMS templating HTML-escapes text before
+    injecting it into a JSON-LD script block, not just literal HTML attributes/text nodes).
+    `html.unescape` on text with no entities in it is a no-op, so this is safe unconditionally."""
     if value is None:
         return None
-    text = str(value).strip()
+    text = html.unescape(str(value)).strip()
     return text or None
 
 
