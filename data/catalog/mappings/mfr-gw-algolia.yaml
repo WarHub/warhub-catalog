@@ -1,0 +1,81 @@
+# Ported from the retired .NET tool's AlgoliaProductSource
+# (git show 1593ee1^:tools/WarHub.ProductCatalog.Tool/Scraping/AlgoliaProductSource.cs).
+# algolia.py's `_raw_game_system_and_faction`/`_raw_faction` read this file; see task-9-report.md
+# for the full live-evidence trail.
+#
+# gameSystem: raw GameSystemsRoot.lvl0[0] value -> taxonomy/game-systems.yaml slug. All 6 raw
+# values below are confirmed live, 2026-07-13 (curl.exe POST, single query,
+# filters=productType:miniatureKit) -- they are the exact contents of the response's own
+# `renderingContent.facetOrdering.values."GameSystemsRoot.lvl0".order` array, i.e. Algolia itself
+# reports these as the complete, exhaustive set of top-level game lines in this index today. This
+# also confirms `AlgoliaProductSource.MapAlgoliaGameSystem`'s switch cases are still exhaustive.
+gameSystem:
+  "Warhammer 40,000": warhammer-40k
+  "Age of Sigmar": age-of-sigmar
+  "The Horus Heresy": horus-heresy
+  "The Old World": the-old-world
+  "Middle-Earth": middle-earth
+  "Other Games": other-games
+
+# factionSkipTerms: ported VERBATIM (as data) from AlgoliaProductSource.ExtractFaction's hardcoded
+# `skipTerms` array -- generic hierarchy-segment labels that are never themselves a faction name.
+# Per the task brief, this is the .NET method's DATA; the matching *logic* (case-insensitive,
+# applied to every " > "-split segment after the game-system segment, first survivor wins) is
+# ported into algolia.py's `_raw_faction` function.
+#
+# KNOWN LIMITATION (not fixed here -- faithful port, not a resync with the live site): GW's site
+# taxonomy has drifted since this list was written. The live response's own facetOrdering shows
+# current lvl1 umbrella terms like "Armies of the Imperium" and "Armies of Chaos" that this
+# skip-list does NOT cover (it has the OLDER "Imperium of Man" / "Forces of Chaos" instead) -- a
+# product whose hierarchy bottoms out at one of today's umbrella terms (no lvl2/lvl3 depth) will
+# surface that umbrella string as a raw faction, which (correctly) has no entry in the `faction`
+# map below and so counts under stats.unmapped_hints rather than corrupting data.
+factionSkipTerms:
+  - Unit Type
+  - Infantry
+  - Character
+  - Vehicle
+  - Monster
+  - Battleline
+  - Hero
+  - Unit
+  - Artillery
+  - Cavalry
+  - Start Here
+  - Xenos Armies
+  - Imperium of Man
+  - Forces of Chaos
+  - Force Organisation
+  - Armies of the Old World
+  - Armies of Infamy
+
+# faction: raw faction name (post-skip-list, exactly as `_raw_faction` returns it) ->
+# taxonomy/factions.yaml slug. Only entries with DIRECT live evidence are mapped:
+# - The 8 Old World army names below all came from the real captured fixture's own
+#   GameSystemsRoot.lvl2 hierarchy values (tests/fixtures/algolia/gw-page.json) and match a
+#   factions.yaml slug/label exactly, verbatim capitalization included (e.g. "Kingdom Of
+#   Bretonnia" really is capitalized that way in both places).
+# - "Space Marines" is confirmed by the SAME live response's own
+#   renderingContent.facetOrdering.values."GameSystemsRoot.lvl3".order array (real chapter-level
+#   lvl3 values like "Warhammer 40,000 > Space Marines > Black Templars > Black Templars" all
+#   roll up to "Space Marines" once Unit-Type/chapter-name segments are skipped) -- live evidence
+#   from the same capture, just not from one of the 3 hits kept in the trimmed fixture file.
+# - "General" is `_raw_faction`'s own deterministic fallback (every segment skipped), exercised
+#   live by the fixture's own "Baby Dragons" hit (only lvl1 = ["The Old World > Armies of the Old
+#   World"], and "Armies of the Old World" is itself a skip term) -- not a guess, a real observed
+#   fallback value, and factions.yaml already has a matching "general" slug.
+# Deliberately NOT mapped without live evidence: Xenos race names (Aeldari, Necrons, Orks, ...),
+# and the Chaos Legion names (Death Guard, ...) -- the latter are in fact unreachable today anyway
+# per the factionSkipTerms limitation noted above ("Armies of Chaos" isn't skipped, so it wins
+# before "Death Guard" is ever reached).
+faction:
+  "Beastman Brayherds": beastman-brayherds
+  "Dwarfen Mountain Holds": dwarfen-mountain-holds
+  "Empire of Man": empire-of-man
+  "Warriors of Chaos": warriors-of-chaos
+  "Kingdom Of Bretonnia": kingdom-of-bretonnia
+  "High Elf Realms": high-elf-realms
+  "Orc and Goblin Tribes": orc-and-goblin-tribes
+  "Grand Cathay": grand-cathay
+  "Space Marines": space-marines
+  "General": general

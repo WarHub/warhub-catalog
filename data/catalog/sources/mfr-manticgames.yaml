@@ -1,0 +1,29 @@
+id: mfr-manticgames
+kind: manufacturer
+strategy: woo-store-api
+baseUrl: https://www.manticgames.com
+scope:
+  # Woo's Store API has no per-product vendor field at all (unlike Shopify) -- this whole store
+  # IS the manufacturer's own catalog, so the manufacturer is pinned here and resolved through
+  # Taxonomy.manufacturer_for_vendor (same mechanism shopify.py uses per-product, called once).
+  manufacturer: Mantic Games
+  # Confirmed live 2026-07-13 (curl.exe, bot UA): every sampled product's prices.currency_code
+  # was "GBP" (page 1, page 500, page 200, plus several category-filtered samples).
+  currency: gbp
+  # Detail-fetch the product's own permalink HTML and pull gtin/gtin13 out of its JSON-LD --
+  # confirmed live that most Mantic products have NO gtin (events, most miniatures kits), but at
+  # least some retail-distributed books do (e.g. "Kings of War FRACTURE (Hardback Edition)",
+  # gtin 9781911516675, the real fixture this strategy's tests assert against).
+  gtinFromJsonLd: true
+politeness:
+  rps: 0.5
+contract:
+  # Evidence-based floor (~85% of observed): live X-WP-Total header, 2026-07-13
+  # (GET /wp-json/wc/store/products?per_page=2&page=1) read exactly 2789 products store-wide.
+  # 2789 * 0.85 = 2370.65, floored to 2370. Contracts are drop detectors, not aspirations --
+  # controller policy, see task-8-report.md.
+  minCount: 2370
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.8

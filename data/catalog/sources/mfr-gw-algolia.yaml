@@ -1,0 +1,30 @@
+id: mfr-gw-algolia
+kind: manufacturer
+strategy: algolia
+baseUrl: https://www.warhammer.com
+scope:
+  # Games Workshop's Algolia hit payload has no per-product vendor/brand field at all -- same
+  # "this whole index IS the manufacturer's own catalog" situation as woo.py's Mantic/Para Bellum
+  # descriptors, so the manufacturer is pinned here and resolved through the same
+  # Taxonomy.manufacturer_for_vendor mechanism (called once per source run). "Games Workshop" is
+  # already a vendorName on taxonomy/manufacturers.yaml's games-workshop entry.
+  manufacturer: Games Workshop
+politeness:
+  # Algolia is a JSON search API, not a scraped storefront -- staying polite anyway per controller
+  # instruction rather than treating "it's an API" as license to hammer it.
+  rps: 0.5
+contract:
+  # Evidence-based floor: live query, 2026-07-13 (curl.exe POST, single request, hitsPerPage=5,
+  # filters=productType:miniatureKit, app m5ziqznq2h / index prod-lazarus-product-en-gb) read
+  # nbHits=2856 store-wide. 2856 * 0.85 = 2427.6, floored to 2427 -- below the spec's default 2500,
+  # so per controller policy ("honest floors": if nbHits * 0.85 < 2500, use floor(0.85 * nbHits)
+  # instead) minCount is set to the evidence-based 2427, not 2500. See task-9-report.md.
+  minCount: 2427
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    # All 3 real fixture hits parsed a valid sku from objectID's last dash-segment
+    # (e.g. "P-253194-99112799002" -> "99112799002", matching games-workshop's \d{11}
+    # codePattern exactly) -- kept at the spec's default 0.9 pending full-harvest evidence, since
+    # 3/3 is too small a sample to justify raising or lowering it.
+    sku: 0.9

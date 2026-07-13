@@ -1,0 +1,38 @@
+id: mfr-corvus-belli
+kind: manufacturer
+strategy: appsync
+baseUrl: https://store.corvusbelli.com
+scope:
+  # Corvus Belli's AppSync `listProducts` API has no per-product vendor/brand field (the whole
+  # store's catalog IS Corvus Belli's own products) -- pinned here and resolved the same
+  # Taxonomy.manufacturer_for_vendor way algolia.py/woo.py already use.
+  manufacturer: Corvus Belli
+politeness:
+  rps: 0.5
+contract:
+  # Evidence-based floor, live query 2026-07-13 (curl.exe POST, single polite request, UA
+  # warhub-catalog-bot/1.0, category {type: wargames, game: infinity}, page 1) --
+  # listProducts.total=283 for Infinity/wargames alone. 283 * 0.85 = 240.55, floored to 240.
+  #
+  # IMPORTANT scope note: this strategy sweeps ALL THREE Corvus Belli game systems the .NET tool
+  # actually drove (Infinity/wargames, Warcrow/wargames, Aristeia!/boardgames -- see
+  # ProductCatalogApp.cs's FetchCorvusBelliProducts + ManufacturerRegistry.cs's ["Corvus Belli"]
+  # entry, both read during this task), NOT just CorvusBelliProductSource's own
+  # FetchAllProductsAsync convenience default (Infinity only). Live evidence was captured for
+  # Infinity ONLY (a single polite request, per task policy) -- Warcrow and Aristeia! were NOT
+  # queried live, so their contribution to the real full-sweep count is unknown and NOT counted
+  # toward this floor. 240 is therefore a conservative LOWER bound (the real 3-system total can
+  # only be >= 283, never less). The legacy .NET tool's own historical figure of ~1,940 across all
+  # Corvus Belli game systems (referenced in Enrichment/ShopifyEanSource.cs's comments) is
+  # deliberately NOT used here: its provenance/scope (which categories, which point in time) is
+  # unverifiable today, and using it would be a guess, not evidence. Revisit with real
+  # full-harvest numbers at EXECUTE time. See task-10-report.md.
+  minCount: 240
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    # sku is the RAW `reference` string, unparsed (fix wave 1: truncating it to the 6-digit stem
+    # was an identity-join hazard -- see task-10-report.md). Raw reference was present on ALL 12
+    # live page-1 products, including the 4 "WHP-xxx" books, so 0.9 is a safe honest floor
+    # pending full-harvest evidence.
+    sku: 0.9

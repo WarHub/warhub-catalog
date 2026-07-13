@@ -1,0 +1,23 @@
+id: ret-radaddel
+kind: retailer
+strategy: sitemap-structured-data
+baseUrl: https://www.radaddel.de
+scope:
+  sitemaps:
+    - https://www.radaddel.de/sitemap_index.xml
+  # No urlInclude: live probe 2026-07-13 confirmed product slugs are pure name-based with no
+  # reliable brand/category token -- e.g. the real GW flagship "necrons-combat-patrol" slug
+  # contains no "warhammer"/"games-workshop"/"citadel" substring at all. A keyword filter here
+  # would silently drop real GW products, which budget+priority already bounds without it.
+  currency: eur
+politeness:
+  rps: 0.5
+contract:
+  # Pure EAN-enrichment source: partial coverage by design (12,806 sitemap URLs observed live
+  # 2026-07-13, budgeted per-run), so minCount stays 0 -- the drop/min-count contract makes no
+  # sense against a budgeted subset. requiredFieldRates.ean instead gates on the FETCHED set: if
+  # Radaddel's microdata markup drifts and extraction breaks, this must fail loudly rather than
+  # silently degrade. Controller decision, task-11-report.md.
+  minCount: 0
+  requiredFieldRates:
+    ean: 0.5

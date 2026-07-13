@@ -76,7 +76,17 @@ def join_observations(
 
     uf = _UnionFind()
     code_index: dict[tuple[str, str], str] = {}
-    ean_index: dict[str, str] = {}
+    # GS1 EANs are manufacturer-scoped, so joins are keyed by (manufacturer, ean): a
+    # validated EAN shared by two DIFFERENT manufacturers is bad data to surface, not a
+    # merge instruction -- ean_owners tracks the first manufacturer to claim each ean so a
+    # second, different manufacturer asserting it is reported instead of unioned.
+    ean_index: dict[tuple[str, str], str] = {}
+    ean_owners: dict[str, str] = {}
+    ean_conflicts: set[str] = set()
+    # ean_claims tracks EVERY observation key that asserted a given validated ean, regardless
+    # of manufacturer -- used to build cross-manufacturer-ean payloads with the complete set of
+    # disputing keys (not just the owner's anchor + the other manufacturers' keys).
+    ean_claims: dict[str, set[str]] = {}
     for observation in attributed:
         code = codes[observation.key]
         ean = eans[observation.key]
@@ -84,8 +94,18 @@ def join_observations(
             anchor = code_index.setdefault((observation.manufacturer, code), observation.key)
             uf.union(anchor, observation.key)
         if ean is not None:
-            anchor = ean_index.setdefault(ean, observation.key)
-            uf.union(anchor, observation.key)
+            ean_claims.setdefault(ean, set()).add(observation.key)
+            owner = ean_owners.setdefault(ean, observation.manufacturer)
+            if owner == observation.manufacturer:
+                anchor = ean_index.setdefault((observation.manufacturer, ean), observation.key)
+                uf.union(anchor, observation.key)
+            else:
+                ean_conflicts.add(ean)
+
+    for ean in sorted(ean_conflicts):
+        result.ambiguous.append(
+            {"type": "cross-manufacturer-ean", "ean": ean, "keys": sorted(ean_claims[ean])}
+        )
 
     # provisional entity id per group
     def group_entity_id(members: list[Observation]) -> str:

@@ -29,6 +29,10 @@ class DataPaths:
         return self.root / "catalog" / "sources"
 
     @property
+    def mappings(self) -> Path:
+        return self.root / "catalog" / "mappings"
+
+    @property
     def taxonomy(self) -> Path:
         return self.root / "catalog" / "taxonomy"
 
@@ -93,6 +97,13 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             taxonomy.normalize_code(m.manufacturer, m.sku) == entity.split("/", 1)[1] for m in members
         ) else None
         product = apply_overrides(resolve_attributes(entity, members, kinds, ean, code), overrides)
+        if product.gameSystem is None:
+            # the publisher throws on a null gameSystem -- park the entity out of the
+            # written catalog instead, surfaced via the review queue for mapping.
+            conflicts.append(
+                {"type": "unclassified-entity", "entity": entity, "names": [members[0].name]}
+            )
+            continue
         products.setdefault(product.manufacturer, []).append(product)
 
     conflicts.extend(find_shared_eans(ean_resolutions))

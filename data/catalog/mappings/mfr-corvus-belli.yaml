@@ -1,0 +1,74 @@
+# Ported from the retired .NET tool's CorvusBelliProductSource + ManufacturerRegistry
+# (git show 1593ee1^:tools/WarHub.ProductCatalog.Tool/Scraping/CorvusBelliProductSource.cs and
+# .../Configuration/ManufacturerRegistry.cs). appsync.py's `_apply_hints`/`_extract_faction` read
+# this file; see task-10-report.md for the full live-evidence trail.
+
+# gameSystem: the 3 game systems CorvusBelliProductSource.MapToRawProduct actually names
+# (Infinity, Warcrow, Aristeia!) -> taxonomy/game-systems.yaml slug. Fixed, not discovered live
+# (unlike algolia's facet-driven list) -- these are exactly the 3 (apiGame, apiType, gameSystem)
+# tuples ManufacturerRegistry.cs's ["Corvus Belli"] entry + ProductCatalogApp.cs's
+# FetchCorvusBelliProducts drove the .NET scraper with. appsync.py's GAME_SYSTEMS constant mirrors
+# the same 3 tuples (that's enumeration SCOPE, kept as code, not data) -- this file is only the
+# taxonomy-slug hint mapping.
+gameSystem:
+  Infinity: infinity
+  Warcrow: warcrow
+  Aristeia!: aristeia
+
+# factionCandidatesByGameSystem: ported VERBATIM (as data) from
+# CorvusBelliProductSource.ExtractFaction's hardcoded `factions` switch (per-gameSystem candidate
+# name arrays). Per the established "skip-list/candidate-list is DATA" convention (see
+# mfr-gw-algolia.yaml's factionSkipTerms), the candidate NAMES are data here; the matching *logic*
+# (scan `seo` entries in order, each against every candidate in list order, first hit wins; fall
+# back to scanning `name` the same way) lives in appsync.py's `_extract_faction`. Aristeia! is
+# deliberately absent from this map: the .NET source always returns null for it before ever
+# consulting a candidate list (`if (gameSystem == "Aristeia!") return null;`), so appsync.py never
+# calls `_extract_faction` at all when `game_system_name == "Aristeia!"`.
+factionCandidatesByGameSystem:
+  Infinity:
+    - PanOceania
+    - Yu Jing
+    - Ariadna
+    - Haqqislam
+    - Nomads
+    - Combined Army
+    - ALEPH
+    - Tohaa
+    - O-12
+    - NA2
+  Warcrow:
+    - Northern Tribes
+    - Hegemony of Embersig
+    - Ahlwardt Ice Bears
+    - Varank Nasai
+    - Scions of Yaldabaoth
+
+# faction: raw faction name (exactly as `_extract_faction` returns it -- one of the candidate
+# strings above, verbatim) -> taxonomy/factions.yaml slug. Only entries with a REAL taxonomy slug
+# are mapped (never guessed); a raw faction that IS extracted but has no entry here counts under
+# stats["unmapped_hints"] instead of being silently dropped or invented.
+#
+# 8 of the 10 Infinity candidates have a matching taxonomy/factions.yaml slug today (checked
+# 2026-07-13): PanOceania, Yu Jing, Ariadna, Haqqislam, Nomads, Combined Army, ALEPH, O-12.
+# "ALEPH" is additionally confirmed by DIRECT live evidence, not just a taxonomy-slug lookup: the
+# captured fixture's own "Steel Phalanx Action Pack" product has
+# `seo: ["ALEPH Steel Phalanx Sectorial Pack", "buy ALEPH Steel Phalanx Sectorial Pack"]`, which
+# `_extract_faction` matches to the "ALEPH" candidate (see
+# tests/fixtures/appsync/cb-infinity-page.json and task-10-report.md).
+#
+# Deliberately NOT mapped (no taxonomy/factions.yaml slug exists at all, as of 2026-07-13 -- a
+# taxonomy gap, never guessed around, not a live-evidence gap):
+#   - Tohaa, NA2 (Infinity candidates)
+#   - all 5 Warcrow candidates (Northern Tribes, Hegemony of Embersig, Ahlwardt Ice Bears, Varank
+#     Nasai, Scions of Yaldabaoth) -- Warcrow has NO faction slugs in taxonomy/factions.yaml today
+#     at all, so every Warcrow product's hints will only ever carry gameSystem, never faction,
+#     until factions.yaml adds them.
+faction:
+  PanOceania: panoceania
+  Yu Jing: yu-jing
+  Ariadna: ariadna
+  Haqqislam: haqqislam
+  Nomads: nomads
+  Combined Army: combined-army
+  ALEPH: aleph
+  O-12: o-12

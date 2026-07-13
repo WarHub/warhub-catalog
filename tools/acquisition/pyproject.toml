@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "WarHub catalog data acquisition and resolution pipeline"
 requires-python = ">=3.12"
 dependencies = [
+    "httpx>=0.27",
     "pydantic>=2.7",
     "pyyaml>=6.0",
 ]
@@ -23,3 +24,7 @@ packages = ["src/warhub_acquisition"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-m 'not live'"
+markers = [
+    "live: real network integration test (opt-in only, e.g. `pytest -m live`; excluded by default)",
+]

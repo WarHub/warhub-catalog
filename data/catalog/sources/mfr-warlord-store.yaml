@@ -1,0 +1,19 @@
+id: mfr-warlord-store
+kind: manufacturer
+strategy: shopify
+baseUrl: https://store.warlordgames.com
+scope:
+  currency: gbp
+politeness:
+  rps: 0.5
+budget:
+  pagesPerRun: 400
+contract:
+  # Evidence-based floor (~85% of observed): live probe 2026-07-13 found 4024 products with
+  # vendor "Warlord Games" exactly (4140 counting co-brand variants) out of 5842 store-wide.
+  # Contracts are drop detectors, not aspirations -- controller decision, task-6-report.md.
+  minCount: 3500
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.8

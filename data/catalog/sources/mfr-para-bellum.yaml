@@ -1,0 +1,27 @@
+id: mfr-para-bellum
+kind: manufacturer
+strategy: woo-store-api
+baseUrl: https://eshop.para-bellum.com
+scope:
+  # Same reasoning as mfr-manticgames.yaml: Woo's Store API has no per-product vendor field, so
+  # the manufacturer is pinned here rather than derived per-product.
+  manufacturer: Para Bellum
+  # DEVIATION from the plan's assumption: the plan/brief expected EUR. Verified live twice,
+  # independently, 2026-07-13 (curl.exe, bot UA) -- prices.currency_code was "USD" on every
+  # sampled product across two different pages (page 1: 2 products, page 50: 5 products, 7/7
+  # USD). Set from the live evidence, not the plan's assumption -- see task-8-report.md.
+  currency: usd
+  # No gtinFromJsonLd: this store's own product JSON-LD was not probed for gtin presence (out of
+  # this task's scope -- Para Bellum has no detail-fetch strategy at all, metadata-only refresh).
+politeness:
+  rps: 0.5
+contract:
+  # Evidence-based floor (~85% of observed): live X-WP-Total header, 2026-07-13
+  # (GET /wp-json/wc/store/products?per_page=2&page=1) read exactly 384 products store-wide
+  # (all under the single "conquest" category -- Para Bellum sells one game system).
+  # 384 * 0.85 = 326.4, floored to 326. Controller policy, see task-8-report.md.
+  minCount: 326
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.8

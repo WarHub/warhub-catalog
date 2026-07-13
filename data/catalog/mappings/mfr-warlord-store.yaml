@@ -1,0 +1,45 @@
+# gameSystem mapping ported from the retired .NET tool's WarlordGamesGameSystem method
+# (git show 1593ee1^:tools/WarHub.ProductCatalog.Tool/ProductCatalogApp.cs, ~line 876). That
+# method did substring Contains() matching against free-form product_type text; this repo's
+# mapping lookup is exact-match instead, so the keys below are the exact product_type strings
+# actually observed live on https://store.warlordgames.com/products.json (probed 2026-07-13,
+# curl.exe with bot UA, 24 paginated /products.json?limit=250 requests at ~0.5 rps, 5842
+# products, 84 distinct product_type values). Every raw key below is one of those live values
+# that matched a .NET case; every slug is verified present in
+# data/catalog/taxonomy/game-systems.yaml.
+#
+# Left unmapped, deliberately, health-reported via stats.unmapped_hints rather than guessed:
+# - product_type values with NO corresponding case in WarlordGamesGameSystem at all, even
+#   though some look plausibly game-system-shaped: "Napoleonic Wars 1789-1815", "Oathmark",
+#   "Slaine", "ABC Warriors".
+# - "Slaine" additionally has no taxonomy slug in game-systems.yaml even if it had been in the
+#   .NET switch, confirming it should stay unmapped either way.
+# - Every non-game-system product_type (Accessory, Paint, Terrain, Bases, Book, Dice, ...) --
+#   never had a case in the ported method.
+gameSystem:
+  Achtung Panzer: achtung-panzer
+  Beyond The Gates Of Antares: gates-of-antares
+  Black Powder: black-powder
+  Black Seas: black-seas
+  Blood Red Skies: blood-red-skies
+  Bolt Action: bolt-action
+  Cruel Seas: cruel-seas
+  Epic Black Powder: epic-black-powder
+  Epic Hail Caesar: epic-hail-caesar
+  Epic Pike & Shotte: epic-pike-and-shotte
+  Hail Caesar: hail-caesar
+  Judge Dredd: judge-dredd
+  Konflikt '47: konflikt-47
+  Pike & Shotte: pike-and-shotte
+  SPQR: spqr
+  Stargrave: stargrave
+  Victory At Sea: victory-at-sea
+  Warlords of Erehwon: warlords-of-erehwon
+# faction: left as an empty scaffold. The .NET tool's WarlordGamesFaction (the sibling method,
+# not covered by this task's "WarlordGamesGameSystem" porting instruction) does substring
+# Contains() matching of army names ("british", "german", ...) against free-form tags, which
+# cannot be ported into this repo's exact-match tag lookup without either missing most real tag
+# variants (british-8th-army, german-afrika-korps, ...) or enumerating dozens of tags by hand --
+# real risk of silently-wrong or incomplete data either way. Left unmapped rather than guessed;
+# flagged in task-6-report.md for controller review.
+faction: {}

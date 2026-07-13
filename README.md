@@ -77,26 +77,39 @@ tools/
   WarHub.ProductCatalog.Tool/    # scrapes vendor sites -> data/products YAML
   WarHub.PaintCatalog.Tool/      # parses paint lists, computes Delta-E -> data/paints YAML
   WarHub.Catalog.Publish/        # bundles data/ YAML -> dist/ JSON (the published catalog)
-  acquisition/                   # python: migrate/resolve/report (acquire arrives in Plan 3)
+  acquisition/                   # python: acquire/migrate/resolve/report
 data/
   evidence/                      # source of truth: per-source observations (evidence ledger)
   catalog/                       # source of truth: resolved canonical catalog (products/, taxonomy/)
   products/                      # legacy, retired by the evidence-ledger pipeline; removal tracked for Plan 5
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
+  catalog-acquire.yml            # nightly: harvest live sources -> evidence -> resolve -> sticky PR
   paint-catalog-update.yml       # weekly: regenerate paint data + equivalences (PR)
-  catalog-publish.yml            # on data change: bundle -> Release + Pages
+  catalog-publish.yml            # on catalog/paint data change: bundle -> Release + Pages
 ```
 
 ## Pipeline
 
 1. Product data flows through an **evidence ledger**: per-source observations under
    `data/evidence/` are resolved into the canonical catalog under `data/catalog/`
-   (`tools/acquisition`). The legacy `product-catalog-update.yml` / `product-catalog-enrich.yml`
-   generation workflows are being replaced by Plan 3's nightly acquisition workflow.
+   (`tools/acquisition`). **`catalog-acquire.yml`** runs nightly (04:00 UTC): a job matrix
+   harvests each live source group into `data/evidence/`, then an integrate job merges the
+   evidence, runs `resolve`/`report`/`report --ean-guard`, and opens or updates a sticky PR
+   (`catalog/acquisition`) with the combined health report, coverage table, and any
+   confirmed-EAN guard findings. It supersedes the legacy `product-catalog-update.yml` /
+   `product-catalog-enrich.yml` generation workflows. Deliberate deviation from the original
+   plan: there is no separate weekly deep-sweep workflow — the nightly run already does full
+   (cheap) enumeration plus budgeted detail fetches with persistent per-source cursors, which
+   converges to full coverage across nights; the weekly cadence returns in Plan 4 as the
+   archive-mining driver. Live-source strategies are covered by `pytest -m live` smoke tests
+   under `tools/acquisition/tests/` (opt-in real-network checks, excluded from the default
+   test run — see `test_live_smoke.py` / `test_live_smoke_woo.py`).
 2. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
-   then publishes it as a versioned Release **and** to GitHub Pages.
+   then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only
+   watches `data/catalog/**` and `data/paints/**`, so evidence-only or legacy-tree churn never
+   mints a release.
 
 ## Build locally
 

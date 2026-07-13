@@ -26,6 +26,15 @@
     </Content>
   </ItemGroup>
 
+  <!-- Cross-stack golden fixture (see tools/acquisition/tests/test_golden_fixture.py): the
+       literal output of the Python resolver, republished here through the real .NET pipeline. -->
+  <ItemGroup>
+    <Content Include="fixtures\canonical-golden\**\*.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>fixtures\canonical-golden\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
+
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
