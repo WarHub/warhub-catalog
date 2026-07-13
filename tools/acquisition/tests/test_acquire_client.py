@@ -146,3 +146,47 @@ def test_transport_error_retried_then_raises_fetch_error() -> None:
     with pytest.raises(FetchError) as excinfo:
         client.get_json("/unreachable")
     assert excinfo.value.status is None
+
+
+def test_non_retryable_4xx_raises_fetch_error_without_retry() -> None:
+    """A 404 is not a politeness/transient concern: it must surface as the single
+    FetchError contract immediately, with no retry and no leaked httpx exception."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(404, text="not found")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/missing")
+    assert excinfo.value.status == 404
+    assert excinfo.value.url.endswith("/missing")
+    assert len(calls) == 1  # no retry for a non-retryable 4xx
+
+
+def test_5xx_backoff_durations_follow_exponential_formula() -> None:
+    """The backoff delay per attempt is 2**attempt (no Retry-After header present)."""
+    attempts = {"n": 0}
+    sleeps: list[float] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        if attempts["n"] < 3:
+            return httpx.Response(503, text="unavailable")
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=0,  # disable pacing sleeps so only backoff sleeps are captured
+        transport=httpx.MockTransport(handler),
+        sleep=sleeps.append,
+    )
+    assert client.get_json("/flaky") == {"ok": True}
+    assert attempts["n"] == 3
+    assert sleeps == [1.0, 2.0]  # 2**0, 2**1 for the first two (failed) attempts

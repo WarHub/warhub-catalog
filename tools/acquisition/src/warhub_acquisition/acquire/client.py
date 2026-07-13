@@ -72,7 +72,12 @@ class PoliteClient:
                     continue
                 raise FetchError(url, last_status)
 
-            response.raise_for_status()
+            if response.status_code >= 400:
+                # Non-retryable 4xx (e.g. 404): not a politeness/transient concern,
+                # so surface it immediately via the same FetchError contract instead
+                # of leaking httpx.HTTPStatusError to callers.
+                raise FetchError(url, response.status_code)
+
             return response
 
         raise FetchError(url, last_status)  # unreachable safeguard
