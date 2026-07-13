@@ -91,14 +91,26 @@ sorted-slug order for determinism); 3) failing both, `stats["skipped_unknown_man
 observation for that page (mirrors shopify.py/woo.py's unknown-vendor skip -- the fetch itself
 still counts as "fetched" for cursor/full_sweep purposes; only the observation is dropped).
 
-**`full_sweep`**: `True` only when every URL passing the filter this run has a `fetched` cursor
-entry (i.e. has been successfully fetched at least once, ever). Given sitemap sizes observed live
+**`full_sweep`**: hard-coded `False`, always (final fix wave, item 2 -- this is a correctness fix,
+not a tightening of an edge case). An earlier revision computed `full_sweep` as `True` once every
+URL passing the filter had a `fetched` cursor entry (i.e. had been successfully fetched at least
+once, ever) and called that "practically always False" given sitemap sizes observed live
 (Radaddel: 12,806 URLs; Game Nerdz: ~145,000 URLs across 27 product-sitemap pages) against any
-sane per-run budget, this is "practically always False" per the task brief -- which is exactly the
-point: `run_source` only calls `EvidenceStore.mark_missed` when `full_sweep` is True, so these
-sources can never drive another source's product into a `missStreak` (a retailer simply never
-having enumerated a given product yet, or not having refetched it recently, must never be confused
-with "this product is discontinued").
+sane per-run budget. That reasoning was wrong past the coverage horizon: given enough nights,
+budget rotation eventually DOES fetch every filtered URL at least once, at which point the old
+condition flips to `True` -- e.g. around night 4 for Radaddel at its observed per-run pace. When
+that happens, `run_source` treats
+`full_sweep=True` as "this run's observations are the full population of this source" and calls
+`EvidenceStore.mark_missed` on everything not re-observed -- but a retailer sitemap enumerating a
+product at some point in the past, and this run's budget-limited slice simply not re-touching it
+today, is NOT the same claim as "this retailer no longer carries it." Retailer absence is not
+manufacturer discontinuation, and even "this retailer's own sitemap doesn't currently list a page
+it once listed" is a weak, budget-confounded signal that must never inflate `missStreak` on
+out-of-slice records (which, at `resolve`'s missStreak-threshold-3 default, silently flips
+retailer-only entities to `suspected-discontinued`). So `full_sweep` is `False` here always, by
+design, regardless of the `fetched` map's coverage of the filtered URL set: `run_source` only
+calls `mark_missed` when `full_sweep` is `True`, so this source can never drive another source's
+product into a `missStreak` at all.
 """
 import gzip
 import json
@@ -403,7 +415,11 @@ def sitemap_sd_strategy(
     new_fetched: dict[str, str] = {path: date for path, date in old_fetched.items() if path in by_path}
 
     never = sorted(path for path in by_path if path not in new_fetched)
-    stale = sorted((path for path in by_path if path in new_fetched), key=lambda p: new_fetched[p])
+    # Secondary sort key `p` breaks ties deterministically when multiple paths share the same
+    # fetched-date: `by_path` (the iteration source) is built from a set comprehension, so its
+    # order is hash-randomized -- without a tie-break, same-date entries would land in a
+    # nondeterministic order in the queue (and thus a nondeterministic cursor on the next save).
+    stale = sorted((path for path in by_path if path in new_fetched), key=lambda p: (new_fetched[p], p))
     queue = never + stale
 
     budget = context.budget
@@ -450,7 +466,11 @@ def sitemap_sd_strategy(
             )
         )
 
-    full_sweep = set(by_path) <= set(new_fetched)
+    # Always False, by design -- see module docstring's "full_sweep" section (final fix wave,
+    # item 2): retailer absence from a budget-limited sitemap slice must never be treated as "this
+    # run observed the full population," which would let run_source's mark_missed inflate
+    # missStreak on records this source simply hasn't gotten around to re-fetching yet.
+    full_sweep = False
 
     return StrategyResult(
         observations=observations,

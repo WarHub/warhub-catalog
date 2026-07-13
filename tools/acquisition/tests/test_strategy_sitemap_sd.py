@@ -333,10 +333,11 @@ def test_radaddel_sweep_extracts_real_ean_via_microdata() -> None:
     assert necrons.url == f"{RADADDEL_BASE}/necrons-combat-patrol"
     assert necrons.extractor == "sitemap-structured-data@1"
 
-    # this run fetched every filtered URL at least once, but full_sweep must still reflect that
-    # honestly (see also the dedicated full_sweep tests below for the "practically always False"
-    # case against a real-sized catalog)
-    assert result.full_sweep is True
+    # full_sweep is hard-coded False for this strategy always (final fix wave, item 2), even
+    # though this particular tiny fixture happens to fetch every filtered URL: retailer sitemap
+    # coverage is never a claim about the full population (see the dedicated full_sweep tests
+    # below and the module docstring's "full_sweep" section).
+    assert result.full_sweep is False
     assert set(result.cursor["fetched"]) == {
         "/necrons-combat-patrol",
         "/game-color-ink-111-yellow",
@@ -442,6 +443,30 @@ def test_oldest_fetched_bucket_is_prioritized_over_never_fetched_on_second_run()
     assert fetched_paths == {"/game-color-ink-111-yellow", "/necrons-combat-patrol"}
 
 
+def test_stale_bucket_tie_break_is_path_sorted_when_dates_are_equal() -> None:
+    """Regression (final fix wave, item 1): `stale`'s sort key must break same-date ties on the
+    path itself -- without it, ties rode on `by_path`'s set-comprehension iteration order (hash-
+    randomized per process), so the fetch order (and thus the resulting cursor's tie order) was
+    nondeterministic across runs even for identical inputs."""
+    same_date = "2026-07-01"
+    old_cursor = {
+        "fetched": {
+            "/necrons-combat-patrol": same_date,
+            "/game-color-ink-111-yellow": same_date,
+            "/game-color-ink-115-blue": same_date,
+            "/game-color-ink-117-green": same_date,
+            "/game-color-ink-118-black-green": same_date,
+        }
+    }
+    calls: list[str] = []
+    client = PoliteClient(RADADDEL_BASE, transport=radaddel_transport(calls), sleep=lambda s: None)
+    result = sitemap_sd_strategy(radaddel_descriptor(), client, old_cursor, context(gw_taxonomy(), budget=1))
+
+    fetched_paths = [c.split(RADADDEL_BASE)[-1] for c in calls if "sitemap" not in c]
+    # all 5 paths tie on date -- the alphabetically-first path must be the one fetched.
+    assert fetched_paths == ["/game-color-ink-111-yellow"]
+
+
 def test_cursor_prunes_paths_no_longer_in_the_filtered_sitemap() -> None:
     old_cursor = {"fetched": {"/some-delisted-product": "2020-01-01", "/necrons-combat-patrol": "2020-01-01"}}
     client = PoliteClient(RADADDEL_BASE, transport=radaddel_transport(), sleep=lambda s: None)
@@ -456,10 +481,14 @@ def test_full_sweep_is_false_while_any_filtered_url_has_never_been_fetched() -> 
     assert result.full_sweep is False
 
 
-def test_full_sweep_is_true_only_once_every_filtered_url_has_been_fetched_at_least_once() -> None:
+def test_full_sweep_is_always_false_even_when_every_filtered_url_has_been_fetched() -> None:
+    """Regression (final fix wave, item 2): full_sweep must be hard-coded False for this strategy,
+    even for an unbudgeted run that happens to fetch every filtered URL -- retailer sitemap
+    coverage is never a claim about the manufacturer's full population, and run_source's
+    mark_missed must never be invoked off this source's observations. See module docstring."""
     client = PoliteClient(RADADDEL_BASE, transport=radaddel_transport(), sleep=lambda s: None)
     result = sitemap_sd_strategy(radaddel_descriptor(), client, {}, context(gw_taxonomy(), budget=None))
-    assert result.full_sweep is True
+    assert result.full_sweep is False
 
 
 # --- Full strategy: Game Nerdz (sitemap-index -> multiple children, urlInclude filter, BCData) --
