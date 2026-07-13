@@ -2,10 +2,4 @@
 
 | source | status | full sweep | observations | marked missed | stats |
 |---|---|---|---|---|---|
-| mfr-manticgames | ok | False | 2789 | 0 | detail_fetch_errors=0, details_fetched=0, fetched_pages=29, gtins_found=0, products_seen=2789, reported_total=2789, skipped_unknown_vendor=0, unmapped_hints=4600 |
-| mfr-para-bellum | ok | True | 384 | 0 | detail_fetch_errors=0, details_fetched=0, fetched_pages=5, gtins_found=0, products_seen=384, reported_total=384, skipped_unknown_vendor=0, unmapped_hints=88 |
-
-## Unmapped hints
-
-- mfr-manticgames: 4600
-- mfr-para-bellum: 88
+| ret-gamenerdz | ok | False | 4229 | 0 | ean_source_bcdata=4181, ean_source_jsonld=1, ean_source_microdata=0, eans_found=4182, extraction_failed=30, fetch_errors=6, fetched_sitemaps=33, pages_fetched=5455, sitemap_urls_filtered=5455, sitemap_urls_total=260259, skipped_unknown_manufacturer=1190 |
