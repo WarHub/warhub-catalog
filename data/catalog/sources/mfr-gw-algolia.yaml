@@ -13,6 +13,14 @@ politeness:
   # Algolia is a JSON search API, not a scraped storefront -- staying polite anyway per controller
   # instruction rather than treating "it's an API" as license to hammer it.
   rps: 0.5
+  # Robots preflight (Task 4b, 2026-07-13): baseUrl (www.warhammer.com, the marketing site) is NOT
+  # the actual fetch target -- algolia.py's SEARCH_URL is a hardcoded absolute URL on Algolia's own
+  # host (https://m5ziqznq2h-dsn.algolia.net/...), entirely unrelated to warhammer.com. Checking
+  # warhammer.com's robots.txt would say nothing about whether we're allowed to query Algolia's
+  # index. Verified live 2026-07-13: m5ziqznq2h-dsn.algolia.net/robots.txt -> 404 (via its own
+  # internal redirect to https://algolia.net/1/404) -- no restrictions published on the real fetch
+  # target either way, so this is a true no-op today, not a loophole.
+  ignoreRobots: true
 contract:
   # Evidence-based floor: live query, 2026-07-13 (curl.exe POST, single request, hitsPerPage=5,
   # filters=productType:miniatureKit, app m5ziqznq2h / index prod-lazarus-product-en-gb) read

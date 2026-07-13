@@ -277,6 +277,18 @@ def _capture_client_strategy(captured: dict) -> object:
     return strategy
 
 
+def _permissive_robots_transport() -> httpx.MockTransport:
+    """404 on /robots.txt (permissive -- "no restrictions published", see robots.py) so tests
+    about unrelated run_source behavior (timeouts, here) don't have to think about robots.txt."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return httpx.Response(404)
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    return httpx.MockTransport(handler)
+
+
 def test_runner_passes_politeness_timeout_seconds_to_client(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -293,7 +305,7 @@ def test_runner_passes_politeness_timeout_seconds_to_client(
         politeness={"rps": 1.0, "timeoutSeconds": 60},
     )
 
-    run_source(desc, DataPaths(tmp_path), context(tmp_path))
+    run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=_permissive_robots_transport())
 
     assert captured["client"]._client.timeout == httpx.Timeout(60.0)
 
@@ -307,6 +319,6 @@ def test_runner_default_timeout_is_30_seconds_when_unspecified(
         id="toy-timeout", kind="manufacturer", strategy="toy-timeout", baseUrl="https://example.test"
     )
 
-    run_source(desc, DataPaths(tmp_path), context(tmp_path))
+    run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=_permissive_robots_transport())
 
     assert captured["client"]._client.timeout == httpx.Timeout(30.0)

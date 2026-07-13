@@ -280,6 +280,10 @@ def test_garbled_shownumpages_via_full_strategy_run_does_not_poison_cursor(tmp_p
     `cdx_num_pages=0` and silently suppress enumeration for `reEnumerateAfterDays`."""
 
     def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            # Permissive (no robots.txt published) -- keeps this test focused on the garbled
+            # showNumPages body, not the robots preflight (see tests/test_robots.py for that).
+            return httpx.Response(404)
         if request.url.path == "/cdx/search/cdx" and request.url.params.get("showNumPages") == "true":
             return httpx.Response(200, text="<html>oops")
         raise AssertionError(f"unexpected request: {request.url}")
