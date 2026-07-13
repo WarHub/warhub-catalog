@@ -37,9 +37,13 @@ here at all).
 **Enumeration is a two-phase, per-game-system facet sweep.** Found the hard way: a live harvest of
 the original single unfiltered sweep returned EXACTLY 1000 observations against nbHits 2856 --
 Algolia's default `paginationLimitedTo` setting caps `page * hitsPerPage` at 1000 for plain
-pagination. The .NET tool avoided the cap the same way this port now does:
+pagination. The .NET tool avoided the cap with per-game-system sweeps driven by a static hardcoded
+list (`ManufacturerRegistry.cs`); its `GetGameSystemCountsAsync` facet query existed but was never
+called. This port keeps the per-system sweep (phase 2, faithful) and replaces the static list with
+live facet discovery (phase 1, deliberate improvement): self-updating, and it reads Algolia's raw
+facet values directly instead of round-tripping display names through `MapGameSystem`.
 
-1. **Facet discovery** (port of `GetGameSystemCountsAsync`): one query with `hitsPerPage=0` and
+1. **Facet discovery** (adapted from the unused `GetGameSystemCountsAsync`): one query with `hitsPerPage=0` and
    `facets=["GameSystemsRoot.lvl0"]` (same `filters`) returns the complete set of game-system
    facet values plus the store-wide `nbHits` (recorded as `stats["reported_nbhits"]`). A response
    with no usable facets produces an EMPTY result with `stats["missing_game_system_facets"]=1`
@@ -48,8 +52,8 @@ pagination. The .NET tool avoided the cap the same way this port now does:
 2. **Per-game-system paginated sweeps** (port of `BuildQuery`'s `FacetFilters`): for each facet
    value in SORTED order (determinism), paginate with
    `facetFilters=[["GameSystemsRoot.lvl0:<gs>"]]` added to the same query; each slice terminates
-   on an empty hits page or `page >= nbPages`, exactly like the .NET per-system loop. Each slice
-   stays under the 1000 cap. Hits are deduplicated across slices by objectID (first slice wins;
+   on an empty hits page or `page >= nbPages`, exactly like the .NET per-system loop (that part IS
+   the faithful port). Each slice stays under the 1000 cap. Hits are deduplicated across slices by objectID (first slice wins;
    `stats["cross_slice_duplicates"]` counts the rest -- a product CAN legitimately carry multiple
    lvl0 values, e.g. a starter set listed under two game lines). If any single slice's own nbHits
    exceeds 1000, `stats["slices_over_pagination_cap"]` counts it: single-level slicing is the
