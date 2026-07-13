@@ -37,6 +37,22 @@ class EvidenceStore:
             )
         observations[fresh.key] = fresh
 
+    def mark_missed(self, source_id: str, seen_keys: set[str]) -> int:
+        """Increment missStreak on existing records not observed by a full contract-passing sweep.
+
+        Only unseen records are touched; seen keys keep whatever missStreak their fresh
+        observation carried (upsert already resets it to 0). Never called for partial/budgeted
+        runs -- absence from a partial sweep says nothing about a product's liveness.
+        """
+        observations = self.load(source_id)
+        missed = 0
+        for key in sorted(observations):
+            if key not in seen_keys:
+                observation = observations[key]
+                observations[key] = observation.model_copy(update={"missStreak": observation.missStreak + 1})
+                missed += 1
+        return missed
+
     def save(self, source_id: str) -> None:
         observations = self.load(source_id)
         lines = [
