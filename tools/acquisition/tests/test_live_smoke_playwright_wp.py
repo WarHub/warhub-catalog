@@ -21,21 +21,29 @@ picking up its line's name) is already covered offline/deterministically by
 `test_strategy_playwright_wp.py`'s real fixtures. Uses a tmp_path evidence dir so nothing here
 touches the repo's real evidence/cursor state.
 
-**BLOCKED, confirmed live 2026-07-13 (see task-10-report.md for full evidence/methodology).**
-Vanilla `playwright.chromium.launch(headless=True)` + `page.goto(...)` against
-`wp-sitemap-posts-products-line-1.xml` returns Cloudflare's "Just a moment..." managed-challenge
-interstitial (a normal 200 HTML response, title "Just a moment...", zero `<loc>` tags) on 3/3
-independent attempts; a same-origin `fetch()` issued from within an already-navigated page context
-also comes back 403 with the same interstitial body, and no `cf_clearance` (or any) cookie is ever
-set. Per the task brief's explicit instruction, this is NOT escalated with stealth plugins or
-fingerprint spoofing (that crosses the politeness line) -- this test is therefore `xfail`
-(non-strict: an unexpected pass is reported, not a hard failure, so a future Cloudflare policy
-change or Playwright/Chromium fingerprint update surfaces here automatically without needing anyone
-to remember to check).
+**UNBLOCKED as of plan-5 task-5 (2026-07-13).** History: with `headless=True`, vanilla
+`playwright.chromium.launch()` + `page.goto(...)` against `wp-sitemap-posts-products-line-1.xml`
+returned Cloudflare's "Just a moment..." managed-challenge interstitial (a normal 200 HTML response,
+title "Just a moment...", zero `<loc>` tags) on 3/3 independent attempts, with no `cf_clearance` (or
+any) cookie ever set -- so this test was `xfail`ed as BLOCKED (task-10-report.md). A **headed**
+browser clears that same challenge outright: live 2026-07-13, `headless=False` + `page.goto` on the
+product sitemap returned `status=200`, `cf-cache-status: BYPASS`, and the real 37,770-byte sitemap
+body with no interstitial at all. `mfr-cmon.yaml` therefore now carries `scope.headless: false`
+(the knob defaults True everywhere else, so CI stays headless), and the full 320-product EXECUTE run
+came back clean: 320/320 pages fetched, 0 fetch_errors, 0 extraction_failed_name. The `xfail` is
+consequently REMOVED -- this test is expected to pass on the live path now.
+
+(Two Cloudflare-adjacent traps this test would NOT have caught on its own, both fixed in
+`_playwright_browser.py`: `page.content()` returns an EMPTY string for an `application/xml` response
+because Chromium renders XML through its tree-viewer widget rather than as a plain-text DOM -- which
+enumerated zero products and looked *exactly* like a Cloudflare block from the caller's side, right
+down to tripping `minCount=272` with `actual=0`. The fetcher now uses `response.text()`, the raw
+buffered HTTP body, which is correct for both XML and HTML. Politeness line still held throughout:
+no stealth plugins, no fingerprint spoofing, no UA impersonation -- just a visible window.)
 """
 from pathlib import Path
 
-import pytest
+import pytest  # noqa: F401  (kept: `pytest.mark.live` below + `pytest.skip` in the test body)
 
 from warhub_acquisition.acquire.runner import AcquireContext, load_mappings, run_source
 from warhub_acquisition.evidence.store import EvidenceStore
@@ -47,15 +55,6 @@ REPO_DATA = Path(__file__).resolve().parents[3] / "data"
 
 
 @pytest.mark.live
-@pytest.mark.xfail(
-    reason=(
-        "BLOCKED (task-10-report.md, confirmed live 2026-07-13): CMON's Cloudflare managed "
-        "challenge blocks vanilla headless Chromium -- 3/3 independent attempts got the "
-        "'Just a moment...' interstitial, no cf_clearance cookie ever set. Not escalated with "
-        "stealth plugins per the task brief's politeness line."
-    ),
-    strict=False,
-)
 def test_live_cmon_small_sweep_passes_cloudflare_and_extracts_real_products(tmp_path: Path) -> None:
     if not REPO_DATA.exists():
         pytest.skip("no repo data directory found (package built/tested outside the monorepo)")

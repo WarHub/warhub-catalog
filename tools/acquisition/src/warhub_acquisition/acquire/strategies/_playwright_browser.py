@@ -11,6 +11,30 @@ not a prompt to escalate). One browser + one page is launched and reused across 
 strategy run (sitemaps, line pages, product pages alike) -- Cloudflare's JS challenge is passed once
 per browsing context, not per navigation, so reusing the same page carries the challenge's clearance
 cookies across all ~346 fetches instead of re-solving it every time.
+
+**`headless` knob** (plan-5 task-5 recon): headless Chromium is blocked 3/3 by CMON's Cloudflare
+managed challenge (see `playwright_wp.py`'s module docstring / `test_live_smoke_playwright_wp.py`),
+but a HEADED browser was confirmed live to clear it -- live evidence 2026-07-13: a headed
+`page.goto` against the product sitemap came back `status=200`, `cf-cache-status: BYPASS`, real
+37,770-byte sitemap body, no interstitial at all (no re-challenge, no `cf_clearance` cookie dance
+needed). `headless` therefore defaults to `True` here (so CI / every other caller of this module
+stays headless-by-default) and is threaded through from `playwright_wp_strategy`, which reads
+`descriptor.scope["headless"]` (also defaulting `True`) -- `data/catalog/sources/mfr-cmon.yaml` is
+the one descriptor that sets `scope.headless: false`.
+
+**`response.text()`, not `page.content()`** (live bug found running the headed EXECUTE, 2026-07-13):
+`page.content()` serializes the CURRENT DOM (`document.documentElement.outerHTML`), and Chromium
+renders an `application/xml`-typed response (CMON's sitemaps) through its internal XML tree-viewer
+widget rather than as a plain-text DOM -- `page.content()` on that came back an EMPTY string live
+(confirmed: `status=200`, `resp.body()` had the real 37,770-byte sitemap, but `page.content()` was
+`len()==0`), which silently enumerated zero products and tripped the descriptor's `minCount=272`
+contract with `actual=0` -- indistinguishable from a real Cloudflare block from the caller's side.
+`response.text()` (the raw HTTP response body Playwright already buffered for the main-frame
+navigation, decoded per its charset) sidesteps DOM serialization entirely and was confirmed live to
+return correct content for BOTH the XML sitemaps (37,770 bytes, matching `resp.body()` exactly) and
+ordinary HTML product pages (74,948 bytes; `page.content()`'s 76,311 differed only by Chromium's own
+whitespace/DOCTYPE reformatting, not missing content) -- so this is a strict, mimetype-agnostic
+improvement, not a headed-only workaround.
 """
 from contextlib import contextmanager
 from typing import Iterator
@@ -21,20 +45,22 @@ _NAV_TIMEOUT_MS = 30_000
 
 
 @contextmanager
-def launch_page_fetcher() -> Iterator["PageFetcher"]:  # noqa: F821 (PageFetcher is a Callable alias, not importable here)
+def launch_page_fetcher(headless: bool = True) -> Iterator["PageFetcher"]:  # noqa: F821 (PageFetcher is a Callable alias, not importable here)
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=headless)
         try:
             page = browser.new_page()
 
             def fetch(url: str) -> str:
                 try:
-                    page.goto(url, wait_until="domcontentloaded", timeout=_NAV_TIMEOUT_MS)
+                    response = page.goto(url, wait_until="domcontentloaded", timeout=_NAV_TIMEOUT_MS)
                 except Exception as exc:  # noqa: BLE001 -- any Playwright navigation failure -> FetchError
                     raise FetchError(url, None) from exc
-                return page.content()
+                if response is None:
+                    raise FetchError(url, None)
+                return response.text()
 
             yield fetch
         finally:

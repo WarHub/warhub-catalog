@@ -83,6 +83,14 @@ product page) at `descriptor.politeness["rps"]` (default 0.5, same as every othe
 is an injected `Callable[[float], None]` (default `time.sleep`) purely so tests can assert pacing
 calls without a real wall-clock delay -- same seam shape as `PoliteClient`'s own `sleep` parameter.
 
+**`scope.headless`** (plan-5 task-5): defaults `True`. When `fetcher` is not injected (the real
+run path), this value is read from `descriptor.scope` and forwarded to
+`_playwright_browser.launch_page_fetcher(headless=...)`. Headless Chromium is blocked 3/3 live by
+CMON's Cloudflare managed challenge (`test_live_smoke_playwright_wp.py`'s xfail); a headed browser
+was confirmed live to clear it, so `mfr-cmon.yaml` is the one descriptor setting
+`scope.headless: false`. Every other descriptor (and every test in this module, which always
+injects `fetcher=`) is unaffected.
+
 **No budget concept.** Unlike every budgeted strategy in this package (woo.py's detail queue,
 sitemap_sd.py's page-fetch queue), `context.budget` is never consulted here: CMON's entire
 population is 320 products + 24 lines, cheap enough (~11-12 minutes at rps 0.5) that every run
@@ -207,7 +215,11 @@ def playwright_wp_strategy(
         # strategy actually runs for real -- see module docstring.
         from warhub_acquisition.acquire.strategies._playwright_browser import launch_page_fetcher
 
-        with launch_page_fetcher() as real_fetcher:
+        # `scope.headless` (plan-5 task-5): defaults True so every other caller/CI stays headless;
+        # `data/catalog/sources/mfr-cmon.yaml` sets it False -- headless Chromium is blocked 3/3 by
+        # CMON's Cloudflare managed challenge, a headed browser was confirmed live to clear it.
+        headless = bool(descriptor.scope.get("headless", True))
+        with launch_page_fetcher(headless=headless) as real_fetcher:
             return _run(descriptor, context, real_fetcher, sleep)
     return _run(descriptor, context, fetcher, sleep)
 

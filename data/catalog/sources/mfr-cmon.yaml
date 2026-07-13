@@ -8,6 +8,12 @@ scope:
   # manufacturer. Resolved through Taxonomy.manufacturer_for_vendor against
   # taxonomy/manufacturers.yaml's cmon entry (vendorNames: [CMON, Cool Mini or Not]).
   manufacturer: CMON
+  # Cloudflare evidence (task-10-report.md, confirmed live 2026-07-13): vanilla headless Chromium
+  # got the "Just a moment..." managed-challenge interstitial 3/3 independent attempts, no
+  # cf_clearance cookie ever set. Plan-5 task-5 recon confirmed a HEADED browser clears the same
+  # challenge live. `headless` defaults True in `_playwright_browser.py`/`playwright_wp.py` for
+  # every other caller/CI -- this is the one descriptor overriding it.
+  headless: false
 politeness:
   rps: 0.5
 contract:

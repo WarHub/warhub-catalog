@@ -11,6 +11,7 @@ is exactly as served, only unrelated surrounding markup (nav, footer, prose, coo
 trimmed.
 """
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
 
@@ -451,6 +452,55 @@ def test_lazy_import_is_only_attempted_when_no_fetcher_is_injected(monkeypatch) 
     monkeypatch.setitem(sys.modules, "playwright", None)
     with pytest.raises(ImportError):
         playwright_wp_strategy(cmon_descriptor(), real_client(), {}, context(cmon_taxonomy()))
+
+
+# --- `scope.headless` knob: reaches the (mocked) browser launcher, no real browser launched ----
+
+
+def _fake_launcher(captured: dict) -> Callable[..., object]:
+    @contextmanager
+    def fake_launch_page_fetcher(headless: bool = True):
+        captured["headless"] = headless
+        yield fake_fetcher()
+
+    return fake_launch_page_fetcher
+
+
+def test_headless_defaults_to_true_when_scope_omits_it(monkeypatch) -> None:
+    captured: dict = {}
+    monkeypatch.setattr(
+        "warhub_acquisition.acquire.strategies._playwright_browser.launch_page_fetcher",
+        _fake_launcher(captured),
+    )
+    result = playwright_wp_strategy(
+        cmon_descriptor(), real_client(), {}, context(cmon_taxonomy()), sleep=lambda s: None
+    )
+    assert captured["headless"] is True
+    assert result.stats["product_urls_total"] == 5  # sanity: the mocked launcher's fetcher ran
+
+
+def test_headless_false_in_scope_reaches_the_browser_launcher(monkeypatch) -> None:
+    captured: dict = {}
+    monkeypatch.setattr(
+        "warhub_acquisition.acquire.strategies._playwright_browser.launch_page_fetcher",
+        _fake_launcher(captured),
+    )
+    playwright_wp_strategy(
+        cmon_descriptor(headless=False), real_client(), {}, context(cmon_taxonomy()), sleep=lambda s: None
+    )
+    assert captured["headless"] is False
+
+
+def test_headless_true_explicit_in_scope_still_reaches_the_browser_launcher(monkeypatch) -> None:
+    captured: dict = {}
+    monkeypatch.setattr(
+        "warhub_acquisition.acquire.strategies._playwright_browser.launch_page_fetcher",
+        _fake_launcher(captured),
+    )
+    playwright_wp_strategy(
+        cmon_descriptor(headless=True), real_client(), {}, context(cmon_taxonomy()), sleep=lambda s: None
+    )
+    assert captured["headless"] is True
 
 
 def test_module_import_itself_never_touches_playwright(monkeypatch) -> None:
