@@ -32,8 +32,13 @@ name: Nightly Acquisition
 #
 # Weekly deep-sweep mode: the Saturday-02:00-UTC schedule (or workflow_dispatch mode=weekly) adds
 # groups E and F above and raises group D's budget to 2500 (converges its ~14k-URL backlog in
-# ~3 weeks). Nightly runs (the daily 04:00 UTC schedule, or workflow_dispatch mode=nightly/unset)
-# never include E or F. This is mode-gated within the SAME workflow/matrix rather than a separate
+# ~3 weeks). Nightly runs (the Sun-Fri 04:00 UTC schedule, or workflow_dispatch mode=nightly/unset)
+# never include E or F. The nightly cron deliberately EXCLUDES Saturday: weekly mode already runs
+# every nightly group PLUS E/F, so a Saturday nightly run at 04:00 (2h after the 02:00 weekly run
+# starts) would gain nothing -- and integrate's create-pull-request step force-resets
+# catalog/acquisition from main + its own artifacts, so a same-day nightly run would silently
+# destroy that Saturday's archive/barcode-db evidence before the weekly PR could ever be reviewed
+# or merged. This is mode-gated within the SAME workflow/matrix rather than a separate
 # workflow file: GitHub Actions matrices can't be conditionally composed at the strategy level, so
 # every group is always listed in `strategy.matrix.include`, and weekly-only groups instead get
 # `run_sources` forced empty (same "ran=false" skip path already used for an empty dispatch
@@ -43,7 +48,10 @@ name: Nightly Acquisition
 
 on:
   schedule:
-    - cron: '0 4 * * *'
+    # Sun-Fri only (day-of-week 0-5) -- Saturday is covered exclusively by the weekly schedule
+    # below; see the roster comment above for why a same-day nightly run would destroy the
+    # weekly run's evidence.
+    - cron: '0 4 * * 0-5'
     - cron: '0 2 * * 6'
   workflow_dispatch:
     inputs:

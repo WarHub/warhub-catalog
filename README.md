@@ -94,8 +94,10 @@ data/
 
 1. Product data flows through an **evidence ledger**: per-source observations under
    `data/evidence/` are resolved into the canonical catalog under `data/catalog/`
-   (`tools/acquisition`). **`catalog-acquire.yml`** runs nightly (04:00 UTC) and does a
-   **weekly deep sweep** (Saturdays, 02:00 UTC, or `workflow_dispatch` with `mode: weekly`): a
+   (`tools/acquisition`). **`catalog-acquire.yml`** runs nightly (04:00 UTC, Sun-Fri -- Saturday
+   is deliberately skipped so the nightly run never clobbers that day's weekly-sweep evidence)
+   and does a **weekly deep sweep** (Saturdays, 02:00 UTC, or `workflow_dispatch` with
+   `mode: weekly`): a
    job matrix harvests each live source group into `data/evidence/`, then an integrate job
    merges the evidence, runs `resolve`/`report`/`report --ean-guard`, and opens or updates a
    sticky PR (`catalog/acquisition`) with the combined health report, coverage table, and any
