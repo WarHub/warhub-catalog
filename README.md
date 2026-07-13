@@ -77,8 +77,11 @@ tools/
   WarHub.ProductCatalog.Tool/    # scrapes vendor sites -> data/products YAML
   WarHub.PaintCatalog.Tool/      # parses paint lists, computes Delta-E -> data/paints YAML
   WarHub.Catalog.Publish/        # bundles data/ YAML -> dist/ JSON (the published catalog)
+  acquisition/                   # python: migrate/resolve/report (acquire arrives in Plan 3)
 data/
-  products/                      # source of truth: manufacturers/**/*.yaml, overrides.yaml
+  evidence/                      # source of truth: per-source observations (evidence ledger)
+  catalog/                       # source of truth: resolved canonical catalog (products/, taxonomy/)
+  products/                      # legacy, retired by the evidence-ledger pipeline; removal tracked for Plan 5
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
   product-catalog-update.yml     # weekly: refresh product data (PR)
@@ -89,9 +92,13 @@ data/
 
 ## Pipeline
 
-1. Scheduled **generation** workflows refresh the YAML under `data/` and open PRs.
-2. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher to build the
-   `dist/` JSON tree, then publishes it as a versioned Release **and** to GitHub Pages.
+1. Product data flows through an **evidence ledger**: per-source observations under
+   `data/evidence/` are resolved into the canonical catalog under `data/catalog/`
+   (`tools/acquisition`). The legacy `product-catalog-update.yml` / `product-catalog-enrich.yml`
+   generation workflows are being replaced by Plan 3's nightly acquisition workflow.
+2. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
+   `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
+   then publishes it as a versioned Release **and** to GitHub Pages.
 
 ## Build locally
 
@@ -103,6 +110,8 @@ dotnet test WarHub.Catalog.slnx           # tools + publisher tests
 # Bundle the committed data into ./dist
 dotnet run --project tools/WarHub.Catalog.Publish -- \
   --catalog-version 0.0.0-local --page-base-url http://localhost:8080
+# --catalog-dir defaults to data/catalog (products/*.yaml, taxonomy/*.yaml); pass it to point
+# at another canonical catalog checkout
 
 # Serve it like a client would
 python -m http.server 8080 --directory dist

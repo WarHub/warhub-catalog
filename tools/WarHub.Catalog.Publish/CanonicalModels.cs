@@ -3,7 +3,7 @@ namespace WarHub.Catalog.Publish;
 /// <summary>
 /// Canonical, publisher-native DTOs for the migrated catalog layout
 /// (<c>data/catalog/products/*.yaml</c> and <c>data/catalog/taxonomy/*.yaml</c>). These are additive:
-/// nothing in the publish pipeline consumes them yet.
+/// consumed by ProductBuilder via YamlSource.LoadCanonicalCatalogs.
 /// </summary>
 public sealed record CanonicalProductCatalog
 {
