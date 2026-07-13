@@ -30,9 +30,30 @@ brief) -- `Observation.ean` is always `None` here, never invented.
 No detail fetches, no budget: every hit already carries everything this strategy extracts (name,
 sku, price, url, image, hints) directly in the search response -- there is nothing to fetch a
 "detail" for, and `context.budget` is ignored entirely (per the task brief). Enumeration is always
-complete (paginates until `page >= nbPages` or an empty `hits` page), so `full_sweep` is always
-`True` and the cursor is always `{}` (no per-product state needs to persist between runs -- unlike
-shopify/woo, there is no staleness/detail-queue concept here at all).
+complete, so `full_sweep` is always `True` and the cursor is always `{}` (no per-product state
+needs to persist between runs -- unlike shopify/woo, there is no staleness/detail-queue concept
+here at all).
+
+**Enumeration is a two-phase, per-game-system facet sweep.** Found the hard way: a live harvest of
+the original single unfiltered sweep returned EXACTLY 1000 observations against nbHits 2856 --
+Algolia's default `paginationLimitedTo` setting caps `page * hitsPerPage` at 1000 for plain
+pagination. The .NET tool avoided the cap the same way this port now does:
+
+1. **Facet discovery** (port of `GetGameSystemCountsAsync`): one query with `hitsPerPage=0` and
+   `facets=["GameSystemsRoot.lvl0"]` (same `filters`) returns the complete set of game-system
+   facet values plus the store-wide `nbHits` (recorded as `stats["reported_nbhits"]`). A response
+   with no usable facets produces an EMPTY result with `stats["missing_game_system_facets"]=1`
+   rather than an exception -- the descriptor's min-count contract then fires loudly downstream,
+   which is the established failure channel for "the source's data shape broke."
+2. **Per-game-system paginated sweeps** (port of `BuildQuery`'s `FacetFilters`): for each facet
+   value in SORTED order (determinism), paginate with
+   `facetFilters=[["GameSystemsRoot.lvl0:<gs>"]]` added to the same query; each slice terminates
+   on an empty hits page or `page >= nbPages`, exactly like the .NET per-system loop. Each slice
+   stays under the 1000 cap. Hits are deduplicated across slices by objectID (first slice wins;
+   `stats["cross_slice_duplicates"]` counts the rest -- a product CAN legitimately carry multiple
+   lvl0 values, e.g. a starter set listed under two game lines). If any single slice's own nbHits
+   exceeds 1000, `stats["slices_over_pagination_cap"]` counts it: single-level slicing is the
+   faithful port, but a shortfall must be visible in health, never silent.
 """
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, StrategyResult
@@ -55,6 +76,13 @@ ALGOLIA_HEADERS = {
     "x-algolia-application-id": APP_ID,
     "x-algolia-api-key": SEARCH_KEY,
 }
+
+# The facet the .NET tool sliced sweeps by (GetGameSystemCountsAsync / BuildQuery.FacetFilters).
+GAME_SYSTEM_FACET = "GameSystemsRoot.lvl0"
+
+# Algolia's default paginationLimitedTo: plain pagination cannot see past this many results per
+# query. Used only for the slices_over_pagination_cap honesty stat -- never for loop control.
+PAGINATION_CAP = 1000
 
 # Ported from AlgoliaProductSource.MapToRawProduct: `$"https://www.warhammer.com{hit.Images[0]}"`
 # and `$"https://www.warhammer.com/en-GB/shop/{hit.Slug}"`.
@@ -224,6 +252,9 @@ def algolia_strategy(
         "skipped_missing_name": 0,
         "malformed_object_id": 0,
         "unmapped_hints": 0,
+        "cross_slice_duplicates": 0,
+        "slices_over_pagination_cap": 0,
+        "missing_game_system_facets": 0,
     }
 
     # --- Manufacturer: pinned per-source, same mechanism as woo.py (Algolia's hit payload has no
@@ -231,30 +262,84 @@ def algolia_strategy(
     manufacturer_name = str(descriptor.scope.get("manufacturer") or "")
     manufacturer = context.taxonomy.manufacturer_for_vendor(manufacturer_name) if manufacturer_name else None
 
-    # --- Enumerate: always full, paginate via page/nbPages (ported from FetchProductsAsync).
-    # Terminates on an empty hits page OR page >= nbPages, whichever comes first -- matching the
-    # .NET source's own loop exactly. context.budget is never consulted (per the task brief). ---
+    # --- Phase 1: facet discovery (port of GetGameSystemCountsAsync). hitsPerPage=0 returns no
+    # hits, just the facet value counts and the store-wide nbHits (the honesty baseline
+    # products_seen is compared against in health reports). ---
+    facet_body = {
+        "query": "",
+        "hitsPerPage": 0,
+        "page": 0,
+        "filters": FILTER,
+        "facets": [GAME_SYSTEM_FACET],
+    }
+    facet_payload = client.post_json(SEARCH_URL, facet_body, headers=ALGOLIA_HEADERS)
+    stats["fetched_pages"] += 1
+
+    reported_nbhits = facet_payload.get("nbHits") if isinstance(facet_payload, dict) else None
+    if isinstance(reported_nbhits, int):
+        stats["reported_nbhits"] = reported_nbhits
+
+    facets = facet_payload.get("facets") if isinstance(facet_payload, dict) else None
+    game_system_counts = facets.get(GAME_SYSTEM_FACET) if isinstance(facets, dict) else None
+    # Sorted for determinism: the facet dict's own order is relevance/count-based and can shift
+    # between runs, which would make cross-slice dedupe ("first slice wins") nondeterministic.
+    game_systems = sorted(game_system_counts) if isinstance(game_system_counts, dict) else []
+
+    if not game_systems:
+        # No usable facets -- the index's shape changed out from under us. Return an EMPTY result
+        # (with the stat below) instead of raising: the descriptor's minCount contract fires
+        # loudly downstream, the established failure channel for source-shape drift, and a failed
+        # contract never decays existing evidence (run_source checks before any write).
+        stats["missing_game_system_facets"] = 1
+
+    # --- Phase 2: per-game-system paginated sweeps (port of BuildQuery's FacetFilters). Each
+    # slice paginates via page/nbPages, terminating on an empty hits page OR page >= nbPages,
+    # exactly like the .NET per-system loop; each stays under Algolia's ~1000
+    # paginationLimitedTo cap, which a single unfiltered sweep does NOT (live harvest proved it:
+    # exactly 1000 observations against nbHits 2856). context.budget is never consulted (per the
+    # task brief). ---
     hits_by_id: dict[str, dict] = {}
-    page = 0
-    while True:
-        body = {"query": "", "hitsPerPage": HITS_PER_PAGE, "page": page, "filters": FILTER}
-        payload = client.post_json(SEARCH_URL, body, headers=ALGOLIA_HEADERS)
-        stats["fetched_pages"] += 1
+    for game_system in game_systems:
+        page = 0
+        while True:
+            body = {
+                "query": "",
+                "hitsPerPage": HITS_PER_PAGE,
+                "page": page,
+                "filters": FILTER,
+                "facetFilters": [[f"{GAME_SYSTEM_FACET}:{game_system}"]],
+            }
+            payload = client.post_json(SEARCH_URL, body, headers=ALGOLIA_HEADERS)
+            stats["fetched_pages"] += 1
 
-        hits = payload.get("hits") if isinstance(payload, dict) else None
-        hits = hits or []
-        if not hits:
-            break
+            if page == 0:
+                # Cap-detection honesty: single-level slicing is the faithful port, but if a
+                # slice itself outgrows the pagination cap the shortfall must show up in health
+                # stats, never silently truncate.
+                slice_nbhits = payload.get("nbHits") if isinstance(payload, dict) else None
+                if isinstance(slice_nbhits, int) and slice_nbhits > PAGINATION_CAP:
+                    stats["slices_over_pagination_cap"] += 1
 
-        for hit in hits:
-            object_id = hit.get("objectID")
-            if object_id:
-                hits_by_id[object_id] = hit
+            hits = payload.get("hits") if isinstance(payload, dict) else None
+            hits = hits or []
+            if not hits:
+                break
 
-        nb_pages = payload.get("nbPages") if isinstance(payload, dict) else None
-        page += 1
-        if not isinstance(nb_pages, int) or page >= nb_pages:
-            break
+            for hit in hits:
+                object_id = hit.get("objectID")
+                if not object_id:
+                    continue
+                if object_id in hits_by_id:
+                    # First slice wins (slices visited in sorted game-system order, so this is
+                    # deterministic). Legitimate: one product can carry multiple lvl0 values.
+                    stats["cross_slice_duplicates"] += 1
+                else:
+                    hits_by_id[object_id] = hit
+
+            nb_pages = payload.get("nbPages") if isinstance(payload, dict) else None
+            page += 1
+            if not isinstance(nb_pages, int) or page >= nb_pages:
+                break
 
     stats["products_seen"] = len(hits_by_id)
 
