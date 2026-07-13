@@ -22,8 +22,20 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
         JsonElement beta = products.EnumerateArray().Single(p => p.GetProperty("name").GetString() == "Beta Box");
 
         Assert.Equal("5011921142361", alpha.GetProperty("ean").GetString());
+        Assert.Equal("provisional", alpha.GetProperty("eanConfidence").GetString());
         Assert.False(beta.TryGetProperty("ean", out _));       // omitted when null
         Assert.Equal("SKUB", beta.GetProperty("productCode").GetString()); // falls back to sku
+    }
+
+    [Fact]
+    public void Product_quantity_flows_from_data()
+    {
+        JsonElement products = Doc("products.json").GetProperty("products");
+        JsonElement alpha = products.EnumerateArray().Single(p => p.GetProperty("name").GetString() == "Alpha Box");
+        JsonElement beta = products.EnumerateArray().Single(p => p.GetProperty("name").GetString() == "Beta Box");
+
+        Assert.Equal(2, alpha.GetProperty("quantity").GetInt32());
+        Assert.Equal(1, beta.GetProperty("quantity").GetInt32()); // no quantity in source -> fallback to 1
     }
 
     [Fact]

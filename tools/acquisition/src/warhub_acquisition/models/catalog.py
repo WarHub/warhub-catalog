@@ -9,6 +9,7 @@ class CanonicalProduct(BaseModel):
     name: str
     manufacturer: str
     productCode: str | None = None
+    sku: str | None = None
     ean: str | None = None
     eanConfidence: str | None = None
     gameSystem: str | None = None

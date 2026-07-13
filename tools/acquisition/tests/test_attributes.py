@@ -98,3 +98,12 @@ def test_curated_current_does_not_resurrect_suspected() -> None:
     product = resolve_attributes("e", members, KINDS, NO_EAN, None)
     assert product.status == "suspected-discontinued"
     assert product.availability == "unknown"
+
+
+def test_sku_is_resolved_first_non_none() -> None:
+    members = [
+        obs("mfr-gw:necrons", sku=None),
+        obs("ret-a:necrons", sku="GWS99120110077"),
+    ]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, None)
+    assert product.sku == "GWS99120110077"

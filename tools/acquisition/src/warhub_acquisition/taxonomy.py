@@ -20,11 +20,16 @@ class Manufacturer(BaseModel):
 class Taxonomy:
     def __init__(self, manufacturers: dict[str, Manufacturer]) -> None:
         self.manufacturers = manufacturers
-        self._vendor_index = {
-            vendor.casefold(): manufacturer.slug
-            for manufacturer in manufacturers.values()
-            for vendor in [manufacturer.name, *manufacturer.vendorNames]
-        }
+        self._vendor_index: dict[str, str] = {}
+        for manufacturer in manufacturers.values():
+            for vendor in [manufacturer.name, *manufacturer.vendorNames]:
+                folded = vendor.casefold()
+                existing = self._vendor_index.get(folded)
+                if existing is not None and existing != manufacturer.slug:
+                    raise ValueError(
+                        f"vendor name {vendor!r} claimed by both {existing!r} and {manufacturer.slug!r}"
+                    )
+                self._vendor_index[folded] = manufacturer.slug
 
     @classmethod
     def load(cls, directory: Path) -> "Taxonomy":
@@ -44,3 +49,16 @@ class Taxonomy:
             code = code.removeprefix(prefix.upper())
         code = code.removesuffix("-EN")
         return code if re.fullmatch(spec.codePattern, code, flags=re.IGNORECASE) else None
+
+
+def load_labels(taxonomy_dir: Path) -> tuple[dict[str, str], dict[str, str]]:
+    def read_map(path: Path, key: str) -> dict[str, str]:
+        if not path.exists():
+            return {}
+        data = read_yaml(path)
+        return {entry["slug"]: entry["label"] for entry in data[key]}
+
+    return (
+        read_map(taxonomy_dir / "game-systems.yaml", "gameSystems"),
+        read_map(taxonomy_dir / "factions.yaml", "factions"),
+    )

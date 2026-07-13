@@ -4,7 +4,7 @@ from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
 
 _HINT_FIELDS = ("gameSystem", "faction", "category", "packaging", "quantity", "description")
-_DIRECT_FIELDS = ("name", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur")
+_DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur")
 
 
 def _first(values: list[object | None]) -> object | None:
