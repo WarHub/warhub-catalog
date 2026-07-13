@@ -1,0 +1,316 @@
+name: Nightly Acquisition
+
+# Harvests live product data from manufacturer/retailer sources into the evidence ledger
+# (data/evidence/), resolves it into the canonical catalog (data/catalog/), and opens/updates a
+# sticky PR. Merging that PR triggers catalog-publish.yml.
+#
+# Source roster (only these have descriptors today; ret-tistaminis / ret-miniaturicum are
+# deferred and deliberately absent):
+#   group A: mfr-warlord-store, mfr-steamforged, mfr-wyrd-store       (budget 6000)
+#   group B: mfr-gw-algolia, mfr-manticgames, mfr-para-bellum,
+#            mfr-corvus-belli                                        (budget 3000)
+#   group C: ret-goblingaming                                        (budget 3000)
+#   group D: ret-radaddel, ret-gamenerdz                              (budget 1000)
+#
+# Deliberate deviation from the original spec: no separate weekly deep-sweep workflow. The
+# nightly run already does full (cheap) enumeration plus budgeted detail fetches with persistent
+# cursors, which converges to full coverage across nights. Weekly cadence returns in Plan 4 as the
+# archive-mining driver.
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: 'Space-separated source ids to run (overrides group defaults; empty = all groups)'
+        required: false
+        type: string
+      budget:
+        description: 'Override budget for every group (empty = per-group default)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-acquire
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    name: Acquire (${{ matrix.group }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - group: A
+            sources: mfr-warlord-store mfr-steamforged mfr-wyrd-store
+            budget: 6000
+          - group: B
+            sources: mfr-gw-algolia mfr-manticgames mfr-para-bellum mfr-corvus-belli
+            budget: 3000
+          - group: C
+            sources: ret-goblingaming
+            budget: 3000
+          - group: D
+            sources: ret-radaddel ret-gamenerdz
+            budget: 1000
+    defaults:
+      run:
+        working-directory: tools/acquisition
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v5
+
+      - run: uv sync --locked
+
+      # Inputs (github.event.inputs.*) are routed through env: rather than interpolated directly
+      # into the script body -- GitHub substitutes ${{ }} textually before bash ever parses the
+      # script, so free-text workflow_dispatch input belongs in an env var, not inline.
+      - name: Plan sources + budget for this group
+        id: plan
+        env:
+          GROUP: ${{ matrix.group }}
+          GROUP_SOURCES: ${{ matrix.sources }}
+          GROUP_BUDGET: ${{ matrix.budget }}
+          OVERRIDE_SOURCES: ${{ github.event.inputs.sources }}
+          OVERRIDE_BUDGET: ${{ github.event.inputs.budget }}
+        run: |
+          if [ -n "$OVERRIDE_SOURCES" ]; then
+            RUN_SOURCES=""
+            for s in $OVERRIDE_SOURCES; do
+              for g in $GROUP_SOURCES; do
+                if [ "$s" = "$g" ]; then RUN_SOURCES="$RUN_SOURCES $s"; fi
+              done
+            done
+            RUN_SOURCES="$(echo "$RUN_SOURCES" | xargs)"
+          else
+            RUN_SOURCES="$GROUP_SOURCES"
+          fi
+
+          BUDGET="$OVERRIDE_BUDGET"
+          if [ -z "$BUDGET" ]; then BUDGET="$GROUP_BUDGET"; fi
+
+          echo "run_sources=$RUN_SOURCES" >> "$GITHUB_OUTPUT"
+          echo "budget=$BUDGET" >> "$GITHUB_OUTPUT"
+          if [ -n "$RUN_SOURCES" ]; then
+            echo "ran=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ran=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Group $GROUP: no sources selected (sources override='$OVERRIDE_SOURCES'); skipping acquire."
+          fi
+
+      # Exit 4 = at least one source in this group failed (contract violation or error). This is
+      # intentionally NOT swallowed: the step (and thus the job) fails, so a broken source is loud
+      # in the Checks tab. The integrate job below still runs regardless (needs: + if: always()),
+      # so a partial nightly harvest never blocks integration of the sources that did succeed.
+      - name: Run acquire
+        id: acquire
+        if: steps.plan.outputs.ran == 'true'
+        env:
+          RUN_SOURCES: ${{ steps.plan.outputs.run_sources }}
+          BUDGET: ${{ steps.plan.outputs.budget }}
+        run: |
+          SRC_ARGS=""
+          for s in $RUN_SOURCES; do
+            SRC_ARGS="$SRC_ARGS --source $s"
+          done
+          uv run warhub-data acquire --data ../../data $SRC_ARGS \
+            --budget "$BUDGET" \
+            --run-date "$(date -u +%F)"
+
+      # Stage exactly this group's evidence dirs (cursor.yaml + observations.jsonl live together
+      # under data/evidence/products/<source>/) plus its own health file, under a group-distinct
+      # name -- disjoint by source, so a plain copy on download in the integrate job is safe. Runs
+      # even if the acquire step above failed (exit 4): partial results must not be lost.
+      - name: Stage artifact payload
+        if: always() && steps.plan.outputs.ran == 'true'
+        env:
+          RUN_SOURCES: ${{ steps.plan.outputs.run_sources }}
+          GROUP: ${{ matrix.group }}
+        run: |
+          mkdir -p ../../_stage/evidence
+          for s in $RUN_SOURCES; do
+            if [ -d "../../data/evidence/products/$s" ]; then
+              cp -r "../../data/evidence/products/$s" "../../_stage/evidence/$s"
+            fi
+          done
+          if [ -f ../../data/review/acquisition-health.md ]; then
+            cp ../../data/review/acquisition-health.md "../../_stage/health-${GROUP}.md"
+          fi
+
+      - name: Upload evidence + health artifact
+        if: always() && steps.plan.outputs.ran == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: acquire-data-${{ matrix.group }}
+          path: _stage
+          if-no-files-found: warn
+
+  integrate:
+    name: Integrate + sticky PR
+    needs: acquire
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: uv sync
+        working-directory: tools/acquisition
+        run: uv sync --locked
+
+      - name: Download acquisition artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: acquire-data-*
+          path: artifacts
+          if-no-artifact-found: warn
+
+      # Disjoint by source (each matrix group only ever staged its own sources), so this is a
+      # plain copy -- no merge logic needed.
+      - name: Merge evidence directories
+        run: |
+          mkdir -p data/evidence/products
+          shopt -s nullglob
+          for group_dir in artifacts/acquire-data-*/; do
+            [ -d "${group_dir}evidence" ] || continue
+            for src_dir in "${group_dir}evidence"/*/; do
+              src="$(basename "$src_dir")"
+              mkdir -p "data/evidence/products/$src"
+              cp -r "$src_dir"* "data/evidence/products/$src/"
+            done
+          done
+
+      # KNOWN GAP: `acquire` overwrites data/review/acquisition-health.md with only its own run's
+      # rows, and each matrix job runs a disjoint source set. Since matrix jobs can't share a
+      # single working tree, the combined health state is regenerated here by concatenating each
+      # group's staged health file (deterministic group-letter order A-D) rather than by rerunning
+      # `acquire` (which would require live network access again, defeating the point).
+      - name: Combine health reports
+        run: |
+          shopt -s nullglob
+          mkdir -p data/review
+          # Bash glob results are lexicographically sorted, so this naturally comes out in group
+          # letter order (health-A.md < health-B.md < health-C.md < health-D.md).
+          health_files=(artifacts/acquire-data-*/health-*.md)
+          {
+            echo "# Acquisition health (combined)"
+            echo
+            echo "_Nightly run $(date -u +%F) -- combined per-group reports, group letter order A-D._"
+            if [ "${#health_files[@]}" -eq 0 ]; then
+              echo
+              echo "_No matrix group reported a health file this run (no sources were selected)._"
+            else
+              for f in "${health_files[@]}"; do
+                group="$(basename "$f" | sed -E 's/^health-(.*)\.md$/\1/')"
+                echo
+                echo "---"
+                echo
+                echo "## Group $group"
+                echo
+                cat "$f"
+              done
+            fi
+          } > data/review/acquisition-health.md
+
+      # Conflicts (exit 2) are expected review material during early live-source rollout, not a
+      # failure -- capture the exit code and continue either way.
+      - name: Resolve catalog
+        id: resolve
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data resolve --data ../../data > ../../_resolve.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_resolve.txt
+
+      - name: Coverage report
+        id: report
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data report --data ../../data > ../../_report.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_report.txt
+
+      # Exit 5 = confirmed-EAN guard found hits. Captured here, not failed immediately: the PR
+      # must still be opened/updated with the findings before the job is marked failed (see the
+      # final step below), so the guard hits are visible both in the PR body and loud in Checks.
+      - name: Confirmed-EAN guard report
+        id: guard
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data report --data ../../data --ean-guard > ../../_report_guard.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          awk '/^## Confirmed-EAN changes/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
+          cat ../../_guard_section.txt
+
+      - name: Build PR body
+        run: |
+          {
+            echo "Automated nightly acquisition run."
+            echo
+            echo "**Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "**Trigger:** ${{ github.event_name }}"
+            echo
+            echo "### Resolve"
+            echo
+            cat _resolve.txt
+            if [ "${{ steps.resolve.outputs.exit_code }}" = "2" ]; then
+              echo
+              echo "> Conflicts detected -- expected during early live-source rollout. See \`data/review/conflicts.yaml\`; treat as review material, not a failure."
+            elif [ "${{ steps.resolve.outputs.exit_code }}" != "0" ]; then
+              echo
+              echo "> :warning: \`resolve\` exited ${{ steps.resolve.outputs.exit_code }} (expected 0 or 2)."
+            fi
+            echo
+            echo "### Coverage report"
+            echo
+            cat _report.txt
+            echo
+            if [ "${{ steps.guard.outputs.exit_code }}" = "5" ]; then
+              echo "### :rotating_light: Confirmed-EAN guard: HITS FOUND"
+              echo
+              echo "A previously **confirmed** EAN changed since the last HEAD -- review carefully before merging this PR."
+              echo
+              cat _guard_section.txt
+            else
+              echo "### Confirmed-EAN guard: clean"
+              echo
+              echo "No confirmed-EAN changes detected."
+            fi
+          } > pr-body.md
+
+      - name: Create or update sticky PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: data
+          branch: catalog/acquisition
+          base: main
+          title: 'Nightly acquisition update'
+          body-path: pr-body.md
+          commit-message: 'Nightly acquisition data update'
+          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          delete-branch: true
+
+      - name: Fail job if confirmed-EAN guard found hits
+        if: steps.guard.outputs.exit_code == '5'
+        run: |
+          echo "::error::Confirmed-EAN guard found hits this run -- see the sticky PR body and data/review for details. Failing job so this is loud in Checks."
+          exit 5
