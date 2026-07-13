@@ -209,6 +209,69 @@ def test_show_num_pages_negative_body_raises() -> None:
         _show_num_pages(client, goblin_descriptor(), {"url": "goblingaming.co.uk/products/*"})
 
 
+def test_count_request_sends_exactly_url_bounds_and_shownumpages_only() -> None:
+    """Fix wave 2 (live-run defect, controller-verified 2026-07-13): the count query must carry
+    ONLY url + from/to + showNumPages=true. Live CDX behavior: `output=json` alongside
+    showNumPages makes Wayback ignore showNumPages and return the full ~224KB DATA page;
+    `fl=`/`collapse=` return garbage (`- - -`). The previous tests routed the mock by path and
+    `params.get("showNumPages")` alone, which masked any extra params riding along -- this
+    asserts the EXACT param set on the wire, via a full strategy run."""
+    count_requests: list[dict[str, str]] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        params = request.url.params
+        if request.url.path == "/cdx/search/cdx":
+            if params.get("showNumPages") == "true":
+                count_requests.append(dict(params))
+                return httpx.Response(200, text="1")
+            return httpx.Response(200, text=load_text("goblin-cdx-page.json"))
+        if request.url.path == GOBLIN_SNAPSHOT_PATH:
+            return httpx.Response(200, text=load_text("goblin-archived-product.html"))
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    client = PoliteClient(WAYBACK_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    cdx_archive_strategy(goblin_descriptor(), client, {}, context())
+
+    assert count_requests == [
+        {
+            "url": "goblingaming.co.uk/products/*",
+            "from": "2014",
+            "to": "2021",
+            "showNumPages": "true",
+        }
+    ]
+
+
+def test_show_num_pages_whitelists_params_even_from_a_polluted_base_params_dict() -> None:
+    """Structural guard for the fix-wave-2 whitelist: even if a future refactor grows extra keys
+    (output/collapse/fl/...) into the base_params dict passed in, the count request on the wire
+    must still carry only url + from/to + showNumPages."""
+    seen_params: list[dict[str, str]] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen_params.append(dict(request.url.params))
+        return httpx.Response(200, text="3")
+
+    client = PoliteClient(WAYBACK_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    polluted = {
+        "url": "goblingaming.co.uk/products/*",
+        "from": "2014",
+        "to": "2021",
+        "output": "json",
+        "collapse": "urlkey",
+        "fl": "original,timestamp,statuscode",
+    }
+    assert _show_num_pages(client, goblin_descriptor(), polluted) == 3
+    assert seen_params == [
+        {
+            "url": "goblingaming.co.uk/products/*",
+            "from": "2014",
+            "to": "2021",
+            "showNumPages": "true",
+        }
+    ]
+
+
 def test_garbled_shownumpages_via_full_strategy_run_does_not_poison_cursor(tmp_path: Path) -> None:
     """End-to-end (via `run_source`, matching `cli.py`'s call path): a garbled showNumPages body
     must raise ValueError uncaught, and -- because `run_source` only writes the cursor AFTER the

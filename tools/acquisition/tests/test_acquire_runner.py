@@ -1,6 +1,7 @@
 """run_source: contract enforcement gates evidence writes; missStreak sweep semantics."""
 from pathlib import Path
 
+import httpx
 import pytest
 
 from warhub_acquisition.acquire.cursor import CursorStore
@@ -266,3 +267,46 @@ def test_load_mappings_reads_every_file_keyed_by_source_id(tmp_path: Path) -> No
 
 def test_load_mappings_missing_directory_returns_empty_dict(tmp_path: Path) -> None:
     assert load_mappings(tmp_path / "does-not-exist") == {}
+
+
+def _capture_client_strategy(captured: dict) -> object:
+    def strategy(desc, client, cursor, ctx):
+        captured["client"] = client
+        return StrategyResult(observations=[], full_sweep=False, stats={}, cursor={})
+
+    return strategy
+
+
+def test_runner_passes_politeness_timeout_seconds_to_client(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Fix wave 2 (live-run defect, 2026-07-13): descriptors can raise the HTTP timeout for slow
+    bulk endpoints (Wayback CDX pages: 200KB+, 3-7s+ live) via `politeness.timeoutSeconds` --
+    run_source must wire it into the PoliteClient it constructs."""
+    captured: dict = {}
+    monkeypatch.setitem(STRATEGIES, "toy-timeout", _capture_client_strategy(captured))
+    desc = SourceDescriptor(
+        id="toy-timeout",
+        kind="archive",
+        strategy="toy-timeout",
+        baseUrl="https://example.test",
+        politeness={"rps": 1.0, "timeoutSeconds": 60},
+    )
+
+    run_source(desc, DataPaths(tmp_path), context(tmp_path))
+
+    assert captured["client"]._client.timeout == httpx.Timeout(60.0)
+
+
+def test_runner_default_timeout_is_30_seconds_when_unspecified(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    captured: dict = {}
+    monkeypatch.setitem(STRATEGIES, "toy-timeout", _capture_client_strategy(captured))
+    desc = SourceDescriptor(
+        id="toy-timeout", kind="manufacturer", strategy="toy-timeout", baseUrl="https://example.test"
+    )
+
+    run_source(desc, DataPaths(tmp_path), context(tmp_path))
+
+    assert captured["client"]._client.timeout == httpx.Timeout(30.0)

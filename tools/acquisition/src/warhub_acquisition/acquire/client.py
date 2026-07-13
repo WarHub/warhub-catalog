@@ -38,7 +38,14 @@ class PoliteClient:
         user_agent: str = UA,
         transport: httpx.BaseTransport | None = None,
         sleep: Callable[[float], None] = time.sleep,
+        timeout: float = 30.0,
     ) -> None:
+        # Explicit timeout, default 30s -- httpx's own default is 5s, which real slow-but-healthy
+        # endpoints blow through: Wayback CDX data pages are 200KB+ and took 3-7s+ in live
+        # controller probes (2026-07-13), so at 5s every CDX page fetch became three straight
+        # transport timeouts -> FetchError(status=None), killing both arc-* sources' first
+        # harvest. Descriptors can raise it further via `politeness.timeoutSeconds` (see
+        # runner.run_source), e.g. 60 for the arc-* Wayback sources.
         self._min_interval = 1.0 / rps if rps > 0 else 0.0
         self._sleep = sleep
         self._last_request_at: float | None = None
@@ -46,6 +53,7 @@ class PoliteClient:
             base_url=base_url or "",
             headers={"User-Agent": user_agent},
             transport=transport,
+            timeout=timeout,
         )
 
     def _pace(self) -> None:

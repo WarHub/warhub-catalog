@@ -133,7 +133,15 @@ def run_source(
     transport=None,
 ) -> SourceHealth:
     politeness = descriptor.politeness or {}
-    client = PoliteClient(descriptor.baseUrl, rps=politeness.get("rps", 0.5), transport=transport)
+    client = PoliteClient(
+        descriptor.baseUrl,
+        rps=politeness.get("rps", 0.5),
+        # Explicit per-source timeout override (seconds). PoliteClient's own default is 30s; slow
+        # bulk endpoints (Wayback CDX: 200KB+ pages, 3-7s+ observed live) declare a higher value,
+        # e.g. arc-*.yaml's `timeoutSeconds: 60`.
+        timeout=float(politeness.get("timeoutSeconds", 30.0)),
+        transport=transport,
+    )
 
     cursor_store = CursorStore(paths.evidence_products)
     cursor = cursor_store.load(descriptor.id)

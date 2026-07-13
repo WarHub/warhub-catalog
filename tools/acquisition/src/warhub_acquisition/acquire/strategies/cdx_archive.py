@@ -180,8 +180,18 @@ def _show_num_pages(client: PoliteClient, descriptor: SourceDescriptor, base_par
     (`cli.py` `_run_acquire`), which records a loud `SOURCE ERROR {source_id}: ValueError: ...`,
     sets the command's exit code to 4, and -- critically -- never reaches the cursor write (that
     happens only after the strategy call returns), so no cache poisoning occurs. Other sources in
-    the same run are unaffected (per-source isolation, same handler)."""
-    response = client.get_response(CDX_PATH, params={**base_params, "showNumPages": "true"})
+    the same run are unaffected (per-source isolation, same handler).
+
+    Fix wave 2 (live-run defect, controller-verified 2026-07-13): the count query MUST carry ONLY
+    `url` + `from`/`to` bounds + `showNumPages=true` -- nothing else. Live CDX behavior: with
+    `output=json` also present, Wayback IGNORES showNumPages entirely and returns the full JSON
+    DATA page (~224KB for goblingaming) instead of the count; with `fl=`/`collapse=` present it
+    returns garbage (`- - -`). Only the minimal query returns the bare integer. The count params
+    are therefore WHITELISTED structurally below (never spread from a dict a later refactor might
+    grow extra keys into), and the covering test asserts the EXACT param set on the wire."""
+    count_params = {key: base_params[key] for key in ("url", "from", "to") if key in base_params}
+    count_params["showNumPages"] = "true"
+    response = client.get_response(CDX_PATH, params=count_params)
     text = response.text.strip()
     try:
         num_pages = int(text)

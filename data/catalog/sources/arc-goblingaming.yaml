@@ -15,6 +15,10 @@ scope:
   snapshotTo: "2023"
 politeness:
   rps: 1.0
+  # Wayback CDX data pages are 200KB+ and took 3-7s+ in live controller probes (2026-07-13);
+  # httpx's 5s default made every page fetch time out (fix wave 2). PoliteClient default is 30s;
+  # 60s here gives slow CDX pages ample headroom.
+  timeoutSeconds: 60
 contract:
   # Archived-only recovery of out-of-print products: no population floor to enforce (an empty
   # result on any given run is not a failure signal the way a live-storefront sweep would be).
