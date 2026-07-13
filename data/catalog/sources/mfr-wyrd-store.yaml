@@ -7,6 +7,9 @@ scope:
 politeness:
   rps: 0.5
 contract:
+  # Coincides with the evidence-based ~85% floor: live probe 2026-07-13 counted 707 products
+  # store-wide, all attributable to wyrd-games after the taxonomy vendorNames fix
+  # (0.85 * 707 = 601) -- the brief's original value already matches the evidence, kept as-is.
   minCount: 600
   maxDropPct: 30
   requiredFieldRates:

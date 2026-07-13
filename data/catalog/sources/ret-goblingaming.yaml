@@ -9,7 +9,10 @@ scope:
 politeness:
   rps: 0.5
 contract:
-  minCount: 6000
+  # Evidence-based floor (~85% of observed): live probe 2026-07-13 (full 54-page pagination,
+  # 13436 products store-wide) found exactly 2923 products with vendor "Games Workshop" -- the
+  # scope.vendors allow-list above. Controller decision, task-6-report.md.
+  minCount: 2500
   maxDropPct: 30
   requiredFieldRates:
     name: 1.0
