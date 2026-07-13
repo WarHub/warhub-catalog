@@ -121,10 +121,13 @@ data/
    `resolve`/`report`; `propose-joins` finds suspected duplicate-entity pairs (shared EAN /
    normalized name / legacy-code match) and sends them to the model for a same-product verdict,
    writing `data/review/join-proposals.yaml` for human/controller review only — it never edits
-   `data/catalog/matches.yaml` itself; promoting a proposed join stays a manual step. Both modes
-   open or update their own sticky PR (`catalog/classification`, separate from
-   `catalog/acquisition`). **Requires the `ANTHROPIC_API_KEY` repository secret** — the workflow
-   fails fast with a clear error if it isn't configured, before spending any budget.
+   `data/catalog/matches.yaml` itself; promoting a proposed join stays a manual step. Each mode
+   opens or updates its OWN mode-suffixed sticky PR branch — `classify` uses
+   `catalog/classification`, `propose-joins` uses `catalog/classification-joins` — kept separate
+   (from each other and from `catalog/acquisition`) so a propose-joins dispatch's
+   force-reset-from-`main` PR step can never clobber an unmerged classify-mode PR, or vice versa.
+   **Requires the `ANTHROPIC_API_KEY` repository secret** — the workflow fails fast with a clear
+   error if it isn't configured, before spending any budget.
 3. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
    then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only

@@ -11,12 +11,18 @@ name: Classification
 #
 # mode=classify (default): emit-queue -> `classify --llm` -> `classify --apply` -> `resolve` ->
 #   `report`, committing catalog/overrides.yaml + classification-cache.jsonl changes to the sticky
-#   PR branch.
+#   PR branch `catalog/classification`.
 # mode=propose-joins: `classify --propose-joins`, committing join-proposals.yaml +
 #   join-cache.jsonl only. This mode NEVER touches matches.yaml or catalog/overrides.yaml --
 #   promoting a proposed join into matches.yaml stays a manual, spot-checked human/controller step
 #   (see task-6-report.md); there is no `emit-queue`/`apply`/`resolve`/`report` step for this mode
-#   -- propose-joins never reads classification-queue.yaml.
+#   -- propose-joins never reads classification-queue.yaml. Its sticky PR branch is the
+#   MODE-SUFFIXED `catalog/classification-joins`, deliberately SEPARATE from classify mode's
+#   `catalog/classification`: both modes used to share one sticky branch, so a propose-joins
+#   dispatch's create-pull-request step (which force-resets its branch from `main`) would blow
+#   away an unmerged classify-mode PR's still-pending overrides/apply changes, and vice versa.
+#   The branch name is derived from MODE via the `branch` env step below -- see the "Create or
+#   update sticky PR" step.
 #
 # Requires the ANTHROPIC_API_KEY repository secret. The "Check ANTHROPIC_API_KEY secret" step
 # below fails fast, before any budget-relevant work happens, if it's missing.
@@ -52,6 +58,21 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v7
+
+      # Mode-suffixed sticky branch: classify mode keeps `catalog/classification`,
+      # propose-joins gets its own `catalog/classification-joins` -- see the header comment above
+      # for why sharing one branch is unsafe (create-pull-request force-resets its branch from
+      # `main` on every dispatch).
+      - name: Derive mode-suffixed branch
+        id: branch
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          if [ "$MODE" = "propose-joins" ]; then
+            echo "name=catalog/classification-joins" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=catalog/classification" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: astral-sh/setup-uv@v5
 
@@ -238,9 +259,9 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           add-paths: data
-          branch: catalog/classification
+          branch: ${{ steps.branch.outputs.name }}
           base: main
-          title: 'Classification update'
+          title: "${{ github.event.inputs.mode == 'propose-joins' && 'Classification: proposed joins' || 'Classification update' }}"
           body-path: tools/acquisition/pr-body.md
           commit-message: 'Classification update (${{ github.event.inputs.mode }})'
           committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
