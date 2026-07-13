@@ -6,16 +6,24 @@ strategy: shopify
 # cart_currency=CAD cookie, content-language: en-CA).
 baseUrl: https://tistaminis.com
 scope:
-  # Live-verified 2026-07-13 (controller probes after a zero-observation contract violation):
-  # this store carries NO plain "Games Workshop" vendor. New GW stock is vendored "GW-Local"
-  # (observed both casings across the catalog; combat-patrol-necrons.js -> vendor "GW-Local",
-  # barcode 5011921194285 populated). "Games Workshop Used" is deliberately EXCLUDED: those
-  # are one-off second-hand listings (unique -aNN handle suffixes) that would flood evidence
-  # with unjoinable single-item entities while duplicating new-stock barcodes.
-  vendors:
-    - Games Workshop
-    - GW-Local
-    - GW-LOCAL
+  # scope.vendors REMOVED 2026-07-13 (Plan 5 Task 1): the [Games Workshop, GW-Local,
+  # GW-LOCAL] allow-list was throwing away most of this store's barcoded catalog. This
+  # store enumerates 25,000 products (Shopify's platform-wide pagination cap; the real
+  # catalog is larger) vs. 1,178 harvested under the old GW-only scope. Live full
+  # enumeration (up to the 100-page/25000-product cap) also found the store's
+  # brand-format vendor-tagging convention extends past GW: "Warlord-BLISTER" and
+  # "Warlord-WEB" (Warlord Games), plus "GW-Web" and "GW-OOP" alongside the known
+  # "GW-Local"/"GW-LOCAL" (Games Workshop) -- all four newly added as vendorNames
+  # aliases in data/catalog/taxonomy/manufacturers.yaml (see comments there for the
+  # live product-sample evidence). Taxonomy attribution now governs inclusion instead
+  # of the old allow-list; unmapped vendors count as skipped_unknown_vendor. This is
+  # existing, tested strategy behavior (test_scope_vendors_absent_behaves_unchanged) --
+  # no shopify.py code change was needed.
+  # "Games Workshop Used" remains deliberately UNTRACKED (not aliased): those are
+  # one-off second-hand listings (unique -aNN handle suffixes) that would flood
+  # evidence with unjoinable single-item entities while duplicating new-stock barcodes
+  # -- taxonomy attribution naturally excludes it since no manufacturer claims that
+  # exact vendor string, and it correctly falls into skipped_unknown_vendor.
   currency: cad
 politeness:
   rps: 0.5
@@ -37,6 +45,8 @@ contract:
   # only; the harvest is a separate EXECUTE step). Conservative floor pending first live
   # sweep; raise from evidence after Task-8 EXECUTE. Left unchanged despite the 25k
   # enumeration cap above -- the first ~25k-product slice comfortably clears 1000.
+  # STILL left unchanged after the scope.vendors removal (Plan 5 Task 1, 2026-07-13) --
+  # the controller re-floors minCount from the first wide harvest's evidence (Step 4).
   minCount: 1000
   maxDropPct: 30
   requiredFieldRates:

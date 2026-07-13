@@ -6,7 +6,13 @@ manufacturers:
     gs1Prefixes: ['5011921']
     # GW-Local: tistaminis.com vendors its new GW stock this way (taxonomy matching is
     # casefolded, so one spelling also covers GW-LOCAL). Live-verified 2026-07-13.
-    vendorNames: [Games Workshop, Citadel, Forge World, GW-Local]
+    # GW-Web / GW-OOP: same store, same brand-format tagging convention, discovered on a
+    # full 100-page live enumeration of tistaminis.com/products.json 2026-07-13 (Plan 5
+    # Task 1). Confirmed by product sample: "GW-Web" skus are raw GS1 5011921xxxxxx
+    # barcodes (e.g. sku 5011921221493, "High Elves Ellyrian Reavers"); "GW-OOP" titles
+    # are GW lines (Chaos Space Marines, Blood Bowl, Middle-earth SBG). Casefolded
+    # matching also covers "GW-WEB".
+    vendorNames: [Games Workshop, Citadel, Forge World, GW-Local, GW-Web, GW-OOP]
   - slug: atomic-mass-games
     name: Atomic Mass Games
     codePattern: '(SWL|SWP|SWM|CP|AMG)[A-Z]?\d+[A-Z]*'
@@ -42,7 +48,14 @@ manufacturers:
   - slug: warlord-games
     name: Warlord Games
     codePattern: '[0-9]{9,12}(-[0-9]{1,2})?|(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{6,}'
-    vendorNames: [Warlord Games]
+    # Warlord-BLISTER / Warlord-WEB: tistaminis.com's brand-format tagging convention
+    # (same pattern as GW-Local/GW-Web/GW-OOP above) for Warlord Games stock. Discovered
+    # on a full 100-page live enumeration of tistaminis.com/products.json 2026-07-13
+    # (Plan 5 Task 1); "Warlord-BLISTER" alone was 77 products in a 1,500-product sample
+    # -- by far the largest unmapped tracked-brand vendor string found. Confirmed by
+    # product sample: titles/skus are Warlord Games lines (Hail Caesar sku WGH-IR-22,
+    # Bolt Action sku WGB-RI-130).
+    vendorNames: [Warlord Games, Warlord-BLISTER, Warlord-WEB]
   - slug: wyrd-games
     name: Wyrd Games
     codePattern: 'WYR\d+[A-Z ]*'
