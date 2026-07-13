@@ -538,6 +538,53 @@ def test_cache_flushed_incrementally_survives_crash_after_first_batch(tmp_path: 
     assert len(entries) == 20  # only the first, successfully-flushed batch survived
 
 
+def test_second_run_after_crash_still_writes_cached_accepted_decisions_to_products_yaml(
+    tmp_path: Path,
+) -> None:
+    """The other half of the crash-survival invariant: a run that crashes AFTER the cache is
+    incrementally flushed but BEFORE `_write_classifications` runs (e.g. the process is killed
+    between the last batch's `append_cache_lines` and the final write, or a later run's own
+    process dies before writing) leaves accepted decisions sitting in the cache but never
+    materialized to products.yaml. A SECOND run must not treat those cache hits as already
+    handled -- it must fold them into products.yaml just like a first-time acceptance would.
+    """
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    items = [make_item(i) for i in range(20)]
+    write_queue(paths, items)
+
+    # First run: succeeds and flushes the cache, but simulate a crash that happens AFTER the
+    # incremental cache flush and BEFORE products.yaml is written -- i.e. products.yaml never
+    # gets the accepted decisions from this run, exactly like a process killed between the two.
+    client = RecordingClient(_accept_all())
+    run_llm_classification(paths, run_date="2026-07-12", client=client)
+    assert paths.classifications.exists()
+    paths.classifications.unlink()  # simulate: cache flushed, but the write never landed
+
+    assert len(cache_lines(paths)) == 20
+    assert not paths.classifications.exists()
+
+    # Second run: every item is now a cache hit (same queue, same input hashes) -- no new
+    # queries should be made, but the previously-accepted, still-stranded decisions must land
+    # in products.yaml this time.
+    client2 = RecordingClient(_accept_all())
+    summary = run_llm_classification(paths, run_date="2026-07-13", client=client2)
+
+    assert summary.cached_skips == 20
+    assert summary.queried == 0
+    assert client2.calls == []
+
+    written = read_yaml(paths.classifications)
+    assert set(written) == {item["entity"] for item in items}
+    for item in items:
+        entry = written[item["entity"]]
+        assert entry["gameSystem"] == "age-of-sigmar"
+        assert entry["decidedBy"] == "llm"
+        # provenance keeps the ORIGINAL cache entry's date/model, not the second run's -- the
+        # cache entry is the source of truth being re-materialized, unmodified.
+        assert entry["date"] == "2026-07-12"
+
+
 # --- CLI: missing key / missing queue -----------------------------------------------------------
 
 

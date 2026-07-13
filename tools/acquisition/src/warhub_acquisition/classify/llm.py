@@ -220,10 +220,30 @@ def run_llm_classification(
 
     pending: list[tuple[dict, str]] = []
     cached_skips = 0
+    new_decisions: dict[str, dict] = {}
     for item in queue:
         input_hash = compute_input_hash(item)
-        if input_hash in cache:
+        cached_entry = cache.get(input_hash)
+        if cached_entry is not None:
             cached_skips += 1
+            # A cache hit for a PREVIOUSLY accepted classification must still land in
+            # products.yaml on every run -- mirrors joins.py's `decided` fold-in (see that
+            # module's cache-hit branch). Without this, a run that crashed after flushing the
+            # cache but before `_write_classifications` stranded the accepted decision forever:
+            # every later run would hit the cache and `continue`, never re-materializing it.
+            if (
+                cached_entry.decision == "classified"
+                and cached_entry.confidence is not None
+                and cached_entry.confidence >= ACCEPT_THRESHOLD
+            ):
+                new_decisions[cached_entry.entity] = {
+                    "gameSystem": cached_entry.gameSystem,
+                    "faction": cached_entry.faction,
+                    "decidedBy": "llm",
+                    "model": cached_entry.model,
+                    "inputHash": cached_entry.inputHash,
+                    "date": cached_entry.date,
+                }
             continue
         pending.append((item, input_hash))
 
@@ -248,7 +268,6 @@ def run_llm_classification(
     unknown = 0
     low_confidence = 0
     requests_made = 0
-    new_decisions: dict[str, dict] = {}
 
     batches = batch_pending(pending, DEFAULT_BATCH_SIZE, budget)
     for batch in batches:
