@@ -1,0 +1,24 @@
+id: ret-gamenerdz
+kind: retailer
+strategy: sitemap-structured-data
+baseUrl: https://www.gamenerdz.com
+scope:
+  sitemaps:
+    - https://www.gamenerdz.com/xmlsitemap.php
+  # Best-effort GW filter: live probe 2026-07-13 sampled 5,370 URLs from the first products
+  # sitemap page and found a reasonable density of GW-signal tokens (211 "warhammer", 84
+  # "citadel") in product slugs, unlike Radaddel. This is NOT exhaustive -- some GW products may
+  # slug without any of these tokens -- but budget+priority already bounds total work, so a
+  # best-effort filter here just spends that budget more usefully.
+  urlInclude: '(?i)(warhammer|citadel|forge-world)'
+  currency: usd
+politeness:
+  rps: 0.5
+contract:
+  # Pure EAN-enrichment source: partial coverage by design (~145,000 sitemap URLs across 27
+  # product-sitemap pages, observed live 2026-07-13, budgeted per-run), so minCount stays 0.
+  # requiredFieldRates.ean gates on the FETCHED set -- BigCommerce BCData markup drift must fail
+  # loudly. Controller decision, task-11-report.md.
+  minCount: 0
+  requiredFieldRates:
+    ean: 0.5

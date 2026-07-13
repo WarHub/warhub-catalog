@@ -1,0 +1,6 @@
+# Retailer scaffold, per the brief: sitemap_sd.py extracts no game-system/faction signal at all
+# (no category/tag data is scraped from these product pages -- see task-11-report.md), so this
+# mapping file is intentionally never consumed by the strategy. Kept as an empty scaffold purely
+# for repo convention (test_repo_mappings_parse_when_present).
+gameSystem: {}
+faction: {}
