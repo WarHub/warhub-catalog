@@ -295,7 +295,7 @@ def test_pair_context_completeness(tmp_path: Path) -> None:
     (candidate,) = generate_candidates(paths)
     for side in ("entityA", "entityB"):
         ctx = candidate[side]
-        assert set(ctx) == {"entity", "name", "sku", "ean", "url", "evidence"}
+        assert set(ctx) == {"entity", "name", "sku", "ean", "url", "legacyProductCode", "evidence"}
         assert ctx["entity"]
         assert ctx["name"] == "Widget"
         assert ctx["ean"] == "5011921063765"
@@ -584,9 +584,9 @@ def test_proposals_file_has_header_comment_and_sorted_provenance(tmp_path: Path)
     (proposal,) = written["proposals"]
     assert proposal == {
         "entityA": {"entity": "games-workshop/AAA", "name": "Widget", "sku": None, "ean": None,
-                     "url": None, "evidence": []},
+                     "url": None, "legacyProductCode": None, "evidence": []},
         "entityB": {"entity": "games-workshop/ZZZ", "name": "Widget", "sku": None, "ean": None,
-                     "url": None, "evidence": []},
+                     "url": None, "legacyProductCode": None, "evidence": []},
         "manufacturer": "games-workshop",
         "matchedRules": ["name"],
         "verdict": "same-product",

@@ -107,6 +107,7 @@ class EntityContext:
             "sku": self.sku,
             "ean": self.ean,
             "url": self.url,
+            "legacyProductCode": self.legacyProductCode,
             "evidence": self.evidence,
         }
 
@@ -260,7 +261,7 @@ def _rule_legacy_code(contexts: dict[str, EntityContext]) -> dict[tuple[str, str
 def generate_candidates(paths: DataPaths) -> list[dict]:
     """Deterministic candidate generation -- no LLM. Returns sorted `{entityA, entityB,
     manufacturer, matchedRules}` dicts, each side's context a full `EntityContext.to_context_dict()`
-    (name/sku/ean/url/evidence). A pair matched by multiple rules appears once with all rules
+    (name/sku/ean/url/legacyProductCode/evidence). A pair matched by multiple rules appears once with all rules
     listed.
     """
     contexts = _entity_contexts(paths)
@@ -337,40 +338,52 @@ model, or bundle a customer would consider identical), false otherwise.
 - confidence: a calibrated 0.0-1.0 estimate that your sameProduct answer is correct.
 
 EVIDENCE
-name, sku, ean, url, and which rule(s) flagged the pair (matchedRules) are the only signal -- \
-there is no description or image. A shared validated ean ("ean" in matchedRules) is strong \
-evidence of sameness. A shared normalized name ("name" in matchedRules) is good evidence, but a \
-box and the standalone unit inside it can still share a name and be legitimately different \
+name, sku, ean, url, legacyProductCode, and which rule(s) flagged the pair (matchedRules) are the \
+only signal -- there is no description or image. A shared validated ean ("ean" in matchedRules) is \
+strong evidence of sameness. A shared normalized name ("name" in matchedRules) is good evidence, but \
+a box and the standalone unit inside it can still share a name and be legitimately different \
 products. A legacy-code-to-sku digit match ("legacy-code" in matchedRules) is the WEAKEST signal \
 -- numeric codes can coincide between unrelated products -- and must not be trusted without \
-corroborating name or ean similarity.
+corroborating name or ean similarity; the legacyProductCode field shows the actual value that \
+triggered the match so you can judge whether it plausibly corresponds to the other side's sku or \
+looks coincidental.
+
+COST ASYMMETRY
+A wrong merge (declaring two different products the same) is worse than a missed merge (declaring \
+the same product different): a false merge silently corrupts the catalog, while a missed merge just \
+leaves a duplicate for a later pass to catch. When the evidence is genuinely ambiguous, prefer \
+sameProduct: false or a lower confidence over a confident true.
 
 EXAMPLES
 1. {"pairId": "games-workshop/AAA::games-workshop/BBB", "manufacturer": "games-workshop", \
 "matchedRules": ["ean"], "entityA": {"entity": "games-workshop/AAA", "name": "Combat Patrol: Necrons", \
-"sku": "99120106339", "ean": "5011921063765", "url": null}, "entityB": {"entity": "games-workshop/BBB", \
+"sku": "99120106339", "ean": "5011921063765", "url": null, "legacyProductCode": null}, \
+"entityB": {"entity": "games-workshop/BBB", \
 "name": "Combat Patrol - Necrons (Archived Listing)", "sku": "OLD-CP-NEC", "ean": "5011921063765", \
-"url": "https://web.archive.org/.../combat-patrol-necrons"}}
+"url": "https://web.archive.org/.../combat-patrol-necrons", "legacyProductCode": null}}
    -> {"pairId": "games-workshop/AAA::games-workshop/BBB", "sameProduct": true, "confidence": 0.95}
    Identical validated ean under the same manufacturer, with a name variant consistent with an \
 archived retailer listing -- the same physical product.
 
 2. {"pairId": "mantic-games/CCC::mantic-games/DDD", "manufacturer": "mantic-games", \
 "matchedRules": ["name"], "entityA": {"entity": "mantic-games/CCC", "name": "Kings of War: Ogre Battleforce", \
-"sku": "MGKWO01", "ean": null, "url": null}, "entityB": {"entity": "mantic-games/DDD", \
-"name": "Kings of War: Ogre Battleforce", "sku": "MGKWO01-EU", "ean": null, "url": null}}
+"sku": "MGKWO01", "ean": null, "url": null, "legacyProductCode": null}, \
+"entityB": {"entity": "mantic-games/DDD", \
+"name": "Kings of War: Ogre Battleforce", "sku": "MGKWO01-EU", "ean": null, "url": null, \
+"legacyProductCode": null}}
    -> {"pairId": "mantic-games/CCC::mantic-games/DDD", "sameProduct": true, "confidence": 0.85}
    Identical normalized name and a sku differing only by a regional suffix -- the same product \
 listed under two regional codes.
 
 3. {"pairId": "games-workshop/EEE::games-workshop/FFF", "manufacturer": "games-workshop", \
 "matchedRules": ["legacy-code"], "entityA": {"entity": "games-workshop/EEE", \
-"name": "Warhammer 40,000: Core Rulebook", "sku": null, "ean": null, "url": null}, \
+"name": "Warhammer 40,000: Core Rulebook", "sku": null, "ean": null, "url": null, \
+"legacyProductCode": "400108001"}, \
 "entityB": {"entity": "games-workshop/FFF", "name": "Warhammer Underworlds: Direchasm", \
-"sku": "40-0108001", "ean": null, "url": null}}
+"sku": "40-0108001", "ean": null, "url": null, "legacyProductCode": null}}
    -> {"pairId": "games-workshop/EEE::games-workshop/FFF", "sameProduct": false, "confidence": 0.9}
-   The only signal is a coincidental legacy-code/sku digit match; the names describe two \
-unrelated products, so the rule's hint does not hold up.
+   The legacyProductCode digit-matches the sku, but that is a coincidental numeric overlap; the \
+names describe two unrelated products, so the rule's hint does not hold up.
 
 OUTPUT
 Respond with ONLY a strict JSON array, no prose, no markdown code fences, one object per input \
