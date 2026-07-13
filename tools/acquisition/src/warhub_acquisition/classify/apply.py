@@ -48,9 +48,11 @@ def apply_classifications(paths: DataPaths) -> int:
 
     overrides = Overrides.model_validate(read_yaml(paths.overrides)) if paths.overrides.exists() else Overrides()
     for entity, decision in sorted(decisions.items()):
-        patch: dict[str, object] = {"gameSystem": decision.gameSystem}
-        if decision.faction is not None:
-            patch["faction"] = decision.faction
+        # a decision present in classifications/products.yaml is authoritative for both
+        # fields: writing faction=None here (re-classification with an explicit null, or a
+        # decision that never had a faction) must clear any stale prior faction override
+        # rather than leaving it in place.
+        patch: dict[str, object] = {"gameSystem": decision.gameSystem, "faction": decision.faction}
         overrides.products[entity] = {**overrides.products.get(entity, {}), **patch}
 
     write_yaml(

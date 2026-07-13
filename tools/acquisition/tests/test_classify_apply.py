@@ -61,7 +61,7 @@ def test_valid_classifications_merge_into_overrides_preserving_existing_keys(tmp
             "games-workshop/combat-patrol-necrons-mystery-box": {
                 "quantity": 5, "gameSystem": "warhammer-40k", "faction": "necrons",
             },
-            "games-workshop/paint-set-mystery": {"gameSystem": "age-of-sigmar"},
+            "games-workshop/paint-set-mystery": {"gameSystem": "age-of-sigmar", "faction": None},
             "games-workshop/unrelated": {"category": "terrain"},
         },
     }
@@ -137,8 +137,47 @@ def test_no_overrides_file_yet_creates_it(tmp_path: Path) -> None:
     assert count == 1
     assert read_yaml(paths.overrides) == {
         "retract": [],
-        "products": {"games-workshop/a": {"gameSystem": "warhammer-40k"}},
+        "products": {"games-workshop/a": {"gameSystem": "warhammer-40k", "faction": None}},
     }
+
+
+def test_reclassification_with_null_faction_clears_stale_override(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    write_yaml(
+        paths.overrides,
+        {
+            "retract": [],
+            "products": {
+                "games-workshop/combat-patrol-necrons-mystery-box": {
+                    "gameSystem": "warhammer-40k", "faction": "necrons",
+                },
+            },
+        },
+    )
+    write_yaml(
+        paths.classifications,
+        {
+            "games-workshop/combat-patrol-necrons-mystery-box": {
+                "gameSystem": "warhammer-40k", "faction": None, "decidedBy": "human", "date": "2026-07-12",
+            },
+        },
+    )
+
+    count = apply_classifications(paths)
+
+    assert count == 1
+    overrides = read_yaml(paths.overrides)
+    assert overrides == {
+        "retract": [],
+        "products": {
+            "games-workshop/combat-patrol-necrons-mystery-box": {
+                "gameSystem": "warhammer-40k", "faction": None,
+            },
+        },
+    }
+    # explicit null survives the yaml round-trip (not dropped, not left stale)
+    assert "faction" in overrides["products"]["games-workshop/combat-patrol-necrons-mystery-box"]
 
 
 def test_cli_apply_success(tmp_path: Path, capsys) -> None:
