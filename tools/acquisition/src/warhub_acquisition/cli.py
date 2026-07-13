@@ -11,6 +11,7 @@ from warhub_acquisition.yamlio import read_yaml
 
 
 def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
+    import warhub_acquisition.acquire.strategies  # noqa: F401  (import registers STRATEGIES entries)
     from warhub_acquisition.acquire.health import SourceError, SourceFailure, build_health_report
     from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, SourceContractError, run_source
     from warhub_acquisition.models.descriptor import load_descriptors
