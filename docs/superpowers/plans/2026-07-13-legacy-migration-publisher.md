@@ -1092,6 +1092,7 @@ from pathlib import Path
 
 from test_migrate_runner import seed_repo
 from warhub_acquisition.cli import main
+from warhub_acquisition.yamlio import write_yaml
 
 
 def test_migrate_verifies_and_writes_report(tmp_path: Path, capsys) -> None:
@@ -1104,12 +1105,28 @@ def test_migrate_verifies_and_writes_report(tmp_path: Path, capsys) -> None:
     assert "games-workshop" in report
     assert "| manufacturer |" in report
     assert "- minted factions: 0" in report
+    assert "## Invalid EAN values" not in report
     # the legacy Adrax and the seed Adrax share sku 99120101293 -> one entity
     catalog = (data / "catalog" / "products" / "games-workshop.yaml").read_text(encoding="utf-8")
     assert catalog.count("- id:") == 1
     assert "quantity: 1" in catalog          # from seed contents
     assert "ean: '5011921140862'" in catalog
     assert "eanConfidence: confirmed" in catalog  # curated-kind assertion
+
+
+def test_report_lists_invalid_checksum_eans(tmp_path: Path, capsys) -> None:
+    data, legacy, seed_dir = seed_repo(tmp_path)
+    write_yaml(
+        seed_dir / "gw-bad-ean.yaml",
+        [{"name": "Miscast Miniature", "sku": "99120101994", "ean": "5011921194286",
+          "manufacturer": "Games Workshop", "gameSystem": "Warhammer 40,000",
+          "faction": "Space Marines", "status": "current",
+          "contents": [{"unitName": "Miscast", "quantity": 1, "baseSize": "40mm"}]}],
+    )
+    main(["migrate", "--data", str(data), "--legacy-dir", str(legacy), "--seed-dir", str(seed_dir)])
+    report = (data / "review" / "migration-report.md").read_text(encoding="utf-8")
+    assert "## Invalid EAN values" in report
+    assert "- 5011921194286" in report
 
 
 def test_report_table_includes_record_counts(tmp_path: Path, capsys) -> None:
@@ -1184,7 +1201,7 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
     conflict_eans = {
         value for c in conflicts
         for value in (
-            [c.get("ean")] + [a.get("ean") for a in c.get("assertions", [])]
+            [c.get("ean"), c.get("chosen")] + [a.get("ean") for a in c.get("assertions", [])]
         )
         if value
     }
@@ -1203,6 +1220,10 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         1 for source in evidence.values() for obs in source.values()
         if obs.ean and canonical_ean(obs.ean) is None
     )
+    invalid_eans = sorted({
+        obs.ean for source in evidence.values() for obs in source.values()
+        if obs.ean and canonical_ean(obs.ean) is None
+    })
 
     # Count observations (records) by manufacturer
     records_by_manufacturer: dict[str, int] = {}
@@ -1229,6 +1250,10 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         confirmed = [p for p in with_ean if p.eanConfidence == "confirmed"]
         record_count = records_by_manufacturer.get(manufacturer, 0)
         lines.append(f"| {manufacturer} | {record_count} | {len(records)} | {len(with_ean)} | {len(confirmed)} |")
+    lines.append("")
+    lines.append("(records = evidence observations incl. seed; entities = post-dedup canonical products)")
+    if invalid_eans:
+        lines += ["", "## Invalid EAN values", *[f"- {v}" for v in invalid_eans]]
     if violations:
         lines += ["", "## Violations", *[f"- {v}" for v in violations]]
     return violations, "\n".join(lines) + "\n"

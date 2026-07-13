@@ -37,7 +37,7 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
     conflict_eans = {
         value for c in conflicts
         for value in (
-            [c.get("ean")] + [a.get("ean") for a in c.get("assertions", [])]
+            [c.get("ean"), c.get("chosen")] + [a.get("ean") for a in c.get("assertions", [])]
         )
         if value
     }
@@ -56,6 +56,10 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         1 for source in evidence.values() for obs in source.values()
         if obs.ean and canonical_ean(obs.ean) is None
     )
+    invalid_eans = sorted({
+        obs.ean for source in evidence.values() for obs in source.values()
+        if obs.ean and canonical_ean(obs.ean) is None
+    })
 
     # Count observations (records) by manufacturer
     records_by_manufacturer: dict[str, int] = {}
@@ -82,6 +86,10 @@ def verify_migration(paths: DataPaths, summary: MigrationSummary) -> tuple[list[
         confirmed = [p for p in with_ean if p.eanConfidence == "confirmed"]
         record_count = records_by_manufacturer.get(manufacturer, 0)
         lines.append(f"| {manufacturer} | {record_count} | {len(records)} | {len(with_ean)} | {len(confirmed)} |")
+    lines.append("")
+    lines.append("(records = evidence observations incl. seed; entities = post-dedup canonical products)")
+    if invalid_eans:
+        lines += ["", "## Invalid EAN values", *[f"- {v}" for v in invalid_eans]]
     if violations:
         lines += ["", "## Violations", *[f"- {v}" for v in violations]]
     return violations, "\n".join(lines) + "\n"
