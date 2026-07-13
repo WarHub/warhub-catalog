@@ -1,4 +1,4 @@
-"""warhub-data CLI: resolve, report, migrate, acquire."""
+"""warhub-data CLI: resolve, report, migrate, acquire, classify."""
 import argparse
 import datetime
 import sys
@@ -7,7 +7,7 @@ from pathlib import Path
 from warhub_acquisition.migrate.verify import verify_migration
 from warhub_acquisition.report import build_report, check_ean_guard, render_ean_guard_section
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
-from warhub_acquisition.yamlio import read_yaml
+from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 
 def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
@@ -82,6 +82,29 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     return 4 if (failures or errors) else 0
 
 
+def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
+    from warhub_acquisition.classify.apply import apply_classifications
+    from warhub_acquisition.classify.queue import build_queue
+
+    try:
+        if args.emit_queue:
+            queue = build_queue(paths)
+            queue_path = paths.root / "review" / "classification-queue.yaml"
+            write_yaml(queue_path, {"queue": queue})
+            print(f"wrote {len(queue)} queue items to {queue_path}")
+            return 0
+
+        count = apply_classifications(paths)
+        print(
+            f"applied {count} classification{'s' if count != 1 else ''} to catalog/overrides.yaml; "
+            "run `warhub-data resolve` to un-park the classified entities"
+        )
+        return 0
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="warhub-data")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -104,6 +127,22 @@ def main(argv: list[str] | None = None) -> int:
     acquire.add_argument("--source", action="append", default=None)
     acquire.add_argument("--budget", type=int, default=None)
     acquire.add_argument("--run-date", required=True)
+
+    classify = subparsers.add_parser(
+        "classify",
+        description=(
+            "Classification pipeline for entities the resolver parked (null gameSystem). "
+            "--emit-queue writes data/review/classification-queue.yaml for a classifier "
+            "(human or LLM) to work through; --apply reads committed decisions from "
+            "data/catalog/classifications/products.yaml and merges them into "
+            "data/catalog/overrides.yaml. Neither step re-runs `resolve` itself -- run "
+            "`warhub-data resolve` afterwards to actually un-park the classified entities."
+        ),
+    )
+    classify.add_argument("--data", type=Path, default=Path("data"))
+    classify_mode = classify.add_mutually_exclusive_group(required=True)
+    classify_mode.add_argument("--emit-queue", action="store_true")
+    classify_mode.add_argument("--apply", action="store_true")
 
     args = parser.parse_args(argv)
     paths = DataPaths(args.data)
@@ -139,6 +178,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "acquire":
         return _run_acquire(args, paths)
+
+    if args.command == "classify":
+        return _run_classify(args, paths)
 
     report_text = build_report(paths)
     exit_code = 0
