@@ -210,10 +210,16 @@ jobs:
             # Group F (barcode-db) needs distinct, always-explicit per-source budgets --
             # upcitemdb=80, go-upc=50 -- because `acquire --budget N` applies N to every source in
             # a single invocation (AcquireContext.budget is one shared value), not divided across
-            # sources. Two separate invocations, each overwriting
-            # data/review/acquisition-health.md, so each call's report is captured before the next
-            # one runs, then concatenated. $BUDGET (steps.plan.outputs.budget) is deliberately
-            # ignored here -- see the roster comment at the top of this file.
+            # sources. data/review/acquisition-health.md is a TRACKED committed file (always
+            # present from checkout), so its mere existence after an invocation can't signal
+            # freshness on its own -- it's rm -f'd immediately before EACH of the two
+            # sub-invocations, so the post-invocation `-f` check genuinely means "this invocation
+            # produced/updated the file" (and a pre-try/finally crash before any write correctly
+            # yields no stash for that source, instead of mislabelling stale/other-source content
+            # as fresh). Each surviving per-source stash is concatenated below. $BUDGET
+            # (steps.plan.outputs.budget) is deliberately ignored here -- see the roster comment at
+            # the top of this file.
+            shopt -s nullglob
             crashed=0
             ran_any=0
             for entry in "bdb-upcitemdb:80" "bdb-goupc:50"; do
@@ -221,6 +227,7 @@ jobs:
               bud="${entry##*:}"
               case " $RUN_SOURCES " in
                 *" $src "*)
+                  rm -f ../../data/review/acquisition-health.md
                   uv run warhub-data acquire --data ../../data --source "$src" \
                     --budget "$bud" \
                     --run-date "$(date -u +%F)" || crashed=1

@@ -12,13 +12,14 @@ name: Classification
 # mode=classify (default): emit-queue -> `classify --llm` -> `classify --apply` -> `resolve` ->
 #   `report`, committing catalog/overrides.yaml + classification-cache.jsonl changes to the sticky
 #   PR branch.
-# mode=propose-joins: emit-queue -> `classify --propose-joins`, committing join-proposals.yaml +
+# mode=propose-joins: `classify --propose-joins`, committing join-proposals.yaml +
 #   join-cache.jsonl only. This mode NEVER touches matches.yaml or catalog/overrides.yaml --
 #   promoting a proposed join into matches.yaml stays a manual, spot-checked human/controller step
-#   (see task-6-report.md); there is no `apply`/`resolve`/`report` step for this mode.
+#   (see task-6-report.md); there is no `emit-queue`/`apply`/`resolve`/`report` step for this mode
+#   -- propose-joins never reads classification-queue.yaml.
 #
 # Requires the ANTHROPIC_API_KEY repository secret. The "Check ANTHROPIC_API_KEY secret" step
-# below fails fast, before the queue is even emitted, if it's missing.
+# below fails fast, before any budget-relevant work happens, if it's missing.
 
 on:
   workflow_dispatch:
@@ -68,18 +69,28 @@ jobs:
             exit 1
           fi
 
+      # `set +e` + captured exit code (not a hard step failure) on this step and every
+      # budget/data-mutating step below, same convention as catalog-acquire.yml's integrate job:
+      # build_queue()/llm.py/joins.py can raise (e.g. build_queue()'s ValueError on evidence
+      # mismatch) or flush partial progress mid-run (task-5-report.md:
+      # "incremental-flush-survives-crash"), so a crash here still leaves whatever made it to disk
+      # available for the sticky PR, instead of every later step -- including the sticky-PR step
+      # itself -- being skipped by an early job abort. The final step fails the job loudly, after
+      # the PR is opened. Gated to mode=classify: propose-joins never reads
+      # classification-queue.yaml, so an irrelevant queue failure must not kill a joins run.
       - name: Emit classification queue
+        id: emit_queue
+        if: github.event.inputs.mode == 'classify'
         working-directory: tools/acquisition
-        run: uv run warhub-data classify --data ../../data --emit-queue
+        run: |
+          set +e
+          uv run warhub-data classify --data ../../data --emit-queue > ../../_emit_queue.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_emit_queue.txt
 
       # Inputs (github.event.inputs.*) are routed through env: rather than interpolated directly
       # into the script body -- same injection-hardening pattern as catalog-acquire.yml.
-      #
-      # `set +e` + captured exit code (not a hard step failure) on every budget/data-mutating step
-      # below, same convention as catalog-acquire.yml's integrate job: llm.py/joins.py flush their
-      # caches incrementally (task-5-report.md: "incremental-flush-survives-crash"), so a mid-run
-      # crash still leaves real partial progress on disk that belongs in the sticky PR, not thrown
-      # away by an early job abort. The final step fails the job loudly, after the PR is opened.
       - name: LLM classify
         id: llm
         if: github.event.inputs.mode == 'classify'
@@ -89,6 +100,10 @@ jobs:
           BUDGET: ${{ github.event.inputs.budget }}
         run: |
           set +e
+          # Empty string (explicitly-cleared input) falls back to the default budget -- same
+          # empty-string fallback pattern as catalog-acquire.yml's OVERRIDE_BUDGET handling;
+          # otherwise argparse receives --budget "" and errors.
+          BUDGET="${BUDGET:-500}"
           uv run warhub-data classify --data ../../data --llm \
             --budget "$BUDGET" \
             --run-date "$(date -u +%F)" > ../../_llm.txt
@@ -105,6 +120,10 @@ jobs:
           BUDGET: ${{ github.event.inputs.budget }}
         run: |
           set +e
+          # Empty string (explicitly-cleared input) falls back to the default budget -- same
+          # empty-string fallback pattern as catalog-acquire.yml's OVERRIDE_BUDGET handling;
+          # otherwise argparse receives --budget "" and errors.
+          BUDGET="${BUDGET:-500}"
           uv run warhub-data classify --data ../../data --propose-joins \
             --budget "$BUDGET" \
             --run-date "$(date -u +%F)" > ../../_joins.txt
@@ -158,6 +177,14 @@ jobs:
             echo "**Trigger:** ${{ github.event_name }}"
             echo
             if [ "$MODE" = "classify" ]; then
+              echo "### Emit classification queue"
+              echo
+              cat _emit_queue.txt
+              if [ "${{ steps.emit_queue.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`classify --emit-queue\` exited ${{ steps.emit_queue.outputs.exit_code }} (expected 0) -- possible crash."
+              fi
+              echo
               echo "### LLM classify"
               echo
               cat _llm.txt
@@ -230,11 +257,16 @@ jobs:
           crashed=0
 
           if [ "$MODE" = "classify" ]; then
+            emit_queue_exit="${{ steps.emit_queue.outputs.exit_code }}"
             llm_exit="${{ steps.llm.outputs.exit_code }}"
             apply_exit="${{ steps.apply.outputs.exit_code }}"
             resolve_exit="${{ steps.resolve.outputs.exit_code }}"
             report_exit="${{ steps.report.outputs.exit_code }}"
 
+            if [ "$emit_queue_exit" != "0" ]; then
+              echo "::error::classify --emit-queue exited $emit_queue_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
+              crashed=1
+            fi
             if [ "$llm_exit" != "0" ]; then
               echo "::error::classify --llm exited $llm_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
               crashed=1
