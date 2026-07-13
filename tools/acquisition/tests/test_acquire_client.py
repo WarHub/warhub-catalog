@@ -184,6 +184,89 @@ def test_non_retryable_4xx_raises_fetch_error_without_retry() -> None:
     assert len(calls) == 1  # no retry for a non-retryable 4xx
 
 
+def test_3xx_redirect_raises_fetch_error_without_retry() -> None:
+    """The goblingaming incident: an apex host 301-redirected detail URLs with an
+    empty body. follow_redirects stays off, so this must surface immediately as
+    FetchError(url, 301) — never leak the empty body into json.loads."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(301, headers={"Location": "https://example.test/moved"}, text="")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/detail")
+    assert excinfo.value.status == 301
+    assert len(calls) == 1  # no retry for a redirect
+
+
+def test_get_json_empty_body_200_retried_then_raises_fetch_error() -> None:
+    """A 2xx with an unparseable (e.g. empty) body is transient, not an immediate
+    failure: retry with the same backoff loop, then raise FetchError(url, 200)."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(200, text="")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/empty")
+    assert len(calls) == 3  # retried through all attempts
+    assert excinfo.value.status == 200
+
+
+def test_get_json_empty_body_then_valid_json_succeeds_on_retry() -> None:
+    attempts = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        if attempts["n"] == 1:
+            return httpx.Response(200, text="")
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    assert client.get_json("/flaky-body") == {"ok": True}
+    assert attempts["n"] == 2
+
+
+def test_get_response_does_not_validate_non_json_2xx_body() -> None:
+    """get_response has no JSON-parsing concept: a 2xx with a non-JSON body (e.g.
+    empty, or plain text) is returned as-is, unlike get_json."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(200, text="")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    response = client.get_response("/not-json")
+    assert response.status_code == 200
+    assert response.text == ""
+    assert len(calls) == 1  # no retry: get_response never inspects the body
+
+
 def test_5xx_backoff_durations_follow_exponential_formula() -> None:
     """The backoff delay per attempt is 2**attempt (no Retry-After header present)."""
     attempts = {"n": 0}

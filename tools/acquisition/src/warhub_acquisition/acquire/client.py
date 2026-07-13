@@ -52,7 +52,12 @@ class PoliteClient:
                 pass
         return float(2**attempt)
 
-    def _request(self, url: str, params: dict | None = None) -> httpx.Response:
+    def _request(
+        self,
+        url: str,
+        params: dict | None = None,
+        accept: Callable[[httpx.Response], bool] | None = None,
+    ) -> httpx.Response:
         last_status: int | None = None
         for attempt in range(_MAX_ATTEMPTS):
             self._pace()
@@ -72,11 +77,24 @@ class PoliteClient:
                     continue
                 raise FetchError(url, last_status)
 
-            if response.status_code >= 400:
-                # Non-retryable 4xx (e.g. 404): not a politeness/transient concern,
-                # so surface it immediately via the same FetchError contract instead
-                # of leaking httpx.HTTPStatusError to callers.
+            if not (200 <= response.status_code < 300):
+                # Any other non-2xx (404, and — per the goblingaming incident — a
+                # 301 redirect with follow_redirects off) is not a politeness/transient
+                # concern, so surface it immediately via the same FetchError contract
+                # instead of leaking an empty/poison body or an httpx.HTTPStatusError
+                # to callers. No retry: redirects and client errors won't fix themselves.
                 raise FetchError(url, response.status_code)
+
+            if accept is not None and not accept(response):
+                # 2xx but the payload failed the caller's validation (e.g. get_json's
+                # body doesn't parse as JSON). Observed live: Shopify's edge returning
+                # empty-body 200s. Treat like any other transient failure and retry
+                # with the same backoff loop before giving up.
+                last_status = response.status_code
+                if attempt < _MAX_ATTEMPTS - 1:
+                    self._sleep(self._backoff_delay(attempt, None))
+                    continue
+                raise FetchError(url, last_status)
 
             return response
 
@@ -90,11 +108,24 @@ class PoliteClient:
         access that `get_json`'s `object`-only return can't provide. `get_json`/`get_text` are
         now thin wrappers over this so there is exactly one request/retry/pacing code path;
         neither existing method's signature or behavior changed.
+
+        No body validation happens at this layer: a 2xx response is returned as-is
+        regardless of its content (e.g. non-JSON bodies are fine here — only
+        `get_json` treats an unparseable body as transient).
         """
         return self._request(url, params)
 
     def get_json(self, url: str, params: dict | None = None) -> object:
-        return self.get_response(url, params).json()
+        def parses_as_json(response: httpx.Response) -> bool:
+            try:
+                response.json()
+            except ValueError:
+                # Poison 2xx body (e.g. an empty response from a misbehaving edge/CDN):
+                # never let json.JSONDecodeError escape the client's FetchError contract.
+                return False
+            return True
+
+        return self._request(url, params, accept=parses_as_json).json()
 
     def get_text(self, url: str) -> str:
         return self.get_response(url).text
