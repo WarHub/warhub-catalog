@@ -5,12 +5,42 @@ baseUrl: https://www.gamenerdz.com
 scope:
   sitemaps:
     - https://www.gamenerdz.com/xmlsitemap.php
-  # Best-effort GW filter: live probe 2026-07-13 sampled 5,370 URLs from the first products
-  # sitemap page and found a reasonable density of GW-signal tokens (211 "warhammer", 84
-  # "citadel") in product slugs, unlike Radaddel. This is NOT exhaustive -- some GW products may
-  # slug without any of these tokens -- but budget+priority already bounds total work, so a
-  # best-effort filter here just spends that budget more usefully.
-  urlInclude: '(?i)(warhammer|citadel|forge-world)'
+  # Broadened multi-manufacturer filter, Plan 5 Task 2 (2026-07-13). The old GW-only filter
+  # (warhammer|citadel|forge-world) structurally excluded Warlord/Mantic/etc -- exactly the two
+  # manufacturers holding 79% of the catalog's missing-EAN gap (3,979 Warlord + 1,983 Mantic of
+  # 7,547, docs/research/2026-07-13-coverage-arithmetic.md). Terms below were derived from
+  # data/catalog/taxonomy/{game-systems,manufacturers}.yaml slugs/vendorNames (every game-system
+  # slug published by a tracked non-GW manufacturer, plus each manufacturer's own brand token),
+  # NOT invented, then live-measured against the real sitemap (260,267 URLs, all 32 xmlsitemap.php
+  # child pages, 2026-07-13) and pruned of terms that proved to be junk generators:
+  #   - "middle-earth" alone matched 2,872 URLs, ~all Magic: The Gathering "Tales of Middle-earth"
+  #     cards, not GW's Middle-earth SBG -- dropped (age-of-sigmar/horus-heresy/the-old-world/
+  #     warhammer/citadel/forge-world already cover GW).
+  #   - bare "warlord" matched 130 URLs on this site, ~98% MTG "Warlord" creature-type cards and an
+  #     unrelated CCG literally named "Warlord" (site category /warlord/ = "Card Games - Warlord",
+  #     confirmed by live browse) -- replaced with "warlord-games" + Warlord's specific game-system
+  #     slugs (bolt-action, black-powder, hail-caesar, ...). Net finding: Game Nerdz's actual
+  #     Warlord Games miniatures stock is negligible (exactly 1 confirmed product across the whole
+  #     260k-URL sitemap and site search: "bolt-action-us-army-command" -- a structural ceiling,
+  #     not a filter gap; matches the Plan-5 Warlord-store-ceiling pattern noted elsewhere).
+  #   - bare "mantic" matched 76 URLs, ~97% "manticore"/"necromantic" collisions -- replaced with
+  #     "mantic-games" + Mantic's specific game-system/product-line slugs (kings-of-war, deadzone,
+  #     dreadball, walking-dead-all-out-war, halo-flashpoint, dungeon-saga).
+  #   - bare "corvus" (100% junk here: GW "Corvus Blackstar"/Citadel "Corvus Black" paint/Star Wars
+  #     Destiny cards, 0 genuine Corvus Belli hits) and bare "firefight" (100% junk: Star Wars
+  #     Destiny "into the Firefight" cards, 0 genuine hits) were dropped entirely -- Corvus Belli is
+  #     already fully covered by "infinity"/"aristeia"/"warcrow".
+  #   - bare "armada" and bare "conquest" were dropped as generic-English-word junk generators
+  #     (Freebooter Miniatures "Imperiale Armada", "Master of Orion: Conquest", MTG cards, etc.);
+  #     Para Bellum's Conquest is instead matched by the specific "last-argument-of-kings" slug
+  #     token, Atomic Mass's Star Wars: Armada by "star-wars-armada".
+  # Result: 3,171 -> 5,455 URLs pass (of 260,267 total; 2,284 newly admitted), still well under a
+  # single controller sweep's budget (~20k). A 40-URL random sample of newly-admitted product-type
+  # URLs was 100% genuine wargaming-miniatures products (0% junk); across ALL types only 30 of the
+  # 5,455 total matches (0.55%) are non-product category/brand pages (harmless -- they just fail
+  # extraction and count extraction_failed, matching existing 7/3,171 behavior under the old
+  # filter). See task-2-report.md for the full term-derivation method and measurement script.
+  urlInclude: '(?i)(warhammer|citadel|forge-world|age-of-sigmar|horus-heresy|the-old-world|warlord-games|bolt-action|black-powder|hail-caesar|cruel-seas|victory-at-sea|blood-red-skies|konflikt-47|warlords-of-erehwon|gates-of-antares|spqr|judge-dredd|achtung-panzer|black-seas|pike-and-shotte|epic-black-powder|epic-hail-caesar|epic-pike-and-shotte|stargrave|mantic-games|kings-of-war|deadzone|dreadball|walking-dead-all-out-war|halo-flashpoint|dungeon-saga|infinity|aristeia|warcrow|wyrd|malifaux|the-other-side|steamforged|warmachine|guild-ball|godtear|epic-encounters|atomic-mass|marvel-crisis-protocol|star-wars-legion|star-wars-armada|star-wars-shatterpoint|star-wars-x-wing|cmon|asoiaf|para-bellum|last-argument-of-kings)'
   currency: usd
 politeness:
   rps: 0.5

@@ -9,6 +9,17 @@ scope:
   # reliable brand/category token -- e.g. the real GW flagship "necrons-combat-patrol" slug
   # contains no "warhammer"/"games-workshop"/"citadel" substring at all. A keyword filter here
   # would silently drop real GW products, which budget+priority already bounds without it.
+  #
+  # Re-verified for Plan 5 Task 2 (2026-07-13, docs/research/2026-07-13-coverage-arithmetic.md):
+  # this source was already an unfiltered full sweep, so it needed no "un-GW-scoping" -- the
+  # self-inflicted-gap problem this task fixes on Game Nerdz does not exist here. Confirmed the
+  # decision still holds rather than assuming it: applying the same broadened multi-manufacturer
+  # term list built for ret-gamenerdz.yaml (game-system + manufacturer slugs from
+  # data/catalog/taxonomy/{game-systems,manufacturers}.yaml, Warlord/Mantic/Corvus/Wyrd/
+  # Steamforged/AMG/CMON/Para Bellum) to Radaddel's live sitemap (12,806 URLs, unchanged from prior
+  # probe) would match only 670 of them -- i.e. a filter here would still throw away >94% of the
+  # catalog, the same finding as the original probe. Left deliberately unfiltered; stays a full
+  # sweep. See task-2-report.md.
   currency: eur
 politeness:
   rps: 0.5
