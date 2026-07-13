@@ -68,13 +68,27 @@ def _check_contract(descriptor: SourceDescriptor, result: StrategyResult, cursor
     contract = descriptor.contract or Contract()
     actual = len(result.observations)
 
-    if result.full_sweep:
-        if actual < contract.minCount:
-            raise SourceContractError(
-                f"{descriptor.id}: fresh observation count {actual} below minCount {contract.minCount}",
-                {"type": "min-count", "source": descriptor.id, "expected": contract.minCount, "actual": actual},
-            )
+    # minCount is checked on EVERY run, full sweep or not (final fix wave, item 3). Rationale: the
+    # runner previously gated this on full_sweep, but shopify.py/woo.py sources can never reach
+    # full_sweep at all (their barcode-less products re-queue into pending_details forever, so
+    # `full_sweep = not pending_details` never goes True once a store has any barcode-less
+    # product) -- their minCount floors were therefore permanently inert, and a partial
+    # enumeration collapse (the bulk /products.json or Store API page listing itself shrinking,
+    # e.g. from a broken store or a bad filter) would be silent. The assumption that makes this
+    # safe: every current strategy's *enumeration* (the cheap bulk-listing pass) covers the full
+    # product population on EVERY run, budgeted or not -- only per-item DETAIL fetches (barcodes,
+    # gtins) are what the budget rations, and minCount is a floor on `len(result.observations)`
+    # (one per enumerated+attributed product), not on detail-fetch completeness. sitemap_sd.py is
+    # the one strategy that does NOT enumerate its full population every run (a sitemap page-fetch
+    # budget rations the enumeration itself, not just per-item details) -- its minCount is 0 in
+    # every descriptor, so this unconditional check stays a no-op for it by design.
+    if actual < contract.minCount:
+        raise SourceContractError(
+            f"{descriptor.id}: fresh observation count {actual} below minCount {contract.minCount}",
+            {"type": "min-count", "source": descriptor.id, "expected": contract.minCount, "actual": actual},
+        )
 
+    if result.full_sweep:
         last_good_count = cursor.get("last_good_count")
         if last_good_count:
             drop_pct = (last_good_count - actual) / last_good_count * 100

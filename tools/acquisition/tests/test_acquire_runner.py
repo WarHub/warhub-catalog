@@ -67,6 +67,55 @@ def test_contract_min_count_violation_raises_and_writes_nothing(tmp_path: Path, 
     assert not (paths.evidence_products / "toy-src" / "cursor.yaml").exists()
 
 
+def test_unconditional_min_count_applies_on_budgeted_partial_run(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Regression (final fix wave, item 3): minCount must be checked on EVERY run, not only
+    full-sweep ones -- shopify.py/woo.py sources can never reach full_sweep at all (barcode-less
+    products requeue forever), so a minCount gated on full_sweep was permanently inert for them
+    and a partial enumeration collapse (e.g. the bulk listing itself shrinking) would be silent."""
+    result = StrategyResult(
+        observations=[obs("toy-src:a")],
+        full_sweep=False,
+        stats={"fetched": 1},
+        cursor={"pending": ["b", "c"]},
+    )
+    register("toy-src", result, monkeypatch)
+    desc = descriptor(minCount=10)
+    paths = DataPaths(tmp_path)
+
+    with pytest.raises(SourceContractError) as excinfo:
+        run_source(desc, paths, context(tmp_path, budget=1))
+
+    assert excinfo.value.details["type"] == "min-count"
+    assert excinfo.value.details["expected"] == 10
+    assert excinfo.value.details["actual"] == 1
+    assert not (paths.evidence_products / "toy-src" / "observations.jsonl").exists()
+    assert not (paths.evidence_products / "toy-src" / "cursor.yaml").exists()
+
+
+def test_unconditional_min_count_zero_is_a_noop_on_partial_run(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A minCount of 0 (sitemap_sd.py's descriptors, by design: partial-by-design coverage) must
+    stay a no-op on a budgeted/partial run -- this is the sitemap-source escape hatch the
+    unconditional minCount check relies on."""
+    result = StrategyResult(
+        observations=[],
+        full_sweep=False,
+        stats={"fetched": 0},
+        cursor={"fetched": {}},
+    )
+    register("toy-src", result, monkeypatch)
+    desc = descriptor(minCount=0)
+    paths = DataPaths(tmp_path)
+
+    health = run_source(desc, paths, context(tmp_path, budget=1))
+
+    assert health.contract_ok is True
+    assert health.observation_count == 0
+
+
 def test_healthy_full_sweep_writes_evidence_and_updates_miss_streaks(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -124,7 +173,10 @@ def test_budgeted_partial_run_never_increments_miss_streak(tmp_path: Path, monke
         cursor={"pending": ["x"]},
     )
     register("toy-src", result, monkeypatch)
-    desc = descriptor(minCount=1000)  # would fail if enforced -- must be skipped on partial runs
+    # minCount=0: this test is about mark_missed/missStreak gating on full_sweep, not minCount
+    # (which is now checked unconditionally, final fix wave item 3 -- see the dedicated
+    # test_unconditional_min_count_* tests below for that behavior).
+    desc = descriptor(minCount=0)
 
     health = run_source(desc, paths, context(tmp_path, budget=1))
 
