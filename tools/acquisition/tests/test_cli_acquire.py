@@ -58,6 +58,53 @@ def test_acquire_named_source_ok(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     assert "ok" in health
 
 
+def test_acquire_loads_real_mapping_file_into_context_mappings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
+) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    write_descriptor(paths, "toy-src", "toy")
+    write_yaml(
+        paths.mappings / "toy-src.yaml",
+        {"gameSystem": {"Bolt Action": "bolt-action"}, "faction": {}},
+    )
+
+    seen_mappings: dict = {}
+
+    def capture(desc, client, cursor, ctx):
+        seen_mappings.update(ctx.mappings)
+        return StrategyResult(observations=[obs("toy-src:a")], full_sweep=True, stats={"fetched": 1}, cursor={})
+
+    monkeypatch.setitem(STRATEGIES, "toy", capture)
+
+    exit_code = main(["acquire", "--data", str(tmp_path), "--source", "toy-src", "--run-date", "2026-07-13"])
+
+    assert exit_code == 0
+    assert seen_mappings == {"toy-src": {"gameSystem": {"Bolt Action": "bolt-action"}, "faction": {}}}
+
+
+def test_acquire_missing_mappings_directory_yields_empty_mappings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    write_descriptor(paths, "toy-src", "toy")
+
+    seen_mappings: dict = {"sentinel": "unset"}
+
+    def capture(desc, client, cursor, ctx):
+        seen_mappings.clear()
+        seen_mappings.update(ctx.mappings)
+        return StrategyResult(observations=[obs("toy-src:a")], full_sweep=True, stats={"fetched": 1}, cursor={})
+
+    monkeypatch.setitem(STRATEGIES, "toy", capture)
+
+    exit_code = main(["acquire", "--data", str(tmp_path), "--source", "toy-src", "--run-date", "2026-07-13"])
+
+    assert exit_code == 0
+    assert seen_mappings == {}
+
+
 def test_acquire_contract_violation_exits_4_and_other_sources_still_run(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
 ) -> None:

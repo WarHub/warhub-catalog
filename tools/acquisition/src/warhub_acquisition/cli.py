@@ -13,7 +13,13 @@ from warhub_acquisition.yamlio import read_yaml
 def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     import warhub_acquisition.acquire.strategies  # noqa: F401  (import registers STRATEGIES entries)
     from warhub_acquisition.acquire.health import SourceError, SourceFailure, build_health_report
-    from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, SourceContractError, run_source
+    from warhub_acquisition.acquire.runner import (
+        STRATEGIES,
+        AcquireContext,
+        SourceContractError,
+        load_mappings,
+        run_source,
+    )
     from warhub_acquisition.models.descriptor import load_descriptors
     from warhub_acquisition.taxonomy import Taxonomy
 
@@ -41,7 +47,8 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
         skipped = sorted(sid for sid, descriptor in descriptors.items() if descriptor.strategy not in STRATEGIES)
 
     taxonomy = Taxonomy.load(paths.taxonomy)
-    context = AcquireContext(taxonomy=taxonomy, mappings={}, run_date=args.run_date, budget=args.budget)
+    mappings = load_mappings(paths.mappings)
+    context = AcquireContext(taxonomy=taxonomy, mappings=mappings, run_date=args.run_date, budget=args.budget)
 
     healths = []
     failures = []

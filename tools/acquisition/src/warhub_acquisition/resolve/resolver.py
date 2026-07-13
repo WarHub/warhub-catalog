@@ -29,6 +29,10 @@ class DataPaths:
         return self.root / "catalog" / "sources"
 
     @property
+    def mappings(self) -> Path:
+        return self.root / "catalog" / "mappings"
+
+    @property
     def taxonomy(self) -> Path:
         return self.root / "catalog" / "taxonomy"
 

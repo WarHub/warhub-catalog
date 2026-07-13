@@ -67,3 +67,35 @@ def test_repo_mappings_parse_when_present() -> None:
     assert files
     for path in files:
         assert read_yaml(path) is not None
+
+
+def test_repo_mappings_reference_only_known_taxonomy_slugs() -> None:
+    """Every mapped gameSystem/faction slug must exist in the taxonomy label files -- strictly:
+    a slug not yet in game-systems.yaml/factions.yaml is only tolerated if the mapping file
+    explicitly lists it under a `newGameSystems:`/`newFactions:` allowlist key. No mapping file
+    uses that escape hatch today (kept strict on purpose), but the mechanism exists so a future
+    genuinely-new game system doesn't have to silently fail this check to get added.
+    """
+    paths = _require_repo_data()
+    mappings_dir = REPO_DATA / "catalog" / "mappings"
+    if not mappings_dir.exists():
+        pytest.skip("data/catalog/mappings/ not created yet")
+
+    game_systems, factions = load_labels(paths.taxonomy)
+
+    for path in sorted(mappings_dir.glob("*.yaml")):
+        data = read_yaml(path) or {}
+        allowed_game_systems = set(data.get("newGameSystems", []))
+        allowed_factions = set(data.get("newFactions", []))
+
+        for raw, slug in (data.get("gameSystem") or {}).items():
+            assert slug in game_systems or slug in allowed_game_systems, (
+                f"{path.name}: gameSystem[{raw!r}] -> {slug!r} is not a known "
+                f"taxonomy/game-systems.yaml slug and is not listed under newGameSystems"
+            )
+
+        for raw, slug in (data.get("faction") or {}).items():
+            assert slug in factions or slug in allowed_factions, (
+                f"{path.name}: faction[{raw!r}] -> {slug!r} is not a known "
+                f"taxonomy/factions.yaml slug and is not listed under newFactions"
+            )

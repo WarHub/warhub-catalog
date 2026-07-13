@@ -24,3 +24,7 @@ packages = ["src/warhub_acquisition"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-m 'not live'"
+markers = [
+    "live: real network integration test (opt-in only, e.g. `pytest -m live`; excluded by default)",
+]

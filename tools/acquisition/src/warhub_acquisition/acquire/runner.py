@@ -1,5 +1,6 @@
 """Contract-enforcing source runner: invoke a strategy, gate writes on its contract, persist."""
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Callable
 
 from warhub_acquisition.acquire.client import PoliteClient
@@ -8,6 +9,20 @@ from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.descriptor import Contract, SourceDescriptor
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.taxonomy import Taxonomy
+from warhub_acquisition.yamlio import read_yaml
+
+
+def load_mappings(directory: Path) -> dict[str, dict]:
+    """Load `data/catalog/mappings/<source-id>.yaml` files into `{source_id: {...}}`.
+
+    A source with no mapping file (fine for most retailers) is simply absent from the returned
+    dict -- callers already do `context.mappings.get(descriptor.id, {})`, so a missing key and an
+    empty file behave identically. A missing directory (e.g. a repo that hasn't created any
+    mappings yet) returns `{}`, not an error.
+    """
+    if not directory.exists():
+        return {}
+    return {path.stem: (read_yaml(path) or {}) for path in sorted(directory.glob("*.yaml"))}
 
 
 class SourceContractError(Exception):

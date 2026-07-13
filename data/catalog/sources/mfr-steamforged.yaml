@@ -1,0 +1,14 @@
+id: mfr-steamforged
+kind: manufacturer
+strategy: shopify
+baseUrl: https://steamforged.com
+scope:
+  currency: usd
+politeness:
+  rps: 0.5
+contract:
+  minCount: 900
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.8

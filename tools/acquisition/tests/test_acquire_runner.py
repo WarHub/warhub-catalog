@@ -10,6 +10,7 @@ from warhub_acquisition.acquire.runner import (
     SourceContractError,
     SourceHealth,
     StrategyResult,
+    load_mappings,
     run_source,
 )
 from warhub_acquisition.evidence.store import EvidenceStore
@@ -17,6 +18,7 @@ from warhub_acquisition.models.descriptor import Contract, SourceDescriptor
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.taxonomy import Taxonomy
+from warhub_acquisition.yamlio import write_yaml
 
 
 def obs(key: str, **kw: object) -> Observation:
@@ -197,3 +199,18 @@ def test_empty_fetched_set_skips_field_rate_check(tmp_path: Path, monkeypatch: p
 
     health = run_source(desc, paths, context(tmp_path))
     assert health.observation_count == 0
+
+
+def test_load_mappings_reads_every_file_keyed_by_source_id(tmp_path: Path) -> None:
+    write_yaml(tmp_path / "mfr-warlord-store.yaml", {"gameSystem": {"Bolt Action": "bolt-action"}, "faction": {}})
+    write_yaml(tmp_path / "ret-goblingaming.yaml", {"gameSystem": {}, "faction": {}})
+
+    mappings = load_mappings(tmp_path)
+
+    assert set(mappings) == {"mfr-warlord-store", "ret-goblingaming"}
+    assert mappings["mfr-warlord-store"]["gameSystem"] == {"Bolt Action": "bolt-action"}
+    assert mappings["ret-goblingaming"] == {"gameSystem": {}, "faction": {}}
+
+
+def test_load_mappings_missing_directory_returns_empty_dict(tmp_path: Path) -> None:
+    assert load_mappings(tmp_path / "does-not-exist") == {}

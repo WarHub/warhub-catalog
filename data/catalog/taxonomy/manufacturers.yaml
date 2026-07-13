@@ -29,7 +29,14 @@ manufacturers:
   - slug: steamforged-games
     name: Steamforged Games
     codePattern: 'SF[A-Z0-9-]+'
-    vendorNames: [Steamforged Games, Steamforged]
+    # steamforged.com (own Shopify store, probed 2026-07-13) tags vendor per in-house game line
+    # rather than by company name; these four (+ the "(app subscribers only)"/"Local Legends"
+    # variants) are exactly the game lines the retired .NET tool's own vendorMap attributed to
+    # "Steamforged Games" (git show 1593ee1^:tools/WarHub.ProductCatalog.Tool/ProductCatalogApp.cs,
+    # ~line 1154) -- see task-6-report.md for full live vendor-tag counts. Deliberately excludes
+    # the store's many licensed board-game/RPG vendor tags (Dark Souls, Elden Ring, Monster
+    # Hunter, P3 Paints, Iron Kingdoms, ...), which the old tool never scraped either.
+    vendorNames: [Steamforged Games, Steamforged, Warmachine, 'Warmachine (app subscribers only)', Guild Ball, Godtear, Epic Encounters, 'Epic Encounters: Local Legends']
   - slug: warlord-games
     name: Warlord Games
     codePattern: '[0-9]{9,12}(-[0-9]{1,2})?|(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{6,}'
@@ -37,4 +44,8 @@ manufacturers:
   - slug: wyrd-games
     name: Wyrd Games
     codePattern: 'WYR\d+[A-Z ]*'
-    vendorNames: [Wyrd Games, Wyrd Miniatures]
+    # giveusyourmoneypleasethankyou-wyrd.com (own Shopify store, probed 2026-07-13) uses these 5
+    # vendor tag variants across its ~707 products (518 "Wyrd Miniatures - Online Store", 185
+    # "Wyrd", 2 "Wyrd Games", 1 "Wyrd Miniatures", 1 "WYRD - PROMO") -- all the same company's
+    # own catalog, no other vendor observed. See task-6-report.md.
+    vendorNames: [Wyrd Games, Wyrd Miniatures, Wyrd, 'Wyrd Miniatures - Online Store', 'WYRD - PROMO']

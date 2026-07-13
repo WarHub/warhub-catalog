@@ -151,6 +151,7 @@ def shopify_strategy(
         "details_fetched": 0,
         "barcodes_found": 0,
         "skipped_unknown_vendor": 0,
+        "out_of_scope_vendor": 0,
         "unmapped_hints": 0,
         "detail_fetch_errors": 0,
     }
@@ -177,8 +178,18 @@ def shopify_strategy(
     missing_ean_candidates: list[str] = []
     stale_candidates: list[str] = []
 
+    # Retailer allow-list (e.g. ret-goblingaming's scope.vendors: [Games Workshop]): when
+    # declared, only these exact raw vendor strings are eligible at all -- applied BEFORE
+    # taxonomy attribution, and counted separately from an ordinary unknown-vendor skip so a
+    # health report can distinguish "not the brand this retailer source is scoped to" from "not
+    # in the taxonomy anywhere." Manufacturer-kind sources (no scope.vendors) are unaffected.
+    scope_vendors = descriptor.scope.get("vendors")
+
     for handle, product in sorted(products.items()):
         vendor = product.get("vendor") or ""
+        if scope_vendors is not None and vendor not in scope_vendors:
+            stats["out_of_scope_vendor"] += 1
+            continue
         manufacturer = context.taxonomy.manufacturer_for_vendor(vendor)
         if manufacturer is None:
             stats["skipped_unknown_vendor"] += 1

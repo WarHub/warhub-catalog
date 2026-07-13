@@ -329,6 +329,98 @@ def test_detail_fetch_error_does_not_abort_sweep_and_stays_pending() -> None:
     assert result.full_sweep is False
 
 
+def retailer_descriptor(vendors: list[str]) -> SourceDescriptor:
+    return SourceDescriptor(
+        id="ret-goblingaming",
+        kind="retailer",
+        strategy="shopify",
+        baseUrl="https://goblingaming.co.uk",
+        scope={"vendors": vendors, "currency": "gbp"},
+    )
+
+
+def two_manufacturer_taxonomy() -> Taxonomy:
+    return Taxonomy(
+        {
+            "games-workshop": Manufacturer(
+                slug="games-workshop", name="Games Workshop", vendorNames=["Games Workshop"]
+            ),
+            "warlord-games": Manufacturer(
+                slug="warlord-games", name="Warlord Games", vendorNames=["Warlord Games"]
+            ),
+        }
+    )
+
+
+def test_scope_vendors_allow_list_keeps_only_listed_vendor_and_counts_the_rest() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(
+                200,
+                json={
+                    "products": [
+                        {
+                            "id": 1,
+                            "handle": "gw-item",
+                            "title": "GW Item",
+                            "vendor": "Games Workshop",
+                            "product_type": "",
+                            "tags": [],
+                            "updated_at": "2026-07-01T00:00:00+00:00",
+                            "variants": [{"sku": "G1", "price": "10.00"}],
+                            "images": [],
+                        },
+                        {
+                            "id": 2,
+                            "handle": "warlord-item",
+                            "title": "Warlord Item",
+                            # taxonomy-known vendor, but NOT in this retailer's scope -- must be
+                            # skipped as out-of-scope, not unknown-vendor.
+                            "vendor": "Warlord Games",
+                            "product_type": "",
+                            "tags": [],
+                            "updated_at": "2026-07-01T00:00:00+00:00",
+                            "variants": [{"sku": "W1", "price": "20.00"}],
+                            "images": [],
+                        },
+                    ]
+                },
+            )
+        return httpx.Response(200, json={"products": []})
+
+    client = PoliteClient(
+        "https://goblingaming.co.uk", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(
+        retailer_descriptor(["Games Workshop"]), client, {}, context(two_manufacturer_taxonomy(), budget=0)
+    )
+
+    assert result.stats["products_seen"] == 2
+    assert result.stats["out_of_scope_vendor"] == 1
+    assert result.stats["skipped_unknown_vendor"] == 0
+    assert len(result.observations) == 1
+    assert result.observations[0].key == "ret-goblingaming:gw-item"
+    assert result.observations[0].manufacturer == "games-workshop"
+
+
+def test_scope_vendors_absent_behaves_unchanged() -> None:
+    """No scope.vendors declared (the manufacturer-store case) -- out_of_scope_vendor stays 0
+    and taxonomy attribution alone decides inclusion, matching pre-existing behavior."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(200, json=two_known_products_page())
+        return httpx.Response(200, json={"products": []})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(descriptor(), client, {}, context(warlord_taxonomy(), budget=0))
+
+    assert result.stats["out_of_scope_vendor"] == 0
+    assert len(result.observations) == 2
+
+
 def test_detail_fetch_error_on_stale_refresh_preserves_previously_known_ean() -> None:
     """A transient failure while refreshing an already-known ean must not wipe it: the candidate
     observation keeps serving the last-known-good ean, and the handle stays queued for retry."""
