@@ -180,6 +180,34 @@ def test_shared_ean_same_manufacturer_still_merges() -> None:
     assert list(result.entities) == ["games-workshop/99120110077"]
 
 
+def test_cross_manufacturer_ean_keys_include_all_owner_observations() -> None:
+    # Owner manufacturer (games-workshop) asserts the EAN via TWO observations (which union
+    # with each other as today, via the ean anchor); a second manufacturer (wyrd-games)
+    # asserts the same EAN. The payload's "keys" must list all three asserting keys, not just
+    # the owner's anchor key.
+    taxonomy = Taxonomy(
+        {
+            "games-workshop": Manufacturer(slug="games-workshop", name="Games Workshop", codePattern=r"\d{11}"),
+            "wyrd-games": Manufacturer(slug="wyrd-games", name="Wyrd Games", codePattern=r"WYR\d+"),
+        }
+    )
+    result = join_observations(
+        [
+            obs("mfr-gw:a", sku="99120110077", ean="5011921194285"),
+            obs("ret-goblin:x", sku=None, name="Different Listing Name", ean="5011921194285"),
+            obs("ret-x:b", manufacturer="wyrd-games", name="Other Thing", sku=None, ean="5011921194285"),
+        ],
+        taxonomy, {**KINDS, "ret-x": "retailer"}, Matches(),
+    )
+    assert sorted(m.key for m in result.entities["games-workshop/99120110077"]) == ["mfr-gw:a", "ret-goblin:x"]
+    assert [m.key for m in result.entities["wyrd-games/other-thing"]] == ["ret-x:b"]
+    assert {
+        "type": "cross-manufacturer-ean",
+        "ean": "5011921194285",
+        "keys": ["mfr-gw:a", "ret-goblin:x", "ret-x:b"],
+    } in result.ambiguous
+
+
 def test_degenerate_name_forced_join_still_works() -> None:
     matches = Matches(joins={"ret-goblin:x": "games-workshop/99120110077"})
     result = join_observations(
