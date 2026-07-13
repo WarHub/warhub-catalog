@@ -82,8 +82,19 @@ class PoliteClient:
 
         raise FetchError(url, last_status)  # unreachable safeguard
 
+    def get_response(self, url: str, params: dict | None = None) -> httpx.Response:
+        """Like `get_json`/`get_text` but returns the full response (headers + body).
+
+        Added for the woo strategy (Task 8): WooCommerce's Store API signals total result count
+        via the `X-WP-Total` response header, not the JSON body, so pagination needs header
+        access that `get_json`'s `object`-only return can't provide. `get_json`/`get_text` are
+        now thin wrappers over this so there is exactly one request/retry/pacing code path;
+        neither existing method's signature or behavior changed.
+        """
+        return self._request(url, params)
+
     def get_json(self, url: str, params: dict | None = None) -> object:
-        return self._request(url, params).json()
+        return self.get_response(url, params).json()
 
     def get_text(self, url: str) -> str:
-        return self._request(url).text
+        return self.get_response(url).text

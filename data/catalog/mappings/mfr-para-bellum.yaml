@@ -1,0 +1,27 @@
+# Real category-slug data, sourced from the live Woo Store API's own
+# /wp-json/wc/store/products/categories endpoint (probed 2026-07-13, curl.exe, bot UA). Unlike
+# mfr-manticgames.yaml, Para Bellum's own product `categories` lists DO carry these exact slugs
+# directly (confirmed on real sampled products, e.g. product 1493 "Herald of Magma" carries
+# ["conquest", "dweghom", "factions"]) -- an honest, evidence-based, exact-match mapping, not a
+# guess.
+#
+# gameSystem: the store's single top-level category (id 19, "conquest", 384/384 products
+# store-wide) matches taxonomy/game-systems.yaml's "conquest" slug exactly. Para Bellum sells
+# exactly one game system.
+gameSystem:
+  conquest: conquest
+# faction: every one of Para Bellum's 9 faction-level categories (probed via the categories
+# endpoint, each is a real live category with a nonzero product count) matches a
+# taxonomy/factions.yaml slug exactly, except "wadrhun" (W'adrhun, 36 live products) -- no
+# corresponding slug exists in factions.yaml today, so it is deliberately left unmapped and will
+# surface via stats.unmapped_hints rather than being guessed.
+faction:
+  city-states: city-states
+  dweghom: dweghom
+  hundred-kingdoms: hundred-kingdoms
+  nords: nords
+  old-dominion: old-dominion
+  sorcerer-kings: sorcerer-kings
+  spires: spires
+  weaver-courts: weaver-courts
+  yoroni: yoroni

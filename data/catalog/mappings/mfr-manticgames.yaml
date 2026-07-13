@@ -1,0 +1,23 @@
+# Left as an empty scaffold rather than guessed. Live evidence (2026-07-13, curl.exe, bot UA)
+# from probing the Woo Store API's own /products/categories endpoint plus several real product
+# pages (Kings of War, Firefight, Deadzone, Armada, Halo: Flashpoint ranges) found:
+#
+# - Top-level category slugs DO match taxonomy/game-systems.yaml exactly in several cases
+#   (kings-of-war, firefight, deadzone, dreadball, armada, halo-flashpoint) -- but a product's
+#   OWN `categories` list (what the strategy actually reads) never literally carries that
+#   top-level slug; products are tagged only with leaf/child categories (e.g.
+#   "kings-of-war-undead", "firefight-forge-fathers", "mazon-labs-firefight",
+#   "getting-started-kings-of-war"). Confirmed across every sampled product (categories
+#   endpoint's own descendant-inclusive counts do NOT mean the descendant tag is present on the
+#   product itself). An exact-match lookup against these leaf slugs would therefore never fire.
+# - Unlike mfr-warlord-store.yaml (Task 6), there is no retired .NET tool method covering Mantic
+#   to port substring-match rules from -- Mantic is a new source with no prior extractor.
+# - Faction-level category slugs (basilean, forces-of-nature, kings-of-war-undead, ...) have no
+#   corresponding entries in data/catalog/taxonomy/factions.yaml at all (that file's slugs come
+#   from other manufacturers' own faction naming).
+#
+# Curating a substring/heuristic mapping from leaf category slugs to game systems without a
+# ported source-of-truth would be guessing, which this task's brief explicitly forbids. See
+# task-8-report.md for the full live evidence.
+gameSystem: {}
+faction: {}

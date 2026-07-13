@@ -25,6 +25,20 @@ def test_get_json_sends_user_agent_and_returns_parsed_body() -> None:
     assert seen_headers["user-agent"] == UA
 
 
+def test_get_response_exposes_headers_and_body() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"ok": True}, headers={"X-WP-Total": "42"})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    response = client.get_response("/things.json")
+    assert response.json() == {"ok": True}
+    assert response.headers["X-WP-Total"] == "42"
+
+
 def test_get_text_returns_body_text() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(200, text="hello world")
