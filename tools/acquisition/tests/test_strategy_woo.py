@@ -167,43 +167,90 @@ def test_enumeration_and_detail_fetch_extracts_real_gtin_from_ldjson() -> None:
     assert len(calls) == 4
 
 
-def test_x_wp_total_header_stops_enumeration_without_extra_page_fetch() -> None:
+def test_x_wp_total_header_is_informational_only_and_does_not_stop_enumeration() -> None:
+    """X-WP-Total must never drive loop control (finding 2): even though the header claims
+    the whole catalog is satisfied by page 1, enumeration must still fetch page 2 and only
+    stop once an empty page is seen. The header value is recorded purely as a stat."""
+
     def handler(request: httpx.Request) -> httpx.Response:
-        assert request.url.params.get("page") == "1"  # a page 2 request would fail this
-        return httpx.Response(
-            200,
-            json=[
-                {
-                    "id": 1,
-                    "name": "Alpha",
-                    "sku": "A1",
-                    "permalink": "https://example.test/alpha/",
-                    "prices": {"price": "1000", "currency_minor_unit": 2},
-                    "images": [],
-                    "categories": [],
-                    "is_in_stock": True,
-                },
-                {
-                    "id": 2,
-                    "name": "Bravo",
-                    "sku": "B1",
-                    "permalink": "https://example.test/bravo/",
-                    "prices": {"price": "2000", "currency_minor_unit": 2},
-                    "images": [],
-                    "categories": [],
-                    "is_in_stock": True,
-                },
-            ],
-            headers={"X-WP-Total": "2"},
-        )
+        page = request.url.params.get("page")
+        if page == "1":
+            return httpx.Response(
+                200,
+                json=[
+                    {
+                        "id": 1,
+                        "name": "Alpha",
+                        "sku": "A1",
+                        "permalink": "https://example.test/alpha/",
+                        "prices": {"price": "1000", "currency_minor_unit": 2},
+                        "images": [],
+                        "categories": [],
+                        "is_in_stock": True,
+                    },
+                    {
+                        "id": 2,
+                        "name": "Bravo",
+                        "sku": "B1",
+                        "permalink": "https://example.test/bravo/",
+                        "prices": {"price": "2000", "currency_minor_unit": 2},
+                        "images": [],
+                        "categories": [],
+                        "is_in_stock": True,
+                    },
+                ],
+                headers={"X-WP-Total": "2"},
+            )
+        if page == "2":
+            return httpx.Response(200, json=[])
+        raise AssertionError(f"unexpected page requested: {page}")
 
     client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
     result = woo_strategy(
         mantic_descriptor(gtinFromJsonLd=False), client, {}, context(mantic_taxonomy(), budget=0)
     )
 
-    assert result.stats["fetched_pages"] == 1  # X-WP-Total: 2 satisfied by a single page of 2
+    assert result.stats["fetched_pages"] == 2  # page 2 fetched despite X-WP-Total already met
     assert result.stats["products_seen"] == 2
+    assert result.stats["reported_total"] == 2  # kept only as an informational stat
+
+
+def test_enumeration_completes_all_non_empty_pages_when_x_wp_total_is_absent() -> None:
+    """Regression for trusting X-WP-Total for loop control: a missing header used to default
+    to 0 via `int(headers.get("X-WP-Total", "0"))`, which combined with a `len(products) >=
+    total` check terminated enumeration after a single page even when more non-empty pages
+    remained. Termination must be driven ONLY by an empty page (mirrors shopify.py)."""
+
+    def product(product_id: int, name: str) -> dict:
+        return {
+            "id": product_id,
+            "name": name,
+            "sku": f"P{product_id}",
+            "permalink": f"https://example.test/{name.lower()}/",
+            "prices": {"price": "1000", "currency_minor_unit": 2},
+            "images": [],
+            "categories": [],
+            "is_in_stock": True,
+        }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        page = request.url.params.get("page")
+        if page == "1":
+            return httpx.Response(200, json=[product(1, "Alpha")])  # no X-WP-Total at all
+        if page == "2":
+            return httpx.Response(200, json=[product(2, "Bravo")])
+        if page == "3":
+            return httpx.Response(200, json=[])
+        raise AssertionError(f"unexpected page requested: {page}")
+
+    client = PoliteClient(MANTIC_BASE, transport=httpx.MockTransport(handler), sleep=lambda s: None)
+    result = woo_strategy(
+        mantic_descriptor(gtinFromJsonLd=False), client, {}, context(mantic_taxonomy(), budget=0)
+    )
+
+    assert result.stats["fetched_pages"] == 3
+    assert result.stats["products_seen"] == 2
+    assert "reported_total" not in result.stats
 
 
 def test_minor_unit_price_conversion_is_exact() -> None:
@@ -251,6 +298,22 @@ def test_gtin_extraction_falls_back_to_gtin13_and_flat_product_node() -> None:
 
 def test_gtin_extraction_returns_none_when_absent() -> None:
     assert _extract_gtin(NO_GTIN_HTML) is None
+
+
+def test_gtin_extraction_skips_malformed_ldjson_block_and_finds_later_graph_product() -> None:
+    """Real pages carry multiple ld+json blocks; one being malformed (e.g. a theme/plugin
+    emitting broken JSON) must not abort extraction -- a later, valid block's @graph'd
+    Product node must still be found."""
+    html = (
+        '<script type="application/ld+json">{not valid json,,,</script>'
+        '<script type="application/ld+json">'
+        '{"@context": "https://schema.org", "@graph": ['
+        '{"@type": "WebPage", "name": "Some Page"},'
+        '{"@type": "Product", "name": "Widget", "gtin": "9781911516675"}'
+        "]}"
+        "</script>"
+    )
+    assert _extract_gtin(html) == "9781911516675"
 
 
 def two_known_products_page() -> list[dict]:

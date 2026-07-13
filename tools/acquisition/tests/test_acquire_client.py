@@ -267,6 +267,43 @@ def test_get_response_does_not_validate_non_json_2xx_body() -> None:
     assert len(calls) == 1  # no retry: get_response never inspects the body
 
 
+def test_get_json_response_returns_parsed_body_and_headers() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"ok": True}, headers={"X-WP-Total": "42"})
+
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    body, headers = client.get_json_response("/things.json")
+    assert body == {"ok": True}
+    assert headers["X-WP-Total"] == "42"
+
+
+def test_get_json_response_empty_body_200_retried_then_raises_fetch_error() -> None:
+    """The woo strategy used to call get_response + unguarded response.json() for header
+    access, bypassing get_json's poison-2xx-body protection entirely: an empty/malformed
+    body on a real pagination endpoint would crash the run instead of being retried.
+    get_json_response must share the exact same retry+accept path as get_json."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(200, text="", headers={"X-WP-Total": "2"})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json_response("/wp-json/wc/store/products")
+    assert len(calls) == 3  # retried through all attempts, same as get_json
+    assert excinfo.value.status == 200
+
+
 def test_5xx_backoff_durations_follow_exponential_formula() -> None:
     """The backoff delay per attempt is 2**attempt (no Retry-After header present)."""
     attempts = {"n": 0}

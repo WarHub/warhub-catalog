@@ -206,25 +206,30 @@ def woo_strategy(
         "detail_fetch_errors": 0,
     }
 
-    # --- Enumerate: always full, stop via X-WP-Total (falling back to an empty page, e.g. an
-    # out-of-range page past the last one -- confirmed live behavior during fixture capture). ---
+    # --- Enumerate: always full, terminate ONLY on an empty page (mirrors shopify.py). Woo's
+    # `X-WP-Total` header is informational only (stats["reported_total"]) -- a missing or
+    # garbled header must never end enumeration early, so it is never consulted for loop
+    # control. Confirmed live during fixture capture: an out-of-range page past the last one
+    # returns an empty list, which is what actually terminates the loop. ---
     products: dict[str, dict] = {}
     page = 1
-    total: int | None = None
     while True:
-        response = client.get_response(PRODUCTS_PATH, params={"per_page": PAGE_SIZE, "page": page})
+        payload, headers = client.get_json_response(
+            PRODUCTS_PATH, params={"per_page": PAGE_SIZE, "page": page}
+        )
         stats["fetched_pages"] += 1
-        payload = response.json()
         page_products = payload if isinstance(payload, list) else []
-        if total is None:
-            try:
-                total = int(response.headers.get("X-WP-Total", "0"))
-            except (TypeError, ValueError):
-                total = 0
+        if "reported_total" not in stats:
+            reported_total = headers.get("X-WP-Total")
+            if reported_total is not None:
+                try:
+                    stats["reported_total"] = int(reported_total)
+                except (TypeError, ValueError):
+                    pass
+        if not page_products:
+            break
         for product in page_products:
             products[str(product["id"])] = product
-        if not page_products or len(products) >= total:
-            break
         page += 1
 
     stats["products_seen"] = len(products)
@@ -262,9 +267,9 @@ def woo_strategy(
         for pid in to_fetch:
             product = products[pid]
             permalink = product.get("permalink")
-            stats["details_fetched"] += 1
             if not permalink:
                 continue  # nothing to fetch; stays queued via pending_details below
+            stats["details_fetched"] += 1
             try:
                 html = client.get_text(permalink)
             except FetchError:

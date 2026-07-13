@@ -103,19 +103,27 @@ class PoliteClient:
     def get_response(self, url: str, params: dict | None = None) -> httpx.Response:
         """Like `get_json`/`get_text` but returns the full response (headers + body).
 
-        Added for the woo strategy (Task 8): WooCommerce's Store API signals total result count
-        via the `X-WP-Total` response header, not the JSON body, so pagination needs header
-        access that `get_json`'s `object`-only return can't provide. `get_json`/`get_text` are
-        now thin wrappers over this so there is exactly one request/retry/pacing code path;
-        neither existing method's signature or behavior changed.
+        `get_text` is a thin wrapper over this so there is exactly one request/retry/pacing
+        code path for the raw-response case.
 
         No body validation happens at this layer: a 2xx response is returned as-is
         regardless of its content (e.g. non-JSON bodies are fine here — only
-        `get_json` treats an unparseable body as transient).
+        `get_json`/`get_json_response` treat an unparseable body as transient).
         """
         return self._request(url, params)
 
-    def get_json(self, url: str, params: dict | None = None) -> object:
+    def get_json_response(self, url: str, params: dict | None = None) -> tuple[object, httpx.Headers]:
+        """Like `get_json` but also exposes response headers.
+
+        Added for the woo strategy (Task 8 fix wave 1): WooCommerce's Store API signals total
+        result count via the `X-WP-Total` response header, not the JSON body, so pagination
+        needs header access -- but `get_response` deliberately skips body validation, and
+        enumeration was calling it and then unguarding `response.json()`, bypassing the very
+        poison-2xx-body protection `get_json`'s `accept` hook exists to provide (an
+        empty/malformed 200 body would crash the run instead of being retried). `get_json` is
+        now a thin wrapper over this so there is exactly one retry+accept code path for the
+        JSON case; its signature/behavior is unchanged.
+        """
         def parses_as_json(response: httpx.Response) -> bool:
             try:
                 response.json()
@@ -125,7 +133,11 @@ class PoliteClient:
                 return False
             return True
 
-        return self._request(url, params, accept=parses_as_json).json()
+        response = self._request(url, params, accept=parses_as_json)
+        return response.json(), response.headers
+
+    def get_json(self, url: str, params: dict | None = None) -> object:
+        return self.get_json_response(url, params)[0]
 
     def get_text(self, url: str) -> str:
         return self.get_response(url).text
