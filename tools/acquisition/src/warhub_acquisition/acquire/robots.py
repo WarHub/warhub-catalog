@@ -10,18 +10,37 @@ compliance hole, since a site can publish a robots.txt that allows `/` (the site
 `baseUrl`) while disallowing a specific path a strategy actually fetches (e.g. `/products.json` or
 `/search`). Nothing in this repo's current sources hit that hole (verified live), but nothing
 structurally prevented a future one from doing so. The fix moved enforcement into
-`PoliteClient._request` (`acquire/client.py`) -- the single choke point EVERY request from EVERY
-strategy already passes through -- so the guarantee is now "every fetched URL is checked," not
-"the base URL happened to be checked and every other URL was assumed fine." The two checks now
-work together, not redundantly:
+`PoliteClient._request` (`acquire/client.py`) -- the choke point every HTTPX-based request from
+every strategy passes through -- so the guarantee became "every fetched URL is checked, base URL
+or not" for those strategies. The two checks work together, not redundantly:
 
 1. `runner.run_source`'s base-URL preflight (unchanged in spirit, still runs first): a fast, loud,
    early failure -- if `baseUrl` itself is disallowed, we know before any strategy-specific work
    (enumeration, pagination, detail fetches) starts, with a clear "this source's root is blocked"
    error rather than whatever the strategy's first fetch happens to be.
-2. `PoliteClient._request`'s per-request check (the REAL guarantee): the `RobotsPolicy` fetched by
-   the preflight is attached to the strategy's `PoliteClient` (`robots=` constructor param) and
-   re-checked against the fully-resolved URL of every single subsequent request, base URL or not.
+2. `PoliteClient._request`'s per-request check: the `RobotsPolicy` fetched by the preflight is
+   attached to the strategy's `PoliteClient` (`robots=` constructor param) and re-checked against
+   the fully-resolved URL of every single subsequent request made THROUGH that client, base URL or
+   not.
+
+**NOT every strategy fetches through `PoliteClient` (fix wave 3, Important #2 correction)**: point
+2 above is not, in fact, a universal "every request from every strategy" guarantee -- it only
+covers requests that go through `PoliteClient._request`. `strategies/playwright_wp.py` (CMON) is
+the one exception: it fetches every URL via a Chromium `page.goto` (`_playwright_browser.py`),
+which never calls `PoliteClient._request` at all (see that module's docstring -- CMON's
+Cloudflare wall requires a real, JS-executing browser, not httpx). An earlier version of this
+docstring claimed `PoliteClient` was "the single choke point EVERY request from EVERY strategy
+already passes through," which was simply false for that strategy: point 1's base-URL preflight
+still ran for it (so a disallowed `baseUrl` was still caught), but every subsequent sitemap/line/
+product URL it fetched via `page.goto` went completely unchecked. Fixed by giving
+`playwright_wp.py`'s own fetch helper (`_fetch`, wired through `_run`) the same check
+`PoliteClient._request` does, reading the identical `RobotsPolicy` off `client.robots` /
+`client.user_agent` (both public read-only properties on `PoliteClient`, added for exactly this
+cross-transport reuse -- see that module's docstring's "Robots.txt THROUGH THE BROWSER too"
+section) rather than re-fetching robots.txt a second time. The accurate claim, going forward: every
+URL fetched by every strategy IS checked against the source's `RobotsPolicy` -- but the checkpoint
+that does it is strategy-specific whenever a strategy's transport isn't `PoliteClient` itself, not
+a single shared choke point.
 
 **Fetching (`fetch_policy`)**: always goes THROUGH the caller's `PoliteClient` -- paced, retried,
 UA-bearing, exactly like every other request this codebase makes. `GET <baseUrl>/robots.txt`:
@@ -177,10 +196,24 @@ class RobotsPolicy:
         return None
 
     def crawl_delay(self, user_agent: str) -> float | None:
+        """Most-conservative (largest) `Crawl-delay` across the same three tokens `allows` checks
+        (fix wave 3, Minor #7): the outgoing UA, the bare product token, and ClaudeBot. The
+        pre-fix version checked only `user_agent`, so a site publishing `User-agent:
+        ClaudeBot\nCrawl-delay: 30` (with no mention of our own UA string at all) would have its
+        directive silently ignored -- the exact same gap `allows`'s three-token check exists to
+        close for `Disallow` (module docstring, point 3), just left open here for `Crawl-delay`.
+        Taking the MAX across all three (not the first non-`None` hit, and not just the
+        `user_agent` token) means a slower delay declared under a less-specific token always wins
+        over a faster one declared under a more-specific token -- the more polite outcome, and the
+        only one consistent with treating all three tokens as "targeting us."""
         if self._parser is None:
             return None
-        delay = self._parser.crawl_delay(user_agent)
-        return float(delay) if delay is not None else None
+        delays = [
+            float(delay)
+            for delay in (self._parser.crawl_delay(token) for token in self._tokens(user_agent))
+            if delay is not None
+        ]
+        return max(delays) if delays else None
 
 
 def fetch_policy(client: PoliteClient, base_url: str) -> RobotsPolicy:

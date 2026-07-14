@@ -83,6 +83,24 @@ product page) at `descriptor.politeness["rps"]` (default 0.5, same as every othe
 is an injected `Callable[[float], None]` (default `time.sleep`) purely so tests can assert pacing
 calls without a real wall-clock delay -- same seam shape as `PoliteClient`'s own `sleep` parameter.
 
+**Robots.txt THROUGH THE BROWSER too** (fix wave 3, Important #2): `PoliteClient._request`'s
+per-request robots check (`client.py`) only ever fires for requests that actually go through that
+method -- and this strategy's `page.goto` fetches never do (see above). `runner.run_source`'s
+base-URL preflight still ran (so a source disallowed at `/` is caught before this strategy is ever
+called), but every subsequent product/line/sitemap URL was going completely unchecked -- a real gap
+`acquire/robots.py`'s docstring used to paper over by claiming `PoliteClient` was "the single choke
+point EVERY request from EVERY strategy already passes through," which was not true for this one.
+`_fetch` (below) now re-implements the exact same check `PoliteClient._request` does --
+`client.robots.allows(url, client.user_agent)`, raising `RobotsDisallowedError` with the same
+`disallowed_by`-derived detail on a no -- against the `RobotsPolicy` already attached to the
+`client: PoliteClient` parameter every strategy receives (`client.robots`/`client.user_agent`, both
+public read-only properties added for exactly this cross-transport reuse; no second robots.txt
+fetch). The check runs BEFORE `pacer.wait()` and BEFORE the actual `page.goto`, so a disallowed URL
+never launches a navigation. `real_client()` in this module's tests builds a `PoliteClient` with no
+`robots=` (mirrors `ignoreRobots`/no-baseUrl in `runner.py` -- `client.robots is None` means "no
+robots checking"), so the existing fixture-driven tests are unaffected; a dedicated test injects a
+disallowing policy instead.
+
 **`scope.headless`** (plan-5 task-5): defaults `True`. When `fetcher` is not injected (the real
 run path), this value is read from `descriptor.scope` and forwarded to
 `_playwright_browser.launch_page_fetcher(headless=...)`. Headless Chromium is blocked 3/3 live by
@@ -104,12 +122,16 @@ strategy's only real per-run variability given the "always full" design.
 import html as html_lib
 import re
 import time
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
 
-from warhub_acquisition.acquire.client import FetchError, PoliteClient
+from warhub_acquisition.acquire.client import FetchError, PoliteClient, RobotsDisallowedError
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, StrategyResult
 from warhub_acquisition.models.descriptor import SourceDescriptor
 from warhub_acquisition.models.observation import Observation
+
+if TYPE_CHECKING:
+    # Only for the `robots` type hint below -- see `client.py`'s identical pattern.
+    from warhub_acquisition.acquire.robots import RobotsPolicy
 
 EXTRACTOR = "playwright-wp@1"
 
@@ -172,24 +194,50 @@ class _Pacer:
         self._last_call_at = time.monotonic()
 
 
-def _fetch(fetcher: PageFetcher, pacer: _Pacer, url: str) -> str:
+def _fetch(
+    fetcher: PageFetcher,
+    pacer: _Pacer,
+    url: str,
+    robots: "RobotsPolicy | None",
+    user_agent: str,
+) -> str:
+    # Per-URL robots.txt enforcement, BEFORE pacing and BEFORE the actual `page.goto` -- see
+    # module docstring's "Robots.txt THROUGH THE BROWSER too" section. Mirrors
+    # `PoliteClient._request`'s check (`client.py`) exactly, since this strategy's fetches never
+    # go through that method at all. `robots is None` means "no robots checking" (mirrors
+    # `PoliteClient`'s own `robots=None` default), a no-op for every existing fixture-driven test.
+    if robots is not None and not robots.allows(url, user_agent):
+        disallow = robots.disallowed_by(url, user_agent)
+        token, rule = disallow if disallow is not None else (user_agent, None)
+        rule_detail = f" ({rule})" if rule else ""
+        raise RobotsDisallowedError(
+            f"robots.txt disallows fetching {url} for user-agent {token!r}{rule_detail}",
+            {"type": "robots-disallowed", "url": url, "userAgent": token, "rule": rule},
+        )
     pacer.wait()
     return fetcher(url)
 
 
-def _build_line_map(fetcher: PageFetcher, pacer: _Pacer, line_sitemap_url: str, stats: dict) -> dict[str, str]:
+def _build_line_map(
+    fetcher: PageFetcher,
+    pacer: _Pacer,
+    line_sitemap_url: str,
+    stats: dict,
+    robots: "RobotsPolicy | None",
+    user_agent: str,
+) -> dict[str, str]:
     """Fetch the products-line sitemap + every line page it lists; return `{product slug: line
     display name}`. A single failed line-page fetch is counted and skipped (non-fatal -- this is
     enrichment, not the product enumeration itself); the line sitemap fetch itself is not caught
     (see module docstring)."""
-    xml_text = _fetch(fetcher, pacer, line_sitemap_url)
+    xml_text = _fetch(fetcher, pacer, line_sitemap_url, robots, user_agent)
     line_urls = _parse_locs(xml_text)
     stats["line_urls_total"] = len(line_urls)
 
     slug_to_line: dict[str, str] = {}
     for line_url in sorted(line_urls):
         try:
-            html = _fetch(fetcher, pacer, line_url)
+            html = _fetch(fetcher, pacer, line_url, robots, user_agent)
         except FetchError:
             stats["line_fetch_errors"] += 1
             continue
@@ -220,12 +268,13 @@ def playwright_wp_strategy(
         # CMON's Cloudflare managed challenge, a headed browser was confirmed live to clear it.
         headless = bool(descriptor.scope.get("headless", True))
         with launch_page_fetcher(headless=headless) as real_fetcher:
-            return _run(descriptor, context, real_fetcher, sleep)
-    return _run(descriptor, context, fetcher, sleep)
+            return _run(descriptor, client, context, real_fetcher, sleep)
+    return _run(descriptor, client, context, fetcher, sleep)
 
 
 def _run(
     descriptor: SourceDescriptor,
+    client: PoliteClient,
     context: AcquireContext,
     fetcher: PageFetcher,
     sleep: Callable[[float], None],
@@ -248,11 +297,17 @@ def _run(
     rps = float(politeness.get("rps", 0.5))
     pacer = _Pacer(rps, sleep)
 
+    # See module docstring's "Robots.txt THROUGH THE BROWSER too": the exact same policy
+    # `runner.run_source` fetched and attached to `client` for its own (unused-by-this-strategy)
+    # httpx requests, reused here to check every browser-fetched URL too.
+    robots = client.robots
+    user_agent = client.user_agent
+
     base_url = str(descriptor.baseUrl or "").rstrip("/")
     product_sitemap_url = str(descriptor.scope.get("productSitemap") or f"{base_url}/wp-sitemap-posts-products-1.xml")
     line_sitemap_url = str(descriptor.scope.get("lineSitemap") or f"{base_url}/wp-sitemap-posts-products-line-1.xml")
 
-    slug_to_line = _build_line_map(fetcher, pacer, line_sitemap_url, stats)
+    slug_to_line = _build_line_map(fetcher, pacer, line_sitemap_url, stats, robots, user_agent)
 
     manufacturer_name = str(descriptor.scope.get("manufacturer") or "")
     manufacturer = context.taxonomy.manufacturer_for_vendor(manufacturer_name) if manufacturer_name else None
@@ -260,7 +315,7 @@ def _run(
     mapping = context.mappings.get(descriptor.id, {}) if context.mappings else {}
     game_system_map: dict[str, str] = mapping.get("gameSystem") or {}
 
-    product_xml = _fetch(fetcher, pacer, product_sitemap_url)
+    product_xml = _fetch(fetcher, pacer, product_sitemap_url, robots, user_agent)
     product_urls = sorted(_parse_locs(product_xml))
     stats["product_urls_total"] = len(product_urls)
 
@@ -272,7 +327,7 @@ def _run(
         for url in product_urls:
             slug = _slug_from_url(url)
             try:
-                html = _fetch(fetcher, pacer, url)
+                html = _fetch(fetcher, pacer, url, robots, user_agent)
             except FetchError:
                 stats["fetch_errors"] += 1
                 continue

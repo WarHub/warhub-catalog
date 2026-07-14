@@ -233,6 +233,48 @@ def test_crawl_delay_none_when_permissive() -> None:
     assert policy.crawl_delay(UA) is None
 
 
+def test_crawl_delay_takes_the_max_across_all_three_checked_tokens() -> None:
+    """Fix wave 3, Minor #7: a site can declare a SLOWER Crawl-delay under 'ClaudeBot' without
+    ever mentioning our own UA string -- the pre-fix version, which checked only `user_agent`,
+    would have missed this entirely (returned the faster '*'-block delay). Mirrors `allows`'s own
+    three-token check (module docstring, point 3): ANY of the three tokens can contribute, and the
+    most conservative (largest) delay wins."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(
+            "User-agent: *\nAllow: /\nCrawl-delay: 2\n\n"
+            f"User-agent: {CLAUDEBOT_TOKEN}\nAllow: /\nCrawl-delay: 30\n"
+        )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.crawl_delay(UA) == 30.0
+
+
+def test_crawl_delay_declared_under_bare_product_token_is_found_too() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(
+            "User-agent: *\nAllow: /\nCrawl-delay: 1\n\n"
+            f"User-agent: {PRODUCT_TOKEN}\nAllow: /\nCrawl-delay: 15\n"
+        )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.crawl_delay(UA) == 15.0
+
+
+def test_crawl_delay_our_own_slower_delay_still_wins_over_a_faster_claudebot_one() -> None:
+    """MAX across tokens, not "prefer ClaudeBot" -- our own (slower) declared delay must still
+    win when it is the more conservative of the two."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(
+            f"User-agent: {PRODUCT_TOKEN}\nAllow: /\nCrawl-delay: 20\n\n"
+            f"User-agent: {CLAUDEBOT_TOKEN}\nAllow: /\nCrawl-delay: 3\n"
+        )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.crawl_delay(UA) == 20.0
+
+
 # =================================================================================================
 # run_source integration: the preflight is wired in BEFORE any strategy call.
 # =================================================================================================

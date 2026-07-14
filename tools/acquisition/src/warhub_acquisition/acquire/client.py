@@ -93,6 +93,23 @@ class PoliteClient:
             timeout=timeout,
         )
 
+    @property
+    def robots(self) -> "RobotsPolicy | None":
+        """The `RobotsPolicy` attached to this client (`None` when robots checking is off -- see
+        the constructor's `robots` parameter docs). Public on purpose: `_request` below is the
+        checkpoint for every request THIS client makes via httpx, but a strategy that fetches
+        through a different transport entirely (`playwright_wp.py`'s Chromium `page.goto`, which
+        never calls `_request` -- see `acquire/robots.py`'s module docstring for the full story)
+        still receives this same `PoliteClient` per the `Strategy` call signature and needs a way
+        to enforce the identical policy itself, without a second robots.txt fetch."""
+        return self._robots
+
+    @property
+    def user_agent(self) -> str:
+        """Public counterpart to `robots` above -- a non-httpx strategy checking `robots.allows`
+        itself needs the exact UA string this client would have sent, not a hardcoded guess."""
+        return self._user_agent
+
     def _pace(self) -> None:
         now = time.monotonic()
         if self._last_request_at is not None:
