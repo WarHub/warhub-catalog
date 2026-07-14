@@ -1,6 +1,5 @@
 """PoliteClient: pacing, retry-with-backoff, and error surfacing over an injected transport."""
 import json
-import urllib.robotparser
 
 import httpx
 import pytest
@@ -11,10 +10,8 @@ from warhub_acquisition.acquire.robots import RobotsPolicy
 
 def _policy(robots_txt: str) -> RobotsPolicy:
     """Build a `RobotsPolicy` directly from robots.txt text, without a network fetch -- mirrors
-    exactly what `robots.fetch_policy` does on a 200 response (`RobotFileParser().parse(...)`)."""
-    parser = urllib.robotparser.RobotFileParser()
-    parser.parse(robots_txt.splitlines())
-    return RobotsPolicy(parser)
+    exactly what `robots.fetch_policy` does on a 200 response."""
+    return RobotsPolicy.from_lines(robots_txt.splitlines())
 
 
 def test_user_agent_constant() -> None:

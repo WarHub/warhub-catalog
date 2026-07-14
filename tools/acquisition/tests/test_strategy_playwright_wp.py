@@ -11,7 +11,6 @@ is exactly as served, only unrelated surrounding markup (nav, footer, prose, coo
 trimmed.
 """
 import sys
-import urllib.robotparser
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
@@ -110,9 +109,8 @@ def disallowing_client(disallow_path: str) -> PoliteClient:
     to `BASE_URL`) for every user-agent -- used to prove the playwright strategy checks robots.txt
     on each browser fetch, not just `descriptor.baseUrl` (see `runner.run_source`'s preflight,
     which this test bypasses entirely by calling `playwright_wp_strategy` directly)."""
-    parser = urllib.robotparser.RobotFileParser()
-    parser.parse(f"User-agent: *\nAllow: /\nDisallow: {disallow_path}\n".splitlines())
-    return PoliteClient(BASE_URL, sleep=lambda s: None, robots=RobotsPolicy(parser))
+    policy = RobotsPolicy.from_lines(f"User-agent: *\nAllow: /\nDisallow: {disallow_path}\n".splitlines())
+    return PoliteClient(BASE_URL, sleep=lambda s: None, robots=policy)
 
 
 # --- Registration ---------------------------------------------------------------------------
