@@ -45,7 +45,10 @@ contract:
   minCount: 0
   maxDropPct: 30
   requiredFieldRates:
-    # Live-verified 2026-07-13: the confirmed archived Shopify page carries JSON-LD gtin13 in
-    # offers[0] -- same "archived Shopify carries gtin13" pattern arc-goblingaming's 0.5 floor
-    # is built on. 0.5 floor pending full-harvest evidence.
-    ean: 0.25
+    # Measured 2026-07-13 over this source's actual written observations (the denominator
+    # requiredFieldRates is checked against -- runner.py's `rate = filled /
+    # len(result.observations)` -- NOT ean-recovered-per-CDX-page-fetched, which is a smaller,
+    # noisier number that produced the earlier 0.25 floor): 292/320 = 91.3% of observations
+    # carry an ean. 0.65 leaves real headroom for normal variance while still tripping on a
+    # genuine JSON-LD-extraction regression (the class of bug this floor exists to catch).
+    ean: 0.65
