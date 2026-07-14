@@ -209,6 +209,26 @@ def _extract_bcdata(html: str) -> dict[str, str | None] | None:
 # --- Fallback name / field-merge -----------------------------------------------------------------
 
 
+def strip_site_chrome(name: str | None) -> str | None:
+    """Strip trailing shop chrome from a product name.
+
+    This is applied to the MERGED name from every extractor, not just the `<title>` fallback:
+    radaddel.de emits its shop-suffixed page title verbatim in `itemprop="name"` microdata
+    (live-verified 2026-07-14), so the chrome arrives through structured data that is supposed to
+    be authoritative. Left alone it lands in the published catalog name AND in the entity id
+    (`...-radaddel-radaddel-tabletop-shop`).
+
+    `|` is the one separator we split on: a real product name containing a literal pipe is
+    vanishingly rare, while `Product | Shop Name` chrome is the storefront-template norm. We
+    deliberately do NOT split on ` - ` / en-dash / em-dash -- legitimate product names use them
+    ("War of the Roses - Hail Caesar Supplement").
+    """
+    if not name or "|" not in name:
+        return name
+    head = name.split("|", 1)[0].strip()
+    return head or name
+
+
 def _fallback_name(html: str) -> str | None:
     """`<h1>` wins outright (real product markup, no shop chrome to worry about). `<title>` is the
     last resort, and it is frequently shop-suffixed -- e.g. radaddel.de emits
@@ -260,6 +280,7 @@ def _extract_page(html: str) -> tuple[dict[str, str | None], str | None]:
                     ean_source = label
     if merged["name"] is None and (merged["sku"] or merged["ean"] or merged["brand"]):
         merged["name"] = _fallback_name(html)
+    merged["name"] = strip_site_chrome(merged["name"])
     return merged, ean_source
 
 
