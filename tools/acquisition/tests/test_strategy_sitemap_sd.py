@@ -379,6 +379,38 @@ def test_fallback_name_unescapes_html_entities_from_h1() -> None:
     assert _fallback_name(html) == "Foo – Bar & Baz"
 
 
+# --- Title-fallback shop-chrome stripping (radaddel polluted-name bug) --------------------------
+
+
+def test_fallback_name_strips_pipe_delimited_shop_chrome_from_title() -> None:
+    html = "<html><head><title>Foo | Radaddel | Radaddel Tabletop Shop</title></head><body></body></html>"
+    assert _fallback_name(html) == "Foo"
+
+
+def test_fallback_name_title_without_pipe_is_unchanged() -> None:
+    html = "<html><head><title>War of the Roses - Hail Caesar Supplement</title></head><body></body></html>"
+    assert _fallback_name(html) == "War of the Roses - Hail Caesar Supplement"
+
+
+def test_fallback_name_prefers_h1_over_pipe_delimited_title() -> None:
+    html = (
+        "<html><head><title>Foo | Radaddel | Radaddel Tabletop Shop</title></head>"
+        "<body><h1>Real Product Name</h1></body></html>"
+    )
+    assert _fallback_name(html) == "Real Product Name"
+
+
+def test_fallback_name_not_used_when_itemprop_name_present() -> None:
+    html = (
+        '<html><head><title>Foo | Radaddel | Radaddel Tabletop Shop</title></head>'
+        '<body><div itemscope itemtype="https://schema.org/Product">'
+        '<span itemprop="name">Real Product Name</span>'
+        "</div></body></html>"
+    )
+    merged, _ = _extract_page(html)
+    assert merged["name"] == "Real Product Name"
+
+
 # --- GS1-prefix manufacturer attribution --------------------------------------------------------
 
 

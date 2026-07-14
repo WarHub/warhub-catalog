@@ -210,6 +210,14 @@ def _extract_bcdata(html: str) -> dict[str, str | None] | None:
 
 
 def _fallback_name(html: str) -> str | None:
+    """`<h1>` wins outright (real product markup, no shop chrome to worry about). `<title>` is the
+    last resort, and it is frequently shop-suffixed -- e.g. radaddel.de emits
+    `"<Product> | Radaddel | Radaddel Tabletop Shop"` -- so a bare `<title>` fallback mints the
+    site's chrome straight into the catalog name (and, upstream, into the entity ID). `|` is the
+    one separator we strip on: real product titles containing a literal pipe are vanishingly rare,
+    while `<title>Product | Shop Name</title>` chrome is the norm across storefront templates. We
+    deliberately do NOT split on ` - ` / en-dash / em-dash -- those appear inside legitimate
+    product names (e.g. "War of the Roses - Hail Caesar Supplement")."""
     match = _H1_RE.search(html)
     if match:
         text = _clean(re.sub(r"<[^>]+>", "", match.group(1)))
@@ -217,7 +225,12 @@ def _fallback_name(html: str) -> str | None:
             return text
     match = _TITLE_RE.search(html)
     if match:
-        return _clean(re.sub(r"<[^>]+>", "", match.group(1)))
+        text = _clean(re.sub(r"<[^>]+>", "", match.group(1)))
+        if text and "|" in text:
+            head = text.split("|", 1)[0].strip()
+            if head:
+                return head
+        return text
     return None
 
 
