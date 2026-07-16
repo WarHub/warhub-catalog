@@ -159,3 +159,24 @@ def test_shared_ean_across_entities_reported() -> None:
     assert shared == [
         {"type": "ean-shared", "ean": "5060393709671", "entities": ["a", "b"]}
     ]
+
+
+def test_additional_ean_colliding_with_another_entitys_primary_reported() -> None:
+    # A repackaged product's retired barcode (in additionalEans) colliding with another entity's
+    # primary is a data error just like a primary/primary collision -- it must surface, with the
+    # additional-side holder named under `additionalIn`. A non-colliding additional barcode ("c")
+    # raises nothing.
+    resolutions = {
+        "a": EanResolution("5060393709671", "confirmed", []),
+        "b": EanResolution("5011921194285", "confirmed", [], ["5060393709671"]),
+        "c": EanResolution("5060924985581", "confirmed", [], ["5060469664330"]),
+    }
+    shared = find_shared_eans(resolutions)
+    assert shared == [
+        {
+            "type": "ean-shared",
+            "ean": "5060393709671",
+            "entities": ["a", "b"],
+            "additionalIn": ["b"],
+        }
+    ]

@@ -23,7 +23,9 @@ from warhub_acquisition.models.observation import Observation
 
 # A barcode is LIVE-corroborated when a scraped manufacturer/retailer source currently lists it
 # (present, not archived, not miss-decayed). Curated/legacy imports and archive snapshots never
-# count as live -- they attest history, not the current shelf. Mirrors attributes.py's `scraped_live`.
+# count as live -- they attest history, not the current shelf. Deliberately STRICTER than
+# attributes.py's `scraped_live` (which admits kind `archive`): an archive-recovered observation
+# may drive lifecycle, but it must never confer barcode primacy.
 _LIVE_KINDS = ("manufacturer", "retailer")
 
 
@@ -120,12 +122,24 @@ def _mismatch(entity: str, chosen: str, assertions: dict[str, dict[str, str]]) -
 
 
 def find_shared_eans(resolutions: dict[str, EanResolution]) -> list[dict]:
+    """Report every barcode held by more than one entity -- as a primary `ean` OR an
+    `additionalEans` entry (a repackaged product's retired barcode colliding with another entity's
+    barcode is just as much a data error as two primaries colliding). When any holder carries the
+    barcode as an additional one, the conflict names those holders under `additionalIn`."""
     by_ean: dict[str, list[str]] = {}
+    additional_in: dict[str, list[str]] = {}
     for entity, resolution in sorted(resolutions.items()):
         if resolution.ean is not None:
             by_ean.setdefault(resolution.ean, []).append(entity)
-    return [
-        {"type": "ean-shared", "ean": ean, "entities": entities}
-        for ean, entities in sorted(by_ean.items())
-        if len(entities) > 1
-    ]
+        for extra in resolution.additional:
+            by_ean.setdefault(extra, []).append(entity)
+            additional_in.setdefault(extra, []).append(entity)
+    conflicts: list[dict] = []
+    for ean, entities in sorted(by_ean.items()):
+        if len(entities) <= 1:
+            continue
+        conflict = {"type": "ean-shared", "ean": ean, "entities": entities}
+        if ean in additional_in:
+            conflict["additionalIn"] = additional_in[ean]
+        conflicts.append(conflict)
+    return conflicts
