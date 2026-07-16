@@ -8,6 +8,14 @@
 # `acceptedCandidate: true` (verdict same-product, confidence >= 0.8) into matches.yaml's `joins`
 # map -- spot-checking, not blindly trusting the threshold -- then re-run `resolve` and
 # `report --ean-guard` (a join can change a confirmed EAN; guard findings are review items).
+#
+# JOINABLE vs DISTINCT. A product genuinely REPACKAGED over time -- same contents, new box and
+# barcode -- IS joinable: the resolver carries multiple barcodes on one entity (the live one
+# primary, retired ones under `additionalEans`), so a differing EAN across a repackaging is NOT a
+# reason to keep the pair apart. But a change to the CONTENTS makes the two DISTINCT products that
+# must NEVER be joined, even under an identical name: a material change (metal -> resin / plastic
+# recut), a roster/content change (models added, dropped, or swapped), an edition-content change,
+# or a premium/limited-variant line. When unsure whether contents changed, do NOT join.
 proposals:
   - entityA:
       entity: atomic-mass-games/SWL05

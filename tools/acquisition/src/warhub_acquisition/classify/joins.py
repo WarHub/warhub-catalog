@@ -352,6 +352,18 @@ corroborating name or ean similarity; the legacyProductCode field shows the actu
 triggered the match so you can judge whether it plausibly corresponds to the other side's sku or \
 looks coincidental.
 
+REPACKAGING VS A CONTENT CHANGE
+A product genuinely REPACKAGED over time -- the SAME contents in a new box under a new product \
+code and barcode (a range relaunched for a new edition, a box re-boxed with fresh art) -- is the \
+SAME product and SHOULD be merged: the catalog now carries several barcodes on one entity, so a \
+DIFFERENT barcode across the pair is NOT by itself evidence of difference. But a change to what is \
+IN the box makes them DISTINCT products that must NOT be merged, even under an identical name: a \
+material change (metal vs resin vs a plastic recut), a roster/content change (models added, \
+dropped, or swapped), an edition-content change, or a premium/limited-variant line (a "special \
+edition" carrying extra sprues). When name or code hints at a repackaging but you cannot tell \
+whether the CONTENTS changed, prefer sameProduct: false -- an unmerged repackaging is a harmless \
+duplicate a later pass can still catch; a merged content change silently corrupts the entity.
+
 COST ASYMMETRY
 A wrong merge (declaring two different products the same) is worse than a missed merge (declaring \
 the same product different): a false merge silently corrupts the catalog, while a missed merge just \
@@ -388,6 +400,17 @@ listed under two regional codes.
    -> {"pairId": "games-workshop/EEE::games-workshop/FFF", "sameProduct": false, "confidence": 0.9}
    The legacyProductCode digit-matches the sku, but that is a coincidental numeric overlap; the \
 names describe two unrelated products, so the rule's hint does not hold up.
+
+4. {"pairId": "mantic-games/GGG::mantic-games/HHH", "manufacturer": "mantic-games", \
+"matchedRules": ["name"], "entityA": {"entity": "mantic-games/GGG", "name": "Basilean Army", \
+"sku": "MGKWB108", "ean": "5060469664330", "url": "https://.../basilean/basilean-army/", \
+"legacyProductCode": null}, "entityB": {"entity": "mantic-games/HHH", "name": "Basilean Army", \
+"sku": "MGKWB112", "ean": "5060924985581", "url": "https://.../basileans/army-2025/", \
+"legacyProductCode": null}}
+   -> {"pairId": "mantic-games/GGG::mantic-games/HHH", "sameProduct": true, "confidence": 0.85}
+   Same army box relaunched under a new code and barcode for a later edition with unchanged \
+contents -- a repackaging. The different eans do NOT make it a different product; the merged entity \
+keeps the live barcode as primary and the retired one as an additional barcode.
 
 OUTPUT
 Respond with ONLY a strict JSON array, no prose, no markdown code fences, one object per input \
@@ -458,6 +481,14 @@ _PROPOSALS_HEADER = """\
 # `acceptedCandidate: true` (verdict same-product, confidence >= 0.8) into matches.yaml's `joins`
 # map -- spot-checking, not blindly trusting the threshold -- then re-run `resolve` and
 # `report --ean-guard` (a join can change a confirmed EAN; guard findings are review items).
+#
+# JOINABLE vs DISTINCT. A product genuinely REPACKAGED over time -- same contents, new box and
+# barcode -- IS joinable: the resolver carries multiple barcodes on one entity (the live one
+# primary, retired ones under `additionalEans`), so a differing EAN across a repackaging is NOT a
+# reason to keep the pair apart. But a change to the CONTENTS makes the two DISTINCT products that
+# must NEVER be joined, even under an identical name: a material change (metal -> resin / plastic
+# recut), a roster/content change (models added, dropped, or swapped), an edition-content change,
+# or a premium/limited-variant line. When unsure whether contents changed, do NOT join.
 """
 
 
