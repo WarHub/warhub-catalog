@@ -1,8 +1,10 @@
 """CLI `acquire` verb: source selection, contract-failure isolation, health report, exit codes."""
 from pathlib import Path
 
+import httpx
 import pytest
 
+from warhub_acquisition.acquire import runner as runner_module
 from warhub_acquisition.acquire.client import FetchError
 from warhub_acquisition.acquire.runner import STRATEGIES, StrategyResult
 from warhub_acquisition.cli import main
@@ -200,6 +202,61 @@ def test_acquire_fetch_error_isolated_and_exits_4(
 
     health = (tmp_path / "review" / "acquisition-health.md").read_text(encoding="utf-8")
     assert "toy-broken" in health
+    assert "ERROR" in health
+    assert "toy-ok" in health
+
+
+def test_acquire_robots_disallowed_isolated_and_exits_4(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
+) -> None:
+    """End-to-end via `cli.main()` (the real production call path, `_run_acquire` -> `run_source`
+    with no injected transport): `RobotsDisallowedError` is a plain `Exception` subclass raised
+    from inside `run_source`, BEFORE the strategy runs -- it must hit the exact same per-source
+    isolation as any other source-level failure (SOURCE ERROR printed, exit code 4, other sources
+    unaffected, no evidence written for the blocked source). `cli.py`'s `except Exception` clause
+    is exception-type-agnostic, so this is largely already proven by the ValueError/FetchError
+    siblings above -- this test closes the loop for the robots preflight specifically, real
+    descriptor `baseUrl` and all (the CLI has no transport-injection flag, so `PoliteClient` itself
+    is monkeypatched to route through a `MockTransport` instead of real network)."""
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    write_descriptor(paths, "toy-robots-broken", "toy-robots-broken", baseUrl="https://example.test")
+    write_descriptor(paths, "toy-ok", "toy-ok")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text="User-agent: *\nDisallow: /\n")
+        raise AssertionError(f"unexpected request: {request.url}")
+
+    real_polite_client = runner_module.PoliteClient
+
+    def fake_polite_client(base_url, **kwargs):
+        kwargs["transport"] = httpx.MockTransport(handler)
+        return real_polite_client(base_url, **kwargs)
+
+    monkeypatch.setattr(runner_module, "PoliteClient", fake_polite_client)
+
+    def never_called(desc, client, cursor, ctx):
+        raise AssertionError("strategy must not run when robots.txt disallows the source")
+
+    monkeypatch.setitem(STRATEGIES, "toy-robots-broken", never_called)
+    register(
+        monkeypatch,
+        "toy-ok",
+        StrategyResult(observations=[obs("toy-ok:a")], full_sweep=True, stats={"fetched": 1}, cursor={}),
+    )
+
+    exit_code = main(["acquire", "--data", str(tmp_path), "--run-date", "2026-07-13"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 4
+    assert "SOURCE ERROR toy-robots-broken: RobotsDisallowedError" in out
+    assert "toy-ok: ok fetched=1" in out
+    assert not (paths.evidence_products / "toy-robots-broken" / "observations.jsonl").exists()
+    assert (paths.evidence_products / "toy-ok" / "observations.jsonl").exists()
+
+    health = (tmp_path / "review" / "acquisition-health.md").read_text(encoding="utf-8")
+    assert "toy-robots-broken" in health
     assert "ERROR" in health
     assert "toy-ok" in health
 

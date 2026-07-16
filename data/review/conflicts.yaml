@@ -6,10 +6,109 @@ conflicts:
       - ean: '0812152030015'
         sources:
           - legacy-catalog
+          - ret-goblingaming
       - ean: '0812152030084'
         sources:
           - legacy-catalog
           - mfr-wyrd-store
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40007
+    chosen: '0812152030091'
+    assertions:
+      - ean: '0812152030022'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152030091'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40152
+    chosen: '0812152030220'
+    assertions:
+      - ean: '0812152030183'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152030220'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+          - ret-gamenerdz
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40157
+    chosen: '0812152030237'
+    assertions:
+      - ean: '0812152030190'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152030237'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40162
+    chosen: '0812152030305'
+    assertions:
+      - ean: '0812152030282'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152030305'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+          - ret-gamenerdz
+      - ean: '0812152030404'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40203
+    chosen: '0812152030411'
+    assertions:
+      - ean: '0812152030312'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152030411'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40207
+    chosen: '0812152030435'
+    assertions:
+      - ean: '0812152030350'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152030435'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+          - ret-gamenerdz
+      - ean: '0812152030442'
+        sources:
+          - ret-gamenerdz
+          - ret-goblingaming
+      - ean: '0812152030534'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+  - type: ean-mismatch
+    entity: wyrd-games/WYR23729
+    chosen: '0812152032309'
+    assertions:
+      - ean: '0812152031753'
+        sources:
+          - ret-gamenerdz
+      - ean: '0812152032309'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+          - ret-gamenerdz
+          - ret-goblingaming
   - type: ean-mismatch
     entity: wyrd-games/WYR23306
     chosen: '0812152031975'
@@ -17,6 +116,8 @@ conflicts:
       - ean: '0812152031975'
         sources:
           - legacy-catalog
+          - ret-gamenerdz
+          - ret-goblingaming
       - ean: '0812152032354'
         sources:
           - mfr-wyrd-store
@@ -28,6 +129,7 @@ conflicts:
         sources:
           - legacy-catalog
           - mfr-wyrd-store
+          - ret-goblingaming
       - ean: '0813856019535'
         sources:
           - mfr-wyrd-store
@@ -39,9 +141,15 @@ conflicts:
         sources:
           - legacy-catalog
           - mfr-wyrd-store
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-tistaminis
       - ean: '0812152034549'
         sources:
           - legacy-catalog
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-tistaminis
   - type: ean-mismatch
     entity: wyrd-games/WYR30402
     chosen: '0813856015353'
@@ -52,6 +160,85 @@ conflicts:
       - ean: '0813856015353'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: atomic-mass-games/star-wars-legion-at-st-walker
+    chosen: '0841333134983'
+    assertions:
+      - ean: '0841333122157'
+        sources:
+          - ret-gamenerdz
+      - ean: '0841333134983'
+        sources:
+          - ret-gamenerdz
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: corvus-belli/infinity-haqqislam-bashi-bazouks-boarding-shotgun
+    chosen: '2804280001614'
+    assertions:
+      - ean: '2804280001614'
+        sources:
+          - ret-gamenerdz
+      - ean: '2804820005911'
+        sources:
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: corvus-belli/infinity-nomads-iguana-squadron
+    chosen: '2805650004389'
+    assertions:
+      - ean: '2805650004389'
+        sources:
+          - ret-gamenerdz
+          - ret-goblingaming
+      - ean: '8436607713784'
+        sources:
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: corvus-belli/infinity-combined-army-malignos-hacker
+    chosen: '2816150009224'
+    assertions:
+      - ean: '2806480003559'
+        sources:
+          - ret-gamenerdz
+      - ean: '2816150009224'
+        sources:
+          - ret-gamenerdz
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: corvus-belli/infinity-combined-army-daturazi-witch-soldiers
+    chosen: '8436607710622'
+    assertions:
+      - ean: '2806600004640'
+        sources:
+          - ret-gamenerdz
+      - ean: '8436607710622'
+        sources:
+          - ret-gamenerdz
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: games-workshop/99811466024
+    chosen: '5011921024582'
+    assertions:
+      - ean: '5011921024582'
+        sources:
+          - legacy-catalog
+      - ean: '5011921238118'
+        sources:
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: games-workshop/99811466025
+    chosen: '5011921037162'
+    assertions:
+      - ean: '5011921037162'
+        sources:
+          - legacy-catalog
+      - ean: '5011921238125'
+        sources:
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
   - type: ean-mismatch
     entity: games-workshop/99070201008
     chosen: '5011921063765'
@@ -59,6 +246,7 @@ conflicts:
       - ean: '5011921063765'
         sources:
           - legacy-catalog
+          - ret-radaddel
       - ean: '5011921259090'
         sources:
           - ret-goblingaming
@@ -72,6 +260,7 @@ conflicts:
       - ean: '5011921252923'
         sources:
           - ret-goblingaming
+          - ret-tistaminis
   - type: ean-mismatch
     entity: games-workshop/99129915082
     chosen: '5011921090877'
@@ -79,6 +268,7 @@ conflicts:
       - ean: '5011921090877'
         sources:
           - legacy-catalog
+          - ret-radaddel
       - ean: '5011921259113'
         sources:
           - ret-goblingaming
@@ -89,6 +279,7 @@ conflicts:
       - ean: '5011921133901'
         sources:
           - legacy-catalog
+          - ret-gamenerdz
       - ean: '5011921177806'
         sources:
           - ret-goblingaming
@@ -99,6 +290,7 @@ conflicts:
       - ean: '5011921139521'
         sources:
           - legacy-catalog
+          - ret-tistaminis
       - ean: '5011921261017'
         sources:
           - ret-goblingaming
@@ -108,10 +300,34 @@ conflicts:
     assertions:
       - ean: '5011921170241'
         sources:
+          - arc-wargameportal
           - legacy-catalog
       - ean: '5011921256891'
         sources:
           - ret-goblingaming
+  - type: ean-mismatch
+    entity: warlord-games/402215810
+    chosen: '5060917991070'
+    assertions:
+      - ean: '5011921171835'
+        sources:
+          - ret-tistaminis
+      - ean: '5060917991070'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: games-workshop/99120599051
+    chosen: '5011921176939'
+    assertions:
+      - ean: '5011921176939'
+        sources:
+          - legacy-catalog
+      - ean: '5011921176953'
+        sources:
+          - ret-goblingaming
+          - ret-radaddel
   - type: ean-mismatch
     entity: games-workshop/99120108113
     chosen: '5011921180998'
@@ -122,6 +338,7 @@ conflicts:
       - ean: '5011921236336'
         sources:
           - ret-goblingaming
+          - ret-tistaminis
   - type: ean-mismatch
     entity: games-workshop/99120207248
     chosen: '5011921182121'
@@ -132,6 +349,17 @@ conflicts:
       - ean: '5011921261444'
         sources:
           - ret-goblingaming
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: games-workshop/warhammer-40-000-paints-tools-set
+    chosen: '5011921196951'
+    assertions:
+      - ean: '5011921196951'
+        sources:
+          - ret-radaddel
+      - ean: '5011921260256'
+        sources:
+          - ret-radaddel
   - type: ean-mismatch
     entity: games-workshop/99120205083
     chosen: '5011921201471'
@@ -142,6 +370,7 @@ conflicts:
       - ean: '5011921261437'
         sources:
           - ret-goblingaming
+          - ret-tistaminis
   - type: ean-mismatch
     entity: games-workshop/99120209158
     chosen: '5011921201495'
@@ -159,9 +388,21 @@ conflicts:
       - ean: '5011921204281'
         sources:
           - legacy-catalog
+          - ret-gamenerdz
+          - ret-radaddel
       - ean: '5011921254668'
         sources:
           - ret-goblingaming
+  - type: ean-mismatch
+    entity: warlord-games/WG-IR-EAR-1
+    chosen: '5060200840191'
+    assertions:
+      - ean: '5060200840184'
+        sources:
+          - ret-tistaminis
+      - ean: '5060200840191'
+        sources:
+          - mfr-warlord-store
   - type: ean-mismatch
     entity: warlord-games/103011303
     chosen: '5060200840382'
@@ -172,6 +413,7 @@ conflicts:
       - ean: '5060393705444'
         sources:
           - mfr-warlord-store
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/WGH-IR-05
     chosen: '5060200842553'
@@ -179,6 +421,7 @@ conflicts:
       - ean: '5060200842461'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060200842553'
         sources:
           - legacy-catalog
@@ -188,10 +431,41 @@ conflicts:
     assertions:
       - ean: '5060200842867'
         sources:
+          - arc-tistaminis
           - mfr-warlord-store
       - ean: '5060572509948'
         sources:
           - legacy-catalog
+  - type: ean-mismatch
+    entity: warlord-games/WGH-GT-21
+    chosen: '5060200843086'
+    assertions:
+      - ean: '5060200843086'
+        sources:
+          - mfr-warlord-store
+      - ean: '5060200844328'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/WGN-BR-32
+    chosen: '5060200849217'
+    assertions:
+      - ean: '5060200845318'
+        sources:
+          - arc-tistaminis
+      - ean: '5060200849217'
+        sources:
+          - mfr-warlord-store
+  - type: ean-mismatch
+    entity: warlord-games/403012015
+    chosen: '5060572501614'
+    assertions:
+      - ean: '5060200846254'
+        sources:
+          - arc-tistaminis
+      - ean: '5060572501614'
+        sources:
+          - mfr-warlord-store
   - type: ean-mismatch
     entity: warlord-games/103011104
     chosen: '5060200846711'
@@ -202,16 +476,32 @@ conflicts:
       - ean: '5060393705338'
         sources:
           - mfr-warlord-store
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/409912059
     chosen: '5060917994651'
     assertions:
       - ean: '5060200846780'
         sources:
+          - arc-tistaminis
           - mfr-warlord-store
       - ean: '5060917994651'
         sources:
           - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/WGN-FR-37
+    chosen: '5060200848272'
+    assertions:
+      - ean: '5060200846827'
+        sources:
+          - mfr-warlord-store
+      - ean: '5060200848272'
+        sources:
+          - mfr-warlord-store
+          - ret-radaddel
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/WGB-AI-06
     chosen: '5060200848913'
@@ -222,6 +512,8 @@ conflicts:
       - ean: '5060200848913'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
   - type: ean-mismatch
     entity: warlord-games/WGN-BR-04
     chosen: '5060200848562'
@@ -229,9 +521,12 @@ conflicts:
       - ean: '5060200848487'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060200848562'
         sources:
+          - arc-tistaminis
           - legacy-catalog
+          - ret-goblingaming
   - type: ean-mismatch
     entity: warlord-games/402211004
     chosen: '5060200848982'
@@ -239,6 +534,8 @@ conflicts:
       - ean: '5060200848982'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
       - ean: '5060393701088'
         sources:
           - mfr-warlord-store
@@ -253,6 +550,18 @@ conflicts:
         sources:
           - legacy-catalog
           - mfr-warlord-store
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: warlord-games/WGB-PI-23
+    chosen: '5060200849590'
+    assertions:
+      - ean: '5060200849590'
+        sources:
+          - mfr-warlord-store
+          - ret-tistaminis
+      - ean: '5060200849606'
+        sources:
+          - mfr-warlord-store
   - type: ean-mismatch
     entity: warlord-games/302012001
     chosen: '5060393705109'
@@ -262,7 +571,9 @@ conflicts:
           - mfr-warlord-store
       - ean: '5060393705109'
         sources:
+          - arc-tistaminis
           - legacy-catalog
+          - ret-radaddel
   - type: ean-mismatch
     entity: warlord-games/WGB-RI-05
     chosen: '5060393701118'
@@ -273,6 +584,47 @@ conflicts:
       - ean: '5060393701118'
         sources:
           - legacy-catalog
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/WGN-PO-01
+    chosen: '5060572501348'
+    assertions:
+      - ean: '5060393700876'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5060572501348'
+        sources:
+          - arc-tistaminis
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/302011002
+    chosen: '5060393706267'
+    assertions:
+      - ean: '5060393702269'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060393706267'
+        sources:
+          - arc-tistaminis
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5060393707929'
+        sources:
+          - arc-tistaminis
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
   - type: ean-mismatch
     entity: warlord-games/309910013
     chosen: '9780993058912'
@@ -283,6 +635,35 @@ conflicts:
       - ean: '9780993058912'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/402014011
+    chosen: '5060917996877'
+    assertions:
+      - ean: '5060393705819'
+        sources:
+          - arc-tistaminis
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5060917996877'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/402211202
+    chosen: '5060393707387'
+    assertions:
+      - ean: '5060393706014'
+        sources:
+          - mfr-warlord-store
+      - ean: '5060393707387'
+        sources:
+          - arc-tistaminis
+          - mfr-warlord-store
+          - ret-radaddel
   - type: ean-mismatch
     entity: warlord-games/302014602
     chosen: '5060393706472'
@@ -291,9 +672,12 @@ conflicts:
         sources:
           - legacy-catalog
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060393706489'
         sources:
+          - arc-tistaminis
           - mfr-warlord-store
+          - ret-radaddel
   - type: ean-mismatch
     entity: steamforged-games/SFEE-LL005
     chosen: '5060453697184'
@@ -301,10 +685,22 @@ conflicts:
       - ean: '5060453695388'
         sources:
           - mfr-steamforged
+          - ret-gamenerdz
       - ean: '5060453697184'
         sources:
           - legacy-catalog
           - mfr-steamforged
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: mantic-games/MGVAF202
+    chosen: '5060924988162'
+    assertions:
+      - ean: '5060469664040'
+        sources:
+          - ret-gamenerdz
+      - ean: '5060924988162'
+        sources:
+          - mfr-manticgames
   - type: ean-mismatch
     entity: warlord-games/772012008
     chosen: '5060572501546'
@@ -336,6 +732,8 @@ conflicts:
       - ean: '5060572504851'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
       - ean: '5060572506725'
         sources:
           - mfr-warlord-store
@@ -346,6 +744,8 @@ conflicts:
       - ean: '5060572509870'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
       - ean: '5060917991919'
         sources:
           - mfr-warlord-store
@@ -356,9 +756,170 @@ conflicts:
       - ean: '5060917990653'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
       - ean: '5060917991988'
         sources:
           - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/H00133
+    chosen: '5060917992084'
+    assertions:
+      - ean: '5060917992084'
+        sources:
+          - legacy-catalog
+      - ean: '5907652563592'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110025
+    chosen: '5060917992091'
+    assertions:
+      - ean: '5060917992091'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563608'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110022
+    chosen: '5060917992169'
+    assertions:
+      - ean: '5060917992169'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563578'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110023
+    chosen: '5060917992176'
+    assertions:
+      - ean: '5060917992176'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563585'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110019
+    chosen: '5060917992183'
+    assertions:
+      - ean: '5060917992183'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563547'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110020
+    chosen: '5060917992190'
+    assertions:
+      - ean: '5060917992190'
+        sources:
+          - legacy-catalog
+      - ean: '5907652563554'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110021
+    chosen: '5060917992206'
+    assertions:
+      - ean: '5060917992206'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563561'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110014
+    chosen: '5060917992213'
+    assertions:
+      - ean: '5060917992213'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563493'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110015
+    chosen: '5060917992220'
+    assertions:
+      - ean: '5060917992220'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563509'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110016
+    chosen: '5060917992237'
+    assertions:
+      - ean: '5060917992237'
+        sources:
+          - legacy-catalog
+          - ret-tistaminis
+      - ean: '5907652563516'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110017
+    chosen: '5060917992244'
+    assertions:
+      - ean: '5060917992244'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563523'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/849110018
+    chosen: '5060917992251'
+    assertions:
+      - ean: '5060917992251'
+        sources:
+          - legacy-catalog
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5907652563530'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/112010004
+    chosen: '5060917993111'
+    assertions:
+      - ean: '5060917993111'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5060917993777'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-radaddel
   - type: ean-mismatch
     entity: warlord-games/303214002
     chosen: '5060917993524'
@@ -366,6 +927,7 @@ conflicts:
       - ean: '5060917993395'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060917993524'
         sources:
           - legacy-catalog
@@ -377,10 +939,24 @@ conflicts:
       - ean: '5060917993401'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060917993531'
         sources:
           - legacy-catalog
           - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/4099300010
+    chosen: '9781472863874'
+    assertions:
+      - ean: '5060917994545'
+        sources:
+          - ret-goblingaming
+      - ean: '9781472863874'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-radaddel
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/489910014
     chosen: '9781915319562'
@@ -388,9 +964,11 @@ conflicts:
       - ean: '5060917994958'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '9781915319562'
         sources:
           - legacy-catalog
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/402610008
     chosen: '5060917995467'
@@ -402,6 +980,7 @@ conflicts:
       - ean: '5060917995467'
         sources:
           - legacy-catalog
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/402015806
     chosen: '5060917995436'
@@ -413,6 +992,8 @@ conflicts:
       - ean: '5060917995436'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/402013017
     chosen: '5060917995429'
@@ -420,9 +1001,27 @@ conflicts:
       - ean: '5060917995306'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060917995429'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/452010405
+    chosen: '5060917996259'
+    assertions:
+      - ean: '5060917995368'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060917996259'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-radaddel
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/452610003
     chosen: '5060917996914'
@@ -430,13 +1029,132 @@ conflicts:
       - ean: '5060917996587'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
       - ean: '5060917996907'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
       - ean: '5060917996914'
         sources:
           - legacy-catalog
           - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/403205802
+    chosen: '5060917997539'
+    assertions:
+      - ean: '5060917997126'
+        sources:
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060917997140'
+        sources:
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060917997157'
+        sources:
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060917997164'
+        sources:
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060917997539'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5060917997942'
+        sources:
+          - mfr-warlord-store
+          - ret-radaddel
+      - ean: '5060917998383'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5060917998529'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5060917998536'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/452611202
+    chosen: '5060917997713'
+    assertions:
+      - ean: '5060917997713'
+        sources:
+          - legacy-catalog
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5060917997928'
+        sources:
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: warlord-games/452011205
+    chosen: '5060917998925'
+    assertions:
+      - ean: '5060917998925'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5060917998949'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5060917998956'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5060917999175'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: mantic-games/MGARM114
+    chosen: '5060924982320'
+    assertions:
+      - ean: '5060924982306'
+        sources:
+          - legacy-catalog
+      - ean: '5060924982320'
+        sources:
+          - legacy-catalog
+          - ret-tistaminis
+      - ean: '9781911516507'
+        sources:
+          - legacy-catalog
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: mantic-games/MGWD173
+    chosen: '5060924983624'
+    assertions:
+      - ean: '5060924983624'
+        sources:
+          - legacy-catalog
+      - ean: '5060924984799'
+        sources:
+          - ret-goblingaming
   - type: ean-mismatch
     entity: mantic-games/MGKWR407
     chosen: '5060924983860'
@@ -444,9 +1162,12 @@ conflicts:
       - ean: '5060924983860'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
       - ean: '5060924987080'
         sources:
           - mfr-manticgames
+          - ret-gamenerdz
   - type: ean-mismatch
     entity: mantic-games/MGHAB101
     chosen: '5060924985475'
@@ -454,10 +1175,16 @@ conflicts:
       - ean: '5060924985390'
         sources:
           - legacy-catalog
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-tistaminis
       - ean: '5060924985475'
         sources:
           - legacy-catalog
           - mfr-manticgames
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/109910020
     chosen: '9781911281580'
@@ -465,6 +1192,29 @@ conflicts:
       - ean: '9781911281580'
         sources:
           - legacy-catalog
+          - ret-goblingaming
+          - ret-radaddel
       - ean: '9781911281603'
         sources:
           - mfr-warlord-store
+  - type: ambiguous-join
+    keys:
+      - arc-wargameportal:/products/chaos-warriors
+    name: Chaos Warriors
+    candidates:
+      - games-workshop/99120201131
+      - games-workshop/99122701003
+  - type: ambiguous-join
+    keys:
+      - arc-wargameportal:/products/arcane-ruins
+    name: Arcane Ruins
+    candidates:
+      - games-workshop/99122799001
+      - games-workshop/99129999003
+  - type: cross-manufacturer-ean
+    ean: '5011921171835'
+    keys:
+      - arc-wargameportal:/products/biophagus
+      - legacy-catalog:games-workshop/warhammer-40k/genestealer-cults/biophagus
+      - ret-goblingaming:biophagus
+      - ret-tistaminis:bolt-action-italian-paracadutisti-weapons-team

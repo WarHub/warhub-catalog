@@ -5,15 +5,28 @@ strategy: shopify
 # /products/<handle>.js to www, and the client does not follow redirects.
 baseUrl: https://www.goblingaming.co.uk
 scope:
-  vendors:
-    - Games Workshop
+  # scope.vendors: [Games Workshop] REMOVED 2026-07-13 (Plan 5 Task 1): that allow-list
+  # was throwing away most of this store's barcoded catalog. Live full-catalog enumeration
+  # (54 pages) found 13,436 products store-wide vs. 2,923 harvested under the old
+  # GW-only scope -- a 78% loss. This store also stocks Warlord Games, Corvus Belli,
+  # Atomic Mass Games, Mantic Games and Wyrd Games (all tracked manufacturers) at
+  # meaningful volume. Taxonomy attribution (manufacturer_for_vendor) now governs
+  # inclusion instead: every product's vendor is resolved against
+  # data/catalog/taxonomy/manufacturers.yaml; unmapped vendors count as
+  # skipped_unknown_vendor rather than being silently dropped pre-taxonomy. This is
+  # existing, tested strategy behavior (test_scope_vendors_absent_behaves_unchanged) --
+  # no shopify.py code change was needed.
   currency: gbp
 politeness:
   rps: 0.5
 contract:
-  # Evidence-based floor (~85% of observed): live probe 2026-07-13 (full 54-page pagination,
-  # 13436 products store-wide) found exactly 2923 products with vendor "Games Workshop" -- the
-  # scope.vendors allow-list above. Controller decision, task-6-report.md.
+  # Historical evidence-based floor (~85% of observed): live probe 2026-07-13 (full 54-page
+  # pagination, 13436 products store-wide) found exactly 2923 products with vendor "Games
+  # Workshop" -- the scope.vendors allow-list that governed inclusion at the time. Controller
+  # decision, task-6-report.md.
+  # NOT YET RAISED for the widened (taxonomy-attribution-governed) scope above -- left
+  # unchanged pending the first wide harvest's evidence (Plan 5 Task 1, Step 3); the
+  # controller re-floors minCount from that run's observed tracked-vendor product count.
   minCount: 2500
   maxDropPct: 30
   requiredFieldRates:

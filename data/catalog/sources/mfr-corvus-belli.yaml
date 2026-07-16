@@ -9,6 +9,17 @@ scope:
   manufacturer: Corvus Belli
 politeness:
   rps: 0.5
+  # Robots preflight (Task 4b, 2026-07-13): baseUrl (store.corvusbelli.com, the storefront) is NOT
+  # the actual fetch target -- appsync.py's GRAPHQL_ENDPOINT is a hardcoded absolute URL on AWS
+  # AppSync's own host (https://aiscbwsb6vb3xbysk57tnk3miy.appsync-api.eu-west-1.amazonaws.com/
+  # graphql), entirely unrelated to store.corvusbelli.com. Checking store.corvusbelli.com's
+  # robots.txt would say nothing about whether we're allowed to query the AppSync API -- and in
+  # fact store.corvusbelli.com/robots.txt itself 301-redirects (to /en/robots.txt), which
+  # PoliteClient never follows (see client.py), so a literal baseUrl check would FAIL LOUD here
+  # for a source that is actually fine. Verified live 2026-07-13: the real fetch target
+  # (aiscbwsb6vb3xbysk57tnk3miy.appsync-api.eu-west-1.amazonaws.com/robots.txt) -> 404 -- no
+  # restrictions published on the real fetch target.
+  ignoreRobots: true
 contract:
   # Evidence-based floor, live query 2026-07-13 (curl.exe POST, single polite request, UA
   # warhub-catalog-bot/1.0, category {type: wargames, game: infinity}, page 1) --

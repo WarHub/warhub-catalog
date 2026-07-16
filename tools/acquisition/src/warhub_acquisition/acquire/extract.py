@@ -64,12 +64,47 @@ def _jsonld_brand(raw: object) -> str | None:
     return _clean(raw)
 
 
+_GTIN_FIELDS = ("gtin13", "gtin", "gtin12", "gtin8")
+
+
+def _first_gtin(source: dict) -> object:
+    for field in _GTIN_FIELDS:
+        value = source.get(field)
+        if value:
+            return value
+    return None
+
+
+def _node_gtin(node: dict) -> object:
+    """gtin13/gtin/gtin12/gtin8, checked in that order, on the Product node's own top level
+    FIRST (unchanged precedence). Many Shopify themes instead (or additionally) nest the gtin
+    inside the Product's `offers` -- a single Offer object OR a list of them (probe-confirmed:
+    tistaminis.com's archived pages carry gtin13 only inside `offers`, not at the Product's top
+    level, which is why the top-level-only lookup this function replaces returned a null ean for
+    a page whose HTML plainly contains the barcode). When the top level has no usable gtin, each
+    offer is checked in list order and the first one carrying a usable gtin field wins."""
+    raw_gtin = _first_gtin(node)
+    if raw_gtin:
+        return raw_gtin
+    offers = node.get("offers")
+    if isinstance(offers, dict):
+        offers = [offers]
+    if isinstance(offers, list):
+        for offer in offers:
+            if isinstance(offer, dict):
+                raw_gtin = _first_gtin(offer)
+                if raw_gtin:
+                    return raw_gtin
+    return None
+
+
 def _extract_jsonld(html: str) -> dict[str, str | None] | None:
     """First `Product` node found across every `<script type="application/ld+json">` block
     (malformed blocks are skipped, not fatal -- a later valid block can still match), unwrapping
     `@graph` nesting. Returns None only when no Product node with a usable `name` is found at
     all -- a Product node with a `name` but no gtin field still counts as a hit (`ean` is None in
-    that case), matching the field-merge design of both callers."""
+    that case), matching the field-merge design of both callers. gtin lookup: see `_node_gtin`
+    for the top-level-then-offers precedence."""
     for block in _LDJSON_RE.findall(html):
         try:
             data = json.loads(block)
@@ -91,7 +126,7 @@ def _extract_jsonld(html: str) -> dict[str, str | None] | None:
             name = _clean(node.get("name"))
             if not name:
                 continue
-            raw_gtin = node.get("gtin13") or node.get("gtin") or node.get("gtin12")
+            raw_gtin = _node_gtin(node)
             return {
                 "name": name,
                 "sku": _clean(node.get("sku")),
@@ -174,7 +209,35 @@ def _extract_bcdata(html: str) -> dict[str, str | None] | None:
 # --- Fallback name / field-merge -----------------------------------------------------------------
 
 
+def strip_site_chrome(name: str | None) -> str | None:
+    """Strip trailing shop chrome from a product name.
+
+    This is applied to the MERGED name from every extractor, not just the `<title>` fallback:
+    radaddel.de emits its shop-suffixed page title verbatim in `itemprop="name"` microdata
+    (live-verified 2026-07-14), so the chrome arrives through structured data that is supposed to
+    be authoritative. Left alone it lands in the published catalog name AND in the entity id
+    (`...-radaddel-radaddel-tabletop-shop`).
+
+    `|` is the one separator we split on: a real product name containing a literal pipe is
+    vanishingly rare, while `Product | Shop Name` chrome is the storefront-template norm. We
+    deliberately do NOT split on ` - ` / en-dash / em-dash -- legitimate product names use them
+    ("War of the Roses - Hail Caesar Supplement").
+    """
+    if not name or "|" not in name:
+        return name
+    head = name.split("|", 1)[0].strip()
+    return head or name
+
+
 def _fallback_name(html: str) -> str | None:
+    """`<h1>` wins outright (real product markup, no shop chrome to worry about). `<title>` is the
+    last resort, and it is frequently shop-suffixed -- e.g. radaddel.de emits
+    `"<Product> | Radaddel | Radaddel Tabletop Shop"` -- so a bare `<title>` fallback mints the
+    site's chrome straight into the catalog name (and, upstream, into the entity ID). `|` is the
+    one separator we strip on: real product titles containing a literal pipe are vanishingly rare,
+    while `<title>Product | Shop Name</title>` chrome is the norm across storefront templates. We
+    deliberately do NOT split on ` - ` / en-dash / em-dash -- those appear inside legitimate
+    product names (e.g. "War of the Roses - Hail Caesar Supplement")."""
     match = _H1_RE.search(html)
     if match:
         text = _clean(re.sub(r"<[^>]+>", "", match.group(1)))
@@ -182,7 +245,12 @@ def _fallback_name(html: str) -> str | None:
             return text
     match = _TITLE_RE.search(html)
     if match:
-        return _clean(re.sub(r"<[^>]+>", "", match.group(1)))
+        text = _clean(re.sub(r"<[^>]+>", "", match.group(1)))
+        if text and "|" in text:
+            head = text.split("|", 1)[0].strip()
+            if head:
+                return head
+        return text
     return None
 
 
@@ -212,6 +280,7 @@ def _extract_page(html: str) -> tuple[dict[str, str | None], str | None]:
                     ean_source = label
     if merged["name"] is None and (merged["sku"] or merged["ean"] or merged["brand"]):
         merged["name"] = _fallback_name(html)
+    merged["name"] = strip_site_chrome(merged["name"])
     return merged, ean_source
 
 

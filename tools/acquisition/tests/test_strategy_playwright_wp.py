@@ -11,12 +11,14 @@ is exactly as served, only unrelated surrounding markup (nav, footer, prose, coo
 trimmed.
 """
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
 
 import pytest
 
-from warhub_acquisition.acquire.client import FetchError, PoliteClient
+from warhub_acquisition.acquire.client import FetchError, PoliteClient, RobotsDisallowedError
+from warhub_acquisition.acquire.robots import RobotsPolicy
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
 from warhub_acquisition.acquire.strategies.playwright_wp import (
     _extract_image_url,
@@ -93,9 +95,22 @@ def fake_fetcher(calls: list[str] | None = None, fail_urls: set[str] | None = No
 
 
 def real_client() -> PoliteClient:
-    # playwright_wp_strategy receives a PoliteClient per the Strategy call signature but never
-    # uses it (see module docstring) -- a real, transport-less instance is enough to prove that.
+    # playwright_wp_strategy receives a PoliteClient per the Strategy call signature and never
+    # fetches THROUGH it (see module docstring) -- but it does read `client.robots`/
+    # `client.user_agent` off it to enforce robots.txt on its own browser fetches (fix wave 3). No
+    # `robots=` here means "no robots checking" (mirrors `ignoreRobots`/no-baseUrl in runner.py),
+    # so this stays a no-op for every fixture-driven test below; `disallowing_client` (below) is
+    # the one that attaches a real policy.
     return PoliteClient(BASE_URL, sleep=lambda s: None)
+
+
+def disallowing_client(disallow_path: str) -> PoliteClient:
+    """A `PoliteClient` carrying a `RobotsPolicy` that disallows exactly `disallow_path` (relative
+    to `BASE_URL`) for every user-agent -- used to prove the playwright strategy checks robots.txt
+    on each browser fetch, not just `descriptor.baseUrl` (see `runner.run_source`'s preflight,
+    which this test bypasses entirely by calling `playwright_wp_strategy` directly)."""
+    policy = RobotsPolicy.from_lines(f"User-agent: *\nAllow: /\nDisallow: {disallow_path}\n".splitlines())
+    return PoliteClient(BASE_URL, sleep=lambda s: None, robots=policy)
 
 
 # --- Registration ---------------------------------------------------------------------------
@@ -389,6 +404,75 @@ def test_cursor_is_empty_no_budget_no_persisted_state() -> None:
     assert result.cursor == {}
 
 
+# --- Robots.txt enforcement on browser fetches (fix wave 3, Important #2) --------------------
+#
+# playwright_wp.py never calls PoliteClient._request (it fetches via a Chromium page.goto,
+# injected here as a fake PageFetcher) -- acquire/robots.py's per-request guarantee used to stop
+# at that transport boundary. These tests prove `_fetch` (wired through `_run`) now checks the
+# SAME RobotsPolicy attached to the `client: PoliteClient` argument before every browser fetch,
+# and -- critically -- BEFORE calling the injected fetcher at all, so a disallowed URL never
+# reaches a real `page.goto` (a mocked fetcher stands in for the browser; none is launched here).
+
+
+def test_robots_disallowed_product_path_raises_before_the_fetcher_is_called() -> None:
+    disallowed_url = f"{BASE_URL}/products/stark-starter-set/"
+    calls: list[str] = []
+
+    with pytest.raises(RobotsDisallowedError) as excinfo:
+        playwright_wp_strategy(
+            cmon_descriptor(),
+            disallowing_client("/products/stark-starter-set/"),
+            {},
+            context(cmon_taxonomy()),
+            fetcher=fake_fetcher(calls),
+            sleep=lambda s: None,
+        )
+
+    # The disallowed URL alphabetically sorts last among this fixture's 5 product URLs, so every
+    # other product page (and both sitemaps, and both line pages) fetched cleanly first -- proving
+    # this isn't a blanket "nothing ran" failure, only the specific disallowed URL was blocked.
+    assert disallowed_url not in calls
+    assert PRODUCT_SITEMAP_URL in calls
+    assert LINE_SITEMAP_URL in calls
+    assert excinfo.value.details["type"] == "robots-disallowed"
+    assert excinfo.value.details["url"] == disallowed_url
+
+
+def test_robots_disallowed_sitemap_raises_before_any_page_fetch() -> None:
+    """Disallowing the product sitemap itself (the very first browser fetch after the line map)
+    blocks before a single product page is ever reached."""
+    calls: list[str] = []
+
+    with pytest.raises(RobotsDisallowedError):
+        playwright_wp_strategy(
+            cmon_descriptor(),
+            disallowing_client("/wp-sitemap-posts-products-1.xml"),
+            {},
+            context(cmon_taxonomy()),
+            fetcher=fake_fetcher(calls),
+            sleep=lambda s: None,
+        )
+
+    assert PRODUCT_SITEMAP_URL not in calls
+    assert f"{BASE_URL}/products/grow-sky/" not in calls
+
+
+def test_robots_allowing_policy_does_not_block_the_run() -> None:
+    """Sanity check: a policy that allows everything behaves exactly like `real_client()`'s
+    no-robots-attached default -- attaching a permissive policy is not itself the thing that
+    changes behavior."""
+    result = playwright_wp_strategy(
+        cmon_descriptor(),
+        disallowing_client("/nothing-here/"),
+        {},
+        context(cmon_taxonomy()),
+        fetcher=fake_fetcher(),
+        sleep=lambda s: None,
+    )
+    assert result.stats["product_urls_total"] == 5
+    assert len(result.observations) == 4  # same as the no-robots full-sweep test
+
+
 # --- Pacing --------------------------------------------------------------------------------
 
 
@@ -451,6 +535,55 @@ def test_lazy_import_is_only_attempted_when_no_fetcher_is_injected(monkeypatch) 
     monkeypatch.setitem(sys.modules, "playwright", None)
     with pytest.raises(ImportError):
         playwright_wp_strategy(cmon_descriptor(), real_client(), {}, context(cmon_taxonomy()))
+
+
+# --- `scope.headless` knob: reaches the (mocked) browser launcher, no real browser launched ----
+
+
+def _fake_launcher(captured: dict) -> Callable[..., object]:
+    @contextmanager
+    def fake_launch_page_fetcher(headless: bool = True):
+        captured["headless"] = headless
+        yield fake_fetcher()
+
+    return fake_launch_page_fetcher
+
+
+def test_headless_defaults_to_true_when_scope_omits_it(monkeypatch) -> None:
+    captured: dict = {}
+    monkeypatch.setattr(
+        "warhub_acquisition.acquire.strategies._playwright_browser.launch_page_fetcher",
+        _fake_launcher(captured),
+    )
+    result = playwright_wp_strategy(
+        cmon_descriptor(), real_client(), {}, context(cmon_taxonomy()), sleep=lambda s: None
+    )
+    assert captured["headless"] is True
+    assert result.stats["product_urls_total"] == 5  # sanity: the mocked launcher's fetcher ran
+
+
+def test_headless_false_in_scope_reaches_the_browser_launcher(monkeypatch) -> None:
+    captured: dict = {}
+    monkeypatch.setattr(
+        "warhub_acquisition.acquire.strategies._playwright_browser.launch_page_fetcher",
+        _fake_launcher(captured),
+    )
+    playwright_wp_strategy(
+        cmon_descriptor(headless=False), real_client(), {}, context(cmon_taxonomy()), sleep=lambda s: None
+    )
+    assert captured["headless"] is False
+
+
+def test_headless_true_explicit_in_scope_still_reaches_the_browser_launcher(monkeypatch) -> None:
+    captured: dict = {}
+    monkeypatch.setattr(
+        "warhub_acquisition.acquire.strategies._playwright_browser.launch_page_fetcher",
+        _fake_launcher(captured),
+    )
+    playwright_wp_strategy(
+        cmon_descriptor(headless=True), real_client(), {}, context(cmon_taxonomy()), sleep=lambda s: None
+    )
+    assert captured["headless"] is True
 
 
 def test_module_import_itself_never_touches_playwright(monkeypatch) -> None:

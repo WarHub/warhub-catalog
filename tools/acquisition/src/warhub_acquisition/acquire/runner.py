@@ -3,8 +3,9 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Callable
 
-from warhub_acquisition.acquire.client import PoliteClient
+from warhub_acquisition.acquire.client import UA, PoliteClient, RobotsDisallowedError
 from warhub_acquisition.acquire.cursor import CursorStore
+from warhub_acquisition.acquire.robots import RobotsPolicy, fetch_policy
 from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.descriptor import Contract, SourceDescriptor
 from warhub_acquisition.models.observation import Observation
@@ -137,17 +138,74 @@ def run_source(
     paths,
     context: AcquireContext,
     transport=None,
+    sleep=None,
 ) -> SourceHealth:
     politeness = descriptor.politeness or {}
-    client = PoliteClient(
-        descriptor.baseUrl,
-        rps=politeness.get("rps", 0.5),
-        # Explicit per-source timeout override (seconds). PoliteClient's own default is 30s; slow
-        # bulk endpoints (Wayback CDX: 200KB+ pages, 3-7s+ observed live) declare a higher value,
-        # e.g. arc-*.yaml's `timeoutSeconds: 60`.
-        timeout=float(politeness.get("timeoutSeconds", 30.0)),
-        transport=transport,
-    )
+    configured_rps = politeness.get("rps", 0.5)
+    timeout_seconds = float(politeness.get("timeoutSeconds", 30.0))
+    # `sleep` is an optional pacing-injection seam (mirrors `transport`) -- `None` means "use
+    # PoliteClient's own default (real time.sleep)"; tests inject a list-appending callable to
+    # observe pacing decisions (e.g. a robots.txt Crawl-delay override) without a real wall-clock
+    # wait. Threaded into every PoliteClient this function constructs -- both the robots.txt probe
+    # client below and the strategy's real client.
+    client_kwargs: dict[str, object] = {"timeout": timeout_seconds, "transport": transport}
+    if sleep is not None:
+        client_kwargs["sleep"] = sleep
+
+    # --- Robots.txt preflight (acquire/robots.py) -- BEFORE the strategy runs, never after. ---
+    # Skipped entirely when there's no baseUrl to check (curated/no-strategy sources never reach
+    # here via cli.py, but direct callers -- e.g. this module's own tests -- may still construct a
+    # baseUrl-less descriptor) or when the descriptor explicitly opts out via
+    # `politeness.ignoreRobots: true` (see robots.py's module docstring + the two real committed
+    # cases in mfr-gw-algolia.yaml / mfr-corvus-belli.yaml: baseUrl there is a marketing site, not
+    # the actual Algolia/AppSync API host the strategy fetches from, so checking baseUrl's
+    # robots.txt would be checking the wrong thing entirely). `policy` stays `None` in both skip
+    # cases, so the strategy's client below is built with `robots=None` (no per-request checking)
+    # -- exactly matching the intent of `ignoreRobots`/no-baseUrl.
+    ignore_robots = bool(politeness.get("ignoreRobots", False))
+    robots_stats: dict[str, float] = {}
+    policy: RobotsPolicy | None = None
+    effective_rps = configured_rps
+    if descriptor.baseUrl is not None and not ignore_robots:
+        # A bare, policy-less probe client -- fetching robots.txt itself must never be blocked by
+        # the very policy it's about to produce. This is throwaway: it's used ONLY for this one
+        # `fetch_policy` call, never passed to the strategy (fix wave 1, per-request robots
+        # checking -- see client.py's `PoliteClient.__init__`).
+        probe_client = PoliteClient(descriptor.baseUrl, rps=configured_rps, **client_kwargs)
+        policy = fetch_policy(probe_client, descriptor.baseUrl)
+        disallow = policy.disallowed_by(descriptor.baseUrl, UA)
+        if disallow is not None:
+            token, rule = disallow
+            rule_detail = f" ({rule})" if rule else ""
+            raise RobotsDisallowedError(
+                f"{descriptor.id}: robots.txt at {descriptor.baseUrl} disallows "
+                f"user-agent {token!r}{rule_detail}",
+                {
+                    "type": "robots-disallowed",
+                    "source": descriptor.id,
+                    "url": descriptor.baseUrl,
+                    "userAgent": token,
+                    "rule": rule,
+                },
+            )
+
+        robots_delay = policy.crawl_delay(UA)
+        if robots_delay is not None:
+            configured_interval = 1.0 / configured_rps if configured_rps > 0 else 0.0
+            if robots_delay > configured_interval:
+                # robots.txt asks for slower pacing than the descriptor configured for itself --
+                # honor the slower one (a descriptor's politeness.rps is a ceiling we impose on
+                # ourselves, never a floor we're entitled to regardless of what the site asks for).
+                robots_stats["robots_crawl_delay_applied"] = robots_delay
+                effective_rps = 1.0 / robots_delay
+
+    # The strategy's REAL client, constructed once, AFTER the robots.txt probe above (never
+    # before -- so the probe fetch is always the one and only policy-less request) and WITH the
+    # policy attached (`robots=policy`, `None` when skipped above): this is the structural
+    # guarantee the base-URL preflight alone can't give -- `PoliteClient._request` now checks
+    # EVERY request this client makes, not just `descriptor.baseUrl`, against the exact same
+    # `RobotsPolicy` the preflight already fetched (no second robots.txt fetch).
+    client = PoliteClient(descriptor.baseUrl, rps=effective_rps, robots=policy, **client_kwargs)
 
     cursor_store = CursorStore(paths.evidence_products)
     cursor = cursor_store.load(descriptor.id)
@@ -160,6 +218,8 @@ def run_source(
 
     strategy = STRATEGIES[descriptor.strategy]
     result = strategy(descriptor, client, cursor, strategy_context)
+    if robots_stats:
+        result.stats.update(robots_stats)
 
     # All contract checks run BEFORE any evidence or cursor write: a failed source must never
     # delete or decay existing evidence, it can only fail to refresh it.
