@@ -248,3 +248,139 @@ def test_null_game_system_entity_publishes_with_no_conflict(tmp_path: Path) -> N
     data = read_yaml(paths.catalog_products / "games-workshop.yaml")
     record = next(p for p in data["products"] if p["id"] == "games-workshop/99999999999")
     assert "gameSystem" not in record
+
+
+def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_path: Path) -> None:
+    """Overrides-based reclassification is a pure post-identity attribute patch.
+
+    Context: issue #12 ("Cross-faction move identity: reclassified product loses EAN + resets
+    firstSeen") described the LEGACY .NET pipeline, where identity and EAN merge were scoped
+    within a single faction-partitioned YAML file. In the Python resolver, apply_overrides runs
+    AFTER join/identity, EAN resolution, and firstSeen derivation (resolve/resolver.py:103,
+    resolve/attributes.py:76-82), so an overrides.yaml gameSystem/faction patch structurally
+    CANNOT move identity, drop the EAN, or reset firstSeen -- those equalities hold by
+    construction, and this test does not (cannot) guard against a faction-scoped-identity
+    regression; that guard is test_reclassification_via_changed_source_hint_preserves_identity
+    below. What this test pins is the behaviour that makes the mechanism safe: the patch lands
+    (gameSystem/faction actually change), it survives CanonicalProduct revalidation, no duplicate
+    entity is minted, and no conflict is raised."""
+    paths = seed(tmp_path)
+
+    before = resolve_catalog(paths)["games-workshop"][0]
+    assert before.id == "games-workshop/99120110077"
+    assert before.faction == "necrons"
+    assert before.gameSystem == "warhammer-40k"
+    assert before.ean == "5011921194285"
+    assert before.firstSeen == "2026-07-07"
+
+    # Reclassify via the documented mechanism: an overrides.yaml patch, moving the product to a
+    # different game system and faction.
+    write_yaml(
+        paths.overrides,
+        {"retract": [], "products": {
+            "games-workshop/99120110077": {
+                "gameSystem": "warhammer-age-of-sigmar", "faction": "stormcast-eternals"}}},
+    )
+
+    catalog = resolve_catalog(paths)
+    products = [p for records in catalog.values() for p in records]
+    assert len(products) == 1, "reclassification must not mint a duplicate entity"
+    after = products[0]
+
+    # the patch landed -- these are the non-trivial assertions here
+    assert after.gameSystem == "warhammer-age-of-sigmar"
+    assert after.faction == "stormcast-eternals"
+    assert read_yaml(paths.conflicts) == {"conflicts": []}
+    # documented invariant (holds by construction -- overrides apply post-identity): the patch
+    # touched nothing but the two classification attributes
+    assert after.model_dump(exclude={"gameSystem", "faction"}) == before.model_dump(
+        exclude={"gameSystem", "faction"}
+    )
+
+
+def test_reclassification_via_changed_source_hint_preserves_identity(tmp_path: Path) -> None:
+    """Regression guard for issue #12 ("Cross-faction move identity: reclassified product loses
+    EAN + resets firstSeen"), via the trigger with teeth: a changed source classification hint.
+
+    A source re-observes the SAME product (same evidence key) but now hints a different
+    gameSystem/faction, so the changed classification flows through join/identity input -- if
+    entity identity were faction-scoped (as in the legacy .NET pipeline the issue describes),
+    the changed hint would mint a NEW entity id, orphaning the EAN and firstSeen on a stale
+    duplicate. Because entity_id keys only on manufacturer/code-or-slug (resolve/identity.py)
+    and EAN + firstSeen derive from the persisted observations (resolve/attributes.py), the
+    entity keeps its id, EAN, eanConfidence and firstSeen while only its classification changes.
+
+    The persisted firstSeen is held fixed here; the EvidenceStore.upsert min(old, fresh) clamp
+    for a re-observation carrying a LATER firstSeen is covered separately by
+    test_upsert_reobservation_with_changed_hint_clamps_first_seen."""
+    paths = seed(tmp_path)
+    before = resolve_catalog(paths)["games-workshop"][0]
+
+    # Re-observation of mfr-gw:necrons with a moved classification, firstSeen unchanged.
+    gw = paths.evidence_products / "mfr-gw" / "observations.jsonl"
+    gw.write_text(
+        json.dumps(
+            {"key": "mfr-gw:necrons", "name": "Combat Patrol: Necrons", "manufacturer": "games-workshop",
+             "sku": "99120110077", "priceGbp": 76.5, "availability": "in_stock",
+             "hints": {"gameSystem": "warhammer-age-of-sigmar", "faction": "stormcast-eternals"},
+             "firstSeen": "2026-07-07", "lastSeen": "2026-07-15", "extractor": "algolia@1"},
+            sort_keys=True, separators=(",", ":"),
+        )
+        + "\n",
+        encoding="utf-8", newline="\n",
+    )
+
+    catalog = resolve_catalog(paths)
+    products = [p for records in catalog.values() for p in records]
+    assert len(products) == 1, "changed classification hint must not mint a duplicate entity"
+    after = products[0]
+    assert after.id == before.id
+    assert after.faction == "stormcast-eternals"
+    assert after.gameSystem == "warhammer-age-of-sigmar"
+    assert after.ean == before.ean
+    assert after.eanConfidence == before.eanConfidence
+    assert after.firstSeen == before.firstSeen
+
+
+def test_upsert_reobservation_with_changed_hint_clamps_first_seen(tmp_path: Path) -> None:
+    """Companion to the source-hint regression test above: drive the actual acquire-side write
+    path. A second sweep re-observes the SAME evidence key with a changed gameSystem/faction hint
+    and a LATER firstSeen (a fresh observation only knows "seen today"). EvidenceStore.upsert
+    must clamp the stored firstSeen to min(old, fresh) (evidence/store.py:31-38) -- and a
+    subsequent resolve must keep the entity's id, EAN and original firstSeen while adopting the
+    new classification."""
+    from warhub_acquisition.evidence.store import EvidenceStore
+    from warhub_acquisition.models.observation import Observation
+
+    paths = seed(tmp_path)
+    before = resolve_catalog(paths)["games-workshop"][0]
+    assert before.firstSeen == "2026-07-07"
+
+    store = EvidenceStore(paths.evidence_products)
+    store.upsert(
+        "mfr-gw",
+        Observation(
+            key="mfr-gw:necrons", name="Combat Patrol: Necrons", manufacturer="games-workshop",
+            sku="99120110077", priceGbp=76.5, availability="in_stock",
+            hints={"gameSystem": "warhammer-age-of-sigmar", "faction": "stormcast-eternals"},
+            firstSeen="2026-07-15", lastSeen="2026-07-15", extractor="algolia@1",
+        ),
+    )
+    store.save("mfr-gw")
+
+    # the persisted record kept the OLD firstSeen and took the new lastSeen + classification
+    stored = EvidenceStore(paths.evidence_products).load("mfr-gw")["mfr-gw:necrons"]
+    assert stored.firstSeen == "2026-07-07"
+    assert stored.lastSeen == "2026-07-15"
+    assert stored.hints == {"gameSystem": "warhammer-age-of-sigmar", "faction": "stormcast-eternals"}
+
+    catalog = resolve_catalog(paths)
+    products = [p for records in catalog.values() for p in records]
+    assert len(products) == 1
+    after = products[0]
+    assert after.id == before.id
+    assert after.faction == "stormcast-eternals"
+    assert after.gameSystem == "warhammer-age-of-sigmar"
+    assert after.ean == before.ean
+    assert after.eanConfidence == before.eanConfidence
+    assert after.firstSeen == before.firstSeen == "2026-07-07"
