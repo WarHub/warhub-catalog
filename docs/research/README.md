@@ -11,6 +11,7 @@ behavior (especially bot protection and Shopify feed fields) may drift.
 | [Retailer + barcode-DB probe](2026-07-12-source-probe-retailers-barcodedb.md) | Tier-1 EAN retailers: Goblin Gaming, Tistaminis (Shopify per-handle `.js`), Miniaturicum, Radaddel (structured-data gtin13), Game Nerdz (BigCommerce `upc`). Go-UPC works as a lookup; other barcode DBs are dead ends or spotty. |
 | [Web-archive probe](2026-07-12-source-probe-webarchive.md) | Wayback CDX enumeration is viable at scale; old GW webstore archives yield name + 11-digit code + price for dead SKUs; archived Shopify retailer pages carry `gtin13` — the EAN join for out-of-print products. BGG API now token-gated; Wikidata negligible. |
 | [Current pipeline analysis](2026-07-12-current-pipeline-analysis.md) | As-built map of the acquisition layer: per-manufacturer source table, the three-step EAN chain and why it plateaus at 46%, metadata-heuristic inventory, storage-model mechanics, and the fail-soft error-surfacing inventory. |
+| [Trade order sheets probe](2026-07-16-trade-order-sheets.md) | Manufacturer/distributor trade order sheets as a bulk EAN source: LOW viability. GW's public trade sheets carry the internal 11-digit code + name + price, never the GS1 EAN-13; the EAN-bearing forms are password-gated + Confidential (anti-ML/AI clause). Warlord's Excel/CSV export is behind the gated Trade Hub; Mantic publishes none. ~0 new EANs; keep the retailer-per-page and archived-Shopify veins instead. |
 
 ## Headline conclusions
 
