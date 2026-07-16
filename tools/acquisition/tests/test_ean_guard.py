@@ -157,6 +157,62 @@ def test_new_manufacturer_file_absent_from_head_is_not_a_hit(tmp_path: Path, cap
     assert "## Confirmed-EAN changes" not in out
 
 
+def test_repackaging_retained_in_additional_passes_and_reports(tmp_path: Path, capsys) -> None:
+    # HEAD confirmed ean X; the working record's primary flips to Y but X is retained in
+    # additionalEans -- a tracked repackaging (multi-EAN join). Reported distinctly, NOT a
+    # regression: exit 0, and the regression section is absent.
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/a", "name": "Thing A", "ean": "5011921194285", "eanConfidence": "confirmed"}],
+    )
+    _commit(repo_root, "seed catalog")
+
+    _write_catalog(
+        paths,
+        [{
+            "id": "games-workshop/a", "name": "Thing A", "ean": "5060393709671",
+            "eanConfidence": "confirmed", "additionalEans": ["5011921194285"],
+        }],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Confirmed-EAN changes" not in out
+    assert "repackaging" in out.lower()
+    assert "games-workshop/a" in out
+
+
+def test_lost_confirmed_ean_not_in_additional_fails_loudly(tmp_path: Path, capsys) -> None:
+    # HEAD confirmed ean X; the working primary is Y and X is NOWHERE (not primary, not in
+    # additionalEans) -- a genuine regression that must fail loudly: exit 5.
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/a", "name": "Thing A", "ean": "5011921194285", "eanConfidence": "confirmed"}],
+    )
+    _commit(repo_root, "seed catalog")
+
+    _write_catalog(
+        paths,
+        [{
+            "id": "games-workshop/a", "name": "Thing A", "ean": "5060393709671",
+            "eanConfidence": "confirmed", "additionalEans": ["5011921063765"],
+        }],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Confirmed-EAN changes" in out
+    assert "5011921194285" in out
+
+
 def test_report_without_ean_guard_flag_ignores_git_state(tmp_path: Path, capsys) -> None:
     repo_root = tmp_path / "repo"
     paths = _init_repo(repo_root)

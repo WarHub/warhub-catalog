@@ -30,17 +30,25 @@ def build_report(paths: DataPaths) -> str:
     return "\n".join(lines) + "\n"
 
 
-def check_ean_guard(paths: DataPaths) -> list[dict]:
+def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
     """Compare working-tree catalog/products/*.yaml against `git show HEAD:<path>`.
 
-    An entity is a hit only when present in BOTH revisions, the previous (HEAD) record had
-    `eanConfidence == "confirmed"`, and its `ean` value changed (including to/from null). New
-    entities, removed entities, and changes to non-confirmed entities are NOT hits. Pure read --
-    no git mutation, no filesystem writes. The repo root is derived as the data dir's parent;
-    a catalog file absent from HEAD (e.g. new manufacturer file) is treated as empty.
+    An entity is examined only when present in BOTH revisions with `eanConfidence == "confirmed"`
+    in HEAD and a changed primary `ean` (including to/from null). New entities, removed entities,
+    and non-confirmed entities are ignored. A changed primary EAN is classified two ways:
+
+      * ``lost`` -- the previous confirmed barcode is GONE (not the new `ean`, not in the new
+        `additionalEans`): a genuine regression, the caller fails the run loudly.
+      * ``repackaged`` -- the previous confirmed barcode was RETAINED in `additionalEans`: a
+        tracked repackaging (multi-EAN join promoted the live barcode to primary while keeping the
+        old one). Reported for visibility but NOT a regression.
+
+    Pure read -- no git mutation, no filesystem writes. The repo root is derived as the data dir's
+    parent; a catalog file absent from HEAD (e.g. a new manufacturer file) is treated as empty.
     """
     repo_root = paths.root.parent
-    findings: list[dict] = []
+    lost: list[dict] = []
+    repackaged: list[dict] = []
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         rel = path.relative_to(repo_root).as_posix()
         working = read_yaml(path) or {}
@@ -66,20 +74,33 @@ def check_ean_guard(paths: DataPaths) -> list[dict]:
                 continue  # removed entities are not guard hits
             previous_ean = head_product.get("ean")
             new_ean = working_product.get("ean")
-            if previous_ean != new_ean:
-                findings.append(
-                    {
-                        "entity": entity_id,
-                        "manufacturer_file": rel,
-                        "previous_ean": previous_ean,
-                        "new_ean": new_ean,
-                    }
-                )
-    return findings
+            if previous_ean == new_ean:
+                continue
+            finding = {
+                "entity": entity_id,
+                "manufacturer_file": rel,
+                "previous_ean": previous_ean,
+                "new_ean": new_ean,
+            }
+            retained = {new_ean, *(working_product.get("additionalEans") or [])}
+            if previous_ean is not None and previous_ean in retained:
+                repackaged.append(finding)
+            else:
+                lost.append(finding)
+    return {"lost": lost, "repackaged": repackaged}
 
 
-def render_ean_guard_section(findings: list[dict]) -> str:
-    lines = ["", "## Confirmed-EAN changes", ""]
-    for finding in sorted(findings, key=lambda f: f["entity"]):
-        lines.append(f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']}")
+def render_ean_guard_section(findings: dict[str, list[dict]]) -> str:
+    lines: list[str] = []
+    if findings["lost"]:
+        lines += ["", "## Confirmed-EAN changes", ""]
+        for finding in sorted(findings["lost"], key=lambda f: f["entity"]):
+            lines.append(f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']}")
+    if findings["repackaged"]:
+        lines += ["", "## Confirmed-EAN repackaging (retained in additionalEans)", ""]
+        for finding in sorted(findings["repackaged"], key=lambda f: f["entity"]):
+            lines.append(
+                f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']} "
+                f"(previous barcode retained)"
+            )
     return "\n".join(lines) + "\n"

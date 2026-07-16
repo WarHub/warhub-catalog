@@ -12,6 +12,11 @@ class CanonicalProduct(BaseModel):
     sku: str | None = None
     ean: str | None = None
     eanConfidence: str | None = None
+    # Extra barcodes a repackaged product carries beyond its primary `ean` (same contents,
+    # new box/barcode -- joined via matches.yaml). Empty for the single-barcode majority, so
+    # the published `ean` is unchanged for existing consumers. A confirmed barcode displaced
+    # by a repackaging join lands here rather than being silently dropped (see resolve_ean).
+    additionalEans: list[str] = Field(default_factory=list)
     gameSystem: str | None = None
     faction: str | None = None
     category: str | None = None
