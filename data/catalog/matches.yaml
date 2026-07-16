@@ -1,0 +1,24 @@
+# Hand-maintained: forced entity joins/aliases the deterministic resolver (resolve/join.py)
+# cannot infer on its own. `joins` maps one observation key (source_id:key) belonging to the
+# entity being folded in -> the surviving entity id it should merge into; `aliases` maps a
+# retired entity id -> its surviving replacement id. See resolve/join.py's docstring and
+# data/review/join-proposals.yaml's header for the promotion procedure. After editing, re-run
+# `warhub-data resolve` then `warhub-data report --ean-guard`.
+#
+# Note: the "surviving" id on the right isn't always the entity that was named as the join's
+# target when promoted from join-proposals.yaml -- resolve/join.py's own anchor-priority rule
+# (curated > manufacturer > retailer > archive > barcode-db) decides which side's id actually
+# survives once the two groups merge, so a few entries below point at the OTHER side's id (the
+# one carrying the higher-priority evidence) to avoid a spurious unresolved-forced-join conflict.
+joins:
+  'arc-gw-webstore:/en-GB/Baneblade': games-workshop/99120105107
+  'legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/the-three-hunters': games-workshop/99121499041
+  'legacy-catalog:mantic-games/kings-of-war/general/basilean-army-2': mantic-games/MGKWB112
+  'legacy-catalog:mantic-games/kings-of-war/general/undead-mega-army-2': mantic-games/MGKWU113
+  'mfr-gw-algolia:prod2940184-99120201240': games-workshop/99070201008
+  'mfr-gw-algolia:prod3530279-99550108187': games-workshop/99853008187
+  'mfr-gw-algolia:prod4830199-99120113104': games-workshop/99070113003
+  'mfr-warlord-store:germania-hail-caesar-supplement-copy': warlord-games/109910007
+  'mfr-warlord-store:hail-caesar-age-of-bronze-supplement-copy': warlord-games/109910010
+  'mfr-warlord-store:hail-caesar-rulebook-spanish-language-richard-i-the-lionheart-special-figure': warlord-games/101010004SP
+aliases: {}
