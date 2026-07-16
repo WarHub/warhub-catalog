@@ -387,6 +387,169 @@ def test_5xx_backoff_durations_follow_exponential_formula() -> None:
     assert sleeps == [1.0, 2.0]  # 2**0, 2**1 for the first two (failed) attempts
 
 
+# =================================================================================================
+# Rate-limit classification + bounded backoff (fix/nightly-429-degradation): a FetchError carries a
+# `rate_limited` flag so the CLI can treat an upstream throttle as DEGRADED (exit 3) rather than a
+# genuine failure (exit 4). 429 is always rate-limited; a 403 only when it carries a Cloudflare-
+# style edge signature; every other status stays a real error. A Retry-After longer than the cap
+# makes the client give up (degrade next run) instead of blocking the whole job's timeout.
+# =================================================================================================
+
+
+def test_429_after_retry_exhaustion_is_flagged_rate_limited() -> None:
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(429, text="slow down")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/products.json")
+    assert excinfo.value.status == 429
+    assert excinfo.value.rate_limited is True
+    assert len(calls) == 3  # retried through all attempts before giving up
+
+
+def test_5xx_after_retry_exhaustion_is_not_rate_limited() -> None:
+    """A persistent 5xx is a genuine upstream fault, not a throttle -- it must NOT be flagged
+    rate_limited (so the CLI still fails the run on it), unlike a 429."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(503, text="down")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/flaky")
+    assert excinfo.value.status == 503
+    assert excinfo.value.rate_limited is False
+
+
+def test_cloudflare_403_is_flagged_rate_limited() -> None:
+    """A 403 fronted by a Cloudflare edge (cf-ray / Server: cloudflare) is a bot/rate block on a
+    keyless public endpoint, so it degrades rather than fails. No retry (403 is not in the retry
+    set) -- the flag is what matters."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(403, text="Attention Required!", headers={"cf-ray": "8a1b", "Server": "cloudflare"})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/products.json")
+    assert excinfo.value.status == 403
+    assert excinfo.value.rate_limited is True
+    assert len(calls) == 1  # 403 is surfaced immediately, no retry
+
+
+def test_plain_403_without_edge_signature_is_not_rate_limited() -> None:
+    """A 403 with no edge signature is a genuine authorization/origin decision, not a throttle --
+    it must stay a real error so a real misconfiguration still fails loudly."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(403, text="Forbidden")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=lambda seconds: None,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/private")
+    assert excinfo.value.status == 403
+    assert excinfo.value.rate_limited is False
+
+
+def test_429_retry_after_beyond_cap_gives_up_without_long_sleep() -> None:
+    """A Retry-After longer than _MAX_BACKOFF_SECONDS must NOT be slept literally (it would eat the
+    job's timeout-minutes and risk a mid-run cancellation with the cursor unsaved). The client
+    gives up immediately, flagged rate_limited, so the source degrades and retries next run."""
+    calls: list[str] = []
+    sleeps: list[float] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(429, headers={"Retry-After": "3600"}, text="slow down")
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=sleeps.append,
+    )
+    with pytest.raises(FetchError) as excinfo:
+        client.get_json("/products.json")
+    assert excinfo.value.status == 429
+    assert excinfo.value.rate_limited is True
+    assert len(calls) == 1  # gave up after the first attempt -- never retried
+    assert sleeps == []  # never slept the hour-long Retry-After, nor any backoff at all
+
+
+def test_5xx_retry_after_beyond_cap_still_sleeps_and_retries() -> None:
+    """The give-up-on-long-Retry-After cap is scoped to 429 ONLY: a 5xx is a genuine upstream
+    fault, not a throttle (its FetchError isn't flagged rate_limited, so it would FAIL the run,
+    not degrade it) -- it must keep the pre-existing behavior of honoring Retry-After and
+    retrying, however long the server asked for. Sleep is injected, so no real wait happens."""
+    attempts = {"n": 0}
+    sleeps: list[float] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        if attempts["n"] == 1:
+            return httpx.Response(503, headers={"Retry-After": "3600"}, text="unavailable")
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=sleeps.append,
+    )
+    assert client.get_json("/flaky") == {"ok": True}
+    assert attempts["n"] == 2  # retried despite the hour-long Retry-After -- no early give-up
+    assert 3600.0 in sleeps  # and honored the server's requested delay exactly, as before
+
+
+def test_429_retry_after_within_cap_is_still_honored() -> None:
+    """The cap only bites for pathologically long waits: a Retry-After at/under the cap is still
+    honored and retried, exactly as before."""
+    attempts = {"n": 0}
+    sleeps: list[float] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        if attempts["n"] == 1:
+            return httpx.Response(429, headers={"Retry-After": "30"}, text="slow down")
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=sleeps.append,
+    )
+    assert client.get_json("/retry-me") == {"ok": True}
+    assert attempts["n"] == 2
+    assert 30.0 in sleeps  # honored a Retry-After equal to the cap
+
+
 def test_default_timeout_is_30_seconds() -> None:
     """Fix wave 2 (live-run defect, 2026-07-13): httpx's own 5s default timed out on real Wayback
     CDX data pages (200KB+, 3-7s+ observed live in controller probes) -- three straight transport

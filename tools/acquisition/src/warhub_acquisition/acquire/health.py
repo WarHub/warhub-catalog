@@ -30,10 +30,30 @@ class SourceError:
     message: str
 
 
+@dataclass
+class SourceRateLimited:
+    """A source whose ONLY failure this run was upstream rate-limiting -- an HTTP 429, or a
+    Cloudflare-style 403 anti-bot block -- after PoliteClient exhausted its bounded retry/backoff.
+
+    Deliberately split out from SourceError: this is an *expected, environment-driven, transient*
+    degradation (GitHub-runner IPs are throttled by Shopify/Cloudflare -- see catalog-acquire.yml's
+    header), NOT a code or data fault. A source in this bucket made no progress tonight, but its
+    cursor is intact and it converges on a later run. A run whose failures are ALL of this kind is
+    reported as DEGRADED (a distinct exit code the workflow treats as success-with-annotation),
+    not broken -- so a throttled night no longer paints the whole job red and hides real failures.
+    Rendered with a `rate-limited` status so the sticky PR surfaces it at a glance.
+    """
+
+    source_id: str
+    status: int | None
+    message: str
+
+
 def build_health_report(
     healths: list[SourceHealth],
     failures: list[SourceFailure],
     errors: list[SourceError],
+    rate_limited: list[SourceRateLimited],
     skipped: list[str],
 ) -> str:
     lines = [
@@ -61,6 +81,11 @@ def build_health_report(
     for error in errors:
         rows.append(
             (error.source_id, f"| {error.source_id} | ERROR |  |  |  | {error.exc_type}: {error.message} |")
+        )
+    for limited in rate_limited:
+        detail = f"HTTP {limited.status}: {limited.message}" if limited.status is not None else limited.message
+        rows.append(
+            (limited.source_id, f"| {limited.source_id} | rate-limited |  |  |  | {detail} |")
         )
     for _, row in sorted(rows, key=lambda r: r[0]):
         lines.append(row)

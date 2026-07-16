@@ -7,7 +7,7 @@ name: Nightly Acquisition
 # Source roster (only these have descriptors today; ret-miniaturicum -- site 520s -- and
 # mfr-cmon -- Cloudflare-blocked, Plan-5 alternative pending -- are deferred and deliberately
 # absent):
-#   group A1: mfr-warlord-store                                       (budget 3000 nightly)
+#   group A1: mfr-warlord-store                                       (budget 2000 nightly)
 #   group A2: mfr-steamforged, mfr-wyrd-store                         (budget 1000 nightly)
 #   group B:  mfr-gw-algolia, mfr-manticgames, mfr-para-bellum,
 #             mfr-corvus-belli                                        (budget 3000)
@@ -25,10 +25,29 @@ name: Nightly Acquisition
 # GitHub-runner IPs are heavily throttled by Shopify/Cloudflare (observed first real nightly run,
 # 29229516710): the pre-split group A and group C both hit the 120-minute timeout; group B took
 # ~90 min. Splitting A into A1/A2 and lowering C's budget reduces load, but the underlying reality
-# doesn't go away -- a throttled job hitting timeout-minutes is a DEGRADED run, not a broken one.
-# Every source's cursor persists in data/evidence/products/<source>/cursor.yaml, so forward
-# progress accrues and converges to full coverage across multiple nights regardless of whether any
-# single run finishes inside its timeout.
+# doesn't go away -- a throttled job is a DEGRADED run, not a broken one. Every source's cursor
+# persists in data/evidence/products/<source>/cursor.yaml, so forward progress accrues and
+# converges to full coverage across multiple nights.
+#
+# Two degradation modes are handled distinctly -- the goal is that a throttled night never paints
+# the job red (which hides genuine failures) yet never silently loses work:
+#   1. A source whose enumeration is 429'd (or Cloudflare-403'd) mid-run, after PoliteClient's
+#      bounded 429 retry/backoff (which honors Retry-After up to a cap -- see client.py) is
+#      exhausted, no longer FAILS the run. `acquire` records it as `rate-limited` in the health
+#      report and exits 3 (DEGRADED) when rate-limits are the ONLY failures; the "Run acquire" step
+#      below treats exit 3 as success + a ::warning:: annotation. A GENUINE failure (contract
+#      violation, parse error, unexpected exception) still exits 4 and fails the job loudly, even
+#      when a rate-limit is also present -- a real fault always wins. (Exit-code contract lives in
+#      cli.py's _run_acquire.)
+#   2. A per-group startup stagger (matrix.startupDelay; see the "Stagger group start" step) keeps
+#      the groups from opening connections to the shared hosts at the same instant -- every group's
+#      job starts together (one scheduled workflow) from GitHub's shared Azure egress range, and
+#      that synchronized burst is itself part of what earns the 429s. The heaviest group (A1) waits
+#      0s to keep its full timeout budget; the others are spaced ~1 min apart.
+# Even so, timeout-minutes remains the ultimate backstop: cursor/evidence for a source is written
+# only when its run_source completes (not incrementally), so a hard timeout cancellation still
+# loses that source's in-flight night -- which is exactly why group A1's budget is sized (2000, see
+# below) to finish well inside 120 min rather than relying on the timeout.
 #
 # Weekly deep-sweep mode: the Saturday-02:00-UTC schedule (or workflow_dispatch mode=weekly) adds
 # groups E and F above and raises group D's budget to 2500 (converges its ~14k-URL backlog in
@@ -87,42 +106,60 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # startupDelay (seconds) de-synchronizes each group's first outbound connections -- see
+        # the "Stagger group start" step and the throttling note in this file's header. Heaviest
+        # group A1 waits 0 (keeps its full 120-min budget); the rest are spaced ~1 min apart.
         include:
+          # A1 budget sized to finish inside timeout-minutes rather than lean on it: at rps 0.5
+          # (2s/request pacing -> ~1800 req/hr ceiling) budget 3000 + full enumeration did NOT
+          # finish in 120 min on 2026-07-16 (run cancelled at 2h, losing the night's cursor -- see
+          # header), implying real throughput <~1500/hr once latency + 429 backoffs stack. Budget
+          # 2000 detail fetches ~= 80 min, + ~1 min enumeration + setup/upload, leaving ample
+          # headroom under 120 min. Enumeration is always full and budget-independent, so every run
+          # still yields all ~4k observations (>= minCount 3500); the budget only rations per-handle
+          # barcode detail fetches, which converge across nights via the persistent cursor.
           - group: A1
             sources: mfr-warlord-store
-            budget: 3000
+            budget: 2000
             weeklyBudget: ''
             weeklyOnly: false
+            startupDelay: 0
           - group: A2
             sources: mfr-steamforged mfr-wyrd-store
             budget: 1000
             weeklyBudget: ''
             weeklyOnly: false
+            startupDelay: 60
           - group: B
             sources: mfr-gw-algolia mfr-manticgames mfr-para-bellum mfr-corvus-belli
             budget: 3000
             weeklyBudget: ''
             weeklyOnly: false
+            startupDelay: 120
           - group: C
             sources: ret-goblingaming ret-tistaminis
             budget: 1500
             weeklyBudget: ''
             weeklyOnly: false
+            startupDelay: 180
           - group: D
             sources: ret-radaddel ret-gamenerdz
             budget: 1000
             weeklyBudget: 2500
             weeklyOnly: false
+            startupDelay: 240
           - group: E
             sources: arc-goblingaming arc-gw-webstore
             budget: 500
             weeklyBudget: ''
             weeklyOnly: true
+            startupDelay: 300
           - group: F
             sources: bdb-upcitemdb bdb-goupc
             budget: 0
             weeklyBudget: ''
             weeklyOnly: true
+            startupDelay: 360
     defaults:
       run:
         working-directory: tools/acquisition
@@ -202,10 +239,27 @@ jobs:
             echo "::notice::Group $GROUP: no sources selected (sources override='$OVERRIDE_SOURCES'); skipping acquire."
           fi
 
-      # Exit 4 = at least one source in this group failed (contract violation or error). This is
-      # intentionally NOT swallowed: the step (and thus the job) fails, so a broken source is loud
-      # in the Checks tab. The integrate job below still runs regardless (needs: + if: always()),
-      # so a partial nightly harvest never blocks integration of the sources that did succeed.
+      # De-synchronize the matrix groups' first outbound connections. Every group's job starts at
+      # the same instant (one scheduled workflow), so without this they all open connections to
+      # Shopify/Cloudflare simultaneously from GitHub's shared Azure egress range -- part of what
+      # gets these runner IPs 429'd. A short per-group stagger (matrix.startupDelay, ~1 min apart;
+      # heaviest group A1 = 0 so it keeps its full 120-min budget) spreads the initial load. `sleep
+      # 0` (group A1) is a harmless no-op. Cheap relative to timeout-minutes; only the tiny weekly F
+      # group waits longest.
+      - name: Stagger group start
+        if: steps.plan.outputs.ran == 'true'
+        run: sleep ${{ matrix.startupDelay }}
+
+      # Exit-code contract (defined in tools/acquisition/src/warhub_acquisition/cli.py::_run_acquire):
+      #   0 = every source ok; 4 = at least one GENUINE failure (contract violation / parse error /
+      #   unexpected exception); 3 = DEGRADED -- the only failures were upstream rate-limits (HTTP
+      #   429 / Cloudflare 403). Exit 4 is intentionally NOT swallowed: the step (and job) fails, so
+      #   a broken source is loud in the Checks tab. Exit 3 IS tolerated: the job stays green with a
+      #   ::warning:: annotation, because a throttled runner IP is an environment condition, not a
+      #   code/data fault -- the rate-limited source kept its cursor and retries next run, and
+      #   painting the job red would only hide real failures. The integrate job below runs
+      #   regardless (needs: + if: always()), so a partial/degraded harvest never blocks integration
+      #   of the sources that did succeed.
       - name: Run acquire
         id: acquire
         if: steps.plan.outputs.ran == 'true'
@@ -236,9 +290,19 @@ jobs:
               case " $RUN_SOURCES " in
                 *" $src "*)
                   rm -f ../../data/review/acquisition-health.md
+                  set +e
                   uv run warhub-data acquire --data ../../data --source "$src" \
                     --budget "$bud" \
-                    --run-date "$(date -u +%F)" || crashed=1
+                    --run-date "$(date -u +%F)"
+                  sub=$?
+                  set -e
+                  # Exit 3 = DEGRADED (source rate-limited): tolerate + annotate, don't fail. Any
+                  # other non-zero is a genuine crash for this source -> crashed=1 -> exit 4 below.
+                  if [ "$sub" = "3" ]; then
+                    echo "::warning::Group F ($src): DEGRADED -- source rate-limited (HTTP 429/403). Cursor intact; retries next run. See data/review/acquisition-health.md (status 'rate-limited')."
+                  elif [ "$sub" != "0" ]; then
+                    crashed=1
+                  fi
                   if [ -f ../../data/review/acquisition-health.md ]; then
                     cp ../../data/review/acquisition-health.md "../../_health-F-$src.md"
                   fi
@@ -255,9 +319,20 @@ jobs:
             for s in $RUN_SOURCES; do
               SRC_ARGS="$SRC_ARGS --source $s"
             done
+            set +e
             uv run warhub-data acquire --data ../../data $SRC_ARGS \
               --budget "$BUDGET" \
               --run-date "$(date -u +%F)"
+            code=$?
+            set -e
+            # Exit 3 = DEGRADED (only rate-limits): tolerate with a ::warning:: so the job stays
+            # green and the throttle is still visible. Exit 4 (or anything else non-zero) fails the
+            # job. Exit 0 = clean. See the exit-code contract comment above this step.
+            if [ "$code" = "3" ]; then
+              echo "::warning::Group $GROUP: DEGRADED acquire run -- one or more sources were rate-limited (HTTP 429 / Cloudflare 403) and made no progress this run. Their cursors are intact and they retry next run; successful sources committed normally. See data/review/acquisition-health.md (status 'rate-limited')."
+            elif [ "$code" != "0" ]; then
+              exit "$code"
+            fi
           fi
 
       # Stage exactly this group's evidence dirs (cursor.yaml + observations.jsonl live together
