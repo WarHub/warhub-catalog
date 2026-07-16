@@ -1,5 +1,6 @@
 """Fold an entity's observations into one canonical record; derive lifecycle."""
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
+from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
 
@@ -18,12 +19,23 @@ def resolve_attributes(
     ean: EanResolution,
     code: str | None,
     miss_threshold: int = 3,
+    superseded: frozenset[str] = frozenset(),
 ) -> CanonicalProduct:
+    # A repackaging join folds an OLD product code's observations (superseded) into the surviving
+    # entity. Their attributes describe the retired box (a stale price, an old image), so within a
+    # source kind they must lose to the surviving code's observations -- otherwise a still-live
+    # old-packaging manufacturer page could pin a stale price over the current one. This does NOT
+    # touch the curated>manufacturer>retailer>archive kind ladder: it only breaks ties WITHIN a
+    # kind, and is a no-op for the single-code majority (no member is superseded there).
+    ordered = sorted(
+        members,
+        key=lambda m: (KIND_PRIORITY.get(kinds.get(m.source_id, "barcode-db"), 9), m.key in superseded, m.key),
+    )
     fields: dict[str, object] = {}
     for name in _DIRECT_FIELDS:
-        fields[name] = _first([getattr(member, name) for member in members])
+        fields[name] = _first([getattr(member, name) for member in ordered])
     for name in _HINT_FIELDS:
-        fields[name] = _first([member.hints.get(name) for member in members])
+        fields[name] = _first([member.hints.get(name) for member in ordered])
     fields.setdefault("category", None)
     if fields["category"] is None:
         fields["category"] = "miniatures"
@@ -66,6 +78,7 @@ def resolve_attributes(
         productCode=code,
         ean=ean.ean,
         eanConfidence=ean.confidence,
+        additionalEans=ean.additional,
         status=status,
         firstSeen=min(member.firstSeen for member in members),
         evidence=sorted(member.key for member in members),

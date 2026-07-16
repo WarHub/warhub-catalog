@@ -22,6 +22,7 @@
       "required": ["name", "quantity"],
       "properties": {
         "ean": { "type": "string" },
+        "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "eanConfidence": { "type": "string", "enum": ["confirmed", "provisional", "conflicted"] },
         "priceGbp": { "type": "number" },
         "priceUsd": { "type": "number" },

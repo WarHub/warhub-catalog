@@ -226,6 +226,79 @@ def test_barcode_db_alone_two_sources_stays_provisional_not_confirmed(tmp_path: 
     assert product["eanConfidence"] == "provisional"
 
 
+def test_repackaging_forced_join_carries_multi_ean_and_live_price(tmp_path: Path) -> None:
+    """End-to-end repackaging join: an OLD product code (curated old barcode + a stale manufacturer
+    price) is folded via matches.yaml into the surviving CURRENT code (live manufacturer + retailer
+    confirming the new barcode). The resolved entity must (1) keep the live/confirmed barcode as
+    primary, (2) retain the displaced old barcode in additionalEans rather than dropping it, (3)
+    take the live price over the stale one, and (4) raise no conflict."""
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.taxonomy / "manufacturers.yaml",
+        {"manufacturers": [{"slug": "games-workshop", "name": "Games Workshop",
+                            "codePattern": r"\d{11}", "codeStrip": ["GWS"],
+                            "gs1Prefixes": ["5011921"], "vendorNames": []}]},
+    )
+    write_yaml(paths.sources / "mfr-gw.yaml", {"id": "mfr-gw", "kind": "manufacturer", "strategy": "algolia"})
+    write_yaml(paths.sources / "ret-goblin.yaml", {"id": "ret-goblin", "kind": "retailer", "strategy": "shopify"})
+    write_yaml(paths.sources / "legacy-catalog.yaml", {"id": "legacy-catalog", "kind": "curated", "strategy": "manual"})
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    mfr = paths.evidence_products / "mfr-gw" / "observations.jsonl"
+    mfr.parent.mkdir(parents=True)
+    mfr.write_text(
+        # NEW packaging (surviving code 99120110002): live manufacturer confirms the new barcode
+        # and lists the live price 20.0.
+        line({"key": "mfr-gw:new", "name": "Widget", "manufacturer": "games-workshop", "sku": "99120110002",
+              "ean": "5011921194285", "priceGbp": 20.0, "availability": "in_stock",
+              "hints": {"gameSystem": "warhammer-40k"},
+              "firstSeen": "2026-07-07", "lastSeen": "2026-07-12", "extractor": "algolia@1"}) + "\n"
+        # OLD packaging (folded-in code 99120110001): a STALE manufacturer price 30.0, no barcode.
+        + line({"key": "mfr-gw:old", "name": "Widget", "manufacturer": "games-workshop", "sku": "99120110001",
+                "priceGbp": 30.0, "availability": "in_stock", "hints": {"gameSystem": "warhammer-40k"},
+                "firstSeen": "2026-07-01", "lastSeen": "2026-07-12", "extractor": "algolia@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    ret = paths.evidence_products / "ret-goblin" / "observations.jsonl"
+    ret.parent.mkdir(parents=True)
+    ret.write_text(
+        line({"key": "ret-goblin:new", "name": "Widget 2025", "manufacturer": "games-workshop", "sku": "99120110002",
+              "ean": "5011921194285", "firstSeen": "2026-07-08", "lastSeen": "2026-07-12", "extractor": "shopify@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    cur = paths.evidence_products / "legacy-catalog" / "observations.jsonl"
+    cur.parent.mkdir(parents=True)
+    cur.write_text(
+        # OLD curated import carries the OLD (now displaced) barcode.
+        line({"key": "legacy-catalog:old", "name": "Widget", "manufacturer": "games-workshop", "sku": "99120110001",
+              "ean": "5011921194506", "hints": {"gameSystem": "warhammer-40k"},
+              "firstSeen": "2026-07-01", "lastSeen": "2026-07-05", "extractor": "manual@1"}) + "\n"
+        # NEW curated import (surviving side), so the surviving entity id is the NEW code.
+        + line({"key": "legacy-catalog:new", "name": "Widget", "manufacturer": "games-workshop", "sku": "99120110002",
+                "hints": {"gameSystem": "warhammer-40k"},
+                "firstSeen": "2026-07-01", "lastSeen": "2026-07-05", "extractor": "manual@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    write_yaml(paths.matches, {"joins": {"legacy-catalog:old": "games-workshop/99120110002"}, "aliases": {}})
+
+    catalog = resolve_catalog(paths)
+    products = [p for records in catalog.values() for p in records]
+    assert len(products) == 1  # OLD packaging folded into NEW
+    prod = products[0]
+    assert prod.id == "games-workshop/99120110002"
+    assert prod.ean == "5011921194285"
+    assert prod.eanConfidence == "confirmed"
+    assert prod.additionalEans == ["5011921194506"]  # displaced OLD barcode retained, not dropped
+    assert prod.priceGbp == 20.0  # live price wins over the stale 30.0 from the old packaging
+    assert read_yaml(paths.conflicts) == {"conflicts": []}
+
+    # single-barcode products never carry the key at all (byte-compatible for existing consumers)
+    data = read_yaml(paths.catalog_products / "games-workshop.yaml")
+    assert data["products"][0]["additionalEans"] == ["5011921194506"]
+
+
 def test_null_game_system_entity_publishes_with_no_conflict(tmp_path: Path) -> None:
     """gameSystem is optional: a product no source ever hinted a gameSystem for (a base, a
     gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with

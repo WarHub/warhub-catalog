@@ -163,6 +163,32 @@ def test_curated_plus_barcode_db_only_entity_still_trusts_curated_status() -> No
     assert product_delisted.status == "delisted"
 
 
+def test_superseded_member_loses_within_kind_for_attributes() -> None:
+    # A repackaging join folds an OLD product code's manufacturer observation (a stale price) into
+    # the surviving entity alongside the CURRENT code's manufacturer observation. Within the
+    # manufacturer kind the superseded old-packaging price must lose to the live price -- even
+    # though the old observation's key sorts first. additionalEans flows through from the resolution.
+    ean = EanResolution("5060924985581", "confirmed", [], ["5060469664330"])
+    members = [
+        obs("mfr-gw:0old", priceGbp=80.0, url="https://old"),   # superseded, sorts first by key
+        obs("mfr-gw:1new", priceGbp=65.0, url="https://new"),   # surviving
+    ]
+    product = resolve_attributes("e", members, KINDS, ean, "NEW", superseded=frozenset({"mfr-gw:0old"}))
+    assert product.priceGbp == 65.0
+    assert product.url == "https://new"
+    assert product.additionalEans == ["5060469664330"]
+
+
+def test_no_supersession_keeps_within_kind_key_ordering_unchanged() -> None:
+    # Without a superseded set the within-kind key order is unchanged: the key that sorts first
+    # wins, exactly as before, and additionalEans is empty.
+    ean = EanResolution("5060924985581", "confirmed", [])
+    members = [obs("mfr-gw:0old", priceGbp=80.0), obs("mfr-gw:1new", priceGbp=65.0)]
+    product = resolve_attributes("e", members, KINDS, ean, None)
+    assert product.priceGbp == 80.0  # key "mfr-gw:0old" < "mfr-gw:1new"
+    assert product.additionalEans == []
+
+
 def test_sku_is_resolved_first_non_none() -> None:
     members = [
         obs("mfr-gw:necrons", sku=None),
