@@ -12,9 +12,30 @@ from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 
+# Exit codes for the `acquire` verb (documented in .github/workflows/catalog-acquire.yml's header
+# and enforced by its "Run acquire" step):
+#   0                  -- every selected source succeeded.
+#   EXIT_DEGRADED (3)  -- the ONLY failures were upstream rate-limits (HTTP 429 / Cloudflare 403);
+#                         successful sources committed, rate-limited ones kept their cursors and
+#                         retry next run. The workflow treats this as success-with-annotation, not
+#                         a red job -- a throttled night is a DEGRADED run, not a broken one.
+#   EXIT_SOURCE_FAILURE (4) -- at least one GENUINE failure (contract violation, parse error,
+#                         unexpected exception). Rate-limits present alongside a real failure do
+#                         NOT downgrade this: a real fault always wins.
+#   1                  -- usage/validation error (bad --run-date, unknown source, missing data dir).
+EXIT_DEGRADED = 3
+EXIT_SOURCE_FAILURE = 4
+
+
 def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     import warhub_acquisition.acquire.strategies  # noqa: F401  (import registers STRATEGIES entries)
-    from warhub_acquisition.acquire.health import SourceError, SourceFailure, build_health_report
+    from warhub_acquisition.acquire.client import FetchError
+    from warhub_acquisition.acquire.health import (
+        SourceError,
+        SourceFailure,
+        SourceRateLimited,
+        build_health_report,
+    )
     from warhub_acquisition.acquire.runner import (
         STRATEGIES,
         AcquireContext,
@@ -55,6 +76,7 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     healths = []
     failures = []
     errors = []
+    rate_limited = []
     try:
         for source_id in source_ids:
             try:
@@ -64,9 +86,19 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
                 print(f"CONTRACT VIOLATION {source_id}: {exc.details}")
                 continue
             except Exception as exc:
-                # Per-source isolation: a source blowing up mid-run (e.g. FetchError after retry
-                # exhaustion) must not abort the whole acquire command -- later sources still run,
-                # and already-collected results still get flushed to the health report below.
+                # Per-source isolation: a source blowing up mid-run must not abort the whole
+                # acquire command -- later sources still run, and already-collected results still
+                # get flushed to the health report below. Rate-limits are split off here into their
+                # OWN bucket: an upstream throttle (429 / Cloudflare 403, flagged on the FetchError
+                # by PoliteClient) is an expected, transient, environment-driven degradation, not a
+                # code/data fault, so it must NOT fail the run the way a genuine error does. The
+                # source made no progress this run but its cursor is intact and it converges later.
+                if isinstance(exc, FetchError) and exc.rate_limited:
+                    rate_limited.append(
+                        SourceRateLimited(source_id=source_id, status=exc.status, message=str(exc))
+                    )
+                    print(f"RATE LIMITED {source_id}: {exc}")
+                    continue
                 errors.append(SourceError(source_id=source_id, exc_type=type(exc).__name__, message=str(exc)))
                 print(f"SOURCE ERROR {source_id}: {type(exc).__name__}: {exc}")
                 continue
@@ -76,12 +108,18 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
     finally:
         # Always write the health report once the loop has run, even if every source failed --
         # successful sources' results must never be silently lost because a later source raised.
-        report_text = build_health_report(healths, failures, errors, skipped)
+        report_text = build_health_report(healths, failures, errors, rate_limited, skipped)
         report_path = paths.root / "review" / "acquisition-health.md"
         report_path.parent.mkdir(parents=True, exist_ok=True)
         report_path.write_text(report_text, encoding="utf-8", newline="\n")
 
-    return 4 if (failures or errors) else 0
+    # A genuine failure always wins over a rate-limit; a run whose only failures are rate-limits is
+    # DEGRADED (not broken) so the workflow can treat it as success-with-annotation.
+    if failures or errors:
+        return EXIT_SOURCE_FAILURE
+    if rate_limited:
+        return EXIT_DEGRADED
+    return 0
 
 
 def _run_classify_llm(args: argparse.Namespace, paths: DataPaths) -> int:

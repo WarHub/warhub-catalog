@@ -102,9 +102,16 @@ data/
    merges the evidence, runs `resolve`/`report`/`report --ean-guard`, and opens or updates a
    sticky PR (`catalog/acquisition`) with the combined health report, coverage table, and any
    confirmed-EAN guard findings. It supersedes the legacy `product-catalog-update.yml` /
-   `product-catalog-enrich.yml` generation workflows. Every nightly run does full (cheap)
-   enumeration plus budgeted detail fetches with persistent per-source cursors, converging to
-   full coverage across nights; the weekly sweep additionally runs two source kinds that are too
+   `product-catalog-enrich.yml` generation workflows. The health report carries a per-source
+   `status` (`ok` / `rate-limited` / `ERROR` / `CONTRACT VIOLATION`), so a throttled source is
+   distinguishable at a glance from a genuine failure: GitHub-runner IPs are routinely
+   rate-limited (HTTP 429, or a Cloudflare 403) by Shopify/Cloudflare, so a source whose only
+   failure is upstream rate-limiting is recorded as `rate-limited` and the run exits **degraded**
+   (a distinct exit code the workflow treats as success-with-annotation) rather than failing —
+   a throttled night keeps its cursor intact and converges next run, and no longer paints the
+   job red or hides real failures (which still fail the run loudly). Every nightly run does full
+   (cheap) enumeration plus budgeted detail fetches with persistent per-source cursors, converging
+   to full coverage across nights; the weekly sweep additionally runs two source kinds that are too
    slow/quota-limited for nightly cadence: **archive mining** (`arc-*` sources, e.g. Wayback
    Machine snapshots of goblingaming/gw-webstore — one shared host, budgeted and paced
    accordingly) and **barcode-db corroboration** (`bdb-*` sources, e.g. upcitemdb/Go-UPC —

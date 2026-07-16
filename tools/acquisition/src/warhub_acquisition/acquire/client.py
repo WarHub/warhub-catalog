@@ -13,6 +13,18 @@ UA = "warhub-catalog-bot/1.0 (+https://github.com/WarHub/warhub-catalog)"
 
 _MAX_ATTEMPTS = 3
 
+# Ceiling on how long a single request will block on a rate-limit backoff. A 429 (or a
+# Cloudflare 403) can carry a `Retry-After` of minutes; sleeping that literally would let ONE
+# throttled endpoint consume the whole job's `timeout-minutes` budget and -- on a GitHub runner --
+# get the source cancelled mid-run with its cursor never saved (the exact July-2026 group-A1
+# degradation). When the honored delay would exceed this cap we stop retrying rather than sleep
+# for minutes or retry sooner than the site asked (both would be wrong): the request fails, the
+# source is recorded as rate-limited/degraded, and it retries cleanly on the next run. Pacing
+# (`_pace`) still governs how fast we ever send -- this only bounds how long we WAIT before giving
+# up. The exponential fallback (`2**attempt`) tops out at 2s and never trips this cap; only a
+# server-supplied `Retry-After` can.
+_MAX_BACKOFF_SECONDS = 30.0
+
 
 def _parses_as_json(response: httpx.Response) -> bool:
     try:
@@ -26,12 +38,33 @@ def _parses_as_json(response: httpx.Response) -> bool:
     return True
 
 
-class FetchError(Exception):
-    """Raised when a URL could not be fetched after retries."""
+def _looks_like_edge_rate_block(response: httpx.Response) -> bool:
+    """True when a non-2xx response looks like a Cloudflare-style edge/anti-bot block rather than
+    an origin decision. Used only to classify a 403: the public product endpoints this bot fetches
+    never require authentication, so a 403 fronted by Cloudflare is a bot-detection/rate wall
+    (throttle us -> treat as rate-limited/degraded, retry next run), whereas a 403 with no edge
+    signature is left as a genuine error so a real misconfiguration still fails loudly. `cf-ray`
+    is present on every Cloudflare-served response (including its challenge/block pages), and a
+    `Server: cloudflare` header is the other unambiguous tell."""
+    if "cloudflare" in response.headers.get("Server", "").lower():
+        return True
+    return "cf-ray" in response.headers
 
-    def __init__(self, url: str, status: int | None) -> None:
+
+class FetchError(Exception):
+    """Raised when a URL could not be fetched after retries.
+
+    `rate_limited` distinguishes an upstream throttle/anti-bot block (which the pipeline treats as
+    a DEGRADED, retry-next-run condition -- see cli._run_acquire / acquire/health.py) from a
+    genuine fault. A 429 is ALWAYS a rate-limit; a 403 only counts as one when the caller passes
+    `rate_limited=True` (PoliteClient._request does so on an edge-block signature -- see
+    `_looks_like_edge_rate_block`); every other status defaults to a real error.
+    """
+
+    def __init__(self, url: str, status: int | None, *, rate_limited: bool | None = None) -> None:
         self.url = url
         self.status = status
+        self.rate_limited = (status == 429) if rate_limited is None else rate_limited
         super().__init__(f"failed to fetch {url} (status={status})")
 
 
@@ -170,8 +203,14 @@ class PoliteClient:
             if response.status_code == 429 or response.status_code >= 500:
                 last_status = response.status_code
                 if attempt < _MAX_ATTEMPTS - 1:
-                    self._sleep(self._backoff_delay(attempt, response.headers.get("Retry-After")))
-                    continue
+                    delay = self._backoff_delay(attempt, response.headers.get("Retry-After"))
+                    if delay <= _MAX_BACKOFF_SECONDS:
+                        self._sleep(delay)
+                        continue
+                    # Server asked us to wait longer than we're willing to block the whole run for
+                    # (see _MAX_BACKOFF_SECONDS): stop now rather than sleep for minutes. Fall
+                    # through to raise -- FetchError(429) is flagged rate_limited, so the source
+                    # degrades cleanly and retries next run instead of eating the job timeout.
                 raise FetchError(url, last_status)
 
             if not (200 <= response.status_code < 300):
@@ -180,7 +219,11 @@ class PoliteClient:
                 # concern, so surface it immediately via the same FetchError contract
                 # instead of leaking an empty/poison body or an httpx.HTTPStatusError
                 # to callers. No retry: redirects and client errors won't fix themselves.
-                raise FetchError(url, response.status_code)
+                # Exception: a Cloudflare-style 403 is an edge rate/anti-bot block, not an origin
+                # decision, so flag it rate_limited (-> degraded, retry next run) -- but only when
+                # the response actually carries an edge signature, so a genuine 403 still fails.
+                rate_limited = response.status_code == 403 and _looks_like_edge_rate_block(response)
+                raise FetchError(url, response.status_code, rate_limited=rate_limited)
 
             if accept is not None and not accept(response):
                 # 2xx but the payload failed the caller's validation (e.g. get_json's
