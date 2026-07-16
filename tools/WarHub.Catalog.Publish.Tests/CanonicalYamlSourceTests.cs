@@ -19,6 +19,8 @@ public class CanonicalYamlSourceTests
                 sku: '99120110077'
                 ean: '5011921194285'
                 eanConfidence: confirmed
+                additionalEans:
+                  - '5011921194506'
                 gameSystem: test-system
                 faction: necrons
                 category: miniatures
@@ -54,6 +56,7 @@ public class CanonicalYamlSourceTests
         Assert.Equal("test-mfg/99120110077", product.Id);
         Assert.Equal("5011921194285", product.Ean);
         Assert.Equal("confirmed", product.EanConfidence);
+        Assert.Equal(["5011921194506"], product.AdditionalEans);
         Assert.Equal(11, product.Quantity);
         Assert.Equal("test-system", product.GameSystem);
         Assert.Equal(76.5m, product.PriceGbp);

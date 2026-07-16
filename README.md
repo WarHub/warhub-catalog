@@ -55,8 +55,11 @@ Every document carries a self-describing envelope plus its payload:
 }
 ```
 
-- **Product**: `{ ean?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
-  — `ean` is optional (not every product has a barcode).
+- **Product**: `{ ean?, additionalEans?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
+  — `ean` is optional (not every product has a barcode). `additionalEans` is present only on a
+  product genuinely repackaged over time (same contents, new box/barcode): `ean` stays the single
+  primary barcode, and the extra barcodes are listed here so existing single-barcode consumers are
+  unaffected.
 - **Paint**: `{ id, brand, range?, name, hex, type?, finish?, equivalents: [{ id, deltaE, tier? }] }`
   — `id` is the stable global key (`brand-slug/paint-slug`); `equivalents` reference other
   paints' ids and are stored **bidirectionally**. Colour equivalence is precomputed here, so

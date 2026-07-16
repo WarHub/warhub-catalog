@@ -44,9 +44,16 @@ internal static class ProductBuilder
                     }
                 }
 
+                var extraEans = (p.AdditionalEans ?? [])
+                    .Select(e => e?.Trim())
+                    .Where(e => !string.IsNullOrEmpty(e))
+                    .Select(e => e!)
+                    .ToList();
+
                 var record = new ProductRecord
                 {
                     Ean = string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
+                    AdditionalEans = extraEans.Count > 0 ? extraEans : null,
                     EanConfidence = p.EanConfidence,
                     PriceGbp = p.PriceGbp,
                     PriceUsd = p.PriceUsd,
