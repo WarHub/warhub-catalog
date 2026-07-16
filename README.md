@@ -55,8 +55,11 @@ Every document carries a self-describing envelope plus its payload:
 }
 ```
 
-- **Product**: `{ ean?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
-  — `ean` is optional (not every product has a barcode).
+- **Product**: `{ ean?, additionalEans?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
+  — `ean` is optional (not every product has a barcode). `additionalEans` is present only on a
+  product genuinely repackaged over time (same contents, new box/barcode): `ean` stays the single
+  primary barcode, and the extra barcodes are listed here so existing single-barcode consumers are
+  unaffected.
 - **Paint**: `{ id, brand, range?, name, hex, type?, finish?, equivalents: [{ id, deltaE, tier? }] }`
   — `id` is the stable global key (`brand-slug/paint-slug`); `equivalents` reference other
   paints' ids and are stored **bidirectionally**. Colour equivalence is precomputed here, so
@@ -74,14 +77,12 @@ a release tag for a frozen snapshot.
 
 ```
 tools/
-  WarHub.ProductCatalog.Tool/    # scrapes vendor sites -> data/products YAML
   WarHub.PaintCatalog.Tool/      # parses paint lists, computes Delta-E -> data/paints YAML
   WarHub.Catalog.Publish/        # bundles data/ YAML -> dist/ JSON (the published catalog)
   acquisition/                   # python: acquire/migrate/resolve/report
 data/
   evidence/                      # source of truth: per-source observations (evidence ledger)
   catalog/                       # source of truth: resolved canonical catalog (products/, taxonomy/)
-  products/                      # legacy, retired by the evidence-ledger pipeline; removal tracked for Plan 5
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
   catalog-acquire.yml            # nightly + weekly deep-sweep: harvest live sources -> evidence -> resolve -> sticky PR
@@ -138,8 +139,7 @@ data/
 3. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
    then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only
-   watches `data/catalog/**` and `data/paints/**`, so evidence-only or legacy-tree churn never
-   mints a release.
+   watches `data/catalog/**` and `data/paints/**`, so evidence-only churn never mints a release.
 
 Both `catalog-acquire.yml` and `classify.yml` use **sticky PRs** (one persistent branch each,
 updated in place rather than opened fresh every run): cursor/queue progress from a given run only
@@ -166,7 +166,10 @@ python -m http.server 8080 --directory dist
 
 ## Data sources & licensing
 
-Product data is scraped from manufacturer and retailer sites. Paint data derives from
+Product data is scraped from manufacturer and retailer sites and resolved through the evidence
+ledger (`data/evidence/` → `data/catalog/`). Paint data derives from
 [Arcturus5404/miniature-paints](https://github.com/Arcturus5404/miniature-paints) (MIT) plus
-public swatch sources. See `data/*/LICENSE` for the source-data terms; tooling is under this
+public swatch sources. For source-data terms see `data/paints/LICENSE` (paints) and
+`data/evidence/products/legacy-catalog/LICENSE` (the legacy product catalog that seeded the
+evidence ledger) — both MIT, matching this repo's [LICENSE](LICENSE); tooling is under this
 repo's [LICENSE](LICENSE).

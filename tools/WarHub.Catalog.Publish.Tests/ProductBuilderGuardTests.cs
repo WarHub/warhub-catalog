@@ -65,6 +65,58 @@ public sealed class ProductBuilderGuardTests
     }
 
     [Fact]
+    public void Additional_eans_of_a_repackaged_product_flow_into_products_json()
+    {
+        // A product repackaged over time carries extra barcodes; `ean` stays the single primary
+        // one and the rest publish under `additionalEans` (validated against the product schema by
+        // the writer). Existing single-barcode consumers keep reading `ean` unchanged.
+        var product = new CanonicalProduct
+        {
+            Id = "mantic-games/MGKWB112",
+            Name = "Basilean Army",
+            Manufacturer = "mantic-games",
+            Status = "current",
+            Ean = "5060924985581",
+            EanConfidence = "confirmed",
+            AdditionalEans = ["5060469664330"],
+            GameSystem = null,
+        };
+
+        (CatalogWriter writer, string dist) = WriterWithDist();
+        ProductBuilder.Build([CatalogOf(product)], EmptyLabels, Prov(), writer);
+
+        string productsJson = File.ReadAllText(Path.Combine(dist, "products.json"));
+        using JsonDocument doc = JsonDocument.Parse(productsJson);
+        JsonElement p = Assert.Single(doc.RootElement.GetProperty("products").EnumerateArray());
+        Assert.Equal("5060924985581", p.GetProperty("ean").GetString());
+        string[] extra = p.GetProperty("additionalEans").EnumerateArray().Select(e => e.GetString()!).ToArray();
+        Assert.Equal(["5060469664330"], extra);
+    }
+
+    [Fact]
+    public void Single_barcode_product_omits_additional_eans()
+    {
+        var product = new CanonicalProduct
+        {
+            Id = "test-mfg/single",
+            Name = "Single Barcode",
+            Manufacturer = "test-mfg",
+            Status = "current",
+            Ean = "5060924985581",
+            AdditionalEans = null,
+            GameSystem = null,
+        };
+
+        (CatalogWriter writer, string dist) = WriterWithDist();
+        ProductBuilder.Build([CatalogOf(product)], EmptyLabels, Prov(), writer);
+
+        string productsJson = File.ReadAllText(Path.Combine(dist, "products.json"));
+        using JsonDocument doc = JsonDocument.Parse(productsJson);
+        JsonElement p = Assert.Single(doc.RootElement.GetProperty("products").EnumerateArray());
+        Assert.False(p.TryGetProperty("additionalEans", out _)); // null -> omitted, never published as []
+    }
+
+    [Fact]
     public void Missing_game_system_label_throws_naming_the_slug()
     {
         var product = new CanonicalProduct

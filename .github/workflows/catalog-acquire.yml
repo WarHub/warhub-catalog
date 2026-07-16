@@ -473,7 +473,10 @@ jobs:
           uv run warhub-data report --data ../../data --ean-guard > ../../_report_guard.txt
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           set -e
-          awk '/^## Confirmed-EAN changes/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
+          # Capture from EITHER guard header: "## Confirmed-EAN changes" (regressions, exit 5)
+          # or "## Confirmed-EAN repackaging ..." (tracked repackagings, still exit 0) -- a
+          # repackaging-only run must surface its section in the PR body too, not render "clean".
+          awk '/^## Confirmed-EAN/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
           cat ../../_guard_section.txt
 
       - name: Build PR body
@@ -503,6 +506,12 @@ jobs:
               echo "### :rotating_light: Confirmed-EAN guard: HITS FOUND"
               echo
               echo "A previously **confirmed** EAN changed since the last HEAD -- review carefully before merging this PR."
+              echo
+              cat _guard_section.txt
+            elif [ -s _guard_section.txt ]; then
+              echo "### Confirmed-EAN guard: repackaging tracked (no losses)"
+              echo
+              echo "A primary EAN changed but the previous confirmed barcode was **retained** in \`additionalEans\` -- a tracked repackaging, informational only, not a failure."
               echo
               cat _guard_section.txt
             else

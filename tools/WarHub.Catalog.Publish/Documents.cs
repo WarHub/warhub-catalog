@@ -24,10 +24,15 @@ internal sealed record ReleaseRef(string Tag, string Url);
 
 internal sealed record SourceRef(string Repo, ReleaseRef? Release = null, string? PageUrl = null);
 
-/// <summary>A retail product. <c>ean</c> is optional — not every product carries a barcode.</summary>
+/// <summary>
+/// A retail product. <c>ean</c> is optional — not every product carries a barcode. A product
+/// genuinely repackaged over time (same contents, new box/barcode) carries its extra barcodes in
+/// <c>additionalEans</c>; <c>ean</c> stays the single primary barcode for existing consumers.
+/// </summary>
 internal sealed record ProductRecord
 {
     [JsonPropertyOrder(1)] public string? Ean { get; init; }
+    [JsonPropertyOrder(1)] public IReadOnlyList<string>? AdditionalEans { get; init; }
     [JsonPropertyOrder(2)] public required string Name { get; init; }
     [JsonPropertyOrder(3)] public string? GameSystem { get; init; }
     [JsonPropertyOrder(4)] public string? Faction { get; init; }
