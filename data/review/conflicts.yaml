@@ -53,6 +53,26 @@ conflicts:
         sources:
           - legacy-catalog
   - type: ean-mismatch
+    entity: games-workshop/99811466024
+    chosen: '5011921024582'
+    assertions:
+      - ean: '5011921024582'
+        sources:
+          - legacy-catalog
+      - ean: '5011921238118'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: games-workshop/99811466025
+    chosen: '5011921037162'
+    assertions:
+      - ean: '5011921037162'
+        sources:
+          - legacy-catalog
+      - ean: '5011921238125'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
     entity: games-workshop/99070201008
     chosen: '5011921063765'
     assertions:
@@ -120,6 +140,16 @@ conflicts:
         sources:
           - legacy-catalog
       - ean: '5011921236336'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: games-workshop/99120201247
+    chosen: '5011921182114'
+    assertions:
+      - ean: '5011921182114'
+        sources:
+          - legacy-catalog
+      - ean: '5011921259533'
         sources:
           - ret-goblingaming
   - type: ean-mismatch
@@ -291,9 +321,11 @@ conflicts:
         sources:
           - legacy-catalog
           - mfr-warlord-store
+          - ret-radaddel
       - ean: '5060393706489'
         sources:
           - mfr-warlord-store
+          - ret-radaddel
   - type: ean-mismatch
     entity: steamforged-games/SFEE-LL005
     chosen: '5060453697184'
@@ -465,6 +497,7 @@ conflicts:
       - ean: '9781911281580'
         sources:
           - legacy-catalog
+          - ret-radaddel
       - ean: '9781911281603'
         sources:
           - mfr-warlord-store
