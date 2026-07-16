@@ -692,16 +692,6 @@ conflicts:
           - mfr-steamforged
           - ret-gamenerdz
   - type: ean-mismatch
-    entity: mantic-games/MGKWU113
-    chosen: '5060469661407'
-    assertions:
-      - ean: '5060469661407'
-        sources:
-          - legacy-catalog
-      - ean: '5060924980098'
-        sources:
-          - legacy-catalog
-  - type: ean-mismatch
     entity: mantic-games/MGVAF202
     chosen: '5060924988162'
     assertions:
@@ -711,17 +701,6 @@ conflicts:
       - ean: '5060924988162'
         sources:
           - mfr-manticgames
-  - type: ean-mismatch
-    entity: mantic-games/MGKWB112
-    chosen: '5060469664330'
-    assertions:
-      - ean: '5060469664330'
-        sources:
-          - legacy-catalog
-      - ean: '5060924985581'
-        sources:
-          - mfr-manticgames
-          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/772012008
     chosen: '5060572501546'
