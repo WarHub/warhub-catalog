@@ -11,6 +11,7 @@ behavior (especially bot protection and Shopify feed fields) may drift.
 | [Retailer + barcode-DB probe](2026-07-12-source-probe-retailers-barcodedb.md) | Tier-1 EAN retailers: Goblin Gaming, Tistaminis (Shopify per-handle `.js`), Miniaturicum, Radaddel (structured-data gtin13), Game Nerdz (BigCommerce `upc`). Go-UPC works as a lookup; other barcode DBs are dead ends or spotty. |
 | [Web-archive probe](2026-07-12-source-probe-webarchive.md) | Wayback CDX enumeration is viable at scale; old GW webstore archives yield name + 11-digit code + price for dead SKUs; archived Shopify retailer pages carry `gtin13` — the EAN join for out-of-print products. BGG API now token-gated; Wikidata negligible. |
 | [Current pipeline analysis](2026-07-12-current-pipeline-analysis.md) | As-built map of the acquisition layer: per-manufacturer source table, the three-step EAN chain and why it plateaus at 46%, metadata-heuristic inventory, storage-model mechanics, and the fail-soft error-surfacing inventory. |
+| [Retailer candidates: Warlord/Mantic](2026-07-16-retailer-candidates-warlord-mantic.md) | New-source hunt (2026-07-16) to close the Warlord/Mantic EAN gap toward 60%. Top pick **Athena Games** (Shopify, ClaudeBot-OK): 774 Warlord + 312 Mantic at ~90-100% barcode fill, incl. out-of-stock items. Backups: The Combat Company (AU Warlord), Board Game Bliss (CA Mantic). A Cloudflare managed robots.txt now blocks ClaudeBot on Firestorm/Caliver/Battlefield Berlin; Alphaspel is deep but publishes no EAN. |
 
 ## Headline conclusions
 
