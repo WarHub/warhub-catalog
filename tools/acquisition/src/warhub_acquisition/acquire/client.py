@@ -13,13 +13,16 @@ UA = "warhub-catalog-bot/1.0 (+https://github.com/WarHub/warhub-catalog)"
 
 _MAX_ATTEMPTS = 3
 
-# Ceiling on how long a single request will block on a rate-limit backoff. A 429 (or a
-# Cloudflare 403) can carry a `Retry-After` of minutes; sleeping that literally would let ONE
-# throttled endpoint consume the whole job's `timeout-minutes` budget and -- on a GitHub runner --
-# get the source cancelled mid-run with its cursor never saved (the exact July-2026 group-A1
-# degradation). When the honored delay would exceed this cap we stop retrying rather than sleep
-# for minutes or retry sooner than the site asked (both would be wrong): the request fails, the
-# source is recorded as rate-limited/degraded, and it retries cleanly on the next run. Pacing
+# Ceiling on how long a single request will block on a RATE-LIMIT (429) backoff -- and 429 ONLY.
+# A 429 can carry a `Retry-After` of minutes; sleeping that literally would let ONE throttled
+# endpoint consume the whole job's `timeout-minutes` budget and -- on a GitHub runner -- get the
+# source cancelled mid-run with its cursor never saved (the exact July-2026 group-A1 degradation).
+# When the honored delay would exceed this cap we stop retrying rather than sleep for minutes or
+# retry sooner than the site asked (both would be wrong): the request fails, the source is
+# recorded as rate-limited/degraded, and it retries cleanly on the next run. A 5xx is deliberately
+# NOT subject to this cap: it's a genuine upstream fault, not a throttle -- its FetchError isn't
+# flagged rate_limited (it would fail the run, not degrade it), so giving up early there would
+# only narrow the pre-existing 5xx honor-Retry-After-and-retry resilience for no benefit. Pacing
 # (`_pace`) still governs how fast we ever send -- this only bounds how long we WAIT before giving
 # up. The exponential fallback (`2**attempt`) tops out at 2s and never trips this cap; only a
 # server-supplied `Retry-After` can.
@@ -204,13 +207,16 @@ class PoliteClient:
                 last_status = response.status_code
                 if attempt < _MAX_ATTEMPTS - 1:
                     delay = self._backoff_delay(attempt, response.headers.get("Retry-After"))
-                    if delay <= _MAX_BACKOFF_SECONDS:
-                        self._sleep(delay)
-                        continue
-                    # Server asked us to wait longer than we're willing to block the whole run for
-                    # (see _MAX_BACKOFF_SECONDS): stop now rather than sleep for minutes. Fall
-                    # through to raise -- FetchError(429) is flagged rate_limited, so the source
-                    # degrades cleanly and retries next run instead of eating the job timeout.
+                    if response.status_code == 429 and delay > _MAX_BACKOFF_SECONDS:
+                        # The rate-limiter asked us to wait longer than we're willing to block the
+                        # whole run for (see _MAX_BACKOFF_SECONDS): stop now rather than sleep for
+                        # minutes. FetchError(429) is flagged rate_limited, so the source degrades
+                        # cleanly and retries next run instead of eating the job timeout. 429-only
+                        # ON PURPOSE: a 5xx keeps its pre-existing honor-Retry-After-and-retry
+                        # behavior -- see the _MAX_BACKOFF_SECONDS comment above.
+                        raise FetchError(url, last_status)
+                    self._sleep(delay)
+                    continue
                 raise FetchError(url, last_status)
 
             if not (200 <= response.status_code < 300):

@@ -502,6 +502,31 @@ def test_429_retry_after_beyond_cap_gives_up_without_long_sleep() -> None:
     assert sleeps == []  # never slept the hour-long Retry-After, nor any backoff at all
 
 
+def test_5xx_retry_after_beyond_cap_still_sleeps_and_retries() -> None:
+    """The give-up-on-long-Retry-After cap is scoped to 429 ONLY: a 5xx is a genuine upstream
+    fault, not a throttle (its FetchError isn't flagged rate_limited, so it would FAIL the run,
+    not degrade it) -- it must keep the pre-existing behavior of honoring Retry-After and
+    retrying, however long the server asked for. Sleep is injected, so no real wait happens."""
+    attempts = {"n": 0}
+    sleeps: list[float] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        if attempts["n"] == 1:
+            return httpx.Response(503, headers={"Retry-After": "3600"}, text="unavailable")
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test",
+        rps=1000,
+        transport=httpx.MockTransport(handler),
+        sleep=sleeps.append,
+    )
+    assert client.get_json("/flaky") == {"ok": True}
+    assert attempts["n"] == 2  # retried despite the hour-long Retry-After -- no early give-up
+    assert 3600.0 in sleeps  # and honored the server's requested delay exactly, as before
+
+
 def test_429_retry_after_within_cap_is_still_honored() -> None:
     """The cap only bites for pathologically long waits: a Retry-After at/under the cap is still
     honored and retried, exactly as before."""
