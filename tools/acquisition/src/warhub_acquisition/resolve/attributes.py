@@ -4,7 +4,7 @@ from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
 
-_HINT_FIELDS = ("gameSystem", "faction", "category", "packaging", "quantity", "description")
+_HINT_FIELDS = ("gameSystem", "faction", "category", "packaging", "quantity", "volumeMl", "description")
 _DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur", "priceCad")
 
 

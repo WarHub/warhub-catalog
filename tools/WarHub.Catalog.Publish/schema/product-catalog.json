@@ -35,6 +35,7 @@
         "status": { "type": "string" },
         "availability": { "type": "string" },
         "quantity": { "type": "integer", "minimum": 1 },
+        "volumeMl": { "type": "integer", "minimum": 1 },
         "productCode": { "type": "string" },
         "url": { "type": "string" },
         "imageUrl": { "type": "string" }

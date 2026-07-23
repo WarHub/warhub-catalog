@@ -26,6 +26,7 @@ public sealed record CanonicalProduct
     public string? Category { get; init; }
     public string? Packaging { get; init; }
     public int? Quantity { get; init; }
+    public int? VolumeMl { get; init; }
     public required string Status { get; init; }
     public string? Availability { get; init; }
     public string? FirstSeen { get; init; }

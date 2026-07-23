@@ -48,6 +48,8 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(14)] public decimal? PriceUsd { get; init; }
     [JsonPropertyOrder(15)] public decimal? PriceEur { get; init; }
     [JsonPropertyOrder(16)] public decimal? PriceCad { get; init; }
+    // Unit volume in millilitres, for paints/sprays (e.g. 12, 18, 24, 400). Null for everything else.
+    [JsonPropertyOrder(17)] public int? VolumeMl { get; init; }
 }
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>
