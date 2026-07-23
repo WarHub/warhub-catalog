@@ -127,14 +127,15 @@ class Catalog:
         return self.by_code.get(code or "")
 
     def match_name(self, name: str | None, set_hint: str | None = None) -> str | None:
+        """With a set_hint the match is IN-SET ONLY: a name that exists solely in some other
+        set must not cross-set match (a Fanatic-range store product sharing a name with an old
+        D&D-range paint planted the wrong SKU under the old live-enrichment flow). Without a
+        hint, a brand-wide unique name is trusted."""
         keys = self.by_name.get(norm(name), [])
-        if len(keys) == 1:
-            return keys[0]
-        if set_hint:
+        if set_hint is not None:
             in_set = [k for k in keys if k.endswith(f"|{set_hint}")]
-            if len(in_set) == 1:
-                return in_set[0]
-        return None
+            return in_set[0] if len(in_set) == 1 else None
+        return keys[0] if len(keys) == 1 else None
 
 
 class BrandHarvest:
@@ -252,10 +253,13 @@ def bridge_armypainter() -> BrandHarvest:
         if not is_single:
             continue  # sets/bundles/markers: not even candidates, the store is metadata-only
         set_hint = TAP_SET_BY_PREFIX.get(prefix or "")
-        # Name-matching is only trusted under a RECOGNIZED range prefix: a title from an
-        # unmapped range (a future product form sharing paint names, like the markers) must
-        # never cross-set match by name alone. Code matches carry their own certainty.
-        key = catalog.match_code(sku) or catalog.match_code(sku.rstrip("PS"))
+        # Code-match against ARCTURUS-shaped codes only (store SKUs carry a P/S packaging
+        # suffix the base set doesn't). A VERBATIM store-SKU hit is deliberately not trusted:
+        # the retired live-Shopify flow planted name-matched store SKUs into the archive
+        # (including cross-set false attributions), so a verbatim match can be an echo of a
+        # historical mistake, not a join. Name-matching only under a recognized range prefix,
+        # in-set only.
+        key = catalog.match_code(sku.rstrip("PS"))
         if key is None and set_hint is not None:
             key = catalog.match_name(paint_name, set_hint)
         if key is not None:
