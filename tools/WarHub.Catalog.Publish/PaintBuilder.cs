@@ -179,6 +179,10 @@ internal static class PaintBuilder
     private static string NormalizeHex(string hex)
     {
         string h = hex.Trim().ToLowerInvariant();
+        // Harvested additions can carry no colour yet (hex unknown until an override or a
+        // swatch-extraction pass fills it) -- publish them as "" rather than a bare "#".
+        if (h.Length == 0)
+            return "";
         return h.StartsWith('#') ? h : $"#{h}";
     }
 }

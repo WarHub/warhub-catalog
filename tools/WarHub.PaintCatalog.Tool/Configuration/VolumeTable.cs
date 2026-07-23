@@ -17,6 +17,8 @@ public static class VolumeTable
         new("Vallejo", ["Model Color", "Game Color", "Game Color Special FX", "Xpress Color"], 18, "dropper"),
         new("Vallejo", ["Model Air", "Game Air", "Mecha Color", "Surface Primer", "Panzer Aces", "Nocturna Models"], 17, "dropper"),
         new("Vallejo", ["Metal Color"], 32, "dropper"),
+        new("Vallejo", ["True Metallic Metal"], 18, "dropper"),
+        new("Vallejo", ["Pigment FX"], 30, "jar"),
         new("Vallejo", ["Liquid Gold"], 35, "dropper"),
         new("Vallejo", ["Premium Airbrush Color"], 60, "dropper"),
         new("Vallejo", ["Hobby Paint"], 18, "dropper"),

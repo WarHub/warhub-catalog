@@ -29,10 +29,13 @@ public class EquivalenceFinder
     public EquivalencesFile FindEquivalences(
         IReadOnlyList<BrandCatalog> catalogs)
     {
-        // Build flat list of (paint, brand info) pairs, excluding discontinued
+        // Build flat list of (paint, brand info) pairs, excluding discontinued paints and
+        // paints with no known colour (harvested additions carry Hex = "" until an override
+        // or swatch-extraction pass fills it — their R/G/B of 0 would otherwise make them
+        // match every genuinely black paint).
         var allPaints = catalogs
             .SelectMany(c => c.Paints
-                .Where(p => !p.IsDiscontinued)
+                .Where(p => !p.IsDiscontinued && !string.IsNullOrEmpty(p.Hex))
                 .Select(p => (Paint: p, Brand: c.Brand, BrandSlug: c.BrandSlug)))
             .ToList();
 
