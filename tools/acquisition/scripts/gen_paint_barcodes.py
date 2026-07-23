@@ -14,6 +14,7 @@ Run: `uv run --with pyyaml python tools/acquisition/scripts/gen_paint_barcodes.p
 """
 from __future__ import annotations
 
+import difflib
 import json
 import re
 from pathlib import Path
@@ -62,12 +63,27 @@ def is_paint_obs(o: dict) -> bool:
 
 
 def main() -> None:
-    # index the paint catalog: (set, normalized name) -> canonical "{Name}|{Set}" key
+    # index the paint catalog: (set, normalized name) -> canonical "{Name}|{Set}" key,
+    # plus per-set normalized-name lists for a fuzzy fallback (apostrophe-s, "Flesh"->"Fleshtone",
+    # "Casandora"/"Cassandora" spelling, etc. -- all real GW paints already in the catalog with
+    # colour, just under a name variant).
     citadel = yaml.safe_load(CITADEL.read_text(encoding="utf-8"))["paints"]
     by_key: dict[tuple[str, str], str] = {}
+    names_by_set: dict[str, dict[str, str]] = {}
     for p in citadel:
         s = (p.get("details") or {}).get("set") or ""
         by_key[(s, norm(p["name"]))] = f"{p['name']}|{s}"
+        names_by_set.setdefault(s, {})[norm(p["name"])] = f"{p['name']}|{s}"
+
+    def resolve_key(pset: str, pnorm: str) -> str | None:
+        exact = by_key.get((pset, pnorm))
+        if exact is not None:
+            return exact
+        # fuzzy fallback WITHIN the same set only (never cross-set), high cutoff to avoid
+        # mis-assigning a barcode; a paint name is unique within its set so this is safe.
+        pool = names_by_set.get(pset, {})
+        close = difflib.get_close_matches(pnorm, list(pool), n=1, cutoff=0.86)
+        return pool[close[0]] if close else None
 
     # collect trade paint barcodes, newest (WH Colour) preferred as primary
     entries: dict[str, dict] = {}
@@ -85,7 +101,7 @@ def main() -> None:
         if pset is None:
             continue
         pname = clean_paint_name(o.get("name") or "")
-        key = by_key.get((pset, norm(pname)))
+        key = resolve_key(pset, norm(pname))
         if key is None:
             unmatched.append(f"{pset}: {o.get('name')}")
             continue
