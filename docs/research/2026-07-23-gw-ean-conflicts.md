@@ -1,5 +1,24 @@
 # GW EAN conflicts — repackaging joins & review (2026-07-23)
 
+> **Update — resolver live-primacy fix landed.** The "stale published primary" bucket below
+> (§2) is now **fixed in code**: `resolve/corroborate.py` treats a **live manufacturer barcode on
+> the surviving product code as authoritative** — it becomes the primary and the stale barcodes on
+> that code drop to `additionalEans`, clearing the conflict. This dropped catalog-wide conflicts
+> **111 → 48** and populated `additionalEans` on **73** products, with **0 barcodes lost**
+> (ean-guard clean). It also fixed the same class across Warlord/Wyrd/Mantic (a manufacturer is
+> authoritative for its *own* barcodes everywhere). A retailer-only disagreement, or a barcode only
+> ever seen under a *foreign* code (a different product bridged in by a retailer mis-code, e.g.
+> Zodgrod §3), deliberately stays **conflicted and visible** — cross-code merges must be
+> human-vetted via `matches.yaml`, never guessed. See `test_corroborate.py` for the rules.
+>
+> **One case flipped on inspection — Combat Patrol vs Kill Team (§3):** the evidence says GW
+> *reused* code `99120101402`. The "Combat Patrol: Space Marines" record is a real **2024** product
+> (GW's own image is `99120101402_CPSpaceMarines2024Lead.jpg`, `status: current`); the *Kill Team:
+> Space Marine Scout Squad* on the same code is an **archived/discontinued** trade row. So it is not
+> "Combat Patrol was the mistake" — it is a code GW used for two products across time. Left for a
+> maintainer decision rather than deleting a real current product.
+
+
 Adding the GW trade barcodes (PR #40) surfaced **38 EAN conflicts** on Games Workshop products —
 cases where one catalog entity has two different barcodes asserted by its sources. This documents
 what each one actually is, in plain English, and what was done. Analysis was fanned out across
