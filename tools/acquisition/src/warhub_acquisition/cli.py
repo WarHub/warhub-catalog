@@ -312,10 +312,11 @@ def main(argv: list[str] | None = None) -> int:
     exit_code = 0
     if args.ean_guard:
         findings = check_ean_guard(paths)
-        if findings["lost"] or findings["repackaged"]:
+        if any(findings.values()):
             report_text += render_ean_guard_section(findings)
         # Only a genuinely LOST confirmed barcode fails the run; a tracked repackaging (old
-        # barcode retained in additionalEans) is reported but passes.
+        # barcode retained in additionalEans), a dropped provisional barcode and a dropped
+        # product code are all reported for visibility but pass.
         if findings["lost"]:
             exit_code = 5
     print(report_text, end="")
