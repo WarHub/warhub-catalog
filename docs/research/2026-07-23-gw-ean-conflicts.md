@@ -1,5 +1,29 @@
 # GW EAN conflicts — repackaging joins & review (2026-07-23)
 
+> **Update — resolver live-primacy fix landed.** The "stale published primary" bucket below
+> (§2) is now **fixed in code**: `resolve/corroborate.py` treats a **live manufacturer barcode on
+> the surviving product code as authoritative** — it becomes the primary and the stale barcodes on
+> that code drop to `additionalEans`, clearing the conflict. This dropped catalog-wide conflicts
+> **111 → 48** and populated `additionalEans` on **73** products, with **0 barcodes lost**
+> (ean-guard clean). It also fixed the same class across Warlord/Wyrd/Mantic (a manufacturer is
+> authoritative for its *own* barcodes everywhere). A retailer-only disagreement, or a barcode only
+> ever seen under a *foreign* code (a different product bridged in by a retailer mis-code, e.g.
+> Zodgrod §3), deliberately stays **conflicted and visible** — cross-code merges must be
+> human-vetted via `matches.yaml`, never guessed. See `test_corroborate.py` for the rules.
+>
+> **Combat Patrol vs Kill Team (`99120101402`) — resolved as a bad seed record.** First pass I
+> defended the seed's "Combat Patrol: Space Marines" here (its image filename / URL say 2024,
+> `status: current`) — wrongly: those fields are the *seed's own* metadata, the very record under
+> suspicion. On a proper hunt the seed's barcode `5011921178629` appears in **no other source** —
+> not GW's Algolia feed, not one retailer, not the legacy import — and returns nothing in a web
+> barcode search. The **real** Combat Patrol: Space Marines is already in the catalog as
+> `99120101388` / `5011921199518` (corroborated by legacy + Goblin Gaming + Tistaminis, and all over
+> retail). GW's trade sheet says `99120101402` is the discontinued *Kill Team: Space Marine Scout
+> Squad*. So the seed put a phantom barcode on a code that belongs to a different product. **Fix:**
+> the erroneous seed observation was removed; `99120101402` now resolves cleanly to the Kill Team
+> Scout Squad (confirmed), `99120101388` Combat Patrol is untouched, and no real barcode was lost.
+
+
 Adding the GW trade barcodes (PR #40) surfaced **38 EAN conflicts** on Games Workshop products —
 cases where one catalog entity has two different barcodes asserted by its sources. This documents
 what each one actually is, in plain English, and what was done. Analysis was fanned out across

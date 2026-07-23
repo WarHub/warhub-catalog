@@ -26,6 +26,30 @@ def obs(key: str, **kw: object) -> Observation:
     return Observation(**base)
 
 
+def test_reassign_code_splits_a_retailer_miscode_bridge() -> None:
+    # A retailer listed the single "Zodgrod" miniature under the ARMY SET's code while carrying
+    # Zodgrod's EAN -- bridging the army set into the Zodgrod entity (miscode code + shared EAN).
+    # reassignCodes corrects that one observation's code so the army set splits back out.
+    members = [
+        obs("mfr-gw:zodgrod", sku="99120103074", ean="5011921128327", name="Zodgrod Wortsnagga"),
+        obs("mfr-gw:army-set", sku="60010103001", ean="5011921138395", name="Beast Snagga Army Set"),
+        # the bridging retailer listing: army-set code, but Zodgrod's name + EAN
+        obs("ret-goblin:zodgrod", sku="60010103001", ean="5011921128327", name="Zodgrod Wortsnagga"),
+    ]
+    # Without the correction, all three collapse into one entity (bad bridge).
+    bridged = join_observations(members, TAXONOMY, KINDS, Matches())
+    assert len(bridged.entities) == 1
+
+    fixed = join_observations(
+        members, TAXONOMY, KINDS,
+        Matches(reassignCodes={"ret-goblin:zodgrod": "99120103074"}),
+    )
+    assert set(fixed.entities) == {"games-workshop/99120103074", "games-workshop/60010103001"}
+    # the army set is now alone; Zodgrod has its own listing + the corrected retailer one
+    assert len(fixed.entities["games-workshop/60010103001"]) == 1
+    assert len(fixed.entities["games-workshop/99120103074"]) == 2
+
+
 def test_join_by_normalized_code() -> None:
     result = join_observations(
         [obs("mfr-gw:necrons", sku="99120110077"), obs("ret-goblin:cp-necrons", sku="GWS99120110077")],

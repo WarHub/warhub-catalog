@@ -60,3 +60,9 @@ joins:
   # code (name-slug id), so a fold cannot supersede -- documented in the conflicts review doc as
   # needs-direction rather than force-joined here.
 aliases: {}
+reassignCodes:
+  # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
+  # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole
+  # army set into the Zodgrod entity. Correct this listing to Zodgrod's real code so the army set
+  # (60010103001, barcode 5011921138395) splits back out into its own product.
+  'ret-goblingaming:new-games-workshop-zodgrod-wortsnagga-orks': '99120103074'
