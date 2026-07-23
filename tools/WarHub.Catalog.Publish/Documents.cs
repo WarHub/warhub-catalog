@@ -70,9 +70,13 @@ internal sealed record PaintRecord(
     [property: JsonPropertyOrder(8)] string? Finish,
     [property: JsonPropertyOrder(9)] int? VolumeMl,
     [property: JsonPropertyOrder(10)] string? Container,
-    [property: JsonPropertyOrder(11)] string Status,
-    [property: JsonPropertyOrder(12)] string Availability,
-    [property: JsonPropertyOrder(13)] IReadOnlyList<PaintEquivalent> Equivalents);
+    // ean/productCode are the manufacturer's retail identifiers, optional (only some brands supply
+    // them -- currently GW/Citadel via the trade-barcode bridge, and Vallejo via computed EAN).
+    [property: JsonPropertyOrder(11)] string? ProductCode,
+    [property: JsonPropertyOrder(12)] string? Ean,
+    [property: JsonPropertyOrder(13)] string Status,
+    [property: JsonPropertyOrder(14)] string Availability,
+    [property: JsonPropertyOrder(15)] IReadOnlyList<PaintEquivalent> Equivalents);
 
 // ---- Envelope-bearing documents ------------------------------------------------
 

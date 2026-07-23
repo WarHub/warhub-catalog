@@ -38,6 +38,11 @@ internal static class PaintCatalogApp
             Description = "Path to overrides.yaml file"
         };
 
+        Option<FileInfo?> barcodesOption = new("--barcodes")
+        {
+            Description = "Path to a generated barcode file ({brand}/{Name}|{Set} -> ean/productCode)"
+        };
+
         Option<int> sampleOption = new("--sample")
         {
             Description = "Sample N paints per brand (0 = all)",
@@ -69,6 +74,7 @@ internal static class PaintCatalogApp
             sourceOption,
             outputOption,
             overridesOption,
+            barcodesOption,
             sampleOption,
             brandOption,
             equivalencesOption,
@@ -81,6 +87,7 @@ internal static class PaintCatalogApp
             DirectoryInfo? source = parseResult.GetValue(sourceOption);
             DirectoryInfo output = parseResult.GetValue(outputOption)!;
             FileInfo? overrides = parseResult.GetValue(overridesOption);
+            FileInfo? barcodes = parseResult.GetValue(barcodesOption);
             int sample = parseResult.GetValue(sampleOption);
             string? brandFilter = parseResult.GetValue(brandOption);
             bool generateEquivalences = parseResult.GetValue(equivalencesOption);
@@ -111,6 +118,7 @@ internal static class PaintCatalogApp
 
             string outputDir = output.FullName;
             string? overridesPath = overrides?.FullName;
+            string? barcodesPath = barcodes?.FullName;
             string toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
             var brandSummaries = new List<BrandSummary>();
             var allCatalogs = new List<BrandCatalog>();
@@ -187,6 +195,10 @@ internal static class PaintCatalogApp
                         Ean = EanComputer.ComputeVallejoEan(p.ProductCode) ?? p.Ean
                     }).ToList();
                 }
+
+                // Fill EAN + product code from the generated manufacturer-barcode file (only fills
+                // blanks; a manual override below still wins).
+                paints = BarcodeEnricher.Apply(paints, brandInfo.Slug, barcodesPath);
 
                 // Apply overrides
                 paints = OverrideApplier.Apply(paints, brandInfo.Slug, overridesPath);

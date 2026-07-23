@@ -64,6 +64,8 @@ internal static class PaintBuilder
                     Finish: e.Paint.Details.Finish,
                     VolumeMl: e.Paint.Details.VolumeMl,
                     Container: e.Paint.Details.Container,
+                    ProductCode: e.Paint.ProductCode,
+                    Ean: e.Paint.Ean,
                     Status: e.Paint.Status,
                     Availability: e.Paint.Availability,
                     Equivalents: []); // filled below
