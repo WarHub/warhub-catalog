@@ -20,6 +20,7 @@ def resolve_attributes(
     code: str | None,
     miss_threshold: int = 3,
     superseded: frozenset[str] = frozenset(),
+    category_maps: dict[str, dict] | None = None,
 ) -> CanonicalProduct:
     # A repackaging join folds an OLD product code's observations (superseded) into the surviving
     # entity. Their attributes describe the retired box (a stale price, an old image), so within a
@@ -36,6 +37,27 @@ def resolve_attributes(
         fields[name] = _first([getattr(member, name) for member in ordered])
     for name in _HINT_FIELDS:
         fields[name] = _first([member.hints.get(name) for member in ordered])
+
+    # Fallback classification from a source's raw category taxonomy (today only mfr-gw-trade's
+    # `tradeCategory`, mapped in data/catalog/mappings/<source>.yaml). Applied ONLY when no source
+    # supplied a gameSystem directly, and it never overrides one -- it fills the products (chiefly
+    # the GW trade ingest's China Order Form rows) that would otherwise publish gameSystem: null.
+    # `ordered` already puts higher-priority/surviving sources first, so the first member whose
+    # source maps its tradeCategory to a system wins; faction is taken from that same mapping.
+    if fields["gameSystem"] is None and category_maps:
+        for member in ordered:
+            trade_category = member.hints.get("tradeCategory")
+            mapping = category_maps.get(member.source_id) if trade_category else None
+            if not mapping:
+                continue
+            prefix = str(trade_category).split(" - ", 1)[0]
+            system = (mapping.get("gameSystem") or {}).get(prefix)
+            if system:
+                fields["gameSystem"] = system
+                if fields["faction"] is None:
+                    fields["faction"] = (mapping.get("faction") or {}).get(str(trade_category))
+                break
+
     fields.setdefault("category", None)
     if fields["category"] is None:
         fields["category"] = "miniatures"
