@@ -11,6 +11,10 @@ scope:
   # mixed bucket that still contains paints -- kept in evidence, bridge classifies.
   includeTypes: [TurboShift, Metallic, ZeniShift, Retail, Medium]
 politeness:
+  # Shopify bot management on this shop throttles bot-token UAs inconsistently (isolated
+  # probe 200, full run 429 on page 1, 2026-07-23/24) -- same treatment as mfr-armypainter /
+  # mfr-monument. One-off snapshot source; pacing unchanged.
+  uaProfile: browser
   rps: 0.5
 budget:
   pagesPerRun: 40
