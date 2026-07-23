@@ -31,6 +31,8 @@
         "finish": { "type": "string" },
         "volumeMl": { "type": "integer" },
         "container": { "type": "string" },
+        "productCode": { "type": "string" },
+        "ean": { "type": "string" },
         "status": { "type": "string" },
         "availability": { "type": "string" },
         "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }

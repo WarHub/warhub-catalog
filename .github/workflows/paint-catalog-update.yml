@@ -60,6 +60,7 @@ jobs:
         run: |
           ARGS="--source /tmp/miniature-paints/paints --output data/paints"
           ARGS="$ARGS --overrides data/paints/overrides.yaml --equivalences"
+          ARGS="$ARGS --barcodes data/paints/barcodes/citadel-colour.yaml"
           ARGS="$ARGS --sample ${{ github.event.inputs.sample || '0' }} --verbose"
           [ -n "${{ github.event.inputs.brand }}" ] && ARGS="$ARGS --brand '${{ github.event.inputs.brand }}'"
           [ "${{ github.event.inputs.scrape || 'true' }}" = "true" ] && ARGS="$ARGS --scrape"
