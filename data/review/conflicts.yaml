@@ -166,19 +166,6 @@ conflicts:
           - ret-goblingaming
           - ret-radaddel
   - type: ean-mismatch
-    entity: games-workshop/99120103074
-    chosen: '5011921128327'
-    assertions:
-      - ean: '5011921128327'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-      - ean: '5011921138395'
-        sources:
-          - mfr-gw-trade
-  - type: ean-mismatch
     entity: games-workshop/99120108058
     chosen: '5011921156771'
     assertions:

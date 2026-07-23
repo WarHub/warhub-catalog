@@ -15,6 +15,13 @@ class Matches(BaseModel):
     model_config = ConfigDict(extra="forbid")
     joins: dict[str, str] = Field(default_factory=dict)
     aliases: dict[str, str] = Field(default_factory=dict)
+    # Hand corrections for a single observation whose retailer SKU carries the WRONG product code,
+    # bridging two genuinely different products into one entity. Maps observation key -> the correct
+    # normalized product code. Applied before union-find grouping so the mis-coded observation joins
+    # the right entity and the other product splits back out. Use ONLY for a demonstrable retailer
+    # mis-code (e.g. a single-miniature listing tagged with an army-set's code); it is not a general
+    # re-slotting tool. See resolve/join.py where `code` is computed.
+    reassignCodes: dict[str, str] = Field(default_factory=dict)
 
 
 @dataclass
@@ -78,7 +85,9 @@ def join_observations(
         if not observation.manufacturer:
             result.ambiguous.append({"type": "unattributed", "key": observation.key, "name": observation.name})
             continue
-        code = taxonomy.normalize_code(observation.manufacturer, observation.sku)
+        code = matches.reassignCodes.get(observation.key) or taxonomy.normalize_code(
+            observation.manufacturer, observation.sku
+        )
         ean = canonical_ean(observation.ean)
         forced = matches.joins.get(observation.key)
         is_barcode_db = kinds.get(observation.source_id, "barcode-db") == "barcode-db"
