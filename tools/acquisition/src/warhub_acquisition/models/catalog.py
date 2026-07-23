@@ -22,6 +22,7 @@ class CanonicalProduct(BaseModel):
     category: str | None = None
     packaging: str | None = None
     quantity: int | None = None
+    volumeMl: int | None = None
     status: str
     availability: str | None = None
     firstSeen: str

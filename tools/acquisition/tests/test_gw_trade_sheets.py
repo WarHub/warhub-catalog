@@ -18,6 +18,7 @@ from warhub_acquisition.acquire.strategies.gw_trade_sheets import (
     _clean_ean,
     _fetch_page,
     _paint_category,
+    _volume_ml,
     _is_discontinued,
     _merge,
     _release_date_is_future,
@@ -186,6 +187,21 @@ def test_rows_skips_leading_banner_row():
 )
 def test_paint_category_tags_paints_and_sprays(trade_category, expected):
     assert _paint_category(trade_category) == expected
+
+
+@pytest.mark.parametrize(
+    "size,name,expected",
+    [
+        ("12ml", "BASE: AVERLAND SUNSET (12ML) (6-PACK)", 12),
+        ("400ml", "CHAOS BLACK SPRAY (6-PK)", 400),
+        ("-", "MEPHISTON RED 12ML (6-PACK)", 12),          # size column blank -> parse from name
+        (None, "SHADE: NULN OIL (18ML) (6 PACK)", 18),
+        ("-", "SYNTHETIC BASE BRUSH (SMALL) (X3)", None),  # a brush has no ml
+        (None, "COMBAT PATROL: SPACE MARINES", None),
+    ],
+)
+def test_volume_ml(size, name, expected):
+    assert _volume_ml(size, name) == expected
 
 
 def test_rows_finds_china_header_under_multi_cell_banner():

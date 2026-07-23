@@ -258,6 +258,17 @@ def _rows(sheet) -> Iterator[dict]:
         yield dict(zip(header, raw))
 
 
+def _volume_ml(size: object, name: str) -> int | None:
+    """Unit volume in millilitres, from the SIZE column (`12ml`, `400ml`) or the product name
+    (`... (12ML) ...`, `MEPHISTON RED 12ML ...`). None when there is no ml figure (most products,
+    and brushes/tools/books which have no volume)."""
+    for text in (str(size or ""), name or ""):
+        m = re.search(r"(\d{1,4})\s*ml\b", text, re.IGNORECASE)
+        if m:
+            return int(m.group(1))
+    return None
+
+
 def _paint_category(trade_category: str | None) -> str | None:
     """`"paint"` when the trade range names a paint or spray, else None.
 
@@ -500,6 +511,9 @@ def gw_trade_sheets_strategy(
                         paint_category = _paint_category(str(category))
                         if paint_category is not None:
                             hints["category"] = paint_category
+                    volume = _volume_ml(_first(row, "SIZE"), str(name))
+                    if volume is not None:
+                        hints["volumeMl"] = volume
 
                     fresh = Observation(
                         key=key,
