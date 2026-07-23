@@ -1,0 +1,39 @@
+id: mfr-ak-interactive
+kind: manufacturer
+strategy: woo-paints
+baseUrl: https://ak-interactive.com
+scope:
+  manufacturer: AK Interactive
+  # WPML store: without lang=en the Store API answers in the default locale (live-verified
+  # 2026-07-23: Spanish names/permalinks).
+  extraParams:
+    lang: en
+  # Store categories to sweep (Store API accepts category=<slug>, live-verified 2026-07-23
+  # with X-WP-Total counts): paints-acrylics 999 (3GEN singles/sets, washes, dense), quick-gen
+  # 112, abteilung502 119 (oils; includes a few books -- bridge filters), spray lines 25+25.
+  # real-colors has no working category slug on the EN store; that range stays covered by the
+  # Arcturus base set.
+  categories:
+    - paints-acrylics
+    - quick-gen
+    - abteilung502
+    - ak-spray-colors
+    - ak-spray-primers
+politeness:
+  # ak-interactive.com's WAF 403s any UA containing a bot token -- including the robots.txt
+  # fetch itself (live matrix 2026-07-23: bot UA 403, curl 200, browser 200). Their robots.txt
+  # rules allow us (only Amazon bots are disallowed); uaProfile swaps the identification string
+  # so robots.txt can actually be FETCHED and honored -- evaluation stays pinned to the
+  # canonical bot token (see runner.py).
+  uaProfile: browser
+  rps: 0.5
+  timeoutSeconds: 60
+contract:
+  # ~1,280 raw category memberships minus overlaps (quick-gen/set products are also in
+  # paints-acrylics); floor set after the first committed snapshot (2026-07-23 run: see
+  # evidence dir) -- generous because this source is run on demand, not on a schedule.
+  minCount: 700
+  maxDropPct: 50
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.9

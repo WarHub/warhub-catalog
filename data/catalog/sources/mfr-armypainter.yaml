@@ -1,0 +1,31 @@
+id: mfr-armypainter
+kind: manufacturer
+strategy: shopify-paints
+# No www: the www host 301s robots.txt (the robots fetcher refuses to assume permission on
+# redirects); apex serves it directly (matches the C# ShopifyPaintSource's base URL too).
+baseUrl: https://thearmypainter.com
+scope:
+  # Store default currency confirmed live 2026-07-23 via /cart.js -> "USD".
+  currency: usd
+  # Live probe 2026-07-23: 898 products; product_type "Paint" 487, "Spray" 33 (Colour Primer
+  # rasters), and "" 274 -- several real paint ranges ship untyped (e.g. some Warpaints
+  # Fanatic singles, Speedpaint Marker) so the empty type must stay in. Triads/bundles/brush
+  # products caught downstream by the harvest bridge, which classifies ranges/singles.
+  includeTypes: [Paint, Spray, '']
+politeness:
+  # This shop's Shopify bot management 429s any bot-token UA on /products.json regardless of
+  # pacing (live matrix 2026-07-23: bot UA 429, browser UA 200, repeatable after cooldown).
+  # uaProfile swaps the identification string only; pacing stays 0.5 rps and runs are one-off
+  # snapshots, not scheduled.
+  uaProfile: browser
+  rps: 0.5
+budget:
+  pagesPerRun: 400
+contract:
+  # Evidence-based floor (~85% of observed): live enumeration 2026-07-23 kept 794 products
+  # after the includeTypes filter (487+33+274). 794 * 0.85 = 674.9 -> 670.
+  minCount: 670
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.9

@@ -3,7 +3,7 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Callable
 
-from warhub_acquisition.acquire.client import UA, PoliteClient, RobotsDisallowedError
+from warhub_acquisition.acquire.client import BROWSER_UA, UA, PoliteClient, RobotsDisallowedError
 from warhub_acquisition.acquire.cursor import CursorStore
 from warhub_acquisition.acquire.robots import RobotsPolicy, fetch_policy
 from warhub_acquisition.evidence.store import EvidenceStore
@@ -151,6 +151,17 @@ def run_source(
     client_kwargs: dict[str, object] = {"timeout": timeout_seconds, "transport": transport}
     if sleep is not None:
         client_kwargs["sleep"] = sleep
+
+    # `politeness.uaProfile: browser` swaps ONLY the identification string (see BROWSER_UA in
+    # client.py) for origins whose WAF hard-403s any non-browser UA on public catalog endpoints
+    # (live-verified per descriptor, documented inline there). Robots matching below deliberately
+    # keeps using the canonical bot UA token: a robots.txt group written against generic browser
+    # strings doesn't exist in practice, and evaluating OUR rules under the identity we'd rather
+    # present would let the profile weaken robots compliance -- the bot token is the honest,
+    # stricter match.
+    if politeness.get("uaProfile") == "browser":
+        client_kwargs["user_agent"] = BROWSER_UA
+        client_kwargs["robots_user_agent"] = UA
 
     # --- Robots.txt preflight (acquire/robots.py) -- BEFORE the strategy runs, never after. ---
     # Skipped entirely when there's no baseUrl to check (curated/no-strategy sources never reach

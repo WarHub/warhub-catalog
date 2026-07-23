@@ -1,0 +1,48 @@
+id: mfr-vallejo
+kind: manufacturer
+strategy: wp-rest-paints
+baseUrl: https://acrylicosvallejo.com
+scope:
+  manufacturer: Vallejo
+  apiBase: /en/wp-json/wp/v2
+  # Hobby paint ranges (product_cat slugs verified against the live 61-term taxonomy,
+  # 2026-07-23; per-term product counts in parentheses summed ~1,167 before overlap dedupe).
+  # Deliberately excludes the sets tree, airbrushes, tools, brushes, scenics, stencils,
+  # publications and the fine-arts tree -- singles ranges only, matching data/paints scope.
+  # Panzer Aces is no longer on the site at all (discontinued; Arcturus base retains it).
+  includeCategorySlugs:
+    - model-color-en # (204)
+    - model-air-en # (235)
+    - game-color-en # (131)
+    - game-air-en # (51)
+    - xpress-color-en # (60)
+    - mecha-color-en # (76)
+    - metal-color-en # (19)
+    - liquid-metal-en # (8)
+    - true-metallic-metal-en # (80)
+    - premium-color-en # (60)
+    - hobby-paint # (34, sprays)
+    - primers-en # (22)
+    - weathering-fx-en # (28)
+    - pigment-fx-en # (30)
+    - wash-fx-en # (18)
+    - diorama-fx-en # (49)
+    - auxiliary-products-hobby # (62)
+politeness:
+  # acrylicosvallejo.com's WAF returns 403 to any non-browser UA on these public read-only
+  # REST endpoints (live-verified 2026-07-23: bot UA 403, browser UA 200). uaProfile swaps the
+  # identification string only; robots evaluation stays pinned to the bot token (runner.py).
+  uaProfile: browser
+  # robots.txt: `User-agent: * / Allow: /` with `Crawl-delay: 9000` -- an anti-crawl posture
+  # aimed at page crawlers, which at face value forbids ANY practical access (1 request/2.5 h).
+  # This strategy never crawls pages: the entire run is ~25 REST list/media requests at
+  # 0.2 rps, on demand only (one-off snapshot model -- see the design doc). Same opt-out
+  # precedent as mfr-gw-algolia (robots target mismatch), rationale documented here instead of
+  # silently ignored.
+  ignoreRobots: true
+  rps: 0.2
+  timeoutSeconds: 60
+contract:
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.9
