@@ -17,6 +17,7 @@ from warhub_acquisition.acquire.client import FetchError
 from warhub_acquisition.acquire.strategies.gw_trade_sheets import (
     _clean_ean,
     _fetch_page,
+    _paint_category,
     _is_discontinued,
     _merge,
     _release_date_is_future,
@@ -167,6 +168,24 @@ def test_rows_skips_leading_banner_row():
     assert len(rows) == 1
     assert rows[0]["Barcode"] == "5011921199280"
     assert rows[0]["Code"] == "60010199059"
+
+
+@pytest.mark.parametrize(
+    "trade_category,expected",
+    [
+        ("Paint - WH Colour - Base", "paint"),
+        ("Paint - WH Colour - Contrast", "paint"),
+        ("Spray - Colour", "paint"),
+        ("Paint Other - Painting Accessory", None),  # water pots/handles are accessories, not paint
+        ("40K - Imperium - Astra Militarum", None),
+        ("Brush - Base", None),
+        ("Hobby - Build - Glue", None),
+        ("", None),
+        (None, None),
+    ],
+)
+def test_paint_category_tags_paints_and_sprays(trade_category, expected):
+    assert _paint_category(trade_category) == expected
 
 
 def test_rows_finds_china_header_under_multi_cell_banner():

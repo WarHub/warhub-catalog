@@ -258,6 +258,18 @@ def _rows(sheet) -> Iterator[dict]:
         yield dict(zip(header, raw))
 
 
+def _paint_category(trade_category: str | None) -> str | None:
+    """`"paint"` when the trade range names a paint or spray, else None.
+
+    GW's trade range labels the product authoritatively: `Paint - WH Colour - Base`,
+    `Spray - Colour`, etc. NOTE `Paint Other - Painting Accessory` (water pots, painting handles,
+    palettes) is an accessory, not a paint -- matching `paint -` with the dash excludes it, as it
+    does brushes (`Brush - ...`), glue and tools.
+    """
+    tc = (trade_category or "").strip().lower()
+    return "paint" if tc.startswith("paint -") or tc.startswith("spray") else None
+
+
 def _first(row: dict, *names: str):
     for name in names:
         if name in row and row[name] not in (None, ""):
@@ -483,6 +495,11 @@ def gw_trade_sheets_strategy(
                     category = _first(row, "Category (ENG)", "Range", "Trade range")
                     if category is not None:
                         hints["tradeCategory"] = str(category).strip()
+                        # A GW paint pot/spray is a paint, not a "miniature": tag the product
+                        # category so it publishes as `paint` rather than the default.
+                        paint_category = _paint_category(str(category))
+                        if paint_category is not None:
+                            hints["category"] = paint_category
 
                     fresh = Observation(
                         key=key,
