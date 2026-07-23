@@ -673,3 +673,43 @@ def test_robots_check_uses_the_clients_own_user_agent() -> None:
     with pytest.raises(RobotsDisallowedError) as excinfo:
         client.get_json("/blocked")
     assert excinfo.value.details["userAgent"] == "custom-bot"
+
+
+def test_http_cache_serves_second_get_from_disk(tmp_path, monkeypatch) -> None:
+    monkeypatch.setenv("WARHUB_HTTP_CACHE_DIR", str(tmp_path / "cache"))
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        return httpx.Response(200, json={"hit": calls["n"]}, headers={"X-WP-Total": "7"})
+
+    client = PoliteClient(
+        "https://example.test", transport=httpx.MockTransport(handler), sleep=lambda s: None,
+    )
+    # first call hits the transport and populates the cache; the second is served from disk --
+    # same body AND headers, transport untouched.
+    first, h1 = client.get_json_response("/media?page=1")
+    second, h2 = client.get_json_response("/media?page=1")
+    assert first == second == {"hit": 1}
+    assert h1["X-WP-Total"] == h2["X-WP-Total"] == "7"
+    assert calls["n"] == 1  # transport called exactly once
+
+    # a DIFFERENT url is a cache miss -> transport called again
+    client.get_json_response("/media?page=2")
+    assert calls["n"] == 2
+
+
+def test_http_cache_off_by_default(monkeypatch) -> None:
+    monkeypatch.delenv("WARHUB_HTTP_CACHE_DIR", raising=False)
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        return httpx.Response(200, json={"ok": True})
+
+    client = PoliteClient(
+        "https://example.test", transport=httpx.MockTransport(handler), sleep=lambda s: None,
+    )
+    client.get_json("/x")
+    client.get_json("/x")
+    assert calls["n"] == 2  # no caching -> both calls hit the transport

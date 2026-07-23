@@ -1,5 +1,9 @@
 """Polite HTTP client: the single place politeness (UA, pacing, retry) is enforced."""
+import hashlib
+import json
+import os
 import time
+from pathlib import Path
 from typing import TYPE_CHECKING, Callable
 
 import httpx
@@ -128,6 +132,42 @@ class PoliteClient:
             transport=transport,
             timeout=timeout,
         )
+        # Opt-in on-disk GET cache for LOCAL iteration: set WARHUB_HTTP_CACHE_DIR to a directory and
+        # every 200 GET (media-API pages, the ~10 MB of trade workbooks, ...) is served from disk on
+        # re-runs instead of re-downloaded. Keyed by the fully-resolved URL (params included, request
+        # headers -- e.g. the rotating X-WP-Nonce -- excluded, since they don't change the response
+        # body). Never expires: delete the directory to refresh. CI never sets the var, so CI always
+        # fetches live. Off by default -- a no-op unless the env var is present.
+        cache_dir = os.environ.get("WARHUB_HTTP_CACHE_DIR") or None
+        self._cache_dir = Path(cache_dir) if cache_dir else None
+        if self._cache_dir is not None:
+            self._cache_dir.mkdir(parents=True, exist_ok=True)
+
+    def _cache_paths(self, method: str, url: str, params: dict | None) -> tuple[Path, Path]:
+        full = str(self._client.build_request(method, url, params=params).url)
+        digest = hashlib.sha256(f"{method} {full}".encode()).hexdigest()
+        assert self._cache_dir is not None
+        base = self._cache_dir / digest
+        return base, base.with_suffix(".headers")
+
+    def _cache_read(self, method: str, url: str, params: dict | None) -> "httpx.Response | None":
+        if self._cache_dir is None:
+            return None
+        body_path, headers_path = self._cache_paths(method, url, params)
+        if not body_path.exists():
+            return None
+        headers = json.loads(headers_path.read_text("utf-8")) if headers_path.exists() else {}
+        return httpx.Response(
+            200, content=body_path.read_bytes(), headers=headers,
+            request=self._client.build_request(method, url, params=params),
+        )
+
+    def _cache_write(self, method: str, url: str, params: dict | None, response: httpx.Response) -> None:
+        if self._cache_dir is None or response.status_code != 200:
+            return
+        body_path, headers_path = self._cache_paths(method, url, params)
+        body_path.write_bytes(response.content)
+        headers_path.write_text(json.dumps(dict(response.headers)), "utf-8")
 
     @property
     def robots(self) -> "RobotsPolicy | None":
@@ -262,7 +302,12 @@ class PoliteClient:
         merged over the client's own (added for the gw-trade-sheets strategy, whose media API
         requires a public, rotating `X-WP-Nonce` header on GET -- see that module's docstring).
         """
-        return self._request(url, params, headers=headers)
+        cached = self._cache_read("GET", url, params)
+        if cached is not None:
+            return cached
+        response = self._request(url, params, headers=headers)
+        self._cache_write("GET", url, params, response)
+        return response
 
     def get_json_response(
         self, url: str, params: dict | None = None, headers: dict | None = None
@@ -278,7 +323,11 @@ class PoliteClient:
         now a thin wrapper over this so there is exactly one retry+accept code path for the
         JSON case; its signature/behavior is unchanged.
         """
+        cached = self._cache_read("GET", url, params)
+        if cached is not None:
+            return cached.json(), cached.headers
         response = self._request(url, params, accept=_parses_as_json, headers=headers)
+        self._cache_write("GET", url, params, response)
         return response.json(), response.headers
 
     def get_json(self, url: str, params: dict | None = None) -> object:
