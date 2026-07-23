@@ -21,6 +21,12 @@ name: Nightly Acquisition
 #             explicit per-source budgets, never the global `budget` dispatch override --
 #             upcitemdb's trial quota is ~100 requests/day and must never be blown by an
 #             unrelated global override.
+#   group G:  mfr-gw-trade -- WEEKLY ONLY, UNCAPPED (empty budget). The GW trade sheets are a
+#             cumulative register, not a paginated store: the strategy's `budget` slices the
+#             WORKBOOK list (`workbooks[:budget]`), and cutting it could drop the flagship
+#             InsertDelete file, so it must never be budgeted. A full sweep is ~36 workbooks at
+#             the descriptor's rps 0.125 (~35 min) -- its own group so that pacing runs in
+#             parallel with the others and keeps its own 120-min timeout.
 #
 # GitHub-runner IPs are heavily throttled by Shopify/Cloudflare (observed first real nightly run,
 # 29229516710): the pre-split group A and group C both hit the 120-minute timeout; group B took
@@ -50,9 +56,9 @@ name: Nightly Acquisition
 # below) to finish well inside 120 min rather than relying on the timeout.
 #
 # Weekly deep-sweep mode: the Saturday-02:00-UTC schedule (or workflow_dispatch mode=weekly) adds
-# groups E and F above and raises group D's budget to 2500 (converges its ~14k-URL backlog in
+# groups E, F and G above and raises group D's budget to 2500 (converges its ~14k-URL backlog in
 # ~3 weeks). Nightly runs (the Sun-Fri 04:00 UTC schedule, or workflow_dispatch mode=nightly/unset)
-# never include E or F. The nightly cron deliberately EXCLUDES Saturday: weekly mode already runs
+# never include E, F or G. The nightly cron deliberately EXCLUDES Saturday: weekly mode already runs
 # every nightly group PLUS E/F, so a Saturday nightly run at 04:00 (2h after the 02:00 weekly run
 # starts) would gain nothing -- and integrate's create-pull-request step force-resets
 # catalog/acquisition from main + its own artifacts, so a same-day nightly run would silently
@@ -160,6 +166,15 @@ jobs:
             weeklyBudget: ''
             weeklyOnly: true
             startupDelay: 360
+          # Empty budget = UNCAPPED (see the roster comment): the trade register must sweep every
+          # workbook, never a `workbooks[:budget]` slice. The acquire step omits --budget when it's
+          # empty. Longest stagger (heaviest weekly-only source, own group).
+          - group: G
+            sources: mfr-gw-trade
+            budget: ''
+            weeklyBudget: ''
+            weeklyOnly: true
+            startupDelay: 420
     defaults:
       run:
         working-directory: tools/acquisition
@@ -319,9 +334,14 @@ jobs:
             for s in $RUN_SOURCES; do
               SRC_ARGS="$SRC_ARGS --source $s"
             done
+            # An empty group budget means UNCAPPED (--budget is omitted, so AcquireContext.budget
+            # stays None) -- used by group G (mfr-gw-trade), whose full workbook register must never
+            # be sliced by `workbooks[:budget]`. Every other group passes a numeric budget as before.
+            BUDGET_ARG=""
+            [ -n "$BUDGET" ] && BUDGET_ARG="--budget $BUDGET"
             set +e
             uv run warhub-data acquire --data ../../data $SRC_ARGS \
-              --budget "$BUDGET" \
+              $BUDGET_ARG \
               --run-date "$(date -u +%F)"
             code=$?
             set -e
