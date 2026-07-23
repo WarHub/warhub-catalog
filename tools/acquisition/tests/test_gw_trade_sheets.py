@@ -169,6 +169,29 @@ def test_rows_skips_leading_banner_row():
     assert rows[0]["Code"] == "60010199059"
 
 
+def test_rows_finds_china_header_under_multi_cell_banner():
+    """The China Order Form's row 1 is a label banner with >=3 non-empty cells -- a naive
+    "first substantial row" detector picks it and every real row zips against the wrong keys,
+    silently yielding zero observations. The header must be found by column token instead."""
+    sheet = _FakeSheet(
+        "20.07.2026",
+        [
+            ("Releases For Next Week", None, "Releases For This Week", None, None, "Order Total:", "0"),
+            ("下周新品", None, "这周新品", None, None, "订单总额：", None),
+            (None, None, None, None, None, None, None),
+            ("Release Date (China)", "Product Code", "Short Code", "Description (ENG)",
+             "Category (ENG)", "Barcode", "Release Date (Global)"),
+            ("2026-08-08", "99120199169", "73-401", "COMBAT PATROL: BATTLEZONE",
+             "40K - Generic", "5011921274604", "2026-08-08"),
+        ],
+    )
+    rows = list(_rows(sheet))
+    assert len(rows) == 1
+    assert rows[0]["Product Code"] == "99120199169"
+    assert rows[0]["Barcode"] == "5011921274604"
+    assert rows[0]["Category (ENG)"] == "40K - Generic"
+
+
 # --- workbook selection ------------------------------------------------------------------------
 
 

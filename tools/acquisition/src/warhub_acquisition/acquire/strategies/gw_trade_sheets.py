@@ -220,17 +220,37 @@ def _select_workbooks(assets: dict[str, dict], patterns: list[str]) -> list[tupl
     return out
 
 
-def _rows(sheet) -> Iterator[dict]:
-    """Header-keyed rows, tolerating the leading note/banner rows some GW sheets carry.
+# A row is the header iff it contains one of these exact cell values. Detecting the header by a
+# known token rather than "first non-trivial row" is what lets the same parser handle the three
+# different banner layouts on the site: the AU/NZ price files bury the header under a paragraph of
+# RRP small print, and the China Order Form buries it under two rows of "Releases For Next Week" /
+# order-total labels that would themselves pass a naive >=3-non-empty-cells test.
+_HEADER_TOKENS: frozenset[str] = frozenset(
+    {
+        "Product Code",
+        "New Product Code",
+        "Barcode",
+        "Barcode (Single)",
+        "New Individual barcode",
+        "New Barcode",
+        "PRODUCT NAME",
+        "Unit Code",
+        "Individual Code",
+    }
+)
 
-    The AU/NZ price files put a paragraph of RRP small print in row 1 and the real header in row 2,
-    so the header is taken to be the first row with >=3 non-empty cells rather than simply row 1.
+
+def _rows(sheet) -> Iterator[dict]:
+    """Header-keyed rows, locating the header by a known column token.
+
+    See `_HEADER_TOKENS`: the header is the first row containing one of them, so banner/label rows
+    above it (which vary per sheet family) are skipped regardless of how many cells they fill.
     """
     header: list[str] | None = None
     for raw in sheet.iter_rows(values_only=True):
         cells = ["" if c is None else str(c).strip() for c in raw]
         if header is None:
-            if sum(1 for c in cells if c) >= 3:
+            if any(c in _HEADER_TOKENS for c in cells):
                 header = cells
             continue
         if not any(cells):

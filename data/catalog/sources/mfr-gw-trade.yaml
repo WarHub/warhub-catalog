@@ -20,18 +20,24 @@ scope:
   # Only the barcode-bearing families. Anchored on the stable part of each name: WordPress appends
   # unpredictable dedup suffixes (`__1`, `__2`, `(1)`), so these must never be exact-matched.
   #
+  # China Order Form (weekly): the richest file -- barcode + SS Code + a 202-entry
+  # `Category (ENG)` taxonomy (game system + faction, e.g. "40K - Imperium - Astra Militarum"),
+  # captured as the `tradeCategory` hint. It brings ~522 product codes absent from InsertDelete
+  # (China-specific SKUs). NOTE its `RRP` column is in CHINESE YUAN, not GBP -- the strategy only
+  # ever reads a `UKR` column for priceGbp, which the China form does not have, so no CNY price can
+  # leak in. Future-dated rows (the "Releases For Next/This Week" section) are dropped on the
+  # `Release Date (Global)` column like every other sheet. Eight weekly copies match this pattern;
+  # the per-code merge folds them into one observation each.
+  #
   # Deliberately EXCLUDED and why:
   #   - Planogram / POS files          -- zero barcode columns (verified 2026-07-22)
   #   - US/CA Price Adjustment files   -- zero barcode columns
-  #   - China Order Form               -- richest file (barcode + SSC + a 202-entry category
-  #                                       taxonomy), but its price columns are wholesale and its
-  #                                       rows are heavily future-dated; deferred to its own
-  #                                       change rather than smuggled in here.
   filePatterns:
     - 'InsertDelete'
     - 'Individual Barcodes'
     - 'WH Colour Codes and Barcodes'
     - 'Trade Direct Range'
+    - 'China Order Form'
 politeness:
   # 8s between requests. GW's edge 429s under sustained load AND -- the reason this is so low --
   # degrades the media API to an empty-assets HTTP 200 rather than a 429, which silently truncates
