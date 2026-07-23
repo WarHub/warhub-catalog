@@ -246,7 +246,9 @@ class PoliteClient:
 
         raise FetchError(url, last_status)  # unreachable safeguard
 
-    def get_response(self, url: str, params: dict | None = None) -> httpx.Response:
+    def get_response(
+        self, url: str, params: dict | None = None, headers: dict | None = None
+    ) -> httpx.Response:
         """Like `get_json`/`get_text` but returns the full response (headers + body).
 
         `get_text` is a thin wrapper over this so there is exactly one request/retry/pacing
@@ -255,10 +257,16 @@ class PoliteClient:
         No body validation happens at this layer: a 2xx response is returned as-is
         regardless of its content (e.g. non-JSON bodies are fine here — only
         `get_json`/`get_json_response` treat an unparseable body as transient).
-        """
-        return self._request(url, params)
 
-    def get_json_response(self, url: str, params: dict | None = None) -> tuple[object, httpx.Headers]:
+        `headers` mirrors `post_json`'s parameter of the same name: per-request extra headers
+        merged over the client's own (added for the gw-trade-sheets strategy, whose media API
+        requires a public, rotating `X-WP-Nonce` header on GET -- see that module's docstring).
+        """
+        return self._request(url, params, headers=headers)
+
+    def get_json_response(
+        self, url: str, params: dict | None = None, headers: dict | None = None
+    ) -> tuple[object, httpx.Headers]:
         """Like `get_json` but also exposes response headers.
 
         Added for the woo strategy (Task 8 fix wave 1): WooCommerce's Store API signals total
@@ -270,7 +278,7 @@ class PoliteClient:
         now a thin wrapper over this so there is exactly one retry+accept code path for the
         JSON case; its signature/behavior is unchanged.
         """
-        response = self._request(url, params, accept=_parses_as_json)
+        response = self._request(url, params, accept=_parses_as_json, headers=headers)
         return response.json(), response.headers
 
     def get_json(self, url: str, params: dict | None = None) -> object:

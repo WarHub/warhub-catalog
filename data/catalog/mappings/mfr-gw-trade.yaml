@@ -1,0 +1,12 @@
+# Scaffold: gw_trade_sheets.py does not consult mapping gameSystem/faction tables -- the trade
+# workbooks selected by this source carry no per-product hierarchy (their `Trade range` column is a
+# merchandising bucket like "BS:A"/"E:P210", not a game system). This file exists so the repo-data
+# tests (test_repo_mappings_parse_when_present et al.) have a mapping file to validate per source.
+#
+# Worth revisiting if the China Order Form is ever ingested: it carries a `Category (ENG)` column
+# with 202 distinct manufacturer-authoritative entries of the shape
+# "40K - Imperium - Astra Militarum" / "Kill Team - Generic" / "Paint - WH Colour - Layer", which
+# is a genuine gameSystem+faction taxonomy and would populate these tables properly. Emitted as the
+# `tradeCategory` hint today so the data is not lost.
+gameSystem: {}
+faction: {}

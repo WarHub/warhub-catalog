@@ -1,0 +1,57 @@
+id: mfr-gw-trade
+kind: manufacturer
+strategy: gw-trade-sheets
+baseUrl: https://trade.games-workshop.com
+scope:
+  # Trade sheets carry no vendor column (same as mfr-gw-algolia / arc-gw-webstore), so the
+  # manufacturer is pinned here and resolved through Taxonomy.manufacturer_for_vendor. Must be the
+  # vendor NAME string, not the taxonomy slug -- manufacturer_for_vendor looks up name/vendorNames.
+  manufacturer: Games Workshop
+  # The public REST nonce is scraped from this page on every run (it rotates). It is not a
+  # credential: the media API serves the same data with no cookie and no session.
+  resourcesPath: /resources/
+  # Asset visibility is country-scoped and the slices genuinely differ (totals 5,109-5,927 across
+  # the 43 ids). 220 = United Kingdom, the reference slice: it carries the InsertDelete register
+  # (the flagship file) and both paint barcode sheets. 156/157/164 add the US/CA/RoW-only price
+  # files and the regional Trade Direct Range variants. NOTE the id must be NUMERIC -- passing the
+  # country NAME returns total_items:0 with HTTP 200, which is what made a previous probe conclude
+  # the endpoint was behind a login (docs/research/2026-07-22-gw-trade-barcode-retrieval.md SS1).
+  countries: [220, 156, 157, 164]
+  # Only the barcode-bearing families. Anchored on the stable part of each name: WordPress appends
+  # unpredictable dedup suffixes (`__1`, `__2`, `(1)`), so these must never be exact-matched.
+  #
+  # Deliberately EXCLUDED and why:
+  #   - Planogram / POS files          -- zero barcode columns (verified 2026-07-22)
+  #   - US/CA Price Adjustment files   -- zero barcode columns
+  #   - China Order Form               -- richest file (barcode + SSC + a 202-entry category
+  #                                       taxonomy), but its price columns are wholesale and its
+  #                                       rows are heavily future-dated; deferred to its own
+  #                                       change rather than smuggled in here.
+  filePatterns:
+    - 'InsertDelete'
+    - 'Individual Barcodes'
+    - 'WH Colour Codes and Barcodes'
+    - 'Trade Direct Range'
+politeness:
+  # 8s between requests. GW's edge 429s under sustained load AND -- the reason this is so low --
+  # degrades the media API to an empty-assets HTTP 200 rather than a 429, which silently truncates
+  # a paginator that reads len(assets). The strategy treats that as a retryable throttle, but the
+  # cheapest fix is simply not to provoke it. Measured safe at this spacing over 258 requests.
+  rps: 0.125
+  # Workbooks run to ~500KB and the host is slow under load; 30s (the client default) is tight.
+  timeoutSeconds: 60
+contract:
+  # Evidence-based floor from the live 2026-07-22 harvest: the four selected families yield 6,469
+  # distinct product-code -> EAN pairs, of which the InsertDelete register alone supplies the bulk.
+  # Floored well below that: a single-family fetch failure (one 404'd workbook after a GW re-upload)
+  # must degrade the run, not fail it outright, and the register is cumulative so the count only
+  # ever grows.
+  minCount: 4000
+  maxDropPct: 30
+  requiredFieldRates:
+    # Every emitted observation is gated on BOTH a product code and a GS1-prefix-valid barcode --
+    # rows missing either are skipped before emission, never emitted with a null. These are
+    # therefore 1.0 by construction, and a drop below it means the sheet schema changed.
+    name: 1.0
+    sku: 1.0
+    ean: 1.0
