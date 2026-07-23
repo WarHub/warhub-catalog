@@ -90,6 +90,23 @@ does exact identity lookups only.
    (Shopify — descriptor-only once shopify-paints exists), Wayback/CDX for dead catalogs
    (Testors) via existing `cdx-archive` strategy.
 
-CI: paint sources join `catalog-acquire.yml` as a weekly group; `gen_paint_harvest.py` runs in
-`paint-catalog-update.yml` before the C# tool (alongside `gen_paint_barcodes.py`), and the tool
-gains `--harvest data/paints/harvest`.
+CI: no scheduled harvesting (one-off model above) — paint sources run on demand via
+`catalog-acquire.yml`'s `workflow_dispatch` `sources` input. `gen_paint_harvest.py` runs in
+`paint-catalog-update.yml` before the C# tool (alongside `gen_paint_barcodes.py`, committed
+inputs only), and the tool gains `--harvest data/paints/harvest`.
+
+## First snapshot results (2026-07-23 runs)
+
+| Source | Observed | Enriched (exact identity) | EANs found | Additions | Candidates |
+|---|---:|---:|---:|---:|---:|
+| mfr-vallejo | 1,194 | 926 (images) | — (computed from codes) | 202 (TMM 75, Diorama FX 43, Pigment FX 25, Auxiliaries 50, gap-fills 9) | 51 (code-less legacy slugs) |
+| mfr-ak-interactive | 1,142 | 473 (images, by AK code) | — | 0 (metadata role) | 669 (sets/books + Quick Gen + 3rd-gen gaps) |
+| mfr-armypainter | 794 | 409 (EAN+image) | 725 harvested | 0 (metadata role) | 128 (new Fanatic waves, Air Triads, Masterclass) |
+| mfr-monument | 197 | 126 of 131 (EAN+image) | 195 harvested | 0 (metadata role) | 27 (1-Step + AMP Colors ranges) |
+| mfr-turbodork | (retry pending) | | | | |
+
+Harvest-review notes: Speedpaint **Marker** SKUs (`SM____P`) share paint names with Speedpaint
+droppers — excluded from singles matching (a marker EAN on a paint record would be a false
+barcode); TAP name-matching requires a recognized range prefix, cross-set name matches are
+never trusted. Monument's "Expert Acrylics" are vendored `Tri Art` on the store (rebrand) —
+out of scope until that range exists in the catalog.
