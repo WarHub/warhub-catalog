@@ -30,4 +30,33 @@ joins:
   'mfr-warlord-store:germania-hail-caesar-supplement-copy': warlord-games/109910007
   'mfr-warlord-store:hail-caesar-age-of-bronze-supplement-copy': warlord-games/109910010
   'mfr-warlord-store:hail-caesar-rulebook-spanish-language-richard-i-the-lionheart-special-figure': warlord-games/101010004SP
+  # --- GW trade repackaging joins (2026-07-23): old product code folded into the current
+  # code so its retired barcode becomes additionalEans, current barcode stays primary.
+  # Each verified same-product via evidence + adversarial check. See
+  # docs/research/2026-07-23-gw-ean-conflicts.md for the plain-English rationale per item.
+  # Dryads: old code 99120204012 (barcode 5011921062164) -> current (barcode 5011921179398).
+  'mfr-gw-trade:99120204012': games-workshop/99120204035
+  # Kustom Boosta-blasta: old code 99120103064 (barcode 5011921107995) -> current (barcode
+  # 5011921157068).
+  'mfr-gw-trade:99120103064': games-workshop/99120103100
+  # Rukkatrukk Squigbuggy: old code 99120103066 (barcode 5011921108022) -> current (barcode
+  # 5011921157082).
+  'mfr-gw-trade:99120103066': games-workshop/99120103102
+  # Haarken Worldclaimer, Herald of the Apocalypse: old code 99120102088 (barcode 5011921111084) ->
+  # current (barcode 5011921178179).
+  'mfr-gw-trade:99120102088': games-workshop/99120102164
+  # Kor'sarro Khan: old code 99120101255 (barcode 5011921119868) -> current (barcode 5011921142590).
+  'mfr-gw-trade:99120101255': games-workshop/99120101330
+  # Drazhar: old code 99120112040 (barcode 5011921127504) -> current (barcode 5011921155873).
+  'mfr-gw-trade:99120112040': games-workshop/99120112050
+  # Legions Imperialis: Lightning Fighter Squadron: old code 99121808004 (barcode 5011921132133) ->
+  # current (barcode 5011921188772).
+  'mfr-gw-trade:99121808004': games-workshop/99122608005
+  # AOS S/E + PAINT SET ENG/SPA/PORT/LATV/RM: old code 52170218004 (barcode 5011921260157) ->
+  # current (barcode 5011921219322).
+  'mfr-gw-trade:52170218004': games-workshop/52170218003
+  # NOTE: the Italian/Spanish AoS intro sets (age-of-sigmar-set-di-presentazione-ita /
+  # -introductorio-esp) are also repackaging, but their surviving entity has no resolved product
+  # code (name-slug id), so a fold cannot supersede -- documented in the conflicts review doc as
+  # needs-direction rather than force-joined here.
 aliases: {}

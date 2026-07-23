@@ -242,18 +242,6 @@ conflicts:
           - ret-radaddel
           - ret-tistaminis
   - type: ean-mismatch
-    entity: games-workshop/99120204035
-    chosen: '5011921179398'
-    assertions:
-      - ean: '5011921062164'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921179398'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-goblingaming
-  - type: ean-mismatch
     entity: games-workshop/99070201008
     chosen: '5011921063765'
     assertions:
@@ -306,33 +294,6 @@ conflicts:
           - mfr-gw-trade
           - ret-goblingaming
   - type: ean-mismatch
-    entity: games-workshop/99120103100
-    chosen: '5011921157068'
-    assertions:
-      - ean: '5011921107995'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921157068'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-          - ret-radaddel
-  - type: ean-mismatch
-    entity: games-workshop/99120103102
-    chosen: '5011921157082'
-    assertions:
-      - ean: '5011921108022'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921157082'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-goblingaming
-          - ret-radaddel
-  - type: ean-mismatch
     entity: games-workshop/99070117012
     chosen: '5011921171835'
     assertions:
@@ -343,18 +304,6 @@ conflicts:
       - ean: '5011921171835'
         sources:
           - arc-wargameportal
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-goblingaming
-  - type: ean-mismatch
-    entity: games-workshop/99120102164
-    chosen: '5011921178179'
-    assertions:
-      - ean: '5011921111084'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921178179'
-        sources:
           - legacy-catalog
           - mfr-gw-trade
           - ret-goblingaming
@@ -386,33 +335,6 @@ conflicts:
           - ret-goblingaming
           - ret-radaddel
   - type: ean-mismatch
-    entity: games-workshop/99120101330
-    chosen: '5011921142590'
-    assertions:
-      - ean: '5011921119868'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921142590'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-          - ret-radaddel
-  - type: ean-mismatch
-    entity: games-workshop/99120112050
-    chosen: '5011921155873'
-    assertions:
-      - ean: '5011921127504'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921155873'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-  - type: ean-mismatch
     entity: games-workshop/99120103074
     chosen: '5011921128327'
     assertions:
@@ -440,18 +362,6 @@ conflicts:
           - mfr-gw-trade
           - ret-goblingaming
           - ret-radaddel
-  - type: ean-mismatch
-    entity: games-workshop/99122608005
-    chosen: '5011921188772'
-    assertions:
-      - ean: '5011921132133'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921188772'
-        sources:
-          - mfr-gw-trade
-          - ret-goblingaming
-          - ret-tistaminis
   - type: ean-mismatch
     entity: games-workshop/99120299088
     chosen: '5011921133901'
@@ -665,19 +575,6 @@ conflicts:
         sources:
           - mfr-gw-trade
           - ret-goblingaming
-  - type: ean-mismatch
-    entity: games-workshop/52170218003
-    chosen: '5011921219322'
-    assertions:
-      - ean: '5011921219322'
-        sources:
-          - bdb-goupc
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-      - ean: '5011921260157'
-        sources:
-          - mfr-gw-trade
   - type: ean-mismatch
     entity: games-workshop/age-of-sigmar-set-di-presentazione-ita
     chosen: '5011921220908'
