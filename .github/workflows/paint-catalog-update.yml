@@ -48,6 +48,8 @@ jobs:
           dotnet-version: '10.x'
           dotnet-quality: 'preview'
 
+      - uses: astral-sh/setup-uv@v5
+
       - name: Build and test tool
         run: |
           dotnet build tools/WarHub.PaintCatalog.Tool.Tests -c Release -v:q
@@ -55,6 +57,14 @@ jobs:
 
       - name: Clone source data
         run: git clone --depth 1 https://github.com/Arcturus5404/miniature-paints.git /tmp/miniature-paints
+
+      # Refresh data/paints/barcodes/citadel-colour.yaml from the committed GW trade evidence BEFORE
+      # the tool runs -- the tool consumes it via --barcodes below. This closes the loop that was
+      # previously manual: the fuzzy trade->paint match is regenerated each run, so new/rebranded
+      # Citadel barcodes flow in without a hand-run. Deterministic and idempotent (no diff when the
+      # trade evidence is unchanged); skips cleanly if the trade evidence hasn't been harvested yet.
+      - name: Regenerate Citadel paint barcodes from GW trade evidence
+        run: uv run --with pyyaml python tools/acquisition/scripts/gen_paint_barcodes.py
 
       - name: Run paint catalog tool
         run: |
