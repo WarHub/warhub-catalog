@@ -194,17 +194,6 @@ conflicts:
           - ret-goblingaming
           - ret-radaddel
   - type: ean-mismatch
-    entity: games-workshop/99120101402
-    chosen: '5011921203420'
-    assertions:
-      - ean: '5011921178629'
-        sources:
-          - seed-curated
-      - ean: '5011921203420'
-        sources:
-          - mfr-gw-trade
-          - ret-tistaminis
-  - type: ean-mismatch
     entity: games-workshop/warhammer-40-000-paints-tools-set
     chosen: '5011921196951'
     assertions:

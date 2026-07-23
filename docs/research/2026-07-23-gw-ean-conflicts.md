@@ -11,12 +11,17 @@
 > Zodgrod §3), deliberately stays **conflicted and visible** — cross-code merges must be
 > human-vetted via `matches.yaml`, never guessed. See `test_corroborate.py` for the rules.
 >
-> **One case flipped on inspection — Combat Patrol vs Kill Team (§3):** the evidence says GW
-> *reused* code `99120101402`. The "Combat Patrol: Space Marines" record is a real **2024** product
-> (GW's own image is `99120101402_CPSpaceMarines2024Lead.jpg`, `status: current`); the *Kill Team:
-> Space Marine Scout Squad* on the same code is an **archived/discontinued** trade row. So it is not
-> "Combat Patrol was the mistake" — it is a code GW used for two products across time. Left for a
-> maintainer decision rather than deleting a real current product.
+> **Combat Patrol vs Kill Team (`99120101402`) — resolved as a bad seed record.** First pass I
+> defended the seed's "Combat Patrol: Space Marines" here (its image filename / URL say 2024,
+> `status: current`) — wrongly: those fields are the *seed's own* metadata, the very record under
+> suspicion. On a proper hunt the seed's barcode `5011921178629` appears in **no other source** —
+> not GW's Algolia feed, not one retailer, not the legacy import — and returns nothing in a web
+> barcode search. The **real** Combat Patrol: Space Marines is already in the catalog as
+> `99120101388` / `5011921199518` (corroborated by legacy + Goblin Gaming + Tistaminis, and all over
+> retail). GW's trade sheet says `99120101402` is the discontinued *Kill Team: Space Marine Scout
+> Squad*. So the seed put a phantom barcode on a code that belongs to a different product. **Fix:**
+> the erroneous seed observation was removed; `99120101402` now resolves cleanly to the Kill Team
+> Scout Squad (confirmed), `99120101388` Combat Patrol is untouched, and no real barcode was lost.
 
 
 Adding the GW trade barcodes (PR #40) surfaced **38 EAN conflicts** on Games Workshop products —
