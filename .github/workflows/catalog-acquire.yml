@@ -181,7 +181,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
 
       - run: uv sync --locked
 
@@ -377,7 +377,7 @@ jobs:
 
       - name: Upload evidence + health artifact
         if: always() && steps.plan.outputs.ran == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: acquire-data-${{ matrix.group }}
           path: _stage
@@ -395,19 +395,19 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
 
       - name: uv sync
         working-directory: tools/acquisition
         run: uv sync --locked
 
-      # actions/download-artifact@v4 has no `if-no-artifact-found` input (that was a v3-only
+      # actions/download-artifact@v8 has no `if-no-artifact-found` input (that was a v3-only
       # input; v4's action.yml only accepts name/artifact-ids/path/pattern/merge-multiple/
       # github-token/repository/run-id -- verified against the action's own action.yml, final fix
       # wave item 4). v4 already doesn't fail the step when a pattern matches zero artifacts (e.g.
       # every acquire matrix job was skipped), so no replacement input is needed.
       - name: Download acquisition artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: acquire-data-*
           path: artifacts
