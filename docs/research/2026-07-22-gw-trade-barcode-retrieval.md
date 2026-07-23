@@ -241,6 +241,34 @@ Cases where the catalog name and the trade name describe different products (e.g
 SQUAD"). These look like pre-existing catalog errors the trade data usefully exposes — worth
 fixing deliberately, not overwriting blindly.
 
+### 5.5 Classifying via the 202-category taxonomy (implemented)
+
+The China Order Form's `Category (ENG)` column (`"40K - Imperium - Astra Militarum"`,
+`"AOS - Order - Stormcast Eternals"`, …) is captured verbatim as the `tradeCategory` hint. The
+strategy no longer just stores it: `data/catalog/mappings/mfr-gw-trade.yaml` now folds that
+manufacturer taxonomy into the catalog's own **coarse** vocabulary (7 game systems; ~76 factions
+where GW's fine factions collapse — every `AOS - <Alliance> - *` → `grand-alliance-<alliance>`,
+each `40K - Xenos - <race>` → its own faction, all `Necromunda -`/`Blood Bowl -` → the sub-game).
+The 200 readable categories were mapped by **rule and cross-checked against the (gameSystem,
+faction) already carried by co-occurring classified products** — 177 of 200 co-occur, and every
+high-purity disagreement was a domain-correct override of a sparse/stale label. Paints, sprays,
+brushes, hobby accessories and the cross-system `Chaos Daemons` bucket are deliberately unmapped.
+
+Two design choices worth recording:
+
+- **Applied at resolve, not harvest** (`resolve/attributes.py`, keyed off the `tradeCategory`
+  hint via `resolver.py::_load_mappings`). The hint is already in committed evidence, so refining
+  the mapping reclassifies on the next `resolve` with **no 30-minute trade re-harvest** — the
+  right layer for a fine→coarse canonicalisation that will be tuned over time.
+- **Null-fallback only.** It fills a product's `gameSystem`/`faction` only when *no* source
+  supplied one; it never overrides an existing classification, and a system-without-a-mapped-faction
+  classifies the system alone rather than guessing.
+
+Measured on the current evidence: **142 previously `gameSystem: null` products newly classified**
+— overwhelmingly Chinese-market SKUs (`… (CHN)`) that the global Algolia storefront never lists,
+which is exactly why no other source had classified them. The other ~1,215 products carrying a
+mappable category were already classified (the taxonomy confirms them); ean-guard: 0 barcodes lost.
+
 ## 6. Terms and licensing
 
 *Not legal advice.* Assessment of the actual documents, since the prior doc's treatment drove a

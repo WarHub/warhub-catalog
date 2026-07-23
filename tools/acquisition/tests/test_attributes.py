@@ -196,3 +196,63 @@ def test_sku_is_resolved_first_non_none() -> None:
     ]
     product = resolve_attributes("e", members, KINDS, NO_EAN, None)
     assert product.sku == "GWS99120110077"
+
+
+# --- tradeCategory fallback classification (mfr-gw-trade China Order Form) ----------------------
+
+TRADE_KINDS = {**KINDS, "mfr-gw-trade": "manufacturer"}
+TRADE_MAPS = {
+    "mfr-gw-trade": {
+        "gameSystem": {"40K": "warhammer-40k", "AOS": "age-of-sigmar", "Necromunda": "other-games"},
+        "faction": {
+            "40K - Xenos - Aeldari": "aeldari",
+            "AOS - Order - Stormcast Eternals": "grand-alliance-order",
+            "Necromunda - Escher": "necromunda",
+        },
+    }
+}
+
+
+def test_trade_category_fills_null_game_system_and_faction() -> None:
+    members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": "40K - Xenos - Aeldari"})]
+    product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120", category_maps=TRADE_MAPS)
+    assert product.gameSystem == "warhammer-40k"
+    assert product.faction == "aeldari"
+
+
+def test_trade_category_never_overrides_a_supplied_game_system() -> None:
+    # A direct gameSystem hint from ANY source wins; the trade fallback only fills genuine nulls,
+    # so it must not overwrite an existing classification even when its own mapping disagrees.
+    members = [
+        obs("mfr-gw:necrons", hints={"gameSystem": "warhammer-40k", "faction": "necrons"}),
+        obs("mfr-gw-trade:99120", hints={"tradeCategory": "AOS - Order - Stormcast Eternals"}),
+    ]
+    product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, None, category_maps=TRADE_MAPS)
+    assert product.gameSystem == "warhammer-40k"
+    assert product.faction == "necrons"
+
+
+def test_trade_category_system_only_when_faction_unmapped() -> None:
+    # "40K - Generic" maps a system but no faction: classify the system, leave faction null
+    # rather than guess.
+    members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": "40K - Generic"})]
+    product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120", category_maps=TRADE_MAPS)
+    assert product.gameSystem == "warhammer-40k"
+    assert product.faction is None
+
+
+def test_trade_category_unmapped_prefix_classifies_nothing() -> None:
+    # A paint/accessory/opaque bucket has no gameSystem prefix in the mapping -> stays null.
+    for raw in ("Paint - WH Colour - Layer", "E:B200b", "Chaos Daemons - Khorne"):
+        members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": raw})]
+        product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120", category_maps=TRADE_MAPS)
+        assert product.gameSystem is None, raw
+        assert product.faction is None, raw
+
+
+def test_trade_fallback_is_inert_without_category_maps() -> None:
+    # The default call path (category_maps=None) must behave exactly as before this feature.
+    members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": "40K - Xenos - Aeldari"})]
+    product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120")
+    assert product.gameSystem is None
+    assert product.faction is None

@@ -1,12 +1,220 @@
-# Scaffold: gw_trade_sheets.py does not consult mapping gameSystem/faction tables -- the trade
-# workbooks selected by this source carry no per-product hierarchy (their `Trade range` column is a
-# merchandising bucket like "BS:A"/"E:P210", not a game system). This file exists so the repo-data
-# tests (test_repo_mappings_parse_when_present et al.) have a mapping file to validate per source.
+# tradeCategory -> catalog taxonomy, consumed at RESOLVE time (resolve/attributes.py), NOT by the
+# strategy. gw_trade_sheets.py emits the China Order Form's `Category (ENG)` value verbatim as the
+# `tradeCategory` hint (e.g. "40K - Imperium - Astra Militarum"); the resolver folds that
+# manufacturer-authoritative taxonomy into the catalog's own coarse (gameSystem, faction) vocabulary
+# below, but ONLY as a fallback for products no source classified directly -- it never overrides a
+# gameSystem another source already supplied. Applied at resolve (not harvest) so refining this file
+# reclassifies on the next `resolve`, with no 30-minute trade re-harvest.
 #
-# Worth revisiting if the China Order Form is ever ingested: it carries a `Category (ENG)` column
-# with 202 distinct manufacturer-authoritative entries of the shape
-# "40K - Imperium - Astra Militarum" / "Kill Team - Generic" / "Paint - WH Colour - Layer", which
-# is a genuine gameSystem+faction taxonomy and would populate these tables properly. Emitted as the
-# `tradeCategory` hint today so the data is not lost.
-gameSystem: {}
-faction: {}
+# `gameSystem` is keyed by the range PREFIX (first " - " segment): a system is decided by the range a
+# product sells under, so a new "40K - <faction>" category is a 40K product the moment it appears.
+# `faction` is keyed by the FULL category string: GW's fine factions fold into the catalog's coarse
+# ones context-dependently (every "AOS - Order - *" -> grand-alliance-order; each "40K - Xenos - *"
+# race is its own faction), and the same leaf ("Imperial Agents") means different things under
+# different systems -- so faction cannot be keyed on a single token. A category present here for
+# gameSystem but absent from `faction` classifies the system only (faction stays null -- honest, not
+# guessed). Built + cross-checked against the (gameSystem, faction) already carried by co-occurring
+# classified products; see docs/research and the PR body. Paints/sprays/brushes/hobby accessories and
+# the cross-system "Chaos Daemons" bucket are deliberately absent -> no gameSystem (paints already
+# carry category=paint from the strategy).
+gameSystem:
+  '40K': warhammer-40k
+  'KT': warhammer-40k
+  'AOS': age-of-sigmar
+  'Old World': the-old-world
+  'HH Astartes': horus-heresy
+  'HH Imperium': horus-heresy
+  'HH Mechanicum': horus-heresy
+  'The Horus Heresy': horus-heresy
+  'Middle-earth': middle-earth
+  'Adeptus Titanicus': other-games
+  'Blood Bowl': other-games
+  'Kill Team': other-games
+  'L/Imperialis Astartes': other-games
+  'L/Imperialis Imperium': other-games
+  'L/Imperialis Mechanicum': other-games
+  'Legions Imperialis': other-games
+  'Necromunda': other-games
+  'WH Quest': other-games
+  'WH Underworlds': other-games
+  'WHU': other-games
+faction:
+  # 40K
+  '40K - Chaos - Chaos Knights': armies-of-chaos
+  '40K - Chaos - Chaos Space Marines': armies-of-chaos
+  '40K - Chaos - Death Guard': armies-of-chaos
+  '40K - Chaos - Emperors Children': armies-of-chaos
+  '40K - Chaos - Thousand Sons': armies-of-chaos
+  '40K - Chaos - World Eaters': armies-of-chaos
+  '40K - Imperium - Adepta Sororitas': armies-of-the-imperium
+  '40K - Imperium - Adeptus Custodes': armies-of-the-imperium
+  '40K - Imperium - Adeptus Mechanicus': armies-of-the-imperium
+  '40K - Imperium - Astra Militarum': armies-of-the-imperium
+  '40K - Imperium - Imperial Agents': armies-of-the-imperium
+  '40K - Imperium - Imperial Knights': armies-of-the-imperium
+  '40K - Space Marines - Black Templars': space-marines
+  '40K - Space Marines - Blood Angels': space-marines
+  '40K - Space Marines - Dark Angels': space-marines
+  '40K - Space Marines - Death Watch': space-marines
+  '40K - Space Marines - Generic': space-marines
+  '40K - Space Marines - Grey Knights': space-marines
+  '40K - Space Marines - Imperial Fists': space-marines
+  '40K - Space Marines - Iron Hands': space-marines
+  '40K - Space Marines - Raven Guard': space-marines
+  '40K - Space Marines - Salamanders': space-marines
+  '40K - Space Marines - Space Wolves': space-marines
+  '40K - Space Marines - Ultramarines': space-marines
+  '40K - Space Marines - White Scars': space-marines
+  '40K - Xenos - Aeldari': aeldari
+  '40K - Xenos - Drukhari': drukhari
+  '40K - Xenos - Genestealer Cults': genestealer-cults
+  '40K - Xenos - Leagues Of Votann': leagues-of-votann
+  '40K - Xenos - Necrons': necrons
+  '40K - Xenos - Orks': orks
+  '40K - Xenos - T''au Empire': tau-empire
+  '40K - Xenos - Tyranids': tyranids
+  # KT
+  'KT - Chaos - Chaos Space Marines': armies-of-chaos
+  'KT - Imperium - Adepta Sororitas': armies-of-the-imperium
+  'KT - Imperium - Adeptus Mechanicus': armies-of-the-imperium
+  'KT - Imperium - Astra Militarum': armies-of-the-imperium
+  'KT - Imperium - Imperial Agents': armies-of-the-imperium
+  'KT - Space Marines - Death Watch': space-marines
+  'KT - Space Marines - Generic': space-marines
+  'KT - Space Marines - Space Wolves': space-marines
+  'KT - Xenos - Aeldari': aeldari
+  'KT - Xenos - Drukhari': drukhari
+  'KT - Xenos - Genestealer Cults': genestealer-cults
+  'KT - Xenos - Leagues Of Votann': leagues-of-votann
+  'KT - Xenos - Necrons': necrons
+  'KT - Xenos - Orks': orks
+  'KT - Xenos - T''au Empire': tau-empire
+  'KT - Xenos - Tyranids': tyranids
+  # AOS
+  'AOS - Chaos - Blades Of Khorne': grand-alliance-chaos
+  'AOS - Chaos - Disciples Of Tzeentch': grand-alliance-chaos
+  'AOS - Chaos - Hedonites Of Slaanesh': grand-alliance-chaos
+  'AOS - Chaos - Helsmiths of Hashut': grand-alliance-chaos
+  'AOS - Chaos - Maggotkin Of Nurgle': grand-alliance-chaos
+  'AOS - Chaos - Skaven': grand-alliance-chaos
+  'AOS - Chaos - Slaves To Darkness': grand-alliance-chaos
+  'AOS - Death - Flesh-Eater Courts': grand-alliance-death
+  'AOS - Death - Generic': grand-alliance-death
+  'AOS - Death - Nighthaunt': grand-alliance-death
+  'AOS - Death - Ossiarch Bonereapers': grand-alliance-death
+  'AOS - Death - Soulblight Gravelords': grand-alliance-death
+  'AOS - Destruction - Generic': grand-alliance-destruction
+  'AOS - Destruction - Gloomspite Gitz': grand-alliance-destruction
+  'AOS - Destruction - Ogor Mawtribes': grand-alliance-destruction
+  'AOS - Destruction - Orruk Warclans': grand-alliance-destruction
+  'AOS - Destruction - Sons Of Behemat': grand-alliance-destruction
+  'AOS - Order - Cities Of Sigmar': grand-alliance-order
+  'AOS - Order - Daughters Of Khaine': grand-alliance-order
+  'AOS - Order - Fyreslayers': grand-alliance-order
+  'AOS - Order - Idoneth Deepkin': grand-alliance-order
+  'AOS - Order - Kharadron Overlords': grand-alliance-order
+  'AOS - Order - Lumineth Realmlords': grand-alliance-order
+  'AOS - Order - Seraphon': grand-alliance-order
+  'AOS - Order - Stormcast Eternals': grand-alliance-order
+  'AOS - Order - Sylvaneth': grand-alliance-order
+  # Old World
+  'Old World - Beastmen': beastman-brayherds
+  'Old World - Bretonnians': kingdom-of-bretonnia
+  'Old World - Chaos': warriors-of-chaos
+  'Old World - Dwarf': dwarfen-mountain-holds
+  'Old World - Empire': empire-of-man
+  'Old World - Grand Cathay': grand-cathay
+  'Old World - High Elves': high-elf-realms
+  'Old World - Orcs And Goblins': orc-and-goblin-tribes
+  'Old World - Tomb Kings': tomb-kings-of-khemri
+  'Old World - Wood Elves': wood-elf-realms
+  # HH Astartes
+  'HH Astartes - Generic': legiones-astartes
+  'HH Astartes - Loyalist - Blood Angels': loyalist-legiones-astartes
+  'HH Astartes - Loyalist - Imperial Fists': loyalist-legiones-astartes
+  'HH Astartes - Loyalist - Space Wolves': loyalist-legiones-astartes
+  'HH Astartes - Loyalist Legiones': loyalist-legiones-astartes
+  'HH Astartes - Traitor - Thousand Sons': traitor-legiones-astartes
+  'HH Astartes - Traitor Legiones': traitor-legiones-astartes
+  # HH Imperium
+  'HH Imperium - Legio Custodes': forces-of-the-emperor
+  'HH Imperium - Solar Auxilia': forces-of-the-emperor
+  # HH Mechanicum
+  'HH Mechanicum - Generic': mechanicum
+  'HH Mechanicum - Knights': mechanicum
+  'HH Mechanicum - Loyalist Mechanicum': mechanicum
+  # Middle-earth
+  'Middle-earth - Elves': the-lord-of-the-rings-good
+  'Middle-earth - Monsters': monsters
+  'Middle-earth - Orcs': the-lord-of-the-rings-evil
+  # Adeptus Titanicus
+  'Adeptus Titanicus - Generic': adeptus-titanicus
+  # Blood Bowl
+  'Blood Bowl - Amazons': blood-bowl
+  'Blood Bowl - Black Orc': blood-bowl
+  'Blood Bowl - Bretonnia': blood-bowl
+  'Blood Bowl - Chaos Chosen': blood-bowl
+  'Blood Bowl - Chaos Dwarfs': blood-bowl
+  'Blood Bowl - Dark Elf': blood-bowl
+  'Blood Bowl - Dwarf': blood-bowl
+  'Blood Bowl - Generic': blood-bowl
+  'Blood Bowl - Gnomes': blood-bowl
+  'Blood Bowl - Goblin': blood-bowl
+  'Blood Bowl - Halfling': blood-bowl
+  'Blood Bowl - High Elf': blood-bowl
+  'Blood Bowl - Human': blood-bowl
+  'Blood Bowl - Khorne': blood-bowl
+  'Blood Bowl - Necromantic Horror': blood-bowl
+  'Blood Bowl - Norse': blood-bowl
+  'Blood Bowl - Nurgle': blood-bowl
+  'Blood Bowl - Ogre': blood-bowl
+  'Blood Bowl - Old World Alliance': blood-bowl
+  'Blood Bowl - Shambling Undead': blood-bowl
+  'Blood Bowl - Skaven': blood-bowl
+  'Blood Bowl - Snotling': blood-bowl
+  'Blood Bowl - Tomb Kings': blood-bowl
+  'Blood Bowl - Underworld Denizens': blood-bowl
+  'Blood Bowl - Vampire Counts': blood-bowl
+  'Blood Bowl - Wood Elf': blood-bowl
+  # Kill Team
+  'Kill Team - Generic': kill-team
+  # L/Imperialis Astartes
+  'L/Imperialis Astartes - Generic': legions-imperialis
+  'L/Imperialis Astartes - Loyalist Legiones': legions-imperialis
+  # L/Imperialis Imperium
+  'L/Imperialis Imperium - Solar Auxilia': legions-imperialis
+  # L/Imperialis Mechanicum
+  'L/Imperialis Mechanicum - Dark Mechanicum': legions-imperialis
+  'L/Imperialis Mechanicum - Generic': legions-imperialis
+  'L/Imperialis Mechanicum - Knights': legions-imperialis
+  'L/Imperialis Mechanicum - Loyalist Mechanicum': legions-imperialis
+  'L/Imperialis Mechanicum - Titans': legions-imperialis
+  # Legions Imperialis
+  'Legions Imperialis - Generic': legions-imperialis
+  # Necromunda
+  'Necromunda - Ash Waste Nomads': necromunda
+  'Necromunda - Cawdor': necromunda
+  'Necromunda - Corpse Grinders': necromunda
+  'Necromunda - Delaque': necromunda
+  'Necromunda - Enforcers': necromunda
+  'Necromunda - Escher': necromunda
+  'Necromunda - Generic': necromunda
+  'Necromunda - Goliath': necromunda
+  'Necromunda - Malstrain Genestealers': necromunda
+  'Necromunda - Orlock': necromunda
+  'Necromunda - Spyrers': necromunda
+  'Necromunda - Squats': necromunda
+  'Necromunda - Van Saar': necromunda
+  # WH Underworlds
+  'WH Underworlds - Generic': warhammer-underworlds
+  # WHU
+  'WHU - Chaos - Blades Of Khorne': warhammer-underworlds
+  'WHU - Chaos - Generic': warhammer-underworlds
+  'WHU - Chaos - Maggotkin Of Nurgle': warhammer-underworlds
+  'WHU - Death - Generic': warhammer-underworlds
+  'WHU - Death - Ossiarch Bonereapers': warhammer-underworlds
+  'WHU - Destruction - Generic': warhammer-underworlds
+  'WHU - Order - Daughters Of Khaine': warhammer-underworlds
+  'WHU - Order - Generic': warhammer-underworlds
+  'WHU - Order - Lumineth Realmlords': warhammer-underworlds
+  'WHU - Order - Seraphon': warhammer-underworlds

@@ -68,10 +68,23 @@ def _dump_product(record: CanonicalProduct) -> dict:
     return data
 
 
+def _load_mappings(directory: Path) -> dict[str, dict]:
+    """`{source_id: mapping}` from data/catalog/mappings/*.yaml (empty dict if the dir is absent).
+
+    A local copy of acquire.runner.load_mappings so this "pure resolver" module keeps its layer
+    boundary -- resolve consumes the same mapping files the strategies do, but must not import the
+    acquire stack (client/robots/cursor) to do it.
+    """
+    if not directory.exists():
+        return {}
+    return {path.stem: (read_yaml(path) or {}) for path in sorted(directory.glob("*.yaml"))}
+
+
 def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
+    category_maps = _load_mappings(paths.mappings)
 
     evidence = EvidenceStore(paths.evidence_products).load_all()
     unknown = set(evidence) - set(descriptors)
@@ -129,7 +142,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         ean_resolutions[entity] = ean
         conflicts.extend(ean.conflicts)
         product = apply_overrides(
-            resolve_attributes(entity, members, kinds, ean, code, superseded=superseded), overrides
+            resolve_attributes(
+                entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps
+            ),
+            overrides,
         )
         # gameSystem is OPTIONAL: a product genuinely belonging to no game system (a base, a
         # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
