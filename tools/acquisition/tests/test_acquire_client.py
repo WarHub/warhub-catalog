@@ -699,6 +699,39 @@ def test_http_cache_serves_second_get_from_disk(tmp_path, monkeypatch) -> None:
     assert calls["n"] == 2
 
 
+def test_http_cache_replays_gzipped_response_without_double_decode(tmp_path, monkeypatch) -> None:
+    # httpx hands the client a DECODED body; replaying the origin's Content-Encoding header
+    # over it from the cache makes httpx decompress a second time (DecodingError "incorrect
+    # header check" -- live-hit 2026-07-23 on Shopify /products.json). The framing headers
+    # must be stripped, and a cache written BEFORE the fix (poisoned headers on disk) must
+    # also replay cleanly thanks to the read-side strip.
+    import gzip as gzip_lib
+
+    monkeypatch.setenv("WARHUB_HTTP_CACHE_DIR", str(tmp_path / "cache"))
+    body = json.dumps({"products": [1, 2, 3]}).encode()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            content=gzip_lib.compress(body),
+            headers={"Content-Encoding": "gzip", "Content-Type": "application/json"},
+        )
+
+    client = PoliteClient(
+        "https://example.test", transport=httpx.MockTransport(handler), sleep=lambda s: None,
+    )
+    assert client.get_json("/products.json") == {"products": [1, 2, 3]}  # writes cache
+    assert client.get_json("/products.json") == {"products": [1, 2, 3]}  # replays from disk
+
+    # Pre-fix poisoned cache entry: decoded body on disk + content-encoding still in headers.
+    cache_dir = tmp_path / "cache"
+    for headers_file in cache_dir.glob("*.headers"):
+        stored = json.loads(headers_file.read_text("utf-8"))
+        stored["content-encoding"] = "gzip"
+        headers_file.write_text(json.dumps(stored), "utf-8")
+    assert client.get_json("/products.json") == {"products": [1, 2, 3]}
+
+
 def test_http_cache_off_by_default(monkeypatch) -> None:
     monkeypatch.delenv("WARHUB_HTTP_CACHE_DIR", raising=False)
     calls = {"n": 0}
