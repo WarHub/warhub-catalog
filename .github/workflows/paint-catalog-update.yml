@@ -66,11 +66,20 @@ jobs:
       - name: Regenerate Citadel paint barcodes from GW trade evidence
         run: uv run --with pyyaml python tools/acquisition/scripts/gen_paint_barcodes.py
 
+      # Refresh data/paints/harvest/*.yaml from the committed manufacturer paint evidence
+      # (mfr-vallejo, mfr-armypainter, ...). Same pattern as the barcode bridge above: reads
+      # only committed files (no network -- paint sources are one-off snapshot harvests run on
+      # demand via catalog-acquire's workflow_dispatch), deterministic, skips brands cleanly
+      # when their evidence is absent. The tool consumes the files via --harvest below.
+      - name: Regenerate manufacturer paint harvest files
+        run: uv run --with pyyaml python tools/acquisition/scripts/gen_paint_harvest.py
+
       - name: Run paint catalog tool
         run: |
           ARGS="--source /tmp/miniature-paints/paints --output data/paints"
           ARGS="$ARGS --overrides data/paints/overrides.yaml --equivalences"
           ARGS="$ARGS --barcodes data/paints/barcodes/citadel-colour.yaml"
+          ARGS="$ARGS --harvest data/paints/harvest"
           ARGS="$ARGS --sample ${{ github.event.inputs.sample || '0' }} --verbose"
           [ -n "${{ github.event.inputs.brand }}" ] && ARGS="$ARGS --brand '${{ github.event.inputs.brand }}'"
           [ "${{ github.event.inputs.scrape || 'true' }}" = "true" ] && ARGS="$ARGS --scrape"

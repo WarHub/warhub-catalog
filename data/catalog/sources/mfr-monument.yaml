@@ -1,0 +1,30 @@
+id: mfr-monument
+kind: manufacturer
+strategy: shopify-paints
+baseUrl: https://monumenthobbies.com
+scope:
+  # Store default currency confirmed live 2026-07-23 via /cart.js -> "USD".
+  currency: usd
+  # monumenthobbies.com is multi-vendor (Tri Art, Mesko Pinsel, Printify merch, ...): only
+  # Monument's own products are in scope for the paint harvest.
+  vendors: [Monument Hobbies]
+  # Live probe 2026-07-23: 333 products; paint-relevant types below (179 Paint Singles,
+  # 21 Paint Sets, 5 Paint Mediums, 10 Primers, 4 Spray Paints). Sets kept as evidence
+  # (set EANs are real retail EANs); the harvest bridge projects singles only.
+  includeTypes: [Paint Singles, Paint Sets, Paint Mediums, Primers, Spray Paints]
+politeness:
+  # Same Shopify bot management as mfr-armypainter: bot-token UA gets a persistent 429 on
+  # /products.json (live matrix 2026-07-23: bot UA 429, browser UA 200). One-off snapshot
+  # source; pacing unchanged.
+  uaProfile: browser
+  rps: 0.5
+budget:
+  pagesPerRun: 40
+contract:
+  # Evidence-based floor (~85% of observed): live probe 2026-07-23 counted 197 products in
+  # the included types with vendor Monument Hobbies. 197 * 0.85 = 167.5 -> 165.
+  minCount: 165
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.9

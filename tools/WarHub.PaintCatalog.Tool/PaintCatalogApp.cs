@@ -43,6 +43,11 @@ internal static class PaintCatalogApp
             Description = "Path to a generated barcode file ({brand}/{Name}|{Set} -> ean/productCode)"
         };
 
+        Option<DirectoryInfo?> harvestOption = new("--harvest")
+        {
+            Description = "Directory of generated manufacturer harvest files (data/paints/harvest)"
+        };
+
         Option<int> sampleOption = new("--sample")
         {
             Description = "Sample N paints per brand (0 = all)",
@@ -75,6 +80,7 @@ internal static class PaintCatalogApp
             outputOption,
             overridesOption,
             barcodesOption,
+            harvestOption,
             sampleOption,
             brandOption,
             equivalencesOption,
@@ -88,6 +94,7 @@ internal static class PaintCatalogApp
             DirectoryInfo output = parseResult.GetValue(outputOption)!;
             FileInfo? overrides = parseResult.GetValue(overridesOption);
             FileInfo? barcodes = parseResult.GetValue(barcodesOption);
+            DirectoryInfo? harvest = parseResult.GetValue(harvestOption);
             int sample = parseResult.GetValue(sampleOption);
             string? brandFilter = parseResult.GetValue(brandOption);
             bool generateEquivalences = parseResult.GetValue(equivalencesOption);
@@ -119,6 +126,10 @@ internal static class PaintCatalogApp
             string outputDir = output.FullName;
             string? overridesPath = overrides?.FullName;
             string? barcodesPath = barcodes?.FullName;
+            IReadOnlyDictionary<string, HarvestApplier.BrandHarvest> harvestData =
+                HarvestApplier.Load(harvest?.FullName);
+            if (verbose && harvestData.Count > 0)
+                Console.WriteLine($"Harvest files loaded for {harvestData.Count} brand(s).");
             string toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
             var brandSummaries = new List<BrandSummary>();
             var allCatalogs = new List<BrandCatalog>();
@@ -178,6 +189,18 @@ internal static class PaintCatalogApp
                     paints = paints.Take(sample).ToList();
                 }
 
+                // Merge harvested additions (committed manufacturer snapshots) BEFORE the
+                // enrichment chain, so volume/type/finish/EAN enrichment treats them like
+                // native paints. Skipped on sampled runs: a sample is a smoke test of the
+                // Arcturus parse, not a place to grow the catalog.
+                if (sample == 0)
+                {
+                    int before = paints.Count;
+                    paints = HarvestApplier.AppendAdditions(paints, brandInfo.Slug, harvestData);
+                    if (verbose && paints.Count > before)
+                        Console.Write($" +{paints.Count - before} harvested");
+                }
+
                 // Enrich with volume/packaging
                 paints = paints.Select(p => VolumeEnricher.Enrich(p, brandInfo.DisplayName)).ToList();
 
@@ -199,6 +222,10 @@ internal static class PaintCatalogApp
                 // Fill EAN + product code from the generated manufacturer-barcode file (only fills
                 // blanks; a manual override below still wins).
                 paints = BarcodeEnricher.Apply(paints, brandInfo.Slug, barcodesPath);
+
+                // Fill blank Ean/ImageUrl from the committed manufacturer harvest (exact
+                // {Name}|{Set} lookups resolved at generation time; overrides below still win).
+                paints = HarvestApplier.ApplyEnrichment(paints, brandInfo.Slug, harvestData);
 
                 // Apply overrides
                 paints = OverrideApplier.Apply(paints, brandInfo.Slug, overridesPath);

@@ -22,17 +22,17 @@ public static class ScrapedBrandRegistry
         };
 
     /// <summary>
-    /// Shopify stores used for paint data enrichment (swatch images, SKUs).
-    /// Key: brand slug, Value: Shopify store configuration.
+    /// Shopify stores used for LIVE paint data enrichment each scrape run. Deliberately empty
+    /// since 2026-07-24: storefront metadata (EANs, swatch images) now flows from the COMMITTED
+    /// harvest files instead (data/paints/harvest/*.yaml via --harvest; produced on demand by
+    /// the acquire pipeline's shopify-paints sources + gen_paint_harvest.py). That covers more
+    /// ranges than the two collections this registry reached, needs no network in the weekly
+    /// job, and stops the per-run ProductCode overwrite from store SKUs that re-keyed paint
+    /// identities (store SKUs are recorded in the harvest files for audit instead). The
+    /// registry and mechanism stay for a store that ever genuinely needs live enrichment.
     /// </summary>
     public static readonly IReadOnlyDictionary<string, ShopifyPaintStoreInfo> ShopifyStores =
-        new Dictionary<string, ShopifyPaintStoreInfo>(StringComparer.OrdinalIgnoreCase)
-        {
-            ["army-painter"] = new(
-                BrandSlug: "army-painter",
-                BaseUrl: "https://thearmypainter.com",
-                Collections: ["warpaints-fanatic", "speedpaint"]),
-        };
+        new Dictionary<string, ShopifyPaintStoreInfo>(StringComparer.OrdinalIgnoreCase);
 }
 
 /// <summary>

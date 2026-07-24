@@ -2,4 +2,4 @@
 
 | source | status | full sweep | observations | marked missed | stats |
 |---|---|---|---|---|---|
-| ret-radaddel | ok | False | 4095 | 0 | ean_source_bcdata=0, ean_source_jsonld=0, ean_source_microdata=3614, eans_found=3614, extraction_failed=870, fetch_errors=0, fetched_sitemaps=2, pages_fetched=12854, sitemap_urls_filtered=12854, sitemap_urls_total=12854, skipped_unknown_manufacturer=7889 |
+| mfr-turbodork | ok | False | 357 | 0 | barcodes_found=329, detail_fetch_errors=0, details_fetched=357, enumeration_capped=0, enumeration_capped_by_400=0, fetched_pages=3, kept_paint_products=357, out_of_scope_vendor=12, products_seen=389, skipped_type=20, skipped_unknown_vendor=0 |

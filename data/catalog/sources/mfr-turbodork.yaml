@@ -1,0 +1,28 @@
+id: mfr-turbodork
+kind: manufacturer
+strategy: shopify-paints
+baseUrl: https://turbodork.com
+scope:
+  # Store default currency confirmed live 2026-07-23 via /cart.js -> "USD".
+  currency: usd
+  vendors: [Turbo Dork]
+  # Live probe 2026-07-23: 389 products; product_type doubles as the range name for the
+  # paint lines (TurboShift 33, Metallic 40, ZeniShift 7). "Retail" (275) is the legacy
+  # mixed bucket that still contains paints -- kept in evidence, bridge classifies.
+  includeTypes: [TurboShift, Metallic, ZeniShift, Retail, Medium]
+politeness:
+  # Shopify bot management on this shop throttles bot-token UAs inconsistently (isolated
+  # probe 200, full run 429 on page 1, 2026-07-23/24) -- same treatment as mfr-armypainter /
+  # mfr-monument. One-off snapshot source; pacing unchanged.
+  uaProfile: browser
+  rps: 0.5
+budget:
+  pagesPerRun: 40
+contract:
+  # Evidence-based floor (~85% of observed): live probe 2026-07-23 counted 357 products in
+  # the included types with vendor Turbo Dork. 357 * 0.85 = 303.4 -> 300.
+  minCount: 300
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.9

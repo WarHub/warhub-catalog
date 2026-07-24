@@ -64,3 +64,36 @@ manufacturers:
     # "Wyrd", 2 "Wyrd Games", 1 "Wyrd Miniatures", 1 "WYRD - PROMO") -- all the same company's
     # own catalog, no other vendor observed. See task-6-report.md.
     vendorNames: [Wyrd Games, Wyrd Miniatures, Wyrd, 'Wyrd Miniatures - Online Store', 'WYRD - PROMO']
+  # --- Paint manufacturers (paint harvest sources; see
+  # docs/research/2026-07-23-paint-manufacturer-harvest-design.md) ---
+  - slug: vallejo
+    name: Vallejo
+    codePattern: '\d{2}\.\d{3}'
+    # GS1 prefix verified by the paint tool's EanComputer (computed Vallejo EANs are
+    # 8429551 + code digits + check digit).
+    gs1Prefixes: ['8429551']
+    vendorNames: [Vallejo, Acrylicos Vallejo, AV]
+  - slug: ak-interactive
+    name: AK Interactive
+    codePattern: '(AK|RC|ABT)\s?\d{2,5}[A-Z]?(-[A-Z0-9]+)?'
+    vendorNames: [AK Interactive, AK-Interactive]
+  - slug: army-painter
+    name: The Army Painter
+    codePattern: '(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-Z]?'
+    # EAN 5713799314009 observed live on thearmypainter.com variant barcode (Warpaints
+    # Fanatic: Moldy Wine, WP3140P) -> GS1 Denmark company prefix.
+    gs1Prefixes: ['5713799']
+    # thearmypainter.com (own Shopify store, probed 2026-07-23) tags every product with
+    # vendor "The Army Painter (B2C)".
+    vendorNames: [The Army Painter, 'The Army Painter (B2C)', Army Painter]
+  - slug: monument-hobbies
+    name: Monument Hobbies
+    codePattern: 'MPA-[A-Z0-9]+'
+    # UPC-12 655368409059 observed live on monumenthobbies.com variant barcode
+    # (Pro Acryl 1-Step 501) -> EAN-13 zero-padded prefix.
+    gs1Prefixes: ['0655368']
+    vendorNames: [Monument Hobbies]
+  - slug: turbo-dork
+    name: Turbo Dork
+    codePattern: 'TDK\d+(_\d)?'
+    vendorNames: [Turbo Dork, TurboDork]

@@ -15,6 +15,17 @@ if TYPE_CHECKING:
 
 UA = "warhub-catalog-bot/1.0 (+https://github.com/WarHub/warhub-catalog)"
 
+# Generic evergreen-browser UA for the rare descriptor whose origin WAF hard-403s any
+# non-browser UA on public, unauthenticated catalog endpoints (politeness.uaProfile: browser --
+# see runner.run_source). This changes ONLY the identification string: pacing, retry, robots
+# handling and the request footprint stay exactly as configured. Each descriptor using it must
+# document why (live-verified 403) inline. Kept deliberately version-frozen: rotating it per
+# release would be UA-cloaking churn for zero benefit.
+BROWSER_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+)
+
 _MAX_ATTEMPTS = 3
 
 # Ceiling on how long a single request will block on a RATE-LIMIT (429) backoff -- and 429 ONLY.
@@ -109,6 +120,7 @@ class PoliteClient:
         sleep: Callable[[float], None] = time.sleep,
         timeout: float = 30.0,
         robots: "RobotsPolicy | None" = None,
+        robots_user_agent: str | None = None,
     ) -> None:
         # Explicit timeout, default 30s -- httpx's own default is 5s, which real slow-but-healthy
         # endpoints blow through: Wayback CDX data pages are 200KB+ and took 3-7s+ in live
@@ -120,6 +132,11 @@ class PoliteClient:
         self._sleep = sleep
         self._last_request_at: float | None = None
         self._user_agent = user_agent
+        # Robots rules are always evaluated under the canonical bot token, even when the
+        # PRESENTED UA is a browser profile (politeness.uaProfile: browser): matching our own
+        # rules under a generic browser string would silently skip a site's explicit
+        # `warhub-catalog-bot` group -- the bot token is the honest, stricter match.
+        self._robots_user_agent = robots_user_agent or user_agent
         # `None` (the default) means "no robots checking" -- used for tests, for the bare probe
         # client `runner.run_source` uses to fetch robots.txt itself (checking robots against the
         # robots.txt fetch would be nonsensical), and for `ignoreRobots: true` descriptors (see
@@ -150,6 +167,18 @@ class PoliteClient:
         base = self._cache_dir / digest
         return base, base.with_suffix(".headers")
 
+    # The cached body is response.content -- httpx has ALREADY decoded any gzip/deflate
+    # transfer encoding by then. Replaying the original Content-Encoding header over that
+    # decoded body makes httpx try to decompress it a second time on read (DecodingError
+    # "incorrect header check" -- live-hit 2026-07-23 on Shopify /products.json, which gzips).
+    # Strip the encoding/length framing headers on BOTH write and read: write so new entries
+    # are clean, read so caches written before this fix still replay fine.
+    _CACHE_STRIP_HEADERS = ("content-encoding", "content-length", "transfer-encoding")
+
+    @classmethod
+    def _clean_cache_headers(cls, headers: dict) -> dict:
+        return {k: v for k, v in headers.items() if k.lower() not in cls._CACHE_STRIP_HEADERS}
+
     def _cache_read(self, method: str, url: str, params: dict | None) -> "httpx.Response | None":
         if self._cache_dir is None:
             return None
@@ -158,7 +187,7 @@ class PoliteClient:
             return None
         headers = json.loads(headers_path.read_text("utf-8")) if headers_path.exists() else {}
         return httpx.Response(
-            200, content=body_path.read_bytes(), headers=headers,
+            200, content=body_path.read_bytes(), headers=self._clean_cache_headers(headers),
             request=self._client.build_request(method, url, params=params),
         )
 
@@ -167,7 +196,9 @@ class PoliteClient:
             return
         body_path, headers_path = self._cache_paths(method, url, params)
         body_path.write_bytes(response.content)
-        headers_path.write_text(json.dumps(dict(response.headers)), "utf-8")
+        headers_path.write_text(
+            json.dumps(self._clean_cache_headers(dict(response.headers))), "utf-8"
+        )
 
     @property
     def robots(self) -> "RobotsPolicy | None":
@@ -222,9 +253,9 @@ class PoliteClient:
         # `RobotsPolicy.allows` is a pure in-memory check over the already-parsed policy.
         if self._robots is not None:
             full_url = str(self._client.build_request(method, url, params=params).url)
-            if not self._robots.allows(full_url, self._user_agent):
-                disallow = self._robots.disallowed_by(full_url, self._user_agent)
-                token, rule = disallow if disallow is not None else (self._user_agent, None)
+            if not self._robots.allows(full_url, self._robots_user_agent):
+                disallow = self._robots.disallowed_by(full_url, self._robots_user_agent)
+                token, rule = disallow if disallow is not None else (self._robots_user_agent, None)
                 rule_detail = f" ({rule})" if rule else ""
                 raise RobotsDisallowedError(
                     f"robots.txt disallows fetching {full_url} for user-agent {token!r}{rule_detail}",
