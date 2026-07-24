@@ -407,12 +407,61 @@ def bridge_turbodork() -> BrandHarvest:
     return out
 
 
+# scale75.com collection handle -> Arcturus set spelling ("Warfront  Range" really has two
+# spaces in the base data). Handles absent here (drop-paint, flow/floww, scalecolor-games,
+# prism sets) are ranges the catalog does not know yet -> candidates for a later promotion.
+SCALE75_SET_BY_COLLECTION = {
+    "scalecolor-individual": "Scale Color Range",
+    "artist-individuales": "Artist Range",
+    "warfront-individuales": "Warfront  Range",
+    "fantasy-games-individuales": "Fantasy & Games Range",
+    "instant-individuales": "Instant Colors Range",
+    "metal-n-alchemy-individuales": "Metal N Alchemy Range",
+    "inktensity-individuales": "Inktensity Range",
+    "fx-fluor-individuales": "FX Range",
+}
+
+
+def bridge_scale75() -> BrandHarvest:
+    """METADATA role: Arcturus scale75 has no product codes, so joins are name-based with the
+    collection membership as the set hint (the store publishes no other range signal). No EANs
+    exist on the store (variant barcodes unpopulated, verified 2026-07-24) -- enrichment is
+    images/source URLs; unmatched singles surface as candidates, including the whole
+    Drop & Paint / Floww / Scalecolor Games ranges pending promotion review."""
+    catalog = Catalog("scale75")
+    out = BrandHarvest()
+    for o in read_observations("mfr-scale75"):
+        collections = (o.get("hints") or {}).get("collections") or []
+        set_hint = next(
+            (SCALE75_SET_BY_COLLECTION[c] for c in collections if c in SCALE75_SET_BY_COLLECTION),
+            None,
+        )
+        if set_hint is not None:
+            key = catalog.match_name(o["name"], set_hint) or catalog.match_name(o["name"])
+            if key is not None:
+                out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=o.get("sku"),
+                               sourceUrl=o.get("url"), source="mfr-scale75")
+                continue
+            reason = f"single not in catalog set {set_hint} (new or renamed)"
+        else:
+            reason = (
+                "range not in catalog (promotion candidate): "
+                + ",".join(c for c in collections if "individuales" in c or c in ("prism",))
+            )
+        out.candidates.append(
+            {"name": o["name"], "sku": o.get("sku"), "url": o.get("url"),
+             "source": "mfr-scale75", "reason": reason}
+        )
+    return out
+
+
 BRIDGES = {
     "vallejo": bridge_vallejo,
     "ak-interactive": bridge_ak,
     "army-painter": bridge_armypainter,
     "monument-pro-acryl": bridge_monument,
     "turbo-dork": bridge_turbodork,
+    "scale75": bridge_scale75,
 }
 
 

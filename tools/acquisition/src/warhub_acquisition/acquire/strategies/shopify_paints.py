@@ -9,10 +9,36 @@ pending_details) -- specialized for paint catalogs:
   -- some Army Painter paint ranges ship untyped). Omitted = every product observed.
 - scope.vendors: optional exact vendor allow-list applied BEFORE taxonomy attribution
   (monumenthobbies.com carries Tri Art / Mesko Pinsel / ... third-party stock).
+- scope.collections: optional list of collection handles. When present, enumeration walks
+  /collections/{handle}/products.json (each paginated to an empty page, in descriptor order)
+  INSTEAD of the store-wide /products.json; absent, behavior is exactly the store-wide
+  enumeration above. Built for scale75.com (live recon 2026-07-24): that store's product_type
+  is empty store-wide and its tags are generic (PINTURAS / PINTURAS INDIVIDUALES), so
+  per-range collection membership is the ONLY range signal the store publishes -- it must be
+  captured at harvest time, because the store-wide listing cannot ever be re-parsed into
+  ranges. Every scoped collection a product was listed in is recorded as hints.collections
+  (sorted) for the downstream bridge's range attribution. Products are deduped by handle: the
+  FIRST collection (descriptor order) to list a handle supplies the payload -- Shopify renders
+  the same product object in every collection listing (modulo updated_at, which can tick
+  between page fetches), so first-wins is determinism, not data selection. Descriptor ordering
+  convention: specific range collections first, catch-all/umbrella collections LAST. Range
+  attribution never depends on that order (hints.collections records every membership), but a
+  degraded enumeration (platform cap / mid-walk 400) loses tail collections first -- ordering
+  the umbrella last means coverage of range-less strays is what degrades, never a specific
+  range's attribution. A nonexistent handle 404s and fails the run loudly -- exactly what a
+  descriptor typo should do. scope.maxEnumerationPages, when combined with collections,
+  bounds each collection's walk individually (same platform cap either way).
+- scope.skipDetails: true skips the per-handle /products/{handle}.js barcode queue entirely:
+  no detail fetches, no updated_at/detailMisses/pending_details bookkeeping (the cursor stays
+  empty), and full_sweep is simply "enumeration wasn't capped". For stores whose variant
+  barcodes are unpopulated store-wide (scale75.com, verified 2026-07-24: sampled .js details
+  all carry barcode null), the detail sweep would spend hundreds of requests per run to learn
+  nothing -- and would KEEP spending them until every handle exhausts DETAIL_MISS_CAP.
 - Observations keep the store title verbatim as `name`; paint-relevant raw signals ride along
   in hints for the downstream bridge (scripts/gen_paint_harvest.py) to parse into
   range/paint-name/volume per brand: hints.productType, hints.grams (first variant),
-  hints.tags (sorted verbatim), hints.category = "paint".
+  hints.tags (sorted verbatim), hints.collections (scoped-collection mode only),
+  hints.category = "paint".
 
 Range/single classification deliberately does NOT happen here: evidence stays faithful to the
 store, and re-tuning brand parsing must never require a re-fetch.
@@ -51,6 +77,7 @@ def _build_observation(
     manufacturer: str,
     ean: str | None,
     run_date: str,
+    collections: set[str] | None = None,
 ) -> Observation:
     handle = product["handle"]
     first_variant = _first_variant(product)
@@ -70,6 +97,8 @@ def _build_observation(
     grams = _grams(product)
     if grams is not None:
         hints["grams"] = grams
+    if collections:
+        hints["collections"] = sorted(collections)
     tags = product.get("tags") or []
     if tags:
         hints["tags"] = sorted(str(t) for t in tags)
@@ -89,6 +118,35 @@ def _build_observation(
         extractor=EXTRACTOR,
         **price_kwargs,
     )
+
+
+def _paginate_products(
+    client: PoliteClient, path: str, stats: dict[str, int], max_pages: int
+) -> tuple[list[dict], bool]:
+    """Walk one products.json listing (store-wide or per-collection) until an empty page.
+
+    Returns (products, capped). Same defensive posture as shopify.py: a 400 means the platform
+    cap moved -- report the walk as capped, never kill the whole source over it (an empty
+    page-1 store fires minCount instead).
+    """
+    listed: list[dict] = []
+    page = 1
+    while page <= max_pages:
+        try:
+            payload = client.get_json(path, params={"limit": PAGE_LIMIT, "page": page})
+        except FetchError as error:
+            if error.status == 400:
+                stats["enumeration_capped_by_400"] += 1
+                return listed, True
+            raise
+        stats["fetched_pages"] += 1
+        page_products = payload.get("products") if isinstance(payload, dict) else None
+        page_products = page_products or []
+        if not page_products:
+            return listed, False
+        listed.extend(page_products)
+        page += 1
+    return listed, True
 
 
 def shopify_paints_strategy(
@@ -120,30 +178,29 @@ def shopify_paints_strategy(
         max_pages = min(max_pages, scoped_max_pages)
 
     # --- Enumerate: always full, cheap pages -- until an empty page or the platform cap. ---
+    # Two modes (see module docstring): store-wide /products.json (the default), or -- when
+    # scope.collections is present -- each scoped /collections/{handle}/products.json in
+    # descriptor order, deduped by handle with every membership recorded for attribution.
+    scope_collections = descriptor.scope.get("collections")
     products: dict[str, dict] = {}
-    page = 1
+    collections_by_handle: dict[str, set[str]] = {}
     enumeration_capped = False
-    while page <= max_pages:
-        try:
-            payload = client.get_json("/products.json", params={"limit": PAGE_LIMIT, "page": page})
-        except FetchError as error:
-            if error.status == 400:
-                # Same defensive posture as shopify.py: the platform cap moved; never kill
-                # the whole source over it (an empty page-1 store fires minCount instead).
-                stats["enumeration_capped_by_400"] += 1
-                enumeration_capped = True
-                break
-            raise
-        stats["fetched_pages"] += 1
-        page_products = payload.get("products") if isinstance(payload, dict) else None
-        page_products = page_products or []
-        if not page_products:
-            break
-        for product in page_products:
-            products[product["handle"]] = product
-        page += 1
+    if scope_collections:
+        stats["collections_enumerated"] = 0
+        for collection in scope_collections:
+            listed, capped = _paginate_products(
+                client, f"/collections/{collection}/products.json", stats, max_pages
+            )
+            stats["collections_enumerated"] += 1
+            enumeration_capped = enumeration_capped or capped
+            for product in listed:
+                handle = product["handle"]
+                products.setdefault(handle, product)
+                collections_by_handle.setdefault(handle, set()).add(collection)
     else:
-        enumeration_capped = True
+        listed, enumeration_capped = _paginate_products(client, "/products.json", stats, max_pages)
+        for product in listed:
+            products[product["handle"]] = product
 
     if enumeration_capped:
         stats["enumeration_capped"] = 1
@@ -153,6 +210,7 @@ def shopify_paints_strategy(
     # --- Filter to paint-relevant products, attribute manufacturer, bucket detail queue. ---
     include_types = descriptor.scope.get("includeTypes")
     scope_vendors = descriptor.scope.get("vendors")
+    skip_details = bool(descriptor.scope.get("skipDetails"))
 
     manufacturer_by_handle: dict[str, str] = {}
     new_candidates: list[str] = []
@@ -173,6 +231,11 @@ def shopify_paints_strategy(
             continue
         manufacturer_by_handle[handle] = manufacturer
 
+        if skip_details:
+            # scope.skipDetails: the classification below only feeds the .js detail queue,
+            # which this source has opted out of entirely.
+            continue
+
         bulk_updated_at = product.get("updated_at") or ""
         recorded = old_updated_at.get(handle)
         if recorded is not None:
@@ -188,60 +251,72 @@ def shopify_paints_strategy(
 
     kept_handles = set(manufacturer_by_handle)
     stats["kept_paint_products"] = len(kept_handles)
-    detail_queue = (
-        sorted(new_candidates)
-        + sorted(missing_ean_candidates)
-        + sorted(stale_candidates, key=lambda h: old_updated_at[h].get("updatedAt", ""))
-    )
 
-    budget = context.budget
-    to_fetch = detail_queue if budget is None else detail_queue[: max(budget, 0)]
-    to_fetch_set = set(to_fetch)
+    new_updated_at: dict[str, dict] = {}
+    pending_details: list[str] = []
+    if not skip_details:
+        detail_queue = (
+            sorted(new_candidates)
+            + sorted(missing_ean_candidates)
+            + sorted(stale_candidates, key=lambda h: old_updated_at[h].get("updatedAt", ""))
+        )
 
-    # Carry forward every known ean this run isn't (re)fetching -- never silently drop a
-    # confirmed ean just because the budget didn't reach its handle (see shopify.py docstring).
-    new_updated_at: dict[str, dict] = {
-        handle: old_updated_at[handle]
-        for handle in kept_handles
-        if handle in old_updated_at and handle not in to_fetch_set
-    }
+        budget = context.budget
+        to_fetch = detail_queue if budget is None else detail_queue[: max(budget, 0)]
+        to_fetch_set = set(to_fetch)
 
-    refreshed_this_run: set[str] = set()
-    for handle in to_fetch:
-        product = products[handle]
-        stats["details_fetched"] += 1
-        try:
-            detail = client.get_json(f"/products/{handle}.js")
-        except FetchError:
-            stats["detail_fetch_errors"] += 1
-            if handle in old_updated_at:
-                new_updated_at[handle] = old_updated_at[handle]
-            continue
+        # Carry forward every known ean this run isn't (re)fetching -- never silently drop a
+        # confirmed ean just because the budget didn't reach its handle (see shopify.py docstring).
+        new_updated_at = {
+            handle: old_updated_at[handle]
+            for handle in kept_handles
+            if handle in old_updated_at and handle not in to_fetch_set
+        }
 
-        bulk_updated_at = product.get("updated_at") or ""
-        barcode = _extract_barcode(detail if isinstance(detail, dict) else {})
-        if barcode:
-            stats["barcodes_found"] += 1
-            new_updated_at[handle] = {"updatedAt": bulk_updated_at, "ean": barcode}
-            refreshed_this_run.add(handle)
-        else:
-            previous = old_updated_at.get(handle)
-            if previous is not None and bulk_updated_at <= previous.get("updatedAt", ""):
-                misses = previous.get("detailMisses", 0)
+        refreshed_this_run: set[str] = set()
+        for handle in to_fetch:
+            product = products[handle]
+            stats["details_fetched"] += 1
+            try:
+                detail = client.get_json(f"/products/{handle}.js")
+            except FetchError:
+                stats["detail_fetch_errors"] += 1
+                if handle in old_updated_at:
+                    new_updated_at[handle] = old_updated_at[handle]
+                continue
+
+            bulk_updated_at = product.get("updated_at") or ""
+            barcode = _extract_barcode(detail if isinstance(detail, dict) else {})
+            if barcode:
+                stats["barcodes_found"] += 1
+                new_updated_at[handle] = {"updatedAt": bulk_updated_at, "ean": barcode}
+                refreshed_this_run.add(handle)
             else:
-                misses = 0
-            new_updated_at[handle] = {"updatedAt": bulk_updated_at, "detailMisses": misses + 1}
+                previous = old_updated_at.get(handle)
+                if previous is not None and bulk_updated_at <= previous.get("updatedAt", ""):
+                    misses = previous.get("detailMisses", 0)
+                else:
+                    misses = 0
+                new_updated_at[handle] = {"updatedAt": bulk_updated_at, "detailMisses": misses + 1}
+
+        pending_details = sorted(set(detail_queue) - refreshed_this_run)
 
     observations: list[Observation] = []
     for handle in sorted(kept_handles):
         ean = new_updated_at.get(handle, {}).get("ean")
         observations.append(
             _build_observation(
-                descriptor, products[handle], manufacturer_by_handle[handle], ean, context.run_date
+                descriptor,
+                products[handle],
+                manufacturer_by_handle[handle],
+                ean,
+                context.run_date,
+                collections=collections_by_handle.get(handle),
             )
         )
 
-    pending_details = sorted(set(detail_queue) - refreshed_this_run)
+    # skipDetails leaves pending_details empty by construction, so full_sweep degenerates to
+    # "enumeration wasn't capped" -- exactly the population-completeness claim mark_missed needs.
     full_sweep = not pending_details and not enumeration_capped
 
     return StrategyResult(
