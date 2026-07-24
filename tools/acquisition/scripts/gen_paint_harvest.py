@@ -165,6 +165,21 @@ class BrandHarvest:
         return out
 
 
+def previous_addition_codes(slug: str) -> set[str]:
+    """Codes emitted as additions in the brand's committed harvest file. Additions must be a
+    STABLE projection of the source: once a merge lands an addition, the catalog code-matches
+    it, and a catalog-gated bridge would flip it to enrich-only — the next merge would then
+    drop it from the fresh set entirely (it exists nowhere but this file). This ratchet keeps
+    prior additions additions (hand-prune the file to actually retire one); the C# (Name, Set,
+    Code) skip keeps re-emission idempotent against Arcturus-covered paints."""
+    path = OUT_DIR / f"{slug}.yaml"
+    if not path.exists():
+        return set()
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    additions = (data.get(slug) or {}).get("additions") or []
+    return {str(a.get("productCode")) for a in additions if a.get("productCode")}
+
+
 def vallejo_code(raw_sku: str | None) -> str | None:
     """'72001' -> '72.001' (Vallejo's display/catalog code). Non-5-digit codes pass through."""
     if not raw_sku:
@@ -177,6 +192,7 @@ def vallejo_code(raw_sku: str | None) -> str | None:
 
 def bridge_vallejo() -> BrandHarvest:
     catalog = Catalog("vallejo")
+    prior_additions = previous_addition_codes("vallejo")
     out = BrandHarvest()
     for o in read_observations("mfr-vallejo"):
         slugs = (o.get("hints") or {}).get("categorySlugs") or []
@@ -194,14 +210,18 @@ def bridge_vallejo() -> BrandHarvest:
         key = catalog.match_code(code)
         if key is None and set_name is not None:
             key = catalog.match_name(o["name"], set_name)
-        if key is not None:
+        is_prior_addition = code in prior_additions
+        if key is not None and not is_prior_addition:
             out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=code, **common)
         elif set_name is not None:
+            # New-to-catalog singles AND prior additions (ratchet -- see
+            # previous_addition_codes): additions must not flip to enrich-only just because
+            # an earlier merge landed them.
             out.additions.append(
                 {"name": o["name"], "set": set_name, "productCode": code,
                  "imageUrl": o.get("imageUrl"), **common}
             )
-        else:
+        elif key is None:
             out.candidates.append(
                 {"name": o["name"], "sku": code, "url": o.get("url"), "source": "mfr-vallejo",
                  "reason": f"no set mapping for categories: {','.join(slugs) or '(none)'}"}
@@ -209,23 +229,95 @@ def bridge_vallejo() -> BrandHarvest:
     return out
 
 
+# AK store singles suffix their names with the subseries ("PURPLE – STANDARD",
+# "SPACE MAGENTA – QUICK GEN COLOR") -- far more reliable than the sprawling category tree.
+# Values are the Arcturus set spellings where the subseries exists there; starred are new.
+AK_SET_BY_SUFFIX = {
+    "STANDARD": "Standard (3rd Gen)",
+    "METALLIC": "Metallic (3rd Gen)",
+    "INTENSE": "Intense (3rd Gen)",
+    "PASTEL": "Pastel (3rd Gen)",
+    "INK": "Ink (3rd Gen)",
+    "QUICK GEN COLOR": "Quick Gen",  # *
+    "COLOR PUNCH": "Color Punch (3rd Gen)",  # *
+}
+AK_SINGLE_SKU = re.compile(r"^AK\d{4,5}$")
+_AK_SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
+
+
+def ak_prettify(name: str) -> str:
+    """ALL-CAPS store name -> the Arcturus capitalization style (plain per-word capitalize:
+    'APC INTERIOR LIGHT GREEN (FS24533)' -> 'Apc Interior Light Green (fs24533)'-ish)."""
+    words = []
+    for word in name.lower().split():
+        words.append(word if word.startswith("(") and any(ch.isdigit() for ch in word)
+                     else word.capitalize())
+    return " ".join(words)
+
+
+def ak_split(name: str) -> tuple[str, str | None]:
+    """'SPACE MAGENTA – QUICK GEN COLOR' -> ('SPACE MAGENTA', 'QUICK GEN COLOR')."""
+    for dash in (" – ", " - "):
+        if dash in name:
+            base, _, suffix = name.rpartition(dash)
+            return base.strip(), suffix.strip().upper()
+    return name.strip(), None
+
+
 def bridge_ak() -> BrandHarvest:
+    """CATALOG role for the store's paint singles since 2026-07-24 (owner-approved promotion):
+    the Trello-tracked gaps (Quick Gen range, 3rd-gen review) come exactly from here. Sets,
+    bundles, guides and everything without a clean AK-number SKU stay out; washes ride along
+    as their own set. Additions are born colour-less; chart swatches heal them later."""
     catalog = Catalog("ak-interactive")
+    prior_additions = previous_addition_codes("ak-interactive")
     out = BrandHarvest()
     for o in read_observations("mfr-ak-interactive"):
         sku = str(o.get("sku") or "")
         key = catalog.match_code(sku)
-        if key is not None:
-            out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=sku,
-                           sourceUrl=o.get("url"), source="mfr-ak-interactive")
-        else:
-            slugs = (o.get("hints") or {}).get("categorySlugs") or []
-            is_set = any("set" in s for s in slugs) or "SET" in (o.get("name") or "").upper()
+        common = {"sourceUrl": o.get("url"), "source": "mfr-ak-interactive"}
+        if key is not None and sku not in prior_additions:
+            out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=sku, **common)
+            continue
+
+        slugs = set((o.get("hints") or {}).get("categorySlugs") or [])
+        name_raw = o["name"]
+        is_set = (
+            bool({"3rd-set", "paints-acrylics-sets", "b2b-3gen-sets"} & slugs)
+            or _AK_SET_WORDS.search(name_raw) is not None
+        )
+        if is_set or not AK_SINGLE_SKU.fullmatch(sku):
             out.candidates.append(
-                {"name": o["name"], "sku": sku or None, "url": o.get("url"),
+                {"name": name_raw, "sku": sku or None, "url": o.get("url"),
                  "source": "mfr-ak-interactive",
-                 "reason": "set/bundle (not a single)" if is_set else "no matching product code in catalog"}
+                 "reason": "set/bundle/guide (not a promotable single)"}
             )
+            continue
+
+        base, suffix = ak_split(name_raw)
+        set_name = AK_SET_BY_SUFFIX.get(suffix or "")
+        if suffix == "INK" and not sku.startswith("AK112"):
+            # Two distinct ink lines share the "– INK" suffix: 3rd-gen inks are AK112xx
+            # (Arcturus "Ink (3rd Gen)"); the standalone The-Inks range is AK16xxx.
+            set_name = "Inks"
+        if set_name is None:
+            if "acrylic-wash" in slugs:
+                set_name = "Acrylic Wash"  # new set: Arcturus has no AK wash range
+            elif "3rd-acrylics" in slugs and suffix is None:
+                # Un-suffixed 3rd-gen singles (effects etc.) join the dominant set.
+                set_name = "Standard (3rd Gen)"
+        if set_name is None:
+            out.candidates.append(
+                {"name": name_raw, "sku": sku, "url": o.get("url"),
+                 "source": "mfr-ak-interactive",
+                 "reason": f"single outside promoted ranges (suffix: {suffix or '(none)'})"}
+            )
+            continue
+
+        out.additions.append(
+            {"name": ak_prettify(base), "set": set_name, "productCode": sku,
+             "imageUrl": o.get("imageUrl"), **common}
+        )
     return out
 
 

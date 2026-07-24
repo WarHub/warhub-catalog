@@ -19,6 +19,10 @@ public static class VolumeTable
         new("Vallejo", ["Metal Color"], 32, "dropper"),
         new("Vallejo", ["True Metallic Metal"], 18, "dropper"),
         new("Vallejo", ["Pigment FX"], 30, "jar"),
+        // AK promoted ranges (2026-07-24): Quick Gen bottles are 18 ml ("79 COLORS + 1 MEDIUM
+        // 18ML" full-range listing); Color Punch ships in the standard 3rd-gen 17 ml dropper.
+        new("AK Interactive", ["Quick Gen"], 18, "dropper"),
+        new("AK Interactive", ["Color Punch (3rd Gen)"], 17, "dropper"),
         new("Vallejo", ["Liquid Gold"], 35, "dropper"),
         new("Vallejo", ["Premium Airbrush Color"], 60, "dropper"),
         new("Vallejo", ["Hobby Paint"], 18, "dropper"),
