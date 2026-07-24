@@ -65,7 +65,9 @@ internal sealed record PaintRecord(
     [property: JsonPropertyOrder(3)] string Category,
     [property: JsonPropertyOrder(4)] string? Range,
     [property: JsonPropertyOrder(5)] string Name,
-    [property: JsonPropertyOrder(6)] string Hex,
+    // Null = colour not yet known (harvested additions await chart-swatch extraction); the
+    // property is omitted from the JSON entirely rather than published as "".
+    [property: JsonPropertyOrder(6)] string? Hex,
     [property: JsonPropertyOrder(7)] string? Type,
     [property: JsonPropertyOrder(8)] string? Finish,
     [property: JsonPropertyOrder(9)] int? VolumeMl,

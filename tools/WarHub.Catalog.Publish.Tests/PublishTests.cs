@@ -11,7 +11,7 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     public void Publishes_expected_counts()
     {
         Assert.Equal(2, fx.Result.Products);
-        Assert.Equal(3, fx.Result.Paints);
+        Assert.Equal(4, fx.Result.Paints);
     }
 
     [Fact]
@@ -59,6 +59,17 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
         Assert.Equal("Base", abaddon.GetProperty("range").GetString());
         Assert.Equal("#231f20", abaddon.GetProperty("hex").GetString());     // normalized lowercase
         Assert.Contains(paints, p => p.GetProperty("id").GetString() == "vallejo/black");
+    }
+
+    [Fact]
+    public void Paint_without_colour_publishes_no_hex_property()
+    {
+        // Harvested additions can be colour-less until swatch extraction covers them; they
+        // must publish with the hex property OMITTED (not "" — the schema pattern applies
+        // whenever the property is present, and "" broke the 2026-07-24 release).
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        JsonElement oldCopper = paints.Single(p => p.GetProperty("id").GetString() == "vallejo/old-copper");
+        Assert.False(oldCopper.TryGetProperty("hex", out _));
     }
 
     [Fact]
@@ -112,8 +123,8 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
 
         JsonElement xIndex = Doc("paints/index.json");
         int xSum = xIndex.GetProperty("partitions").EnumerateArray().Sum(e => e.GetProperty("records").GetInt32());
-        Assert.Equal(3, xIndex.GetProperty("total").GetInt32());
-        Assert.Equal(3, xSum);
+        Assert.Equal(4, xIndex.GetProperty("total").GetInt32());
+        Assert.Equal(4, xSum);
     }
 
     [Fact]
