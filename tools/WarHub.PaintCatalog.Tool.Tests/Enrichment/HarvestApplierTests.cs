@@ -119,6 +119,29 @@ public class HarvestApplierTests
     }
 
     [Fact]
+    public void AppendAdditions_KeepsSameNameVariantsWithDistinctCodes()
+    {
+        // Variant ranges reuse one colour name across coded variants (TMM ships each colour
+        // as 4 codes) — the skip key must include the code or 3 of these 4 vanish.
+        string dir = WriteHarvestDir("""
+            vallejo:
+              additions:
+                - { name: Sterling Silver, set: True Metallic Metal, productCode: "77.101" }
+                - { name: Sterling Silver, set: True Metallic Metal, productCode: "77.121" }
+                - { name: Sterling Silver, set: True Metallic Metal, productCode: "77.141" }
+                - { name: Sterling Silver, set: True Metallic Metal, productCode: "77.161" }
+                - { name: Sterling Silver, set: True Metallic Metal, productCode: "77.161" }
+            """);
+        try
+        {
+            var harvests = HarvestApplier.Load(dir);
+            IReadOnlyList<Paint> result = HarvestApplier.AppendAdditions(SamplePaints, "vallejo", harvests);
+            Assert.Equal(4, result.Count(p => p.Name == "Sterling Silver")); // exact dupe skipped
+        }
+        finally { Directory.Delete(dir, recursive: true); }
+    }
+
+    [Fact]
     public void AppendAdditions_NoHarvestForBrand_ReturnsOriginal()
     {
         Assert.Same(SamplePaints, HarvestApplier.AppendAdditions(
