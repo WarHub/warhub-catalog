@@ -1,0 +1,47 @@
+id: mfr-mr-hobby
+kind: manufacturer
+strategy: mr-hobby
+baseUrl: https://www.mr-hobby.com
+scope:
+  manufacturer: Mr Hobby
+  # Paint/finish categories only (ids + display labels verified against the live category nav,
+  # 2026-07-24). Deliberately excludes the marker categories (5 GUNDAM MARKER / COLOR,
+  # 7 Mr. HOBBY MARKER) and the tools/materials trees (10-29) -- bottled/sprayed colour,
+  # thinner and finish products only, matching data/paints scope. Detail pages here are
+  # SERIES-level (one page covers e.g. all of Mr.COLOR C1~C189) or single products; the site
+  # publishes no per-colour pages, no JAN/EAN and no hex chips anywhere (live-probed
+  # 2026-07-24, EN+JA) -- the harvest bridge expands range skus against the existing catalog.
+  categories:
+    - id: 1
+      label: Mr. COLOR # 41 series/products across 3 pages (2026-07-24)
+    - id: 2
+      label: AQUEOUS HOBBY COLOR # 15
+    - id: 3
+      label: ACRYSION # 11
+    - id: 4
+      label: WEATHERING / DECORATION # 15
+    - id: 6
+      label: COLLABORATION PAINT # 9, mostly cross-listed with the base ranges
+    - id: 8
+      label: TOP COAT / VARNISH # 17
+    - id: 9
+      label: SURFACER / PRIMER # 32 across 2 pages
+    - id: 36
+      label: COLOR for SOFT PVC # 1
+politeness:
+  # robots.txt is `User-agent: * / Disallow:` (empty disallow = everything allowed, no
+  # Crawl-delay) and the canonical bot UA is served byte-identical HTML to a browser UA
+  # (both live-verified 2026-07-24; CloudFront-fronted, no bot wall, Laravel session cookies
+  # set but never required) -- so no uaProfile/ignoreRobots overrides are needed here.
+  # Full snapshot footprint: ~11 listing pages + ~130 series-detail pages at 0.5 rps -> ~5
+  # minutes, and details are fetched ONCE (cursor-cached; one-off snapshot model, see
+  # docs/research/2026-07-23-paint-manufacturer-harvest-design.md).
+  rps: 0.5
+contract:
+  # 134 unique detail ids observed across the configured categories on 2026-07-24; the floor
+  # leaves room for delistings while still catching a listing-markup collapse.
+  minCount: 80
+  requiredFieldRates:
+    name: 1.0
+    # Every live listing tile carries a products__item-code; keep margin for CMS blanks.
+    sku: 0.9
