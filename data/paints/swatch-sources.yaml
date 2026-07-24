@@ -17,14 +17,19 @@ vallejo:
     - id: cc331-diorama-fx
       url: https://acrylicosvallejo.com/wp-content/uploads/2024/11/CC331-R00-Diorama-FX-NewIC.pdf
       codePattern: '26\.\d{3}'
-      pages: [0, 1]
+      # Page 1 ONLY: page 0 mixes card styles and the configured offset lands on descriptive
+      # text for the Water-FX codes (contact-sheet review 2026-07-24) -- transparent gels that
+      # arguably should not carry a flat hex anyway. Unfilled codes can return later via a
+      # chip-grid chart (Catalogo) config.
+      pages: [1]
       set: Diorama FX
       # Product cards: texture-photo panel right of the jar shot, anchored to the "Ref." code.
       sample: { dx: 304, dy: -6, width: 78, height: 78 }
     - id: cc336-pigment-fx
       url: https://acrylicosvallejo.com/wp-content/uploads/2025/03/CC336-R00-Pigment-FX-NewIC.pdf
       codePattern: '73\.\d{3}'
-      pages: [0, 1]
+      # Page 1 ONLY -- same contact-sheet finding as cc331 (page 0 is boxed set panels/text).
+      pages: [1]
       set: Pigment FX
       # Same NewIC card family as CC331.
       sample: { dx: 304, dy: -6, width: 78, height: 78 }
