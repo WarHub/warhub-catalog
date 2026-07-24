@@ -61,4 +61,32 @@ public class PaintRecordAdapterTests
         Assert.Equal("2026-07-07", _a.WithFirstSeen(R(firstSeen: null), "2026-07-07").FirstSeen);
         Assert.True(_a.HasFirstSeen(R(firstSeen: "2026-01-01")));
     }
+
+    [Fact]
+    public void ApplyRename_AdoptsFreshIdentityFields_KeepsHistory()
+    {
+        // Colour-backfill alias: an archived colour-less record renamed onto its
+        // hex-carrying fresh twin must ADOPT the fresh identity fields (else the stored
+        // record disagrees with the key it sits under and the alias must fire forever),
+        // while history (FirstSeen) and backfills (Ean) come from the archive side.
+        PaintRecord existing = R(hex: "", ean: "111", firstSeen: "2026-07-23");
+        PaintRecord fresh = R(hex: "#8A8D91", ean: null, firstSeen: null);
+        PaintRecord renamed = _a.ApplyRename(existing, fresh);
+
+        Assert.Equal("#8A8D91", renamed.Details.Hex);
+        Assert.Equal("111", renamed.Ean);
+        Assert.Equal("2026-07-23", renamed.FirstSeen);
+        Assert.Equal(_a.IdentityKey(fresh), _a.IdentityKey(renamed)); // record matches its new key
+    }
+
+    [Fact]
+    public void ApplyRename_PureNameRename_OnlyChangesName()
+    {
+        PaintRecord existing = R(name: "Old Name", firstSeen: "2026-01-01");
+        PaintRecord fresh = R(name: "New Name", firstSeen: null);
+        PaintRecord renamed = _a.ApplyRename(existing, fresh);
+        Assert.Equal("New Name", renamed.Name);
+        Assert.Equal("2026-01-01", renamed.FirstSeen);
+        Assert.Equal(_a.IdentityKey(fresh), _a.IdentityKey(renamed));
+    }
 }
