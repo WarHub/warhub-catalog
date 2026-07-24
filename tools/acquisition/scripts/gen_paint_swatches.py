@@ -33,11 +33,19 @@ import yaml
 REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 
-from warhub_acquisition.acquire.client import BROWSER_UA, PoliteClient  # noqa: E402
+from warhub_acquisition.acquire.client import BROWSER_UA, FetchError, PoliteClient  # noqa: E402
 from warhub_acquisition.swatch.grid_image import CellSample, GridSpec, extract_grid  # noqa: E402
+from warhub_acquisition.swatch.item_image import ItemImageSpec, sample_item, template_url  # noqa: E402
 from warhub_acquisition.swatch.pdf_chart import ChartSpec, SampleSpec, extract_chart  # noqa: E402
 
+# --config <path> lets calibration runs (parallel agents, throwaway experiments) use their own
+# spec file without racing edits on the committed one; positional args stay brand filters.
+_argv = sys.argv[1:]
 CONFIG = REPO / "data/paints/swatch-sources.yaml"
+if "--config" in _argv:
+    i = _argv.index("--config")
+    CONFIG = Path(_argv[i + 1])
+    _argv = _argv[:i] + _argv[i + 2 :]
 BRANDS_DIR = REPO / "data/paints/brands"
 OUT_DIR = REPO / "data/paints/swatches"
 REVIEW_DIR = REPO / "data/review/swatches"
@@ -49,6 +57,29 @@ def load_specs() -> dict[str, tuple[dict, list[ChartSpec | GridSpec]]]:
     for slug, brand_cfg in config.items():
         charts: list[ChartSpec | GridSpec] = []
         for chart in brand_cfg.get("charts") or []:
+            if chart.get("type") == "item-image":
+                raw_regions = chart.get("regions") or [chart.get("region") or {}]
+                charts.append(
+                    ItemImageSpec(
+                        chart_id=chart["id"],
+                        url_template=chart.get("urlTemplate"),
+                        code_pad=int(chart.get("codePad", 0)),
+                        use_catalog_images=bool(chart.get("useCatalogImages", False)),
+                        regions=tuple(
+                            CellSample(
+                                x0=float(r.get("x0", 0.1)),
+                                y0=float(r.get("y0", 0.1)),
+                                x1=float(r.get("x1", 0.9)),
+                                y1=float(r.get("y1", 0.9)),
+                            )
+                            for r in raw_regions
+                        ),
+                        set_name=chart.get("set"),
+                        reject_backdrop=bool(chart.get("rejectBackdrop", True)),
+                        max_spread=float(chart.get("maxSpread", 60.0)),
+                    )
+                )
+                continue
             sample = chart["sample"]
             if chart.get("type") == "grid-image":
                 grid = chart["grid"]
@@ -113,7 +144,7 @@ def load_catalog(slug: str) -> dict[str, dict]:
         by_code.setdefault(
             code,
             {"key": f"{p['name']}|{details.get('set') or ''}", "hex": details.get("hex") or "",
-             "set": details.get("set") or ""},
+             "set": details.get("set") or "", "imageUrl": p.get("imageUrl") or ""},
         )
     return by_code
 
@@ -144,10 +175,95 @@ def contact_sheet(swatches, renders, out_path: Path, *, row_h: int = 44, crop_w:
     sheet.save(out_path, quality=82)
 
 
+def _run_item_image(slug, spec, catalog, client, applied, cross_checks, unmatched) -> None:
+    """One image per code: fill every colour-less catalog paint the spec covers, and sample a
+    deterministic slice of already-coloured ones as the calibration cross-check."""
+    from PIL import Image
+
+    targets = []       # (code, entry, url, is_fill)
+    check_budget = 40  # coloured paints sampled for the distance distribution
+    for code in sorted(catalog):
+        entry = catalog[code]
+        if spec.set_name is not None and entry["set"] != spec.set_name:
+            continue
+        url = template_url(spec, code) if spec.url_template else entry["imageUrl"]
+        if not url:
+            continue
+        if not entry["hex"]:
+            targets.append((code, entry, url, True))
+        elif check_budget > 0:
+            targets.append((code, entry, url, False))
+            check_budget -= 1
+
+    rows = []  # (swatch, crop PIL) for the sheet
+    filled = checked = fetch_misses = rejected = 0
+    distances = []
+    for code, entry, url, is_fill in targets:
+        try:
+            raw = client.get_response(url).content
+            image = Image.open(io.BytesIO(raw))
+        except (FetchError, OSError):
+            fetch_misses += 1
+            unmatched.append(f"{spec.chart_id}: {code} image unavailable ({url})")
+            continue
+        swatch, reason = sample_item(image, code, spec)
+        if swatch is None:
+            rejected += 1
+            unmatched.append(f"{spec.chart_id}: {code} rejected -- {reason}")
+            continue
+        rows.append((swatch, image.convert("RGB").crop(swatch.crop_box_px)))
+        if is_fill:
+            filled += 1
+            applied.setdefault(
+                f"{entry['key']}|{code}",
+                {
+                    "hex": swatch.hex,
+                    "code": code,
+                    "method": "item-image",
+                    "chart": spec.chart_id,
+                    "source": url if spec.url_template else "catalog imageUrl",
+                    "confidence": swatch.confidence,
+                },
+            )
+        else:
+            checked += 1
+            have = entry["hex"].lstrip("#")
+            got = swatch.hex.lstrip("#")
+            dist = sum(
+                (int(have[i : i + 2], 16) - int(got[i : i + 2], 16)) ** 2 for i in (0, 2, 4)
+            ) ** 0.5
+            distances.append(dist)
+            if dist > 40:
+                cross_checks.append(
+                    f"{spec.chart_id}: {code} sampled {swatch.hex} vs catalog {entry['hex']} (d={dist:.0f})"
+                )
+
+    if rows:
+        renders = {}
+        sheet_swatches = []
+        for i, (sw, crop) in enumerate(rows):
+            # contact_sheet crops renders[page] by crop_box; give each row its own page image
+            fake = sw.__class__(**{**sw.__dict__, "page": i, "crop_box_px": (0, 0, *crop.size)})
+            renders[i] = crop
+            sheet_swatches.append(fake)
+        contact_sheet(sheet_swatches, renders, REVIEW_DIR / f"{slug}-{spec.chart_id}.jpg")
+
+    stats = ""
+    if distances:
+        distances.sort()
+        med = distances[len(distances) // 2]
+        within = sum(1 for d in distances if d <= 40) / len(distances) * 100
+        stats = f" calibration: median d={med:.1f}, {within:.0f}% within 40 (n={len(distances)})"
+    print(
+        f"{slug}/{spec.chart_id}: filled={filled} cross-checked={checked} "
+        f"misses={fetch_misses} rejected={rejected}{stats}"
+    )
+
+
 def main() -> None:
     import pdfplumber
 
-    only_brands = set(sys.argv[1:])
+    only_brands = set(_argv)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     for slug, (brand_cfg, charts) in load_specs().items():
@@ -170,6 +286,9 @@ def main() -> None:
         cross_checks: list[str] = []
         unmatched: list[str] = []
         for spec in charts:
+            if isinstance(spec, ItemImageSpec):
+                _run_item_image(slug, spec, catalog, client, applied, cross_checks, unmatched)
+                continue
             raw = client.get_response(spec.url).content
             sha = hashlib.sha256(raw).hexdigest()
             if isinstance(spec, GridSpec):
@@ -227,6 +346,19 @@ def main() -> None:
                 f"{slug}/{spec.chart_id}: swatches={len(swatches)} filled={filled} "
                 f"cross-checked={checked} (contact sheet: data/review/swatches/{slug}-{spec.chart_id}.jpg)"
             )
+
+        # RATCHET (mirrors the harvest-additions ratchet): once a merge lands a fill, the
+        # catalog paint has hex, so a regeneration would emit no entry for it -- and the NEXT
+        # merge births the harvest addition colour-less again, splitting it from its coloured
+        # archive twin (live-hit 2026-07-24: 4 full-identity dupes). Committed entries whose
+        # code still exists in the catalog are carried forward verbatim unless this run
+        # re-derived them; hand-prune the file to actually retire a fill.
+        committed_path = OUT_DIR / f"{slug}.yaml"
+        if committed_path.exists():
+            committed = (yaml.safe_load(committed_path.read_text(encoding="utf-8")) or {}).get(slug) or {}
+            for key, entry in committed.items():
+                if key not in applied and str(entry.get("code") or "") in catalog:
+                    applied[key] = entry
 
         if applied:
             out = OUT_DIR / f"{slug}.yaml"

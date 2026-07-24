@@ -14,6 +14,55 @@
 ak-interactive:
   uaProfile: browser # same WAF as mfr-ak-interactive (bot UAs 403'd)
   charts:
+    - id: quickgen-dossier
+      url: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+      codePattern: 'AK17\d{3}'
+      # p4 = 64-colour Generic Range tables, p5 = 6 Metallic + 9 Military tables. Official
+      # range dossier found via ak-interactive.com /downloads/ (PDFs live on ak-masters.com;
+      # the WP-media "dossier" JPGs are just A4 cover thumbs). Chips are AK's canonical tone
+      # for contrast paints (Putrid White genuinely prints olive-khaki).
+      pages: [4, 5]
+      set: Quick Gen
+      # Flat chip fills each 22.68pt row at dx +47..+117 from the REF label; sample the core.
+      sample: { dx: 52, dy: -4, width: 54, height: 18 }
+    - id: wash-conversion-18
+      type: grid-image
+      url: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+      # 18 chip rows (single column) in exact AK19301..AK19318 catalog order; no printed
+      # codes -> position-assigned. Cell includes the printed name (self-verifying sheet).
+      grid: { originX: 130, originY: 772, cellWidth: 560, cellHeight: 91, cols: 1, rows: 18 }
+      codes: { prefix: AK, start: 19301, pad: 5, maxCount: 18 }
+      # chip = cell x 0..0.31, y 0..0.54 (173x49 px); sample its core.
+      sample: { x0: 0.04, y0: 0.10, x1: 0.27, y1: 0.44 }
+    - id: inks-catalogue-2026
+      url: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+      codePattern: 'AK16\d{3}'
+      # p34 "THE INKS / 28 COLORS": ~36pt round chip above each centred code label.
+      # AK16013 Immaculate White prints paper-white -> paper guard drops it (stays empty).
+      # 67 MB fetch -- cache it; re-pin pages if AK rotates a 2027 edition.
+      pages: [34]
+      set: Inks
+      sample: { dx: 2, dy: -32, width: 20, height: 22 }
+    - id: punch-equivalence-2026
+      url: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+      codePattern: 'AK112[67]\d'
+      # p12 3GEN equivalence table, COLOR chip cell per 11.6pt row. Product-photo backgrounds
+      # are darkened mood panels (worst d~170) -- this chart is the only honest punch source.
+      # AK11260-63 effect rows print NO chip -> dropped; thirdgen-bottle-bg fills them.
+      pages: [12]
+      set: Color Punch (3rd Gen)
+      sample: { dx: 108, dy: 0.5, width: 24, height: 7 }
+    - id: thirdgen-bottle-bg
+      type: item-image
+      useCatalogImages: true
+      set: Standard (3rd Gen)
+      # 2026/03 product shots: the studio background panel IS the paint colour.
+      # Calibration 2026-07-24 vs 40 coloured Standard paints: median dRGB 22.8, 78% within
+      # 40; all outliers are yellows (photo bg desaturates yellow, hue preserved). Fills only
+      # AK11260-62 (translucent effect fluids, splatter-art photos -> medium confidence;
+      # like Vallejo Water-FX these arguably need no flat hex -- override if the review says
+      # so; the entry also keeps the ongoing calibration stats either way).
+      region: { x0: 0.04, y0: 0.34, x1: 0.30, y1: 0.70 }
     - id: briefcase-235
       type: grid-image
       url: https://ak-interactive.com/wp-content/uploads/2020/12/BRIEFCASE_235COLORS-CHART.jpg
@@ -29,6 +78,48 @@ ak-interactive:
       # Cells print the code at ~y 0.10-0.25 and the name at ~y 0.63-0.75; this band
       # samples pure fill between the two.
       sample: { x0: 0.10, y0: 0.30, x1: 0.90, y1: 0.58 }
+army-painter:
+  uaProfile: browser # thearmypainter.com Shopify bot management 429s bot UAs (mfr-armypainter precedent)
+  # No TAP chart PDF is code-anchored (posters/naming charts are name-keyed or raster-text;
+  # /pages/downloads inventoried 2026-07-24) -- product photos are the committed-pipeline
+  # source. Warpaints Air's 6 colour-less paints are deliberately ABSENT: old-label dropper
+  # chips miscalibrate (median d=56) and the varnish/primer bottles would false-fill
+  # near-black -- a missing colour beats a wrong one.
+  charts:
+    - id: fanatic-bottles
+      type: item-image
+      useCatalogImages: true
+      set: Warpaints Fanatic
+      # Dropper shots: the lit strip of the label hexagon chip. Scratch calibration vs 175
+      # coloured Fanatic paints: median dRGB 11.0, 89% within 40; the tail is the 11
+      # metallics whose sheen samples bright. Matt White triggers the backdrop guard by
+      # design. 4 mediums (Stabilizer/Retarder/varnishes) fill as the rendered warm-grey
+      # chip (~#D6D3CC) vs the catalog's brighter varnish convention -- kept, flagged for
+      # review (medium-quality data beats none; override if unwanted).
+      regions:
+        - { x0: 0.53, y0: 0.515, x1: 0.565, y1: 0.55 }
+    - id: masterclass-bottles
+      type: item-image
+      useCatalogImages: true
+      set: John Blanche Masterclass
+      # Same label template, chip framed narrower on WP4xxx renders; band sits above the
+      # two-line name text and below the red banner, clean on both render framings. The
+      # whole set is colour-less so no in-run references exist -- the contact sheet IS the
+      # verification (39/39 crops match, reviewed 2026-07-24).
+      regions:
+        - { x0: 0.50, y0: 0.515, x1: 0.55, y1: 0.542 }
+    - id: primer-spray-caps
+      type: item-image
+      useCatalogImages: true
+      set: Warpaints Primer
+      # Spray-can shots: the detached cap's end face is a flat colour disc (the can body is
+      # constant olive). Borderline calibration (n=22 median d=36.9 -- disc renders sit
+      # darker than the set's old-Warpaints hexes; varnish discs read grey, cross-check
+      # only). Kept: the 5 fills land 13-27 dRGB from their factory-matched Warpaints
+      # name-twins (metallic Greedy Gold 49); twin-based overrides remain the cleaner
+      # alternative if review prefers.
+      regions:
+        - { x0: 0.35, y0: 0.72, x1: 0.42, y1: 0.79 }
 vallejo:
   uaProfile: browser # same WAF as mfr-vallejo (bot UAs 403'd)
   charts:
@@ -71,3 +162,194 @@ vallejo:
       pages: [0, 1]
       set: Game Air
       sample: { dx: 0, dy: -36, width: 44, height: 30 }
+# --- Store product-image calibrations (agent-calibrated 2026-07-24; monument withheld:
+# render shading darkens all samples ~15%% -- hue-correct but below the accuracy bar,
+# see docs/research design doc wave notes). Per-set verdicts + unusable-form reasons
+# live as comments in the per-entry blocks of the calibration report (PR).
+turbo-dork:
+  charts:
+  - id: bottle-band
+    type: item-image
+    useCatalogImages: true
+    set: Turbo Dork
+    regions:
+    - x0: 0.43
+      y0: 0.74
+      x1: 0.57
+      y1: 0.8
+    maxSpread: 70
+green-stuff-world:
+  charts:
+  - id: chip-dry-brush
+    type: item-image
+    useCatalogImages: true
+    set: Dry Brush
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-fluorescent
+    type: item-image
+    useCatalogImages: true
+    set: Fluorescent
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-flexible
+    type: item-image
+    useCatalogImages: true
+    set: Flexible
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-liquid-pigments
+    type: item-image
+    useCatalogImages: true
+    set: Liquid Pigments
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-effects
+    type: item-image
+    useCatalogImages: true
+    set: Effects
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-metallic
+    type: item-image
+    useCatalogImages: true
+    set: Metallic Colors
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-chrome
+    type: item-image
+    useCatalogImages: true
+    set: Chrome
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-dipping
+    type: item-image
+    useCatalogImages: true
+    set: Dipping Inks
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+    - x0: 0.56
+      y0: 0.4
+      x1: 0.76
+      y1: 0.48
+  - id: spray-chameleon
+    type: item-image
+    useCatalogImages: true
+    set: Chameleon Spray
+    regions:
+    - x0: 0.66
+      y0: 0.42
+      x1: 0.86
+      y1: 0.6
+  - id: spray-primer
+    type: item-image
+    useCatalogImages: true
+    set: Spray Primer
+    regions:
+    - x0: 0.66
+      y0: 0.42
+      x1: 0.86
+      y1: 0.6
+  - id: spray-chrome
+    type: item-image
+    useCatalogImages: true
+    set: Chrome Spray
+    regions:
+    - x0: 0.66
+      y0: 0.42
+      x1: 0.86
+      y1: 0.6
+  - id: bottle-blackest
+    type: item-image
+    useCatalogImages: true
+    set: Blackest Black
+    regions:
+    - x0: 0.42
+      y0: 0.31
+      x1: 0.58
+      y1: 0.37
+    - x0: 0.42
+      y0: 0.28
+      x1: 0.62
+      y1: 0.32
+scale75:
+  uaProfile: browser
+  charts:
+  - id: dropper-scale-color
+    type: item-image
+    useCatalogImages: true
+    set: Scale Color Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-warfront
+    type: item-image
+    useCatalogImages: true
+    set: Warfront  Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-fantasy-games
+    type: item-image
+    useCatalogImages: true
+    set: Fantasy & Games Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-drop-and-paint
+    type: item-image
+    useCatalogImages: true
+    set: Drop & Paint
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-scalecolor-games
+    type: item-image
+    useCatalogImages: true
+    set: Scalecolor Games
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-inktensity
+    type: item-image
+    useCatalogImages: true
+    set: Inktensity Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92

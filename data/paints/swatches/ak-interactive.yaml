@@ -4,14 +4,693 @@
 # only; overrides win.
 # Review artifacts: data/review/swatches/*.jpg (crop vs extracted colour per code).
 ak-interactive:
+  Afro Shadow|Color Punch (3rd Gen)|AK11276:
+    hex: '#070C14'
+    code: AK11276
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Beast Brown|Color Punch (3rd Gen)|AK11278:
+    hex: '#B54124'
+    code: AK11278
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Bile Yellow|Quick Gen|AK17008:
+    hex: '#E6E12B'
+    code: AK17008
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Black Night|Acrylic Wash|AK19303:
+    hex: '#101010'
+    code: AK19303
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Black Purple|Color Punch (3rd Gen)|AK11270:
+    hex: '#21112B'
+    code: AK11270
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Black|Inks|AK16005:
+    hex: '#241F1F'
+    code: AK16005
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Black|Quick Gen|AK17049:
+    hex: '#3C3D3D'
+    code: AK17049
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Blood Effect|Standard (3rd Gen)|AK11260:
+    hex: '#403129'
+    code: AK11260
+    method: item-image
+    chart: thirdgen-bottle-bg
+    source: catalog imageUrl
+    confidence: medium
+  Blood Scarlet|Inks|AK16009:
+    hex: '#C6271E'
+    code: AK16009
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Blue Black|Quick Gen|AK17051:
+    hex: '#242C36'
+    code: AK17051
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Blue Moon|Acrylic Wash|AK19307:
+    hex: '#4B6270'
+    code: AK19307
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Bluish Grey|Quick Gen|AK17042:
+    hex: '#3C535A'
+    code: AK17042
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Bone Brown|Quick Gen|AK17058:
+    hex: '#693B1F'
+    code: AK17058
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  British Uniform|Quick Gen|AK17076:
+    hex: '#88591B'
+    code: AK17076
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Bronze|Quick Gen|AK17069:
+    hex: '#81471E'
+    code: AK17069
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Brown Black|Inks|AK16011:
+    hex: '#2C281F'
+    code: AK16011
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Brown Black|Quick Gen|AK17047:
+    hex: '#503D35'
+    code: AK17047
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Camel Brown|Quick Gen|AK17059:
+    hex: '#926614'
+    code: AK17059
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Camo Green|Inks|AK16007:
+    hex: '#1C311E'
+    code: AK16007
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Carmine Dawn|Acrylic Wash|AK19308:
+    hex: '#DF3148'
+    code: AK19308
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Chipping Effect|Standard (3rd Gen)|AK11262:
+    hex: '#272A25'
+    code: AK11262
+    method: item-image
+    chart: thirdgen-bottle-bg
+    source: catalog imageUrl
+    confidence: medium
+  Cold Green|Color Punch (3rd Gen)|AK11273:
+    hex: '#116851'
+    code: AK11273
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Cold Steel|Quick Gen|AK17070:
+    hex: '#485D76'
+    code: AK17070
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Copper|Quick Gen|AK17066:
+    hex: '#C87E29'
+    code: AK17066
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
   Cork|Standard (3rd Gen)|AK11119:
     hex: '#B17745'
     code: AK11119
     method: grid-image
     chart: briefcase-235
     source: https://ak-interactive.com/wp-content/uploads/2020/12/BRIEFCASE_235COLORS-CHART.jpg
-    sourceSha256: 71790b9e90892fd3ff429cc864d42d02dc62201e09c9703bb9ed43e0cdcfb3f7
     page: 0
+    confidence: high
+  Crimson Red|Quick Gen|AK17031:
+    hex: '#79191D'
+    code: AK17031
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Crimson Veil|Acrylic Wash|AK19310:
+    hex: '#C06274'
+    code: AK19310
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Crimson|Inks|AK16048:
+    hex: '#651B20'
+    code: AK16048
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Cyan|Inks|AK16054:
+    hex: '#009EE3'
+    code: AK16054
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Dak Green|Quick Gen|AK17073:
+    hex: '#4C541F'
+    code: AK17073
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Dark Flesh|Quick Gen|AK17061:
+    hex: '#603A26'
+    code: AK17061
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Dark Grey|Acrylic Wash|AK19314:
+    hex: '#4C4C4C'
+    code: AK19314
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Dark Leather|Quick Gen|AK17048:
+    hex: '#4B211A'
+    code: AK17048
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Dark Steel|Quick Gen|AK17067:
+    hex: '#5D5D5D'
+    code: AK17067
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Deep Blue|Inks|AK16002:
+    hex: '#001B40'
+    code: AK16002
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Demon Purple|Quick Gen|AK17006:
+    hex: '#50215A'
+    code: AK17006
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Desert Sand|Quick Gen|AK17079:
+    hex: '#A16D13'
+    code: AK17079
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Desert Yellow|Quick Gen|AK17063:
+    hex: '#7F6516'
+    code: AK17063
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Dirtveil|Acrylic Wash|AK19317:
+    hex: '#D6D6CA'
+    code: AK19317
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Dirty Grey|Quick Gen|AK17046:
+    hex: '#6E674C'
+    code: AK17046
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Dirty Yellow|Quick Gen|AK17007:
+    hex: '#F3BB03'
+    code: AK17007
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Dragon Blood|Color Punch (3rd Gen)|AK11272:
+    hex: '#891C66'
+    code: AK11272
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Dwarf Flesh|Quick Gen|AK17032:
+    hex: '#EE8236'
+    code: AK17032
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Eggplant|Inks|AK16052:
+    hex: '#392266'
+    code: AK16052
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Field Grey|Quick Gen|AK17072:
+    hex: '#4D4D44'
+    code: AK17072
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Fire Orange|Inks|AK16012:
+    hex: '#EA5A0B'
+    code: AK16012
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Fluor Blue|Inks|AK16046:
+    hex: '#024B98'
+    code: AK16046
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Fluor Green|Inks|AK16045:
+    hex: '#AFCA13'
+    code: AK16045
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Fluor Magenta|Inks|AK16041:
+    hex: '#E50068'
+    code: AK16041
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Fluor Orange|Inks|AK16043:
+    hex: '#ED6F03'
+    code: AK16043
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Fluor Red|Inks|AK16042:
+    hex: '#E40134'
+    code: AK16042
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Fluor Yellow|Inks|AK16044:
+    hex: '#FFED00'
+    code: AK16044
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Forest Green|Quick Gen|AK17021:
+    hex: '#4A5821'
+    code: AK17021
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Forge Red|Inks|AK16051:
+    hex: '#E53B2C'
+    code: AK16051
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  German Grey|Quick Gen|AK17071:
+    hex: '#3F3F47'
+    code: AK17071
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Gold|Quick Gen|AK17065:
+    hex: '#DCAC29'
+    code: AK17065
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Greenskin Punch|Color Punch (3rd Gen)|AK11274:
+    hex: '#115928'
+    code: AK11274
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Green|Acrylic Wash|AK19312:
+    hex: '#6F7E2D'
+    code: AK19312
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Grey Shadow|Quick Gen|AK17040:
+    hex: '#7E6D75'
+    code: AK17040
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Hazel Brown|Acrylic Wash|AK19306:
+    hex: '#BA6E3D'
+    code: AK19306
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Human Flesh|Quick Gen|AK17057:
+    hex: '#84462B'
+    code: AK17057
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Ice Blue|Quick Gen|AK17024:
+    hex: '#72C3E6'
+    code: AK17024
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Infernal Red|Quick Gen|AK17037:
+    hex: '#90281A'
+    code: AK17037
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Intense Sienna|Inks|AK16010:
+    hex: '#592217'
+    code: AK16010
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Invocation Purple|Acrylic Wash|AK19309:
+    hex: '#3B2D68'
+    code: AK19309
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Jade Green|Quick Gen|AK17015:
+    hex: '#0A8361'
+    code: AK17015
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  King Purple|Color Punch (3rd Gen)|AK11271:
+    hex: '#42235B'
+    code: AK11271
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Lavender|Quick Gen|AK17004:
+    hex: '#7B509C'
+    code: AK17004
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Leaf Green|Quick Gen|AK17020:
+    hex: '#7E7D2F'
+    code: AK17020
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Leather|Quick Gen|AK17053:
+    hex: '#693B1F'
+    code: AK17053
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Light Grey Shadow|Quick Gen|AK17039:
+    hex: '#B7A3B4'
+    code: AK17039
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Light Leather|Quick Gen|AK17060:
+    hex: '#904B14'
+    code: AK17060
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Light Rust|Acrylic Wash|AK19316:
+    hex: '#D56E11'
+    code: AK19316
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Light Wood|Inks|AK16053:
+    hex: '#EAB426'
+    code: AK16053
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Light Yellow|Quick Gen|AK17014:
+    hex: '#F9EF72'
+    code: AK17014
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Lime Green|Inks|AK16049:
+    hex: '#8CBE22'
+    code: AK16049
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Mahogani|Inks|AK16047:
+    hex: '#4F3212'
+    code: AK16047
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
     confidence: high
   Metallic Green|Metallic (3rd Gen)|AK11205:
     hex: '#679D4E'
@@ -19,8 +698,187 @@ ak-interactive:
     method: grid-image
     chart: briefcase-235
     source: https://ak-interactive.com/wp-content/uploads/2020/12/BRIEFCASE_235COLORS-CHART.jpg
-    sourceSha256: 71790b9e90892fd3ff429cc864d42d02dc62201e09c9703bb9ed43e0cdcfb3f7
     page: 0
+    confidence: high
+  Nature Green|Inks|AK16008:
+    hex: '#00823A'
+    code: AK16008
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Necromancer Purple|Quick Gen|AK17005:
+    hex: '#422A85'
+    code: AK17005
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Night Black|Quick Gen|AK17052:
+    hex: '#363345'
+    code: AK17052
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Night Blood|Quick Gen|AK17038:
+    hex: '#67231F'
+    code: AK17038
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Night Blue|Quick Gen|AK17025:
+    hex: '#114B70'
+    code: AK17025
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Night Purple|Inks|AK16004:
+    hex: '#170537'
+    code: AK16004
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Obsidian Holt|Acrylic Wash|AK19302:
+    hex: '#44413C'
+    code: AK19302
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Ocean Blue|Inks|AK16014:
+    hex: '#133C6B'
+    code: AK16014
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Ochre Green|Quick Gen|AK17075:
+    hex: '#855D12'
+    code: AK17075
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Old Gold|Quick Gen|AK17068:
+    hex: '#ECC26D'
+    code: AK17068
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: medium
+  Orange Brown|Quick Gen|AK17054:
+    hex: '#8F4D15'
+    code: AK17054
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Orange|Quick Gen|AK17033:
+    hex: '#E8631A'
+    code: AK17033
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Orc Flesh|Quick Gen|AK17023:
+    hex: '#077B35'
+    code: AK17023
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Pink Flesh|Quick Gen|AK17002:
+    hex: '#D85B9D'
+    code: AK17002
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Plague Yellow|Quick Gen|AK17013:
+    hex: '#F5C30C'
+    code: AK17013
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Power Blue|Quick Gen|AK17026:
+    hex: '#014D8B'
+    code: AK17026
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Primary Yellow|Inks|AK16006:
+    hex: '#FFD100'
+    code: AK16006
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Pure Grime|Acrylic Wash|AK19304:
+    hex: '#7A5F4C'
+    code: AK19304
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Pure Magenta|Inks|AK16003:
+    hex: '#7D1D2D'
+    code: AK16003
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Purple Flesh|Quick Gen|AK17003:
+    hex: '#702D60'
+    code: AK17003
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
     confidence: high
   Purple|Standard (3rd Gen)|AK11073:
     hex: '#624352'
@@ -28,6 +886,354 @@ ak-interactive:
     method: grid-image
     chart: briefcase-235
     source: https://ak-interactive.com/wp-content/uploads/2020/12/BRIEFCASE_235COLORS-CHART.jpg
-    sourceSha256: 71790b9e90892fd3ff429cc864d42d02dc62201e09c9703bb9ed43e0cdcfb3f7
     page: 0
+    confidence: high
+  Putrid Green|Acrylic Wash|AK19311:
+    hex: '#038561'
+    code: AK19311
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Putrid White|Quick Gen|AK17055:
+    hex: '#897C1C'
+    code: AK17055
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Reddish Flesh|Quick Gen|AK17056:
+    hex: '#8D443D'
+    code: AK17056
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Reddish Orange|Quick Gen|AK17035:
+    hex: '#D25123'
+    code: AK17035
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Rotten Green|Quick Gen|AK17022:
+    hex: '#86A427'
+    code: AK17022
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Rotwood Brown|Acrylic Wash|AK19301:
+    hex: '#4A3524'
+    code: AK19301
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Russet Shadow|Color Punch (3rd Gen)|AK11277:
+    hex: '#CC5426'
+    code: AK11277
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Russian Blue|Quick Gen|AK17078:
+    hex: '#103A60'
+    code: AK17078
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Russian Uniform|Quick Gen|AK17077:
+    hex: '#505821'
+    code: AK17077
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Sepia Filth|Acrylic Wash|AK19305:
+    hex: '#84573A'
+    code: AK19305
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Slime Green|Color Punch (3rd Gen)|AK11275:
+    hex: '#8CBC26'
+    code: AK11275
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Soft Black|Quick Gen|AK17050:
+    hex: '#736F71'
+    code: AK17050
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Solar Yellow|Quick Gen|AK17012:
+    hex: '#ECA900'
+    code: AK17012
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Space Dark Green|Quick Gen|AK17019:
+    hex: '#206455'
+    code: AK17019
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Space Green|Quick Gen|AK17017:
+    hex: '#0F6631'
+    code: AK17017
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Space Grey|Quick Gen|AK17045:
+    hex: '#A5A5B5'
+    code: AK17045
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Space Magenta|Quick Gen|AK17001:
+    hex: '#92135B'
+    code: AK17001
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Space Red|Quick Gen|AK17034:
+    hex: '#C23B2F'
+    code: AK17034
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Spectral Blue|Quick Gen|AK17028:
+    hex: '#319F9B'
+    code: AK17028
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Spectral Green|Quick Gen|AK17016:
+    hex: '#90C35D'
+    code: AK17016
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Standard Rust|Acrylic Wash|AK19315:
+    hex: '#B04018'
+    code: AK19315
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Strong Grey|Quick Gen|AK17044:
+    hex: '#5B5C67'
+    code: AK17044
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Sun Red|Color Punch (3rd Gen)|AK11279:
+    hex: '#AF421C'
+    code: AK11279
+    method: pdf-chart
+    chart: punch-equivalence-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 12
+    confidence: high
+  Toad Green|Inks|AK16050:
+    hex: '#1D421E'
+    code: AK16050
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Turquoise Blue|Quick Gen|AK17029:
+    hex: '#006284'
+    code: AK17029
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Turquoise Green|Quick Gen|AK17030:
+    hex: '#006762'
+    code: AK17030
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Ultramarine Blue|Quick Gen|AK17027:
+    hex: '#223770'
+    code: AK17027
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Us Olive Uniform|Quick Gen|AK17074:
+    hex: '#736B2A'
+    code: AK17074
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 5
+    confidence: high
+  Vampire Flesh|Quick Gen|AK17064:
+    hex: '#9B747B'
+    code: AK17064
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Verdigris|Acrylic Wash|AK19313:
+    hex: '#93CDB7'
+    code: AK19313
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Viscera Effect|Standard (3rd Gen)|AK11261:
+    hex: '#B73527'
+    code: AK11261
+    method: item-image
+    chart: thirdgen-bottle-bg
+    source: catalog imageUrl
+    confidence: medium
+  Vivid Flesh|Quick Gen|AK17036:
+    hex: '#E0673F'
+    code: AK17036
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Vivid Green|Quick Gen|AK17018:
+    hex: '#1E7731'
+    code: AK17018
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Warm Orange|Quick Gen|AK17009:
+    hex: '#F28C16'
+    code: AK17009
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  White Shadow|Quick Gen|AK17043:
+    hex: '#CBC9C9'
+    code: AK17043
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Winter Grey|Quick Gen|AK17041:
+    hex: '#778A8E'
+    code: AK17041
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
+    confidence: high
+  Wood Brown|Inks|AK16001:
+    hex: '#2A140F'
+    code: AK16001
+    method: pdf-chart
+    chart: inks-catalogue-2026
+    source: https://ak-masters.com/app/pdf/AK_Catalogue2026.pdf
+    sourceSha256: 59c404170b24302915af351355e5ad634c47287ba9fa2718ed9c2c6392875438
+    page: 34
+    confidence: high
+  Woodgrain|Acrylic Wash|AK19318:
+    hex: '#66312B'
+    code: AK19318
+    method: grid-image
+    chart: wash-conversion-18
+    source: https://ak-interactive.com/wp-content/uploads/2025/11/ACRYLIC_WASHES_CONVERSION_CHART.jpg
+    sourceSha256: 444d7d1061cba1b2534886143021834ee588b352b121a89e6e778298f579bada
+    page: 0
+    confidence: high
+  Wood|Quick Gen|AK17062:
+    hex: '#603018'
+    code: AK17062
+    method: pdf-chart
+    chart: quickgen-dossier
+    source: https://ak-masters.com/app/pdf/Dossier_QuickGen_AK.pdf
+    sourceSha256: 345d7edf37d648e0702a215d5bf1ef51d8758d6e1d3ac845eda8b812818edda1
+    page: 4
     confidence: high
