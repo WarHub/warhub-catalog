@@ -110,3 +110,24 @@ droppers — excluded from singles matching (a marker EAN on a paint record woul
 barcode); TAP name-matching requires a recognized range prefix, cross-set name matches are
 never trusted. Monument's "Expert Acrylics" are vendored `Tri Art` on the store (rebrand) —
 out of scope until that range exists in the catalog.
+
+## Wave 2 (2026-07-24): AK promotion + next probes
+
+- **AK promoted to catalog-role** (owner-approved): 139 additions via the name-suffix set
+  mapping (`"NAME – SUBSERIES"`): Quick Gen 77 (18 ml), The-Inks 28 (`AK16xxx` — distinct
+  from `AK112xx` 3rd-gen inks sharing the "– INK" suffix), Acrylic Wash 18, Color Punch 10,
+  3rd-gen gap singles 6. Bridge additions are now RATCHETED (a prior addition never flips to
+  enrich-only just because a merge landed it — that gating caused a decay loop where the next
+  merge dropped harvest-born paints from the fresh set).
+- **AK colours**: no usable vector chart found — the 236-colour briefcase chart is a raster
+  JPG grid (`wp-content/uploads/2020/12/BRIEFCASE_235COLORS-CHART.jpg`, perfect 20-col grid,
+  sequential codes; covers AK11001-236 which Arcturus already colours → cross-check value).
+  A `grid-image` extractor (config: grid geometry + code sequence, same contact-sheet rails)
+  is the vehicle; Quick Gen chart material not yet located (the AK17000GUIDE product is a PDF
+  sold in-store). AK additions stay colour-less until then — the auto-alias healing makes
+  that safe.
+- **Mr Hobby probe**: mr-hobby.com rebuilt (Laravel; not Inertia). `/en/products/category/N`
+  paginated listings (20/page) → `/en/products/detail/<id>` pages; codes/colours live on
+  detail pages only → budgeted-detail-queue strategy (same shape as shopify-paints).
+- **Reaper probe**: `/paints/msp2` is marketing-only (no data). The real per-paint listing
+  (and the rumored embedded swatch hex) needs deeper mapping — next wave.
