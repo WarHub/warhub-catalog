@@ -1,0 +1,250 @@
+<!-- Trimmed REAL capture of https://www.reapermini.com/paints/paint-sets (2026-07-24): head/body stripped, the inline Vue
+     bootstrap script kept byte-for-byte with its paints array cut to 2 items. -->
+<!doctype html>
+<html>
+<head><title>Reaper Miniatures :: Paint Sets</title></head>
+<body>
+<script>
+
+    var calcTax = function(price, currency){
+        // state Texas gets .065 // UK gets .2 // Do not calculate for other countries
+        var taxRate = {
+            USD: 0.065,
+            AUD: 0,
+            CAD: 0,
+            GBP: 0.2,
+            EUR: 0.2
+        };
+        if (currency != 'USD') {
+            // USD calculated at Checkout
+            return Math.ceil(price * taxRate[currency])
+        }
+        return price
+    };
+
+
+
+    Vue.filter("imagepath", function (context, size) {
+        if (!context) {
+            return ""
+        }
+        if (!size) {
+            size = 4;
+        }
+        return ("https://images.reapermini.com/" + size + "/" + context);
+    });
+
+
+
+    Vue.filter("splitCamel", function (context) {
+
+        if (!context) {
+            return ""
+        }
+        return context.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")
+    });
+
+
+    Vue.filter("getMainImage", function (context) {
+        if (!context) {
+            return ""
+        }
+        var mainImage = context[0];
+        if (mainImage && mainImage.filename) {
+            return ("https://images.reapermini.com/6/" + mainImage.filename);
+        } else {
+            return false;
+        }
+    });
+
+
+    Vue.filter("nl2br", function (context) {
+        if (!context) return "";
+        return context.replace(/\r|\n|\r\n/g, '<br />');
+    });
+
+
+
+
+    Vue.filter("getProductPrice", function(product, currency) {
+
+    	if (currency === 'USD') {
+    		return product.price;
+        }
+
+		var divisor = {
+            EUR: 1.039,
+            GBP: 1.201,
+            AUD: 0.55,
+            CAD: 0.73,
+            USD: 1.00
+        }
+
+    	var price = product.prices && product.prices[currency];
+
+        if (!price || price <= 0) {
+        	// do conversion
+            price =  Math.trunc(Math.ceil(product.price / divisor[currency]))
+
+            if (divisor === 'AUD') {
+			    price = Math.round(price / 5) * 5
+		    }
+        }
+        return price;
+    });
+
+
+
+	Vue.filter("moneyWithTax", function (price, currency) {
+
+		if (currency == 'USD') {
+			return price
+		}
+
+		if (price === 0) return "0.00";
+
+		if (!price) return "";
+
+		var tax = calcTax(price, currency);
+
+        var total = (Number(price) + Number(tax)) // convert cents/pence into Dollars/Pounds
+
+        return total; // Money with any applicable tax added */
+	});
+
+
+    Vue.filter("decimalize", function (context) {
+        if (context === 0) return "0.00";
+		if (!context) return "";
+		var price = parseInt(context, 10) / 100
+		return price.toFixed(2)
+    });
+
+
+
+	Vue.filter("roundingError", function (context) {
+		if (context === 0) return "0.00";
+		if (!context) return "";
+		var price = (context / 100).toFixed(3);
+
+		if ( price.slice(-1) == '0' ) {
+			return price.slice(0, -1); // remove trailing zero
+		}
+		var fractioned = price.split('');
+		fractioned[fractioned.length - 1] = '<span style="color: #cc0000; font-size: 0.85rem">' + fractioned[fractioned.length - 1] + ' *</span>';
+		return fractioned.join('')
+	});
+
+
+
+
+
+
+
+	Vue.filter("dekebab", function (context) {
+        if (!context) return "";
+        return context.replace('-', ' ');
+    });
+
+    Vue.filter("deunderscore", function (context) {
+    if (!context) return "";
+    return context.replace('_', ' ');
+    });
+
+
+    Vue.filter("tags", function (context, delimiter) {
+    	if (!delimiter) {
+    		delimiter = ','
+        }
+        if (!context) return "";
+        var str = context;
+        var temp = str.split(delimiter);
+        var tags = [];
+        // done this way, to remove any empty tags.
+        var i;
+        for (i = 0; i < temp.length; i++) {
+            i && tags.push(i);
+        }
+        return tags;
+    });
+
+
+var updateCartTotal = function(i) {
+	var cartElem = document.getElementById('cartTotalQTY');
+	var newTotal = parseInt(cartElem.textContent) + i;
+	cartElem.textContent = newTotal;
+};
+
+	var app = new Vue({
+		el: '#paintApp',
+        delimiters: ['${', '}'],
+		data: {
+			isLoading: false,
+			paints: [{"_id":"5a674d95a8dded098e1ed18d","sku":"08906","name":"Learn To Paint Kit: Core Skills","price":4799,"inventory":446,"description":"Learn to Paint Kit: Core Skills includes everything you need to start painting, including: \nEleven 1/4 oz Starter Bottles MSP Core Colors and MSP Bones Ultra-Coverage paints: \n09030-Leather Brown\n09037-Pure Black\n09054-Polished Silver\n09200-Harvest Brown\n09408-Candlelight Yellow\n09413-Naga Green\n09432-Desert Sand\n09433-Mountain Stone\n09439-Dragon White\n09452-Blade Steel\n09472-Dragon Blue\n\n2 MSP Paint Brushes (#2 Flat, #0 Round)\n\n3 Bones Miniatures (30024 - Skeletal Archer, 30022 - Orc Marauder, 30023 - Mangu, Evil Warrior)\n\n1 Easy-to-follow Instruction Guide by award-winning painter Rhonda Bender.\n\nLTPK: Core Skills works hand-in-hand with 08907 LTPK: Layer Up!, and both LTPK Sets may be used together in any order.\n\n<a href=\"https://www.reapermini.com/search/ltpk\"> CHECK OUT OUR FULL RANGE OF REAPER LEARN TO PAINT KITS, EXPANSIONS, AND QUICK-PAINT SETS!</a>\n\nMade in the USA!","images":[{"artist":"","type":"main","order":0,"filename":"08906_b_6.jpg"}],"meta":{"color":["red","orange","yellow","green","blue","purple","brown","black","white","grey","clear","metallic"]},"associatedProducts":[{"sku":"08501","name":"Small Drybrush (#2 Flat)","category":["Brushes","Pro Brush"],"filename":"08501.jpg","material":"accessory"},{"sku":"08505","name":"Standard Brush (#0 Round)","category":["Brushes","Pro Brush"],"filename":"08505.jpg","material":"accessory"},{"sku":"08706","name":"Paint Carrying Case","category":["Accessories"],"filename":"08706_1.jpg","material":"plastic"},{"sku":"09030","name":"Leather Brown","category":["Master Series Paints Core Colors"],"filename":"09030.jpg","material":"paint"},{"sku":"09037","name":"Pure Black","category":["Master Series Paints Core Colors"],"filename":"09037.jpg","material":"paint"},{"sku":"09054","name":"Polished Silver","category":["Master Series Paints Core Colors"],"filename":"09054.jpg","material":"paint"},{"sku":"09200","name":"Harvest Brown","category":["Master Series Paints Core Colors"],"filename":"09200.jpg","material":"paint"},{"sku":"09408","name":"Candlelight Yellow","category":["Master Series Paints Bones"],"filename":"09408.jpg","material":"paint"},{"sku":"09413","name":"Naga Green","category":["Master Series Paints Bones"],"filename":"09413.jpg","material":"paint"},{"sku":"09432","name":"Desert Sand","category":["Master Series Paints Bones"],"filename":"09432.jpg","material":"paint"},{"sku":"09433","name":"Mountain Stone","category":["Master Series Paints Bones"],"filename":"09433.jpg","material":"paint"},{"sku":"09439","name":"Dragon White","category":["Master Series Paints Bones"],"filename":"09439.jpg","material":"paint"},{"sku":"09452","name":"Blade Steel","category":["Master Series Paints Bones"],"filename":"09452.jpg","material":"paint"},{"sku":"29815","name":"HD Dragon Blue","category":["Master Series Paints High Density"],"filename":"29815.jpg","material":"paint"},{"sku":"77018","name":"Skeletal Archers (3)","category":["Bones Classic"],"filename":"77018_30024_w_1.jpg","material":"plastic"},{"sku":"77042","name":"Orc Marauder (Sword and Shield)","category":["Bones Classic"],"filename":"77042_w_5.jpg","material":"plastic"},{"sku":"77148","name":"Mangu Timur, Evil Warlord","category":["Bones Classic"],"filename":"77148_w_5.jpg","material":"plastic"}],"prices":{"EUR":4619,"GBP":3996,"AUD":8726,"CAD":6574},"inventoryBuffer":0},{"_id":"5f62662e263c20a305e776c7","sku":"09901","associatedProducts":[{"sku":"09148","name":"Ghoul Skin","category":["Master Series Paints Core Colors"],"filename":"09148.jpg","material":"paint"},{"sku":"09149","name":"Moldy Skin","category":["Master Series Paints Core Colors"],"filename":"09149.jpg","material":"paint"},{"sku":"09150","name":"Bloodless Skin","category":["Master Series Paints Core Colors"],"filename":"09150.jpg","material":"paint"},{"sku":"09274","name":"Vampiric Shadow","category":["Master Series Paints Core Colors"],"filename":"09274.jpg","material":"paint"},{"sku":"09275","name":"Vampiric Skin","category":["Master Series Paints Core Colors"],"filename":"09275.jpg","material":"paint"},{"sku":"09276","name":"Vampiric Highlight","category":["Master Series Paints Core Colors"],"filename":"09276.jpg","material":"paint"}],"description":"Fast Palette boxes are themed paint sets that eliminate the guesswork of trying to coordinate colors!\nThis \"Flesh of the Damned\" Fast Palette contains a palette of 6 putrid and ghastly skintones suitable for painting your army of the dead.  \nContains:\n09148 Ghoul Skin\n09149 Moldy Skin\n09150 Bloodless Skin\n09274 Vampiric Shadow\n09275 Vampiric Skin\n09276 Vampiric Highlight\n\nEach Fast Palette contains 6 MSP Core Color Paints. Core Color Paints are airbrush-friendly, water-soluble, and easy to clean. \n\nPick up a Fast Palette and start painting today!","images":[{"artist":"","type":"main","order":0,"filename":"09901_w_1.jpg"}],"inventory":837,"inventoryBuffer":0,"meta":{"color":["grey"]},"name":"Reaper Fast Palette: Flesh of the Damned - Undead Skin","price":2199,"prices":{"EUR":2117,"GBP":1831,"AUD":3999,"CAD":3013}}],
+            wishlists: [],
+            showWishlistModal: false,
+            wishlist: { sku: null, name: null, ajaxing: false },
+            selectedWishlist: 'Default',
+		},
+        methods: {
+			getInventory: function(sku) {
+				var obj = _.find(this.paints, function(o) {
+					return o.sku === sku;
+				});
+				return ((obj && obj.inventory) <= 0 ) ? 'None in stock' : ''
+			},
+			updateInventory: function(sku) {
+				var obj = _.find(this.paints, function(o) {
+					return o.sku === sku;
+				});
+                var inventory = obj.inventory - 1;
+
+                this.$set(obj, 'inventory', inventory)
+
+			},
+			isDisabled: function(sku) {
+			    var obj = _.find(this.paints, function(o) {
+			    	return o.sku === sku;
+			    });
+				if (obj && obj.inventory <= 0) {
+					return true
+                }
+            },
+			addToCart: function(sku) {
+				var that = this
+				that.isLoading = sku
+				axios.post('/cart/path/add/' + sku).then(function(response) {
+					// const inventory = response.data.inventory['US'] - 3
+                    that.updateInventory(sku)
+					that.isLoading = false
+					updateCartTotal(1);
+				}).catch(function(err) {
+					that.isLoading = false
+					console.log(err);
+				});
+			},
+
+			wishlistModal: function(sku, name) {
+				this.showWishlistModal = true;
+				this.wishlist.sku = sku;
+				this.wishlist.name = name;
+			},
+			addToWishlist: function() {
+				var that = this;
+				that.wishlist.ajaxing = true;
+				axios.post('/wishlist/incrementsku', {sku: that.wishlist.sku, name: that.wishlist.name, listID: that.selectedWishlist})
+					.then(function (response) {
+						setTimeout(function () {
+							that.showWishlistModal = false;
+							that.wishlist.ajaxing = false;
+						}, 100)
+					}).catch(function (err) {
+					console.log(err);
+				});
+			},
+
+		}
+	})
+</script>
+</body>
+</html>
