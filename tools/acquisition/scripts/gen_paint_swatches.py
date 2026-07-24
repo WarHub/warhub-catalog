@@ -1,11 +1,12 @@
 """Generate data/paints/swatches/<brand>.yaml — colours extracted from manufacturer charts.
 
-Reads data/paints/swatch-sources.yaml (per-brand chart configs), downloads each chart PDF
+Reads data/paints/swatch-sources.yaml (per-brand chart configs), downloads each chart
 (PoliteClient: pacing, browser-UA profile where the WAF demands it, WARHUB_HTTP_CACHE_DIR
-cache), samples swatch colours anchored to the vector code labels (see swatch/pdf_chart.py),
-and projects them onto the paint catalog's identities — code-matched, once, here, so the C#
-SwatchApplier only ever does exact "{Name}|{Set}" lookups (same architecture as the barcode
-and harvest bridges).
+cache), samples swatch colours — anchored to the vector code labels for PDFs (see
+swatch/pdf_chart.py) or to configured grid geometry for raster chart images (`type:
+grid-image`, see swatch/grid_image.py) — and projects them onto the paint catalog's
+identities — code-matched, once, here, so the C# SwatchApplier only ever does exact
+"{Name}|{Set}" lookups (same architecture as the barcode and harvest bridges).
 
 Outputs, all committed / reviewable:
 - data/paints/swatches/<brand>.yaml — entries ONLY for catalog paints whose hex is empty
@@ -33,6 +34,7 @@ REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 
 from warhub_acquisition.acquire.client import BROWSER_UA, PoliteClient  # noqa: E402
+from warhub_acquisition.swatch.grid_image import CellSample, GridSpec, extract_grid  # noqa: E402
 from warhub_acquisition.swatch.pdf_chart import ChartSpec, SampleSpec, extract_chart  # noqa: E402
 
 CONFIG = REPO / "data/paints/swatch-sources.yaml"
@@ -41,13 +43,41 @@ OUT_DIR = REPO / "data/paints/swatches"
 REVIEW_DIR = REPO / "data/review/swatches"
 
 
-def load_specs() -> dict[str, tuple[dict, list[ChartSpec]]]:
+def load_specs() -> dict[str, tuple[dict, list[ChartSpec | GridSpec]]]:
     config = yaml.safe_load(CONFIG.read_text(encoding="utf-8")) or {}
-    result: dict[str, tuple[dict, list[ChartSpec]]] = {}
+    result: dict[str, tuple[dict, list[ChartSpec | GridSpec]]] = {}
     for slug, brand_cfg in config.items():
-        charts = []
+        charts: list[ChartSpec | GridSpec] = []
         for chart in brand_cfg.get("charts") or []:
             sample = chart["sample"]
+            if chart.get("type") == "grid-image":
+                grid = chart["grid"]
+                codes = chart["codes"]
+                charts.append(
+                    GridSpec(
+                        chart_id=chart["id"],
+                        url=chart["url"],
+                        origin_x=float(grid.get("originX", 0)),
+                        origin_y=float(grid.get("originY", 0)),
+                        cell_w=float(grid["cellWidth"]),
+                        cell_h=float(grid["cellHeight"]),
+                        cols=int(grid["cols"]),
+                        rows=int(grid["rows"]),
+                        code_prefix=str(codes["prefix"]),
+                        code_start=int(codes["start"]),
+                        code_pad=int(codes.get("pad", 0)),
+                        max_count=None if codes.get("maxCount") is None else int(codes["maxCount"]),
+                        skip_cells=frozenset(int(i) for i in codes.get("skipCells") or ()),
+                        sample=CellSample(
+                            x0=float(sample["x0"]),
+                            y0=float(sample["y0"]),
+                            x1=float(sample["x1"]),
+                            y1=float(sample["y1"]),
+                        ),
+                        set_name=chart.get("set"),
+                    )
+                )
+                continue
             charts.append(
                 ChartSpec(
                     chart_id=chart["id"],
@@ -88,12 +118,14 @@ def load_catalog(slug: str) -> dict[str, dict]:
     return by_code
 
 
-def contact_sheet(swatches, renders, out_path: Path) -> None:
+def contact_sheet(swatches, renders, out_path: Path, *, row_h: int = 44, crop_w: int = 120) -> None:
+    # Grid charts pass a larger row_h/crop_w: their crop is the FULL cell whose printed code
+    # must stay legible (the sheet's self-verification), so it must not be thumbnailed down.
     from PIL import Image, ImageDraw
 
     if not swatches:
         return
-    row_h, crop_w, color_w, text_w, pad = 44, 120, 90, 90, 6
+    color_w, text_w, pad = 90, 90, 6
     width = text_w + crop_w + color_w + 4 * pad
     sheet = Image.new("RGB", (width, row_h * len(swatches) + pad), "white")
     draw = ImageDraw.Draw(sheet)
@@ -138,11 +170,23 @@ def main() -> None:
         cross_checks: list[str] = []
         unmatched: list[str] = []
         for spec in charts:
-            pdf_bytes = client.get_response(spec.url).content
-            sha = hashlib.sha256(pdf_bytes).hexdigest()
-            with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-                swatches, renders = extract_chart(pdf, spec)
-            contact_sheet(swatches, renders, REVIEW_DIR / f"{slug}-{spec.chart_id}.jpg")
+            raw = client.get_response(spec.url).content
+            sha = hashlib.sha256(raw).hexdigest()
+            if isinstance(spec, GridSpec):
+                from PIL import Image
+
+                chart_image = Image.open(io.BytesIO(raw)).convert("RGB")
+                swatches = extract_grid(chart_image, spec)
+                renders = {0: chart_image}  # extract_grid stamps page=0 on every swatch
+                method = "grid-image"
+                # Full cells at ~original scale so the printed code stays readable.
+                sheet_size = {"row_h": round(spec.cell_h) + 12, "crop_w": round(spec.cell_w) + 16}
+            else:
+                with pdfplumber.open(io.BytesIO(raw)) as pdf:
+                    swatches, renders = extract_chart(pdf, spec)
+                method = "pdf-chart"
+                sheet_size = {}
+            contact_sheet(swatches, renders, REVIEW_DIR / f"{slug}-{spec.chart_id}.jpg", **sheet_size)
 
             filled = checked = 0
             for sw in swatches:
@@ -171,7 +215,7 @@ def main() -> None:
                     {
                         "hex": sw.hex,
                         "code": sw.code,
-                        "method": "pdf-chart",
+                        "method": method,
                         "chart": spec.chart_id,
                         "source": spec.url,
                         "sourceSha256": sha,
@@ -188,8 +232,9 @@ def main() -> None:
             out = OUT_DIR / f"{slug}.yaml"
             content = (
                 "# GENERATED by tools/acquisition/scripts/gen_paint_swatches.py -- do not hand-edit.\n"
-                "# Colours sampled from manufacturer chart PDFs, keyed by the paint catalog's\n"
-                "# {Name}|{Set} identity. The C# SwatchApplier fills EMPTY hex only; overrides win.\n"
+                "# Colours sampled from manufacturer charts (PDF or raster grid), keyed by the\n"
+                "# paint catalog's {Name}|{Set} identity. The C# SwatchApplier fills EMPTY hex\n"
+                "# only; overrides win.\n"
                 "# Review artifacts: data/review/swatches/*.jpg (crop vs extracted colour per code).\n"
                 + yaml.safe_dump({slug: {k: applied[k] for k in sorted(applied)}},
                                  sort_keys=False, allow_unicode=True, width=200)

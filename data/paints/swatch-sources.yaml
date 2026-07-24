@@ -1,9 +1,34 @@
 # Manufacturer colour-chart sources for swatch extraction (scripts/gen_paint_swatches.py).
-# Per chart: the code-label regex, the pages carrying the REAL chart (codes reappear in
-# combination tables and indexes), and the sampling rectangle in PDF points relative to each
-# code label's (x0, top) -- negative dy means the chip sits above the label. Offsets are
-# calibrated against the rendered contact sheets in data/review/swatches/ (regenerate and
-# eyeball them whenever a chart URL/revision changes).
+# Two chart kinds:
+# - default (pdf-chart): the code-label regex, the pages carrying the REAL chart (codes
+#   reappear in combination tables and indexes), and the sampling rectangle in PDF points
+#   relative to each code label's (x0, top) -- negative dy means the chip sits above the
+#   label.
+# - type: grid-image -- raster chart image: grid geometry in pixels (origin + cell pitch +
+#   cols/rows), the sequential code spec the cells spell out (prefix/start/pad, maxCount
+#   stops before logo-covered or unprinted trailing cells, skipCells punches mid-grid
+#   holes), and the per-cell sampling sub-region as cell fractions (dodges the printed
+#   code/name text).
+# Offsets are calibrated against the rendered contact sheets in data/review/swatches/
+# (regenerate and eyeball them whenever a chart URL/revision changes).
+ak-interactive:
+  uaProfile: browser # same WAF as mfr-ak-interactive (bot UAs 403'd)
+  charts:
+    - id: briefcase-235
+      type: grid-image
+      url: https://ak-interactive.com/wp-content/uploads/2020/12/BRIEFCASE_235COLORS-CHART.jpg
+      # 1600x810 JPG, 20x12 grid of 80 x 67.5 px cells, codes AK11001.. left-to-right
+      # top-to-bottom. Despite the briefcase's marketed 236 colours only 235 are PRINTED:
+      # cell (11,15) -- would-be AK11236 Crackle Medium -- is blank white (full-cell
+      # stdev 0.0) and the AK logo covers the rest of row 12, hence maxCount 235.
+      # Calibration 2026-07-24 vs Arcturus hex (232 coded cells): median dRGB 11.5,
+      # 97.4% within 40; the outliers are saturated inks whose chart print clips a
+      # channel (e.g. AK11200), not misalignment.
+      grid: { originX: 0, originY: 0, cellWidth: 80, cellHeight: 67.5, cols: 20, rows: 12 }
+      codes: { prefix: AK, start: 11001, pad: 5, maxCount: 235 }
+      # Cells print the code at ~y 0.10-0.25 and the name at ~y 0.63-0.75; this band
+      # samples pure fill between the two.
+      sample: { x0: 0.10, y0: 0.30, x1: 0.90, y1: 0.58 }
 vallejo:
   uaProfile: browser # same WAF as mfr-vallejo (bot UAs 403'd)
   charts:
