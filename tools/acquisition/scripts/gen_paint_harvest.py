@@ -455,6 +455,50 @@ def bridge_scale75() -> BrandHarvest:
     return out
 
 
+def bridge_gsw() -> BrandHarvest:
+    """METADATA role. greenstuffworld.com titles wrap the paint name in marketing prefixes
+    ("Acrylic Color WONKA VIOLET", "Acrylic white paint Nuclear White") while the base data
+    keeps bare names -- so the join is LONGEST-UNIQUE-SUFFIX on normalized names (>=5 chars,
+    longest catalog name that the store title ends with, unique at that length). Enrichment
+    carries the store's REAL gtin13 EANs (100% fill in the 2026-07-24 snapshot) + images;
+    the microdata mpn (true paint number) rides along as sku for audit. Store sets and
+    unmatched paints surface as candidates."""
+    catalog = Catalog("green-stuff-world")
+    out = BrandHarvest()
+    # normed catalog name -> keys, for suffix lookup
+    by_norm: dict[str, list[str]] = catalog.by_name
+    norms = sorted(by_norm, key=len, reverse=True)
+
+    def suffix_match(store_name: str) -> str | None:
+        n = norm(store_name)
+        best: str | None = None
+        for cand in norms:
+            if len(cand) < 5:
+                break  # sorted by length desc; everything after is shorter
+            if n == cand or n.endswith(cand):
+                keys = by_norm[cand]
+                if len(keys) == 1:
+                    return keys[0]
+                return None  # ambiguous at the longest match -- refuse
+        return best
+
+    for o in read_observations("mfr-greenstuffworld"):
+        slug = (o.get("hints") or {}).get("categorySlug") or ""
+        if slug == "paint-sets":
+            continue  # sets: not even candidates, metadata-only source
+        key = suffix_match(o["name"])
+        if key is not None:
+            out.add_enrich(key, ean=o.get("ean"), imageUrl=o.get("imageUrl"), sku=o.get("sku"),
+                           sourceUrl=o.get("url"), source="mfr-greenstuffworld")
+        else:
+            out.candidates.append(
+                {"name": o["name"], "sku": o.get("sku"), "url": o.get("url"),
+                 "source": "mfr-greenstuffworld",
+                 "reason": f"no unique name join into catalog ({slug})"}
+            )
+    return out
+
+
 BRIDGES = {
     "vallejo": bridge_vallejo,
     "ak-interactive": bridge_ak,
@@ -462,6 +506,7 @@ BRIDGES = {
     "monument-pro-acryl": bridge_monument,
     "turbo-dork": bridge_turbodork,
     "scale75": bridge_scale75,
+    "green-stuff-world": bridge_gsw,
 }
 
 

@@ -107,6 +107,14 @@ manufacturers:
     # No gs1Prefixes on purpose: mr-hobby.com publishes no JAN/EAN anywhere (live-probed
     # 2026-07-24 across EN+JA detail pages, no ld+json/gtin either) -- nothing verified to pin.
     vendorNames: [Mr Hobby, GSI Creos, Mr. Hobby]
+  - slug: green-stuff-world
+    name: Green Stuff World
+    # mpn paint numbers off product-page microdata (3220 Wonka Violet etc.).
+    codePattern: '\d{3,4}'
+    # Three GS1 prefixes observed across the full 477-product snapshot 2026-07-24:
+    # 8435646 (241), 8436574 (217), 8436554 (19 -- the Chameleon line + 1 fluor).
+    gs1Prefixes: ['8435646', '8436574', '8436554']
+    vendorNames: [Green Stuff World, GSW]
   - slug: reaper
     name: Reaper
     # 5-digit skus straight off reapermini.com's embedded line-page data (09001 Red Brick,
