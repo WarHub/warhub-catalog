@@ -1,0 +1,305 @@
+<!-- Trimmed REAL capture of https://www.reapermini.com/paints/master-series-paints-core-colors (2026-07-24): head/body stripped, the inline Vue
+     bootstrap script kept byte-for-byte with its paints array cut to 5 items. -->
+<!doctype html>
+<html>
+<head><title>Reaper Miniatures :: Master Series Paints Core Colors</title></head>
+<body>
+<script>
+
+    var calcTax = function(price, currency){
+        // state Texas gets .065 // UK gets .2 // Do not calculate for other countries
+        var taxRate = {
+            USD: 0.065,
+            AUD: 0,
+            CAD: 0,
+            GBP: 0.2,
+            EUR: 0.2
+        };
+        if (currency != 'USD') {
+            // USD calculated at Checkout
+            return Math.ceil(price * taxRate[currency])
+        }
+        return price
+    };
+
+
+
+    Vue.filter("imagepath", function (context, size) {
+        if (!context) {
+            return ""
+        }
+        if (!size) {
+            size = 4;
+        }
+        return ("https://images.reapermini.com/" + size + "/" + context);
+    });
+
+
+
+    Vue.filter("splitCamel", function (context) {
+
+        if (!context) {
+            return ""
+        }
+        return context.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")
+    });
+
+
+    Vue.filter("getMainImage", function (context) {
+        if (!context) {
+            return ""
+        }
+        var mainImage = context[0];
+        if (mainImage && mainImage.filename) {
+            return ("https://images.reapermini.com/6/" + mainImage.filename);
+        } else {
+            return false;
+        }
+    });
+
+
+    Vue.filter("nl2br", function (context) {
+        if (!context) return "";
+        return context.replace(/\r|\n|\r\n/g, '<br />');
+    });
+
+
+
+
+    Vue.filter("getProductPrice", function(product, currency) {
+
+    	if (currency === 'USD') {
+    		return product.price;
+        }
+
+		var divisor = {
+            EUR: 1.039,
+            GBP: 1.201,
+            AUD: 0.55,
+            CAD: 0.73,
+            USD: 1.00
+        }
+
+    	var price = product.prices && product.prices[currency];
+
+        if (!price || price <= 0) {
+        	// do conversion
+            price =  Math.trunc(Math.ceil(product.price / divisor[currency]))
+
+            if (divisor === 'AUD') {
+			    price = Math.round(price / 5) * 5
+		    }
+        }
+        return price;
+    });
+
+
+
+	Vue.filter("moneyWithTax", function (price, currency) {
+
+		if (currency == 'USD') {
+			return price
+		}
+
+		if (price === 0) return "0.00";
+
+		if (!price) return "";
+
+		var tax = calcTax(price, currency);
+
+        var total = (Number(price) + Number(tax)) // convert cents/pence into Dollars/Pounds
+
+        return total; // Money with any applicable tax added */
+	});
+
+
+    Vue.filter("decimalize", function (context) {
+        if (context === 0) return "0.00";
+		if (!context) return "";
+		var price = parseInt(context, 10) / 100
+		return price.toFixed(2)
+    });
+
+
+
+	Vue.filter("roundingError", function (context) {
+		if (context === 0) return "0.00";
+		if (!context) return "";
+		var price = (context / 100).toFixed(3);
+
+		if ( price.slice(-1) == '0' ) {
+			return price.slice(0, -1); // remove trailing zero
+		}
+		var fractioned = price.split('');
+		fractioned[fractioned.length - 1] = '<span style="color: #cc0000; font-size: 0.85rem">' + fractioned[fractioned.length - 1] + ' *</span>';
+		return fractioned.join('')
+	});
+
+
+
+
+
+
+
+	Vue.filter("dekebab", function (context) {
+        if (!context) return "";
+        return context.replace('-', ' ');
+    });
+
+    Vue.filter("deunderscore", function (context) {
+    if (!context) return "";
+    return context.replace('_', ' ');
+    });
+
+
+    Vue.filter("tags", function (context, delimiter) {
+    	if (!delimiter) {
+    		delimiter = ','
+        }
+        if (!context) return "";
+        var str = context;
+        var temp = str.split(delimiter);
+        var tags = [];
+        // done this way, to remove any empty tags.
+        var i;
+        for (i = 0; i < temp.length; i++) {
+            i && tags.push(i);
+        }
+        return tags;
+    });
+
+
+var updateCartTotal = function(i) {
+	var cartElem = document.getElementById('cartTotalQTY');
+	var newTotal = parseInt(cartElem.textContent) + i;
+	cartElem.textContent = newTotal;
+};
+
+	var app = new Vue({
+		el: '#paintApp',
+        delimiters: ['${', '}'],
+		data: {
+			isLoading: false,
+			paints: [{"_id":"6862ba2406848d9b4cd9c6a9","sku":"09000","images":[{"artist":"","type":"main","order":0,"filename":"09000_SAMPLE.jpg"}],"inventory":99407,"inventoryBuffer":0,"meta":{"color":["red"]},"name":"MSP Paint Color Sample","price":389,"prices":{"EUR":375,"GBP":324,"AUD":708,"CAD":533}},{"_id":"5a67484ca8dded098e1eb30f","sku":"09001","name":"Red Brick","price":389,"inventory":98223,"images":[],"meta":{"color":["red"]},"prices":{"EUR":375,"GBP":324,"AUD":708,"CAD":533},"inventoryBuffer":0},{"_id":"5a67484da8dded098e1eb310","sku":"09002","name":"Deep Red","price":389,"inventory":97336,"images":[{"filename":"09002.jpg","type":"main","order":0,"artist":""}],"meta":{"color":["red"]},"prices":{"EUR":375,"GBP":324,"AUD":708,"CAD":533},"inventoryBuffer":0},{"_id":"5a6748e1a8dded098e1eb64e","sku":"09168","name":"Mist Green","price":389,"meta":{"color":["green"]},"inventory":0,"prices":{"EUR":374,"GBP":324,"AUD":707,"CAD":533},"images":[{"artist":"","type":"main","order":0,"filename":"09168_2.jpg"},{"artist":"","type":"main","order":1,"filename":"09168.jpg"}],"inventoryBuffer":0},{"_id":"6a0f37e812318dc6ea4e7494","sku":"09819","images":[{"artist":"","type":"main","order":1,"filename":"09819_w_1.jpg"}],"inventory":66,"inventoryBuffer":0,"meta":{"color":["red","yellow","green"]},"name":"Tinted Glosses Triad #1","price":1149,"prices":{"EUR":1106,"GBP":957,"AUD":2090,"CAD":1574}}],
+			colors: [
+				'red',
+				'orange',
+				'yellow',
+				'green',
+				'blue',
+				'purple',
+				'brown',
+				'black',
+				'white',
+				'grey',
+				'metallic',
+				'clear',
+			],
+            selectedColors: [
+				'red',
+				'orange',
+				'yellow',
+				'green',
+				'blue',
+				'purple',
+				'brown',
+				'black',
+				'white',
+				'grey',
+				'metallic',
+				'clear',
+            ],
+            wishlists: [],
+            showWishlistModal: false,
+            wishlist: { sku: null, name: null, ajaxing: false },
+            selectedWishlist: 'Default',
+		},
+        methods: {
+			getInventory: function(sku) {
+				var obj = _.find(this.paints, function(o) {
+					return o.sku === sku;
+				});
+
+				return ((obj && obj.inventory) <= 0 ) ? 'None in stock' : ''
+            },
+			updateInventory: function(sku) {
+				var obj = _.find(this.paints, function(o) {
+					return o.sku === sku;
+				});
+
+				var inventory = obj.inventory - 1;
+
+				this.$set(obj, 'inventory', inventory)
+
+			},
+			isDisabled: function(sku) {
+			    var obj = _.find(this.paints, function(o) {
+			    	return o.sku === sku;
+			    });
+				if (obj && obj.inventory <= 0) {
+					return true
+                }
+            },
+			addToCart: function(sku) {
+				var that = this
+				that.isLoading = sku
+				axios.post('/cart/path/add/' + sku).then(function(response) {
+					// const inventory = response.data.inventory['US']
+                    that.updateInventory(sku)
+					that.isLoading = false
+					updateCartTotal(1);
+				}).catch(function(err) {
+					that.isLoading = false
+					console.log(err);
+				});
+			},
+			selectColor: function(color) {
+				var idx = _.indexOf(this.selectedColors, color);
+				if (idx !== -1) {
+					this.selectedColors.splice(idx, 1);
+				} else {
+					this.selectedColors.push(color);
+				}
+			},
+			colorTagClass: function(color) {
+				var cssClass = color + 'Tag'
+				var idx = _.indexOf(this.selectedColors, color);
+				if (idx !== -1) {
+					cssClass = cssClass + ' ' + 'selectedColor'
+				}
+				return cssClass
+			},
+			showTag: function(tags) {
+				var tag = _.intersection(this.selectedColors, tags)
+				return tag.length > 0
+			},
+
+
+			wishlistModal: function(sku, name) {
+				this.showWishlistModal = true;
+				this.wishlist.sku = sku;
+				this.wishlist.name = name;
+			},
+			addToWishlist: function() {
+				var that = this;
+				that.wishlist.ajaxing = true;
+				axios.post('/wishlist/incrementsku', {sku: that.wishlist.sku, name: that.wishlist.name, listID: that.selectedWishlist})
+					.then(function (response) {
+						setTimeout(function () {
+							that.showWishlistModal = false;
+							that.wishlist.ajaxing = false;
+						}, 100)
+					}).catch(function (err) {
+					console.log(err);
+				});
+			},
+
+
+
+
+
+		}
+	})
+</script>
+</body>
+</html>

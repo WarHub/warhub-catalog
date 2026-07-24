@@ -131,3 +131,32 @@ out of scope until that range exists in the catalog.
   detail pages only → budgeted-detail-queue strategy (same shape as shopify-paints).
 - **Reaper probe**: `/paints/msp2` is marketing-only (no data). The real per-paint listing
   (and the rumored embedded swatch hex) needs deeper mapping — next wave.
+
+## Wave 3 (2026-07-24): delegated builds — Mr Hobby, Reaper, grid-image, Scale75/GSW recon
+
+- **Mr Hobby** (`mr-hobby` strategy + `mfr-mr-hobby`, snapshot committed: 134 observations,
+  8 paint categories, full sweep): the site publishes **no per-colour data** — detail pages
+  are SERIES-level ("Mr.COLOR C1~C189" is one page), no JAN/EAN anywhere, colours only as a
+  JA-only raster PNG. Arcturus stays the per-paint source; this snapshot documents
+  series-level truth (lifecycle tags incl. 7× "Out of Production", series volumes, images).
+  No harvest bridge for it — there is no per-paint join. Lead: the JA colour-lineup PNG could
+  feed grid-image if per-colour need arises.
+- **Reaper** (`reaper` strategy + `mfr-reaper` + tests, **dormant — no snapshot**): line pages
+  embed complete per-line JSON (sku/name/multi-currency price/images/colour-family; sets
+  carry component SKUs). But reapermini.com's robots.txt carries Cloudflare's managed
+  AI-crawl block (`ClaudeBot Disallow: /`), which this pipeline's robots policy honors —
+  activation is an owner-level decision, documented in the descriptor. Colour leads: flat
+  swatch tiles at `images.reapermini.com/6/<sku>.jpg` (their colour DB, published as raster)
+  and a server-side PowerPalette matcher with no public endpoint. Offline dry-run through the
+  real runner: 541 observations, sku/price 100%, ean 0%.
+- **grid-image extractor** (`swatch/grid_image.py` + bridge `type: grid-image` routing):
+  raster chart grids with sequential codes; contact-sheet crops show the FULL cell (printed
+  code visible → self-verifying). AK briefcase chart calibrated: 235 printed cells (AK11236
+  is blank), median dRGB 11.5 vs Arcturus, 97.4% ≤40 — an independent validation of the
+  Arcturus AK colours; filled the 3 hex-less 3rd-gen singles the chart covers.
+- **Scale75 is Shopify now** (recon; the PrestaShop assumption was stale): reuse
+  `shopify-paints` + a `scope.collections` delta (~15 requests covers Drop & Paint 128,
+  Floww 24+5, Prism sets, likely-Mystic `zodiac-mystic-signs` 12); uaProfile browser;
+  barcodes unpopulated store-wide → skip the `.js` sweep. **GSW is PrestaShop 1.7** with
+  microdata gtin13 + true paint numbers as `mpn` (GS1 prefixes 8435646/8436574), honest bot
+  UA accepted everywhere → `sitemap-sd-paints` variant, ~471 requests one-off.

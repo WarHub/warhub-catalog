@@ -97,3 +97,20 @@ manufacturers:
     name: Turbo Dork
     codePattern: 'TDK\d+(_\d)?'
     vendorNames: [Turbo Dork, TurboDork]
+  - slug: mr-hobby
+    name: Mr Hobby
+    # Item codes are a 1-4 letter line prefix + 1-4 digits (+ rare letter suffix): C74, H55,
+    # N32, GX112, SMS1, SP2, XC01, CMC04, SF284, B601, WTT111, PSMS01... (live site + catalog
+    # brand data, 2026-07-24). Letters optional because the catalog's Mr Color / Mr Metal
+    # Color productCodes are stored as bare digits ('74', '218') with the C prefix implied.
+    codePattern: '[A-Z]{0,4}\d{1,4}[A-Z]?'
+    # No gs1Prefixes on purpose: mr-hobby.com publishes no JAN/EAN anywhere (live-probed
+    # 2026-07-24 across EN+JA detail pages, no ld+json/gtin either) -- nothing verified to pin.
+    vendorNames: [Mr Hobby, GSI Creos, Mr. Hobby]
+  - slug: reaper
+    name: Reaper
+    # 5-digit skus straight off reapermini.com's embedded line-page data (09001 Red Brick,
+    # 29237 UV Reactive, 08906 LTPK). No gs1Prefixes: no EAN/UPC appears anywhere in the
+    # site's data (live-mapped 2026-07-24) -- add one only once a real barcode is observed.
+    codePattern: '\d{5}'
+    vendorNames: [Reaper, Reaper Miniatures]

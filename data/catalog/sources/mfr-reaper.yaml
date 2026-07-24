@@ -1,0 +1,47 @@
+id: mfr-reaper
+kind: manufacturer
+strategy: reaper
+baseUrl: https://www.reapermini.com
+scope:
+  manufacturer: Reaper
+  # The six real /paints/* data pages (live-mapped 2026-07-24): each embeds its line's full
+  # product array in the inline Vue bootstrap (`paints: [...]`) -- one GET per page is the
+  # entire request footprint. Every other /paints/<slug> is a catch-all serving the data-less
+  # marketing page. ORDER MATTERS: the first page claiming a sku wins, so set-kind pages come
+  # first -- triad/set skus recur on the singles pages (09819-22 triads on core-colors, Bones
+  # Ultra-Coverage sets 09976-81 on bones, 09967-68 on pathfinder, LTPK 08906-07 on
+  # paint-sets) and must keep their set identity. `line` labels are the site's own page names.
+  linePages:
+    - {path: /paints/learn-to-paint-kits, line: Learn to Paint Kits, kind: set}
+    - {path: /paints/paint-sets, line: Paint Sets, kind: set}
+    - {path: /paints/master-series-paints-triads, line: Master Series Paints Triads, kind: set}
+    - {path: /paints/master-series-paints-core-colors, line: Master Series Paints Core Colors, kind: single}
+    - {path: /paints/master-series-paints-bones, line: Master Series Paints Bones, kind: single}
+    - {path: /paints/master-series-paints-pathfinder-colors, line: Master Series Paints Pathfinder Colors, kind: single}
+politeness:
+  # STATUS (2026-07-24): implemented but POLICY-BLOCKED from running. robots.txt's
+  # `User-agent: *` group allows everything except /api and /admin (all /paints/* pages this
+  # strategy fetches are allowed, no crawl-delay, and the canonical bot UA gets clean 200s on
+  # them) -- BUT the site also carries Cloudflare's managed AI-crawl-control block, which
+  # includes `User-agent: ClaudeBot / Disallow: /`. This repo's robots enforcement
+  # deliberately honors ClaudeBot groups as disallowing OURSELVES (acquire/robots.py module
+  # docstring, checked-token 3), so run_source refuses the whole site with
+  # RobotsDisallowedError before any strategy work. That is the intended conservative
+  # outcome, not a bug: do NOT add ignoreRobots here -- the escape hatch exists for
+  # "baseUrl isn't the real fetch target" cases, not for opting past an explicit
+  # Anthropic-stack opt-out. Revisit only on an owner-level policy decision or if Reaper's
+  # robots.txt changes. (The shop's /search/* tree additionally sits behind a Cloudflare
+  # managed JS challenge and is never fetched regardless.)
+  rps: 0.5
+contract:
+  # Evidence-based floor (~85% of observed): live snapshot 2026-07-24 counted 555 blob items
+  # across the six pages, 541 unique skus after cross-page dedupe (439 singles + 116 sets -
+  # 14 recurrences). 541 * 0.85 = 459.9 -> 455.
+  minCount: 455
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 1.0
+    # Drift guard on the images array shape: ~97% of blob items carry a main image filename
+    # (8 of 267 core singles and a handful of sets shipped image-less on 2026-07-24).
+    imageUrl: 0.9
