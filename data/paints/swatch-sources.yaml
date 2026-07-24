@@ -1,0 +1,48 @@
+# Manufacturer colour-chart sources for swatch extraction (scripts/gen_paint_swatches.py).
+# Per chart: the code-label regex, the pages carrying the REAL chart (codes reappear in
+# combination tables and indexes), and the sampling rectangle in PDF points relative to each
+# code label's (x0, top) -- negative dy means the chip sits above the label. Offsets are
+# calibrated against the rendered contact sheets in data/review/swatches/ (regenerate and
+# eyeball them whenever a chart URL/revision changes).
+vallejo:
+  uaProfile: browser # same WAF as mfr-vallejo (bot UAs 403'd)
+  charts:
+    - id: cc339-true-metallic-metal
+      url: https://acrylicosvallejo.com/wp-content/uploads/2026/06/CC339-True_Metallic_Metal.pdf
+      codePattern: '77\.\d{3}'
+      pages: [0] # page 1 repeats every code in mixing-combination tables
+      set: True Metallic Metal
+      # Chip grid: brushed-metallic photo strips directly above each code, ~44pt column pitch.
+      sample: { dx: 0, dy: -36, width: 44, height: 30 }
+    - id: cc331-diorama-fx
+      url: https://acrylicosvallejo.com/wp-content/uploads/2024/11/CC331-R00-Diorama-FX-NewIC.pdf
+      codePattern: '26\.\d{3}'
+      # Page 1 ONLY: page 0 mixes card styles and the configured offset lands on descriptive
+      # text for the Water-FX codes (contact-sheet review 2026-07-24) -- transparent gels that
+      # arguably should not carry a flat hex anyway. Unfilled codes can return later via a
+      # chip-grid chart (Catalogo) config.
+      pages: [1]
+      set: Diorama FX
+      # Product cards: texture-photo panel right of the jar shot, anchored to the "Ref." code.
+      sample: { dx: 304, dy: -6, width: 78, height: 78 }
+    - id: cc336-pigment-fx
+      url: https://acrylicosvallejo.com/wp-content/uploads/2025/03/CC336-R00-Pigment-FX-NewIC.pdf
+      codePattern: '73\.\d{3}'
+      # Page 1 ONLY -- same contact-sheet finding as cc331 (page 0 is boxed set panels/text).
+      pages: [1]
+      set: Pigment FX
+      # Same NewIC card family as CC331.
+      sample: { dx: 304, dy: -6, width: 78, height: 78 }
+    - id: cc329-model-color
+      url: https://acrylicosvallejo.com/wp-content/uploads/2024/03/CC329-R00-Model-Color-NewIC.pdf
+      codePattern: '70\.\d{3}'
+      pages: [0, 1]
+      set: Model Color
+      # Chip grid (calibrate on first run).
+      sample: { dx: 0, dy: -36, width: 44, height: 30 }
+    - id: cc298-game-air
+      url: https://acrylicosvallejo.com/wp-content/uploads/2025/09/CC298-Game_Air.pdf
+      codePattern: '76\.\d{3}'
+      pages: [0, 1]
+      set: Game Air
+      sample: { dx: 0, dy: -36, width: 44, height: 30 }

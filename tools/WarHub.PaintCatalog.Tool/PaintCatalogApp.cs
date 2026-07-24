@@ -48,6 +48,11 @@ internal static class PaintCatalogApp
             Description = "Directory of generated manufacturer harvest files (data/paints/harvest)"
         };
 
+        Option<DirectoryInfo?> swatchesOption = new("--swatches")
+        {
+            Description = "Directory of generated swatch-extraction files (data/paints/swatches)"
+        };
+
         Option<int> sampleOption = new("--sample")
         {
             Description = "Sample N paints per brand (0 = all)",
@@ -81,6 +86,7 @@ internal static class PaintCatalogApp
             overridesOption,
             barcodesOption,
             harvestOption,
+            swatchesOption,
             sampleOption,
             brandOption,
             equivalencesOption,
@@ -95,6 +101,7 @@ internal static class PaintCatalogApp
             FileInfo? overrides = parseResult.GetValue(overridesOption);
             FileInfo? barcodes = parseResult.GetValue(barcodesOption);
             DirectoryInfo? harvest = parseResult.GetValue(harvestOption);
+            DirectoryInfo? swatchesDir = parseResult.GetValue(swatchesOption);
             int sample = parseResult.GetValue(sampleOption);
             string? brandFilter = parseResult.GetValue(brandOption);
             bool generateEquivalences = parseResult.GetValue(equivalencesOption);
@@ -130,6 +137,10 @@ internal static class PaintCatalogApp
                 HarvestApplier.Load(harvest?.FullName);
             if (verbose && harvestData.Count > 0)
                 Console.WriteLine($"Harvest files loaded for {harvestData.Count} brand(s).");
+            IReadOnlyDictionary<string, IReadOnlyDictionary<string, SwatchApplier.SwatchEntry>> swatchData =
+                SwatchApplier.Load(swatchesDir?.FullName);
+            if (verbose && swatchData.Count > 0)
+                Console.WriteLine($"Swatch files loaded for {swatchData.Count} brand(s).");
             string toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
             var brandSummaries = new List<BrandSummary>();
             var allCatalogs = new List<BrandCatalog>();
@@ -226,6 +237,10 @@ internal static class PaintCatalogApp
                 // Fill blank Ean/ImageUrl from the committed manufacturer harvest (exact
                 // {Name}|{Set} lookups resolved at generation time; overrides below still win).
                 paints = HarvestApplier.ApplyEnrichment(paints, brandInfo.Slug, harvestData);
+
+                // Fill EMPTY hex from the committed chart-swatch extraction (exact
+                // {Name}|{Set}|{ProductCode} lookups; overrides below still win).
+                paints = SwatchApplier.Apply(paints, brandInfo.Slug, swatchData);
 
                 // Apply overrides
                 paints = OverrideApplier.Apply(paints, brandInfo.Slug, overridesPath);
@@ -439,7 +454,29 @@ internal static class PaintCatalogApp
                 (IReadOnlyDictionary<string, string> aliases, ISet<string> retracted) =
                     PaintOverrideAliases.Load(overridesPath, brandSlug);
 
-                ReconcileResult<PaintRecord> reconciled = reconciler.Reconcile(existing, fresh, aliases, retracted, today);
+                // Auto-alias every hex-carrying fresh identity to its empty-hex twin key.
+                // Harvest additions are born colour-less (hex is part of the identity key);
+                // the moment a colour source lands (chart swatches, an override), the fresh
+                // record's identity moves — this alias makes the archived colour-less record
+                // MERGE into it (keeping FirstSeen/history) instead of splitting into a
+                // stale twin. An alias only fires when the old key actually exists in the
+                // archive, so blanket generation is harmless; explicit overrides-file aliases
+                // keep priority via TryAdd.
+                var mergedAliases = new Dictionary<string, string>(StringComparer.Ordinal);
+                foreach (var (newKey, oldKey) in aliases)
+                    mergedAliases[newKey] = oldKey;
+                foreach (PaintRecord rec in fresh)
+                {
+                    if (string.IsNullOrEmpty(rec.Details.Hex))
+                        continue;
+                    string hexKey = adapter.IdentityKey(rec);
+                    string hexlessKey = adapter.IdentityKey(
+                        rec with { Details = rec.Details with { Hex = "" } });
+                    if (hexKey != hexlessKey)
+                        mergedAliases.TryAdd(hexKey, hexlessKey);
+                }
+
+                ReconcileResult<PaintRecord> reconciled = reconciler.Reconcile(existing, fresh, mergedAliases, retracted, today);
 
                 List<PaintRecord> finalRecords;
                 if (authoritativeRun)

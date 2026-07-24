@@ -89,8 +89,11 @@ public static class HarvestApplier
     }
 
     /// <summary>
-    /// Appends harvested additions for the brand, skipping any whose (Name, Set) identity is
-    /// already present (idempotent when Arcturus catches up with a range we harvested first).
+    /// Appends harvested additions for the brand, skipping any whose (Name, Set, ProductCode)
+    /// is already present (idempotent when Arcturus catches up with a range we harvested
+    /// first). The code MUST be part of the skip key: variant ranges legitimately reuse one
+    /// colour name across several codes (True Metallic Metal ships each colour as 4 coded
+    /// variants — a name-only key silently dropped 59 of its 79 paints).
     /// </summary>
     public static IReadOnlyList<Paint> AppendAdditions(
         IReadOnlyList<Paint> paints,
@@ -104,14 +107,15 @@ public static class HarvestApplier
         }
 
         var existing = new HashSet<string>(
-            paints.Select(p => $"{p.Name}|{p.Set}"), StringComparer.OrdinalIgnoreCase);
+            paints.Select(p => $"{p.Name}|{p.Set}|{p.ProductCode}"), StringComparer.OrdinalIgnoreCase);
 
         List<Paint> result = paints.ToList();
         foreach (HarvestAddition addition in additions)
         {
             if (string.IsNullOrWhiteSpace(addition.Name) || string.IsNullOrWhiteSpace(addition.Set))
                 continue;
-            if (!existing.Add($"{addition.Name}|{addition.Set}"))
+            string code = string.IsNullOrWhiteSpace(addition.ProductCode) ? "" : addition.ProductCode!;
+            if (!existing.Add($"{addition.Name}|{addition.Set}|{code}"))
                 continue;
 
             result.Add(new Paint

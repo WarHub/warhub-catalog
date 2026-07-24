@@ -22,6 +22,12 @@ dependencies = [
 # explains the lazy-import seam). `uv sync --extra browser` + `playwright install chromium` to use
 # the live path.
 browser = ["playwright>=1.40"]
+# Only needed by the swatch subsystem (swatch/pdf_chart.py + scripts/gen_paint_swatches.py):
+# pdfplumber parses chart PDFs and renders pages via its pypdfium2 backend, Pillow does the
+# pixel sampling and contact sheets. An extra (not base deps) because swatch generation is an
+# on-demand, human-reviewed step -- the acquire pipeline and test suite must not require a PDF
+# stack. `uv sync --extra swatch` (or `uv run --extra swatch ...`) to use.
+swatch = ["pdfplumber>=0.11", "Pillow>=10"]
 
 [project.scripts]
 warhub-data = "warhub_acquisition.cli:main"

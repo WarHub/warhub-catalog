@@ -37,8 +37,30 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
 
     public bool HasFirstSeen(PaintRecord r) => !string.IsNullOrWhiteSpace(r.FirstSeen);
 
-    public PaintRecord ApplyRename(PaintRecord existing, PaintRecord fresh) =>
-        Merge(existing, fresh) with { Name = fresh.Name };
+    // A rename/alias moves the record to FRESH's identity — the stored record must carry the
+    // identity fields its new key was computed from, or the key and the record disagree and
+    // the alias has to fire again every run forever. For a pure name rename these assignments
+    // are no-ops (identity fields matched); for a colour backfill (empty-hex archive record
+    // aliased to its hex-carrying fresh twin — see the auto-alias pass in PaintCatalogApp)
+    // they are what actually lands the colour. History (FirstSeen, status, availability
+    // backfills) still comes from `existing` via Merge.
+    public PaintRecord ApplyRename(PaintRecord existing, PaintRecord fresh)
+    {
+        PaintRecord merged = Merge(existing, fresh);
+        return merged with
+        {
+            Name = fresh.Name,
+            ProductCode = fresh.ProductCode,
+            Details = merged.Details with
+            {
+                Set = fresh.Details.Set,
+                Hex = fresh.Details.Hex,
+                R = fresh.Details.R,
+                G = fresh.Details.G,
+                B = fresh.Details.B,
+            },
+        };
+    }
 
     private static string? Pick(string? fresh, string? existing) =>
         string.IsNullOrWhiteSpace(fresh) ? existing : fresh;
