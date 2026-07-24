@@ -154,6 +154,29 @@ out of scope until that range exists in the catalog.
   code visible → self-verifying). AK briefcase chart calibrated: 235 printed cells (AK11236
   is blank), median dRGB 11.5 vs Arcturus, 97.4% ≤40 — an independent validation of the
   Arcturus AK colours; filled the 3 hex-less 3rd-gen singles the chart covers.
+## Colour campaign (2026-07-24, waves 5): filling the promoted additions
+
+Third extractor kind `item-image` (per-code images: URL-templated tiles or the harvested
+store product photos; ordered candidate REGIONS because label layouts drift across product
+generations — Reaper went 1/55 → 42/55 with a 3-region list, calibration median dRGB 1.4).
+Per-brand outcomes (all calibrated vs already-coloured paints where any exist; contact
+sheets in data/review/swatches/ are the audit record):
+
+| Brand | Filled | Source quality |
+|---|---:|---|
+| Vallejo | 136 (earlier) | CC-series chart PDFs |
+| AK | 135/136 | 132 from OFFICIAL charts (Quick Gen dossier PDF on ak-masters.com, washes conversion chart, 2026 catalogue p12/p34); 3 effect fluids photo-sampled medium |
+| TAP | 66/72 | product-photo label chips (no code-anchored TAP chart exists); Masterclass 39/39; Warpaints Air 6 deliberately unfilled (no safe region) |
+| Reaper | 42/55 (+1 tile) | colour-dot product photos, median d 1.4; flat tiles at images.reapermini.com/6/<sku>.jpg are the premium source but 500 on newest skus (their DB lags) |
+| Turbo Dork | 40/40 | bottle label band, median d 7.0 (shift/metallic = mid-blend by design) |
+| GSW | 95/180 | the manufacturer's own swatch chips inside product shots (flat chips median d 0.0!); 60 stay unfilled with stated reasons (ink smears, colorshift spheres d 125, transparent varnishes, primer framing risk) |
+| Scale75 | ~216/259 | dropper-body band per set (d 20-35 by set); Drop & Paint/Games are form-transfers verified by sheet; Artist/Floww/Metal N excluded (tube band is a TINT — d 76-88) |
+| Monument | 0/26 (withheld) | renders shade ALL samples ~15% dark (hue-correct, d 28-36) — below the bar; needs a real chart source |
+
+Principles that held: a missing colour beats a wrong one (unfilled sets have stated
+reasons); calibration against known colours before trusting fills; contact sheets as the
+review gate (they caught text-region false samples, tint bands, mood-panel backgrounds).
+
 - **Scale75 is Shopify now** (recon; the PrestaShop assumption was stale): reuse
   `shopify-paints` + a `scope.collections` delta (~15 requests covers Drop & Paint 128,
   Floww 24+5, Prism sets, likely-Mystic `zodiac-mystic-signs` 12); uaProfile browser;

@@ -162,3 +162,194 @@ vallejo:
       pages: [0, 1]
       set: Game Air
       sample: { dx: 0, dy: -36, width: 44, height: 30 }
+# --- Store product-image calibrations (agent-calibrated 2026-07-24; monument withheld:
+# render shading darkens all samples ~15%% -- hue-correct but below the accuracy bar,
+# see docs/research design doc wave notes). Per-set verdicts + unusable-form reasons
+# live as comments in the per-entry blocks of the calibration report (PR).
+turbo-dork:
+  charts:
+  - id: bottle-band
+    type: item-image
+    useCatalogImages: true
+    set: Turbo Dork
+    regions:
+    - x0: 0.43
+      y0: 0.74
+      x1: 0.57
+      y1: 0.8
+    maxSpread: 70
+green-stuff-world:
+  charts:
+  - id: chip-dry-brush
+    type: item-image
+    useCatalogImages: true
+    set: Dry Brush
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-fluorescent
+    type: item-image
+    useCatalogImages: true
+    set: Fluorescent
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-flexible
+    type: item-image
+    useCatalogImages: true
+    set: Flexible
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-liquid-pigments
+    type: item-image
+    useCatalogImages: true
+    set: Liquid Pigments
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-effects
+    type: item-image
+    useCatalogImages: true
+    set: Effects
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-metallic
+    type: item-image
+    useCatalogImages: true
+    set: Metallic Colors
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-chrome
+    type: item-image
+    useCatalogImages: true
+    set: Chrome
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+  - id: chip-dipping
+    type: item-image
+    useCatalogImages: true
+    set: Dipping Inks
+    regions:
+    - x0: 0.62
+      y0: 0.32
+      x1: 0.8
+      y1: 0.44
+    - x0: 0.56
+      y0: 0.4
+      x1: 0.76
+      y1: 0.48
+  - id: spray-chameleon
+    type: item-image
+    useCatalogImages: true
+    set: Chameleon Spray
+    regions:
+    - x0: 0.66
+      y0: 0.42
+      x1: 0.86
+      y1: 0.6
+  - id: spray-primer
+    type: item-image
+    useCatalogImages: true
+    set: Spray Primer
+    regions:
+    - x0: 0.66
+      y0: 0.42
+      x1: 0.86
+      y1: 0.6
+  - id: spray-chrome
+    type: item-image
+    useCatalogImages: true
+    set: Chrome Spray
+    regions:
+    - x0: 0.66
+      y0: 0.42
+      x1: 0.86
+      y1: 0.6
+  - id: bottle-blackest
+    type: item-image
+    useCatalogImages: true
+    set: Blackest Black
+    regions:
+    - x0: 0.42
+      y0: 0.31
+      x1: 0.58
+      y1: 0.37
+    - x0: 0.42
+      y0: 0.28
+      x1: 0.62
+      y1: 0.32
+scale75:
+  uaProfile: browser
+  charts:
+  - id: dropper-scale-color
+    type: item-image
+    useCatalogImages: true
+    set: Scale Color Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-warfront
+    type: item-image
+    useCatalogImages: true
+    set: Warfront  Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-fantasy-games
+    type: item-image
+    useCatalogImages: true
+    set: Fantasy & Games Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-drop-and-paint
+    type: item-image
+    useCatalogImages: true
+    set: Drop & Paint
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-scalecolor-games
+    type: item-image
+    useCatalogImages: true
+    set: Scalecolor Games
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92
+  - id: dropper-inktensity
+    type: item-image
+    useCatalogImages: true
+    set: Inktensity Range
+    regions:
+    - x0: 0.43
+      y0: 0.86
+      x1: 0.57
+      y1: 0.92

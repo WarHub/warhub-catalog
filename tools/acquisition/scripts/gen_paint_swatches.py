@@ -347,6 +347,19 @@ def main() -> None:
                 f"cross-checked={checked} (contact sheet: data/review/swatches/{slug}-{spec.chart_id}.jpg)"
             )
 
+        # RATCHET (mirrors the harvest-additions ratchet): once a merge lands a fill, the
+        # catalog paint has hex, so a regeneration would emit no entry for it -- and the NEXT
+        # merge births the harvest addition colour-less again, splitting it from its coloured
+        # archive twin (live-hit 2026-07-24: 4 full-identity dupes). Committed entries whose
+        # code still exists in the catalog are carried forward verbatim unless this run
+        # re-derived them; hand-prune the file to actually retire a fill.
+        committed_path = OUT_DIR / f"{slug}.yaml"
+        if committed_path.exists():
+            committed = (yaml.safe_load(committed_path.read_text(encoding="utf-8")) or {}).get(slug) or {}
+            for key, entry in committed.items():
+                if key not in applied and str(entry.get("code") or "") in catalog:
+                    applied[key] = entry
+
         if applied:
             out = OUT_DIR / f"{slug}.yaml"
             content = (
