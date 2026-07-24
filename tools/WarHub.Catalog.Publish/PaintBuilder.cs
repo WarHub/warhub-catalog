@@ -176,13 +176,15 @@ internal static class PaintBuilder
         }
     }
 
-    private static string NormalizeHex(string hex)
+    private static string? NormalizeHex(string hex)
     {
         string h = hex.Trim().ToLowerInvariant();
         // Harvested additions can carry no colour yet (hex unknown until an override or a
-        // swatch-extraction pass fills it) -- publish them as "" rather than a bare "#".
+        // swatch-extraction pass fills it) -- publish them with NO hex property at all
+        // (null serializes as omitted), never "" or a bare "#": the schema pattern applies
+        // only when the property is present.
         if (h.Length == 0)
-            return "";
+            return null;
         return h.StartsWith('#') ? h : $"#{h}";
     }
 }

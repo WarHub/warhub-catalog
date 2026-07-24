@@ -117,6 +117,20 @@ public sealed class PublishFixture : IDisposable
                 hex: '#232323'
                 volumeMl: 17
                 container: dropper
+            - name: Old Copper
+              category: paint
+              status: current
+              availability: unknown
+              firstSeen: '2026-07-24'
+              productCode: '77.703'
+              details:
+                set: True Metallic Metal
+                r: 0
+                g: 0
+                b: 0
+                hex: ''
+                volumeMl: 18
+                container: dropper
             """);
 
         WriteFile(Path.Combine(paints, "equivalences.yaml"), """
