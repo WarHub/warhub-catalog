@@ -1,0 +1,47 @@
+id: mfr-greenstuffworld
+kind: manufacturer
+strategy: sitemap-sd-paints
+baseUrl: https://www.greenstuffworld.com
+scope:
+  manufacturer: Green Stuff World
+  # PrestaShop 1.7 publishes one single-urlset sitemap per shop language; EN is
+  # 1_en_0_sitemap.xml (2.8 MB, 3,929 locs of which 3,370 are product URLs, CDATA-wrapped --
+  # live-verified 2026-07-24). No sitemap index nesting.
+  sitemaps:
+    - https://www.greenstuffworld.com/1_en_0_sitemap.xml
+  # Paint category slugs, singles + sets (per-slug product-URL counts against the live
+  # sitemap summed 477 on 2026-07-24: acrylic-paints 104, dipping-inks 71, acrylic-inks 65,
+  # paint-sets 50, metallic 28, chameleon 28, flexible 26, dry-brush 20, liquid-pigments 18,
+  # fluorescent 11, acrylic-primers 11, chrome-paints 9, colour-primers-spray 9,
+  # colorshift-spray 7, effect-paints 7, varnishes 9, chrome-spray 2, blackest-black 2).
+  # airbrush-paint and auxiliary-paints matched 0 URLs that day (recon-listed categories;
+  # kept in case they return). Product URLs are /en/{category}/{id}-{slug}.html -- the
+  # trailing /\d+- keeps category landing pages (e.g. /en/122-acrylic-paints) out of the
+  # detail queue. Deliberately excludes brushes, empty pots, paint racks/displays,
+  # paint-packs-deals (retail bundles of the same singles) and the outlet tree -- singles
+  # ranges + boxed paint sets only, matching data/paints scope.
+  urlInclude: '/en/(acrylic-paints|acrylic-inks|dipping-inks|metallic-acrylic-paints|chameleon-acrylic-paints|fluorescent-acrylic-paints|dry-brush-paints|chrome-paints|effect-paints|flexible-paints|liquid-pigments|acrylic-primers|varnishes|colorshift-chameleon-spray|colour-primers-spray|chrome-spray-paint|airbrush-paint|blackest-black-paint|paint-sets|auxiliary-paints)/\d+-'
+politeness:
+  # greenstuffworld.com serves the canonical bot UA byte-identical product/sitemap responses
+  # (no WAF, no bot wall, no rate limiting observed at 0.5 rps -- live-verified 2026-07-24),
+  # so no uaProfile override. robots.txt (PrestaShop-generated) disallows only legacy ?p=
+  # pagination and account/cart controller params -- nothing this strategy fetches -- and is
+  # evaluated normally (no ignoreRobots).
+  rps: 0.5
+  # The EN sitemap body is a single 2.8 MB document -- give the transfer headroom over the
+  # 30 s default.
+  timeoutSeconds: 60
+contract:
+  # 477 paint-category product URLs on 2026-07-24; the floor leaves room for delistings
+  # while still catching a category-slug rename or sitemap collapse. Observations only
+  # exist for FETCHED product pages (a sitemap loc carries no fields), so run this source
+  # unbudgeted (one-off snapshot model, like the other mfr-* paint sources): a
+  # budget-starved partial run fails this floor by design instead of committing a sliver.
+  minCount: 350
+  requiredFieldRates:
+    name: 1.0
+    # Every probed product page carries meta gtin13 (real EAN, GS1 prefixes 8435646/8436574)
+    # and an itemprop sku Reference (EAN + 'ES'); meta mpn is the true paint number when
+    # present. 0.9 leaves margin for set/bundle pages missing barcodes.
+    ean: 0.9
+    sku: 0.9

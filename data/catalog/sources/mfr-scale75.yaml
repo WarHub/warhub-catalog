@@ -1,0 +1,64 @@
+id: mfr-scale75
+kind: manufacturer
+strategy: shopify-paints
+# Apex host serves robots.txt directly with 200 (live 2026-07-24); no www redirect involved.
+baseUrl: https://scale75.com
+scope:
+  # EUR store (recon 2026-07-24; live prices match, e.g. SC-00 "2.65").
+  currency: eur
+  # scale75.com publishes NO product_type (empty store-wide) and only generic tags
+  # (PINTURAS / PINTURAS INDIVIDUALES) -- live-verified 2026-07-24 -- so per-range collection
+  # membership is the ONLY range signal the store has. Enumeration is therefore scoped to the
+  # per-range paint collections; hints.collections carries the attribution downstream. Dedupe
+  # order convention (see shopify_paints.py docstring): specific range collections FIRST, the
+  # 572-product PINTURAS INDIVIDUALES umbrella LAST -- attribution never depends on the order
+  # (every membership is recorded), but a degraded enumeration loses tail collections first,
+  # so the umbrella's range-less strays are what degrade, never a range's attribution.
+  # Per-collection product counts live-verified 2026-07-24 via /collections.json (138
+  # collections total; only paint collections scoped, sets collections left out). Two scoped
+  # collections turned out to carry set-shaped products (snapshot-verified 2026-07-24) and are
+  # KEPT as evidence, like mfr-monument's Paint Sets -- the harvest bridge classifies:
+  # prism + prism-effect-sets both list exactly the 2 SSE-08x Prism effect SETS (the range has
+  # no singles on the store), and floww-oleos is 4 oil sets + the SFLOW-000 paint case.
+  # zodiac-mystic-signs (12) was probed and EXCLUDED: it is the ZODIAC MYSTIC SIGNS
+  # miniature-bust line (ARIES..PISCES, sku SZ75-0xx, 41.32 EUR / 200 g, tags MINIATURAS),
+  # NOT a Mystic Colors paint range -- no Mystic Colors collection exists on the store at all.
+  collections:
+    - scalecolor-individual # 63
+    - artist-individuales # 84 (sku SART-xx)
+    - warfront-individuales # 64
+    - fantasy-games-individuales # 48
+    - scalecolor-games-individuales # 48
+    - metal-n-alchemy-individuales # 24
+    - instant-individuales # 48
+    - drop-paint-individuales # 128
+    - flow-individuales # 24
+    - floww-oleos # 5
+    - inktensity-individuales # 16
+    - fx-fluor-individuales # 8
+    - prism # 2
+    - prism-effect-sets # 2
+    # Umbrella (products_count 572; 555 actually enumerated 2026-07-24) -- ALWAYS LAST. Not a
+    # strict superset: the 2026-07-24 snapshot found 7 singles listed only in their range
+    # collection, and every observed product had at least one specific-range membership.
+    - pinturas-para-miniaturas-colores-pinturas-acrilicas
+  # Variant barcodes are unpopulated store-wide (recon + live sample 2026-07-24: every .js
+  # detail checked carries barcode null), so the budgeted per-handle .js sweep would spend
+  # ~600 requests per run to learn nothing.
+  skipDetails: true
+politeness:
+  # Same Shopify bot management posture as mfr-armypainter/mfr-monument: bot-token UAs draw
+  # persistent 429s on /products.json bursts (recon 2026-07-24); browser UA 200s. uaProfile
+  # swaps the identification string only; pacing stays 0.5 rps, runs are one-off snapshots
+  # (~35 requests total for the scoped collections).
+  uaProfile: browser
+  rps: 0.5
+contract:
+  # Evidence-based floor (~85% of observed): the 2026-07-24 snapshot observed 562 unique
+  # products across the scoped collections. 562 * 0.85 = 477.7 -> 480.
+  minCount: 480
+  maxDropPct: 30
+  requiredFieldRates:
+    name: 1.0
+    sku: 0.9
+    # NO ean gate on purpose: barcodes unpopulated store-wide (see scope.skipDetails).

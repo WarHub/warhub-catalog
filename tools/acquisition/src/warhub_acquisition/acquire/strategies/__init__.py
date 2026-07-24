@@ -10,6 +10,7 @@ from warhub_acquisition.acquire.strategies import reaper  # noqa: F401
 from warhub_acquisition.acquire.strategies import shopify  # noqa: F401
 from warhub_acquisition.acquire.strategies import shopify_paints  # noqa: F401
 from warhub_acquisition.acquire.strategies import sitemap_sd  # noqa: F401
+from warhub_acquisition.acquire.strategies import sitemap_sd_paints  # noqa: F401
 from warhub_acquisition.acquire.strategies import woo  # noqa: F401
 from warhub_acquisition.acquire.strategies import woo_paints  # noqa: F401
 from warhub_acquisition.acquire.strategies import wp_rest_paints  # noqa: F401

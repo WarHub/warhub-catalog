@@ -107,6 +107,14 @@ manufacturers:
     # No gs1Prefixes on purpose: mr-hobby.com publishes no JAN/EAN anywhere (live-probed
     # 2026-07-24 across EN+JA detail pages, no ld+json/gtin either) -- nothing verified to pin.
     vendorNames: [Mr Hobby, GSI Creos, Mr. Hobby]
+  - slug: green-stuff-world
+    name: Green Stuff World
+    # mpn paint numbers off product-page microdata (3220 Wonka Violet etc.).
+    codePattern: '\d{3,4}'
+    # Three GS1 prefixes observed across the full 477-product snapshot 2026-07-24:
+    # 8435646 (241), 8436574 (217), 8436554 (19 -- the Chameleon line + 1 fluor).
+    gs1Prefixes: ['8435646', '8436574', '8436554']
+    vendorNames: [Green Stuff World, GSW]
   - slug: reaper
     name: Reaper
     # 5-digit skus straight off reapermini.com's embedded line-page data (09001 Red Brick,
@@ -114,3 +122,17 @@ manufacturers:
     # site's data (live-mapped 2026-07-24) -- add one only once a real barcode is observed.
     codePattern: '\d{5}'
     vendorNames: [Reaper, Reaper Miniatures]
+  - slug: scale75
+    name: Scale75
+    # Verified against the mfr-scale75 snapshot's full sku inventory (2026-07-24, 562/562
+    # skus match 'PREFIX-\d{2,3}'): SC 103 (Scalecolor 63 + Metal N' Alchemy 24 + Inktensity
+    # 16 share one SC numbering), SDP 128 (Drop & Paint), SART 84 (Artist), SW 64 (Warfront),
+    # SIN 48 (Instant), SFG 48 (Fantasy & Games), SCG 48 (Scalecolor Games), SFL 24 (Flow),
+    # SFX 8 (FX Fluor), SFLOW 5 (Floww oils), SSE 2 (Prism effect sets). SZ75 (Zodiac minis)
+    # deliberately NOT matched -- not paint.
+    codePattern: '(SFLOW|SART|SCG|SDP|SFG|SFL|SFX|SIN|SSE|SC|SW)-?\d{2,3}'
+    # No gs1Prefixes: the store publishes no barcodes at all (variant barcode null store-wide,
+    # live-verified 2026-07-24) -- add one only once a real Scale75 EAN is observed somewhere.
+    # Live store vendor string is 'SCALE75 - HOBBIES & GAMES' (all caps, 2026-07-24); matching
+    # is casefolded so the mixed-case spelling below also covers it.
+    vendorNames: ['SCALE75 - Hobbies & Games', 'Scale75', 'SCALE75']
