@@ -2,4 +2,4 @@
 
 | source | status | full sweep | observations | marked missed | stats |
 |---|---|---|---|---|---|
-| mfr-scale75 | ok | True | 562 | 0 | barcodes_found=0, collections_enumerated=15, detail_fetch_errors=0, details_fetched=0, enumeration_capped=0, enumeration_capped_by_400=0, fetched_pages=32, kept_paint_products=562, out_of_scope_vendor=0, products_seen=562, skipped_type=0, skipped_unknown_vendor=0 |
+| mfr-reaper | ok | True | 541 | 0 | duplicate_skus=14, fetched_pages=6, image_missing=8, kept_paint_products=427, kept_set_products=114, products_seen=555, skipped_unknown_vendor=0, sku_missing=0 |

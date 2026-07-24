@@ -83,6 +83,8 @@ TAP_SET_BY_PREFIX = {
     "warpaints air metallics": "Warpaints Air",
     "speedpaint": "Speedpaint Set 2.0",
     "colour primer": "Warpaints Primer",
+    # Owner-approved promotion 2026-07-24: Masterclass singles join as their own set.
+    "john blanche masterclass": "John Blanche Masterclass",
 }
 
 
@@ -331,6 +333,7 @@ def tap_split(title: str) -> tuple[str | None, str]:
 
 def bridge_armypainter() -> BrandHarvest:
     catalog = Catalog("army-painter")
+    prior_additions = previous_addition_codes("army-painter")
     out = BrandHarvest()
     for o in read_observations("mfr-armypainter"):
         hints = o.get("hints") or {}
@@ -354,19 +357,29 @@ def bridge_armypainter() -> BrandHarvest:
         key = catalog.match_code(sku.rstrip("PS"))
         if key is None and set_hint is not None:
             key = catalog.match_name(paint_name, set_hint)
-        if key is not None:
+        if key is not None and sku not in prior_additions:
             out.add_enrich(key, ean=o.get("ean"), imageUrl=o.get("imageUrl"), sku=sku,
                            sourceUrl=o.get("url"), source="mfr-armypainter")
+        elif set_hint is not None and "triad" not in o["name"].lower():
+            # Owner-approved promotion 2026-07-24: unmatched singles under a recognized range
+            # prefix are NEW paints (Fanatic waves, Masterclass) -- born with their store EAN
+            # and image. Triads are 3-packs, never singles.
+            out.additions.append(
+                {"name": paint_name, "set": set_hint, "productCode": sku,
+                 "ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
+                 "sourceUrl": o.get("url"), "source": "mfr-armypainter"}
+            )
         else:
             out.candidates.append(
                 {"name": o["name"], "sku": sku, "url": o.get("url"), "source": "mfr-armypainter",
-                 "reason": "single not in catalog (new paint or renamed)"}
+                 "reason": "single outside promoted ranges"}
             )
     return out
 
 
 def bridge_monument() -> BrandHarvest:
     catalog = Catalog("monument-pro-acryl")
+    prior_additions = previous_addition_codes("monument-pro-acryl")
     out = BrandHarvest()
     for o in read_observations("mfr-monument"):
         if (o.get("hints") or {}).get("productType") != "Paint Singles":
@@ -374,35 +387,50 @@ def bridge_monument() -> BrandHarvest:
         sku = str(o.get("sku") or "")
         code = sku.removeprefix("MPA-")
         name = MONUMENT_NAME.sub("", o["name"]).strip()
+        common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
+                  "sourceUrl": o.get("url"), "source": "mfr-monument"}
         key = catalog.match_code(code) or catalog.match_code(code.zfill(3)) or catalog.match_name(name)
-        if key is not None:
-            out.add_enrich(key, ean=o.get("ean"), imageUrl=o.get("imageUrl"), sku=sku,
-                           sourceUrl=o.get("url"), source="mfr-monument")
+        if key is not None and sku not in prior_additions:
+            out.add_enrich(key, sku=sku, **common)
+            continue
+        # Owner-approved promotion 2026-07-24: the two post-Arcturus ranges join as their own
+        # sets; anything else unmatched stays a candidate.
+        title = o["name"]
+        if sku.startswith("MPA-5") or "1-step" in title.lower():
+            paint = title.split(" - ", 1)[-1].strip()
+            out.additions.append({"name": paint, "set": "Pro Acryl 1-Step", "productCode": sku, **common})
+        elif sku.startswith("AMP-"):
+            paint = title.split(" - ", 1)[-1].strip()
+            out.additions.append({"name": paint, "set": "AMP Colors", "productCode": sku, **common})
         else:
             out.candidates.append(
-                {"name": o["name"], "sku": sku or None, "url": o.get("url"),
-                 "source": "mfr-monument", "reason": "single not in catalog (new range or renamed)"}
+                {"name": title, "sku": sku or None, "url": o.get("url"),
+                 "source": "mfr-monument", "reason": "single outside promoted ranges (renamed?)"}
             )
     return out
 
 
 def bridge_turbodork() -> BrandHarvest:
     catalog = Catalog("turbo-dork")
+    prior_additions = previous_addition_codes("turbo-dork")
     out = BrandHarvest()
     paint_types = {"TurboShift", "Metallic", "ZeniShift", "Retail"}
     for o in read_observations("mfr-turbodork"):
-        if (o.get("hints") or {}).get("productType") not in paint_types:
+        hints = o.get("hints") or {}
+        if hints.get("productType") not in paint_types:
             continue
+        sku = str(o.get("sku") or "")
         key = catalog.match_name(o["name"])
-        if key is not None:
-            out.add_enrich(key, ean=o.get("ean"), imageUrl=o.get("imageUrl"),
-                           sku=o.get("sku"), sourceUrl=o.get("url"), source="mfr-turbodork")
-        elif (o.get("hints") or {}).get("productType") != "Retail":
-            # Retail is a legacy mixed bucket -- only the dedicated paint types report as
-            # unmatched candidates, otherwise merch/bundles would flood the list.
-            out.candidates.append(
-                {"name": o["name"], "sku": o.get("sku"), "url": o.get("url"),
-                 "source": "mfr-turbodork", "reason": "paint not in catalog (new or renamed)"}
+        common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
+                  "sourceUrl": o.get("url"), "source": "mfr-turbodork"}
+        if key is not None and sku not in prior_additions:
+            out.add_enrich(key, sku=sku, **common)
+        elif hints.get("productType") != "Retail":
+            # Owner-approved promotion 2026-07-24: the dedicated paint types
+            # (TurboShift/Metallic/ZeniShift) join the base's single flat set, born with
+            # their store EAN + image. Retail stays a legacy mixed bucket -- never promoted.
+            out.additions.append(
+                {"name": o["name"], "set": "Turbo Dork", "productCode": sku or None, **common}
             )
     return out
 
@@ -422,48 +450,113 @@ SCALE75_SET_BY_COLLECTION = {
 }
 
 
+# Post-Arcturus scale75 ranges, owner-approved promotion 2026-07-24. floww-oleos (oil sets +
+# a case) and the prism handles (sets) are deliberately absent -- sets never promote.
+SCALE75_NEW_SET_BY_COLLECTION = {
+    "drop-paint-individuales": "Drop & Paint",
+    "flow-individuales": "Scalecolor Floww",
+    "scalecolor-games-individuales": "Scalecolor Games",
+}
+
+
 def bridge_scale75() -> BrandHarvest:
-    """METADATA role: Arcturus scale75 has no product codes, so joins are name-based with the
-    collection membership as the set hint (the store publishes no other range signal). No EANs
-    exist on the store (variant barcodes unpopulated, verified 2026-07-24) -- enrichment is
-    images/source URLs; unmatched singles surface as candidates, including the whole
-    Drop & Paint / Floww / Scalecolor Games ranges pending promotion review."""
+    """CATALOG role since 2026-07-24 (owner-approved): Arcturus scale75 has no product codes,
+    so joins are name-based with collection membership as the set hint (the store publishes no
+    other range signal). Matched singles get image enrichment (no EANs exist -- variant
+    barcodes unpopulated store-wide); unmatched singles in KNOWN sets and the three
+    post-Arcturus ranges join as additions with the store SKU as the code."""
     catalog = Catalog("scale75")
+    prior_additions = previous_addition_codes("scale75")
     out = BrandHarvest()
     for o in read_observations("mfr-scale75"):
         collections = (o.get("hints") or {}).get("collections") or []
-        set_hint = next(
+        sku = str(o.get("sku") or "")
+        common = {"imageUrl": o.get("imageUrl"), "sourceUrl": o.get("url"), "source": "mfr-scale75"}
+        known_set = next(
             (SCALE75_SET_BY_COLLECTION[c] for c in collections if c in SCALE75_SET_BY_COLLECTION),
             None,
         )
-        if set_hint is not None:
-            key = catalog.match_name(o["name"], set_hint) or catalog.match_name(o["name"])
-            if key is not None:
-                out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=o.get("sku"),
-                               sourceUrl=o.get("url"), source="mfr-scale75")
-                continue
-            reason = f"single not in catalog set {set_hint} (new or renamed)"
-        else:
-            reason = (
-                "range not in catalog (promotion candidate): "
-                + ",".join(c for c in collections if "individuales" in c or c in ("prism",))
-            )
-        out.candidates.append(
-            {"name": o["name"], "sku": o.get("sku"), "url": o.get("url"),
-             "source": "mfr-scale75", "reason": reason}
+        new_set = next(
+            (SCALE75_NEW_SET_BY_COLLECTION[c] for c in collections if c in SCALE75_NEW_SET_BY_COLLECTION),
+            None,
         )
+        if known_set is not None:
+            key = catalog.match_name(o["name"], known_set) or catalog.match_name(o["name"])
+            if key is not None and sku not in prior_additions:
+                out.add_enrich(key, sku=sku, **common)
+                continue
+            out.additions.append(
+                {"name": ak_prettify(o["name"]), "set": known_set, "productCode": sku or None, **common}
+            )
+        elif new_set is not None:
+            out.additions.append(
+                {"name": ak_prettify(o["name"]), "set": new_set, "productCode": sku or None, **common}
+            )
+        else:
+            out.candidates.append(
+                {"name": o["name"], "sku": sku or None, "url": o.get("url"),
+                 "source": "mfr-scale75",
+                 "reason": "sets/unmapped collections: " + ",".join(collections[:4])}
+            )
     return out
 
 
+# greenstuffworld.com category slug -> catalog set. First four use the Arcturus spellings;
+# the rest are post-Arcturus ranges (owner-approved promotion 2026-07-24). The store's
+# acrylic-inks category spans three Arcturus ink sets -- unmatched inks join the store's own
+# umbrella naming rather than guessing a subset.
+GSW_SET_BY_CATEGORY = {
+    "acrylic-paints": "Acrylic Colors",
+    "dipping-inks": "Dipping Inks",
+    "metallic-acrylic-paints": "Metallic Colors",
+    "chameleon-acrylic-paints": "Chameleon Colorshift Metallic",
+    "acrylic-inks": "Acrylic Inks",
+    "fluorescent-acrylic-paints": "Fluorescent",
+    "dry-brush-paints": "Dry Brush",
+    "flexible-paints": "Flexible",
+    "liquid-pigments": "Liquid Pigments",
+    "chrome-paints": "Chrome",
+    "effect-paints": "Effects",
+    "varnishes": "Varnish",
+    "acrylic-primers": "Primer",
+    "colour-primers-spray": "Spray Primer",
+    "colorshift-chameleon-spray": "Chameleon Spray",
+    "chrome-spray-paint": "Chrome Spray",
+    "blackest-black-paint": "Blackest Black",
+}
+
+# Leading marketing descriptors on store titles ("Acrylic Color WONKA VIOLET", "Dipping ink
+# 60 ml - Papyrus DIP"). Stripped iteratively; a trailing ALL-CAPS run is title-cased.
+_GSW_PREFIX = re.compile(
+    r"^(acrylic (color|colors|white paint|black paint|paint)|dipping ink|metallic paint|"
+    r"chameleon( paint)?|fluor(escent)? (acrylic )?paint|dry ?brush( paint)?|flexible paint|"
+    r"liquid pigments?|chrome paint|effect paint|varnish|primer|colorshift|maxx darth|"
+    r"\d+ ?ml|[-–])\s*",
+    re.IGNORECASE,
+)
+
+
+def gsw_clean_name(raw: str) -> str:
+    name = raw.strip()
+    while True:
+        stripped = _GSW_PREFIX.sub("", name, count=1).strip()
+        if stripped == name or not stripped:
+            break
+        name = stripped
+    # Title-case fully-uppercase words (WONKA VIOLET -> Wonka Violet), leave mixed-case alone.
+    words = [w.capitalize() if w.isupper() and len(w) > 2 else w for w in name.split()]
+    return " ".join(words)
+
+
 def bridge_gsw() -> BrandHarvest:
-    """METADATA role. greenstuffworld.com titles wrap the paint name in marketing prefixes
-    ("Acrylic Color WONKA VIOLET", "Acrylic white paint Nuclear White") while the base data
-    keeps bare names -- so the join is LONGEST-UNIQUE-SUFFIX on normalized names (>=5 chars,
-    longest catalog name that the store title ends with, unique at that length). Enrichment
-    carries the store's REAL gtin13 EANs (100% fill in the 2026-07-24 snapshot) + images;
-    the microdata mpn (true paint number) rides along as sku for audit. Store sets and
-    unmatched paints surface as candidates."""
+    """CATALOG role since 2026-07-24 (owner-approved). greenstuffworld.com titles wrap the
+    paint name in marketing prefixes ("Acrylic Color WONKA VIOLET") while the base data keeps
+    bare names -- so the join is LONGEST-UNIQUE-SUFFIX on normalized names (>=5 chars, longest
+    catalog name that the store title ends with, unique at that length). Enrichment carries
+    the store's REAL gtin13 EANs (100% fill) + images; unmatched paints in mapped categories
+    join as additions (cleaned name, mpn as productCode, EAN at birth)."""
     catalog = Catalog("green-stuff-world")
+    prior_additions = previous_addition_codes("green-stuff-world")
     out = BrandHarvest()
     # normed catalog name -> keys, for suffix lookup
     by_norm: dict[str, list[str]] = catalog.by_name
@@ -485,16 +578,65 @@ def bridge_gsw() -> BrandHarvest:
     for o in read_observations("mfr-greenstuffworld"):
         slug = (o.get("hints") or {}).get("categorySlug") or ""
         if slug == "paint-sets":
-            continue  # sets: not even candidates, metadata-only source
+            continue  # sets never promote
+        sku = str(o.get("sku") or "")
+        common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
+                  "sourceUrl": o.get("url"), "source": "mfr-greenstuffworld"}
         key = suffix_match(o["name"])
-        if key is not None:
-            out.add_enrich(key, ean=o.get("ean"), imageUrl=o.get("imageUrl"), sku=o.get("sku"),
-                           sourceUrl=o.get("url"), source="mfr-greenstuffworld")
+        if key is not None and sku not in prior_additions:
+            out.add_enrich(key, sku=sku, **common)
+            continue
+        set_name = GSW_SET_BY_CATEGORY.get(slug)
+        if set_name is not None:
+            out.additions.append(
+                {"name": gsw_clean_name(o["name"]), "set": set_name,
+                 "productCode": sku or None, **common}
+            )
         else:
             out.candidates.append(
-                {"name": o["name"], "sku": o.get("sku"), "url": o.get("url"),
+                {"name": o["name"], "sku": sku or None, "url": o.get("url"),
                  "source": "mfr-greenstuffworld",
-                 "reason": f"no unique name join into catalog ({slug})"}
+                 "reason": f"unmapped category ({slug})"}
+            )
+    return out
+
+
+# reapermini.com line label -> Arcturus set spelling (they match the site's own page names).
+REAPER_SET_BY_LINE = {
+    "Master Series Paints Core Colors": "Master Series Paints Core Colors",
+    "Master Series Paints Bones": "Master Series Paints Bones",
+    "Master Series Paints Pathfinder Colors": "Master Series Paints Pathfinder",
+}
+
+
+def bridge_reaper() -> BrandHarvest:
+    """CATALOG role (owner-activated + promotion 2026-07-24). Site skus are zero-padded
+    ("09412") while the Arcturus base stores bare digits ('9412') -- codes normalize by
+    stripping leading zeros, and additions adopt the base convention. Singles only; the
+    set-kind observations (triads/sets/LTPK, hints.category paint-set) carry contentSkus as
+    committed set-membership evidence but never promote. No EANs exist in the site data."""
+    catalog = Catalog("reaper")
+    prior_additions = previous_addition_codes("reaper")
+    out = BrandHarvest()
+    for o in read_observations("mfr-reaper"):
+        hints = o.get("hints") or {}
+        if hints.get("category") != "paint":
+            continue
+        code = str(o.get("sku") or "").lstrip("0")
+        line = str(hints.get("line") or "")
+        set_name = REAPER_SET_BY_LINE.get(line)
+        common = {"imageUrl": o.get("imageUrl"), "sourceUrl": o.get("url"), "source": "mfr-reaper"}
+        key = catalog.match_code(code)
+        if key is not None and code not in prior_additions:
+            out.add_enrich(key, sku=code, **common)
+        elif set_name is not None:
+            out.additions.append(
+                {"name": o["name"], "set": set_name, "productCode": code or None, **common}
+            )
+        else:
+            out.candidates.append(
+                {"name": o["name"], "sku": code or None, "url": o.get("url"),
+                 "source": "mfr-reaper", "reason": f"unmapped line ({line or 'none'})"}
             )
     return out
 
@@ -507,6 +649,7 @@ BRIDGES = {
     "turbo-dork": bridge_turbodork,
     "scale75": bridge_scale75,
     "green-stuff-world": bridge_gsw,
+    "reaper": bridge_reaper,
 }
 
 

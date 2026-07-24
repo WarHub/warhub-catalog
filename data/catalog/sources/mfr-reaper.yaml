@@ -19,19 +19,20 @@ scope:
     - {path: /paints/master-series-paints-bones, line: Master Series Paints Bones, kind: single}
     - {path: /paints/master-series-paints-pathfinder-colors, line: Master Series Paints Pathfinder Colors, kind: single}
 politeness:
-  # STATUS (2026-07-24): implemented but POLICY-BLOCKED from running. robots.txt's
-  # `User-agent: *` group allows everything except /api and /admin (all /paints/* pages this
-  # strategy fetches are allowed, no crawl-delay, and the canonical bot UA gets clean 200s on
-  # them) -- BUT the site also carries Cloudflare's managed AI-crawl-control block, which
-  # includes `User-agent: ClaudeBot / Disallow: /`. This repo's robots enforcement
-  # deliberately honors ClaudeBot groups as disallowing OURSELVES (acquire/robots.py module
-  # docstring, checked-token 3), so run_source refuses the whole site with
-  # RobotsDisallowedError before any strategy work. That is the intended conservative
-  # outcome, not a bug: do NOT add ignoreRobots here -- the escape hatch exists for
-  # "baseUrl isn't the real fetch target" cases, not for opting past an explicit
-  # Anthropic-stack opt-out. Revisit only on an owner-level policy decision or if Reaper's
-  # robots.txt changes. (The shop's /search/* tree additionally sits behind a Cloudflare
-  # managed JS challenge and is never fetched regardless.)
+  # HISTORY (2026-07-24): first landed POLICY-BLOCKED. robots.txt's `User-agent: *` group
+  # allows everything this strategy fetches (all /paints/* pages, no crawl-delay, clean 200s
+  # to the canonical bot UA) -- but the site also carries Cloudflare's managed
+  # AI-crawl-control block (`User-agent: ClaudeBot / Disallow: /`), which this repo's robots
+  # enforcement honors as disallowing ourselves, so run_source refused at preflight pending
+  # an owner-level decision.
+  # ACTIVATED same day by OWNER DECISION: this pipeline is a one-off catalog READ (plain
+  # Python scripting, six GETs total), not AI crawling -- no model training and no AI
+  # processing of the fetched content is involved; the Cloudflare block targets AI-training
+  # crawlers, and the site's own general-agent group allows these paths. ignoreRobots
+  # documents that decision here rather than silently bypassing (same transparency bar as
+  # mfr-vallejo's crawl-delay rationale). The shop's /search/* tree is never fetched
+  # regardless.
+  ignoreRobots: true
   rps: 0.5
 contract:
   # Evidence-based floor (~85% of observed): live snapshot 2026-07-24 counted 555 blob items
