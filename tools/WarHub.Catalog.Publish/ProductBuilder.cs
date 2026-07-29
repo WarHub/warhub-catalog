@@ -52,6 +52,8 @@ internal static class ProductBuilder
 
                 var record = new ProductRecord
                 {
+                    Id = p.Id,
+                    Manufacturer = p.Manufacturer,
                     Ean = string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
                     AdditionalEans = extraEans.Count > 0 ? extraEans : null,
                     EanConfidence = p.EanConfidence,

@@ -31,6 +31,10 @@ internal sealed record SourceRef(string Repo, ReleaseRef? Release = null, string
 /// </summary>
 internal sealed record ProductRecord
 {
+    // Id + Manufacturer are published so an archival/lineage link (supersededBy / supersedes) has
+    // a stable target to point at -- the resolver's entity id, `manufacturer/<code-or-slug>`.
+    [JsonPropertyOrder(0)] public required string Id { get; init; }
+    [JsonPropertyOrder(0)] public required string Manufacturer { get; init; }
     [JsonPropertyOrder(1)] public string? Ean { get; init; }
     [JsonPropertyOrder(1)] public IReadOnlyList<string>? AdditionalEans { get; init; }
     [JsonPropertyOrder(2)] public required string Name { get; init; }
@@ -138,5 +142,5 @@ internal sealed class ManifestDocument
 
 internal static class SchemaInfo
 {
-    public const string SchemaVersion = "1.0";
+    public const string SchemaVersion = "1.1";
 }
