@@ -76,7 +76,13 @@ def test_no_change_exits_0_and_no_guard_section(tmp_path: Path, capsys) -> None:
     assert "## Confirmed-EAN changes" not in out
 
 
-def test_provisional_ean_change_is_not_a_hit(tmp_path: Path, capsys) -> None:
+def test_provisional_ean_change_is_reported_but_never_fails(tmp_path: Path, capsys) -> None:
+    """A provisional primary that vanishes catalog-wide is REPORTED but must not fail the run.
+
+    A provisional barcode is legitimately corrected the moment a better source arrives, so this
+    can never be exit 5 -- but it used to be entirely silent, which is what the archival work
+    needs to be able to see.
+    """
     repo_root = tmp_path / "repo"
     paths = _init_repo(repo_root)
     _write_catalog(
@@ -95,6 +101,69 @@ def test_provisional_ean_change_is_not_a_hit(tmp_path: Path, capsys) -> None:
 
     assert exit_code == 0
     assert "## Confirmed-EAN changes" not in out
+    assert "## Provisional-EAN dropped" in out
+    assert "5011921194285" in out
+
+
+def test_provisional_ean_retained_elsewhere_is_not_reported(tmp_path: Path, capsys) -> None:
+    """Only a provisional barcode that vanished EVERYWHERE is reported -- one that merely moved
+    (here: promoted to another entity's primary) survived, so it is not a finding."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/a", "name": "Thing A", "ean": "5011921194285", "eanConfidence": "provisional"}],
+    )
+    _commit(repo_root, "seed catalog")
+
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/b", "name": "Thing B", "ean": "5011921194285", "eanConfidence": "confirmed"}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Provisional-EAN dropped" not in out
+
+
+def test_dropped_product_code_is_reported_but_never_fails(tmp_path: Path, capsys) -> None:
+    """A productCode that vanishes catalog-wide is REPORTED but not fatal.
+
+    This is exactly what a repackaging join does today when it folds an old code away -- the code
+    disappears with nothing noticing. It stays non-fatal because folding is still the current
+    design; the point is that the loss stops being invisible.
+    """
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [
+            {"id": "games-workshop/99120204012", "name": "Old Box", "productCode": "99120204012",
+             "ean": "5011921062164", "eanConfidence": "confirmed"},
+            {"id": "games-workshop/99120204035", "name": "New Box", "productCode": "99120204035",
+             "ean": "5011921179398", "eanConfidence": "confirmed"},
+        ],
+    )
+    _commit(repo_root, "seed catalog")
+
+    # the fold: old entity gone, its barcode retained in the survivor's additionalEans
+    _write_catalog(
+        paths,
+        [
+            {"id": "games-workshop/99120204035", "name": "New Box", "productCode": "99120204035",
+             "ean": "5011921179398", "eanConfidence": "confirmed",
+             "additionalEans": ["5011921062164"]},
+        ],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0  # barcode was retained -> repackaged, not lost
+    assert "## Product-code dropped" in out
+    assert "99120204012" in out
 
 
 def test_new_entity_is_not_a_hit(tmp_path: Path, capsys) -> None:

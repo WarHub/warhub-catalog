@@ -59,6 +59,7 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
     # Working tree: every product by id, plus a global barcode -> holding entities presence map.
     working_products: dict[str, dict] = {}
     working_holders: dict[str, set[str]] = {}
+    working_codes: set[str] = set()
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         working = read_yaml(path) or {}
         for product in working.get("products", []):
@@ -67,6 +68,8 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
                 working_holders.setdefault(product["ean"], set()).add(product["id"])
             for extra in product.get("additionalEans") or []:
                 working_holders.setdefault(extra, set()).add(product["id"])
+            if product.get("productCode"):
+                working_codes.add(product["productCode"])
 
     head_files = subprocess.run(
         ["git", "ls-tree", "--name-only", "HEAD", "--", products_rel + "/"],
@@ -78,6 +81,14 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
 
     lost: list[dict] = []
     repackaged: list[dict] = []
+    # Non-fatal visibility buckets. The confirmed-only guard above is silent about two real losses:
+    # a PROVISIONAL primary that vanishes catalog-wide, and a productCode that vanishes catalog-wide
+    # (today a repackaging join folds an old code away and nothing notices). Both are REPORTED but
+    # never fail the run -- a provisional barcode is legitimately corrected when a better source
+    # arrives, and code folding is still the current design. Making them visible is the point: they
+    # are the acceptance test for the archival work that stops discarding old codes/barcodes.
+    dropped_provisional: list[dict] = []
+    dropped_codes: list[dict] = []
     for rel in sorted(line for line in head_files.stdout.splitlines() if line.endswith(".yaml")):
         head_result = subprocess.run(
             ["git", "show", f"HEAD:{rel}"],
@@ -119,7 +130,34 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
                     repackaged.append(finding)
                 else:
                     lost.append(finding)
-    return {"lost": lost, "repackaged": repackaged}
+
+            # A provisional primary is only reported when it vanished EVERYWHERE -- if it merely
+            # moved (promoted, demoted, or re-homed on another entity) it survived, which is all
+            # this bucket is asking about.
+            provisional = head_product.get("ean")
+            if provisional and head_product.get("eanConfidence") != "confirmed":
+                if not working_holders.get(provisional):
+                    dropped_provisional.append(
+                        {
+                            "entity": entity_id,
+                            "manufacturer_file": rel,
+                            "previous_ean": provisional,
+                            "new_ean": working_product.get("ean") if working_product else None,
+                        }
+                    )
+
+            head_code = head_product.get("productCode")
+            if head_code and head_code not in working_codes:
+                dropped_codes.append(
+                    {"entity": entity_id, "manufacturer_file": rel, "previous_code": head_code}
+                )
+
+    return {
+        "lost": lost,
+        "repackaged": repackaged,
+        "dropped_provisional": dropped_provisional,
+        "dropped_codes": dropped_codes,
+    }
 
 
 def render_ean_guard_section(findings: dict[str, list[dict]]) -> str:
@@ -136,5 +174,19 @@ def render_ean_guard_section(findings: dict[str, list[dict]]) -> str:
             lines.append(
                 f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']} "
                 f"(retained in {retained})"
+            )
+    if findings.get("dropped_provisional"):
+        lines += ["", "## Provisional-EAN dropped (visibility only, not a regression)", ""]
+        for finding in sorted(findings["dropped_provisional"], key=order):
+            lines.append(
+                f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']} "
+                f"(no longer anywhere in the catalog)"
+            )
+    if findings.get("dropped_codes"):
+        lines += ["", "## Product-code dropped (visibility only, not a regression)", ""]
+        for finding in sorted(findings["dropped_codes"], key=lambda f: (f["entity"], f["previous_code"])):
+            lines.append(
+                f"- {finding['entity']}: productCode {finding['previous_code']} "
+                f"no longer anywhere in the catalog"
             )
     return "\n".join(lines) + "\n"
