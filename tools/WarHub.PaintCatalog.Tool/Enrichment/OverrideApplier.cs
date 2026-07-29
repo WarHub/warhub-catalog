@@ -67,6 +67,9 @@ public static class OverrideApplier
                 VolumeMl = over.VolumeMl ?? p.VolumeMl,
                 Packaging = over.Packaging ?? p.Packaging,
                 Ean = over.Ean ?? p.Ean,
+                // Non-destructive: an override that supplies a NEW primary keeps the barcode it
+                // displaced (plus any the override itself lists) instead of dropping it.
+                AdditionalEans = BarcodeSet.Union(over.Ean ?? p.Ean, p.AdditionalEans, over.AdditionalEans, [p.Ean]),
             };
         }).ToList();
     }
@@ -99,4 +102,35 @@ public record PaintOverride
     public int? VolumeMl { get; init; }
     public string? Packaging { get; init; }
     public string? Ean { get; init; }
+    /// <summary>
+    /// Extra barcodes for this paint. Also the read shape for the generated barcodes file
+    /// (BarcodeEnricher deserializes into this type), which is why the property must exist here or
+    /// `additionalEans` is silently discarded by IgnoreUnmatchedProperties at parse time.
+    /// </summary>
+    public List<string>? AdditionalEans { get; init; }
+}
+
+/// <summary>Barcode-set helpers shared by the enrichers and the reconciler.</summary>
+public static class BarcodeSet
+{
+    /// <summary>
+    /// Every extra barcode, deduped and ordinal-sorted, with the primary removed and blanks
+    /// dropped. Returns null (never an empty list) so the key is omitted from YAML/JSON rather
+    /// than churning every archive file with `additionalEans: []`.
+    /// </summary>
+    public static IReadOnlyList<string>? Union(string? primary, params IEnumerable<string?>?[] sources)
+    {
+        var set = new SortedSet<string>(StringComparer.Ordinal);
+        foreach (IEnumerable<string?>? source in sources)
+        {
+            if (source is null) continue;
+            foreach (string? value in source)
+            {
+                string trimmed = value?.Trim() ?? "";
+                if (trimmed.Length > 0 && !string.Equals(trimmed, primary?.Trim(), StringComparison.Ordinal))
+                    set.Add(trimmed);
+            }
+        }
+        return set.Count > 0 ? set.ToList() : null;
+    }
 }

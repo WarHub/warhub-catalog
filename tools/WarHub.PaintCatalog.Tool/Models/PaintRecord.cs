@@ -19,6 +19,14 @@ public record PaintRecord
     public string? FirstSeen { get; init; }
     public string? ProductCode { get; init; }
     public string? Ean { get; init; }
+    /// <summary>
+    /// Further barcodes the SAME paint is sold under beyond the primary <see cref="Ean"/>, so a
+    /// scan of any of them still identifies this paint. Today these are concurrent REGIONAL trade
+    /// variants (e.g. a spray sold as both an R/O-Europe and a UK/ROW SKU with one shared SSC
+    /// code), NOT retired barcodes -- do not present them as superseded. Null (never an empty
+    /// list) when there is only one barcode, so the key is omitted from the archive YAML.
+    /// </summary>
+    public IReadOnlyList<string>? AdditionalEans { get; init; }
     public string? ImageUrl { get; init; }
     public required PaintDetails Details { get; init; }
 }

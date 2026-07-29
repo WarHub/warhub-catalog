@@ -9,8 +9,16 @@ internal static class PaintBuilder
 {
     private sealed record Entry(string BrandSlug, string Brand, PaintYaml Paint);
 
-    private static string NaturalKey(string brandSlug, string name, string set, string? code) =>
-        $"{brandSlug}|{name}|{set}|{code ?? ""}";
+    // Hex is part of the key because it is part of a paint's IDENTITY upstream
+    // (PaintRecordAdapter.IdentityKey = set|name|productCode|hex). Without it, two records that
+    // share brand|name|set|code but are DIFFERENT COLOURS -- a reformulation, or a colour
+    // correction -- collided here and the second was silently dropped at step 1 below, never
+    // published (measured: 2 real paints, Kommando Khaki and Vallejo Viking Grey).
+    // This needs NO regeneration of equivalences.yaml: every ref in that file already carries a
+    // hex, it was just parsed and discarded (see EquivRef.Hex). Both sides normalize identically
+    // via NormalizeHex so '#9B8C7B' and '#9b8c7b' are the same key.
+    private static string NaturalKey(string brandSlug, string name, string set, string? code, string? hex) =>
+        $"{brandSlug}|{name}|{set}|{code ?? ""}|{NormalizeHex(hex ?? "") ?? ""}";
 
     public static int Build(
         IReadOnlyList<BrandFile> brands,
@@ -25,7 +33,7 @@ internal static class PaintBuilder
         {
             foreach (PaintYaml p in brand.Paints)
             {
-                if (seen.Add(NaturalKey(brand.BrandSlug, p.Name, p.Details.Set, p.ProductCode)))
+                if (seen.Add(NaturalKey(brand.BrandSlug, p.Name, p.Details.Set, p.ProductCode, p.Details.Hex)))
                 {
                     entries.Add(new Entry(brand.BrandSlug, brand.Brand, p));
                 }
@@ -51,7 +59,7 @@ internal static class PaintBuilder
             {
                 Entry e = ordered[i];
                 string id = i == 0 ? group.Key : $"{group.Key}-{i + 1}";
-                idByNaturalKey[NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode)] = id;
+                idByNaturalKey[NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode, e.Paint.Details.Hex)] = id;
                 equivById[id] = new Dictionary<string, (double, string?)>(StringComparer.Ordinal);
                 recordById[id] = new PaintRecord(
                     Id: id,
@@ -66,6 +74,7 @@ internal static class PaintBuilder
                     Container: e.Paint.Details.Container,
                     ProductCode: e.Paint.ProductCode,
                     Ean: e.Paint.Ean,
+                    AdditionalEans: e.Paint.AdditionalEans is { Count: > 0 } extra ? extra : null,
                     Status: e.Paint.Status,
                     Availability: e.Paint.Availability,
                     Equivalents: []); // filled below
@@ -163,7 +172,7 @@ internal static class PaintBuilder
     }
 
     private static bool TryResolve(Dictionary<string, string> map, EquivRef refr, out string id) =>
-        map.TryGetValue(NaturalKey(refr.BrandSlug, refr.Name, refr.Set, refr.ProductCode), out id!);
+        map.TryGetValue(NaturalKey(refr.BrandSlug, refr.Name, refr.Set, refr.ProductCode, refr.Hex), out id!);
 
     private static void Link(
         Dictionary<string, Dictionary<string, (double, string?)>> adjacency,

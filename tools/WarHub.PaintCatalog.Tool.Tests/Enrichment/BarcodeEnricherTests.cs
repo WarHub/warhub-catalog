@@ -26,6 +26,50 @@ public class BarcodeEnricherTests
     }
 
     [Fact]
+    public void Apply_KeepsAdditionalEans_FromTheBarcodeFile()
+    {
+        // 9 Citadel sprays are sold under two concurrent regional trade SKUs (R/O Europe + UK/ROW,
+        // one shared SSC code). Both barcodes are live; the second used to be dropped at parse
+        // because PaintOverride had no AdditionalEans, so a scan of the UK/ROW pot resolved to
+        // nothing.
+        string path = WriteTemp("""
+            citadel-colour:
+              "Averland Sunset|Base":
+                ean: "5011921172221"
+                additionalEans:
+                  - "5011921175291"
+            """);
+        try
+        {
+            IReadOnlyList<Paint> result = BarcodeEnricher.Apply(SamplePaints, "citadel-colour", path);
+            Paint averland = result.Single(p => p.Name == "Averland Sunset");
+            Assert.Equal("5011921172221", averland.Ean);
+            Assert.Equal(["5011921175291"], averland.AdditionalEans);
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Fact]
+    public void Apply_KeepsFilePrimary_WhenPaintAlreadyHasADifferentEan()
+    {
+        // Abaddon Black already carries a hand-set Ean, which still wins the primary slot -- but
+        // the file's own barcode must not vanish just because it lost that contest.
+        string path = WriteTemp("""
+            citadel-colour:
+              "Abaddon Black|Base":
+                ean: "5011921172221"
+            """);
+        try
+        {
+            IReadOnlyList<Paint> result = BarcodeEnricher.Apply(SamplePaints, "citadel-colour", path);
+            Paint abaddon = result.Single(p => p.Name == "Abaddon Black");
+            Assert.Equal("5011921000000", abaddon.Ean);
+            Assert.Equal(["5011921172221"], abaddon.AdditionalEans);
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Fact]
     public void Apply_FillsEan_ByNameSetKey_ButNotProductCode()
     {
         // Ean backfills; ProductCode must NOT (it is part of the identity key and would re-key the

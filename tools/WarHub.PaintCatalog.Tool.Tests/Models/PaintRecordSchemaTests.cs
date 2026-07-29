@@ -10,7 +10,10 @@ public class PaintRecordSchemaTests
     public void PaintRecord_TopLevel_FieldOrder()
     {
         string[] expected =
-            ["Name", "Category", "Status", "Availability", "FirstSeen", "ProductCode", "Ean", "ImageUrl", "Details"];
+        [
+            "Name", "Category", "Status", "Availability", "FirstSeen", "ProductCode", "Ean",
+            "AdditionalEans", "ImageUrl", "Details",
+        ];
         string[] actual = typeof(PaintRecord).GetProperties().Select(p => p.Name).ToArray();
         Assert.Equal(expected, actual);
     }

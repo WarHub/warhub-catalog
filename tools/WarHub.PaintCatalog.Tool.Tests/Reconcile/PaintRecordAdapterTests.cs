@@ -41,6 +41,26 @@ public class PaintRecordAdapterTests
     }
 
     [Fact]
+    public void Merge_RebarcodingKeepsTheDisplacedBarcode()
+    {
+        // EAN is not part of the identity key, so a fresh harvest carrying a DIFFERENT barcode
+        // lands on this same record and takes the primary slot. The barcode it displaced must be
+        // retained -- a pot bought years ago has to stay resolvable by the barcode printed on it.
+        PaintRecord merged = _a.Merge(R(ean: "5011921172221"), R(ean: "5011921175291"));
+        Assert.Equal("5011921175291", merged.Ean);
+        Assert.Equal(["5011921172221"], merged.AdditionalEans);
+    }
+
+    [Fact]
+    public void Merge_UnchangedBarcodeAddsNoExtras()
+    {
+        // The single-barcode majority must stay byte-identical: null, never an empty list.
+        PaintRecord merged = _a.Merge(R(ean: "5011921172221"), R(ean: "5011921172221"));
+        Assert.Equal("5011921172221", merged.Ean);
+        Assert.Null(merged.AdditionalEans);
+    }
+
+    [Fact]
     public void Merge_Status_StickyDiscontinued_AgainstFreshCurrent()
     {
         PaintRecord merged = _a.Merge(R(status: "discontinued"), R(status: "current"));

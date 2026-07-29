@@ -11,6 +11,12 @@ namespace WarHub.PaintCatalog.Tool.Enrichment;
 /// once so this side only ever does an exact identity lookup. It only fills a BLANK <c>Ean</c>, so a
 /// later hand override in overrides.yaml still wins.
 ///
+/// A paint can carry MORE than one barcode. Measured on the committed file: 9 sprays are sold as
+/// both an R/O-Europe and a UK/ROW trade SKU (one shared SSC code, two live EAN-13s). Those extras
+/// land in <c>AdditionalEans</c> so a scan of either still resolves. They are CONCURRENT regional
+/// variants, not retired barcodes -- which one occupies <c>Ean</c> is decided only by evidence
+/// order, so nothing here may present the others as superseded.
+///
 /// It deliberately does NOT set <c>ProductCode</c>: that field is part of the paint's identity key
 /// (<c>set|name|productCode|hex</c> — see <c>PaintRecordAdapter</c>), so populating it would re-key
 /// every matched paint and duplicate it against its archived null-productCode record. The trade
@@ -49,9 +55,15 @@ public static class BarcodeEnricher
             if (!brandBarcodes.TryGetValue(key, out PaintOverride? barcode))
                 return p;
 
+            string? primary = p.Ean ?? barcode.Ean;
             return p with
             {
-                Ean = p.Ean ?? barcode.Ean,
+                Ean = primary,
+                // The file can list a paint under more than one barcode (concurrent regional trade
+                // SKUs -- see the class remarks). Keep every one of them: the file's own primary is
+                // included as a candidate so it is not lost when the paint already had a different
+                // hand-set Ean that wins above.
+                AdditionalEans = BarcodeSet.Union(primary, p.AdditionalEans, barcode.AdditionalEans, [barcode.Ean]),
             };
         }).ToList();
     }

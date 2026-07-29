@@ -21,6 +21,7 @@ internal sealed class PaintYaml
     public string? FirstSeen { get; set; }
     public string? ProductCode { get; set; }
     public string? Ean { get; set; }
+    public List<string>? AdditionalEans { get; set; }
     public string? ImageUrl { get; set; }
     public PaintDetailsYaml Details { get; set; } = new();
 }
