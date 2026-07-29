@@ -285,11 +285,11 @@ proposals:
     manufacturer: games-workshop
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: fc0ea5a37db1c32dd811fa0ec5b7961b705309d23ccc451192dbebc262ab240d
   - entityA:
       entity: games-workshop/60100181151
@@ -1512,11 +1512,11 @@ proposals:
     manufacturer: mantic-games
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: d5676bdadf7edfa90b4904b4e3ba306f8f1c1610afdb8066fdf5f0a2d88277bf
   - entityA:
       entity: mantic-games/MGKWL102
@@ -1541,11 +1541,11 @@ proposals:
     manufacturer: mantic-games
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: 25f7b403120c5f185445aaacb1a5734596a4c8432bb335b7e6db0b5f124c9180
   - entityA:
       entity: mantic-games/MGKWR210
@@ -1628,11 +1628,11 @@ proposals:
     manufacturer: mantic-games
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.85
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: 67fc7041ad37b8dc47b556307e3c95c7e7d6e79ea3b88fd7f6225354894b7a33
   - entityA:
       entity: mantic-games/VAL72096
@@ -1713,11 +1713,11 @@ proposals:
     manufacturer: para-bellum
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: e838f3d0ccc6c1109ccfdcdf883c987fd79bf2f8ed39157d9fb4588bb4b99e88
   - entityA:
       entity: para-bellum/PBW4403
@@ -1742,11 +1742,11 @@ proposals:
     manufacturer: para-bellum
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: f58915ab62f77ba6bf07283bd2084f66f93824a21e2f452b4d36f3558080a23b
   - entityA:
       entity: para-bellum/PBW6155
@@ -1968,11 +1968,11 @@ proposals:
     manufacturer: warlord-games
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: 32eb175ac4175131ad98fc21ab65e8e3eaaee82d37987ef733291dd1df58027e
   - entityA:
       entity: warlord-games/403015810
@@ -1997,11 +1997,11 @@ proposals:
     manufacturer: warlord-games
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.8
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: 24f8d4b343b2f68b95c065b8568c73cb529fb210a78d429b6ae17c0104b16fd4
   - entityA:
       entity: warlord-games/452201201
@@ -2082,9 +2082,9 @@ proposals:
     manufacturer: warlord-games
     matchedRules:
       - name
-    verdict: same-product
-    confidence: 0.85
-    acceptedCandidate: true
-    model: claude-haiku-4-5-20251001
-    date: '2026-07-13'
+    verdict: different-product
+    confidence: 1.0
+    acceptedCandidate: false
+    model: human-web-verify
+    date: '2026-07-23'
     inputHash: 8bf9dcd13740bed33fff623cf21c5810ca2dfc6af8a2ac50c11b8d1921de80a6
