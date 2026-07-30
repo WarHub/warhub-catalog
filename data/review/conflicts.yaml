@@ -123,6 +123,20 @@ conflicts:
           - ret-gamenerdz
           - ret-goblingaming
   - type: ean-mismatch
+    entity: games-workshop/99120116031
+    chosen: '5011921155903'
+    assertions:
+      - ean: '5011921058648'
+        sources:
+          - mfr-gw-trade
+      - ean: '5011921155903'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+  - type: ean-mismatch
     entity: games-workshop/99120117019
     chosen: '5011921171934'
     assertions:
@@ -136,6 +150,17 @@ conflicts:
           - legacy-catalog
           - mfr-gw-trade
           - ret-goblingaming
+  - type: ean-mismatch
+    entity: games-workshop/99120101190
+    chosen: '5011921142439'
+    assertions:
+      - ean: '5011921086184'
+        sources:
+          - mfr-gw-trade
+      - ean: '5011921142439'
+        sources:
+          - mfr-gw-trade
+          - seed-curated
   - type: ean-mismatch
     entity: games-workshop/99070117012
     chosen: '5011921171835'

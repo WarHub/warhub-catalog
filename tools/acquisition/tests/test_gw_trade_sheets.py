@@ -644,3 +644,78 @@ def test_short_code_that_is_a_truncated_real_code_is_left_alone():
     known = frozenset({"60249999604"})
     assert _code("6024999960", known) == "6024999960"       # truncation: left to fail the pattern
     assert _code("3050208002", known) == "03050208002"      # lost leading zero: padded
+
+
+# --- minting archival records for retired codes nothing observes --------------------------------
+
+
+def _mint(observations):
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _mint_lineage_records
+
+    by_key = {o.key: o for o in observations}
+    stats = collections.defaultdict(int)
+    _mint_lineage_records(by_key, stats)
+    return by_key, stats
+
+
+def test_unobserved_retired_code_gets_its_own_archival_record():
+    survivor = _obs(
+        key="mfr-gw-trade:99120204035", sku="99120204035", ean="5011921179398", name="DRYADS",
+        hints={"supersedes": [{"productCode": "99120204012", "ean": "5011921062164",
+                               "changedOn": "2024-06-03"}]},
+    )
+    by_key, stats = _mint([survivor])
+
+    minted = by_key["mfr-gw-trade:99120204012"]
+    assert minted.sku == "99120204012"
+    assert minted.ean == "5011921062164"      # the retired barcode becomes a real, scannable record
+    assert minted.archived is True            # -> status: discontinued, from the existing rules
+    assert minted.hints == {"lineageDerived": True, "retiredOn": "2024-06-03"}
+    assert minted.name == "DRYADS"
+    assert stats["lineage_records"] == 1
+    assert stats["lineage_records_with_barcode"] == 1
+
+
+def test_an_observed_retired_code_is_never_overwritten_by_a_minted_one():
+    real = _obs(key="mfr-gw-trade:99120204012", sku="99120204012", ean="5011921062164",
+                name="SYLVANETH DRYADS")
+    survivor = _obs(key="mfr-gw-trade:99120204035", sku="99120204035", ean="5011921179398",
+                    hints={"supersedes": [{"productCode": "99120204012"}]})
+    by_key, stats = _mint([real, survivor])
+
+    assert by_key["mfr-gw-trade:99120204012"] is real
+    assert stats["lineage_records"] == 0
+
+
+def test_a_retired_code_claimed_by_two_survivors_is_not_minted():
+    # A fan-out is a regional split or a filler code -- neither is a 1:1 lineage fact, and minting
+    # one record for it would pick a parent at random.
+    a = _obs(key="mfr-gw-trade:52170206002", sku="52170206002", ean="5011921260195",
+             hints={"supersedes": [{"productCode": "52170206001"}]})
+    b = _obs(key="mfr-gw-trade:54170206002", sku="54170206002", ean="5011921260218",
+             hints={"supersedes": [{"productCode": "52170206001"}]})
+    by_key, stats = _mint([a, b])
+
+    assert "mfr-gw-trade:52170206001" not in by_key
+    assert stats["lineage_records_ambiguous"] == 1
+
+
+def test_a_malformed_code_can_never_mint_a_product():
+    survivor = _obs(key="mfr-gw-trade:99120204035", sku="99120204035",
+                    hints={"supersedes": [{"productCode": "5011921062164"}]})  # a barcode, not a code
+    by_key, stats = _mint([survivor])
+
+    assert len(by_key) == 1
+    assert stats["lineage_records_malformed"] == 1
+
+
+def test_minted_record_without_a_barcode_still_preserves_the_code():
+    survivor = _obs(key="mfr-gw-trade:99121499041", sku="99121499041",
+                    hints={"supersedes": [{"productCode": "99061499084"}]})
+    by_key, stats = _mint([survivor])
+
+    minted = by_key["mfr-gw-trade:99061499084"]
+    assert minted.ean is None
+    assert minted.sku == "99061499084"
+    assert stats["lineage_records"] == 1
+    assert stats["lineage_records_with_barcode"] == 0

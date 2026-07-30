@@ -5777,6 +5777,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:02040199190
+  - id: games-workshop/02040299080
+    name: 'AGE OF SIGMAR: WARCRY CORE BOOK (ENG)'
+    manufacturer: games-workshop
+    productCode: '02040299080'
+    sku: '02040299080'
+    ean: '9781788266017'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/60040299107
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:02040299080
   - id: games-workshop/02040299086
     name: 'AGE OF SIGMAR: LIBRO BASE (ITALIANO)'
     manufacturer: games-workshop
@@ -32004,6 +32017,8 @@ products:
     sku: '60040299107'
     ean: '9781839060878'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/02040299080
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -51817,6 +51832,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070101014
+  - id: games-workshop/99070101015
+    name: ULTRAMARINES UPGRADES
+    manufacturer: games-workshop
+    productCode: '99070101015'
+    sku: '99070101015'
+    ean: '5011921060177'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101057
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101015
   - id: games-workshop/99070101018
     name: SPACE WOLVES IRON PRIEST
     manufacturer: games-workshop
@@ -51868,6 +51896,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070101027
+  - id: games-workshop/99070101032
+    name: S/M PRIMARIS LIEUTENANT WITH POWER SWORD
+    manufacturer: games-workshop
+    productCode: '99070101032'
+    sku: '99070101032'
+    ean: '5011921091003'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101053
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101032
   - id: games-workshop/99070101034
     name: BLOOD ANGELS CHAPLAIN WITH JUMP PACK
     manufacturer: games-workshop
@@ -51949,6 +51990,58 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070101038
+  - id: games-workshop/99070101040
+    name: WHITE SCARS PRIMARIS UPGRADES/TRANSFERS
+    manufacturer: games-workshop
+    productCode: '99070101040'
+    sku: '99070101040'
+    ean: '5011921118618'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101059
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101040
+  - id: games-workshop/99070101041
+    name: RAVEN GUARD PRIMARIS UPGRADES & TRANSFRS
+    manufacturer: games-workshop
+    productCode: '99070101041'
+    sku: '99070101041'
+    ean: '5011921118625'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101050
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101041
+  - id: games-workshop/99070101042
+    name: IRON HANDS PRIMARIS UPGRADES & TRANSFERS
+    manufacturer: games-workshop
+    productCode: '99070101042'
+    sku: '99070101042'
+    ean: '5011921118632'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101049
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101042
+  - id: games-workshop/99070101043
+    name: IMPERIAL FISTS PRIMARIS UPGRADES AND TRANSFERS
+    manufacturer: games-workshop
+    productCode: '99070101043'
+    sku: '99070101043'
+    ean: '5011921118649'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101075
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101043
   - id: games-workshop/99070101044
     name: SALAMANDERS PRIMARIS UPGRADES & TRANSFRS
     manufacturer: games-workshop
@@ -51979,6 +52072,19 @@ products:
     evidence:
       - mfr-gw-trade:99070101045
       - ret-gamenerdz:/warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
+  - id: games-workshop/99070101046
+    name: PRIMARIS LIBRARIAN IN PHOBOS ARMOUR
+    manufacturer: games-workshop
+    productCode: '99070101046'
+    sku: '99070101046'
+    ean: '5011921118878'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101055
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070101046
   - id: games-workshop/99070101047
     name: PRIMARIS CAPTAIN IN PHOBOS ARMOUR
     manufacturer: games-workshop
@@ -52030,6 +52136,8 @@ products:
     sku: '99070101049'
     ean: '5011921140800'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101042
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52072,6 +52180,8 @@ products:
     sku: '99070101050'
     ean: '5011921140824'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101041
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52170,6 +52280,8 @@ products:
     sku: '99070101053'
     ean: '5011921140893'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101032
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52233,6 +52345,8 @@ products:
     sku: '99070101055'
     ean: '5011921142095'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101046
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52296,6 +52410,8 @@ products:
     sku: '99070101057'
     ean: '5011921999200'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101015
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -52322,6 +52438,8 @@ products:
     sku: '99070101059'
     ean: '5011921999187'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101040
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52369,6 +52487,8 @@ products:
     sku: '99070101060'
     ean: '5011921999170'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101178
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52465,6 +52585,8 @@ products:
     sku: '99070101063'
     ean: '5011921145997'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101181
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52721,6 +52843,8 @@ products:
     sku: '99070101075'
     ean: '5011921155170'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070101043
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -52912,6 +53036,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070102003
+  - id: games-workshop/99070102004
+    name: 'DEATH GUARD: NAUSEOUS ROTBONE'
+    manufacturer: games-workshop
+    productCode: '99070102004'
+    sku: '99070102004'
+    ean: '5011921087617'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070102019
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070102004
   - id: games-workshop/99070102005
     name: DEATH GUARD BIOLOGUS PUTRIFIER
     manufacturer: games-workshop
@@ -53150,6 +53287,8 @@ products:
     sku: '99070102019'
     ean: '5011921153619'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070102004
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -53543,6 +53682,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070104006
+  - id: games-workshop/99070104007
+    name: CRAFTWORLDS SPIRITSEER
+    manufacturer: games-workshop
+    productCode: '99070104007'
+    sku: '99070104007'
+    ean: '5011921114030'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070104013
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070104007
   - id: games-workshop/99070104008
     name: Eldrad Ulthran
     manufacturer: games-workshop
@@ -53701,6 +53853,8 @@ products:
     sku: '99070104013'
     ean: '5011921172405'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070104007
     gameSystem: warhammer-40k
     faction: aeldari
     category: miniatures
@@ -53796,6 +53950,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070105004
+  - id: games-workshop/99070107001
+    name: GREY KNIGHTS GRAND MASTER VOLDUS
+    manufacturer: games-workshop
+    productCode: '99070107001'
+    sku: '99070107001'
+    ean: '5011921088591'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070107002
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070107001
   - id: games-workshop/99070107002
     name: Grand Master Voldus
     manufacturer: games-workshop
@@ -53803,6 +53970,8 @@ products:
     sku: '99070107002'
     ean: '5011921153749'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070107001
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -54431,6 +54600,19 @@ products:
       - ret-gamenerdz:/warhammer-40k-adeptus-astartes-deathwatch-watch-master
       - ret-goblingaming:deathwatch-watch-master-warhammer-40k-99070109008
       - ret-radaddel:/imperial-agents-watch-master
+  - id: games-workshop/99070110001
+    name: 'NECRONS: OVERLORD'
+    manufacturer: games-workshop
+    productCode: '99070110001'
+    sku: '99070110001'
+    ean: '5011921056767'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070110004
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070110001
   - id: games-workshop/99070110002
     name: NECRONS CRYPTEK
     manufacturer: games-workshop
@@ -54482,6 +54664,8 @@ products:
     sku: '99070110004'
     ean: '5011921140336'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070110001
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -55004,10 +55188,12 @@ products:
       - ret-radaddel:/tau-empire-kroot-flesh-shaper
       - ret-tistaminis:tau-empire-kroot-flesh-shaper
   - id: games-workshop/99070116001
-    name: Adeptus Mechanicus Tech-Priest Dominus
+    name: ADEPTUS MECHANICUS TECH-PRIEST DOMINUS
     manufacturer: games-workshop
     productCode: '99070116001'
     sku: '99070116001'
+    ean: '5011921058600'
+    eanConfidence: confirmed
     supersededBy: games-workshop/99070116005
     gameSystem: warhammer-40k
     category: miniatures
@@ -55017,6 +55203,20 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Ad-Mec-Tech-Priest-Dominus
     evidence:
       - arc-gw-webstore:/en-GB/Ad-Mec-Tech-Priest-Dominus
+      - mfr-gw-trade:99070116001
+  - id: games-workshop/99070116002
+    name: ADEPTUS MECHANICUS TECH-PRIEST MANIPULUS
+    manufacturer: games-workshop
+    productCode: '99070116002'
+    sku: '99070116002'
+    ean: '5011921127122'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070116006
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070116002
   - id: games-workshop/99070116003
     name: Skitarii Marshal
     manufacturer: games-workshop
@@ -55116,6 +55316,8 @@ products:
     sku: '99070116006'
     ean: '5011921155422'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070116002
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -56600,6 +56802,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99070207009
+  - id: games-workshop/99070207010
+    name: OSSIARCH BONEREAPERS MORTISAN BONESHAPER
+    manufacturer: games-workshop
+    productCode: '99070207010'
+    sku: '99070207010'
+    ean: '5011921126279'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207208
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99070207010
   - id: games-workshop/99070207011
     name: OSSIARCH BONEREAPERS MORTISAN SOULREAPER
     manufacturer: games-workshop
@@ -57705,6 +57920,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99079915005
+  - id: games-workshop/99079915007
+    name: 'DAEMONS OF SLAANESH: THE MASQUE'
+    manufacturer: games-workshop
+    productCode: '99079915007'
+    sku: '99079915007'
+    ean: '5011921114047'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99079915011
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99079915007
   - id: games-workshop/99079915008
     name: 'MAGGOTKIN OF NURGLE: SPOILPOX SCRIVENER'
     manufacturer: games-workshop
@@ -57757,6 +57985,8 @@ products:
     sku: '99079915011'
     ean: '5011921199655'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99079915007
     gameSystem: age-of-sigmar
     category: miniatures
     status: current
@@ -60594,6 +60824,19 @@ products:
       - mfr-gw-algolia:prod1060240-99120101050
       - mfr-gw-trade:99120101050
       - ret-goblingaming:dark-angels-bike-squad-92488603
+  - id: games-workshop/99120101058
+    name: SPACE MARINE VINDICATOR
+    manufacturer: games-workshop
+    productCode: '99120101058'
+    sku: '99120101058'
+    ean: '5011921903399'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101341
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101058
   - id: games-workshop/99120101061
     name: Venerable Land Raider
     manufacturer: games-workshop
@@ -60665,6 +60908,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101075
+  - id: games-workshop/99120101076
+    name: SPACE MARINES IRONCLAD DREADNOUGHT
+    manufacturer: games-workshop
+    productCode: '99120101076'
+    sku: '99120101076'
+    ean: '5011921015986'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101298
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101076
   - id: games-workshop/99120101079
     name: SPACE WOLVES WOLF GUARD TERMINATORS
     manufacturer: games-workshop
@@ -60678,6 +60934,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101079
+  - id: games-workshop/99120101083
+    name: SPACE MARINE VENERABLE DREADNOUGHT
+    manufacturer: games-workshop
+    productCode: '99120101083'
+    sku: '99120101083'
+    ean: '5011921018376'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101299
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101083
   - id: games-workshop/99120101086
     name: Baal Predator
     manufacturer: games-workshop
@@ -60705,6 +60974,32 @@ products:
       - mfr-gw-algolia:prod680008a-99120101086
       - mfr-gw-trade:99120101086
       - ret-goblingaming:blood-angels-baal-predator-92488609
+  - id: games-workshop/99120101088
+    name: STORMRAVEN GUNSHIP
+    manufacturer: games-workshop
+    productCode: '99120101088'
+    sku: '99120101088'
+    ean: '5011921021253'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101339
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101088
+  - id: games-workshop/99120101089
+    name: 'BLOOD ANGELS: FURIOSO DREADNOUGHT'
+    manufacturer: games-workshop
+    productCode: '99120101089'
+    sku: '99120101089'
+    ean: '5011921021260'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101354
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101089
   - id: games-workshop/99120101095
     name: Nephilim Jetfighter
     manufacturer: games-workshop
@@ -60921,6 +61216,19 @@ products:
     evidence:
       - mfr-gw-trade:99120101170
       - ret-gamenerdz:/warhammer-40k-adeptus-astartes-mark-iii-space-marines-the-horus-heresy
+  - id: games-workshop/99120101178
+    name: SPACE MARINES PRIMARIS APOTHECARY
+    manufacturer: games-workshop
+    productCode: '99120101178'
+    sku: '99120101178'
+    ean: '5011921085293'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101060
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101178
   - id: games-workshop/99120101179
     name: SPACE MARINES PRIMARIS CAPTAIN
     manufacturer: games-workshop
@@ -60947,6 +61255,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101180
+  - id: games-workshop/99120101181
+    name: SPACE MARINES PRIMARIS LIBRARIAN
+    manufacturer: games-workshop
+    productCode: '99120101181'
+    sku: '99120101181'
+    ean: '5011921085262'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070101063
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-40k-space-marines-primaris-librarian
+    evidence:
+      - mfr-gw-trade:99120101181
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian
   - id: games-workshop/99120101184
     name: SPACE MARINES PRIMARIS AGGRESSORS
     manufacturer: games-workshop
@@ -60977,13 +61300,28 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101186
+  - id: games-workshop/99120101189
+    name: SPACE MARINES PRIMARIS HELLBLASTERS
+    manufacturer: games-workshop
+    productCode: '99120101189'
+    sku: '99120101189'
+    ean: '5011921086191'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101308
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101189
   - id: games-workshop/99120101190
     name: Intercessors
     manufacturer: games-workshop
     productCode: '99120101190'
     sku: '99120101190'
     ean: '5011921142439'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921086184'
     supersedes:
       - games-workshop/99120101212
     supersededBy: games-workshop/99120101309
@@ -60998,6 +61336,7 @@ products:
     priceEur: 42.5
     url: https://www.games-workshop.com/en-GB/space-marines-primaris-intercessors-2020
     evidence:
+      - mfr-gw-trade:99120101190
       - mfr-gw-trade:99120101314
       - seed-curated:games-workshop/intercessors
   - id: games-workshop/99120101191
@@ -61067,6 +61406,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101198
+  - id: games-workshop/99120101211
+    name: SPACE MARINES CENTURION ASSAULT SQUAD
+    manufacturer: games-workshop
+    productCode: '99120101211'
+    sku: '99120101211'
+    ean: '5011921091560'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101313
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101211
   - id: games-workshop/99120101212
     name: SPACE MARINE ASSAULT SQUAD
     manufacturer: games-workshop
@@ -61080,6 +61432,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101212
+  - id: games-workshop/99120101213
+    name: SPACE MARINE STORMHAWK INTERCEPTOR
+    manufacturer: games-workshop
+    productCode: '99120101213'
+    sku: '99120101213'
+    ean: '5011921091584'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101315
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101213
   - id: games-workshop/99120101215
     name: SPACE MARINE BIKE SQUAD
     manufacturer: games-workshop
@@ -61144,6 +61509,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101220
+  - id: games-workshop/99120101228
+    name: SPACE MARINES DROP POD
+    manufacturer: games-workshop
+    productCode: '99120101228'
+    sku: '99120101228'
+    ean: '5011921092208'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101340
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101228
   - id: games-workshop/99120101229
     name: S/MARINE LAND RAIDER CRUSADER/REDEEMER
     manufacturer: games-workshop
@@ -61157,6 +61535,32 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101229
+  - id: games-workshop/99120101231
+    name: SPACE MARINE DEVASTATOR SQUAD
+    manufacturer: games-workshop
+    productCode: '99120101231'
+    sku: '99120101231'
+    ean: '5011921092345'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101317
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101231
+  - id: games-workshop/99120101232
+    name: SPACE MARINES STERNGUARD VETERAN SQUAD
+    manufacturer: games-workshop
+    productCode: '99120101232'
+    sku: '99120101232'
+    ean: '5011921092352'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101318
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101232
   - id: games-workshop/99120101238
     name: DARK ANGELS RAVENWING COMMAND SQUAD
     manufacturer: games-workshop
@@ -61207,6 +61611,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101245
+  - id: games-workshop/99120101247
+    name: SPACE MARINES PREDATOR
+    manufacturer: games-workshop
+    productCode: '99120101247'
+    sku: '99120101247'
+    ean: '5011921112173'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101320
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101247
   - id: games-workshop/99120101248
     name: SPACE MARINES SCOUTS WITH SNIPER RIFLES
     manufacturer: games-workshop
@@ -61348,6 +61765,32 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101262
+  - id: games-workshop/99120101263
+    name: SPACE MARINES PRIMARIS INFILTRATORS
+    manufacturer: games-workshop
+    productCode: '99120101263'
+    sku: '99120101263'
+    ean: '5011921121427'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101325
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101263
+  - id: games-workshop/99120101264
+    name: S/M PRIMARIS INVICTOR TACTICAL WARSUIT
+    manufacturer: games-workshop
+    productCode: '99120101264'
+    sku: '99120101264'
+    ean: '5011921121410'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101326
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120101264
   - id: games-workshop/99120101265
     name: START COLLECTING! VANGUARD SPACE MARINES
     manufacturer: games-workshop
@@ -62012,6 +62455,8 @@ products:
     sku: '99120101298'
     ean: '5011921142149'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101076
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -62024,6 +62469,8 @@ products:
     sku: '99120101299'
     ean: '5011921142156'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101083
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62187,6 +62634,8 @@ products:
     sku: '99120101308'
     ean: '5011921142316'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101189
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62366,6 +62815,8 @@ products:
     sku: '99120101313'
     ean: '5011921142422'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101211
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62400,6 +62851,8 @@ products:
     sku: '99120101315'
     ean: '5011921142446'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101213
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62478,6 +62931,8 @@ products:
     sku: '99120101317'
     ean: '5011921142460'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101231
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62530,6 +62985,8 @@ products:
     sku: '99120101318'
     ean: '5011921142477'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101232
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -62576,6 +63033,8 @@ products:
     sku: '99120101320'
     ean: '5011921142491'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101247
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62722,6 +63181,8 @@ products:
     sku: '99120101325'
     ean: '5011921142545'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101263
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62754,6 +63215,8 @@ products:
     sku: '99120101326'
     ean: '5011921142552'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101264
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62940,6 +63403,8 @@ products:
     sku: '99120101339'
     ean: '5011921146000'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101088
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -62970,6 +63435,8 @@ products:
     sku: '99120101340'
     ean: '5011921146017'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101228
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -62982,6 +63449,8 @@ products:
     sku: '99120101341'
     ean: '5011921146024'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101058
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -63370,6 +63839,8 @@ products:
     sku: '99120101354'
     ean: '5011921152872'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120101089
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -66627,6 +67098,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120102060
+  - id: games-workshop/99120102063
+    name: 'THOUSAND SONS: RUBRIC MARINES'
+    manufacturer: games-workshop
+    productCode: '99120102063'
+    sku: '99120102063'
+    ean: '5011921079391'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102130
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102063
   - id: games-workshop/99120102064
     name: AHRIMAN ARCH-SORCERER OF TZEENTCH
     manufacturer: games-workshop
@@ -66640,6 +67124,58 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120102064
+  - id: games-workshop/99120102065
+    name: 'THOUSAND SONS: MAGNUS THE RED'
+    manufacturer: games-workshop
+    productCode: '99120102065'
+    sku: '99120102065'
+    ean: '5011921079513'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102132
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102065
+  - id: games-workshop/99120102066
+    name: THOUSAND SONS SCARAB OCCULT TERMINATORS
+    manufacturer: games-workshop
+    productCode: '99120102066'
+    sku: '99120102066'
+    ean: '5011921079735'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102133
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102066
+  - id: games-workshop/99120102067
+    name: THOUSAND SONS EXALTED SORCERERS
+    manufacturer: games-workshop
+    productCode: '99120102067'
+    sku: '99120102067'
+    ean: '5011921079742'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102134
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102067
+  - id: games-workshop/99120102072
+    name: 'MORTARION: DAEMON PRIMARCH OF NURGLE'
+    manufacturer: games-workshop
+    productCode: '99120102072'
+    sku: '99120102072'
+    ean: '5011921087655'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102129
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102072
   - id: games-workshop/99120102073
     name: DEATH GUARD DEATHSHROUD BODYGUARD
     manufacturer: games-workshop
@@ -66666,6 +67202,45 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120102074
+  - id: games-workshop/99120102075
+    name: 'DEATH GUARD: PLAGUEBURST CRAWLER'
+    manufacturer: games-workshop
+    productCode: '99120102075'
+    sku: '99120102075'
+    ean: '5011921087686'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102125
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102075
+  - id: games-workshop/99120102076
+    name: 'D/GUARD: TYPHUS HERALD OF THE PLAGUE GOD'
+    manufacturer: games-workshop
+    productCode: '99120102076'
+    sku: '99120102076'
+    ean: '5011921087693'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102126
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102076
+  - id: games-workshop/99120102077
+    name: 'DEATH GUARD: FOETID BLOAT-DRONE'
+    manufacturer: games-workshop
+    productCode: '99120102077'
+    sku: '99120102077'
+    ean: '5011921087945'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102127
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102077
   - id: games-workshop/99120102078
     name: DEATH GUARD PLAGUE MARINES
     manufacturer: games-workshop
@@ -66679,6 +67254,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120102078
+  - id: games-workshop/99120102080
+    name: 'DEATH GUARD: MYPHITIC BLIGHT-HAULER'
+    manufacturer: games-workshop
+    productCode: '99120102080'
+    sku: '99120102080'
+    ean: '5011921091249'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102112
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120102080
   - id: games-workshop/99120102081
     name: ETB LORD FELTHIUS & THE TAINTED COHORT
     manufacturer: games-workshop
@@ -66954,6 +67542,8 @@ products:
     sku: '99120102112'
     ean: '5011921129751'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102080
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67260,6 +67850,8 @@ products:
     sku: '99120102125'
     ean: '5011921153541'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102075
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67290,6 +67882,8 @@ products:
     sku: '99120102126'
     ean: '5011921153558'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102076
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67320,6 +67914,8 @@ products:
     sku: '99120102127'
     ean: '5011921153565'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102077
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67391,6 +67987,8 @@ products:
     sku: '99120102129'
     ean: '5011921153589'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102072
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67421,6 +68019,8 @@ products:
     sku: '99120102130'
     ean: '5011921153688'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102063
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67486,6 +68086,8 @@ products:
     sku: '99120102132'
     ean: '5011921153701'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102065
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67516,6 +68118,8 @@ products:
     sku: '99120102133'
     ean: '5011921153718'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102066
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -67548,6 +68152,8 @@ products:
     sku: '99120102134'
     ean: '5011921153725'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120102067
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -77205,6 +77811,45 @@ products:
       - ret-goblingaming:tyranid-swarm-battleforce
       - ret-radaddel:/tyranids-tyranid-swarm-battleforce
       - ret-tistaminis:battleforce-tyranid-swarm-pre-order
+  - id: games-workshop/99120107008
+    name: GREY KNIGHTS NEMESIS DREADKNIGHT
+    manufacturer: games-workshop
+    productCode: '99120107008'
+    sku: '99120107008'
+    ean: '5011921053582'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120107017
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120107008
+  - id: games-workshop/99120107013
+    name: GREY KNIGHTS STRIKE SQUAD
+    manufacturer: games-workshop
+    productCode: '99120107013'
+    sku: '99120107013'
+    ean: '5011921085774'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120107018
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120107013
+  - id: games-workshop/99120107014
+    name: G/KNIGHTS BROTHERHOOD TERMINATOR SQUAD
+    manufacturer: games-workshop
+    productCode: '99120107014'
+    sku: '99120107014'
+    ean: '5011921092376'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120107019
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120107014
   - id: games-workshop/99120107015
     name: Castellan Crowe
     manufacturer: games-workshop
@@ -77257,6 +77902,8 @@ products:
     sku: '99120107017'
     ean: '5011921153756'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120107008
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -77269,6 +77916,8 @@ products:
     sku: '99120107018'
     ean: '5011921153763'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120107013
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -77307,6 +77956,8 @@ products:
     sku: '99120107019'
     ean: '5011921153770'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120107014
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -80139,6 +80790,45 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120110013
+  - id: games-workshop/99120110014
+    name: NECRON GHOST ARK/DOOMSDAY ARK
+    manufacturer: games-workshop
+    productCode: '99120110014'
+    sku: '99120110014'
+    ean: '5011921028368'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110063
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110014
+  - id: games-workshop/99120110021
+    name: NECRON TRIARCH STALKER
+    manufacturer: games-workshop
+    productCode: '99120110021'
+    sku: '99120110021'
+    ean: '5011921030668'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110062
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110021
+  - id: games-workshop/99120110022
+    name: NECRON CANOPTEK SPYDER
+    manufacturer: games-workshop
+    productCode: '99120110022'
+    sku: '99120110022'
+    ean: '5011921030699'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110061
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110022
   - id: games-workshop/99120110026
     name: Obelisk & Transcendent C'tan
     manufacturer: games-workshop
@@ -80169,6 +80859,32 @@ products:
       - mfr-gw-algolia:prod2260120-99120110026
       - mfr-gw-trade:99120110026
       - ret-goblingaming:necrons-tesseract-vault-obelisk
+  - id: games-workshop/99120110035
+    name: 'NECRONS: IMMORTALS'
+    manufacturer: games-workshop
+    productCode: '99120110035'
+    sku: '99120110035'
+    ean: '5011921092239'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110057
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110035
+  - id: games-workshop/99120110036
+    name: NECRON TRIARCH PRAETORIANS
+    manufacturer: games-workshop
+    productCode: '99120110036'
+    sku: '99120110036'
+    ean: '5011921092246'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110058
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110036
   - id: games-workshop/99120110037
     name: NECRONS CANOPTEK WRAITHS
     manufacturer: games-workshop
@@ -80182,6 +80898,32 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120110037
+  - id: games-workshop/99120110038
+    name: 'NECRONS: DOOM SCYTHE'
+    manufacturer: games-workshop
+    productCode: '99120110038'
+    sku: '99120110038'
+    ean: '5011921093229'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110065
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110038
+  - id: games-workshop/99120110039
+    name: NECRONS TOMB BLADES
+    manufacturer: games-workshop
+    productCode: '99120110039'
+    sku: '99120110039'
+    ean: '5011921093236'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120110059
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120110039
   - id: games-workshop/99120110043
     name: Monolith
     manufacturer: games-workshop
@@ -80530,6 +81272,8 @@ products:
     sku: '99120110057'
     ean: '5011921139125'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110035
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -80564,6 +81308,8 @@ products:
     sku: '99120110058'
     ean: '5011921139132'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110036
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -80596,6 +81342,8 @@ products:
     sku: '99120110059'
     ean: '5011921139149'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110039
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -80659,6 +81407,8 @@ products:
     sku: '99120110061'
     ean: '5011921139163'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110022
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -80690,6 +81440,8 @@ products:
     sku: '99120110062'
     ean: '5011921139170'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110021
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -80720,6 +81472,8 @@ products:
     sku: '99120110063'
     ean: '5011921139187'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110014
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -80792,6 +81546,8 @@ products:
     sku: '99120110065'
     ean: '5011921140329'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120110038
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
@@ -81516,6 +82272,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120111008
+  - id: games-workshop/99120112008
+    name: DRUKHARI WYCHES
+    manufacturer: games-workshop
+    productCode: '99120112008'
+    sku: '99120112008'
+    ean: '5011921020249'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120112044
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120112008
   - id: games-workshop/99120112009
     name: Hellions
     manufacturer: games-workshop
@@ -81849,6 +82618,8 @@ products:
     sku: '99120112044'
     ean: '5011921155811'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120112008
     gameSystem: warhammer-40k
     faction: aeldari
     category: miniatures
@@ -82388,6 +83159,19 @@ products:
       - mfr-gw-algolia:prod2210224-99120113029
       - mfr-gw-trade:99120113029
       - ret-goblingaming:tau-empire-sunshark-bomber
+  - id: games-workshop/99120113036
+    name: TAU EMPIRE KV128 STORMSURGE
+    manufacturer: games-workshop
+    productCode: '99120113036'
+    sku: '99120113036'
+    ean: '5011921064939'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120113071
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120113036
   - id: games-workshop/99120113038
     name: TAU EMPIRE XV8 CRISIS BATTLESUITS
     manufacturer: games-workshop
@@ -82418,6 +83202,19 @@ products:
     evidence:
       - mfr-gw-trade:99120113042
       - ret-gamenerdz:/warhammer-40k-tau-empire-tx4-piranha-old
+  - id: games-workshop/99120113043
+    name: TAU EMPIRE TY7 DEVILFISH
+    manufacturer: games-workshop
+    productCode: '99120113043'
+    sku: '99120113043'
+    ean: '5011921065004'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120113074
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120113043
   - id: games-workshop/99120113048
     name: TAU EMPIRE TIDEWALL SHIELDLINE
     manufacturer: games-workshop
@@ -82502,6 +83299,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120113058
+  - id: games-workshop/99120113059
+    name: TAU XV95 GHOSTKEEL BATTLESUIT
+    manufacturer: games-workshop
+    productCode: '99120113059'
+    sku: '99120113059'
+    ean: '5011921091935'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120113078
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120113059
   - id: games-workshop/99120113060
     name: TAU EMPIRE COMMANDER
     manufacturer: games-workshop
@@ -82652,6 +83462,8 @@ products:
     sku: '99120113071'
     ean: '5011921169924'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120113036
     gameSystem: warhammer-40k
     faction: tau-empire
     category: miniatures
@@ -82752,6 +83564,8 @@ products:
     sku: '99120113074'
     ean: '5011921169955'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120113043
     gameSystem: warhammer-40k
     faction: tau-empire
     category: miniatures
@@ -82887,6 +83701,8 @@ products:
     sku: '99120113078'
     ean: '5011921169993'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120113059
     gameSystem: warhammer-40k
     faction: tau-empire
     category: miniatures
@@ -83695,6 +84511,45 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Adeptus-Mechanicus-Elimination-Maniple
     evidence:
       - arc-gw-webstore:/en-GB/Adeptus-Mechanicus-Elimination-Maniple
+  - id: games-workshop/99120116015
+    name: 'ADEPTUS MECHANICUS: BELISARIUS CAWL'
+    manufacturer: games-workshop
+    productCode: '99120116015'
+    sku: '99120116015'
+    ean: '5011921088607'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116032
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120116015
+  - id: games-workshop/99120116016
+    name: 'ADEPTUS MECHANICUS: SKITARII'
+    manufacturer: games-workshop
+    productCode: '99120116016'
+    sku: '99120116016'
+    ean: '5011921091843'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116033
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120116016
+  - id: games-workshop/99120116017
+    name: 'ADEPTUS MECHANICUS: IRONSTRIDER'
+    manufacturer: games-workshop
+    productCode: '99120116017'
+    sku: '99120116017'
+    ean: '5011921091850'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116034
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120116017
   - id: games-workshop/99120116018
     name: ADEPTUS MECHANICUS SICARIANS
     manufacturer: games-workshop
@@ -83708,6 +84563,32 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120116018
+  - id: games-workshop/99120116019
+    name: 'ADEPTUS MECHANICUS: KASTELAN ROBOTS'
+    manufacturer: games-workshop
+    productCode: '99120116019'
+    sku: '99120116019'
+    ean: '5011921091874'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116036
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120116019
+  - id: games-workshop/99120116020
+    name: AD/MECHANICUS:KATAPHRON BATTLE SERVITORS
+    manufacturer: games-workshop
+    productCode: '99120116020'
+    sku: '99120116020'
+    ean: '5011921091881'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116037
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120116020
   - id: games-workshop/99120116023
     name: ADEPT/MECHANICUS SKORPIUS DISINTEGRATOR
     manufacturer: games-workshop
@@ -83721,6 +84602,36 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120116023
+  - id: games-workshop/99120116024
+    name: 'ADEPTUS MECHANICUS: ARCHAEOPTER'
+    manufacturer: games-workshop
+    productCode: '99120116024'
+    sku: '99120116024'
+    ean: '5011921135813'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116039
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-40k-adeptus-mechanicus-archaeopter
+    evidence:
+      - mfr-gw-trade:99120116024
+      - ret-gamenerdz:/warhammer-40k-adeptus-mechanicus-archaeopter
+  - id: games-workshop/99120116025
+    name: 'ADEPTUS MECHANICUS: PTERAXII'
+    manufacturer: games-workshop
+    productCode: '99120116025'
+    sku: '99120116025'
+    ean: '5011921135806'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116040
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-40k-adeptus-mechanicus-pteraxii
+    evidence:
+      - mfr-gw-trade:99120116025
+      - ret-gamenerdz:/warhammer-40k-adeptus-mechanicus-pteraxii
   - id: games-workshop/99120116026
     name: ADEPTUS MECHANICUS SERBERYS RAIDERS
     manufacturer: games-workshop
@@ -83802,7 +84713,9 @@ products:
     productCode: '99120116031'
     sku: '99120116031'
     ean: '5011921155903'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921058648'
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -83825,6 +84738,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/fulgurite-electro-priests
       - mfr-gw-algolia:prod2720129-99120116031
       - mfr-gw-algolia:prod2830174-99120116031
+      - mfr-gw-trade:99120116009
       - mfr-gw-trade:99120116031
       - ret-gamenerdz:/warhammer-40k-adeptus-mechanicus-electro-priests
       - ret-goblingaming:adeptus-mechanicus-electro-priests
@@ -83836,6 +84750,8 @@ products:
     sku: '99120116032'
     ean: '5011921155927'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116015
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -83866,6 +84782,8 @@ products:
     sku: '99120116033'
     ean: '5011921155934'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116016
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -83900,6 +84818,8 @@ products:
     sku: '99120116034'
     ean: '5011921155941'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116017
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -83968,6 +84888,8 @@ products:
     sku: '99120116036'
     ean: '5011921155965'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116019
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -83998,6 +84920,8 @@ products:
     sku: '99120116037'
     ean: '5011921155972'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116020
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -84066,6 +84990,8 @@ products:
     sku: '99120116039'
     ean: '5011921155996'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116024
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -84102,6 +85028,8 @@ products:
     sku: '99120116040'
     ean: '5011921156009'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116025
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -87148,6 +88076,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120201041
+  - id: games-workshop/99120201042
+    name: KHORNE BLOODBOUND WRATHMONGERS
+    manufacturer: games-workshop
+    productCode: '99120201042'
+    sku: '99120201042'
+    ean: '5011921064038'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120201156
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.radaddel.de/blades-of-khorne-wrathmongers
+    evidence:
+      - mfr-gw-trade:99120201042
+      - ret-radaddel:/blades-of-khorne-wrathmongers
   - id: games-workshop/99120201043
     name: Mighty Skullcrushers
     manufacturer: games-workshop
@@ -88607,6 +89550,8 @@ products:
     sku: '99120201156'
     ean: '5011921199754'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120201042
     supersededBy: games-workshop/99120201248
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
@@ -92405,6 +93350,36 @@ products:
     evidence:
       - mfr-gw-trade:99120205020
       - ret-gamenerdz:/warhammer-age-of-sigmar-kharadron-overlords-arkanaut-company
+  - id: games-workshop/99120205021
+    name: KHARADRON OVERLORDS SKYRIGGERS
+    manufacturer: games-workshop
+    productCode: '99120205021'
+    sku: '99120205021'
+    ean: '5011921082988'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120205053
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-kharadron-overlords-skyriggers
+    evidence:
+      - mfr-gw-trade:99120205021
+      - ret-gamenerdz:/warhammer-age-of-sigmar-kharadron-overlords-skyriggers
+  - id: games-workshop/99120205022
+    name: KHARADRON OVERLORDS GRUNDSTOK THUNDERERS
+    manufacturer: games-workshop
+    productCode: '99120205022'
+    sku: '99120205022'
+    ean: '5011921082995'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120205054
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-kharadron-overlords-grundstok-thunderers
+    evidence:
+      - mfr-gw-trade:99120205022
+      - ret-gamenerdz:/warhammer-age-of-sigmar-kharadron-overlords-grundstok-thunderers
   - id: games-workshop/99120205023
     name: Brokk Grungsson, Lord-Magnate of Barak-Nar
     manufacturer: games-workshop
@@ -92449,6 +93424,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120205024
+  - id: games-workshop/99120205028
+    name: KHARADRON OVERLORDS ARKANAUT IRONCLAD
+    manufacturer: games-workshop
+    productCode: '99120205028'
+    sku: '99120205028'
+    ean: '5011921083633'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120205055
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120205028
   - id: games-workshop/99120205029
     name: START COLLECTING! FYRESLAYERS
     manufacturer: games-workshop
@@ -92919,6 +93907,8 @@ products:
     sku: '99120205053'
     ean: '5011921195961'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120205021
     gameSystem: age-of-sigmar
     faction: grand-alliance-order
     category: miniatures
@@ -92954,6 +93944,8 @@ products:
     sku: '99120205054'
     ean: '5011921195978'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120205022
     gameSystem: age-of-sigmar
     faction: grand-alliance-order
     category: miniatures
@@ -92985,6 +93977,8 @@ products:
     sku: '99120205055'
     ean: '5011921195985'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120205028
     gameSystem: age-of-sigmar
     faction: grand-alliance-order
     category: miniatures
@@ -94430,6 +95424,19 @@ products:
     evidence:
       - arc-gw-webstore:/en-GB/Arkhan-the-Black
       - arc-gw-webstore:/en-GB/Arkhan-the-Black;jsessionid=3E1586E855F5E258A819EEA77B22C6BD
+  - id: games-workshop/99120207029
+    name: DEATHLORDS NAGASH SUPREME LORD OF UNDEAD
+    manufacturer: games-workshop
+    productCode: '99120207029'
+    sku: '99120207029'
+    ean: '5011921069576'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207157
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120207029
   - id: games-workshop/99120207030
     name: NIGHTHAUNT SPIRIT HOSTS
     manufacturer: games-workshop
@@ -94596,6 +95603,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120207040
+  - id: games-workshop/99120207046
+    name: DEATHRATTLE GRAVE GUARD
+    manufacturer: games-workshop
+    productCode: '99120207046'
+    sku: '99120207046'
+    ean: '5011921090389'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207137
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120207046
   - id: games-workshop/99120207048
     name: Morghast Archai
     manufacturer: games-workshop
@@ -94992,6 +96012,34 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120207075
+  - id: games-workshop/99120207076
+    name: KATAKROS MORTARCH OF THE NECROPOLIS
+    manufacturer: games-workshop
+    productCode: '99120207076'
+    sku: '99120207076'
+    ean: '5011921126330'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207161
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120207076
+  - id: games-workshop/99120207077
+    name: OSSIARCH BONEREAPERS KAVALOS DEATHRIDERS
+    manufacturer: games-workshop
+    productCode: '99120207077'
+    sku: '99120207077'
+    ean: '5011921126323'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207162
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ossiarch-bonereapers-kavalos-deathriders
+    evidence:
+      - mfr-gw-trade:99120207077
+      - ret-gamenerdz:/warhammer-age-of-sigmar-ossiarch-bonereapers-kavalos-deathriders
   - id: games-workshop/99120207078
     name: Mortek Crawler
     manufacturer: games-workshop
@@ -95033,6 +96081,32 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120207079
+  - id: games-workshop/99120207080
+    name: 'OSSIARCH BONEREAPERS: MORTISAN SOULMASON'
+    manufacturer: games-workshop
+    productCode: '99120207080'
+    sku: '99120207080'
+    ean: '5011921126293'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207165
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120207080
+  - id: games-workshop/99120207081
+    name: OSSIARCH BONEREAPERS NECROPOLIS STALKERS
+    manufacturer: games-workshop
+    productCode: '99120207081'
+    sku: '99120207081'
+    ean: '5011921126286'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120207166
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120207081
   - id: games-workshop/99120207082
     name: 'Endless Spells: Ossiarch Bonereapers'
     manufacturer: games-workshop
@@ -95848,6 +96922,8 @@ products:
     sku: '99120207137'
     ean: '5011921196005'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207046
     category: miniatures
     status: current
     firstSeen: '2026-07-23'
@@ -96304,6 +97380,8 @@ products:
     sku: '99120207157'
     ean: '5011921204298'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207029
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -96399,6 +97477,8 @@ products:
     sku: '99120207161'
     ean: '5011921204335'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207076
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -96427,6 +97507,8 @@ products:
     sku: '99120207162'
     ean: '5011921204342'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207077
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -96488,6 +97570,8 @@ products:
     sku: '99120207165'
     ean: '5011921204373'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207080
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -96516,6 +97600,8 @@ products:
     sku: '99120207166'
     ean: '5011921204380'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207081
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -97687,6 +98773,8 @@ products:
     eanConfidence: confirmed
     additionalEans:
       - '5011921204281'
+    supersedes:
+      - games-workshop/99070207010
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -111349,6 +112437,19 @@ products:
       - ret-goblingaming:blood-bowl-bretonnian-team
       - ret-radaddel:/blood-bowl-bretonnian-team-the-brionne-barons
       - ret-tistaminis:blood-bowl-bretonnian-team-pre-order
+  - id: games-workshop/99120904001
+    name: 'BLOOD BOWL: WOOD ELF TEAM'
+    manufacturer: games-workshop
+    productCode: '99120904001'
+    sku: '99120904001'
+    ean: '5011921125371'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120904002
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120904001
   - id: games-workshop/99120904002
     name: Wood Elf Blood Bowl Team – Athelorn Avengers
     manufacturer: games-workshop
@@ -111356,6 +112457,8 @@ products:
     sku: '99120904002'
     ean: '5011921146130'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120904001
     gameSystem: other-games
     faction: blood-bowl
     category: miniatures
@@ -111475,6 +112578,19 @@ products:
       - mfr-gw-trade:99120906002
       - ret-goblingaming:blood-bowl-skaven-team-scramblers
       - ret-radaddel:/blood-bowl-skavenblight-scramblers
+  - id: games-workshop/99120907001
+    name: 'BLOOD BOWL: SHAMBLING UNDEAD TEAM'
+    manufacturer: games-workshop
+    productCode: '99120907001'
+    sku: '99120907001'
+    ean: '5011921117031'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120907003
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120907001
   - id: games-workshop/99120907002
     name: Necromantic Horror Blood Bowl Team – The Wolfenburg Crypt-stealers
     manufacturer: games-workshop
@@ -111523,6 +112639,8 @@ products:
     sku: '99120907003'
     ean: '5011921146147'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120907001
     gameSystem: other-games
     faction: blood-bowl
     category: miniatures
@@ -111918,6 +113036,19 @@ products:
       - ret-goblingaming:blood-bowl-chaos-dwarf-team
       - ret-radaddel:/blood-bowl-chaos-dwarf-team
       - ret-tistaminis:blood-bowl-chaos-dwarf-team
+  - id: games-workshop/99120912001
+    name: 'BLOOD BOWL: DARK ELF TEAM'
+    manufacturer: games-workshop
+    productCode: '99120912001'
+    sku: '99120912001'
+    ean: '5011921107759'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120912002
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120912001
   - id: games-workshop/99120912002
     name: Dark Elf Blood Bowl Team – Naggaroth Nightmares
     manufacturer: games-workshop
@@ -111925,6 +113056,8 @@ products:
     sku: '99120912002'
     ean: '5011921146222'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120912001
     gameSystem: other-games
     faction: blood-bowl
     category: miniatures
@@ -111949,6 +113082,19 @@ products:
       - mfr-gw-trade:99120912002
       - ret-goblingaming:naggaroth-nightmares-team
       - ret-radaddel:/blood-bowl-naggaroth-nightmares
+  - id: games-workshop/99120913001
+    name: 'BLOOD BOWL: OGRE TEAM'
+    manufacturer: games-workshop
+    productCode: '99120913001'
+    sku: '99120913001'
+    ean: '5011921133123'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120913002
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120913001
   - id: games-workshop/99120913002
     name: Ogre Blood Bowl Team – Fire Mountain Gut Busters
     manufacturer: games-workshop
@@ -111956,6 +113102,8 @@ products:
     sku: '99120913002'
     ean: '5011921146253'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120913001
     gameSystem: other-games
     faction: blood-bowl
     category: miniatures
@@ -112083,6 +113231,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120999003
+  - id: games-workshop/99120999004
+    name: 'BLOOD BOWL: HALFLING TEAM'
+    manufacturer: games-workshop
+    productCode: '99120999004'
+    sku: '99120999004'
+    ean: '5011921120031'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120999012
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99120999004
   - id: games-workshop/99120999005
     name: 'BLOOD BOWL: THE UNDERWORLD CREEPERS'
     manufacturer: games-workshop
@@ -112259,6 +113420,8 @@ products:
     sku: '99120999012'
     ean: '5011921146161'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120999004
     gameSystem: other-games
     faction: blood-bowl
     category: miniatures
@@ -127412,6 +128575,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99129915034
+  - id: games-workshop/99129915036
+    name: DAEMONS OF SLAANESH DAEMONETTES
+    manufacturer: games-workshop
+    productCode: '99129915036'
+    sku: '99129915036'
+    ean: '5011921085521'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99129915076
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99129915036
   - id: games-workshop/99129915037
     name: DAEMONS OF NURGLE NURGLINGS
     manufacturer: games-workshop
@@ -127602,6 +128778,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99129915049
+  - id: games-workshop/99129915050
+    name: DAEMONS OF KHORNE FLESH HOUNDS
+    manufacturer: games-workshop
+    productCode: '99129915050'
+    sku: '99129915050'
+    ean: '5011921113170'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99129915074
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.radaddel.de/blades-of-khorne-flesh-hounds
+    evidence:
+      - mfr-gw-trade:99129915050
+      - ret-radaddel:/blades-of-khorne-flesh-hounds
   - id: games-workshop/99129915051
     name: DAEMONS OF KHORNE SKULLTAKER
     manufacturer: games-workshop
@@ -128221,6 +129412,8 @@ products:
     sku: '99129915074'
     ean: '5011921199846'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99129915050
     supersededBy: games-workshop/99129915088
     category: miniatures
     status: current
@@ -128249,6 +129442,8 @@ products:
     sku: '99129915076'
     ean: '5011921200030'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99129915036
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -128799,11 +129994,26 @@ products:
     sku: '99170101012'
     ean: '5011921144655'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99170101013
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99170101012
+  - id: games-workshop/99170101013
+    name: ASSLT INT + PAINTS ENG/SPA/PORT/LATV/ROM
+    manufacturer: games-workshop
+    productCode: '99170101013'
+    sku: '99170101013'
+    ean: '5011921144662'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99170101012
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99170101013
   - id: games-workshop/99170101016
     name: ASSLT INT + PAINTS ENG/SPA/PORT/LATV/ROM
     manufacturer: games-workshop
@@ -128811,11 +130021,26 @@ products:
     sku: '99170101016'
     ean: '5011921192076'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99170101017
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99170101016
+  - id: games-workshop/99170101017
+    name: ASSLT INT + PAINTS ENG/SPA/PORT/LATV/ROM
+    manufacturer: games-workshop
+    productCode: '99170101017'
+    sku: '99170101017'
+    ean: '5011921192083'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99170101016
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99170101017
   - id: games-workshop/99170110003
     name: NECRONS PAINT SET+ ENG/SPA/PORT/LATV/ROM
     manufacturer: games-workshop
@@ -128823,12 +130048,41 @@ products:
     sku: '99170110003'
     ean: '5011921144617'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99170110004
+      - games-workshop/99170110005
     supersededBy: games-workshop/99170110007
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99170110003
+  - id: games-workshop/99170110004
+    name: NECRONS PAINT SET+ ENG/SPA/PORT/LATV/ROM
+    manufacturer: games-workshop
+    productCode: '99170110004'
+    sku: '99170110004'
+    ean: '5011921144624'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99170110003
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99170110004
+  - id: games-workshop/99170110005
+    name: NECRONS PAINT SET+ ENG/SPA/PORT/LATV/ROM
+    manufacturer: games-workshop
+    productCode: '99170110005'
+    sku: '99170110005'
+    ean: '5011921144631'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99170110003
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99170110005
   - id: games-workshop/99170110007
     name: NECRONS PAINT SET+ ENG/SPA/PORT/LATV/ROM
     manufacturer: games-workshop
@@ -128850,12 +130104,28 @@ products:
     sku: '99170199014'
     ean: '5011921152773'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99170199015
+      - games-workshop/99170199019
     supersededBy: games-workshop/99170199018
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99170199014
+  - id: games-workshop/99170199015
+    name: 40K PAINTS + TOOLS ENG/SPA/PORT/LATV/ROM
+    manufacturer: games-workshop
+    productCode: '99170199015'
+    sku: '99170199015'
+    ean: '5011921152780'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99170199014
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99170199015
   - id: games-workshop/99170199018
     name: 40K PAINTS + TOOLS ENG/SPA/PORT/LATV/ROM
     manufacturer: games-workshop
@@ -128870,6 +130140,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99170199018
+  - id: games-workshop/99170199019
+    name: 40K PAINTS + TOOLS ENG/SPA/PORT/LATV/ROM
+    manufacturer: games-workshop
+    productCode: '99170199019'
+    sku: '99170199019'
+    ean: '5011921192038'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99170199014
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-30'
+    evidence:
+      - mfr-gw-trade:99170199019
   - id: games-workshop/99170207001
     name: N/HAUNT PAINT SET+  ENG/SPA/PORT/LAT/ROM
     manufacturer: games-workshop
@@ -146698,6 +147981,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99239999074
+  - id: games-workshop/99239999075
+    name: WARHAMMER BATTLE CASE
+    manufacturer: games-workshop
+    productCode: '99239999075'
+    sku: '99239999075'
+    ean: '5011921053438'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99239999129
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.radaddel.de/citadel-battle-figure-case
+    evidence:
+      - mfr-gw-trade:99239999075
+      - ret-radaddel:/citadel-battle-figure-case
   - id: games-workshop/99239999076
     name: CITADEL CRUSADE FIGURE CASE
     manufacturer: games-workshop
@@ -147083,6 +148381,8 @@ products:
     sku: '99239999129'
     ean: '5011921244898'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99239999075
     category: miniatures
     status: current
     availability: in_stock
@@ -167493,18 +168793,6 @@ products:
     url: https://www.radaddel.de/blades-of-khorne-battletome-softcover-2.-edition-deutsch
     evidence:
       - ret-radaddel:/blades-of-khorne-battletome-softcover-2.-edition-deutsch
-  - id: games-workshop/blades-of-khorne-flesh-hounds-von-games-workshop
-    name: 'Blades of Khorne: Flesh Hounds von Games Workshop'
-    manufacturer: games-workshop
-    sku: '119610'
-    ean: '5011921113170'
-    eanConfidence: provisional
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.radaddel.de/blades-of-khorne-flesh-hounds
-    evidence:
-      - ret-radaddel:/blades-of-khorne-flesh-hounds
   - id: games-workshop/blades-of-khorne-realmgore-ritualist-new
     name: 'BLADES OF KHORNE: REALMGORE RITUALIST New'
     manufacturer: games-workshop
@@ -167516,18 +168804,6 @@ products:
     url: https://tistaminis.com/products/blades-of-khorne-realmgore-ritualist
     evidence:
       - arc-tistaminis:/products/blades-of-khorne-realmgore-ritualist
-  - id: games-workshop/blades-of-khorne-wrathmongers-von-games-workshop
-    name: 'Blades of Khorne: Wrathmongers von Games Workshop'
-    manufacturer: games-workshop
-    sku: '114992'
-    ean: '5011921064038'
-    eanConfidence: provisional
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.radaddel.de/blades-of-khorne-wrathmongers
-    evidence:
-      - ret-radaddel:/blades-of-khorne-wrathmongers
   - id: games-workshop/blood-angels-space-marine-heroes-blister-pack-x1
     name: BLOOD ANGELS SPACE MARINE HEROES BLISTER PACK (X1)
     manufacturer: games-workshop
@@ -168055,18 +169331,6 @@ products:
     evidence:
       - bdb-goupc:5011921026449
       - ret-gamenerdz:/citadel-base-paint-steel-legion-drab-12ml
-  - id: games-workshop/citadel-battle-figure-case-von-games-workshop
-    name: 'Citadel: Battle Figure Case von Games Workshop'
-    manufacturer: games-workshop
-    sku: '114177'
-    ean: '5011921053438'
-    eanConfidence: provisional
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.radaddel.de/citadel-battle-figure-case
-    evidence:
-      - ret-radaddel:/citadel-battle-figure-case
   - id: games-workshop/citadel-brush-x-large-base
     name: 'Citadel Brush: X-Large Base'
     manufacturer: games-workshop
@@ -172117,34 +173381,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200b-6001019908240-05Warhammer40000StarterSet-ENG.jpg?v=1783729421
     evidence:
       - ret-tistaminis:warhammer-40000-starter-set
-  - id: games-workshop/warhammer-40k-adeptus-mechanicus-archaeopter
-    name: 'Warhammer 40K: Adeptus Mechanicus - Archaeopter'
-    manufacturer: games-workshop
-    sku: GWS59-22
-    ean: '5011921135813'
-    eanConfidence: provisional
-    gameSystem: warhammer-40k
-    faction: armies-of-the-imperium
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-adeptus-mechanicus-archaeopter
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-adeptus-mechanicus-archaeopter
-  - id: games-workshop/warhammer-40k-adeptus-mechanicus-pteraxii
-    name: 'Warhammer 40K: Adeptus Mechanicus - Pteraxii'
-    manufacturer: games-workshop
-    sku: GWS59-23
-    ean: '5011921135806'
-    eanConfidence: provisional
-    gameSystem: warhammer-40k
-    faction: armies-of-the-imperium
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-adeptus-mechanicus-pteraxii
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-adeptus-mechanicus-pteraxii
   - id: games-workshop/warhammer-40k-apocalypse
     name: 'Warhammer 40K: Apocalypse'
     manufacturer: games-workshop
@@ -172568,20 +173804,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-40k-space-marine-heroes-series-2-display-box
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marine-heroes-series-2-display-box
-  - id: games-workshop/warhammer-40k-space-marines-primaris-librarian
-    name: 'Warhammer 40K: Space Marines Primaris Librarian'
-    manufacturer: games-workshop
-    sku: GWS48-63
-    ean: '5011921085262'
-    eanConfidence: provisional
-    gameSystem: warhammer-40k
-    faction: space-marines
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-primaris-librarian
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian
   - id: games-workshop/warhammer-40k-ultramarines-captain-uriel-ventris-black-library-celebration-2021
     name: 'Warhammer 40K: Ultramarines - Captain Uriel Ventris (Black Library Celebration 2021)'
     manufacturer: games-workshop
@@ -172721,32 +173943,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-gloomspite-gitz-trugg-the-troggoth-king
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-gloomspite-gitz-trugg-the-troggoth-king
-  - id: games-workshop/warhammer-age-of-sigmar-kharadron-overlords-grundstok-thunderers
-    name: 'Warhammer Age of Sigmar: Kharadron Overlords - Grundstok Thunderers'
-    manufacturer: games-workshop
-    sku: GWS84-37
-    ean: '5011921082995'
-    eanConfidence: provisional
-    gameSystem: age-of-sigmar
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-kharadron-overlords-grundstok-thunderers
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-kharadron-overlords-grundstok-thunderers
-  - id: games-workshop/warhammer-age-of-sigmar-kharadron-overlords-skyriggers
-    name: 'Warhammer Age of Sigmar: Kharadron Overlords - Skyriggers'
-    manufacturer: games-workshop
-    sku: GWS84-36
-    ean: '5011921082988'
-    eanConfidence: provisional
-    gameSystem: age-of-sigmar
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-kharadron-overlords-skyriggers
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-kharadron-overlords-skyriggers
   - id: games-workshop/warhammer-age-of-sigmar-lumineth-realm-lords-scinari-calligrave
     name: 'Warhammer Age of Sigmar: Lumineth Realm-Lords - Scinari Calligrave'
     manufacturer: games-workshop
@@ -172771,19 +173967,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-malign-portents-cards
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-malign-portents-cards
-  - id: games-workshop/warhammer-age-of-sigmar-ossiarch-bonereapers-kavalos-deathriders
-    name: 'Warhammer Age of Sigmar: Ossiarch Bonereapers - Kavalos Deathriders'
-    manufacturer: games-workshop
-    sku: GWS94-27
-    ean: '5011921126323'
-    eanConfidence: provisional
-    gameSystem: age-of-sigmar
-    category: miniatures
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ossiarch-bonereapers-kavalos-deathriders
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-ossiarch-bonereapers-kavalos-deathriders
   - id: games-workshop/warhammer-age-of-sigmar-season-of-war-firestorm
     name: 'Warhammer Age of Sigmar: Season of War - Firestorm'
     manufacturer: games-workshop
