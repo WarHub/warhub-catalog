@@ -25,6 +25,8 @@
         "manufacturer": { "type": "string" },
         "ean": { "type": "string" },
         "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "supersedes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "supersededBy": { "type": "string" },
         "eanConfidence": { "type": "string", "enum": ["confirmed", "provisional", "conflicted"] },
         "priceGbp": { "type": "number" },
         "priceUsd": { "type": "number" },

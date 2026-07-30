@@ -7,7 +7,16 @@ from warhub_acquisition.yamlio import load_yaml, read_yaml
 
 
 def build_report(paths: DataPaths) -> str:
-    lines = ["## Catalog coverage", "", "| manufacturer | products | with EAN | EAN % | confirmed % |", "|---|---|---|---|---|"]
+    # `products` is the TOTAL and includes archival records -- a superseded product is still a real
+    # product somebody owns. `current` is the subset nothing supersedes; the two are reported
+    # separately so the coverage percentages (which stay over the total) can't be misread as a
+    # shrinking or growing shelf when lineage links are added.
+    lines = [
+        "## Catalog coverage",
+        "",
+        "| manufacturer | products | current | with EAN | EAN % | confirmed % |",
+        "|---|---|---|---|---|---|",
+    ]
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         try:
             data = read_yaml(path)
@@ -17,11 +26,12 @@ def build_report(paths: DataPaths) -> str:
             raise ValueError(f"malformed catalog file {path}: {exc}") from exc
         with_ean = [p for p in products if p.get("ean")]
         confirmed = [p for p in with_ean if p.get("eanConfidence") == "confirmed"]
+        current = [p for p in products if not p.get("supersededBy")]
         total = len(products)
         ean_pct = 100 * len(with_ean) / total if total else 0.0
         confirmed_pct = 100 * len(confirmed) / total if total else 0.0
         lines.append(
-            f"| {manufacturer} | {total} | {len(with_ean)} "
+            f"| {manufacturer} | {total} | {len(current)} | {len(with_ean)} "
             f"| {ean_pct:.1f}% | {confirmed_pct:.1f}% |"
         )
     lines += ["", "## Evidence sources", ""]

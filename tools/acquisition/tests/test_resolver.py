@@ -457,3 +457,92 @@ def test_upsert_reobservation_with_changed_hint_clamps_first_seen(tmp_path: Path
     assert after.ean == before.ean
     assert after.eanConfidence == before.eanConfidence
     assert after.firstSeen == before.firstSeen == "2026-07-07"
+
+
+def test_supersession_publishes_both_records_and_moves_the_retired_barcode(tmp_path: Path) -> None:
+    """The archival counterpart to the repackaging-join test above. Same evidence shape, but the
+    pair is DECLARED rather than folded: both records must publish, the retired barcode MOVES to
+    the retired record (it is not duplicated onto the survivor), the retired record inherits
+    `discontinued` from the ordinary lifecycle rules, and the link points both ways."""
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.taxonomy / "manufacturers.yaml",
+        {"manufacturers": [{"slug": "games-workshop", "name": "Games Workshop",
+                            "codePattern": r"\d{11}", "codeStrip": ["GWS"],
+                            "gs1Prefixes": ["5011921"], "vendorNames": []}]},
+    )
+    write_yaml(paths.sources / "mfr-gw.yaml", {"id": "mfr-gw", "kind": "manufacturer", "strategy": "algolia"})
+    write_yaml(paths.sources / "ret-goblin.yaml", {"id": "ret-goblin", "kind": "retailer", "strategy": "shopify"})
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    mfr = paths.evidence_products / "mfr-gw" / "observations.jsonl"
+    mfr.parent.mkdir(parents=True)
+    mfr.write_text(
+        # RETIRED packaging: the trade row is archived and carries the old barcode.
+        line({"key": "mfr-gw:old", "name": "Widget", "manufacturer": "games-workshop", "sku": "99120110001",
+              "ean": "5011921062164", "archived": True, "hints": {"gameSystem": "warhammer-40k"},
+              "firstSeen": "2026-07-01", "lastSeen": "2026-07-05", "extractor": "algolia@1"}) + "\n"
+        + line({"key": "mfr-gw:new", "name": "Widget", "manufacturer": "games-workshop", "sku": "99120110002",
+                "ean": "5011921179398", "priceGbp": 20.0, "availability": "in_stock",
+                "hints": {"gameSystem": "warhammer-40k"},
+                "firstSeen": "2026-07-07", "lastSeen": "2026-07-12", "extractor": "algolia@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    ret = paths.evidence_products / "ret-goblin" / "observations.jsonl"
+    ret.parent.mkdir(parents=True)
+    ret.write_text(
+        # The bridge: still filed under the RETIRED code, but scanning as the CURRENT barcode.
+        line({"key": "ret-goblin:widget", "name": "Widget", "manufacturer": "games-workshop",
+              "sku": "99120110001", "ean": "5011921179398", "url": "https://goblin/widget",
+              "firstSeen": "2026-07-08", "lastSeen": "2026-07-12", "extractor": "shopify@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    write_yaml(paths.matches, {"supersessions": {"games-workshop/99120110001": "games-workshop/99120110002"}})
+
+    catalog = resolve_catalog(paths)
+    retired, current = catalog["games-workshop"]
+
+    assert retired.id == "games-workshop/99120110001"
+    assert retired.productCode == "99120110001"
+    assert retired.ean == "5011921062164"          # its own barcode, kept as the PRIMARY
+    assert retired.eanConfidence == "confirmed"
+    assert retired.status == "discontinued"        # free from the existing lifecycle rules
+    assert retired.supersededBy == "games-workshop/99120110002"
+    assert retired.supersedes == []
+
+    assert current.id == "games-workshop/99120110002"
+    assert current.ean == "5011921179398"
+    assert current.additionalEans == []            # the retired barcode MOVED, it is not duplicated
+    assert current.supersedes == ["games-workshop/99120110001"]
+    assert current.supersededBy is None
+    assert current.url == "https://goblin/widget"  # the re-homed retailer's live listing
+
+    # the barcode-vs-stale-SKU disagreement is reported, and nothing else is
+    assert [c["type"] for c in read_yaml(paths.conflicts)["conflicts"]] == ["supersession-stale-code"]
+
+    # both link keys are omitted entirely where they are empty, so every other record is unchanged
+    written = read_yaml(paths.catalog_products / "games-workshop.yaml")["products"]
+    assert "supersedes" not in written[0] and written[0]["supersededBy"] == "games-workshop/99120110002"
+    assert "supersededBy" not in written[1] and written[1]["supersedes"] == ["games-workshop/99120110001"]
+
+
+def test_supersession_onto_retracted_raises(tmp_path: Path) -> None:
+    import pytest
+
+    paths = seed(tmp_path)
+    write_yaml(paths.overrides, {"retract": ["games-workshop/99120110077"], "products": {}})
+    write_yaml(paths.matches, {"supersessions": {"games-workshop/old": "games-workshop/99120110077"}})
+    with pytest.raises(ValueError, match="retracted"):
+        resolve_catalog(paths)
+
+
+def test_supersession_cycle_raises(tmp_path: Path) -> None:
+    import pytest
+
+    paths = seed(tmp_path)
+    write_yaml(paths.matches, {"supersessions": {"games-workshop/a": "games-workshop/b",
+                                                 "games-workshop/b": "games-workshop/a"}})
+    with pytest.raises(ValueError, match="cycle"):
+        resolve_catalog(paths)

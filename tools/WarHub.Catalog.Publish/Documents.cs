@@ -54,6 +54,14 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(16)] public decimal? PriceCad { get; init; }
     // Unit volume in millilitres, for paints/sprays (e.g. 12, 18, 24, 400). Null for everything else.
     [JsonPropertyOrder(17)] public int? VolumeMl { get; init; }
+    // Archival lineage between two product codes for the same product (a re-code, a repackaging).
+    // BOTH records are published: a retired one keeps its own productCode/ean and points forward
+    // with <c>supersededBy</c>; the current one lists its predecessors in <c>supersedes</c>. So a
+    // decade-old box still scans to a record, and that record says what replaced it. Note the
+    // relation is NOT encoded in <c>status</c> -- a consumer filtering on status keeps working
+    // unchanged, and a retired record's status is still whatever the evidence says it is.
+    [JsonPropertyOrder(18)] public IReadOnlyList<string>? Supersedes { get; init; }
+    [JsonPropertyOrder(19)] public string? SupersededBy { get; init; }
 }
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>

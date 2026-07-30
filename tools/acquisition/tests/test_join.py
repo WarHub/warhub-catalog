@@ -314,3 +314,98 @@ def test_degenerate_name_forced_join_still_works() -> None:
     )
     assert [m.key for m in result.entities["games-workshop/99120110077"]] == ["mfr-gw:a", "ret-goblin:x"]
     assert result.ambiguous == []
+
+
+# --- declared supersessions: two product codes, one product, BOTH records kept ------------------
+
+SUPERSESSION = {"games-workshop/99120110001": "games-workshop/99120110002"}
+OLD_EAN = "5011921062164"   # the retired packaging's barcode
+NEW_EAN = "5011921179398"   # the current packaging's barcode
+
+
+def test_supersession_rehomes_a_stale_code_bridge_and_keeps_both_records() -> None:
+    """The measured shape of every GW repackaging pair: a retailer still lists the RETIRED product
+    code while carrying the CURRENT barcode. That one observation ean-unions the two codes into a
+    single entity, destroying the retired record. Declaring the supersession must split them --
+    and the bridge belongs to the record whose barcode it scans as, not the stale SKU it kept."""
+    members = [
+        obs("mfr-gw:old", sku="99120110001", ean=OLD_EAN, name="Widget", archived=True),
+        obs("mfr-gw:new", sku="99120110002", ean=NEW_EAN, name="Widget"),
+        obs("ret-goblin:widget", sku="99120110001", ean=NEW_EAN, name="Widget"),
+    ]
+    merged = join_observations(members, TAXONOMY, KINDS, Matches())
+    assert list(merged.entities) == ["games-workshop/99120110002"]  # today: the retired code is gone
+
+    split = join_observations(members, TAXONOMY, KINDS, Matches(supersessions=SUPERSESSION))
+    assert set(split.entities) == {"games-workshop/99120110001", "games-workshop/99120110002"}
+    assert [m.key for m in split.entities["games-workshop/99120110001"]] == ["mfr-gw:old"]
+    assert [m.key for m in split.entities["games-workshop/99120110002"]] == [
+        "mfr-gw:new",
+        "ret-goblin:widget",
+    ]
+    assert [c for c in split.ambiguous if c["type"] == "supersession-stale-code"] == [
+        {
+            "type": "supersession-stale-code",
+            "key": "ret-goblin:widget",
+            "ean": NEW_EAN,
+            "listed_code": "99120110001",
+            "barcode_code": "99120110002",
+            "manufacturer": "games-workshop",
+        }
+    ]
+
+
+def test_supersession_barrier_blocks_a_merge_it_cannot_re_home() -> None:
+    """Neither side's MANUFACTURER asserts the contested barcode, so no side owns it and the
+    bridging observations cannot be re-homed. The barrier itself then has to stop the ean-union --
+    without it a single shared barcode silently re-merges a declared pair."""
+    members = [
+        obs("mfr-gw:old", sku="99120110001", name="Widget"),
+        obs("mfr-gw:new", sku="99120110002", name="Widget"),
+        obs("ret-goblin:old", sku="99120110001", ean=NEW_EAN, name="Widget"),
+        obs("ret-radaddel:new", sku="99120110002", ean=NEW_EAN, name="Widget"),
+    ]
+    assert len(join_observations(members, TAXONOMY, KINDS, Matches()).entities) == 1
+
+    split = join_observations(members, TAXONOMY, KINDS, Matches(supersessions=SUPERSESSION))
+    assert set(split.entities) == {"games-workshop/99120110001", "games-workshop/99120110002"}
+    assert [c for c in split.ambiguous if c["type"] == "supersession-blocked-merge"] == [
+        {
+            "type": "supersession-blocked-merge",
+            "retired": "games-workshop/99120110001",
+            "surviving": "games-workshop/99120110002",
+            "keys": ["ret-goblin:old", "ret-radaddel:new"],
+        }
+    ]
+
+
+def test_forced_join_cannot_collapse_a_declared_supersession() -> None:
+    # Contradictory hand instructions: the supersession wins and the join is reported unresolved.
+    result = join_observations(
+        [obs("mfr-gw:old", sku="99120110001", name="Widget"), obs("mfr-gw:new", sku="99120110002", name="Widget")],
+        TAXONOMY, KINDS,
+        Matches(joins={"mfr-gw:old": "games-workshop/99120110002"}, supersessions=SUPERSESSION),
+    )
+    assert set(result.entities) == {"games-workshop/99120110001", "games-workshop/99120110002"}
+    assert {
+        "type": "unresolved-forced-join",
+        "key": "mfr-gw:old",
+        "target": "games-workshop/99120110002",
+    } in result.ambiguous
+
+
+def test_supersession_naming_no_resolved_entity_is_reported() -> None:
+    # Entity ids fall back to name slugs, so a typo (or a code that stopped being observed) would
+    # otherwise publish a link pointing at nothing.
+    result = join_observations(
+        [obs("mfr-gw:new", sku="99120110002", name="Widget")],
+        TAXONOMY, KINDS, Matches(supersessions=SUPERSESSION),
+    )
+    assert [c for c in result.ambiguous if c["type"] == "unresolved-supersession"] == [
+        {
+            "type": "unresolved-supersession",
+            "retired": "games-workshop/99120110001",
+            "surviving": "games-workshop/99120110002",
+            "missing": ["games-workshop/99120110001"],
+        }
+    ]

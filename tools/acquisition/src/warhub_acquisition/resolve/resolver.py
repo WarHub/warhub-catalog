@@ -60,11 +60,13 @@ def _load_optional(path: Path, model: type, default: object) -> object:
 
 
 def _dump_product(record: CanonicalProduct) -> dict:
-    # `additionalEans` is empty for the single-barcode majority; omit it entirely there so the
-    # published shape is byte-identical for existing products (only repackaged entities carry it).
+    # `additionalEans`/`supersedes` are empty for the vast majority; omit them entirely there so
+    # the published shape is byte-identical for existing products (only repackaged/superseded
+    # entities carry them). `supersededBy` is None there and exclude_none already drops it.
     data = record.model_dump(mode="json", exclude_none=True)
-    if not data.get("additionalEans"):
-        data.pop("additionalEans", None)
+    for optional_list in ("additionalEans", "supersedes"):
+        if not data.get(optional_list):
+            data.pop(optional_list, None)
     return data
 
 
@@ -101,6 +103,21 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     for join_target in matches.joins.values():
         if join_target in retracted:
             raise ValueError(f"matches.yaml join targets retracted entity {join_target!r}")
+    # A supersession is a published LINK, so a side that is retracted (or a self/cyclic chain)
+    # would publish a pointer to nothing. Fail loudly rather than emit a dangling link.
+    for retired, surviving in matches.supersessions.items():
+        for side in (retired, surviving):
+            if side in retracted:
+                raise ValueError(f"matches.yaml supersession references retracted entity {side!r}")
+        if retired == surviving:
+            raise ValueError(f"matches.yaml supersession points {retired!r} at itself")
+        seen = {retired}
+        node = surviving
+        while node in matches.supersessions:
+            if node in seen:
+                raise ValueError(f"matches.yaml supersessions form a cycle through {node!r}")
+            seen.add(node)
+            node = matches.supersessions[node]
 
     observations = [observation for source in evidence.values() for observation in source.values()]
 
@@ -119,6 +136,16 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     # a repackaging and must keep its `conflicted` flag, so the bad data stays visible.
     key_to_entity = {m.key: eid for eid, ms in joined.entities.items() for m in ms}
     forced_keys = set(matches.joins)
+    # Declared lineage, alias-resolved on both sides and restricted to entities that actually
+    # resolved (join_observations reports the ones that did not as `unresolved-supersession`).
+    superseded_by: dict[str, str] = {}
+    supersedes: dict[str, list[str]] = {}
+    for retired, surviving in sorted(matches.supersessions.items()):
+        retired = matches.aliases.get(retired, retired)
+        surviving = matches.aliases.get(surviving, surviving)
+        if retired in joined.entities and surviving in joined.entities:
+            superseded_by[retired] = surviving
+            supersedes.setdefault(surviving, []).append(retired)
     for entity, members in joined.entities.items():
         # retracted entities are fully suppressed -- including from the ean-shared check below
         if entity in retracted:
@@ -141,12 +168,13 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         ean = resolve_ean(entity, members, kinds, superseded, surviving_code=code, member_codes=member_codes)
         ean_resolutions[entity] = ean
         conflicts.extend(ean.conflicts)
-        product = apply_overrides(
-            resolve_attributes(
-                entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps
-            ),
-            overrides,
+        record = resolve_attributes(
+            entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps
         )
+        # Stamped before apply_overrides so a hand override can still correct a link.
+        record.supersededBy = superseded_by.get(entity)
+        record.supersedes = sorted(supersedes.get(entity, []))
+        product = apply_overrides(record, overrides)
         # gameSystem is OPTIONAL: a product genuinely belonging to no game system (a base, a
         # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
         # gameSystem: null rather than being parked out of the catalog. classify/queue.py

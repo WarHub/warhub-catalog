@@ -21,6 +21,8 @@ public sealed record CanonicalProduct
     public string? Ean { get; init; }
     public string? EanConfidence { get; init; }
     public List<string>? AdditionalEans { get; init; }   // extra barcodes of a repackaged product
+    public List<string>? Supersedes { get; init; }       // retired product records this one replaces
+    public string? SupersededBy { get; init; }           // the current record replacing this retired one
     public string? GameSystem { get; init; }     // slug
     public string? Faction { get; init; }        // slug
     public string? Category { get; init; }

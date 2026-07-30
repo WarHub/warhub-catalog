@@ -16550,8 +16550,8 @@ products:
     sku: '52170218003'
     ean: '5011921219322'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921260157'
+    supersedes:
+      - games-workshop/52170218004
     gameSystem: age-of-sigmar
     faction: stormcast-eternals
     category: miniatures
@@ -16564,9 +16564,21 @@ products:
     evidence:
       - bdb-goupc:5011921219322
       - mfr-gw-trade:52170218003
-      - mfr-gw-trade:52170218004
       - ret-gamenerdz:/warhammer-age-of-sigmar-stormcast-eternals-paint-set-4th-edition
       - ret-goblingaming:age-of-sigmar-stormcast-eternals-paint-set
+  - id: games-workshop/52170218004
+    name: AOS S/E + PAINT SET ENG/SPA/PORT/LATV/RM
+    manufacturer: games-workshop
+    productCode: '52170218004'
+    sku: '52170218004'
+    ean: '5011921260157'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/52170218003
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:52170218004
   - id: games-workshop/52170299001
     name: AOS PAINTS+TOOLS ENG/SPA/PORT/LATV/ROM
     manufacturer: games-workshop
@@ -45617,6 +45629,34 @@ products:
       - mfr-gw-algolia:prod4570176-99061499078
       - mfr-gw-trade:99061499078
       - ret-goblingaming:frodo-baggins-samwise-gamgee-gollum
+  - id: games-workshop/99061499084
+    name: The Three Hunters
+    manufacturer: games-workshop
+    productCode: '99061499084'
+    sku: '99061499084'
+    supersededBy: games-workshop/99121499041
+    gameSystem: middle-earth
+    faction: the-lord-of-the-rings-good
+    category: miniatures
+    packaging: single
+    status: current
+    availability: limited
+    firstSeen: '2026-07-07'
+    priceGbp: 37.0
+    url: https://www.warhammer.com/en-GB/shop/the-three-hunters-mto-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99061499084_METhreeHuntersMTO2026.jpg
+    description: |-
+      After the ambush at Amon Hen, Aragorn, Gimli, and Legolas pledge to rescue the Hobbits who have been abducted by the Uruk-hai scouts. Ready to hunt, they are filled with grim resolve.
+
+      This multipart metal kit builds Aragorn, Gimli, and Legolas, three legendary warriors for the Middle-earth Strategy Battle Game. They are depicted as they were after the breaking of The Fellowship, as they prepare to track the Uruk-hai. These classic sculpts are a great way to add even more character to your collection.
+
+      This kit comprises 5 metal components and 3 Citadel 25mm Round Slotta Bases. These miniatures require assembly and are supplied unpainted – we recommend using Citadel Colour paints.
+
+      Rules for these miniatures can be found in the *Armies of The Lord of the Rings*™ publication, available separately.
+
+      **This kit is available on a Made to Order basis until 08:00am GMT on 16 March 2026, and will be shipped within 180 days of ordering.**
+    evidence:
+      - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/the-three-hunters
   - id: games-workshop/99062701006
     name: Chaos Warriors Halberds Upgrade Set
     manufacturer: games-workshop
@@ -49840,6 +49880,7 @@ products:
     sku: '99070113003'
     ean: '5011921066735'
     eanConfidence: confirmed
+    supersededBy: games-workshop/99120113104
     gameSystem: warhammer-40k
     faction: tau-empire
     category: miniatures
@@ -49860,7 +49901,6 @@ products:
       This miniature is supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/tau-empire/ethereal
-      - mfr-gw-algolia:prod4830199-99120113104
       - mfr-gw-trade:99070113003
       - ret-gamenerdz:/warhammer-40k-tau-empire-ethereal
       - ret-goblingaming:warhammer-40k-tau-ethereal
@@ -50650,8 +50690,7 @@ products:
     sku: '99070201008'
     ean: '5011921063765'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921259090'
+    supersededBy: games-workshop/99120201240
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
@@ -50668,10 +50707,7 @@ products:
       This six-piece plastic kit contains everything needed to build one Gutrot Spume. Armed with a Rot-pocked Axe and grasping Flailing Tentacles, he cuts a suitably grotesque figure. Includes one Citadel 40mm Round base.
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/gutrot-spume
-      - mfr-gw-algolia:prod2940184-99120201240
       - mfr-gw-trade:99070201008
-      - mfr-gw-trade:99120201240
-      - ret-goblingaming:rotbringers-gutrot-spume
       - ret-radaddel:/maggotkin-of-nurgle-gutrot-spume
   - id: games-workshop/99070201009
     name: NURGLE ROTBRINGERS LORD OF PLAGUES
@@ -56161,6 +56197,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101252
+  - id: games-workshop/99120101255
+    name: WHITE SCARS KOR'SARRO KHAN
+    manufacturer: games-workshop
+    productCode: '99120101255'
+    sku: '99120101255'
+    ean: '5011921119868'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120101330
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120101255
   - id: games-workshop/99120101256
     name: RAVEN GUARD KAYVAAN SHRIKE
     manufacturer: games-workshop
@@ -57708,8 +57757,8 @@ products:
     sku: '99120101330'
     ean: '5011921142590'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921119868'
+    supersedes:
+      - games-workshop/99120101255
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -57729,7 +57778,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/kor-sarro-khan
       - mfr-gw-algolia:prod4530151-99120101330
-      - mfr-gw-trade:99120101255
       - mfr-gw-trade:99120101330
       - ret-gamenerdz:/warhammer-40k-white-scars-kor-sarro-khan
       - ret-goblingaming:space-marines-white-scars-korsarro-khan
@@ -61518,6 +61566,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120102087
+  - id: games-workshop/99120102088
+    name: 'CHAOS S/M: HAARKEN WORLDCLAIMER'
+    manufacturer: games-workshop
+    productCode: '99120102088'
+    sku: '99120102088'
+    ean: '5011921111084'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120102164
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120102088
   - id: games-workshop/99120102089
     name: CHAOS SPACE MARINES FORGEFIEND
     manufacturer: games-workshop
@@ -62978,8 +63039,8 @@ products:
     sku: '99120102164'
     ean: '5011921178179'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921111084'
+    supersedes:
+      - games-workshop/99120102088
     gameSystem: warhammer-40k
     faction: armies-of-chaos
     category: miniatures
@@ -63001,7 +63062,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/haarken-worldclaimer-herald-of-the-apocalypse
       - mfr-gw-algolia:prod4090142-99120102164
-      - mfr-gw-trade:99120102088
       - mfr-gw-trade:99120102164
       - ret-goblingaming:haarken-worldclaimer
   - id: games-workshop/99120102165
@@ -65425,6 +65485,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120103063
+  - id: games-workshop/99120103064
+    name: ORKS KUSTOM BOOSTA-BLASTA
+    manufacturer: games-workshop
+    productCode: '99120103064'
+    sku: '99120103064'
+    ean: '5011921107995'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120103100
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120103064
   - id: games-workshop/99120103065
     name: ORKS MEGATRAKK SCRAPJET
     manufacturer: games-workshop
@@ -65437,6 +65510,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120103065
+  - id: games-workshop/99120103066
+    name: ORKS RUKKATRUKK SQUIGBUGGY
+    manufacturer: games-workshop
+    productCode: '99120103066'
+    sku: '99120103066'
+    ean: '5011921108022'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120103102
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120103066
   - id: games-workshop/99120103067
     name: ORKS SHOKKJUMP DRAGSTA
     manufacturer: games-workshop
@@ -66214,8 +66300,8 @@ products:
     sku: '99120103100'
     ean: '5011921157068'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921107995'
+    supersedes:
+      - games-workshop/99120103064
     gameSystem: warhammer-40k
     faction: orks
     category: miniatures
@@ -66235,7 +66321,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/orks/kustom-boosta-blasta
       - mfr-gw-algolia:prod4090143-99120103100
-      - mfr-gw-trade:99120103064
       - mfr-gw-trade:99120103100
       - ret-gamenerdz:/warhammer-40k-orks-kustom-boosta-blasta
       - ret-goblingaming:kustom-boosta-blasta
@@ -66276,8 +66361,8 @@ products:
     sku: '99120103102'
     ean: '5011921157082'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921108022'
+    supersedes:
+      - games-workshop/99120103066
     gameSystem: warhammer-40k
     faction: orks
     category: miniatures
@@ -66297,7 +66382,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/orks/rukkatrukk-squigbuggy
       - mfr-gw-algolia:prod4000171-99120103102
-      - mfr-gw-trade:99120103066
       - mfr-gw-trade:99120103102
       - ret-goblingaming:rukkatrukk-squigbuggy
       - ret-radaddel:/orks-rukkatrukk-squigbuggy
@@ -76288,6 +76372,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120112036
+  - id: games-workshop/99120112040
+    name: DRUKHARI DRAZHAR
+    manufacturer: games-workshop
+    productCode: '99120112040'
+    sku: '99120112040'
+    ean: '5011921127504'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120112050
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120112040
   - id: games-workshop/99120112041
     name: DRUKHARI INCUBI
     manufacturer: games-workshop
@@ -76535,8 +76632,8 @@ products:
     sku: '99120112050'
     ean: '5011921155873'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921127504'
+    supersedes:
+      - games-workshop/99120112040
     gameSystem: warhammer-40k
     faction: drukhari
     category: miniatures
@@ -76556,7 +76653,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/drukhari/drazhar
       - mfr-gw-algolia:prod4390159-99120112050
-      - mfr-gw-trade:99120112040
       - mfr-gw-trade:99120112050
       - ret-gamenerdz:/warhammer-40k-drukhari-drazhar-10th-edition
       - ret-goblingaming:drukhari-drazhar
@@ -77992,6 +78088,23 @@ products:
       - ret-goblingaming:kill-team-xv26-stealth-battlesuits
       - ret-radaddel:/kill-team-xv26-stealth-battlesuits
       - ret-tistaminis:kill-team-xv26-stealth-battlesuits-pre-order
+  - id: games-workshop/99120113104
+    name: Ethereal
+    manufacturer: games-workshop
+    productCode: '99120113104'
+    sku: '99120113104'
+    supersedes:
+      - games-workshop/99070113003
+    gameSystem: warhammer-40k
+    category: miniatures
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/tau-empire-ethereal-2022
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070113003_EtherealLive.jpg
+    evidence:
+      - mfr-gw-algolia:prod4830199-99120113104
   - id: games-workshop/99120113111
     name: 'T''AU EMPIRE: FARSIGHT CADRE'
     manufacturer: games-workshop
@@ -84514,6 +84627,27 @@ products:
       - ret-goblingaming:maggotkin-of-nurgle-the-court-of-gelgus-pust
       - ret-radaddel:/maggotkin-of-nurgle-the-court-of-gelgus-pust
       - ret-tistaminis:maggotkin-of-nurgle-court-of-gelgus-pust
+  - id: games-workshop/99120201240
+    name: Gutrot Spume
+    manufacturer: games-workshop
+    productCode: '99120201240'
+    sku: '99120201240'
+    ean: '5011921259090'
+    eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070201008
+    gameSystem: age-of-sigmar
+    category: miniatures
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 19.0
+    url: https://www.warhammer.com/en-GB/shop/Rotbringers-Gutrot-Spume
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070201008_GutrotSprume01.jpg
+    evidence:
+      - mfr-gw-algolia:prod2940184-99120201240
+      - mfr-gw-trade:99120201240
+      - ret-goblingaming:rotbringers-gutrot-spume
   - id: games-workshop/99120201246
     name: Blood Warriors
     manufacturer: games-workshop
@@ -85854,6 +85988,19 @@ products:
       - mfr-gw-algolia:P-221480-99120202076
       - mfr-gw-trade:99120202076
       - ret-tistaminis:warcry-wildercorps-hunters
+  - id: games-workshop/99120204012
+    name: SYLVANETH DRYADS
+    manufacturer: games-workshop
+    productCode: '99120204012'
+    sku: '99120204012'
+    ean: '5011921062164'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120204035
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120204012
   - id: games-workshop/99120204015
     name: SYLVANETH ALARIELLE THE EVERQUEEN
     manufacturer: games-workshop
@@ -86113,8 +86260,8 @@ products:
     sku: '99120204035'
     ean: '5011921179398'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921062164'
+    supersedes:
+      - games-workshop/99120204012
     gameSystem: age-of-sigmar
     faction: grand-alliance-order
     category: miniatures
@@ -86132,7 +86279,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/dryads
       - mfr-gw-algolia:prod2940129-99120204035
-      - mfr-gw-trade:99120204012
       - mfr-gw-trade:99120204035
       - ret-goblingaming:sylvaneth-dry-ads
   - id: games-workshop/99120204036
@@ -108698,6 +108844,8 @@ products:
     sku: '99121499041'
     ean: '5011921118601'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99061499084
     gameSystem: middle-earth
     faction: heroes
     category: miniatures
@@ -108728,7 +108876,6 @@ products:
       Gimli is marching menacingly towards the foe, a double-handed axe ready to cleave some Orc heads. In addition, his iconic two-headed axe is stowed on his back and he carries a brace of throwing axes. He wears an Elven cloak in addition to his layers of armour.
     evidence:
       - legacy-catalog:games-workshop/middle-earth/heroes/the-three-hunters
-      - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/the-three-hunters
       - mfr-gw-algolia:prod4120168-99121499041
       - mfr-gw-trade:99121499041
       - ret-goblingaming:the-three-hunters
@@ -109432,6 +109579,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99121808003
+  - id: games-workshop/99121808004
+    name: A/I IMPERIAL NAVY LIGHTNING FIGHTERS
+    manufacturer: games-workshop
+    productCode: '99121808004'
+    sku: '99121808004'
+    ean: '5011921132133'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99122608005
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99121808004
   - id: games-workshop/99121808005
     name: 'AER/IMP: VALKYRIE ASSAULT CARRIERS'
     manufacturer: games-workshop
@@ -111337,8 +111497,8 @@ products:
     sku: '99122608005'
     ean: '5011921188772'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921132133'
+    supersedes:
+      - games-workshop/99121808004
     gameSystem: other-games
     faction: legions-imperialis
     category: miniatures
@@ -111373,7 +111533,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/other-games/legions-imperialis/legions-imperialis-lightning-fighter-squadron
       - mfr-gw-algolia:P-163415-99122608005
-      - mfr-gw-trade:99121808004
       - mfr-gw-trade:99122608005
       - ret-goblingaming:aeronautica-imperialis-imperial-navy-lightning-fighters
       - ret-tistaminis:legions-imperialis-lightning-fighter-squadron
@@ -136289,6 +136448,23 @@ products:
       - mfr-gw-trade:99513005002
       - ret-goblingaming:the-horus-heresy-solar-auxilia-vehicle-markings-transfer-sheet
       - ret-tistaminis:horus-heresy-solar-auxilia-vehicle-transfers
+  - id: games-workshop/99550108187
+    name: Legio Custodes Telemon Arachnus Storm Cannon
+    manufacturer: games-workshop
+    productCode: '99550108187'
+    sku: '99550108187'
+    supersedes:
+      - games-workshop/99853008187
+    gameSystem: warhammer-40k
+    category: miniatures
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 16.5
+    url: https://www.warhammer.com/en-GB/shop/Legio-Custodes-Telemon-Storm-Cannon-Arm-2017
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99550108187_TelemonStormCannon01.jpg
+    evidence:
+      - mfr-gw-algolia:prod3530279-99550108187
   - id: games-workshop/99550108192
     name: Telemon Heavy Dreadnought Iliastus Accelerator Culverin
     manufacturer: games-workshop
@@ -148722,6 +148898,7 @@ products:
     manufacturer: games-workshop
     productCode: '99853008187'
     sku: '99853008187'
+    supersededBy: games-workshop/99550108187
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -148745,7 +148922,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/legio-custodes-telemon-arachnus-storm-cannon
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/legio-custodes-telemon-arachnus-storm-cannon-2
-      - mfr-gw-algolia:prod3530279-99550108187
   - id: games-workshop/99853008188
     name: Sisters of Silence Prosecutor Cadre Upgrade Set
     manufacturer: games-workshop
