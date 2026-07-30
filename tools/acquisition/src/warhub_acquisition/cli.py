@@ -71,7 +71,13 @@ def _run_acquire(args: argparse.Namespace, paths: DataPaths) -> int:
 
     taxonomy = Taxonomy.load(paths.taxonomy)
     mappings = load_mappings(paths.mappings)
-    context = AcquireContext(taxonomy=taxonomy, mappings=mappings, run_date=args.run_date, budget=args.budget)
+    context = AcquireContext(
+        taxonomy=taxonomy,
+        mappings=mappings,
+        run_date=args.run_date,
+        budget=args.budget,
+        from_snapshot=getattr(args, "from_snapshot", False),
+    )
 
     healths = []
     failures = []
@@ -256,6 +262,10 @@ def main(argv: list[str] | None = None) -> int:
     acquire.add_argument("--source", action="append", default=None)
     acquire.add_argument("--budget", type=int, default=None)
     acquire.add_argument("--run-date", required=True)
+    # Re-parse a source's committed normalized extract instead of fetching it (today: gw-trade).
+    # No network, no politeness delay -- the point is that lineage stays re-derivable when the
+    # live source rotates its files or goes away.
+    acquire.add_argument("--from-snapshot", action="store_true")
 
     classify = subparsers.add_parser(
         "classify",

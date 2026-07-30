@@ -128,6 +128,15 @@ data/
    weekly run to converge their backlog faster. Live-source strategies are covered by
    `pytest -m live` smoke tests under `tools/acquisition/tests/` (opt-in real-network checks,
    excluded from the default test run — see `test_live_smoke.py` / `test_live_smoke_woo.py`).
+   A source whose data is a **point-in-time document** rather than a live listing also commits a
+   normalized extract under `data/snapshots/<source-id>/`, and `acquire --from-snapshot` re-parses
+   that with no network at all. Today this is `mfr-gw-trade`: GW's workbooks rotate, get re-uploaded
+   under new names, and its `Code Changes` register is cumulative only for as long as GW keeps
+   restating old rows — so the product-code lineage the catalog's archival records depend on must
+   not be re-derivable *only* by re-scraping someone else's site. The extract is column-filtered to
+   exactly what the parser reads (never the raw workbook, so wholesale `Trade Price`/`Cost` columns
+   stay out of git) and future-dated rows are dropped before it is written, since GW's Trade Terms
+   make unreleased product information confidential.
 2. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
    duplicate-entity adjudication go through **`classify.yml`**, a **`workflow_dispatch`-only**
    workflow (never scheduled — LLM spend stays human-triggered) with a `mode` input:
