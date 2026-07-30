@@ -55397,6 +55397,21 @@ products:
       - mfr-gw-algolia:prod3290252-99070117002
       - mfr-gw-trade:99070117002
       - ret-goblingaming:acolyte-iconward
+  - id: games-workshop/99070117003
+    name: GENESTEALER CULTS BIOPHAGUS
+    manufacturer: games-workshop
+    productCode: '99070117003'
+    sku: '99070117003'
+    ean: '5011921110988'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99070117012
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-40k-genestealer-cults-biophagus
+    evidence:
+      - mfr-gw-trade:99070117003
+      - ret-gamenerdz:/warhammer-40k-genestealer-cults-biophagus
   - id: games-workshop/99070117004
     name: GENESTEALER CULTS CLAMAVUS
     manufacturer: games-workshop
@@ -55555,9 +55570,9 @@ products:
     productCode: '99070117012'
     sku: '99070117012'
     ean: '5011921171835'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921110988'
+    eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070117003
     gameSystem: warhammer-40k
     faction: genestealer-cults
     category: miniatures
@@ -55578,9 +55593,7 @@ products:
       - arc-wargameportal:/products/biophagus
       - legacy-catalog:games-workshop/warhammer-40k/genestealer-cults/biophagus
       - mfr-gw-algolia:prod4140164-99070117012
-      - mfr-gw-trade:99070117003
       - mfr-gw-trade:99070117012
-      - ret-gamenerdz:/warhammer-40k-genestealer-cults-biophagus
       - ret-goblingaming:biophagus
   - id: games-workshop/99070117013
     name: Clamavus
@@ -78405,6 +78418,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120108033
+  - id: games-workshop/99120108034
+    name: ADEPTA SORORITAS CANONESS
+    manufacturer: games-workshop
+    productCode: '99120108034'
+    sku: '99120108034'
+    ean: '5011921131174'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120108058
+    category: miniatures
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-40k-adepta-sororitas-canoness
+    evidence:
+      - mfr-gw-trade:99120108034
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-canoness
   - id: games-workshop/99120108035
     name: ADEPTA SORORITAS PENITENT ENGINES
     manufacturer: games-workshop
@@ -78917,9 +78945,9 @@ products:
     productCode: '99120108058'
     sku: '99120108058'
     ean: '5011921156771'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921131174'
+    eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120108034
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -78939,9 +78967,7 @@ products:
     evidence:
       - arc-wargameportal:/products/canoness
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/canoness
-      - mfr-gw-trade:99120108034
       - mfr-gw-trade:99120108058
-      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-canoness
       - ret-goblingaming:adepta-sororitas-canoness
       - ret-radaddel:/adepta-sororitas-canoness
   - id: games-workshop/99120108059
@@ -84483,6 +84509,22 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120116004
+  - id: games-workshop/99120116009
+    name: 'ADEPTUS MECHANICUS: ELECTRO-PRIESTS'
+    manufacturer: games-workshop
+    productCode: '99120116009'
+    sku: '99120116009'
+    ean: '5011921058648'
+    eanConfidence: confirmed
+    supersededBy: games-workshop/99120116031
+    category: miniatures
+    status: discontinued
+    firstSeen: '2026-07-13'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Ad-Mec-Corpuscarii-Electro-Priests
+    evidence:
+      - arc-gw-webstore:/en-GB/Ad-Mec-Corpuscarii-Electro-Priests
+      - mfr-gw-trade:99120116009
   - id: games-workshop/99120116010
     name: Adeptus Mechanicus Battle Maniple
     manufacturer: games-workshop
@@ -84713,9 +84755,9 @@ products:
     productCode: '99120116031'
     sku: '99120116031'
     ean: '5011921155903'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921058648'
+    eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120116009
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -84733,12 +84775,10 @@ products:
 
       This eighty-two component, multi-part plastic kit contains everything needed to build Five Corpuscarii or five Fulgurite Electro-Priests. These detailed miniatures are supplied with five Citadel 32mm Round Bases.
     evidence:
-      - arc-gw-webstore:/en-GB/Ad-Mec-Corpuscarii-Electro-Priests
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/corpuscarii-electro-priests
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/fulgurite-electro-priests
       - mfr-gw-algolia:prod2720129-99120116031
       - mfr-gw-algolia:prod2830174-99120116031
-      - mfr-gw-trade:99120116009
       - mfr-gw-trade:99120116031
       - ret-gamenerdz:/warhammer-40k-adeptus-mechanicus-electro-priests
       - ret-goblingaming:adeptus-mechanicus-electro-priests
