@@ -9,6 +9,7 @@ rather than fail loudly, which is why they get dedicated tests:
 3. The media API degrades to an empty-assets HTTP 200 under load instead of returning 429, which
    makes a paginator silently under-report and still pass its contract.
 """
+import collections
 import datetime as dt
 
 import pytest
@@ -324,6 +325,131 @@ def test_sheet_roles(title, role):
 def test_merge_unions_hints():
     merged = _merge(_obs(hints={"sscCode": "70-863"}), _obs(hints={"tradeCategory": "BS:A"}))
     assert merged.hints == {"sscCode": "70-863", "tradeCategory": "BS:A"}
+
+
+# --- re-coding lineage (Code Changes sheet) ---------------------------------------------------
+
+
+def _lineage(pairs):
+    """Run _attach_lineage over (key, old_code, raw_old_barcode[, changed_on]) rows."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _attach_lineage
+
+    observations = {"mfr-gw-trade:99120202075": _obs()}
+    stats = collections.defaultdict(int)
+    _attach_lineage([tuple(p) + (None,) * (4 - len(p)) for p in pairs], observations, stats)
+    return observations["mfr-gw-trade:99120202075"], stats
+
+
+def test_code_change_records_predecessor_code_and_barcode():
+    obs, stats = _lineage([("mfr-gw-trade:99120202075", "99120202012", "5011921062164")])
+    assert obs.hints["supersedes"] == [{"productCode": "99120202012", "ean": "5011921062164"}]
+    assert stats["lineage_links"] == 1
+    assert stats["lineage_with_barcode"] == 1
+
+
+def test_cumulative_restatement_does_not_look_like_a_placeholder():
+    """REGRESSION. The InsertDelete register is cumulative: each workbook generation restates every
+    past code change, so a genuine old barcode is seen many times -- always against the SAME old
+    code. An occurrence-count filter therefore rejects EVERY barcode (measured live: 2,729 rows for
+    919 real edges, 0 barcodes surviving). The test is 'claimed by more than one distinct old
+    code', not 'seen more than once'."""
+    rows = [("mfr-gw-trade:99120202075", "99120202012", "5011921062164")] * 3
+    obs, stats = _lineage(rows)
+    assert obs.hints["supersedes"] == [{"productCode": "99120202012", "ean": "5011921062164"}]
+    assert stats["lineage_with_barcode"] == 1
+    assert stats["lineage_placeholder_barcodes"] == 0
+
+
+def test_placeholder_old_barcode_is_dropped_but_the_code_link_survives():
+    """GW reuses filler values in `Old Barcode` across unrelated products -- 14 of them, one on 29
+    rows (measured 2026-07-22). Asserting those would invent barcode links between unrelated
+    products; the renumbering itself is still real, so only the barcode is dropped."""
+    filler = "5011921182312"
+    obs, stats = _lineage(
+        [
+            ("mfr-gw-trade:99120202075", "99120202012", filler),
+            ("mfr-gw-trade:99120202075", "99120202013", filler),
+        ]
+    )
+    assert obs.hints["supersedes"] == [
+        {"productCode": "99120202012"},
+        {"productCode": "99120202013"},
+    ]
+    assert stats["lineage_placeholder_barcodes"] == 2
+    assert stats["lineage_with_barcode"] == 0
+
+
+def test_lineage_old_barcode_obeys_the_gs1_prefix_gate():
+    """A 12-digit GW internal code parses as a valid UPC-A -- it must never become a barcode here
+    either, exactly as on the primary column."""
+    obs, _ = _lineage([("mfr-gw-trade:99120202075", "99120202012", "608899990183")])
+    assert obs.hints["supersedes"] == [{"productCode": "99120202012"}]
+
+
+def test_repeated_code_change_rows_dedup_and_prefer_the_one_with_a_barcode():
+    obs, stats = _lineage(
+        [
+            ("mfr-gw-trade:99120202075", "99120202012", None),
+            ("mfr-gw-trade:99120202075", "99120202012", "5011921062164"),
+        ]
+    )
+    assert obs.hints["supersedes"] == [{"productCode": "99120202012", "ean": "5011921062164"}]
+    assert stats["lineage_links"] == 1
+
+
+def test_lineage_for_a_code_with_no_observation_is_counted_not_invented():
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _attach_lineage
+
+    stats = collections.defaultdict(int)
+    _attach_lineage([("mfr-gw-trade:missing", "99120202012", "5011921062164", None)], {}, stats)
+    assert stats["lineage_unmatched"] == 1
+    assert stats["lineage_links"] == 0
+
+
+def test_predecessor_is_absent_on_sheets_without_old_columns():
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _predecessor
+
+    assert _predecessor({"Product Code": "99120202075", "Barcode": "5011921252848"}) == (
+        None,
+        None,
+        None,
+    )
+    # The real header, verified live against InsertDelete18.05.2026.xlsx sheet `Code Changes`:
+    # New Product Code | Old Product Code | Description | New SS Code | Old SSC Code |
+    # New Barcode | Old Barcode | Trade Range | Date
+    assert _predecessor(
+        {
+            "New Product Code": "52170299004",
+            "Old Product Code": " 5217 0299003 ",
+            "Old Barcode": "5011921219254",
+            "Date": dt.datetime(2026, 3, 30),
+        },
+        "2026-07-22",
+    ) == ("52170299003", "5011921219254", "2026-03-30")
+
+
+def test_future_dated_code_change_keeps_the_pair_but_drops_the_date():
+    """Dates are ingestable EXCEPT forward-looking ones -- the same policy gate that excludes
+    unreleased products. The renumbering itself is still a fact; only the date is withheld."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _predecessor
+
+    code, barcode, changed = _predecessor(
+        {
+            "Old Product Code": "52170299003",
+            "Old Barcode": "5011921219254",
+            "Date": dt.datetime(2026, 12, 25),
+        },
+        "2026-07-22",
+    )
+    assert (code, barcode) == ("52170299003", "5011921219254")
+    assert changed is None
+
+
+def test_change_date_lands_on_the_supersedes_entry():
+    obs, _ = _lineage([("mfr-gw-trade:99120202075", "99120202012", "5011921062164", "2026-03-30")])
+    assert obs.hints["supersedes"] == [
+        {"productCode": "99120202012", "ean": "5011921062164", "changedOn": "2026-03-30"}
+    ]
 
 
 def test_select_workbooks_excludes_legacy_xls():

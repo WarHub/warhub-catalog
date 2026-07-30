@@ -145,8 +145,17 @@ Consequence: **the newest file alone is the whole dataset.** Row dates span
    today carrying `0995101011…` barcodes.
 2. **Placeholder barcodes in Code Changes.** 14 "Old Barcode" values repeat across unrelated
    products — `5011921182312` appears **29 times**, spanning entirely different product lines.
-   Naively ingesting these fabricates repackaging links. Filtering to old-barcodes appearing
-   exactly once leaves **480 clean 1:1 pairs** from 553.
+   Naively ingesting these fabricates repackaging links. Within a single workbook, filtering to
+   old-barcodes appearing exactly once leaves **480 clean 1:1 pairs** from 553.
+
+   > **Correction (2026-07-23, when this was implemented).** "Appears exactly once" is only valid
+   > *within one workbook*. The InsertDelete register is **cumulative**, so across the 3 live
+   > generations every genuine pairing is restated and an occurrence-count filter rejects
+   > **every** barcode (measured: 2,729 predecessor-bearing rows → 919 real edges → **0** barcodes
+   > surviving). The correct test is whether one old barcode is claimed by **more than one distinct
+   > old product code**. With that filter, measured live across all 3 workbooks: **919** old→new
+   > edges, **505** carrying a trusted old barcode, **111** barcode assertions rejected as
+   > placeholders, **855** carrying a change date. See `_attach_lineage` in the strategy.
 3. **Shared barcodes across language variants.** 121 barcodes recur across Insertions rows
    (multi-language editions of the same box). The resolver's shared-EAN handling must see these.
 
@@ -268,6 +277,27 @@ Measured on the current evidence: **142 previously `gameSystem: null` products n
 — overwhelmingly Chinese-market SKUs (`… (CHN)`) that the global Algolia storefront never lists,
 which is exactly why no other source had classified them. The other ~1,215 products carrying a
 mappable category were already classified (the taxonomy confirms them); ean-guard: 0 barcodes lost.
+
+### 5.6 Re-coding lineage from `Code Changes` (implemented)
+
+The `Code Changes` sheet is the authoritative record of GW renumbering a product, and it was read
+only for its sheet *role* — the `Old …` columns were parsed and discarded. Its real header,
+verified live against `InsertDelete18.05.2026.xlsx`:
+
+```
+New Product Code | Old Product Code | Description | New SS Code | Old SSC Code |
+New Barcode | Old Barcode | Trade Range | Date
+```
+
+The strategy now records each row as `hints["supersedes"]` on the SURVIVING product: a list of
+`{productCode, ean?, changedOn?}`. A list because a product can be re-coded more than once (7 such
+chains live). Three gates: the placeholder filter above; `_clean_ean`'s GS1 prefix allowlist on the
+old-barcode column (the 14-digit values in this sheet are GTIN-14 case codes); and the same
+future-date policy gate used for releases — `Date` here is the day a renumbering *took effect*, a
+historical fact, not a confidential forward-looking release date.
+
+This is capture only. The hint is inert until the resolver learns to turn it into a supersession
+link, which is deliberately a later, separately-reviewable change.
 
 ## 6. Terms and licensing
 
