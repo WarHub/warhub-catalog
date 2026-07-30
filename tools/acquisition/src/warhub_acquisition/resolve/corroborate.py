@@ -159,16 +159,28 @@ def resolve_ean(
         ]
         if not bridged:
             return EanResolution(primary, _confidence(assertions[primary]), [], sorted(losers))
-        return EanResolution(primary, "conflicted", [_mismatch(entity, primary, assertions)])
+        # Bridged: at least one loser is a different product dragged in by a retailer mis-code, so
+        # the entity STAYS conflicted and visible -- absorbing it silently would hide the bad merge.
+        # The losers are still carried in `additional` rather than dropped: they are barcodes the
+        # evidence really asserts, and `eanConfidence: conflicted` on this record is precisely the
+        # signal that its barcode set is disputed. Publishing them keeps a scan resolvable and puts
+        # them under the confirmed-EAN guard; dropping them made the data silently unreachable.
+        return EanResolution(
+            primary, "conflicted", [_mismatch(entity, primary, assertions)], sorted(losers)
+        )
 
     # No single authoritative manufacturer barcode (none live-manufacturer, or the manufacturer
     # itself lists two live barcodes for one code, or only retailers disagree -- retailers do make
     # barcode-entry errors): keep the historical conflicted semantics. `strength` still puts the
     # best live-corroborated barcode first, so the PRIMARY is the least-stale choice even while the
-    # disagreement is flagged for a human. No `additional` list is produced here.
+    # disagreement is flagged for a human. The runners-up go to `additional` rather than being
+    # dropped -- measured 2026-07-30, these two conflicted branches were the ONLY reason 59
+    # canonical-valid, evidence-asserted barcodes appeared nowhere in the published catalog.
     ranked = sorted(assertions, key=strength)
     primary = ranked[0]
-    return EanResolution(primary, "conflicted", [_mismatch(entity, primary, assertions)])
+    return EanResolution(
+        primary, "conflicted", [_mismatch(entity, primary, assertions)], sorted(ranked[1:])
+    )
 
 
 def _mismatch(entity: str, chosen: str, assertions: dict[str, dict[str, str]]) -> dict:
