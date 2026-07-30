@@ -135,15 +135,18 @@ def test_superseded_barcode_never_becomes_primary_even_if_higher_kind() -> None:
     assert r.confidence == "provisional"      # lone retailer -> provisional, from the primary alone
 
 
-def test_retailer_only_disagreement_stays_conflicted_with_no_additional() -> None:
+def test_retailer_only_disagreement_stays_conflicted_but_keeps_both_barcodes() -> None:
     # No manufacturer barcode -- just two retailers disagreeing (retailers make barcode-entry
-    # errors). The historical `conflicted` semantics are preserved and NO additionalEans are
-    # produced: the resolver must not silently pick a winner or invent a repackaging from retailer
-    # noise. The primary is still the least-stale/lexicographic choice, but the flag stays up.
+    # errors). The `conflicted` flag stays up and the resolver still does not pick a silent winner
+    # or invent a repackaging. But the runner-up is RETAINED: it is a barcode the evidence really
+    # asserts, and dropping it made it unreachable from the published catalog entirely (measured
+    # 2026-07-30: this branch and the bridged one below were the only cause of 59 such losses).
+    # `eanConfidence: conflicted` is the signal that this record's barcode set is disputed.
     members = [obsx("ret-t:1", "5060393709671"), obsx("ret-x:1", "5011921194285")]
     r = resolve_ean("e", members, {**REPACK_KINDS, "ret-x": "retailer"})
     assert r.confidence == "conflicted"
-    assert r.additional == []
+    assert r.additional == ["5060393709671"]  # the non-primary assertion, kept not dropped
+    assert r.ean not in r.additional
 
 
 def test_live_manufacturer_barcode_beats_stale_legacy_and_retires_it() -> None:
@@ -190,7 +193,10 @@ def test_bridged_different_product_barcode_keeps_conflict_visible() -> None:
     r = resolve_ean("e", members, REPACK_KINDS, surviving_code="CUR", member_codes=member_codes)
     assert r.ean == "5060924985581"
     assert r.confidence == "conflicted"
-    assert r.additional == []
+    # Still flagged and still not absorbed as a "retired version" -- but the bridged barcode is
+    # carried rather than dropped, so it stays reachable and guard-tracked while the conflict is
+    # adjudicated.
+    assert r.additional == ["5060469664330"]
 
 
 def test_two_live_manufacturer_barcodes_on_surviving_code_stay_conflicted() -> None:
@@ -200,7 +206,11 @@ def test_two_live_manufacturer_barcodes_on_surviving_code_stay_conflicted() -> N
     member_codes = {"mfr-m:1": "CUR", "mfr-m:2": "CUR"}
     r = resolve_ean("e", members, REPACK_KINDS, surviving_code="CUR", member_codes=member_codes)
     assert r.confidence == "conflicted"
-    assert r.additional == []
+    # Both are live manufacturer barcodes on one code, so `strength` ties down to lexicographic:
+    # the ambiguity stays flagged, and the runner-up is kept rather than lost.
+    assert r.ean == "5060469664330"
+    assert r.additional == ["5060924985581"]
+    assert r.ean not in r.additional
 
 
 def test_single_barcode_entity_has_empty_additional() -> None:
