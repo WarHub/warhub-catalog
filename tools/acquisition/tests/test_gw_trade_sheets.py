@@ -347,6 +347,47 @@ def test_code_change_records_predecessor_code_and_barcode():
     assert stats["lineage_with_barcode"] == 1
 
 
+def test_wh_colour_rebrand_row_yields_new_sku_plus_its_predecessor():
+    """The WH Colour workbook is the rebrand register: `Original SKU` -> `New SKU` with the NEW
+    barcode. Its rows used to die unread because none of the accepted code columns existed in it,
+    silently losing 604 barcodes the catalog has never seen."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _first, _predecessor
+
+    row = {
+        "Original SKU": "99189960061",
+        "Original Pack SKU": "9918996006106",
+        "New SKU": "99189960262",
+        "SSC": "27-19",
+        "Product Description": "C:NIGHTHAUNT GLOOM 18ML ROW X6",
+        "New Individual barcode": "501192126251-9",
+        "Range": "BS:A",
+    }
+    assert _first(row, "Product Code", "New Product Code", "Unit Code", "Individual Code",
+                  "New SKU") == "99189960262"
+    assert _clean_ean(row["New Individual barcode"]) == "5011921262519"
+    # no Old Barcode column in this workbook -> the link carries the code alone, never a guess
+    assert _predecessor(row, "2026-07-30") == ("99189960061", None, None)
+
+
+@pytest.mark.parametrize(
+    "title,expected",
+    [
+        ("Paint", "paint"),
+        ("paints", "paint"),
+        ("Brushes", None),   # a brush is not a paint -- same rule _paint_category applies
+        ("Hobby", None),
+        ("Deletions", None),
+    ],
+)
+def test_sheet_title_supplies_the_paint_category(title, expected):
+    """The WH Colour workbook's `Range` column holds merchandising codes ("BS:A"), so the paint
+    signal has to come from the sheet the row lives on -- otherwise its 592 paints publish as
+    `miniatures`."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _sheet_paint_category
+
+    assert _sheet_paint_category(title) == expected
+
+
 def test_cumulative_restatement_does_not_look_like_a_placeholder():
     """REGRESSION. The InsertDelete register is cumulative: each workbook generation restates every
     past code change, so a genuine old barcode is seen many times -- always against the SAME old
