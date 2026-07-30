@@ -39,7 +39,7 @@ Every document carries a self-describing envelope plus its payload:
 
 ```jsonc
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "kind": "paint-catalog",             // or *-partition, product-catalog, index, manifest
   "version": "2026.7.4",
   "generatedAt": "2026-07-04T05:00:00Z",
@@ -55,11 +55,13 @@ Every document carries a self-describing envelope plus its payload:
 }
 ```
 
-- **Product**: `{ ean?, additionalEans?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
-  — `ean` is optional (not every product has a barcode). `additionalEans` is present only on a
-  product genuinely repackaged over time (same contents, new box/barcode): `ean` stays the single
-  primary barcode, and the extra barcodes are listed here so existing single-barcode consumers are
-  unaffected.
+- **Product**: `{ id, manufacturer, ean?, additionalEans?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
+  — `id` is the stable global key (`manufacturer-slug/product-code-or-slug`) and, with
+  `manufacturer`, is present on every product; both are what a cross-product link (e.g. a
+  successor/predecessor relation) points at. `ean` is optional (not every product has a barcode).
+  `additionalEans` is present only on a product genuinely repackaged over time (same contents, new
+  box/barcode): `ean` stays the single primary barcode, and the extra barcodes are listed here so
+  existing single-barcode consumers are unaffected.
 - **Paint**: `{ id, brand, range?, name, hex, type?, finish?, equivalents: [{ id, deltaE, tier? }] }`
   — `id` is the stable global key (`brand-slug/paint-slug`); `equivalents` reference other
   paints' ids and are stored **bidirectionally**. Colour equivalence is precomputed here, so

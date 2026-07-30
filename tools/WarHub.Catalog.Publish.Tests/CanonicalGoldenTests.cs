@@ -87,6 +87,20 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
     }
 
     [Fact]
+    public void Id_and_manufacturer_are_published_for_every_product()
+    {
+        // Phase 1 of the archival direction: an entity id + manufacturer are published so a
+        // lineage link (supersededBy / supersedes) has a stable target. Both are required on
+        // every product; the id is the resolver's `manufacturer/<code-or-slug>` entity id.
+        foreach (JsonElement p in fx.Products.EnumerateArray())
+        {
+            Assert.False(string.IsNullOrEmpty(p.GetProperty("id").GetString()));
+            Assert.Equal("games-workshop", p.GetProperty("manufacturer").GetString());
+        }
+        Assert.Equal("games-workshop/99120110052", Necrons.GetProperty("id").GetString());
+    }
+
+    [Fact]
     public void Confirmed_ean_from_curated_assertion_flows_through()
     {
         JsonElement p = Necrons;

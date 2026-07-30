@@ -19,8 +19,10 @@
   "$defs": {
     "product": {
       "type": "object",
-      "required": ["name", "quantity"],
+      "required": ["id", "manufacturer", "name", "quantity"],
       "properties": {
+        "id": { "type": "string" },
+        "manufacturer": { "type": "string" },
         "ean": { "type": "string" },
         "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "eanConfidence": { "type": "string", "enum": ["confirmed", "provisional", "conflicted"] },
