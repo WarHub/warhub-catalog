@@ -97,6 +97,9 @@ from warhub_acquisition.models.observation import Observation
 # Anything else in a Barcode column is not a retail barcode -- see the module docstring.
 _GS1_PREFIXES: tuple[str, ...] = ("5011921", "977", "978", "979")
 
+# GW product codes are exactly this many digits; see _code for why the width is load-bearing.
+_CODE_DIGITS = 11
+
 _NONCE_RE = re.compile(r"gwAssetData\s*=\s*\{\s*\"nonce\"\s*:\s*\"([0-9a-f]+)\"")
 
 # The media API's documents bucket ("Printable Materials").
@@ -394,6 +397,33 @@ def _sheet_paint_category(sheet_title: str) -> str | None:
     return "paint" if title in ("paint", "paints", "spray", "sprays") else None
 
 
+def _code(value: object, known: frozenset[str] = frozenset()) -> str:
+    """A GW product code as text, restoring a leading zero Excel dropped.
+
+    GW product codes are exactly 11 digits and several families start with one (`01…`–`04…` are
+    EU-region codes, e.g. `01010299044`). A code column typed as NUMBER loses that zero on the way
+    through the workbook, so the sheet hands us `1010299044`. That 10-digit string fails the
+    taxonomy's `\\d{11}` pattern, which means the product resolves to a NAME-SLUG entity id and
+    publishes with no `productCode` at all -- measured 2026-07-30: 60 of 7,531 trade observations,
+    plus 2 retired codes in the re-coding register, where the same loss would fabricate a product
+    code that never existed.
+
+    `known` is every full-width code in the same harvest, and it is what keeps this from inventing
+    codes. A short code is only a lost leading zero if it is not ALSO explainable as a full code
+    that lost its LAST digit: GW's own sheets contain such typos (measured: `6024999960` on 3 rows
+    of 2 workbooks, where the real code `60249999604` is asserted elsewhere with the same barcode).
+    Padding that one produced `06024999960` -- a code that has never existed -- and moved a real
+    product's barcode onto it, which is exactly what `report --ean-guard` flagged. When a short code
+    looks truncated it is left alone, failing the taxonomy pattern as it always did.
+    """
+    text = re.sub(r"\s+", "", str(value))
+    if not text.isdigit() or len(text) >= _CODE_DIGITS:
+        return text
+    if any(f"{text}{digit}" in known for digit in "0123456789"):
+        return text  # a full code that lost its last digit, not one that lost a leading zero
+    return text.zfill(_CODE_DIGITS)
+
+
 def _first(row: dict, *names: str):
     for name in names:
         if name in row and row[name] not in (None, ""):
@@ -401,7 +431,15 @@ def _first(row: dict, *names: str):
     return None
 
 
-def _predecessor(row: dict, run_date: str | None = None) -> tuple[str | None, object, str | None]:
+def _row_code(row: dict) -> str | None:
+    """The row's own product code as raw text, for the pre-pass that builds `known` (see _code)."""
+    value = _first(row, "Product Code", "New Product Code", "Unit Code", "Individual Code", "New SKU")
+    return None if value is None else re.sub(r"\s+", "", str(value))
+
+
+def _predecessor(
+    row: dict, run_date: str | None = None, known: frozenset[str] = frozenset()
+) -> tuple[str | None, object, str | None]:
     """The (old product code, raw old barcode, change date) a `Code Changes` row renumbers FROM.
 
     Verified against the live register (InsertDelete18.05.2026.xlsx, sheet `Code Changes`), whose
@@ -418,7 +456,7 @@ def _predecessor(row: dict, run_date: str | None = None) -> tuple[str | None, ob
     old_code = _first(row, "Old Product Code", "Old Code", "Previous Product Code", "Old SKU",
                       "Original SKU")
     old_barcode = _first(row, "Old Barcode", "Old Individual barcode", "Previous Barcode")
-    code = re.sub(r"\s+", "", str(old_code)) if old_code is not None else None
+    code = _code(old_code, known) if old_code is not None else None
 
     changed_on = None
     changed = _as_date(_first(row, "Date", "Change Date", "Effective Date"))
@@ -684,8 +722,26 @@ def gw_trade_sheets_strategy(
         if context.budget is not None:
             workbooks = workbooks[: context.budget]
         source_rows = _live_rows(client, workbooks, stats, openpyxl.load_workbook)
-    # Rows kept for the snapshot, collected as the live parse streams past them.
+    # PRE-PASS. The release-date policy gate runs here rather than in the main loop so the snapshot
+    # and the `known` code set are built from exactly the same rows on a live run and on a replay
+    # -- otherwise a future-dated row would contribute a code live but not offline, and the two
+    # would stop agreeing. `known` is what stops _code inventing a product code (see its docstring).
+    run_date = context.run_date
     captured: list[tuple[str, str, dict]] = []
+    known_codes: set[str] = set()
+    for workbook_name, sheet_title, row in source_rows:
+        stats["rows"] += 1
+        if _release_date_is_future(row, run_date):
+            # Dropped BEFORE capture: GW's Trade Terms make unreleased product information
+            # Confidential, so a future release date may no more be committed to git than
+            # published. The next live run picks the product up once it ships.
+            stats["skipped_unreleased"] += 1
+            continue
+        captured.append((workbook_name, sheet_title, _extract(row)))
+        raw_code = _row_code(row)
+        if raw_code is not None and raw_code.isdigit() and len(raw_code) == _CODE_DIGITS:
+            known_codes.add(raw_code)
+    known = frozenset(known_codes)
 
     observations: dict[str, Observation] = {}
     # Per-product provenance across every sheet of every workbook, resolved into `archived` once
@@ -696,24 +752,15 @@ def gw_trade_sheets_strategy(
     # below can only be applied once all occurrences of an old barcode have been counted -- the
     # same deferred-decision shape as `roles`/_is_discontinued.
     lineage: list[tuple[str, str, object]] = []
-    run_date = context.run_date
 
-    for workbook_name, sheet_title, row in source_rows:
+    for _workbook_name, sheet_title, row in captured:
         role = _sheet_role(sheet_title)
-        stats["rows"] += 1
         code = _first(row, "Product Code", "New Product Code", "Unit Code",
                       "Individual Code", "New SKU")
         name = _first(row, "Description", "Description (ENG)", "PRODUCT NAME",
                       "Product Description", "Product Name")
         if code is None or name is None:
             continue
-        if _release_date_is_future(row, run_date):
-            # Dropped BEFORE the row reaches `captured`: GW's Trade Terms make unreleased product
-            # information Confidential, so a future release date must not be committed to git any
-            # more than it may be published. The next live run picks the product up once it ships.
-            stats["skipped_unreleased"] += 1
-            continue
-        captured.append((workbook_name, sheet_title, _extract(row)))
 
         raw_barcode = _first(row, "Barcode (Single)", "New Individual barcode",
                              "Barcode", "New Barcode")
@@ -725,7 +772,7 @@ def gw_trade_sheets_strategy(
                 stats["skipped_bad_prefix"] += 1
             continue
 
-        sku = re.sub(r"\s+", "", str(code))
+        sku = _code(code, known)
         key = f"{descriptor.id}:{sku}"
         hints: dict[str, object] = {}
         ssc = _first(row, "SS Code", "SSC", "New SS Code", "Short Code")
@@ -754,7 +801,7 @@ def gw_trade_sheets_strategy(
         # Re-coding lineage: this row says "old code -> this code". Recorded against
         # the SURVIVING key and resolved after the whole harvest (see below). A row
         # whose old code equals its new code is a no-op, not a supersession.
-        old_code, old_barcode, changed_on = _predecessor(row, run_date)
+        old_code, old_barcode, changed_on = _predecessor(row, run_date, known)
         if old_code is not None and old_code != sku:
             lineage.append((key, old_code, old_barcode, changed_on))
 
