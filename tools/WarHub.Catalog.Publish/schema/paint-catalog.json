@@ -33,6 +33,7 @@
         "container": { "type": "string" },
         "productCode": { "type": "string" },
         "ean": { "type": "string" },
+        "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "status": { "type": "string" },
         "availability": { "type": "string" },
         "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }

@@ -80,6 +80,9 @@ internal sealed record PaintRecord(
     // them -- currently GW/Citadel via the trade-barcode bridge, and Vallejo via computed EAN).
     [property: JsonPropertyOrder(11)] string? ProductCode,
     [property: JsonPropertyOrder(12)] string? Ean,
+    // Further barcodes the same paint is sold under (today: concurrent regional trade variants),
+    // so a scan of any of them resolves. Mirrors ProductRecord.AdditionalEans; null -> omitted.
+    [property: JsonPropertyOrder(12)] IReadOnlyList<string>? AdditionalEans,
     [property: JsonPropertyOrder(13)] string Status,
     [property: JsonPropertyOrder(14)] string Availability,
     [property: JsonPropertyOrder(15)] IReadOnlyList<PaintEquivalent> Equivalents);

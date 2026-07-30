@@ -15,6 +15,8 @@ public record Paint
     public int? VolumeMl { get; init; }
     public string? Packaging { get; init; }
     public string? Ean { get; init; }
+    /// <summary>Extra barcodes the same paint is sold under (regional variants). See PaintRecord.</summary>
+    public IReadOnlyList<string>? AdditionalEans { get; init; }
     public bool IsDiscontinued { get; init; }
 
     /// <summary>

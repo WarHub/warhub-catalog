@@ -27,4 +27,10 @@ internal sealed class EquivRef
     public string Name { get; set; } = "";
     public string Set { get; set; } = "";
     public string? ProductCode { get; set; }
+
+    // Every ref in equivalences.yaml already carries a hex (verified: 7,992 source + 39,906 match
+    // refs, none missing) -- it was simply parsed and discarded. Binding it lets the natural key
+    // include colour, which is what distinguishes two records that share brand|name|set|code but
+    // are different colours (a reformulation). See PaintBuilder.NaturalKey.
+    public string? Hex { get; set; }
 }

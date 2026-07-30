@@ -6,9 +6,15 @@ This script does the fuzzy match ONCE, here, and emits a file keyed by the paint
 auditable: the committed YAML shows exactly which paint got which barcode.
 
 Match key: (set, normalized name), with volume as a tiebreaker. Source of barcodes: the resolved
-mfr-gw-trade paint observations (the UNIT barcode, not the 6-pack case code). When both the
-pre-rebrand (Individual Barcodes) and post-rebrand (WH Colour Codes) barcodes exist for a paint,
-the newer WH-Colour one wins as `ean` and the older is kept as `additionalEans`.
+mfr-gw-trade paint observations (the UNIT barcode, not the 6-pack case code).
+
+A paint can appear under more than one trade SKU. Measured on the committed evidence, every such
+case is a CONCURRENT REGIONAL pair -- e.g. Chaos Black Spray is sold as `80209999077`
+(R/O Europe, EAN 5011921172221) and `99209999090` (UK/ROW, EAN 5011921175291) under one shared SSC
+code 62-02. Both barcodes are live. All of them are kept: the first observed takes the `ean` slot
+and the rest go to `additionalEans`, so a scan of either resolves. Nothing here identifies an
+OLD vs NEW barcode -- the genuine re-barcoding record is the InsertDelete workbook's `Code Changes`
+sheet (an `Old Barcode` column the strategy does not read yet), not this file.
 
 Runs automatically in .github/workflows/paint-catalog-update.yml (before the C# tool's --barcodes
 step) so new/rebranded Citadel barcodes flow in without a hand-run; also runnable directly:
@@ -118,18 +124,16 @@ def main() -> None:
             continue
         matched += 1
         ssc = str((o.get("hints") or {}).get("sscCode") or "")
-        # WH Colour rows carry a rebrand SKU (9918996...) and are the current barcode; prefer them.
-        is_new = str(o.get("sku") or "").startswith("9918996")
         cur = entries.get(key)
         if cur is None:
             entries[key] = {"ean": o["ean"], "productCode": str(o.get("sku") or ""), "ssc": ssc,
-                            "_new": is_new, "additionalEans": []}
-        else:
-            if is_new and not cur["_new"]:
-                cur["additionalEans"].append(cur["ean"])
-                cur.update(ean=o["ean"], productCode=str(o.get("sku") or ""), ssc=ssc, _new=True)
-            elif o["ean"] != cur["ean"] and o["ean"] not in cur["additionalEans"]:
-                cur["additionalEans"].append(o["ean"])
+                            "additionalEans": []}
+        elif o["ean"] != cur["ean"] and o["ean"] not in cur["additionalEans"]:
+            # Same paint under a second trade SKU -- keep BOTH barcodes. Which one holds the
+            # primary `ean` slot is decided purely by evidence order (first seen wins); that is
+            # acceptable precisely because the other is retained here rather than dropped, so a
+            # scan of either resolves. Do NOT read the primary as "the current/newer" barcode.
+            cur["additionalEans"].append(o["ean"])
 
     # emit: {brand-slug}: {"{Name}|{Set}": {ean, productCode, ssc, additionalEans?}}
     brand: dict[str, dict] = {}

@@ -23,6 +23,13 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
         Status = fresh.Status is "discontinued" or "delisted" ? fresh.Status : existing.Status,
         Availability = Pick(fresh.Availability, existing.Availability) ?? "unknown",
         Ean = Pick(fresh.Ean, existing.Ean),
+        // Non-destructive re-barcoding. EAN is not part of the identity key (set|name|productCode|
+        // hex), so a fresh harvest carrying a DIFFERENT barcode lands on this same record and
+        // `Pick` hands the primary slot to fresh -- which previously destroyed the stored barcode
+        // outright. Keep it: a paint bought years ago must stay resolvable by the barcode on the
+        // pot the owner actually has.
+        AdditionalEans = Enrichment.BarcodeSet.Union(
+            Pick(fresh.Ean, existing.Ean), existing.AdditionalEans, fresh.AdditionalEans, [existing.Ean]),
         ImageUrl = Pick(fresh.ImageUrl, existing.ImageUrl),
         Details = existing.Details with
         {
