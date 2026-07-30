@@ -546,3 +546,47 @@ def test_supersession_cycle_raises(tmp_path: Path) -> None:
                                                  "games-workshop/b": "games-workshop/a"}})
     with pytest.raises(ValueError, match="cycle"):
         resolve_catalog(paths)
+
+
+def test_paint_source_observations_never_publish_as_products(tmp_path: Path) -> None:
+    """Paint sources share the evidence layout but feed the PAINT catalog. Before this, every
+    paint they observed also published as a product -- measured 4,839 duplicate records across 9
+    manufacturers, none of which anyone ever committed."""
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.taxonomy / "manufacturers.yaml",
+        {"manufacturers": [{"slug": "games-workshop", "name": "Games Workshop",
+                            "codePattern": r"\d{11}", "codeStrip": [], "gs1Prefixes": [],
+                            "vendorNames": []},
+                           {"slug": "vallejo", "name": "Vallejo", "vendorNames": []}]},
+    )
+    write_yaml(paths.sources / "mfr-gw.yaml", {"id": "mfr-gw", "kind": "manufacturer", "strategy": "algolia"})
+    write_yaml(paths.sources / "mfr-vallejo.yaml",
+               {"id": "mfr-vallejo", "kind": "manufacturer", "catalog": "paints", "strategy": "wp-rest-paints"})
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    gw = paths.evidence_products / "mfr-gw" / "observations.jsonl"
+    gw.parent.mkdir(parents=True)
+    gw.write_text(
+        line({"key": "mfr-gw:necrons", "name": "Combat Patrol: Necrons", "manufacturer": "games-workshop",
+              "sku": "99120110077", "hints": {"gameSystem": "warhammer-40k"},
+              "firstSeen": "2026-07-07", "lastSeen": "2026-07-12", "extractor": "algolia@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    paint = paths.evidence_products / "mfr-vallejo" / "observations.jsonl"
+    paint.parent.mkdir(parents=True)
+    paint.write_text(
+        line({"key": "mfr-vallejo:model-air-russian-green", "name": "3B Russian Green",
+              "manufacturer": "vallejo", "sku": "71281", "hints": {"category": "paint"},
+              "firstSeen": "2026-07-23", "lastSeen": "2026-07-30", "extractor": "wp-rest-paints@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+
+    catalog = resolve_catalog(paths)
+
+    assert list(catalog) == ["games-workshop"]
+    assert not (paths.catalog_products / "vallejo.yaml").exists()
+    # the evidence itself is untouched -- gen_paint_harvest.py still reads it
+    assert paint.exists()
