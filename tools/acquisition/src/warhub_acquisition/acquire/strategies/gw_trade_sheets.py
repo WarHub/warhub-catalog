@@ -288,6 +288,39 @@ def _first(row: dict, *names: str):
     return None
 
 
+def _predecessor(row: dict, run_date: str | None = None) -> tuple[str | None, object, str | None]:
+    """The (old product code, raw old barcode, change date) a `Code Changes` row renumbers FROM.
+
+    Verified against the live register (InsertDelete18.05.2026.xlsx, sheet `Code Changes`), whose
+    header is: New Product Code | Old Product Code | Description | New SS Code | Old SSC Code |
+    New Barcode | Old Barcode | Trade Range | Date. Only that sheet family carries `Old …` columns,
+    so a row without them yields (None, None, None) and every other sheet is untouched. Extra
+    spellings are accepted for the same reason `_first` is used throughout this module: GW's column
+    headings drift between workbook generations.
+
+    `Date` is the day the renumbering took effect -- a genuine archival fact, and the only date in
+    this data that is not a (confidential) forward-looking release date. A future-dated one is
+    dropped on the same policy gate as unreleased products.
+    """
+    old_code = _first(row, "Old Product Code", "Old Code", "Previous Product Code", "Old SKU")
+    old_barcode = _first(row, "Old Barcode", "Old Individual barcode", "Previous Barcode")
+    code = re.sub(r"\s+", "", str(old_code)) if old_code is not None else None
+
+    changed_on = None
+    changed = _as_date(_first(row, "Date", "Change Date", "Effective Date"))
+    if changed is not None:
+        today = None
+        if run_date is not None:
+            try:
+                today = _dt.date.fromisoformat(run_date)
+            except ValueError:
+                today = None
+        if today is None or changed <= today:
+            changed_on = changed.isoformat()
+
+    return (code or None), old_barcode, changed_on
+
+
 def _clean_ean(raw) -> str | None:
     """Canonical EAN-13, gated on GW's GS1 prefixes.
 
@@ -408,6 +441,67 @@ def _is_discontinued(roles: set[str]) -> bool:
     return "withdrawn" in roles and "current" not in roles
 
 
+def _attach_lineage(
+    lineage: list[tuple[str, str, object, str | None]],
+    observations: dict[str, Observation],
+    stats: dict[str, int],
+) -> None:
+    """Fold collected `Code Changes` rows into `hints["supersedes"]` on the surviving observation.
+
+    Two filters, both load-bearing:
+
+    1. **Placeholder old-barcodes.** GW reuses a handful of filler values in the `Old Barcode`
+       column across entirely unrelated products -- measured 2026-07-22: 14 such values, one of
+       them (`5011921182312`) on 29 different rows. Asserting those would fabricate barcode links
+       between unrelated products and trip the resolver's shared-EAN detection.
+
+       The test is whether one old barcode is claimed by MORE THAN ONE distinct old product code
+       -- NOT whether it occurs more than once. The InsertDelete register is cumulative, so every
+       genuine pairing is restated in each generation of the workbook (measured live: 2,729 rows
+       carrying a predecessor across 3 workbooks for 919 real edges). Counting raw occurrences
+       therefore rejects EVERY barcode, which is exactly what happened before this was measured.
+    2. **GS1 prefix gate** (`_clean_ean`), identical to the primary barcode column -- GW's 12-digit
+       internal codes parse as valid UPC-A and must never be stored as barcodes.
+
+    The hint is a LIST: a product re-coded more than once accumulates several predecessors, and a
+    single-element list keeps that case from needing a shape change later. Sorted for determinism.
+    """
+    codes_per_barcode: dict[str, set[str]] = {}
+    cleaned: list[tuple[str, str, str | None, str | None]] = []
+    for key, old_code, raw_barcode, changed_on in lineage:
+        old_ean = _clean_ean(raw_barcode)
+        cleaned.append((key, old_code, old_ean, changed_on))
+        if old_ean is not None:
+            codes_per_barcode.setdefault(old_ean, set()).add(old_code)
+
+    by_key: dict[str, dict[str, dict[str, str]]] = {}
+    for key, old_code, old_ean, changed_on in cleaned:
+        if old_ean is not None and len(codes_per_barcode[old_ean]) > 1:
+            stats["lineage_placeholder_barcodes"] += 1
+            old_ean = None
+        entry: dict[str, str] = {"productCode": old_code}
+        if old_ean is not None:
+            entry["ean"] = old_ean
+        if changed_on is not None:
+            entry["changedOn"] = changed_on
+        # Dedup on the old code: the same renumbering is restated across workbook generations.
+        # A later row carrying a usable barcode upgrades an earlier bare entry.
+        existing = by_key.setdefault(key, {}).get(old_code)
+        if existing is None or ("ean" not in existing and "ean" in entry):
+            by_key[key][old_code] = entry
+
+    for key, entries in by_key.items():
+        observation = observations.get(key)
+        if observation is None:
+            # The surviving code produced no observation (no valid barcode of its own, or it was
+            # dropped as unreleased). Nothing to hang the lineage on -- counted, not invented.
+            stats["lineage_unmatched"] += len(entries)
+            continue
+        observation.hints["supersedes"] = [entries[code] for code in sorted(entries)]
+        stats["lineage_links"] += len(entries)
+        stats["lineage_with_barcode"] += sum(1 for e in entries.values() if "ean" in e)
+
+
 def gw_trade_sheets_strategy(
     descriptor: SourceDescriptor,
     client: PoliteClient,
@@ -430,6 +524,11 @@ def gw_trade_sheets_strategy(
         "skipped_bad_prefix": 0,
         "skipped_unreleased": 0,
         "parse_errors": 0,
+        # Re-coding lineage captured from `Code Changes` rows (see _attach_lineage).
+        "lineage_links": 0,
+        "lineage_with_barcode": 0,
+        "lineage_placeholder_barcodes": 0,
+        "lineage_unmatched": 0,
     }
 
     base_url = descriptor.baseUrl or "https://trade.games-workshop.com"
@@ -462,6 +561,11 @@ def gw_trade_sheets_strategy(
     # Per-product provenance across every sheet of every workbook, resolved into `archived` once
     # the whole harvest is in -- see _sheet_role / _is_discontinued.
     roles: dict[str, set[str]] = {}
+    # (surviving observation key, old product code, raw old barcode) from `Code Changes` rows.
+    # Collected here and resolved AFTER every workbook is parsed, because the placeholder filter
+    # below can only be applied once all occurrences of an old barcode have been counted -- the
+    # same deferred-decision shape as `roles`/_is_discontinued.
+    lineage: list[tuple[str, str, object]] = []
     run_date = context.run_date
 
     for url, asset in workbooks:
@@ -515,6 +619,13 @@ def gw_trade_sheets_strategy(
                     if volume is not None:
                         hints["volumeMl"] = volume
 
+                    # Re-coding lineage: this row says "old code -> this code". Recorded against
+                    # the SURVIVING key and resolved after the whole harvest (see below). A row
+                    # whose old code equals its new code is a no-op, not a supersession.
+                    old_code, old_barcode, changed_on = _predecessor(row, run_date)
+                    if old_code is not None and old_code != sku:
+                        lineage.append((key, old_code, old_barcode, changed_on))
+
                     fresh = Observation(
                         key=key,
                         manufacturer=manufacturer,
@@ -539,6 +650,8 @@ def gw_trade_sheets_strategy(
     for key, observation in observations.items():
         observation.archived = _is_discontinued(roles.get(key, set()))
     stats["discontinued"] = sum(1 for o in observations.values() if o.archived)
+
+    _attach_lineage(lineage, observations, stats)
 
     return StrategyResult(
         observations=list(observations.values()),
