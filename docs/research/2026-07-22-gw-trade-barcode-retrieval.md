@@ -299,6 +299,33 @@ historical fact, not a confidential forward-looking release date.
 This is capture only. The hint is inert until the resolver learns to turn it into a supersession
 link, which is deliberately a later, separately-reviewable change.
 
+### 5.7 The WH Colour rebrand workbook (implemented)
+
+`WH Colour Codes and Barcodes` was downloaded on every run and then **silently discarded**: header
+detection succeeded, but the row loop's code column list held none of its column names, so all its
+rows failed the `code is None` guard *before* any `skipped_*` counter — invisible in the run
+summary. Its sheets:
+
+| Sheet | Columns |
+|---|---|
+| `Paint`, `Brushes` | Original SKU, Original Pack SKU, **New SKU**, New Pack SKU, SSC, Product Description, **New Individual barcode**, New pack barcode, Type, Range |
+| `Hobby` | Individual Code, Pack Code, SSC, Product Name, Barcode *(already ingested — those names were accepted)* |
+
+Measured before enabling, to check it was a rebrand record and not a duplicate import: **308
+distinct `Original SKU` → 604 distinct `New SKU`** (~2 regional successors each, per the `Type`
+column), **all 308 originals already in the catalog, none of the 604 new SKUs, and all 604 barcodes
+absent from the repo entirely**.
+
+Enabled by accepting `New SKU` as a code column and `Original SKU` as a predecessor, so each new
+SKU arrives with its `supersedes` link. The lineage here carries a product code but **no barcode** —
+the workbook has no old-barcode column, and inventing one is exactly the failure §4.2 warns about.
+
+One trap: this workbook's `Range` column holds merchandising codes (`BS:A`), not the
+`Paint - WH Colour - …` taxonomy, so `_paint_category` cannot fire and its paints would have
+published as `miniatures`. The category is taken from the SHEET TITLE instead. Measured result:
+**609 observations, 604 new barcodes, 592 tagged `paint`** (brushes/hobby correctly not), 604
+lineage links, 0 unmatched, 0 skipped.
+
 ## 6. Terms and licensing
 
 *Not legal advice.* Assessment of the actual documents, since the prior doc's treatment drove a

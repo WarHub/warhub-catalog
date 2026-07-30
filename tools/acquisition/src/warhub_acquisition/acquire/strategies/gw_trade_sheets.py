@@ -281,6 +281,18 @@ def _paint_category(trade_category: str | None) -> str | None:
     return "paint" if tc.startswith("paint -") or tc.startswith("spray") else None
 
 
+def _sheet_paint_category(sheet_title: str) -> str | None:
+    """`"paint"` when the SHEET itself says its rows are paints, else None.
+
+    Only the WH Colour rebrand workbook needs this: it has no usable range column (its `Range`
+    holds merchandising codes like `BS:A`) and instead splits rows across `Paint` / `Brushes` /
+    `Hobby` tabs. Brushes and hobby tools are deliberately NOT paints -- the same distinction
+    `_paint_category` already draws for `Paint Other`/`Brush` ranges.
+    """
+    title = sheet_title.strip().lower()
+    return "paint" if title in ("paint", "paints", "spray", "sprays") else None
+
+
 def _first(row: dict, *names: str):
     for name in names:
         if name in row and row[name] not in (None, ""):
@@ -302,7 +314,8 @@ def _predecessor(row: dict, run_date: str | None = None) -> tuple[str | None, ob
     this data that is not a (confidential) forward-looking release date. A future-dated one is
     dropped on the same policy gate as unreleased products.
     """
-    old_code = _first(row, "Old Product Code", "Old Code", "Previous Product Code", "Old SKU")
+    old_code = _first(row, "Old Product Code", "Old Code", "Previous Product Code", "Old SKU",
+                      "Original SKU")
     old_barcode = _first(row, "Old Barcode", "Old Individual barcode", "Previous Barcode")
     code = re.sub(r"\s+", "", str(old_code)) if old_code is not None else None
 
@@ -582,7 +595,8 @@ def gw_trade_sheets_strategy(
                 role = _sheet_role(sheet.title)
                 for row in _rows(sheet):
                     stats["rows"] += 1
-                    code = _first(row, "Product Code", "New Product Code", "Unit Code", "Individual Code")
+                    code = _first(row, "Product Code", "New Product Code", "Unit Code",
+                                  "Individual Code", "New SKU")
                     name = _first(row, "Description", "Description (ENG)", "PRODUCT NAME",
                                   "Product Description", "Product Name")
                     if code is None or name is None:
@@ -615,6 +629,14 @@ def gw_trade_sheets_strategy(
                         paint_category = _paint_category(str(category))
                         if paint_category is not None:
                             hints["category"] = paint_category
+                    # Fallback: the WH Colour rebrand workbook's `Range` column holds opaque
+                    # merchandising codes ("BS:A"), so the category has to come from the SHEET the
+                    # row lives on -- that workbook splits its rows into `Paint` / `Brushes` /
+                    # `Hobby` tabs. Without this its 604 paints would publish as `miniatures`.
+                    if "category" not in hints:
+                        sheet_category = _sheet_paint_category(sheet.title)
+                        if sheet_category is not None:
+                            hints["category"] = sheet_category
                     volume = _volume_ml(_first(row, "SIZE"), str(name))
                     if volume is not None:
                         hints["volumeMl"] = volume
