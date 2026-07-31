@@ -891,6 +891,25 @@ supersessions:
   # Fixed in resolve/join.py; see the comment on the `supersession-stale-code` re-homing.
   games-workshop/99070207021: games-workshop/99120207208  # Mortisan Boneshaper, 2026-03-09
   games-workshop/99120209100: games-workshop/99120209152  # Boingrot Bounderz, 2025-03-10
+  # --- Adjudicated out of the `conflicting` bucket (2026-07-31). Each of these retired codes was
+  # claimed by several survivors; the winner is the only claimant that keeps the retired code's own
+  # GW SS Code and is still listed in the current trade master. Full reasoning per pair, and the
+  # decision to leave the other 6 conflicting codes undeclared, in the review write-up.
+  # Rabble-Rowza: 5011921211593 -> 5011921254576. Four rival claimants are batch noise (different
+  # SS Codes). The retired code is still in every current order form, so its record stays `current`.
+  games-workshop/99070209011: games-workshop/99120209141
+  # Deadwalker Zombies: 5011921196043 -> 5011921257119. Both claimants share SS Code 91-07; only
+  # this one is still listed. Do NOT also declare -> 99120207092: that rival comes from a
+  # chronologically inverted row and is itself dead. Direction certain; only immediacy is not.
+  games-workshop/99120207141: games-workshop/99120207234
+  # Kragnos: the register asserts BOTH directions (080->087 on 2021-08-30, 087->080 on 2021-09-13)
+  # and the LATER row is the wrong one -- 080 has a Deletions row and appears in no current sheet.
+  # "Latest row wins" would pick the dead direction; liveness is what decides it.
+  games-workshop/99120209080: games-workshop/99120209087
+  # Aeldari Guardians: a genuine flip-flop, not a bad row -- 067 -> 091 -> 067 -> 091 across
+  # 2022-2024, every row true. A one-value map holds only the net result, and 091 is the terminal
+  # live state.
+  games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
   # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
   # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole

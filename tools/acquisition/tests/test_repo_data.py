@@ -99,3 +99,36 @@ def test_repo_mappings_reference_only_known_taxonomy_slugs() -> None:
                 f"{path.name}: faction[{raw!r}] -> {slug!r} is not a known "
                 f"taxonomy/factions.yaml slug and is not listed under newFactions"
             )
+
+
+# Sources flagged `catalog: paints` are skipped by the product resolver, so the ONLY thing that
+# consumes them is a bridge in scripts/gen_paint_harvest.py. A source with neither is acquired on a
+# schedule and lands nowhere -- silently, because nothing errors. This pins that contract.
+_PAINT_SOURCES_WITHOUT_A_BRIDGE = {
+    # mfr-mr-hobby: 134 observations, and data/paints/brands/mr-hobby.yaml exists (imported by a
+    # different route), but gen_paint_harvest.py has no mr-hobby bridge -- so nothing consumes this
+    # source today. Pre-existing; recorded here so it is visible and so no NEW source joins it.
+    "mfr-mr-hobby",
+}
+
+
+def test_every_paint_source_is_consumed_by_a_harvest_bridge() -> None:
+    paths = _require_repo_data()
+    script = Path(__file__).resolve().parents[1] / "scripts" / "gen_paint_harvest.py"
+    if not script.exists():
+        pytest.skip("gen_paint_harvest.py not present")
+    text = script.read_text(encoding="utf-8")
+
+    paint_sources = {
+        source_id
+        for source_id, descriptor in load_descriptors(paths.sources).items()
+        if descriptor.catalog == "paints"
+    }
+    assert paint_sources, "expected at least one catalog: paints source"
+
+    unconsumed = {s for s in paint_sources if f'"{s}"' not in text and f"'{s}'" not in text}
+    assert unconsumed == _PAINT_SOURCES_WITHOUT_A_BRIDGE, (
+        f"paint sources with no harvest bridge changed: {sorted(unconsumed)}. A `catalog: paints` "
+        "source is skipped by the product resolver, so without a bridge its observations reach "
+        "neither catalog. Add a bridge, or add it to _PAINT_SOURCES_WITHOUT_A_BRIDGE with a reason."
+    )
