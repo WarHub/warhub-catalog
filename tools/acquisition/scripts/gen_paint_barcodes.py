@@ -80,6 +80,18 @@ def clean_paint_name(raw: str) -> str:
     return re.sub(r"\s+", " ", n).strip()
 
 
+# GW abbreviates a few names in the trade sheet past what a 0.86 fuzzy match can bridge:
+# `MECH STANDARD GREY` vs `Mechanicus Standard Grey` scores 0.842 and `MORTARION GREEN` vs
+# `Mortarion Green Clear` 0.849. Both are hand-verified unambiguous -- each is the ONLY Air paint
+# with that prefix -- and without them the two paints carry no barcode at all (5011921182831 and
+# 5011921183500 reach nothing). Preferred over lowering the cutoff, which would loosen every match
+# in the file to rescue two.
+_NAME_ALIASES = {
+    "mechstandardgrey": "mechanicusstandardgrey",
+    "mortariongreen": "mortariongreenclear",
+}
+
+
 def set_from_trade_category(tc: str | None, name: str) -> str | None:
     tc = (tc or "").lower()
     if "spray" in tc or "spray" in name.lower():
@@ -91,6 +103,22 @@ def set_from_trade_category(tc: str | None, name: str) -> str | None:
 
 
 def is_paint_obs(o: dict) -> bool:
+    """Only rows whose TRADE RANGE says paint/spray. Deliberately narrow -- see below.
+
+    The 2026 WH Colour rebrand workbook has no trade range (its `Range` column holds merchandising
+    codes like `E:P360`), so its rows are tagged `hints.category: "paint"` from the sheet title
+    instead and do NOT pass this gate. That looks like 592 lost manufacturer facts and is not:
+    measured 2026-07-31, **all 592 of them are 6-PACK rows** (`... X6`, 295 UK/ROW + 294 JUC + 2 AU
+    + 1 other). Their barcode is the MULTIPACK barcode, and their product code is the multipack SKU.
+    Admitting them replaces every unit barcode in this file with a 6-pack one -- verified by trying
+    it: `Abaddon Black|Air` went from ean 5011921182848 / code 99189958145 to 5011921244379 /
+    56189958220, and all 297 entries were overwritten the same way.
+
+    So the rebrand workbook contributes nothing a SINGLE pot can use, and this gate is correct as
+    written. If a future rebrand sheet ever carries unit rows, gate them on the SS Code prefix
+    (21 Base, 22 Layer, 23 Dry, 24 Shade, 27 Technical/Contrast, 28 Air, 29 Contrast -- measured
+    100% pure except 27) and exclude anything whose name carries a pack marker.
+    """
     tc = str((o.get("hints") or {}).get("tradeCategory") or "").lower()
     return tc.startswith("paint") or tc.startswith("spray")
 
@@ -118,6 +146,7 @@ def main() -> None:
         names_by_set.setdefault(s, {})[norm(p["name"])] = f"{p['name']}|{s}"
 
     def resolve_key(pset: str, pnorm: str) -> str | None:
+        pnorm = _NAME_ALIASES.get(pnorm, pnorm)
         exact = by_key.get((pset, pnorm))
         if exact is not None:
             return exact
