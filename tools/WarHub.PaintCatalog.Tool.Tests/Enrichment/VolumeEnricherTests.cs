@@ -23,7 +23,9 @@ public class VolumeEnricherTests
     [InlineData("Citadel Colour", "Technical", 24, "pot")]
     [InlineData("Citadel Colour", "Spray", 400, "spray")]
     [InlineData("Citadel Colour", "Dry", 12, "pot")]
-    [InlineData("Citadel Colour", "Air", 12, "pot")]
+    // 24, not 12: measured 926/926 `AIR: … (24ML)` rows across every committed trade
+    // workbook, zero at 12. See the rule comment in VolumeTable.
+    [InlineData("Citadel Colour", "Air", 24, "pot")]
     public void Enrich_Citadel_CorrectVolume(string brand, string set, int expectedVolume, string expectedPackaging)
     {
         Paint paint = MakePaint(set);
