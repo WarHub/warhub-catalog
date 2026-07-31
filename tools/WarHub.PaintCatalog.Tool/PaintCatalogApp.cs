@@ -40,7 +40,7 @@ internal static class PaintCatalogApp
 
         Option<FileInfo?> barcodesOption = new("--barcodes")
         {
-            Description = "Path to a generated barcode file ({brand}/{Name}|{Set} -> ean/productCode)"
+            Description = "Path to a generated manufacturer bridge file ({brand}/{Name}|{Set} -> ean/volumeMl)"
         };
 
         Option<DirectoryInfo?> harvestOption = new("--harvest")
@@ -230,8 +230,11 @@ internal static class PaintCatalogApp
                     }).ToList();
                 }
 
-                // Fill EAN + product code from the generated manufacturer-barcode file (only fills
-                // blanks; a manual override below still wins).
+                // Apply the manufacturer's own assertions from the generated bridge file: EAN fills
+                // a blank slot, VolumeMl OVERWRITES the VolumeTable guess set just above (GW's SIZE
+                // column beats a per-set constant). Must run after VolumeEnricher and before
+                // OverrideApplier -- that ordering IS the precedence rule, so do not reorder these
+                // three without reading BarcodeEnricher's remarks.
                 paints = BarcodeEnricher.Apply(paints, brandInfo.Slug, barcodesPath);
 
                 // Fill blank Ean/ImageUrl from the committed manufacturer harvest (exact

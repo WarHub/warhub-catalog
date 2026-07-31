@@ -110,6 +110,48 @@ public class BarcodeEnricherTests
     }
 
     [Fact]
+    public void Apply_ManufacturerVolume_OverwritesTheVolumeTableGuess()
+    {
+        // The whole point: VolumeEnricher has already stamped the per-set constant (Citadel Air ->
+        // 12 ml) before this runs, so a fill-only-when-blank rule could never fire. GW's own SIZE
+        // column says 24 and must win. A fill-blanks rule here would leave 53 Citadel paints wrong.
+        Paint air = new() { Name = "Averland Sunset", Set = "Air", R = 250, G = 189, B = 0, Hex = "#FABD00", VolumeMl = 12, Packaging = "pot" };
+        string path = WriteTemp("""
+            citadel-colour:
+              "Averland Sunset|Air":
+                ean: "5011921182596"
+                volumeMl: 24
+            """);
+        try
+        {
+            Paint result = BarcodeEnricher.Apply([air], "citadel-colour", path).Single();
+            Assert.Equal(24, result.VolumeMl);
+            // Packaging is not the manufacturer's to assert here; the table keeps it.
+            Assert.Equal("pot", result.Packaging);
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Fact]
+    public void Apply_NoVolumeInFile_LeavesTheTableVolumeAlone()
+    {
+        // A bridge entry with no volumeMl (blank SIZE column, an older committed file, or two
+        // trade SKUs disagreeing — the generator emits nothing rather than pick one) must not
+        // blank out the table's value.
+        Paint air = new() { Name = "Averland Sunset", Set = "Air", R = 250, G = 189, B = 0, Hex = "#FABD00", VolumeMl = 12 };
+        string path = WriteTemp("""
+            citadel-colour:
+              "Averland Sunset|Air":
+                ean: "5011921182596"
+            """);
+        try
+        {
+            Assert.Equal(12, BarcodeEnricher.Apply([air], "citadel-colour", path).Single().VolumeMl);
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Fact]
     public void Apply_UnknownBrandOrKey_LeavesPaintUnchanged()
     {
         string path = WriteTemp("""
