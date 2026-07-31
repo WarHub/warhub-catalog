@@ -27,6 +27,12 @@
         "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "supersedes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "supersededBy": { "type": "string" },
+        "paintIds": {
+          "type": "array",
+          "description": "Paint records sharing a barcode with this product -- the same physical thing published in the paint catalog too. Omitted when there is none. See barcode-index.json; ids are stable within a release.",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
         "eanConfidence": { "type": "string", "enum": ["confirmed", "provisional", "conflicted"] },
         "priceGbp": { "type": "number" },
         "priceUsd": { "type": "number" },

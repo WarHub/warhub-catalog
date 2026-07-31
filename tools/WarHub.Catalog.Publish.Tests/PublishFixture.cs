@@ -5,6 +5,13 @@ namespace WarHub.Catalog.Publish.Tests;
 /// <summary>
 /// Publishes a tiny hand-authored dataset once and exposes the resulting dist/ tree.
 /// Fixtures mirror the exact YAML the two tools emit.
+///
+/// The barcodes are deliberately arranged to exercise the cross-catalog seam:
+///   5011921142361 -- product test-mfg/alpha (primary) AND paint citadel/abaddon-black
+///   8429551724838 -- product test-mfg/alpha (additionalEans) AND paint vallejo/black
+///   5011921142378 -- paint citadel/mephiston-red only, no product side
+/// so alpha links to TWO paints (plural on both sides), mephiston-red links to nothing, and
+/// test-mfg/beta carries no barcode at all.
 /// </summary>
 public sealed class PublishFixture : IDisposable
 {
@@ -27,6 +34,7 @@ public sealed class PublishFixture : IDisposable
                 manufacturer: test-mfg
                 productCode: PRODA
                 ean: '5011921142361'
+                additionalEans: ['8429551724838']
                 eanConfidence: provisional
                 gameSystem: test-system
                 faction: general
@@ -71,6 +79,7 @@ public sealed class PublishFixture : IDisposable
               availability: unknown
               firstSeen: '2026-07-07'
               productCode: C1
+              ean: '5011921142361'
               details:
                 set: Base
                 r: 35
@@ -87,6 +96,7 @@ public sealed class PublishFixture : IDisposable
               availability: out_of_stock
               firstSeen: '2026-07-07'
               productCode: C2
+              ean: '5011921142378'
               details:
                 set: Base
                 r: 154
@@ -109,6 +119,7 @@ public sealed class PublishFixture : IDisposable
               availability: unknown
               firstSeen: '2026-07-07'
               productCode: V1
+              ean: '8429551724838'
               details:
                 set: Model Color
                 r: 35

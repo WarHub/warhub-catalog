@@ -70,6 +70,7 @@ root.SetAction(parseResult =>
     PublishResult result = Publisher.Run(new PublishOptions(catalogDir, paintsDir, outDir, schemaDir, prov));
 
     Console.WriteLine($"Published catalog {version}: {result.Products} products, {result.Paints} paints, "
+        + $"{result.Barcodes} barcodes ({result.CrossCatalogBarcodes} in both catalogs), "
         + $"{result.Files} files → {outDir}");
     return 0;
 });

@@ -20,11 +20,24 @@ internal static class PaintBuilder
     private static string NaturalKey(string brandSlug, string name, string set, string? code, string? hex) =>
         $"{brandSlug}|{name}|{set}|{code ?? ""}|{NormalizeHex(hex ?? "") ?? ""}";
 
+    /// <summary>
+    /// Assemble + write in one step, with no cross-catalog links. Kept for callers that publish
+    /// paints on their own; <see cref="Publisher"/> uses the two phases separately so the barcode
+    /// link pass can run between them.
+    /// </summary>
     public static int Build(
         IReadOnlyList<BrandFile> brands,
         EquivFile? equivalences,
         Provenance prov,
-        CatalogWriter writer)
+        CatalogWriter writer) => Write(Assemble(brands, equivalences), prov, writer);
+
+    /// <summary>
+    /// Runs steps 1-4 (flatten, assign ids, fold equivalences, materialize) and stops before
+    /// serialization, so the cross-catalog link pass can stamp <c>productIds</c> on. The id
+    /// assignment in step 2 is what the product side links AGAINST, so it has to have happened
+    /// before any link can be computed.
+    /// </summary>
+    public static PaintAssembly Assemble(IReadOnlyList<BrandFile> brands, EquivFile? equivalences)
     {
         // 1. Flatten, de-duplicating exact natural-key repeats.
         var seen = new HashSet<string>(StringComparer.Ordinal);
@@ -115,8 +128,13 @@ internal static class PaintBuilder
             recordById[id] = record with { Equivalents = eq };
         }
 
-        // 5. Partition by brand, write consolidated + partitions + index.
-        var byBrand = recordById.Values
+        return new PaintAssembly(recordById);
+    }
+
+    /// <summary>Step 5: partition by brand, write consolidated + partitions + index.</summary>
+    public static int Write(PaintAssembly assembly, Provenance prov, CatalogWriter writer)
+    {
+        var byBrand = assembly.Records
             .GroupBy(r => r.Brand, StringComparer.Ordinal)
             .Select(g => (BrandSlug: g.First().Id.Split('/')[0], Brand: g.Key, Paints: g
                 .OrderBy(r => r.Id, StringComparer.Ordinal).ToList()))
@@ -195,5 +213,27 @@ internal static class PaintBuilder
         if (h.Length == 0)
             return null;
         return h.StartsWith('#') ? h : $"#{h}";
+    }
+}
+
+/// <summary>
+/// Paints built and keyed by their assigned id, but not yet serialized -- the handoff between
+/// <see cref="PaintBuilder.Assemble"/> and <see cref="PaintBuilder.Write"/>. Brand partitions and
+/// the consolidated order are still derived at write time from these records, unchanged.
+/// </summary>
+internal sealed class PaintAssembly(Dictionary<string, PaintRecord> recordById)
+{
+    public IEnumerable<PaintRecord> Records => recordById.Values;
+
+    /// <summary>
+    /// Rewrites every record. Records are immutable, so a link pass replaces them rather than
+    /// mutating them; keys are snapshotted first so the dictionary is not enumerated while written.
+    /// </summary>
+    public void MapRecords(Func<PaintRecord, PaintRecord> map)
+    {
+        foreach (string id in recordById.Keys.ToList())
+        {
+            recordById[id] = map(recordById[id]);
+        }
     }
 }

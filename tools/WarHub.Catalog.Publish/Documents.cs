@@ -62,6 +62,11 @@ internal sealed record ProductRecord
     // unchanged, and a retired record's status is still whatever the evidence says it is.
     [JsonPropertyOrder(18)] public IReadOnlyList<string>? Supersedes { get; init; }
     [JsonPropertyOrder(19)] public string? SupersededBy { get; init; }
+    // Cross-catalog seam: the paint records that share a barcode with this product. Plural
+    // because neither side is 1:1 -- one colour ships as many SKUs, and a barcode can be
+    // carried by more than one record on either side. Null (omitted) when there is no link.
+    // See CrossCatalogLinks for how it is computed and why it is emitted, not assumed.
+    [JsonPropertyOrder(20)] public IReadOnlyList<string>? PaintIds { get; init; }
 }
 
 /// <summary>A cross-brand near match; lower <c>deltaE</c> is closer.</summary>
@@ -93,7 +98,12 @@ internal sealed record PaintRecord(
     [property: JsonPropertyOrder(12)] IReadOnlyList<string>? AdditionalEans,
     [property: JsonPropertyOrder(13)] string Status,
     [property: JsonPropertyOrder(14)] string Availability,
-    [property: JsonPropertyOrder(15)] IReadOnlyList<PaintEquivalent> Equivalents);
+    [property: JsonPropertyOrder(15)] IReadOnlyList<PaintEquivalent> Equivalents,
+    // Cross-catalog seam: the product records that share a barcode with this paint. Plural
+    // because one colour is sold as many SKUs (pot, spray, contrast, a paint-set component),
+    // so a paint routinely resolves to several products. Mirrors ProductRecord.PaintIds;
+    // null -> omitted. Defaulted so the link pass can fill it via `with` after assembly.
+    [property: JsonPropertyOrder(16)] IReadOnlyList<string>? ProductIds = null);
 
 // ---- Envelope-bearing documents ------------------------------------------------
 
@@ -121,6 +131,31 @@ internal sealed class PaintCatalogDocument
     [JsonPropertyOrder(6)] public required IReadOnlyDictionary<string, int> Counts { get; init; }
     [JsonPropertyOrder(7)] public required SourceRef Source { get; init; }
     [JsonPropertyOrder(8)] public required IReadOnlyList<PaintRecord> Paints { get; init; }
+}
+
+/// <summary>One record that carries a barcode. <c>catalog</c> is <c>product</c> or <c>paint</c>.</summary>
+internal sealed record BarcodeRef(
+    [property: JsonPropertyOrder(1)] string Catalog,
+    [property: JsonPropertyOrder(2)] string Id);
+
+/// <summary>
+/// The cross-catalog barcode index: every barcode in either catalog, mapped to the records that
+/// carry it. Keyed by the barcode itself so a scanner does one lookup, not a scan. A key whose
+/// value names records from BOTH catalogs is the seam this document exists for -- the same
+/// physical thing published twice, once as a SKU and once as a colour.
+/// </summary>
+internal sealed class BarcodeIndexDocument
+{
+    [JsonPropertyOrder(0)] public string SchemaVersion { get; init; } = SchemaInfo.SchemaVersion;
+    [JsonPropertyOrder(1)] public string Kind { get; init; } = "barcode-index";
+    [JsonPropertyOrder(2)] public required string Version { get; init; }
+    [JsonPropertyOrder(3)] public required string GeneratedAt { get; init; }
+    [JsonPropertyOrder(4)] public string? GitCommit { get; init; }
+    [JsonPropertyOrder(6)] public required IReadOnlyDictionary<string, int> Counts { get; init; }
+    [JsonPropertyOrder(7)] public required SourceRef Source { get; init; }
+    // Dictionary keys are NOT camelCased -- JsonSerializerOptions.PropertyNamingPolicy applies to
+    // property names only, DictionaryKeyPolicy is unset, so barcodes pass through verbatim.
+    [JsonPropertyOrder(8)] public required IReadOnlyDictionary<string, IReadOnlyList<BarcodeRef>> Barcodes { get; init; }
 }
 
 internal sealed record IndexEntry(string Key, string Label, int Records, string File);
