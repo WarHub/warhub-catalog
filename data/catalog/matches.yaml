@@ -882,12 +882,15 @@ supersessions:
   games-workshop/99070117003: games-workshop/99070117012  # Biophagus, 2021-11-29
   games-workshop/99120108034: games-workshop/99120108058  # Canoness, 2021-09-06
   games-workshop/99120116009: games-workshop/99120116031  # Corpuscarii Electro-Priests, 2021-04-19
-  # NOT declared, and why: 99070207021 (Mortisan Boneshaper) and 99120209100 (Boingrot
-  # Bounderz) are observed ONLY by rows carrying the SUCCESSOR's barcode, so the stale-code
-  # re-homing moves every one of them to the survivor and the retired entity resolves to
-  # nothing -- `unresolved-supersession`. Their barcodes exist only in the register, so they
-  # need a minted archival record (which today is skipped for them precisely because the code
-  # IS observed). Left in the `merged-with-survivor` bucket until that case is handled.
+  # The last two of that bucket. Both were tried on 2026-07-30 and produced
+  # `unresolved-supersession`, which was misread as "the retired code has no observation of its
+  # own left". It has: GW's China Order Form lists each retired code with its own retired barcode,
+  # and the split really did happen. What failed was NAMING the split-off group -- its `curated`
+  # bridge still carried the surviving code, and a curated source outranks the manufacturer when a
+  # group is named, so the retired group was named after the survivor and merged straight back in.
+  # Fixed in resolve/join.py; see the comment on the `supersession-stale-code` re-homing.
+  games-workshop/99070207021: games-workshop/99120207208  # Mortisan Boneshaper, 2026-03-09
+  games-workshop/99120209100: games-workshop/99120209152  # Boingrot Bounderz, 2025-03-10
 reassignCodes:
   # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
   # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole

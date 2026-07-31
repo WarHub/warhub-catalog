@@ -183,7 +183,8 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         ean_resolutions[entity] = ean
         conflicts.extend(ean.conflicts)
         record = resolve_attributes(
-            entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps
+            entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps,
+            member_codes=member_codes,
         )
         # Stamped before apply_overrides so a hand override can still correct a link.
         record.supersededBy = superseded_by.get(entity)

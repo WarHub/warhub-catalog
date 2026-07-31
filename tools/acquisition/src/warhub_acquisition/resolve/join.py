@@ -223,6 +223,18 @@ def join_observations(
                     "manufacturer": observation.manufacturer,
                 }
             )
+            # Discard the stale code EVERYWHERE, not just for the unions below. `codes` is what
+            # `group_entity_id` ranks to name a group, and it ranks by source kind -- so a re-homed
+            # observation left holding its stale code can still NAME the group it was re-homed
+            # into. Measured 2026-07-30 on Mortisan Boneshaper and Boingrot Bounderz: the retired
+            # component is built correctly (the manufacturer's own retired code + barcode, plus the
+            # re-homed bridges) and is then named `games-workshop/<SURVIVING code>` by a re-homed
+            # `curated` observation, whose kind outranks the manufacturer's. The retired component
+            # collides with the survivor's id and the final id-keyed merge folds the two back into
+            # one entity -- undoing the split that the barrier and the re-homing just achieved, and
+            # reporting the declared pair as `unresolved-supersession`. The three pairs declared
+            # before this escaped only because their bridge was a `retailer`, which loses that rank.
+            codes[observation.key] = None
             code = None
         if code is not None:
             group_codes.setdefault(uf.find(observation.key), set()).add(code)

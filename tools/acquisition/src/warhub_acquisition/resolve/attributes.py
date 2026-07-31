@@ -21,6 +21,7 @@ def resolve_attributes(
     miss_threshold: int = 3,
     superseded: frozenset[str] = frozenset(),
     category_maps: dict[str, dict] | None = None,
+    member_codes: dict[str, str | None] | None = None,
 ) -> CanonicalProduct:
     # A repackaging join folds an OLD product code's observations (superseded) into the surviving
     # entity. Their attributes describe the retired box (a stale price, an old image), so within a
@@ -32,9 +33,27 @@ def resolve_attributes(
         members,
         key=lambda m: (KIND_PRIORITY.get(kinds.get(m.source_id, "barcode-db"), 9), m.key in superseded, m.key),
     )
+    # `sku` is the only direct field that IDENTIFIES this product rather than describing it, so it
+    # is the only one a member may be disqualified from supplying. An observation re-homed onto the
+    # record its barcode scans as still carries the OTHER side's product code as its SKU -- that is
+    # exactly what join.py's `supersession-stale-code` re-homing establishes about it -- and
+    # publishing that would state a falsehood: `productCode: 99070207021` beside
+    # `sku: 99120207208`, the code of a different product. A member whose SKU normalizes to a
+    # DIFFERENT product code than this entity's is therefore skipped here. A retailer's own
+    # catalogue number (`GWS94-22`, `120563` -- no normalized code at all) is NOT a competing
+    # claim about GW's numbering and still qualifies, which is why this tests the NORMALIZED code
+    # rather than string-comparing raw SKUs.
+    foreign = {
+        member.key
+        for member in members
+        if code is not None
+        and member_codes is not None
+        and member_codes.get(member.key) not in (None, code)
+    }
     fields: dict[str, object] = {}
     for name in _DIRECT_FIELDS:
-        fields[name] = _first([getattr(member, name) for member in ordered])
+        eligible = [m for m in ordered if name != "sku" or m.key not in foreign]
+        fields[name] = _first([getattr(member, name) for member in eligible])
     for name in _HINT_FIELDS:
         fields[name] = _first([member.hints.get(name) for member in ordered])
 

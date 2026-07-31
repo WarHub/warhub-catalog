@@ -198,6 +198,49 @@ def test_sku_is_resolved_first_non_none() -> None:
     assert product.sku == "GWS99120110077"
 
 
+def test_a_foreign_product_code_never_becomes_this_record_s_sku() -> None:
+    """`sku` identifies the product; every other direct field only describes it. A supersession
+    re-homes an observation onto the record its BARCODE scans as, having established that the SKU
+    it kept is the other side's stale code -- so letting that member supply `sku` publishes
+    `productCode: <retired>` beside `sku: <survivor>`, two different products in one record.
+
+    The curated member here outranks the manufacturer, so this is not a tie-break: it must be an
+    exclusion, and it must apply to `sku` alone -- the stale listing's name, price and image are
+    still the best description of the retired box, which is why it was re-homed rather than dropped.
+    """
+    members = [
+        obs("legacy-catalog:widget", sku="99120110002", priceGbp=20.5, url="https://legacy"),
+        obs("mfr-gw:widget", sku="99120110001", priceGbp=18.0),
+    ]
+    codes = {"legacy-catalog:widget": "99120110002", "mfr-gw:widget": "99120110001"}
+
+    product = resolve_attributes(
+        "games-workshop/99120110001", members, KINDS, NO_EAN, "99120110001", member_codes=codes
+    )
+    assert product.sku == "99120110001"
+    assert product.priceGbp == 20.5           # descriptive fields still come from the curated member
+    assert product.url == "https://legacy"
+
+
+def test_a_retailer_catalogue_number_is_not_a_foreign_code() -> None:
+    # A retailer SKU that normalizes to NO product code makes no competing claim about the
+    # manufacturer's numbering, so it stays eligible -- otherwise this rule would blank the `sku`
+    # of the many records whose only SKU is a shop's own reference.
+    members = [obs("ret-a:widget", sku="GWS94-22")]
+    product = resolve_attributes(
+        "games-workshop/99120110001", members, KINDS, NO_EAN, "99120110001",
+        member_codes={"ret-a:widget": None},
+    )
+    assert product.sku == "GWS94-22"
+
+
+def test_sku_eligibility_is_inert_without_member_codes() -> None:
+    # The default call path (member_codes=None) must behave exactly as before this rule.
+    members = [obs("legacy-catalog:widget", sku="99120110002"), obs("mfr-gw:widget", sku="99120110001")]
+    product = resolve_attributes("e", members, KINDS, NO_EAN, "99120110001")
+    assert product.sku == "99120110002"
+
+
 # --- tradeCategory fallback classification (mfr-gw-trade China Order Form) ----------------------
 
 TRADE_KINDS = {**KINDS, "mfr-gw-trade": "manufacturer"}

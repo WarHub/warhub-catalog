@@ -10,7 +10,12 @@ TAXONOMY = Taxonomy(
         )
     }
 )
-KINDS = {"mfr-gw": "manufacturer", "ret-goblin": "retailer", "ret-radaddel": "retailer"}
+KINDS = {
+    "legacy": "curated",
+    "mfr-gw": "manufacturer",
+    "ret-goblin": "retailer",
+    "ret-radaddel": "retailer",
+}
 
 
 def obs(key: str, **kw: object) -> Observation:
@@ -377,6 +382,36 @@ def test_supersession_barrier_blocks_a_merge_it_cannot_re_home() -> None:
             "keys": ["ret-goblin:old", "ret-radaddel:new"],
         }
     ]
+
+
+def test_a_rehomed_bridge_cannot_name_the_group_it_was_rehomed_into() -> None:
+    """The bridge here is `curated`, which OUTRANKS the manufacturer on the kind ladder that names
+    a group. Its SKU is the surviving code and has just been declared stale -- so if the re-homing
+    only hides that code from the UNIONS, the retired component is built correctly and then named
+    after the survivor anyway. Both components then resolve to the same id and the final id-keyed
+    merge folds them straight back together, which reports the pair as `unresolved-supersession`:
+    the split is undone by the very step meant to publish it.
+
+    Measured on the live data (2026-07-30) for Mortisan Boneshaper and Boingrot Bounderz, whose
+    bridge is `legacy-catalog`. The pairs declared before them escaped only because their bridge
+    happened to be a `retailer`, which loses that rank to the manufacturer's own retired code.
+    """
+    members = [
+        obs("mfr-gw:old", sku="99120110001", ean=OLD_EAN, name="Widget"),
+        obs("mfr-gw:new", sku="99120110002", ean=NEW_EAN, name="Widget"),
+        # curated, so it wins every kind-ranked choice -- including which code names the group
+        obs("legacy:widget", sku="99120110002", ean=OLD_EAN, name="Widget"),
+    ]
+    split = join_observations(members, TAXONOMY, KINDS, Matches(supersessions=SUPERSESSION))
+
+    assert set(split.entities) == {"games-workshop/99120110001", "games-workshop/99120110002"}
+    # the bridge scans as the OLD barcode, so it belongs to the retired record
+    assert [m.key for m in split.entities["games-workshop/99120110001"]] == [
+        "legacy:widget",
+        "mfr-gw:old",
+    ]
+    assert [m.key for m in split.entities["games-workshop/99120110002"]] == ["mfr-gw:new"]
+    assert [c["type"] for c in split.ambiguous] == ["supersession-stale-code"]
 
 
 def test_forced_join_cannot_collapse_a_declared_supersession() -> None:
