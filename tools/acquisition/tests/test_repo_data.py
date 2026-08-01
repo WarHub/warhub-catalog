@@ -73,7 +73,8 @@ def test_every_paint_source_reaches_the_paint_catalog() -> None:
     happen to carry some paints, and they reach the paint catalog by a different bridge
     (gen_paint_barcodes.py); mfr-reaper is a paint source whose paint-set pages are not.
     """
-    _require_repo_data()
+    paths = _require_repo_data()
+    descriptors = load_descriptors(paths.sources)
     if not PAINT_HARVEST_BRIDGE.exists():
         pytest.skip("gen_paint_harvest.py not present (package tested outside the monorepo)")
     bridged = PAINT_HARVEST_BRIDGE.read_text(encoding="utf-8")
@@ -91,6 +92,14 @@ def test_every_paint_source_reaches_the_paint_catalog() -> None:
         ]
         paints = sum(1 for category in categories if category and "paint" in str(category))
         if paints and paints * 2 >= len(categories):
+            # It must ALSO be flagged `catalog: paints`, or the product resolver publishes every
+            # one of its paints a SECOND time as a product -- the duplication that flag exists to
+            # stop (measured once at 9 sources / 4,839 records).
+            descriptor = descriptors.get(source_dir.name)
+            assert descriptor is not None and descriptor.catalog == "paints", (
+                f"{source_dir.name} is paint-majority evidence but is not `catalog: paints`, so "
+                "the product resolver would publish its paints as products too."
+            )
             if f'read_observations("{source_dir.name}")' not in bridged:
                 unbridged.append(source_dir.name)
 
@@ -143,40 +152,3 @@ def test_repo_mappings_reference_only_known_taxonomy_slugs() -> None:
                 f"{path.name}: faction[{raw!r}] -> {slug!r} is not a known "
                 f"taxonomy/factions.yaml slug and is not listed under newFactions"
             )
-
-
-# Sources flagged `catalog: paints` are skipped by the product resolver, so the ONLY thing that
-# consumes them is a bridge in scripts/gen_paint_harvest.py. A source with neither is acquired on a
-# schedule and lands nowhere -- silently, because nothing errors. This pins that contract.
-_PAINT_SOURCES_WITHOUT_A_BRIDGE = {
-    # mfr-mr-hobby: 134 observations, and data/paints/brands/mr-hobby.yaml exists (imported by a
-    # different route), but gen_paint_harvest.py has no mr-hobby bridge -- so nothing consumes this
-    # source today. Pre-existing; recorded here so it is visible and so no NEW source joins it.
-    "mfr-mr-hobby",
-    # mfr-gw-webstore-paints: 331 Citadel paints with GW's own codes, pot sizes and launch dates.
-    # Bridging it would add only 3 catalog paints today (gen_paint_barcodes.py already reaches 297),
-    # so it is deliberately evidence-only for now. The Base/Layer codes it carries are the point.
-    "mfr-gw-webstore-paints",
-}
-
-
-def test_every_paint_source_is_consumed_by_a_harvest_bridge() -> None:
-    paths = _require_repo_data()
-    script = Path(__file__).resolve().parents[1] / "scripts" / "gen_paint_harvest.py"
-    if not script.exists():
-        pytest.skip("gen_paint_harvest.py not present")
-    text = script.read_text(encoding="utf-8")
-
-    paint_sources = {
-        source_id
-        for source_id, descriptor in load_descriptors(paths.sources).items()
-        if descriptor.catalog == "paints"
-    }
-    assert paint_sources, "expected at least one catalog: paints source"
-
-    unconsumed = {s for s in paint_sources if f'"{s}"' not in text and f"'{s}'" not in text}
-    assert unconsumed == _PAINT_SOURCES_WITHOUT_A_BRIDGE, (
-        f"paint sources with no harvest bridge changed: {sorted(unconsumed)}. A `catalog: paints` "
-        "source is skipped by the product resolver, so without a bridge its observations reach "
-        "neither catalog. Add a bridge, or add it to _PAINT_SOURCES_WITHOUT_A_BRIDGE with a reason."
-    )
