@@ -103,6 +103,10 @@ equivalences:
 - **Primary source:** [Arcturus5404/miniature-paints](https://github.com/Arcturus5404/miniature-paints) (MIT License)
 - **Volume & Packaging:** Deterministic from (brand, set) — e.g., Citadel Base = 12ml pot
 - **Vallejo EAN:** Computed from product code formula `8429551 + code + check digit`
+- **Retailer barcodes:** `stores/<brand>.yaml` — JAN/EAN snapshots keyed on the manufacturer's
+  own item code, for brands whose own site publishes no barcode anywhere (Mr Hobby). Taken on
+  demand by `gen_paint_store_barcodes.py`, configured in `store-sources.yaml`, and read offline
+  by the harvest bridge. Metadata-only: they fill a blank EAN, they never add a paint.
 - **Overrides:** Manual corrections in `overrides.yaml`
 - **Equivalences:** Cross-brand color matching using CIEDE2000 Delta E (close < 5, substitute < 10)
 

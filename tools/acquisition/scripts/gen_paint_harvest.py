@@ -10,10 +10,15 @@ Per-source ROLES (owner decision, 2026-07-23 — see
 docs/research/2026-07-23-paint-manufacturer-harvest-design.md):
 
 - catalog  (mfr-vallejo): may propose NEW paints (`additions`) and enrich existing ones.
-- metadata (mfr-armypainter, mfr-monument, mfr-turbodork, mfr-ak-interactive): storefronts
-  are never catalog-providers — matched products only fill blanks on EXISTING identities
-  (`enrich`: ean/imageUrl); unmatched paint-like products land in `candidates` (report-only,
-  ignored by C#) for a human to review.
+- metadata (mfr-armypainter, mfr-monument, mfr-turbodork, mfr-ak-interactive, mfr-mr-hobby):
+  storefronts are never catalog-providers — matched products only fill blanks on EXISTING
+  identities (`enrich`: ean/imageUrl); unmatched paint-like products land in `candidates`
+  (report-only, ignored by C#) for a human to review.
+
+Most bridges read one evidence directory. mr-hobby reads TWO inputs because no single source
+holds the join: the manufacturer site knows the codes but publishes no barcode, so the bridge
+unions it with data/paints/stores/mr-hobby.yaml — a committed RETAILER barcode snapshot taken
+on demand by gen_paint_store_barcodes.py (that script owns the network; this one never does).
 
 Output shape per brand file:
 
@@ -40,6 +45,7 @@ import yaml
 REPO = Path(__file__).resolve().parents[3]
 EVIDENCE_DIR = REPO / "data/evidence/products"
 BRANDS_DIR = REPO / "data/paints/brands"
+STORES_DIR = REPO / "data/paints/stores"
 OUT_DIR = REPO / "data/paints/harvest"
 
 # SM (Speedpaint Marker) deliberately excluded: markers share paint NAMES with the Speedpaint
@@ -104,6 +110,29 @@ def read_observations(source_id: str) -> list[dict]:
     return rows
 
 
+def read_store_barcodes(slug: str) -> list[dict]:
+    """`{sku, ean, name, url, store}` rows from data/paints/stores/<slug>.yaml -- the committed
+    retailer barcode snapshot produced on demand by gen_paint_store_barcodes.py. Empty when
+    absent: the snapshot is optional per brand, exactly like the evidence directories above."""
+    path = STORES_DIR / f"{slug}.yaml"
+    if not path.exists():
+        return []
+    data = (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get(slug) or {}
+    return data.get("items") or []
+
+
+def ean13_ok(value: str | None) -> bool:
+    """EAN/JAN-13 check digit. A retailer barcode is third-party keyed data: one transposed
+    digit would plant a barcode that resolves to a DIFFERENT product, and nothing downstream
+    re-checks it (the C# fills a blank Ean verbatim). Cheap gate, kept inline so this script
+    stays a pure-pyyaml script the workflow can run with `uv run --with pyyaml`."""
+    digits = str(value or "")
+    if len(digits) != 13 or not digits.isdigit():
+        return False
+    total = sum(int(d) * (3 if i % 2 else 1) for i, d in enumerate(digits[:12]))
+    return (10 - total % 10) % 10 == int(digits[12])
+
+
 class Catalog:
     """Existing brand catalog indexed for exact/normalized joins."""
 
@@ -116,9 +145,16 @@ class Catalog:
         self.by_code: dict[str, str] = {}
         self.by_name: dict[str, list[str]] = {}
         self.keys: set[str] = set()
+        # Keys more than one paint answers to. "{Name}|{Set}" is the C# applier's whole lookup,
+        # so an enrich entry on such a key lands on EVERY paint sharing it -- one ean copied
+        # onto two different bottles. Real in this data: mr-hobby ships Mr Color 20 and 323 both
+        # named "Light Blue". A bridge must route these to candidates, not enrich.
+        self.ambiguous: set[str] = set()
         for p in self.paints:
             s = (p.get("details") or {}).get("set") or ""
             key = f"{p['name']}|{s}"
+            if key in self.keys:
+                self.ambiguous.add(key)
             self.keys.add(key)
             code = str(p.get("productCode") or "")
             if code:
@@ -641,6 +677,195 @@ def bridge_reaper() -> BrandHarvest:
     return out
 
 
+# --- Mr Hobby (GSI Creos) ------------------------------------------------------------------
+# The manufacturer source is SERIES-level: mr-hobby.com has no per-colour page anywhere, so one
+# observation covers a whole range and its `sku` is the range STRING the site prints under
+# "Product Number" -- "C1~C189", "H1~110,151,301~340,511~515", "WC01-08,14-18". Expanding that
+# is deliberately the bridge's job (see the strategy docstring: evidence stays faithful to the
+# site, re-tuning the parse must never require a re-fetch). Separators are whatever the CMS
+# typed that day, including the fullwidth/Japanese forms.
+MRHOBBY_SEPARATORS = str.maketrans({"～": "~", "、": ",", "・": ",", "/": ","})
+MRHOBBY_TOKEN = re.compile(r"^([A-Z]*)(\d+)(?:\s*[~-]\s*([A-Z]*)(\d+))?$", re.IGNORECASE)
+# Widest real range is Mr.COLOR C1~C189; the cap only fires if a malformed string parses into a
+# nonsense span, which must fail loudly as "unparseable" rather than mint thousands of codes.
+MRHOBBY_MAX_SPAN = 400
+
+# Site code prefix -> the Arcturus base's own spelling. The base stores Mr Color and Mr Metal
+# Color codes as BARE digits ('74', '218') with the C/MC prefix implied, and spells the spray
+# range SP1 where the site prints S1 (both verified against data/paints/brands/mr-hobby.yaml).
+#
+# An alias is only applied to a code the MANUFACTURER's own ranges confirm (see bridge_mrhobby):
+# dropping a prefix is a claim about which range a number belongs to, and a retailer sku alone
+# cannot support it. aztoyhobby lists MC124/127/129/131/132 alongside the real MC211~219 metal
+# colours; mr-hobby.com publishes only MC211~219, so the stray MC1xx stay verbatim (-> no match
+# -> candidate) instead of aliasing onto Mr Color 124/127/131, three unrelated paints.
+MRHOBBY_CODE_ALIAS = {"C": "", "MC": "", "S": "SP"}
+
+# GS1 Japan prefix GSI Creos ships every Mr Hobby JAN under. data/catalog/taxonomy/
+# manufacturers.yaml deliberately pins NO gs1Prefixes for this brand (nothing was verifiable
+# from the manufacturer), so the gate lives here, next to the retailer data it guards: a
+# multi-vendor hobby store mis-keying a Tamiya or Gaia barcode onto a Mr Hobby listing is the
+# exact failure this catches, and a rejected row is reported as a candidate, never dropped.
+MRHOBBY_GS1_PREFIX = "4973028"
+
+
+def mrhobby_expand(raw: str | None) -> list[str] | None:
+    """'C1~C189' -> ['C1'...'C189']; 'WC01-08,14-18' -> ['WC01'...'WC08','WC14'...'WC18'].
+
+    The prefix carries across comma groups (the site drops it after the first: 'XAC01,02',
+    'SVC01~11,101'), and zero-padding follows the range's own lower bound ('WC01-08' pads to
+    two, 'H1~110' does not). None means "not a code string at all" -- the letter-only product
+    numbers ('LG', 'GGX') and anything the CMS typed freehand.
+    """
+    if not raw:
+        return None
+    codes: list[str] = []
+    prefix = ""
+    for token in str(raw).translate(MRHOBBY_SEPARATORS).split(","):
+        token = token.strip()
+        if not token:
+            continue
+        match = MRHOBBY_TOKEN.match(token)
+        if match is None:
+            return None
+        lo_prefix, lo, hi_prefix, hi = match.groups()
+        prefix = (lo_prefix or prefix).upper()
+        if hi is None:
+            codes.append(f"{prefix}{lo}")
+            continue
+        if hi_prefix and hi_prefix.upper() != prefix:
+            return None  # 'S1~151・SJ01・02'-style mixed spans: refuse rather than guess
+        start, end = int(lo), int(hi)
+        if end < start or end - start > MRHOBBY_MAX_SPAN:
+            return None
+        codes.extend(f"{prefix}{n:0{len(lo)}d}" for n in range(start, end + 1))
+    return codes or None
+
+
+def mrhobby_canonical(code: str) -> str:
+    """'NGA01' / 'NGA1' -> 'NGA1'. One spelling per code so the site's padding (which varies
+    range by range: 'WC01-08' but 'H1~110') never decides whether two codes are the same."""
+    match = re.fullmatch(r"([A-Z]*)(\d+)", code.upper())
+    return f"{match.group(1)}{int(match.group(2))}" if match else code.upper()
+
+
+def mrhobby_code_forms(code: str, *, alias_ok: bool = True) -> list[str]:
+    """Every spelling of one site code the base might store it under -- zero-stripped,
+    zero-padded-to-two and verbatim digits, under the aliased prefix FIRST and the site's own
+    prefix second.
+
+    Alias-first is load-bearing, not cosmetic. The Arcturus base duplicates three Mr.COLOR
+    singles into its "Mr Color Modulation Set" under their PREFIXED codes -- C38/C39/C40 are
+    the same bottles as bare 38/39/40 (Olive Drab 2, Dark Yellow, German Gray). Verbatim-first
+    would put the barcode on the set copy; alias-first puts it on the canonical single, which
+    is what the site's C<n> means everywhere.
+    """
+    match = re.fullmatch(r"([A-Z]*)(\d+)", code.upper())
+    forms: list[str] = []
+    if match is None:
+        return [code.upper()]
+    prefix, digits = match.groups()
+    number = int(digits)
+    alias = MRHOBBY_CODE_ALIAS.get(prefix) if alias_ok else None
+    prefixes = [prefix] if alias is None else [alias, prefix]
+    for candidate_prefix in prefixes:
+        for tail in (str(number), f"{number:02d}", digits):
+            form = f"{candidate_prefix}{tail}"
+            if form and form not in forms:
+                forms.append(form)
+    return forms
+
+
+def bridge_mrhobby() -> BrandHarvest:
+    """METADATA-ONLY, and a UNION of two sources that each hold half the join.
+
+    mr-hobby.com knows which codes exist (as ranges) but publishes no JAN/EAN, no per-colour
+    page and no hex, EN or JA -- so the manufacturer can never fill a field, and all 668
+    catalog paints sat EAN-less. A hobby retailer stocking the range publishes the JAN per
+    single, keyed by GSI's own item code (data/paints/stores/mr-hobby.yaml, snapshotted on
+    demand by gen_paint_store_barcodes.py). So: the manufacturer's expanded ranges CONFIRM the
+    identity and supply the canonical site code + series page for the audit trail, the store
+    supplies the barcode, and the join is EXACT on the code at both ends -- no fuzzy matching,
+    no name matching, nowhere.
+
+    No `additions`: neither source can name a new colour (the manufacturer publishes series
+    pages only, and a storefront is not a catalog-provider). Everything unmatched -- a whole
+    manufacturer range the catalog lacks, a store single, a barcode that fails its check digit
+    -- lands in `candidates` for a human, never in the catalog.
+    """
+    catalog = Catalog("mr-hobby")
+    out = BrandHarvest()
+
+    # Pass 1 -- manufacturer: expand every series range onto catalog identities.
+    confirmed: dict[str, tuple[str, str | None]] = {}  # identity key -> (site code, series url)
+    site_codes: set[str] = set()  # every code the manufacturer lists, in or out of the catalog
+    for o in read_observations("mfr-mr-hobby"):
+        codes = mrhobby_expand(o.get("sku"))
+        common = {"name": o["name"], "sku": o.get("sku") or None, "url": o.get("url"),
+                  "source": "mfr-mr-hobby"}
+        if codes is None:
+            out.candidates.append({**common, "reason": "product number is not a code range"})
+            continue
+        site_codes.update(mrhobby_canonical(code) for code in codes)
+        hits = 0
+        for code in codes:
+            form = next((f for f in mrhobby_code_forms(code) if f in catalog.by_code), None)
+            if form is None:
+                continue
+            hits += 1
+            confirmed.setdefault(catalog.by_code[form], (code, o.get("url")))
+        if hits == 0:
+            plural = "" if len(codes) == 1 else "s"
+            out.candidates.append(
+                {**common,
+                 "reason": f"manufacturer range absent from catalog ({len(codes)} code{plural})"}
+            )
+
+    # Pass 2 -- retailer: the barcode, onto identities the catalog already has.
+    for item in read_store_barcodes("mr-hobby"):
+        sku = str(item.get("sku") or "")
+        ean = str(item.get("ean") or "")
+        store = str(item.get("store") or "store")
+        common = {"name": item.get("name"), "sku": sku or None, "url": item.get("url"),
+                  "source": store}
+        # Manufacturer-corroborated codes may use the prefix alias; store-only ones may not.
+        corroborated = mrhobby_canonical(sku) in site_codes
+        form = next(
+            (f for f in mrhobby_code_forms(sku, alias_ok=corroborated) if f in catalog.by_code),
+            None,
+        )
+        if form is None:
+            out.candidates.append(
+                {**common,
+                 "reason": "manufacturer range not in catalog" if corroborated
+                 else "store-only code (marker/tool/finish, or a range the catalog lacks)"}
+            )
+            continue
+        if not ean13_ok(ean) or not ean.startswith(MRHOBBY_GS1_PREFIX):
+            out.candidates.append({**common, "reason": f"rejected barcode {ean or '(none)'}"})
+            continue
+        key = catalog.by_code[form]
+        if key in catalog.ambiguous:
+            # Two paints answer to this "{Name}|{Set}" (Mr Color 20 and 323 are both "Light
+            # Blue"). The C# fills BOTH from one entry, so enriching would plant this barcode
+            # on a bottle it does not belong to. Report the collision instead.
+            out.candidates.append(
+                {**common, "reason": f"ambiguous catalog identity ({key}) -- barcode {ean}"}
+            )
+            continue
+        site_code, series_url = confirmed.get(key, (None, None))
+        out.add_enrich(
+            key,
+            ean=ean,
+            # Prefer the MANUFACTURER's own spelling and page when its ranges cover this code:
+            # the store is the barcode's source, but the site is the authority on the identity.
+            sku=site_code or sku,
+            sourceUrl=series_url or item.get("url"),
+            source=f"mfr-mr-hobby+{store}" if site_code else store,
+        )
+    return out
+
+
 BRIDGES = {
     "vallejo": bridge_vallejo,
     "ak-interactive": bridge_ak,
@@ -650,6 +875,7 @@ BRIDGES = {
     "scale75": bridge_scale75,
     "green-stuff-world": bridge_gsw,
     "reaper": bridge_reaper,
+    "mr-hobby": bridge_mrhobby,
 }
 
 

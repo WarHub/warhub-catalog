@@ -1,0 +1,28 @@
+# Retailer barcode snapshots per paint brand -- input to
+# tools/acquisition/scripts/gen_paint_store_barcodes.py (on-demand, network) whose committed
+# output under data/paints/stores/ is read offline by gen_paint_harvest.py.
+#
+# Only add a store here for a brand whose OWN site publishes no barcode: retailers are
+# metadata-only, and a manufacturer source always outranks them. Stores are listed in trust
+# order -- the first store to publish a given item code wins that code.
+
+mr-hobby:
+  # mr-hobby.com is series-level ("Mr.COLOR C1~C189" is ONE page) and carries no JAN/EAN, no
+  # per-colour page and no hex chip anywhere, EN or JA (live-probed 2026-07-24; see
+  # data/catalog/sources/mfr-mr-hobby.yaml and the manufacturers.yaml note that deliberately
+  # pins no gs1Prefixes for this brand). Every one of the 668 catalog paints was therefore
+  # EAN-less. Hobby retailers stocking the range publish the JAN per single, keyed by GSI's
+  # own item code -- so the join is exact, on the code, with no fuzzy matching anywhere.
+  stores:
+    - id: aztoyhobby
+      platform: shopify
+      baseUrl: https://aztoyhobby.com
+      # robots.txt (fetched 2026-08-01) is `User-agent: * / Allow: /` with no crawl-delay and
+      # no AI-crawler group; only account/cart/checkout paths are restricted, none of which
+      # this scan touches. Barcodes are 100% populated on the JAN-carrying singles (sampled
+      # 25/25 on the first probe), all under GS1 Japan prefix 4973028 (GSI Creos).
+      rps: 1.0
+      # Multi-vendor store (8,913 products, 41 vendors): Bandai, AK Interactive, Tamiya,
+      # Vallejo, ... -- scope to the brand, then to paints, before spending detail requests.
+      vendors: [Mr. Hobby]
+      includeTypes: [Paint]

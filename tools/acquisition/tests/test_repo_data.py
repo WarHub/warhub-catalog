@@ -5,6 +5,7 @@ Uses a repo-root fixture rather than a package-relative one: this package can be
 tested outside the monorepo (sdist), where ../../../../data does not exist -- skip cleanly
 in that case instead of failing.
 """
+import json
 from pathlib import Path
 
 import pytest
@@ -16,7 +17,9 @@ from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.yamlio import read_yaml
 
-REPO_DATA = Path(__file__).resolve().parents[3] / "data"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+REPO_DATA = REPO_ROOT / "data"
+PAINT_HARVEST_BRIDGE = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
 
 
 def _require_repo_data() -> DataPaths:
@@ -54,6 +57,47 @@ def test_repo_matches_and_overrides_parse_when_present() -> None:
         Matches.model_validate(read_yaml(paths.matches))
     if paths.overrides.exists():
         Overrides.model_validate(read_yaml(paths.overrides))
+
+
+def test_every_paint_source_reaches_the_paint_catalog() -> None:
+    """A harvested paint source that no bridge reads is evidence nobody consumes.
+
+    Paint sources are deliberately excluded from the product catalog, so `gen_paint_harvest.py`
+    is their ONLY route into anything published: if no bridge calls `read_observations` for a
+    source id, its committed observations reach neither catalog and the harvest was wasted
+    politeness. This is a contract, not a report -- a new paint source must land with its bridge
+    (or, if the bridge genuinely cannot be written yet, the evidence should not be committed).
+
+    "Paint source" = most of its observations are paint-kind. The ratio matters: mfr-gw-trade
+    (346 paints in a 6,914-row trade workbook) and legacy-catalog are product sources that
+    happen to carry some paints, and they reach the paint catalog by a different bridge
+    (gen_paint_barcodes.py); mfr-reaper is a paint source whose paint-set pages are not.
+    """
+    _require_repo_data()
+    if not PAINT_HARVEST_BRIDGE.exists():
+        pytest.skip("gen_paint_harvest.py not present (package tested outside the monorepo)")
+    bridged = PAINT_HARVEST_BRIDGE.read_text(encoding="utf-8")
+
+    evidence_dir = REPO_DATA / "evidence" / "products"
+    unbridged = []
+    for source_dir in sorted(p for p in evidence_dir.iterdir() if p.is_dir()):
+        path = source_dir / "observations.jsonl"
+        if not path.exists():
+            continue
+        categories = [
+            (json.loads(line).get("hints") or {}).get("category")
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        paints = sum(1 for category in categories if category and "paint" in str(category))
+        if paints and paints * 2 >= len(categories):
+            if f'read_observations("{source_dir.name}")' not in bridged:
+                unbridged.append(source_dir.name)
+
+    assert not unbridged, (
+        f"paint sources with no bridge in {PAINT_HARVEST_BRIDGE.name}: {unbridged} -- their "
+        "observations reach neither the product catalog nor data/paints/"
+    )
 
 
 def test_repo_mappings_parse_when_present() -> None:
