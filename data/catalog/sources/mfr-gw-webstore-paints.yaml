@@ -1,0 +1,51 @@
+id: mfr-gw-webstore-paints
+kind: manufacturer
+# Feeds the PAINT catalog, not the product one. Without this the resolver would publish all 331
+# Citadel paints a SECOND time as products -- the exact duplication the `catalog` flag was added to
+# stop (9 sources, 4,839 records). No harvest/barcode bridge consumes it YET: measured against the
+# existing gen_paint_barcodes.py coverage it would add only 3 catalog paints today, so it is
+# recorded as a known no-bridge source rather than pretending otherwise. Its value is the data the
+# trade sheets do NOT have -- GW's CURRENT single-pot codes for Base and Layer (trade knows those
+# ranges only under 6-pack trade units), pot sizes and launch dates.
+catalog: paints
+strategy: gw-webstore-paints
+baseUrl: https://www.warhammer.com
+scope:
+  # GW's storefront carries no per-product vendor/brand field (this whole index IS Games
+  # Workshop's own catalog) -- same situation as mfr-gw-algolia / mfr-gw-trade / arc-gw-webstore,
+  # so the manufacturer is pinned here and resolved through Taxonomy.manufacturer_for_vendor.
+  # Must be the vendor NAME string, not the taxonomy slug -- manufacturer_for_vendor looks up
+  # name/vendorNames, not slugs.
+  manufacturer: Games Workshop
+politeness:
+  # 2s spacing. Two different hosts are touched and the slower one sets the pace: the roster is
+  # four cheap POSTs to Algolia (mfr-gw-algolia runs the same index at this rps), but each
+  # _next/data detail fetch pulls ~370KB off GW's own edge and measured ~1.3s wall-clock even
+  # unthrottled. ALWAYS run this with --budget: like the other paint sources this is a one-off
+  # snapshot, not a scheduled crawl (it is deliberately absent from catalog-acquire.yml's matrix,
+  # same as mfr-mr-hobby / mfr-vallejo), and an unbudgeted detail sweep of all 331 paints moves
+  # ~120MB to add 2 pot sizes and the launch dates. The roster is never budgeted, so even
+  # --budget 0 still observes the full population.
+  rps: 0.5
+  # 370KB payloads off a host that is slow under load; 30s (the client default) is tight.
+  timeoutSeconds: 60
+  # NO ignoreRobots, deliberately, unlike mfr-gw-algolia. www.warhammer.com/robots.txt is
+  # `Allow: /` (plus an explicit `Allow: /app/resources/catalog/product/*`) and disallows only
+  # `/*/cart` and `/*?search*` -- neither the `_next/data` JSON routes nor the Algolia query URL
+  # matches a disallow rule, so the per-request robots check in PoliteClient passes on its own
+  # merits and must stay switched on. Site SEARCH is disallowed, which is why the roster comes
+  # from the productType facet rather than a search query. Verified live 2026-08-01; the
+  # robots-advertised sitemap.xml 404s.
+contract:
+  # Evidence-based floor from the full live sweep, 2026-08-01: the productType:paint facet
+  # reports nbHits 331 (Layer 93, Contrast 61, Base 57, Air 45, Dry 23, Technical 21, Shade 19,
+  # Spray 12). Floored at floor(0.85 * 331) = 281 per the same "honest floor" policy
+  # mfr-gw-algolia.yaml records, leaving room for GW retiring a range without failing the run.
+  minCount: 281
+  maxDropPct: 30
+  requiredFieldRates:
+    # Both are gated before emission -- a hit with no parseable 11-digit product code or no name
+    # is counted in stats.skipped_no_product_code and never emitted with a null. These are
+    # therefore 1.0 by construction, and a drop below it means the index schema changed.
+    name: 1.0
+    sku: 1.0

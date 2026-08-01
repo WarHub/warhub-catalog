@@ -746,3 +746,61 @@ def test_http_cache_off_by_default(monkeypatch) -> None:
     client.get_json("/x")
     client.get_json("/x")
     assert calls["n"] == 2  # no caching -> both calls hit the transport
+
+
+def test_allow_statuses_returns_the_body_instead_of_raising() -> None:
+    """Opt-in escape from the FetchError contract, for endpoints whose ERROR page is the data.
+
+    Added for gw-webstore-paints: warhammer.com bot-walls every HTML route, so the only readable
+    copy of its rotating Next.js buildId is the body of a deliberately provoked 404.
+    """
+    client = PoliteClient(
+        "https://example.test",
+        transport=httpx.MockTransport(lambda r: httpx.Response(404, text="buildId: abc123")),
+        sleep=lambda s: None,
+    )
+    response = client.get_response("/missing", allow_statuses=(404,))
+    assert response.status_code == 404
+    assert "abc123" in response.text
+
+    # A status is only waived when the caller asks; the default is unchanged.
+    with pytest.raises(FetchError):
+        client.get_response("/missing")
+
+
+def test_allow_statuses_does_not_waive_rate_limits_or_server_errors() -> None:
+    """429/5xx are matched BEFORE the waiver, so their retry+backoff path cannot be opted out of
+    -- otherwise a caller could silently turn a throttle into 'data'."""
+    for status in (429, 503):
+        calls = {"n": 0}
+
+        def handler(request: httpx.Request, status: int = status) -> httpx.Response:
+            calls["n"] += 1
+            return httpx.Response(status, text="slow down")
+
+        client = PoliteClient(
+            "https://example.test",
+            transport=httpx.MockTransport(handler),
+            sleep=lambda s: None,
+        )
+        with pytest.raises(FetchError):
+            client.get_response("/x", allow_statuses=(status,))
+        assert calls["n"] > 1, f"{status} must still be retried, not handed back as a body"
+
+
+def test_allow_statuses_response_is_never_cached(tmp_path, monkeypatch) -> None:
+    """The cache replays every stored entry as a 200; storing an error page there would turn it
+    into an apparent success for a later caller."""
+    monkeypatch.setenv("WARHUB_HTTP_CACHE_DIR", str(tmp_path / "cache"))
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        return httpx.Response(404, text="error page")
+
+    client = PoliteClient(
+        "https://example.test", transport=httpx.MockTransport(handler), sleep=lambda s: None,
+    )
+    client.get_response("/missing", allow_statuses=(404,))
+    client.get_response("/missing", allow_statuses=(404,))
+    assert calls["n"] == 2  # re-fetched, not replayed from disk

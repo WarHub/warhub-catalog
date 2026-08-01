@@ -241,6 +241,7 @@ class PoliteClient:
         method: str = "GET",
         json_body: object | None = None,
         headers: dict | None = None,
+        allow_statuses: tuple[int, ...] = (),
     ) -> httpx.Response:
         # Per-request robots.txt enforcement -- BEFORE pacing/sending, and before the retry loop
         # (the target URL doesn't change across retries, so there's nothing to re-check). This is
@@ -290,6 +291,16 @@ class PoliteClient:
                     continue
                 raise FetchError(url, last_status)
 
+            if response.status_code in allow_statuses:
+                # The caller declared this status a legitimate, body-bearing outcome rather than a
+                # failure, so hand the response back instead of raising. Added for the
+                # gw-webstore-paints strategy, whose ONLY way to learn warhammer.com's rotating
+                # Next.js buildId is the body of a deliberate 404 (every HTML route is behind a
+                # bot wall; see that module's docstring). Deliberately narrow: 429/5xx are matched
+                # earlier, so their retry/backoff behaviour is untouched and cannot be waived, and
+                # the default `()` leaves every existing caller byte-identical.
+                return response
+
             if not (200 <= response.status_code < 300):
                 # Any other non-2xx (404, and — per the goblingaming incident — a
                 # 301 redirect with follow_redirects off) is not a politeness/transient
@@ -318,7 +329,11 @@ class PoliteClient:
         raise FetchError(url, last_status)  # unreachable safeguard
 
     def get_response(
-        self, url: str, params: dict | None = None, headers: dict | None = None
+        self,
+        url: str,
+        params: dict | None = None,
+        headers: dict | None = None,
+        allow_statuses: tuple[int, ...] = (),
     ) -> httpx.Response:
         """Like `get_json`/`get_text` but returns the full response (headers + body).
 
@@ -332,12 +347,18 @@ class PoliteClient:
         `headers` mirrors `post_json`'s parameter of the same name: per-request extra headers
         merged over the client's own (added for the gw-trade-sheets strategy, whose media API
         requires a public, rotating `X-WP-Nonce` header on GET -- see that module's docstring).
+
+        `allow_statuses` opts specific non-2xx statuses out of the FetchError contract so their
+        BODY can be read (see `_request`). Such a response is never written to the offline cache:
+        the cache replays everything it holds as a 200, which would silently turn a
+        deliberately-fetched error page into an apparent success for some later caller.
         """
         cached = self._cache_read("GET", url, params)
         if cached is not None:
             return cached
-        response = self._request(url, params, headers=headers)
-        self._cache_write("GET", url, params, response)
+        response = self._request(url, params, headers=headers, allow_statuses=allow_statuses)
+        if 200 <= response.status_code < 300:
+            self._cache_write("GET", url, params, response)
         return response
 
     def get_json_response(

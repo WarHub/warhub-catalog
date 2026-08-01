@@ -109,6 +109,10 @@ _PAINT_SOURCES_WITHOUT_A_BRIDGE = {
     # different route), but gen_paint_harvest.py has no mr-hobby bridge -- so nothing consumes this
     # source today. Pre-existing; recorded here so it is visible and so no NEW source joins it.
     "mfr-mr-hobby",
+    # mfr-gw-webstore-paints: 331 Citadel paints with GW's own codes, pot sizes and launch dates.
+    # Bridging it would add only 3 catalog paints today (gen_paint_barcodes.py already reaches 297),
+    # so it is deliberately evidence-only for now. The Base/Layer codes it carries are the point.
+    "mfr-gw-webstore-paints",
 }
 
 
