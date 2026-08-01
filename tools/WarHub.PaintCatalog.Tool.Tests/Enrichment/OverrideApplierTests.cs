@@ -158,4 +158,30 @@ public class OverrideApplierTests
         File.WriteAllText(path, yaml);
         return path;
     }
+
+    [Fact]
+    public void Override_can_retire_a_paint_the_source_still_lists()
+    {
+        // Discontinuation is an ABSENCE -- the upstream source just stops listing a paint and the
+        // manufacturer bridge is built from trade rows that no longer contain it -- so nothing in
+        // the pipeline can assert it. A researched decision recorded here is the only route.
+        string path = WriteTempOverrides("citadel-colour:\n  Mephiston Red|Base:\n    isDiscontinued: true\n");
+
+        IReadOnlyList<Paint> result = OverrideApplier.Apply(SamplePaints, "citadel-colour", path);
+
+        Assert.True(result.Single(p => p.Name == "Mephiston Red").IsDiscontinued);
+        Assert.False(result.Single(p => p.Name == "Abaddon Black").IsDiscontinued);
+    }
+
+    [Fact]
+    public void Override_can_also_contradict_a_retirement_the_source_asserted()
+    {
+        // Authoritative both ways. `bool?` distinguishes an absent key from an explicit `false`,
+        // so writing `false` is a deliberate claim that the source is wrong -- the same contract
+        // every other overridable field has.
+        IReadOnlyList<Paint> retired = [SamplePaints[0] with { IsDiscontinued = true }];
+        string path = WriteTempOverrides("citadel-colour:\n  Mephiston Red|Base:\n    isDiscontinued: false\n");
+
+        Assert.False(OverrideApplier.Apply(retired, "citadel-colour", path).Single().IsDiscontinued);
+    }
 }

@@ -70,6 +70,10 @@ public static class OverrideApplier
                 // Non-destructive: an override that supplies a NEW primary keeps the barcode it
                 // displaced (plus any the override itself lists) instead of dropping it.
                 AdditionalEans = BarcodeSet.Union(over.Ean ?? p.Ean, p.AdditionalEans, over.AdditionalEans, [p.Ean]),
+                // Authoritative in BOTH directions, like every other field here: `bool?` makes an
+                // explicit `false` distinguishable from an absent key, so writing one is a
+                // deliberate statement that the source is wrong, not an accident.
+                IsDiscontinued = over.IsDiscontinued ?? p.IsDiscontinued,
             };
         }).ToList();
     }
@@ -108,6 +112,15 @@ public record PaintOverride
     /// `additionalEans` is silently discarded by IgnoreUnmatchedProperties at parse time.
     /// </summary>
     public List<string>? AdditionalEans { get; init; }
+
+    /// <summary>
+    /// Marks a paint the manufacturer no longer sells, which drives `status: discontinued` and
+    /// `availability: out_of_stock` via PaintRecordMapper. It exists as an override because
+    /// discontinuation is an ABSENCE -- the upstream source simply stops listing a paint, and the
+    /// manufacturer bridge is built from trade rows that by definition no longer contain it, so
+    /// neither can assert it. A researched, cited decision recorded as data is the honest shape.
+    /// </summary>
+    public bool? IsDiscontinued { get; init; }
 }
 
 /// <summary>Barcode-set helpers shared by the enrichers and the reconciler.</summary>

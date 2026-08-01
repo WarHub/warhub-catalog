@@ -1,7 +1,7 @@
 thresholds:
   close: 5
   substitute: 10
-totalEntries: 7992
+totalEntries: 7959
 equivalences:
 - source:
     brand: AK Interactive
@@ -312,7 +312,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Ironbreaker
-      set: Air
+      set: Layer
       hex: '#899092'
     deltaE: 2.54
     tier: close
@@ -5491,7 +5491,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.36
     tier: close
@@ -16788,7 +16788,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Straken Green
-      set: Air
+      set: Layer
       hex: '#597F1C'
     deltaE: 2.5
     tier: close
@@ -21359,14 +21359,6 @@ equivalences:
     deltaE: 0.81
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Sigismund Yellow Clear
-      set: Air
-      hex: '#FFE32F'
-    deltaE: 0.81
-    tier: close
-  - paint:
       brand: Mission Models
       brandSlug: mission-models
       name: Yellow
@@ -21374,6 +21366,14 @@ equivalences:
       set: Mission Models
       hex: '#FCDE09'
     deltaE: 0.82
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Phalanx Yellow
+      set: Layer
+      hex: '#FFE200'
+    deltaE: 0.89
     tier: close
   - paint:
       brand: Army Painter
@@ -30458,7 +30458,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 1.93
     tier: close
@@ -32947,14 +32947,6 @@ equivalences:
     deltaE: 0.94
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 1.17
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: RLM66 Black Gray A
@@ -32962,6 +32954,14 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#1F1E1D'
     deltaE: 1.19
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Primer Black
+      set: Gloss Surface
+      hex: '#202020'
+    deltaE: 1.54
     tier: close
 - source:
     brand: AK Interactive
@@ -33785,7 +33785,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 3.21
     tier: close
@@ -37459,7 +37459,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 3.49
     tier: close
@@ -37608,7 +37608,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.46
     tier: close
@@ -40296,7 +40296,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 1.95
     tier: close
@@ -43372,14 +43372,6 @@ equivalences:
     deltaE: 2.48
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
-    deltaE: 3.14
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Diabolic Plum
@@ -43404,6 +43396,14 @@ equivalences:
       set: Dipping Inks
       hex: '#533968'
     deltaE: 4.74
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beaten Purple
+      set: Privateer Press Formula P3
+      hex: '#552A72'
+    deltaE: 4.75
     tier: close
 - source:
     brand: AK Interactive
@@ -50131,14 +50131,6 @@ equivalences:
     deltaE: 2.49
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.66
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Burnt Orange
@@ -50146,6 +50138,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E18749'
     deltaE: 3.26
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Brown Skin
+      productCode: SDP-05
+      set: Drop & Paint
+      hex: '#EB8D4E'
+    deltaE: 3.34
     tier: close
 - source:
     brand: AK Interactive
@@ -59826,14 +59827,6 @@ equivalences:
     hex: '#EBC691'
   matches:
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Relictor Gold
-      set: Air
-      hex: '#EAC58F'
-    deltaE: 0.36
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Pale Sand
@@ -59850,6 +59843,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#F2CE9A'
     deltaE: 1.91
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Cassandora Yellow
+      set: Shade
+      hex: '#F5CC92'
+    deltaE: 2.03
     tier: close
   - paint:
       brand: Foundry
@@ -59878,14 +59879,6 @@ equivalences:
     hex: '#EBC691'
   matches:
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Relictor Gold
-      set: Air
-      hex: '#EAC58F'
-    deltaE: 0.36
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Pale Sand
@@ -59902,6 +59895,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#F2CE9A'
     deltaE: 1.91
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Cassandora Yellow
+      set: Shade
+      hex: '#F5CC92'
+    deltaE: 2.03
     tier: close
   - paint:
       brand: Foundry
@@ -69201,7 +69202,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 3.64
     tier: close
@@ -69253,7 +69254,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 3.64
     tier: close
@@ -69508,7 +69509,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.46
     tier: close
@@ -69559,7 +69560,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.46
     tier: close
@@ -73175,14 +73176,6 @@ equivalences:
     deltaE: 0.74
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.79
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Black Ink
@@ -73198,6 +73191,14 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#1F1E1D'
     deltaE: 1.25
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Abyssal Black
+      set: D&D Nolzur's Marvelous Pigments
+      hex: '#21201D'
+    deltaE: 1.31
     tier: close
 - source:
     brand: AK Real Color
@@ -73225,14 +73226,6 @@ equivalences:
     deltaE: 0.74
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.79
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Black Ink
@@ -73248,6 +73241,14 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#1F1E1D'
     deltaE: 1.25
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Abyssal Black
+      set: D&D Nolzur's Marvelous Pigments
+      hex: '#21201D'
+    deltaE: 1.31
     tier: close
 - source:
     brand: AK Real Color
@@ -74058,7 +74059,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 2.65
     tier: close
@@ -75840,12 +75841,12 @@ equivalences:
     deltaE: 1.56
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 1.92
+      brand: Scale75
+      brandSlug: scale75
+      name: Black Ink
+      set: Artist Range
+      hex: '#1B1A18'
+    deltaE: 1.98
     tier: close
 - source:
     brand: Army Painter
@@ -82687,7 +82688,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 5.43
     tier: substitute
@@ -84434,12 +84435,13 @@ equivalences:
     deltaE: 3.75
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
-    deltaE: 3.86
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Violet -70-
+      productCode: AK3094
+      set: Figures
+      hex: '#543A7B'
+    deltaE: 4.02
     tier: close
 - source:
     brand: Army Painter
@@ -87703,12 +87705,13 @@ equivalences:
     deltaE: 2.45
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.48
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Orange Yellow
+      productCode: 58
+      set: Mr Color
+      hex: '#EE7800'
+    deltaE: 2.58
     tier: close
 - source:
     brand: Army Painter
@@ -90997,7 +91000,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Calgar Blue
-      set: Air
+      set: Layer
       hex: '#2A497F'
     deltaE: 1.77
     tier: close
@@ -91120,12 +91123,13 @@ equivalences:
     deltaE: 2.36
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 2.36
+      brand: Foundry
+      brandSlug: foundry
+      name: Blackened Barrel
+      productCode: 105B
+      set: Foundry Paint System
+      hex: '#191919'
+    deltaE: 2.91
     tier: close
 - source:
     brand: Army Painter
@@ -91966,7 +91970,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Calgar Blue
-      set: Air
+      set: Layer
       hex: '#2A497F'
     deltaE: 1.86
     tier: close
@@ -92014,14 +92018,6 @@ equivalences:
     deltaE: 1.9
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
-    deltaE: 2.27
-    tier: close
-  - paint:
       brand: Monument (Pro Acryl)
       brandSlug: monument-pro-acryl
       name: Purple
@@ -92047,6 +92043,14 @@ equivalences:
       set: Premium Airbrush Color
       hex: '#693E76'
     deltaE: 4.25
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beaten Purple
+      set: Privateer Press Formula P3
+      hex: '#552A72'
+    deltaE: 4.56
     tier: close
 - source:
     brand: Army Painter
@@ -95443,20 +95447,21 @@ equivalences:
     deltaE: 2.2
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 2.64
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Warm Grey 5
       set: Layer paints
       hex: '#1E1D1B'
     deltaE: 2.68
+    tier: close
+  - paint:
+      brand: Humbrol
+      brandSlug: humbrol
+      name: Dark Green
+      productCode: S163
+      set: Humbrol Aerosol Sprays - Satin
+      hex: '#1C1D15'
+    deltaE: 2.77
     tier: close
 - source:
     brand: Army Painter
@@ -97571,14 +97576,6 @@ equivalences:
     deltaE: 0.79
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Sigismund Yellow Clear
-      set: Air
-      hex: '#FFE32F'
-    deltaE: 2.02
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Lemon Yellow
@@ -97595,6 +97592,15 @@ equivalences:
       set: Drop & Paint
       hex: '#F8DE53'
     deltaE: 2.16
+    tier: close
+  - paint:
+      brand: Humbrol
+      brandSlug: humbrol
+      name: Yellow
+      productCode: S69
+      set: Humbrol Aerosol Sprays
+      hex: '#FCDA06'
+    deltaE: 2.45
     tier: close
 - source:
     brand: Army Painter
@@ -104031,7 +104037,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Calgar Blue
-      set: Air
+      set: Layer
       hex: '#2A497F'
     deltaE: 1.96
     tier: close
@@ -105816,7 +105822,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 2.14
     tier: close
@@ -108261,7 +108267,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Calgar Blue
-      set: Air
+      set: Layer
       hex: '#2A497F'
     deltaE: 2.09
     tier: close
@@ -116466,55 +116472,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Balor Brown
-    set: Air
-    hex: '#875408'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: British Uniform
-      productCode: AK17076
-      set: Quick Gen
-      hex: '#88591B'
-    deltaE: 2.26
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Light Tone
-      set: Warpaints Fanatic Wash
-      hex: '#7F5216'
-    deltaE: 2.57
-    tier: close
-  - paint:
-      brand: Kimera Kolors
-      brandSlug: kimera-kolors
-      name: Golden Brown
-      set: Kimera Kolors Danilo Cartacci Signature Set
-      hex: '#885A1E'
-    deltaE: 2.72
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Viking Gold
-      set: Metal N Alchemy Range
-      hex: '#8D591F'
-    deltaE: 3.28
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Butter Fudge Shade
-      productCode: 55A
-      set: Foundry Paint System
-      hex: '#915203'
-    deltaE: 3.36
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Balthasar Gold
     set: Air
     hex: '#A77353'
@@ -117425,57 +117382,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Caledor Sky
-    set: Air
-    hex: '#366699'
-  matches:
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: High Elf Blue
-      productCode: 117
-      set: Fantasy Range
-      hex: '#3D6799'
-    deltaE: 1.13
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Stratos Blue
-      set: Warpaints Fanatic
-      hex: '#33658F'
-    deltaE: 2.14
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Blue
-      productCode: 69.019
-      set: Mecha Color
-      hex: '#44689C'
-    deltaE: 2.63
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Forest Blue
-      productCode: SDP-32
-      set: Drop & Paint
-      hex: '#3363AB'
-    deltaE: 2.76
-    tier: close
-  - paint:
-      brand: Turbo Dork
-      brandSlug: turbo-dork
-      name: Wavelength
-      productCode: TDK015847_1
-      set: Turbo Dork
-      hex: '#476A9C'
-    deltaE: 3.07
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Caledor Sky
     set: Base
     hex: '#366699'
   matches:
@@ -117522,58 +117428,6 @@ equivalences:
       set: Turbo Dork
       hex: '#476A9C'
     deltaE: 3.07
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Calgar Blue
-    set: Air
-    hex: '#2A497F'
-  matches:
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Medium Blue
-      productCode: AMIG0103
-      set: Acrylics
-      hex: '#294888'
-    deltaE: 1.48
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Griffon Blue
-      productCode: WP1429
-      set: Warpaints
-      hex: '#20477A'
-    deltaE: 1.77
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Flat blue
-      productCode: XF-8
-      set: Acrylics Mini Flat
-      hex: '#284C7B'
-    deltaE: 1.84
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Royal Blue
-      productCode: 70.809
-      set: Model Color
-      hex: '#1A427D'
-    deltaE: 2.52
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Sapphire Blue
-      productCode: 9016
-      set: Master Series Paints Core Colors
-      hex: '#29458F'
-    deltaE: 3.14
     tier: close
 - source:
     brand: Citadel Colour
@@ -118042,57 +117896,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Castellax Bronze
-    set: Air
-    hex: '#C68351'
-  matches:
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Billous Brown
-      productCode: 130
-      set: Fantasy Range
-      hex: '#C98651'
-    deltaE: 1.22
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Wild Beast
-      set: Instant Colors Range
-      hex: '#CA854E'
-    deltaE: 1.39
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Elf Skin Tone
-      productCode: 72.004
-      set: Game Color
-      hex: '#CA8854'
-    deltaE: 1.65
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Orange Tan
-      productCode: AK3022
-      set: Figures
-      hex: '#CC864A'
-    deltaE: 2.54
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Oriental Flesh Shade
-      productCode: 122A
-      set: Foundry Paint System
-      hex: '#C17E54'
-    deltaE: 2.73
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Castellax Bronze
     set: Layer
     hex: '#C68351'
   matches:
@@ -118345,56 +118148,6 @@ equivalences:
       set: Foundry Paint System
       hex: '#000000'
     deltaE: 0
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Chemos Purple
-    set: Air
-    hex: '#4F356C'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Hive Dweller Purple
-      set: Speedpaint Set 2.0
-      hex: '#57366B'
-    deltaE: 2.27
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Nightshade Purple Dip
-      productCode: 4231
-      set: Dipping Inks
-      hex: '#533968'
-    deltaE: 2.46
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Violet -70-
-      productCode: AK3094
-      set: Figures
-      hex: '#543A7B'
-    deltaE: 3.14
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Violet
-      productCode: 62.008
-      set: Premium Airbrush Color
-      hex: '#534078'
-    deltaE: 3.65
-    tier: close
-  - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Beaten Purple
-      set: Privateer Press Formula P3
-      hex: '#552A72'
-    deltaE: 4.32
     tier: close
 - source:
     brand: Citadel Colour
@@ -119367,57 +119120,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Death Korps Drab
-    set: Air
-    hex: '#3D4539'
-  matches:
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Black Green Stone Dip
-      set: Dipping Inks
-      hex: '#3E4639'
-    deltaE: 0.56
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: RLM71 Dark Green
-      productCode: H64
-      set: Aqueous Hobby Color
-      hex: '#3D4437'
-    deltaE: 0.72
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: IJA Midouri Green
-      productCode: 71.134
-      set: Model Air
-      hex: '#3E483D'
-    deltaE: 1.36
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Russian Dark Green 4BO FS 34079
-      productCode: MMP-031
-      set: Mission Models
-      hex: '#3D4335'
-    deltaE: 1.45
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Protective Green
-      productCode: AK750
-      set: AFV
-      hex: '#43493B'
-    deltaE: 1.93
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Death Korps Drab
     set: Base
     hex: '#3D4539'
   matches:
@@ -119514,106 +119216,6 @@ equivalences:
       set: Wash FX
       hex: '#B65A45'
     deltaE: 3.11
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Deathclaw Brown
-    set: Air
-    hex: '#AF634F'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Nomad Flesh
-      set: Warpaints Air
-      hex: '#B3614B'
-    deltaE: 1.25
-    tier: close
-  - paint:
-      brand: Humbrol
-      brandSlug: humbrol
-      name: Rust
-      productCode: 113
-      set: Humbrol Acrylics - Matt
-      hex: '#AE6A57'
-    deltaE: 2.34
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Swamp Brown
-      set: Intensity Ink
-      hex: '#A85D46'
-    deltaE: 2.74
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Shoanti Sienna
-      productCode: 89542
-      set: Master Series Paints Pathfinder
-      hex: '#BA6954'
-    deltaE: 3
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Dark Rust
-      productCode: 76.507
-      set: Wash FX
-      hex: '#B65A45'
-    deltaE: 3.11
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Deathshroud Clear
-    set: Air
-    hex: '#1C1C1B'
-  matches:
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Satin Black
-      productCode: AMIG0032
-      set: Acrylics
-      hex: '#1C1C1C'
-    deltaE: 0.77
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Decay Black
-      set: Fantasy & Games Range
-      hex: '#1C1C1C'
-    deltaE: 0.77
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Rubber Black
-      productCode: RC022
-      set: Real Colors - Standard
-      hex: '#1D1D1B'
-    deltaE: 0.79
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Black 240ml
-      productCode: 5656
-      set: Flexible
-      hex: '#1D1D1D'
-    deltaE: 0.84
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Warm Grey 5
-      set: Layer paints
-      hex: '#1E1D1B'
-    deltaE: 0.97
     tier: close
 - source:
     brand: Citadel Colour
@@ -120028,56 +119630,6 @@ equivalences:
     brandSlug: citadel-colour
     name: Dryad Bark
     set: Base
-    hex: '#2B2A24'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Flat Black
-      productCode: AK735
-      set: General
-      hex: '#2B2C27'
-    deltaE: 1.46
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Magnolia Brown
-      set: Warpaints Air
-      hex: '#2C2C24'
-    deltaE: 1.55
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Black Brown
-      productCode: 040
-      set: Monument Pro Acrylic Paints
-      hex: '#2C2D28'
-    deltaE: 1.6
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Camouflage Black Green
-      productCode: 70.741
-      set: Model Color
-      hex: '#313129'
-    deltaE: 2.54
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Transparent Black
-      set: Transparent paints
-      hex: '#262624'
-    deltaE: 2.8
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Dryad Bark
-    set: Air
     hex: '#2B2A24'
   matches:
   - paint:
@@ -121188,56 +120740,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Gal Vorbak Red
-    set: Air
-    hex: '#4B213C'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Royal Purple
-      productCode: 70.810
-      set: Model Color
-      hex: '#4D2740'
-    deltaE: 1.74
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Burgundy Wine
-      productCode: 9025
-      set: Master Series Paints Core Colors
-      hex: '#462035'
-    deltaE: 2.22
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Dark Violet
-      set: Artist Range
-      hex: '#481A3F'
-    deltaE: 3.31
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Royal Purple
-      set: Warpaints Air
-      hex: '#43173B'
-    deltaE: 3.77
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Deep Maroon Shade
-      productCode: 64A
-      set: Foundry Paint System
-      hex: '#390F25'
-    deltaE: 5.87
-    tier: substitute
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Gauss Blaster Green
     set: Layer
     hex: '#7FC1A5'
@@ -121336,57 +120838,6 @@ equivalences:
       set: Game Color
       hex: '#D67419'
     deltaE: 3.63
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Genestealer Purple
-    set: Air
-    hex: '#7658A5'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Celestial Violet
-      productCode: 77.169
-      set: True Metallic Metal
-      hex: '#7B5BA5'
-    deltaE: 1.5
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Metal Violet
-      productCode: GX207
-      set: Mr Metallic Color GX
-      hex: '#7F5AA7'
-    deltaE: 2.11
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Lavender
-      productCode: AK17004
-      set: Quick Gen
-      hex: '#7B509C'
-    deltaE: 3.46
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Alien Purple
-      set: Warpaints Fanatic
-      hex: '#6154A3'
-    deltaE: 4.88
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Royal Purple
-      productCode: 19B
-      set: Foundry Paint System
-      hex: '#664C95'
-    deltaE: 4.89
     tier: close
 - source:
     brand: Citadel Colour
@@ -122202,57 +121653,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Hexwraith Flame
-    set: Technical
-    hex: '#29A236'
-  matches:
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Park green
-      productCode: TS-35
-      set: Tamiya Spray
-      hex: '#33A23D'
-    deltaE: 0.97
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Yellow Green
-      productCode: SP64
-      set: Mr Color Spray
-      hex: '#00A33B'
-    deltaE: 1.68
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Clear Green
-      productCode: 9096
-      set: Master Series Paints Core Colors
-      hex: '#049F3A'
-    deltaE: 2.07
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Green 4
-      set: Layer paints
-      hex: '#009A2D'
-    deltaE: 3.02
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Lime Green
-      productCode: AMIG0124
-      set: Acrylics
-      hex: '#109F45'
-    deltaE: 3.22
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Hobgrot Hide
     set: Base
     hex: '#9C823B'
@@ -122558,57 +121958,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Iron Hands Steel
-    set: Air
-    hex: '#B2A79F'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Pale Flesh
-      productCode: 74.015
-      set: Nocturna Models
-      hex: '#B0A39A'
-    deltaE: 1.4
-    tier: close
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Mid Grey
-      productCode: 231
-      set: Military Range
-      hex: '#B2A7A5'
-    deltaE: 3.23
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Filigree Silver
-      productCode: 9453
-      set: Master Series Paints Bones
-      hex: '#B2ADAA'
-    deltaE: 3.54
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Warm Grey 2
-      set: Layer paints
-      hex: '#AAA295'
-    deltaE: 3.84
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Libyan Army Desert Grey
-      productCode: RC103
-      set: Real Colors - AFV
-      hex: '#B4A796'
-    deltaE: 4.02
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Iron Hands Steel
     set: Base
     hex: '#B2A79F'
   matches:
@@ -122707,57 +122056,6 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#707070'
     deltaE: 2
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Ironbreaker
-    set: Air
-    hex: '#899092'
-  matches:
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Medium Sea Grey (bs 637)
-      productCode: AMIG0246
-      set: Acrylics
-      hex: '#858F91'
-    deltaE: 1.48
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: German Late Field Grey Light
-      productCode: 78C
-      set: Foundry Paint System
-      hex: '#828A8D'
-    deltaE: 2.23
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Russian AF Grey N.3
-      productCode: 71.339
-      set: Model Air
-      hex: '#858E8D'
-    deltaE: 2.35
-    tier: close
-  - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Ironhull Grey
-      set: Privateer Press Formula P3
-      hex: '#8E959A'
-    deltaE: 2.42
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: 507c Admirality Light Grey
-      productCode: AK5035
-      set: Naval
-      hex: '#909599'
-    deltaE: 2.54
     tier: close
 - source:
     brand: Citadel Colour
@@ -123016,56 +122314,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Kakophoni Purple
-    set: Air
-    hex: '#8869AE'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Violeta Wash
-      productCode: 73.209
-      set: Game Color
-      hex: '#886CA7'
-    deltaE: 2.22
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Sacra Purple
-      set: Intensity Ink
-      hex: '#8869B9'
-    deltaE: 2.4
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Blue Violet
-      productCode: AK11070
-      set: Standard (3rd Gen)
-      hex: '#886DA4'
-    deltaE: 3.18
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Metal Violet
-      productCode: GX207
-      set: Mr Metallic Color GX
-      hex: '#7F5AA7'
-    deltaE: 5.15
-    tier: substitute
-  - paint:
-      brand: Turbo Dork
-      brandSlug: turbo-dork
-      name: People Eater
-      set: Turbo Dork
-      hex: '#935AAF'
-    deltaE: 5.49
-    tier: substitute
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Kantor Blue
     set: Air
     hex: '#02134E'
@@ -123170,57 +122418,6 @@ equivalences:
     brandSlug: citadel-colour
     name: Karak Stone
     set: Layer
-    hex: '#B7945C'
-  matches:
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Festering Brown
-      productCode: 126
-      set: Fantasy Range
-      hex: '#B5955C'
-    deltaE: 1.09
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Iraqi Sand
-      productCode: 70.819
-      set: Model Color
-      hex: '#B49360'
-    deltaE: 1.22
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Carc Tan 686a Fs 33446
-      productCode: RC079
-      set: Real Colors - AFV
-      hex: '#B49457'
-    deltaE: 1.75
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Burnt Turf
-      set: Warpaints Fanatic
-      hex: '#BE9859'
-    deltaE: 2.03
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Bright Gold
-      productCode: 031
-      set: Monument Pro Acrylic Paints
-      hex: '#BC9866'
-    deltaE: 2.16
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Karak Stone
-    set: Air
     hex: '#B7945C'
   matches:
   - paint:
@@ -124291,56 +123488,6 @@ equivalences:
     brandSlug: citadel-colour
     name: Lupercal Green
     set: Base
-    hex: '#002C2B'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Midnight Blue
-      productCode: 85.070
-      set: Arte Deco
-      hex: '#012D2C'
-    deltaE: 0.31
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Archaic Turquoise
-      productCode: AK11172
-      set: Standard (3rd Gen)
-      hex: '#003839'
-    deltaE: 3.89
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Dark Green Bs381c/641 A
-      productCode: H330
-      set: Aqueous Hobby Color
-      hex: '#193737'
-    deltaE: 4.59
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Turquoise 5
-      set: Layer paints
-      hex: '#002327'
-    deltaE: 4.74
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Riff Green
-      set: Fantasy & Games Range
-      hex: '#1A2D29'
-    deltaE: 5.38
-    tier: substitute
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Lupercal Green
-    set: Air
     hex: '#002C2B'
   matches:
   - paint:
@@ -125755,57 +124902,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Nighthaunt Gloom
-    set: Technical
-    hex: '#3A686E'
-  matches:
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Sharkbite
-      productCode: 9506
-      set: Master Series Paints Bones
-      hex: '#3D6A70'
-    deltaE: 0.79
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Aggressor Blue Fs 35109
-      productCode: AK11877
-      set: Air (3rd Gen)
-      hex: '#3B6C71'
-    deltaE: 1.59
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Grayish Blue Fs35237
-      productCode: 337
-      set: Mr Color
-      hex: '#3A7179'
-    deltaE: 3.35
-    tier: close
-  - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 3.87
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Pine Hollow Shade
-      productCode: WP4111P
-      set: John Blanche Masterclass
-      hex: '#3E6D6C'
-    deltaE: 3.9
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Nihilakh Oxide
     set: Technical
     hex: '#66B39A'
@@ -125858,57 +124954,6 @@ equivalences:
     brandSlug: citadel-colour
     name: Nocturne Green
     set: Base
-    hex: '#162A29'
-  matches:
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: French Chasseur A Cheval Green Shade
-      productCode: 71A
-      set: Foundry Paint System
-      hex: '#172B2C'
-    deltaE: 1.37
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Blighted Green
-      productCode: WP4004P
-      set: John Blanche Masterclass
-      hex: '#152524'
-    deltaE: 1.95
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Riff Green
-      set: Fantasy & Games Range
-      hex: '#1A2D29'
-    deltaE: 2.02
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Peacock Green
-      productCode: 9226
-      set: Master Series Paints Core Colors
-      hex: '#1E2E2B'
-    deltaE: 2.15
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Anthracite Grey
-      productCode: AK11167
-      set: Standard (3rd Gen)
-      hex: '#1C2A2B'
-    deltaE: 2.98
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Nocturne Green
-    set: Air
     hex: '#162A29'
   matches:
   - paint:
@@ -126822,56 +125867,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Pyroclast Orange Clear
-    set: Air
-    hex: '#ED8022'
-  matches:
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Orange 3
-      set: Layer paints
-      hex: '#F48124'
-    deltaE: 1.44
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Light Rust Wash
-      productCode: 69.505
-      set: Mecha Color
-      hex: '#EB7919'
-    deltaE: 1.84
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Orange Yellow
-      productCode: 58
-      set: Mr Color
-      hex: '#EE7800'
-    deltaE: 2.14
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Metallic orange
-      productCode: LP-44
-      set: Lacquer Paint
-      hex: '#EF7800'
-    deltaE: 2.15
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Fire Giant Orange
-      set: Speedpaint Set 2.0
-      hex: '#E77924'
-    deltaE: 2.48
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Rakarth Flesh
     set: Base
     hex: '#9C998D'
@@ -127072,58 +126067,6 @@ equivalences:
       set: Metal N Alchemy Range
       hex: '#B89E85'
     deltaE: 4.28
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Relictor Gold
-    set: Air
-    hex: '#EAC58F'
-  matches:
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Elfenbein – Ivory RAL 1001 (interior Color)
-      productCode: RC046
-      set: Real Colors - AFV
-      hex: '#EBC691'
-    deltaE: 0.36
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Pale Sand
-      productCode: 70.837
-      set: Model Color
-      hex: '#E3C28F'
-    deltaE: 1.47
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Base Sand
-      productCode: 10B
-      set: Foundry Paint System
-      hex: '#E9C384'
-    deltaE: 2.09
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Yellow Fs33531
-      productCode: 313
-      set: Mr Color
-      hex: '#E8C689'
-    deltaE: 2.17
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Golden Highlight
-      productCode: 9093
-      set: Master Series Paints Core Colors
-      hex: '#F2CE9A'
-    deltaE: 2.19
     tier: close
 - source:
     brand: Citadel Colour
@@ -127833,57 +126776,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Sigismund Yellow Clear
-    set: Air
-    hex: '#FFE32F'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Lemon Yellow
-      productCode: AK11047
-      set: Standard (3rd Gen)
-      hex: '#FFE121'
-    deltaE: 0.81
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Angelic Yellow
-      set: D&D Nolzur's Marvelous Pigments
-      hex: '#F9DF1C'
-    deltaE: 1.21
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Flat yellow
-      productCode: LP-80
-      set: Lacquer Paint
-      hex: '#FEE101'
-    deltaE: 1.39
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Chiara Yellow
-      productCode: GX4
-      set: Mr Color GX
-      hex: '#FFE100'
-    deltaE: 1.45
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Yellow
-      productCode: MMP-007
-      set: Mission Models
-      hex: '#FCDE09'
-    deltaE: 1.53
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Sigmarite
     set: Dry
     hex: '#D6AC57'
@@ -128393,56 +127285,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Sons of Horus Green
-    set: Air
-    hex: '#00545E'
-  matches:
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Turquoise 4
-      set: Layer paints
-      hex: '#00535B'
-    deltaE: 1.03
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Jade
-      productCode: 021
-      set: Monument Pro Acrylic Paints
-      hex: '#03535A'
-    deltaE: 1.45
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Caribbean Turquoise
-      productCode: 72.414
-      set: Xpress Color
-      hex: '#005961'
-    deltaE: 2.02
-    tier: close
-  - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Coal Black
-      set: Privateer Press Formula P3
-      hex: '#005A61'
-    deltaE: 2.61
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Intermediate Blue
-      productCode: 72
-      set: Mr Color
-      hex: '#0E4D59'
-    deltaE: 3.17
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Sons of Horus Green
     set: Layer
     hex: '#00545E'
   matches:
@@ -128745,57 +127587,6 @@ equivalences:
     brandSlug: citadel-colour
     name: Steel Legion Drab
     set: Base
-    hex: '#584E2D'
-  matches:
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Necro Gold
-      set: Metal N Alchemy Range
-      hex: '#574E31'
-    deltaE: 1.31
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Canvas Tone
-      productCode: AK11436
-      set: Figures (3rd Gen)
-      hex: '#52492A'
-    deltaE: 1.85
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Dunkelbraun RAL 7017
-      productCode: MMP-139
-      set: Mission Models
-      hex: '#5C5334'
-    deltaE: 1.88
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Ija  7 Ohryuko Nana Go Shoku (olive Brown) 10ml
-      productCode: RC330
-      set: Real Colors - Air
-      hex: '#56502E'
-    deltaE: 2.15
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: River Water
-      productCode: 26.224
-      set: Diorama FX
-      hex: '#534B30'
-    deltaE: 2.29
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Steel Legion Drab
-    set: Air
     hex: '#584E2D'
   matches:
   - paint:
@@ -129203,57 +127994,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Straken Green
-    set: Air
-    hex: '#597F1C'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Grass Green
-      productCode: AK11140
-      set: Standard (3rd Gen)
-      hex: '#62832C'
-    deltaE: 2.5
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Bright Green Amt-4
-      productCode: AMIG0080
-      set: Acrylics
-      hex: '#5E7D3A'
-    deltaE: 4.82
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Goblin Green
-      set: Warpaints Air
-      hex: '#528536'
-    deltaE: 4.93
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Orc Skin
-      productCode: 72.415
-      set: Xpress Color
-      hex: '#5E752D'
-    deltaE: 5
-    tier: substitute
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Squog Green
-      productCode: 9508
-      set: Master Series Paints Bones
-      hex: '#5A863B'
-    deltaE: 5.08
-    tier: substitute
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Straken Green
     set: Layer
     hex: '#597F1C'
   matches:
@@ -129301,56 +128041,6 @@ equivalences:
       hex: '#5A863B'
     deltaE: 5.08
     tier: substitute
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Sybarite Green
-    set: Air
-    hex: '#17A166'
-  matches:
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Vivid Metallic Paint - Ironleaf Green
-      productCode: 2568
-      set: Metallic Colors
-      hex: '#1BA16C'
-    deltaE: 1.38
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Rogue Hobbies Bright Green
-      productCode: S33
-      set: Monument Pro Signature Series
-      hex: '#12A361'
-    deltaE: 1.5
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Emerald 3
-      set: Layer paints
-      hex: '#009960'
-    deltaE: 2.69
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Clear Green
-      productCode: GX104
-      set: Mr Clear Color GX
-      hex: '#02A861'
-    deltaE: 2.93
-    tier: close
-  - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Green Ink
-      set: Privateer Press Formula P3
-      hex: '#129959'
-    deltaE: 3.04
-    tier: close
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
@@ -129659,56 +128349,6 @@ equivalences:
     brand: Citadel Colour
     brandSlug: citadel-colour
     name: Tau Light Ochre
-    set: Air
-    hex: '#BC6B10'
-  matches:
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Cursed Gold
-      productCode: 9464
-      set: Master Series Paints Bones
-      hex: '#B16B23'
-    deltaE: 2.89
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Bronze Brown
-      productCode: 76.036
-      set: Game Air
-      hex: '#B16921'
-    deltaE: 2.96
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Leather Brown
-      set: Acrylic Colors
-      hex: '#AF6816'
-    deltaE: 3.06
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Metallic Orange
-      productCode: AMIG0189
-      set: Acrylics
-      hex: '#CD6702'
-    deltaE: 4.38
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Chink Orange
-      set: Fantasy & Games Range
-      hex: '#B2621B'
-    deltaE: 4.42
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Tau Light Ochre
     set: Layer
     hex: '#BC6B10'
   matches:
@@ -129902,58 +128542,6 @@ equivalences:
       set: Acrylic Colors
       hex: '#019A88'
     deltaE: 3.21
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Terminatus Stone
-    set: Air
-    hex: '#C8B79D'
-  matches:
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Desert Sand
-      productCode: 9432
-      set: Master Series Paints Bones
-      hex: '#C5B49A'
-    deltaE: 0.81
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Light Brown
-      productCode: SDP-85
-      set: Drop & Paint
-      hex: '#CCB89A'
-    deltaE: 1.51
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: IAF Sand
-      productCode: 71.327
-      set: Model Air
-      hex: '#C4B29A'
-    deltaE: 1.65
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Sand Fs 33531
-      productCode: AK11869
-      set: Air (3rd Gen)
-      hex: '#C6B49E'
-    deltaE: 1.95
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: RAL 7027 Sandgrau
-      productCode: AMIG0009
-      set: Acrylics
-      hex: '#C0AF93'
-    deltaE: 2.34
     tier: close
 - source:
     brand: Citadel Colour
@@ -130566,58 +129154,6 @@ equivalences:
       set: Humbrol Aerosol Sprays
       hex: '#E46E28'
     deltaE: 2.42
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Tuskgor Fur
-    set: Air
-    hex: '#863231'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Autumn Red
-      productCode: 85.176
-      set: Arte Deco
-      hex: '#833331'
-    deltaE: 0.7
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: AdeptiCon Spray-Team Red Oxide
-      productCode: S37
-      set: Monument Pro Acrylic Primer
-      hex: '#863531'
-    deltaE: 1.07
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Red Wine
-      productCode: SDP-40
-      set: Drop & Paint
-      hex: '#8A2A2E'
-    deltaE: 1.93
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Russet
-      productCode: H33
-      set: Aqueous Hobby Color
-      hex: '#81292D'
-    deltaE: 2.4
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Rust Surface Primer
-      productCode: AK11250
-      set: Primer (3rd Gen)
-      hex: '#852F25'
-    deltaE: 3.74
     tier: close
 - source:
     brand: Citadel Colour
@@ -131443,58 +129979,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Vulkan Green
-    set: Air
-    hex: '#223C2E'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Lizard Green
-      productCode: 72.418
-      set: Xpress Color
-      hex: '#223A2C'
-    deltaE: 0.8
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Elven Green
-      productCode: 9488
-      set: Master Series Paints Bones
-      hex: '#264033'
-    deltaE: 1.41
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Gray green
-      productCode: AS-3
-      set: Aircraft Spray
-      hex: '#253A2E'
-    deltaE: 1.87
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Angel Green
-      productCode: CP3020
-      set: Warpaints Primer
-      hex: '#273B2F'
-    deltaE: 2.16
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Ija  27 Ao Midori Iro (blue-green) 10ml
-      productCode: RC332
-      set: Real Colors - Air
-      hex: '#1D3327'
-    deltaE: 2.98
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Waaagh! Flesh
     set: Base
     hex: '#0B3B36'
@@ -131547,57 +130031,6 @@ equivalences:
     brandSlug: citadel-colour
     name: Warboss Green
     set: Layer
-    hex: '#317E57'
-  matches:
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Green Fs34227
-      productCode: 312
-      set: Mr Color
-      hex: '#2D845D'
-    deltaE: 2.26
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Russian Cockpit Emerald Green
-      productCode: MMP-100
-      set: Mission Models
-      hex: '#28845D'
-    deltaE: 2.39
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Glittering Green
-      set: Warpaints Fanatic
-      hex: '#2E794A'
-    deltaE: 3.1
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Grass Green
-      productCode: 9014
-      set: Master Series Paints Core Colors
-      hex: '#067A55'
-    deltaE: 3.3
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Bluegrass Green
-      productCode: 85.080
-      set: Arte Deco
-      hex: '#007B59'
-    deltaE: 3.69
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: Warboss Green
-    set: Air
     hex: '#317E57'
   matches:
   - paint:
@@ -132207,57 +130640,6 @@ equivalences:
 - source:
     brand: Citadel Colour
     brandSlug: citadel-colour
-    name: Word Bearers Red
-    set: Air
-    hex: '#620104'
-  matches:
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Blackened Brown
-      productCode: 9137
-      set: Master Series Paints Core Colors
-      hex: '#5D0501'
-    deltaE: 1.34
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Dull red
-      productCode: TS-33
-      set: Tamiya Spray
-      hex: '#660000'
-    deltaE: 1.45
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Sangria Red
-      set: Acrylic Colors
-      hex: '#5E0A0A'
-    deltaE: 1.47
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Burnt Red
-      productCode: 008
-      set: Monument Pro Acrylic Paints
-      hex: '#631410'
-    deltaE: 2.45
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Seraph Red
-      productCode: 72.479
-      set: Xpress Color Intense
-      hex: '#6B1411'
-    deltaE: 2.93
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
     name: Wrack White
     set: Dry
     hex: '#D3D0CF'
@@ -132459,56 +130841,6 @@ equivalences:
       set: Standard (3rd Gen)
       hex: '#42271E'
     deltaE: 1.67
-    tier: close
-- source:
-    brand: Citadel Colour
-    brandSlug: citadel-colour
-    name: XV-88
-    set: Air
-    hex: '#6C4811'
-  matches:
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: English Field Brown
-      set: Acrylic Colors
-      hex: '#6C4615'
-    deltaE: 1.71
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Golden Armour
-      set: Speedpaint Set 2.0
-      hex: '#714808'
-    deltaE: 1.81
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Brown (JGSDF)
-      productCode: XF-72
-      set: Acrylics Mini Flat
-      hex: '#734C0C'
-    deltaE: 2.17
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Rusty Gold
-      productCode: AK11193
-      set: Metallic (3rd Gen)
-      hex: '#734B03'
-    deltaE: 2.74
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Bronze
-      productCode: 81.123
-      set: Arte Deco
-      hex: '#6D4C21'
-    deltaE: 2.77
     tier: close
 - source:
     brand: Citadel Colour
@@ -132914,7 +131246,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 5.14
     tier: substitute
@@ -133412,7 +131744,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Castellax Bronze
-      set: Air
+      set: Layer
       hex: '#C68351'
     deltaE: 1.22
     tier: close
@@ -136716,7 +135048,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 1.13
     tier: close
@@ -137900,7 +136232,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 1.39
     tier: close
@@ -137983,7 +136315,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Iron Hands Steel
-      set: Air
+      set: Base
       hex: '#B2A79F'
     deltaE: 3.23
     tier: close
@@ -138593,7 +136925,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.35
     tier: close
@@ -140886,7 +139218,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 1.97
     tier: close
@@ -153395,7 +151727,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Castellax Bronze
-      set: Air
+      set: Layer
       hex: '#C68351'
     deltaE: 2.73
     tier: close
@@ -160526,7 +158858,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 0.56
     tier: close
@@ -162708,7 +161040,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: XV-88
-      set: Air
+      set: Base
       hex: '#6C4811'
     deltaE: 1.71
     tier: close
@@ -164477,7 +162809,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tau Light Ochre
-      set: Air
+      set: Layer
       hex: '#BC6B10'
     deltaE: 3.06
     tier: close
@@ -166237,7 +164569,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: XV-88
-      set: Air
+      set: Base
       hex: '#6C4811'
     deltaE: 2.3
     tier: close
@@ -171474,14 +169806,6 @@ equivalences:
     deltaE: 1.9
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
-    deltaE: 2.46
-    tier: close
-  - paint:
       brand: Humbrol
       brandSlug: humbrol
       name: Gloss Purple
@@ -171506,6 +169830,15 @@ equivalences:
       set: Scale Color Range
       hex: '#604673'
     deltaE: 4.33
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Violet -70-
+      productCode: AK3094
+      set: Figures
+      hex: '#543A7B'
+    deltaE: 4.74
     tier: close
 - source:
     brand: Green Stuff World
@@ -172625,14 +170958,6 @@ equivalences:
     deltaE: 0.63
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.84
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: RLM66 Black Gray A
@@ -172640,6 +170965,15 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#1F1E1D'
     deltaE: 0.97
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Blackened Barrel
+      productCode: 105B
+      set: Foundry Paint System
+      hex: '#191919'
+    deltaE: 1.26
     tier: close
 - source:
     brand: Green Stuff World
@@ -174999,7 +173333,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 1.38
     tier: close
@@ -181632,7 +179966,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Castellax Bronze
-      set: Air
+      set: Layer
       hex: '#C68351'
     deltaE: 2.9
     tier: close
@@ -185081,7 +183415,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Straken Green
-      set: Air
+      set: Layer
       hex: '#597F1C'
     deltaE: 4.92
     tier: close
@@ -189929,7 +188263,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Calgar Blue
-      set: Air
+      set: Layer
       hex: '#2A497F'
     deltaE: 1.48
     tier: close
@@ -190084,7 +188418,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Ironbreaker
-      set: Air
+      set: Layer
       hex: '#899092'
     deltaE: 1.48
     tier: close
@@ -192297,7 +190631,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 2.34
     tier: close
@@ -194860,14 +193194,6 @@ equivalences:
     deltaE: 0.31
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.77
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Dark Tone
@@ -194881,6 +193207,14 @@ equivalences:
       name: Blackened Barrel
       productCode: 105B
       set: Foundry Paint System
+      hex: '#191919'
+    deltaE: 0.94
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Cool Grey 5
+      set: Layer paints
       hex: '#191919'
     deltaE: 0.94
     tier: close
@@ -204330,7 +202664,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 1.45
     tier: close
@@ -207159,7 +205493,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 1.07
     tier: close
@@ -210368,7 +208702,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sons of Horus Green
-      set: Air
+      set: Layer
       hex: '#00545E'
     deltaE: 1.45
     tier: close
@@ -212118,7 +210452,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 1.5
     tier: close
@@ -216984,14 +215318,6 @@ equivalences:
     deltaE: 2.1
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 3.11
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Crystal Orange
@@ -216999,6 +215325,15 @@ equivalences:
       set: Acrylics
       hex: '#FE8F00'
     deltaE: 3.76
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Orange Shade
+      productCode: 3A
+      set: Foundry Paint System
+      hex: '#E17A13'
+    deltaE: 3.79
     tier: close
 - source:
     brand: Mr Hobby
@@ -217036,14 +215371,6 @@ equivalences:
     deltaE: 2.1
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 3.11
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Crystal Orange
@@ -217051,6 +215378,15 @@ equivalences:
       set: Acrylics
       hex: '#FE8F00'
     deltaE: 3.76
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Orange Shade
+      productCode: 3A
+      set: Foundry Paint System
+      hex: '#E17A13'
+    deltaE: 3.79
     tier: close
 - source:
     brand: Mr Hobby
@@ -218002,7 +216338,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 2.93
     tier: close
@@ -221475,7 +219811,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.73
     tier: close
@@ -221621,7 +219957,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.37
     tier: close
@@ -229689,7 +228025,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sons of Horus Green
-      set: Air
+      set: Layer
       hex: '#00545E'
     deltaE: 3.17
     tier: close
@@ -229739,7 +228075,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sons of Horus Green
-      set: Air
+      set: Layer
       hex: '#00545E'
     deltaE: 3.17
     tier: close
@@ -229789,7 +228125,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sons of Horus Green
-      set: Air
+      set: Layer
       hex: '#00545E'
     deltaE: 3.17
     tier: close
@@ -234577,7 +232913,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 2.11
     tier: close
@@ -237690,14 +236026,6 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.14
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Highlight Orange
@@ -237705,6 +236033,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E27812'
     deltaE: 2.25
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Fire Giant Orange
+      set: Speedpaint Set 2.0
+      hex: '#E77924'
+    deltaE: 2.58
     tier: close
 - source:
     brand: Mr Hobby
@@ -237741,14 +236077,6 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.14
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Highlight Orange
@@ -237756,6 +236084,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E27812'
     deltaE: 2.25
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Fire Giant Orange
+      set: Speedpaint Set 2.0
+      hex: '#E77924'
+    deltaE: 2.58
     tier: close
 - source:
     brand: Mr Hobby
@@ -237792,14 +236128,6 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.14
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Highlight Orange
@@ -237807,6 +236135,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E27812'
     deltaE: 2.25
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Fire Giant Orange
+      set: Speedpaint Set 2.0
+      hex: '#E77924'
+    deltaE: 2.58
     tier: close
 - source:
     brand: Mr Hobby
@@ -237843,14 +236179,6 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.14
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Highlight Orange
@@ -237858,6 +236186,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E27812'
     deltaE: 2.25
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Fire Giant Orange
+      set: Speedpaint Set 2.0
+      hex: '#E77924'
+    deltaE: 2.58
     tier: close
 - source:
     brand: Mr Hobby
@@ -238978,19 +237314,19 @@ equivalences:
     deltaE: 0.97
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 1.01
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Satin Black
       productCode: AMIG0032
       set: Acrylics
+      hex: '#1C1C1C'
+    deltaE: 1.13
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Decay Black
+      set: Fantasy & Games Range
       hex: '#1C1C1C'
     deltaE: 1.13
     tier: close
@@ -239058,7 +237394,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 0.72
     tier: close
@@ -242100,7 +240436,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 3.05
     tier: close
@@ -242186,7 +240522,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 2.4
     tier: close
@@ -247805,14 +246141,6 @@ equivalences:
     deltaE: 1.26
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Hexwraith Flame
-      set: Technical
-      hex: '#29A236'
-    deltaE: 1.68
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Park green
@@ -247837,6 +246165,14 @@ equivalences:
       set: Layer paints
       hex: '#009A2D'
     deltaE: 3.1
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Iosan Green
+      set: Privateer Press Formula P3
+      hex: '#23A652'
+    deltaE: 3.34
     tier: close
 - source:
     brand: Mr Hobby
@@ -247856,14 +246192,6 @@ equivalences:
     deltaE: 1.26
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Hexwraith Flame
-      set: Technical
-      hex: '#29A236'
-    deltaE: 1.68
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Park green
@@ -247888,6 +246216,14 @@ equivalences:
       set: Layer paints
       hex: '#009A2D'
     deltaE: 3.1
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Iosan Green
+      set: Privateer Press Formula P3
+      hex: '#23A652'
+    deltaE: 3.34
     tier: close
 - source:
     brand: Mr Hobby
@@ -247933,12 +246269,13 @@ equivalences:
     deltaE: 2.05
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Hexwraith Flame
-      set: Technical
-      hex: '#29A236'
-    deltaE: 2.46
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Park green
+      productCode: TS-35
+      set: Tamiya Spray
+      hex: '#33A23D'
+    deltaE: 2.55
     tier: close
 - source:
     brand: Mr Hobby
@@ -247984,12 +246321,13 @@ equivalences:
     deltaE: 2.05
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Hexwraith Flame
-      set: Technical
-      hex: '#29A236'
-    deltaE: 2.46
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Park green
+      productCode: TS-35
+      set: Tamiya Spray
+      hex: '#33A23D'
+    deltaE: 2.55
     tier: close
 - source:
     brand: Mr Hobby
@@ -248899,12 +247237,13 @@ equivalences:
     deltaE: 3.24
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
-    deltaE: 4.32
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Violet -70-
+      productCode: AK3094
+      set: Figures
+      hex: '#543A7B'
+    deltaE: 4.75
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -250973,7 +249312,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 3.04
     tier: close
@@ -251543,7 +249882,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Ironbreaker
-      set: Air
+      set: Layer
       hex: '#899092'
     deltaE: 2.42
     tier: close
@@ -254788,14 +253127,6 @@ equivalences:
     deltaE: 1.9
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Sigismund Yellow Clear
-      set: Air
-      hex: '#FFE32F'
-    deltaE: 2
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Clear yellow
@@ -254803,6 +253134,14 @@ equivalences:
       set: Acrylics Mini Gloss
       hex: '#FFE600'
     deltaE: 2.05
+    tier: close
+  - paint:
+      brand: Turbo Dork
+      brandSlug: turbo-dork
+      name: Pucker
+      set: Turbo Dork
+      hex: '#FDE852'
+    deltaE: 2.14
     tier: close
 - source:
     brand: Reaper
@@ -259412,14 +257751,6 @@ equivalences:
     deltaE: 1.64
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Hexwraith Flame
-      set: Technical
-      hex: '#29A236'
-    deltaE: 2.07
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Green 4
@@ -259435,6 +257766,15 @@ equivalences:
       set: Tamiya Spray
       hex: '#33A23D'
     deltaE: 2.24
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Clear Green
+      productCode: AK11216
+      set: Standard (3rd Gen)
+      hex: '#029837'
+    deltaE: 2.29
     tier: close
 - source:
     brand: Reaper
@@ -260186,7 +258526,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tau Light Ochre
-      set: Air
+      set: Layer
       hex: '#BC6B10'
     deltaE: 2.89
     tier: close
@@ -260784,7 +259124,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 0.81
     tier: close
@@ -263229,7 +261569,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 5.5
     tier: substitute
@@ -265387,7 +263727,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 4.39
     tier: close
@@ -269593,12 +267933,12 @@ equivalences:
     deltaE: 1.45
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Sigismund Yellow Clear
-      set: Air
-      hex: '#FFE32F'
-    deltaE: 1.71
+      brand: Turbo Dork
+      brandSlug: turbo-dork
+      name: Bees Knees
+      set: Turbo Dork
+      hex: '#FFE145'
+    deltaE: 1.72
     tier: close
 - source:
     brand: Reaper
@@ -274231,7 +272571,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tau Light Ochre
-      set: Air
+      set: Layer
       hex: '#BC6B10'
     deltaE: 3.28
     tier: close
@@ -277649,10 +275989,10 @@ equivalences:
   - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
-      name: Nighthaunt Gloom
-      set: Technical
-      hex: '#3A686E'
-    deltaE: 0.79
+      name: Thunderhawk Blue
+      set: Dry
+      hex: '#396A70'
+    deltaE: 0.8
     tier: close
   - paint:
       brand: AK Interactive
@@ -280875,7 +279215,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 4.93
     tier: close
@@ -281101,14 +279441,6 @@ equivalences:
     deltaE: 0.94
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 1.09
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Rubber Black
@@ -281133,6 +279465,15 @@ equivalences:
       set: Matt Surface
       hex: '#1A1A1A'
     deltaE: 1.52
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Blackened Barrel
+      productCode: 105B
+      set: Foundry Paint System
+      hex: '#191919'
+    deltaE: 1.55
     tier: close
 - source:
     brand: Scale75
@@ -283491,14 +281832,6 @@ equivalences:
     deltaE: 0.31
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.77
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Dark Tone
@@ -283512,6 +281845,14 @@ equivalences:
       name: Blackened Barrel
       productCode: 105B
       set: Foundry Paint System
+      hex: '#191919'
+    deltaE: 0.94
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Cool Grey 5
+      set: Layer paints
       hex: '#191919'
     deltaE: 0.94
     tier: close
@@ -285139,14 +283480,6 @@ equivalences:
     deltaE: 0.31
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.77
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Dark Tone
@@ -285160,6 +283493,14 @@ equivalences:
       name: Blackened Barrel
       productCode: 105B
       set: Foundry Paint System
+      hex: '#191919'
+    deltaE: 0.94
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Cool Grey 5
+      set: Layer paints
       hex: '#191919'
     deltaE: 0.94
     tier: close
@@ -293740,20 +292081,21 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 2.34
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Warm Grey 5
       set: Layer paints
       hex: '#1E1D1B'
     deltaE: 2.42
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: NATO black
+      productCode: TS-63
+      set: Tamiya Spray
+      hex: '#222424'
+    deltaE: 2.74
     tier: close
 - source:
     brand: Scale75
@@ -297084,7 +295426,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Castellax Bronze
-      set: Air
+      set: Layer
       hex: '#C68351'
     deltaE: 1.39
     tier: close
@@ -299638,7 +297980,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 2.76
     tier: close
@@ -300870,7 +299212,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 1.51
     tier: close
@@ -301570,7 +299912,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 2.17
     tier: close
@@ -302908,7 +301250,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Castellax Bronze
-      set: Air
+      set: Layer
       hex: '#C68351'
     deltaE: 2.25
     tier: close
@@ -303037,7 +301379,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 1.93
     tier: close
@@ -309574,14 +307916,6 @@ equivalences:
     deltaE: 2.69
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 3.3
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Orange Yellow
@@ -309598,6 +307932,14 @@ equivalences:
       set: Flexible
       hex: '#FF7C28'
     deltaE: 4.11
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Flickering Flame
+      set: Warpaints Fanatic
+      hex: '#F58B3D'
+    deltaE: 4.43
     tier: close
 - source:
     brand: Tamiya
@@ -313641,7 +311983,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Calgar Blue
-      set: Air
+      set: Layer
       hex: '#2A497F'
     deltaE: 1.84
     tier: close
@@ -319380,14 +317722,6 @@ equivalences:
     deltaE: 1.39
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 2.15
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Peach Flesh
@@ -319403,6 +317737,14 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E27812'
     deltaE: 2.43
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Fire Giant Orange
+      set: Speedpaint Set 2.0
+      hex: '#E77924'
+    deltaE: 2.6
     tier: close
 - source:
     brand: Tamiya
@@ -321334,14 +319676,6 @@ equivalences:
     deltaE: 2.69
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 3.3
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Orange Yellow
@@ -321358,6 +319692,14 @@ equivalences:
       set: Flexible
       hex: '#FF7C28'
     deltaE: 4.11
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Flickering Flame
+      set: Warpaints Fanatic
+      hex: '#F58B3D'
+    deltaE: 4.43
     tier: close
 - source:
     brand: Tamiya
@@ -321471,14 +319813,6 @@ equivalences:
     hex: '#33A23D'
   matches:
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Hexwraith Flame
-      set: Technical
-      hex: '#29A236'
-    deltaE: 0.97
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Yellow Green
@@ -321513,6 +319847,14 @@ equivalences:
       set: Drop & Paint
       hex: '#4DA74E'
     deltaE: 3.09
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Green 4
+      set: Layer paints
+      hex: '#009A2D'
+    deltaE: 3.49
     tier: close
 - source:
     brand: Tamiya
@@ -325448,14 +323790,6 @@ equivalences:
     deltaE: 1.3
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Sigismund Yellow Clear
-      set: Air
-      hex: '#FFE32F'
-    deltaE: 1.72
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Estus Yellow
@@ -325471,6 +323805,15 @@ equivalences:
       set: Standard (3rd Gen)
       hex: '#FFE121'
     deltaE: 2.12
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Yellow
+      productCode: 85.008
+      set: Arte Deco
+      hex: '#FFE15D'
+    deltaE: 2.21
     tier: close
 - source:
     brand: Turbo Dork
@@ -328101,7 +326444,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 5.39
     tier: substitute
@@ -329173,14 +327516,6 @@ equivalences:
     deltaE: 3.85
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Nighthaunt Gloom
-      set: Technical
-      hex: '#3A686E'
-    deltaE: 4
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Sharkbite
@@ -329188,6 +327523,15 @@ equivalences:
       set: Master Series Paints Bones
       hex: '#3D6A70'
     deltaE: 4.08
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Gray Fs36118
+      productCode: 305
+      set: Mr Color
+      hex: '#406A68'
+    deltaE: 4.18
     tier: close
 - source:
     brand: Turbo Dork
@@ -329321,7 +327665,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 3.07
     tier: close
@@ -330368,7 +328712,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 4.54
     tier: close
@@ -330401,7 +328745,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 3.57
     tier: close
@@ -330452,7 +328796,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 3.57
     tier: close
@@ -330503,7 +328847,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 3.57
     tier: close
@@ -331570,7 +329914,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 0.7
     tier: close
@@ -334999,7 +333343,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Caledor Sky
-      set: Air
+      set: Base
       hex: '#366699'
     deltaE: 2.63
     tier: close
@@ -335881,7 +334225,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 3.18
     tier: close
@@ -336953,7 +335297,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tau Light Ochre
-      set: Air
+      set: Layer
       hex: '#BC6B10'
     deltaE: 2.96
     tier: close
@@ -337002,7 +335346,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tau Light Ochre
-      set: Air
+      set: Layer
       hex: '#BC6B10'
     deltaE: 2.96
     tier: close
@@ -343745,7 +342089,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 2.17
     tier: close
@@ -347336,7 +345680,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 2.63
     tier: close
@@ -351663,14 +350007,6 @@ equivalences:
     deltaE: 1.85
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 1.94
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Orange 3
@@ -351685,6 +350021,15 @@ equivalences:
       set: Acrylic Colors
       hex: '#E47700'
     deltaE: 2.86
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Orange Shade
+      productCode: 3A
+      set: Foundry Paint System
+      hex: '#E17A13'
+    deltaE: 3.08
     tier: close
 - source:
     brand: Vallejo
@@ -359542,7 +357887,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 3.25
     tier: close
@@ -359729,11 +358074,12 @@ equivalences:
     deltaE: 5.22
     tier: substitute
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
+      brand: Monument (Pro Acryl)
+      brandSlug: monument-pro-acryl
+      name: Vince Venturella Royal Purple
+      productCode: S03
+      set: Monument Pro Signature Series
+      hex: '#3B3053'
     deltaE: 5.6
     tier: substitute
 - source:
@@ -360438,7 +358784,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 1.65
     tier: close
@@ -361030,7 +359376,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 1.36
     tier: close
@@ -361184,7 +359530,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Death Korps Drab
-      set: Air
+      set: Base
       hex: '#3D4539'
     deltaE: 1.36
     tier: close
@@ -366057,14 +364403,6 @@ equivalences:
     deltaE: 1.39
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 1.84
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Highlight Orange
@@ -366072,6 +364410,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#E27812'
     deltaE: 2.13
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Orange
+      productCode: AMIG0129
+      set: Acrylics
+      hex: '#E7731E'
+    deltaE: 2.34
     tier: close
 - source:
     brand: Vallejo
@@ -370840,7 +369187,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Terminatus Stone
-      set: Air
+      set: Dry
       hex: '#C8B79D'
     deltaE: 3.87
     tier: close
@@ -375200,7 +373547,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Iron Hands Steel
-      set: Air
+      set: Base
       hex: '#B2A79F'
     deltaE: 1.4
     tier: close
@@ -375661,14 +374008,6 @@ equivalences:
     hex: '#E3C28F'
   matches:
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Relictor Gold
-      set: Air
-      hex: '#EAC58F'
-    deltaE: 1.47
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Elfenbein – Ivory RAL 1001 (interior Color)
@@ -375701,6 +374040,14 @@ equivalences:
       productCode: 10B
       set: Foundry Paint System
       hex: '#E9C384'
+    deltaE: 2.7
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Braun
+      set: Warfront  Range
+      hex: '#E5C89E'
     deltaE: 2.7
     tier: close
 - source:
@@ -379434,7 +377781,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Ironbreaker
-      set: Air
+      set: Layer
       hex: '#899092'
     deltaE: 2.35
     tier: close
@@ -390884,7 +389231,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Tuskgor Fur
-      set: Air
+      set: Layer
       hex: '#863231'
     deltaE: 2.85
     tier: close
@@ -391280,14 +389627,6 @@ equivalences:
     deltaE: 2.48
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Chemos Purple
-      set: Air
-      hex: '#4F356C'
-    deltaE: 3.65
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Nightshade Purple Dip
@@ -391312,6 +389651,15 @@ equivalences:
       hex: '#604673'
     deltaE: 4.73
     tier: close
+  - paint:
+      brand: Turbo Dork
+      brandSlug: turbo-dork
+      name: Let Them Eat Cake
+      productCode: TDK015441_1
+      set: Turbo Dork
+      hex: '#5D4E8D'
+    deltaE: 5.22
+    tier: substitute
 - source:
     brand: Vallejo
     brandSlug: vallejo
@@ -398936,7 +397284,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 1.81
     tier: close
@@ -399035,7 +397383,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Genestealer Purple
-      set: Air
+      set: Layer
       hex: '#7658A5'
     deltaE: 1.5
     tier: close
@@ -403117,7 +401465,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sybarite Green
-      set: Air
+      set: Layer
       hex: '#17A166'
     deltaE: 2.69
     tier: close
@@ -406925,14 +405273,6 @@ equivalences:
     hex: '#F48124'
   matches:
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Pyroclast Orange Clear
-      set: Air
-      hex: '#ED8022'
-    deltaE: 1.44
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Dwarf Flesh
@@ -406967,6 +405307,14 @@ equivalences:
       set: Mr Color
       hex: '#EE7800'
     deltaE: 2.74
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Flickering Flame
+      set: Warpaints Fanatic
+      hex: '#F58B3D'
+    deltaE: 2.81
     tier: close
 - source:
     brand: Warcolours
@@ -409258,7 +407606,7 @@ equivalences:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sons of Horus Green
-      set: Air
+      set: Layer
       hex: '#00545E'
     deltaE: 1.03
     tier: close
@@ -409869,12 +408217,12 @@ equivalences:
     deltaE: 0.94
     tier: close
   - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Deathshroud Clear
-      set: Air
-      hex: '#1C1C1B'
-    deltaE: 0.97
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Abyssal Black
+      set: D&D Nolzur's Marvelous Pigments
+      hex: '#21201D'
+    deltaE: 1.15
     tier: close
 - source:
     brand: Warcolours

@@ -1,1 +1,91 @@
-{}
+# Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
+# Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
+# the bridge and the VolumeTable. Keep every entry cited -- these are asserted facts.
+#
+# --- Discontinued Citadel paints (researched 2026-07-31 against GW's own storefront) -------------
+# Discontinuation is an ABSENCE: the upstream source stops listing a paint and the trade sheets no
+# longer carry a row for it, so nothing in the pipeline can assert it. It has to be recorded here.
+#
+# The 31 Air colours below were culled on 2022-06-13, when GW deleted 44 Air SKUs from its trade
+# register, reissued 13 under new codes and dropped these for good. Confirmed independently against
+# the live storefront: GW's Air range enumerates as "Showing 45 of 45" and none of these is in it,
+# and each per-colour slug 404s while controls (Air-Thallax-Gold-2019, Air-Typhon-Ash-2019) return
+# 200 with `Pot size: 24ml`. The XV-88 slug trap was checked both ways (Air-XV-88 and Air-XV88).
+# 31 culled + 13 reissued + the 2 still-current below = the 44 the register deleted, exactly.
+#
+# NOT included, deliberately: Mechanicus Standard Grey and Mortarion Green Clear. They look culled
+# from the trade data but are LIVE on GW's storefront with lastChanceToBuy:false -- merely out of
+# stock. They were the two paints the bridge could not name-match, which is why they looked absent.
+citadel-colour:
+  Balor Brown|Air:
+    isDiscontinued: true
+  Caledor Sky|Air:
+    isDiscontinued: true
+  Calgar Blue|Air:
+    isDiscontinued: true
+  Castellax Bronze|Air:
+    isDiscontinued: true
+  Chemos Purple|Air:
+    isDiscontinued: true
+  Death Korps Drab|Air:
+    isDiscontinued: true
+  Deathclaw Brown|Air:
+    isDiscontinued: true
+  Deathshroud Clear|Air:
+    isDiscontinued: true
+  Dryad Bark|Air:
+    isDiscontinued: true
+  Gal Vorbak Red|Air:
+    isDiscontinued: true
+  Genestealer Purple|Air:
+    isDiscontinued: true
+  Iron Hands Steel|Air:
+    isDiscontinued: true
+  Ironbreaker|Air:
+    isDiscontinued: true
+  Kakophoni Purple|Air:
+    isDiscontinued: true
+  Karak Stone|Air:
+    isDiscontinued: true
+  Lupercal Green|Air:
+    isDiscontinued: true
+  Nocturne Green|Air:
+    isDiscontinued: true
+  Pyroclast Orange Clear|Air:
+    isDiscontinued: true
+  Relictor Gold|Air:
+    isDiscontinued: true
+  Sigismund Yellow Clear|Air:
+    isDiscontinued: true
+  Sons of Horus Green|Air:
+    isDiscontinued: true
+  Steel Legion Drab|Air:
+    isDiscontinued: true
+  Straken Green|Air:
+    isDiscontinued: true
+  Sybarite Green|Air:
+    isDiscontinued: true
+  Tau Light Ochre|Air:
+    isDiscontinued: true
+  Terminatus Stone|Air:
+    isDiscontinued: true
+  Tuskgor Fur|Air:
+    isDiscontinued: true
+  Vulkan Green|Air:
+    isDiscontinued: true
+  Warboss Green|Air:
+    isDiscontinued: true
+  Word Bearers Red|Air:
+    isDiscontinued: true
+  XV-88|Air:
+    isDiscontinued: true
+  # Reformulated into Contrast at 18 ml on 2022-07-16 (GW trade article: "improved ... to
+  # benefit from the ground-breaking science behind Contrast"), with new product codes
+  # 99189960060/99189960061. The Technical 24 ml versions are gone, not concurrent: absent
+  # from GW's 21-item Technical range and Technical-Hexwraith-Flame-24ml-2018 404s in the
+  # Wayback CDX. New colour, new code, new volume -- two products, not a re-key, so the
+  # Contrast entries are an ADDITION the paint catalog still lacks (tracked separately).
+  Hexwraith Flame|Technical:
+    isDiscontinued: true
+  Nighthaunt Gloom|Technical:
+    isDiscontinued: true
