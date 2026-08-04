@@ -65,9 +65,30 @@ public static class BarcodeEnricher
         if (file is null || !file.TryGetValue(brandSlug, out Dictionary<string, PaintOverride>? brandBarcodes))
             return paints;
 
+        // Same hazard HarvestApplier documents: `{Name}|{Set}` is not unique, so a keyed entry
+        // applied to every match copies one SKU's barcode and pot size onto two different paints.
+        // No entry in the committed citadel file lands on an ambiguous key today (measured
+        // 2026-08-01: 71 such keys brand-wide, 0 of them here), so this changes nothing now -- it
+        // stops the file acquiring that power silently the first time GW ships a same-name,
+        // same-set pair. `productCode` disambiguates where it can; anything still ambiguous is
+        // skipped, because a barcode on the wrong pot is worse than no barcode.
+        var ambiguous = paints.GroupBy(p => $"{p.Name}|{p.Set}", StringComparer.Ordinal)
+            .Where(g => g.Count() > 1)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+
         return paints.Select(p =>
         {
             string key = $"{p.Name}|{p.Set}";
+            if (ambiguous.TryGetValue(key, out List<Paint>? rivals)
+                && brandBarcodes.TryGetValue(key, out PaintOverride? contested))
+            {
+                var owner = rivals
+                    .Where(r => !string.IsNullOrWhiteSpace(contested.ProductCode)
+                                && string.Equals(r.ProductCode, contested.ProductCode, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                if (owner.Count != 1 || !ReferenceEquals(owner[0], p))
+                    return p;
+            }
             if (!brandBarcodes.TryGetValue(key, out PaintOverride? barcode))
                 return p;
 

@@ -150,10 +150,37 @@ public static class HarvestApplier
             return paints;
         }
 
+        // `{Name}|{Set}` is NOT unique -- paint identity is `set|name|productCode|hex`, so a brand
+        // can ship two paints differing only by code or colour. Applying a keyed entry to every
+        // match therefore copies ONE product's barcode and photo onto BOTH. Measured 2026-08-01:
+        // 71 ambiguous keys across 8 brands, 35 of them enriched today, every one putting a single
+        // store photo on two genuinely different Vallejo paints (e.g. Bloody Red|Game Air 72.710
+        // #CD3230 and 76.010 #D41C1C).
+        //
+        // The entry's own `sku` resolves it -- all 917 Vallejo enrich entries carry one, and it is
+        // the product code of the exact paint the generator matched. So an ambiguous key is
+        // disambiguated rather than dropped, and only when the sku picks out exactly one paint.
+        // Anything still ambiguous is skipped: guessing which of two paints a photo belongs to is
+        // worse than leaving both blank.
+        var ambiguous = paints.GroupBy(p => $"{p.Name}|{p.Set}", StringComparer.Ordinal)
+            .Where(g => g.Count() > 1)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+
         return paints.Select(p =>
         {
-            if (!enrich.TryGetValue($"{p.Name}|{p.Set}", out HarvestEntry? entry))
+            string key = $"{p.Name}|{p.Set}";
+            if (!enrich.TryGetValue(key, out HarvestEntry? entry))
                 return p;
+
+            if (ambiguous.TryGetValue(key, out List<Paint>? rivals))
+            {
+                var owner = rivals
+                    .Where(r => !string.IsNullOrWhiteSpace(entry.Sku)
+                                && string.Equals(r.ProductCode, entry.Sku, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                if (owner.Count != 1 || !ReferenceEquals(owner[0], p))
+                    return p;
+            }
 
             return p with
             {
