@@ -2780,6 +2780,24 @@ paints:
     container: pot
     type: Contrast
     finish: Matte
+- name: Hexwraith Flame
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-08-04'
+  productCode: '99189960060'
+  supersedes:
+  - Hexwraith Flame|Technical
+  details:
+    set: Contrast
+    r: 0
+    g: 0
+    b: 0
+    hex: ''
+    volumeMl: 18
+    container: pot
+    type: Contrast
+    finish: Matte
 - name: Iyanden Yellow
   category: paint
   status: current
@@ -2871,6 +2889,24 @@ paints:
     g: 76
     b: 0
     hex: '#6C4C00'
+    volumeMl: 18
+    container: pot
+    type: Contrast
+    finish: Matte
+- name: Nighthaunt Gloom
+  category: paint
+  status: current
+  availability: unknown
+  firstSeen: '2026-08-04'
+  productCode: '99189960061'
+  supersedes:
+  - Nighthaunt Gloom|Technical
+  details:
+    set: Contrast
+    r: 0
+    g: 0
+    b: 0
+    hex: ''
     volumeMl: 18
     container: pot
     type: Contrast
@@ -7565,6 +7601,7 @@ paints:
   status: discontinued
   availability: out_of_stock
   firstSeen: '2026-07-10'
+  supersededBy: Hexwraith Flame|Contrast
   details:
     set: Technical
     r: 41
@@ -7656,6 +7693,7 @@ paints:
   status: discontinued
   availability: out_of_stock
   firstSeen: '2026-07-10'
+  supersededBy: Nighthaunt Gloom|Contrast
   details:
     set: Technical
     r: 58
