@@ -16,6 +16,7 @@ from warhub_acquisition.classify.supersessions import (
     READY,
     RETIRED_ALREADY_DECLARED,
     SAME_CODE,
+    STALE_REGISTER_ROW,
     UNOBSERVED,
     generate_supersession_proposals,
     run_supersession_proposals,
@@ -325,3 +326,70 @@ def test_a_retired_code_already_declared_elsewhere_is_never_ready(tmp_path: Path
     )
     (proposal,) = generate_supersession_proposals(paths)
     assert proposal["bucket"] == RETIRED_ALREADY_DECLARED
+
+
+# --- GW's SS Code: the product's identity across a re-code ---------------------------------------
+
+
+def _fanout(tmp_path, retired_ssc, claimants):
+    """One retired code claimed by several survivors, each with its own SS Code."""
+    observations = [
+        {"key": f"mfr-gw-trade:{code}", "name": f"WIDGET {code}", "sku": code, "ean": ean,
+         "hints": {"sscCode": ssc,
+                   "supersedes": [{"productCode": "99120110001",
+                                   **({"ssc": retired_ssc} if retired_ssc else {})}]}}
+        for code, ean, ssc in claimants
+    ]
+    observations.append({"key": "mfr-gw-trade:99120110001", "name": "OLD WIDGET",
+                         "sku": "99120110001", "ean": "5011921062164", "archived": True,
+                         "hints": {"sscCode": retired_ssc} if retired_ssc else {}})
+    products = [_product(f"games-workshop/{c}", c, [f"mfr-gw-trade:{c}"]) for c, _, _ in claimants]
+    products.append(_product("games-workshop/99120110001", "99120110001",
+                             ["mfr-gw-trade:99120110001"]))
+    return _seed(tmp_path, observations=observations, products=products)
+
+
+def test_the_claimant_that_kept_the_retired_ss_code_is_the_successor(tmp_path: Path) -> None:
+    """GW's SS Code is the product's identity ACROSS a re-code -- 706 of 727 register pairs keep
+    it -- so among COMPETING claimants the one that kept it is the real successor."""
+    paths = _fanout(tmp_path, "91-07", [
+        ("99120110002", "5011921179398", "91-07"),   # kept the SSC
+        ("99120110003", "5011921155873", "80-15"),   # a different product entirely
+    ])
+    by = {p["survivingCode"]: p for p in generate_supersession_proposals(paths)}
+    assert by["99120110002"]["bucket"] == READY
+    assert by["99120110003"]["bucket"] == REGIONAL
+
+
+def test_a_retired_code_no_claimant_kept_is_a_stale_register_row(tmp_path: Path) -> None:
+    """Its own SS Code is known and NOT ONE claimant carries it, so it is not their predecessor --
+    it is a real product parked in the register's `Old ...` columns while a batch of genuinely new
+    products was registered. A verdict, not an unknown."""
+    paths = _fanout(tmp_path, "109-19", [
+        ("99120110002", "5011921179398", "80-01"),
+        ("99120110003", "5011921155873", "80-15"),
+    ])
+    assert {p["bucket"] for p in generate_supersession_proposals(paths)} == {STALE_REGISTER_ROW}
+
+
+def test_an_unknown_retired_ss_code_is_never_convicted_on_absence(tmp_path: Path) -> None:
+    # Requires knowing BOTH sides. Without the retired SSC the rule must stay silent.
+    paths = _fanout(tmp_path, None, [
+        ("99120110002", "5011921179398", "80-01"),
+        ("99120110003", "5011921155873", "80-15"),
+    ])
+    assert {p["bucket"] for p in generate_supersession_proposals(paths)} == {CONFLICTING}
+
+
+def test_a_declared_edge_inside_an_unresolved_fanout_is_not_re_reported(tmp_path: Path) -> None:
+    # Both claimants share the SSC so it cannot split them; one is already declared. Re-flagging
+    # the settled edge as `conflicting` would hide that only its RIVAL needs a human.
+    paths = _fanout(tmp_path, "91-07", [
+        ("99120110002", "5011921179398", "91-07"),
+        ("99120110003", "5011921155873", "91-07"),
+    ])
+    write_yaml(paths.matches,
+               {"supersessions": {"games-workshop/99120110001": "games-workshop/99120110002"}})
+    by = {p["survivingCode"]: p for p in generate_supersession_proposals(paths)}
+    assert by["99120110002"]["bucket"] == ALREADY_DECLARED
+    assert by["99120110003"]["bucket"] == CONFLICTING

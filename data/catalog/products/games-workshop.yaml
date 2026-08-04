@@ -15397,6 +15397,20 @@ products:
     firstSeen: '2026-07-30'
     evidence:
       - mfr-gw-trade:15010199082
+  - id: games-workshop/15010213001
+    name: OGOR MAWTRIBES ARMY SET (CHINESE)
+    manufacturer: games-workshop
+    productCode: '15010213001'
+    sku: '15010213001'
+    ean: '5011921266746'
+    eanConfidence: confirmed
+    gameSystem: age-of-sigmar
+    faction: grand-alliance-destruction
+    category: miniatures
+    status: current
+    firstSeen: '2026-08-01'
+    evidence:
+      - mfr-gw-trade:15010213001
   - id: games-workshop/15010299042
     name: 'WARCRY: CRYPT OF BLOOD (CHINESE)'
     manufacturer: games-workshop
@@ -66852,11 +66866,27 @@ products:
     sku: '99120101465'
     ean: '5011921256037'
     eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: space-marines
     category: miniatures
     status: current
     firstSeen: '2026-07-30'
     evidence:
       - mfr-gw-trade:99120101465
+  - id: games-workshop/99120101484
+    name: 'DARK ANGELS: MASTER LAZARUS'
+    manufacturer: games-workshop
+    productCode: '99120101484'
+    sku: '99120101484'
+    ean: '5011921256440'
+    eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: space-marines
+    category: miniatures
+    status: current
+    firstSeen: '2026-08-01'
+    evidence:
+      - mfr-gw-trade:99120101484
   - id: games-workshop/99120101488
     name: Space Marine Heads
     manufacturer: games-workshop
@@ -80643,6 +80673,8 @@ products:
     sku: '99120108138'
     ean: '5011921256204'
     eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: armies-of-the-imperium
     category: miniatures
     status: current
     firstSeen: '2026-07-30'
@@ -120133,6 +120165,48 @@ products:
       - ret-goblingaming:legions-imperialis-order-tokens-obj-markers
       - ret-radaddel:/l-i-order-tokens-and-objectives-markers
       - ret-tistaminis:legions-imperialis-order-tokens-and-objectives-markers-pre-order
+  - id: games-workshop/99122699035
+    name: L/I:WARLORD TITAN+QUAKE CANNON & BEAM/EX
+    manufacturer: games-workshop
+    productCode: '99122699035'
+    sku: '99122699035'
+    ean: '5011921259274'
+    eanConfidence: confirmed
+    gameSystem: other-games
+    faction: legions-imperialis
+    category: miniatures
+    status: current
+    firstSeen: '2026-08-01'
+    evidence:
+      - mfr-gw-trade:99122699035
+  - id: games-workshop/99122699036
+    name: 'L/I: REAVER TITAN GRAV/OBL & VOLK/ANNH'
+    manufacturer: games-workshop
+    productCode: '99122699036'
+    sku: '99122699036'
+    ean: '5011921259281'
+    eanConfidence: confirmed
+    gameSystem: other-games
+    faction: legions-imperialis
+    category: miniatures
+    status: current
+    firstSeen: '2026-08-01'
+    evidence:
+      - mfr-gw-trade:99122699036
+  - id: games-workshop/99122699038
+    name: 'L/I: WARLORD TITAN W/VOLKITE & MACRO GAT'
+    manufacturer: games-workshop
+    productCode: '99122699038'
+    sku: '99122699038'
+    ean: '5011921260492'
+    eanConfidence: confirmed
+    gameSystem: other-games
+    faction: legions-imperialis
+    category: miniatures
+    status: current
+    firstSeen: '2026-08-01'
+    evidence:
+      - mfr-gw-trade:99122699038
   - id: games-workshop/99122701001
     name: Chaos Lord on Manticore
     manufacturer: games-workshop
@@ -147903,12 +147977,12 @@ products:
       - ret-gamenerdz:/warhammer-colour-mordian-corpsegrass-tufts
       - ret-goblingaming:mordian-corpsegrass-citadel-colour-tufts
   - id: games-workshop/99229999193
-    name: 'Citadel Colour: Verdia Veldt Tufts'
+    name: 'WARHAMMER COLOUR: VERDIA VELDT TUFTS'
     manufacturer: games-workshop
     productCode: '99229999193'
     sku: '99229999193'
     ean: '5011921248094'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: miniatures
     status: current
     availability: in_stock
@@ -147917,6 +147991,7 @@ products:
     url: https://www.goblingaming.co.uk/products/verdia-veldt-citadel-colour-tufts
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2021_10_99229999177_VerdiaVeldtTuftsLead.jpg?v=1634316551
     evidence:
+      - mfr-gw-trade:99229999193
       - ret-goblingaming:verdia-veldt-citadel-colour-tufts
   - id: games-workshop/99229999194
     name: WARHAMMER DICE

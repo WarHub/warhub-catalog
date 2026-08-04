@@ -446,8 +446,9 @@ def _row_code(row: dict) -> str | None:
 
 def _predecessor(
     row: dict, run_date: str | None = None, known: frozenset[str] = frozenset()
-) -> tuple[str | None, object, str | None]:
-    """The (old product code, raw old barcode, change date) a `Code Changes` row renumbers FROM.
+) -> tuple[str | None, object, str | None, str | None]:
+    """The (old product code, raw old barcode, change date, old SS Code) a `Code Changes` row
+    renumbers FROM.
 
     Verified against the live register (InsertDelete18.05.2026.xlsx, sheet `Code Changes`), whose
     header is: New Product Code | Old Product Code | Description | New SS Code | Old SSC Code |
@@ -477,7 +478,13 @@ def _predecessor(
         if today is None or changed <= today:
             changed_on = changed.isoformat()
 
-    return (code or None), old_barcode, changed_on
+    # GW's SS Code is the product's IDENTITY across a re-code -- 706 of 727 register pairs keep
+    # it. That makes `Old SSC Code` the discriminator between a real predecessor and a stale
+    # regional edition parked in the Old columns, which is what the `conflicting` bucket is full
+    # of. It is only sound BETWEEN competing claimants, never as a veto on a lone edge: 9 already
+    # declared pairs legitimately renumber their SSC (Kor'sarro Khan 48-88 -> 55-24).
+    old_ssc = _first(row, "Old SSC Code", "Old SS Code", "Old SSC")
+    return (code or None), old_barcode, changed_on, (str(old_ssc).strip() if old_ssc else None)
 
 
 def _clean_ean(raw) -> str | None:
@@ -685,7 +692,7 @@ def _mint_lineage_records(observations: dict[str, Observation], stats: dict[str,
 
 
 def _attach_lineage(
-    lineage: list[tuple[str, str, object, str | None]],
+    lineage: list[tuple[str, str, object, str | None, str | None]],
     observations: dict[str, Observation],
     stats: dict[str, int],
 ) -> None:
@@ -710,15 +717,15 @@ def _attach_lineage(
     single-element list keeps that case from needing a shape change later. Sorted for determinism.
     """
     codes_per_barcode: dict[str, set[str]] = {}
-    cleaned: list[tuple[str, str, str | None, str | None]] = []
-    for key, old_code, raw_barcode, changed_on in lineage:
+    cleaned: list[tuple[str, str, str | None, str | None, str | None]] = []
+    for key, old_code, raw_barcode, changed_on, _old_ssc in lineage:
         old_ean = _clean_ean(raw_barcode)
-        cleaned.append((key, old_code, old_ean, changed_on))
+        cleaned.append((key, old_code, old_ean, changed_on, _old_ssc))
         if old_ean is not None:
             codes_per_barcode.setdefault(old_ean, set()).add(old_code)
 
     by_key: dict[str, dict[str, dict[str, str]]] = {}
-    for key, old_code, old_ean, changed_on in cleaned:
+    for key, old_code, old_ean, changed_on, old_ssc in cleaned:
         if old_ean is not None and len(codes_per_barcode[old_ean]) > 1:
             stats["lineage_placeholder_barcodes"] += 1
             old_ean = None
@@ -727,6 +734,8 @@ def _attach_lineage(
             entry["ean"] = old_ean
         if changed_on is not None:
             entry["changedOn"] = changed_on
+        if old_ssc:
+            entry["ssc"] = old_ssc
         # Dedup on the old code: the same renumbering is restated across workbook generations.
         # A later row carrying a usable barcode upgrades an earlier bare entry.
         existing = by_key.setdefault(key, {}).get(old_code)
@@ -897,9 +906,9 @@ def gw_trade_sheets_strategy(
         # Re-coding lineage: this row says "old code -> this code". Recorded against
         # the SURVIVING key and resolved after the whole harvest (see below). A row
         # whose old code equals its new code is a no-op, not a supersession.
-        old_code, old_barcode, changed_on = _predecessor(row, run_date, known)
+        old_code, old_barcode, changed_on, old_ssc = _predecessor(row, run_date, known)
         if old_code is not None and old_code != sku:
-            lineage.append((key, old_code, old_barcode, changed_on))
+            lineage.append((key, old_code, old_barcode, changed_on, old_ssc))
 
         fresh = Observation(
             key=key,
