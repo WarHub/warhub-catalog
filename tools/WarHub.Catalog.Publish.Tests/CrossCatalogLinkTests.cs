@@ -182,8 +182,15 @@ public sealed class BarcodeIndexTests
         ProductCode: null,
         Ean: ean,
         AdditionalEans: additional.Length > 0 ? additional : null,
+        ImageUrl: null,
+        PriceGbp: null,
+        PriceUsd: null,
+        PriceEur: null,
+        PriceCad: null,
         Status: "current",
         Availability: "unknown",
+        Supersedes: null,
+        SupersededBy: null,
         Equivalents: []);
 
     [Fact]

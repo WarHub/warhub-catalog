@@ -39,4 +39,33 @@ public class PaintRecordMapperTests
         Assert.Equal("discontinued", r.Status);
         Assert.Equal("out_of_stock", r.Availability);
     }
+
+    [Fact]
+    public void ToRecord_CarriesPricesAndLineage()
+    {
+        Paint p = P() with
+        {
+            PriceGbp = 3.30m, PriceUsd = 5.60m, PriceEur = 4.40m, PriceCad = 7.25m,
+            SupersededBy = "Retributor Armour|Contrast",
+            Supersedes = ["Shining Gold|Base"],
+        };
+        PaintRecord r = PaintRecordMapper.ToRecord(p);
+
+        Assert.Equal(3.30m, r.PriceGbp);
+        Assert.Equal(5.60m, r.PriceUsd);
+        Assert.Equal(4.40m, r.PriceEur);
+        Assert.Equal(7.25m, r.PriceCad);
+        Assert.Equal("Retributor Armour|Contrast", r.SupersededBy);
+        Assert.Equal(["Shining Gold|Base"], r.Supersedes);
+    }
+
+    [Fact]
+    public void ToRecord_EmptyLineageAndPrice_StayNull_SoTheKeysAreOmitted()
+    {
+        PaintRecord r = PaintRecordMapper.ToRecord(P() with { Supersedes = [] });
+        Assert.Null(r.Supersedes);      // never an empty list -> omitted from the archive YAML
+        Assert.Null(r.SupersededBy);
+        Assert.Null(r.PriceGbp);
+        Assert.Null(r.PriceCad);
+    }
 }

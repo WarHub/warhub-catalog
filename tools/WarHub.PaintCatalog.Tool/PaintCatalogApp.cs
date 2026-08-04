@@ -210,6 +210,13 @@ internal static class PaintCatalogApp
                     paints = HarvestApplier.AppendAdditions(paints, brandInfo.Slug, harvestData);
                     if (verbose && paints.Count > before)
                         Console.Write($" +{paints.Count - before} harvested");
+
+                    // Hand-minted records (overrides.yaml `additions:`) join here too, so the
+                    // enrichment chain below treats them exactly like a native paint.
+                    before = paints.Count;
+                    paints = OverrideApplier.AppendAdditions(paints, brandInfo.Slug, overridesPath);
+                    if (verbose && paints.Count > before)
+                        Console.Write($" +{paints.Count - before} minted");
                 }
 
                 // Enrich with volume/packaging
@@ -247,6 +254,9 @@ internal static class PaintCatalogApp
 
                 // Apply overrides
                 paints = OverrideApplier.Apply(paints, brandInfo.Slug, overridesPath);
+
+                // Derive the reverse of every declared supersession, once both sides exist.
+                paints = OverrideApplier.LinkSupersessions(paints);
 
                 bool hasProductCodes = paints.Any(p => p.ProductCode is not null);
 
@@ -305,6 +315,10 @@ internal static class PaintCatalogApp
                     if (sample > 0)
                         scrapedPaints = scrapedPaints.Take(sample).ToList();
 
+                    // Hand-minted records join BEFORE enrichment, as on the Arcturus path.
+                    if (sample == 0)
+                        scrapedPaints = OverrideApplier.AppendAdditions(scrapedPaints, slug, overridesPath);
+
                     // Enrich with volume/packaging (use defaults if scraper didn't provide)
                     scrapedPaints = scrapedPaints.Select(p => p with
                     {
@@ -318,8 +332,9 @@ internal static class PaintCatalogApp
                         .Select(p => FinishClassifier.Enrich(p, scrapedBrand.DisplayName))
                         .ToList();
 
-                    // Apply overrides
+                    // Apply overrides, then derive the reverse of every declared supersession.
                     scrapedPaints = OverrideApplier.Apply(scrapedPaints, slug, overridesPath);
+                    scrapedPaints = OverrideApplier.LinkSupersessions(scrapedPaints);
 
                     bool hasProductCodes = scrapedPaints.Any(p => p.ProductCode is not null);
 

@@ -12,7 +12,8 @@ public class PaintRecordSchemaTests
         string[] expected =
         [
             "Name", "Category", "Status", "Availability", "FirstSeen", "ProductCode", "Ean",
-            "AdditionalEans", "ImageUrl", "Details",
+            "AdditionalEans", "ImageUrl", "PriceGbp", "PriceUsd", "PriceEur", "PriceCad",
+            "Supersedes", "SupersededBy", "Details",
         ];
         string[] actual = typeof(PaintRecord).GetProperties().Select(p => p.Name).ToArray();
         Assert.Equal(expected, actual);

@@ -40,8 +40,15 @@
           "items": { "type": "string" },
           "minItems": 1
         },
+        "imageUrl": { "type": "string" },
+        "priceGbp": { "type": "number" },
+        "priceUsd": { "type": "number" },
+        "priceEur": { "type": "number" },
+        "priceCad": { "type": "number" },
         "status": { "type": "string" },
         "availability": { "type": "string" },
+        "supersedes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "supersededBy": { "type": "string" },
         "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }
       }
     },

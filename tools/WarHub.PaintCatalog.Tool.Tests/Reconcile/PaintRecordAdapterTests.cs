@@ -100,6 +100,34 @@ public class PaintRecordAdapterTests
     }
 
     [Fact]
+    public void Merge_KeepsLastKnownPrice_WhenFreshQuotesNone()
+    {
+        // Price is evidence: a run whose bridge simply did not quote a figure must not blank the
+        // record, but a fresh figure wins.
+        PaintRecord existing = R() with { PriceGbp = 2.75m, PriceUsd = 4.50m };
+        PaintRecord fresh = R() with { PriceGbp = 3.30m };
+        PaintRecord merged = _a.Merge(existing, fresh);
+
+        Assert.Equal(3.30m, merged.PriceGbp);
+        Assert.Equal(4.50m, merged.PriceUsd);
+    }
+
+    [Fact]
+    public void Merge_LineageIsDeclarative_FreshWinsIncludingWithdrawal()
+    {
+        // Unlike evidence fields, lineage comes from overrides.yaml. Withdrawing the declaration
+        // has to actually withdraw the link, or a mistaken supersession is unfixable.
+        PaintRecord existing = R() with { SupersededBy = "Black|Contrast", Supersedes = ["Old|Base"] };
+        PaintRecord declared = _a.Merge(existing, R() with { SupersededBy = "Black|Speedpaint" });
+        PaintRecord withdrawn = _a.Merge(existing, R());
+
+        Assert.Equal("Black|Speedpaint", declared.SupersededBy);
+        Assert.Null(declared.Supersedes);
+        Assert.Null(withdrawn.SupersededBy);
+        Assert.Null(withdrawn.Supersedes);
+    }
+
+    [Fact]
     public void ApplyRename_PureNameRename_OnlyChangesName()
     {
         PaintRecord existing = R(name: "Old Name", firstSeen: "2026-01-01");

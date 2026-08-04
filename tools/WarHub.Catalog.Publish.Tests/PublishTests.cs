@@ -11,7 +11,98 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     public void Publishes_expected_counts()
     {
         Assert.Equal(2, fx.Result.Products);
-        Assert.Equal(4, fx.Result.Paints);
+        Assert.Equal(7, fx.Result.Paints);
+    }
+
+    [Fact]
+    public void Paint_image_url_is_published()
+    {
+        // 3,864 of the archive's paints carry an imageUrl and PaintSource has always parsed it,
+        // but PaintRecord had no such property, so every one of them was dropped at publish.
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        JsonElement black = paints.Single(p => p.GetProperty("id").GetString() == "vallejo/black");
+        JsonElement abaddon = paints.Single(p => p.GetProperty("id").GetString() == "citadel/abaddon-black");
+
+        Assert.Equal("https://img.example/vallejo-black.jpg", black.GetProperty("imageUrl").GetString());
+        Assert.False(abaddon.TryGetProperty("imageUrl", out _));   // omitted, never null or ""
+    }
+
+    [Fact]
+    public void Paint_prices_are_published_and_omitted_when_absent()
+    {
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        JsonElement black = paints.Single(p => p.GetProperty("id").GetString() == "vallejo/black");
+        JsonElement abaddon = paints.Single(p => p.GetProperty("id").GetString() == "citadel/abaddon-black");
+
+        Assert.Equal(2.75m, black.GetProperty("priceGbp").GetDecimal());
+        Assert.Equal(3.99m, black.GetProperty("priceUsd").GetDecimal());
+        Assert.Equal(3.20m, black.GetProperty("priceEur").GetDecimal());
+        Assert.Equal(4.50m, black.GetProperty("priceCad").GetDecimal());
+        foreach (string key in new[] { "priceGbp", "priceUsd", "priceEur", "priceCad" })
+        {
+            Assert.False(abaddon.TryGetProperty(key, out _));
+        }
+        // Availability deliberately does not follow price across from the trade evidence.
+        Assert.Equal("unknown", black.GetProperty("availability").GetString());
+    }
+
+    [Fact]
+    public void Paint_lineage_publishes_both_directions_as_ids()
+    {
+        // A reformulation keeps BOTH records: the retired Technical pot and the Contrast
+        // replacement are separate identities (set is part of the identity key), linked rather
+        // than folded, so a pot bought years ago still resolves and says what replaced it.
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        var ids = paints.Select(p => p.GetProperty("id").GetString()).ToHashSet();
+
+        JsonElement contrast = paints.Single(p =>
+            p.GetProperty("name").GetString() == "Hexwraith Flame" &&
+            p.GetProperty("range").GetString() == "Contrast");
+        JsonElement technical = paints.Single(p =>
+            p.GetProperty("name").GetString() == "Hexwraith Flame" &&
+            p.GetProperty("range").GetString() == "Technical");
+
+        string contrastId = contrast.GetProperty("id").GetString()!;
+        string technicalId = technical.GetProperty("id").GetString()!;
+        Assert.NotEqual(contrastId, technicalId);
+
+        Assert.Equal(contrastId, technical.GetProperty("supersededBy").GetString());
+        Assert.Equal(technicalId, Assert.Single(contrast.GetProperty("supersedes")
+            .EnumerateArray().Select(e => e.GetString())));
+        Assert.Contains(technical.GetProperty("supersededBy").GetString(), ids);
+
+        // The relation is NOT encoded in status: the retired record keeps whatever the evidence
+        // says, so a consumer filtering on status is unaffected.
+        Assert.Equal("discontinued", technical.GetProperty("status").GetString());
+        Assert.False(technical.TryGetProperty("supersedes", out _));
+        Assert.False(contrast.TryGetProperty("supersededBy", out _));
+    }
+
+    [Fact]
+    public void Paint_lineage_that_resolves_to_nothing_is_not_published()
+    {
+        // An unresolvable upstream key must yield NO property rather than a dangling id: the
+        // published values are paint ids and consumers dereference them.
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        JsonElement ghost = paints.Single(p => p.GetProperty("name").GetString() == "Ghost Ash");
+
+        Assert.False(ghost.TryGetProperty("supersededBy", out _));
+        Assert.False(ghost.TryGetProperty("supersedes", out _));
+    }
+
+    [Fact]
+    public void Every_lineage_id_resolves_to_a_paint()
+    {
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        var ids = paints.Select(p => p.GetProperty("id").GetString()).ToHashSet();
+        foreach (JsonElement p in paints)
+        {
+            if (p.TryGetProperty("supersededBy", out JsonElement by))
+                Assert.Contains(by.GetString(), ids);
+            if (p.TryGetProperty("supersedes", out JsonElement prior))
+                foreach (JsonElement e in prior.EnumerateArray())
+                    Assert.Contains(e.GetString(), ids);
+        }
     }
 
     [Fact]
@@ -123,8 +214,8 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
 
         JsonElement xIndex = Doc("paints/index.json");
         int xSum = xIndex.GetProperty("partitions").EnumerateArray().Sum(e => e.GetProperty("records").GetInt32());
-        Assert.Equal(4, xIndex.GetProperty("total").GetInt32());
-        Assert.Equal(4, xSum);
+        Assert.Equal(7, xIndex.GetProperty("total").GetInt32());
+        Assert.Equal(7, xSum);
     }
 
     [Fact]

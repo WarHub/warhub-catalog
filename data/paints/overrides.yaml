@@ -1,3 +1,47 @@
+# Manual corrections to the paint catalog. Hand-edited; read by tools/WarHub.PaintCatalog.Tool
+# (--overrides). Every section is keyed by brand slug and read independently, so a mistake in one
+# section cannot silently disable another.
+#
+#   <brand-slug>:  "{Name}|{Set}" -> field overrides (productCode, hex, volumeMl, packaging, ean,
+#                  additionalEans, priceGbp/Usd/Eur/Cad, supersededBy)
+#
+
+additions:     <brand-slug> -> list of MINTED paints (name, set, productCode, ean, imageUrl,
+#                  supersededBy). For records a maintainer researched that NO upstream source
+#                  supplies. Distinct from data/paints/harvest/*.yaml `additions:`, which are
+#                  GENERATED from observed manufacturer listings and rewritten by the generator.
+#   aliases:       <brand-slug> -> {new identity key: old identity key} (reconciler renames)
+#   retract:       <brand-slug> -> [identity key] (drop from the archive)
+#
+# Minted paints are appended before the enrichment chain, so volume/container/type/finish/barcodes
+# come from the same tables a native paint uses. They are born colour-less (hex "", r/g/b 0) like
+# harvest additions; a swatch-extraction pass or an explicit `hex:` override fills the colour later.
+
+additions:
+  citadel-colour:
+    # Games Workshop reformulated the Hexwraith Flame and Nighthaunt Gloom Technical paints with
+    # Contrast chemistry and relaunched them IN the Contrast range on 2022-07-16 -- 18 ml, under a
+    # new 991899600xx product-code block. GW's trade announcement of that wave: "We've also improved
+    # the existing Hexwraith Flame and Nighthaunt Gloom Technical paints to benefit from the
+    # ground-breaking science behind Contrast." (GW store slugs: contrast-hexwraith-flame-18ml-2022,
+    # contrast-nighthaunt-gloom-18ml-2022.)
+    #
+    # These are TWO PRODUCTS, not a re-key of the Technical pots: new range, new volume, new
+    # formula, new code block -- and `set` is part of the paint identity key (set|name|productCode|
+    # hex), so each is a genuinely new identity. The Technical records stay, and point forward.
+    #
+    # Neither Arcturus5404/miniature-paints nor any harvested manufacturer source carries them,
+    # which is why they are minted here rather than harvested. NO hex is asserted: the Technical
+    # hex describes the OLD formula, so copying it across would be fabrication.
+    - name: Hexwraith Flame
+      set: Contrast
+      productCode: '99189960060'
+      source: Games Workshop trade announcement, 2022-07-16 Contrast wave
+    - name: Nighthaunt Gloom
+      set: Contrast
+      productCode: '99189960061'
+      source: Games Workshop trade announcement, 2022-07-16 Contrast wave
+
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
 # the bridge and the VolumeTable. Keep every entry cited -- these are asserted facts.
@@ -17,6 +61,8 @@
 # from the trade data but are LIVE on GW's storefront with lastChanceToBuy:false -- merely out of
 # stock. They were the two paints the bridge could not name-match, which is why they looked absent.
 citadel-colour:
+  # Only the forward direction is declared; `supersedes` on the Contrast records is derived from
+  # these, so the two directions cannot drift. Deliberately NOT expressed as a status change: the
   Balor Brown|Air:
     isDiscontinued: true
   Caledor Sky|Air:
@@ -86,6 +132,10 @@ citadel-colour:
   # Wayback CDX. New colour, new code, new volume -- two products, not a re-key, so the
   # Contrast entries are an ADDITION the paint catalog still lacks (tracked separately).
   Hexwraith Flame|Technical:
+    # Reformulated into Contrast on 2022-07-16; the Technical pot is BOTH
+    # discontinued and superseded, and both facts belong on the record.
+    supersededBy: Hexwraith Flame|Contrast
     isDiscontinued: true
   Nighthaunt Gloom|Technical:
+    supersededBy: Nighthaunt Gloom|Contrast
     isDiscontinued: true

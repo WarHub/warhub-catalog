@@ -16,7 +16,7 @@ public record Paint
     public string? Packaging { get; init; }
     public string? Ean { get; init; }
     /// <summary>Extra barcodes the same paint is sold under (regional variants). See PaintRecord.</summary>
-    public IReadOnlyList<string>? AdditionalEans { get; init; }
+    public List<string>? AdditionalEans { get; init; }
     public bool IsDiscontinued { get; init; }
 
     /// <summary>
@@ -36,4 +36,23 @@ public record Paint
     /// URL to product/swatch image from manufacturer or retailer.
     /// </summary>
     public string? ImageUrl { get; init; }
+
+    /// <summary>Manufacturer list price per currency. See PaintRecord for why availability does NOT follow.</summary>
+    public decimal? PriceGbp { get; init; }
+    public decimal? PriceUsd { get; init; }
+    public decimal? PriceEur { get; init; }
+    public decimal? PriceCad { get; init; }
+
+    /// <summary>
+    /// The <c>{Name}|{Set}</c> identity of the paint that REPLACED this one (a reformulation into
+    /// another range). Maintainer-declared in overrides.yaml; the single declared direction.
+    /// </summary>
+    public string? SupersededBy { get; init; }
+
+    /// <summary>
+    /// The <c>{Name}|{Set}</c> identities this paint replaced. DERIVED from the declarations above
+    /// by <see cref="Enrichment.OverrideApplier.LinkSupersessions"/> — never hand-written, so the
+    /// two directions cannot drift apart.
+    /// </summary>
+    public List<string>? Supersedes { get; init; }
 }

@@ -105,6 +105,16 @@ public static class BarcodeEnricher
                 // by VolumeEnricher; when the bridge has no volume for this paint (older file, or
                 // a trade row with a blank SIZE, or two SKUs disagreeing) the table value stands.
                 VolumeMl = barcode.VolumeMl ?? p.VolumeMl,
+                // Trade list prices, when the bridge quotes them. Blank-fill only, same as Ean: a
+                // hand override still wins. Availability is NOT taken from the same evidence --
+                // a trade sheet says what a pot costs, never whether anyone has one in stock.
+                // NOTE: measured 2026-08-04, GW's paint workbooks carry NO price column at all
+                // (0 of 938 paint observations have one), so these are inert on today's data --
+                // kept because the field must exist before the harvest bridge can supply it.
+                PriceGbp = p.PriceGbp ?? barcode.PriceGbp,
+                PriceUsd = p.PriceUsd ?? barcode.PriceUsd,
+                PriceEur = p.PriceEur ?? barcode.PriceEur,
+                PriceCad = p.PriceCad ?? barcode.PriceCad,
             };
         }).ToList();
     }

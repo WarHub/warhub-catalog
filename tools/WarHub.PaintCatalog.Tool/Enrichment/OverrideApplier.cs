@@ -1,3 +1,4 @@
+using WarHub.CatalogStore;
 using WarHub.PaintCatalog.Tool.Models;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
@@ -5,14 +6,33 @@ using YamlDotNet.Serialization.NamingConventions;
 namespace WarHub.PaintCatalog.Tool.Enrichment;
 
 /// <summary>
-/// Applies manual overrides from an overrides YAML file.
+/// Applies the hand-maintained overrides file (<c>data/paints/overrides.yaml</c>).
+///
+/// The file has brand-slug keys at the ROOT carrying per-paint field overrides
+/// (<c>{brand-slug}</c> → <c>{Name}|{Set}</c> → fields), plus reserved top-level sections:
+/// <c>additions</c> (this class), and <c>aliases</c>/<c>retract</c> (see PaintOverrideAliases).
+///
+/// Each section is read INDEPENDENTLY: the document is parsed once into an untyped tree and only
+/// the requested node is bound to a typed shape. That matters because the sections have different
+/// shapes — before this, one <c>retract:</c> list anywhere in the file made the whole typed parse
+/// throw and silently disabled EVERY field override in the file.
 /// </summary>
 public static class OverrideApplier
 {
+    /// <summary>Top-level keys that are sections, not brand slugs.</summary>
+    internal static readonly IReadOnlySet<string> ReservedSections =
+        new HashSet<string>(StringComparer.Ordinal) { "additions", "aliases", "retract" };
+
     private static readonly IDeserializer YamlDeserializer = new DeserializerBuilder()
         .WithNamingConvention(CamelCaseNamingConvention.Instance)
         .IgnoreUnmatchedProperties()
         .Build();
+
+    // Used to re-emit ONE parsed node so it can be bound to a typed shape (see Bind). The shared
+    // catalog serializer is deliberate: its QuotingEventEmitter keeps a scalar like the EAN
+    // '0011921153770' or the code '0605' a quoted STRING across the round trip, instead of letting
+    // it re-emit plain and come back as an integer with its leading zeros eaten.
+    private static readonly ISerializer NodeSerializer = CatalogSerializer.CreateSerializer();
 
     /// <summary>
     /// Loads overrides from a YAML file and applies them to the paint list.
@@ -21,27 +41,18 @@ public static class OverrideApplier
     /// </summary>
     public static IReadOnlyList<Paint> Apply(IReadOnlyList<Paint> paints, string brandSlug, string? overridesPath)
     {
-        if (string.IsNullOrEmpty(overridesPath) || !File.Exists(overridesPath))
+        if (ReservedSections.Contains(brandSlug))
             return paints;
 
-        string yaml = File.ReadAllText(overridesPath);
-        Dictionary<string, Dictionary<string, PaintOverride>>? overrides;
-        try
-        {
-            overrides = YamlDeserializer.Deserialize<Dictionary<string, Dictionary<string, PaintOverride>>>(yaml);
-        }
-        catch
-        {
-            return paints;
-        }
-
-        if (overrides is null || !overrides.TryGetValue(brandSlug, out Dictionary<string, PaintOverride>? brandOverrides))
+        Dictionary<string, PaintOverride>? brandOverrides =
+            Bind<Dictionary<string, PaintOverride>>(LoadRoot(overridesPath), brandSlug);
+        if (brandOverrides is null)
             return paints;
 
         return paints.Select(p =>
         {
             string key = $"{p.Name}|{p.Set}";
-            if (!brandOverrides.TryGetValue(key, out PaintOverride? over))
+            if (!brandOverrides.TryGetValue(key, out PaintOverride? over) || over is null)
                 return p;
 
             string newHex = over.Hex ?? p.Hex;
@@ -74,8 +85,110 @@ public static class OverrideApplier
                 // explicit `false` distinguishable from an absent key, so writing one is a
                 // deliberate statement that the source is wrong, not an accident.
                 IsDiscontinued = over.IsDiscontinued ?? p.IsDiscontinued,
+                PriceGbp = over.PriceGbp ?? p.PriceGbp,
+                PriceUsd = over.PriceUsd ?? p.PriceUsd,
+                PriceEur = over.PriceEur ?? p.PriceEur,
+                PriceCad = over.PriceCad ?? p.PriceCad,
+                SupersededBy = Blank(over.SupersededBy) ?? p.SupersededBy,
             };
         }).ToList();
+    }
+
+    /// <summary>
+    /// Appends MINTED paints from the overrides file's <c>additions</c> section — records a
+    /// maintainer researched that no upstream source supplies at all (a range move, a
+    /// reformulation), as opposed to <c>data/paints/harvest/*.yaml</c> additions, which are
+    /// GENERATED from observed manufacturer-catalog listings and are overwritten wholesale by the
+    /// next generator run.
+    ///
+    /// Shape (mirrors the harvest additions it sits beside):
+    /// <code>
+    /// additions:
+    ///   citadel-colour:
+    ///     - name: Hexwraith Flame
+    ///       set: Contrast
+    ///       productCode: '99189960060'
+    /// </code>
+    ///
+    /// Called at the same point in the pipeline as the harvest additions — BEFORE the enrichment
+    /// chain — so a minted paint picks up volume/container/type/finish/barcodes from the same
+    /// tables a native paint does, and the field-override section below still gets the last word.
+    /// A minted paint carries no colour (<c>hex: ""</c>, R/G/B 0) exactly like a harvest addition:
+    /// the swatch-extraction pass or an explicit hex override fills it later.
+    /// Idempotent on <c>{Name}|{Set}|{ProductCode}</c>, so it is a no-op once upstream catches up.
+    /// </summary>
+    public static IReadOnlyList<Paint> AppendAdditions(
+        IReadOnlyList<Paint> paints, string brandSlug, string? overridesPath)
+    {
+        Dictionary<string, object?>? root = LoadRoot(overridesPath);
+        var additions = Bind<Dictionary<string, List<PaintAddition>>>(root, "additions");
+        if (additions is null ||
+            !additions.TryGetValue(brandSlug, out List<PaintAddition>? brandAdditions) ||
+            brandAdditions is not { Count: > 0 })
+        {
+            return paints;
+        }
+
+        var existing = new HashSet<string>(
+            paints.Select(p => $"{p.Name}|{p.Set}|{p.ProductCode}"), StringComparer.OrdinalIgnoreCase);
+
+        List<Paint> result = paints.ToList();
+        foreach (PaintAddition addition in brandAdditions)
+        {
+            if (addition is null || Blank(addition.Name) is null || Blank(addition.Set) is null)
+                continue;
+            string code = Blank(addition.ProductCode) ?? "";
+            if (!existing.Add($"{addition.Name}|{addition.Set}|{code}"))
+                continue;
+
+            result.Add(new Paint
+            {
+                Name = addition.Name!,
+                Set = addition.Set!,
+                ProductCode = Blank(addition.ProductCode),
+                R = 0,
+                G = 0,
+                B = 0,
+                Hex = "",
+                Ean = Blank(addition.Ean),
+                ImageUrl = Blank(addition.ImageUrl),
+                SupersededBy = Blank(addition.SupersededBy),
+            });
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Materializes the REVERSE of every <c>supersededBy</c> declaration: the replacement paint's
+    /// <c>supersedes</c> list. Only one direction is ever declared, so the two cannot drift apart —
+    /// the same discipline the product side gets from a single <c>matches.supersessions</c> map.
+    /// Runs after the field overrides, over one brand's finished list. A declaration whose target
+    /// is not in this brand is left on the record as declared but produces no reverse link (and the
+    /// publisher will not publish an unresolvable one).
+    /// </summary>
+    public static IReadOnlyList<Paint> LinkSupersessions(IReadOnlyList<Paint> paints)
+    {
+        var predecessors = new Dictionary<string, SortedSet<string>>(StringComparer.OrdinalIgnoreCase);
+        foreach (Paint p in paints)
+        {
+            string? target = Blank(p.SupersededBy);
+            string self = $"{p.Name}|{p.Set}";
+            if (target is null || string.Equals(target, self, StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (!predecessors.TryGetValue(target, out SortedSet<string>? set))
+                predecessors[target] = set = new SortedSet<string>(StringComparer.Ordinal);
+            set.Add(self);
+        }
+
+        if (predecessors.Count == 0)
+            return paints;
+
+        return paints
+            .Select(p => predecessors.TryGetValue($"{p.Name}|{p.Set}", out SortedSet<string>? found)
+                ? p with { Supersedes = found.ToList() }
+                : p)
+            .ToList();
     }
 
     internal static bool TryParseHex(string hex, out int r, out int g, out int b)
@@ -94,6 +207,42 @@ public static class OverrideApplier
         r = g = b = 0;
         return false;
     }
+
+    /// <summary>Parses the whole file into an untyped tree; null when absent or malformed.</summary>
+    private static Dictionary<string, object?>? LoadRoot(string? overridesPath)
+    {
+        if (string.IsNullOrEmpty(overridesPath) || !File.Exists(overridesPath))
+            return null;
+        try
+        {
+            return YamlDeserializer.Deserialize<Dictionary<string, object?>>(File.ReadAllText(overridesPath));
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Binds ONE top-level node to a typed shape. A section that fails to bind yields null and
+    /// leaves every other section readable — the file is hand-edited, and one mistyped section
+    /// must not take the rest of it down with it.
+    /// </summary>
+    private static T? Bind<T>(Dictionary<string, object?>? root, string key) where T : class
+    {
+        if (root is null || !root.TryGetValue(key, out object? node) || node is null)
+            return null;
+        try
+        {
+            return YamlDeserializer.Deserialize<T>(NodeSerializer.Serialize(node));
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string? Blank(string? value) => string.IsNullOrWhiteSpace(value) ? null : value;
 }
 
 /// <summary>
@@ -121,6 +270,35 @@ public record PaintOverride
     /// neither can assert it. A researched, cited decision recorded as data is the honest shape.
     /// </summary>
     public bool? IsDiscontinued { get; init; }
+    /// <summary>
+    /// Manufacturer list price. Like <see cref="AdditionalEans"/> these are ALSO the read shape for
+    /// the generated manufacturer bridge file, so the bridge can carry trade prices. Availability
+    /// deliberately does not travel with them: trade evidence carries no stock signal, and one
+    /// paint identity spans several retail SKUs whose stock differs.
+    /// </summary>
+    public decimal? PriceGbp { get; init; }
+    public decimal? PriceUsd { get; init; }
+    public decimal? PriceEur { get; init; }
+    public decimal? PriceCad { get; init; }
+    /// <summary>
+    /// <c>{Name}|{Set}</c> of the paint that replaced this one. The ONE declared lineage direction;
+    /// the reverse (`supersedes`) is derived by <see cref="OverrideApplier.LinkSupersessions"/>.
+    /// </summary>
+    public string? SupersededBy { get; init; }
+}
+
+/// <summary>A minted paint from the overrides file's <c>additions</c> section.</summary>
+public record PaintAddition
+{
+    public string? Name { get; init; }
+    public string? Set { get; init; }
+    public string? ProductCode { get; init; }
+    public string? Ean { get; init; }
+    public string? ImageUrl { get; init; }
+    public string? SupersededBy { get; init; }
+    /// <summary>Provenance for the human reader; not consumed by the pipeline.</summary>
+    public string? Source { get; init; }
+    public string? SourceUrl { get; init; }
 }
 
 /// <summary>Barcode-set helpers shared by the enrichers and the reconciler.</summary>
@@ -131,7 +309,7 @@ public static class BarcodeSet
     /// dropped. Returns null (never an empty list) so the key is omitted from YAML/JSON rather
     /// than churning every archive file with `additionalEans: []`.
     /// </summary>
-    public static IReadOnlyList<string>? Union(string? primary, params IEnumerable<string?>?[] sources)
+    public static List<string>? Union(string? primary, params IEnumerable<string?>?[] sources)
     {
         var set = new SortedSet<string>(StringComparer.Ordinal);
         foreach (IEnumerable<string?>? source in sources)

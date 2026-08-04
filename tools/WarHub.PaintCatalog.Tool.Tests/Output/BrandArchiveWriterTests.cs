@@ -71,6 +71,49 @@ public class BrandArchiveWriterTests
     }
 
     [Fact]
+    public async Task WriteThenLoad_RoundTripsListFields()
+    {
+        // The archive is read back on the NEXT run by the same serializer that wrote it. A list
+        // property typed as IReadOnlyList<string> serializes fine and then makes LoadAsync throw
+        // ("no node deserializer was able to deserialize the node into type IReadOnlyList<String>"),
+        // i.e. the tool writes a file it can never read again. That bug was latent while no archive
+        // carried a list; it fires the first run after one does.
+        PaintRecord source = R("Hexwraith Flame", set: "Contrast", code: "99189960060", ean: null) with
+        {
+            AdditionalEans = ["5011921175291", "5011921175383"],
+            Supersedes = ["Hexwraith Flame|Technical"],
+            SupersededBy = null,
+            PriceGbp = 3.30m,
+            PriceCad = 7.25m,
+        };
+        var archive = new BrandArchive
+        {
+            Brand = "Citadel",
+            BrandSlug = "citadel-colour",
+            Paints = [source, R("Old Pot", set: "Technical", code: null) with { SupersededBy = "Hexwraith Flame|Contrast" }],
+        };
+        string dir = NewTempDir();
+        try
+        {
+            await BrandArchiveWriter.WriteAsync(archive, dir, default);
+            IReadOnlyList<PaintRecord> loaded =
+                await BrandArchiveWriter.LoadAsync(Path.Combine(dir, "brands", "citadel-colour.yaml"), default);
+
+            PaintRecord back = loaded.Single(p => p.Name == "Hexwraith Flame");
+            Assert.Equal(["5011921175291", "5011921175383"], back.AdditionalEans);
+            Assert.Equal(["Hexwraith Flame|Technical"], back.Supersedes);
+            Assert.Equal(3.30m, back.PriceGbp);
+            Assert.Equal(7.25m, back.PriceCad);
+            Assert.Null(back.PriceUsd);
+            Assert.Equal("Hexwraith Flame|Contrast", loaded.Single(p => p.Name == "Old Pot").SupersededBy);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
+    [Fact]
     public async Task Load_MissingFile_ReturnsEmpty()
     {
         string dir = NewTempDir();
