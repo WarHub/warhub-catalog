@@ -60,12 +60,28 @@ internal static class PaintBuilder
             }
         }
 
-        // 2. Assign ids: brand-slug/paint-slug, with deterministic -N suffixes on collision.
+        // 2. Assign ids: brand-slug/paint-slug, QUALIFIED BY CONTENT when the name collides.
+        //
+        // The suffix used to be positional -- sort the colliding group by (set, code, hex) and
+        // append -2, -3 by index. That made an id a statement about the group's membership rather
+        // than about the paint: inserting one paint renumbered its siblings, and 1,541 records
+        // (18%) carried such a suffix. Minting the two Contrast reformulations made the failure
+        // concrete -- "Contrast" sorts before "Technical", so `citadel-colour/hexwraith-flame`
+        // silently STOPPED meaning the Technical pot and started meaning the Contrast one.
+        //
+        // The suffix is now derived from the paint's own identity (set, then product code, then
+        // hex -- the same fields as the natural key), so an id depends on nothing but the paint it
+        // names. When a name collides, EVERY member is qualified and none keeps the bare id: a
+        // consumer holding the old bare id gets a clean 404 instead of silently the wrong colour.
+        // Uncollided names -- the large majority -- are untouched.
         var idByNaturalKey = new Dictionary<string, string>(StringComparer.Ordinal);
         var recordById = new Dictionary<string, PaintRecord>(StringComparer.Ordinal);
         var equivById = new Dictionary<string, Dictionary<string, (double DeltaE, string? Tier)>>(StringComparer.Ordinal);
         // `{brand}|{name}|{set}` -> id, with null marking an ambiguous key (see LineageKey).
         var idByLineageKey = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
+
+        static string Natural(Entry e) =>
+            NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode, e.Paint.Details.Hex);
 
         foreach (IGrouping<string, Entry> group in entries
             .GroupBy(e => $"{e.BrandSlug}/{Slug.Make(e.Paint.Name)}", StringComparer.Ordinal)
@@ -77,10 +93,54 @@ internal static class PaintBuilder
                 .ThenBy(e => e.Paint.Details.Hex, StringComparer.Ordinal)
                 .ToList();
 
+            // Qualify only when the bare name is contested, and only as far as it takes to be
+            // unique: set, then + product code, then + hex. Those are exactly the natural key's
+            // fields, so a fully-qualified id cannot collide -- two records that reached here with
+            // the same set, code AND hex would already have been folded by the natural key above.
+            var qualified = new Dictionary<string, string>(StringComparer.Ordinal);
+            if (ordered.Count > 1)
+            {
+                foreach (Entry e in ordered)
+                {
+                    qualified[Natural(e)] = $"{group.Key}-{Slug.Make(e.Paint.Details.Set)}";
+                }
+                for (int level = 0; level < 2; level++)
+                {
+                    var clashing = qualified.GroupBy(kv => kv.Value, StringComparer.Ordinal)
+                        .Where(g => g.Count() > 1)
+                        .SelectMany(g => g.Select(kv => kv.Key))
+                        .ToHashSet(StringComparer.Ordinal);
+                    if (clashing.Count == 0)
+                    {
+                        break;
+                    }
+                    foreach (Entry e in ordered.Where(x => clashing.Contains(Natural(x))))
+                    {
+                        string extra = level == 0
+                            ? Slug.Make(e.Paint.ProductCode ?? "")
+                            : (NormalizeHex(e.Paint.Details.Hex) ?? "").TrimStart('#').ToLowerInvariant();
+                        if (extra.Length > 0)
+                        {
+                            qualified[Natural(e)] = $"{qualified[Natural(e)]}-{extra}";
+                        }
+                    }
+                }
+            }
+
             for (int i = 0; i < ordered.Count; i++)
             {
                 Entry e = ordered[i];
-                string id = i == 0 ? group.Key : $"{group.Key}-{i + 1}";
+                string naturalKey = Natural(e);
+                string id = qualified.TryGetValue(naturalKey, out string? q) ? q : group.Key;
+                // A duplicate id here SILENTLY DROPS a paint via the dictionary write below.
+                // That is not hypothetical: the previous positional scheme lost 4 records
+                // this way, because a name legitimately ending in a digit could collide with
+                // another name's `-2`. Fail the build instead.
+                if (recordById.ContainsKey(id))
+                {
+                    throw new InvalidOperationException(
+                        $"duplicate paint id '{id}' -- two paints would publish under one id");
+                }
                 idByNaturalKey[NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode, e.Paint.Details.Hex)] = id;
                 string lineageKey = LineageKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set);
                 idByLineageKey[lineageKey] = idByLineageKey.ContainsKey(lineageKey) ? null : id;
