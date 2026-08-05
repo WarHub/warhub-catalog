@@ -33,6 +33,17 @@ public static class HarvestApplier
     {
         public string? Ean { get; set; }
         public string? ImageUrl { get; set; }
+        /// <summary>
+        /// Storefront list price, in the currency the source actually quotes. The generator pins
+        /// ONE currency per source rather than trusting the observation's field, because
+        /// `woo.py`/`shopify.py` fall back to `priceGbp` for an unrecognised currency code -- so
+        /// reading the wrong field would publish euros as pounds. Measured 2026-08-05: no paint
+        /// source quotes GBP or CAD; three are EUR and four USD.
+        /// </summary>
+        public decimal? PriceGbp { get; set; }
+        public decimal? PriceUsd { get; set; }
+        public decimal? PriceEur { get; set; }
+        public decimal? PriceCad { get; set; }
         public string? Sku { get; set; }
         public string? SourceUrl { get; set; }
         public string? Source { get; set; }
@@ -45,6 +56,10 @@ public static class HarvestApplier
         public string? ProductCode { get; set; }
         public string? Ean { get; set; }
         public string? ImageUrl { get; set; }
+        public decimal? PriceGbp { get; set; }
+        public decimal? PriceUsd { get; set; }
+        public decimal? PriceEur { get; set; }
+        public decimal? PriceCad { get; set; }
         public string? SourceUrl { get; set; }
         public string? Source { get; set; }
     }
@@ -129,6 +144,10 @@ public static class HarvestApplier
                 Hex = "",
                 Ean = string.IsNullOrWhiteSpace(addition.Ean) ? null : addition.Ean,
                 ImageUrl = string.IsNullOrWhiteSpace(addition.ImageUrl) ? null : addition.ImageUrl,
+                PriceGbp = addition.PriceGbp,
+                PriceUsd = addition.PriceUsd,
+                PriceEur = addition.PriceEur,
+                PriceCad = addition.PriceCad,
             });
         }
 
@@ -186,6 +205,13 @@ public static class HarvestApplier
             {
                 Ean = p.Ean ?? (string.IsNullOrWhiteSpace(entry.Ean) ? null : entry.Ean),
                 ImageUrl = p.ImageUrl ?? (string.IsNullOrWhiteSpace(entry.ImageUrl) ? null : entry.ImageUrl),
+                // Blank-fill, matching Ean: a hand override in overrides.yaml still wins. The
+                // ambiguous-key skip above already protects these for free -- it drops the whole
+                // entry, so a contested key never lands a price on the wrong paint either.
+                PriceGbp = p.PriceGbp ?? entry.PriceGbp,
+                PriceUsd = p.PriceUsd ?? entry.PriceUsd,
+                PriceEur = p.PriceEur ?? entry.PriceEur,
+                PriceCad = p.PriceCad ?? entry.PriceCad,
             };
         }).ToList();
     }
