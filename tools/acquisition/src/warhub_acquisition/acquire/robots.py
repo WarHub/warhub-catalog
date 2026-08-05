@@ -133,8 +133,11 @@ of what the site asks for.
 real fetch target (e.g. an Algolia or AppSync API host reached via an absolute URL baked into the
 strategy, unrelated to the marketing-site `baseUrl` the descriptor happens to declare) or where
 robots.txt is otherwise not the right compliance mechanism. It must be set explicitly per
-descriptor, with a comment citing why -- see `data/catalog/sources/mfr-gw-algolia.yaml` and
-`mfr-corvus-belli.yaml` for the two real cases this repo currently needs it for.
+descriptor, with a comment citing why -- see `data/catalog/sources/mfr-gw-algolia.yaml`,
+`mfr-corvus-belli.yaml` and `mfr-vallejo.yaml` for the THREE real cases this repo currently needs
+it for. (This said "two" while four descriptors carried the flag; corrected 2026-08-05, when
+retiring the ClaudeBot token let `mfr-reaper.yaml` drop its own.) If you add or remove one, fix
+this line -- an undercount here reads as "the escape hatch is barely used" when auditing it.
 """
 import re
 from dataclasses import dataclass, field
@@ -262,24 +265,52 @@ def _parse_groups(lines: list[str]) -> list[_Group]:
 
 
 def _select_group(groups: list[_Group], user_agent: str) -> _Group | None:
-    """RFC 9309 group selection for one crawler token: the group whose user-agent line matches most
-    specifically (longest matching agent string wins), falling back to the `*` group only when no
-    specific group matches. Matching mirrors the long-standing convention: the crawler token is
-    reduced to its pre-`/` product token, lowercased, and a group agent matches if it is a substring
-    of that token. Returns `None` when nothing (not even `*`) applies -- i.e. no restrictions on us."""
+    """RFC 9309 group selection for one crawler token: pick the most specific matching user-agent
+    (longest matching agent string wins), falling back to `*` only when no specific agent matches,
+    then MERGE every group naming that agent. Matching mirrors the long-standing convention: the
+    crawler token is reduced to its pre-`/` product token, lowercased, and a group agent matches if
+    it is a substring of that token. Returns `None` when nothing (not even `*`) applies -- i.e. no
+    restrictions on us.
+
+    **Merging (fix, 2026-08-05)**: RFC 9309 sec 2.2.1 requires that groups repeating the same
+    user-agent be combined into one. The previous implementation kept only the FIRST group per
+    agent (`if default is None: default = group`) and silently discarded the rest. That is not
+    hypothetical: www.reapermini.com/robots.txt publishes TWO `*` groups -- Cloudflare's managed
+    block (`Allow: /`) near the top and a trailing site-authored one (`Disallow: /api`,
+    `Disallow: /admin`) -- and the trailing group's rules evaluated as if absent, so
+    `/api` and `/admin` both read as allowed. The bug predates the ClaudeBot-token retirement, but
+    that retirement is what made it load-bearing: dropping `ignoreRobots: true` from
+    mfr-reaper.yaml turned real per-request enforcement ON for the one source in this repo whose
+    robots.txt exercises the gap. No path we fetch was ever affected (the Reaper strategy reads
+    only /paints/*), but "the rule we ignored happened not to matter" is luck, not compliance.
+
+    Crawl-delay across merged groups takes the MAX, consistent with `RobotsPolicy.crawl_delay`'s
+    own most-conservative rule: a site that asks us to slow down anywhere gets the slower pace."""
     reduced = user_agent.split("/", 1)[0].strip().lower()
-    best: _Group | None = None
-    best_len = -1
-    default: _Group | None = None
+    selected: str | None = None
     for group in groups:
         for agent in group.agents:
-            if agent == "*":
-                if default is None:
-                    default = group
-            elif agent and agent in reduced and len(agent) > best_len:
-                best_len = len(agent)
-                best = group
-    return best if best is not None else default
+            if agent and agent != "*" and agent in reduced:
+                if selected is None or len(agent) > len(selected):
+                    selected = agent
+    if selected is None:
+        selected = "*"
+
+    matching = [group for group in groups if selected in group.agents]
+    if not matching:
+        return None
+    if len(matching) == 1:
+        return matching[0]
+
+    merged = _Group(agents=[selected])
+    for group in matching:
+        merged.rules.extend(group.rules)
+        if group.crawl_delay is not None:
+            merged.crawl_delay = (
+                group.crawl_delay if merged.crawl_delay is None
+                else max(merged.crawl_delay, group.crawl_delay)
+            )
+    return merged
 
 
 def _url_path(url: str) -> str:

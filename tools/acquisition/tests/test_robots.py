@@ -724,3 +724,96 @@ def test_run_source_does_not_slow_down_when_robots_crawl_delay_is_faster_than_co
     # strategy requests, same as the slower-crawl-delay test above: /a (first request on the fresh
     # client) doesn't wait, then /b waits the full configured 10s interval.
     assert sleeps == [pytest.approx(10.0, abs=0.2)]
+
+
+# --- RFC 9309 sec 2.2.1: groups repeating a user-agent MUST be merged (fix, 2026-08-05) --------
+
+# Verbatim shape of www.reapermini.com/robots.txt: Cloudflare's managed block publishes a `*`
+# group near the top, and the site's own trailing `*` group adds rules AFTER the AI-crawler runs.
+# Keeping only the first group silently discarded the second -- see `_select_group`'s docstring.
+_TWO_STAR_GROUPS = """User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: *
+Disallow: /api
+Disallow: /admin
+"""
+
+
+def test_trailing_star_group_is_merged_not_discarded() -> None:
+    policy = RobotsPolicy.from_lines(_TWO_STAR_GROUPS.splitlines())
+    # The FIRST `*` group's `Allow: /` still governs everything it should...
+    assert policy.allows("https://www.reapermini.com/paints/master-series-paints-core-colors", UA)
+    # ...but the TRAILING group's rules are no longer thrown away. Longest-match puts `/api`
+    # (4 chars) above `/` (1 char), so these are disallowed.
+    assert not policy.allows("https://www.reapermini.com/api/x", UA)
+    assert not policy.allows("https://www.reapermini.com/admin", UA)
+    token, rule = policy.disallowed_by("https://www.reapermini.com/api/x", UA)
+    assert rule == "Disallow: /api"
+
+
+def test_merged_groups_take_the_slowest_crawl_delay() -> None:
+    """Consistent with `crawl_delay`'s most-conservative rule across tokens: merging two groups for
+    one agent must not let the faster of two declared delays win."""
+    policy = RobotsPolicy.from_lines(
+        "User-agent: *\nCrawl-delay: 2\nAllow: /\n\nUser-agent: *\nCrawl-delay: 30\n".splitlines()
+    )
+    assert policy.crawl_delay(UA) == 30.0
+
+
+def test_merging_does_not_promote_the_star_group_over_a_named_one() -> None:
+    """Selection still picks the most specific agent FIRST; merging only combines groups naming
+    that same agent. A `*` group must not leak its rules into our own group's decision."""
+    policy = RobotsPolicy.from_lines(
+        (
+            "User-agent: *\nDisallow: /\n\n"
+            "User-agent: warhub-catalog-bot\nAllow: /\n\n"
+            "User-agent: *\nDisallow: /also-blocked\n"
+        ).splitlines()
+    )
+    assert policy.allows("https://example.test/anything", UA)
+    assert policy.allows("https://example.test/also-blocked", UA)
+
+
+def test_repeated_named_group_is_merged_too() -> None:
+    """The merge is agent-generic, not a `*` special case: a site naming us twice still binds."""
+    policy = RobotsPolicy.from_lines(
+        (
+            "User-agent: *\nAllow: /\n\n"
+            "User-agent: warhub-catalog-bot\nAllow: /\n\n"
+            "User-agent: warhub-catalog-bot\nDisallow: /secret\n"
+        ).splitlines()
+    )
+    assert policy.allows("https://example.test/ok", UA)
+    assert not policy.allows("https://example.test/secret", UA)
+
+
+def test_browser_ua_profile_never_picks_the_robots_group() -> None:
+    """`uaProfile: browser` swaps the PRESENTED identification string only. A site's rule naming
+    `warhub-catalog-bot` must still bind, and the client must expose the bot token for the one
+    strategy (playwright_wp) that checks robots itself through a non-httpx transport.
+
+    Without this, `_select_group` reduces the browser UA to `mozilla`, matches no group naming us,
+    and only `PRODUCT_TOKEN`'s presence in `_tokens` still catches the rule -- correct by accident.
+    """
+    from warhub_acquisition.acquire.client import BROWSER_UA, PoliteClient
+
+    policy = RobotsPolicy.from_lines(
+        "User-agent: *\nAllow: /\n\nUser-agent: warhub-catalog-bot\nDisallow: /blocked\n".splitlines()
+    )
+    client = PoliteClient(
+        base_url="https://example.test",
+        user_agent=BROWSER_UA,
+        robots=policy,
+        robots_user_agent=UA,
+    )
+    assert client.user_agent == BROWSER_UA
+    assert client.robots_user_agent == UA
+    assert not policy.allows("https://example.test/blocked", client.robots_user_agent)

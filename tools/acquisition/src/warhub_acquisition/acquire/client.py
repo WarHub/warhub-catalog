@@ -214,8 +214,26 @@ class PoliteClient:
     @property
     def user_agent(self) -> str:
         """Public counterpart to `robots` above -- a non-httpx strategy checking `robots.allows`
-        itself needs the exact UA string this client would have sent, not a hardcoded guess."""
+        itself needs the exact UA string this client would have sent, not a hardcoded guess.
+
+        This is the PRESENTED UA. For a robots decision use `robots_user_agent` instead -- see
+        there for why the difference bites."""
         return self._user_agent
+
+    @property
+    def robots_user_agent(self) -> str:
+        """The UA a robots decision must be evaluated under -- always the canonical bot token, even
+        when `uaProfile: browser` makes `user_agent` a browser string.
+
+        Added 2026-08-05 because `playwright_wp.py` was reading `user_agent` for its own
+        `robots.allows` call, which is the one place that difference is reachable. Under a browser
+        profile `_select_group` reduces the presented UA to `mozilla`, so it matches no
+        `warhub-catalog-bot` group a site might publish; the only thing still catching such a rule
+        was `PRODUCT_TOKEN` happening to be the second entry in `RobotsPolicy._tokens`. That is a
+        correct outcome resting on an accident, and the accident got thinner when the third token
+        was retired. No source is affected today (mfr-cmon, the sole playwright_wp source, sets no
+        uaProfile), which is exactly why it should be fixed before one is."""
+        return self._robots_user_agent
 
     def _pace(self) -> None:
         now = time.monotonic()
