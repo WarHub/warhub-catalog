@@ -703,3 +703,67 @@ def test_a_product_barcode_does_not_silence_an_unrelated_paint_loss(tmp_path: Pa
 
     assert exit_code == 5
     assert "## Paint-EAN lost" in out
+
+
+def test_a_barcode_moving_into_an_unchanged_file_is_still_seen(tmp_path: Path, capsys) -> None:
+    """The guard skips HEAD files identical to the working tree (2026-08-06, for speed).
+
+    That is safe only because the WORKING side still reads everything. This pins the case that
+    would break if someone ever narrowed the working side to match: the barcode leaves a CHANGED
+    file and reappears in an UNCHANGED one, so the holder that rescues it from `lost` is in a file
+    the HEAD pass never opens.
+    """
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    # army-painter already holds the same barcode as an ADDITIONAL, and is never touched again --
+    # so `git diff --name-only HEAD` will not list it and the HEAD pass will not open it. Only the
+    # working-side read can find this holder.
+    _write_brand(
+        paths,
+        "army-painter",
+        [{"name": "Matt Black", "ean": "5713799410602",
+          "additionalEans": ["5011921182848"]}],
+    )
+    _commit(repo_root, "seed two brands")
+
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black"}])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    # Only citadel-colour differs from HEAD; army-painter is byte-identical and skipped there.
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", "HEAD", "--", "data/paints/brands/"],
+        cwd=repo_root, capture_output=True, text=True,
+    ).stdout.split()
+    assert changed == ["data/paints/brands/citadel-colour.yaml"], changed
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" in out
+    assert "army-painter" in out
+
+
+def test_an_untouched_brand_file_produces_no_finding(tmp_path: Path, capsys) -> None:
+    """The other half of the skip: a file byte-identical to HEAD cannot fire, so skipping it
+    changes nothing. Guards against a future 'optimisation' that skips the working side too."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _write_brand(paths, "army-painter", [{"name": "Matt Black", "ean": "5713799410602"}])
+    _commit(repo_root, "seed two brands")
+
+    # Only army-painter changes, and only by ADDING a paint. citadel-colour is untouched.
+    _write_brand(
+        paths,
+        "army-painter",
+        [{"name": "Matt Black", "ean": "5713799410602"},
+         {"name": "Ashroot", "ean": "5713799410619"}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "Paint-EAN" not in out

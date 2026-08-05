@@ -96,20 +96,43 @@ def build_report(paths: DataPaths) -> str:
 
 
 def _head_yaml_files(repo_root: Path, rel_dir: str) -> list[str]:
-    """Repo-relative *.yaml paths HEAD holds under `rel_dir`.
+    """Repo-relative *.yaml paths HEAD holds under `rel_dir` that DIFFER from the working tree.
 
     Enumerated from the tree rather than the working glob so a file DELETED from the working tree
     is still read; a directory absent from HEAD entirely yields nothing (`ls-tree` exits 0 with no
     output on an unmatched pathspec, which is exactly the right answer -- nothing to track).
+
+    Intersected with `git diff --name-only HEAD` (2026-08-06) because a file identical to HEAD can
+    never produce a finding, and reading it is the guard's whole cost. The argument is semantic,
+    not just an optimisation: every finding here requires a barcode present in HEAD to be missing
+    from the working tree under the same holder. If a file is byte-identical, every barcode it
+    attests is still attested by the same record in the same role in the same file -- the
+    `continue` branch -- so no comparison against it can fire. The WORKING side still reads every
+    file, which is what keeps a barcode that MOVED INTO an unchanged file visible.
+
+    `git diff --name-only HEAD` reports deletions and unstaged modifications, so both still get
+    read. An untracked file cannot appear, and correctly so: it has no HEAD version to compare.
     """
-    result = subprocess.run(
+    tracked = subprocess.run(
         ["git", "ls-tree", "--name-only", "HEAD", "--", rel_dir + "/"],
         cwd=repo_root,
         capture_output=True,
         text=True,
         encoding="utf-8",
     )
-    return sorted(line for line in result.stdout.splitlines() if line.endswith(".yaml"))
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", "HEAD", "--", rel_dir + "/"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    differing = set(changed.stdout.splitlines())
+    return sorted(
+        line
+        for line in tracked.stdout.splitlines()
+        if line.endswith(".yaml") and line in differing
+    )
 
 
 def _head_document(repo_root: Path, rel: str) -> dict:
