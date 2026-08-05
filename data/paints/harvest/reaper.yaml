@@ -2553,12 +2553,6 @@ reaper:
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
     priceUsd: 3.89
-  - name: Sophie's Mystery Paint Set
-    set: Master Series Paints Core Colors
-    productCode: '9985'
-    imageUrl: https://images.reapermini.com/4/09985_w_3.jpg
-    sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
-    source: mfr-reaper
   - name: Steed Green
     set: Master Series Paints Core Colors
     productCode: '29183'
@@ -2622,3 +2616,9 @@ reaper:
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
     priceUsd: 3.89
+  candidates:
+  - name: Sophie's Mystery Paint Set
+    sku: 09985
+    url: https://www.reapermini.com/paints/master-series-paints-core-colors
+    source: mfr-reaper
+    reason: set title labelled category=paint

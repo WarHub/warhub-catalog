@@ -132,12 +132,21 @@ SOURCE_PRICE_FIELD = {
 # `additions` anyway, because greenstuffworld.com files its range sets under the RANGE category
 # ("Paint Set - Chrome" in chrome-paints, "Set x8 Fluor Paints" in fluorescent-acrylic-paints)
 # and reapermini.com labels "Sophie's Mystery Paint Set" hints.category=paint, not paint-set.
-# Those additions are a pre-existing question for a human; what must not happen either way is
-# the €22.75 a box of paints costs being published as the price of one pot.
+# `bridge_gsw` and `bridge_reaper` now gate on this too (see each for why their own signal is
+# insufficient), so no new box reaches `additions`. The price was never the exposure -- this regex
+# has always fired inside `observed_price`, and the 20 boxes landed with no price at all. What
+# landed wrong was STRUCTURE: an 8-pot box published as one 17 ml dropper with `hex: ""`.
 #
-# The word list is deliberately the narrow one the AK bridge has always used. Widening it is
-# what breaks: `\bBOX\b` would flag Turbo Dork's real colour "Box Wine", and `\bPACK\b`/`\bKIT\b`
-# invite the same. "WOODEN BOX" stays a phrase for exactly that reason.
+# The word list is deliberately the narrow one the AK bridge has always used, but the reason
+# recorded here was wrong and is worth correcting rather than repeating. Measured 2026-08-05 over
+# all 8,528 committed archive names and all 2,852 source titles that currently join a catalog
+# single: PACK, KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE, RANGE and COMBO each produce ZERO
+# false positives. Only `\bBOX\b` genuinely breaks, on Turbo Dork's real colour "Box Wine" --
+# which is why "WOODEN BOX" stays a phrase. So the list is narrow by choice, not by necessity;
+# widening it is a live option if a future set slips past, and only BOX is actually barred.
+#
+# What the list CANNOT do is catch a set whose title carries none of these words. Name matching is
+# a backstop for sets the per-source category signal misfiles, never the primary gate.
 SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
 
 
@@ -737,6 +746,26 @@ def bridge_gsw() -> BrandHarvest:
         slug = (o.get("hints") or {}).get("categorySlug") or ""
         if slug == "paint-sets":
             continue  # sets never promote
+        # The category check above is necessary but NOT sufficient: greenstuffworld.com files its
+        # RANGE sets under the range's own category, so "Paint Set - Chrome" arrives as
+        # chrome-paints and "Set x8 Fluor Paints" as fluorescent-acrylic-paints -- both mapped in
+        # GSW_SET_BY_CATEGORY, both promoted. Measured 2026-08-05: 19 boxes reached `additions`
+        # this way and published as single 17 ml droppers.
+        #
+        # Placed BEFORE the enrich/ratchet branch, unlike the AK bridge's post-ratchet gate. That
+        # is load-bearing: `catalog` reads the archive, so all 17 already-published sets self-match
+        # by name. A gate placed after the ratchet would demote them to candidates in generation N,
+        # then find their codes gone from `previous_addition_codes` in N+1 and re-promote them --
+        # a two-generation oscillation. Before the branch, the row leaves unconditionally and stays
+        # gone. The cost of that placement is stated plainly: if the store ever retitles an
+        # EXISTING single to contain a set word, that real paint drops out of `fresh` too.
+        if SET_WORDS.search(o["name"]):
+            out.candidates.append(
+                {"name": o["name"], "sku": str(o.get("sku") or "") or None, "url": o.get("url"),
+                 "source": "mfr-greenstuffworld",
+                 "reason": "set title filed under a range category"}
+            )
+            continue
         sku = str(o.get("sku") or "")
         common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
                   "sourceUrl": o.get("url"), "source": "mfr-greenstuffworld"}
@@ -786,6 +815,15 @@ def bridge_reaper() -> BrandHarvest:
     for o in read_observations("mfr-reaper"):
         hints = o.get("hints") or {}
         if hints.get("category") != "paint":
+            continue
+        # ...and reapermini.com labels "Sophie's Mystery Paint Set" category=paint, so the check
+        # above passes it through. Same placement rationale as bridge_gsw: before the
+        # enrich/ratchet branch, so a gated row can never oscillate back in.
+        if SET_WORDS.search(o["name"]):
+            out.candidates.append(
+                {"name": o["name"], "sku": str(o.get("sku") or "") or None, "url": o.get("url"),
+                 "source": "mfr-reaper", "reason": "set title labelled category=paint"}
+            )
             continue
         code = str(o.get("sku") or "").lstrip("0")
         line = str(hints.get("line") or "")

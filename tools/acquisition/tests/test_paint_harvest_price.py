@@ -255,3 +255,27 @@ def test_candidates_are_never_priced() -> None:
     for slug, data in _committed_harvests():
         for candidate in data.get("candidates") or []:
             assert not [f for f in PRICE_FIELDS if f in candidate], f"{slug}: {candidate}"
+
+
+def test_no_committed_addition_is_a_boxed_set() -> None:
+    """A multi-pot box must never be proposed as a new individual paint.
+
+    Until 2026-08-05 twenty of them were: 19 green-stuff-world (the store files its RANGE sets
+    under the range's own category, so `categorySlug == "paint-sets"` never fired) and 1 reaper
+    ("Sophie's Mystery Paint Set", which the store labels `category=paint`). They published as
+    single 17 ml droppers with an empty hex.
+
+    SCOPE, deliberately: this asserts over EVERY brand, but only bridge_ak, bridge_gsw and
+    bridge_reaper actually carry a name-level set check. The other six bridges gate on per-source
+    signals alone and pass today only because no set has yet slipped past them (measured: 0
+    SET_WORDS hits across their 619 additions). That is intentional -- this is a tripwire for the
+    whole surface, not a restatement of the three gates. If it ever fails for vallejo or
+    army-painter, the fix is a gate in that bridge, not an edit to this test.
+    """
+    offenders = [
+        (slug, addition.get("name"))
+        for slug, data in _committed_harvests()
+        for addition in data.get("additions") or []
+        if harvest.SET_WORDS.search(str(addition.get("name") or ""))
+    ]
+    assert not offenders, f"boxed sets proposed as individual paints: {offenders}"
