@@ -16,6 +16,17 @@ def _paint_brands_dir(paths: DataPaths) -> Path:
     return paths.root.joinpath(*PAINT_BRANDS_SUBDIR)
 
 
+def _product_barcodes(product: dict) -> list[str]:
+    """Every barcode a PRODUCT record attests. Role is not tracked here: this is only ever used as
+    a fallback holder for `_check_paints`, which asks "does this barcode still exist at all", and
+    the product side runs its own role-aware guard over the same records."""
+    barcodes: list[str] = []
+    if product.get("ean"):
+        barcodes.append(str(product["ean"]))
+    barcodes.extend(str(extra) for extra in product.get("additionalEans") or [])
+    return barcodes
+
+
 def _paint_barcodes(record: dict) -> list[tuple[str, str]]:
     """Every barcode a paint record attests, paired with the role it holds it in.
 
@@ -125,7 +136,9 @@ def _paint_label(brand: str, record: dict) -> str:
     return f"{brand}/{name}|{paint_set}" if paint_set else f"{brand}/{name}"
 
 
-def _check_paints(repo_root: Path, brands_dir: Path) -> tuple[list[dict], list[dict]]:
+def _check_paints(
+    repo_root: Path, brands_dir: Path, products_dir: Path
+) -> tuple[list[dict], list[dict]]:
     """Compare working-tree paints/brands/*.yaml against HEAD, tracking barcodes GLOBALLY.
 
     ALL paint barcodes are tracked -- the primary `ean` and every `additionalEans` entry alike.
@@ -152,8 +165,23 @@ def _check_paints(repo_root: Path, brands_dir: Path) -> tuple[list[dict], list[d
         Reported with the holders named; NOT a regression.
       * ``lost`` -- the barcode appears NOWHERE in the working paint catalog: an old pot stopped
         being scannable, which is exactly the regression the caller fails the run on.
+
+    **Cross-catalog re-homing counts as `moved` (2026-08-05).** The working PRODUCT catalog is
+    searched too, and a barcode that left the paint catalog but is now held by a product is
+    reported as moved rather than lost. The guard's real question is "is this barcode still
+    attested SOMEWHERE in the repo", and a boxed set leaving the paint catalog for the product
+    catalog -- where it always belonged -- is a correction, not a regression. This is not a
+    loosening: a barcode held by neither catalog is still `lost` and still exits 5. It exists
+    because the alternative was worse. Retiring the 19 Green Stuff World boxed sets that reached
+    `data/paints/brands/green-stuff-world.yaml` as fake single pots requires their sole-held box
+    GTINs to survive; without this, doing the RIGHT thing (re-home to products, then retract)
+    would fail the build, and the only ways to keep it green would have been to weaken the guard
+    outright or to hide the GTIN in a surviving pot's `additionalEans` -- which would be a factual
+    lie, since a boxed-set GTIN is not a pot's GTIN.
     """
-    # barcode -> {(brand slug, role)} across the WHOLE working paint catalog.
+    # barcode -> {(holder, role)} across the WHOLE working paint catalog, plus the product catalog
+    # as a fallback holder so a cross-catalog re-home reads as moved. Products are recorded under a
+    # "products/<file stem>" holder so the rendered finding says where it went.
     working_holders: dict[str, set[tuple[str, str]]] = {}
     for path in sorted(brands_dir.glob("*.yaml")):
         working = read_yaml(path) or {}
@@ -161,6 +189,11 @@ def _check_paints(repo_root: Path, brands_dir: Path) -> tuple[list[dict], list[d
         for record in working.get("paints") or []:
             for barcode, role in _paint_barcodes(record):
                 working_holders.setdefault(barcode, set()).add((brand, role))
+
+    for path in sorted(products_dir.glob("*.yaml")):
+        for product in (read_yaml(path) or {}).get("products") or []:
+            for barcode in _product_barcodes(product):
+                working_holders.setdefault(barcode, set()).add((f"products/{path.stem}", "product"))
 
     lost: list[dict] = []
     moved: list[dict] = []
@@ -295,7 +328,9 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
                     {"entity": entity_id, "manufacturer_file": rel, "previous_code": head_code}
                 )
 
-    paint_lost, paint_moved = _check_paints(repo_root, _paint_brands_dir(paths))
+    paint_lost, paint_moved = _check_paints(
+        repo_root, _paint_brands_dir(paths), paths.catalog_products
+    )
 
     return {
         "lost": lost,

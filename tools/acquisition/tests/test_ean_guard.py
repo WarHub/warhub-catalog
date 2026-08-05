@@ -625,3 +625,81 @@ def test_report_without_ean_guard_flag_ignores_git_state(tmp_path: Path, capsys)
 
     assert exit_code == 0
     assert "## Confirmed-EAN changes" not in out
+
+
+def test_paint_barcode_rehomed_to_the_product_catalog_is_moved_not_lost(
+    tmp_path: Path, capsys
+) -> None:
+    """The re-home case this exists for: a boxed set wrongly published as a paint is retracted from
+    the paint catalog, and its sole-held box GTIN now lives on a product record. That is a
+    correction, so it must NOT fail the run -- but it must still be REPORTED, because a barcode
+    changing catalogs is exactly the kind of move a reviewer should see."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "green-stuff-world",
+        [{"name": "Paint Set - Chrome", "ean": "8436574506327", "details": {"set": "Chrome"}}],
+    )
+    _commit(repo_root, "seed the bogus paint record")
+
+    # The retraction, plus the re-home that must precede it.
+    _write_brand(paths, "green-stuff-world", [])
+    _write_catalog(
+        paths,
+        [{"id": "green-stuff-world/10133", "name": "Paint Set - Chrome",
+          "ean": "8436574506327", "eanConfidence": "confirmed"}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" in out
+    assert "8436574506327" in out
+    assert "products/games-workshop" in out  # the holder is named, so the move is auditable
+
+
+def test_retracting_a_paint_without_rehoming_is_still_lost(tmp_path: Path, capsys) -> None:
+    """The other half, and the reason the cross-catalog lookup is not a loosening: retract the same
+    record WITHOUT putting its barcode anywhere, and the guard still fails the run."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "green-stuff-world",
+        [{"name": "Paint Set - Chrome", "ean": "8436574506327", "details": {"set": "Chrome"}}],
+    )
+    _commit(repo_root, "seed the bogus paint record")
+
+    _write_brand(paths, "green-stuff-world", [])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out
+    assert "8436574506327" in out
+
+
+def test_a_product_barcode_does_not_silence_an_unrelated_paint_loss(tmp_path: Path, capsys) -> None:
+    """The cross-catalog fallback must be barcode-exact, not a blanket amnesty: an unrelated
+    product barcode existing cannot excuse a different paint barcode going missing."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/a", "name": "Thing A", "ean": "5011921194285",
+          "eanConfidence": "confirmed"}],
+    )
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _commit(repo_root, "seed both catalogs")
+
+    _write_brand(paths, "citadel-colour", [])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out
