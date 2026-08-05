@@ -22,20 +22,27 @@ scope:
     - {path: /paints/master-series-paints-bones, line: Master Series Paints Bones, kind: single}
     - {path: /paints/master-series-paints-pathfinder-colors, line: Master Series Paints Pathfinder Colors, kind: single}
 politeness:
-  # HISTORY (2026-07-24): first landed POLICY-BLOCKED. robots.txt's `User-agent: *` group
-  # allows everything this strategy fetches (all /paints/* pages, no crawl-delay, clean 200s
-  # to the canonical bot UA) -- but the site also carries Cloudflare's managed
-  # AI-crawl-control block (`User-agent: ClaudeBot / Disallow: /`), which this repo's robots
-  # enforcement honors as disallowing ourselves, so run_source refused at preflight pending
-  # an owner-level decision.
-  # ACTIVATED same day by OWNER DECISION: this pipeline is a one-off catalog READ (plain
-  # Python scripting, six GETs total), not AI crawling -- no model training and no AI
-  # processing of the fetched content is involved; the Cloudflare block targets AI-training
-  # crawlers, and the site's own general-agent group allows these paths. ignoreRobots
-  # documents that decision here rather than silently bypassing (same transparency bar as
-  # mfr-vallejo's crawl-delay rationale). The shop's /search/* tree is never fetched
-  # regardless.
-  ignoreRobots: true
+  # HISTORY (2026-07-24): first landed POLICY-BLOCKED, then activated the same day by owner
+  # decision via a blanket `ignoreRobots: true`. robots.txt's `User-agent: *` group allows
+  # everything this strategy fetches (all /paints/* pages, no crawl-delay, clean 200s to the
+  # canonical bot UA) -- but the site also carries Cloudflare's managed AI-crawl-control block
+  # (`User-agent: ClaudeBot / Disallow: /`), which this repo's robots enforcement THEN honored
+  # as disallowing ourselves, so run_source refused at preflight until that opt-out was added.
+  #
+  # RESOLVED (2026-08-05): `ignoreRobots` is REMOVED, because the only thing it worked around is
+  # gone. acquire/robots.py no longer checks the ClaudeBot token at all (maintainer decision --
+  # see that module's docstring for the reasoning, the measured evidence AND the honest
+  # counter-argument), so this source now passes the ordinary robots preflight on its own merits,
+  # under the `*` group that actually addresses us. Dropping the flag is the STRICTER choice, not
+  # the looser one: full per-request enforcement and Crawl-delay honouring are switched back on
+  # for this source, so if reapermini.com ever narrows its `*` group or names us, we stop --
+  # whereas `ignoreRobots` would have kept fetching regardless. Re-verified live 2026-08-05:
+  # `*` -> `Allow: /` with no Crawl-delay, and the six configured /paints/* pages return 200 to
+  # the canonical bot UA. The shop's /search/* tree is never fetched regardless.
+  #
+  # No `uaProfile: browser` here, deliberately: reapermini.com serves the canonical bot UA and a
+  # browser UA identically (live 2026-08-05, /paints/master-series-paints-core-colors: bot 200,
+  # browser 200), so the override would be unjustified UA-cloaking for zero benefit.
   rps: 0.5
 contract:
   # Evidence-based floor (~85% of observed): live snapshot 2026-07-24 counted 555 blob items

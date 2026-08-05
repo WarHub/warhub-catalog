@@ -72,8 +72,8 @@ UA-bearing, exactly like every other request this codebase makes. `GET <baseUrl>
   fix, not something this module should paper over.
 - 200 -> parsed by `_parse_groups` into RFC 9309 user-agent groups.
 
-**Checked tokens (`RobotsPolicy.allows`)**: every call checks THREE user-agent tokens against the
-parsed policy, and a `Disallow` under ANY of them makes the URL not-allowed:
+**Checked tokens (`RobotsPolicy.allows`)**: every call checks TWO user-agent tokens against the
+parsed policy, and a `Disallow` under EITHER of them makes the URL not-allowed:
 
 1. The full outgoing `User-Agent` string this client actually sends (`client.UA` by default --
    `"warhub-catalog-bot/1.0 (+https://github.com/WarHub/warhub-catalog)"`).
@@ -81,18 +81,49 @@ parsed policy, and a `Disallow` under ANY of them makes the URL not-allowed:
    product, not a full UA-with-URL-comment string. Group selection reduces any UA to its pre-`/`
    token before matching (see `_select_group`), so in practice this is redundant with (1) today,
    but it's cheap, explicit, and future-proof against a UA format change.
-3. `"ClaudeBot"` -- a DELIBERATE, CONSERVATIVE policy choice, not an accident. Cloudflare's AI
-   Crawl Control and a growing set of publishers name `ClaudeBot` specifically as how they opt out
-   of Anthropic-affiliated crawling (see Cloudflare's AI Crawl Control docs). This tool runs under
-   Claude Code / the Claude Agent SDK; a site that has gone to the trouble of writing a
-   `User-agent: ClaudeBot` block is expressing "no AI-agent crawling from Anthropic's stack" even
-   though our own product string never says "Claude" anywhere. We treat that as disallowing
-   OURSELVES too, rather than exploiting the UA-string mismatch as a loophole. This can only ever
-   make the check MORE conservative (fewer allows, never more) -- it never grants access a plain
-   product-token check would have denied.
+
+Nothing else about enforcement is relaxed by that list being two long rather than three. The `*`
+group still fully binds us -- it is the group `_select_group` falls back to whenever no specific
+group names us, which is the overwhelmingly common case -- and a site that disallows
+`warhub-catalog-bot` BY NAME still blocks us outright (fantasywelt.de, cited at the top of this
+docstring, remains blocked on exactly that basis). robots.txt is still fetched, parsed and
+enforced on every request at both enforcement points, and `RobotsFetchError` still fails loud.
+
+**RETIRED third token: `ClaudeBot` (maintainer decision, 2026-08-05)**: until this date `allows`
+and `crawl_delay` also evaluated the literal token `"ClaudeBot"`, so that a site publishing
+Cloudflare's managed AI-crawler block (`User-agent: ClaudeBot` / `Disallow: /`) was treated as
+disallowing US, even though our product string never says "Claude" anywhere and we never present
+that UA. The maintainer retired it, verbatim: "ignore ClaudeBot when doing harvest - we harvest
+via scripts, not via claude session direct."
+
+The reasoning, and the evidence measured live on 2026-08-05 against www.reapermini.com/robots.txt:
+
+- robots.txt is a PER-USER-AGENT protocol (RFC 9309 sec 2.2.1). A `User-agent: ClaudeBot` group
+  addresses Anthropic's own web crawler. This harvester is a separate, honestly-identified,
+  user-operated program that fetches on demand under its own name and never claims to be
+  ClaudeBot; the group that actually addresses us is `*`, or a `warhub-catalog-bot` group.
+- Under the group that does address us, that file explicitly permits us: its first `User-agent: *`
+  group is `Allow: /`, with no crawl-delay. The `ClaudeBot / Disallow: /` line is one of NINE
+  consecutive Cloudflare-managed AI-crawler blocks in a `# BEGIN Cloudflare Managed content`
+  section -- Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot,
+  CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot, meta-externalagent -- i.e. a
+  vendor-supplied AI-crawler list toggled on at the edge, not a rule written about this pipeline.
+- The same file carries `Content-Signal: search=yes,ai-train=no,use=reference` on its `*` group.
+  This repo builds a REFERENCE catalog (identifiers, names, barcodes) and trains nothing, so
+  `use=reference` is consistent with what we do and `ai-train=no` restricts something we were
+  never doing.
+
+**The counter-argument, stated plainly rather than buried**: a publisher who switches on a
+ClaudeBot block may well intend it as "no AI-agent-operated crawling of any kind," not narrowly
+"not Anthropic's crawler process." Under the previous policy we honored that broader reading; as
+of 2026-08-05 we do not, and a site whose ONLY expression of that intent is a ClaudeBot group is
+now fetched by this pipeline where it previously was not. That is a real change in whose wishes we
+defer to, made deliberately by the maintainer on the reasoning above, and recorded here so a
+future reader weighs the trade-off rather than rediscovering it. If a publisher names us, or
+narrows `*`, we are still bound -- that is the line this change does not cross.
 
 **Crawl-delay (`RobotsPolicy.crawl_delay`)**: the most-conservative (largest) `Crawl-delay` across
-the same three tokens `allows` checks. The runner honors it when it asks for SLOWER pacing than the
+the same two tokens `allows` checks. The runner honors it when it asks for SLOWER pacing than the
 descriptor's own `politeness.rps` -- a site publishing `Crawl-delay: 10` is asking us to back off,
 and `politeness.rps` is a ceiling we impose on OURSELVES, never a floor we're entitled to regardless
 of what the site asks for.
@@ -115,8 +146,14 @@ from warhub_acquisition.acquire.client import FetchError, PoliteClient
 # string's exact format (see module docstring point 2).
 PRODUCT_TOKEN = "warhub-catalog-bot"
 
-# Deliberate policy choice -- see module docstring point 3.
-CLAUDEBOT_TOKEN = "ClaudeBot"
+# (There is deliberately no CLAUDEBOT_TOKEN here any more. It was removed outright rather than
+# kept-but-unreferenced on 2026-08-05: a module-level constant is an interface statement -- "this
+# codebase has a notion of the ClaudeBot token" -- and after the retirement described in the module
+# docstring we have no such notion, so keeping one unused would read as an oversight or, worse, as
+# a token something still checks. The full rationale, the maintainer's wording, the measured Reaper
+# evidence and the counter-argument all live in the module docstring, which is where a policy
+# decision belongs; the literal string survives only inside test fixtures, where it stands for
+# SOMEONE ELSE'S robots.txt rather than for a token of ours.)
 
 # 404/410 are the only statuses RFC 9309 sec 2.3.1.3 treats as "no robots.txt published" -- every
 # other non-2xx is a FetchError that propagates uncaught (fail loud).
@@ -290,9 +327,10 @@ class RobotsPolicy:
         return self._groups is None
 
     def _tokens(self, user_agent: str) -> tuple[str, ...]:
-        # See module docstring: full UA string, bare product token, and ClaudeBot -- ANY
-        # disallowing any of the three makes the URL not-allowed.
-        return (user_agent, PRODUCT_TOKEN, CLAUDEBOT_TOKEN)
+        # See module docstring: the full outgoing UA string and the bare product token -- EITHER
+        # disallowing makes the URL not-allowed. `_select_group` falls back to the `*` group for
+        # both when no group names us, so a site-wide `Disallow: /` under `*` still binds.
+        return (user_agent, PRODUCT_TOKEN)
 
     def _token_disallows(self, url: str, token: str) -> _Rule | bool | None:
         """The disallowing `_Rule` for `token` on `url`, or `None` if `token` is allowed. Kept
@@ -324,12 +362,15 @@ class RobotsPolicy:
         return None
 
     def crawl_delay(self, user_agent: str) -> float | None:
-        """Most-conservative (largest) `Crawl-delay` across the same three tokens `allows` checks
-        (fix wave 3, Minor #7): the outgoing UA, the bare product token, and ClaudeBot. Taking the
-        MAX across all three (not the first hit, and not just the `user_agent` token) means a slower
-        delay declared under a less-specific token always wins over a faster one declared under a
-        more-specific token -- the more polite outcome, and the only one consistent with treating
-        all three tokens as "targeting us"."""
+        """Most-conservative (largest) `Crawl-delay` across the same two tokens `allows` checks
+        (fix wave 3, Minor #7): the outgoing UA and the bare product token. Taking the MAX across
+        both (not the first hit, and not just the `user_agent` token) means a slower delay declared
+        under a less-specific token always wins over a faster one declared under a more-specific
+        token -- the more polite outcome, and the only one consistent with treating both tokens as
+        "targeting us". Narrowed from three tokens on 2026-08-05 alongside `allows` -- see the
+        module docstring's retired-ClaudeBot section; a `Crawl-delay` declared ONLY under a
+        `ClaudeBot` group is no longer picked up, for the same reason its `Disallow` no longer
+        binds."""
         if self._groups is None:
             return None
         delays: list[float] = []

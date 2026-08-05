@@ -1,7 +1,12 @@
 """robots.txt compliance preflight: `acquire/robots.py` unit tests, plus `run_source` integration
 (the preflight is wired in BEFORE any strategy runs -- see runner.py's module docstring additions
-and robots.py's own module docstring for the full policy rationale, including why `ClaudeBot` is
-checked as a third token alongside our own UA)."""
+and robots.py's own module docstring for the full policy rationale, including why `ClaudeBot` was
+retired as a checked token on 2026-08-05 and what still fully binds us).
+
+Two halves worth reading together: the tests below that pin the RETIREMENT (a ClaudeBot-only block
+no longer disallows us) and the ones that pin the COMPLIANCE THAT REMAINS (`*` and our own product
+token still block outright). Neither half is meaningful alone -- the second is what stops this
+change being read as "robots checking was turned off"."""
 from pathlib import Path
 
 import httpx
@@ -9,7 +14,6 @@ import pytest
 
 from warhub_acquisition.acquire.client import UA, FetchError, PoliteClient
 from warhub_acquisition.acquire.robots import (
-    CLAUDEBOT_TOKEN,
     PRODUCT_TOKEN,
     RobotsFetchError,
     RobotsPolicy,
@@ -36,6 +40,65 @@ def client_for(handler, sleep=None) -> PoliteClient:
 
 def robots_response(body: str) -> httpx.Response:
     return httpx.Response(200, text=body)
+
+
+# The token a Cloudflare-managed AI-crawler block names. Deliberately a test-local literal rather
+# than an import: `acquire/robots.py` no longer defines a constant for it (see its module
+# docstring), and inside these fixtures the string stands for SOMEONE ELSE'S robots.txt, not for a
+# token of ours.
+CLAUDEBOT = "ClaudeBot"
+
+# www.reapermini.com/robots.txt as measured live 2026-08-05 (comment preamble elided, rule
+# structure verbatim and complete): a `*` group with `Allow: /` and a Content-Signal line, then the
+# `# BEGIN Cloudflare Managed content` run of NINE AI-crawler blocks of which `ClaudeBot` is one,
+# then a trailing second `*` group. This is the exact file that motivated the 2026-08-05 retirement,
+# kept whole so the test exercises real group ordering rather than a two-line caricature.
+REAPER_ROBOTS = """\
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: *
+Disallow: /api
+Disallow: /admin
+"""
+
+# The six /paints/* line pages mfr-reaper.yaml configures -- the source's ENTIRE request footprint.
+REAPER_LINE_PAGES = (
+    "/paints/learn-to-paint-kits",
+    "/paints/paint-sets",
+    "/paints/master-series-paints-triads",
+    "/paints/master-series-paints-core-colors",
+    "/paints/master-series-paints-bones",
+    "/paints/master-series-paints-pathfinder-colors",
+)
 
 
 def obs(key: str, **kw: object) -> Observation:
@@ -138,7 +201,7 @@ def test_fetch_policy_requests_robots_txt_through_the_client() -> None:
     assert seen == ["/robots.txt"]
 
 
-# --- RobotsPolicy.allows: full UA, bare product token, ClaudeBot -- ANY disallow => disallowed ---
+# --- RobotsPolicy.allows: full UA + bare product token -- EITHER disallow => disallowed ---------
 
 
 def test_allows_true_when_robots_allows_everything() -> None:
@@ -166,27 +229,90 @@ def test_allows_false_when_bare_product_token_is_disallowed() -> None:
     assert policy.allows("https://example.test/", UA) is False
 
 
-def test_allows_false_when_claudebot_is_disallowed_even_if_our_own_ua_is_allowed() -> None:
-    """The deliberate policy choice (robots.py module docstring, point 3): a site can disallow
-    'ClaudeBot' by name without ever mentioning our real product string, and we still treat
-    ourselves as disallowed."""
+def test_allows_true_when_only_claudebot_is_disallowed_and_star_allows_us() -> None:
+    """RETIREMENT, pinned (maintainer decision 2026-08-05 -- robots.py module docstring): a
+    `ClaudeBot` group is addressed to Anthropic's crawler, not to this separately-named,
+    user-operated harvester. The group that DOES address us here is `*`, and it says `Allow: /`.
+    This test previously asserted the exact opposite; it is updated, not deleted, precisely so the
+    policy flip is visible in the diff rather than silently dropped."""
 
     def handler(request: httpx.Request) -> httpx.Response:
-        return robots_response(f"User-agent: *\nAllow: /\n\nUser-agent: {CLAUDEBOT_TOKEN}\nDisallow: /\n")
-
-    policy = fetch_policy(client_for(handler), "https://example.test")
-    assert policy.allows("https://example.test/", UA) is False
-
-
-def test_allows_true_when_claudebot_disallowed_only_on_an_unrelated_path() -> None:
-    """Sanity check: ClaudeBot being blocked from ONE path doesn't blanket-disallow the whole
-    site -- only the checked URL matters, same as any other token."""
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        return robots_response(f"User-agent: *\nAllow: /\n\nUser-agent: {CLAUDEBOT_TOKEN}\nDisallow: /admin/\n")
+        return robots_response(f"User-agent: *\nAllow: /\n\nUser-agent: {CLAUDEBOT}\nDisallow: /\n")
 
     policy = fetch_policy(client_for(handler), "https://example.test")
     assert policy.allows("https://example.test/", UA) is True
+    assert policy.disallowed_by("https://example.test/", UA) is None
+
+
+def test_allows_true_when_claudebot_disallowed_only_on_an_unrelated_path() -> None:
+    """Companion to the above, and now true for a second, independent reason: even before the
+    retirement a ClaudeBot block on ONE path never blanket-disallowed the site. Kept so a future
+    re-introduction of any third token can't quietly turn a path rule into a site-wide one."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(f"User-agent: *\nAllow: /\n\nUser-agent: {CLAUDEBOT}\nDisallow: /admin/\n")
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.allows("https://example.test/", UA) is True
+
+
+def test_reaper_shaped_robots_allows_every_configured_line_page() -> None:
+    """The real motivating file (see REAPER_ROBOTS above, measured 2026-08-05): `*` -> `Allow: /`,
+    plus nine Cloudflare-managed AI-crawler blocks including `ClaudeBot` -> `Disallow: /`. Every
+    /paints/* page mfr-reaper.yaml configures must now be allowed, and no crawl-delay is imposed.
+
+    Deliberately asserts nothing about `/api` or `/admin`: those appear only in a SECOND `*` group
+    at the end of the file, and how this module's parser treats a repeated `*` group is a separate,
+    pre-existing question that this change neither touches nor should silently bless. The reaper
+    strategy never fetches either path."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(REAPER_ROBOTS)
+
+    policy = fetch_policy(client_for(handler), "https://www.reapermini.com")
+    assert policy.is_permissive is False
+    assert policy.allows("https://www.reapermini.com", UA) is True  # the baseUrl preflight
+    for path in REAPER_LINE_PAGES:
+        assert policy.allows(f"https://www.reapermini.com{path}", UA) is True, path
+    assert policy.crawl_delay(UA) is None
+
+
+def test_our_own_product_token_disallow_still_blocks_everything() -> None:
+    """THE COMPLIANCE THAT REMAINS. Retiring the ClaudeBot token narrowed WHOSE rules bind us; it
+    did not turn robots checking off. A site that names `warhub-catalog-bot` and disallows `/` --
+    fantasywelt.de's real posture, cited in robots.py's module docstring -- still blocks us
+    outright, even when the `*` group is wide open and even when a ClaudeBot group is present to
+    prove the parser saw a multi-group file. If this test ever goes green-by-vacuity, the retirement
+    has been over-applied."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(
+            "User-agent: *\nAllow: /\n\n"
+            f"User-agent: {CLAUDEBOT}\nDisallow: /\n\n"
+            f"User-agent: {PRODUCT_TOKEN}\nDisallow: /\n"
+        )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.allows("https://example.test/", UA) is False
+    assert policy.allows("https://example.test/paints/anything", UA) is False
+    disallow = policy.disallowed_by("https://example.test/", UA)
+    assert disallow is not None
+    token, rule = disallow
+    # Blocked under OUR OWN identity -- never attributed to the retired token.
+    assert token == UA
+    assert rule == "Disallow: /"
+
+
+def test_star_group_disallow_still_binds_us() -> None:
+    """The other half of what remains: `*` is the group that addresses us whenever nothing names us
+    specifically (the overwhelmingly common case), so a `*` disallow is fully binding."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response("User-agent: *\nAllow: /\nDisallow: /paints/\n")
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.allows("https://example.test/", UA) is True
+    assert policy.allows("https://example.test/paints/core", UA) is False
 
 
 def test_disallowed_by_reports_the_matching_token_and_rule() -> None:
@@ -233,21 +359,22 @@ def test_crawl_delay_none_when_permissive() -> None:
     assert policy.crawl_delay(UA) is None
 
 
-def test_crawl_delay_takes_the_max_across_all_three_checked_tokens() -> None:
-    """Fix wave 3, Minor #7: a site can declare a SLOWER Crawl-delay under 'ClaudeBot' without
-    ever mentioning our own UA string -- the pre-fix version, which checked only `user_agent`,
-    would have missed this entirely (returned the faster '*'-block delay). Mirrors `allows`'s own
-    three-token check (module docstring, point 3): ANY of the three tokens can contribute, and the
-    most conservative (largest) delay wins."""
+def test_crawl_delay_ignores_a_delay_declared_only_under_claudebot() -> None:
+    """The crawl-delay half of the 2026-08-05 retirement, and the honest cost of it: a delay
+    declared ONLY under a `ClaudeBot` group is no longer picked up, so the applicable pace here is
+    the `*` group's 2s, not the 30s that group asks of Anthropic's crawler. This test previously
+    asserted 30.0 (fix wave 3, Minor #7). Updated rather than deleted -- the same reasoning that
+    stops a ClaudeBot `Disallow` binding us has to apply to its `Crawl-delay`, or the policy would
+    be incoherent, and that consequence belongs in a test where it is visible."""
 
     def handler(request: httpx.Request) -> httpx.Response:
         return robots_response(
             "User-agent: *\nAllow: /\nCrawl-delay: 2\n\n"
-            f"User-agent: {CLAUDEBOT_TOKEN}\nAllow: /\nCrawl-delay: 30\n"
+            f"User-agent: {CLAUDEBOT}\nAllow: /\nCrawl-delay: 30\n"
         )
 
     policy = fetch_policy(client_for(handler), "https://example.test")
-    assert policy.crawl_delay(UA) == 30.0
+    assert policy.crawl_delay(UA) == 2.0
 
 
 def test_crawl_delay_declared_under_bare_product_token_is_found_too() -> None:
@@ -261,14 +388,16 @@ def test_crawl_delay_declared_under_bare_product_token_is_found_too() -> None:
     assert policy.crawl_delay(UA) == 15.0
 
 
-def test_crawl_delay_our_own_slower_delay_still_wins_over_a_faster_claudebot_one() -> None:
-    """MAX across tokens, not "prefer ClaudeBot" -- our own (slower) declared delay must still
-    win when it is the more conservative of the two."""
+def test_crawl_delay_declared_under_our_own_token_is_honored_alongside_a_claudebot_group() -> None:
+    """A Crawl-delay a site declares AT US is still fully honored -- the retirement narrowed which
+    groups speak to us, not whether we obey the one that does. Unchanged in outcome by the
+    2026-08-05 change (it asserted 20.0 before and after), which is the point: it is the control
+    against which the ignored-ClaudeBot-delay test above is read."""
 
     def handler(request: httpx.Request) -> httpx.Response:
         return robots_response(
             f"User-agent: {PRODUCT_TOKEN}\nAllow: /\nCrawl-delay: 20\n\n"
-            f"User-agent: {CLAUDEBOT_TOKEN}\nAllow: /\nCrawl-delay: 3\n"
+            f"User-agent: {CLAUDEBOT}\nAllow: /\nCrawl-delay: 3\n"
         )
 
     policy = fetch_policy(client_for(handler), "https://example.test")
@@ -359,18 +488,64 @@ def test_run_source_500_robots_raises_robots_fetch_error_and_writes_no_evidence(
     assert not (paths.evidence_products / "toy-robots-500" / "observations.jsonl").exists()
 
 
-def test_run_source_claudebot_disallowed_raises(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
-        return robots_response(f"User-agent: *\nAllow: /\n\nUser-agent: {CLAUDEBOT_TOKEN}\nDisallow: /\n")
+def test_run_source_claudebot_only_block_no_longer_stops_the_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """End-to-end counterpart of the retirement, on the real Reaper file: run_source used to raise
+    RobotsDisallowedError at the base-URL preflight for exactly this robots.txt (that is why
+    mfr-reaper.yaml carried an ignoreRobots opt-out), and now runs the strategy normally. The
+    strategy's fetch of a real /paints/* line page goes through PoliteClient's per-request check
+    with the policy attached, so this proves the whole path, not just the preflight."""
+    fetched: list[str] = []
 
-    register("toy-robots-claude", _never_called_strategy, monkeypatch)
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return robots_response(REAPER_ROBOTS)
+        fetched.append(request.url.path)
+        return httpx.Response(200, text="ok")
+
+    def strategy(desc, client, cursor, ctx):
+        for path in REAPER_LINE_PAGES:
+            client.get_text(path)
+        return toy_result()
+
+    register("toy-robots-claude", strategy, monkeypatch)
     desc = SourceDescriptor(
-        id="toy-robots-claude", kind="retailer", strategy="toy-robots-claude", baseUrl="https://example.test"
+        id="toy-robots-claude", kind="manufacturer", strategy="toy-robots-claude",
+        baseUrl="https://example.test",
+    )
+
+    health = run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=httpx.MockTransport(handler))
+    assert health.contract_ok is True
+    assert fetched == list(REAPER_LINE_PAGES)
+
+
+def test_run_source_still_refuses_a_source_that_disallows_our_own_token(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """THE COMPLIANCE THAT REMAINS, end to end: a site naming `warhub-catalog-bot` still stops the
+    source dead at the preflight, the strategy never runs, and the error is attributed to our own
+    identity. The `*` group is wide open and a ClaudeBot block is present, so the ONLY thing
+    producing the refusal is the group written at us."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return robots_response(
+            "User-agent: *\nAllow: /\n\n"
+            f"User-agent: {CLAUDEBOT}\nDisallow: /\n\n"
+            f"User-agent: {PRODUCT_TOKEN}\nDisallow: /\n"
+        )
+
+    register("toy-robots-named", _never_called_strategy, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-robots-named", kind="retailer", strategy="toy-robots-named", baseUrl="https://example.test"
     )
 
     with pytest.raises(RobotsDisallowedError) as excinfo:
         run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=httpx.MockTransport(handler))
-    assert excinfo.value.details["userAgent"] == CLAUDEBOT_TOKEN
+    assert excinfo.value.details["type"] == "robots-disallowed"
+    assert excinfo.value.details["source"] == "toy-robots-named"
+    assert excinfo.value.details["userAgent"] == UA
+    assert excinfo.value.details["rule"] == "Disallow: /"
 
 
 def test_run_source_ignore_robots_skips_the_check_entirely(
