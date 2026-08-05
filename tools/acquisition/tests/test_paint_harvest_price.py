@@ -32,10 +32,19 @@ PRICE_FIELDS = ("priceGbp", "priceUsd", "priceEur", "priceCad")
 # The bridge's `SET_WORDS` constant moved into the per-source `crossoverToProducts.nameMatches`
 # declarations on 2026-08-05 (data/catalog/sources/*.yaml), so the tests below keep their own
 # copy. That is not duplication to be tidied away -- it is the point. These two tests assert over
-# EVERY committed brand file, including the six brands whose source declares no name clause (and
-# the three whose source declares no block at all); a tripwire that read each source's own regex
-# would only ever re-assert what that source already gates on. This literal is the independent
-# check.
+# EVERY committed brand file, including the brands whose source declares no name clause and those
+# whose source declares no block at all; a tripwire that read each source's own regex would only
+# ever re-assert what that source already gates on. This literal is the independent check, and
+# tools/acquisition/tests/test_repo_data.py is where the five DESCRIPTOR copies are pinned to each
+# other -- deliberately not to this one, which must be free to outlive them.
+#
+# Counted correctly (this comment previously said "six brands ... and the three", which was the
+# BRIDGE count borrowed from the scope note on test_no_committed_addition_is_a_boxed_set below --
+# the same descriptor-declaration/bridge-behaviour conflation that was Gap 2). Measured
+# 2026-08-05 over the 9 committed harvest brands: FOUR have a source with no `anyOf` name clause
+# (scale75, mr-hobby, turbo-dork, vallejo) and THREE declare no block at all (mr-hobby,
+# turbo-dork, vallejo). A tenth `catalog: paints` source, mfr-gw-webstore-paints, has no
+# evidence directory and so no brand file here.
 SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
 
 
@@ -111,13 +120,22 @@ def test_the_price_is_carried_verbatim_never_rounded() -> None:
 @pytest.mark.parametrize(
     "title",
     [
-        # Real titles that reach `additions` today, because greenstuffworld.com files its range
-        # sets under the RANGE category and reapermini.com calls this one hints.category=paint.
+        # The first five are real titles that reached `additions` before 2026-08-05, because
+        # greenstuffworld.com files its range sets under the RANGE category and reapermini.com
+        # calls that one hints.category=paint.
         "Paint Set - Chrome",
         "Set x8 Fluor Paints",
         "Acrylic Inks Set - Basic Opaque (x4)",
         "Sophie's Mystery Paint Set",
         "Paint Set - Dipping collection 01",
+        # SYNTHETIC, and the label above used to claim otherwise: measured 2026-08-05, no
+        # observations.jsonl under data/evidence/products carries a WOODEN BOX title at all (0 of
+        # 55,096 rows), and this row is exercised under mfr-greenstuffworld, whose corpus holds
+        # zero FULL RANGE and zero WOODEN BOX titles. AK's real neighbours are "SPECIAL BOX FULL
+        # RANGE ABT 502 OILS" and "AK BRIEFCASE WITH 80 3GEN - FULL RANGE AFV SERIES". Kept
+        # deliberately: WOODEN BOX is the one token no corpus can exercise (see the nameMatches
+        # field comment in models/descriptor.py), so a hand-written row is the only coverage it
+        # will ever have.
         "AK INTERACTIVE FULL RANGE WOODEN BOX",
     ],
 )
@@ -279,12 +297,15 @@ def test_no_committed_addition_is_a_boxed_set() -> None:
     same predicate both admits them to the product catalog and refuses them here (see
     resolve/crossover.py). This test is the independent check that the refusal half held.
 
-    SCOPE, deliberately: this asserts over EVERY brand, but only bridge_ak, bridge_gsw and
-    bridge_reaper actually carry a name-level set check. The other six bridges gate on per-source
-    signals alone and pass today only because no set has yet slipped past them (measured: 0
-    SET_WORDS hits across their 619 additions). That is intentional -- this is a tripwire for the
-    whole surface, not a restatement of the three gates. If it ever fails for vallejo or
-    army-painter, the fix is a gate in that bridge, not an edit to this test.
+    SCOPE, deliberately: this asserts over EVERY brand with THIS file's own word list, not with
+    each source's. Until 2026-08-05 only bridge_ak, bridge_gsw and bridge_reaper carried a set
+    check at all and the other six passed by luck; since `paint_rows` all nine read through the
+    gate, so the six no longer pass by luck -- but three of the nine sources still declare no
+    predicate (mfr-vallejo, mfr-turbodork, mfr-mr-hobby, measured 2026-08-05), and for those the
+    gate is a no-op and this literal remains the only set check in the repo. That is why it stays
+    a tripwire for the whole surface rather than a restatement of the gates. If it ever fires for
+    vallejo or turbo-dork, the fix is a `crossoverToProducts` block on that source (and a deleted
+    line in SOURCES_WITHOUT_A_CROSSOVER_BLOCK), not an edit to this test.
     """
     offenders = [
         (slug, addition.get("name"))
