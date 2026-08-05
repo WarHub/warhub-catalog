@@ -48,3 +48,27 @@ contract:
     # present. 0.9 leaves margin for set/bundle pages missing barcodes.
     ean: 0.9
     sku: 0.9
+# Boxed multi-pot sets are PRODUCTS, not paints -- they cross into the product catalog from here
+# and gen_paint_harvest.py refuses exactly the same rows (one evaluator, resolve/crossover.py).
+crossoverToProducts:
+  reason: >
+    Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
+    Measured 2026-08-05 over all 477 observations: this block selects 69 boxes, all 69
+    carrying an EAN and a price. greenstuffworld.com files 50 of them under `paint-sets`
+    and the other 19 under the RANGE category ("Paint Set - Chrome" in chrome-paints,
+    "Set x8 Fluor Paints" in fluorescent-acrylic-paints), so the category signal alone
+    selects 50 of 69 and the title signal is a strict superset here (cat - name = 0).
+    Those 19 are exactly the box EANs currently sole-held by paint records in
+    data/paints/brands/green-stuff-world.yaml (19/19 verified); the other 50 are held by
+    0 paint records -- so the re-home set and the pending retraction set coincide
+    precisely, and the retraction happens SECOND, once the barcode exists as a product.
+    All 69 carry hints.category "paint", hence the category stamp below. The word list is
+    the narrow one the AK bridge has always used: measured 2026-08-05 across all 8,528
+    committed archive names and all 2,852 source titles joining a catalog single, PACK,
+    KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE, RANGE and COMBO each produce zero false
+    positives, and only `\bBOX\b` genuinely breaks (Turbo Dork's real colour "Box Wine"),
+    which is why WOODEN BOX stays a phrase.
+  category: paint-set
+  anyOf:
+    - hintEquals: {categorySlug: paint-sets}
+    - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'

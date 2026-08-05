@@ -16,6 +16,7 @@ Imported by path: the bridge scripts are not part of the installed package (they
 standalone under `uv run --with pyyaml`), same as test_paint_harvest_mrhobby.py.
 """
 import importlib.util
+import re
 import sys
 from pathlib import Path
 
@@ -27,6 +28,15 @@ SCRIPT = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
 HARVEST_DIR = REPO_ROOT / "data/paints/harvest"
 
 PRICE_FIELDS = ("priceGbp", "priceUsd", "priceEur", "priceCad")
+
+# The bridge's `SET_WORDS` constant moved into the per-source `crossoverToProducts.nameMatches`
+# declarations on 2026-08-05 (data/catalog/sources/*.yaml), so the tests below keep their own
+# copy. That is not duplication to be tidied away -- it is the point. These two tests assert over
+# EVERY committed brand file, including the six brands whose source declares no name clause (and
+# the three whose source declares no block at all); a tripwire that read each source's own regex
+# would only ever re-assert what that source already gates on. This literal is the independent
+# check.
+SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
 
 
 def _load():
@@ -246,7 +256,7 @@ def test_no_committed_price_rides_a_set_or_a_free_download() -> None:
             for field in PRICE_FIELDS:
                 if field in entry:
                     assert entry[field] > 0, f"{slug}: {name} priced at {entry[field]}"
-                    assert not harvest.SET_WORDS.search(name), f"{slug}: set {name!r} is priced"
+                    assert not SET_WORDS.search(name), f"{slug}: set {name!r} is priced"
 
 
 def test_candidates_are_never_priced() -> None:
@@ -265,6 +275,10 @@ def test_no_committed_addition_is_a_boxed_set() -> None:
     ("Sophie's Mystery Paint Set", which the store labels `category=paint`). They published as
     single 17 ml droppers with an empty hex.
 
+    Since 2026-08-05 those boxes are PRODUCTS: each source declares `crossoverToProducts` and the
+    same predicate both admits them to the product catalog and refuses them here (see
+    resolve/crossover.py). This test is the independent check that the refusal half held.
+
     SCOPE, deliberately: this asserts over EVERY brand, but only bridge_ak, bridge_gsw and
     bridge_reaper actually carry a name-level set check. The other six bridges gate on per-source
     signals alone and pass today only because no set has yet slipped past them (measured: 0
@@ -276,6 +290,6 @@ def test_no_committed_addition_is_a_boxed_set() -> None:
         (slug, addition.get("name"))
         for slug, data in _committed_harvests()
         for addition in data.get("additions") or []
-        if harvest.SET_WORDS.search(str(addition.get("name") or ""))
+        if SET_WORDS.search(str(addition.get("name") or ""))
     ]
     assert not offenders, f"boxed sets proposed as individual paints: {offenders}"

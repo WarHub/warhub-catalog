@@ -56,3 +56,28 @@ contract:
     # Drift guard on the images array shape: ~97% of blob items carry a main image filename
     # (8 of 267 core singles and a handful of sets shipped image-less on 2026-07-24).
     imageUrl: 0.9
+# Boxed multi-pot sets are PRODUCTS, not paints -- see resolve/crossover.py for the shared
+# evaluator gen_paint_harvest.py refuses the same rows with.
+crossoverToProducts:
+  reason: >
+    Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
+    Measured 2026-08-05 over all 541 observations: this block selects 115 -- 114 that
+    reapermini.com itself labels hints.category "paint-set" (triads, LTPK kits, the
+    $659.99 full range) plus exactly 1 the title catches that the category misses, 09985
+    "Sophie's Mystery Paint Set", which the store labels hints.category "paint". The
+    category signal therefore does the heavy lifting here and the title alone would select
+    only 19 -- the OPPOSITE direction to greenstuffworld.com, which is why the predicate
+    is declared per source rather than shared.
+    All 115 are code-anchored (115/115 normalize under reaper's `\d{5}` codePattern), so
+    none hits the identity floor; the site publishes zero barcodes anywhere, so all 115
+    cross with no EAN. 09985 is a SECOND re-home case: it is published as a paint today
+    with hex '' and no EAN, so there is no barcode to move and the paint record still
+    needs retracting separately -- the EAN guard will not notice either way.
+    Set-membership evidence (hints.contentSkus) is dropped on crossover: CanonicalProduct
+    has no field for it. 114 of these 115 already carry hints.category "paint-set", so the
+    category stamp below is a no-op for them and a correction for 09985 -- and for all 431
+    rows the other five sources label "paint".
+  category: paint-set
+  anyOf:
+    - hintEquals: {category: paint-set}
+    - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'

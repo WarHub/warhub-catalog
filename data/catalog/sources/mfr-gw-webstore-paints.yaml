@@ -49,3 +49,6 @@ contract:
     # therefore 1.0 by construction, and a drop below it means the index schema changed.
     name: 1.0
     sku: 1.0
+# NO crossoverToProducts, deliberately: data/evidence/products/mfr-gw-webstore-paints/ does not
+# exist (verified 2026-08-05). Ten descriptors declare `catalog: paints`; only nine have
+# committed evidence, so there is nothing here to measure a predicate against yet.

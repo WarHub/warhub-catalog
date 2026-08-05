@@ -48,3 +48,8 @@ contract:
     name: 1.0
     # Every live listing tile carries a products__item-code; keep margin for CMS blanks.
     sku: 0.9
+# NO crossoverToProducts, deliberately. Measured 2026-08-05 over all 134 observations: 11 title
+# hits exist, but this source is SERIES-level -- one observation covers a whole range and its
+# `sku` is the range STRING the site prints ("C1~C189", "WC01-08,14-18"), not a product identity
+# (see the strategy docstring and bridge_mrhobby's expansion). Crossing a range row would mint a
+# product for something that is not one item, so there is nothing here to cross.

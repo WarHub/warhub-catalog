@@ -51,3 +51,7 @@ contract:
   requiredFieldRates:
     name: 1.0
     sku: 0.9
+# NO crossoverToProducts, deliberately. Measured 2026-08-05 over all 1,194 observations: ZERO
+# titles match the set word list and the source exposes no sets category -- scope.urlInclude
+# above never fetched a sets endpoint, so the boxes simply are not in this evidence. If Vallejo
+# sets are wanted later they need an acquire-side scope change first, not a predicate here.

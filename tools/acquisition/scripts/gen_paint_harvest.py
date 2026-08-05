@@ -44,15 +44,36 @@ from __future__ import annotations
 
 import json
 import re
+import sys
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
 
 REPO = Path(__file__).resolve().parents[3]
 EVIDENCE_DIR = REPO / "data/evidence/products"
+SOURCES_DIR = REPO / "data/catalog/sources"
 BRANDS_DIR = REPO / "data/paints/brands"
 STORES_DIR = REPO / "data/paints/stores"
 OUT_DIR = REPO / "data/paints/harvest"
+
+# THE INVARIANT: A SOURCE'S CROSSOVER PREDICATE IS EXACTLY WHAT ITS PAINT BRIDGE REFUSES.
+#
+# Boxed multi-pot sets are products, not paints (maintainer decision 2026-08-05). The product
+# resolver admits them via each descriptor's `crossoverToProducts` block; this script must refuse
+# precisely the same rows, or a box publishes in both catalogs or in neither. Sharing the
+# evaluator rather than restating the rule is what makes that true by construction -- the three
+# inline set tests this replaced were three different spellings of the same intent, and the 19
+# boxes commit 6b3c930 gated out were the gap between two of them.
+#
+# The bootstrap keeps this a PURE-PYYAML script: resolve/crossover.py imports only `re` and
+# `typing`, and the two package __init__ files this traverses import nothing third-party
+# (`resolve/__init__.py` is empty; `warhub_acquisition/__init__.py` holds only `__version__`), so
+# this adds no dependency and .github/workflows/paint-catalog-update.yml:75
+# (`uv run --with pyyaml python ...`) still runs unchanged. The RULES are read with plain pyyaml
+# below for the same reason -- loading the pydantic SourceDescriptor here would drag in pydantic.
+sys.path.insert(0, str(REPO / "tools/acquisition/src"))
+from warhub_acquisition.resolve.crossover import matches as crossover_matches  # noqa: E402
 
 # SM (Speedpaint Marker) deliberately excluded: markers share paint NAMES with the Speedpaint
 # range but are a different product form with their own EANs -- a marker EAN on a dropper
@@ -125,29 +146,45 @@ SOURCE_PRICE_FIELD = {
     "mfr-turbodork": "priceUsd",
 }
 
-# Multi-pot products, by the word the store itself puts in the title. Every bridge already
-# gates its enrich/additions to singles using per-source signals (reaper hints.category,
-# monument productType, army-painter SKU+grams, ...), and that catches sets almost everywhere
-# -- but not quite: measured 2026-08-05, 20 products whose own title says SET reached
-# `additions` anyway, because greenstuffworld.com files its range sets under the RANGE category
-# ("Paint Set - Chrome" in chrome-paints, "Set x8 Fluor Paints" in fluorescent-acrylic-paints)
-# and reapermini.com labels "Sophie's Mystery Paint Set" hints.category=paint, not paint-set.
-# `bridge_gsw` and `bridge_reaper` now gate on this too (see each for why their own signal is
-# insufficient), so no new box reaches `additions`. The price was never the exposure -- this regex
-# has always fired inside `observed_price`, and the 20 boxes landed with no price at all. What
-# landed wrong was STRUCTURE: an 8-pot box published as one 17 ml dropper with `hex: ""`.
-#
-# The word list is deliberately the narrow one the AK bridge has always used, but the reason
-# recorded here was wrong and is worth correcting rather than repeating. Measured 2026-08-05 over
-# all 8,528 committed archive names and all 2,852 source titles that currently join a catalog
-# single: PACK, KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE, RANGE and COMBO each produce ZERO
-# false positives. Only `\bBOX\b` genuinely breaks, on Turbo Dork's real colour "Box Wine" --
-# which is why "WOODEN BOX" stays a phrase. So the list is narrow by choice, not by necessity;
-# widening it is a live option if a future set slips past, and only BOX is actually barred.
-#
-# What the list CANNOT do is catch a set whose title carries none of these words. Name matching is
-# a backstop for sets the per-source category signal misfiles, never the primary gate.
-SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
+@lru_cache(maxsize=None)
+def crossover_rule(source_id: str) -> dict | None:
+    """The source's own `crossoverToProducts` block, straight out of its descriptor YAML.
+
+    Plain pyyaml on purpose (see the bootstrap comment at the top): the pydantic
+    SourceDescriptor validates the same key in CI (tests/test_repo_data.py), so this reader
+    only has to FIND it, not police it. None means the source declares no carve-out -- and
+    `crossover_matches` then selects nothing, which is exactly the behaviour the four
+    deliberately blockless paint sources want (mfr-turbodork, mfr-mr-hobby, mfr-vallejo,
+    mfr-gw-webstore-paints -- each records why in a comment on its own descriptor).
+    """
+    path = SOURCES_DIR / f"{source_id}.yaml"
+    if not path.exists():
+        # FAIL LOUD. A missing descriptor means the source id is misspelled or renamed, never
+        # "this source has no carve-out" -- that case is a descriptor that EXISTS without the key,
+        # handled below. Returning None here instead would silently disable the gate, and the
+        # blast radius is not small: pointing SOURCES_DIR at a nonexistent directory takes
+        # bridge_ak from 139 additions to 295 (156 boxed sets proposed as individual paints) and
+        # puts "Sophie's Mystery Paint Set" back in reaper's -- the exact regression 6b3c930
+        # fixed. The bridges pass this id as a bare literal, separately from the one they hand
+        # `read_observations`, so the two CAN drift by a character; this is what catches that.
+        raise SystemExit(
+            f"gen_paint_harvest: no descriptor at {path} -- is the source id {source_id!r} right? "
+            "Refusing to run with a set gate that would silently pass everything."
+        )
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return data.get("crossoverToProducts")
+
+
+def is_set(observation: dict, source_id: str) -> bool:
+    """Does the PRODUCT catalog claim this row? Then this bridge must not publish it as a paint.
+
+    The one gate every bridge asks, so that "crosses over" and "refused here" cannot diverge.
+    Measured 2026-08-05: 545 rows across the six declaring sources, of which the resolver's
+    identity floor admits 516 -- the 29 it rejects stay refused here too, which is deliberate.
+    They are not paints either; they are unaddressable set rows that reach neither catalog and
+    surface as `set-without-identity` in review/conflicts.yaml for a human to resolve.
+    """
+    return crossover_matches(observation, crossover_rule(source_id))
 
 
 def norm(s: str | None) -> str:
@@ -165,13 +202,18 @@ def observed_price(observation: dict, source_id: str) -> dict:
     is recoverable, instead of a mislabelled one, which is not.
 
     A non-positive price is not a price: ak-interactive lists "QUICK GEN COLOR GUIDE [PDF]"
-    (AK17000GUIDE) at 0.00 -- a free download, not a free paint. A SET's price is not a
-    paint's price either (see SET_WORDS), so a multi-pot title yields nothing.
+    (AK17000GUIDE) at 0.00 -- a free download, not a free paint. A SET's price is not a paint's
+    price either, so a crossed-over row yields nothing.
+
+    This guard used to be the title regex alone, which was strictly weaker: it caught 19 of
+    Reaper's 115 sets, and the other 96 stayed unpriced only because `bridge_reaper` happened to
+    `continue` before anything read the price -- an ordering dependency that bridge's docstring
+    was explicitly nervous about. Asking the source's own predicate removes it.
     """
     field = SOURCE_PRICE_FIELD.get(source_id)
     if field is None:
         return {}
-    if SET_WORDS.search(str(observation.get("name") or "")):
+    if is_set(observation, source_id):
         return {}
     value = observation.get(field)
     if not isinstance(value, (int, float)) or isinstance(value, bool) or value <= 0:
@@ -438,11 +480,10 @@ def bridge_ak() -> BrandHarvest:
 
         slugs = set((o.get("hints") or {}).get("categorySlugs") or [])
         name_raw = o["name"]
-        is_set = (
-            bool({"3rd-set", "paints-acrylics-sets", "b2b-3gen-sets"} & slugs)
-            or SET_WORDS.search(name_raw) is not None
-        )
-        if is_set or not AK_SINGLE_SKU.fullmatch(sku):
+        # The set test that used to be inline here is now the source's own declared predicate --
+        # same category slugs, same word list, one implementation shared with the resolver (see
+        # `is_set`). 285 of the 1,142 rows leave this way, measured 2026-08-05.
+        if is_set(o, "mfr-ak-interactive") or not AK_SINGLE_SKU.fullmatch(sku):
             out.candidates.append(
                 {"name": name_raw, "sku": sku or None, "url": o.get("url"),
                  "source": "mfr-ak-interactive",
@@ -744,13 +785,15 @@ def bridge_gsw() -> BrandHarvest:
 
     for o in read_observations("mfr-greenstuffworld"):
         slug = (o.get("hints") or {}).get("categorySlug") or ""
-        if slug == "paint-sets":
-            continue  # sets never promote
-        # The category check above is necessary but NOT sufficient: greenstuffworld.com files its
-        # RANGE sets under the range's own category, so "Paint Set - Chrome" arrives as
-        # chrome-paints and "Set x8 Fluor Paints" as fluorescent-acrylic-paints -- both mapped in
-        # GSW_SET_BY_CATEGORY, both promoted. Measured 2026-08-05: 19 boxes reached `additions`
-        # this way and published as single 17 ml droppers.
+        # ONE gate, covering both signals the descriptor declares: the `paint-sets` category AND
+        # the set word list. The category check alone is necessary but NOT sufficient --
+        # greenstuffworld.com files its RANGE sets under the range's own category, so "Paint Set -
+        # Chrome" arrives as chrome-paints and "Set x8 Fluor Paints" as
+        # fluorescent-acrylic-paints, both mapped in GSW_SET_BY_CATEGORY and both promoted.
+        # Measured 2026-08-05: 50 rows leave on the category, 19 more on the title (69 total), and
+        # those 19 are exactly the boxes that reached `additions` and published as single 17 ml
+        # droppers before commit 6b3c930. They now cross into the PRODUCT catalog instead of
+        # merely being refused here.
         #
         # Placed BEFORE the enrich/ratchet branch, unlike the AK bridge's post-ratchet gate. That
         # is load-bearing: `catalog` reads the archive, so all 17 already-published sets self-match
@@ -759,11 +802,11 @@ def bridge_gsw() -> BrandHarvest:
         # a two-generation oscillation. Before the branch, the row leaves unconditionally and stays
         # gone. The cost of that placement is stated plainly: if the store ever retitles an
         # EXISTING single to contain a set word, that real paint drops out of `fresh` too.
-        if SET_WORDS.search(o["name"]):
+        if is_set(o, "mfr-greenstuffworld"):
             out.candidates.append(
                 {"name": o["name"], "sku": str(o.get("sku") or "") or None, "url": o.get("url"),
                  "source": "mfr-greenstuffworld",
-                 "reason": "set title filed under a range category"}
+                 "reason": "boxed set -- crosses to the product catalog"}
             )
             continue
         sku = str(o.get("sku") or "")
@@ -808,22 +851,32 @@ def bridge_reaper() -> BrandHarvest:
     The set filter is also what keeps SET prices out: 114 of the 541 observations are
     paint-set kind and all 114 quote a priceUsd (a $47.99 Learn To Paint Kit, a $659.99 full
     range). A set's price is not a paint's price -- the `continue` below is the only thing
-    standing between the two, so it runs BEFORE anything reads the price."""
+    standing between the two, so it runs BEFORE anything reads the price. `observed_price` now
+    asks the SAME predicate, so that ordering is a belt-and-braces convenience rather than the
+    only guard it used to be."""
     catalog = Catalog("reaper")
     prior_additions = previous_addition_codes("reaper")
     out = BrandHarvest()
     for o in read_observations("mfr-reaper"):
         hints = o.get("hints") or {}
-        if hints.get("category") != "paint":
-            continue
-        # ...and reapermini.com labels "Sophie's Mystery Paint Set" category=paint, so the check
-        # above passes it through. Same placement rationale as bridge_gsw: before the
-        # enrich/ratchet branch, so a gated row can never oscillate back in.
-        if SET_WORDS.search(o["name"]):
+        # ONE gate for both routes out. The old `hints.get("category") != "paint"` continue is
+        # subsumed by the descriptor's `hintEquals: {category: paint-set}` clause, so all 114
+        # category-marked sets now leave here rather than through a separate test -- and the 1 the
+        # category misses (09985 "Sophie's Mystery Paint Set", which reapermini.com labels
+        # category=paint) leaves on the title clause. 115 rows, measured 2026-08-05.
+        # Same placement rationale as bridge_gsw: before the enrich/ratchet branch, so a gated row
+        # can never oscillate back in.
+        if is_set(o, "mfr-reaper"):
             out.candidates.append(
                 {"name": o["name"], "sku": str(o.get("sku") or "") or None, "url": o.get("url"),
-                 "source": "mfr-reaper", "reason": "set title labelled category=paint"}
+                 "source": "mfr-reaper", "reason": "boxed set -- crosses to the product catalog"}
             )
+            continue
+        if hints.get("category") != "paint":
+            # Unreachable today and kept as a floor, not as live logic: reapermini.com emits
+            # exactly two categories across all 541 observations (paint 427, paint-set 114,
+            # measured 2026-08-05) and the gate above already removed every paint-set. If the
+            # site ever adds a third kind, it must not be mistaken for a paint.
             continue
         code = str(o.get("sku") or "").lstrip("0")
         line = str(hints.get("line") or "")

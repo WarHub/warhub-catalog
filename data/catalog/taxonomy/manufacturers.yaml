@@ -79,7 +79,14 @@ manufacturers:
     vendorNames: [AK Interactive, AK-Interactive]
   - slug: army-painter
     name: The Army Painter
-    codePattern: '(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-Z]?'
+    # BNDL added 2026-08-05 for the boxed sets crossing into the product catalog
+    # (mfr-armypainter.yaml crossoverToProducts): thearmypainter.com numbers its bundles
+    # BNDL212/224/230, outside the range prefixes. Codes 48 of the 49 selected sets. TL/BR were
+    # considered and rejected -- they are the BRUSH set prefixes, which that block vetoes anyway,
+    # and adding them measures 52 of 56 rather than the 55 an earlier estimate claimed. The last
+    # uncoded row is 75005 "D&D Undead Paint Set"; left as a name slug rather than widening
+    # further to chase one row.
+    codePattern: '(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-Z]?|BNDL\d{3,4}'
     # EAN 5713799314009 observed live on thearmypainter.com variant barcode (Warpaints
     # Fanatic: Moldy Wine, WP3140P) -> GS1 Denmark company prefix.
     gs1Prefixes: ['5713799']
@@ -88,7 +95,11 @@ manufacturers:
     vendorNames: [The Army Painter, 'The Army Painter (B2C)', Army Painter]
   - slug: monument-hobbies
     name: Monument Hobbies
-    codePattern: 'MPA-[A-Z0-9]+'
+    # Widened 2026-08-05 for the boxed sets crossing into the product catalog
+    # (mfr-monument.yaml crossoverToProducts): the old 'MPA-[A-Z0-9]+' matched no set at all
+    # (0 of 21) because it cannot cross the SECOND hyphen in MPA-SET-ACON, and the store also
+    # ships AMP- (AMP Colors) and MEA- prefixes. Codes 21 of 21 sets.
+    codePattern: '(MPA|AMP|MEA)-[A-Z0-9-]+'
     # UPC-12 655368409059 observed live on monumenthobbies.com variant barcode
     # (Pro Acryl 1-Step 501) -> EAN-13 zero-padded prefix.
     gs1Prefixes: ['0655368']
@@ -109,8 +120,16 @@ manufacturers:
     vendorNames: [Mr Hobby, GSI Creos, Mr. Hobby]
   - slug: green-stuff-world
     name: Green Stuff World
-    # mpn paint numbers off product-page microdata (3220 Wonka Violet etc.).
-    codePattern: '\d{3,4}'
+    # mpn paint numbers off product-page microdata (3220 Wonka Violet etc.). Widened 3,4 -> 3,5
+    # on 2026-08-05 so the boxed sets crossing into the product catalog
+    # (mfr-greenstuffworld.yaml crossoverToProducts) are addressable by code rather than by a
+    # slug of the store title: 5-digit mpns code 69 of 69 sets, and across ALL 477 committed GSW
+    # observations the widened pattern yields 477 DISTINCT codes with zero collisions. Only 2
+    # non-set rows change code-ness (11947 "Maxx Darth Black Paint 17 ml", 12020 "Maxx Darth
+    # Paint 60 ml"), and neither reaches the paint bridge through this file: gen_paint_harvest.py
+    # never loads the taxonomy -- its Catalog.by_code is built from data/paints/brands/*.yaml
+    # productCode values -- so the paint catalog is untouched by this widening.
+    codePattern: '\d{3,5}'
     # Three GS1 prefixes observed across the full 477-product snapshot 2026-07-24:
     # 8435646 (241), 8436574 (217), 8436554 (19 -- the Chameleon line + 1 fluor).
     gs1Prefixes: ['8435646', '8436574', '8436554']
