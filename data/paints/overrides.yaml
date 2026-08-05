@@ -125,6 +125,14 @@ citadel-colour:
     isDiscontinued: true
   XV-88|Air:
     isDiscontinued: true
+  # DELIBERATELY NOT RETIRED, so the asymmetry is visible rather than an oversight:
+  # Armageddon Dunes, Astrogranite Debris and Stirland Battlemire are absent from GW's current
+  # 21-item Technical range, but that is only HALF the evidence the 31 Air colours above were
+  # retired on. Those also had a per-colour slug returning 404 while known-live controls returned
+  # 200 -- a probe nobody has run for these three. Absence from an enumerated range alone has a
+  # benign explanation (temporarily out of stock, like Mechanicus Standard Grey and Mortarion Green
+  # Clear, which looked culled in the trade data and are demonstrably live). Retiring them on
+  # weaker evidence than their neighbours would make `status` mean two different things.
   # Reformulated into Contrast at 18 ml on 2022-07-16 (GW trade article: "improved ... to
   # benefit from the ground-breaking science behind Contrast"), with new product codes
   # 99189960060/99189960061. The Technical 24 ml versions are gone, not concurrent: absent
