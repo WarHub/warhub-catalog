@@ -2,6 +2,8 @@
 # Projection of committed manufacturer evidence onto the paint catalog's identities.
 # `enrich` keys are exact {Name}|{Set} identities (C# fills blank ean/imageUrl only);
 # `additions` are new paints from catalog-role sources; `candidates` are report-only.
+# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --
+# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).
 scale75:
   enrich:
     Abyssal Blue|Scale Color Range:
@@ -9,1476 +11,1771 @@ scale75:
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4352.jpg?v=1753971341
       sourceUrl: https://scale75.com/products/abyssal-blue
       source: mfr-scale75
+      priceEur: 2.65
     Acid Green|Instant Colors Range:
       sku: SIN-25
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4508.jpg?v=1753972253
       sourceUrl: https://scale75.com/products/acid-green
       source: mfr-scale75
+      priceEur: 3.23
     Acid Pink|FX Range:
       sku: SFX-02
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4650.jpg?v=1753972100
       sourceUrl: https://scale75.com/products/acid-pink
       source: mfr-scale75
+      priceEur: 2.9
     Adriatic Blue|Scale Color Range:
       sku: SC-15
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4366.jpg?v=1753971348
       sourceUrl: https://scale75.com/products/adriatic-blue
       source: mfr-scale75
+      priceEur: 2.65
     African Shadow|Scale Color Range:
       sku: SC-24
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4384.jpg?v=1753971361
       sourceUrl: https://scale75.com/products/african-shadow
       source: mfr-scale75
+      priceEur: 2.65
     Aldebaran Red|Scale Color Range:
       sku: SC-38
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4412.jpg?v=1753971380
       sourceUrl: https://scale75.com/products/aldebaran-red
       source: mfr-scale75
+      priceEur: 2.65
     Alizarin Green|Artist Range:
       sku: SART-62
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6144.jpg?v=1753972457
       sourceUrl: https://scale75.com/products/alizarin-green
       source: mfr-scale75
+      priceEur: 3.72
     Amarth Blue|Fantasy & Games Range:
       sku: SFG-30
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4691.jpg?v=1753971547
       sourceUrl: https://scale75.com/products/amarth-blue
       source: mfr-scale75
+      priceEur: 2.9
     Amber Alchemy|Metal N Alchemy Range:
       sku: SC-93
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4562.jpg?v=1753971452
       sourceUrl: https://scale75.com/products/amber-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     American Olive|Warfront  Range:
       sku: SW-48
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4238.jpg?v=1753971714
       sourceUrl: https://scale75.com/products/american-olive
       source: mfr-scale75
+      priceEur: 2.25
     Amethyst Alchemy|Metal N Alchemy Range:
       sku: SC-70
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4592.jpg?v=1753971422
       sourceUrl: https://scale75.com/products/amethyst-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Ancestral Blue|Instant Colors Range:
       sku: SIN-33
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4492.jpg?v=1753972265
       sourceUrl: https://scale75.com/products/ancestral-blue
       source: mfr-scale75
+      priceEur: 3.23
     Antares Red|Scale Color Range:
       sku: SC-37
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4410.jpg?v=1753971377
       sourceUrl: https://scale75.com/products/antares-red
       source: mfr-scale75
+      priceEur: 2.65
     Arabic Shadow|Scale Color Range:
       sku: SC-22
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4380.jpg?v=1753971359
       sourceUrl: https://scale75.com/products/arabic-shadow
       source: mfr-scale75
+      priceEur: 2.65
     Arbuckles Brown|Fantasy & Games Range:
       sku: SFG-34
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4683.jpg?v=1753971551
       sourceUrl: https://scale75.com/products/arbuckles-brown
       source: mfr-scale75
+      priceEur: 2.9
     Arcane Purple|Instant Colors Range:
       sku: SIN-27
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4504.jpg?v=1753972256
       sourceUrl: https://scale75.com/products/arcane-purple
       source: mfr-scale75
+      priceEur: 3.23
     Ardenes Green|Scale Color Range:
       sku: SC-45
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4426.jpg?v=1753971389
       sourceUrl: https://scale75.com/products/ardenes-green
       source: mfr-scale75
+      priceEur: 2.65
     Arphen Jade|Fantasy & Games Range:
       sku: SFG-28
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4695.jpg?v=1753971550
       sourceUrl: https://scale75.com/products/arphen-jade
       source: mfr-scale75
+      priceEur: 2.9
     Art Black|Artist Range:
       sku: SART-02
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4845.jpg?v=1753971978
       sourceUrl: https://scale75.com/products/negro-arte
       source: mfr-scale75
+      priceEur: 3.72
     Art White|Artist Range:
       sku: SART-01
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4847.jpg?v=1753971978
       sourceUrl: https://scale75.com/products/blanco-arte
       source: mfr-scale75
+      priceEur: 3.72
     Baal Crimson|Fantasy & Games Range:
       sku: SFG-04
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4743.jpg?v=1753971515
       sourceUrl: https://scale75.com/products/baal-crimson
       source: mfr-scale75
+      priceEur: 2.9
     Basic Flesh|Scale Color Range:
       sku: SC-20
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4376.jpg?v=1753971359
       sourceUrl: https://scale75.com/products/basic-flesh
       source: mfr-scale75
+      priceEur: 2.65
     Basilisk Green|Instant Colors Range:
       sku: SIN-43
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4472.jpg?v=1753972281
       sourceUrl: https://scale75.com/products/basilisk-green
       source: mfr-scale75
+      priceEur: 3.23
     Beherit Red|Fantasy & Games Range:
       sku: SFG-05
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4741.jpg?v=1753971516
       sourceUrl: https://scale75.com/products/beherit-red
       source: mfr-scale75
+      priceEur: 2.9
     Belladonna Green|Instant Colors Range:
       sku: SIN-22
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4514.jpg?v=1753972251
       sourceUrl: https://scale75.com/products/belladonna-green
       source: mfr-scale75
+      priceEur: 3.23
     Bering Blue|Scale Color Range:
       sku: SC-06
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4348.jpg?v=1753971339
       sourceUrl: https://scale75.com/products/bering-blue
       source: mfr-scale75
+      priceEur: 2.65
     Birch|Scale Color Range:
       sku: SC-25
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4385.jpg?v=1753971360
       sourceUrl: https://scale75.com/products/birch
       source: mfr-scale75
+      priceEur: 2.65
     Black Forest Green|Scale Color Range:
       sku: SC-41
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4418.jpg?v=1753971384
       sourceUrl: https://scale75.com/products/black-forest-green
       source: mfr-scale75
+      priceEur: 2.65
     Black Ink|Artist Range:
       sku: SART-79
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6178.jpg?v=1754389362
       sourceUrl: https://scale75.com/products/black-ink
       source: mfr-scale75
+      priceEur: 3.72
     Black Leather|Scale Color Range:
       sku: SC-32
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4400.jpg?v=1753971372
       sourceUrl: https://scale75.com/products/black-leather
       source: mfr-scale75
+      priceEur: 2.65
     Black Metal|Metal N Alchemy Range:
       sku: SC-63
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4606.jpg?v=1753971411
       sourceUrl: https://scale75.com/products/black-metal
       source: mfr-scale75
+      priceEur: 3.23
     Blackert Brown|Fantasy & Games Range:
       sku: SFG-40
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4671.jpg?v=1753971559
       sourceUrl: https://scale75.com/products/blackert-brown
       source: mfr-scale75
+      priceEur: 2.9
     Black|Scale Color Range:
       sku: SC-00
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4204.jpg?v=1753971330
       sourceUrl: https://scale75.com/products/black
       source: mfr-scale75
+      priceEur: 2.65
     Blood Red|Scale Color Range:
       sku: SC-36
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4408.jpg?v=1753971379
       sourceUrl: https://scale75.com/products/blood-red
       source: mfr-scale75
+      priceEur: 2.65
     Bloodfest Crimson|Fantasy & Games Range:
       sku: SFG-11
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/5717.jpg?v=1753971522
       sourceUrl: https://scale75.com/products/bloodfest-crimson
       source: mfr-scale75
+      priceEur: 2.9
     Boreal Green|Scale Color Range:
       sku: SC-42
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4420.jpg?v=1753971385
       sourceUrl: https://scale75.com/products/boreal-green
       source: mfr-scale75
+      priceEur: 2.65
     Bosh Chesnut|Fantasy & Games Range:
       sku: SFG-35
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4681.jpg?v=1753971555
       sourceUrl: https://scale75.com/products/bosh-chesnut
       source: mfr-scale75
+      priceEur: 2.9
     Braineater Azure|Fantasy & Games Range:
       sku: SFG-12
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4727.jpg?v=1753971523
       sourceUrl: https://scale75.com/products/braineater-azure
       source: mfr-scale75
+      priceEur: 2.9
     Braun|Warfront  Range:
       sku: SW-28
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4278.jpg?v=1753971687
       sourceUrl: https://scale75.com/products/braun
       source: mfr-scale75
+      priceEur: 2.25
     Brilli White|FX Range:
       sku: SFX-00
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4654.jpg?v=1753972097
       sourceUrl: https://scale75.com/products/brilli-white
       source: mfr-scale75
+      priceEur: 2.9
     Brown Leather|Scale Color Range:
       sku: SC-31
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4398.jpg?v=1753971372
       sourceUrl: https://scale75.com/products/brown-leather
       source: mfr-scale75
+      priceEur: 2.65
     Buff|Artist Range:
       sku: SART-13
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4823.jpg?v=1754393647
       sourceUrl: https://scale75.com/products/ante
       source: mfr-scale75
+      priceEur: 3.72
     Burgundy Wine Red|Artist Range:
       sku: SART-54
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6128.jpg?v=1754393049
       sourceUrl: https://scale75.com/products/burgundy-wine-red
       source: mfr-scale75
+      priceEur: 3.72
     Burnt Sienna Umber|Artist Range:
       sku: SART-06
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4837.jpg?v=1754390995
       sourceUrl: https://scale75.com/products/tierra-siena-tostada
       source: mfr-scale75
+      priceEur: 3.72
     Burnt Sienna|Artist Range:
       sku: SART-42
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4765.jpg?v=1753972035
       sourceUrl: https://scale75.com/products/siena-tostada
       source: mfr-scale75
+      priceEur: 3.72
     Burnt Skin|Artist Range:
       sku: SART-12
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6821.jpg?v=1754393552
       sourceUrl: https://scale75.com/products/piel-tostada
       source: mfr-scale75
+      priceEur: 3.72
     Burnt Umber|Artist Range:
       sku: SART-38
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4773.jpg?v=1754391300
       sourceUrl: https://scale75.com/products/tierra-sombra-tostada
       source: mfr-scale75
+      priceEur: 3.72
     Cantabric Blue|Scale Color Range:
       sku: SC-53
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4442.jpg?v=1753971402
       sourceUrl: https://scale75.com/products/cantabric-blue
       source: mfr-scale75
+      priceEur: 2.65
     Caribbean Blue|Scale Color Range:
       sku: SC-49
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4434.jpg?v=1753971393
       sourceUrl: https://scale75.com/products/caribbean-blue
       source: mfr-scale75
+      priceEur: 2.65
     Caspian Blue|Scale Color Range:
       sku: SC-07
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4350.jpg?v=1753971340
       sourceUrl: https://scale75.com/products/caspian-blue
       source: mfr-scale75
+      priceEur: 2.65
     Citrine Alchemy|Metal N Alchemy Range:
       sku: SC-75
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4582.jpg?v=1753971428
       sourceUrl: https://scale75.com/products/citrine-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Cobalt Blue|Artist Range:
       sku: SART-27
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4795.jpg?v=1754395002
       sourceUrl: https://scale75.com/products/azul-cobalto
       source: mfr-scale75
+      priceEur: 3.72
     Cobalt Metal|Metal N Alchemy Range:
       sku: SC-68
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4596.jpg?v=1753971419
       sourceUrl: https://scale75.com/products/cobalt-metal
       source: mfr-scale75
+      priceEur: 3.23
     Cobalt Violet Grey|Artist Range:
       sku: SART-53
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6126.jpg?v=1754393079
       sourceUrl: https://scale75.com/products/cobalt-violet-grey
       source: mfr-scale75
+      priceEur: 3.72
     Cokum Copper|Fantasy & Games Range:
       sku: SFG-38
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4675.jpg?v=1753971557
       sourceUrl: https://scale75.com/products/cokum-copper
       source: mfr-scale75
+      priceEur: 2.9
     Coral Red|Artist Range:
       sku: SART-58
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6136.jpg?v=1754392813
       sourceUrl: https://scale75.com/products/coral-red
       source: mfr-scale75
+      priceEur: 3.72
     Cork Brown|Artist Range:
       sku: SART-49
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6118.jpg?v=1754393296
       sourceUrl: https://scale75.com/products/cork-brown
       source: mfr-scale75
+      priceEur: 3.72
     Corrupted Stamina|Instant Colors Range:
       sku: SIN-23
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4512.jpg?v=1753972252
       sourceUrl: https://scale75.com/products/corrupted-stamina
       source: mfr-scale75
+      priceEur: 3.23
     Cremeweiss|Warfront  Range:
       sku: SW-27
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4280.jpg?v=1753971686
       sourceUrl: https://scale75.com/products/cremeweiss
       source: mfr-scale75
+      priceEur: 2.25
     Crimson Ink|Artist Range:
       sku: SART-81
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6182.jpg?v=1754389299
       sourceUrl: https://scale75.com/products/crimson-ink
       source: mfr-scale75
+      priceEur: 3.72
     Dark Brown Ochre|Artist Range:
       sku: SART-41
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4767.jpg?v=1754391124
       sourceUrl: https://scale75.com/products/marron-pardo-oscuro
       source: mfr-scale75
+      priceEur: 3.72
     Dark Earth|Warfront  Range:
       sku: SW-33
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4268.jpg?v=1753971695
       sourceUrl: https://scale75.com/products/dark-earth
       source: mfr-scale75
+      priceEur: 2.25
     Dark Kraken|Instant Colors Range:
       sku: SIN-45
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4466.jpg?v=1753972282
       sourceUrl: https://scale75.com/products/dark-kraken
       source: mfr-scale75
+      priceEur: 3.23
     Dark Prussian Blue|Artist Range:
       sku: SART-66
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6152.jpg?v=1754392424
       sourceUrl: https://scale75.com/products/dark-prussian-blue
       source: mfr-scale75
+      priceEur: 3.72
     Dark Ultramarine|Artist Range:
       sku: SART-29
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4791.jpg?v=1754394946
       sourceUrl: https://scale75.com/products/azul-ultramar-oscuro
       source: mfr-scale75
+      priceEur: 3.72
     Dark Violet|Artist Range:
       sku: SART-25
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4799.jpg?v=1754395067
       sourceUrl: https://scale75.com/products/violeta-oscuro
       source: mfr-scale75
+      priceEur: 3.72
     Dead Flesh|Instant Colors Range:
       sku: SIN-11
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4536.jpg?v=1753972235
       sourceUrl: https://scale75.com/products/dead-flesh
       source: mfr-scale75
+      priceEur: 3.23
     Decay Black|Fantasy & Games Range:
       sku: SFG-00
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4751.jpg?v=1753971510
       sourceUrl: https://scale75.com/products/decay-black
       source: mfr-scale75
+      priceEur: 2.9
     Decayed Metal|Metal N Alchemy Range:
       sku: SC-87
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7490.jpg?v=1753971442
       sourceUrl: https://scale75.com/products/decayed-metal
       source: mfr-scale75
+      priceEur: 3.23
     Deep Blue|Scale Color Range:
       sku: SC-55
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4446.jpg?v=1753971403
       sourceUrl: https://scale75.com/products/deep-blue
       source: mfr-scale75
+      priceEur: 2.65
     Deep Ocean|Warfront  Range:
       sku: SW-61
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4212.jpg?v=1753971732
       sourceUrl: https://scale75.com/products/deep-ocean
       source: mfr-scale75
+      priceEur: 2.25
     Deep Red|Scale Color Range:
       sku: SC-35
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4406.jpg?v=1753971379
       sourceUrl: https://scale75.com/products/deep-red
       source: mfr-scale75
+      priceEur: 2.65
     Demon Brown|Instant Colors Range:
       sku: SIN-44
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4470.jpg?v=1753972282
       sourceUrl: https://scale75.com/products/demon-brown
       source: mfr-scale75
+      priceEur: 3.23
     Desert Yellow|Warfront  Range:
       sku: SW-31
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4272.jpg?v=1753971691
       sourceUrl: https://scale75.com/products/desert-yellow
       source: mfr-scale75
+      priceEur: 2.25
     Despair Green|Fantasy & Games Range:
       sku: SFG-43
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4665.jpg?v=1753971564
       sourceUrl: https://scale75.com/products/despair-green
       source: mfr-scale75
+      priceEur: 2.9
     Dragon Blood|Instant Colors Range:
       sku: SIN-02
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4554.jpg?v=1753972224
       sourceUrl: https://scale75.com/products/dragon-blood
       source: mfr-scale75
+      priceEur: 3.23
     Drain Life|Instant Colors Range:
       sku: SIN-07
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4544.jpg?v=1753972230
       sourceUrl: https://scale75.com/products/drain-life
       source: mfr-scale75
+      priceEur: 3.23
     Dubai Brown|Scale Color Range:
       sku: SC-13
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4362.jpg?v=1753971345
       sourceUrl: https://scale75.com/products/dubai-brown
       source: mfr-scale75
+      priceEur: 2.65
     Dunkelgelb 44|Warfront  Range:
       sku: SW-24
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4286.jpg?v=1753971682
       sourceUrl: https://scale75.com/products/dunkelgelb-44
       source: mfr-scale75
+      priceEur: 2.25
     Dwarven Gold|Metal N Alchemy Range:
       sku: SC-73
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4586.jpg?v=1753971426
       sourceUrl: https://scale75.com/products/dwarven-gold
       source: mfr-scale75
+      priceEur: 3.23
     Earth Green|Artist Range:
       sku: SART-36
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4777.jpg?v=1754391442
       sourceUrl: https://scale75.com/products/verde-tierra
       source: mfr-scale75
+      priceEur: 3.72
     Eclipse Grey|Scale Color Range:
       sku: SC-16
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4368.jpg?v=1753971349
       sourceUrl: https://scale75.com/products/eclipse-grey
       source: mfr-scale75
+      priceEur: 2.65
     Eldandil Violet|Fantasy & Games Range:
       sku: SFG-27
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4697.jpg?v=1753971545
       sourceUrl: https://scale75.com/products/eldandil-violet
       source: mfr-scale75
+      priceEur: 2.9
     Electric Blue|FX Range:
       sku: SFX-04
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4646.jpg?v=1753972103
       sourceUrl: https://scale75.com/products/electric-blue
       source: mfr-scale75
+      priceEur: 2.9
     Elixir Green|Instant Colors Range:
       sku: SIN-28
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4502.jpg?v=1753972257
       sourceUrl: https://scale75.com/products/elixir-green
       source: mfr-scale75
+      priceEur: 3.23
     Elven Gold|Metal N Alchemy Range:
       sku: SC-74
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4584.jpg?v=1753971427
       sourceUrl: https://scale75.com/products/elven-gold
       source: mfr-scale75
+      priceEur: 3.23
     Emerald Alchemy|Metal N Alchemy Range:
       sku: SC-69
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4594.jpg?v=1753971421
       sourceUrl: https://scale75.com/products/emerald-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Emerald Green|Artist Range:
       sku: SART-33
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4783.jpg?v=1754391581
       sourceUrl: https://scale75.com/products/verde-esmeralda
       source: mfr-scale75
+      priceEur: 3.72
     Endurance Brown|Instant Colors Range:
       sku: SIN-35
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4488.jpg?v=1753972268
       sourceUrl: https://scale75.com/products/endurance-brown
       source: mfr-scale75
+      priceEur: 3.23
     Estus Yellow|Instant Colors Range:
       sku: SIN-09
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4540.jpg?v=1753972233
       sourceUrl: https://scale75.com/products/estus-yellow
       source: mfr-scale75
+      priceEur: 3.23
     Evil Root|Instant Colors Range:
       sku: SIN-19
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4520.jpg?v=1753972246
       sourceUrl: https://scale75.com/products/evil-root
       source: mfr-scale75
+      priceEur: 3.23
     Fairy Blood|Instant Colors Range:
       sku: SIN-12
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4534.jpg?v=1753972235
       sourceUrl: https://scale75.com/products/fairy-blood
       source: mfr-scale75
+      priceEur: 3.23
     Fall Green|Scale Color Range:
       sku: SC-48
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4432.jpg?v=1753971393
       sourceUrl: https://scale75.com/products/fall-green
       source: mfr-scale75
+      priceEur: 2.65
     Field Grey 1|Warfront  Range:
       sku: SW-38
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4258.jpg?v=1753971700
       sourceUrl: https://scale75.com/products/field-grey-1
       source: mfr-scale75
+      priceEur: 2.25
     Field Grey 2|Warfront  Range:
       sku: SW-39
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4256.jpg?v=1753971705
       sourceUrl: https://scale75.com/products/field-grey-2
       source: mfr-scale75
+      priceEur: 2.25
     Flat Black|Warfront  Range:
       sku: SW-15
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4304.jpg?v=1753971670
       sourceUrl: https://scale75.com/products/flat-black
       source: mfr-scale75
+      priceEur: 2.25
     Flight Blue|Warfront  Range:
       sku: SW-55
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4224.jpg?v=1753971722
       sourceUrl: https://scale75.com/products/flight-blue
       source: mfr-scale75
+      priceEur: 2.25
     Frenzy Orange|Instant Colors Range:
       sku: SIN-37
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4484.jpg?v=1753972270
       sourceUrl: https://scale75.com/products/frenzy-orange
       source: mfr-scale75
+      priceEur: 3.23
     Fuchsia|Scale Color Range:
       sku: SC-34
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4404.jpg?v=1753971374
       sourceUrl: https://scale75.com/products/fuchsia
       source: mfr-scale75
+      priceEur: 2.65
     Full Healing|Instant Colors Range:
       sku: SIN-08
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4542.jpg?v=1753972232
       sourceUrl: https://scale75.com/products/full-healing
       source: mfr-scale75
+      priceEur: 3.23
     Garnet Alchemy|Metal N Alchemy Range:
       sku: SC-89
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4570.jpg?v=1753971445
       sourceUrl: https://scale75.com/products/garnet-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Gobi Brown|Scale Color Range:
       sku: SC-12
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4360.jpg?v=1753971346
       sourceUrl: https://scale75.com/products/gobi-brown
       source: mfr-scale75
+      priceEur: 2.65
     Goblin Flesh|Fantasy & Games Range:
       sku: SFG-24
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4703.jpg?v=1753971539
       sourceUrl: https://scale75.com/products/goblin-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Golden Flesh|Artist Range:
       sku: SART-08
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4833.jpg?v=1754390857
       sourceUrl: https://scale75.com/products/carne-dorada
       source: mfr-scale75
+      priceEur: 3.72
     Golden Skin|Scale Color Range:
       sku: SC-19
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4374.jpg?v=1753971355
       sourceUrl: https://scale75.com/products/golden-skin
       source: mfr-scale75
+      priceEur: 2.65
     Golem Grey|Instant Colors Range:
       sku: SIN-42
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4474.jpg?v=1753972277
       sourceUrl: https://scale75.com/products/golem-grey
       source: mfr-scale75
+      priceEur: 3.23
     Graphite|Scale Color Range:
       sku: SC-03
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4342.jpg?v=1753971333
       sourceUrl: https://scale75.com/products/graphite
       source: mfr-scale75
+      priceEur: 2.65
     Grau|Warfront  Range:
       sku: SW-29
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4276.jpg?v=1753971692
       sourceUrl: https://scale75.com/products/grau
       source: mfr-scale75
+      priceEur: 2.25
     Green Grey|Artist Range:
       sku: SART-16
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4817.jpg?v=1754394207
       sourceUrl: https://scale75.com/products/gris-verdoso
       source: mfr-scale75
+      priceEur: 3.72
     Green Ochre|Warfront  Range:
       sku: SW-30
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4274.jpg?v=1753971692
       sourceUrl: https://scale75.com/products/green-ochre
       source: mfr-scale75
+      priceEur: 2.25
     Greenskin Flesh|Fantasy & Games Range:
       sku: SFG-21
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4709.jpg?v=1753971534
       sourceUrl: https://scale75.com/products/greenskin-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Grey Spell|Instant Colors Range:
       sku: SIN-32
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4494.jpg?v=1753972262
       sourceUrl: https://scale75.com/products/grey-spell
       source: mfr-scale75
+      priceEur: 3.23
     Grizzly Brown|Instant Colors Range:
       sku: SIN-34
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4490.jpg?v=1753972268
       sourceUrl: https://scale75.com/products/grizzly-brown
       source: mfr-scale75
+      priceEur: 3.23
     Harvester Flesh|Fantasy & Games Range:
       sku: SFG-15
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4721.jpg?v=1753971529
       sourceUrl: https://scale75.com/products/harvester-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Hastur Purple|Fantasy & Games Range:
       sku: SFG-02
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4747.jpg?v=1753971513
       sourceUrl: https://scale75.com/products/hastur-purple
       source: mfr-scale75
+      priceEur: 2.9
     Health Red|Instant Colors Range:
       sku: SIN-03
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4552.jpg?v=1753972223
       sourceUrl: https://scale75.com/products/health-red
       source: mfr-scale75
+      priceEur: 3.23
     Heavy Metal|Metal N Alchemy Range:
       sku: SC-65
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4602.jpg?v=1753971414
       sourceUrl: https://scale75.com/products/heavy-metal
       source: mfr-scale75
+      priceEur: 3.23
     Hellbound Flesh|Fantasy & Games Range:
       sku: SFG-16
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4719.jpg?v=1753971530
       sourceUrl: https://scale75.com/products/hellbound-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Hiril Blue|Fantasy & Games Range:
       sku: SFG-33
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4685.jpg?v=1753971551
       sourceUrl: https://scale75.com/products/hiril-blue
       source: mfr-scale75
+      priceEur: 2.9
     Huldra Blue|Fantasy & Games Range:
       sku: SFG-26
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4699.jpg?v=1753971544
       sourceUrl: https://scale75.com/products/huldra-blue
       source: mfr-scale75
+      priceEur: 2.9
     Human Flesh|Instant Colors Range:
       sku: SIN-15
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4528.jpg?v=1753972241
       sourceUrl: https://scale75.com/products/human-flesh
       source: mfr-scale75
+      priceEur: 3.23
     Hykey Yellow|Fantasy & Games Range:
       sku: SFG-41
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4669.jpg?v=1753971560
       sourceUrl: https://scale75.com/products/hykey-yellow
       source: mfr-scale75
+      priceEur: 2.9
     Indian Shadow|Scale Color Range:
       sku: SC-23
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4382.jpg?v=1753971359
       sourceUrl: https://scale75.com/products/indian-shadow
       source: mfr-scale75
+      priceEur: 2.65
     Inktense Black|Inktensity Range:
       sku: SC-79
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4638.jpg?v=1753971432
       sourceUrl: https://scale75.com/products/inktense-black
       source: mfr-scale75
+      priceEur: 3.23
     Inktense Blue|Inktensity Range:
       sku: SC-83
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4630.jpg?v=1753971440
       sourceUrl: https://scale75.com/products/inktense-blue
       source: mfr-scale75
+      priceEur: 3.23
     Inktense Green|Inktensity Range:
       sku: SC-84
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4628.jpg?v=1753971439
       sourceUrl: https://scale75.com/products/inktense-green
       source: mfr-scale75
+      priceEur: 3.23
     Inktense Red|Inktensity Range:
       sku: SC-85
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4626.jpg?v=1753971442
       sourceUrl: https://scale75.com/products/inktense-red
       source: mfr-scale75
+      priceEur: 3.23
     Inktense Violet|Inktensity Range:
       sku: SC-82
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4632.jpg?v=1753971438
       sourceUrl: https://scale75.com/products/inktense-violet
       source: mfr-scale75
+      priceEur: 3.23
     Inktense Wood|Inktensity Range:
       sku: SC-80
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4636.jpg?v=1753971433
       sourceUrl: https://scale75.com/products/inktense-wood
       source: mfr-scale75
+      priceEur: 3.23
     Inktense Yellow|Inktensity Range:
       sku: SC-86
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4624.jpg?v=1753971442
       sourceUrl: https://scale75.com/products/inktense-yellow
       source: mfr-scale75
+      priceEur: 3.23
     Innsmouth Blue|Fantasy & Games Range:
       sku: SFG-46
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4659.jpg?v=1753971569
       sourceUrl: https://scale75.com/products/innsmouth-blue
       source: mfr-scale75
+      priceEur: 2.9
     Intense Yellow|Artist Range:
       sku: SART-19
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4811.jpg?v=1754395429
       sourceUrl: https://scale75.com/products/amarillo-intenso
       source: mfr-scale75
+      priceEur: 3.72
     Irati Green|Scale Color Range:
       sku: SC-43
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4422.jpg?v=1753971386
       sourceUrl: https://scale75.com/products/irati-green
       source: mfr-scale75
+      priceEur: 2.65
     Iroko|Scale Color Range:
       sku: SC-27
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4390.jpg?v=1753971364
       sourceUrl: https://scale75.com/products/iroko
       source: mfr-scale75
+      priceEur: 2.65
     Ishtar Pink|Fantasy & Games Range:
       sku: SFG-07
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4737.jpg?v=1753971517
       sourceUrl: https://scale75.com/products/ishtar-pink
       source: mfr-scale75
+      priceEur: 2.9
     Jade Green|Artist Range:
       sku: SART-63
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6146.jpg?v=1754392485
       sourceUrl: https://scale75.com/products/jade-green
       source: mfr-scale75
+      priceEur: 3.72
     Jorildyn Turquoise|Fantasy & Games Range:
       sku: SFG-31
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4689.jpg?v=1753971551
       sourceUrl: https://scale75.com/products/jorildyn-turquoise
       source: mfr-scale75
+      priceEur: 2.9
     Kalahari Orange|Scale Color Range:
       sku: SC-14
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4364.jpg?v=1753971348
       sourceUrl: https://scale75.com/products/kalahari-orange
       source: mfr-scale75
+      priceEur: 2.65
     Kunzite Alchemy|Metal N Alchemy Range:
       sku: SC-77
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4578.jpg?v=1753971429
       sourceUrl: https://scale75.com/products/kunzite-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Leaden Sky|Warfront  Range:
       sku: SW-37
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4260.jpg?v=1753971706
       sourceUrl: https://scale75.com/products/leaden-sky
       source: mfr-scale75
+      priceEur: 2.25
     Lemon Yellow|Artist Range:
       sku: SART-55
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6130.jpg?v=1754392972
       sourceUrl: https://scale75.com/products/lemon-yellow
       source: mfr-scale75
+      priceEur: 3.72
     Lendanis Grey|Fantasy & Games Range:
       sku: SFG-32
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4687.jpg?v=1753971549
       sourceUrl: https://scale75.com/products/lendanis-grey
       source: mfr-scale75
+      priceEur: 2.9
     Leviathan Blue|Instant Colors Range:
       sku: SIN-46
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4464.jpg?v=1753972283
       sourceUrl: https://scale75.com/products/leviathan-blue
       source: mfr-scale75
+      priceEur: 3.23
     Life Red|Instant Colors Range:
       sku: SIN-05
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4548.jpg?v=1753972227
       sourceUrl: https://scale75.com/products/life-red
       source: mfr-scale75
+      priceEur: 3.23
     Light Moss Green|Artist Range:
       sku: SART-31
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4787.jpg?v=1754391645
       sourceUrl: https://scale75.com/products/verde-musgo-claro
       source: mfr-scale75
+      priceEur: 3.72
     Light Skin|Artist Range:
       sku: SART-09
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4831.jpg?v=1754390788
       sourceUrl: https://scale75.com/products/piel-clara
       source: mfr-scale75
+      priceEur: 3.72
     Light Skin|Scale Color Range:
       sku: SC-18
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4372.jpg?v=1753971354
       sourceUrl: https://scale75.com/products/light-skin
       source: mfr-scale75
+      priceEur: 2.65
     Light Sky|Warfront  Range:
       sku: SW-56
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4222.jpg?v=1753971725
       sourceUrl: https://scale75.com/products/light-sky
       source: mfr-scale75
+      priceEur: 2.25
     Light Ultramarine|Artist Range:
       sku: SART-28
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4793.jpg?v=1754394973
       sourceUrl: https://scale75.com/products/azul-ultramar-claro
       source: mfr-scale75
+      priceEur: 3.72
     Lilith Yellow|Fantasy & Games Range:
       sku: SFG-09
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4733.jpg?v=1753971521
       sourceUrl: https://scale75.com/products/lilith-yellow
       source: mfr-scale75
+      priceEur: 2.9
     Lime Green|Artist Range:
       sku: SART-61
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6142.jpg?v=1754392677
       sourceUrl: https://scale75.com/products/lime-green
       source: mfr-scale75
+      priceEur: 3.72
     Love Affair|Instant Colors Range:
       sku: SIN-04
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4550.jpg?v=1753972225
       sourceUrl: https://scale75.com/products/love-affair
       source: mfr-scale75
+      priceEur: 3.23
     Magenta|Artist Range:
       sku: SART-23
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4803.jpg?v=1754395194
       sourceUrl: https://scale75.com/products/magenta
       source: mfr-scale75
+      priceEur: 3.72
     Magic Blue|Instant Colors Range:
       sku: SIN-31
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4496.jpg?v=1753972261
       sourceUrl: https://scale75.com/products/magic-blue
       source: mfr-scale75
+      priceEur: 3.23
     Mana Regeneration|Instant Colors Range:
       sku: SIN-30
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4498.jpg?v=1753972260
       sourceUrl: https://scale75.com/products/mana-regeneration
       source: mfr-scale75
+      priceEur: 3.23
     Marduk Yellow|Fantasy & Games Range:
       sku: SFG-08
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4735.jpg?v=1753971522
       sourceUrl: https://scale75.com/products/marduk-yellow
       source: mfr-scale75
+      priceEur: 2.9
     Mars Orange|Scale Color Range:
       sku: SC-39
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4414.jpg?v=1753971383
       sourceUrl: https://scale75.com/products/mars-orange
       source: mfr-scale75
+      priceEur: 2.65
     Mayhem Red|Fantasy & Games Range:
       sku: SFG-03
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4745.jpg?v=1753971514
       sourceUrl: https://scale75.com/products/mayhem-red
       source: mfr-scale75
+      priceEur: 2.9
     Mediterranean Blue|Scale Color Range:
       sku: SC-51
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4438.jpg?v=1753971399
       sourceUrl: https://scale75.com/products/mediterranean-blue
       source: mfr-scale75
+      priceEur: 2.65
     Merm Green|Fantasy & Games Range:
       sku: SFG-20
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4711.jpg?v=1753971533
       sourceUrl: https://scale75.com/products/merm-green
       source: mfr-scale75
+      priceEur: 2.9
     Misfits Green|Fantasy & Games Range:
       sku: SFG-10
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4731.jpg?v=1753971523
       sourceUrl: https://scale75.com/products/misfits-green
       source: mfr-scale75
+      priceEur: 2.9
     Miskatonic Grey|Fantasy & Games Range:
       sku: SFG-47
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4657.jpg?v=1753971571
       sourceUrl: https://scale75.com/products/miskatonic-grey
       source: mfr-scale75
+      priceEur: 2.9
     Mojave White|Scale Color Range:
       sku: SC-62
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4460.jpg?v=1753971412
       sourceUrl: https://scale75.com/products/mojave-white
       source: mfr-scale75
+      priceEur: 2.65
     Moonray Flesh|Fantasy & Games Range:
       sku: SFG-17
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4717.jpg?v=1753971531
       sourceUrl: https://scale75.com/products/moonray-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Moonstone Alchemy|Metal N Alchemy Range:
       sku: SC-94
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4560.jpg?v=1753971454
       sourceUrl: https://scale75.com/products/moonstone-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Moss Green|Artist Range:
       sku: SART-11
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4827.jpg?v=1754391228
       sourceUrl: https://scale75.com/products/verde-musgo
       source: mfr-scale75
+      priceEur: 3.72
     Nacar|Scale Color Range:
       sku: SC-02
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4340.jpg?v=1753971333
       sourceUrl: https://scale75.com/products/nacar
       source: mfr-scale75
+      priceEur: 2.65
     Navy Blue|Scale Color Range:
       sku: SC-54
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4444.jpg?v=1753971402
       sourceUrl: https://scale75.com/products/navy-blue
       source: mfr-scale75
+      priceEur: 2.65
     Necro Gold|Metal N Alchemy Range:
       sku: SC-71
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4590.jpg?v=1753971421
       sourceUrl: https://scale75.com/products/necro-gold
       source: mfr-scale75
+      priceEur: 3.23
     Necro Grey|Fantasy & Games Range:
       sku: SFG-42
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4667.jpg?v=1753971562
       sourceUrl: https://scale75.com/products/necro-grey
       source: mfr-scale75
+      priceEur: 2.9
     Neon Blue|Artist Range:
       sku: SART-72
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6164.jpg?v=1754392012
       sourceUrl: https://scale75.com/products/neon-blue
       source: mfr-scale75
+      priceEur: 3.72
     Neon Green|Artist Range:
       sku: SART-71
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6162.jpg?v=1754390112
       sourceUrl: https://scale75.com/products/neon-green
       source: mfr-scale75
+      priceEur: 3.72
     Neon Orange|Artist Range:
       sku: SART-67
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6154.jpg?v=1754392389
       sourceUrl: https://scale75.com/products/neon-orange
       source: mfr-scale75
+      priceEur: 3.72
     Neon Pink|Artist Range:
       sku: SART-68
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6156.jpg?v=1754392352
       sourceUrl: https://scale75.com/products/neon-pink
       source: mfr-scale75
+      priceEur: 3.72
     Neon Red|Artist Range:
       sku: SART-69
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6158.jpg?v=1754392283
       sourceUrl: https://scale75.com/products/neon-red
       source: mfr-scale75
+      priceEur: 3.72
     Neon Yellow|Artist Range:
       sku: SART-70
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6159.jpg?v=1753972468
       sourceUrl: https://scale75.com/products/neon-yellow
       source: mfr-scale75
+      priceEur: 3.72
     Ocean Blue|Warfront  Range:
       sku: SW-60
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4214.jpg?v=1753971728
       sourceUrl: https://scale75.com/products/ocean-blue
       source: mfr-scale75
+      priceEur: 2.25
     Off White|Artist Range:
       sku: SART-47
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4755.jpg?v=1753972038
       sourceUrl: https://scale75.com/products/blanco-hueso
       source: mfr-scale75
+      priceEur: 3.72
     Ogre Brown|Instant Colors Range:
       sku: SIN-38
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4482.jpg?v=1753972272
       sourceUrl: https://scale75.com/products/ogre-brown
       source: mfr-scale75
+      priceEur: 3.23
     Old Copper|Metal N Alchemy Range:
       sku: SC-88
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4572.jpg?v=1753971444
       sourceUrl: https://scale75.com/products/old-copper
       source: mfr-scale75
+      priceEur: 3.23
     Olive Brown|Warfront  Range:
       sku: SW-35
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4264.jpg?v=1753971696
       sourceUrl: https://scale75.com/products/olive-brown
       source: mfr-scale75
+      priceEur: 2.25
     Olive Green|Artist Range:
       sku: SART-35
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4779.jpg?v=1754391471
       sourceUrl: https://scale75.com/products/verde-oliva
       source: mfr-scale75
+      priceEur: 3.72
     Orange Leather|Scale Color Range:
       sku: SC-28
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4392.jpg?v=1753971367
       sourceUrl: https://scale75.com/products/orange-leather
       source: mfr-scale75
+      priceEur: 2.65
     Orange Neon|FX Range:
       sku: SFX-01
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4652.jpg?v=1753972102
       sourceUrl: https://scale75.com/products/orange-neon
       source: mfr-scale75
+      priceEur: 2.9
     Orange|Artist Range:
       sku: SART-22
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4805.jpg?v=1754395252
       sourceUrl: https://scale75.com/products/naranja
       source: mfr-scale75
+      priceEur: 3.72
     Orange|Warfront  Range:
       sku: SW-59
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4216.jpg?v=1753971727
       sourceUrl: https://scale75.com/products/orange
       source: mfr-scale75
+      priceEur: 2.25
     Orcish Dermis|Fantasy & Games Range:
       sku: SFG-19
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4713.jpg?v=1753971534
       sourceUrl: https://scale75.com/products/orcish-dermis
       source: mfr-scale75
+      priceEur: 2.9
     Oxford Blue|Artist Range:
       sku: SART-65
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6150.jpg?v=1754392449
       sourceUrl: https://scale75.com/products/oxford-blue
       source: mfr-scale75
+      priceEur: 3.72
     Pale Earth|Warfront  Range:
       sku: SW-34
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4266.jpg?v=1753971695
       sourceUrl: https://scale75.com/products/pale-earth
       source: mfr-scale75
+      priceEur: 2.25
     Pale Skin|Artist Range:
       sku: SART-51
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6122.jpg?v=1754393166
       sourceUrl: https://scale75.com/products/pale-skin-1
       source: mfr-scale75
+      priceEur: 3.72
     Pale Skin|Scale Color Range:
       sku: SC-17
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4370.jpg?v=1753971350
       sourceUrl: https://scale75.com/products/pale-skin
       source: mfr-scale75
+      priceEur: 2.65
     Panzer Grey|Warfront  Range:
       sku: SW-46
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4242.jpg?v=1753971711
       sourceUrl: https://scale75.com/products/panzer-grey
       source: mfr-scale75
+      priceEur: 2.25
     Panzer Yellow|Warfront  Range:
       sku: SW-47
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4240.jpg?v=1753971713
       sourceUrl: https://scale75.com/products/panzer-yellow
       source: mfr-scale75
+      priceEur: 2.25
     Paralyze Blue|Instant Colors Range:
       sku: SIN-18
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4522.jpg?v=1753972245
       sourceUrl: https://scale75.com/products/paralyze-blue
       source: mfr-scale75
+      priceEur: 3.23
     Pastel Blue|Artist Range:
       sku: SART-48
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4753.jpg?v=1753972037
       sourceUrl: https://scale75.com/products/azul-pastel
       source: mfr-scale75
+      priceEur: 3.72
     Pastel Green|Artist Range:
       sku: SART-46
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4757.jpg?v=1753972036
       sourceUrl: https://scale75.com/products/verde-pastel
       source: mfr-scale75
+      priceEur: 3.72
     Pastel Pink|Artist Range:
       sku: SART-50
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6120.jpg?v=1754393208
       sourceUrl: https://scale75.com/products/pastel-pink
       source: mfr-scale75
+      priceEur: 3.72
     Pastel Violet|Artist Range:
       sku: SART-45
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4759.jpg?v=1753972036
       sourceUrl: https://scale75.com/products/violeta-pastel
       source: mfr-scale75
+      priceEur: 3.72
     Peanut Butter|Fantasy & Games Range:
       sku: SFG-39
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4673.jpg?v=1753971560
       sourceUrl: https://scale75.com/products/peanut-butter
       source: mfr-scale75
+      priceEur: 2.9
     Pearl Grey|Artist Range:
       sku: SART-14
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4821.jpg?v=1754393897
       sourceUrl: https://scale75.com/products/gris-perla
       source: mfr-scale75
+      priceEur: 3.72
     Peridot Alchemy|Metal N Alchemy Range:
       sku: SC-78
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4576.jpg?v=1753971430
       sourceUrl: https://scale75.com/products/peridot-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Permanent Orange|Artist Range:
       sku: SART-57
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6134.jpg?v=1754392857
       sourceUrl: https://scale75.com/products/permanent-orange
       source: mfr-scale75
+      priceEur: 3.72
     Phoenix Egg|Instant Colors Range:
       sku: SIN-17
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4524.jpg?v=1753972243
       sourceUrl: https://scale75.com/products/phoenix-egg
       source: mfr-scale75
+      priceEur: 3.23
     Phoenix Feather|Instant Colors Range:
       sku: SIN-14
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4530.jpg?v=1753972239
       sourceUrl: https://scale75.com/products/phoenix-feather
       source: mfr-scale75
+      priceEur: 3.23
     Pink Flesh|Artist Range:
       sku: SART-07
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4835.jpg?v=1754390963
       sourceUrl: https://scale75.com/products/carne-rosada
       source: mfr-scale75
+      priceEur: 3.72
     Pink Flesh|Scale Color Range:
       sku: SC-21
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4378.jpg?v=1753971357
       sourceUrl: https://scale75.com/products/pink-flesh
       source: mfr-scale75
+      priceEur: 2.65
     Pistachio Green Ink|Artist Range:
       sku: SART-82
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6184.jpg?v=1754389273
       sourceUrl: https://scale75.com/products/pistachio-green-ink
       source: mfr-scale75
+      priceEur: 3.72
     Primary Blue|Artist Range:
       sku: SART-03
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4843.jpg?v=1754390767
       sourceUrl: https://scale75.com/products/azul-primario
       source: mfr-scale75
+      priceEur: 3.72
     Primary Red|Artist Range:
       sku: SART-05
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4839.jpg?v=1754391026
       sourceUrl: https://scale75.com/products/rojo-primario
       source: mfr-scale75
+      priceEur: 3.72
     Primary Yellow|Artist Range:
       sku: SART-04
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4841.jpg?v=1754391062
       sourceUrl: https://scale75.com/products/amarillo-primario
       source: mfr-scale75
+      priceEur: 3.72
     Psychedelic Purple|FX Range:
       sku: SFX-03
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4648.jpg?v=1753972102
       sourceUrl: https://scale75.com/products/psychedelic-purple
       source: mfr-scale75
+      priceEur: 2.9
     Pure Copper|Metal N Alchemy Range:
       sku: SC-91
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4566.jpg?v=1753971448
       sourceUrl: https://scale75.com/products/pure-copper
       source: mfr-scale75
+      priceEur: 3.23
     Purity White|Fantasy & Games Range:
       sku: SFG-01
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4749.jpg?v=1753971512
       sourceUrl: https://scale75.com/products/purity-white
       source: mfr-scale75
+      priceEur: 2.9
     Purple|Artist Range:
       sku: SART-24
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4801.jpg?v=1754395138
       sourceUrl: https://scale75.com/products/purpura
       source: mfr-scale75
+      priceEur: 3.72
     Rage Brown|Instant Colors Range:
       sku: SIN-36
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4486.jpg?v=1753972269
       sourceUrl: https://scale75.com/products/rage-brown
       source: mfr-scale75
+      priceEur: 3.23
     Ragweed Orange|Instant Colors Range:
       sku: SIN-06
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4546.jpg?v=1753972228
       sourceUrl: https://scale75.com/products/ragweed-orange
       source: mfr-scale75
+      priceEur: 3.23
     Raw Sienna|Artist Range:
       sku: SART-21
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4807.jpg?v=1754395354
       sourceUrl: https://scale75.com/products/tierra-siena-natural
       source: mfr-scale75
+      priceEur: 3.72
     Raw Umber|Artist Range:
       sku: SART-40
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4769.jpg?v=1754391249
       sourceUrl: https://scale75.com/products/tierra-sombra-natural
       source: mfr-scale75
+      priceEur: 3.72
     Red Ecstasy|FX Range:
       sku: SFX-07
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4641.jpg?v=1753972107
       sourceUrl: https://scale75.com/products/red-ecstasy
       source: mfr-scale75
+      priceEur: 2.9
     Red Label|Warfront  Range:
       sku: SW-53
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4228.jpg?v=1753971722
       sourceUrl: https://scale75.com/products/red-label
       source: mfr-scale75
+      priceEur: 2.25
     Red Leather|Scale Color Range:
       sku: SC-30
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4396.jpg?v=1753971367
       sourceUrl: https://scale75.com/products/red-leather
       source: mfr-scale75
+      priceEur: 2.65
     Red Ochre|Artist Range:
       sku: SART-37
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4775.jpg?v=1754391414
       sourceUrl: https://scale75.com/products/ocre-rojo
       source: mfr-scale75
+      priceEur: 3.72
     Remove Mana|Instant Colors Range:
       sku: SIN-26
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4506.jpg?v=1753972255
       sourceUrl: https://scale75.com/products/remove-mana
       source: mfr-scale75
+      priceEur: 3.23
     Replenish Blue|Instant Colors Range:
       sku: SIN-29
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4500.jpg?v=1753972258
       sourceUrl: https://scale75.com/products/replenish-blue
       source: mfr-scale75
+      priceEur: 3.23
     Resurrection Flesh|Fantasy & Games Range:
       sku: SFG-14
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4723.jpg?v=1753971527
       sourceUrl: https://scale75.com/products/resurrection-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Riff Green|Fantasy & Games Range:
       sku: SFG-18
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4715.jpg?v=1753971531
       sourceUrl: https://scale75.com/products/riff-green
       source: mfr-scale75
+      priceEur: 2.9
     Rlyeh Grey|Fantasy & Games Range:
       sku: SFG-45
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4661.jpg?v=1753971567
       sourceUrl: https://scale75.com/products/rlyeh-grey
       source: mfr-scale75
+      priceEur: 2.9
     Rotbraun 44|Warfront  Range:
       sku: SW-25
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4284.jpg?v=1753971685
       sourceUrl: https://scale75.com/products/rotbraun-44
       source: mfr-scale75
+      priceEur: 2.25
     Rotten Pus|Instant Colors Range:
       sku: SIN-24
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4510.jpg?v=1753972253
       sourceUrl: https://scale75.com/products/rotten-pus
       source: mfr-scale75
+      priceEur: 3.23
     Ruby Alchemy|Metal N Alchemy Range:
       sku: SC-90
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4568.jpg?v=1753971446
       sourceUrl: https://scale75.com/products/ruby-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Russian Green|Warfront  Range:
       sku: SW-43
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4248.jpg?v=1753971709
       sourceUrl: https://scale75.com/products/russian-green
       source: mfr-scale75
+      priceEur: 2.25
     Russian Light Green|Warfront  Range:
       sku: SW-44
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4246.jpg?v=1753971709
       sourceUrl: https://scale75.com/products/russian-light-green
       source: mfr-scale75
+      priceEur: 2.25
     Russian Uniform|Warfront  Range:
       sku: SW-45
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4244.jpg?v=1753971712
       sourceUrl: https://scale75.com/products/russian-uniform
       source: mfr-scale75
+      priceEur: 2.25
     Sahara Sand|Warfront  Range:
       sku: SW-36
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4262.jpg?v=1753971697
       sourceUrl: https://scale75.com/products/sahara-sand
       source: mfr-scale75
+      priceEur: 2.25
     Sahara Yellow|Scale Color Range:
       sku: SC-11
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4358.jpg?v=1753971345
       sourceUrl: https://scale75.com/products/sahara-yellow
       source: mfr-scale75
+      priceEur: 2.65
     Salmon Fury|Instant Colors Range:
       sku: SIN-39
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4480.jpg?v=1753972273
       sourceUrl: https://scale75.com/products/salmon-fury
       source: mfr-scale75
+      priceEur: 3.23
     Sand Yellow|Warfront  Range:
       sku: SW-32
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4270.jpg?v=1753971694
       sourceUrl: https://scale75.com/products/sand-yellow
       source: mfr-scale75
+      priceEur: 2.25
     Sandalwood|Scale Color Range:
       sku: SC-26
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4388.jpg?v=1753971362
       sourceUrl: https://scale75.com/products/sandalwood
       source: mfr-scale75
+      priceEur: 2.65
     Sap Green|Artist Range:
       sku: SART-34
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4781.jpg?v=1754391501
       sourceUrl: https://scale75.com/products/verde-vejiga
       source: mfr-scale75
+      priceEur: 3.72
     Savage Beige|Instant Colors Range:
       sku: SIN-41
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4476.jpg?v=1753972276
       sourceUrl: https://scale75.com/products/savage-beige
       source: mfr-scale75
+      priceEur: 3.23
     Shadow Black|Instant Colors Range:
       sku: SIN-00
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4558.jpg?v=1753972220
       sourceUrl: https://scale75.com/products/shadow-black
       source: mfr-scale75
+      priceEur: 3.23
     Shadow Blue|Warfront  Range:
       sku: SW-57
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4220.jpg?v=1753971727
       sourceUrl: https://scale75.com/products/shadow-blue
       source: mfr-scale75
+      priceEur: 2.25
     Sharpnel Red|Fantasy & Games Range:
       sku: SFG-36
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4679.jpg?v=1753971556
       sourceUrl: https://scale75.com/products/sharpnel-red
       source: mfr-scale75
+      priceEur: 2.9
     Sherwood Green|Scale Color Range:
       sku: SC-44
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4424.jpg?v=1753971388
       sourceUrl: https://scale75.com/products/sherwood-green
       source: mfr-scale75
+      priceEur: 2.65
     Sky Blue|Artist Range:
       sku: SART-52
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6124.jpg?v=1754393127
       sourceUrl: https://scale75.com/products/ski-blue
       source: mfr-scale75
+      priceEur: 3.72
     Sky Blue|Scale Color Range:
       sku: SC-50
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4436.jpg?v=1753971396
       sourceUrl: https://scale75.com/products/sky-blue
       source: mfr-scale75
+      priceEur: 2.65
     Slimer Green|Fantasy & Games Range:
       sku: SFG-23
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4705.jpg?v=1753971540
       sourceUrl: https://scale75.com/products/slimer-green
       source: mfr-scale75
+      priceEur: 2.9
     Sol Yellow|Scale Color Range:
       sku: SC-40
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4416.jpg?v=1753971382
       sourceUrl: https://scale75.com/products/sol-yellow
       source: mfr-scale75
+      priceEur: 2.65
     Spectral Wolf|Instant Colors Range:
       sku: SIN-47
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4462.jpg?v=1753972283
       sourceUrl: https://scale75.com/products/spectral-wolf
       source: mfr-scale75
+      priceEur: 3.23
     Speed Metal|Metal N Alchemy Range:
       sku: SC-66
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4600.jpg?v=1753971415
       sourceUrl: https://scale75.com/products/speed-metal
       source: mfr-scale75
+      priceEur: 3.23
     Speed Yellow|FX Range:
       sku: SFX-06
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4642.jpg?v=1753972106
       sourceUrl: https://scale75.com/products/speed-yellow
       source: mfr-scale75
+      priceEur: 2.9
     Spring Green|Artist Range:
       sku: SART-32
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4785.jpg?v=1754391608
       sourceUrl: https://scale75.com/products/verde-primavera
       source: mfr-scale75
+      priceEur: 3.72
     Spring Green|Scale Color Range:
       sku: SC-47
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4430.jpg?v=1753971392
       sourceUrl: https://scale75.com/products/spring-green
       source: mfr-scale75
+      priceEur: 2.65
     Sulfur Yellow|Instant Colors Range:
       sku: SIN-21
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4516.jpg?v=1753972248
       sourceUrl: https://scale75.com/products/sulfur-yellow
       source: mfr-scale75
+      priceEur: 3.23
     Sunset Purple|Scale Color Range:
       sku: SC-33
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4402.jpg?v=1753971372
       sourceUrl: https://scale75.com/products/sunset-purple
       source: mfr-scale75
+      priceEur: 2.65
     Surfer Orc Flesh|Fantasy & Games Range:
       sku: SFG-22
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4707.jpg?v=1753971538
       sourceUrl: https://scale75.com/products/surfer-orc-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Techno Green|FX Range:
       sku: SFX-05
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4644.jpg?v=1753972104
       sourceUrl: https://scale75.com/products/techno-green
       source: mfr-scale75
+      priceEur: 2.9
     Tenere Yellow|Scale Color Range:
       sku: SC-10
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4356.jpg?v=1753971342
       sourceUrl: https://scale75.com/products/tenere-yellow
       source: mfr-scale75
+      priceEur: 2.65
     Tesla Blue|Scale Color Range:
       sku: SC-52
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4440.jpg?v=1753971400
       sourceUrl: https://scale75.com/products/tesla-blue
       source: mfr-scale75
+      priceEur: 2.65
     Thar Brown|Scale Color Range:
       sku: SC-61
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4458.jpg?v=1753971411
       sourceUrl: https://scale75.com/products/thar-brown
       source: mfr-scale75
+      priceEur: 2.65
     Tiamat Orange|Fantasy & Games Range:
       sku: SFG-06
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4739.jpg?v=1753971521
       sourceUrl: https://scale75.com/products/tiamat-orange
       source: mfr-scale75
+      priceEur: 2.9
     Tindalos Red|Fantasy & Games Range:
       sku: SFG-44
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4663.jpg?v=1753971564
       sourceUrl: https://scale75.com/products/tindalos-red
       source: mfr-scale75
+      priceEur: 2.9
     Titanium Grey|Artist Range:
       sku: SW-40
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4254.jpg?v=1753971704
       sourceUrl: https://scale75.com/products/titanium-gray
       source: mfr-scale75
+      priceEur: 2.25
     Toad Green|Instant Colors Range:
       sku: SIN-20
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4518.jpg?v=1753972248
       sourceUrl: https://scale75.com/products/toad-green
       source: mfr-scale75
+      priceEur: 3.23
     Tourmaline Alchemy|Metal N Alchemy Range:
       sku: SC-76
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4580.jpg?v=1753971428
       sourceUrl: https://scale75.com/products/tourmaline-alchemy
       source: mfr-scale75
+      priceEur: 3.23
     Toxic Waste Green|Fantasy & Games Range:
       sku: SFG-25
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4701.jpg?v=1753971542
       sourceUrl: https://scale75.com/products/toxic-waste-green
       source: mfr-scale75
+      priceEur: 2.9
     Turquoise Blue|Artist Range:
       sku: SART-26
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4797.jpg?v=1754395033
       sourceUrl: https://scale75.com/products/azul-turquesa
       source: mfr-scale75
+      priceEur: 3.72
     Turquoise Ink|Artist Range:
       sku: SART-83
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6185.jpg?v=1753972485
       sourceUrl: https://scale75.com/products/turquoise-ink
       source: mfr-scale75
+      priceEur: 3.72
     Turquoise|Artist Range:
       sku: SART-64
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6147.jpg?v=1753972460
       sourceUrl: https://scale75.com/products/turquoise
       source: mfr-scale75
+      priceEur: 3.72
     Undead Dragon|Instant Colors Range:
       sku: SIN-16
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4526.jpg?v=1753972242
       sourceUrl: https://scale75.com/products/undead-dragon
       source: mfr-scale75
+      priceEur: 3.23
     Undead Flesh|Fantasy & Games Range:
       sku: SFG-13
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4725.jpg?v=1753971526
       sourceUrl: https://scale75.com/products/undead-flesh
       source: mfr-scale75
+      priceEur: 2.9
     Us Dark Brown|Warfront  Range:
       sku: SW-51
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4232.jpg?v=1753971717
       sourceUrl: https://scale75.com/products/us-dark-brown
       source: mfr-scale75
+      priceEur: 2.25
     Us Green|Warfront  Range:
       sku: SW-52
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4230.jpg?v=1753971721
       sourceUrl: https://scale75.com/products/us-green
       source: mfr-scale75
+      priceEur: 2.25
     Us Medium Brown|Warfront  Range:
       sku: SW-50
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4234.jpg?v=1753971720
       sourceUrl: https://scale75.com/products/us-medium-brown
       source: mfr-scale75
+      priceEur: 2.25
     Vanilla White|Artist Range:
       sku: SART-43
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4763.jpg?v=1754390208
       sourceUrl: https://scale75.com/products/blanco-vainilla
       source: mfr-scale75
+      priceEur: 3.72
     Vanilla Yellow|Artist Range:
       sku: SART-17
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4815.jpg?v=1754394323
       sourceUrl: https://scale75.com/products/amarillo-vainilla
       source: mfr-scale75
+      priceEur: 3.72
     Victorian Brass|Metal N Alchemy Range:
       sku: SC-92
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4564.jpg?v=1753971450
       sourceUrl: https://scale75.com/products/victorian-brass
       source: mfr-scale75
+      priceEur: 3.23
     Viking Gold|Metal N Alchemy Range:
       sku: SC-72
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4588.jpg?v=1753971422
       sourceUrl: https://scale75.com/products/viking-gold
       source: mfr-scale75
+      priceEur: 3.23
     Violet Blue|Scale Color Range:
       sku: SC-56
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4448.jpg?v=1753971403
       sourceUrl: https://scale75.com/products/violet-blue
       source: mfr-scale75
+      priceEur: 2.65
     Violet Grey|Artist Range:
       sku: SART-15
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4819.jpg?v=1754394158
       sourceUrl: https://scale75.com/products/gris-violeta
       source: mfr-scale75
+      priceEur: 3.72
     Violet|Artist Range:
       sku: SART-59
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6138.jpg?v=1754392707
       sourceUrl: https://scale75.com/products/violet
       source: mfr-scale75
+      priceEur: 3.72
     Walnut|Scale Color Range:
       sku: SC-29
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4394.jpg?v=1753971368
       sourceUrl: https://scale75.com/products/walnut
       source: mfr-scale75
+      priceEur: 2.65
     Werewolf Brown|Instant Colors Range:
       sku: SIN-01
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4556.jpg?v=1753972221
       sourceUrl: https://scale75.com/products/werewolf-brown
       source: mfr-scale75
+      priceEur: 3.23
     White Ink|Artist Range:
       sku: SART-80
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6180.jpg?v=1754389335
       sourceUrl: https://scale75.com/products/white-ink
       source: mfr-scale75
+      priceEur: 3.72
     White Metal|Metal N Alchemy Range:
       sku: SC-67
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4598.jpg?v=1753971418
       sourceUrl: https://scale75.com/products/white-metal
       source: mfr-scale75
+      priceEur: 3.23
     White Sands|Scale Color Range:
       sku: SC-09
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4354.jpg?v=1753971341
       sourceUrl: https://scale75.com/products/white-sands
       source: mfr-scale75
+      priceEur: 2.65
     White|Scale Color Range:
       sku: SC-01
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4338.jpg?v=1753971331
       sourceUrl: https://scale75.com/products/white
       source: mfr-scale75
+      priceEur: 2.65
     White|Warfront  Range:
       sku: SW-58
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4218.jpg?v=1753971728
       sourceUrl: https://scale75.com/products/white-1
       source: mfr-scale75
+      priceEur: 2.25
     Wild Beast|Instant Colors Range:
       sku: SIN-40
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4478.jpg?v=1753972274
       sourceUrl: https://scale75.com/products/wild-beast
       source: mfr-scale75
+      priceEur: 3.23
     Winter Grey|Warfront  Range:
       sku: SW-63
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4208.jpg?v=1753971732
       sourceUrl: https://scale75.com/products/winter-grey
       source: mfr-scale75
+      priceEur: 2.25
     Winter Shadow|Warfront  Range:
       sku: SW-62
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4210.jpg?v=1753971731
       sourceUrl: https://scale75.com/products/winter-shadow
       source: mfr-scale75
+      priceEur: 2.25
     Wood|Artist Range:
       sku: SART-39
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4771.jpg?v=1754391275
       sourceUrl: https://scale75.com/products/madera
       source: mfr-scale75
+      priceEur: 3.72
     Yellow Code|Warfront  Range:
       sku: SW-54
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4336.jpg?v=1753971721
       sourceUrl: https://scale75.com/products/yellow-code
       source: mfr-scale75
+      priceEur: 2.25
     Zombie Skin|Instant Colors Range:
       sku: SIN-13
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4532.jpg?v=1753972238
       sourceUrl: https://scale75.com/products/zombie-skin
       source: mfr-scale75
+      priceEur: 3.23
     Zucchini Green|Instant Colors Range:
       sku: SIN-10
       imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4538.jpg?v=1753972234
       sourceUrl: https://scale75.com/products/zucchini-green
       source: mfr-scale75
+      priceEur: 3.23
   additions:
   - name: Arctic Blue
     set: Artist Range
@@ -1486,1554 +1783,1813 @@ scale75:
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4761.jpg?v=1754390713
     sourceUrl: https://scale75.com/products/azul-artico
     source: mfr-scale75
+    priceEur: 3.72
   - name: Blue Ink
     set: Artist Range
     productCode: SART-75
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6170.jpg?v=1754391890
     sourceUrl: https://scale75.com/products/blue-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Chestnut Ink
     set: Artist Range
     productCode: SART-84
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6188.jpg?v=1754389250
     sourceUrl: https://scale75.com/products/chestnut-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Crimson
     set: Artist Range
     productCode: SART-10
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4829.jpg?v=1753971989
     sourceUrl: https://scale75.com/products/carmesi
     source: mfr-scale75
+    priceEur: 3.72
   - name: Green Ink
     set: Artist Range
     productCode: SART-76
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6172.jpg?v=1754391675
     sourceUrl: https://scale75.com/products/green-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Orange Ink
     set: Artist Range
     productCode: SART-77
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6174.jpg?v=1754389564
     sourceUrl: https://scale75.com/products/orange-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Oxide Yellow
     set: Artist Range
     productCode: SART-56
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6132.jpg?v=1754392904
     sourceUrl: https://scale75.com/products/yellow-oxide
     source: mfr-scale75
+    priceEur: 3.72
   - name: Prussian Blue
     set: Artist Range
     productCode: SART-30
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4789.jpg?v=1754393701
     sourceUrl: https://scale75.com/products/azul-prusiano
     source: mfr-scale75
+    priceEur: 3.72
   - name: Red Ink
     set: Artist Range
     productCode: SART-74
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6168.jpg?v=1754391936
     sourceUrl: https://scale75.com/products/red-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Violet Ink
     set: Artist Range
     productCode: SART-78
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6176.jpg?v=1754389526
     sourceUrl: https://scale75.com/products/violet-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Yellow Ink
     set: Artist Range
     productCode: SART-73
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6166.jpg?v=1754391966
     sourceUrl: https://scale75.com/products/yellow-ink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Yellow Naples
     set: Artist Range
     productCode: SART-18
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4813.jpg?v=1754394684
     sourceUrl: https://scale75.com/products/amarillo-napoles
     source: mfr-scale75
+    priceEur: 3.72
   - name: Yellow Ochre
     set: Artist Range
     productCode: SART-20
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4809.jpg?v=1754395311
     sourceUrl: https://scale75.com/products/ocre-amarillo
     source: mfr-scale75
+    priceEur: 3.72
   - name: Aluminium
     set: Drop & Paint
     productCode: SDP-108
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7188.jpg?v=1753972769
     sourceUrl: https://scale75.com/products/aluminium
     source: mfr-scale75
+    priceEur: 3.23
   - name: Amber Metal
     set: Drop & Paint
     productCode: SDP-127
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7209.jpg?v=1753972797
     sourceUrl: https://scale75.com/products/amber-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Aquamarine Blue
     set: Drop & Paint
     productCode: SDP-17
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7215.jpg?v=1753972802
     sourceUrl: https://scale75.com/products/aquamarine-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Arctic Grey
     set: Drop & Paint
     productCode: SDP-89
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7287.jpg?v=1753972894
     sourceUrl: https://scale75.com/products/arctic-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Basic Blue
     set: Drop & Paint
     productCode: SDP-20
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7218.jpg?v=1753972806
     sourceUrl: https://scale75.com/products/basic-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Black
     set: Drop & Paint
     productCode: SDP-16
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7214.jpg?v=1753972801
     sourceUrl: https://scale75.com/products/black-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Black Gold
     set: Drop & Paint
     productCode: SDP-113
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7194.jpg?v=1753972776
     sourceUrl: https://scale75.com/products/black-gold
     source: mfr-scale75
+    priceEur: 3.23
   - name: Black Jungle Green
     set: Drop & Paint
     productCode: SDP-74
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7272.jpg?v=1753972875
     sourceUrl: https://scale75.com/products/black-jungle-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Black Metal
     set: Drop & Paint
     productCode: SDP-105
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7185.jpg?v=1753972765
     sourceUrl: https://scale75.com/products/black-metal-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Blood Red
     set: Drop & Paint
     productCode: SDP-36
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7234.jpg?v=1753972827
     sourceUrl: https://scale75.com/products/blood-red-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Bluish Grey
     set: Drop & Paint
     productCode: SDP-93
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7292.jpg?v=1753972901
     sourceUrl: https://scale75.com/products/bluish-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Bluish Metal
     set: Drop & Paint
     productCode: SDP-110
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7191.jpg?v=1753972773
     sourceUrl: https://scale75.com/products/bluish-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Brown Skin
     set: Drop & Paint
     productCode: SDP-05
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7174.jpg?v=1753972750
     sourceUrl: https://scale75.com/products/brown-skin
     source: mfr-scale75
+    priceEur: 3.23
   - name: Burnished Steel
     set: Drop & Paint
     productCode: SDP-106
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7186.jpg?v=1753972766
     sourceUrl: https://scale75.com/products/burnished-steel
     source: mfr-scale75
+    priceEur: 3.23
   - name: Burnt Gold
     set: Drop & Paint
     productCode: SDP-115
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7196.jpg?v=1753972778
     sourceUrl: https://scale75.com/products/burnt-gold
     source: mfr-scale75
+    priceEur: 3.23
   - name: Burnt Orange
     set: Drop & Paint
     productCode: SDP-58
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7256.jpg?v=1753972855
     sourceUrl: https://scale75.com/products/burnt-orange
     source: mfr-scale75
+    priceEur: 3.23
   - name: Burnt Shade
     set: Drop & Paint
     productCode: SDP-84
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7282.jpg?v=1753972889
     sourceUrl: https://scale75.com/products/burnt-shade
     source: mfr-scale75
+    priceEur: 3.23
   - name: Burnt Siena Umber
     set: Drop & Paint
     productCode: SDP-83
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7281.jpg?v=1753972887
     sourceUrl: https://scale75.com/products/burnt-siena-umber
     source: mfr-scale75
+    priceEur: 3.23
   - name: Cardinal Purple
     set: Drop & Paint
     productCode: SDP-53
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7251.jpg?v=1753972847
     sourceUrl: https://scale75.com/products/cardinal-purple
     source: mfr-scale75
+    priceEur: 3.23
   - name: Caribbean Blue
     set: Drop & Paint
     productCode: SDP-30
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7228.jpg?v=1753972819
     sourceUrl: https://scale75.com/products/caribbean-blue-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Caterpillar Green
     set: Drop & Paint
     productCode: SDP-80
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7278.jpg?v=1753972884
     sourceUrl: https://scale75.com/products/caterpillar-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Caucasian Skin
     set: Drop & Paint
     productCode: SDP-04
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7173.jpg?v=1753972750
     sourceUrl: https://scale75.com/products/caucasian-skin
     source: mfr-scale75
+    priceEur: 3.23
   - name: Chalk Blue
     set: Drop & Paint
     productCode: SDP-26
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7224.jpg?v=1753972814
     sourceUrl: https://scale75.com/products/chalk-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Chocolate Brown
     set: Drop & Paint
     productCode: SDP-82
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7280.jpg?v=1753972886
     sourceUrl: https://scale75.com/products/chocolate-brown
     source: mfr-scale75
+    priceEur: 3.23
   - name: Cold Pink
     set: Drop & Paint
     productCode: SDP-51
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7249.jpg?v=1753972845
     sourceUrl: https://scale75.com/products/cold-pink
     source: mfr-scale75
+    priceEur: 3.23
   - name: Cold Skin
     set: Drop & Paint
     productCode: SDP-06
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7175.jpg?v=1753972751
     sourceUrl: https://scale75.com/products/cold-skin
     source: mfr-scale75
+    priceEur: 3.23
   - name: Complementary Green
     set: Drop & Paint
     productCode: SDP-12
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7201.jpg?v=1753972786
     sourceUrl: https://scale75.com/products/complementary-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Complementary Orange
     set: Drop & Paint
     productCode: SDP-13
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7211.jpg?v=1753972798
     sourceUrl: https://scale75.com/products/complementary-orange
     source: mfr-scale75
+    priceEur: 3.23
   - name: Complementary Violet
     set: Drop & Paint
     productCode: SDP-14
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7212.jpg?v=1753972798
     sourceUrl: https://scale75.com/products/complementary-violet
     source: mfr-scale75
+    priceEur: 3.23
   - name: Confederate Grey
     set: Drop & Paint
     productCode: SDP-91
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7290.jpg?v=1753972897
     sourceUrl: https://scale75.com/products/confederate-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Coral Red
     set: Drop & Paint
     productCode: SDP-34
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7232.jpg?v=1753972826
     sourceUrl: https://scale75.com/products/coral-red-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Crimson
     set: Drop & Paint
     productCode: SDP-50
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7248.jpg?v=1753972842
     sourceUrl: https://scale75.com/products/crimson
     source: mfr-scale75
+    priceEur: 3.23
   - name: Dark Brass
     set: Drop & Paint
     productCode: SDP-126
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7208.jpg?v=1753972794
     sourceUrl: https://scale75.com/products/dark-brass
     source: mfr-scale75
+    priceEur: 3.23
   - name: Dark Brown
     set: Drop & Paint
     productCode: SDP-81
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7279.jpg?v=1753972883
     sourceUrl: https://scale75.com/products/dark-brown
     source: mfr-scale75
+    priceEur: 3.23
   - name: Dark Mauve
     set: Drop & Paint
     productCode: SDP-37
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7235.jpg?v=1753972828
     sourceUrl: https://scale75.com/products/dark-mauve
     source: mfr-scale75
+    priceEur: 3.23
   - name: Dark Prussian Blue
     set: Drop & Paint
     productCode: SDP-21
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7219.jpg?v=1753972808
     sourceUrl: https://scale75.com/products/dark-prussian-blue-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Dark Violet
     set: Drop & Paint
     productCode: SDP-52
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7250.jpg?v=1753972845
     sourceUrl: https://scale75.com/products/dark-violet
     source: mfr-scale75
+    priceEur: 3.23
   - name: Deep Blue
     set: Drop & Paint
     productCode: SDP-23
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7221.jpg?v=1753972810
     sourceUrl: https://scale75.com/products/deep-blue-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Diabolic Orange
     set: Drop & Paint
     productCode: SDP-61
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7259.jpg?v=1753972858
     sourceUrl: https://scale75.com/products/diabolic-orange
     source: mfr-scale75
+    priceEur: 3.23
   - name: Emerald Green
     set: Drop & Paint
     productCode: SDP-77
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7275.jpg?v=1753972879
     sourceUrl: https://scale75.com/products/emerald-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Fiji Blue
     set: Drop & Paint
     productCode: SDP-27
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7225.jpg?v=1753972815
     sourceUrl: https://scale75.com/products/fiji-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Forest Blue
     set: Drop & Paint
     productCode: SDP-32
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7230.jpg?v=1753972823
     sourceUrl: https://scale75.com/products/forest-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Garnet Metal
     set: Drop & Paint
     productCode: SDP-123
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7205.jpg?v=1753972790
     sourceUrl: https://scale75.com/products/garnet-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Glorious Yellow
     set: Drop & Paint
     productCode: SDP-42
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7240.jpg?v=1753972835
     sourceUrl: https://scale75.com/products/glorious-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Golden Flesh
     set: Drop & Paint
     productCode: SDP-01
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7170.jpg?v=1753972747
     sourceUrl: https://scale75.com/products/golden-flesh
     source: mfr-scale75
+    priceEur: 3.23
   - name: Golden Yellow
     set: Drop & Paint
     productCode: SDP-45
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7243.jpg?v=1753972839
     sourceUrl: https://scale75.com/products/golden-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Graphite Grey
     set: Drop & Paint
     productCode: SDP-90
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7289.jpg?v=1753972896
     sourceUrl: https://scale75.com/products/graphite-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Green Earth
     set: Drop & Paint
     productCode: SDP-88
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7286.jpg?v=1753972893
     sourceUrl: https://scale75.com/products/green-earth
     source: mfr-scale75
+    priceEur: 3.23
   - name: Green Toad
     set: Drop & Paint
     productCode: SDP-73
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7271.jpg?v=1753972873
     sourceUrl: https://scale75.com/products/green-toad
     source: mfr-scale75
+    priceEur: 3.23
   - name: Greenish Blue
     set: Drop & Paint
     productCode: SDP-25
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7223.jpg?v=1753972813
     sourceUrl: https://scale75.com/products/greenish-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Greenish Grey
     set: Drop & Paint
     productCode: SDP-94
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7293.jpg?v=1753972901
     sourceUrl: https://scale75.com/products/greenish-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Greenish Metal
     set: Drop & Paint
     productCode: SDP-111
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7192.jpg?v=1753972774
     sourceUrl: https://scale75.com/products/greenish-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Greenish Ochre
     set: Drop & Paint
     productCode: SDP-60
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7258.jpg?v=1753972857
     sourceUrl: https://scale75.com/products/greenish-ochre
     source: mfr-scale75
+    priceEur: 3.23
   - name: Grey Fox
     set: Drop & Paint
     productCode: SDP-95
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7294.jpg?v=1753972901
     sourceUrl: https://scale75.com/products/grey-fox
     source: mfr-scale75
+    priceEur: 3.23
   - name: Greyish Blue
     set: Drop & Paint
     productCode: SDP-28
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7226.jpg?v=1753972817
     sourceUrl: https://scale75.com/products/greyish-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Greyish Green
     set: Drop & Paint
     productCode: SDP-78
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7276.jpg?v=1753972880
     sourceUrl: https://scale75.com/products/greyish-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Imperial Red
     set: Drop & Paint
     productCode: SDP-35
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7233.jpg?v=1753972826
     sourceUrl: https://scale75.com/products/imperial-red
     source: mfr-scale75
+    priceEur: 3.23
   - name: Irati Green
     set: Drop & Paint
     productCode: SDP-70
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7268.jpg?v=1753972870
     sourceUrl: https://scale75.com/products/irati-green-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Jade Green
     set: Drop & Paint
     productCode: SDP-68
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7266.jpg?v=1753972868
     sourceUrl: https://scale75.com/products/jade-green-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Jumento Brown
     set: Drop & Paint
     productCode: SDP-86
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7284.jpg?v=1753972891
     sourceUrl: https://scale75.com/products/jumento-brown
     source: mfr-scale75
+    priceEur: 3.23
   - name: Kunzite Gold
     set: Drop & Paint
     productCode: SDP-119
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7200.jpg?v=1753972784
     sourceUrl: https://scale75.com/products/kunzite-gold
     source: mfr-scale75
+    priceEur: 3.23
   - name: Lavender
     set: Drop & Paint
     productCode: SDP-56
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7254.jpg?v=1753972852
     sourceUrl: https://scale75.com/products/lavender
     source: mfr-scale75
+    priceEur: 3.23
   - name: Leaf Ochre
     set: Drop & Paint
     productCode: SDP-63
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7261.jpg?v=1753972860
     sourceUrl: https://scale75.com/products/leaf-ochre
     source: mfr-scale75
+    priceEur: 3.23
   - name: Lemon Yellow
     set: Drop & Paint
     productCode: SDP-44
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7242.jpg?v=1753972837
     sourceUrl: https://scale75.com/products/lemon-yellow-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Light Brass
     set: Drop & Paint
     productCode: SDP-120
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7202.jpg?v=1753972786
     sourceUrl: https://scale75.com/products/light-brass
     source: mfr-scale75
+    priceEur: 3.23
   - name: Light Brown
     set: Drop & Paint
     productCode: SDP-85
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7283.jpg?v=1753972891
     sourceUrl: https://scale75.com/products/light-brown
     source: mfr-scale75
+    priceEur: 3.23
   - name: Light Moss Green
     set: Drop & Paint
     productCode: SDP-71
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7269.jpg?v=1753972871
     sourceUrl: https://scale75.com/products/light-moss-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Light Olive Green
     set: Drop & Paint
     productCode: SDP-66
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7264.jpg?v=1753972865
     sourceUrl: https://scale75.com/products/light-olive-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Light Skin
     set: Drop & Paint
     productCode: SDP-08
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7177.jpg?v=1753972755
     sourceUrl: https://scale75.com/products/light-skin-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Light Ultramarine Blue
     set: Drop & Paint
     productCode: SDP-19
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7217.jpg?v=1753972806
     sourceUrl: https://scale75.com/products/light-ultramarine-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Lime Green
     set: Drop & Paint
     productCode: SDP-65
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7263.jpg?v=1753972863
     sourceUrl: https://scale75.com/products/lime-green-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Lime Yellow
     set: Drop & Paint
     productCode: SDP-46
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7244.jpg?v=1753972840
     sourceUrl: https://scale75.com/products/lime-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Liquidambar Ochre
     set: Drop & Paint
     productCode: SDP-59
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7257.jpg?v=1753972856
     sourceUrl: https://scale75.com/products/liquidambar-ochre
     source: mfr-scale75
+    priceEur: 3.23
   - name: Magenta
     set: Drop & Paint
     productCode: SDP-39
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7237.jpg?v=1753972831
     sourceUrl: https://scale75.com/products/magenta-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Mauve
     set: Drop & Paint
     productCode: SDP-55
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7253.jpg?v=1753972851
     sourceUrl: https://scale75.com/products/mauve
     source: mfr-scale75
+    priceEur: 3.23
   - name: Mcqueen Red
     set: Drop & Paint
     productCode: SDP-33
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7231.jpg?v=1753972825
     sourceUrl: https://scale75.com/products/mcqueen-red
     source: mfr-scale75
+    priceEur: 3.23
   - name: Medium Skin
     set: Drop & Paint
     productCode: SDP-02
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7171.jpg?v=1753972746
     sourceUrl: https://scale75.com/products/medium-skin
     source: mfr-scale75
+    priceEur: 3.23
   - name: Miami Orange
     set: Drop & Paint
     productCode: SDP-57
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7255.jpg?v=1753972854
     sourceUrl: https://scale75.com/products/miami-orange
     source: mfr-scale75
+    priceEur: 3.23
   - name: Moon Metal
     set: Drop & Paint
     productCode: SDP-128
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7210.jpg?v=1753972796
     sourceUrl: https://scale75.com/products/moon-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Moss Green
     set: Drop & Paint
     productCode: SDP-72
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7270.jpg?v=1753972871
     sourceUrl: https://scale75.com/products/moss-green-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Mummy White
     set: Drop & Paint
     productCode: SDP-101
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7181.jpg?v=1753972761
     sourceUrl: https://scale75.com/products/mummy-white
     source: mfr-scale75
+    priceEur: 3.23
   - name: Natural Purple
     set: Drop & Paint
     productCode: SDP-54
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7252.jpg?v=1753972849
     sourceUrl: https://scale75.com/products/natural-purple
     source: mfr-scale75
+    priceEur: 3.23
   - name: Natural Shade
     set: Drop & Paint
     productCode: SDP-87
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7285.jpg?v=1753972892
     sourceUrl: https://scale75.com/products/natural-shade
     source: mfr-scale75
+    priceEur: 3.23
   - name: Navy Blue
     set: Drop & Paint
     productCode: SDP-22
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7220.jpg?v=1753972809
     sourceUrl: https://scale75.com/products/navy-blue-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: New Gold
     set: Drop & Paint
     productCode: SDP-116
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7197.jpg?v=1753972779
     sourceUrl: https://scale75.com/products/new-gold
     source: mfr-scale75
+    priceEur: 3.23
   - name: Nostalgia Ochre
     set: Drop & Paint
     productCode: SDP-64
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7262.jpg?v=1753972862
     sourceUrl: https://scale75.com/products/nostalgia-ochre
     source: mfr-scale75
+    priceEur: 3.23
   - name: Nostalgia Yellow
     set: Drop & Paint
     productCode: SDP-48
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7246.jpg?v=1753972842
     sourceUrl: https://scale75.com/products/nostalgia-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Old Copper
     set: Drop & Paint
     productCode: SDP-122
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7204.jpg?v=1753972789
     sourceUrl: https://scale75.com/products/old-copper-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Old Metal
     set: Drop & Paint
     productCode: SDP-121
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7203.jpg?v=1753972788
     sourceUrl: https://scale75.com/products/old-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Olive Green
     set: Drop & Paint
     productCode: SDP-79
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7277.jpg?v=1753972882
     sourceUrl: https://scale75.com/products/olive-green-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Orange Oxide
     set: Drop & Paint
     productCode: SDP-62
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7260.jpg?v=1753972860
     sourceUrl: https://scale75.com/products/orange-oxide
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Blue
     set: Drop & Paint
     productCode: SDP-97
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7296.jpg?v=1753972904
     sourceUrl: https://scale75.com/products/pastel-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Green
     set: Drop & Paint
     productCode: SDP-99
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7298.jpg?v=1753972907
     sourceUrl: https://scale75.com/products/pastel-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Grey
     set: Drop & Paint
     productCode: SDP-100
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7180.jpg?v=1753972759
     sourceUrl: https://scale75.com/products/pastel-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Red
     set: Drop & Paint
     productCode: SDP-104
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7184.jpg?v=1753972764
     sourceUrl: https://scale75.com/products/pastel-red
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Turquoise
     set: Drop & Paint
     productCode: SDP-98
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7297.jpg?v=1753972906
     sourceUrl: https://scale75.com/products/pastel-turquoise
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Violet
     set: Drop & Paint
     productCode: SDP-103
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7183.jpg?v=1753972763
     sourceUrl: https://scale75.com/products/pastel-violet
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pastel Yellow
     set: Drop & Paint
     productCode: SDP-102
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7182.jpg?v=1753972761
     sourceUrl: https://scale75.com/products/pastel-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pear Green
     set: Drop & Paint
     productCode: SDP-75
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7273.jpg?v=1753972876
     sourceUrl: https://scale75.com/products/pear-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pine Green
     set: Drop & Paint
     productCode: SDP-69
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7267.jpg?v=1753972869
     sourceUrl: https://scale75.com/products/pine-green
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pink Flesh
     set: Drop & Paint
     productCode: SDP-07
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7176.jpg?v=1753972754
     sourceUrl: https://scale75.com/products/pink-flesh-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pinky Gold
     set: Drop & Paint
     productCode: SDP-118
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7199.jpg?v=1753972782
     sourceUrl: https://scale75.com/products/pinky-gold
     source: mfr-scale75
+    priceEur: 3.23
   - name: Primary Blue
     set: Drop & Paint
     productCode: SDP-11
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7190.jpg?v=1753972771
     sourceUrl: https://scale75.com/products/primary-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Primary Red
     set: Drop & Paint
     productCode: SDP-10
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7179.jpg?v=1753972758
     sourceUrl: https://scale75.com/products/primary-red
     source: mfr-scale75
+    priceEur: 3.23
   - name: Primary Yellow
     set: Drop & Paint
     productCode: SDP-09
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7178.jpg?v=1753972756
     sourceUrl: https://scale75.com/products/primary-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Pure Copper
     set: Drop & Paint
     productCode: SDP-125
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7207.jpg?v=1753972792
     sourceUrl: https://scale75.com/products/pure-copper-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Purplish Metal
     set: Drop & Paint
     productCode: SDP-112
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7193.jpg?v=1753972775
     sourceUrl: https://scale75.com/products/purplish-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Red Anger
     set: Drop & Paint
     productCode: SDP-38
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7236.jpg?v=1753972830
     sourceUrl: https://scale75.com/products/red-anger
     source: mfr-scale75
+    priceEur: 3.23
   - name: Red Wine
     set: Drop & Paint
     productCode: SDP-40
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7238.jpg?v=1753972832
     sourceUrl: https://scale75.com/products/red-wine
     source: mfr-scale75
+    priceEur: 3.23
   - name: Ruby Metal
     set: Drop & Paint
     productCode: SDP-124
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7206.jpg?v=1753972792
     sourceUrl: https://scale75.com/products/ruby-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Sand Yellow
     set: Drop & Paint
     productCode: SDP-43
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7241.jpg?v=1753972836
     sourceUrl: https://scale75.com/products/sand-yellow-2
     source: mfr-scale75
+    priceEur: 3.23
   - name: Spearmint
     set: Drop & Paint
     productCode: SDP-76
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7274.jpg?v=1753972878
     sourceUrl: https://scale75.com/products/spearmint
     source: mfr-scale75
+    priceEur: 3.23
   - name: Spring Green
     set: Drop & Paint
     productCode: SDP-67
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7265.jpg?v=1753972866
     sourceUrl: https://scale75.com/products/spring-green-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Steel
     set: Drop & Paint
     productCode: SDP-107
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7187.jpg?v=1753972768
     sourceUrl: https://scale75.com/products/steel
     source: mfr-scale75
+    priceEur: 3.23
   - name: Sunset Yellow
     set: Drop & Paint
     productCode: SDP-41
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7239.jpg?v=1753972834
     sourceUrl: https://scale75.com/products/sunset-yellow
     source: mfr-scale75
+    priceEur: 3.23
   - name: Tanned Skin
     set: Drop & Paint
     productCode: SDP-03
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7172.jpg?v=1753972748
     sourceUrl: https://scale75.com/products/tanned-skin
     source: mfr-scale75
+    priceEur: 3.23
   - name: Turquoise
     set: Drop & Paint
     productCode: SDP-18
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7216.jpg?v=1753972804
     sourceUrl: https://scale75.com/products/turquoise-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: U.f.o. Grey
     set: Drop & Paint
     productCode: SDP-92
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7291.jpg?v=1753972898
     sourceUrl: https://scale75.com/products/ufo-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: Ultramarine Blue
     set: Drop & Paint
     productCode: SDP-24
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7222.jpg?v=1753972812
     sourceUrl: https://scale75.com/products/ultramarine-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Venus Blue
     set: Drop & Paint
     productCode: SDP-29
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7227.jpg?v=1753972818
     sourceUrl: https://scale75.com/products/venus-blue
     source: mfr-scale75
+    priceEur: 3.23
   - name: Viking Gold
     set: Drop & Paint
     productCode: SDP-114
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7195.jpg?v=1753972777
     sourceUrl: https://scale75.com/products/viking-gold-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Violet
     set: Drop & Paint
     productCode: SDP-49
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7247.jpg?v=1753972908
     sourceUrl: https://scale75.com/products/violet-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Violet Blue
     set: Drop & Paint
     productCode: SDP-31
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7229.jpg?v=1753972820
     sourceUrl: https://scale75.com/products/violet-blue-1
     source: mfr-scale75
+    priceEur: 3.23
   - name: Violet Grey
     set: Drop & Paint
     productCode: SDP-96
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7295.jpg?v=1753972903
     sourceUrl: https://scale75.com/products/violet-grey
     source: mfr-scale75
+    priceEur: 3.23
   - name: White
     set: Drop & Paint
     productCode: SDP-15
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7213.jpg?v=1753972800
     sourceUrl: https://scale75.com/products/white-2
     source: mfr-scale75
+    priceEur: 3.23
   - name: White Gold
     set: Drop & Paint
     productCode: SDP-117
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7198.jpg?v=1753972781
     sourceUrl: https://scale75.com/products/white-gold
     source: mfr-scale75
+    priceEur: 3.23
   - name: White Steel
     set: Drop & Paint
     productCode: SDP-109
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7189.jpg?v=1753972770
     sourceUrl: https://scale75.com/products/white-steel
     source: mfr-scale75
+    priceEur: 3.23
   - name: Yellow Parchment
     set: Drop & Paint
     productCode: SDP-47
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7245.jpg?v=1753972841
     sourceUrl: https://scale75.com/products/yellow-parchment
     source: mfr-scale75
+    priceEur: 3.23
   - name: Arianrhod Blue
     set: Fantasy & Games Range
     productCode: SFG-29
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4693.jpg?v=1753971547
     sourceUrl: https://scale75.com/products/arianrhod-blue
     source: mfr-scale75
+    priceEur: 2.9
   - name: Vulcan Orange
     set: Fantasy & Games Range
     productCode: SFG-37
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4677.jpg?v=1753971557
     sourceUrl: https://scale75.com/products/vulcan-orange
     source: mfr-scale75
+    priceEur: 2.9
   - name: Inktense Brown
     set: Inktensity Range
     productCode: SC-95
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4622.jpg?v=1753972085
     sourceUrl: https://scale75.com/products/inktense-brown
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Chestnut
     set: Inktensity Range
     productCode: SC-81
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4634.jpg?v=1753971435
     sourceUrl: https://scale75.com/products/inktense-chesnut
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Crimson
     set: Inktensity Range
     productCode: SC-96
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4620.jpg?v=1753972087
     sourceUrl: https://scale75.com/products/inktense-crimson
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Cyan
     set: Inktensity Range
     productCode: SC-99
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4614.jpg?v=1753972093
     sourceUrl: https://scale75.com/products/inktense-cyan
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Lime
     set: Inktensity Range
     productCode: SC-100
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4612.jpg?v=1753972094
     sourceUrl: https://scale75.com/products/inktense-lime
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Ochre
     set: Inktensity Range
     productCode: SC-98
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4616.jpg?v=1753972091
     sourceUrl: https://scale75.com/products/inktense-ochre
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Olive
     set: Inktensity Range
     productCode: SC-101
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4610.jpg?v=1753972095
     sourceUrl: https://scale75.com/products/inktense-olive
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense Oxide
     set: Inktensity Range
     productCode: SC-97
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4618.jpg?v=1753972090
     sourceUrl: https://scale75.com/products/inktense-oxide
     source: mfr-scale75
+    priceEur: 3.23
   - name: Inktense White
     set: Inktensity Range
     productCode: SC-102
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4608.jpg?v=1753972096
     sourceUrl: https://scale75.com/products/inktense-white
     source: mfr-scale75
+    priceEur: 3.23
   - name: Trash Metal
     set: Metal N Alchemy Range
     productCode: SC-64
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/SC64-TRASHMETAL.png?v=1765552891
     sourceUrl: https://scale75.com/products/thrash-metal
     source: mfr-scale75
+    priceEur: 3.23
   - name: Anthracite Grey
     set: Scale Color Range
     productCode: SC-04
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4344.jpg?v=1753971337
     sourceUrl: https://scale75.com/products/anthartic-grey
     source: mfr-scale75
+    priceEur: 2.65
   - name: Arctic Blue
     set: Scale Color Range
     productCode: SC-05
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4346.jpg?v=1753971335
     sourceUrl: https://scale75.com/products/artic-blue
     source: mfr-scale75
+    priceEur: 2.65
   - name: Brown Grey
     set: Scale Color Range
     productCode: SC-59
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4454.jpg?v=1753971406
     sourceUrl: https://scale75.com/products/brown-gray
     source: mfr-scale75
+    priceEur: 2.65
   - name: Field Grey
     set: Scale Color Range
     productCode: SC-46
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4428.jpg?v=1753971391
     sourceUrl: https://scale75.com/products/field-gray
     source: mfr-scale75
+    priceEur: 2.65
   - name: Graphene Grey
     set: Scale Color Range
     productCode: SC-58
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4452.jpg?v=1753971405
     sourceUrl: https://scale75.com/products/graphene-gray
     source: mfr-scale75
+    priceEur: 2.65
   - name: Petroleum Grey
     set: Scale Color Range
     productCode: SC-57
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4450.jpg?v=1753971403
     sourceUrl: https://scale75.com/products/petroleum-gray
     source: mfr-scale75
+    priceEur: 2.65
   - name: Rainy Grey
     set: Scale Color Range
     productCode: SC-60
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4456.jpg?v=1753971407
     sourceUrl: https://scale75.com/products/rainy-gray
     source: mfr-scale75
+    priceEur: 2.65
   - name: Antique Pink
     set: Scalecolor Floww
     productCode: SFL-14
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6231.jpg?v=1754388364
     sourceUrl: https://scale75.com/products/antique-pink
     source: mfr-scale75
+    priceEur: 3.72
   - name: Bronzed Skin
     set: Scalecolor Floww
     productCode: SFL-18
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6239.jpg?v=1754387678
     sourceUrl: https://scale75.com/products/bronzed-skin
     source: mfr-scale75
+    priceEur: 3.72
   - name: Brown Sienna
     set: Scalecolor Floww
     productCode: SFL-22
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6246.jpg?v=1753972541
     sourceUrl: https://scale75.com/products/brown-sienna
     source: mfr-scale75
+    priceEur: 3.72
   - name: Buff
     set: Scalecolor Floww
     productCode: SFL-24
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6250.jpg?v=1753972543
     sourceUrl: https://scale75.com/products/buff
     source: mfr-scale75
+    priceEur: 3.72
   - name: Cobalt Blue Light (hue)
     set: Scalecolor Floww
     productCode: SFL-04
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6210.jpg?v=1753972518
     sourceUrl: https://scale75.com/products/cobalt-blue-light
     source: mfr-scale75
+    priceEur: 3.72
   - name: Ivory Black
     set: Scalecolor Floww
     productCode: SFL-05
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6213.jpg?v=1754388250
     sourceUrl: https://scale75.com/products/ivory-black
     source: mfr-scale75
+    priceEur: 3.72
   - name: Medium Yellow
     set: Scalecolor Floww
     productCode: SFL-02
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6207.jpg?v=1754388150
     sourceUrl: https://scale75.com/products/medium-yellow
     source: mfr-scale75
+    priceEur: 3.72
   - name: Moist Soil
     set: Scalecolor Floww
     productCode: SFL-15
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6233.jpg?v=1754387970
     sourceUrl: https://scale75.com/products/moist-soil
     source: mfr-scale75
+    priceEur: 3.72
   - name: Olive Green
     set: Scalecolor Floww
     productCode: SFL-11
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6225.jpg?v=1754388283
     sourceUrl: https://scale75.com/products/olive-green
     source: mfr-scale75
+    priceEur: 3.72
   - name: Paris Red
     set: Scalecolor Floww
     productCode: SFL-07
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6216.jpg?v=1753972522
     sourceUrl: https://scale75.com/products/paris-red
     source: mfr-scale75
+    priceEur: 3.72
   - name: Persian Yellow
     set: Scalecolor Floww
     productCode: SFL-08
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6218.jpg?v=1753972523
     sourceUrl: https://scale75.com/products/persian-yellow
     source: mfr-scale75
+    priceEur: 3.72
   - name: Prussian Blue
     set: Scalecolor Floww
     productCode: SFL-09
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6221.jpg?v=1753972524
     sourceUrl: https://scale75.com/products/prussian-blue
     source: mfr-scale75
+    priceEur: 3.72
   - name: Raw Umber
     set: Scalecolor Floww
     productCode: SFL-20
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6243.jpg?v=1754387623
     sourceUrl: https://scale75.com/products/raw-umber
     source: mfr-scale75
+    priceEur: 3.72
   - name: Red Mauve
     set: Scalecolor Floww
     productCode: SFL-16
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6235.jpg?v=1754387708
     sourceUrl: https://scale75.com/products/red-mauve
     source: mfr-scale75
+    priceEur: 3.72
   - name: Rusty Brown
     set: Scalecolor Floww
     productCode: SFL-19
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6240.jpg?v=1753972538
     sourceUrl: https://scale75.com/products/rusty-brown
     source: mfr-scale75
+    priceEur: 3.72
   - name: Sand Yellow
     set: Scalecolor Floww
     productCode: SFL-21
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6244.jpg?v=1753972541
     sourceUrl: https://scale75.com/products/sand-yellow-1
     source: mfr-scale75
+    priceEur: 3.72
   - name: Scroll White
     set: Scalecolor Floww
     productCode: SFL-17
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6236.jpg?v=1753972535
     sourceUrl: https://scale75.com/products/scroll-white
     source: mfr-scale75
+    priceEur: 3.72
   - name: Stencil Yellow
     set: Scalecolor Floww
     productCode: SFL-10
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6223.jpg?v=1753972525
     sourceUrl: https://scale75.com/products/stencil-yellow
     source: mfr-scale75
+    priceEur: 3.72
   - name: Stone Grey
     set: Scalecolor Floww
     productCode: SFL-12
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6227.jpg?v=1754388315
     sourceUrl: https://scale75.com/products/stone-grey
     source: mfr-scale75
+    priceEur: 3.72
   - name: Swamp Green
     set: Scalecolor Floww
     productCode: SFL-23
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6248.jpg?v=1753972542
     sourceUrl: https://scale75.com/products/swamp-green
     source: mfr-scale75
+    priceEur: 3.72
   - name: Titanium White
     set: Scalecolor Floww
     productCode: SFL-01
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6205.jpg?v=1754388009
     sourceUrl: https://scale75.com/products/titanium-white
     source: mfr-scale75
+    priceEur: 3.72
   - name: Toad Green
     set: Scalecolor Floww
     productCode: SFL-13
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6229.jpg?v=1754388338
     sourceUrl: https://scale75.com/products/toad-green-1
     source: mfr-scale75
+    priceEur: 3.72
   - name: Turquoise Blue
     set: Scalecolor Floww
     productCode: SFL-06
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6214.jpg?v=1753972521
     sourceUrl: https://scale75.com/products/turquoise-blue
     source: mfr-scale75
+    priceEur: 3.72
   - name: Vermilion
     set: Scalecolor Floww
     productCode: SFL-03
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/6209.jpg?v=1754388182
     sourceUrl: https://scale75.com/products/vermilion
     source: mfr-scale75
+    priceEur: 3.72
   - name: Amethyst Lillac
     set: Scalecolor Games
     productCode: SCG-11
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7424.jpg?v=1753972929
     sourceUrl: https://scale75.com/products/amethyst-lillac
     source: mfr-scale75
+    priceEur: 3.32
   - name: Anger Crimson
     set: Scalecolor Games
     productCode: SCG-03
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7416.jpg?v=1753972920
     sourceUrl: https://scale75.com/products/anger-crimson
     source: mfr-scale75
+    priceEur: 3.32
   - name: Arrogance White
     set: Scalecolor Games
     productCode: SCG-48
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7461.jpg?v=1753972977
     sourceUrl: https://scale75.com/products/arrogance-white
     source: mfr-scale75
+    priceEur: 3.32
   - name: Baby Leaf Green
     set: Scalecolor Games
     productCode: SCG-09
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7422.jpg?v=1753972926
     sourceUrl: https://scale75.com/products/baby-leaf-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Bile Green
     set: Scalecolor Games
     productCode: SCG-24
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7437.jpg?v=1753972948
     sourceUrl: https://scale75.com/products/bile-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Blood & Wine Red
     set: Scalecolor Games
     productCode: SCG-02
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7415.jpg?v=1753972917
     sourceUrl: https://scale75.com/products/blood-wine-red
     source: mfr-scale75
+    priceEur: 3.32
   - name: Cthulhu Green
     set: Scalecolor Games
     productCode: SCG-20
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7433.jpg?v=1753972942
     sourceUrl: https://scale75.com/products/cthulhu-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Dark Dahlia Brown
     set: Scalecolor Games
     productCode: SCG-44
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7457.jpg?v=1753972970
     sourceUrl: https://scale75.com/products/dark-dahlia-brown
     source: mfr-scale75
+    priceEur: 3.32
   - name: Dark Peony Purple
     set: Scalecolor Games
     productCode: SCG-10
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7423.jpg?v=1753972928
     sourceUrl: https://scale75.com/products/dark-peony-purple
     source: mfr-scale75
+    priceEur: 3.32
   - name: Dried Lavender
     set: Scalecolor Games
     productCode: SCG-31
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7444.jpg?v=1753972955
     sourceUrl: https://scale75.com/products/dried-lavender
     source: mfr-scale75
+    priceEur: 3.32
   - name: Druid Green
     set: Scalecolor Games
     productCode: SCG-19
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7432.jpg?v=1753972940
     sourceUrl: https://scale75.com/products/druid-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Dull Blue
     set: Scalecolor Games
     productCode: SCG-30
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7443.jpg?v=1753972953
     sourceUrl: https://scale75.com/products/dull-blue
     source: mfr-scale75
+    priceEur: 3.32
   - name: Ego Green
     set: Scalecolor Games
     productCode: SCG-43
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7456.jpg?v=1753972969
     sourceUrl: https://scale75.com/products/ego-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Egoism Grey
     set: Scalecolor Games
     productCode: SCG-42
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7455.jpg?v=1753972968
     sourceUrl: https://scale75.com/products/egoism-grey
     source: mfr-scale75
+    priceEur: 3.32
   - name: Eryn Green
     set: Scalecolor Games
     productCode: SCG-17
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7430.jpg?v=1753972937
     sourceUrl: https://scale75.com/products/eryn-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Fremen Blue
     set: Scalecolor Games
     productCode: SCG-29
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7442.jpg?v=1753972953
     sourceUrl: https://scale75.com/products/fremen-blue
     source: mfr-scale75
+    priceEur: 3.32
   - name: Green-eyed Monster
     set: Scalecolor Games
     productCode: SCG-21
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7434.jpg?v=1753972942
     sourceUrl: https://scale75.com/products/greeneyed-monster
     source: mfr-scale75
+    priceEur: 3.32
   - name: Honey
     set: Scalecolor Games
     productCode: SCG-38
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7451.jpg?v=1753972964
     sourceUrl: https://scale75.com/products/honey
     source: mfr-scale75
+    priceEur: 3.32
   - name: Hubris Grey
     set: Scalecolor Games
     productCode: SCG-47
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7460.jpg?v=1753972975
     sourceUrl: https://scale75.com/products/hubris-grey
     source: mfr-scale75
+    priceEur: 3.32
   - name: Insatiable Brown
     set: Scalecolor Games
     productCode: SCG-34
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7447.jpg?v=1753972958
     sourceUrl: https://scale75.com/products/insatiable-brown
     source: mfr-scale75
+    priceEur: 3.32
   - name: Jade Green
     set: Scalecolor Games
     productCode: SCG-22
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7435.jpg?v=1753972944
     sourceUrl: https://scale75.com/products/jade-green-2
     source: mfr-scale75
+    priceEur: 3.32
   - name: King Purple
     set: Scalecolor Games
     productCode: SCG-01
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7414.jpg?v=1753972916
     sourceUrl: https://scale75.com/products/king-purple
     source: mfr-scale75
+    priceEur: 3.32
   - name: Lazy Blue
     set: Scalecolor Games
     productCode: SCG-32
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7445.jpg?v=1753972957
     sourceUrl: https://scale75.com/products/lazy-blue
     source: mfr-scale75
+    priceEur: 3.32
   - name: Marine Yellow
     set: Scalecolor Games
     productCode: SCG-07
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7420.jpg?v=1753972925
     sourceUrl: https://scale75.com/products/marine-yellow
     source: mfr-scale75
+    priceEur: 3.32
   - name: Melange Brown
     set: Scalecolor Games
     productCode: SCG-36
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7449.jpg?v=1753972962
     sourceUrl: https://scale75.com/products/melange-brown
     source: mfr-scale75
+    priceEur: 3.32
   - name: Milan Pink
     set: Scalecolor Games
     productCode: SCG-06
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7419.jpg?v=1753972922
     sourceUrl: https://scale75.com/products/milan-pink
     source: mfr-scale75
+    priceEur: 3.32
   - name: Milk Chocolate
     set: Scalecolor Games
     productCode: SCG-35
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7448.jpg?v=1753972960
     sourceUrl: https://scale75.com/products/milk-chocolate
     source: mfr-scale75
+    priceEur: 3.32
   - name: Modesty Black
     set: Scalecolor Games
     productCode: SCG-41
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7454.jpg?v=1753972968
     sourceUrl: https://scale75.com/products/modesty-black
     source: mfr-scale75
+    priceEur: 3.32
   - name: Morcilla Brown
     set: Scalecolor Games
     productCode: SCG-33
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7446.jpg?v=1753972957
     sourceUrl: https://scale75.com/products/morcilla-brown
     source: mfr-scale75
+    priceEur: 3.32
   - name: Nightmare Violet
     set: Scalecolor Games
     productCode: SCG-26
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7439.jpg?v=1753972949
     sourceUrl: https://scale75.com/products/nightmare-violet
     source: mfr-scale75
+    priceEur: 3.32
   - name: Pale Emerald Green
     set: Scalecolor Games
     productCode: SCG-12
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7425.jpg?v=1753972930
     sourceUrl: https://scale75.com/products/pale-emerald-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Pink Of Desire
     set: Scalecolor Games
     productCode: SCG-18
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7431.jpg?v=1753972938
     sourceUrl: https://scale75.com/products/pink-of-desire
     source: mfr-scale75
+    priceEur: 3.32
   - name: Rebel Orange
     set: Scalecolor Games
     productCode: SCG-05
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7418.jpg?v=1753972923
     sourceUrl: https://scale75.com/products/rebel-orange
     source: mfr-scale75
+    priceEur: 3.32
   - name: Roasted Brown
     set: Scalecolor Games
     productCode: SCG-37
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7450.jpg?v=1753972963
     sourceUrl: https://scale75.com/products/roasted-brown
     source: mfr-scale75
+    priceEur: 3.32
   - name: Rogue Grey
     set: Scalecolor Games
     productCode: SCG-45
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7458.jpg?v=1753972972
     sourceUrl: https://scale75.com/products/rogue-grey
     source: mfr-scale75
+    priceEur: 3.32
   - name: Sexy Zombie Skin
     set: Scalecolor Games
     productCode: SCG-15
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7428.jpg?v=1753972935
     sourceUrl: https://scale75.com/products/sexy-zombie-skin
     source: mfr-scale75
+    priceEur: 3.32
   - name: Siesta Blue
     set: Scalecolor Games
     productCode: SCG-25
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7438.jpg?v=1753972948
     sourceUrl: https://scale75.com/products/siesta-blue
     source: mfr-scale75
+    priceEur: 3.32
   - name: Sinner Flesh
     set: Scalecolor Games
     productCode: SCG-14
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7427.jpg?v=1753972934
     sourceUrl: https://scale75.com/products/sinner-flesh
     source: mfr-scale75
+    priceEur: 3.32
   - name: Starving Brown
     set: Scalecolor Games
     productCode: SCG-39
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7452.jpg?v=1753972965
     sourceUrl: https://scale75.com/products/starving-brown
     source: mfr-scale75
+    priceEur: 3.32
   - name: Survival Skin
     set: Scalecolor Games
     productCode: SCG-13
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7426.jpg?v=1753972933
     sourceUrl: https://scale75.com/products/survival-skin
     source: mfr-scale75
+    priceEur: 3.32
   - name: Sweet Dreams Blue
     set: Scalecolor Games
     productCode: SCG-28
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7441.jpg?v=1753972952
     sourceUrl: https://scale75.com/products/sweet-dreams-blue
     source: mfr-scale75
+    priceEur: 3.32
   - name: Tengu Red
     set: Scalecolor Games
     productCode: SCG-04
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7417.jpg?v=1753972921
     sourceUrl: https://scale75.com/products/tengo-red
     source: mfr-scale75
+    priceEur: 3.32
   - name: Valyrian Green
     set: Scalecolor Games
     productCode: SCG-23
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7436.jpg?v=1753972946
     sourceUrl: https://scale75.com/products/valyrian-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Vanilla Ice Cream
     set: Scalecolor Games
     productCode: SCG-40
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7453.jpg?v=1753972965
     sourceUrl: https://scale75.com/products/vanilla-ice-cream
     source: mfr-scale75
+    priceEur: 3.32
   - name: Vanity Blue
     set: Scalecolor Games
     productCode: SCG-46
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7459.jpg?v=1753972973
     sourceUrl: https://scale75.com/products/vanity-blue
     source: mfr-scale75
+    priceEur: 3.32
   - name: Victorian Flesh
     set: Scalecolor Games
     productCode: SCG-16
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7429.jpg?v=1753972936
     sourceUrl: https://scale75.com/products/victorian-flesh
     source: mfr-scale75
+    priceEur: 3.32
   - name: Wasp Yellow
     set: Scalecolor Games
     productCode: SCG-08
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7421.jpg?v=1753972926
     sourceUrl: https://scale75.com/products/wasp-yellow
     source: mfr-scale75
+    priceEur: 3.32
   - name: Ñañara Green
     set: Scalecolor Games
     productCode: SCG-27
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/7440.jpg?v=1753972950
     sourceUrl: https://scale75.com/products/nanara-green
     source: mfr-scale75
+    priceEur: 3.32
   - name: Camo Dark Brown
     set: Warfront  Range
     productCode: SW-18
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4298.jpg?v=1753971675
     sourceUrl: https://scale75.com/products/ss-camo-dark-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Dark Green
     set: Warfront  Range
     productCode: SW-09
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4318.jpg?v=1753971663
     sourceUrl: https://scale75.com/products/ss-camo-dark-green
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Golden Brown
     set: Warfront  Range
     productCode: SW-19
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4296.jpg?v=1753971678
     sourceUrl: https://scale75.com/products/ss-camo-golden-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Grey
     set: Warfront  Range
     productCode: SW-16
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4302.jpg?v=1753971672
     sourceUrl: https://scale75.com/products/ss-camo-grey
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Grey Brown
     set: Warfront  Range
     productCode: SW-13
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4310.jpg?v=1753971667
     sourceUrl: https://scale75.com/products/ss-camo-gray-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Highlights
     set: Warfront  Range
     productCode: SW-14
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4306.jpg?v=1753971673
     sourceUrl: https://scale75.com/products/ss-camo-highlights
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Italian Green
     set: Warfront  Range
     productCode: SW-20
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4294.jpg?v=1753971679
     sourceUrl: https://scale75.com/products/ss-camo-italian-green
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Light Green
     set: Warfront  Range
     productCode: SW-11
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4314.jpg?v=1753971667
     sourceUrl: https://scale75.com/products/ss-camo-light-green
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Medium Brown
     set: Warfront  Range
     productCode: SW-08
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4320.jpg?v=1753971661
     sourceUrl: https://scale75.com/products/ss-camo-medium-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Medium Green
     set: Warfront  Range
     productCode: SW-10
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4316.jpg?v=1753971664
     sourceUrl: https://scale75.com/products/ss-camo-medium-green
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Ochre Brown
     set: Warfront  Range
     productCode: SW-12
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4312.jpg?v=1753971666
     sourceUrl: https://scale75.com/products/ss-camo-ocher-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Red Brown
     set: Warfront  Range
     productCode: SW-17
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4300.jpg?v=1753971675
     sourceUrl: https://scale75.com/products/ss-camo-red-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Top Lights
     set: Warfront  Range
     productCode: SW-22
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4290.jpg?v=1753971679
     sourceUrl: https://scale75.com/products/ss-camo-top-lights
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Top Shadows
     set: Warfront  Range
     productCode: SW-23
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4288.jpg?v=1753971681
     sourceUrl: https://scale75.com/products/ss-camo-top-shadows
     source: mfr-scale75
+    priceEur: 2.25
   - name: Camo Yellow Sand
     set: Warfront  Range
     productCode: SW-21
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4292.jpg?v=1753971678
     sourceUrl: https://scale75.com/products/ss-camo-yellow-sand
     source: mfr-scale75
+    priceEur: 2.25
   - name: Dunkelbraun
     set: Warfront  Range
     productCode: SW-05
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4326.jpg?v=1753971660
     sourceUrl: https://scale75.com/products/dunkelbraun-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Dunkelgelb
     set: Warfront  Range
     productCode: SW-00
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4206.jpg?v=1753971654
     sourceUrl: https://scale75.com/products/dunkelgelb-yellow
     source: mfr-scale75
+    priceEur: 2.25
   - name: Dunkelgrau
     set: Warfront  Range
     productCode: SW-04
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4328.jpg?v=1753971656
     sourceUrl: https://scale75.com/products/dunkelgrau-gray
     source: mfr-scale75
+    priceEur: 2.25
   - name: Gelbbraun
     set: Warfront  Range
     productCode: SW-06
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4324.jpg?v=1753971659
     sourceUrl: https://scale75.com/products/gelbraun-brown
     source: mfr-scale75
+    priceEur: 2.25
   - name: Graugrün
     set: Warfront  Range
     productCode: SW-07
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4322.jpg?v=1753971660
     sourceUrl: https://scale75.com/products/graugrun-gray
     source: mfr-scale75
+    priceEur: 2.25
   - name: Ocean Grey
     set: Warfront  Range
     productCode: SW-49
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4236.jpg?v=1753971717
     sourceUrl: https://scale75.com/products/ocean-gray
     source: mfr-scale75
+    priceEur: 2.25
   - name: Olivgrün
     set: Warfront  Range
     productCode: SW-01
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4334.jpg?v=1753971653
     sourceUrl: https://scale75.com/products/olivegrun-green
     source: mfr-scale75
+    priceEur: 2.25
   - name: Olivgrün 44
     set: Warfront  Range
     productCode: SW-26
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4282.jpg?v=1753971685
     sourceUrl: https://scale75.com/products/olivegrun-44
     source: mfr-scale75
+    priceEur: 2.25
   - name: Rotbraun
     set: Warfront  Range
     productCode: SW-02
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4332.jpg?v=1753971654
     sourceUrl: https://scale75.com/products/rotbraun-red
     source: mfr-scale75
+    priceEur: 2.25
   - name: Rotbraun Primer
     set: Warfront  Range
     productCode: SW-03
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4330.jpg?v=1753971655
     sourceUrl: https://scale75.com/products/rotbraun-primer-red
     source: mfr-scale75
+    priceEur: 2.25
   - name: Slate Grey
     set: Warfront  Range
     productCode: SW-42
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4250.jpg?v=1753971708
     sourceUrl: https://scale75.com/products/slate-gray
     source: mfr-scale75
+    priceEur: 2.25
   - name: Smoke Grey
     set: Warfront  Range
     productCode: SW-41
     imageUrl: https://cdn.shopify.com/s/files/1/0932/5975/9959/files/4252.jpg?v=1753971707
     sourceUrl: https://scale75.com/products/smoke-gray
     source: mfr-scale75
+    priceEur: 2.25
   candidates:
   - name: CORE
     sku: SFLOW-002

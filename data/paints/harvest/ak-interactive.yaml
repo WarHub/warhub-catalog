@@ -2,6 +2,8 @@
 # Projection of committed manufacturer evidence onto the paint catalog's identities.
 # `enrich` keys are exact {Name}|{Set} identities (C# fills blank ean/imageUrl only);
 # `additions` are new paints from catalog-role sources; `candidates` are report-only.
+# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --
+# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).
 ak-interactive:
   enrich:
     3b Au/zb Au|AFV (3rd Gen):
@@ -9,2366 +11,2839 @@ ak-interactive:
       sku: AK11387
       sourceUrl: https://ak-interactive.com/product/3b-au-zb-au-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     A-14 Interior Steel Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11911.jpg
       sku: AK11911
       sourceUrl: https://ak-interactive.com/product/a-14-interior-steel-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     A-18f Light Grey-blue|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11912.jpg
       sku: AK11912
       sourceUrl: https://ak-interactive.com/product/a-18f-light-grey-blue-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     A-19f Grass Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11913.jpg
       sku: AK11913
       sourceUrl: https://ak-interactive.com/product/a-19f-grass-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     A-21m Light Yellowish Brown|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11914.jpg
       sku: AK11914
       sourceUrl: https://ak-interactive.com/product/a-21m-light-yellowish-brown-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Adc Grey Fs 16473|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11867.jpg
       sku: AK11867
       sourceUrl: https://ak-interactive.com/product/adc-grey-fs-16473-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ae-9/aii Light Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11908.jpg
       sku: AK11908
       sourceUrl: https://ak-interactive.com/product/ae-9-aii-light-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Aggressor Blue Fs 35109|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11877.jpg
       sku: AK11877
       sourceUrl: https://ak-interactive.com/product/aggressor-blue-fs-35109-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Aggressor Grey Fs 36251|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11885.jpg
       sku: AK11885
       sourceUrl: https://ak-interactive.com/product/aggressor-grey-fs-36251-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Aii Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11909.jpg
       sku: AK11909
       sourceUrl: https://ak-interactive.com/product/aii-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Aii Light Blue|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11910.jpg
       sku: AK11910
       sourceUrl: https://ak-interactive.com/product/aii-light-blue-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Air Superiority Blue Fs 35450|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11879.jpg
       sku: AK11879
       sourceUrl: https://ak-interactive.com/product/air-superiority-blue-fs-35450-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Alga Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11152.jpg
       sku: AK11152
       sourceUrl: https://ak-interactive.com/product/alga-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Aluminium|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11207.jpg
       sku: AK11207
       sourceUrl: https://ak-interactive.com/product/aluminium-metallic-2/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Amaranth Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11086.jpg
       sku: AK11086
       sourceUrl: https://ak-interactive.com/product/amaranth-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Amethyst Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11183.jpg
       sku: AK11183
       sourceUrl: https://ak-interactive.com/product/amethyst-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Amt-11 Blue-grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11917.jpg
       sku: AK11917
       sourceUrl: https://ak-interactive.com/product/amt-11-blue-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Amt-12 Dark Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11918.jpg
       sku: AK11918
       sourceUrl: https://ak-interactive.com/product/amt-12-dark-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Amt-4 (a-24m) Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11915.jpg
       sku: AK11915
       sourceUrl: https://ak-interactive.com/product/amt-4-a-24m-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Amt-7 Light Blue|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11916.jpg
       sku: AK11916
       sourceUrl: https://ak-interactive.com/product/amt-7-light-blue-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ana 613 Olive Drab|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11863.jpg
       sku: AK11863
       sourceUrl: https://ak-interactive.com/product/ana-613-olive-drab-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Anodized Violet|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11202.jpg
       sku: AK11202
       sourceUrl: https://ak-interactive.com/product/anodized-violet-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Anthracite Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11167.jpg
       sku: AK11167
       sourceUrl: https://ak-interactive.com/product/anthracite-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Apc Interior Light Green (fs24533)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11345.jpg
       sku: AK11345
       sourceUrl: https://ak-interactive.com/product/apc-interior-light-green-fs24533-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Aquatic Turquoise|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11170.jpg
       sku: AK11170
       sourceUrl: https://ak-interactive.com/product/aquatic-turquoise-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Archaic Turquoise|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11172.jpg
       sku: AK11172
       sourceUrl: https://ak-interactive.com/product/archaic-turquoise-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ash Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11024.jpg
       sku: AK11024
       sourceUrl: https://ak-interactive.com/product/ash-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Astral Beryllium|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11200.jpg
       sku: AK11200
       sourceUrl: https://ak-interactive.com/product/astral-beryllium-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Australian Camouflage Brown|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11347.jpg
       sku: AK11347
       sourceUrl: https://ak-interactive.com/product/australian-camouflage-brown-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Australian Camouflage Green|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11348.jpg
       sku: AK11348
       sourceUrl: https://ak-interactive.com/product/australian-camouflage-green-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Basalt Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11021.jpg
       sku: AK11021
       sourceUrl: https://ak-interactive.com/product/basalt-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Base Flesh|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11401.jpg
       sku: AK11401
       sourceUrl: https://ak-interactive.com/product/base-flesh-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Base Green (protective)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11367.jpg
       sku: AK11367
       sourceUrl: https://ak-interactive.com/product/base-green-protective-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Basic Skin Tone|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11052.jpg
       sku: AK11052
       sourceUrl: https://ak-interactive.com/product/basic-skin-tone-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Beige Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11064.jpg
       sku: AK11064
       sourceUrl: https://ak-interactive.com/product/beige-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Beige|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11030.jpg
       sku: AK11030
       sourceUrl: https://ak-interactive.com/product/beige-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Black Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11160.jpg
       sku: AK11160
       sourceUrl: https://ak-interactive.com/product/black-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Black Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2019/01/AK11242.jpg
       sku: AK11242
       sourceUrl: https://ak-interactive.com/product/black-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Black Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11098.jpg
       sku: AK11098
       sourceUrl: https://ak-interactive.com/product/black-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Black Uniform Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11407.jpg
       sku: AK11407
       sourceUrl: https://ak-interactive.com/product/black-uniform-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Black|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11029.jpg
       sku: AK11029
       sourceUrl: https://ak-interactive.com/product/black-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Blood Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11089.jpg
       sku: AK11089
       sourceUrl: https://ak-interactive.com/product/blood-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Blue Fs 35190|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11878.jpg
       sku: AK11878
       sourceUrl: https://ak-interactive.com/product/blue-fs-35190-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Blue Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11011.jpg
       sku: AK11011
       sourceUrl: https://ak-interactive.com/product/blue-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Blue Violet|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11070.jpg
       sku: AK11070
       sourceUrl: https://ak-interactive.com/product/blue-violet-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Blue-green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11169.jpg
       sku: AK11169
       sourceUrl: https://ak-interactive.com/product/blue-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Bordeaux Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11094.jpg
       sku: AK11094
       sourceUrl: https://ak-interactive.com/product/bordeaux-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Brass|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11194.jpg
       sku: AK11194
       sourceUrl: https://ak-interactive.com/product/brass-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Brick Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11093.jpg
       sku: AK11093
       sourceUrl: https://ak-interactive.com/product/brick-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Dark Olive Green Pfi|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11381.jpg
       sku: AK11381
       sourceUrl: https://ak-interactive.com/product/british-dark-olive-green-pfi-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Desert Pink Zi|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11382.jpg
       sku: AK11382
       sourceUrl: https://ak-interactive.com/product/british-desert-pink-zi-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Khaki|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11127.jpg
       sku: AK11127
       sourceUrl: https://ak-interactive.com/product/british-khaki-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Light Mud|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11383.jpg
       sku: AK11383
       sourceUrl: https://ak-interactive.com/product/british-light-mud-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Sand Yellow|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11362.jpg
       sku: AK11362
       sourceUrl: https://ak-interactive.com/product/british-sand-yellow-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Uniform Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11437.jpg
       sku: AK11437
       sourceUrl: https://ak-interactive.com/product/british-uniform-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     British Uniform Lights|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11438.jpg
       sku: AK11438
       sourceUrl: https://ak-interactive.com/product/british-uniform-lights-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Bronze Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11857.jpg
       sku: AK11857
       sourceUrl: https://ak-interactive.com/product/bronze-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Bronze|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11196.jpg
       sku: AK11196
       sourceUrl: https://ak-interactive.com/product/bronze-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Brown Black|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11418.jpg
       sku: AK11418
       sourceUrl: https://ak-interactive.com/product/brown-black-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Brown Rose|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11063.jpg
       sku: AK11063
       sourceUrl: https://ak-interactive.com/product/brown-rose-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Brownish Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11151.jpg
       sku: AK11151
       sourceUrl: https://ak-interactive.com/product/brownish-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Buff|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11031.jpg
       sku: AK11031
       sourceUrl: https://ak-interactive.com/product/buff-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Burn Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11079.jpg
       sku: AK11079
       sourceUrl: https://ak-interactive.com/product/burn-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Burnt Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11097.jpg
       sku: AK11097
       sourceUrl: https://ak-interactive.com/product/burnt-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Burnt Tin|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11198.jpg
       sku: AK11198
       sourceUrl: https://ak-interactive.com/product/burnt-tin-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Burnt Umber|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11111.jpg
       sku: AK11111
       sourceUrl: https://ak-interactive.com/product/burnt-umber-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Cadmium Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11085.jpg
       sku: AK11085
       sourceUrl: https://ak-interactive.com/product/cadmium-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Camouflage Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11156.jpg
       sku: AK11156
       sourceUrl: https://ak-interactive.com/product/camouflage-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Camouflage Grey Fs 36622|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11890.jpg
       sku: AK11890
       sourceUrl: https://ak-interactive.com/product/camouflage-grey-fs-36622-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Canvas Tone|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11436.jpg
       sku: AK11436
       sourceUrl: https://ak-interactive.com/product/canvas-tone-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Carc Tan 686a (fs33446)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11349.jpg
       sku: AK11349
       sourceUrl: https://ak-interactive.com/product/carc-tan-686a-fs33446-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Carmine|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11091.jpg
       sku: AK11091
       sourceUrl: https://ak-interactive.com/product/carmine-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Chocolate (chipping)|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11113.jpg
       sku: AK11113
       sourceUrl: https://ak-interactive.com/product/chocolate-chipping-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Clear Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11214.jpg
       sku: AK11214
       sourceUrl: https://ak-interactive.com/product/clear-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Clear Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11216.jpg
       sku: AK11216
       sourceUrl: https://ak-interactive.com/product/clear-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Clear Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11218.jpg
       sku: AK11218
       sourceUrl: https://ak-interactive.com/product/clear-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Clear Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11213.jpg
       sku: AK11213
       sourceUrl: https://ak-interactive.com/product/clear-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Clear Smoke|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11215.jpg
       sku: AK11215
       sourceUrl: https://ak-interactive.com/product/clear-smoke-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Clear Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11217.jpg
       sku: AK11217
       sourceUrl: https://ak-interactive.com/product/clear-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Cobalt Blue|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11201.jpg
       sku: AK11201
       sourceUrl: https://ak-interactive.com/product/cobalt-blue-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Command Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11155.jpg
       sku: AK11155
       sourceUrl: https://ak-interactive.com/product/command-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Copper|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11197.jpg
       sku: AK11197
       sourceUrl: https://ak-interactive.com/product/copper-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Cremeweiss|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11333.jpg
       sku: AK11333
       sourceUrl: https://ak-interactive.com/product/cremeweiss-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Aluminium|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11208.jpg
       sku: AK11208
       sourceUrl: https://ak-interactive.com/product/dark-aluminium-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Blue-grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11164.jpg
       sku: AK11164
       sourceUrl: https://ak-interactive.com/product/dark-blue-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11181.jpg
       sku: AK11181
       sourceUrl: https://ak-interactive.com/product/dark-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11109.jpg
       sku: AK11109
       sourceUrl: https://ak-interactive.com/product/dark-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Flesh|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11056.jpg
       sku: AK11056
       sourceUrl: https://ak-interactive.com/product/dark-flesh-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Ghost Grey Fs 36320|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11887.jpg
       sku: AK11887
       sourceUrl: https://ak-interactive.com/product/dark-ghost-grey-fs-36320-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Green (fs34102)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11342.jpg
       sku: AK11342
       sourceUrl: https://ak-interactive.com/product/dark-green-fs34102-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Green-grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11133.jpg
       sku: AK11133
       sourceUrl: https://ak-interactive.com/product/dark-green-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Green|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11410.jpg
       sku: AK11410
       sourceUrl: https://ak-interactive.com/product/dark-green-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11146.jpg
       sku: AK11146
       sourceUrl: https://ak-interactive.com/product/dark-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11022.jpg
       sku: AK11022
       sourceUrl: https://ak-interactive.com/product/dark-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Gull Grey Fs 36231|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11884.jpg
       sku: AK11884
       sourceUrl: https://ak-interactive.com/product/dark-gull-grey-fs-36231-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Olive Drab 41|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11860.jpg
       sku: AK11860
       sourceUrl: https://ak-interactive.com/product/dark-olive-drab-41-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Olive Green|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11421.jpg
       sku: AK11421
       sourceUrl: https://ak-interactive.com/product/dark-olive-green-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Prussian Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11189.jpg
       sku: AK11189
       sourceUrl: https://ak-interactive.com/product/dark-prussian-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Rust|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11107.jpg
       sku: AK11107
       sourceUrl: https://ak-interactive.com/product/dark-rust-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Sand|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11033.jpg
       sku: AK11033
       sourceUrl: https://ak-interactive.com/product/dark-sand-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Sea Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11190.jpg
       sku: AK11190
       sourceUrl: https://ak-interactive.com/product/dark-sea-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Sea Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11015.jpg
       sku: AK11015
       sourceUrl: https://ak-interactive.com/product/dark-sea-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dark Shadow Flesh|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11405.jpg
       sku: AK11405
       sourceUrl: https://ak-interactive.com/product/dark-shadow-flesh-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dead Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11083.jpg
       sku: AK11083
       sourceUrl: https://ak-interactive.com/product/dead-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deck Tan|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11114.jpg
       sku: AK11114
       sourceUrl: https://ak-interactive.com/product/deck-tan-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Decomposed Flesh|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11058.jpg
       sku: AK11058
       sourceUrl: https://ak-interactive.com/product/decomposed-flesh-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Blue|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11182.jpg
       sku: AK11182
       sourceUrl: https://ak-interactive.com/product/deep-blue-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Brown|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11102.jpg
       sku: AK11102
       sourceUrl: https://ak-interactive.com/product/deep-brown-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Green|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11142.jpg
       sku: AK11142
       sourceUrl: https://ak-interactive.com/product/deep-green-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Orange|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11080.jpg
       sku: AK11080
       sourceUrl: https://ak-interactive.com/product/deep-orange-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Purple|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11074.jpg
       sku: AK11074
       sourceUrl: https://ak-interactive.com/product/deep-purple-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Red|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11088.jpg
       sku: AK11088
       sourceUrl: https://ak-interactive.com/product/deep-red-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Sea Blue|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11864.jpg
       sku: AK11864
       sourceUrl: https://ak-interactive.com/product/deep-sea-blue-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Sky Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11176.jpg
       sku: AK11176
       sourceUrl: https://ak-interactive.com/product/deep-sky-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Violet|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11072.jpg
       sku: AK11072
       sourceUrl: https://ak-interactive.com/product/deep-violet-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Deep Yellow|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11045.jpg
       sku: AK11045
       sourceUrl: https://ak-interactive.com/product/deep-yellow-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Denison Tan Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11413.jpg
       sku: AK11413
       sourceUrl: https://ak-interactive.com/product/denison-tan-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Desert Sand Surface Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK11248.jpg
       sku: AK11248
       sourceUrl: https://ak-interactive.com/product/desert-sand-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Desert Uniform Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11440.jpg
       sku: AK11440
       sourceUrl: https://ak-interactive.com/product/desert-uniform-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dirty Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11095.jpg
       sku: AK11095
       sourceUrl: https://ak-interactive.com/product/dirty-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dirty Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11043.jpg
       sku: AK11043
       sourceUrl: https://ak-interactive.com/product/dirty-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dot44 Brown Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11408.jpg
       sku: AK11408
       sourceUrl: https://ak-interactive.com/product/dot44-brown-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ducat Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11177.jpg
       sku: AK11177
       sourceUrl: https://ak-interactive.com/product/ducat-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Duck Egg Blue Fs 35622|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11880.jpg
       sku: AK11880
       sourceUrl: https://ak-interactive.com/product/duck-egg-blue-fs-35622-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dull Dark Green Fs 34092|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11873.jpg
       sku: AK11873
       sourceUrl: https://ak-interactive.com/product/dull-dark-green-fs-34092-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Dunkelgelb Ral 7028 Dark Yellow|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2021/06/AK11245-1.jpg
       sku: AK11245
       sourceUrl: https://ak-interactive.com/product/dunkelgelb-ral-7028-dark-yellow-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Emerald Metallic Green|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11204.jpg
       sku: AK11204
       sourceUrl: https://ak-interactive.com/product/emerald-metallic-green-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Emerald|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11144.jpg
       sku: AK11144
       sourceUrl: https://ak-interactive.com/product/emerald-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     English Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11020.jpg
       sku: AK11020
       sourceUrl: https://ak-interactive.com/product/english-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Extra Dark Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11153.jpg
       sku: AK11153
       sourceUrl: https://ak-interactive.com/product/extra-dark-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     F-15 Dark Grey (mod Eagle) Fs 36176|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11883.jpg
       sku: AK11883
       sourceUrl: https://ak-interactive.com/product/f-15-dark-grey-mod-eagle-fs-36176-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Faded Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11135.jpg
       sku: AK11135
       sourceUrl: https://ak-interactive.com/product/faded-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Field Drab (fs30118)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11344.jpg
       sku: AK11344
       sourceUrl: https://ak-interactive.com/product/field-drab-fs30118-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Field Drab|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11435.jpg
       sku: AK11435
       sourceUrl: https://ak-interactive.com/product/field-drab-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Field Green Fs 34097|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11875.jpg
       sku: AK11875
       sourceUrl: https://ak-interactive.com/product/field-green-fs-34097-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Field Grey Base  1 (green Uniform)|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11425.jpg
       sku: AK11425
       sourceUrl: https://ak-interactive.com/product/field-grey-base-1-green-uniform-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Field Grey Base  2 (grey Uniform)|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11423.jpg
       sku: AK11423
       sourceUrl: https://ak-interactive.com/product/field-grey-base-2-grey-uniform-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Fluorescent Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11178.jpg
       sku: AK11178
       sourceUrl: https://ak-interactive.com/product/fluorescent-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Fluorescent Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11129.jpg
       sku: AK11129
       sourceUrl: https://ak-interactive.com/product/fluorescent-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Fluorescent Magenta|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11068.jpg
       sku: AK11068
       sourceUrl: https://ak-interactive.com/product/fluorescent-magenta-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Fluorescent Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11081.jpg
       sku: AK11081
       sourceUrl: https://ak-interactive.com/product/fluorescent-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Fluorescent Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11049.jpg
       sku: AK11049
       sourceUrl: https://ak-interactive.com/product/fluorescent-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Forest Green (fs34079)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11346.jpg
       sku: AK11346
       sourceUrl: https://ak-interactive.com/product/forest-green-fs34079-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Foundry Red|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11203.jpg
       sku: AK11203
       sourceUrl: https://ak-interactive.com/product/foundry-red-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     French Army Desert Sand|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11363.jpg
       sku: AK11363
       sourceUrl: https://ak-interactive.com/product/french-army-desert-sand-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     French Army Green|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11364.jpg
       sku: AK11364
       sourceUrl: https://ak-interactive.com/product/french-army-green-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     French Army Grey-blue|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11365.jpg
       sku: AK11365
       sourceUrl: https://ak-interactive.com/product/french-army-grey-blue-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     French Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11166.jpg
       sku: AK11166
       sourceUrl: https://ak-interactive.com/product/french-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     French Greyish Blue|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11439.jpg
       sku: AK11439
       sourceUrl: https://ak-interactive.com/product/french-greyish-blue-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Frog Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11136.jpg
       sku: AK11136
       sourceUrl: https://ak-interactive.com/product/frog-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     German Field Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11154.jpg
       sku: AK11154
       sourceUrl: https://ak-interactive.com/product/german-field-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     German Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11025.jpg
       sku: AK11025
       sourceUrl: https://ak-interactive.com/product/german-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Glaze Medium|Auxiliary (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11233.jpg
       sku: AK11233
       sourceUrl: https://ak-interactive.com/product/glaze-medium-auxiliary/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Gloss Medium|Auxiliary (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11235.jpg
       sku: AK11235
       sourceUrl: https://ak-interactive.com/product/gloss-medium-auxiliary/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Golden Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11117.jpg
       sku: AK11117
       sourceUrl: https://ak-interactive.com/product/golden-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Golden Olive|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11139.jpg
       sku: AK11139
       sourceUrl: https://ak-interactive.com/product/golden-olive-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Golden Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11041.jpg
       sku: AK11041
       sourceUrl: https://ak-interactive.com/product/golden-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Gold|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11191.jpg
       sku: AK11191
       sourceUrl: https://ak-interactive.com/product/gold-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Graphite|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11019.jpg
       sku: AK11019
       sourceUrl: https://ak-interactive.com/product/graphite-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grass Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11140.jpg
       sku: AK11140
       sourceUrl: https://ak-interactive.com/product/grass-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Green Fs 34258|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11876.jpg
       sku: AK11876
       sourceUrl: https://ak-interactive.com/product/green-fs-34258-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Green Ochre|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11122.jpg
       sku: AK11122
       sourceUrl: https://ak-interactive.com/product/green-ochre-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Green Sky|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11134.jpg
       sku: AK11134
       sourceUrl: https://ak-interactive.com/product/green-sky-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Green Uniform Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11427.jpg
       sku: AK11427
       sourceUrl: https://ak-interactive.com/product/green-uniform-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Green-brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11126.jpg
       sku: AK11126
       sourceUrl: https://ak-interactive.com/product/green-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Green-grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11132.jpg
       sku: AK11132
       sourceUrl: https://ak-interactive.com/product/green-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Greenish White|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11005.jpg
       sku: AK11005
       sourceUrl: https://ak-interactive.com/product/greenish-white-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grey Blue|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11426.jpg
       sku: AK11426
       sourceUrl: https://ak-interactive.com/product/grey-blue-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grey Green|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11424.jpg
       sku: AK11424
       sourceUrl: https://ak-interactive.com/product/grey-green-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grey Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11016.jpg
       sku: AK11016
       sourceUrl: https://ak-interactive.com/product/grey-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grey Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2019/01/AK11241.jpg
       sku: AK11241
       sourceUrl: https://ak-interactive.com/product/grey-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Grey-blue 1920s-1930s|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11907.jpg
       sku: AK11907
       sourceUrl: https://ak-interactive.com/product/grey-blue-1920s-1930s-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grey-blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11165.jpg
       sku: AK11165
       sourceUrl: https://ak-interactive.com/product/grey-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grey-brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11125.jpg
       sku: AK11125
       sourceUrl: https://ak-interactive.com/product/grey-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grim Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11112.jpg
       sku: AK11112
       sourceUrl: https://ak-interactive.com/product/grim-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Grimy Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11008.jpg
       sku: AK11008
       sourceUrl: https://ak-interactive.com/product/grimy-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Gun Metal|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11212.jpg
       sku: AK11212
       sourceUrl: https://ak-interactive.com/product/gun-metal-metallic-2/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Gunship Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11150.jpg
       sku: AK11150
       sourceUrl: https://ak-interactive.com/product/gunship-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Have Glass Grey Fs 36170|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11882.jpg
       sku: AK11882
       sourceUrl: https://ak-interactive.com/product/have-glass-grey-fs-36170-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Highlight Flesh|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11403.jpg
       sku: AK11403
       sourceUrl: https://ak-interactive.com/product/highlight-flesh-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Hull Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11108.jpg
       sku: AK11108
       sourceUrl: https://ak-interactive.com/product/hull-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ice Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11036.jpg
       sku: AK11036
       sourceUrl: https://ak-interactive.com/product/ice-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Idf Early Sand Yellow|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11354.jpg
       sku: AK11354
       sourceUrl: https://ak-interactive.com/product/idf-early-sand-yellow-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Idf Green|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11355.jpg
       sku: AK11355
       sourceUrl: https://ak-interactive.com/product/idf-green-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Idf Modern Grey|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11352.jpg
       sku: AK11352
       sourceUrl: https://ak-interactive.com/product/idf-modern-grey-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Idf Sand Grey 1970s-1980s|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11353.jpg
       sku: AK11353
       sourceUrl: https://ak-interactive.com/product/idf-sand-grey-1970s-1980s-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  1 Hairyokushoku (grey-green)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11899.jpg
       sku: AK11899
       sourceUrl: https://ak-interactive.com/product/ija-1-hairyokushoku-grey-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  21 Midori Iro (green)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11902.jpg
       sku: AK11902
       sourceUrl: https://ak-interactive.com/product/ija-21-midori-iro-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  27 Ao Midori Iro (blue-green)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11903.jpg
       sku: AK11903
       sourceUrl: https://ak-interactive.com/product/ija-27-ao-midori-iro-blue-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  29 Ki Midori Iro (yellow-green)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11904.jpg
       sku: AK11904
       sourceUrl: https://ak-interactive.com/product/ija-29-ki-midori-iro-yellow-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  3 Hairanshoku (grey Indigo)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11900.jpg
       sku: AK11900
       sourceUrl: https://ak-interactive.com/product/ija-3-hairanshoku-grey-indigo-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  30 Karekusa Iro (dry Grass)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11905.jpg
       sku: AK11905
       sourceUrl: https://ak-interactive.com/product/ija-30-karekusa-iro-dry-grass-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  31 Cha Kasshoku (tea Colour)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11906.jpg
       sku: AK11906
       sourceUrl: https://ak-interactive.com/product/ija-31-cha-kasshoku-tea-colour-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ija  7 Ohryuko Nana Go Shoku (Olive Brown)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11901.jpg
       sku: AK11901
       sourceUrl: https://ak-interactive.com/product/ija-7-ohryuko-nana-go-shoku-olive-brown-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn D1 Deep Green Black|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11893.jpg
       sku: AK11893
       sourceUrl: https://ak-interactive.com/product/ijn-d1-deep-green-black-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn D2 Green Black|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11894.jpg
       sku: AK11894
       sourceUrl: https://ak-interactive.com/product/ijn-d2-green-black-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn J3 Hai-iro (grey)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11891.jpg
       sku: AK11891
       sourceUrl: https://ak-interactive.com/product/ijn-j3-hai-iro-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn J3 Sp (amber Grey)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11892.jpg
       sku: AK11892
       sourceUrl: https://ak-interactive.com/product/ijn-j3-sp-amber-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn M3 (m) Mitsubishi Interior Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11896.jpg
       sku: AK11896
       sourceUrl: https://ak-interactive.com/product/ijn-m3-m-mitsubishi-interior-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn M3 (n) Nakajima Interior Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11897.jpg
       sku: AK11897
       sourceUrl: https://ak-interactive.com/product/ijn-m3-n-nakajima-interior-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn Q1 Anti-glare Blue-black|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11895.jpg
       sku: AK11895
       sourceUrl: https://ak-interactive.com/product/ijn-q1-anti-glare-blue-black-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ijn/ija Aotake|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11898.jpg
       sku: AK11898
       sourceUrl: https://ak-interactive.com/product/ijn-ija-aotake-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Imperial Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11180.jpg
       sku: AK11180
       sourceUrl: https://ak-interactive.com/product/imperial-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Insignia White Fs 17875|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11868.jpg
       sku: AK11868
       sourceUrl: https://ak-interactive.com/product/insignia-white-fs-17875-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Intense Pink|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11065.jpg
       sku: AK11065
       sourceUrl: https://ak-interactive.com/product/intense-pink-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Interior Yellow Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11138.jpg
       sku: AK11138
       sourceUrl: https://ak-interactive.com/product/interior-yellow-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Intermediate Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11163.jpg
       sku: AK11163
       sourceUrl: https://ak-interactive.com/product/intermediate-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Intermediate Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11149.jpg
       sku: AK11149
       sourceUrl: https://ak-interactive.com/product/intermediate-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ivory|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11004.jpg
       sku: AK11004
       sourceUrl: https://ak-interactive.com/product/ivory-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Japanese Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11123.jpg
       sku: AK11123
       sourceUrl: https://ak-interactive.com/product/japanese-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Khaki Green No.3|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11373.jpg
       sku: AK11373
       sourceUrl: https://ak-interactive.com/product/khaki-green-no-3-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Laf Green|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11357.jpg
       sku: AK11357
       sourceUrl: https://ak-interactive.com/product/laf-green-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Laser Magenta|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11066.jpg
       sku: AK11066
       sourceUrl: https://ak-interactive.com/product/laser-magenta-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Laser Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11048.jpg
       sku: AK11048
       sourceUrl: https://ak-interactive.com/product/laser-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Lead Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11023.jpg
       sku: AK11023
       sourceUrl: https://ak-interactive.com/product/lead-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Leather Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11110.jpg
       sku: AK11110
       sourceUrl: https://ak-interactive.com/product/leather-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Lemon Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11047.jpg
       sku: AK11047
       sourceUrl: https://ak-interactive.com/product/lemon-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11100.jpg
       sku: AK11100
       sourceUrl: https://ak-interactive.com/product/light-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Earth|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11115.jpg
       sku: AK11115
       sourceUrl: https://ak-interactive.com/product/light-earth-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Flesh|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11402.jpg
       sku: AK11402
       sourceUrl: https://ak-interactive.com/product/light-flesh-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Flesh|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11050.jpg
       sku: AK11050
       sourceUrl: https://ak-interactive.com/product/light-flesh-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Ghost Grey Fs 36375|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11888.jpg
       sku: AK11888
       sourceUrl: https://ak-interactive.com/product/light-ghost-grey-fs-36375-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Green Uniform|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2023/01/AK11428.jpg
       sku: AK11428
       sourceUrl: https://ak-interactive.com/product/light-green-uniform-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Green|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11411.jpg
       sku: AK11411
       sourceUrl: https://ak-interactive.com/product/light-green-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11141.jpg
       sku: AK11141
       sourceUrl: https://ak-interactive.com/product/light-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Grey Fs 36495|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11889.jpg
       sku: AK11889
       sourceUrl: https://ak-interactive.com/product/light-grey-fs-36495-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Gull Grey Fs 16440|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11866.jpg
       sku: AK11866
       sourceUrl: https://ak-interactive.com/product/light-gull-grey-fs-16440-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11077.jpg
       sku: AK11077
       sourceUrl: https://ak-interactive.com/product/light-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Prussian Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11186.jpg
       sku: AK11186
       sourceUrl: https://ak-interactive.com/product/light-prussian-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Rust|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2023/01/AK11105.jpg
       sku: AK11105
       sourceUrl: https://ak-interactive.com/product/light-rust-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Light Stone No.61|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11377.jpg
       sku: AK11377
       sourceUrl: https://ak-interactive.com/product/light-stone-no-61-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Lilac|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11071.jpg
       sku: AK11071
       sourceUrl: https://ak-interactive.com/product/lilac-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Lime Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11137.jpg
       sku: AK11137
       sourceUrl: https://ak-interactive.com/product/lime-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Lizard Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11145.jpg
       sku: AK11145
       sourceUrl: https://ak-interactive.com/product/lizard-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Luminous Flesh|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11051.jpg
       sku: AK11051
       sourceUrl: https://ak-interactive.com/product/luminous-flesh-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Luminous Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11128.jpg
       sku: AK11128
       sourceUrl: https://ak-interactive.com/product/luminous-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Luminous Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11082.jpg
       sku: AK11082
       sourceUrl: https://ak-interactive.com/product/luminous-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     M-485 Blue-grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11865.jpg
       sku: AK11865
       sourceUrl: https://ak-interactive.com/product/m-485-blue-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Magenta|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11067.jpg
       sku: AK11067
       sourceUrl: https://ak-interactive.com/product/magenta-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Mahogany Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11106.jpg
       sku: AK11106
       sourceUrl: https://ak-interactive.com/product/mahogany-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Matt Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11092.jpg
       sku: AK11092
       sourceUrl: https://ak-interactive.com/product/matt-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Matte Medium|Auxiliary (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11234.jpg
       sku: AK11234
       sourceUrl: https://ak-interactive.com/product/matte-medium-auxiliary/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11184.jpg
       sku: AK11184
       sourceUrl: https://ak-interactive.com/product/medium-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Flesh Tone|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11054.jpg
       sku: AK11054
       sourceUrl: https://ak-interactive.com/product/medium-flesh-tone-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Green 42|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11861.jpg
       sku: AK11861
       sourceUrl: https://ak-interactive.com/product/medium-green-42-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Green|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11412.jpg
       sku: AK11412
       sourceUrl: https://ak-interactive.com/product/medium-green-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Grey Fs 36270|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11886.jpg
       sku: AK11886
       sourceUrl: https://ak-interactive.com/product/medium-grey-fs-36270-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11010.jpg
       sku: AK11010
       sourceUrl: https://ak-interactive.com/product/medium-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Gunship Grey Fs 36118|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11881.jpg
       sku: AK11881
       sourceUrl: https://ak-interactive.com/product/medium-gunship-grey-fs-36118-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Olive Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11148.jpg
       sku: AK11148
       sourceUrl: https://ak-interactive.com/product/medium-olive-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11078.jpg
       sku: AK11078
       sourceUrl: https://ak-interactive.com/product/medium-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Rust|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2023/01/AK11103.jpg
       sku: AK11103
       sourceUrl: https://ak-interactive.com/product/medium-rust-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Sand|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11034.jpg
       sku: AK11034
       sourceUrl: https://ak-interactive.com/product/medium-sand-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Medium Sea Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11014.jpg
       sku: AK11014
       sourceUrl: https://ak-interactive.com/product/medium-sea-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Merdc Sand (fs30277)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11343.jpg
       sku: AK11343
       sourceUrl: https://ak-interactive.com/product/merdc-sand-fs30277-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Metal Medium|Auxiliary (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11232.jpg
       sku: AK11232
       sourceUrl: https://ak-interactive.com/product/metal-medium-auxiliary/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Metallic Blue|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11199.jpg
       sku: AK11199
       sourceUrl: https://ak-interactive.com/product/metallic-blue-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Middle Stone|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11124.jpg
       sku: AK11124
       sourceUrl: https://ak-interactive.com/product/middle-stone-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Mig-25/mig-31 Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11920.jpg
       sku: AK11920
       sourceUrl: https://ak-interactive.com/product/mig-25-mig-31-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Minium Red Surface Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2021/06/AK11247-1.jpg
       sku: AK11247
       sourceUrl: https://ak-interactive.com/product/minium-red-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Mint Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11143.jpg
       sku: AK11143
       sourceUrl: https://ak-interactive.com/product/mint-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Modern Spanish Green|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11350.jpg
       sku: AK11350
       sourceUrl: https://ak-interactive.com/product/modern-spanish-green-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Mud Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11120.jpg
       sku: AK11120
       sourceUrl: https://ak-interactive.com/product/mud-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Mustard Yellow|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11366.jpg
       sku: AK11366
       sourceUrl: https://ak-interactive.com/product/mustard-yellow-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nato Black|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11360.jpg
       sku: AK11360
       sourceUrl: https://ak-interactive.com/product/nato-black-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nato Brown|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11359.jpg
       sku: AK11359
       sourceUrl: https://ak-interactive.com/product/nato-brown-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nato Green|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11358.jpg
       sku: AK11358
       sourceUrl: https://ak-interactive.com/product/nato-green-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Natural Steel|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11210.jpg
       sku: AK11210
       sourceUrl: https://ak-interactive.com/product/natural-steel-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Neutral Grey 43|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11862.jpg
       sku: AK11862
       sourceUrl: https://ak-interactive.com/product/neutral-grey-43-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Neutral Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11018.jpg
       sku: AK11018
       sourceUrl: https://ak-interactive.com/product/neutral-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     New Iraqi Army Sand|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11361.jpg
       sku: AK11361
       sourceUrl: https://ak-interactive.com/product/new-iraqi-army-sand-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nº1 Light Green (fs34151)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11335.jpg
       sku: AK11335
       sourceUrl: https://ak-interactive.com/product/no1-light-green-fs34151-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nº13 Desert Sand (fs30279)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11340.jpg
       sku: AK11340
       sourceUrl: https://ak-interactive.com/product/no13-desert-sand-fs30279-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nº5 Earth Brown (fs30099)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11336.jpg
       sku: AK11336
       sourceUrl: https://ak-interactive.com/product/no5-earth-brown-fs30099-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nº6 Earth Yellow (fs30257)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11337.jpg
       sku: AK11337
       sourceUrl: https://ak-interactive.com/product/no6-earth-yellow-fs30257-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nº8 Earth Red (fs30117)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11338.jpg
       sku: AK11338
       sourceUrl: https://ak-interactive.com/product/no8-earth-red-fs30117-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Nº9 Olive Drab (fs33070)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11339.jpg
       sku: AK11339
       sourceUrl: https://ak-interactive.com/product/no9-olive-drab-fs33070-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ocean Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11173.jpg
       sku: AK11173
       sourceUrl: https://ak-interactive.com/product/ocean-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ocean Gray (fs35164)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11341.jpg
       sku: AK11341
       sourceUrl: https://ak-interactive.com/product/ocean-gray-fs35164-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ocher Khaki|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11422.jpg
       sku: AK11422
       sourceUrl: https://ak-interactive.com/product/ocher-khaki-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ocher Orange|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11099.jpg
       sku: AK11099
       sourceUrl: https://ak-interactive.com/product/ocher-orange-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ochre|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11118.jpg
       sku: AK11118
       sourceUrl: https://ak-interactive.com/product/ochre-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Offwhite|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11002.jpg
       sku: AK11002
       sourceUrl: https://ak-interactive.com/product/offwhite-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Oily Steel|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11211.jpg
       sku: AK11211
       sourceUrl: https://ak-interactive.com/product/oily-steel-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Old Gold|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11192.jpg
       sku: AK11192
       sourceUrl: https://ak-interactive.com/product/old-gold-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Old Rose|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11062.jpg
       sku: AK11062
       sourceUrl: https://ak-interactive.com/product/old-rose-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Olive Drab Base|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11334.jpg
       sku: AK11334
       sourceUrl: https://ak-interactive.com/product/olive-drab-base-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Olive Drab Surface Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2021/06/AK11249-1.jpg
       sku: AK11249
       sourceUrl: https://ak-interactive.com/product/olive-drab-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Olive Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11147.jpg
       sku: AK11147
       sourceUrl: https://ak-interactive.com/product/olive-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Orange Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11101.jpg
       sku: AK11101
       sourceUrl: https://ak-interactive.com/product/orange-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Orange Tan|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11409.jpg
       sku: AK11409
       sourceUrl: https://ak-interactive.com/product/orange-tan-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Oxford|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11188.jpg
       sku: AK11188
       sourceUrl: https://ak-interactive.com/product/oxford-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pale Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11161.jpg
       sku: AK11161
       sourceUrl: https://ak-interactive.com/product/pale-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pale Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11013.jpg
       sku: AK11013
       sourceUrl: https://ak-interactive.com/product/pale-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pale Sand|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11032.jpg
       sku: AK11032
       sourceUrl: https://ak-interactive.com/product/pale-sand-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pale Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11038.jpg
       sku: AK11038
       sourceUrl: https://ak-interactive.com/product/pale-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pastel Blue|Pastel (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11168.jpg
       sku: AK11168
       sourceUrl: https://ak-interactive.com/product/pastel-blue-pastel/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pastel Green|Pastel (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11131.jpg
       sku: AK11131
       sourceUrl: https://ak-interactive.com/product/pastel-green-pastel/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pastel Peach|Pastel (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11076.jpg
       sku: AK11076
       sourceUrl: https://ak-interactive.com/product/pastel-peach-pastel/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pastel Pink|Pastel (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11059.jpg
       sku: AK11059
       sourceUrl: https://ak-interactive.com/product/pastel-pink-pastel/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pastel Violet|Pastel (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2023/01/AK11069.jpg
       sku: AK11069
       sourceUrl: https://ak-interactive.com/product/pastel-violet-pastel/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pastel Yellow|Pastel (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11037.jpg
       sku: AK11037
       sourceUrl: https://ak-interactive.com/product/pastel-yellow-pastel/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pc10 Late|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11809.jpg
       sku: AK11809
       sourceUrl: https://ak-interactive.com/product/pc10-late-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pc12|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11810.jpg
       sku: AK11810
       sourceUrl: https://ak-interactive.com/product/pc12-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pearl|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11206.jpg
       sku: AK11206
       sourceUrl: https://ak-interactive.com/product/pearl-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Pistachio|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11130.jpg
       sku: AK11130
       sourceUrl: https://ak-interactive.com/product/pistachio-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Portland Stone No.64|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11378.jpg
       sku: AK11378
       sourceUrl: https://ak-interactive.com/product/portland-stone-no-64-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Protective Green 1920s-1930s|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11371.jpg
       sku: AK11371
       sourceUrl: https://ak-interactive.com/product/protective-green-1920s-1930s-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Purulent Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11039.jpg
       sku: AK11039
       sourceUrl: https://ak-interactive.com/product/purulent-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Radiant Flesh|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11053.jpg
       sku: AK11053
       sourceUrl: https://ak-interactive.com/product/radiant-flesh-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Radiant Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11046.jpg
       sku: AK11046
       sourceUrl: https://ak-interactive.com/product/radiant-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Radome &amp; Wheel Hub Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11919.jpg
       sku: AK11919
       sourceUrl: https://ak-interactive.com/product/radome-wheel-hub-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Radome Tan Fs 33613|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11870.jpg
       sku: AK11870
       sourceUrl: https://ak-interactive.com/product/radome-tan-fs-33613-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Azure Blue|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11845.jpg
       sku: AK11845
       sourceUrl: https://ak-interactive.com/product/raf-azure-blue-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Camouflage (barley) Grey Bs381c/626|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11854.jpg
       sku: AK11854
       sourceUrl: https://ak-interactive.com/product/raf-camouflage-barley-grey-bs381c-626-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Camouflage Beige (hemp) Bs381c/389|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11856.jpg
       sku: AK11856
       sourceUrl: https://ak-interactive.com/product/raf-camouflage-beige-hemp-bs381c-389-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Cockpit Grey-green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11847.jpg
       sku: AK11847
       sourceUrl: https://ak-interactive.com/product/raf-cockpit-grey-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Dark Camouflage Grey Bs381c/629|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11855.jpg
       sku: AK11855
       sourceUrl: https://ak-interactive.com/product/raf-dark-camouflage-grey-bs381c-629-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Dark Earth|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11841.jpg
       sku: AK11841
       sourceUrl: https://ak-interactive.com/product/raf-dark-earth-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Dark Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11840.jpg
       sku: AK11840
       sourceUrl: https://ak-interactive.com/product/raf-dark-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Dark Sea Grey Bs381c/638|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11851.jpg
       sku: AK11851
       sourceUrl: https://ak-interactive.com/product/raf-dark-sea-grey-bs381c-638-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Dark Slate Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11849.jpg
       sku: AK11849
       sourceUrl: https://ak-interactive.com/product/raf-dark-slate-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Extra Dark Sea Grey Bs381c/640|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11850.jpg
       sku: AK11850
       sourceUrl: https://ak-interactive.com/product/raf-extra-dark-sea-grey-bs381c-640-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Light Aircraft Grey Bs381c/627|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11853.jpg
       sku: AK11853
       sourceUrl: https://ak-interactive.com/product/raf-light-aircraft-grey-bs381c-627-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Medium Sea Grey Bs381c/637|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11843.jpg
       sku: AK11843
       sourceUrl: https://ak-interactive.com/product/raf-medium-sea-grey-bs381c-637-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Middle Stone|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11846.jpg
       sku: AK11846
       sourceUrl: https://ak-interactive.com/product/raf-middle-stone-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Ocean Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11842.jpg
       sku: AK11842
       sourceUrl: https://ak-interactive.com/product/raf-ocean-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Pru Blue Bs381c/636|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11852.jpg
       sku: AK11852
       sourceUrl: https://ak-interactive.com/product/raf-pru-blue-bs381c-636-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Sky / Fs 34424|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11844.jpg
       sku: AK11844
       sourceUrl: https://ak-interactive.com/product/raf-sky-fs-34424-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Raf Sky Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11848.jpg
       sku: AK11848
       sourceUrl: https://ak-interactive.com/product/raf-sky-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 1039 F9 Sandbeige|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11325.jpg
       sku: AK11325
       sourceUrl: https://ak-interactive.com/product/ral-1039-f9-sandbeige-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 6003 Olivgrün Opt.1|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11309.jpg
       sku: AK11309
       sourceUrl: https://ak-interactive.com/product/ral-6003-olivgrun-opt-1-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 6003 Olivgrün Opt.2|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11310.jpg
       sku: AK11310
       sourceUrl: https://ak-interactive.com/product/ral-6003-olivgrun-opt-2-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 6007 Grün|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11308.jpg
       sku: AK11308
       sourceUrl: https://ak-interactive.com/product/ral-6007-grun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 6011 Resedagrün|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11311.jpg
       sku: AK11311
       sourceUrl: https://ak-interactive.com/product/ral-6011-resedagrun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 6011b Resedagrün|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11312.jpg
       sku: AK11312
       sourceUrl: https://ak-interactive.com/product/ral-6011b-resedagrun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 6040 F9 Helloliv|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11323.jpg
       sku: AK11323
       sourceUrl: https://ak-interactive.com/product/ral-6040-f9-helloliv-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7008 Graugrün Opt 2|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11314.jpg
       sku: AK11314
       sourceUrl: https://ak-interactive.com/product/ral-7008-graugrun-opt-2-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7008 Graugrün|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11313.jpg
       sku: AK11313
       sourceUrl: https://ak-interactive.com/product/ral-7008-graugrun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7009 Hellgrau|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11307.jpg
       sku: AK11307
       sourceUrl: https://ak-interactive.com/product/ral-7009-hellgrau-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7017 Dunkelbraun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11315.jpg
       sku: AK11315
       sourceUrl: https://ak-interactive.com/product/ral-7017-dunkelbraun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7021 Dunkelgrau|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11316.jpg
       sku: AK11316
       sourceUrl: https://ak-interactive.com/product/ral-7021-dunkelgrau-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7027 Grau|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11317.jpg
       sku: AK11317
       sourceUrl: https://ak-interactive.com/product/ral-7027-grau-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7028 Dunkelgelb (initial)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11318.jpg
       sku: AK11318
       sourceUrl: https://ak-interactive.com/product/ral-7028-dunkelgelb-initial-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7028 Dunkelgelb (variant)|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11320.jpg
       sku: AK11320
       sourceUrl: https://ak-interactive.com/product/ral-7028-dunkelgelb-variant-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 7028 Dunkelgelb Ausgabe 1944|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11319.jpg
       sku: AK11319
       sourceUrl: https://ak-interactive.com/product/ral-7028-dunkelgelb-ausgabe-1944-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 8000 Gelbbraun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11327.jpg
       sku: AK11327
       sourceUrl: https://ak-interactive.com/product/ral-8000-gelbbraun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 8012 Rotbraun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11328.jpg
       sku: AK11328
       sourceUrl: https://ak-interactive.com/product/ral-8012-rotbraun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 8013 Rotbraun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11329.jpg
       sku: AK11329
       sourceUrl: https://ak-interactive.com/product/ral-8013-rotbraun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 8017 Rotbraun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11330.jpg
       sku: AK11330
       sourceUrl: https://ak-interactive.com/product/ral-8017-rotbraun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 8020 Braun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11331.jpg
       sku: AK11331
       sourceUrl: https://ak-interactive.com/product/ral-8020-braun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ral 8031 F9 Sandbraun|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11326.jpg
       sku: AK11326
       sourceUrl: https://ak-interactive.com/product/ral-8031-f9-sandbraun-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Red Brown|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11434.jpg
       sku: AK11434
       sourceUrl: https://ak-interactive.com/product/red-brown-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Reddish Black|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11406.jpg
       sku: AK11406
       sourceUrl: https://ak-interactive.com/product/reddish-black-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Reddish Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11017.jpg
       sku: AK11017
       sourceUrl: https://ak-interactive.com/product/reddish-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Reflective Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11158.jpg
       sku: AK11158
       sourceUrl: https://ak-interactive.com/product/reflective-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Retarder|Auxiliary (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11231.jpg
       sku: AK11231
       sourceUrl: https://ak-interactive.com/product/retarder-auxiliary/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 02 Rlm-grau (1938)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11811.jpg
       sku: AK11811
       sourceUrl: https://ak-interactive.com/product/rlm-02-rlm-grau-1938-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 02 Rlm-grau (1941)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11812.jpg
       sku: AK11812
       sourceUrl: https://ak-interactive.com/product/rlm-02-rlm-grau-1941-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 04|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11813.jpg
       sku: AK11813
       sourceUrl: https://ak-interactive.com/product/rlm-04-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 61|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11814.jpg
       sku: AK11814
       sourceUrl: https://ak-interactive.com/product/rlm-61-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 62|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11815.jpg
       sku: AK11815
       sourceUrl: https://ak-interactive.com/product/rlm-62-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 63|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11816.jpg
       sku: AK11816
       sourceUrl: https://ak-interactive.com/product/rlm-63-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 65 (1938)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11817.jpg
       sku: AK11817
       sourceUrl: https://ak-interactive.com/product/rlm-65-1938-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 65 (1941)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11818.jpg
       sku: AK11818
       sourceUrl: https://ak-interactive.com/product/rlm-65-1941-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 66 (1938)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11819.jpg
       sku: AK11819
       sourceUrl: https://ak-interactive.com/product/rlm-66-1938-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 66 (1941)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11820.jpg
       sku: AK11820
       sourceUrl: https://ak-interactive.com/product/rlm-66-1941-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 70|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11821.jpg
       sku: AK11821
       sourceUrl: https://ak-interactive.com/product/rlm-70-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 71|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11822.jpg
       sku: AK11822
       sourceUrl: https://ak-interactive.com/product/rlm-71-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 72|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11823.jpg
       sku: AK11823
       sourceUrl: https://ak-interactive.com/product/rlm-72-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 73|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11824.jpg
       sku: AK11824
       sourceUrl: https://ak-interactive.com/product/rlm-73-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 74|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11825.jpg
       sku: AK11825
       sourceUrl: https://ak-interactive.com/product/rlm-74-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 75|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11826.jpg
       sku: AK11826
       sourceUrl: https://ak-interactive.com/product/rlm-75-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 76 Late War Variation|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11829.jpg
       sku: AK11829
       sourceUrl: https://ak-interactive.com/product/rlm-76-late-war-variation-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 76 Version 1|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11827.jpg
       sku: AK11827
       sourceUrl: https://ak-interactive.com/product/rlm-76-version-1-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 76 Version 2|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11828.jpg
       sku: AK11828
       sourceUrl: https://ak-interactive.com/product/rlm-76-version-2-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 78 (1941)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11830.jpg
       sku: AK11830
       sourceUrl: https://ak-interactive.com/product/rlm-78-1941-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 78 (1942)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11831.jpg
       sku: AK11831
       sourceUrl: https://ak-interactive.com/product/rlm-78-1942-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 79 (1941)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11832.jpg
       sku: AK11832
       sourceUrl: https://ak-interactive.com/product/rlm-79-1941-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 79 (1942)|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11833.jpg
       sku: AK11833
       sourceUrl: https://ak-interactive.com/product/rlm-79-1942-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 80|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11834.jpg
       sku: AK11834
       sourceUrl: https://ak-interactive.com/product/rlm-80-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 81 Version 1|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11835.jpg
       sku: AK11835
       sourceUrl: https://ak-interactive.com/product/rlm-81-version-1-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 81 Version 2|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11836.jpg
       sku: AK11836
       sourceUrl: https://ak-interactive.com/product/rlm-81-version-2-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 81 Version 3|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11837.jpg
       sku: AK11837
       sourceUrl: https://ak-interactive.com/product/rlm-81-version-3-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 82|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11838.jpg
       sku: AK11838
       sourceUrl: https://ak-interactive.com/product/rlm-82-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rlm 83|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11839.jpg
       sku: AK11839
       sourceUrl: https://ak-interactive.com/product/rlm-83-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rock Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11007.jpg
       sku: AK11007
       sourceUrl: https://ak-interactive.com/product/rock-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rubber Black|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11027.jpg
       sku: AK11027
       sourceUrl: https://ak-interactive.com/product/rubber-black-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ruby|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11084.jpg
       sku: AK11084
       sourceUrl: https://ak-interactive.com/product/ruby-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Blue Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11432.jpg
       sku: AK11432
       sourceUrl: https://ak-interactive.com/product/russian-blue-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Blue Lights|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11431.jpg
       sku: AK11431
       sourceUrl: https://ak-interactive.com/product/russian-blue-lights-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Dark Brown 6k|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11369.jpg
       sku: AK11369
       sourceUrl: https://ak-interactive.com/product/russian-dark-brown-6k-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Green 4bo|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11368.jpg
       sku: AK11368
       sourceUrl: https://ak-interactive.com/product/russian-green-4bo-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Green Surface Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK11246.jpg
       sku: AK11246
       sourceUrl: https://ak-interactive.com/product/russian-green-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Russian Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11159.jpg
       sku: AK11159
       sourceUrl: https://ak-interactive.com/product/russian-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Sand 7|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11370.jpg
       sku: AK11370
       sourceUrl: https://ak-interactive.com/product/russian-sand-7-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Uniform Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11430.jpg
       sku: AK11430
       sourceUrl: https://ak-interactive.com/product/russian-uniform-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Russian Uniform Lights|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11429.jpg
       sku: AK11429
       sourceUrl: https://ak-interactive.com/product/russian-uniform-lights-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rust Surface Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2021/06/AK11250-1.jpg
       sku: AK11250
       sourceUrl: https://ak-interactive.com/product/rust-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Rusty Brass|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11195.jpg
       sku: AK11195
       sourceUrl: https://ak-interactive.com/product/rusty-brass-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Rusty Gold|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11193.jpg
       sku: AK11193
       sourceUrl: https://ak-interactive.com/product/rusty-gold-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     S.c.c. No.15 Olive Drab|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11386.jpg
       sku: AK11386
       sourceUrl: https://ak-interactive.com/product/s-c-c-no-15-olive-drab-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     S.c.c. No.1a Very Dark Brown|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11384.jpg
       sku: AK11384
       sourceUrl: https://ak-interactive.com/product/s-c-c-no-1a-very-dark-brown-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     S.c.c. No.2 Brown|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11385.jpg
       sku: AK11385
       sourceUrl: https://ak-interactive.com/product/s-c-c-no-2-brown-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Saddle Brown|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11104.jpg
       sku: AK11104
       sourceUrl: https://ak-interactive.com/product/saddle-brown-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sahara Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11040.jpg
       sku: AK11040
       sourceUrl: https://ak-interactive.com/product/sahara-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Salmon|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11061.jpg
       sku: AK11061
       sourceUrl: https://ak-interactive.com/product/salmon-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sand Fs 33531|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11869.jpg
       sku: AK11869
       sourceUrl: https://ak-interactive.com/product/sand-fs-33531-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sand Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11035.jpg
       sku: AK11035
       sourceUrl: https://ak-interactive.com/product/sand-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Scarlet Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11087.jpg
       sku: AK11087
       sourceUrl: https://ak-interactive.com/product/scarlet-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Shadow Flesh|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11404.jpg
       sku: AK11404
       sourceUrl: https://ak-interactive.com/product/shadow-flesh-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sickly Pink|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11060.jpg
       sku: AK11060
       sourceUrl: https://ak-interactive.com/product/sickly-pink-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Silver Grey No.28|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11374.jpg
       sku: AK11374
       sourceUrl: https://ak-interactive.com/product/silver-grey-no-28-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Silver Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11006.jpg
       sku: AK11006
       sourceUrl: https://ak-interactive.com/product/silver-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Silver|Metallic (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11209.jpg
       sku: AK11209
       sourceUrl: https://ak-interactive.com/product/silver-metallic/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sky Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11175.jpg
       sku: AK11175
       sourceUrl: https://ak-interactive.com/product/sky-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sky Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11012.jpg
       sku: AK11012
       sourceUrl: https://ak-interactive.com/product/sky-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sla Blue|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11356.jpg
       sku: AK11356
       sourceUrl: https://ak-interactive.com/product/sla-blue-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Slate No.34|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11375.jpg
       sku: AK11375
       sourceUrl: https://ak-interactive.com/product/slate-no-34-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Smoke Black|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11028.jpg
       sku: AK11028
       sourceUrl: https://ak-interactive.com/product/smoke-black-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Snow Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11174.jpg
       sku: AK11174
       sourceUrl: https://ak-interactive.com/product/snow-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Spectrum Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11162.jpg
       sku: AK11162
       sourceUrl: https://ak-interactive.com/product/spectrum-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Splittermuster Base|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11414.jpg
       sku: AK11414
       sourceUrl: https://ak-interactive.com/product/splittermuster-base-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Splittermuster Green Spots|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11415.jpg
       sku: AK11415
       sourceUrl: https://ak-interactive.com/product/splittermuster-green-spots-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Star Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11185.jpg
       sku: AK11185
       sourceUrl: https://ak-interactive.com/product/star-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Strong Dark Blue|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11187.jpg
       sku: AK11187
       sourceUrl: https://ak-interactive.com/product/strong-dark-blue-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Sunny Skin Tone|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11055.jpg
       sku: AK11055
       sourceUrl: https://ak-interactive.com/product/sunny-skin-tone-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Tan Earth|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11121.jpg
       sku: AK11121
       sourceUrl: https://ak-interactive.com/product/tan-earth-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Tan Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11116.jpg
       sku: AK11116
       sourceUrl: https://ak-interactive.com/product/tan-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Tenebrous Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11026.jpg
       sku: AK11026
       sourceUrl: https://ak-interactive.com/product/tenebrous-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Tracks Surface Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2021/06/AK11251-1.jpg
       sku: AK11251
       sourceUrl: https://ak-interactive.com/product/tracks-surface-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     Turquoise|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11171.jpg
       sku: AK11171
       sourceUrl: https://ak-interactive.com/product/turquoise-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Ultramarine|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11179.jpg
       sku: AK11179
       sourceUrl: https://ak-interactive.com/product/ultramarine-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Us Army Helo Drab Fs 34031|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11872.jpg
       sku: AK11872
       sourceUrl: https://ak-interactive.com/product/us-army-helo-drab-fs-34031-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Us Dark Green|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11157.jpg
       sku: AK11157
       sourceUrl: https://ak-interactive.com/product/us-dark-green-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Us Interior Yellow Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11859.jpg
       sku: AK11859
       sourceUrl: https://ak-interactive.com/product/us-interior-yellow-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Us Olive Base Uniform|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11433.jpg
       sku: AK11433
       sourceUrl: https://ak-interactive.com/product/us-olive-base-uniform-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Usmc Green Fs 34095|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11874.jpg
       sku: AK11874
       sourceUrl: https://ak-interactive.com/product/usmc-green-fs-34095-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Usmc Sand Fs 33711|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11871.jpg
       sku: AK11871
       sourceUrl: https://ak-interactive.com/product/usmc-sand-fs-33711-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Vampiric Flesh|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11057.jpg
       sku: AK11057
       sourceUrl: https://ak-interactive.com/product/vampiric-flesh-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Varnish Gloss|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2020/06/AK11239_web.jpg
       sku: AK11239
       sourceUrl: https://ak-interactive.com/product/varnish-gloss-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.57
     Varnish Matt|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2020/06/AK11237_web.jpg
       sku: AK11237
       sourceUrl: https://ak-interactive.com/product/varnish-matt-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.57
     Varnish Satin|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2020/06/AK11238_web.jpg
       sku: AK11238
       sourceUrl: https://ak-interactive.com/product/varnish-satin-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.57
     Vermillion|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11090.jpg
       sku: AK11090
       sourceUrl: https://ak-interactive.com/product/vermillion-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Violet Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11075.jpg
       sku: AK11075
       sourceUrl: https://ak-interactive.com/product/violet-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Volcanic Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11042.jpg
       sku: AK11042
       sourceUrl: https://ak-interactive.com/product/volcanic-yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Waffen Brown Grey|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11416.jpg
       sku: AK11416
       sourceUrl: https://ak-interactive.com/product/waffen-brown-grey-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Waffen Brown|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11417.jpg
       sku: AK11417
       sourceUrl: https://ak-interactive.com/product/waffen-brown-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Waffen Green|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11420.jpg
       sku: AK11420
       sourceUrl: https://ak-interactive.com/product/waffen-green-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Waffen Red Brown|Figures (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11419.jpg
       sku: AK11419
       sourceUrl: https://ak-interactive.com/product/waffen-red-brown-figures/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Warm Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11009.jpg
       sku: AK11009
       sourceUrl: https://ak-interactive.com/product/warm-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Washable White Paint|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11372.jpg
       sku: AK11372
       sourceUrl: https://ak-interactive.com/product/washable-white-paint-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     White Grey|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11003.jpg
       sku: AK11003
       sourceUrl: https://ak-interactive.com/product/white-grey-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     White Primer|Primer (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2019/01/AK11240.jpg
       sku: AK11240
       sourceUrl: https://ak-interactive.com/product/white-primer-100ml/
       source: mfr-ak-interactive
+      priceEur: 6.2
     White|Intense (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11001.jpg
       sku: AK11001
       sourceUrl: https://ak-interactive.com/product/white-intense/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wine Red|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11096.jpg
       sku: AK11096
       sourceUrl: https://ak-interactive.com/product/wine-red-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wood Base|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11351.jpg
       sku: AK11351
       sourceUrl: https://ak-interactive.com/product/wood-base-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi British Khaki Brown Base|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11301.jpg
       sku: AK11301
       sourceUrl: https://ak-interactive.com/product/wwi-british-khaki-brown-base-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi French Artillery Grey|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11303.jpg
       sku: AK11303
       sourceUrl: https://ak-interactive.com/product/wwi-french-artillery-grey-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi French Brown|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11304.jpg
       sku: AK11304
       sourceUrl: https://ak-interactive.com/product/wwi-french-brown-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi French Green 1|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11305.jpg
       sku: AK11305
       sourceUrl: https://ak-interactive.com/product/wwi-french-green-1-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi French Green 2|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11306.jpg
       sku: AK11306
       sourceUrl: https://ak-interactive.com/product/wwi-french-green-2-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi French Milky Coffee|AFV (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11302.jpg
       sku: AK11302
       sourceUrl: https://ak-interactive.com/product/wwi-french-milky-coffee-afv/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Dark Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11803.jpg
       sku: AK11803
       sourceUrl: https://ak-interactive.com/product/wwi-german-dark-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Fokker Grey|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11801.jpg
       sku: AK11801
       sourceUrl: https://ak-interactive.com/product/wwi-german-fokker-grey-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Grey-green Primer|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11808.jpg
       sku: AK11808
       sourceUrl: https://ak-interactive.com/product/wwi-german-grey-green-primer-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Light Blue|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11806.jpg
       sku: AK11806
       sourceUrl: https://ak-interactive.com/product/wwi-german-light-blue-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Light Green|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11802.jpg
       sku: AK11802
       sourceUrl: https://ak-interactive.com/product/wwi-german-light-green-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Lilac|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11807.jpg
       sku: AK11807
       sourceUrl: https://ak-interactive.com/product/wwi-german-lilac-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Mauve|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11804.jpg
       sku: AK11804
       sourceUrl: https://ak-interactive.com/product/wwi-german-mauve-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Wwi German Red Brown|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11805.jpg
       sku: AK11805
       sourceUrl: https://ak-interactive.com/product/wwi-german-red-brown-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Yellow|Standard (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11044.jpg
       sku: AK11044
       sourceUrl: https://ak-interactive.com/product/yellow-standard/
       source: mfr-ak-interactive
+      priceEur: 2.27
     Zinc Chromate Yellow|Air (3rd Gen):
       imageUrl: https://ak-interactive.com/wp-content/uploads/2026/04/AK11858.jpg
       sku: AK11858
       sourceUrl: https://ak-interactive.com/product/zinc-chromate-yellow-air/
       source: mfr-ak-interactive
+      priceEur: 2.27
   additions:
   - name: Black Night
     set: Acrylic Wash
@@ -2376,834 +2851,973 @@ ak-interactive:
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19303.jpg
     sourceUrl: https://ak-interactive.com/product/black-night-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Blue Moon
     set: Acrylic Wash
     productCode: AK19307
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19307.jpg
     sourceUrl: https://ak-interactive.com/product/blue-moon-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Carmine Dawn
     set: Acrylic Wash
     productCode: AK19308
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19308.jpg
     sourceUrl: https://ak-interactive.com/product/carmine-dawn-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Crimson Veil
     set: Acrylic Wash
     productCode: AK19310
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19310.jpg
     sourceUrl: https://ak-interactive.com/product/crimson-veil-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dark Grey
     set: Acrylic Wash
     productCode: AK19314
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19314.jpg
     sourceUrl: https://ak-interactive.com/product/dark-grey-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dirtveil
     set: Acrylic Wash
     productCode: AK19317
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19317.jpg
     sourceUrl: https://ak-interactive.com/product/dirtveil-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Green
     set: Acrylic Wash
     productCode: AK19312
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19312.jpg
     sourceUrl: https://ak-interactive.com/product/green-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Hazel Brown
     set: Acrylic Wash
     productCode: AK19306
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19306.jpg
     sourceUrl: https://ak-interactive.com/product/hazel-brown-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Invocation Purple
     set: Acrylic Wash
     productCode: AK19309
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19309.jpg
     sourceUrl: https://ak-interactive.com/product/invocation-purple-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Light Rust
     set: Acrylic Wash
     productCode: AK19316
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19316.jpg
     sourceUrl: https://ak-interactive.com/product/light-rust-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Obsidian Holt
     set: Acrylic Wash
     productCode: AK19302
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19302-WEB.jpg
     sourceUrl: https://ak-interactive.com/product/obsidian-holt-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Pure Grime
     set: Acrylic Wash
     productCode: AK19304
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19304.jpg
     sourceUrl: https://ak-interactive.com/product/pure-grime-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Putrid Green
     set: Acrylic Wash
     productCode: AK19311
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK1931.jpg
     sourceUrl: https://ak-interactive.com/product/putrid-green-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Rotwood Brown
     set: Acrylic Wash
     productCode: AK19301
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19301-1.jpg
     sourceUrl: https://ak-interactive.com/product/rotwood-brown-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Sepia Filth
     set: Acrylic Wash
     productCode: AK19305
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19305.jpg
     sourceUrl: https://ak-interactive.com/product/sepia-filth-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Standard Rust
     set: Acrylic Wash
     productCode: AK19315
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19315.jpg
     sourceUrl: https://ak-interactive.com/product/standard-rust-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Verdigris
     set: Acrylic Wash
     productCode: AK19313
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19313.jpg
     sourceUrl: https://ak-interactive.com/product/verdigris-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Woodgrain
     set: Acrylic Wash
     productCode: AK19318
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK19318.jpg
     sourceUrl: https://ak-interactive.com/product/woodgrain-acrylic-wash/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Afro Shadow
     set: Color Punch (3rd Gen)
     productCode: AK11276
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11276.jpg
     sourceUrl: https://ak-interactive.com/product/afro-shadow-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Beast Brown
     set: Color Punch (3rd Gen)
     productCode: AK11278
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11278.jpg
     sourceUrl: https://ak-interactive.com/product/beast-brown-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Black Purple
     set: Color Punch (3rd Gen)
     productCode: AK11270
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11270.jpg
     sourceUrl: https://ak-interactive.com/product/black-purple-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Cold Green
     set: Color Punch (3rd Gen)
     productCode: AK11273
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11273.jpg
     sourceUrl: https://ak-interactive.com/product/cold-green-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Dragon Blood
     set: Color Punch (3rd Gen)
     productCode: AK11272
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11272.jpg
     sourceUrl: https://ak-interactive.com/product/dragon-blood-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Greenskin Punch
     set: Color Punch (3rd Gen)
     productCode: AK11274
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11274.jpg
     sourceUrl: https://ak-interactive.com/product/greenskin-punch-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: King Purple
     set: Color Punch (3rd Gen)
     productCode: AK11271
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11271.jpg
     sourceUrl: https://ak-interactive.com/product/king-purple-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Russet Shadow
     set: Color Punch (3rd Gen)
     productCode: AK11277
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11277.jpg
     sourceUrl: https://ak-interactive.com/product/russet-shadow-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Slime Green
     set: Color Punch (3rd Gen)
     productCode: AK11275
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11275.jpg
     sourceUrl: https://ak-interactive.com/product/slime-green-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Sun Red
     set: Color Punch (3rd Gen)
     productCode: AK11279
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11279.jpg
     sourceUrl: https://ak-interactive.com/product/sun-red-color-punch/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Black
     set: Inks
     productCode: AK16005
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16005-2.jpg
     sourceUrl: https://ak-interactive.com/product/black-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Blood Scarlet
     set: Inks
     productCode: AK16009
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16009-2.jpg
     sourceUrl: https://ak-interactive.com/product/blood-scarlet-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Brown Black
     set: Inks
     productCode: AK16011
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16011-2.jpg
     sourceUrl: https://ak-interactive.com/product/brown-black-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Camo Green
     set: Inks
     productCode: AK16007
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16007-2.jpg
     sourceUrl: https://ak-interactive.com/product/camo-green-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Crimson
     set: Inks
     productCode: AK16048
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16048.jpg
     sourceUrl: https://ak-interactive.com/product/crimson-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Cyan
     set: Inks
     productCode: AK16054
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16054.jpg
     sourceUrl: https://ak-interactive.com/product/cyan-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Deep Blue
     set: Inks
     productCode: AK16002
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16002-2.jpg
     sourceUrl: https://ak-interactive.com/product/deep-blue-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Eggplant
     set: Inks
     productCode: AK16052
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16052.jpg
     sourceUrl: https://ak-interactive.com/product/eggplant-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fire Orange
     set: Inks
     productCode: AK16012
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK16012.jpg
     sourceUrl: https://ak-interactive.com/product/fire-orange-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fluor Blue
     set: Inks
     productCode: AK16046
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16046.jpg
     sourceUrl: https://ak-interactive.com/product/fluor-blue-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fluor Green
     set: Inks
     productCode: AK16045
     imageUrl: https://ak-interactive.com/wp-content/uploads/2025/11/AK16045.jpg
     sourceUrl: https://ak-interactive.com/product/fluor-green-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fluor Magenta
     set: Inks
     productCode: AK16041
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16041.jpg
     sourceUrl: https://ak-interactive.com/product/fluor-magenta-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fluor Orange
     set: Inks
     productCode: AK16043
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16043.jpg
     sourceUrl: https://ak-interactive.com/product/fluor-orange-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fluor Red
     set: Inks
     productCode: AK16042
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16042.jpg
     sourceUrl: https://ak-interactive.com/product/fluor-red-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Fluor Yellow
     set: Inks
     productCode: AK16044
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16044.jpg
     sourceUrl: https://ak-interactive.com/product/fluor-yellow-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Forge Red
     set: Inks
     productCode: AK16051
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16051.jpg
     sourceUrl: https://ak-interactive.com/product/forge-red-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Inmaculate White
     set: Inks
     productCode: AK16013
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16013-2.jpg
     sourceUrl: https://ak-interactive.com/product/inmaculate-white-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Intense Sienna
     set: Inks
     productCode: AK16010
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16010-2.jpg
     sourceUrl: https://ak-interactive.com/product/intense-sienna-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Light Wood
     set: Inks
     productCode: AK16053
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16053.jpg
     sourceUrl: https://ak-interactive.com/product/light-wood-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Lime Green
     set: Inks
     productCode: AK16049
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16049.jpg
     sourceUrl: https://ak-interactive.com/product/lime-green-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Mahogani
     set: Inks
     productCode: AK16047
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16047.jpg
     sourceUrl: https://ak-interactive.com/product/mahogani-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Nature Green
     set: Inks
     productCode: AK16008
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16008-2.jpg
     sourceUrl: https://ak-interactive.com/product/nature-green-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Night Purple
     set: Inks
     productCode: AK16004
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16004-2.jpg
     sourceUrl: https://ak-interactive.com/product/night-purple-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Ocean Blue
     set: Inks
     productCode: AK16014
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16014-2.jpg
     sourceUrl: https://ak-interactive.com/product/ocean-blue-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Primary Yellow
     set: Inks
     productCode: AK16006
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16006-2.jpg
     sourceUrl: https://ak-interactive.com/product/primary-yellow-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Pure Magenta
     set: Inks
     productCode: AK16003
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16003-2.jpg
     sourceUrl: https://ak-interactive.com/product/pure-magenta-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Toad Green
     set: Inks
     productCode: AK16050
     imageUrl: https://ak-interactive.com/wp-content/uploads/2024/12/AK16050.jpg
     sourceUrl: https://ak-interactive.com/product/toad-green-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Wood Brown
     set: Inks
     productCode: AK16001
     imageUrl: https://ak-interactive.com/wp-content/uploads/2023/11/AK16001-2.jpg
     sourceUrl: https://ak-interactive.com/product/wood-brown-ink/
     source: mfr-ak-interactive
+    priceEur: 4.09
   - name: Metallic Green
     set: Metallic (3rd Gen)
     productCode: AK11205
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11205.jpg
     sourceUrl: https://ak-interactive.com/product/metallic-green-metallic/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Bile Yellow
     set: Quick Gen
     productCode: AK17008
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17008.jpg
     sourceUrl: https://ak-interactive.com/product/bile-yellow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Black
     set: Quick Gen
     productCode: AK17049
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17049.jpg
     sourceUrl: https://ak-interactive.com/product/black-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Blue Black
     set: Quick Gen
     productCode: AK17051
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17051.jpg
     sourceUrl: https://ak-interactive.com/product/blue-black-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Bluish Grey
     set: Quick Gen
     productCode: AK17042
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17042.jpg
     sourceUrl: https://ak-interactive.com/product/bluish-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Bone Brown
     set: Quick Gen
     productCode: AK17058
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17058.jpg
     sourceUrl: https://ak-interactive.com/product/bone-brown-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: British Uniform
     set: Quick Gen
     productCode: AK17076
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17076.jpg
     sourceUrl: https://ak-interactive.com/product/british-uniform-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Bronze
     set: Quick Gen
     productCode: AK17069
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17069.jpg
     sourceUrl: https://ak-interactive.com/product/bronze-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Brown Black
     set: Quick Gen
     productCode: AK17047
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17047.jpg
     sourceUrl: https://ak-interactive.com/product/brown-black-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Camel Brown
     set: Quick Gen
     productCode: AK17059
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17059.jpg
     sourceUrl: https://ak-interactive.com/product/camel-brown-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Cold Steel
     set: Quick Gen
     productCode: AK17070
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17070.jpg
     sourceUrl: https://ak-interactive.com/product/cold-steel-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Copper
     set: Quick Gen
     productCode: AK17066
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17066.jpg
     sourceUrl: https://ak-interactive.com/product/copper-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Crimson Red
     set: Quick Gen
     productCode: AK17031
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17031.jpg
     sourceUrl: https://ak-interactive.com/product/crimson-red-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dak Green
     set: Quick Gen
     productCode: AK17073
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17073.jpg
     sourceUrl: https://ak-interactive.com/product/dak-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dark Flesh
     set: Quick Gen
     productCode: AK17061
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17061.jpg
     sourceUrl: https://ak-interactive.com/product/dark-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dark Leather
     set: Quick Gen
     productCode: AK17048
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17048.jpg
     sourceUrl: https://ak-interactive.com/product/dark-leather-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dark Steel
     set: Quick Gen
     productCode: AK17067
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17067.jpg
     sourceUrl: https://ak-interactive.com/product/dark-steel-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Demon Purple
     set: Quick Gen
     productCode: AK17006
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17006.jpg
     sourceUrl: https://ak-interactive.com/product/demon-purple-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Desert Sand
     set: Quick Gen
     productCode: AK17079
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17079.jpg
     sourceUrl: https://ak-interactive.com/product/desert-sand-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Desert Yellow
     set: Quick Gen
     productCode: AK17063
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17063.jpg
     sourceUrl: https://ak-interactive.com/product/desert-yellow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dirty Grey
     set: Quick Gen
     productCode: AK17046
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17046.jpg
     sourceUrl: https://ak-interactive.com/product/dirty-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dirty Yellow
     set: Quick Gen
     productCode: AK17007
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17007.jpg
     sourceUrl: https://ak-interactive.com/product/dirty-yellow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Dwarf Flesh
     set: Quick Gen
     productCode: AK17032
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17032.jpg
     sourceUrl: https://ak-interactive.com/product/dwarf-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Field Grey
     set: Quick Gen
     productCode: AK17072
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17072.jpg
     sourceUrl: https://ak-interactive.com/product/field-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Forest Green
     set: Quick Gen
     productCode: AK17021
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17021.jpg
     sourceUrl: https://ak-interactive.com/product/forest-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: German Grey
     set: Quick Gen
     productCode: AK17071
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17071.jpg
     sourceUrl: https://ak-interactive.com/product/german-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Gold
     set: Quick Gen
     productCode: AK17065
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17065.jpg
     sourceUrl: https://ak-interactive.com/product/gold-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Grey Shadow
     set: Quick Gen
     productCode: AK17040
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17040.jpg
     sourceUrl: https://ak-interactive.com/product/grey-shadow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Human Flesh
     set: Quick Gen
     productCode: AK17057
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17057.jpg
     sourceUrl: https://ak-interactive.com/product/human-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Ice Blue
     set: Quick Gen
     productCode: AK17024
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17024.jpg
     sourceUrl: https://ak-interactive.com/product/ice-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Infernal Red
     set: Quick Gen
     productCode: AK17037
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17037.jpg
     sourceUrl: https://ak-interactive.com/product/infernal-red-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Jade Green
     set: Quick Gen
     productCode: AK17015
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17015.jpg
     sourceUrl: https://ak-interactive.com/product/jade-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Lavender
     set: Quick Gen
     productCode: AK17004
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17004.jpg
     sourceUrl: https://ak-interactive.com/product/lavender-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Leaf Green
     set: Quick Gen
     productCode: AK17020
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17020.jpg
     sourceUrl: https://ak-interactive.com/product/leaf-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Leather
     set: Quick Gen
     productCode: AK17053
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17053.jpg
     sourceUrl: https://ak-interactive.com/product/leather-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Light Grey Shadow
     set: Quick Gen
     productCode: AK17039
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17039.jpg
     sourceUrl: https://ak-interactive.com/product/light-grey-shadow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Light Leather
     set: Quick Gen
     productCode: AK17060
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17060.jpg
     sourceUrl: https://ak-interactive.com/product/light-leather-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Light Yellow
     set: Quick Gen
     productCode: AK17014
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17014.jpg
     sourceUrl: https://ak-interactive.com/product/light-yellow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Necromancer Purple
     set: Quick Gen
     productCode: AK17005
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17005.jpg
     sourceUrl: https://ak-interactive.com/product/necromancer-purple-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Night Black
     set: Quick Gen
     productCode: AK17052
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17052.jpg
     sourceUrl: https://ak-interactive.com/product/night-black-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Night Blood
     set: Quick Gen
     productCode: AK17038
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17038.jpg
     sourceUrl: https://ak-interactive.com/product/night-blood-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Night Blue
     set: Quick Gen
     productCode: AK17025
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17025.jpg
     sourceUrl: https://ak-interactive.com/product/night-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Ochre Green
     set: Quick Gen
     productCode: AK17075
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17075.jpg
     sourceUrl: https://ak-interactive.com/product/ochre-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Old Gold
     set: Quick Gen
     productCode: AK17068
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17068.jpg
     sourceUrl: https://ak-interactive.com/product/old-gold-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Orange
     set: Quick Gen
     productCode: AK17033
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17033.jpg
     sourceUrl: https://ak-interactive.com/product/orange-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Orange Brown
     set: Quick Gen
     productCode: AK17054
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17054.jpg
     sourceUrl: https://ak-interactive.com/product/orange-brown-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Orc Flesh
     set: Quick Gen
     productCode: AK17023
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17023.jpg
     sourceUrl: https://ak-interactive.com/product/orc-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Pink Flesh
     set: Quick Gen
     productCode: AK17002
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17002.jpg
     sourceUrl: https://ak-interactive.com/product/pink-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Plague Yellow
     set: Quick Gen
     productCode: AK17013
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17013.jpg
     sourceUrl: https://ak-interactive.com/product/plague-yellow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Power Blue
     set: Quick Gen
     productCode: AK17026
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17026.jpg
     sourceUrl: https://ak-interactive.com/product/power-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Purple Flesh
     set: Quick Gen
     productCode: AK17003
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17003.jpg
     sourceUrl: https://ak-interactive.com/product/purple-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Putrid White
     set: Quick Gen
     productCode: AK17055
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17055.jpg
     sourceUrl: https://ak-interactive.com/product/putrid-white-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Reddish Flesh
     set: Quick Gen
     productCode: AK17056
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17056.jpg
     sourceUrl: https://ak-interactive.com/product/reddish-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Reddish Orange
     set: Quick Gen
     productCode: AK17035
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17035.jpg
     sourceUrl: https://ak-interactive.com/product/reddish-orange-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Rotten Green
     set: Quick Gen
     productCode: AK17022
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17022.jpg
     sourceUrl: https://ak-interactive.com/product/rotten-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Russian Blue
     set: Quick Gen
     productCode: AK17078
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17078.jpg
     sourceUrl: https://ak-interactive.com/product/russian-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Russian Uniform
     set: Quick Gen
     productCode: AK17077
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17077.jpg
     sourceUrl: https://ak-interactive.com/product/russian-uniform-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Soft Black
     set: Quick Gen
     productCode: AK17050
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17050.jpg
     sourceUrl: https://ak-interactive.com/product/soft-black-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Solar Yellow
     set: Quick Gen
     productCode: AK17012
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17012.jpg
     sourceUrl: https://ak-interactive.com/product/solar-yellow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Space Dark Green
     set: Quick Gen
     productCode: AK17019
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17019.jpg
     sourceUrl: https://ak-interactive.com/product/space-dark-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Space Green
     set: Quick Gen
     productCode: AK17017
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17017.jpg
     sourceUrl: https://ak-interactive.com/product/space-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Space Grey
     set: Quick Gen
     productCode: AK17045
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17045.jpg
     sourceUrl: https://ak-interactive.com/product/space-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Space Magenta
     set: Quick Gen
     productCode: AK17001
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17001.jpg
     sourceUrl: https://ak-interactive.com/product/space-magenta-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Space Red
     set: Quick Gen
     productCode: AK17034
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17034.jpg
     sourceUrl: https://ak-interactive.com/product/space-red-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Spectral Blue
     set: Quick Gen
     productCode: AK17028
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17028.jpg
     sourceUrl: https://ak-interactive.com/product/spectral-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Spectral Green
     set: Quick Gen
     productCode: AK17016
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17016.jpg
     sourceUrl: https://ak-interactive.com/product/spectral-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Strong Grey
     set: Quick Gen
     productCode: AK17044
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17044.jpg
     sourceUrl: https://ak-interactive.com/product/strong-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Turquoise Blue
     set: Quick Gen
     productCode: AK17029
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17029.jpg
     sourceUrl: https://ak-interactive.com/product/turquoise-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Turquoise Green
     set: Quick Gen
     productCode: AK17030
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17030.jpg
     sourceUrl: https://ak-interactive.com/product/turquoise-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Ultramarine Blue
     set: Quick Gen
     productCode: AK17027
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17027.jpg
     sourceUrl: https://ak-interactive.com/product/ultramarine-blue-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Us Olive Uniform
     set: Quick Gen
     productCode: AK17074
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17074.jpg
     sourceUrl: https://ak-interactive.com/product/us-olive-uniform-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Vampire Flesh
     set: Quick Gen
     productCode: AK17064
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17064.jpg
     sourceUrl: https://ak-interactive.com/product/vampire-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Vivid Flesh
     set: Quick Gen
     productCode: AK17036
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17036.jpg
     sourceUrl: https://ak-interactive.com/product/vivid-flesh-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Vivid Green
     set: Quick Gen
     productCode: AK17018
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17018.jpg
     sourceUrl: https://ak-interactive.com/product/vivid-green-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Warm Orange
     set: Quick Gen
     productCode: AK17009
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17009.jpg
     sourceUrl: https://ak-interactive.com/product/warm-orange-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: White Shadow
     set: Quick Gen
     productCode: AK17043
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17043.jpg
     sourceUrl: https://ak-interactive.com/product/white-shadow-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Winter Grey
     set: Quick Gen
     productCode: AK17041
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17041.jpg
     sourceUrl: https://ak-interactive.com/product/winter-grey-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Wood
     set: Quick Gen
     productCode: AK17062
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK17062.jpg
     sourceUrl: https://ak-interactive.com/product/wood-quick-gen-color/
     source: mfr-ak-interactive
+    priceEur: 2.44
   - name: Blood Effect
     set: Standard (3rd Gen)
     productCode: AK11260
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11260.jpg
     sourceUrl: https://ak-interactive.com/product/blood-effect/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Chipping Effect
     set: Standard (3rd Gen)
     productCode: AK11262
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11262.jpg
     sourceUrl: https://ak-interactive.com/product/chipping-effect/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Cork
     set: Standard (3rd Gen)
     productCode: AK11119
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11119.jpg
     sourceUrl: https://ak-interactive.com/product/cork-standard/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Purple
     set: Standard (3rd Gen)
     productCode: AK11073
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11073.jpg
     sourceUrl: https://ak-interactive.com/product/purple-standard/
     source: mfr-ak-interactive
+    priceEur: 2.27
   - name: Viscera Effect
     set: Standard (3rd Gen)
     productCode: AK11261
     imageUrl: https://ak-interactive.com/wp-content/uploads/2026/03/AK11261.jpg
     sourceUrl: https://ak-interactive.com/product/viscera-effect/
     source: mfr-ak-interactive
+    priceEur: 2.27
   candidates:
   - name: 1937-44 PANZER COLORS
     sku: AK11656

@@ -24,11 +24,17 @@ Output shape per brand file:
 
     <brand-slug>:
       enrich:
-        "{Name}|{Set}": {ean?, imageUrl?, sku?, sourceUrl, source}
+        "{Name}|{Set}": {ean?, imageUrl?, sku?, sourceUrl, source, price<Ccy>?}
       additions:
-        - {name, set, productCode?, imageUrl?, sourceUrl, source}
+        - {name, set, productCode?, imageUrl?, sourceUrl, source, price<Ccy>?}
       candidates:
         - {name, sku?, url?, source, reason}
+
+PRICE is carried in the source's OWN quoted currency and never converted -- see
+SOURCE_PRICE_FIELD for the per-source evidence, observed_price() for the currency guard and
+Catalog.pins() for the identity guard. GW's trade sheets carry no price at all (0 of 938 paint
+observations, measured 2026-08-04), so the storefronts here are the only paint price evidence
+the repo has.
 
 Paint ranges are mostly one-off snapshots (rarely re-run) — this script reads only committed
 files and is deterministic; run it after any manual acquire run:
@@ -94,8 +100,74 @@ TAP_SET_BY_PREFIX = {
 }
 
 
+# Per-source price currency. A storefront's price is NEVER assumed to be GBP (or anything
+# else): each entry below is the field that source's own evidence populates, and why it is
+# that currency. Measured over the committed observations, 2026-08-05:
+#
+#   mfr-ak-interactive   priceEur  1142/1142  Woo Store API declares currency_code per product
+#   mfr-scale75          priceEur   562/562   descriptor scope.currency: eur (live-verified)
+#   mfr-greenstuffworld  priceEur   477/477   recorded only when itemprop=priceCurrency is EUR
+#   mfr-armypainter      priceUsd   794/794   descriptor scope.currency: usd (live /cart.js)
+#   mfr-reaper           priceUsd   541/541   reapermini.com is a US store; strategy reads cents
+#   mfr-turbodork        priceUsd   357/357   descriptor scope.currency: usd (live /cart.js)
+#   mfr-monument         priceUsd   197/197   descriptor scope.currency: usd (live /cart.js)
+#
+# Deliberately absent: mfr-vallejo (0 of 1194 observations carry any price) and mfr-mr-hobby
+# (0 of 134; neither the series pages nor the retailer barcode snapshot quote one). No paint
+# source quotes GBP or CAD, so those two fields are never emitted by this bridge.
+SOURCE_PRICE_FIELD = {
+    "mfr-ak-interactive": "priceEur",
+    "mfr-armypainter": "priceUsd",
+    "mfr-greenstuffworld": "priceEur",
+    "mfr-monument": "priceUsd",
+    "mfr-reaper": "priceUsd",
+    "mfr-scale75": "priceEur",
+    "mfr-turbodork": "priceUsd",
+}
+
+# Multi-pot products, by the word the store itself puts in the title. Every bridge already
+# gates its enrich/additions to singles using per-source signals (reaper hints.category,
+# monument productType, army-painter SKU+grams, ...), and that catches sets almost everywhere
+# -- but not quite: measured 2026-08-05, 20 products whose own title says SET reached
+# `additions` anyway, because greenstuffworld.com files its range sets under the RANGE category
+# ("Paint Set - Chrome" in chrome-paints, "Set x8 Fluor Paints" in fluorescent-acrylic-paints)
+# and reapermini.com labels "Sophie's Mystery Paint Set" hints.category=paint, not paint-set.
+# Those additions are a pre-existing question for a human; what must not happen either way is
+# the €22.75 a box of paints costs being published as the price of one pot.
+#
+# The word list is deliberately the narrow one the AK bridge has always used. Widening it is
+# what breaks: `\bBOX\b` would flag Turbo Dork's real colour "Box Wine", and `\bPACK\b`/`\bKIT\b`
+# invite the same. "WOODEN BOX" stays a phrase for exactly that reason.
+SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
+
+
 def norm(s: str | None) -> str:
     return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def observed_price(observation: dict, source_id: str) -> dict:
+    """`{'priceEur': 2.27}` when the observation quotes THIS source's currency, else `{}`.
+
+    Reading only the pinned field is a guard, not a lookup shortcut. Both storefront price
+    extractors fall back to `priceGbp` for a currency code they do not recognize
+    (`_PRICE_FIELDS.get(str(currency).casefold(), "priceGbp")` in woo.py and shopify.py), so a
+    store that starts answering in a currency the table lacks would land euros in `priceGbp`
+    and nothing downstream would ever notice. Pinning turns that into a DROPPED price, which
+    is recoverable, instead of a mislabelled one, which is not.
+
+    A non-positive price is not a price: ak-interactive lists "QUICK GEN COLOR GUIDE [PDF]"
+    (AK17000GUIDE) at 0.00 -- a free download, not a free paint. A SET's price is not a
+    paint's price either (see SET_WORDS), so a multi-pot title yields nothing.
+    """
+    field = SOURCE_PRICE_FIELD.get(source_id)
+    if field is None:
+        return {}
+    if SET_WORDS.search(str(observation.get("name") or "")):
+        return {}
+    value = observation.get(field)
+    if not isinstance(value, (int, float)) or isinstance(value, bool) or value <= 0:
+        return {}
+    return {field: float(value)}
 
 
 def read_observations(source_id: str) -> list[dict]:
@@ -150,16 +222,41 @@ class Catalog:
         # onto two different bottles. Real in this data: mr-hobby ships Mr Color 20 and 323 both
         # named "Light Blue". A bridge must route these to candidates, not enrich.
         self.ambiguous: set[str] = set()
+        self.by_key: dict[str, list[dict]] = {}
         for p in self.paints:
             s = (p.get("details") or {}).get("set") or ""
             key = f"{p['name']}|{s}"
             if key in self.keys:
                 self.ambiguous.add(key)
             self.keys.add(key)
+            self.by_key.setdefault(key, []).append(p)
             code = str(p.get("productCode") or "")
             if code:
                 self.by_code.setdefault(code, key)
             self.by_name.setdefault(norm(p["name"]), []).append(key)
+
+    def pins(self, key: str, sku: str | None) -> bool:
+        """Does this enrich entry name exactly ONE catalog paint?
+
+        True whenever the key is unique. When it is not, the entry's own `sku` has to settle
+        it -- the same test HarvestApplier applies (`r.ProductCode == entry.Sku`, ordinal
+        case-insensitive), so this answers the question "will the C# actually land this entry,
+        and on which paint?" rather than a second, differently-shaped guess.
+
+        Measured 2026-08-05: 66 ambiguous keys across the nine brands (57 Vallejo, 6 mr-hobby,
+        1 each ak-interactive / green-stuff-world / reaper), 35 of them carrying an enrich
+        entry -- every one Vallejo, which quotes no price at all. So this refuses nothing
+        today; it exists so that the first time a priced storefront ships a same-name,
+        same-set pair, the price is withheld instead of silently doubled onto both pots.
+        """
+        if key not in self.ambiguous:
+            return True
+        code = (sku or "").casefold()
+        if not code:
+            return False
+        owners = [p for p in self.by_key.get(key, [])
+                  if str(p.get("productCode") or "").casefold() == code]
+        return len(owners) == 1
 
     def match_code(self, code: str | None) -> str | None:
         return self.by_code.get(code or "")
@@ -174,6 +271,18 @@ class Catalog:
             in_set = [k for k in keys if k.endswith(f"|{set_hint}")]
             return in_set[0] if len(in_set) == 1 else None
         return keys[0] if len(keys) == 1 else None
+
+
+def pinned_price(catalog: Catalog, key: str, sku: str | None, observation: dict,
+                 source_id: str) -> dict:
+    """`observed_price`, but only for an enrich entry that names exactly one paint.
+
+    Additions do not need this -- each one MINTS its own paint under its own
+    (name, set, productCode), so its price came from precisely the product that created it.
+    Enrichment is the direction that can go wrong: `{Name}|{Set}` is not unique, and a price
+    landing on the wrong pot is a lie about a real product, not a missing field.
+    """
+    return observed_price(observation, source_id) if catalog.pins(key, sku) else {}
 
 
 class BrandHarvest:
@@ -280,7 +389,6 @@ AK_SET_BY_SUFFIX = {
     "COLOR PUNCH": "Color Punch (3rd Gen)",  # *
 }
 AK_SINGLE_SKU = re.compile(r"^AK\d{4,5}$")
-_AK_SET_WORDS = re.compile(r"\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b", re.IGNORECASE)
 
 
 def ak_prettify(name: str) -> str:
@@ -315,14 +423,15 @@ def bridge_ak() -> BrandHarvest:
         key = catalog.match_code(sku)
         common = {"sourceUrl": o.get("url"), "source": "mfr-ak-interactive"}
         if key is not None and sku not in prior_additions:
-            out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=sku, **common)
+            out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=sku, **common,
+                           **pinned_price(catalog, key, sku, o, "mfr-ak-interactive"))
             continue
 
         slugs = set((o.get("hints") or {}).get("categorySlugs") or [])
         name_raw = o["name"]
         is_set = (
             bool({"3rd-set", "paints-acrylics-sets", "b2b-3gen-sets"} & slugs)
-            or _AK_SET_WORDS.search(name_raw) is not None
+            or SET_WORDS.search(name_raw) is not None
         )
         if is_set or not AK_SINGLE_SKU.fullmatch(sku):
             out.candidates.append(
@@ -354,7 +463,8 @@ def bridge_ak() -> BrandHarvest:
 
         out.additions.append(
             {"name": ak_prettify(base), "set": set_name, "productCode": sku,
-             "imageUrl": o.get("imageUrl"), **common}
+             "imageUrl": o.get("imageUrl"), **common,
+             **observed_price(o, "mfr-ak-interactive")}
         )
     return out
 
@@ -395,7 +505,8 @@ def bridge_armypainter() -> BrandHarvest:
             key = catalog.match_name(paint_name, set_hint)
         if key is not None and sku not in prior_additions:
             out.add_enrich(key, ean=o.get("ean"), imageUrl=o.get("imageUrl"), sku=sku,
-                           sourceUrl=o.get("url"), source="mfr-armypainter")
+                           sourceUrl=o.get("url"), source="mfr-armypainter",
+                           **pinned_price(catalog, key, sku, o, "mfr-armypainter"))
         elif set_hint is not None and "triad" not in o["name"].lower():
             # Owner-approved promotion 2026-07-24: unmatched singles under a recognized range
             # prefix are NEW paints (Fanatic waves, Masterclass) -- born with their store EAN
@@ -403,7 +514,8 @@ def bridge_armypainter() -> BrandHarvest:
             out.additions.append(
                 {"name": paint_name, "set": set_hint, "productCode": sku,
                  "ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
-                 "sourceUrl": o.get("url"), "source": "mfr-armypainter"}
+                 "sourceUrl": o.get("url"), "source": "mfr-armypainter",
+                 **observed_price(o, "mfr-armypainter")}
             )
         else:
             out.candidates.append(
@@ -427,17 +539,21 @@ def bridge_monument() -> BrandHarvest:
                   "sourceUrl": o.get("url"), "source": "mfr-monument"}
         key = catalog.match_code(code) or catalog.match_code(code.zfill(3)) or catalog.match_name(name)
         if key is not None and sku not in prior_additions:
-            out.add_enrich(key, sku=sku, **common)
+            out.add_enrich(key, sku=sku, **common,
+                           **pinned_price(catalog, key, sku, o, "mfr-monument"))
             continue
         # Owner-approved promotion 2026-07-24: the two post-Arcturus ranges join as their own
         # sets; anything else unmatched stays a candidate.
         title = o["name"]
+        price = observed_price(o, "mfr-monument")
         if sku.startswith("MPA-5") or "1-step" in title.lower():
             paint = title.split(" - ", 1)[-1].strip()
-            out.additions.append({"name": paint, "set": "Pro Acryl 1-Step", "productCode": sku, **common})
+            out.additions.append(
+                {"name": paint, "set": "Pro Acryl 1-Step", "productCode": sku, **common, **price})
         elif sku.startswith("AMP-"):
             paint = title.split(" - ", 1)[-1].strip()
-            out.additions.append({"name": paint, "set": "AMP Colors", "productCode": sku, **common})
+            out.additions.append(
+                {"name": paint, "set": "AMP Colors", "productCode": sku, **common, **price})
         else:
             out.candidates.append(
                 {"name": title, "sku": sku or None, "url": o.get("url"),
@@ -460,13 +576,15 @@ def bridge_turbodork() -> BrandHarvest:
         common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
                   "sourceUrl": o.get("url"), "source": "mfr-turbodork"}
         if key is not None and sku not in prior_additions:
-            out.add_enrich(key, sku=sku, **common)
+            out.add_enrich(key, sku=sku, **common,
+                           **pinned_price(catalog, key, sku, o, "mfr-turbodork"))
         elif hints.get("productType") != "Retail":
             # Owner-approved promotion 2026-07-24: the dedicated paint types
             # (TurboShift/Metallic/ZeniShift) join the base's single flat set, born with
             # their store EAN + image. Retail stays a legacy mixed bucket -- never promoted.
             out.additions.append(
-                {"name": o["name"], "set": "Turbo Dork", "productCode": sku or None, **common}
+                {"name": o["name"], "set": "Turbo Dork", "productCode": sku or None, **common,
+                 **observed_price(o, "mfr-turbodork")}
             )
     return out
 
@@ -516,17 +634,21 @@ def bridge_scale75() -> BrandHarvest:
             (SCALE75_NEW_SET_BY_COLLECTION[c] for c in collections if c in SCALE75_NEW_SET_BY_COLLECTION),
             None,
         )
+        price = observed_price(o, "mfr-scale75")
         if known_set is not None:
             key = catalog.match_name(o["name"], known_set) or catalog.match_name(o["name"])
             if key is not None and sku not in prior_additions:
-                out.add_enrich(key, sku=sku, **common)
+                out.add_enrich(key, sku=sku, **common,
+                               **pinned_price(catalog, key, sku, o, "mfr-scale75"))
                 continue
             out.additions.append(
-                {"name": ak_prettify(o["name"]), "set": known_set, "productCode": sku or None, **common}
+                {"name": ak_prettify(o["name"]), "set": known_set,
+                 "productCode": sku or None, **common, **price}
             )
         elif new_set is not None:
             out.additions.append(
-                {"name": ak_prettify(o["name"]), "set": new_set, "productCode": sku or None, **common}
+                {"name": ak_prettify(o["name"]), "set": new_set,
+                 "productCode": sku or None, **common, **price}
             )
         else:
             out.candidates.append(
@@ -620,13 +742,15 @@ def bridge_gsw() -> BrandHarvest:
                   "sourceUrl": o.get("url"), "source": "mfr-greenstuffworld"}
         key = suffix_match(o["name"])
         if key is not None and sku not in prior_additions:
-            out.add_enrich(key, sku=sku, **common)
+            out.add_enrich(key, sku=sku, **common,
+                           **pinned_price(catalog, key, sku, o, "mfr-greenstuffworld"))
             continue
         set_name = GSW_SET_BY_CATEGORY.get(slug)
         if set_name is not None:
             out.additions.append(
                 {"name": gsw_clean_name(o["name"]), "set": set_name,
-                 "productCode": sku or None, **common}
+                 "productCode": sku or None, **common,
+                 **observed_price(o, "mfr-greenstuffworld")}
             )
         else:
             out.candidates.append(
@@ -650,7 +774,12 @@ def bridge_reaper() -> BrandHarvest:
     ("09412") while the Arcturus base stores bare digits ('9412') -- codes normalize by
     stripping leading zeros, and additions adopt the base convention. Singles only; the
     set-kind observations (triads/sets/LTPK, hints.category paint-set) carry contentSkus as
-    committed set-membership evidence but never promote. No EANs exist in the site data."""
+    committed set-membership evidence but never promote. No EANs exist in the site data.
+
+    The set filter is also what keeps SET prices out: 114 of the 541 observations are
+    paint-set kind and all 114 quote a priceUsd (a $47.99 Learn To Paint Kit, a $659.99 full
+    range). A set's price is not a paint's price -- the `continue` below is the only thing
+    standing between the two, so it runs BEFORE anything reads the price."""
     catalog = Catalog("reaper")
     prior_additions = previous_addition_codes("reaper")
     out = BrandHarvest()
@@ -664,10 +793,12 @@ def bridge_reaper() -> BrandHarvest:
         common = {"imageUrl": o.get("imageUrl"), "sourceUrl": o.get("url"), "source": "mfr-reaper"}
         key = catalog.match_code(code)
         if key is not None and code not in prior_additions:
-            out.add_enrich(key, sku=code, **common)
+            out.add_enrich(key, sku=code, **common,
+                           **pinned_price(catalog, key, code, o, "mfr-reaper"))
         elif set_name is not None:
             out.additions.append(
-                {"name": o["name"], "set": set_name, "productCode": code or None, **common}
+                {"name": o["name"], "set": set_name, "productCode": code or None, **common,
+                 **observed_price(o, "mfr-reaper")}
             )
         else:
             out.candidates.append(
@@ -896,6 +1027,8 @@ def main() -> None:
             "# Projection of committed manufacturer evidence onto the paint catalog's identities.\n"
             "# `enrich` keys are exact {Name}|{Set} identities (C# fills blank ean/imageUrl only);\n"
             "# `additions` are new paints from catalog-role sources; `candidates` are report-only.\n"
+            "# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --\n"
+            "# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).\n"
             + yaml.safe_dump({slug: data}, sort_keys=False, allow_unicode=True, width=200)
         )
         out_path.write_bytes(content.encode("utf-8"))

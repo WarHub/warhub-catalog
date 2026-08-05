@@ -2,6 +2,8 @@
 # Projection of committed manufacturer evidence onto the paint catalog's identities.
 # `enrich` keys are exact {Name}|{Set} identities (C# fills blank ean/imageUrl only);
 # `additions` are new paints from catalog-role sources; `candidates` are report-only.
+# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --
+# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).
 mr-hobby:
   enrich:
     A.E.U.G'.s MS Blue|Gundam Color Spray:
