@@ -497,7 +497,12 @@ jobs:
           # "## Confirmed-EAN repackaging ..." (tracked repackagings, still exit 0), and the
           # visibility-only "## Provisional-EAN dropped" / "## Product-code dropped" sections --
           # a run with only non-fatal findings must still surface them, not render "clean".
-          awk '/^## (Confirmed-EAN|Provisional-EAN|Product-code)/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
+          # "Paint-EAN" is listed too because the guard covers BOTH catalogs: omitting it made a
+          # paint finding invisible here, since the job would fail on the exit code with an empty
+          # findings section in the PR body. It is near-vacuous in THIS workflow (the product
+          # pipeline does not write data/paints, so paints are identical to HEAD and nothing fires)
+          # -- the real paint enforcement point is paint-catalog-update.yml, which does write them.
+          awk '/^## (Confirmed-EAN|Provisional-EAN|Product-code|Paint-EAN)/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
           cat ../../_guard_section.txt
 
       - name: Build PR body
