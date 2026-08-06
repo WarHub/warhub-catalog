@@ -456,7 +456,10 @@ retract:
     # and none of the 14 new harvest additions exists yet; only the paint tool writes that file and
     # it is not run here. Until the next full authoritative run, nothing below has happened.
     #
-    # WHAT IS DELIBERATELY LEFT: the other 7 `Fluor Metallic` records. Three (Orange/White/Yellow)
+    # WHAT WAS DELIBERATELY LEFT -- SETTLED in the block below, same day, once the archive had been
+    # rebuilt and the fluorescent chart could be re-sampled. The rest of this paragraph is kept
+    # verbatim because it is what the question looked like before that measurement existed:
+    # the other 7 `Fluor Metallic` records. Three (Orange/White/Yellow)
     # hold a barcode from a different range entirely and their rightful owners are minted by this
     # same run; four (Blue/Lime/Red/Rose) are barcodeless duplicates of `Fluorescent` records. That
     # is a set-naming decision about all 7 at once, with four Arcturus hexes to weigh, and it does
@@ -470,15 +473,140 @@ retract:
     # And it BREAKS A CURRENTLY-CLEAN INVARIANT. Measured 2026-08-06 over all 412 committed
     # green-stuff-world records (primary ean + additionalEans): ZERO barcodes are held by more
     # than one record. This change takes that to THREE -- 8435646508665, 8435646516332 and
-    # 8435646516547 each end up on a surviving `Fluor Metallic` record AND on the newly minted
-    # `Acrylic Inks` record that rightfully owns it. `report --ean-guard` cannot see this: it keys
-    # holders on `(brand, role)`, not on the record, so a barcode on two records reads as held.
-    # That is why the duplicate count is pinned by a Python test instead --
-    # test_paint_harvest_gsw_sets.py -- and why "deferred" here means a known 0 -> 3 regression
-    # with an owner, not an unmeasured maybe.
+    # 8435646516417 each end up on a surviving `Fluor Metallic` record AND on the newly minted
+    # `Acrylic Inks` record that rightfully owns it. (CORRECTED 2026-08-06: this line and 240dc3d's
+    # commit message both named 8435646516547 as the third. Wrong -- that is `Acrylic Ink Opaque -
+    # Yellow` 4294, held by exactly ONE record then and now. The third duplicate is 8435646516417,
+    # `Transparent Acrylic Ink - Yellow` 4281, which is what test_paint_harvest_gsw_sets.py:321
+    # always said. Fixed here rather than left because this paragraph is the one a future reader
+    # trusts, and a wrong GTIN in it sends them auditing a record that is fine.)
+    # `report --ean-guard` cannot see this: it keys holders on `(brand, role)`, not on the record,
+    # so a barcode on two records reads as held. That is why the duplicate count is pinned by a
+    # Python test instead -- test_paint_harvest_gsw_sets.py -- and why "deferred" here means a
+    # known 0 -> 3 regression with an owner, not an unmeasured maybe.
+    # (SUPERSEDED 2026-08-06: that test cannot see these three any more, measured. The invariant
+    # now lives in test_repo_data.py::test_no_barcode_is_held_by_two_records_in_one_brand -- see
+    # the block below for why the harvest-suite one went vacuous.)
     - 'Fluor Metallic|Violet||#BE68E3'
     - 'Fluor Metallic|Yellow-orange||#F89D68'
     - 'Metallic Colors|Chrome Paint||#FCFDFF'
+    # --- The remaining 7 `Fluor Metallic` records, settled 2026-08-06 ----------------------------
+    # The set-naming question the block above deferred. VERDICT: `Fluor Metallic` is not a Green
+    # Stuff World range. It is Arcturus's grouping label for GSW's ordinary `Fluor Paint` line, so
+    # all 7 survivors are duplicates of a `Fluorescent` record and all 7 go, following the ruling
+    # already executed on Violet and Yellow-orange three lines up.
+    #
+    # WHAT SETTLED IT IS A MEASUREMENT, NOT AN ARGUMENT ABOUT NAMES, and it is reproducible.
+    # `gen_paint_swatches.py --config <fluorescent-only>` sampled greenstuffworld.com's OWN product
+    # photo for `Fluor Paint ORANGE` (1703, hex-less until this change) and got #F96E33 --
+    # BIT-IDENTICAL to the hex Arcturus carries for `Fluor Metallic|Orange`. A 24-bit exact match
+    # between two independently-authored files is not two similar oranges; it is one pot described
+    # twice. `Fluor Paint YELLOW` (1701) sampled #EEFF34 vs Arcturus's #F8FB48, d=22.7, inside the
+    # sampler's own d<=40 band. Contact sheet: data/review/swatches/green-stuff-world-chip-
+    # fluorescent.jpg -- 8 rows, every one `high` confidence, crop and extracted colour agree.
+    # This is the calibration pair that did not exist before: the two sources never described the
+    # same pot, because the swatch pass only fills EMPTY hex and the 7 have no productCode, so
+    # `load_catalog` (gen_paint_swatches.py:140-142) skips them and always will.
+    #
+    # CORROBORATING, all measured 2026-08-06. Over all 477 rows of
+    # data/evidence/products/mfr-greenstuffworld/observations.jsonl the store has exactly ONE
+    # fluorescent category (fluorescent-acrylic-paints) holding exactly 10 individual paints,
+    # 1700-1776, every title `Fluor Paint <COLOUR>`; across all 17 category slugs
+    # (gen_paint_harvest.py:1092-1109) ZERO rows are a metallic fluorescent. Upstream's column
+    # header is `Set`, not `Range` (GreenStuffWorld.md:4), it has no fluorescent grouping other
+    # than this one, and its 9 `Fluor Metallic` names are GSW's 10 `Fluor Paint` colours MINUS
+    # Turquoise -- 1776, the highest/newest code, which upstream simply predates. "Metallic" is a
+    # qualifier Arcturus appends: it files GSW's `Candy Ink AMBER ORANGE` as `Candy Ink Metallic`
+    # and `Chameleon Acrylic Paint` as `Chameleon Colorshift Metallic` too.
+    #
+    # `type: Metallic, finish: Metallic` ON ALL 7 IS NOT EVIDENCE, and it reads like the strongest
+    # evidence there is. FinishClassifier.cs:56-63 and PaintTypeClassifier.cs:116/149/192 decide on
+    # a bare `set.Contains("Metallic")` substring test, so the Arcturus label CAUSED the
+    # classification. The pot never voted. Anyone re-opening this should discount those two fields
+    # first, exactly as the Violet/Yellow-orange retraction's own comment (below, field overrides)
+    # records for the same reason.
+    #
+    # THE COLOURS: THE PHOTO WINS EVERYWHERE IT EXISTS, and no Arcturus hex is carried across.
+    # Same run, same chart, Arcturus hex vs GSW's own photo of the same pot, in the sampler's own
+    # RGB metric: Orange 0.0, Yellow 22.7, Red 51.7, Violet 69.4, Rose 73.6, Lime 87.7,
+    # Yellow-orange 103.2, Blue 116.5 -- 2 of 8 inside the d<=40 band. So Arcturus agrees on the
+    # pot's IDENTITY and is unreliable about its COLOUR, per value, with no way to tell in advance
+    # which. That is why the four contested hexes (Blue/Lime/Red/Rose) are NOT overridden onto
+    # their `Fluorescent` twins: those twins already carry photo samples with recorded provenance
+    # in data/paints/swatches/green-stuff-world.yaml, and copying Arcturus over them would replace
+    # a cited measurement with an uncited one that is 116.5 away.
+    #   Orange 1703 and Yellow 1701 are NOT lost either -- this run FILLED them from GSW's photos
+    #   (#F96E33, #EEFF34), which is strictly better than transcribing the Arcturus value by hand.
+    #   No `hex:` field override is needed for any of the seven.
+    # WHITE 1760 IS THE ONE REAL COLOUR LOSS, stated rather than papered over: Arcturus's #FFFFFF
+    # dies with the record and `White|Fluorescent` stays hex-less. Deliberate. `sample_item`
+    # REJECTED 1760 this run with `backdrop-white` -- it cannot separate a white pot from the white
+    # studio backdrop -- so #FFFFFF is precisely the value the pipeline refuses to trust, and a
+    # photographed fluorescent white is not pure white anyway. An empty hex is an honest absence;
+    # #FFFFFF would be an assertion nobody measured. It waits for a chart with a coloured backdrop.
+    #
+    # THE 3 DUPLICATE BARCODES ARE CLEARED BY THIS, which is the regression this block exists for.
+    # 8435646508665 / 8435646516332 / 8435646516417 sit on `Fluor Metallic` White/Orange/Yellow AND
+    # on `Intensity Ink Osl White` 3506 / `Transparent Acrylic Ink - Orange` 4273 / `Transparent
+    # Acrylic Ink - Yellow` 4281, which rightfully own them (they are inks; the fluor records got
+    # them through a matching bug fixed in 240dc3d). Retracting the fluor side leaves each barcode
+    # held by exactly one record and takes green-stuff-world back to the ZERO duplicates it had
+    # before 240dc3d -- measured over all 423 committed records, and now the only 3 of the 4 in the
+    # whole catalogue that are fixable (the 4th, vallejo `Viking Grey` 72.483, is two real paints,
+    # PaintBuilder.cs:12-16). Nothing ends up holding nothing: holder `(brand, role)` is unchanged
+    # at (green-stuff-world, primary), which is also why `report --ean-guard` says nothing here --
+    # see the test note below before reading its silence as confirmation.
+    #
+    # WHY `retract:` AND NOT `aliases:` -- RE-VERIFIED FOR THESE 7, not inherited from above. All
+    # seven come from Arcturus, which paint-catalog-update.yml:58-59 re-clones every run, so each
+    # is in `fresh` under its own key, composite-matches at CatalogReconciler.cs:60 and lands in
+    # `consumed` (:38-46); step 3 refuses a consumed target (:84) and the alias is skipped
+    # silently. All 7 carry `lastSeen: '2026-08-06', missStreak: 0` in data/paints/_liveness.yaml,
+    # which is the ledger saying `fresh` held them on the last authoritative run. Only `retract:`
+    # suppresses on INPUT (:52-55) as well as output, which is what a re-cloned source demands.
+    #
+    # KEYS GENERATED FROM THE RECORDS, never transcribed -- a mistyped key is a silent no-op
+    # (PaintOverrideAliases.cs:18 is an ordinal HashSet). All 7 verified to name exactly 1 of the
+    # 423 committed records under BOTH normalisations that matter: per-component
+    # `PaintRecordAdapter.IdentityKey` and whole-string `PaintOverrideAliases.Load:34`.
+    #
+    # WHAT ELSE MOVES, because "it only deletes 7 duplicates" is not the whole invoice:
+    #   - 7 SURVIVING records are RENAMED. `PaintBuilder` qualifies a name-slug group only when
+    #     contested (:101) and these `Fluorescent` twins are contested by nothing else, so
+    #     `green-stuff-world/blue-fluorescent` becomes `green-stuff-world/blue`, and likewise
+    #     lime/orange/red/rose/white/yellow. No id ever collides (:139 checked, 0). A consumer
+    #     holding `blue-fluorescent` gets a 404 -- the reverse of the case :74-75 argues for.
+    #   - 51 cross-brand equivalence pairs disappear and nothing replaces 50 of them; only 1 of the
+    #     51 counterparts is also matched by a `Fluorescent` twin. equivalences.yaml is computed
+    #     PRE-reconciliation, so the 7 will also linger in it as unresolvable refs after the run,
+    #     exactly as 240dc3d's three still do. That persistence is not the retraction failing.
+    #   - `_liveness.yaml` rows for the 7 become orphans pruned only on a FULL run
+    #     (`fullRun = authoritativeRun && brandFilter empty`, PaintCatalogApp.cs:452, :579).
+    #
+    # THE GUARD IS BLIND HERE AND ITS GREEN IS VACUOUS. `_check_paints` keys holders on
+    # (brand, role) (report.py:229), so it cannot see a barcode on two records at all; worse, on a
+    # commit that touches only this file `_head_yaml_files` intersects `git ls-tree` with
+    # `git diff --name-only HEAD` (report.py:180-195) and enumerates ZERO brand files, so it tracks
+    # nothing. The invariant is pinned in Python instead --
+    # test_repo_data.py::test_no_barcode_is_held_by_two_records_in_one_brand. NOT in
+    # test_paint_harvest_gsw_sets.py: `test_every_displaced_barcode_is_retracted_or_listed` is
+    # already vacuous for these three, verified by emptying its `deferred` dict and still getting
+    # 0 unanswered -- its ratchet-skip (:347) now treats the 3 ink records as prior mints because
+    # 240dc3d landed them in the archive. Deleting those `deferred` entries would change nothing.
+    #
+    # THE ARCHIVE DOES NOT CHANGE IN THIS COMMIT, DELIBERATELY, same as every block above. All 7
+    # records are still in data/paints/brands/green-stuff-world.yaml holding their barcodes; only
+    # the paint tool writes that file and it is not run here. The two swatch fills below are the
+    # single exception and they are only an INPUT: data/paints/swatches/green-stuff-world.yaml now
+    # carries `Orange|Fluorescent|1703` and `Yellow|Fluorescent|1701`, which SwatchApplier will
+    # spend on the next run. Until then, nothing here has happened.
+    - 'Fluor Metallic|Blue||#5E88FF'
+    - 'Fluor Metallic|Lime||#4EFF71'
+    - 'Fluor Metallic|Orange||#F96E33'
+    - 'Fluor Metallic|Red||#F03C25'
+    - 'Fluor Metallic|Rose||#F470A1'
+    - 'Fluor Metallic|White||#FFFFFF'
+    - 'Fluor Metallic|Yellow||#F8FB48'
   reaper:
     # Double-quoted rather than single: a single-quoted YAML scalar would need `Sophie''s`, which
     # reads like a typo in the one entry that can least afford to look like one.
@@ -902,16 +1030,67 @@ green-stuff-world:
   # recorded because "only the colour is at risk" was wrong and the next reader should not
   # rediscover it by diffing the archive.
   #
-  # The values ARE the retracted records' own hexes, transcribed from
+  # The values WERE the retracted records' own hexes, transcribed from
   # data/paints/brands/green-stuff-world.yaml (`Fluor Metallic|Violet` #BE68E3,
   # `Fluor Metallic|Yellow-orange` #F89D68, `Metallic Colors|Chrome Paint` #FCFDFF) -- the same
-  # pots under the store's own set names, so the colour is not being re-asserted, only re-homed.
+  # pots under the store's own set names, so the colour was not being re-asserted, only re-homed.
+  # TWO OF THE THREE HAVE SINCE BEEN RE-MEASURED AND REPLACED; see the block immediately below,
+  # which is the live justification for the values now on file. This paragraph is kept because the
+  # reasoning it records -- transcribe rather than lose -- was right for the day it was written,
+  # and only a measurement that did not exist yet could improve on it.
   # `OverrideApplier.Apply:64-69` recomputes R/G/B from the hex, so the three stay in sync.
   #
   # NOT belt-and-braces: `Chrome Paint|Chrome` is a NEW key, not a rename of `Chrome Paint|Metallic
   # Colors`, so an ordinal-lookup miss here is silent (OverrideApplier.cs:52-55) exactly as it is
   # for the 15 volume assertions above. All three keys were checked against the 412 committed
   # records for collisions (0) and against the regenerated harvest additions (3/3 present).
+  #
+  # RE-MEASURED AND CORRECTED 2026-08-06, same run that settled the `Fluor Metallic` retraction.
+  # These two were the ONLY place the repo had accepted an Arcturus hex as the colour of a
+  # store-harvested pot, and they were asserted sight-unseen: a harvest addition is born
+  # `hex: ''`, no swatch entry existed, so transcribing the retracted record's hex was the only
+  # way to keep A colour. It kept the wrong one. Now that both records are in the archive WITH a
+  # hex they are cross-check targets rather than fill targets of the very chart that coloured the
+  # other five in their set, and `gen_paint_swatches.py` sampled greenstuffworld.com's own product
+  # photos: 1706 #CC35B6 vs #BE68E3 (d=69.4) and 1702 #FF9D01 vs #F89D68 (d=103.2). Those are the
+  # two worst disagreements in the set and the only two of seven outside the sampler's own d<=40
+  # band -- the other five, being photo samples already, came back at d=0.
+  #
+  # THE SAMPLES ARE THE BETTER FACT, not merely the newer one. Contact sheet
+  # data/review/swatches/green-stuff-world-chip-fluorescent.jpg shows all 8 rows at `high`
+  # confidence with crop and extracted colour agreeing, and the same chart, same region, same run
+  # reproduced Arcturus's `Fluor Metallic|Orange` #F96E33 BIT-IDENTICALLY on 1703 -- so the method
+  # is not biased against Arcturus, it disagrees with it per value. A pastel peach (#F89D68) and a
+  # pale lavender (#BE68E3) were never plausible for pots sold as fluorescent; #FF9D01 and #CC35B6
+  # are what the pot looks like.
+  #
+  # AND YET THESE TWO VALUES ARE NOT CHANGED, for two reasons found in review that each defeat
+  # the edit on their own.
+  #
+  # (1) IT WOULD SPLIT THE RECORD AND DUPLICATE ITS BARCODE. `hex` is part of the identity key
+  # (PaintRecordAdapter.cs:11-14) and `OverrideApplier.Apply` runs on the FRESH list
+  # (PaintCatalogApp.cs:256) BEFORE `Reconcile` (:497), so a new hex moves the fresh key. The only
+  # bridge back is the auto-alias at PaintCatalogApp.cs:487-494, and its guard is
+  # `if (string.IsNullOrEmpty(rec.Details.Hex))` -- it rescues a record whose stored hex is EMPTY.
+  # Both of these hold a non-empty one, so the archived record would SURVIVE beside a newly minted
+  # one, both carrying ean 8436574500653 / 8436574500615. That is 2 new duplicate barcodes, in a
+  # change whose entire purpose is to clear 3 -- and worse than the ones it clears, which were at
+  # least between visibly different ranges. (`aliases:` WOULD work here, unlike for the Arcturus
+  # records above, because these two are harvest-minted so `consumed` never blocks them. It is a
+  # real option if the value is ever worth changing.)
+  #
+  # (2) THE REPLACEMENT IS NOT TRUSTWORTHY EITHER. `sample_item` takes a per-channel MEDIAN
+  # (pdf_chart.py:67-74), and fluorescent pigment is out of sRGB gamut by construction, so a JPEG
+  # product photo clips it: the proposed #FF9D01 has median R=255 and median B=1, i.e. more than
+  # half the sampled pixels railed in two channels. #EEFF34 (1701), #00FF49 (1700), #008B6E (1776)
+  # and #FE0C32/#FE2E82 rail too. "This is what the pot looks like" overstates what a clipped
+  # photo can say. The calibration figure quoted above is also weaker than it reads: 5 of its 7
+  # cross-checks compare the sampler against hexes THIS SAMPLER wrote on an earlier run, which
+  # measures determinism, not accuracy. Only 2 checks were independent and both disagreed.
+  #
+  # So: Arcturus's values stay, flagged as unreliable rather than replaced by something equally
+  # unreliable at the cost of two duplicates. Settling this needs a colour source that does not
+  # clip -- a printed swatch card, or the manufacturer's own colour data.
   Violet|Fluorescent:
     hex: '#BE68E3'
   Yellow-orange|Fluorescent:

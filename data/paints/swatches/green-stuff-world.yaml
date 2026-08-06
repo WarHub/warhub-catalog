@@ -403,6 +403,13 @@ green-stuff-world:
     chart: chip-liquid-pigments
     source: catalog imageUrl
     confidence: high
+  Orange|Fluorescent|1703:
+    hex: '#F96E33'
+    code: '1703'
+    method: item-image
+    chart: chip-fluorescent
+    source: catalog imageUrl
+    confidence: high
   Paint 60 ml|Blackest Black|12020:
     hex: '#191919'
     code: '12020'
@@ -667,5 +674,12 @@ green-stuff-world:
     code: '5666'
     method: item-image
     chart: chip-flexible
+    source: catalog imageUrl
+    confidence: high
+  Yellow|Fluorescent|1701:
+    hex: '#EEFF34'
+    code: '1701'
+    method: item-image
+    chart: chip-fluorescent
     source: catalog imageUrl
     confidence: high
