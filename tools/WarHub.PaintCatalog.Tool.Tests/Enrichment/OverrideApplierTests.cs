@@ -375,4 +375,54 @@ public class OverrideApplierTests
 
         Assert.False(OverrideApplier.Apply(retired, "citadel-colour", path).Single().IsDiscontinued);
     }
+
+    [Fact]
+    public void A_weight_assertion_retires_the_volume_and_container_the_table_wrote()
+    {
+        // The live case: `Foam Primer and Coat - Black 250gr|Primer` in data/paints/overrides.yaml.
+        // By the time Apply runs, VolumeEnricher has already stamped Green Stuff World's brand-wide
+        // 17 ml dropper onto the record (PaintCatalogApp.cs:223), so this is the only mechanism in
+        // the pipeline that can withdraw a volume -- an override cannot write `volumeMl: null`,
+        // because YamlDotNet cannot tell that from the key being absent.
+        IReadOnlyList<Paint> stamped =
+            [SamplePaints[0] with { VolumeMl = 17, Packaging = "dropper" }];
+        string path = WriteTempOverrides("citadel-colour:\n  Mephiston Red|Base:\n    weightG: 250\n");
+
+        try
+        {
+            Paint result = OverrideApplier.Apply(stamped, "citadel-colour", path).Single();
+
+            Assert.Equal(250, result.WeightG);
+            Assert.Null(result.VolumeMl);
+            Assert.Null(result.Packaging);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
+    public void A_volume_assertion_still_behaves_exactly_as_it_did_before_weightG_existed()
+    {
+        // 63 `volumeMl:` lines in the committed overrides file depend on this, including the 15
+        // Green Stuff World per-record figures the mixed sets need. A volume override replaces the
+        // volume, keeps the container it says nothing about, and leaves no mass behind.
+        IReadOnlyList<Paint> stamped =
+            [SamplePaints[0] with { VolumeMl = 17, Packaging = "dropper" }];
+        string path = WriteTempOverrides("citadel-colour:\n  Mephiston Red|Base:\n    volumeMl: 60\n");
+
+        try
+        {
+            Paint result = OverrideApplier.Apply(stamped, "citadel-colour", path).Single();
+
+            Assert.Equal(60, result.VolumeMl);
+            Assert.Equal("dropper", result.Packaging);
+            Assert.Null(result.WeightG);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
 }

@@ -11,7 +11,7 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     public void Publishes_expected_counts()
     {
         Assert.Equal(2, fx.Result.Products);
-        Assert.Equal(7, fx.Result.Paints);
+        Assert.Equal(8, fx.Result.Paints);  // 7 + the weight-sold Weathering Powder
     }
 
     [Fact]
@@ -175,6 +175,19 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
         Assert.Equal("pot", abaddon.GetProperty("container").GetString());
         // discontinued paints are still published (include-everything).
         Assert.Contains(paints.EnumerateArray(), p => p.GetProperty("status").GetString() == "discontinued");
+
+        // A weight-sold paint publishes its MASS and no volume -- the hop most likely to lose it
+        // silently. `PaintSource.PaintDetailsYaml` is read through a deserializer built with
+        // `.IgnoreUnmatchedProperties()`, so deleting that one property would drop every
+        // `weightG:` in the archive from the published catalogue with no error and no other
+        // failing test. Before this assertion, the only `WeightG` in this whole test project was a
+        // `null` that existed because a positional record gained a parameter.
+        JsonElement powder = paints.EnumerateArray()
+            .First(p => p.GetProperty("id").GetString() == "citadel/weathering-powder-rust");
+        Assert.Equal(35, powder.GetProperty("weightG").GetInt32());
+        Assert.Equal("jar", powder.GetProperty("container").GetString());
+        Assert.False(powder.TryGetProperty("volumeMl", out _),
+            "a weight-sold paint must not publish a volume it does not have");
     }
 
     [Fact]
@@ -214,8 +227,8 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
 
         JsonElement xIndex = Doc("paints/index.json");
         int xSum = xIndex.GetProperty("partitions").EnumerateArray().Sum(e => e.GetProperty("records").GetInt32());
-        Assert.Equal(7, xIndex.GetProperty("total").GetInt32());
-        Assert.Equal(7, xSum);
+        Assert.Equal(8, xIndex.GetProperty("total").GetInt32());
+        Assert.Equal(8, xSum);
     }
 
     [Fact]

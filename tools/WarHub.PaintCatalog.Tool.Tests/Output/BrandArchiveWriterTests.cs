@@ -114,6 +114,60 @@ public class BrandArchiveWriterTests
     }
 
     [Fact]
+    public async Task WriteThenLoad_RoundTripsWeightG()
+    {
+        // Round-trip, not just write. `AdditionalEans` (see the docstring on PaintRecord) is the
+        // standing reminder that this archive has shipped a shape it could not read back: the file
+        // serialized fine and then blew up on the next LoadAsync, invisibly until a record actually
+        // gained the key. `weightG` gains its first two records the next time the paint tool runs,
+        // so it is proved here before that happens rather than after.
+        //
+        // Three claims at once: the value survives; a weight-sold record writes NO `volumeMl` and
+        // NO `container` key at all (the shared serializer omits nulls, so absence is how the
+        // archive says "not measured that way"); and an absent `weightG` still reads back null
+        // rather than 0, which is what keeps the other 8,545 records byte-identical.
+        PaintRecord tub = R("Foam Primer and Coat - Black 250gr", set: "Primer", code: "5723",
+            hex: "", ean: "8435646530833") with
+        {
+            Details = new PaintDetails
+            {
+                Set = "Primer", R = 0, G = 0, B = 0, Hex = "",
+                VolumeMl = null, WeightG = 250, Container = null, Type = "Standard", Finish = "Matte",
+            },
+        };
+        var archive = new BrandArchive
+        {
+            Brand = "Green Stuff World",
+            BrandSlug = "green-stuff-world",
+            Paints = [tub, R("Matt Black Primer 60ml", set: "Primer", code: "1742", ean: "8436574501018")],
+        };
+        string dir = NewTempDir();
+        try
+        {
+            await BrandArchiveWriter.WriteAsync(archive, dir, default);
+            string filePath = Path.Combine(dir, "brands", "green-stuff-world.yaml");
+            string yaml = await File.ReadAllTextAsync(filePath);
+
+            Assert.Contains("weightG: 250", yaml);
+
+            IReadOnlyList<PaintRecord> loaded = await BrandArchiveWriter.LoadAsync(filePath, default);
+
+            PaintRecord back = loaded.Single(p => p.Name.StartsWith("Foam Primer"));
+            Assert.Equal(250, back.Details.WeightG);
+            Assert.Null(back.Details.VolumeMl);
+            Assert.Null(back.Details.Container);
+
+            PaintRecord bottle = loaded.Single(p => p.Name == "Matt Black Primer 60ml");
+            Assert.Null(bottle.Details.WeightG);
+            Assert.Equal(12, bottle.Details.VolumeMl);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
+    [Fact]
     public async Task Load_MissingFile_ReturnsEmpty()
     {
         string dir = NewTempDir();

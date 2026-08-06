@@ -50,6 +50,11 @@
         "availability": { "type": "string" },
         "quantity": { "type": "integer", "minimum": 1 },
         "volumeMl": { "type": "integer", "minimum": 1 },
+        "weightG": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "NET CONTENTS in grams, for a product sold by mass rather than by volume (plastic glue, basing sand). Sibling of volumeMl; either, both or neither may be present. NOT a shipping weight. `minimum` mirrors this schema's own volumeMl rather than paint-catalog.json's unconstrained integer -- each side keeps its existing convention."
+        },
         "productCode": { "type": "string" },
         "url": { "type": "string" },
         "imageUrl": { "type": "string" }

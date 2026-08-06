@@ -54,6 +54,14 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(16)] public decimal? PriceCad { get; init; }
     // Unit volume in millilitres, for paints/sprays (e.g. 12, 18, 24, 400). Null for everything else.
     [JsonPropertyOrder(17)] public int? VolumeMl { get; init; }
+    // Unit NET WEIGHT in grams, for the things sold by mass rather than volume (glue, basing sand).
+    // Mirrors the paint record's field so the cross-catalog seam cannot disagree with itself: a
+    // barcode that resolves to both a paint and a product (paintIds/productIds, CrossCatalogLinks)
+    // would otherwise publish net contents on one side and silence on the other for one physical
+    // tub. Measured 2026-08-06: 3 of 22,529 products name a mass (2 GW plastic glue SKUs at 15 g,
+    // 1 Mantic basing sand at 400 g) and NONE of them carries a volume, so unlike the paint side
+    // nothing here is currently wrong -- this closes an absence, not an error.
+    [JsonPropertyOrder(17)] public int? WeightG { get; init; }
     // Archival lineage between two product codes for the same product (a re-code, a repackaging).
     // BOTH records are published: a retired one keeps its own productCode/ean and points forward
     // with <c>supersededBy</c>; the current one lists its predecessors in <c>supersedes</c>. So a
@@ -88,6 +96,14 @@ internal sealed record PaintRecord(
     [property: JsonPropertyOrder(7)] string? Type,
     [property: JsonPropertyOrder(8)] string? Finish,
     [property: JsonPropertyOrder(9)] int? VolumeMl,
+    // NET CONTENTS in grams for the products sold by mass instead of by volume -- 2 paints as of
+    // 2026-08-06, both Green Stuff World foam-primer tubs. A SIBLING of volumeMl, in the style of
+    // the four price scalars below: the unit is in the name, both may be present (a pigment
+    // weighed into a jar of stated size), and a consumer that never reads it behaves exactly as it
+    // did before the field existed. Deliberately NOT a {unit, amount} pair or a repurposed
+    // volumeMl -- either would force every existing reader of volumeMl to be rewritten and would
+    // have to migrate 7,903 values for a 2-record problem.
+    [property: JsonPropertyOrder(9)] int? WeightG,
     [property: JsonPropertyOrder(10)] string? Container,
     // ean/productCode are the manufacturer's retail identifiers, optional (only some brands supply
     // them -- currently GW/Citadel via the trade-barcode bridge, and Vallejo via computed EAN).

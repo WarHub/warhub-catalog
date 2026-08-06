@@ -125,14 +125,16 @@ public static class VolumeTable
         // 60, and a rule at 60 would flip all 31 pots minted in c709958.
         //
         // ORDER IS LOAD-BEARING. `Lookup` returns on the FIRST rule matching the brand and a null
-        // set list matches every set (:191-194), so placed after the brand-wide row below these
+        // set list matches every set (:196-199), so placed after the brand-wide row below these
         // three could never fire and the repair would look simply unapplied. AK Interactive
         // :54-55 above its own default at :65 is the same shape.
         //
-        // `spray` IS ASSERTED; `dropper` IS ONLY CARRIED. VolumeRule takes Packaging as a
-        // non-nullable positional and VolumeEnricher writes it beside VolumeMl unconditionally
-        // (VolumeEnricher.cs:26-30), so there is no "fix the volume, leave the container alone"
-        // row. For the 18 aerosols three signals agree 18/18: the name contains "Spray", the
+        // `spray` IS ASSERTED; `dropper` IS ONLY CARRIED. As of 2026-08-06 `Packaging` IS nullable
+        // and a "fix the volume, leave the container alone" row is now expressible (see VolumeRule
+        // below) -- these two rows are NOT changed to use it, because flipping them to null would
+        // move 46 genuinely volume-sold records from `dropper` to nothing, which is a separate
+        // question from the one the weight change came to answer. For the 18 aerosols three
+        // signals agree 18/18: the name contains "Spray", the
         // evidence `categorySlug` is colour-primers-spray / colorshift-chameleon-spray /
         // chrome-spray-paint, and the size is 400 ml -- and no GSW record at any other volume is
         // named "Spray". That is a claim, with Citadel :44 as precedent. For Flexible and Dry Brush
@@ -140,9 +142,12 @@ public static class VolumeTable
         // category, categorySlug, reference, ml), so `dropper` here restates what the brand-wide
         // rule already wrote and asserts nothing new. A 240 ml Flexible paint is very probably not
         // a dropper bottle, but the committed vocabulary is exactly dropper/jar/pot/tin/spray
-        // (5399/1449/924/115/12 across the 21 brand files -- the same five strings this table uses,
-        // and no `packaging:` override exists anywhere in data/paints), and none of them is
-        // defensible for a squeeze bottle. It stays visibly wrong rather than confidently wrong.
+        // (re-measured 2026-08-06 across the 21 brand files: 5385/1449/924/115/30, plus 644 null
+        // -- the same five strings this table uses, and no `packaging:` override exists anywhere
+        // in data/paints), and none of them is defensible for a squeeze bottle. It stays visibly
+        // wrong rather than confidently wrong. The figures quoted here before were 5399/1449/924/
+        // 115/12: they describe the state BEFORE the spray row at :151 existed and were already
+        // stale when this comment was written.
         new("Green Stuff World", ["Spray Primer", "Chameleon Spray", "Chrome Spray"], 400, "spray"),
         new("Green Stuff World", ["Flexible"], 240, "dropper"),
         new("Green Stuff World", ["Dry Brush"], 30, "dropper"),
@@ -165,10 +170,10 @@ public static class VolumeTable
     ];
 
     /// <summary>
-    /// Looks up volume and packaging for a brand/set combination.
-    /// Returns null if no match found.
+    /// Looks up the net-contents claim for a brand/set combination.
+    /// Returns null if no match found; a match may still abstain on any individual field.
     /// </summary>
-    public static (int VolumeMl, string Packaging)? Lookup(string brandDisplayName, string set)
+    public static (int? VolumeMl, string? Packaging, int? WeightG)? Lookup(string brandDisplayName, string set)
     {
         foreach (VolumeRule rule in Rules)
         {
@@ -185,18 +190,45 @@ public static class VolumeTable
 
                 if (rule.Sets.Any(s => string.Equals(s, cleanSet, StringComparison.OrdinalIgnoreCase)))
                 {
-                    return (rule.VolumeMl, rule.Packaging);
+                    return (rule.VolumeMl, rule.Packaging, rule.WeightG);
                 }
             }
             else
             {
                 // Brand-wide default (no specific set filter)
-                return (rule.VolumeMl, rule.Packaging);
+                return (rule.VolumeMl, rule.Packaging, rule.WeightG);
             }
         }
 
         return null;
     }
 
-    private record VolumeRule(string BrandDisplayName, IReadOnlyList<string>? Sets, int VolumeMl, string Packaging);
+    /// <summary>
+    /// EVERY FIELD BUT THE BRAND IS OPTIONAL, and that is the point of the 2026-08-06 widening.
+    /// The shape used to be <c>(string, IReadOnlyList&lt;string&gt;?, int VolumeMl, string
+    /// Packaging)</c> with both content fields NON-nullable, which made three statements literally
+    /// inexpressible: "this range is sold by weight", "I know the pot size but not the container"
+    /// and its converse. The comment at :132-149 above records the third case being worked around
+    /// by writing a `dropper` the evidence does not support. All 38 rules below compile verbatim
+    /// -- an `int` literal binds to `int?`, a string literal to `string?`, and <c>WeightG</c> is a
+    /// trailing optional -- and <see cref="Enrichment.VolumeEnricher"/> now folds the result
+    /// through <see cref="Models.NetContents.Merge"/>, which is identity for a rule that states
+    /// both fields. So this widening changes ZERO records; it only stops the table lying when it
+    /// does not know.
+    ///
+    /// NO ROW USES <c>WeightG</c> TODAY and none should be added speculatively. Measured
+    /// 2026-08-06 across 8,547 paint records: no (brand, set) is weight-sold as a RANGE. The two
+    /// weight-sold records both sit in Green Stuff World `Primer`, which is genuinely mixed
+    /// (240 ml x3, 60 ml x6, plus the two 250 g tubs) -- the :118-125 comment already says no
+    /// `Primer` constant can be right -- so they are asserted per record in
+    /// data/paints/overrides.yaml, not here. A row belongs here only when an entire set is sold by
+    /// mass, and then it should also leave <c>Packaging</c> null rather than pick a lie out of the
+    /// dropper/jar/pot/tin/spray vocabulary, none of which describes a tub.
+    /// </summary>
+    private record VolumeRule(
+        string BrandDisplayName,
+        IReadOnlyList<string>? Sets,
+        int? VolumeMl,
+        string? Packaging,
+        int? WeightG = null);
 }

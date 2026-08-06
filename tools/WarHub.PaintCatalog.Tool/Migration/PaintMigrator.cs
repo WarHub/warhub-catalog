@@ -68,6 +68,10 @@ public static class PaintMigrator
         public int B { get; init; }
         public string? Hex { get; init; }
         public int? VolumeMl { get; init; }
+        // Carried, not migrated FROM: the flat legacy shape above has no mass field, so this only
+        // ever appears on an already-migrated file. Present so re-running the migrator over a
+        // current archive is idempotent instead of silently dropping a weight-sold record's mass.
+        public int? WeightG { get; init; }
         public string? Container { get; init; }
         public string? Type { get; init; }
         public string? Finish { get; init; }
@@ -146,6 +150,7 @@ public static class PaintMigrator
                     B = lp.Details.B,
                     Hex = lp.Details.Hex ?? "",
                     VolumeMl = lp.Details.VolumeMl,
+                    WeightG = lp.Details.WeightG,
                     Container = lp.Details.Container,
                     Type = lp.Details.Type,
                     Finish = lp.Details.Finish,

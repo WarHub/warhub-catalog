@@ -4,7 +4,12 @@ from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
 
-_HINT_FIELDS = ("gameSystem", "faction", "category", "packaging", "quantity", "volumeMl", "description")
+# `weightG` is NET CONTENTS in grams for a product sold by mass (added 2026-08-06), first-wins
+# across the kind-ordered members exactly like `volumeMl` beside it. It is NOT Shopify's `grams`
+# hint, which is gross shipping weight on 1,843 observations and stays out of this tuple.
+_HINT_FIELDS = (
+    "gameSystem", "faction", "category", "packaging", "quantity", "volumeMl", "weightG", "description",
+)
 _DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur", "priceCad")
 
 

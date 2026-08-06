@@ -30,6 +30,19 @@ class CanonicalProduct(BaseModel):
     packaging: str | None = None
     quantity: int | None = None
     volumeMl: int | None = None
+    # NET CONTENTS in grams, for the products sold by mass rather than by volume. Sibling of
+    # volumeMl, never a replacement -- either, both or neither. Measured 2026-08-06: 3 of 22,529
+    # products name a mass (2 GW `WH COLOUR PLASTIC GLUE (15g)` regional SKUs, 1 Mantic
+    # `Colour Forge Basing Sand - Fine Grit - 400g`) and none of them carries a volume, so this
+    # closes an ABSENCE on the product side rather than correcting an error. It exists chiefly so
+    # the cross-catalog seam cannot disagree with itself: a barcode resolving to both a paint and
+    # a product must not have net contents on one side and silence on the other.
+    #
+    # NOTHING FEEDS IT YET AND THAT IS DELIBERATE. It flows the moment a source emits a `weightG`
+    # hint (it is in resolve.attributes._HINT_FIELDS), and no source does today -- the only
+    # mass-shaped hint in the corpus is Shopify's `grams`, which is GROSS SHIPPING weight on 1,843
+    # observations (a brush 3 g, an 18 ml dropper 26-31 g) and must never be wired here.
+    weightG: int | None = None
     status: str
     availability: str | None = None
     firstSeen: str

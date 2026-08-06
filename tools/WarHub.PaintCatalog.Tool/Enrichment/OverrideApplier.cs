@@ -68,6 +68,17 @@ public static class OverrideApplier
                 newB = b;
             }
 
+            // The one path that can say "this is sold by WEIGHT, not by volume". It has to be a
+            // fold and not a coalesce: `over.VolumeMl ?? p.VolumeMl` cannot express a clear (an
+            // absent key and an explicit `volumeMl: null` are the same thing to YamlDotNet on an
+            // `int?`), and VolumeEnricher has already written the table's guess into `p` by the
+            // time this runs, so a weight assertion sitting beside it would publish `weightG: 250`
+            // next to a still-wrong `volumeMl: 17`. See NetContents for the rule and for why the
+            // container travels with it.
+            NetContents.Claim contents = NetContents.Merge(
+                new NetContents.Claim(over.VolumeMl, over.WeightG, over.Packaging),
+                new NetContents.Claim(p.VolumeMl, p.WeightG, p.Packaging));
+
             return p with
             {
                 ProductCode = over.ProductCode ?? p.ProductCode,
@@ -75,8 +86,9 @@ public static class OverrideApplier
                 R = newR,
                 G = newG,
                 B = newB,
-                VolumeMl = over.VolumeMl ?? p.VolumeMl,
-                Packaging = over.Packaging ?? p.Packaging,
+                VolumeMl = contents.VolumeMl,
+                WeightG = contents.WeightG,
+                Packaging = contents.Container,
                 Ean = over.Ean ?? p.Ean,
                 // Non-destructive: an override that supplies a NEW primary keeps the barcode it
                 // displaced (plus any the override itself lists) instead of dropping it.
@@ -253,6 +265,16 @@ public record PaintOverride
     public string? ProductCode { get; init; }
     public string? Hex { get; init; }
     public int? VolumeMl { get; init; }
+    /// <summary>
+    /// NET CONTENTS in grams — and the only mechanism in the pipeline that can retire a volume.
+    /// Writing it is a statement that this product is measured by mass, so
+    /// <see cref="NetContents.Merge"/> drops <see cref="VolumeMl"/> and <see cref="Packaging"/>
+    /// rather than leaving the record claiming both (see that class for why the coalesce every
+    /// other field here uses cannot do the job). Like <see cref="AdditionalEans"/> and the prices,
+    /// this is ALSO the read shape of the generated barcode bridge, so the property must exist
+    /// here or a `weightG` in that file is silently dropped by IgnoreUnmatchedProperties.
+    /// </summary>
+    public int? WeightG { get; init; }
     public string? Packaging { get; init; }
     public string? Ean { get; init; }
     /// <summary>

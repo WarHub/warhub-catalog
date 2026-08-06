@@ -29,6 +29,8 @@ public sealed record CanonicalProduct
     public string? Packaging { get; init; }
     public int? Quantity { get; init; }
     public int? VolumeMl { get; init; }
+    /// <summary>Net contents in grams. Sibling of <see cref="VolumeMl"/>; see ProductRecord.</summary>
+    public int? WeightG { get; init; }
     public required string Status { get; init; }
     public string? Availability { get; init; }
     public string? FirstSeen { get; init; }

@@ -13,6 +13,13 @@ public record Paint
     public required int B { get; init; }
     public required string Hex { get; init; }
     public int? VolumeMl { get; init; }
+    /// <summary>
+    /// NET CONTENTS in grams, for a product sold by mass rather than by volume. Sibling of
+    /// <see cref="VolumeMl"/>, never a replacement: a record may state either, both (a pigment
+    /// weighed into a jar of known size) or neither. See <see cref="NetContents"/> for the merge
+    /// rule and for why the Shopify `hints.grams` shipping weight must never feed it.
+    /// </summary>
+    public int? WeightG { get; init; }
     public string? Packaging { get; init; }
     public string? Ean { get; init; }
     /// <summary>Extra barcodes the same paint is sold under (regional variants). See PaintRecord.</summary>

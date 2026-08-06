@@ -30,6 +30,7 @@ public static class PaintRecordMapper
             B = p.B,
             Hex = p.Hex,
             VolumeMl = p.VolumeMl,
+            WeightG = p.WeightG,
             Container = p.Packaging,
             Type = p.Type,
             Finish = p.Finish,

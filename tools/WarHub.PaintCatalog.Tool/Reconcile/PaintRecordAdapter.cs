@@ -17,42 +17,56 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
     // so URL-based rename detection is disabled. Genuine renames use aliases: overrides.
     public string? Url(PaintRecord r) => null;
 
-    public PaintRecord Merge(PaintRecord existing, PaintRecord fresh) => existing with
+    public PaintRecord Merge(PaintRecord existing, PaintRecord fresh)
     {
-        // Name, FirstSeen, Category, and the identity components (Set/Hex/ProductCode) are immutable.
-        Status = fresh.Status is "discontinued" or "delisted" ? fresh.Status : existing.Status,
-        Availability = Pick(fresh.Availability, existing.Availability) ?? "unknown",
-        Ean = Pick(fresh.Ean, existing.Ean),
-        // Non-destructive re-barcoding. EAN is not part of the identity key (set|name|productCode|
-        // hex), so a fresh harvest carrying a DIFFERENT barcode lands on this same record and
-        // `Pick` hands the primary slot to fresh -- which previously destroyed the stored barcode
-        // outright. Keep it: a paint bought years ago must stay resolvable by the barcode on the
-        // pot the owner actually has.
-        AdditionalEans = Enrichment.BarcodeSet.Union(
-            Pick(fresh.Ean, existing.Ean), existing.AdditionalEans, fresh.AdditionalEans, [existing.Ean])
-            is { Count: > 0 } merged ? [.. merged] : null,
-        ImageUrl = Pick(fresh.ImageUrl, existing.ImageUrl),
-        // Price is EVIDENCE (trade bridge / hand override), so it behaves like Ean and ImageUrl:
-        // a fresh figure wins, a run that simply carries no price keeps the last known one rather
-        // than blanking a record because this run's bridge did not quote it.
-        PriceGbp = fresh.PriceGbp ?? existing.PriceGbp,
-        PriceUsd = fresh.PriceUsd ?? existing.PriceUsd,
-        PriceEur = fresh.PriceEur ?? existing.PriceEur,
-        PriceCad = fresh.PriceCad ?? existing.PriceCad,
-        // Lineage is a DECLARATION (overrides.yaml), not evidence: fresh is authoritative in both
-        // directions, INCLUDING clearing. Withdrawing the declaration must actually withdraw the
-        // link -- mirroring the product side, where the resolver recomputes it from matches.yaml
-        // every run. Records absent from `fresh` never reach Merge, so nothing else can be cleared.
-        Supersedes = fresh.Supersedes,
-        SupersededBy = fresh.SupersededBy,
-        Details = existing.Details with
+        // THE ARCHIVE MUST BE ABLE TO FORGET A VOLUME. Until 2026-08-06 this block was
+        // `VolumeMl = fresh ?? existing` plus `Pick` on the container, so a value once committed
+        // could never be withdrawn -- and the two Green Stuff World tubs measured in grams would
+        // have kept re-inheriting the `volumeMl: 17` already on disk even after every upstream
+        // writer stopped producing it. NetContents makes a stated mass replace the pair, in
+        // exactly the same shape it does in OverrideApplier, so the two cannot drift.
+        NetContents.Claim contents = NetContents.Merge(
+            new NetContents.Claim(fresh.Details.VolumeMl, fresh.Details.WeightG, fresh.Details.Container),
+            new NetContents.Claim(existing.Details.VolumeMl, existing.Details.WeightG, existing.Details.Container));
+
+        return existing with
         {
-            VolumeMl = fresh.Details.VolumeMl ?? existing.Details.VolumeMl,
-            Container = Pick(fresh.Details.Container, existing.Details.Container),
-            Type = Pick(fresh.Details.Type, existing.Details.Type),
-            Finish = Pick(fresh.Details.Finish, existing.Details.Finish),
-        },
-    };
+            // Name, FirstSeen, Category, and the identity components (Set/Hex/ProductCode) are immutable.
+            Status = fresh.Status is "discontinued" or "delisted" ? fresh.Status : existing.Status,
+            Availability = Pick(fresh.Availability, existing.Availability) ?? "unknown",
+            Ean = Pick(fresh.Ean, existing.Ean),
+            // Non-destructive re-barcoding. EAN is not part of the identity key (set|name|productCode|
+            // hex), so a fresh harvest carrying a DIFFERENT barcode lands on this same record and
+            // `Pick` hands the primary slot to fresh -- which previously destroyed the stored barcode
+            // outright. Keep it: a paint bought years ago must stay resolvable by the barcode on the
+            // pot the owner actually has.
+            AdditionalEans = Enrichment.BarcodeSet.Union(
+                Pick(fresh.Ean, existing.Ean), existing.AdditionalEans, fresh.AdditionalEans, [existing.Ean])
+                is { Count: > 0 } merged ? [.. merged] : null,
+            ImageUrl = Pick(fresh.ImageUrl, existing.ImageUrl),
+            // Price is EVIDENCE (trade bridge / hand override), so it behaves like Ean and ImageUrl:
+            // a fresh figure wins, a run that simply carries no price keeps the last known one rather
+            // than blanking a record because this run's bridge did not quote it.
+            PriceGbp = fresh.PriceGbp ?? existing.PriceGbp,
+            PriceUsd = fresh.PriceUsd ?? existing.PriceUsd,
+            PriceEur = fresh.PriceEur ?? existing.PriceEur,
+            PriceCad = fresh.PriceCad ?? existing.PriceCad,
+            // Lineage is a DECLARATION (overrides.yaml), not evidence: fresh is authoritative in both
+            // directions, INCLUDING clearing. Withdrawing the declaration must actually withdraw the
+            // link -- mirroring the product side, where the resolver recomputes it from matches.yaml
+            // every run. Records absent from `fresh` never reach Merge, so nothing else can be cleared.
+            Supersedes = fresh.Supersedes,
+            SupersededBy = fresh.SupersededBy,
+            Details = existing.Details with
+            {
+                VolumeMl = contents.VolumeMl,
+                WeightG = contents.WeightG,
+                Container = contents.Container,
+                Type = Pick(fresh.Details.Type, existing.Details.Type),
+                Finish = Pick(fresh.Details.Finish, existing.Details.Finish),
+            },
+        };
+    }
 
     public PaintRecord WithFirstSeen(PaintRecord r, string isoDate) => r with { FirstSeen = isoDate };
 

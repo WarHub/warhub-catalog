@@ -68,6 +68,26 @@ public record PaintDetails
     public required int B { get; init; }
     public required string Hex { get; init; }
     public int? VolumeMl { get; init; }
+    /// <summary>
+    /// NET CONTENTS in grams, for the products sold by mass rather than by volume -- not the
+    /// gross shipping weight, which the Shopify evidence carries on 1,843 observations and which
+    /// must never feed this. A sibling of <see cref="VolumeMl"/> in the style of the four
+    /// <c>price*</c> scalars above: the unit is in the name, both may be stated, and a consumer
+    /// that ignores this field behaves exactly as it did before it existed. <c>int</c> because
+    /// every mass observed anywhere in this repo is integral (250 gr, 400 g, 15 g) and
+    /// <see cref="VolumeMl"/> is already <c>int</c>; widening later is additive.
+    ///
+    /// Measured 2026-08-06: 2 of 8,547 committed records are sold by mass (Green Stuff World
+    /// `Foam Primer and Coat - Black/Grey 250gr`). That is the whole population, not a sample --
+    /// hobby pigments, weathering powders and basing sands are sold by JAR VOLUME in this corpus:
+    /// re-measured 2026-08-07 over all 21 brand files, 283 records match pigment/powder/paste/
+    /// putty/sand/glue in their set OR their name, 217 of them state a volume and ZERO state a
+    /// mass. (An earlier draft of this comment said "317 records: 3 state a volume", which was
+    /// wrong by roughly seventyfold AND inverted the fact it was quoting -- these records
+    /// overwhelmingly DO carry a volume, which is the whole point.) The field exists because the
+    /// write path could not say "no volume", not because a large repair was waiting.
+    /// </summary>
+    public int? WeightG { get; init; }
     /// <summary>Bottle type (dropper | pot | spray | ...). Was the legacy `packaging` field.</summary>
     public string? Container { get; init; }
     public string? Type { get; init; }

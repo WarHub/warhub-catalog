@@ -319,11 +319,26 @@ internal static class PaintCatalogApp
                     if (sample == 0)
                         scrapedPaints = OverrideApplier.AppendAdditions(scrapedPaints, slug, overridesPath);
 
-                    // Enrich with volume/packaging (use defaults if scraper didn't provide)
-                    scrapedPaints = scrapedPaints.Select(p => p with
+                    // Enrich with volume/packaging (use defaults if scraper didn't provide).
+                    // Through NetContents like the other four write sites: this one was left
+                    // open-coding the same triple, and it is inert only by accident today --
+                    // ScalematesPaintSource parses `ml` only, so a scraped paint never carries a
+                    // mass. The moment one does, or a scraped brand's default is a weight, the
+                    // bare `??` would stamp a volume and a container beside it, which is exactly
+                    // what this rule exists to stop. The scraped default is the INCOMING claim
+                    // only where the paint itself said nothing, so it is passed as `current`.
+                    scrapedPaints = scrapedPaints.Select(p =>
                     {
-                        VolumeMl = p.VolumeMl ?? scrapedBrand.DefaultVolumeMl,
-                        Packaging = p.Packaging ?? scrapedBrand.DefaultPackaging
+                        var merged = NetContents.Merge(
+                            new NetContents.Claim(p.VolumeMl, p.WeightG, p.Packaging),
+                            new NetContents.Claim(
+                                scrapedBrand.DefaultVolumeMl, null, scrapedBrand.DefaultPackaging));
+                        return p with
+                        {
+                            VolumeMl = merged.VolumeMl,
+                            WeightG = merged.WeightG,
+                            Packaging = merged.Container,
+                        };
                     }).ToList();
 
                     // Enrich with type and finish

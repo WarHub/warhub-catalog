@@ -137,4 +137,37 @@ public class PaintRecordAdapterTests
         Assert.Equal("2026-01-01", renamed.FirstSeen);
         Assert.Equal(_a.IdentityKey(fresh), _a.IdentityKey(renamed));
     }
+
+    [Fact]
+    public void Merge_AFreshWeightRetiresTheVolumeAlreadyCommittedToTheArchive()
+    {
+        // The last of the three `??` merges that had to fall for the weight change to be visible.
+        // Fixing OverrideApplier alone is not enough: the two Green Stuff World tubs already have
+        // `volumeMl: 17, container: dropper` ON DISK, and this method used to be
+        // `fresh.Details.VolumeMl ?? existing.Details.VolumeMl` with a blank-aware `Pick` on the
+        // container -- so the archive would have re-supplied both, forever, over a fresh record
+        // that correctly stated neither.
+        PaintRecord existing = R(vol: 17);
+        PaintRecord fresh = R(vol: null) with
+        {
+            Details = R().Details with { VolumeMl = null, WeightG = 250, Container = null },
+        };
+
+        PaintRecord merged = _a.Merge(existing, fresh);
+
+        Assert.Equal(250, merged.Details.WeightG);
+        Assert.Null(merged.Details.VolumeMl);
+        Assert.Null(merged.Details.Container);
+    }
+
+    [Fact]
+    public void Merge_WithNoWeightOnEitherSideIsUnchangedFromTheOldCoalesce()
+    {
+        // The 8,545 records that are genuinely volume-sold: fresh volume wins, a fresh record
+        // silent on volume keeps the stored one, and a blank container still falls back.
+        Assert.Equal(18, _a.Merge(R(vol: 12), R(vol: 18)).Details.VolumeMl);
+        Assert.Equal(12, _a.Merge(R(vol: 12), R(vol: null)).Details.VolumeMl);
+        Assert.Equal("pot", _a.Merge(R(vol: 12), R(vol: 18)).Details.Container);
+        Assert.Null(_a.Merge(R(vol: 12), R(vol: 18)).Details.WeightG);
+    }
 }

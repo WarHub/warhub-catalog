@@ -34,6 +34,10 @@
         "type": { "type": "string" },
         "finish": { "type": "string" },
         "volumeMl": { "type": "integer" },
+        "weightG": {
+          "type": "integer",
+          "description": "NET CONTENTS in grams, for a paint sold by mass rather than by volume (a foam-primer tub, a dry pigment weighed rather than jarred). A sibling of volumeMl, not a replacement: either, both or neither may be present, and a consumer that reads only volumeMl behaves exactly as it did before this key existed. NOT a shipping weight."
+        },
         "container": { "type": "string" },
         "productCode": { "type": "string" },
         "ean": { "type": "string" },

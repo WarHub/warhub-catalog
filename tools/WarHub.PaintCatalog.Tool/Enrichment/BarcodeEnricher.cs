@@ -93,6 +93,17 @@ public static class BarcodeEnricher
                 return p;
 
             string? primary = p.Ean ?? barcode.Ean;
+            // Manufacturer-asserted pot size WINS over the VolumeTable guess written upstream by
+            // VolumeEnricher; when the bridge has no volume for this paint (older file, or a trade
+            // row with a blank SIZE, or two SKUs disagreeing) the table value stands. Folded
+            // through NetContents so the bridge can also assert a MASS the day a trade register
+            // states one -- measured 2026-08-06 the committed GW extract never does (376 of 53,049
+            // sheet rows carry a SIZE, five distinct values, all ml), so this arm is inert today
+            // and kept only because PaintOverride is the bridge's read shape and the field would
+            // otherwise be silently discarded by IgnoreUnmatchedProperties.
+            NetContents.Claim contents = NetContents.Merge(
+                new NetContents.Claim(barcode.VolumeMl, barcode.WeightG, Container: null),
+                new NetContents.Claim(p.VolumeMl, p.WeightG, p.Packaging));
             return p with
             {
                 Ean = primary,
@@ -101,10 +112,9 @@ public static class BarcodeEnricher
                 // included as a candidate so it is not lost when the paint already had a different
                 // hand-set Ean that wins above.
                 AdditionalEans = BarcodeSet.Union(primary, p.AdditionalEans, barcode.AdditionalEans, [barcode.Ean]),
-                // Manufacturer-asserted pot size WINS over the VolumeTable guess written upstream
-                // by VolumeEnricher; when the bridge has no volume for this paint (older file, or
-                // a trade row with a blank SIZE, or two SKUs disagreeing) the table value stands.
-                VolumeMl = barcode.VolumeMl ?? p.VolumeMl,
+                VolumeMl = contents.VolumeMl,
+                WeightG = contents.WeightG,
+                Packaging = contents.Container,
                 // Trade list prices, when the bridge quotes them. Blank-fill only, same as Ean: a
                 // hand override still wins. Availability is NOT taken from the same evidence --
                 // a trade sheet says what a pot costs, never whether anyone has one in stock.
