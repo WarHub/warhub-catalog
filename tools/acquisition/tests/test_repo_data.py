@@ -7,6 +7,7 @@ in that case instead of failing.
 """
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 import pytest
@@ -413,4 +414,109 @@ def test_no_crossed_set_also_reaches_the_paint_catalog() -> None:
 
     assert not offenders, (
         f"rows that cross to the product catalog AND publish as paints: {offenders}"
+    )
+
+
+# --- retract: the one deletion in an append-only pipeline ------------------------------------
+
+_WHITESPACE = re.compile(r"\s+")
+
+
+def _normalize(value: str) -> str:
+    """Port of `NameNormalizer.Normalize` (tools/WarHub.CatalogStore/NameNormalizer.cs:19-26).
+
+    NFKC, collapse whitespace, trim, strip leading/trailing `'` and `"`, collapse and trim again,
+    lowercase. Kept as a literal transcription rather than something tidier: the whole point of
+    this test is that Python agrees with C# character-for-character, so any simplification here
+    would be a second implementation to keep in sync rather than a mirror of the first.
+    """
+    text = unicodedata.normalize("NFKC", value or "")
+    text = _WHITESPACE.sub(" ", text).strip()
+    text = text.strip("'\"")
+    text = _WHITESPACE.sub(" ", text).strip()
+    return text.lower()
+
+
+def _paint_identity_key(record: dict) -> str:
+    """Port of `PaintRecordAdapter.IdentityKey` (Reconcile/PaintRecordAdapter.cs:10-14).
+
+    NOT the same function as `_normalize` applied to the joined string: the adapter normalizes each
+    of the four components SEPARATELY and joins with `|`, while `PaintOverrideAliases.Load` (:34)
+    normalizes the authored key as ONE string. The two agree unless a component starts or ends with
+    a quote or whitespace -- `'Ardcoat` and mr-hobby's `Dark Gray "Dunkel Grau"` are the real cases
+    -- because a per-component pass strips a quote at a component boundary and a whole-string pass
+    does not. Such a record cannot be named by a retract or alias key at all, and this test is
+    where that would surface: the key would match zero records.
+    """
+    details = record.get("details") or {}
+    return "|".join(
+        _normalize(str(part if part is not None else ""))
+        for part in (details.get("set"), record.get("name"),
+                     record.get("productCode"), details.get("hex"))
+    )
+
+
+def test_every_retract_key_names_exactly_one_committed_paint() -> None:
+    """`retract:` is the ONLY code path in the pipeline that DELETES an archived record --
+    `CatalogReconciler` subtracts exactly this set (:52-55 input side, :104 output side) and
+    everything else is append-only. It is matched with an ordinal `HashSet<string>`
+    (PaintOverrideAliases.cs:18), so a key that matches nothing produces no error, no warning and
+    no log line: the record simply stays, and the run looks exactly like a successful retraction.
+
+    That silent no-op is the failure mode this test exists for. A key must name exactly one
+    committed record under the tool's own normalisation -- zero means the retraction misses,
+    two would mean the identity key is not identifying.
+
+    Deliberately checks against the ARCHIVE, not against the harvest: a retraction is a statement
+    about what is published, and `data/paints/brands/*.yaml` is what is published.
+
+    TWO LEGITIMATE STATES, and the assertion has to survive both. Before the paint tool runs,
+    every key names exactly one record. After it runs, every key names ZERO -- the records are
+    gone, which is the retraction working, and the block stays as the standing input-side guard.
+    An earlier draft asserted `matches == 1` unconditionally and would have turned red the moment
+    it succeeded.
+
+    So: no key may EVER name more than one record (that means the identity key is not
+    identifying), and the resolved count must be all-or-nothing. A MIXED state is the typo
+    signature -- 19 keys naming their record while the 20th names nothing is exactly the silent
+    no-op this exists to catch, and it is indistinguishable from success if you only count zeros.
+    """
+    _require_repo_data()
+    overrides_path = REPO_DATA / "paints/overrides.yaml"
+    if not overrides_path.exists():
+        pytest.skip("data/paints/overrides.yaml not present")
+    retract = (read_yaml(overrides_path) or {}).get("retract") or {}
+    if not retract:
+        pytest.skip("no retract: block declared")
+
+    ambiguous = []
+    resolved = []
+    missing = []
+    for brand_slug, keys in retract.items():
+        archive_path = REPO_DATA / "paints/brands" / f"{brand_slug}.yaml"
+        assert archive_path.exists(), (
+            f"retract: names brand {brand_slug!r}, which has no data/paints/brands file -- "
+            f"PaintOverrideAliases.Load is scoped by slug, so the whole list would be dead"
+        )
+        archive = read_yaml(archive_path) or {}
+        identities: dict[str, int] = {}
+        for record in archive.get("paints") or []:
+            key = _paint_identity_key(record)
+            identities[key] = identities.get(key, 0) + 1
+        for authored in keys:
+            # PaintOverrideAliases.Load normalizes the authored key as ONE string (:34).
+            matches = identities.get(_normalize(str(authored)), 0)
+            (ambiguous if matches > 1 else resolved if matches == 1 else missing).append(
+                (brand_slug, authored, matches)
+            )
+
+    assert not ambiguous, (
+        "retract keys naming MORE than one committed record -- the identity key is not "
+        f"identifying, and the retraction would delete several paints: {ambiguous}"
+    )
+    assert not (resolved and missing), (
+        f"{len(resolved)} retract key(s) name their record while {len(missing)} name nothing. "
+        "All-or-nothing is the only honest state: before the paint tool every key resolves, "
+        "after it none does. A mix means the ones naming nothing are MISTYPED, and a mistyped "
+        f"key is a silent no-op that leaves the record published. Suspect: {missing}"
     )
