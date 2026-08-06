@@ -311,10 +311,14 @@ aliases:
 # output side) and nothing else. Keys are matched with an ORDINAL HashSet, so a mistyped key is a
 # silent no-op with no error, no warning and no log line -- it looks exactly like success while
 # the record stays. Every key below was GENERATED from the record it names rather than transcribed,
-# then round-tripped through YAML and checked back against PaintRecordAdapter.IdentityKey: 20/20
+# then round-tripped through YAML and checked back against PaintRecordAdapter.IdentityKey: 23/23
 # match, each exactly one archive record. `test_repo_data.py` pins that check.
 #
-# All 20 are boxed MULTI-POT SETS published as if each were a single pot (maintainer decision
+# TWO GROUPS, and they are here for unrelated reasons. The 20 boxed sets below are the original
+# block; the 3 Green Stuff World singles appended after them (2026-08-06) are the forced half of
+# the `Fluor Metallic` set-naming question -- see the block comment that introduces them.
+#
+# The 20 are boxed MULTI-POT SETS published as if each were a single pot (maintainer decision
 # 2026-08-05: a boxed set is a PRODUCT, not a paint). Each carries fabricated single-pot structure
 # -- `container: dropper`, `hex: ''`, `volumeMl: 17` (reaper's says 15) -- describing a cardboard
 # box that has no volume, no container and no colour. 19 green-stuff-world, 1 reaper; they are the
@@ -400,6 +404,81 @@ retract:
     - 'Metallic Colors|s Set - Colours|9912|'
     - 'Metallic Colors|s Set - Gold|9911|'
     - 'Metallic Colors|s Set - Silver|9910|'
+    # --- The three the set-aware GSW join FORCES, 2026-08-06 -------------------------------------
+    # These three are NOT boxed sets and NOT wrong records. They are the one part of the
+    # "`Fluor Metallic` is an Arcturus-only label" question that cannot be deferred, so they land
+    # with the join fix rather than with the rest of that set-naming decision.
+    #
+    # WHAT CHANGED. `suffix_match` in gen_paint_harvest.py now filters its candidates to the sets
+    # the row's own store category may reach (GSW_UMBRELLA_SETS). greenstuffworld.com files
+    # `Fluor Paint VIOLET` (1706) and `Fluor Paint YELLOW-ORANGE` (1702) under
+    # fluorescent-acrylic-paints -> `Fluorescent`, and `Chrome Paint` (2454) under
+    # chrome-paints -> `Chrome`; the archive files all three under Arcturus-era names. So the three
+    # rows stop enriching `Fluor Metallic|Violet` / `Fluor Metallic|Yellow-orange` /
+    # `Metallic Colors|Chrome Paint` and become additions instead -- carrying the SAME barcodes
+    # (8436574500653, 8436574500615, 8436574508130) the three records already hold. Without this
+    # block each of those barcodes would sit on two records at once.
+    #
+    # WHY NOT WIDEN THE FILTER INSTEAD, which would keep all three enrichments and mint nothing.
+    # Measured 2026-08-06 over all 408 rows: admitting `Fluor Metallic` for
+    # fluorescent-acrylic-paints also UN-CROWDS the three contested keys, so 1701/1703/1760 then
+    # enrich `Yellow|Fluor Metallic`, `Orange|Fluor Metallic` and `White|Fluor Metallic` -- the
+    # three records that hold a Transparent Acrylic Ink's / Intensity Ink OSL's barcode -- and
+    # `PaintRecordAdapter.Merge:25-33` would promote the fluor barcode to primary and demote the
+    # ink's into `additionalEans`, asserting that a fluor pot was also sold under an ink's GTIN.
+    # It homes 5 of the 8 unhomed barcodes and manufactures three archival lies to do it.
+    #
+    # WHY NOT `aliases:`, WHICH IS THE OBVIOUS TOOL AND DOES NOT WORK HERE. An alias would be
+    # strictly better on paper -- rename, keep firstSeen 2026-07-10, move no barcode. It cannot
+    # fire. All three records come from the Arcturus source, which the workflow re-clones every run
+    # (paint-catalog-update.yml:58), so each is present in `fresh` under its OWN key,
+    # composite-matches at CatalogReconciler.cs:60, and its key is therefore in `consumed`
+    # (:38-46). Step 3 refuses any alias whose canonical target is consumed (:84), so the alias is
+    # skipped and the addition mints the duplicate anyway. Measured, not reasoned: all three keys
+    # carry `lastSeen: '2026-08-06', missStreak: 0` in data/paints/_liveness.yaml, which is the
+    # ledger saying `fresh` contained them on the last authoritative run. `retract:` is the only
+    # mechanism that answers a record the source keeps re-supplying -- it suppresses on INPUT
+    # (:52-55) as well as on output.
+    #
+    # THE BARCODES DO NOT GO ANYWHERE. Each retracted record's ean is the primary ean of the
+    # addition minted in the SAME run, same brand, same `primary` role -- and `_check_paints`
+    # (report.py:229) keys its no-finding rule on (brand, role), so the guard says nothing at all.
+    # Retracting these three WITHOUT the join fix would be three `paint_lost` findings and exit 5.
+    #
+    # THE ARCTURUS HEXES ARE PRESERVED BY HAND, in the field-override section below
+    # (`Violet|Fluorescent`, `Yellow-orange|Fluorescent`, `Chrome Paint|Chrome`): a harvest
+    # addition is born `hex: ''` and no swatch entry exists for any of the three, so without those
+    # three lines the colour would be lost. OverrideApplier runs after SwatchApplier and before
+    # reconciliation (PaintCatalogApp.cs:253-256, :497), so the minted record carries the hex.
+    #
+    # THE ARCHIVE DOES NOT CHANGE IN THIS COMMIT, DELIBERATELY -- same as the 20 boxed sets above.
+    # `data/paints/brands/green-stuff-world.yaml` still holds all three records with their eans,
+    # and none of the 14 new harvest additions exists yet; only the paint tool writes that file and
+    # it is not run here. Until the next full authoritative run, nothing below has happened.
+    #
+    # WHAT IS DELIBERATELY LEFT: the other 7 `Fluor Metallic` records. Three (Orange/White/Yellow)
+    # hold a barcode from a different range entirely and their rightful owners are minted by this
+    # same run; four (Blue/Lime/Red/Rose) are barcodeless duplicates of `Fluorescent` records. That
+    # is a set-naming decision about all 7 at once, with four Arcturus hexes to weigh, and it does
+    # not belong inside a join fix. Nothing here depends on it.
+    #
+    # BUT IT IS NOT FREE, and this is the sharpest way to say it: after this run all SEVEN are
+    # duplicates of a `Fluorescent` namesake, because Yellow/Orange/White|Fluorescent are minted
+    # by this very change (post-run membership: Fluor Metallic = Blue, Lime, Orange, Red, Rose,
+    # White, Yellow; Fluorescent = those seven plus Turquoise, Violet, Yellow-orange).
+    #
+    # And it BREAKS A CURRENTLY-CLEAN INVARIANT. Measured 2026-08-06 over all 412 committed
+    # green-stuff-world records (primary ean + additionalEans): ZERO barcodes are held by more
+    # than one record. This change takes that to THREE -- 8435646508665, 8435646516332 and
+    # 8435646516547 each end up on a surviving `Fluor Metallic` record AND on the newly minted
+    # `Acrylic Inks` record that rightfully owns it. `report --ean-guard` cannot see this: it keys
+    # holders on `(brand, role)`, not on the record, so a barcode on two records reads as held.
+    # That is why the duplicate count is pinned by a Python test instead --
+    # test_paint_harvest_gsw_sets.py -- and why "deferred" here means a known 0 -> 3 regression
+    # with an owner, not an unmeasured maybe.
+    - 'Fluor Metallic|Violet||#BE68E3'
+    - 'Fluor Metallic|Yellow-orange||#F89D68'
+    - 'Metallic Colors|Chrome Paint||#FCFDFF'
   reaper:
     # Double-quoted rather than single: a single-quoted YAML scalar would need `Sophie''s`, which
     # reads like a typo in the one entry that can least afford to look like one.
@@ -802,3 +881,40 @@ green-stuff-world:
     volumeMl: 60
   Flexible varnish 240ml|Varnish:
     volumeMl: 240
+  # --- Colours carried across the three retractions above (2026-08-06) --------------------------
+  # Each of these three keys names a paint that does NOT exist yet: `suffix_match`'s new set filter
+  # files skus 1706/1702/2454 as additions instead of enrichments, and a harvest addition is born
+  # `hex: ''` (HarvestApplier.cs:141-144). The three records they replace -- retracted at the top
+  # of this file so their barcodes are not left on two records at once -- carry an Arcturus colour
+  # each, and nothing else in the pipeline would carry it over: SwatchApplier is keyed
+  # `{Name}|{Set}|{ProductCode}` and data/paints/swatches/green-stuff-world.yaml has no entry for
+  # any of the three (measured 2026-08-06: it holds Blue/Lime/Red/Rose/Turquoise|Fluorescent and
+  # nothing under `Chrome`). So without these three lines the retraction trades a wrong set name
+  # for a lost colour.
+  #
+  # HEX IS NOT THE ONLY FIELD THAT MOVES, and an earlier draft of this comment implied it was.
+  # All three records are `type: Metallic, finish: Metallic` today, and both classifiers run AFTER
+  # AppendAdditions (PaintCatalogApp.cs:210 then :222-225) deriving from the record's SET -- which
+  # is the whole point of the retraction. `Fluor Metallic` and `Metallic Colors` contain the
+  # substring "Metallic"; `Fluorescent` and `Chrome` do not, so the re-homed records will classify
+  # differently. That is CORRECT rather than a loss: a fluorescent paint filed under a metallic
+  # set name was classified metallic because of the set name, not because of the pot. It is
+  # recorded because "only the colour is at risk" was wrong and the next reader should not
+  # rediscover it by diffing the archive.
+  #
+  # The values ARE the retracted records' own hexes, transcribed from
+  # data/paints/brands/green-stuff-world.yaml (`Fluor Metallic|Violet` #BE68E3,
+  # `Fluor Metallic|Yellow-orange` #F89D68, `Metallic Colors|Chrome Paint` #FCFDFF) -- the same
+  # pots under the store's own set names, so the colour is not being re-asserted, only re-homed.
+  # `OverrideApplier.Apply:64-69` recomputes R/G/B from the hex, so the three stay in sync.
+  #
+  # NOT belt-and-braces: `Chrome Paint|Chrome` is a NEW key, not a rename of `Chrome Paint|Metallic
+  # Colors`, so an ordinal-lookup miss here is silent (OverrideApplier.cs:52-55) exactly as it is
+  # for the 15 volume assertions above. All three keys were checked against the 412 committed
+  # records for collisions (0) and against the regenerated harvest additions (3/3 present).
+  Violet|Fluorescent:
+    hex: '#BE68E3'
+  Yellow-orange|Fluorescent:
+    hex: '#F89D68'
+  Chrome Paint|Chrome:
+    hex: '#FCFDFF'

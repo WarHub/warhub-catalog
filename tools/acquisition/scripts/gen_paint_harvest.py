@@ -1109,6 +1109,71 @@ GSW_SET_BY_CATEGORY = {
     "blackest-black-paint": "Blackest Black",
 }
 
+# Archive sets a store category may legitimately JOIN, where that is more than the one set it
+# MINTS into. `suffix_match` filters its candidates through this; every slug not named here
+# admits its GSW_SET_BY_CATEGORY value alone.
+#
+# KEYED BY SLUG, NOT BY SET NAME, and that is not cosmetic: the umbrella is a property of
+# greenstuffworld.com's `acrylic-inks` category spanning four archive sets, not of the string
+# "Acrylic Inks". Slug-keying also stays correct on the day two slugs map to one set.
+#
+# WHY EXACTLY THESE FOUR AND NOTHING ELSE, measured 2026-08-06 over the 408 rows `paint_rows`
+# yields for mfr-greenstuffworld. 42 rows join a set their own category does not map to, and they
+# are not one phenomenon:
+#   28 are this umbrella -- 12 Intensity Ink, 8 Wash Ink, 8 Candy Ink Metallic -- real Arcturus
+#      ink sets the store files under one category. Dropping them from this map re-mints all 28 as
+#      `Acrylic Inks` additions ("Wash Ink Aether Blue|Acrylic Inks"), duplicating 28 archive
+#      records. Measured: a strict per-slug filter with NO umbrella costs 31 enrich entries.
+#   11 are the three crowded `Fluor Metallic` keys (White x3, Orange x4, Yellow x4 claimants),
+#      already refused as contested and filed as candidates. Those are what the filter homes.
+#    3 are `Fluor Paint YELLOW-ORANGE` (1702), `Fluor Paint VIOLET` (1706) and `Chrome Paint`
+#      (2454), each enriching an archive record that is genuinely the same pot under an
+#      Arcturus-era set name (`Fluor Metallic`, `Metallic Colors`). Admitting those two set names
+#      here WOULD preserve those three enrichments -- and is a trap, measured: it also un-crowds
+#      the three contests, so 1701/1703/1760 then enrich `Yellow|Fluor Metallic` and friends, the
+#      very records holding a Transparent Acrylic Ink's barcode, and `PaintRecordAdapter.Merge`
+#      would promote the fluor barcode to primary and demote the ink's into `additionalEans` --
+#      three archival lies, on records from a range the pot was never part of. So those three are
+#      answered in data/paints/overrides.yaml by `retract:` plus a `hex:` override each -- NOT by
+#      `aliases:`, which cannot fire for them. All three records come from Arcturus, which the
+#      workflow re-clones every run, so `fresh` re-supplies each key, `consumed` is seeded with it
+#      and CatalogReconciler.cs:84 refuses the alias. That constraint has been invisible until now
+#      because every existing alias in overrides.yaml renames a HARVEST-minted record, which
+#      Arcturus never supplies -- worth knowing before reaching for `aliases:` again.
+#
+# ONE DECISION LEFT OPEN, AND IT EXPIRES AT THE NEXT TOOL RUN. Five of the ink additions this
+# unblocks inherit the store's own punctuation through `gsw_clean_name`:
+# `Acrylic Ink Opaque- Osl White` (no space after the dash, and `OSL` title-cased to `Osl`) will
+# sit beside `Acrylic Ink Opaque - Yellow`. `_GSW_PREFIX`'s `^[-–]` branch is ^-anchored and
+# cannot reach a mid-title dash, and its `fluor(escent)? (acrylic )?paint` alternative does not
+# cover "Fluor Acrylic Ink". This is NOT a decision with a deadline, as an earlier draft of this
+# comment claimed: both spellings are ALREADY committed archive identities, minted by earlier
+# harvest runs -- `Acrylic Ink Opaque- Black` (4286), `- Light Brown` (4291) and `- Turquoise`
+# (4287) carry the missing space, while `Acrylic Ink Opaque - Blue`/`- Brown`/`- Green`/`- Red`/
+# `- Siena` carry it. The ratchet re-emits all of them in this very file. So the inconsistency
+# predates these five, tidying it is a `gsw_clean_name` change affecting every one of the 175
+# additions (an unaliased rename that mints and strands, per
+# test_paint_harvest_gsw_names.py::TestNoRenameStrandsAnArchiveRecord), and nothing about it gets
+# easier or harder by running the tool. Left as generated, consistent with its own neighbours.
+GSW_UMBRELLA_SETS = {
+    "acrylic-inks": {"Acrylic Inks", "Intensity Ink", "Wash Ink", "Candy Ink Metallic"},
+}
+
+
+def gsw_allowed_sets(slug: str) -> set[str] | None:
+    """Archive sets `slug` may join, or None when the slug maps to no set at all.
+
+    None means "no hint" and restores the unhinted brand-wide-unique rule, matching
+    `Catalog.match_name`'s own None branch. Inert today -- 0 of the 408 joining rows sit in an
+    unmapped category (an unmapped row cannot become an addition either, it goes to candidates)
+    -- but it is the correct reading of "the store told us nothing", not a silent refusal.
+    """
+    set_name = GSW_SET_BY_CATEGORY.get(slug)
+    if set_name is None:
+        return None
+    return GSW_UMBRELLA_SETS.get(slug) or {set_name}
+
+
 # Leading marketing descriptors on store titles ("Acrylic Color WONKA VIOLET", "Dipping ink
 # 60 ml - Papyrus DIP"). Stripped iteratively; a trailing ALL-CAPS run is title-cased.
 #
@@ -1186,7 +1251,8 @@ def bridge_gsw() -> BrandHarvest:
     """CATALOG role since 2026-07-24 (owner-approved). greenstuffworld.com titles wrap the
     paint name in marketing prefixes ("Acrylic Color WONKA VIOLET") while the base data keeps
     bare names -- so the join is LONGEST-UNIQUE-SUFFIX on normalized names (>=5 chars, longest
-    catalog name that the store title ends with, unique at that length). Enrichment carries
+    catalog name that the store title ends with, unique at that length, AND in a set the row's
+    own store category is allowed to reach -- see GSW_UMBRELLA_SETS). Enrichment carries
     the store's REAL gtin13 EANs (100% fill) + images; unmatched paints in mapped categories
     join as additions (cleaned name, mpn as productCode, EAN at birth)."""
     catalog = Catalog("green-stuff-world")
@@ -1196,13 +1262,15 @@ def bridge_gsw() -> BrandHarvest:
     by_norm: dict[str, list[str]] = catalog.by_name
     norms = sorted(by_norm, key=len, reverse=True)
 
-    def suffix_match(store_name: str) -> str | None:
+    def suffix_match(store_name: str, allowed: set[str] | None = None) -> str | None:
         # STILL VOLUME-BLIND, AND THAT IS NOW ANSWERED BY REFUSING, NOT BY MATCHING BETTER.
         # This runs on the RAW title, so norm("Dipping ink 60 ml - PAPYRUS DIP") and
         # norm("Dipping ink 17 ml - Papyrus Dip") both END with `papyrusdip` and both return
         # `Papyrus Dip|Dipping Inks`. Two different pots, two gtin13s, 3.7375 vs 2.125 EUR, one
-        # identity. Measured 2026-08-06: 34 keys claimed by more than one row, 73 rows involved,
-        # 39 of them formerly discarded in silence by first-wins.
+        # identity. Measured 2026-08-06: 31 keys claimed by more than one row, 62 rows involved,
+        # 39 of them formerly discarded in silence by first-wins. (34 keys / 73 rows before the
+        # set filter landed later the same day -- the 3 keys and 11 rows it removed were the
+        # crowded `Fluor Metallic` ones, which were never a volume collision at all.)
         #
         # WHY NOT MAKE THE MATCH VOLUME-AWARE INSTEAD, AND WHY MINTING THE RECORDS WOULD NOT
         # DO IT. 5b9d39b taught `gsw_clean_name` to keep the volume, but that function names
@@ -1224,25 +1292,52 @@ def bridge_gsw() -> BrandHarvest:
         # first, as a pure archive pass, is still the right order.
         #
         # And no SKU can settle it either -- the test `Catalog.owner` and HarvestApplier both
-        # apply. All 34 contested keys have exactly ONE catalog paint and 0 of those paints
-        # carry a productCode (nor does any of the 174 current enrich targets; 5 of 41
+        # apply. All 31 contested keys have exactly ONE catalog paint and 0 of those paints
+        # carry a productCode (nor does any of the 171 current enrich targets; 5 of 41
         # `Dipping Inks` and 0 of 9 `Fluor Metallic` records have one, none of them here). So
         # this is `add_enrich`'s MODE B throughout -- one paint, N products -- and the caller
         # refuses BOTH claimants and reports them, which is the half of the HarvestApplier
         # precedent that applies when nothing can disambiguate.
         #
-        # AND THE OTHER CANDIDATE FIX, MEASURED RATHER THAN ASSUMED: this join is also SET-BLIND
-        # -- `Catalog.match_name` takes a `set_hint` whose docstring warns about exactly this,
-        # and 42 of the 402 joining GSW rows land in a set the store's own category contradicts.
-        # Filtering by GSW_SET_BY_CATEGORY[slug] would still be wrong. Measured 2026-08-06: 28 of
-        # the 42 are the documented `acrylic-inks` umbrella (12 Intensity Ink, 8 Wash Ink, 8
-        # Candy Ink Metallic); 11 more are the three fluor keys the refusal above already
-        # removes; and the last 3 -- `Fluor Paint VIOLET` (1706), `Fluor Paint YELLOW-ORANGE`
-        # (1702) and `Chrome Paint` (2454) -- each put THEIR OWN barcode on a record that holds
-        # exactly it today (8436574500653, 8436574500615, 8436574508130). A hint would refuse
-        # those three and then mint duplicates of them, since their categories map. The archive
-        # simply files some fluor paints under `Fluor Metallic` and a chrome paint under
-        # `Metallic Colors`; that is a set-naming question for the archive pass, not a join bug.
+        # NO LONGER SET-BLIND, AND THE FIX IS A FILTER, NOT A TIEBREAK (2026-08-06). `allowed` is
+        # `gsw_allowed_sets(categorySlug)` and it is applied with `Catalog.match_name`'s exact
+        # IN-SET-ONLY semantics (:405-414): the out-of-set keys are DISCARDED before the
+        # uniqueness test, with no fallback branch, so a name that exists only in some other set
+        # is refused outright. Two softer shapes were simulated against all 408 rows and are exact
+        # NO-OPS -- a tiebreak (consult the sets only when several keys match) and a preference
+        # (in-set first, unhinted fallback) each change 0 rows and home 0 of the 8 orphans,
+        # because every one of the 42 cross-set joins already has `len(keys) == 1` at the matched
+        # candidate. Widening the FILTER SET is therefore the only lever; see GSW_UMBRELLA_SETS
+        # for why it holds exactly four names and why admitting `Fluor Metallic` is a trap.
+        #
+        # WHAT IT COSTS AND WHAT IT BUYS, measured over the 408 rows: 14 change disposition,
+        # 394 do not, and no enrich entry changes CONTENT. 174/161/142 (enrich/additions/
+        # candidates) becomes 171/175/131. All 28 umbrella joins survive. 11 rows leave the three
+        # crowded `Fluor Metallic` contests and 3 leave `enrich` (1702/1706/2454, answered by
+        # `retract:` + `hex:` in overrides.yaml -- see the GSW_UMBRELLA_SETS note for why an alias
+        # cannot fire for an Arcturus-supplied record). The point of it is the 8 barcodes that were held by no
+        # paint record and no product at all -- 8435646516455/516486/516547 (Acrylic Ink Opaque
+        # OSL White/Orange/Yellow), 8435646524566/524580 (Fluor Acrylic Ink Yellow/Orange),
+        # 8436574500608/500622/501193 (Fluor Paint YELLOW/ORANGE/WHITE) -- which now home as
+        # additions. The `Fluor Paint` three land beside the Blue/Lime/Red/Rose/Turquoise
+        # `Fluorescent` already holds; the ink five had no catalog representation whatsoever.
+        #
+        # AND THE CROWDING, NOT THE MATCH, IS WHAT UNHOMED THEM. The set-blind join wrote ZERO
+        # wrong values into today's harvest: 11 of its 14 wrong-set rows were ALREADY refused as
+        # contested and the other 3 put their own barcode on a record that holds exactly it. What
+        # it did was pile 3-4 claimants onto `White|Fluor Metallic`, `Orange|Fluor Metallic` and
+        # `Yellow|Fluor Metallic` until the refusal above fired on all of them. The three wrong
+        # barcodes sitting on those records on disk are residue from 7873af8, predating contest
+        # detection -- this filter stops nothing that is currently happening, it promotes 11
+        # candidates to correct homes.
+        #
+        # NOT the reason Blue/Lime/Red/Rose escaped, though it looks like it: those four names
+        # exist in BOTH `Fluorescent` and `Fluor Metallic`, but the loop never gets far enough to
+        # notice. `blue`/`lime`/`rose` norm to 4 characters and `red` to 3, so `len(cand) < 5`
+        # breaks first and they match nothing at all. `white` (5) is the shortest name that clears
+        # the floor and is exactly the shortest that got mis-joined. Anyone lowering that floor is
+        # relying on the two-set ambiguity, which is a second line of defence, not the operative
+        # one.
         #
         # WHAT THIS DOES NOT REPAIR, and it is most of it. Re-measured 2026-08-06 over the 39
         # committed `Dipping Inks` records (41 before 2277fb1 retracted the 2 boxed sets; the
@@ -1276,18 +1371,27 @@ def bridge_gsw() -> BrandHarvest:
         # Worse in kind and NOT a volume question at all: `Orange`, `Yellow` and `White` in
         # `Fluor Metallic` hold a Transparent Acrylic Ink's / Intensity Ink OSL's barcode, from a
         # different range entirely, and in all three contests the row first-wins discarded was
-        # the `Fluor Paint` one that belongs there.
+        # the `Fluor Paint` one that belongs there. STILL TRUE ON DISK after this change: the
+        # filter mints those inks' rightful owners (3506/4273/4281 -> `Acrylic Inks`) but nothing
+        # here can take a barcode OFF a record -- `OverrideApplier` unions the displaced primary
+        # back into `additionalEans` and so does `PaintRecordAdapter.Merge`, leaving `retract:` as
+        # the only mechanism in the pipeline that removes one. That is an archive change, tracked
+        # separately; the ordering it needs is supplied here, because a retraction whose barcode
+        # lands on a same-brand, same-role record in the SAME run is `moved`, not `lost`.
         n = norm(store_name)
-        best: str | None = None
         for cand in norms:
             if len(cand) < 5:
                 break  # sorted by length desc; everything after is shorter
             if n == cand or n.endswith(cand):
                 keys = by_norm[cand]
+                if allowed is not None:
+                    # `rsplit`, not `endswith(f"|{set}")`: equivalent only while no paint name
+                    # contains a pipe, and this is the spelling that stays true if one ever does.
+                    keys = [k for k in keys if k.rsplit("|", 1)[1] in allowed]
                 if len(keys) == 1:
                     return keys[0]
-                return None  # ambiguous at the longest match -- refuse
-        return best
+                return None  # ambiguous (or out of set) at the longest match -- refuse
+        return None
 
     rows = paint_rows("mfr-greenstuffworld", out)
     # PASS 1 -- WHO CLAIMS WHAT. A store product is identified by its sku, so a key two skus
@@ -1297,11 +1401,18 @@ def bridge_gsw() -> BrandHarvest:
     # report it under the catalog's name rather than the store's own two titles.
     #
     # Only rows that would actually enrich count as claimants: a `previous_addition_codes` row
-    # is on its way to `additions` and takes no identity here (0 of the 73 contested rows are
-    # prior additions today -- the guard is for the day one is).
+    # is on its way to `additions` and takes no identity here (0 of the 62 contested rows are
+    # prior additions today, and 0 of the 14 the set filter promoted out of the contests were
+    # either -- the guard is for the day one is).
+    #
+    # The `allowed` argument MUST be computed the same way here as in the filing loop below.
+    # A pass that counts claims on an unfiltered join and files them on a filtered one contests
+    # keys the filing loop never reaches, and vice versa -- the two would disagree about which
+    # rows are refused, which is the one thing this two-pass shape exists to make impossible.
     claims: dict[str, set[str]] = {}
     for o in rows:
-        key = suffix_match(o["name"])
+        key = suffix_match(o["name"],
+                           gsw_allowed_sets((o.get("hints") or {}).get("categorySlug") or ""))
         if key is not None and str(o.get("sku") or "") not in prior_additions:
             claims.setdefault(key, set()).add(str(o.get("sku") or ""))
     contested = {key: skus for key, skus in claims.items() if len(skus) > 1}
@@ -1327,33 +1438,37 @@ def bridge_gsw() -> BrandHarvest:
         sku = str(o.get("sku") or "")
         common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
                   "sourceUrl": o.get("url"), "source": "mfr-greenstuffworld"}
-        key = suffix_match(o["name"])
+        key = suffix_match(o["name"], gsw_allowed_sets(slug))
         if key is not None and sku not in prior_additions:
             if key in contested:
                 # REFUSED EXPLICITLY, and the explicitness is the whole point: in this bridge a
                 # missing match is not a refusal. `suffix_match` returning None falls through to
-                # the GSW_SET_BY_CATEGORY branch below, and all 73 contested rows sit in a mapped
-                # category -- so "refuse both" written as "return None" PROPOSES 73 NEW PAINTS
+                # the GSW_SET_BY_CATEGORY branch below, and all 62 contested rows sit in a mapped
+                # category -- so "refuse both" written as "return None" PROPOSES 62 NEW PAINTS
                 # (measured on this branch; since 5b9d39b their cleaned names are volume-suffixed,
                 # 0 colliding with each other and 0 with an existing catalog key, so they would
-                # all mint). Those 73 records are probably the right end state, but not yet:
+                # all mint). Those 62 records are probably the right end state, but not yet:
                 # minting "Papyrus Dip 60 ml" and "Papyrus Dip 17 ml" beside a bare "Papyrus Dip"
                 # that still holds the 60 ml barcode grows the catalog instead of repairing it.
                 # Candidates now, additions after the archive pass -- in that order.
                 #
                 # WHAT THAT COSTS, EXACTLY, because a candidate carries only
                 # {name, sku, url, source, reason} -- no ean, no price, no imageUrl (see
-                # `BrandHarvest.contested_candidates`). All 73 of these rows carry a gtin13, 73
-                # DISTINCT ones. Before this change 34 of the 73 reached data/paints/harvest as
-                # the first-wins winner's `ean`; after it, 0 of the 73 appear anywhere under
-                # data/paints/harvest. Of the 73 barcodes, 34 are already written into
-                # data/paints/brands/green-stuff-world.yaml (the winners -- 31 on `Dipping Inks`
-                # records, 3 on `Fluor Metallic`) and 39 exist NOWHERE under data/
-                # outside data/evidence/products/mfr-greenstuffworld/observations.jsonl -- the
-                # same 39 rows first-wins was discarding in silence, now named by sku and url but
-                # still with their barcodes only in the evidence file. So the refusal does not
-                # lose a barcode the repo had; it declines to promote 34 and reports, rather than
-                # hides, the 39. Recovering any of them means reading the evidence file.
+                # `BrandHarvest.contested_candidates`). All 62 of these rows carry a gtin13, 62
+                # DISTINCT ones. Before the refusal landed, 31 of them reached data/paints/harvest
+                # as the first-wins winner's `ean`; after it, 0 appear anywhere under
+                # data/paints/harvest. Of the 62 barcodes, 31 are already written into
+                # data/paints/brands/green-stuff-world.yaml (the winners, all 31 on `Dipping Inks`
+                # records) and 31 exist NOWHERE under data/ outside
+                # data/evidence/products/mfr-greenstuffworld/observations.jsonl. So the refusal
+                # does not lose a barcode the repo had; it declines to promote 31 and reports,
+                # rather than hides, the other 31. Recovering any of them means reading the
+                # evidence file.
+                #
+                # The 3 `Fluor Metallic` winners this paragraph used to count here are gone from
+                # the tally (2026-08-06): the set filter took all 11 of those rows out of the
+                # contests entirely, and the 8 barcodes that were held by nothing at all now home
+                # as additions. What is left is one phenomenon, not two -- 31 dipping-ink pairs.
                 out.candidates.append(
                     {"name": o["name"], "sku": sku or None, "url": o.get("url"),
                      "source": "mfr-greenstuffworld",
