@@ -1244,15 +1244,30 @@ def bridge_gsw() -> BrandHarvest:
         # simply files some fluor paints under `Fluor Metallic` and a chrome paint under
         # `Metallic Colors`; that is a set-naming question for the archive pass, not a join bug.
         #
-        # WHAT THIS DOES NOT REPAIR, and it is most of it. Measured 2026-08-06 over the 41
-        # committed `Dipping Inks` records: 33 carry a 60 ml row's ean/EUR 3.7375/image, 5 carry
-        # a 17 ml row's, 1 has none, 2 are boxed sets 9c62fb2 left behind. Withholding an entry
-        # never un-writes a populated field (`HarvestApplier.ApplyEnrichment` and
-        # `BarcodeEnricher` blank-fill), so all 33 stay exactly as they are. Nor does `volumeMl`
-        # tell you which pot they mean -- VolumeTable.cs:101 is `("Green Stuff World", null, 17,
-        # "dropper")`, a null set list, and all 400 GSW records say 17 including
-        # `Chrome Spray Paint 400ml`. Deciding what those records denote, and minting the volume
-        # -named pair for each colour, is an archive pass that has to land as its own change.
+        # WHAT THIS DOES NOT REPAIR, and it is most of it. Re-measured 2026-08-06 over the 39
+        # committed `Dipping Inks` records (41 before 2277fb1 retracted the 2 boxed sets; the
+        # brand is 381 records, not 400): 33 carry a 60 ml row's ean/EUR 3.7375/image, 5 carry a
+        # 17 ml row's, 1 has none. Withholding an entry never un-writes a populated field
+        # (`HarvestApplier.ApplyEnrichment` and `BarcodeEnricher` blank-fill), so all 33 stay
+        # exactly as they are, and this bridge cannot repair one of them.
+        #
+        # THAT ARCHIVE PASS HAS NOW LANDED FOR 31 OF THE 33, BY HAND, in data/paints/overrides.yaml
+        # (2026-08-06) -- and it is invisible from here, deliberately. Those 31 are the ones whose
+        # 17 ml sibling barcode was held by NOTHING; the file declares the bare record to be the
+        # 60 ml pot (`volumeMl: 60`) and mints the 17 ml pot with its own ean/imageUrl, so no
+        # barcode moves. This function is unaffected: simulated with all 31 minted records in the
+        # archive, this bridge's output is unchanged (+0/-0 on enrich 174, additions 161,
+        # candidates 142), because the rule below is still `n.endswith(cand)` and
+        # `dippingink17mlpapyrusdip` ends with `papyrusdip`, never `papyrusdip17ml`. Minting was
+        # necessary and, exactly as the paragraph above says, not sufficient.
+        #
+        # STILL OPEN, and NOT a barcode question: `volumeMl` says nothing about which pot a record
+        # means anywhere else in this brand. VolumeTable.cs:101 is `("Green Stuff World", null, 17,
+        # "dropper")`, a null set list written unconditionally by VolumeEnricher, and 81 records
+        # still contradict their own barcode's `hints.ml` (Flexible 26, Dry Brush 20, Primer 9,
+        # Spray Primer 9, Chameleon Spray 7, Varnish 5, Chrome Spray 2, Dipping Inks 2,
+        # Blackest Black 1 -- including `Chrome Spray Paint 400ml`), and the same line stamps
+        # `container: dropper` on 18 aerosol cans. That is a volume-table change, not a bridge one.
         # Worse in kind and NOT a volume question at all: `Orange`, `Yellow` and `White` in
         # `Fluor Metallic` hold a Transparent Acrylic Ink's / Intensity Ink OSL's barcode, from a
         # different range entirely, and in all three contests the row first-wins discarded was
