@@ -337,10 +337,13 @@ aliases:
 # that crossed into the product catalog `moved` rather than `lost`, so these 19 report as moved
 # and the run stays green; retracting BEFORE the re-home would have been 19 genuine losses.
 #
-# THE ARCHIVE DOES NOT CHANGE IN THIS COMMIT, DELIBERATELY. `data/paints/brands/*.yaml` still holds
-# all 20 records; only the paint tool can remove them, and it is not run here. Reading this block
-# as "already retracted" is the mistake to avoid -- until the next full authoritative run, the 20
-# are still published.
+# APPLIED. This paragraph used to say the opposite -- "the archive does not change in this commit,
+# the 20 are still published" -- which was true when the block was written and false from the
+# moment commit 2277fb1 ran the paint tool. Measured 2026-08-07: 0 set-shaped hexless records
+# remain in either brand file, `report --ean-guard` reports the 19 GSW barcodes as `moved` (held
+# by their product records) and exits 0. A comment describing a pending action AFTER it has been
+# taken is worse than none: it tells the next reader the block is inert and invites them to
+# "apply" it again.
 #
 # The generator stopped PROPOSING them in 6b3c930: all 20 sit in `candidates:` in
 # data/paints/harvest/{green-stuff-world,reaper}.yaml under `reason: boxed set -- crosses to the
@@ -451,10 +454,11 @@ retract:
     # three lines the colour would be lost. OverrideApplier runs after SwatchApplier and before
     # reconciliation (PaintCatalogApp.cs:253-256, :497), so the minted record carries the hex.
     #
-    # THE ARCHIVE DOES NOT CHANGE IN THIS COMMIT, DELIBERATELY -- same as the 20 boxed sets above.
-    # `data/paints/brands/green-stuff-world.yaml` still holds all three records with their eans,
-    # and none of the 14 new harvest additions exists yet; only the paint tool writes that file and
-    # it is not run here. Until the next full authoritative run, nothing below has happened.
+    # APPLIED, and this paragraph is corrected for the same reason as the one above the 20 boxed
+    # sets: it said "the archive does not change in this commit ... nothing below has happened",
+    # which stopped being true when 240dc3d ran the paint tool. Measured 2026-08-07: 0
+    # `Fluor Metallic` records remain, the 14 harvest additions exist, and the three barcodes are
+    # each held by exactly one record.
     #
     # WHAT WAS DELIBERATELY LEFT -- SETTLED in the block below, same day, once the archive had been
     # rebuilt and the fluorescent chart could be re-sampled. The rest of this paragraph is kept
