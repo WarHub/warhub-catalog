@@ -19,10 +19,34 @@
 # zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: all 802 refs are
 # 5 chars, the archive stores 0 codes with a leading zero, 744 refs match only after stripping
 # and 58 match verbatim (56 89xxx Bones Ultra-Coverage plus the two unresolved 29xxx). No ref
-# needs any other rule.
+# needs any other rule -- and AK needs none at all: its refs are alpha-prefixed, so `lstrip("0")`
+# is a no-op on every one of them, and the archive already stores the same zero-padded form the
+# source prints (AK004, AK012, AK088). Do NOT "helpfully" extend the rule to strip zeros after the
+# prefix. AK011/AK012/AK088/AK089 are genuinely absent from data/paints/brands/ak-interactive.yaml
+# and AK11/AK88 do not exist either, so the only thing such a rule could do is convert honest
+# refusals into silent misses.
 #
-# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason.
-# Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich, HarvestApplier.ApplyEnrichment).
+# `from` ON A SET says where its refs came from, and the two are not the same claim. "stated" is a
+# machine-readable contents array the source published (mfr-reaper's `associatedProducts`) and is
+# exhaustive by construction. "description" is resolve/set_refs.py reading codes out of the
+# source's own prose, which is NOT guaranteed exhaustive -- measured live 2026-08-07, 46 of AK's
+# 256 boxed-set pages state a colour COUNT in words and enumerate nothing, and 6 print a second,
+# explicitly not-included bulleted list in the identical shape. Treat a "description" set as a
+# lower bound on the box; treat a "stated" one as the box.
+#
+# ONE PHYSICAL BOX MAY APPEAR TWICE, under two manufacturers, and that is intended rather than a
+# bug to de-duplicate. AK's 24 "Quick Gen" boxes are sold by Warlord too, and because AK publishes
+# ZERO barcodes anywhere the two product records can never join -- so `warlord-games/AK17522` and
+# `ak-interactive/AK17522` are two records of one box, each stating its contents from its own
+# source's words. This relation is keyed by PRODUCT id, not by box, so both belong in it; a test
+# forbidding identical member sets under different manufacturers would forbid a true statement.
+# What would be wrong is one of them silently winning.
+#
+# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason, and so
+# does a code the same set lists TWICE -- see the repeat branch in resolve_manufacturer for the
+# AK17068 OLD GOLD / COLD STEEL typo that makes the difference between a visible refusal and a
+# silently halved set. Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich,
+# HarvestApplier.ApplyEnrichment).
 # THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
 # hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
 # material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
@@ -58,6 +82,7 @@ reaper:
     reaper/08906:
       name: 'Learn To Paint Kit: Core Skills'
       brand: reaper
+      from: stated
       members:
         - ref: '09030'
           brand: reaper
@@ -105,6 +130,7 @@ reaper:
     reaper/08907:
       name: 'Learn to Paint Kit: Layer Up!'
       brand: reaper
+      from: stated
       members:
         - ref: '09007'
           brand: reaper
@@ -153,6 +179,7 @@ reaper:
     reaper/08908:
       name: 'Learn to Paint Kit: Core Skills Color Expansion'
       brand: reaper
+      from: stated
       members:
         - ref: '09003'
           brand: reaper
@@ -189,6 +216,7 @@ reaper:
     reaper/08909:
       name: 'Learn to Paint Kit: Layer Up! Color Expansion'
       brand: reaper
+      from: stated
       members:
         - ref: '09012'
           brand: reaper
@@ -221,6 +249,7 @@ reaper:
     reaper/09901:
       name: 'Reaper Fast Palette: Flesh of the Damned - Undead Skin'
       brand: reaper
+      from: stated
       members:
         - ref: '09148'
           brand: reaper
@@ -249,6 +278,7 @@ reaper:
     reaper/09902:
       name: 'Reaper Fast Palette: Fantasy Flesh - Fair Skin'
       brand: reaper
+      from: stated
       members:
         - ref: '09046'
           brand: reaper
@@ -277,6 +307,7 @@ reaper:
     reaper/09903:
       name: 'Reaper Fast Palette: Fire and Brimstone: Fiery Reds'
       brand: reaper
+      from: stated
       members:
         - ref: '09001'
           brand: reaper
@@ -305,6 +336,7 @@ reaper:
     reaper/09904:
       name: 'Reaper Fast Palette: Hammer and Anvil - Steel Colors'
       brand: reaper
+      from: stated
       members:
         - ref: '09052'
           brand: reaper
@@ -333,6 +365,7 @@ reaper:
     reaper/09907:
       name: 'Reaper Fast Palette: Fantasy Flesh - Tanned Skin (Medium Skintones)'
       brand: reaper
+      from: stated
       members:
         - ref: '09043'
           brand: reaper
@@ -361,6 +394,7 @@ reaper:
     reaper/09914:
       name: 'Learn to Paint: Goblins Quick-Paint Kit'
       brand: reaper
+      from: stated
       members:
         - ref: '09022'
           brand: reaper
@@ -397,6 +431,7 @@ reaper:
     reaper/09915:
       name: 'Learn to Paint: Kobolds Quick-Paint Kit'
       brand: reaper
+      from: stated
       members:
         - ref: '09053'
           brand: reaper
@@ -433,6 +468,7 @@ reaper:
     reaper/09916:
       name: 'Learn to Paint: Zombies Quick-Paint Kit'
       brand: reaper
+      from: stated
       members:
         - ref: '09056'
           brand: reaper
@@ -460,6 +496,7 @@ reaper:
     reaper/09917:
       name: Dragon Colors Paint Set
       brand: reaper
+      from: stated
       members:
         - ref: '09410'
           brand: reaper
@@ -488,6 +525,7 @@ reaper:
     reaper/09918:
       name: 'Learn to Paint: Grave Wraith Quick-Paint Kit'
       brand: reaper
+      from: stated
       members:
         - ref: '09059'
           brand: reaper
@@ -512,6 +550,7 @@ reaper:
     reaper/09951:
       name: 'Master Series Paints Core Colors Set #1'
       brand: reaper
+      from: stated
       members:
         - ref: '09001'
           brand: reaper
@@ -948,6 +987,7 @@ reaper:
     reaper/09952:
       name: 'Master Series Paints Core Colors Basics #1'
       brand: reaper
+      from: stated
       members:
         - ref: '09001'
           brand: reaper
@@ -1168,6 +1208,7 @@ reaper:
     reaper/09956:
       name: Master Series Paint Core Colors Master Set
       brand: reaper
+      from: stated
       members:
         - ref: '09001'
           brand: reaper
@@ -2036,6 +2077,7 @@ reaper:
     reaper/09957:
       name: 'Master Series Core Colors Set #2'
       brand: reaper
+      from: stated
       members:
         - ref: '09117'
           brand: reaper
@@ -2464,6 +2506,7 @@ reaper:
     reaper/09966:
       name: Reaper Master Series Bones Ultra-Coverage Paints Basic Set (09401-09454)
       brand: reaper
+      from: stated
       members:
         - ref: '09401'
           brand: reaper
@@ -2684,6 +2727,7 @@ reaper:
     reaper/09967:
       name: 'Master Series Paints: Pathfinder Colors of Golarion - Paint Set #1'
       brand: reaper
+      from: stated
       members:
         - ref: '89501'
           brand: reaper
@@ -2800,6 +2844,7 @@ reaper:
     reaper/09968:
       name: 'Master Series Paints: Pathfinder Colors of Golarion - Paint Set #2'
       brand: reaper
+      from: stated
       members:
         - ref: '89529'
           brand: reaper
@@ -2916,6 +2961,7 @@ reaper:
     reaper/09974:
       name: 'MSP Bones: Monster Colors Set'
       brand: reaper
+      from: stated
       members:
         - ref: '09455'
           brand: reaper
@@ -2944,6 +2990,7 @@ reaper:
     reaper/09975:
       name: 'MSP Bones: Dungeon Colors Set'
       brand: reaper
+      from: stated
       members:
         - ref: '09461'
           brand: reaper
@@ -2972,6 +3019,7 @@ reaper:
     reaper/09976:
       name: 'MSP Bones Ultra-Coverage Paints: Set #1'
       brand: reaper
+      from: stated
       members:
         - ref: '09401'
           brand: reaper
@@ -3040,6 +3088,7 @@ reaper:
     reaper/09977:
       name: 'MSP Bones Ultra-Coverage Paints: Set #2'
       brand: reaper
+      from: stated
       members:
         - ref: '09417'
           brand: reaper
@@ -3108,6 +3157,7 @@ reaper:
     reaper/09978:
       name: 'MSP Bones Ultra-Coverage Paints: Set #3'
       brand: reaper
+      from: stated
       members:
         - ref: '09433'
           brand: reaper
@@ -3176,6 +3226,7 @@ reaper:
     reaper/09979:
       name: 'MSP Bones Ultra-Coverage Paints: Set #4'
       brand: reaper
+      from: stated
       members:
         - ref: '09449'
           brand: reaper
@@ -3244,6 +3295,7 @@ reaper:
     reaper/09980:
       name: 'MSP Bones Ultra-Coverage Paints: Set #5'
       brand: reaper
+      from: stated
       members:
         - ref: '09465'
           brand: reaper
@@ -3312,6 +3364,7 @@ reaper:
     reaper/09981:
       name: 'MSP Bones Ultra-Coverage Paints: Set #6'
       brand: reaper
+      from: stated
       members:
         - ref: '09481'
           brand: reaper

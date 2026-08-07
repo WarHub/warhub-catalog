@@ -161,3 +161,45 @@ def test_a_member_records_the_brand_it_resolved_in() -> None:
                         f"{set_id} member {member.get('ref')}: resolved in {member['brand']!r} "
                         f"which is not among the searched brands {sorted(searched)}"
                     )
+
+
+def test_every_set_records_where_its_refs_came_from() -> None:
+    """`from` distinguishes a contents ARRAY the source published ("stated", exhaustive by
+    construction) from codes read out of its PROSE ("description", a lower bound). Measured live
+    2026-08-07 over AK's 256 boxed-set pages, 47 state a colour count in words and enumerate
+    nothing and 6 print a second, explicitly NOT-INCLUDED bulleted list in the identical shape --
+    so the weaker claim is materially weaker, and a relation that flattened the two would launder
+    that away. It must be present on every set, not defaulted at read time."""
+    for path in _require():
+        for brand, block in _load(path).items():
+            for set_id, entry in (block.get("sets") or {}).items():
+                assert entry.get("from") in ("stated", "description"), (
+                    f"{path.name}/{brand}/{set_id}: `from` must say whether these refs came from a "
+                    f"contents array or from the description, got {entry.get('from')!r}"
+                )
+
+
+def test_a_description_derived_set_is_still_reproducible_from_that_description() -> None:
+    """The provenance claim has to be checkable, or it is decoration. For every set marked
+    `from: description`, re-running resolve/set_refs.py over the product record's own description
+    must reproduce its refs exactly -- same codes, same order, same repeats. This is the
+    description-side equivalent of the contentSkus cross-check above, and together they mean no ref
+    in this file can exist without a committed source line that states it."""
+    sys.path.insert(0, str(REPO_ROOT / "tools/acquisition/src"))
+    from warhub_acquisition.resolve.set_refs import content_skus_from_description
+
+    descriptions: dict[str, str | None] = {}
+    for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
+        for product in (_load(path).get("products") or []):
+            descriptions[product["id"]] = product.get("description")
+
+    for path in _require():
+        for block in _load(path).values():
+            for set_id, entry in (block.get("sets") or {}).items():
+                if entry.get("from") != "description":
+                    continue
+                refs = [m["ref"] for m in entry.get("members") or []]
+                refs += [u["ref"] for u in entry.get("unresolved") or []]
+                assert sorted(refs) == sorted(
+                    content_skus_from_description(descriptions.get(set_id)) or []
+                ), f"{set_id}: refs do not reproduce from the product record's description"

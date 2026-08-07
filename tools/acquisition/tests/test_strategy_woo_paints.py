@@ -103,3 +103,41 @@ def test_full_sweep_claimed_within_declared_scope() -> None:
     result = run()
     assert result.full_sweep is True
     assert result.cursor == {}
+
+
+def test_short_description_is_captured_verbatim() -> None:
+    """AK's Store API returns `short_description` in the SAME payload the sweep already fetches --
+    zero extra requests -- and it is the ONLY route by which AK's 256 boxed-set rows ever say what
+    is in them (they carry no contents array, and every one of their observations today has hint
+    keys exactly {category, categorySlugs}).
+
+    VERBATIM, byte for byte: not unescaped, not tag-stripped, not sliced to the English half. The
+    field is a bilingual accordion and keeping only English would save ~59% of the bytes -- and
+    would be acquire-time classification, so the day that slice is wrong it costs a re-fetch
+    instead of a `warhub-data resolve` run. resolve/set_refs.py makes the cut once, late.
+    """
+    result = run()
+    fixture = {item["sku"]: item for item in load_fixture("ak-quick-page1.json")}
+    boxed_set = next(o for o in result.observations if o.key.endswith(":704678"))
+    assert boxed_set.hints["description"] == fixture["AK11787"]["short_description"]
+    assert "ESPA" in boxed_set.hints["description"]  # the Spanish half is kept, uncut
+    assert boxed_set.hints["description"].startswith('<span class="collapseomatic ')
+
+
+def test_a_captured_description_carries_the_boxed_sets_membership() -> None:
+    """End to end on a REAL captured payload: AK11787 "Sun & Shade Tone Collection" states 14
+    colours in prose and nowhere else. This is the whole point of the capture, so it is asserted
+    against the parser rather than left to be inferred from the two halves passing separately."""
+    from warhub_acquisition.resolve.set_refs import content_skus_from_description
+
+    result = run()
+    boxed_set = next(o for o in result.observations if o.key.endswith(":704678"))
+    refs = content_skus_from_description(boxed_set.hints["description"])
+    assert refs == [
+        "AK11001", "AK11029", "AK11040", "AK11051", "AK11064", "AK11087", "AK11103",
+        "AK11109", "AK11112", "AK11113", "AK11121", "AK11124", "AK11151", "AK11156",
+    ]
+    # ...and the single pot in the same sweep states no membership at all, so capturing the field
+    # on every row does not turn 999 singles into 999 one-item sets.
+    single = next(o for o in result.observations if o.key.endswith(":107107"))
+    assert content_skus_from_description(single.hints["description"]) is None
