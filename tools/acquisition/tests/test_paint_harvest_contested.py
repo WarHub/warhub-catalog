@@ -177,11 +177,16 @@ class TestASecondProductCannotTakeAnIdentity:
 
 
 def _catalog(tmp_path: Path, slug: str, paints: list[dict]):
-    """A real `Catalog` over a synthetic brand file (BRANDS_DIR is monkeypatched by `evidence`)."""
+    """A real `Catalog` over a synthetic brand file (BRANDS_DIR is monkeypatched by `evidence`).
+
+    The dir is passed to `Catalog` explicitly: it moved into warhub_acquisition.paints.catalog to
+    be shared with gen_set_contents.py, and takes its brands dir as an argument rather than reading
+    a module constant that would have to encode the repo layout from inside the package.
+    """
     (harvest.BRANDS_DIR / f"{slug}.yaml").write_text(
         yaml.safe_dump({"paints": paints}, sort_keys=False), encoding="utf-8"
     )
-    return harvest.Catalog(slug)
+    return harvest.Catalog(slug, harvest.BRANDS_DIR)
 
 
 class TestTheTwoModes:

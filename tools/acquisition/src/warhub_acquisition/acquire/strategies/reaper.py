@@ -104,13 +104,56 @@ def _availability(product: dict) -> str | None:
 
 def _content_skus(product: dict) -> list[str]:
     """Paint-material component skus of a set (associatedProducts also lists brushes and Bones
-    figures -- only the paint contents are paint evidence)."""
+    figures -- only the paint contents are paint evidence).
+
+    THE SITE STATES NO QUANTITY, so neither does this. Measured live 2026-08-07 across all three
+    set-kind pages: 848 associatedProducts entries on 31 set items, and the union of their keys is
+    exactly {sku, name, category, filename, material} -- no count/qty/quantity field -- with 0 sets
+    repeating a sku (the doubling-likely candidates 08906/08907 and the Quick-Paint Kits included).
+    The set comprehension below therefore discards nothing on 100% of real data, and swapping it
+    for a repeat-preserving list would be a change that can never fire. Do NOT "recover" quantity
+    with a strategy change plus a re-acquire; there is nothing upstream to recover. See
+    models/catalog.py::CanonicalProduct.contentSkus, which asserted the opposite reason until
+    this was measured.
+
+    `material == "paint"` is a WHITELIST, and 2 real paints fall outside it -- see the caller's
+    `content_sku_material_unstated` stat for why that is reported rather than papered over.
+    """
     skus = {
         str(item["sku"])
         for item in (product.get("associatedProducts") or [])
         if isinstance(item, dict) and item.get("sku") and str(item.get("material") or "").lower() == "paint"
     }
     return sorted(skus)
+
+
+def _material_unstated_paints(product: dict) -> list[str]:
+    """Members `_content_skus` DROPS that the site's own `category` calls a paint range.
+
+    A silent 25% under-report, found live 2026-08-07 and invisible in committed data: set 09916
+    ("Learn to Paint: Zombies Quick-Paint Kit") lists 8 paint members on reapermini.com but only 6
+    reach `contentSkus`. Skus 29137 "Vampire Pallor" and 29143 "Golden Griffon Brown" sit in
+    category ["Master Series Paints Core Colors"] yet carry `material: null` and `filename: false`
+    -- malformed records on Reaper's side -- so the whitelist above rejects them without a word.
+    These 2 are the only such entries in all 848; the other 22 rejects are genuinely brushes
+    (material "accessory") and Bones figures (material "plastic").
+
+    ADMISSION IS NOT WIDENED, deliberately. A blank `material` is UNSTATED, and admitting on the
+    strength of `category` alone would be this repo inferring a taxonomy the source declined to
+    state -- the guess HarvestApplier.ApplyEnrichment exists to refuse. It would also recover
+    nothing joinable: 29137 and 29143 are absent from data/paints/brands/reaper.yaml, like the
+    29xxx codes 29107 and 29815 that already land in set-contents' `unresolved:` block. All four
+    are the SAME root cause -- the 29xxx High Density range has no `linePages` entry in
+    data/catalog/sources/mfr-reaper.yaml. The fix is to extend the descriptor, and this counter
+    is what makes the gap show up in run stats instead of nowhere.
+    """
+    return sorted(
+        str(item["sku"])
+        for item in (product.get("associatedProducts") or [])
+        if isinstance(item, dict) and item.get("sku")
+        and not str(item.get("material") or "").strip()
+        and any("paint" in str(c).lower() for c in (item.get("category") or []))
+    )
 
 
 def reaper_strategy(
@@ -128,6 +171,10 @@ def reaper_strategy(
         "sku_missing": 0,
         "skipped_unknown_vendor": 0,
         "image_missing": 0,
+        # Set members the site's `category` calls a paint but whose `material` it leaves blank,
+        # so `_content_skus` drops them. 2 today (09916 -> 29137, 29143) and they are NOT a
+        # rounding error -- they are a quarter of that box. See `_material_unstated_paints`.
+        "content_sku_material_unstated": 0,
     }
 
     manufacturer_name = str(descriptor.scope.get("manufacturer") or "")
@@ -176,6 +223,7 @@ def reaper_strategy(
             content_skus = _content_skus(product)
             if content_skus:
                 hints["contentSkus"] = content_skus
+            stats["content_sku_material_unstated"] += len(_material_unstated_paints(product))
 
             price_kwargs: dict[str, object] = {}
             price_cents = product.get("price")
