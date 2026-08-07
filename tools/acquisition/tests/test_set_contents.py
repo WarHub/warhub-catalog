@@ -108,9 +108,14 @@ def test_every_member_names_exactly_one_committed_paint() -> None:
     for path in _require():
         for block in _load(path).values():
             for set_id, entry in (block.get("sets") or {}).items():
-                brand = entry.get("brand")
-                records = archives.get(brand) or []
                 for member in entry.get("members") or []:
+                    # The MEMBER's brand, not the set's. The set-level `brand` lists every archive
+                    # that was SEARCHED (comma-joined once a manufacturer can draw from several,
+                    # e.g. warlord-games -> "army-painter, ak-interactive"), so looking a record up
+                    # under it finds nothing. Only the member says where it was FOUND, which is
+                    # the whole reason that field exists -- and this test failing on the joined
+                    # string is what proved it.
+                    records = archives.get(member.get("brand")) or []
                     name, _, set_name = str(member["paint"]).partition("|")
                     hits = [
                         r for r in records

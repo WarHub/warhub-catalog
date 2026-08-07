@@ -630,12 +630,28 @@ def ak_prettify(name: str) -> str:
     return " ".join(words)
 
 
+# A dash with whitespace on AT LEAST ONE side, never neither. The first version required a space
+# on BOTH (` - ` and ` – `), and AK does not always type one: measured 2026-08-07 over the
+# 1,142 committed observations, `WARM YELLOW- QUICK GEN COLOR` (AK17010) and
+# `SPACE YELLOW- QUICK GEN COLOR` (AK17011) print the hyphen flush against the colour name. Both
+# fell through to `suffix = None`, missed AK_SET_BY_SUFFIX, and landed in `candidates:` --
+# report-only -- so two paints AK genuinely sells reached no catalog at all. Verified live
+# 2026-08-07: ak-interactive.com/product/space-yellow-quick-gen-color/ returns HTTP 200, SKU
+# AK17011, in stock. They are the ONLY gap in the archive's AK17001-AK17079 block, and they were
+# lost to one missing space.
+#
+# "At least one side" and not "any hyphen": a bare `-` would split real colour names on their own
+# punctuation. Measured over the same 1,142 rows, exactly 2 rows change classification and 0
+# others reclassify.
+_AK_SUFFIX = re.compile(r"\s[-–]\s|\s[-–]|[-–]\s")
+
+
 def ak_split(name: str) -> tuple[str, str | None]:
     """'SPACE MAGENTA – QUICK GEN COLOR' -> ('SPACE MAGENTA', 'QUICK GEN COLOR')."""
-    for dash in (" – ", " - "):
-        if dash in name:
-            base, _, suffix = name.rpartition(dash)
-            return base.strip(), suffix.strip().upper()
+    matches = list(_AK_SUFFIX.finditer(name))
+    if matches:
+        last = matches[-1]
+        return name[: last.start()].strip(), name[last.end():].strip().upper()
     return name.strip(), None
 
 
