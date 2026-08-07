@@ -299,3 +299,36 @@ def test_trade_fallback_is_inert_without_category_maps() -> None:
     product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120")
     assert product.gameSystem is None
     assert product.faction is None
+
+
+def test_a_list_valued_hint_folds_first_wins_and_is_never_unioned() -> None:
+    """`contentSkus` is the first LIST-valued member of `_HINT_FIELDS`, and the fold must take one
+    source's list WHOLE rather than merging them.
+
+    Two sources disagreeing about what is in a box is a conflict to surface, not an input to
+    average: a union would assert a set neither source describes, and nothing downstream could
+    tell afterwards which refs came from where. `_first` already does the right thing -- this pins
+    it, so a well-meaning "merge the lists" change fails instead of silently fabricating contents.
+    """
+    from warhub_acquisition.resolve.attributes import _HINT_FIELDS
+
+    assert "contentSkus" in _HINT_FIELDS
+
+    manufacturer = obs("mfr-gw:box", hints={"contentSkus": ["A1", "A2"]})
+    retailer = obs("ret-a:box", hints={"contentSkus": ["B1", "B2", "B3"]})
+
+    product = resolve_attributes("e", [manufacturer, retailer], KINDS, NO_EAN, None)
+    assert product.contentSkus == ["A1", "A2"], "the manufacturer's list must win WHOLE"
+
+    # Sorting is by kind priority, so the same answer regardless of arrival order -- and in
+    # particular the retailer's three refs never appear alongside the manufacturer's two.
+    product = resolve_attributes("e", [retailer, manufacturer], KINDS, NO_EAN, None)
+    assert product.contentSkus == ["A1", "A2"]
+
+
+def test_a_product_with_no_contents_hint_states_nothing_rather_than_empty() -> None:
+    """None, not `[]`. "The source said nothing about the contents" and "the source says this box
+    is empty" are different claims, and every other hint field in `_HINT_FIELDS` is nullable for
+    the same reason."""
+    product = resolve_attributes("e", [obs("mfr-gw:a")], KINDS, NO_EAN, None)
+    assert product.contentSkus is None

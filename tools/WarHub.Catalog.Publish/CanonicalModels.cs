@@ -41,6 +41,19 @@ public sealed record CanonicalProduct
     public string? Url { get; init; }
     public string? ImageUrl { get; init; }
     public string? Description { get; init; }
+    /// <summary>
+    /// The manufacturer's OWN product codes for what a boxed set contains, verbatim from the
+    /// source -- not resolved catalog ids. Resolving them needs the paint catalog, which the
+    /// Python resolver never loads, so the resolved relation is generated separately into
+    /// data/catalog/set-contents/.
+    ///
+    /// Read here so the publisher can carry it; nothing publishes it yet. Declared
+    /// <c>List</c> rather than <c>IReadOnlyList</c> for the same reason
+    /// <see cref="PaintCatalog.Tool.Models.PaintRecord.AdditionalEans"/> is: YamlDotNet
+    /// serializes a read-only list happily and has no node deserializer for one, so the round trip
+    /// dies the first time a record actually gains the key.
+    /// </summary>
+    public List<string>? ContentSkus { get; init; }
     public List<string>? Evidence { get; init; }
 }
 

@@ -53,6 +53,29 @@ class CanonicalProduct(BaseModel):
     url: str | None = None
     imageUrl: str | None = None
     description: str | None = None
+    # WHAT IS IN THE BOX, as the source states it: the manufacturer's own product codes for the
+    # items a boxed set contains. Raw refs, NOT resolved catalog ids -- resolving them needs the
+    # PAINT catalog, which this resolver deliberately never loads, so the resolved relation lives
+    # in data/catalog/set-contents/ and is generated separately.
+    #
+    # Measured 2026-08-07: `mfr-reaper` is the only source that states this today, on 29 of its 541
+    # observations, 802 refs in total, of which 800 (99.8%) name a paint that exists in
+    # data/paints/brands/reaper.yaml. Those 29 are 25% of Reaper's 115 boxed sets and 5.6% of the
+    # catalog's 516 -- small, and the reason it goes first is that it needs no acquisition at all,
+    # not that it is a big win. Every other brand states contents in prose inside a `description`
+    # that no live source captures yet.
+    #
+    # FIRST-WINS across kind-ordered members like every other hint, NOT a union: two sources
+    # disagreeing about a box's contents is a conflict to surface, and unioning them would
+    # fabricate a set neither one asserts.
+    #
+    # QUANTITY IS NOT HERE and is not recoverable for Reaper: `strategies/reaper.py::_content_skus`
+    # builds a SET, so a box shipping two of one pot is already indistinguishable from one shipping
+    # one. Recovering it needs a strategy change and a re-acquire.
+    # `| None`, like every other member of `_HINT_FIELDS`: `_first` yields None when no source
+    # states one, and None reads correctly as "this source said nothing about the contents",
+    # which is a different claim from "this box is empty".
+    contentSkus: list[str] | None = None
     evidence: list[str] = Field(default_factory=list)
 
 

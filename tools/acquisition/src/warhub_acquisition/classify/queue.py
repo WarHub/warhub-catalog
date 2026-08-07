@@ -17,7 +17,10 @@ _DESCRIPTION_LIMIT = 300
 # never carried a gameSystem hint in the first place (that's why it resolved to null); description
 # gets its own dedicated, truncated field below, so it is excluded from the generic raw-hints
 # list too.
-_EXCLUDED_HINT_KEYS = {"gameSystem", "faction", "description"}
+# `contentSkus` is excluded for size, not for relevance: all 516 paint-set products have a null
+# gameSystem so all 516 reach this queue, and reaper/09956 alone carries 216 codes. A contents
+# list tells an LLM nothing about a game system and would crowd the prompt.
+_EXCLUDED_HINT_KEYS = {"gameSystem", "faction", "description", "contentSkus"}
 
 
 def _first(values: list[object | None]) -> object | None:
