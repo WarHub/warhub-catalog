@@ -382,6 +382,262 @@ aliases:
 # CI is unaffected either way: the guard's only paint-side enforcement point is
 # paint-catalog-update.yml, which runs it AFTER the tool (:102-108), and ci.yml does not run it.
 retract:
+  # --- AK: one pot listed twice, retracted (2026-08-07) ------------------------------------------
+  # 194 records that are NOT products. The upstream Arcturus5404/miniature-paints tables emit one
+  # row per (paint, BROWSING CATEGORY) -- AK.md:440 and :442 are two `AK706 Light Rust` rows
+  # identical but for the third column, "AFV" and "General" -- and `set` is part of this repo's
+  # paint identity key (set|name|productCode|hex, PaintRecordAdapter). So one pot filed under two
+  # headings becomes two identities. MarkdownPaintParser reads the rows faithfully; the duplication
+  # is inherited, not introduced, and the reader must NOT be "corrected".
+  #
+  # Verified before deleting anything: all 194 groups are byte-identical apart from `set` and the
+  # `type` derived from it. No group is two genuinely different products. And AK itself does not
+  # multi-file paints -- of 390 live products carrying a Serie slug, exactly 9 carry two, and all 9
+  # are boxed sets or packs; ZERO single paints are multi-filed.
+  #
+  # WHICH ROW SURVIVES IS EVIDENCE, NOT PREFERENCE, and file order was rejected as the rule: it is
+  # arbitrary, and for 89 of these the surviving label also decides the published `details.type`.
+  #
+  # ak-real-color -> keep `Real Colors - Standard`, `- Air`, `- AFV`; drop `- WWII`, `- Modern`,
+  # `- Clear`. Two independent tests agree. (1) Containment: a set whose every coded member also
+  # appears under another set is a browsing theme, and WWII is 144/144 = 100% re-listed, Modern
+  # 31/31, Clear 6/6, while Air (65%) and AFV (66%) hold members of their own. (2) AK's own store
+  # API lists only FOUR Real Colors facets -- RC Civil, RC Military, RC Standard, RC Markers. There
+  # is no "Modern" and no "Clear" in AK's taxonomy at all, and `rc-standard-en` contains exactly
+  # this block renumbered (RC801-826) INCLUDING the six clears, 31 old codes onto 26 new with
+  # exactly five discontinued and no residue. `Modern` is byte-identical in membership to
+  # `Standard`: two labels on one thing.
+  #
+  # ak-interactive -> keep `General`; drop the `AFV` and `Naval` halves. Both ARE real AK series
+  # names, so this one is decided by what the colours are. All 12 shared codes are generic effects
+  # (rust x5, chipping, tracks x2, mud, middle grey, medium brown, burnt umber) while AFV's
+  # exclusive AK7xx members are nation/era camo (RAL Dunkelgelb, IDF Sinai Grey, 4BO Russian
+  # Green). AK's own present-day successors for these colours sit in AK11001-11251, which is the
+  # General Serie -- proved numerically: AK's product title says "236 references" and the live
+  # evidence holds exactly 236 SKUs in that block, against AK11301-11399 for AFV, whose contents
+  # are national (AK11383 "BRITISH LIGHT MUD - AFV"). AK730 Wooden Deck settles the shape: `Naval`
+  # is the contiguous AK5001-5046 line plus AK730 alone, so its Naval tag is a subject
+  # cross-listing, and Naval keeps its own Wooden Deck at AK5032.
+  #
+  # WEAKEST OF THE 13, recorded rather than hidden: AK721/AK722 (Rusty/Dark Tracks) have a fair AFV
+  # case, since tracks are armour-specific and AK's 3rd-gen "TRACKS & WHEELS" set is filed under
+  # afv-all. They go to General for consistency with their neighbours AK720 Rubber/Tires and AK723
+  # Dust, both General-only. The upstream `Set` column is demonstrably noisy in BOTH directions
+  # here -- AK738/739/740 are three consecutive "Acrylic Color" products split General/AFV/General,
+  # which no real range does.
+  #
+  # NOT A DEDUPE ONLY: 89 ak-real-color records currently publish `type: Standard` under
+  # `- WWII` while the same pot publishes `type: Air` under `- Air` (type is derived from the set
+  # name by PaintTypeClassifier). Keeping `- Air` retires 89 wrong type values as well as 89
+  # phantom records.
+  #
+  # DELIBERATELY EXCLUDED, with reasons:
+  #   * coat-darmes' 5 same-name-same-hex groups (Fantasy/Military/WWII Range). No containment
+  #     signal reaches 100% and no research was done on Coat d'Armes' real range structure, so
+  #     there is no evidence for which label survives. Deleting on a coin-flip is worse than
+  #     leaving five duplicates visible.
+  #   * vallejo 72.483 Viking Grey. ALREADY ADJUDICATED as two real paints sharing a GTIN after a
+  #     formula correction, and pinned in tests/test_repo_data.py's `_KNOWN_SHARED_BARCODES`.
+  #   * army-painter WP1405. A genuine MISCODE, not a duplicate -- Brainmatter Beige is WP1406
+  #     (our own mantic-games catalog lists it in sequence). It needs a correction, not a deletion.
+  #   * mission-models MMP-096. One pot, differing by a double space and 1 unit of RGB; it is a
+  #     transcription artefact rather than a category re-listing, and belongs with the corrections.
+  ak-interactive:
+    - 'AFV|Burnt Umber|AK789|#3D362E'
+    - 'AFV|Chipping Color|AK711|#362E2B'
+    - 'AFV|Dark Rust|AK708|#73402B'
+    - 'AFV|Dark Tracks|AK722|#3F3B2F'
+    - 'AFV|Dry Light Mud|AK724|#AC914E'
+    - 'AFV|Light Rust|AK706|#BE7845'
+    - 'AFV|Medium Brown|AK788|#695032'
+    - 'AFV|Medium Rust|AK707|#915533'
+    - 'AFV|Middle Grey|AK785|#8B8B81'
+    - 'AFV|Old Rust|AK709|#4D3827'
+    - 'AFV|Rusty Tracks|AK721|#4D3B27'
+    - 'AFV|Shadow Rust|AK710|#4B3D32'
+    - 'Naval|Wooden Deck|AK730|#AD9557'
+  ak-real-color:
+    - 'Real Colors - Clear|Clear Blue|RC504|#1C69A1'
+    - 'Real Colors - Clear|Clear Green|RC505|#3A683A'
+    - 'Real Colors - Clear|Clear Orange|RC506|#DE7927'
+    - 'Real Colors - Clear|Clear Red|RC503|#BD0A0D'
+    - 'Real Colors - Clear|Clear Smoke|RC508|#4C4845'
+    - 'Real Colors - Clear|Clear Yellow|RC507|#ECC31B'
+    - 'Real Colors - Modern|Aluminium|RC020|#ADACA8'
+    - 'Real Colors - Modern|Blue, RAL 5001|RC011|#233D54'
+    - 'Real Colors - Modern|Buff|RC014|#9A8260'
+    - 'Real Colors - Modern|Clear Blue|RC504|#1C69A1'
+    - 'Real Colors - Modern|Clear Green|RC505|#3A683A'
+    - 'Real Colors - Modern|Clear Orange|RC506|#DE7927'
+    - 'Real Colors - Modern|Clear Red|RC503|#BD0A0D'
+    - 'Real Colors - Modern|Clear Smoke|RC508|#4C4845'
+    - 'Real Colors - Modern|Clear Yellow|RC507|#ECC31B'
+    - 'Real Colors - Modern|Cream White, RAL 9001|RC002|#FEEECC'
+    - 'Real Colors - Modern|Deck Tan|RC019|#99907F'
+    - 'Real Colors - Modern|Flat Black, RAL 9005|RC001|#000000'
+    - 'Real Colors - Modern|Flat Varnish|RC500|#F0F0F0'
+    - 'Real Colors - Modern|Flat White, RAL 9003|RC004|#FFFFFF'
+    - 'Real Colors - Modern|Gloss Varnish|RC502|#E5E5E5'
+    - 'Real Colors - Modern|Gun Metal|RC015|#221F18'
+    - 'Real Colors - Modern|Maize Yellow, RAL 1006|RC008|#FAB013'
+    - 'Real Colors - Modern|Ochre|RC016|#A87B20'
+    - 'Real Colors - Modern|Off White|RC013|#E1D6BA'
+    - 'Real Colors - Modern|Orange, RAL 2004|RC009|#E85213'
+    - 'Real Colors - Modern|Pale Blue|RC017|#698A91'
+    - 'Real Colors - Modern|Pale Grey|RC021|#879391'
+    - 'Real Colors - Modern|Pale Sand|RC018|#CBB590'
+    - 'Real Colors - Modern|Pure Blue, RAL 5005|RC010|#2C3D73'
+    - 'Real Colors - Modern|Pure Green, RAL 6037|RC012|#1C6E30'
+    - 'Real Colors - Modern|Red, RAL 3000|RC006|#A61B18'
+    - 'Real Colors - Modern|Rubber Black|RC022|#1D1D1B'
+    - 'Real Colors - Modern|Satin Varnish|RC501|#DCDCDC'
+    - 'Real Colors - Modern|Signal Red, RAL 3020|RC005|#C5170E'
+    - 'Real Colors - Modern|White Grey, RAL 9002|RC003|#F1EDE2'
+    - 'Real Colors - Modern|Yellow, RAL 1003|RC007|#FDC109'
+    - 'Real Colors - WWII|A-14 Interior Steel Grey 10ml|RC319|#647177'
+    - 'Real Colors - WWII|A-18f Light Grey-blue 10ml|RC311|#89A49D'
+    - 'Real Colors - WWII|A-19f Grass Green 10ml|RC312|#506336'
+    - 'Real Colors - WWII|A-21m Light Yellowish Brown 10ml|RC314|#898675'
+    - 'Real Colors - WWII|Ae-9 / Aii Light Grey 10ml|RC308|#E0DCB9'
+    - 'Real Colors - WWII|Aii Green 10ml|RC309|#343F21'
+    - 'Real Colors - WWII|Aii Light Blue 10ml|RC310|#7FA4AA'
+    - 'Real Colors - WWII|Amt-1 Light Brown 10ml|RC313|#8B806C'
+    - 'Real Colors - WWII|Amt-11 Blue Grey 10ml|RC317|#4E5F66'
+    - 'Real Colors - WWII|Amt-12 Dark Grey 10ml|RC318|#4E5F66'
+    - 'Real Colors - WWII|Amt-4 / A-24m Green 10ml|RC315|#4A471C'
+    - 'Real Colors - WWII|Amt-7 Light Blue 10ml|RC316|#678DA4'
+    - 'Real Colors - WWII|Black 6rp|RC071|#17120C'
+    - 'Real Colors - WWII|Blaugrau – Blue Gray RAL 7016|RC055|#303433'
+    - 'Real Colors - WWII|Braun – Brown RAL 8010|RC065|#604826'
+    - 'Real Colors - WWII|Braun – Brown RAL 8020|RC069|#AE8557'
+    - 'Real Colors - WWII|British Dark Olive Green Pfi|RC042|#4A442E'
+    - 'Real Colors - WWII|British Desert Pink Zi|RC043|#F19161'
+    - 'Real Colors - WWII|British Light Mud|RC044|#837D49'
+    - 'Real Colors - WWII|Bronze Green 10ml|RC264|#32402F'
+    - 'Real Colors - WWII|Brown Fs 30140 10ml|RC224|#7A6051'
+    - 'Real Colors - WWII|Bsc Nº28 Silver Grey|RC038|#9F9D6A'
+    - 'Real Colors - WWII|Bsc Nº34 Slate|RC039|#4F4A2C'
+    - 'Real Colors - WWII|Bsc Nº49 Light Purple Brown|RC045|#45241F'
+    - 'Real Colors - WWII|Bsc Nº61 Light Stone|RC040|#D2B25B'
+    - 'Real Colors - WWII|Bsc Nº64 Portland Stone|RC041|#F1DFA1'
+    - 'Real Colors - WWII|Common Protective – Zo|RC070|#3B301A'
+    - 'Real Colors - WWII|Dark Brown 6k|RC074|#452B1C'
+    - 'Real Colors - WWII|Dark Gull Grey Fs 36231 10ml|RC247|#7F8386'
+    - 'Real Colors - WWII|Dark Olive Drab 41 10ml|RC259|#564F3F'
+    - 'Real Colors - WWII|Dark Olive Drab Nº31|RC025|#414232'
+    - 'Real Colors - WWII|Dark Sea Blue 10ml|RC258|#36434C'
+    - 'Real Colors - WWII|Dark Tan Fs 30219 10ml|RC225|#8F7463'
+    - 'Real Colors - WWII|Desert Sand Fs 30279|RC032|#BB986E'
+    - 'Real Colors - WWII|Dull Dark Green Fs 34092 10ml|RC230|#485750'
+    - 'Real Colors - WWII|Dunkelbraun – Dark Brown RAL 7017|RC056|#4E3D2D'
+    - 'Real Colors - WWII|Dunkelgelb Ausgabe 44 – Dark Yellow RAL 7028 Ver. ’44|RC061|#B7A277'
+    - 'Real Colors - WWII|Dunkelgelb Nach Muster – Dark Yellow|RC059|#A98E47'
+    - 'Real Colors - WWII|Dunkelgelb – Dark Yellow (variant)|RC062|#A78A50'
+    - 'Real Colors - WWII|Dunkelgelb – Dark Yellow RAL 7028|RC060|#9C8853'
+    - 'Real Colors - WWII|Dunkelgrau – Dark Gray RAL 7021|RC057|#1F2120'
+    - 'Real Colors - WWII|Dunkelgrün – Dark Green RAL 6009|RC050|#2F311C'
+    - 'Real Colors - WWII|Elfenbein – Ivory RAL 1001 (interior Color)|RC046|#EBC691'
+    - 'Real Colors - WWII|Erdgelb – Earth Yellow RAL 8002|RC064|#9F7022'
+    - 'Real Colors - WWII|Feldgrau – Field Grey RAL 6006|RC048|#3D3F27'
+    - 'Real Colors - WWII|Forest Green Fs 34079|RC027|#42412C'
+    - 'Real Colors - WWII|Gelbbraun – Yellow Brown – RAL 8000|RC063|#836839'
+    - 'Real Colors - WWII|Grau – Gray RAL 7027|RC058|#6F6448'
+    - 'Real Colors - WWII|Grau – Grey RAL 7003 (RLM 02)|RC052|#777255'
+    - 'Real Colors - WWII|Graugrün – Gray Green RAL 7008|RC053|#837038'
+    - 'Real Colors - WWII|Green Fs 34258 10ml|RC233|#7F8159'
+    - 'Real Colors - WWII|Grün – Green RAL 6007|RC049|#2A2B19'
+    - 'Real Colors - WWII|Hellgrau – Light Grey RAL 7009 (interior Color)|RC054|#5D5A49'
+    - 'Real Colors - WWII|Ija  1 Hairyokushoku (grey-green) 10ml|RC328|#A4A788'
+    - 'Real Colors - WWII|Ija  21 Midori Iro (green) 10ml|RC331|#414E30'
+    - 'Real Colors - WWII|Ija  27 Ao Midori Iro (blue-green) 10ml|RC332|#1D3327'
+    - 'Real Colors - WWII|Ija  29 Ki Midori Iro (yellow-green) 10ml|RC333|#828B3C'
+    - 'Real Colors - WWII|Ija  3 Hairanshoku (grey Indigo) 10ml|RC329|#464C48'
+    - 'Real Colors - WWII|Ija  30 Karekusa Iro (dry Grass Colour) 10ml|RC334|#958247'
+    - 'Real Colors - WWII|Ija  31 Cha Kasshoku (tea Colour) 10ml|RC335|#694E39'
+    - 'Real Colors - WWII|Ija  7 Ohryuko Nana Go Shoku (olive Brown) 10ml|RC330|#56502E'
+    - 'Real Colors - WWII|Ijn D1 Deep Green Black 10ml|RC304|#133527'
+    - 'Real Colors - WWII|Ijn D2 Green Black 10ml|RC305|#1A4F3D'
+    - 'Real Colors - WWII|Ijn J3 Hai-iro (grey) 10ml|RC302|#BBBFB0'
+    - 'Real Colors - WWII|Ijn J3 Sp (amber Grey) 10ml|RC303|#B0B795'
+    - 'Real Colors - WWII|Ijn M3 (m) Mitsubishi Interior Green 10ml|RC306|#7F873C'
+    - 'Real Colors - WWII|Ijn M3 (n) Nakajima Interior Green 10ml|RC307|#6D7647'
+    - 'Real Colors - WWII|Interior Green Fs 34151|RC028|#6E6C2F'
+    - 'Real Colors - WWII|Intermediate Blue Fs 35164 10ml|RC235|#627282'
+    - 'Real Colors - WWII|Kenttävihrea-olive Green Fs 34096|RC340|#545648'
+    - 'Real Colors - WWII|Khaki Green Nº3|RC033|#4F4231'
+    - 'Real Colors - WWII|Light Gull Grey Fs 16440 10ml|RC220|#B6B6AE'
+    - 'Real Colors - WWII|Light Sea Grey Fs 36307 10ml|RC250|#96978F'
+    - 'Real Colors - WWII|M-485 Blue Grey 10ml|RC256|#70848B'
+    - 'Real Colors - WWII|M-485 Light Grey 10ml|RC255|#9E9A8E'
+    - 'Real Colors - WWII|Marinegrau – Navy Grey RAL 7002|RC051|#80774E'
+    - 'Real Colors - WWII|Medium Green 42 10ml|RC260|#495241'
+    - 'Real Colors - WWII|Medium Gunship Grey Fs 36118 10ml|RC244|#5D616A'
+    - 'Real Colors - WWII|Neutral Grey 43 10ml|RC261|#6F6F6F'
+    - 'Real Colors - WWII|Nº5 Earth Brown Fs 30099|RC029|#5A462D'
+    - 'Real Colors - WWII|Nº6 Earth Yellow Fs 30257|RC030|#BD8D4D'
+    - 'Real Colors - WWII|Nº8 Earth Red Fs 30117|RC031|#704729'
+    - 'Real Colors - WWII|Olive Drab Faded|RC024|#514217'
+    - 'Real Colors - WWII|Olive Drab Fs 34087|RC026|#39372A'
+    - 'Real Colors - WWII|Olive Drab Nº9 / Nº22|RC023|#423C1C'
+    - 'Real Colors - WWII|Olivgrün – Olive Green RAL 6003|RC047|#4E5220'
+    - 'Real Colors - WWII|Pale Green Fs 34227 10ml|RC232|#7A866E'
+    - 'Real Colors - WWII|Protective 4bo|RC073|#504C27'
+    - 'Real Colors - WWII|Protective Green 1920’s – 1930’s|RC076|#504A26'
+    - 'Real Colors - WWII|Protective K|RC072|#494923'
+    - 'Real Colors - WWII|RLM 02 RLM -grau (1938)|RC265|#979481'
+    - 'Real Colors - WWII|RLM 02 RLM -grau (1941)|RC266|#817C5E'
+    - 'Real Colors - WWII|RLM 04|RC267|#F1A502'
+    - 'Real Colors - WWII|RLM 61 / RAL 8019|RC268|#5A504E'
+    - 'Real Colors - WWII|RLM 62|RC269|#66694E'
+    - 'Real Colors - WWII|RLM 63|RC270|#7D7A67'
+    - 'Real Colors - WWII|RLM 65 (1938)|RC271|#87A0A4'
+    - 'Real Colors - WWII|RLM 65 (1941)|RC272|#91A197'
+    - 'Real Colors - WWII|RLM 66 (1938)|RC339|#353D3F'
+    - 'Real Colors - WWII|RLM 66 (1941)|RC273|#51524C'
+    - 'Real Colors - WWII|RLM 70|RC274|#464940'
+    - 'Real Colors - WWII|RLM 71|RC275|#504E42'
+    - 'Real Colors - WWII|RLM 72|RC276|#454641'
+    - 'Real Colors - WWII|RLM 73|RC277|#414840'
+    - 'Real Colors - WWII|RLM 74|RC278|#5A5954'
+    - 'Real Colors - WWII|RLM 75|RC279|#6E6E6E'
+    - 'Real Colors - WWII|RLM 76 Late War Variation 10ml|RC322|#C1C19D'
+    - 'Real Colors - WWII|RLM 76 Version 1 10ml|RC320|#A9B4A4'
+    - 'Real Colors - WWII|RLM 76 Version 2 10ml|RC321|#AEBEBE'
+    - 'Real Colors - WWII|RLM 78 (1941)|RC280|#80979F'
+    - 'Real Colors - WWII|RLM 78 (1942)|RC281|#889D98'
+    - 'Real Colors - WWII|RLM 79 (1941)|RC282|#E7A159'
+    - 'Real Colors - WWII|RLM 79 (1942)|RC283|#9C704D'
+    - 'Real Colors - WWII|RLM 80|RC284|#575644'
+    - 'Real Colors - WWII|RLM 81 Version 1 10ml|RC323|#575644'
+    - 'Real Colors - WWII|RLM 81 Version 2 10ml|RC324|#464C3E'
+    - 'Real Colors - WWII|RLM 81 Version 3 10ml|RC325|#5A5044'
+    - 'Real Colors - WWII|RLM 82 10ml|RC326|#4D5B4A'
+    - 'Real Colors - WWII|RLM 83 10ml|RC327|#384452'
+    - 'Real Colors - WWII|Radome Tan Fs 33613 10ml|RC227|#E7C7A1'
+    - 'Real Colors - WWII|Raf Azure Blue 10ml|RC291|#7D9FC4'
+    - 'Real Colors - WWII|Raf Cockpit Grey-green 10ml|RC293|#969F82'
+    - 'Real Colors - WWII|Raf Dark Earth – 10ml|RC287|#5D4A29'
+    - 'Real Colors - WWII|Raf Dark Green – 10ml|RC286|#4F5143'
+    - 'Real Colors - WWII|Raf Dark Sea Grey Bs381c/638 – 10ml|RC296|#646B75'
+    - 'Real Colors - WWII|Raf Dark Slate Grey 10ml|RC294|#5E5E52'
+    - 'Real Colors - WWII|Raf Extra Dark Sea Grey Bs381c/640 – 10ml|RC295|#4C565F'
+    - 'Real Colors - WWII|Raf Medium Sea Grey Bs381c/637 – 10ml|RC289|#808D93'
+    - 'Real Colors - WWII|Raf Middle Stone 10ml|RC292|#A37C3B'
+    - 'Real Colors - WWII|Raf Ocean Grey – 10ml|RC288|#666D75'
+    - 'Real Colors - WWII|Raf Sky / Fs 34424 – 10ml|RC290|#B1BA8D'
+    - 'Real Colors - WWII|Raf Sky Grey / Fs 26373 – 10ml|RC285|#A2A6A5'
+    - 'Real Colors - WWII|Rot (rotbraun) Red (red Brown) RAL 8012|RC067|#6D2114'
+    - 'Real Colors - WWII|Rot (rotbraun) – Red (red Brown) RAL 8013|RC066|#55160D'
+    - 'Real Colors - WWII|Rotbraun – Red Brown RAL 8017|RC068|#3C251D'
+    - 'Real Colors - WWII|S.c.c. 14 Blue Black|RC036|#1E2326'
+    - 'Real Colors - WWII|S.c.c. 15 Olive Drab|RC037|#43412A'
+    - 'Real Colors - WWII|S.c.c. 1a Brown|RC034|#3A1F18'
+    - 'Real Colors - WWII|S.c.c. 2 Brown|RC035|#855F2E'
+    - 'Real Colors - WWII|Sand 7k|RC075|#84632D'
+    - 'Real Colors - WWII|Sea Blue 10ml|RC257|#3D444C'
+    - 'Real Colors - WWII|Us Interior Yellow Green 10ml|RC262|#848158'
+    - 'Real Colors - WWII|Zb Au Basic Protector|RC077|#433E21'
+    - 'Real Colors - WWII|Zinc Chromate Yellow 10ml|RC263|#D1BB4E'
   green-stuff-world:
     - 'Acrylic Inks|Acrylic Inks Set - Basic Opaque (x4)|13344|'
     - 'Acrylic Inks|Acrylic Inks Set - Basic Transparent (x4)|13348|'

@@ -575,6 +575,25 @@ internal static class PaintCatalogApp
                 await BrandArchiveWriter.WriteAsync(archive, outputDir, cancellationToken);
                 totalPaints += finalRecords.Count;
 
+                // EQUIVALENCES MUST SEE THE ARCHIVE, NOT THE WORKING LIST. `allCatalogs` was built
+                // from the pre-reconciliation `paints` earlier in this run, so it still holds every
+                // record `retract:` removes -- and the equivalence pass ran on it. Measured
+                // 2026-08-07 while retracting AK's 194 category-duplicate records: 405 equivalence
+                // sources and 1,855 match rows named a paint that no longer exists, and a SECOND
+                // full run reproduced the identical numbers, so it is not a stale-file problem.
+                // Rebuilding the catalog from `finalRecords` here is what makes the equivalence
+                // file a statement about the published archive rather than about an intermediate.
+                var archivedCatalog = new BrandCatalog
+                {
+                    Brand = pending.Brand,
+                    BrandSlug = brandSlug,
+                    PaintCount = finalRecords.Count,
+                    Paints = finalRecords.Select(PaintRecordMapper.ToPaint).ToList(),
+                };
+                int archivedIdx = allCatalogs.FindIndex(c => c.BrandSlug == brandSlug);
+                if (archivedIdx >= 0) allCatalogs[archivedIdx] = archivedCatalog;
+                else allCatalogs.Add(archivedCatalog);
+
                 if (verbose) Console.WriteLine($"  {brandSlug}: {finalRecords.Count} archived records ({fresh.Count} fresh this run)");
             }
 
