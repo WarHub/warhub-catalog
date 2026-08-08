@@ -11,6 +11,7 @@ import unicodedata
 from pathlib import Path
 
 import pytest
+import yaml
 
 from warhub_acquisition.models.catalog import Overrides
 from warhub_acquisition.models.descriptor import load_descriptors
@@ -684,4 +685,90 @@ def test_no_barcode_is_held_by_two_records_in_one_brand() -> None:
         "cannot see it. Either retract the wrong holder (the only mechanism that deletes an "
         "archived record) or, if both records are real paints sharing a code, pin the pair in "
         f"_KNOWN_SHARED_BARCODES with a citation: {offenders}"
+    )
+
+
+# YAML 1.2 core schema, verbatim from the spec's resolution table. NOT PyYAML's 1.1 resolver,
+# which is the whole point of the test below.
+_CORE_NULL = re.compile(r"^(~|null|Null|NULL|)$")
+_CORE_BOOL = re.compile(r"^(true|True|TRUE|false|False|FALSE)$")
+_CORE_INT = re.compile(r"^([-+]?[0-9]+|0o[0-7]+|0x[0-9a-fA-F]+)$")
+_CORE_FLOAT = re.compile(
+    r"^([-+]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)([eE][-+]?[0-9]+)?"
+    r"|[-+]?\.(inf|Inf|INF)|\.(nan|NaN|NAN))$"
+)
+
+
+def _reads_as_non_string_under_yaml_1_2(text: str) -> bool:
+    return bool(
+        _CORE_NULL.match(text)
+        or _CORE_BOOL.match(text)
+        or _CORE_INT.match(text)
+        or _CORE_FLOAT.match(text)
+    )
+
+
+def test_no_committed_yaml_string_changes_type_between_readers() -> None:
+    """A committed scalar must mean the same thing to every YAML reader, not just to ours.
+
+    THE INVARIANT, and why it is decidable without knowing any schema: if PyYAML resolves a PLAIN
+    (unquoted) scalar to a STRING, the writer meant a string -- nothing else could have produced
+    that tag. So a YAML 1.2 core-schema reader disagreeing and calling it an int or a float is
+    unambiguously a serialization bug, with no judgement call about whether the field is "supposed
+    to be" numeric. The reverse case (a string field emitted as a genuine number) is NOT decidable
+    from the text and is not tested here; it is closed on the write side instead, by
+    yamlio._represent_str and QuotingEventEmitter force-quoting anything number-shaped.
+
+    THIS IS THE TEST THAT SHOULD HAVE EXISTED FIRST. The same defect landed twice, in two
+    languages, and neither writer's own tests could see it because both only ever read their own
+    output back with the reader that produced it:
+
+      - data/paints/equivalences.yaml built a local YamlDotNet serializer with no quoting rule at
+        all. All 34,172 productCode scalars were plain; 13,112 ambiguous, 1,093 changing VALUE
+        under PyYAML ('040' -> 32 as octal). 145 more were invisible to PyYAML entirely -- a
+        leading-zero code containing an 8 or 9 is not valid octal, so PyYAML alone reads it as a
+        string while a 1.2 reader takes it as an int. Exactly the case this test is shaped around.
+      - data/paints/harvest/reaper.yaml called yaml.safe_dump directly instead of
+        yamlio.dump_yaml. 115 of 487 `sku` scalars bare and 372 quoted -- one field contradicting
+        itself, decided by nothing but which digits happened to appear.
+
+    Both were silent: PyYAML round-trips its own output, so every in-repo consumer agreed with
+    every other one, and the catalog was only wrong for somebody else.
+
+    Scans every committed data/**/*.yaml -- generated and hand-edited alike, since a hand-edited
+    file can carry the same mistake and overrides.yaml is full of zero-padded codes.
+    """
+    _require_repo_data()
+    offenders: list[str] = []
+    for path in sorted(REPO_DATA.rglob("*.yaml")):
+        # CSafeLoader for speed (148 files, one of them 9 MB) -- it reports scalar style and
+        # resolved tag just as the pure-Python loader does; see yamlio for the 7.5x measurement.
+        node = yaml.compose(path.read_text(encoding="utf-8"), Loader=yaml.CSafeLoader)
+        stack = [node] if node is not None else []
+        while stack:
+            current = stack.pop()
+            if isinstance(current, yaml.ScalarNode):
+                # style "" / None is plain; anything else was deliberately quoted or blocked.
+                if (not current.style
+                        and current.tag == "tag:yaml.org,2002:str"
+                        and _reads_as_non_string_under_yaml_1_2(current.value)):
+                    offenders.append(
+                        f"{path.relative_to(REPO_DATA)}:{current.start_mark.line + 1} "
+                        f"{current.value!r}"
+                    )
+            elif isinstance(current, yaml.SequenceNode):
+                stack.extend(current.value)
+            elif isinstance(current, yaml.MappingNode):
+                for key, value in current.value:
+                    stack.append(key)
+                    stack.append(value)
+
+    assert not offenders, (
+        f"{len(offenders)} committed scalar(s) that PyYAML reads as a STRING but a YAML 1.2 "
+        "core-schema reader reads as a number/bool/null. The writer meant a string, so the file "
+        "is lying to every consumer that is not PyYAML -- and the join these values feed "
+        "(productCode/sku/ean/ref) breaks silently rather than loudly. Fix the WRITER: Python "
+        "generators must use warhub_acquisition.yamlio.dump_yaml, never yaml.safe_dump; C# "
+        "writers must use CatalogSerializer.CreateSerializer(), never a local SerializerBuilder. "
+        f"First 20: {offenders[:20]}"
     )

@@ -79,6 +79,7 @@ OUT_DIR = REPO / "data/paints/harvest"
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.paints.catalog import Catalog, norm  # noqa: E402
 from warhub_acquisition.resolve.crossover import matches as crossover_matches  # noqa: E402
+from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 # SM (Speedpaint Marker) deliberately excluded: markers share paint NAMES with the Speedpaint
 # range but are a different product form with their own EANs -- a marker EAN on a dropper
@@ -1711,7 +1712,27 @@ def main() -> None:
             "# `additions` are new paints from catalog-role sources; `candidates` are report-only.\n"
             "# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --\n"
             "# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).\n"
-            + yaml.safe_dump({slug: data}, sort_keys=False, allow_unicode=True, width=200)
+            # dump_yaml, NOT yaml.safe_dump, because `sku` is a zero-padded numeric string on
+            # Reaper and stock PyYAML emits half of those unquoted. Its YAML 1.1 resolver quotes
+            # '89556' (that reads as an int, so it must be protected) but leaves '09736' BARE --
+            # the 9 makes it invalid octal, so PyYAML itself reads it back as a string and never
+            # notices the omission. A YAML 1.2 consumer has no octal rule for a bare leading zero
+            # and reads 9736, losing the pad.
+            #
+            # Measured 2026-08-07 on the committed data/paints/harvest/reaper.yaml: 115 of 487
+            # `sku` scalars bare against 372 quoted -- ONE field contradicting itself, decided by
+            # nothing but which digits happen to appear. Every one of the 115 carries `reason:
+            # boxed set -- crosses to the product catalog`, and the pad IS the join: 115 of 115
+            # match a productCode in data/catalog/products/reaper.yaml verbatim (which stores them
+            # quoted, '08906'), and 0 of 115 match once a 1.2 reader strips the zero.
+            #
+            # Nothing consumes it wrongly today -- the C# ignores `candidates` outright and PyYAML
+            # round-trips its own output -- so this closes an exposure rather than a live bug. The
+            # sibling generator gen_set_contents.py already refuses safe_dump for this exact shape
+            # and says so in the same words; this was the last generator of committed data still
+            # using it. The wider reformat in the same commit (indented sequences, longer lines) is
+            # _Dumper doing what it does everywhere else in the repo.
+            + dump_yaml({slug: data})
         )
         out_path.write_bytes(content.encode("utf-8"))
         # `contested` is the count of Mode B identities NO evidence could settle, withheld by
