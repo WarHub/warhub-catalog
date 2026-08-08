@@ -1,10 +1,7 @@
+using WarHub.CatalogStore;
 using WarHub.PaintCatalog.Tool.Equivalence;
 using WarHub.PaintCatalog.Tool.Models;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.EventEmitters;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace WarHub.PaintCatalog.Tool.Output;
 
@@ -14,12 +11,33 @@ namespace WarHub.PaintCatalog.Tool.Output;
 /// </summary>
 public static class YamlCatalogWriter
 {
-    private static readonly ISerializer Serializer = new SerializerBuilder()
-        .WithNamingConvention(CamelCaseNamingConvention.Instance)
-        .WithEventEmitter(next => new BlockScalarEmitter(next))
-        .ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull)
-        .DisableAliases()
-        .Build();
+    // THE SHARED SERIALIZER, not a local one. This file used to build its own with a
+    // BlockScalarEmitter that handled multi-line strings and nothing else, so every string that
+    // LOOKS like a number went out as a plain scalar -- and a plain scalar is a type declaration,
+    // not a formatting choice.
+    //
+    // Measured on the committed equivalences.yaml: ALL 34,172 `productCode` scalars were emitted
+    // plain (this file quoted nothing, ever). 13,112 of them are ambiguous and now carry quotes:
+    //   - 12,967 a YAML 1.1 reader (PyYAML) re-types, of which 1,093 come back a DIFFERENT VALUE
+    //     -- '040' -> 32 read as octal, '71.130' -> 71.13, '85.050' -> 85.05;
+    //   - a further 145 PyYAML happens to keep as strings ONLY because a leading-zero code
+    //     containing an 8 or a 9 ('008', '029', '049') is not valid octal, while a YAML 1.2 core
+    //     -schema reader has no octal rule there and reads every one of them as an int.
+    // Which reader you use decided which half of the field was corrupt. That is the whole argument
+    // for quoting on the WRITE side rather than documenting a loader requirement.
+    //
+    // The archive under brands/ has always quoted them, because it goes through CatalogSerializer
+    // -- so the two halves of the same catalog disagreed about the type of the one field that
+    // joins them, and equivalences.yaml could not be joined to the archive from Python without
+    // re-deriving the raw text. Not hypothetical: it produced a false "201 dangling equivalence
+    // sources" reading during the AK duplicate retraction.
+    //
+    // QuotingEventEmitter is a strict superset of what BlockScalarEmitter did -- same literal-block
+    // rule for multi-line strings, checked FIRST so a multi-line string that also looks numeric
+    // still blocks rather than quotes, plus the ambiguous-scalar rule. Nothing is lost by deleting
+    // the local one, and CatalogSerializer's "all catalog data files" claim becomes true rather
+    // than aspirational.
+    private static readonly ISerializer Serializer = CatalogSerializer.CreateSerializer();
 
     /// <summary>
     /// Writes a brand catalog YAML file to brands/{slug}.yaml.
@@ -56,23 +74,5 @@ public static class YamlCatalogWriter
         string filePath = Path.Combine(outputDir, "equivalences.yaml");
         string yaml = Serializer.Serialize(equivalences);
         await File.WriteAllTextAsync(filePath, yaml);
-    }
-
-    /// <summary>
-    /// Custom event emitter that uses block scalar style (|) for multi-line strings.
-    /// </summary>
-    private sealed class BlockScalarEmitter(IEventEmitter next) : ChainedEventEmitter(next)
-    {
-        public override void Emit(ScalarEventInfo eventInfo, IEmitter emitter)
-        {
-            if (eventInfo.Source.Type == typeof(string) &&
-                eventInfo.Source.Value is string text &&
-                text.Contains('\n'))
-            {
-                eventInfo.Style = ScalarStyle.Literal;
-            }
-
-            base.Emit(eventInfo, emitter);
-        }
     }
 }
