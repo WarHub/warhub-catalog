@@ -7,10 +7,19 @@ strategy: reaper
 baseUrl: https://www.reapermini.com
 scope:
   manufacturer: Reaper
-  # The six real /paints/* data pages (live-mapped 2026-07-24): each embeds its line's full
-  # product array in the inline Vue bootstrap (`paints: [...]`) -- one GET per page is the
-  # entire request footprint. Every other /paints/<slug> is a catch-all serving the data-less
-  # marketing page. ORDER MATTERS: the first page claiming a sku wins, so set-kind pages come
+  # The six real /paints/* data pages (live-mapped 2026-07-24, RE-VERIFIED 2026-08-08): each
+  # embeds its line's full product array in the inline Vue bootstrap (`paints: [...]`) -- one GET
+  # per page is the entire request footprint. Every other /paints/<slug> is a catch-all serving the
+  # data-less marketing page.
+  #
+  # THIS LIST IS COMPLETE, and that had to be established rather than assumed, because
+  # strategies/reaper.py used to blame a missing entry here for the four 29xxx codes that resolve
+  # to nothing. Re-mapped live 2026-08-08: the /paints index links exactly 7 pages -- these 6 plus
+  # /paints/msp2, which carries no data blob -- and the 6 still hold exactly 541 unique skus.
+  # There is no High Density page and no page for 29107/29137/29143/29815. Nothing added here
+  # could have closed that gap; the site names those paints only inside set contents, which is
+  # where the strategy now reads them from.
+  # ORDER MATTERS: the first page claiming a sku wins, so set-kind pages come
   # first -- triad/set skus recur on the singles pages (09819-22 triads on core-colors, Bones
   # Ultra-Coverage sets 09976-81 on bones, 09967-68 on pathfinder, LTPK 08906-07 on
   # paint-sets) and must keep their set identity. `line` labels are the site's own page names.
@@ -47,21 +56,38 @@ politeness:
 contract:
   # Evidence-based floor (~85% of observed): live snapshot 2026-07-24 counted 555 blob items
   # across the six pages, 541 unique skus after cross-page dedupe (439 singles + 116 sets -
-  # 14 recurrences). 541 * 0.85 = 459.9 -> 455.
+  # 14 recurrences). 541 * 0.85 = 459.9 -> 455. Re-measured 2026-08-08: the six pages still yield
+  # exactly 555 items and 541 unique skus, plus 35 set-only paints (see below) for 576 total, so
+  # the floor keeps its original meaning and is left alone -- raising it to track the new total
+  # would just make a genuine line-page outage harder to see.
   minCount: 455
   maxDropPct: 30
   requiredFieldRates:
     name: 1.0
     sku: 1.0
-    # Drift guard on the images array shape: ~97% of blob items carry a main image filename
-    # (8 of 267 core singles and a handful of sets shipped image-less on 2026-07-24).
-    imageUrl: 0.9
+    # Drift guard on the images array shape: ~97% of LINE-PAGE blob items carry a main image
+    # filename (8 of 267 core singles and a handful of sets shipped image-less on 2026-07-24).
+    #
+    # LOWERED 0.9 -> 0.85 on 2026-08-08, and that is loosening a number to STOP it lying rather
+    # than to dodge it. The 35 set-only paints carry no image BY CONSTRUCTION -- a set-member
+    # reference names the paint but its `filename` depicts the referenced sku as sold, which for a
+    # 12-bottle special order is a case of bottles (strategies/reaper.py::_set_only_paints). They
+    # therefore dilute this rate permanently and for a reason that has nothing to do with image
+    # drift: 533 of 541 with images before (98.5%, 47 image-less rows of headroom), 533 of 576
+    # after (92.5%, only 15). At 0.9 the guard would now fire after 15 line-page images went
+    # missing instead of the ~47 it was calibrated for, and a fire would be ambiguous between real
+    # drift and Reaper simply naming more paints inside sets. 0.85 restores ~38 rows of headroom,
+    # which is the sensitivity this line was actually written to have.
+    imageUrl: 0.85
 # Boxed multi-pot sets are PRODUCTS, not paints -- see resolve/crossover.py for the shared
 # evaluator gen_paint_harvest.py refuses the same rows with.
 crossoverToProducts:
   reason: >
     Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
-    Measured 2026-08-05 over all 541 observations: this block selects 115 -- 114 that
+    Measured 2026-08-05 over all 541 observations, re-measured 2026-08-08 over all 576
+    (the 35 set-only paints are category "paint" and none of their names carries a set
+    word -- "12 Bottle Lot Special Order: Khaki Shadow" has no SET/COLLECTION token --
+    so the selection is unchanged): this block selects 115 -- 114 that
     reapermini.com itself labels hints.category "paint-set" (triads, LTPK kits, the
     $659.99 full range) plus exactly 1 the title catches that the category misses, 09985
     "Sophie's Mystery Paint Set", which the store labels hints.category "paint". The

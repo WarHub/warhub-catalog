@@ -140,12 +140,23 @@ def _material_unstated_paints(product: dict) -> list[str]:
 
     ADMISSION IS NOT WIDENED, deliberately. A blank `material` is UNSTATED, and admitting on the
     strength of `category` alone would be this repo inferring a taxonomy the source declined to
-    state -- the guess HarvestApplier.ApplyEnrichment exists to refuse. It would also recover
-    nothing joinable: 29137 and 29143 are absent from data/paints/brands/reaper.yaml, like the
-    29xxx codes 29107 and 29815 that already land in set-contents' `unresolved:` block. All four
-    are the SAME root cause -- the 29xxx High Density range has no `linePages` entry in
-    data/catalog/sources/mfr-reaper.yaml. The fix is to extend the descriptor, and this counter
-    is what makes the gap show up in run stats instead of nowhere.
+    state -- the guess HarvestApplier.ApplyEnrichment exists to refuse. Both entries are blank in
+    TWO fields at once (`material: null` AND `filename: false`), which is what a malformed record
+    looks like rather than a paint the site merely under-described.
+
+    THE ROOT CAUSE THIS DOCSTRING USED TO NAME WAS WRONG, and it sent the next person to a dead
+    end, so the correction is recorded rather than quietly swapped: it said 29107/29137/29143/29815
+    were missing because "the 29xxx High Density range has no `linePages` entry" and that "the fix
+    is to extend the descriptor". Re-mapped live 2026-08-08 -- reapermini.com's /paints index links
+    exactly 7 pages, the 6 already configured plus /paints/msp2, which is a data-less marketing
+    page. There is no High Density page, no page for any of the four, and the 6 configured pages'
+    blobs still hold exactly the 541 unique skus the descriptor already claims. No descriptor entry
+    could have closed this gap because there is nothing to point it at.
+
+    What is true is narrower and fixable: the site names these paints ONLY inside
+    `associatedProducts`, which is where `set_only_paints` below now picks them up. This counter
+    stays because 29137 and 29143 are NOT recovered by that route either -- they fail the same
+    material whitelist -- so the gap they represent must keep showing up in run stats.
     """
     return sorted(
         str(item["sku"])
@@ -154,6 +165,52 @@ def _material_unstated_paints(product: dict) -> list[str]:
         and not str(item.get("material") or "").strip()
         and any("paint" in str(c).lower() for c in (item.get("category") or []))
     )
+
+
+def _set_only_paints(product: dict, page_path: str) -> list[dict]:
+    """Paint members this set NAMES that no line page sells on its own.
+
+    Returned raw (sku/name/line/parent/page) for the caller to emit once every line page has been
+    read -- "no line page lists it" is only knowable after the whole sweep, so this cannot decide
+    anything by itself.
+
+    WHY THIS IS EVIDENCE AND NOT A GUESS. `associatedProducts` states, in the source's own fields,
+    a sku, a name, a `category` naming the paint's line, and `material: "paint"`. That is strictly
+    more than several line-page items carry. The only thing it lacks is a page of its own, which is
+    a fact about Reaper's shop, not about the paint. Measured live 2026-08-08 across the six line
+    pages: 48 members are named but unlisted -- 4 brushes and 7 Bones figures (rejected by the same
+    `material` whitelist `_content_skus` uses, unchanged), 2 malformed (see
+    `_material_unstated_paints`), and 35 paints. 33 of those 35 are "12 Bottle Lot Special Order"
+    bulk packs whose sku still names a paint the catalog already holds once Reaper's zero-padding
+    is stripped (09121 -> 9121 "Khaki Shadow"), so the bridge's ordinary `match_code` route absorbs
+    them and mints nothing. The remaining 2 are the whole gap: 29107 "Gutter Grime" and 29815
+    "HD Dragon Blue", which resolve to nothing under any normalization and are exactly the two refs
+    sitting in data/catalog/set-contents/reaper.yaml's `unresolved:` block.
+
+    NO IMAGE IS CARRIED, deliberately, even though `filename` is right there and 33 of the 33
+    enrich-route paints currently have none. A reference's filename depicts the referenced SKU AS
+    SOLD, and for a special-order lot that is a case of bottles, not a pot -- Reaper marks those
+    with a distinct `_D` render (09121_D.jpg). Filling a single pot's blank image with a photo of
+    twelve would be a worse record than a blank one, and telling the two apart means reading a
+    filename suffix, which is a guess. A set-member reference is weaker evidence than a listing and
+    is treated that way: it carries identity (sku, name, line) and nothing else. Price is not a
+    judgement call at all -- `associatedProducts` has no price field.
+    """
+    out = []
+    for item in (product.get("associatedProducts") or []):
+        if not isinstance(item, dict) or not item.get("sku"):
+            continue
+        if str(item.get("material") or "").lower() != "paint":
+            continue
+        line = next((str(c) for c in (item.get("category") or []) if str(c).strip()), "")
+        out.append({
+            "sku": str(item["sku"]),
+            "name": str(item.get("name") or item["sku"]),
+            "line": line,
+            "parent": str(product.get("sku") or ""),
+            "page": page_path,
+        })
+    return out
 
 
 def reaper_strategy(
@@ -175,6 +232,9 @@ def reaper_strategy(
         # so `_content_skus` drops them. 2 today (09916 -> 29137, 29143) and they are NOT a
         # rounding error -- they are a quarter of that box. See `_material_unstated_paints`.
         "content_sku_material_unstated": 0,
+        # Paints named ONLY inside a set's associatedProducts, with no line page of their own.
+        # 35 today; see `_set_only_paints` for why they are evidence rather than inference.
+        "kept_set_only_paints": 0,
     }
 
     manufacturer_name = str(descriptor.scope.get("manufacturer") or "")
@@ -183,6 +243,9 @@ def reaper_strategy(
     )
 
     observations_by_sku: dict[str, Observation] = {}
+    # Collected across the whole sweep and emitted after it: whether a member has a page of its
+    # own cannot be known until every page has been read.
+    set_only_seen: dict[str, dict] = {}
     for page in descriptor.scope.get("linePages") or []:
         path = str(page.get("path") or "")
         line = str(page.get("line") or "")
@@ -197,6 +260,12 @@ def reaper_strategy(
             continue
 
         for product in products:
+            # Gathered for EVERY product, before the duplicate-sku `continue` below: a set listed
+            # on two pages must still contribute its members, and the first-wins rule is about
+            # which page owns a product, not about whether its contents were read.
+            for member in _set_only_paints(product, path):
+                set_only_seen.setdefault(member["sku"], member)
+
             sku = str(product.get("sku") or "")
             if not sku:
                 stats["sku_missing"] += 1
@@ -243,6 +312,40 @@ def reaper_strategy(
                 lastSeen=context.run_date,
                 extractor=EXTRACTOR,
                 **price_kwargs,
+            )
+
+    # A named member with no page of its own becomes an observation in its own right. Runs after
+    # the sweep so `observations_by_sku` is complete, and never overwrites a real listing -- a
+    # listing is the stronger evidence and always wins.
+    if manufacturer is not None:
+        for sku in sorted(set_only_seen):
+            if sku in observations_by_sku:
+                continue
+            member = set_only_seen[sku]
+            stats["kept_set_only_paints"] += 1
+            observations_by_sku[sku] = Observation(
+                key=f"{descriptor.id}:{sku}",
+                # The page the evidence was actually read from -- the set's own line page. There
+                # is no page for this sku to point at, and inventing one would be the only false
+                # field on the record.
+                url=f"{descriptor.baseUrl}{member['page']}",
+                manufacturer=manufacturer,
+                name=member["name"],
+                sku=sku,
+                imageUrl=None,
+                availability=None,
+                hints={
+                    "category": "paint",
+                    "line": member["line"],
+                    # Provenance, so a consumer can tell a referenced paint from a listed one
+                    # without re-deriving it: this record came from a set's contents array, and
+                    # `namedInSet` says which box was the witness.
+                    "namedOnlyInSets": True,
+                    "namedInSet": member["parent"],
+                },
+                firstSeen=context.run_date,
+                lastSeen=context.run_date,
+                extractor=EXTRACTOR,
             )
 
     return StrategyResult(

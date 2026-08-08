@@ -2,4 +2,4 @@
 
 | source | status | full sweep | observations | marked missed | stats |
 |---|---|---|---|---|---|
-| mfr-gw-trade | ok | False | 7617 | 0 | discontinued=2737, emitted=45288, lineage_links=1145, lineage_placeholder_barcodes=0, lineage_records=88, lineage_records_ambiguous=5, lineage_records_malformed=1, lineage_records_with_barcode=88, lineage_unmatched=0, lineage_with_barcode=540, parse_errors=0, rows=53049, skipped_bad_prefix=7758, skipped_no_ean=3, skipped_unreleased=0, workbooks=21 |
+| mfr-reaper | ok | True | 576 | 0 | content_sku_material_unstated=2, duplicate_skus=14, fetched_pages=6, image_missing=8, kept_paint_products=427, kept_set_only_paints=35, kept_set_products=114, products_seen=555, skipped_unknown_vendor=0, sku_missing=0 |
