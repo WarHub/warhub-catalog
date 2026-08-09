@@ -59,6 +59,30 @@ additions:
       productCode: AK17082
       soldSeparately: false
 
+    # TWO 3RD-GEN SINGLES AK STOPPED SELLING BUT STILL SHIPS INSIDE BOXES. Both are enumerated by
+    # AK's own set descriptions -- AK11253 "Grey Primer" in 4 sets, AK11388 "Harness & Uniform
+    # Belts" in 2 -- and both answer NOTHING on ak-interactive.com today (live Store API query
+    # 2026-08-09, exact-sku search, no result), while every other refused code from those same
+    # sets either answered or turned out to be a brush.
+    #
+    # Same shape as reaper's 29107/29815, and minted for the same reason: a discontinued single
+    # that a currently-sold box still contains is precisely the record someone holding the pot
+    # needs, and the catalog is the only place left that can hold it. Both codes sit inside AK's
+    # 3rd Gen AK11xxx block (502 codes committed), so they are gaps in a covered range rather than
+    # products of some line nobody swept -- there is no descriptor change that would recover them.
+    #
+    # NO `soldSeparately` KEY, and the omission is the statement. AK17082 above carries `false`
+    # because Warlord's listing SAYS "not sold separately". These two say nothing of the kind --
+    # AK simply stopped listing them, which is a different fact, and absence is how this field
+    # spells "no source said". Writing `false` here would launder a discontinuation into a
+    # manufacturing decision.
+    - name: Grey Primer
+      set: Primer (3rd Gen)
+      productCode: AK11253
+    - name: Harness & Uniform Belts
+      set: Standard (3rd Gen)
+      productCode: AK11388
+
   citadel-colour:
     # Games Workshop reformulated the Hexwraith Flame and Nighthaunt Gloom Technical paints with
     # Contrast chemistry and relaunched them IN the Contrast range on 2022-07-16 -- 18 ml, under a

@@ -620,7 +620,15 @@ AK_SET_BY_SUFFIX = {
     "QUICK GEN COLOR": "Quick Gen",  # *
     "COLOR PUNCH": "Color Punch (3rd Gen)",  # *
 }
-AK_SINGLE_SKU = re.compile(r"^AK\d{4,5}$")
+# WIDENED to 3 digits 2026-08-09. AK's legacy weathering and Xtreme Metal ranges number in
+# three (AK012 Streaking Grime, AK479 Xtreme Metal Aluminium), and the archive has held 111
+# such codes all along -- they arrived via the Arcturus base, so the shape was never in doubt,
+# only unreachable through this bridge. Measured over the 951 observations that survive the
+# crossover gate: 71 carry a 3-digit sku, ALL 71 sit in a mapped range (48 weathering, 23
+# Xtreme Metal) and 0 would fall through to `candidates`, so widening admits exactly the
+# paints the boxed sets were asking for and nothing else. The gate still rejects everything
+# without a clean AK-number sku, which is what it was written to do.
+AK_SINGLE_SKU = re.compile(r"^AK\d{3,5}$")
 
 
 def ak_prettify(name: str) -> str:
@@ -699,6 +707,25 @@ def bridge_ak() -> BrandHarvest:
         if set_name is None:
             if "acrylic-wash" in slugs:
                 set_name = "Acrylic Wash"  # new set: Arcturus has no AK wash range
+            # THE TWO RANGES THE SWEEP GAINED 2026-08-09, keyed by slug because these products
+            # carry no "- RANGE" suffix in their titles the way 3rd Gen and Quick Gen do. Both are
+            # colours by AK's own taxonomy (they sit under its `paints` parent) and both are named
+            # by the boxed sets: Xtreme Metal answers AK479/AK480/AK488, weathering singles answer
+            # AK012/AK014/AK636 and the seven AK121xx wash colours.
+            #
+            # The auxiliary agents that share these categories never reach here -- the descriptor's
+            # crossover block takes them out as `hobby-auxiliary` before `paint_rows` yields, which
+            # is the same gate that already removes boxed sets. So "is it a colour?" is answered
+            # once, in the descriptor, rather than twice in two spellings.
+            elif "xtreme-metal-paints" in slugs:
+                set_name = "Xtreme Metal"
+            elif "paints-weathering-single" in slugs:
+                # ONE set for the whole weathering line rather than one per sub-shelf (filters,
+                # washes, deposits, streaking). AK's own slugs partition it four ways and its
+                # printed labels do not, so a per-shelf split would invent a taxonomy the bottles
+                # do not carry -- and `set` is half the paint identity key, so an invented split is
+                # expensive to undo. A future source that states the sub-range can refine it.
+                set_name = "Weathering Effects"
             elif "3rd-acrylics" in slugs and suffix is None:
                 # Un-suffixed 3rd-gen singles (effects etc.) join the dominant set.
                 set_name = "Standard (3rd Gen)"

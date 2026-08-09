@@ -53,6 +53,10 @@ class CrossoverClause(BaseModel):
     # WOODEN BOX and near-green on two more tokens.
     nameMatches: str | None = None
     hintEquals: dict[str, str] | None = None  # scalar hint == value (hints.categorySlug, ...)
+    # Overrides the BLOCK's `category` for rows this clause selects. Absent on almost every
+    # clause: a source that crosses one kind of thing needs one stamp. See
+    # resolve/crossover.py::category_for for the case that needs two.
+    category: str | None = None
     # list hint intersects these values. EXACT value membership, never substring: Army Painter's
     # genuine airbrush paint sets carry the tag `Airbrush Warpaints`, which CONTAINS the substring
     # of the `brushset` exclusion but is not it (measured 2026-08-05, 4 rows AW8001P-AW8004P).
