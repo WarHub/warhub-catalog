@@ -82,8 +82,8 @@ ak-interactive:
   counts:
     sets: 212
     refs: 1223
-    members: 1211
-    unresolved: 12
+    members: 1212
+    unresolved: 11
     quantified: 0
   sets:
     ak-interactive/AK1063:
@@ -4998,6 +4998,11 @@ ak-interactive:
           brand: ak-interactive
           paint: Medium Sand|Standard (3rd Gen)
           productCode: AK11034
+        - ref: AK111424
+          brand: ak-interactive
+          paint: Grey Green|Figures (3rd Gen)
+          productCode: AK11424
+          resolvedBy: correction
         - ref: AK11419
           brand: ak-interactive
           paint: Waffen Red Brown|Figures (3rd Gen)
@@ -5018,9 +5023,6 @@ ak-interactive:
           brand: ak-interactive
           paint: Russian Uniform Lights|Figures (3rd Gen)
           productCode: AK11429
-      unresolved:
-        - ref: AK111424
-          reason: 'no paint in brand(s) ''ak-interactive'' carries this product code -- either it has not been acquired yet (fix the source), or the manufacturer makes it only for this set and lists it nowhere, in which case mint it in data/paints/overrides.yaml `additions:` with `soldSeparately: false` rather than leaving it refused forever'
     ak-interactive/AK11787:
       name: SUN & SHADE TONE COLLECTION BY KIRILL KANAEV
       brand: ak-interactive

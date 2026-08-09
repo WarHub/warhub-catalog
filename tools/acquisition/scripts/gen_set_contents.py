@@ -35,6 +35,16 @@ HarvestApplier.ApplyEnrichment — "guessing which of two paints a photo belongs
 leaving both blank"). A file that reported 100% by dropping the misses would be the failure mode
 this whole exercise is about.
 
+THE ONE THING THAT MAY OVERRULE A PRINTED CODE IS A HUMAN, and the distinction is worth stating
+precisely because this file elsewhere says a generator rewriting a source's claim is worse than
+one that refuses. That prohibition is on INFERENCE: nothing here computes an edit distance, looks
+for a nearest code, or fuzzy-matches a name to make its own output look complete.
+`Overrides.setRefs` is the other thing — a maintainer states, in a committed file, scoped to one
+product, with the evidence beside it, that a manufacturer mistyped a code in its own prose. It is
+the same separation `overrides.yaml` draws everywhere else in this repo, and it is reviewable in a
+diff. The corrected code changes only what is LOOKED UP: `ref:` keeps the string the source
+printed and the member carries `resolvedBy: correction`, so nothing is laundered.
+
 WHERE IT RUNS. Downstream of BOTH pipelines, which is the structural difference from its two
 siblings: they run BEFORE the C# paint tool because they FEED it, this one runs AFTER because it
 CONSUMES data/paints/brands/*.yaml. Its other input, data/catalog/products/*.yaml, is written by
@@ -61,6 +71,7 @@ REPO = Path(__file__).resolve().parents[3]
 PRODUCTS_DIR = REPO / "data/catalog/products"
 BRANDS_DIR = REPO / "data/paints/brands"
 OUT_DIR = REPO / "data/catalog/set-contents"
+OVERRIDES = REPO / "data/catalog/overrides.yaml"
 
 # Same pure-pyyaml sys.path bootstrap gen_paint_harvest.py documents at length: this script runs
 # as `uv run --with pyyaml python ...` in CI, and both modules below import only stdlib + yaml.
@@ -252,7 +263,8 @@ def _by_stated_name(name: str | None, catalogs: list[Catalog]) -> tuple[Catalog,
     return hits[0] if len(hits) == 1 else None
 
 
-def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list[Catalog]) -> dict:
+def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list[Catalog],
+                         set_refs: dict[str, dict[str, str]] | None = None) -> dict:
     """The whole relation for one manufacturer: {counts, sets}.
 
     `catalogs` is every paint archive this manufacturer's sets may draw from, in search order --
@@ -267,6 +279,10 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
         unresolved: list[dict] = []
         seen_refs: set[str] = set()
         stated_names = _stated_names(product)
+        # Maintainer-declared repairs for codes THIS product mistypes, keyed by the ref as printed
+        # (models/catalog.py::Overrides.setRefs). Nothing is computed here -- an entry exists only
+        # because somebody wrote it and cited the evidence in overrides.yaml.
+        corrections = (set_refs or {}).get(product["id"], {})
         for i, ref in enumerate(product["contentSkus"]):
             n_refs += 1
             # A CODE THE SOURCE LISTS TWICE IN ONE BOX IS NEVER RESOLVED TWICE BY CODE. Measured
@@ -334,15 +350,19 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
             # Collected across every listed brand: a code that names one paint in two different
             # archives is genuinely ambiguous and must be refused, not won by whichever brand
             # happens to be listed first.
+            # A declared correction replaces the code we LOOK UP and nothing else: `ref` below
+            # stays the string the source printed, so the repair is legible in the committed file
+            # instead of laundered into it.
+            lookup = corrections.get(ref, ref)
             hits: list[tuple[Catalog, dict]] = [
                 (catalog, paint)
                 for catalog in catalogs
-                for paint in (catalog.paints_for_code(ref)
-                              or catalog.paints_for_code(ref.lstrip("0") or ref))
+                for paint in (catalog.paints_for_code(lookup)
+                              or catalog.paints_for_code(lookup.lstrip("0") or lookup))
             ]
             if len(hits) == 1:
                 catalog, paint = hits[0]
-                members.append({
+                member = {
                     "ref": ref,
                     # The archive this ref actually resolved in -- per MEMBER, because one box can
                     # legitimately mix brands (a Warlord set of Army Painter pots that also ships
@@ -351,7 +371,13 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
                     "brand": catalog.slug,
                     "paint": catalog.key_of(paint),
                     "productCode": str(paint.get("productCode") or ""),
-                })
+                }
+                if lookup != ref:
+                    # Same shape the stated-name repair uses: the member says WHY its productCode
+                    # disagrees with its ref, so `resolvedBy` sorts every overruled code into view
+                    # whether a human or the source's own words did the overruling.
+                    member["resolvedBy"] = "correction"
+                members.append(member)
             elif not hits:
                 # The reason NAMES THE TWO CASES, because they need opposite responses and the
                 # bare fact does not distinguish them. Both were live in this file at once:
@@ -417,6 +443,12 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    # Read with plain yaml, not the Overrides model: this script runs in CI as
+    # `uv run --with pyyaml python ...` and importing pydantic here would break that line.
+    # The model still validates the same file in the resolver and in test_repo_data.py, so
+    # a malformed block fails loudly there rather than being tolerated everywhere.
+    set_refs = ((yaml.safe_load(OVERRIDES.read_text(encoding="utf-8")) or {}).get("setRefs")
+                if OVERRIDES.exists() else None) or {}
     written: set[str] = set()
     refused: list[str] = []
 
@@ -442,7 +474,7 @@ def main() -> None:
             written.add(manufacturer)
             continue
 
-        relation = resolve_manufacturer(manufacturer, products, catalogs)
+        relation = resolve_manufacturer(manufacturer, products, catalogs, set_refs)
         out = OUT_DIR / f"{manufacturer}.yaml"
         # write_bytes (not write_text) so the committed file is LF on every platform -- write_text
         # would emit CRLF on Windows and churn the diff for a maintainer running this locally.
