@@ -18,6 +18,47 @@
 # harvest additions; a swatch-extraction pass or an explicit `hex:` override fills the colour later.
 
 additions:
+  ak-interactive:
+    # THE ONE PAINT IN THIS CATALOG THAT NOBODY SELLS. Warlord's listing for the Winter Blue
+    # Soldiers set (warlord-games/AK17524) enumerates its contents and annotates one of them:
+    #   - AK17082 WOLF BLUE GREY *Special color only for this set - not sold separately.*
+    # Code, name, range and commercial status, all in the source's own words. Nothing here is
+    # inferred; the only thing missing is a product page, and the source explains why there is
+    # none.
+    #
+    # WHY IT IS MINTED RATHER THAN LEFT AS A REFUSAL, which is the opposite of the usual answer
+    # in this repo. `unresolved:` is right when the CATALOG has a gap -- when a code names a paint
+    # we simply failed to acquire, refusing says "go and look". Here there is nothing to go and
+    # look at: no page exists, no future acquisition can find one, and the refusal would stand
+    # forever while the evidence it needs sits committed three files away. A permanent refusal
+    # over settled evidence is not caution, it is a record we declined to write.
+    #
+    # And this is the record that matters MOST, by the catalog's own stated purpose. The
+    # equivalence pass argues it about discontinued paints: somebody holding a pot nobody makes
+    # anymore is the single most likely person to need the catalog. A set-exclusive colour is the
+    # extreme of that -- it has no page to search, no shop listing, no barcode to scan. Someone
+    # holding this bottle and reading "AK17082 WOLF BLUE GREY" off the label has exactly one way
+    # to find out what it is, and this is it.
+    #
+    # THE CODE IS THE IDENTIFIER, and it is real. AK's Quick Gen numbering runs AK17001-AK17079
+    # for the 79 retail colours (complete in the archive, zero gaps), then AK17080 and AK17081 for
+    # the 18 ml and 60 ml mediums, then this. AK allocated a catalogue number to a colour it makes
+    # for one box -- the sequence is the evidence that the code is genuine rather than a typo.
+    #
+    # NO BARCODE, and none is obtainable. All 79 committed Quick Gen paints carry zero EANs, so a
+    # barcode is missing for the whole RANGE, not just for this pot -- a colour that is never sold
+    # on its own is the last one that would ever get a retail one. The `ean` key is therefore
+    # absent rather than blank, and must stay absent: inventing one would be the only fabricated
+    # field on an otherwise fully-sourced record.
+    #
+    # Born colour-less (hex "", r/g/b 0) like every other minted paint. `soldSeparately: false` is
+    # the whole reason that field exists -- without it this publishes as status current /
+    # availability unknown, indistinguishable from a pot you can walk in and buy.
+    - name: Wolf Blue Grey
+      set: Quick Gen
+      productCode: AK17082
+      soldSeparately: false
+
   citadel-colour:
     # Games Workshop reformulated the Hexwraith Flame and Nighthaunt Gloom Technical paints with
     # Contrast chemistry and relaunched them IN the Contrast range on 2022-07-16 -- 18 ml, under a

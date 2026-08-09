@@ -97,6 +97,10 @@ public static class OverrideApplier
                 // explicit `false` distinguishable from an absent key, so writing one is a
                 // deliberate statement that the source is wrong, not an accident.
                 IsDiscontinued = over.IsDiscontinued ?? p.IsDiscontinued,
+                // Same bool? discipline as IsDiscontinued above, and for the same reason: an
+                // explicit `false` ("a source says this is set-exclusive") must stay
+                // distinguishable from an absent key ("nobody said").
+                SoldSeparately = over.SoldSeparately ?? p.SoldSeparately,
                 PriceGbp = over.PriceGbp ?? p.PriceGbp,
                 PriceUsd = over.PriceUsd ?? p.PriceUsd,
                 PriceEur = over.PriceEur ?? p.PriceEur,
@@ -165,6 +169,7 @@ public static class OverrideApplier
                 Ean = Blank(addition.Ean),
                 ImageUrl = Blank(addition.ImageUrl),
                 SupersededBy = Blank(addition.SupersededBy),
+                SoldSeparately = addition.SoldSeparately,
             });
         }
 
@@ -276,6 +281,8 @@ public record PaintOverride
     /// </summary>
     public int? WeightG { get; init; }
     public string? Packaging { get; init; }
+    /// <summary>See PaintRecord.SoldSeparately. `false` states set-exclusivity; null is unstated.</summary>
+    public bool? SoldSeparately { get; init; }
     public string? Ean { get; init; }
     /// <summary>
     /// Extra barcodes for this paint. Also the read shape for the generated barcodes file
@@ -312,6 +319,8 @@ public record PaintOverride
 /// <summary>A minted paint from the overrides file's <c>additions</c> section.</summary>
 public record PaintAddition
 {
+    /// <summary>See PaintRecord.SoldSeparately. Written only when a source states it.</summary>
+    public bool? SoldSeparately { get; init; }
     public string? Name { get; init; }
     public string? Set { get; init; }
     public string? ProductCode { get; init; }

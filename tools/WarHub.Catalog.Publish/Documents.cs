@@ -123,6 +123,12 @@ internal sealed record PaintRecord(
     [property: JsonPropertyOrder(17)] decimal? PriceCad,
     [property: JsonPropertyOrder(18)] string Status,
     [property: JsonPropertyOrder(19)] string Availability,
+    // `false` when a source states this pot is only available inside a boxed set; ABSENT
+    // whenever no source said, which is nearly always and is a different claim from `true`.
+    // A consumer that has never heard of this field sees exactly what it saw before -- which
+    // is the point of it being a sibling rather than a new `availability` value, the same
+    // reasoning `supersedes` records just below.
+    [property: JsonPropertyOrder(19)] bool? SoldSeparately,
     // Archival lineage between two paint identities for the same colour -- a reformulation that
     // moved the paint into another range keeps BOTH records: the retired one points forward with
     // `supersededBy`, the replacement lists its predecessors in `supersedes`. Values are paint ids,

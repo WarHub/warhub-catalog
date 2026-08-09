@@ -190,6 +190,7 @@ public sealed class BarcodeIndexTests
         PriceCad: null,
         Status: "current",
         Availability: "unknown",
+        SoldSeparately: null,
         Supersedes: null,
         SupersededBy: null,
         Equivalents: []);
