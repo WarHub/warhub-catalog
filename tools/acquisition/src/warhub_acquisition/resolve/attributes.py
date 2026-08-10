@@ -7,8 +7,13 @@ from warhub_acquisition.resolve.corroborate import EanResolution
 # `weightG` is NET CONTENTS in grams for a product sold by mass (added 2026-08-06), first-wins
 # across the kind-ordered members exactly like `volumeMl` beside it. It is NOT Shopify's `grams`
 # hint, which is gross shipping weight on 1,843 observations and stays out of this tuple.
+# `contentSkus` is LIST-valued, unlike every other member of this tuple, and folds the same way:
+# `_first` takes the highest-priority source's list WHOLE. That is deliberate -- see
+# CanonicalProduct.contentSkus. Unioning two sources' contents claims would assert a box neither
+# of them describes.
 _HINT_FIELDS = (
-    "gameSystem", "faction", "category", "packaging", "quantity", "volumeMl", "weightG", "description",
+    "gameSystem", "faction", "category", "packaging", "quantity", "volumeMl", "weightG",
+    "description", "contentSkus",
 )
 _DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur", "priceCad")
 

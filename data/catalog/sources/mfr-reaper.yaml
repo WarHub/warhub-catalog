@@ -73,8 +73,9 @@ crossoverToProducts:
     cross with no EAN. 09985 is a SECOND re-home case: it is published as a paint today
     with hex '' and no EAN, so there is no barcode to move and the paint record still
     needs retracting separately -- the EAN guard will not notice either way.
-    Set-membership evidence (hints.contentSkus) is dropped on crossover: CanonicalProduct
-    has no field for it. 114 of these 115 already carry hints.category "paint-set", so the
+    Set-membership evidence (hints.contentSkus) crosses over intact as of 2026-08-07:
+    CanonicalProduct.contentSkus carries it, 29 sets / 802 refs. 114 of these 115 already
+    carry hints.category "paint-set", so the
     category stamp below is a no-op for them and a correction for 09985 -- and for all 431
     rows the other five sources label "paint".
   category: paint-set
