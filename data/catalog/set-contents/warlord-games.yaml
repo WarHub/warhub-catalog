@@ -75,8 +75,8 @@ warlord-games:
   counts:
     sets: 24
     refs: 90
-    members: 87
-    unresolved: 3
+    members: 88
+    unresolved: 2
     quantified: 0
   sets:
     warlord-games/AK17501:
@@ -434,6 +434,10 @@ warlord-games:
       brand: army-painter, ak-interactive
       from: description
       members:
+        - ref: AK17011
+          brand: ak-interactive
+          paint: Space Yellow|Quick Gen
+          productCode: AK17011
         - ref: AK17034
           brand: ak-interactive
           paint: Space Red|Quick Gen
@@ -446,9 +450,6 @@ warlord-games:
           brand: ak-interactive
           paint: Black|Quick Gen
           productCode: AK17049
-      unresolved:
-        - ref: AK17011
-          reason: no paint in brand(s) 'army-painter, ak-interactive' carries this product code
     warlord-games/AK17520:
       name: Creatures And Witches (Quick Gen Set)
       brand: army-painter, ak-interactive
