@@ -82,7 +82,9 @@ from __future__ import annotations
 
 import datetime as _dt
 import io
+import json
 import re
+from pathlib import Path
 from typing import Iterator
 
 from warhub_acquisition.acquire.client import FetchError, PoliteClient
@@ -238,6 +240,105 @@ _HEADER_TOKENS: frozenset[str] = frozenset(
         "Individual Code",
     }
 )
+
+
+# Every column this module reads, and the ONLY columns the committed snapshot may carry. The
+# snapshot is a NORMALIZED EXTRACT, never the raw workbook: a raw copy would drag GW's wholesale
+# `Trade Price`/`Cost` columns into git alongside the retail data we actually publish. Keeping the
+# whitelist next to the readers means a new `_first(row, ...)` spelling that is not listed here
+# fails visibly on a snapshot re-parse rather than silently reading None.
+_CONSUMED_COLUMNS: frozenset[str] = frozenset(
+    {
+        # identity
+        "Product Code", "New Product Code", "Unit Code", "Individual Code", "New SKU",
+        "Description", "Description (ENG)", "PRODUCT NAME", "Product Description", "Product Name",
+        "Barcode (Single)", "New Individual barcode", "Barcode", "New Barcode",
+        # attributes / classification
+        "SS Code", "SSC", "New SS Code", "Short Code",
+        "Category (ENG)", "Range", "Trade range",
+        "SIZE", "UKR",
+        # release-date policy gate
+        "Release Date (Global)", "Release Date", "Release Date (China)",
+        # re-coding lineage
+        "Old Product Code", "Old Code", "Previous Product Code", "Old SKU", "Original SKU",
+        "Old Barcode", "Old Individual barcode", "Previous Barcode",
+        "Date", "Change Date", "Effective Date",
+    }
+)
+
+
+def _cell(value: object) -> object:
+    """A cell value as JSON. Dates become ISO strings, which `_as_date` already accepts, so a
+    snapshot round-trip parses identically to the live workbook it came from."""
+    if isinstance(value, _dt.datetime):
+        return value.date().isoformat()
+    if isinstance(value, _dt.date):
+        return value.isoformat()
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+    return str(value)
+
+
+def _extract(row: dict) -> dict:
+    return {
+        name: _cell(value)
+        for name, value in row.items()
+        if name in _CONSUMED_COLUMNS and value not in (None, "")
+    }
+
+
+def _live_rows(client, workbooks, stats: dict[str, int], load_workbook) -> Iterator[tuple[str, str, dict]]:
+    """`(workbook name, sheet title, row)` from the network, one workbook at a time."""
+    for url, asset in workbooks:
+        try:
+            payload = client.get_response(url).content
+            book = load_workbook(io.BytesIO(payload), data_only=True, read_only=True)
+        except (FetchError, Exception):  # noqa: BLE001 - a bad workbook must not fail the run
+            stats["parse_errors"] += 1
+            continue
+        stats["workbooks"] += 1
+        name = str(asset.get("file_name") or url.rsplit("/", 1)[-1])
+        try:
+            for sheet in book.worksheets:
+                for row in _rows(sheet):
+                    yield name, sheet.title, row
+        finally:
+            book.close()
+
+
+def _snapshot_rows(path: Path, stats: dict[str, int]) -> Iterator[tuple[str, str, dict]]:
+    """The same triples, replayed from the committed extract in their original order.
+
+    Order matters: `_merge` resolves a product code seen in several workbooks by first-wins/richest
+    -wins rules, so replaying out of order would not reproduce the live result.
+    """
+    if not path.exists():
+        raise FileNotFoundError(
+            f"no committed snapshot at {path}; run `warhub-data acquire --source mfr-gw-trade` "
+            "once (with network) to write one"
+        )
+    books: set[str] = set()
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            payload = json.loads(line)
+            books.add(payload["workbook"])
+            yield payload["workbook"], payload["sheet"], payload["row"]
+    stats["workbooks"] = len(books)
+
+
+def _write_snapshot(path: Path, rows: list[tuple[str, str, dict]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        for workbook, sheet, row in rows:
+            handle.write(
+                json.dumps(
+                    {"workbook": workbook, "sheet": sheet, "row": row},
+                    sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+                )
+                + "\n"
+            )
 
 
 def _rows(sheet) -> Iterator[dict]:
@@ -564,11 +665,27 @@ def gw_trade_sheets_strategy(
     if not patterns:
         raise ValueError(f"{descriptor.id}: scope.filePatterns is required")
 
-    nonce = _scrape_nonce(client, base_url, resources_path)
-    assets = _enumerate_assets(client, base_url, nonce, countries)
-    workbooks = _select_workbooks(assets, patterns)
-    if context.budget is not None:
-        workbooks = workbooks[: context.budget]
+    # Durability (phase 6): the workbooks are a LIVE third-party surface -- they rotate, get
+    # re-uploaded under new names, and the `Code Changes` register is cumulative only for as long
+    # as GW chooses to keep restating old rows. Every live run therefore writes a normalized
+    # extract of exactly the columns this module reads, and `--from-snapshot` re-parses that
+    # extract with no network at all. Re-deriving lineage must not depend on a 35-minute scrape of
+    # someone else's site staying available.
+    snapshot_path = (context.snapshot_dir / "sheets.jsonl") if context.snapshot_dir else None
+    if context.from_snapshot:
+        if snapshot_path is None:
+            raise ValueError(f"{descriptor.id}: --from-snapshot needs a data root to read from")
+        source_rows = _snapshot_rows(snapshot_path, stats)
+        workbooks = []
+    else:
+        nonce = _scrape_nonce(client, base_url, resources_path)
+        assets = _enumerate_assets(client, base_url, nonce, countries)
+        workbooks = _select_workbooks(assets, patterns)
+        if context.budget is not None:
+            workbooks = workbooks[: context.budget]
+        source_rows = _live_rows(client, workbooks, stats, openpyxl.load_workbook)
+    # Rows kept for the snapshot, collected as the live parse streams past them.
+    captured: list[tuple[str, str, dict]] = []
 
     observations: dict[str, Observation] = {}
     # Per-product provenance across every sheet of every workbook, resolved into `archived` once
@@ -581,93 +698,90 @@ def gw_trade_sheets_strategy(
     lineage: list[tuple[str, str, object]] = []
     run_date = context.run_date
 
-    for url, asset in workbooks:
-        try:
-            payload = client.get_response(url).content
-            book = openpyxl.load_workbook(io.BytesIO(payload), data_only=True, read_only=True)
-        except (FetchError, Exception):  # noqa: BLE001 - a bad workbook must not fail the run
-            stats["parse_errors"] += 1
+    for workbook_name, sheet_title, row in source_rows:
+        role = _sheet_role(sheet_title)
+        stats["rows"] += 1
+        code = _first(row, "Product Code", "New Product Code", "Unit Code",
+                      "Individual Code", "New SKU")
+        name = _first(row, "Description", "Description (ENG)", "PRODUCT NAME",
+                      "Product Description", "Product Name")
+        if code is None or name is None:
             continue
-        stats["workbooks"] += 1
+        if _release_date_is_future(row, run_date):
+            # Dropped BEFORE the row reaches `captured`: GW's Trade Terms make unreleased product
+            # information Confidential, so a future release date must not be committed to git any
+            # more than it may be published. The next live run picks the product up once it ships.
+            stats["skipped_unreleased"] += 1
+            continue
+        captured.append((workbook_name, sheet_title, _extract(row)))
 
-        try:
-            for sheet in book.worksheets:
-                role = _sheet_role(sheet.title)
-                for row in _rows(sheet):
-                    stats["rows"] += 1
-                    code = _first(row, "Product Code", "New Product Code", "Unit Code",
-                                  "Individual Code", "New SKU")
-                    name = _first(row, "Description", "Description (ENG)", "PRODUCT NAME",
-                                  "Product Description", "Product Name")
-                    if code is None or name is None:
-                        continue
-                    if _release_date_is_future(row, run_date):
-                        stats["skipped_unreleased"] += 1
-                        continue
+        raw_barcode = _first(row, "Barcode (Single)", "New Individual barcode",
+                             "Barcode", "New Barcode")
+        ean = _clean_ean(raw_barcode)
+        if ean is None:
+            if raw_barcode is None:
+                stats["skipped_no_ean"] += 1
+            else:
+                stats["skipped_bad_prefix"] += 1
+            continue
 
-                    raw_barcode = _first(row, "Barcode (Single)", "New Individual barcode",
-                                         "Barcode", "New Barcode")
-                    ean = _clean_ean(raw_barcode)
-                    if ean is None:
-                        if raw_barcode is None:
-                            stats["skipped_no_ean"] += 1
-                        else:
-                            stats["skipped_bad_prefix"] += 1
-                        continue
+        sku = re.sub(r"\s+", "", str(code))
+        key = f"{descriptor.id}:{sku}"
+        hints: dict[str, object] = {}
+        ssc = _first(row, "SS Code", "SSC", "New SS Code", "Short Code")
+        if ssc is not None:
+            hints["sscCode"] = str(ssc).strip()
+        category = _first(row, "Category (ENG)", "Range", "Trade range")
+        if category is not None:
+            hints["tradeCategory"] = str(category).strip()
+            # A GW paint pot/spray is a paint, not a "miniature": tag the product
+            # category so it publishes as `paint` rather than the default.
+            paint_category = _paint_category(str(category))
+            if paint_category is not None:
+                hints["category"] = paint_category
+        # Fallback: the WH Colour rebrand workbook's `Range` column holds opaque
+        # merchandising codes ("BS:A"), so the category has to come from the SHEET the
+        # row lives on -- that workbook splits its rows into `Paint` / `Brushes` /
+        # `Hobby` tabs. Without this its 604 paints would publish as `miniatures`.
+        if "category" not in hints:
+            sheet_category = _sheet_paint_category(sheet_title)
+            if sheet_category is not None:
+                hints["category"] = sheet_category
+        volume = _volume_ml(_first(row, "SIZE"), str(name))
+        if volume is not None:
+            hints["volumeMl"] = volume
 
-                    sku = re.sub(r"\s+", "", str(code))
-                    key = f"{descriptor.id}:{sku}"
-                    hints: dict[str, object] = {}
-                    ssc = _first(row, "SS Code", "SSC", "New SS Code", "Short Code")
-                    if ssc is not None:
-                        hints["sscCode"] = str(ssc).strip()
-                    category = _first(row, "Category (ENG)", "Range", "Trade range")
-                    if category is not None:
-                        hints["tradeCategory"] = str(category).strip()
-                        # A GW paint pot/spray is a paint, not a "miniature": tag the product
-                        # category so it publishes as `paint` rather than the default.
-                        paint_category = _paint_category(str(category))
-                        if paint_category is not None:
-                            hints["category"] = paint_category
-                    # Fallback: the WH Colour rebrand workbook's `Range` column holds opaque
-                    # merchandising codes ("BS:A"), so the category has to come from the SHEET the
-                    # row lives on -- that workbook splits its rows into `Paint` / `Brushes` /
-                    # `Hobby` tabs. Without this its 604 paints would publish as `miniatures`.
-                    if "category" not in hints:
-                        sheet_category = _sheet_paint_category(sheet.title)
-                        if sheet_category is not None:
-                            hints["category"] = sheet_category
-                    volume = _volume_ml(_first(row, "SIZE"), str(name))
-                    if volume is not None:
-                        hints["volumeMl"] = volume
+        # Re-coding lineage: this row says "old code -> this code". Recorded against
+        # the SURVIVING key and resolved after the whole harvest (see below). A row
+        # whose old code equals its new code is a no-op, not a supersession.
+        old_code, old_barcode, changed_on = _predecessor(row, run_date)
+        if old_code is not None and old_code != sku:
+            lineage.append((key, old_code, old_barcode, changed_on))
 
-                    # Re-coding lineage: this row says "old code -> this code". Recorded against
-                    # the SURVIVING key and resolved after the whole harvest (see below). A row
-                    # whose old code equals its new code is a no-op, not a supersession.
-                    old_code, old_barcode, changed_on = _predecessor(row, run_date)
-                    if old_code is not None and old_code != sku:
-                        lineage.append((key, old_code, old_barcode, changed_on))
+        fresh = Observation(
+            key=key,
+            manufacturer=manufacturer,
+            name=str(name).strip(),
+            sku=sku,
+            ean=ean,
+            priceGbp=_price(row, "UKR"),
+            hints=hints,
+            firstSeen=run_date,
+            lastSeen=run_date,
+            # Provisional; finalised from `roles` once every workbook is parsed.
+            archived=False,
+            extractor="gw-trade-sheets",
+        )
+        existing = observations.get(key)
+        observations[key] = fresh if existing is None else _merge(existing, fresh)
+        roles.setdefault(key, set()).add(role)
+        stats["emitted"] += 1
 
-                    fresh = Observation(
-                        key=key,
-                        manufacturer=manufacturer,
-                        name=str(name).strip(),
-                        sku=sku,
-                        ean=ean,
-                        priceGbp=_price(row, "UKR"),
-                        hints=hints,
-                        firstSeen=run_date,
-                        lastSeen=run_date,
-                        # Provisional; finalised from `roles` once every workbook is parsed.
-                        archived=False,
-                        extractor="gw-trade-sheets",
-                    )
-                    existing = observations.get(key)
-                    observations[key] = fresh if existing is None else _merge(existing, fresh)
-                    roles.setdefault(key, set()).add(role)
-                    stats["emitted"] += 1
-        finally:
-            book.close()
+    # Refresh the committed extract only on a live run -- a `--from-snapshot` parse must never
+    # rewrite the file it just read (a budgeted or partly-failed replay would truncate it).
+    if snapshot_path is not None and not context.from_snapshot:
+        _write_snapshot(snapshot_path, captured)
+        stats["snapshot_rows"] = len(captured)
 
     for key, observation in observations.items():
         observation.archived = _is_discontinued(roles.get(key, set()))

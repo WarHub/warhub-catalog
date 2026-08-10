@@ -29,6 +29,12 @@ class DataPaths:
         return self.root / "catalog" / "sources"
 
     @property
+    def snapshots(self) -> Path:
+        """Committed normalized extracts of live third-party sources, per source id -- so a source
+        that rotates or disappears can still be re-parsed offline (see gw_trade_sheets)."""
+        return self.root / "snapshots"
+
+    @property
     def mappings(self) -> Path:
         return self.root / "catalog" / "mappings"
 

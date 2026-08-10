@@ -54,6 +54,12 @@ class AcquireContext:
     # (see below) -- callers constructing an AcquireContext directly (most existing strategy
     # tests) never need to set this.
     catalog_dir: Path | None = None
+    # Additive (phase 6, gw-trade durability): where a strategy keeps its committed normalized
+    # extract of a live source, and whether this run should REPLAY that extract instead of
+    # fetching. Populated by `run_source` like `catalog_dir`; strategies that have no snapshot
+    # simply ignore both.
+    snapshot_dir: Path | None = None
+    from_snapshot: bool = False
 
 
 Strategy = Callable[[SourceDescriptor, PoliteClient, dict, AcquireContext], StrategyResult]
@@ -225,7 +231,9 @@ def run_source(
     # every strategy call gets a context carrying it, not just barcode-db's. `replace` (never
     # mutating the caller's context in place) so a single AcquireContext instance reused across
     # every source in a run (cli.py builds one) is never surprised by another source's call.
-    strategy_context = replace(context, catalog_dir=paths.catalog_products)
+    strategy_context = replace(
+        context, catalog_dir=paths.catalog_products, snapshot_dir=paths.snapshots / descriptor.id
+    )
 
     strategy = STRATEGIES[descriptor.strategy]
     result = strategy(descriptor, client, cursor, strategy_context)

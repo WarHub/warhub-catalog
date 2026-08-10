@@ -498,3 +498,109 @@ def test_select_workbooks_excludes_legacy_xls():
     rather than a parse failure counted against the run."""
     assets = {"https://x/a/Pricelist UK.xls": {"file_name": "Pricelist UK.xls"}}
     assert _select_workbooks(assets, ["Pricelist"]) == []
+
+
+# --- phase 6: the committed normalized extract -------------------------------------------------
+
+
+def test_extract_keeps_only_consumed_columns_and_never_wholesale_pricing():
+    """The snapshot is a NORMALIZED EXTRACT, not a copy of the workbook. GW's wholesale
+    `Trade Price`/`Cost` columns sit next to the retail data we publish and must never reach git."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _extract
+
+    row = {
+        "Product Code": "99120204035", "Description": "SYLVANETH: DRYADS",
+        "Barcode (Single)": "5011921179398", "UKR": 30.0, "Category (ENG)": "AOS - Sylvaneth",
+        "Trade Price": 15.0, "Cost": 9.5, "Qty Per Case": 6, "": None, "Blank Column": "",
+    }
+    assert _extract(row) == {
+        "Product Code": "99120204035",
+        "Description": "SYLVANETH: DRYADS",
+        "Barcode (Single)": "5011921179398",
+        "UKR": 30.0,
+        "Category (ENG)": "AOS - Sylvaneth",
+    }
+
+
+def test_extracted_dates_round_trip_through_the_same_date_reader():
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _as_date, _cell
+
+    for value in (dt.datetime(2024, 6, 3, 9, 30), dt.date(2024, 6, 3)):
+        assert _cell(value) == "2024-06-03"
+        assert _as_date(_cell(value)) == dt.date(2024, 6, 3)
+
+
+def _snapshot(tmp_path, rows):
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _write_snapshot
+
+    path = tmp_path / "mfr-gw-trade" / "sheets.jsonl"
+    _write_snapshot(path, rows)
+    return path
+
+
+def test_snapshot_round_trip_preserves_row_order(tmp_path):
+    """Order is load-bearing: `_merge` resolves a code seen in several workbooks by first-wins
+    rules, so a replay that reorders rows would not reproduce the live result."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _snapshot_rows
+
+    rows = [
+        ("InsertDelete.xlsx", "Deletions", {"Product Code": "1", "Description": "A"}),
+        ("InsertDelete.xlsx", "Insertions", {"Product Code": "2", "Description": "B"}),
+        ("China Order Form.xlsx", "Sheet1", {"Product Code": "3", "Description": "C"}),
+    ]
+    stats = collections.defaultdict(int)
+    assert list(_snapshot_rows(_snapshot(tmp_path, rows), stats)) == rows
+    assert stats["workbooks"] == 2
+
+
+def test_missing_snapshot_says_how_to_create_one(tmp_path):
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _snapshot_rows
+
+    with pytest.raises(FileNotFoundError, match="acquire --source mfr-gw-trade"):
+        list(_snapshot_rows(tmp_path / "absent.jsonl", collections.defaultdict(int)))
+
+
+def test_replay_from_snapshot_rebuilds_observations_and_lineage_with_no_network(tmp_path):
+    """The whole point of phase 6: with the live source unreachable (no client at all), the
+    committed extract still yields the same observations, barcodes and re-coding lineage."""
+    from warhub_acquisition.acquire.runner import AcquireContext
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import gw_trade_sheets_strategy
+    from warhub_acquisition.models.descriptor import SourceDescriptor
+    from warhub_acquisition.taxonomy import Manufacturer, Taxonomy
+
+    snapshot = _snapshot(tmp_path, [
+        ("InsertDelete.xlsx", "Code Changes", {
+            "New Product Code": "99120204035", "Description": "SYLVANETH: DRYADS",
+            "New Barcode": "5011921179398", "Old Product Code": "99120204012",
+            "Old Barcode": "5011921062164", "Date": "2024-06-03", "UKR": 30.0,
+        }),
+        ("InsertDelete.xlsx", "Deletions", {
+            "Product Code": "99120204012", "Description": "SYLVANETH DRYADS",
+            "Barcode (Single)": "5011921062164",
+        }),
+    ])
+    taxonomy = Taxonomy({"games-workshop": Manufacturer(
+        slug="games-workshop", name="Games Workshop", codePattern=r"\d{11}")})
+    descriptor = SourceDescriptor(
+        id="mfr-gw-trade", kind="manufacturer", strategy="gw-trade-sheets",
+        scope={"manufacturer": "Games Workshop", "filePatterns": ["InsertDelete"]},
+    )
+    context = AcquireContext(
+        taxonomy=taxonomy, mappings={}, run_date="2026-07-30",
+        snapshot_dir=snapshot.parent, from_snapshot=True,
+    )
+
+    result = gw_trade_sheets_strategy(descriptor, None, {}, context)
+
+    by_key = {o.key: o for o in result.observations}
+    assert set(by_key) == {"mfr-gw-trade:99120204035", "mfr-gw-trade:99120204012"}
+    assert by_key["mfr-gw-trade:99120204035"].ean == "5011921179398"
+    assert by_key["mfr-gw-trade:99120204035"].hints["supersedes"] == [
+        {"productCode": "99120204012", "ean": "5011921062164", "changedOn": "2024-06-03"}
+    ]
+    # the retired code's own row still lands, still carrying its own barcode
+    assert by_key["mfr-gw-trade:99120204012"].ean == "5011921062164"
+    assert by_key["mfr-gw-trade:99120204012"].archived is True  # Deletions-only -> withdrawn
+    assert result.stats["workbooks"] == 1
+    # a replay must never rewrite the file it just read
+    assert "snapshot_rows" not in result.stats
