@@ -50,6 +50,12 @@ internal static class ProductBuilder
                     .Select(e => e!)
                     .ToList();
 
+                var supersedes = (p.Supersedes ?? [])
+                    .Select(s => s?.Trim())
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => s!)
+                    .ToList();
+
                 var record = new ProductRecord
                 {
                     Id = p.Id,
@@ -72,6 +78,8 @@ internal static class ProductBuilder
                     ProductCode = p.ProductCode ?? p.Sku,
                     Url = p.Url,
                     ImageUrl = p.ImageUrl,
+                    Supersedes = supersedes.Count > 0 ? supersedes : null,
+                    SupersededBy = string.IsNullOrWhiteSpace(p.SupersededBy) ? null : p.SupersededBy.Trim(),
                 };
 
                 if (gameSystemKey is null)
@@ -107,6 +115,12 @@ internal static class ProductBuilder
         var allProducts = orderedKeys.SelectMany(k => partitions[k].Products).Concat(systemless).ToList();
         int total = allProducts.Count;
 
+        // `products` counts EVERY record, archival ones included -- a superseded product is still a
+        // product you can own and scan. `currentProducts` is the subset nothing has replaced, so a
+        // consumer showing "what's on the shelf" has the number without re-deriving it.
+        static int CountCurrent(IEnumerable<ProductRecord> records) =>
+            records.Count(r => r.SupersededBy is null);
+
         // Consolidated
         writer.Write("products.json", "product-catalog", "product-catalog", null, total,
             new ProductCatalogDocument
@@ -114,7 +128,12 @@ internal static class ProductBuilder
                 Version = prov.Version,
                 GeneratedAt = prov.GeneratedAt,
                 GitCommit = prov.GitCommit,
-                Counts = new Dictionary<string, int> { ["products"] = total, ["gameSystems"] = orderedKeys.Count },
+                Counts = new Dictionary<string, int>
+                {
+                    ["products"] = total,
+                    ["currentProducts"] = CountCurrent(allProducts),
+                    ["gameSystems"] = orderedKeys.Count,
+                },
                 Source = prov.SourceFor("products.json"),
                 Products = allProducts,
             });
@@ -133,7 +152,11 @@ internal static class ProductBuilder
                     GeneratedAt = prov.GeneratedAt,
                     GitCommit = prov.GitCommit,
                     Partition = new Partition("gameSystem", key, data.Label),
-                    Counts = new Dictionary<string, int> { ["products"] = data.Products.Count },
+                    Counts = new Dictionary<string, int>
+                    {
+                        ["products"] = data.Products.Count,
+                        ["currentProducts"] = CountCurrent(data.Products),
+                    },
                     Source = prov.SourceFor(relPath),
                     Products = data.Products,
                 });

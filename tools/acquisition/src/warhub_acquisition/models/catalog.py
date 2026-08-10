@@ -17,6 +17,13 @@ class CanonicalProduct(BaseModel):
     # the published `ean` is unchanged for existing consumers. A confirmed barcode displaced
     # by a repackaging join lands here rather than being silently dropped (see resolve_ean).
     additionalEans: list[str] = Field(default_factory=list)
+    # Archival lineage, from matches.yaml `supersessions`. Both records are published: the retired
+    # one keeps its own productCode/ean/name and points forward via `supersededBy`; the surviving
+    # one lists its predecessors in `supersedes`. Deliberately NOT expressed as a `status` value --
+    # `status` is a free string every consumer filters on, and a new value there would silently
+    # exclude exactly the archival records this is meant to keep reachable.
+    supersedes: list[str] = Field(default_factory=list)
+    supersededBy: str | None = None
     gameSystem: str | None = None
     faction: str | None = None
     category: str | None = None

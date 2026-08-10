@@ -117,6 +117,61 @@ public sealed class ProductBuilderGuardTests
     }
 
     [Fact]
+    public void Supersession_link_publishes_on_both_records_and_counts_current_separately()
+    {
+        // Archival lineage: a retired product code keeps its own record and barcode and points
+        // forward; the current one points back. `counts.products` includes the retired record
+        // (somebody still owns that box) and `counts.currentProducts` is the subset on the shelf.
+        var retired = new CanonicalProduct
+        {
+            Id = "games-workshop/99120204012",
+            Name = "Dryads",
+            Manufacturer = "games-workshop",
+            Status = "discontinued",
+            Ean = "5011921062164",
+            EanConfidence = "confirmed",
+            SupersededBy = "games-workshop/99120204035",
+            GameSystem = null,
+        };
+        var current = new CanonicalProduct
+        {
+            Id = "games-workshop/99120204035",
+            Name = "Dryads",
+            Manufacturer = "games-workshop",
+            Status = "current",
+            Ean = "5011921179398",
+            EanConfidence = "confirmed",
+            Supersedes = ["games-workshop/99120204012"],
+            GameSystem = null,
+        };
+
+        (CatalogWriter writer, string dist) = WriterWithDist();
+        int total = ProductBuilder.Build(
+            [new CanonicalProductCatalog { Manufacturer = "games-workshop", Products = [retired, current] }],
+            EmptyLabels, Prov(), writer);
+
+        Assert.Equal(2, total);
+        string productsJson = File.ReadAllText(Path.Combine(dist, "products.json"));
+        using JsonDocument doc = JsonDocument.Parse(productsJson);
+        JsonElement counts = doc.RootElement.GetProperty("counts");
+        Assert.Equal(2, counts.GetProperty("products").GetInt32());
+        Assert.Equal(1, counts.GetProperty("currentProducts").GetInt32());
+
+        JsonElement[] published = [.. doc.RootElement.GetProperty("products").EnumerateArray()];
+        JsonElement old = published.Single(p => p.GetProperty("id").GetString() == "games-workshop/99120204012");
+        JsonElement now = published.Single(p => p.GetProperty("id").GetString() == "games-workshop/99120204035");
+        Assert.Equal("games-workshop/99120204035", old.GetProperty("supersededBy").GetString());
+        Assert.False(old.TryGetProperty("supersedes", out _));      // null -> omitted, never []
+        Assert.Equal(
+            ["games-workshop/99120204012"],
+            now.GetProperty("supersedes").EnumerateArray().Select(e => e.GetString()!).ToArray());
+        Assert.False(now.TryGetProperty("supersededBy", out _));
+        // the retired record keeps its own barcode -- it is NOT an additionalEans of the survivor
+        Assert.Equal("5011921062164", old.GetProperty("ean").GetString());
+        Assert.False(now.TryGetProperty("additionalEans", out _));
+    }
+
+    [Fact]
     public void Missing_game_system_label_throws_naming_the_slug()
     {
         var product = new CanonicalProduct

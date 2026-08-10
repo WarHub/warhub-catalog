@@ -274,8 +274,21 @@ def generate_candidates(paths: DataPaths) -> list[dict]:
         for pair, rules in rule_pairs.items():
             merged.setdefault(pair, set()).update(rules)
 
+    # A pair already declared as lineage in matches.yaml `supersessions` is settled: the two sides
+    # are the same product under two product codes and are kept apart ON PURPOSE. Re-proposing it
+    # as a JOIN would ask a reviewer to re-fold exactly what was deliberately split (and the union
+    # barrier in resolve/join.py would refuse the fold anyway), so drop it from the artifact. The
+    # name rule matches every such pair -- they share a product name by definition.
+    matches = _load_matches(paths)
+    declared = {
+        _pair_key(matches.aliases.get(retired, retired), matches.aliases.get(surviving, surviving))
+        for retired, surviving in matches.supersessions.items()
+    }
+
     candidates: list[dict] = []
     for entity_a, entity_b in sorted(merged):
+        if (entity_a, entity_b) in declared:
+            continue
         ctx_a, ctx_b = contexts[entity_a], contexts[entity_b]
         candidates.append(
             {

@@ -1,65 +1,92 @@
-# Hand-maintained: forced entity joins/aliases the deterministic resolver (resolve/join.py)
+# Hand-maintained: forced entity joins/aliases/lineage the deterministic resolver (resolve/join.py)
 # cannot infer on its own. `joins` maps one observation key (source_id:key) belonging to the
 # entity being folded in -> the surviving entity id it should merge into; `aliases` maps a
-# retired entity id -> its surviving replacement id. See resolve/join.py's docstring and
-# data/review/join-proposals.yaml's header for the promotion procedure. After editing, re-run
-# `warhub-data resolve` then `warhub-data report --ean-guard`.
+# retired entity id -> its surviving replacement id; `supersessions` LINKS two entities that both
+# keep their own record. See resolve/join.py's docstring and data/review/join-proposals.yaml's
+# header for the promotion procedure. After editing, re-run `warhub-data resolve` then
+# `warhub-data report --ean-guard`.
 #
-# Note: the "surviving" id on the right isn't always the entity that was named as the join's
-# target when promoted from join-proposals.yaml -- resolve/join.py's own anchor-priority rule
-# (curated > manufacturer > retailer > archive > barcode-db) decides which side's id actually
+# Note: the "surviving" id on the right of a JOIN isn't always the entity that was named as the
+# join's target when promoted from join-proposals.yaml -- resolve/join.py's own anchor-priority
+# rule (curated > manufacturer > retailer > archive > barcode-db) decides which side's id actually
 # survives once the two groups merge, so a few entries below point at the OTHER side's id (the
 # one carrying the higher-priority evidence) to avoid a spurious unresolved-forced-join conflict.
+# `supersessions` has no such quirk: nothing merges, so both ids are exactly as written and the
+# direction is the real one (retired -> current).
 #
-# A join is legitimate ONLY when the two sides are the SAME product. A genuine REPACKAGING (same
-# contents, new box/barcode) is joinable: the merged entity carries multiple barcodes -- the
-# live/manufacturer-confirmed one becomes the primary `ean`, and any displaced barcode is retained
-# in `additionalEans` (never dropped; see resolve/corroborate.py). Do NOT join a pair whose
-# CONTENTS differ -- a material change (metal -> resin), a roster/content change, an edition-content
-# change, or a premium/limited-variant line make them DISTINCT products.
+# JOIN or SUPERSESSION?
+#   * `joins` -- the two sides are ONE product record: an archive/duplicate page, a listing with no
+#     code of its own, a second store page for the same SKU. Nothing is destroyed by merging them.
+#   * `supersessions` -- the two sides are one product across TWO product codes (a re-code, a
+#     repackaging, a new edition of the same box). Folding those destroys a real product code and
+#     usually a real barcode, and people own the old box for decades: both records are kept and
+#     linked instead. resolve/join.py additionally BARS the union-find from re-merging a declared
+#     pair through a shared barcode (every GW pair below is bridged by a retailer still listing the
+#     retired code while carrying the current barcode).
+# Do NOT link a pair whose CONTENTS differ -- a material change (metal -> resin), a roster/content
+# change, an edition-content change, or a premium/limited-variant line make them DISTINCT products
+# with no lineage at all.
 joins:
+  # Archived GW webstore page for the Baneblade carrying that store's own SKU (60100181151) rather
+  # than the multi-build kit's code. A store SKU on a dead page is not product-code lineage, and no
+  # barcode is at stake, so this stays a fold.
   'arc-gw-webstore:/en-GB/Baneblade': games-workshop/99120105107
-  'legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/the-three-hunters': games-workshop/99121499041
-  'mfr-gw-algolia:prod2940184-99120201240': games-workshop/99070201008
-  'mfr-gw-algolia:prod3530279-99550108187': games-workshop/99853008187
-  'mfr-gw-algolia:prod4830199-99120113104': games-workshop/99070113003
-  # Basilean Army repackaged for KoW 3rd edition (same contents): MGKWB108 folded into the current
-  # MGKWB112. Surviving entity keeps the live confirmed barcode 5060924985581 as primary and the
-  # retired 5060469664330 as an additionalEans entry.
-  'legacy-catalog:mantic-games/kings-of-war/general/basilean-army-2': mantic-games/MGKWB112
+  # Warlord's store has literal duplicate ("-copy") pages for these three books, both sides LIVE.
+  # A CMS duplicate is one product record, not lineage -- splitting them would publish two current
+  # records for one book.
   'mfr-warlord-store:germania-hail-caesar-supplement-copy': warlord-games/109910007
   'mfr-warlord-store:hail-caesar-age-of-bronze-supplement-copy': warlord-games/109910010
   'mfr-warlord-store:hail-caesar-rulebook-spanish-language-richard-i-the-lionheart-special-figure': warlord-games/101010004SP
-  # --- GW trade repackaging joins (2026-07-23): old product code folded into the current
-  # code so its retired barcode becomes additionalEans, current barcode stays primary.
-  # Each verified same-product via evidence + adversarial check. See
-  # docs/research/2026-07-23-gw-ean-conflicts.md for the plain-English rationale per item.
-  # Dryads: old code 99120204012 (barcode 5011921062164) -> current (barcode 5011921179398).
-  'mfr-gw-trade:99120204012': games-workshop/99120204035
-  # Kustom Boosta-blasta: old code 99120103064 (barcode 5011921107995) -> current (barcode
-  # 5011921157068).
-  'mfr-gw-trade:99120103064': games-workshop/99120103100
-  # Rukkatrukk Squigbuggy: old code 99120103066 (barcode 5011921108022) -> current (barcode
-  # 5011921157082).
-  'mfr-gw-trade:99120103066': games-workshop/99120103102
-  # Haarken Worldclaimer, Herald of the Apocalypse: old code 99120102088 (barcode 5011921111084) ->
-  # current (barcode 5011921178179).
-  'mfr-gw-trade:99120102088': games-workshop/99120102164
-  # Kor'sarro Khan: old code 99120101255 (barcode 5011921119868) -> current (barcode 5011921142590).
-  'mfr-gw-trade:99120101255': games-workshop/99120101330
-  # Drazhar: old code 99120112040 (barcode 5011921127504) -> current (barcode 5011921155873).
-  'mfr-gw-trade:99120112040': games-workshop/99120112050
-  # Legions Imperialis: Lightning Fighter Squadron: old code 99121808004 (barcode 5011921132133) ->
-  # current (barcode 5011921188772).
-  'mfr-gw-trade:99121808004': games-workshop/99122608005
-  # AOS S/E + PAINT SET ENG/SPA/PORT/LATV/RM: old code 52170218004 (barcode 5011921260157) ->
-  # current (barcode 5011921219322).
-  'mfr-gw-trade:52170218004': games-workshop/52170218003
+aliases: {}
+# `{retired entity id: current entity id}`. BOTH records are published: the retired one keeps its
+# own productCode, its own primary `ean`, its own name/firstSeen and gains `supersededBy`; the
+# current one gains `supersedes`. Migrated out of `joins` (2026-07-30) -- every entry here used to
+# fold the retired code away entirely.
+supersessions:
+  # --- GW trade repackaging (verified same-product via evidence + adversarial check, 2026-07-23;
+  # see docs/research/2026-07-23-gw-ean-conflicts.md for the rationale per item). The retired code's
+  # trade row is archived, so each archival record resolves discontinued on the existing lifecycle
+  # rules; the retired barcode is its own primary `ean`, no longer an additionalEans entry on the
+  # survivor.
+  # Dryads: 5011921062164 -> 5011921179398.
+  games-workshop/99120204012: games-workshop/99120204035
+  # Kustom Boosta-blasta: 5011921107995 -> 5011921157068.
+  games-workshop/99120103064: games-workshop/99120103100
+  # Rukkatrukk Squigbuggy: 5011921108022 -> 5011921157082.
+  games-workshop/99120103066: games-workshop/99120103102
+  # Haarken Worldclaimer, Herald of the Apocalypse: 5011921111084 -> 5011921178179.
+  games-workshop/99120102088: games-workshop/99120102164
+  # Kor'sarro Khan: 5011921119868 -> 5011921142590.
+  games-workshop/99120101255: games-workshop/99120101330
+  # Drazhar: 5011921127504 -> 5011921155873.
+  games-workshop/99120112040: games-workshop/99120112050
+  # Legions Imperialis: Lightning Fighter Squadron: 5011921132133 -> 5011921188772.
+  games-workshop/99121808004: games-workshop/99122608005
+  # AOS S/E + PAINT SET ENG/SPA/PORT/LATV/RM: 5011921260157 -> 5011921219322. Both rows are still
+  # live in the trade sheet, so the retired record stays `current` -- the link is the lineage, the
+  # status is whatever the evidence says.
+  games-workshop/52170218004: games-workshop/52170218003
+  # --- GW re-codes where the current code is the one GW's own webstore lists today. Direction is
+  # the REVERSE of the old joins, whose target was the retired id (anchor-priority artefact).
+  # Gutrot Spume: 99070201008 (5011921063765) -> 99120201240 (5011921259090).
+  games-workshop/99070201008: games-workshop/99120201240
+  # Legio Custodes Telemon Arachnus Storm Cannon: legacy 99853008187 -> webstore 99550108187.
+  # Neither side carries a barcode; this is pure code lineage.
+  games-workshop/99853008187: games-workshop/99550108187
+  # T'au Empire Ethereal: clampack 99070113003 (5011921066735) -> plastic kit 99120113104. The
+  # retired code is the one carrying the barcode -- the trade sheet has not been re-cut yet, so a
+  # scan of 5011921066735 lands on the archival record and follows `supersededBy` forward.
+  games-workshop/99070113003: games-workshop/99120113104
+  # The Three Hunters: 99061499084 -> 99121499041. Retired code attested only by the legacy import
+  # and carries no barcode of its own.
+  games-workshop/99061499084: games-workshop/99121499041
+  # Basilean Army repackaged for KoW 3rd edition (same contents): MGKWB108 (5060469664330) ->
+  # MGKWB112 (5060924985581).
+  mantic-games/MGKWB108: mantic-games/MGKWB112
   # NOTE: the Italian/Spanish AoS intro sets (age-of-sigmar-set-di-presentazione-ita /
   # -introductorio-esp) are also repackaging, but their surviving entity has no resolved product
-  # code (name-slug id), so a fold cannot supersede -- documented in the conflicts review doc as
-  # needs-direction rather than force-joined here.
-aliases: {}
+  # code (name-slug id), so there is no stable id to link -- documented in the conflicts review doc
+  # as needs-direction rather than declared here.
 reassignCodes:
   # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
   # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole

@@ -15,6 +15,14 @@ class Matches(BaseModel):
     model_config = ConfigDict(extra="forbid")
     joins: dict[str, str] = Field(default_factory=dict)
     aliases: dict[str, str] = Field(default_factory=dict)
+    # Declared product lineage: `{retired entity id: surviving entity id}`. Unlike `joins` (which
+    # merges observations that are ONE product) this is a LINK between two products that both keep
+    # their own record -- the retired one keeps its own product code, barcode, name and firstSeen,
+    # and gains `supersededBy`; the survivor gains `supersedes`. People own boxes for decades, so a
+    # retired code/barcode must stay resolvable rather than being folded away. See resolve/resolver.py
+    # for where the link is stamped, and the union barrier below for what stops the two sides
+    # silently re-merging.
+    supersessions: dict[str, str] = Field(default_factory=dict)
     # Hand corrections for a single observation whose retailer SKU carries the WRONG product code,
     # bridging two genuinely different products into one entity. Maps observation key -> the correct
     # normalized product code. Applied before union-find grouping so the mis-coded observation joins
@@ -114,6 +122,44 @@ def join_observations(
         eans[observation.key] = ean
         attributed.append(observation)
 
+    # --- declared supersessions: the two sides must never end up in one group -------------------
+    # A pair is expressed as entity ids; both sides of every pair in use today are
+    # `manufacturer/<product code>`, so the pair reduces to two codes under one manufacturer (a
+    # name-slug suffix simply never equals any observation's normalized code, and the pair is then
+    # inert here -- nothing can bridge it by code anyway).
+    barred_pairs: dict[str, list[tuple[str, str]]] = {}
+    for retired, surviving in sorted(matches.supersessions.items()):
+        retired = matches.aliases.get(retired, retired)
+        surviving = matches.aliases.get(surviving, surviving)
+        retired_manufacturer, _, retired_code = retired.partition("/")
+        surviving_manufacturer, _, surviving_code = surviving.partition("/")
+        if (
+            retired_manufacturer == surviving_manufacturer
+            and retired_code
+            and surviving_code
+            and retired_code != surviving_code
+        ):
+            barred_pairs.setdefault(retired_manufacturer, []).append((retired_code, surviving_code))
+
+    # Which side of a declared pair OWNS a contested barcode: a barcode the MANUFACTURER asserts
+    # under code C is C's own barcode. `(manufacturer, ean) -> (owning code, the other side)`.
+    manufacturer_code_eans: dict[tuple[str, str], set[str]] = {}
+    for observation in attributed:
+        if kinds.get(observation.source_id) != "manufacturer":
+            continue
+        code, ean = codes[observation.key], eans[observation.key]
+        if code is not None and ean is not None:
+            manufacturer_code_eans.setdefault((observation.manufacturer, code), set()).add(ean)
+    pair_owner: dict[tuple[str, str], tuple[str, str]] = {}
+    for manufacturer, pairs in barred_pairs.items():
+        for retired_code, surviving_code in pairs:
+            retired_eans = manufacturer_code_eans.get((manufacturer, retired_code), set())
+            surviving_eans = manufacturer_code_eans.get((manufacturer, surviving_code), set())
+            for ean in retired_eans - surviving_eans:
+                pair_owner.setdefault((manufacturer, ean), (retired_code, surviving_code))
+            for ean in surviving_eans - retired_eans:
+                pair_owner.setdefault((manufacturer, ean), (surviving_code, retired_code))
+
     uf = _UnionFind()
     code_index: dict[tuple[str, str], str] = {}
     # GS1 EANs are manufacturer-scoped, so joins are keyed by (manufacturer, ean): a
@@ -127,20 +173,88 @@ def join_observations(
     # of manufacturer -- used to build cross-manufacturer-ean payloads with the complete set of
     # disputing keys (not just the owner's anchor + the other manufacturers' keys).
     ean_claims: dict[str, set[str]] = {}
+    # Product codes present in each union-find group, maintained alongside the unions so the
+    # supersession barrier can ask "would merging these two groups put both sides of a declared
+    # pair in one entity?" -- the transitive question, not just "do these two observations
+    # disagree". Keyed by group root; merged on every union.
+    group_codes: dict[str, set[str]] = {}
+
+    def union(a: str, b: str) -> None:
+        root_a, root_b = uf.find(a), uf.find(b)
+        if root_a == root_b:
+            return
+        uf.union(a, b)
+        merged = group_codes.pop(root_a, set()) | group_codes.pop(root_b, set())
+        if merged:
+            group_codes[uf.find(a)] = merged
+
+    def barred(a: str, b: str, manufacturer: str) -> tuple[str, str] | None:
+        root_a, root_b = uf.find(a), uf.find(b)
+        if root_a == root_b:
+            return None  # already one group; nothing to bar and no union to report
+        merged = group_codes.get(root_a, set()) | group_codes.get(root_b, set())
+        return next(
+            (
+                pair
+                for pair in barred_pairs.get(manufacturer, ())
+                if pair[0] in merged and pair[1] in merged
+            ),
+            None,
+        )
+
+    blocked_bridges: dict[tuple[str, str, str], set[str]] = {}
     for observation in attributed:
         code = codes[observation.key]
         ean = eans[observation.key]
+        # A bridging observation carrying one side of a declared pair as its SKU while scanning as
+        # the other side's barcode is placed by BARCODE: the barcode identifies the box in hand,
+        # the SKU is only the lister's catalogue number, and it goes stale across a re-code. This
+        # is what puts a retailer's live price/url on the record a shopper can actually buy, and
+        # leaves the retired record attested by its own (usually archived) manufacturer evidence.
+        owner = pair_owner.get((observation.manufacturer, ean)) if ean is not None else None
+        if owner is not None and code == owner[1]:
+            result.ambiguous.append(
+                {
+                    "type": "supersession-stale-code",
+                    "key": observation.key,
+                    "ean": ean,
+                    "listed_code": code,
+                    "barcode_code": owner[0],
+                    "manufacturer": observation.manufacturer,
+                }
+            )
+            code = None
         if code is not None:
+            group_codes.setdefault(uf.find(observation.key), set()).add(code)
             anchor = code_index.setdefault((observation.manufacturer, code), observation.key)
-            uf.union(anchor, observation.key)
+            union(anchor, observation.key)
         if ean is not None:
             ean_claims.setdefault(ean, set()).add(observation.key)
-            owner = ean_owners.setdefault(ean, observation.manufacturer)
-            if owner == observation.manufacturer:
+            owner_manufacturer = ean_owners.setdefault(ean, observation.manufacturer)
+            if owner_manufacturer == observation.manufacturer:
                 anchor = ean_index.setdefault((observation.manufacturer, ean), observation.key)
-                uf.union(anchor, observation.key)
+                pair = barred(anchor, observation.key, observation.manufacturer)
+                if pair is None:
+                    union(anchor, observation.key)
+                else:
+                    # THE union barrier. Without it a single bridging observation re-merges a
+                    # declared pair through the shared barcode and the retired record disappears
+                    # again -- measured on every GW repackaging pair, 2026-07-30.
+                    blocked_bridges.setdefault(
+                        (observation.manufacturer, pair[0], pair[1]), set()
+                    ).update({anchor, observation.key})
             else:
                 ean_conflicts.add(ean)
+
+    for (manufacturer, retired_code, surviving_code), keys in sorted(blocked_bridges.items()):
+        result.ambiguous.append(
+            {
+                "type": "supersession-blocked-merge",
+                "retired": f"{manufacturer}/{retired_code}",
+                "surviving": f"{manufacturer}/{surviving_code}",
+                "keys": sorted(keys),
+            }
+        )
 
     for ean in sorted(ean_conflicts):
         result.ambiguous.append(
@@ -173,9 +287,9 @@ def join_observations(
     # groups/provisional ids after each successful union so chained forced joins (where one
     # union changes another group's provisional id) still resolve. Bounded by len(entries) + 1
     # full passes.
-    attributed_keys = {observation.key for observation in attributed}
+    manufacturer_by_key = {observation.key: observation.manufacturer for observation in attributed}
     forced_entries = sorted(
-        (key, target) for key, target in matches.joins.items() if key in attributed_keys
+        (key, target) for key, target in matches.joins.items() if key in manufacturer_by_key
     )
 
     groups, provisional = current_groups_and_ids()
@@ -195,7 +309,13 @@ def join_observations(
                 None,
             )
             if match_root is not None:
-                uf.union(root, match_root)
+                # A forced join that would collapse a declared supersession is a contradiction
+                # between two hand-written instructions. The supersession wins (it is the whole
+                # point of keeping the retired record) and the join is left unresolved -- the
+                # existing `unresolved-forced-join` report below then names it for a human.
+                if barred(root, match_root, manufacturer_by_key[key]) is not None:
+                    continue
+                union(root, match_root)
                 pass_changed = True
                 groups, provisional = current_groups_and_ids()
         if not pass_changed:
@@ -228,7 +348,7 @@ def join_observations(
             {r for m in members for r in slug_index.get((m.manufacturer, slugify(m.name)), [])}
         )
         if len(candidates) == 1:
-            uf.union(candidates[0], root)
+            union(candidates[0], root)
         elif len(candidates) > 1:
             result.ambiguous.append(
                 {
@@ -265,5 +385,29 @@ def join_observations(
         resolved_target = matches.aliases.get(target, target)
         if key_to_entity.get(key) != resolved_target:
             result.ambiguous.append({"type": "unresolved-forced-join", "key": key, "target": target})
+
+    # report supersessions whose ids resolve to no entity: entity ids fall back to name slugs, so
+    # a code that stops being observed (or a typo) leaves the link pointing at nothing. A dangling
+    # link publishes as silence, which is exactly what this whole phase exists to prevent.
+    for retired, surviving in sorted(matches.supersessions.items()):
+        missing = sorted(
+            {
+                eid
+                for eid in (
+                    matches.aliases.get(retired, retired),
+                    matches.aliases.get(surviving, surviving),
+                )
+                if eid not in result.entities
+            }
+        )
+        if missing:
+            result.ambiguous.append(
+                {
+                    "type": "unresolved-supersession",
+                    "retired": retired,
+                    "surviving": surviving,
+                    "missing": missing,
+                }
+            )
 
     return result

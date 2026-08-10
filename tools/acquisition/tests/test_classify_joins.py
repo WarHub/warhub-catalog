@@ -757,3 +757,25 @@ def test_repo_generate_candidates_no_cross_manufacturer_and_sorted() -> None:
         mfr_b = candidate["entityB"]["entity"].split("/", 1)[0]
         assert mfr_a == mfr_b == candidate["manufacturer"]
         assert candidate["matchedRules"]
+
+
+def test_declared_supersession_pair_is_not_proposed_as_a_join(tmp_path: Path) -> None:
+    """A retired product code and its replacement share a name (and often a barcode lineage), so
+    every rule pairs them -- but matches.yaml already declares the relation and the resolver keeps
+    them apart on purpose. Proposing the pair would ask a reviewer to undo that."""
+    paths = DataPaths(tmp_path)
+    write_taxonomy(paths, ["games-workshop"])
+    write_products(
+        paths,
+        "games-workshop",
+        [
+            _product("games-workshop/99120204012", "Dryads", "games-workshop", sku="99120204012",
+                     ean="5011921062164", evidence=["mfr-gw-trade:99120204012"]),
+            _product("games-workshop/99120204035", "Dryads", "games-workshop", sku="99120204035",
+                     ean="5011921179398", evidence=["mfr-gw-trade:99120204035"]),
+        ],
+    )
+    assert len(generate_candidates(paths)) == 1  # matched by name while undeclared
+
+    write_yaml(paths.matches, {"supersessions": {"games-workshop/99120204012": "games-workshop/99120204035"}})
+    assert generate_candidates(paths) == []

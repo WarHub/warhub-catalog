@@ -19,7 +19,7 @@ def test_report_command(tmp_path: Path, capsys) -> None:
     exit_code = main(["report", "--data", str(tmp_path)])
     out = capsys.readouterr().out
     assert exit_code == 0
-    assert "| games-workshop | 1 | 1 | 100.0% | 0.0% |" in out
+    assert "| games-workshop | 1 | 1 | 1 | 100.0% | 0.0% |" in out  # products | current | with EAN
     assert "- mfr-gw: 1 observations" in out
 
 

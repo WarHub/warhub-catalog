@@ -55,13 +55,18 @@ Every document carries a self-describing envelope plus its payload:
 }
 ```
 
-- **Product**: `{ id, manufacturer, ean?, additionalEans?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
+- **Product**: `{ id, manufacturer, ean?, additionalEans?, supersedes?, supersededBy?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
   — `id` is the stable global key (`manufacturer-slug/product-code-or-slug`) and, with
-  `manufacturer`, is present on every product; both are what a cross-product link (e.g. a
-  successor/predecessor relation) points at. `ean` is optional (not every product has a barcode).
-  `additionalEans` is present only on a product genuinely repackaged over time (same contents, new
-  box/barcode): `ean` stays the single primary barcode, and the extra barcodes are listed here so
-  existing single-barcode consumers are unaffected.
+  `manufacturer`, is present on every product; both are what a cross-product link points at. `ean`
+  is optional (not every product has a barcode). `additionalEans` is present only on a product
+  genuinely repackaged over time (same contents, new box/barcode): `ean` stays the single primary
+  barcode, and the extra barcodes are listed here so existing single-barcode consumers are
+  unaffected. `supersedes` / `supersededBy` link the same product across **two product codes** (a
+  re-code, a repackaging): both records are published, each keeping its own `productCode` and
+  `ean`, so a decade-old box still scans to a record and that record says what replaced it. The
+  relation is deliberately not encoded in `status` — a retired record's status is still whatever
+  the evidence says, so existing `status` filters keep working unchanged. `counts.products`
+  includes those archival records; `counts.currentProducts` is the subset nothing supersedes.
 - **Paint**: `{ id, brand, range?, name, hex, type?, finish?, equivalents: [{ id, deltaE, tier? }] }`
   — `id` is the stable global key (`brand-slug/paint-slug`); `equivalents` reference other
   paints' ids and are stored **bidirectionally**. Colour equivalence is precomputed here, so
