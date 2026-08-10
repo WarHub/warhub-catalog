@@ -25,8 +25,16 @@ public record PaintRecord
     /// variants (e.g. a spray sold as both an R/O-Europe and a UK/ROW SKU with one shared SSC
     /// code), NOT retired barcodes -- do not present them as superseded. Null (never an empty
     /// list) when there is only one barcode, so the key is omitted from the archive YAML.
+    ///
+    /// Declared as <c>List</c>, not <c>IReadOnlyList</c>: YamlDotNet SERIALIZES a read-only list
+    /// happily but has no node deserializer for one, so the archive wrote a shape it could not read
+    /// back. That is invisible until a record actually gains the key -- which happened the first
+    /// time the bridge matched the 9 regional spray pairs, and the very next load of
+    /// citadel-colour.yaml then died with "No node deserializer was able to deserialize the node
+    /// into type IReadOnlyList&lt;String&gt;" at the first `additionalEans` entry. Any list property
+    /// added to this archival record must be round-trip tested, not just written.
     /// </summary>
-    public IReadOnlyList<string>? AdditionalEans { get; init; }
+    public List<string>? AdditionalEans { get; init; }
     public string? ImageUrl { get; init; }
     public required PaintDetails Details { get; init; }
 }

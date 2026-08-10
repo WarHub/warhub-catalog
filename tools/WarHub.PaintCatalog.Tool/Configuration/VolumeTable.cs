@@ -8,7 +8,37 @@ public static class VolumeTable
     private static readonly List<VolumeRule> Rules =
     [
         // Citadel Colour
-        new("Citadel Colour", ["Base", "Layer", "Air", "Dry", "Glaze", "Edge", "Foundation"], 12, "pot"),
+        new("Citadel Colour", ["Base", "Layer", "Dry", "Glaze", "Edge", "Foundation"], 12, "pot"),
+        // Air ships at 24 ml, not 12. It was lumped in with Base/Layer above from this repo's first
+        // commit, which made all 78 Air paints 12 ml -- a value with no support anywhere in the
+        // data. Measured 2026-07-31 over the committed trade extract: of 926 rows across all 20
+        // workbooks whose description names an `AIR:` paint with a size, 926 say `(24ML)` and ZERO
+        // say 12; GW's own SIZE column agrees 47/47 on the barcode workbook, and 211 Citadel-Air
+        // product names across five independent sources (three retailers, a barcode DB and the
+        // trade sheets) all say 24.
+        //
+        // 24 is era-dependent, and this matters: Citadel Air LAUNCHED in September 2015 at 12 ml
+        // and moved to 24 ml in June 2019 (GW's own webstore copy, "usable straight from the 12ml
+        // pot", against its June-2019 catalogue listing all 78 Air products as `(24ml) (2019)` with
+        // "now in a larger pot"). So a 12 ml Air pot really existed -- it is simply not what any
+        // record here describes. Every Air paint in this catalog is post-2019: 30 of the 33 that
+        // this rule newly corrects carry a GW-authored `(24ML)` in their own trade-register
+        // description (the other 3 only miss an exact name match), and the catalog's 78 Air paints
+        // map exactly onto the post-2019 SSC block 28-01..28-80.
+        //
+        // A PRE-2019 12 ml pot is therefore a different product with its own code and barcode, and
+        // must NOT inherit this constant -- give it the manufacturer bridge or an override. That is
+        // also why this stays a per-(brand, set) constant rather than becoming a claim about the
+        // range for all time.
+        //
+        // This is a TABLE fix rather than 33 bridge entries because the bridge reads RESOLVED
+        // observations, which only hold live SKUs: 31 of the 33 stragglers were culled from GW's
+        // register on 2022-06-13 and can never be reached by it. The 2022 event is a re-code plus a
+        // cull, NOT a repack -- every one of the 30 Air rows in the `Code Changes` register carries
+        // the same `(24ML)` description on both sides with its SSC preserved, while both the
+        // product code and the barcode change. So the generations are distinct products of
+        // identical volume, and the pre-2022 pots were 24 ml too.
+        new("Citadel Colour", ["Air"], 24, "pot"),
         new("Citadel Colour", ["Shade", "Contrast"], 18, "pot"),
         new("Citadel Colour", ["Technical"], 24, "pot"),
         new("Citadel Colour", ["Spray"], 400, "spray"),

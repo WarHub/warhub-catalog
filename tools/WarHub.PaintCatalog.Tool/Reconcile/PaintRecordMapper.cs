@@ -14,7 +14,7 @@ public static class PaintRecordMapper
         FirstSeen = null, // reconciler stamps write-once firstSeen
         ProductCode = p.ProductCode,
         Ean = p.Ean,
-        AdditionalEans = p.AdditionalEans is { Count: > 0 } extra ? extra : null,
+        AdditionalEans = p.AdditionalEans is { Count: > 0 } extra ? [.. extra] : null,
         ImageUrl = p.ImageUrl,
         Details = new PaintDetails
         {

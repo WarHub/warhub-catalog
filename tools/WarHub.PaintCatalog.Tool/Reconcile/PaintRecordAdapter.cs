@@ -29,7 +29,8 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
         // outright. Keep it: a paint bought years ago must stay resolvable by the barcode on the
         // pot the owner actually has.
         AdditionalEans = Enrichment.BarcodeSet.Union(
-            Pick(fresh.Ean, existing.Ean), existing.AdditionalEans, fresh.AdditionalEans, [existing.Ean]),
+            Pick(fresh.Ean, existing.Ean), existing.AdditionalEans, fresh.AdditionalEans, [existing.Ean])
+            is { Count: > 0 } merged ? [.. merged] : null,
         ImageUrl = Pick(fresh.ImageUrl, existing.ImageUrl),
         Details = existing.Details with
         {
