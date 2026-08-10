@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://warhub.github.io/warhub-catalog/schema/barcode-index.json",
+  "title": "WarHub Barcode Index",
+  "description": "Every barcode published by this release, in either catalog, mapped to the records that carry it. Scan a barcode, look the string up as a key, get back the product record(s) and/or paint record(s) it belongs to. A key whose entries name BOTH catalogs is the same physical thing published twice -- once as a retail SKU, once as a colour; counts.crossCatalog is how many of those there are.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "version", "generatedAt", "counts", "source", "barcodes"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "kind": { "const": "barcode-index" },
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "gitCommit": { "type": "string" },
+    "counts": {
+      "type": "object",
+      "description": "barcodes (distinct, both catalogs), productBarcodes, paintBarcodes, crossCatalog (held by both), references (barcode/record pairs).",
+      "additionalProperties": { "type": "integer" }
+    },
+    "source": { "$ref": "#/$defs/source" },
+    "barcodes": {
+      "type": "object",
+      "description": "The barcode string exactly as published on the records -- no normalization is applied here that the rest of the pipeline does not already do.",
+      "propertyNames": { "pattern": "^[0-9]+$" },
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "$ref": "#/$defs/ref" }
+      }
+    }
+  },
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "description": "One record carrying the barcode. More than one entry from the SAME catalog means two records claim it; this document reports that, it does not adjudicate it.",
+      "required": ["catalog", "id"],
+      "properties": {
+        "catalog": { "enum": ["product", "paint"] },
+        "id": {
+          "type": "string",
+          "description": "The record's id in its catalog: manufacturer/code for products, brand-slug/paint-slug for paints. Paint ids are stable within a release but not yet across releases (positional -N suffixes move with the data), which is why the link is published per build rather than assumed."
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["repo"],
+      "properties": {
+        "repo": { "type": "string" },
+        "release": {
+          "type": "object",
+          "required": ["tag", "url"],
+          "properties": { "tag": { "type": "string" }, "url": { "type": "string" } }
+        },
+        "pageUrl": { "type": "string" }
+      }
+    }
+  }
+}

@@ -34,6 +34,12 @@
         "productCode": { "type": "string" },
         "ean": { "type": "string" },
         "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "productIds": {
+          "type": "array",
+          "description": "Product records sharing a barcode with this paint -- the retail SKUs this colour ships as. Plural: one colour is many SKUs. Omitted when there is none. See barcode-index.json.",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
         "status": { "type": "string" },
         "availability": { "type": "string" },
         "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }

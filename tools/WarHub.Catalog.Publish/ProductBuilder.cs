@@ -11,15 +11,28 @@ namespace WarHub.Catalog.Publish;
 /// </summary>
 internal static class ProductBuilder
 {
-    private sealed record PartitionData(string Label, List<ProductRecord> Products);
-
+    /// <summary>
+    /// Assemble + write in one step, with no cross-catalog links. Kept for callers that publish
+    /// products on their own; <see cref="Publisher"/> uses the two phases separately so the
+    /// barcode link pass can run between them.
+    /// </summary>
     public static int Build(
         IEnumerable<CanonicalProductCatalog> catalogs,
         TaxonomyLabels labels,
         Provenance prov,
-        CatalogWriter writer)
+        CatalogWriter writer) => Write(Assemble(catalogs, labels), prov, writer);
+
+    /// <summary>
+    /// Builds every record and settles the ordering, but writes nothing. Split out from
+    /// <see cref="Write"/> so the cross-catalog link pass can stamp <c>paintIds</c> onto these
+    /// records first -- that link needs the paint catalog's ids, which do not exist until the
+    /// paint side has been assembled too.
+    /// </summary>
+    public static ProductAssembly Assemble(
+        IEnumerable<CanonicalProductCatalog> catalogs,
+        TaxonomyLabels labels)
     {
-        var partitions = new Dictionary<string, PartitionData>(StringComparer.Ordinal);
+        var partitions = new Dictionary<string, ProductPartitionData>(StringComparer.Ordinal);
         var systemless = new List<ProductRecord>();
         foreach (var catalog in catalogs)
         {
@@ -90,7 +103,7 @@ internal static class ProductBuilder
 
                 if (!partitions.TryGetValue(gameSystemKey, out var data))
                 {
-                    partitions[gameSystemKey] = data = new PartitionData(gameSystemLabel!, []);
+                    partitions[gameSystemKey] = data = new ProductPartitionData(gameSystemLabel!, []);
                 }
                 data.Products.Add(record);
             }
@@ -103,16 +116,22 @@ internal static class ProductBuilder
         }
 
         // Deterministic ordering everywhere for reproducible output / stable sha256.
-        foreach (PartitionData data in partitions.Values)
+        foreach (ProductPartitionData data in partitions.Values)
         {
             data.Products.Sort(CompareProducts);
         }
         systemless.Sort(CompareProducts);
 
         var orderedKeys = partitions.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
-        // Systemless products sort after every partitioned game system in the consolidated
-        // list -- they have no partition key to order them alongside.
-        var allProducts = orderedKeys.SelectMany(k => partitions[k].Products).Concat(systemless).ToList();
+        return new ProductAssembly(orderedKeys, partitions, systemless);
+    }
+
+    /// <summary>Writes the consolidated document, the per-game-system partitions and the index.</summary>
+    public static int Write(ProductAssembly assembly, Provenance prov, CatalogWriter writer)
+    {
+        IReadOnlyList<string> orderedKeys = assembly.OrderedKeys;
+        IReadOnlyDictionary<string, ProductPartitionData> partitions = assembly.Partitions;
+        List<ProductRecord> allProducts = [.. assembly.Records];
         int total = allProducts.Count;
 
         // `products` counts EVERY record, archival ones included -- a superseded product is still a
@@ -142,7 +161,7 @@ internal static class ProductBuilder
         var indexEntries = new List<IndexEntry>();
         foreach (string key in orderedKeys)
         {
-            PartitionData data = partitions[key];
+            ProductPartitionData data = partitions[key];
             string relPath = $"products/by-system/{key}.json";
             writer.Write(relPath, "product-catalog", "product-catalog-partition", key, data.Products.Count,
                 new ProductCatalogDocument
@@ -175,5 +194,54 @@ internal static class ProductBuilder
             });
 
         return total;
+    }
+}
+
+internal sealed record ProductPartitionData(string Label, List<ProductRecord> Products);
+
+/// <summary>
+/// Products built and ordered, but not yet serialized -- the handoff between
+/// <see cref="ProductBuilder.Assemble"/> and <see cref="ProductBuilder.Write"/>.
+///
+/// The partition lists are the single source of truth; the consolidated order is derived from
+/// them on demand by <see cref="Records"/>, exactly as it always was. Nothing caches a second
+/// copy of a record, so a link pass that rewrites the partition lists cannot leave the
+/// consolidated document holding stale, unlinked copies.
+/// </summary>
+internal sealed class ProductAssembly(
+    List<string> orderedKeys,
+    Dictionary<string, ProductPartitionData> partitions,
+    List<ProductRecord> systemless)
+{
+    public IReadOnlyList<string> OrderedKeys => orderedKeys;
+
+    public IReadOnlyDictionary<string, ProductPartitionData> Partitions => partitions;
+
+    /// <summary>
+    /// Every record in consolidated order: each game system in key order, then the systemless
+    /// products (they have no partition key to order them alongside).
+    /// </summary>
+    public IEnumerable<ProductRecord> Records =>
+        orderedKeys.SelectMany(k => partitions[k].Products).Concat(systemless);
+
+    /// <summary>
+    /// Rewrites every record in place, preserving order. Records are immutable, so a link pass
+    /// replaces them rather than mutating them.
+    /// </summary>
+    public void MapRecords(Func<ProductRecord, ProductRecord> map)
+    {
+        foreach (ProductPartitionData data in partitions.Values)
+        {
+            Rewrite(data.Products, map);
+        }
+        Rewrite(systemless, map);
+    }
+
+    private static void Rewrite(List<ProductRecord> records, Func<ProductRecord, ProductRecord> map)
+    {
+        for (int i = 0; i < records.Count; i++)
+        {
+            records[i] = map(records[i]);
+        }
     }
 }
