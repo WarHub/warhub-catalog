@@ -548,3 +548,119 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
         "is a silent no-op that leaves the record in the catalog looking retired. "
         f"Authored key vs the identity keys still on file: {mistyped}"
     )
+
+
+# One legitimate double-hold, pinned by hand because nothing can clear it: two REAL paints share
+# this GTIN. Vallejo colour-corrected `Xpress Color Intense|Viking Grey|72.483` and kept the code
+# and the barcode, so the archive carries both formulations (#374855 and #45515D) and
+# PaintBuilder.cs:12-16 puts the hex in its natural key precisely so the second is published
+# rather than silently dropped. Listed as (brand slug, barcode) so a NEW duplicate in vallejo is
+# still caught.
+_KNOWN_SHARED_BARCODES = {("vallejo", "8429551724838")}
+
+
+def test_no_barcode_is_held_by_two_records_in_one_brand() -> None:
+    """A barcode identifies ONE product. Two records in a brand holding the same GTIN is the
+    catalogue asserting that one physical pot is two different paints, and every consumer that
+    resolves a scan to a paint then has to pick one.
+
+    THIS TEST EXISTS BECAUSE NOTHING ELSE CAN SEE IT, which is the only reason to spend an
+    archive-wide sweep on something a guard should catch. `report --ean-guard` keys its holders on
+    `(brand, role)` (report.py:229), not on the record, so a barcode sitting on two records of the
+    same brand reads as perfectly held and the guard exits 0. It is blinder still on an
+    overrides-only commit: `_head_yaml_files` intersects `git ls-tree` with
+    `git diff --name-only HEAD` (report.py:180-195), enumerates zero brand files, and tracks
+    nothing at all. Its green is vacuous, not reassuring.
+
+    NOR does the harvest suite cover it any more. `test_paint_harvest_gsw_sets.py::
+    test_every_displaced_barcode_is_retracted_or_listed` names the three green-stuff-world
+    duplicates in a `deferred` dict and promises the list "can only shrink"; measured 2026-08-06 by
+    emptying that dict, it reports 0 unanswered either way, because its ratchet-skip (:347) now
+    treats the three `Acrylic Inks` records as prior mints once 240dc3d landed them in the archive.
+    It can only ever see this on a pre-run tree. The invariant belongs against the ARCHIVE, which
+    is what is published and what survives the tool run -- hence here, beside the retract test.
+
+    THE ALLOWANCE IS DERIVED, NOT LISTED, and that is the whole design. A duplicate is tolerated
+    only while one of its holders is already named by a `retract:` key for that brand -- i.e. while
+    the repo has declared, in the one mechanism that deletes archived records, that this holder is
+    going away. That ties the excuse to the fix: the moment the paint tool runs, the record is gone
+    and the duplicate with it; if someone deletes the retract keys while the records remain, this
+    turns red; and a duplicate introduced with no retraction behind it is red immediately. A
+    hardcoded allow-list would instead have rotted into a permanent excuse, and asserting zero
+    unconditionally would have been red on the committed tree for a defect that IS already answered.
+
+    Membership is the faithful port of `CatalogReconciler` (:52-55, :104): it tests
+    `retracted.Contains(adapter.IdentityKey(rec))`, so the RECORD is keyed per-component
+    (`PaintRecordAdapter.IdentityKey`) while the AUTHORED key is normalized as one string
+    (`PaintOverrideAliases.Load:34`). Reusing both helpers here rather than one of them.
+
+    Brand-scoped deliberately. One barcode reaching two brands is a different claim -- rebrands and
+    OEM relabels do share GTINs across catalogue brands -- and folding it in here would bury the
+    within-brand case, which is unambiguously a defect, under judgement calls.
+
+    Measured on the committed archive 2026-08-06: 4 duplicated barcodes catalogue-wide. Three are
+    green-stuff-world `Fluor Metallic` records holding an `Acrylic Inks` GTIN via a matching bug
+    fixed in 240dc3d, all three named by retract keys; the fourth is the vallejo pair pinned above.
+    """
+    _require_repo_data()
+    brands_dir = REPO_DATA / "paints/brands"
+    if not brands_dir.exists():
+        pytest.skip("data/paints/brands not present")
+    overrides_path = REPO_DATA / "paints/overrides.yaml"
+    retract = {}
+    if overrides_path.exists():
+        retract = (read_yaml(overrides_path) or {}).get("retract") or {}
+
+    offenders = []
+    for archive_path in sorted(brands_dir.glob("*.yaml")):
+        brand_slug = archive_path.stem
+        retracted = {_normalize(str(k)) for k in (retract.get(brand_slug) or [])}
+        holders: dict[str, list[tuple[str, str, bool]]] = {}
+        for position, record in enumerate((read_yaml(archive_path) or {}).get("paints") or []):
+            identity = _paint_identity_key(record)
+            pending = identity in retracted
+            barcodes = [(str(record["ean"]), "primary")] if record.get("ean") else []
+            barcodes += [(str(e), "additional") for e in record.get("additionalEans") or []]
+            # Per RECORD, not per listing: `OverrideApplier.cs:83` and `PaintRecordAdapter.
+            # Merge:31-33` both union a record's old primary back into its own `additionalEans`,
+            # so one record legitimately names a barcode twice. That is a record talking about
+            # itself; this test is about TWO records claiming one product. Deduping on the
+            # record's position keeps identity-colliding records (which the retract test hunts
+            # separately) visible as the two holders they are.
+            seen_here = set()
+            for barcode, role in barcodes:
+                if barcode in seen_here:
+                    continue
+                seen_here.add(barcode)
+                holders.setdefault(barcode, []).append((f"[{position}] {identity}", role, pending))
+        for barcode, held in sorted(holders.items()):
+            if len(held) < 2:
+                continue
+            if (brand_slug, barcode) in _KNOWN_SHARED_BARCODES:
+                continue
+            # Tolerated only while the retractions leave EXACTLY ONE holder. Counting "some
+            # leaving, some staying" is not enough: three holders with one retract key satisfies
+            # that and still publishes a barcode on two records after the tool runs -- the very
+            # defect this test exists for. Demonstrated by mutation, so it is a real hole rather
+            # than a hypothetical one.
+            leaving = sum(1 for *_, pending in held if pending)
+            remaining = len(held) - leaving
+            if remaining == 0:
+                offenders.append((brand_slug, barcode, "EVERY holder retracted -- the barcode "
+                                                       "would be left holding nothing", held))
+            elif remaining > 1:
+                offenders.append((
+                    brand_slug, barcode,
+                    f"{remaining} holders would REMAIN after the declared retractions "
+                    f"({leaving} of {len(held)} named) -- a barcode identifies one product",
+                    held,
+                ))
+
+    assert not offenders, (
+        f"{len(offenders)} barcode(s) held by more than one record within a brand, with nothing "
+        "declared to clear it. A GTIN identifies one product, so this publishes a scan that "
+        "resolves to two different paints; `report --ean-guard` keys holders on (brand, role) and "
+        "cannot see it. Either retract the wrong holder (the only mechanism that deletes an "
+        "archived record) or, if both records are real paints sharing a code, pin the pair in "
+        f"_KNOWN_SHARED_BARCODES with a citation: {offenders}"
+    )

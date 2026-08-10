@@ -301,9 +301,15 @@ def test_every_displaced_barcode_is_retracted_or_listed() -> None:
 
     So the rule has to be stated here. Every addition that would MINT a record whose ean is
     already on a different archive record must be answered by a `retract:` key naming that
-    record -- except the three below, which are deliberately deferred with the rest of the
-    `Fluor Metallic` set-naming question (Diagnosis B, 2026-08-06) and are pinned BY BARCODE so
-    the follow-up can only shrink this list, never quietly grow it.
+    record.
+
+    THE `deferred` DICT BELOW IS NOW EMPTY, and the reason is worth keeping. It once held three
+    barcodes that a `Fluor Metallic` record and a newly minted `Acrylic Inks` record shared,
+    deferred with the rest of the set-naming question. That question is settled -- `Fluor
+    Metallic` is not a Green Stuff World range, it is the upstream grouping label for GSW's own
+    `Fluor Paint` line -- and all seven records are retracted, so the three duplicates are gone.
+    The dict stays as the mechanism because the NEXT such deferral needs somewhere honest to
+    live; it is not a permanent excuse, and an entry here should read as a debt with an owner.
 
     "Would mint" is `HarvestApplier.AppendAdditions`' own skip key, `{Name}|{Set}|{ProductCode}`
     (HarvestApplier.cs:124-134): 161 of the 175 committed additions are prior additions the
@@ -311,15 +317,18 @@ def test_every_displaced_barcode_is_retracted_or_listed() -> None:
     that without the skip key and it reports 161 false collisions.
 
     Live tripwire, measured 2026-08-06: of the 14 additions that would actually mint, exactly 6
-    carry a barcode an archive record already holds. Three are answered by the `retract:` keys
-    this change adds; delete any one of them and this test names it.
+    carry a barcode an archive record already holds, and every one is answered by a `retract:`
+    key -- delete any of them and this test names it. (An earlier draft said "three are answered
+    ... the other three are deferred". That stopped being true once those three Acrylic Inks
+    records landed in the archive, at which point the ratchet skip short-circuits before the
+    deferred check ever runs, so emptying the dict changed no result. The claim was corrected in
+    overrides.yaml but not here, which is exactly how a reader ends up trusting a dead comment.)
     """
-    deferred = {
-        # ean -> the archive record wearing it, and the record this run mints for it.
-        "8435646508665": "Fluor Metallic|White <- Intensity Ink Osl White|Acrylic Inks (3506)",
-        "8435646516332": "Fluor Metallic|Orange <- Transparent Acrylic Ink - Orange (4273)",
-        "8435646516417": "Fluor Metallic|Yellow <- Transparent Acrylic Ink - Yellow (4281)",
-    }
+    # ean -> the archive record wearing it, and the record this run mints for it. EMPTY on
+    # purpose: the three that lived here (8435646508665 / 516332 / 516417, the Fluor Metallic
+    # White/Orange/Yellow records) are retracted, so the duplication is declared away rather than
+    # tolerated. Kept as the mechanism for the next one -- see the docstring.
+    deferred: dict[str, str] = {}
     records = _yaml(ARCHIVE).get("paints") or []
     holders: dict[str, list[dict]] = {}
     for record in records:

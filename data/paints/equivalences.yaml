@@ -1,7 +1,7 @@
 thresholds:
   close: 5
   substitute: 10
-totalEntries: 8095
+totalEntries: 8097
 equivalences:
 - source:
     brand: AK Interactive
@@ -178688,6 +178688,58 @@ equivalences:
 - source:
     brand: Green Stuff World
     brandSlug: green-stuff-world
+    name: Orange
+    productCode: 1703
+    set: Fluorescent
+    hex: '#F96E33'
+  matches:
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Medium Orange
+      productCode: AK11078
+      set: Standard (3rd Gen)
+      hex: '#FA682C'
+    deltaE: 1.2
+    tier: close
+  - paint:
+      brand: Reaper
+      brandSlug: reaper
+      name: Cavalier Orange
+      productCode: 89509
+      set: Master Series Paints Pathfinder
+      hex: '#F2682A'
+    deltaE: 2
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Tangerine
+      productCode: 85.026
+      set: Arte Deco
+      hex: '#FB7129'
+    deltaE: 2.44
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Ryza Rust
+      set: Dry
+      hex: '#F16C23'
+    deltaE: 3.12
+    tier: close
+  - paint:
+      brand: Coat D'Armes
+      brandSlug: coat-darmes
+      name: Leprous Brown
+      productCode: 156
+      set: Fantasy Range
+      hex: '#FC7B37'
+    deltaE: 3.61
+    tier: close
+- source:
+    brand: Green Stuff World
+    brandSlug: green-stuff-world
     name: Red
     productCode: 1704
     set: Fluorescent
@@ -178875,6 +178927,57 @@ equivalences:
       set: FX Range
       hex: '#F81DFE'
     deltaE: 9.61
+    tier: substitute
+- source:
+    brand: Green Stuff World
+    brandSlug: green-stuff-world
+    name: Yellow
+    productCode: 1701
+    set: Fluorescent
+    hex: '#EEFF34'
+  matches:
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Fluorescent Yellow
+      set: Layer paints
+      hex: '#E9FF00'
+    deltaE: 1.47
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Neon Yellow
+      set: Artist Range
+      hex: '#EDFE5A'
+    deltaE: 2.77
+    tier: close
+  - paint:
+      brand: Coat D'Armes
+      brandSlug: coat-darmes
+      name: Ink Wash Yellow
+      productCode: 168
+      set: Fantasy Range - Ink Wash
+      hex: '#FFFD32'
+    deltaE: 3.83
+    tier: close
+  - paint:
+      brand: Reaper
+      brandSlug: reaper
+      name: Clear Yellow
+      productCode: 9095
+      set: Master Series Paints Core Colors
+      hex: '#F9F404'
+    deltaE: 5.02
+    tier: substitute
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Fluorescent Yellow
+      productCode: AK11049
+      set: Standard (3rd Gen)
+      hex: '#F6F101'
+    deltaE: 5.22
     tier: substitute
 - source:
     brand: Green Stuff World
@@ -273168,20 +273271,21 @@ equivalences:
     deltaE: 3.97
     tier: close
   - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Yellow
+      productCode: 1701
+      set: Fluorescent
+      hex: '#EEFF34'
+    deltaE: 5.82
+    tier: substitute
+  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Neon Yellow
       set: Artist Range
       hex: '#EDFE5A'
     deltaE: 5.95
-    tier: substitute
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Tropical Green
-      set: Chameleon Colorshift Metallic
-      hex: '#B3D924'
-    deltaE: 8.34
     tier: substitute
   - paint:
       brand: Vallejo
@@ -294711,9 +294815,10 @@ equivalences:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Yellow
-      set: Fluor Metallic
-      hex: '#F8FB48'
-    deltaE: 3.46
+      productCode: 1701
+      set: Fluorescent
+      hex: '#EEFF34'
+    deltaE: 2.77
     tier: close
   - paint:
       brand: Coat D'Armes
@@ -408461,9 +408566,10 @@ equivalences:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Yellow
-      set: Fluor Metallic
-      hex: '#F8FB48'
-    deltaE: 3.95
+      productCode: 1701
+      set: Fluorescent
+      hex: '#EEFF34'
+    deltaE: 1.47
     tier: close
   - paint:
       brand: Scale75
@@ -408508,6 +408614,15 @@ equivalences:
     hex: '#E2FF11'
   matches:
   - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Yellow
+      productCode: 1701
+      set: Fluorescent
+      hex: '#EEFF34'
+    deltaE: 2.13
+    tier: close
+  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Neon Yellow
@@ -408523,14 +408638,6 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#CBFF17'
     deltaE: 3.97
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Yellow
-      set: Fluor Metallic
-      hex: '#F8FB48'
-    deltaE: 4.85
     tier: close
   - paint:
       brand: Coat D'Armes
@@ -409677,6 +409784,15 @@ equivalences:
     deltaE: 1.85
     tier: close
   - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Yellow
+      productCode: 1701
+      set: Fluorescent
+      hex: '#EEFF34'
+    deltaE: 3.56
+    tier: close
+  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Neon Yellow
@@ -409685,14 +409801,6 @@ equivalences:
       hex: '#CBFF17'
     deltaE: 4.37
     tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Yellow
-      set: Fluor Metallic
-      hex: '#F8FB48'
-    deltaE: 5.14
-    tier: substitute
   - paint:
       brand: Coat D'Armes
       brandSlug: coat-darmes
