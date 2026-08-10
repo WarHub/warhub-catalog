@@ -19,27 +19,16 @@
 # at least visible and countable.
 summary:
   ready: 0
-  merged-with-survivor: 5
+  merged-with-survivor: 2
   conflicting: 57
   contradicts-declared: 1
   unobserved-retired-code: 1
   regional-variant: 304
   same-code: 0
-  already-declared: 777
+  already-declared: 780
   surviving-entity-unresolved: 0
 readyToPromote: {}
 proposals:
-  - bucket: merged-with-survivor
-    manufacturer: games-workshop
-    retiredCode: '99070117003'
-    retiredEan: '5011921110988'
-    retiredEntity: null
-    survivingEntity: games-workshop/99070117012
-    survivingCode: '99070117012'
-    survivingName: Biophagus
-    survivingEan: '5011921171835'
-    changedOn: '2021-11-29'
-    assertedBy: mfr-gw-trade:99070117012
   - bucket: merged-with-survivor
     manufacturer: games-workshop
     retiredCode: '99070207021'
@@ -51,28 +40,6 @@ proposals:
     survivingEan: '5011921254668'
     changedOn: '2026-03-09'
     assertedBy: mfr-gw-trade:99120207208
-  - bucket: merged-with-survivor
-    manufacturer: games-workshop
-    retiredCode: '99120108034'
-    retiredEan: '5011921131174'
-    retiredEntity: null
-    survivingEntity: games-workshop/99120108058
-    survivingCode: '99120108058'
-    survivingName: Canoness
-    survivingEan: '5011921156771'
-    changedOn: '2021-09-06'
-    assertedBy: mfr-gw-trade:99120108058
-  - bucket: merged-with-survivor
-    manufacturer: games-workshop
-    retiredCode: '99120116009'
-    retiredEan: '5011921058648'
-    retiredEntity: null
-    survivingEntity: games-workshop/99120116031
-    survivingCode: '99120116031'
-    survivingName: Corpuscarii Electro-Priests
-    survivingEan: '5011921155903'
-    changedOn: '2021-04-19'
-    assertedBy: mfr-gw-trade:99120116031
   - bucket: merged-with-survivor
     manufacturer: games-workshop
     retiredCode: '99120209100'
@@ -4882,6 +4849,17 @@ proposals:
     assertedBy: mfr-gw-trade:99070116006
   - bucket: already-declared
     manufacturer: games-workshop
+    retiredCode: '99070117003'
+    retiredEan: '5011921110988'
+    retiredEntity: games-workshop/99070117003
+    survivingEntity: games-workshop/99070117012
+    survivingCode: '99070117012'
+    survivingName: Biophagus
+    survivingEan: '5011921171835'
+    changedOn: '2021-11-29'
+    assertedBy: mfr-gw-trade:99070117012
+  - bucket: already-declared
+    manufacturer: games-workshop
     retiredCode: '99070117004'
     retiredEan: '5011921110995'
     retiredEntity: games-workshop/99070117004
@@ -6664,6 +6642,17 @@ proposals:
     assertedBy: mfr-gw-trade:99120108057
   - bucket: already-declared
     manufacturer: games-workshop
+    retiredCode: '99120108034'
+    retiredEan: '5011921131174'
+    retiredEntity: games-workshop/99120108034
+    survivingEntity: games-workshop/99120108058
+    survivingCode: '99120108058'
+    survivingName: Canoness
+    survivingEan: '5011921156771'
+    changedOn: '2021-09-06'
+    assertedBy: mfr-gw-trade:99120108058
+  - bucket: already-declared
+    manufacturer: games-workshop
     retiredCode: '99120108035'
     retiredEan: '5011921131181'
     retiredEntity: games-workshop/99120108035
@@ -7135,6 +7124,17 @@ proposals:
     survivingEan: '5011921155897'
     changedOn: '2021-03-22'
     assertedBy: mfr-gw-trade:99120116030
+  - bucket: already-declared
+    manufacturer: games-workshop
+    retiredCode: '99120116009'
+    retiredEan: '5011921058648'
+    retiredEntity: games-workshop/99120116009
+    survivingEntity: games-workshop/99120116031
+    survivingCode: '99120116031'
+    survivingName: Corpuscarii Electro-Priests
+    survivingEan: '5011921155903'
+    changedOn: '2021-04-19'
+    assertedBy: mfr-gw-trade:99120116031
   - bucket: already-declared
     manufacturer: games-workshop
     retiredCode: '99120116015'

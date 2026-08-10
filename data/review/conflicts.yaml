@@ -123,20 +123,6 @@ conflicts:
           - ret-gamenerdz
           - ret-goblingaming
   - type: ean-mismatch
-    entity: games-workshop/99120116031
-    chosen: '5011921155903'
-    assertions:
-      - ean: '5011921058648'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921155903'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-          - ret-radaddel
-  - type: ean-mismatch
     entity: games-workshop/99120117019
     chosen: '5011921171934'
     assertions:
@@ -162,20 +148,6 @@ conflicts:
           - mfr-gw-trade
           - seed-curated
   - type: ean-mismatch
-    entity: games-workshop/99070117012
-    chosen: '5011921171835'
-    assertions:
-      - ean: '5011921110988'
-        sources:
-          - mfr-gw-trade
-          - ret-gamenerdz
-      - ean: '5011921171835'
-        sources:
-          - arc-wargameportal
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-goblingaming
-  - type: ean-mismatch
     entity: games-workshop/99120101329
     chosen: '5011921142583'
     assertions:
@@ -188,21 +160,6 @@ conflicts:
           - legacy-catalog
           - mfr-gw-trade
           - ret-gamenerdz
-          - ret-goblingaming
-          - ret-radaddel
-  - type: ean-mismatch
-    entity: games-workshop/99120108058
-    chosen: '5011921156771'
-    assertions:
-      - ean: '5011921131174'
-        sources:
-          - mfr-gw-trade
-          - ret-gamenerdz
-      - ean: '5011921156771'
-        sources:
-          - arc-wargameportal
-          - legacy-catalog
-          - mfr-gw-trade
           - ret-goblingaming
           - ret-radaddel
   - type: ean-mismatch
@@ -608,6 +565,12 @@ conflicts:
     barcode_code: '52170218003'
     manufacturer: games-workshop
   - type: supersession-stale-code
+    key: ret-goblingaming:biophagus
+    ean: '5011921171835'
+    listed_code: '99070117003'
+    barcode_code: '99070117012'
+    manufacturer: games-workshop
+  - type: supersession-stale-code
     key: ret-goblingaming:space-marines-white-scars-korsarro-khan
     ean: '5011921142590'
     listed_code: '99120101255'
@@ -632,10 +595,22 @@ conflicts:
     barcode_code: '99120103102'
     manufacturer: games-workshop
   - type: supersession-stale-code
+    key: ret-goblingaming:adepta-sororitas-canoness
+    ean: '5011921156771'
+    listed_code: '99120108034'
+    barcode_code: '99120108058'
+    manufacturer: games-workshop
+  - type: supersession-stale-code
     key: ret-goblingaming:drukhari-drazhar
     ean: '5011921155873'
     listed_code: '99120112040'
     barcode_code: '99120112050'
+    manufacturer: games-workshop
+  - type: supersession-stale-code
+    key: ret-goblingaming:adeptus-mechanicus-electro-priests
+    ean: '5011921155903'
+    listed_code: '99120116009'
+    barcode_code: '99120116031'
     manufacturer: games-workshop
   - type: supersession-stale-code
     key: ret-goblingaming:rotbringers-gutrot-spume
