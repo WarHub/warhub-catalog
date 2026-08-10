@@ -813,25 +813,75 @@ GSW_SET_BY_CATEGORY = {
 
 # Leading marketing descriptors on store titles ("Acrylic Color WONKA VIOLET", "Dipping ink
 # 60 ml - Papyrus DIP"). Stripped iteratively; a trailing ALL-CAPS run is title-cased.
+#
+# TWO things this regex must NOT do, both measured against the 477 committed greenstuffworld
+# observations on 2026-08-05:
+#
+# 1. IT MUST NOT ERASE THE VOLUME. Until today `\d+ ?ml` sat in the alternation below as a peer
+#    of the marketing words and was thrown away, which collapsed the store's 17 ml and 60 ml
+#    dipping inks -- different skus, different gtin13s, 3.7375 vs 2.125 EUR -- onto one name:
+#    32 (set, cleanedName) collisions that do not exist on the raw titles (0). The volume is
+#    now CAPTURED and re-emitted as a suffix, which takes that to 0. Naming a pot after its
+#    volume is not a convention invented here: 86 GSW archive records ALREADY end in one
+#    ("Alpha Turquoise 30 ml", "Antique Gold 17ml") purely because the store writes it last in
+#    those titles, where this ^-anchored regex could never reach it. Keeping it in one position
+#    and erasing it in the other was the actual defect.
+#    Deleting the alternative outright is NOT the fix, and that was measured too: `[-–]` is
+#    ^-anchored, so the volume is precisely what unblocks it. Drop it and the loop stalls with
+#    the dash unreached -- 69 dipping-ink names become "60 ml - Grey Mist Dip".
+#    What this does NOT fix: `suffix_match` below still joins BOTH volume listings onto the one
+#    bare catalog name, so 31 of those 32 pairs never reach this function at all. See its own
+#    comment.
+#
+# 2. IT MUST NOT EAT A PREFIX OUT OF THE MIDDLE OF A WORD. The word alternatives carry no
+#    trailing \b before today, so `metallic paint` matched 14 characters of "Metallic Paints
+#    Set - Colours" and the `\s*` then matched ZERO (the next character is "s"), yielding
+#    "s Set - Colours" -- skus 9910/9911/9912, whose mangled names are still in the archive.
+#    Those three are boxed sets `paint_rows` now routes to candidates, so this boundary repairs
+#    nothing on disk today (3 of 477 cleaned names change, 474 byte-identical, 0 of them
+#    reaching `additions`); it is prevention against the next plural the store ships.
+#    `[-–]` stays OUTSIDE the boundary in its own ^-anchored branch, because a hyphen followed
+#    by a space has no word boundary between them -- `(-)\b` would never fire and every
+#    "... - Colour" title would stop being stripped at all.
 _GSW_PREFIX = re.compile(
     r"^(acrylic (color|colors|white paint|black paint|paint)|dipping ink|metallic paint|"
     r"chameleon( paint)?|fluor(escent)? (acrylic )?paint|dry ?brush( paint)?|flexible paint|"
-    r"liquid pigments?|chrome paint|effect paint|varnish|primer|colorshift|maxx darth|"
-    r"\d+ ?ml|[-–])\s*",
+    r"liquid pigments?|chrome paint|effect paint|varnish|primer|colorshift|maxx darth)\b\s*"
+    r"|^[-–]\s*",
     re.IGNORECASE,
 )
+# Peeled by the same loop, but REMEMBERED rather than discarded -- see (1) above. Re-emitted in
+# one canonical spelling ("60 ml"), so a store retitle from "60ml" to "60 ml" is not a rename --
+# but ONLY for a volume in the LEADING position, which is all this `^`-anchored regex can reach.
+# A title carrying its volume at the END passes through with the store's own spelling, and the
+# brand already holds both forms side by side: measured 2026-08-06 over the 161 committed GSW
+# additions, 89 names end in a volume -- 62 in the no-space store spelling ("Satin Varnish 17ml",
+# "Chrome Spray Paint 400ml") and 27 with a space, of which only these 3 dipping inks come from
+# the capture below. So a TRAILING "17ml" -> "17 ml" respacing is still an unaliased rename that
+# would mint and strand. That predates this rule (the `^` anchor always had it) and is not fixed
+# here; it is written down so the sentence above is not read as a general guarantee.
+_GSW_VOLUME = re.compile(r"^(\d+) ?ml\b\s*", re.IGNORECASE)
 
 
 def gsw_clean_name(raw: str) -> str:
     name = raw.strip()
+    volume: str | None = None
     while True:
+        matched = _GSW_VOLUME.match(name)
+        if matched:
+            volume = matched.group(1)
+            name = name[matched.end():].strip()
+            continue
         stripped = _GSW_PREFIX.sub("", name, count=1).strip()
         if stripped == name or not stripped:
             break
         name = stripped
     # Title-case fully-uppercase words (WONKA VIOLET -> Wonka Violet), leave mixed-case alone.
     words = [w.capitalize() if w.isupper() and len(w) > 2 else w for w in name.split()]
-    return " ".join(words)
+    cleaned = " ".join(words)
+    # .strip() covers a title that is nothing BUT a volume ("Dipping ink 60 ml"), which today
+    # also cleans to "60 ml" -- the volume capture must not turn that into " 60 ml".
+    return f"{cleaned} {volume} ml".strip() if volume else cleaned
 
 
 def bridge_gsw() -> BrandHarvest:
@@ -849,6 +899,21 @@ def bridge_gsw() -> BrandHarvest:
     norms = sorted(by_norm, key=len, reverse=True)
 
     def suffix_match(store_name: str) -> str | None:
+        # KNOWN DEFECT, deliberately not fixed here (2026-08-05). This matches on the RAW title,
+        # so it is blind to a volume the title carries and the catalog record does not:
+        # norm("Dipping ink 60 ml - PAPYRUS DIP") and norm("Dipping ink 17 ml - Papyrus Dip")
+        # both END with `papyrusdip` and both claim `Papyrus Dip|Dipping Inks`. `add_enrich` is
+        # first-wins and the 60 ml rows sit earlier in observations.jsonl, so the 17 ml row is
+        # discarded every time. Measured 2026-08-05: 34 enrich keys are claimed by more than one
+        # store row and 39 rows are dropped in silence -- 31 of them these ml pairs, the other 8
+        # a different collapse entirely (`Orange|Fluor Metallic` is claimed by 4 rows spanning
+        # Transparent Ink / Opaque Ink / Fluor Ink / Fluor Paint, `Yellow` likewise, `White` by
+        # 3). It has landed: 33 of the 41 committed `Dipping Inks` records carry a 60 ml sku's
+        # ean, price and image while declaring volumeMl 17, and all 31 genuine 17 ml barcodes
+        # appear NOWHERE in the repo outside this source's evidence file (git grep, all 31).
+        # `gsw_clean_name`'s volume fix does NOT reach these -- they never reach it. Repairing
+        # them needs a volume-aware join here AND an explicit correction pass over the archive,
+        # not a regeneration.
         n = norm(store_name)
         best: str | None = None
         for cand in norms:

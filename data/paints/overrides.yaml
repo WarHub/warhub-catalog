@@ -6,7 +6,7 @@
 #                  additionalEans, priceGbp/Usd/Eur/Cad, supersededBy)
 #
 
-additions:     <brand-slug> -> list of MINTED paints (name, set, productCode, ean, imageUrl,
+#   additions:     <brand-slug> -> list of MINTED paints (name, set, productCode, ean, imageUrl,
 #                  supersededBy). For records a maintainer researched that NO upstream source
 #                  supplies. Distinct from data/paints/harvest/*.yaml `additions:`, which are
 #                  GENERATED from observed manufacturer listings and rewritten by the generator.
@@ -41,6 +41,39 @@ additions:
       set: Contrast
       productCode: '99189960061'
       source: Games Workshop trade announcement, 2022-07-16 Contrast wave
+
+# Renames. `{Set}|{Name}|{ProductCode}|{Hex}` (NOT the `{Name}|{Set}` grammar of the field
+# overrides below), NEW key -> OLD key, whole-string NFKC/whitespace/case-normalized by
+# NameNormalizer, so readable casing here is cosmetic. This is the ONLY rename path paints have:
+# PaintRecordAdapter.Url => null deliberately disables URL-based rename detection, so without an
+# entry here a changed name does not rename a record -- CatalogReconciler falls to step 4 and
+# MINTS a new one, stranding the old.
+aliases:
+  green-stuff-world:
+    # gsw_clean_name stopped erasing the store's LEADING volume token on 2026-08-05 (17 ml and
+    # 60 ml dipping inks are different skus with different gtin13s and prices; erasing it
+    # manufactured 32 (set, name) collisions that do not exist on the raw titles). Measured over
+    # the 161 rows that reach `additions`: 3 names change, 158 byte-identical -- so these three
+    # entries are the complete archive impact, and every other GSW record keeps its identity.
+    #
+    # `Green Stone Dip` is the one pair that reached `additions` rather than being folded by
+    # suffix_match, so it minted TWICE under one name in commit 9200376 and is the SOLE ambiguous
+    # {Name}|{Set} key in the whole 400-record GSW archive. Renaming both halves retires it.
+    # `Nightshade Purple Dip` has no colliding twin (its 60 ml sibling is spelled "Nightsahde",
+    # a store typo) -- it renames as collateral of the same rule, which is the price of the rule
+    # being uniform.
+    #
+    # NO hexless variant of the 4220/4231 keys is written, deliberately. The tempting
+    # belt-and-braces entry ('...|4220|' -> '...|4220|#4B5345') is NOT a no-op: it fires only
+    # when SwatchApplier misses, and ApplyRename then assigns Hex = fresh.Hex, DESTROYING the
+    # archived colour. The swatch keys in data/paints/swatches/green-stuff-world.yaml were
+    # re-keyed to the new names in the same change so the swatch lands and `fresh` carries the
+    # hex these keys assert. (Regenerating that file cannot do it: gen_paint_swatches.py's
+    # ratchet emits no entry for a paint that already has hex, and carries the committed entry
+    # forward verbatim under its old key.)
+    'Dipping Inks|Green Stone Dip 60 ml|3487|': 'Dipping Inks|Green Stone Dip|3487|'
+    'Dipping Inks|Green Stone Dip 17 ml|4220|#4B5345': 'Dipping Inks|Green Stone Dip|4220|#4B5345'
+    'Dipping Inks|Nightshade Purple Dip 17 ml|4231|#533968': 'Dipping Inks|Nightshade Purple Dip|4231|#533968'
 
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
