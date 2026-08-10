@@ -241,15 +241,23 @@ def test_crossover_name_patterns_compile() -> None:
 
 
 def _anyof_name_clauses() -> dict[str, str]:
-    """source_id -> its `anyOf` name-clause regex, for the sources that declare one.
+    """source_id -> its SET-WORD `anyOf` name-clause regex, for the sources that declare one.
 
     `anyOf` ONLY. scale75's `noneOf: \\bCASE\\b` is a per-source veto ("DR FLOWS PAINT CASE" is
     an empty carrying case, not a paint set) and has no business agreeing with anything.
+
+    AND ONLY THE CLAUSES THAT STAMP THE BLOCK'S OWN CATEGORY. A clause carrying its own `category`
+    selects a DIFFERENT KIND of thing and has no reason to agree with four other sources' set-word
+    lists: mfr-ak-interactive's THINNER|CLEANER|BURNISHING|MICROFILLER|FLUID clause crosses
+    auxiliary agents as `hobby-auxiliary`, which is not a boxed set and never was. Keying on the
+    override -- rather than on clause position, or on inspecting the pattern text -- keeps the
+    roster below about the one thing it was written to protect: five independent copies of the
+    set-word list, which drift silently and which nothing else in the suite reads.
     """
     clauses: dict[str, str] = {}
     for source_id, descriptor in _crossover_descriptors().items():
         patterns = [c.nameMatches for c in descriptor.crossoverToProducts.anyOf
-                    if c.nameMatches is not None]
+                    if c.nameMatches is not None and c.category is None]
         assert len(patterns) <= 1, f"{source_id}: {len(patterns)} anyOf name clauses, expected <=1"
         if patterns:
             clauses[source_id] = patterns[0]

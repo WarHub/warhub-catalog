@@ -22,6 +22,25 @@ scope:
     - abteilung502
     - ak-spray-colors
     - ak-spray-primers
+    # ADDED 2026-08-09, and chosen by what AK's own boxed sets ask for rather than by browsing the
+    # category tree. Acquiring the 256 sets' contents produced 30 refusals over 14 distinct codes;
+    # querying the Store API for each showed 8 of them are products AK SELLS TODAY, in exactly
+    # these two categories -- AK479/480/488 (Xtreme Metal Aluminium family) and AK012/AK014
+    # (Streaking Grime), AK088/AK089 (chipping fluids), AK636 (Starship Detail Wash). The sets were
+    # naming paints the sweep could not see.
+    #
+    # This is the case where "extend the descriptor and re-acquire" is genuinely the fix -- worth
+    # saying because the same sentence was WRONG for mfr-reaper one commit ago, where no page
+    # existed to point at. The difference is checkable, not a matter of taste: here the products
+    # answer a live Store API query and name their own category slug.
+    #
+    # NARROWEST PAIR THAT DOES THE JOB. `paints-weathering` (196) and `metallic-paint` (48) would
+    # also cover them and pull in several times as much; these two are 84 + 27 and were picked by
+    # intersecting the categories the 8 refused skus actually carry. Weathering singles and Xtreme
+    # Metal are paints by AK's own taxonomy (both sit under its `paints` parent), which is the only
+    # authority this repo accepts for what a manufacturer sells.
+    - xtreme-metal-paints
+    - paints-weathering-single
 politeness:
   # ak-interactive.com's WAF 403s any UA containing a bot token -- including the robots.txt
   # fetch itself (live matrix 2026-07-23: bot UA 403, curl 200, browser 200). Their robots.txt
@@ -63,5 +82,25 @@ crossoverToProducts:
     count and contribute nothing to the EAN coverage the repo's guards measure.
   category: paint-set
   anyOf:
+    # FIRST, because clause order decides the stamp where clauses overlap (crossover.py::
+    # matched_clause) and this one is the narrow case. AK sells auxiliary AGENTS out of the same
+    # paint categories the sweep now covers: thinners, burnishing fluids and the two chipping
+    # fluids the boxed sets enumerate (AK088 "Worn Effects Acrylic Fluid", AK089 "Heavy Effects
+    # Acrylic Fluid"). They are products -- AK sells them, sets contain them, someone holding one
+    # needs to identify it -- but they are not COLOURS, and the paint catalog is a catalog of
+    # colours. Crossing them keeps them addressable without asserting they are paint.
+    #
+    # `category: hobby-auxiliary` rather than the block's `paint-set`: stamping an agent as a
+    # boxed set would be the same structural lie this block exists to fix, one level down.
+    #
+    # Measured live 2026-08-09 over the 111 rows the two new categories added: 10 match -- 4 in
+    # xtreme-metal-paints (XTREME CLEANER & THINNER, and the three PRIMER AND MICROFILLER sprays)
+    # and 6 in paints-weathering-single (PHOTOETCH BURNISHING, Metal burnishing fluid, MEDIUM RUST
+    # DEPOSITS, Wet Effects Fluid, Worn Effects Acrylic Fluid, Heavy Effects Acrylic Fluid). The
+    # word list is deliberately narrow and anchored: BURNISHING and MICROFILLER name processes,
+    # THINNER/CLEANER name solvents, and `\bFLUID\b` is a whole word so it cannot catch a colour
+    # named e.g. "Fluid Blue". Verified 0 of the 1,272 committed AK archive names match it.
+    - nameMatches: '\b(THINNER|CLEANER|BURNISHING|MICROFILLER|FLUID)\b'
+      category: hobby-auxiliary
     - hintContainsAny: {categorySlugs: [3rd-set, paints-acrylics-sets, b2b-3gen-sets]}
     - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'

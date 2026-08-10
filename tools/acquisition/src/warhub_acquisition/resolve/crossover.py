@@ -57,10 +57,39 @@ def matches(observation: Mapping, rule: Mapping | None) -> bool:
     an `anyOf` clause, which is what makes the exclusion lists readable as "not these, whatever
     else you concluded". No rule (a paint source that declares no carve-out) means nothing crosses.
     """
+    return matched_clause(observation, rule) is not None
+
+
+def matched_clause(observation: Mapping, rule: Mapping | None) -> Mapping | None:
+    """The FIRST `anyOf` clause this observation satisfies, or None -- `matches` with a receipt.
+
+    Exists because a crossed row's category is not always the block's: see `category_for`. Clause
+    ORDER is therefore load-bearing where clauses overlap, which is why this returns the first
+    match rather than any match, and why the descriptor lists the narrow clauses first.
+    """
     if not rule:
-        return False
+        return None
     name = str(observation.get("name") or "")
     hints = observation.get("hints") or {}
     if any(clause_matches(name, hints, clause) for clause in rule.get("noneOf") or []):
-        return False
-    return any(clause_matches(name, hints, clause) for clause in rule.get("anyOf") or [])
+        return None
+    for clause in rule.get("anyOf") or []:
+        if clause_matches(name, hints, clause):
+            return clause
+    return None
+
+
+def category_for(observation: Mapping, rule: Mapping | None) -> str | None:
+    """What to stamp on a crossed row: the matching clause's own `category`, else the block's.
+
+    ONE SOURCE CAN CROSS TWO DIFFERENT KINDS OF THING. ak-interactive.com sells boxed sets (which
+    are `paint-set` products) and auxiliary agents -- thinners, burnishing fluids, chipping fluids
+    -- out of the same paint categories. Both belong in the product catalog and NEITHER belongs in
+    the paint catalog, but stamping an agent `paint-set` would be the same structural lie the block
+    was introduced to fix, one level down. A per-clause override says the true thing about each
+    without needing a second block, so the four sources that cross exactly one kind are untouched.
+    """
+    clause = matched_clause(observation, rule)
+    if clause is None:
+        return None
+    return str(clause.get("category") or (rule or {}).get("category") or "") or None

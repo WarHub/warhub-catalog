@@ -152,7 +152,8 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             continue
         spec = rule.model_dump()
         for observation in source.values():
-            if not crossover.matches(observation.model_dump(), spec):
+            stamp = crossover.category_for(observation.model_dump(), spec)
+            if stamp is None:
                 continue
             # IDENTITY FLOOR. A record crossing catalogs must be addressable by a product code or
             # a barcode, or its entity id falls back to a slug of the store's TITLE -- which a
@@ -178,7 +179,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             # "paint"` -- publishing a 12-pot box under that is the same structural lie commit
             # 6b3c930 fixed on the paint side.
             observations.append(
-                observation.model_copy(update={"hints": {**observation.hints, "category": rule.category}})
+                observation.model_copy(update={"hints": {**observation.hints, "category": stamp}})
             )
 
     # The wipe guard asks about PRODUCT-SOURCE evidence specifically, not about `observations`.
