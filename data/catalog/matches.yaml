@@ -782,6 +782,98 @@ supersessions:
   games-workshop/99239999105: games-workshop/99239999120
   games-workshop/99239999106: games-workshop/99239999118
   games-workshop/99440199140: games-workshop/99440199081
+  # --- Bulk-promoted from data/review/supersession-proposals.yaml (2026-07-30): the `ready`
+  # bucket of GW's own "Code Changes" register -- edges where BOTH sides already resolve to
+  # their own distinct entity, so declaring the link adds lineage without inventing a record.
+  # Regenerate with `warhub-data classify --propose-supersessions`; the other buckets in that
+  # file are NOT paste-ready and each says why. Chains are expected and legal here (a code
+  # re-coded twice, or a discontinued region folding into another); cycles are not, and the
+  # generator keeps both directions of a self-contradicting pair out of this block.
+  games-workshop/02040299080: games-workshop/60040299107
+  games-workshop/99070101015: games-workshop/99070101057
+  games-workshop/99070101032: games-workshop/99070101053
+  games-workshop/99070101040: games-workshop/99070101059
+  games-workshop/99070101041: games-workshop/99070101050
+  games-workshop/99070101042: games-workshop/99070101049
+  games-workshop/99070101043: games-workshop/99070101075
+  games-workshop/99070101046: games-workshop/99070101055
+  games-workshop/99070102004: games-workshop/99070102019
+  games-workshop/99070104007: games-workshop/99070104013
+  games-workshop/99070107001: games-workshop/99070107002
+  games-workshop/99070110001: games-workshop/99070110004
+  games-workshop/99070116002: games-workshop/99070116006
+  games-workshop/99070207010: games-workshop/99120207208
+  games-workshop/99079915007: games-workshop/99079915011
+  games-workshop/99120101058: games-workshop/99120101341
+  games-workshop/99120101076: games-workshop/99120101298
+  games-workshop/99120101083: games-workshop/99120101299
+  games-workshop/99120101088: games-workshop/99120101339
+  games-workshop/99120101089: games-workshop/99120101354
+  games-workshop/99120101178: games-workshop/99070101060
+  games-workshop/99120101181: games-workshop/99070101063
+  games-workshop/99120101189: games-workshop/99120101308
+  games-workshop/99120101211: games-workshop/99120101313
+  games-workshop/99120101213: games-workshop/99120101315
+  games-workshop/99120101228: games-workshop/99120101340
+  games-workshop/99120101231: games-workshop/99120101317
+  games-workshop/99120101232: games-workshop/99120101318
+  games-workshop/99120101247: games-workshop/99120101320
+  games-workshop/99120101263: games-workshop/99120101325
+  games-workshop/99120101264: games-workshop/99120101326
+  games-workshop/99120102063: games-workshop/99120102130
+  games-workshop/99120102065: games-workshop/99120102132
+  games-workshop/99120102066: games-workshop/99120102133
+  games-workshop/99120102067: games-workshop/99120102134
+  games-workshop/99120102072: games-workshop/99120102129
+  games-workshop/99120102075: games-workshop/99120102125
+  games-workshop/99120102076: games-workshop/99120102126
+  games-workshop/99120102077: games-workshop/99120102127
+  games-workshop/99120102080: games-workshop/99120102112
+  games-workshop/99120107008: games-workshop/99120107017
+  games-workshop/99120107013: games-workshop/99120107018
+  games-workshop/99120107014: games-workshop/99120107019
+  games-workshop/99120110014: games-workshop/99120110063
+  games-workshop/99120110021: games-workshop/99120110062
+  games-workshop/99120110022: games-workshop/99120110061
+  games-workshop/99120110035: games-workshop/99120110057
+  games-workshop/99120110036: games-workshop/99120110058
+  games-workshop/99120110038: games-workshop/99120110065
+  games-workshop/99120110039: games-workshop/99120110059
+  games-workshop/99120112008: games-workshop/99120112044
+  games-workshop/99120113036: games-workshop/99120113071
+  games-workshop/99120113043: games-workshop/99120113074
+  games-workshop/99120113059: games-workshop/99120113078
+  games-workshop/99120116015: games-workshop/99120116032
+  games-workshop/99120116016: games-workshop/99120116033
+  games-workshop/99120116017: games-workshop/99120116034
+  games-workshop/99120116019: games-workshop/99120116036
+  games-workshop/99120116020: games-workshop/99120116037
+  games-workshop/99120116024: games-workshop/99120116039
+  games-workshop/99120116025: games-workshop/99120116040
+  games-workshop/99120201042: games-workshop/99120201156
+  games-workshop/99120205021: games-workshop/99120205053
+  games-workshop/99120205022: games-workshop/99120205054
+  games-workshop/99120205028: games-workshop/99120205055
+  games-workshop/99120207029: games-workshop/99120207157
+  games-workshop/99120207046: games-workshop/99120207137
+  games-workshop/99120207076: games-workshop/99120207161
+  games-workshop/99120207077: games-workshop/99120207162
+  games-workshop/99120207080: games-workshop/99120207165
+  games-workshop/99120207081: games-workshop/99120207166
+  games-workshop/99120904001: games-workshop/99120904002
+  games-workshop/99120907001: games-workshop/99120907003
+  games-workshop/99120912001: games-workshop/99120912002
+  games-workshop/99120913001: games-workshop/99120913002
+  games-workshop/99120999004: games-workshop/99120999012
+  games-workshop/99129915036: games-workshop/99129915076
+  games-workshop/99129915050: games-workshop/99129915074
+  games-workshop/99170101013: games-workshop/99170101012
+  games-workshop/99170101017: games-workshop/99170101016
+  games-workshop/99170110004: games-workshop/99170110003
+  games-workshop/99170110005: games-workshop/99170110003
+  games-workshop/99170199015: games-workshop/99170199014
+  games-workshop/99170199019: games-workshop/99170199014
+  games-workshop/99239999075: games-workshop/99239999129
 reassignCodes:
   # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
   # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole

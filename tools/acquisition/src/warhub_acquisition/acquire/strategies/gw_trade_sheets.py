@@ -593,6 +593,72 @@ def _is_discontinued(roles: set[str]) -> bool:
     return "withdrawn" in roles and "current" not in roles
 
 
+def _mint_lineage_records(observations: dict[str, Observation], stats: dict[str, int]) -> None:
+    """Give a RETIRED product code its own record when nothing else in the harvest observes it.
+
+    GW's register asserts that a code existed and (usually) what its barcode was, but the trade
+    sheets only LIST current codes -- so most retired codes have no row of their own and therefore
+    no entity, no record, and no way for a scan of that old box to resolve. Measured 2026-07-30: 86
+    such codes, 85 of them carrying a real barcode. Without this they are asserted and then lost,
+    which is the exact failure the whole archival direction exists to stop.
+
+    This is the first evidence in the pipeline DERIVED rather than observed, so it is deliberately
+    narrow:
+
+      * only when the code is claimed by exactly ONE surviving code -- a fan-out is either a
+        regional split or a filler code, and neither is a 1:1 lineage fact;
+      * only for a well-formed product code, so a stray barcode in a code column cannot mint a
+        product;
+      * never when the code is already observed -- a real row always wins, and because the key is
+        the same, a later harvest that starts listing the code simply overwrites this record;
+      * `archived=True`, so the existing lifecycle rule resolves it to `status: discontinued`
+        rather than inventing a liveness claim.
+
+    The name is the register row's own description, which describes the product as its SUCCESSOR is
+    listed -- the two are the same product by the register's own assertion, but the record is marked
+    `lineageDerived` so a consumer can tell a re-listed name from an observed one.
+    """
+    survivors: dict[str, set[str]] = {}
+    seed: dict[str, tuple[Observation, dict]] = {}
+    for observation in list(observations.values()):
+        for entry in observation.hints.get("supersedes") or []:
+            code = str(entry.get("productCode") or "")
+            if not code:
+                continue
+            survivors.setdefault(code, set()).add(observation.key)
+            seed.setdefault(code, (observation, entry))
+
+    for code, (survivor, entry) in sorted(seed.items()):
+        source_id = survivor.key.split(":", 1)[0]
+        key = f"{source_id}:{code}"
+        if key in observations:
+            continue  # observed in its own right; the real row is the better record
+        if len(survivors[code]) != 1:
+            stats["lineage_records_ambiguous"] += 1
+            continue
+        if not (code.isdigit() and len(code) == _CODE_DIGITS):
+            stats["lineage_records_malformed"] += 1
+            continue
+        hints: dict[str, object] = {"lineageDerived": True}
+        if entry.get("changedOn"):
+            hints["retiredOn"] = entry["changedOn"]
+        observations[key] = Observation(
+            key=key,
+            manufacturer=survivor.manufacturer,
+            name=survivor.name,
+            sku=code,
+            ean=entry.get("ean"),
+            hints=hints,
+            firstSeen=survivor.firstSeen,
+            lastSeen=survivor.lastSeen,
+            archived=True,
+            extractor="gw-trade-sheets-lineage",
+        )
+        stats["lineage_records"] += 1
+        if entry.get("ean"):
+            stats["lineage_records_with_barcode"] += 1
+
+
 def _attach_lineage(
     lineage: list[tuple[str, str, object, str | None]],
     observations: dict[str, Observation],
@@ -681,6 +747,11 @@ def gw_trade_sheets_strategy(
         "lineage_with_barcode": 0,
         "lineage_placeholder_barcodes": 0,
         "lineage_unmatched": 0,
+        # Archival records minted for retired codes nothing observes (see _mint_lineage_records).
+        "lineage_records": 0,
+        "lineage_records_with_barcode": 0,
+        "lineage_records_ambiguous": 0,
+        "lineage_records_malformed": 0,
     }
 
     base_url = descriptor.baseUrl or "https://trade.games-workshop.com"
@@ -835,6 +906,9 @@ def gw_trade_sheets_strategy(
     stats["discontinued"] = sum(1 for o in observations.values() if o.archived)
 
     _attach_lineage(lineage, observations, stats)
+    # After the lineage hints exist, and after `archived` has been resolved from `roles` -- a
+    # minted record sets its own `archived=True` and must not be overwritten by that pass.
+    _mint_lineage_records(observations, stats)
 
     return StrategyResult(
         observations=list(observations.values()),
