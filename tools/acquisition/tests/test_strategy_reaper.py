@@ -165,10 +165,72 @@ def test_full_sweep_stateless_cursor_and_stats() -> None:
     assert result.stats["products_seen"] == 9  # 2 sets + 2 triads + 5 core items
     assert result.stats["kept_set_products"] == 4
     assert result.stats["kept_paint_products"] == 4  # 09819 deduped out of core
-    assert len(result.observations) == 8
+    # Plus the paints the fixture's sets NAME but its trimmed singles page does not list. 17 here
+    # is an artifact of the trim, not a live figure (the real six pages yield 35) -- the fixture
+    # keeps 5 core items out of 267, so almost every set member looks unlisted inside it. That is
+    # exactly the condition the branch exists for, which is why the trim is left as it is.
+    assert result.stats["kept_set_only_paints"] == 17
+    assert len(result.observations) == 8 + 17
 
 
 def test_unknown_vendor_observes_nothing() -> None:
     result = run(descriptor(manufacturer="Somebody Else"))
     assert result.observations == []
     assert result.stats["skipped_unknown_vendor"] == 9
+
+
+def test_set_only_paints_become_observations_of_their_own() -> None:
+    """A paint the site NAMES inside a set but sells on no line page is still a paint.
+
+    This closed the two refs that sat in data/catalog/set-contents/reaper.yaml's `unresolved:`
+    block for weeks -- 29107 "Gutter Grime" and 29815 "HD Dragon Blue". The repo's stated
+    diagnosis was that the 29xxx High Density range needed a `linePages` entry; re-mapping the
+    site live on 2026-08-08 showed there is no such page and never was, so the only place those
+    paints are stated at all is `associatedProducts`.
+    """
+    result = run()
+    # 08501 is a brush ("accessory") and 77018 a Bones figure ("plastic") in the LTPK's contents.
+    # The material whitelist is NOT widened by this branch -- it is the same one `_content_skus`
+    # uses, so a non-paint member is still not a paint.
+    skus = {o.sku for o in result.observations}
+    assert "08501" not in skus
+    assert "77018" not in skus
+
+    named_only = [o for o in result.observations if o.hints.get("namedOnlyInSets")]
+    assert named_only, "fixture sets name members the trimmed singles page does not list"
+
+    member = next(o for o in named_only if o.sku == "09148")
+    assert member.key == "mfr-reaper:09148"
+    assert member.manufacturer == "reaper"
+    # Categorised as a paint so the bridge treats it like one, and tagged with the box that
+    # witnessed it so the provenance is not something a consumer has to re-derive.
+    assert member.hints["category"] == "paint"
+    assert member.hints["namedInSet"] == "09901"
+    assert member.hints["line"] == "Master Series Paints Core Colors"
+    # NO image and NO price, both deliberate: a reference's `filename` depicts the referenced sku
+    # AS SOLD (a 12-bottle special order is a case, not a pot) and associatedProducts carries no
+    # price field at all. See _set_only_paints.
+    assert member.imageUrl is None
+    assert member.priceUsd is None
+    assert member.availability is None
+    # The page the evidence was actually read from -- there is no page for this sku to point at.
+    assert member.url == "https://www.reapermini.com/paints/paint-sets"
+
+
+def test_a_listed_paint_is_never_overwritten_by_its_set_reference() -> None:
+    """A line-page listing is the stronger evidence and must win.
+
+    09819 is the case that makes this checkable: the triads page lists it AND the fixture's sets
+    reference paint skus, so if the set-only pass ran without the membership check it would
+    clobber real listings with identity-only records -- silently dropping price, image and
+    availability from paints that have them.
+    """
+    result = run()
+    listed = next(o for o in result.observations if o.sku == "09002")
+    assert "namedOnlyInSets" not in listed.hints
+    assert listed.imageUrl == "https://images.reapermini.com/4/09002.jpg"
+    assert listed.priceUsd == 3.89
+
+    # And every sku appears exactly once, whichever route produced it.
+    all_skus = [o.sku for o in result.observations]
+    assert len(all_skus) == len(set(all_skus))

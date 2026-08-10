@@ -82,8 +82,8 @@ reaper:
   counts:
     sets: 29
     refs: 802
-    members: 800
-    unresolved: 2
+    members: 802
+    unresolved: 0
     quantified: 0
   sets:
     reaper/08906:
@@ -131,9 +131,10 @@ reaper:
           brand: reaper
           paint: Blade Steel|Master Series Paints Bones
           productCode: '9452'
-      unresolved:
         - ref: '29815'
-          reason: no paint in brand(s) 'reaper' carries this product code
+          brand: reaper
+          paint: HD Dragon Blue|Master Series Paints High Density
+          productCode: '29815'
     reaper/08907:
       name: 'Learn to Paint Kit: Layer Up!'
       brand: reaper
@@ -497,9 +498,10 @@ reaper:
           brand: reaper
           paint: Wyvern Leather|Master Series Paints Bones
           productCode: '9492'
-      unresolved:
         - ref: '29107'
-          reason: no paint in brand(s) 'reaper' carries this product code
+          brand: reaper
+          paint: Gutter Grime|Master Series Paints Core Colors
+          productCode: '29107'
     reaper/09917:
       name: Dragon Colors Paint Set
       brand: reaper

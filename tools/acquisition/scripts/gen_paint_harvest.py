@@ -135,7 +135,9 @@ TAP_SET_BY_PREFIX = {
 #   mfr-scale75          priceEur   562/562   descriptor scope.currency: eur (live-verified)
 #   mfr-greenstuffworld  priceEur   477/477   recorded only when itemprop=priceCurrency is EUR
 #   mfr-armypainter      priceUsd   794/794   descriptor scope.currency: usd (live /cart.js)
-#   mfr-reaper           priceUsd   541/541   reapermini.com is a US store; strategy reads cents
+#   mfr-reaper           priceUsd   541/576   reapermini.com is a US store; strategy reads cents
+#                                             (the 35 set-only paints quote no price -- an
+#                                             associatedProducts entry has no price field)
 #   mfr-turbodork        priceUsd   357/357   descriptor scope.currency: usd (live /cart.js)
 #   mfr-monument         priceUsd   197/197   descriptor scope.currency: usd (live /cart.js)
 #
@@ -1436,6 +1438,17 @@ REAPER_SET_BY_LINE = {
     "Master Series Paints Core Colors": "Master Series Paints Core Colors",
     "Master Series Paints Bones": "Master Series Paints Bones",
     "Master Series Paints Pathfinder Colors": "Master Series Paints Pathfinder",
+    # NO LINE PAGE ANYWHERE ON reapermini.com, and that is the point. Reaper's High Density range
+    # is named only inside set contents now (`associatedProducts.category`), which is why 29815
+    # "HD Dragon Blue" resolved to nothing for so long -- see strategies/reaper.py::
+    # _set_only_paints. Without this row the observation would land in `candidates` as an "unmapped
+    # line" and stay unpublished, which is the same silence in a different file.
+    #
+    # The set NAME matches the site's own label rather than the shorter "Master Series Paints
+    # High Density Colors" the boxes print: `set` is half the paint identity key, and every other
+    # entry here takes the site's wording too (only Pathfinder is shortened, and only because the
+    # Arcturus base already spells it that way and the archive must agree with itself).
+    "Master Series Paints High Density": "Master Series Paints High Density",
 }
 
 
@@ -1446,7 +1459,7 @@ def bridge_reaper() -> BrandHarvest:
     set-kind observations (triads/sets/LTPK, hints.category paint-set) carry contentSkus as
     committed set-membership evidence but never promote. No EANs exist in the site data.
 
-    The set filter is also what keeps SET prices out: 114 of the 541 observations are
+    The set filter is also what keeps SET prices out: 114 of the 576 observations are
     paint-set kind and all 114 quote a priceUsd (a $47.99 Learn To Paint Kit, a $659.99 full
     range). A set's price is not a paint's price, and `paint_rows` now removes all 115 before
     this loop sees them, so no ordering inside this bridge can expose one. `observed_price`
@@ -1466,8 +1479,9 @@ def bridge_reaper() -> BrandHarvest:
         # branch, so a gated row can never oscillate back in (see bridge_gsw).
         if hints.get("category") != "paint":
             # Unreachable today and kept as a floor, not as live logic: reapermini.com emits
-            # exactly two categories across all 541 observations (paint 427, paint-set 114,
-            # measured 2026-08-05) and `paint_rows` already removed every paint-set. If the
+            # exactly two categories across all 576 observations (paint 462 -- 427 listed plus
+            # 35 named only inside sets -- and paint-set 114, measured 2026-08-08) and
+            # `paint_rows` already removed every paint-set. If the
             # site ever adds a third kind, it must not be mistaken for a paint.
             continue
         code = str(o.get("sku") or "").lstrip("0")
