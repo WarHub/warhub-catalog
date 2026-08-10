@@ -1,4 +1,6 @@
 """Canonical catalog records and human overrides."""
+from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -85,6 +87,22 @@ class CanonicalProduct(BaseModel):
     # states one, and None reads correctly as "this source said nothing about the contents",
     # which is a different claim from "this box is empty".
     contentSkus: list[str] | None = None
+    # WHERE THE LIST ABOVE CAME FROM, because the two provenances make DIFFERENT claims and a
+    # consumer cannot tell them apart from the refs alone.
+    #
+    # - "stated": a source handed us a machine-readable contents array (today only mfr-reaper's
+    #   `associatedProducts`). Exhaustive by construction -- the field either lists the box or is
+    #   absent.
+    # - "description": resolve/set_refs.py read the refs out of the source's own prose. NOT
+    #   guaranteed exhaustive, and that is measured rather than cautious: live 2026-08-07 over the
+    #   256 AK boxed-set rows, 46 enumerate no codes at all while still stating a count in words
+    #   (AK11701 says 233 colours and lists none), and 6 print a second, explicitly NOT-INCLUDED
+    #   bulleted list in the identical shape. A prose list is editorial; an array is data.
+    #
+    # None whenever `contentSkus` is None, and dropped from the published YAML by exclude_none, so
+    # adding it is byte-identical for every product that states no contents -- 22,476 of the
+    # 22,529 committed today, once the 24 derived sets land beside reaper's 29.
+    contentSkusFrom: Literal["stated", "description"] | None = None
     evidence: list[str] = Field(default_factory=list)
 
 

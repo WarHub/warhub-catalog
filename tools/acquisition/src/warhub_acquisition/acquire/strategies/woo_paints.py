@@ -1,6 +1,6 @@
 """WooCommerce Store API paints strategy (AK Interactive): category-scoped enumeration.
 
-Differs from the generic `woo-store-api` strategy in three paint-catalog-specific ways
+Differs from the generic `woo-store-api` strategy in four paint-catalog-specific ways
 (everything else -- pinned manufacturer, minor-unit prices, HTML-unescaped names, empty-page
 termination -- mirrors woo.py):
 
@@ -13,6 +13,10 @@ termination -- mirrors woo.py):
 3. **hints.categorySlugs** (each product's own category slug list, sorted) rides along for
    the harvest bridge to classify ranges/sets/singles; hints.category = "paint". No
    gameSystem/faction mapping -- these are paint catalogs.
+4. **hints.description** carries `short_description` VERBATIM -- same payload, no extra request.
+   It is what lets a boxed set say what is in it (resolve/set_refs.py reads the member codes out
+   of it at resolve time); see the comment at the capture site for the size it costs and why it
+   is stored unsliced.
 
 No detail fetches: AK product pages carry no gtin in their JSON-LD (live-checked), so there
 is nothing worth a per-product request. Paint ranges are near-static (one-off snapshot model
@@ -99,6 +103,35 @@ def woo_paints_strategy(
                 price_kwargs[_price_field_for(product, descriptor.scope)] = price
 
             hints: dict[str, object] = {"category": "paint"}
+            # The source's own words about the product, VERBATIM, from a field already in this
+            # payload -- zero extra requests, live-verified 2026-08-07 (999/999 rows of
+            # `paints-acrylics` carry a non-empty `short_description`; 0/999 carry a non-empty
+            # `description`, so the long field is not the one to read).
+            #
+            # WHY IT IS WORTH THE BYTES. This is the only route by which AK's 256 boxed-set rows
+            # ever say what is in them: they carry no `contentSkus` (AK publishes no contents
+            # array) and today resolve to 0 descriptions, so their membership is unknowable.
+            # Measured against the live payload with resolve/set_refs.py, 210 of the 256 yield a
+            # member list -- 1,210 refs, 1,176 of which name exactly one paint in
+            # data/paints/brands/ak-interactive.yaml and 0 of which are ambiguous.
+            #
+            # NOT SLICED, NOT PARSED, NOT CLEANED, and that costs something real: the field is a
+            # bilingual collapseomatic accordion (English block then Spanish block, the same codes
+            # twice) averaging 2,012 chars, so storing it whole takes this source's
+            # observations.jsonl from 765,020 bytes to ~3.23 MB -- measured by projecting the 999
+            # captured rows over all 1,142 observations, a 4.2x growth. Keeping only the English
+            # half would save ~59% of that -- and would be acquire-time classification, the thing
+            # shopify_paints.py and mr_hobby.py exist to forbid: the day the slice rule is wrong
+            # it costs a full re-fetch instead of a `warhub-data resolve` run. The bilingual cut is
+            # made once, late, in resolve/set_refs.py::_first_language_block, where retuning it
+            # costs a `resolve` run and nothing else.
+            #
+            # The same reasoning is why classify/queue.py now flattens markup before truncating to
+            # its 300-char prompt window: measured over these 999 rows a raw window is only 45%
+            # prose, and the place to fix that is the prompt, not the archive.
+            short_description = product.get("short_description")
+            if short_description and str(short_description).strip():
+                hints["description"] = str(short_description)
             slugs = sorted(
                 category.get("slug", "")
                 for category in (product.get("categories") or [])

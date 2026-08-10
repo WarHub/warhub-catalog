@@ -4,6 +4,9 @@ bundle, dice, or advent calendar, publishes with gameSystem: null rather than be
 the catalog) awaiting an OPTIONAL gameSystem/faction decision, with enough context for an LLM
 (Task 5) to classify each one.
 """
+import html as html_lib
+import re
+
 from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.descriptor import load_descriptors
 from warhub_acquisition.models.observation import Observation
@@ -21,6 +24,32 @@ _DESCRIPTION_LIMIT = 300
 # gameSystem so all 516 reach this queue, and reaper/09956 alone carries 216 codes. A contents
 # list tells an LLM nothing about a game system and would crowd the prompt.
 _EXCLUDED_HINT_KEYS = {"gameSystem", "faction", "description", "contentSkus"}
+
+
+_TAG = re.compile(r"<[^>]+>")
+
+
+def _prompt_description(raw: object) -> str:
+    """The description an LLM actually reads: markup flattened, THEN truncated to 300 chars.
+
+    ORDER IS THE WHOLE POINT. Sources store their words verbatim, which for a WooCommerce store
+    means raw HTML, and a 300-char window taken off the front of that is mostly angle brackets.
+    Measured 2026-08-07 over the 999 live rows of AK's `paints-acrylics` category: the raw window
+    is 45% prose on average (median 49%, worst 5%), 512 of the 999 rows are under half prose, and
+    the leading run of markup alone averages 61 chars (max 115). All 256 of AK's boxed sets have a
+    null gameSystem, so all 256 reach this queue -- they would have arrived spending a third of
+    their budget on `<span class="collapseomatic ...>`.
+
+    THIS IS THE RIGHT LAYER FOR IT, and it is why acquire/strategies/woo_paints.py stores
+    `short_description` unsliced: a retune of a PROMPT costs nothing, while a retune of what was
+    stored costs a full re-fetch. Flattening is skipped entirely when there is no tag, so it is
+    byte-identical for the 11,949 of 11,953 committed descriptions that carry none (all
+    `legacy-catalog`; exactly 4 contain a tag).
+    """
+    text = str(raw)
+    if _TAG.search(text):
+        text = re.sub(r"\s+", " ", html_lib.unescape(_TAG.sub(" ", text))).strip()
+    return text[:_DESCRIPTION_LIMIT]
 
 
 def _first(values: list[object | None]) -> object | None:
@@ -127,7 +156,7 @@ def build_queue(paths: DataPaths) -> list[dict]:
                 "name": members[0].name,
                 "manufacturer": members[0].manufacturer,
                 "url": _first([member.url for member in members]),
-                "description": str(description)[:_DESCRIPTION_LIMIT] if description else None,
+                "description": _prompt_description(description) if description else None,
                 "hints": _raw_hints(members),
                 "candidates": candidates,
             }

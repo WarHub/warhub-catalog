@@ -3,6 +3,7 @@ from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
 from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
+from warhub_acquisition.resolve.set_refs import content_skus_from_description
 
 # `weightG` is NET CONTENTS in grams for a product sold by mass (added 2026-08-06), first-wins
 # across the kind-ordered members exactly like `volumeMl` beside it. It is NOT Shopify's `grams`
@@ -86,6 +87,30 @@ def resolve_attributes(
                 if fields["faction"] is None:
                     fields["faction"] = (mapping.get("faction") or {}).get(str(trade_category))
                 break
+
+    # WHAT IS IN THE BOX, when the source states it in prose instead of in a field. Only
+    # `mfr-reaper` hands us a machine-readable contents array; every other brand writes the codes
+    # into its `description`, which by this point has already been folded above and so is one
+    # string regardless of which source supplied it. Never overrides a stated list -- a structured
+    # array is the stronger claim and prose must not be allowed to contradict it.
+    #
+    # HERE rather than in the strategy (acquire-time parsing would make a better regex cost a
+    # re-fetch) and rather than in gen_set_contents.py (which cannot reach `contentSkus` at all,
+    # since it is written only from hints, and whose coverage test cross-checks the relation
+    # against exactly this field). See resolve/set_refs.py, which argues all four candidate homes.
+    #
+    # Measured 2026-08-07 over all 22,529 committed products (11,503 with a description): 24
+    # products derive a list, all `warlord-games`, 90 refs, 0 false positives anywhere else in the
+    # corpus. Those 24 are the AK "Quick Gen" boxes Warlord resells, and their descriptions come
+    # from `legacy-catalog` -- a frozen curated import with `strategy: none`, so no strategy
+    # change could ever have produced them.
+    if fields["contentSkus"] is None and fields["description"]:
+        derived = content_skus_from_description(str(fields["description"]))
+        if derived:
+            fields["contentSkus"] = derived
+            fields["contentSkusFrom"] = "description"
+    if fields["contentSkus"] is not None:
+        fields.setdefault("contentSkusFrom", "stated")
 
     fields.setdefault("category", None)
     if fields["category"] is None:

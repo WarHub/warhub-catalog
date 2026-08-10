@@ -332,3 +332,55 @@ def test_a_product_with_no_contents_hint_states_nothing_rather_than_empty() -> N
     the same reason."""
     product = resolve_attributes("e", [obs("mfr-gw:a")], KINDS, NO_EAN, None)
     assert product.contentSkus is None
+
+
+# --- contentSkus derived from the source's own prose (resolve/set_refs.py) ----------------------
+
+QUICK_GEN = (
+    "QUICK GEN colour set for painting WWII German soldiers.\n\nContains:\n\n"
+    "- AK17071 GERMAN GREY\n- AK17072 FIELD GREY\n- AK17049 BLACK\n"
+)
+
+
+def test_contents_are_derived_from_a_description_when_no_source_states_them() -> None:
+    """Only mfr-reaper hands us a contents array; every other brand writes the codes into its
+    description. Deriving HERE -- not in the strategy, not in gen_set_contents.py -- is what puts
+    the refs on the product record, which is the field
+    test_set_contents.py::test_the_relation_covers_exactly_the_products_that_state_contents
+    cross-checks the whole relation against.
+
+    The 24 real cases come from `legacy-catalog` (kind: curated, strategy: none), a frozen import.
+    No strategy change could ever have produced them, which is why the parse cannot live upstream.
+    """
+    product = resolve_attributes(
+        "warlord-games/AK17501",
+        [obs("legacy-catalog:a", hints={"description": QUICK_GEN})],
+        KINDS, NO_EAN, "AK17501",
+    )
+    assert product.contentSkus == ["AK17071", "AK17072", "AK17049"]
+    assert product.contentSkusFrom == "description"
+
+
+def test_a_stated_contents_array_is_never_overridden_by_prose() -> None:
+    """A machine-readable array is the stronger claim and is exhaustive by construction; a prose
+    list is editorial and may be a lower bound. Prose must not be allowed to contradict it, and
+    `contentSkusFrom` must keep saying which one a consumer is looking at."""
+    product = resolve_attributes(
+        "reaper/09901",
+        [obs("mfr-gw:a", hints={"contentSkus": ["09030", "09031"], "description": QUICK_GEN})],
+        KINDS, NO_EAN, None,
+    )
+    assert product.contentSkus == ["09030", "09031"]
+    assert product.contentSkusFrom == "stated"
+
+
+def test_a_description_stating_no_membership_leaves_contents_unset() -> None:
+    """`None` reads as "no source said what is in this box", which is a different claim from "this
+    box is empty". Measured 2026-08-07, 11,479 of the 11,503 committed descriptions land here."""
+    product = resolve_attributes(
+        "games-workshop/x",
+        [obs("mfr-gw:a", hints={"description": "A single 18ml bottle of intense white."})],
+        KINDS, NO_EAN, None,
+    )
+    assert product.contentSkus is None
+    assert product.contentSkusFrom is None

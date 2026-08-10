@@ -220,3 +220,29 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
         assert item["name"]
         assert item["manufacturer"] in taxonomy.manufacturers
     assert [item["entity"] for item in queue] == sorted(item["entity"] for item in queue)
+
+
+def test_html_is_flattened_before_the_description_is_truncated() -> None:
+    """The 300-char window is a BUDGET, and markup spends it on nothing. Measured 2026-08-07 over
+    the 999 live rows of AK's `paints-acrylics` category, a raw window is 45% prose on average and
+    512 rows are under half prose -- and all 256 AK boxed sets have a null gameSystem, so all 256
+    reach this queue. Flattening here rather than at acquire time is deliberate: retuning a prompt
+    is free, retuning what was STORED costs a re-fetch (see strategies/woo_paints.py)."""
+    from warhub_acquisition.classify.queue import _DESCRIPTION_LIMIT, _prompt_description
+
+    raw = (
+        '<span class="collapseomatic " id="englang" title="ENGLISH">ENGLISH</span>'
+        '<div id="target-englang" class="collapseomatic_content ">\n'
+        "<p>A <strong>QUICK GEN</strong> colour set for WWII German soldiers &#8211; three "
+        "tones.</p>\n</div>"
+    )
+    flattened = _prompt_description(raw)
+    assert "<" not in flattened
+    assert flattened.startswith("ENGLISH A QUICK GEN colour set")
+    assert "\u2013 three tones." in flattened  # &#8211; unescaped, not left as an entity
+
+    # Tag-free descriptions are untouched, so this is byte-identical for the 11,949 of 11,953
+    # committed descriptions that carry no markup at all.
+    plain = "Contains:\n\n- AK17071 GERMAN GREY\n- AK17072 FIELD GREY\n"
+    assert _prompt_description(plain) == plain
+    assert len(_prompt_description("x" * 500)) == _DESCRIPTION_LIMIT

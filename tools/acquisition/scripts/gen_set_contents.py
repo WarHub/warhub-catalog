@@ -41,7 +41,12 @@ CONSUMES data/paints/brands/*.yaml. Its other input, data/catalog/products/*.yam
 `warhub-data resolve` in a different workflow. So it is wired into both
 (.github/workflows/paint-catalog-update.yml after the tool step, catalog-acquire.yml after
 "Resolve catalog"), and what actually stops it going stale is the byte-compare test in
-tests/test_gen_set_contents.py, not the workflow placement.
+tests/test_set_contents.py, not the workflow placement.
+
+TWO PROVENANCES, ONE RELATION. `contentSkus` now reaches a product record two ways -- a source's
+own contents array, or resolve/set_refs.py reading the codes out of the source's prose -- and a set
+records which via `from:`. Prose is the weaker claim (not guaranteed exhaustive) and the relation
+must not launder that away; see CanonicalProduct.contentSkusFrom for the measurements.
 
 Runnable directly: `uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py`
 """
@@ -90,12 +95,32 @@ from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 # brands is unresolved with all the candidates named. It is never decided by list order -- the
 # order only bounds the search, never breaks a tie.
 #
-# A manufacturer with contentSkus and no entry here is REFUSED loudly and gets no file, which is
-# what tests/test_gen_set_contents.py::test_file_roster_matches_manufacturers_with_contentskus
-# turns into a CI failure. That is deliberate: a new set-shipping manufacturer needs a human to
-# state its paint brands, not a heuristic to pick one.
+# A manufacturer with contentSkus and no entry here is REFUSED loudly and gets no file, which
+# tests/test_set_contents.py::test_the_relation_covers_exactly_the_products_that_state_contents
+# turns into a CI failure -- its `declared` side scans the product records, so a refused
+# manufacturer shows up as `missing`. (This comment previously named a
+# tests/test_gen_set_contents.py::test_file_roster_matches_manufacturers_with_contentskus that has
+# never existed in this repo; the property held, the citation did not.) That is deliberate: a new
+# set-shipping manufacturer needs a human to state its paint brands, not a heuristic to pick one.
 MANUFACTURER_BRANDS = {
     "reaper": ["reaper"],
+    # No longer inert. resolve/set_refs.py derives contentSkus from a set's own description, and
+    # measured 2026-08-07 that selects 24 warlord-games products -- the AK "Quick Gen" boxes
+    # Warlord resells -- carrying 90 refs. `ak-interactive` answers 87 of them; `army-painter` is
+    # listed beside it because 23 warlord product rows carry an Army Painter code, and measured, 0
+    # of these 90 refs resolve there, so naming both brands introduces no ambiguity today and
+    # states the real search space rather than a lucky one.
+    "warlord-games": ["army-painter", "ak-interactive"],
+    # PRE-DECLARED AND INERT UNTIL `mfr-ak-interactive` IS NEXT ACQUIRED. The refusal rule above
+    # exists so a heuristic never picks a brand -- but the human it demands is the author of this
+    # commit, who has measured which archive answers these refs, so stating it now is the rule
+    # being followed rather than dodged. AK's 256 boxed-set product rows carry 0 descriptions today
+    # (the source's hint keys are exactly {category, categorySlugs} across all 1,142 observations),
+    # so this entry currently selects nothing. Once woo_paints.py's short_description capture lands
+    # in evidence and `warhub-data resolve` runs, live-measured 2026-08-07 against those same 256
+    # rows: 210 yield a member list, 1,210 refs -> 1,176 members, 33 refusals over 17 distinct
+    # codes, 0 ambiguous.
+    "ak-interactive": ["ak-interactive"],
 }
 
 HEADER = """\
@@ -120,10 +145,34 @@ HEADER = """\
 # zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: all 802 refs are
 # 5 chars, the archive stores 0 codes with a leading zero, 744 refs match only after stripping
 # and 58 match verbatim (56 89xxx Bones Ultra-Coverage plus the two unresolved 29xxx). No ref
-# needs any other rule.
+# needs any other rule -- and AK needs none at all: its refs are alpha-prefixed, so `lstrip("0")`
+# is a no-op on every one of them, and the archive already stores the same zero-padded form the
+# source prints (AK004, AK012, AK088). Do NOT "helpfully" extend the rule to strip zeros after the
+# prefix. AK011/AK012/AK088/AK089 are genuinely absent from data/paints/brands/ak-interactive.yaml
+# and AK11/AK88 do not exist either, so the only thing such a rule could do is convert honest
+# refusals into silent misses.
 #
-# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason.
-# Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich, HarvestApplier.ApplyEnrichment).
+# `from` ON A SET says where its refs came from, and the two are not the same claim. "stated" is a
+# machine-readable contents array the source published (mfr-reaper's `associatedProducts`) and is
+# exhaustive by construction. "description" is resolve/set_refs.py reading codes out of the
+# source's own prose, which is NOT guaranteed exhaustive -- measured live 2026-08-07, 46 of AK's
+# 256 boxed-set pages state a colour COUNT in words and enumerate nothing, and 6 print a second,
+# explicitly not-included bulleted list in the identical shape. Treat a "description" set as a
+# lower bound on the box; treat a "stated" one as the box.
+#
+# ONE PHYSICAL BOX MAY APPEAR TWICE, under two manufacturers, and that is intended rather than a
+# bug to de-duplicate. AK's 24 "Quick Gen" boxes are sold by Warlord too, and because AK publishes
+# ZERO barcodes anywhere the two product records can never join -- so `warlord-games/AK17522` and
+# `ak-interactive/AK17522` are two records of one box, each stating its contents from its own
+# source's words. This relation is keyed by PRODUCT id, not by box, so both belong in it; a test
+# forbidding identical member sets under different manufacturers would forbid a true statement.
+# What would be wrong is one of them silently winning.
+#
+# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason, and so
+# does a code the same set lists TWICE -- see the repeat branch in resolve_manufacturer for the
+# AK17068 OLD GOLD / COLD STEEL typo that makes the difference between a visible refusal and a
+# silently halved set. Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich,
+# HarvestApplier.ApplyEnrichment).
 # THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
 # hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
 # material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
@@ -168,8 +217,28 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
     for product in sorted(products, key=lambda p: p["id"]):
         members: list[dict] = []
         unresolved: list[dict] = []
+        seen_refs: set[str] = set()
         for ref in product["contentSkus"]:
             n_refs += 1
+            # A CODE THE SOURCE LISTS TWICE IN ONE BOX IS REFUSED, not resolved twice. Measured
+            # 2026-08-07: warlord-games/AK17522 "Metallics" enumerates AK17068 as both "OLD GOLD"
+            # (which the archive confirms at AK17068) and "COLD STEEL" (which the archive holds at
+            # AK17070) -- a typo in AK's own copy. Resolving both occurrences would claim the box
+            # holds two pots of Old Gold and lose Cold Steel entirely; de-duplicating upstream
+            # would lose it just as silently. Refusing the repeat is the only outcome that leaves
+            # a trace, and the trace is what sends a reviewer to the description.
+            #
+            # Inert for reaper, which is why the committed file does not move: strategies/reaper.py
+            # builds contentSkus from a SET, and reapermini.com repeats no sku in any of its 31 set
+            # items anyway (measured live 2026-08-07 over 848 associatedProducts entries).
+            if ref in seen_refs:
+                unresolved.append({
+                    "ref": ref,
+                    "reason": "this set lists the same product code more than once; see the "
+                              "product record's description for the differing stated names",
+                })
+                continue
+            seen_refs.add(ref)
             # verbatim first, then leading-zero-stripped -- see the header. `or ref` keeps an
             # all-zero code from normalising to "" and matching the blank-code bucket.
             # Collected across every listed brand: a code that names one paint in two different
@@ -211,7 +280,15 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
                 })
         n_members += len(members)
         n_unresolved += len(unresolved)
-        entry: dict = {"name": product.get("name") or "", "brand": brands}
+        # `from` is copied off the product record, never inferred here: the generator cannot tell
+        # a prose-derived list from a stated one by looking at the refs, and guessing would be
+        # exactly the laundering this field exists to prevent. Defaults to "stated" so a record
+        # written before the field existed reads as the stronger claim it was.
+        entry: dict = {
+            "name": product.get("name") or "",
+            "brand": brands,
+            "from": product.get("contentSkusFrom") or "stated",
+        }
         if members:
             entry["members"] = sorted(members, key=_member_sort_key)
         if unresolved:
