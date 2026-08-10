@@ -75,6 +75,109 @@ aliases:
     'Dipping Inks|Green Stone Dip 17 ml|4220|#4B5345': 'Dipping Inks|Green Stone Dip|4220|#4B5345'
     'Dipping Inks|Nightshade Purple Dip 17 ml|4231|#533968': 'Dipping Inks|Nightshade Purple Dip|4231|#533968'
 
+# Retractions. `{Set}|{Name}|{ProductCode}|{Hex}` -- the same grammar as `aliases:` above and the
+# same whole-string NameNormalizer pass, so readable casing here is cosmetic. Everything else must
+# be exact: the ` - ` separators, the `(x4)` suffixes, and the trailing pipe an empty hex leaves.
+#
+# This is the ONLY code path in the pipeline that DELETES an archived record. Everything else is
+# append-only; CatalogReconciler subtracts exactly this set (:52-55 on the input side, :104 on the
+# output side) and nothing else. Keys are matched with an ORDINAL HashSet, so a mistyped key is a
+# silent no-op with no error, no warning and no log line -- it looks exactly like success while
+# the record stays. Every key below was GENERATED from the record it names rather than transcribed,
+# then round-tripped through YAML and checked back against PaintRecordAdapter.IdentityKey: 20/20
+# match, each exactly one archive record. `test_repo_data.py` pins that check.
+#
+# All 20 are boxed MULTI-POT SETS published as if each were a single pot (maintainer decision
+# 2026-08-05: a boxed set is a PRODUCT, not a paint). Each carries fabricated single-pot structure
+# -- `container: dropper`, `hex: ''`, `volumeMl: 17` (reaper's says 15) -- describing a cardboard
+# box that has no volume, no container and no colour. 19 green-stuff-world, 1 reaper; they are the
+# only archive records anywhere whose NAME says set/collection and whose hex is empty.
+#
+# THE ORDER MATTERS, AND THE RE-HOME IS ALREADY DONE. Commit 9c62fb2 moved 516 boxed sets into the
+# product catalog first. Each of the 19 Green Stuff World box GTINs is now the primary `ean` of
+# exactly one `category: paint-set` product with `eanConfidence: confirmed`, under the id
+# `green-stuff-world/<the very productCode its key below carries>` (8435646528441 ->
+# green-stuff-world/13344 ... 8436574506310 -> green-stuff-world/10132). Uncovered: zero. Six of
+# the 19 match by GTIN but NOT by name -- the products keep the full store titles ("Chameleon
+# Acrylic Paint Set 1", "Paint Set - CHROME", "Metallic Paints Set - Colours/Gold/Silver") -- so a
+# name-based re-verification reports false gaps; join by barcode. Reaper's set has no barcode on
+# EITHER side (the paint record's `ean` is null and product reaper/09985 carries none), so it
+# retracts with nothing to preserve. Commit 725dc0e taught `report --ean-guard` to call a barcode
+# that crossed into the product catalog `moved` rather than `lost`, so these 19 report as moved
+# and the run stays green; retracting BEFORE the re-home would have been 19 genuine losses.
+#
+# THE ARCHIVE DOES NOT CHANGE IN THIS COMMIT, DELIBERATELY. `data/paints/brands/*.yaml` still holds
+# all 20 records; only the paint tool can remove them, and it is not run here. Reading this block
+# as "already retracted" is the mistake to avoid -- until the next full authoritative run, the 20
+# are still published.
+#
+# The generator stopped PROPOSING them in 6b3c930: all 20 sit in `candidates:` in
+# data/paints/harvest/{green-stuff-world,reaper}.yaml under `reason: boxed set -- crosses to the
+# product catalog` (by sku for the six GSW rows whose store title differs from the archived name),
+# and none appears in either file's `enrich:` or `additions:`. They are therefore already absent
+# from `fresh`, so it is the OUTPUT-side arm that does the work this run; the input-side arm guards
+# a re-listing -- but only one AT THE SAME IDENTITY. The key includes hex, and all 20 are hexless,
+# so if a source ever supplies a colour for one of these boxes the fresh key differs,
+# `retracted.Contains(freshKey)` is false, and the auto-alias that would map the hex key back to
+# the hexless one is itself refused (CatalogReconciler.cs:82 `!retracted.Contains(canonicalKey)`).
+# The box would then be inserted as a brand-new record with today's firstSeen. Nil risk today
+# (0 swatch keys, 0 enrich keys, 0 additions for all 20), and stated because "standing guard"
+# overclaims otherwise.
+#
+# Nothing else in data/paints refers to them: 0 hits in equivalences.yaml (an empty hex is excluded
+# from equivalence matching), 0 in swatches/*.yaml, 0 in the `additions:`/`aliases:`/field-override
+# sections of this file, and 0 as any record's `supersedes`/`supersededBy` -- nor does any of the 20
+# declare lineage of its own. Their 20 `_liveness.yaml` entries (all `lastSeen: '2026-07-24'`,
+# `missStreak: 0`) become orphans the moment they leave `reconciled.Records`, and
+# LedgerMaintenance.PruneOrphans deletes them -- but ONLY on a FULL run (PaintCatalogApp.cs:452
+# `fullRun = authoritativeRun && brandFilter is empty`, :579). A `--brand` or `--sample` run
+# retracts the records and leaves 20 stale ledger rows behind.
+#
+# ONE HAND-RUN CAVEAT, shared with the monument-pro-acryl `ean:` correction that lands beside this
+# block. That correction hands three dropper records their own barcodes, so the three 1-Step
+# barcodes they were wrongly carrying (655368408984 / 655368429989 / 655368417375) briefly belong
+# to no record and `warhub-data report --ean-guard` exits 5 with three `paint_lost` findings.
+#
+# The window closes at COMMIT, not at the tool run. `check_ean_guard` diffs HEAD against the
+# WORKING TREE (report.py `_head_yaml_files`/`_head_document`), so it is only ever comparing
+# uncommitted edits: once HEAD carries the corrected `ean:` values, HEAD no longer attests the
+# three old barcodes and there is nothing to find. An earlier draft of this comment said the
+# window stayed open until the tool minted the 1-Step records, which was wrong about both the
+# mechanism and the duration.
+#
+# CI is unaffected either way: the guard's only paint-side enforcement point is
+# paint-catalog-update.yml, which runs it AFTER the tool (:102-108), and ci.yml does not run it.
+retract:
+  green-stuff-world:
+    - 'Acrylic Inks|Acrylic Inks Set - Basic Opaque (x4)|13344|'
+    - 'Acrylic Inks|Acrylic Inks Set - Basic Transparent (x4)|13348|'
+    - 'Acrylic Inks|Acrylic Inks Set - Fluor (x4)|13347|'
+    - 'Acrylic Inks|Acrylic Inks Set - Opaque Nature (x4)|13345|'
+    - 'Acrylic Inks|Acrylic Inks Set - Sunset Opaque (x4)|13346|'
+    - 'Acrylic Inks|Acrylic Inks Set - Transparent Fire (x4)|13351|'
+    - 'Acrylic Inks|Acrylic Inks Set - Transparent Nature (x4)|13349|'
+    - 'Acrylic Inks|Acrylic Inks Set - Transparent Shades (x4)|13350|'
+    # `Set 1/2/3` are the names as ARCHIVED, not abbreviations: gsw_clean_name stripped the range
+    # prefix off "Chameleon Acrylic Paint Set 1". The products keep the full store titles.
+    - 'Chameleon Colorshift Metallic|Set 1|9340|'
+    - 'Chameleon Colorshift Metallic|Set 2|9341|'
+    - 'Chameleon Colorshift Metallic|Set 3|9349|'
+    - 'Chrome|Paint Set - Chrome|10133|'
+    - 'Dipping Inks|Paint Set - Dipping collection 01|11693|'
+    - 'Dipping Inks|Paint Set - Dipping collection 02|11694|'
+    - 'Fluorescent|Set x8 Fluor Paints|9353|'
+    - 'Metallic Colors|Vivid Metallic Paints Set|10132|'
+    # Same artefact, uglier: "Metallic Paints Set - Colours" lost its "Metallic Paint" prefix and
+    # kept the orphaned "s". These three keys are correct AS WRITTEN -- "fixing" them makes the
+    # retraction silently miss, and the three records stay in the archive looking retired.
+    - 'Metallic Colors|s Set - Colours|9912|'
+    - 'Metallic Colors|s Set - Gold|9911|'
+    - 'Metallic Colors|s Set - Silver|9910|'
+  reaper:
+    # Double-quoted rather than single: a single-quoted YAML scalar would need `Sophie''s`, which
+    # reads like a typo in the one entry that can least afford to look like one.
+    - "Master Series Paints Core Colors|Sophie's Mystery Paint Set|9985|"
+
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
 # the bridge and the VolumeTable. Keep every entry cited -- these are asserted facts.
