@@ -138,6 +138,34 @@ public class VolumeEnricherTests
         Assert.NotNull(enriched.VolumeMl);
     }
 
+    [Theory]
+    [InlineData("Citadel Colour", "Base")]
+    [InlineData("Green Stuff World", "Primer")]
+    [InlineData("Vallejo", "Pigment FX")]
+    [InlineData("Unknown Brand", "Unknown Set")]
+    public void Enrich_NoRuleInTheTableStatesAMass(string brand, string set)
+    {
+        // The table CAN carry a weight since 2026-08-06 (VolumeRule gained a trailing `int?
+        // WeightG`) and deliberately carries none: measured across 8,547 records, no (brand, set)
+        // is weight-sold as a range, and the only two weight-sold records sit in the genuinely
+        // mixed Green Stuff World `Primer` set which no constant can describe. `Pigment FX` is
+        // here because it is the tempting one -- 29 records of real dry powder that the table
+        // prices at 30 ml with zero corroboration in any of the 29 evidence sources. Guessing
+        // grams there would replace an unevidenced volume with an unevidenced mass.
+        Assert.Null(VolumeEnricher.Enrich(MakePaint(set), brand).WeightG);
+    }
+
+    [Fact]
+    public void Enrich_LeavesAnAlreadyStatedMassAloneWhenNoRuleMatches()
+    {
+        // Ordering insurance. VolumeEnricher runs first in the chain today (PaintCatalogApp.cs:223)
+        // so nothing has stated a mass by the time it fires; if that ever stops being true, an
+        // unmatched brand must still not silently drop one.
+        Paint carried = MakePaint("Unknown Set") with { WeightG = 250 };
+
+        Assert.Equal(250, VolumeEnricher.Enrich(carried, "Unknown Brand").WeightG);
+    }
+
     [Fact]
     public void Enrich_PreservesOtherFields()
     {

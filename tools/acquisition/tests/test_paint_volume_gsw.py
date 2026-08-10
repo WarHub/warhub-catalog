@@ -39,9 +39,13 @@ accept both endpoints and reject the states in between.
 
 WHAT IS NOT COVERED, stated so the coverage is not overread: 254 of the 412 records have no
 `hints.ml` to join against (the hint is on 158 of 477 observation rows) and 12 carry no ean at all.
-This module can neither confirm nor deny their 17. `Foam Primer and Coat - Black/Grey 250gr` are
-the two known-wrong members of that group -- sold by weight, still publishing 17 ml -- and no
-mechanism in this repair reaches them.
+This module can neither confirm nor deny their 17. `Foam Primer and Coat - Black/Grey 250gr` were
+the two known-wrong members of that group -- sold by weight, still publishing 17 ml. They are now
+covered by test_paint_weight.py instead, through a `weightG:` assertion rather than a millilitre
+one: the answer was a contract change (the write path could not say "no volume" at all), not a
+figure this module could have found, and there is no gram hint in the evidence to join against.
+The only trace of them here is the container assertion at the bottom, which now has to accept a
+weight-sold record carrying NO container at all.
 """
 import json
 import re
@@ -318,11 +322,12 @@ class TestTheArchiveAgreesWithTheManufacturer:
         """
         by_ean = _by_ean()
         by_name, by_slug, by_set = set(), set(), set()
-        containers = {}
+        containers, weights = {}, {}
         for record in _archive():
             details = record.get("details") or {}
             key = _key(record, details)
             containers[key] = details.get("container")
+            weights[key] = details.get("weightG")
             if "spray" in record["name"].lower():
                 by_name.add(key)
             if details.get("set") in SPRAY_SETS:
@@ -343,8 +348,20 @@ class TestTheArchiveAgreesWithTheManufacturer:
             "Before the paint tool none of them says spray and after it all of them do; a mix "
             f"means the row lists a set that is not an aerosol line: {sorted(sprayed ^ by_set)[:5]}"
         )
-        others = {v for k, v in containers.items() if k not in by_set}
-        assert others <= {TABLE_DEFAULT_CONTAINER}, (
+        # `None` is admissible from 2026-08-06 and only for a weight-sold record: the two 250 g
+        # foam-primer tubs had `container: dropper` from the same brand-wide row that gave them
+        # `volumeMl: 17`, and a mass assertion now clears the pair (Models/NetContents.cs). The
+        # committed vocabulary -- dropper/jar/pot/tin/spray -- has no word for a tub, so "no word
+        # for it" is the honest value. Every OTHER record must still be `dropper`, which keeps the
+        # decision recorded above (a 240 ml squeeze bottle stays visibly wrong, not confidently
+        # wrong) from being quietly reversed by nulling containers wholesale.
+        unjustified = {
+            key: value for key, value in containers.items()
+            if key not in by_set
+            and value != TABLE_DEFAULT_CONTAINER
+            and not (value is None and weights.get(key) is not None)
+        }
+        assert not unjustified, (
             "a non-aerosol Green Stuff World record carries a container this repair never "
-            f"justified: {sorted(others - {TABLE_DEFAULT_CONTAINER})}"
+            f"justified: {unjustified}"
         )

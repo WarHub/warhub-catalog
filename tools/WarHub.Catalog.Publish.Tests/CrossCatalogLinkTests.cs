@@ -178,6 +178,7 @@ public sealed class BarcodeIndexTests
         Type: null,
         Finish: null,
         VolumeMl: null,
+        WeightG: null,
         Container: null,
         ProductCode: null,
         Ean: ean,

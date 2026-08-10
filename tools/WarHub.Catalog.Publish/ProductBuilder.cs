@@ -88,6 +88,7 @@ internal static class ProductBuilder
                     Availability = p.Availability ?? "unknown",
                     Quantity = p.Quantity ?? 1,
                     VolumeMl = p.VolumeMl,
+                    WeightG = p.WeightG,
                     ProductCode = p.ProductCode ?? p.Sku,
                     Url = p.Url,
                     ImageUrl = p.ImageUrl,

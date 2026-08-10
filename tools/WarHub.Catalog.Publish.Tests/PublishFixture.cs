@@ -90,6 +90,20 @@ public sealed class PublishFixture : IDisposable
                 container: pot
                 type: Base
                 finish: Matte
+            - name: Weathering Powder Rust
+              category: paint
+              status: current
+              availability: unknown
+              firstSeen: '2026-07-07'
+              productCode: WP1
+              details:
+                set: Weathering
+                r: 140
+                g: 70
+                b: 20
+                hex: '#8C4614'
+                weightG: 35
+                container: jar
             - name: Mephiston Red
               category: paint
               status: discontinued

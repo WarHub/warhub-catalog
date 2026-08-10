@@ -22,8 +22,11 @@ public class PaintRecordSchemaTests
     [Fact]
     public void PaintDetails_FieldOrder()
     {
+        // `WeightG` sits immediately after `VolumeMl` because the two are the same fact measured
+        // two ways and the archive YAML should read that way; `container` follows both, as the
+        // vessel the contents are in. Property order here IS the on-disk key order.
         string[] expected =
-            ["Set", "R", "G", "B", "Hex", "VolumeMl", "Container", "Type", "Finish"];
+            ["Set", "R", "G", "B", "Hex", "VolumeMl", "WeightG", "Container", "Type", "Finish"];
         string[] actual = typeof(PaintDetails).GetProperties().Select(p => p.Name).ToArray();
         Assert.Equal(expected, actual);
     }

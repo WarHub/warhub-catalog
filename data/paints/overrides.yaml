@@ -974,11 +974,11 @@ green-stuff-world:
   # NO BARCODE MOVES, exactly as above: no `ean:` or `additionalEans:` appears in this block, so
   # `BarcodeSet.Union` writes nothing and `_check_paints` has nothing to report.
   #
-  # KNOWN WRONG AND OUT OF REACH, recorded rather than papered over: `Foam Primer and Coat - Black
-  # 250gr` and its Grey twin will still publish `volumeMl: 17, container: dropper` for a product
-  # sold in grams. There is no ml evidence to join on, and inventing one is the failure mode this
-  # whole repair exists to undo. Likewise 254 GSW records carry no `hints.ml` at all (the hint is
-  # on 158 of 477 observation rows), so no mechanism here can confirm or deny their 17.
+  # THE TWO KNOWN-WRONG RECORDS THIS COULD NOT REACH ARE NOW REACHED, by `weightG:` rather than by
+  # an ml figure -- see the block after the volume assertions below. What was out of reach was
+  # never the value, it was the CONTRACT: there was no way to say "sold by weight", and no way to
+  # clear a volume at all. 254 GSW records still carry no `hints.ml` (the hint is on 158 of 477
+  # observation rows), so no mechanism here can confirm or deny their 17; that gap is unchanged.
   Paint 60 ml|Blackest Black:
     volumeMl: 60
   Gloss Black Primer 60ml|Primer:
@@ -1009,6 +1009,48 @@ green-stuff-world:
     volumeMl: 60
   Flexible varnish 240ml|Varnish:
     volumeMl: 240
+  # --- SOLD BY WEIGHT, NOT BY VOLUME (2026-08-06) -----------------------------------------------
+  # The two records the ml repair above explicitly could not reach, and the only two in the whole
+  # 8,547-record paint archive that are measured in grams. Both are foam-primer TUBS; both were
+  # publishing `volumeMl: 17, container: dropper` inherited from the brand-wide Green Stuff World
+  # row (VolumeTable.cs:154), which is wrong in both of the fields it writes.
+  #
+  # `weightG:` IS THE CLEAR. There is no `volumeMl: null` here and there cannot be: YamlDotNet
+  # cannot tell an absent key from an explicit null on an `int?`, so a coalescing override
+  # (`over.VolumeMl ?? p.VolumeMl`, which is what this file's every other field still does) can
+  # only ever REPLACE a volume, never withdraw one. Stating the mass is what withdraws it --
+  # Models/NetContents.cs holds the rule and PaintRecordAdapter applies the same one to the
+  # archive merge, so the committed 17 is dropped rather than re-inherited on the next run.
+  # `container` goes with it: the committed vocabulary is exactly dropper/jar/pot/tin/spray
+  # (5385/1449/924/115/30 plus 644 null, measured 2026-08-06) and none of the five describes a
+  # tub, so these two records publish NO container -- "we have no word for it" is true where
+  # "it is a dropper bottle" is false.
+  #
+  # THE VALUE IS FROM THE RECORD'S OWN NAME, and that is weaker than the 15 assertions above and
+  # is said so plainly. Those joined each record's `ean` to `hints.ml` in the manufacturer's own
+  # observations; there is NO gram sibling to join against -- `_ML_RE` (sitemap_sd_paints.py:114)
+  # is the only size parser in the GSW strategy and it looks for ml only, so both rows carry
+  # `hints: {category, categorySlug, reference}` and no size at all. The name is nonetheless the
+  # SAME second signal that agreed 79/79 with the evidence on the ml half, the manufacturer wrote
+  # it, and `250gr` is unambiguous. tools/acquisition/tests/test_paint_weight.py re-derives both
+  # figures from the committed names on every CI run, so this is single-sourced but not unchecked.
+  #
+  # NOT hints.grams. 1,843 observations across four Shopify sources carry one and it is GROSS
+  # SHIPPING weight -- a brush is 3 g, an 18 ml dropper 26-31 g, a paint case 2450 g -- which
+  # gen_paint_harvest.py:82 already depends on it meaning. Wiring it to `weightG` would fabricate
+  # net contents on 1,843 records to fix these 2. GSW emits it on none of its 477 rows anyway.
+  #
+  # NOT A VolumeTable ROW, for the reason the block above already gives: their set is `Primer`,
+  # which is genuinely mixed (240 ml x3, 60 ml x6, plus these two), so no per-set constant can be
+  # right for it. A weight row in that table would need a whole set sold by mass and no such set
+  # exists -- measured 2026-08-06, no (brand, set) anywhere in the archive is weight-sold.
+  #
+  # NO BARCODE MOVES here either: no `ean:` or `additionalEans:`, so `BarcodeSet.Union` writes
+  # nothing.
+  Foam Primer and Coat - Black 250gr|Primer:
+    weightG: 250
+  Foam Primer and Coat - Grey 250gr|Primer:
+    weightG: 250
   # --- Colours carried across the three retractions above (2026-08-06) --------------------------
   # Each of these three keys names a paint that does NOT exist yet: `suffix_match`'s new set filter
   # files skus 1706/1702/2454 as additions instead of enrichments, and a harvest addition is born

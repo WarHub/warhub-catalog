@@ -43,6 +43,8 @@ internal sealed class PaintDetailsYaml
     public int B { get; set; }
     public string Hex { get; set; } = "";
     public int? VolumeMl { get; set; }
+    /// <summary>Net contents in grams; sibling of <see cref="VolumeMl"/>, never a replacement.</summary>
+    public int? WeightG { get; set; }
     public string? Container { get; set; }
     public string? Type { get; set; }
     public string? Finish { get; set; }
