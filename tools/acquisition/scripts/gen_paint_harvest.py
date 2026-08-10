@@ -67,12 +67,17 @@ OUT_DIR = REPO / "data/paints/harvest"
 # boxes commit 6b3c930 gated out were the gap between two of them.
 #
 # The bootstrap keeps this a PURE-PYYAML script: resolve/crossover.py imports only `re` and
-# `typing`, and the two package __init__ files this traverses import nothing third-party
-# (`resolve/__init__.py` is empty; `warhub_acquisition/__init__.py` holds only `__version__`), so
-# this adds no dependency and .github/workflows/paint-catalog-update.yml:75
-# (`uv run --with pyyaml python ...`) still runs unchanged. The RULES are read with plain pyyaml
-# below for the same reason -- loading the pydantic SourceDescriptor here would drag in pydantic.
+# `typing`, paints/catalog.py only `re`/`pathlib`/`yaml`, and the three package __init__ files
+# this traverses import nothing third-party (`resolve/__init__.py` and `paints/__init__.py` are
+# empty; `warhub_acquisition/__init__.py` holds only `__version__`), so this adds no dependency
+# and .github/workflows/paint-catalog-update.yml:75 (`uv run --with pyyaml python ...`) still
+# runs unchanged. The RULES are read with plain pyyaml below for the same reason -- loading the
+# pydantic SourceDescriptor here would drag in pydantic.
+#
+# `Catalog`/`norm` moved OUT of this file (2026-08-07) so gen_set_contents.py joins manufacturer
+# codes to paints through the same index rather than a second spelling of it -- f181a73's rule.
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
+from warhub_acquisition.paints.catalog import Catalog, norm  # noqa: E402
 from warhub_acquisition.resolve.crossover import matches as crossover_matches  # noqa: E402
 
 # SM (Speedpaint Marker) deliberately excluded: markers share paint NAMES with the Speedpaint
@@ -189,10 +194,6 @@ def is_set(observation: dict, source_id: str) -> bool:
     surface as `set-without-identity` in review/conflicts.yaml for a human to resolve.
     """
     return crossover_matches(observation, crossover_rule(source_id))
-
-
-def norm(s: str | None) -> str:
-    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
 
 
 def observed_price(observation: dict, source_id: str) -> dict:
@@ -330,88 +331,6 @@ def ean13_ok(value: str | None) -> bool:
         return False
     total = sum(int(d) * (3 if i % 2 else 1) for i, d in enumerate(digits[:12]))
     return (10 - total % 10) % 10 == int(digits[12])
-
-
-class Catalog:
-    """Existing brand catalog indexed for exact/normalized joins."""
-
-    def __init__(self, slug: str):
-        self.slug = slug
-        path = BRANDS_DIR / f"{slug}.yaml"
-        self.paints: list[dict] = []
-        if path.exists():
-            self.paints = yaml.safe_load(path.read_text(encoding="utf-8")).get("paints") or []
-        self.by_code: dict[str, str] = {}
-        self.by_name: dict[str, list[str]] = {}
-        self.keys: set[str] = set()
-        # Keys more than one paint answers to. "{Name}|{Set}" is the C# applier's whole lookup,
-        # so an enrich entry on such a key lands on EVERY paint sharing it -- one ean copied
-        # onto two different bottles. Real in this data: mr-hobby ships Mr Color 20 and 323 both
-        # named "Light Blue". A bridge must route these to candidates, not enrich.
-        self.ambiguous: set[str] = set()
-        self.by_key: dict[str, list[dict]] = {}
-        for p in self.paints:
-            s = (p.get("details") or {}).get("set") or ""
-            key = f"{p['name']}|{s}"
-            if key in self.keys:
-                self.ambiguous.add(key)
-            self.keys.add(key)
-            self.by_key.setdefault(key, []).append(p)
-            code = str(p.get("productCode") or "")
-            if code:
-                self.by_code.setdefault(code, key)
-            self.by_name.setdefault(norm(p["name"]), []).append(key)
-
-    def owner(self, key: str, sku: str | None) -> dict | None:
-        """WHICH of the paints answering to `key` this entry's `sku` names -- None if not one.
-
-        The lookup HarvestApplier performs (`r.ProductCode == entry.Sku`, ordinal
-        case-insensitive). None for a blank sku, for a sku no paint under this key carries, and
-        for a sku two of them somehow share. Identity is the dict itself: two paints are the
-        same paint iff they are the same record, so callers compare with `id()` rather than
-        re-deriving a key the archive may spell twice.
-
-        `pins` asks "will the C# land this entry at all"; this asks "on WHICH pot". They differ
-        exactly where the key is NOT ambiguous: `pins` is then True for any sku (there is only
-        one paint, the C# needs no tie-break), while this is None unless the sku really is that
-        paint's product code. `BrandHarvest.add_enrich` needs the second question -- see there.
-        """
-        code = (sku or "").casefold()
-        if not code:
-            return None
-        owners = [p for p in self.by_key.get(key, [])
-                  if str(p.get("productCode") or "").casefold() == code]
-        return owners[0] if len(owners) == 1 else None
-
-    def pins(self, key: str, sku: str | None) -> bool:
-        """Does this enrich entry name exactly ONE catalog paint?
-
-        True whenever the key is unique. When it is not, the entry's own `sku` has to settle
-        it -- the same test HarvestApplier applies (`r.ProductCode == entry.Sku`, ordinal
-        case-insensitive), so this answers the question "will the C# actually land this entry,
-        and on which paint?" rather than a second, differently-shaped guess.
-
-        Measured 2026-08-05: 66 ambiguous keys across the nine brands (57 Vallejo, 6 mr-hobby,
-        1 each ak-interactive / green-stuff-world / reaper), 35 of them carrying an enrich
-        entry -- every one Vallejo, which quotes no price at all. So this refuses nothing
-        today; it exists so that the first time a priced storefront ships a same-name,
-        same-set pair, the price is withheld instead of silently doubled onto both pots.
-        """
-        return key not in self.ambiguous or self.owner(key, sku) is not None
-
-    def match_code(self, code: str | None) -> str | None:
-        return self.by_code.get(code or "")
-
-    def match_name(self, name: str | None, set_hint: str | None = None) -> str | None:
-        """With a set_hint the match is IN-SET ONLY: a name that exists solely in some other
-        set must not cross-set match (a Fanatic-range store product sharing a name with an old
-        D&D-range paint planted the wrong SKU under the old live-enrichment flow). Without a
-        hint, a brand-wide unique name is trusted."""
-        keys = self.by_name.get(norm(name), [])
-        if set_hint is not None:
-            in_set = [k for k in keys if k.endswith(f"|{set_hint}")]
-            return in_set[0] if len(in_set) == 1 else None
-        return keys[0] if len(keys) == 1 else None
 
 
 def pinned_price(catalog: Catalog, key: str, sku: str | None, observation: dict,
@@ -633,7 +552,7 @@ def vallejo_code(raw_sku: str | None) -> str | None:
 
 
 def bridge_vallejo() -> BrandHarvest:
-    catalog = Catalog("vallejo")
+    catalog = Catalog("vallejo", BRANDS_DIR)
     prior_additions = previous_addition_codes("vallejo")
     out = BrandHarvest(catalog)
     for o in paint_rows("mfr-vallejo", out):
@@ -725,7 +644,7 @@ def bridge_ak() -> BrandHarvest:
     the Trello-tracked gaps (Quick Gen range, 3rd-gen review) come exactly from here. Sets,
     bundles, guides and everything without a clean AK-number SKU stay out; washes ride along
     as their own set. Additions are born colour-less; chart swatches heal them later."""
-    catalog = Catalog("ak-interactive")
+    catalog = Catalog("ak-interactive", BRANDS_DIR)
     prior_additions = previous_addition_codes("ak-interactive")
     out = BrandHarvest(catalog)
     for o in paint_rows("mfr-ak-interactive", out):
@@ -789,7 +708,7 @@ def tap_split(title: str) -> tuple[str | None, str]:
 
 
 def bridge_armypainter() -> BrandHarvest:
-    catalog = Catalog("army-painter")
+    catalog = Catalog("army-painter", BRANDS_DIR)
     prior_additions = previous_addition_codes("army-painter")
     out = BrandHarvest(catalog)
     for o in paint_rows("mfr-armypainter", out):
@@ -916,7 +835,7 @@ def bridge_monument() -> BrandHarvest:
     are `628504...`), `priceUsd` 6.0 (3; 71 are 5.0 and one is 6.25), and a
     `MH-22-ml-1step-*` image filename (3).
     """
-    catalog = Catalog("monument-pro-acryl")
+    catalog = Catalog("monument-pro-acryl", BRANDS_DIR)
     prior_additions = previous_addition_codes("monument-pro-acryl")
     out = BrandHarvest(catalog)
     rows = [o for o in paint_rows("mfr-monument", out)
@@ -962,7 +881,7 @@ def bridge_monument() -> BrandHarvest:
 
 
 def bridge_turbodork() -> BrandHarvest:
-    catalog = Catalog("turbo-dork")
+    catalog = Catalog("turbo-dork", BRANDS_DIR)
     prior_additions = previous_addition_codes("turbo-dork")
     out = BrandHarvest(catalog)
     paint_types = {"TurboShift", "Metallic", "ZeniShift", "Retail"}
@@ -1045,7 +964,7 @@ def bridge_scale75() -> BrandHarvest:
     the entry stops the wrong value being re-asserted, but `HarvestApplier.ApplyEnrichment` and
     `BarcodeEnricher` only ever blank-fill, so the record keeps what it has. Correcting it is the
     same archive pass the GSW dipping inks need, and this record belongs on its list."""
-    catalog = Catalog("scale75")
+    catalog = Catalog("scale75", BRANDS_DIR)
     prior_additions = previous_addition_codes("scale75")
     out = BrandHarvest(catalog)
     for o in paint_rows("mfr-scale75", out):
@@ -1255,7 +1174,7 @@ def bridge_gsw() -> BrandHarvest:
     own store category is allowed to reach -- see GSW_UMBRELLA_SETS). Enrichment carries
     the store's REAL gtin13 EANs (100% fill) + images; unmatched paints in mapped categories
     join as additions (cleaned name, mpn as productCode, EAN at birth)."""
-    catalog = Catalog("green-stuff-world")
+    catalog = Catalog("green-stuff-world", BRANDS_DIR)
     prior_additions = previous_addition_codes("green-stuff-world")
     out = BrandHarvest(catalog)
     # normed catalog name -> keys, for suffix lookup
@@ -1516,7 +1435,7 @@ def bridge_reaper() -> BrandHarvest:
     this loop sees them, so no ordering inside this bridge can expose one. `observed_price`
     asks the same predicate as a second line -- but only for a source that DECLARES one, so it
     is not the backstop an earlier version of this docstring implied it was for every source."""
-    catalog = Catalog("reaper")
+    catalog = Catalog("reaper", BRANDS_DIR)
     prior_additions = previous_addition_codes("reaper")
     out = BrandHarvest(catalog)
     for o in paint_rows("mfr-reaper", out):
@@ -1671,7 +1590,7 @@ def bridge_mrhobby() -> BrandHarvest:
     manufacturer range the catalog lacks, a store single, a barcode that fails its check digit
     -- lands in `candidates` for a human, never in the catalog.
     """
-    catalog = Catalog("mr-hobby")
+    catalog = Catalog("mr-hobby", BRANDS_DIR)
     out = BrandHarvest(catalog)
 
     # Pass 1 -- manufacturer: expand every series range onto catalog identities.

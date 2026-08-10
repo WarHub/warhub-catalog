@@ -165,8 +165,12 @@ def _catalog(monkeypatch, tmp_path: Path, paints: list[dict]) -> object:
     (tmp_path / "brand.yaml").write_text(
         yaml.safe_dump({"paints": paints}, sort_keys=False), encoding="utf-8"
     )
+    # `Catalog` takes its brands dir explicitly since it moved into
+    # warhub_acquisition.paints.catalog (shared with gen_set_contents.py): monkeypatching the
+    # script's module constant no longer reaches it, and passing the path is what the module
+    # asks for rather than a workaround.
     monkeypatch.setattr(harvest, "BRANDS_DIR", tmp_path)
-    return harvest.Catalog("brand")
+    return harvest.Catalog("brand", tmp_path)
 
 
 def _paint(name: str, set_name: str, code: str | None, hex_value: str) -> dict:

@@ -92,11 +92,18 @@ from __future__ import annotations
 import difflib
 import json
 import re
+import sys
 from pathlib import Path
 
 import yaml
 
 REPO = Path(__file__).resolve().parents[3]
+
+# Same pure-pyyaml bootstrap gen_paint_harvest.py uses (see its comment for why the import graph
+# matters): `norm` was the identical five-line body in both scripts until 2026-08-07.
+sys.path.insert(0, str(REPO / "tools/acquisition/src"))
+from warhub_acquisition.paints.catalog import norm  # noqa: E402
+
 EVIDENCE = REPO / "data/evidence/products/mfr-gw-trade/observations.jsonl"
 CITADEL = REPO / "data/paints/brands/citadel-colour.yaml"
 OUT = REPO / "data/paints/barcodes/citadel-colour.yaml"
@@ -106,10 +113,6 @@ _SET_FROM_TRADE = {
     "base": "Base", "layer": "Layer", "shade": "Shade", "contrast": "Contrast",
     "dry": "Dry", "technical": "Technical", "air": "Air", "spray": "Spray",
 }
-
-
-def norm(s: str | None) -> str:
-    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
 
 
 def clean_paint_name(raw: str) -> str:

@@ -69,9 +69,18 @@ class CanonicalProduct(BaseModel):
     # disagreeing about a box's contents is a conflict to surface, and unioning them would
     # fabricate a set neither one asserts.
     #
-    # QUANTITY IS NOT HERE and is not recoverable for Reaper: `strategies/reaper.py::_content_skus`
-    # builds a SET, so a box shipping two of one pot is already indistinguishable from one shipping
-    # one. Recovering it needs a strategy change and a re-acquire.
+    # QUANTITY IS NOT HERE and NO STRATEGY CHANGE CAN RECOVER IT -- the SOURCE never states it.
+    # This comment previously blamed `strategies/reaper.py::_content_skus` for building a SET, which
+    # was wrong in the way that costs someone a pointless re-acquire: it named a mechanism that is
+    # inert. Measured live 2026-08-07 over reapermini.com's three set-kind pages -- all 848
+    # `associatedProducts` entries on 31 set items carry exactly {sku, name, category, filename,
+    # material}, there is no count field of any kind, and 0 sets repeat a sku. So the set
+    # comprehension discards nothing on 100% of real data, and quantity is unknowable upstream.
+    # Should some future source state one, it lands in a SPARSE SIBLING field keyed by the same
+    # code, never by re-typing this list: absence must keep reading as "not stated", and a
+    # repeat-preserving list would silently assert a quantity of 1 on all 802 refs instead.
+    # The resolved relation in data/catalog/set-contents/ already reserves a per-member
+    # `quantity` key on the same terms, so a value arriving later is additive.
     # `| None`, like every other member of `_HINT_FIELDS`: `_first` yields None when no source
     # states one, and None reads correctly as "this source said nothing about the contents",
     # which is a different claim from "this box is empty".

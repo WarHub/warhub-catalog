@@ -1,0 +1,255 @@
+"""Generate data/catalog/set-contents/<manufacturer>.yaml — the boxed-set membership relation.
+
+CanonicalProduct.contentSkus holds the manufacturer's own RAW product codes for what a boxed set
+contains. Resolving them needs the PAINT catalog, which the product resolver deliberately never
+loads (see models/catalog.py:56-78), so the join happens ONCE, here, and the committed YAML is
+the audit trail — same architecture as gen_paint_barcodes.py and gen_paint_harvest.py, and the
+same posture: reads only committed files, no network, deterministic, byte-identical on re-run.
+
+WHY THE JOIN CANNOT BE DEFERRED TO A PUBLISHER. It is fuzzy in exactly one place — Reaper's site
+zero-pads product codes (`09412`) and the paint archive does not (`9412`) — and it is refusable
+in two more (a code naming zero paints, a code naming several). A publisher doing this inline
+would have to embed the normalisation rule and would have nowhere to put a refusal. Here both
+are visible in a diff.
+
+IDENTITY, and why each side is named the way it is:
+
+- The SET is keyed by `CanonicalProduct.id` (`reaper/09901`). It is stable and committed. Paint
+  ids are minted at publish time and so cannot appear on either side of this file.
+- A MEMBER is named by `paint` ("{Name}|{Set}", the C# paint catalog's own lookup key) PLUS
+  `productCode`. Both are required because {Name}|{Set} is NOT unique — paint identity is
+  set|name|productCode|hex — and `productCode` is the exact tie-break HarvestApplier
+  .ApplyEnrichment performs (`r.ProductCode == entry.Sku`, ordinal case-insensitive). Measured
+  2026-08-07: reaper has 491 keys over 492 paints, the one collision being
+  `Rose Gold|Master Series Paints Core Colors` (9337, 9608), which none of the 802 refs lands
+  on. So `productCode` is inert today and mandatory anyway — a member shape without it breaks
+  the first time a box contains one of a same-name pair.
+- `ref` is the source's own code VERBATIM, before normalisation. It is the audit link back to
+  the product record's `contentSkus`, and it is the only field showing both sides of the join.
+- `name` on a set is a REVIEW LABEL copied off the product record — 29 opaque ids is not a
+  reviewable relation. Never join on it; it is regenerated wholesale with the rest of the file.
+
+REFUSALS ARE RECORDED, NEVER GUESSED. A ref naming zero or several paints goes to `unresolved:`
+with its raw code and a reason (Catalog.pins, BrandHarvest.add_enrich,
+HarvestApplier.ApplyEnrichment — "guessing which of two paints a photo belongs to is worse than
+leaving both blank"). A file that reported 100% by dropping the misses would be the failure mode
+this whole exercise is about.
+
+WHERE IT RUNS. Downstream of BOTH pipelines, which is the structural difference from its two
+siblings: they run BEFORE the C# paint tool because they FEED it, this one runs AFTER because it
+CONSUMES data/paints/brands/*.yaml. Its other input, data/catalog/products/*.yaml, is written by
+`warhub-data resolve` in a different workflow. So it is wired into both
+(.github/workflows/paint-catalog-update.yml after the tool step, catalog-acquire.yml after
+"Resolve catalog"), and what actually stops it going stale is the byte-compare test in
+tests/test_gen_set_contents.py, not the workflow placement.
+
+Runnable directly: `uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py`
+"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import yaml
+
+REPO = Path(__file__).resolve().parents[3]
+PRODUCTS_DIR = REPO / "data/catalog/products"
+BRANDS_DIR = REPO / "data/paints/brands"
+OUT_DIR = REPO / "data/catalog/set-contents"
+
+# Same pure-pyyaml sys.path bootstrap gen_paint_harvest.py documents at length: this script runs
+# as `uv run --with pyyaml python ...` in CI, and both modules below import only stdlib + yaml.
+sys.path.insert(0, str(REPO / "tools/acquisition/src"))
+from warhub_acquisition.paints.catalog import Catalog  # noqa: E402
+from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
+
+# MANUFACTURER slug (data/catalog/products/) -> PAINT BRAND slug (data/paints/brands/).
+#
+# EXPLICIT BECAUSE THE FILENAME CANNOT IMPLY IT. The two directories are keyed by different
+# namespaces and they already disagree: monument-hobbies/monument-pro-acryl,
+# games-workshop/citadel-colour, mantic-games/army-painter. `reaper` matching `reaper` is a
+# coincidence, and inferring from it would silently resolve the next manufacturer's set against
+# the wrong catalog (or, worse, against a same-named file that happens to exist).
+#
+# A manufacturer with contentSkus and no entry here is REFUSED loudly and gets no file, which is
+# what tests/test_gen_set_contents.py::test_file_roster_matches_manufacturers_with_contentskus
+# turns into a CI failure. That is deliberate: a new set-shipping manufacturer needs a human to
+# state its paint brand, not a heuristic to pick one.
+MANUFACTURER_BRAND = {
+    "reaper": "reaper",
+}
+
+HEADER = """\
+# GENERATED by tools/acquisition/scripts/gen_set_contents.py -- do not hand-edit.
+#
+# WHAT IS IN EACH BOXED SET, resolved: every `contentSkus` ref on a CanonicalProduct
+# (data/catalog/products/) joined ONCE, here, against the paint archive
+# (data/paints/brands/), so a publisher only ever does an exact lookup. Reads only committed
+# files, no network, deterministic.
+#
+# A member names a paint by `paint` ({Name}|{Set}) PLUS `productCode`: {Name}|{Set} is not
+# unique (paint identity is set|name|productCode|hex) and `productCode` is the exact tie-break
+# HarvestApplier.ApplyEnrichment does. Paint ids are minted at publish time and cannot be used
+# here. `ref` is the source's own code VERBATIM, before normalisation -- the audit link back to
+# the product record. `name` on a set is a REVIEW LABEL off the product record; never join on
+# it. `brand` is the paint archive that was searched, and it is NOT derivable from this file's
+# name: data/catalog/products/ is keyed by manufacturer and data/paints/brands/ by brand, and
+# the two namespaces already disagree (monument-hobbies/monument-pro-acryl,
+# games-workshop/citadel-colour).
+#
+# CODE NORMALISATION: a ref is tried verbatim, then with leading zeros stripped. Reaper's site
+# zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: all 802 refs are
+# 5 chars, the archive stores 0 codes with a leading zero, 744 refs match only after stripping
+# and 58 match verbatim (56 89xxx Bones Ultra-Coverage plus the two unresolved 29xxx). No ref
+# needs any other rule.
+#
+# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason.
+# Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich, HarvestApplier.ApplyEnrichment).
+# THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
+# hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
+# material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
+# has no `linePages` entry in data/catalog/sources/mfr-reaper.yaml, and 29107 is missing from
+# the Core Colors singles population. The fix is to extend the descriptor and re-acquire.
+#
+# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX. They differ,
+# measured: reaper/08906's own description enumerates "09472-Dragon Blue" among its bottles
+# while `associatedProducts` instead lists 29815 "HD Dragon Blue". 09472 exists in the archive
+# and 29815 does not -- and the ref is still recorded as refused rather than repaired to 09472,
+# because a generator that rewrites a source's claim to make it resolve is worse than one that
+# refuses.
+#
+# QUANTITY. A member MAY carry `quantity: <int>` -- how many of that item the source states the
+# box contains. It is ABSENT on every member today and `counts.quantified` states that zero as
+# a number rather than as a silence. ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT; writing
+# `quantity: 1` everywhere would assert 800 facts reapermini.com never asserted and would be
+# unrecoverable, since a fabricated 1 is indistinguishable from a measured one. Measured
+# 2026-08-07 live against reapermini.com's three set-kind pages: all 848 `associatedProducts`
+# entries across 31 set items carry exactly {sku, name, category, filename, material} -- there
+# is no count field of any kind -- and 0 sets repeat a sku. So the set comprehension in
+# strategies/reaper.py::_content_skus discards nothing (it is a no-op on 100% of real data) and
+# NO strategy change can recover a quantity the source never states. A quantity arriving from
+# some future source ADDS this key to a member; it is not a schema change and needs no backfill.
+"""
+
+
+def _member_sort_key(member: dict) -> tuple:
+    return (member["ref"], member.get("paint", ""))
+
+
+def resolve_manufacturer(manufacturer: str, products: list[dict], catalog: Catalog) -> dict:
+    """The whole relation for one manufacturer: {counts, sets}."""
+    sets: dict[str, dict] = {}
+    n_refs = n_members = n_unresolved = 0
+    for product in sorted(products, key=lambda p: p["id"]):
+        members: list[dict] = []
+        unresolved: list[dict] = []
+        for ref in product["contentSkus"]:
+            n_refs += 1
+            # verbatim first, then leading-zero-stripped -- see the header. `or ref` keeps an
+            # all-zero code from normalising to "" and matching the blank-code bucket.
+            candidates = catalog.paints_for_code(ref) or catalog.paints_for_code(
+                ref.lstrip("0") or ref)
+            if len(candidates) == 1:
+                paint = candidates[0]
+                members.append({
+                    "ref": ref,
+                    "paint": catalog.key_of(paint),
+                    "productCode": str(paint.get("productCode") or ""),
+                })
+            elif not candidates:
+                unresolved.append({
+                    "ref": ref,
+                    "reason": f"no paint in brand '{catalog.slug}' carries this product code",
+                })
+            else:
+                # Refused, not decided by file order. reaper has 0 duplicated codes of 492 so
+                # this is dead for the only brand here today, but 198 codes across the 21 brand
+                # files are duplicated (measured 2026-08-07) -- see Catalog._paints_by_code.
+                unresolved.append({
+                    "ref": ref,
+                    "reason": (f"{len(candidates)} paints in brand '{catalog.slug}' carry this "
+                               f"product code: "
+                               + ", ".join(sorted(catalog.key_of(p) for p in candidates))),
+                })
+        n_members += len(members)
+        n_unresolved += len(unresolved)
+        entry: dict = {"name": product.get("name") or "", "brand": catalog.slug}
+        if members:
+            entry["members"] = sorted(members, key=_member_sort_key)
+        if unresolved:
+            entry["unresolved"] = sorted(unresolved, key=lambda u: u["ref"])
+        sets[product["id"]] = entry
+
+    quantified = sum(1 for s in sets.values() for m in s.get("members", []) if "quantity" in m)
+    return {
+        # Derivable from the body, and that is fine: `refs` vs `members` is the first thing a
+        # reviewer reads and the cheapest thing a reproducibility test can assert.
+        "counts": {
+            "sets": len(sets),
+            "refs": n_refs,
+            "members": n_members,
+            "unresolved": n_unresolved,
+            "quantified": quantified,
+        },
+        "sets": sets,
+    }
+
+
+def main() -> None:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    written: set[str] = set()
+    refused: list[str] = []
+
+    for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
+        manufacturer = path.stem
+        catalog_doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        products = [p for p in (catalog_doc.get("products") or []) if p.get("contentSkus")]
+        if not products:
+            continue
+        brand = MANUFACTURER_BRAND.get(manufacturer)
+        if brand is None:
+            refused.append(manufacturer)
+            continue
+        catalog = Catalog(brand, BRANDS_DIR)
+        if not catalog.paints:
+            # The paint archive is written by a different pipeline (the C# tool). On a fresh
+            # clone, or if this ever runs before that tool, resolving would refuse every ref and
+            # commit a file claiming the whole brand is missing. Skip instead -- same posture as
+            # gen_paint_barcodes.py's absent-evidence skip.
+            print(f"SKIP {manufacturer}: paint archive data/paints/brands/{brand}.yaml is empty "
+                  f"or absent; leaving any existing set-contents file untouched.")
+            written.add(manufacturer)
+            continue
+
+        relation = resolve_manufacturer(manufacturer, products, catalog)
+        out = OUT_DIR / f"{manufacturer}.yaml"
+        # write_bytes (not write_text) so the committed file is LF on every platform -- write_text
+        # would emit CRLF on Windows and churn the diff for a maintainer running this locally.
+        # dump_yaml (not yaml.safe_dump) because refs and product codes are zero-padded numeric
+        # strings: safe_dump emits `ref: 09148` unquoted, which a YAML 1.2 consumer reads as a
+        # number. yamlio force-quotes exactly that shape.
+        out.write_bytes((HEADER + dump_yaml({manufacturer: relation})).encode("utf-8"))
+        written.add(manufacturer)
+        counts = relation["counts"]
+        print(f"{manufacturer} -> {out.relative_to(REPO)}: {counts['sets']} sets, "
+              f"{counts['refs']} refs -> {counts['members']} members, "
+              f"{counts['unresolved']} unresolved, {counts['quantified']} with a quantity")
+        for set_id, entry in relation["sets"].items():
+            for u in entry.get("unresolved", []):
+                print(f"    UNRESOLVED {set_id} ref={u['ref']}: {u['reason']}")
+
+    # The output directory is written by nothing else, so a file with no surviving inputs is a
+    # fossil that a byte-compare test would happily pass. Delete it rather than let the relation
+    # outlive the relation it describes.
+    for stale in sorted(OUT_DIR.glob("*.yaml")):
+        if stale.stem not in written:
+            stale.unlink()
+            print(f"REMOVED stale {stale.relative_to(REPO)} (manufacturer states no contentSkus)")
+
+    for manufacturer in refused:
+        print(f"REFUSED {manufacturer}: states contentSkus but has no MANUFACTURER_BRAND entry -- "
+              f"add one naming its paint brand slug; nothing is guessed here.")
+
+
+if __name__ == "__main__":
+    main()
