@@ -276,6 +276,14 @@ additions:
 # entry here a changed name does not rename a record -- CatalogReconciler falls to step 4 and
 # MINTS a new one, stranding the old.
 aliases:
+  army-painter:
+    # Pairs with the `productCode: WP1406` override in the army-painter section below, which states
+    # the evidence. Without this line the correction would ADD a paint rather than fix one: the
+    # fresh record's identity key moves from ...|wp1405|... to ...|wp1406|..., the reconciler sees
+    # an unknown key, and the miscoded record stays in the archive forever beside it -- the exact
+    # duplicate the correction exists to remove. The old key is safe to name here because the
+    # override rewrites the code BEFORE reconciliation, so nothing else claims it this run.
+    Warpaints|Brainmatter Beige|WP1406|#F1F2E2: Warpaints|Brainmatter Beige|WP1405|#F1F2E2
   green-stuff-world:
     # gsw_clean_name stopped erasing the store's LEADING volume token on 2026-08-05 (17 ml and
     # 60 ml dipping inks are different skus with different gtin13s and prices; erasing it
@@ -890,6 +898,35 @@ retract:
 # NOT included, deliberately: Mechanicus Standard Grey and Mortarion Green Clear. They look culled
 # from the trade data but are LIVE on GW's storefront with lastChanceToBuy:false -- merely out of
 # stock. They were the two paints the bridge could not name-match, which is why they looked absent.
+army-painter:
+  # Brainmatter Beige is stamped WP1405, which is Basilisk Brown's code. Two paints, one code, and
+  # the source states no other. The correct code is WP1406, and that rests on three independent
+  # things agreeing rather than on any one witness:
+  #
+  #  1. THE SEQUENCE. WP1401-WP1421 is strictly alphabetical, with no exception:
+  #     Abomination Gore, Arid Earth, Babe Blonde, Banshee Brown, Basilisk Brown, [gap],
+  #     Castle Grey, Centaur Skin, Combat Fatigues, Commando Green, Corpse Pale, Crusted Sore,
+  #     Crypt Wraith, Cultist Robe, Dark Sky, Dirt Spatter, Drake Tooth, Dungeon Grey,
+  #     Elemental Bolt, Elf Green, Elven Flesh. "Brainmatter Beige" sorts after Basilisk Brown
+  #     and before Castle Grey -- exactly the gap. (The run breaks later, at WP1422 Orc Blood and
+  #     WP1425 Dark Stone, where The Army Painter renamed colours without renumbering them. The
+  #     argument is confined to the stretch where the rule demonstrably holds.)
+  #  2. THE VACANCY. WP1406 is claimed by NOTHING in the 776-record army-painter archive, and it
+  #     is the ONLY vacant code in that alphabetical stretch. A miscode leaves its true slot empty;
+  #     a genuine second product at WP1405 would not.
+  #  3. AN INDEPENDENT CATALOGUE. Mantic stocks the Warpaints line and lists WP1405 Basilisk Brown,
+  #     WP1406 Brainmatter Beige, WP1407 Castle Grey (data/catalog/products/mantic-games.yaml) --
+  #     a separate acquisition, from a separate site, whose neighbours match ours on both sides.
+  #
+  # Any one of these alone would be thin. Together they close: the gap the alphabet predicts, the
+  # gap the archive actually has, and the code a second retailer prints are the same code.
+  #
+  # The paired `aliases:` entry below is REQUIRED, not belt-and-braces -- productCode is part of
+  # the identity key, so rewriting it here mints a new record and strands the old one. The alias is
+  # what makes the reconciler treat this as the correction it is, preserving firstSeen.
+  Brainmatter Beige|Warpaints:
+    productCode: WP1406
+
 citadel-colour:
   # Only the forward direction is declared; `supersedes` on the Contrast records is derived from
   # these, so the two directions cannot drift. Deliberately NOT expressed as a status change: the
