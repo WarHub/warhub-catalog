@@ -1,7 +1,7 @@
 thresholds:
   close: 5
   substitute: 10
-totalEntries: 8092
+totalEntries: 8095
 equivalences:
 - source:
     brand: AK Interactive
@@ -176144,6 +176144,58 @@ equivalences:
 - source:
     brand: Green Stuff World
     brandSlug: green-stuff-world
+    name: Chrome Paint
+    productCode: 2454
+    set: Chrome
+    hex: '#FCFDFF'
+  matches:
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: RAF High Speed Silver
+      productCode: MMM-009
+      set: Mission Models
+      hex: '#FAFAFC'
+    deltaE: 0.75
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Varnish Gloss
+      productCode: AK11239
+      set: Primer (3rd Gen)
+      hex: '#FEFEFE'
+    deltaE: 1.07
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Matt Varnish
+      productCode: AMIG0089
+      set: Acrylics
+      hex: '#FEFEFE'
+    deltaE: 1.07
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Art White
+      set: Artist Range
+      hex: '#FEFEFE'
+    deltaE: 1.07
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Flat White, RAL 9003
+      productCode: RC004
+      set: Real Colors - Modern
+      hex: '#FFFFFF'
+    deltaE: 1.12
+    tier: close
+- source:
+    brand: Green Stuff World
+    brandSlug: green-stuff-world
     name: Copper 17ml
     productCode: 3694
     set: Chrome
@@ -178790,6 +178842,92 @@ equivalences:
       set: True Metallic Metal
       hex: '#13957B'
     deltaE: 3.86
+    tier: close
+- source:
+    brand: Green Stuff World
+    brandSlug: green-stuff-world
+    name: Violet
+    productCode: 1706
+    set: Fluorescent
+    hex: '#BE68E3'
+  matches:
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Violet 2
+      set: Layer paints
+      hex: '#9B66FF'
+    deltaE: 8.54
+    tier: substitute
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Hyacinth Blue
+      productCode: 85.055
+      set: Arte Deco
+      hex: '#986BB8'
+    deltaE: 9.07
+    tier: substitute
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Acid Pink
+      set: FX Range
+      hex: '#F81DFE'
+    deltaE: 9.61
+    tier: substitute
+- source:
+    brand: Green Stuff World
+    brandSlug: green-stuff-world
+    name: Yellow-orange
+    productCode: 1702
+    set: Fluorescent
+    hex: '#F89D68'
+  matches:
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Expert Flesh
+      productCode: 127C
+      set: Foundry Paint System
+      hex: '#FEA36A'
+    deltaE: 1.85
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Salmon
+      productCode: AK11061
+      set: Standard (3rd Gen)
+      hex: '#F5A175'
+    deltaE: 2.34
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Clear Pale Brown
+      productCode: SM215
+      set: Mr Color Lascivus
+      hex: '#F4A26A'
+    deltaE: 2.41
+    tier: close
+  - paint:
+      brand: Reaper
+      brandSlug: reaper
+      name: Enestreve Rose
+      productCode: 29179
+      set: Master Series Paints Core Colors
+      hex: '#FBA971'
+    deltaE: 3.4
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: British Desert Pink Zi
+      productCode: RC043
+      set: Real Colors - WWII
+      hex: '#F19161'
+    deltaE: 3.41
     tier: close
 - source:
     brand: Green Stuff World

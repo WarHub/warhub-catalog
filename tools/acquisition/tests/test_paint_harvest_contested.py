@@ -377,8 +377,8 @@ def test_two_volumes_of_one_ink_are_reported_not_published(evidence) -> None:
     """THE TRAP THIS TEST EXISTS FOR: in bridge_gsw a missing match is not a refusal.
 
     `suffix_match` returning None falls straight through to `GSW_SET_BY_CATEGORY`, and every one
-    of the 73 contested rows sits in a mapped category -- so "refuse both" implemented as "return
-    None" proposes 73 NEW paints. The refusal has to be routed to `candidates` by name.
+    of the 62 contested rows sits in a mapped category -- so "refuse both" implemented as "return
+    None" proposes 62 NEW paints. The refusal has to be routed to `candidates` by name.
     """
     evidence.catalog("green-stuff-world", [
         {"name": "Papyrus Dip", "productCode": None,
@@ -422,14 +422,22 @@ def test_an_uncontested_new_colour_still_becomes_an_addition(evidence) -> None:
 
 
 def test_a_refused_gsw_row_is_never_also_published() -> None:
-    """The same invariant over the committed file, where the count is 73 rows on 34 keys: no sku
-    reported as contested may appear as an enrich sku or an addition's productCode."""
+    """The same invariant over the committed file, where the count is 62 rows on 31 keys: no sku
+    reported as contested may appear as an enrich sku or an addition's productCode.
+
+    Was 73 on 34 until 2026-08-06, when `suffix_match` gained the set filter. The 11 rows and 3
+    keys that left were never a real contest: `White|Fluor Metallic`, `Orange|Fluor Metallic` and
+    `Yellow|Fluor Metallic` were CROWDED by rows the store files under other categories -- inks
+    reaching a fluor set -- and the refusal was the join's own blindness reported as a collision.
+    The 62 that remain are the genuine article, dipping inks whose 17 ml and 60 ml rows really do
+    both end with the one catalog name. See test_paint_harvest_gsw_sets.py.
+    """
     data = _committed("green-stuff-world")
     published = {str(e.get("sku")) for e in (data.get("enrich") or {}).values()}
     published |= {str(a.get("productCode")) for a in (data.get("additions") or [])}
     refused = [c for c in (data.get("candidates") or []) if str(c.get("reason", "")).startswith(CONTESTED)]
-    assert len(refused) == 73
-    assert len({c["reason"] for c in refused}) == 34
+    assert len(refused) == 62
+    assert len({c["reason"] for c in refused}) == 31
     assert [c for c in refused if str(c.get("sku")) in published] == []
 
 
@@ -442,7 +450,7 @@ def test_no_bridge_lets_a_contested_key_leave_in_silence() -> None:
     Runs all nine bridges against the committed evidence: a key `add_enrich` withheld must be
     absent from `enrich` AND present in the emitted candidates. That is ONE key today -- scale75's
     `Titanium Grey|Artist Range`, the only Mode B collision no bridge resolves for itself
-    (monument settles its four by code, gsw routes its 34 by hand, and vallejo's four are Mode A
+    (monument settles its four by code, gsw routes its 31 by hand, and vallejo's four are Mode A
     and are not withheld at all).
     """
     if not (REPO_ROOT / "data/evidence/products").exists():

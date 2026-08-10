@@ -470,16 +470,32 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
     Deliberately checks against the ARCHIVE, not against the harvest: a retraction is a statement
     about what is published, and `data/paints/brands/*.yaml` is what is published.
 
-    TWO LEGITIMATE STATES, and the assertion has to survive both. Before the paint tool runs,
-    every key names exactly one record. After it runs, every key names ZERO -- the records are
-    gone, which is the retraction working, and the block stays as the standing input-side guard.
-    An earlier draft asserted `matches == 1` unconditionally and would have turned red the moment
-    it succeeded.
+    TWO LEGITIMATE STATES, and the assertion has to survive both. Before the paint tool runs, a
+    key names exactly one record. After it runs it names ZERO -- the record is gone, which is the
+    retraction working, and the block stays as the standing input-side guard. An earlier draft
+    asserted `matches == 1` unconditionally and would have turned red the moment it succeeded.
 
-    So: no key may EVER name more than one record (that means the identity key is not
-    identifying), and the resolved count must be all-or-nothing. A MIXED state is the typo
-    signature -- 19 keys naming their record while the 20th names nothing is exactly the silent
-    no-op this exists to catch, and it is indistinguishable from success if you only count zeros.
+    THE ALL-OR-NOTHING RULE THAT STOOD HERE WAS WRONG, and 2026-08-06 is when it broke: it read
+    the whole file as one batch, so the first change to append a retraction beside an
+    already-applied one failed with 20 keys "suspect" that were simply done. `retract:` is a
+    standing declaration, not a queue -- entries accumulate and land in different runs, so a mixed
+    resolved/missing count is the NORMAL steady state of any file with more than one batch in it.
+
+    WHAT DISCRIMINATES INSTEAD, and it is sharper than counting. A key that names zero records is
+    either applied or mistyped, and those two look different in the archive: an APPLIED key's
+    record is gone entirely, while a MISTYPED key's record is still published under the (set,
+    name) the author was aiming at -- the typo is in the productCode or the hex or a separator,
+    which is precisely where these keys go wrong (`s Set - Colours`, the trailing empty-hex pipe).
+    So a zero-match key whose (set, name) pair is STILL in the archive is the silent no-op; a
+    zero-match key with no such record left is a retraction that worked. Measured on the committed
+    file: 20 boxed sets + reaper's, all applied, 0 near-misses; the 3 green-stuff-world singles
+    added today all resolve exactly.
+
+    Residual blind spot, stated rather than papered over: a key whose SET or NAME component is
+    itself mistyped names nothing and has no near-miss either, so it reads as applied. Nothing in
+    the file can distinguish that from a real deletion -- only the record's absence proves it --
+    which is why the retract block's own comment insists the keys be GENERATED from the records
+    rather than transcribed.
     """
     _require_repo_data()
     overrides_path = REPO_DATA / "paints/overrides.yaml"
@@ -490,8 +506,7 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
         pytest.skip("no retract: block declared")
 
     ambiguous = []
-    resolved = []
-    missing = []
+    mistyped = []
     for brand_slug, keys in retract.items():
         archive_path = REPO_DATA / "paints/brands" / f"{brand_slug}.yaml"
         assert archive_path.exists(), (
@@ -500,23 +515,36 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
         )
         archive = read_yaml(archive_path) or {}
         identities: dict[str, int] = {}
+        by_set_and_name: dict[tuple[str, str], list[str]] = {}
         for record in archive.get("paints") or []:
             key = _paint_identity_key(record)
             identities[key] = identities.get(key, 0) + 1
+            details = record.get("details") or {}
+            by_set_and_name.setdefault(
+                (_normalize(str(details.get("set") or "")), _normalize(str(record["name"]))), []
+            ).append(key)
         for authored in keys:
             # PaintOverrideAliases.Load normalizes the authored key as ONE string (:34).
             matches = identities.get(_normalize(str(authored)), 0)
-            (ambiguous if matches > 1 else resolved if matches == 1 else missing).append(
-                (brand_slug, authored, matches)
-            )
+            if matches > 1:
+                ambiguous.append((brand_slug, authored, matches))
+                continue
+            if matches == 1:
+                continue  # names its record; the retraction has not run yet
+            # Zero matches: applied, or aimed at a record that is still published.
+            parts = str(authored).split("|")
+            survivors = by_set_and_name.get(
+                (_normalize(parts[0]), _normalize(parts[1])), []) if len(parts) == 4 else []
+            if survivors:
+                mistyped.append((brand_slug, authored, survivors))
 
     assert not ambiguous, (
         "retract keys naming MORE than one committed record -- the identity key is not "
         f"identifying, and the retraction would delete several paints: {ambiguous}"
     )
-    assert not (resolved and missing), (
-        f"{len(resolved)} retract key(s) name their record while {len(missing)} name nothing. "
-        "All-or-nothing is the only honest state: before the paint tool every key resolves, "
-        "after it none does. A mix means the ones naming nothing are MISTYPED, and a mistyped "
-        f"key is a silent no-op that leaves the record published. Suspect: {missing}"
+    assert not mistyped, (
+        f"{len(mistyped)} retract key(s) name NOTHING while the record they aim at is still "
+        "published -- the productCode/hex/separator half of the key is wrong, and a mistyped key "
+        "is a silent no-op that leaves the record in the catalog looking retired. "
+        f"Authored key vs the identity keys still on file: {mistyped}"
     )
