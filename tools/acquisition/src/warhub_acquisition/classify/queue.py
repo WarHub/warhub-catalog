@@ -20,8 +20,8 @@ _DESCRIPTION_LIMIT = 300
 # never carried a gameSystem hint in the first place (that's why it resolved to null); description
 # gets its own dedicated, truncated field below, so it is excluded from the generic raw-hints
 # list too.
-# `contentSkus` is excluded for size, not for relevance: all 516 paint-set products have a null
-# gameSystem so all 516 reach this queue, and reaper/09956 alone carries 216 codes. A contents
+# `contentSkus` is excluded for size, not for relevance: EVERY paint-set product has a null
+# gameSystem, so all of them reach this queue, and reaper/09956 alone carries 216 codes. A contents
 # list tells an LLM nothing about a game system and would crowd the prompt.
 _EXCLUDED_HINT_KEYS = {"gameSystem", "faction", "description", "contentSkus"}
 
@@ -36,15 +36,22 @@ def _prompt_description(raw: object) -> str:
     means raw HTML, and a 300-char window taken off the front of that is mostly angle brackets.
     Measured 2026-08-07 over the 999 live rows of AK's `paints-acrylics` category: the raw window
     is 45% prose on average (median 49%, worst 5%), 512 of the 999 rows are under half prose, and
-    the leading run of markup alone averages 61 chars (max 115). All 256 of AK's boxed sets have a
-    null gameSystem, so all 256 reach this queue -- they would have arrived spending a third of
+    the leading run of markup alone averages 61 chars (max 115). EVERY one of AK's boxed sets has a
+    null gameSystem, so all of them reach this queue -- they would have arrived spending a third of
     their budget on `<span class="collapseomatic ...>`.
 
     THIS IS THE RIGHT LAYER FOR IT, and it is why acquire/strategies/woo_paints.py stores
     `short_description` unsliced: a retune of a PROMPT costs nothing, while a retune of what was
     stored costs a full re-fetch. Flattening is skipped entirely when there is no tag, so it is
-    byte-identical for the 11,949 of 11,953 committed descriptions that carry none (all
-    `legacy-catalog`; exactly 4 contain a tag).
+    byte-identical for the `legacy-catalog` descriptions, which are the bulk of the corpus and
+    almost never carry markup.
+
+    THE WOOCOMMERCE CASE IS NOT HYPOTHETICAL, and an earlier version of this note read as though it
+    were: it said only four committed descriptions contained a tag, which was true before AK was
+    acquired and is now wrong by three orders of magnitude. `mfr-ak-interactive`'s descriptions are
+    committed HTML and essentially every one carries a tag, so they are the population this function
+    exists for rather than a future one. Re-derive by grepping `"description":` and then for a tag
+    across data/evidence/products/*/observations.jsonl.
     """
     text = str(raw)
     if _TAG.search(text):

@@ -30,10 +30,14 @@ record:
                                  2026-07-30: 299 of the 307 multi-survivor codes are exactly this,
                                  and in 299/299 precisely ONE survivor shares the retired prefix.
   * ``conflicting``            -- one retired code asserted against two different survivors that a
-                                 regional split does NOT explain (filler codes reused across
-                                 unrelated products, e.g. an ISBN-barcoded `03040199135` against two
-                                 different terrain kits), OR a pair the register asserts in BOTH
-                                 directions. Never promote without a human.
+                                 regional split does NOT explain (a filler code reused across
+                                 unrelated products), OR a pair the register asserts in BOTH
+                                 directions -- which is the shape the bucket actually holds today.
+                                 The filler-code illustration here used to name an ISBN-barcoded
+                                 `03040199135` against two terrain kits; that pair moved to
+                                 ``stale-register-row`` when that bucket was introduced, so read it
+                                 as a shape to watch for, not a current instance. Never promote
+                                 without a human.
   * ``contradicts-declared``   -- the exact reverse of an edge already in matches.yaml. The
                                  declaration wins (it was verified against evidence; the register
                                  restates old rows), but the contradiction is named, not dropped.
@@ -273,11 +277,15 @@ def generate_supersession_proposals(paths: DataPaths) -> list[dict]:
         pair_key = (manufacturer, retired_code)
         successor = None
         if len(fan_out) > 1:
-            # GW's SS Code is the product's identity ACROSS a re-code -- 706 of 727
-            # register pairs keep it -- so among COMPETING claimants the one that kept
-            # the retired code's own SSC is the real successor and the rest are stale
-            # rows. Only ever used between claimants, NEVER as a veto on a lone edge:
-            # 9 already-declared pairs legitimately renumber their SSC.
+            # GW's SS Code is the product's identity ACROSS a re-code -- the register keeps
+            # it on the overwhelming majority of pairs -- so among COMPETING claimants the
+            # one that kept the retired code's own SSC is the real successor and the rest
+            # are stale rows. Only ever used between claimants, NEVER as a veto on a lone
+            # edge: a real minority of already-declared pairs DO legitimately renumber their
+            # SSC, so a lone edge that changes it is not thereby suspect. This comment used
+            # to put that minority at 9; the committed artifact has never agreed, so count
+            # `already-declared` rows whose retiredSsc and survivingSsc differ in
+            # data/review/supersession-proposals.yaml rather than trusting a number here.
             successor = _ssc_successor(
                 edge.get("retiredSsc"), survivor_ssc_per_code.get(pair_key, {}))
             # Regional editions SHARE their SSC, so a fan-out the SSC cannot split
