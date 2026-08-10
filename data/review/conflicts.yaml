@@ -191,26 +191,6 @@ conflicts:
         sources:
           - ret-radaddel
   - type: ean-mismatch
-    entity: games-workshop/age-of-sigmar-set-di-presentazione-ita
-    chosen: '5011921220908'
-    assertions:
-      - ean: '5011921220908'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921251452'
-        sources:
-          - mfr-gw-trade
-  - type: ean-mismatch
-    entity: games-workshop/age-of-sigmar-set-introductorio-esp
-    chosen: '5011921220915'
-    assertions:
-      - ean: '5011921220915'
-        sources:
-          - mfr-gw-trade
-      - ean: '5011921251469'
-        sources:
-          - mfr-gw-trade
-  - type: ean-mismatch
     entity: warlord-games/WGH-CEM-23
     chosen: '5060200849385'
     assertions:

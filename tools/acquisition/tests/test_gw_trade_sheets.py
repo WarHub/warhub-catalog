@@ -604,3 +604,43 @@ def test_replay_from_snapshot_rebuilds_observations_and_lineage_with_no_network(
     assert result.stats["workbooks"] == 1
     # a replay must never rewrite the file it just read
     assert "snapshot_rows" not in result.stats
+
+
+# --- Excel's dropped leading zero ---------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        (1010299044, "01010299044"),   # EU-region code typed as a NUMBER: leading zero eaten
+        ("1010299044", "01010299044"),
+        (2120712002, "02120712002"),
+        ("99120204035", "99120204035"),  # already 11 digits: untouched
+        (" 99120204035 ", "99120204035"),
+        ("101010004SP", "101010004SP"),  # non-numeric codes are never padded
+    ],
+)
+def test_code_restores_a_leading_zero_excel_dropped(raw, expected):
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _code
+
+    assert _code(raw) == expected
+
+
+def test_predecessor_code_is_zero_padded_too():
+    """A retired code that lost its zero would mint an archival record for a product code that
+    never existed -- and would not match the surviving catalog's 11-digit codes."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _predecessor
+
+    code, _, _ = _predecessor({"Old Product Code": 2120712002, "New Product Code": "60010299044"})
+    assert code == "02120712002"
+
+
+def test_short_code_that_is_a_truncated_real_code_is_left_alone():
+    """GW's own sheets carry typos. `6024999960` is `60249999604` with its LAST digit lost -- the
+    real code is asserted elsewhere with the same barcode. Padding it invented `06024999960`, a
+    code that has never existed, and moved a real product's barcode onto it."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _code
+
+    known = frozenset({"60249999604"})
+    assert _code("6024999960", known) == "6024999960"       # truncation: left to fail the pattern
+    assert _code("3050208002", known) == "03050208002"      # lost leading zero: padded

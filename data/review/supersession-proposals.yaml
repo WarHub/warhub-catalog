@@ -20,9 +20,9 @@
 summary:
   ready: 0
   merged-with-survivor: 5
-  conflicting: 55
+  conflicting: 57
   contradicts-declared: 1
-  unobserved-retired-code: 88
+  unobserved-retired-code: 86
   regional-variant: 304
   same-code: 0
   already-declared: 692
@@ -109,7 +109,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/01010799025
     survivingCode: '01010799025'
@@ -120,7 +120,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/01050799011
     survivingCode: '01050799011'
@@ -131,7 +131,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/01050799012
     survivingCode: '01050799012'
@@ -142,7 +142,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/01120706002
     survivingCode: '01120706002'
@@ -153,7 +153,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/01120709007
     survivingCode: '01120709007'
@@ -164,7 +164,18 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
+    retiredEntity: games-workshop/02010101007
+    survivingEntity: games-workshop/01120799003
+    survivingCode: '01120799003'
+    survivingName: 'WHU: RIVAUX DE HARROWDEEP (FRA)'
+    survivingEan: '5011921130030'
+    changedOn: null
+    assertedBy: mfr-gw-trade:01120799003
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02010101007'
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/02010799025
     survivingCode: '02010799025'
@@ -175,7 +186,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02010101007'
-    retiredEan: null
+    retiredEan: '5011921219636'
     retiredEntity: games-workshop/02010101007
     survivingEntity: games-workshop/02050799011
     survivingCode: '02050799011'
@@ -219,7 +230,183 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/01010299044
+    survivingCode: '01010299044'
+    survivingName: AGE OF SIGMAR:SET D'INITIATION ULTIME FR
+    survivingEan: '5011921203468'
+    changedOn: null
+    assertedBy: mfr-gw-trade:01010299044
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/01010299045
+    survivingCode: '01010299045'
+    survivingName: 'AGE OF SIGMAR: SET D''INITIATION (FRA)'
+    survivingEan: '5011921204694'
+    changedOn: null
+    assertedBy: mfr-gw-trade:01010299045
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/01010299046
+    survivingCode: '01010299046'
+    survivingName: 'AGE OF SIGMAR: SET DE DÉCOUVERTE (FRA)'
+    survivingEan: '5011921220892'
+    changedOn: null
+    assertedBy: mfr-gw-trade:01010299046
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/01040299158
+    survivingCode: '01040299158'
+    survivingName: COMMENT DÉBUTER À AGE OF SIGMAR (FRA)
+    survivingEan: '9781804573822'
+    changedOn: null
+    assertedBy: mfr-gw-trade:01040299158
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/02010299044
+    survivingCode: '02010299044'
+    survivingName: 'AGE OF SIGMAR: SET INTRO. DEFINITIVO ITA'
+    survivingEan: '5011921203475'
+    changedOn: null
+    assertedBy: mfr-gw-trade:02010299044
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/02010299045
+    survivingCode: '02010299045'
+    survivingName: 'AGE OF SIGMAR: SET INTRODUTTIVO (ITA)'
+    survivingEan: '5011921204700'
+    changedOn: null
+    assertedBy: mfr-gw-trade:02010299045
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/02010299046
+    survivingCode: '02010299046'
+    survivingName: 'AGE OF SIGMAR: SET DI PRESENTAZIONE ITA'
+    survivingEan: '5011921220908'
+    changedOn: null
+    assertedBy: mfr-gw-trade:02010299046
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/02040299158
+    survivingCode: '02040299158'
+    survivingName: INIZIA CON AGE OF SIGMAR (ITALIANO)
+    survivingEan: '9781804573853'
+    changedOn: null
+    assertedBy: mfr-gw-trade:02040299158
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/03010299044
+    survivingCode: '03010299044'
+    survivingName: AGE OF SIGMAR:SET DE INICIO DEFINIT. ESP
+    survivingEan: '5011921203482'
+    changedOn: null
+    assertedBy: mfr-gw-trade:03010299044
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/03010299045
+    survivingCode: '03010299045'
+    survivingName: 'AGE OF SIGMAR: SET DE INICIO (ESP)'
+    survivingEan: '5011921204717'
+    changedOn: null
+    assertedBy: mfr-gw-trade:03010299045
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/03010299046
+    survivingCode: '03010299046'
+    survivingName: 'AGE OF SIGMAR: SET INTRODUCTORIO (ESP)'
+    survivingEan: '5011921220915'
+    changedOn: null
+    assertedBy: mfr-gw-trade:03010299046
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/03040299158
+    survivingCode: '03040299158'
+    survivingName: INÍCIATE EN AGE OF SIGMAR (ESPAÑOL)
+    survivingEan: '9781804573846'
+    changedOn: null
+    assertedBy: mfr-gw-trade:03040299158
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/04010299044
+    survivingCode: '04010299044'
+    survivingName: AGE OF SIGMAR:ULTIMATIVES STARTERSET DEU
+    survivingEan: '5011921203499'
+    changedOn: null
+    assertedBy: mfr-gw-trade:04010299044
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/04010299045
+    survivingCode: '04010299045'
+    survivingName: 'AGE OF SIGMAR: STARTERSET (DEUTSCH)'
+    survivingEan: '5011921204724'
+    changedOn: null
+    assertedBy: mfr-gw-trade:04010299045
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/04010299046
+    survivingCode: '04010299046'
+    survivingName: 'AGE OF SIGMAR: EINSTEIGERSET (DEUTSCH)'
+    survivingEan: '5011921220922'
+    changedOn: null
+    assertedBy: mfr-gw-trade:04010299046
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/04040299158
+    survivingCode: '04040299158'
+    survivingName: EINSTEIGERLEITFADEN AGE OF SIGMAR (DEU)
+    survivingEan: '9781804573839'
+    changedOn: null
+    assertedBy: mfr-gw-trade:04040299158
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/52170206001
     survivingCode: '52170206001'
@@ -230,7 +417,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/52170218003
     survivingCode: '52170218003'
@@ -241,7 +428,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/52170299003
     survivingCode: '52170299003'
@@ -252,7 +439,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/53170206001
     survivingCode: '53170206001'
@@ -263,7 +450,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/53170218003
     survivingCode: '53170218003'
@@ -274,7 +461,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/53170299003
     survivingCode: '53170299003'
@@ -285,7 +472,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/54170206001
     survivingCode: '54170206001'
@@ -296,7 +483,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/54170218003
     survivingCode: '54170218003'
@@ -307,7 +494,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/54170299003
     survivingCode: '54170299003'
@@ -318,7 +505,18 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
+    retiredEntity: null
+    survivingEntity: games-workshop/60010299044
+    survivingCode: '60010299044'
+    survivingName: 'Warhammer Age of Sigmar: Spearhead Starter Set'
+    survivingEan: '5011921203451'
+    changedOn: null
+    assertedBy: mfr-gw-trade:60010299044
+  - bucket: conflicting
+    manufacturer: games-workshop
+    retiredCode: '02120712002'
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/60010299045
     survivingCode: '60010299045'
@@ -329,7 +527,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/60010299046
     survivingCode: '60010299046'
@@ -340,7 +538,7 @@ proposals:
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '02120712002'
-    retiredEan: null
+    retiredEan: '5011921182312'
     retiredEntity: null
     survivingEntity: games-workshop/60040299158
     survivingCode: '60040299158'
@@ -348,182 +546,6 @@ proposals:
     survivingEan: '9781804573815'
     changedOn: null
     assertedBy: mfr-gw-trade:60040299158
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-einsteigerset-deutsch
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: EINSTEIGERSET (DEUTSCH)'
-    survivingEan: '5011921220922'
-    changedOn: null
-    assertedBy: mfr-gw-trade:4010299046
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-d-initiation-fra
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET D''INITIATION (FRA)'
-    survivingEan: '5011921204694'
-    changedOn: null
-    assertedBy: mfr-gw-trade:1010299045
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-d-initiation-ultime-fr
-    survivingCode: null
-    survivingName: AGE OF SIGMAR:SET D'INITIATION ULTIME FR
-    survivingEan: '5011921203468'
-    changedOn: null
-    assertedBy: mfr-gw-trade:1010299044
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-de-decouverte-fra
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET DE DÉCOUVERTE (FRA)'
-    survivingEan: '5011921220892'
-    changedOn: null
-    assertedBy: mfr-gw-trade:1010299046
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-de-inicio-definit-esp
-    survivingCode: null
-    survivingName: AGE OF SIGMAR:SET DE INICIO DEFINIT. ESP
-    survivingEan: '5011921203482'
-    changedOn: null
-    assertedBy: mfr-gw-trade:3010299044
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-de-inicio-esp
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET DE INICIO (ESP)'
-    survivingEan: '5011921204717'
-    changedOn: null
-    assertedBy: mfr-gw-trade:3010299045
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-di-presentazione-ita
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET DI PRESENTAZIONE ITA'
-    survivingEan: '5011921220908'
-    changedOn: null
-    assertedBy: mfr-gw-trade:2010299046
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-intro-definitivo-ita
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET INTRO. DEFINITIVO ITA'
-    survivingEan: '5011921203475'
-    changedOn: null
-    assertedBy: mfr-gw-trade:2010299044
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-introductorio-esp
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET INTRODUCTORIO (ESP)'
-    survivingEan: '5011921220915'
-    changedOn: null
-    assertedBy: mfr-gw-trade:3010299046
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-set-introduttivo-ita
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: SET INTRODUTTIVO (ITA)'
-    survivingEan: '5011921204700'
-    changedOn: null
-    assertedBy: mfr-gw-trade:2010299045
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-starterset-deutsch
-    survivingCode: null
-    survivingName: 'AGE OF SIGMAR: STARTERSET (DEUTSCH)'
-    survivingEan: '5011921204724'
-    changedOn: null
-    assertedBy: mfr-gw-trade:4010299045
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/age-of-sigmar-ultimatives-starterset-deu
-    survivingCode: null
-    survivingName: AGE OF SIGMAR:ULTIMATIVES STARTERSET DEU
-    survivingEan: '5011921203499'
-    changedOn: null
-    assertedBy: mfr-gw-trade:4010299044
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/comment-debuter-a-age-of-sigmar-fra
-    survivingCode: null
-    survivingName: COMMENT DÉBUTER À AGE OF SIGMAR (FRA)
-    survivingEan: '9781804573822'
-    changedOn: null
-    assertedBy: mfr-gw-trade:1040299158
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/einsteigerleitfaden-age-of-sigmar-deu
-    survivingCode: null
-    survivingName: EINSTEIGERLEITFADEN AGE OF SIGMAR (DEU)
-    survivingEan: '9781804573839'
-    changedOn: null
-    assertedBy: mfr-gw-trade:4040299158
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/iniciate-en-age-of-sigmar-espanol
-    survivingCode: null
-    survivingName: INÍCIATE EN AGE OF SIGMAR (ESPAÑOL)
-    survivingEan: '9781804573846'
-    changedOn: null
-    assertedBy: mfr-gw-trade:3040299158
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '02120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/inizia-con-age-of-sigmar-italiano
-    survivingCode: null
-    survivingName: INIZIA CON AGE OF SIGMAR (ITALIANO)
-    survivingEan: '9781804573853'
-    changedOn: null
-    assertedBy: mfr-gw-trade:2040299158
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '03040199135'
@@ -711,28 +733,6 @@ proposals:
     survivingEan: '9781839060878'
     changedOn: '2021-05-10'
     assertedBy: mfr-gw-trade:60040299107
-  - bucket: unobserved-retired-code
-    manufacturer: games-workshop
-    retiredCode: '2010101007'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/01120799003
-    survivingCode: '01120799003'
-    survivingName: 'WHU: RIVAUX DE HARROWDEEP (FRA)'
-    survivingEan: '5011921130030'
-    changedOn: null
-    assertedBy: mfr-gw-trade:01120799003
-  - bucket: unobserved-retired-code
-    manufacturer: games-workshop
-    retiredCode: '2120712002'
-    retiredEan: null
-    retiredEntity: null
-    survivingEntity: games-workshop/60010299044
-    survivingCode: '60010299044'
-    survivingName: 'Warhammer Age of Sigmar: Spearhead Starter Set'
-    survivingEan: '5011921203451'
-    changedOn: null
-    assertedBy: mfr-gw-trade:60010299044
   - bucket: unobserved-retired-code
     manufacturer: games-workshop
     retiredCode: '99070101015'
