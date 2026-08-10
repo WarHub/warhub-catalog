@@ -40,3 +40,28 @@ contract:
   requiredFieldRates:
     name: 1.0
     sku: 0.9
+# Boxed multi-pot sets are PRODUCTS, not paints -- see resolve/crossover.py for the shared
+# evaluator gen_paint_harvest.py refuses the same rows with.
+crossoverToProducts:
+  reason: >
+    Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
+    Measured 2026-08-05 over all 1,142 observations: this block selects 285 -- 216 by
+    category slug, 153 by title, and NEITHER signal contains the other (132 category-only,
+    69 title-only). That is why both clauses are present and why the predicate cannot be
+    a single shared rule across sources.
+    29 of the 285 fail the resolver's identity floor and land in review/conflicts.yaml as
+    `set-without-identity` rather than crossing: ak-interactive.com publishes ZERO barcodes
+    anywhere (0 of 1,142 observations carry an ean), so a row whose sku does not match this
+    manufacturer's codePattern has no addressable identity at all and would publish under a
+    slug of its store title. The 29, exactly: AKABT301-311 (11), AKAD102-109 (8), the four
+    "AK 3G RANGE AFV/AIR/FIG/GENERIC", AKG25, AKG26, AKPACK74, AKPACK78, AKABT1000 and
+    "RANGE AKAD". Deliberately NOT fixed by widening the codePattern here: that list mixes
+    real item numbers with freehand RANGE STRINGS which are not product identities at all,
+    and a pattern loose enough to swallow the former would code the latter too. Surfacing
+    them as a reviewable list is the point.
+    The remaining 256 cross code-anchored and barcode-less; they are ~1% of the catalog by
+    count and contribute nothing to the EAN coverage the repo's guards measure.
+  category: paint-set
+  anyOf:
+    - hintContainsAny: {categorySlugs: [3rd-set, paints-acrylics-sets, b2b-3gen-sets]}
+    - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'

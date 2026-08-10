@@ -16,6 +16,12 @@ public static class PaintRecordMapper
         Ean = p.Ean,
         AdditionalEans = p.AdditionalEans is { Count: > 0 } extra ? [.. extra] : null,
         ImageUrl = p.ImageUrl,
+        PriceGbp = p.PriceGbp,
+        PriceUsd = p.PriceUsd,
+        PriceEur = p.PriceEur,
+        PriceCad = p.PriceCad,
+        Supersedes = p.Supersedes is { Count: > 0 } predecessors ? predecessors : null,
+        SupersededBy = p.SupersededBy,
         Details = new PaintDetails
         {
             Set = p.Set,

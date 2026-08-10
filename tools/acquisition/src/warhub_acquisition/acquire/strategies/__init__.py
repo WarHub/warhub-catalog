@@ -4,6 +4,7 @@ from warhub_acquisition.acquire.strategies import appsync  # noqa: F401
 from warhub_acquisition.acquire.strategies import barcode_db  # noqa: F401
 from warhub_acquisition.acquire.strategies import cdx_archive  # noqa: F401
 from warhub_acquisition.acquire.strategies import gw_trade_sheets  # noqa: F401
+from warhub_acquisition.acquire.strategies import gw_webstore_paints  # noqa: F401
 from warhub_acquisition.acquire.strategies import mr_hobby  # noqa: F401
 from warhub_acquisition.acquire.strategies import playwright_wp  # noqa: F401
 from warhub_acquisition.acquire.strategies import reaper  # noqa: F401

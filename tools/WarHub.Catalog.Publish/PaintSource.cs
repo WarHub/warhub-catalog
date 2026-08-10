@@ -23,6 +23,15 @@ internal sealed class PaintYaml
     public string? Ean { get; set; }
     public List<string>? AdditionalEans { get; set; }
     public string? ImageUrl { get; set; }
+    public decimal? PriceGbp { get; set; }
+    public decimal? PriceUsd { get; set; }
+    public decimal? PriceEur { get; set; }
+    public decimal? PriceCad { get; set; }
+    // Archival lineage, stored upstream as the `{Name}|{Set}` cross-reference key. PaintBuilder
+    // resolves both to published ids and drops anything it cannot resolve unambiguously, so the
+    // catalog never publishes a dangling link.
+    public List<string>? Supersedes { get; set; }
+    public string? SupersededBy { get; set; }
     public PaintDetailsYaml Details { get; set; } = new();
 }
 

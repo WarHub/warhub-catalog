@@ -249,7 +249,15 @@ def main(argv: list[str] | None = None) -> int:
 
     report_sub = subparsers.add_parser("report")
     report_sub.add_argument("--data", type=Path, default=Path("data"))
-    report_sub.add_argument("--ean-guard", action="store_true")
+    report_sub.add_argument(
+        "--ean-guard",
+        action="store_true",
+        help=(
+            "Regression gate over BOTH catalogs: every confirmed/additional product barcode and "
+            "every paint barcode HEAD attests must still be somewhere in the working tree. A "
+            "barcode that vanished exits 5; one that merely moved is reported and passes."
+        ),
+    )
 
     migrate = subparsers.add_parser("migrate")
     migrate.add_argument("--data", type=Path, default=Path("data"))
@@ -340,10 +348,11 @@ def main(argv: list[str] | None = None) -> int:
         findings = check_ean_guard(paths)
         if any(findings.values()):
             report_text += render_ean_guard_section(findings)
-        # Only a genuinely LOST confirmed barcode fails the run; a tracked repackaging (old
-        # barcode retained in additionalEans), a dropped provisional barcode and a dropped
-        # product code are all reported for visibility but pass.
-        if findings["lost"]:
+        # Only a genuinely LOST barcode fails the run -- a confirmed product barcode, or ANY paint
+        # barcode (paints carry no eanConfidence, so all of them are gated). A tracked repackaging
+        # (old barcode retained in additionalEans), a paint barcode that merely moved role/brand,
+        # a dropped provisional barcode and a dropped product code are all reported but pass.
+        if findings["lost"] or findings["paint_lost"]:
             exit_code = 5
     print(report_text, end="")
     return exit_code

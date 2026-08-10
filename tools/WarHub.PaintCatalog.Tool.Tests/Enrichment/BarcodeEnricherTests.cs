@@ -167,4 +167,31 @@ public class BarcodeEnricherTests
         }
         finally { File.Delete(path); }
     }
+
+    [Fact]
+    public void Apply_CarriesTradePrices_ButNeverAvailability()
+    {
+        // The manufacturer bridge is allowed to quote list prices. It is NOT allowed to imply
+        // stock: a trade sheet says what a pot costs, never whether anyone has one.
+        string path = WriteTemp("""
+            citadel-colour:
+              "Averland Sunset|Base":
+                ean: "5011921172221"
+                priceGbp: 3.30
+                priceUsd: 5.60
+                priceEur: 4.40
+                priceCad: 7.25
+                availability: in_stock
+            """);
+        try
+        {
+            Paint averland = BarcodeEnricher.Apply(SamplePaints, "citadel-colour", path)
+                .Single(p => p.Name == "Averland Sunset");
+            Assert.Equal(3.30m, averland.PriceGbp);
+            Assert.Equal(5.60m, averland.PriceUsd);
+            Assert.Equal(4.40m, averland.PriceEur);
+            Assert.Equal(7.25m, averland.PriceCad);
+        }
+        finally { File.Delete(path); }
+    }
 }

@@ -36,6 +36,13 @@ def _write_catalog(paths: DataPaths, products: list[dict]) -> None:
     )
 
 
+def _write_brand(paths: DataPaths, brand: str, paints: list[dict]) -> None:
+    write_yaml(
+        paths.root / "paints" / "brands" / f"{brand}.yaml",
+        {"brand": brand.replace("-", " ").title(), "brandSlug": brand, "paints": paints},
+    )
+
+
 def test_confirmed_ean_change_exits_5_and_lists_the_entity(tmp_path: Path, capsys) -> None:
     repo_root = tmp_path / "repo"
     paths = _init_repo(repo_root)
@@ -376,6 +383,229 @@ def test_vanished_additional_ean_is_lost(tmp_path: Path, capsys) -> None:
     assert "5011921194285" in out
 
 
+def test_paint_ean_lost_everywhere_fails_loudly(tmp_path: Path, capsys) -> None:
+    # The gap this closes: the paint catalog carries real barcodes and had NO gate at all, so a
+    # pot could stop being scannable between commits with nothing noticing. Gone -> exit 5.
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _commit(repo_root, "seed paints")
+
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black"}])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out
+    assert "citadel-colour/Abaddon Black" in out
+    assert "5011921182848" in out
+
+
+def test_paint_additional_ean_is_gated_exactly_like_the_primary(tmp_path: Path, capsys) -> None:
+    """Paints have no `eanConfidence`, so there is no tier to demote a barcode into: an
+    `additionalEans` entry that vanishes is just as fatal as a vanished primary."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Abaddon Black", "ean": "5011921182848",
+          "additionalEans": ["5011921199457", "5011921244379"]}],
+    )
+    _commit(repo_root, "seed paints")
+
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Abaddon Black", "ean": "5011921182848", "additionalEans": ["5011921199457"]}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out
+    assert "5011921244379" in out
+    assert "5011921199457" not in out  # still held -> not a finding
+
+
+def test_paint_ean_demoted_to_additional_is_moved_not_fatal(tmp_path: Path, capsys) -> None:
+    # A reformulation making the new pot primary and keeping the old barcode in additionalEans is
+    # the archival outcome we WANT: reported for visibility, never a regression.
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Hexwraith Flame", "ean": "5011921182848"}])
+    _commit(repo_root, "seed paints")
+
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Hexwraith Flame", "ean": "5011921139774",
+          "additionalEans": ["5011921182848"]}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" in out
+    assert "5011921182848" in out
+    assert "citadel-colour (additional)" in out
+
+
+def test_paint_ean_moving_to_another_brand_is_moved_not_fatal(tmp_path: Path, capsys) -> None:
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Some Pot", "ean": "5011921182848"}])
+    _write_brand(paths, "vallejo", [{"name": "Other Pot", "ean": "8429551700504"}])
+    _commit(repo_root, "seed paints")
+
+    _write_brand(paths, "citadel-colour", [])
+    _write_brand(
+        paths,
+        "vallejo",
+        [{"name": "Other Pot", "ean": "8429551700504"}, {"name": "Some Pot", "ean": "5011921182848"}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" in out
+    assert "vallejo (primary)" in out
+
+
+def test_paint_identity_change_alone_is_not_a_finding(tmp_path: Path, capsys) -> None:
+    """A published paint id is CONTENT-DERIVED (brand + name, escalating to set/productCode/hex),
+    so it legitimately changes between commits -- see `publish(paints): make ids depend on the
+    paint, not on its neighbours`. The guard is keyed on barcodes, never on the record's identity:
+    rewrite every id-input on the record and, with the barcodes untouched, nothing fires.
+    """
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Hexwraith Flame", "productCode": "29-11",
+          "ean": "5011921182848", "additionalEans": ["5011921199457"],
+          "details": {"set": "Technical", "hex": "#4CB0A0"}}],
+    )
+    _commit(repo_root, "seed paints")
+
+    # name, set, productCode and hex all rewritten -> a different published id, same barcodes.
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Hexwraith Flame (Contrast)", "productCode": "29-56",
+          "ean": "5011921182848", "additionalEans": ["5011921199457"],
+          "details": {"set": "Contrast", "hex": "#3FA090"}}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" not in out
+
+
+def test_new_paint_brand_file_absent_from_head_tracks_nothing(tmp_path: Path, capsys) -> None:
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    (repo_root / "README.md").write_text("hello\n", encoding="utf-8", newline="\n")
+    _commit(repo_root, "seed repo")
+
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" not in out
+
+
+def test_deleted_paint_brand_file_is_still_read_from_head(tmp_path: Path, capsys) -> None:
+    # HEAD-side files come from `git ls-tree`, not the working glob, so deleting a brand file
+    # cannot hide its barcodes from the gate.
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _commit(repo_root, "seed paints")
+
+    (paths.root / "paints" / "brands" / "citadel-colour.yaml").unlink()
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out
+    assert "5011921182848" in out
+
+
+def test_unchanged_paint_catalog_is_silent(tmp_path: Path, capsys) -> None:
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Abaddon Black", "ean": "5011921182848", "additionalEans": ["5011921199457"]}],
+    )
+    _commit(repo_root, "seed paints")
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "Paint-EAN" not in out
+
+
+def test_new_paint_with_a_new_barcode_is_not_a_finding(tmp_path: Path, capsys) -> None:
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _commit(repo_root, "seed paints")
+
+    _write_brand(
+        paths,
+        "citadel-colour",
+        [{"name": "Abaddon Black", "ean": "5011921182848"},
+         {"name": "Hexwraith Flame", "ean": "5011921139774"}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "Paint-EAN" not in out
+
+
+def test_paint_guard_does_not_mask_a_lost_product_barcode(tmp_path: Path, capsys) -> None:
+    # Both catalogs are gated by the same run; a clean paint catalog must not swallow a product
+    # regression, and both sections render together.
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/a", "name": "Thing A", "ean": "5011921194285", "eanConfidence": "confirmed"}],
+    )
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _commit(repo_root, "seed both catalogs")
+
+    _write_catalog(paths, [])
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black"}])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Confirmed-EAN changes" in out
+    assert "## Paint-EAN lost" in out
+
+
 def test_report_without_ean_guard_flag_ignores_git_state(tmp_path: Path, capsys) -> None:
     repo_root = tmp_path / "repo"
     paths = _init_repo(repo_root)
@@ -395,3 +625,81 @@ def test_report_without_ean_guard_flag_ignores_git_state(tmp_path: Path, capsys)
 
     assert exit_code == 0
     assert "## Confirmed-EAN changes" not in out
+
+
+def test_paint_barcode_rehomed_to_the_product_catalog_is_moved_not_lost(
+    tmp_path: Path, capsys
+) -> None:
+    """The re-home case this exists for: a boxed set wrongly published as a paint is retracted from
+    the paint catalog, and its sole-held box GTIN now lives on a product record. That is a
+    correction, so it must NOT fail the run -- but it must still be REPORTED, because a barcode
+    changing catalogs is exactly the kind of move a reviewer should see."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "green-stuff-world",
+        [{"name": "Paint Set - Chrome", "ean": "8436574506327", "details": {"set": "Chrome"}}],
+    )
+    _commit(repo_root, "seed the bogus paint record")
+
+    # The retraction, plus the re-home that must precede it.
+    _write_brand(paths, "green-stuff-world", [])
+    _write_catalog(
+        paths,
+        [{"id": "green-stuff-world/10133", "name": "Paint Set - Chrome",
+          "ean": "8436574506327", "eanConfidence": "confirmed"}],
+    )
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "## Paint-EAN lost" not in out
+    assert "## Paint-EAN moved" in out
+    assert "8436574506327" in out
+    assert "products/games-workshop" in out  # the holder is named, so the move is auditable
+
+
+def test_retracting_a_paint_without_rehoming_is_still_lost(tmp_path: Path, capsys) -> None:
+    """The other half, and the reason the cross-catalog lookup is not a loosening: retract the same
+    record WITHOUT putting its barcode anywhere, and the guard still fails the run."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_brand(
+        paths,
+        "green-stuff-world",
+        [{"name": "Paint Set - Chrome", "ean": "8436574506327", "details": {"set": "Chrome"}}],
+    )
+    _commit(repo_root, "seed the bogus paint record")
+
+    _write_brand(paths, "green-stuff-world", [])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out
+    assert "8436574506327" in out
+
+
+def test_a_product_barcode_does_not_silence_an_unrelated_paint_loss(tmp_path: Path, capsys) -> None:
+    """The cross-catalog fallback must be barcode-exact, not a blanket amnesty: an unrelated
+    product barcode existing cannot excuse a different paint barcode going missing."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(
+        paths,
+        [{"id": "games-workshop/a", "name": "Thing A", "ean": "5011921194285",
+          "eanConfidence": "confirmed"}],
+    )
+    _write_brand(paths, "citadel-colour", [{"name": "Abaddon Black", "ean": "5011921182848"}])
+    _commit(repo_root, "seed both catalogs")
+
+    _write_brand(paths, "citadel-colour", [])
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 5
+    assert "## Paint-EAN lost" in out

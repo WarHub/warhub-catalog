@@ -2,6 +2,8 @@
 # Projection of committed manufacturer evidence onto the paint catalog's identities.
 # `enrich` keys are exact {Name}|{Set} identities (C# fills blank ean/imageUrl only);
 # `additions` are new paints from catalog-role sources; `candidates` are report-only.
+# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --
+# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).
 reaper:
   enrich:
     Adamantine|Master Series Paints Pathfinder:
@@ -9,1860 +11,2232 @@ reaper:
       imageUrl: https://images.reapermini.com/4/89556.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Adamantium Black|Master Series Paints Core Colors:
       sku: '9124'
       imageUrl: https://images.reapermini.com/4/09124.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Aged Bone|Master Series Paints Core Colors:
       sku: '9059'
       imageUrl: https://images.reapermini.com/4/09059.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Aged Pewter|Master Series Paints Core Colors:
       sku: '9196'
       imageUrl: https://images.reapermini.com/4/09196.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Aircraft Grey|Master Series Paints Core Colors:
       sku: '9290'
       imageUrl: https://images.reapermini.com/4/09290.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Akata Blue|Master Series Paints Pathfinder:
       sku: '89523'
       imageUrl: https://images.reapermini.com/4/89523.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Alchemical Green|Master Series Paints Pathfinder:
       sku: '89516'
       imageUrl: https://images.reapermini.com/4/89516.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Alien Goo|Master Series Paints Core Colors:
       sku: '9294'
       imageUrl: https://images.reapermini.com/4/09294.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Amber Gold|Master Series Paints Core Colors:
       sku: '9032'
       imageUrl: https://images.reapermini.com/4/09032.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Amethyst Purple|Master Series Paints Core Colors:
       sku: '9024'
       imageUrl: https://images.reapermini.com/4/09024.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ancient Bronze|Master Series Paints Core Colors:
       sku: '9049'
       imageUrl: https://images.reapermini.com/4/09049.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ancient Oak|Master Series Paints Bones:
       sku: '9412'
       imageUrl: https://images.reapermini.com/4/09412.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Ancient Wood|Master Series Paints Core Colors:
       sku: '9315'
       imageUrl: https://images.reapermini.com/4/09315.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Andoran Blue|Master Series Paints Pathfinder:
       sku: '89527'
       imageUrl: https://images.reapermini.com/4/89527.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Anti-Shine Additive|Master Series Paints Core Colors:
       sku: '9215'
       imageUrl: https://images.reapermini.com/4/09215.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Antique Gold|Master Series Paints Core Colors:
       sku: '9050'
       imageUrl: https://images.reapermini.com/4/09050.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Arclord Purple|Master Series Paints Pathfinder:
       sku: '89534'
       imageUrl: https://images.reapermini.com/4/89534.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Ashen Blue|Master Series Paints Core Colors:
       sku: '9057'
       imageUrl: https://images.reapermini.com/4/09057.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Asmodeus Red|Master Series Paints Pathfinder:
       sku: '89507'
       imageUrl: https://images.reapermini.com/4/89507.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Auburn Shadow|Master Series Paints Core Colors:
       sku: '9241'
       imageUrl: https://images.reapermini.com/4/09241.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Azlanti Violet|Master Series Paints Pathfinder:
       sku: '89533'
       imageUrl: https://images.reapermini.com/4/89533.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Barbarian Flesh|Master Series Paints Bones:
       sku: '9442'
       imageUrl: https://images.reapermini.com/4/09442b.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Basic Dirt|Master Series Paints Core Colors:
       sku: '9245'
       imageUrl: https://images.reapermini.com/4/09245.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Besmara Black|Master Series Paints Pathfinder:
       sku: '89546'
       imageUrl: https://images.reapermini.com/4/89546.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Black Ink|Master Series Paints Core Colors:
       sku: '9208'
       imageUrl: https://images.reapermini.com/4/09208.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Black Wash|Master Series Paints Core Colors Wash:
       sku: '9255'
       imageUrl: https://images.reapermini.com/4/09255.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blackened Brown|Master Series Paints Core Colors:
       sku: '9137'
       imageUrl: https://images.reapermini.com/4/09137.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blackened Steel|Master Series Paints Core Colors:
       sku: '9205'
       imageUrl: https://images.reapermini.com/4/09205.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blade Steel|Master Series Paints Bones:
       sku: '9452'
       imageUrl: https://images.reapermini.com/4/09452.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Bleached Linen|Master Series Paints Bones:
       sku: '9436'
       imageUrl: https://images.reapermini.com/4/09436.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Blonde Hair|Master Series Paints Core Colors:
       sku: '9257'
       imageUrl: https://images.reapermini.com/4/09257.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blonde Highlight|Master Series Paints Core Colors:
       sku: '9258'
       imageUrl: https://images.reapermini.com/4/09258.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blonde Shadow|Master Series Paints Core Colors:
       sku: '9256'
       imageUrl: https://images.reapermini.com/4/09256.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blood Red|Master Series Paints Core Colors:
       sku: '9003'
       imageUrl: https://images.reapermini.com/4/09003.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Bloodless Skin|Master Series Paints Core Colors:
       sku: '9150'
       imageUrl: https://images.reapermini.com/4/09150.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Bloodstain Red|Master Series Paints Core Colors:
       sku: '9133'
       imageUrl: https://images.reapermini.com/4/09133.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blue Flame|Master Series Paints Bones:
       sku: '9480'
       imageUrl: https://images.reapermini.com/4/09480.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Blue Liner|Master Series Paints Core Colors:
       sku: '9066'
       imageUrl: https://images.reapermini.com/4/09066.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Blush Pink|Master Series Paints Core Colors:
       sku: '9262'
       imageUrl: https://images.reapermini.com/4/09262.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Boggard Green|Master Series Paints Pathfinder:
       sku: '89515'
       imageUrl: https://images.reapermini.com/4/89515.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Bone Shadow|Master Series Paints Core Colors:
       sku: '9058'
       imageUrl: https://images.reapermini.com/4/09058.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Braaaains Pink|Master Series Paints Core Colors:
       sku: '9281'
       imageUrl: https://images.reapermini.com/4/09281.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Breonne Blue|Master Series Paints Core Colors:
       sku: '9055'
       imageUrl: https://images.reapermini.com/4/09055.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brevoy Copper|Master Series Paints Pathfinder:
       sku: '89553'
       imageUrl: https://images.reapermini.com/4/89553.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Bright Bronze|Master Series Paints Pathfinder:
       sku: '89555'
       imageUrl: https://images.reapermini.com/4/89555.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Bright Turquoise|Master Series Paints Bones:
       sku: '9471'
       imageUrl: https://images.reapermini.com/4/09471.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Brilliant Blue|Master Series Paints Core Colors:
       sku: '9116'
       imageUrl: https://images.reapermini.com/4/09116.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brilliant Green|Master Series Paints Core Colors:
       sku: '9227'
       imageUrl: https://images.reapermini.com/4/09227.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brilliant Red|Master Series Paints Bones:
       sku: '9468'
       imageUrl: https://images.reapermini.com/4/09468.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Bronzed Skin Highlight|Master Series Paints Core Colors:
       sku: '9261'
       imageUrl: https://images.reapermini.com/4/09261.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Bronzed Skin Shadow|Master Series Paints Core Colors:
       sku: '9259'
       imageUrl: https://images.reapermini.com/4/09259.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Bronzed Skin|Master Series Paints Core Colors:
       sku: '9260'
       imageUrl: https://images.reapermini.com/4/09260.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brown Ink|Master Series Paints Core Colors:
       sku: '9209'
       imageUrl: https://images.reapermini.com/4/09209.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brown Liner|Master Series Paints Core Colors:
       sku: '9064'
       imageUrl: https://images.reapermini.com/4/09064.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brown Sand|Master Series Paints Core Colors:
       sku: '9246'
       imageUrl: https://images.reapermini.com/4/09246.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brown Wash|Master Series Paints Core Colors Wash:
       sku: '9254'
       imageUrl: https://images.reapermini.com/4/09254.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brush-On Black Primer|Master Series Paints Core Colors Primer:
       sku: '9214'
       imageUrl: https://images.reapermini.com/4/09214.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brush-On Grey Primer|Master Series Paints Core Colors Primer:
       sku: '9299'
       imageUrl: https://images.reapermini.com/4/09299.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brush-on Sealer|Master Series Paints Core Colors:
       sku: '9107'
       imageUrl: https://images.reapermini.com/4/09107.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Brush-on White Primer|Master Series Paints Core Colors Primer:
       sku: '9108'
       imageUrl: https://images.reapermini.com/4/09108.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Buckskin Pale|Master Series Paints Core Colors:
       sku: '9075'
       imageUrl: https://images.reapermini.com/4/09075.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Bugbear Fur|Master Series Paints Bones:
       sku: '9490'
       imageUrl: https://images.reapermini.com/4/09490.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Burgundy Wine|Master Series Paints Core Colors:
       sku: '9025'
       imageUrl: https://images.reapermini.com/4/09025.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Burnt Orange|Master Series Paints Core Colors:
       sku: '9111'
       imageUrl: https://images.reapermini.com/4/09111.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Cailean Wine|Master Series Paints Pathfinder:
       sku: '89506'
       imageUrl: https://images.reapermini.com/4/89506.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Cairn Stone|Master Series Paints Pathfinder:
       sku: '89512'
       imageUrl: https://images.reapermini.com/4/89512.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Calistria Yellow|Master Series Paints Pathfinder:
       sku: '89513'
       imageUrl: https://images.reapermini.com/4/89513.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Canary Yellow|Master Series Paints Bones:
       sku: '9409'
       imageUrl: https://images.reapermini.com/4/09409.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Candlelight Yellow|Master Series Paints Bones:
       sku: '9408'
       imageUrl: https://images.reapermini.com/4/09408.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Carbon Grey|Master Series Paints Core Colors:
       sku: '9318'
       imageUrl: https://images.reapermini.com/4/09318.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Carnage Red|Master Series Paints Core Colors:
       sku: '9135'
       imageUrl: https://images.reapermini.com/4/09135.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Carrottop Red|Master Series Paints Core Colors:
       sku: '9242'
       imageUrl: https://images.reapermini.com/4/09242.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Cats-Eye Green|Master Series Paints Bones:
       sku: '9414'
       imageUrl: https://images.reapermini.com/4/09414.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Caucasian Flesh|Master Series Paints Bones:
       sku: '9474'
       imageUrl: https://images.reapermini.com/4/09474.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Cavalier Orange|Master Series Paints Pathfinder:
       sku: '89509'
       imageUrl: https://images.reapermini.com/4/89509.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Charred Brown|Master Series Paints Bones:
       sku: '9426'
       imageUrl: https://images.reapermini.com/4/09426.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Chestnut Brown|Master Series Paints Core Colors:
       sku: '9071'
       imageUrl: https://images.reapermini.com/4/09071.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Chestnut Gold|Master Series Paints Core Colors:
       sku: '9073'
       imageUrl: https://images.reapermini.com/4/09073.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Cinnamon Red|Master Series Paints Bones:
       sku: '9404'
       imageUrl: https://images.reapermini.com/4/09404.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Clear Blue|Master Series Paints Core Colors:
       sku: '9097'
       imageUrl: https://images.reapermini.com/4/09097.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Clear Green|Master Series Paints Core Colors:
       sku: '9096'
       imageUrl: https://images.reapermini.com/4/09096.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Clear Magenta|Master Series Paints Core Colors:
       sku: '9098'
       imageUrl: https://images.reapermini.com/4/09098.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Clear Purple|Master Series Paints Core Colors:
       sku: '9099'
       imageUrl: https://images.reapermini.com/4/09099.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Clear Red|Master Series Paints Core Colors:
       sku: '9094'
       imageUrl: https://images.reapermini.com/4/09094.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Clear Yellow|Master Series Paints Core Colors:
       sku: '9095'
       imageUrl: https://images.reapermini.com/4/09095.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Clockwork Brass|Master Series Paints Pathfinder:
       sku: '89554'
       imageUrl: https://images.reapermini.com/4/89554.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Clotted Red|Master Series Paints Core Colors:
       sku: '9134'
       imageUrl: https://images.reapermini.com/4/09134.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Cloudy Grey|Master Series Paints Core Colors:
       sku: '9089'
       imageUrl: https://images.reapermini.com/4/09089.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Cold Iron|Master Series Paints Pathfinder:
       sku: '89549'
       imageUrl: https://images.reapermini.com/4/89549.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Copper Verdigris|Master Series Paints Core Colors:
       sku: '9304'
       imageUrl: https://images.reapermini.com/4/09304.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Coppery Orange|Master Series Paints Core Colors:
       sku: '9102'
       imageUrl: https://images.reapermini.com/4/09102.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Creamy Ivory|Master Series Paints Core Colors:
       sku: '9144'
       imageUrl: https://images.reapermini.com/4/09144.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Crimson Red|Master Series Paints Bones:
       sku: '9467'
       imageUrl: https://images.reapermini.com/4/09467.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Crusader Silver|Master Series Paints Pathfinder:
       sku: '89550'
       imageUrl: https://images.reapermini.com/4/89550.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Cursed Gold|Master Series Paints Bones:
       sku: '9464'
       imageUrl: https://images.reapermini.com/4/09464.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Cyan Blue|Master Series Paints Core Colors:
       sku: '9117'
       imageUrl: https://images.reapermini.com/4/09117.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dark Elf Highlight|Master Series Paints Core Colors:
       sku: '9165'
       imageUrl: https://images.reapermini.com/4/09165.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dark Elf Shadow|Master Series Paints Core Colors:
       sku: '9163'
       imageUrl: https://images.reapermini.com/4/09163.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dark Elf Skin|Master Series Paints Core Colors:
       sku: '9164'
       imageUrl: https://images.reapermini.com/4/09164.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dark Highlights|Master Series Paints Core Colors:
       sku: '9042'
       imageUrl: https://images.reapermini.com/4/09042.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dark Shadow|Master Series Paints Core Colors:
       sku: '9040'
       imageUrl: https://images.reapermini.com/4/09040.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dark Skin|Master Series Paints Core Colors:
       sku: '9041'
       imageUrl: https://images.reapermini.com/4/09041.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Deep Ocean|Master Series Paints Core Colors:
       sku: '9076'
       imageUrl: https://images.reapermini.com/4/09076.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Deep Red|Master Series Paints Core Colors:
       sku: '9002'
       imageUrl: https://images.reapermini.com/4/09002.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Desert Sand|Master Series Paints Bones:
       sku: '9432'
       imageUrl: https://images.reapermini.com/4/09432.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Desert Stone|Master Series Paints Bones:
       sku: '9431'
       imageUrl: https://images.reapermini.com/4/09431.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Desna Blue|Master Series Paints Pathfinder:
       sku: '89530'
       imageUrl: https://images.reapermini.com/4/89530.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Dragon Black|Master Series Paints Bones:
       sku: '9437'
       imageUrl: https://images.reapermini.com/4/09437.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon Blue|Master Series Paints Bones:
       sku: '9472'
       imageUrl: https://images.reapermini.com/4/09472.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon Bronze|Master Series Paints Bones:
       sku: '9449'
       imageUrl: https://images.reapermini.com/4/09449.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon Copper|Master Series Paints Bones:
       sku: '9448'
       imageUrl: https://images.reapermini.com/4/09448.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon Gold|Master Series Paints Bones:
       sku: '9450'
       imageUrl: https://images.reapermini.com/4/09450.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon Green|Master Series Paints Bones:
       sku: '9410'
       imageUrl: https://images.reapermini.com/4/09410.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon Red|Master Series Paints Bones:
       sku: '9401'
       imageUrl: https://images.reapermini.com/4/09401.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dragon White|Master Series Paints Bones:
       sku: '9439'
       imageUrl: https://images.reapermini.com/4/09439.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Driftwood Brown|Master Series Paints Core Colors:
       sku: '9162'
       imageUrl: https://images.reapermini.com/4/09162.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Drow Silver|Master Series Paints Bones:
       sku: '9495'
       imageUrl: https://images.reapermini.com/4/09495.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Drying Retarder|Master Series Paints Core Colors:
       sku: '9216'
       imageUrl: https://images.reapermini.com/4/09216.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Dungeon Grey|Master Series Paints Bones:
       sku: '9466'
       imageUrl: https://images.reapermini.com/4/09466.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dungeon Slime|Master Series Paints Bones:
       sku: '9415'
       imageUrl: https://images.reapermini.com/4/09415.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Dwarven Gold|Master Series Paints Bones:
       sku: '9451'
       imageUrl: https://images.reapermini.com/4/09451.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Earth Brown|Master Series Paints Core Colors:
       sku: '9029'
       imageUrl: https://images.reapermini.com/4/09029.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ebony Flesh|Master Series Paints Bones:
       sku: '9440'
       imageUrl: https://images.reapermini.com/4/09440.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Eldritch Purple|Master Series Paints Bones:
       sku: '9463'
       imageUrl: https://images.reapermini.com/4/09463.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Elven Green|Master Series Paints Bones:
       sku: '9488'
       imageUrl: https://images.reapermini.com/4/09488.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Emerald Green|Master Series Paints Core Colors:
       sku: '9103'
       imageUrl: https://images.reapermini.com/4/09103.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Explosion Orange|Master Series Paints Core Colors:
       sku: '9219'
       imageUrl: https://images.reapermini.com/4/09219.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ezren Blue|Master Series Paints Pathfinder:
       sku: '89528'
       imageUrl: https://images.reapermini.com/4/89528.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Faded Khaki|Master Series Paints Core Colors:
       sku: '9129'
       imageUrl: https://images.reapermini.com/4/09129.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Fair Highlights|Master Series Paints Core Colors:
       sku: '9048'
       imageUrl: https://images.reapermini.com/4/09048.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Fair Shadow|Master Series Paints Core Colors:
       sku: '9046'
       imageUrl: https://images.reapermini.com/4/09046.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Fair Skin|Master Series Paints Core Colors:
       sku: '9047'
       imageUrl: https://images.reapermini.com/4/09047.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Filigree Silver|Master Series Paints Bones:
       sku: '9453'
       imageUrl: https://images.reapermini.com/4/09453.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Fire Orange|Master Series Paints Core Colors:
       sku: '9006'
       imageUrl: https://images.reapermini.com/4/09006.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Fire Red|Master Series Paints Core Colors:
       sku: '9004'
       imageUrl: https://images.reapermini.com/4/09004.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Fireball Orange|Master Series Paints Bones:
       sku: '9469'
       imageUrl: https://images.reapermini.com/4/09469.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Flesh Wash|Master Series Paints Core Colors Wash:
       sku: '9253'
       imageUrl: https://images.reapermini.com/4/09253.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Flow Improver|Master Series Paints Core Colors:
       sku: '9106'
       imageUrl: https://images.reapermini.com/4/09106.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Foggy Grey|Master Series Paints Core Colors:
       sku: '9316'
       imageUrl: https://images.reapermini.com/4/09316.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Forest Green|Master Series Paints Core Colors:
       sku: '9013'
       imageUrl: https://images.reapermini.com/4/09013.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Fresh Blood|Master Series Paints Core Colors:
       sku: '9279'
       imageUrl: https://images.reapermini.com/4/09279.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Frost Blue|Master Series Paints Bones:
       sku: '9421'
       imageUrl: https://images.reapermini.com/4/09421.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Gargoyle Grey|Master Series Paints Bones:
       sku: '9493'
       imageUrl: https://images.reapermini.com/4/09493.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Gem Purple|Master Series Paints Bones:
       sku: '9473'
       imageUrl: https://images.reapermini.com/4/09473.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Ghost White|Master Series Paints Core Colors:
       sku: '9063'
       imageUrl: https://images.reapermini.com/4/09063.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ghoul Skin|Master Series Paints Core Colors:
       sku: '9148'
       imageUrl: https://images.reapermini.com/4/09148.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ghoul Violet|Master Series Paints Pathfinder:
       sku: '89532'
       imageUrl: https://images.reapermini.com/4/89532.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Glacial Mist|Master Series Paints Core Colors:
       sku: '9323'
       imageUrl: https://images.reapermini.com/4/09323.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Glacier Blue|Master Series Paints Bones:
       sku: '9420'
       imageUrl: https://images.reapermini.com/4/09420.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Gloss Sealer|Master Series Paints Core Colors:
       sku: '9298'
       imageUrl: https://images.reapermini.com/4/09298.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Gnoll Pelt|Master Series Paints Bones:
       sku: '9460'
       imageUrl: https://images.reapermini.com/4/09460.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Gnome Flesh|Master Series Paints Bones:
       sku: '9494'
       imageUrl: https://images.reapermini.com/4/09494.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Goblin Green|Master Series Paints Pathfinder:
       sku: '89519'
       imageUrl: https://images.reapermini.com/4/89519.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Goblin Skin|Master Series Paints Bones:
       sku: '9457'
       imageUrl: https://images.reapermini.com/4/09457.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Golden Blonde|Master Series Paints Core Colors:
       sku: '9033'
       imageUrl: https://images.reapermini.com/4/09033.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Golden Shadow|Master Series Paints Core Colors:
       sku: '9091'
       imageUrl: https://images.reapermini.com/4/09091.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Golden Skin|Master Series Paints Core Colors:
       sku: '9092'
       imageUrl: https://images.reapermini.com/4/09092.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Golden Yellow|Master Series Paints Bones:
       sku: '9470'
       imageUrl: https://images.reapermini.com/4/09470.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Gozreh Gray|Master Series Paints Pathfinder:
       sku: '89545'
       imageUrl: https://images.reapermini.com/4/89545.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Grass Green|Master Series Paints Core Colors:
       sku: '9014'
       imageUrl: https://images.reapermini.com/4/09014.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Green Liner|Master Series Paints Core Colors:
       sku: '9308'
       imageUrl: https://images.reapermini.com/4/09308.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Green Ochre|Master Series Paints Core Colors:
       sku: '9128'
       imageUrl: https://images.reapermini.com/4/09128.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Grey Liner|Master Series Paints Core Colors:
       sku: '9065'
       imageUrl: https://images.reapermini.com/4/09065.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Grindylow Blue|Master Series Paints Pathfinder:
       sku: '89522'
       imageUrl: https://images.reapermini.com/4/89522.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Gug Umber|Master Series Paints Pathfinder:
       sku: '89543'
       imageUrl: https://images.reapermini.com/4/89543.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Gunmetal Blue|Master Series Paints Core Colors:
       sku: '9126'
       imageUrl: https://images.reapermini.com/4/09126.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Harvest Brown|Master Series Paints Core Colors:
       sku: '9200'
       imageUrl: https://images.reapermini.com/4/09200.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Heartwood Brown|Master Series Paints Core Colors:
       sku: '9314'
       imageUrl: https://images.reapermini.com/4/09314.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Heather Blue|Master Series Paints Core Colors:
       sku: '9231'
       imageUrl: https://images.reapermini.com/4/09231.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Heraldic Red|Master Series Paints Bones:
       sku: '9402'
       imageUrl: https://images.reapermini.com/4/09402.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Highland Moss|Master Series Paints Core Colors:
       sku: '9083'
       imageUrl: https://images.reapermini.com/4/09083.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Highlight Orange|Master Series Paints Core Colors:
       sku: '9243'
       imageUrl: https://images.reapermini.com/4/09243.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Hobgoblin Blue|Master Series Paints Pathfinder:
       sku: '89529'
       imageUrl: https://images.reapermini.com/4/89529.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Hodag Green|Master Series Paints Pathfinder:
       sku: '89520'
       imageUrl: https://images.reapermini.com/4/89520.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Honed Steel|Master Series Paints Core Colors:
       sku: '9053'
       imageUrl: https://images.reapermini.com/4/09053.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ice Devil Blue|Master Series Paints Pathfinder:
       sku: '89524'
       imageUrl: https://images.reapermini.com/4/89524.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Icy Violet|Master Series Paints Bones:
       sku: '9425'
       imageUrl: https://images.reapermini.com/4/09425.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Imperial Purple|Master Series Paints Core Colors:
       sku: '9023'
       imageUrl: https://images.reapermini.com/4/09023.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Intense Brown|Master Series Paints Core Colors:
       sku: '9138'
       imageUrl: https://images.reapermini.com/4/09138.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Irrisen Blue|Master Series Paints Pathfinder:
       sku: '89525'
       imageUrl: https://images.reapermini.com/4/89525.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Jade Green|Master Series Paints Core Colors:
       sku: '9015'
       imageUrl: https://images.reapermini.com/4/09015.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Jungle Mist|Master Series Paints Core Colors:
       sku: '9322'
       imageUrl: https://images.reapermini.com/4/09322.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Jungle Moss|Master Series Paints Core Colors:
       sku: '9082'
       imageUrl: https://images.reapermini.com/4/09082.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Keleshite Gold|Master Series Paints Pathfinder:
       sku: '89551'
       imageUrl: https://images.reapermini.com/4/89551.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Kellid Tan|Master Series Paints Pathfinder:
       sku: '89539'
       imageUrl: https://images.reapermini.com/4/89539.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Khaki Highlight|Master Series Paints Core Colors:
       sku: '9123'
       imageUrl: https://images.reapermini.com/4/09123.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Kobold Scale|Master Series Paints Bones:
       sku: '9458'
       imageUrl: https://images.reapermini.com/4/09458.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Kraken Purple|Master Series Paints Pathfinder:
       sku: '89531'
       imageUrl: https://images.reapermini.com/4/89531.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Kyonin Beige|Master Series Paints Pathfinder:
       sku: '89541'
       imageUrl: https://images.reapermini.com/4/89541.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     LED Blue|Master Series Paints Core Colors:
       sku: '9288'
       imageUrl: https://images.reapermini.com/4/09288.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Lantern Yellow|Master Series Paints Bones:
       sku: '9407'
       imageUrl: https://images.reapermini.com/4/09407.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Lava Orange|Master Series Paints Core Colors:
       sku: '9218'
       imageUrl: https://images.reapermini.com/4/09218.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Leaf Green|Master Series Paints Core Colors:
       sku: '9011'
       imageUrl: https://images.reapermini.com/4/09011.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Leather Brown|Master Series Paints Core Colors:
       sku: '9030'
       imageUrl: https://images.reapermini.com/4/09030.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Leather White|Master Series Paints Core Colors:
       sku: '9062'
       imageUrl: https://images.reapermini.com/4/09062.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Lemon Yellow|Master Series Paints Core Colors:
       sku: '9009'
       imageUrl: https://images.reapermini.com/4/09009.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Light Blue|Master Series Paints Core Colors:
       sku: '9264'
       imageUrl: https://images.reapermini.com/4/09264.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Linen White|Master Series Paints Core Colors:
       sku: '9061'
       imageUrl: https://images.reapermini.com/4/09061.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Lini Green|Master Series Paints Pathfinder:
       sku: '89517'
       imageUrl: https://images.reapermini.com/4/89517.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Magma Red|Master Series Paints Core Colors:
       sku: '9217'
       imageUrl: https://images.reapermini.com/4/09217.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Mahogany Brown|Master Series Paints Core Colors:
       sku: '9070'
       imageUrl: https://images.reapermini.com/4/09070.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Maiden Flesh|Master Series Paints Bones:
       sku: '9475'
       imageUrl: https://images.reapermini.com/4/09475.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Mana Waste Gray|Master Series Paints Pathfinder:
       sku: '89544'
       imageUrl: https://images.reapermini.com/4/89544.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Marid Blue|Master Series Paints Pathfinder:
       sku: '89526'
       imageUrl: https://images.reapermini.com/4/89526.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Marigold Yellow|Master Series Paints Core Colors:
       sku: '9007'
       imageUrl: https://images.reapermini.com/4/09007.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Marine Teal|Master Series Paints Core Colors:
       sku: '9077'
       imageUrl: https://images.reapermini.com/4/09077.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Meadow Green|Master Series Paints Bones:
       sku: '9485'
       imageUrl: https://images.reapermini.com/4/09485.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Medusa Green|Master Series Paints Pathfinder:
       sku: '89521'
       imageUrl: https://images.reapermini.com/4/89521.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Merisiel Red|Master Series Paints Pathfinder:
       sku: '89505'
       imageUrl: https://images.reapermini.com/4/89505.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Midnight Blue|Master Series Paints Core Colors:
       sku: '9019'
       imageUrl: https://images.reapermini.com/4/09019.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Milani Rose|Master Series Paints Pathfinder:
       sku: '89502'
       imageUrl: https://images.reapermini.com/4/89502.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Military Green|Master Series Paints Core Colors:
       sku: '9176'
       imageUrl: https://images.reapermini.com/4/09176.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Minotaur Hide|Master Series Paints Bones:
       sku: '9491'
       imageUrl: https://images.reapermini.com/4/09491.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Mint Green|Master Series Paints Core Colors:
       sku: '9263'
       imageUrl: https://images.reapermini.com/4/09263.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Misty Grey|Master Series Paints Core Colors:
       sku: '9090'
       imageUrl: https://images.reapermini.com/4/09090.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Moldy Skin|Master Series Paints Core Colors:
       sku: '9149'
       imageUrl: https://images.reapermini.com/4/09149.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Monarch Purple|Master Series Paints Core Colors:
       sku: '9239'
       imageUrl: https://images.reapermini.com/4/09239.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Monster Maw|Master Series Paints Bones:
       sku: '9403'
       imageUrl: https://images.reapermini.com/4/09403.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Moonstone Blue|Master Series Paints Core Colors:
       sku: '9317'
       imageUrl: https://images.reapermini.com/4/09317.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Moth Green|Master Series Paints Core Colors:
       sku: '9248'
       imageUrl: https://images.reapermini.com/4/09248.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Mountain Stone|Master Series Paints Bones:
       sku: '9433'
       imageUrl: https://images.reapermini.com/4/09433.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Muddy Brown|Master Series Paints Core Colors:
       sku: '9028'
       imageUrl: https://images.reapermini.com/4/09028.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Muddy Olive|Master Series Paints Core Colors:
       sku: '9034'
       imageUrl: https://images.reapermini.com/4/09034.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Mwangi Brown|Master Series Paints Pathfinder:
       sku: '89538'
       imageUrl: https://images.reapermini.com/4/89538.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     NMM Gold Base|Master Series Paints Core Colors:
       sku: '9302'
       imageUrl: https://images.reapermini.com/4/09302.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     NMM Gold Highlight|Master Series Paints Core Colors:
       sku: '9303'
       imageUrl: https://images.reapermini.com/4/09303.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     NMM Gold Shadow|Master Series Paints Core Colors:
       sku: '9301'
       imageUrl: https://images.reapermini.com/4/09301.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Naga Green|Master Series Paints Bones:
       sku: '9413'
       imageUrl: https://images.reapermini.com/4/09413.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Neon Yellow|Master Series Paints Core Colors:
       sku: '9287'
       imageUrl: https://images.reapermini.com/4/09287.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     New Copper|Master Series Paints Core Colors:
       sku: '9306'
       imageUrl: https://images.reapermini.com/4/09306.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     New Gold|Master Series Paints Core Colors:
       sku: '9051'
       imageUrl: https://images.reapermini.com/4/09051.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Nightmare Black|Master Series Paints Core Colors:
       sku: '9280'
       imageUrl: https://images.reapermini.com/4/09280.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Nightshade Purple|Master Series Paints Core Colors:
       sku: '9022'
       imageUrl: https://images.reapermini.com/4/09022.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Nightsky Indigo|Master Series Paints Bones:
       sku: '9422'
       imageUrl: https://images.reapermini.com/4/09422.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Noir Black|Master Series Paints Core Colors:
       sku: '9289'
       imageUrl: https://images.reapermini.com/4/09289.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Numeria Rust|Master Series Paints Pathfinder:
       sku: '89510'
       imageUrl: https://images.reapermini.com/4/89510.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Nut Brown|Master Series Paints Bones:
       sku: '9427'
       imageUrl: https://images.reapermini.com/4/09427.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Oceanic Blue|Master Series Paints Bones:
       sku: '9418'
       imageUrl: https://images.reapermini.com/4/09418.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Ogre Skin|Master Series Paints Bones:
       sku: '9459'
       imageUrl: https://images.reapermini.com/4/09459.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Oiled Leather|Master Series Paints Core Colors:
       sku: '9110'
       imageUrl: https://images.reapermini.com/4/09110.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Old Bronze|Master Series Paints Core Colors:
       sku: '9197'
       imageUrl: https://images.reapermini.com/4/09197.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Olive Drab|Master Series Paints Core Colors:
       sku: '9158'
       imageUrl: https://images.reapermini.com/4/09158.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Olive Green|Master Series Paints Core Colors:
       sku: '9035'
       imageUrl: https://images.reapermini.com/4/09035.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Olive Skin|Master Series Paints Core Colors:
       sku: '9221'
       imageUrl: https://images.reapermini.com/4/09221.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Orange Brown|Master Series Paints Core Colors:
       sku: '9201'
       imageUrl: https://images.reapermini.com/4/09201.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Orc Skin|Master Series Paints Bones:
       sku: '9456'
       imageUrl: https://images.reapermini.com/4/09456.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Osirian Sand|Master Series Paints Pathfinder:
       sku: '89511'
       imageUrl: https://images.reapermini.com/4/89511.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Pale Flesh|Master Series Paints Bones:
       sku: '9446'
       imageUrl: https://images.reapermini.com/4/09446.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Pale Green|Master Series Paints Core Colors:
       sku: '9012'
       imageUrl: https://images.reapermini.com/4/09012.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pale Lichen|Master Series Paints Core Colors:
       sku: '9084'
       imageUrl: https://images.reapermini.com/4/09084.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pale Olive|Master Series Paints Core Colors:
       sku: '9036'
       imageUrl: https://images.reapermini.com/4/09036b.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pale Saffron|Master Series Paints Bones:
       sku: '9484'
       imageUrl: https://images.reapermini.com/4/09484.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Pale Violet Red|Master Series Paints Core Colors:
       sku: '9027'
       imageUrl: https://images.reapermini.com/4/09027.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Palomino Gold|Master Series Paints Core Colors:
       sku: '9074'
       imageUrl: https://images.reapermini.com/4/09074.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pearl White|Master Series Paints Core Colors:
       sku: '9100'
       imageUrl: https://images.reapermini.com/4/09100.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Phantom Glow|Master Series Paints Core Colors:
       sku: '9319'
       imageUrl: https://images.reapermini.com/4/09319.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pharasma Purple|Master Series Paints Pathfinder:
       sku: '89535'
       imageUrl: https://images.reapermini.com/4/89535.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Phoenix Red|Master Series Paints Core Colors:
       sku: '9005'
       imageUrl: https://images.reapermini.com/4/09005.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pine Green|Master Series Paints Core Colors:
       sku: '9010'
       imageUrl: https://images.reapermini.com/4/09010.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Polished Bone|Master Series Paints Core Colors:
       sku: '9060'
       imageUrl: https://images.reapermini.com/4/09060.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Polished Leather|Master Series Paints Bones:
       sku: '9430'
       imageUrl: https://images.reapermini.com/4/09430.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Polished Silver|Master Series Paints Core Colors:
       sku: '9054'
       imageUrl: https://images.reapermini.com/4/09054.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Punk Rock Pink|Master Series Paints Core Colors:
       sku: '9286'
       imageUrl: https://images.reapermini.com/4/09286.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pure Black|Master Series Paints Core Colors:
       sku: '9037'
       imageUrl: https://images.reapermini.com/4/09037.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Pure White|Master Series Paints Core Colors:
       sku: '9039'
       imageUrl: https://images.reapermini.com/4/09039.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Rainy Grey|Master Series Paints Core Colors:
       sku: '9038'
       imageUrl: https://images.reapermini.com/4/09038.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Red Brick|Master Series Paints Core Colors:
       sku: '9001'
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Red Neon Glow|Master Series Paints Core Colors:
       sku: '9321'
       imageUrl: https://images.reapermini.com/4/09321.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Reliquary Gold|Master Series Paints Bones:
       sku: '9496'
       imageUrl: https://images.reapermini.com/4/09496.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Rich Leather|Master Series Paints Bones:
       sku: '9429'
       imageUrl: https://images.reapermini.com/4/09429.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Ritterlich Blue|Master Series Paints Core Colors:
       sku: '9115'
       imageUrl: https://images.reapermini.com/4/09115.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Rosy Highlight|Master Series Paints Core Colors:
       sku: '9069'
       imageUrl: https://images.reapermini.com/4/09069.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Rosy Shadow|Master Series Paints Core Colors:
       sku: '9067'
       imageUrl: https://images.reapermini.com/4/09067.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Rosy Skin|Master Series Paints Core Colors:
       sku: '9068'
       imageUrl: https://images.reapermini.com/4/09068.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Rotting Wood|Master Series Paints Core Colors:
       sku: '9313'
       imageUrl: https://images.reapermini.com/4/09313.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Royal Purple|Master Series Paints Core Colors:
       sku: '9240'
       imageUrl: https://images.reapermini.com/4/09240_w_1.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ruby Red|Master Series Paints Core Colors:
       sku: '9101'
       imageUrl: https://images.reapermini.com/4/09101.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ruddy Flesh|Master Series Paints Bones:
       sku: '9441'
       imageUrl: https://images.reapermini.com/4/09441.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Ruddy Leather|Master Series Paints Core Colors:
       sku: '9109'
       imageUrl: https://images.reapermini.com/4/09109.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Runic Glow|Master Series Paints Core Colors:
       sku: '9320'
       imageUrl: https://images.reapermini.com/4/09320.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Runic Purple|Master Series Paints Bones:
       sku: '9424'
       imageUrl: https://images.reapermini.com/4/09424.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Russet Brown|Master Series Paints Core Colors:
       sku: '9199'
       imageUrl: https://images.reapermini.com/4/09199.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Rust Brown|Master Series Paints Core Colors:
       sku: '9072'
       imageUrl: https://images.reapermini.com/4/09072.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Saddle Brown|Master Series Paints Bones:
       sku: '9428'
       imageUrl: https://images.reapermini.com/4/09428.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Saffron Sunset|Master Series Paints Core Colors:
       sku: '9247'
       imageUrl: https://images.reapermini.com/4/09247.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Sapphire Blue|Master Series Paints Core Colors:
       sku: '9016'
       imageUrl: https://images.reapermini.com/4/09016.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Sarenrae Yellow|Master Series Paints Pathfinder:
       sku: '89514'
       imageUrl: https://images.reapermini.com/4/89514.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Scholar Flesh|Master Series Paints Bones:
       sku: '9444'
       imageUrl: https://images.reapermini.com/4/09444b.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Scorched Metal|Master Series Paints Core Colors:
       sku: '9125'
       imageUrl: https://images.reapermini.com/4/09125.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Seoni Scarlet|Master Series Paints Pathfinder:
       sku: '89504'
       imageUrl: https://images.reapermini.com/4/89504.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Sepia Liner|Master Series Paints Core Colors:
       sku: '9309'
       imageUrl: https://images.reapermini.com/4/09309.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Sepia Wash|Master Series Paints Core Colors Wash:
       sku: '9310'
       imageUrl: https://images.reapermini.com/4/09310.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Seugathi Purple|Master Series Paints Pathfinder:
       sku: '89536'
       imageUrl: https://images.reapermini.com/4/89536.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Shadowed Steel|Master Series Paints Core Colors:
       sku: '9052'
       imageUrl: https://images.reapermini.com/4/09052.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Shadowed Stone|Master Series Paints Core Colors:
       sku: '9085'
       imageUrl: https://images.reapermini.com/4/09085.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Shelyn Blush|Master Series Paints Pathfinder:
       sku: '89501'
       imageUrl: https://images.reapermini.com/4/89501.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Shield Brown|Master Series Paints Core Colors:
       sku: '9161'
       imageUrl: https://images.reapermini.com/4/09161.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Shining Mithril|Master Series Paints Bones:
       sku: '9454'
       imageUrl: https://images.reapermini.com/4/09454.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Shoanti Sienna|Master Series Paints Pathfinder:
       sku: '89542'
       imageUrl: https://images.reapermini.com/4/89542.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Sinspawn Pink|Master Series Paints Pathfinder:
       sku: '89503'
       imageUrl: https://images.reapermini.com/4/89503.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Siren's Song|Master Series Paints Bones:
       sku: '9489'
       imageUrl: https://images.reapermini.com/4/09489.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Skeleton Bone|Master Series Paints Bones:
       sku: '9435'
       imageUrl: https://images.reapermini.com/4/09435.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Skeleton Key|Master Series Paints Bones:
       sku: '9465'
       imageUrl: https://images.reapermini.com/4/09465.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Skeleton White|Master Series Paints Pathfinder:
       sku: '89548'
       imageUrl: https://images.reapermini.com/4/89548.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Sky Blue|Master Series Paints Core Colors:
       sku: '9018'
       imageUrl: https://images.reapermini.com/4/09018.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Snow Shadow|Master Series Paints Core Colors:
       sku: '9021'
       imageUrl: https://images.reapermini.com/4/09021.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Solid Black|Master Series Paints Bones:
       sku: '9479'
       imageUrl: https://images.reapermini.com/4/09479.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Solid White|Master Series Paints Bones:
       sku: '9478'
       imageUrl: https://images.reapermini.com/4/09478.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Sorcerous Mist|Master Series Paints Core Colors:
       sku: '9324'
       imageUrl: https://images.reapermini.com/4/09324.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Sparkling Amethyst|Master Series Paints Core Colors:
       sku: '9105'
       imageUrl: https://images.reapermini.com/4/09105.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Sparkling Blue|Master Series Paints Core Colors:
       sku: '9104'
       imageUrl: https://images.reapermini.com/4/09104.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Spectral Glow|Master Series Paints Bones:
       sku: '9416'
       imageUrl: https://images.reapermini.com/4/09416.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Steel Wash|Master Series Paints Core Colors Wash:
       sku: '9312'
       imageUrl: https://images.reapermini.com/4/09312.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Stone Grey|Master Series Paints Core Colors:
       sku: '9086'
       imageUrl: https://images.reapermini.com/4/09086.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Stone Wash|Master Series Paints Core Colors Wash:
       sku: '9311'
       imageUrl: https://images.reapermini.com/4/09311.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Stormy Grey|Master Series Paints Core Colors:
       sku: '9088'
       imageUrl: https://images.reapermini.com/4/09088.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Styx Purple|Master Series Paints Bones:
       sku: '9423'
       imageUrl: https://images.reapermini.com/4/09423.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Succubus Kiss|Master Series Paints Bones:
       sku: '9462'
       imageUrl: https://images.reapermini.com/4/09462.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Sun Yellow|Master Series Paints Core Colors:
       sku: '9008'
       imageUrl: https://images.reapermini.com/4/09008.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Sunrise Orange|Master Series Paints Bones:
       sku: '9406'
       imageUrl: https://images.reapermini.com/4/09406.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Suntan Flesh|Master Series Paints Bones:
       sku: '9482'
       imageUrl: https://images.reapermini.com/4/09482.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Surf Aqua|Master Series Paints Core Colors:
       sku: '9078'
       imageUrl: https://images.reapermini.com/4/09078.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Taldan Pink|Master Series Paints Pathfinder:
       sku: '89540'
       imageUrl: https://images.reapermini.com/4/89540.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Tanned Highlight|Master Series Paints Core Colors:
       sku: '9045'
       imageUrl: https://images.reapermini.com/4/09045.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tanned Leather|Master Series Paints Core Colors:
       sku: '9031'
       imageUrl: https://images.reapermini.com/4/09031.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tanned Shadow|Master Series Paints Core Colors:
       sku: '9043'
       imageUrl: https://images.reapermini.com/4/09043.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tanned Skin|Master Series Paints Core Colors:
       sku: '9044'
       imageUrl: https://images.reapermini.com/4/09044.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tarnished Brass|Master Series Paints Core Colors:
       sku: '9198'
       imageUrl: https://images.reapermini.com/4/09198.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tarnished Copper|Master Series Paints Core Colors:
       sku: '9305'
       imageUrl: https://images.reapermini.com/4/09305.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tarnished Steel|Master Series Paints Core Colors:
       sku: '9206'
       imageUrl: https://images.reapermini.com/4/09206.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tempest Grey|Master Series Paints Bones:
       sku: '9438'
       imageUrl: https://images.reapermini.com/4/09438.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Templar Blue|Master Series Paints Core Colors:
       sku: '9056'
       imageUrl: https://images.reapermini.com/4/09056.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Tendril Pink|Master Series Paints Bones:
       sku: '9486'
       imageUrl: https://images.reapermini.com/4/09486.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Terran Khaki|Master Series Paints Core Colors:
       sku: '9122'
       imageUrl: https://images.reapermini.com/4/09122.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Thuvian Sun Orchid|Master Series Paints Pathfinder:
       sku: '89537'
       imageUrl: https://images.reapermini.com/4/89537.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Tian Xia Jade|Master Series Paints Pathfinder:
       sku: '89518'
       imageUrl: https://images.reapermini.com/4/89518.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Troll Hide|Master Series Paints Bones:
       sku: '9455'
       imageUrl: https://images.reapermini.com/4/09455.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Tropical Blue|Master Series Paints Bones:
       sku: '9419'
       imageUrl: https://images.reapermini.com/4/09419.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     True Blue|Master Series Paints Core Colors:
       sku: '9017'
       imageUrl: https://images.reapermini.com/4/09017.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     True Silver|Master Series Paints Core Colors:
       sku: '9207'
       imageUrl: https://images.reapermini.com/4/09207.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Turf Green|Master Series Paints Bones:
       sku: '9481'
       imageUrl: https://images.reapermini.com/4/09481_TurfGreen.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Twilight Blue|Master Series Paints Core Colors:
       sku: '9020'
       imageUrl: https://images.reapermini.com/4/09020.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Twilight Purple|Master Series Paints Bones:
       sku: '9483'
       imageUrl: https://images.reapermini.com/4/09483.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Ultramarine Blue|Master Series Paints Core Colors:
       sku: '9188'
       imageUrl: https://images.reapermini.com/4/09188.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ultramarine Highlight|Master Series Paints Core Colors:
       sku: '9189'
       imageUrl: https://images.reapermini.com/4/09189.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Ultramarine Shadow|Master Series Paints Core Colors:
       sku: '9187'
       imageUrl: https://images.reapermini.com/4/09187.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Undead Flesh|Master Series Paints Bones:
       sku: '9447'
       imageUrl: https://images.reapermini.com/4/09447.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Unicorn White|Master Series Paints Pathfinder:
       sku: '89547'
       imageUrl: https://images.reapermini.com/4/89547.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Uniform Brown|Master Series Paints Core Colors:
       sku: '9127'
       imageUrl: https://images.reapermini.com/4/09127.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Urgathoa Red|Master Series Paints Pathfinder:
       sku: '89508'
       imageUrl: https://images.reapermini.com/4/89508.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Valeros Gold|Master Series Paints Pathfinder:
       sku: '89552'
       imageUrl: https://images.reapermini.com/4/89552.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-pathfinder-colors
       source: mfr-reaper
+      priceUsd: 3.99
     Vampiric Highlight|Master Series Paints Core Colors:
       sku: '9276'
       imageUrl: https://images.reapermini.com/4/09276.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Vampiric Mist|Master Series Paints Bones:
       sku: '9461'
       imageUrl: https://images.reapermini.com/4/09461.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Vampiric Shadow|Master Series Paints Core Colors:
       sku: '9274'
       imageUrl: https://images.reapermini.com/4/09274.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Vampiric Skin|Master Series Paints Core Colors:
       sku: '9275'
       imageUrl: https://images.reapermini.com/4/09275.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Violet Red|Master Series Paints Core Colors:
       sku: '9026'
       imageUrl: https://images.reapermini.com/4/09026.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Viper Green|Master Series Paints Core Colors:
       sku: '9228'
       imageUrl: https://images.reapermini.com/4/09228.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Void Blue|Master Series Paints Bones:
       sku: '9417'
       imageUrl: https://images.reapermini.com/4/09417.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Volcanic Orange|Master Series Paints Bones:
       sku: '9405'
       imageUrl: https://images.reapermini.com/4/09405.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Walnut Brown|Master Series Paints Core Colors:
       sku: '9136'
       imageUrl: https://images.reapermini.com/4/09136.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Warrior Flesh|Master Series Paints Bones:
       sku: '9443'
       imageUrl: https://images.reapermini.com/4/09443b.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Wash Medium|Master Series Paints Core Colors:
       sku: '9300'
       imageUrl: https://images.reapermini.com/4/09300.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Weathered Stone|Master Series Paints Core Colors:
       sku: '9087'
       imageUrl: https://images.reapermini.com/4/09087.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Wilderness Green|Master Series Paints Bones:
       sku: '9411'
       imageUrl: https://images.reapermini.com/4/09411.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Witchcraft Purple|Master Series Paints Bones:
       sku: '9477'
       imageUrl: https://images.reapermini.com/4/09477.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Wolf Grey|Master Series Paints Bones:
       sku: '9434'
       imageUrl: https://images.reapermini.com/4/09434.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Woodland Brown|Master Series Paints Bones:
       sku: '9476'
       imageUrl: https://images.reapermini.com/4/09476.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Woodstain Brown|Master Series Paints Core Colors:
       sku: '9160'
       imageUrl: https://images.reapermini.com/4/09160.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Wyvern Leather|Master Series Paints Bones:
       sku: '9492'
       imageUrl: https://images.reapermini.com/4/09492.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Yellow Mold|Master Series Paints Bones:
       sku: '9487'
       imageUrl: https://images.reapermini.com/4/09487.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
     Yellowed Ivory|Master Series Paints Core Colors:
       sku: '9143'
       imageUrl: https://images.reapermini.com/4/09143.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
       source: mfr-reaper
+      priceUsd: 3.89
     Youthful Flesh|Master Series Paints Bones:
       sku: '9445'
       imageUrl: https://images.reapermini.com/4/09445_b.jpg
       sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
       source: mfr-reaper
+      priceUsd: 3.89
   additions:
   - name: Brinewind Brown
     set: Master Series Paints Bones
@@ -1870,327 +2244,951 @@ reaper:
     imageUrl: https://images.reapermini.com/4/09500_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Chum Red
     set: Master Series Paints Bones
     productCode: '9505'
     imageUrl: https://images.reapermini.com/4/09505_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Doxy Blush
     set: Master Series Paints Bones
     productCode: '9498'
     imageUrl: https://images.reapermini.com/4/09498_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Ghostfire
     set: Master Series Paints Bones
     productCode: '9503'
     imageUrl: https://images.reapermini.com/4/09503_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Kraken Ink
     set: Master Series Paints Bones
     productCode: '9507'
     imageUrl: https://images.reapermini.com/4/09507_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Mermaid Scale
     set: Master Series Paints Bones
     productCode: '9497'
     imageUrl: https://images.reapermini.com/4/09497_3.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Pieces of Eight
     set: Master Series Paints Bones
     productCode: '9501'
     imageUrl: https://images.reapermini.com/4/09501_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Sharkbite
     set: Master Series Paints Bones
     productCode: '9506'
     imageUrl: https://images.reapermini.com/4/09506_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Skull and Crossbones
     set: Master Series Paints Bones
     productCode: '9504'
     imageUrl: https://images.reapermini.com/4/09504_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Squog Green
     set: Master Series Paints Bones
     productCode: '9508'
     imageUrl: https://images.reapermini.com/4/09508_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Stormchaser Blue
     set: Master Series Paints Bones
     productCode: '9502'
     imageUrl: https://images.reapermini.com/4/09502_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Treasure Map
     set: Master Series Paints Bones
     productCode: '9499'
     imageUrl: https://images.reapermini.com/4/09499_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-bones
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Aragott Goldmare
     set: Master Series Paints Core Colors
     productCode: '29182'
     imageUrl: https://images.reapermini.com/4/29182_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Ashen Brown
     set: Master Series Paints Core Colors
     productCode: '9327'
     imageUrl: https://images.reapermini.com/4/09327.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Batwing Black
     set: Master Series Paints Core Colors
     productCode: '29226'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Black Indigo
     set: Master Series Paints Core Colors
     productCode: '9328'
     imageUrl: https://images.reapermini.com/4/09328.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Bruised Purple
     set: Master Series Paints Core Colors
     productCode: '9326'
     imageUrl: https://images.reapermini.com/4/09326.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Carnival Purple
     set: Master Series Paints Core Colors
     productCode: '9325'
     imageUrl: https://images.reapermini.com/4/09325.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Crowberry
     set: Master Series Paints Core Colors
     productCode: '29184'
     imageUrl: https://images.reapermini.com/4/29184_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Elf Road
     set: Master Series Paints Core Colors
     productCode: '29188'
     imageUrl: https://images.reapermini.com/4/29188_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Enestreve Rose
     set: Master Series Paints Core Colors
     productCode: '29179'
     imageUrl: https://images.reapermini.com/4/29179_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Ghostly Fog
     set: Master Series Paints Core Colors
     productCode: '29187'
     imageUrl: https://images.reapermini.com/4/29187_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Haunted Aura UV Reactive Paint
     set: Master Series Paints Core Colors
     productCode: '29236'
     imageUrl: https://images.reapermini.com/4/29236_w_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.99
   - name: Lamplighter's Yellow
     set: Master Series Paints Core Colors
     productCode: '29181'
     imageUrl: https://images.reapermini.com/4/29181_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Leaf Bud Green
     set: Master Series Paints Core Colors
     productCode: '9336'
     imageUrl: https://images.reapermini.com/4/09336.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Lotus Orange
     set: Master Series Paints Core Colors
     productCode: '9335'
     imageUrl: https://images.reapermini.com/4/09335.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: MSP Paint Color Sample
     set: Master Series Paints Core Colors
     productCode: '9000'
     imageUrl: https://images.reapermini.com/4/09000_SAMPLE.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Meadowlark Gold
     set: Master Series Paints Core Colors
     productCode: '29180'
     imageUrl: https://images.reapermini.com/4/29180_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Mist Green
     set: Master Series Paints Core Colors
     productCode: '9168'
     imageUrl: https://images.reapermini.com/4/09168_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Mistwood
     set: Master Series Paints Core Colors
     productCode: '29186'
     imageUrl: https://images.reapermini.com/4/29186_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Morning Glory
     set: Master Series Paints Core Colors
     productCode: '29185'
     imageUrl: https://images.reapermini.com/4/29185_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Morvaigne Scarlet
     set: Master Series Paints Core Colors
     productCode: '29178'
     imageUrl: https://images.reapermini.com/4/29178_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: NMM Silver Base
     set: Master Series Paints Core Colors
     productCode: '29223'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: NMM Silver Highlight
     set: Master Series Paints Core Colors
     productCode: '29224'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: NMM Silver Shadow
     set: Master Series Paints Core Colors
     productCode: '29222'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Orchid Purple
     set: Master Series Paints Core Colors
     productCode: '9334'
     imageUrl: https://images.reapermini.com/4/09334.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Oxidized Brown
     set: Master Series Paints Core Colors
     productCode: '9333'
     imageUrl: https://images.reapermini.com/4/09333.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Oxidized Red
     set: Master Series Paints Core Colors
     productCode: '9332'
     imageUrl: https://images.reapermini.com/4/09332.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Phthalo Green
     set: Master Series Paints Core Colors
     productCode: '29225'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Poltergeist Slime UV Reactive Paint
     set: Master Series Paints Core Colors
     productCode: '29237'
     imageUrl: https://images.reapermini.com/4/29237_w_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.99
   - name: Redfork Jasper
     set: Master Series Paints Core Colors
     productCode: '29177'
     imageUrl: https://images.reapermini.com/4/29177_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Rich Indigo
     set: Master Series Paints Core Colors
     productCode: '9329'
     imageUrl: https://images.reapermini.com/4/09329.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Rose Gold
     set: Master Series Paints Core Colors
     productCode: '9337'
     imageUrl: https://images.reapermini.com/4/09337_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Rudolph Red
     set: Master Series Paints Core Colors
     productCode: '29176'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.69
   - name: Rust Monster Hide
     set: Master Series Paints Core Colors
     productCode: '29227'
     imageUrl: null
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
-  - name: Sophie's Mystery Paint Set
-    set: Master Series Paints Core Colors
-    productCode: '9985'
-    imageUrl: https://images.reapermini.com/4/09985_w_3.jpg
-    sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
-    source: mfr-reaper
+    priceUsd: 3.89
   - name: Steed Green
     set: Master Series Paints Core Colors
     productCode: '29183'
     imageUrl: https://images.reapermini.com/4/29183_1.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Tinted Black Gloss
     set: Master Series Paints Core Colors
     productCode: '29221'
     imageUrl: https://images.reapermini.com/4/29221_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Tinted Blue Gloss
     set: Master Series Paints Core Colors
     productCode: '29219'
     imageUrl: https://images.reapermini.com/4/29219_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Tinted Golden Gloss
     set: Master Series Paints Core Colors
     productCode: '29217'
     imageUrl: https://images.reapermini.com/4/29217_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Tinted Green Gloss
     set: Master Series Paints Core Colors
     productCode: '29218'
     imageUrl: https://images.reapermini.com/4/29218_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Tinted Purple Gloss
     set: Master Series Paints Core Colors
     productCode: '29220'
     imageUrl: https://images.reapermini.com/4/29220_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Tinted Red Gloss
     set: Master Series Paints Core Colors
     productCode: '29216'
     imageUrl: https://images.reapermini.com/4/29216_2.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Wild Violet
     set: Master Series Paints Core Colors
     productCode: '9330'
     imageUrl: https://images.reapermini.com/4/09330.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
   - name: Yellow Ochre
     set: Master Series Paints Core Colors
     productCode: '9331'
     imageUrl: https://images.reapermini.com/4/09331.jpg
     sourceUrl: https://www.reapermini.com/paints/master-series-paints-core-colors
     source: mfr-reaper
+    priceUsd: 3.89
+  candidates:
+  - name: Additives
+    sku: 09736
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Additives II
+    sku: 09772
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Autumn Browns
+    sku: 09767
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Blonde Hair Triad
+    sku: 09786
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Blood Colors
+    sku: 09701
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Bloodthirsty Reds
+    sku: 09745
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Bone Colors
+    sku: 09720
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Bronzed Skin Triad
+    sku: 09787
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Burnt Colors
+    sku: 09737
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Classic Browns
+    sku: 09746
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Clear Brights One
+    sku: 09732
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Clear Brights Two
+    sku: 09733
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Colored Metallics One
+    sku: 09734
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Colored Metallics Three
+    sku: 09742
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Colored Metallics Two
+    sku: 09735
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Cool Greens
+    sku: 09705
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Dark Elf Skin
+    sku: 09755
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Dark Skintones
+    sku: 09714
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Dragon Colors Paint Set
+    sku: 09917
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Exotics Triad
+    sku: 09816
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Fair Skintones
+    sku: 09716
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Fire Colors
+    sku: 09702
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Glows Triad (9319-9321)
+    sku: 09811
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Gold-toned Metal
+    sku: 09717
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Grey Blues
+    sku: 09707
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Grey Browns
+    sku: 09754
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Heartbreaker Triad #1'
+    sku: 09817
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Heartbreaker Triad #2'
+    sku: 09818
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Indigos Triad (9328-30)
+    sku: 09814
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Khaki Brown
+    sku: 09743
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Lava Colors
+    sku: 09773
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn To Paint Kit: Core Skills'
+    sku: 08906
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint Kit: Core Skills Bundle'
+    sku: 08910
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint Kit: Core Skills Color Expansion'
+    sku: 08908
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint Kit: Layer Up!'
+    sku: 08907
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint Kit: Layer Up! Bundle'
+    sku: 08911
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint Kit: Layer Up! Color Expansion'
+    sku: 08909
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint: Goblins Quick-Paint Kit'
+    sku: 09914
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint: Grave Wraith Quick-Paint Kit'
+    sku: 09918
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint: Kobolds Quick-Paint Kit'
+    sku: 09915
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Learn to Paint: Zombies Quick-Paint Kit'
+    sku: 09916
+    url: https://www.reapermini.com/paints/learn-to-paint-kits
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Liners
+    sku: 09722
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones Ultra-Coverage Paints: Set #1'
+    sku: 09976
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones Ultra-Coverage Paints: Set #2'
+    sku: 09977
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones Ultra-Coverage Paints: Set #3'
+    sku: 09978
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones Ultra-Coverage Paints: Set #4'
+    sku: 09979
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones Ultra-Coverage Paints: Set #5'
+    sku: 09980
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones Ultra-Coverage Paints: Set #6'
+    sku: 09981
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones: Dungeon Colors Set'
+    sku: 09975
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Bones: Monster Colors Set'
+    sku: 09974
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Core Color Triad: Purples Triad'
+    sku: 09813
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Core Color Triad: Seasons Greetings'
+    sku: 09806
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Core Color Triad: Smores Colors'
+    sku: 09805
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Core Color Triad: Stone Sky Triad'
+    sku: 09810
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Core Color Triad: Winter Snow'
+    sku: 09807
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'MSP Core Colors Triad: Additives III (09298-09300)'
+    sku: 09800
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: MSP Pride Paint Set
+    sku: 09919
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: MSP Starter Set
+    sku: 09984
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Martial Blues
+    sku: 09719
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Master Series Core Colors Set #2'
+    sku: 09957
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Master Series Paint Core Colors Master Set
+    sku: 09956
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Master Series Paints Core Colors Basics #1'
+    sku: 09952
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Master Series Paints Core Colors Set #1'
+    sku: 09951
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Master Series Paints Holiday Paint Set
+    sku: 09969
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Master Series Paints: Pathfinder Colors of Golarion - Paint Set #1'
+    sku: 09967
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Master Series Paints: Pathfinder Colors of Golarion - Paint Set #2'
+    sku: 09968
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Medium Skintones
+    sku: 09715
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Metallics V
+    sku: 09766
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Misty Colors Triad (9322-9324)
+    sku: 09812
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Modern Brights Colors
+    sku: 09796
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Moss Colors
+    sku: 09728
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: NMM Copper Colors Triad (09304-09306)
+    sku: 09802
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: NMM Gold Colors Triad (09301-09303)
+    sku: 09801
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Natural Steel
+    sku: 09769
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Neutral Colors
+    sku: 09713
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Neutral Greys
+    sku: 09730
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Ocean Colors
+    sku: 09726
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Off-Whites
+    sku: 09721
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Olive Greens
+    sku: 09712
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Oxidized Triad
+    sku: 09815
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Pastel Colors Triad
+    sku: 09788
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Pure Blues
+    sku: 09706
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: Fantasy Flesh - Fair Skin'
+    sku: 09902
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: Fantasy Flesh - Tanned Skin (Medium Skintones)'
+    sku: 09907
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: Fire and Brimstone: Fiery Reds'
+    sku: 09903
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: Flesh of the Damned - Undead Skin'
+    sku: 09901
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: Hammer and Anvil - Steel Colors'
+    sku: 09904
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: High Seas Adventure'
+    sku: 09905
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Reaper Fast Palette: High Seas Horror'
+    sku: 09906
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Reaper Master Series Bones Ultra-Coverage Paints Basic Set (09401-09454)
+    sku: 09966
+    url: https://www.reapermini.com/paints/paint-sets
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: ReaperCon 2024 Hall of Fame Triad
+    sku: 09887
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: ReaperCon 2025 Artist Box Triad
+    sku: 09987
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Red Hair
+    sku: 09781
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Red-Brown
+    sku: 09724
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Rosy Skintones
+    sku: 09723
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Royal Purples
+    sku: 09708
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Silver-toned Metal
+    sku: 09718
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Sophie's Mystery Paint Set
+    sku: 09985
+    url: https://www.reapermini.com/paints/master-series-paints-core-colors
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Stone Colors
+    sku: 09729
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Sunkissed Triad
+    sku: 09821
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: The Triliad
+    sku: 09822
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Tinted Glosses Triad #1'
+    sku: 09819
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: 'Tinted Glosses Triad #2'
+    sku: 09820
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Ultramarine Blues
+    sku: 09763
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Undead Skintones
+    sku: 09750
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Vampiric Skintones Colors
+    sku: 09792
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Violet Reds
+    sku: 09709
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Vivid Blues
+    sku: 09739
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Warm Deep Browns
+    sku: 09710
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Warm Greens
+    sku: 09704
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Warm Light Brown
+    sku: 09711
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Washes I Triad
+    sku: 09785
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Washes II Triad (09310-09312)
+    sku: 09804
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Woods Triad
+    sku: 09809
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog
+  - name: Yellows
+    sku: 09703
+    url: https://www.reapermini.com/paints/master-series-paints-triads
+    source: mfr-reaper
+    reason: boxed set -- crosses to the product catalog

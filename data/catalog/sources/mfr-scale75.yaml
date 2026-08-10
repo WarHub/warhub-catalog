@@ -65,3 +65,20 @@ contract:
     name: 1.0
     sku: 0.9
     # NO ean gate on purpose: barcodes unpopulated store-wide (see scope.skipDetails).
+# Boxed multi-pot sets are PRODUCTS, not paints -- see resolve/crossover.py for the shared
+# evaluator gen_paint_harvest.py refuses the same rows with.
+crossoverToProducts:
+  reason: >
+    Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
+    Measured 2026-08-05 over all 562 observations: CATEGORY ONLY -- the title signal
+    selects ZERO here (scale75.com names its boxes "BOREAL LIGHTS.COOL COLORS", "CORE",
+    "PRIMARY", never "set"), so a name clause would be inert and is omitted. The three
+    collection handles select 7; the `\bCASE\b` veto drops SFLOW-000 "DR FLOWS PAINT
+    CASE", an empty carrying case in the floww-oleos collection and not a paint set,
+    leaving 6. All 6 are code-anchored under the existing scale75 codePattern; the store
+    publishes no barcodes at all (see scope.skipDetails), so all 6 cross EAN-less.
+  category: paint-set
+  anyOf:
+    - hintContainsAny: {collections: [prism, prism-effect-sets, floww-oleos]}
+  noneOf:
+    - nameMatches: '\bCASE\b'

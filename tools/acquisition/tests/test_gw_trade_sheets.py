@@ -331,12 +331,12 @@ def test_merge_unions_hints():
 
 
 def _lineage(pairs):
-    """Run _attach_lineage over (key, old_code, raw_old_barcode[, changed_on]) rows."""
+    """Run _attach_lineage over (key, old_code, raw_old_barcode[, changed_on[, old_ssc]]) rows."""
     from warhub_acquisition.acquire.strategies.gw_trade_sheets import _attach_lineage
 
     observations = {"mfr-gw-trade:99120202075": _obs()}
     stats = collections.defaultdict(int)
-    _attach_lineage([tuple(p) + (None,) * (4 - len(p)) for p in pairs], observations, stats)
+    _attach_lineage([tuple(p) + (None,) * (5 - len(p)) for p in pairs], observations, stats)
     return observations["mfr-gw-trade:99120202075"], stats
 
 
@@ -366,7 +366,7 @@ def test_wh_colour_rebrand_row_yields_new_sku_plus_its_predecessor():
                   "New SKU") == "99189960262"
     assert _clean_ean(row["New Individual barcode"]) == "5011921262519"
     # no Old Barcode column in this workbook -> the link carries the code alone, never a guess
-    assert _predecessor(row, "2026-07-30") == ("99189960061", None, None)
+    assert _predecessor(row, "2026-07-30") == ("99189960061", None, None, None)
 
 
 @pytest.mark.parametrize(
@@ -442,7 +442,7 @@ def test_lineage_for_a_code_with_no_observation_is_counted_not_invented():
     from warhub_acquisition.acquire.strategies.gw_trade_sheets import _attach_lineage
 
     stats = collections.defaultdict(int)
-    _attach_lineage([("mfr-gw-trade:missing", "99120202012", "5011921062164", None)], {}, stats)
+    _attach_lineage([("mfr-gw-trade:missing", "99120202012", "5011921062164", None, None)], {}, stats)
     assert stats["lineage_unmatched"] == 1
     assert stats["lineage_links"] == 0
 
@@ -451,6 +451,7 @@ def test_predecessor_is_absent_on_sheets_without_old_columns():
     from warhub_acquisition.acquire.strategies.gw_trade_sheets import _predecessor
 
     assert _predecessor({"Product Code": "99120202075", "Barcode": "5011921252848"}) == (
+        None,
         None,
         None,
         None,
@@ -466,7 +467,7 @@ def test_predecessor_is_absent_on_sheets_without_old_columns():
             "Date": dt.datetime(2026, 3, 30),
         },
         "2026-07-22",
-    ) == ("52170299003", "5011921219254", "2026-03-30")
+    ) == ("52170299003", "5011921219254", "2026-03-30", None)
 
 
 def test_future_dated_code_change_keeps_the_pair_but_drops_the_date():
@@ -474,7 +475,7 @@ def test_future_dated_code_change_keeps_the_pair_but_drops_the_date():
     unreleased products. The renumbering itself is still a fact; only the date is withheld."""
     from warhub_acquisition.acquire.strategies.gw_trade_sheets import _predecessor
 
-    code, barcode, changed = _predecessor(
+    code, barcode, changed, _ = _predecessor(
         {
             "Old Product Code": "52170299003",
             "Old Barcode": "5011921219254",
@@ -631,7 +632,7 @@ def test_predecessor_code_is_zero_padded_too():
     never existed -- and would not match the surviving catalog's 11-digit codes."""
     from warhub_acquisition.acquire.strategies.gw_trade_sheets import _predecessor
 
-    code, _, _ = _predecessor({"Old Product Code": 2120712002, "New Product Code": "60010299044"})
+    code, _, _, _ = _predecessor({"Old Product Code": 2120712002, "New Product Code": "60010299044"})
     assert code == "02120712002"
 
 
@@ -733,7 +734,7 @@ def test_slash_dates_in_the_register_are_read_day_first():
     assert _as_date("31/02/2021") is None                  # impossible date, not a silent shift
     assert _as_date("not a date") is None
 
-    _, _, changed_on = _predecessor(
+    _, _, changed_on, _ = _predecessor(
         {"Old Product Code": "99120204012", "Date": "03/06/2024"}, run_date="2026-07-30"
     )
     assert changed_on == "2024-06-03"

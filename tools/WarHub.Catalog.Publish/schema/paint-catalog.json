@@ -21,7 +21,11 @@
       "type": "object",
       "required": ["id", "brand", "name", "equivalents"],
       "properties": {
-        "id": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+$" },
+        "id": {
+          "type": "string",
+          "description": "brand-slug/paint-slug, fully slugged and all-lowercase. Qualified by set (then product code, then hex) when a name collides, so an id depends only on the paint it names. NOTE this is STRICTER than product-catalog.json's id pattern, which preserves manufacturer casing -- the two grammars differ on purpose; see that schema.",
+          "pattern": "^[a-z0-9-]+/[a-z0-9-]+$"
+        },
         "brand": { "type": "string" },
         "category": { "type": "string" },
         "range": { "type": "string" },
@@ -40,8 +44,15 @@
           "items": { "type": "string" },
           "minItems": 1
         },
+        "imageUrl": { "type": "string" },
+        "priceGbp": { "type": "number" },
+        "priceUsd": { "type": "number" },
+        "priceEur": { "type": "number" },
+        "priceCad": { "type": "number" },
         "status": { "type": "string" },
         "availability": { "type": "string" },
+        "supersedes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "supersededBy": { "type": "string" },
         "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }
       }
     },

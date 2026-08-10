@@ -43,3 +43,43 @@ def test_malformed_catalog_file_raises_value_error_naming_the_file(tmp_path: Pat
     bad.write_text("manufacturer: broken\n", encoding="utf-8", newline="\n")  # missing 'products' key
     with pytest.raises(ValueError, match="broken.yaml"):
         build_report(paths)
+
+
+def test_paint_coverage_counts_distinct_barcodes_under_the_guard(tmp_path: Path) -> None:
+    # The count the EAN guard gates must be visible on every run: a guard that quietly reads zero
+    # paint files would pass forever, which is the silent failure it exists to prevent. Both roles
+    # count (paints have no eanConfidence), and a barcode held twice counts once.
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.root / "paints" / "brands" / "citadel-colour.yaml",
+        {
+            "brand": "Citadel Colour",
+            "brandSlug": "citadel-colour",
+            "paints": [
+                {"name": "Abaddon Black", "ean": "5011921182848",
+                 "additionalEans": ["5011921199457", "5011921244379"]},
+                {"name": "Administratum Grey", "ean": "5011921183340"},
+                {"name": "Duplicate Pot", "ean": "5011921183340"},
+                {"name": "No Barcode Yet"},
+            ],
+        },
+    )
+    report = build_report(paths)
+    assert "## Paint coverage" in report
+    assert "| citadel-colour | 4 | 4 |" in report
+    assert "| **total** | 4 | **4** |" in report
+
+
+def test_paint_coverage_section_is_absent_without_a_paint_catalog(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    write_yaml(paths.catalog_products / "empty-mfr.yaml", {"manufacturer": "empty-mfr", "products": []})
+    assert "## Paint coverage" not in build_report(paths)
+
+
+def test_malformed_paint_brand_file_raises_value_error_naming_the_file(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    bad = paths.root / "paints" / "brands" / "broken.yaml"
+    bad.parent.mkdir(parents=True, exist_ok=True)
+    bad.write_text("brandSlug: broken\npaints: [oops\n", encoding="utf-8", newline="\n")
+    with pytest.raises(ValueError, match="broken.yaml"):
+        build_report(paths)

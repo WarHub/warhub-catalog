@@ -36,6 +36,26 @@ public record PaintRecord
     /// </summary>
     public List<string>? AdditionalEans { get; init; }
     public string? ImageUrl { get; init; }
+    /// <summary>
+    /// Manufacturer list price per currency, from the trade bridge or a hand override. Note that
+    /// <see cref="Availability"/> deliberately does NOT come from the same evidence: trade sheets
+    /// carry no stock signal, and one paint identity spans several retail SKUs with different stock.
+    /// </summary>
+    public decimal? PriceGbp { get; init; }
+    public decimal? PriceUsd { get; init; }
+    public decimal? PriceEur { get; init; }
+    public decimal? PriceCad { get; init; }
+    /// <summary>
+    /// Archival lineage between two paint identities for the same colour (a reformulation moved
+    /// into another range). BOTH records are kept: the retired one keeps its own set/volume/code
+    /// and points forward with <see cref="SupersededBy"/>, the replacement lists its predecessors
+    /// in <see cref="Supersedes"/>. Stored as the <c>{Name}|{Set}</c> cross-reference key used
+    /// everywhere else in this tool; the publisher resolves it to a published id. Mirrors
+    /// ProductRecord: the relation is deliberately NOT encoded in <see cref="Status"/>, which every
+    /// consumer filters on and would hide exactly the archival record this keeps reachable.
+    /// </summary>
+    public List<string>? Supersedes { get; init; }
+    public string? SupersededBy { get; init; }
     public required PaintDetails Details { get; init; }
 }
 

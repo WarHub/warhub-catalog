@@ -23,19 +23,31 @@ public class EquivalenceFinder
     }
 
     /// <summary>
-    /// Finds equivalences across all brands. For each non-discontinued paint,
-    /// finds the best matches from other brands within the substitute threshold.
+    /// Finds equivalences across all brands. For each colour-bearing paint (including
+    /// discontinued ones — see below), finds the best cross-brand matches within the threshold.
     /// </summary>
     public EquivalencesFile FindEquivalences(
         IReadOnlyList<BrandCatalog> catalogs)
     {
-        // Build flat list of (paint, brand info) pairs, excluding discontinued paints and
-        // paints with no known colour (harvested additions carry Hex = "" until an override
-        // or swatch-extraction pass fills it — their R/G/B of 0 would otherwise make them
-        // match every genuinely black paint).
+        // Build flat list of (paint, brand info) pairs, excluding only paints with no known colour
+        // (harvested additions carry Hex = "" until an override or swatch-extraction pass fills it
+        // — their R/G/B of 0 would otherwise make them match every genuinely black paint).
+        //
+        // DISCONTINUED PAINTS ARE INCLUDED, deliberately. They used to be filtered out here with no
+        // stated reason, which had it exactly backwards for an archival catalog: somebody holding a
+        // pot GW stopped making is the single most likely person to need "what can I replace this
+        // with", and they were the only people guaranteed to get no answer. Retiring 33 Citadel
+        // paints made the cost visible — 7 sources lost their entry and 35 matches vanished purely
+        // because the paints became correct about their own status.
+        //
+        // Kept in BOTH roles rather than source-only, so the relation stays symmetric: if a retired
+        // paint matches a current one, the current one matches it back. Every published record
+        // carries `status`, so a consumer that only wants buyable substitutes can filter, whereas
+        // information dropped here could not be recovered downstream. Measured cost of including
+        // them: 133 of 8,270 colour-bearing paints, i.e. 1.03x on an O(n^2) pass.
         var allPaints = catalogs
             .SelectMany(c => c.Paints
-                .Where(p => !p.IsDiscontinued && !string.IsNullOrEmpty(p.Hex))
+                .Where(p => !string.IsNullOrEmpty(p.Hex))
                 .Select(p => (Paint: p, Brand: c.Brand, BrandSlug: c.BrandSlug)))
             .ToList();
 

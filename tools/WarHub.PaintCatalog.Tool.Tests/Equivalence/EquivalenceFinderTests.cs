@@ -70,7 +70,7 @@ public class EquivalenceFinderTests
     }
 
     [Fact]
-    public void FindEquivalences_ExcludesDiscontinued()
+    public void FindEquivalences_KeepsDiscontinuedPaintsAndTheirMatches()
     {
         var catalogs = new List<BrandCatalog>
         {
@@ -94,10 +94,13 @@ public class EquivalenceFinderTests
         var finder = new EquivalenceFinder();
         EquivalencesFile result = finder.FindEquivalences(catalogs);
 
-        // Old Red is discontinued — should not appear as source
-        Assert.DoesNotContain(result.Equivalences, e => e.Source.Name == "Old Red");
-        // New Red has no matches because Old Red is excluded
-        Assert.DoesNotContain(result.Equivalences, e => e.Source.Name == "New Red");
+        // A discontinued paint is exactly who needs a substitute, so it DOES appear as a source...
+        var oldRed = Assert.Single(result.Equivalences, e => e.Source.Name == "Old Red");
+        Assert.Equal("New Red", Assert.Single(oldRed.Matches).Paint.Name);
+        // ...and the relation stays symmetric: the current paint matches it back. Consumers that
+        // only want buyable substitutes filter on the `status` every published record carries.
+        var newRed = Assert.Single(result.Equivalences, e => e.Source.Name == "New Red");
+        Assert.Equal("Old Red", Assert.Single(newRed.Matches).Paint.Name);
     }
 
     [Fact]

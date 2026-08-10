@@ -33,8 +33,10 @@ scope:
     - auxiliary-products-hobby # (62)
 politeness:
   # acrylicosvallejo.com's WAF returns 403 to any non-browser UA on these public read-only
-  # REST endpoints (live-verified 2026-07-23: bot UA 403, browser UA 200). uaProfile swaps the
-  # identification string only; robots evaluation stays pinned to the bot token (runner.py).
+  # REST endpoints (live-verified 2026-07-23: bot UA 403, browser UA 200; RE-VERIFIED 2026-08-05,
+  # 3/3 paired probes of /en/wp-json/wp/v2/product?per_page=1 -- still bot UA 403, browser UA 200,
+  # so this override is still earned rather than inherited). uaProfile swaps the identification
+  # string only; robots evaluation stays pinned to the bot token (runner.py).
   uaProfile: browser
   # robots.txt: `User-agent: * / Allow: /` with `Crawl-delay: 9000` -- an anti-crawl posture
   # aimed at page crawlers, which at face value forbids ANY practical access (1 request/2.5 h).
@@ -49,3 +51,7 @@ contract:
   requiredFieldRates:
     name: 1.0
     sku: 0.9
+# NO crossoverToProducts, deliberately. Measured 2026-08-05 over all 1,194 observations: ZERO
+# titles match the set word list and the source exposes no sets category -- scope.urlInclude
+# above never fetched a sets endpoint, so the boxes simply are not in this evidence. If Vallejo
+# sets are wanted later they need an acquire-side scope change first, not a predicate here.

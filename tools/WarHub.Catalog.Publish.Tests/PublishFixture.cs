@@ -105,6 +105,51 @@ public sealed class PublishFixture : IDisposable
                 hex: '#9A1115'
                 volumeMl: 12
                 container: pot
+            - name: Hexwraith Flame
+              category: paint
+              status: discontinued
+              availability: out_of_stock
+              firstSeen: '2026-07-07'
+              supersededBy: Hexwraith Flame|Contrast
+              details:
+                set: Technical
+                r: 41
+                g: 162
+                b: 54
+                hex: '#29A236'
+                volumeMl: 24
+                container: pot
+            - name: Hexwraith Flame
+              category: paint
+              status: current
+              availability: unknown
+              firstSeen: '2026-07-07'
+              productCode: '99189960060'
+              supersedes:
+                - Hexwraith Flame|Technical
+              details:
+                set: Contrast
+                r: 0
+                g: 0
+                b: 0
+                hex: ''
+                volumeMl: 18
+                container: pot
+            - name: Ghost Ash
+              category: paint
+              status: discontinued
+              availability: out_of_stock
+              firstSeen: '2026-07-07'
+              productCode: C3
+              supersededBy: Nothing At All|Contrast
+              details:
+                set: Technical
+                r: 1
+                g: 2
+                b: 3
+                hex: '#010203'
+                volumeMl: 24
+                container: pot
             """);
 
         WriteFile(Path.Combine(paints, "brands", "vallejo.yaml"), """
@@ -120,6 +165,11 @@ public sealed class PublishFixture : IDisposable
               firstSeen: '2026-07-07'
               productCode: V1
               ean: '8429551724838'
+              imageUrl: https://img.example/vallejo-black.jpg
+              priceGbp: 2.75
+              priceUsd: 3.99
+              priceEur: 3.20
+              priceCad: 4.50
               details:
                 set: Model Color
                 r: 35

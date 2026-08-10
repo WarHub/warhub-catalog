@@ -1,1 +1,149 @@
-{}
+# Manual corrections to the paint catalog. Hand-edited; read by tools/WarHub.PaintCatalog.Tool
+# (--overrides). Every section is keyed by brand slug and read independently, so a mistake in one
+# section cannot silently disable another.
+#
+#   <brand-slug>:  "{Name}|{Set}" -> field overrides (productCode, hex, volumeMl, packaging, ean,
+#                  additionalEans, priceGbp/Usd/Eur/Cad, supersededBy)
+#
+
+additions:     <brand-slug> -> list of MINTED paints (name, set, productCode, ean, imageUrl,
+#                  supersededBy). For records a maintainer researched that NO upstream source
+#                  supplies. Distinct from data/paints/harvest/*.yaml `additions:`, which are
+#                  GENERATED from observed manufacturer listings and rewritten by the generator.
+#   aliases:       <brand-slug> -> {new identity key: old identity key} (reconciler renames)
+#   retract:       <brand-slug> -> [identity key] (drop from the archive)
+#
+# Minted paints are appended before the enrichment chain, so volume/container/type/finish/barcodes
+# come from the same tables a native paint uses. They are born colour-less (hex "", r/g/b 0) like
+# harvest additions; a swatch-extraction pass or an explicit `hex:` override fills the colour later.
+
+additions:
+  citadel-colour:
+    # Games Workshop reformulated the Hexwraith Flame and Nighthaunt Gloom Technical paints with
+    # Contrast chemistry and relaunched them IN the Contrast range on 2022-07-16 -- 18 ml, under a
+    # new 991899600xx product-code block. GW's trade announcement of that wave: "We've also improved
+    # the existing Hexwraith Flame and Nighthaunt Gloom Technical paints to benefit from the
+    # ground-breaking science behind Contrast." (GW store slugs: contrast-hexwraith-flame-18ml-2022,
+    # contrast-nighthaunt-gloom-18ml-2022.)
+    #
+    # These are TWO PRODUCTS, not a re-key of the Technical pots: new range, new volume, new
+    # formula, new code block -- and `set` is part of the paint identity key (set|name|productCode|
+    # hex), so each is a genuinely new identity. The Technical records stay, and point forward.
+    #
+    # Neither Arcturus5404/miniature-paints nor any harvested manufacturer source carries them,
+    # which is why they are minted here rather than harvested. NO hex is asserted: the Technical
+    # hex describes the OLD formula, so copying it across would be fabrication.
+    - name: Hexwraith Flame
+      set: Contrast
+      productCode: '99189960060'
+      source: Games Workshop trade announcement, 2022-07-16 Contrast wave
+    - name: Nighthaunt Gloom
+      set: Contrast
+      productCode: '99189960061'
+      source: Games Workshop trade announcement, 2022-07-16 Contrast wave
+
+# Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
+# Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
+# the bridge and the VolumeTable. Keep every entry cited -- these are asserted facts.
+#
+# --- Discontinued Citadel paints (researched 2026-07-31 against GW's own storefront) -------------
+# Discontinuation is an ABSENCE: the upstream source stops listing a paint and the trade sheets no
+# longer carry a row for it, so nothing in the pipeline can assert it. It has to be recorded here.
+#
+# The 31 Air colours below were culled on 2022-06-13, when GW deleted 44 Air SKUs from its trade
+# register, reissued 13 under new codes and dropped these for good. Confirmed independently against
+# the live storefront: GW's Air range enumerates as "Showing 45 of 45" and none of these is in it,
+# and each per-colour slug 404s while controls (Air-Thallax-Gold-2019, Air-Typhon-Ash-2019) return
+# 200 with `Pot size: 24ml`. The XV-88 slug trap was checked both ways (Air-XV-88 and Air-XV88).
+# 31 culled + 13 reissued + the 2 still-current below = the 44 the register deleted, exactly.
+#
+# NOT included, deliberately: Mechanicus Standard Grey and Mortarion Green Clear. They look culled
+# from the trade data but are LIVE on GW's storefront with lastChanceToBuy:false -- merely out of
+# stock. They were the two paints the bridge could not name-match, which is why they looked absent.
+citadel-colour:
+  # Only the forward direction is declared; `supersedes` on the Contrast records is derived from
+  # these, so the two directions cannot drift. Deliberately NOT expressed as a status change: the
+  Balor Brown|Air:
+    isDiscontinued: true
+  Caledor Sky|Air:
+    isDiscontinued: true
+  Calgar Blue|Air:
+    isDiscontinued: true
+  Castellax Bronze|Air:
+    isDiscontinued: true
+  Chemos Purple|Air:
+    isDiscontinued: true
+  Death Korps Drab|Air:
+    isDiscontinued: true
+  Deathclaw Brown|Air:
+    isDiscontinued: true
+  Deathshroud Clear|Air:
+    isDiscontinued: true
+  Dryad Bark|Air:
+    isDiscontinued: true
+  Gal Vorbak Red|Air:
+    isDiscontinued: true
+  Genestealer Purple|Air:
+    isDiscontinued: true
+  Iron Hands Steel|Air:
+    isDiscontinued: true
+  Ironbreaker|Air:
+    isDiscontinued: true
+  Kakophoni Purple|Air:
+    isDiscontinued: true
+  Karak Stone|Air:
+    isDiscontinued: true
+  Lupercal Green|Air:
+    isDiscontinued: true
+  Nocturne Green|Air:
+    isDiscontinued: true
+  Pyroclast Orange Clear|Air:
+    isDiscontinued: true
+  Relictor Gold|Air:
+    isDiscontinued: true
+  Sigismund Yellow Clear|Air:
+    isDiscontinued: true
+  Sons of Horus Green|Air:
+    isDiscontinued: true
+  Steel Legion Drab|Air:
+    isDiscontinued: true
+  Straken Green|Air:
+    isDiscontinued: true
+  Sybarite Green|Air:
+    isDiscontinued: true
+  Tau Light Ochre|Air:
+    isDiscontinued: true
+  Terminatus Stone|Air:
+    isDiscontinued: true
+  Tuskgor Fur|Air:
+    isDiscontinued: true
+  Vulkan Green|Air:
+    isDiscontinued: true
+  Warboss Green|Air:
+    isDiscontinued: true
+  Word Bearers Red|Air:
+    isDiscontinued: true
+  XV-88|Air:
+    isDiscontinued: true
+  # DELIBERATELY NOT RETIRED, so the asymmetry is visible rather than an oversight:
+  # Armageddon Dunes, Astrogranite Debris and Stirland Battlemire are absent from GW's current
+  # 21-item Technical range, but that is only HALF the evidence the 31 Air colours above were
+  # retired on. Those also had a per-colour slug returning 404 while known-live controls returned
+  # 200 -- a probe nobody has run for these three. Absence from an enumerated range alone has a
+  # benign explanation (temporarily out of stock, like Mechanicus Standard Grey and Mortarion Green
+  # Clear, which looked culled in the trade data and are demonstrably live). Retiring them on
+  # weaker evidence than their neighbours would make `status` mean two different things.
+  # Reformulated into Contrast at 18 ml on 2022-07-16 (GW trade article: "improved ... to
+  # benefit from the ground-breaking science behind Contrast"), with new product codes
+  # 99189960060/99189960061. The Technical 24 ml versions are gone, not concurrent: absent
+  # from GW's 21-item Technical range and Technical-Hexwraith-Flame-24ml-2018 404s in the
+  # Wayback CDX. New colour, new code, new volume -- two products, not a re-key, so the
+  # Contrast entries are an ADDITION the paint catalog still lacks (tracked separately).
+  Hexwraith Flame|Technical:
+    # Reformulated into Contrast on 2022-07-16; the Technical pot is BOTH
+    # discontinued and superseded, and both facts belong on the record.
+    supersededBy: Hexwraith Flame|Contrast
+    isDiscontinued: true
+  Nighthaunt Gloom|Technical:
+    supersededBy: Nighthaunt Gloom|Contrast
+    isDiscontinued: true

@@ -147,4 +147,54 @@ public class HarvestApplierTests
         Assert.Same(SamplePaints, HarvestApplier.AppendAdditions(
             SamplePaints, "vallejo", new Dictionary<string, HarvestApplier.BrandHarvest>()));
     }
+
+    [Fact]
+    public void Enrichment_on_an_ambiguous_key_lands_only_on_the_paint_its_sku_names()
+    {
+        // `{Name}|{Set}` is not unique -- identity is set|name|productCode|hex. Applying to every
+        // match put one store photo on both Vallejo "Bloody Red|Game Air" paints (35 such keys).
+        IReadOnlyList<Paint> paints =
+        [
+            new Paint { Name = "Bloody Red", Set = "Game Air", ProductCode = "72.710", R = 205, G = 50, B = 48, Hex = "#CD3230" },
+            new Paint { Name = "Bloody Red", Set = "Game Air", ProductCode = "76.010", R = 212, G = 28, B = 28, Hex = "#D41C1C" },
+        ];
+        var harvests = new Dictionary<string, HarvestApplier.BrandHarvest>
+        {
+            ["vallejo"] = new HarvestApplier.BrandHarvest
+            {
+                Enrich = new Dictionary<string, HarvestApplier.HarvestEntry>
+                {
+                    ["Bloody Red|Game Air"] = new() { ImageUrl = "https://example/76-010.jpg", Sku = "76.010" },
+                },
+            },
+        };
+
+        IReadOnlyList<Paint> result = HarvestApplier.ApplyEnrichment(paints, "vallejo", harvests);
+
+        Assert.Null(result.Single(p => p.ProductCode == "72.710").ImageUrl);
+        Assert.Equal("https://example/76-010.jpg", result.Single(p => p.ProductCode == "76.010").ImageUrl);
+    }
+
+    [Fact]
+    public void Enrichment_on_an_ambiguous_key_the_sku_cannot_resolve_is_skipped_entirely()
+    {
+        // Guessing which of two paints a photo belongs to is worse than leaving both blank.
+        IReadOnlyList<Paint> paints =
+        [
+            new Paint { Name = "Black", Set = "Game Color", ProductCode = "72.051", R = 0, G = 0, B = 0, Hex = "#000000" },
+            new Paint { Name = "Black", Set = "Game Color", ProductCode = "72.094", R = 0, G = 0, B = 0, Hex = "#000000" },
+        ];
+        var harvests = new Dictionary<string, HarvestApplier.BrandHarvest>
+        {
+            ["vallejo"] = new HarvestApplier.BrandHarvest
+            {
+                Enrich = new Dictionary<string, HarvestApplier.HarvestEntry>
+                {
+                    ["Black|Game Color"] = new() { ImageUrl = "https://example/black.jpg", Sku = "99.999" },
+                },
+            },
+        };
+
+        Assert.All(HarvestApplier.ApplyEnrichment(paints, "vallejo", harvests), p => Assert.Null(p.ImageUrl));
+    }
 }

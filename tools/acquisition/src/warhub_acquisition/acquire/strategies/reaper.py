@@ -1,14 +1,17 @@
 """Reaper strategy: Master Series Paints via the /paints/* line pages' embedded Vue data.
 
-POLICY STATUS (2026-07-24): implemented and unit-proven against real page captures, but the
-source is currently BLOCKED from live runs by this repo's own robots stance: reapermini.com
-ships Cloudflare's managed AI-crawl-control robots block (`User-agent: ClaudeBot /
-Disallow: /`), and acquire/robots.py deliberately honors ClaudeBot groups as disallowing this
-pipeline too (module docstring, checked-token 3) -- run_source therefore raises
-RobotsDisallowedError at the preflight, before any strategy work. Do not paper over that with
-ignoreRobots; see the descriptor (data/catalog/sources/mfr-reaper.yaml) for the full
-rationale and revisit conditions. Everything below documents what the strategy DOES when the
-policy situation allows it to run.
+POLICY STATUS (2026-08-05): CLEARED to run under the ordinary robots preflight, no opt-out.
+This paragraph previously said the opposite, and the history matters: reapermini.com ships
+Cloudflare's managed AI-crawl-control robots block (`User-agent: ClaudeBot / Disallow: /`),
+acquire/robots.py used to honor ClaudeBot groups as disallowing this pipeline too, and
+run_source therefore raised RobotsDisallowedError at the preflight -- which is why the
+descriptor carried `ignoreRobots: true` for a while. As of 2026-08-05 robots.py does not check
+that token at all (maintainer decision; its module docstring carries the reasoning, the measured
+evidence and the counter-argument), so the block is no longer read as addressed to us and the
+descriptor's opt-out has been removed rather than left standing. Robots enforcement is now fully
+ON for this source: the `*` group that does address us says `Allow: /` with no Crawl-delay, and
+every /paints/* fetch below is checked per-request against it like any other source. Everything
+after this paragraph describes what the strategy does; none of it changed.
 
 reapermini.com's REAL paint listing is not the shop search (/search/* sits behind a Cloudflare
 managed JS challenge -- deliberately never fetched) and not an API (site JS calls no /api route;

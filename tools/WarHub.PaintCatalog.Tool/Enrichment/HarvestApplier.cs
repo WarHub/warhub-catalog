@@ -33,6 +33,17 @@ public static class HarvestApplier
     {
         public string? Ean { get; set; }
         public string? ImageUrl { get; set; }
+        /// <summary>
+        /// Storefront list price, in the currency the source actually quotes. The generator pins
+        /// ONE currency per source rather than trusting the observation's field, because
+        /// `woo.py`/`shopify.py` fall back to `priceGbp` for an unrecognised currency code -- so
+        /// reading the wrong field would publish euros as pounds. Measured 2026-08-05: no paint
+        /// source quotes GBP or CAD; three are EUR and four USD.
+        /// </summary>
+        public decimal? PriceGbp { get; set; }
+        public decimal? PriceUsd { get; set; }
+        public decimal? PriceEur { get; set; }
+        public decimal? PriceCad { get; set; }
         public string? Sku { get; set; }
         public string? SourceUrl { get; set; }
         public string? Source { get; set; }
@@ -45,6 +56,10 @@ public static class HarvestApplier
         public string? ProductCode { get; set; }
         public string? Ean { get; set; }
         public string? ImageUrl { get; set; }
+        public decimal? PriceGbp { get; set; }
+        public decimal? PriceUsd { get; set; }
+        public decimal? PriceEur { get; set; }
+        public decimal? PriceCad { get; set; }
         public string? SourceUrl { get; set; }
         public string? Source { get; set; }
     }
@@ -129,6 +144,10 @@ public static class HarvestApplier
                 Hex = "",
                 Ean = string.IsNullOrWhiteSpace(addition.Ean) ? null : addition.Ean,
                 ImageUrl = string.IsNullOrWhiteSpace(addition.ImageUrl) ? null : addition.ImageUrl,
+                PriceGbp = addition.PriceGbp,
+                PriceUsd = addition.PriceUsd,
+                PriceEur = addition.PriceEur,
+                PriceCad = addition.PriceCad,
             });
         }
 
@@ -150,15 +169,49 @@ public static class HarvestApplier
             return paints;
         }
 
+        // `{Name}|{Set}` is NOT unique -- paint identity is `set|name|productCode|hex`, so a brand
+        // can ship two paints differing only by code or colour. Applying a keyed entry to every
+        // match therefore copies ONE product's barcode and photo onto BOTH. Measured 2026-08-01:
+        // 71 ambiguous keys across 8 brands, 35 of them enriched today, every one putting a single
+        // store photo on two genuinely different Vallejo paints (e.g. Bloody Red|Game Air 72.710
+        // #CD3230 and 76.010 #D41C1C).
+        //
+        // The entry's own `sku` resolves it -- all 917 Vallejo enrich entries carry one, and it is
+        // the product code of the exact paint the generator matched. So an ambiguous key is
+        // disambiguated rather than dropped, and only when the sku picks out exactly one paint.
+        // Anything still ambiguous is skipped: guessing which of two paints a photo belongs to is
+        // worse than leaving both blank.
+        var ambiguous = paints.GroupBy(p => $"{p.Name}|{p.Set}", StringComparer.Ordinal)
+            .Where(g => g.Count() > 1)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+
         return paints.Select(p =>
         {
-            if (!enrich.TryGetValue($"{p.Name}|{p.Set}", out HarvestEntry? entry))
+            string key = $"{p.Name}|{p.Set}";
+            if (!enrich.TryGetValue(key, out HarvestEntry? entry))
                 return p;
+
+            if (ambiguous.TryGetValue(key, out List<Paint>? rivals))
+            {
+                var owner = rivals
+                    .Where(r => !string.IsNullOrWhiteSpace(entry.Sku)
+                                && string.Equals(r.ProductCode, entry.Sku, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                if (owner.Count != 1 || !ReferenceEquals(owner[0], p))
+                    return p;
+            }
 
             return p with
             {
                 Ean = p.Ean ?? (string.IsNullOrWhiteSpace(entry.Ean) ? null : entry.Ean),
                 ImageUrl = p.ImageUrl ?? (string.IsNullOrWhiteSpace(entry.ImageUrl) ? null : entry.ImageUrl),
+                // Blank-fill, matching Ean: a hand override in overrides.yaml still wins. The
+                // ambiguous-key skip above already protects these for free -- it drops the whole
+                // entry, so a contested key never lands a price on the wrong paint either.
+                PriceGbp = p.PriceGbp ?? entry.PriceGbp,
+                PriceUsd = p.PriceUsd ?? entry.PriceUsd,
+                PriceEur = p.PriceEur ?? entry.PriceEur,
+                PriceCad = p.PriceCad ?? entry.PriceCad,
             };
         }).ToList();
     }

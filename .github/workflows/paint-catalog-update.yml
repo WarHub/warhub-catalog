@@ -88,6 +88,56 @@ jobs:
           [ "${{ github.event.inputs.scrape || 'true' }}" = "true" ] && ARGS="$ARGS --scrape"
           eval dotnet run --project tools/WarHub.PaintCatalog.Tool -c Release -- $ARGS
 
+      # THE paint-side enforcement point for the barcode regression gate. This workflow is the only
+      # one that writes data/paints/brands/*.yaml, so it is the only place the paint half of
+      # `--ean-guard` can ever fire: catalog-acquire.yml runs the same guard, but its checkout
+      # leaves data/paints identical to HEAD, so the paint comparison there is vacuous by
+      # construction. Without this step the gate landed in c4f026b protected nothing in CI -- it
+      # only ever ran where paint data does not change.
+      #
+      # Runs BEFORE the PR is opened but does NOT fail the job here: a lost barcode must reach a
+      # human WITH the findings attached, so the PR is created first and the job is failed at the
+      # end (same shape as catalog-acquire.yml's guard). Exit 5 = a barcode HEAD attests is now
+      # held by no record at all; exit 0 with a section = a barcode merely changed role or brand.
+      - name: Paint-EAN guard report
+        id: guard
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data report --data ../../data --ean-guard > ../../_report_guard.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          awk '/^## Paint-EAN/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
+          cat ../../_guard_section.txt
+
+      - name: Build PR body
+        run: |
+          {
+            echo "Automated paint data regeneration (incl. cross-brand equivalences)."
+            echo
+            echo "**Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "**Trigger:** ${{ github.event_name }}"
+            echo
+            if [ "${{ steps.guard.outputs.exit_code }}" = "5" ]; then
+              echo "### :rotating_light: Paint-EAN guard: BARCODE LOST"
+              echo
+              echo "A barcode this catalog attested at HEAD is held by **no paint record** in this run."
+              echo "A pot that used to be scannable no longer is -- review before merging."
+              echo
+              cat _guard_section.txt
+            elif [ -s _guard_section.txt ]; then
+              echo "### Paint-EAN guard: barcode moved (retained, not a regression)"
+              echo
+              echo "A barcode changed role (primary <-> \`additionalEans\`) or brand but is still held."
+              echo
+              cat _guard_section.txt
+            else
+              echo "### Paint-EAN guard: clean"
+              echo
+              echo "Every barcode HEAD attests is still held by a paint record."
+            fi
+          } > pr-body.md
+
       - name: Summary
         run: |
           git add -A data/paints
@@ -105,11 +155,7 @@ jobs:
           branch: catalog/paint-update
           base: main
           title: 'Update paint catalog data'
-          body: |
-            Automated paint data regeneration (incl. cross-brand equivalences).
-
-            **Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            **Trigger:** ${{ github.event_name }}
+          body-path: pr-body.md
           commit-message: 'Update paint catalog data'
           committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
           author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
@@ -123,3 +169,18 @@ jobs:
           git add -A data/paints
           git diff --cached --quiet || git commit -m "Update paint catalog data"
           git push
+
+      # Last, so the PR above already carries the findings. Two distinct failures, kept separate:
+      # an exit code we do not recognise means the guard itself broke (a crash reads as "clean" if
+      # you only test for 5), while exit 5 means it worked and found a lost barcode.
+      - name: Fail job on paint-EAN guard hits
+        run: |
+          guard_exit="${{ steps.guard.outputs.exit_code }}"
+          if [ "$guard_exit" != "0" ] && [ "$guard_exit" != "5" ]; then
+            echo "::error::Paint-EAN guard exited $guard_exit (expected 0 or 5) -- possible crash. See the job log."
+            exit 1
+          fi
+          if [ "$guard_exit" = "5" ]; then
+            echo "::error::Paint-EAN guard: a barcode attested at HEAD is held by no paint record. See the sticky PR body."
+            exit 1
+          fi

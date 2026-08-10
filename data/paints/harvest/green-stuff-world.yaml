@@ -2,6 +2,8 @@
 # Projection of committed manufacturer evidence onto the paint catalog's identities.
 # `enrich` keys are exact {Name}|{Set} identities (C# fills blank ean/imageUrl only);
 # `additions` are new paints from catalog-role sources; `candidates` are report-only.
+# priceEur/priceUsd are the storefront's OWN quoted currency, never converted --
+# inert until HarvestApplier reads them (it fills blank ean/imageUrl today).
 green-stuff-world:
   enrich:
     Abyss Blue|Acrylic Colors:
@@ -10,1248 +12,1456 @@ green-stuff-world:
       imageUrl: https://www.greenstuffworld.com/30042-large_default/acrylic-color-abyss-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1037-acrylic-color-abyss-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Acid Green Dip|Dipping Inks:
       sku: '3501'
       ean: '8435646508610'
       imageUrl: https://www.greenstuffworld.com/27991-large_default/dipping-ink-60-ml-acid-green-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2437-dipping-ink-60-ml-acid-green-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Aether Blue|Wash Ink:
       sku: '1712'
       ean: '8436574500714'
       imageUrl: https://www.greenstuffworld.com/30416-large_default/wash-ink-aether-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/777-wash-ink-aether-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Amber Orange|Candy Ink Metallic:
       sku: '1726'
       ean: '8436574500851'
       imageUrl: https://www.greenstuffworld.com/29203-large_default/candy-ink-amber-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/944-candy-ink-amber-orange.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Amberglow Dip|Dipping Inks:
       sku: '3499'
       ean: '8435646508597'
       imageUrl: https://www.greenstuffworld.com/22264-large_default/dipping-ink-60-ml-amberglow-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2435-dipping-ink-60-ml-amberglow-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Amethyst Purple|Candy Ink Metallic:
       sku: '1738'
       ean: '8436574500974'
       imageUrl: https://www.greenstuffworld.com/30324-large_default/candy-ink-amethyst-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/948-candy-ink-amethyst-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Ancient Sepia|Wash Ink:
       sku: '1717'
       ean: '8436574500769'
       imageUrl: https://www.greenstuffworld.com/29169-large_default/wash-ink-ancient-sepia.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/774-wash-ink-ancient-sepia.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Andalusian Earth|Wash Ink:
       sku: '1716'
       ean: '8436574500752'
       imageUrl: https://www.greenstuffworld.com/30434-large_default/wash-ink-andalusian-earth.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/773-wash-ink-andalusian-earth.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Anthrax Metal|Metallic Colors:
       sku: '1862'
       ean: '8436574502213'
       imageUrl: https://www.greenstuffworld.com/30420-large_default/metallic-paint-anthrax-metal.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/911-metallic-paint-anthrax-metal.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Antique Gold|Metallic Colors:
       sku: '1871'
       ean: '8436574502305'
       imageUrl: https://www.greenstuffworld.com/29033-large_default/metallic-paint-antique-gold.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/920-metallic-paint-antique-gold.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Aqua Turquoise|Metallic Colors:
       sku: '1876'
       ean: '8436574502350'
       imageUrl: https://www.greenstuffworld.com/29231-large_default/metallic-paint-aqua-turquoise.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/914-metallic-paint-aqua-turquoise.html
       source: mfr-greenstuffworld
+      priceEur: 2.925
     Arachnid Green|Acrylic Colors:
       sku: '3239'
       ean: '8435646505992'
       imageUrl: https://www.greenstuffworld.com/29201-large_default/acrylic-color-arachnid-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1883-acrylic-color-arachnid-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Arctic Blue|Acrylic Colors:
       sku: '3227'
       ean: '8435646505879'
       imageUrl: https://www.greenstuffworld.com/28987-large_default/acrylic-color-arctic-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1871-acrylic-color-arctic-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Arrakis Brown|Acrylic Colors:
       sku: '3213'
       ean: '8435646505732'
       imageUrl: https://www.greenstuffworld.com/29163-large_default/acrylic-color-arrakis-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1857-acrylic-color-arrakis-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Atramentum Black|Wash Ink:
       sku: '1710'
       ean: '8436574500691'
       imageUrl: https://www.greenstuffworld.com/29130-large_default/wash-ink-atramentum-black.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/775-wash-ink-atramentum-black.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Azure Dip|Dipping Inks:
       sku: '3496'
       ean: '8435646508566'
       imageUrl: https://www.greenstuffworld.com/10450-large_default/dipping-ink-60-ml-azure-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2432-dipping-ink-60-ml-azure-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Banana Split|Acrylic Colors:
       sku: '1780'
       ean: '8436574501391'
       imageUrl: https://www.greenstuffworld.com/30448-large_default/acrylic-color-banana-split.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1025-acrylic-color-banana-split.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Barrel Grey|Acrylic Colors:
       sku: '1882'
       ean: '8436574502411'
       imageUrl: https://www.greenstuffworld.com/28958-large_default/acrylic-color-barrel-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1187-acrylic-color-barrel-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Bestial Brown|Acrylic Colors:
       sku: '1833'
       ean: '8436574501926'
       imageUrl: https://www.greenstuffworld.com/29054-large_default/acrylic-color-bestial-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1063-acrylic-color-bestial-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Black Stallion|Acrylic Colors:
       sku: '1779'
       ean: '8436574501384'
       imageUrl: https://www.greenstuffworld.com/29220-large_default/acrylic-color-black-stallion.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1072-acrylic-color-black-stallion.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Blackroot Grey|Acrylic Colors:
       sku: '3233'
       ean: '8435646505930'
       imageUrl: https://www.greenstuffworld.com/29176-large_default/acrylic-color-blackroot-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1877-acrylic-color-blackroot-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Blue Glacier Dip|Dipping Inks:
       sku: '3701'
       ean: '8435646510613'
       imageUrl: https://www.greenstuffworld.com/11129-large_default/dipping-ink-60-ml-blue-glacier-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2557-dipping-ink-60-ml-blue-glacier-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Bluebird Grey|Acrylic Colors:
       sku: '3238'
       ean: '8435646505985'
       imageUrl: https://www.greenstuffworld.com/30752-large_default/acrylic-color-bluebird-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1882-acrylic-color-bluebird-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Bluegrey Dusk|Acrylic Colors:
       sku: '1836'
       ean: '8436574501957'
       imageUrl: https://www.greenstuffworld.com/30090-large_default/acrylic-color-bluegrey-dusk.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1066-acrylic-color-bluegrey-dusk.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Blush Red|Wash Ink:
       sku: '1711'
       ean: '8436574500707'
       imageUrl: https://www.greenstuffworld.com/30034-large_default/wash-ink-blush-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/776-wash-ink-blush-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Blushing Flesh|Acrylic Colors:
       sku: '1827'
       ean: '8436574501865'
       imageUrl: https://www.greenstuffworld.com/29210-large_default/acrylic-color-blushing-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1056-acrylic-color-blushing-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Borealis Green|Chameleon Colorshift Metallic:
       sku: '1729'
       ean: '8436574500882'
       imageUrl: https://www.greenstuffworld.com/28905-large_default/chameleon-paint-borealis-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/844-chameleon-paint-borealis-green.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Brown Skin|Acrylic Colors:
       sku: '3219'
       ean: '8435646505794'
       imageUrl: https://www.greenstuffworld.com/29412-large_default/acrylic-color-brown-skin.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1863-acrylic-color-brown-skin.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Burgundy Dip|Dipping Inks:
       sku: '3504'
       ean: '8435646508641'
       imageUrl: https://www.greenstuffworld.com/10474-large_default/dipping-ink-60-ml-burgundy-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2440-dipping-ink-60-ml-burgundy-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Burning Gold|Chameleon Colorshift Metallic:
       sku: '1606'
       ean: '8436554368648'
       imageUrl: https://www.greenstuffworld.com/29139-large_default/chameleon-burning-gold.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/685-chameleon-burning-gold.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Caesar Red|Metallic Colors:
       sku: '1874'
       ean: '8436574502336'
       imageUrl: https://www.greenstuffworld.com/29173-large_default/metallic-paint-caesar-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/916-metallic-paint-caesar-red.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Camouflage Green|Acrylic Colors:
       sku: '1800'
       ean: '8436574501599'
       imageUrl: https://www.greenstuffworld.com/30731-large_default/acrylic-color-camouflage-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1047-acrylic-color-camouflage-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Canary Green|Acrylic Colors:
       sku: '3231'
       ean: '8435646505916'
       imageUrl: https://www.greenstuffworld.com/28995-large_default/acrylic-color-canary-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1875-acrylic-color-canary-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Carnage Red|Acrylic Colors:
       sku: '3218'
       ean: '8435646505787'
       imageUrl: https://www.greenstuffworld.com/29406-large_default/acrylic-color-carnage-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1862-acrylic-color-carnage-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Celestial Azure|Chameleon Colorshift Metallic:
       sku: '1559'
       ean: '8436554369584'
       imageUrl: https://www.greenstuffworld.com/28884-large_default/chameleon-celestial-azure.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/684-chameleon-celestial-azure.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Chancellor Blue|Acrylic Colors:
       sku: '3222'
       ean: '8435646505824'
       imageUrl: https://www.greenstuffworld.com/30121-large_default/acrylic-color-chancellor-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1866-acrylic-color-chancellor-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Choco Brown|Acrylic Colors:
       sku: '1831'
       ean: '8436574501902'
       imageUrl: https://www.greenstuffworld.com/28832-large_default/acrylic-color-choco-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1061-acrylic-color-choco-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Chrome Paint|Metallic Colors:
       sku: '2454'
       ean: '8436574508130'
       imageUrl: https://www.greenstuffworld.com/29217-large_default/chrome-paint.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/1429-chrome-paint.html
       source: mfr-greenstuffworld
+      priceEur: 4.0
     Citrine Yellow|Candy Ink Metallic:
       sku: '1759'
       ean: '8436574501186'
       imageUrl: https://www.greenstuffworld.com/30366-large_default/candy-ink-citrine-yellow.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/945-candy-ink-citrine-yellow.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Cobalt Blue|Chameleon Colorshift Metallic:
       sku: '1552'
       ean: '8436554369515'
       imageUrl: https://www.greenstuffworld.com/29213-large_default/chameleon-cobalt-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/677-chameleon-cobalt-blue.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Cool Blue Dip|Dipping Inks:
       sku: '3488'
       ean: '8435646508481'
       imageUrl: https://www.greenstuffworld.com/10426-large_default/dipping-ink-60-ml-cool-blue-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2424-dipping-ink-60-ml-cool-blue-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Coyote Brown|Acrylic Colors:
       sku: '1856'
       ean: '8436574502152'
       imageUrl: https://www.greenstuffworld.com/30030-large_default/acrylic-color-coyote-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1183-acrylic-color-coyote-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Crimson Magenta|Intensity Ink:
       sku: '1721'
       ean: '8436574500806'
       imageUrl: https://www.greenstuffworld.com/30480-large_default/intensity-ink-crimson-magenta.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/805-intensity-ink-crimson-magenta.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Cutthroat Red|Acrylic Colors:
       sku: '1787'
       ean: '8436574501469'
       imageUrl: https://www.greenstuffworld.com/29574-large_default/acrylic-color-cutthroat-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1032-acrylic-color-cutthroat-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Cyber Yellow|Acrylic Colors:
       sku: '1781'
       ean: '8436574501407'
       imageUrl: https://www.greenstuffworld.com/29571-large_default/acrylic-color-cyber-yellow.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1026-acrylic-color-cyber-yellow.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Dark Beige|Acrylic Colors:
       sku: '1854'
       ean: '8436574502138'
       imageUrl: https://www.greenstuffworld.com/29135-large_default/acrylic-color-dark-beige.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1181-acrylic-color-dark-beige.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Dark Elder Bronze|Metallic Colors:
       sku: '1866'
       ean: '8436574502251'
       imageUrl: https://www.greenstuffworld.com/28859-large_default/metallic-paint-dark-elder-bronze.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/909-metallic-paint-dark-elder-bronze.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Dark Umber|Acrylic Colors:
       sku: '1841'
       ean: '8436574502008'
       imageUrl: https://www.greenstuffworld.com/30744-large_default/acrylic-color-dark-umber.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1071-acrylic-color-dark-umber.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Darth Blue|Chameleon Colorshift Metallic:
       sku: '1728'
       ean: '8436574500875'
       imageUrl: https://www.greenstuffworld.com/28900-large_default/chameleon-darth-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/845-chameleon-darth-blue.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Deck Grey|Acrylic Colors:
       sku: '1885'
       ean: '8436574502442'
       imageUrl: https://www.greenstuffworld.com/29278-large_default/acrylic-color-deck-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1190-acrylic-color-deck-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Deep Black Dip|Dipping Inks:
       sku: '3697'
       ean: '8435646510576'
       imageUrl: https://www.greenstuffworld.com/22294-large_default/dipping-ink-60-ml-deep-black-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2553-dipping-ink-60-ml-deep-black-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Desert Camo|Acrylic Colors:
       sku: '1857'
       ean: '8436574502169'
       imageUrl: https://www.greenstuffworld.com/30038-large_default/acrylic-color-desert-camo.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1184-acrylic-color-desert-camo.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Dusty Blue Dip|Dipping Inks:
       sku: '3489'
       ean: '8435646508498'
       imageUrl: https://www.greenstuffworld.com/22260-large_default/dipping-ink-60-ml-dusty-blue-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2425-dipping-ink-60-ml-dusty-blue-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Dusty Rose|Acrylic Colors:
       sku: '3215'
       ean: '8435646505756'
       imageUrl: https://www.greenstuffworld.com/29164-large_default/acrylic-color-dusty-rose.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1859-acrylic-color-dusty-rose.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Dwarven Flesh|Acrylic Colors:
       sku: '1826'
       ean: '8436574501858'
       imageUrl: https://www.greenstuffworld.com/30457-large_default/acrylic-color-dwarven-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1055-acrylic-color-dwarven-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     El Dorado|Metallic Colors:
       sku: '1870'
       ean: '8436574502299'
       imageUrl: https://www.greenstuffworld.com/29172-large_default/metallic-paint-el-dorado.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/924-metallic-paint-el-dorado.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Elfwood Brown Dip|Dipping Inks:
       sku: '3491'
       ean: '8435646508511'
       imageUrl: https://www.greenstuffworld.com/22262-large_default/dipping-ink-60-ml-elfwood-brown-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2427-dipping-ink-60-ml-elfwood-brown-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Elven Flesh|Acrylic Colors:
       sku: '1845'
       ean: '8436574502046'
       imageUrl: https://www.greenstuffworld.com/29162-large_default/acrylic-color-elven-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1054-acrylic-color-elven-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Ember Orange|Acrylic Colors:
       sku: '1785'
       ean: '8436574501445'
       imageUrl: https://www.greenstuffworld.com/30477-large_default/acrylic-color-ember-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1030-acrylic-color-ember-orange.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Emerald Getaway|Chameleon Colorshift Metallic:
       sku: '1609'
       ean: '8436554368679'
       imageUrl: https://www.greenstuffworld.com/28897-large_default/chameleon-emerald-getaway.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/688-chameleon-emerald-getaway.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     English Field Brown|Acrylic Colors:
       sku: '1855'
       ean: '8436574502145'
       imageUrl: https://www.greenstuffworld.com/28841-large_default/acrylic-color-english-field-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1182-acrylic-color-english-field-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Evil Forest|Chameleon Colorshift Metallic:
       sku: '1674'
       ean: '8436574500332'
       imageUrl: https://www.greenstuffworld.com/29146-large_default/chameleon-evil-forest.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/736-chameleon-evil-forest.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Faded Orange|Acrylic Colors:
       sku: '3214'
       ean: '8435646505749'
       imageUrl: https://www.greenstuffworld.com/29390-large_default/acrylic-color-faded-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1858-acrylic-color-faded-orange.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Fang White|Acrylic Colors:
       sku: '3207'
       ean: '8435646505671'
       imageUrl: https://www.greenstuffworld.com/28965-large_default/acrylic-color-fang-white.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1851-acrylic-color-fang-white.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Field Green-grey|Acrylic Colors:
       sku: '1849'
       ean: '8436574502084'
       imageUrl: https://www.greenstuffworld.com/29268-large_default/acrylic-color-field-green-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1178-acrylic-color-field-green-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Flaming Orange|Acrylic Colors:
       sku: '1784'
       ean: '8436574501438'
       imageUrl: https://www.greenstuffworld.com/30469-large_default/acrylic-color-flaming-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1029-acrylic-color-flaming-orange.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Flesh Rose|Acrylic Colors:
       sku: '3216'
       ean: '8435646505763'
       imageUrl: https://www.greenstuffworld.com/29394-large_default/acrylic-color-flesh-rose.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1860-acrylic-color-flesh-rose.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Flubber Green|Acrylic Colors:
       sku: '1820'
       ean: '8436574501797'
       imageUrl: https://www.greenstuffworld.com/30736-large_default/acrylic-color-flubber-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1048-acrylic-color-flubber-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Forest Green|Acrylic Colors:
       sku: '1797'
       ean: '8436574501568'
       imageUrl: https://www.greenstuffworld.com/30452-large_default/acrylic-color-forest-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1044-acrylic-color-forest-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Foxhide Brown|Acrylic Colors:
       sku: '1830'
       ean: '8436574501896'
       imageUrl: https://www.greenstuffworld.com/30078-large_default/acrylic-color-foxhide-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1060-acrylic-color-foxhide-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Gangrene|Acrylic Colors:
       sku: '1851'
       ean: '8436574502107'
       imageUrl: https://www.greenstuffworld.com/30304-large_default/acrylic-color-gangrene.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1176-acrylic-color-gangrene.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Garnet Purple Dip|Dipping Inks:
       sku: '3485'
       ean: '8435646508450'
       imageUrl: https://www.greenstuffworld.com/10417-large_default/dipping-ink-60-ml-garnet-purple-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2421-dipping-ink-60-ml-garnet-purple-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Gengis Khaki|Acrylic Colors:
       sku: '1883'
       ean: '8436574502428'
       imageUrl: https://www.greenstuffworld.com/28852-large_default/acrylic-color-gengis-khaki.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1188-acrylic-color-gengis-khaki.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Gladius Bronze|Metallic Colors:
       sku: '1867'
       ean: '8436574502268'
       imageUrl: https://www.greenstuffworld.com/29016-large_default/metallic-paint-gladius-bronze.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/917-metallic-paint-gladius-bronze.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Glorious Magenta Dip|Dipping Inks:
       sku: '3486'
       ean: '8435646508467'
       imageUrl: https://www.greenstuffworld.com/10420-large_default/dipping-ink-60-ml-glorious-magenta-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2422-dipping-ink-60-ml-glorious-magenta-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Go Mango|Acrylic Colors:
       sku: '1782'
       ean: '8436574501414'
       imageUrl: https://www.greenstuffworld.com/30460-large_default/acrylic-color-go-mango.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1027-acrylic-color-go-mango.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Golden Cream|Acrylic Colors:
       sku: '3210'
       ean: '8435646505701'
       imageUrl: https://www.greenstuffworld.com/30748-large_default/acrylic-color-golden-cream.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1854-acrylic-color-golden-cream.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Gorgon Dark Green|Intensity Ink:
       sku: '1733'
       ean: '8436574500929'
       imageUrl: https://www.greenstuffworld.com/30878-large_default/intensity-ink-gorgon-dark-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/814-intensity-ink-gorgon-dark-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Goth Skin Dip|Dipping Inks:
       sku: '3503'
       ean: '8435646508634'
       imageUrl: https://www.greenstuffworld.com/22268-large_default/dipping-ink-60-ml-goth-skin-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2439-dipping-ink-60-ml-goth-skin-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Green Ghost Dip|Dipping Inks:
       sku: '3493'
       ean: '8435646508535'
       imageUrl: https://www.greenstuffworld.com/10441-large_default/dipping-ink-60-ml-green-ghost-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2429-dipping-ink-60-ml-green-ghost-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Green Shark Skin Dip|Dipping Inks:
       sku: '3705'
       ean: '8435646510651'
       imageUrl: https://www.greenstuffworld.com/11143-large_default/dipping-ink-60-ml-green-shark-skin-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2561-dipping-ink-60-ml-green-shark-skin-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Grey Mist Dip|Dipping Inks:
       sku: '3706'
       ean: '8435646510668'
       imageUrl: https://www.greenstuffworld.com/22296-large_default/dipping-ink-60-ml-grey-mist-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2562-dipping-ink-60-ml-grey-mist-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Grey Teal|Acrylic Colors:
       sku: '3228'
       ean: '8435646505886'
       imageUrl: https://www.greenstuffworld.com/29323-large_default/acrylic-color-grey-teal.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1872-acrylic-color-grey-teal.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Hellfire Red|Acrylic Colors:
       sku: '1786'
       ean: '8436574501452'
       imageUrl: https://www.greenstuffworld.com/29294-large_default/acrylic-color-hellfire-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1031-acrylic-color-hellfire-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Hulky Green Dip|Dipping Inks:
       sku: '3494'
       ean: '8435646508542'
       imageUrl: https://www.greenstuffworld.com/10444-large_default/dipping-ink-60-ml-hulky-green-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2430-dipping-ink-60-ml-hulky-green-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Hunter Green|Acrylic Colors:
       sku: '1798'
       ean: '8436574501575'
       imageUrl: https://www.greenstuffworld.com/29224-large_default/acrylic-color-hunter-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1045-acrylic-color-hunter-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Hydromiel Yellow|Intensity Ink:
       sku: '1723'
       ean: '8436574500820'
       imageUrl: https://www.greenstuffworld.com/29127-large_default/intensity-ink-hydromiel-yellow.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/806-intensity-ink-hydromiel-yellow.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Imperium Blue|Acrylic Colors:
       sku: '1846'
       ean: '8436574502053'
       imageUrl: https://www.greenstuffworld.com/29070-large_default/acrylic-color-imperium-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1038-acrylic-color-imperium-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Indigo Blue Dip|Dipping Inks:
       sku: '4230'
       ean: '8435646515908'
       imageUrl: https://www.greenstuffworld.com/29119-large_default/dipping-ink-17-ml-indigo-blue-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/3316-dipping-ink-17-ml-indigo-blue-dip.html
       source: mfr-greenstuffworld
+      priceEur: 2.125
     Ivory Tusk|Acrylic Colors:
       sku: '1843'
       ean: '8436574502022'
       imageUrl: https://www.greenstuffworld.com/30098-large_default/acrylic-color-ivory-tusk.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1024-acrylic-color-ivory-tusk.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Jade Green|Candy Ink Metallic:
       sku: '1737'
       ean: '8436574500967'
       imageUrl: https://www.greenstuffworld.com/29333-large_default/candy-ink-jade-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/949-candy-ink-jade-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Komodo Khaki|Acrylic Colors:
       sku: '1824'
       ean: '8436574501834'
       imageUrl: https://www.greenstuffworld.com/29160-large_default/acrylic-color-komodo-khaki.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1052-acrylic-color-komodo-khaki.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Kraken Green|Acrylic Colors:
       sku: '1796'
       ean: '8436574501551'
       imageUrl: https://www.greenstuffworld.com/29049-large_default/acrylic-color-kraken-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1043-acrylic-color-kraken-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Lapislazuli|Acrylic Colors:
       sku: '3225'
       ean: '8435646505855'
       imageUrl: https://www.greenstuffworld.com/29151-large_default/acrylic-color-lapislazuli.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1869-acrylic-color-lapislazuli.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Leather Brown|Acrylic Colors:
       sku: '1829'
       ean: '8436574501889'
       imageUrl: https://www.greenstuffworld.com/30070-large_default/acrylic-color-leather-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1058-acrylic-color-leather-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Liche Purple|Acrylic Colors:
       sku: '1790'
       ean: '8436574501490'
       imageUrl: https://www.greenstuffworld.com/30428-large_default/acrylic-color-liche-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1036-acrylic-color-liche-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Lilac Purple|Acrylic Colors:
       sku: '3236'
       ean: '8435646505961'
       imageUrl: https://www.greenstuffworld.com/28836-large_default/acrylic-color-lilac-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1880-acrylic-color-lilac-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Limelight Dip|Dipping Inks:
       sku: '3500'
       ean: '8435646508603'
       imageUrl: https://www.greenstuffworld.com/22265-large_default/dipping-ink-60-ml-limelight-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2436-dipping-ink-60-ml-limelight-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Lollipop Magenta|Acrylic Colors:
       sku: '1839'
       ean: '8436574501988'
       imageUrl: https://www.greenstuffworld.com/29066-large_default/acrylic-color-lollipop-magenta.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1034-acrylic-color-lollipop-magenta.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Majin Pink|Acrylic Colors:
       sku: '1788'
       ean: '8436574501476'
       imageUrl: https://www.greenstuffworld.com/30727-large_default/acrylic-color-majin-pink.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1033-acrylic-color-majin-pink.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Malefic Purple|Acrylic Colors:
       sku: '1847'
       ean: '8436574502060'
       imageUrl: https://www.greenstuffworld.com/29105-large_default/acrylic-color-malefic-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1174-acrylic-color-malefic-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Marine Blue|Acrylic Colors:
       sku: '1792'
       ean: '8436574501513'
       imageUrl: https://www.greenstuffworld.com/29192-large_default/acrylic-color-marine-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1039-acrylic-color-marine-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Martian Green|Chameleon Colorshift Metallic:
       sku: '1607'
       ean: '8436554368655'
       imageUrl: https://www.greenstuffworld.com/29140-large_default/chameleon-martian-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/686-chameleon-martian-green.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Military Green|Acrylic Colors:
       sku: '1848'
       ean: '8436574502077'
       imageUrl: https://www.greenstuffworld.com/30296-large_default/acrylic-color-military-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1175-acrylic-color-military-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Mint Twister|Acrylic Colors:
       sku: '3237'
       ean: '8435646505978'
       imageUrl: https://www.greenstuffworld.com/29122-large_default/acrylic-color-mint-twister.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1881-acrylic-color-mint-twister.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Mirage Blue|Acrylic Colors:
       sku: '1840'
       ean: '8436574501995'
       imageUrl: https://www.greenstuffworld.com/30740-large_default/acrylic-color-mirage-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1069-acrylic-color-mirage-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Misted Yellow Dip|Dipping Inks:
       sku: '3482'
       ean: '8435646508429'
       imageUrl: https://www.greenstuffworld.com/10408-large_default/dipping-ink-60-ml-misted-yellow-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2418-dipping-ink-60-ml-misted-yellow-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Moon Mist Grey|Acrylic Colors:
       sku: '3240'
       ean: '8435646506005'
       imageUrl: https://www.greenstuffworld.com/29332-large_default/acrylic-color-moon-mist-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1884-acrylic-color-moon-mist-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Moonstone Grey|Acrylic Colors:
       sku: '1837'
       ean: '8436574501964'
       imageUrl: https://www.greenstuffworld.com/28916-large_default/acrylic-color-moonstone-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1067-acrylic-color-moonstone-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Morrow Purple Dip|Dipping Inks:
       sku: '3703'
       ean: '8435646510637'
       imageUrl: https://www.greenstuffworld.com/11136-large_default/dipping-ink-60-ml-morrow-purple-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2559-dipping-ink-60-ml-morrow-purple-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Moss Green|Wash Ink:
       sku: '1715'
       ean: '8436574500745'
       imageUrl: https://www.greenstuffworld.com/30424-large_default/wash-ink-moss-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/780-wash-ink-moss-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Mustard Yellow|Acrylic Colors:
       sku: '1783'
       ean: '8436574501421'
       imageUrl: https://www.greenstuffworld.com/29221-large_default/acrylic-color-mustard-yellow.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1028-acrylic-color-mustard-yellow.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Mystic Gold|Chameleon Colorshift Metallic:
       sku: '1553'
       ean: '8436554369522'
       imageUrl: https://www.greenstuffworld.com/28879-large_default/chameleon-paint-mystic-gold.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/678-chameleon-paint-mystic-gold.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Mystic White|Metallic Colors:
       sku: '1863'
       ean: '8436574502220'
       imageUrl: https://www.greenstuffworld.com/30022-large_default/metallic-paint-mystic-white.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/905-metallic-paint-mystic-white.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Nebula Copper|Chameleon Colorshift Metallic:
       sku: '1558'
       ean: '8436554369577'
       imageUrl: https://www.greenstuffworld.com/28883-large_default/chameleon-nebula-copper.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/683-chameleon-nebula-copper.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Neptunus Blue|Metallic Colors:
       sku: '1872'
       ean: '8436574502312'
       imageUrl: https://www.greenstuffworld.com/29058-large_default/metallic-paint-neptunus-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/910-metallic-paint-neptunus-blue.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Nightsahde Purple Dip|Dipping Inks:
       sku: '3498'
       ean: '8435646508580'
       imageUrl: https://www.greenstuffworld.com/10456-large_default/dipping-ink-60-ml-nightsahde-purple-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2434-dipping-ink-60-ml-nightsahde-purple-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Nuclear White|Acrylic Colors:
       sku: '1778'
       ean: '8436574501377'
       imageUrl: https://www.greenstuffworld.com/28936-large_default/acrylic-white-paint-nuclear-white.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1014-acrylic-white-paint-nuclear-white.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Nude Skin Dip|Dipping Inks:
       sku: '4241'
       ean: '8435646516011'
       imageUrl: https://www.greenstuffworld.com/29207-large_default/dipping-ink-17-ml-nude-skin-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/3305-dipping-ink-17-ml-nude-skin-dip.html
       source: mfr-greenstuffworld
+      priceEur: 2.125
     Ochre Desert|Acrylic Colors:
       sku: '1828'
       ean: '8436574501872'
       imageUrl: https://www.greenstuffworld.com/30464-large_default/acrylic-color-ochre-desert.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1057-acrylic-color-ochre-desert.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Olive-brown Ops|Acrylic Colors:
       sku: '1887'
       ean: '8436574502466'
       imageUrl: https://www.greenstuffworld.com/30055-large_default/acrylic-color-olive-brown-ops.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1192-acrylic-color-olive-brown-ops.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Olivegrove Green|Acrylic Colors:
       sku: '1821'
       ean: '8436574501803'
       imageUrl: https://www.greenstuffworld.com/30058-large_default/acrylic-color-olivegrove-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1049-acrylic-color-olivegrove-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Opulentus Black|Intensity Ink:
       sku: '1730'
       ean: '8436574500899'
       imageUrl: https://www.greenstuffworld.com/29157-large_default/intensity-ink-opulentus-black.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/810-intensity-ink-opulentus-black.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Orange|Fluor Metallic:
       sku: '4273'
       ean: '8435646516332'
       imageUrl: https://www.greenstuffworld.com/19652-large_default/transparent-acrylic-ink-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3539-transparent-acrylic-ink-orange.html
       source: mfr-greenstuffworld
+      priceEur: 4.752
     Orchid Purple|Metallic Colors:
       sku: '1877'
       ean: '8436574502367'
       imageUrl: https://www.greenstuffworld.com/29232-large_default/metallic-paint-orchid-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/925-metallic-paint-orchid-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.925
     Ork Flesh Dip|Dipping Inks:
       sku: '3495'
       ean: '8435646508559'
       imageUrl: https://www.greenstuffworld.com/10447-large_default/dipping-ink-60-ml-ork-flesh-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2431-dipping-ink-60-ml-ork-flesh-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Overlord Olive|Acrylic Colors:
       sku: '1853'
       ean: '8436574502121'
       imageUrl: https://www.greenstuffworld.com/30026-large_default/acrylic-color-overlord-olive.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1180-acrylic-color-overlord-olive.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Pale Flesh|Acrylic Colors:
       sku: '1844'
       ean: '8436574502039'
       imageUrl: https://www.greenstuffworld.com/28951-large_default/acrylic-color-pale-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1053-acrylic-color-pale-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Papyrus Dip|Dipping Inks:
       sku: '3481'
       ean: '8435646508412'
       imageUrl: https://www.greenstuffworld.com/10405-large_default/dipping-ink-60-ml-papyrus-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2417-dipping-ink-60-ml-papyrus-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Parchment|Acrylic Colors:
       sku: '3209'
       ean: '8435646505695'
       imageUrl: https://www.greenstuffworld.com/29281-large_default/acrylic-color-parchment.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1853-acrylic-color-parchment.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Peach Flesh|Acrylic Colors:
       sku: '1825'
       ean: '8436574501841'
       imageUrl: https://www.greenstuffworld.com/30066-large_default/acrylic-color-peach-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1059-acrylic-color-peach-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Pecatum Flesh|Wash Ink:
       sku: '1713'
       ean: '8436574500721'
       imageUrl: https://www.greenstuffworld.com/29132-large_default/wash-ink-pecatum-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/778-wash-ink-pecatum-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Persian Violet|Metallic Colors:
       sku: '1875'
       ean: '8436574502343'
       imageUrl: https://www.greenstuffworld.com/29174-large_default/metallic-paint-persian-violet.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/926-metallic-paint-persian-violet.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Phantom Violet|Acrylic Colors:
       sku: '3221'
       ean: '8435646505817'
       imageUrl: https://www.greenstuffworld.com/30319-large_default/acrylic-color-phantom-violet.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1865-acrylic-color-phantom-violet.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Phoenix Orange|Intensity Ink:
       sku: '1724'
       ean: '8436574500837'
       imageUrl: https://www.greenstuffworld.com/28980-large_default/intensity-ink-phoenix-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/808-intensity-ink-phoenix-orange.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Pinky Blue|Chameleon Colorshift Metallic:
       sku: '1672'
       ean: '8436574500318'
       imageUrl: https://www.greenstuffworld.com/28887-large_default/chameleon-pinky-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/735-chameleon-pinky-blue.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Prussian Blue|Acrylic Colors:
       sku: '3223'
       ean: '8435646505831'
       imageUrl: https://www.greenstuffworld.com/29303-large_default/acrylic-color-prussian-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1867-acrylic-color-prussian-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Prussian Green|Acrylic Colors:
       sku: '1886'
       ean: '8436574502459'
       imageUrl: https://www.greenstuffworld.com/30050-large_default/acrylic-color-prussian-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1191-acrylic-color-prussian-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Psychotic Illusions|Chameleon Colorshift Metallic:
       sku: '1557'
       ean: '8436554369560'
       imageUrl: https://www.greenstuffworld.com/28894-large_default/chameleon-psychotic-illusions.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/682-chameleon-psychotic-illusions.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Purple Vanity Dip|Dipping Inks:
       sku: '3704'
       ean: '8435646510644'
       imageUrl: https://www.greenstuffworld.com/11139-large_default/dipping-ink-60-ml-purple-vanity-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2560-dipping-ink-60-ml-purple-vanity-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Quartz Magenta|Candy Ink Metallic:
       sku: '1757'
       ean: '8436574501162'
       imageUrl: https://www.greenstuffworld.com/28959-large_default/candy-ink-quartz-magenta.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/946-candy-ink-quartz-magenta.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Quicksand Brown|Acrylic Colors:
       sku: '1834'
       ean: '8436574501933'
       imageUrl: https://www.greenstuffworld.com/29161-large_default/acrylic-color-quicksand-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1064-acrylic-color-quicksand-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Quicksilver|Metallic Colors:
       sku: '1861'
       ean: '8436574502206'
       imageUrl: https://www.greenstuffworld.com/29128-large_default/metallic-paint-quicksilver.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/912-metallic-paint-quicksilver.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Radiant Orange Dip|Dipping Inks:
       sku: '3483'
       ean: '8435646508436'
       imageUrl: https://www.greenstuffworld.com/22258-large_default/dipping-ink-60-ml-radiant-orange-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2419-dipping-ink-60-ml-radiant-orange-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Ranger Green|Acrylic Colors:
       sku: '3234'
       ean: '8435646505947'
       imageUrl: https://www.greenstuffworld.com/28823-large_default/acrylic-color-ranger-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1878-acrylic-color-ranger-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Red Cloak Dip|Dipping Inks:
       sku: '3484'
       ean: '8435646508443'
       imageUrl: https://www.greenstuffworld.com/11108-large_default/dipping-ink-60-ml-red-cloak-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2420-dipping-ink-60-ml-red-cloak-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Red Goblin|Chameleon Colorshift Metallic:
       sku: '1608'
       ean: '8436554368662'
       imageUrl: https://www.greenstuffworld.com/29104-large_default/chameleon-red-goblin.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/687-chameleon-red-goblin.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Red Opulence Dip|Dipping Inks:
       sku: '3707'
       ean: '8435646510675'
       imageUrl: https://www.greenstuffworld.com/27990-large_default/dipping-ink-60-ml-red-opulence-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2563-dipping-ink-60-ml-red-opulence-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Red Truth|Acrylic Colors:
       sku: '3217'
       ean: '8435646505770'
       imageUrl: https://www.greenstuffworld.com/29401-large_default/acrylic-color-red-truth.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1861-acrylic-color-red-truth.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Redwood Brown|Acrylic Colors:
       sku: '1832'
       ean: '8436574501919'
       imageUrl: https://www.greenstuffworld.com/29264-large_default/acrylic-color-redwood-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1062-acrylic-color-redwood-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Rocket Green|Acrylic Colors:
       sku: '1850'
       ean: '8436574502091'
       imageUrl: https://www.greenstuffworld.com/30299-large_default/acrylic-color-rocket-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1179-acrylic-color-rocket-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Rotten Green|Acrylic Colors:
       sku: '3230'
       ean: '8435646505909'
       imageUrl: https://www.greenstuffworld.com/29117-large_default/acrylic-color-rotten-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1874-acrylic-color-rotten-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Royal Burgundy|Chameleon Colorshift Metallic:
       sku: '1671'
       ean: '8436574500301'
       imageUrl: https://www.greenstuffworld.com/29895-large_default/chameleon-paint-royal-burgundy.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/737-chameleon-paint-royal-burgundy.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Ruby Red|Candy Ink Metallic:
       sku: '1756'
       ean: '8436574501155'
       imageUrl: https://www.greenstuffworld.com/29205-large_default/candy-ink-ruby-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/943-candy-ink-ruby-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Sacra Purple|Intensity Ink:
       sku: '1731'
       ean: '8436574500905'
       imageUrl: https://www.greenstuffworld.com/30395-large_default/intensity-ink-sacra-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/812-intensity-ink-sacra-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Sandstorm|Acrylic Colors:
       sku: '1884'
       ean: '8436574502435'
       imageUrl: https://www.greenstuffworld.com/27707-large_default/acrylic-color-sandstorm.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1189-acrylic-color-sandstorm.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Sangria Red|Acrylic Colors:
       sku: '1789'
       ean: '8436574501483'
       imageUrl: https://www.greenstuffworld.com/29222-large_default/acrylic-color-sangria-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1035-acrylic-color-sangria-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Sanguinem Red|Intensity Ink:
       sku: '1725'
       ean: '8436574500844'
       imageUrl: https://www.greenstuffworld.com/30874-large_default/intensity-ink-sanguinem-red.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/809-intensity-ink-sanguinem-red.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Sapphire Blue|Candy Ink Metallic:
       sku: '1739'
       ean: '8436574500981'
       imageUrl: https://www.greenstuffworld.com/29204-large_default/candy-ink-sapphire-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/950-candy-ink-sapphire-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Scorched Wood|Acrylic Colors:
       sku: '1852'
       ean: '8436574502114'
       imageUrl: https://www.greenstuffworld.com/29110-large_default/acrylic-color-scorched-wood.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1177-acrylic-color-scorched-wood.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Sepia Vetus|Intensity Ink:
       sku: '1735'
       ean: '8436574500943'
       imageUrl: https://www.greenstuffworld.com/30882-large_default/intensity-ink-sepia-vetus.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/816-intensity-ink-sepia-vetus.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Seraphim Flesh Dip|Dipping Inks:
       sku: '3699'
       ean: '8435646510590'
       imageUrl: https://www.greenstuffworld.com/11121-large_default/dipping-ink-60-ml-seraphim-flesh-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2555-dipping-ink-60-ml-seraphim-flesh-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Sharkfin Blue|Metallic Colors:
       sku: '1864'
       ean: '8436574502237'
       imageUrl: https://www.greenstuffworld.com/29171-large_default/metallic-paint-sharkfin-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/907-metallic-paint-sharkfin-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.925
     Shiny Gold|Metallic Colors:
       sku: '1869'
       ean: '8436574502282'
       imageUrl: https://www.greenstuffworld.com/28861-large_default/metallic-paint-shiny-gold.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/923-metallic-paint-shiny-gold.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Sirenscale Green|Metallic Colors:
       sku: '1873'
       ean: '8436574502329'
       imageUrl: https://www.greenstuffworld.com/29422-large_default/metallic-paint-sirenscale-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/915-metallic-paint-sirenscale-green.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Skeleton Brown Dip|Dipping Inks:
       sku: '3492'
       ean: '8435646508528'
       imageUrl: https://www.greenstuffworld.com/22263-large_default/dipping-ink-60-ml-skeleton-brown-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2428-dipping-ink-60-ml-skeleton-brown-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Skull Linen Dip|Dipping Inks:
       sku: '4249'
       ean: '8435646516097'
       imageUrl: https://www.greenstuffworld.com/30870-large_default/dipping-ink-17-ml-skull-linen-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/3297-dipping-ink-17-ml-skull-linen-dip.html
       source: mfr-greenstuffworld
+      priceEur: 2.125
     Slate Grey|Acrylic Colors:
       sku: '1838'
       ean: '8436574501971'
       imageUrl: https://www.greenstuffworld.com/30473-large_default/acrylic-color-slate-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1068-acrylic-color-slate-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Smoked Blue|Acrylic Colors:
       sku: '3226'
       ean: '8435646505862'
       imageUrl: https://www.greenstuffworld.com/29115-large_default/acrylic-color-smoked-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1870-acrylic-color-smoked-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Solar Anomalie|Chameleon Colorshift Metallic:
       sku: '1727'
       ean: '8436574500868'
       imageUrl: https://www.greenstuffworld.com/29175-large_default/chameleon-solar-anomalie.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/846-chameleon-solar-anomalie.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Starship Grey|Acrylic Colors:
       sku: '3235'
       ean: '8435646505954'
       imageUrl: https://www.greenstuffworld.com/30309-large_default/acrylic-color-starship-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1879-acrylic-color-starship-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Steampunk Copper|Metallic Colors:
       sku: '1868'
       ean: '8436574502275'
       imageUrl: https://www.greenstuffworld.com/29029-large_default/metallic-paint-steampunk-copper.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/906-metallic-paint-steampunk-copper.html
       source: mfr-greenstuffworld
+      priceEur: 3.25
     Steel Grey|Acrylic Colors:
       sku: '1842'
       ean: '8436574502015'
       imageUrl: https://www.greenstuffworld.com/28920-large_default/acrylic-color-steel-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1070-acrylic-color-steel-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Storm Surge Green|Chameleon Colorshift Metallic:
       sku: '1554'
       ean: '8436554369539'
       imageUrl: https://www.greenstuffworld.com/28882-large_default/chameleon-storm-surge-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/679-chameleon-storm-surge-green.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Summersea Blue|Acrylic Colors:
       sku: '1793'
       ean: '8436574501520'
       imageUrl: https://www.greenstuffworld.com/28810-large_default/acrylic-color-summersea-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1040-acrylic-color-summersea-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Sun-bleached Bone|Acrylic Colors:
       sku: '1823'
       ean: '8436574501827'
       imageUrl: https://www.greenstuffworld.com/29209-large_default/acrylic-color-sun-bleached-bone.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1051-acrylic-color-sun-bleached-bone.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Swamp Brown|Intensity Ink:
       sku: '1720'
       ean: '8436574500790'
       imageUrl: https://www.greenstuffworld.com/30375-large_default/intensity-ink-swamp-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/804-intensity-ink-swamp-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Temple Ochre|Acrylic Colors:
       sku: '3211'
       ean: '8435646505718'
       imageUrl: https://www.greenstuffworld.com/28814-large_default/acrylic-color-temple-ochre.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1855-acrylic-color-temple-ochre.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Tenebris Blue|Intensity Ink:
       sku: '1732'
       ean: '8436574500912'
       imageUrl: https://www.greenstuffworld.com/28988-large_default/intensity-ink-tenebris-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/813-intensity-ink-tenebris-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Tiger Brown|Acrylic Colors:
       sku: '3212'
       ean: '8435646505725'
       imageUrl: https://www.greenstuffworld.com/30094-large_default/acrylic-color-tiger-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1856-acrylic-color-tiger-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Tiger Eye Brown|Candy Ink Metallic:
       sku: '1755'
       ean: '8436574501148'
       imageUrl: https://www.greenstuffworld.com/30756-large_default/candy-ink-tiger-eye-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/947-candy-ink-tiger-eye-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.628
     Tinmetal Grey|Metallic Colors:
       sku: '1865'
       ean: '8436574502244'
       imageUrl: https://www.greenstuffworld.com/28849-large_default/metallic-paint-tinmetal-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/908-metallic-paint-tinmetal-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.925
     Toxic Purple|Chameleon Colorshift Metallic:
       sku: '1555'
       ean: '8436554369546'
       imageUrl: https://www.greenstuffworld.com/28889-large_default/chameleon-toxic-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/680-chameleon-toxic-purple.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Tropical Green|Chameleon Colorshift Metallic:
       sku: '1556'
       ean: '8436554369553'
       imageUrl: https://www.greenstuffworld.com/29138-large_default/chameleon-tropical-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/681-chameleon-tropical-green.html
       source: mfr-greenstuffworld
+      priceEur: 3.65
     Tropical Turquoise|Acrylic Colors:
       sku: '1795'
       ean: '8436574501544'
       imageUrl: https://www.greenstuffworld.com/28907-large_default/acrylic-color-tropical-turquoise.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1042-acrylic-color-tropical-turquoise.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Turquoise Ghost Dip|Dipping Inks:
       sku: '3502'
       ean: '8435646508627'
       imageUrl: https://www.greenstuffworld.com/22267-large_default/dipping-ink-60-ml-turquoise-ghost-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2438-dipping-ink-60-ml-turquoise-ghost-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Ultramar Blue|Acrylic Colors:
       sku: '3224'
       ean: '8435646505848'
       imageUrl: https://www.greenstuffworld.com/29226-large_default/acrylic-color-ultramar-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1868-acrylic-color-ultramar-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Valkyrie Yellow|Acrylic Colors:
       sku: '1859'
       ean: '8436574502183'
       imageUrl: https://www.greenstuffworld.com/30046-large_default/acrylic-color-valkyrie-yellow.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1186-acrylic-color-valkyrie-yellow.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Vanilla Drop|Acrylic Colors:
       sku: '3208'
       ean: '8435646505688'
       imageUrl: https://www.greenstuffworld.com/30083-large_default/acrylic-color-vanilla-drop.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1852-acrylic-color-vanilla-drop.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Vicious Purple|Wash Ink:
       sku: '1714'
       ean: '8436574500738'
       imageUrl: https://www.greenstuffworld.com/28867-large_default/wash-ink-vicious-purple.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/779-wash-ink-vicious-purple.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Violet Hint Dip|Dipping Inks:
       sku: '3702'
       ean: '8435646510620'
       imageUrl: https://www.greenstuffworld.com/11133-large_default/dipping-ink-60-ml-violet-hint-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2558-dipping-ink-60-ml-violet-hint-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Violet|Fluor Metallic:
       sku: '1706'
       ean: '8436574500653'
       imageUrl: https://www.greenstuffworld.com/28976-large_default/fluor-paint-violet.jpg
       sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/768-fluor-paint-violet.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Viridian Green|Acrylic Colors:
       sku: '3229'
       ean: '8435646505893'
       imageUrl: https://www.greenstuffworld.com/30110-large_default/acrylic-color-viridian-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1873-acrylic-color-viridian-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Viridis Green|Intensity Ink:
       sku: '1722'
       ean: '8436574500813'
       imageUrl: https://www.greenstuffworld.com/30381-large_default/intensity-ink-viridis-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/807-intensity-ink-viridis-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Walnut Brown|Intensity Ink:
       sku: '1734'
       ean: '8436574500936'
       imageUrl: https://www.greenstuffworld.com/29165-large_default/intensity-ink-walnut-brown.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/815-intensity-ink-walnut-brown.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Warcry Green|Acrylic Colors:
       sku: '1799'
       ean: '8436574501582'
       imageUrl: https://www.greenstuffworld.com/29225-large_default/acrylic-color-warcry-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1046-acrylic-color-warcry-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Whitecap Beige|Acrylic Colors:
       sku: '3259'
       ean: '8435646506197'
       imageUrl: https://www.greenstuffworld.com/30102-large_default/acrylic-color-whitecap-beige.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1885-acrylic-color-whitecap-beige.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     White|Fluor Metallic:
       sku: '3506'
       ean: '8435646508665'
       imageUrl: https://www.greenstuffworld.com/30399-large_default/intensity-ink-osl-white.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/2949-intensity-ink-osl-white.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Wolven Grey|Acrylic Colors:
       sku: '1835'
       ean: '8436574501940'
       imageUrl: https://www.greenstuffworld.com/29061-large_default/acrylic-color-wolven-grey.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1065-acrylic-color-wolven-grey.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Wonka Violet|Acrylic Colors:
       sku: '3220'
       ean: '8435646505800'
       imageUrl: https://www.greenstuffworld.com/29144-large_default/acrylic-color-wonka-violet.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1864-acrylic-color-wonka-violet.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Yellow Submarine Dip|Dipping Inks:
       sku: '3698'
       ean: '8435646510583'
       imageUrl: https://www.greenstuffworld.com/11117-large_default/dipping-ink-60-ml-yellow-submarine-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2554-dipping-ink-60-ml-yellow-submarine-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Yellow-brown Ops|Acrylic Colors:
       sku: '1858'
       ean: '8436574502176'
       imageUrl: https://www.greenstuffworld.com/29274-large_default/acrylic-color-yellow-brown-ops.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1185-acrylic-color-yellow-brown-ops.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Yellow-orange|Fluor Metallic:
       sku: '1702'
       ean: '8436574500615'
       imageUrl: https://www.greenstuffworld.com/28968-large_default/fluor-paint-yellow-orange.jpg
       sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/764-fluor-paint-yellow-orange.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Yellow|Fluor Metallic:
       sku: '4281'
       ean: '8435646516417'
       imageUrl: https://www.greenstuffworld.com/19678-large_default/transparent-acrylic-ink-yellow.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3556-transparent-acrylic-ink-yellow.html
       source: mfr-greenstuffworld
+      priceEur: 4.752
     Yoda Green|Acrylic Colors:
       sku: '3232'
       ean: '8435646505923'
       imageUrl: https://www.greenstuffworld.com/29326-large_default/acrylic-color-yoda-green.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1876-acrylic-color-yoda-green.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Zima Blue|Acrylic Colors:
       sku: '1794'
       ean: '8436574501537'
       imageUrl: https://www.greenstuffworld.com/32458-large_default/acrylic-color-zima-blue.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1041-acrylic-color-zima-blue.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
     Zombie Dip|Dipping Inks:
       sku: '3490'
       ean: '8435646508504'
       imageUrl: https://www.greenstuffworld.com/22261-large_default/dipping-ink-60-ml-zombie-dip.jpg
       sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2426-dipping-ink-60-ml-zombie-dip.html
       source: mfr-greenstuffworld
+      priceEur: 3.7375
     Zombie Flesh|Acrylic Colors:
       sku: '1822'
       ean: '8436574501810'
       imageUrl: https://www.greenstuffworld.com/28912-large_default/acrylic-color-zombie-flesh.jpg
       sourceUrl: https://www.greenstuffworld.com/en/acrylic-paints/1050-acrylic-color-zombie-flesh.html
       source: mfr-greenstuffworld
+      priceEur: 2.592
   additions:
   - name: Acrylic Ink Opaque - Blue
     set: Acrylic Inks
@@ -1260,6 +1470,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19696-large_default/acrylic-ink-opaque-blue.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3565-acrylic-ink-opaque-blue.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Acrylic Ink Opaque - Brown
     set: Acrylic Inks
     productCode: '4292'
@@ -1267,6 +1478,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19700-large_default/acrylic-ink-opaque-brown.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3567-acrylic-ink-opaque-brown.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Acrylic Ink Opaque - Green
     set: Acrylic Inks
     productCode: '4293'
@@ -1274,6 +1486,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19702-large_default/acrylic-ink-opaque-green.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3568-acrylic-ink-opaque-green.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Acrylic Ink Opaque - Red
     set: Acrylic Inks
     productCode: '4289'
@@ -1281,6 +1494,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19694-large_default/acrylic-ink-opaque-red.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3564-acrylic-ink-opaque-red.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Acrylic Ink Opaque - Siena
     set: Acrylic Inks
     productCode: '5095'
@@ -1288,6 +1502,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19656-large_default/acrylic-ink-opaque-siena.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3770-acrylic-ink-opaque-siena.html
     source: mfr-greenstuffworld
+    priceEur: 4.86
   - name: Acrylic Ink Opaque- Black
     set: Acrylic Inks
     productCode: '4286'
@@ -1295,6 +1510,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19688-large_default/acrylic-ink-opaque-black.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3561-acrylic-ink-opaque-black.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Acrylic Ink Opaque- Light Brown
     set: Acrylic Inks
     productCode: '4291'
@@ -1302,6 +1518,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19698-large_default/acrylic-ink-opaque-light-brown.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3566-acrylic-ink-opaque-light-brown.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Acrylic Ink Opaque- Turquoise
     set: Acrylic Inks
     productCode: '4287'
@@ -1309,62 +1526,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19690-large_default/acrylic-ink-opaque-turquoise.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3562-acrylic-ink-opaque-turquoise.html
     source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Basic Opaque (x4)
-    set: Acrylic Inks
-    productCode: '13344'
-    ean: '8435646528441'
-    imageUrl: https://www.greenstuffworld.com/23317-large_default/acrylic-inks-set-basic-opaque-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4049-acrylic-inks-set-basic-opaque-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Basic Transparent (x4)
-    set: Acrylic Inks
-    productCode: '13348'
-    ean: '8435646528489'
-    imageUrl: https://www.greenstuffworld.com/23342-large_default/acrylic-inks-set-basic-transparent-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4053-acrylic-inks-set-basic-transparent-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Fluor (x4)
-    set: Acrylic Inks
-    productCode: '13347'
-    ean: '8435646528472'
-    imageUrl: https://www.greenstuffworld.com/23345-large_default/acrylic-inks-set-fluor-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4052-acrylic-inks-set-fluor-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Opaque Nature (x4)
-    set: Acrylic Inks
-    productCode: '13345'
-    ean: '8435646528458'
-    imageUrl: https://www.greenstuffworld.com/23326-large_default/acrylic-inks-set-opaque-nature-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4050-acrylic-inks-set-opaque-nature-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Sunset Opaque (x4)
-    set: Acrylic Inks
-    productCode: '13346'
-    ean: '8435646528465'
-    imageUrl: https://www.greenstuffworld.com/23350-large_default/acrylic-inks-set-sunset-opaque-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4051-acrylic-inks-set-sunset-opaque-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Transparent Fire (x4)
-    set: Acrylic Inks
-    productCode: '13351'
-    ean: '8435646528519'
-    imageUrl: https://www.greenstuffworld.com/23355-large_default/acrylic-inks-set-transparent-fire-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4056-acrylic-inks-set-transparent-fire-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Transparent Nature (x4)
-    set: Acrylic Inks
-    productCode: '13349'
-    ean: '8435646528496'
-    imageUrl: https://www.greenstuffworld.com/23338-large_default/acrylic-inks-set-transparent-nature-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4054-acrylic-inks-set-transparent-nature-x4.html
-    source: mfr-greenstuffworld
-  - name: Acrylic Inks Set - Transparent Shades (x4)
-    set: Acrylic Inks
-    productCode: '13350'
-    ean: '8435646528502'
-    imageUrl: https://www.greenstuffworld.com/23352-large_default/acrylic-inks-set-transparent-shades-x4.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/4055-acrylic-inks-set-transparent-shades-x4.html
-    source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Fluor Acrylic Ink - Green
     set: Acrylic Inks
     productCode: '5097'
@@ -1372,6 +1534,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19662-large_default/fluor-acrylic-ink-green.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3772-fluor-acrylic-ink-green.html
     source: mfr-greenstuffworld
+    priceEur: 4.86
   - name: Fluor Acrylic Ink - Magenta
     set: Acrylic Inks
     productCode: '5099'
@@ -1379,6 +1542,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19668-large_default/fluor-acrylic-ink-magenta.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3774-fluor-acrylic-ink-magenta.html
     source: mfr-greenstuffworld
+    priceEur: 4.86
   - name: Transparent Acrylic Ink - Blue
     set: Acrylic Inks
     productCode: '4276'
@@ -1386,6 +1550,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19664-large_default/transparent-acrylic-ink-blue.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3543-transparent-acrylic-ink-blue.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Brown
     set: Acrylic Inks
     productCode: '4283'
@@ -1393,6 +1558,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19682-large_default/transparent-acrylic-ink-brown.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3558-transparent-acrylic-ink-brown.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Burgundy
     set: Acrylic Inks
     productCode: '4280'
@@ -1400,6 +1566,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19676-large_default/transparent-acrylic-ink-burgundy.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3555-transparent-acrylic-ink-burgundy.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Cold Green
     set: Acrylic Inks
     productCode: '4277'
@@ -1407,6 +1574,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19670-large_default/transparent-acrylic-ink-cold-green.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3552-transparent-acrylic-ink-cold-green.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Magenta
     set: Acrylic Inks
     productCode: '4275'
@@ -1414,6 +1582,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19660-large_default/transparent-acrylic-ink-magenta.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3542-transparent-acrylic-ink-magenta.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Ochre
     set: Acrylic Inks
     productCode: '4282'
@@ -1421,6 +1590,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19680-large_default/transparent-acrylic-ink-ochre.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3557-transparent-acrylic-ink-ochre.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Purple
     set: Acrylic Inks
     productCode: '4279'
@@ -1428,6 +1598,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19674-large_default/transparent-acrylic-ink-purple.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3554-transparent-acrylic-ink-purple.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Red
     set: Acrylic Inks
     productCode: '4274'
@@ -1435,6 +1606,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19648-large_default/transparent-acrylic-ink-red.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3541-transparent-acrylic-ink-red.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Sepia
     set: Acrylic Inks
     productCode: '5094'
@@ -1442,6 +1614,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/20352-large_default/transparent-acrylic-ink-sepia.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3769-transparent-acrylic-ink-sepia.html
     source: mfr-greenstuffworld
+    priceEur: 4.86
   - name: Transparent Acrylic Ink - Turquoise
     set: Acrylic Inks
     productCode: '4284'
@@ -1449,6 +1622,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19684-large_default/transparent-acrylic-ink-turquoise.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3559-transparent-acrylic-ink-turquoise.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Transparent Acrylic Ink - Warm Green
     set: Acrylic Inks
     productCode: '4278'
@@ -1456,6 +1630,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19672-large_default/transparent-acrylic-ink-warm-green.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-inks/3553-transparent-acrylic-ink-warm-green.html
     source: mfr-greenstuffworld
+    priceEur: 4.752
   - name: Black Paint 17 ml
     set: Blackest Black
     productCode: '11947'
@@ -1463,6 +1638,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/28805-large_default/maxx-darth-black-paint-17-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/blackest-black-paint/3364-maxx-darth-black-paint-17-ml.html
     source: mfr-greenstuffworld
+    priceEur: 5.8225
   - name: Paint 60 ml
     set: Blackest Black
     productCode: '12020'
@@ -1470,6 +1646,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31313-large_default/maxx-darth-paint-60-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/blackest-black-paint/3366-maxx-darth-paint-60-ml.html
     source: mfr-greenstuffworld
+    priceEur: 14.6625
   - name: Holographic Paint
     set: Chameleon Colorshift Metallic
     productCode: '1673'
@@ -1477,6 +1654,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29145-large_default/holographic-paint.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1097-holographic-paint.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Metal Filters - Blue Interference
     set: Chameleon Colorshift Metallic
     productCode: '2582'
@@ -1484,6 +1662,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29219-large_default/metal-filters-blue-interference.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1482-metal-filters-blue-interference.html
     source: mfr-greenstuffworld
+    priceEur: 3.65
   - name: Metal Filters - Gold Interference
     set: Chameleon Colorshift Metallic
     productCode: '2586'
@@ -1491,6 +1670,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/28932-large_default/metal-filters-gold-interference.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1486-metal-filters-gold-interference.html
     source: mfr-greenstuffworld
+    priceEur: 3.65
   - name: Metal Filters - Green Interference
     set: Chameleon Colorshift Metallic
     productCode: '2585'
@@ -1498,6 +1678,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30019-large_default/metal-filters-green-interference.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1485-metal-filters-green-interference.html
     source: mfr-greenstuffworld
+    priceEur: 3.65
   - name: Metal Filters - Purple Interference
     set: Chameleon Colorshift Metallic
     productCode: '2583'
@@ -1505,6 +1686,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29562-large_default/metal-filters-purple-interference.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1483-metal-filters-purple-interference.html
     source: mfr-greenstuffworld
+    priceEur: 3.65
   - name: Metal Filters - Red Interference
     set: Chameleon Colorshift Metallic
     productCode: '2587'
@@ -1512,6 +1694,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30403-large_default/metal-filters-red-interference.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1487-metal-filters-red-interference.html
     source: mfr-greenstuffworld
+    priceEur: 3.65
   - name: Metal Filters - Turquoise Interference
     set: Chameleon Colorshift Metallic
     productCode: '2584'
@@ -1519,27 +1702,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/28928-large_default/metal-filters-turquoise-interference.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/1484-metal-filters-turquoise-interference.html
     source: mfr-greenstuffworld
-  - name: Set 1
-    set: Chameleon Colorshift Metallic
-    productCode: '9340'
-    ean: '8436554368396'
-    imageUrl: https://www.greenstuffworld.com/27049-large_default/chameleon-acrylic-paint-set-1.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/667-chameleon-acrylic-paint-set-1.html
-    source: mfr-greenstuffworld
-  - name: Set 2
-    set: Chameleon Colorshift Metallic
-    productCode: '9341'
-    ean: '8436554368402'
-    imageUrl: https://www.greenstuffworld.com/26906-large_default/chameleon-acrylic-paint-set-2.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/668-chameleon-acrylic-paint-set-2.html
-    source: mfr-greenstuffworld
-  - name: Set 3
-    set: Chameleon Colorshift Metallic
-    productCode: '9349'
-    ean: '8436554368488'
-    imageUrl: https://www.greenstuffworld.com/27689-large_default/chameleon-acrylic-paint-set-3.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/847-chameleon-acrylic-paint-set-3.html
-    source: mfr-greenstuffworld
+    priceEur: 3.65
   - name: Spray Chameleon Emerald Getaway 400ml
     set: Chameleon Spray
     productCode: '2216'
@@ -1547,6 +1710,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26024-large_default/spray-chameleon-emerald-getaway-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/1633-spray-chameleon-emerald-getaway-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Spray Chameleon Neptunus Green 400ml
     set: Chameleon Spray
     productCode: '4773'
@@ -1554,6 +1718,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25968-large_default/spray-chameleon-neptunus-green-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/3516-spray-chameleon-neptunus-green-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Spray Chameleon Pinky Blue 400ml
     set: Chameleon Spray
     productCode: '2222'
@@ -1561,6 +1726,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26038-large_default/spray-chameleon-pinky-blue-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/1728-spray-chameleon-pinky-blue-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Spray Chameleon Red Goblin 400ml
     set: Chameleon Spray
     productCode: '2221'
@@ -1568,6 +1734,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26041-large_default/spray-chameleon-red-goblin-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/1729-spray-chameleon-red-goblin-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Spray Chameleon Solar Anomalie 400ml
     set: Chameleon Spray
     productCode: '2219'
@@ -1575,6 +1742,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26037-large_default/spray-colorshift-chameleon-solar-anomalie-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/1727-spray-colorshift-chameleon-solar-anomalie-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Spray Chameleon Storm Surge Green 400ml
     set: Chameleon Spray
     productCode: '2218'
@@ -1582,6 +1750,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25974-large_default/spray-chameleon-storm-surge-green-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/1635-spray-chameleon-storm-surge-green-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Spray Chameleon Violet Turquoise 400ml
     set: Chameleon Spray
     productCode: '4780'
@@ -1589,6 +1758,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25963-large_default/spray-chameleon-violet-turquoise-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colorshift-chameleon-spray/3515-spray-chameleon-violet-turquoise-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 12.07
   - name: Airbrush
     set: Chrome
     productCode: '2455'
@@ -1596,6 +1766,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29216-large_default/chrome-paint-airbrush.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/1430-chrome-paint-airbrush.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Antique Gold 17ml
     set: Chrome
     productCode: '3692'
@@ -1603,6 +1774,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29153-large_default/chrome-paint-antique-gold-17ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2594-chrome-paint-antique-gold-17ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Black Chrome Paint - Airbrush
     set: Chrome
     productCode: '2577'
@@ -1610,6 +1782,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29218-large_default/black-chrome-paint-airbrush.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2947-black-chrome-paint-airbrush.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Bronze 17ml
     set: Chrome
     productCode: '3690'
@@ -1617,6 +1790,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29147-large_default/chrome-paint-bronze-17ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2592-chrome-paint-bronze-17ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Copper 17ml
     set: Chrome
     productCode: '3694'
@@ -1624,6 +1798,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29155-large_default/chrome-paint-copper-17ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2596-chrome-paint-copper-17ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Gold 17ml
     set: Chrome
     productCode: '3691'
@@ -1631,13 +1806,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29152-large_default/chrome-paint-gold-17ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2593-chrome-paint-gold-17ml.html
     source: mfr-greenstuffworld
-  - name: Paint Set - Chrome
-    set: Chrome
-    productCode: '10133'
-    ean: '8436574506327'
-    imageUrl: https://www.greenstuffworld.com/26321-large_default/paint-set-chrome.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2625-paint-set-chrome.html
-    source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Tinplate 17ml
     set: Chrome
     productCode: '3693'
@@ -1645,6 +1814,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29154-large_default/chrome-paint-tinplate-17ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-paints/2595-chrome-paint-tinplate-17ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.0
   - name: Black Chrome Spray Paint 400ml
     set: Chrome Spray
     productCode: '5432'
@@ -1652,6 +1822,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/20925-large_default/black-chrome-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-spray-paint/3931-black-chrome-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 19.125
   - name: Chrome Spray Paint 400ml
     set: Chrome Spray
     productCode: '5183'
@@ -1659,6 +1830,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/19722-large_default/chrome-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/chrome-spray-paint/3776-chrome-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 15.2575
   - name: Green Stone Dip
     set: Dipping Inks
     productCode: '3487'
@@ -1666,6 +1838,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/22259-large_default/dipping-ink-60-ml-black-green-stone-dip.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2423-dipping-ink-60-ml-black-green-stone-dip.html
     source: mfr-greenstuffworld
+    priceEur: 3.7375
   - name: Green Stone Dip
     set: Dipping Inks
     productCode: '4220'
@@ -1673,6 +1846,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29009-large_default/dipping-ink-17-ml-green-stone-dip.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/3326-dipping-ink-17-ml-green-stone-dip.html
     source: mfr-greenstuffworld
+    priceEur: 2.125
   - name: Nightshade Purple Dip
     set: Dipping Inks
     productCode: '4231'
@@ -1680,20 +1854,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29126-large_default/dipping-ink-17-ml-nightshade-purple-dip.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/3315-dipping-ink-17-ml-nightshade-purple-dip.html
     source: mfr-greenstuffworld
-  - name: Paint Set - Dipping collection 01
-    set: Dipping Inks
-    productCode: '11693'
-    ean: '8435646511931'
-    imageUrl: https://www.greenstuffworld.com/28077-large_default/paint-set-dipping-collection-01.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2570-paint-set-dipping-collection-01.html
-    source: mfr-greenstuffworld
-  - name: Paint Set - Dipping collection 02
-    set: Dipping Inks
-    productCode: '11694'
-    ean: '8435646511948'
-    imageUrl: https://www.greenstuffworld.com/28078-large_default/paint-set-dipping-collection-02.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/dipping-inks/2571-paint-set-dipping-collection-02.html
-    source: mfr-greenstuffworld
+    priceEur: 2.125
   - name: Alpha Turquoise 30 ml
     set: Dry Brush
     productCode: '4096'
@@ -1701,6 +1862,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18556-large_default/dry-brush-alpha-turquoise-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2975-dry-brush-alpha-turquoise-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Aqua Oxide 30 ml
     set: Dry Brush
     productCode: '4097'
@@ -1708,6 +1870,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18555-large_default/dry-brush-aqua-oxide-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2976-dry-brush-aqua-oxide-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Blue Wolf Touch 30 ml
     set: Dry Brush
     productCode: '4093'
@@ -1715,6 +1878,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18559-large_default/dry-brush-blue-wolf-touch-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2972-dry-brush-blue-wolf-touch-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Bonemeal 30 ml
     set: Dry Brush
     productCode: '4101'
@@ -1722,6 +1886,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18542-large_default/dry-brush-bonemeal-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2980-dry-brush-bonemeal-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Butter Yellow 30 ml
     set: Dry Brush
     productCode: '4088'
@@ -1729,6 +1894,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18564-large_default/dry-brush-butter-yellow-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2967-dry-brush-butter-yellow-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Coral Touch 30 ml
     set: Dry Brush
     productCode: '4089'
@@ -1736,6 +1902,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18563-large_default/dry-brush-coral-touch-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2968-dry-brush-coral-touch-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Courage Mauve 30 ml
     set: Dry Brush
     productCode: '4090'
@@ -1743,6 +1910,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18562-large_default/dry-brush-courage-mauve-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2969-dry-brush-courage-mauve-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Dry Puke Green 30 ml
     set: Dry Brush
     productCode: '4099'
@@ -1750,6 +1918,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18552-large_default/dry-brush-dry-puke-green-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2978-dry-brush-dry-puke-green-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Dry Violet 30 ml
     set: Dry Brush
     productCode: '4095'
@@ -1757,6 +1926,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18557-large_default/dry-brush-dry-violet-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2974-dry-brush-dry-violet-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Grimdark Orange 30 ml
     set: Dry Brush
     productCode: '4091'
@@ -1764,6 +1934,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18561-large_default/dry-brush-grimdark-orange-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2970-dry-brush-grimdark-orange-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Metallic Dry Brush - Cursed Gold 30 ml
     set: Dry Brush
     productCode: '4106'
@@ -1771,6 +1942,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18537-large_default/metallic-dry-brush-cursed-gold-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2985-metallic-dry-brush-cursed-gold-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.7905
   - name: Metallic Dry Brush - Dark Forged Iron 30 ml
     set: Dry Brush
     productCode: '4105'
@@ -1778,6 +1950,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18538-large_default/metallic-dry-brush-dark-forged-iron-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2984-metallic-dry-brush-dark-forged-iron-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.7905
   - name: Metallic Dry Brush - Dry Aged Silver 30 ml
     set: Dry Brush
     productCode: '4104'
@@ -1785,6 +1958,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18539-large_default/metallic-dry-brush-dry-aged-silver-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2983-metallic-dry-brush-dry-aged-silver-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.7905
   - name: Metallic Dry Brush - Imperial Copper 30 ml
     set: Dry Brush
     productCode: '4107'
@@ -1792,6 +1966,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18536-large_default/metallic-dry-brush-imperial-copper-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2986-metallic-dry-brush-imperial-copper-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.7905
   - name: Off-white 30 ml
     set: Dry Brush
     productCode: '4100'
@@ -1799,6 +1974,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18547-large_default/dry-brush-off-white-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2979-dry-brush-off-white-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Raptor Green 30 ml
     set: Dry Brush
     productCode: '4098'
@@ -1806,6 +1982,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18554-large_default/dry-brush-raptor-green-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2977-dry-brush-raptor-green-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Red Bark 30 ml
     set: Dry Brush
     productCode: '4094'
@@ -1813,6 +1990,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18558-large_default/dry-brush-red-bark-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2973-dry-brush-red-bark-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Rock Grey 30 ml
     set: Dry Brush
     productCode: '4103'
@@ -1820,6 +1998,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18540-large_default/dry-brush-rock-grey-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2982-dry-brush-rock-grey-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Storm Grey 30 ml
     set: Dry Brush
     productCode: '4102'
@@ -1827,6 +2006,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18541-large_default/dry-brush-storm-grey-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2981-dry-brush-storm-grey-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Ultramarine Touch 30 ml
     set: Dry Brush
     productCode: '4092'
@@ -1834,6 +2014,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/18560-large_default/dry-brush-ultramarine-touch-30-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/dry-brush-paints/2971-dry-brush-ultramarine-touch-30-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.8
   - name: Bile Effect
     set: Effects
     productCode: '2398'
@@ -1841,6 +2022,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/28821-large_default/bile-effect.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/1341-bile-effect.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Blood Effects - Prince Blood
     set: Effects
     productCode: '4147'
@@ -1848,6 +2030,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30412-large_default/blood-effects-prince-blood.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/2948-blood-effects-prince-blood.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Blood effect - True Blood
     set: Effects
     productCode: '1718'
@@ -1855,6 +2038,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/27741-large_default/true-blood-effect.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/899-true-blood-effect.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Coagulated Blood
     set: Effects
     productCode: '1709'
@@ -1862,6 +2046,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29181-large_default/coagulated-blood.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/1012-coagulated-blood.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Demon Blood Effect
     set: Effects
     productCode: '4148'
@@ -1869,6 +2054,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/27759-large_default/demon-blood-effect.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/2889-demon-blood-effect.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Ork Blood
     set: Effects
     productCode: '1890'
@@ -1876,6 +2062,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30383-large_default/ork-blood-effect.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/1013-ork-blood-effect.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Vomit Effect
     set: Effects
     productCode: '2399'
@@ -1883,6 +2070,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30387-large_default/vomit-effect.jpg
     sourceUrl: https://www.greenstuffworld.com/en/effect-paints/1342-vomit-effect.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Black 240ml
     set: Flexible
     productCode: '5656'
@@ -1890,6 +2078,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24950-large_default/flexible-paint-black-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4202-flexible-paint-black-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Blue 240ml
     set: Flexible
     productCode: '5660'
@@ -1897,6 +2086,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24951-large_default/flexible-paint-blue-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4198-flexible-paint-blue-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Brown 240ml
     set: Flexible
     productCode: '5672'
@@ -1904,6 +2094,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24931-large_default/flexible-paint-brown-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4186-flexible-paint-brown-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Cobalt Blue 240ml
     set: Flexible
     productCode: '5661'
@@ -1911,6 +2102,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24945-large_default/flexible-paint-cobalt-blue-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4197-flexible-paint-cobalt-blue-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Cold Green 240ml
     set: Flexible
     productCode: '5663'
@@ -1918,6 +2110,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24943-large_default/flexible-paint-cold-green-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4195-flexible-paint-cold-green-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Dark Brown Earth 240ml
     set: Flexible
     productCode: '5674'
@@ -1925,6 +2118,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24929-large_default/flexible-paint-dark-brown-earth-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4184-flexible-paint-dark-brown-earth-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Flexible Metallic Bronze Paint 240ml
     set: Flexible
     productCode: '6366'
@@ -1932,6 +2126,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32524-large_default/flexible-metallic-bronze-paint-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4621-flexible-metallic-bronze-paint-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 13.05
   - name: Flexible Metallic Copper Paint 240ml
     set: Flexible
     productCode: '5679'
@@ -1939,6 +2134,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32519-large_default/flexible-metallic-copper-paint-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4619-flexible-metallic-copper-paint-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 13.05
   - name: Flexible Metallic Gold Paint 240ml
     set: Flexible
     productCode: '5678'
@@ -1946,6 +2142,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32515-large_default/flexible-metallic-gold-paint-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4618-flexible-metallic-gold-paint-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 13.05
   - name: Flexible Metallic Silver Paint 240ml
     set: Flexible
     productCode: '5677'
@@ -1953,6 +2150,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32512-large_default/flexible-metallic-silver-paint-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4617-flexible-metallic-silver-paint-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 13.05
   - name: Flexible Metallic Steel Paint 240ml
     set: Flexible
     productCode: '5680'
@@ -1960,6 +2158,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32521-large_default/flexible-metallic-steel-paint-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4620-flexible-metallic-steel-paint-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 13.05
   - name: Gray 240ml
     set: Flexible
     productCode: '5676'
@@ -1967,6 +2166,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24923-large_default/flexible-paint-gray-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4182-flexible-paint-gray-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Ivory 240ml
     set: Flexible
     productCode: '5675'
@@ -1974,6 +2174,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24934-large_default/flexible-paint-ivory-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4183-flexible-paint-ivory-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Magenta 240ml
     set: Flexible
     productCode: '5659'
@@ -1981,6 +2182,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24947-large_default/flexible-paint-magenta-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4199-flexible-paint-magenta-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 10.0
   - name: Ochre 240ml
     set: Flexible
     productCode: '5671'
@@ -1988,6 +2190,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24932-large_default/flexible-paint-ochre-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4187-flexible-paint-ochre-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Olive Green 240ml
     set: Flexible
     productCode: '5665'
@@ -1995,6 +2198,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24941-large_default/flexible-paint-olive-green-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4193-flexible-paint-olive-green-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Orange 240ml
     set: Flexible
     productCode: '5664'
@@ -2002,6 +2206,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24942-large_default/flexible-paint-orange-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4194-flexible-paint-orange-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Pink 240ml
     set: Flexible
     productCode: '5668'
@@ -2009,6 +2214,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24937-large_default/flexible-paint-pink-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4190-flexible-paint-pink-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Purple 240ml
     set: Flexible
     productCode: '5669'
@@ -2016,6 +2222,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24936-large_default/flexible-paint-purple-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4189-flexible-paint-purple-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 10.0
   - name: Red 240ml
     set: Flexible
     productCode: '5658'
@@ -2023,6 +2230,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24948-large_default/flexible-paint-red-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4200-flexible-paint-red-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Reddish Brown 240ml
     set: Flexible
     productCode: '5673'
@@ -2030,6 +2238,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24930-large_default/flexible-paint-reddish-brown-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4185-flexible-paint-reddish-brown-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Violet 240ml
     set: Flexible
     productCode: '5670'
@@ -2037,6 +2246,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24933-large_default/flexible-paint-violet-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4188-flexible-paint-violet-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 10.0
   - name: Warm Green 240ml
     set: Flexible
     productCode: '5662'
@@ -2044,6 +2254,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24944-large_default/flexible-paint-warm-green-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4196-flexible-paint-warm-green-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Warm Yellow 240ml
     set: Flexible
     productCode: '5667'
@@ -2051,6 +2262,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24939-large_default/flexible-paint-warm-yellow-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4191-flexible-paint-warm-yellow-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: White 240ml
     set: Flexible
     productCode: '5657'
@@ -2058,6 +2270,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24949-large_default/flexible-paint-white-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4201-flexible-paint-white-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Yellow 240ml
     set: Flexible
     productCode: '5666'
@@ -2065,6 +2278,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24940-large_default/flexible-paint-yellow-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/flexible-paints/4192-flexible-paint-yellow-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Blue
     set: Fluorescent
     productCode: '1707'
@@ -2072,6 +2286,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/28845-large_default/fluor-paint-blue.jpg
     sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/769-fluor-paint-blue.html
     source: mfr-greenstuffworld
+    priceEur: 2.592
   - name: Lime
     set: Fluorescent
     productCode: '1700'
@@ -2079,6 +2294,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29206-large_default/fluor-paint-lime.jpg
     sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/754-fluor-paint-lime.html
     source: mfr-greenstuffworld
+    priceEur: 2.592
   - name: Red
     set: Fluorescent
     productCode: '1704'
@@ -2086,6 +2302,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29230-large_default/fluor-paint-red.jpg
     sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/766-fluor-paint-red.html
     source: mfr-greenstuffworld
+    priceEur: 2.592
   - name: Rose
     set: Fluorescent
     productCode: '1705'
@@ -2093,13 +2310,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29212-large_default/fluor-paint-rose.jpg
     sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/767-fluor-paint-rose.html
     source: mfr-greenstuffworld
-  - name: Set x8 Fluor Paints
-    set: Fluorescent
-    productCode: '9353'
-    ean: '8436554368525'
-    imageUrl: https://www.greenstuffworld.com/33799-large_default/set-x8-fluor-paints.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/797-set-x8-fluor-paints.html
-    source: mfr-greenstuffworld
+    priceEur: 2.592
   - name: Turquoise
     set: Fluorescent
     productCode: '1776'
@@ -2107,6 +2318,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30371-large_default/fluor-paint-turquoise.jpg
     sourceUrl: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/1886-fluor-paint-turquoise.html
     source: mfr-greenstuffworld
+    priceEur: 2.592
   - name: Black Soot
     set: Liquid Pigments
     productCode: '2298'
@@ -2114,6 +2326,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30409-large_default/liquid-pigments-black-soot.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1300-liquid-pigments-black-soot.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Burnt Earth
     set: Liquid Pigments
     productCode: '2297'
@@ -2121,6 +2334,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33319-large_default/liquid-pigments-burnt-earth.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1299-liquid-pigments-burnt-earth.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Dark Earth
     set: Liquid Pigments
     productCode: '2296'
@@ -2128,6 +2342,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33316-large_default/liquid-pigments-dark-earth.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1298-liquid-pigments-dark-earth.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Dark Green Dust
     set: Liquid Pigments
     productCode: '2302'
@@ -2135,6 +2350,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30063-large_default/liquid-pigments-dark-green-dust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1304-liquid-pigments-dark-green-dust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Dark Industrial Dust
     set: Liquid Pigments
     productCode: '2300'
@@ -2142,6 +2358,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30144-large_default/liquid-pigments-dark-industrial-dust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1302-liquid-pigments-dark-industrial-dust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Dark Rust
     set: Liquid Pigments
     productCode: '2289'
@@ -2149,6 +2366,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33333-large_default/liquid-pigments-dark-rust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1291-liquid-pigments-dark-rust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Desert Earth
     set: Liquid Pigments
     productCode: '2292'
@@ -2156,6 +2374,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33301-large_default/liquid-pigments-desert-earth.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1294-liquid-pigments-desert-earth.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Industrial Dust
     set: Liquid Pigments
     productCode: '2301'
@@ -2163,6 +2382,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29461-large_default/liquid-pigments-industrial-dust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1303-liquid-pigments-industrial-dust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Light Earth
     set: Liquid Pigments
     productCode: '2294'
@@ -2170,6 +2390,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33307-large_default/liquid-pigments-light-earth.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1296-liquid-pigments-light-earth.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Light Green Dust
     set: Liquid Pigments
     productCode: '2303'
@@ -2177,6 +2398,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30148-large_default/liquid-pigments-light-green-dust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1305-liquid-pigments-light-green-dust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Light Rust
     set: Liquid Pigments
     productCode: '2287'
@@ -2184,6 +2406,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33325-large_default/liquid-pigments-light-rust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1289-liquid-pigments-light-rust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Medium Earth
     set: Liquid Pigments
     productCode: '2295'
@@ -2191,6 +2414,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33312-large_default/liquid-pigments-medium-earth.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1297-liquid-pigments-medium-earth.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Medium Rust
     set: Liquid Pigments
     productCode: '2288'
@@ -2198,6 +2422,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33329-large_default/liquid-pigments-medium-rust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1290-liquid-pigments-medium-rust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Ochre Earth
     set: Liquid Pigments
     productCode: '2293'
@@ -2205,6 +2430,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33305-large_default/liquid-pigments-ochre-earth.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1295-liquid-pigments-ochre-earth.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Orange Rust
     set: Liquid Pigments
     productCode: '2286'
@@ -2212,6 +2438,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33324-large_default/liquid-pigments-orange-rust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1288-liquid-pigments-orange-rust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Turquoise Oxide
     set: Liquid Pigments
     productCode: '2291'
@@ -2219,6 +2446,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33342-large_default/liquid-pigments-turquoise-oxide.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1293-liquid-pigments-turquoise-oxide.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Verdigris
     set: Liquid Pigments
     productCode: '2290'
@@ -2226,6 +2454,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33337-large_default/liquid-pigments-verdigris.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1292-liquid-pigments-verdigris.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: White Dust
     set: Liquid Pigments
     productCode: '2299'
@@ -2233,6 +2462,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30135-large_default/liquid-pigments-white-dust.jpg
     sourceUrl: https://www.greenstuffworld.com/en/liquid-pigments/1301-liquid-pigments-white-dust.html
     source: mfr-greenstuffworld
+    priceEur: 3.06
   - name: Cosmic Silver
     set: Metallic Colors
     productCode: '6283'
@@ -2240,6 +2470,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32330-large_default/metallic-paint-cosmic-silver.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4269-metallic-paint-cosmic-silver.html
     source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Metallic Gun metal grey paint
     set: Metallic Colors
     productCode: '1860'
@@ -2247,6 +2478,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29007-large_default/metallic-paint-gunmetal-grey.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/913-metallic-paint-gunmetal-grey.html
     source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Vivid Metallic Paint - Anvil Blue
     set: Metallic Colors
     productCode: '2567'
@@ -2254,6 +2486,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32361-large_default/vivid-metallic-paint-anvil-blue.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4498-vivid-metallic-paint-anvil-blue.html
     source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Vivid Metallic Paint - Flameflare Red
     set: Metallic Colors
     productCode: '2566'
@@ -2261,6 +2494,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32355-large_default/vivid-metallic-paint-flameflare-red.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4497-vivid-metallic-paint-flameflare-red.html
     source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Vivid Metallic Paint - Ironleaf Green
     set: Metallic Colors
     productCode: '2568'
@@ -2268,6 +2502,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32364-large_default/vivid-metallic-paint-ironleaf-green.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4499-vivid-metallic-paint-ironleaf-green.html
     source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Vivid Metallic Paint - Kingsfall Gold
     set: Metallic Colors
     productCode: '2569'
@@ -2275,6 +2510,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32367-large_default/vivid-metallic-paint-kingsfall-gold.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4500-vivid-metallic-paint-kingsfall-gold.html
     source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Vivid Metallic Paint - Purple Passion
     set: Metallic Colors
     productCode: '2570'
@@ -2282,34 +2518,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/32370-large_default/vivid-metallic-paint-purple-passion.jpg
     sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4501-vivid-metallic-paint-purple-passion.html
     source: mfr-greenstuffworld
-  - name: Vivid Metallic Paints Set
-    set: Metallic Colors
-    productCode: '10132'
-    ean: '8436574506310'
-    imageUrl: https://www.greenstuffworld.com/32264-large_default/vivid-metallic-paints-set.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4588-vivid-metallic-paints-set.html
-    source: mfr-greenstuffworld
-  - name: s Set - Colours
-    set: Metallic Colors
-    productCode: '9912'
-    ean: '8436574504118'
-    imageUrl: https://www.greenstuffworld.com/27513-large_default/metallic-paints-set-colours.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/976-metallic-paints-set-colours.html
-    source: mfr-greenstuffworld
-  - name: s Set - Gold
-    set: Metallic Colors
-    productCode: '9911'
-    ean: '8436574504101'
-    imageUrl: https://www.greenstuffworld.com/29493-large_default/metallic-paints-set-gold.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/977-metallic-paints-set-gold.html
-    source: mfr-greenstuffworld
-  - name: s Set - Silver
-    set: Metallic Colors
-    productCode: '9910'
-    ean: '8436574504095'
-    imageUrl: https://www.greenstuffworld.com/27675-large_default/metallic-paints-set-silver.jpg
-    sourceUrl: https://www.greenstuffworld.com/en/metallic-acrylic-paints/978-metallic-paints-set-silver.html
-    source: mfr-greenstuffworld
+    priceEur: 3.25
   - name: Foam Primer and Coat - Black 250gr
     set: Primer
     productCode: '5723'
@@ -2317,6 +2526,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25492-large_default/foam-primer-and-coat-black-250gr.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/4272-foam-primer-and-coat-black-250gr.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Foam Primer and Coat - Grey 250gr
     set: Primer
     productCode: '5724'
@@ -2324,6 +2534,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25489-large_default/foam-primer-and-coat-grey-250gr.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/4271-foam-primer-and-coat-grey-250gr.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Gloss Black Primer 240ml
     set: Primer
     productCode: '4692'
@@ -2331,6 +2542,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31307-large_default/gloss-surface-primer-240ml-black.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/3536-gloss-surface-primer-240ml-black.html
     source: mfr-greenstuffworld
+    priceEur: 7.5375
   - name: Gloss Black Primer 60ml
     set: Primer
     productCode: '1743'
@@ -2338,6 +2550,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31306-large_default/gloss-black-primer-60ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/726-gloss-black-primer-60ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Matt Black Primer 240ml - Black
     set: Primer
     productCode: '4689'
@@ -2345,6 +2558,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31309-large_default/matt-surface-primer-240ml-black.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/3471-matt-surface-primer-240ml-black.html
     source: mfr-greenstuffworld
+    priceEur: 9.5475
   - name: Matt Black Primer 60ml
     set: Primer
     productCode: '1740'
@@ -2352,6 +2566,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31222-large_default/matt-surface-primer-60ml-black.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/731-matt-surface-primer-60ml-black.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Matt Cream Primer 60ml
     set: Primer
     productCode: '3550'
@@ -2359,6 +2574,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31299-large_default/matt-surface-primer-60ml-cream.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/2334-matt-surface-primer-60ml-cream.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Matt Grey Primer 60ml
     set: Primer
     productCode: '1742'
@@ -2366,6 +2582,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31303-large_default/matt-grey-primer-60ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/733-matt-grey-primer-60ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Matt Red Primer 60ml
     set: Primer
     productCode: '1888'
@@ -2373,6 +2590,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31301-large_default/matt-surface-primer-60ml-red.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/981-matt-surface-primer-60ml-red.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Matt White Primer 240ml
     set: Primer
     productCode: '4690'
@@ -2380,6 +2598,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31308-large_default/matt-surface-primer-240ml-white.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/3470-matt-surface-primer-240ml-white.html
     source: mfr-greenstuffworld
+    priceEur: 9.5475
   - name: Matt White Primer 60ml
     set: Primer
     productCode: '1741'
@@ -2387,6 +2606,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/31224-large_default/matt-surface-primer-60ml-white.jpg
     sourceUrl: https://www.greenstuffworld.com/en/acrylic-primers/732-matt-surface-primer-60ml-white.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Black Gloss Spray Paint 400ml
     set: Spray Primer
     productCode: '2234'
@@ -2394,6 +2614,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26002-large_default/black-gloss-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1645-black-gloss-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Matt Black Spray Paint Primer 400ml
     set: Spray Primer
     productCode: '2230'
@@ -2401,6 +2622,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25999-large_default/matt-black-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1641-matt-black-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Matt Grey Spray Paint 400ml
     set: Spray Primer
     productCode: '2231'
@@ -2408,6 +2630,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25996-large_default/matt-grey-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1642-matt-grey-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Matt White Spray Paint 400ml
     set: Spray Primer
     productCode: '2229'
@@ -2415,6 +2638,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25992-large_default/matt-white-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1640-matt-white-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Spray Filler Primer 400ml
     set: Spray Primer
     productCode: '5577'
@@ -2422,6 +2646,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26017-large_default/spray-filler-primer-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/4114-spray-filler-primer-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Spray Primer Colour Matt Green 400ml
     set: Spray Primer
     productCode: '2233'
@@ -2429,6 +2654,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26029-large_default/spray-primer-colour-matt-green-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1644-spray-primer-colour-matt-green-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Spray Primer Colour Matt Ochre 400ml
     set: Spray Primer
     productCode: '2240'
@@ -2436,6 +2662,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26032-large_default/spray-primer-colour-matt-ochre-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1725-spray-primer-colour-matt-ochre-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Spray Primer Colour Matt Red Rust 400ml
     set: Spray Primer
     productCode: '2232'
@@ -2443,6 +2670,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26026-large_default/spray-primer-colour-matt-red-rust-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/1643-spray-primer-colour-matt-red-rust-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: White Gloss Spray Paint 400ml
     set: Spray Primer
     productCode: '5182'
@@ -2450,6 +2678,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/26013-large_default/white-gloss-spray-paint-400ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/colour-primers-spray/3708-white-gloss-spray-paint-400ml.html
     source: mfr-greenstuffworld
+    priceEur: 9.095
   - name: Chrome Clear Coat 17 ml
     set: Varnish
     productCode: '6282'
@@ -2457,6 +2686,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/30074-large_default/chrome-clear-coat-17-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/4286-chrome-clear-coat-17-ml.html
     source: mfr-greenstuffworld
+    priceEur: 3.6
   - name: Chrome Clear Coat 60 ml
     set: Varnish
     productCode: '6281'
@@ -2464,6 +2694,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/25593-large_default/chrome-clear-coat-60-ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/4287-chrome-clear-coat-60-ml.html
     source: mfr-greenstuffworld
+    priceEur: 7.2
   - name: Flexible varnish 240ml
     set: Varnish
     productCode: '5719'
@@ -2471,6 +2702,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/33210-large_default/flexible-varnish-240ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/4203-flexible-varnish-240ml.html
     source: mfr-greenstuffworld
+    priceEur: 11.25
   - name: Gloss Varnish 17ml
     set: Varnish
     productCode: '1744'
@@ -2478,6 +2710,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29214-large_default/gloss-varnish.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/784-gloss-varnish.html
     source: mfr-greenstuffworld
+    priceEur: 2.691
   - name: Gloss Varnish 60ml
     set: Varnish
     productCode: '2887'
@@ -2485,6 +2718,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24224-large_default/gloss-varnish-60ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/1736-gloss-varnish-60ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.725
   - name: Maxx Matt Varnish 17ml - Ultra Matte Varnish
     set: Varnish
     productCode: '2639'
@@ -2492,6 +2726,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29566-large_default/maxx-matt-varnish-ultramate.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/1457-maxx-matt-varnish-ultramate.html
     source: mfr-greenstuffworld
+    priceEur: 2.691
   - name: Maxx Matt Varnish 60ml - Ultra Matte Varnish
     set: Varnish
     productCode: '2640'
@@ -2499,6 +2734,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24217-large_default/maxx-matt-varnish-60ml-ultramate.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/1495-maxx-matt-varnish-60ml-ultramate.html
     source: mfr-greenstuffworld
+    priceEur: 4.6875
   - name: Satin Varnish 17ml
     set: Varnish
     productCode: '1878'
@@ -2506,6 +2742,7 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/29473-large_default/satin-varnish.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/1760-satin-varnish.html
     source: mfr-greenstuffworld
+    priceEur: 2.745
   - name: Satin Varnish 60ml
     set: Varnish
     productCode: '1879'
@@ -2513,3 +2750,350 @@ green-stuff-world:
     imageUrl: https://www.greenstuffworld.com/24222-large_default/satin-varnish-miniatures-paint-60ml.jpg
     sourceUrl: https://www.greenstuffworld.com/en/varnishes/1761-satin-varnish-miniatures-paint-60ml.html
     source: mfr-greenstuffworld
+    priceEur: 4.8
+  candidates:
+  - name: Acrylic Dipping Ink Mega Paint Set
+    sku: '12263'
+    url: https://www.greenstuffworld.com/en/paint-sets/3343-acrylic-dipping-ink-paint-set.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Basic Opaque (x4)
+    sku: '13344'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4049-acrylic-inks-set-basic-opaque-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Basic Transparent (x4)
+    sku: '13348'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4053-acrylic-inks-set-basic-transparent-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Fluor (x4)
+    sku: '13347'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4052-acrylic-inks-set-fluor-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Opaque Nature (x4)
+    sku: '13345'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4050-acrylic-inks-set-opaque-nature-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Sunset Opaque (x4)
+    sku: '13346'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4051-acrylic-inks-set-sunset-opaque-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Transparent Fire (x4)
+    sku: '13351'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4056-acrylic-inks-set-transparent-fire-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Transparent Nature (x4)
+    sku: '13349'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4054-acrylic-inks-set-transparent-nature-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Acrylic Inks Set - Transparent Shades (x4)
+    sku: '13350'
+    url: https://www.greenstuffworld.com/en/acrylic-inks/4055-acrylic-inks-set-transparent-shades-x4.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Basic Mega Paint Set - Vol. 1.0
+    sku: '12259'
+    url: https://www.greenstuffworld.com/en/paint-sets/3406-basic-mega-paint-set-vol-10.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Chameleon Acrylic Paint Set 1
+    sku: '9340'
+    url: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/667-chameleon-acrylic-paint-set-1.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Chameleon Acrylic Paint Set 2
+    sku: '9341'
+    url: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/668-chameleon-acrylic-paint-set-2.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Chameleon Acrylic Paint Set 3
+    sku: '9349'
+    url: https://www.greenstuffworld.com/en/chameleon-acrylic-paints/847-chameleon-acrylic-paint-set-3.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Mega Paint Set - Vol. 2.0
+    sku: '12260'
+    url: https://www.greenstuffworld.com/en/paint-sets/3407-mega-paint-set-vol-20.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Metallic Paints Set - Colours
+    sku: '9912'
+    url: https://www.greenstuffworld.com/en/metallic-acrylic-paints/976-metallic-paints-set-colours.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Metallic Paints Set - Gold
+    sku: '9911'
+    url: https://www.greenstuffworld.com/en/metallic-acrylic-paints/977-metallic-paints-set-gold.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Metallic Paints Set - Silver
+    sku: '9910'
+    url: https://www.greenstuffworld.com/en/metallic-acrylic-paints/978-metallic-paints-set-silver.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Metallics Mega Paint Set
+    sku: '12261'
+    url: https://www.greenstuffworld.com/en/paint-sets/3383-metallics-mega-paint-set.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Opaque Paint Set - Cold Colours
+    sku: '12534'
+    url: https://www.greenstuffworld.com/en/paint-sets/3473-opaque-paint-set-cold-colours.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Opaque Paint Set - Flesh Colours
+    sku: '12536'
+    url: https://www.greenstuffworld.com/en/paint-sets/3475-opaque-paint-set-flesh-colours.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Opaque Paint Set - Green Colours
+    sku: '12535'
+    url: https://www.greenstuffworld.com/en/paint-sets/3474-opaque-paint-set-green-colours.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Opaque Paint Set - Warm Colours
+    sku: '12533'
+    url: https://www.greenstuffworld.com/en/paint-sets/3472-opaque-paint-set-warm-colours.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Ancestral Machines
+    sku: '12252'
+    url: https://www.greenstuffworld.com/en/paint-sets/3075-paint-set-ancestral-machines.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Basic Colors 02
+    sku: '11743'
+    url: https://www.greenstuffworld.com/en/paint-sets/2965-paint-set-basic-colors-02.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Basics 01
+    sku: '10120'
+    url: https://www.greenstuffworld.com/en/paint-sets/1163-pain-set-basics-01.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Black and White
+    sku: '10123'
+    url: https://www.greenstuffworld.com/en/paint-sets/1165-paint-set-black-and-white.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Blood Moon
+    sku: '10118'
+    url: https://www.greenstuffworld.com/en/paint-sets/1161-pain-set-blood-moon.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Bones
+    sku: '11744'
+    url: https://www.greenstuffworld.com/en/paint-sets/2960-paint-set-bones.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Bright Green
+    sku: '10115'
+    url: https://www.greenstuffworld.com/en/paint-sets/1158-paint-set-green.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - CHROME
+    sku: '10133'
+    url: https://www.greenstuffworld.com/en/chrome-paints/2625-paint-set-chrome.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Chaotic Soldiers
+    sku: '12068'
+    url: https://www.greenstuffworld.com/en/paint-sets/3071-paint-set-chaotic-soldiers.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Darth Purple
+    sku: '10203'
+    url: https://www.greenstuffworld.com/en/paint-sets/3035-paint-set-darth-purple.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Desert Mysteries
+    sku: '12063'
+    url: https://www.greenstuffworld.com/en/paint-sets/3030-paint-set-desert-mysteries.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Dipping collection 01
+    sku: '11693'
+    url: https://www.greenstuffworld.com/en/dipping-inks/2570-paint-set-dipping-collection-01.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Dipping collection 02
+    sku: '11694'
+    url: https://www.greenstuffworld.com/en/dipping-inks/2571-paint-set-dipping-collection-02.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Evil Pink
+    sku: '11746'
+    url: https://www.greenstuffworld.com/en/paint-sets/2962-paint-set-evil-pink.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Faded Green
+    sku: '10135'
+    url: https://www.greenstuffworld.com/en/paint-sets/3033-paint-set-faded-green.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Flaming Orange
+    sku: '10134'
+    url: https://www.greenstuffworld.com/en/paint-sets/3032-paint-set-flaming-orange.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Flesh Tones
+    sku: '10117'
+    url: https://www.greenstuffworld.com/en/paint-sets/1160-paint-set-flesh-tones.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Hammer Legion
+    sku: '12251'
+    url: https://www.greenstuffworld.com/en/paint-sets/3074-paint-set-hammer-legion.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Leather Brown
+    sku: '10119'
+    url: https://www.greenstuffworld.com/en/paint-sets/1162-paint-set-brown.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Malefic Skin
+    sku: '10122'
+    url: https://www.greenstuffworld.com/en/paint-sets/1193-paint-set-malefic-skin.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Misty Blue
+    sku: '10201'
+    url: https://www.greenstuffworld.com/en/paint-sets/2964-paint-set-misty-blue.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - NMM Copper
+    sku: '11742'
+    url: https://www.greenstuffworld.com/en/paint-sets/3036-paint-set-nmm-copper.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - NMM Gold
+    sku: '10114'
+    url: https://www.greenstuffworld.com/en/paint-sets/1157-paint-set-nmm-gold.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - NMM Steel and Silver
+    sku: '10113'
+    url: https://www.greenstuffworld.com/en/paint-sets/1156-paint-set-nmm-steel-and-silver.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Orcs and Goblins
+    sku: '10124'
+    url: https://www.greenstuffworld.com/en/paint-sets/1167-paint-set-orcs-and-goblins.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Pastel Colors
+    sku: '10131'
+    url: https://www.greenstuffworld.com/en/paint-sets/3031-paint-set-pastel-colors.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Pestilence
+    sku: '12065'
+    url: https://www.greenstuffworld.com/en/paint-sets/3068-paint-set-pestilence.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Pure Blue
+    sku: '10116'
+    url: https://www.greenstuffworld.com/en/paint-sets/1159-pain-set-pure-blue.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Rock & Stone
+    sku: '10202'
+    url: https://www.greenstuffworld.com/en/paint-sets/3034-paint-set-rock-stone.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Savage Reptiles
+    sku: '12249'
+    url: https://www.greenstuffworld.com/en/paint-sets/3072-paint-set-savage-reptiles.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Skulls & Blood
+    sku: '12064'
+    url: https://www.greenstuffworld.com/en/paint-sets/3067-paint-set-skulls-blood.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Special Effects Vol. 1
+    sku: '11747'
+    url: https://www.greenstuffworld.com/en/paint-sets/2821-paint-set-special-effects-vol-1.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Special Effects Vol. 2
+    sku: '11748'
+    url: https://www.greenstuffworld.com/en/paint-sets/3367-paint-set-special-effects-vol-2.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Spectral Army
+    sku: '12250'
+    url: https://www.greenstuffworld.com/en/paint-sets/3073-paint-set-spectral-army.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Turquoise
+    sku: '10130'
+    url: https://www.greenstuffworld.com/en/paint-sets/2963-paint-set-turquoise.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Undead
+    sku: '10121'
+    url: https://www.greenstuffworld.com/en/paint-sets/1164-paint-set-undead.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Vicious
+    sku: '12066'
+    url: https://www.greenstuffworld.com/en/paint-sets/3069-paint-set-vicious.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - WOOD n BARK
+    sku: '11745'
+    url: https://www.greenstuffworld.com/en/paint-sets/2961-paint-set-wood-n-bark.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Paint Set - Warp Sorcery
+    sku: '12067'
+    url: https://www.greenstuffworld.com/en/paint-sets/3070-paint-set-warp-sorcery-.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Set x6 Intensity Inks - Set 1
+    sku: '9351'
+    url: https://www.greenstuffworld.com/en/paint-sets/829-set-x6-intensity-inks-set-1.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Set x6 Intensity Inks - Set 2
+    sku: '9352'
+    url: https://www.greenstuffworld.com/en/paint-sets/828-set-x6-intensity-inks-set-2.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Set x8 Acrylic Candy Ink Paints
+    sku: '9568'
+    url: https://www.greenstuffworld.com/en/paint-sets/988-set-x8-acrylic-candy-ink-paints.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Set x8 Acrylic Wash Ink Paints
+    sku: '9350'
+    url: https://www.greenstuffworld.com/en/paint-sets/781-set-x8-acrylic-wash-ink-paints.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Set x8 Fluor Paints
+    sku: '9353'
+    url: https://www.greenstuffworld.com/en/fluorescent-acrylic-paints/797-set-x8-fluor-paints.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Special Effects Mega Paint Set
+    sku: '12262'
+    url: https://www.greenstuffworld.com/en/paint-sets/3368-special-effects-mega-paint-set.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Starter Mega Paint Set
+    sku: '12264'
+    url: https://www.greenstuffworld.com/en/paint-sets/3382-starter-mega-paint-set.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog
+  - name: Vivid Metallic Paints Set
+    sku: '10132'
+    url: https://www.greenstuffworld.com/en/metallic-acrylic-paints/4588-vivid-metallic-paints-set.html
+    source: mfr-greenstuffworld
+    reason: boxed set -- crosses to the product catalog

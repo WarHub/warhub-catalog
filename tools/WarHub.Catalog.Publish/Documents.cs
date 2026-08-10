@@ -96,14 +96,31 @@ internal sealed record PaintRecord(
     // Further barcodes the same paint is sold under (today: concurrent regional trade variants),
     // so a scan of any of them resolves. Mirrors ProductRecord.AdditionalEans; null -> omitted.
     [property: JsonPropertyOrder(12)] IReadOnlyList<string>? AdditionalEans,
-    [property: JsonPropertyOrder(13)] string Status,
-    [property: JsonPropertyOrder(14)] string Availability,
-    [property: JsonPropertyOrder(15)] IReadOnlyList<PaintEquivalent> Equivalents,
+    // Product/swatch image from the manufacturer or a harvested catalog page.
+    [property: JsonPropertyOrder(13)] string? ImageUrl,
+    // Manufacturer list price, mirroring ProductRecord. Availability deliberately does NOT come
+    // with it: the trade evidence that carries paint prices carries no stock signal at all, and one
+    // paint identity spans several retail SKUs whose stock differs.
+    [property: JsonPropertyOrder(14)] decimal? PriceGbp,
+    [property: JsonPropertyOrder(15)] decimal? PriceUsd,
+    [property: JsonPropertyOrder(16)] decimal? PriceEur,
+    [property: JsonPropertyOrder(17)] decimal? PriceCad,
+    [property: JsonPropertyOrder(18)] string Status,
+    [property: JsonPropertyOrder(19)] string Availability,
+    // Archival lineage between two paint identities for the same colour -- a reformulation that
+    // moved the paint into another range keeps BOTH records: the retired one points forward with
+    // `supersededBy`, the replacement lists its predecessors in `supersedes`. Values are paint ids,
+    // so an old pot still resolves and says what replaced it. As on ProductRecord the relation is
+    // deliberately NOT encoded in `status` -- a consumer filtering on status keeps working, and a
+    // retired paint's status stays whatever the evidence says it is.
+    [property: JsonPropertyOrder(20)] IReadOnlyList<string>? Supersedes,
+    [property: JsonPropertyOrder(21)] string? SupersededBy,
+    [property: JsonPropertyOrder(22)] IReadOnlyList<PaintEquivalent> Equivalents,
     // Cross-catalog seam: the product records that share a barcode with this paint. Plural
     // because one colour is sold as many SKUs (pot, spray, contrast, a paint-set component),
     // so a paint routinely resolves to several products. Mirrors ProductRecord.PaintIds;
     // null -> omitted. Defaulted so the link pass can fill it via `with` after assembly.
-    [property: JsonPropertyOrder(16)] IReadOnlyList<string>? ProductIds = null);
+    [property: JsonPropertyOrder(23)] IReadOnlyList<string>? ProductIds = null);
 
 // ---- Envelope-bearing documents ------------------------------------------------
 

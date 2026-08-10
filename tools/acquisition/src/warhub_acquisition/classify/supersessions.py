@@ -58,10 +58,11 @@ UNOBSERVED = "unobserved-retired-code"
 MERGED = "merged-with-survivor"
 REGIONAL = "regional-variant"
 CONFLICTING = "conflicting"
+STALE_REGISTER_ROW = "stale-register-row"
 UNRESOLVED_CARRIER = "surviving-entity-unresolved"
 
 _BUCKET_ORDER = (
-    READY, MERGED, CONFLICTING, CONTRADICTS_DECLARED, RETIRED_ALREADY_DECLARED, UNOBSERVED,
+    READY, MERGED, CONFLICTING, STALE_REGISTER_ROW, CONTRADICTS_DECLARED, RETIRED_ALREADY_DECLARED, UNOBSERVED,
     REGIONAL, SAME_CODE, ALREADY_DECLARED, UNRESOLVED_CARRIER,
 )
 
@@ -87,6 +88,32 @@ def _cyclic_entities(graph: dict[str, str]) -> set[str]:
             cyclic.update(path[path.index(node):])
         finished.update(on_path)
     return cyclic
+
+
+def _no_claimant_kept_ssc(retired_ssc: object, survivor_ssc: dict[str, str]) -> bool:
+    """True when the retired SS Code is known and no surviving code carries it.
+
+    Requires knowing BOTH sides -- an unknown retired SSC, or claimants whose own SSC we
+    never captured, must stay `conflicting` rather than be convicted on absence.
+    """
+    wanted = str(retired_ssc).strip() if retired_ssc else ""
+    known = {ssc for ssc in survivor_ssc.values() if ssc}
+    return bool(wanted) and bool(known) and wanted not in known
+
+
+def _ssc_successor(retired_ssc: object, survivor_ssc: dict[str, str]) -> str | None:
+    """The one surviving code that kept the retired code's SS Code, or None.
+
+    None when the retired SSC is unknown, when NO claimant kept it (the retired code is
+    then a stale row parked in the register's Old columns, not a predecessor of any of
+    them), or when SEVERAL did (regional editions share an SSC -- the region rule splits
+    those). Returning None means 'this rule has nothing to say', never 'no successor'.
+    """
+    wanted = str(retired_ssc).strip() if retired_ssc else ""
+    if not wanted:
+        return None
+    kept = [code for code, ssc in survivor_ssc.items() if ssc == wanted]
+    return kept[0] if len(kept) == 1 else None
 
 
 def _regional_successor(retired_code: str, surviving_codes: set[str]) -> str | None:
@@ -201,6 +228,8 @@ def generate_supersession_proposals(paths: DataPaths) -> list[dict]:
                         "manufacturer": observation.manufacturer,
                         "retiredCode": retired_code,
                         "retiredEan": entry.get("ean"),
+                        "retiredSsc": entry.get("ssc"),
+                        "survivingSsc": (observation.hints or {}).get("sscCode"),
                         "changedOn": entry.get("changedOn"),
                         "survivingCode": surviving_code,
                         "survivingEntity": surviving_entity,
@@ -217,12 +246,16 @@ def generate_supersession_proposals(paths: DataPaths) -> list[dict]:
         )
     survivors_per_code: dict[tuple[str, str], set[str]] = {}
     survivor_codes_per_code: dict[tuple[str, str], set[str]] = {}
+    survivor_ssc_per_code: dict[tuple[str, str], dict[str, str]] = {}
     for edge in unique.values():
         if edge["survivingEntity"]:
             pair = (edge["manufacturer"], edge["retiredCode"])
             survivors_per_code.setdefault(pair, set()).add(edge["survivingEntity"])
             if edge["survivingCode"]:
                 survivor_codes_per_code.setdefault(pair, set()).add(edge["survivingCode"])
+            if edge["survivingCode"] and edge.get("survivingSsc"):
+                survivor_ssc_per_code.setdefault(pair, {})[edge["survivingCode"]] = str(
+                    edge["survivingSsc"]).strip()
 
     proposals: list[dict] = []
     for edge in unique.values():
@@ -237,23 +270,46 @@ def generate_supersession_proposals(paths: DataPaths) -> list[dict]:
         retired_entity = owner if owner is not None else (elsewhere[0] if elsewhere else None)
 
         fan_out = survivors_per_code.get((manufacturer, retired_code), set())
-        successor = (
-            _regional_successor(retired_code, survivor_codes_per_code.get((manufacturer, retired_code), set()))
-            if len(fan_out) > 1
-            else None
-        )
+        pair_key = (manufacturer, retired_code)
+        successor = None
+        if len(fan_out) > 1:
+            # GW's SS Code is the product's identity ACROSS a re-code -- 706 of 727
+            # register pairs keep it -- so among COMPETING claimants the one that kept
+            # the retired code's own SSC is the real successor and the rest are stale
+            # rows. Only ever used between claimants, NEVER as a veto on a lone edge:
+            # 9 already-declared pairs legitimately renumber their SSC.
+            successor = _ssc_successor(
+                edge.get("retiredSsc"), survivor_ssc_per_code.get(pair_key, {}))
+            # Regional editions SHARE their SSC, so a fan-out the SSC cannot split
+            # falls through to the region rule, which is exactly what splits those.
+            if successor is None:
+                successor = _regional_successor(
+                    retired_code, survivor_codes_per_code.get(pair_key, set()))
 
-        if surviving is None:
+        if retired_entity is not None and declared.get(retired_entity) == surviving:
+            # Checked FIRST: an edge a maintainer has already declared is settled, and
+            # re-reporting it as `conflicting` because its fan-out is unresolved hides that.
+            # Its unresolved RIVALS still surface, which is the part worth a human's time.
+            bucket = ALREADY_DECLARED
+        elif surviving is None:
             bucket = UNRESOLVED_CARRIER
         elif retired_code == edge["survivingCode"]:
             bucket = SAME_CODE
+        elif len(fan_out) > 1 and successor is None and _no_claimant_kept_ssc(
+            edge.get("retiredSsc"), survivor_ssc_per_code.get(pair_key, {})
+        ):
+            # The retired code's OWN SS Code is known and NOT ONE claimant kept it. GW's
+            # SSC is the product's identity across a re-code, so this code is not the
+            # predecessor of any of them -- it is a stale row the register parked in the
+            # `Old ...` columns while a batch of genuinely new products was registered.
+            # A verdict, not an unknown: every one is a real product (mostly non-English
+            # regional editions), just not THESE products' ancestor.
+            bucket = STALE_REGISTER_ROW
         elif len(fan_out) > 1 and successor is None:
             bucket = CONFLICTING
         elif successor is not None and edge["survivingCode"] != successor:
             # another region's edition of the same product; its own retired code covers it
             bucket = REGIONAL
-        elif retired_entity is not None and declared.get(retired_entity) == surviving:
-            bucket = ALREADY_DECLARED
         elif retired_entity is not None and retired_entity in declared:
             # `supersessions` is keyed by the RETIRED id, so promoting this would not add a link --
             # it would REPLACE the existing, hand-verified one. Marking it `ready` (as this did
@@ -279,6 +335,8 @@ def generate_supersession_proposals(paths: DataPaths) -> list[dict]:
                 "manufacturer": manufacturer,
                 "retiredCode": retired_code,
                 "retiredEan": edge["retiredEan"],
+                "retiredSsc": edge.get("retiredSsc"),
+                "survivingSsc": edge.get("survivingSsc"),
                 "retiredEntity": retired_entity,
                 "survivingEntity": surviving,
                 "survivingCode": edge["survivingCode"],

@@ -31,3 +31,20 @@ contract:
   requiredFieldRates:
     name: 1.0
     sku: 0.9
+# Boxed multi-pot sets are PRODUCTS, not paints -- see resolve/crossover.py for the shared
+# evaluator gen_paint_harvest.py refuses the same rows with.
+crossoverToProducts:
+  reason: >
+    Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
+    Measured 2026-08-05 over all 197 observations: this block selects 21, and the two
+    signals agree EXACTLY (productType "Paint Sets" 21, title 21, same rows) -- both are
+    kept anyway so a retitled box or a retyped product still crosses on the other. 19 of
+    the 21 carry a real retail EAN (the scope comment above already notes set EANs are
+    real); the 2 without are code-anchored, so none hits the identity floor.
+    All 21 need the widened `(MPA|AMP|MEA)-[A-Z0-9-]+` codePattern in
+    data/catalog/taxonomy/manufacturers.yaml -- the old `MPA-[A-Z0-9]+` cannot match the
+    second hyphen in MPA-SET-ACON, and codes 0 of 21 without it.
+  category: paint-set
+  anyOf:
+    - hintEquals: {productType: Paint Sets}
+    - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'

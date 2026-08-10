@@ -301,7 +301,10 @@ def _run(
     # `runner.run_source` fetched and attached to `client` for its own (unused-by-this-strategy)
     # httpx requests, reused here to check every browser-fetched URL too.
     robots = client.robots
-    user_agent = client.user_agent
+    # `robots_user_agent`, NOT `user_agent`: robots must be evaluated under the canonical bot token
+    # even when a browser profile is presented, exactly as PoliteClient._request does it. See that
+    # property's docstring for what reading the presented UA here would cost.
+    user_agent = client.robots_user_agent
 
     base_url = str(descriptor.baseUrl or "").rstrip("/")
     product_sitemap_url = str(descriptor.scope.get("productSitemap") or f"{base_url}/wp-sitemap-posts-products-1.xml")

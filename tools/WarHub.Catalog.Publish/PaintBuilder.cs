@@ -25,6 +25,13 @@ internal static class PaintBuilder
     /// paints on their own; <see cref="Publisher"/> uses the two phases separately so the barcode
     /// link pass can run between them.
     /// </summary>
+    // Lineage is stored upstream as `{Name}|{Set}` -- the cross-reference key the paint tool uses
+    // everywhere (overrides, the barcode bridge, harvest enrichment). It is NOT the natural key:
+    // it omits code and hex, so it can be ambiguous (variant ranges legitimately ship one colour
+    // name under several codes). Ambiguous keys are dropped from the map below rather than guessed.
+    private static string LineageKey(string brandSlug, string name, string set) =>
+        $"{brandSlug}|{name}|{set}";
+
     public static int Build(
         IReadOnlyList<BrandFile> brands,
         EquivFile? equivalences,
@@ -53,10 +60,28 @@ internal static class PaintBuilder
             }
         }
 
-        // 2. Assign ids: brand-slug/paint-slug, with deterministic -N suffixes on collision.
+        // 2. Assign ids: brand-slug/paint-slug, QUALIFIED BY CONTENT when the name collides.
+        //
+        // The suffix used to be positional -- sort the colliding group by (set, code, hex) and
+        // append -2, -3 by index. That made an id a statement about the group's membership rather
+        // than about the paint: inserting one paint renumbered its siblings, and 1,541 records
+        // (18%) carried such a suffix. Minting the two Contrast reformulations made the failure
+        // concrete -- "Contrast" sorts before "Technical", so `citadel-colour/hexwraith-flame`
+        // silently STOPPED meaning the Technical pot and started meaning the Contrast one.
+        //
+        // The suffix is now derived from the paint's own identity (set, then product code, then
+        // hex -- the same fields as the natural key), so an id depends on nothing but the paint it
+        // names. When a name collides, EVERY member is qualified and none keeps the bare id: a
+        // consumer holding the old bare id gets a clean 404 instead of silently the wrong colour.
+        // Uncollided names -- the large majority -- are untouched.
         var idByNaturalKey = new Dictionary<string, string>(StringComparer.Ordinal);
         var recordById = new Dictionary<string, PaintRecord>(StringComparer.Ordinal);
         var equivById = new Dictionary<string, Dictionary<string, (double DeltaE, string? Tier)>>(StringComparer.Ordinal);
+        // `{brand}|{name}|{set}` -> id, with null marking an ambiguous key (see LineageKey).
+        var idByLineageKey = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
+
+        static string Natural(Entry e) =>
+            NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode, e.Paint.Details.Hex);
 
         foreach (IGrouping<string, Entry> group in entries
             .GroupBy(e => $"{e.BrandSlug}/{Slug.Make(e.Paint.Name)}", StringComparer.Ordinal)
@@ -68,11 +93,57 @@ internal static class PaintBuilder
                 .ThenBy(e => e.Paint.Details.Hex, StringComparer.Ordinal)
                 .ToList();
 
+            // Qualify only when the bare name is contested, and only as far as it takes to be
+            // unique: set, then + product code, then + hex. Those are exactly the natural key's
+            // fields, so a fully-qualified id cannot collide -- two records that reached here with
+            // the same set, code AND hex would already have been folded by the natural key above.
+            var qualified = new Dictionary<string, string>(StringComparer.Ordinal);
+            if (ordered.Count > 1)
+            {
+                foreach (Entry e in ordered)
+                {
+                    qualified[Natural(e)] = $"{group.Key}-{Slug.Make(e.Paint.Details.Set)}";
+                }
+                for (int level = 0; level < 2; level++)
+                {
+                    var clashing = qualified.GroupBy(kv => kv.Value, StringComparer.Ordinal)
+                        .Where(g => g.Count() > 1)
+                        .SelectMany(g => g.Select(kv => kv.Key))
+                        .ToHashSet(StringComparer.Ordinal);
+                    if (clashing.Count == 0)
+                    {
+                        break;
+                    }
+                    foreach (Entry e in ordered.Where(x => clashing.Contains(Natural(x))))
+                    {
+                        string extra = level == 0
+                            ? Slug.Make(e.Paint.ProductCode ?? "")
+                            : (NormalizeHex(e.Paint.Details.Hex) ?? "").TrimStart('#').ToLowerInvariant();
+                        if (extra.Length > 0)
+                        {
+                            qualified[Natural(e)] = $"{qualified[Natural(e)]}-{extra}";
+                        }
+                    }
+                }
+            }
+
             for (int i = 0; i < ordered.Count; i++)
             {
                 Entry e = ordered[i];
-                string id = i == 0 ? group.Key : $"{group.Key}-{i + 1}";
+                string naturalKey = Natural(e);
+                string id = qualified.TryGetValue(naturalKey, out string? q) ? q : group.Key;
+                // A duplicate id here SILENTLY DROPS a paint via the dictionary write below.
+                // That is not hypothetical: the previous positional scheme lost 4 records
+                // this way, because a name legitimately ending in a digit could collide with
+                // another name's `-2`. Fail the build instead.
+                if (recordById.ContainsKey(id))
+                {
+                    throw new InvalidOperationException(
+                        $"duplicate paint id '{id}' -- two paints would publish under one id");
+                }
                 idByNaturalKey[NaturalKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set, e.Paint.ProductCode, e.Paint.Details.Hex)] = id;
+                string lineageKey = LineageKey(e.BrandSlug, e.Paint.Name, e.Paint.Details.Set);
+                idByLineageKey[lineageKey] = idByLineageKey.ContainsKey(lineageKey) ? null : id;
                 equivById[id] = new Dictionary<string, (double, string?)>(StringComparer.Ordinal);
                 recordById[id] = new PaintRecord(
                     Id: id,
@@ -88,8 +159,16 @@ internal static class PaintBuilder
                     ProductCode: e.Paint.ProductCode,
                     Ean: e.Paint.Ean,
                     AdditionalEans: e.Paint.AdditionalEans is { Count: > 0 } extra ? extra : null,
+                    ImageUrl: Trimmed(e.Paint.ImageUrl),
+                    PriceGbp: e.Paint.PriceGbp,
+                    PriceUsd: e.Paint.PriceUsd,
+                    PriceEur: e.Paint.PriceEur,
+                    PriceCad: e.Paint.PriceCad,
                     Status: e.Paint.Status,
                     Availability: e.Paint.Availability,
+                    // Still the upstream `{Name}|{Set}` keys here; rewritten to ids in step 4.
+                    Supersedes: e.Paint.Supersedes is { Count: > 0 } prior ? prior : null,
+                    SupersededBy: Trimmed(e.Paint.SupersededBy),
                     Equivalents: []); // filled below
             }
         }
@@ -117,7 +196,7 @@ internal static class PaintBuilder
             }
         }
 
-        // 4. Materialize records with sorted equivalents.
+        // 4. Materialize records with sorted equivalents and resolved lineage.
         foreach ((string id, PaintRecord record) in recordById)
         {
             var eq = equivById[id]
@@ -125,7 +204,21 @@ internal static class PaintBuilder
                 .OrderBy(x => x.DeltaE)
                 .ThenBy(x => x.Id, StringComparer.Ordinal)
                 .ToList();
-            recordById[id] = record with { Equivalents = eq };
+
+            string brandSlug = id.Split('/')[0];
+            var supersedes = record.Supersedes?
+                .Select(key => ResolveLineage(idByLineageKey, brandSlug, key, id))
+                .OfType<string>()
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(x => x, StringComparer.Ordinal)
+                .ToList();
+
+            recordById[id] = record with
+            {
+                Equivalents = eq,
+                Supersedes = supersedes is { Count: > 0 } ? supersedes : null,
+                SupersededBy = ResolveLineage(idByLineageKey, brandSlug, record.SupersededBy, id),
+            };
         }
 
         return new PaintAssembly(recordById);
@@ -188,6 +281,26 @@ internal static class PaintBuilder
 
         return total;
     }
+
+    /// <summary>
+    /// Turns one upstream <c>{Name}|{Set}</c> lineage key into a published paint id, within the
+    /// SAME brand (a reformulation never crosses brands). Returns null — the link is simply not
+    /// published — when the key names nothing, names several paints (see <see cref="LineageKey"/>),
+    /// or names the record itself. A dangling id in the published catalog would be worse than a
+    /// missing one: consumers treat these as resolvable.
+    /// </summary>
+    private static string? ResolveLineage(
+        Dictionary<string, string?> idByLineageKey, string brandSlug, string? key, string selfId)
+    {
+        if (string.IsNullOrWhiteSpace(key))
+            return null;
+        return idByLineageKey.TryGetValue($"{brandSlug}|{key.Trim()}", out string? id) && id != selfId
+            ? id
+            : null;
+    }
+
+    private static string? Trimmed(string? value) =>
+        string.IsNullOrWhiteSpace(value) ? null : value.Trim();
 
     private static bool TryResolve(Dictionary<string, string> map, EquivRef refr, out string id) =>
         map.TryGetValue(NaturalKey(refr.BrandSlug, refr.Name, refr.Set, refr.ProductCode, refr.Hex), out id!);

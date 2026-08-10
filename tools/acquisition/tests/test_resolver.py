@@ -590,3 +590,152 @@ def test_paint_source_observations_never_publish_as_products(tmp_path: Path) -> 
     assert not (paths.catalog_products / "vallejo.yaml").exists()
     # the evidence itself is untouched -- gen_paint_harvest.py still reads it
     assert paint.exists()
+
+
+# --- crossoverToProducts: boxed sets from a paint source ------------------------------------
+# Boxed multi-pot sets are products, not paints (maintainer decision 2026-08-05). A paint source
+# declares which of its rows those are; the resolver admits exactly those and gen_paint_harvest.py
+# refuses exactly those. Fixtures only -- the repo-data half of the contract is in
+# test_repo_data.py, and the predicate itself in test_crossover.py.
+
+GSW_SET_RULE = {
+    "reason": "boxed multi-pot sets are products; measured 2026-08-05, 69 of 477",
+    "category": "paint-set",
+    "anyOf": [
+        {"hintEquals": {"categorySlug": "paint-sets"}},
+        {"nameMatches": r"\b(SET|COLLECTION)\b"},
+    ],
+}
+
+
+def seed_paint_source(tmp_path: Path, crossover: dict | None) -> tuple[DataPaths, Path]:
+    """A products source plus a paints source holding one set-shaped row and one real single."""
+    paths = seed(tmp_path)
+    descriptor = {"id": "mfr-gsw", "kind": "manufacturer", "catalog": "paints",
+                  "strategy": "sitemap-sd-paints"}
+    if crossover is not None:
+        descriptor["crossoverToProducts"] = crossover
+    write_yaml(paths.sources / "mfr-gsw.yaml", descriptor)
+
+    manufacturers = read_yaml(paths.taxonomy / "manufacturers.yaml")
+    manufacturers["manufacturers"].append(
+        {"slug": "green-stuff-world", "name": "Green Stuff World", "codePattern": r"\d{3,5}",
+         "codeStrip": [], "gs1Prefixes": [], "vendorNames": []}
+    )
+    write_yaml(paths.taxonomy / "manufacturers.yaml", manufacturers)
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    path = paths.evidence_products / "mfr-gsw" / "observations.jsonl"
+    path.parent.mkdir(parents=True)
+    path.write_text(
+        line({"key": "mfr-gsw:box", "name": "Paint Set - Chrome", "manufacturer": "green-stuff-world",
+              "sku": "12345", "ean": "8435646800011",
+              # the store's OWN category is the range, not `paint-sets` -- and it calls the box a
+              # paint, which is exactly why `category` has to be stamped
+              "hints": {"categorySlug": "chrome-paints", "category": "paint", "volumeMl": 17},
+              "firstSeen": "2026-07-24", "lastSeen": "2026-08-05",
+              "extractor": "sitemap-sd-paints@1"}) + "\n"
+        + line({"key": "mfr-gsw:single", "name": "Acrylic Color WONKA VIOLET",
+                "manufacturer": "green-stuff-world", "sku": "3220", "ean": "8435646800028",
+                "hints": {"categorySlug": "acrylic-paints", "category": "paint"},
+                "firstSeen": "2026-07-24", "lastSeen": "2026-08-05",
+                "extractor": "sitemap-sd-paints@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    return paths, path
+
+
+def test_paint_source_without_a_crossover_block_contributes_nothing(tmp_path: Path) -> None:
+    """T10 -- today's behaviour, and what the four blockless paint sources still get."""
+    paths, evidence = seed_paint_source(tmp_path, crossover=None)
+    catalog = resolve_catalog(paths)
+    assert list(catalog) == ["games-workshop"]
+    assert not (paths.catalog_products / "green-stuff-world.yaml").exists()
+    assert evidence.exists()  # gen_paint_harvest.py still reads it
+
+
+def test_crossover_admits_the_set_and_stamps_its_category(tmp_path: Path) -> None:
+    """T11 -- only the SELECTED row crosses, and `category` is the only field that changes."""
+    paths, _ = seed_paint_source(tmp_path, GSW_SET_RULE)
+    catalog = resolve_catalog(paths)
+
+    assert sorted(catalog) == ["games-workshop", "green-stuff-world"]
+    products = catalog["green-stuff-world"]
+    assert [p.id for p in products] == ["green-stuff-world/12345"]
+    box = products[0]
+    # the store said `paint`; the descriptor's `category` overwrites it (without this a 12-pot
+    # box publishes as an individual paint -- the lie commit 6b3c930 fixed on the paint side)
+    assert box.category == "paint-set"
+    assert box.name == "Paint Set - Chrome"
+    assert box.ean == "8435646800011"
+    # every OTHER hint survives untouched
+    assert box.volumeMl == 17
+    # the single is still a paint-catalog row and reaches no product file
+    assert read_yaml(paths.conflicts) == {"conflicts": []}
+
+
+def test_crossover_row_without_code_or_ean_is_refused_as_a_conflict(tmp_path: Path) -> None:
+    """T12 -- the identity floor. A name-slug entity id is orphaned by a store retitle, so an
+    unaddressable set is surfaced for a human instead of published. Measured on real evidence:
+    29 of 545, all mfr-ak-interactive."""
+    paths, evidence = seed_paint_source(tmp_path, GSW_SET_RULE)
+    rows = evidence.read_text(encoding="utf-8").splitlines()
+    rows.append(json.dumps({"key": "mfr-gsw:nameless-box", "name": "Mystery Collection",
+                            "manufacturer": "green-stuff-world", "sku": "RANGE-GSW",
+                            "hints": {"category": "paint"},
+                            "firstSeen": "2026-07-24", "lastSeen": "2026-08-05",
+                            "extractor": "sitemap-sd-paints@1"}, sort_keys=True,
+                           separators=(",", ":")))
+    evidence.write_text("\n".join(rows) + "\n", encoding="utf-8", newline="\n")
+
+    catalog = resolve_catalog(paths)
+
+    assert [p.id for p in catalog["green-stuff-world"]] == ["green-stuff-world/12345"]
+    conflicts = read_yaml(paths.conflicts)["conflicts"]
+    assert conflicts == [
+        {"type": "set-without-identity", "source": "mfr-gsw", "key": "mfr-gsw:nameless-box",
+         "sku": "RANGE-GSW", "name": "Mystery Collection"}
+    ]
+
+
+def test_crossover_elsewhere_does_not_disturb_a_products_source(tmp_path: Path) -> None:
+    """T13 -- the products half of the partition is byte-identical to the no-crossover run."""
+    baseline_paths = seed(tmp_path / "baseline")
+    resolve_catalog(baseline_paths)
+    baseline = (baseline_paths.catalog_products / "games-workshop.yaml").read_text(encoding="utf-8")
+
+    paths, _ = seed_paint_source(tmp_path / "with-crossover", GSW_SET_RULE)
+    resolve_catalog(paths)
+    after = (paths.catalog_products / "games-workshop.yaml").read_text(encoding="utf-8")
+
+    assert after == baseline
+
+
+def test_crossover_rows_alone_do_not_satisfy_the_wipe_guard(tmp_path: Path) -> None:
+    """The guard asks about PRODUCT-SOURCE evidence, not about the merged observation list.
+
+    Crossover put crossed paint rows into the same list the guard counted, so a run where every
+    `catalog: products` source failed to load would sail past `if not observations`, publish only
+    the crossover manufacturers, and then let the stale-file sweep unlink every real product file.
+    Losing the entire product catalog to a transient evidence-loading failure is precisely what
+    this guard exists to prevent, so crossed rows must not be able to satisfy it.
+    """
+    import shutil
+
+    import pytest
+
+    paths, _ = seed_paint_source(tmp_path, GSW_SET_RULE)
+    resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()
+    assert (paths.catalog_products / "green-stuff-world.yaml").exists()
+
+    # Every products source's evidence vanishes; the paints source still loads and still crosses.
+    shutil.rmtree(paths.evidence_products / "mfr-gw", ignore_errors=True)
+    shutil.rmtree(paths.evidence_products / "ret-goblin", ignore_errors=True)
+    assert (paths.evidence_products / "mfr-gsw").exists()
+
+    with pytest.raises(ValueError, match="refusing to wipe"):
+        resolve_catalog(paths)
+    assert (paths.catalog_products / "games-workshop.yaml").exists()

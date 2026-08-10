@@ -32,3 +32,42 @@ contract:
   requiredFieldRates:
     name: 1.0
     sku: 0.9
+# Boxed multi-pot sets are PRODUCTS, not paints -- see resolve/crossover.py for the shared
+# evaluator gen_paint_harvest.py refuses the same rows with.
+crossoverToProducts:
+  reason: >
+    Boxed multi-pot sets are PRODUCTS, not paints (maintainer decision 2026-08-05).
+    Measured 2026-08-05 over all 794 observations: this block selects 49 (56 title hits
+    minus 7 vetoed), 40 of them carrying an EAN, 48 of 49 code-anchored once army-painter
+    gains the `BNDL\d{3,4}` alternative in manufacturers.yaml.
+    TITLE IS THE ONLY LEVER HERE: thearmypainter.com exposes no usable set category --
+    hints.productType takes only the three values Paint, Spray and '' across all 794 rows,
+    none of which distinguishes a box from a dropper.
+    The single exact tag value `brushset` vetoes exactly the 7 brush sets (TL5065P,
+    TL5066P, TL5067P, TL5068P, TL5069P, TL5070P, BR7055P) while the four genuine airbrush
+    paint sets AW8001P-AW8004P survive -- their tags are `Airbrush Warpaints` and
+    `SDS Airbrush Sets`, which CONTAIN the substring but are not the value. Matching is
+    exact value membership, never substring (see resolve/crossover.py); a substring test
+    would veto all four real sets to exclude the 7.
+    DELIBERATE NON-SELECTION: the tag `tap-shop-bundles-set` was considered and rejected.
+    It carries 110 rows and would select 110 on its own (none of them brush sets) or 117
+    unioned with the title clause, against 49 today. Either way it pulls in
+    WP8082P/WP8083P/WP8084P ("Historical: WWII American/British/German" -- note none
+    matches the title regex, so only the tag signal reaches them), whose EANs
+    5713799808201 / 5713799808300 / 5713799808409 are ALREADY published as
+    warlord-games/WP8082, /WP8083 and /WP8084 ("Warpaints Fanatic: World War II
+    American/German/British Paint Set", verified in data/catalog/products/warlord-games.yaml
+    on 2026-08-05). Selecting them would ship 3 day-one `cross-manufacturer-ean` conflicts.
+    That misattribution is real and pre-existing --
+    ret-tistaminis vendors Army Painter stock under Warlord-BLISTER/Warlord-WEB and
+    manufacturers.yaml maps those to warlord-games -- but fixing it means deciding whether
+    that vendor tag can still be trusted as a manufacturer signal, which touches more than
+    three records. Deferred to its own change; if a later change switches this source to
+    the tag signal, those 3 conflicts appear immediately.
+    75005 "D&D Undead Paint Set" is the one row that stays a name slug after the taxonomy
+    widening; left as-is rather than widening the pattern further to chase a single row.
+  category: paint-set
+  anyOf:
+    - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'
+  noneOf:
+    - hintContainsAny: {tags: [brushset]}

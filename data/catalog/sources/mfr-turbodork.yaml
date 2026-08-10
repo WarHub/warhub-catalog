@@ -29,3 +29,9 @@ contract:
   requiredFieldRates:
     name: 1.0
     sku: 0.9
+# NO crossoverToProducts, deliberately. Measured 2026-08-05 over all 357 observations: the set
+# word list produces 4 title hits and all 4 are junk, not boxed paint sets --
+# TDK044099 "Countertop Leg Adapter Set for 5 Trays" (a display rack; tags distributor:rack,
+# retail:rack) and three "_R" trade packs, TDK025885_R / TDK015892_R / TDK015939_R
+# "... Starter Set (1 Count for Retailers)", all four tagged pfs:hidden. Nothing here is a
+# product to cross, so declaring a block would only mislabel 4 rows as `paint-set`.
