@@ -208,6 +208,21 @@ def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
         if args.propose_joins:
             return _run_classify_propose_joins(args, paths)
 
+        if args.propose_supersessions:
+            # No LLM and no run date: the lineage is the manufacturer's own assertion, so there
+            # is nothing to adjudicate -- only to classify as safe/unsafe to declare.
+            from warhub_acquisition.classify.supersessions import run_supersession_proposals
+
+            summary = run_supersession_proposals(paths)
+            buckets = ", ".join(f"{bucket} {count}" for bucket, count in sorted(summary.buckets.items()))
+            print(
+                f"classified {summary.edges} asserted lineage edge"
+                f"{'s' if summary.edges != 1 else ''} to "
+                f"{paths.root / 'review' / 'supersession-proposals.yaml'}"
+                + (f" ({buckets})" if buckets else "")
+            )
+            return 0
+
         count = apply_classifications(paths)
         print(
             f"applied {count} classification{'s' if count != 1 else ''} to catalog/overrides.yaml; "
@@ -266,6 +281,7 @@ def main(argv: list[str] | None = None) -> int:
     classify_mode.add_argument("--apply", action="store_true")
     classify_mode.add_argument("--llm", action="store_true")
     classify_mode.add_argument("--propose-joins", action="store_true")
+    classify_mode.add_argument("--propose-supersessions", action="store_true")
     classify.add_argument("--budget", type=int, default=DEFAULT_BUDGET)
     classify.add_argument("--model", default=DEFAULT_MODEL)
     classify.add_argument("--run-date", default=None)

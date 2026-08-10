@@ -143,6 +143,12 @@ data/
    force-reset-from-`main` PR step can never clobber an unmerged classify-mode PR, or vice versa.
    **Requires the `ANTHROPIC_API_KEY` repository secret** — the workflow fails fast with a clear
    error if it isn't configured, before spending any budget.
+   `warhub-data classify --propose-supersessions` is the lineage counterpart and needs **no** LLM
+   and no key: the manufacturer's own re-coding register asserts that two product codes are the
+   same product, so nothing needs adjudicating. It classifies each asserted edge by whether it is
+   safe to declare and writes `data/review/supersession-proposals.yaml`, whose `readyToPromote`
+   block pastes straight into `matches.yaml`'s `supersessions:`. Like the join proposer it never
+   edits `matches.yaml` itself.
 3. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
    then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only
