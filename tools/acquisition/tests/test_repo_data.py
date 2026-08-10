@@ -491,11 +491,22 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
     file: 20 boxed sets + reaper's, all applied, 0 near-misses; the 3 green-stuff-world singles
     added today all resolve exactly.
 
-    Residual blind spot, stated rather than papered over: a key whose SET or NAME component is
-    itself mistyped names nothing and has no near-miss either, so it reads as applied. Nothing in
-    the file can distinguish that from a real deletion -- only the record's absence proves it --
-    which is why the retract block's own comment insists the keys be GENERATED from the records
-    rather than transcribed.
+    A SURVIVING (SET, NAME) IS NOT ENOUGH ON ITS OWN, and 2026-08-07 is when THAT broke. Retracting
+    AK's category duplicates flagged `Naval|Wooden Deck|AK730|#AD9557` as mistyped because
+    `Naval|Wooden Deck|AK5032|#D4B78B` survives it -- but those are two different paints that
+    happen to share a name inside one set, and the retraction of the first was exactly right (it
+    duplicated `General|Wooden Deck|AK730|#AD9557`, same code, same colour). The rule now asks how
+    FAR the survivor is: a typo lands NEXT to its target, differing in the productCode or the hex
+    but not both, because the author transcribed one record and got one field wrong. A survivor
+    differing in BOTH is a different pot, and reading it as a near-miss blocks a correct deletion
+    -- the worse of the two errors, since the false positive stops good data landing while the
+    false negative merely fails to catch a key that is wrong in two places at once.
+
+    Residual blind spots, stated rather than papered over: a key whose SET or NAME component is
+    itself mistyped names nothing and has no near-miss either, so it reads as applied; and by the
+    same token neither does a key wrong in both code and hex. Nothing in the file can distinguish
+    either from a real deletion -- only the record's absence proves it -- which is why the retract
+    block's own comment insists the keys be GENERATED from the records rather than transcribed.
     """
     _require_repo_data()
     overrides_path = REPO_DATA / "paints/overrides.yaml"
@@ -535,8 +546,18 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
             parts = str(authored).split("|")
             survivors = by_set_and_name.get(
                 (_normalize(parts[0]), _normalize(parts[1])), []) if len(parts) == 4 else []
-            if survivors:
-                mistyped.append((brand_slug, authored, survivors))
+            # NEAR-MISS ONLY. Survivors share the set and name by construction, so they can differ
+            # from the authored key in the productCode, the hex, or both -- and only "one of the
+            # two" reads as a transcription slip. Both differing means a genuinely different pot
+            # sharing a name inside one set (AK's Naval Wooden Deck, AK730 vs AK5032), which the
+            # retraction of its twin is supposed to leave standing.
+            authored_parts = [_normalize(p) for p in parts]
+            near = [
+                survivor for survivor in survivors
+                if sum(1 for a, b in zip(authored_parts, survivor.split("|")) if a != b) == 1
+            ]
+            if near:
+                mistyped.append((brand_slug, authored, near))
 
     assert not ambiguous, (
         "retract keys naming MORE than one committed record -- the identity key is not "
