@@ -51,6 +51,7 @@ from warhub_acquisition.yamlio import dump_yaml, read_yaml
 
 READY = "ready"
 CONTRADICTS_DECLARED = "contradicts-declared"
+RETIRED_ALREADY_DECLARED = "retired-already-declared"
 ALREADY_DECLARED = "already-declared"
 SAME_CODE = "same-code"
 UNOBSERVED = "unobserved-retired-code"
@@ -60,8 +61,8 @@ CONFLICTING = "conflicting"
 UNRESOLVED_CARRIER = "surviving-entity-unresolved"
 
 _BUCKET_ORDER = (
-    READY, MERGED, CONFLICTING, CONTRADICTS_DECLARED, UNOBSERVED, REGIONAL, SAME_CODE,
-    ALREADY_DECLARED, UNRESOLVED_CARRIER,
+    READY, MERGED, CONFLICTING, CONTRADICTS_DECLARED, RETIRED_ALREADY_DECLARED, UNOBSERVED,
+    REGIONAL, SAME_CODE, ALREADY_DECLARED, UNRESOLVED_CARRIER,
 )
 
 
@@ -253,6 +254,14 @@ def generate_supersession_proposals(paths: DataPaths) -> list[dict]:
             bucket = REGIONAL
         elif retired_entity is not None and declared.get(retired_entity) == surviving:
             bucket = ALREADY_DECLARED
+        elif retired_entity is not None and retired_entity in declared:
+            # `supersessions` is keyed by the RETIRED id, so promoting this would not add a link --
+            # it would REPLACE the existing, hand-verified one. Marking it `ready` (as this did
+            # until 2026-07-31) means any "paste readyToPromote" step silently rewrites a
+            # declaration. Surfaced by a real case: a newly minted archival record made
+            # `99070207010 -> 99070207021` proposable while `99070207010 -> 99120207208` was
+            # already declared.
+            bucket = RETIRED_ALREADY_DECLARED
         elif retired_entity is not None and retired_entity != surviving:
             bucket = READY
         elif surviving in observers:

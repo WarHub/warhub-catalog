@@ -719,3 +719,35 @@ def test_minted_record_without_a_barcode_still_preserves_the_code():
     assert minted.sku == "99061499084"
     assert stats["lineage_records"] == 1
     assert stats["lineage_records_with_barcode"] == 0
+
+
+def test_slash_dates_in_the_register_are_read_day_first():
+    """A text-typed date column arrives as `01/03/2021`, which `fromisoformat` rejects -- so the
+    change date was silently dropped on 192 register rows. Day-first is unambiguous on this data:
+    zero of those rows have both leading fields <= 12."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _as_date, _predecessor
+
+    assert _as_date("01/03/2021") == dt.date(2021, 3, 1)   # day-first, not 2021-01-03
+    assert _as_date("29/02/2024") == dt.date(2024, 2, 29)
+    assert _as_date("2021-03-01") == dt.date(2021, 3, 1)   # ISO still wins
+    assert _as_date("31/02/2021") is None                  # impossible date, not a silent shift
+    assert _as_date("not a date") is None
+
+    _, _, changed_on = _predecessor(
+        {"Old Product Code": "99120204012", "Date": "03/06/2024"}, run_date="2026-07-30"
+    )
+    assert changed_on == "2024-06-03"
+
+
+def test_old_ssc_column_is_kept_in_the_extract_before_anything_reads_it():
+    """GW's SS Code is the product's identity across a re-code, so `Old SSC Code` is what tells a
+    real predecessor from a stale regional edition. A whitelist only keeps what it is told to, and
+    a durable extract must not discard a column just because today's parser ignores it."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _extract
+
+    row = {"Old Product Code": "99120204012", "Old SSC Code": "48-88", "New SS Code": "55-24",
+           "Trade Price": 15.0}
+    extracted = _extract(row)
+    assert extracted["Old SSC Code"] == "48-88"
+    assert extracted["New SS Code"] == "55-24"
+    assert "Trade Price" not in extracted

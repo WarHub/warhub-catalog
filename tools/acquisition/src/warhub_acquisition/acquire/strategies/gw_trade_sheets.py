@@ -266,6 +266,13 @@ _CONSUMED_COLUMNS: frozenset[str] = frozenset(
         "Old Product Code", "Old Code", "Previous Product Code", "Old SKU", "Original SKU",
         "Old Barcode", "Old Individual barcode", "Previous Barcode",
         "Date", "Change Date", "Effective Date",
+        # Not read by this module (yet) but whitelisted deliberately: GW's SS Code is the product's
+        # identity ACROSS a re-code -- 706 of 727 register pairs keep it -- so `Old SSC Code` beside
+        # `New SS Code` is what distinguishes a real predecessor from a stale regional edition left
+        # in the Old columns. Adjudicating the `conflicting` bucket needs it, and it was absent from
+        # every snapshot row because a whitelist only keeps what it is told to. A column the parser
+        # does not read yet is exactly the kind a durable extract must not throw away.
+        "Old SSC Code", "Old SS Code", "Old SSC",
     }
 )
 
@@ -495,15 +502,33 @@ def _clean_ean(raw) -> str | None:
 
 
 def _as_date(value) -> _dt.date | None:
+    """A cell as a date. Accepts real date/datetime cells, ISO text, and GW's `DD/MM/YYYY`.
+
+    The slash form is not cosmetic: a text-typed date column comes through as `01/03/2021`, which
+    `fromisoformat` rejects, so the date was silently dropped. Measured 2026-07-30 over the
+    committed register extract: 192 rows, losing the change date on every lineage pair they carry.
+    Read as DAY-first (GW is a UK company and its ISO rows agree) -- and unambiguously so here:
+    ZERO of those 192 rows have both leading fields <= 12, so none of them could be read as
+    month-first even in principle. Release-date columns are unaffected: all 6,277 are ISO, so the
+    confidentiality gate never depended on this.
+    """
     if isinstance(value, _dt.datetime):
         return value.date()
     if isinstance(value, _dt.date):
         return value
     if isinstance(value, str):
+        text = value.strip()
         try:
-            return _dt.date.fromisoformat(value.strip()[:10])
+            return _dt.date.fromisoformat(text[:10])
         except ValueError:
-            return None
+            pass
+        match = re.fullmatch(r"(\d{1,2})/(\d{1,2})/(\d{4})", text)
+        if match:
+            day, month, year = (int(part) for part in match.groups())
+            try:
+                return _dt.date(year, month, day)
+            except ValueError:
+                return None
     return None
 
 

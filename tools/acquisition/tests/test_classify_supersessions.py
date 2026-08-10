@@ -14,6 +14,7 @@ from warhub_acquisition.classify.supersessions import (
     MERGED,
     REGIONAL,
     READY,
+    RETIRED_ALREADY_DECLARED,
     SAME_CODE,
     UNOBSERVED,
     generate_supersession_proposals,
@@ -302,3 +303,25 @@ def test_a_legitimate_chain_is_still_promotable(tmp_path: Path) -> None:
         ],
     )
     assert {p["bucket"] for p in generate_supersession_proposals(paths)} == {READY}
+
+
+def test_a_retired_code_already_declared_elsewhere_is_never_ready(tmp_path: Path) -> None:
+    """`supersessions` is keyed by the RETIRED id, so promoting a second edge for the same retired
+    code REPLACES the first rather than adding to it. Marking it `ready` would let a bulk
+    paste-readyToPromote step silently rewrite a hand-verified declaration."""
+    paths = _seed(
+        tmp_path,
+        observations=[
+            {**NEW, "hints": {"supersedes": [{"productCode": "99120110001"}]}},
+            {"key": "mfr-gw-trade:99120110001", "name": "WIDGET", "sku": "99120110001",
+             "ean": "5011921062164", "archived": True},
+        ],
+        products=[
+            _product("games-workshop/99120110002", "99120110002", ["mfr-gw-trade:99120110002"]),
+            _product("games-workshop/99120110001", "99120110001", ["mfr-gw-trade:99120110001"]),
+            _product("games-workshop/99120110009", "99120110009", ["mfr-gw-trade:99120110009"]),
+        ],
+        matches={"supersessions": {"games-workshop/99120110001": "games-workshop/99120110009"}},
+    )
+    (proposal,) = generate_supersession_proposals(paths)
+    assert proposal["bucket"] == RETIRED_ALREADY_DECLARED

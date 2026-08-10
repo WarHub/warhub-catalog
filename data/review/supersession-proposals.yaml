@@ -18,29 +18,18 @@
 # there is no entity to link. Those rows carry the retired barcode and change date so the loss is
 # at least visible and countable.
 summary:
-  ready: 1
+  ready: 0
   merged-with-survivor: 0
-  conflicting: 57
-  contradicts-declared: 1
+  conflicting: 53
+  contradicts-declared: 3
+  retired-already-declared: 1
   unobserved-retired-code: 1
   regional-variant: 304
   same-code: 0
-  already-declared: 781
+  already-declared: 783
   surviving-entity-unresolved: 0
-readyToPromote:
-  games-workshop/99070207010: games-workshop/99070207021
+readyToPromote: {}
 proposals:
-  - bucket: ready
-    manufacturer: games-workshop
-    retiredCode: '99070207010'
-    retiredEan: '5011921126279'
-    retiredEntity: games-workshop/99070207010
-    survivingEntity: games-workshop/99070207021
-    survivingCode: '99070207021'
-    survivingName: Mortisan Boneshaper
-    survivingEan: '5011921204281'
-    changedOn: '2023-03-20'
-    assertedBy: mfr-gw-trade:99070207021
   - bucket: conflicting
     manufacturer: games-workshop
     retiredCode: '01010199068'
@@ -72,7 +61,7 @@ proposals:
     survivingCode: '01010799025'
     survivingName: 'WHU: RIVALS OF THE MIRRORED CITY (FRE)'
     survivingEan: '5011921215911'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:01010799025
   - bucket: conflicting
     manufacturer: games-workshop
@@ -83,7 +72,7 @@ proposals:
     survivingCode: '01050799011'
     survivingName: 'MASQUES: MALÉFIQUES PILE DE RIVAUX (FRA)'
     survivingEan: '5011921219186'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:01050799011
   - bucket: conflicting
     manufacturer: games-workshop
@@ -94,7 +83,7 @@ proposals:
     survivingCode: '01050799012'
     survivingName: 'WHU: RELIQUES TRANSIES (FRANCAIS)'
     survivingEan: '5011921226535'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:01050799012
   - bucket: conflicting
     manufacturer: games-workshop
@@ -105,7 +94,7 @@ proposals:
     survivingCode: '01120706002'
     survivingName: 'WHU: SKABBIKS PLAGUEPACK (FRE)'
     survivingEan: '5011921200245'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:01120706002
   - bucket: conflicting
     manufacturer: games-workshop
@@ -116,7 +105,7 @@ proposals:
     survivingCode: '01120709007'
     survivingName: WH UNDERWORLDS:SURINEURS DE DAGGOK (FRA)
     survivingEan: '5011921202959'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:01120709007
   - bucket: conflicting
     manufacturer: games-workshop
@@ -127,7 +116,7 @@ proposals:
     survivingCode: '01120799003'
     survivingName: 'WHU: RIVAUX DE HARROWDEEP (FRA)'
     survivingEan: '5011921130030'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:01120799003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -138,7 +127,7 @@ proposals:
     survivingCode: '02010799025'
     survivingName: 'WHU: RIVALS OF THE MIRRORED CITY (ITA)'
     survivingEan: '5011921215928'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:02010799025
   - bucket: conflicting
     manufacturer: games-workshop
@@ -149,7 +138,7 @@ proposals:
     survivingCode: '02050799011'
     survivingName: 'MASCHERE MALEFICHE: MAZZO RIVALI (ITA)'
     survivingEan: '5011921219193'
-    changedOn: null
+    changedOn: '2024-09-30'
     assertedBy: mfr-gw-trade:02050799011
   - bucket: conflicting
     manufacturer: games-workshop
@@ -193,7 +182,7 @@ proposals:
     survivingCode: '01010299044'
     survivingName: AGE OF SIGMAR:SET D'INITIATION ULTIME FR
     survivingEan: '5011921203468'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:01010299044
   - bucket: conflicting
     manufacturer: games-workshop
@@ -204,7 +193,7 @@ proposals:
     survivingCode: '01010299045'
     survivingName: 'AGE OF SIGMAR: SET D''INITIATION (FRA)'
     survivingEan: '5011921204694'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:01010299045
   - bucket: conflicting
     manufacturer: games-workshop
@@ -215,7 +204,7 @@ proposals:
     survivingCode: '01010299046'
     survivingName: 'AGE OF SIGMAR: SET DE DÉCOUVERTE (FRA)'
     survivingEan: '5011921220892'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:01010299046
   - bucket: conflicting
     manufacturer: games-workshop
@@ -226,7 +215,7 @@ proposals:
     survivingCode: '01040299158'
     survivingName: COMMENT DÉBUTER À AGE OF SIGMAR (FRA)
     survivingEan: '9781804573822'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:01040299158
   - bucket: conflicting
     manufacturer: games-workshop
@@ -237,7 +226,7 @@ proposals:
     survivingCode: '02010299044'
     survivingName: 'AGE OF SIGMAR: SET INTRO. DEFINITIVO ITA'
     survivingEan: '5011921203475'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:02010299044
   - bucket: conflicting
     manufacturer: games-workshop
@@ -248,7 +237,7 @@ proposals:
     survivingCode: '02010299045'
     survivingName: 'AGE OF SIGMAR: SET INTRODUTTIVO (ITA)'
     survivingEan: '5011921204700'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:02010299045
   - bucket: conflicting
     manufacturer: games-workshop
@@ -259,7 +248,7 @@ proposals:
     survivingCode: '02010299046'
     survivingName: 'AGE OF SIGMAR: SET DI PRESENTAZIONE ITA'
     survivingEan: '5011921220908'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:02010299046
   - bucket: conflicting
     manufacturer: games-workshop
@@ -270,7 +259,7 @@ proposals:
     survivingCode: '02040299158'
     survivingName: INIZIA CON AGE OF SIGMAR (ITALIANO)
     survivingEan: '9781804573853'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:02040299158
   - bucket: conflicting
     manufacturer: games-workshop
@@ -281,7 +270,7 @@ proposals:
     survivingCode: '03010299044'
     survivingName: AGE OF SIGMAR:SET DE INICIO DEFINIT. ESP
     survivingEan: '5011921203482'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:03010299044
   - bucket: conflicting
     manufacturer: games-workshop
@@ -292,7 +281,7 @@ proposals:
     survivingCode: '03010299045'
     survivingName: 'AGE OF SIGMAR: SET DE INICIO (ESP)'
     survivingEan: '5011921204717'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:03010299045
   - bucket: conflicting
     manufacturer: games-workshop
@@ -303,7 +292,7 @@ proposals:
     survivingCode: '03010299046'
     survivingName: 'AGE OF SIGMAR: SET INTRODUCTORIO (ESP)'
     survivingEan: '5011921220915'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:03010299046
   - bucket: conflicting
     manufacturer: games-workshop
@@ -314,7 +303,7 @@ proposals:
     survivingCode: '03040299158'
     survivingName: INÍCIATE EN AGE OF SIGMAR (ESPAÑOL)
     survivingEan: '9781804573846'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:03040299158
   - bucket: conflicting
     manufacturer: games-workshop
@@ -325,7 +314,7 @@ proposals:
     survivingCode: '04010299044'
     survivingName: AGE OF SIGMAR:ULTIMATIVES STARTERSET DEU
     survivingEan: '5011921203499'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:04010299044
   - bucket: conflicting
     manufacturer: games-workshop
@@ -336,7 +325,7 @@ proposals:
     survivingCode: '04010299045'
     survivingName: 'AGE OF SIGMAR: STARTERSET (DEUTSCH)'
     survivingEan: '5011921204724'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:04010299045
   - bucket: conflicting
     manufacturer: games-workshop
@@ -347,7 +336,7 @@ proposals:
     survivingCode: '04010299046'
     survivingName: 'AGE OF SIGMAR: EINSTEIGERSET (DEUTSCH)'
     survivingEan: '5011921220922'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:04010299046
   - bucket: conflicting
     manufacturer: games-workshop
@@ -358,7 +347,7 @@ proposals:
     survivingCode: '04040299158'
     survivingName: EINSTEIGERLEITFADEN AGE OF SIGMAR (DEU)
     survivingEan: '9781804573839'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:04040299158
   - bucket: conflicting
     manufacturer: games-workshop
@@ -369,7 +358,7 @@ proposals:
     survivingCode: '52170206001'
     survivingName: AOS SKAVEN + PAINT SET ENG/SPA/PORT/LAT
     survivingEan: '5011921219285'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:52170206001
   - bucket: conflicting
     manufacturer: games-workshop
@@ -380,7 +369,7 @@ proposals:
     survivingCode: '52170218003'
     survivingName: AOS S/E + PAINT SET ENG/SPA/PORT/LATV/RM
     survivingEan: '5011921219322'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:52170218003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -391,7 +380,7 @@ proposals:
     survivingCode: '52170299003'
     survivingName: AOS PAINTS+TOOLS ENG/SPA/PORT/LATV/ROM
     survivingEan: '5011921219254'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:52170299003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -402,7 +391,7 @@ proposals:
     survivingCode: '53170206001'
     survivingName: AOS SKAVEN + PAINT SET (CAN/POL/SCANDA)
     survivingEan: '5011921219292'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:53170206001
   - bucket: conflicting
     manufacturer: games-workshop
@@ -413,7 +402,7 @@ proposals:
     survivingCode: '53170218003'
     survivingName: AOS STORMCAST + PAINT SET CAN/POL/SCANDA
     survivingEan: '5011921219339'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:53170218003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -424,7 +413,7 @@ proposals:
     survivingCode: '53170299003'
     survivingName: AOS PAINTS + TOOLS (CAN/POL/SCANDA)
     survivingEan: '5011921219377'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:53170299003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -435,7 +424,7 @@ proposals:
     survivingCode: '54170206001'
     survivingName: AOS SKAVEN + PAINT SET GER/FRE/ITA/DUT
     survivingEan: '5011921219308'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:54170206001
   - bucket: conflicting
     manufacturer: games-workshop
@@ -446,7 +435,7 @@ proposals:
     survivingCode: '54170218003'
     survivingName: AOS S/E + PAINT SET GER/FRE/ITA/DUT/CZ/S
     survivingEan: '5011921219346'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:54170218003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -457,7 +446,7 @@ proposals:
     survivingCode: '54170299003'
     survivingName: AOS PAINTS+TOOLS GER/FR/ITA/DUT/CZE/SLV
     survivingEan: '5011921219261'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:54170299003
   - bucket: conflicting
     manufacturer: games-workshop
@@ -468,7 +457,7 @@ proposals:
     survivingCode: '60010299044'
     survivingName: 'Warhammer Age of Sigmar: Spearhead Starter Set'
     survivingEan: '5011921203451'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:60010299044
   - bucket: conflicting
     manufacturer: games-workshop
@@ -479,7 +468,7 @@ proposals:
     survivingCode: '60010299045'
     survivingName: 'Warhammer Age of Sigmar: Starter Set'
     survivingEan: '5011921204687'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:60010299045
   - bucket: conflicting
     manufacturer: games-workshop
@@ -490,7 +479,7 @@ proposals:
     survivingCode: '60010299046'
     survivingName: 'AGE OF SIGMAR: INTRODUCTORY SET (ENG)'
     survivingEan: '5011921220885'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:60010299046
   - bucket: conflicting
     manufacturer: games-workshop
@@ -501,7 +490,7 @@ proposals:
     survivingCode: '60040299158'
     survivingName: Getting Started With Warhammer Age of Sigmar
     survivingEan: '9781804573815'
-    changedOn: null
+    changedOn: '2024-07-22'
     assertedBy: mfr-gw-trade:60040299158
   - bucket: conflicting
     manufacturer: games-workshop
@@ -534,7 +523,7 @@ proposals:
     survivingCode: '99120201195'
     survivingName: 'Spearhead: Slaves to Darkness'
     survivingEan: '5011921228638'
-    changedOn: null
+    changedOn: '2024-05-27'
     assertedBy: mfr-gw-trade:99120201195
   - bucket: conflicting
     manufacturer: games-workshop
@@ -545,7 +534,7 @@ proposals:
     survivingCode: '99120208045'
     survivingName: 'Spearhead: Seraphon'
     survivingEan: '5011921228768'
-    changedOn: null
+    changedOn: '2024-05-27'
     assertedBy: mfr-gw-trade:99120208045
   - bucket: conflicting
     manufacturer: games-workshop
@@ -604,28 +593,6 @@ proposals:
     assertedBy: mfr-gw-trade:99120209154
   - bucket: conflicting
     manufacturer: games-workshop
-    retiredCode: '99120104067'
-    retiredEan: '5011921162727'
-    retiredEntity: games-workshop/99120104067
-    survivingEntity: games-workshop/99120104091
-    survivingCode: '99120104091'
-    survivingName: Guardian Defenders
-    survivingEan: '5011921194315'
-    changedOn: '2024-04-08'
-    assertedBy: mfr-gw-trade:99120104091
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '99120104091'
-    retiredEan: '5011921194315'
-    retiredEntity: games-workshop/99120104091
-    survivingEntity: games-workshop/99120104067
-    survivingCode: '99120104067'
-    survivingName: 'AELDARI: GUARDIANS'
-    survivingEan: '5011921162727'
-    changedOn: '2023-06-19'
-    assertedBy: mfr-gw-trade:99120104067
-  - bucket: conflicting
-    manufacturer: games-workshop
     retiredCode: '99120207141'
     retiredEan: '5011921196043'
     retiredEntity: games-workshop/99120207141
@@ -646,28 +613,17 @@ proposals:
     survivingEan: '5011921257119'
     changedOn: '2025-03-03'
     assertedBy: mfr-gw-trade:99120207234
-  - bucket: conflicting
+  - bucket: contradicts-declared
     manufacturer: games-workshop
-    retiredCode: '99120209080'
-    retiredEan: '5011921157204'
-    retiredEntity: games-workshop/99120209080
-    survivingEntity: games-workshop/99120209087
-    survivingCode: '99120209087'
-    survivingName: Kragnos, the End of Empires
-    survivingEan: '5011921163670'
-    changedOn: '2021-08-30'
-    assertedBy: mfr-gw-trade:99120209087
-  - bucket: conflicting
-    manufacturer: games-workshop
-    retiredCode: '99120209087'
-    retiredEan: '5011921163670'
-    retiredEntity: games-workshop/99120209087
-    survivingEntity: games-workshop/99120209080
-    survivingCode: '99120209080'
-    survivingName: KRAGNOS THE END OF EMPIRES
-    survivingEan: '5011921157204'
-    changedOn: '2021-09-13'
-    assertedBy: mfr-gw-trade:99120209080
+    retiredCode: '99120104091'
+    retiredEan: '5011921194315'
+    retiredEntity: games-workshop/99120104091
+    survivingEntity: games-workshop/99120104067
+    survivingCode: '99120104067'
+    survivingName: 'AELDARI: GUARDIANS'
+    survivingEan: '5011921162727'
+    changedOn: '2023-06-19'
+    assertedBy: mfr-gw-trade:99120104067
   - bucket: contradicts-declared
     manufacturer: games-workshop
     retiredCode: '99120204035'
@@ -679,6 +635,28 @@ proposals:
     survivingEan: '5011921062164'
     changedOn: '2022-02-14'
     assertedBy: mfr-gw-trade:99120204012
+  - bucket: contradicts-declared
+    manufacturer: games-workshop
+    retiredCode: '99120209087'
+    retiredEan: '5011921163670'
+    retiredEntity: games-workshop/99120209087
+    survivingEntity: games-workshop/99120209080
+    survivingCode: '99120209080'
+    survivingName: KRAGNOS THE END OF EMPIRES
+    survivingEan: '5011921157204'
+    changedOn: '2021-09-13'
+    assertedBy: mfr-gw-trade:99120209080
+  - bucket: retired-already-declared
+    manufacturer: games-workshop
+    retiredCode: '99070207010'
+    retiredEan: '5011921126279'
+    retiredEntity: games-workshop/99070207010
+    survivingEntity: games-workshop/99070207021
+    survivingCode: '99070207021'
+    survivingName: Mortisan Boneshaper
+    survivingEan: '5011921204281'
+    changedOn: '2023-03-20'
+    assertedBy: mfr-gw-trade:99070207021
   - bucket: unobserved-retired-code
     manufacturer: games-workshop
     retiredCode: '9923999910404'
@@ -743,7 +721,7 @@ proposals:
     survivingCode: '01040299160'
     survivingName: 'AGE OF SIGMAR: MANUEL DE GÉNÉRAL (FRA)'
     survivingEan: '9781804575857'
-    changedOn: null
+    changedOn: '2025-05-23'
     assertedBy: mfr-gw-trade:01040299160
   - bucket: regional-variant
     manufacturer: games-workshop
@@ -754,7 +732,7 @@ proposals:
     survivingCode: '02040299160'
     survivingName: 'AOS: PRONTUARION DEL GENERALE (ITA)'
     survivingEan: '9781804575864'
-    changedOn: null
+    changedOn: '2025-05-23'
     assertedBy: mfr-gw-trade:02040299160
   - bucket: regional-variant
     manufacturer: games-workshop
@@ -765,7 +743,7 @@ proposals:
     survivingCode: '03040299160'
     survivingName: 'AOS: MANUAL DE CAMPO PARA GENERALES (ESP'
     survivingEan: '9781804575871'
-    changedOn: null
+    changedOn: '2025-05-23'
     assertedBy: mfr-gw-trade:03040299160
   - bucket: regional-variant
     manufacturer: games-workshop
@@ -776,7 +754,7 @@ proposals:
     survivingCode: '04040299160'
     survivingName: 'AGE OF SIGMAR: HANDBUCH DES GENERALS DEU'
     survivingEan: '9781804575888'
-    changedOn: null
+    changedOn: '2025-05-23'
     assertedBy: mfr-gw-trade:04040299160
   - bucket: regional-variant
     manufacturer: games-workshop
@@ -4296,7 +4274,7 @@ proposals:
     survivingCode: '60040299160'
     survivingName: 'AGE OF SIGMAR: GENERAL''S HANDBOOK (ENG)'
     survivingEan: '9781804575840'
-    changedOn: null
+    changedOn: '2025-05-23'
     assertedBy: mfr-gw-trade:60040299160
   - bucket: already-declared
     manufacturer: games-workshop
@@ -6269,6 +6247,17 @@ proposals:
     assertedBy: mfr-gw-trade:99120104086
   - bucket: already-declared
     manufacturer: games-workshop
+    retiredCode: '99120104067'
+    retiredEan: '5011921162727'
+    retiredEntity: games-workshop/99120104067
+    survivingEntity: games-workshop/99120104091
+    survivingCode: '99120104091'
+    survivingName: Guardian Defenders
+    survivingEan: '5011921194315'
+    changedOn: '2024-04-08'
+    assertedBy: mfr-gw-trade:99120104091
+  - bucket: already-declared
+    manufacturer: games-workshop
     retiredCode: '99120105046'
     retiredEan: '5011921018222'
     retiredEntity: games-workshop/99120105046
@@ -7640,7 +7629,7 @@ proposals:
     survivingCode: '99120205060'
     survivingName: 'Spearhead: Fyreslayers'
     survivingEan: '5011921228706'
-    changedOn: null
+    changedOn: '2024-06-24'
     assertedBy: mfr-gw-trade:99120205060
   - bucket: already-declared
     manufacturer: games-workshop
@@ -7651,7 +7640,7 @@ proposals:
     survivingCode: '99120205061'
     survivingName: 'SPEARHEAD: KHARADRON OVERLORDS'
     survivingEan: '5011921228713'
-    changedOn: null
+    changedOn: '2024-05-13'
     assertedBy: mfr-gw-trade:99120205061
   - bucket: already-declared
     manufacturer: games-workshop
@@ -8003,7 +7992,7 @@ proposals:
     survivingCode: '99120207186'
     survivingName: 'SPEARHEAD: NIGHTHAUNT'
     survivingEan: '5011921228744'
-    changedOn: null
+    changedOn: '2024-06-17'
     assertedBy: mfr-gw-trade:99120207186
   - bucket: already-declared
     manufacturer: games-workshop
@@ -8238,6 +8227,17 @@ proposals:
     assertedBy: mfr-gw-trade:99120209103
   - bucket: already-declared
     manufacturer: games-workshop
+    retiredCode: '99120209080'
+    retiredEan: '5011921157204'
+    retiredEntity: games-workshop/99120209080
+    survivingEntity: games-workshop/99120209087
+    survivingCode: '99120209087'
+    survivingName: Kragnos, the End of Empires
+    survivingEan: '5011921163670'
+    changedOn: '2021-08-30'
+    assertedBy: mfr-gw-trade:99120209087
+  - bucket: already-declared
+    manufacturer: games-workshop
     retiredCode: '99120209084'
     retiredEan: '5011921162932'
     retiredEntity: games-workshop/99120209084
@@ -8443,7 +8443,7 @@ proposals:
     survivingCode: '99120212042'
     survivingName: 'SPEARHEAD: DAUGHTERS OF KHAINE'
     survivingEan: '5011921228805'
-    changedOn: null
+    changedOn: '2024-05-20'
     assertedBy: mfr-gw-trade:99120212042
   - bucket: already-declared
     manufacturer: games-workshop

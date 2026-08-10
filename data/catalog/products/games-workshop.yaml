@@ -57367,6 +57367,7 @@ products:
     sku: '99070209011'
     ean: '5011921211593'
     eanConfidence: confirmed
+    supersededBy: games-workshop/99120209141
     gameSystem: age-of-sigmar
     category: miniatures
     status: current
@@ -73112,6 +73113,7 @@ products:
     sku: '99120104067'
     ean: '5011921162727'
     eanConfidence: confirmed
+    supersededBy: games-workshop/99120104091
     category: miniatures
     status: discontinued
     firstSeen: '2026-07-23'
@@ -73786,6 +73788,8 @@ products:
     sku: '99120104091'
     ean: '5011921194315'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120104067
     gameSystem: warhammer-40k
     faction: aeldari
     category: miniatures
@@ -97052,6 +97056,7 @@ products:
     sku: '99120207141'
     ean: '5011921196043'
     eanConfidence: confirmed
+    supersededBy: games-workshop/99120207234
     gameSystem: age-of-sigmar
     category: miniatures
     status: current
@@ -99207,6 +99212,8 @@ products:
     sku: '99120207234'
     ean: '5011921257119'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120207141
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
@@ -101279,6 +101286,7 @@ products:
     sku: '99120209080'
     ean: '5011921157204'
     eanConfidence: confirmed
+    supersededBy: games-workshop/99120209087
     gameSystem: age-of-sigmar
     category: miniatures
     status: current
@@ -101323,6 +101331,8 @@ products:
     sku: '99120209087'
     ean: '5011921163670'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99120209080
     gameSystem: age-of-sigmar
     faction: grand-alliance-destruction
     category: miniatures
@@ -102346,6 +102356,8 @@ products:
     sku: '99120209141'
     ean: '5011921254576'
     eanConfidence: confirmed
+    supersedes:
+      - games-workshop/99070209011
     gameSystem: age-of-sigmar
     faction: grand-alliance-destruction
     category: miniatures
