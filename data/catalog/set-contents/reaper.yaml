@@ -16,9 +16,10 @@
 # games-workshop/citadel-colour).
 #
 # CODE NORMALISATION: a ref is tried verbatim, then with leading zeros stripped. Reaper's site
-# zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: all 802 refs are
-# 5 chars, the archive stores 0 codes with a leading zero, 744 refs match only after stripping
-# and 58 match verbatim (56 89xxx Bones Ultra-Coverage plus the two unresolved 29xxx). No ref
+# zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: every reaper ref is
+# 5 chars, the archive stores NO code with a leading zero, and most refs match only after
+# stripping -- the verbatim matches are the 89xxx Bones Ultra-Coverage block plus the 29xxx pair
+# the site names only inside a box (since acquired, so they now resolve rather than refuse). No ref
 # needs any other rule -- and AK needs none at all: its refs are alpha-prefixed, so `lstrip("0")`
 # is a no-op on every one of them, and the archive already stores the same zero-padded form the
 # source prints (AK004, AK012, AK088). Do NOT "helpfully" extend the rule to strip zeros after the
@@ -29,13 +30,13 @@
 # `from` ON A SET says where its refs came from, and the two are not the same claim. "stated" is a
 # machine-readable contents array the source published (mfr-reaper's `associatedProducts`) and is
 # exhaustive by construction. "description" is resolve/set_refs.py reading codes out of the
-# source's own prose, which is NOT guaranteed exhaustive -- measured live 2026-08-07, 46 of AK's
-# 256 boxed-set pages state a colour COUNT in words and enumerate nothing, and 6 print a second,
-# explicitly not-included bulleted list in the identical shape. Treat a "description" set as a
-# lower bound on the box; treat a "stated" one as the box.
+# source's own prose, which is NOT guaranteed exhaustive -- measured live 2026-08-07, a substantial
+# minority of AK's boxed-set pages state a colour COUNT in words and enumerate nothing at all, and
+# a few print a second, explicitly not-included bulleted list in the identical shape. Treat a
+# "description" set as a LOWER BOUND on the box; treat a "stated" one as the box.
 #
 # ONE PHYSICAL BOX MAY APPEAR TWICE, under two manufacturers, and that is intended rather than a
-# bug to de-duplicate. AK's 24 "Quick Gen" boxes are sold by Warlord too, and because AK publishes
+# bug to de-duplicate. AK's "Quick Gen" boxes are sold by Warlord too, and because AK publishes
 # ZERO barcodes anywhere the two product records can never join -- so `warlord-games/AK17522` and
 # `ak-interactive/AK17522` are two records of one box, each stating its contents from its own
 # source's words. This relation is keyed by PRODUCT id, not by box, so both belong in it; a test
@@ -53,31 +54,45 @@
 # laundered. This is the narrowest possible use of the second field: the first occurrence still
 # resolves by code alone, so the branch cannot overturn any verdict the code already reached, and
 # every uncertainty (no prose, misaligned prose, a name naming zero or several paints, or one
-# already in the box) still refuses. See _stated_names and _by_stated_name.
-# THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
-# hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
-# material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
-# has no `linePages` entry in data/catalog/sources/mfr-reaper.yaml, and 29107 is missing from
-# the Core Colors singles population. The fix is to extend the descriptor and re-acquire.
+# already in the box) still refuses. See _stated_prose and _by_stated_name.
+# A REFUSAL MAY BE A SOURCE COVERAGE GAP RATHER THAN BAD DATA -- do not "fix" one by hand-editing
+# the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 were exactly that: both are
+# material:"paint" on reapermini.com, but 29815's whole range (Master Series Paints High Density)
+# had no `linePages` entry in data/catalog/sources/mfr-reaper.yaml, and 29107 was missing from the
+# Core Colors singles population. The fix was to extend the descriptor and re-acquire, and that has
+# since been done -- both resolve today. The RULE is what to carry forward, not the example:
+# extend the source, never edit the archive to make a ref resolve.
 #
-# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX. They differ,
-# measured: reaper/08906's own description enumerates "09472-Dragon Blue" among its bottles
-# while `associatedProducts` instead lists 29815 "HD Dragon Blue". 09472 exists in the archive
-# and 29815 does not -- and the ref is still recorded as refused rather than repaired to 09472,
-# because a generator that rewrites a source's claim to make it resolve is worse than one that
-# refuses.
+# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX. They genuinely
+# differ: reaper/08906's own description enumerates "09472-Dragon Blue" among its bottles while
+# `associatedProducts` instead lists 29815 "HD Dragon Blue" -- two different pots, and the ARRAY is
+# what this file records. While 29815 was still unacquired that ref was recorded as REFUSED rather
+# than quietly repaired to the 9472 the archive did hold, because a generator that rewrites a
+# source's claim to make it resolve is worse than one that refuses. That principle outlives its
+# example: 29815 has since been acquired and now resolves on its own terms.
 #
 # QUANTITY. A member MAY carry `quantity: <int>` -- how many of that item the source states the
-# box contains. It is ABSENT on every member today and `counts.quantified` states that zero as
-# a number rather than as a silence. ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT; writing
-# `quantity: 1` everywhere would assert 800 facts reapermini.com never asserted and would be
-# unrecoverable, since a fabricated 1 is indistinguishable from a measured one. Measured
-# 2026-08-07 live against reapermini.com's three set-kind pages: all 848 `associatedProducts`
-# entries across 31 set items carry exactly {sku, name, category, filename, material} -- there
-# is no count field of any kind -- and 0 sets repeat a sku. So the set comprehension in
-# strategies/reaper.py::_content_skus discards nothing (it is a no-op on 100% of real data) and
-# NO strategy change can recover a quantity the source never states. A quantity arriving from
-# some future source ADDS this key to a member; it is not a schema change and needs no backfill.
+# box contains. ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT: writing `quantity: 1` everywhere
+# would assert a count for every member reapermini.com never counted, and would be unrecoverable,
+# since a fabricated 1 is indistinguishable from a measured one. `counts.quantified` therefore
+# reports how many counts were ASSERTED, as a number rather than as a silence.
+#
+# REAPER STATES NONE. Its `associatedProducts` entries carry {sku, name, category, filename,
+# material} and no count field of any kind (measured live 2026-08-07), so no strategy change can
+# recover a quantity from that source, and the set comprehension in
+# strategies/reaper.py::_content_skus discards nothing.
+#
+# AK STATES THEM IN PROSE, AND THEY NOW TRAVEL. `resolve/set_refs.py` captures a `- 2x AK17080 -`
+# prefix, and `_stated_prose` below carries it onto the member along the same proven alignment the
+# stated-name repair uses. Until that was wired the prefix was parsed and then dropped by
+# `content_skus_from_description`, so `quantified` was pinned at 0 by the PIPELINE rather than by
+# the sources -- it could not have reported a count even for a source that stated one.
+#
+# IT MAY STILL READ 0, and that is a different fact from "nobody states a count". A set enters this
+# relation only if its description enumerates at least two DISTINCT codes (see
+# `content_skus_from_description`), and the AK rows that state a quantity today enumerate exactly
+# one code each, so the floor excludes them before this key can apply. Re-derive the current split
+# with `enumerated_members` over the crossed AK rows.
 reaper:
   counts:
     sets: 29

@@ -267,9 +267,9 @@ _CONSUMED_COLUMNS: frozenset[str] = frozenset(
         "Old Barcode", "Old Individual barcode", "Previous Barcode",
         "Date", "Change Date", "Effective Date",
         # Not read by this module (yet) but whitelisted deliberately: GW's SS Code is the product's
-        # identity ACROSS a re-code -- 706 of 727 register pairs keep it -- so `Old SSC Code` beside
-        # `New SS Code` is what distinguishes a real predecessor from a stale regional edition left
-        # in the Old columns. Adjudicating the `conflicting` bucket needs it, and it was absent from
+        # identity ACROSS a re-code -- the register keeps it on almost every pair -- so `Old SSC
+        # Code` beside `New SS Code` is what distinguishes a real predecessor from a stale regional
+        # edition left in the Old columns. Adjudicating the `conflicting` bucket needs it, and it was absent from
         # every snapshot row because a whitelist only keeps what it is told to. A column the parser
         # does not read yet is exactly the kind a durable extract must not throw away.
         "Old SSC Code", "Old SS Code", "Old SSC",
@@ -478,11 +478,13 @@ def _predecessor(
         if today is None or changed <= today:
             changed_on = changed.isoformat()
 
-    # GW's SS Code is the product's IDENTITY across a re-code -- 706 of 727 register pairs keep
-    # it. That makes `Old SSC Code` the discriminator between a real predecessor and a stale
-    # regional edition parked in the Old columns, which is what the `conflicting` bucket is full
-    # of. It is only sound BETWEEN competing claimants, never as a veto on a lone edge: 9 already
-    # declared pairs legitimately renumber their SSC (Kor'sarro Khan 48-88 -> 55-24).
+    # GW's SS Code is the product's IDENTITY across a re-code -- the register keeps it on the
+    # overwhelming majority of pairs. That makes `Old SSC Code` the discriminator between a real
+    # predecessor and a stale regional edition parked in the Old columns. It is only sound BETWEEN
+    # competing claimants, never as a veto on a lone edge: a real minority of already-declared
+    # pairs legitimately renumber their SSC (Kor'sarro Khan 48-88 -> 55-24). See
+    # classify/supersessions.py for how to re-derive that minority; the count once quoted here and
+    # there was wrong from the start.
     old_ssc = _first(row, "Old SSC Code", "Old SS Code", "Old SSC")
     return (code or None), old_barcode, changed_on, (str(old_ssc).strip() if old_ssc else None)
 

@@ -38,19 +38,20 @@ class CrossoverClause(BaseModel):
     # measurement behind it is about the WORD LIST, not about any one store, so it is recorded
     # here -- where someone writing a NEW name clause reads -- instead of being restated in five
     # descriptors, which would reproduce in prose exactly the unpinned duplication the copies
-    # themselves have. Measured 2026-08-05 across all 8,528 committed archive names and all 2,852
-    # source titles joining a catalog single: PACK, KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE,
-    # RANGE and COMBO each produce ZERO false positives, and only `\bBOX\b` genuinely breaks --
-    # on Turbo Dork's real colour "Box Wine" -- which is why WOODEN BOX stays a two-word phrase.
+    # themselves have. Measured 2026-08-05 across the committed archive names and the source titles
+    # joining a catalog single: PACK, KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE, RANGE and COMBO
+    # each produce ZERO false positives, and only `\bBOX\b` genuinely breaks -- on Turbo Dork's
+    # real colour "Box Wine" -- which is why WOODEN BOX stays a two-word phrase.
     #
     # A token can be justified and still be invisible to any corpus: measured 2026-08-05,
-    # `\bWOODEN BOX\b` matches 0 of the 5,398 committed paint-source names and 0 of all 55,096
-    # observation names across the 30 evidence directories, while BRIEFCASE, COLLECTION and FULL
-    # RANGE rest on 2, 3 and 9 sole-held rows respectively (all the BRIEFCASE/FULL RANGE ones
-    # AK's). That is why the five copies are pinned by STRING equality in
+    # `\bWOODEN BOX\b` matches NOTHING at all -- not one committed paint-source name, not one
+    # observation name in any evidence directory -- while BRIEFCASE and FULL RANGE rest on only a
+    # handful of sole-held rows each, all of them AK's, and COLLECTION on a handful more, none of
+    # them AK's. That is why the five copies are pinned by STRING equality in
     # tests/test_repo_data.py::test_crossover_name_clauses_agree_unless_declared and NOT by
     # re-evaluating them over a fixture corpus: a corpus check goes green on a silent deletion of
-    # WOODEN BOX and near-green on two more tokens.
+    # WOODEN BOX and near-green on two more tokens. Re-derive with `crossover.clause_matches` over
+    # data/evidence/products/*/observations.jsonl.
     nameMatches: str | None = None
     hintEquals: dict[str, str] | None = None  # scalar hint == value (hints.categorySlug, ...)
     # Overrides the BLOCK's `category` for rows this clause selects. Absent on almost every
@@ -59,7 +60,7 @@ class CrossoverClause(BaseModel):
     category: str | None = None
     # list hint intersects these values. EXACT value membership, never substring: Army Painter's
     # genuine airbrush paint sets carry the tag `Airbrush Warpaints`, which CONTAINS the substring
-    # of the `brushset` exclusion but is not it (measured 2026-08-05, 4 rows AW8001P-AW8004P).
+    # of the `brushset` exclusion but is not it (measured 2026-08-05, rows AW8001P-AW8004P).
     hintContainsAny: dict[str, list[str]] | None = None
 
     @model_validator(mode="after")
@@ -91,10 +92,12 @@ class Crossover(BaseModel):
     Boxed multi-pot sets are products, not paints (maintainer decision 2026-08-05): before this
     they reached NEITHER catalog -- the resolver dropped the whole source (see resolver.py) and
     every bridge in gen_paint_harvest.py gates them out of data/paints/. The predicate is declared
-    per source because the direction of failure genuinely flips between stores: measured
-    2026-08-05, greenstuffworld.com's category signal selects 50 where the title selects 69 (a
-    strict superset), ak-interactive.com's selects 216 where the title selects 153 and NEITHER
-    contains the other, and reapermini.com's selects 114 where the title selects 19.
+    per source because the direction of failure genuinely flips between stores: measured 2026-08-05,
+    greenstuffworld.com's title signal is a strict superset of its category signal,
+    ak-interactive.com's two signals NEITHER contain the other, and reapermini.com's category signal
+    does nearly all the work where its title signal is sparse. One shared rule would therefore be
+    wrong for all three. Re-derive with `crossover.matches` over
+    data/evidence/products/*/observations.jsonl.
 
     `matches()` in resolve/crossover.py is the single evaluator: the resolver uses it to admit
     these rows and the paint bridge uses it to refuse exactly the same ones, so the two catalogs
@@ -103,15 +106,25 @@ class Crossover(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     # REQUIRED prose, matching the house style of every other per-source declaration here. It must
-    # carry the measurement AND the count the block selected on the day it was written: the
-    # descriptor's `contract` measures the WHOLE source, so nothing fires if the PREDICATE (rather
-    # than the source) collapses -- a future reader diffing against this number is the only signal.
+    # say WHY this source needs a predicate of its own and WHICH SIGNALS carry it -- the DIRECTION
+    # of the relationship between them, and how to re-derive it.
+    #
+    # DELIBERATELY NOT A COUNT, and that reverses what this comment used to demand. It previously
+    # required "the count the block selected on the day it was written", reasoning that the
+    # descriptor's `contract` measures the WHOLE source, so nothing fires if the PREDICATE rather
+    # than the source collapses, and a reader diffing that number was the only signal there was.
+    # The signal never actually fired: re-harvests invalidated these counts silently, nothing
+    # validates them (test_repo_data only asserts this string is >= 80 chars), and every stale one
+    # was eventually caught by re-measuring rather than by anyone noticing a diff. A number here
+    # rots without telling anyone, so state the relationship and the re-derivation instead.
     reason: str
     # Stamped onto hints.category for every crossed row. Measured-necessary, not cosmetic:
-    # `category` is folded from hints by resolve/attributes.py:7, and 431 of the 545 selected rows
-    # carry `hints.category: "paint"` (only 114 say `paint-set`, all Reaper's -- its 115th, 09985
-    # "Sophie's Mystery Paint Set", says `paint` like everyone else's). Without the stamp a 12-pot
-    # box publishes as `category: paint` -- the structural lie commit 6b3c930 just fixed.
+    # `category` is folded from hints by resolve/attributes.py:7, and the large majority of crossed
+    # rows arrive carrying `hints.category: "paint"`. Only reapermini.com labels its boxes
+    # `paint-set` itself, and even it has an exception -- 09985 "Sophie's Mystery Paint Set" says
+    # `paint` like everyone else's. Without the stamp a multi-pot box publishes as `category:
+    # paint` -- the structural lie commit 6b3c930 fixed. Re-derive with `crossover.matches` over
+    # each paint source's observations.
     category: str
     anyOf: list[CrossoverClause] = Field(min_length=1)
     # Veto, evaluated FIRST and unconditionally: a row any of these match never crosses, however
@@ -128,8 +141,9 @@ class SourceDescriptor(BaseModel):
     # data/evidence/products/ like everything else (one evidence layout, one acquire runner), but
     # they describe PAINTS -- `gen_paint_harvest.py` projects them onto the paint catalog's own
     # identities. The product resolver must skip them, or every paint publishes a second time as a
-    # product: measured 2026-07-30, 4,839 such records across 9 manufacturers, all of them
-    # `category: paint`/`paint-set`. Defaults to products, so only the paint sources say so.
+    # product: measured 2026-07-30, every such record is `category: paint`/`paint-set`. Re-derive by
+    # taking the descriptors here that say `catalog: paints` and counting their observations under
+    # data/evidence/products/. Defaults to products, so only the paint sources say so.
     catalog: Literal["products", "paints"] = "products"
     strategy: str
     baseUrl: str | None = None
@@ -138,8 +152,7 @@ class SourceDescriptor(BaseModel):
     budget: dict[str, object] = Field(default_factory=dict)
     contract: Contract | None = None
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
-    # by the 21 product sources and by the paint sources whose set-shaped rows are not products
-    # (mfr-turbodork's rack/retailer-pack rows, mfr-mr-hobby's series-level rows); each records why
+    # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.
     crossoverToProducts: Crossover | None = None
 

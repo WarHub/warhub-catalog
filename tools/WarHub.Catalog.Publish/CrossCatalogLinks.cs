@@ -17,12 +17,12 @@ namespace WarHub.Catalog.Publish;
 ///     record does not need a second fetch.
 ///
 /// Both are derived from the ids of THIS build. Paint ids carry positional <c>-N</c> suffixes
-/// wherever a brand/name slug collides -- measured on real data, 1,541 of 8,520 paint records
-/// (18.1%) across 1,046 collided slug groups -- and the position that decides <c>-2</c> from
-/// <c>-3</c> is a sort over the upstream YAML, so those suffixes MOVE when the data moves. A
-/// paint id is therefore stable within a release but NOT yet across releases. That is precisely
-/// why the link is EMITTED rather than left for a consumer to assume: it is internally
-/// consistent within one release, which is the strongest claim the current id scheme supports.
+/// wherever a brand/name slug collides across many such slug groups, and the position that
+/// decides <c>-2</c> from <c>-3</c> is a sort over the upstream YAML, so those suffixes MOVE
+/// when the data moves. A paint id is therefore stable within a release but NOT yet across
+/// releases. That is precisely why the link is EMITTED rather than left for a consumer to
+/// assume: it is internally consistent within one release, which is the strongest claim the
+/// current id scheme supports.
 ///
 /// Matching is on the canonical barcode string exactly as published. No normalization is
 /// invented here that the rest of the pipeline does not already do -- if two records disagree
@@ -111,9 +111,9 @@ internal sealed class BarcodeIndex
         {
             Holders h = holders[code];
             // A barcode held by two records in the SAME catalog is the product resolver's
-            // business (it adjudicates duplicate-barcode conflicts upstream); measured on real
-            // data there are 2 such barcodes. Publish both holders and move on -- the index
-            // reports what is there, it does not adjudicate and must not choke on it.
+            // business (it adjudicates duplicate-barcode conflicts upstream). Publish both
+            // holders and move on -- the index reports what is there, it does not adjudicate
+            // and must not choke on it.
             barcodes[code] =
             [
                 .. h.Products.Select(id => new BarcodeRef(ProductCatalog, id))
