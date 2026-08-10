@@ -63,11 +63,10 @@ crossoverToProducts:
     0 paint records -- so the re-home set and the pending retraction set coincide
     precisely, and the retraction happens SECOND, once the barcode exists as a product.
     All 69 carry hints.category "paint", hence the category stamp below. The word list is
-    the narrow one the AK bridge has always used: measured 2026-08-05 across all 8,528
-    committed archive names and all 2,852 source titles joining a catalog single, PACK,
-    KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE, RANGE and COMBO each produce zero false
-    positives, and only `\bBOX\b` genuinely breaks (Turbo Dork's real colour "Box Wine"),
-    which is why WOODEN BOX stays a phrase.
+    the narrow one the AK bridge has always used; the measurement justifying THAT list is
+    source-agnostic and lives with the field it describes, on `CrossoverClause.nameMatches`
+    in tools/acquisition/src/warhub_acquisition/models/descriptor.py -- it was copied here
+    once, and one copy of a measurement is where the next four copies come from.
   category: paint-set
   anyOf:
     - hintEquals: {categorySlug: paint-sets}

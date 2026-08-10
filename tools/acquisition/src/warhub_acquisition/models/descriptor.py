@@ -31,7 +31,27 @@ class CrossoverClause(BaseModel):
     """
 
     model_config = ConfigDict(extra="forbid")
-    nameMatches: str | None = None  # regex against the store's own title, case-insensitive
+    # Regex against the store's own title, case-insensitive.
+    #
+    # The word list every declaring source uses today is
+    # `\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b`, and it is narrow on purpose. The
+    # measurement behind it is about the WORD LIST, not about any one store, so it is recorded
+    # here -- where someone writing a NEW name clause reads -- instead of being restated in five
+    # descriptors, which would reproduce in prose exactly the unpinned duplication the copies
+    # themselves have. Measured 2026-08-05 across all 8,528 committed archive names and all 2,852
+    # source titles joining a catalog single: PACK, KIT, BUNDLE, STARTER, MEGA, TRIAD, PALETTE,
+    # RANGE and COMBO each produce ZERO false positives, and only `\bBOX\b` genuinely breaks --
+    # on Turbo Dork's real colour "Box Wine" -- which is why WOODEN BOX stays a two-word phrase.
+    #
+    # A token can be justified and still be invisible to any corpus: measured 2026-08-05,
+    # `\bWOODEN BOX\b` matches 0 of the 5,398 committed paint-source names and 0 of all 55,096
+    # observation names across the 30 evidence directories, while BRIEFCASE, COLLECTION and FULL
+    # RANGE rest on 2, 3 and 9 sole-held rows respectively (all the BRIEFCASE/FULL RANGE ones
+    # AK's). That is why the five copies are pinned by STRING equality in
+    # tests/test_repo_data.py::test_crossover_name_clauses_agree_unless_declared and NOT by
+    # re-evaluating them over a fixture corpus: a corpus check goes green on a silent deletion of
+    # WOODEN BOX and near-green on two more tokens.
+    nameMatches: str | None = None
     hintEquals: dict[str, str] | None = None  # scalar hint == value (hints.categorySlug, ...)
     # list hint intersects these values. EXACT value membership, never substring: Army Painter's
     # genuine airbrush paint sets carry the tag `Airbrush Warpaints`, which CONTAINS the substring

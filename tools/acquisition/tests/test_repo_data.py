@@ -65,10 +65,15 @@ def test_every_paint_source_reaches_the_paint_catalog() -> None:
     """A harvested paint source that no bridge reads is evidence nobody consumes.
 
     Paint sources are deliberately excluded from the product catalog, so `gen_paint_harvest.py`
-    is their ONLY route into anything published: if no bridge calls `read_observations` for a
-    source id, its committed observations reach neither catalog and the harvest was wasted
-    politeness. This is a contract, not a report -- a new paint source must land with its bridge
-    (or, if the bridge genuinely cannot be written yet, the evidence should not be committed).
+    is their ONLY route into anything published: if no bridge calls `paint_rows` for a source id,
+    its committed observations reach neither catalog and the harvest was wasted politeness. This
+    is a contract, not a report -- a new paint source must land with its bridge (or, if the
+    bridge genuinely cannot be written yet, the evidence should not be committed).
+
+    Looks for `paint_rows`, not `read_observations`: on 2026-08-05 the crossover gate moved into
+    that reader, so a bridge reading the raw JSONL is a bridge with no set gate (see
+    test_every_bridge_reads_through_the_crossover_gate below, which is the half of the contract
+    that catches the wrong reader rather than a missing one).
 
     "Paint source" = most of its observations are paint-kind. The ratio matters: mfr-gw-trade
     (346 paints in a 6,914-row trade workbook) and legacy-catalog are product sources that
@@ -102,7 +107,7 @@ def test_every_paint_source_reaches_the_paint_catalog() -> None:
                 f"{source_dir.name} is paint-majority evidence but is not `catalog: paints`, so "
                 "the product resolver would publish its paints as products too."
             )
-            if f'read_observations("{source_dir.name}")' not in bridged:
+            if f'paint_rows("{source_dir.name}"' not in bridged:
                 unbridged.append(source_dir.name)
 
     assert not unbridged, (
@@ -174,6 +179,35 @@ SOURCES_WITHOUT_A_CROSSOVER_BLOCK = [
 ]
 
 
+# Every DECLARING source's `anyOf` name clause carries the same word list today (measured
+# 2026-08-05: five sources, byte-identical 73-byte lines --
+# `\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b` at mfr-ak-interactive.yaml:67,
+# mfr-armypainter.yaml:71, mfr-greenstuffworld.yaml:73, mfr-monument.yaml:50, mfr-reaper.yaml:83).
+# A sixth, DIFFERENT one lives at mfr-scale75.yaml:84 (`\bCASE\b`, in `noneOf`) -- divergence is
+# not hypothetical here, it is already committed, which is why nothing below assumes one string.
+# The predicate is per-source BY DESIGN -- see Crossover in models/descriptor.py, which justifies
+# that with measurements where the direction of failure FLIPS between stores -- so divergence
+# stays legal. It just has to be DECLARED, because the evaluator is shared while the predicate
+# data is not, and an accidental divergence (a typo, a half-finished edit) is otherwise silent.
+# The word list's own justification: models/descriptor.py, the `nameMatches` field comment.
+CROSSOVER_NAME_CLAUSE_DIVERGES: dict[str, str] = {
+    # source_id -> the MEASUREMENT that justifies a different `anyOf` word list for that source.
+    # Empty today. Adding a line here is the second half of an intentional edit (the first is the
+    # descriptor's own `reason` prose, which T1 already forces to be >= 80 chars); the test below
+    # rejects a stale line, so re-converging later forces its deletion.
+}
+CROSSOVER_SOURCES_WITH_NO_NAME_CLAUSE = {
+    # A declaring source may legitimately have no name clause at all. Listed so that SILENTLY
+    # DROPPING one -- which a pure equality check cannot see, since it only compares what is
+    # there -- fails here instead.
+    "mfr-scale75": (
+        "the title signal selects ZERO: scale75.com names its boxes 'BOREAL LIGHTS.COOL "
+        "COLORS', 'CORE', 'PRIMARY', never 'set'. Its only nameMatches is the `\\bCASE\\b` VETO "
+        "in noneOf (mfr-scale75.yaml:84), which is a per-source exclusion and out of scope here."
+    ),
+}
+
+
 def _crossover_descriptors() -> dict:
     paths = _require_repo_data()
     descriptors = load_descriptors(paths.sources)
@@ -202,6 +236,119 @@ def test_crossover_name_patterns_compile() -> None:
         for clause in [*rule.anyOf, *rule.noneOf]:
             if clause.nameMatches is not None:
                 re.compile(clause.nameMatches)  # raises re.error on a bad pattern
+
+
+def _anyof_name_clauses() -> dict[str, str]:
+    """source_id -> its `anyOf` name-clause regex, for the sources that declare one.
+
+    `anyOf` ONLY. scale75's `noneOf: \\bCASE\\b` is a per-source veto ("DR FLOWS PAINT CASE" is
+    an empty carrying case, not a paint set) and has no business agreeing with anything.
+    """
+    clauses: dict[str, str] = {}
+    for source_id, descriptor in _crossover_descriptors().items():
+        patterns = [c.nameMatches for c in descriptor.crossoverToProducts.anyOf
+                    if c.nameMatches is not None]
+        assert len(patterns) <= 1, f"{source_id}: {len(patterns)} anyOf name clauses, expected <=1"
+        if patterns:
+            clauses[source_id] = patterns[0]
+    return clauses
+
+
+def test_crossover_name_clauses_agree_unless_declared() -> None:
+    """T5, Gap 1. The EVALUATOR is shared (resolve/crossover.py); the PREDICATE DATA is not.
+
+    Five descriptors carry the same set-word regex as five independent literals, and T2 above
+    only checks they compile -- `\\b(SET)\\b` and `\\bZZZ\\b` both pass it. T3 below is worse than
+    silent on a narrowing: a narrowed pattern makes a row stop crossing and stop being refused in
+    the same instant, so its join simply sees fewer rows and goes green. Nothing else in the suite
+    reads these five strings at all.
+
+    So: they must be EQUAL unless a maintainer says otherwise, in one of two rosters above. Not a
+    shared constant -- that would undo the per-source design and hand the next bridge author an
+    importable canonical word list, which is the module-level SET_WORDS this replaced. Not a
+    semantics-over-corpus check either: measured 2026-08-05, `\\bWOODEN BOX\\b` matches 0 of the
+    5,398 committed paint-source names, so deleting that token changes zero rows and a corpus
+    check cannot see it.
+
+    Three assertions, because a roster is only honest if it is checked both ways.
+    """
+    clauses = _anyof_name_clauses()
+    assert clauses, "no crossover source declares an anyOf name clause -- did they all vanish?"
+
+    # 1. The sources that are supposed to agree, agree.
+    shared = {sid: p for sid, p in clauses.items() if sid not in CROSSOVER_NAME_CLAUSE_DIVERGES}
+    distinct = sorted(set(shared.values()))
+    assert len(distinct) == 1, (
+        "crossover anyOf name clauses have diverged without a declaration:\n"
+        + "\n".join(f"  data/catalog/sources/{sid}.yaml: {shared[sid]!r}" for sid in sorted(shared))
+        + "\nIf that is intentional, extend the descriptor's `reason` AND add the source to "
+          "CROSSOVER_NAME_CLAUSE_DIVERGES with the measurement. If it is a typo, fix the typo."
+    )
+    canonical = distinct[0]
+
+    # 2. A declaring source with no name clause is a deliberate choice, and a silently DELETED
+    #    clause looks exactly like one -- so both directions of that roster are pinned.
+    missing = set(clauses) ^ set(_crossover_descriptors())
+    assert missing == set(CROSSOVER_SOURCES_WITH_NO_NAME_CLAUSE), (
+        f"declaring sources with no anyOf name clause: {sorted(missing)}, "
+        f"declared: {sorted(CROSSOVER_SOURCES_WITH_NO_NAME_CLAUSE)} -- a clause was dropped or "
+        "added without moving the source in/out of that roster"
+    )
+
+    # 3. Same discipline as T4: a stale exemption must fail, so re-converging forces the line out.
+    for source_id, why in CROSSOVER_NAME_CLAUSE_DIVERGES.items():
+        assert source_id in clauses, f"{source_id} declares no anyOf name clause to diverge with"
+        assert clauses[source_id] != canonical, (
+            f"{source_id} is listed in CROSSOVER_NAME_CLAUSE_DIVERGES ({why!r}) but its name "
+            "clause matches the shared one again -- delete the roster line"
+        )
+
+
+def test_every_bridge_reads_through_the_crossover_gate() -> None:
+    """T6, Gap 2. The invariant is stated universally, so the gate must be asked universally.
+
+    Measured 2026-08-05 on the state this replaced: `is_set` was called at exactly 3 of the 9
+    bridge sites (ak, gsw, reaper) while bridge_armypainter, bridge_monument and bridge_scale75
+    each declared a `crossoverToProducts` block and never consulted it -- 76 crossed rows relying
+    on inclusion whitelists that know nothing about sets. For monument and scale75 that held by
+    coincidence; for armypainter it did NOT hold: 3 of its 49 crossed set rows (WP8017P, WP8042P,
+    WP8012P, carrying real retail EANs the resolver publishes as products) pass its singles shape
+    test and were stopped only by a failed catalog join.
+
+    The fix was to move the gate into `paint_rows`, the one reader. This is what keeps it there:
+    a bridge that calls `read_observations` directly is a bridge with no set gate, and that is now
+    a test failure rather than a coincidence. Two call sites are legitimate -- the `def` and the
+    one inside `paint_rows` -- and nothing else.
+    """
+    if not PAINT_HARVEST_BRIDGE.exists():
+        pytest.skip("gen_paint_harvest.py not present (package tested outside the monorepo)")
+    source = PAINT_HARVEST_BRIDGE.read_text(encoding="utf-8")
+
+    assert "def paint_rows(" in source, "the gating reader is gone -- every bridge is now ungated"
+    sites = [
+        (n, line) for n, line in enumerate(source.splitlines(), 1)
+        if "read_observations(" in line
+    ]
+    assert len(sites) == 2, (
+        f"read_observations is referenced at {[n for n, _ in sites]}; exactly two are allowed "
+        "(its own def, and the single call inside paint_rows). A bridge reading the raw JSONL "
+        "skips the crossover gate: read paint_rows' docstring before adding a third."
+    )
+    assert sites[0][1].startswith("def read_observations("), sites[0]
+    # The surviving call must be lexically inside paint_rows, not merely after its def line.
+    definitions = [n for n, line in enumerate(source.splitlines(), 1)
+                   if line.startswith("def ") or line.startswith("class ")]
+    owner = max(n for n in definitions if n <= sites[1][0])
+    assert source.splitlines()[owner - 1].startswith("def paint_rows("), (
+        f"the one read_observations call (line {sites[1][0]}) sits in "
+        f"{source.splitlines()[owner - 1]!r}, not in paint_rows"
+    )
+
+    # And every declaring source is actually routed through it, by id.
+    for source_id in _crossover_descriptors():
+        assert f'paint_rows("{source_id}"' in source, (
+            f"{source_id} declares a crossover block but no bridge reads it through paint_rows"
+        )
 
 
 def test_sources_without_a_crossover_block_declare_none() -> None:
