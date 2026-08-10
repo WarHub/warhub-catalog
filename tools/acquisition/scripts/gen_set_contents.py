@@ -63,7 +63,8 @@ sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.paints.catalog import Catalog  # noqa: E402
 from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
-# MANUFACTURER slug (data/catalog/products/) -> PAINT BRAND slug (data/paints/brands/).
+# MANUFACTURER slug (data/catalog/products/) -> the PAINT BRAND slugs (data/paints/brands/) whose
+# archives its sets may draw members from, in search order.
 #
 # EXPLICIT BECAUSE THE FILENAME CANNOT IMPLY IT. The two directories are keyed by different
 # namespaces and they already disagree: monument-hobbies/monument-pro-acryl,
@@ -71,12 +72,30 @@ from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 # coincidence, and inferring from it would silently resolve the next manufacturer's set against
 # the wrong catalog (or, worse, against a same-named file that happens to exist).
 #
+# A LIST, NOT ONE SLUG, and that is a correction rather than speculation. The first draft mapped
+# one manufacturer to one brand, which cannot express a fact this catalog already contains:
+# measured 2026-08-07, 40 product rows carry an Army Painter product code (WP/TL/ST/BR/GM/BF)
+# under a DIFFERENT manufacturer -- mantic-games 17, warlord-games 23 -- plus
+# `warlord-games/AK17522` (an AK Interactive box) and
+# `mantic-games/vallejo-hellboy-paint-set-discontinued` (Vallejo). So warlord-games needs both
+# `army-painter` and `ak-interactive`, and mantic-games both `army-painter` and `vallejo`. Under
+# the 1:1 shape the second brand was simply unsayable.
+#
+# It is inert today: reaper is the only manufacturer stating contentSkus (29 products), and one
+# brand answers all 802 of its refs. Landed now anyway, because the alternative is discovering
+# it while writing the change that needs it and being tempted to "just pick one".
+#
+# RESOLUTION ACROSS BRANDS IS REFUSE-ON-AMBIGUITY, like everything else here: a ref naming
+# exactly one paint in exactly one listed brand is a member; a ref naming a paint in SEVERAL
+# brands is unresolved with all the candidates named. It is never decided by list order -- the
+# order only bounds the search, never breaks a tie.
+#
 # A manufacturer with contentSkus and no entry here is REFUSED loudly and gets no file, which is
 # what tests/test_gen_set_contents.py::test_file_roster_matches_manufacturers_with_contentskus
 # turns into a CI failure. That is deliberate: a new set-shipping manufacturer needs a human to
-# state its paint brand, not a heuristic to pick one.
-MANUFACTURER_BRAND = {
-    "reaper": "reaper",
+# state its paint brands, not a heuristic to pick one.
+MANUFACTURER_BRANDS = {
+    "reaper": ["reaper"],
 }
 
 HEADER = """\
@@ -136,10 +155,16 @@ def _member_sort_key(member: dict) -> tuple:
     return (member["ref"], member.get("paint", ""))
 
 
-def resolve_manufacturer(manufacturer: str, products: list[dict], catalog: Catalog) -> dict:
-    """The whole relation for one manufacturer: {counts, sets}."""
+def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list[Catalog]) -> dict:
+    """The whole relation for one manufacturer: {counts, sets}.
+
+    `catalogs` is every paint archive this manufacturer's sets may draw from, in search order --
+    see MANUFACTURER_BRANDS for why that is a list. A ref is looked up in ALL of them and the
+    verdict is on the union, so list order bounds the search without ever breaking a tie.
+    """
     sets: dict[str, dict] = {}
     n_refs = n_members = n_unresolved = 0
+    brands = ", ".join(c.slug for c in catalogs)
     for product in sorted(products, key=lambda p: p["id"]):
         members: list[dict] = []
         unresolved: list[dict] = []
@@ -147,33 +172,46 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalog: Catal
             n_refs += 1
             # verbatim first, then leading-zero-stripped -- see the header. `or ref` keeps an
             # all-zero code from normalising to "" and matching the blank-code bucket.
-            candidates = catalog.paints_for_code(ref) or catalog.paints_for_code(
-                ref.lstrip("0") or ref)
-            if len(candidates) == 1:
-                paint = candidates[0]
+            # Collected across every listed brand: a code that names one paint in two different
+            # archives is genuinely ambiguous and must be refused, not won by whichever brand
+            # happens to be listed first.
+            hits: list[tuple[Catalog, dict]] = [
+                (catalog, paint)
+                for catalog in catalogs
+                for paint in (catalog.paints_for_code(ref)
+                              or catalog.paints_for_code(ref.lstrip("0") or ref))
+            ]
+            if len(hits) == 1:
+                catalog, paint = hits[0]
                 members.append({
                     "ref": ref,
+                    # The archive this ref actually resolved in -- per MEMBER, because one box can
+                    # legitimately mix brands (a Warlord set of Army Painter pots that also ships
+                    # an AK bottle). The set-level `brand` says what was SEARCHED; this says what
+                    # was FOUND, and only this one is safe to join on.
+                    "brand": catalog.slug,
                     "paint": catalog.key_of(paint),
                     "productCode": str(paint.get("productCode") or ""),
                 })
-            elif not candidates:
+            elif not hits:
                 unresolved.append({
                     "ref": ref,
-                    "reason": f"no paint in brand '{catalog.slug}' carries this product code",
+                    "reason": f"no paint in brand(s) '{brands}' carries this product code",
                 })
             else:
                 # Refused, not decided by file order. reaper has 0 duplicated codes of 492 so
                 # this is dead for the only brand here today, but 198 codes across the 21 brand
-                # files are duplicated (measured 2026-08-07) -- see Catalog._paints_by_code.
+                # files are duplicated (measured 2026-08-07) -- see Catalog._paints_by_code. The
+                # same branch now also catches a code that resolves in two DIFFERENT brands.
                 unresolved.append({
                     "ref": ref,
-                    "reason": (f"{len(candidates)} paints in brand '{catalog.slug}' carry this "
-                               f"product code: "
-                               + ", ".join(sorted(catalog.key_of(p) for p in candidates))),
+                    "reason": (f"{len(hits)} paints in brand(s) '{brands}' carry this product "
+                               f"code: "
+                               + ", ".join(sorted(f"{c.slug}/{c.key_of(p)}" for c, p in hits))),
                 })
         n_members += len(members)
         n_unresolved += len(unresolved)
-        entry: dict = {"name": product.get("name") or "", "brand": catalog.slug}
+        entry: dict = {"name": product.get("name") or "", "brand": brands}
         if members:
             entry["members"] = sorted(members, key=_member_sort_key)
         if unresolved:
@@ -206,12 +244,13 @@ def main() -> None:
         products = [p for p in (catalog_doc.get("products") or []) if p.get("contentSkus")]
         if not products:
             continue
-        brand = MANUFACTURER_BRAND.get(manufacturer)
-        if brand is None:
+        brands = MANUFACTURER_BRANDS.get(manufacturer)
+        if not brands:
             refused.append(manufacturer)
             continue
-        catalog = Catalog(brand, BRANDS_DIR)
-        if not catalog.paints:
+        catalogs = [Catalog(b, BRANDS_DIR) for b in brands]
+        brand = ", ".join(brands)
+        if not any(c.paints for c in catalogs):
             # The paint archive is written by a different pipeline (the C# tool). On a fresh
             # clone, or if this ever runs before that tool, resolving would refuse every ref and
             # commit a file claiming the whole brand is missing. Skip instead -- same posture as
@@ -221,7 +260,7 @@ def main() -> None:
             written.add(manufacturer)
             continue
 
-        relation = resolve_manufacturer(manufacturer, products, catalog)
+        relation = resolve_manufacturer(manufacturer, products, catalogs)
         out = OUT_DIR / f"{manufacturer}.yaml"
         # write_bytes (not write_text) so the committed file is LF on every platform -- write_text
         # would emit CRLF on Windows and churn the diff for a maintainer running this locally.
@@ -247,8 +286,8 @@ def main() -> None:
             print(f"REMOVED stale {stale.relative_to(REPO)} (manufacturer states no contentSkus)")
 
     for manufacturer in refused:
-        print(f"REFUSED {manufacturer}: states contentSkus but has no MANUFACTURER_BRAND entry -- "
-              f"add one naming its paint brand slug; nothing is guessed here.")
+        print(f"REFUSED {manufacturer}: states contentSkus but has no MANUFACTURER_BRANDS entry -- "
+              f"add one naming its paint brand slug(s); nothing is guessed here.")
 
 
 if __name__ == "__main__":

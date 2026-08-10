@@ -136,3 +136,28 @@ def test_the_committed_relation_is_reproducible_from_committed_inputs() -> None:
         f"committed relation files are not reproducible from committed inputs: {stale}. "
         "Regenerate with `uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py`."
     )
+
+
+def test_a_member_records_the_brand_it_resolved_in() -> None:
+    """One box can legitimately mix brands -- measured 2026-08-07, 40 product rows carry an Army
+    Painter code under a different manufacturer (mantic-games 17, warlord-games 23), plus a
+    Warlord-sold AK box and a Mantic-sold Vallejo one.
+
+    So `brand` on a MEMBER is what was FOUND and is safe to join on; `brand` on the SET is only
+    what was SEARCHED. An earlier draft mapped one manufacturer to one brand and could not say
+    this at all.
+    """
+    for path in _require():
+        for block in _load(path).values():
+            for set_id, entry in (block.get("sets") or {}).items():
+                searched = {b.strip() for b in str(entry.get("brand") or "").split(",")}
+                assert searched, f"{set_id}: no brand recorded on the set"
+                for member in entry.get("members") or []:
+                    assert member.get("brand"), (
+                        f"{set_id} member {member.get('ref')}: no brand -- a member must say which "
+                        f"archive it resolved in, or a consumer cannot join it"
+                    )
+                    assert member["brand"] in searched, (
+                        f"{set_id} member {member.get('ref')}: resolved in {member['brand']!r} "
+                        f"which is not among the searched brands {sorted(searched)}"
+                    )
