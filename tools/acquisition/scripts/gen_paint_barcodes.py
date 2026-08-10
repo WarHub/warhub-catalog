@@ -1,12 +1,37 @@
-"""Generate data/paints/barcodes/citadel-colour.yaml — the Citadel paint EAN bridge.
+"""Generate data/paints/barcodes/citadel-colour.yaml — the Citadel paint manufacturer bridge.
 
-The paint catalog (C#) has no product code/SKU, so it cannot join the GW trade barcodes directly.
+The paint catalog (C#) has no product code/SKU, so it cannot join the GW trade rows directly.
 This script does the fuzzy match ONCE, here, and emits a file keyed by the paint catalog's own
 `{Name}|{Set}` identity so the C# BarcodeEnricher only ever does an exact lookup. The match is
 auditable: the committed YAML shows exactly which paint got which barcode.
 
-Match key: (set, normalized name), with volume as a tiebreaker. Source of barcodes: the resolved
+Match key: (set, normalized name), with volume as a tiebreaker. Source: the resolved
 mfr-gw-trade paint observations (the UNIT barcode, not the 6-pack case code).
+
+WHAT CROSSES THIS BRIDGE, and what deliberately does not:
+
+- `ean` — the manufacturer's barcode. Backfilled into a BLANK slot only; `additionalEans` are
+  unioned in alongside it so no live barcode is ever displaced.
+- `volumeMl` — GW's own `SIZE` column (`hints.volumeMl`), the manufacturer asserting the pot size
+  of the thing it is selling. This one WINS over the C# `VolumeTable`, which is a hardcoded
+  per-(brand, set) guess: the table lumps `Air` in with `Base`/`Layer` at 12 ml, while GW ships
+  Air at 24 ml and says so in the SIZE column AND in the row's own name (`AIR: AVERLAND SUNSET
+  (24ML)`). Technical is genuinely mixed (12 / 18 / 24 ml) and no per-set constant can be right
+  for it at all. `volumeMl` is NOT part of the paint identity key (`set|name|productCode|hex`),
+  so unlike `productCode` below it backfills onto the existing record instead of re-keying it.
+- `productCode` / `ssc` — emitted for AUDIT ONLY; the C# side must not apply `productCode`,
+  because it IS part of the identity key and writing it would re-key and duplicate every matched
+  paint against its archived null-productCode record.
+- `availability` — deliberately NOT carried, and it could not be even if we wanted it: every one
+  of the 7,611 mfr-gw-trade observations has no availability at all (a trade price list has no
+  stock signal). The product catalog's `in_stock` for these SKUs comes from retailer/webstore
+  feeds (ret-goblingaming, ret-tistaminis, mfr-gw-algolia) resolved on a different cadence.
+  Carrying it would mean (a) a new dependency from the paint pipeline onto the RESOLVED product
+  catalog rather than evidence, (b) attributing one retailer's stock for one SKU to a paint
+  identity that spans several SKUs (single pot + 6-pack, R/O-Europe + UK/ROW), and (c) baking a
+  volatile value into a git-committed append-only archive, churning ~300 records a week off
+  retailer stock noise. `unknown` is the honest value there; the paint tool already forces it
+  back to `unknown` when a paint vanishes from its source.
 
 A paint can appear under more than one trade SKU. Measured on the committed evidence, every such
 case is a CONCURRENT REGIONAL pair -- e.g. Chaos Black Spray is sold as `80209999077`
@@ -123,26 +148,46 @@ def main() -> None:
             unmatched.append(f"{pset}: {o.get('name')}")
             continue
         matched += 1
-        ssc = str((o.get("hints") or {}).get("sscCode") or "")
+        hints = o.get("hints") or {}
+        ssc = str(hints.get("sscCode") or "")
         cur = entries.get(key)
         if cur is None:
-            entries[key] = {"ean": o["ean"], "productCode": str(o.get("sku") or ""), "ssc": ssc,
-                            "additionalEans": []}
+            cur = entries[key] = {"ean": o["ean"], "productCode": str(o.get("sku") or ""),
+                                  "ssc": ssc, "additionalEans": [], "volumes": set()}
         elif o["ean"] != cur["ean"] and o["ean"] not in cur["additionalEans"]:
             # Same paint under a second trade SKU -- keep BOTH barcodes. Which one holds the
             # primary `ean` slot is decided purely by evidence order (first seen wins); that is
             # acceptable precisely because the other is retained here rather than dropped, so a
             # scan of either resolves. Do NOT read the primary as "the current/newer" barcode.
             cur["additionalEans"].append(o["ean"])
+        # GW's own SIZE column for this row, gathered from EVERY trade SKU that maps to this
+        # paint (not just the first) and kept as a SET, so a disagreement between two SKUs is
+        # detectable rather than silently decided by evidence order. Measured on the committed
+        # evidence there are zero such disagreements -- all 297 matched paints carry exactly one
+        # volume -- but a future workbook could introduce one, and guessing is what this bridge
+        # exists to stop.
+        if isinstance(hints.get("volumeMl"), int):
+            cur["volumes"].add(hints["volumeMl"])
 
-    # emit: {brand-slug}: {"{Name}|{Set}": {ean, productCode, ssc, additionalEans?}}
+    # emit: {brand-slug}: {"{Name}|{Set}": {ean, productCode, ssc, volumeMl?, additionalEans?}}
     brand: dict[str, dict] = {}
+    volumes_emitted = 0
+    volume_conflicts: list[str] = []
     for key, v in sorted(entries.items()):
         rec = {"ean": v["ean"]}
         if v["productCode"]:
             rec["productCode"] = v["productCode"]
         if v["ssc"]:
             rec["ssc"] = v["ssc"]
+        if len(v["volumes"]) == 1:
+            rec["volumeMl"] = next(iter(v["volumes"]))
+            volumes_emitted += 1
+        elif len(v["volumes"]) > 1:
+            # Two trade SKUs for one paint identity claiming different pot sizes. Emit NOTHING:
+            # the C# side then keeps its per-set table value rather than this bridge picking a
+            # winner by evidence order. Loud, because it means either the match is wrong or GW
+            # really does ship this paint in two sizes and the catalog needs two records.
+            volume_conflicts.append(f"{key}: {sorted(v['volumes'])}")
         if v["additionalEans"]:
             rec["additionalEans"] = sorted(set(v["additionalEans"]))
         brand[key] = rec
@@ -150,17 +195,25 @@ def main() -> None:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     content = (
         "# GENERATED by tools/acquisition/scripts/gen_paint_barcodes.py -- do not hand-edit.\n"
-        "# Maps the paint catalog's {Name}|{Set} identity to GW trade barcodes. The C# BarcodeEnricher\n"
+        "# Maps the paint catalog's {Name}|{Set} identity to the manufacturer's own assertions from\n"
+        "# the GW trade sheets: barcodes, and `volumeMl` from GW's SIZE column. The C# BarcodeEnricher\n"
         "# does an exact lookup; the fuzzy trade->catalog match happened at generation time.\n"
+        "# `volumeMl` OVERRIDES the tool's hardcoded per-set VolumeTable (a hand override still wins);\n"
+        "# `productCode`/`ssc` are audit-only -- applying productCode would re-key the paint.\n"
         + yaml.safe_dump({"citadel-colour": brand}, sort_keys=True, allow_unicode=True, width=200)
     )
     # write_bytes (not write_text) so the committed file is LF on every platform -- write_text would
     # emit CRLF on Windows and churn the diff for a maintainer running this locally.
     OUT.write_bytes(content.encode("utf-8"))
     print(f"citadel paints: {len(citadel)} | matched trade barcodes: {matched} | emitted: {len(brand)}")
+    print(f"entries carrying a manufacturer volumeMl: {volumes_emitted}/{len(brand)}")
     print(f"unmatched trade paint rows: {len(unmatched)}")
     for u in unmatched[:15]:
         print("   ", u)
+    if volume_conflicts:
+        print(f"VOLUME CONFLICTS (no volumeMl emitted for these): {len(volume_conflicts)}")
+        for c in volume_conflicts[:15]:
+            print("   ", c)
 
 
 if __name__ == "__main__":

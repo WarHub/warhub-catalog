@@ -23,6 +23,81 @@ public class CliEndToEndTests
         |Sand Yellow|70.916|Model Color|171|148|93|![#AB945D](https://placehold.co/15x15/AB945D/AB945D.png) `#AB945D`|
         """;
 
+    /// <summary>
+    /// The volume precedence chain, asserted through the REAL CLI rather than against the enrichers
+    /// in isolation — because the precedence is not a rule any one enricher states, it is the order
+    /// PaintCatalogApp calls them in (VolumeEnricher → BarcodeEnricher → OverrideApplier). A
+    /// reordering that broke it would leave every unit test green.
+    ///
+    /// Black:       table 18 → bridge 33            → 33 (manufacturer beats the hardcoded table)
+    /// Flat Red:    table 18 → bridge 33 → over 44  → 44 (a hand override beats the manufacturer)
+    /// Sand Yellow: table 18, no bridge entry       → 18 (absent volume changes nothing)
+    /// </summary>
+    [Fact]
+    public async Task RunAsync_VolumePrecedence_TableThenManufacturerThenOverride()
+    {
+        string root = Path.Combine(Path.GetTempPath(), $"paint-cli-vol-{Guid.NewGuid():N}");
+        string srcDir = Path.Combine(root, "src");
+        string outDir = Path.Combine(root, "out");
+        Directory.CreateDirectory(srcDir);
+
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(srcDir, "Vallejo.md"), VallejoSample);
+
+            string barcodesPath = Path.Combine(root, "barcodes.yaml");
+            await File.WriteAllTextAsync(barcodesPath, """
+                vallejo:
+                  "Black|Model Color":
+                    ean: "8429551709507"
+                    volumeMl: 33
+                  "Flat Red|Model Color":
+                    ean: "8429551709576"
+                    volumeMl: 33
+                """);
+
+            string overridesPath = Path.Combine(root, "overrides.yaml");
+            await File.WriteAllTextAsync(overridesPath, """
+                vallejo:
+                  "Flat Red|Model Color":
+                    volumeMl: 44
+                """);
+
+            int exit = await PaintCatalogApp.RunAsync([
+                "--source", srcDir, "--output", outDir,
+                "--barcodes", barcodesPath, "--overrides", overridesPath]);
+
+            Assert.Equal(0, exit);
+
+            string brandYaml = await File.ReadAllTextAsync(Path.Combine(outDir, "brands", "vallejo.yaml"));
+            Assert.Equal(33, VolumeOf(brandYaml, "Black"));
+            Assert.Equal(44, VolumeOf(brandYaml, "Flat Red"));
+            Assert.Equal(18, VolumeOf(brandYaml, "Sand Yellow"));
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+                Directory.Delete(root, recursive: true);
+        }
+    }
+
+    /// <summary>The <c>details.volumeMl</c> of the named paint in a written brand archive.</summary>
+    private static int VolumeOf(string brandYaml, string paintName)
+    {
+        string[] lines = brandYaml.Split('\n');
+        int start = Array.FindIndex(lines, l => l.TrimEnd('\r').EndsWith($"name: {paintName}", StringComparison.Ordinal));
+        Assert.True(start >= 0, $"No record named '{paintName}' in:\n{brandYaml}");
+        for (int i = start + 1; i < lines.Length; i++)
+        {
+            string line = lines[i].TrimEnd('\r').Trim();
+            if (line.StartsWith("- name:", StringComparison.Ordinal)) break; // next record
+            if (line.StartsWith("volumeMl:", StringComparison.Ordinal))
+                return int.Parse(line["volumeMl:".Length..].Trim());
+        }
+        Assert.Fail($"No volumeMl for '{paintName}' in:\n{brandYaml}");
+        return -1;
+    }
+
     [Fact]
     public async Task RunAsync_SourceToOutput_WritesArchivalBrandFileAndLedger()
     {
