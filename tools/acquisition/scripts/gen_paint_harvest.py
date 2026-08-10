@@ -1261,13 +1261,18 @@ def bridge_gsw() -> BrandHarvest:
         # `dippingink17mlpapyrusdip` ends with `papyrusdip`, never `papyrusdip17ml`. Minting was
         # necessary and, exactly as the paragraph above says, not sufficient.
         #
-        # STILL OPEN, and NOT a barcode question: `volumeMl` says nothing about which pot a record
-        # means anywhere else in this brand. VolumeTable.cs:101 is `("Green Stuff World", null, 17,
-        # "dropper")`, a null set list written unconditionally by VolumeEnricher, and 81 records
-        # still contradict their own barcode's `hints.ml` (Flexible 26, Dry Brush 20, Primer 9,
-        # Spray Primer 9, Chameleon Spray 7, Varnish 5, Chrome Spray 2, Dipping Inks 2,
-        # Blackest Black 1 -- including `Chrome Spray Paint 400ml`), and the same line stamps
-        # `container: dropper` on 18 aerosol cans. That is a volume-table change, not a bridge one.
+        # CLOSED 2026-08-06, and it was NOT a barcode question -- `volumeMl` said nothing about
+        # which pot a record meant anywhere else in this brand. The brand-wide
+        # `("Green Stuff World", null, 17, "dropper")` rule, written unconditionally by
+        # VolumeEnricher, contradicted 79 records' own `hints.ml` (Flexible 26, Dry Brush 20,
+        # Primer 9, Spray Primer 9, Chameleon Spray 7, Varnish 5, Chrome Spray 2, Blackest Black 1
+        # -- the 2 Dipping Inks of the old count of 81 having been taken by overrides.yaml in
+        # fe4a2dd), and the same line stamped `container: dropper` on 18 aerosol cans. It was a
+        # volume-table change, not a bridge one, and that is where it went: three per-set rows above
+        # the brand-wide one in VolumeTable.cs cover 64 of the 79 plus all 18 containers, and the
+        # 15 in the three mixed-volume sets are per-record `volumeMl` assertions in overrides.yaml.
+        # Nothing here moved, and nothing here should: the bridge was never the right home, since
+        # `--barcodes` is a single hardcoded FileInfo and BarcodeEnricher cannot write Packaging.
         # Worse in kind and NOT a volume question at all: `Orange`, `Yellow` and `White` in
         # `Fluor Metallic` hold a Transparent Acrylic Ink's / Intensity Ink OSL's barcode, from a
         # different range entirely, and in all three contests the row first-wins discarded was

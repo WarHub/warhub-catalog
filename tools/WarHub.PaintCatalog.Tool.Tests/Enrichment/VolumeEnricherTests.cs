@@ -53,6 +53,47 @@ public class VolumeEnricherTests
         Assert.Equal(expectedPackaging, enriched.Packaging);
     }
 
+    // Green Stuff World's brand-wide rule is a 17 ml dropper, which was wrong for 79 records --
+    // measured 2026-08-06 against each one's own barcode in the mfr-greenstuffworld evidence. 64 of
+    // them are these five sets; the other 15 sit in mixed-volume sets and are asserted per record
+    // in data/paints/overrides.yaml. See the rule comment in VolumeTable.
+    [Theory]
+    [InlineData("Flexible", 240, "dropper")]
+    [InlineData("Dry Brush", 30, "dropper")]
+    [InlineData("Spray Primer", 400, "spray")]
+    [InlineData("Chameleon Spray", 400, "spray")]
+    [InlineData("Chrome Spray", 400, "spray")]
+    public void Enrich_GreenStuffWorld_SetSpecificRulesBeatTheBrandWideDefault(
+        string set, int expectedVolume, string expectedPackaging)
+    {
+        // This is the ordering test as much as the value test. `Lookup` returns on the FIRST rule
+        // matching the brand and the brand-wide rule has a null set list, which matches every set,
+        // so a set-specific row placed BELOW it is unreachable and every assertion here comes back
+        // 17/dropper. That failure looks exactly like the repair never happening.
+        Paint enriched = VolumeEnricher.Enrich(MakePaint(set), "Green Stuff World");
+
+        Assert.Equal(expectedVolume, enriched.VolumeMl);
+        Assert.Equal(expectedPackaging, enriched.Packaging);
+    }
+
+    // The rules above must not widen the brand's default. `Dipping Inks` is the one that would
+    // hurt: it holds 36 records at an evidenced 17 ml (including all 31 pots minted in c709958)
+    // beside 33 at an evidenced 60, so any per-set constant for it is wrong for one group or the
+    // other -- and the 33 are handled by overrides, which run last.
+    [Theory]
+    [InlineData("Dipping Inks")]
+    [InlineData("Acrylic Colors")]
+    [InlineData("Primer")]
+    [InlineData("Varnish")]
+    [InlineData("Blackest Black")]
+    public void Enrich_GreenStuffWorld_UnlistedSetsStillGetTheBrandWideDefault(string set)
+    {
+        Paint enriched = VolumeEnricher.Enrich(MakePaint(set), "Green Stuff World");
+
+        Assert.Equal(17, enriched.VolumeMl);
+        Assert.Equal("dropper", enriched.Packaging);
+    }
+
     [Fact]
     public void Enrich_ArmyPainter_18mlDropper()
     {

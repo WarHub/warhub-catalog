@@ -573,6 +573,16 @@ citadel-colour:
 # failure mode and no barcode exposure with this one, and it will additionally have to cover the 31
 # pots minted here: they are born at 17 ml, which is right, but their bare 60 ml partners are only
 # right because of the `volumeMl: 60` lines below.
+#
+# THAT FOLLOW-UP HAS NOW LANDED (2026-08-06), and the count came out at 79, not 81: the two dipping
+# inks named just above were taken by the `volumeMl: 60` lines in this very block, leaving 79. It is
+# a SPLIT, because one mechanism does not fit them: 64 are three per-set rows in VolumeTable.cs
+# (Flexible, Dry Brush, and one row for the three 400 ml spray sets, which also carries the 18
+# aerosol containers), and the other 15 are per-record `volumeMl` assertions at the bottom of this
+# section, because Primer/Varnish/Blackest Black are mixed-volume sets no constant can express. The
+# 31 pots minted here are untouched by both: they are 17 ml, the brand-wide rule still says 17, and
+# no `Dipping Inks` row was added precisely because that set is 36 evidenced 17s beside 33
+# evidenced 60s.
 green-stuff-world:
   # The bare Arcturus record IS the 60 ml pot: on all 31, its ean, priceEur and imageUrl
   # are the 60 ml sku's, and VolumeTable.cs:101's brand-wide 17 is the one field that
@@ -642,8 +652,9 @@ green-stuff-world:
   # The two Dipping Inks records that are NOT part of the 31-pot repair above, because their
   # 60 ml ean/price/imageUrl were already correct and their 17 ml siblings already exist as
   # separate records (4220, 4231). Only `volumeMl` was ever wrong on them, and unlike the other
-  # 79 records Group 2 defers -- which need a per-product volume the table cannot express -- these
-  # two are reachable by exactly the mechanism used above. Leaving them at 17 would put two
+  # 79 records Group 2 defers -- 64 of which turned out to BE expressible as per-set constants and
+  # are now three rows in VolumeTable.cs, the remaining 15 landing at the bottom of this section --
+  # these two are reachable by exactly the mechanism used above. Leaving them at 17 would put two
   # records saying 17 ml beside 31 saying 60 ml in the same set, one of them NAMED `60 ml`.
   # Verified 2026-08-06 against the evidence: 8435646508474 is sku 3487 at hints.ml 60, and
   # 8435646508580 is sku 3498 at hints.ml 60 (the "Nightsahde" spelling is the store's own typo,
@@ -716,3 +727,78 @@ green-stuff-world:
     priceEur: 2.125
   Zombie Dip 17 ml|Dipping Inks:
     priceEur: 2.125
+  # ---------------------------------------------------------------------------------------------
+  # THE 15 THE VOLUME TABLE CANNOT REACH (2026-08-06). The other 64 of the 79 records that
+  # contradicted `volumeMl: 17` are fixed in VolumeTable.cs by three per-set rows, because their
+  # sets are volume-uniform AND fully evidenced. These 15 are not: their three sets are genuinely
+  # MIXED, so a per-set constant is wrong by construction, not merely imprecise.
+  #
+  #   Primer          240 x3, 60 x6, and 2 records with NO ml at all
+  #   Varnish          17 x4 (already right, untouched), 60 x4, 240 x1
+  #   Blackest Black   17 x1 (already right, untouched), 60 x1
+  #
+  # `Gloss Black Primer` is the shape of the problem: greenstuffworld.com sells it as a 60 ml
+  # bottle (sku 1743, 8436574501025) AND a 240 ml one (sku 4692, 8435646520520), two barcodes on
+  # two records, and a `Primer` row would have to pick one and lie about the other. A `Primer` row
+  # would ALSO stamp an ml figure on `Foam Primer and Coat - Black/Grey 250gr`, which are sold by
+  # WEIGHT and carry no `hints.ml` -- see the known-wrong note at the bottom.
+  #
+  # EVERY VALUE HERE IS JOINED, NOT TYPED. Each record's own committed `ean` was looked up in
+  # data/evidence/products/mfr-greenstuffworld/observations.jsonl and the asserted figure IS that
+  # row's `hints.ml`, 15/15. A second independent signal agrees on all 15: the record's own name
+  # already states the volume ("Matt Cream Primer 60ml", "Paint 60 ml"), and across all 79 the two
+  # signals disagreed ZERO times. Each key names exactly one committed record (measured: 412
+  # records, 412 distinct `{Name}|{Set}`, 0 collisions), so none of these is the silent no-op
+  # `OverrideApplier.Apply`'s ordinal lookup turns a mistyped key into (OverrideApplier.cs:52-55).
+  #
+  # WHY A HAND ASSERTION AND NOT THE DURABLE MECHANISM. fe4a2dd's limitation applies here too: an
+  # override has exactly one asserter and no regeneration re-confirms it. The generated manufacturer
+  # bridge would be the durable home -- except `--barcodes` is a single FileInfo
+  # (PaintCatalogApp.cs:41-44), not a directory like `--harvest`, and
+  # .github/workflows/paint-catalog-update.yml:81 hardcodes the citadel-colour path, so a
+  # green-stuff-world.yaml beside it would be read by NOTHING; and `BarcodeEnricher.Apply`'s
+  # projection (BarcodeEnricher.cs:96-118) writes Ean/AdditionalEans/VolumeMl and four prices but
+  # never Packaging, so it could not have carried the container half of this repair regardless.
+  # The cost is paid HERE and only here, and it is bought back by
+  # tools/acquisition/tests/test_paint_volume_gsw.py, which re-derives all 15 from the evidence on
+  # every CI run -- so unlike the `volumeMl: 60` block above these are single-authored but not
+  # single-asserted.
+  #
+  # NO BARCODE MOVES, exactly as above: no `ean:` or `additionalEans:` appears in this block, so
+  # `BarcodeSet.Union` writes nothing and `_check_paints` has nothing to report.
+  #
+  # KNOWN WRONG AND OUT OF REACH, recorded rather than papered over: `Foam Primer and Coat - Black
+  # 250gr` and its Grey twin will still publish `volumeMl: 17, container: dropper` for a product
+  # sold in grams. There is no ml evidence to join on, and inventing one is the failure mode this
+  # whole repair exists to undo. Likewise 254 GSW records carry no `hints.ml` at all (the hint is
+  # on 158 of 477 observation rows), so no mechanism here can confirm or deny their 17.
+  Paint 60 ml|Blackest Black:
+    volumeMl: 60
+  Gloss Black Primer 60ml|Primer:
+    volumeMl: 60
+  Matt Black Primer 60ml|Primer:
+    volumeMl: 60
+  Matt Cream Primer 60ml|Primer:
+    volumeMl: 60
+  Matt Grey Primer 60ml|Primer:
+    volumeMl: 60
+  Matt Red Primer 60ml|Primer:
+    volumeMl: 60
+  Matt White Primer 60ml|Primer:
+    volumeMl: 60
+  Gloss Black Primer 240ml|Primer:
+    volumeMl: 240
+  Matt Black Primer 240ml - Black|Primer:
+    volumeMl: 240
+  Matt White Primer 240ml|Primer:
+    volumeMl: 240
+  Chrome Clear Coat 60 ml|Varnish:
+    volumeMl: 60
+  Gloss Varnish 60ml|Varnish:
+    volumeMl: 60
+  Maxx Matt Varnish 60ml - Ultra Matte Varnish|Varnish:
+    volumeMl: 60
+  Satin Varnish 60ml|Varnish:
+    volumeMl: 60
+  Flexible varnish 240ml|Varnish:
+    volumeMl: 240

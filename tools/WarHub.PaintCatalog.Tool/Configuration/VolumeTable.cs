@@ -98,6 +98,54 @@ public static class VolumeTable
         new("Foundry", null, 20, "pot"),
 
         // Green Stuff World
+        // Five ranges GSW does not sell in the 17 ml dropper the brand-wide rule below assumes.
+        // That rule is a FLOOR for a catalogue that is mostly 17 ml droppers, and it was stamping a
+        // flat 17 onto records whose own barcode says otherwise. Measured 2026-08-06 by joining
+        // every committed record's `ean` to data/evidence/products/mfr-greenstuffworld/
+        // observations.jsonl on `hints.ml`: 412 records, 400 carry an ean, 400 join, 158 of those
+        // joins carry an ml hint, and 79 of the 158 CONTRADICT `volumeMl: 17` -- 240 ml x30,
+        // 30 ml x20, 400 ml x18, 60 ml x11. Two independent signals agree on all 79 with ZERO
+        // disagreements and zero abstentions: the evidence hint, and the record's own NAME, which
+        // already spells the volume out ("Spray Chameleon Emerald Getaway 400ml", "Paint 60 ml").
+        //
+        // These three rows reach 64 of the 79 and ONLY those 64, because each of the five sets is
+        // volume-uniform AND fully evidenced -- every member carries an ml hint, so no record is
+        // dragged to a constant that was never measured for it: Flexible 26/26 at 240, Dry Brush
+        // 20/20 at 30, Spray Primer 9/9 + Chameleon Spray 7/7 + Chrome Spray 2/2 at 400. The
+        // harvest adds nothing here either (all 64 of its additions in these sets dedup against a
+        // record that already exists, HarvestApplier.cs:124-134), so the population is exactly 64.
+        //
+        // THE REMAINING 15 ARE NOT A TABLE PROBLEM. Primer (240 x3, 60 x6, and two `Foam Primer
+        // and Coat … 250gr` sold by WEIGHT with no ml at all), Varnish (17 x4, 60 x4, 240 x1) and
+        // Blackest Black (17 x1, 60 x1) are genuinely mixed -- `Gloss Black Primer` ships as both a
+        // 60 and a 240 ml bottle under two barcodes -- so no per-set constant is right for them and
+        // a Primer row would additionally stamp ml on the two records measured in grams. They are
+        // asserted per record in data/paints/overrides.yaml instead. Same reason there is no
+        // `Dipping Inks` row: that set is 36 records at an evidenced 17 beside 33 at an evidenced
+        // 60, and a rule at 60 would flip all 31 pots minted in c709958.
+        //
+        // ORDER IS LOAD-BEARING. `Lookup` returns on the FIRST rule matching the brand and a null
+        // set list matches every set (:191-194), so placed after the brand-wide row below these
+        // three could never fire and the repair would look simply unapplied. AK Interactive
+        // :54-55 above its own default at :65 is the same shape.
+        //
+        // `spray` IS ASSERTED; `dropper` IS ONLY CARRIED. VolumeRule takes Packaging as a
+        // non-nullable positional and VolumeEnricher writes it beside VolumeMl unconditionally
+        // (VolumeEnricher.cs:26-30), so there is no "fix the volume, leave the container alone"
+        // row. For the 18 aerosols three signals agree 18/18: the name contains "Spray", the
+        // evidence `categorySlug` is colour-primers-spray / colorshift-chameleon-spray /
+        // chrome-spray-paint, and the size is 400 ml -- and no GSW record at any other volume is
+        // named "Spray". That is a claim, with Citadel :44 as precedent. For Flexible and Dry Brush
+        // the evidence carries NO packaging signal whatever (hint keys across all 477 rows are only
+        // category, categorySlug, reference, ml), so `dropper` here restates what the brand-wide
+        // rule already wrote and asserts nothing new. A 240 ml Flexible paint is very probably not
+        // a dropper bottle, but the committed vocabulary is exactly dropper/jar/pot/tin/spray
+        // (5399/1449/924/115/12 across the 21 brand files -- the same five strings this table uses,
+        // and no `packaging:` override exists anywhere in data/paints), and none of them is
+        // defensible for a squeeze bottle. It stays visibly wrong rather than confidently wrong.
+        new("Green Stuff World", ["Spray Primer", "Chameleon Spray", "Chrome Spray"], 400, "spray"),
+        new("Green Stuff World", ["Flexible"], 240, "dropper"),
+        new("Green Stuff World", ["Dry Brush"], 30, "dropper"),
         new("Green Stuff World", null, 17, "dropper"),
 
         // Mr Hobby
