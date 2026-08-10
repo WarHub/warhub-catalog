@@ -110,3 +110,29 @@ class Overrides(BaseModel):
     model_config = ConfigDict(extra="forbid")
     retract: list[str] = Field(default_factory=list)
     products: dict[str, dict[str, object]] = Field(default_factory=dict)
+    # A CODE THE SOURCE MISTYPED IN ITS OWN CONTENTS PROSE: {product id: {stated ref: real code}}.
+    # Read by scripts/gen_set_contents.py when it resolves a set's members, and by nothing else.
+    #
+    # WHY THIS IS NOT THE GENERATOR REWRITING THE SOURCE, which gen_set_contents.py's header
+    # forbids in those words. That prohibition is on INFERENCE -- a generator that quietly repairs
+    # a ref to make its own output look complete, deciding for itself what the source meant. This
+    # is the same separation `overrides.yaml` draws everywhere else in this repo: a human may state
+    # a correction, in a committed file, with the evidence beside it, and be reviewed on it; a
+    # generator may not derive one. Nothing here is computed -- no edit distance, no nearest-code
+    # search, no fuzzy name match. An entry exists only because somebody wrote it.
+    #
+    # SCOPED TO ONE PRODUCT, never to a source or globally. The same string can be a typo in one
+    # box and a real code in another, and a correction that cannot say WHERE it applies would
+    # silently rewrite both. It also keeps the entry auditable: the box is the evidence.
+    #
+    # `contentSkus` on the product record stays VERBATIM and is not touched -- it is documented as
+    # the manufacturer's own raw refs, and a catalog that quietly launders them loses the only
+    # record that the source ever said something else. The correction applies at RESOLUTION, so
+    # the member keeps `ref:` exactly as printed and carries `resolvedBy: correction`. That is the
+    # same shape the stated-name repair uses for a code a set contradicts itself about.
+    #
+    # tests/test_repo_data.py::test_every_set_ref_correction_is_live_and_resolvable holds it to
+    # both halves of its claim: the mistyped ref must STILL be in that product's contentSkus (if
+    # the manufacturer fixes its own prose, the entry is stale and must be deleted, not left to
+    # rot), and the corrected code must name exactly one committed paint.
+    setRefs: dict[str, dict[str, str]] = Field(default_factory=dict)

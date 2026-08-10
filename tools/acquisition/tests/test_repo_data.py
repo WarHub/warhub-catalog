@@ -780,3 +780,72 @@ def test_no_committed_yaml_string_changes_type_between_readers() -> None:
         "writers must use CatalogSerializer.CreateSerializer(), never a local SerializerBuilder. "
         f"First 20: {offenders[:20]}"
     )
+
+
+def test_every_set_ref_correction_is_live_and_resolvable() -> None:
+    """A declared typo repair must still be repairing a typo, and must still land somewhere.
+
+    `Overrides.setRefs` is the one place a human may overrule a code a manufacturer printed, so it
+    is also the one place a stale entry does real damage: silently rewriting a ref the source has
+    since FIXED, or pointing at a paint that has since been retracted. Neither shows up anywhere
+    else -- gen_set_contents.py applies a correction with `dict.get`, so an entry that matches
+    nothing is a no-op and an entry pointing nowhere just re-refuses. Both look like success.
+
+    Two halves, because the entry makes two claims:
+
+      1. THE MISTYPED REF IS STILL PRINTED. If it is gone from that product's `contentSkus`, the
+         manufacturer fixed its own prose (or the description changed shape) and the entry must be
+         DELETED, not left behind where it can catch a future code that happens to collide.
+      2. THE CORRECTED CODE STILL NAMES EXACTLY ONE PAINT. A correction resolving to zero paints
+         is a refusal wearing a repair's clothes; one resolving to several would pick by archive
+         order, which is the tie-break-by-luck this relation refuses everywhere else.
+
+    Live today: ak-interactive/AK11781 prints `AK111424 Grey Green`, which is AK11424 with one
+    extra digit -- the only 6-digit code in a box whose other nine are 5-digit AK11xxx.
+    """
+    _require_repo_data()
+    overrides_path = REPO_DATA / "catalog" / "overrides.yaml"
+    if not overrides_path.exists():
+        pytest.skip("data/catalog/overrides.yaml not present")
+    corrections = (read_yaml(overrides_path) or {}).get("setRefs") or {}
+    if not corrections:
+        pytest.skip("no setRefs corrections declared")
+
+    products: dict[str, dict] = {}
+    for path in sorted((REPO_DATA / "catalog" / "products").glob("*.yaml")):
+        for product in (read_yaml(path) or {}).get("products") or []:
+            products[str(product.get("id"))] = product
+
+    paints_by_code: dict[str, list[str]] = {}
+    for path in sorted((REPO_DATA / "paints" / "brands").glob("*.yaml")):
+        archive = read_yaml(path) or {}
+        for record in archive.get("paints") or []:
+            code = str(record.get("productCode") or "")
+            if code:
+                paints_by_code.setdefault(code, []).append(f"{path.stem}/{record['name']}")
+
+    stale, unresolvable = [], []
+    for product_id, mapping in corrections.items():
+        product = products.get(product_id)
+        assert product is not None, (
+            f"setRefs names {product_id!r}, which is not a committed product -- a correction "
+            "scoped to a product that no longer exists can never fire"
+        )
+        stated = [str(code) for code in (product.get("contentSkus") or [])]
+        for wrong, right in mapping.items():
+            if str(wrong) not in stated:
+                stale.append((product_id, wrong, right))
+            hits = paints_by_code.get(str(right), [])
+            if len(hits) != 1:
+                unresolvable.append((product_id, wrong, right, hits))
+
+    assert not stale, (
+        "setRefs entries whose mistyped ref is NO LONGER in the product's contentSkus -- the "
+        "source fixed its own prose, so the correction is dead weight that can only misfire on a "
+        f"future code. Delete them: {stale}"
+    )
+    assert not unresolvable, (
+        "setRefs entries whose corrected code does not name exactly one committed paint. Zero "
+        "means the repair refuses just as loudly as the typo did; several means it would be "
+        f"decided by archive order: {unresolvable}"
+    )
