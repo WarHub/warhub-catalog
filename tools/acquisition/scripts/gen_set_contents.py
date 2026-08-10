@@ -353,9 +353,24 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
                     "productCode": str(paint.get("productCode") or ""),
                 })
             elif not hits:
+                # The reason NAMES THE TWO CASES, because they need opposite responses and the
+                # bare fact does not distinguish them. Both were live in this file at once:
+                # reaper/08906 -> 29815 was a coverage gap (the site states the paint inside its
+                # sets and the strategy was not reading it -- fixed by acquiring it), while
+                # warlord-games/AK17524 -> AK17082 was a paint that genuinely has no listing
+                # anywhere, because AK makes "Wolf Blue Grey" for that one box and says so in the
+                # set's own description. The first is fixed upstream; the second can only ever be
+                # fixed here, by minting the record, and a reviewer told merely "no paint carries
+                # this code" reads BOTH as "go and acquire it" and waits forever on the second.
                 unresolved.append({
                     "ref": ref,
-                    "reason": f"no paint in brand(s) '{brands}' carries this product code",
+                    "reason": (
+                        f"no paint in brand(s) '{brands}' carries this product code -- either it "
+                        "has not been acquired yet (fix the source), or the manufacturer makes it "
+                        "only for this set and lists it nowhere, in which case mint it in "
+                        "data/paints/overrides.yaml `additions:` with `soldSeparately: false` "
+                        "rather than leaving it refused forever"
+                    ),
                 })
             else:
                 # Refused, not decided by file order. reaper has 0 duplicated codes of 492 so

@@ -9,11 +9,16 @@ public class PaintRecordSchemaTests
     [Fact]
     public void PaintRecord_TopLevel_FieldOrder()
     {
+        // `SoldSeparately` sits with `Status`/`Availability` because it is the same KIND of fact
+        // -- how you can obtain this pot -- and property order here IS the on-disk key order, so a
+        // reader meets the three together. It is deliberately not folded INTO either of them: both
+        // are free strings every consumer filters on, and a new value there would silently exclude
+        // the set-exclusive records the field exists to keep reachable.
         string[] expected =
         [
-            "Name", "Category", "Status", "Availability", "FirstSeen", "ProductCode", "Ean",
-            "AdditionalEans", "ImageUrl", "PriceGbp", "PriceUsd", "PriceEur", "PriceCad",
-            "Supersedes", "SupersededBy", "Details",
+            "Name", "Category", "Status", "Availability", "SoldSeparately", "FirstSeen",
+            "ProductCode", "Ean", "AdditionalEans", "ImageUrl", "PriceGbp", "PriceUsd", "PriceEur",
+            "PriceCad", "Supersedes", "SupersededBy", "Details",
         ];
         string[] actual = typeof(PaintRecord).GetProperties().Select(p => p.Name).ToArray();
         Assert.Equal(expected, actual);
@@ -29,5 +34,30 @@ public class PaintRecordSchemaTests
             ["Set", "R", "G", "B", "Hex", "VolumeMl", "WeightG", "Container", "Type", "Finish"];
         string[] actual = typeof(PaintDetails).GetProperties().Select(p => p.Name).ToArray();
         Assert.Equal(expected, actual);
+    }
+
+    /// <summary>
+    /// `soldSeparately` is a TRI-STATE and the whole design rests on that: null means no source
+    /// said, `false` means a source stated the pot is set-exclusive, and those are different
+    /// claims. A non-nullable bool would read every silence as "not sold separately", turning
+    /// 8,000 absences into assertions -- so the nullability is a contract, not a style choice.
+    /// </summary>
+    [Fact]
+    public void SoldSeparately_IsNullable_SoAbsenceStaysDistinctFromFalse()
+    {
+        System.Reflection.PropertyInfo property =
+            typeof(PaintRecord).GetProperty("SoldSeparately")!;
+        Assert.Equal(typeof(bool?), property.PropertyType);
+
+        // And it defaults to null, so a record written without mentioning it asserts nothing.
+        var record = new PaintRecord
+        {
+            Name = "x",
+            Category = "paint",
+            Status = "current",
+            Availability = "unknown",
+            Details = new PaintDetails { Set = "s", R = 0, G = 0, B = 0, Hex = "" },
+        };
+        Assert.Null(record.SoldSeparately);
     }
 }

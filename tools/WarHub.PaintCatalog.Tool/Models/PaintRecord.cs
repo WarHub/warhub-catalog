@@ -15,6 +15,28 @@ public record PaintRecord
     public required string Status { get; init; }
     /// <summary>Volatile purchasability: in_stock | out_of_stock | pre_order | limited | unknown.</summary>
     public required string Availability { get; init; }
+    /// <summary>
+    /// WHETHER THE MANUFACTURER SELLS THIS POT ON ITS OWN. `null` -- the overwhelming default --
+    /// means no source said, which is a different claim from "yes". `false` means a source stated
+    /// the paint exists ONLY inside a boxed set.
+    ///
+    /// Deliberately NOT a `status` or `availability` value, for the reason `supersedes` gives a few
+    /// lines down: those are free strings every consumer filters on, and a new value in them would
+    /// silently drop exactly the records this exists to keep reachable. A sibling field is additive
+    /// -- a consumer that has never heard of it behaves as before.
+    ///
+    /// The record it was added for is ak-interactive AK17082 "Wolf Blue Grey", which Warlord's own
+    /// listing for the Winter Blue Soldiers set spells out: "Special color only for this set - not
+    /// sold separately." Without this field the catalog would publish it as `current` / `unknown`,
+    /// i.e. indistinguishable from a pot you can walk in and buy -- which is worse than silence for
+    /// the one person most likely to look it up, somebody holding the bottle and reading the label.
+    ///
+    /// NOTHING WRITES `true`, deliberately. No source states the positive; a listed product's
+    /// separate availability is implied by its having a page, and stamping `true` on all 8,000
+    /// records would assert a fact no source states -- the same argument set-member `quantity`
+    /// loses on. `true` is reserved for a source that ever says it in words.
+    /// </summary>
+    public bool? SoldSeparately { get; init; }
     /// <summary>Write-once, immutable.</summary>
     public string? FirstSeen { get; init; }
     public string? ProductCode { get; init; }

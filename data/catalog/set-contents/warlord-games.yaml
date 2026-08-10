@@ -82,8 +82,8 @@ warlord-games:
   counts:
     sets: 24
     refs: 90
-    members: 89
-    unresolved: 1
+    members: 90
+    unresolved: 0
     quantified: 0
   sets:
     warlord-games/AK17501:
@@ -564,6 +564,7 @@ warlord-games:
           brand: ak-interactive
           paint: Old Gold|Quick Gen
           productCode: AK17068
-      unresolved:
         - ref: AK17082
-          reason: no paint in brand(s) 'army-painter, ak-interactive' carries this product code
+          brand: ak-interactive
+          paint: Wolf Blue Grey|Quick Gen
+          productCode: AK17082

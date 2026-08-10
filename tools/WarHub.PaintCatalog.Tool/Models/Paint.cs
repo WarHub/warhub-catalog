@@ -25,6 +25,8 @@ public record Paint
     /// <summary>Extra barcodes the same paint is sold under (regional variants). See PaintRecord.</summary>
     public List<string>? AdditionalEans { get; init; }
     public bool IsDiscontinued { get; init; }
+    /// <summary>See PaintRecord.SoldSeparately -- null means unstated, false means set-exclusive.</summary>
+    public bool? SoldSeparately { get; init; }
 
     /// <summary>
     /// Paint type derived from brand and set classification.
