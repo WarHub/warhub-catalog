@@ -1,5 +1,8 @@
 id: mfr-turbodork
 kind: manufacturer
+# Feeds the PAINT catalog: gen_paint_harvest.py projects these observations onto
+# data/paints/. Without this the product resolver publishes every paint a second time.
+catalog: paints
 strategy: shopify-paints
 baseUrl: https://turbodork.com
 scope:

@@ -125,7 +125,15 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             seen.add(node)
             node = matches.supersessions[node]
 
-    observations = [observation for source in evidence.values() for observation in source.values()]
+    # Paint sources share the evidence layout but feed the PAINT catalog (see SourceDescriptor
+    # .catalog and scripts/gen_paint_harvest.py). Their observations are skipped here rather than
+    # stored elsewhere, so the acquire runner, cursors and health reporting stay uniform.
+    observations = [
+        observation
+        for source_id, source in evidence.items()
+        if descriptors[source_id].catalog == "products"
+        for observation in source.values()
+    ]
 
     if not observations and any(paths.catalog_products.glob("*.yaml")):
         raise ValueError("no evidence loaded but catalog files exist; refusing to wipe the catalog")

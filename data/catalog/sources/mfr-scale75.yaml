@@ -1,5 +1,8 @@
 id: mfr-scale75
 kind: manufacturer
+# Feeds the PAINT catalog: gen_paint_harvest.py projects these observations onto
+# data/paints/. Without this the product resolver publishes every paint a second time.
+catalog: paints
 strategy: shopify-paints
 # Apex host serves robots.txt directly with 200 (live 2026-07-24); no www redirect involved.
 baseUrl: https://scale75.com

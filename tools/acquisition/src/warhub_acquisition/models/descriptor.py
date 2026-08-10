@@ -26,6 +26,13 @@ class SourceDescriptor(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: str
     kind: Literal["curated", "manufacturer", "retailer", "archive", "barcode-db"]
+    # Which catalog this source feeds. Paint sources store their observations under
+    # data/evidence/products/ like everything else (one evidence layout, one acquire runner), but
+    # they describe PAINTS -- `gen_paint_harvest.py` projects them onto the paint catalog's own
+    # identities. The product resolver must skip them, or every paint publishes a second time as a
+    # product: measured 2026-07-30, 4,839 such records across 9 manufacturers, all of them
+    # `category: paint`/`paint-set`. Defaults to products, so only the paint sources say so.
+    catalog: Literal["products", "paints"] = "products"
     strategy: str
     baseUrl: str | None = None
     scope: dict[str, object] = Field(default_factory=dict)
