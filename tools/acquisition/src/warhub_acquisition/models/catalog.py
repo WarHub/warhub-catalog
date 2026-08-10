@@ -33,17 +33,18 @@ class CanonicalProduct(BaseModel):
     quantity: int | None = None
     volumeMl: int | None = None
     # NET CONTENTS in grams, for the products sold by mass rather than by volume. Sibling of
-    # volumeMl, never a replacement -- either, both or neither. Measured 2026-08-06: 3 of 22,529
-    # products name a mass (2 GW `WH COLOUR PLASTIC GLUE (15g)` regional SKUs, 1 Mantic
-    # `Colour Forge Basing Sand - Fine Grit - 400g`) and none of them carries a volume, so this
-    # closes an ABSENCE on the product side rather than correcting an error. It exists chiefly so
+    # volumeMl, never a replacement -- either, both or neither. Measured 2026-08-06, only a handful
+    # of products name a mass at all (the GW `WH COLOUR PLASTIC GLUE (15g)` regional SKUs and
+    # Mantic's `Colour Forge Basing Sand - Fine Grit - 400g`) and none of them carries a volume, so
+    # this closes an ABSENCE on the product side rather than correcting an error. It exists chiefly so
     # the cross-catalog seam cannot disagree with itself: a barcode resolving to both a paint and
     # a product must not have net contents on one side and silence on the other.
     #
     # NOTHING FEEDS IT YET AND THAT IS DELIBERATE. It flows the moment a source emits a `weightG`
     # hint (it is in resolve.attributes._HINT_FIELDS), and no source does today -- the only
-    # mass-shaped hint in the corpus is Shopify's `grams`, which is GROSS SHIPPING weight on 1,843
-    # observations (a brush 3 g, an 18 ml dropper 26-31 g) and must never be wired here.
+    # mass-shaped hint in the corpus is Shopify's `grams`, which is GROSS SHIPPING weight on well
+    # over a thousand observations (a brush 3 g, an 18 ml dropper 26-31 g) and must never be
+    # wired here.
     weightG: int | None = None
     status: str
     availability: str | None = None
@@ -60,29 +61,33 @@ class CanonicalProduct(BaseModel):
     # PAINT catalog, which this resolver deliberately never loads, so the resolved relation lives
     # in data/catalog/set-contents/ and is generated separately.
     #
-    # Measured 2026-08-07: `mfr-reaper` is the only source that states this today, on 29 of its 541
-    # observations, 802 refs in total, of which 800 (99.8%) name a paint that exists in
-    # data/paints/brands/reaper.yaml. Those 29 are 25% of Reaper's 115 boxed sets and 5.6% of the
-    # catalog's 516 -- small, and the reason it goes first is that it needs no acquisition at all,
-    # not that it is a big win. Every other brand states contents in prose inside a `description`
-    # that no live source captures yet.
+    # `mfr-reaper` WAS the only source that stated this, and the reason it went first is that it
+    # needed no acquisition at all, not that it was a big win: it hands us a machine-readable array
+    # and every one of its refs now resolves against data/paints/brands/reaper.yaml. That is no
+    # longer the whole picture. ak-interactive and warlord-games state their contents in prose
+    # inside a `description`, resolve/set_refs.py reads it, and AK is now by a wide margin the
+    # LARGEST of the three. Re-derive the current split from each file's own `counts` block under
+    # data/catalog/set-contents/.
     #
     # FIRST-WINS across kind-ordered members like every other hint, NOT a union: two sources
     # disagreeing about a box's contents is a conflict to surface, and unioning them would
     # fabricate a set neither one asserts.
     #
-    # QUANTITY IS NOT HERE and NO STRATEGY CHANGE CAN RECOVER IT -- the SOURCE never states it.
-    # This comment previously blamed `strategies/reaper.py::_content_skus` for building a SET, which
-    # was wrong in the way that costs someone a pointless re-acquire: it named a mechanism that is
-    # inert. Measured live 2026-08-07 over reapermini.com's three set-kind pages -- all 848
-    # `associatedProducts` entries on 31 set items carry exactly {sku, name, category, filename,
-    # material}, there is no count field of any kind, and 0 sets repeat a sku. So the set
-    # comprehension discards nothing on 100% of real data, and quantity is unknowable upstream.
-    # Should some future source state one, it lands in a SPARSE SIBLING field keyed by the same
-    # code, never by re-typing this list: absence must keep reading as "not stated", and a
-    # repeat-preserving list would silently assert a quantity of 1 on all 802 refs instead.
-    # The resolved relation in data/catalog/set-contents/ already reserves a per-member
-    # `quantity` key on the same terms, so a value arriving later is additive.
+    # QUANTITY IS NOT HERE, and for reaper no strategy change could recover it -- that SOURCE never
+    # states one. This comment previously blamed `strategies/reaper.py::_content_skus` for building
+    # a SET, which was wrong in the way that costs someone a pointless re-acquire: it named a
+    # mechanism that is inert. Measured live 2026-08-07 over reapermini.com's three set-kind pages,
+    # every `associatedProducts` entry carries exactly {sku, name, category, filename, material},
+    # there is no count field of any kind, and no set repeats a sku -- so that set comprehension
+    # discards nothing on real data.
+    #
+    # AK IS THE EXCEPTION, and it is why this field stays a plain list of codes. AK's prose DOES
+    # state per-member counts ("- 2x AK17080 - ..."), and resolve/set_refs.py captures them -- but
+    # they land on the MEMBER in data/catalog/set-contents/, never here, because absence in this
+    # list must keep reading as "not stated" and a repeat-preserving list would silently assert a
+    # quantity of 1 on every other ref. The relation reserves a per-member `quantity` key on
+    # exactly those terms (gen_set_contents.py::_stated_prose populates it), so a value arriving
+    # later is additive rather than a re-typing of this field.
     # `| None`, like every other member of `_HINT_FIELDS`: `_first` yields None when no source
     # states one, and None reads correctly as "this source said nothing about the contents",
     # which is a different claim from "this box is empty".
@@ -94,14 +99,17 @@ class CanonicalProduct(BaseModel):
     #   `associatedProducts`). Exhaustive by construction -- the field either lists the box or is
     #   absent.
     # - "description": resolve/set_refs.py read the refs out of the source's own prose. NOT
-    #   guaranteed exhaustive, and that is measured rather than cautious: live 2026-08-07 over the
-    #   256 AK boxed-set rows, 46 enumerate no codes at all while still stating a count in words
-    #   (AK11701 says 233 colours and lists none), and 6 print a second, explicitly NOT-INCLUDED
-    #   bulleted list in the identical shape. A prose list is editorial; an array is data.
+    #   guaranteed exhaustive, and that is measured rather than cautious: live 2026-08-07, a
+    #   substantial minority of AK's boxed-set rows enumerate no codes at all while still stating a
+    #   count in words (AK11701 says 233 colours and lists none), and a few print a second,
+    #   explicitly NOT-INCLUDED bulleted list in the identical shape. A prose list is editorial;
+    #   an array is data.
     #
     # None whenever `contentSkus` is None, and dropped from the published YAML by exclude_none, so
-    # adding it is byte-identical for every product that states no contents -- 22,476 of the
-    # 22,529 committed today, once the 24 derived sets land beside reaper's 29.
+    # adding it is byte-identical for every product that states no contents -- the overwhelming
+    # majority of the catalog. Only reaper's `stated` sets and the description-derived
+    # ak-interactive and warlord-games ones carry it. Re-derive by counting `contentSkusFrom:` in
+    # data/catalog/products/.
     contentSkusFrom: Literal["stated", "description"] | None = None
     evidence: list[str] = Field(default_factory=list)
 

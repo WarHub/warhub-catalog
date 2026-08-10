@@ -117,21 +117,23 @@ from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 MANUFACTURER_BRANDS = {
     "reaper": ["reaper"],
     # No longer inert. resolve/set_refs.py derives contentSkus from a set's own description, and
-    # measured 2026-08-07 that selects 24 warlord-games products -- the AK "Quick Gen" boxes
-    # Warlord resells -- carrying 90 refs. `ak-interactive` answers 87 of them; `army-painter` is
-    # listed beside it because 23 warlord product rows carry an Army Painter code, and measured, 0
-    # of these 90 refs resolve there, so naming both brands introduces no ambiguity today and
-    # states the real search space rather than a lucky one.
+    # measured 2026-08-07 that selects the warlord-games products which are AK "Quick Gen" boxes
+    # Warlord resells. `ak-interactive` answers nearly all of their refs; `army-painter` is listed
+    # beside it because some warlord product rows do carry an Army Painter code, and measured, NONE
+    # of these refs resolve there -- so naming both brands introduces no ambiguity today and states
+    # the real search space rather than a lucky one.
     "warlord-games": ["army-painter", "ak-interactive"],
-    # PRE-DECLARED AND INERT UNTIL `mfr-ak-interactive` IS NEXT ACQUIRED. The refusal rule above
-    # exists so a heuristic never picks a brand -- but the human it demands is the author of this
-    # commit, who has measured which archive answers these refs, so stating it now is the rule
-    # being followed rather than dodged. AK's 256 boxed-set product rows carry 0 descriptions today
-    # (the source's hint keys are exactly {category, categorySlugs} across all 1,142 observations),
-    # so this entry currently selects nothing. Once woo_paints.py's short_description capture lands
-    # in evidence and `warhub-data resolve` runs, live-measured 2026-08-07 against those same 256
-    # rows: 210 yield a member list, 1,210 refs -> 1,176 members, 33 refusals over 17 distinct
-    # codes, 0 ambiguous.
+    # NO LONGER PRE-DECLARED, AND NO LONGER INERT -- this entry was written BEFORE the acquire that
+    # made it live, and the note it carried has been overtaken. The refusal rule above exists so a
+    # heuristic never picks a brand; the human it demands was the author of the commit that added
+    # this line, who had already measured which archive answers these refs. That acquire has since
+    # landed: `mfr-ak-interactive` now captures `short_description`, AK's boxed-set rows carry
+    # descriptions, and resolve/set_refs.py reads their contents out of that prose.
+    #
+    # AK IS NOW THE LARGEST POPULATION IN THIS RELATION, by a wide margin -- more sets and more refs
+    # than warlord-games and reaper combined -- so anything that changes the description parse is
+    # felt here first. A small number of its refs land in `unresolved`; that is the rule working,
+    # not failing. Re-derive from data/catalog/set-contents/ak-interactive.yaml's own `counts`.
     "ak-interactive": ["ak-interactive"],
 }
 
@@ -154,9 +156,10 @@ HEADER = """\
 # games-workshop/citadel-colour).
 #
 # CODE NORMALISATION: a ref is tried verbatim, then with leading zeros stripped. Reaper's site
-# zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: all 802 refs are
-# 5 chars, the archive stores 0 codes with a leading zero, 744 refs match only after stripping
-# and 58 match verbatim (56 89xxx Bones Ultra-Coverage plus the two unresolved 29xxx). No ref
+# zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: every reaper ref is
+# 5 chars, the archive stores NO code with a leading zero, and most refs match only after
+# stripping -- the verbatim matches are the 89xxx Bones Ultra-Coverage block plus the 29xxx pair
+# the site names only inside a box (since acquired, so they now resolve rather than refuse). No ref
 # needs any other rule -- and AK needs none at all: its refs are alpha-prefixed, so `lstrip("0")`
 # is a no-op on every one of them, and the archive already stores the same zero-padded form the
 # source prints (AK004, AK012, AK088). Do NOT "helpfully" extend the rule to strip zeros after the
@@ -167,13 +170,13 @@ HEADER = """\
 # `from` ON A SET says where its refs came from, and the two are not the same claim. "stated" is a
 # machine-readable contents array the source published (mfr-reaper's `associatedProducts`) and is
 # exhaustive by construction. "description" is resolve/set_refs.py reading codes out of the
-# source's own prose, which is NOT guaranteed exhaustive -- measured live 2026-08-07, 46 of AK's
-# 256 boxed-set pages state a colour COUNT in words and enumerate nothing, and 6 print a second,
-# explicitly not-included bulleted list in the identical shape. Treat a "description" set as a
-# lower bound on the box; treat a "stated" one as the box.
+# source's own prose, which is NOT guaranteed exhaustive -- measured live 2026-08-07, a substantial
+# minority of AK's boxed-set pages state a colour COUNT in words and enumerate nothing at all, and
+# a few print a second, explicitly not-included bulleted list in the identical shape. Treat a
+# "description" set as a LOWER BOUND on the box; treat a "stated" one as the box.
 #
 # ONE PHYSICAL BOX MAY APPEAR TWICE, under two manufacturers, and that is intended rather than a
-# bug to de-duplicate. AK's 24 "Quick Gen" boxes are sold by Warlord too, and because AK publishes
+# bug to de-duplicate. AK's "Quick Gen" boxes are sold by Warlord too, and because AK publishes
 # ZERO barcodes anywhere the two product records can never join -- so `warlord-games/AK17522` and
 # `ak-interactive/AK17522` are two records of one box, each stating its contents from its own
 # source's words. This relation is keyed by PRODUCT id, not by box, so both belong in it; a test
@@ -191,31 +194,45 @@ HEADER = """\
 # laundered. This is the narrowest possible use of the second field: the first occurrence still
 # resolves by code alone, so the branch cannot overturn any verdict the code already reached, and
 # every uncertainty (no prose, misaligned prose, a name naming zero or several paints, or one
-# already in the box) still refuses. See _stated_names and _by_stated_name.
-# THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
-# hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
-# material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
-# has no `linePages` entry in data/catalog/sources/mfr-reaper.yaml, and 29107 is missing from
-# the Core Colors singles population. The fix is to extend the descriptor and re-acquire.
+# already in the box) still refuses. See _stated_prose and _by_stated_name.
+# A REFUSAL MAY BE A SOURCE COVERAGE GAP RATHER THAN BAD DATA -- do not "fix" one by hand-editing
+# the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 were exactly that: both are
+# material:"paint" on reapermini.com, but 29815's whole range (Master Series Paints High Density)
+# had no `linePages` entry in data/catalog/sources/mfr-reaper.yaml, and 29107 was missing from the
+# Core Colors singles population. The fix was to extend the descriptor and re-acquire, and that has
+# since been done -- both resolve today. The RULE is what to carry forward, not the example:
+# extend the source, never edit the archive to make a ref resolve.
 #
-# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX. They differ,
-# measured: reaper/08906's own description enumerates "09472-Dragon Blue" among its bottles
-# while `associatedProducts` instead lists 29815 "HD Dragon Blue". 09472 exists in the archive
-# and 29815 does not -- and the ref is still recorded as refused rather than repaired to 09472,
-# because a generator that rewrites a source's claim to make it resolve is worse than one that
-# refuses.
+# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX. They genuinely
+# differ: reaper/08906's own description enumerates "09472-Dragon Blue" among its bottles while
+# `associatedProducts` instead lists 29815 "HD Dragon Blue" -- two different pots, and the ARRAY is
+# what this file records. While 29815 was still unacquired that ref was recorded as REFUSED rather
+# than quietly repaired to the 9472 the archive did hold, because a generator that rewrites a
+# source's claim to make it resolve is worse than one that refuses. That principle outlives its
+# example: 29815 has since been acquired and now resolves on its own terms.
 #
 # QUANTITY. A member MAY carry `quantity: <int>` -- how many of that item the source states the
-# box contains. It is ABSENT on every member today and `counts.quantified` states that zero as
-# a number rather than as a silence. ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT; writing
-# `quantity: 1` everywhere would assert 800 facts reapermini.com never asserted and would be
-# unrecoverable, since a fabricated 1 is indistinguishable from a measured one. Measured
-# 2026-08-07 live against reapermini.com's three set-kind pages: all 848 `associatedProducts`
-# entries across 31 set items carry exactly {sku, name, category, filename, material} -- there
-# is no count field of any kind -- and 0 sets repeat a sku. So the set comprehension in
-# strategies/reaper.py::_content_skus discards nothing (it is a no-op on 100% of real data) and
-# NO strategy change can recover a quantity the source never states. A quantity arriving from
-# some future source ADDS this key to a member; it is not a schema change and needs no backfill.
+# box contains. ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT: writing `quantity: 1` everywhere
+# would assert a count for every member reapermini.com never counted, and would be unrecoverable,
+# since a fabricated 1 is indistinguishable from a measured one. `counts.quantified` therefore
+# reports how many counts were ASSERTED, as a number rather than as a silence.
+#
+# REAPER STATES NONE. Its `associatedProducts` entries carry {sku, name, category, filename,
+# material} and no count field of any kind (measured live 2026-08-07), so no strategy change can
+# recover a quantity from that source, and the set comprehension in
+# strategies/reaper.py::_content_skus discards nothing.
+#
+# AK STATES THEM IN PROSE, AND THEY NOW TRAVEL. `resolve/set_refs.py` captures a `- 2x AK17080 -`
+# prefix, and `_stated_prose` below carries it onto the member along the same proven alignment the
+# stated-name repair uses. Until that was wired the prefix was parsed and then dropped by
+# `content_skus_from_description`, so `quantified` was pinned at 0 by the PIPELINE rather than by
+# the sources -- it could not have reported a count even for a source that stated one.
+#
+# IT MAY STILL READ 0, and that is a different fact from "nobody states a count". A set enters this
+# relation only if its description enumerates at least two DISTINCT codes (see
+# `content_skus_from_description`), and the AK rows that state a quantity today enumerate exactly
+# one code each, so the floor excludes them before this key can apply. Re-derive the current split
+# with `enumerated_members` over the crossed AK rows.
 """
 
 
@@ -223,24 +240,43 @@ def _member_sort_key(member: dict) -> tuple:
     return (member["ref"], member.get("paint", ""))
 
 
-def _stated_names(product: dict) -> list[str] | None:
-    """The name the source printed BESIDE each code, positionally aligned to `contentSkus`.
+def _stated_prose(product: dict) -> list[tuple[str, str, int | None]] | None:
+    """What the source printed BESIDE each code -- name AND quantity -- aligned to `contentSkus`.
 
     None unless the alignment is PROVEN rather than assumed: the codes re-read out of the
-    description must equal `contentSkus` element-for-element, in order. Anything less and the
-    names are dropped -- a name attached to the wrong code is a fabricated fact, and this function
-    exists to repair exactly that kind of mistake, so it must not be able to make one.
+    description must equal `contentSkus` element-for-element, in order. Anything less and both the
+    name and the count are dropped -- either one attached to the wrong code is a fabricated fact,
+    and this function exists to repair exactly that kind of mistake, so it must not be able to
+    make one.
 
     None for a `stated` product too. A machine-readable contents array (reaper's
     `associatedProducts`) has no prose to re-read, so a repeat there stays refused: the source
     genuinely said the same code twice and said nothing else to tell the two apart.
+
+    THIS IS THE ONLY PATH A QUANTITY CAN TRAVEL, which is why this returns the whole triple rather
+    than just the names. `contentSkus` is a flat list of codes and carries no counts, so re-reading
+    the description HERE -- against an alignment the product record itself proves -- is what lets
+    the quantity prefix `resolve/set_refs.py` captures reach a member. Before this it was parsed
+    and then discarded one function later, so `counts.quantified` could only ever be 0.
     """
     if (product.get("contentSkusFrom") or "stated") != "description":
         return None
     enumerated = enumerated_members(product.get("description"))
     if [code for code, _, _ in enumerated] != list(product["contentSkus"]):
         return None
-    return [name for _, name, _ in enumerated]
+    return enumerated
+
+
+def _attach_quantity(member: dict, prose: list[tuple[str, str, int | None]] | None, index: int) -> None:
+    """Copy the source's stated per-member count onto `member`, when it stated one.
+
+    ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT -- so a member the source gave no count for
+    gets no key at all rather than a defaulted 1, and `counts.quantified` stays a count of what was
+    actually asserted rather than of what was assumed.
+    """
+    quantity = prose[index][2] if prose else None
+    if quantity is not None:
+        member["quantity"] = quantity
 
 
 def _by_stated_name(name: str | None, catalogs: list[Catalog]) -> tuple[Catalog, dict] | None:
@@ -278,7 +314,7 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
         members: list[dict] = []
         unresolved: list[dict] = []
         seen_refs: set[str] = set()
-        stated_names = _stated_names(product)
+        prose = _stated_prose(product)
         # Maintainer-declared repairs for codes THIS product mistypes, keyed by the ref as printed
         # (models/catalog.py::Overrides.setRefs). Nothing is computed here -- an entry exists only
         # because somebody wrote it and cited the evidence in overrides.yaml.
@@ -309,14 +345,14 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
             # repeats no sku in any of its 31 set items (measured live 2026-08-07 over 848
             # associatedProducts entries), and a `stated` product has no prose to consult anyway.
             if ref in seen_refs:
-                stated = stated_names[i] if stated_names else None
+                stated = prose[i][1] if prose else None
                 hit = _by_stated_name(stated, catalogs) if stated else None
                 if hit is not None and not any(
                     m["brand"] == hit[0].slug and m["paint"] == hit[0].key_of(hit[1])
                     for m in members
                 ):
                     catalog, paint = hit
-                    members.append({
+                    repaired = {
                         "ref": ref,
                         "brand": catalog.slug,
                         "paint": catalog.key_of(paint),
@@ -327,7 +363,9 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
                         # source's own code list was overruled, and by what.
                         "resolvedBy": "statedName",
                         "statedName": stated,
-                    })
+                    }
+                    _attach_quantity(repaired, prose, i)
+                    members.append(repaired)
                     continue
                 if not stated:
                     why = ("and the source states no name beside this occurrence to tell it "
@@ -377,6 +415,7 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
                     # disagrees with its ref, so `resolvedBy` sorts every overruled code into view
                     # whether a human or the source's own words did the overruling.
                     member["resolvedBy"] = "correction"
+                _attach_quantity(member, prose, i)
                 members.append(member)
             elif not hits:
                 # The reason NAMES THE TWO CASES, because they need opposite responses and the

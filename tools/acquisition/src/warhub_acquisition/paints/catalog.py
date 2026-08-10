@@ -50,12 +50,14 @@ class Catalog:
         # it, but first-wins cannot answer "does this code name exactly one paint?" -- it
         # answers "yes" unconditionally. A refusal branch built on it would be decorative.
         #
-        # Measured 2026-08-07 across all 21 brand files: 198 product codes are carried by more
-        # than one paint (ak-real-color 175, ak-interactive 13, coat-darmes 7, army-painter 1
-        # `WP1405`, mission-models 1 `MMP-096`, vallejo 1 `72.483`). reaper has 0 of its 492, so
-        # for today's only set-contents brand the several-paints branch is provably dead -- but
-        # it is dead by measurement, not by construction, and 15 of those duplicates sit in
-        # brands bridged live today.
+        # Across the brand files, a small number of product codes are carried by more than one
+        # paint -- today they sit in coat-darmes, mission-models (`MMP-096`) and vallejo
+        # (`72.483`). reaper carries none, so for the oldest set-contents brand this branch is
+        # provably dead. IT IS DEAD BY MEASUREMENT, NOT BY CONSTRUCTION, which is the whole reason
+        # the branch exists: the population moves. It was an order of magnitude larger when this
+        # was written (ak-real-color and ak-interactive held most of it) and shrank when AK's
+        # duplicate records were retracted, so do not read today's small number as a guarantee.
+        # Re-derive by counting repeated `productCode` values per file in data/paints/brands/.
         self._paints_by_code: dict[str, list[dict]] = {}
         self.by_name: dict[str, list[str]] = {}
         self.keys: set[str] = set()
@@ -120,11 +122,19 @@ class Catalog:
         case-insensitive), so this answers the question "will the C# actually land this entry,
         and on which paint?" rather than a second, differently-shaped guess.
 
-        Measured 2026-08-05: 66 ambiguous keys across the nine brands (57 Vallejo, 6 mr-hobby,
-        1 each ak-interactive / green-stuff-world / reaper), 35 of them carrying an enrich
-        entry -- every one Vallejo, which quotes no price at all. So this refuses nothing
-        today; it exists so that the first time a priced storefront ships a same-name,
-        same-set pair, the price is withheld instead of silently doubled onto both pots.
+        Ambiguous keys are concentrated in Vallejo, with a handful across mr-hobby,
+        ak-interactive and reaper; most of the ones carrying an enrich entry are Vallejo's.
+
+        THE CASE THIS GUARD WAS BUILT FOR HAS ARRIVED, so read the next sentence as live rather
+        than hypothetical. This comment used to say every enrich-bearing ambiguous key was
+        Vallejo's and that Vallejo "quotes no price at all", concluding the guard refuses nothing.
+        A PRICED one now exists -- ak-interactive `Grey Primer|Primer (3rd Gen)` carries a
+        priceEur -- so the price path is exercised, not theoretical. It still does not refuse,
+        but for a DIFFERENT reason than the old note gave: the two Grey Primer records carry
+        distinct product codes, so `owner()` settles the key on sku. If a source ever ships a
+        same-name, same-set pair that ALSO shares a code, this is what withholds the price
+        instead of silently doubling it onto both pots. Re-derive by intersecting each brand's
+        ambiguous keys with its harvest `enrich` block.
         """
         return key not in self.ambiguous or self.owner(key, sku) is not None
 

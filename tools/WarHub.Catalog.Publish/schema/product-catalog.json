@@ -23,7 +23,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "manufacturer-slug/product-code-or-name-slug. The suffix keeps the MANUFACTURER'S OWN CASING for a product code (CP01, MGKWB112, 101010004SP) -- 6,829 of 22,013 ids contain an uppercase letter -- so this pattern is deliberately laxer than paint-catalog.json's all-lowercase one. The two catalogs have different id grammars ON PURPOSE: lowercasing product ids would break every supersedes/supersededBy pointer and every stored consumer link. Cross-catalog references therefore carry explicit id fields (paintIds/productIds) rather than assuming one shared shape.",
+          "description": "manufacturer-slug/product-code-or-name-slug. The suffix keeps the MANUFACTURER'S OWN CASING for a product code like CP01, MGKWB112, or 101010004SP; many contain uppercase letters, so this pattern is deliberately laxer than paint-catalog.json's all-lowercase one. The two catalogs have different id grammars ON PURPOSE: lowercasing product ids would break every supersedes/supersededBy pointer and every stored consumer link. Cross-catalog references therefore carry explicit id fields (paintIds/productIds) rather than assuming one shared shape.",
           "pattern": "^[a-z0-9-]+/[A-Za-z0-9-]+$"
         },
         "manufacturer": { "type": "string" },

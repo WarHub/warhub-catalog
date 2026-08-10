@@ -7,7 +7,7 @@ from warhub_acquisition.resolve.set_refs import content_skus_from_description
 
 # `weightG` is NET CONTENTS in grams for a product sold by mass (added 2026-08-06), first-wins
 # across the kind-ordered members exactly like `volumeMl` beside it. It is NOT Shopify's `grams`
-# hint, which is gross shipping weight on 1,843 observations and stays out of this tuple.
+# hint, which is gross shipping weight and stays out of this tuple.
 # `contentSkus` is LIST-valued, unlike every other member of this tuple, and folds the same way:
 # `_first` takes the highest-priority source's list WHOLE. That is deliberate -- see
 # CanonicalProduct.contentSkus. Unioning two sources' contents claims would assert a box neither
@@ -99,11 +99,14 @@ def resolve_attributes(
     # since it is written only from hints, and whose coverage test cross-checks the relation
     # against exactly this field). See resolve/set_refs.py, which argues all four candidate homes.
     #
-    # Measured 2026-08-07 over all 22,529 committed products (11,503 with a description): 24
-    # products derive a list, all `warlord-games`, 90 refs, 0 false positives anywhere else in the
-    # corpus. Those 24 are the AK "Quick Gen" boxes Warlord resells, and their descriptions come
-    # from `legacy-catalog` -- a frozen curated import with `strategy: none`, so no strategy
-    # change could ever have produced them.
+    # Both `warlord-games` and `ak-interactive` derive contents from descriptions, with
+    # `ak-interactive` by far the dominant population. When this path was first measured
+    # (2026-08-07) Warlord was the ONLY population, which is why older notes describe it that way;
+    # AK's own boxed sets arrived later and now outnumber it heavily. The Warlord entries are AK
+    # "Quick Gen" boxes Warlord resells; their descriptions come from `legacy-catalog` -- a frozen
+    # curated import with `strategy: none`, so no strategy change could ever have produced them.
+    # Re-derive with `content_skus_from_description` over the committed product descriptions, or
+    # count `contentSkusFrom: description` in data/catalog/products/.
     if fields["contentSkus"] is None and fields["description"]:
         derived = content_skus_from_description(str(fields["description"]))
         if derived:
