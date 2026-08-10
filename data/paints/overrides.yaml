@@ -41,6 +41,233 @@ additions:
       set: Contrast
       productCode: '99189960061'
       source: Games Workshop trade announcement, 2022-07-16 Contrast wave
+  # --- Green Stuff World dipping inks: the MISSING 17 ml pot of 31 colours (2026-08-06) --------
+  # greenstuffworld.com sells these 31 colours in two pots -- 17 ml at EUR 2.125 and 60 ml at
+  # EUR 3.7375, separate skus with separate gtin13s -- and the paint catalog has ONE record per
+  # colour. `suffix_match` (gen_paint_harvest.py:1199) joins on the longest catalog name a store
+  # title ENDS with, and GSW writes the volume mid-title ("Dipping ink 60 ml - PAPYRUS DIP"), so
+  # both pots claimed the same bare archived name and first-wins gave that record the 60 ml row's
+  # ean, priceEur and imageUrl. The 17 ml pot reached nothing: measured 2026-08-06, its 31
+  # barcodes are held by no record in data/paints/brands/*.yaml, no product in
+  # data/catalog/products/*.yaml, and appear nowhere under data/ outside the evidence file and
+  # its cursor. These entries are that pot, and the field-override block at the bottom of this
+  # file is the other half of the same repair -- read them together.
+  #
+  # THE GENERATOR CANNOT DO THIS, WHICH IS WHY EACH ENTRY CARRIES ITS OWN ean AND imageUrl.
+  # Simulated 2026-08-06 with all 31 records already in the archive: bridge_gsw's output is
+  # unchanged -- enrich 174, additions 161, candidates 142, +0/-0 on all three. `suffix_match`
+  # stays volume-blind (norm("Dipping ink 17 ml - Papyrus Dip") ends with `papyrusdip`, never
+  # `papyrusdip17ml`), so both rows still contest the bare key and both still land in
+  # `candidates`, where a candidate carries no ean and no image (9789741). Minting is necessary
+  # and not sufficient, exactly as suffix_match's own comment says.
+  #
+  # NOTHING BELOW IS TRANSCRIBED. Each entry is joined to the observations row whose `sku` is its
+  # productCode: `ean` (all 31 pass the EAN-13 check digit), `imageUrl` (whose filename states the
+  # volume: dipping-ink-17-ml-<slug>.jpg), and `hints.ml == 17` on all 31. `name` is
+  # `gsw_clean_name` (gen_paint_harvest.py:1164) applied to the store title, spelling included --
+  # so if bridge_gsw ever promotes these rows to `additions`, HarvestApplier runs first
+  # (PaintCatalogApp.cs:210) and this block dedups on the identical {Name}|{Set}|{ProductCode}
+  # triple (OverrideApplier.cs:132-141) instead of minting a twin.
+  #
+  # WHAT A PaintAddition CANNOT SAY (:291-302 -- no price, no volume, no hex), and where each of
+  # those comes from instead:
+  #   * priceEur: asserted per colour in the field-override block at the bottom of this file.
+  #   * volumeMl: correct for free. AppendAdditions runs at PaintCatalogApp.cs:217, BEFORE
+  #     VolumeEnricher (:223), and VolumeTable.cs:101's brand-wide rule ("Green Stuff World",
+  #     null, 17, "dropper") is right for a 17 ml dropper. It is wrong for 81 other GSW records;
+  #     that is the deferred change described at the bottom of this file.
+  #   * hex: born empty, like 66 of the brand's 381 records. swatch-sources.yaml's `chip-dipping`
+  #     item-image chart samples this exact shape from the catalog imageUrl -- `Green Stone Dip
+  #     17 ml|Dipping Inks|4220` in data/paints/swatches/green-stuff-world.yaml is the precedent,
+  #     minted the same way -- and the auto-alias pass (PaintCatalogApp.cs:483-490) then merges
+  #     the hexed identity onto the hexless one instead of stranding it.
+  green-stuff-world:
+    - name: Acid Green Dip 17 ml
+      set: Dipping Inks
+      productCode: '4234'
+      ean: '8435646515946'
+      imageUrl: https://www.greenstuffworld.com/29540-large_default/dipping-ink-17-ml-acid-green-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Amberglow Dip 17 ml
+      set: Dipping Inks
+      productCode: '4232'
+      ean: '8435646515922'
+      imageUrl: https://www.greenstuffworld.com/29534-large_default/dipping-ink-17-ml-amberglow-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Azure Dip 17 ml
+      set: Dipping Inks
+      productCode: '4229'
+      ean: '8435646515892'
+      imageUrl: https://www.greenstuffworld.com/29112-large_default/dipping-ink-17-ml-azure-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Blue Glacier Dip 17 ml
+      set: Dipping Inks
+      productCode: '4242'
+      ean: '8435646516028'
+      imageUrl: https://www.greenstuffworld.com/27992-large_default/dipping-ink-17-ml-blue-glacier-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Burgundy Dip 17 ml
+      set: Dipping Inks
+      productCode: '4237'
+      ean: '8435646515977'
+      imageUrl: https://www.greenstuffworld.com/30774-large_default/dipping-ink-17-ml-burgundy-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Cool Blue Dip 17 ml
+      set: Dipping Inks
+      productCode: '4221'
+      ean: '8435646515816'
+      imageUrl: https://www.greenstuffworld.com/29019-large_default/dipping-ink-17-ml-cool-blue-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Deep Black Dip 17 ml
+      set: Dipping Inks
+      productCode: '4238'
+      ean: '8435646515984'
+      imageUrl: https://www.greenstuffworld.com/30778-large_default/dipping-ink-17-ml-deep-black-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Dusty Blue Dip 17 ml
+      set: Dipping Inks
+      productCode: '4222'
+      ean: '8435646515823'
+      imageUrl: https://www.greenstuffworld.com/29022-large_default/dipping-ink-17-ml-dusty-blue-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Elfwood Brown Dip 17 ml
+      set: Dipping Inks
+      productCode: '4224'
+      ean: '8435646515847'
+      imageUrl: https://www.greenstuffworld.com/30106-large_default/dipping-ink-17-ml-elfwood-brown-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Garnet Purple Dip 17 ml
+      set: Dipping Inks
+      productCode: '4218'
+      ean: '8435646515786'
+      imageUrl: https://www.greenstuffworld.com/29552-large_default/dipping-ink-17-ml-garnet-purple-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Glorious Magenta Dip 17 ml
+      set: Dipping Inks
+      productCode: '4219'
+      ean: '8435646515793'
+      imageUrl: https://www.greenstuffworld.com/29001-large_default/dipping-ink-17-ml-glorious-magenta-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Goth Skin Dip 17 ml
+      set: Dipping Inks
+      productCode: '4236'
+      ean: '8435646515960'
+      imageUrl: https://www.greenstuffworld.com/30768-large_default/dipping-ink-17-ml-goth-skin-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Green Ghost Dip 17 ml
+      set: Dipping Inks
+      productCode: '4226'
+      ean: '8435646515861'
+      imageUrl: https://www.greenstuffworld.com/30126-large_default/dipping-ink-17-ml-green-ghost-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Green Shark Skin Dip 17 ml
+      set: Dipping Inks
+      productCode: '4246'
+      ean: '8435646516066'
+      imageUrl: https://www.greenstuffworld.com/30862-large_default/dipping-ink-17-ml-green-shark-skin-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Grey Mist Dip 17 ml
+      set: Dipping Inks
+      productCode: '4247'
+      ean: '8435646516073'
+      imageUrl: https://www.greenstuffworld.com/30315-large_default/dipping-ink-17-ml-grey-mist-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Hulky Green Dip 17 ml
+      set: Dipping Inks
+      productCode: '4227'
+      ean: '8435646515878'
+      imageUrl: https://www.greenstuffworld.com/29087-large_default/dipping-ink-17-ml-hulky-green-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Limelight Dip 17 ml
+      set: Dipping Inks
+      productCode: '4233'
+      ean: '8435646515939'
+      imageUrl: https://www.greenstuffworld.com/29455-large_default/dipping-ink-17-ml-limelight-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Misted Yellow Dip 17 ml
+      set: Dipping Inks
+      productCode: '4215'
+      ean: '8435646515755'
+      imageUrl: https://www.greenstuffworld.com/29340-large_default/dipping-ink-17-ml-misted-yellow-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Morrow Purple Dip 17 ml
+      set: Dipping Inks
+      productCode: '4244'
+      ean: '8435646516042'
+      imageUrl: https://www.greenstuffworld.com/30854-large_default/dipping-ink-17-ml-morrow-purple-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Ork Flesh Dip 17 ml
+      set: Dipping Inks
+      productCode: '4228'
+      ean: '8435646515885'
+      imageUrl: https://www.greenstuffworld.com/29450-large_default/dipping-ink-17-ml-ork-flesh-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Papyrus Dip 17 ml
+      set: Dipping Inks
+      productCode: '4214'
+      ean: '8435646515748'
+      imageUrl: https://www.greenstuffworld.com/30760-large_default/dipping-ink-17-ml-papyrus-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Purple Vanity Dip 17 ml
+      set: Dipping Inks
+      productCode: '4245'
+      ean: '8435646516059'
+      imageUrl: https://www.greenstuffworld.com/30858-large_default/dipping-ink-17-ml-purple-vanity-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Radiant Orange Dip 17 ml
+      set: Dipping Inks
+      productCode: '4216'
+      ean: '8435646515762'
+      imageUrl: https://www.greenstuffworld.com/28996-large_default/dipping-ink-17-ml-radiant-orange-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Red Cloak Dip 17 ml
+      set: Dipping Inks
+      productCode: '4217'
+      ean: '8435646515779'
+      imageUrl: https://www.greenstuffworld.com/29440-large_default/dipping-ink-17-ml-red-cloak-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Red Opulence Dip 17 ml
+      set: Dipping Inks
+      productCode: '4248'
+      ean: '8435646516080'
+      imageUrl: https://www.greenstuffworld.com/30866-large_default/dipping-ink-17-ml-red-opulence-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Seraphim Flesh Dip 17 ml
+      set: Dipping Inks
+      productCode: '4240'
+      ean: '8435646516004'
+      imageUrl: https://www.greenstuffworld.com/29133-large_default/dipping-ink-17-ml-seraphim-flesh-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Skeleton Brown Dip 17 ml
+      set: Dipping Inks
+      productCode: '4225'
+      ean: '8435646515854'
+      imageUrl: https://www.greenstuffworld.com/30116-large_default/dipping-ink-17-ml-skeleton-brown-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Turquoise Ghost Dip 17 ml
+      set: Dipping Inks
+      productCode: '4235'
+      ean: '8435646515953'
+      imageUrl: https://www.greenstuffworld.com/29545-large_default/dipping-ink-17-ml-turquoise-ghost-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Violet Hint Dip 17 ml
+      set: Dipping Inks
+      productCode: '4243'
+      ean: '8435646516035'
+      imageUrl: https://www.greenstuffworld.com/30850-large_default/dipping-ink-17-ml-violet-hint-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Yellow Submarine Dip 17 ml
+      set: Dipping Inks
+      productCode: '4239'
+      ean: '8435646515991'
+      imageUrl: https://www.greenstuffworld.com/30846-large_default/dipping-ink-17-ml-yellow-submarine-dip.jpg
+      source: mfr-greenstuffworld
+    - name: Zombie Dip 17 ml
+      set: Dipping Inks
+      productCode: '4223'
+      ean: '8435646515830'
+      imageUrl: https://www.greenstuffworld.com/29081-large_default/dipping-ink-17-ml-zombie-dip.jpg
+      source: mfr-greenstuffworld
 
 # Renames. `{Set}|{Name}|{ProductCode}|{Hex}` (NOT the `{Name}|{Set}` grammar of the field
 # overrides below), NEW key -> OLD key, whole-string NFKC/whitespace/case-normalized by
@@ -283,3 +510,209 @@ citadel-colour:
   Nighthaunt Gloom|Technical:
     supersededBy: Nighthaunt Gloom|Contrast
     isDiscontinued: true
+
+# --- Green Stuff World dipping inks: WHICH POT the bare record is (decided 2026-08-06) ----------
+# 31 `volumeMl: 60` assertions and 31 `priceEur` assertions, one pair per colour. They are the
+# second half of the `additions:` block at the top of this file; neither half is correct alone.
+#
+# THE DECISION, AND IT IS A DECISION. `Papyrus Dip` carries ean 8435646508412, priceEur 3.7375 and
+# .../dipping-ink-60-ml-papyrus-dip.jpg. All three belong to sku 3481, the 60 ml pot, and are
+# byte-identical to its evidence row on 31/31 records -- only `volumeMl: 17` disagrees. So the
+# record is declared to BE the 60 ml pot, and the 17 ml pot is minted beside it. The rival reading
+# (a 17 ml record wearing three of the 60 ml pot's fields) fits the same bytes; it is rejected
+# because it needs three fields rewritten and this needs one, and because `imageUrl` is not
+# overridable at all (PaintOverride, OverrideApplier.cs:251-288, has no such field and `Apply`
+# never assigns ImageUrl), so under that reading the record would keep a 60 ml photo forever.
+#
+# WHY NOT JUST CORRECT THE ean, which is the obvious repair. Nothing in this pipeline can REMOVE a
+# barcode from a surviving record: the displaced value is unioned straight back as `additionalEans`
+# (OverrideApplier.cs:83, and PaintRecordAdapter.cs:31 does it again in Merge). A 60 ml pot's
+# gtin13 would then be published as an alternate barcode of a 17 ml pot -- the exact "factual lie"
+# report.py:200-203 says the ean-guard was loosened to avoid -- and since `_check_paints` keys
+# holders on (brand, role) at :227-240, the demotion reports as `paint_moved` and exits 0 (only
+# `lost`/`paint_lost` reaches the exit-5 branch at cli.py:355). That repair fails
+# silently and green, which is worse than failing loudly.
+#
+# WHY THE RECORDS ARE NOT RENAMED TO `X 60 ml`, which would be the symmetric shape. All 31 are
+# Arcturus-origin -- firstSeen 2026-07-10, no productCode; the partition is exact (220 Arcturus /
+# 161 harvest over 381 records) and all 31 appear in the initial import a3ca2c6, which carries 220
+# records and zero eans. The base source therefore re-asserts their identity key on every run, so
+# `consumed` is seeded with it (CatalogReconciler.cs:40-46) and an `aliases:` entry is refused at
+# :84. The three GSW aliases above only fire because `Green Stone Dip` and `Nightshade Purple Dip`
+# are harvest-minted names Arcturus never supplied -- while "Nightsahde", the store's typo, IS in
+# that import. Renaming these would need `retract:`: 31 deleted records, 31 firstSeen dates reset
+# to today, 31 archived hexes to re-assert by hand. The asymmetry that buys (`Papyrus Dip` = 60 ml
+# beside `Papyrus Dip 17 ml`) is a price already paid elsewhere in this set -- see `Nightsahde
+# Purple Dip` beside `Nightshade Purple Dip 17 ml`.
+#
+# WHAT MOVES: NOTHING. No `ean:` is overridden anywhere in this block, so `BarcodeSet.Union` drops
+# the one value equal to the primary and not a single `additionalEans` entry is written. The 31
+# sixty-ml barcodes stay the primary `ean` of the same record in the same brand file, which
+# `_check_paints` answers with no finding at all -- not even an informational `moved` -- and the 31
+# seventeen-ml barcodes are new, so HEAD attests nothing about them. Predicted `warhub-data report
+# --ean-guard` after the tool runs: paint_lost 0, paint_moved 0, exit 0. (Measured green on this
+# tree before the edit, and again after it -- the guard reads brands/ and products/, and this
+# commit changes neither.)
+#
+# THE ARCHIVE DOES NOT CHANGE IN THIS COMMIT, DELIBERATELY. Only the paint tool writes
+# data/paints/brands/green-stuff-world.yaml and it is not run here: all 31 records still say
+# `volumeMl: 17`, and the 31 minted pots do not exist yet. Reading this block as already applied is
+# the mistake to avoid.
+#
+# DELIBERATELY NOT FIXED HERE, so the asymmetry is visible rather than an oversight. `volumeMl: 17`
+# is wrong on 81 OTHER GSW records, two of which are dipping inks and will sit right beside these:
+# `Green Stone Dip 60 ml` (3487) and `Nightsahde Purple Dip` (ean 8435646508580 = sku 3498, 60 ml).
+# Neither is a collision -- their 17 ml siblings are ALREADY held correctly by `Green Stone Dip
+# 17 ml` (4220) and `Nightshade Purple Dip 17 ml` (4231), so nothing is unhomed and there is
+# nothing to mint; only the volume is wrong. Measured 2026-08-06, joining every record's ean to
+# observations.jsonl on `hints.ml`: 369 records carry an ean, 369 join, 127 joins carry an ml hint,
+# 112 contradict `volumeMl: 17` (60 ml x44, 240 ml x30, 30 ml x20, 400 ml x18). 31 of the 112 are
+# this block; the other 81 are one brand-wide rule -- VolumeTable.cs:101, written unconditionally
+# by VolumeEnricher.cs:26-30 -- which also stamps `container: dropper` on 18 aerosol cans. Fixing
+# that is a C# change to the volume tables sized at 81 records + 18 containers, sharing no code, no
+# failure mode and no barcode exposure with this one, and it will additionally have to cover the 31
+# pots minted here: they are born at 17 ml, which is right, but their bare 60 ml partners are only
+# right because of the `volumeMl: 60` lines below.
+green-stuff-world:
+  # The bare Arcturus record IS the 60 ml pot: on all 31, its ean, priceEur and imageUrl
+  # are the 60 ml sku's, and VolumeTable.cs:101's brand-wide 17 is the one field that
+  # contradicts them.
+  Acid Green Dip|Dipping Inks:
+    volumeMl: 60
+  Amberglow Dip|Dipping Inks:
+    volumeMl: 60
+  Azure Dip|Dipping Inks:
+    volumeMl: 60
+  Blue Glacier Dip|Dipping Inks:
+    volumeMl: 60
+  Burgundy Dip|Dipping Inks:
+    volumeMl: 60
+  Cool Blue Dip|Dipping Inks:
+    volumeMl: 60
+  Deep Black Dip|Dipping Inks:
+    volumeMl: 60
+  Dusty Blue Dip|Dipping Inks:
+    volumeMl: 60
+  Elfwood Brown Dip|Dipping Inks:
+    volumeMl: 60
+  Garnet Purple Dip|Dipping Inks:
+    volumeMl: 60
+  Glorious Magenta Dip|Dipping Inks:
+    volumeMl: 60
+  Goth Skin Dip|Dipping Inks:
+    volumeMl: 60
+  Green Ghost Dip|Dipping Inks:
+    volumeMl: 60
+  Green Shark Skin Dip|Dipping Inks:
+    volumeMl: 60
+  Grey Mist Dip|Dipping Inks:
+    volumeMl: 60
+  Hulky Green Dip|Dipping Inks:
+    volumeMl: 60
+  Limelight Dip|Dipping Inks:
+    volumeMl: 60
+  Misted Yellow Dip|Dipping Inks:
+    volumeMl: 60
+  Morrow Purple Dip|Dipping Inks:
+    volumeMl: 60
+  Ork Flesh Dip|Dipping Inks:
+    volumeMl: 60
+  Papyrus Dip|Dipping Inks:
+    volumeMl: 60
+  Purple Vanity Dip|Dipping Inks:
+    volumeMl: 60
+  Radiant Orange Dip|Dipping Inks:
+    volumeMl: 60
+  Red Cloak Dip|Dipping Inks:
+    volumeMl: 60
+  Red Opulence Dip|Dipping Inks:
+    volumeMl: 60
+  Seraphim Flesh Dip|Dipping Inks:
+    volumeMl: 60
+  Skeleton Brown Dip|Dipping Inks:
+    volumeMl: 60
+  Turquoise Ghost Dip|Dipping Inks:
+    volumeMl: 60
+  Violet Hint Dip|Dipping Inks:
+    volumeMl: 60
+  Yellow Submarine Dip|Dipping Inks:
+    volumeMl: 60
+  Zombie Dip|Dipping Inks:
+    volumeMl: 60
+  # The two Dipping Inks records that are NOT part of the 31-pot repair above, because their
+  # 60 ml ean/price/imageUrl were already correct and their 17 ml siblings already exist as
+  # separate records (4220, 4231). Only `volumeMl` was ever wrong on them, and unlike the other
+  # 79 records Group 2 defers -- which need a per-product volume the table cannot express -- these
+  # two are reachable by exactly the mechanism used above. Leaving them at 17 would put two
+  # records saying 17 ml beside 31 saying 60 ml in the same set, one of them NAMED `60 ml`.
+  # Verified 2026-08-06 against the evidence: 8435646508474 is sku 3487 at hints.ml 60, and
+  # 8435646508580 is sku 3498 at hints.ml 60 (the "Nightsahde" spelling is the store's own typo,
+  # carried verbatim because it is the archived name and renaming it is a separate decision).
+  Green Stone Dip 60 ml|Dipping Inks:
+    volumeMl: 60
+  Nightsahde Purple Dip|Dipping Inks:
+    volumeMl: 60
+  # List price of the pots minted at the top of this file -- a PaintAddition carries no
+  # price. EUR 2.125 is the observations row named by each mint's productCode, 31/31.
+  Acid Green Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Amberglow Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Azure Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Blue Glacier Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Burgundy Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Cool Blue Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Deep Black Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Dusty Blue Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Elfwood Brown Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Garnet Purple Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Glorious Magenta Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Goth Skin Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Green Ghost Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Green Shark Skin Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Grey Mist Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Hulky Green Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Limelight Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Misted Yellow Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Morrow Purple Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Ork Flesh Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Papyrus Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Purple Vanity Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Radiant Orange Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Red Cloak Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Red Opulence Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Seraphim Flesh Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Skeleton Brown Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Turquoise Ghost Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Violet Hint Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Yellow Submarine Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
+  Zombie Dip 17 ml|Dipping Inks:
+    priceEur: 2.125
