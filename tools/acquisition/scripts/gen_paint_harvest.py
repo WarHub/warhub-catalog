@@ -362,6 +362,27 @@ class Catalog:
                 self.by_code.setdefault(code, key)
             self.by_name.setdefault(norm(p["name"]), []).append(key)
 
+    def owner(self, key: str, sku: str | None) -> dict | None:
+        """WHICH of the paints answering to `key` this entry's `sku` names -- None if not one.
+
+        The lookup HarvestApplier performs (`r.ProductCode == entry.Sku`, ordinal
+        case-insensitive). None for a blank sku, for a sku no paint under this key carries, and
+        for a sku two of them somehow share. Identity is the dict itself: two paints are the
+        same paint iff they are the same record, so callers compare with `id()` rather than
+        re-deriving a key the archive may spell twice.
+
+        `pins` asks "will the C# land this entry at all"; this asks "on WHICH pot". They differ
+        exactly where the key is NOT ambiguous: `pins` is then True for any sku (there is only
+        one paint, the C# needs no tie-break), while this is None unless the sku really is that
+        paint's product code. `BrandHarvest.add_enrich` needs the second question -- see there.
+        """
+        code = (sku or "").casefold()
+        if not code:
+            return None
+        owners = [p for p in self.by_key.get(key, [])
+                  if str(p.get("productCode") or "").casefold() == code]
+        return owners[0] if len(owners) == 1 else None
+
     def pins(self, key: str, sku: str | None) -> bool:
         """Does this enrich entry name exactly ONE catalog paint?
 
@@ -376,14 +397,7 @@ class Catalog:
         today; it exists so that the first time a priced storefront ships a same-name,
         same-set pair, the price is withheld instead of silently doubled onto both pots.
         """
-        if key not in self.ambiguous:
-            return True
-        code = (sku or "").casefold()
-        if not code:
-            return False
-        owners = [p for p in self.by_key.get(key, [])
-                  if str(p.get("productCode") or "").casefold() == code]
-        return len(owners) == 1
+        return key not in self.ambiguous or self.owner(key, sku) is not None
 
     def match_code(self, code: str | None) -> str | None:
         return self.by_code.get(code or "")
@@ -413,16 +427,169 @@ def pinned_price(catalog: Catalog, key: str, sku: str | None, observation: dict,
 
 
 class BrandHarvest:
-    def __init__(self) -> None:
+    def __init__(self, catalog: "Catalog | None" = None) -> None:
         self.enrich: dict[str, dict] = {}
         self.additions: list[dict] = []
         self.candidates: list[dict] = []
+        # The brand catalog this harvest enriches, when the bridge has one. `add_enrich` needs it
+        # to tell a key TWO paints answer to from a key ONE paint answers to; without it every
+        # rival claim is treated as the second, which is the safe direction. See add_enrich.
+        self.catalog = catalog
+        # Every store product that has claimed an enrich key, in arrival order, and the subset of
+        # keys whose claims disagree about which product they are. See add_enrich.
+        self.claims: dict[str, list[dict]] = {}
+        self.contested: dict[str, list[dict]] = {}
 
-    def add_enrich(self, key: str, **fields: object) -> None:
+    def routes_by_sku(self, key: str, claims: list[dict]) -> bool:
+        """Do these rival claims each name a DIFFERENT catalog paint under one `{Name}|{Set}`?
+
+        The whole of the two-mode distinction in `add_enrich`. True only when the catalog is
+        known, every distinct sku among the claims resolves through `Catalog.owner` to exactly
+        one paint, and those paints are pairwise different records. Then the collision is in the
+        KEY, not in the evidence: the C# routes each entry by sku and each lands correctly.
+        """
+        if self.catalog is None:
+            return False
+        skus = {str(c.get("sku") or "") for c in claims}
+        owners = [self.catalog.owner(key, sku) for sku in skus]
+        if any(owner is None for owner in owners):
+            return False
+        return len({id(owner) for owner in owners}) == len(owners)
+
+    def add_enrich(self, key: str, **fields: object) -> bool:
+        """File ONE store product's evidence under ONE catalog identity. False = withheld.
+
+        THIS USED TO BE A FIRST-WINS MERGE UNCONDITIONALLY, and that is the bug (2026-08-06).
+        The body was `if v not in (None, "") and k not in entry`, over a dict `setdefault` had
+        already created -- so when two DIFFERENT store products claimed the same `{Name}|{Set}`,
+        the second one's ean, imageUrl, price and sku all hit `k in entry` and vanished. Not
+        overwritten, not reported: gone, with the winner decided by observations.jsonl row
+        order. Measured here, on this branch, against HEAD's generator and HEAD's harvest files
+        (the ratchet reads them, so a regenerated tree undercounts monument): 43 keys were
+        claimed twice or more and 48 rows were discarded that way --
+
+            green-stuff-world  34 keys / 39 rows     ak-interactive  0 / 0
+            vallejo             4 /  4               army-painter    0 / 0
+            monument-pro-acryl  4 /  4               turbo-dork      0 / 0
+            scale75             1 /  1               reaper          0 / 0
+                                                     mr-hobby        0 / 0
+
+        -- and the loss was not hypothetical: three monument-pro-acryl records (Blue, Orange,
+        Shadow Flesh) carry a 22 ml Pro Acryl 1-Step bottle's EAN, photo and $6.00 price today
+        because the 1-Step row sat earlier in the file than the dropper's own.
+
+        BUT THOSE 43 KEYS ARE TWO DIFFERENT FAILURES, and only one of them is a corruption.
+
+        MODE B -- ONE catalog paint, N store products (gsw 34, monument 4, scale75 1). The entry
+        would put one product's barcode, photo and price onto a paint that is a different
+        product. REFUSED, by the C#'s own rule read from the other end:
+        `HarvestApplier.ApplyEnrichment` meets one entry against N paints and declines because
+        "guessing which of two paints a photo belongs to is worse than leaving both blank"
+        (HarvestApplier.cs:183). A rival claim marks the key contested, drops whatever the first
+        claim filed, and every later claim on it is withheld too.
+
+        MODE A -- ONE catalog KEY, N catalog PAINTS, each store product naming its own (vallejo
+        4, all of vallejo's). `Black|Game Color` is 72.051 AND 72.094; the store ships both and
+        each row's sku is the exact `productCode` of one of them. Nothing is at risk here,
+        because the C# does not route by key alone -- `ApplyEnrichment` disambiguates an
+        ambiguous key by `entry.Sku`, so the entry lands on the correct pot. `enrich` is a dict
+        keyed by identity, so only ONE of the two can be carried; that is a partial gain (one
+        paint enriched, one not), not a wrong value on a right paint. FIRST-WINS IS KEPT, and
+        refusing here would have cost 4 correct imageUrls to prevent nothing -- mfr-vallejo
+        quotes no ean and no price, so those entries carry a photo and a source URL and nothing
+        else. `routes_by_sku` above is the test, and it is `Catalog.owner`, i.e. the same lookup
+        the C# does, rather than a second differently-shaped guess.
+
+        The two modes are distinguished by the CATALOG, not by the store, which is why
+        `BrandHarvest` now takes one. With no catalog (a bare `BrandHarvest()` in a test) every
+        rival claim is Mode B: refusing is the safe default when nothing can vouch for routing.
+
+        `sku` is the rivalry test because it is the only thing an entry carries that names the
+        PRODUCT rather than the paint (and it is exactly what the C# disambiguates on). TWO
+        HONEST LIMITS OF THAT, both measured over all nine bridges on this branch --
+
+          * A repeat claim under the SAME non-blank sku still merges first-wins, so two rows of
+            one product that CONFLICT on a non-blank field lose the second silently. Not
+            reported, and not a property of this rule: it is a property of the data. Across
+            3,217 `add_enrich` calls there are ZERO repeat claims on any key under one sku (nor
+            any with both skus blank, which this rule would likewise read as one product). The
+            branch has never fired. mr-hobby, the one bridge that genuinely unions two sources
+            per identity, does it INSIDE a single call -- the manufacturer pass fills a
+            `confirmed` dict and the retailer pass reads it (see bridge_mrhobby) -- so it never
+            claims a key twice. The branch is kept because "the same product seen twice is not
+            two products" is the correct rule, not because anything needs it today; if a source
+            ever does file one identity from two rows, that silence is the thing to revisit.
+          * So "nothing leaves in silence" is a guarantee about RIVAL products only.
+
+        Detection lives here, in the one place all nine bridges pass through, because the
+        mechanism is shared even where the evidence is not: bridge_monument can settle its four
+        keys with a product code and does (see its two-pass join), bridge_gsw has no code to
+        settle anything with and routes its 34 to `candidates` itself. Whatever the bridge does
+        not resolve, this refuses and `contested_candidates` reports -- including for the five
+        brands that have no contested key today and nobody has had to look at.
+        """
+        sku = str(fields.get("sku") or "")
+        claims = self.claims.setdefault(key, [])
+        rival = bool(claims) and sku not in {str(c.get("sku") or "") for c in claims}
+        claims.append(dict(fields))
+        if rival and not self.routes_by_sku(key, claims):
+            self.contested[key] = list(claims)
+        if key in self.contested:
+            # Re-recorded on every later claim so the report names all of them, and popped
+            # rather than left: a key can be Mode A for two claims and become Mode B on a third.
+            self.contested[key] = list(claims)
+            self.enrich.pop(key, None)
+            return False
         entry = self.enrich.setdefault(key, {})
+        # A RIVAL claim contributes NOTHING, not even to a blank field. Mode A means the catalog
+        # holds several paints under this key and each store sku names a different one -- but the
+        # harvest can still carry only ONE entry per key, and the C# routes that entry by its
+        # `sku`. So every field in it must come off the product that sku names. Blank-filling from
+        # a rival was the corruption this whole change exists to stop, merely narrowed to the
+        # fields the winner happened to leave empty: measured on a synthetic two-paint catalog,
+        # claim {72.051, imageUrl} then {72.094, imageUrl, ean, priceEur} produced an entry whose
+        # sku routes to 72.051 while its ean and price came off 72.094. Zero occurrences today
+        # (all 8 vallejo Mode-A claims carry imageUrl and nothing else), which is a property of
+        # the data, not of the rule -- hence the rule.
+        if rival:
+            return True
         for k, v in fields.items():
             if v not in (None, "") and k not in entry:
                 entry[k] = v
+        return True
+
+    def contested_candidates(self) -> list[dict]:
+        """One candidate per withheld claim -- the report half of the refusal above.
+
+        Refusing a row and losing a row are different things (the rule `paint_rows` already
+        works to), so a key nobody could settle still has to say so in the file. Pure and
+        idempotent: derived from `self.contested`, never appended to `self.candidates`, so a
+        bridge that resolves its own contests (gsw, monument) emits nothing here twice.
+
+        `name` is the CATALOG name off the key, not the store title -- this candidate is about
+        the identity, and the store row is already pinned by its own sku and sourceUrl. A bridge
+        that wants the store's own wording routes the row itself, before calling add_enrich.
+
+        WHAT A CANDIDATE DOES NOT CARRY, said plainly because the deferral downstream rests on
+        it: `{name, sku, url, source, reason}` and nothing else -- no ean, no price, no
+        imageUrl. A refused row's BARCODE therefore survives only in
+        data/evidence/products/<source>/observations.jsonl, and only a human following `url` or
+        `sku` back into that file can recover it. That is the shape of the loss the GSW refusal
+        below quantifies.
+        """
+        out: list[dict] = []
+        for key, claims in self.contested.items():
+            skus = sorted({str(c.get("sku") or "") or "(none)" for c in claims})
+            for claim in claims:
+                out.append(
+                    {"name": key.split("|", 1)[0],
+                     "sku": str(claim.get("sku") or "") or None,
+                     "url": claim.get("sourceUrl"),
+                     "source": claim.get("source"),
+                     "reason": f"contested identity ({key}) -- {len(skus)} store products claim "
+                               f"it: {', '.join(skus)}"}
+                )
+        return out
 
     def to_yaml(self) -> dict:
         out: dict[str, object] = {}
@@ -432,9 +599,10 @@ class BrandHarvest:
             out["additions"] = sorted(
                 self.additions, key=lambda a: (a.get("set") or "", a.get("name") or "")
             )
-        if self.candidates:
+        candidates = self.candidates + self.contested_candidates()
+        if candidates:
             out["candidates"] = sorted(
-                self.candidates, key=lambda c: (c.get("reason") or "", c.get("name") or "")
+                candidates, key=lambda c: (c.get("reason") or "", c.get("name") or "")
             )
         return out
 
@@ -467,7 +635,7 @@ def vallejo_code(raw_sku: str | None) -> str | None:
 def bridge_vallejo() -> BrandHarvest:
     catalog = Catalog("vallejo")
     prior_additions = previous_addition_codes("vallejo")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     for o in paint_rows("mfr-vallejo", out):
         slugs = (o.get("hints") or {}).get("categorySlugs") or []
         set_name = next(
@@ -486,6 +654,21 @@ def bridge_vallejo() -> BrandHarvest:
             key = catalog.match_name(o["name"], set_name)
         is_prior_addition = code in prior_additions
         if key is not None and not is_prior_addition:
+            # VALLEJO IS `add_enrich`'s MODE A, AND ALL FOUR OF ITS DOUBLE-CLAIMED KEYS ARE.
+            # Not monument's failure and not gsw's: the CATALOG key is ambiguous -- two REAL,
+            # DIFFERENT paints share one `{Name}|{Set}` -- and each store row's sku is the exact
+            # productCode of one of them. Measured on this branch, all four and both claimants
+            # each: `Black|Game Color` {72.051, 72.094}, `Green Grey|Model Color` {70.886,
+            # 70.971}, `Grey|Mecha Color` {69.037, 70.641}, `Red|Model Air` {71.269, 71.102}.
+            # `Catalog.owner` resolves all eight skus to eight distinct records, so
+            # `routes_by_sku` is True and first-wins stands -- HarvestApplier disambiguates an
+            # ambiguous key by `entry.Sku`, so the entry that IS carried lands on its own pot.
+            # The cost is that `enrich` is one dict per key and can only carry one of the two:
+            # four paints keep a photo they would otherwise not have, four go without. A partial
+            # gain. Refusing both would have cost those four imageUrls and prevented nothing --
+            # mfr-vallejo quotes no ean and no price, so there is no wrong value to plant.
+            # Carrying BOTH means keying enrichment by product code, a schema change for another
+            # day; that is the only thing still missing here.
             out.add_enrich(key, imageUrl=o.get("imageUrl"), sku=code, **common)
         elif set_name is not None:
             # New-to-catalog singles AND prior additions (ratchet -- see
@@ -544,7 +727,7 @@ def bridge_ak() -> BrandHarvest:
     as their own set. Additions are born colour-less; chart swatches heal them later."""
     catalog = Catalog("ak-interactive")
     prior_additions = previous_addition_codes("ak-interactive")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     for o in paint_rows("mfr-ak-interactive", out):
         sku = str(o.get("sku") or "")
         key = catalog.match_code(sku)
@@ -608,7 +791,7 @@ def tap_split(title: str) -> tuple[str | None, str]:
 def bridge_armypainter() -> BrandHarvest:
     catalog = Catalog("army-painter")
     prior_additions = previous_addition_codes("army-painter")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     for o in paint_rows("mfr-armypainter", out):
         hints = o.get("hints") or {}
         sku = str(o.get("sku") or "")
@@ -654,18 +837,106 @@ def bridge_armypainter() -> BrandHarvest:
 
 
 def bridge_monument() -> BrandHarvest:
+    """METADATA-ONLY storefront, joined CODE-FIRST IN TWO PASSES since 2026-08-06.
+
+    monumenthobbies.com ships two ranges that share colour names: the 22 ml PRO Acryl 1-Step
+    bottles (MPA-5xx) and the original droppers (MPA-005 etc.). The catalog knows the droppers
+    by their bare code and the 1-Step range only under the codes a previous harvest minted
+    (MPA-501 ... MPA-510), so `match_code("500")` misses and the one-line join this replaced --
+    `match_code(code) or match_code(code.zfill(3)) or match_name(name)` -- dropped a 1-Step
+    bottle onto the dropper's identity by NAME. First-wins in `add_enrich` then decided the
+    winner by file order, and the 1-Step rows sit first: measured 2026-08-06, `Blue`, `Orange`
+    and `Shadow Flesh` each carry a 1-Step EAN, photo and $6.00 price in
+    data/paints/brands/monument-pro-acryl.yaml (:405-419, :1260-1274, :1393-1407) and only
+    `Warm Yellow` escaped, because MPA-072 happens to precede MPA-504.
+
+    So: a code match OWNS the identity it hits, and a name match may only take a key no code
+    match claimed. That is the other half of the HarvestApplier precedent add_enrich quotes --
+    disambiguate when a SKU can settle it, refuse when it cannot -- and here it settles all four
+    (measured 2026-08-06: contested 4 -> 0, three enrich entries flip to MPA-005/007/042, and
+    MPA-500/504/506/511 land as `Pro Acryl 1-Step` additions instead of vanishing, taking that
+    set from 8 records to 12).
+
+    Ownership is claimed regardless of the `previous_addition_codes` ratchet: a coded product
+    whose entry is deferred to `additions` still IS the paint under that key, so letting a
+    same-named row from another range take the identity it vacated would be the same theft.
+
+    THE ONE THING THIS FIX DOES NOT DO, AND IT MUST BE HANDLED BEFORE THE PAINT TOOL NEXT RUNS.
+    The repair moves three barcodes but cannot un-write the ones already stored, and the
+    archive's non-destructive re-barcoding will keep them:
+
+      655368408984  Blue          brands/monument-pro-acryl.yaml:411  -> addition MPA-500
+      655368429989  Orange        brands/monument-pro-acryl.yaml:1266 -> addition MPA-511
+      655368417375  Shadow Flesh  brands/monument-pro-acryl.yaml:1399 -> addition MPA-506
+
+    Each is a 1-Step bottle's real barcode sitting on a DROPPER record. This harvest now hands
+    the dropper its own (628504411056 / 628504411070 / 628504411421) and mints the 1-Step bottle
+    as its own addition carrying the barcode natively. When the paint tool runs,
+    `PaintRecordAdapter.Merge` gives the primary `ean` slot to fresh and unions the displaced
+    value into `additionalEans` (PaintRecordAdapter.cs:25 and :31-32, via
+    `BarcodeSet.Union(..., [existing.Ean])`) -- deliberately, because "a paint bought years ago
+    must stay resolvable by the barcode on the pot the owner actually has". The result is that
+    each of these three barcodes would be held by TWO records at once: primary on the 1-Step
+    addition, additional on the dropper.
+
+    THAT IS A CHANGE IN DEGREE, and the first draft of this paragraph called it a change in KIND
+    on a claim that is false. Measured 2026-08-06 over ALL 21 files in data/paints/brands (not
+    the nine bridged brands, which are 5,710 records / 2,993 barcodes -- the earlier text
+    miscited the scope in the one sentence whose job is quantification): 8,528 paint records,
+    3,825 distinct barcodes, and exactly ONE barcode held by more than one record --
+    8429551724838, on two `Viking Grey|Xpress Color Intense|72.483` records. Those were called
+    "one identity written twice". They are not: `PaintRecordAdapter.IdentityKey` is
+    set|name|productCode|HEX, and the two differ precisely there (`#374855` vs `#45515D`). So
+    cross-identity barcode sharing is already 1, and these three would make it 4.
+
+    The argument survives the correction and is worth keeping for the right reason: it is not the
+    COUNT that matters but the provenance. 655368408984 was never on any Blue dropper pot -- it
+    was written there by the name-match bug this docstring describes. The union barrier exists to
+    keep a barcode a pot GENUINELY carried resolvable; preserving one it never carried archives
+    the bug in the one shape nothing downstream reviews.
+
+    AND AN OVERRIDE CANNOT CLEAN IT UP AFTERWARDS, for two reasons that both have to be false
+    before one would work. `OverrideApplier.Apply` runs on the FRESH side, before the reconciler
+    (PaintCatalogApp.cs:256 vs :497), so it never sees the archived record that holds the wrong
+    barcode; and its own union is non-destructive in the same way -- OverrideApplier.cs:83 passes
+    `[p.Ean]` into `BarcodeSet.Union`, so even overriding `ean` in place would keep the displaced
+    value. The one intervention that works is to correct the stored `ean:` on those three records
+    in data/paints/brands/monument-pro-acryl.yaml BEFORE the tool runs: `Union` drops any value
+    equal to the primary, so once existing and fresh agree the barcode never enters the set at
+    all. That edit belongs to the archive correction pass (the same one the GSW dipping inks and
+    scale75's `Titanium Grey` need), and it is a PRECONDITION of running the paint tool on this
+    harvest, not a follow-up. Nothing in this change touches the archive, so no duplicate exists
+    on disk today -- this is a debt recorded at the moment it is incurred, not one discovered
+    later.
+
+    For whoever writes that pass: `volumeMl` will not find these records. All 75
+    `Monument Pro Acrylic Paints` records say 22, including `Warm Yellow`, which was never wrong
+    -- it is a brand-wide table default, not evidence. Three tells single out exactly these
+    three, and agree with each other: the `655368...` barcode prefix (3 records; the other 72
+    are `628504...`), `priceUsd` 6.0 (3; 71 are 5.0 and one is 6.25), and a
+    `MH-22-ml-1step-*` image filename (3).
+    """
     catalog = Catalog("monument-pro-acryl")
     prior_additions = previous_addition_codes("monument-pro-acryl")
-    out = BrandHarvest()
-    for o in paint_rows("mfr-monument", out):
-        if (o.get("hints") or {}).get("productType") != "Paint Singles":
-            continue
+    out = BrandHarvest(catalog)
+    rows = [o for o in paint_rows("mfr-monument", out)
+            if (o.get("hints") or {}).get("productType") == "Paint Singles"]
+
+    def code_key(observation: dict) -> str | None:
+        code = str(observation.get("sku") or "").removeprefix("MPA-")
+        return catalog.match_code(code) or catalog.match_code(code.zfill(3))
+
+    claimed_by_code = {key for key in map(code_key, rows) if key is not None}
+
+    for o in rows:
         sku = str(o.get("sku") or "")
-        code = sku.removeprefix("MPA-")
         name = MONUMENT_NAME.sub("", o["name"]).strip()
         common = {"ean": o.get("ean"), "imageUrl": o.get("imageUrl"),
                   "sourceUrl": o.get("url"), "source": "mfr-monument"}
-        key = catalog.match_code(code) or catalog.match_code(code.zfill(3)) or catalog.match_name(name)
+        key = code_key(o)
+        if key is None:
+            named = catalog.match_name(name)
+            key = None if named in claimed_by_code else named
         if key is not None and sku not in prior_additions:
             out.add_enrich(key, sku=sku, **common,
                            **pinned_price(catalog, key, sku, o, "mfr-monument"))
@@ -693,7 +964,7 @@ def bridge_monument() -> BrandHarvest:
 def bridge_turbodork() -> BrandHarvest:
     catalog = Catalog("turbo-dork")
     prior_additions = previous_addition_codes("turbo-dork")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     paint_types = {"TurboShift", "Metallic", "ZeniShift", "Retail"}
     for o in paint_rows("mfr-turbodork", out):
         hints = o.get("hints") or {}
@@ -746,10 +1017,37 @@ def bridge_scale75() -> BrandHarvest:
     so joins are name-based with collection membership as the set hint (the store publishes no
     other range signal). Matched singles get image enrichment (no EANs exist -- variant
     barcodes unpopulated store-wide); unmatched singles in KNOWN sets and the three
-    post-Arcturus ranges join as additions with the store SKU as the code."""
+    post-Arcturus ranges join as additions with the store SKU as the code.
+
+    ONE contested key, left to add_enrich to refuse: SART-60 and SW-40 are both titled "TITANIUM
+    GREY" and the catalog holds ONE `Titanium Grey|Artist Range`, carrying no productCode. That
+    is `add_enrich`'s MODE B -- one paint, two products -- so `Catalog.owner` returns None for
+    both skus and neither can claim it. The in-set match (SART-60, artist-individuales) is the
+    better evidence and the brand-wide fallback on the line below is what let SW-40
+    (warfront-individuales) reach it -- so this IS settleable, unlike gsw. It is not settled here
+    because resolving it in the bridge does not just pick a winner: SW-40 would then fall to the
+    addition branch and MINT `Titanium Grey|Warfront  Range` under the `previous_addition_codes`
+    ratchet, i.e. assert a new paint on the strength of one store collection tag. Promotion, if
+    it is one, belongs in its own change.
+
+    WHAT THE REFUSAL COSTS, corrected: SW-40 arrives FIRST, so SW-40's is the entry first-wins
+    published and this change withholds -- imageUrl `.../4254.jpg` and priceEur 2.25, exactly as
+    HEAD's data/paints/harvest/scale75.yaml:1581-1586 has it. SART-60's EUR 3.72 was never the
+    Titanium Grey entry's price and has never appeared on this key in any harvest file (3.72 is
+    a common scale75 figure elsewhere in that file, which is how it got miscited). scale75
+    publishes no EANs, so no barcode is at stake.
+
+    AND THE DAMAGE ALREADY ON DISK, which the deferral above has to be weighed against:
+    data/paints/brands/scale75.yaml:1280-1292 shows `Titanium Grey` (set `Artist Range`) ALREADY
+    carrying `.../4254.jpg` and priceEur 2.25 -- the Warfront bottle's photo and price on the
+    Artist Range record. So this is a FOURTH already-wrong record alongside monument's Blue,
+    Orange and Shadow Flesh, and unlike those three the bridge does not repair it: withholding
+    the entry stops the wrong value being re-asserted, but `HarvestApplier.ApplyEnrichment` and
+    `BarcodeEnricher` only ever blank-fill, so the record keeps what it has. Correcting it is the
+    same archive pass the GSW dipping inks need, and this record belongs on its list."""
     catalog = Catalog("scale75")
     prior_additions = previous_addition_codes("scale75")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     for o in paint_rows("mfr-scale75", out):
         collections = (o.get("hints") or {}).get("collections") or []
         sku = str(o.get("sku") or "")
@@ -893,27 +1191,72 @@ def bridge_gsw() -> BrandHarvest:
     join as additions (cleaned name, mpn as productCode, EAN at birth)."""
     catalog = Catalog("green-stuff-world")
     prior_additions = previous_addition_codes("green-stuff-world")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     # normed catalog name -> keys, for suffix lookup
     by_norm: dict[str, list[str]] = catalog.by_name
     norms = sorted(by_norm, key=len, reverse=True)
 
     def suffix_match(store_name: str) -> str | None:
-        # KNOWN DEFECT, deliberately not fixed here (2026-08-05). This matches on the RAW title,
-        # so it is blind to a volume the title carries and the catalog record does not:
-        # norm("Dipping ink 60 ml - PAPYRUS DIP") and norm("Dipping ink 17 ml - Papyrus Dip")
-        # both END with `papyrusdip` and both claim `Papyrus Dip|Dipping Inks`. `add_enrich` is
-        # first-wins and the 60 ml rows sit earlier in observations.jsonl, so the 17 ml row is
-        # discarded every time. Measured 2026-08-05: 34 enrich keys are claimed by more than one
-        # store row and 39 rows are dropped in silence -- 31 of them these ml pairs, the other 8
-        # a different collapse entirely (`Orange|Fluor Metallic` is claimed by 4 rows spanning
-        # Transparent Ink / Opaque Ink / Fluor Ink / Fluor Paint, `Yellow` likewise, `White` by
-        # 3). It has landed: 33 of the 41 committed `Dipping Inks` records carry a 60 ml sku's
-        # ean, price and image while declaring volumeMl 17, and all 31 genuine 17 ml barcodes
-        # appear NOWHERE in the repo outside this source's evidence file (git grep, all 31).
-        # `gsw_clean_name`'s volume fix does NOT reach these -- they never reach it. Repairing
-        # them needs a volume-aware join here AND an explicit correction pass over the archive,
-        # not a regeneration.
+        # STILL VOLUME-BLIND, AND THAT IS NOW ANSWERED BY REFUSING, NOT BY MATCHING BETTER.
+        # This runs on the RAW title, so norm("Dipping ink 60 ml - PAPYRUS DIP") and
+        # norm("Dipping ink 17 ml - Papyrus Dip") both END with `papyrusdip` and both return
+        # `Papyrus Dip|Dipping Inks`. Two different pots, two gtin13s, 3.7375 vs 2.125 EUR, one
+        # identity. Measured 2026-08-06: 34 keys claimed by more than one row, 73 rows involved,
+        # 39 of them formerly discarded in silence by first-wins.
+        #
+        # WHY NOT MAKE THE MATCH VOLUME-AWARE INSTEAD, AND WHY MINTING THE RECORDS WOULD NOT
+        # DO IT. 5b9d39b taught `gsw_clean_name` to keep the volume, but that function names
+        # ADDITIONS -- it never touches the catalog side of this join, and 0 of the 41 committed
+        # `Dipping Inks` records carry a volume in their name (86 of the brand's 400 end in one,
+        # none of them here). The tempting conclusion is that minting "Papyrus Dip 17 ml" and
+        # "Papyrus Dip 60 ml" would then let a volume-aware matcher prefer the right one. IT
+        # WOULD NOT, and that is a fact about THIS FUNCTION, not about the archive: the rule
+        # below is `n.endswith(cand)` -- the store title must END with the catalog name -- and
+        # Green Stuff World writes the volume in the MIDDLE of these titles. Measured on this
+        # branch over the 73 refused rows: 62 carry a volume mid-title, 0 carry one at the end,
+        # 11 carry none. `norm("Dipping ink 60 ml - PAPYRUS DIP")` is `dippingink60mlpapyrusdip`,
+        # which does not end with `papyrusdip60ml` and never will. The 86 records that DO end in
+        # a volume match only because the store writes it last in THEIR titles (sprays,
+        # varnishes: "Chrome Spray Paint 400ml"), which is exactly the position this rule can
+        # reach. So a volume-aware join means replacing the suffix rule with one that parses the
+        # volume out of the title and matches on (colour, volume) -- a different matcher, not a
+        # richer catalog. Minting the records is necessary and NOT sufficient, and doing it
+        # first, as a pure archive pass, is still the right order.
+        #
+        # And no SKU can settle it either -- the test `Catalog.owner` and HarvestApplier both
+        # apply. All 34 contested keys have exactly ONE catalog paint and 0 of those paints
+        # carry a productCode (nor does any of the 174 current enrich targets; 5 of 41
+        # `Dipping Inks` and 0 of 9 `Fluor Metallic` records have one, none of them here). So
+        # this is `add_enrich`'s MODE B throughout -- one paint, N products -- and the caller
+        # refuses BOTH claimants and reports them, which is the half of the HarvestApplier
+        # precedent that applies when nothing can disambiguate.
+        #
+        # AND THE OTHER CANDIDATE FIX, MEASURED RATHER THAN ASSUMED: this join is also SET-BLIND
+        # -- `Catalog.match_name` takes a `set_hint` whose docstring warns about exactly this,
+        # and 42 of the 402 joining GSW rows land in a set the store's own category contradicts.
+        # Filtering by GSW_SET_BY_CATEGORY[slug] would still be wrong. Measured 2026-08-06: 28 of
+        # the 42 are the documented `acrylic-inks` umbrella (12 Intensity Ink, 8 Wash Ink, 8
+        # Candy Ink Metallic); 11 more are the three fluor keys the refusal above already
+        # removes; and the last 3 -- `Fluor Paint VIOLET` (1706), `Fluor Paint YELLOW-ORANGE`
+        # (1702) and `Chrome Paint` (2454) -- each put THEIR OWN barcode on a record that holds
+        # exactly it today (8436574500653, 8436574500615, 8436574508130). A hint would refuse
+        # those three and then mint duplicates of them, since their categories map. The archive
+        # simply files some fluor paints under `Fluor Metallic` and a chrome paint under
+        # `Metallic Colors`; that is a set-naming question for the archive pass, not a join bug.
+        #
+        # WHAT THIS DOES NOT REPAIR, and it is most of it. Measured 2026-08-06 over the 41
+        # committed `Dipping Inks` records: 33 carry a 60 ml row's ean/EUR 3.7375/image, 5 carry
+        # a 17 ml row's, 1 has none, 2 are boxed sets 9c62fb2 left behind. Withholding an entry
+        # never un-writes a populated field (`HarvestApplier.ApplyEnrichment` and
+        # `BarcodeEnricher` blank-fill), so all 33 stay exactly as they are. Nor does `volumeMl`
+        # tell you which pot they mean -- VolumeTable.cs:101 is `("Green Stuff World", null, 17,
+        # "dropper")`, a null set list, and all 400 GSW records say 17 including
+        # `Chrome Spray Paint 400ml`. Deciding what those records denote, and minting the volume
+        # -named pair for each colour, is an archive pass that has to land as its own change.
+        # Worse in kind and NOT a volume question at all: `Orange`, `Yellow` and `White` in
+        # `Fluor Metallic` hold a Transparent Acrylic Ink's / Intensity Ink OSL's barcode, from a
+        # different range entirely, and in all three contests the row first-wins discarded was
+        # the `Fluor Paint` one that belongs there.
         n = norm(store_name)
         best: str | None = None
         for cand in norms:
@@ -926,7 +1269,24 @@ def bridge_gsw() -> BrandHarvest:
                 return None  # ambiguous at the longest match -- refuse
         return best
 
-    for o in paint_rows("mfr-greenstuffworld", out):
+    rows = paint_rows("mfr-greenstuffworld", out)
+    # PASS 1 -- WHO CLAIMS WHAT. A store product is identified by its sku, so a key two skus
+    # reach is two products claiming one paint. Counted before anything is filed, because
+    # first-wins cannot be undone from inside the loop: by the time the 17 ml row arrives the
+    # 60 ml row has already filed the ean, and `add_enrich` (which does catch this now) would
+    # report it under the catalog's name rather than the store's own two titles.
+    #
+    # Only rows that would actually enrich count as claimants: a `previous_addition_codes` row
+    # is on its way to `additions` and takes no identity here (0 of the 73 contested rows are
+    # prior additions today -- the guard is for the day one is).
+    claims: dict[str, set[str]] = {}
+    for o in rows:
+        key = suffix_match(o["name"])
+        if key is not None and str(o.get("sku") or "") not in prior_additions:
+            claims.setdefault(key, set()).add(str(o.get("sku") or ""))
+    contested = {key: skus for key, skus in claims.items() if len(skus) > 1}
+
+    for o in rows:
         slug = (o.get("hints") or {}).get("categorySlug") or ""
         # The set gate that stood here is now `paint_rows`, which every bridge shares. It covers
         # both signals this descriptor declares: the `paint-sets` category AND the set word list.
@@ -949,6 +1309,38 @@ def bridge_gsw() -> BrandHarvest:
                   "sourceUrl": o.get("url"), "source": "mfr-greenstuffworld"}
         key = suffix_match(o["name"])
         if key is not None and sku not in prior_additions:
+            if key in contested:
+                # REFUSED EXPLICITLY, and the explicitness is the whole point: in this bridge a
+                # missing match is not a refusal. `suffix_match` returning None falls through to
+                # the GSW_SET_BY_CATEGORY branch below, and all 73 contested rows sit in a mapped
+                # category -- so "refuse both" written as "return None" PROPOSES 73 NEW PAINTS
+                # (measured on this branch; since 5b9d39b their cleaned names are volume-suffixed,
+                # 0 colliding with each other and 0 with an existing catalog key, so they would
+                # all mint). Those 73 records are probably the right end state, but not yet:
+                # minting "Papyrus Dip 60 ml" and "Papyrus Dip 17 ml" beside a bare "Papyrus Dip"
+                # that still holds the 60 ml barcode grows the catalog instead of repairing it.
+                # Candidates now, additions after the archive pass -- in that order.
+                #
+                # WHAT THAT COSTS, EXACTLY, because a candidate carries only
+                # {name, sku, url, source, reason} -- no ean, no price, no imageUrl (see
+                # `BrandHarvest.contested_candidates`). All 73 of these rows carry a gtin13, 73
+                # DISTINCT ones. Before this change 34 of the 73 reached data/paints/harvest as
+                # the first-wins winner's `ean`; after it, 0 of the 73 appear anywhere under
+                # data/paints/harvest. Of the 73 barcodes, 34 are already written into
+                # data/paints/brands/green-stuff-world.yaml (the winners -- 31 on `Dipping Inks`
+                # records, 3 on `Fluor Metallic`) and 39 exist NOWHERE under data/
+                # outside data/evidence/products/mfr-greenstuffworld/observations.jsonl -- the
+                # same 39 rows first-wins was discarding in silence, now named by sku and url but
+                # still with their barcodes only in the evidence file. So the refusal does not
+                # lose a barcode the repo had; it declines to promote 34 and reports, rather than
+                # hides, the 39. Recovering any of them means reading the evidence file.
+                out.candidates.append(
+                    {"name": o["name"], "sku": sku or None, "url": o.get("url"),
+                     "source": "mfr-greenstuffworld",
+                     "reason": f"contested identity ({key}) -- {len(contested[key])} store "
+                               f"products claim it: {', '.join(sorted(contested[key]))}"}
+                )
+                continue
             out.add_enrich(key, sku=sku, **common,
                            **pinned_price(catalog, key, sku, o, "mfr-greenstuffworld"))
             continue
@@ -991,7 +1383,7 @@ def bridge_reaper() -> BrandHarvest:
     is not the backstop an earlier version of this docstring implied it was for every source."""
     catalog = Catalog("reaper")
     prior_additions = previous_addition_codes("reaper")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
     for o in paint_rows("mfr-reaper", out):
         hints = o.get("hints") or {}
         # ONE gate for both routes out, and it now lives in `paint_rows` above. The old
@@ -1145,7 +1537,7 @@ def bridge_mrhobby() -> BrandHarvest:
     -- lands in `candidates` for a human, never in the catalog.
     """
     catalog = Catalog("mr-hobby")
-    out = BrandHarvest()
+    out = BrandHarvest(catalog)
 
     # Pass 1 -- manufacturer: expand every series range onto catalog identities.
     confirmed: dict[str, tuple[str, str | None]] = {}  # identity key -> (site code, series url)
@@ -1252,9 +1644,15 @@ def main() -> None:
             + yaml.safe_dump({slug: data}, sort_keys=False, allow_unicode=True, width=200)
         )
         out_path.write_bytes(content.encode("utf-8"))
+        # `contested` is the count of Mode B identities NO evidence could settle, withheld by
+        # add_enrich rather than resolved by the bridge. It should stay at 0 for a brand whose
+        # bridge disambiguates (monument by code, gsw by routing its own refusals) and for one
+        # whose collisions are Mode A (vallejo -- an ambiguous catalog key the store's skus
+        # route correctly, so nothing is withheld). scale75's 1 is the only one left.
+        contested = f" contested={len(harvest.contested)}" if harvest.contested else ""
         print(
             f"{slug}: enrich={len(harvest.enrich)} additions={len(harvest.additions)} "
-            f"candidates={len(harvest.candidates)}"
+            f"candidates={len(data.get('candidates') or [])}{contested}"
         )
 
 
