@@ -41,8 +41,30 @@ def dump_yaml(data: object) -> str:
     )
 
 
+# READING uses libyaml's C parser where the PyYAML wheel provides it; WRITING deliberately does
+# not. `yaml.safe_load` is the pure-Python parser, and this repo parses a lot: measured 2026-08-06,
+# `report --ean-guard` spent 135s parsing (15 product catalogs + 21 brand archives, each read twice
+# -- once from HEAD via `git show`, once from the working tree) against 2.7s of actual git. It
+# exceeded a 10-minute timeout. Swapping the loader took the same 40 files from 113.13s to 15.14s,
+# a 7.5x, and `resolve` and every script benefit too since they all come through here.
+#
+# Verified equivalent, not assumed: all 15 product catalogs, all 21 brand archives, matches.yaml,
+# overrides.yaml, equivalences.yaml and conflicts.yaml were parsed with BOTH loaders and compared
+# with deep equality -- 40 files, 0 mismatches.
+#
+# The DUMPER stays pure-Python on purpose. `_Dumper` overrides `increase_indent` to suppress
+# indentless sequences, and libyaml's emitter handles indentation internally rather than through
+# that hook, so `CSafeDumper` would silently reflow every file this repo has ever written. In a
+# git-committed archive that is a diff measured in hundreds of thousands of lines, for no speed
+# that matters -- writing is not where the time goes.
+try:
+    _Loader: type = yaml.CSafeLoader
+except AttributeError:  # pragma: no cover -- PyYAML built without libyaml
+    _Loader = yaml.SafeLoader
+
+
 def load_yaml(text: str) -> object:
-    return yaml.safe_load(text)
+    return yaml.load(text, Loader=_Loader)
 
 
 def write_yaml(path: Path, data: object) -> None:
@@ -51,4 +73,4 @@ def write_yaml(path: Path, data: object) -> None:
 
 
 def read_yaml(path: Path) -> object:
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+    return yaml.load(path.read_text(encoding="utf-8"), Loader=_Loader)

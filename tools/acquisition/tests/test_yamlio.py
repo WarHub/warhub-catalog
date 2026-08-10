@@ -47,3 +47,33 @@ def test_yaml12_numeric_like_strings_are_quoted() -> None:
     assert "d: '1.5e10'" in text
     assert "e: '0x1A'" in text
     assert "f: '0o17'" in text
+
+
+def test_the_c_loader_agrees_with_the_pure_python_one() -> None:
+    """`load_yaml`/`read_yaml` moved to libyaml's parser on 2026-08-06 for a 7.5x speedup.
+
+    The swap is only safe because the two parsers agree, and the shapes worth checking are the
+    ones this repo's own dumper deliberately produces: force-quoted number-like strings (barcodes
+    with a leading zero, dotless scientific notation), literal blocks for embedded newlines, and
+    unicode that `allow_unicode=True` writes raw. A silent divergence on any of those would
+    corrupt an archive rather than fail a run.
+    """
+    import yaml
+
+    from warhub_acquisition.yamlio import _Loader, dump_yaml
+
+    sample = {
+        "barcodes": ["0812152031524", "5011921182848", "5e3", "0x1f", "0o17"],
+        "name": "Nightsahde Purple Dip",           # a real store typo, kept verbatim
+        "unicode": "CHAR´S PINK 60ML. – Ätzend",   # real GSW/AK title characters
+        "block": "line one\nline two\n",
+        "nested": {"empty_list": [], "null": None, "zero": 0, "false": False},
+        "floats": [3.7375, 2.125, 1e-3],
+    }
+    text = dump_yaml(sample)
+    assert yaml.load(text, Loader=_Loader) == yaml.safe_load(text)
+    assert yaml.load(text, Loader=_Loader) == sample
+
+    # The barcodes must survive as STRINGS, not be re-read as ints/floats -- the reason
+    # `_represent_str` force-quotes them in the first place.
+    assert yaml.load(text, Loader=_Loader)["barcodes"] == sample["barcodes"]
