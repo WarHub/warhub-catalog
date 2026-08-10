@@ -42,11 +42,18 @@
 # forbidding identical member sets under different manufacturers would forbid a true statement.
 # What would be wrong is one of them silently winning.
 #
-# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason, and so
-# does a code the same set lists TWICE -- see the repeat branch in resolve_manufacturer for the
-# AK17068 OLD GOLD / COLD STEEL typo that makes the difference between a visible refusal and a
-# silently halved set. Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich,
-# HarvestApplier.ApplyEnrichment).
+# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason.
+# Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich, HarvestApplier.ApplyEnrichment).
+#
+# A CODE THE SAME SET LISTS TWICE gets ONE extra question before it is refused, and only one: does
+# the name the source printed beside that occurrence identify exactly one paint? warlord-games/
+# AK17522 lists AK17068 as both "OLD GOLD" and "COLD STEEL" -- a typo in AK's own copy, since the
+# archive holds Cold Steel at AK17070. The repeat resolves to Cold Steel BY NAME, keeps `ref:
+# AK17068` verbatim, and carries `resolvedBy: statedName` so the repair is visible rather than
+# laundered. This is the narrowest possible use of the second field: the first occurrence still
+# resolves by code alone, so the branch cannot overturn any verdict the code already reached, and
+# every uncertainty (no prose, misaligned prose, a name naming zero or several paints, or one
+# already in the box) still refuses. See _stated_names and _by_stated_name.
 # THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
 # hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
 # material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
@@ -75,8 +82,8 @@ warlord-games:
   counts:
     sets: 24
     refs: 90
-    members: 88
-    unresolved: 2
+    members: 89
+    unresolved: 1
     quantified: 0
   sets:
     warlord-games/AK17501:
@@ -507,15 +514,18 @@ warlord-games:
           productCode: AK17067
         - ref: AK17068
           brand: ak-interactive
+          paint: Cold Steel|Quick Gen
+          productCode: AK17070
+          resolvedBy: statedName
+          statedName: COLD STEEL
+        - ref: AK17068
+          brand: ak-interactive
           paint: Old Gold|Quick Gen
           productCode: AK17068
         - ref: AK17069
           brand: ak-interactive
           paint: Bronze|Quick Gen
           productCode: AK17069
-      unresolved:
-        - ref: AK17068
-          reason: this set lists the same product code more than once; see the product record's description for the differing stated names
     warlord-games/AK17523:
       name: Purple Soldiers (Quick Gen Set)
       brand: army-painter, ak-interactive

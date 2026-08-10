@@ -66,6 +66,7 @@ OUT_DIR = REPO / "data/catalog/set-contents"
 # as `uv run --with pyyaml python ...` in CI, and both modules below import only stdlib + yaml.
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.paints.catalog import Catalog  # noqa: E402
+from warhub_acquisition.resolve.set_refs import enumerated_members  # noqa: E402
 from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 # MANUFACTURER slug (data/catalog/products/) -> the PAINT BRAND slugs (data/paints/brands/) whose
@@ -168,11 +169,18 @@ HEADER = """\
 # forbidding identical member sets under different manufacturers would forbid a true statement.
 # What would be wrong is one of them silently winning.
 #
-# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason, and so
-# does a code the same set lists TWICE -- see the repeat branch in resolve_manufacturer for the
-# AK17068 OLD GOLD / COLD STEEL typo that makes the difference between a visible refusal and a
-# silently halved set. Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich,
-# HarvestApplier.ApplyEnrichment).
+# A ref naming ZERO or SEVERAL paints goes to `unresolved:` with its raw code and a reason.
+# Nothing is guessed (Catalog.pins, BrandHarvest.add_enrich, HarvestApplier.ApplyEnrichment).
+#
+# A CODE THE SAME SET LISTS TWICE gets ONE extra question before it is refused, and only one: does
+# the name the source printed beside that occurrence identify exactly one paint? warlord-games/
+# AK17522 lists AK17068 as both "OLD GOLD" and "COLD STEEL" -- a typo in AK's own copy, since the
+# archive holds Cold Steel at AK17070. The repeat resolves to Cold Steel BY NAME, keeps `ref:
+# AK17068` verbatim, and carries `resolvedBy: statedName` so the repair is visible rather than
+# laundered. This is the narrowest possible use of the second field: the first occurrence still
+# resolves by code alone, so the branch cannot overturn any verdict the code already reached, and
+# every uncertainty (no prose, misaligned prose, a name naming zero or several paints, or one
+# already in the box) still refuses. See _stated_names and _by_stated_name.
 # THE TWO REFUSALS TODAY ARE A SOURCE COVERAGE GAP, NOT BAD DATA -- do not "fix" them by
 # hand-editing the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 are both
 # material:"paint" on reapermini.com; 29815's whole range (Master Series Paints High Density)
@@ -204,6 +212,46 @@ def _member_sort_key(member: dict) -> tuple:
     return (member["ref"], member.get("paint", ""))
 
 
+def _stated_names(product: dict) -> list[str] | None:
+    """The name the source printed BESIDE each code, positionally aligned to `contentSkus`.
+
+    None unless the alignment is PROVEN rather than assumed: the codes re-read out of the
+    description must equal `contentSkus` element-for-element, in order. Anything less and the
+    names are dropped -- a name attached to the wrong code is a fabricated fact, and this function
+    exists to repair exactly that kind of mistake, so it must not be able to make one.
+
+    None for a `stated` product too. A machine-readable contents array (reaper's
+    `associatedProducts`) has no prose to re-read, so a repeat there stays refused: the source
+    genuinely said the same code twice and said nothing else to tell the two apart.
+    """
+    if (product.get("contentSkusFrom") or "stated") != "description":
+        return None
+    enumerated = enumerated_members(product.get("description"))
+    if [code for code, _, _ in enumerated] != list(product["contentSkus"]):
+        return None
+    return [name for _, name, _ in enumerated]
+
+
+def _by_stated_name(name: str | None, catalogs: list[Catalog]) -> tuple[Catalog, dict] | None:
+    """The ONE paint the source's stated name identifies, across every listed brand -- or None.
+
+    Deliberately stricter than `match_name` alone. That returns a "{Name}|{Set}" key, and a key
+    can be answered by several paints (mr-hobby ships Mr Color 20 and 323 both named "Light
+    Blue"); a member must name ONE pot because it carries that pot's `productCode`. So the key
+    must be unambiguous within its catalog AND unique across the catalogs searched.
+    """
+    hits: list[tuple[Catalog, dict]] = []
+    for catalog in catalogs:
+        key = catalog.match_name(name)
+        if key is None:
+            continue
+        paints = catalog.by_key.get(key, [])
+        if len(paints) != 1:
+            return None
+        hits.append((catalog, paints[0]))
+    return hits[0] if len(hits) == 1 else None
+
+
 def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list[Catalog]) -> dict:
     """The whole relation for one manufacturer: {counts, sets}.
 
@@ -218,24 +266,66 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
         members: list[dict] = []
         unresolved: list[dict] = []
         seen_refs: set[str] = set()
-        for ref in product["contentSkus"]:
+        stated_names = _stated_names(product)
+        for i, ref in enumerate(product["contentSkus"]):
             n_refs += 1
-            # A CODE THE SOURCE LISTS TWICE IN ONE BOX IS REFUSED, not resolved twice. Measured
+            # A CODE THE SOURCE LISTS TWICE IN ONE BOX IS NEVER RESOLVED TWICE BY CODE. Measured
             # 2026-08-07: warlord-games/AK17522 "Metallics" enumerates AK17068 as both "OLD GOLD"
             # (which the archive confirms at AK17068) and "COLD STEEL" (which the archive holds at
-            # AK17070) -- a typo in AK's own copy. Resolving both occurrences would claim the box
-            # holds two pots of Old Gold and lose Cold Steel entirely; de-duplicating upstream
-            # would lose it just as silently. Refusing the repeat is the only outcome that leaves
-            # a trace, and the trace is what sends a reviewer to the description.
+            # AK17070) -- a typo in AK's own copy. Resolving both occurrences by code would claim
+            # the box holds two pots of Old Gold and lose Cold Steel entirely; de-duplicating
+            # upstream would lose it just as silently.
             #
-            # Inert for reaper, which is why the committed file does not move: strategies/reaper.py
-            # builds contentSkus from a SET, and reapermini.com repeats no sku in any of its 31 set
-            # items anyway (measured live 2026-08-07 over 848 associatedProducts entries).
+            # THE CODE IS THE KEY; THE STATED NAME IS THE TIE-BREAK, consulted ONLY here, where the
+            # source has contradicted itself. The first occurrence resolves by code exactly as
+            # before -- this branch cannot change any verdict the code alone already reached. A
+            # repeat asks a different question, because its code is spoken for: does the name the
+            # source printed beside THIS occurrence identify exactly one paint? For AK17522 it
+            # does, "COLD STEEL" -> Cold Steel|Quick Gen at AK17070, and `ref` keeps the typo
+            # AK17068 verbatim so the repair is legible in a diff rather than laundered.
+            #
+            # This is not guessing (Catalog.pins, BrandHarvest.add_enrich): nothing is invented,
+            # a second field the SOURCE ITSELF wrote decides, and every way of failing to be
+            # certain -- no prose, misaligned prose, a name naming zero paints, several paints,
+            # or one already in this box -- still refuses, with the reason saying which.
+            #
+            # Inert for reaper: strategies/reaper.py builds contentSkus from a SET, reapermini.com
+            # repeats no sku in any of its 31 set items (measured live 2026-08-07 over 848
+            # associatedProducts entries), and a `stated` product has no prose to consult anyway.
             if ref in seen_refs:
+                stated = stated_names[i] if stated_names else None
+                hit = _by_stated_name(stated, catalogs) if stated else None
+                if hit is not None and not any(
+                    m["brand"] == hit[0].slug and m["paint"] == hit[0].key_of(hit[1])
+                    for m in members
+                ):
+                    catalog, paint = hit
+                    members.append({
+                        "ref": ref,
+                        "brand": catalog.slug,
+                        "paint": catalog.key_of(paint),
+                        "productCode": str(paint.get("productCode") or ""),
+                        # WHY THIS MEMBER'S productCode DISAGREES WITH ITS ref. Present only on
+                        # the name-resolved repeats, so its absence is the norm and its presence
+                        # is a flag: a reviewer sorting on this field sees every place the
+                        # source's own code list was overruled, and by what.
+                        "resolvedBy": "statedName",
+                        "statedName": stated,
+                    })
+                    continue
+                if not stated:
+                    why = ("and the source states no name beside this occurrence to tell it "
+                           "apart -- its contents are not prose-derived, or the description no "
+                           "longer re-reads to this exact code list")
+                elif hit is None:
+                    why = (f"and the name stated beside this one ({stated!r}) names no single "
+                           f"paint in brand(s) '{brands}'")
+                else:
+                    why = (f"and the name stated beside this one ({stated!r}) names a paint "
+                           f"already in this set")
                 unresolved.append({
                     "ref": ref,
-                    "reason": "this set lists the same product code more than once; see the "
-                              "product record's description for the differing stated names",
+                    "reason": f"this set lists the same product code more than once {why}",
                 })
                 continue
             seen_refs.add(ref)
