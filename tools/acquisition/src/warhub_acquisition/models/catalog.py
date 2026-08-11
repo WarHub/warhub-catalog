@@ -115,11 +115,27 @@ class CanonicalProduct(BaseModel):
 
 
 class Overrides(BaseModel):
+    # extra="forbid" is what makes this file MACHINE-OWNED safely. classify/apply.py rewrites
+    # overrides.yaml wholesale from a hand-built dict of exactly these two keys, so any third
+    # top-level key a human adds here is deleted on the next `classify --apply` -- silently, and
+    # with its comments, because write_yaml is plain PyYAML. `setRefs` lived here and was lost
+    # that way (see data/catalog/set-refs.yaml, 2026-08-11). Forbidding extras turns the next
+    # attempt into a ValidationError at load time instead of a quiet deletion at write time.
     model_config = ConfigDict(extra="forbid")
     retract: list[str] = Field(default_factory=list)
     products: dict[str, dict[str, object]] = Field(default_factory=dict)
+
+
+class SetRefs(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     # A CODE THE SOURCE MISTYPED IN ITS OWN CONTENTS PROSE: {product id: {stated ref: real code}}.
     # Read by scripts/gen_set_contents.py when it resolves a set's members, and by nothing else.
+    #
+    # LIVES IN ITS OWN FILE, data/catalog/set-refs.yaml (DataPaths.set_refs), which no code in this
+    # repo writes. It was a key in overrides.yaml until 2026-08-11, and that was a real defect
+    # rather than a tidiness complaint: classify/apply.py rebuilds overrides.yaml from a two-key
+    # literal, so one `warhub-data classify --apply` deleted the block and its 19 lines of evidence
+    # and exited 0. A hand-authored key cannot share a path with a generator's output.
     #
     # WHY THIS IS NOT THE GENERATOR REWRITING THE SOURCE, which gen_set_contents.py's header
     # forbids in those words. That prohibition is on INFERENCE -- a generator that quietly repairs

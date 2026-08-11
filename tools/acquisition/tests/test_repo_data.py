@@ -13,7 +13,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from warhub_acquisition.models.catalog import Overrides
+from warhub_acquisition.models.catalog import Overrides, SetRefs
 from warhub_acquisition.models.descriptor import load_descriptors
 from warhub_acquisition.resolve import crossover
 from warhub_acquisition.resolve.join import Matches
@@ -61,6 +61,12 @@ def test_repo_matches_and_overrides_parse_when_present() -> None:
         Matches.model_validate(read_yaml(paths.matches))
     if paths.overrides.exists():
         Overrides.model_validate(read_yaml(paths.overrides))
+    # set-refs.yaml is hand-authored and read by a script that deliberately imports no pydantic
+    # (gen_set_contents.py runs as `uv run --with pyyaml python ...`), so this is the ONLY place
+    # its shape is checked. It also re-checks the split: `setRefs` back in overrides.yaml is now
+    # an extra="forbid" ValidationError on the line above rather than a silent deletion.
+    if paths.set_refs.exists():
+        SetRefs.model_validate(read_yaml(paths.set_refs))
 
 
 def test_every_paint_source_reaches_the_paint_catalog() -> None:
@@ -785,11 +791,12 @@ def test_no_committed_yaml_string_changes_type_between_readers() -> None:
 def test_every_set_ref_correction_is_live_and_resolvable() -> None:
     """A declared typo repair must still be repairing a typo, and must still land somewhere.
 
-    `Overrides.setRefs` is the one place a human may overrule a code a manufacturer printed, so it
-    is also the one place a stale entry does real damage: silently rewriting a ref the source has
-    since FIXED, or pointing at a paint that has since been retracted. Neither shows up anywhere
-    else -- gen_set_contents.py applies a correction with `dict.get`, so an entry that matches
-    nothing is a no-op and an entry pointing nowhere just re-refuses. Both look like success.
+    `data/catalog/set-refs.yaml` (models/catalog.py::SetRefs) is the one place a human may overrule
+    a code a manufacturer printed, so it is also the one place a stale entry does real damage:
+    silently rewriting a ref the source has since FIXED, or pointing at a paint that has since been
+    retracted. Neither shows up anywhere else -- gen_set_contents.py applies a correction with
+    `dict.get`, so an entry that matches nothing is a no-op and an entry pointing nowhere just
+    re-refuses. Both look like success.
 
     Two halves, because the entry makes two claims:
 
@@ -804,10 +811,10 @@ def test_every_set_ref_correction_is_live_and_resolvable() -> None:
     extra digit -- the only 6-digit code in a box whose other nine are 5-digit AK11xxx.
     """
     _require_repo_data()
-    overrides_path = REPO_DATA / "catalog" / "overrides.yaml"
-    if not overrides_path.exists():
-        pytest.skip("data/catalog/overrides.yaml not present")
-    corrections = (read_yaml(overrides_path) or {}).get("setRefs") or {}
+    set_refs_path = REPO_DATA / "catalog" / "set-refs.yaml"
+    if not set_refs_path.exists():
+        pytest.skip("data/catalog/set-refs.yaml not present")
+    corrections = (read_yaml(set_refs_path) or {}).get("setRefs") or {}
     if not corrections:
         pytest.skip("no setRefs corrections declared")
 

@@ -39,11 +39,13 @@ THE ONE THING THAT MAY OVERRULE A PRINTED CODE IS A HUMAN, and the distinction i
 precisely because this file elsewhere says a generator rewriting a source's claim is worse than
 one that refuses. That prohibition is on INFERENCE: nothing here computes an edit distance, looks
 for a nearest code, or fuzzy-matches a name to make its own output look complete.
-`Overrides.setRefs` is the other thing — a maintainer states, in a committed file, scoped to one
-product, with the evidence beside it, that a manufacturer mistyped a code in its own prose. It is
-the same separation `overrides.yaml` draws everywhere else in this repo, and it is reviewable in a
-diff. The corrected code changes only what is LOOKED UP: `ref:` keeps the string the source
-printed and the member carries `resolvedBy: correction`, so nothing is laundered.
+`data/catalog/set-refs.yaml` (models/catalog.py::SetRefs) is the other thing — a maintainer states,
+in a committed file, scoped to one product, with the evidence beside it, that a manufacturer
+mistyped a code in its own prose. It is the same separation `overrides.yaml` draws everywhere else
+in this repo, and it is reviewable in a diff. The corrected code changes only what is LOOKED UP:
+`ref:` keeps the string the source printed and the member carries `resolvedBy: correction`, so
+nothing is laundered. It is a FILE OF ITS OWN and not a key in overrides.yaml because
+`classify --apply` rewrites that file wholesale and deleted this block once already (2026-08-11).
 
 WHERE IT RUNS. Downstream of BOTH pipelines, which is the structural difference from its two
 siblings: they run BEFORE the C# paint tool because they FEED it, this one runs AFTER because it
@@ -71,7 +73,7 @@ REPO = Path(__file__).resolve().parents[3]
 PRODUCTS_DIR = REPO / "data/catalog/products"
 BRANDS_DIR = REPO / "data/paints/brands"
 OUT_DIR = REPO / "data/catalog/set-contents"
-OVERRIDES = REPO / "data/catalog/overrides.yaml"
+SET_REFS = REPO / "data/catalog/set-refs.yaml"
 
 # Same pure-pyyaml sys.path bootstrap gen_paint_harvest.py documents at length: this script runs
 # as `uv run --with pyyaml python ...` in CI, and both modules below import only stdlib + yaml.
@@ -316,8 +318,8 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
         seen_refs: set[str] = set()
         prose = _stated_prose(product)
         # Maintainer-declared repairs for codes THIS product mistypes, keyed by the ref as printed
-        # (models/catalog.py::Overrides.setRefs). Nothing is computed here -- an entry exists only
-        # because somebody wrote it and cited the evidence in overrides.yaml.
+        # (models/catalog.py::SetRefs). Nothing is computed here -- an entry exists only because
+        # somebody wrote it and cited the evidence in data/catalog/set-refs.yaml.
         corrections = (set_refs or {}).get(product["id"], {})
         for i, ref in enumerate(product["contentSkus"]):
             n_refs += 1
@@ -482,12 +484,12 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    # Read with plain yaml, not the Overrides model: this script runs in CI as
-    # `uv run --with pyyaml python ...` and importing pydantic here would break that line.
-    # The model still validates the same file in the resolver and in test_repo_data.py, so
-    # a malformed block fails loudly there rather than being tolerated everywhere.
-    set_refs = ((yaml.safe_load(OVERRIDES.read_text(encoding="utf-8")) or {}).get("setRefs")
-                if OVERRIDES.exists() else None) or {}
+    # Read data/catalog/set-refs.yaml with plain yaml, not the SetRefs model: this script runs in
+    # CI as `uv run --with pyyaml python ...` and importing pydantic here would break that line.
+    # The model still validates the same file in test_repo_data.py, so a malformed block fails
+    # loudly there rather than being tolerated everywhere.
+    set_refs = ((yaml.safe_load(SET_REFS.read_text(encoding="utf-8")) or {}).get("setRefs")
+                if SET_REFS.exists() else None) or {}
     written: set[str] = set()
     refused: list[str] = []
 
