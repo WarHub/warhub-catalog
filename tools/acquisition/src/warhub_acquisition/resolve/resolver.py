@@ -53,6 +53,13 @@ class DataPaths:
         return self.root / "catalog" / "overrides.yaml"
 
     @property
+    def set_refs(self) -> Path:
+        """Maintainer-declared repairs for codes a manufacturer mistyped in its own contents prose
+        (models/catalog.py::SetRefs). Separate from `overrides` because classify/apply.py rewrites
+        overrides.yaml wholesale and would delete a hand-authored key -- as it did, 2026-08-11."""
+        return self.root / "catalog" / "set-refs.yaml"
+
+    @property
     def conflicts(self) -> Path:
         return self.root / "review" / "conflicts.yaml"
 

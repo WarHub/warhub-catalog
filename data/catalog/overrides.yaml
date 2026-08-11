@@ -1,26 +1,4 @@
 retract: []
-# Codes a manufacturer mistyped in its OWN contents prose: {product id: {stated ref: real code}}.
-# See models/catalog.py::Overrides.setRefs for why a human may state this and a generator may not.
-setRefs:
-  ak-interactive/AK11781:
-    # "GERMAN PANZERGRENADIER DIVISION, EUROPE - WARGAME STARTER SET - 10 COLORS" lists
-    # `AK111424 Grey Green`. There is no AK111424; AK11424 is "GREY GREEN - FIGURES", which AK's
-    # store still sells (live Store API, exact-sku search, 2026-08-09). Six things agree, and the
-    # last two are what make it a correction rather than a guess:
-    #
-    #  1. The name matches: the set prints "Grey Green"; AK11424 is Grey Green.
-    #  2. AK111424 is AK11424 with one extra digit -- a single-character insertion.
-    #  3. It is the ONLY 6-digit code in the box. The other nine are all 5-digit AK11xxx.
-    #  4. The box says "10 COLORS" and enumerates exactly 10, so the 7th line is a miscode and
-    #     not a real eleventh product printed by mistake.
-    #  5. Five of its nine siblings are AK114xx (AK11419, AK11425, AK11426, AK11427, AK11429).
-    #     AK11424 sits inside that run; AK111424 sits nowhere.
-    #  6. The NAME ALONE COULD NOT DECIDE THIS. Two committed paints are called "Grey Green" --
-    #     AK11424 (Figures 3rd Gen) and AK11016 (Standard 3rd Gen) -- so the stated-name repair
-    #     that settles a self-contradicting set refuses here, correctly. The code picks one of the
-    #     two and the name confirms it; neither half is sufficient alone, which is exactly why this
-    #     needs a human and gets a file entry instead of a heuristic.
-    AK111424: AK11424
 products:
   atomic-mass-games/aat-battle-tank-star-wars-legion:
     gameSystem: star-wars-legion
