@@ -1827,9 +1827,17 @@ def main() -> None:
             # Nothing consumes it wrongly today -- the C# ignores `candidates` outright and PyYAML
             # round-trips its own output -- so this closes an exposure rather than a live bug. The
             # sibling generator gen_set_contents.py already refuses safe_dump for this exact shape
-            # and says so in the same words; this was the last generator of committed data still
-            # using it. The wider reformat in the same commit (indented sequences, longer lines) is
-            # _Dumper doing what it does everywhere else in the repo.
+            # and says so in the same words. The wider reformat in the same commit (indented
+            # sequences, longer lines) is _Dumper doing what it does everywhere else in the repo.
+            #
+            # This comment used to end "this was the last generator of committed data still using
+            # it", and that was simply WRONG -- audited 2026-08-11, three more were still on
+            # safe_dump: gen_paint_barcodes.py, gen_paint_store_barcodes.py and
+            # gen_paint_swatches.py. All three are migrated now, which is why the claim is not
+            # restated in the present tense either: the standing guarantee lives in
+            # tests/test_repo_data.py::test_no_committed_yaml_string_changes_type_between_readers,
+            # which scans the committed data instead of trusting a prose count that goes stale the
+            # next time somebody adds a generator.
             + dump_yaml({slug: data})
         )
         out_path.write_bytes(content.encode("utf-8"))

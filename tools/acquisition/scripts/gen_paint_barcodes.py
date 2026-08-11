@@ -103,6 +103,8 @@ REPO = Path(__file__).resolve().parents[3]
 # matters): `norm` was the identical five-line body in both scripts until 2026-08-07.
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.paints.catalog import norm  # noqa: E402
+# yamlio imports nothing but re/pathlib/yaml, so the `--with pyyaml` invocation above still works.
+from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 EVIDENCE = REPO / "data/evidence/products/mfr-gw-trade/observations.jsonl"
 CITADEL = REPO / "data/paints/brands/citadel-colour.yaml"
@@ -316,7 +318,26 @@ def main() -> None:
         "# does an exact lookup; the fuzzy trade->catalog match happened at generation time.\n"
         "# `volumeMl` OVERRIDES the tool's hardcoded per-set VolumeTable (a hand override still wins);\n"
         "# `productCode`/`ssc` are audit-only -- applying productCode would re-key the paint.\n"
-        + yaml.safe_dump({"citadel-colour": brand}, sort_keys=True, allow_unicode=True, width=200)
+        # dump_yaml (not yaml.safe_dump) because `ean`/`productCode` are the join, and safe_dump
+        # decides whether to protect them by which DIGITS happen to appear. Its YAML 1.1 resolver
+        # quotes '5011921193066' (that reads as an int, so it must be), but a leading-zero code is
+        # only quoted when it is valid octal: '0812152031524' contains an 8, so PyYAML calls it a
+        # string, emits it BARE, and reads its own output back correctly -- while a YAML 1.2
+        # consumer, which has no octal rule for a bare leading zero, reads 812152031524 and the pad
+        # that IS the join is gone. data/catalog/products/wyrd-games.yaml:3082 carries exactly that
+        # EAN today (quoted, because the C# writer force-quotes); GW's own codes simply have not
+        # handed this file a leading zero yet. Measured 2026-08-11 on the committed
+        # data/paints/barcodes/citadel-colour.yaml: 0 of its scalars are bare-and-number-shaped, so
+        # this closes an EXPOSURE, not a live bug -- the file is one upstream code away from it.
+        #
+        # sort_keys is the one thing that does not carry over: safe_dump sorted every level and
+        # dump_yaml preserves insertion order, so the sort moves here explicitly. Sorting both
+        # levels reproduces safe_dump's order exactly (PyYAML sorts (key, value) pairs, and the
+        # keys are unique, so it is a plain key sort) and keeps the diff to what _Dumper changes.
+        + dump_yaml({"citadel-colour": {
+            key: {field: brand[key][field] for field in sorted(brand[key])}
+            for key in sorted(brand)
+        }})
     )
     # write_bytes (not write_text) so the committed file is LF on every platform -- write_text would
     # emit CRLF on Windows and churn the diff for a maintainer running this locally.
