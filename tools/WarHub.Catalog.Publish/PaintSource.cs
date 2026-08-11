@@ -20,7 +20,8 @@ internal sealed class PaintYaml
     public string Availability { get; set; } = "";
     /// <summary>`false` when a source states the pot is only sold inside a set; null unstated.
     /// Nullable on purpose -- a non-nullable bool would read an absent key as `false`, turning
-    /// 8,000 silences into an assertion that nothing is sold on its own.</summary>
+    /// 8,460 silences (of 8,461 committed records, measured 2026-08-11) into an assertion that
+    /// nothing is sold on its own.</summary>
     public bool? SoldSeparately { get; set; }
     public string? FirstSeen { get; set; }
     public string? ProductCode { get; set; }

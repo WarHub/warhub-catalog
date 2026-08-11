@@ -128,6 +128,23 @@ public class PaintRecordAdapterTests
     }
 
     [Fact]
+    public void Merge_SoldSeparatelyIsDeclarative_FreshWinsIncludingWithdrawal()
+    {
+        // Until 2026-08-11 this with-list simply did not name SoldSeparately, so the declaration
+        // reached a record ONLY on the insert path: an already-archived pot could never gain the
+        // `false`, and once it had it no edit to overrides.yaml could ever take it back. Both
+        // directions have to work -- `null` is not "unset", it is the positive claim that no
+        // source said, and restoring it is the whole point of being able to withdraw.
+        PaintRecord existing = R();
+        PaintRecord declared = _a.Merge(existing, R() with { SoldSeparately = false });
+        PaintRecord withdrawn = _a.Merge(R() with { SoldSeparately = false }, R());
+
+        Assert.Null(existing.SoldSeparately);
+        Assert.False(declared.SoldSeparately);
+        Assert.Null(withdrawn.SoldSeparately);
+    }
+
+    [Fact]
     public void ApplyRename_PureNameRename_OnlyChangesName()
     {
         PaintRecord existing = R(name: "Old Name", firstSeen: "2026-01-01");

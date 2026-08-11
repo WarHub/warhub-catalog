@@ -40,7 +40,8 @@ public class PaintRecordSchemaTests
     /// `soldSeparately` is a TRI-STATE and the whole design rests on that: null means no source
     /// said, `false` means a source stated the pot is set-exclusive, and those are different
     /// claims. A non-nullable bool would read every silence as "not sold separately", turning
-    /// 8,000 absences into assertions -- so the nullability is a contract, not a style choice.
+    /// 8,460 absences into assertions -- measured 2026-08-11: 8,461 committed records, of which
+    /// exactly one states the field. So the nullability is a contract, not a style choice.
     /// </summary>
     [Fact]
     public void SoldSeparately_IsNullable_SoAbsenceStaysDistinctFromFalse()
