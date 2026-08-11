@@ -1,0 +1,116 @@
+name: Data CI
+
+# Runs the data-integrity tests on changes under data/**. Until this file existed they ran
+# NOWHERE for such a change: ci.yml gates BOTH of its jobs on one workflow-level `paths:` list
+# (tools/**, Directory.Build.props, Directory.Packages.props, WarHub.Catalog.slnx, global.json,
+# .github/workflows/ci.yml) and data/** is absent from it, while ci.yml's `uv run pytest` was the
+# only one in any workflow -- `git grep -n pytest -- .github/` returned exactly one line before
+# this file existed, and returns this file too once it does. So a pull request touching only data/
+# ran ZERO tests and went green by default. PR #111 is what that looks like in practice: a
+# `classify --apply` run deleted a hand-authored block from data/catalog/overrides.yaml and
+# nothing in CI objected.
+#
+# WHY A SECOND WORKFLOW RATHER THAN ADDING 'data/**' TO ci.yml's FILTER. That filter is a budget,
+# not an oversight. ci.yml restores, builds and tests the whole .NET solution AND runs the full
+# pytest suite (~15 min; its build job carries timeout-minutes: 15). Every nightly
+# catalog-acquire.yml PR and every paint-catalog-update.yml PR touches data/**, so widening the
+# filter would put that whole suite -- including a .NET build that no YAML file can affect -- on
+# several automated data PRs a week. This workflow runs the two data-facing test files and
+# nothing else.
+#
+# WHAT IT COVERS, and why exactly these two files: together they are the repo's whole
+# data-integrity net. tests/test_repo_data.py holds the YAML-1.2 scalar-retype guard, the
+# within-brand barcode double-hold guard, the crossover declaration/compile/no-double-publish
+# checks, the paint-bridge gate check, the retract-key silent-no-op guard and the setRefs
+# correction guard. tests/test_set_contents.py holds the boxed-set relation's invariants: no ref
+# silently dropped, no quantity invented, every member naming exactly one committed paint, and
+# the byte-compare proving the committed relation is reproducible from committed inputs. Not one
+# of them was reachable from a data-only change before today.
+#
+# RUNTIME on this runner: 2m9s for the 25 tests, measured 2026-08-11 on the first real run of
+# this workflow (PR #112, which triggered it on itself). For contrast, the same command on the
+# Windows dev box it was written on took 3m49s and 4m38s over two runs -- tests/test_repo_data.py
+# 17 tests / 1m15s, tests/test_set_contents.py 8 tests / 4m56s. Both files are I/O-bound: ~150
+# committed YAML files, one of them 9 MB, walked several times over, plus one full subprocess
+# regeneration of the set-contents relation -- the kind of work a Linux runner does markedly
+# faster than NTFS, which is the whole 2x. timeout-minutes below stays well above the measured
+# figure on purpose: it is a runaway backstop, not a performance budget, and the set-contents
+# regeneration grows with the number of sets that state their contents.
+#
+# A PR touching data/** AND tools/** runs these 25 tests twice, once here and once inside
+# ci.yml's full suite. That is deliberate: the alternative is deselecting them from ci.yml, which
+# would let a tools-only change break a data guard silently -- the mirror image of the hole this
+# workflow closes.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - '.github/workflows/data-ci.yml'
+  pull_request:
+    paths:
+      - 'data/**'
+      - '.github/workflows/data-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: data-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  data-integrity:
+    name: Data integrity tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tools/acquisition
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked
+      - run: uv run pytest tests/test_repo_data.py tests/test_set_contents.py -q
+
+      # THE TESTS WRITE INTO THE CHECKOUT. tests/test_set_contents.py:138 runs
+      # scripts/gen_set_contents.py as a subprocess with cwd=REPO_ROOT, so the run rewrites
+      # data/catalog/set-contents/*.yaml in place. Harmless on a throwaway runner -- and worth
+      # keeping, because it is the only way that test can prove the committed relation is
+      # reproducible -- but it means the tree state after pytest carries information, so this
+      # step reads it instead of discarding it.
+      #
+      # WHY IT IS NOT REDUNDANT WITH THAT TEST. The test snapshots the files that exist BEFORE
+      # the subprocess runs (`before = {p: p.read_bytes() for p in _require()}`) and compares
+      # only those. A file the generator CREATES has no entry in that snapshot, so it is never
+      # compared and the test stays green with a new, uncommitted relation file sitting in the
+      # tree -- and gen_set_contents.py does create files, one per manufacturer that states
+      # contentSkus (:517). `git status --porcelain` sees an untracked file; a byte-compare over
+      # a pre-run snapshot structurally cannot. This step is therefore the half of "the committed
+      # relation is stale" that the test cannot reach, at a cost of one git invocation.
+      #
+      # SCOPED TO data/ ON PURPOSE, not the whole tree: data/ is the only thing pytest can write
+      # here, and an unscoped check would additionally be hostage to whatever build detritus a
+      # future step drops in the workspace. (tools/acquisition/.venv and __pycache__ are already
+      # ignored, and .pytest_cache self-ignores, so an unscoped check happens to pass today --
+      # scoping keeps it passing for a reason rather than by luck.)
+      #
+      # Runs from the workspace root; the job default working-directory is tools/acquisition,
+      # which the `-- data` pathspec would otherwise be resolved against.
+      # `always()` so a FAILING test run is still inspected -- a stale relation usually shows up as
+      # a failure plus a dirty tree, and skipping the check there would hide half the evidence. The
+      # cost is that a pytest CRASH mid-regeneration also lands here, where a half-written file is
+      # not drift at all, so the message says which of the two a reader is looking at rather than
+      # asserting the drift reading.
+      - name: Fail if the tests rewrote committed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          if [ -n "$(git status --porcelain -- data)" ]; then
+            echo "::error::The test run rewrote data/. If the test step above PASSED, a committed generated file is stale: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit the result. If the test step above FAILED or crashed, this is most likely fallout from a half-finished regeneration -- fix that failure first and discard this with 'git checkout -- data'."
+            git status --porcelain -- data
+            git --no-pager diff -- data
+            exit 1
+          fi
