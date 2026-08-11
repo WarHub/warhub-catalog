@@ -29,6 +29,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 SCRIPT = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
 
 CROSSED = "boxed set -- crosses to the product catalog"
+AUX = "auxiliary agent, not a colour -- claimed by the product catalog"
 
 
 def _load():
@@ -98,6 +99,42 @@ def test_a_crossed_row_is_reported_not_dropped(evidence) -> None:
         {"name": "AdeptiCon Paint Set", "sku": "MPA-SET-ACON", "url": "u",
          "source": "mfr-monument", "reason": CROSSED}
     ]
+
+
+def test_the_receipt_names_the_kind_the_clause_declared_not_always_a_set(evidence) -> None:
+    """A refusal is RECORDED, never guessed -- including the kind of thing being refused.
+
+    ak-interactive.com crosses two kinds out of the same paint categories (a per-clause `category`,
+    crossover.py::category_for): boxed sets and auxiliary agents. The receipt was the fixed word
+    "boxed set" for both, and this file is the ONLY place the paint side says why AK712 Acrylic
+    Thinner is not a paint. Measured 2026-08-11 over data/paints/harvest/: 562 candidate rows carry
+    a crossover reason and 16 of them -- all AK -- are `hobby-auxiliary`.
+
+    Both rows below are real AK titles, and they run against the REAL descriptor (SOURCES_DIR is
+    not redirected), so this pins the actual clause order too: "ODOURLESS THINNER" reaches the
+    narrow clause first, "FLESH COLORS SET" falls through to the title clause.
+    """
+    evidence("mfr-ak-interactive", [
+        {"name": "ODOURLESS THINNER", "sku": "AKABT111", "url": "u"},
+        {"name": "FLESH COLORS SET", "sku": "AKABT301", "url": "u"},
+    ])
+    out = harvest.BrandHarvest()
+    assert harvest.paint_rows("mfr-ak-interactive", out) == []
+    assert _reasons(out) == [AUX, CROSSED]
+
+
+def test_a_crossover_category_with_no_receipt_stops_the_run(monkeypatch, evidence) -> None:
+    """The next `category` someone adds must not inherit the previous one's word by default.
+
+    `CROSSOVER_REASON.get(stamp)` with a fallback would file a new kind under an old label -- the
+    exact defect this pair of tests exists to close -- so an unmapped stamp is a hard stop. Pinned
+    because the failure mode is silent: the harvest would still be written, still be valid YAML,
+    and still be wrong.
+    """
+    monkeypatch.setattr(harvest, "CROSSOVER_REASON", {})
+    evidence("mfr-ak-interactive", [{"name": "FLESH COLORS SET", "sku": "AKABT301", "url": "u"}])
+    with pytest.raises(SystemExit, match="CROSSOVER_REASON"):
+        harvest.paint_rows("mfr-ak-interactive", harvest.BrandHarvest())
 
 
 def test_a_blockless_source_loses_nothing(evidence) -> None:

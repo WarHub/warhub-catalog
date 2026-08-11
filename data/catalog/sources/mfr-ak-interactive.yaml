@@ -69,23 +69,33 @@ crossoverToProducts:
     and why the predicate cannot be one shared rule across sources -- greenstuffworld.com's
     title signal is a strict superset of its category signal and reapermini.com's category
     signal does nearly all the work, so the same rule would be wrong for all three.
-    A MINORITY FAIL THE RESOLVER'S IDENTITY FLOOR and land in review/conflicts.yaml as
-    `set-without-identity` rather than crossing: ak-interactive.com publishes ZERO barcodes
-    anywhere (no observation from this source carries an ean), so a row whose sku does not
-    match this manufacturer's codePattern has no addressable identity at all and would
-    publish under a slug of its store title. They are of two kinds: real item numbers
-    (AKABT301-311, AKAD102-109, AKG25, AKG26, AKPACK74, AKPACK78, AKABT1000) and freehand
-    RANGE STRINGS which are not product identities at all ("AK 3G RANGE AFV/AIR/FIG/GENERIC",
-    "RANGE AKAD"). Deliberately NOT fixed by widening the codePattern: a pattern loose enough
-    to swallow the former would code the latter too. Surfacing them as a reviewable list is
-    the point, so the list lives in conflicts.yaml where it stays current, not here.
+    A MINORITY FAIL THE RESOLVER'S IDENTITY FLOOR and land in review/conflicts.yaml rather
+    than crossing: ak-interactive.com publishes ZERO barcodes anywhere (no observation from
+    this source carries an ean), so a row whose sku does not match this manufacturer's
+    codePattern has no addressable identity at all and would publish under a slug of its
+    store title. THE CONFLICT TYPE CARRIES THE STAMP THE ROW WOULD HAVE WORN, so they arrive
+    as `paint-set-without-identity` AND `hobby-auxiliary-without-identity` -- not all of them
+    are sets, and a maintainer triaging the list should not have to open the store page to
+    find that out. They are of three kinds: real item numbers for boxed sets (the AKABT3xx
+    and AKAD10x colour sets, the AKG gouache sets, the AKPACK bundles, AKABT1000);
+    freehand RANGE STRINGS which are not product identities at all ("AK 3G RANGE
+    AFV/AIR/FIG/GENERIC", "RANGE AKAD"); and the AKABT11x thinners, which the
+    `hobby-auxiliary` clause below claims and which are not boxed sets and never were.
+    Deliberately NOT fixed by widening the codePattern: a pattern loose enough to swallow the
+    item numbers would code the range strings too.
+    KINDS, NOT MEMBERS, and for the same reason the counts came out of this field: the
+    enumeration that stood here was the exact membership from before the `hobby-auxiliary`
+    clause below was added to this same block, and it went stale in that very commit -- it
+    named three fewer skus than conflicts.yaml held and still read as authoritative. Nothing
+    validates a list here any more than a number. Surfacing these rows as a reviewable list
+    is the point, so the list lives in conflicts.yaml where it stays current, not here.
     The rest cross code-anchored and barcode-less, and contribute nothing to the EAN coverage
     the repo's guards measure.
     RE-DERIVE any of the above with `crossover.matches` over
-    data/evidence/products/mfr-ak-interactive/observations.jsonl, and the refusals by counting
-    `set-without-identity` in data/review/conflicts.yaml. Counts are deliberately not quoted
-    here: this source is re-harvested, and a number in this field goes stale silently because
-    nothing validates it.
+    data/evidence/products/mfr-ak-interactive/observations.jsonl (or `crossover.category_for`
+    for the split by kind), and the refusals by counting the two `*-without-identity` types in
+    data/review/conflicts.yaml. Counts are deliberately not quoted here: this source is
+    re-harvested, and a number in this field goes stale silently because nothing validates it.
   category: paint-set
   anyOf:
     # FIRST, because clause order decides the stamp where clauses overlap (crossover.py::
@@ -106,9 +116,19 @@ crossoverToProducts:
     # Effects Fluid) -- but a `nameMatches` clause is evaluated against EVERY row this source
     # observes, so it also claims solvent-named rows from elsewhere in the catalogue: AKABT111 /
     # AKABT112 / AKABT113 (odourless, matt-effect and fast-dry thinners), AK712, AK1566, ABT116 and
-    # AK1018. Those are auxiliaries and belong here, but none of them matches any OTHER clause in
-    # this block, so this clause ADMITS them to the product catalog rather than merely restamping
-    # rows that were already crossing. Widening the word list widens the catalog, not just a stamp.
+    # AK1018. Those are auxiliaries and belong here, and NONE OF THE 16 ROWS THIS CLAUSE SELECTS
+    # MATCHES ANY OTHER CLAUSE IN THIS BLOCK (measured 2026-08-11 with crossover.clause_matches --
+    # 0 of 16, the swept-category hits included), so this clause is not restamping rows that were
+    # already crossing: every row it selects crosses BECAUSE of it. Widening the word list widens
+    # the catalog, not just a stamp.
+    #
+    # ADMITS 13 OF THE 16, not all of them. AKABT111/112/113 are selected here and then REFUSED by
+    # the resolver's identity floor -- their skus do not match this manufacturer's codePattern and
+    # AK publishes no barcode -- so they reach neither catalog and surface as
+    # `hobby-auxiliary-without-identity` in review/conflicts.yaml. Measured 2026-08-11:
+    # data/catalog/products/ak-interactive.yaml holds 13 `category: hobby-auxiliary` products
+    # against this clause's 16 selections. Widening the word list can therefore also widen
+    # conflicts.yaml rather than the catalog, which is the cheaper failure but still a cost.
     #
     # The word list is deliberately narrow and anchored: BURNISHING and MICROFILLER name processes,
     # THINNER/CLEANER name solvents, and `\bFLUID\b` is a whole word so it cannot catch a colour
