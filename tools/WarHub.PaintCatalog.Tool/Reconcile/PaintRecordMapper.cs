@@ -10,8 +10,11 @@ public static class PaintRecordMapper
     /// equivalence pass can run on what was actually ARCHIVED rather than on the pre-reconciliation
     /// working list -- `retract:` removes records only from the reconciler's output, so an
     /// equivalence file built from the working list names paints the archive no longer contains.
-    /// Measured while retracting AK's 194 duplicates: 405 dangling sources and 1,855 dangling match
-    /// rows, reproduced identically by a second full run.
+    /// Re-measured 2026-08-11 across that retraction, joining (brandSlug, name, set, productCode):
+    /// 204 dangling sources and 933 dangling match rows. The 405 and 1,855 this quoted before are
+    /// the same join read through the unquoted `productCode` scalars 3539f4e fixed, inflated by
+    /// exactly the 201 false sources YamlCatalogWriter.cs names; a second full run reproduced them
+    /// because the bias is systematic, not because they were real. Both are 0 at 8,461 records.
     ///
     /// Lossy ON PURPOSE, and only in fields equivalence does not read: `Status`/`Availability`
     /// collapse back into <see cref="Paint.IsDiscontinued"/>, and `FirstSeen` has no home on the

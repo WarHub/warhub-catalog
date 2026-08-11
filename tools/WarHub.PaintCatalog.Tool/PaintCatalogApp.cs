@@ -577,12 +577,17 @@ internal static class PaintCatalogApp
 
                 // EQUIVALENCES MUST SEE THE ARCHIVE, NOT THE WORKING LIST. `allCatalogs` was built
                 // from the pre-reconciliation `paints` earlier in this run, so it still holds every
-                // record `retract:` removes -- and the equivalence pass ran on it. Measured
-                // 2026-08-07 while retracting AK's 194 category-duplicate records: 405 equivalence
-                // sources and 1,855 match rows named a paint that no longer exists, and a SECOND
-                // full run reproduced the identical numbers, so it is not a stale-file problem.
-                // Rebuilding the catalog from `finalRecords` here is what makes the equivalence
-                // file a statement about the published archive rather than about an intermediate.
+                // record `retract:` removes -- and the equivalence pass ran on it. Re-measured
+                // 2026-08-11 on (brandSlug, name, set, productCode) against the archive AK's 194
+                // category-duplicate retraction left: 204 sources and 933 match rows named a paint
+                // that no longer exists. The 405 and 1,855 quoted here before read the same join
+                // through the unquoted `productCode` scalars 3539f4e later fixed, where PyYAML
+                // takes '040' for 32 -- a surplus of exactly the 201 false sources
+                // YamlCatalogWriter.cs already names. A second full run agreeing could never have
+                // caught that, because a systematic mis-read reproduces perfectly. Rebuilding from
+                // `finalRecords` here is what makes the equivalence file a statement about the
+                // published archive rather than about an intermediate: 0 dangling on both sides of
+                // today's 8,461 records.
                 var archivedCatalog = new BrandCatalog
                 {
                     Brand = pending.Brand,
