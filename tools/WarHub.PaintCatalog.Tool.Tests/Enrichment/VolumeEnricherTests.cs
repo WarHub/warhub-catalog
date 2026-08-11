@@ -94,6 +94,39 @@ public class VolumeEnricherTests
         Assert.Equal("dropper", enriched.Packaging);
     }
 
+    // Xtreme Metal landed 2026-08-09 with no rule and took AK's brand-wide 17 ml, contradicting
+    // every one of its own record names ("Xtreme Metal Aluminium 30ml" published as volumeMl 17).
+    // Measured 2026-08-11: 23 of 23 state 30 in the name, 23 of 23 carried 17.
+    [Fact]
+    public void Enrich_AkInteractive_XtremeMetalBeatsTheBrandWideDefault()
+    {
+        // Ordering test as much as a value test, same as the Green Stuff World pair above: AK's
+        // brand-wide row has a null set list and so matches everything, and `Lookup` returns on
+        // the FIRST match. A row for this set placed below it can never fire, and the failure
+        // reads as 17/dropper -- indistinguishable from the repair never having been made.
+        Paint enriched = VolumeEnricher.Enrich(MakePaint("Xtreme Metal"), "AK Interactive");
+
+        Assert.Equal(30, enriched.VolumeMl);
+        Assert.Equal("dropper", enriched.Packaging);
+    }
+
+    // And the new row must not widen AK's default. `Weathering Effects` is the set that would hurt:
+    // it was promoted the same day and deliberately has NO rule, because 0 of its 78 records state
+    // a volume in their name and the mfr-ak-interactive evidence carries no `ml` hint at all -- so
+    // any constant for it would be invented rather than measured.
+    [Theory]
+    [InlineData("Weathering Effects")]
+    [InlineData("AFV")]
+    [InlineData("Figures (3rd Gen)")]
+    [InlineData("Standard (3rd Gen)")]
+    public void Enrich_AkInteractive_UnlistedSetsStillGetTheBrandWideDefault(string set)
+    {
+        Paint enriched = VolumeEnricher.Enrich(MakePaint(set), "AK Interactive");
+
+        Assert.Equal(17, enriched.VolumeMl);
+        Assert.Equal("dropper", enriched.Packaging);
+    }
+
     [Fact]
     public void Enrich_ArmyPainter_18mlDropper()
     {
