@@ -53,6 +53,21 @@ public static class VolumeTable
         // 18ML" full-range listing); Color Punch ships in the standard 3rd-gen 17 ml dropper.
         new("AK Interactive", ["Quick Gen"], 18, "dropper"),
         new("AK Interactive", ["Color Punch (3rd Gen)"], 17, "dropper"),
+        // Xtreme Metal, promoted 2026-08-09 with no rule, so all 23 records took the brand-wide
+        // 17 ml below while their own committed NAME said 30 -- `Xtreme Metal Aluminium 30ml`
+        // published as `volumeMl: 17`. Measured 2026-08-11: 23 of 23 names state a volume, all 23
+        // state 30, and 23 of 23 carried 17. Two independent signals agree against the table --
+        // the record's name and the store title in the mfr-ak-interactive evidence -- which is the
+        // same pair the Green Stuff World rows below were justified on.
+        // `dropper` restates what all 23 already carry, so it asserts nothing new; writing null
+        // would CLEAR the container on 23 records, a different change than the one intended.
+        new("AK Interactive", ["Xtreme Metal"], 30, "dropper"),
+        // NO ROW FOR "Weathering Effects", the other set promoted the same day, and the absence is
+        // deliberate. Its 78 records state a volume nowhere: 0 of 78 names carry an ml token, and
+        // the mfr-ak-interactive observations expose only {category, categorySlugs, description}
+        // -- there is no `ml` hint for the bridge to read, unlike mfr-greenstuffworld. A constant
+        // here would be the speculative row the VolumeRule docstring forbids; those records keep
+        // the brand-wide default until a source states otherwise, per the Dipping Inks precedent.
         new("Vallejo", ["Liquid Gold"], 35, "dropper"),
         new("Vallejo", ["Premium Airbrush Color"], 60, "dropper"),
         new("Vallejo", ["Hobby Paint"], 18, "dropper"),
