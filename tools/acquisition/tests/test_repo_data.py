@@ -5,8 +5,11 @@ Uses a repo-root fixture rather than a package-relative one: this package can be
 tested outside the monorepo (sdist), where ../../../../data does not exist -- skip cleanly
 in that case instead of failing.
 """
+import functools
+import importlib.util
 import json
 import re
+import sys
 import unicodedata
 from pathlib import Path
 
@@ -24,6 +27,63 @@ from warhub_acquisition.yamlio import read_yaml
 REPO_ROOT = Path(__file__).resolve().parents[3]
 REPO_DATA = REPO_ROOT / "data"
 PAINT_HARVEST_BRIDGE = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
+SET_CONTENTS_GENERATOR = REPO_ROOT / "tools/acquisition/scripts/gen_set_contents.py"
+
+
+@functools.lru_cache(maxsize=1)
+def _set_contents_generator():
+    """The set-contents generator itself, so a guard over its inputs uses ITS rules, not a copy.
+
+    Same importlib.util pattern nine other test modules use to reach a script that is not part of
+    the installed package (tests/test_paint_harvest_gate.py is the canonical one; counted
+    2026-08-11), each with a DISTINCT sys.modules name so no two of them collide. Safe to import:
+    the script guards `main()` with `if __name__ == "__main__":`, and nothing at module scope
+    touches the filesystem beyond a sys.path insert.
+
+    Everything is read off THIS module object rather than re-imported from the package, so the
+    objects the test asks questions of are byte-for-byte the ones the generator uses -- including
+    under a non-editable install, where the script's own sys.path bootstrap could otherwise resolve
+    `warhub_acquisition` to a different copy than pytest does.
+    """
+    if not SET_CONTENTS_GENERATOR.exists():
+        pytest.skip("gen_set_contents.py not present (package built/tested outside the monorepo)")
+    spec = importlib.util.spec_from_file_location(
+        "gen_set_contents_for_repo_data", SET_CONTENTS_GENERATOR
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+@functools.lru_cache(maxsize=None)
+def _catalogs_for_manufacturer(manufacturer: str) -> tuple:
+    """The paint archives gen_set_contents.py would search for this manufacturer -- and no others.
+
+    `Catalog.__init__` is a pure constructor over one YAML read, so caching this is about not
+    re-parsing a 200KB archive per assertion rather than about correctness.
+    """
+    generator = _set_contents_generator()
+    brands = generator.MANUFACTURER_BRANDS.get(manufacturer) or []
+    return tuple(generator.Catalog(brand, generator.BRANDS_DIR) for brand in brands)
+
+
+def _codes_across_every_archive() -> dict[str, list[str]]:
+    """Every productCode in data/paints/brands/, ignoring which brand it belongs to.
+
+    THIS IS THE WRONG INDEX FOR DECIDING ANYTHING, and it is here only to prove that -- see the two
+    divergence tests at the bottom of this file. A repo-wide index cannot answer the question this
+    relation asks ("does this code name one paint in the brands THIS manufacturer's sets search?"),
+    because the answer depends on the scope. It was, until 2026-08-11, how the setRefs guard
+    answered it anyway.
+    """
+    codes: dict[str, list[str]] = {}
+    for path in sorted((REPO_DATA / "paints" / "brands").glob("*.yaml")):
+        for record in (read_yaml(path) or {}).get("paints") or []:
+            code = str(record.get("productCode") or "")
+            if code:
+                codes.setdefault(code, []).append(f"{path.stem}/{record['name']}")
+    return codes
 
 
 def _require_repo_data() -> DataPaths:
@@ -803,14 +863,36 @@ def test_every_set_ref_correction_is_live_and_resolvable() -> None:
       1. THE MISTYPED REF IS STILL PRINTED. If it is gone from that product's `contentSkus`, the
          manufacturer fixed its own prose (or the description changed shape) and the entry must be
          DELETED, not left behind where it can catch a future code that happens to collide.
-      2. THE CORRECTED CODE STILL NAMES EXACTLY ONE PAINT. A correction resolving to zero paints
-         is a refusal wearing a repair's clothes; one resolving to several would pick by archive
-         order, which is the tie-break-by-luck this relation refuses everywhere else.
+      2. THE CORRECTED CODE STILL NAMES EXACTLY ONE PAINT, in the brands this manufacturer's sets
+         actually search. A correction resolving to zero paints is a refusal wearing a repair's
+         clothes; one resolving to several would pick by archive order, which is the
+         tie-break-by-luck this relation refuses everywhere else.
+
+    RESOLVED THE WAY THE GENERATOR RESOLVES, which is the whole point of importing
+    `paints_for_ref` and `MANUFACTURER_BRANDS` rather than restating them. This test used to glob
+    every file in data/paints/brands/ and pass on a repo-wide unique hit, and that disagreed with
+    gen_set_contents.py in both directions (measured 2026-08-11, and both are pinned by the two
+    tests below so a future loosening fails rather than drifts):
+
+      - It passed corrections the generator REFUSES. A code is only looked up in
+        MANUFACTURER_BRANDS[manufacturer] -- ak-interactive searches only `ak-interactive` -- so
+        correcting an AK ref to `RC078`, which exists exactly once repo-wide but in ak-real-color,
+        was reported "live and resolvable" while the generator writes `unresolved`. 4,925 of the
+        6,049 repo-wide-unique codes are outside ak-interactive's scope like that (warlord-games
+        4,701, reaper 5,555, of 6,192 distinct codes across the 21 archives).
+      - It failed corrections the generator RESOLVES. The generator falls back to
+        `lstrip("0")`, so a reaper correction written in reaper's own printed vocabulary
+        (`09412`) resolved there and produced hits=[] here. 345 of reaper's 403 distinct refs are
+        zero-padded and its archive stores 0 of 494 codes with a leading zero, so that is the
+        normal shape of a reaper code, not a corner.
 
     Live today: ak-interactive/AK11781 prints `AK111424 Grey Green`, which is AK11424 with one
-    extra digit -- the only 6-digit code in a box whose other nine are 5-digit AK11xxx.
+    extra digit -- the only 6-digit code in a box whose other nine are 5-digit AK11xxx. Under the
+    tightened rule it still resolves, to exactly one paint within `['ak-interactive']`:
+    `Grey Green|Figures (3rd Gen)` (verified 2026-08-11; AK111424 itself names no paint anywhere).
     """
     _require_repo_data()
+    generator = _set_contents_generator()
     set_refs_path = REPO_DATA / "catalog" / "set-refs.yaml"
     if not set_refs_path.exists():
         pytest.skip("data/catalog/set-refs.yaml not present")
@@ -818,33 +900,39 @@ def test_every_set_ref_correction_is_live_and_resolvable() -> None:
     if not corrections:
         pytest.skip("no setRefs corrections declared")
 
-    products: dict[str, dict] = {}
+    # Keyed by the products FILE STEM, because that is what gen_set_contents.py keys
+    # MANUFACTURER_BRANDS by. Splitting the product id on "/" would agree today and would be a
+    # second spelling of the same fact -- the thing this test was just fixed for.
+    products: dict[str, tuple[str, dict]] = {}
     for path in sorted((REPO_DATA / "catalog" / "products").glob("*.yaml")):
         for product in (read_yaml(path) or {}).get("products") or []:
-            products[str(product.get("id"))] = product
-
-    paints_by_code: dict[str, list[str]] = {}
-    for path in sorted((REPO_DATA / "paints" / "brands").glob("*.yaml")):
-        archive = read_yaml(path) or {}
-        for record in archive.get("paints") or []:
-            code = str(record.get("productCode") or "")
-            if code:
-                paints_by_code.setdefault(code, []).append(f"{path.stem}/{record['name']}")
+            products[str(product.get("id"))] = (path.stem, product)
 
     stale, unresolvable = [], []
     for product_id, mapping in corrections.items():
-        product = products.get(product_id)
-        assert product is not None, (
+        entry = products.get(product_id)
+        assert entry is not None, (
             f"setRefs names {product_id!r}, which is not a committed product -- a correction "
             "scoped to a product that no longer exists can never fire"
         )
+        manufacturer, product = entry
+        assert generator.MANUFACTURER_BRANDS.get(manufacturer), (
+            f"setRefs corrects {product_id!r}, whose manufacturer {manufacturer!r} has no "
+            "MANUFACTURER_BRANDS entry in gen_set_contents.py -- that manufacturer is refused "
+            "wholesale and gets no set-contents file, so the correction can never fire"
+        )
+        catalogs = list(_catalogs_for_manufacturer(manufacturer))
         stated = [str(code) for code in (product.get("contentSkus") or [])]
         for wrong, right in mapping.items():
             if str(wrong) not in stated:
                 stale.append((product_id, wrong, right))
-            hits = paints_by_code.get(str(right), [])
+            hits = generator.paints_for_ref(catalogs, str(right))
             if len(hits) != 1:
-                unresolvable.append((product_id, wrong, right, hits))
+                unresolvable.append((
+                    product_id, wrong, right,
+                    sorted(f"{c.slug}/{c.key_of(p)}" for c, p in hits),
+                    [c.slug for c in catalogs],
+                ))
 
     assert not stale, (
         "setRefs entries whose mistyped ref is NO LONGER in the product's contentSkus -- the "
@@ -852,7 +940,100 @@ def test_every_set_ref_correction_is_live_and_resolvable() -> None:
         f"future code. Delete them: {stale}"
     )
     assert not unresolvable, (
-        "setRefs entries whose corrected code does not name exactly one committed paint. Zero "
-        "means the repair refuses just as loudly as the typo did; several means it would be "
+        "setRefs entries whose corrected code does not name exactly one paint IN THE BRANDS THAT "
+        "MANUFACTURER'S SETS SEARCH (last field). Zero means the repair refuses just as loudly as "
+        "the typo did -- and note a code that exists in some OTHER brand's archive still counts as "
+        "zero here, because gen_set_contents.py never looks there. Several means it would be "
         f"decided by archive order: {unresolvable}"
+    )
+
+
+def test_a_setref_correction_may_not_reach_into_an_archive_the_generator_never_searches() -> None:
+    """The FALSE PASS the guard above allowed until 2026-08-11, pinned so it cannot come back.
+
+    gen_set_contents.py resolves a ref only against `MANUFACTURER_BRANDS[manufacturer]`. A guard
+    that instead asks "is this code unique across all 21 brand archives?" answers a strictly easier
+    question, and the gap is not marginal: measured 2026-08-11, 6,192 distinct product codes are
+    committed, 6,049 of them unique repo-wide, and of those 4,925 name no paint at all inside
+    ak-interactive's search space (warlord-games 4,701, reaper 5,555).
+
+    `RC078` is the concrete shape -- exactly one paint repo-wide (ak-real-color, "Apc Interior
+    Green Fs 24533") and zero inside `['ak-interactive']`. A correction pointing an AK ref there
+    would have been called "live and resolvable" while the generator wrote `unresolved`, i.e. the
+    guard's docstring promised precisely what it did not check.
+
+    Asserted over the whole divergent population rather than on RC078 by name, so retracting one
+    paint cannot turn this into a confusing failure -- but with a floor, so a scope change that
+    quietly made the two indexes agree cannot turn it vacuous either.
+    """
+    _require_repo_data()
+    generator = _set_contents_generator()
+    repo_wide = _codes_across_every_archive()
+    unique_repo_wide = [code for code, owners in repo_wide.items() if len(owners) == 1]
+    assert len(unique_repo_wide) > 5000, (
+        f"only {len(unique_repo_wide)} repo-wide-unique codes (6,049 measured 2026-08-11) -- the "
+        "population this test reasons about has changed shape; re-derive before relaxing anything"
+    )
+
+    for manufacturer in sorted(generator.MANUFACTURER_BRANDS):
+        catalogs = list(_catalogs_for_manufacturer(manufacturer))
+        in_scope = {
+            str(paint.get("productCode") or "") for catalog in catalogs for paint in catalog.paints
+        }
+        # Unique repo-wide -- so the OLD guard passed it -- but carried by no paint in any archive
+        # this manufacturer searches. Every one must be refused, verbatim and after the zero-strip.
+        outsiders = [code for code in unique_repo_wide
+                     if code not in in_scope and (code.lstrip("0") or code) not in in_scope]
+        assert len(outsiders) > 1000, (
+            f"{manufacturer}: only {len(outsiders)} repo-wide-unique codes fall outside its "
+            "search space (ak-interactive 4,925 / warlord-games 4,701 / reaper 5,555 measured "
+            "2026-08-11) -- this test is close to vacuous, re-measure it"
+        )
+        for code in outsiders:
+            assert generator.paints_for_ref(catalogs, code) == [], (
+                f"{manufacturer}: {code!r} names no paint in "
+                f"{generator.MANUFACTURER_BRANDS[manufacturer]} yet paints_for_ref returned a "
+                f"hit -- the lookup has been widened past the brands the generator searches, so a "
+                "setRefs correction could now be declared 'resolvable' against an archive this "
+                "manufacturer's sets never draw from"
+            )
+
+
+def test_a_setref_correction_in_a_sources_zero_padded_vocabulary_still_resolves() -> None:
+    """The FALSE FAIL of the same guard, and the reason the fix could not just be "scope it".
+
+    A maintainer writing a reaper correction writes it the way reapermini.com prints the code --
+    zero-padded, `09412` -- because that is the string sitting in `contentSkus` next to the typo.
+    The generator resolves it (verbatim, then `lstrip("0")`); a guard without the strip returns
+    zero hits and calls the correction unresolvable.
+
+    Measured 2026-08-11 over the committed files: reaper's 29 sets state 802 refs, 403 distinct,
+    ALL 5 characters, and 345 of the 403 are zero-padded -- while the archive stores 0 of its 494
+    codes with a leading zero. So a padded correction is the ORDINARY case for this manufacturer,
+    and the 345 below are each a correction that the pre-2026-08-11 guard would have rejected.
+    """
+    _require_repo_data()
+    generator = _set_contents_generator()
+    if "reaper" not in generator.MANUFACTURER_BRANDS:
+        pytest.skip("reaper is no longer a set-contents manufacturer")
+    catalogs = list(_catalogs_for_manufacturer("reaper"))
+    repo_wide = _codes_across_every_archive()
+
+    refs = sorted({
+        str(ref)
+        for product in (read_yaml(REPO_DATA / "catalog" / "products" / "reaper.yaml") or {})
+        .get("products") or []
+        for ref in (product.get("contentSkus") or [])
+    })
+    padded = [ref for ref in refs if ref.startswith("0")]
+    # Padded, resolving to exactly one paint through the generator's rule, and invisible to a
+    # verbatim index -- the exact combination the old guard mishandled.
+    strip_only = [ref for ref in padded
+                  if len(generator.paints_for_ref(catalogs, ref)) == 1 and ref not in repo_wide]
+    assert len(strip_only) > 300, (
+        f"{len(strip_only)} zero-padded reaper refs resolve only via the leading-zero strip (345 "
+        f"of {len(refs)} distinct refs measured 2026-08-11, {len(padded)} padded today) -- if this "
+        "collapsed, either the archive started storing padded codes or the strip was dropped, and "
+        "in the second case every reaper correction a maintainer writes in the source's own "
+        "vocabulary now silently fails"
     )

@@ -158,16 +158,27 @@ HEADER = """\
 # games-workshop/citadel-colour).
 #
 # CODE NORMALISATION: a ref is tried verbatim, then with leading zeros stripped. Reaper's site
-# zero-pads (09412) and its archive does not (9412). Measured 2026-08-07: every reaper ref is
-# 5 chars, the archive stores NO code with a leading zero, and most refs match only after
-# stripping -- the verbatim matches are the 89xxx Bones Ultra-Coverage block plus the 29xxx pair
-# the site names only inside a box (since acquired, so they now resolve rather than refuse). No ref
-# needs any other rule -- and AK needs none at all: its refs are alpha-prefixed, so `lstrip("0")`
-# is a no-op on every one of them, and the archive already stores the same zero-padded form the
-# source prints (AK004, AK012, AK088). Do NOT "helpfully" extend the rule to strip zeros after the
-# prefix. AK011/AK012/AK088/AK089 are genuinely absent from data/paints/brands/ak-interactive.yaml
-# and AK11/AK88 do not exist either, so the only thing such a rule could do is convert honest
-# refusals into silent misses.
+# zero-pads (09412) and its archive does not (9412). Re-measured over the committed files
+# 2026-08-11: all 403 distinct reaper refs are 5 chars, the archive stores NO code with a leading
+# zero (0 of 494), and 345 of the 403 match only after stripping. The 58 that match VERBATIM are
+# 89501-89556 -- a contiguous block, listed by reaper/09967 and reaper/09968 ("Pathfinder Colors of
+# Golarion" sets #1 and #2), every one resolving into `Master Series Paints Pathfinder` -- plus the
+# 29xxx pair the site names only inside a box (29107 Gutter Grime, 29815 HD Dragon Blue; both since
+# acquired, so they now resolve rather than refuse).
+#
+# THAT SENTENCE USED TO CALL THE 89xxx BLOCK "Bones Ultra-Coverage", and it was wrong in a way
+# worth recording because it inverted the very thing this paragraph is about. The reaper archive
+# holds no Ultra-Coverage set and no 890xx code at all. The REAL Bones Ultra-Coverage products --
+# reaper/09966 and 09976-09981, 150 refs between them -- enumerate 094xx codes, of which 0 match
+# verbatim and all 150 match only after `lstrip("0")`: the OPPOSITE normalisation category from the
+# one the old wording filed them under.
+#
+# NO REF NEEDS ANY OTHER RULE -- and AK needs none at all: its refs are alpha-prefixed, so
+# `lstrip("0")` is a no-op on every one of them, and the archive already stores the same zero-padded
+# form the source prints (AK004, AK012, AK088). Do NOT "helpfully" extend the rule to strip zeros
+# after the prefix. AK011/AK012/AK088/AK089 are genuinely absent from
+# data/paints/brands/ak-interactive.yaml and AK11/AK88 do not exist either, so the only thing such
+# a rule could do is convert honest refusals into silent misses.
 #
 # `from` ON A SET says where its refs came from, and the two are not the same claim. "stated" is a
 # machine-readable contents array the source published (mfr-reaper's `associatedProducts`) and is
@@ -197,6 +208,30 @@ HEADER = """\
 # resolves by code alone, so the branch cannot overturn any verdict the code already reached, and
 # every uncertainty (no prose, misaligned prose, a name naming zero or several paints, or one
 # already in the box) still refuses. See _stated_prose and _by_stated_name.
+#
+# A CODE THE MANUFACTURER MISTYPED carries the OTHER value of that field, `resolvedBy: correction`,
+# and it is worth reading carefully because it is the one thing in this file that overrules a
+# printed code without the source's own words settling it. It means: a HUMAN declared, in
+# data/catalog/set-refs.yaml (models/catalog.py::SetRefs), scoped to ONE product id, with the
+# evidence written out beside the entry, that the manufacturer mistyped a code in its own contents
+# prose. ONLY a human may write one -- nothing here computes a correction, and nothing may: no edit
+# distance, no nearest-code search, no fuzzy name match. The generator reads that file and applies
+# an exact {stated ref: real code} substitution to what it LOOKS UP, and to nothing else, so `ref:`
+# below still carries the string the source printed and `contentSkus` on the product record stays
+# verbatim. The repair is a line in a diff, not a laundered value.
+#
+# IT IS THE DELIBERATE EXCEPTION TO THE DO-NOT-REPAIR RULE STATED FURTHER DOWN, and the distinction
+# is INFERENCE vs a reviewed human statement: what is forbidden is a GENERATOR deciding for itself
+# what a source meant in order to make its own output look complete. A maintainer stating a fact in
+# a committed file and being reviewed on it is the same separation `overrides.yaml` draws
+# everywhere else in this repo. It lives in its own file rather than in overrides.yaml because
+# `classify --apply` rewrites that one wholesale and deleted the block once already (2026-08-11).
+# Measured 2026-08-11, one member in this whole relation carries it: ak-interactive/AK11781's
+# `AK111424` -> AK11424 (1 of 1,212 ak-interactive members; 0 of reaper's 802 and 0 of
+# warlord-games' 90). tests/test_repo_data.py::test_every_set_ref_correction_is_live_and_resolvable
+# holds every entry to both halves of its claim -- the mistyped ref must STILL be printed, and the
+# corrected code must name exactly one paint IN THE BRANDS THIS MANUFACTURER ACTUALLY SEARCHES.
+#
 # A REFUSAL MAY BE A SOURCE COVERAGE GAP RATHER THAN BAD DATA -- do not "fix" one by hand-editing
 # the paint archive. reaper/08906 -> 29815 and reaper/09916 -> 29107 were exactly that: both are
 # material:"paint" on reapermini.com, but 29815's whole range (Master Series Paints High Density)
@@ -205,13 +240,23 @@ HEADER = """\
 # since been done -- both resolve today. The RULE is what to carry forward, not the example:
 # extend the source, never edit the archive to make a ref resolve.
 #
-# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX. They genuinely
-# differ: reaper/08906's own description enumerates "09472-Dragon Blue" among its bottles while
-# `associatedProducts` instead lists 29815 "HD Dragon Blue" -- two different pots, and the ARRAY is
-# what this file records. While 29815 was still unacquired that ref was recorded as REFUSED rather
-# than quietly repaired to the 9472 the archive did hold, because a generator that rewrites a
-# source's claim to make it resolve is worse than one that refuses. That principle outlives its
-# example: 29815 has since been acquired and now resolves on its own terms.
+# THIS RECORDS WHAT THE SOURCE'S CONTENTS ARRAY SAYS, NOT WHAT IS IN THE BOX, and the rule that
+# follows is: a generator that rewrites a source's claim so its own output resolves is worse than
+# one that refuses. reaper/08906 ("Learn To Paint Kit: Core Skills") is the worked example. Its
+# `associatedProducts` lists 29815 "HD Dragon Blue", and while 29815 was still unacquired that ref
+# was recorded as REFUSED rather than quietly repaired to the 9472 "Dragon Blue" the archive did
+# hold -- a different pot in a different range, which is exactly the kind of thing a
+# make-it-resolve repair invents. 29815 has since been acquired and resolves on its own terms.
+#
+# THE SENTENCE THIS REPLACES ASSERTED A DIVERGENCE THAT IS NOT IN THE DATA. It said 08906's "own
+# description enumerates '09472-Dragon Blue' among its bottles" while the array said 29815, and
+# measured 2026-08-11 against data/catalog/products/reaper.yaml that is wrong three ways: ZERO of
+# the 115 reaper product records carry a `description` field at all (all 29 reaper sets are
+# `from: stated`, per the `from` paragraph above), 09472 appears in no 08906 ref list, and the two
+# products that DO enumerate it are reaper/09917 and reaper/09980. So for reaper the array-vs-prose
+# divergence is currently unobservable, and the rule above now rests on the refusal, which is in
+# the committed data, rather than on a second contents list that never was. If a
+# `from: description` source ever contradicts its own array, THAT is the example to write here.
 #
 # QUANTITY. A member MAY carry `quantity: <int>` -- how many of that item the source states the
 # box contains. ABSENT MEANS THE SOURCE DID NOT SAY, NOT ONE UNIT: writing `quantity: 1` everywhere
@@ -236,6 +281,51 @@ HEADER = """\
 # one code each, so the floor excludes them before this key can apply. Re-derive the current split
 # with `enumerated_members` over the crossed AK rows.
 """
+
+
+def paints_for_ref(catalogs: list[Catalog], code: str) -> list[tuple[Catalog, dict]]:
+    """EVERY paint this manufacturer's search space offers for `code` -- 0, 1 or several.
+
+    THE WHOLE RESOLUTION RULE, IN ONE PLACE, and public rather than `_`-prefixed because it has a
+    second caller BY DESIGN: tests/test_repo_data.py::
+    test_every_set_ref_correction_is_live_and_resolvable imports THIS function to decide whether a
+    declared setRefs correction resolves. That guard used to spell the rule itself, and the two
+    spellings disagreed in BOTH directions (measured 2026-08-11):
+
+      - IT RESOLVED CODES THIS GENERATOR NEVER LOOKS AT. The guard globbed every file in
+        data/paints/brands/ and passed on a repo-wide unique hit, so a correction pointing an
+        ak-interactive ref at `RC078` -- which exists exactly once, in ak-real-color, an archive
+        ak-interactive's sets never search -- was reported "live and resolvable" while this
+        function returns [] and the generator writes `unresolved`. 4,925 of the 6,049 codes that
+        are unique repo-wide (of 6,192 distinct codes across the 21 archives) sit outside
+        ak-interactive's scope like that; warlord-games 4,701, reaper 5,555.
+      - IT REFUSED CODES THIS GENERATOR RESOLVES. The guard did no zero-strip, so a reaper
+        correction written in reaper's OWN printed vocabulary (`09412`) failed it with zero hits
+        while resolving fine here. That is the normal shape rather than an edge case: 345 of
+        reaper's 403 distinct refs are zero-padded and the archive stores 0 of its 494 codes with
+        a leading zero.
+
+    So this is the f181a73 rule -- a predicate spelled twice is a predicate that will disagree with
+    itself -- applied to the PREDICATE, where paints/catalog.py already applied it to the index
+    underneath.
+
+    KEPT HERE, NOT IN paints/catalog.py BESIDE `Catalog`, and that is deliberate. The leading-zero
+    fallback is a set-contents POLICY, not a property of a brand archive: HEADER above documents
+    it, fences it ("do NOT extend the rule to strip zeros after the prefix") and is emitted into
+    the committed files, so the rule and its warning stay in one place. `Catalog.paints_for_code`
+    stays the raw, un-normalised question -- gen_paint_harvest.py imports that module too and must
+    NOT strip, so it cannot pick this up by accident.
+
+    `or code` keeps an all-zero code from normalising to "" and matching the blank-code bucket.
+    Collected across EVERY listed brand: a code naming one paint in two different archives is
+    genuinely ambiguous and must be refused, not won by whichever brand happens to be listed first.
+    """
+    return [
+        (catalog, paint)
+        for catalog in catalogs
+        for paint in (catalog.paints_for_code(code)
+                      or catalog.paints_for_code(code.lstrip("0") or code))
+    ]
 
 
 def _member_sort_key(member: dict) -> tuple:
@@ -385,21 +475,16 @@ def resolve_manufacturer(manufacturer: str, products: list[dict], catalogs: list
                 })
                 continue
             seen_refs.add(ref)
-            # verbatim first, then leading-zero-stripped -- see the header. `or ref` keeps an
-            # all-zero code from normalising to "" and matching the blank-code bucket.
-            # Collected across every listed brand: a code that names one paint in two different
-            # archives is genuinely ambiguous and must be refused, not won by whichever brand
-            # happens to be listed first.
             # A declared correction replaces the code we LOOK UP and nothing else: `ref` below
             # stays the string the source printed, so the repair is legible in the committed file
             # instead of laundered into it.
+            #
+            # The lookup itself is `paints_for_ref` (verbatim, then leading-zero-stripped, across
+            # every listed brand) rather than the expression it used to be, because the setRefs
+            # guard has to reach the SAME verdict and was reaching a different one in both
+            # directions -- see that function.
             lookup = corrections.get(ref, ref)
-            hits: list[tuple[Catalog, dict]] = [
-                (catalog, paint)
-                for catalog in catalogs
-                for paint in (catalog.paints_for_code(lookup)
-                              or catalog.paints_for_code(lookup.lstrip("0") or lookup))
-            ]
+            hits: list[tuple[Catalog, dict]] = paints_for_ref(catalogs, lookup)
             if len(hits) == 1:
                 catalog, paint = hits[0]
                 member = {
