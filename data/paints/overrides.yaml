@@ -22,9 +22,10 @@ additions:
     # THE ONE PAINT IN THIS CATALOG THAT NOBODY SELLS. Warlord's listing for the Winter Blue
     # Soldiers set (warlord-games/AK17524) enumerates its contents and annotates one of them:
     #   - AK17082 WOLF BLUE GREY *Special color only for this set - not sold separately.*
-    # Code, name, range and commercial status, all in the source's own words. Nothing here is
-    # inferred; the only thing missing is a product page, and the source explains why there is
-    # none.
+    # Code, name, range and commercial status, all in the source's own words. Nothing STATED HERE
+    # is inferred; the only thing missing is a product page, and the source explains why there is
+    # none. That is a claim about the four keys below, not about the published record -- see the
+    # note on derived fields at the end of this block.
     #
     # WHY IT IS MINTED RATHER THAN LEFT AS A REFUSAL, which is the opposite of the usual answer
     # in this repo. `unresolved:` is right when the CATALOG has a gap -- when a code names a paint
@@ -48,12 +49,22 @@ additions:
     # NO BARCODE, and none is obtainable. All 79 committed Quick Gen paints carry zero EANs, so a
     # barcode is missing for the whole RANGE, not just for this pot -- a colour that is never sold
     # on its own is the last one that would ever get a retail one. The `ean` key is therefore
-    # absent rather than blank, and must stay absent: inventing one would be the only fabricated
-    # field on an otherwise fully-sourced record.
+    # absent rather than blank, and must stay absent: inventing one would be the only field on this
+    # record with no basis at all.
     #
     # Born colour-less (hex "", r/g/b 0) like every other minted paint. `soldSeparately: false` is
     # the whole reason that field exists -- without it this publishes as status current /
     # availability unknown, indistinguishable from a pot you can walk in and buy.
+    #
+    # FOUR PUBLISHED FIELDS ARE DERIVED, NOT STATED, and saying so is the honest version of the
+    # sentence at the top of this block. A human wrote exactly four keys here -- name, set,
+    # productCode, soldSeparately. The committed record additionally carries volumeMl 18 and
+    # container dropper, which come from VolumeTable's `["Quick Gen"], 18, "dropper"` row, and type
+    # Standard / finish Matte from the classifiers. The volume rule is itself evidenced -- AK's own
+    # full-range listing says "79 COLORS + 1 MEDIUM 18ML" -- but it is evidence about the RANGE, and
+    # no source states the volume of THIS pot, which has no listing to state one. That is the same
+    # treatment every minted paint in this file gets, and it is defensible; what was not defensible
+    # was calling the result "fully-sourced" while four of its published fields came from a table.
     - name: Wolf Blue Grey
       set: Quick Gen
       productCode: AK17082
@@ -76,10 +87,40 @@ additions:
     # AK simply stopped listing them, which is a different fact, and absence is how this field
     # spells "no source said". Writing `false` here would launder a discontinuation into a
     # manufacturing decision.
+    #
+    # AK11388's `set` IS A GUESS, and this block used to be silent about the one field that is.
+    # `set` is half the identity key, so it cannot be left absent the way `soldSeparately` can --
+    # something has to be written, and nothing states it. Three signals disagree, measured over the
+    # committed AK11xxx blocks 2026-08-11:
+    #
+    #   NUMBERING SAYS AFV.      AFV (3rd Gen) runs AK11301-AK11387 (n=80) and Figures (3rd Gen)
+    #                            runs AK11401-AK11440 (n=40). AK11388 is the immediate successor of
+    #                            AK11387, the last AFV code, in the otherwise empty gap between the
+    #                            two blocks.
+    #   SEMANTICS SAY FIGURES.   The only two sources that name it are AK11690 "WWII LUFTWAFFE
+    #                            PILOT UNIFORM COLORS" and AK11691 "WWII US PILOT UNIFORM COLORS".
+    #                            Harnesses and uniform belts on pilots is figure painting, not
+    #                            armour.
+    #   THE RECORD SAYS STANDARD, which is what is written below. Excluding this mint, Standard
+    #                            (3rd Gen) runs AK11002-AK11262 (n=182); AK11388 sits 126 codes
+    #                            above its top and is the only member above AK11262.
+    #
+    # AND THE CHOICE IS SELF-CONFIRMING, which is the trap worth naming: computed WITHOUT this mint
+    # Standard reads AK11002-AK11262, computed WITH it the same block reads AK11002-AK11388. The
+    # mint is the only thing that stretches the range far enough to cover its own code, so "it fits
+    # in Standard" is an artefact of having put it there.
+    #
+    # Left as Standard rather than moved, deliberately. Moving it to AFV would trade one guess for
+    # a better-argued guess and churn the identity key -- the brand record, two set-contents members
+    # and a _liveness key -- while still asserting something no source says. The honest fix is to
+    # stop the value looking settled. A source that states the range replaces this paragraph; AK's
+    # four published 3rd Gen full-range maps do not, having been checked and not naming AK11388 at
+    # all, which is itself consistent with a colour AK stopped listing.
     - name: Grey Primer
       set: Primer (3rd Gen)
       productCode: AK11253
     - name: Harness & Uniform Belts
+      # INFERRED, not stated -- see the three-way disagreement above.
       set: Standard (3rd Gen)
       productCode: AK11388
 
