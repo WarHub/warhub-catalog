@@ -32,9 +32,10 @@ public record PaintRecord
     /// the one person most likely to look it up, somebody holding the bottle and reading the label.
     ///
     /// NOTHING WRITES `true`, deliberately. No source states the positive; a listed product's
-    /// separate availability is implied by its having a page, and stamping `true` on all 8,000
-    /// records would assert a fact no source states -- the same argument set-member `quantity`
-    /// loses on. `true` is reserved for a source that ever says it in words.
+    /// separate availability is implied by its having a page, and stamping `true` on all 8,461
+    /// records (measured 2026-08-11; exactly one of them, AK17082, states anything at all) would
+    /// assert a fact no source states -- the same argument set-member `quantity` loses on. `true`
+    /// is reserved for a source that ever says it in words.
     /// </summary>
     public bool? SoldSeparately { get; init; }
     /// <summary>Write-once, immutable.</summary>

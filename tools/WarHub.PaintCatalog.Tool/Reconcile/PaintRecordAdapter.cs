@@ -51,12 +51,22 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
             PriceUsd = fresh.PriceUsd ?? existing.PriceUsd,
             PriceEur = fresh.PriceEur ?? existing.PriceEur,
             PriceCad = fresh.PriceCad ?? existing.PriceCad,
-            // Lineage is a DECLARATION (overrides.yaml), not evidence: fresh is authoritative in both
-            // directions, INCLUDING clearing. Withdrawing the declaration must actually withdraw the
-            // link -- mirroring the product side, where the resolver recomputes it from matches.yaml
-            // every run. Records absent from `fresh` never reach Merge, so nothing else can be cleared.
+            // Lineage and set-exclusivity are DECLARATIONS (overrides.yaml), not evidence: fresh is
+            // authoritative in both directions, INCLUDING clearing. Withdrawing the declaration must
+            // actually withdraw the link -- mirroring the product side, where the resolver recomputes
+            // it from matches.yaml every run. Records absent from `fresh` never reach Merge, so
+            // nothing else can be cleared.
             Supersedes = fresh.Supersedes,
             SupersededBy = fresh.SupersededBy,
+            // `soldSeparately` was MISSING from this with-list until 2026-08-11, so the declaration
+            // could only ever land on the INSERT path -- the one run that mints a brand-new record.
+            // A pot already in the archive could never GAIN it (existing `null` won), and one that
+            // had it could never LOSE it. AK17082 carries `false` today only because that was the
+            // run that created it. Note this is a BARE assignment and not `fresh ?? existing`: the
+            // tri-state's `false` is a claim a named source made in words, so deleting the source
+            // has to restore `null` ("no source said"), exactly as for the two lines above. Coalesce
+            // here and withdrawal becomes impossible in the other direction instead.
+            SoldSeparately = fresh.SoldSeparately,
             Details = existing.Details with
             {
                 VolumeMl = contents.VolumeMl,
@@ -78,7 +88,9 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
     // are no-ops (identity fields matched); for a colour backfill (empty-hex archive record
     // aliased to its hex-carrying fresh twin — see the auto-alias pass in PaintCatalogApp)
     // they are what actually lands the colour. History (FirstSeen, status, availability
-    // backfills) still comes from `existing` via Merge.
+    // backfills) still comes from `existing` via Merge, and the declarations (lineage,
+    // soldSeparately) from `fresh` via that same call -- an aliased record needs no separate
+    // handling here precisely because every field decision is made once, in Merge.
     public PaintRecord ApplyRename(PaintRecord existing, PaintRecord fresh)
     {
         PaintRecord merged = Merge(existing, fresh);
