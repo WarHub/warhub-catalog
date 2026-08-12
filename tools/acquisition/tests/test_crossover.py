@@ -135,6 +135,12 @@ def test_missing_name_does_not_raise() -> None:
 
 
 # --- T9: import hygiene ----------------------------------------------------------------------
+#
+# Both tests below guard the SAME property of the same workflow line, which is why they live
+# together in a file otherwise about crossover.py: paint-catalog-update.yml runs two scripts as
+# `uv run --with pyyaml python ...`, and between them they reach resolve/crossover.py and
+# paints/catalog.py through sys.path bootstraps. A third-party import in either -- or in any
+# package __init__ on the way -- breaks that line at import time.
 
 
 def test_crossover_imports_no_third_party_module() -> None:
@@ -166,3 +172,48 @@ def test_crossover_imports_no_third_party_module() -> None:
 
     imported = top_level_imports(Path(crossover.__file__))
     assert imported == {"re", "typing"}, f"crossover.py imports {sorted(imported)}"
+
+
+def test_paints_catalog_imports_no_third_party_module() -> None:
+    """The guard paints/catalog.py's own docstring said was already here, and was not.
+
+    That module has claimed since it was extracted that its pure-pyyaml property is "Asserted, not
+    assumed -- see tests/test_crossover.py::test_paints_catalog_imports_no_third_party_module". No
+    test of that name existed anywhere; the only neighbour is the crossover one above, which
+    asserts on a different module. So the claim was true of the sibling and false of itself, and
+    the property it names was enforced by nothing.
+
+    It is not a hypothetical property. BOTH scripts driven by
+    .github/workflows/paint-catalog-update.yml import this module through a sys.path bootstrap --
+    gen_paint_harvest.py for the brand index and gen_set_contents.py for `paints_for_ref` -- and
+    both run as `uv run --with pyyaml python ...` with no pydantic in the environment. A pydantic
+    import added here would fail at import time, in CI, on a paint harvest, far from whoever added
+    it. The docstring even warns against reaching for `warhub_acquisition.yamlio` for the libyaml
+    speed-up; this is what makes that warning enforceable rather than advisory.
+
+    `yaml` is in the allowed set here where crossover.py allows only {re, typing}: this module
+    PARSES the brand archives, which is the whole reason the workflow line says `--with pyyaml`.
+    Asserted on the SOURCE rather than sys.modules, for the reason given above.
+    """
+    import warhub_acquisition
+    import warhub_acquisition.paints
+    from warhub_acquisition.paints import catalog as paints_catalog
+
+    def top_level_imports(path: Path) -> set[str]:
+        found = set()
+        for line in path.read_text(encoding="utf-8").splitlines():
+            match = re.match(r"^(?:from|import)\s+([\w.]+)", line)
+            if match:
+                found.add(match.group(1).split(".")[0])
+        return found
+
+    # Same two-package traversal as above, with `paints` in place of `resolve`.
+    for package in (warhub_acquisition, warhub_acquisition.paints):
+        imports = top_level_imports(Path(package.__file__))
+        assert imports == set(), f"{package.__name__}/__init__.py now imports {sorted(imports)}"
+
+    imported = top_level_imports(Path(paints_catalog.__file__))
+    assert imported == {"__future__", "re", "pathlib", "yaml"}, (
+        f"paints/catalog.py imports {sorted(imported)} -- anything beyond the stdlib and yaml "
+        "breaks the `uv run --with pyyaml python ...` steps in paint-catalog-update.yml"
+    )
