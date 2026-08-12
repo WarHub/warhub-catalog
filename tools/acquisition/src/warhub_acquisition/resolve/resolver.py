@@ -142,8 +142,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     # 2026-08-05) and until now reached NEITHER catalog: dropped here, and gated out of every
     # bridge in gen_paint_harvest.py. `crossoverToProducts` is each paint source's declaration of
     # which of its rows those are; `crossover.matches` is the same evaluator the bridges refuse
-    # with, so the two catalogs partition the source instead of both guessing. Measured 2026-08-05
-    # across the six declaring sources: 545 rows selected, 516 admitted.
+    # with, so the two catalogs partition the source instead of both guessing. Measured 2026-08-11
+    # across the six declaring sources: 562 rows selected (302 ak, 115 reaper, 69 gsw, 49
+    # armypainter, 21 monument, 6 scale75), 530 admitted. Not all of them are SETS: 16 of ak's 302
+    # stamp `hobby-auxiliary` off a per-clause override (crossover.py::category_for).
     observations = []
     crossover_conflicts: list[dict] = []
     # Counted separately from `observations` ON PURPOSE -- see the wipe guard below.
@@ -167,13 +169,29 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             # retitle silently orphans, minting a second entity and stranding the first. That is
             # the identity instability the archival-identity decision exists to prevent, so an
             # unaddressable row is surfaced as a conflict for a human rather than published as a
-            # name slug. Measured 2026-08-05: 29 of 545, every one mfr-ak-interactive (which
+            # name slug. Measured 2026-08-11: 32 of 562, every one mfr-ak-interactive (which
             # publishes no barcode anywhere) with a SKU its codePattern does not match.
+            #
+            # THE REFUSAL IS TYPED BY THE STAMP THE ROW WOULD HAVE CARRIED, not by the word "set".
+            # A per-clause `category` means one source can cross two kinds of thing (crossover.py
+            # ::category_for), so the fixed `set-without-identity` this line used to emit filed 3
+            # of those 32 -- AKABT111/112/113, the odourless / matt-effect / fast-dry thinners,
+            # which the `category_for` call above stamps `hobby-auxiliary` -- under a type that
+            # says BOXED SET. A maintainer triaging that list was reading "set" and finding a
+            # bottle of thinner.
+            #
+            # DERIVED, not a second key, and the reason is the sort at the bottom of this function:
+            # `str(sorted(c.items()))` orders each record's items BY KEY NAME, and of the five keys
+            # here (`key` < `name` < `sku` < `source` < `type`) `key` comes first and is unique per
+            # row, so the sort string is decided before `type` is ever reached. Measured 2026-08-11
+            # over the committed 90-row conflicts.yaml: retyping moves 0 of 90 rows, while adding a
+            # sibling `category:` key -- which would sort FIRST, ahead of `key` -- moves 33 of 90
+            # and buries a 3-row correction in a 33-row reshuffle.
             has_code = taxonomy.normalize_code(observation.manufacturer, observation.sku) is not None
             if not has_code and canonical_ean(observation.ean) is None:
                 crossover_conflicts.append(
                     {
-                        "type": "set-without-identity",
+                        "type": f"{stamp}-without-identity",
                         "source": source_id,
                         "key": observation.key,
                         "sku": observation.sku,
@@ -182,9 +200,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
                 )
                 continue
             # The category stamp is the ONLY mutation. `category` is folded from hints
-            # (resolve/attributes.py), and 431 of the 545 selected rows carry `hints.category:
+            # (resolve/attributes.py), and 448 of the 562 selected rows carry `hints.category:
             # "paint"` -- publishing a 12-pot box under that is the same structural lie commit
-            # 6b3c930 fixed on the paint side.
+            # 6b3c930 fixed on the paint side (re-measured 2026-08-11; it was 431 of 545 on
+            # 2026-08-05, before the AK sweep widened this source).
             observations.append(
                 observation.model_copy(update={"hints": {**observation.hints, "category": stamp}})
             )

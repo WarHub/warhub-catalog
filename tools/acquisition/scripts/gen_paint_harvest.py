@@ -78,7 +78,10 @@ OUT_DIR = REPO / "data/paints/harvest"
 # codes to paints through the same index rather than a second spelling of it -- f181a73's rule.
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.paints.catalog import Catalog, norm  # noqa: E402
-from warhub_acquisition.resolve.crossover import matches as crossover_matches  # noqa: E402
+from warhub_acquisition.resolve.crossover import (  # noqa: E402
+    category_for as crossover_category,
+    matches as crossover_matches,
+)
 from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 # SM (Speedpaint Marker) deliberately excluded: markers share paint NAMES with the Speedpaint
@@ -190,13 +193,67 @@ def is_set(observation: dict, source_id: str) -> bool:
 
     The one gate every bridge asks -- through `paint_rows`, which is what makes "every" true
     rather than aspirational -- so that "crosses over" and "refused here" cannot diverge.
-    Measured 2026-08-05: 545 rows across the six declaring sources (285 ak, 115 reaper, 69 gsw,
+    Measured 2026-08-11: 562 rows across the six declaring sources (302 ak, 115 reaper, 69 gsw,
     49 armypainter, 21 monument, 6 scale75), of which the resolver's
-    identity floor admits 516 -- the 29 it rejects stay refused here too, which is deliberate.
-    They are not paints either; they are unaddressable set rows that reach neither catalog and
-    surface as `set-without-identity` in review/conflicts.yaml for a human to resolve.
+    identity floor admits 530 -- the 32 it rejects stay refused here too, which is deliberate.
+    They are not paints either; they are unaddressable crossed rows that reach neither catalog and
+    surface in review/conflicts.yaml as `paint-set-without-identity` (29) or
+    `hobby-auxiliary-without-identity` (3) for a human to resolve.
+
+    BOOLEAN ON PURPOSE, and it stays that way. `category_for` would answer the same question for
+    every committed descriptor, but only because `Crossover.category` is a required field -- a
+    clause that matched under a block with no category would make it answer None, i.e. silently
+    UNGATE the row. The gate asks `matches`; `crossed_reason` below does the labelling, and fails
+    loud rather than quietly widening what the paint catalog publishes.
     """
     return crossover_matches(observation, crossover_rule(source_id))
+
+
+# Why the paint bridge refused a crossed row, KEYED BY THE CATEGORY THE PRODUCT SIDE WILL STAMP.
+# Explicit rather than derived from the category string, because this text is the only place the
+# PAINT side ever says why (e.g.) `AK712 Acrylic Thinner` is not a paint, and a reader of
+# data/paints/harvest/ak-interactive.yaml has no product catalog in front of them.
+#
+# `paint-set` keeps its wording BYTE-FOR-BYTE (it has been this string since af01ca5). Measured
+# 2026-08-11 over the regenerated harvest: of the 562 candidate rows carrying a crossover reason,
+# 546 are `paint-set` and 16 are `hobby-auxiliary` -- so rewording the first would rewrite 546 rows
+# and five assertions in tests/test_paint_harvest_gate.py to say nothing new, where fixing the
+# second rewrites 16. That ratio is the whole reason this is a dict and not a rename.
+#
+# "CLAIMED BY", not "crosses to", for the auxiliaries, and the asymmetry is deliberate rather than
+# sloppy. 16 AK rows stamp `hobby-auxiliary` (measured 2026-08-11) and 3 of them -- AKABT111 /
+# AKABT112 / AKABT113, the odourless / matt-effect / fast-dry thinners -- fail the resolver's
+# identity floor and reach NEITHER catalog, so "crosses to the product catalog" would be false for
+# them. "Claimed by" is true of all 16: the source's own `crossoverToProducts` block claims them,
+# which is exactly the fact this gate acted on. The same nuance holds for 29 of the 546 `paint-set`
+# rows, and is deliberately NOT fixed by rewording: this script cannot evaluate the identity floor
+# without a second spelling of taxonomy.normalize_code (and a pydantic import the pure-pyyaml
+# bootstrap at the top of this file exists to avoid), and the resolver already records every one of
+# the 32 by name in data/review/conflicts.yaml. Recorded once, in the file that stays current.
+CROSSOVER_REASON = {
+    "paint-set": "boxed set -- crosses to the product catalog",
+    "hobby-auxiliary": "auxiliary agent, not a colour -- claimed by the product catalog",
+}
+
+
+def crossed_reason(observation: dict, source_id: str) -> str:
+    """The refusal receipt for a row `is_set` just gated, by that row's own crossover category.
+
+    FAIL LOUD on a category with no entry. A descriptor can grow a new `category` at any time (the
+    per-clause override that produced `hobby-auxiliary` landed in PR #107), and the alternatives to
+    stopping are both silent corruption of an audit trail: a `.get(..., <the set string>)` default
+    files the new kind under the old word -- the exact bug this function fixes -- and an empty
+    string writes a refusal with no reason at all. The harvest is the record of what left and why;
+    a reason it cannot state is a stop, not a shrug.
+    """
+    stamp = crossover_category(observation, crossover_rule(source_id))
+    reason = CROSSOVER_REASON.get(stamp or "")
+    if reason is None:
+        raise SystemExit(
+            f"gen_paint_harvest: {source_id} crosses {observation.get('sku')!r} as {stamp!r}, "
+            f"which has no entry in CROSSOVER_REASON. Add one -- a refusal is recorded, not guessed."
+        )
+    return reason
 
 
 def observed_price(observation: dict, source_id: str) -> dict:
@@ -306,7 +363,7 @@ def paint_rows(source_id: str, out: "BrandHarvest") -> list[dict]:
                  "sku": str(observation.get("sku") or "") or None,
                  "url": observation.get("url"),
                  "source": source_id,
-                 "reason": "boxed set -- crosses to the product catalog"}
+                 "reason": crossed_reason(observation, source_id)}
             )
             continue
         rows.append(observation)

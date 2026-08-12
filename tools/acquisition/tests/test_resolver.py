@@ -678,8 +678,8 @@ def test_crossover_admits_the_set_and_stamps_its_category(tmp_path: Path) -> Non
 
 def test_crossover_row_without_code_or_ean_is_refused_as_a_conflict(tmp_path: Path) -> None:
     """T12 -- the identity floor. A name-slug entity id is orphaned by a store retitle, so an
-    unaddressable set is surfaced for a human instead of published. Measured on real evidence:
-    29 of 545, all mfr-ak-interactive."""
+    unaddressable set is surfaced for a human instead of published. Measured on real evidence
+    2026-08-11: 32 of 562, all mfr-ak-interactive."""
     paths, evidence = seed_paint_source(tmp_path, GSW_SET_RULE)
     rows = evidence.read_text(encoding="utf-8").splitlines()
     rows.append(json.dumps({"key": "mfr-gsw:nameless-box", "name": "Mystery Collection",
@@ -695,8 +695,45 @@ def test_crossover_row_without_code_or_ean_is_refused_as_a_conflict(tmp_path: Pa
     assert [p.id for p in catalog["green-stuff-world"]] == ["green-stuff-world/12345"]
     conflicts = read_yaml(paths.conflicts)["conflicts"]
     assert conflicts == [
-        {"type": "set-without-identity", "source": "mfr-gsw", "key": "mfr-gsw:nameless-box",
+        {"type": "paint-set-without-identity", "source": "mfr-gsw", "key": "mfr-gsw:nameless-box",
          "sku": "RANGE-GSW", "name": "Mystery Collection"}
+    ]
+
+
+def test_a_refused_crossover_row_is_typed_by_its_own_clause_not_by_the_word_set(
+    tmp_path: Path,
+) -> None:
+    """T12b -- the refusal type must say what the row IS, and the row is not always a set.
+
+    A per-clause `category` lets one source cross two kinds of thing (crossover.py::category_for),
+    so a fixed `set-without-identity` filed the auxiliaries as boxes. Measured on real evidence
+    2026-08-11: 3 of the 32 refusals -- AKABT111/112/113, the odourless / matt-effect / fast-dry
+    thinners -- stamp `hobby-auxiliary`, so a maintainer triaging `set-without-identity` was
+    looking for a boxed set and finding a bottle of thinner. The row below is the same shape: it
+    matches only the narrow clause, and it must be refused under THAT clause's word.
+
+    The control is the sibling test above -- a `paint-set` refusal from the SAME block still types
+    `paint-set-without-identity`, so this pins the derivation and not merely a new constant.
+    """
+    rule = {**GSW_SET_RULE, "anyOf": [{"nameMatches": r"\bTHINNER\b", "category": "hobby-auxiliary"},
+                                      *GSW_SET_RULE["anyOf"]]}
+    paths, evidence = seed_paint_source(tmp_path, rule)
+    rows = evidence.read_text(encoding="utf-8").splitlines()
+    rows.append(json.dumps({"key": "mfr-gsw:nameless-thinner", "name": "Odourless Thinner Set",
+                            "manufacturer": "green-stuff-world", "sku": "RANGE-GSW",
+                            "hints": {"category": "paint"},
+                            "firstSeen": "2026-07-24", "lastSeen": "2026-08-05",
+                            "extractor": "sitemap-sd-paints@1"}, sort_keys=True,
+                           separators=(",", ":")))
+    evidence.write_text("\n".join(rows) + "\n", encoding="utf-8", newline="\n")
+
+    resolve_catalog(paths)
+
+    # The title carries BOTH signals ("Thinner" and "Set"); the narrow clause is first, so it wins
+    # -- the same clause-order rule that decides the stamp on an admitted row.
+    assert read_yaml(paths.conflicts)["conflicts"] == [
+        {"type": "hobby-auxiliary-without-identity", "source": "mfr-gsw",
+         "key": "mfr-gsw:nameless-thinner", "sku": "RANGE-GSW", "name": "Odourless Thinner Set"}
     ]
 
 
