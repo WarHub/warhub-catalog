@@ -8,7 +8,7 @@ name: Nightly Acquisition
 # mfr-cmon -- Cloudflare-blocked, Plan-5 alternative pending -- are deferred and deliberately
 # absent):
 #   group A1: mfr-warlord-store                                       (budget 2000 nightly)
-#   group A2: mfr-steamforged, mfr-wyrd-store                         (budget 1000 nightly)
+#   group A2: mfr-steamforged, mfr-wyrd-store, mfr-warmachine         (budget 1000 nightly)
 #   group B:  mfr-gw-algolia, mfr-manticgames, mfr-para-bellum,
 #             mfr-corvus-belli                                        (budget 3000)
 #   group C:  ret-goblingaming, ret-tistaminis                        (budget 1500 nightly)
@@ -130,8 +130,16 @@ jobs:
             weeklyBudget: ''
             weeklyOnly: false
             startupDelay: 0
+          # mfr-warmachine (warmachine.gg) joins A2 rather than opening a group of its own: it is
+          # the other half of a store split, so it belongs beside the source it split FROM, and
+          # A2 got cheaper in the same change -- mfr-steamforged dropped from ~600 attributed
+          # products to 248 when Warmachine moved out. warmachine.gg is also a DIFFERENT host, so
+          # its requests don't compound the per-host throttling that forced the A1/A2 split.
+          # Worst case at rps 0.5 and this budget: steamforged ~4 min, wyrd ~24 min, warmachine
+          # ~20 min on its first (cold-cursor) run and far less after, well inside the 120-min
+          # timeout below. `--budget` applies per source, not per group (see the acquire step).
           - group: A2
-            sources: mfr-steamforged mfr-wyrd-store
+            sources: mfr-steamforged mfr-wyrd-store mfr-warmachine
             budget: 1000
             weeklyBudget: ''
             weeklyOnly: false

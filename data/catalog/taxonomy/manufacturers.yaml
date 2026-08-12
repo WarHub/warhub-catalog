@@ -37,14 +37,33 @@ manufacturers:
   - slug: steamforged-games
     name: Steamforged Games
     codePattern: 'SF[A-Z0-9-]+'
-    # steamforged.com (own Shopify store, probed 2026-07-13) tags vendor per in-house game line
-    # rather than by company name; these four (+ the "(app subscribers only)"/"Local Legends"
-    # variants) are exactly the game lines the retired .NET tool's own vendorMap attributed to
-    # "Steamforged Games" (git show 1593ee1^:tools/WarHub.ProductCatalog.Tool/ProductCatalogApp.cs,
-    # ~line 1154) -- see task-6-report.md for full live vendor-tag counts. Deliberately excludes
-    # the store's many licensed board-game/RPG vendor tags (Dark Souls, Elden Ring, Monster
-    # Hunter, P3 Paints, Iron Kingdoms, ...), which the old tool never scraped either.
-    vendorNames: [Steamforged Games, Steamforged, Warmachine, 'Warmachine (app subscribers only)', Guild Ball, Godtear, Epic Encounters, 'Epic Encounters: Local Legends']
+    # Steamforged tags vendor per in-house game line rather than by company name, and since
+    # 2026-08 those lines are split across TWO of its own Shopify stores -- mfr-steamforged
+    # (steamforged.com) and mfr-warmachine (warmachine.gg). One vendorNames list spans both: a
+    # vendor string means the same brand whichever store serves it, and the store split is a
+    # fact about sources, not about who makes the product.
+    #
+    # Guild Ball/Godtear/Epic Encounters (+ the "Local Legends" variant) are exactly the game
+    # lines the retired .NET tool's own vendorMap attributed to "Steamforged Games" (git show
+    # 1593ee1^:tools/WarHub.ProductCatalog.Tool/ProductCatalogApp.cs, ~line 1154).
+    #
+    # Iron Kingdoms and P3 Paints were EXCLUDED here until 2026-08-12, listed alongside the
+    # store's genuinely-licensed board-game/RPG tags (Dark Souls, Elden Ring, Monster Hunter,
+    # ...) on the grounds that the old tool never scraped them either. That was a
+    # misclassification: the licensed tags are third-party IP Steamforged only publishes,
+    # whereas Warmachine, Iron Kingdoms and Formula P3 are all brands Steamforged BOUGHT
+    # outright from Privateer Press in 2024 and now owns. The 2026-08 store split made the
+    # error visible -- warmachine.gg carries all three together as one in-house catalogue --
+    # so they are attributed here. Live probe 2026-08-12: 361 Warmachine, 222 P3 Paints, 25
+    # Iron Kingdoms, 1 app-subscriber variant. All 222 P3 skus match codePattern above (the
+    # range was re-coded to SF* after the acquisition), so they resolve like any other product.
+    # The licensed board-game/RPG tags remain excluded, unchanged.
+    #
+    # "Steamforged Games - Tradeshow" is deliberately NOT here despite naming the company: all
+    # 4 products under it (both stores) are Baron of Dice accessories -- skus BOD001-BOD003,
+    # 0 of 4 matching codePattern -- i.e. another maker's goods on a Steamforged booth.
+    # See docs/research/2026-08-12-steamforged-warmachine-store-split.md.
+    vendorNames: [Steamforged Games, Steamforged, Warmachine, 'Warmachine (app subscribers only)', Guild Ball, Godtear, Epic Encounters, 'Epic Encounters: Local Legends', Iron Kingdoms, P3 Paints]
   - slug: warlord-games
     name: Warlord Games
     codePattern: '[0-9]{9,12}(-[0-9]{1,2})?|(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{6,}'

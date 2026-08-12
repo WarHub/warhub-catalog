@@ -1,0 +1,18 @@
+# Empty on purpose, and measured so rather than left unexamined.
+#
+# shopify.py's `_apply_hints` maps product_type -> gameSystem and tags -> faction. warmachine.gg's
+# product_type vocabulary is a FORMAT taxonomy, not a game-system one -- the whole attributed
+# population of 609 (probe 2026-08-12) is: Miniatures 347, Paint 222, Digital Download 14,
+# Roleplaying Game 13, Free Resource 9, Wargame 2, Product 1, empty 1. Not one of those values
+# names a game system, so every entry would be a guess; `_apply_hints` never guesses and counts
+# the miss in `unmapped_hints` instead, which is the correct outcome here.
+#
+# The store is single-system by construction (it exists to hold Warmachine + Iron Kingdoms +
+# P3 Paints), so a gameSystem hint would add nothing a downstream classifier can't get from the
+# manufacturer and code. Faction is the mapping worth having here one day -- warmachine.gg tags
+# army/faction on products -- but taxonomy/factions.yaml has to carry those slugs first, and
+# test_repo_mappings_reference_only_known_taxonomy_slugs is strict about that (deliberately).
+#
+# Same empty-scaffold shape as mappings/mfr-steamforged.yaml.
+gameSystem: {}
+faction: {}
