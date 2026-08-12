@@ -4,8 +4,11 @@ kind: manufacturer
 # data/paints/. Without this the product resolver publishes every paint a second time.
 catalog: paints
 strategy: shopify-paints
-# No www: the www host 301s robots.txt (the robots fetcher refuses to assume permission on
-# redirects); apex serves it directly (matches the C# ShopifyPaintSource's base URL too).
+# Apex host, matching the C# ShopifyPaintSource's base URL. The www host 301s robots.txt, which
+# used to be a hard blocker here (the robots fetcher refused to assume permission on any redirect)
+# and is why this line said "No www"; as of 2026-08-12 acquire/robots.py follows robots.txt
+# redirects per RFC 9309 sec 2.3.1.2, so www would work too -- apex is now just the host we
+# already harvest from, not a workaround. Don't re-derive the old reason from this comment.
 baseUrl: https://thearmypainter.com
 scope:
   # Store default currency confirmed live 2026-07-23 via /cart.js -> "USD".

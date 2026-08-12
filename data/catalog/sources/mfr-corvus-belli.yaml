@@ -13,10 +13,12 @@ politeness:
   # the actual fetch target -- appsync.py's GRAPHQL_ENDPOINT is a hardcoded absolute URL on AWS
   # AppSync's own host (https://aiscbwsb6vb3xbysk57tnk3miy.appsync-api.eu-west-1.amazonaws.com/
   # graphql), entirely unrelated to store.corvusbelli.com. Checking store.corvusbelli.com's
-  # robots.txt would say nothing about whether we're allowed to query the AppSync API -- and in
-  # fact store.corvusbelli.com/robots.txt itself 301-redirects (to /en/robots.txt), which
-  # PoliteClient never follows (see client.py), so a literal baseUrl check would FAIL LOUD here
-  # for a source that is actually fine. Verified live 2026-07-13: the real fetch target
+  # robots.txt would say nothing about whether we're allowed to query the AppSync API. That
+  # target mismatch is now the ONLY reason this flag is set: the second reason recorded here until
+  # 2026-08-12 -- that store.corvusbelli.com/robots.txt 301-redirects to /en/robots.txt and the
+  # fetcher refused to follow it, so a literal baseUrl check would FAIL LOUD for a source that is
+  # actually fine -- no longer holds, because acquire/robots.py follows robots.txt redirects per
+  # RFC 9309 sec 2.3.1.2. Verified live 2026-07-13: the real fetch target
   # (aiscbwsb6vb3xbysk57tnk3miy.appsync-api.eu-west-1.amazonaws.com/robots.txt) -> 404 -- no
   # restrictions published on the real fetch target.
   ignoreRobots: true

@@ -14,6 +14,7 @@ import pytest
 
 from warhub_acquisition.acquire.client import UA, FetchError, PoliteClient
 from warhub_acquisition.acquire.robots import (
+    MAX_REDIRECTS,
     PRODUCT_TOKEN,
     RobotsFetchError,
     RobotsPolicy,
@@ -40,6 +41,32 @@ def client_for(handler, sleep=None) -> PoliteClient:
 
 def robots_response(body: str) -> httpx.Response:
     return httpx.Response(200, text=body)
+
+
+def routes(mapping: dict, seen: list[str] | None = None):
+    """A MockTransport handler routing by FULL request URL (host included -- robots.txt redirects
+    cross hosts), appending each requested URL to `seen`. Values are zero-arg factories so every
+    hop gets a fresh `httpx.Response`, and an unmapped URL is a loud test failure rather than a
+    silent 200: these tests are about which hops we do and do not request."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url = str(request.url)
+        if seen is not None:
+            seen.append(url)
+        make = mapping.get(url)
+        if make is None:
+            raise AssertionError(f"unexpected robots.txt hop: {url}")
+        return make()
+
+    return handler
+
+
+def moved(location: str, status: int = 301):
+    return lambda: httpx.Response(status, headers={"Location": location})
+
+
+def serves(body: str):
+    return lambda: robots_response(body)
 
 
 # The token a Cloudflare-managed AI-crawler block names. Deliberately a test-local literal rather
@@ -168,16 +195,22 @@ def test_fetch_policy_transport_failure_raises() -> None:
     assert excinfo.value.cause.status is None
 
 
-def test_fetch_policy_non_permissive_4xx_raises() -> None:
-    """A 301/401/403 on robots.txt itself is neither '2xx: parse' nor '404/410: no restrictions
-    published' -- we cannot prove we're allowed, so this fails loud too, not just 5xx/transport."""
+@pytest.mark.parametrize("status", [401, 403])
+def test_fetch_policy_non_permissive_4xx_raises(status: int) -> None:
+    """A 401/403 on robots.txt itself is neither '2xx: parse' nor '404/410: no restrictions
+    published' -- we cannot prove we're allowed, so this fails loud too, not just 5xx/transport.
+
+    This test used to assert the same of a 301 (with `Location: /en/robots.txt`, the shape
+    store.corvusbelli.com publishes). It no longer does: as of 2026-08-12 a redirect is FOLLOWED
+    (see the redirect section below and robots.py's module docstring). The 401/403 cases are what
+    that change deliberately leaves alone, which is why they stay here rather than moving."""
 
     def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(301, headers={"Location": "/en/robots.txt"})
+        return httpx.Response(status)
 
     with pytest.raises(RobotsFetchError) as excinfo:
         fetch_policy(client_for(handler), "https://example.test")
-    assert excinfo.value.cause.status == 301
+    assert excinfo.value.cause.status == status
 
 
 def test_fetch_policy_200_parses_and_is_not_permissive() -> None:
@@ -199,6 +232,220 @@ def test_fetch_policy_requests_robots_txt_through_the_client() -> None:
 
     fetch_policy(client_for(handler), "https://example.test")
     assert seen == ["/robots.txt"]
+
+
+# =================================================================================================
+# fetch_policy: robots.txt redirects are FOLLOWED (fix, 2026-08-12 -- RFC 9309 sec 2.3.1.2, which
+# tells a crawler to follow at least five consecutive redirects, even across authorities, and to
+# apply the file it reaches "in the context of the initial authority").
+#
+# Read the two halves together, as with the ClaudeBot retirement above: the tests that pin what is
+# now FOLLOWED, and the ones that pin what still FAILS LOUD. Following a redirect must never become
+# a way to end up with fewer rules than the site published.
+# =================================================================================================
+
+
+CANONICAL_ROBOTS = "User-agent: *\nAllow: /\nDisallow: /cart\n"
+
+
+def test_fetch_policy_follows_a_301_to_the_canonical_host() -> None:
+    """THE MOTIVATING CASE: an apex host 301ing /robots.txt to its www canonical -- the shape
+    thearmypainter.com's www host publishes, and the reason mfr-armypainter.yaml pinned baseUrl to
+    the apex. The file at the canonical host is fetched, parsed, and -- the part that matters --
+    its rules bind requests to the ORIGINAL host."""
+    seen: list[str] = []
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt"),
+            "https://www.example.test/robots.txt": serves(CANONICAL_ROBOTS),
+        },
+        seen,
+    )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+
+    assert seen == ["https://example.test/robots.txt", "https://www.example.test/robots.txt"]
+    assert policy.is_permissive is False  # NOT "no robots.txt published" -- we read a real one
+    assert policy.allows("https://example.test/paints/x", UA) is True
+    assert policy.allows("https://example.test/cart", UA) is False
+
+
+def test_fetch_policy_follows_a_relative_redirect_to_a_locale_path() -> None:
+    """store.corvusbelli.com's real shape: /robots.txt 301s to the relative /en/robots.txt. The
+    Location is resolved against the URL actually requested, so a relative hop stays on-host."""
+    seen: list[str] = []
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("/en/robots.txt"),
+            "https://example.test/en/robots.txt": serves("User-agent: *\nDisallow: /admin\n"),
+        },
+        seen,
+    )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+
+    assert seen == ["https://example.test/robots.txt", "https://example.test/en/robots.txt"]
+    assert policy.allows("https://example.test/admin", UA) is False
+    assert policy.allows("https://example.test/paints", UA) is True
+
+
+@pytest.mark.parametrize("status", [301, 302, 303, 307, 308])
+def test_fetch_policy_follows_every_redirect_status(status: int) -> None:
+    """RFC 9309 names 301 and 302 as examples, not as the list. A permanent/temporary/see-other
+    distinction changes nothing about where the file we must read lives."""
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt", status),
+            "https://www.example.test/robots.txt": serves(CANONICAL_ROBOTS),
+        }
+    )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.allows("https://example.test/cart", UA) is False
+
+
+def _hop_chain(hops: int, seen: list[str] | None = None):
+    """A robots.txt chain of exactly `hops` redirects, ending in a real file at the last host."""
+    mapping = {"https://example.test/robots.txt": moved("https://h1.example.test/robots.txt")}
+    for index in range(1, hops):
+        mapping[f"https://h{index}.example.test/robots.txt"] = moved(
+            f"https://h{index + 1}.example.test/robots.txt"
+        )
+    mapping[f"https://h{hops}.example.test/robots.txt"] = serves(CANONICAL_ROBOTS)
+    return routes(mapping, seen)
+
+
+def test_fetch_policy_follows_a_chain_of_exactly_five_redirects() -> None:
+    """Five consecutive hops is the RFC floor a compliant crawler must reach -- so the fifth is
+    followed, not refused."""
+    seen: list[str] = []
+
+    policy = fetch_policy(client_for(_hop_chain(MAX_REDIRECTS, seen)), "https://example.test")
+
+    assert len(seen) == MAX_REDIRECTS + 1  # the original request plus five hops
+    assert policy.allows("https://example.test/cart", UA) is False
+
+
+def test_fetch_policy_refuses_more_than_five_redirects() -> None:
+    """The sixth hop is where we stop. The RFC permits treating an over-long chain as "robots.txt
+    unavailable" (i.e. permissive); we deliberately stay stricter and fail loud, and the host that
+    would have been hop six is never requested."""
+    seen: list[str] = []
+
+    with pytest.raises(RobotsFetchError) as excinfo:
+        fetch_policy(client_for(_hop_chain(MAX_REDIRECTS + 1, seen)), "https://example.test")
+
+    assert len(seen) == MAX_REDIRECTS + 1
+    assert f"https://h{MAX_REDIRECTS + 1}.example.test/robots.txt" not in seen
+    assert "more than 5 consecutive redirects" in str(excinfo.value)
+
+
+def test_fetch_policy_refuses_a_redirect_loop() -> None:
+    """A -> B -> A never resolves. Caught by revisit-detection rather than only by the hop cap, so
+    a two-hop loop fails on the first revisit instead of pinging six times first."""
+    seen: list[str] = []
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt"),
+            "https://www.example.test/robots.txt": moved("https://example.test/robots.txt"),
+        },
+        seen,
+    )
+
+    with pytest.raises(RobotsFetchError) as excinfo:
+        fetch_policy(client_for(handler), "https://example.test")
+
+    assert len(seen) == 2  # stopped at the first revisit, not after the full hop budget
+    assert "redirect loop" in str(excinfo.value)
+
+
+def test_fetch_policy_refuses_a_redirect_with_no_location() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(301)
+
+    with pytest.raises(RobotsFetchError) as excinfo:
+        fetch_policy(client_for(handler), "https://example.test")
+    assert excinfo.value.cause.status == 301
+    assert "cannot follow redirect" in str(excinfo.value)
+
+
+def test_fetch_policy_refuses_a_redirect_to_a_non_http_scheme() -> None:
+    """Following a redirect is not a licence to fetch anything -- only http(s) is resolvable here,
+    and an unresolvable robots.txt is still "we cannot prove we're allowed"."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(301, headers={"Location": "ftp://files.example.test/robots.txt"})
+
+    with pytest.raises(RobotsFetchError) as excinfo:
+        fetch_policy(client_for(handler), "https://example.test")
+    assert excinfo.value.cause.status == 301
+
+
+def test_fetch_policy_redirect_ending_in_404_is_permissive() -> None:
+    """The final response is classified by the same rules a first-hop response is: a chain ending
+    in 404 is still "no robots.txt published", the redirect merely said where the absent file would
+    have lived."""
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt"),
+            "https://www.example.test/robots.txt": lambda: httpx.Response(404),
+        }
+    )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+    assert policy.is_permissive is True
+
+
+def test_fetch_policy_redirect_ending_in_403_still_fails_loud() -> None:
+    """The other half of the same rule, and the one that keeps this honest: reaching a 403 through
+    a redirect is exactly as unprovable as being served one directly. The error names the hop that
+    actually failed, not the base URL, so the chain is debuggable."""
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt"),
+            "https://www.example.test/robots.txt": lambda: httpx.Response(403),
+        }
+    )
+
+    with pytest.raises(RobotsFetchError) as excinfo:
+        fetch_policy(client_for(handler), "https://example.test")
+
+    assert excinfo.value.cause.status == 403
+    assert excinfo.value.cause.url == "https://www.example.test/robots.txt"
+    assert "via 1 redirect(s) from https://example.test/robots.txt" in str(excinfo.value)
+
+
+def test_fetch_policy_redirect_ending_in_5xx_still_fails_loud() -> None:
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt"),
+            "https://www.example.test/robots.txt": lambda: httpx.Response(503),
+        }
+    )
+
+    with pytest.raises(RobotsFetchError) as excinfo:
+        fetch_policy(client_for(handler), "https://example.test")
+    assert excinfo.value.cause.status == 503
+
+
+def test_fetch_policy_redirect_target_disallowing_us_still_binds() -> None:
+    """THE COMPLIANCE THAT REMAINS, at unit level: following a redirect is a way to READ a site's
+    rules, never a way to shed them. A canonical host naming us and disallowing everything blocks
+    the apex source that redirected to it."""
+    handler = routes(
+        {
+            "https://example.test/robots.txt": moved("https://www.example.test/robots.txt"),
+            "https://www.example.test/robots.txt": serves(
+                f"User-agent: *\nAllow: /\n\nUser-agent: {PRODUCT_TOKEN}\nDisallow: /\n"
+            ),
+        }
+    )
+
+    policy = fetch_policy(client_for(handler), "https://example.test")
+
+    assert policy.allows("https://example.test/", UA) is False
+    token, rule = policy.disallowed_by("https://example.test/anything", UA)
+    assert (token, rule) == (UA, "Disallow: /")
 
 
 # --- RobotsPolicy.allows: full UA + bare product token -- EITHER disallow => disallowed ---------
@@ -724,6 +971,117 @@ def test_run_source_does_not_slow_down_when_robots_crawl_delay_is_faster_than_co
     # strategy requests, same as the slower-crawl-delay test above: /a (first request on the fresh
     # client) doesn't wait, then /b waits the full configured 10s interval.
     assert sleeps == [pytest.approx(10.0, abs=0.2)]
+
+
+def test_run_source_follows_a_robots_redirect_and_still_refuses_a_disallowing_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """End-to-end proof that the 2026-08-12 redirect fix reads rules rather than shedding them: the
+    descriptor's own host publishes nothing but a 301 to its canonical, and the canonical says
+    `Disallow: /`. The source stops dead at the base-URL preflight, the strategy never runs, and
+    the error still names the DESCRIPTOR's URL (what we wanted to fetch), not the redirect hop."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if str(request.url) == "https://example.test/robots.txt":
+            return httpx.Response(301, headers={"Location": "https://www.example.test/robots.txt"})
+        assert str(request.url) == "https://www.example.test/robots.txt"
+        return robots_response("User-agent: *\nDisallow: /\n")
+
+    register("toy-robots-redirect-blocked", _never_called_strategy, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-robots-redirect-blocked", kind="retailer",
+        strategy="toy-robots-redirect-blocked", baseUrl="https://example.test",
+    )
+
+    with pytest.raises(RobotsDisallowedError) as excinfo:
+        run_source(
+            desc, DataPaths(tmp_path), context(tmp_path),
+            transport=httpx.MockTransport(handler), sleep=lambda seconds: None,
+        )
+
+    assert excinfo.value.details["source"] == "toy-robots-redirect-blocked"
+    assert excinfo.value.details["url"] == "https://example.test"
+    assert excinfo.value.details["rule"] == "Disallow: /"
+
+
+def test_run_source_attaches_the_redirected_policy_to_the_strategys_client(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The redirected policy is the SAME policy the per-request check enforces -- no second fetch,
+    and no gap between "which file the preflight read" and "which rules strategy requests obey".
+    Base URL is allowed (so the preflight passes), one strategy path is allowed, and the path the
+    canonical host disallows is blocked at PoliteClient._request."""
+    fetched: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url = str(request.url)
+        if url == "https://example.test/robots.txt":
+            return httpx.Response(301, headers={"Location": "https://www.example.test/robots.txt"})
+        if url == "https://www.example.test/robots.txt":
+            return robots_response("User-agent: *\nAllow: /\nDisallow: /products.json\n")
+        fetched.append(url)
+        return httpx.Response(200, json={"ok": True})
+
+    def strategy(desc, client, cursor, ctx):
+        client.get_json("/catalog.json")  # allowed by the redirected policy
+        client.get_json("/products.json")  # disallowed by it -- must raise
+        return toy_result()
+
+    register("toy-robots-redirect-path", strategy, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-robots-redirect-path", kind="retailer",
+        strategy="toy-robots-redirect-path", baseUrl="https://example.test",
+    )
+
+    with pytest.raises(RobotsDisallowedError) as excinfo:
+        run_source(
+            desc, DataPaths(tmp_path), context(tmp_path),
+            transport=httpx.MockTransport(handler), sleep=lambda seconds: None,
+        )
+
+    assert fetched == ["https://example.test/catalog.json"]  # the allowed one ran, the other didn't
+    assert excinfo.value.details["url"] == "https://example.test/products.json"
+    assert excinfo.value.details["rule"] == "Disallow: /products.json"
+    assert "source" not in excinfo.value.details  # raised by the per-request check
+
+
+def test_run_source_honors_a_crawl_delay_published_on_the_redirect_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Crawl-delay comes from the file we actually read, not from the host we first asked. A site
+    that redirects robots.txt and asks for 5s there gets 5s, exactly as if it had served it
+    directly."""
+    sleeps: list[float] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url = str(request.url)
+        if url == "https://example.test/robots.txt":
+            return httpx.Response(301, headers={"Location": "https://www.example.test/robots.txt"})
+        if url == "https://www.example.test/robots.txt":
+            return robots_response("User-agent: *\nAllow: /\nCrawl-delay: 5\n")
+        return httpx.Response(200, text="ok")
+
+    def strategy(desc, client, cursor, ctx):
+        client.get_text("/a")
+        client.get_text("/b")
+        return toy_result()
+
+    register("toy-robots-redirect-delay", strategy, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-robots-redirect-delay", kind="retailer",
+        strategy="toy-robots-redirect-delay", baseUrl="https://example.test",
+        politeness={"rps": 1.0},
+    )
+
+    health = run_source(
+        desc, DataPaths(tmp_path), context(tmp_path),
+        transport=httpx.MockTransport(handler), sleep=sleeps.append,
+    )
+
+    assert health.stats["robots_crawl_delay_applied"] == 5.0
+    # Two sleeps: the probe client pacing its second request (the redirect hop, at the configured
+    # 1 rps -- the policy that slows us down isn't parsed yet), then the strategy's /b at 5s.
+    assert sleeps == [pytest.approx(1.0, abs=0.2), pytest.approx(5.0, abs=0.2)]
 
 
 # --- RFC 9309 sec 2.2.1: groups repeating a user-agent MUST be merged (fix, 2026-08-05) --------
