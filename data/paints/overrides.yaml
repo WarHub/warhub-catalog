@@ -341,6 +341,35 @@ additions:
 # entry here a changed name does not rename a record -- CatalogReconciler falls to step 4 and
 # MINTS a new one, stranding the old.
 aliases:
+  ak-interactive:
+    # Pairs with AK_LABEL_SUFFIXES in scripts/gen_paint_harvest.py (2026-08-11), which states the
+    # evidence. Until that list existed the AK bridge cut every store title at its LAST
+    # dash-with-whitespace and published only the part before it, so a suffix that was not a known
+    # range label was simply deleted. Two products lost the only words that told them apart:
+    # 'oif & oef – us vehicles wash' (AK121) and 'OIF & OEF – US Vehicles Streaking Effects'
+    # (AK123) both published as `Oif & Oef`, both into set `Weathering Effects`. Measured over a
+    # live bridge_ak() run: 242 additions, 143 carrying a suffix, and these 2 are the ONLY
+    # published names the inverted rule changes -- the other 240 are byte-identical.
+    #
+    # Without these two lines the fix would SPLIT rather than rename. Name is half the identity
+    # key, so the reconciler would see an unknown key, MINT a second record for each pot, and
+    # leave the two `Oif & Oef` records in the archive forever beside them -- one truncated name
+    # replaced by two, which is worse than the bug. Same failure mode as the army-painter entry
+    # below, reached through the name rather than the code.
+    #
+    # BOTH KEYS ARE HEXLESS, AND THAT IS THE ONLY REASON THEY ARE SAFE. `ApplyRename` assigns
+    # `Hex = fresh.Hex` wholesale, so a hexless alias onto a record that HOLDS a colour erases it
+    # -- the trap the green-stuff-world block below refuses the 4220/4231 belt-and-braces entries
+    # over. Here there is nothing to erase and nothing to re-key: the archive has `hex: ''` on
+    # both AK121 and AK123, and data/paints/swatches/ak-interactive.yaml holds no entry for
+    # either code, so SwatchApplier cannot supply one and `fresh` is hexless too.
+    #
+    # AND THE OLD KEYS ARE REACHABLE, unlike the 31 Arcturus-origin GSW records further down that
+    # `retract:` had to handle instead. AK121/AK123 are harvest-minted -- firstSeen 2026-08-09,
+    # with productCode, imageUrl and priceEur off the store -- so no base source re-asserts their
+    # old identity key, `consumed` never claims it, and the alias is not refused.
+    'Weathering Effects|Oif & Oef – Us Vehicles Wash|AK121|': 'Weathering Effects|Oif & Oef|AK121|'
+    'Weathering Effects|Oif & Oef – Us Vehicles Streaking Effects|AK123|': 'Weathering Effects|Oif & Oef|AK123|'
   army-painter:
     # Pairs with the `productCode: WP1406` override in the army-painter section below, which states
     # the evidence. Without this line the correction would ADD a paint rather than fix one: the

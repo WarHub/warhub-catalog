@@ -677,6 +677,45 @@ AK_SET_BY_SUFFIX = {
     "QUICK GEN COLOR": "Quick Gen",  # *
     "COLOR PUNCH": "Color Punch (3rd Gen)",  # *
 }
+
+# THE PUBLISHED NAME MAY DROP A SUFFIX ONLY WHEN THIS LIST SAYS THE SUFFIX IS A LABEL.
+# INVERTED 2026-08-11. Until then `bridge_ak` published `ak_prettify(base)` unconditionally, so
+# the rule was "cut at the last dash" rather than "strip a known range label": ANY suffix the
+# mapping above did not recognise was deleted from the name, including the words that said what
+# the product WAS. Measured over a live `bridge_ak()` run on the committed evidence: 242
+# additions, 143 of which carry a suffix. 141 of those 143 are labels -- 79 QUICK GEN COLOR,
+# 28 INK, 18 ACRYLIC WASH, 10 COLOR PUNCH, 2 STANDARD, 1 METALLIC, 3 Spanish glosses -- and lose
+# nothing by being dropped. The other 2 are the whole reason this list exists:
+#   AK121 'oif & oef – us vehicles wash'              -> `Oif & Oef`
+#   AK123 'OIF & OEF – US Vehicles Streaking Effects' -> `Oif & Oef`
+# Two different products, one set (`Weathering Effects`), one published name, and the only text
+# telling them apart was the part the cut threw away. Inverting the rule changes exactly those 2
+# published names and leaves the other 240 additions byte-identical -- so the blast radius of the
+# fix is the bug itself. (Their un-swept sibling AK122 is committed as the full
+# `Oif & Oef – US Vehicles Base`; it came from the Arcturus base and has no observation at all,
+# which is why it never lost its suffix.)
+#
+# WHY EACH ENTRY IS A LABEL AND NOT NAME TEXT:
+#  - the AK_SET_BY_SUFFIX keys ARE the range names, and the `set` the row lands in already says
+#    each of them -- the suffix would only repeat half the identity key inside the other half;
+#  - ACRYLIC WASH is the same thing one step further out: it routes to set `Acrylic Wash` by
+#    slug below, and all 18 of its additions land there;
+#  - EFECTO HIERRO / EFECTO BRONCE / AGENTE OXIDANTE (AK11266/7/8) are the SPANISH of the English
+#    words immediately before them ('IRON EFFECT – EFECTO HIERRO'), i.e. a translation AK prints
+#    in the title, not further product name. They are listed by their literal text because there
+#    are three of them and no rule distinguishes a gloss from a qualifier; a fourth needs a line.
+#
+# `ak_split` itself is deliberately NOT changed. 124 rows reach it with `suffix is None` and the
+# set-resolution below reads that value (`AK_SET_BY_SUFFIX.get(suffix or "")`, the `INK` split,
+# and the `3rd-acrylics and suffix is None` branch), so moving the cut would move paints between
+# sets -- and `set` is half the paint identity key. Only the NAME moved.
+AK_LABEL_SUFFIXES = frozenset(AK_SET_BY_SUFFIX) | {
+    "ACRYLIC WASH",
+    "EFECTO HIERRO",
+    "EFECTO BRONCE",
+    "AGENTE OXIDANTE",
+}
+
 # WIDENED to 3 digits 2026-08-09. AK's legacy weathering and Xtreme Metal ranges number in
 # three (AK012 Streaking Grime, AK479 Xtreme Metal Aluminium), and the archive has held 111
 # such codes all along -- they arrived via the Arcturus base, so the shape was never in doubt,
@@ -794,8 +833,12 @@ def bridge_ak() -> BrandHarvest:
             )
             continue
 
+        # The suffix is dropped only when AK_LABEL_SUFFIXES says it is a label; anything else --
+        # including `suffix is None`, where `base` and the raw title are already the same string
+        # (verified: 0 of the 124 suffix-less rows differ) -- keeps the FULL title.
         out.additions.append(
-            {"name": ak_prettify(base), "set": set_name, "productCode": sku,
+            {"name": ak_prettify(base if suffix in AK_LABEL_SUFFIXES else name_raw),
+             "set": set_name, "productCode": sku,
              "imageUrl": o.get("imageUrl"), **common,
              **observed_price(o, "mfr-ak-interactive")}
         )
