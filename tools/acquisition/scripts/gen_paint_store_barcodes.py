@@ -45,6 +45,7 @@ sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 
 from warhub_acquisition.acquire.client import PoliteClient  # noqa: E402
 from warhub_acquisition.acquire.robots import fetch_policy  # noqa: E402
+from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 CONFIG = REPO / "data/paints/store-sources.yaml"
 OUT_DIR = REPO / "data/paints/stores"
@@ -161,7 +162,20 @@ def main() -> None:
             "# Retailer barcode snapshot: manufacturer item code (store sku) -> JAN/EAN, for a brand\n"
             "# whose own site publishes none. METADATA-ONLY: fills blank eans, never mints a paint.\n"
             "# Consumed offline by gen_paint_harvest.py; re-run this script to refresh.\n"
-            + yaml.safe_dump(data, sort_keys=False, allow_unicode=True, width=200)
+            # dump_yaml (not yaml.safe_dump) because `sku` and `ean` are what gen_paint_harvest.py
+            # joins on, and safe_dump protects them only by accident: it quotes a JAN like
+            # '4973028111545' because YAML 1.1 reads it as an int, but a store sku that is
+            # number-shaped with a leading zero goes out BARE unless it happens to be valid octal,
+            # and a YAML 1.2 reader then strips the pad. `snapshot` is the other one -- an ISO date
+            # is a YAML 1.1 timestamp, so safe_dump does quote it today, but that is the resolver
+            # agreeing by luck rather than the writer meaning it. dump_yaml force-quotes anything
+            # number-shaped by rule.
+            #
+            # sort_keys was already False here and dump_yaml is too, so ordering is untouched: the
+            # committed file changes only where _Dumper indents `items:` sequence entries under
+            # their key. Measured 2026-08-11: 3,155 lines re-indented, 0 values requoted,
+            # parse-equal under yaml.safe_load.
+            + dump_yaml(data)
         )
         (OUT_DIR / f"{slug}.yaml").write_bytes(content.encode("utf-8"))
         print(f"{slug}: {len(seen)} coded barcodes -> data/paints/stores/{slug}.yaml")

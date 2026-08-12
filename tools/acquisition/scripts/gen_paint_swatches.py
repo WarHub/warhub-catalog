@@ -37,6 +37,7 @@ from warhub_acquisition.acquire.client import BROWSER_UA, FetchError, PoliteClie
 from warhub_acquisition.swatch.grid_image import CellSample, GridSpec, extract_grid  # noqa: E402
 from warhub_acquisition.swatch.item_image import ItemImageSpec, sample_item, template_url  # noqa: E402
 from warhub_acquisition.swatch.pdf_chart import ChartSpec, SampleSpec, extract_chart  # noqa: E402
+from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 # --config <path> lets calibration runs (parallel agents, throwaway experiments) use their own
 # spec file without racing edits on the committed one; positional args stay brand filters.
@@ -368,8 +369,15 @@ def main() -> None:
                 "# paint catalog's {Name}|{Set} identity. The C# SwatchApplier fills EMPTY hex\n"
                 "# only; overrides win.\n"
                 "# Review artifacts: data/review/swatches/*.jpg (crop vs extracted colour per code).\n"
-                + yaml.safe_dump({slug: {k: applied[k] for k in sorted(applied)}},
-                                 sort_keys=False, allow_unicode=True, width=200)
+                # dump_yaml (not yaml.safe_dump) because `code` is a manufacturer part number and
+                # some brands' are pure digits -- a leading-zero one would go out BARE wherever it
+                # is not valid octal, and the C# SwatchApplier keys its fill on that code. Measured
+                # 2026-08-11 across all 7 committed data/paints/swatches/*.yaml: this rewrite is
+                # byte-identical (0 changed lines) -- every code in them today is alphanumeric and
+                # every hex starts with '#', so nothing needed requoting and there are no sequences
+                # to re-indent. That is the point: the shape is safe by accident of the current
+                # data, and this makes it safe by rule for the next chart that lands.
+                + dump_yaml({slug: {k: applied[k] for k in sorted(applied)}})
             )
             out.write_bytes(content.encode("utf-8"))
             print(f"{slug}: wrote {len(applied)} fills -> {out.relative_to(REPO)}")
