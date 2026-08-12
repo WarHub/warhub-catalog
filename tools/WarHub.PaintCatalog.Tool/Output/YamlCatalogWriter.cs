@@ -30,7 +30,8 @@ public static class YamlCatalogWriter
     // -- so the two halves of the same catalog disagreed about the type of the one field that
     // joins them, and equivalences.yaml could not be joined to the archive from Python without
     // re-deriving the raw text. Not hypothetical: it produced a false "201 dangling equivalence
-    // sources" reading during the AK duplicate retraction.
+    // sources" reading during the AK duplicate retraction -- PaintCatalogApp.cs and
+    // PaintRecordMapper.cs carry the true figures that reading displaced.
     //
     // QuotingEventEmitter is a strict superset of what BlockScalarEmitter did -- same literal-block
     // rule for multi-line strings, checked FIRST so a multi-line string that also looks numeric
