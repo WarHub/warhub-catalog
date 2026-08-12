@@ -59,18 +59,68 @@ decision is identical on every supported interpreter. See `_Group` / `_match_rul
 **Fetching (`fetch_policy`)**: always goes THROUGH the caller's `PoliteClient` -- paced, retried,
 UA-bearing, exactly like every other request this codebase makes. `GET <baseUrl>/robots.txt`:
 
+- 301/302/303/307/308 -> FOLLOWED, up to `MAX_REDIRECTS` (5) consecutive hops, then the final
+  response is classified by the rules below. See the redirect section immediately after this list.
 - 404/410 -> permissive (`RobotsPolicy` wrapping `None`): "no restrictions published" is an
   explicit, positive outcome, not a fallback-on-error. Per RFC 9309 sec 2.3.1.3, these two codes
   are the ones a well-behaved crawler treats as "no robots.txt exists."
 - Any other non-2xx (5xx after `PoliteClient`'s own retries, a transport failure, or anything else
-  -- 401/403/3xx/etc.) -> `RobotsFetchError` (FAIL LOUD). We cannot prove we're allowed, and a
-  site that is actively erroring or redirecting on its own robots.txt is not the same thing as a
-  site that has published "no restrictions" -- silently treating that as permission would defeat
-  the entire point of this preflight. `PoliteClient` never follows redirects (see client.py), so a
-  3xx here is not resolved automatically; if a source's `baseUrl` genuinely isn't where its
-  robots.txt lives (see `politeness.ignoreRobots` on `SourceDescriptor`), that's a descriptor-level
-  fix, not something this module should paper over.
+  -- 401/403/etc.) -> `RobotsFetchError` (FAIL LOUD). We cannot prove we're allowed, and a site
+  that is actively erroring on its own robots.txt is not the same thing as a site that has
+  published "no restrictions" -- silently treating that as permission would defeat the entire
+  point of this preflight.
 - 200 -> parsed by `_parse_groups` into RFC 9309 user-agent groups.
+
+**Redirects ARE followed, on robots.txt only (fix, 2026-08-12)**: until this date a 3xx on
+robots.txt was lumped in with 401/403/5xx and raised `RobotsFetchError`, on the reasoning that
+`PoliteClient` never follows redirects so we could not resolve one. That was a gap in this fetcher,
+not a compliance stance: RFC 9309 sec 2.3.1.2 is explicit that a crawler "SHOULD follow at least
+five consecutive redirects, even across authorities", and that a robots.txt reached within five
+hops MUST be fetched, parsed, and its rules followed IN THE CONTEXT OF THE INITIAL AUTHORITY. An
+apex host 301ing `/robots.txt` to its `www` canonical (or to a locale prefix like `/en/robots.txt`)
+is the single most ordinary shape on the web; refusing it meant refusing to read rules a site was
+publishing perfectly well, which is strictly worse for compliance than reading them.
+
+It was also already costing us. Two committed descriptors existed to route around this fetcher
+rather than around any site's actual wishes:
+
+- `mfr-armypainter.yaml` pinned `baseUrl` to the apex host with the note "the www host 301s
+  robots.txt (the robots fetcher refuses to assume permission on redirects)" -- a baseUrl chosen to
+  dodge a client limitation.
+- `mfr-corvus-belli.yaml` cited `store.corvusbelli.com/robots.txt` 301ing to `/en/robots.txt` as
+  one of two reasons for `ignoreRobots: true`. That reason is now void; its OTHER reason (the
+  strategy's real fetch target is a hardcoded AppSync host unrelated to the storefront baseUrl) is
+  untouched and still carries the flag on its own.
+
+Scope, deliberately narrow -- this changes how ROBOTS.TXT is fetched and nothing else.
+`PoliteClient` still never follows redirects for anything a strategy fetches: a 301 on a product
+URL is still an immediate `FetchError` (the goblingaming incident, see client.py), because a
+strategy silently following a redirect could land on a path the policy disallows without being
+re-checked. The robots.txt probe client is the one client that carries no policy at all (checking
+robots against the robots.txt fetch would be nonsensical), so hop-by-hop re-checking is not a
+question here.
+
+What stops this being a loophole:
+
+- Bounded at five consecutive hops, exactly the RFC floor. A sixth is `RobotsFetchError`, not an
+  assumption of permission (the RFC permits treating it as "unavailable", i.e. permissive; we stay
+  stricter).
+- A loop (any hop revisiting an already-requested URL), a 3xx with a missing/empty `Location`, and
+  a `Location` on a non-http(s) scheme are each `RobotsFetchError` -- unresolvable is unresolvable.
+- The FINAL response is classified by exactly the same rules a first-hop response is: only 2xx
+  parses, only 404/410 is permissive, everything else fails loud. A redirect ending in 403 fails
+  just as it did before this change.
+- Rules fetched from a redirect target bind requests to the ORIGINAL host, per the RFC's
+  "context of the initial authority" -- so a canonical host publishing `Disallow: /` blocks the
+  apex source that redirected to it. Pinned end-to-end in test_robots.py.
+
+The honest cost: a host that 301s `/robots.txt` to an HTML page returning 200 now yields a policy
+parsed from HTML, i.e. zero groups, i.e. no restrictions -- where before it failed loud. That is
+not a new failure mode (a host serving that same HTML soft-404 directly on `/robots.txt` with a 200
+already parses to zero groups today, and always has), but redirect-following does make it reachable
+on redirecting hosts. Not guarded here: every available guard is a content-type or body heuristic
+that would also reject the many sites serving a perfectly valid robots.txt under a sloppy
+`Content-Type`, and asymmetric guards (applied to redirected 200s only) would be worse still.
 
 **Checked tokens (`RobotsPolicy.allows`)**: every call checks TWO user-agent tokens against the
 parsed policy, and a `Disallow` under EITHER of them makes the URL not-allowed:
@@ -141,7 +191,7 @@ this line -- an undercount here reads as "the escape hatch is barely used" when 
 """
 import re
 from dataclasses import dataclass, field
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 from warhub_acquisition.acquire.client import FetchError, PoliteClient
 
@@ -162,21 +212,38 @@ PRODUCT_TOKEN = "warhub-catalog-bot"
 # other non-2xx is a FetchError that propagates uncaught (fail loud).
 _PERMISSIVE_STATUSES = frozenset({404, 410})
 
+# The redirect statuses `fetch_policy` follows (see the module docstring's redirect section). Passed
+# to `PoliteClient.get_response`'s `allow_statuses` so the client hands the 3xx response back
+# instead of raising -- PoliteClient itself still never follows a redirect for anything else.
+_REDIRECT_STATUSES = (301, 302, 303, 307, 308)
+
+# RFC 9309 sec 2.3.1.2: a crawler SHOULD follow at least five consecutive redirects on robots.txt.
+# Five is the floor a compliant client must reach, so it is also where we stop -- past it the RFC
+# permits assuming the file is unavailable (permissive); we raise instead.
+MAX_REDIRECTS = 5
+
 ROBOTS_PATH = "/robots.txt"
 
 
 class RobotsFetchError(Exception):
     """robots.txt could not be retrieved with enough confidence to proceed: a 5xx (after
-    PoliteClient's own retries), a transport failure, or any other non-2xx status that isn't one of
-    the two "no robots.txt published" codes (404/410). We cannot prove we're allowed to crawl, so
-    this fails loud rather than silently defaulting to permissive."""
+    PoliteClient's own retries), a transport failure, any other non-2xx status that isn't one of
+    the two "no robots.txt published" codes (404/410), or a redirect chain that could not be
+    resolved (unfollowable `Location`, a loop, or more than `MAX_REDIRECTS` hops -- see the module
+    docstring). We cannot prove we're allowed to crawl, so this fails loud rather than silently
+    defaulting to permissive.
 
-    def __init__(self, base_url: str, cause: FetchError) -> None:
+    `cause.url` is the URL actually being fetched when it failed, which differs from
+    `<base_url>/robots.txt` once a redirect has been followed; `detail` says how we got there."""
+
+    def __init__(self, base_url: str, cause: FetchError, *, detail: str | None = None) -> None:
         self.base_url = base_url
         self.cause = cause
+        self.detail = detail
+        context = f"; {detail}" if detail else ""
         super().__init__(
             f"could not fetch {base_url.rstrip('/')}{ROBOTS_PATH} "
-            f"(status={cause.status}): refusing to assume permission"
+            f"(status={cause.status}{context}): refusing to assume permission"
         )
 
 
@@ -412,15 +479,74 @@ class RobotsPolicy:
         return max(delays) if delays else None
 
 
+def _via(redirected: list[str]) -> str:
+    """How we reached the hop that failed. Empty before any redirect has been followed, so a
+    failure on the very first request keeps its original, redirect-free message."""
+    if not redirected:
+        return ""
+    return f" via {len(redirected)} redirect(s) from {redirected[0]}"
+
+
+def _redirect_target(response) -> str | None:
+    """The absolute URL a 3xx robots.txt response points at, or `None` when it cannot be followed
+    at all: no `Location` header, an empty one, or one resolving to a non-http(s) scheme. A
+    relative `Location` (`/en/robots.txt`, the shape store.corvusbelli.com publishes) is resolved
+    against the URL that was actually requested, not against `base_url` -- after a cross-host hop
+    those differ."""
+    location = response.headers.get("Location", "").strip()
+    if not location:
+        return None
+    target = urljoin(str(response.request.url), location)
+    if urlparse(target).scheme not in ("http", "https"):
+        return None
+    return target
+
+
 def fetch_policy(client: PoliteClient, base_url: str) -> RobotsPolicy:
     """Fetches `<baseUrl>/robots.txt` through `client` (paced/retried/UA-bearing) and returns the
-    resulting policy. See module docstring for the 404/410 (permissive) vs. everything-else
-    (`RobotsFetchError`, fail loud) vs. 200 (parse) split."""
-    try:
-        response = client.get_response(ROBOTS_PATH)
-    except FetchError as exc:
-        if exc.status in _PERMISSIVE_STATUSES:
-            return RobotsPolicy(None)
-        raise RobotsFetchError(base_url, exc) from exc
+    resulting policy, following up to `MAX_REDIRECTS` consecutive redirects on the way. See the
+    module docstring for the redirect rules and for the 404/410 (permissive) vs. everything-else
+    (`RobotsFetchError`, fail loud) vs. 200 (parse) split the FINAL response is classified by.
 
-    return RobotsPolicy.from_lines(response.text.splitlines())
+    The rules returned bind requests to `base_url`'s host even when the file was fetched from
+    another one -- RFC 9309 sec 2.3.1.2's "context of the initial authority"."""
+    url = ROBOTS_PATH
+    # Every URL we requested that answered with a redirect, in order: its length is the number of
+    # hops followed so far, and membership is the loop check.
+    redirected: list[str] = []
+
+    while True:
+        try:
+            response = client.get_response(url, allow_statuses=_REDIRECT_STATUSES)
+        except FetchError as exc:
+            if exc.status in _PERMISSIVE_STATUSES:
+                # A chain ending in 404/410 is still "no robots.txt published" -- the redirect just
+                # told us where the site keeps the file it does not have.
+                return RobotsPolicy(None)
+            detail = f"failed at {exc.url}{_via(redirected)}" if redirected else None
+            raise RobotsFetchError(base_url, exc, detail=detail) from exc
+
+        if response.status_code not in _REDIRECT_STATUSES:
+            return RobotsPolicy.from_lines(response.text.splitlines())
+
+        current = str(response.request.url)
+        redirected.append(current)
+        failure = FetchError(current, response.status_code)
+        target = _redirect_target(response)
+        if target is None:
+            location = response.headers.get("Location", "")
+            raise RobotsFetchError(
+                base_url, failure,
+                detail=f"cannot follow redirect from {current} to {location!r}",
+            )
+        if target in redirected:
+            raise RobotsFetchError(
+                base_url, failure,
+                detail=f"redirect loop: {current} -> {target}, already requested",
+            )
+        if len(redirected) > MAX_REDIRECTS:
+            raise RobotsFetchError(
+                base_url, failure,
+                detail=f"more than {MAX_REDIRECTS} consecutive redirects (next would be {target})",
+            )
+        url = target
