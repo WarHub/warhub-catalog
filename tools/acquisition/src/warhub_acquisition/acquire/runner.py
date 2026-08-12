@@ -240,11 +240,29 @@ def run_source(
     if robots_stats:
         result.stats.update(robots_stats)
 
+    # Declared exclusions are applied BEFORE the contract, so every downstream number -- minCount,
+    # requiredFieldRates, last_good_count -- measures the population this source actually keeps
+    # rather than one inflated by rows we are about to throw away.
+    excluded_keys = {f"{descriptor.id}:{suffix}" for suffix in descriptor.excludeKeys}
+    if excluded_keys:
+        kept = [obs for obs in result.observations if obs.key not in excluded_keys]
+        result.stats["excluded_keys"] = len(result.observations) - len(kept)
+        result.observations = kept
+
     # All contract checks run BEFORE any evidence or cursor write: a failed source must never
     # delete or decay existing evidence, it can only fail to refresh it.
     _check_contract(descriptor, result, cursor)
 
     store = EvidenceStore(paths.evidence_products)
+    # An exclusion RETRACTS as well as prevents. Filtering the fresh list alone would leave a
+    # previously-harvested copy sitting in observations.jsonl forever -- `save` rewrites whatever
+    # `load` holds, and `mark_missed` only ever increments missStreak, so nothing else in this
+    # pipeline can remove a record once written. Retracting here keeps the descriptor the single
+    # source of truth: declare the key and the next run cleans up after itself, with no
+    # accompanying hand-edit of the evidence file to remember or get wrong.
+    if excluded_keys:
+        result.stats["excluded_retracted"] = store.drop(descriptor.id, excluded_keys)
+
     seen_keys: set[str] = set()
     for observation in result.observations:
         fresh = observation.model_copy(update={"firstSeen": context.run_date, "lastSeen": context.run_date})

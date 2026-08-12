@@ -37,6 +37,18 @@ class EvidenceStore:
             )
         observations[fresh.key] = fresh
 
+    def drop(self, source_id: str, keys: set[str]) -> int:
+        """Remove records outright. Returns how many were actually present.
+
+        The ONLY deletion path in this store, and deliberately narrow: it exists for
+        `SourceDescriptor.excludeKeys` -- storefront test entries that were never real products.
+        Everything else that stops being observed decays through `mark_missed`/`missStreak`
+        instead, because a product disappearing from a source is evidence about the SOURCE, not
+        permission to forget the product ever existed.
+        """
+        observations = self.load(source_id)
+        return sum(1 for key in keys if observations.pop(key, None) is not None)
+
     def mark_missed(self, source_id: str, seen_keys: set[str]) -> int:
         """Increment missStreak on existing records not observed by a full contract-passing sweep.
 
