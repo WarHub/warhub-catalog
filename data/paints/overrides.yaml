@@ -383,6 +383,20 @@ additions:
 # MINTS a new one, stranding the old.
 aliases:
   ak-interactive:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Auxiliary (3rd Gen)|Crackle Medium|AK11236|: Auxiliary (3rd Gen)|Crackle Medium|AK11236|#ACACAC
+    Auxiliary (3rd Gen)|Glaze Medium|AK11233|: Auxiliary (3rd Gen)|Glaze Medium|AK11233|#D5D5D5
+    Auxiliary (3rd Gen)|Gloss Medium|AK11235|: Auxiliary (3rd Gen)|Gloss Medium|AK11235|#D9D9D9
+    Auxiliary (3rd Gen)|Matte Medium|AK11234|: Auxiliary (3rd Gen)|Matte Medium|AK11234|#AFAFAF
+    Auxiliary (3rd Gen)|Metal Medium|AK11232|: Auxiliary (3rd Gen)|Metal Medium|AK11232|#E0E0E0
+    Auxiliary (3rd Gen)|Retarder|AK11231|: Auxiliary (3rd Gen)|Retarder|AK11231|#D5D5D5
+    Figures|Glaze Medium -90-|AK3085|: Figures|Glaze Medium -90-|AK3085|#B7B7B7
+    Primer (3rd Gen)|Varnish Gloss|AK11239|: Primer (3rd Gen)|Varnish Gloss|AK11239|#FEFEFE
+    Primer (3rd Gen)|Varnish Matt|AK11237|: Primer (3rd Gen)|Varnish Matt|AK11237|#DADBE1
+    Primer (3rd Gen)|Varnish Satin|AK11238|: Primer (3rd Gen)|Varnish Satin|AK11238|#F5F6F8
     # Pairs with AK_LABEL_SUFFIXES in scripts/gen_paint_harvest.py (2026-08-11), which states the
     # evidence. Until that list existed the AK bridge cut every store title at its LAST
     # dash-with-whitespace and published only the part before it, so a suffix that was not a known
@@ -412,6 +426,24 @@ aliases:
     'Weathering Effects|Oif & Oef – Us Vehicles Wash|AK121|': 'Weathering Effects|Oif & Oef|AK121|'
     'Weathering Effects|Oif & Oef – Us Vehicles Streaking Effects|AK123|': 'Weathering Effects|Oif & Oef|AK123|'
   army-painter:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Skin Tones Paint Set|Warpaints Mixing Medium||: Skin Tones Paint Set|Warpaints Mixing Medium||#EFF1F0
+    Speedpaint Set 2.0|Speedpaint Medium||: Speedpaint Set 2.0|Speedpaint Medium||#F3F0EB
+    Speedpaint Set|Speedpaint Medium||: Speedpaint Set|Speedpaint Medium||#EFEFEF
+    Warpaints Fanatic Wash|Wash Medium||: Warpaints Fanatic Wash|Wash Medium||#B1B3B4
+    Warpaints Fanatic|Gloss Varnish|WP3173P|: Warpaints Fanatic|Gloss Varnish|WP3173P|#D8D6D0
+    Warpaints Fanatic|Matt Varnish|WP3174P|: Warpaints Fanatic|Matt Varnish|WP3174P|#D7D6D1
+    Warpaints Fanatic|Warpaints Retarder|WP3172P|: Warpaints Fanatic|Warpaints Retarder|WP3172P|#D6D3CC
+    Warpaints Fanatic|Warpaints Stabilizer|WP3171P|: Warpaints Fanatic|Warpaints Stabilizer|WP3171P|#D8D6D1
+    Warpaints Primer|Aegis Suit Satin Varnish|CP3027|: Warpaints Primer|Aegis Suit Satin Varnish|CP3027|#F4F7F7
+    Warpaints Primer|Anti-Shine Matt Varnish|CP3003|: Warpaints Primer|Anti-Shine Matt Varnish|CP3003|#F0F0F0
+    Warpaints Wash|Anti-Shine Matt Varnish|WP1103|: Warpaints Wash|Anti-Shine Matt Varnish|WP1103|#F0F0F0
+    Warpaints Wash|Quickshade Wash Mixing Medium|WP1474|: Warpaints Wash|Quickshade Wash Mixing Medium|WP1474|#EEEFEF
+    Warpaints|Gloss Varnish|WP1473|: Warpaints|Gloss Varnish|WP1473|#F7F7F7
+    Warpaints|Warpaints Mixing Medium|WP1475|: Warpaints|Warpaints Mixing Medium|WP1475|#EFEFEF
     # Pairs with the `productCode: WP1406` override in the army-painter section below, which states
     # the evidence. Without this line the correction would ADD a paint rather than fix one: the
     # fresh record's identity key moves from ...|wp1405|... to ...|wp1406|..., the reconciler sees
@@ -645,6 +677,137 @@ aliases:
 #
 # CI is unaffected either way: the guard's only paint-side enforcement point is
 # paint-catalog-update.yml, which runs it AFTER the tool (:102-108), and ci.yml does not run it.
+  vallejo:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Arte Deco|Crackle Medium|84.160|: Arte Deco|Crackle Medium|84.160|#F8F5E5
+    Arte Deco|Gloss Varnish|84.154|: Arte Deco|Gloss Varnish|84.154|#E5E5E5
+    Arte Deco|Matt Varnish|84.155|: Arte Deco|Matt Varnish|84.155|#DCDCDC
+    Arte Deco|Pearl Medium|84.158|: Arte Deco|Pearl Medium|84.158|#C2C2C2
+    Arte Deco|Satin Varnish|84.169|: Arte Deco|Satin Varnish|84.169|#FFFFFF
+    Arte Deco|Textile Medium|84.159|: Arte Deco|Textile Medium|84.159|#ECECEC
+    Mecha Color|Mecha Gloss Varnish|69.701|: Mecha Color|Mecha Gloss Varnish|69.701|#FFFFFF
+    Mecha Color|Mecha Matt Varnish|69.702|: Mecha Color|Mecha Matt Varnish|69.702|#FFFFFF
+    Mecha Color|Mecha Satin Varnish|69.703|: Mecha Color|Mecha Satin Varnish|69.703|#FFFFFF
+    Metal Color|Gloss Metal Varnish|77.657|: Metal Color|Gloss Metal Varnish|77.657|#FFFFFF
+    Premium Airbrush Color|Cleaner|62.067|: Premium Airbrush Color|Cleaner|62.067|#FFFFFF
+    Premium Airbrush Color|Clear Base|62.068|: Premium Airbrush Color|Clear Base|62.068|#FFFFFF
+    Premium Airbrush Color|Gloss Varnish|62.064|: Premium Airbrush Color|Gloss Varnish|62.064|#FFFFFF
+    Premium Airbrush Color|Matt Varnish|62.062|: Premium Airbrush Color|Matt Varnish|62.062|#FFFFFF
+    Premium Airbrush Color|Metallic Medium|62.041|: Premium Airbrush Color|Metallic Medium|62.041|#FAF7F0
+    Premium Airbrush Color|Reducer|62.066|: Premium Airbrush Color|Reducer|62.066|#FFFFFF
+    Premium Airbrush Color|Retarder|62.065|: Premium Airbrush Color|Retarder|62.065|#FFFFFF
+    Premium Airbrush Color|Satin Varnish|62.063|: Premium Airbrush Color|Satin Varnish|62.063|#FFFFFF
+  tamiya:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Acrylics Mini Flat|Flat clear|XF-86|: Acrylics Mini Flat|Flat clear|XF-86|#FFFFFF
+    Acrylics Mini Gloss|Acrylic thinner|X-20A|: Acrylics Mini Gloss|Acrylic thinner|X-20A|#FFFFFF
+    Acrylics Mini Gloss|Clear|X-22|: Acrylics Mini Gloss|Clear|X-22|#FFFFFF
+    Acrylics Mini Gloss|Flat base|X-21|: Acrylics Mini Gloss|Flat base|X-21|#FFFFFF
+    Acrylics Mini Gloss|Semi-gloss clear|X-35|: Acrylics Mini Gloss|Semi-gloss clear|X-35|#FFFFFF
+    Lacquer Paint|Clear|LP-9|: Lacquer Paint|Clear|LP-9|#FFFFFF
+    Lacquer Paint|Flat base|LP-22|: Lacquer Paint|Flat base|LP-22|#FFFFFE
+    Lacquer Paint|Flat clear|LP-23|: Lacquer Paint|Flat clear|LP-23|#9DB3BF
+    Lacquer Paint|Lacquer thinner|LP-10|: Lacquer Paint|Lacquer thinner|LP-10|#FFFFFF
+    Lacquer Paint|Semi gloss clear|LP-24|: Lacquer Paint|Semi gloss clear|LP-24|#FFFFFE
+    Tamiya Spray|Clear|TS-13|: Tamiya Spray|Clear|TS-13|#FFFFFF
+    Tamiya Spray|Flat clear|TS-80|: Tamiya Spray|Flat clear|TS-80|#FFFFFF
+    Tamiya Spray|Semi gloss clear|TS-79|: Tamiya Spray|Semi gloss clear|TS-79|#FFFFFF
+  scale75:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Soil Works|Medium Wet||: Soil Works|Medium Wet||#FFFFFF
+    Soil Works|Odorless Thinner||: Soil Works|Odorless Thinner||#DFDFDF
+  reaper:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Master Series Paints Core Colors|Anti-Shine Additive|9215|: Master Series Paints Core Colors|Anti-Shine Additive|9215|#FFFFFF
+    Master Series Paints Core Colors|Brush-on Sealer|9107|: Master Series Paints Core Colors|Brush-on Sealer|9107|#FFFFFF
+    Master Series Paints Core Colors|Drying Retarder|9216|: Master Series Paints Core Colors|Drying Retarder|9216|#FFFFFF
+    Master Series Paints Core Colors|Flow Improver|9106|: Master Series Paints Core Colors|Flow Improver|9106|#FFFFFF
+    Master Series Paints Core Colors|Gloss Sealer|9298|: Master Series Paints Core Colors|Gloss Sealer|9298|#FFFFFF
+    Master Series Paints Core Colors|Wash Medium|9300|: Master Series Paints Core Colors|Wash Medium|9300|#FFFFFF
+  mr-hobby:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Acrysion|Clear|N30|: Acrysion|Clear|N30|#FFFFFF
+    Acrysion|Flat Base|N40|: Acrysion|Flat Base|N40|#FFFFFF
+    Acrysion|Flat Clear|N20|: Acrysion|Flat Clear|N20|#FFFFFF
+    Aqueous Hobby Color|Clear|H30|: Aqueous Hobby Color|Clear|H30|#FFFFFF
+    Aqueous Hobby Color|Flat Base|H40|: Aqueous Hobby Color|Flat Base|H40|#FFFFFF
+    Aqueous Hobby Color|Flat Clear|H20|: Aqueous Hobby Color|Flat Clear|H20|#FFFFFF
+    Mr Color GX|Super Clear III|GX100|: Mr Color GX|Super Clear III|GX100|#FFFFFF
+    Mr Color Spray|Clear|SP46|: Mr Color Spray|Clear|SP46|#FFFFFF
+    Mr Color Spray|Flat Clear|SP30|: Mr Color Spray|Flat Clear|SP30|#FFFFFF
+    Mr Color|Clear|46|: Mr Color|Clear|46|#FFFFFF
+    Mr Color|Flat Base Rough|188|: Mr Color|Flat Base Rough|188|#FFFFFF
+    Mr Color|Flat Base Smooth|189|: Mr Color|Flat Base Smooth|189|#FFFFFF
+    Mr Color|Flat Base|30|: Mr Color|Flat Base|30|#FFFFFF
+    Mr Color|Flat Clear|182|: Mr Color|Flat Clear|182|#FFFFFF
+    Mr Color|Semi-gloss Super Clear|181|: Mr Color|Semi-gloss Super Clear|181|#FFFFFF
+    Mr Color|Super Clear Gray Tone|183|: Mr Color|Super Clear Gray Tone|183|#F5F7F7
+  monument-pro-acryl:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Monument Pro Acrylic Paints|Metallic Medium|033|: Monument Pro Acrylic Paints|Metallic Medium|033|#D3D4CC
+  mission-models:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Mission Models Primer|Clear Primer (Transparent)|MMS-007|: Mission Models Primer|Clear Primer (Transparent)|MMS-007|#FFFFFF
+    Mission Models|Transparent Medium|MMW-004|: Mission Models|Transparent Medium|MMW-004|#FFFFFF
+  humbrol:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Humbrol Acrylics - Gloss|Gloss Varnish|35|: Humbrol Acrylics - Gloss|Gloss Varnish|35|#FFFFFF
+    Humbrol Acrylics - Gloss|Satin Varnish|135|: Humbrol Acrylics - Gloss|Satin Varnish|135|#FFFFFF
+  citadel-colour:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Air|Air Caste Thinner||: Air|Air Caste Thinner||#F9F9F9
+    Spray|Munitorum Varnish||: Spray|Munitorum Varnish||#FAFAFA
+    # Authored WITHOUT the apostrophe, exactly like the p3 `'Jack Bone` entry above and for the
+    # same reason: alias keys normalize as one string while identity keys normalize per
+    # component, and only the per-component pass strips a leading quote. Written verbatim this
+    # names nothing, the run mints a hexless twin, and the two `'Ardcoat` records then hold one
+    # barcode between them -- which is how the archive noticed (two guard tests, one about
+    # aliases and one about duplicated GTINs, failed on the same record).
+    Technical|Ardcoat||: Technical|Ardcoat||#F9F9F9
+    Technical|Contrast Medium||: Technical|Contrast Medium||#F9F9F9
+    Technical|Lahmian Medium||: Technical|Lahmian Medium||#F9F9F9
+    Technical|Stormshield||: Technical|Stormshield||#F9F9F9
+  ammo-mig:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Acrylics|Matt Varnish|AMIG0089|: Acrylics|Matt Varnish|AMIG0089|#FEFEFE
+  ak-real-color:
+    # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
+    # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
+    # reconciler mints a hexless twin and leaves the coloured record standing beside it --
+    # measured on the first attempt: +94 records, every varnish in the archive twice.
+    Real Colors - Standard|Flat Varnish|RC500|: Real Colors - Standard|Flat Varnish|RC500|#F0F0F0
+    Real Colors - Standard|Gloss Varnish|RC502|: Real Colors - Standard|Gloss Varnish|RC502|#E5E5E5
+    Real Colors - Standard|Satin Varnish|RC501|: Real Colors - Standard|Satin Varnish|RC501|#DCDCDC
 retract:
   # --- AK: one pot listed twice, retracted (2026-08-07) ------------------------------------------
   # 194 records that are NOT products. The upstream Arcturus5404/miniature-paints tables emit one
@@ -1348,6 +1511,41 @@ army-painter:
   Brainmatter Beige|Warpaints:
     productCode: WP1406
 
+  # --- colourless utility products (2026-08-13) ---
+  Aegis Suit Satin Varnish, 100 ml|Warpaints Air:
+    colourless: true
+  Aegis Suit Satin Varnish|Warpaints Primer:
+    colourless: true   # cleared #F4F7F7
+  Anti-Shine Matt Varnish|Warpaints Primer:
+    colourless: true   # cleared #F0F0F0
+  Anti-Shine Matt Varnish|Warpaints Wash:
+    colourless: true   # cleared #F0F0F0
+  Anti-shine Varnish, 100 ml|Warpaints Air:
+    colourless: true
+  Gloss Varnish, 100 ml|Warpaints Air:
+    colourless: true
+  Gloss Varnish|Warpaints:
+    colourless: true   # cleared #F7F7F7
+  Gloss Varnish|Warpaints Fanatic:
+    colourless: true   # cleared #D8D6D0
+  Matt Varnish|Warpaints Fanatic:
+    colourless: true   # cleared #D7D6D1
+  Quickshade Wash Mixing Medium|Warpaints Wash:
+    colourless: true   # cleared #EEEFEF
+  Speedpaint Medium|Speedpaint Set:
+    colourless: true   # cleared #EFEFEF
+  Speedpaint Medium|Speedpaint Set 2.0:
+    colourless: true   # cleared #F3F0EB
+  Warpaints Mixing Medium|Skin Tones Paint Set:
+    colourless: true   # cleared #EFF1F0
+  Warpaints Mixing Medium|Warpaints:
+    colourless: true   # cleared #EFEFEF
+  Warpaints Retarder|Warpaints Fanatic:
+    colourless: true   # cleared #D6D3CC
+  Warpaints Stabilizer|Warpaints Fanatic:
+    colourless: true   # cleared #D8D6D1
+  Wash Medium|Warpaints Fanatic Wash:
+    colourless: true   # cleared #B1B3B4
 citadel-colour:
   # Only the forward direction is declared; `supersedes` on the Contrast records is derived from
   # these, so the two directions cannot drift. Deliberately NOT expressed as a status change: the
@@ -1508,6 +1706,19 @@ citadel-colour:
 # 31 pots minted here are untouched by both: they are 17 ml, the brand-wide rule still says 17, and
 # no `Dipping Inks` row was added precisely because that set is 36 evidenced 17s beside 33
 # evidenced 60s.
+  # --- colourless utility products (2026-08-13) ---
+  "'Ardcoat|Technical":
+    colourless: true   # cleared #F9F9F9
+  Air Caste Thinner|Air:
+    colourless: true   # cleared #F9F9F9
+  Contrast Medium|Technical:
+    colourless: true   # cleared #F9F9F9
+  Lahmian Medium|Technical:
+    colourless: true   # cleared #F9F9F9
+  Munitorum Varnish|Spray:
+    colourless: true   # cleared #FAFAFA
+  Stormshield|Technical:
+    colourless: true   # cleared #F9F9F9
 green-stuff-world:
   # The bare Arcturus record IS the 60 ml pot: on all 31, its ean, priceEur and imageUrl
   # are the 60 ml sku's, and VolumeTable.cs:101's brand-wide 17 is the one field that
@@ -1902,6 +2113,25 @@ green-stuff-world:
 # So the same one-line rule admits the six real errors and refuses both classes that a naive
 # "chart beats archive" pass would have corrupted. `Ember Orange` is the clearest of the six: the
 # archive holds #EE2C24, a red, where both documents say #DF8A29 -- which is what the name says.
+  # --- colourless utility products (2026-08-13) ---
+  Chrome Clear Coat 17 ml|Varnish:
+    colourless: true
+  Chrome Clear Coat 60 ml|Varnish:
+    colourless: true
+  Flexible varnish 240ml|Varnish:
+    colourless: true
+  Gloss Varnish 17ml|Varnish:
+    colourless: true
+  Gloss Varnish 60ml|Varnish:
+    colourless: true
+  Maxx Matt Varnish 17ml - Ultra Matte Varnish|Varnish:
+    colourless: true
+  Maxx Matt Varnish 60ml - Ultra Matte Varnish|Varnish:
+    colourless: true
+  Satin Varnish 17ml|Varnish:
+    colourless: true
+  Satin Varnish 60ml|Varnish:
+    colourless: true
 p3:
   Trollblod Highlight|Privateer Press Formula P3:
     # Keyed on the MISSPELLING, and the code lives here with the name for the same reason:
@@ -2098,3 +2328,262 @@ p3:
     productCode: '93038'
   Yellow Ink|Privateer Press Formula P3:
     productCode: '93014'
+
+  # --- colourless utility products (2026-08-13) ---
+  Mixing Medium|P3 Paints:
+    colourless: true
+
+ak-interactive:
+  # --- colourless utility products (2026-08-13) ---
+  Crackle Medium|Auxiliary (3rd Gen):
+    colourless: true   # cleared #ACACAC
+  Glaze Medium -90-|Figures:
+    colourless: true   # cleared #B7B7B7
+  Glaze Medium|Auxiliary (3rd Gen):
+    colourless: true   # cleared #D5D5D5
+  Gloss Medium|Auxiliary (3rd Gen):
+    colourless: true   # cleared #D9D9D9
+  Matte Medium|Auxiliary (3rd Gen):
+    colourless: true   # cleared #AFAFAF
+  Metal Medium|Auxiliary (3rd Gen):
+    colourless: true   # cleared #E0E0E0
+  Retarder|Auxiliary (3rd Gen):
+    colourless: true   # cleared #D5D5D5
+  Varnish Gloss|Primer (3rd Gen):
+    colourless: true   # cleared #FEFEFE
+  Varnish Matt|Primer (3rd Gen):
+    colourless: true   # cleared #DADBE1
+  Varnish Satin|Primer (3rd Gen):
+    colourless: true   # cleared #F5F6F8
+
+ak-real-color:
+  # --- colourless utility products (2026-08-13) ---
+  Flat Varnish|Real Colors - Standard:
+    colourless: true   # cleared #F0F0F0
+  Gloss Varnish|Real Colors - Standard:
+    colourless: true   # cleared #E5E5E5
+  Satin Varnish|Real Colors - Standard:
+    colourless: true   # cleared #DCDCDC
+
+ammo-mig:
+  # --- colourless utility products (2026-08-13) ---
+  Matt Varnish|Acrylics:
+    colourless: true   # cleared #FEFEFE
+
+humbrol:
+  # --- colourless utility products (2026-08-13) ---
+  Gloss Varnish|Humbrol Acrylics - Gloss:
+    colourless: true   # cleared #FFFFFF
+  Satin Varnish|Humbrol Acrylics - Gloss:
+    colourless: true   # cleared #FFFFFF
+
+mission-models:
+  # --- colourless utility products (2026-08-13) ---
+  Clear Primer (Transparent)|Mission Models Primer:
+    colourless: true   # cleared #FFFFFF
+  Transparent Medium|Mission Models:
+    colourless: true   # cleared #FFFFFF
+
+monument-pro-acryl:
+  # --- colourless utility products (2026-08-13) ---
+  Metallic Medium|Monument Pro Acrylic Paints:
+    colourless: true   # cleared #D3D4CC
+
+mr-hobby:
+  # --- colourless utility products (2026-08-13) ---
+  Clear|Acrysion:
+    colourless: true   # cleared #FFFFFF
+  Clear|Aqueous Hobby Color:
+    colourless: true   # cleared #FFFFFF
+  Clear|Mr Color:
+    colourless: true   # cleared #FFFFFF
+  Clear|Mr Color Spray:
+    colourless: true   # cleared #FFFFFF
+  Flat Base Rough|Mr Color:
+    colourless: true   # cleared #FFFFFF
+  Flat Base Smooth|Mr Color:
+    colourless: true   # cleared #FFFFFF
+  Flat Base|Acrysion:
+    colourless: true   # cleared #FFFFFF
+  Flat Base|Aqueous Hobby Color:
+    colourless: true   # cleared #FFFFFF
+  Flat Base|Mr Color:
+    colourless: true   # cleared #FFFFFF
+  Flat Clear|Acrysion:
+    colourless: true   # cleared #FFFFFF
+  Flat Clear|Aqueous Hobby Color:
+    colourless: true   # cleared #FFFFFF
+  Flat Clear|Mr Color:
+    colourless: true   # cleared #FFFFFF
+  Flat Clear|Mr Color Spray:
+    colourless: true   # cleared #FFFFFF
+  Semi-gloss Super Clear|Mr Color:
+    colourless: true   # cleared #FFFFFF
+  Super Clear Gray Tone|Mr Color:
+    colourless: true   # cleared #F5F7F7
+  Super Clear III|Mr Color GX:
+    colourless: true   # cleared #FFFFFF
+
+reaper:
+  # --- colourless utility products (2026-08-13) ---
+  Anti-Shine Additive|Master Series Paints Core Colors:
+    colourless: true   # cleared #FFFFFF
+  Brush-on Sealer|Master Series Paints Core Colors:
+    colourless: true   # cleared #FFFFFF
+  Drying Retarder|Master Series Paints Core Colors:
+    colourless: true   # cleared #FFFFFF
+  Flow Improver|Master Series Paints Core Colors:
+    colourless: true   # cleared #FFFFFF
+  Gloss Sealer|Master Series Paints Core Colors:
+    colourless: true   # cleared #FFFFFF
+  Wash Medium|Master Series Paints Core Colors:
+    colourless: true   # cleared #FFFFFF
+
+scale75:
+  # --- colourless utility products (2026-08-13) ---
+  Medium Wet|Soil Works:
+    colourless: true   # cleared #FFFFFF
+  Odorless Thinner|Soil Works:
+    colourless: true   # cleared #DFDFDF
+
+tamiya:
+  # --- colourless utility products (2026-08-13) ---
+  Acrylic thinner|Acrylics Mini Gloss:
+    colourless: true   # cleared #FFFFFF
+  Clear|Acrylics Mini Gloss:
+    colourless: true   # cleared #FFFFFF
+  Clear|Lacquer Paint:
+    colourless: true   # cleared #FFFFFF
+  Clear|Tamiya Spray:
+    colourless: true   # cleared #FFFFFF
+  Flat base|Acrylics Mini Gloss:
+    colourless: true   # cleared #FFFFFF
+  Flat base|Lacquer Paint:
+    colourless: true   # cleared #FFFFFE
+  Flat clear|Acrylics Mini Flat:
+    colourless: true   # cleared #FFFFFF
+  Flat clear|Lacquer Paint:
+    colourless: true   # cleared #9DB3BF
+  Flat clear|Tamiya Spray:
+    colourless: true   # cleared #FFFFFF
+  Lacquer thinner|Lacquer Paint:
+    colourless: true   # cleared #FFFFFF
+  Semi gloss clear|Lacquer Paint:
+    colourless: true   # cleared #FFFFFE
+  Semi gloss clear|Tamiya Spray:
+    colourless: true   # cleared #FFFFFF
+  Semi-gloss clear|Acrylics Mini Gloss:
+    colourless: true   # cleared #FFFFFF
+
+vallejo:
+  # --- colourless utility products (2026-08-13) ---
+  Acrylic Gloss Spray Varnish|Auxiliaries:
+    colourless: true
+  Acrylic Matt Spray Varnish|Auxiliaries:
+    colourless: true
+  Acrylic Satin Spray Varnish|Auxiliaries:
+    colourless: true
+  Airbrush Cleaner|Auxiliaries:
+    colourless: true
+  Airbrush Flow Improver|Auxiliaries:
+    colourless: true
+  Airbrush Thinner|Auxiliaries:
+    colourless: true
+  Brush Cleaner|Auxiliaries:
+    colourless: true
+  Brush Restorer|Auxiliaries:
+    colourless: true
+  Chipping Medium|Auxiliaries:
+    colourless: true
+  Cleaner|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Clear Base|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Crackle Medium|Arte Deco:
+    colourless: true   # cleared #F8F5E5
+  Crackle Medium|Auxiliaries:
+    colourless: true
+  Decal Fix|Auxiliaries:
+    colourless: true
+  Decal Softener|Auxiliaries:
+    colourless: true
+  Gel Medium|Auxiliaries:
+    colourless: true
+  Glaze Medium|Auxiliaries:
+    colourless: true
+  Gloss Fluid Medium|Auxiliaries:
+    colourless: true
+  Gloss Glaze Medium|Auxiliaries:
+    colourless: true
+  Gloss Medium|Auxiliaries:
+    colourless: true
+  Gloss Metal Varnish|Metal Color:
+    colourless: true   # cleared #FFFFFF
+  Gloss Removable Acrylic Varnish|Auxiliaries:
+    colourless: true
+  Gloss Varnish|Arte Deco:
+    colourless: true   # cleared #E5E5E5
+  Gloss Varnish|Auxiliaries:
+    colourless: true
+  Gloss Varnish|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Liquid Mask|Auxiliaries:
+    colourless: true
+  Matt Base|Auxiliaries:
+    colourless: true
+  Matt Fluid Medium|Auxiliaries:
+    colourless: true
+  Matt Medium|Auxiliaries:
+    colourless: true
+  Matt Removable Acrylic Varnish|Auxiliaries:
+    colourless: true
+  Matt Varnish|Arte Deco:
+    colourless: true   # cleared #DCDCDC
+  Matt Varnish|Auxiliaries:
+    colourless: true
+  Matt Varnish|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Mecha Gloss Varnish|Mecha Color:
+    colourless: true   # cleared #FFFFFF
+  Mecha Matt Varnish|Mecha Color:
+    colourless: true   # cleared #FFFFFF
+  Mecha Satin Varnish|Mecha Color:
+    colourless: true   # cleared #FFFFFF
+  Metal Medium|Auxiliaries:
+    colourless: true
+  Metallic Medium|Premium Airbrush Color:
+    colourless: true   # cleared #FAF7F0
+  Pearl Medium|Arte Deco:
+    colourless: true   # cleared #C2C2C2
+  Pearl Medium|Auxiliaries:
+    colourless: true
+  Pigment Binder|Auxiliaries:
+    colourless: true
+  Reducer|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Retarder Medium|Auxiliaries:
+    colourless: true
+  Retarder|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Satin Fluid Medium|Auxiliaries:
+    colourless: true
+  Satin Medium|Auxiliaries:
+    colourless: true
+  Satin Removable Acrylic Varnish|Auxiliaries:
+    colourless: true
+  Satin Varnish|Arte Deco:
+    colourless: true   # cleared #FFFFFF
+  Satin Varnish|Auxiliaries:
+    colourless: true
+  Satin Varnish|Premium Airbrush Color:
+    colourless: true   # cleared #FFFFFF
+  Silicone Oil Cell Medium|Auxiliaries:
+    colourless: true
+  Terrain Fixer|Diorama FX:
+    colourless: true
+  Textile Medium|Arte Deco:
+    colourless: true   # cleared #ECECEC
+  Textile Medium|Auxiliaries:
+    colourless: true
+  Thinner Medium|Auxiliaries:
+    colourless: true

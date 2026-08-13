@@ -38,6 +38,35 @@ public record PaintRecord
     /// is reserved for a source that ever says it in words.
     /// </summary>
     public bool? SoldSeparately { get; init; }
+
+    /// <summary>
+    /// This product HAS no colour: a mixing medium, thinner, varnish, sealer, flow improver,
+    /// retarder or cleaner. A sibling field for the same reason <see cref="SoldSeparately"/> is
+    /// one -- a consumer that has never heard of it behaves exactly as before.
+    ///
+    /// IT EXISTS BECAUSE AN EMPTY HEX ALREADY MEANS SOMETHING ELSE. `hex: ""` is the pipeline's
+    /// word for "colour not yet known": <see cref="Enrichment.SwatchApplier"/> fills exactly those
+    /// records from the next chart pass, and the publisher omits the key so a consumer reads it as
+    /// absent rather than as black. Measured 2026-08-13 across the archive: of 391 hexless records
+    /// only 68 are utility products -- the other 323 are ordinary colours awaiting extraction. So
+    /// blanking a varnish says "come back and fill this in", which is the opposite of the truth,
+    /// and the next chart pass duly does.
+    ///
+    /// The alternative the archive actually used was worse: 94 of 145 such records carried a
+    /// STAND-IN, 48 of them exactly #FFFFFF and 92 of 94 neutral to within 12 per channel. Those
+    /// are not colours, and nothing downstream could tell. They entered the equivalence graph as
+    /// real ones -- <see cref="Equivalence.EquivalenceFinder"/> admits any non-empty hex -- so
+    /// data/paints/equivalences.yaml published a clear brush-on sealer as a deltaE 0 `close` match
+    /// for five white paints, 310 such rows in total, with 25 utility names appearing 216 times as
+    /// the TARGET of somebody else's colour match.
+    ///
+    /// So the field is an assertion, and the hex is its consequence: `colourless: true` clears the
+    /// hex and zeroes R/G/B in <see cref="Enrichment.OverrideApplier"/>, which runs after the
+    /// swatch pass and therefore also undoes any fill that pass made. `null` means unstated, as
+    /// with SoldSeparately; nothing writes `false`.
+    /// </summary>
+    public bool? Colourless { get; init; }
+
     /// <summary>Write-once, immutable.</summary>
     public string? FirstSeen { get; init; }
     public string? ProductCode { get; init; }

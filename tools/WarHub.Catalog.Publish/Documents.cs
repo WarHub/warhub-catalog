@@ -129,6 +129,11 @@ internal sealed record PaintRecord(
     // is the point of it being a sibling rather than a new `availability` value, the same
     // reasoning `supersedes` records just below.
     [property: JsonPropertyOrder(19)] bool? SoldSeparately,
+    // `true` when the product is a medium, thinner, varnish or other agent that HAS no colour,
+    // which is why its `hex` is absent. Without it a consumer cannot tell that absence from the
+    // far commoner one just above -- a colour this catalog has not harvested yet -- and 323 of
+    // the 391 hexless records are the latter. Absent whenever nobody stated it.
+    [property: JsonPropertyOrder(20)] bool? Colourless,
     // Archival lineage between two paint identities for the same colour -- a reformulation that
     // moved the paint into another range keeps BOTH records: the retired one points forward with
     // `supersededBy`, the replacement lists its predecessors in `supersedes`. Values are paint ids,

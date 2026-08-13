@@ -14,9 +14,13 @@ public class PaintRecordSchemaTests
         // reader meets the three together. It is deliberately not folded INTO either of them: both
         // are free strings every consumer filters on, and a new value there would silently exclude
         // the set-exclusive records the field exists to keep reachable.
+        //
+        // `Colourless` sits beside it for the same reason and reads as the same kind of fact --
+        // what this product IS -- and, like SoldSeparately, is a sibling rather than a new value
+        // inside an existing string field, so an unaware consumer is unaffected.
         string[] expected =
         [
-            "Name", "Category", "Status", "Availability", "SoldSeparately", "FirstSeen",
+            "Name", "Category", "Status", "Availability", "SoldSeparately", "Colourless", "FirstSeen",
             "ProductCode", "Ean", "AdditionalEans", "ImageUrl", "PriceGbp", "PriceUsd", "PriceEur",
             "PriceCad", "Supersedes", "SupersededBy", "Details",
         ];

@@ -59,6 +59,10 @@
           "type": "boolean",
           "description": "`false` when a source states this paint is obtainable ONLY inside a boxed set, never as a pot of its own. ABSENT whenever no source said -- which is nearly always, and is a different claim from `true`. Nothing writes `true` today: no source states the positive, so asserting it on every listed paint would publish a fact nobody made; the value stays reserved for a source that one day says it in words. Deliberately a SIBLING of availability rather than another value inside it -- availability and status are free strings consumers filter on, and a new value there would silently drop exactly the set-exclusive records this key exists to keep reachable. A consumer that ignores this key behaves as it did before the key existed."
         },
+        "colourless": {
+          "type": "boolean",
+          "description": "`true` when the product HAS no colour -- a mixing medium, thinner, varnish, sealer, flow improver, retarder or cleaner. It exists because an absent `hex` already means something else: for 323 of the 391 hexless records it means the colour has not been harvested yet, and the next chart pass fills exactly those. Without this key a consumer cannot distinguish the two, and the catalog itself could not either -- 94 of these products used to carry a stand-in (48 of them exactly #FFFFFF), which put clear varnishes into the colour-equivalence graph as real colours. ABSENT whenever nobody stated it; nothing writes `false`."
+        },
         "supersedes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "supersededBy": { "type": "string" },
         "equivalents": { "type": "array", "items": { "$ref": "#/$defs/equivalent" } }

@@ -191,6 +191,7 @@ public sealed class BarcodeIndexTests
         Status: "current",
         Availability: "unknown",
         SoldSeparately: null,
+        Colourless: null,
         Supersedes: null,
         SupersededBy: null,
         Equivalents: []);

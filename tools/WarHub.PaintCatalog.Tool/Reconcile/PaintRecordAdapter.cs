@@ -67,6 +67,9 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
             // has to restore `null` ("no source said"), exactly as for the two lines above. Coalesce
             // here and withdrawal becomes impossible in the other direction instead.
             SoldSeparately = fresh.SoldSeparately,
+            // Declarative like SoldSeparately: it comes from the override block, so the FRESH
+            // side is authoritative and a cleared block must clear the record.
+            Colourless = fresh.Colourless,
             Details = existing.Details with
             {
                 VolumeMl = contents.VolumeMl,
