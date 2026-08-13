@@ -110,7 +110,7 @@ class CanonicalProduct(BaseModel):
     # majority of the catalog. Only reaper's `stated` sets and the description-derived
     # ak-interactive and warlord-games ones carry it. Re-derive by counting `contentSkusFrom:` in
     # data/catalog/products/.
-    contentSkusFrom: Literal["stated", "description"] | None = None
+    contentSkusFrom: Literal["stated", "description", "sku"] | None = None
     evidence: list[str] = Field(default_factory=list)
 
 

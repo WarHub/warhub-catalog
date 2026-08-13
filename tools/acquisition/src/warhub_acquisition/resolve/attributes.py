@@ -3,7 +3,10 @@ from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
 from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
-from warhub_acquisition.resolve.set_refs import content_skus_from_description
+from warhub_acquisition.resolve.set_refs import (
+    content_skus_from_case_sku,
+    content_skus_from_description,
+)
 
 # `weightG` is NET CONTENTS in grams for a product sold by mass (added 2026-08-06), first-wins
 # across the kind-ordered members exactly like `volumeMl` beside it. It is NOT Shopify's `grams`
@@ -112,6 +115,16 @@ def resolve_attributes(
         if derived:
             fields["contentSkus"] = derived
             fields["contentSkusFrom"] = "description"
+    # A case pack of ONE colour states its membership in its own sku rather than in prose, so it
+    # is tried after the description and only when that found nothing. See
+    # `content_skus_from_case_sku` for why the rule is narrow and why it claims the colour but
+    # not the count.
+    if fields["contentSkus"] is None:
+        derived = content_skus_from_case_sku(
+            fields.get("sku") and str(fields["sku"]), fields.get("name") and str(fields["name"]))
+        if derived:
+            fields["contentSkus"] = derived
+            fields["contentSkusFrom"] = "sku"
     if fields["contentSkus"] is not None:
         fields.setdefault("contentSkusFrom", "stated")
 

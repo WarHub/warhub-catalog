@@ -137,6 +137,17 @@ MANUFACTURER_BRANDS = {
     # felt here first. A small number of its refs land in `unresolved`; that is the rule working,
     # not failing. Re-derive from data/catalog/set-contents/ak-interactive.yaml's own `counts`.
     "ak-interactive": ["ak-interactive"],
+    # The one manufacturer here whose memberships come from a SKU rather than from prose: a P3
+    # case pack's own code is its colour's code minus the `-S` single suffix
+    # (resolve/set_refs.py::content_skus_from_case_sku). `p3` is the only paint brand Steamforged
+    # has in this archive, and the refs are `SFP3-N###-S`, which is exactly the `productCode` on
+    # the relaunched `P3 Paints` records -- so every ref resolves by code with nothing to guess.
+    #
+    # These sets are one member each, which is unlike every other entry above and is the honest
+    # shape: a pack of six of one colour contains one distinct paint. It is also why they clear
+    # the >=2-code bar that `content_skus_from_description` imposes -- that bar exists to stop a
+    # prose cross-reference being read as a set of one, and a SKU pairing is not prose.
+    "steamforged-games": ["p3"],
 }
 
 HEADER = """\
