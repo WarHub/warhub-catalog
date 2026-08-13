@@ -115,6 +115,50 @@ def test_repo_source_descriptors_validate() -> None:
         assert descriptor.id == source_id
 
 
+# Anchored on purpose, and the anchoring is the whole point. A storefront's own test entry is
+# named for a human scanning an admin list ("Test Product"), so it announces itself at the START of
+# the title -- whereas the substring rule this replaces would delete Para Bellum's genuine Conquest
+# expansion "Testing the Waters" (sku PBW1073, ean 5213009017671), a real product with a real
+# barcode. `^test\b` spares it because "Testing" has no word boundary after "test"; also verified
+# to spare "Contest Winner" and "Latest Arrivals". Measured 2026-08-12 over all 22,543 published
+# products: these alternations flag exactly the three known store test entries and nothing else.
+_STORE_TEST_ARTIFACT = re.compile(
+    r"^test\b|\btest (product|item|sku|bundle)\b|^do not (buy|order|purchase)\b|^(dummy|placeholder)\b",
+    re.IGNORECASE,
+)
+
+
+def test_no_published_product_looks_like_a_store_test_artifact() -> None:
+    """A storefront's own test entry must never publish as a real product.
+
+    Three did until 2026-08-12 -- `steamforged-games/test-product`,
+    `steamforged-games/test-paint-f-f-bundle` and `mantic-games/test-product`, all `status:
+    current` -- harvested straight off the live stores under two different strategies (`shopify`
+    and `woo-store-api`). They are now declared in `SourceDescriptor.excludeKeys`, which drops and
+    retracts them at the runner.
+
+    That fix is exact-key, so it cannot catch the NEXT one a store adds. This tripwire is the part
+    that generalises: it costs nothing, and it turns "someone eventually notices Test Product in
+    the catalog" into a CI failure. On a hit, confirm it really is a test entry and add its key to
+    the owning descriptor's `excludeKeys` -- do NOT widen the pattern into a substring match (see
+    above), and do not add an allowlist here without a barcode-backed reason.
+    """
+    if not (REPO_DATA / "catalog" / "products").exists():
+        pytest.skip("data/catalog/products/ not created yet")
+
+    offenders = []
+    for path in sorted((REPO_DATA / "catalog" / "products").glob("*.yaml")):
+        for product in (read_yaml(path) or {}).get("products") or []:
+            name = product.get("name") or ""
+            if _STORE_TEST_ARTIFACT.search(name):
+                offenders.append(f"{product.get('id')} ({name!r}) in {path.name}")
+
+    assert not offenders, (
+        "published products look like storefront test entries; declare each one's key under the "
+        "owning source descriptor's excludeKeys:\n  " + "\n  ".join(offenders)
+    )
+
+
 def test_repo_matches_and_overrides_parse_when_present() -> None:
     paths = _require_repo_data()
     if paths.matches.exists():

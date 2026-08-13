@@ -17,6 +17,14 @@ scope:
   gtinFromJsonLd: true
 politeness:
   rps: 0.5
+# Mantic's own Woo test entry, published as the real `status: current` product
+# `mantic-games/test-product` until 2026-08-12. Name "Test product", no sku, no gtin, and
+# mfr-manticgames is its only evidence. The key is Woo's opaque numeric product id rather than a
+# slug, which is what this store's observation keys are made of; if Mantic ever renumbers it the
+# exclusion simply stops matching (a stale entry excludes nothing and is harmless) and the
+# tripwire test catches the reappearance.
+excludeKeys:
+  - '202218'
 contract:
   # Evidence-based floor (~85% of observed): live X-WP-Total header, 2026-07-13
   # (GET /wp-json/wc/store/products?per_page=2&page=1) read exactly 2789 products store-wide.

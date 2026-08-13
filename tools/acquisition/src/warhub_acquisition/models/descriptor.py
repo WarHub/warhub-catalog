@@ -151,6 +151,19 @@ class SourceDescriptor(BaseModel):
     politeness: dict[str, object] = Field(default_factory=dict)
     budget: dict[str, object] = Field(default_factory=dict)
     contract: Contract | None = None
+    # Observation keys this source must never contribute, WITHOUT the `<source-id>:` prefix --
+    # `test-product`, not `mfr-steamforged:test-product`. Enforced in `run_source`, not in any
+    # strategy, because the problem is not strategy-specific: the storefront test entries this
+    # exists for were found under BOTH `shopify` (steamforged.com) and `woo-store-api`
+    # (manticgames.com). See `run_source` for the two things it does (drop + retract).
+    #
+    # EXACT KEYS ONLY, never a pattern, and that is the whole design. The obvious rule --
+    # "titles starting with Test" -- would delete Para Bellum's genuine Conquest expansion
+    # "Testing the Waters" (sku PBW1073, ean 5213009017671), which is live in the catalog with a
+    # real barcode. A false positive here silently removes a real product and its barcode, so
+    # this list never guesses; `test_no_published_product_looks_like_a_store_test_artifact`
+    # is the tripwire that catches the next one instead.
+    excludeKeys: list[str] = Field(default_factory=list)
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.

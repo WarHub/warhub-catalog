@@ -6,6 +6,16 @@ scope:
   currency: usd
 politeness:
   rps: 0.5
+# The store's own Shopify test entries, live under vendor "Steamforged Games" and published as
+# real `status: current` products until 2026-08-12. Neither carries an EAN, and neither sku
+# normalizes (`TestProduct` does not match the SF[A-Z0-9-]+ codePattern; the bundle has no sku at
+# all), so both published as name-slug entities with mfr-steamforged as their ONLY evidence --
+# nothing else in the catalog refers to them and no barcode is lost by dropping them.
+# The third product under that vendor tag, strangelight-confidential-secret-files, is a real PDF
+# and is deliberately NOT listed here.
+excludeKeys:
+  - test-product
+  - test-paint-f-f-bundle
 contract:
   # Evidence-based floor (~85% of observed): live probe 2026-08-12 found 248 products across the
   # in-house game-line vendor tags attributed to steamforged-games, out of 587 store-wide.

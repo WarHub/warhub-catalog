@@ -322,3 +322,83 @@ def test_runner_default_timeout_is_30_seconds_when_unspecified(
     run_source(desc, DataPaths(tmp_path), context(tmp_path), transport=_permissive_robots_transport())
 
     assert captured["client"]._client.timeout == httpx.Timeout(30.0)
+
+
+def test_exclude_keys_drops_the_row_before_the_contract_measures_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An excluded row must not prop up minCount. Applying the exclusion after the contract would
+    let a source pass its floor on rows it then throws away -- the floor would be measuring a
+    population that never reaches the catalog."""
+    result = StrategyResult(
+        observations=[obs("toy-src:a"), obs("toy-src:b"), obs("toy-src:test-product")],
+        full_sweep=True,
+        stats={},
+        cursor={},
+    )
+    register("toy-src", result, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-src",
+        kind="manufacturer",
+        strategy="toy-src",
+        excludeKeys=["test-product"],
+        contract=Contract(minCount=3),
+    )
+    paths = DataPaths(tmp_path)
+
+    with pytest.raises(SourceContractError) as excinfo:
+        run_source(desc, paths, context(tmp_path))
+
+    assert excinfo.value.details["actual"] == 2  # not 3
+    assert not (paths.evidence_products / "toy-src" / "observations.jsonl").exists()
+
+
+def test_exclude_keys_retracts_a_previously_harvested_copy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Declaring the key must also REMOVE the copy an earlier run already wrote. Filtering only
+    the fresh list would leave it in observations.jsonl forever: `save` rewrites whatever `load`
+    holds and `mark_missed` only increments missStreak, so nothing else here can delete a record.
+    This is what lets the descriptor be the single source of truth, with no hand-edit to remember.
+    """
+    paths = DataPaths(tmp_path)
+    seeded = EvidenceStore(paths.evidence_products)
+    seeded.upsert("toy-src", obs("toy-src:a"))
+    seeded.upsert("toy-src", obs("toy-src:test-product", name="Test Product"))
+    seeded.save("toy-src")
+
+    result = StrategyResult(observations=[obs("toy-src:a")], full_sweep=True, stats={}, cursor={})
+    register("toy-src", result, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-src", kind="manufacturer", strategy="toy-src", excludeKeys=["test-product"]
+    )
+
+    health = run_source(desc, paths, context(tmp_path))
+
+    stored = EvidenceStore(paths.evidence_products).load("toy-src")
+    assert set(stored) == {"toy-src:a"}
+    assert health.stats["excluded_retracted"] == 1
+    # and it stays gone on a later run that no longer sees it at all
+    run_source(desc, paths, context(tmp_path))
+    assert set(EvidenceStore(paths.evidence_products).load("toy-src")) == {"toy-src:a"}
+
+
+def test_exclude_keys_is_scoped_to_its_own_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`excludeKeys` entries are bare suffixes, so they must be qualified with the declaring
+    source's id before matching -- a key another source happens to share is untouched."""
+    paths = DataPaths(tmp_path)
+    seeded = EvidenceStore(paths.evidence_products)
+    seeded.upsert("other-src", obs("other-src:test-product"))
+    seeded.save("other-src")
+
+    result = StrategyResult(observations=[obs("toy-src:a")], full_sweep=True, stats={}, cursor={})
+    register("toy-src", result, monkeypatch)
+    desc = SourceDescriptor(
+        id="toy-src", kind="manufacturer", strategy="toy-src", excludeKeys=["test-product"]
+    )
+
+    run_source(desc, paths, context(tmp_path))
+
+    assert set(EvidenceStore(paths.evidence_products).load("other-src")) == {"other-src:test-product"}
