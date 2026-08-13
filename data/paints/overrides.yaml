@@ -1074,9 +1074,114 @@ retract:
   # data/paints/swatch-sources.yaml the way Steamforged's is: gen_paint_swatches.py joins through
   # `productCode`, and all 130 legacy records have none (Arcturus import). The guide is named here
   # instead so the measurement stays re-derivable by hand.
+  # --- P3: the legacy range Privateer Press SHIPPED is 92 paints (2026-08-13) --------------------
+  # `Battle Dress Green` above was not one mistake, it was the one that happened to leave a TWIN.
+  # Upstream regenerated every paints/*.md on 2025-03-27 (Arcturus5404/miniature-paints 22791a68)
+  # and 37 further rows entered the legacy set that had never been in it. Only that one collided
+  # with an existing name, which is why only that one was visible.
+  #
+  # THE SHIPPED RANGE'S SIZE IS ATTESTED THREE TIMES, AND THE ATTESTATIONS AGREE:
+  #   * Privateer Press's FORMULA P3 PAINT LINE sheet, April 2022 -- 92 entries, each with a name,
+  #     a PIP code and a chip
+  #     (home.privateerpress.com/wp-content/uploads/2022/05/P3-Paint-Line-Web_2022_v2.pdf);
+  #   * its 2013 predecessor, Formula P3 Paint Reference Sheet -- 72 entries, PIP 93011-93082
+  #     CONTIGUOUS, no gaps (privateerpress.com/files/Formula%20P3%20Paint%20Reference%20Sheet.pdf,
+  #     via Wayback 20130821154240). The line grew 72 -> 92 and was never larger;
+  #   * upstream's OWN pre-relaunch file at b180abb8 (2022-05-15) -- the same 92 names.
+  # Cross-tabulated against this archive: 91 records are in both 2022 sources, 1 is in the upstream
+  # file under a misspelling the line sheet corrects (`Trollblod Highlight`, renamed in the layer
+  # below -- genuine legacy, NOT a 2025 arrival), 0 are on the sheet but not upstream, and 37 are
+  # in neither. Retracting exactly those 37 leaves exactly the 92.
+  #
+  # WHERE THE 37 CAME FROM. Privateer Press published a 130-swatch chart in November 2019
+  # (home.privateerpress.com/wp-content/uploads/2019/11/paints.jpg) announcing an expanded line,
+  # its legend splitting FIRST RUN PAINTS from NEW PAINTS. The line was sold to Steamforged before
+  # most of the NEW ones shipped: they are on no line sheet, carry no PIP code, and were never
+  # buyable from Privateer Press. Named on that chart and among the 37 below: Arcantrik Green,
+  # Bile Thrall, Blindwater Green, Copper Pipe, Greylord, Immortal Black, Lyossan Flesh, Mud Rut,
+  # Pyg Grey, Riven Green, Runeshot, Sinari Skin, Troll Tongue, Voltaic Blue. So these rows are
+  # not junk and not a copy of a rival's catalogue -- they are Privateer Press's own announcements
+  # for paints it never released, and a catalogue of products is the wrong place for them.
+  #
+  # THE COLOURS SAY THE SAME THING FROM THE OTHER SIDE. Steamforged shipped many of the colours
+  # Privateer Press had announced, so these rows sit far closer to Steamforged's chips than a real
+  # Privateer-Press-to-Steamforged pair ever does:
+  #
+  #     genuine legacy (in both 2022 sources), n=64   median d = 54.7   5% within 15
+  #     rows added by the 2025 rewrite,        n=34   median d = 10.7  71% within 15
+  #
+  # 54.7 is the reformulation offset between two real ranges; 10.7 is the same colour twice. Each
+  # `#` below records that row's own distance to the minted record it duplicates. (The five worst
+  # -- Drake Grey 126.6, Devout White 102.3, Riven Green 94.6, Icy Yellow 87.4, Sanguine Shadow
+  # 39.1 -- sit closer to the store's product RENDER than to any chart. Still 2025 arrivals.)
+  #
+  # NOTHING IS LOST. Every one of the 34 names a paint this stack publishes properly, in its own
+  # set, with its manufacturer code, barcode, price and chart colour -- asserted at generation
+  # time, not assumed: the script that produced this list refuses to emit a key whose `P3 Paints`
+  # twin is absent.
+  #
+  # THE LAST THREE ARE RESOLVED BY PRIVATEER PRESS ITSELF, not by inference:
+  #   * `Hoksune Red` was never a product. Its own announcement carries the correction --
+  #     "Note: Hoksune Red has been renamed Amethyst Rose since the creation of the line"
+  #     (home.privateerpress.com/2019/11/28/happy-thanksgiving-from-the-privateer-press-studio/).
+  #     It shipped as `Amethyst Rose`, PIP 93211, which this archive already holds.
+  #   * `Meridius Blue` is `Meredius Blue`, PIP 93048 -- one paint whose maker spelled it both
+  #     ways (the 2019 chart says MERIDIUS, the 2013 and 2022 line sheets say Meredius). The
+  #     coded, twice-attested spelling stays; the chart spelling goes.
+  #   * `Bleached Blue` is attested NOWHERE -- not on the 2013 sheet (whose codes are contiguous,
+  #     so there is no slot for it), not on the 2019 chart (checked by reading the alphabetical
+  #     run BILE THRALL -> BLAZING INK -> BLIGHTED GOLD -> BLINDWATER GREEN), not on the 2022
+  #     sheet, not upstream pre-relaunch, not in the relaunch, and at no retailer. Its hex
+  #     #877A68 is a khaki-grey, which is not a blue of any description.
+  #
+  # ONE CORRECTION TO THE BLOCK ABOVE, recorded rather than quietly fixed: it says two words is
+  # "Steamforged's spelling" for Battle Dress Green. Privateer Press's own 2019 chart also prints
+  # BATTLE DRESS GREEN, so the spelling argument there is weaker than stated. The COLOUR argument
+  # that decided it is untouched -- d=5.5 to Steamforged's chip against d=50.5 to Privateer
+  # Press's -- and the 2019 chart is now the likelier origin of that row too.
   p3:
     - 'Privateer Press Formula P3|Battle Dress Green||#5E4E14'
     - 'Privateer Press Formula P3|Jack Bone||#D6D3AE'
+    # The 34, alphabetical. `d=` is the distance from this row's hex to the minted relaunch
+    # record of the same name -- the measurement that says it is a copy of that, not a legacy pot.
+    - 'Privateer Press Formula P3|Arcantrik Green||#547E5B'      # d=60.6
+    - 'Privateer Press Formula P3|Bane Grey||#564F3D'            # d=11.8
+    - 'Privateer Press Formula P3|Basilisk Brown||#76412B'       # d=10.5
+    - 'Privateer Press Formula P3|Bile Thrall||#6A4E16'          # d=9.9
+    - 'Privateer Press Formula P3|Blindwater Green||#2A271A'     # d=17.7
+    - 'Privateer Press Formula P3|Broken Brick||#A53331'         # d=11.8
+    - 'Privateer Press Formula P3|Bronze Badge||#954A02'         # d=28.4
+    - 'Privateer Press Formula P3|Copper Pipe||#745738'          # d=7.5
+    - 'Privateer Press Formula P3|Cryx Green||#2C281B'           # d=10.2
+    - 'Privateer Press Formula P3|Devout White||#B3A998'         # d=102.3 (render-derived)
+    - 'Privateer Press Formula P3|Drake Grey||#8D8581'           # d=126.6 (render-derived)
+    - 'Privateer Press Formula P3|Eldritch Green||#21573B'       # d=7.0
+    - 'Privateer Press Formula P3|Greylord||#48453D'             # d=8.1
+    - 'Privateer Press Formula P3|Icy Yellow||#C7B378'           # d=87.4 (render-derived)
+    - 'Privateer Press Formula P3|Immortal Black||#30281F'       # d=12.7
+    - 'Privateer Press Formula P3|Kapitan Red||#D07B3A'          # d=10.0
+    - 'Privateer Press Formula P3|Lyossan Flesh||#AC8454'        # d=5.5
+    - 'Privateer Press Formula P3|Mouldy Ochre||#B0830E'         # d=25.5
+    - 'Privateer Press Formula P3|Mud Rut||#674D2D'              # d=6.7
+    - 'Privateer Press Formula P3|Pyg Grey||#5F6156'             # d=7.1
+    - 'Privateer Press Formula P3|Rhok Hide||#35211C'            # d=11.9
+    - 'Privateer Press Formula P3|Riven Green||#99AB90'          # d=94.6 (render-derived)
+    - 'Privateer Press Formula P3|Royal Violet||#553D55'         # d=4.1
+    - 'Privateer Press Formula P3|Ruddy Blush||#AB3737'          # d=12.4
+    - 'Privateer Press Formula P3|Runeshot||#2E728B'             # d=4.5
+    - 'Privateer Press Formula P3|Sanguine Shadow||#541A0E'      # d=39.1 (render-derived)
+    - 'Privateer Press Formula P3|Sinari Skin||#4B2B1F'          # d=12.8
+    - 'Privateer Press Formula P3|Skorne Flesh||#9D6327'         # d=10.3
+    - 'Privateer Press Formula P3|Stormguard Blue||#285C8A'      # d=15.6
+    - 'Privateer Press Formula P3|Sul Red||#4A2518'              # d=10.5
+    - 'Privateer Press Formula P3|Tharn Flesh||#7A5131'          # d=8.7
+    - 'Privateer Press Formula P3|Troll Tongue||#B65E77'         # d=4.2
+    - 'Privateer Press Formula P3|Trollblood Blue||#1F6A77'      # d=11.0
+    - 'Privateer Press Formula P3|Voltaic Blue||#7AA0AB'         # d=5.2
+    # The three the relaunch cannot speak for, resolved by Privateer Press's own words above.
+    - 'Privateer Press Formula P3|Bleached Blue||#877A68'        # attested nowhere at all
+    - 'Privateer Press Formula P3|Hoksune Red||#4B2015'          # renamed to Amethyst Rose, 93211
+    - 'Privateer Press Formula P3|Meridius Blue||#1F9095'        # = Meredius Blue, PIP 93048
 
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
