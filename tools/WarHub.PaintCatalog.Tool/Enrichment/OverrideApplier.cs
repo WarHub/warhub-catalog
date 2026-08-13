@@ -55,6 +55,7 @@ public static class OverrideApplier
             if (!brandOverrides.TryGetValue(key, out PaintOverride? over) || over is null)
                 return p;
 
+            bool colourless = (over.Colourless ?? p.Colourless) == true;
             string newHex = over.Hex ?? p.Hex;
             int newR = p.R;
             int newG = p.G;
@@ -90,10 +91,17 @@ public static class OverrideApplier
                 Name = over.Name ?? p.Name,
                 Set = over.Set ?? p.Set,
                 ProductCode = over.ProductCode ?? p.ProductCode,
-                Hex = newHex,
-                R = newR,
-                G = newG,
-                B = newB,
+                // COLOURLESS CLEARS THE COLOUR, and does it here rather than at the call sites.
+                // The assertion and its consequence cannot be separated: a varnish that keeps a
+                // #FFFFFF stand-in is still a node in the equivalence graph no matter what the
+                // flag says. Doing it in this step also undoes any fill SwatchApplier made at
+                // PaintCatalogApp.cs:253, which runs BEFORE this one and cannot see the override.
+                // An explicit `hex:` in the same block would be contradictory, so it loses.
+                Hex = colourless ? "" : newHex,
+                R = colourless ? 0 : newR,
+                G = colourless ? 0 : newG,
+                B = colourless ? 0 : newB,
+                Colourless = over.Colourless ?? p.Colourless,
                 VolumeMl = contents.VolumeMl,
                 WeightG = contents.WeightG,
                 Packaging = contents.Container,
@@ -275,6 +283,14 @@ public static class OverrideApplier
 /// </summary>
 public record PaintOverride
 {
+    /// <summary>
+    /// States that this product has no colour -- see <see cref="Models.PaintRecord.Colourless"/>.
+    /// Writing it also CLEARS the record's hex and R/G/B, so it is the one override that removes
+    /// data rather than supplying it; that is deliberate, because the stand-in greys it removes
+    /// are what put mediums and varnishes into the colour-equivalence graph.
+    /// </summary>
+    public bool? Colourless { get; init; }
+
     /// <summary>
     /// Corrected NAME, and with <see cref="Set"/> the last of the four identity components to get
     /// a pre-reconciliation rewrite. Identity is `set|name|productCode|hex`, and until now only

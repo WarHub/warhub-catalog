@@ -28,6 +28,10 @@ public record Paint
     /// <summary>See PaintRecord.SoldSeparately -- null means unstated, false means set-exclusive.</summary>
     public bool? SoldSeparately { get; init; }
 
+    /// <summary>See PaintRecord.Colourless -- true means the product has no colour at all
+    /// (medium/thinner/varnish); null means unstated. Nothing writes false.</summary>
+    public bool? Colourless { get; init; }
+
     /// <summary>
     /// Paint type derived from brand and set classification.
     /// Examples: "Base", "Layer", "Shade", "Contrast", "Dry", "Air",

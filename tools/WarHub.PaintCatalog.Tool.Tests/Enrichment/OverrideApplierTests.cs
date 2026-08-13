@@ -170,6 +170,84 @@ public class OverrideApplierTests
         }
     }
 
+    /// <summary>
+    /// `colourless: true` is an assertion with a CONSEQUENCE, and the consequence is the whole
+    /// point: a varnish that keeps its #FFFFFF stand-in is still a node in the equivalence graph
+    /// no matter what the flag says. That is what published a clear brush-on sealer as a deltaE 0
+    /// match for five white paints across 310 rows. So the clearing is the behaviour under test,
+    /// not the flag.
+    ///
+    /// Nothing else covers it. The two test edits that came with the field are both mechanical --
+    /// a positional record ctor the compiler forced, and a name added to an ordered property list
+    /// -- so reverting these four lines to `Hex = newHex, R = newR, ...` left the entire C# suite
+    /// green, and the regression would not surface until the next regeneration quietly returned 94
+    /// stand-in greys.
+    /// </summary>
+    [Fact]
+    public void Apply_Colourless_ClearsTheColourAndOutranksAnExplicitHex()
+    {
+        string overridesYaml = """
+            citadel-colour:
+              "Mephiston Red|Base":
+                colourless: true
+              "Abaddon Black|Base":
+                colourless: true
+                hex: "#AA1100"
+            """;
+        string path = WriteTempOverrides(overridesYaml);
+
+        try
+        {
+            IReadOnlyList<Paint> result = OverrideApplier.Apply(SamplePaints, "citadel-colour", path);
+
+            Assert.True(result[0].Colourless);
+            Assert.Equal("", result[0].Hex);
+            Assert.Equal(0, result[0].R);
+            Assert.Equal(0, result[0].G);
+            Assert.Equal(0, result[0].B);
+
+            // A `hex:` in the same block is a contradiction, and colourless wins it. Stated in the
+            // applier's own comment; pinned here so the precedence cannot drift silently.
+            Assert.True(result[1].Colourless);
+            Assert.Equal("", result[1].Hex);
+            Assert.Equal(0, result[1].R);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    /// <summary>
+    /// The other half: an ordinary paint keeps its colour, and `Colourless` stays null rather than
+    /// becoming a written `false`. Null means unstated -- nothing in the pipeline writes false --
+    /// and an over-eager `Colourless = over.Colourless ?? false` would blank nothing but would
+    /// publish the flag on all 8,354 records.
+    /// </summary>
+    [Fact]
+    public void Apply_WithoutColourless_LeavesTheColourAndTheFlagAlone()
+    {
+        string overridesYaml = """
+            citadel-colour:
+              "Mephiston Red|Base":
+                productCode: "22-02"
+            """;
+        string path = WriteTempOverrides(overridesYaml);
+
+        try
+        {
+            IReadOnlyList<Paint> result = OverrideApplier.Apply(SamplePaints, "citadel-colour", path);
+
+            Assert.Null(result[0].Colourless);
+            Assert.Equal("#9A0E05", result[0].Hex);
+            Assert.Equal(154, result[0].R);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
     [Fact]
     public void Apply_OverridesEan_Applies()
     {

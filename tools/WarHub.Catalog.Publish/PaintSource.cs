@@ -23,6 +23,9 @@ internal sealed class PaintYaml
     /// 8,460 silences (of 8,461 committed records, measured 2026-08-11) into an assertion that
     /// nothing is sold on its own.</summary>
     public bool? SoldSeparately { get; set; }
+    /// <summary>`true` when the product has no colour at all (medium/thinner/varnish); null
+    /// unstated. Nullable for the same reason as SoldSeparately above.</summary>
+    public bool? Colourless { get; set; }
     public string? FirstSeen { get; set; }
     public string? ProductCode { get; set; }
     public string? Ean { get; set; }

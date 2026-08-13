@@ -44,6 +44,7 @@ public static class PaintRecordMapper
         Supersedes = r.Supersedes ?? [],
         SupersededBy = r.SupersededBy,
         SoldSeparately = r.SoldSeparately,
+        Colourless = r.Colourless,
         IsDiscontinued = r.Status is "discontinued" or "suspected-discontinued",
     };
 
@@ -65,6 +66,7 @@ public static class PaintRecordMapper
         Supersedes = p.Supersedes is { Count: > 0 } predecessors ? predecessors : null,
         SupersededBy = p.SupersededBy,
         SoldSeparately = p.SoldSeparately,
+        Colourless = p.Colourless,
         Details = new PaintDetails
         {
             Set = p.Set,

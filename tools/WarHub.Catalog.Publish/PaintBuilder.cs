@@ -168,6 +168,7 @@ internal static class PaintBuilder
                     Status: e.Paint.Status,
                     Availability: e.Paint.Availability,
                     SoldSeparately: e.Paint.SoldSeparately,
+                    Colourless: e.Paint.Colourless,
                     // Still the upstream `{Name}|{Set}` keys here; rewritten to ids in step 4.
                     Supersedes: e.Paint.Supersedes is { Count: > 0 } prior ? prior : null,
                     SupersededBy: Trimmed(e.Paint.SupersededBy),

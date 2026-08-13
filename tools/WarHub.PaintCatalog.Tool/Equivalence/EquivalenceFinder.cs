@@ -47,7 +47,14 @@ public class EquivalenceFinder
         // them: 133 of 8,270 colour-bearing paints, i.e. 1.03x on an O(n^2) pass.
         var allPaints = catalogs
             .SelectMany(c => c.Paints
-                .Where(p => !string.IsNullOrEmpty(p.Hex))
+                // `Colourless` is checked as well as the hex, and not instead of it. Clearing the
+                // hex is what actually removes a medium from this graph today, but that clearing
+                // happens in OverrideApplier and could be undone by a later `hex:` on the same
+                // record; the flag is the ASSERTION, so it belongs in the guard that acts on it.
+                // What this excludes: a clear brush-on sealer published as a deltaE 0 `close`
+                // match for five white paints, 310 such rows in all, and 25 utility names
+                // appearing 216 times as the target of somebody else's colour match.
+                .Where(p => !string.IsNullOrEmpty(p.Hex) && p.Colourless != true)
                 .Select(p => (Paint: p, Brand: c.Brand, BrandSlug: c.BrandSlug)))
             .ToList();
 
