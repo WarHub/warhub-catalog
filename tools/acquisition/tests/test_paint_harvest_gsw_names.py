@@ -239,27 +239,40 @@ class TestNoRenameStrandsAnArchiveRecord:
         which is not identifying when the code is empty: every codeless record in the brand matched
         every codeless alias, so 144 unrelated Army Painter colours were reported against one
         mixing-medium alias. Set and name are part of the key the alias states; use them.
+
+        AND NORMALIZED, or the tightening blinds the guard to the records it most needs to see. An
+        alias key must be authored with a leading apostrophe ALREADY STRIPPED -- that is the quote
+        trap, and it is why Citadel's alias says `Technical|Ardcoat||` while the archive record is
+        named `'Ardcoat`. A raw `!=` on those two strings never matches, so the record is never
+        examined and the guard passes by looking away. The old productCode-only comparison did
+        reach it (`"" == ""`); this must not be the tightening that loses it. `'Ardcoat` is hexless
+        today, so nothing is armed yet -- but an empty hex means "not harvested yet" and
+        SwatchApplier exists to fill it, at which point ApplyRename would erase the new colour and
+        a raw comparison would still be green.
         """
         archives = {p.stem: _yaml(p).get("paints") or [] for p in sorted(BRANDS_DIR.glob("*.yaml"))}
         overrides = _yaml(OVERRIDES)
         armed = []
         for slug, entries in ((overrides.get("aliases") or {})).items():
             declared = {
-                key for key, fields in (overrides.get(slug) or {}).items()
+                # `{Name}|{Set}`, normalized per component so a `'Ardcoat` override is reachable
+                # from an alias key that had to strip the same apostrophe.
+                tuple(_normalize(part) for part in str(key).split("|", 1))
+                for key, fields in (overrides.get(slug) or {}).items()
                 if isinstance(fields, dict) and fields.get("colourless")
             }
             for new_key in entries:
-                parts = str(new_key).split("|")
+                parts = [_normalize(part) for part in str(new_key).split("|")]
                 if len(parts) != 4 or parts[3]:
                     continue  # carries a hex, or is not an identity key -- not this hazard
                 set_name, name, code = parts[0], parts[1], parts[2]
-                if f"{name}|{set_name}" in declared:
+                if (name, set_name) in declared:
                     continue  # the erasure is asserted on the record itself
                 for record in archives.get(slug) or []:
                     details = record.get("details") or {}
-                    if (str(record.get("productCode") or "") != code
-                            or str(record.get("name") or "") != name
-                            or str(details.get("set") or "") != set_name):
+                    if (_normalize(str(record.get("productCode") or "")) != code
+                            or _normalize(str(record.get("name") or "")) != name
+                            or _normalize(str(details.get("set") or "")) != set_name):
                         continue
                     archived_hex = details.get("hex") or ""
                     if archived_hex:

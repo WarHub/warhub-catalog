@@ -1942,6 +1942,7 @@ green-stuff-world:
     colourless: true
   Flexible varnish 240ml|Varnish:
     volumeMl: 240
+    colourless: true
   # --- SOLD BY WEIGHT, NOT BY VOLUME (2026-08-06) -----------------------------------------------
   # The two records the ml repair above explicitly could not reach, and the only two in the whole
   # 8,547-record paint archive that are measured in grams. Both are foam-primer TUBS; both were
@@ -1980,7 +1981,6 @@ green-stuff-world:
   #
   # NO BARCODE MOVES here either: no `ean:` or `additionalEans:`, so `BarcodeSet.Union` writes
   # nothing.
-    colourless: true
   Foam Primer and Coat - Black 250gr|Primer:
     weightG: 250
   Foam Primer and Coat - Grey 250gr|Primer:
@@ -2120,7 +2120,6 @@ green-stuff-world:
 # archive holds #EE2C24, a red, where both documents say #DF8A29 -- which is what the name says.
   # --- colourless utility products (2026-08-13) ---
   Chrome Clear Coat 17 ml|Varnish:
-    colourless: true
     colourless: true
   Gloss Varnish 17ml|Varnish:
     colourless: true
