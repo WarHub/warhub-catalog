@@ -685,6 +685,111 @@ def test_every_alias_names_exactly_one_side_of_its_rename() -> None:
     )
 
 
+#: Top-level keys of overrides.yaml that are not brand blocks.
+_OVERRIDE_SECTIONS = {"additions", "aliases", "retract"}
+
+
+def test_every_name_or_set_override_lands_as_a_rename_and_not_as_a_split() -> None:
+    """The mirror of the test above, and it catches the omission that one CANNOT see.
+
+    `test_every_alias_names_exactly_one_side_of_its_rename` starts from the alias and asks whether
+    it names a live identity. Start from the OVERRIDE instead and a different failure appears: an
+    override that moves a record with no alias at all. Nothing in that first test can notice,
+    because there is no alias to iterate.
+
+    It is the same split, reached from the other side. `OverrideApplier.Apply` rewrites the field
+    before reconciliation (PaintCatalogApp.cs:256), so the fresh record arrives under a key the
+    archive has never seen; step 1 misses, step 2 is disabled for paints (`PaintRecordAdapter.Url`
+    returns null), step 3 finds no alias, and step 4 MINTS with today's `firstSeen` while the
+    archived record -- never consumed, never retracted -- is emitted alongside it. Two records,
+    history on neither, and no other guard fires: the barcode double-hold test needs a shared
+    GTIN, and the retract test only reads `retract:`.
+
+    THIS CHECKS THE OUTCOME, NOT THE MECHANISM, and an earlier draft that checked the mechanism is
+    why. It demanded an alias whose OLD side carried the override key's spelling -- which is true
+    only until the rename lands. An alias must always name the record's CURRENT archived identity,
+    so once the correction is in `data/paints/brands/`, the old side carries the CORRECTED name and
+    a later layer re-coding the record replaces the alias entirely. That draft passed at the layer
+    that introduced it and failed three layers up, on a pairing that was completely correct.
+
+    So the invariant is the same exclusive-or its sibling uses, over the ARCHIVE:
+
+      * the CORRECTED identity only -- the rename landed. The steady state.
+      * the BASE identity only -- authored, not yet regenerated. Legitimate mid-change, but ONLY
+        with an alias to bridge it; without one the next run is the split described above.
+      * BOTH -- the split already happened. The override minted its corrected record and the
+        base-spelled one is still standing beside it.
+      * NEITHER -- the override names nothing in this brand and rewrites nothing.
+
+    WHY name/set AND NOT productCode/hex. All four components move a record, but only these two
+    are routinely authored by hand against a name read off a source document -- they were added in
+    PR #131 precisely so a base-sourced record could be corrected, and the requirement was stated
+    three times in prose and guarded nowhere. The other two are written by generators.
+    """
+    _require_repo_data()
+    overrides_path = REPO_DATA / "paints/overrides.yaml"
+    if not overrides_path.exists():
+        pytest.skip("data/paints/overrides.yaml not present")
+    document = read_yaml(overrides_path) or {}
+    aliases = document.get("aliases") or {}
+
+    split, unpaired, dead = [], [], []
+    for brand_slug, entries in document.items():
+        if brand_slug in _OVERRIDE_SECTIONS or not isinstance(entries, dict):
+            continue
+        archive_path = REPO_DATA / "paints/brands" / f"{brand_slug}.yaml"
+        if not archive_path.exists():
+            continue
+        live = {
+            (_normalize(str((record.get("details") or {}).get("set") or "")),
+             _normalize(str(record.get("name") or "")))
+            for record in (read_yaml(archive_path) or {}).get("paints") or []
+        }
+        # (old set, old name) -> (new set, new name), as the brand's aliases state the move.
+        moves = set()
+        for new_key, old_key in (aliases.get(brand_slug) or {}).items():
+            new_parts = [_normalize(part) for part in str(new_key).split("|")]
+            old_parts = [_normalize(part) for part in str(old_key).split("|")]
+            if len(new_parts) == 4 and len(old_parts) == 4:
+                moves.add((old_parts[0], old_parts[1], new_parts[0], new_parts[1]))
+
+        for key, fields in entries.items():
+            if not isinstance(fields, dict) or not ({"name", "set"} & set(fields)):
+                continue
+            # The override key is `{Name}|{Set}` and stays the spelling the BASE emits.
+            base_name, _, base_set = str(key).partition("|")
+            base = (_normalize(base_set), _normalize(base_name))
+            corrected = (
+                _normalize(str(fields.get("set", base_set))),
+                _normalize(str(fields.get("name", base_name))),
+            )
+            where = (brand_slug, str(key), "|".join(corrected))
+            if base in live and corrected in live:
+                split.append(where)
+            elif base in live and base + corrected not in moves:
+                unpaired.append(where)
+            elif base not in live and corrected not in live:
+                dead.append(where)
+
+    assert not split, (
+        f"{len(split)} `name:`/`set:` override(s) whose BASE and CORRECTED identities are BOTH in "
+        "the archive -- the rename already split, and the record is now published twice with "
+        f"history on neither. {split}"
+    )
+    assert not unpaired, (
+        f"{len(unpaired)} `name:`/`set:` override(s) that will MINT rather than rename on the next "
+        "run: the archive still holds the base spelling and no alias bridges the move. Add "
+        "`aliases: <brand>:` mapping the NEW identity to the OLD one, keyed "
+        "`Set|Name|ProductCode|Hex` (not the `{Name}|{Set}` order used here), with any leading "
+        f"apostrophe stripped from both sides. {unpaired}"
+    )
+    assert not dead, (
+        f"{len(dead)} `name:`/`set:` override(s) naming no record in their brand, under either "
+        "spelling -- a field override is matched with an ordinal dictionary, so this rewrites "
+        f"nothing and reports nothing. {dead}"
+    )
+
+
 def test_every_retract_key_names_exactly_one_committed_paint() -> None:
     """`retract:` is the ONLY code path in the pipeline that DELETES an archived record --
     `CatalogReconciler` subtracts exactly this set (:52-55 input side, :104 output side) and
