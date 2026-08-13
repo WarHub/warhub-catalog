@@ -34,8 +34,19 @@ name: Data CI
 #                                  pinned to the evidence they project.
 #   tests/test_paint_equivalences.py  no equivalence naming a paint the archive no longer holds,
 #                                  under the archive key AND the publisher's own key.
+#   tests/test_paint_harvest_gsw_names.py  every renaming addition carries its alias, and no alias
+#                                  erases an archived hex on rename.
+#   tests/test_paint_volume_gsw.py the volume-override block is exactly the records no constant can
+#                                  reach, and no override smuggles in a barcode.
 #
-# The last two matter here more than anywhere: a nightly catalog-acquire PR landing a new GW trade
+# THE LAST TWO WERE ADDED 2026-08-14 AFTER RUNNING NOWHERE ON THE CHANGE THEY POLICE. Their subject
+# is data/paints/overrides.yaml -- aliases, hex erasure, volume assertions -- so the membership rule
+# above always covered them, but they sat only in ci.yml, which filters to tools/**. An overrides
+# edit that touches no code therefore reached neither workflow. PR #133 in this stack is exactly
+# that shape: seven files, all under data/, adding 92 aliases and 6 hex corrections, with both alias
+# guards silent. They cost this job ~78s.
+#
+# The next two matter here more than anywhere: a nightly catalog-acquire PR landing a new GW trade
 # workbook can make the committed Citadel barcode file non-reproducible, and a local regeneration
 # run without --equivalences (the documented procedure) can strand an equivalence ref. Both commit
 # with `add-paths: data*`, so this workflow is the ONLY one their PRs trigger -- under ci.yml those
@@ -45,11 +56,12 @@ name: Data CI
 # RUNTIME. The two-file version of this job measured 2m9s on this runner for 25 tests (2026-08-11,
 # the first real run, PR #112 triggering it on itself). The four-file version measures 2m41s for 29
 # tests on the Windows dev box, against 3m49s and 4m38s there for the two-file one -- so the extra
-# two gates cost well under a minute and the runner should stay near the 2m mark. Everything here
+# two gates cost well under a minute and the runner should stay near the 2m mark. The six-file
+# version adds 29 more tests measured at 78s on the same dev box. Everything here
 # is I/O-bound: ~150 committed YAML files, one of them 9 MB, walked several times over, plus a
 # subprocess regeneration of the set-contents relation and an in-process one of the harvest -- the
 # kind of work a Linux runner does markedly faster than NTFS, which is the whole 2x. Replace the
-# runner figure once the four-file job has a few real runs. timeout-minutes below stays well above
+# runner figure once the six-file job has a few real runs. timeout-minutes below stays well above
 # it on purpose: it is a runaway backstop, not a performance budget, and both regenerations grow
 # with the data.
 #
@@ -89,7 +101,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
       - run: uv sync --locked
-      - run: uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py -q
+      - run: uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py -q
 
       # THE TESTS WRITE INTO THE CHECKOUT. tests/test_set_contents.py:138 runs
       # scripts/gen_set_contents.py as a subprocess with cwd=REPO_ROOT, so the run rewrites

@@ -429,7 +429,117 @@ aliases:
     # hexless DESTROYS the archived colour -- the trap the green-stuff-world block below refuses
     # its belt-and-braces entries over. Here the base supplies #BBB4A2 before and after; only the
     # name moves.
-    Privateer Press Formula P3|Trollblood Highlight||#BBB4A2: Privateer Press Formula P3|Trollblod Highlight||#BBB4A2
+    # SUPERSEDES the rename alias this record carried one layer down, rather than chaining after
+    # it. That alias mapped `...|Trollblood Highlight||#BBB4A2` onto `...|Trollblod Highlight||`
+    # and did its job when the rename landed and the archive was rewritten under the corrected
+    # name. Adding the code moves the identity AGAIN, so BOTH of its sides are now gone and it
+    # would name nothing -- an alias has to name the record's CURRENT archived identity, which
+    # after that layer is the corrected name with no code.
+    Privateer Press Formula P3|Trollblood Highlight|93070|#BBB4A2: Privateer Press Formula P3|Trollblood Highlight||#BBB4A2
+    # THE 92 PIP CODES. Each pairs with a `productCode:` (and for six of them a `hex:`) in the p3
+    # section at the end of this file, and is required for the same reason every alias here is:
+    # productCode is part of the identity key, so writing one moves the record and the reconciler
+    # would mint a duplicate without this line. The override rewrites the code BEFORE
+    # reconciliation, vacating the old key, so the alias fires.
+    #
+    # `'Jack Bone` IS AUTHORED WITHOUT ITS APOSTROPHE HERE, AND THAT IS NOT A TYPO. Alias keys are
+    # normalized as ONE string (PaintOverrideAliases.cs:30) while a record's identity key is
+    # normalized PER COMPONENT (PaintRecordAdapter.cs:10-14), and the per-component pass strips a
+    # leading quote. Written verbatim the key would normalize to `...|'jack bone|...` and match
+    # nothing -- the silent no-op that repo comments call this record unreachable over. Stripped,
+    # the two agree. The override key in the p3 section keeps the apostrophe, because
+    # OverrideApplier looks up the raw `{Name}|{Set}` with no normalization at all.
+    Privateer Press Formula P3|Jack Bone|93064|#D6D3AA: Privateer Press Formula P3|Jack Bone||#D6D3AA
+    Privateer Press Formula P3|Amethyst Rose|93211|#642317: Privateer Press Formula P3|Amethyst Rose||#481306
+    Privateer Press Formula P3|Arcane Blue|93049|#7ACFD9: Privateer Press Formula P3|Arcane Blue||#7ACFD9
+    Privateer Press Formula P3 Wash|Armor Wash|93012|#879284: Privateer Press Formula P3 Wash|Armor Wash||#879284
+    Privateer Press Formula P3|Asheth Grey|93130|#2A2524: Privateer Press Formula P3|Asheth Grey||#2A2524
+    Privateer Press Formula P3|Bad Bruise|93142|#33283A: Privateer Press Formula P3|Bad Bruise||#33283A
+    Privateer Press Formula P3|Bastion Grey|93068|#777965: Privateer Press Formula P3|Bastion Grey||#777965
+    Privateer Press Formula P3|Battledress Green|93060|#757131: Privateer Press Formula P3|Battledress Green||#757131
+    Privateer Press Formula P3|Battlefield Brown|93027|#32261D: Privateer Press Formula P3|Battlefield Brown||#32261D
+    Privateer Press Formula P3|Beast Hide|93056|#AF9369: Privateer Press Formula P3|Beast Hide||#AF9369
+    Privateer Press Formula P3|Beaten Purple|93051|#552A72: Privateer Press Formula P3|Beaten Purple||#552A72
+    Privateer Press Formula P3|Blazing Ink|93159|#EEAA58: Privateer Press Formula P3|Blazing Ink||#EEAA58
+    Privateer Press Formula P3|Blighted Gold|93081|#8B9742: Privateer Press Formula P3|Blighted Gold||#8B9742
+    Privateer Press Formula P3|Bloodstone|93029|#9E4923: Privateer Press Formula P3|Bloodstone||#9E4923
+    Privateer Press Formula P3|Bloodtracker Brown|93030|#A56A28: Privateer Press Formula P3|Bloodtracker Brown||#A56A28
+    Privateer Press Formula P3|Blue Ink|93016|#3B5BA1: Privateer Press Formula P3|Blue Ink||#3B5BA1
+    Privateer Press Formula P3|Bog Moss|93141|#878241: Privateer Press Formula P3|Bog Moss||#80703C
+    Privateer Press Formula P3|Bogrin Brown|93139|#92653C: Privateer Press Formula P3|Bogrin Brown||#92653C
+    Privateer Press Formula P3|Boiler Black|93172|#5D5A55: Privateer Press Formula P3|Boiler Black||#5D5A55
+    Privateer Press Formula P3|Bootstrap Leather|93031|#946839: Privateer Press Formula P3|Bootstrap Leather||#946839
+    Privateer Press Formula P3|Brass Balls|93082|#FAF8D2: Privateer Press Formula P3|Brass Balls||#FAF8D2
+    Privateer Press Formula P3|Brown Ink|93017|#744439: Privateer Press Formula P3|Brown Ink||#744439
+    Privateer Press Formula P3|Carnal Pink|93054|#F9E0EA: Privateer Press Formula P3|Carnal Pink||#F9E0EA
+    Privateer Press Formula P3 Wash|Caspian Flesh Wash|93162|#A49881: Privateer Press Formula P3 Wash|Caspian Flesh Wash||#A49881
+    Privateer Press Formula P3|Coal Black|93046|#005A61: Privateer Press Formula P3|Coal Black||#005A61
+    Privateer Press Formula P3|Cold Steel|93075|#BFCACE: Privateer Press Formula P3|Cold Steel||#BFCACE
+    Privateer Press Formula P3|Cryx Bane Base|93067|#313A25: Privateer Press Formula P3|Cryx Bane Base||#313A25
+    Privateer Press Formula P3|Cryx Bane Highlight|93069|#908E7C: Privateer Press Formula P3|Cryx Bane Highlight||#908E7C
+    Privateer Press Formula P3|Cygnar Blue Base|93041|#124B9A: Privateer Press Formula P3|Cygnar Blue Base||#124B9A
+    Privateer Press Formula P3|Cygnar Blue Highlight|93042|#2C75BB: Privateer Press Formula P3|Cygnar Blue Highlight||#2C75BB
+    Privateer Press Formula P3|Cygnus Yellow|93025|#F7E52D: Privateer Press Formula P3|Cygnus Yellow||#F7E52D
+    Privateer Press Formula P3|Deathless Metal|93169|#503528: Privateer Press Formula P3|Deathless Metal||#503528
+    Privateer Press Formula P3|Eldritch|93149|#007B5C: Privateer Press Formula P3|Eldritch||#35795E
+    Privateer Press Formula P3|Ember Orange|93023|#DF8A29: Privateer Press Formula P3|Ember Orange||#EE2C24
+    Privateer Press Formula P3|Exile Blue|93040|#203467: Privateer Press Formula P3|Exile Blue||#203467
+    Privateer Press Formula P3 Wash|Flesh Wash|93011|#CCB19D: Privateer Press Formula P3 Wash|Flesh Wash||#CCB19D
+    Privateer Press Formula P3|Frostbite|93045|#E6EFF5: Privateer Press Formula P3|Frostbite||#E6EFF5
+    Privateer Press Formula P3|Galvanized Steel|93176|#B5BCB2: Privateer Press Formula P3|Galvanized Steel||#B5BCB2
+    Privateer Press Formula P3|Gnarls Green|93034|#0D6232: Privateer Press Formula P3|Gnarls Green||#0D6232
+    Privateer Press Formula P3|Gravedigger Denim|93129|#4A5456: Privateer Press Formula P3|Gravedigger Denim||#4A5456
+    Privateer Press Formula P3|Greatcoat Grey|93043|#4E5861: Privateer Press Formula P3|Greatcoat Grey||#4E5861
+    Privateer Press Formula P3|Green Ink|93015|#129959: Privateer Press Formula P3|Green Ink||#129959
+    Privateer Press Formula P3|Gun Corps Brown|93061|#927D47: Privateer Press Formula P3|Gun Corps Brown||#927D47
+    Privateer Press Formula P3|Hammerfall Khaki|93032|#C7BF97: Privateer Press Formula P3|Hammerfall Khaki||#C7BF97
+    Privateer Press Formula P3|Heartfire|93024|#F4AF46: Privateer Press Formula P3|Heartfire||#F4AF46
+    Privateer Press Formula P3|Idrian Flesh|93055|#9B5E37: Privateer Press Formula P3|Idrian Flesh||#9B5E37
+    Privateer Press Formula P3|Inferno Orange|93147|#F2642F: Privateer Press Formula P3|Inferno Orange||#E16E41
+    Privateer Press Formula P3|Iosan Green|93035|#23A652: Privateer Press Formula P3|Iosan Green||#23A652
+    Privateer Press Formula P3|Ironhull Grey|93044|#8E959A: Privateer Press Formula P3|Ironhull Grey||#8E959A
+    Privateer Press Formula P3|Khador Red Base|93021|#EE2C24: Privateer Press Formula P3|Khador Red Base||#EE2C24
+    Privateer Press Formula P3|Khador Red Highlight|93022|#F09042: Privateer Press Formula P3|Khador Red Highlight||#F09042
+    Privateer Press Formula P3|Khardic Flesh|93057|#C87A5A: Privateer Press Formula P3|Khardic Flesh||#C87A5A
+    Privateer Press Formula P3 Wash|Kossite Flesh Wash|93161|#AA9883: Privateer Press Formula P3 Wash|Kossite Flesh Wash||#AA9883
+    Privateer Press Formula P3|Mage Hunter Green|93126|#596453: Privateer Press Formula P3|Mage Hunter Green||#596453
+    Privateer Press Formula P3|Meaty Ochre|93138|#BB7F30: Privateer Press Formula P3|Meaty Ochre||#B28240
+    Privateer Press Formula P3|Menoth White Base|93065|#EFECBA: Privateer Press Formula P3|Menoth White Base||#EFECBA
+    Privateer Press Formula P3|Menoth White Highlight|93066|#F2F1DC: Privateer Press Formula P3|Menoth White Highlight||#F2F1DC
+    Privateer Press Formula P3|Meredius Blue|93048|#00AFB8: Privateer Press Formula P3|Meredius Blue||#00AFB8
+    Privateer Press Formula P3|Midlund Flesh|93058|#EEA883: Privateer Press Formula P3|Midlund Flesh||#EEA883
+    Privateer Press Formula P3|Moldy Ochre|93063|#DCB43D: Privateer Press Formula P3|Moldy Ochre||#DCB43D
+    Privateer Press Formula P3|Molten Bronze|93078|#CB8C57: Privateer Press Formula P3|Molten Bronze||#CB8C57
+    Privateer Press Formula P3|Morrow White|93073|#FFFCFD: Privateer Press Formula P3|Morrow White||#FFFCFD
+    Privateer Press Formula P3 Wash|Muddy Wash|93163|#8A7F6E: Privateer Press Formula P3 Wash|Muddy Wash||#8A7F6E
+    Privateer Press Formula P3|Murderous Magenta|93052|#A91F5E: Privateer Press Formula P3|Murderous Magenta||#A91F5E
+    Privateer Press Formula P3|Necrotite Green|93039|#7FC246: Privateer Press Formula P3|Necrotite Green||#7FC246
+    Privateer Press Formula P3|Ordic Olive|93036|#6E7E36: Privateer Press Formula P3|Ordic Olive||#6E7E36
+    Privateer Press Formula P3|Orgoth Bronze|93171|#6D6346: Privateer Press Formula P3|Orgoth Bronze||#6D6346
+    Privateer Press Formula P3|Pig Iron|93074|#797979: Privateer Press Formula P3|Pig Iron||#797979
+    Privateer Press Formula P3|Piggy Purple Ink|93209|#6E5D7E: Privateer Press Formula P3|Piggy Purple Ink||#6E5D7E
+    Privateer Press Formula P3|Quick Silver|93076|#D7D9E0: Privateer Press Formula P3|Quick Silver||#D7D9E0
+    Privateer Press Formula P3|Radiant Platinum|93077|#C0C0AE: Privateer Press Formula P3|Radiant Platinum||#C0C0AE
+    Privateer Press Formula P3|Red Ink|93013|#E9543A: Privateer Press Formula P3|Red Ink||#E9543A
+    Privateer Press Formula P3|Rhulic Gold|93079|#F7D259: Privateer Press Formula P3|Rhulic Gold||#F7D259
+    Privateer Press Formula P3|Rucksack Tan|93062|#B2953D: Privateer Press Formula P3|Rucksack Tan||#B2953D
+    Privateer Press Formula P3|Ryn Flesh|93059|#F8E2D1: Privateer Press Formula P3|Ryn Flesh||#F8E2D1
+    Privateer Press Formula P3|Sanguine Base|93019|#6B160F: Privateer Press Formula P3|Sanguine Base||#6B160F
+    Privateer Press Formula P3|Sanguine Highlight|93053|#C64958: Privateer Press Formula P3|Sanguine Highlight||#C64958
+    Privateer Press Formula P3|Sickly Skin|93132|#E8E6BD: Privateer Press Formula P3|Sickly Skin||#E8E6BD
+    Privateer Press Formula P3|Skorne Red|93020|#B12024: Privateer Press Formula P3|Skorne Red||#B12024
+    Privateer Press Formula P3|Solid Gold|93080|#F8F39F: Privateer Press Formula P3|Solid Gold||#F8F39F
+    Privateer Press Formula P3|Sulfuric Yellow|93026|#F0D133: Privateer Press Formula P3|Sulfuric Yellow||#F0D133
+    Privateer Press Formula P3|Thamar Black|93072|#000000: Privateer Press Formula P3|Thamar Black||#000000
+    Privateer Press Formula P3|Thornwood Green|93033|#65644B: Privateer Press Formula P3|Thornwood Green||#65644B
+    Privateer Press Formula P3|Thrall Flesh|93071|#CFD7AC: Privateer Press Formula P3|Thrall Flesh||#CFD7AC
+    Privateer Press Formula P3|Traitor Green|93037|#808F65: Privateer Press Formula P3|Traitor Green||#808F65
+    Privateer Press Formula P3|Trollblood Base|93047|#178799: Privateer Press Formula P3|Trollblood Base||#178799
+    Privateer Press Formula P3|Turquoise Ink|93018|#006669: Privateer Press Formula P3|Turquoise Ink||#006669
+    Privateer Press Formula P3|Umbral Umber|93028|#240600: Privateer Press Formula P3|Umbral Umber||#240600
+    Privateer Press Formula P3|Underbelly Blue|93050|#C0D4D9: Privateer Press Formula P3|Underbelly Blue||#C0D4D9
+    Privateer Press Formula P3|Wurm Green|93038|#8FBE40: Privateer Press Formula P3|Wurm Green||#8FBE40
+    Privateer Press Formula P3|Yellow Ink|93014|#FBE734: Privateer Press Formula P3|Yellow Ink||#FBE734
   green-stuff-world:
     # gsw_clean_name stopped erasing the store's LEADING volume token on 2026-08-05 (17 ml and
     # 60 ml dipping inks are different skus with different gtin13s and prices; erasing it
@@ -1767,6 +1877,224 @@ green-stuff-world:
 # `name:` is new (see PaintOverride.Name) and the paired `aliases:` entry above is REQUIRED. The
 # key below stays the MISSPELLING for as long as upstream emits it -- it is what the base parse
 # produces, and rewriting it to the corrected name would silently disable the correction.
+# --- P3: the 92 PIP codes, from Privateer Press's own line sheet ------------------------------
+# Every legacy record gains the code its maker printed for it. Source: FORMULA P3 PAINT LINE,
+# April 2022 (home.privateerpress.com/wp-content/uploads/2022/05/P3-Paint-Line-Web_2022_v2.pdf),
+# one page, 92 entries, each a name + `PIP #####` + a chip. It matches this archive's 92 records
+# exactly, as a set, in both directions -- which is the same fact the retraction above rests on.
+# Corroborated where it overlaps the 2013 reference sheet (72 codes, 93011-93082 contiguous) and
+# by retailers quoting the same codes (93060 Battledress Green, 93065/93066 Menoth White
+# Base/Highlight, 93031 Bootstrap Leather, 93070 Trollblood Highlight).
+#
+# SIX ALSO CARRY A COLOUR CORRECTION, and the rule that selects them is derived from the data
+# rather than chosen: take the chart colour only where Privateer Press's TWO April-2022 documents
+# agree with EACH OTHER and disagree with the archive. Measured over all 92:
+#
+#   opaque   n=67  archive-vs-sheet median  2.2 -- 6 disagree by >15, and on all 6 the line sheet
+#                  and the mixing guide are IDENTICAL (d=0.0), so the archive is the outlier
+#   wash/ink n=13  median 56.2 -- REFUSED. The line sheet prints an ink as an applied wash over
+#                  white, not as bottled colour (Green Ink #87B993 against the archive's #129959),
+#                  and the mixing guide gives inks no chip at all, so there is no second witness
+#   metallic n=12  median  7.4 -- REFUSED. The two documents disagree with each OTHER by 8.8-11.7
+#                  on the only two that look wrong (Cold Steel, Radiant Platinum), which is what a
+#                  flat print of a metallic does. A chart cannot photograph sheen
+#
+# So the same one-line rule admits the six real errors and refuses both classes that a naive
+# "chart beats archive" pass would have corrupted. `Ember Orange` is the clearest of the six: the
+# archive holds #EE2C24, a red, where both documents say #DF8A29 -- which is what the name says.
 p3:
   Trollblod Highlight|Privateer Press Formula P3:
+    # Keyed on the MISSPELLING, and the code lives here with the name for the same reason:
+    # OverrideApplier looks up `{Name}|{Set}` as the BASE emits it, so a second block keyed
+    # `Trollblood Highlight|...` would match nothing and the record would stay uncoded --
+    # measured, not hypothetical: that is exactly what happened on the first attempt here.
     name: Trollblood Highlight
+    productCode: '93070'
+  "'Jack Bone|Privateer Press Formula P3":
+    productCode: '93064'
+  Amethyst Rose|Privateer Press Formula P3:
+    productCode: '93211'
+    hex: '#642317'   # was #481306, chart d=36.5
+  Arcane Blue|Privateer Press Formula P3:
+    productCode: '93049'
+  Armor Wash|Privateer Press Formula P3 Wash:
+    productCode: '93012'
+  Asheth Grey|Privateer Press Formula P3:
+    productCode: '93130'
+  Bad Bruise|Privateer Press Formula P3:
+    productCode: '93142'
+  Bastion Grey|Privateer Press Formula P3:
+    productCode: '93068'
+  Battledress Green|Privateer Press Formula P3:
+    productCode: '93060'
+  Battlefield Brown|Privateer Press Formula P3:
+    productCode: '93027'
+  Beast Hide|Privateer Press Formula P3:
+    productCode: '93056'
+  Beaten Purple|Privateer Press Formula P3:
+    productCode: '93051'
+  Blazing Ink|Privateer Press Formula P3:
+    productCode: '93159'
+  Blighted Gold|Privateer Press Formula P3:
+    productCode: '93081'
+  Bloodstone|Privateer Press Formula P3:
+    productCode: '93029'
+  Bloodtracker Brown|Privateer Press Formula P3:
+    productCode: '93030'
+  Blue Ink|Privateer Press Formula P3:
+    productCode: '93016'
+  Bog Moss|Privateer Press Formula P3:
+    productCode: '93141'
+    hex: '#878241'   # was #80703C, chart d=19.9
+  Bogrin Brown|Privateer Press Formula P3:
+    productCode: '93139'
+  Boiler Black|Privateer Press Formula P3:
+    productCode: '93172'
+  Bootstrap Leather|Privateer Press Formula P3:
+    productCode: '93031'
+  Brass Balls|Privateer Press Formula P3:
+    productCode: '93082'
+  Brown Ink|Privateer Press Formula P3:
+    productCode: '93017'
+  Carnal Pink|Privateer Press Formula P3:
+    productCode: '93054'
+  Caspian Flesh Wash|Privateer Press Formula P3 Wash:
+    productCode: '93162'
+  Coal Black|Privateer Press Formula P3:
+    productCode: '93046'
+  Cold Steel|Privateer Press Formula P3:
+    productCode: '93075'
+  Cryx Bane Base|Privateer Press Formula P3:
+    productCode: '93067'
+  Cryx Bane Highlight|Privateer Press Formula P3:
+    productCode: '93069'
+  Cygnar Blue Base|Privateer Press Formula P3:
+    productCode: '93041'
+  Cygnar Blue Highlight|Privateer Press Formula P3:
+    productCode: '93042'
+  Cygnus Yellow|Privateer Press Formula P3:
+    productCode: '93025'
+  Deathless Metal|Privateer Press Formula P3:
+    productCode: '93169'
+  Eldritch|Privateer Press Formula P3:
+    productCode: '93149'
+    hex: '#007B5C'   # was #35795E, chart d=53.1
+  Ember Orange|Privateer Press Formula P3:
+    productCode: '93023'
+    hex: '#DF8A29'   # was #EE2C24, chart d=95.3
+  Exile Blue|Privateer Press Formula P3:
+    productCode: '93040'
+  Flesh Wash|Privateer Press Formula P3 Wash:
+    productCode: '93011'
+  Frostbite|Privateer Press Formula P3:
+    productCode: '93045'
+  Galvanized Steel|Privateer Press Formula P3:
+    productCode: '93176'
+  Gnarls Green|Privateer Press Formula P3:
+    productCode: '93034'
+  Gravedigger Denim|Privateer Press Formula P3:
+    productCode: '93129'
+  Greatcoat Grey|Privateer Press Formula P3:
+    productCode: '93043'
+  Green Ink|Privateer Press Formula P3:
+    productCode: '93015'
+  Gun Corps Brown|Privateer Press Formula P3:
+    productCode: '93061'
+  Hammerfall Khaki|Privateer Press Formula P3:
+    productCode: '93032'
+  Heartfire|Privateer Press Formula P3:
+    productCode: '93024'
+  Idrian Flesh|Privateer Press Formula P3:
+    productCode: '93055'
+  Inferno Orange|Privateer Press Formula P3:
+    productCode: '93147'
+    hex: '#F2642F'   # was #E16E41, chart d=26.7
+  Iosan Green|Privateer Press Formula P3:
+    productCode: '93035'
+  Ironhull Grey|Privateer Press Formula P3:
+    productCode: '93044'
+  Khador Red Base|Privateer Press Formula P3:
+    productCode: '93021'
+  Khador Red Highlight|Privateer Press Formula P3:
+    productCode: '93022'
+  Khardic Flesh|Privateer Press Formula P3:
+    productCode: '93057'
+  Kossite Flesh Wash|Privateer Press Formula P3 Wash:
+    productCode: '93161'
+  Mage Hunter Green|Privateer Press Formula P3:
+    productCode: '93126'
+  Meaty Ochre|Privateer Press Formula P3:
+    productCode: '93138'
+    hex: '#BB7F30'   # was #B28240, chart d=18.6
+  Menoth White Base|Privateer Press Formula P3:
+    productCode: '93065'
+  Menoth White Highlight|Privateer Press Formula P3:
+    productCode: '93066'
+  Meredius Blue|Privateer Press Formula P3:
+    productCode: '93048'
+  Midlund Flesh|Privateer Press Formula P3:
+    productCode: '93058'
+  Moldy Ochre|Privateer Press Formula P3:
+    productCode: '93063'
+  Molten Bronze|Privateer Press Formula P3:
+    productCode: '93078'
+  Morrow White|Privateer Press Formula P3:
+    productCode: '93073'
+  Muddy Wash|Privateer Press Formula P3 Wash:
+    productCode: '93163'
+  Murderous Magenta|Privateer Press Formula P3:
+    productCode: '93052'
+  Necrotite Green|Privateer Press Formula P3:
+    productCode: '93039'
+  Ordic Olive|Privateer Press Formula P3:
+    productCode: '93036'
+  Orgoth Bronze|Privateer Press Formula P3:
+    productCode: '93171'
+  Pig Iron|Privateer Press Formula P3:
+    productCode: '93074'
+  Piggy Purple Ink|Privateer Press Formula P3:
+    productCode: '93209'
+  Quick Silver|Privateer Press Formula P3:
+    productCode: '93076'
+  Radiant Platinum|Privateer Press Formula P3:
+    productCode: '93077'
+  Red Ink|Privateer Press Formula P3:
+    productCode: '93013'
+  Rhulic Gold|Privateer Press Formula P3:
+    productCode: '93079'
+  Rucksack Tan|Privateer Press Formula P3:
+    productCode: '93062'
+  Ryn Flesh|Privateer Press Formula P3:
+    productCode: '93059'
+  Sanguine Base|Privateer Press Formula P3:
+    productCode: '93019'
+  Sanguine Highlight|Privateer Press Formula P3:
+    productCode: '93053'
+  Sickly Skin|Privateer Press Formula P3:
+    productCode: '93132'
+  Skorne Red|Privateer Press Formula P3:
+    productCode: '93020'
+  Solid Gold|Privateer Press Formula P3:
+    productCode: '93080'
+  Sulfuric Yellow|Privateer Press Formula P3:
+    productCode: '93026'
+  Thamar Black|Privateer Press Formula P3:
+    productCode: '93072'
+  Thornwood Green|Privateer Press Formula P3:
+    productCode: '93033'
+  Thrall Flesh|Privateer Press Formula P3:
+    productCode: '93071'
+  Traitor Green|Privateer Press Formula P3:
+    productCode: '93037'
+  Trollblood Base|Privateer Press Formula P3:
+    productCode: '93047'
+  Turquoise Ink|Privateer Press Formula P3:
+    productCode: '93018'
+  Umbral Umber|Privateer Press Formula P3:
+    productCode: '93028'
+  Underbelly Blue|Privateer Press Formula P3:
+    productCode: '93050'
+  Wurm Green|Privateer Press Formula P3:
+    productCode: '93038'
+  Yellow Ink|Privateer Press Formula P3:
+    productCode: '93014'

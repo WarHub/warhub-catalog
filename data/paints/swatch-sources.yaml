@@ -359,11 +359,10 @@ scale75:
       x1: 0.57
       y1: 0.92
 p3:
-  # Colours for the RELAUNCHED range only (set `P3 Paints`, minted by gen_paint_harvest.py's
-  # bridge_p3). The original Privateer Press sets keep their Arcturus hexes and are not
-  # touched by either chart here -- both are set-scoped, and the two ranges measure a median
-  # 39.7 dRGB apart over their 89 same-named colours, so a chart that spilled across the set
-  # boundary would silently restate one range's colours as the other's.
+  # FOUR charts across TWO ranges that must never be confused, so every one is set-scoped: the
+  # relaunched `P3 Paints` and the original `Privateer Press Formula P3*`. A chart that spilled
+  # across that boundary would restate one maker's colours as the other's, which is the whole
+  # mistake this brand's history is made of.
   charts:
     - id: mixing-guide-2024-10
       url: https://cdn.shopify.com/s/files/1/0602/0156/6449/files/SFG-P3-Mixing-Guide.pdf
@@ -438,3 +437,53 @@ p3:
         # translucent effect fluids fill and are flagged for review -- so this is a judgement,
         # reversible by deleting this line.
         - SFP3-N235-S
+    # --- the ORIGINAL Privateer Press range ---------------------------------------------------
+    # Both documents are April 2022, both are Privateer Press's own, and they agree with each
+    # other to a median of 1.0 dRGB (99% within 10) over the 78 colours both carry. Neither can
+    # FILL anything -- all 92 legacy records already hold a colour -- so both run purely as
+    # cross-checks, and that is the point: they are the standing verification behind the six
+    # `hex:` corrections and the 92 PIP codes in data/paints/overrides.yaml, re-derivable by
+    # running this generator instead of by trusting a comment.
+    #
+    # EXPECT DIFFERENCES EVERY RUN, and do not "fix" them. Most are +-1 per channel between a
+    # rendered chip and a stored hex. The ones that matter are the two classes the correction rule
+    # refuses: the line sheet prints an INK as an applied wash over white rather than as bottled
+    # colour (Green Ink #87B993 against the archive's #129959), and the two metallics the two
+    # documents disagree with each OTHER about (Cold Steel 8.8, Radiant Platinum 11.7) are a flat
+    # print failing to photograph sheen. See the correction rule on the p3 block in overrides.yaml.
+    #
+    # The five washes report as `outside set` rather than as differences: they live in
+    # `Privateer Press Formula P3 Wash` and both charts are scoped to the main set. That is left
+    # as-is deliberately -- a second wash-scoped entry would cross-check five records whose chart
+    # colour is known to be the applied wash, i.e. it would report a difference every run and mean
+    # nothing by it.
+    - id: pp-paint-line-2022-04
+      url: https://home.privateerpress.com/wp-content/uploads/2022/05/P3-Paint-Line-Web_2022_v2.pdf
+      # CODE-anchored: this sheet prints `PIP #####` under every name, which is where the
+      # archive's 92 product codes come from. One page, 4 columns, a 22.1 x 22.1pt chip per entry.
+      #
+      # dx IS MEASURED FROM THE CODE WORD, NOT FROM ITS CELL, and the two are 17.7pt apart because
+      # the anchor is the digits and the cell begins at `PIP `. Taking the cell's own x0 (-27.5)
+      # lands the window inside the white gutter, every sample reads paper, and the paper guard
+      # drops all 92 -- a chart that silently yields nothing rather than yielding something wrong.
+      # Verified against an independent name-anchored extraction of the same page: 91 swatches,
+      # median d=0.0, max 9.5. The 92nd is Morrow White, which IS paper-white and is exactly what
+      # that guard is for.
+      codePattern: '9\d{4}'
+      pages: [0]
+      set: Privateer Press Formula P3
+      sample: { dx: -45.2, dy: -13.1, width: 22.1, height: 22.1, inset: 0.28 }
+    - id: pp-mixing-guide-2022-04
+      url: https://home.privateerpress.com/wp-content/uploads/2022/05/P3-Mixing-Guide-Web_2022_v1.pdf
+      # NAME-anchored, like Steamforged's: this one prints recipes, never codes. 2 pages, the same
+      # BASE/SHADE/HIGHLIGHT/+HIGHLIGHT layout, 8.7pt chips. Names repeat across recipes and the
+      # repeats are byte-identical (61 colours in 2+ cells, worst-vs-consensus median 0.0).
+      #
+      # IT CARRIES THREE TYPOS OF ITS OWN -- `Battlefiled Brown`, `Bootstrap Brown` for Bootstrap
+      # Leather, `Sulphuric Yellow` for Sulfuric Yellow -- so it is trusted for COLOUR and never
+      # for names; the line sheet above is the naming authority. A name it misspells simply fails
+      # to anchor, which is the safe direction.
+      anchorNames: true
+      pages: [0, 1]
+      set: Privateer Press Formula P3
+      sample: { dx: -11.03, dy: -1.33, width: 8.7, height: 8.7, inset: 0.25 }
