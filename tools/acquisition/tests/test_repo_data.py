@@ -191,6 +191,15 @@ def test_every_paint_source_reaches_the_paint_catalog() -> None:
     (346 paints in a 6,914-row trade workbook) and legacy-catalog are product sources that
     happen to carry some paints, and they reach the paint catalog by a different bridge
     (gen_paint_barcodes.py); mfr-reaper is a paint source whose paint-set pages are not.
+
+    IF mfr-warmachine EVER TRIPS THE RATIO, `catalog: paints` IS THE WRONG FIX. It is a
+    manufacturer STOREFRONT that a bridge reads under a documented role exception (see
+    gen_paint_harvest.py), and 387 of its 609 rows are models the product catalog must keep.
+    Flagging it would pull all 609 out of the product catalog to stop 110 paints duplicating.
+    Its margin is not comfortable -- a line moving between Steamforged storefronts already
+    shifted 352 products once (PR #127) -- so if the non-paint side falls below the paint side,
+    narrow this rule (exempt the source, or gate on the crossover declaration) rather than
+    reclassifying a store that sells more than paint.
     """
     paths = _require_repo_data()
     descriptors = load_descriptors(paths.sources)
