@@ -75,16 +75,28 @@ def _image_url(product: dict) -> str | None:
 
 
 def _apply_hints(product: dict, mapping: dict) -> tuple[dict[str, object], int]:
-    """Map bulk product_type/tags -> gameSystem/faction slugs via the source's mapping file.
+    """Map bulk product_type/tags -> gameSystem/faction/category via the source's mapping file.
 
     Never guesses: a product_type/tags value with no entry in the mapping is counted (not
     hinted). Faction match is the first tag (in sorted order, for determinism) present in the
     faction map.
+
+    `category` is read from the SAME product_type value as gameSystem, because a Shopify
+    product_type is whatever the store chose to put there and different stores use it for
+    different axes: steamforged.com's values name game lines, warmachine.gg's name formats
+    ("Miniatures", "Paint", "Digital Download"). A store answering the format question cannot
+    also answer the game-system one, so the two maps are independent and a product_type present
+    in neither still counts as unmapped exactly once (against gameSystem, as before).
+
+    Without this, resolve/attributes.py defaults `category` to "miniatures" and a store's paint
+    range publishes as miniatures -- the same mislabel the GW trade rows carried until their
+    `Range` column was read for a category.
     """
     hints: dict[str, object] = {}
     unmapped = 0
     gs_map = mapping.get("gameSystem") or {}
     faction_map = mapping.get("faction") or {}
+    category_map = mapping.get("category") or {}
 
     product_type = product.get("product_type") or ""
     if product_type:
@@ -93,6 +105,9 @@ def _apply_hints(product: dict, mapping: dict) -> tuple[dict[str, object], int]:
             hints["gameSystem"] = slug
         else:
             unmapped += 1
+        category = category_map.get(product_type)
+        if category:
+            hints["category"] = category
 
     tags = product.get("tags") or []
     faction_slug = None

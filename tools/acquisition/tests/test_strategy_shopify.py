@@ -747,3 +747,95 @@ def test_barcode_success_clears_detail_misses_counter() -> None:
     assert "detailMisses" not in result.cursor["updated_at"]["p40-medium-tank"]
     assert result.cursor["pending_details"] == []
     assert result.full_sweep is True
+
+
+def test_mapping_file_applies_category_hint_from_product_type() -> None:
+    """A store whose product_type names the FORMAT ("Paint") rather than a game line.
+
+    Without this, resolve/attributes.py defaults `category` to "miniatures" and warmachine.gg's
+    222 P3 pots publish as miniatures. `category` reads the SAME product_type value as gameSystem
+    but from an independent map, because one store's product_type cannot answer both questions --
+    and a product_type that answers only the category one must still count as unmapped for
+    gameSystem exactly once, which is what keeps the unmapped_hints signal honest.
+    """
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(
+                200,
+                json={
+                    "products": [
+                        {
+                            "id": 1,
+                            "handle": "p3-paints-arcane-blue",
+                            "title": "P3 Paints: Arcane Blue",
+                            "vendor": "Warlord Games",
+                            "product_type": "Paint",
+                            "tags": [],
+                            "updated_at": "2026-07-01T00:00:00+00:00",
+                            "variants": [{"sku": "SFP3-N136-S", "price": "5.00"}],
+                            "images": [],
+                        },
+                        {
+                            "id": 2,
+                            "handle": "some-model",
+                            "title": "Some Model",
+                            "vendor": "Warlord Games",
+                            "product_type": "Miniatures",
+                            "tags": [],
+                            "updated_at": "2026-07-01T00:00:00+00:00",
+                            "variants": [{"sku": "SF1", "price": "5.00"}],
+                            "images": [],
+                        },
+                    ]
+                },
+            )
+        return httpx.Response(200, json={"products": []})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    mappings = {"mfr-warlord-store": {"gameSystem": {}, "faction": {}, "category": {"Paint": "paint"}}}
+    result = shopify_strategy(
+        descriptor(), client, {}, context(warlord_taxonomy(), budget=0, mappings=mappings)
+    )
+
+    by_handle = {obs.key.split(":", 1)[1]: obs for obs in result.observations}
+    assert by_handle["p3-paints-arcane-blue"].hints == {"category": "paint"}
+    # "Miniatures" is deliberately NOT mapped -- it is what the resolver already defaults to.
+    assert by_handle["some-model"].hints == {}
+    # Both product_types are unmapped for gameSystem; a category hit does not mask that.
+    assert result.stats["unmapped_hints"] == 2
+
+
+def test_category_map_is_absent_by_default_and_changes_nothing() -> None:
+    """Every other shopify source has no `category` map; their hints must be byte-identical."""
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.params.get("page") == "1":
+            return httpx.Response(
+                200,
+                json={
+                    "products": [
+                        {
+                            "id": 1,
+                            "handle": "item",
+                            "title": "Item",
+                            "vendor": "Warlord Games",
+                            "product_type": "Paint",
+                            "tags": [],
+                            "updated_at": "2026-07-01T00:00:00+00:00",
+                            "variants": [{"sku": "M1", "price": "5.00"}],
+                            "images": [],
+                        }
+                    ]
+                },
+            )
+        return httpx.Response(200, json={"products": []})
+
+    client = PoliteClient(
+        "https://store.warlordgames.com", transport=httpx.MockTransport(handler), sleep=lambda s: None
+    )
+    result = shopify_strategy(
+        descriptor(), client, {}, context(warlord_taxonomy(), budget=0, mappings={})
+    )
+
+    assert result.observations[0].hints == {}

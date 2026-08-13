@@ -16,3 +16,24 @@
 # Same empty-scaffold shape as mappings/mfr-steamforged.yaml.
 gameSystem: {}
 faction: {}
+# `category`, unlike the two above, IS answerable from this store's product_type -- that is what
+# its vocabulary is FOR. Only the paint answer is asserted: "Miniatures" is what the resolver
+# already defaults to, and Digital Download / Roleplaying Game / Free Resource / Wargame have no
+# honest category in the current vocabulary (miniatures, paint, paint-set, terrain, book,
+# hobby-auxiliary), so they are left unmapped rather than guessed into the nearest one.
+#
+# All 222 rows under product_type "Paint" are the P3 range: 110 single pots (sku SFP3-*-S), 110
+# case packs of ONE colour (sku SFP3-*, titled "(Pack of 6)"), and 2 rows for the Starter Set
+# Dropper Bottle (both sku SFP3-N128, two store handles resolving to one product).
+#
+# `paint` is right for the first 220: a 6-pack of one colour is a packaging unit, not an
+# assortment, and `paint-set` means a boxed MULTI-COLOUR set (see resolve/crossover.py), so it
+# would be the wrong stamp. The single/case distinction is carried by sku and name.
+#
+# The 2 starter-set rows ARE a 10-colour assortment and would ideally be `paint-set`. They are
+# knowingly stamped `paint` here, because product_type is the only signal this mapping can key
+# on and the store gives all 222 rows the same one -- a per-row exception needs the curated
+# channel, not a category map. Still strictly better than the `miniatures` default they carried
+# before, and the imprecision is 1 product out of 221.
+category:
+  Paint: paint
