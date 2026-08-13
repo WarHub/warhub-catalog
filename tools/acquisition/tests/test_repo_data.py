@@ -326,6 +326,38 @@ def _crossover_descriptors() -> dict:
     return {sid: d for sid, d in descriptors.items() if d.crossoverToProducts is not None}
 
 
+# The category vocabulary actually published today, counted over data/catalog/products/*.yaml on
+# 2026-08-13: miniatures 21062, paint 957, paint-set 517, terrain 148, book 98, hobby-auxiliary 13.
+# There is no enum on CanonicalProduct.category (it is a bare `str | None`), so a mapping typo --
+# "paints", "Paint" -- would publish silently and split a category in the consumer catalogs.
+_KNOWN_CATEGORIES = frozenset(
+    {"miniatures", "paint", "paint-set", "terrain", "book", "hobby-auxiliary"}
+)
+
+
+def test_repo_mappings_use_only_known_categories() -> None:
+    """`category` in a mapping file stamps hints.category straight onto every matching row.
+
+    Added with mfr-warmachine, whose product_type vocabulary answers the FORMAT question ("Paint",
+    "Miniatures") rather than the game-system one, so its 222 P3 rows can stop publishing as
+    `miniatures`. It is checked here for the same reason gameSystem/faction slugs are: the value
+    reaches the published catalog unvalidated otherwise.
+    """
+    paths = _require_repo_data()
+    mappings_dir = REPO_DATA / "catalog" / "mappings"
+    if not mappings_dir.exists():
+        pytest.skip("data/catalog/mappings/ not created yet")
+    assert paths.sources.exists()
+
+    for path in sorted(mappings_dir.glob("*.yaml")):
+        data = read_yaml(path) or {}
+        for raw, category in (data.get("category") or {}).items():
+            assert category in _KNOWN_CATEGORIES, (
+                f"{path.name}: category[{raw!r}] -> {category!r} is not one of "
+                f"{sorted(_KNOWN_CATEGORIES)}"
+            )
+
+
 def test_crossover_blocks_are_declared_on_paint_sources_with_a_reason() -> None:
     """T1. The block only makes sense on a `catalog: paints` source, and its `reason` is the
     only drift signal the mechanism has: `contract` measures the WHOLE source, so nothing fires
