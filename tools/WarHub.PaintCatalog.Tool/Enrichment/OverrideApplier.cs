@@ -81,6 +81,14 @@ public static class OverrideApplier
 
             return p with
             {
+                // Name/Set move the record's IDENTITY, so they land here rather than in the
+                // reconciler -- see PaintOverride.Name. Every enrichment keyed on `{Name}|{Set}`
+                // has ALREADY run by this point (BarcodeEnricher :245, ApplyEnrichment :249,
+                // SwatchApplier :253 in PaintCatalogApp), which is deliberate and is the half of
+                // the contract a renaming block has to honour: those files must key the paint by
+                // the name the BASE emits, never the corrected one.
+                Name = over.Name ?? p.Name,
+                Set = over.Set ?? p.Set,
                 ProductCode = over.ProductCode ?? p.ProductCode,
                 Hex = newHex,
                 R = newR,
@@ -267,6 +275,31 @@ public static class OverrideApplier
 /// </summary>
 public record PaintOverride
 {
+    /// <summary>
+    /// Corrected NAME, and with <see cref="Set"/> the last of the four identity components to get
+    /// a pre-reconciliation rewrite. Identity is `set|name|productCode|hex`, and until now only
+    /// productCode and hex could be moved here — so a base-sourced record whose upstream NAME was
+    /// wrong could not be corrected at all. Not for want of a rule: `aliases:` stitches a rename
+    /// to its old record, but only if the old identity key is VACATED, and
+    /// <see cref="CatalogReconciler"/> seeds `consumed` with every key the fresh parse re-asserts
+    /// (CatalogReconciler.cs:38-46). The base re-asserts the misspelled name every run, so the
+    /// alias was refused and the run minted a duplicate with today's firstSeen instead.
+    ///
+    /// Writing it here fixes that the same way the army-painter `Brainmatter Beige` code
+    /// correction already does: <see cref="Apply"/> runs at PaintCatalogApp.cs:256, BEFORE
+    /// reconciliation, so the old key is never asserted and the paired `aliases:` entry fires.
+    /// A rename therefore still REQUIRES its alias — without one the reconciler sees an unknown
+    /// key, mints, and strands the original.
+    ///
+    /// THE LOOKUP KEY IS THE OLD NAME AND STAYS THAT WAY. <see cref="Apply"/> matches on
+    /// `{Name}|{Set}` as the BASE emits it, so a block that renames must keep the misspelling as
+    /// its own key forever; "tidying" it to the corrected name silently disables the correction.
+    /// </summary>
+    public string? Name { get; init; }
+
+    /// <summary>Corrected SET. Same mechanism and same alias requirement as <see cref="Name"/>.</summary>
+    public string? Set { get; init; }
+
     public string? ProductCode { get; init; }
     public string? Hex { get; init; }
     public int? VolumeMl { get; init; }

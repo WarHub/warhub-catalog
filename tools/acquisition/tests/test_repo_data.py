@@ -616,6 +616,75 @@ def _paint_identity_key(record: dict) -> str:
     )
 
 
+def test_every_alias_names_exactly_one_side_of_its_rename() -> None:
+    """`aliases:` is the ONLY thing that turns a moved identity into a RENAME instead of a split,
+    and like `retract:` it is matched with an ordinal `HashSet`/`Dictionary`
+    (PaintOverrideAliases.cs:17-18) -- so a mistyped key produces no error, no warning and no log
+    line. It is not even a no-op: the reconciler meets an unknown key, MINTS a second record with
+    today's `firstSeen`, and leaves the original standing beside it. Silence looks identical to
+    success while the archive quietly grows a duplicate.
+
+    THE INVARIANT IS AN EXCLUSIVE OR, which is what makes it checkable from committed data alone.
+    An alias names two identities, and exactly one of them can exist at rest:
+
+      * the NEW key only -- the rename has been applied and the archive holds the corrected
+        record. This is the steady state for every alias already merged.
+      * the OLD key only -- the alias is authored but the catalog has not been regenerated yet.
+        Legitimate mid-change; the next run consumes it.
+      * BOTH -- the split this mechanism exists to prevent. Whatever the alias was supposed to
+        stitch, it did not, and the archive now carries the record twice.
+      * NEITHER -- a key mistyped on both sides, or aimed at a record whose components cannot be
+        addressed at all (see `_paint_identity_key`: a component that begins or ends with a quote
+        normalizes differently for the adapter than for the alias loader, so Citadel's `'Ardcoat`
+        and mr-hobby's `Dark Gray "Dunkel Grau"` are unreachable by any alias or retract key).
+
+    The `retract:` test below is the sibling of this one and they are deliberately different
+    shapes: a retraction ends with its target ABSENT, so zero matches is the success case there
+    and the near-miss heuristic has to do the work. A rename ends with its target PRESENT under a
+    new name, so the count is decidable outright.
+    """
+    _require_repo_data()
+    overrides_path = REPO_DATA / "paints/overrides.yaml"
+    if not overrides_path.exists():
+        pytest.skip("data/paints/overrides.yaml not present")
+    aliases = (read_yaml(overrides_path) or {}).get("aliases") or {}
+    if not aliases:
+        pytest.skip("no aliases: block declared")
+
+    both, neither = [], []
+    for brand_slug, pairs in aliases.items():
+        archive_path = REPO_DATA / "paints/brands" / f"{brand_slug}.yaml"
+        assert archive_path.exists(), (
+            f"aliases: names brand {brand_slug!r}, which has no data/paints/brands file -- "
+            f"PaintOverrideAliases.Load is scoped by slug, so the whole block would be dead"
+        )
+        archive = read_yaml(archive_path) or {}
+        identities: dict[str, int] = {}
+        for record in archive.get("paints") or []:
+            key = _paint_identity_key(record)
+            identities[key] = identities.get(key, 0) + 1
+        for new_key, old_key in (pairs or {}).items():
+            new_n = identities.get(_normalize(str(new_key)), 0)
+            old_n = identities.get(_normalize(str(old_key)), 0)
+            if new_n and old_n:
+                both.append((brand_slug, str(new_key), str(old_key)))
+            elif not new_n and not old_n:
+                neither.append((brand_slug, str(new_key), str(old_key)))
+
+    assert not both, (
+        f"{len(both)} alias(es) whose OLD and NEW identities are BOTH in the archive -- the "
+        "rename split instead of stitching, and the record is now duplicated. Read the alias's "
+        "own comment: a rename also needs whatever VACATES the old key before reconciliation (a "
+        f"`productCode:`/`name:`/`set:` override, or an upstream generator change). {both}"
+    )
+    assert not neither, (
+        f"{len(neither)} alias(es) naming NOTHING on either side -- a mistyped key is not a "
+        "no-op, it mints a duplicate on the next run. Check the component order "
+        "(`Set|Name|ProductCode|Hex`, which is NOT the `{Name}|{Set}` order the field-override "
+        f"blocks use) and see `_paint_identity_key` for the quote trap. {neither}"
+    )
+
+
 def test_every_retract_key_names_exactly_one_committed_paint() -> None:
     """`retract:` is the ONLY code path in the pipeline that DELETES an archived record --
     `CatalogReconciler` subtracts exactly this set (:52-55 input side, :104 output side) and
