@@ -1930,12 +1930,16 @@ green-stuff-world:
     volumeMl: 240
   Chrome Clear Coat 60 ml|Varnish:
     volumeMl: 60
+    colourless: true
   Gloss Varnish 60ml|Varnish:
     volumeMl: 60
+    colourless: true
   Maxx Matt Varnish 60ml - Ultra Matte Varnish|Varnish:
     volumeMl: 60
+    colourless: true
   Satin Varnish 60ml|Varnish:
     volumeMl: 60
+    colourless: true
   Flexible varnish 240ml|Varnish:
     volumeMl: 240
   # --- SOLD BY WEIGHT, NOT BY VOLUME (2026-08-06) -----------------------------------------------
@@ -1976,6 +1980,7 @@ green-stuff-world:
   #
   # NO BARCODE MOVES here either: no `ean:` or `additionalEans:`, so `BarcodeSet.Union` writes
   # nothing.
+    colourless: true
   Foam Primer and Coat - Black 250gr|Primer:
     weightG: 250
   Foam Primer and Coat - Grey 250gr|Primer:
@@ -2116,21 +2121,12 @@ green-stuff-world:
   # --- colourless utility products (2026-08-13) ---
   Chrome Clear Coat 17 ml|Varnish:
     colourless: true
-  Chrome Clear Coat 60 ml|Varnish:
-    colourless: true
-  Flexible varnish 240ml|Varnish:
     colourless: true
   Gloss Varnish 17ml|Varnish:
     colourless: true
-  Gloss Varnish 60ml|Varnish:
-    colourless: true
   Maxx Matt Varnish 17ml - Ultra Matte Varnish|Varnish:
     colourless: true
-  Maxx Matt Varnish 60ml - Ultra Matte Varnish|Varnish:
-    colourless: true
   Satin Varnish 17ml|Varnish:
-    colourless: true
-  Satin Varnish 60ml|Varnish:
     colourless: true
 p3:
   Trollblod Highlight|Privateer Press Formula P3:

@@ -224,20 +224,44 @@ class TestNoRenameStrandsAnArchiveRecord:
 
         Legitimate hexless aliases exist -- record 3487 has `hex: ''` in the archive, so
         `Dipping Inks|Green Stone Dip 60 ml|3487|` is correct and must keep passing. The rule is
-        narrow on purpose: an alias may omit the hex only when the record it targets HAS no hex.
+        narrow on purpose: an alias may omit the hex only when the record it targets HAS no hex,
+        OR when the erasure is DECLARED by a `colourless: true` override on that same record.
+
+        THE DECLARED CASE IS NOT A LOOPHOLE, it is the same hazard pointed the other way. A medium
+        or varnish has no colour, so the 94 stand-in greys the archive carried for them were the
+        error and clearing them is the fix (see PaintRecord.Colourless); the alias exists because
+        clearing a hex MOVES the identity, and without it the run mints a hexless twin instead of
+        renaming. What the exception requires is that a human wrote the assertion down next to the
+        record -- an alias that erases a colour NOBODY declared colourless is still armed, and is
+        still what this test is for.
+
+        MATCHING IS ON THE WHOLE IDENTITY, NOT ON THE CODE. It used to compare `productCode` alone,
+        which is not identifying when the code is empty: every codeless record in the brand matched
+        every codeless alias, so 144 unrelated Army Painter colours were reported against one
+        mixing-medium alias. Set and name are part of the key the alias states; use them.
         """
         archives = {p.stem: _yaml(p).get("paints") or [] for p in sorted(BRANDS_DIR.glob("*.yaml"))}
+        overrides = _yaml(OVERRIDES)
         armed = []
-        for slug, entries in ((_yaml(OVERRIDES).get("aliases") or {})).items():
+        for slug, entries in ((overrides.get("aliases") or {})).items():
+            declared = {
+                key for key, fields in (overrides.get(slug) or {}).items()
+                if isinstance(fields, dict) and fields.get("colourless")
+            }
             for new_key in entries:
                 parts = str(new_key).split("|")
                 if len(parts) != 4 or parts[3]:
                     continue  # carries a hex, or is not an identity key -- not this hazard
                 set_name, name, code = parts[0], parts[1], parts[2]
+                if f"{name}|{set_name}" in declared:
+                    continue  # the erasure is asserted on the record itself
                 for record in archives.get(slug) or []:
-                    if str(record.get("productCode") or "") != code:
+                    details = record.get("details") or {}
+                    if (str(record.get("productCode") or "") != code
+                            or str(record.get("name") or "") != name
+                            or str(details.get("set") or "") != set_name):
                         continue
-                    archived_hex = (record.get("details") or {}).get("hex") or ""
+                    archived_hex = details.get("hex") or ""
                     if archived_hex:
                         armed.append(
                             f"{slug}: alias {new_key!r} omits the hex, but archived record "
