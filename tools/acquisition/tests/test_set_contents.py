@@ -174,13 +174,19 @@ def test_every_set_records_where_its_refs_came_from() -> None:
     2026-08-07 over AK's 256 boxed-set pages, 47 state a colour count in words and enumerate
     nothing and 6 print a second, explicitly NOT-INCLUDED bulleted list in the identical shape --
     so the weaker claim is materially weaker, and a relation that flattened the two would launder
-    that away. It must be present on every set, not defaulted at read time."""
+    that away. It must be present on every set, not defaulted at read time.
+
+    `sku` is the third and strongest kind, added 2026-08-13: the source states the membership in
+    the product's own CODE rather than in any text -- a Steamforged P3 case pack is `SFP3-N143`
+    and its contents are `SFP3-N143-S`, the single of the same colour. Exhaustive like `stated`
+    and structured like it, but not an array the source published, so it says which it is."""
     for path in _require():
         for brand, block in _load(path).items():
             for set_id, entry in (block.get("sets") or {}).items():
-                assert entry.get("from") in ("stated", "description"), (
+                assert entry.get("from") in ("stated", "description", "sku"), (
                     f"{path.name}/{brand}/{set_id}: `from` must say whether these refs came from a "
-                    f"contents array or from the description, got {entry.get('from')!r}"
+                    f"contents array, a sku convention, or the description, got "
+                    f"{entry.get('from')!r}"
                 )
 
 

@@ -195,3 +195,38 @@ def content_skus_from_description(description: str | None) -> list[str] | None:
     if len(set(refs)) < 2:
         return None
     return refs
+
+
+# A CASE PACK states its contents in its OWN SKU, and only Steamforged's P3 does it this way in
+# this corpus: the single is `SFP3-N143-S` and the case of six is the same code without the `-S`,
+# with `(Pack of 6)` appended to the title. Measured over the committed mfr-warmachine evidence
+# (2026-08-13): 222 P3 rows = 110 singles, 110 `(Pack of 6)` cases whose sku is exactly a single's
+# minus the suffix, and 2 rows for one starter set.
+#
+# NARROW ON PURPOSE, exactly like the AK ref pattern above. It requires the suffixed sibling to be
+# an SFP3 code AND the title to state the pack size, so a bare sku coincidence in another brand
+# cannot enrol anything: nothing else in the corpus pairs `X` with `X-S` under a "(Pack of N)"
+# title, and a rule keyed only on the suffix would.
+#
+# WHAT THIS DOES NOT CLAIM. It says the case contains that one colour, which is the fact the sku
+# states; it does not say SIX, because `contentSkus` is a list of codes with no multiplicity and
+# inventing one would put a number in a field that cannot hold it (`quantity` on the product is
+# the pack's own unit count, a different statement, and no source states it either). The pack size
+# stays where the store put it -- in the name.
+_CASE_PACK_TITLE = re.compile(r"\(pack of \d+\)\s*$", re.IGNORECASE)
+_CASE_PACK_SKU = re.compile(r"^SFP3-N\d{3}$")
+
+
+def content_skus_from_case_sku(sku: str | None, name: str | None) -> list[str] | None:
+    """`['SFP3-N143-S']` for the case pack `SFP3-N143` titled `... (Pack of 6)`, else None.
+
+    The membership a multi-unit pack of ONE colour has. It is a real containment -- somebody
+    holding the case is holding six of that pot -- and it is the only kind this corpus states
+    outside prose, so it is derived here beside `content_skus_from_description` rather than
+    hand-listed: 110 refs that no description mentions and no `associatedProducts` array carries.
+    """
+    if not sku or not name:
+        return None
+    if not _CASE_PACK_SKU.fullmatch(sku.strip()) or not _CASE_PACK_TITLE.search(name):
+        return None
+    return [f"{sku.strip()}-S"]
