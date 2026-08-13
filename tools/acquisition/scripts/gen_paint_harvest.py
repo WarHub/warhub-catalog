@@ -14,6 +14,10 @@ docs/research/2026-07-23-paint-manufacturer-harvest-design.md):
   storefronts are never catalog-providers — matched products only fill blanks on EXISTING
   identities (`enrich`: ean/imageUrl); unmatched paint-like products land in `candidates`
   (report-only, ignored by C#) for a human to review.
+- ONE DOCUMENTED EXCEPTION to "storefronts are never catalog-providers": `bridge_p3` mints
+  from warmachine.gg, which is a storefront. Maintainer-authorised 2026-08-13; the three
+  grounds and their limits are stated on the bridge, not here, so the exception cannot drift
+  away from the code it licenses.
 
 Most bridges read one evidence directory. mr-hobby reads TWO inputs because no single source
 holds the join: the manufacturer site knows the codes but publishes no barcode, so the bridge
@@ -147,6 +151,8 @@ TAP_SET_BY_PREFIX = {
 # Deliberately absent: mfr-vallejo (0 of 1194 observations carry any price) and mfr-mr-hobby
 # (0 of 134; neither the series pages nor the retailer barcode snapshot quote one). No paint
 # source quotes GBP or CAD, so those two fields are never emitted by this bridge.
+#   mfr-warmachine       priceUsd   110/110   descriptor scope.currency: usd; every P3 single
+#                                             quotes $4.10 (91) or $4.65 (19)
 SOURCE_PRICE_FIELD = {
     "mfr-ak-interactive": "priceEur",
     "mfr-armypainter": "priceUsd",
@@ -155,6 +161,7 @@ SOURCE_PRICE_FIELD = {
     "mfr-reaper": "priceUsd",
     "mfr-scale75": "priceEur",
     "mfr-turbodork": "priceUsd",
+    "mfr-warmachine": "priceUsd",
 }
 
 @lru_cache(maxsize=None)
@@ -1821,6 +1828,143 @@ def bridge_mrhobby() -> BrandHarvest:
     return out
 
 
+# --- Steamforged P3 (the RELAUNCHED Formula P3) --------------------------------------------
+
+# Every row the store publishes for this range is titled "P3 Paints: <Colour>" -- singles,
+# trade cases and the starter set alike (222 of 222, measured 2026-08-13).
+P3_TITLE = re.compile(r"^P3 Paints:\s*")
+
+# `SFP3-N###-S` is the SINGLE bottle; the same N-code WITHOUT the suffix is the trade case of
+# six identical bottles, and SFP3-N128 is the starter set. Measured over the committed
+# evidence 2026-08-13, the 222 SFP3 rows are exactly 110 singles + 110 `(Pack of 6)` cases +
+# 2 rows for the one starter set, and the singles are clean: 110/110 carry a check-digit-valid
+# EAN-13, a priceUsd, an imageUrl, and 110 DISTINCT names and 110 distinct barcodes.
+P3_SINGLE_SKU = re.compile(r"^SFP3-N\d{3}-S$")
+
+# THE SET STRING IS THE WHOLE SEPARATION, so it is chosen rather than defaulted. Identity is
+# `set|name|productCode|hex`, and 98 of the 110 relaunched colours name-match a legacy record,
+# so this string is the only thing keeping `Cygnar Blue|P3 Paints` off
+# `Cygnar Blue Base|Privateer Press Formula P3`.
+#
+# "P3 Paints" is the MANUFACTURER'S OWN name for the relaunched range -- it is the literal
+# title prefix on all 222 evidence rows and the store's own /pages/p3-paints -- which is the
+# same rule the other bridges follow ("Warpaints Fanatic", "Quick Gen", "Xtreme Metal"): the
+# range's printed name, never a coined disambiguator. Rejected: bare "P3" (says less than the
+# evidence does, and reads as an abbreviation of the legacy set rather than a different range)
+# and "Steamforged P3" (accurate about the maker, but Steamforged does not print it -- and
+# inventing wording for one half of a pair invites re-inventing it for the next relaunch).
+# Verified 2026-08-13: 0 of the 131 committed P3 records carry this set, so no minted identity
+# can land on one of them.
+P3_SET = "P3 Paints"
+
+
+def bridge_p3() -> BrandHarvest:
+    """CATALOG role for warmachine.gg's P3 singles -- THE ONE STOREFRONT ALLOWED TO MINT.
+
+    ROLE EXCEPTION, maintainer-authorised 2026-08-13, against the doctrine at the top of this
+    file (owner decision, docs/research/2026-07-23-paint-manufacturer-harvest-design.md:
+    "Shopify storefronts are never catalog-providers"). Three grounds, all of which have to
+    hold -- this is a carve-out for THIS range, not a precedent that a storefront may mint:
+
+      1. The relaunched range exists on NO other source. The doctrine's reason for refusing a
+         storefront is that a shop is a sales surface and some catalog source is the authority
+         on what the range contains; here there is no such source to defer to. Left refused,
+         these 110 paints reach no catalog at all.
+      2. The store is the MANUFACTURER'S OWN. warmachine.gg is where Steamforged moved a line
+         it already sold -- 352 products vanished from steamforged.com between 2026-07-13 and
+         2026-08-12 and reappeared here, 350 under an identical handle and all 352 matched by
+         sku (see docs/research/2026-08-12-steamforged-warmachine-store-split.md). It is not a
+         reseller listing somebody else's range.
+      3. The range carries MANUFACTURER PRODUCT CODES. `SFP3-N###-S` is Steamforged's own part
+         number, so each minted paint has a stable identity that is not its name -- the thing a
+         storefront usually cannot supply, and the reason a name-keyed shop listing is weak
+         evidence. Independently corroborated: 1001hobbies publishes code+name+EAN per product
+         and 3 of 3 spot-checks matched this harvest exactly on both fields.
+
+    WHAT THIS BRIDGE MUST NEVER DO, and the reason it is written catalog-blind: it never calls
+    `match_name`. 98 of the 110 relaunched colours name-match a committed P3 record, and
+    joining on that is precisely the backfill PR #128 landed and then reverted -- 97 EANs put
+    onto the ORIGINAL Privateer Press pots. Those records are a different product: `container:
+    pot`, no product codes, Arcturus5404 import, against an 18 ml dropper bottle with preloaded
+    mixing balls; the relaunch drops the old Ink (8) and Wash (5) sub-ranges entirely and adds
+    colours the old range never had; and the measured colour delta over 89 same-named pairs is
+    a median of 39.7 RGB, a systematic reformulation offset rather than measurement noise. A
+    barcode is an assertion about one physical product. Same name and shared heritage are not
+    the same pot, so this bridge does not look at the archive at all: every single mints, and
+    the C#'s (Name, Set, ProductCode) skip in `AppendAdditions` is what keeps that idempotent.
+    That is also why there is no `previous_addition_codes` ratchet here -- the ratchet exists
+    for bridges that WOULD flip an addition to enrich-only once the catalog code-matches it,
+    and a bridge that never consults the catalog cannot flip. `additions` is already the pure
+    projection of the source that `previous_addition_codes` asks every bridge to be.
+
+    WHY THE SHAPE TEST IS THIS BRIDGE'S OWN AND NOT THE CROSSOVER GATE'S. `paint_rows` still
+    reads the evidence, so the universal invariant holds and a block added later would be
+    honoured -- but it selects nothing today, and that is correct rather than an oversight.
+    `crossoverToProducts` is the carve-out a `catalog: paints` source needs in order to send a
+    row to the PRODUCT catalog instead; mfr-warmachine carries no `catalog:` key, so it is not
+    a paint source and all 609 of its rows already publish as products (the 222 P3 rows as
+    `category: paint` since PR #128). There is nothing to carve out. The 112 rows that must not
+    mint are therefore refused HERE, by sku shape, and reported as candidates.
+
+    Nor does minting re-open the double-publish that invariant guards. That guard is about a
+    BOXED SET reaching both catalogs; an individual paint legitimately appears in both, and
+    already does by this exact route -- gen_paint_barcodes.py reads mfr-gw-trade's product
+    evidence (also a source with no `catalog:` key) to barcode the paint catalog's GW records.
+    What must not happen is a case of six, or a starter set, becoming a paint. That is what
+    `P3_SINGLE_SKU` refuses, and the refusal is the same shape the product side already draws:
+    the case's own sku is the single's minus `-S`.
+
+    MINTED COLOUR-LESS BY DESIGN (`AppendAdditions` stamps Hex "" and R/G/B 0). See
+    data/paints/swatch-sources.yaml for the P3 swatch pass that fills them.
+    """
+    catalog = Catalog("p3", BRANDS_DIR)
+    out = BrandHarvest(catalog)
+    for o in paint_rows("mfr-warmachine", out):
+        sku = str(o.get("sku") or "")
+        if not sku.startswith("SFP3-"):
+            continue  # the other 387 rows are miniatures, books and digital downloads
+        name = P3_TITLE.sub("", o["name"]).strip()
+        common = {"sourceUrl": o.get("url"), "source": "mfr-warmachine"}
+        if not P3_SINGLE_SKU.fullmatch(sku):
+            # The trade case and the starter set. Reported, not dropped: both are real products
+            # and both already publish as such, so the harvest has to say why the paint catalog
+            # declined them rather than leave a reader to infer it from an absence.
+            out.candidates.append(
+                {"name": name, "sku": sku, "url": o.get("url"), "source": "mfr-warmachine",
+                 "reason": "multi-bottle pack -- crosses to the product catalog"}
+            )
+            continue
+
+        price = observed_price(o, "mfr-warmachine")
+        # `productCode` is the SINGLE's full sku, `-S` INCLUDED. The suffix is Steamforged's,
+        # not ours, and it is what names the one physical product this record is about: strip
+        # it and the paint carries `SFP3-N173`, which is the trade case's own part number and
+        # the code that case publishes under in the product catalog. One code, two products,
+        # and a later set-contents or barcode join with no way to tell them apart.
+        out.additions.append(
+            {"name": name, "set": P3_SET, "productCode": sku,
+             "imageUrl": o.get("imageUrl"), **common, **price}
+        )
+        # AND an enrich entry on the identity the addition just minted. Not redundant: this is
+        # the route the barcode takes (`additions` mint colour-less and barcode-less; the C#
+        # runs `AppendAdditions` BEFORE `ApplyEnrichment`, so the paint born this run takes its
+        # EAN in the same run), and it is what still lands the barcode on the day some other
+        # import ships `<name>|P3 Paints|SFP3-N###-S` first -- `AppendAdditions` skips an
+        # addition whose (Name, Set, ProductCode) already exists, and would otherwise leave
+        # that record barcode-less forever.
+        key = f"{name}|{P3_SET}"
+        ean = str(o.get("ean") or "")
+        out.add_enrich(
+            key,
+            ean=ean if ean13_ok(ean) else None,
+            imageUrl=o.get("imageUrl"),
+            sku=sku,
+            **common,
+            **pinned_price(catalog, key, sku, o, "mfr-warmachine"),
+        )
+    return out
+
+
 BRIDGES = {
     "vallejo": bridge_vallejo,
     "ak-interactive": bridge_ak,
@@ -1831,6 +1975,7 @@ BRIDGES = {
     "green-stuff-world": bridge_gsw,
     "reaper": bridge_reaper,
     "mr-hobby": bridge_mrhobby,
+    "p3": bridge_p3,
 }
 
 

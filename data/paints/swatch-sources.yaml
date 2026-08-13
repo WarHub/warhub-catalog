@@ -9,6 +9,11 @@
 #   stops before logo-covered or unprinted trailing cells, skipCells punches mid-grid
 #   holes), and the per-cell sampling sub-region as cell fractions (dodges the printed
 #   code/name text).
+# A pdf-chart may set `anchorNames: true` instead of `codePattern` when the chart labels its
+# chips with paint NAMES (a name is several words, so no word regex can see it). It then joins
+# through the catalog's own names inside `set`, which becomes REQUIRED -- see
+# gen_paint_swatches.py -- and every repeat of a name is a reading that the extractor reduces
+# by median rather than taking the first.
 # Offsets are calibrated against the rendered contact sheets in data/review/swatches/
 # (regenerate and eyeball them whenever a chart URL/revision changes).
 ak-interactive:
@@ -353,3 +358,70 @@ scale75:
       y0: 0.86
       x1: 0.57
       y1: 0.92
+p3:
+  # Colours for the RELAUNCHED range only (set `P3 Paints`, minted by gen_paint_harvest.py's
+  # bridge_p3). The original Privateer Press sets keep their Arcturus hexes and are not
+  # touched by either chart here -- both are set-scoped, and the two ranges measure a median
+  # 39.7 dRGB apart over their 89 same-named colours, so a chart that spilled across the set
+  # boundary would silently restate one range's colours as the other's.
+  charts:
+    - id: mixing-guide-2024-10
+      url: https://cdn.shopify.com/s/files/1/0602/0156/6449/files/SFG-P3-Mixing-Guide.pdf
+      # NAME-anchored: Steamforged's guide prints paint names, never codes.
+      anchorNames: true
+      set: P3 Paints
+      pages: [0, 1, 2, 3]
+      # Every page is a 4-column BASE / SHADE / HIGHLIGHT / +HIGHLIGHT table; each label cell
+      # has its 16.6 x 16.3pt chip immediately to its left (dx -18.6) and half a line up
+      # (dy -5.25). Chips are embedded images, not vector fills -- the only rects on the page
+      # are the 3%-black zebra stripes -- so this is sampled from the render like every other
+      # chart rather than read out of the PDF's colour operators.
+      sample: { dx: -18.6, dy: -5.25, width: 16.6, height: 16.3, inset: 0.25 }
+      # COVERAGE AND SELF-CONSISTENCY, measured 2026-08-13 over the committed store evidence:
+      # 109 of the 110 singles get a chip. The only miss is Mixing Medium, which is not a
+      # colour and appears in no recipe. Names repeat across recipes (up to 18 cells for
+      # Menoth White) and the repeats agree: of the 84 colours in 2+ cells, the worst cell
+      # sits a median of 0.0 from the consensus, and exactly two disagree at all -- Ryn Flesh
+      # and Greatcoat Grey, each with a single dissenting cell that the median outvotes.
+      # Both were confirmed independently against the product-photo panel below (d=17, d=7).
+    - id: bottle-panel
+      type: item-image
+      useCatalogImages: true
+      set: P3 Paints
+      # The studio background panel IS the paint colour on this range (same shape as
+      # ak-interactive's thirdgen-bottle-bg). Kept as the CROSS-CHECK and as the fill of last
+      # resort: the guide above already covers 109 of 110, but it is a dated artifact
+      # ("Updated: October 2024") and the range is live, so a colour added later will reach
+      # this chart first.
+      #
+      # THE REGION IS A TALL LEFT STRIP ON PURPOSE. 18 metallics plus Mixing Medium (the
+      # store's own $4.65 tier; the other 91 singles are $4.10) are rendered on a SHADED
+      # panel that sweeps light-to-dark to suggest the metal, so a small window reads one
+      # point of a gradient rather than the paint: measured against the guide, a compact
+      # window like AK's scores median d=35.5 on those 19 and only 56% within 40, while this
+      # full-height strip -- whose median spans the whole sweep -- scores 27.2 and 83%. On
+      # the 91 flat panels the two are identical (the panels measure a channel spread of 0.0),
+      # so one region serves both and no metallic special case is needed. Worst spread over
+      # all 110 is 34.8, comfortably inside the 60 rejection ceiling.
+      regions:
+        - { x0: 0.02, y0: 0.05, x1: 0.26, y1: 0.75 }
+      # CALIBRATION vs the guide, 109 colours, 2026-08-13: median dRGB 29.7, 86% within 40.
+      # That residual is a near-CONSTANT darkening, not scatter -- the panel sits R -16.0,
+      # G -16.5, B -18.0 from the chip (per-channel stdev only 5-7, luminance ratio 0.821),
+      # i.e. the render is the paint colour with a fixed exposure offset. Anyone filling a
+      # future colour from this chart should expect ~17/channel too dark and prefer the guide
+      # where it has an entry. Deliberately NOT corrected here: a gain/offset field would be
+      # machinery for zero current fills, and the measurement is the thing worth keeping.
+      #
+      # ONE GENUINE FAILURE, and it is loud rather than silent: Menoth White renders khaki
+      # (#968E63 panel, #938B5C on the bottle body too) against the guide's #F1F1C2, d=164.6
+      # -- art direction, outvoted 18 chips to nothing. It is the reason this chart is second.
+      skipCodes:
+        # Colourless by nature. Its panel is the render's neutral backdrop grey (#A8A8A4),
+        # which is a stand-in and not a pigment, and the guide gives it no chip precisely
+        # because it has no colour. Minted as a paint (it is part of the range) but left
+        # hex-less rather than filled with a plausible grey. Note the repo has gone the other
+        # way for comparable products -- army-painter's 4 mediums and ak-interactive's
+        # translucent effect fluids fill and are flagged for review -- so this is a judgement,
+        # reversible by deleting this line.
+        - SFP3-N235-S

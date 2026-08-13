@@ -1014,6 +1014,39 @@ retract:
     # Double-quoted rather than single: a single-quoted YAML scalar would need `Sophie''s`, which
     # reads like a typo in the one entry that can least afford to look like one.
     - "Master Series Paints Core Colors|Sophie's Mystery Paint Set|9985|"
+  # --- P3: one of the two Arcturus duplicate pairs, and ONLY one (2026-08-13) --------------------
+  # data/paints/brands/p3.yaml carries two near-duplicate pairs, both inherited verbatim from
+  # upstream P3.md (rows 6 and 73; rows 16 and 17) rather than introduced here. They are NOT the
+  # same kind of problem, and only one of them is decidable:
+  #
+  #   'Jack Bone   #D6D3AA (214,211,170)  vs  Jack Bone         #D6D3AE (214,211,174)   d = 4.0
+  #   Battle Dress Green #5E4E14          vs  Battledress Green #757131                 d = 50.9
+  #
+  # RETRACTED: `Jack Bone`. One pot transcribed twice -- same set, no product codes, and a single
+  # channel differing by 4 units, which is the mission-models MMP-096 shape the exclusion list
+  # above calls "a transcription artefact rather than a category re-listing". Nothing is lost by
+  # folding it: no code, no barcode, and a colour 4 units from the one that survives.
+  #
+  # THE APOSTROPHE FORM IS THE ORIGINAL, and that is a claim about how the copy was made, not a
+  # preference between spellings. `'Jack Bone` is an elision of *warjack*, Privateer Press's own
+  # term, so the apostrophe carries meaning; and corruption runs one way here -- a leading `'` is
+  # the text-literal marker in every spreadsheet these lists pass through and is silently eaten on
+  # export, while nothing plausibly ADDS one. So the pair is an original and a stripped copy, and
+  # the stripped copy goes.
+  #
+  # DELIBERATELY NOT RETRACTED: the Battledress Green pair, on the standard this block already
+  # sets for coat-darmes ("deleting on a coin-flip is worse than leaving duplicates visible").
+  # These two disagree by 50.9, so folding DISCARDS a colour claim rather than a typo, and nothing
+  # available adjudicates which. In particular the relaunched range cannot, and that was measured
+  # rather than assumed (2026-08-13): over the 96 colours the legacy archive and Steamforged's
+  # P3 Mixing Guide both name, the delta runs a median of 41.0 with 13 pairs under 10, so
+  # `Battle Dress Green` at d=5.5 from the new chip and `Battledress Green` at d=48.5 are BOTH
+  # ordinary members of that spread -- one an unusually stable colour, the other a typical
+  # reformulation. A 9x ratio between two draws from that distribution decides nothing. It would
+  # also be the wrong instrument: PR #128 settled that distance to the relaunch measures LINEAGE,
+  # not identity. Left visible for a source that can actually name the original pot.
+  p3:
+    - 'Privateer Press Formula P3|Jack Bone||#D6D3AE'
 
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
