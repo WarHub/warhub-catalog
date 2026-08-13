@@ -191,6 +191,15 @@ def test_every_paint_source_reaches_the_paint_catalog() -> None:
     (346 paints in a 6,914-row trade workbook) and legacy-catalog are product sources that
     happen to carry some paints, and they reach the paint catalog by a different bridge
     (gen_paint_barcodes.py); mfr-reaper is a paint source whose paint-set pages are not.
+
+    IF mfr-warmachine EVER TRIPS THE RATIO, `catalog: paints` IS THE WRONG FIX. It is a
+    manufacturer STOREFRONT that a bridge reads under a documented role exception (see
+    gen_paint_harvest.py), and 387 of its 609 rows are models the product catalog must keep.
+    Flagging it would pull all 609 out of the product catalog to stop 110 paints duplicating.
+    Its margin is not comfortable -- a line moving between Steamforged storefronts already
+    shifted 352 products once (PR #127) -- so if the non-paint side falls below the paint side,
+    narrow this rule (exempt the source, or gate on the crossover declaration) rather than
+    reclassifying a store that sells more than paint.
     """
     paths = _require_repo_data()
     descriptors = load_descriptors(paths.sources)
@@ -653,6 +662,11 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
     -- the worse of the two errors, since the false positive stops good data landing while the
     false negative merely fails to catch a key that is wrong in two places at once.
 
+    A SURVIVOR THAT MERELY NORMALIZES ALIKE IS NOT ONE EITHER, and 2026-08-13 is when that broke:
+    retracting P3's duplicate `Jack Bone` flagged the surviving `'Jack Bone` as a hex typo. Same
+    conclusion as the Wooden Deck case, reached through the name rather than the code -- see the
+    filter below.
+
     Residual blind spots, stated rather than papered over: a key whose SET or NAME component is
     itself mistyped names nothing and has no near-miss either, so it reads as applied; and by the
     same token neither does a key wrong in both code and hex. Nothing in the file can distinguish
@@ -677,14 +691,16 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
         )
         archive = read_yaml(archive_path) or {}
         identities: dict[str, int] = {}
-        by_set_and_name: dict[tuple[str, str], list[str]] = {}
+        # (identity key, RAW name). The raw name is carried because the bucket is NORMALIZED and
+        # therefore over-groups -- see the near-miss filter below.
+        by_set_and_name: dict[tuple[str, str], list[tuple[str, str]]] = {}
         for record in archive.get("paints") or []:
             key = _paint_identity_key(record)
             identities[key] = identities.get(key, 0) + 1
             details = record.get("details") or {}
             by_set_and_name.setdefault(
                 (_normalize(str(details.get("set") or "")), _normalize(str(record["name"]))), []
-            ).append(key)
+            ).append((key, str(record["name"])))
         for authored in keys:
             # PaintOverrideAliases.Load normalizes the authored key as ONE string (:34).
             matches = identities.get(_normalize(str(authored)), 0)
@@ -704,8 +720,26 @@ def test_every_retract_key_names_exactly_one_committed_paint() -> None:
             # retraction of its twin is supposed to leave standing.
             authored_parts = [_normalize(p) for p in parts]
             near = [
-                survivor for survivor in survivors
+                survivor for survivor, raw_name in survivors
                 if sum(1 for a, b in zip(authored_parts, survivor.split("|")) if a != b) == 1
+                # AND the survivor is the record the author was LOOKING AT. The bucket is keyed
+                # by the normalized name, and `_normalize` strips a leading or trailing quote
+                # (NameNormalizer.Normalize:19-26), so two records whose names differ ONLY by
+                # that quote land in one bucket -- P3's `'Jack Bone` (an elision of *warjack*)
+                # and `Jack Bone`, both inherited from upstream P3.md. Retracting either twin
+                # then reads as a hex typo against the other, because the name difference has
+                # already been normalized away and the hex is all that is left to differ.
+                #
+                # This is the 2026-08-07 lesson in a third shape, and it resolves the same way:
+                # a false positive blocks a correct deletion, which is the worse error. A real
+                # typo is transcribed FROM the record it names, so the raw names match exactly;
+                # a name that differs by a character only normalization can erase is a different
+                # record. (Note the survivor here cannot be named by a retract key at all --
+                # `_paint_identity_key` normalizes per component and `PaintOverrideAliases.Load`
+                # normalizes the whole string, so an internal `|'Jack Bone|` survives one pass
+                # and not the other. That asymmetry is documented on `_paint_identity_key`; it
+                # is why the twin is safe from the very key that flags it.)
+                and raw_name == parts[1]
             ]
             if near:
                 mistyped.append((brand_slug, authored, near))

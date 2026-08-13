@@ -98,6 +98,17 @@ public static class VolumeTable
         new("Reaper", null, 15, "dropper"),
 
         // P3
+        // The RELAUNCHED range is 18 ml too, but it is not a pot: Steamforged ships it in a
+        // dropper bottle with a preloaded mixing ball. That difference is not cosmetic here --
+        // `container: pot` on the original Privateer Press records against `dropper` on these is
+        // half of why the relaunch is minted as its own set (`P3 Paints`) rather than backfilled
+        // onto them (gen_paint_harvest.py's `bridge_p3`, and the reverted backfill in PR #128).
+        // Without this rule the brand-wide default below would stamp `pot` on all 110 and erase
+        // the distinction inside the very file that exists to record it.
+        //
+        // Ordered before the brand-wide rule because `Lookup` is first-match-wins and a
+        // set-filtered rule that sits after an unfiltered one for the same brand is unreachable.
+        new("P3 (Privateer Press)", ["P3 Paints"], 18, "dropper"),
         new("P3 (Privateer Press)", null, 18, "pot"),
 
         // Tamiya

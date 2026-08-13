@@ -1014,6 +1014,58 @@ retract:
     # Double-quoted rather than single: a single-quoted YAML scalar would need `Sophie''s`, which
     # reads like a typo in the one entry that can least afford to look like one.
     - "Master Series Paints Core Colors|Sophie's Mystery Paint Set|9985|"
+  # --- P3: two apparent duplicate pairs, TWO DIFFERENT FAULTS (2026-08-13) -----------------------
+  # data/paints/brands/p3.yaml carried two near-duplicate pairs, both inherited verbatim from
+  # upstream P3.md rather than introduced here:
+  #
+  #   'Jack Bone   #D6D3AA (214,211,170)  vs  Jack Bone         #D6D3AE (214,211,174)   d =  4.0
+  #   Battledress Green #757131           vs  Battle Dress Green #5E4E14                d = 50.9
+  #
+  # BOTH ARE RESOLVED BY A SOURCE THAT ADJUDICATES THE LEGACY RANGE ON ITS OWN TERMS: Privateer
+  # Press's own Formula P3 Mixing Guide, April 2022, which predates the Steamforged relaunch
+  # entirely (home.privateerpress.com/wp-content/uploads/2022/05/P3-Mixing-Guide-Web_2022_v1.pdf --
+  # same four-column BASE/SHADE/HIGHLIGHT/+HIGHLIGHT layout, name-labelled chips). Extracted the
+  # same way as the relaunch guide and measured against this archive: 78 of our 130 legacy names
+  # get a chip, and they agree at a MEDIAN OF 2.6 dRGB with 88% inside 10. That is not an
+  # independent opinion about the colours, it is the same data seen twice -- which is exactly what
+  # makes its verdict on these four rows worth acting on.
+  #
+  # `Battle Dress Green` IS NOT A LEGACY PAINT. It is the RELAUNCHED one, mis-filed upstream into
+  # the legacy set, and three things say so together:
+  #   * COLOUR. #5E4E14 sits d=5.5 from Steamforged's chip for the relaunched Battle Dress Green
+  #     (#5C4F19) and d=50.5 from Privateer Press's for Battledress Green (#747131). Its twin
+  #     #757131 is the mirror image -- d=1.0 from Privateer Press, d=48.5 from Steamforged. The
+  #     two guides disagree about this colour by 48.0, so each row matches one range and not the
+  #     other. (This is NOT the lineage-vs-identity error PR #128 warned about: the question here
+  #     is which RANGE a row was transcribed from, and the two ranges' own charts answer it.)
+  #   * SPELLING. Privateer Press printed `Battledress Green`, one word, PIP 93060 -- its own guide
+  #     plus six independent retailer listings (Wayland, Amazon, Dark Elf Dice, Combat Company,
+  #     Over the Brick, Paizo), none of which lists a second green under either spelling. Two words
+  #     is Steamforged's spelling, used on all 110 of its store listings.
+  #   * DATE. Upstream P3.md at b180abb8 (2022-05-15, pre-relaunch) holds `Battledress Green` and
+  #     no `Battle Dress Green` at all; the two-word row appears only after the 2025-03-27 rewrite
+  #     that regenerated every paint file in that repo.
+  # So this row is retracted rather than kept as a duplicate -- and NOTHING IS LOST, because the
+  # paint it describes is published by this same change as `Battle Dress Green|P3 Paints`
+  # (SFP3-N143-S, #5C4F19, ean 5061060701639), which is its correct home.
+  #
+  # `Jack Bone` IS the transcription twin -- the mission-models MMP-096 shape the exclusion list
+  # above describes, "a transcription artefact rather than a category re-listing". Both rows are
+  # the LEGACY colour (d=1.0 and d=4.1 from Privateer Press's #D7D3AA) and both are ~115 from the
+  # relaunched Jack Bone, so unlike the pair above this is one pot written down twice. Both also
+  # predate the relaunch: b180abb8 already carries them. The apostrophe form survives because
+  # Privateer Press's own guide prints `'Jack Bone` -- an elision of *warjack* -- and because
+  # corruption runs one way, a leading `'` being the text-literal marker every spreadsheet eats on
+  # export and nothing plausibly adds. Nothing is lost here either: no code, no barcode, and a
+  # colour 4 units from the survivor's.
+  #
+  # WHY THESE KEYS AND NOT A SWATCH CHART. The Privateer Press guide cannot be committed to
+  # data/paints/swatch-sources.yaml the way Steamforged's is: gen_paint_swatches.py joins through
+  # `productCode`, and all 130 legacy records have none (Arcturus import). The guide is named here
+  # instead so the measurement stays re-derivable by hand.
+  p3:
+    - 'Privateer Press Formula P3|Battle Dress Green||#5E4E14'
+    - 'Privateer Press Formula P3|Jack Bone||#D6D3AE'
 
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both

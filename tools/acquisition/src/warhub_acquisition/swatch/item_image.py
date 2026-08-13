@@ -51,6 +51,15 @@ class ItemImageSpec:
     # (put the historically-calibrated window first). A single-region spec is just a 1-list.
     regions: tuple[CellSample, ...] = (CellSample(0.1, 0.1, 0.9, 0.9),)
     set_name: str | None = None
+    # Codes this chart must never FILL. For products whose honest colour is "none" -- mixing
+    # mediums, thinners, varnishes -- where the image still yields a confident sample (the
+    # render gives them a neutral backdrop) and the guards therefore cannot catch them: a
+    # uniform grey passes the backdrop and spread tests exactly as a real grey paint would.
+    # Narrower than dropping the row: a skipped code is still SAMPLED, so the contact sheet
+    # keeps it and a reviewer can see what the fill would have been. It reaches the calibration
+    # stats only if it already carries a catalog hex to measure a distance against -- which the
+    # colour-less products this exists for do not, so in practice they are sheet-only.
+    skip_codes: frozenset[str] = frozenset()
     reject_backdrop: bool = True
     # Uniformity ceiling: a region whose per-channel spread exceeds this is a busy photo area
     # (text, bottle edges), not a colour surface -- dropped rather than guessed.

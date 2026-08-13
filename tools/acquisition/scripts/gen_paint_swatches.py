@@ -36,7 +36,12 @@ sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.acquire.client import BROWSER_UA, FetchError, PoliteClient  # noqa: E402
 from warhub_acquisition.swatch.grid_image import CellSample, GridSpec, extract_grid  # noqa: E402
 from warhub_acquisition.swatch.item_image import ItemImageSpec, sample_item, template_url  # noqa: E402
-from warhub_acquisition.swatch.pdf_chart import ChartSpec, SampleSpec, extract_chart  # noqa: E402
+from warhub_acquisition.swatch.pdf_chart import (  # noqa: E402
+    ChartSpec,
+    SampleSpec,
+    extract_chart,
+    normalize_label,
+)
 from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
 # --config <path> lets calibration runs (parallel agents, throwaway experiments) use their own
@@ -76,6 +81,7 @@ def load_specs() -> dict[str, tuple[dict, list[ChartSpec | GridSpec]]]:
                             for r in raw_regions
                         ),
                         set_name=chart.get("set"),
+                        skip_codes=frozenset(str(c) for c in chart.get("skipCodes") or ()),
                         reject_backdrop=bool(chart.get("rejectBackdrop", True)),
                         max_spread=float(chart.get("maxSpread", 60.0)),
                     )
@@ -114,7 +120,12 @@ def load_specs() -> dict[str, tuple[dict, list[ChartSpec | GridSpec]]]:
                 ChartSpec(
                     chart_id=chart["id"],
                     url=chart["url"],
-                    code_pattern=chart["codePattern"],
+                    # `codePattern` is optional ONLY for a name-anchored chart, and the empty
+                    # default is never used as a regex there -- `sample_page` branches before
+                    # reading it. Left required otherwise so a typo'd key still fails loudly.
+                    code_pattern=chart.get("codePattern", ""),
+                    anchor_names=bool(chart.get("anchorNames", False)),
+                    cell_gap=float(chart.get("cellGap", 12.0)),
                     pages=tuple(chart.get("pages") or (0,)),
                     sample=SampleSpec(
                         dx=float(sample["dx"]),
@@ -178,10 +189,12 @@ def contact_sheet(swatches, renders, out_path: Path, *, row_h: int = 44, crop_w:
 
 def _run_item_image(slug, spec, catalog, client, applied, cross_checks, unmatched) -> None:
     """One image per code: fill every colour-less catalog paint the spec covers, and sample a
-    deterministic slice of already-coloured ones as the calibration cross-check."""
+    deterministic slice of already-coloured ones as the calibration cross-check.
+
+    `spec.skip_codes` is the third case -- sampled for the sheet, never filled."""
     from PIL import Image
 
-    targets = []       # (code, entry, url, is_fill)
+    targets = []       # (code, entry, url, mode) -- "fill" | "check" | "sheet"
     check_budget = 40  # coloured paints sampled for the distance distribution
     for code in sorted(catalog):
         entry = catalog[code]
@@ -190,16 +203,22 @@ def _run_item_image(slug, spec, catalog, client, applied, cross_checks, unmatche
         url = template_url(spec, code) if spec.url_template else entry["imageUrl"]
         if not url:
             continue
-        if not entry["hex"]:
-            targets.append((code, entry, url, True))
+        # A skipped code is never FILLED -- see ItemImageSpec.skip_codes. It is still sampled,
+        # so it keeps its contact-sheet row: the artifact a reviewer uses to judge whether the
+        # skip was right has to show what the sample would have been. "sheet" rather than
+        # "check" because a colour-less paint has no catalog hex to measure a distance against.
+        if code in spec.skip_codes:
+            targets.append((code, entry, url, "check" if entry["hex"] else "sheet"))
+        elif not entry["hex"]:
+            targets.append((code, entry, url, "fill"))
         elif check_budget > 0:
-            targets.append((code, entry, url, False))
+            targets.append((code, entry, url, "check"))
             check_budget -= 1
 
     rows = []  # (swatch, crop PIL) for the sheet
-    filled = checked = fetch_misses = rejected = 0
+    filled = checked = fetch_misses = rejected = skipped = 0
     distances = []
-    for code, entry, url, is_fill in targets:
+    for code, entry, url, mode in targets:
         try:
             raw = client.get_response(url).content
             image = Image.open(io.BytesIO(raw))
@@ -213,7 +232,12 @@ def _run_item_image(slug, spec, catalog, client, applied, cross_checks, unmatche
             unmatched.append(f"{spec.chart_id}: {code} rejected -- {reason}")
             continue
         rows.append((swatch, image.convert("RGB").crop(swatch.crop_box_px)))
-        if is_fill:
+        if mode == "sheet":
+            skipped += 1
+            unmatched.append(
+                f"{spec.chart_id}: {code} not filled (skipCodes) -- would have been {swatch.hex}"
+            )
+        elif mode == "fill":
             filled += 1
             applied.setdefault(
                 f"{entry['key']}|{code}",
@@ -257,7 +281,8 @@ def _run_item_image(slug, spec, catalog, client, applied, cross_checks, unmatche
         stats = f" calibration: median d={med:.1f}, {within:.0f}% within 40 (n={len(distances)})"
     print(
         f"{slug}/{spec.chart_id}: filled={filled} cross-checked={checked} "
-        f"misses={fetch_misses} rejected={rejected}{stats}"
+        f"misses={fetch_misses} rejected={rejected}"
+        f"{f' skipped={skipped}' if skipped else ''}{stats}"
     )
 
 
@@ -302,8 +327,38 @@ def main() -> None:
                 # Full cells at ~original scale so the printed code stays readable.
                 sheet_size = {"row_h": round(spec.cell_h) + 12, "crop_w": round(spec.cell_w) + 16}
             else:
+                # A name-anchored chart joins through the CATALOG's own names, restricted to
+                # the chart's set. Restricted because a name is not unique across a brand's
+                # ranges the way a code is (P3 alone carries `Cygnar Blue|P3 Paints` and
+                # `Cygnar Blue Base|Privateer Press Formula P3`); without `set` a chart for
+                # one range would silently colour another range's same-named paints.
+                names = None
+                if spec.anchor_names:
+                    if spec.set_name is None:
+                        raise SystemExit(
+                            f"{slug}/{spec.chart_id}: anchorNames needs `set` -- a name-keyed "
+                            "chart with no set can colour a same-named paint in another range."
+                        )
+                    by_name: dict[str, list[str]] = {}
+                    for code, entry in catalog.items():
+                        if entry["set"] == spec.set_name:
+                            by_name.setdefault(
+                                normalize_label(entry["key"].split("|", 1)[0]), []
+                            ).append(code)
+                    # A name TWO paints in one set answer to names neither of them. Dropped and
+                    # reported rather than resolved by dict order -- the same rule the harvest
+                    # bridges apply to an ambiguous `{Name}|{Set}` key, for the same reason:
+                    # guessing which of two paints a chip belongs to is worse than leaving both
+                    # blank. (P3 has none; this is the guard, not a live case.)
+                    names = {n: c[0] for n, c in by_name.items() if len(c) == 1}
+                    for name, codes in sorted(by_name.items()):
+                        if len(codes) > 1:
+                            unmatched.append(
+                                f"{spec.chart_id}: name {name!r} is ambiguous in set "
+                                f"{spec.set_name!r} ({', '.join(sorted(codes))}) -- not anchored"
+                            )
                 with pdfplumber.open(io.BytesIO(raw)) as pdf:
-                    swatches, renders = extract_chart(pdf, spec)
+                    swatches, renders = extract_chart(pdf, spec, names=names)
                 method = "pdf-chart"
                 sheet_size = {}
             contact_sheet(swatches, renders, REVIEW_DIR / f"{slug}-{spec.chart_id}.jpg", **sheet_size)
