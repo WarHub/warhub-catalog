@@ -419,6 +419,17 @@ aliases:
     # duplicate the correction exists to remove. The old key is safe to name here because the
     # override rewrites the code BEFORE reconciliation, so nothing else claims it this run.
     Warpaints|Brainmatter Beige|WP1406|#F1F2E2: Warpaints|Brainmatter Beige|WP1405|#F1F2E2
+  p3:
+    # Pairs with the `name:` override in the p3 section below, and required for the same reason
+    # the army-painter line above is: the correction moves the identity key, so without this the
+    # reconciler mints `Trollblood Highlight` fresh and leaves the misspelled record standing.
+    #
+    # THE HEX IS IDENTICAL ON BOTH SIDES, which is what makes this safe. `ApplyRename` assigns
+    # `Hex = fresh.Hex` outright (PaintRecordAdapter.cs:104), so an alias whose fresh side is
+    # hexless DESTROYS the archived colour -- the trap the green-stuff-world block below refuses
+    # its belt-and-braces entries over. Here the base supplies #BBB4A2 before and after; only the
+    # name moves.
+    Privateer Press Formula P3|Trollblood Highlight||#BBB4A2: Privateer Press Formula P3|Trollblod Highlight||#BBB4A2
   green-stuff-world:
     # gsw_clean_name stopped erasing the store's LEADING volume token on 2026-08-05 (17 ml and
     # 60 ml dipping inks are different skus with different gtin13s and prices; erasing it
@@ -1623,3 +1634,26 @@ green-stuff-world:
     hex: '#F89D68'
   Chrome Paint|Chrome:
     hex: '#FCFDFF'
+
+# --- P3: one upstream misspelling, corrected against Privateer Press's own line sheet ----------
+# `Trollblod Highlight` is missing an `o`. Privateer Press's FORMULA P3 PAINT LINE sheet (April
+# 2022, home.privateerpress.com/wp-content/uploads/2022/05/P3-Paint-Line-Web_2022_v2.pdf) prints
+# `Trollblood Highlight`, PIP 93070, and its chip is #BBB4A2 -- byte-identical to this record's
+# hex, so the sheet is naming THIS pot and not some other. Corroborated by retailers listing
+# 93070 under the same spelling, and by the archive's own neighbours `Trollblood Base` and
+# `Trollblood Blue`, which spell the word in full.
+#
+# It is also the ONLY name this pair of Privateer Press documents corrects. Their Mixing Guide
+# disagrees with the archive on two more -- `Bootstrap Brown` against our `Bootstrap Leather`,
+# `Sulphuric Yellow` against our `Sulfuric Yellow` -- and in both cases the ARCHIVE is right and
+# the guide is the one with the typo: the line sheet prints `Bootstrap Leather` (PIP 93031) and
+# `Sulfuric Yellow` (PIP 93026), and it also carries `Battlefiled Brown` for Battlefield Brown.
+# Three typos in the guide against one in the archive, which is why names are taken from the line
+# sheet and only colours from the guide.
+#
+# `name:` is new (see PaintOverride.Name) and the paired `aliases:` entry above is REQUIRED. The
+# key below stays the MISSPELLING for as long as upstream emits it -- it is what the base parse
+# produces, and rewriting it to the corrected name would silently disable the correction.
+p3:
+  Trollblod Highlight|Privateer Press Formula P3:
+    name: Trollblood Highlight

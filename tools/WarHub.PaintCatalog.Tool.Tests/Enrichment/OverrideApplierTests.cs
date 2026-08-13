@@ -41,6 +41,87 @@ public class OverrideApplierTests
     }
 
     [Fact]
+    public void Apply_OverridesName_MovesTheIdentityBeforeReconciliation()
+    {
+        // The point of the field: a base-sourced record whose UPSTREAM NAME is misspelled could
+        // not be corrected at all before this. `aliases:` alone cannot do it -- the base
+        // re-asserts the misspelling every run, CatalogReconciler seeds `consumed` with it, and
+        // the alias is refused (CatalogReconciler.cs:38-46, :83-86), so the run mints a duplicate.
+        // Rewriting the name HERE vacates the old key, exactly as the productCode correction
+        // above does, and the paired alias then stitches the rename to its existing record.
+        string overridesYaml = """
+            citadel-colour:
+              "Mephiston Red|Base":
+                name: "Mephiston Scarlet"
+            """;
+        string path = WriteTempOverrides(overridesYaml);
+
+        try
+        {
+            IReadOnlyList<Paint> result = OverrideApplier.Apply(SamplePaints, "citadel-colour", path);
+
+            Assert.Equal("Mephiston Scarlet", result[0].Name);
+            Assert.Equal("Base", result[0].Set);          // untouched
+            Assert.Equal("#9A0E05", result[0].Hex);       // the rename carries the colour
+            Assert.Equal("Abaddon Black", result[1].Name);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
+    public void Apply_OverridesSet_Applies()
+    {
+        string overridesYaml = """
+            citadel-colour:
+              "Mephiston Red|Base":
+                set: "Base (2012)"
+            """;
+        string path = WriteTempOverrides(overridesYaml);
+
+        try
+        {
+            IReadOnlyList<Paint> result = OverrideApplier.Apply(SamplePaints, "citadel-colour", path);
+
+            Assert.Equal("Base (2012)", result[0].Set);
+            Assert.Equal("Mephiston Red", result[0].Name);
+            Assert.Equal("Base", result[1].Set);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
+    public void Apply_KeyedOnTheNameTheBaseEmits_NotTheCorrectedOne()
+    {
+        // The trap this pins: the lookup key is `{Name}|{Set}` as the base supplies it, so a
+        // renaming block MUST keep the misspelling as its own key. Tidying the key to the
+        // corrected name makes the block match nothing -- a silent no-op that reads like a
+        // completed correction.
+        string overridesYaml = """
+            citadel-colour:
+              "Mephiston Scarlet|Base":
+                name: "Mephiston Scarlet"
+            """;
+        string path = WriteTempOverrides(overridesYaml);
+
+        try
+        {
+            IReadOnlyList<Paint> result = OverrideApplier.Apply(SamplePaints, "citadel-colour", path);
+
+            Assert.Equal("Mephiston Red", result[0].Name);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
     public void Apply_OverridesProductCode_Applies()
     {
         string overridesYaml = """
