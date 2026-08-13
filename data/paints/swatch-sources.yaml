@@ -414,8 +414,21 @@ p3:
       # machinery for zero current fills, and the measurement is the thing worth keeping.
       #
       # ONE GENUINE FAILURE, and it is loud rather than silent: Menoth White renders khaki
-      # (#968E63 panel, #938B5C on the bottle body too) against the guide's #F1F1C2, d=164.6
-      # -- art direction, outvoted 18 chips to nothing. It is the reason this chart is second.
+      # (#968E63 panel, #938B5C on the bottle body too) against the guide's #F1F1C2, d=164.6.
+      # The guide wins, on four independent measurements (2026-08-13):
+      #   * 18 chips across all four guide columns, byte-identical, visually verified against
+      #     their labels in data/review/swatches/p3-mixing-guide-2024-10.jpg;
+      #   * #F1F1C2 sits d=7.9 from PRIVATEER PRESS's own pre-relaunch chip for Menoth White
+      #     Base (#EEEFBB, April 2022 guide) -- an ordinary barely-reformulated delta, in the
+      #     band Royal Violet (4.1) and Runeshot (4.5) occupy. The khaki is d=157.8 from it;
+      #   * the panel error is -97 luminance against a range median of -15.6 (stdev 13.9), i.e.
+      #     -5.8 sigma; the next-worst is Radiant Platinum at -29.8, a gradient metallic;
+      #   * it is not a two-SKU render swap -- no other paint's panel carries the missing cream
+      #     (nearest is Devout White's own #DED8C1 at 31.4).
+      # A single wrong colour fed to the render template, then, not a range-wide method problem:
+      # every other white (Devout, Morrow, Retribution) renders correctly. It is the reason this
+      # chart is second, and the reason it is worth keeping -- one witness could not have caught
+      # it.
       skipCodes:
         # Colourless by nature. Its panel is the render's neutral backdrop grey (#A8A8A4),
         # which is a stand-in and not a pigment, and the guide gives it no chip precisely

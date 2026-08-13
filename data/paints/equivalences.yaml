@@ -1,7 +1,7 @@
 thresholds:
   close: 5
   substitute: 10
-totalEntries: 8001
+totalEntries: 8000
 equivalences:
 - source:
     brand: AK Interactive
@@ -44357,14 +44357,6 @@ equivalences:
     deltaE: 2.06
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Battle Dress Green
-      set: Privateer Press Formula P3
-      hex: '#5E4E14'
-    deltaE: 2.72
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Olive Drab Faded
@@ -44390,6 +44382,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#5A4E1A'
     deltaE: 3.29
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Battle Dress Green
+      productCode: SFP3-N143-S
+      set: P3 Paints
+      hex: '#5C4F19'
+    deltaE: 3.32
     tier: close
 - source:
     brand: AK Interactive
@@ -249183,57 +249184,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Battle Dress Green
-    set: Privateer Press Formula P3
-    hex: '#5E4E14'
-  matches:
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Russian Light Green
-      set: Warfront  Range
-      hex: '#635111'
-    deltaE: 1.63
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Drab Shade
-      productCode: 12A
-      set: Foundry Paint System
-      hex: '#5A4E1A'
-    deltaE: 1.92
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Brownish Green
-      productCode: AK11151
-      set: Standard (3rd Gen)
-      hex: '#57460E'
-    deltaE: 2.72
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Helloliv – Light Olive RAL 6040-f9
-      productCode: RC090
-      set: Real Colors - AFV
-      hex: '#5F5025'
-    deltaE: 3.28
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Rootpath
-      productCode: WP4119P
-      set: John Blanche Masterclass
-      hex: '#584618'
-    deltaE: 3.69
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Battledress Green
     set: Privateer Press Formula P3
     hex: '#757131'
@@ -307448,9 +307398,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Battle Dress Green
-      set: Privateer Press Formula P3
-      hex: '#5E4E14'
-    deltaE: 1.63
+      productCode: SFP3-N143-S
+      set: P3 Paints
+      hex: '#5C4F19'
+    deltaE: 2.67
     tier: close
   - paint:
       brand: Foundry
