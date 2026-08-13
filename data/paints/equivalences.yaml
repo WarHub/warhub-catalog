@@ -1,7 +1,7 @@
 thresholds:
   close: 5
   substitute: 10
-totalEntries: 8000
+totalEntries: 7963
 equivalences:
 - source:
     brand: AK Interactive
@@ -188,9 +188,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Troll Tongue
-      set: Privateer Press Formula P3
-      hex: '#B65E77'
-    deltaE: 3.61
+      productCode: SFP3-N216-S
+      set: P3 Paints
+      hex: '#B25F78'
+    deltaE: 4.42
     tier: close
   - paint:
       brand: Coat D'Armes
@@ -4006,14 +4007,6 @@ equivalences:
     deltaE: 1.69
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 2.12
-    tier: close
-  - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Mournfang Brown
@@ -4028,6 +4021,15 @@ equivalences:
       set: Chameleon Colorshift Metallic
       hex: '#531516'
     deltaE: 2.61
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Red Brown Ii
+      productCode: '131'
+      set: Mr Color
+      hex: '#501D11'
+    deltaE: 2.62
     tier: close
 - source:
     brand: AK Interactive
@@ -4064,20 +4066,21 @@ equivalences:
     deltaE: 2.18
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 2.36
-    tier: close
-  - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Wyldwood
       set: Contrast
       hex: '#432822'
     deltaE: 2.48
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Ashroot
+      productCode: WP4106P
+      set: John Blanche Masterclass
+      hex: '#462C25'
+    deltaE: 2.8
     tier: close
 - source:
     brand: AK Interactive
@@ -4097,14 +4100,6 @@ equivalences:
     deltaE: 0.69
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Lyossan Flesh
-      set: Privateer Press Formula P3
-      hex: '#AC8454'
-    deltaE: 0.78
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Desert Brown
@@ -4112,6 +4107,15 @@ equivalences:
       set: Model Color
       hex: '#AB8556'
     deltaE: 1.19
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Lyossan Flesh
+      productCode: SFP3-N184-S
+      set: P3 Paints
+      hex: '#AD8259'
+    deltaE: 1.81
     tier: close
   - paint:
       brand: Tamiya
@@ -4410,14 +4414,6 @@ equivalences:
     deltaE: 0.92
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 2.54
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Dark Skin
@@ -4443,6 +4439,15 @@ equivalences:
       set: Inktensity Range
       hex: '#422620'
     deltaE: 3.01
+    tier: close
+  - paint:
+      brand: Monument (Pro Acryl)
+      brandSlug: monument-pro-acryl
+      name: Brown Wash
+      productCode: '201'
+      set: Monument Pro Acrylic Wash
+      hex: '#2C170E'
+    deltaE: 3.07
     tier: close
 - source:
     brand: AK Interactive
@@ -4973,10 +4978,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Blindwater Green
-      set: Privateer Press Formula P3
-      hex: '#2A271A'
-    deltaE: 0.85
+      name: Cryx Green
+      productCode: SFP3-N157-S
+      set: P3 Paints
+      hex: '#242317'
+    deltaE: 1.77
     tier: close
   - paint:
       brand: Army Painter
@@ -5833,12 +5839,13 @@ equivalences:
     deltaE: 2.66
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 3.04
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Dark Earth
+      productCode: N72
+      set: Acrysion
+      hex: '#4F493C'
+    deltaE: 3.16
     tier: close
 - source:
     brand: AK Interactive
@@ -6190,14 +6197,6 @@ equivalences:
     deltaE: 2.77
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 2.83
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Voodoo Shade
@@ -6205,6 +6204,14 @@ equivalences:
       set: John Blanche Masterclass
       hex: '#624B1E'
     deltaE: 2.9
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Russian Uniform
+      set: Warfront  Range
+      hex: '#695928'
+    deltaE: 3.01
     tier: close
 - source:
     brand: AK Interactive
@@ -7358,14 +7365,6 @@ equivalences:
     hex: '#524B38'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 1.47
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Dark Olive Drab 41 10ml
@@ -7400,6 +7399,15 @@ equivalences:
       set: Mission Models
       hex: '#504D3A'
     deltaE: 2.45
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Dark Earth
+      productCode: N72
+      set: Acrysion
+      hex: '#4F493C'
+    deltaE: 2.68
     tier: close
 - source:
     brand: AK Interactive
@@ -8057,14 +8065,6 @@ equivalences:
     deltaE: 1.83
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 1.96
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Zombie Flesh
@@ -8080,6 +8080,14 @@ equivalences:
       set: Mecha Color
       hex: '#D8BB81'
     deltaE: 2.76
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Morghast Bone
+      set: Base
+      hex: '#C0A973'
+    deltaE: 2.89
     tier: close
 - source:
     brand: AK Interactive
@@ -8262,14 +8270,6 @@ equivalences:
     deltaE: 2.44
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sul Red
-      set: Privateer Press Formula P3
-      hex: '#4A2518'
-    deltaE: 3.25
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Brown Leather
@@ -8285,6 +8285,15 @@ equivalences:
       set: Mission Models
       hex: '#543425'
     deltaE: 4.01
+    tier: close
+  - paint:
+      brand: Humbrol
+      brandSlug: humbrol
+      name: German Camouflage Red
+      productCode: '160'
+      set: Humbrol Acrylics - Matt
+      hex: '#623319'
+    deltaE: 4.41
     tier: close
 - source:
     brand: AK Interactive
@@ -9966,14 +9975,6 @@ equivalences:
     deltaE: 0.35
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 0.98
-    tier: close
-  - paint:
       brand: Coat D'Armes
       brandSlug: coat-darmes
       name: Chocolate Brown
@@ -9999,6 +10000,14 @@ equivalences:
       set: Acrysion
       hex: '#4F493C'
     deltaE: 2.72
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Noble Skin
+      set: Speedpaint Set 2.0
+      hex: '#4F493D'
+    deltaE: 2.96
     tier: close
 - source:
     brand: AK Interactive
@@ -12602,9 +12611,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 1.16
+      productCode: SFP3-N220-S
+      set: P3 Paints
+      hex: '#75A1AC'
+    deltaE: 1.17
     tier: close
   - paint:
       brand: AK Real Color
@@ -15539,9 +15549,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 1.43
+      productCode: SFP3-N227-S
+      set: P3 Paints
+      hex: '#6F533C'
+    deltaE: 2.06
     tier: close
   - paint:
       brand: Tamiya
@@ -18987,14 +18998,6 @@ equivalences:
     deltaE: 2.58
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Blindwater Green
-      set: Privateer Press Formula P3
-      hex: '#2A271A'
-    deltaE: 3
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Olive Drab Shadow
@@ -19002,6 +19005,14 @@ equivalences:
       set: Acrylics
       hex: '#323017'
     deltaE: 3.1
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Overlord Olive
+      set: Acrylic Colors
+      hex: '#37321F'
+    deltaE: 3.5
     tier: close
 - source:
     brand: AK Interactive
@@ -20130,14 +20141,6 @@ equivalences:
     deltaE: 1.79
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 2.2
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Wood Brown
@@ -20145,6 +20148,14 @@ equivalences:
       set: Acrysion
       hex: '#6A4A31'
     deltaE: 2.48
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Ss Camo Gray Brown
+      set: Warfront  Range
+      hex: '#6F4F36'
+    deltaE: 2.71
     tier: close
 - source:
     brand: AK Interactive
@@ -23803,14 +23814,6 @@ equivalences:
     deltaE: 1.57
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Riven Green
-      set: Privateer Press Formula P3
-      hex: '#99AB90'
-    deltaE: 1.81
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Interior Grey Green
@@ -23835,6 +23838,15 @@ equivalences:
       set: Aircraft Spray
       hex: '#8F9D87'
     deltaE: 2.87
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Scaly Hide
+      productCode: WP1450
+      set: Warpaints
+      hex: '#939F8C'
+    deltaE: 3.5
     tier: close
 - source:
     brand: AK Interactive
@@ -23949,14 +23961,6 @@ equivalences:
     hex: '#332F23'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Cryx Green
-      set: Privateer Press Formula P3
-      hex: '#2C281B'
-    deltaE: 2.32
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Olive Drab Fs 34087
@@ -23989,6 +23993,15 @@ equivalences:
       set: Washes
       hex: '#322A1D'
     deltaE: 3.05
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Camouflage Black Green
+      productCode: '70.741'
+      set: Model Color
+      hex: '#313129'
+    deltaE: 3.12
     tier: close
 - source:
     brand: AK Interactive
@@ -26823,12 +26836,13 @@ equivalences:
     deltaE: 1.93
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 2.33
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Signalbraun RAL 8002
+      productCode: MMP-141
+      set: Mission Models
+      hex: '#733C28'
+    deltaE: 2.51
     tier: close
 - source:
     brand: AK Interactive
@@ -27494,12 +27508,13 @@ equivalences:
     deltaE: 2.07
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sinari Skin
-      set: Privateer Press Formula P3
-      hex: '#4B2B1F'
-    deltaE: 2.14
+      brand: Kimera Kolors
+      brandSlug: kimera-kolors
+      name: Oxide Brown Dark
+      productCode: PBR 11 Dark
+      set: Kimera Kolors Expansion Set 1
+      hex: '#4B3229'
+    deltaE: 2.55
     tier: close
 - source:
     brand: AK Interactive
@@ -27922,14 +27937,6 @@ equivalences:
     hex: '#2A2319'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Immortal Black
-      set: Privateer Press Formula P3
-      hex: '#30281F'
-    deltaE: 1.95
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Afrika Korps Wash
@@ -27954,6 +27961,15 @@ equivalences:
       set: Real Colors - Standard
       hex: '#221F18'
     deltaE: 3.2
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Immortal Black
+      productCode: SFP3-N176-S
+      set: P3 Paints
+      hex: '#27201B'
+    deltaE: 3.22
     tier: close
   - paint:
       brand: Army Painter
@@ -28633,10 +28649,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Blindwater Green
-      set: Privateer Press Formula P3
-      hex: '#2A271A'
-    deltaE: 3.68
+      name: Cryx Green
+      productCode: SFP3-N157-S
+      set: P3 Paints
+      hex: '#242317'
+    deltaE: 4
     tier: close
 - source:
     brand: AK Interactive
@@ -28649,10 +28666,10 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Immortal Black
+      name: Battlefield Brown
       set: Privateer Press Formula P3
-      hex: '#30281F'
-    deltaE: 1.29
+      hex: '#32261D'
+    deltaE: 1.8
     tier: close
   - paint:
       brand: Army Painter
@@ -28758,14 +28775,6 @@ equivalences:
     deltaE: 2.22
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Immortal Black
-      set: Privateer Press Formula P3
-      hex: '#30281F'
-    deltaE: 2.32
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Stone Wash
@@ -28790,6 +28799,15 @@ equivalences:
       set: Air
       hex: '#2B2A24'
     deltaE: 2.82
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Black Soot
+      productCode: '2298'
+      set: Liquid Pigments
+      hex: '#272320'
+    deltaE: 2.88
     tier: close
 - source:
     brand: AK Interactive
@@ -31974,9 +31992,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Immortal Black
-      set: Privateer Press Formula P3
-      hex: '#30281F'
-    deltaE: 2.35
+      productCode: SFP3-N176-S
+      set: P3 Paints
+      hex: '#27201B'
+    deltaE: 2.47
     tier: close
   - paint:
       brand: AK Real Color
@@ -32314,14 +32333,6 @@ equivalences:
     deltaE: 0.66
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 0.75
-    tier: close
-  - paint:
       brand: Mission Models
       brandSlug: mission-models
       name: Signalbraun RAL 8002
@@ -32329,6 +32340,15 @@ equivalences:
       set: Mission Models
       hex: '#733C28'
     deltaE: 1.46
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Basilisk Brown
+      productCode: SFP3-N141-S
+      set: P3 Paints
+      hex: '#6C3E2C'
+    deltaE: 1.91
     tier: close
   - paint:
       brand: Mr Hobby
@@ -32827,14 +32847,6 @@ equivalences:
     hex: '#695032'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 1.21
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Dark earth
@@ -32868,6 +32880,15 @@ equivalences:
       set: Contrast
       hex: '#694C29'
     deltaE: 2.24
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: German Splinter Brown Light
+      productCode: 83C
+      set: Foundry Paint System
+      hex: '#6A553A'
+    deltaE: 2.35
     tier: close
 - source:
     brand: AK Interactive
@@ -33348,14 +33369,6 @@ equivalences:
     deltaE: 0.7
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Tharn Flesh
-      set: Privateer Press Formula P3
-      hex: '#7A5131'
-    deltaE: 1.18
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Natural Sienna
@@ -33363,6 +33376,15 @@ equivalences:
       set: Pigment FX
       hex: '#775233'
     deltaE: 1.28
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Tharn Flesh
+      productCode: SFP3-N212-S
+      set: P3 Paints
+      hex: '#734C30'
+    deltaE: 2.45
     tier: close
   - paint:
       brand: AMMO by Mig Jimenez
@@ -34372,14 +34394,6 @@ equivalences:
     hex: '#2C281F'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Cryx Green
-      set: Privateer Press Formula P3
-      hex: '#2C281B'
-    deltaE: 2.15
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Barrel Grey
@@ -34410,6 +34424,15 @@ equivalences:
       productCode: AMIG1001
       set: Washes
       hex: '#322A1D'
+    deltaE: 3.05
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Gun Metal
+      productCode: RC015
+      set: Real Colors - Standard
+      hex: '#221F18'
     deltaE: 3.05
     tier: close
 - source:
@@ -35109,14 +35132,6 @@ equivalences:
     deltaE: 2.15
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 2.18
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Oxidized Brown
@@ -35124,6 +35139,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#541C0D'
     deltaE: 2.34
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Dried Blood
+      productCode: '72.133'
+      set: Game Color
+      hex: '#622A1D'
+    deltaE: 2.52
     tier: close
 - source:
     brand: AK Interactive
@@ -37205,14 +37229,6 @@ equivalences:
     deltaE: 2.64
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bronze Badge
-      set: Privateer Press Formula P3
-      hex: '#954A02'
-    deltaE: 2.86
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Greedy Gold
@@ -37228,6 +37244,15 @@ equivalences:
       set: Kimera Kolors Expansion Set 1
       hex: '#9A5622'
     deltaE: 3.5
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Red Primer  Shine
+      productCode: AMIG0923
+      set: Primers
+      hex: '#9E5922'
+    deltaE: 3.92
     tier: close
 - source:
     brand: AK Interactive
@@ -44529,20 +44554,21 @@ equivalences:
     deltaE: 1.92
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sinari Skin
-      set: Privateer Press Formula P3
-      hex: '#4B2B1F'
-    deltaE: 2.14
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Brown Leather
       set: Scale Color Range
       hex: '#4D2C1D'
     deltaE: 2.33
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: German Red Tail Light
+      productCode: '70.307'
+      set: Panzer Aces
+      hex: '#503428'
+    deltaE: 2.37
     tier: close
 - source:
     brand: AK Interactive
@@ -48459,12 +48485,13 @@ equivalences:
     deltaE: 2.82
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.91
+      brand: Reaper
+      brandSlug: reaper
+      name: Yellow Ochre
+      productCode: '9331'
+      set: Master Series Paints Core Colors
+      hex: '#CC7822'
+    deltaE: 3.1
     tier: close
 - source:
     brand: AK Interactive
@@ -49778,14 +49805,6 @@ equivalences:
     deltaE: 1.06
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 1.79
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Rotbraun
@@ -49802,6 +49821,15 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#765730'
     deltaE: 2.08
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Rawhide Shade
+      productCode: 11A
+      set: Foundry Paint System
+      hex: '#775937'
+    deltaE: 2.24
     tier: close
 - source:
     brand: AK Interactive
@@ -50560,14 +50588,6 @@ equivalences:
     deltaE: 4.71
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Royal Violet
-      set: Privateer Press Formula P3
-      hex: '#553D55'
-    deltaE: 5.14
-    tier: substitute
-  - paint:
       brand: Coat D'Armes
       brandSlug: coat-darmes
       name: Super Wash Purple
@@ -50575,6 +50595,15 @@ equivalences:
       set: Fantasy Range - Ink Wash
       hex: '#5F3E5B'
     deltaE: 5.25
+    tier: substitute
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Twilight Rose
+      productCode: '72.460'
+      set: Xpress Color
+      hex: '#774755'
+    deltaE: 5.83
     tier: substitute
 - source:
     brand: AK Interactive
@@ -50893,20 +50922,21 @@ equivalences:
     hex: '#29251A'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Cryx Green
-      set: Privateer Press Formula P3
-      hex: '#2C281B'
-    deltaE: 1.35
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Barrel Grey
       set: Acrylic Colors
       hex: '#25221B'
     deltaE: 2.36
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Cryx Green
+      productCode: SFP3-N157-S
+      set: P3 Paints
+      hex: '#242317'
+    deltaE: 2.45
     tier: close
   - paint:
       brand: AK Real Color
@@ -51536,10 +51566,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Blindwater Green
-      set: Privateer Press Formula P3
-      hex: '#2A271A'
-    deltaE: 2.67
+      name: Cryx Green
+      productCode: SFP3-N157-S
+      set: P3 Paints
+      hex: '#242317'
+    deltaE: 2.82
     tier: close
   - paint:
       brand: Monument (Pro Acryl)
@@ -51920,14 +51951,6 @@ equivalences:
     hex: '#302C21'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Cryx Green
-      set: Privateer Press Formula P3
-      hex: '#2C281B'
-    deltaE: 1.7
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Afrika Korps Wash
@@ -51960,6 +51983,14 @@ equivalences:
       set: Model Color
       hex: '#313129'
     deltaE: 3.22
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Ss Camo Top Shadows
+      set: Warfront  Range
+      hex: '#343428'
+    deltaE: 3.64
     tier: close
 - source:
     brand: AK Interactive
@@ -52150,14 +52181,6 @@ equivalences:
     deltaE: 2.13
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 2.37
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: RAL 7028 Dunkelgelb AUS ’44 Dg I
@@ -52165,6 +52188,15 @@ equivalences:
       set: Acrylics
       hex: '#C9BE86'
     deltaE: 2.62
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: New Gold
+      productCode: SDP-116
+      set: Drop & Paint
+      hex: '#D1C488'
+    deltaE: 2.64
     tier: close
 - source:
     brand: AK Interactive
@@ -52743,14 +52775,6 @@ equivalences:
     hex: '#604826'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 2.23
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Dark earth
@@ -52785,6 +52809,15 @@ equivalences:
       hex: '#6A4F2A'
     deltaE: 2.82
     tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Mud Rut
+      productCode: SFP3-N191-S
+      set: P3 Paints
+      hex: '#62492F'
+    deltaE: 3.08
+    tier: close
 - source:
     brand: AK Real Color
     brandSlug: ak-real-color
@@ -52803,14 +52836,6 @@ equivalences:
     deltaE: 0.69
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Lyossan Flesh
-      set: Privateer Press Formula P3
-      hex: '#AC8454'
-    deltaE: 0.87
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Desert Brown
@@ -52818,6 +52843,15 @@ equivalences:
       set: Model Color
       hex: '#AB8556'
     deltaE: 1.13
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Lyossan Flesh
+      productCode: SFP3-N184-S
+      set: P3 Paints
+      hex: '#AD8259'
+    deltaE: 1.98
     tier: close
   - paint:
       brand: Tamiya
@@ -54167,14 +54201,6 @@ equivalences:
     deltaE: 2.47
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 2.79
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Voodoo Shade
@@ -54182,6 +54208,14 @@ equivalences:
       set: John Blanche Masterclass
       hex: '#624B1E'
     deltaE: 2.83
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Papyrus Dip
+      set: Dipping Inks
+      hex: '#6E4E1B'
+    deltaE: 3.22
     tier: close
 - source:
     brand: AK Real Color
@@ -55124,14 +55158,6 @@ equivalences:
     hex: '#B4A796'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Devout White
-      set: Privateer Press Formula P3
-      hex: '#B3A998'
-    deltaE: 1.58
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Cool Neutral Tone
@@ -55147,6 +55173,15 @@ equivalences:
       set: Shade
       hex: '#B4AA9E'
     deltaE: 2.29
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Illuminated Gold
+      productCode: SFP3-N243-S
+      set: P3 Paints
+      hex: '#B0A794'
+    deltaE: 2.53
     tier: close
   - paint:
       brand: Warcolours
@@ -55960,14 +55995,6 @@ equivalences:
     deltaE: 1.15
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 1.35
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Flesh Shadows
@@ -55993,6 +56020,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#531000'
     deltaE: 2.04
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Maroon
+      productCode: TS-11
+      set: Tamiya Spray
+      hex: '#4D1202'
+    deltaE: 2.21
     tier: close
 - source:
     brand: AK Real Color
@@ -56029,20 +56065,21 @@ equivalences:
     deltaE: 2.18
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 2.36
-    tier: close
-  - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Wyldwood
       set: Contrast
       hex: '#432822'
     deltaE: 2.48
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Ashroot
+      productCode: WP4106P
+      set: John Blanche Masterclass
+      hex: '#462C25'
+    deltaE: 2.8
     tier: close
 - source:
     brand: AK Real Color
@@ -58116,12 +58153,13 @@ equivalences:
     deltaE: 1.74
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Greylord
-      set: Privateer Press Formula P3
-      hex: '#48453D'
-    deltaE: 2.61
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Gun Metal
+      productCode: AMIG0045
+      set: Acrylics
+      hex: '#525044'
+    deltaE: 2.74
     tier: close
 - source:
     brand: AK Real Color
@@ -58193,14 +58231,6 @@ equivalences:
     deltaE: 0.35
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 0.9
-    tier: close
-  - paint:
       brand: Coat D'Armes
       brandSlug: coat-darmes
       name: Chocolate Brown
@@ -58226,6 +58256,14 @@ equivalences:
       set: Acrysion
       hex: '#4F493C'
     deltaE: 2.43
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Noble Skin
+      set: Speedpaint Set 2.0
+      hex: '#4F493D'
+    deltaE: 2.69
     tier: close
 - source:
     brand: AK Real Color
@@ -58704,14 +58742,6 @@ equivalences:
     hex: '#5E6158'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 1.04
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Dark Green
@@ -58737,6 +58767,15 @@ equivalences:
       set: Mission Models
       hex: '#595B50'
     deltaE: 2.4
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Pyg Grey
+      productCode: SFP3-N195-S
+      set: P3 Paints
+      hex: '#5A605B'
+    deltaE: 2.45
     tier: close
   - paint:
       brand: Mr Hobby
@@ -61368,14 +61407,6 @@ equivalences:
     deltaE: 1.28
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 1.48
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Granite
@@ -61401,6 +61432,15 @@ equivalences:
       set: Mission Models
       hex: '#595B50'
     deltaE: 1.65
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Dark Green
+      productCode: '71.012'
+      set: Model Air
+      hex: '#5D5E56'
+    deltaE: 1.96
     tier: close
 - source:
     brand: AK Real Color
@@ -65735,20 +65775,20 @@ equivalences:
     deltaE: 1.84
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Hoksune Red
-      set: Privateer Press Formula P3
-      hex: '#4B2015'
-    deltaE: 1.86
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Metallic Black Copper
       set: Metallic paints
       hex: '#4B1C14'
     deltaE: 1.99
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Amethyst Rose
+      set: Privateer Press Formula P3
+      hex: '#481306'
+    deltaE: 2.13
     tier: close
   - paint:
       brand: Reaper
@@ -66842,14 +66882,6 @@ equivalences:
     hex: '#AF8102'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mouldy Ochre
-      set: Privateer Press Formula P3
-      hex: '#B0830E'
-    deltaE: 0.75
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Vivid Metallic Paint - Kingsfall Gold
@@ -66884,6 +66916,15 @@ equivalences:
       set: Acrylics
       hex: '#B7881C'
     deltaE: 2.65
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Clear Gold
+      productCode: GX111
+      set: Mr Clear Color GX
+      hex: '#B7831E'
+    deltaE: 3.04
     tier: close
 - source:
     brand: Army Painter
@@ -66973,9 +67014,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 2.94
+      productCode: SFP3-N208-S
+      set: P3 Paints
+      hex: '#286795'
+    deltaE: 3.49
     tier: close
   - paint:
       brand: Vallejo
@@ -67097,10 +67139,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Meridius Blue
-      set: Privateer Press Formula P3
-      hex: '#1F9095'
-    deltaE: 0.85
+      name: Meredius Blue
+      productCode: SFP3-N188-S
+      set: P3 Paints
+      hex: '#279399'
+    deltaE: 1.75
     tier: close
   - paint:
       brand: Vallejo
@@ -68760,12 +68803,13 @@ equivalences:
     deltaE: 3.15
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 3.85
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Red Brown Ii
+      productCode: '131'
+      set: Mr Color
+      hex: '#501D11'
+    deltaE: 3.87
     tier: close
 - source:
     brand: Army Painter
@@ -68842,14 +68886,6 @@ equivalences:
     deltaE: 1.61
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Broken Brick
-      set: Privateer Press Formula P3
-      hex: '#A53331'
-    deltaE: 2.34
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Blood Red
@@ -68866,6 +68902,14 @@ equivalences:
       set: Kimera Kolors Pure Pigments
       hex: '#A82135'
     deltaE: 2.87
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Red 3
+      set: Layer paints
+      hex: '#A71A22'
+    deltaE: 2.94
     tier: close
 - source:
     brand: Army Painter
@@ -70865,14 +70909,6 @@ equivalences:
     deltaE: 2.52
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sul Red
-      set: Privateer Press Formula P3
-      hex: '#4A2518'
-    deltaE: 2.55
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: RN Hull Red
@@ -70880,6 +70916,15 @@ equivalences:
       set: Naval
       hex: '#572711'
     deltaE: 2.82
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Deathless Metal
+      productCode: SFP3-N228-S
+      set: P3 Paints
+      hex: '#47230B'
+    deltaE: 3
     tier: close
   - paint:
       brand: Mr Hobby
@@ -74955,12 +75000,13 @@ equivalences:
     deltaE: 2.3
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 2.42
+      brand: Foundry
+      brandSlug: foundry
+      name: Deep Blue Light
+      productCode: 20C
+      set: Foundry Paint System
+      hex: '#005192'
+    deltaE: 3.24
     tier: close
 - source:
     brand: Army Painter
@@ -79510,14 +79556,6 @@ equivalences:
     deltaE: 1.35
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 1.55
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Red Brown Ii
@@ -79525,6 +79563,15 @@ equivalences:
       set: Mr Color
       hex: '#501D11'
     deltaE: 1.83
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Rot (rotbraun) – Red (red Brown) RAL 8013
+      productCode: RC066
+      set: Real Colors - AFV
+      hex: '#55160D'
+    deltaE: 2.62
     tier: close
 - source:
     brand: Army Painter
@@ -81451,12 +81498,13 @@ equivalences:
     deltaE: 2.7
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sinari Skin
-      set: Privateer Press Formula P3
-      hex: '#4B2B1F'
-    deltaE: 2.89
+      brand: Mission Models
+      brandSlug: mission-models
+      name: NATO Brown
+      productCode: MMP-033
+      set: Mission Models
+      hex: '#543425'
+    deltaE: 2.98
     tier: close
 - source:
     brand: Army Painter
@@ -81604,12 +81652,13 @@ equivalences:
     deltaE: 2.27
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.51
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Light Rust
+      productCode: AK19316
+      set: Acrylic Wash
+      hex: '#D56E11'
+    deltaE: 2.55
     tier: close
 - source:
     brand: Army Painter
@@ -89159,20 +89208,21 @@ equivalences:
     deltaE: 1.17
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 1.56
-    tier: close
-  - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Sotek Green
       set: Layer
       hex: '#0B6371'
     deltaE: 2.81
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Trollblood Blue
+      productCode: SFP3-N217-S
+      set: P3 Paints
+      hex: '#156E75'
+    deltaE: 3.12
     tier: close
   - paint:
       brand: Tamiya
@@ -89809,14 +89859,6 @@ equivalences:
     hex: '#8B7C68'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 1.35
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Mid Orient Dust
@@ -89832,6 +89874,14 @@ equivalences:
       set: Base
       hex: '#8D806F'
     deltaE: 1.93
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Muddy Wash
+      set: Privateer Press Formula P3 Wash
+      hex: '#8A7F6E'
+    deltaE: 2.16
     tier: close
   - paint:
       brand: AK Real Color
@@ -92737,14 +92787,6 @@ equivalences:
     deltaE: 3.07
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Riven Green
-      set: Privateer Press Formula P3
-      hex: '#99AB90'
-    deltaE: 3.37
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Pale Olive
@@ -92752,6 +92794,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#A5B58E'
     deltaE: 3.42
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Italian Tank Crew Highlights
+      productCode: '70.331'
+      set: Panzer Aces
+      hex: '#9EB193'
+    deltaE: 3.44
     tier: close
 - source:
     brand: Army Painter
@@ -94291,14 +94342,6 @@ equivalences:
     hex: '#352D25'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Immortal Black
-      set: Privateer Press Formula P3
-      hex: '#30281F'
-    deltaE: 1.73
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: 6k Russian Brown
@@ -94333,6 +94376,15 @@ equivalences:
       set: Model Color
       hex: '#302722'
     deltaE: 2.82
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Slate Grey
+      productCode: SW-42
+      set: Warfront  Range
+      hex: '#3D362F'
+    deltaE: 2.96
     tier: close
 - source:
     brand: Army Painter
@@ -95215,14 +95267,6 @@ equivalences:
     deltaE: 1.29
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 3.17
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Marine Blue
@@ -95247,6 +95291,14 @@ equivalences:
       productCode: XF-8
       set: Acrylics Mini Flat
       hex: '#284C7B'
+    deltaE: 4.22
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Alaitoc Blue
+      set: Layer
+      hex: '#2F4F85'
     deltaE: 4.22
     tier: close
 - source:
@@ -97972,20 +98024,21 @@ equivalences:
     hex: '#018F9B'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Meridius Blue
-      set: Privateer Press Formula P3
-      hex: '#1F9095'
-    deltaE: 2.66
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Turquoise 3
       set: Layer paints
       hex: '#0093A5'
     deltaE: 2.67
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Meredius Blue
+      productCode: SFP3-N188-S
+      set: P3 Paints
+      hex: '#279399'
+    deltaE: 2.72
     tier: close
   - paint:
       brand: Scale75
@@ -98043,9 +98096,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 1.28
+      productCode: SFP3-N141-S
+      set: P3 Paints
+      hex: '#6C3E2C'
+    deltaE: 1.66
     tier: close
   - paint:
       brand: Foundry
@@ -98707,14 +98761,6 @@ equivalences:
     deltaE: 1.41
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Hoksune Red
-      set: Privateer Press Formula P3
-      hex: '#4B2015'
-    deltaE: 1.74
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Red Primer Base
@@ -98730,6 +98776,14 @@ equivalences:
       set: Metallic paints
       hex: '#4B1C14'
     deltaE: 1.97
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Amethyst Rose
+      set: Privateer Press Formula P3
+      hex: '#481306'
+    deltaE: 2.2
     tier: close
   - paint:
       brand: Reaper
@@ -98963,14 +99017,6 @@ equivalences:
     deltaE: 1.3
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Hoksune Red
-      set: Privateer Press Formula P3
-      hex: '#4B2015'
-    deltaE: 1.5
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Oxidized Brown
@@ -98995,6 +99041,15 @@ equivalences:
       set: Metallic paints
       hex: '#4B1C14'
     deltaE: 2.44
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Muddy Water
+      productCode: '26.221'
+      set: Diorama FX
+      hex: '#482215'
+    deltaE: 2.61
     tier: close
 - source:
     brand: Army Painter
@@ -99797,14 +99852,6 @@ equivalences:
     deltaE: 2.6
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mouldy Ochre
-      set: Privateer Press Formula P3
-      hex: '#B0830E'
-    deltaE: 2.65
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Clear Gold
@@ -99821,6 +99868,15 @@ equivalences:
       set: Metallic Colors
       hex: '#B0861B'
     deltaE: 3.01
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Bronze -89-
+      productCode: AK3087
+      set: Figures
+      hex: '#B78629'
+    deltaE: 3.02
     tier: close
 - source:
     brand: Army Painter
@@ -101888,10 +101944,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Greylord
-      set: Privateer Press Formula P3
-      hex: '#48453D'
-    deltaE: 2.93
+      name: Mage Hunter Green
+      productCode: SFP3-N185-S
+      set: P3 Paints
+      hex: '#3F4233'
+    deltaE: 3.1
     tier: close
 - source:
     brand: Army Painter
@@ -103404,10 +103461,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Meridius Blue
-      set: Privateer Press Formula P3
-      hex: '#1F9095'
-    deltaE: 0.14
+      name: Meredius Blue
+      productCode: SFP3-N188-S
+      set: P3 Paints
+      hex: '#279399'
+    deltaE: 1.34
     tier: close
   - paint:
       brand: Monument (Pro Acryl)
@@ -104413,14 +104471,6 @@ equivalences:
     deltaE: 1.88
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 1.97
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: French Hussar Sky Blue Shade
@@ -104428,6 +104478,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#2C5A95'
     deltaE: 1.98
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Pure blue
+      productCode: LP-6
+      set: Lacquer Paint
+      hex: '#005BAC'
+    deltaE: 2.14
     tier: close
 - source:
     brand: Army Painter
@@ -105338,14 +105397,6 @@ equivalences:
     deltaE: 3
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 3.01
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: German Pea Pattern Tan Shade
@@ -105353,6 +105404,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#987C64'
     deltaE: 3.62
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Cinnamon
+      productCode: AMIG0135
+      set: Acrylics
+      hex: '#937D6F'
+    deltaE: 3.74
     tier: close
 - source:
     brand: Citadel Colour
@@ -112943,14 +113003,6 @@ equivalences:
     deltaE: 2.12
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 2.81
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Rusty Gold
@@ -112975,6 +113027,15 @@ equivalences:
       set: Warpaints Fanatic
       hex: '#745218'
     deltaE: 3.43
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Oil Stains (Gloss)
+      productCode: '69.813'
+      set: Mecha Color
+      hex: '#73531A'
+    deltaE: 3.5
     tier: close
 - source:
     brand: Citadel Colour
@@ -113196,14 +113257,6 @@ equivalences:
     deltaE: 0.99
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 1.29
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Old Metal
@@ -113229,6 +113282,14 @@ equivalences:
       set: Air
       hex: '#6B4C2D'
     deltaE: 1.79
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Leather Brown
+      set: Warpaints Air
+      hex: '#67471E'
+    deltaE: 2.35
     tier: close
 - source:
     brand: Citadel Colour
@@ -114952,12 +115013,13 @@ equivalences:
     deltaE: 3.5
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 3.57
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Russian Blue Amt-7
+      productCode: AMIG0251
+      set: Acrylics
+      hex: '#2F737E'
+    deltaE: 3.96
     tier: close
 - source:
     brand: Citadel Colour
@@ -115971,12 +116033,13 @@ equivalences:
     deltaE: 1.93
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 2.33
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Signalbraun RAL 8002
+      productCode: MMP-141
+      set: Mission Models
+      hex: '#733C28'
+    deltaE: 2.51
     tier: close
 - source:
     brand: Citadel Colour
@@ -116565,14 +116628,6 @@ equivalences:
     deltaE: 3.04
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Devout White
-      set: Privateer Press Formula P3
-      hex: '#B3A998'
-    deltaE: 3.07
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Skeleton Bone
@@ -116580,6 +116635,15 @@ equivalences:
       set: Warpaints
       hex: '#C2AE9D'
     deltaE: 3.51
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Spectral Steel
+      productCode: SFP3-N244-S
+      set: P3 Paints
+      hex: '#ADA89F'
+    deltaE: 3.63
     tier: close
   - paint:
       brand: Warcolours
@@ -120525,14 +120589,6 @@ equivalences:
     deltaE: 1.13
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 2.78
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Vanity Blue
@@ -120540,6 +120596,15 @@ equivalences:
       set: Scalecolor Games
       hex: '#1A6E8D'
     deltaE: 2.95
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Runeshot
+      productCode: SFP3-N201-S
+      set: P3 Paints
+      hex: '#2E768D'
+    deltaE: 3.19
     tier: close
   - paint:
       brand: Tamiya
@@ -120838,14 +120903,6 @@ equivalences:
     deltaE: 3
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 3.01
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: German Pea Pattern Tan Shade
@@ -120853,6 +120910,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#987C64'
     deltaE: 3.62
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Cinnamon
+      productCode: AMIG0135
+      set: Acrylics
+      hex: '#937D6F'
+    deltaE: 3.74
     tier: close
 - source:
     brand: Citadel Colour
@@ -123517,14 +123583,6 @@ equivalences:
     deltaE: 1.79
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Greylord
-      set: Privateer Press Formula P3
-      hex: '#48453D'
-    deltaE: 1.91
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Charcoal Black
@@ -123541,6 +123599,15 @@ equivalences:
       set: Weathering FX
       hex: '#46413E'
     deltaE: 2.18
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Greylord
+      productCode: SFP3-N169-S
+      set: P3 Paints
+      hex: '#41413C'
+    deltaE: 2.5
     tier: close
 - source:
     brand: Citadel Colour
@@ -123575,14 +123642,6 @@ equivalences:
     deltaE: 2.12
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bronze Badge
-      set: Privateer Press Formula P3
-      hex: '#954A02'
-    deltaE: 2.3
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Conker Brown Light
@@ -123590,6 +123649,14 @@ equivalences:
       set: Foundry Paint System
       hex: '#804509'
     deltaE: 2.57
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Hardened Leather
+      set: Speedpaint Set 2.0
+      hex: '#8C501E'
+    deltaE: 3.16
     tier: close
 - source:
     brand: Citadel Colour
@@ -123777,20 +123844,21 @@ equivalences:
     deltaE: 2.5
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 2.61
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Deep Azure
       set: Warpaints Fanatic
       hex: '#006B79'
     deltaE: 2.81
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Light metallic blue
+      productCode: TS-54
+      set: Tamiya Spray
+      hex: '#10667A'
+    deltaE: 2.89
     tier: close
 - source:
     brand: Citadel Colour
@@ -124341,12 +124409,13 @@ equivalences:
     deltaE: 3.5
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 3.57
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Russian Blue Amt-7
+      productCode: AMIG0251
+      set: Acrylics
+      hex: '#2F737E'
+    deltaE: 3.96
     tier: close
 - source:
     brand: Citadel Colour
@@ -125185,10 +125254,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Devout White
-      set: Privateer Press Formula P3
-      hex: '#B3A998'
-    deltaE: 2.31
+      name: Spectral Steel
+      productCode: SFP3-N244-S
+      set: P3 Paints
+      hex: '#ADA89F'
+    deltaE: 2.58
     tier: close
   - paint:
       brand: Warcolours
@@ -127334,14 +127404,6 @@ equivalences:
     deltaE: 3.35
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 3.87
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Pine Hollow Shade
@@ -127349,6 +127411,15 @@ equivalences:
       set: John Blanche Masterclass
       hex: '#3E6D6C'
     deltaE: 3.9
+    tier: close
+  - paint:
+      brand: Turbo Dork
+      brandSlug: turbo-dork
+      name: Skyrat
+      productCode: TDK015731_1
+      set: Turbo Dork
+      hex: '#476465'
+    deltaE: 4
     tier: close
 - source:
     brand: Citadel Colour
@@ -128743,14 +128814,6 @@ equivalences:
     hex: '#5F3E5B'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Royal Violet
-      set: Privateer Press Formula P3
-      hex: '#553D55'
-    deltaE: 3.15
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Purple
@@ -128758,6 +128821,15 @@ equivalences:
       set: Model Color
       hex: '#533152'
     deltaE: 4.26
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Royal Violet
+      productCode: SFP3-N198-S
+      set: P3 Paints
+      hex: '#513D56'
+    deltaE: 4.3
     tier: close
   - paint:
       brand: AK Interactive
@@ -129000,9 +129072,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 1.39
+      productCode: SFP3-N201-S
+      set: P3 Paints
+      hex: '#2E768D'
+    deltaE: 2.43
     tier: close
   - paint:
       brand: Mission Models
@@ -132569,14 +132642,6 @@ equivalences:
     deltaE: 1.97
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 2.03
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Ivory RLM05
@@ -132593,6 +132658,15 @@ equivalences:
       set: Acrylics
       hex: '#C6B074'
     deltaE: 2.69
+    tier: close
+  - paint:
+      brand: Reaper
+      brandSlug: reaper
+      name: Yellowed Ivory
+      productCode: '9143'
+      set: Master Series Paints Core Colors
+      hex: '#D3BD84'
+    deltaE: 3
     tier: close
 - source:
     brand: Coat D'Armes
@@ -133558,14 +133632,6 @@ equivalences:
     deltaE: 4.96
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Troll Tongue
-      set: Privateer Press Formula P3
-      hex: '#B65E77'
-    deltaE: 5.15
-    tier: substitute
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Crowberry
@@ -133573,6 +133639,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#AD5669'
     deltaE: 5.31
+    tier: substitute
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Crimson Veil
+      productCode: AK19310
+      set: Acrylic Wash
+      hex: '#C06274'
+    deltaE: 5.4
     tier: substitute
 - source:
     brand: Coat D'Armes
@@ -134282,14 +134357,6 @@ equivalences:
     deltaE: 1.78
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 1.96
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Gun Metal
@@ -134297,6 +134364,15 @@ equivalences:
       set: Acrylics
       hex: '#525044'
     deltaE: 3.06
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Granite
+      productCode: 31B
+      set: Foundry Paint System
+      hex: '#5D5B4E'
+    deltaE: 3.34
     tier: close
 - source:
     brand: Coat D'Armes
@@ -134334,14 +134410,6 @@ equivalences:
     deltaE: 2.78
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 2.85
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Dark Olive Drab 41 10ml
@@ -134349,6 +134417,15 @@ equivalences:
       set: Real Colors - Air
       hex: '#564F3F'
     deltaE: 3.22
+    tier: close
+  - paint:
+      brand: Reaper
+      brandSlug: reaper
+      name: Aged Pewter
+      productCode: '9196'
+      set: Master Series Paints Core Colors
+      hex: '#575036'
+    deltaE: 3.39
     tier: close
 - source:
     brand: Coat D'Armes
@@ -139496,14 +139573,6 @@ equivalences:
     deltaE: 2.53
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 2.69
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Wolf Grey
@@ -139511,6 +139580,15 @@ equivalences:
       set: Master Series Paints Bones
       hex: '#7C7469'
     deltaE: 3.05
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Blackwater Sand
+      productCode: SFP3-N148-S
+      set: P3 Paints
+      hex: '#837866'
+    deltaE: 3.17
     tier: close
   - paint:
       brand: Citadel Colour
@@ -139608,14 +139686,6 @@ equivalences:
     deltaE: 2.07
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 3.33
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Dark ghost gray
@@ -139623,6 +139693,15 @@ equivalences:
       set: Lacquer Paint
       hex: '#80A1B0'
     deltaE: 3.53
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Russian AF Grey N.7
+      productCode: '71.343'
+      set: Model Air
+      hex: '#739CB0'
+    deltaE: 3.8
     tier: close
 - source:
     brand: Foundry
@@ -140846,14 +140925,6 @@ equivalences:
     deltaE: 3.49
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bronze Badge
-      set: Privateer Press Formula P3
-      hex: '#954A02'
-    deltaE: 4.02
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Orange Brown
@@ -140861,6 +140932,15 @@ equivalences:
       set: Quick Gen
       hex: '#8F4D15'
     deltaE: 4.05
+    tier: close
+  - paint:
+      brand: Monument (Pro Acryl)
+      brandSlug: monument-pro-acryl
+      name: Flameon Dark Orange Brown
+      productCode: S26
+      set: Monument Pro Signature Series
+      hex: '#8D5C25'
+    deltaE: 4.63
     tier: close
 - source:
     brand: Foundry
@@ -143015,12 +143095,13 @@ equivalences:
     deltaE: 2.93
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 3.03
+      brand: Humbrol
+      brandSlug: humbrol
+      name: German Camouflage Red
+      productCode: '160'
+      set: Humbrol Acrylics - Matt
+      hex: '#623319'
+    deltaE: 3.06
     tier: close
 - source:
     brand: Foundry
@@ -144407,13 +144488,13 @@ equivalences:
     deltaE: 4.35
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 4.45
-    tier: close
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Metallic Emerald
+      set: Metallic paints
+      hex: '#298B52'
+    deltaE: 5.05
+    tier: substitute
 - source:
     brand: Foundry
     brandSlug: foundry
@@ -144562,11 +144643,11 @@ equivalences:
     deltaE: 2.61
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Marine 4
+      set: Layer paints
+      hex: '#005AA3'
     deltaE: 2.76
     tier: close
 - source:
@@ -145563,14 +145644,6 @@ equivalences:
     hex: '#5A7F5D'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 1.3
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Dark green 2
@@ -145604,6 +145677,15 @@ equivalences:
       set: Mr Color
       hex: '#68825D'
     deltaE: 3.57
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Mutation Green
+      productCode: '72.105'
+      set: Game Color
+      hex: '#4C7650'
+    deltaE: 4.19
     tier: close
 - source:
     brand: Foundry
@@ -148694,12 +148776,13 @@ equivalences:
     deltaE: 3.25
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 3.27
+      brand: Reaper
+      brandSlug: reaper
+      name: Mahogany Brown
+      productCode: '9070'
+      set: Master Series Paints Core Colors
+      hex: '#241210'
+    deltaE: 3.5
     tier: close
 - source:
     brand: Foundry
@@ -149591,14 +149674,6 @@ equivalences:
     deltaE: 0.39
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 1.2
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Camo Medium Brown
@@ -149624,6 +149699,15 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#765730'
     deltaE: 1.64
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 1.93
     tier: close
 - source:
     brand: Foundry
@@ -150592,14 +150676,6 @@ equivalences:
     deltaE: 3.58
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 3.66
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Moss Green
@@ -150607,6 +150683,15 @@ equivalences:
       set: Drop & Paint
       hex: '#54774A'
     deltaE: 3.72
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: MS Green
+      productCode: SG7
+      set: Gundam Color Spray
+      hex: '#426A4E'
+    deltaE: 4.38
     tier: close
 - source:
     brand: Foundry
@@ -153023,14 +153108,6 @@ equivalences:
     deltaE: 2.64
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.71
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Yellow Ochre
@@ -153046,6 +153123,15 @@ equivalences:
       set: Instant Colors Range
       hex: '#CA854E'
     deltaE: 3.55
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Copper
+      productCode: N10
+      set: Acrysion
+      hex: '#CE722A'
+    deltaE: 3.78
     tier: close
 - source:
     brand: Foundry
@@ -159722,14 +159808,6 @@ equivalences:
     hex: '#557C5D'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 1.36
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: German Splinter Green Light
@@ -159763,6 +159841,15 @@ equivalences:
       set: Warpaints Fanatic
       hex: '#5D7554'
     deltaE: 4.38
+    tier: close
+  - paint:
+      brand: Turbo Dork
+      brandSlug: turbo-dork
+      name: Grave Robber
+      productCode: TDK015380_1
+      set: Turbo Dork
+      hex: '#577155'
+    deltaE: 4.67
     tier: close
 - source:
     brand: Green Stuff World
@@ -163304,14 +163391,6 @@ equivalences:
     deltaE: 2.04
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 2.04
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Oil Stains (Gloss)
@@ -163336,6 +163415,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#745213'
     deltaE: 2.64
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Brown (JGSDF)
+      productCode: XF-72
+      set: Acrylics Mini Flat
+      hex: '#734C0C'
+    deltaE: 2.76
     tier: close
 - source:
     brand: Green Stuff World
@@ -169448,14 +169536,6 @@ equivalences:
     hex: '#B0861B'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mouldy Ochre
-      set: Privateer Press Formula P3
-      hex: '#B0830E'
-    deltaE: 1.25
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Gold
@@ -169488,6 +169568,14 @@ equivalences:
       set: Foundation (discontinued)
       hex: '#AD852E'
     deltaE: 2.27
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Sahara Yellow
+      set: Scale Color Range
+      hex: '#AA852D'
+    deltaE: 2.37
     tier: close
 - source:
     brand: Green Stuff World
@@ -178489,12 +178577,13 @@ equivalences:
     deltaE: 3.23
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Riven Green
-      set: Privateer Press Formula P3
-      hex: '#99AB90'
-    deltaE: 3.25
+      brand: Foundry
+      brandSlug: foundry
+      name: Forest Green Light
+      productCode: 26C
+      set: Foundry Paint System
+      hex: '#7E9C84'
+    deltaE: 3.87
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -178834,14 +178923,6 @@ equivalences:
     deltaE: 1.75
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mouldy Ochre
-      set: Privateer Press Formula P3
-      hex: '#B0830E'
-    deltaE: 2.02
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Bronze -89-
@@ -178858,6 +178939,15 @@ equivalences:
       set: Mr Clear Color GX
       hex: '#B7831E'
     deltaE: 2.34
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Gold
+      productCode: '69.059'
+      set: Mecha Color
+      hex: '#AC8424'
+    deltaE: 2.76
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -180779,14 +180869,6 @@ equivalences:
     hex: '#745739'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 0.36
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Camo Medium Brown
@@ -180821,6 +180903,15 @@ equivalences:
       set: Pigment FX
       hex: '#785937'
     deltaE: 1.52
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 1.8
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -183439,14 +183530,6 @@ equivalences:
     deltaE: 0.87
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 1.17
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Rawhide Shade
@@ -183472,6 +183555,15 @@ equivalences:
       set: Aqueous Hobby Color
       hex: '#765730'
     deltaE: 1.63
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Camo Medium Brown
+      productCode: SW-08
+      set: Warfront  Range
+      hex: '#775839'
+    deltaE: 1.71
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -184695,14 +184787,6 @@ equivalences:
     deltaE: 1.93
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 1.98
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Zombie Flesh
@@ -184718,6 +184802,14 @@ equivalences:
       set: Mr Color Super Metallic 2
       hex: '#CFB16E'
     deltaE: 2.39
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Mid Ground / Earth
+      set: Soil Works
+      hex: '#C8AD7E'
+    deltaE: 2.75
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -184745,14 +184837,6 @@ equivalences:
     deltaE: 1.83
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 2.26
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Clockwork Brass
@@ -184769,6 +184853,14 @@ equivalences:
       set: AFV
       hex: '#CCB277'
     deltaE: 2.48
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Zombie Flesh
+      set: Acrylic Colors
+      hex: '#C9AC6A'
+    deltaE: 2.64
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -186750,14 +186842,6 @@ equivalences:
     hex: '#C6B074'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 0.98
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: New Iraqui Army Sand
@@ -186790,6 +186874,15 @@ equivalences:
       set: Model Air
       hex: '#C8B269'
     deltaE: 2.62
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Super Gold 2
+      productCode: SM202
+      set: Mr Color Super Metallic 2
+      hex: '#CFB16E'
+    deltaE: 2.68
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -188114,14 +188207,6 @@ equivalences:
     deltaE: 1.79
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 3.46
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Blue Green
@@ -188138,6 +188223,15 @@ equivalences:
       set: Air (3rd Gen)
       hex: '#3B6C71'
     deltaE: 3.7
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Trollblood Blue
+      productCode: SFP3-N217-S
+      set: P3 Paints
+      hex: '#156E75'
+    deltaE: 3.83
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -188738,14 +188832,6 @@ equivalences:
     deltaE: 2.15
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 2.34
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Arbuckles Brown
@@ -188761,6 +188847,14 @@ equivalences:
       set: Panzer Aces
       hex: '#3C2618'
     deltaE: 2.98
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Traitor Red
+      set: Warpaints Air
+      hex: '#34251F'
+    deltaE: 3.02
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -188798,20 +188892,21 @@ equivalences:
     deltaE: 3
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 3.14
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Necro Gold
       set: Metal N Alchemy Range
       hex: '#574E31'
     deltaE: 3.43
+    tier: close
+  - paint:
+      brand: Coat D'Armes
+      brandSlug: coat-darmes
+      name: Dark Leather
+      productCode: '534'
+      set: World War II Range
+      hex: '#5E533D'
+    deltaE: 3.44
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -190681,14 +190776,6 @@ equivalences:
     hex: '#322A1D'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Immortal Black
-      set: Privateer Press Formula P3
-      hex: '#30281F'
-    deltaE: 2.28
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Dark Brown
@@ -190720,6 +190807,14 @@ equivalences:
       set: Warfront  Range
       hex: '#372B15'
     deltaE: 4.13
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Battlefield Brown
+      set: Privateer Press Formula P3
+      hex: '#32261D'
+    deltaE: 4.17
     tier: close
 - source:
     brand: AMMO by Mig Jimenez
@@ -194607,14 +194702,6 @@ equivalences:
     hex: '#235937'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Eldritch Green
-      set: Privateer Press Formula P3
-      hex: '#21573B'
-    deltaE: 2.01
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Lizard Green
@@ -194631,6 +194718,15 @@ equivalences:
       set: Lacquer Paint
       hex: '#295438'
     deltaE: 2.63
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Eldritch Green
+      productCode: SFP3-N162-S
+      set: P3 Paints
+      hex: '#1B593E'
+    deltaE: 2.71
     tier: close
   - paint:
       brand: AMMO by Mig Jimenez
@@ -195972,9 +196068,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 2.1
+      productCode: SFP3-N201-S
+      set: P3 Paints
+      hex: '#2E768D'
+    deltaE: 3.14
     tier: close
   - paint:
       brand: Coat D'Armes
@@ -198082,14 +198179,6 @@ equivalences:
     deltaE: 1.78
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 1.93
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Strong Tone
@@ -198105,6 +198194,15 @@ equivalences:
       set: Model Color
       hex: '#3B2625'
     deltaE: 2.31
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Reddish Black
+      productCode: AK3016
+      set: Figures
+      hex: '#3D2823'
+    deltaE: 3.06
     tier: close
 - source:
     brand: Mission Models
@@ -199804,12 +199902,13 @@ equivalences:
     deltaE: 2.04
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 2.41
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Raf Dark Green
+      productCode: AK11840
+      set: Air (3rd Gen)
+      hex: '#56564C'
+    deltaE: 2.52
     tier: close
 - source:
     brand: Mission Models
@@ -199891,20 +199990,21 @@ equivalences:
     deltaE: 1.46
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 1.7
-    tier: close
-  - paint:
       brand: Warcolours
       brandSlug: warcolours
       name: Metallic Dark Copper
       set: Metallic paints
       hex: '#793C2A'
     deltaE: 1.79
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Basilisk Brown
+      productCode: SFP3-N141-S
+      set: P3 Paints
+      hex: '#6C3E2C'
+    deltaE: 2.35
     tier: close
   - paint:
       brand: Mr Hobby
@@ -202149,14 +202249,6 @@ equivalences:
     hex: '#408C8E'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Meridius Blue
-      set: Privateer Press Formula P3
-      hex: '#1F9095'
-    deltaE: 2.91
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Royal Cloak
@@ -202164,6 +202256,15 @@ equivalences:
       set: Warpaints
       hex: '#1C9095'
     deltaE: 3.02
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Meredius Blue
+      productCode: SFP3-N188-S
+      set: P3 Paints
+      hex: '#279399'
+    deltaE: 3.31
     tier: close
   - paint:
       brand: Mr Hobby
@@ -206263,10 +206364,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Rhok Hide
-      set: Privateer Press Formula P3
-      hex: '#35211C'
-    deltaE: 3.55
+      name: Battlefield Brown
+      productCode: SFP3-N144-S
+      set: P3 Paints
+      hex: '#24120E'
+    deltaE: 3.65
     tier: close
 - source:
     brand: Monument (Pro Acryl)
@@ -207268,14 +207370,6 @@ equivalences:
     deltaE: 1.26
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Drake Grey
-      set: Privateer Press Formula P3
-      hex: '#8D8581'
-    deltaE: 1.68
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Desert Dust
@@ -207300,6 +207394,15 @@ equivalences:
       set: Warpaints
       hex: '#8D887F'
     deltaE: 2.39
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Steingrau-stone Grey RAL 7030 10ml
+      productCode: RC213
+      set: Real Colors - Air
+      hex: '#918C86'
+    deltaE: 2.74
     tier: close
 - source:
     brand: Monument (Pro Acryl)
@@ -209293,14 +209396,6 @@ equivalences:
     deltaE: 2.55
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.68
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Gold Yellow
@@ -209308,6 +209403,15 @@ equivalences:
       set: Game Air
       hex: '#D67419'
     deltaE: 2.76
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Light Rust 1
+      productCode: MMW-002
+      set: Mission Models
+      hex: '#DD732B'
+    deltaE: 3.27
     tier: close
 - source:
     brand: Mr Hobby
@@ -212114,14 +212218,6 @@ equivalences:
     deltaE: 2.52
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 2.55
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Mig-29 Light Grey 10ml
@@ -212129,6 +212225,14 @@ equivalences:
       set: Real Colors - Air
       hex: '#8099A0'
     deltaE: 3.3
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Cobalt Metal
+      set: Metal N Alchemy Range
+      hex: '#7FA2B5'
+    deltaE: 3.44
     tier: close
 - source:
     brand: Mr Hobby
@@ -213869,20 +213973,20 @@ equivalences:
     deltaE: 1.57
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Broken Brick
-      set: Privateer Press Formula P3
-      hex: '#A53331'
-    deltaE: 1.89
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Inktense Red
       set: Inktensity Range
       hex: '#A91E21'
     deltaE: 1.91
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Skorne Red
+      set: Privateer Press Formula P3
+      hex: '#B12024'
+    deltaE: 1.96
     tier: close
 - source:
     brand: Mr Hobby
@@ -214536,14 +214640,6 @@ equivalences:
     deltaE: 2.55
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.68
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Gold Yellow
@@ -214551,6 +214647,15 @@ equivalences:
       set: Game Air
       hex: '#D67419'
     deltaE: 2.76
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Light Rust 1
+      productCode: MMW-002
+      set: Mission Models
+      hex: '#DD732B'
+    deltaE: 3.27
     tier: close
 - source:
     brand: Mr Hobby
@@ -216895,14 +217000,6 @@ equivalences:
     deltaE: 3.78
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 4.37
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Dark green 2
@@ -216910,6 +217007,14 @@ equivalences:
       set: Lacquer Paint
       hex: '#5B8361'
     deltaE: 4.7
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Metallic Emerald
+      set: Metallic paints
+      hex: '#298B52'
+    deltaE: 4.97
     tier: close
 - source:
     brand: Mr Hobby
@@ -219366,14 +219471,6 @@ equivalences:
     deltaE: 1.82
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 2.03
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Tanned Skin
@@ -219381,6 +219478,15 @@ equivalences:
       set: Xpress Color
       hex: '#81452D'
     deltaE: 2.12
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Signalbraun RAL 8002
+      productCode: MMP-141
+      set: Mission Models
+      hex: '#733C28'
+    deltaE: 2.46
     tier: close
 - source:
     brand: Mr Hobby
@@ -225147,12 +225253,13 @@ equivalences:
     deltaE: 2.49
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 2.78
+      brand: Scale75
+      brandSlug: scale75
+      name: Old Metal
+      productCode: SDP-121
+      set: Drop & Paint
+      hex: '#6A4F2A'
+    deltaE: 2.94
     tier: close
 - source:
     brand: Mr Hobby
@@ -228535,14 +228642,6 @@ equivalences:
     deltaE: 2.52
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 2.55
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Mig-29 Light Grey 10ml
@@ -228550,6 +228649,14 @@ equivalences:
       set: Real Colors - Air
       hex: '#8099A0'
     deltaE: 3.3
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Cobalt Metal
+      set: Metal N Alchemy Range
+      hex: '#7FA2B5'
+    deltaE: 3.44
     tier: close
 - source:
     brand: Mr Hobby
@@ -231532,14 +231639,6 @@ equivalences:
     deltaE: 2.55
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.68
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Gold Yellow
@@ -231547,6 +231646,15 @@ equivalences:
       set: Game Air
       hex: '#D67419'
     deltaE: 2.76
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Light Rust 1
+      productCode: MMW-002
+      set: Mission Models
+      hex: '#DD732B'
+    deltaE: 3.27
     tier: close
 - source:
     brand: Mr Hobby
@@ -232866,14 +232974,6 @@ equivalences:
     deltaE: 1.81
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Eldritch Green
-      set: Privateer Press Formula P3
-      hex: '#21573B'
-    deltaE: 2.05
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Yellow Olive
@@ -232881,6 +232981,15 @@ equivalences:
       set: Game Color
       hex: '#1E4F39'
     deltaE: 2.08
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Eldritch Green
+      productCode: SFP3-N162-S
+      set: P3 Paints
+      hex: '#1B593E'
+    deltaE: 2.9
     tier: close
   - paint:
       brand: AK Real Color
@@ -238221,14 +238330,6 @@ equivalences:
     deltaE: 1.18
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 1.57
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Oxidized Brown
@@ -238253,6 +238354,15 @@ equivalences:
       set: Inks
       hex: '#592217'
     deltaE: 2.15
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Red Primer Base
+      productCode: AMIG0920
+      set: Primers
+      hex: '#491404'
+    deltaE: 2.4
     tier: close
 - source:
     brand: Mr Hobby
@@ -238601,14 +238711,6 @@ equivalences:
     deltaE: 2.52
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 2.55
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Mig-29 Light Grey 10ml
@@ -238616,6 +238718,14 @@ equivalences:
       set: Real Colors - Air
       hex: '#8099A0'
     deltaE: 3.3
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Cobalt Metal
+      set: Metal N Alchemy Range
+      hex: '#7FA2B5'
+    deltaE: 3.44
     tier: close
 - source:
     brand: Mr Hobby
@@ -238956,14 +239066,6 @@ equivalences:
     deltaE: 2.09
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 2.88
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Aii Light Blue
@@ -238980,6 +239082,15 @@ equivalences:
       set: Real Colors - Air
       hex: '#8AB0C3'
     deltaE: 3.22
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Voltaic Blue
+      productCode: SFP3-N220-S
+      set: P3 Paints
+      hex: '#75A1AC'
+    deltaE: 3.59
     tier: close
 - source:
     brand: Mr Hobby
@@ -248876,57 +248987,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Arcantrik Green
-    set: Privateer Press Formula P3
-    hex: '#547E5B'
-  matches:
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: German Splinter Green Light
-      productCode: 84C
-      set: Foundry Paint System
-      hex: '#5A7F5D'
-    deltaE: 1.3
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Yoda Green
-      set: Acrylic Colors
-      hex: '#557C5D'
-    deltaE: 1.36
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Dark green 2
-      productCode: LP-56
-      set: Lacquer Paint
-      hex: '#5B8361'
-    deltaE: 2.17
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Mutation Green
-      productCode: '72.105'
-      set: Game Color
-      hex: '#4C7650'
-    deltaE: 3.33
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Hemp Bs4800/10b21 A
-      productCode: H336
-      set: Aqueous Hobby Color
-      hex: '#4D8452'
-    deltaE: 4.37
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Asheth Grey
     set: Privateer Press Formula P3
     hex: '#2A2524'
@@ -249025,109 +249085,6 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#26192D'
     deltaE: 4.76
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Bane Grey
-    set: Privateer Press Formula P3
-    hex: '#564F3D'
-  matches:
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Dark Olive Drab 41 10ml
-      productCode: RC259
-      set: Real Colors - Air
-      hex: '#564F3F'
-    deltaE: 0.9
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: RAL 7017 Dunkelbraun
-      productCode: AK754
-      set: AFV
-      hex: '#575040'
-    deltaE: 0.98
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: US Olive Drab
-      productCode: '70.887'
-      set: Model Color
-      hex: '#59513C'
-    deltaE: 1.39
-    tier: close
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Chocolate Brown
-      productCode: '519'
-      set: World War II Range
-      hex: '#5A5444'
-    deltaE: 1.96
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Olive Drab / Dark Green 1968-74 FS 24087
-      productCode: MMP-172
-      set: Mission Models
-      hex: '#504D3A'
-    deltaE: 2.72
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Basilisk Brown
-    set: Privateer Press Formula P3
-    hex: '#76412B'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Dark Rust
-      productCode: AK708
-      set: General
-      hex: '#73402B'
-    deltaE: 0.75
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Leather Brown
-      productCode: CP3004
-      set: Warpaints Primer
-      hex: '#713E29'
-    deltaE: 1.28
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Signalbraun RAL 8002
-      productCode: MMP-141
-      set: Mission Models
-      hex: '#733C28'
-    deltaE: 1.7
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Red Brown (2)
-      productCode: H463
-      set: Aqueous Hobby Color
-      hex: '#7C422F'
-    deltaE: 2.03
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Calthan Brown
-      set: Foundation (discontinued)
-      hex: '#7A4231'
-    deltaE: 2.33
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -249388,56 +249345,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Bile Thrall
-    set: Privateer Press Formula P3
-    hex: '#6A4E16'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Radiant Yellow
-      productCode: '77.142'
-      set: True Metallic Metal
-      hex: '#664C1C'
-    deltaE: 1.81
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Papyrus Dip
-      set: Dipping Inks
-      hex: '#6E4E1B'
-    deltaE: 2.04
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: British Khaki
-      productCode: AK11127
-      set: Standard (3rd Gen)
-      hex: '#654D1F'
-    deltaE: 2.35
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Greedy Gold
-      set: Warpaints Fanatic
-      hex: '#745218'
-    deltaE: 2.71
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Olive Skin Shadow
-      productCode: '9220'
-      set: Master Series Paints Core Colors
-      hex: '#745213'
-    deltaE: 2.77
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Blazing Ink
     set: Privateer Press Formula P3
     hex: '#EEAA58'
@@ -249490,56 +249397,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Bleached Blue
-    set: Privateer Press Formula P3
-    hex: '#877A68'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Camouflage Grey
-      productCode: '71.118'
-      set: Model Air
-      hex: '#867966'
-    deltaE: 0.61
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Dusty Skull
-      set: Warpaints Fanatic
-      hex: '#8B7C68'
-    deltaE: 1.35
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Runelord Brass
-      set: Base
-      hex: '#8D806F'
-    deltaE: 2.36
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Amt-1 Light Brown 10ml
-      productCode: RC313
-      set: Real Colors - Air
-      hex: '#8B806C'
-    deltaE: 2.64
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: British Equipment Tan
-      productCode: 89B
-      set: Foundry Paint System
-      hex: '#85796D'
-    deltaE: 2.69
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Blighted Gold
     set: Privateer Press Formula P3
     hex: '#8B9742'
@@ -249588,56 +249445,6 @@ equivalences:
       set: Warpaints
       hex: '#919634'
     deltaE: 3.05
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Blindwater Green
-    set: Privateer Press Formula P3
-    hex: '#2A271A'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Wwi French Green 2
-      productCode: AK11306
-      set: AFV (3rd Gen)
-      hex: '#2A281C'
-    deltaE: 0.85
-    tier: close
-  - paint:
-      brand: Humbrol
-      brandSlug: humbrol
-      name: Gun Metal
-      productCode: S53
-      set: Humbrol Aerosol Sprays
-      hex: '#2A2B1B'
-    deltaE: 3.32
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Magnolia Brown
-      set: Warpaints Air
-      hex: '#2C2C24'
-    deltaE: 3.47
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Barrel Grey
-      set: Acrylic Colors
-      hex: '#25221B'
-    deltaE: 3.56
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Afrika Korps Wash
-      productCode: AMIG1001
-      set: Washes
-      hex: '#322A1D'
-    deltaE: 3.71
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -250049,105 +249856,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Broken Brick
-    set: Privateer Press Formula P3
-    hex: '#A53331'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Carmine
-      productCode: '62.006'
-      set: Premium Airbrush Color
-      hex: '#AC2E32'
-    deltaE: 1.62
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Carmine Red
-      productCode: H367
-      set: Aqueous Hobby Color
-      hex: '#A82C29'
-    deltaE: 1.89
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Succubus Red
-      set: D&D Underdark Set
-      hex: '#AA262F'
-    deltaE: 2.34
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Bordeaux Red
-      productCode: AK11094
-      set: Standard (3rd Gen)
-      hex: '#A13B2F'
-    deltaE: 2.79
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Blood Red
-      productCode: AMIG0121
-      set: Acrylics
-      hex: '#AC2B25'
-    deltaE: 3.14
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Bronze Badge
-    set: Privateer Press Formula P3
-    hex: '#954A02'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Light Leather
-      productCode: AK17060
-      set: Quick Gen
-      hex: '#904B14'
-    deltaE: 2.2
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Skrag Brown
-      set: Layer
-      hex: '#8B4806'
-    deltaE: 2.3
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Sepia
-      set: Inks for Shading and Glazing
-      hex: '#8B4201'
-    deltaE: 3.07
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Hardened Leather
-      set: Speedpaint Set 2.0
-      hex: '#8C501E'
-    deltaE: 3.83
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Radiant Orange Dip
-      set: Dipping Inks
-      hex: '#844406'
-    deltaE: 3.97
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Brown Ink
     set: Privateer Press Formula P3
     hex: '#744439'
@@ -250350,58 +250058,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Copper Pipe
-    set: Privateer Press Formula P3
-    hex: '#745738'
-  matches:
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Earth
-      productCode: AMIG0073
-      set: Acrylics
-      hex: '#745739'
-    deltaE: 0.36
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Camo Medium Brown
-      productCode: SW-08
-      set: Warfront  Range
-      hex: '#775839'
-    deltaE: 0.94
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Rawhide Shade
-      productCode: 11A
-      set: Foundry Paint System
-      hex: '#775937'
-    deltaE: 1.2
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Khaki Green
-      productCode: '73.127'
-      set: Pigment FX
-      hex: '#785937'
-    deltaE: 1.3
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Raf Dark Earth
-      productCode: AK11841
-      set: Air (3rd Gen)
-      hex: '#71563B'
-    deltaE: 1.43
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Cryx Bane Base
     set: Privateer Press Formula P3
     hex: '#313A25'
@@ -250499,56 +250155,6 @@ equivalences:
       set: Metal N Alchemy Range
       hex: '#8A8D78'
     deltaE: 2.96
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Cryx Green
-    set: Privateer Press Formula P3
-    hex: '#2C281B'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Rubber Black
-      productCode: AK11027
-      set: Standard (3rd Gen)
-      hex: '#29251A'
-    deltaE: 1.35
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Afrika Korps Wash
-      productCode: AMIG1001
-      set: Washes
-      hex: '#322A1D'
-    deltaE: 2.92
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Barrel Grey
-      set: Acrylic Colors
-      hex: '#25221B'
-    deltaE: 3.63
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Magnolia Brown
-      set: Warpaints Air
-      hex: '#2C2C24'
-    deltaE: 3.67
-    tier: close
-  - paint:
-      brand: Humbrol
-      brandSlug: humbrol
-      name: Gun Metal
-      productCode: S53
-      set: Humbrol Aerosol Sprays
-      hex: '#2A2B1B'
-    deltaE: 3.89
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -250752,157 +250358,6 @@ equivalences:
       set: Kimera Kolors Expansion Set 1
       hex: '#4B3229'
     deltaE: 2.24
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Devout White
-    set: Privateer Press Formula P3
-    hex: '#B3A998'
-  matches:
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Libyan Army Desert Grey
-      productCode: RC103
-      set: Real Colors - AFV
-      hex: '#B4A796'
-    deltaE: 1.58
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Agrax Earthshade Gloss
-      set: Shade
-      hex: '#B4AA9E'
-    deltaE: 2.31
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Cool Neutral Tone
-      productCode: '85.103'
-      set: Arte Deco
-      hex: '#B2A48F'
-    deltaE: 2.41
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Warm Grey 2
-      set: Layer paints
-      hex: '#AAA295'
-    deltaE: 2.67
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Gargoyle Grey
-      set: Warpaints Fanatic
-      hex: '#A8A292'
-    deltaE: 3.02
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Drake Grey
-    set: Privateer Press Formula P3
-    hex: '#8D8581'
-  matches:
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Rainy Gray
-      set: Scale Color Range
-      hex: '#8B8683'
-    deltaE: 1.49
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Blade Steel
-      productCode: '9452'
-      set: Master Series Paints Bones
-      hex: '#908886'
-    deltaE: 1.6
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Matt Cexwish Bone
-      productCode: S23
-      set: Monument Pro Signature Series
-      hex: '#8D857E'
-    deltaE: 1.68
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Gun Metal
-      productCode: CP3025
-      set: Warpaints Primer
-      hex: '#858180'
-    deltaE: 2.84
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Steingrau-stone Grey RAL 7030 10ml
-      productCode: RC213
-      set: Real Colors - Air
-      hex: '#918C86'
-    deltaE: 3.14
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Eldritch Green
-    set: Privateer Press Formula P3
-    hex: '#21573B'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: USMC Tank Crew
-      productCode: '70.319'
-      set: Panzer Aces
-      hex: '#1D573E'
-    deltaE: 1.26
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Dark Angels Green
-      set: Foundation (discontinued)
-      hex: '#19553C'
-    deltaE: 1.54
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Russian Green (2)
-      productCode: '136'
-      set: Mr Color
-      hex: '#205A42'
-    deltaE: 1.93
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: NATO green
-      productCode: LP-58
-      set: Lacquer Paint
-      hex: '#295438'
-    deltaE: 1.94
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Green
-      productCode: MMP-004
-      set: Mission Models
-      hex: '#235937'
-    deltaE: 2.01
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -251364,56 +250819,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Greylord
-    set: Privateer Press Formula P3
-    hex: '#48453D'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Burnt Umber
-      productCode: '85.117'
-      set: Arte Deco
-      hex: '#4B473E'
-    deltaE: 1
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Warm Grey 4
-      set: Layer paints
-      hex: '#494641'
-    deltaE: 1.79
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Skavenblight Dinge
-      set: Layer
-      hex: '#45413B'
-    deltaE: 1.91
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Obsidian Holt
-      productCode: AK19302
-      set: Acrylic Wash
-      hex: '#44413C'
-    deltaE: 2.13
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Granite Shade
-      productCode: 31A
-      set: Foundry Paint System
-      hex: '#4C4741'
-    deltaE: 2.16
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Gun Corps Brown
     set: Privateer Press Formula P3
     hex: '#927D47'
@@ -251568,109 +250973,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Hoksune Red
-    set: Privateer Press Formula P3
-    hex: '#4B2015'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Red Tone
-      productCode: WP1138
-      set: Warpaints Tone
-      hex: '#502114'
-    deltaE: 1.5
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Metallic Black Copper
-      set: Metallic paints
-      hex: '#4B1C14'
-    deltaE: 1.75
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Muddy Water
-      productCode: '26.221'
-      set: Diorama FX
-      hex: '#482215'
-    deltaE: 1.78
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Dark Leather
-      productCode: AK17048
-      set: Quick Gen
-      hex: '#4B211A'
-    deltaE: 1.96
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Red Brown Ii
-      productCode: '131'
-      set: Mr Color
-      hex: '#501D11'
-    deltaE: 2.16
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Icy Yellow
-    set: Privateer Press Formula P3
-    hex: '#C7B378'
-  matches:
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: RAL1039 F9 German Sand Beige
-      productCode: AMIG0027
-      set: Acrylics
-      hex: '#C6B074'
-    deltaE: 0.98
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: New Iraqui Army Sand
-      productCode: AK725
-      set: AFV
-      hex: '#CCB277'
-    deltaE: 1.96
-    tier: close
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Dark Sand
-      productCode: '229'
-      set: Military Range
-      hex: '#CAB876'
-    deltaE: 2.03
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Ivory RLM05
-      productCode: '71.106'
-      set: Model Air
-      hex: '#C8B269'
-    deltaE: 2.79
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Titanium gold
-      productCode: TS-87
-      set: Tamiya Spray
-      hex: '#C7BA82'
-    deltaE: 2.8
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Idrian Flesh
     set: Privateer Press Formula P3
     hex: '#9B5E37'
@@ -251718,56 +251020,6 @@ equivalences:
       set: Mr Metal Color
       hex: '#975829'
     deltaE: 2.94
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Immortal Black
-    set: Privateer Press Formula P3
-    hex: '#30281F'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Dark Brown
-      productCode: AK3053
-      set: Figures
-      hex: '#33291F'
-    deltaE: 1.29
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Rough Iron
-      set: Warpaints Fanatic
-      hex: '#352D25'
-    deltaE: 1.73
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Afrika Korps Wash
-      productCode: AMIG1001
-      set: Washes
-      hex: '#322A1D'
-    deltaE: 2.28
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Black Grey
-      productCode: '70.862'
-      set: Model Color
-      hex: '#302722'
-    deltaE: 2.8
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Barrel Grey
-      set: Acrylic Colors
-      hex: '#25221B'
-    deltaE: 3.93
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -251977,57 +251229,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Kapitan Red
-    set: Privateer Press Formula P3
-    hex: '#D07B3A'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Demigod Flames
-      set: Warpaints Fanatic
-      hex: '#D17B41'
-    deltaE: 1.68
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Light Rust
-      productCode: '76.505'
-      set: Wash FX
-      hex: '#C97932'
-    deltaE: 2.31
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Copper
-      productCode: N10
-      set: Acrysion
-      hex: '#CE722A'
-    deltaE: 2.68
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Tan Light
-      productCode: 14C
-      set: Foundry Paint System
-      hex: '#C57B3A'
-    deltaE: 2.71
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Light Brown
-      productCode: AK11100
-      set: Standard (3rd Gen)
-      hex: '#CF8139'
-    deltaE: 2.91
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Khador Red Base
     set: Privateer Press Formula P3
     hex: '#EE2C24'
@@ -252173,58 +251374,6 @@ equivalences:
       set: Figures
       hex: '#BB7956'
     deltaE: 3.44
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Lyossan Flesh
-    set: Privateer Press Formula P3
-    hex: '#AC8454'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Desert Brown
-      productCode: '70.767'
-      set: Model Color
-      hex: '#AB8556'
-    deltaE: 0.63
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Ral 8020 Braun
-      productCode: AK11331
-      set: AFV (3rd Gen)
-      hex: '#AC8355'
-    deltaE: 0.78
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Braun – Brown RAL 8020
-      productCode: RC069
-      set: Real Colors - AFV
-      hex: '#AE8557'
-    deltaE: 0.87
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Tan
-      productCode: AS-15
-      set: Aircraft Spray
-      hex: '#A68354'
-    deltaE: 1.71
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Driftwood Brown
-      productCode: '9162'
-      set: Master Series Paints Core Colors
-      hex: '#A47E4D'
-    deltaE: 2.43
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -252486,57 +251635,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Meridius Blue
-    set: Privateer Press Formula P3
-    hex: '#1F9095'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Royal Cloak
-      productCode: WP1449
-      set: Warpaints
-      hex: '#1C9095'
-    deltaE: 0.14
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Bright Jade
-      productCode: '067'
-      set: Monument Pro Acrylic Paints
-      hex: '#408C8E'
-    deltaE: 2.91
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Desert Turquoise
-      productCode: '85.078'
-      set: Arte Deco
-      hex: '#018D8C'
-    deltaE: 3.12
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Gray Fs36320
-      productCode: H307
-      set: Aqueous Hobby Color
-      hex: '#2B848C'
-    deltaE: 4.61
-    tier: close
-  - paint:
-      brand: Warcolours
-      brandSlug: warcolours
-      name: Turquoise 3
-      set: Layer paints
-      hex: '#0093A5'
-    deltaE: 4.94
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Midlund Flesh
     set: Privateer Press Formula P3
     hex: '#EEA883'
@@ -252733,108 +251831,6 @@ equivalences:
       set: Artist Range
       hex: '#FEFEFE'
     deltaE: 1.71
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Mouldy Ochre
-    set: Privateer Press Formula P3
-    hex: '#B0830E'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Ki-Rin Gold
-      set: D&D Nolzur's Marvelous Pigments
-      hex: '#AF8102'
-    deltaE: 0.75
-    tier: close
-  - paint:
-      brand: Green Stuff World
-      brandSlug: green-stuff-world
-      name: Vivid Metallic Paint - Kingsfall Gold
-      productCode: '2569'
-      set: Metallic Colors
-      hex: '#B0861B'
-    deltaE: 1.25
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Gold
-      productCode: '69.059'
-      set: Mecha Color
-      hex: '#AC8424'
-    deltaE: 1.98
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Brass
-      productCode: AMIG0197
-      set: Acrylics
-      hex: '#B7881C'
-    deltaE: 2.02
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Olive Skin
-      productCode: '9221'
-      set: Master Series Paints Core Colors
-      hex: '#A97F1D'
-    deltaE: 2.28
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Mud Rut
-    set: Privateer Press Formula P3
-    hex: '#674D2D'
-  matches:
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Dark earth
-      productCode: AS-22
-      set: Aircraft Spray
-      hex: '#674B2B'
-    deltaE: 1.02
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Medium Brown
-      productCode: AK788
-      set: General
-      hex: '#695032'
-    deltaE: 1.21
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Snakebite Leather
-      set: Contrast
-      hex: '#694C29'
-    deltaE: 1.29
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Old Metal
-      productCode: SDP-121
-      set: Drop & Paint
-      hex: '#6A4F2A'
-    deltaE: 1.65
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Oil Stains
-      productCode: '73.813'
-      set: Weathering FX
-      hex: '#6E502E'
-    deltaE: 1.96
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -253139,58 +252135,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Pyg Grey
-    set: Privateer Press Formula P3
-    hex: '#5F6156'
-  matches:
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Grüngrau-green Grey RAL 7009 (modern) 10ml
-      productCode: RC211
-      set: Real Colors - Air
-      hex: '#5E6158'
-    deltaE: 1.04
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Dark Green
-      productCode: '71.012'
-      set: Model Air
-      hex: '#5D5E56'
-    deltaE: 1.91
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Dark Grey RLM 66 German WWII Late War Cockpits, etc
-      productCode: MMP-089
-      set: Mission Models
-      hex: '#595B50'
-    deltaE: 2.17
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Rlm71 Dark Green
-      productCode: '17'
-      set: Mr Color
-      hex: '#595A4F'
-    deltaE: 2.51
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Raf Dark Slate Grey
-      productCode: AK11849
-      set: Air (3rd Gen)
-      hex: '#5E5C50'
-    deltaE: 2.69
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Quick Silver
     set: Privateer Press Formula P3
     hex: '#D7D9E0'
@@ -253346,57 +252290,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Rhok Hide
-    set: Privateer Press Formula P3
-    hex: '#35211C'
-  matches:
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Pearl Root Beer Brown
-      productCode: MMP-154
-      set: Mission Models
-      hex: '#33211F'
-    deltaE: 1.93
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Reddish Black
-      productCode: AK3016
-      set: Figures
-      hex: '#3D2823'
-    deltaE: 2.28
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Scc 1a  (british Brown 1941-42)
-      productCode: AMIG0110
-      set: Acrylics
-      hex: '#352118'
-    deltaE: 2.34
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Rotbraun – Red Brown RAL 8017
-      productCode: RC068
-      set: Real Colors - AFV
-      hex: '#3C251D'
-    deltaE: 2.36
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Arbuckles Brown
-      set: Fantasy & Games Range
-      hex: '#3C2922'
-    deltaE: 2.78
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Rhulic Gold
     set: Privateer Press Formula P3
     hex: '#F7D259'
@@ -253449,109 +252342,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Riven Green
-    set: Privateer Press Formula P3
-    hex: '#99AB90'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: RLM 76
-      productCode: AK2009
-      set: Air
-      hex: '#93A58B'
-    deltaE: 1.81
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Italian Tank Crew Highlights
-      productCode: '70.331'
-      set: Panzer Aces
-      hex: '#9EB193'
-    deltaE: 1.89
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Jungle Mist
-      productCode: '9322'
-      set: Master Series Paints Core Colors
-      hex: '#97AF8F'
-    deltaE: 2.42
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Apc Interior Light Green
-      productCode: AMIG0082
-      set: Acrylics
-      hex: '#8DA186'
-    deltaE: 3.25
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Ionrach Skin
-      set: Base
-      hex: '#97A384'
-    deltaE: 3.28
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Royal Violet
-    set: Privateer Press Formula P3
-    hex: '#553D55'
-  matches:
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Super Wash Purple
-      productCode: '174'
-      set: Fantasy Range - Ink Wash
-      hex: '#5F3E5B'
-    deltaE: 3.15
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: WWI German Mauve
-      productCode: AK2274
-      set: Air
-      hex: '#4D3C4C'
-    deltaE: 3.97
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Purple
-      productCode: '70.959'
-      set: Model Color
-      hex: '#533152'
-    deltaE: 4.72
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Soviet Winter Brown Shade
-      productCode: 95A
-      set: Foundry Paint System
-      hex: '#473646'
-    deltaE: 4.82
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Nightroot Shade
-      productCode: WP4112P
-      set: John Blanche Masterclass
-      hex: '#493357'
-    deltaE: 5.48
-    tier: substitute
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Rucksack Tan
     set: Privateer Press Formula P3
     hex: '#B2953D'
@@ -253600,108 +252390,6 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#BB962E'
     deltaE: 2.94
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Ruddy Blush
-    set: Privateer Press Formula P3
-    hex: '#AB3737'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Scarlet Red
-      productCode: '28.016'
-      set: Hobby Paint
-      hex: '#AA3935'
-    deltaE: 1.08
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Tinted Red Gloss
-      productCode: '29216'
-      set: Master Series Paints Core Colors
-      hex: '#AE373C'
-    deltaE: 1.59
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Succubus Red
-      set: D&D Underdark Set
-      hex: '#AA262F'
-    deltaE: 2.85
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Carmine Red
-      productCode: H367
-      set: Aqueous Hobby Color
-      hex: '#A82C29'
-    deltaE: 3.19
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Bordeaux Red
-      productCode: AK11094
-      set: Standard (3rd Gen)
-      hex: '#A13B2F'
-    deltaE: 3.7
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Runeshot
-    set: Privateer Press Formula P3
-    hex: '#2E728B'
-  matches:
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Aquamarine
-      productCode: '132'
-      set: Fantasy Range
-      hex: '#3A7289'
-    deltaE: 1.39
-    tier: close
-  - paint:
-      brand: Mission Models
-      brandSlug: mission-models
-      name: Iridescent Turquoise
-      productCode: MMP-161
-      set: Mission Models
-      hex: '#146F8A'
-    deltaE: 2.1
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Vanity Blue
-      productCode: SCG-46
-      set: Scalecolor Games
-      hex: '#1A6E8D'
-    deltaE: 2.51
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Dark Turquoise
-      productCode: '72.084'
-      set: Game Color
-      hex: '#01708B'
-    deltaE: 2.6
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Ahriman Blue
-      set: Layer
-      hex: '#00708A'
-    deltaE: 2.78
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -253860,57 +252548,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Sanguine Shadow
-    set: Privateer Press Formula P3
-    hex: '#541A0E'
-  matches:
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Oxidized Brown
-      productCode: '9333'
-      set: Master Series Paints Core Colors
-      hex: '#541C0D'
-    deltaE: 1.09
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Rot (rotbraun) – Red (red Brown) RAL 8013
-      productCode: RC066
-      set: Real Colors - AFV
-      hex: '#55160D'
-    deltaE: 1.35
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Chaotic Red
-      set: Warpaints Air
-      hex: '#582013'
-    deltaE: 1.55
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Red Brown Ii
-      productCode: '131'
-      set: Mr Color
-      hex: '#501D11'
-    deltaE: 1.57
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Flesh Shadows
-      productCode: '70.343'
-      set: Panzer Aces
-      hex: '#551305'
-    deltaE: 1.79
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Sickly Skin
     set: Privateer Press Formula P3
     hex: '#E8E6BD'
@@ -253958,108 +252595,6 @@ equivalences:
       set: Drop & Paint
       hex: '#EAE6C4'
     deltaE: 2.19
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Sinari Skin
-    set: Privateer Press Formula P3
-    hex: '#4B2B1F'
-  matches:
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Burnt Sienna Umber
-      set: Artist Range
-      hex: '#4C2A20'
-    deltaE: 1.32
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Nut Brown
-      productCode: '9427'
-      set: Master Series Paints Bones
-      hex: '#492D1F'
-    deltaE: 2.09
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Burnt Red
-      productCode: AK11097
-      set: Standard (3rd Gen)
-      hex: '#533125'
-    deltaE: 2.14
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Washable Mud
-      productCode: AMIG0108
-      set: Acrylics
-      hex: '#533229'
-    deltaE: 2.88
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Husk Brown
-      set: Warpaints Air
-      hex: '#562F22'
-    deltaE: 2.89
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Skorne Flesh
-    set: Privateer Press Formula P3
-    hex: '#9D6327'
-  matches:
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Polished Leather
-      productCode: '9430'
-      set: Master Series Paints Bones
-      hex: '#9B6326'
-    deltaE: 0.71
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Brown
-      productCode: '72.092'
-      set: Game Color
-      hex: '#9A632A'
-    deltaE: 0.86
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: Dusky Flesh
-      productCode: 6B
-      set: Foundry Paint System
-      hex: '#93591A'
-    deltaE: 3.75
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Brass
-      productCode: AK11194
-      set: Metallic (3rd Gen)
-      hex: '#A55D09'
-    deltaE: 3.78
-    tier: close
-  - paint:
-      brand: Monument (Pro Acryl)
-      brandSlug: monument-pro-acryl
-      name: Flameon Dark Orange Brown
-      productCode: S26
-      set: Monument Pro Signature Series
-      hex: '#8D5C25'
-    deltaE: 4.17
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -254166,109 +252701,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Stormguard Blue
-    set: Privateer Press Formula P3
-    hex: '#285C8A'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Ultramarine Blue
-      productCode: '77.170'
-      set: True Metallic Metal
-      hex: '#2E5881'
-    deltaE: 1.95
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Viking Blue
-      productCode: WP1462
-      set: Warpaints
-      hex: '#1C5B98'
-    deltaE: 1.97
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Marine Blue
-      productCode: AMIG0123
-      set: Acrylics
-      hex: '#18568F'
-    deltaE: 2.4
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Brilliant Blue
-      productCode: '9116'
-      set: Master Series Paints Core Colors
-      hex: '#02578E'
-    deltaE: 2.54
-    tier: close
-  - paint:
-      brand: Foundry
-      brandSlug: foundry
-      name: French Hussar Sky Blue Shade
-      productCode: 76A
-      set: Foundry Paint System
-      hex: '#2C5A95'
-    deltaE: 2.76
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Sul Red
-    set: Privateer Press Formula P3
-    hex: '#4A2518'
-  matches:
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Muddy Water
-      productCode: '26.221'
-      set: Diorama FX
-      hex: '#482215'
-    deltaE: 0.91
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Burnt Sienna Umber
-      set: Artist Range
-      hex: '#4C2A20'
-    deltaE: 2.23
-    tier: close
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Umberroot
-      productCode: WP4116P
-      set: John Blanche Masterclass
-      hex: '#4C2210'
-    deltaE: 2.55
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: One Shot Primer - Brown Oxide
-      productCode: AMIG2026
-      set: Primers
-      hex: '#412017'
-    deltaE: 2.74
-    tier: close
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Wwi French Brown
-      productCode: AK11304
-      set: AFV (3rd Gen)
-      hex: '#4D2A17'
-    deltaE: 3.12
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Sulfuric Yellow
     set: Privateer Press Formula P3
     hex: '#F0D133'
@@ -254364,58 +252796,6 @@ equivalences:
       set: Fantasy Range - Ink Wash
       hex: '#000000'
     deltaE: 0
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Tharn Flesh
-    set: Privateer Press Formula P3
-    hex: '#7A5131'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Varnished Wood
-      productCode: AK782
-      set: General
-      hex: '#7A5336'
-    deltaE: 1.18
-    tier: close
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Natural Sienna
-      productCode: '73.105'
-      set: Pigment FX
-      hex: '#775233'
-    deltaE: 1.26
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Earth Brown
-      productCode: '9029'
-      set: Master Series Paints Core Colors
-      hex: '#785336'
-    deltaE: 1.43
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Olive Braun-olive Brown RAL 8008 10ml
-      productCode: RC218
-      set: Real Colors - Air
-      hex: '#724A26'
-    deltaE: 2.94
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Washable Earth
-      productCode: AMIG0107
-      set: Acrylics
-      hex: '#714D35'
-    deltaE: 3.25
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -254573,57 +252953,6 @@ equivalences:
 - source:
     brand: P3 (Privateer Press)
     brandSlug: p3
-    name: Troll Tongue
-    set: Privateer Press Formula P3
-    hex: '#B65E77'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Crimson Veil
-      productCode: AK19310
-      set: Acrylic Wash
-      hex: '#C06274'
-    deltaE: 3.61
-    tier: close
-  - paint:
-      brand: Reaper
-      brandSlug: reaper
-      name: Crowberry
-      productCode: '29184'
-      set: Master Series Paints Core Colors
-      hex: '#AD5669'
-    deltaE: 3.91
-    tier: close
-  - paint:
-      brand: Coat D'Armes
-      brandSlug: coat-darmes
-      name: Purple
-      productCode: '210'
-      set: Military Range
-      hex: '#C74B6D'
-    deltaE: 5.15
-    tier: substitute
-  - paint:
-      brand: Vallejo
-      brandSlug: vallejo
-      name: Metallic Red
-      productCode: '69.066'
-      set: Mecha Color
-      hex: '#CB5970'
-    deltaE: 5.19
-    tier: substitute
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Elder Flower
-      set: Warpaints Fanatic
-      hex: '#A8577B'
-    deltaE: 5.34
-    tier: substitute
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
     name: Trollblood Base
     set: Privateer Press Formula P3
     hex: '#178799'
@@ -254670,56 +252999,6 @@ equivalences:
       set: Warpaints Primer
       hex: '#018F9B'
     deltaE: 3.96
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Trollblood Blue
-    set: Privateer Press Formula P3
-    hex: '#1F6A77'
-  matches:
-  - paint:
-      brand: Army Painter
-      brandSlug: army-painter
-      name: Deep Azure
-      set: Warpaints Fanatic
-      hex: '#006B79'
-    deltaE: 1.56
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: Air Superiority Blue
-      productCode: '74'
-      set: Mr Color
-      hex: '#006D79'
-    deltaE: 2.26
-    tier: close
-  - paint:
-      brand: Citadel Colour
-      brandSlug: citadel-colour
-      name: Sotek Green
-      set: Layer
-      hex: '#0B6371'
-    deltaE: 2.61
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Light metallic blue
-      productCode: TS-54
-      set: Tamiya Spray
-      hex: '#10667A'
-    deltaE: 3.18
-    tier: close
-  - paint:
-      brand: AMMO by Mig Jimenez
-      brandSlug: ammo-mig
-      name: Russian Blue Amt-7
-      productCode: AMIG0251
-      set: Acrylics
-      hex: '#2F737E'
-    deltaE: 3.46
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -254924,58 +253203,6 @@ equivalences:
       set: Drop & Paint
       hex: '#C0D2DC'
     deltaE: 2.78
-    tier: close
-- source:
-    brand: P3 (Privateer Press)
-    brandSlug: p3
-    name: Voltaic Blue
-    set: Privateer Press Formula P3
-    hex: '#7AA0AB'
-  matches:
-  - paint:
-      brand: AK Interactive
-      brandSlug: ak-interactive
-      name: Aii Light Blue
-      productCode: AK11910
-      set: Air (3rd Gen)
-      hex: '#7BA3AD'
-    deltaE: 1.16
-    tier: close
-  - paint:
-      brand: AK Real Color
-      brandSlug: ak-real-color
-      name: Aii Light Blue 10ml
-      productCode: RC310
-      set: Real Colors - Air
-      hex: '#7FA4AA'
-    deltaE: 2.54
-    tier: close
-  - paint:
-      brand: Mr Hobby
-      brandSlug: mr-hobby
-      name: RLM65 Light Blue
-      productCode: N67
-      set: Acrysion
-      hex: '#779AA8'
-    deltaE: 2.55
-    tier: close
-  - paint:
-      brand: Scale75
-      brandSlug: scale75
-      name: Bluish Metal
-      productCode: SDP-110
-      set: Drop & Paint
-      hex: '#82A7B5'
-    deltaE: 2.73
-    tier: close
-  - paint:
-      brand: Tamiya
-      brandSlug: tamiya
-      name: Dark ghost gray
-      productCode: LP-36
-      set: Lacquer Paint
-      hex: '#80A1B0'
-    deltaE: 2.83
     tier: close
 - source:
     brand: P3 (Privateer Press)
@@ -255191,14 +253418,6 @@ equivalences:
     hex: '#908886'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Drake Grey
-      set: Privateer Press Formula P3
-      hex: '#8D8581'
-    deltaE: 1.6
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Rainy Gray
@@ -255232,6 +253451,14 @@ equivalences:
       set: Warpaints Primer
       hex: '#858180'
     deltaE: 3.44
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Transparent Warm Grey
+      set: Transparent paints
+      hex: '#908D88'
+    deltaE: 3.83
     tier: close
 - source:
     brand: Reaper
@@ -258236,14 +256463,6 @@ equivalences:
     deltaE: 1.89
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sinari Skin
-      set: Privateer Press Formula P3
-      hex: '#4B2B1F'
-    deltaE: 2.09
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: German Red Tail Light
@@ -258258,6 +256477,14 @@ equivalences:
       name: WWI German Red Brown
       productCode: AK2275
       set: Air
+      hex: '#482D1A'
+    deltaE: 2.53
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Dark Wood
+      set: Speedpaint Set 2.0
       hex: '#482D1A'
     deltaE: 2.53
     tier: close
@@ -258580,14 +256807,6 @@ equivalences:
     hex: '#9B6326'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Skorne Flesh
-      set: Privateer Press Formula P3
-      hex: '#9D6327'
-    deltaE: 0.71
-    tier: close
-  - paint:
       brand: Vallejo
       brandSlug: vallejo
       name: Brown
@@ -258595,6 +256814,15 @@ equivalences:
       set: Game Color
       hex: '#9A632A'
     deltaE: 0.78
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Meaty Ochre
+      productCode: SFP3-N186-S
+      set: P3 Paints
+      hex: '#9E6022'
+    deltaE: 1.68
     tier: close
   - paint:
       brand: Foundry
@@ -258736,14 +256964,6 @@ equivalences:
     hex: '#7B4F2A'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Tharn Flesh
-      set: Privateer Press Formula P3
-      hex: '#7A5131'
-    deltaE: 1.63
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Olive Braun-olive Brown RAL 8008 10ml
@@ -258777,6 +256997,15 @@ equivalences:
       set: Acrylic Colors
       hex: '#7D4A1B'
     deltaE: 2.99
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Bootstrap Leather
+      productCode: SFP3-N154-S
+      set: P3 Paints
+      hex: '#79471C'
+    deltaE: 3.02
     tier: close
 - source:
     brand: Reaper
@@ -258977,12 +257206,13 @@ equivalences:
     deltaE: 3.74
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 4.07
+      brand: Turbo Dork
+      brandSlug: turbo-dork
+      name: Skyrat
+      productCode: TDK015731_1
+      set: Turbo Dork
+      hex: '#476465'
+    deltaE: 4.08
     tier: close
 - source:
     brand: Reaper
@@ -263231,12 +261461,13 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 2.54
+      brand: Foundry
+      brandSlug: foundry
+      name: Deep Blue Light
+      productCode: 20C
+      set: Foundry Paint System
+      hex: '#005192'
+    deltaE: 2.78
     tier: close
 - source:
     brand: Reaper
@@ -264907,9 +263138,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Troll Tongue
-      set: Privateer Press Formula P3
-      hex: '#B65E77'
-    deltaE: 3.91
+      productCode: SFP3-N216-S
+      set: P3 Paints
+      hex: '#B25F78'
+    deltaE: 4.02
     tier: close
   - paint:
       brand: Army Painter
@@ -265592,14 +263824,6 @@ equivalences:
     deltaE: 2.42
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Lyossan Flesh
-      set: Privateer Press Formula P3
-      hex: '#AC8454'
-    deltaE: 2.43
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Ral 8020 Braun
@@ -265607,6 +263831,15 @@ equivalences:
       set: AFV (3rd Gen)
       hex: '#AC8355'
     deltaE: 2.54
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Braun – Brown RAL 8020
+      productCode: RC069
+      set: Real Colors - AFV
+      hex: '#AE8557'
+    deltaE: 3.12
     tier: close
 - source:
     brand: Reaper
@@ -265843,10 +264076,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Tharn Flesh
-      set: Privateer Press Formula P3
-      hex: '#7A5131'
-    deltaE: 1.43
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 2.12
     tier: close
   - paint:
       brand: Scale75
@@ -268192,14 +266426,6 @@ equivalences:
     deltaE: 1.83
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Riven Green
-      set: Privateer Press Formula P3
-      hex: '#99AB90'
-    deltaE: 2.42
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: U.N.T'.s MS Gray
@@ -268224,6 +266450,15 @@ equivalences:
       set: Air
       hex: '#93A58B'
     deltaE: 3.53
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Apc Interior Light Green
+      productCode: AMIG0082
+      set: Acrylics
+      hex: '#8DA186'
+    deltaE: 4.29
     tier: close
 - source:
     brand: Reaper
@@ -271162,14 +269397,6 @@ equivalences:
     hex: '#541C0D'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 1.09
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Chaotic Red
@@ -271202,6 +269429,15 @@ equivalences:
       set: Panzer Aces
       hex: '#551305'
     deltaE: 2.33
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Intense Sienna
+      productCode: AK16010
+      set: Inks
+      hex: '#592217'
+    deltaE: 2.34
     tier: close
 - source:
     brand: Reaper
@@ -273385,14 +271621,6 @@ equivalences:
     deltaE: 2.04
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 2.35
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Red Primer Base
@@ -273400,6 +271628,15 @@ equivalences:
       set: Primers
       hex: '#491404'
     deltaE: 2.84
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Medium Rust
+      productCode: '2288'
+      set: Liquid Pigments
+      hex: '#601709'
+    deltaE: 2.88
     tier: close
 - source:
     brand: Reaper
@@ -273886,20 +272123,21 @@ equivalences:
     deltaE: 2.88
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Tharn Flesh
-      set: Privateer Press Formula P3
-      hex: '#7A5131'
-    deltaE: 3.06
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Komodo Khaki
       set: Acrylic Colors
       hex: '#885A29'
     deltaE: 3.31
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 3.4
     tier: close
   - paint:
       brand: AK Real Color
@@ -275512,10 +273750,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Ruddy Blush
-      set: Privateer Press Formula P3
-      hex: '#AB3737'
-    deltaE: 1.59
+      name: Broken Brick
+      productCode: SFP3-N155-S
+      set: P3 Paints
+      hex: '#A3393B'
+    deltaE: 2.14
     tier: close
   - paint:
       brand: Vallejo
@@ -275929,14 +274168,6 @@ equivalences:
     deltaE: 2.12
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 3.28
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Russian Light Green
@@ -275960,6 +274191,15 @@ equivalences:
       set: Warpaints Fanatic
       hex: '#745218'
     deltaE: 4.45
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Dunkelgelb Dark Base
+      productCode: AK005
+      set: AFV
+      hex: '#695322'
+    deltaE: 4.74
     tier: close
 - source:
     brand: Reaper
@@ -276818,14 +275058,6 @@ equivalences:
     deltaE: 2.23
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 2.92
-    tier: close
-  - paint:
       brand: Coat D'Armes
       brandSlug: coat-darmes
       name: Dark Sand
@@ -276833,6 +275065,15 @@ equivalences:
       set: Military Range
       hex: '#CAB876'
     deltaE: 3
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Titanium gold
+      productCode: TS-87
+      set: Tamiya Spray
+      hex: '#C7BA82'
+    deltaE: 3.19
     tier: close
 - source:
     brand: Reaper
@@ -276861,14 +275102,6 @@ equivalences:
     deltaE: 1.81
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Drake Grey
-      set: Privateer Press Formula P3
-      hex: '#8D8581'
-    deltaE: 2.58
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Castle Grey
@@ -276885,6 +275118,14 @@ equivalences:
       set: Real Colors - Air
       hex: '#918C86'
     deltaE: 3.13
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Transparent Flesh
+      set: Transparent paints
+      hex: '#988879'
+    deltaE: 3.38
     tier: close
 - source:
     brand: Reaper
@@ -280045,14 +278286,6 @@ equivalences:
     deltaE: 2.02
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 2.46
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Red Brown Ii
@@ -280061,6 +278294,15 @@ equivalences:
       hex: '#501D11'
     deltaE: 2.67
     tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Dried Blood
+      productCode: '72.133'
+      set: Game Color
+      hex: '#622A1D'
+    deltaE: 2.84
+    tier: close
 - source:
     brand: Scale75
     brandSlug: scale75
@@ -280068,14 +278310,6 @@ equivalences:
     set: Artist Range
     hex: '#4C2A20'
   matches:
-  - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sinari Skin
-      set: Privateer Press Formula P3
-      hex: '#4B2B1F'
-    deltaE: 1.32
-    tier: close
   - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
@@ -280092,6 +278326,15 @@ equivalences:
       set: Quickshade Washes Set
       hex: '#49251E'
     deltaE: 2.12
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Sinari Skin
+      productCode: SFP3-N205-S
+      set: P3 Paints
+      hex: '#432319'
+    deltaE: 2.4
     tier: close
   - paint:
       brand: Vallejo
@@ -280353,9 +278596,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 2.93
+      productCode: SFP3-N208-S
+      set: P3 Paints
+      hex: '#286795'
+    deltaE: 3.5
     tier: close
   - paint:
       brand: Vallejo
@@ -284268,14 +282512,6 @@ equivalences:
     deltaE: 2.71
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 2.73
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Air Superiority Blue Fs 35450 10ml
@@ -284283,6 +282519,15 @@ equivalences:
       set: Real Colors - Air
       hex: '#8AB0C3'
     deltaE: 3.38
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Voltaic Blue
+      productCode: SFP3-N220-S
+      set: P3 Paints
+      hex: '#75A1AC'
+    deltaE: 3.49
     tier: close
 - source:
     brand: Scale75
@@ -288215,14 +286460,6 @@ equivalences:
     deltaE: 1.65
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 1.65
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: British Uniform Base
@@ -288239,6 +286476,15 @@ equivalences:
       set: Aircraft Spray
       hex: '#674B2B'
     deltaE: 2.19
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Braun – Brown RAL 8010
+      productCode: RC065
+      set: Real Colors - AFV
+      hex: '#604826'
+    deltaE: 2.82
     tier: close
 - source:
     brand: Scale75
@@ -295162,9 +293408,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 2.76
+      productCode: SFP3-N201-S
+      set: P3 Paints
+      hex: '#2E768D'
+    deltaE: 2.81
     tier: close
   - paint:
       brand: Mission Models
@@ -298720,14 +296967,6 @@ equivalences:
     hex: '#4D2C1D'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sinari Skin
-      set: Privateer Press Formula P3
-      hex: '#4B2B1F'
-    deltaE: 1.43
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Wwi French Brown
@@ -298761,6 +297000,15 @@ equivalences:
       set: Warpaints Air
       hex: '#562F22'
     deltaE: 2.78
+    tier: close
+  - paint:
+      brand: AK Real Color
+      brandSlug: ak-real-color
+      name: Dark Brown 6k
+      productCode: RC074
+      set: Real Colors - AFV
+      hex: '#452B1C'
+    deltaE: 2.9
     tier: close
 - source:
     brand: Scale75
@@ -300349,14 +298597,6 @@ equivalences:
     hex: '#8B8683'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Drake Grey
-      set: Privateer Press Formula P3
-      hex: '#8D8581'
-    deltaE: 1.49
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Blade Steel
@@ -300391,6 +298631,14 @@ equivalences:
       set: Real Colors - Air
       hex: '#918C86'
     deltaE: 2.65
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Leadbelcher
+      set: Spray
+      hex: '#868686'
+    deltaE: 2.82
     tier: close
 - source:
     brand: Scale75
@@ -303454,14 +301702,6 @@ equivalences:
     deltaE: 1.99
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 2.51
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Metallic blue
@@ -303477,6 +301717,14 @@ equivalences:
       set: Contrast
       hex: '#25698A'
     deltaE: 2.62
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Tidal Blue
+      set: Warpaints Fanatic
+      hex: '#026B93'
+    deltaE: 2.98
     tier: close
 - source:
     brand: Scale75
@@ -304884,10 +303132,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 0.94
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 1.06
     tier: close
   - paint:
       brand: Vallejo
@@ -307310,14 +305559,6 @@ equivalences:
     deltaE: 1.28
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 1.28
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Brown (JGSDF)
@@ -307334,6 +305575,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#6A553A'
     deltaE: 2.19
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: Khaki Green
+      productCode: '73.127'
+      set: Pigment FX
+      hex: '#785937'
+    deltaE: 2.48
     tier: close
 - source:
     brand: Scale75
@@ -310406,12 +308656,12 @@ equivalences:
     deltaE: 2.67
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 3.08
+      brand: Scale75
+      brandSlug: scale75
+      name: Bosh Chesnut
+      set: Fantasy & Games Range
+      hex: '#69452F'
+    deltaE: 3.11
     tier: close
 - source:
     brand: Tamiya
@@ -313648,20 +311898,21 @@ equivalences:
     deltaE: 2.62
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 3.12
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Tidal Blue
       set: Warpaints Fanatic
       hex: '#026B93'
     deltaE: 3.63
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Iridescent Turquoise
+      productCode: MMP-161
+      set: Mission Models
+      hex: '#146F8A'
+    deltaE: 3.66
     tier: close
 - source:
     brand: Tamiya
@@ -314270,12 +312521,13 @@ equivalences:
     deltaE: 3.59
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 3.64
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Butter Yellow 30 ml
+      productCode: '4088'
+      set: Dry Brush
+      hex: '#DAC981'
+    deltaE: 3.65
     tier: close
 - source:
     brand: Tamiya
@@ -314449,14 +312701,6 @@ equivalences:
     deltaE: 0.99
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 1.02
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: FS 30219 Dark Tan
@@ -314482,6 +312726,15 @@ equivalences:
       set: Drop & Paint
       hex: '#6A4F2A'
     deltaE: 2.19
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Mud Rut
+      productCode: SFP3-N191-S
+      set: P3 Paints
+      hex: '#62492F'
+    deltaE: 2.2
     tier: close
 - source:
     brand: Tamiya
@@ -316008,14 +314261,6 @@ equivalences:
     deltaE: 1.36
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Lyossan Flesh
-      set: Privateer Press Formula P3
-      hex: '#AC8454'
-    deltaE: 1.71
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Japanese Khaki
@@ -316041,6 +314286,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#A2855B'
     deltaE: 2.06
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Ral 8020 Braun
+      productCode: AK11331
+      set: AFV (3rd Gen)
+      hex: '#AC8355'
+    deltaE: 2.14
     tier: close
 - source:
     brand: Tamiya
@@ -316596,14 +314850,6 @@ equivalences:
     deltaE: 2.83
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Voltaic Blue
-      set: Privateer Press Formula P3
-      hex: '#7AA0AB'
-    deltaE: 2.83
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: British Gun Grey
@@ -316611,6 +314857,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#89A0A8'
     deltaE: 3.31
+    tier: close
+  - paint:
+      brand: AK Interactive
+      brandSlug: ak-interactive
+      name: Aii Light Blue
+      productCode: AK11910
+      set: Air (3rd Gen)
+      hex: '#7BA3AD'
+    deltaE: 3.57
     tier: close
 - source:
     brand: Tamiya
@@ -316732,14 +314987,6 @@ equivalences:
     deltaE: 1.54
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 2.17
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Yoda Green
@@ -316764,6 +315011,14 @@ equivalences:
       set: Mr Color
       hex: '#68825D'
     deltaE: 3.73
+    tier: close
+  - paint:
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Feral Green
+      set: Warpaints Air
+      hex: '#5D8758'
+    deltaE: 3.75
     tier: close
 - source:
     brand: Tamiya
@@ -319001,14 +317256,6 @@ equivalences:
     deltaE: 1.46
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Eldritch Green
-      set: Privateer Press Formula P3
-      hex: '#21573B'
-    deltaE: 1.94
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Deep Green -51-
@@ -319034,6 +317281,15 @@ equivalences:
       set: Inktensity Range
       hex: '#365639'
     deltaE: 2.73
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: USMC Tank Crew
+      productCode: '70.319'
+      set: Panzer Aces
+      hex: '#1D573E'
+    deltaE: 2.82
     tier: close
 - source:
     brand: Tamiya
@@ -319053,14 +317309,6 @@ equivalences:
     deltaE: 1.46
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Eldritch Green
-      set: Privateer Press Formula P3
-      hex: '#21573B'
-    deltaE: 1.94
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Deep Green -51-
@@ -319086,6 +317334,15 @@ equivalences:
       set: Inktensity Range
       hex: '#365639'
     deltaE: 2.73
+    tier: close
+  - paint:
+      brand: Vallejo
+      brandSlug: vallejo
+      name: USMC Tank Crew
+      productCode: '70.319'
+      set: Panzer Aces
+      hex: '#1D573E'
+    deltaE: 2.82
     tier: close
 - source:
     brand: Tamiya
@@ -322776,12 +321033,13 @@ equivalences:
     deltaE: 2.9
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Trollblood Blue
-      set: Privateer Press Formula P3
-      hex: '#1F6A77'
-    deltaE: 3.18
+      brand: Foundry
+      brandSlug: foundry
+      name: Night Sky
+      productCode: 62B
+      set: Foundry Paint System
+      hex: '#326576'
+    deltaE: 3.22
     tier: close
 - source:
     brand: Tamiya
@@ -331129,14 +329387,6 @@ equivalences:
     hex: '#4B473E'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Greylord
-      set: Privateer Press Formula P3
-      hex: '#48453D'
-    deltaE: 1
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Noble Skin
@@ -331169,6 +329419,14 @@ equivalences:
       set: Acrysion
       hex: '#4F493C'
     deltaE: 2.16
+    tier: close
+  - paint:
+      brand: Warcolours
+      brandSlug: warcolours
+      name: Warm Grey 4
+      set: Layer paints
+      hex: '#494641'
+    deltaE: 2.19
     tier: close
 - source:
     brand: Vallejo
@@ -332264,14 +330522,6 @@ equivalences:
     deltaE: 3.04
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Meridius Blue
-      set: Privateer Press Formula P3
-      hex: '#1F9095'
-    deltaE: 3.12
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Teal Blue
@@ -332296,6 +330546,15 @@ equivalences:
       set: Monument Pro Acrylic Paints
       hex: '#408C8E'
     deltaE: 4.17
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Meredius Blue
+      productCode: SFP3-N188-S
+      set: P3 Paints
+      hex: '#279399'
+    deltaE: 4.18
     tier: close
 - source:
     brand: Vallejo
@@ -337372,14 +335631,6 @@ equivalences:
     hex: '#482215'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sul Red
-      set: Privateer Press Formula P3
-      hex: '#4A2518'
-    deltaE: 0.91
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Umberroot
@@ -337396,6 +335647,15 @@ equivalences:
       set: Acrylics
       hex: '#421D14'
     deltaE: 2.32
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Sinari Skin
+      productCode: SFP3-N205-S
+      set: P3 Paints
+      hex: '#432319'
+    deltaE: 2.36
     tier: close
   - paint:
       brand: Scale75
@@ -337813,19 +336073,20 @@ equivalences:
     deltaE: 2.37
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Lyossan Flesh
-      set: Privateer Press Formula P3
-      hex: '#AC8454'
-    deltaE: 2.54
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Wasteland Clay
       set: Warpaints Fanatic
       hex: '#A38755'
+    deltaE: 2.74
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: Rich Butternut Light
+      productCode: 115C
+      set: Foundry Paint System
+      hex: '#A2855B'
     deltaE: 2.74
     tier: close
 - source:
@@ -345229,9 +343490,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Skorne Flesh
-      set: Privateer Press Formula P3
-      hex: '#9D6327'
-    deltaE: 0.86
+      productCode: SFP3-N206-S
+      set: P3 Paints
+      hex: '#986330'
+    deltaE: 1.29
     tier: close
   - paint:
       brand: Army Painter
@@ -345763,9 +344025,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Runeshot
-      set: Privateer Press Formula P3
-      hex: '#2E728B'
-    deltaE: 2.6
+      productCode: SFP3-N201-S
+      set: P3 Paints
+      hex: '#2E768D'
+    deltaE: 3.17
     tier: close
   - paint:
       brand: Coat D'Armes
@@ -348939,20 +347202,21 @@ equivalences:
     deltaE: 2.84
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Arcantrik Green
-      set: Privateer Press Formula P3
-      hex: '#547E5B'
-    deltaE: 3.33
-    tier: close
-  - paint:
       brand: Green Stuff World
       brandSlug: green-stuff-world
       name: Yoda Green
       set: Acrylic Colors
       hex: '#557C5D'
     deltaE: 3.45
+    tier: close
+  - paint:
+      brand: Kimera Kolors
+      brandSlug: kimera-kolors
+      name: Oxide Green
+      productCode: PG 17
+      set: Kimera Kolors Expansion Set 1
+      hex: '#506C48'
+    deltaE: 4.28
     tier: close
 - source:
     brand: Vallejo
@@ -352154,14 +350418,6 @@ equivalences:
     deltaE: 1.93
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 2.11
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Shadowed Stone
@@ -352187,6 +350443,15 @@ equivalences:
       set: Standard (3rd Gen)
       hex: '#5B605A'
     deltaE: 2.92
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Dark Grey RLM 66 German WWII Late War Cockpits, etc
+      productCode: MMP-089
+      set: Mission Models
+      hex: '#595B50'
+    deltaE: 3.46
     tier: close
 - source:
     brand: Vallejo
@@ -352771,9 +351036,10 @@ equivalences:
       brand: P3 (Privateer Press)
       brandSlug: p3
       name: Ruddy Blush
-      set: Privateer Press Formula P3
-      hex: '#AB3737'
-    deltaE: 1.08
+      productCode: SFP3-N200-S
+      set: P3 Paints
+      hex: '#A03C3A'
+    deltaE: 2.52
     tier: close
   - paint:
       brand: Army Painter
@@ -354684,10 +352950,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Skorne Flesh
-      set: Privateer Press Formula P3
-      hex: '#9D6327'
-    deltaE: 2.34
+      name: Meaty Ochre
+      productCode: SFP3-N186-S
+      set: P3 Paints
+      hex: '#9E6022'
+    deltaE: 2.35
     tier: close
   - paint:
       brand: AK Interactive
@@ -355226,12 +353493,12 @@ equivalences:
     deltaE: 2.55
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 3.03
+      brand: Army Painter
+      brandSlug: army-painter
+      name: Plate Mail Metal
+      set: Warpaints Air
+      hex: '#6A6B68'
+    deltaE: 3.22
     tier: close
 - source:
     brand: Vallejo
@@ -356099,12 +354366,13 @@ equivalences:
     deltaE: 4.79
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Troll Tongue
-      set: Privateer Press Formula P3
-      hex: '#B65E77'
-    deltaE: 5.19
+      brand: Foundry
+      brandSlug: foundry
+      name: Wine Stain Red
+      productCode: 17B
+      set: Foundry Paint System
+      hex: '#C2446A'
+    deltaE: 5.95
     tier: substitute
 - source:
     brand: Vallejo
@@ -356193,14 +354461,6 @@ equivalences:
     deltaE: 2.14
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bile Thrall
-      set: Privateer Press Formula P3
-      hex: '#6A4E16'
-    deltaE: 2.41
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Burnished Copper Shade
@@ -356208,6 +354468,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#795219'
     deltaE: 2.46
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Brown (JGSDF)
+      productCode: XF-72
+      set: Acrylics Mini Flat
+      hex: '#734C0C'
+    deltaE: 3.09
     tier: close
 - source:
     brand: Vallejo
@@ -357146,14 +355415,6 @@ equivalences:
     hex: '#B33737'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Ruddy Blush
-      set: Privateer Press Formula P3
-      hex: '#AB3737'
-    deltaE: 1.65
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Tinted Red Gloss
@@ -357186,6 +355447,15 @@ equivalences:
       set: Military Range
       hex: '#BA4244'
     deltaE: 3.38
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Broken Brick
+      productCode: SFP3-N155-S
+      set: P3 Paints
+      hex: '#A3393B'
+    deltaE: 3.63
     tier: close
 - source:
     brand: Vallejo
@@ -360607,10 +358877,11 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 0.61
+      name: Blackwater Sand
+      productCode: SFP3-N148-S
+      set: P3 Paints
+      hex: '#837866'
+    deltaE: 1.11
     tier: close
   - paint:
       brand: Army Painter
@@ -361147,14 +359418,6 @@ equivalences:
     deltaE: 2.46
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 2.65
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Dark African Flesh
@@ -361162,6 +359425,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#5B4F43'
     deltaE: 3.96
+    tier: close
+  - paint:
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Linoleum deck brown.jpeg
+      productCode: LP-17
+      set: Lacquer Paint
+      hex: '#564A3A'
+    deltaE: 4.13
     tier: close
 - source:
     brand: Vallejo
@@ -361389,14 +359661,6 @@ equivalences:
     deltaE: 1.56
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 1.91
-    tier: close
-  - paint:
       brand: Mission Models
       brandSlug: mission-models
       name: Dark Grey RLM 66 German WWII Late War Cockpits, etc
@@ -361422,6 +359686,15 @@ equivalences:
       set: Standard (3rd Gen)
       hex: '#5B605A'
     deltaE: 2.27
+    tier: close
+  - paint:
+      brand: Humbrol
+      brandSlug: humbrol
+      name: Sea Grey
+      productCode: '27'
+      set: Humbrol Acrylics - Matt
+      hex: '#585954'
+    deltaE: 2.35
     tier: close
 - source:
     brand: Vallejo
@@ -361699,14 +359972,6 @@ equivalences:
     deltaE: 1.56
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Pyg Grey
-      set: Privateer Press Formula P3
-      hex: '#5F6156'
-    deltaE: 1.91
-    tier: close
-  - paint:
       brand: Mission Models
       brandSlug: mission-models
       name: Dark Grey RLM 66 German WWII Late War Cockpits, etc
@@ -361732,6 +359997,15 @@ equivalences:
       set: Standard (3rd Gen)
       hex: '#5B605A'
     deltaE: 2.27
+    tier: close
+  - paint:
+      brand: Humbrol
+      brandSlug: humbrol
+      name: Sea Grey
+      productCode: '27'
+      set: Humbrol Acrylics - Matt
+      hex: '#585954'
+    deltaE: 2.35
     tier: close
 - source:
     brand: Vallejo
@@ -362052,14 +360326,6 @@ equivalences:
     hex: '#AF3532'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Ruddy Blush
-      set: Privateer Press Formula P3
-      hex: '#AB3737'
-    deltaE: 1.65
-    tier: close
-  - paint:
       brand: Mr Hobby
       brandSlug: mr-hobby
       name: Carmine Red
@@ -362093,6 +360359,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#AE373C'
     deltaE: 2.96
+    tier: close
+  - paint:
+      brand: Humbrol
+      brandSlug: humbrol
+      name: Insignia Red
+      productCode: '153'
+      set: Humbrol Acrylics - Matt
+      hex: '#B21F25'
+    deltaE: 3.12
     tier: close
 - source:
     brand: Vallejo
@@ -364872,14 +363147,6 @@ equivalences:
     deltaE: 2.62
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Icy Yellow
-      set: Privateer Press Formula P3
-      hex: '#C7B378'
-    deltaE: 2.79
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Antique Gold
@@ -364887,6 +363154,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#D0B161'
     deltaE: 2.8
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Super Gold 2
+      productCode: SM202
+      set: Mr Color Super Metallic 2
+      hex: '#CFB16E'
+    deltaE: 3
     tier: close
 - source:
     brand: Vallejo
@@ -367314,20 +365590,21 @@ equivalences:
     deltaE: 2.18
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Ruddy Blush
-      set: Privateer Press Formula P3
-      hex: '#AB3737'
-    deltaE: 2.3
-    tier: close
-  - paint:
       brand: Scale75
       brandSlug: scale75
       name: Crimsom
       set: Artist Range
       hex: '#C22335'
     deltaE: 2.72
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: Iridescent Candy Red
+      productCode: MMP-158
+      set: Mission Models
+      hex: '#C0273B'
+    deltaE: 2.88
     tier: close
 - source:
     brand: Vallejo
@@ -368460,12 +366737,13 @@ equivalences:
     deltaE: 4.79
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Troll Tongue
-      set: Privateer Press Formula P3
-      hex: '#B65E77'
-    deltaE: 5.19
+      brand: Foundry
+      brandSlug: foundry
+      name: Wine Stain Red
+      productCode: 17B
+      set: Foundry Paint System
+      hex: '#C2446A'
+    deltaE: 5.95
     tier: substitute
 - source:
     brand: Vallejo
@@ -374147,14 +372425,6 @@ equivalences:
     hex: '#AB8556'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Lyossan Flesh
-      set: Privateer Press Formula P3
-      hex: '#AC8454'
-    deltaE: 0.63
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Braun – Brown RAL 8020
@@ -374189,6 +372459,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#A47E4D'
     deltaE: 2.56
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Lyossan Flesh
+      productCode: SFP3-N184-S
+      set: P3 Paints
+      hex: '#AD8259'
+    deltaE: 2.85
     tier: close
 - source:
     brand: Vallejo
@@ -374887,14 +373166,6 @@ equivalences:
     deltaE: 1.95
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Broken Brick
-      set: Privateer Press Formula P3
-      hex: '#A53331'
-    deltaE: 1.99
-    tier: close
-  - paint:
       brand: Mission Models
       brandSlug: mission-models
       name: Standard Rust
@@ -374910,6 +373181,14 @@ equivalences:
       set: Layer paints
       hex: '#A71A22'
     deltaE: 2.18
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Inktense Red
+      set: Inktensity Range
+      hex: '#A91E21'
+    deltaE: 2.25
     tier: close
 - source:
     brand: Vallejo
@@ -375085,14 +373364,6 @@ equivalences:
     deltaE: 1.67
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 2.08
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: British Equipment Canvas Shade
@@ -375117,6 +373388,15 @@ equivalences:
       set: Figures
       hex: '#59553A'
     deltaE: 2.45
+    tier: close
+  - paint:
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Green Khaki
+      productCode: AMIG0056
+      set: Acrylics
+      hex: '#545035'
+    deltaE: 2.52
     tier: close
 - source:
     brand: Vallejo
@@ -375662,14 +373942,6 @@ equivalences:
     deltaE: 2.77
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Skorne Flesh
-      set: Privateer Press Formula P3
-      hex: '#9D6327'
-    deltaE: 2.77
-    tier: close
-  - paint:
       brand: Humbrol
       brandSlug: humbrol
       name: Khaki
@@ -375677,6 +373949,14 @@ equivalences:
       set: Humbrol Acrylics - Matt
       hex: '#9B6817'
     deltaE: 2.87
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Bloodtracker Brown
+      set: Privateer Press Formula P3
+      hex: '#A56A28'
+    deltaE: 3.14
     tier: close
   - paint:
       brand: Scale75
@@ -380202,14 +378482,6 @@ equivalences:
     deltaE: 4.28
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Royal Violet
-      set: Privateer Press Formula P3
-      hex: '#553D55'
-    deltaE: 4.72
-    tier: close
-  - paint:
       brand: Foundry
       brandSlug: foundry
       name: Deep Maroon
@@ -380217,6 +378489,15 @@ equivalences:
       set: Foundry Paint System
       hex: '#662E55'
     deltaE: 5.18
+    tier: substitute
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Royal Violet
+      productCode: SFP3-N198-S
+      set: P3 Paints
+      hex: '#513D56'
+    deltaE: 5.22
     tier: substitute
 - source:
     brand: Vallejo
@@ -381066,14 +379347,6 @@ equivalences:
     deltaE: 2.2
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 2.78
-    tier: close
-  - paint:
       brand: AK Real Color
       brandSlug: ak-real-color
       name: Amt-1 Light Brown 10ml
@@ -381089,6 +379362,15 @@ equivalences:
       set: Air
       hex: '#8F7C68'
     deltaE: 3.07
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: IDF Gray2 (-1981 Golan)
+      productCode: '529'
+      set: Mr Color
+      hex: '#877E69'
+    deltaE: 3.4
     tier: close
 - source:
     brand: Vallejo
@@ -381877,14 +380159,6 @@ equivalences:
     hex: '#59513C'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bane Grey
-      set: Privateer Press Formula P3
-      hex: '#564F3D'
-    deltaE: 1.39
-    tier: close
-  - paint:
       brand: Coat D'Armes
       brandSlug: coat-darmes
       name: Dark Leather
@@ -381919,6 +380193,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#575036'
     deltaE: 2.21
+    tier: close
+  - paint:
+      brand: Foundry
+      brandSlug: foundry
+      name: British Equipment Canvas Shade
+      productCode: 90A
+      set: Foundry Paint System
+      hex: '#585135'
+    deltaE: 2.83
     tier: close
 - source:
     brand: Vallejo
@@ -383110,14 +381393,6 @@ equivalences:
     hex: '#867562'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 2.55
-    tier: close
-  - paint:
       brand: Army Painter
       brandSlug: army-painter
       name: Dusty Skull
@@ -383132,6 +381407,15 @@ equivalences:
       set: Air
       hex: '#8F7C68'
     deltaE: 2.99
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Blackwater Sand
+      productCode: SFP3-N148-S
+      set: P3 Paints
+      hex: '#837866'
+    deltaE: 3.08
     tier: close
   - paint:
       brand: Foundry
@@ -384725,14 +383009,6 @@ equivalences:
     deltaE: 1.44
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Sanguine Shadow
-      set: Privateer Press Formula P3
-      hex: '#541A0E'
-    deltaE: 1.79
-    tier: close
-  - paint:
       brand: Tamiya
       brandSlug: tamiya
       name: Maroon
@@ -384749,6 +383025,15 @@ equivalences:
       set: Acrylics
       hex: '#591610'
     deltaE: 2.23
+    tier: close
+  - paint:
+      brand: Green Stuff World
+      brandSlug: green-stuff-world
+      name: Medium Rust
+      productCode: '2288'
+      set: Liquid Pigments
+      hex: '#601709'
+    deltaE: 2.43
     tier: close
 - source:
     brand: Vallejo
@@ -385336,14 +383621,6 @@ equivalences:
     deltaE: 1.83
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Riven Green
-      set: Privateer Press Formula P3
-      hex: '#99AB90'
-    deltaE: 1.89
-    tier: close
-  - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Deepkin Flesh
@@ -385367,6 +383644,15 @@ equivalences:
       set: Air
       hex: '#93A58B'
     deltaE: 3.63
+    tier: close
+  - paint:
+      brand: Mr Hobby
+      brandSlug: mr-hobby
+      name: Gray Fs26440
+      productCode: H325
+      set: Aqueous Hobby Color
+      hex: '#AABBA4'
+    deltaE: 3.9
     tier: close
 - source:
     brand: Vallejo
@@ -387460,14 +385746,6 @@ equivalences:
     deltaE: 1.07
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Copper Pipe
-      set: Privateer Press Formula P3
-      hex: '#745738'
-    deltaE: 1.3
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Earth
@@ -387475,6 +385753,15 @@ equivalences:
       set: Acrylics
       hex: '#745739'
     deltaE: 1.52
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 1.6
     tier: close
   - paint:
       brand: Mr Hobby
@@ -387709,14 +385996,6 @@ equivalences:
     deltaE: 1.37
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 1.43
-    tier: close
-  - paint:
       brand: Citadel Colour
       brandSlug: citadel-colour
       name: Baneblade Brown
@@ -387732,6 +386011,14 @@ equivalences:
       set: Foundry Paint System
       hex: '#85796D'
     deltaE: 2.4
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Muddy Wash
+      set: Privateer Press Formula P3 Wash
+      hex: '#8A7F6E'
+    deltaE: 2.44
     tier: close
   - paint:
       brand: AK Real Color
@@ -387811,14 +386098,6 @@ equivalences:
     deltaE: 0.81
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Tharn Flesh
-      set: Privateer Press Formula P3
-      hex: '#7A5131'
-    deltaE: 1.26
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Varnished Wood
@@ -387826,6 +386105,15 @@ equivalences:
       set: General
       hex: '#7A5336'
     deltaE: 1.28
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Beast Hide
+      productCode: SFP3-N145-S
+      set: P3 Paints
+      hex: '#795737'
+    deltaE: 1.98
     tier: close
   - paint:
       brand: Scale75
@@ -388935,14 +387223,6 @@ equivalences:
     deltaE: 1.41
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Ruddy Blush
-      set: Privateer Press Formula P3
-      hex: '#AB3737'
-    deltaE: 1.53
-    tier: close
-  - paint:
       brand: Reaper
       brandSlug: reaper
       name: Tinted Red Gloss
@@ -388959,6 +387239,15 @@ equivalences:
       set: Acrysion
       hex: '#B01E31'
     deltaE: 2.43
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Broken Brick
+      productCode: SFP3-N155-S
+      set: P3 Paints
+      hex: '#A3393B'
+    deltaE: 2.79
     tier: close
   - paint:
       brand: Humbrol
@@ -391471,12 +389760,13 @@ equivalences:
     deltaE: 4.13
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Bleached Blue
-      set: Privateer Press Formula P3
-      hex: '#877A68'
-    deltaE: 4.21
+      brand: AMMO by Mig Jimenez
+      brandSlug: ammo-mig
+      name: Cinnamon
+      productCode: AMIG0135
+      set: Acrylics
+      hex: '#937D6F'
+    deltaE: 4.52
     tier: close
 - source:
     brand: Vallejo
@@ -396260,14 +394550,6 @@ equivalences:
     deltaE: 1.29
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 1.98
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Marine Blue
@@ -396293,6 +394575,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#02578E'
     deltaE: 3.31
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: French Blue (Cobalt Blue)
+      productCode: MMP-178
+      set: Mission Models
+      hex: '#02538B'
+    deltaE: 3.41
     tier: close
 - source:
     brand: Vallejo
@@ -396361,14 +394652,6 @@ equivalences:
     deltaE: 1.36
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Stormguard Blue
-      set: Privateer Press Formula P3
-      hex: '#285C8A'
-    deltaE: 1.95
-    tier: close
-  - paint:
       brand: AMMO by Mig Jimenez
       brandSlug: ammo-mig
       name: Marine Blue
@@ -396394,6 +394677,15 @@ equivalences:
       set: Master Series Paints Core Colors
       hex: '#02578E'
     deltaE: 3.29
+    tier: close
+  - paint:
+      brand: Mission Models
+      brandSlug: mission-models
+      name: French Blue (Cobalt Blue)
+      productCode: MMP-178
+      set: Mission Models
+      hex: '#02538B'
+    deltaE: 3.36
     tier: close
 - source:
     brand: Vallejo
@@ -397041,14 +395333,6 @@ equivalences:
     deltaE: 2.17
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Kapitan Red
-      set: Privateer Press Formula P3
-      hex: '#D07B3A'
-    deltaE: 2.31
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Light Brown
@@ -397065,6 +395349,15 @@ equivalences:
       set: Acrysion
       hex: '#CE722A'
     deltaE: 2.8
+    tier: close
+  - paint:
+      brand: Scale75
+      brandSlug: scale75
+      name: Melange Brown
+      productCode: SCG-36
+      set: Scalecolor Games
+      hex: '#D97D27'
+    deltaE: 3.55
     tier: close
 - source:
     brand: Vallejo
@@ -398247,12 +396540,13 @@ equivalences:
     deltaE: 1.87
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Mud Rut
-      set: Privateer Press Formula P3
-      hex: '#674D2D'
-    deltaE: 1.96
+      brand: Tamiya
+      brandSlug: tamiya
+      name: Dark earth
+      productCode: AS-22
+      set: Aircraft Spray
+      hex: '#674B2B'
+    deltaE: 2
     tier: close
 - source:
     brand: Vallejo
@@ -399762,10 +398056,10 @@ equivalences:
   - paint:
       brand: P3 (Privateer Press)
       brandSlug: p3
-      name: Skorne Flesh
+      name: Bloodtracker Brown
       set: Privateer Press Formula P3
-      hex: '#9D6327'
-    deltaE: 1.79
+      hex: '#A56A28'
+    deltaE: 2.08
     tier: close
   - paint:
       brand: Citadel Colour
@@ -401271,20 +399565,20 @@ equivalences:
     deltaE: 2.12
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Basilisk Brown
-      set: Privateer Press Formula P3
-      hex: '#76412B'
-    deltaE: 2.61
-    tier: close
-  - paint:
       brand: Monument (Pro Acryl)
       brandSlug: monument-pro-acryl
       name: AdeptiCon Spray-Team Orange Oxide
       productCode: S38
       set: Monument Pro Acrylic Primer
       hex: '#804C31'
+    deltaE: 2.92
+    tier: close
+  - paint:
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Calthan Brown
+      set: Foundation (discontinued)
+      hex: '#7A4231'
     deltaE: 2.92
     tier: close
 - source:
@@ -407026,11 +405320,11 @@ equivalences:
     deltaE: 1.76
     tier: close
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Greylord
-      set: Privateer Press Formula P3
-      hex: '#48453D'
+      brand: Citadel Colour
+      brandSlug: citadel-colour
+      name: Skavenblight Dinge
+      set: Layer
+      hex: '#45413B'
     deltaE: 1.79
     tier: close
 - source:
@@ -407443,14 +405737,6 @@ equivalences:
     hex: '#4B1C14'
   matches:
   - paint:
-      brand: P3 (Privateer Press)
-      brandSlug: p3
-      name: Hoksune Red
-      set: Privateer Press Formula P3
-      hex: '#4B2015'
-    deltaE: 1.75
-    tier: close
-  - paint:
       brand: AK Interactive
       brandSlug: ak-interactive
       name: Dark Leather
@@ -407467,6 +405753,15 @@ equivalences:
       set: Warpaints Tone
       hex: '#4A1B0E'
     deltaE: 1.97
+    tier: close
+  - paint:
+      brand: P3 (Privateer Press)
+      brandSlug: p3
+      name: Sul Red
+      productCode: SFP3-N209-S
+      set: P3 Paints
+      hex: '#451C16'
+    deltaE: 2.05
     tier: close
   - paint:
       brand: Mr Hobby
