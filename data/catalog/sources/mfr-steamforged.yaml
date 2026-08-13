@@ -7,11 +7,25 @@ scope:
 politeness:
   rps: 0.5
 contract:
-  # Evidence-based floor (~85% of observed): live probe 2026-07-13 found ~600 products across
-  # the in-house game-line vendor tags attributed to steamforged-games (Warmachine, Guild Ball,
-  # Godtear, Epic Encounters, + variants) out of 1089 store-wide. Controller decision,
-  # task-6-report.md.
-  minCount: 500
+  # Evidence-based floor (~85% of observed): live probe 2026-08-12 found 248 products across the
+  # in-house game-line vendor tags attributed to steamforged-games, out of 587 store-wide.
+  # Per TAG (not per line -- Epic Encounters ships under two): Guild Ball 103, Godtear 70,
+  # Epic Encounters 59, 'Epic Encounters: Local Legends' 12, Steamforged Games 3, Warmachine 1
+  # (a MiniCrate subscription box that stayed behind). 0.85 * 248 = 210.8.
+  #
+  # This floor was 500, set against the 2026-07-13 probe's 600 attributed / 1089 store-wide
+  # (task-6-report.md). It is lowered because THIS STORE'S SCOPE SHRANK, not because the floor
+  # was failing: Steamforged moved Warmachine, P3 Paints and Iron Kingdoms to its own second
+  # Shopify store, warmachine.gg (see mfr-warmachine). Exactly 352 observations left, all of
+  # them Warmachine, and all 352 were found alive on warmachine.gg by sku. Every other line
+  # here is intact -- zero churn, zero re-tags, zero new products.
+  #
+  # A floor is only ever lowered against a live probe that says the products left the SITE.
+  # The probe here says more than that: it identifies where each one went. Had the 352 merely
+  # 404'd with no successor store, the correct change would have been to age them out, not to
+  # lower this number until the job passed.
+  # See docs/research/2026-08-12-steamforged-warmachine-store-split.md.
+  minCount: 210
   maxDropPct: 30
   requiredFieldRates:
     name: 1.0

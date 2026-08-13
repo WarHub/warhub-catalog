@@ -1,0 +1,29 @@
+id: mfr-warmachine
+kind: manufacturer
+strategy: shopify
+baseUrl: https://warmachine.gg
+scope:
+  currency: usd
+politeness:
+  rps: 0.5
+contract:
+  # Evidence-based floor (~85% of observed): live probe 2026-08-12 enumerated 613 products
+  # store-wide, 609 of them attributed to steamforged-games (361 Warmachine, 222 P3 Paints,
+  # 25 Iron Kingdoms, 1 "Warmachine (app subscribers only)"); the 4 not attributed are the
+  # Baron of Dice accessories under "Steamforged Games - Tradeshow". 0.85 * 609 = 517.6.
+  #
+  # This store is NOT a new discovery -- it is where Steamforged moved a line it already sold.
+  # Between 2026-07-13 and 2026-08-12, 352 Warmachine products vanished from steamforged.com
+  # (all 404, /collections/warmachine 404 too) and reappeared here: 350 under an identical
+  # handle, and all 352 matched by sku. Nothing was discontinued. steamforged.com's own
+  # homepage carries the banner "Warmachine and P3 Paints have a new online home". The 352
+  # therefore keep a live member via THIS source, which is what stops resolve/attributes.py
+  # decaying them to suspected-discontinued as mfr-steamforged's copies age out.
+  # See docs/research/2026-08-12-steamforged-warmachine-store-split.md.
+  minCount: 520
+  maxDropPct: 30
+  requiredFieldRates:
+    # Measured on the 2026-08-12 probe: name 1.000, sku 0.995 (the misses are digital PDFs and
+    # a handful of no-sku bundles, same shape as mfr-steamforged's).
+    name: 1.0
+    sku: 0.8
