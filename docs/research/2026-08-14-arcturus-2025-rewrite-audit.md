@@ -90,16 +90,85 @@ hex sits within dRGB 10 of an evidenced row in the same set returns 30 hits in A
 in Scale75, nearly all of them false (`Deep Blue` ~ `Anthracite Grey` at 2.3 — both merely dark).
 It is name proximity *plus* colour *plus* the manufacturer's own list that identifies a duplicate.
 
-## Two findings left open
+## Two findings left open (the first has since been closed)
 
-**Scale75's Artist Range has a misspelling cluster that predates this rewrite.** Chasing the three
-uncorroborated Scale75 rows turned up `Yellow Ocre` (`#A0702E`, a proper ochre) sitting beside the
-harvest's `Yellow Ochre` (`SART-20`, no hex) — and `Yellow Ocre` is *not* one of the rewrite's
-additions. `Crimsom`, `Prusian Blue`, `Artic Blue` and `Chesknut Ink` are the same shape. 79 of the
-range's 91 records carry no product code, so the harvest enriched barely a tenth of it. This is a
-range-wide name-quality problem, not this rewrite's doing, and merging the pairs would lose the
-Arcturus hex because the harvest-side records have none — the survivor would need the colour moved
-onto it first, with the alias that identity move requires. It deserves its own pass.
+**Scale75's Artist Range has a misspelling cluster that predates this rewrite.** *(Resolved — see
+"The Artist Range pass" below.)* Chasing the three uncorroborated Scale75 rows turned up
+`Yellow Ocre` (`#A0702E`, a proper ochre) sitting beside the harvest's `Yellow Ochre` (`SART-20`,
+no hex) — and `Yellow Ocre` is *not* one of the rewrite's additions. `Crimsom`, `Prusian Blue`,
+`Artic Blue` and `Chesknut Ink` are the same shape. Merging the pairs would lose the Arcturus hex
+because the harvest-side records have none — the survivor needs the colour moved onto it first,
+with the alias that identity move requires.
+
+One claim here was wrong and the pass corrected it: *"79 of the range's 91 records carry no product
+code, so the harvest enriched barely a tenth of it."* A missing `productCode` does not mean the
+harvest missed. `HarvestApplier.ApplyEnrichment` fills **only** a blank Ean/ImageUrl and never
+writes ProductCode or Hex — they are identity-key components and it says so outright
+(`HarvestApplier.cs:20-23`). The code appears only on the `additions` path, i.e. on the paints the
+name-match *missed*. So a code is a marker of failure here, not of success: the harvest matched 70
+of the 91 exactly, and the count of code-less rows was measuring the wrong thing.
+
+## The Artist Range pass
+
+Seven pairs, merged. The range is settleable outright because the manufacturer publishes it
+completely: scale75.com lists `SART-01` … `SART-84` with **no gaps**, and against that list the
+archive's 91 Artist Range records partition exactly — 70 Arcturus rows matching a SART product by
+name, 13 SART products minted as `additions` because the name missed, 1 contested (`Titanium Grey`),
+and 7 Arcturus rows matching no SART product at all. Those 7 are the misspellings, `91 − 7 = 84`,
+and 0 of the 84 SKUs fail to name a record. A bijection, not a similarity score.
+
+| retracted (misspelled) | manufacturer's spelling | code | hex moved |
+|---|---|---|---|
+| Artic Blue | Arctic Blue | SART-44 | `#888FA1` |
+| Chesknut Ink | Chestnut Ink | SART-84 | `#40362D` |
+| Crimsom | Crimson | SART-10 | `#C22335` |
+| Naples Yellow | Yellow Naples | SART-18 | `#DAAC22` |
+| Prusian Blue | Prussian Blue | SART-30 | `#06293D` |
+| Yellow Ocre | Yellow Ochre | SART-20 | `#A0702E` |
+| Yellow Oxide | Oxide Yellow | SART-56 | `#4B3527` |
+
+Two are word **order**, not typos, and one of those was the doubtful case: `Yellow Oxide` `#4B3527`
+looked too dark to be an ochre. It is the same paint anyway, and the store settles it without the
+colour being consulted at all — the product's title is `OXIDE YELLOW` and its own slug is
+`/products/yellow-oxide`. One maker, two spellings, one bottle, exactly like P3's
+`Meridius`/`Meredius Blue`. That is the right order of proof: the hex was the thing in doubt, so it
+could not also be the witness.
+
+**A better name-match in the bridge would not have fixed this, and would have made it worse.** The
+tempting class fix — teach `bridge_scale75` to match `YELLOW OCHRE` to `Yellow Ocre` — stops the
+twin being minted but leaves the misspelling published *and* silently drops the seven product
+codes, because `enrich` writes neither ProductCode nor Hex by design. It converts "two records, one
+correct" into "one record, wrong name, no code". Only an override can correct a name, so the
+instances are the right unit of repair here; the bridge is untouched and regenerates byte-identical.
+
+`retract:` removes the misspelled row and a paired `hex:` override moves its colour onto the
+survivor. The alias that identity move requires is **not** hand-written: `PaintCatalogApp.cs:490`
+already auto-aliases every hex-carrying fresh identity to its own empty-hex key, which is exactly
+this direction, so the archived record merges and keeps its history. (The `colourless:` entries run
+the other way and must still be authored by hand.) 8,528 → 8,521 records, each survivor keeping
+`firstSeen: 2026-07-24`; `--ean-guard` exit 0 — scale75 publishes no barcodes at all, so none moved.
+
+What is lost is the retracted row's earlier `firstSeen` of 2026-07-10, and that is forced rather
+than chosen: an alias onto the Arcturus row would be refused (the base re-asserts that key every
+run, so `consumed` claims it) and an alias onto a retracted key is skipped outright.
+
+### `Titanium Grey` is not a misspelling — and the contested key is settleable after all
+
+It was on the suspect list and it does not belong there: scale75 spells it `TITANIUM GREY`
+(`SART-60`) and so does the archive. It is the contested key `bridge_scale75` documents — `SART-60`
+and Warfront's `SW-40` share that title, `add_enrich` refuses both, and the Artist Range record
+still carries the **wrong bottle's** photo and price (`SW-40`'s `4254.jpg`, EUR 2.25).
+
+The bridge defers it on the grounds that settling it would force `SW-40` to mint a new
+`Titanium Grey|Warfront  Range` "on the strength of one store collection tag". **That premise no
+longer holds.** Warfront already has the record: `Titanium Gray` `#41342B`, Arcturus-origin, no
+code — American spelling, so the in-set match misses and `SW-40` falls through to the brand-wide
+lookup, where the Artist Range row is the unique `titaniumgrey`. Correct the Warfront row's
+spelling and both SKUs match in-set, the contest disappears, and nothing is minted. Same defect
+class as the seven above, one range over. Left out of this pass because it renames a published
+record in a different range on a gray/grey judgement the archive makes inconsistently elsewhere
+(`Brown Grey`/`brown-gray`, `Field Grey`/`field-gray`, `Ocean Grey`/`ocean-gray` are all the same
+shape) — that is a maintainer's call, not a transcription fix.
 
 **Kimera Kolors' 12 signature-set rows are unverified in both directions.** Two artist Signature
 Sets (Danilo Cartacci, Michal Pisarski) with no barcode, no code and no harvest — but the brand has
