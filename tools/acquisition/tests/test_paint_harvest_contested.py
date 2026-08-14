@@ -217,6 +217,13 @@ class TestTheTwoModes:
         productCode, claimed by the Warfront bottle SW-40 and the Artist Range's own SART-60.
         Neither sku names it, so the entry would put one bottle's photo and price on whichever
         paint the C# finds -- the corruption Mode A does not have.
+
+        HISTORICAL AS OF 2026-08-14, and kept deliberately. The committed catalog no longer holds
+        this collision -- Warfront's record was spelled `Titanium Gray`, and correcting it gave
+        SW-40 an in-set home of its own (see `test_no_bridge_lets_a_contested_key_leave_in_silence`
+        and `bridge_scale75`). The catalog here is built by `_catalog` from the two lines below
+        rather than read from disk, so this test is unaffected by that and remains the canonical
+        worked example of Mode B: it is the MECHANISM being asserted, not the population.
         """
         catalog = _catalog(tmp_path, "scale75", [
             {"name": "Titanium Grey", "details": {"set": "Artist Range"}},
@@ -453,10 +460,25 @@ def test_no_bridge_lets_a_contested_key_leave_in_silence() -> None:
     """Whatever a bridge does about a collision, the file must still say it happened.
 
     Runs all nine bridges against the committed evidence: a key `add_enrich` withheld must be
-    absent from `enrich` AND present in the emitted candidates. That is ONE key today -- scale75's
-    `Titanium Grey|Artist Range`, the only Mode B collision no bridge resolves for itself
-    (monument settles its four by code, gsw routes its 31 by hand, and vallejo's four are Mode A
-    and are not withheld at all).
+    absent from `enrich` AND present in the emitted candidates.
+
+    THE POPULATION IS ZERO AS OF 2026-08-14, and the loop above is therefore vacuous today. It was
+    ONE key -- scale75's `Titanium Grey|Artist Range`, the only Mode B collision no bridge resolved
+    for itself (monument settles its four by code, gsw routes its 31 by hand, and vallejo's four
+    are Mode A and are not withheld at all). It went away because the collision was never really a
+    routing problem: SW-40's own Warfront home was spelled `Titanium Gray`, so the in-set match
+    missed it and the brand-wide fallback delivered it to the Artist Range record instead. A
+    `name:` override in data/paints/overrides.yaml corrects the spelling, both skus then match
+    in-set, and the two claims land on two different keys. Nothing was minted and no bridge
+    changed -- see `bridge_scale75`'s docstring, which used to argue the contest was not settleable
+    and now records why that was wrong.
+
+    SO WHY KEEP IT. The census below is the tripwire: a new contested key trips it and forces a
+    human to look, which is exactly the moment the loop's two assertions stop being vacuous and
+    start doing their job. Zero is a real, defensible steady state rather than an absence of
+    coverage -- the MECHANISM is exercised synthetically by `TestContestedKeys` and
+    `test_mode_b_one_paint_two_products_is_refused` above, on a catalog those tests build
+    themselves, so nothing here depends on the committed data still containing a collision.
     """
     if not (REPO_ROOT / "data/evidence/products").exists():
         pytest.skip("no repo data directory found (package built/tested outside the monorepo)")
@@ -469,7 +491,13 @@ def test_no_bridge_lets_a_contested_key_leave_in_silence() -> None:
             withheld.append((slug, key))
             assert key not in (data.get("enrich") or {}), f"{slug}: {key} withheld yet emitted"
             assert any(key in reason for reason in reasons), f"{slug}: {key} vanished silently"
-    assert withheld == [("scale75", "Titanium Grey|Artist Range")]
+    assert withheld == [], (
+        "a bridge now withholds a contested key that was not withheld before. The invariant above "
+        "still passed, so it is being REPORTED correctly and nothing is leaving in silence -- but "
+        "the population is deliberately zero (see this test's docstring), so a new one is a "
+        f"finding, not a fluctuation. Check whether the loser's real home already exists in the "
+        f"catalog under a spelling the join cannot see, as scale75's did. {withheld}"
+    )
 
 
     def test_a_mode_a_rival_cannot_blank_fill_the_winners_entry(
