@@ -725,6 +725,25 @@ aliases:
     # measured on the first attempt: +94 records, every varnish in the archive twice.
     Soil Works|Medium Wet||: Soil Works|Medium Wet||#FFFFFF
     Soil Works|Odorless Thinner||: Soil Works|Odorless Thinner||#DFDFDF
+    # Pairs with the `Titanium Gray|Warfront  Range` name override in this file's `scale75:` block,
+    # which states the evidence. Name is half the identity key, so without this line the rename
+    # SPLITS: the reconciler meets `...|titanium grey||#41342b`, has never seen it, mints a second
+    # record with today's firstSeen and leaves the `Gray` one standing beside it forever.
+    #
+    # THE OLD KEY IS REACHABLE ONLY BECAUSE THE OVERRIDE VACATES IT. This record is Arcturus-origin
+    # and the base re-asserts `Titanium Gray` on every run, which is normally exactly the case an
+    # alias CANNOT touch -- `CatalogReconciler` seeds `consumed` with every key a fresh record
+    # re-asserts (:38-46) and refuses an alias onto anything in it (:83-86). What makes this one
+    # legal is that `OverrideApplier.Apply` runs BEFORE reconciliation (PaintCatalogApp.cs:256), so
+    # by the time `consumed` is built no fresh record claims the `Gray` spelling any more. That is
+    # the capability PR #131 added; before it, this move needed `retract:` plus a re-mint.
+    #
+    # Both sides carry the SAME hex, so `ApplyRename`'s wholesale `Hex = fresh.Hex` is a no-op here
+    # and there is no colour to destroy. It also beats the blanket auto-alias at
+    # PaintCatalogApp.cs:490 (explicit entries are assigned first; the generated ones only `TryAdd`),
+    # which is what we want -- that one would aim at this record's own hexless key, which no archive
+    # record holds.
+    'Warfront  Range|Titanium Grey||#41342B': 'Warfront  Range|Titanium Gray||#41342B'
   reaper:
     # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
     # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
@@ -2581,6 +2600,46 @@ scale75:
     hex: '#DAAC22'   # SART-18, from the retracted `Naples Yellow`
   Yellow Ochre|Artist Range:
     hex: '#A0702E'   # SART-20, from the retracted `Yellow Ocre`
+
+  # --- Warfront `Titanium Gray` -> `Titanium Grey`, which settles a contested key (2026-08-14) ---
+  #
+  # THE SAME DEFECT CLASS AS THE SEVEN ABOVE -- a name-match miss on a spelling variant -- but it
+  # shows up as a CONTESTED KEY rather than a duplicate, and the damage it left is a record wearing
+  # another bottle's photograph.
+  #
+  # scale75 sells two different paints both titled `TITANIUM GREY`: SART-60 (Artist Range) and
+  # SW-40 (Warfront). The archive spells the Warfront one `Titanium Gray`, so `bridge_scale75`'s
+  # in-set match misses it, SW-40 falls through to the brand-wide `catalog.match_name` fallback,
+  # and lands on the only `titaniumgrey` in the brand -- the ARTIST RANGE record. Two store
+  # products then claim one catalog identity, which is `add_enrich`'s Mode B, and both are refused.
+  # The refusal is correct and it came too late: `data/paints/brands/scale75.yaml` already had
+  # SW-40's photo (`4254.jpg`) and its EUR 2.25 on the Artist Range paint, and neither
+  # `ApplyEnrichment` nor `BarcodeEnricher` can take a wrong value back out -- they only blank-fill.
+  #
+  # `bridge_scale75`'s docstring defers this, on the grounds that settling it would force SW-40 to
+  # "MINT `Titanium Grey|Warfront  Range` ... i.e. assert a new paint on the strength of one store
+  # collection tag". THAT PREMISE IS FALSE, and this override is the whole correction: Warfront
+  # ALREADY HOLDS the record, under the American spelling. Nothing is minted and no range is
+  # promoted -- one published name gains an `e`, both SKUs then match IN-SET, the two claims land
+  # on two different keys, and the contest simply ceases to exist.
+  #
+  # THE MANUFACTURER USES BOTH SPELLINGS, so this is a house-style choice, not a typo fix, and it
+  # is made the way the seven above were made -- by the product TITLE. SW-40's title is
+  # `TITANIUM GREY` while its slug is `/products/titanium-gray`; scale75 does this constantly
+  # (`BROWN GREY` at `/brown-gray`, `FIELD GREY` at `/field-gray`, `OCEAN GREY` at `/ocean-gray`).
+  # The titles are consistently `GREY` and so is every other grey in this archive's Warfront and
+  # Artist ranges, so `Grey` is both the manufacturer's word and the set's own convention.
+  #
+  # WHAT THIS FIXES AND WHAT IT DOES NOT. Once the contest clears, SART-60's entry carries its own
+  # photo and price, and `Merge` prefers a non-blank fresh `ImageUrl`/price over the stored one
+  # (PaintRecordAdapter.cs:46-53) -- so the Artist Range record is REPAIRED, not merely stopped
+  # from getting worse. SW-40's own entry, however, is inert: harvest enrichment runs at
+  # PaintCatalogApp.cs:249 and this override at :256, so the fresh Warfront record is still spelled
+  # `Gray` when the exact `{Name}|{Set}` lookup happens and its entry never lands. That costs
+  # nothing today -- the record holds no imageUrl and no price to begin with -- but it is the
+  # "opposite sides of the fence" trap, and it is why this is an override and not a bridge change.
+  'Titanium Gray|Warfront  Range':
+    name: Titanium Grey
 
 tamiya:
   # --- colourless utility products (2026-08-13) ---

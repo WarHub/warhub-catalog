@@ -152,7 +152,7 @@ What is lost is the retracted row's earlier `firstSeen` of 2026-07-10, and that 
 than chosen: an alias onto the Arcturus row would be refused (the base re-asserts that key every
 run, so `consumed` claims it) and an alias onto a retracted key is skipped outright.
 
-### `Titanium Grey` is not a misspelling — and the contested key is settleable after all
+### `Titanium Grey` is not a misspelling — it was a contested key, now settled
 
 It was on the suspect list and it does not belong there: scale75 spells it `TITANIUM GREY`
 (`SART-60`) and so does the archive. It is the contested key `bridge_scale75` documents — `SART-60`
@@ -160,15 +160,34 @@ and Warfront's `SW-40` share that title, `add_enrich` refuses both, and the Arti
 still carries the **wrong bottle's** photo and price (`SW-40`'s `4254.jpg`, EUR 2.25).
 
 The bridge defers it on the grounds that settling it would force `SW-40` to mint a new
-`Titanium Grey|Warfront  Range` "on the strength of one store collection tag". **That premise no
-longer holds.** Warfront already has the record: `Titanium Gray` `#41342B`, Arcturus-origin, no
-code — American spelling, so the in-set match misses and `SW-40` falls through to the brand-wide
-lookup, where the Artist Range row is the unique `titaniumgrey`. Correct the Warfront row's
-spelling and both SKUs match in-set, the contest disappears, and nothing is minted. Same defect
-class as the seven above, one range over. Left out of this pass because it renames a published
-record in a different range on a gray/grey judgement the archive makes inconsistently elsewhere
-(`Brown Grey`/`brown-gray`, `Field Grey`/`field-gray`, `Ocean Grey`/`ocean-gray` are all the same
-shape) — that is a maintainer's call, not a transcription fix.
+`Titanium Grey|Warfront  Range` "on the strength of one store collection tag". **That premise was
+false.** Warfront already held the record: `Titanium Gray` `#41342B`, Arcturus-origin, no code —
+American spelling, so the in-set match missed and `SW-40` fell through to the brand-wide lookup,
+where the Artist Range row was the unique `titaniumgrey`. Same defect class as the seven above, one
+range over, and the fix is one `name:` override plus its alias: `Gray` → `Grey`, both SKUs then
+match **in-set**, the two claims land on two different keys, and the contest ceases to exist.
+Nothing is minted and no range is promoted — `enrich` 294 → 296, `candidates` 9 → 7, contested 0.
+
+Which spelling is a house-style call, not a typo fix, and it is made the way the seven above were —
+by the product **title**. scale75's own titles are consistently `GREY` while its slugs are
+consistently `gray` (`BROWN GREY` at `/brown-gray`, `FIELD GREY` at `/field-gray`, `OCEAN GREY` at
+`/ocean-gray`), and every other grey in the archive's Warfront and Artist ranges already says
+`Grey`.
+
+**The wrong photo repaired itself, which was the point.** Once the contest cleared, `SART-60`'s
+entry carried its own image and price, and `Merge` prefers a non-blank fresh `ImageUrl`/price over
+the stored one (`PaintRecordAdapter.cs:46-53`) — so the Artist Range record went from `4254.jpg` /
+EUR 2.25 (the Warfront bottle) to `6139.jpg` / EUR 3.72 (its own). Blank-filling could never have
+done this; it took the contest clearing for a fresh value to exist at all.
+
+One honest limitation: `SW-40`'s own entry is **inert**. Harvest enrichment runs at
+`PaintCatalogApp.cs:249` and the override at `:256`, so the fresh Warfront record is still spelled
+`Gray` when the exact `{Name}|{Set}` lookup happens, and its entry never lands. It costs nothing
+today — that record holds no image and no price to begin with — but it is the "opposite sides of
+the fence" trap in its natural habitat, and it is precisely why this is an override rather than a
+bridge change. Applying the rename needs **two passes**: the tool renames, the generator re-reads
+the renamed catalog and resolves the contest, the tool runs again and lands the corrected photo.
+CI already runs the generator before the tool, so the steady state is reached on the next run.
 
 **Kimera Kolors' 12 signature-set rows are unverified in both directions.** Two artist Signature
 Sets (Danilo Cartacci, Michal Pisarski) with no barcode, no code and no harvest — but the brand has

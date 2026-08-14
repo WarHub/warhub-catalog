@@ -1091,32 +1091,37 @@ def bridge_scale75() -> BrandHarvest:
     barcodes unpopulated store-wide); unmatched singles in KNOWN sets and the three
     post-Arcturus ranges join as additions with the store SKU as the code.
 
-    ONE contested key, left to add_enrich to refuse: SART-60 and SW-40 are both titled "TITANIUM
-    GREY" and the catalog holds ONE `Titanium Grey|Artist Range`, carrying no productCode. That
-    is `add_enrich`'s MODE B -- one paint, two products -- so `Catalog.owner` returns None for
-    both skus and neither can claim it. The in-set match (SART-60, artist-individuales) is the
-    better evidence and the brand-wide fallback on the line below is what let SW-40
-    (warfront-individuales) reach it -- so this IS settleable, unlike gsw. It is not settled here
-    because resolving it in the bridge does not just pick a winner: SW-40 would then fall to the
-    addition branch and MINT `Titanium Grey|Warfront  Range` under the `previous_addition_codes`
-    ratchet, i.e. assert a new paint on the strength of one store collection tag. Promotion, if
-    it is one, belongs in its own change.
+    THE ONE CONTESTED KEY THIS BRIDGE USED TO CARRY IS GONE (2026-08-14, PR #138), and the way it
+    went is worth keeping, because the deferral recorded here for a week rested on a false premise.
+    SART-60 and SW-40 are both titled "TITANIUM GREY". The catalog spelled the Warfront one
+    `Titanium Gray`, so the in-set match on the line below missed it, SW-40 fell through to the
+    BRAND-WIDE `match_name` fallback, and landed on the only `titaniumgrey` in the brand -- the
+    ARTIST RANGE record. Two store products claiming one identity is `add_enrich`'s MODE B, so
+    `Catalog.owner` returned None for both skus and neither could claim it.
 
-    WHAT THE REFUSAL COSTS, corrected: SW-40 arrives FIRST, so SW-40's is the entry first-wins
-    published and this change withholds -- imageUrl `.../4254.jpg` and priceEur 2.25, exactly as
-    HEAD's data/paints/harvest/scale75.yaml:1581-1586 has it. SART-60's EUR 3.72 was never the
-    Titanium Grey entry's price and has never appeared on this key in any harvest file (3.72 is
-    a common scale75 figure elsewhere in that file, which is how it got miscited). scale75
-    publishes no EANs, so no barcode is at stake.
+    This docstring used to defer settling it on the grounds that SW-40 would then "fall to the
+    addition branch and MINT `Titanium Grey|Warfront  Range` ... i.e. assert a new paint on the
+    strength of one store collection tag". THAT WAS WRONG: Warfront already HELD the record, under
+    the American spelling. The fix was one `name:` override (`Gray` -> `Grey`) plus its alias in
+    data/paints/overrides.yaml, which states the evidence. Both skus then match IN-SET, the two
+    claims land on two different keys, and there is nothing left to contest -- no mint, no
+    promotion, no bridge change. enrich 294 -> 296, candidates 9 -> 7, contested 1 -> 0.
 
-    AND THE DAMAGE ALREADY ON DISK, which the deferral above has to be weighed against:
-    data/paints/brands/scale75.yaml:1280-1292 shows `Titanium Grey` (set `Artist Range`) ALREADY
-    carrying `.../4254.jpg` and priceEur 2.25 -- the Warfront bottle's photo and price on the
-    Artist Range record. So this is a FOURTH already-wrong record alongside monument's Blue,
-    Orange and Shadow Flesh, and unlike those three the bridge does not repair it: withholding
-    the entry stops the wrong value being re-asserted, but `HarvestApplier.ApplyEnrichment` and
-    `BarcodeEnricher` only ever blank-fill, so the record keeps what it has. Correcting it is the
-    same archive pass the GSW dipping inks need, and this record belongs on its list."""
+    THE LESSON, since the shape recurs: a Mode B contest can be a NAME-QUALITY defect wearing a
+    routing defect's clothes. Before treating one as unsettleable, check whether the loser's real
+    home already exists in the catalog under a spelling the join cannot see. `Catalog.match_name`
+    normalizes to lowercase alphanumerics only (`norm`), so gray/grey, a doubled letter and a word
+    swap all read as different paints -- and the brand-wide fallback then quietly delivers the row
+    to whichever record DID normalize alike, which is the worst available outcome.
+
+    AND THE DAMAGE IT LEFT, now repaired: the Artist Range record carried `.../4254.jpg` and
+    priceEur 2.25 -- the WARFRONT bottle's photo and price -- because SW-40 arrives first and won
+    the old first-wins merge before this refusal existed. Withholding the entry stopped the wrong
+    value being re-asserted but could never take it back out, since `ApplyEnrichment` and
+    `BarcodeEnricher` only blank-fill. Clearing the contest is what fixed it: SART-60's entry now
+    supplies a NON-BLANK fresh imageUrl and price, and `PaintRecordAdapter.Merge` prefers fresh
+    over stored for both (:46-53), so the record moved to its own `.../6139.jpg` and EUR 3.72.
+    That leaves monument's Blue, Orange and Shadow Flesh on the archive-pass list, not this one."""
     catalog = Catalog("scale75", BRANDS_DIR)
     prior_additions = previous_addition_codes("scale75")
     out = BrandHarvest(catalog)
