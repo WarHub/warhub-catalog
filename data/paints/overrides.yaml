@@ -1065,6 +1065,39 @@ retract:
     - 'Real Colors - WWII|Us Interior Yellow Green 10ml|RC262|#848158'
     - 'Real Colors - WWII|Zb Au Basic Protector|RC077|#433E21'
     - 'Real Colors - WWII|Zinc Chromate Yellow 10ml|RC263|#D1BB4E'
+  army-painter:
+    # --- FOUR PAINTS PUBLISHED TWICE, ONCE UNDER A MISSPELLING (2026-08-14) ---------------------
+    #
+    # Found by auditing upstream's 2025-03-27 rewrite (Arcturus5404/miniature-paints b180abb ->
+    # 22791a6) across every brand, the way the P3 range was audited in PR #132. That rewrite added
+    # 1,531 distinct names to the brands WarHub publishes and it did NOT repeat the P3 failure:
+    # its Army Painter additions carry a barcode 92% of the time against 51% for the rows that
+    # predate it, so the new material is better evidenced than the old. These four are the
+    # exception, and they are a different defect from P3's -- not a paint that never shipped, but
+    # a real paint spelled wrong and therefore published beside itself.
+    #
+    # THE MECHANISM IS THE ONE THE NAME-MATCH MISS ALWAYS PRODUCES. The misspelled row arrives
+    # from the base parse (firstSeen 2026-07-23). The next day the manufacturer harvest offers the
+    # correct spelling; `HarvestApplier.ApplyEnrichment` keys on `{Name}|{Set}`, misses by one
+    # letter, and `AppendAdditions` MINTS the correct name as a second paint (firstSeen
+    # 2026-07-24) carrying the barcode, the product code and its own colour. Both then publish.
+    #
+    # THE MANUFACTURER SETTLES THE SPELLING, not a similarity score. thearmypainter.com lists
+    # `Bony Spikes`, `Brigandine Brown`, `Terrestrial Titan` and `Violent Vermilion`, and lists
+    # none of the four spellings retracted here -- checked against the committed harvest, which is
+    # where those 218 barcodes come from.
+    #
+    # NOTHING IS LOST. Each retracted row holds no `ean`, no `additionalEans` and no
+    # `productCode`; its only unique content is a hex, and the surviving record carries its own
+    # (d = 2.3, 4.7, 8.0 and 28.0 respectively -- two independent measurements of one pot, except
+    # Brigandine Brown where the archive and the store disagree more and the store's own product
+    # page is the better source anyway). No alias: an alias asserts these are the same record and
+    # would move history onto a hex the survivor already has. This is a deletion of a duplicate,
+    # which is exactly what `retract:` is for.
+    - 'Warpaints Fanatic|Boney Spikes||#E6D4C1'        # -> Bony Spikes, WP3089P, 5713799308909
+    - 'Warpaints Fanatic|Brigadine Brown||#443A40'     # -> Brigandine Brown, WP3073P, 5713799307308
+    - 'Warpaints Fanatic|Terrestial Titan||#303149'    # -> Terrestrial Titan, WP3127P, 5713799312708
+    - 'Warpaints Fanatic|Violent Vermillion||#F37964'  # -> Violent Vermilion, WP3107P, 5713799310704
   green-stuff-world:
     - 'Acrylic Inks|Acrylic Inks Set - Basic Opaque (x4)|13344|'
     - 'Acrylic Inks|Acrylic Inks Set - Basic Transparent (x4)|13348|'

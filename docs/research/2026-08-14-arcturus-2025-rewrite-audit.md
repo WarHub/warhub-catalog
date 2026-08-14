@@ -1,0 +1,108 @@
+# Auditing the 2025-03-27 upstream rewrite for a second P3 (2026-08-14)
+
+PR #132 retracted 37 Formula P3 rows that upstream's 2025-03-27 rewrite had transcribed from a
+Nov-2019 chart of an **expanded line that was announced and never shipped**. Privateer Press sold
+the brand to Steamforged before most of it existed, and the chart was the only source those 37
+names ever had.
+
+The rewrite is one commit (`Arcturus5404/miniature-paints` `b180abb` → `22791a6`) and it rewrote
+**every** `paints/*.md`. So the open question was not whether P3 was fixed but whether the same
+transcription happened to any other brand. **It did not.** The rewrite's additions are, brand for
+brand, better evidenced than the material that predates them. What it did leave is a different and
+much smaller defect: four Army Painter paints published twice, once under a misspelling.
+
+## Method
+
+A line diff is useless here — the rewrite changed the file format from an HTML `<table>` to a
+markdown pipe table, so it reads as 11,578 insertions against 112,052 deletions, nearly all of it
+formatting. The rows have to be parsed out of both formats and compared as sets.
+
+**Compared on names, not on `(name, set)`.** Upstream's `Set` column does not hold a set name in
+most files: Army Painter holds product codes (`CP3001`) or the literal string `null`, Mr Hobby
+holds codes (`H57`, `SG14`), and only a few files (P3, GreenStuffWorld) hold anything resembling a
+range. The rewrite also changed that column wholesale, so a `(name, set)` diff counts set-churn as
+additions and scores Army Painter at +467/−238 — of which almost none is a new paint. The name is
+the only field whose meaning survives the rewrite, so it is the only honest join key.
+
+Each added name was then scored against three signals WarHub holds independently of upstream: a
+barcode, a manufacturer product code, and presence in a committed manufacturer harvest. The P3
+contamination signature is all three absent.
+
+**An uncorroborated row is not automatically contamination** — a real paint can simply be missing
+from the harvests that have been run. What identifies contamination is the *contrast* with the
+brand's own baseline. If the added rows are markedly less evidenced than the rows that predate
+them, the addition is the anomaly; if they are better evidenced, the addition is a real range.
+
+## Result
+
+1,531 distinct names added across the 20 brands WarHub publishes. Barcode coverage of the added
+rows against the brand's pre-existing rows:
+
+| brand | added | with barcode | with code | in harvest | baseline barcode |
+|---|---|---|---|---|---|
+| army-painter | 225 | **92%** | 5% | 97% | **51%** |
+| vallejo | 172 | 100% | 100% | 97% | 100% |
+| mr-hobby | 391 | 59% | 100% | 85% | *(new file)* |
+| ak-real-color | 251 | 0% | 100% | 0% | *(new file)* |
+| mission-models | 201 | 0% | 100% | 0% | *(new file)* |
+| green-stuff-world | 71 | 99% | 0% | 55% | 98% |
+| monument-pro-acryl | 64 | 100% | 100% | 100% | 95% |
+| turbo-dork | 40 | 100% | 0% | 100% | 100% |
+| scale75 | 28 | 0% | 22% | 92% | 0% |
+| kimera-kolors | 26 | 0% | 54% | 0% | 0% |
+| tamiya | 20 | 0% | 100% | 0% | 0% |
+
+Army Painter is the clearest case and the one most worth stating: the rewrite's additions there
+are the Warpaints Fanatic and Speedpaint 2.0 ranges, and they carry a barcode **92%** of the time
+against **51%** for the rows that predate them. That is a real range refresh, not a transcription.
+
+Four of the eight files with no pre-rewrite baseline are new published brands (AK Real Color,
+Mission Models, Mr Hobby, Turbo Dork — 1,162 rows); the other four are craft brands
+`BrandRegistry` excludes and WarHub never publishes.
+
+Only **23** added rows still published carry none of the three signals: 12 Kimera Kolors, 7 Army
+Painter, 3 Scale75, 1 Green Stuff World. Kimera's baseline barcode coverage is 0%, so 0% on its
+additions is that brand's normal state rather than a finding.
+
+## What it did leave: four paints published twice
+
+| retracted (misspelled) | manufacturer's spelling | code | dRGB |
+|---|---|---|---|
+| Boney Spikes | Bony Spikes | WP3089P | 8.0 |
+| Brigadine Brown | Brigandine Brown | WP3073P | 28.0 |
+| Terrestial Titan | Terrestrial Titan | WP3127P | 2.3 |
+| Violent Vermillion | Violent Vermilion | WP3107P | 4.7 |
+
+The mechanism is the name-match miss. The misspelled row arrives from the base parse (firstSeen
+2026-07-23); the next day the manufacturer harvest offers the correct spelling,
+`HarvestApplier.ApplyEnrichment` keys on `{Name}|{Set}`, misses by one letter, and
+`AppendAdditions` mints the correct name as a **second** paint (firstSeen 2026-07-24) carrying the
+barcode, the product code and its own colour. Both then publish.
+
+The manufacturer settles the spelling, not a similarity score: thearmypainter.com lists all four
+correct forms and none of the four misspellings. Retracted rather than aliased — each misspelled
+row holds no barcode and no product code, its only unique content is a hex the survivor already
+has independently, and an alias would assert the two are one record and move history onto a colour
+that is already there.
+
+**Colour proximity alone is not a usable signal for this.** A sweep for evidence-less rows whose
+hex sits within dRGB 10 of an evidenced row in the same set returns 30 hits in Army Painter and 61
+in Scale75, nearly all of them false (`Deep Blue` ~ `Anthracite Grey` at 2.3 — both merely dark).
+It is name proximity *plus* colour *plus* the manufacturer's own list that identifies a duplicate.
+
+## Two findings left open
+
+**Scale75's Artist Range has a misspelling cluster that predates this rewrite.** Chasing the three
+uncorroborated Scale75 rows turned up `Yellow Ocre` (`#A0702E`, a proper ochre) sitting beside the
+harvest's `Yellow Ochre` (`SART-20`, no hex) — and `Yellow Ocre` is *not* one of the rewrite's
+additions. `Crimsom`, `Prusian Blue`, `Artic Blue` and `Chesknut Ink` are the same shape. 79 of the
+range's 91 records carry no product code, so the harvest enriched barely a tenth of it. This is a
+range-wide name-quality problem, not this rewrite's doing, and merging the pairs would lose the
+Arcturus hex because the harvest-side records have none — the survivor would need the colour moved
+onto it first, with the alias that identity move requires. It deserves its own pass.
+
+**Kimera Kolors' 12 signature-set rows are unverified in both directions.** Two artist Signature
+Sets (Danilo Cartacci, Michal Pisarski) with no barcode, no code and no harvest — but the brand has
+no barcode coverage at all, so there is nothing to contrast them against. Unlike P3's 37 there is
+no positive evidence they never shipped. They need a manufacturer source before anything is done,
+not a retraction on absence of evidence.
