@@ -725,6 +725,25 @@ aliases:
     # measured on the first attempt: +94 records, every varnish in the archive twice.
     Soil Works|Medium Wet||: Soil Works|Medium Wet||#FFFFFF
     Soil Works|Odorless Thinner||: Soil Works|Odorless Thinner||#DFDFDF
+    # Pairs with the `Titanium Gray|Warfront  Range` name override in this file's `scale75:` block,
+    # which states the evidence. Name is half the identity key, so without this line the rename
+    # SPLITS: the reconciler meets `...|titanium grey||#41342b`, has never seen it, mints a second
+    # record with today's firstSeen and leaves the `Gray` one standing beside it forever.
+    #
+    # THE OLD KEY IS REACHABLE ONLY BECAUSE THE OVERRIDE VACATES IT. This record is Arcturus-origin
+    # and the base re-asserts `Titanium Gray` on every run, which is normally exactly the case an
+    # alias CANNOT touch -- `CatalogReconciler` seeds `consumed` with every key a fresh record
+    # re-asserts (:38-46) and refuses an alias onto anything in it (:83-86). What makes this one
+    # legal is that `OverrideApplier.Apply` runs BEFORE reconciliation (PaintCatalogApp.cs:256), so
+    # by the time `consumed` is built no fresh record claims the `Gray` spelling any more. That is
+    # the capability PR #131 added; before it, this move needed `retract:` plus a re-mint.
+    #
+    # Both sides carry the SAME hex, so `ApplyRename`'s wholesale `Hex = fresh.Hex` is a no-op here
+    # and there is no colour to destroy. It also beats the blanket auto-alias at
+    # PaintCatalogApp.cs:490 (explicit entries are assigned first; the generated ones only `TryAdd`),
+    # which is what we want -- that one would aim at this record's own hexless key, which no archive
+    # record holds.
+    'Warfront  Range|Titanium Grey||#41342B': 'Warfront  Range|Titanium Gray||#41342B'
   reaper:
     # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
     # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
@@ -1496,6 +1515,70 @@ retract:
     - 'Privateer Press Formula P3|Bleached Blue||#877A68'        # attested nowhere at all
     - 'Privateer Press Formula P3|Hoksune Red||#4B2015'          # renamed to Amethyst Rose, 93211
     - 'Privateer Press Formula P3|Meridius Blue||#1F9095'        # = Meredius Blue, PIP 93048
+  scale75:
+    # --- SEVEN ARTIST RANGE PAINTS PUBLISHED TWICE, ONCE UNDER A MISSPELLING (2026-08-14) --------
+    #
+    # The finding PR #137 left open (docs/research/2026-08-14-arcturus-2025-rewrite-audit.md).
+    # Same duplicate SHAPE as that PR's four Army Painter rows -- a name-match miss between the
+    # base parse and the manufacturer harvest -- but it PREDATES the 2025-03-27 rewrite, and it is
+    # not repaired the same way, because here the survivor has no colour of its own. The paired
+    # `hex:` overrides in this file's `scale75:` block move the colour first; see there.
+    #
+    # THE PAIRING IS A BIJECTION, NOT A SIMILARITY SCORE, which is what makes it safe to merge
+    # seven pairs at once. scale75.com publishes SART-01 through SART-84 with no gaps -- 84
+    # products, all in collection `artist-individuales`
+    # (data/evidence/products/mfr-scale75/observations.jsonl). Against that list the archive's 91
+    # Artist Range records split exactly three ways:
+    #
+    #   70  Arcturus rows whose name matches a SART product exactly  -> harvest `enrich`
+    #   13  SART products matching no Arcturus row                   -> harvest `additions` (minted)
+    #    1  Titanium Grey, SART-60 -- NOT a duplicate, see below
+    #    7  Arcturus rows matching no SART product at all            -> retracted here
+    #
+    # 0 of the 84 manufacturer SKUs fail to name a catalog record, and these 7 rows are the ONLY
+    # records that name no SKU. 91 - 7 = 84 = the size of the range the manufacturer sells. Each
+    # of the seven carries the duplicate signature exactly -- no code, no imageUrl, no price, one
+    # hex -- and each partner carries code, imageUrl and price and no hex.
+    #
+    # THE MANUFACTURER SETTLES EACH SPELLING. Two of the seven are word ORDER rather than a typo
+    # (`Naples Yellow`, `Yellow Oxide`), and one of those was the doubtful case worth naming: the
+    # audit flagged `Yellow Oxide` #4B3527 as too dark for an ochre and possibly a different
+    # paint. It is not. scale75 sells it under BOTH spellings itself -- the product title is
+    # `OXIDE YELLOW` and its own URL slug is `/products/yellow-oxide`, SART-56. One maker, two
+    # names, one bottle, exactly as `Meridius`/`Meredius Blue` above. That settles it without
+    # appealing to the colour at all, which is the right way round: the hex is the thing in doubt
+    # here, so it cannot also be the witness.
+    #
+    # THE COLOUR IS MOVED, NOT DROPPED, which is the whole difference from PR #137. There the
+    # survivor already held its own hex and the retracted row's colour was a second measurement of
+    # it. Here the survivor is harvest-minted and BORN COLOURLESS, so a bare retraction would
+    # delete the only colour the catalogue has for these seven pots. Each `hex:` override below
+    # lands the Arcturus colour on the survivor in the same change; the retraction is what stops
+    # the base re-asserting the misspelling on the next run.
+    #
+    # WHAT IS LOST, stated rather than glossed: `firstSeen`. The survivor keeps 2026-07-24 and the
+    # retracted row's 2026-07-10 goes with it, so the archive forgets that it knew these colours a
+    # fortnight earlier. That is not a preference, it is the only reachable outcome -- an alias
+    # onto the Arcturus row would be REFUSED, because the base re-asserts that key every run and
+    # `CatalogReconciler` seeds `consumed` with it, and an alias onto a RETRACTED key is skipped
+    # outright (:83-86). Nothing else is at stake: scale75 publishes no EANs anywhere, so no
+    # barcode moves and `--ean-guard` cannot be affected.
+    #
+    # NOT IN THIS LIST: `Titanium Grey`. It was on the audit's suspect list and it is not a
+    # misspelling -- scale75 spells it `TITANIUM GREY` (SART-60) and so does the archive. It is
+    # the contested key `bridge_scale75`'s docstring already documents: SART-60 and Warfront's
+    # SW-40 are both titled "TITANIUM GREY", `add_enrich` refuses both, and the record carries the
+    # WRONG bottle's photo and price (SW-40's `4254.jpg`, EUR 2.25) from before that refusal
+    # existed. A real defect, a different one, and the bridge states why fixing it belongs in its
+    # own change: the loser has to become a new Warfront paint or be dropped, and that is a
+    # promotion decision, not a spelling one.
+    - 'Artist Range|Artic Blue||#888FA1'      # -> Arctic Blue,   SART-44 (azul-artico)
+    - 'Artist Range|Chesknut Ink||#40362D'    # -> Chestnut Ink,  SART-84 (chestnut-ink)
+    - 'Artist Range|Crimsom||#C22335'         # -> Crimson,       SART-10 (carmesi)
+    - 'Artist Range|Naples Yellow||#DAAC22'   # -> Yellow Naples, SART-18 (amarillo-napoles)
+    - 'Artist Range|Prusian Blue||#06293D'    # -> Prussian Blue, SART-30 (azul-prusiano)
+    - 'Artist Range|Yellow Ocre||#A0702E'     # -> Yellow Ochre,  SART-20 (ocre-amarillo)
+    - 'Artist Range|Yellow Oxide||#4B3527'    # -> Oxide Yellow,  SART-56 (yellow-oxide)
 
 # Hand-maintained paint overrides: `{brand-slug}` -> `{Name}|{Set}` -> fields.
 # Applied AFTER the manufacturer bridge (data/paints/barcodes/*.yaml), so an entry here beats both
@@ -2473,6 +2556,90 @@ scale75:
     colourless: true   # cleared #FFFFFF
   Odorless Thinner|Soil Works:
     colourless: true   # cleared #DFDFDF
+
+  # --- Artist Range: the colour of seven misspelled twins, moved onto the survivor (2026-08-14) ---
+  #
+  # THE OTHER HALF OF THE `retract: scale75:` BLOCK ABOVE, which states the evidence for all seven
+  # pairs and must be read with these. Each key below is a real scale75 product (SART code in the
+  # comment) that the manufacturer harvest MINTED because `HarvestApplier.ApplyEnrichment` keys on
+  # `{Name}|{Set}` and the Arcturus base spelled the name differently. A minted addition is born
+  # colourless (`HarvestApplier.AppendAdditions` sets hex "" and R/G/B 0), so the only colour the
+  # catalogue holds for these seven pots is on the row being retracted. These lines move it.
+  #
+  # THE ORDER IS WHAT MAKES THIS WORK, and it is not the order the keys suggest. Harvest additions
+  # are appended at PaintCatalogApp.cs:210 and overrides applied at :256, so by the time this file
+  # is read the survivor is already in the list under the manufacturer's spelling -- which is why
+  # these keys are the CORRECT names, and why the usual "an override key stays the spelling the
+  # base emits" rule does not bite here. Nothing renames anything: the survivor's name and code
+  # are already right, and only its `hex` moves. `OverrideApplier` recomputes R/G/B from it (:40,
+  # :65), so the three colour fields cannot drift apart.
+  #
+  # NO HAND-WRITTEN ALIAS, and that IS the paired alias the identity move needs -- generated
+  # rather than authored. Hex is part of `set|name|productCode|hex`, so each of these moves its
+  # record and would MINT a hexless twin beside it. PaintCatalogApp.cs:490 already emits exactly
+  # this alias for every hex-carrying fresh identity, pointing it at the same record's empty-hex
+  # key; the archive holds that key today, so the alias fires and the record MERGES, keeping its
+  # history. Authoring the same pair by hand in `aliases:` would be a second spelling of a rule
+  # the tool applies for free -- and one that then has to be maintained past the next identity
+  # move. The auto-alias covers this direction ONLY (hex-carrying fresh -> hexless archive); the
+  # `colourless:` entries above run the other way and are hand-written for precisely that reason.
+  #
+  # Proof it worked, both halves checkable in the diff: 8,528 -> 8,521 records (seven retractions,
+  # no mints), and each survivor keeps `firstSeen: '2026-07-24'` rather than gaining today's date.
+  Arctic Blue|Artist Range:
+    hex: '#888FA1'   # SART-44, from the retracted `Artic Blue`
+  Chestnut Ink|Artist Range:
+    hex: '#40362D'   # SART-84, from the retracted `Chesknut Ink`
+  Crimson|Artist Range:
+    hex: '#C22335'   # SART-10, from the retracted `Crimsom`
+  Oxide Yellow|Artist Range:
+    hex: '#4B3527'   # SART-56, from the retracted `Yellow Oxide`
+  Prussian Blue|Artist Range:
+    hex: '#06293D'   # SART-30, from the retracted `Prusian Blue`
+  Yellow Naples|Artist Range:
+    hex: '#DAAC22'   # SART-18, from the retracted `Naples Yellow`
+  Yellow Ochre|Artist Range:
+    hex: '#A0702E'   # SART-20, from the retracted `Yellow Ocre`
+
+  # --- Warfront `Titanium Gray` -> `Titanium Grey`, which settles a contested key (2026-08-14) ---
+  #
+  # THE SAME DEFECT CLASS AS THE SEVEN ABOVE -- a name-match miss on a spelling variant -- but it
+  # shows up as a CONTESTED KEY rather than a duplicate, and the damage it left is a record wearing
+  # another bottle's photograph.
+  #
+  # scale75 sells two different paints both titled `TITANIUM GREY`: SART-60 (Artist Range) and
+  # SW-40 (Warfront). The archive spells the Warfront one `Titanium Gray`, so `bridge_scale75`'s
+  # in-set match misses it, SW-40 falls through to the brand-wide `catalog.match_name` fallback,
+  # and lands on the only `titaniumgrey` in the brand -- the ARTIST RANGE record. Two store
+  # products then claim one catalog identity, which is `add_enrich`'s Mode B, and both are refused.
+  # The refusal is correct and it came too late: `data/paints/brands/scale75.yaml` already had
+  # SW-40's photo (`4254.jpg`) and its EUR 2.25 on the Artist Range paint, and neither
+  # `ApplyEnrichment` nor `BarcodeEnricher` can take a wrong value back out -- they only blank-fill.
+  #
+  # `bridge_scale75`'s docstring defers this, on the grounds that settling it would force SW-40 to
+  # "MINT `Titanium Grey|Warfront  Range` ... i.e. assert a new paint on the strength of one store
+  # collection tag". THAT PREMISE IS FALSE, and this override is the whole correction: Warfront
+  # ALREADY HOLDS the record, under the American spelling. Nothing is minted and no range is
+  # promoted -- one published name gains an `e`, both SKUs then match IN-SET, the two claims land
+  # on two different keys, and the contest simply ceases to exist.
+  #
+  # THE MANUFACTURER USES BOTH SPELLINGS, so this is a house-style choice, not a typo fix, and it
+  # is made the way the seven above were made -- by the product TITLE. SW-40's title is
+  # `TITANIUM GREY` while its slug is `/products/titanium-gray`; scale75 does this constantly
+  # (`BROWN GREY` at `/brown-gray`, `FIELD GREY` at `/field-gray`, `OCEAN GREY` at `/ocean-gray`).
+  # The titles are consistently `GREY` and so is every other grey in this archive's Warfront and
+  # Artist ranges, so `Grey` is both the manufacturer's word and the set's own convention.
+  #
+  # WHAT THIS FIXES AND WHAT IT DOES NOT. Once the contest clears, SART-60's entry carries its own
+  # photo and price, and `Merge` prefers a non-blank fresh `ImageUrl`/price over the stored one
+  # (PaintRecordAdapter.cs:46-53) -- so the Artist Range record is REPAIRED, not merely stopped
+  # from getting worse. SW-40's own entry, however, is inert: harvest enrichment runs at
+  # PaintCatalogApp.cs:249 and this override at :256, so the fresh Warfront record is still spelled
+  # `Gray` when the exact `{Name}|{Set}` lookup happens and its entry never lands. That costs
+  # nothing today -- the record holds no imageUrl and no price to begin with -- but it is the
+  # "opposite sides of the fence" trap, and it is why this is an override and not a bridge change.
+  'Titanium Gray|Warfront  Range':
+    name: Titanium Grey
 
 tamiya:
   # --- colourless utility products (2026-08-13) ---
