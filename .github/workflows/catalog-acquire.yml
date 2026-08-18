@@ -542,10 +542,13 @@ jobs:
       # fail-after-PR property -- a failing run still opens/updates a sticky PR carrying its own
       # findings -- while the job still goes red in Checks.
       #
-      # RUNTIME. Measured 2026-08-18 against catalog/acquisition's own tree (e84a60b): all six
-      # files, 64 tests, 6m09s on a Windows dev box with zero data/ drift. data-ci.yml's header
-      # puts a Linux runner at roughly half that (NTFS is the whole 2x), so expect ~3 min against
-      # this job's timeout-minutes: 120 and a nightly that already runs 1h50m.
+      # RUNTIME, on a real runner rather than an extrapolation -- data-ci.yml's header asks for
+      # exactly this ("Replace the runner figure once the six-file job has a few real runs").
+      # The six-file job measured 2m42s on ubuntu-latest, on the Data CI run this stack's own
+      # PR #140 triggered. For comparison, the same six files against catalog/acquisition's tree
+      # (e84a60b) took 6m09s for 64 tests on a Windows dev box with zero data/ drift -- the ~2.3x
+      # is NTFS, as that header predicts. So ~3 min here, against this job's timeout-minutes: 120
+      # and a nightly that already runs 1h50m.
       - name: Data-integrity tests
         id: datatests
         working-directory: tools/acquisition
