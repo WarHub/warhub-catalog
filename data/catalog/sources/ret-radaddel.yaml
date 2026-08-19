@@ -1,34 +1,41 @@
 id: ret-radaddel
 kind: retailer
-strategy: sitemap-structured-data
-baseUrl: https://www.radaddel.de
+strategy: shopify
+baseUrl: https://radaddel.de
 scope:
-  sitemaps:
-    - https://www.radaddel.de/sitemap_index.xml
-  # No urlInclude: live probe 2026-07-13 confirmed product slugs are pure name-based with no
-  # reliable brand/category token -- e.g. the real GW flagship "necrons-combat-patrol" slug
-  # contains no "warhammer"/"games-workshop"/"citadel" substring at all. A keyword filter here
-  # would silently drop real GW products, which budget+priority already bounds without it.
-  #
-  # Re-verified for Plan 5 Task 2 (2026-07-13, docs/research/2026-07-13-coverage-arithmetic.md):
-  # this source was already an unfiltered full sweep, so it needed no "un-GW-scoping" -- the
-  # self-inflicted-gap problem this task fixes on Game Nerdz does not exist here. Confirmed the
-  # decision still holds rather than assuming it: applying the same broadened multi-manufacturer
-  # term list built for ret-gamenerdz.yaml (game-system + manufacturer slugs from
-  # data/catalog/taxonomy/{game-systems,manufacturers}.yaml, Warlord/Mantic/Corvus/Wyrd/
-  # Steamforged/AMG/CMON/Para Bellum) to Radaddel's live sitemap (12,806 URLs, unchanged from prior
-  # probe) would match only 670 of them -- i.e. a filter here would still throw away >94% of the
-  # catalog, the same finding as the original probe. Left deliberately unfiltered; stays a full
-  # sweep. See task-2-report.md.
   currency: eur
 politeness:
+  # Unchanged. Live probe 2026-08-18: 80/80 detail fetches returned 200 at this rate, while a
+  # ~2.5 rps sample of 400 handles drew a 39.5% error rate. Do not raise it.
   rps: 0.5
 contract:
-  # Pure EAN-enrichment source: partial coverage by design (12,806 sitemap URLs observed live
-  # 2026-07-13, budgeted per-run), so minCount stays 0 -- the drop/min-count contract makes no
-  # sense against a budgeted subset. requiredFieldRates.ean instead gates on the FETCHED set: if
-  # Radaddel's microdata markup drifts and extraction breaks, this must fail loudly rather than
-  # silently degrade. Controller decision, task-11-report.md.
-  minCount: 0
+  # PORTED SHAPE, matching every other `strategy: shopify` descriptor in this repo
+  # (mfr-steamforged, mfr-warmachine, mfr-warlord-store, mfr-wyrd-store, ret-goblingaming,
+  # ret-tistaminis -- all six gate name+sku, none gates ean).
+  #
+  # WHY `ean: 0.5` DID NOT SURVIVE THE PORT, and why this is not a floor being lowered to go
+  # green. Under sitemap-structured-data the budget rations ENUMERATION, so `result.observations`
+  # was the set of pages actually fetched this run and an ean fill-rate over it measured exactly
+  # what the old comment claimed: whether extraction still works. Under shopify the budget rations
+  # only the per-handle DETAIL fetch; enumeration is full on every run (runner.py:84-97 states
+  # this as the assumption that makes the unconditional minCount check safe), so
+  # `result.observations` is the whole attributed population and an ean rate over it measures
+  # budget/population, not extraction health. Measured live 2026-08-18 at --budget 200:
+  # 199 barcodes off 200 detail fetches (99.5% -- extraction is fine) against 7,691 observations
+  # = 0.026, so the old gate fails at 4 every night and, because contract checks run before
+  # cursor_store.save, the 199 confirmed eans are never persisted: every run re-slices the same
+  # head and fails identically. It cannot converge. Gating the bulk fields instead is what makes
+  # the accumulate-over-nights mechanism work -- verified: exit 0, cursor holds 199 eans.
+  #
+  # minCount RAISED FROM 0, not lowered. The old 0 was correct for a strategy whose enumeration
+  # was itself budgeted ("partial by design"); shopify enumerates fully every run, so a floor is
+  # meaningful here and its absence would leave an enumeration collapse silent. Evidence-based at
+  # ~85% of observed, the convention used by the sibling descriptors: live run 2026-08-18 saw
+  # 11,733 products store-wide, 7,691 attributed to tracked manufacturers (4,042 dropped as
+  # unknown vendor). 0.85 * 7,691 = 6,537.
+  minCount: 6537
+  maxDropPct: 30
   requiredFieldRates:
-    ean: 0.5
+    # Measured on the same run over all 7,691 attributed observations: name 1.000, sku 1.000.
+    name: 1.0
+    sku: 0.8
