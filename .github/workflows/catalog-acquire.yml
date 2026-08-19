@@ -513,6 +513,83 @@ jobs:
           awk '/^## (Confirmed-EAN|Provisional-EAN|Product-code|Paint-EAN)/{flag=1} flag' ../../_report_guard.txt > ../../_guard_section.txt || true
           cat ../../_guard_section.txt
 
+      # THE DATA-INTEGRITY NET, RUN ON THE PATH THAT PRODUCES THE DATA. data-ci.yml built this
+      # net for `data/**` changes, but it never ran on the two PRs that need it most: it triggers
+      # on `pull_request`, and the runs it queued for the sticky bot PRs sat at `action_required`
+      # awaiting manual approval and were never executed -- six-plus of them on
+      # catalog/acquisition from 2026-08-13 to 2026-08-18 (0s each), one on catalog/paint-update
+      # on 08-16. Meanwhile this workflow ran ZERO pytest of its own (`git grep -n pytest --
+      # .github/` returned only ci.yml and data-ci.yml). So the highest-churn automated path in
+      # the repo -- the one that produced the #111 incident -- was the one path the net did not
+      # cover. Running the files HERE removes the approval from the loop entirely: the job that
+      # writes the data validates it, in the same job, before anyone is asked to merge it.
+      #
+      # THE FILE LIST IS data-ci.yml's, VERBATIM, and must stay in sync with it -- that file's
+      # header states the membership rule ("every test file whose subject is COMMITTED DATA
+      # rather than code ... add a file here the moment one is written"). Two lists is the cost
+      # of covering both paths; a file added to one and not the other leaves exactly the
+      # half-hung net the rule warns about.
+      #
+      # data-ci.yml STAYS AS IT IS. It is now the net for HUMAN pull requests touching data/**
+      # (and for paint-catalog-update.yml's PRs, which this workflow never touches). Narrowing it
+      # because this job duplicates it would reopen the hole for hand-authored data changes,
+      # which is the case it was actually written for.
+      #
+      # PLACED BEFORE THE STICKY PR, NOT AFTER, so the tests judge exactly the tree that is about
+      # to be committed. `set +e` + captured exit code is this job's existing idiom for
+      # resolve/report/guard: the step itself always succeeds, and the code is adjudicated in the
+      # single combined gate at the end, AFTER the PR exists. That keeps the documented
+      # fail-after-PR property -- a failing run still opens/updates a sticky PR carrying its own
+      # findings -- while the job still goes red in Checks.
+      #
+      # RUNTIME, on a real runner rather than an extrapolation -- data-ci.yml's header asks for
+      # exactly this ("Replace the runner figure once the six-file job has a few real runs").
+      # The six-file job measured 2m42s on ubuntu-latest, on the Data CI run this stack's own
+      # PR #140 triggered. For comparison, the same six files against catalog/acquisition's tree
+      # (e84a60b) took 6m09s for 64 tests on a Windows dev box with zero data/ drift -- the ~2.3x
+      # is NTFS, as that header predicts. So ~3 min here, against this job's timeout-minutes: 120
+      # and a nightly that already runs 1h50m.
+      - name: Data-integrity tests
+        id: datatests
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py -q
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+
+      # tests/test_set_contents.py:138 runs scripts/gen_set_contents.py as a subprocess and
+      # rewrites data/catalog/set-contents/*.yaml in place, so the tree state after pytest
+      # carries information (data-ci.yml:106-134 explains why the byte-compare inside the test
+      # cannot see a file the generator CREATES, only ones that already existed).
+      #
+      # Here that state is also a HAZARD the PR-path net does not have: the next step commits
+      # with `add-paths: data`, so anything pytest left behind would ride into the sticky PR as
+      # an unexplained data change. So this restores it. Restoring is safe precisely because
+      # nothing else in this pipeline writes that directory -- `resolve` never touches
+      # set-contents (it cannot reach contentSkus' paint side at all; see
+      # resolve/set_refs.py:16-20), so HEAD's copy is the correct pre-test state and the run's
+      # own output is untouched.
+      #
+      # Drift is still reported and still fails the job, via the combined gate below -- a stale
+      # committed relation is a real finding. Measured on catalog/acquisition's tree 2026-08-18:
+      # no drift, so this is a guard, not a routine cleanup.
+      - name: Check the data tests did not rewrite committed data
+        id: datadrift
+        if: always()
+        run: |
+          drift="$(git status --porcelain -- data/catalog/set-contents)"
+          if [ -n "$drift" ]; then
+            echo "::error::The data tests rewrote data/catalog/set-contents. If the test step above PASSED, the committed relation is stale for this run's catalog: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit it. If that step FAILED, this is most likely fallout from a half-finished regeneration -- fix the failure first."
+            echo "$drift"
+            git --no-pager diff -- data/catalog/set-contents
+            git checkout -- data/catalog/set-contents
+            git clean -fdq data/catalog/set-contents
+            echo "drift=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "drift=0" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build PR body
         run: |
           {
@@ -553,6 +630,21 @@ jobs:
               echo
               echo "No confirmed-EAN changes detected."
             fi
+            echo
+            echo "### Data-integrity tests"
+            echo
+            if [ "${{ steps.datatests.outputs.exit_code }}" = "0" ] && [ "${{ steps.datadrift.outputs.drift }}" = "0" ]; then
+              echo "Passed on this run's own tree -- the same six files \`data-ci.yml\` runs, executed here so the job that writes the data validates it."
+            else
+              echo ":rotating_light: **FAILED on this run's own data.** Do not merge until this is understood."
+              echo
+              if [ "${{ steps.datatests.outputs.exit_code }}" != "0" ]; then
+                echo "- \`pytest\` exited ${{ steps.datatests.outputs.exit_code }} -- see the job log for the failing assertions."
+              fi
+              if [ "${{ steps.datadrift.outputs.drift }}" = "1" ]; then
+                echo "- The tests rewrote \`data/catalog/set-contents\` -- the committed relation is stale for this catalog. Regenerate with \`uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py\` and commit it."
+              fi
+            fi
           } > pr-body.md
 
       - name: Create or update sticky PR
@@ -577,13 +669,29 @@ jobs:
       #      but never actually read anywhere. Now any unexpected exit code fails the job loudly.
       #   2. the confirmed-EAN guard's own exit-5 "hits found" case, unchanged in substance from
       #      before, just folded into this single combined check.
-      - name: Fail job on unexpected resolve/report/guard exit codes
+      - name: Fail job on unexpected resolve/report/guard exit codes or failing data tests
         run: |
           resolve_exit="${{ steps.resolve.outputs.exit_code }}"
           report_exit="${{ steps.report.outputs.exit_code }}"
           guard_exit="${{ steps.guard.outputs.exit_code }}"
+          datatests_exit="${{ steps.datatests.outputs.exit_code }}"
+          datadrift="${{ steps.datadrift.outputs.drift }}"
 
           crashed=0
+
+          # The data-integrity net. Adjudicated HERE rather than by letting the pytest step fail
+          # on its own, for the reason the whole step block exists: the sticky PR must be
+          # opened/updated with this run's findings -- including the test failure, which the PR
+          # body now carries -- before the job is marked failed.
+          if [ "$datatests_exit" != "0" ]; then
+            echo "::error::Data-integrity tests failed (pytest exited $datatests_exit) on this run's own data. See the sticky PR body / job log."
+            crashed=1
+          fi
+
+          if [ "$datadrift" = "1" ]; then
+            echo "::error::The data-integrity tests rewrote data/catalog/set-contents -- the committed relation is stale for this run's catalog. See the sticky PR body / job log."
+            crashed=1
+          fi
 
           if [ "$resolve_exit" != "0" ] && [ "$resolve_exit" != "2" ]; then
             echo "::error::resolve exited $resolve_exit (expected 0 or 2) -- possible crash, possibly mid-write. See the sticky PR body / job log for details."
