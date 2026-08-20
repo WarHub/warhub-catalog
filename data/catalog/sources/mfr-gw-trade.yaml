@@ -1,5 +1,12 @@
 id: mfr-gw-trade
 kind: manufacturer
+# The trade sheets list CASE PACKS (`CONTRAST: BLACK LEGION (18ML) (6 PACK)`, sku
+# 99189960036), and gen_paint_barcodes.py sources Citadel's paint barcodes from these same
+# rows -- so 302 GW products share a barcode with a Citadel paint by construction, not by
+# duplication. Without this flag the paint-EAN refusal in resolve/resolver.py would drop
+# every one of them. Measured 2026-08-20: 302 of 302 GW paint-EAN products carry this
+# source's evidence, and none of the 1,058 genuine duplicates do.
+tradeUnits: true
 strategy: gw-trade-sheets
 baseUrl: https://trade.games-workshop.com
 scope:

@@ -28,6 +28,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 REPO_DATA = REPO_ROOT / "data"
 PAINT_HARVEST_BRIDGE = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
 SET_CONTENTS_GENERATOR = REPO_ROOT / "tools/acquisition/scripts/gen_set_contents.py"
+PAINT_EAN_GENERATOR = REPO_ROOT / "tools/acquisition/scripts/gen_paint_eans.py"
 
 
 @functools.lru_cache(maxsize=1)
@@ -1320,4 +1321,79 @@ def test_a_setref_correction_in_a_sources_zero_padded_vocabulary_still_resolves(
         "collapsed, either the archive started storing padded codes or the strip was dropped, and "
         "in the second case every reaper correction a maintainer writes in the source's own "
         "vocabulary now silently fails"
+    )
+
+
+def _paint_ean_generator():
+    """The paint-EAN index generator, so the guard below uses ITS rules rather than a copy.
+
+    Same importlib.util pattern as `_set_contents_generator` above, with a distinct sys.modules
+    name so the two cannot collide.
+    """
+    if not PAINT_EAN_GENERATOR.exists():
+        pytest.skip("gen_paint_eans.py not present (package built/tested outside the monorepo)")
+    spec = importlib.util.spec_from_file_location(
+        "gen_paint_eans_for_repo_data", PAINT_EAN_GENERATOR
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_the_paint_ean_index_is_reproducible_from_the_committed_paint_catalog() -> None:
+    """A stale index silently narrows the refusal in resolve/resolver.py.
+
+    The failure mode is invisible rather than loud: every barcode missing from the index is a
+    paint free to publish as a product again, and the resolver cannot tell a short index from a
+    small paint catalog. Byte-compare rather than count-compare, for the same reason
+    test_set_contents.py does -- a paint moving between brands keeps the count identical.
+    """
+    paths = _require_repo_data()
+    if not paths.paint_eans.exists():
+        pytest.skip("data/catalog/paint-eans.yaml not present")
+    generator = _paint_ean_generator()
+    committed = read_yaml(paths.paint_eans)
+    regenerated = generator.build_index(REPO_DATA / "paints" / "brands")
+    assert regenerated == committed, (
+        "data/catalog/paint-eans.yaml is stale for the committed paint catalog. Regenerate with "
+        "'uv run --with pyyaml python tools/acquisition/scripts/gen_paint_eans.py' and commit it."
+    )
+
+
+def test_no_published_product_republishes_a_paints_barcode() -> None:
+    """The tripwire for the defect resolve/resolver.py's paint-EAN refusal exists to stop.
+
+    Measured 2026-08-20 on catalog/acquisition before the refusal landed: 1,168 product records
+    carried a barcode the paint catalog already publishes -- vallejo 570, army-painter 476,
+    steamforged-games 110, green-stuff-world 12 -- across five sources, two of them `kind:
+    manufacturer` (mfr-warlord-store distributing Army Painter aerosols, mfr-warmachine listing
+    P3 pots). PR #75 fixed the same defect for paint SOURCES; `catalog` is per-source and cannot
+    reach a source that sells both.
+
+    The exemption is `SourceDescriptor.tradeUnits`, not a manufacturer allow-list: GW's trade rows
+    are case packs that share a barcode with the pot inside them because gen_paint_barcodes.py
+    reads those same rows. Asserting the exemption HERE rather than trusting the resolver means a
+    future descriptor quietly setting `tradeUnits` shows up as a diff in this test's expectations,
+    not as a silent re-opening of the leak.
+    """
+    paths = _require_repo_data()
+    if not paths.paint_eans.exists():
+        pytest.skip("data/catalog/paint-eans.yaml not present")
+    index = (read_yaml(paths.paint_eans) or {}).get("eans") or {}
+    descriptors = load_descriptors(paths.sources)
+    trade_sources = {sid for sid, descriptor in descriptors.items() if descriptor.tradeUnits}
+
+    offenders = []
+    for path in sorted(paths.catalog_products.glob("*.yaml")):
+        for product in (read_yaml(path) or {}).get("products") or []:
+            ean = str(product.get("ean") or "")
+            if not ean or ean not in index:
+                continue
+            sources = {str(ref).split(":", 1)[0] for ref in (product.get("evidence") or [])}
+            if not (sources & trade_sources):
+                offenders.append(f"{product.get('id')} ({ean} = {index[ean]}) via {sorted(sources)}")
+    assert not offenders, (
+        f"{len(offenders)} published product(s) carry a barcode the paint catalog already "
+        f"publishes, with no `tradeUnits` source to justify it:\n  " + "\n  ".join(offenders[:20])
     )

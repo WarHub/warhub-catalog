@@ -60,6 +60,17 @@ class DataPaths:
         return self.root / "catalog" / "set-refs.yaml"
 
     @property
+    def paint_eans(self) -> Path:
+        """Every barcode the PAINT catalog publishes (scripts/gen_paint_eans.py).
+
+        Committed rather than read out of data/paints/ directly because this resolver
+        deliberately never loads the paint catalog -- see models/catalog.py:59-62, the same reason
+        the boxed-set relation is generated into data/catalog/set-contents/ instead of joined
+        inline. The cross-catalog question is answered once, in the generator; here it is an exact
+        set-membership test."""
+        return self.root / "catalog" / "paint-eans.yaml"
+
+    @property
     def conflicts(self) -> Path:
         return self.root / "review" / "conflicts.yaml"
 
@@ -110,6 +121,13 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
 
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     overrides: Overrides = _load_optional(paths.overrides, Overrides, Overrides())
+
+    # Barcodes the paint catalog already publishes, and the sources whose rows are trade units and
+    # may therefore share one legitimately. Both feed the refusal in the entity loop below.
+    paint_eans: dict[str, str] = {}
+    if paths.paint_eans.exists():
+        paint_eans = (read_yaml(paths.paint_eans) or {}).get("eans") or {}
+    trade_sources = {sid for sid, descriptor in descriptors.items() if descriptor.tradeUnits}
 
     retracted = set(overrides.retract)
     for alias_target in matches.aliases.values():
@@ -260,6 +278,34 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             m.key for m in members if code is not None and member_codes[m.key] in folded_codes
         )
         ean = resolve_ean(entity, members, kinds, superseded, surviving_code=code, member_codes=member_codes)
+        # THE PAINT CATALOG OWNS THIS BARCODE. A retailer (or a distributor -- mfr-warlord-store
+        # lists Army Painter aerosols) selling a single pot would otherwise mint a second record
+        # for a paint that data/paints/ already publishes: measured 2026-08-20, 1,058 of them,
+        # every one `category: miniatures` and a single retail unit, 0 with a set-like name.
+        # PR #75 fixed this one level up for paint SOURCES; `catalog` is per-source and cannot
+        # help a source that legitimately sells both.
+        #
+        # The `tradeUnits` exemption is what keeps GW's 302 case packs, which share a barcode with
+        # the pot inside them because gen_paint_barcodes.py reads the same trade rows.
+        #
+        # Tested against the PRIMARY ean only, not `additional`: the primary is the record's
+        # published identity, and a repackaged product may legitimately retain an older barcode in
+        # `additional` without being a paint. Widen this only against a measurement.
+        #
+        # REFUSED, NOT DROPPED: every refusal lands in conflicts.yaml. A silent skip here would
+        # look identical to the source simply not having the product.
+        if ean.ean and ean.ean in paint_eans:
+            if not any(m.key.split(":", 1)[0] in trade_sources for m in members):
+                conflicts.append(
+                    {
+                        "type": "paint-published-as-product",
+                        "entity": entity,
+                        "ean": ean.ean,
+                        "paint": paint_eans[ean.ean],
+                        "keys": sorted(m.key for m in members),
+                    }
+                )
+                continue
         ean_resolutions[entity] = ean
         conflicts.extend(ean.conflicts)
         record = resolve_attributes(

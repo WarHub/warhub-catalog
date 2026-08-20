@@ -168,6 +168,19 @@ class SourceDescriptor(BaseModel):
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.
     crossoverToProducts: Crossover | None = None
+    # This source's rows are TRADE units (case packs, inners), not single retail units, so a row
+    # legitimately shares a barcode with the pot inside it. Products corroborated by such a source
+    # are exempt from the paint-EAN refusal in resolve/resolver.py; everything else carrying a
+    # barcode that data/catalog/paint-eans.yaml already publishes is a paint being republished as
+    # a product and is refused.
+    #
+    # DECLARED, NOT INFERRED, for the same reason `catalog` above is: neither `kind` nor the
+    # strategy name can carry this. `mfr-warlord-store` is `kind: manufacturer` and feeds products,
+    # but for Army Painter it is a DISTRIBUTOR listing single 400ml aerosols -- measured 2026-08-20,
+    # it corroborated 304 of the 476 army-painter paint-EAN duplicates. Exempting by `kind` would
+    # have kept every one of them. Only mfr-gw-trade sets this today; re-derive the set by asking
+    # which sources publish case-pack rows, not which are called `mfr-`.
+    tradeUnits: bool = False
 
     @model_validator(mode="after")
     def _crossover_only_from_paints(self) -> "SourceDescriptor":
