@@ -9,10 +9,9 @@ This one repo holds everything: the generation **tools**, the source-of-truth **
 the automation **workflows**, and the **publisher** that bundles it all into the published
 artifacts.
 
-**Before changing what the catalog contains, read [docs/OBJECTIVES.md](docs/OBJECTIVES.md).** It
-collects the decisions that govern that — the archive-everything rule, the append-only contract,
-and why a paint appearing in *both* catalogs is intended rather than a duplicate — each cited to
-where it is actually enforced.
+The values this catalog is driven by — archive everything, never drop a published id, refuse
+rather than guess — are in [docs/OBJECTIVES.md](docs/OBJECTIVES.md). Read it before changing what
+the catalog *contains*.
 
 ## Consuming the catalog
 
