@@ -9,6 +9,10 @@ This one repo holds everything: the generation **tools**, the source-of-truth **
 the automation **workflows**, and the **publisher** that bundles it all into the published
 artifacts.
 
+The values this catalog is driven by — archive everything, never drop a published id, refuse
+rather than guess — are in [docs/OBJECTIVES.md](docs/OBJECTIVES.md). Read it before changing what
+the catalog *contains*.
+
 ## Consuming the catalog
 
 Every release is published two ways:
