@@ -36,6 +36,8 @@ out as policy, not as taste.
 
 ---
 
-**Deliberately not answered here**, because it is the maintainer's to state rather than mine to
-infer from code: who the priority consumers are, what "good" coverage means, and whether either
-catalog leads when the two compete for effort.
+**Open — not settled by anything in this repo:**
+
+- Who are the priority consumers?
+- What counts as good coverage, and for which catalog?
+- Which catalog leads when the two compete for effort?
