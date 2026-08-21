@@ -1,3 +1,16 @@
 id: legacy-catalog
 kind: curated
 strategy: none
+# `category: miniatures` off this source is the old .NET pipeline's FILL, not a claim: it appears
+# on 12,533 of these 12,799 observations (97.9%). Because this source is `kind: curated` -- the top
+# of KIND_PRIORITY -- that fill wins the fold over every manufacturer and retailer, and 12,082
+# published products take their category from it. A crude name regex finds 357 it is plainly wrong
+# about (dice packs, card packs, novels). Declaring it here marks those records
+# `categoryBasis: default` so they are counted as undecided rather than as evidence; it changes no
+# value. See SourceDescriptor.defaultHints.
+#
+# `packaging` is NOT listed, and the difference is real: its four values (single/box/starter/bundle)
+# are a genuine claim this import carried about the shape of the box, and they are the only
+# packaging data the catalog has -- no live source has ever emitted a packaging hint.
+defaultHints:
+  category: miniatures

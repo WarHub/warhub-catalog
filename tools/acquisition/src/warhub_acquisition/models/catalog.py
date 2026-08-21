@@ -29,6 +29,28 @@ class CanonicalProduct(BaseModel):
     gameSystem: str | None = None
     faction: str | None = None
     category: str | None = None
+    # WHAT DECIDED `category` -- the field that makes the guess countable.
+    #
+    # `category` is the only published product field with a fallback behind it, so a wrong value
+    # there is invisible by construction: every product has one, it just is not necessarily about
+    # that product. Measured on catalog/acquisition (fc3ff62), 2026-08-21, over 30,747 products:
+    #
+    #   stated   1,954  ( 6.4%)  a source asserted it (paint 1,594, terrain 148, paint-set 114,
+    #                            book 98)
+    #   default 12,082  (39.3%)  legacy-catalog's `miniatures` fill won the fold -- an upstream
+    #                            pipeline's placeholder, not a claim (SourceDescriptor.defaultHints)
+    #   guessed 16,711  (54.4%)  nothing said anything; resolve/attributes.py wrote `miniatures`
+    #
+    # So 93.6% of the catalog's categories rest on no evidence at all. Both `default` and `guessed`
+    # mean UNDECIDED; they differ only in who wrote the placeholder, and that distinction is worth
+    # keeping because a `default` row came in from an import whose own evidence could re-decide it,
+    # while a `guessed` row never had anything.
+    #
+    # NOT PUBLISHED YET, deliberately. The value set grows when the categorize stage lands (`mapped`
+    # from a source's raw taxonomy, `derived` from a rule, `llm`, `curated`), and publishing a field
+    # whose vocabulary is about to change would churn the consumer contract twice for one feature.
+    # It lives in the archive now, where it is free to evolve, and gets published once stable.
+    categoryBasis: str | None = None
     packaging: str | None = None
     quantity: int | None = None
     volumeMl: int | None = None

@@ -11,6 +11,7 @@ from warhub_acquisition.resolve.attributes import apply_overrides, resolve_attri
 from warhub_acquisition.resolve.corroborate import find_shared_eans, resolve_ean
 from warhub_acquisition.resolve.join import Matches, join_observations
 from warhub_acquisition.taxonomy import Taxonomy
+from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 
@@ -102,6 +103,8 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     descriptors = load_descriptors(paths.sources)
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
     category_maps = _load_mappings(paths.mappings)
+    vocabulary = load_vocabulary(paths.taxonomy)
+    default_hints = {sid: d.defaultHints for sid, d in descriptors.items() if d.defaultHints}
 
     evidence = EvidenceStore(paths.evidence_products).load_all()
     unknown = set(evidence) - set(descriptors)
@@ -264,12 +267,17 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         conflicts.extend(ean.conflicts)
         record = resolve_attributes(
             entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps,
+            default_hints=default_hints,
             member_codes=member_codes,
         )
         # Stamped before apply_overrides so a hand override can still correct a link.
         record.supersededBy = superseded_by.get(entity)
         record.supersedes = sorted(supersedes.get(entity, []))
         product = apply_overrides(record, overrides)
+        # AFTER overrides, so a hand-written `category:` in overrides.yaml is held to the same
+        # vocabulary as a resolved one -- a typo there would otherwise mint an undeclared value
+        # straight into the published catalog, which is exactly how the six ad-hoc values got in.
+        vocabulary.check(product.category, product.packaging, product.id)
         # gameSystem is OPTIONAL: a product genuinely belonging to no game system (a base, a
         # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
         # gameSystem: null rather than being parked out of the catalog. classify/queue.py
