@@ -83,3 +83,44 @@ def test_malformed_paint_brand_file_raises_value_error_naming_the_file(tmp_path:
     bad.write_text("brandSlug: broken\npaints: [oops\n", encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="broken.yaml"):
         build_report(paths)
+
+
+def test_category_coverage_makes_the_one_guessed_field_visible(tmp_path: Path) -> None:
+    # `category` is the only published field with a fallback behind it, so a regression there is
+    # silent: every product still has a value, it is just the wrong one. Printing the split each
+    # run is what would make `paint` collapsing to zero -- the paint-eans index no longer being
+    # read -- show up in the nightly PR body instead of nowhere. Ordered by count so the shape of
+    # the catalog reads off the top of the table.
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.catalog_products / "vallejo.yaml",
+        {
+            "manufacturer": "vallejo",
+            "products": [
+                {"id": "vallejo/1", "name": "Foul Green", "manufacturer": "vallejo",
+                 "category": "paint", "status": "current", "firstSeen": "2026-07-01"},
+                {"id": "vallejo/2", "name": "Bright Green", "manufacturer": "vallejo",
+                 "category": "paint", "status": "current", "firstSeen": "2026-07-01"},
+                {"id": "vallejo/3", "name": "Brush", "manufacturer": "vallejo",
+                 "category": "miniatures", "status": "current", "firstSeen": "2026-07-01"},
+                {"id": "vallejo/4", "name": "Unlabelled", "manufacturer": "vallejo",
+                 "status": "current", "firstSeen": "2026-07-01"},
+            ],
+        },
+    )
+    report = build_report(paths)
+    assert "## Product categories" in report
+    body = report.split("## Product categories", 1)[1]
+    assert body.index("| paint | 2 |") < body.index("| miniatures | 1 |")
+    # An absent category is reported as absent rather than folded into the majority value: the
+    # whole point of this table is that a missing classification stays legible.
+    assert "| (none) | 1 |" in report
+
+
+def test_category_coverage_section_is_absent_without_a_product_catalog(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.root / "paints" / "brands" / "citadel-colour.yaml",
+        {"brand": "Citadel Colour", "brandSlug": "citadel-colour", "paints": []},
+    )
+    assert "## Product categories" not in build_report(paths)

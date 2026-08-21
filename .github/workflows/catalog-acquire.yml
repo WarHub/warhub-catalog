@@ -554,7 +554,7 @@ jobs:
         working-directory: tools/acquisition
         run: |
           set +e
-          uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py -q
+          uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py tests/test_paint_eans.py -q
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           set -e
 
@@ -574,17 +574,29 @@ jobs:
       # Drift is still reported and still fails the job, via the combined gate below -- a stale
       # committed relation is a real finding. Measured on catalog/acquisition's tree 2026-08-18:
       # no drift, so this is a guard, not a routine cleanup.
+      # tests/test_paint_eans.py rewrites data/catalog/paint-eans.yaml the same way, so it is
+      # watched here too. It should never drift on THIS path: the index is derived from
+      # data/paints/brands, which this workflow does not write (the same reason the paint half of
+      # `--ean-guard` is vacuous here), so a diff means the committed index was already stale when
+      # the run started -- a paint-catalog-update PR that landed data without its index. That is
+      # worth failing on, because until it is fixed every product this run resolves off one of
+      # those barcodes silently keeps the `miniatures` guess.
       - name: Check the data tests did not rewrite committed data
         id: datadrift
         if: always()
         run: |
-          drift="$(git status --porcelain -- data/catalog/set-contents)"
+          paths="data/catalog/set-contents data/catalog/paint-eans.yaml"
+          drift="$(git status --porcelain -- $paths)"
           if [ -n "$drift" ]; then
-            echo "::error::The data tests rewrote data/catalog/set-contents. If the test step above PASSED, the committed relation is stale for this run's catalog: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit it. If that step FAILED, this is most likely fallout from a half-finished regeneration -- fix the failure first."
+            echo "::error::The data tests rewrote a committed generated file. If the test step above PASSED, it is stale for this run's catalog: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' (data/catalog/set-contents) or 'gen_paint_eans.py' (data/catalog/paint-eans.yaml) -- the paths below say which -- and commit it. If that step FAILED, this is most likely fallout from a half-finished regeneration -- fix the failure first."
             echo "$drift"
-            git --no-pager diff -- data/catalog/set-contents
-            git checkout -- data/catalog/set-contents
-            git clean -fdq data/catalog/set-contents
+            git --no-pager diff -- $paths
+            # `|| true`: on a branch where one of these paths is not tracked yet, `git checkout --`
+            # exits non-zero on the unmatched pathspec and would abort the step before drift=1 is
+            # ever written -- turning a reported finding into a silent one. `git clean` then takes
+            # the untracked half, which is the case checkout cannot restore anyway.
+            git checkout -- $paths 2>/dev/null || true
+            git clean -fdq $paths
             echo "drift=1" >> "$GITHUB_OUTPUT"
           else
             echo "drift=0" >> "$GITHUB_OUTPUT"
@@ -642,7 +654,7 @@ jobs:
                 echo "- \`pytest\` exited ${{ steps.datatests.outputs.exit_code }} -- see the job log for the failing assertions."
               fi
               if [ "${{ steps.datadrift.outputs.drift }}" = "1" ]; then
-                echo "- The tests rewrote \`data/catalog/set-contents\` -- the committed relation is stale for this catalog. Regenerate with \`uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py\` and commit it."
+                echo "- The tests rewrote a committed generated file (`data/catalog/set-contents` or `data/catalog/paint-eans.yaml`) -- it is stale for this catalog. Regenerate with `uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py` / `gen_paint_eans.py` and commit it."
               fi
             fi
           } > pr-body.md
@@ -689,7 +701,7 @@ jobs:
           fi
 
           if [ "$datadrift" = "1" ]; then
-            echo "::error::The data-integrity tests rewrote data/catalog/set-contents -- the committed relation is stale for this run's catalog. See the sticky PR body / job log."
+            echo "::error::The data-integrity tests rewrote a committed generated file under data/catalog -- it is stale for this run's catalog. See the sticky PR body / job log."
             crashed=1
           fi
 

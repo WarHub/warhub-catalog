@@ -88,6 +88,16 @@ jobs:
           [ "${{ github.event.inputs.scrape || 'true' }}" = "true" ] && ARGS="$ARGS --scrape"
           eval dotnet run --project tools/WarHub.PaintCatalog.Tool -c Release -- $ARGS
 
+      # Refresh data/catalog/paint-eans.yaml from the brand archives the tool just rewrote. This
+      # workflow is the ONLY writer of data/paints/brands, so it is the only place the index can
+      # go stale, and it must be regenerated in the SAME PR as the data it indexes: the product
+      # resolver reads it to label a retailer-sold pot `category: paint` instead of guessing
+      # miniatures, so a paint whose barcode landed here but not there would silently keep the
+      # guess until someone re-ran this by hand. Reads only committed files, no network,
+      # deterministic -- and tests/test_paint_eans.py fails CI if the committed file drifts.
+      - name: Regenerate the paint barcode index the product resolver labels from
+        run: uv run --with pyyaml python tools/acquisition/scripts/gen_paint_eans.py
+
       # THE paint-side enforcement point for the barcode regression gate. This workflow is the only
       # one that writes data/paints/brands/*.yaml, so it is the only place the paint half of
       # `--ean-guard` can ever fire: catalog-acquire.yml runs the same guard, but its checkout
@@ -138,12 +148,16 @@ jobs:
             fi
           } > pr-body.md
 
+      # data/catalog/paint-eans.yaml rides along with data/paints EVERYWHERE below -- staged here,
+      # in `add-paths`, and in the direct-push branch. It is derived from data/paints/brands and
+      # regenerated above, so leaving it out of any one of the three would commit the paint data
+      # without the index that describes it and fail tests/test_paint_eans.py on the next run.
       - name: Summary
         run: |
-          git add -A data/paints
+          git add -A data/paints data/catalog/paint-eans.yaml
           echo "### 🎨 Paint Catalog Update" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
-          git diff --cached --stat -- data/paints | tail -30 >> "$GITHUB_STEP_SUMMARY" || true
+          git diff --cached --stat -- data/paints data/catalog/paint-eans.yaml | tail -30 >> "$GITHUB_STEP_SUMMARY" || true
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           git reset -q HEAD
 
@@ -151,7 +165,9 @@ jobs:
         if: github.event.inputs.direct-push != 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          add-paths: data/paints
+          add-paths: |
+            data/paints
+            data/catalog/paint-eans.yaml
           branch: catalog/paint-update
           base: main
           title: 'Update paint catalog data'
@@ -166,7 +182,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/paints
+          git add -A data/paints data/catalog/paint-eans.yaml
           git diff --cached --quiet || git commit -m "Update paint catalog data"
           git push
 

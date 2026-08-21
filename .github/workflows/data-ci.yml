@@ -38,6 +38,10 @@ name: Data CI
 #                                  erases an archived hex on rename.
 #   tests/test_paint_volume_gsw.py the volume-override block is exactly the records no constant can
 #                                  reach, and no override smuggles in a barcode.
+#   tests/test_paint_eans.py       data/catalog/paint-eans.yaml reproducible from the brand
+#                                  archives, its keys still strings, no product carrying one of its
+#                                  barcodes left labelled with the `miniatures` guess -- and the
+#                                  tripwire that those products still exist at all.
 #
 # THE LAST TWO WERE ADDED 2026-08-14 AFTER RUNNING NOWHERE ON THE CHANGE THEY POLICE. Their subject
 # is data/paints/overrides.yaml -- aliases, hex erasure, volume assertions -- so the membership rule
@@ -101,7 +105,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
       - run: uv sync --locked
-      - run: uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py -q
+      - run: uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py tests/test_paint_eans.py -q
 
       # THE TESTS WRITE INTO THE CHECKOUT. tests/test_set_contents.py:138 runs
       # scripts/gen_set_contents.py as a subprocess with cwd=REPO_ROOT, so the run rewrites
@@ -137,7 +141,7 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
           if [ -n "$(git status --porcelain -- data)" ]; then
-            echo "::error::The test run rewrote data/. If the test step above PASSED, a committed generated file is stale: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit the result. If the test step above FAILED or crashed, this is most likely fallout from a half-finished regeneration -- fix that failure first and discard this with 'git checkout -- data'."
+            echo "::error::The test run rewrote data/. If the test step above PASSED, a committed generated file is stale: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' (data/catalog/set-contents) or 'gen_paint_eans.py' (data/catalog/paint-eans.yaml) -- the paths below say which -- and commit the result. If the test step above FAILED or crashed, this is most likely fallout from a half-finished regeneration -- fix that failure first and discard this with 'git checkout -- data'."
             git status --porcelain -- data
             git --no-pager diff -- data
             exit 1

@@ -141,6 +141,16 @@ data/
    exactly what the parser reads (never the raw workbook, so wholesale `Trade Price`/`Cost` columns
    stay out of git) and future-dated rows are dropped before it is written, since GW's Trade Terms
    make unreleased product information confidential.
+   The resolver classifies a product from what its sources say, and where they say nothing it has
+   to fall back — `category` is the one published field with a guess behind it, `miniatures`, which
+   covers over half the catalog because the largest retailer sources emit no category signal at
+   all. It is asked one question first: does the paint catalog publish this product's barcode? A
+   pot a shop sells is legitimately both a product and a paint, joined on the barcode at publish
+   time, so if it does, `category: paint` is derived rather than guessed. `data/catalog/paint-eans.yaml`
+   is the committed index that answers it (`scripts/gen_paint_eans.py`, refreshed by
+   `paint-catalog-update.yml`) — the single point where the product pipeline reads anything from
+   the paint side. It only ever **labels**: a source that states a category still wins, and nothing
+   is ever refused, dropped or de-duplicated on the strength of a shared barcode.
 2. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
    duplicate-entity adjudication go through **`classify.yml`**, a **`workflow_dispatch`-only**
    workflow (never scheduled — LLM spend stays human-triggered) with a `mode` input:

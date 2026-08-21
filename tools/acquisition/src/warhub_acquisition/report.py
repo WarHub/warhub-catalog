@@ -51,6 +51,7 @@ def build_report(paths: DataPaths) -> str:
         "| manufacturer | products | current | with EAN | EAN % | confirmed % |",
         "|---|---|---|---|---|---|",
     ]
+    category_counts: dict[str, int] = {}
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         try:
             data = read_yaml(path)
@@ -58,6 +59,9 @@ def build_report(paths: DataPaths) -> str:
             products = data["products"]
         except Exception as exc:
             raise ValueError(f"malformed catalog file {path}: {exc}") from exc
+        for product in products:
+            key = str(product.get("category") or "(none)")
+            category_counts[key] = category_counts.get(key, 0) + 1
         with_ean = [p for p in products if p.get("ean")]
         confirmed = [p for p in with_ean if p.get("eanConfidence") == "confirmed"]
         current = [p for p in products if not p.get("supersededBy")]
@@ -89,6 +93,17 @@ def build_report(paths: DataPaths) -> str:
         lines += ["", "## Paint coverage", "", "| brand | paints | barcodes under EAN guard |", "|---|---|---|"]
         lines += [f"| {brand} | {paints} | {barcodes} |" for brand, paints, barcodes in brand_rows]
         lines.append(f"| **total** | {sum(r[1] for r in brand_rows)} | **{len(catalog_barcodes)}** |")
+    # Category coverage exists for the same reason Paint coverage above does: `category` is the
+    # only published field with a FALLBACK behind it (resolve/attributes.py), so a regression there
+    # is silent by construction -- everything still has a value, it is just the wrong one. Printing
+    # the split every run makes the paint labelling visible in the nightly PR body: `paint` going
+    # to zero means data/catalog/paint-eans.yaml stopped being read, and nothing else would say so.
+    if category_counts:
+        lines += ["", "## Product categories", "", "| category | products |", "|---|---|"]
+        lines += [
+            f"| {category} | {count} |"
+            for category, count in sorted(category_counts.items(), key=lambda kv: (-kv[1], kv[0]))
+        ]
     lines += ["", "## Evidence sources", ""]
     for source_id, observations in EvidenceStore(paths.evidence_products).load_all().items():
         lines.append(f"- {source_id}: {len(observations)} observations")

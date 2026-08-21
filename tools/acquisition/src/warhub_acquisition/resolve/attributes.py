@@ -36,6 +36,7 @@ def resolve_attributes(
     superseded: frozenset[str] = frozenset(),
     category_maps: dict[str, dict] | None = None,
     member_codes: dict[str, str | None] | None = None,
+    paint_eans: frozenset[str] = frozenset(),
 ) -> CanonicalProduct:
     # A repackaging join folds an OLD product code's observations (superseded) into the surviving
     # entity. Their attributes describe the retired box (a stale price, an old image), so within a
@@ -128,9 +129,41 @@ def resolve_attributes(
     if fields["contentSkus"] is not None:
         fields.setdefault("contentSkusFrom", "stated")
 
+    # `category` is the one hint with a FALLBACK, and that fallback is the last thing in this
+    # function that is not evidence. So before asserting it, ask the one source of truth that is
+    # not a source: our own paint catalog. A barcode it publishes belongs to a paint -- the pot
+    # and the product are the same physical thing, joined on exactly this key at publish time
+    # (tools/WarHub.Catalog.Publish/CrossCatalogLinks.cs, docs/OBJECTIVES.md 4) -- so `paint` here
+    # is a DERIVED FACT, not a better guess. data/catalog/paint-eans.yaml is that index; see
+    # scripts/gen_paint_eans.py for why it is committed rather than read live.
+    #
+    # THIS ADDS A LABEL AND REMOVES NOTHING. It cannot fire where a source stated a category
+    # (`fields["category"]` is already set by the fold above), it runs after the crossover stamp,
+    # and `apply_overrides` still overrides it. Measured 2026-08-21 on catalog/acquisition: 1,072
+    # products move miniatures->paint, 0 move the other way, 0 records appear or disappear. The
+    # 948 that already said `paint` (games-workshop 838 off mfr-gw-trade's `Range` column,
+    # steamforged-games 110 off mfr-warmachine's product_type map) never reach this branch. A
+    # REFUSAL built on this same index -- PR #143 -- would have deleted 110 published ids and was
+    # closed unmerged. The index labels; it must never be used to drop or reject a record.
+    #
+    # `miniatures` STAYS the fallback for everything else, and that is a measurement rather than
+    # timidity: 16,711 of 30,747 products (54.4%) carry it with no source hint behind them at all,
+    # because the biggest product sources emit no category signal whatsoever -- ret-goblingaming,
+    # mfr-warlord-store, ret-radaddel, ret-tistaminis, ret-gamenerdz, mfr-gw-algolia,
+    # mfr-manticgames and every arc-* store `hints: {}` on every row. Publishing null there would
+    # empty the field across more than half the catalog for consumers who filter on it. Narrowing
+    # the guess FURTHER is a curation job on data/catalog/mappings/, not a code change: the
+    # `category:` table acquire/strategies/shopify.py::_apply_hints reads already answers this
+    # question at the source, and mfr-warmachine uses it for 222 rows. It is the better lever for
+    # the general case and a worse one for paints -- hints are baked into evidence at acquire
+    # time, so a curated map changes nothing until each store is re-harvested.
     fields.setdefault("category", None)
     if fields["category"] is None:
-        fields["category"] = "miniatures"
+        # No empty-index short-circuit: an empty `paint_eans` already makes every membership test
+        # False, so the no-index path is the old behaviour by construction rather than by a branch
+        # someone could later get wrong.
+        published_as_paint = any(code in paint_eans for code in (ean.ean, *ean.additional) if code)
+        fields["category"] = "paint" if published_as_paint else "miniatures"
 
     curated_status = _first(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]

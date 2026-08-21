@@ -384,3 +384,84 @@ def test_a_description_stating_no_membership_leaves_contents_unset() -> None:
     )
     assert product.contentSkus is None
     assert product.contentSkusFrom is None
+
+
+# --- category: the one field with a fallback behind it ------------------------------------------
+#
+# The fallback used to be the bare string "miniatures" for every product no source classified --
+# 16,711 of 30,747 (54.4%), measured 2026-08-21, because the largest product sources emit no
+# category signal at all. It stays the fallback (see resolve/attributes.py for why nulling it was
+# rejected), but it is now asked one question first: does our own paint catalog publish this
+# barcode? If it does, the product IS a paint, and `paint` is derived rather than guessed.
+
+PAINT_EANS = frozenset({"8429551712811", "5713799300514"})
+
+
+def test_a_barcode_the_paint_catalog_publishes_labels_the_product_paint() -> None:
+    product = resolve_attributes(
+        "vallejo/VAL71281",
+        [obs("ret-a:3b-russian-green", name="3B Russian Green 17ml - Model Air", manufacturer="vallejo")],
+        KINDS, EanResolution("8429551712811", "provisional", []), "VAL71281",
+        paint_eans=PAINT_EANS,
+    )
+    assert product.category == "paint"
+
+
+def test_an_additional_ean_labels_it_too() -> None:
+    """A repackaged paint's older barcode stays addressable (docs/OBJECTIVES.md 3) and is 536 of
+    the 3,965 indexed barcodes. Reading only the primary would leave exactly those records -- the
+    ones the archival-identity work exists to keep reachable -- holding the guess."""
+    product = resolve_attributes(
+        "army-painter/WP3206",
+        [obs("ret-a:red-tone", name="Warpaints Fanatic Wash: Red Tone", manufacturer="army-painter")],
+        KINDS, EanResolution("5713799999999", "confirmed", [], ["5713799300514"]), "WP3206",
+        paint_eans=PAINT_EANS,
+    )
+    assert product.category == "paint"
+
+
+def test_an_unindexed_barcode_still_falls_back_to_miniatures() -> None:
+    product = resolve_attributes(
+        "games-workshop/99120110077", members_sorted(), KINDS,
+        EanResolution("5011921256037", "confirmed", []), "99120110077",
+        paint_eans=PAINT_EANS,
+    )
+    assert product.category == "miniatures"
+
+
+def test_a_stated_category_always_outranks_the_paint_index() -> None:
+    """The index fills a hole; it never contradicts a source. A crossed boxed set carries the
+    stamp resolve/resolver.py put on it (`paint-set`, `hobby-auxiliary`), and a barcode collision
+    with one of its own pots must not flatten that back to `paint`."""
+    product = resolve_attributes(
+        "ak-interactive/AK11685",
+        [obs("mfr-ak:set", name="Wargame Starter Set", manufacturer="ak-interactive",
+             hints={"category": "paint-set"})],
+        KINDS, EanResolution("8429551712811", "confirmed", []), "AK11685",
+        paint_eans=PAINT_EANS,
+    )
+    assert product.category == "paint-set"
+
+
+def test_the_label_is_inert_without_an_index() -> None:
+    """The default call path (paint_eans absent) must behave exactly as it did before this feature
+    -- which is what lets the package be tested outside the monorepo, where data/catalog/ is not
+    on disk at all, and what keeps every resolver fixture unchanged."""
+    product = resolve_attributes(
+        "vallejo/VAL71281",
+        [obs("ret-a:3b-russian-green", name="3B Russian Green", manufacturer="vallejo")],
+        KINDS, EanResolution("8429551712811", "provisional", []), "VAL71281",
+    )
+    assert product.category == "miniatures"
+
+
+def test_a_product_with_no_barcode_at_all_is_not_labelled() -> None:
+    """Membership is tested against the resolved barcodes and nothing else -- no name matching, no
+    fuzzy join. A paint the catalog carries but this product cannot be joined to keeps the guess,
+    and that is the honest outcome: nothing established the link."""
+    product = resolve_attributes(
+        "vallejo/x",
+        [obs("ret-a:x", name="3B Russian Green 17ml - Model Air", manufacturer="vallejo")],
+        KINDS, NO_EAN, None, paint_eans=PAINT_EANS,
+    )
+    assert product.category == "miniatures"
