@@ -530,3 +530,91 @@ def test_crossover_reads_hints_so_capture_stays_off_the_paint_strategies() -> No
                 f"hints can be read by its own crossoverToProducts clauses, so the crossover set "
                 f"must be re-measured before this is allowed."
             )
+
+
+# --- staleFields: a source can be authoritative AND frozen ---------------------------------------
+#
+# `legacy-catalog` is kind: curated (KIND_PRIORITY 0, above manufacturer and retailer) and
+# strategy: none -- never re-observed, so its stock and price values are whatever they were on
+# import day. Measured 2026-08-21 over the 10,245 products where it meets a live source, that rank
+# is right for some fields and wrong for others:
+#
+#   availability  1,205 overridden, 1,175 a stale in_stock beating a live out_of_stock -- WRONG
+#   prices          386 overridden, a frozen RRP beating a live retail price          -- WRONG
+#   name            981 overridden, legacy SHORTER in 733 (no store chrome)           -- BETTER
+#   url             470 overridden, manufacturer page vs a retailer listing in 354    -- BETTER
+#
+# Hence per-field, not per-source. Demoting the whole source was measured too: it fixes
+# availability and collaterally rewrites 981 names, 526 imageUrls and 470 urls.
+
+STALE = {"legacy-catalog": ["availability", "priceGbp"]}
+
+
+def test_a_stale_field_loses_to_a_live_source_whatever_the_kind_ladder_says() -> None:
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", availability="in_stock", priceGbp=108.0),
+         obs("ret-a:x", availability="out_of_stock", priceGbp=91.8)],
+        KINDS, NO_EAN, None, stale_fields=STALE,
+    )
+    assert product.availability == "out_of_stock"
+    assert product.priceGbp == 91.8
+
+
+def test_a_stale_field_still_fills_when_nothing_live_supplies_it() -> None:
+    """DEMOTION, NOT EXCLUSION -- the distinction that keeps 231 availability and 1,714 priceUsd
+    values the frozen import is the only source of. Verified on the real tree: 0 records lost
+    either field."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", availability="in_stock", priceGbp=108.0), obs("ret-a:x")],
+        KINDS, NO_EAN, None, stale_fields=STALE,
+    )
+    assert product.availability == "in_stock"
+    assert product.priceGbp == 108.0
+
+
+def test_fields_not_named_stale_keep_the_sources_curated_rank() -> None:
+    """The whole point of doing this per field. `name` and `url` are BETTER off the curated import
+    and must not move -- a blanket demotion would have taken 981 names and 470 urls with it."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", name="Black Panther and Killmonger",
+             url="https://atomicmassgames.com/p", availability="in_stock"),
+         obs("ret-a:x", name="Black Panther and Killmonger - Marvel Crisis Protocol",
+             url="https://shop.example/listing", availability="out_of_stock")],
+        KINDS, NO_EAN, None, stale_fields=STALE,
+    )
+    assert product.name == "Black Panther and Killmonger"       # curated rank intact
+    assert product.url == "https://atomicmassgames.com/p"       # curated rank intact
+    assert product.availability == "out_of_stock"               # only the stale field moved
+
+
+def test_stale_fields_are_inert_when_nothing_declares_any() -> None:
+    """Every other source declares none, so the fold they get is byte-identical to before."""
+    members = [obs("legacy-catalog:x", availability="in_stock"), obs("ret-a:x", availability="out_of_stock")]
+    assert resolve_attributes("e", members, KINDS, NO_EAN, None).availability == "in_stock"
+    assert resolve_attributes("e", members, KINDS, NO_EAN, None, stale_fields={}).availability == "in_stock"
+
+
+def test_a_stale_field_also_demotes_below_a_lower_ranked_kind() -> None:
+    """Stale means LAST, not "one rung down" -- an archive observation is a better answer about
+    current stock than a frozen import that predates it, even though archive ranks below curated."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", availability="in_stock"), obs("arc-x:x", availability="out_of_stock")],
+        KINDS, NO_EAN, None, stale_fields=STALE,
+    )
+    assert product.availability == "out_of_stock"
+
+
+def test_hint_fields_can_be_declared_stale_too() -> None:
+    """The mechanism is field-name based and spans both `_DIRECT_FIELDS` and `_HINT_FIELDS`, so a
+    future frozen source that ships a stale `description` can say so without new machinery."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", hints={"description": "old blurb"}),
+         obs("ret-a:x", hints={"description": "current blurb"})],
+        KINDS, NO_EAN, None, stale_fields={"legacy-catalog": ["description"]},
+    )
+    assert product.description == "current blurb"

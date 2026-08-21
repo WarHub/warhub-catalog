@@ -37,6 +37,7 @@ def resolve_attributes(
     category_maps: dict[str, dict] | None = None,
     member_codes: dict[str, str | None] | None = None,
     default_hints: dict[str, dict[str, str]] | None = None,
+    stale_fields: dict[str, list[str]] | None = None,
 ) -> CanonicalProduct:
     # A repackaging join folds an OLD product code's observations (superseded) into the surviving
     # entity. Their attributes describe the retired box (a stale price, an old image), so within a
@@ -65,12 +66,28 @@ def resolve_attributes(
         and member_codes is not None
         and member_codes.get(member.key) not in (None, code)
     }
+    # A source can be authoritative AND stale at the same time, so the winner is decided per FIELD
+    # rather than once per member. `SourceDescriptor.staleFields` names the fields a source carries
+    # as a frozen snapshot; for those, and only those, it sorts behind every other member whatever
+    # its kind. `sorted` is stable, so the kind ladder above still decides everything else and this
+    # is a no-op for every source that declares nothing.
+    #
+    # It DEMOTES, it does not exclude: a stale member still supplies a field nothing live has, which
+    # is what keeps the 1,714 priceUsd and 231 availability values legacy-catalog is the only source
+    # of. See SourceDescriptor.staleFields for the four-way measurement that made this per-field.
+    stale = {sid: frozenset(names) for sid, names in (stale_fields or {}).items() if names}
+
+    def _for(name: str) -> list[Observation]:
+        if not stale:
+            return ordered
+        return sorted(ordered, key=lambda m: name in stale.get(m.source_id, frozenset()))
+
     fields: dict[str, object] = {}
     for name in _DIRECT_FIELDS:
-        eligible = [m for m in ordered if name != "sku" or m.key not in foreign]
+        eligible = [m for m in _for(name) if name != "sku" or m.key not in foreign]
         fields[name] = _first([getattr(member, name) for member in eligible])
     for name in _HINT_FIELDS:
-        fields[name] = _first([member.hints.get(name) for member in ordered])
+        fields[name] = _first([member.hints.get(name) for member in _for(name)])
 
     # Fallback classification from a source's raw category taxonomy (today only mfr-gw-trade's
     # `tradeCategory`, mapped in data/catalog/mappings/<source>.yaml). Applied ONLY when no source

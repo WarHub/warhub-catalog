@@ -105,6 +105,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     category_maps = _load_mappings(paths.mappings)
     vocabulary = load_vocabulary(paths.taxonomy)
     default_hints = {sid: d.defaultHints for sid, d in descriptors.items() if d.defaultHints}
+    stale_fields = {sid: d.staleFields for sid, d in descriptors.items() if d.staleFields}
 
     evidence = EvidenceStore(paths.evidence_products).load_all()
     unknown = set(evidence) - set(descriptors)
@@ -267,7 +268,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         conflicts.extend(ean.conflicts)
         record = resolve_attributes(
             entity, members, kinds, ean, code, superseded=superseded, category_maps=category_maps,
-            default_hints=default_hints,
+            default_hints=default_hints, stale_fields=stale_fields,
             member_codes=member_codes,
         )
         # Stamped before apply_overrides so a hand override can still correct a link.
