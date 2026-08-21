@@ -83,3 +83,40 @@ def test_malformed_paint_brand_file_raises_value_error_naming_the_file(tmp_path:
     bad.write_text("brandSlug: broken\npaints: [oops\n", encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="broken.yaml"):
         build_report(paths)
+
+
+def test_category_basis_leads_with_the_share_that_rests_on_nothing(tmp_path: Path) -> None:
+    """The section exists for ONE number: how much of `category` is not evidence. `category` is the
+    only published product field with a fallback behind it, so a regression there is silent --
+    every product keeps a value, it is just not about that product. Measured on
+    catalog/acquisition (fc3ff62): 28,793 of 30,747 (93.6%) are `default` or `guessed`.
+
+    `default` and `guessed` are counted together against `stated` (both mean undecided) and printed
+    apart from each other (they are undecided for different reasons)."""
+    paths = DataPaths(tmp_path)
+    def product(pid: str, category: str, basis: str) -> dict:
+        return {"id": pid, "name": pid, "manufacturer": "vallejo", "category": category,
+                "categoryBasis": basis, "status": "current", "firstSeen": "2026-07-01"}
+    write_yaml(
+        paths.catalog_products / "vallejo.yaml",
+        {"manufacturer": "vallejo", "products": [
+            product("vallejo/1", "paint", "stated"),
+            product("vallejo/2", "miniatures", "default"),
+            product("vallejo/3", "miniatures", "guessed"),
+            product("vallejo/4", "miniatures", "guessed"),
+        ]},
+    )
+    report = build_report(paths)
+    assert "## Product categories" in report
+    assert "**3 of 4 (75.0%) rest on no evidence**" in report
+    assert "| miniatures | guessed | 2 |" in report
+    assert "| paint | stated | 1 |" in report
+
+
+def test_category_section_is_absent_without_a_product_catalog(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.root / "paints" / "brands" / "citadel-colour.yaml",
+        {"brand": "Citadel Colour", "brandSlug": "citadel-colour", "paints": []},
+    )
+    assert "## Product categories" not in build_report(paths)

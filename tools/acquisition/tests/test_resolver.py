@@ -53,6 +53,7 @@ products:
     gameSystem: warhammer-40k
     faction: necrons
     category: miniatures
+    categoryBasis: guessed
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'

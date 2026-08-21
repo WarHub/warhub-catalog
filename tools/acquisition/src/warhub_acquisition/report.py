@@ -51,6 +51,7 @@ def build_report(paths: DataPaths) -> str:
         "| manufacturer | products | current | with EAN | EAN % | confirmed % |",
         "|---|---|---|---|---|---|",
     ]
+    category_rows: dict[tuple[str, str], int] = {}
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         try:
             data = read_yaml(path)
@@ -58,6 +59,9 @@ def build_report(paths: DataPaths) -> str:
             products = data["products"]
         except Exception as exc:
             raise ValueError(f"malformed catalog file {path}: {exc}") from exc
+        for product in products:
+            key = (str(product.get("category") or "(none)"), str(product.get("categoryBasis") or "(none)"))
+            category_rows[key] = category_rows.get(key, 0) + 1
         with_ean = [p for p in products if p.get("ean")]
         confirmed = [p for p in with_ean if p.get("eanConfidence") == "confirmed"]
         current = [p for p in products if not p.get("supersededBy")]
@@ -89,6 +93,29 @@ def build_report(paths: DataPaths) -> str:
         lines += ["", "## Paint coverage", "", "| brand | paints | barcodes under EAN guard |", "|---|---|---|"]
         lines += [f"| {brand} | {paints} | {barcodes} |" for brand, paints, barcodes in brand_rows]
         lines.append(f"| **total** | {sum(r[1] for r in brand_rows)} | **{len(catalog_barcodes)}** |")
+    # THE NUMBER THIS SECTION EXISTS FOR is the `guessed`+`default` share, not the category split.
+    # `category` is the only published product field with a fallback behind it, so a regression is
+    # silent by construction -- every product still has a value, it is just not about that product.
+    # Printing the basis every run puts that share in the nightly PR body, where it is supposed to
+    # fall as the categorize work lands; a jump back up is the signal that something stopped
+    # deciding. `default` is counted apart from `guessed` because they are undecided for different
+    # reasons (see models/catalog.py::categoryBasis), and together apart from `stated` because
+    # that is the only one backed by evidence.
+    if category_rows:
+        undecided = sum(n for (_, basis), n in category_rows.items() if basis != "stated")
+        total_rows = sum(category_rows.values())
+        lines += [
+            "", "## Product categories", "",
+            f"**{undecided} of {total_rows} ({100 * undecided / total_rows:.1f}%) rest on no "
+            f"evidence** -- `default` is an upstream pipeline's fill, `guessed` is our fallback.",
+            "", "| category | basis | products |", "|---|---|---|",
+        ]
+        lines += [
+            f"| {category} | {basis} | {count} |"
+            for (category, basis), count in sorted(
+                category_rows.items(), key=lambda kv: (-kv[1], kv[0])
+            )
+        ]
     lines += ["", "## Evidence sources", ""]
     for source_id, observations in EvidenceStore(paths.evidence_products).load_all().items():
         lines.append(f"- {source_id}: {len(observations)} observations")
@@ -276,6 +303,7 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
     working_products: dict[str, dict] = {}
     working_holders: dict[str, set[str]] = {}
     working_codes: set[str] = set()
+    category_rows: dict[tuple[str, str], int] = {}
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         working = read_yaml(path) or {}
         for product in working.get("products", []):

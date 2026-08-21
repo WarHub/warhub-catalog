@@ -164,6 +164,25 @@ class SourceDescriptor(BaseModel):
     # this list never guesses; `test_no_published_product_looks_like_a_store_test_artifact`
     # is the tripwire that catches the next one instead.
     excludeKeys: list[str] = Field(default_factory=list)
+    # Hint values this source emits as a PIPELINE FILL rather than as a claim about the product --
+    # `{hint: value}`, and only the exact value named. A hint matching an entry here still folds
+    # exactly as it always did (nothing about `category` changes), but the resulting record is
+    # marked `categoryBasis: default` instead of `stated`, so it can be counted as what it is.
+    #
+    # WHY THIS EXISTS AS A DECLARATION rather than a rule in resolve/attributes.py. `legacy-catalog`
+    # is `kind: curated` -- KIND_PRIORITY 0, the top of the ladder, so it outranks every
+    # manufacturer and retailer -- and it hints `category` on all 12,799 of its observations, of
+    # which 12,533 (97.9%) say `miniatures`. That is the old .NET pipeline's own default, not
+    # anyone's assertion, and it wins the fold: 12,082 published products take their category from
+    # it, and a crude name regex finds 357 it is plainly wrong about (`Legion Attack Dice Pack`,
+    # `Galactic Empire Command Card Pack`). Counting those as evidence is what made the catalog
+    # look 54% guessed when it is 93.6% guessed. Hardcoding the source id in the resolver would
+    # bury that fact in a branch; declared here it sits next to the source it describes, and the
+    # next curated import that ships a default says so in its own descriptor.
+    #
+    # It marks provenance. It does NOT suppress the value -- doing that is a data change, and it
+    # belongs in its own PR with its own before/after measurement.
+    defaultHints: dict[str, str] = Field(default_factory=dict)
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.

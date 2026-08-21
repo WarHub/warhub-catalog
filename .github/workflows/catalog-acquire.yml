@@ -554,7 +554,7 @@ jobs:
         working-directory: tools/acquisition
         run: |
           set +e
-          uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py -q
+          uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py tests/test_vocabulary.py -q
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           set -e
 

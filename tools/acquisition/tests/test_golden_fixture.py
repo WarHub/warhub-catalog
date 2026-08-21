@@ -74,6 +74,22 @@ def _seed(tmp_path: Path) -> DataPaths:
     )
     (paths.taxonomy / "game-systems.yaml").write_text(GAME_SYSTEMS_YAML, encoding="utf-8", newline="\n")
     (paths.taxonomy / "factions.yaml").write_text(FACTIONS_YAML, encoding="utf-8", newline="\n")
+    # A category vocabulary, so this end-to-end fixture actually exercises the resolver's
+    # validation. Without one `load_vocabulary` is permissive by design (absence must not break the
+    # package outside the monorepo) and the guard never runs here at all -- which is how this
+    # fixture came to seed `category: tools`, a value that has never existed in the real catalog and
+    # that nothing would have objected to. Deliberately minimal rather than a copy of the committed
+    # file: a fixture should state its own inputs.
+    write_yaml(
+        paths.taxonomy / "categories.yaml",
+        {
+            "categories": [
+                {"slug": "miniatures", "label": "Miniatures", "definition": "Models."},
+                {"slug": "hobby-auxiliary", "label": "Hobby auxiliary", "definition": "Tools."},
+            ],
+            "packaging": [{"slug": "single", "label": "Single", "definition": "One unit."}],
+        },
+    )
 
     write_yaml(paths.sources / "mfr-gw-algolia.yaml",
                {"id": "mfr-gw-algolia", "kind": "manufacturer", "strategy": "algolia"})
@@ -123,7 +139,7 @@ def _seed(tmp_path: Path) -> DataPaths:
         + _line({
             "key": "mfr-gw-algolia:painting-handle", "name": "Citadel Painting Handle",
             "manufacturer": "games-workshop", "sku": "60040199014", "ean": "5011921194803",
-            "priceGbp": 6.0, "availability": "in_stock", "hints": {"category": "tools"},
+            "priceGbp": 6.0, "availability": "in_stock", "hints": {"category": "hobby-auxiliary"},
             "firstSeen": "2026-07-01", "lastSeen": "2026-07-12", "extractor": "algolia@1",
         }) + "\n",
         encoding="utf-8", newline="\n",

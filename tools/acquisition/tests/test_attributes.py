@@ -384,3 +384,73 @@ def test_a_description_stating_no_membership_leaves_contents_unset() -> None:
     )
     assert product.contentSkus is None
     assert product.contentSkusFrom is None
+
+
+# --- categoryBasis: making the one guessed field countable --------------------------------------
+#
+# `category` is the only published product field with a fallback behind it, so a wrong value there
+# is invisible -- every product has one either way. Measured on catalog/acquisition (fc3ff62):
+# stated 1,954 (6.4%), default 12,082 (39.3%), guessed 16,711 (54.4%). The basis changes no
+# category value; it records which of the three actually happened.
+
+LEGACY_DEFAULTS = {"legacy-catalog": {"category": "miniatures"}}
+
+
+def test_no_source_hint_is_recorded_as_guessed() -> None:
+    product = resolve_attributes("e", [obs("ret-a:x")], KINDS, NO_EAN, None)
+    assert (product.category, product.categoryBasis) == ("miniatures", "guessed")
+
+
+def test_a_real_source_claim_is_recorded_as_stated() -> None:
+    product = resolve_attributes(
+        "e", [obs("mfr-gw:x", hints={"category": "paint"})], KINDS, NO_EAN, None,
+        default_hints=LEGACY_DEFAULTS,
+    )
+    assert (product.category, product.categoryBasis) == ("paint", "stated")
+
+
+def test_a_declared_pipeline_fill_is_recorded_as_default_not_stated() -> None:
+    """`legacy-catalog` is `kind: curated` -- the TOP of KIND_PRIORITY -- and emits
+    `category: miniatures` on 12,533 of its 12,799 observations. That is the old .NET pipeline's
+    fill, and because it outranks every manufacturer and retailer it decides 12,082 published
+    products, 357 of which a crude name regex shows are plainly wrong. Counting it as evidence is
+    what made the catalog look 54% guessed when it is 93.6% guessed."""
+    product = resolve_attributes(
+        "e", [obs("legacy-catalog:x", hints={"category": "miniatures"})], KINDS, NO_EAN, None,
+        default_hints=LEGACY_DEFAULTS,
+    )
+    assert product.category == "miniatures"          # the VALUE is untouched
+    assert product.categoryBasis == "default"        # only the provenance is honest about it
+
+
+def test_the_same_source_stating_something_else_is_still_stated() -> None:
+    """`defaultHints` names an exact VALUE, not a source. legacy-catalog's terrain/book/paint hints
+    are real claims (148/99/19 observations) and must keep their standing -- only the `miniatures`
+    fill is a placeholder."""
+    product = resolve_attributes(
+        "e", [obs("legacy-catalog:x", hints={"category": "terrain"})], KINDS, NO_EAN, None,
+        default_hints=LEGACY_DEFAULTS,
+    )
+    assert (product.category, product.categoryBasis) == ("terrain", "stated")
+
+
+def test_a_higher_priority_claim_beating_the_fill_is_stated() -> None:
+    """The fold is unchanged, so a curated fill still outranks a manufacturer claim -- that is the
+    defect Phase 4 addresses, not this one. What matters here is that when some OTHER source's
+    value does win, the basis follows the winner rather than the presence of a fill anywhere."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", hints={"category": "book"}),
+         obs("mfr-gw:x", hints={"category": "paint"})],
+        KINDS, NO_EAN, None, default_hints=LEGACY_DEFAULTS,
+    )
+    assert (product.category, product.categoryBasis) == ("book", "stated")
+
+
+def test_the_basis_is_inert_without_declared_defaults() -> None:
+    """Default call path unchanged: with no `defaultHints` every stated value reads `stated`, which
+    is what keeps every existing fixture and the golden test untouched by this feature."""
+    product = resolve_attributes(
+        "e", [obs("legacy-catalog:x", hints={"category": "miniatures"})], KINDS, NO_EAN, None,
+    )
+    assert product.categoryBasis == "stated"

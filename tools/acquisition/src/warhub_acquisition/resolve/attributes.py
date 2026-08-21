@@ -36,6 +36,7 @@ def resolve_attributes(
     superseded: frozenset[str] = frozenset(),
     category_maps: dict[str, dict] | None = None,
     member_codes: dict[str, str | None] | None = None,
+    default_hints: dict[str, dict[str, str]] | None = None,
 ) -> CanonicalProduct:
     # A repackaging join folds an OLD product code's observations (superseded) into the surviving
     # entity. Their attributes describe the retired box (a stale price, an old image), so within a
@@ -128,9 +129,31 @@ def resolve_attributes(
     if fields["contentSkus"] is not None:
         fields.setdefault("contentSkusFrom", "stated")
 
+    # `category` is the only field here with a FALLBACK behind it, which makes a wrong value
+    # invisible: every product has one either way. `categoryBasis` records which of three things
+    # actually happened, so the guess can be counted instead of assumed away. It changes no
+    # category value -- see models/catalog.py::categoryBasis for the measured split.
+    #
+    #   stated  -- some source asserted this category.
+    #   default -- the winning source emits this exact value as a pipeline FILL, not a claim
+    #              (SourceDescriptor.defaultHints). `legacy-catalog` is `kind: curated`, so its
+    #              `miniatures` fill outranks every manufacturer and retailer and decides 12,082
+    #              products; 357 of those are plainly wrong on their own name.
+    #   guessed -- nothing said anything and the line below wrote `miniatures`.
     fields.setdefault("category", None)
     if fields["category"] is None:
         fields["category"] = "miniatures"
+        fields["categoryBasis"] = "guessed"
+    else:
+        stated_by = next(
+            (m for m in ordered if m.hints.get("category") == fields["category"]), None
+        )
+        filled = (
+            stated_by is not None
+            and (default_hints or {}).get(stated_by.source_id, {}).get("category")
+            == fields["category"]
+        )
+        fields["categoryBasis"] = "default" if filled else "stated"
 
     curated_status = _first(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]
