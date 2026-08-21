@@ -130,6 +130,17 @@ def _apply_hints(categories: list, mapping: dict) -> tuple[dict[str, object], in
     elif slugs:
         unmapped += 1
 
+    # The store's own category slugs, verbatim, whether or not either map above matched -- the same
+    # capture shopify.py::_apply_hints performs and for the same reason: an unmapped taxonomy that
+    # is not stored cannot be mapped later without re-harvesting, and it is the raw values a
+    # maintainer needs in order to author the table at all. Free: `categories` comes off the Store
+    # API page this strategy already reads.
+    #
+    # Woo gives one flat list where Shopify splits product_type from tags, so this lands under its
+    # own key rather than being forced into either of theirs. Sorted for determinism.
+    if slugs:
+        hints["categories"] = slugs
+
     return hints, unmapped
 
 

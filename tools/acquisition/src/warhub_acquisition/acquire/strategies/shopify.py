@@ -120,6 +120,41 @@ def _apply_hints(product: dict, mapping: dict) -> tuple[dict[str, object], int]:
     elif tags:
         unmapped += 1
 
+    # THE STORE'S OWN TAXONOMY, VERBATIM, whether or not this file maps any of it.
+    #
+    # Until 2026-08-21 this function returned ONLY its mapped output and the raw values were
+    # dropped on the floor. That made categorization an acquire-time decision baked into evidence:
+    # a mapping table could not be authored offline (the values it would map were recorded
+    # nowhere), and no improved rule could ever be applied to observations already harvested. It
+    # is why 93.6% of the catalog's `category` rests on no evidence while the stores themselves
+    # publish a usable taxonomy -- mfr-warlord-store's own mapping file documents 84 live
+    # product_type values including "Paint", "Terrain", "Rules & Books" and "Ticket", none of which
+    # this repo has ever stored.
+    #
+    # NOT A NEW REQUEST. Both values come off the bulk `/products.json` page this strategy already
+    # enumerates in full every run ("Enumerate: always full, cheap pages" below), so capture costs
+    # zero extra fetches and lands on the next nightly for every source.
+    #
+    # Shape copied from the paint sibling `shopify_paints.py`, which has stored exactly these keys
+    # since it was written -- sorted `tags` for determinism, `productType` verbatim. Two strategies
+    # answering the same question must answer it identically or a shared rule cannot read both.
+    #
+    # `vendor` is captured too and is NOT redundant with `Observation.manufacturer`: manufacturer
+    # is the RESOLVED slug (taxonomy.manufacturer_for_vendor), while this is the string the store
+    # actually wrote. The distinction is load-bearing here -- ret-tistaminis tags brand-and-format
+    # together ("Warlord-BLISTER", "GW-OOP"), so the raw vendor carries a form signal the resolved
+    # slug has already discarded.
+    #
+    # Nothing reads these yet. `resolve/attributes.py::_HINT_FIELDS` folds a fixed tuple that does
+    # not include them, so this adds facts to the ledger and changes no published record.
+    if product_type:
+        hints["productType"] = product_type
+    if tags:
+        hints["tags"] = sorted(str(tag) for tag in tags)
+    vendor = product.get("vendor")
+    if vendor:
+        hints["vendor"] = str(vendor)
+
     return hints, unmapped
 
 

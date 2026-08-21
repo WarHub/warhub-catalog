@@ -27,7 +27,7 @@ import pytest
 
 from warhub_acquisition.acquire.client import PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext
-from warhub_acquisition.acquire.extract import _fallback_name
+from warhub_acquisition.acquire.extract import _extract_breadcrumbs, _fallback_name
 from warhub_acquisition.acquire.strategies.sitemap_sd import (
     _extract_bcdata,
     _extract_jsonld,
@@ -640,3 +640,132 @@ def test_gamenerdz_url_include_excludes_non_gw_pages_urls() -> None:
     result = sitemap_sd_strategy(gamenerdz_descriptor(), client, {}, context(gw_taxonomy()))
     # 3 "pages" URLs (/, /terms-and-conditions, /contact-us) all excluded by urlInclude
     assert result.stats["sitemap_urls_filtered"] == 2
+
+
+# --- breadcrumb capture -------------------------------------------------------------------------
+#
+# These retailers publish no product_type and no category list, so before this the strategy stored
+# `hints: {}` on every observation and every product fed only by it fell to the `category`
+# fallback. The pages do serve a JSON-LD BreadcrumbList, and it comes out of the same script blocks
+# the gtin already does -- no extra request.
+
+def test_breadcrumbs_are_extracted_from_the_item_object_shape() -> None:
+    html = """
+    <script type="application/ld+json">
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"item":{"@id":"/","name":"Home"}},
+      {"@type":"ListItem","position":2,"item":{"@id":"/m","name":"Miniatures"}},
+      {"@type":"ListItem","position":3,"item":{"@id":"/m/40k","name":"Warhammer 40,000"}}
+    ]}
+    </script>
+    """
+    assert _extract_breadcrumbs(html) == ["Home", "Miniatures", "Warhammer 40,000"]
+
+
+def test_breadcrumbs_are_extracted_from_the_flat_listitem_shape() -> None:
+    """schema.org has allowed the name directly on the ListItem for years and real stores emit
+    both shapes; reading only one would silently return nothing for half of them."""
+    html = """
+    <script type="application/ld+json">
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://x/"},
+      {"@type":"ListItem","position":2,"name":"Paints & Hobby","item":"https://x/paints"}
+    ]}
+    </script>
+    """
+    assert _extract_breadcrumbs(html) == ["Home", "Paints & Hobby"]
+
+
+def test_breadcrumbs_are_ordered_by_position_not_document_order() -> None:
+    """`position` is what schema.org says orders the trail, and the department is identified BY its
+    position -- a trail sorted by document order would point a later mapping table at the wrong
+    element whenever a store emits them out of order."""
+    html = """
+    <script type="application/ld+json">
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":3,"item":{"name":"Third"}},
+      {"@type":"ListItem","position":1,"item":{"name":"First"}},
+      {"@type":"ListItem","position":2,"item":{"name":"Second"}}
+    ]}
+    </script>
+    """
+    assert _extract_breadcrumbs(html) == ["First", "Second", "Third"]
+
+
+def test_breadcrumbs_survive_graph_nesting_and_a_malformed_sibling_block() -> None:
+    """Same tolerances `_extract_jsonld` already has: `@graph` unwrapped, and a broken block is
+    skipped rather than fatal so a later valid one still matches."""
+    html = """
+    <script type="application/ld+json">{ this is not json </script>
+    <script type="application/ld+json">
+    {"@graph":[{"@type":"WebPage"},
+               {"@type":"BreadcrumbList","itemListElement":[
+                 {"@type":"ListItem","position":1,"item":{"name":"Shop"}},
+                 {"@type":"ListItem","position":2,"item":{"name":"Terrain"}}]}]}
+    </script>
+    """
+    assert _extract_breadcrumbs(html) == ["Shop", "Terrain"]
+
+
+def test_no_breadcrumb_list_returns_none_rather_than_an_empty_trail() -> None:
+    """None means "the page said nothing", which is a different claim from "the trail is empty" --
+    and it is what keeps `hints` absent rather than carrying a meaningless key."""
+    assert _extract_breadcrumbs("<html><body>nothing here</body></html>") is None
+    assert _extract_breadcrumbs('<script type="application/ld+json">{"@type":"Product"}</script>') is None
+
+
+def test_a_breadcrumb_list_with_no_usable_names_yields_none() -> None:
+    html = """
+    <script type="application/ld+json">
+    {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":"/just-a-url"}]}
+    </script>
+    """
+    assert _extract_breadcrumbs(html) is None
+
+
+def test_breadcrumbs_reach_the_observation_and_are_counted() -> None:
+    """End-to-end: the trail has to land on the record, not merely be extractable.
+
+    The bug this closes is one level up from the extractor -- the strategy built its Observation
+    with no `hints` argument at all, so every one of this source's records reached the resolver
+    empty and its whole population fell to the `category` fallback.
+    """
+    product_html = load_text("radaddel-product.html").replace(
+        "</head>",
+        '<script type="application/ld+json">'
+        '{"@type":"BreadcrumbList","itemListElement":['
+        '{"@type":"ListItem","position":1,"item":{"name":"Home"}},'
+        '{"@type":"ListItem","position":2,"item":{"name":"Tabletop"}},'
+        '{"@type":"ListItem","position":3,"item":{"name":"Warhammer 40.000"}}]}'
+        "</script></head>",
+    )
+    result = sitemap_sd_strategy(
+        radaddel_descriptor(),
+        PoliteClient(
+            RADADDEL_BASE,
+            transport=radaddel_transport(product_response=httpx.Response(200, text=product_html)),
+            sleep=lambda s: None,
+        ),
+        {},
+        context(gw_taxonomy()),
+    )
+
+    kept = [o for o in result.observations if o.key.endswith(":/necrons-combat-patrol")]
+    assert len(kept) == 1
+    assert kept[0].hints == {"breadcrumbs": ["Home", "Tabletop", "Warhammer 40.000"]}
+    assert result.stats["breadcrumbs_found"] == 1
+
+
+def test_a_page_without_a_trail_still_carries_no_hints() -> None:
+    """Absence stays absence: no empty `breadcrumbs` key, so a consumer can tell "this store
+    publishes no trail" from "this page's trail was empty"."""
+    result = sitemap_sd_strategy(
+        radaddel_descriptor(),
+        PoliteClient(RADADDEL_BASE, transport=radaddel_transport(), sleep=lambda s: None),
+        {},
+        context(gw_taxonomy()),
+    )
+    kept = [o for o in result.observations if o.key.endswith(":/necrons-combat-patrol")]
+    assert len(kept) == 1
+    assert kept[0].hints == {}
+    assert result.stats["breadcrumbs_found"] == 0

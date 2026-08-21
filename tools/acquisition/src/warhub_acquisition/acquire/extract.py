@@ -136,6 +136,67 @@ def _extract_jsonld(html: str) -> dict[str, str | None] | None:
     return None
 
 
+def _extract_breadcrumbs(html: str) -> list[str] | None:
+    """The store's own department trail from a JSON-LD `BreadcrumbList`, in position order.
+
+    THE ONLY TAXONOMY THESE PAGES CARRY. `sitemap_sd.py` retailers expose no Shopify-style
+    product_type and no Woo category list, which is why this strategy stored no taxonomy at all --
+    but the product pages do serve a breadcrumb trail, and a trail's middle is the store
+    department ("Home / Miniatures / Warhammer 40,000 / ..."). Recording it is what lets a
+    department be mapped later without re-fetching 4,000+ pages one at a time at 0.5 rps.
+    Extracted from the SAME `<script type="application/ld+json">` blocks `_extract_jsonld` already
+    reads, so it costs no request and no extra parse pass worth measuring.
+
+    VERBATIM AND WHOLE, including the final element (usually the product's own name). Which
+    position carries the department differs per store and is an interpretation question; this
+    function's job is to record what the page said, not to decide which part of it matters. See
+    docs/OBJECTIVES.md 5.
+
+    Both `ListItem` shapes are handled -- schema.org has allowed the name on the item object
+    (`{"item": {"name": ...}}`) and directly on the ListItem (`{"name": ..., "item": "<url>"}`)
+    for years, and real stores emit both. A trail is returned only if at least one name survives;
+    ordering is by `position` where stated, falling back to document order for the entries that
+    omit it (`position` is required by the spec and therefore exactly the kind of field a real
+    store leaves off).
+    """
+    for block in _LDJSON_RE.findall(html):
+        try:
+            data = json.loads(block)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        top_level = data if isinstance(data, list) else [data]
+        nodes: list[dict] = []
+        for entry in top_level:
+            if not isinstance(entry, dict):
+                continue
+            graph = entry.get("@graph")
+            nodes.extend(n for n in graph if isinstance(n, dict)) if isinstance(graph, list) else nodes.append(entry)
+        for node in nodes:
+            node_type = node.get("@type")
+            types = node_type if isinstance(node_type, list) else [node_type]
+            if "BreadcrumbList" not in types:
+                continue
+            elements = node.get("itemListElement")
+            if not isinstance(elements, list):
+                continue
+            trail: list[tuple[float, str]] = []
+            for order, element in enumerate(elements):
+                if not isinstance(element, dict):
+                    continue
+                item = element.get("item")
+                name = _clean(element.get("name"))
+                if not name and isinstance(item, dict):
+                    name = _clean(item.get("name"))
+                if not name:
+                    continue
+                position = element.get("position")
+                rank = float(position) if isinstance(position, (int, float)) else float(order)
+                trail.append((rank, name))
+            if trail:
+                return [name for _, name in sorted(trail, key=lambda pair: pair[0])]
+    return None
+
+
 # --- Microdata -----------------------------------------------------------------------------------
 
 

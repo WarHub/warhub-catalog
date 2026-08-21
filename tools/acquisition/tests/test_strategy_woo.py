@@ -498,8 +498,13 @@ def test_mapping_file_applies_category_hints_from_para_bellum_fixture() -> None:
     )
 
     by_key = {observation.key: observation for observation in result.observations}
-    assert by_key["mfr-para-bellum:1"].hints == {"gameSystem": "conquest", "faction": "sorcerer-kings"}
-    assert by_key["mfr-para-bellum:2"].hints == {}
+    assert by_key["mfr-para-bellum:1"].hints == {
+        "gameSystem": "conquest", "faction": "sorcerer-kings",
+        "categories": ["conquest", "factions", "sorcerer-kings"],
+    }
+    # Unmapped in BOTH maps, yet the store's own slug is now recorded rather than discarded --
+    # `accessories` is precisely the kind of value a category table would be written against.
+    assert by_key["mfr-para-bellum:2"].hints == {"categories": ["accessories"]}
     # "Random Accessory" has non-empty categories with no match in either map -> +2
     assert result.stats["unmapped_hints"] == 2
 

@@ -73,10 +73,16 @@ required field -- a page with real product data but literally no extractable nam
 otherwise have to be dropped entirely). A page where NO extractor supplies anything usable at all
 (no name, sku, ean, or brand) counts `stats["extraction_failed"]` and contributes no observation.
 
-**No price/availability/hints extraction.** The task brief's per-extractor field lists name only
-gtin/sku/name/brand -- no price field anywhere, and these sites have no game-system/faction
-taxonomy signal exposed the way Shopify tags or Woo categories are (a sitemap `<loc>` carries
-nothing at all, and product pages here were only probed for gtin/sku/name/brand). `scope.currency`
+**No price/availability extraction, and ONE hint: `breadcrumbs`.** The task brief's per-extractor
+field lists name only gtin/sku/name/brand -- no price field anywhere. The claim that these sites
+carry no taxonomy signal at all was WRONG, and it cost this strategy's whole population its
+category: every observation reached the resolver with `hints: {}`, so every product fed only by
+these sources fell to the `category` fallback. They expose no Shopify product_type and no Woo
+category list, but their product pages do serve a JSON-LD `BreadcrumbList`, and a trail's middle is
+the store department. `_extract_breadcrumbs` reads it out of the same `<script
+type="application/ld+json">` blocks the gtin already comes from -- no extra request, no extra
+fetch pass. Stored verbatim and whole; which position is the department is a per-store
+interpretation question that belongs to the categorize stage, not here. `scope.currency`
 is still recorded on each descriptor (EUR for Radaddel/Miniaturicum, USD for Game Nerdz -- verified
 live from each captured fixture's `priceCurrency`/BCData `price.currency`) purely as accurate
 metadata for a possible future price-extraction task; nothing in this strategy reads it.
@@ -126,6 +132,7 @@ from urllib.parse import urlsplit
 from warhub_acquisition.acquire.client import FetchError, PoliteClient
 from warhub_acquisition.acquire.extract import (
     _extract_bcdata,
+    _extract_breadcrumbs,
     _extract_jsonld,
     _extract_microdata,
     _extract_page,
@@ -207,6 +214,7 @@ def sitemap_sd_strategy(
         "fetch_errors": 0,
         "extraction_failed": 0,
         "eans_found": 0,
+        "breadcrumbs_found": 0,
         "skipped_unknown_manufacturer": 0,
         "ean_source_jsonld": 0,
         "ean_source_microdata": 0,
@@ -267,6 +275,15 @@ def sitemap_sd_strategy(
         if ean_source is not None:
             stats[f"ean_source_{ean_source}"] += 1
 
+        # The store's department trail, verbatim, off the JSON-LD already parsed above. These
+        # retailers publish no product_type and no category list -- the breadcrumb is the ONLY
+        # taxonomy their pages carry, and not recording it is why this strategy's observations
+        # reach the resolver with `hints: {}` and every product it feeds falls to the category
+        # fallback. Interpretation (which position is the department) is deliberately not done
+        # here; see `_extract_breadcrumbs`.
+        breadcrumbs = _extract_breadcrumbs(html)
+        if breadcrumbs:
+            stats["breadcrumbs_found"] += 1
         observations.append(
             Observation(
                 key=f"{descriptor.id}:{path}",
@@ -275,6 +292,7 @@ def sitemap_sd_strategy(
                 name=record["name"],
                 sku=record["sku"],
                 ean=record["ean"],
+                hints={"breadcrumbs": breadcrumbs} if breadcrumbs else {},
                 firstSeen=context.run_date,
                 lastSeen=context.run_date,
                 extractor=EXTRACTOR,
