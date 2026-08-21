@@ -14,3 +14,22 @@ strategy: none
 # packaging data the catalog has -- no live source has ever emitted a packaging hint.
 defaultHints:
   category: miniatures
+# FROZEN SNAPSHOT FIELDS. `strategy: none` -- this source is never re-observed, so its missStreak
+# never moves and its stock and price values are whatever they were on import day. Being
+# `kind: curated` they currently outrank every live manufacturer and retailer, which for these two
+# kinds of field is simply wrong: measured 2026-08-21 over the 10,245 products where this source
+# meets a live one, 1,205 availability values are overridden and 1,175 of those are a stale
+# `in_stock` beating a live `out_of_stock`, plus 386 frozen RRPs beating live retail prices.
+#
+# Only these. `name` (981 overridden, legacy shorter in 733 -- no store chrome) and `url` (470,
+# legacy pointing at the manufacturer's own page against a retailer listing in 354) are BETTER
+# curated here, and demoting the source wholesale would have thrown them away to fix availability.
+#
+# Demotion, not exclusion: this source still supplies the 231 availability and 1,714 priceUsd
+# values nothing live carries.
+staleFields:
+  - availability
+  - priceGbp
+  - priceUsd
+  - priceEur
+  - priceCad

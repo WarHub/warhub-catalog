@@ -183,6 +183,34 @@ class SourceDescriptor(BaseModel):
     # It marks provenance. It does NOT suppress the value -- doing that is a data change, and it
     # belongs in its own PR with its own before/after measurement.
     defaultHints: dict[str, str] = Field(default_factory=dict)
+    # Fields whose value this source carries as a FROZEN SNAPSHOT, not as a current claim. For
+    # these fields only, this source sorts LAST in the attribute fold -- behind every other member
+    # regardless of kind. It still fills a field nothing else supplies; it just stops overriding
+    # something live.
+    #
+    # WHY A SOURCE CAN BE AUTHORITATIVE AND STALE AT THE SAME TIME. `legacy-catalog` is
+    # `kind: curated` (KIND_PRIORITY 0, above manufacturer and retailer) and `strategy: none` -- a
+    # frozen import that is never re-observed. Its rank is right for the things it curated and
+    # wrong for the things that move. Measured 2026-08-21 over the 10,245 products where it meets
+    # a live source, this is not one defect but four different answers:
+    #
+    #   availability  1,205 overridden, and 1,175 are a stale `in_stock` beating a live
+    #                 `out_of_stock`. Unambiguously wrong.
+    #   priceGbp/Usd    386 overridden -- a frozen RRP beating a live retail price (108.00 vs
+    #                 91.80). The live number is the one a consumer can act on.
+    #   name            981 overridden, and legacy is SHORTER in 733 -- "Black Panther and
+    #                 Killmonger" against a retailer's "Black Panther and Killmonger - Marvel
+    #                 Crisis Protocol". The curated name is BETTER; demoting it would be a
+    #                 regression.
+    #   url             470 overridden, and the live winner is a retailer listing in 354 -- legacy
+    #                 points at the manufacturer's own product page. Also better.
+    #
+    # So the fix is per FIELD, not per source: demoting the source wholesale would fix availability
+    # and damage names and urls. `kind` is deliberately NOT changed -- it is read in five places
+    # (this fold, `curated_status`, the live/scraped_live lifecycle, `corroborate.py`'s EAN
+    # confidence, and `join.py`'s identity ordering), and legacy's curated standing is correct in
+    # all four of the others.
+    staleFields: list[str] = Field(default_factory=list)
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.
