@@ -296,8 +296,14 @@ def test_mapping_file_applies_game_system_hint_and_counts_unmapped() -> None:
     )
 
     by_handle = {obs.key.split(":", 1)[1]: obs for obs in result.observations}
-    assert by_handle["mapped-item"].hints == {"gameSystem": "bolt-action"}
-    assert by_handle["unmapped-item"].hints == {}
+    assert by_handle["mapped-item"].hints == {
+        "gameSystem": "bolt-action", "productType": "Bolt Action", "vendor": "Warlord Games",
+    }
+    # THE POINT OF THE CAPTURE: unmapped for gameSystem, yet the store's own value is now on
+    # the record instead of being dropped -- which is what makes the map authorable offline.
+    assert by_handle["unmapped-item"].hints == {
+        "productType": "Some New Game System", "vendor": "Warlord Games",
+    }
     assert result.stats["unmapped_hints"] == 1  # only "Some New Game System" is unmapped
 
 
@@ -800,15 +806,25 @@ def test_mapping_file_applies_category_hint_from_product_type() -> None:
     )
 
     by_handle = {obs.key.split(":", 1)[1]: obs for obs in result.observations}
-    assert by_handle["p3-paints-arcane-blue"].hints == {"category": "paint"}
+    assert by_handle["p3-paints-arcane-blue"].hints == {
+        "category": "paint", "productType": "Paint", "vendor": "Warlord Games",
+    }
     # "Miniatures" is deliberately NOT mapped -- it is what the resolver already defaults to.
-    assert by_handle["some-model"].hints == {}
+    assert by_handle["some-model"].hints == {
+        "productType": "Miniatures", "vendor": "Warlord Games",
+    }
     # Both product_types are unmapped for gameSystem; a category hit does not mask that.
     assert result.stats["unmapped_hints"] == 2
 
 
-def test_category_map_is_absent_by_default_and_changes_nothing() -> None:
-    """Every other shopify source has no `category` map; their hints must be byte-identical."""
+def test_category_map_is_absent_by_default_and_maps_nothing() -> None:
+    """No `category` map means no `category` hint -- the mapping half stays inert.
+
+    The RAW half does not: `productType` and `vendor` are recorded whether or not any map matches,
+    and that is the whole point. A source with no table is exactly the source whose values nobody
+    can see, so it is the one that most needs them stored. Before this, a store could publish
+    `product_type: Paint` on every pot for a year and the repo would hold no trace of it.
+    """
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.params.get("page") == "1":
             return httpx.Response(
@@ -838,4 +854,5 @@ def test_category_map_is_absent_by_default_and_changes_nothing() -> None:
         descriptor(), client, {}, context(warlord_taxonomy(), budget=0, mappings={})
     )
 
-    assert result.observations[0].hints == {}
+    assert result.observations[0].hints == {"productType": "Paint", "vendor": "Warlord Games"}
+    assert "category" not in result.observations[0].hints

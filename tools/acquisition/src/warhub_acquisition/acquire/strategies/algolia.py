@@ -173,6 +173,28 @@ def _apply_hints(hit: dict, mapping: dict) -> tuple[dict[str, object], int]:
         else:
             unmapped += 1
 
+    # GW's OWN HIERARCHY, VERBATIM -- every level, whether or not the maps above matched. Same
+    # capture shopify.py and woo.py now perform: an unmapped taxonomy that is not stored cannot be
+    # mapped later without re-harvesting, and mfr-gw-algolia is a full re-sweep of a Cloudflare-
+    # fronted search index, so "just harvest it again" is the expensive option.
+    #
+    # STORED FLAT AND WHOLE rather than as the two values above pick out. `_raw_game_system_and_
+    # faction` reads lvl0 for a system and the FIRST non-empty of lvl3/lvl2/lvl1 for a faction,
+    # which throws away both the deeper levels and the fact that one product can sit under several
+    # branches (a starter set listed under two game lines -- see the module docstring). The deeper
+    # levels are where a product-form signal would live if GW publishes one at all; whether it
+    # does is a question this capture makes answerable offline instead of by another sweep.
+    #
+    # Free: `GameSystemsRoot` is already on every search hit this strategy reads.
+    hierarchy = hit.get("GameSystemsRoot") or {}
+    levels = {
+        level: sorted(str(value) for value in (hierarchy.get(level) or []))
+        for level in ("lvl0", "lvl1", "lvl2", "lvl3")
+        if hierarchy.get(level)
+    }
+    if levels:
+        hints["hierarchy"] = levels
+
     return hints, unmapped
 
 

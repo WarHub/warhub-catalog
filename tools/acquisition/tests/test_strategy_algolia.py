@@ -199,19 +199,34 @@ def test_enumeration_from_real_fixture_produces_expected_fields() -> None:
     assert baggage.manufacturer == "games-workshop"
     # lvl3[0] = "...Armies of the Old World > Beastman Brayherds > Beastmen Brayherds Chariots"
     # -> "Armies of the Old World" is skipped, "Beastman Brayherds" is the raw faction.
-    assert baggage.hints == {"gameSystem": "the-old-world", "faction": "beastman-brayherds"}
+    assert baggage.hints["gameSystem"] == "the-old-world"
+    assert baggage.hints["faction"] == "beastman-brayherds"
+    # ...and GW'S OWN HIERARCHY, stored whole. `_raw_game_system_and_faction` reads lvl0 and the
+    # first non-empty of lvl3/lvl2/lvl1 and drops the rest -- including a `Unit Type` BRANCH that
+    # runs beside the army one and classifies FORM rather than allegiance. That branch is the
+    # reason every level is captured rather than the two the mapping happens to consume.
+    assert baggage.hints["hierarchy"]["lvl0"] == ["The Old World"]
+    assert "The Old World > Unit Type" in baggage.hints["hierarchy"]["lvl1"]
+    assert "The Old World > Unit Type > Chariots" in baggage.hints["hierarchy"]["lvl2"]
 
     dragons = by_key["mfr-gw-algolia:P-253193-99062799001"]
     assert dragons.sku == "99062799001"
     # only lvl1 = ["The Old World > Armies of the Old World"] -- every segment after the game
     # system is skipped, so `_raw_faction` falls back to "General".
-    assert dragons.hints == {"gameSystem": "the-old-world", "faction": "general"}
+    assert dragons.hints["gameSystem"] == "the-old-world"
+    assert dragons.hints["faction"] == "general"
+    # No Unit Type branch on this one, so the captured hierarchy is just the army one.
+    assert dragons.hints["hierarchy"] == {
+        "lvl0": ["The Old World"], "lvl1": ["The Old World > Armies of the Old World"],
+    }
 
     ogre = by_key["mfr-gw-algolia:P-253190-99062709042"]
     assert ogre.sku == "99062709042"
     assert ogre.priceGbp == 18.75
     # lvl3[0] = "...Dwarfen Mountain Holds > Dwarfen Infantry" -> "Dwarfen Mountain Holds"
-    assert ogre.hints == {"gameSystem": "the-old-world", "faction": "dwarfen-mountain-holds"}
+    assert ogre.hints["gameSystem"] == "the-old-world"
+    assert ogre.hints["faction"] == "dwarfen-mountain-holds"
+    assert "The Old World > Unit Type > Infantry" in ogre.hints["hierarchy"]["lvl2"]
 
     assert result.full_sweep is True
     assert result.cursor == {}
@@ -303,7 +318,9 @@ def test_cross_slice_duplicate_object_ids_deduped_first_slice_wins() -> None:
     assert len(result.observations) == 2
     by_key = {observation.key: observation for observation in result.observations}
     # "Age of Sigmar" sorts before "Warhammer 40,000", so the AoS slice's copy won the dedupe:
-    assert by_key["mfr-gw-algolia:P-1-00000000007"].hints == {"gameSystem": "age-of-sigmar"}
+    assert by_key["mfr-gw-algolia:P-1-00000000007"].hints == {
+        "gameSystem": "age-of-sigmar", "hierarchy": {"lvl0": ["Age of Sigmar"]},
+    }
 
 
 def test_game_systems_swept_in_sorted_order_regardless_of_facet_response_order() -> None:
@@ -457,7 +474,12 @@ def test_mapping_unmapped_game_system_and_faction_are_counted_not_guessed() -> N
         context(gw_taxonomy(), mappings=mappings),
     )
 
-    assert result.observations[0].hints == {}
+    # Neither map matched, so NEITHER slug is guessed -- but GW's raw values are now recorded
+    # instead of vanishing, which is exactly the case that matters: an unmapped taxonomy nobody
+    # stores is one nobody can write a table against without re-harvesting the whole index.
+    assert result.observations[0].hints == {
+        "hierarchy": {"lvl0": ["Some New Game"], "lvl1": ["Some New Game > Some New Faction"]},
+    }
     assert result.stats["unmapped_hints"] == 2  # unmapped gameSystem + unmapped faction
 
 

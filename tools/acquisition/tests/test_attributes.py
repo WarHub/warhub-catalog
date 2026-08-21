@@ -454,3 +454,79 @@ def test_the_basis_is_inert_without_declared_defaults() -> None:
         "e", [obs("legacy-catalog:x", hints={"category": "miniatures"})], KINDS, NO_EAN, None,
     )
     assert product.categoryBasis == "stated"
+
+
+# --- raw captured taxonomy must stay OUT of the fold ---------------------------------------------
+
+RAW_CAPTURE_KEYS = ("productType", "tags", "vendor", "categories", "breadcrumbs", "hierarchy")
+
+
+def test_raw_source_taxonomy_never_folds_into_a_published_field() -> None:
+    """Capture adds evidence and changes no record. That is the whole acceptance property of the
+    raw-taxonomy capture, and it holds only because `_HINT_FIELDS` is a fixed tuple that does not
+    name any of these keys. If someone adds one to that tuple, ~40,000 observations start writing
+    into published records the same day, silently.
+
+    Verified end-to-end when the capture landed: re-resolving the nightly's tree with every one of
+    these keys stamped on all 40,167 product-source observations produced 30,747 products before
+    and after, 0 ids moved, and not one changed field.
+    """
+    from warhub_acquisition.resolve.attributes import _DIRECT_FIELDS, _HINT_FIELDS
+
+    for key in RAW_CAPTURE_KEYS:
+        assert key not in _HINT_FIELDS, (
+            f"{key!r} is raw source taxonomy captured verbatim by the acquire strategies. Folding "
+            f"it would publish a store's own private vocabulary as a catalog value -- it is input "
+            f"to the categorize stage, not a catalog field."
+        )
+        assert key not in _DIRECT_FIELDS
+
+
+def test_stamping_every_raw_key_on_a_member_changes_nothing_about_the_record() -> None:
+    """The same property as a behaviour, not just a name check -- a future refactor could read
+    hints somewhere other than `_HINT_FIELDS` and this would catch it."""
+    plain = resolve_attributes("e", [obs("ret-a:x", hints={"category": "paint"})], KINDS, NO_EAN, None)
+    noisy = resolve_attributes(
+        "e",
+        [obs("ret-a:x", hints={
+            "category": "paint",
+            "productType": "Paints & Hobby", "tags": ["citadel", "base"], "vendor": "Games Workshop",
+            "categories": ["paints"], "breadcrumbs": ["Home", "Paints"],
+            "hierarchy": {"lvl0": ["Warhammer 40,000"]},
+        })],
+        KINDS, NO_EAN, None,
+    )
+    assert noisy.model_dump() == plain.model_dump()
+
+
+def test_crossover_reads_hints_so_capture_stays_off_the_paint_strategies() -> None:
+    """A trap found while verifying the capture, recorded so the next person does not re-find it.
+
+    `resolve/crossover.py::clause_matches` matches on `hints` -- `hintContainsAny` over `tags` and
+    `hintEquals` over `productType` are exactly what the paint sources' `crossoverToProducts`
+    blocks are written against. So adding a captured key to a `catalog: paints` strategy can change
+    WHICH ROWS CROSS into the product catalog, i.e. can add or remove published products. Stamping
+    fake `tags`/`productType` on every source (paint sources included) during verification moved
+    the catalog by 3 added and 2 removed ids; restricting the stamp to `catalog: products` sources,
+    which is what the changed strategies actually serve, moved nothing.
+
+    The four strategies carrying raw capture today (shopify, woo-store-api, algolia,
+    sitemap-structured-data) serve product sources ONLY -- the paint pipeline has its own
+    `*_paints.py` variants. This test pins that separation.
+    """
+    from pathlib import Path
+
+    import yaml
+
+    sources_dir = Path(__file__).resolve().parents[3] / "data/catalog/sources"
+    if not sources_dir.exists():
+        pytest.skip("data/catalog/sources/ not present")
+    capturing = {"shopify", "woo-store-api", "algolia", "sitemap-structured-data"}
+    for path in sorted(sources_dir.glob("*.yaml")):
+        descriptor = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        if descriptor.get("strategy") in capturing:
+            assert descriptor.get("catalog", "products") == "products", (
+                f"{descriptor['id']} is a paint source on a raw-capturing strategy. Its captured "
+                f"hints can be read by its own crossoverToProducts clauses, so the crossover set "
+                f"must be re-measured before this is allowed."
+            )
