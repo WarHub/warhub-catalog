@@ -12,6 +12,7 @@ conflicts:
     assertions:
       - ean: '0812152030190'
         sources:
+          - mfr-wyrd-store
           - ret-gamenerdz
       - ean: '0812152030237'
         sources:
@@ -20,10 +21,11 @@ conflicts:
           - ret-gamenerdz
   - type: ean-mismatch
     entity: wyrd-games/WYR40162
-    chosen: '0812152030305'
+    chosen: '0812152030282'
     assertions:
       - ean: '0812152030282'
         sources:
+          - mfr-wyrd-store
           - ret-gamenerdz
       - ean: '0812152030305'
         sources:
@@ -37,11 +39,20 @@ conflicts:
           - ret-gamenerdz
   - type: ean-mismatch
     entity: wyrd-games/WYR40207
-    chosen: '0812152030435'
+    chosen: '0812152030350'
     assertions:
+      - ean: '0812152030312'
+        sources:
+          - mfr-wyrd-store
+          - ret-gamenerdz
       - ean: '0812152030350'
         sources:
+          - mfr-wyrd-store
           - ret-gamenerdz
+      - ean: '0812152030411'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
       - ean: '0812152030435'
         sources:
           - legacy-catalog
@@ -49,9 +60,25 @@ conflicts:
           - ret-gamenerdz
       - ean: '0812152030442'
         sources:
+          - mfr-wyrd-store
           - ret-gamenerdz
           - ret-goblingaming
+      - ean: '0812152030503'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
       - ean: '0812152030534'
+        sources:
+          - legacy-catalog
+          - mfr-wyrd-store
+  - type: ean-mismatch
+    entity: wyrd-games/WYR40256
+    chosen: '0812152030473'
+    assertions:
+      - ean: '0812152030381'
+        sources:
+          - mfr-wyrd-store
+      - ean: '0812152030473'
         sources:
           - legacy-catalog
           - mfr-wyrd-store
@@ -162,6 +189,61 @@ conflicts:
           - ret-gamenerdz
           - ret-goblingaming
           - ret-radaddel
+  - type: ean-mismatch
+    entity: games-workshop/99070101051
+    chosen: '5011921140855'
+    assertions:
+      - ean: '5011921140855'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256037'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120101362
+    chosen: '5011921153022'
+    assertions:
+      - ean: '5011921153022'
+        sources:
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256440'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99070101075
+    chosen: '5011921155170'
+    assertions:
+      - ean: '5011921155170'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256266'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99070108012
+    chosen: '5011921183616'
+    assertions:
+      - ean: '5011921183616'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5011921256204'
+        sources:
+          - mfr-gw-trade
   - type: ean-mismatch
     entity: games-workshop/warhammer-40-000-paints-tools-set
     chosen: '5011921196951'
@@ -500,11 +582,18 @@ conflicts:
           - mfr-warlord-store
           - ret-goblingaming
           - ret-radaddel
-      - ean: '5060917998536'
+  - type: ean-mismatch
+    entity: warlord-games/452600605
+    chosen: '5060917997751'
+    assertions:
+      - ean: '5060917997751'
         sources:
           - mfr-warlord-store
           - ret-goblingaming
           - ret-radaddel
+      - ean: '5060917999298'
+        sources:
+          - ret-tistaminis
   - type: ean-mismatch
     entity: warlord-games/452011205
     chosen: '5060917998949'
@@ -532,6 +621,9 @@ conflicts:
           - mfr-warlord-store
           - ret-goblingaming
           - ret-radaddel
+          - ret-tistaminis
+      - ean: '9781915319258'
+        sources:
           - ret-tistaminis
   - type: ean-mismatch
     entity: mantic-games/MGARM114
@@ -650,6 +742,20 @@ conflicts:
     manufacturer: games-workshop
   - type: ambiguous-join
     keys:
+      - ret-goblingaming:the-army-painter-speedpaint-most-wanted-set-2-0-paint-set
+    name: Speedpaint Most Wanted Set 2.0
+    candidates:
+      - army-painter/WP8060
+      - army-painter/WP8060P
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:warhammer-40000-introductory-set-1
+    name: 'WARHAMMER 40000: INTRODUCTORY SET'
+    candidates:
+      - games-workshop/60010199059
+      - games-workshop/60010199079
+  - type: ambiguous-join
+    keys:
       - ret-goblingaming:necromunda-orlock-gang-tactics-cards-old
     name: 'Necromunda: Orlock Gang Tactics Cards'
     candidates:
@@ -663,6 +769,7 @@ conflicts:
       - games-workshop/99120201047
       - games-workshop/99120201131
       - games-workshop/99122701003
+      - games-workshop/99122701018
   - type: ambiguous-join
     keys:
       - arc-wargameportal:/products/arcane-ruins
@@ -678,6 +785,78 @@ conflicts:
       - mfr-gw-trade:99070117012
       - ret-goblingaming:biophagus
       - ret-tistaminis:bolt-action-italian-paracadutisti-weapons-team
+  - type: ean-shared
+    ean: '5713799503601'
+    entities:
+      - army-painter/sculpting-tools
+      - warlord-games/TL5036
+  - type: cross-manufacturer-ean
+    ean: '5713799503601'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/sculpting-tools
+      - mfr-warlord-store:sculpting-tools
+  - type: ean-shared
+    ean: '5713799503809'
+    entities:
+      - army-painter/miniature-model-magnets
+      - army-painter/model-magnets-hobby-tools
+      - warlord-games/TL5038
+  - type: cross-manufacturer-ean
+    ean: '5713799503809'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/miniature-model-magnets
+      - mfr-warlord-store:miniature-model-magnets
+      - ret-goblingaming:model-magnets
+  - type: ean-shared
+    ean: '5713799808201'
+    entities:
+      - army-painter/WP8082
+      - warlord-games/WP8082
+  - type: cross-manufacturer-ean
+    ean: '5713799808201'
+    keys:
+      - mfr-warlord-store:warpaints-fanatic-world-war-ii-american-paint-set
+      - ret-tistaminis:ww2-american-paint-set
+  - type: ean-shared
+    ean: '5713799808300'
+    entities:
+      - army-painter/WP8083
+      - warlord-games/WP8083
+  - type: cross-manufacturer-ean
+    ean: '5713799808300'
+    keys:
+      - mfr-warlord-store:warpaints-fanatic-world-war-ii-german-paint-set
+      - ret-tistaminis:ww2-german-paint-set
+  - type: ean-shared
+    ean: '5713799808409'
+    entities:
+      - army-painter/WP8084
+      - warlord-games/WP8084
+  - type: cross-manufacturer-ean
+    ean: '5713799808409'
+    keys:
+      - mfr-warlord-store:warpaints-fanatic-world-war-ii-british-paint-set
+      - ret-tistaminis:ww2-british-paint-set
+  - type: ean-shared
+    ean: '8435568306844'
+    entities:
+      - ak-interactive/AK11237
+      - warlord-games/AK11237
+  - type: cross-manufacturer-ean
+    ean: '8435568306844'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/matt-varnish-100-ml
+      - ret-goblingaming:matt-varnish-100-ml-3rd-gen-acrylic-ak-paint-ak11237
+  - type: ean-shared
+    ean: '8435568306868'
+    entities:
+      - ak-interactive/AK11239
+      - warlord-games/AK11239
+  - type: cross-manufacturer-ean
+    ean: '8435568306868'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/gloss-varnish-100-ml-3gen
+      - ret-goblingaming:gloss-varnish-100-ml-3rd-gen-acrylic-ak-paint-ak11239
   - type: paint-set-without-identity
     source: mfr-ak-interactive
     key: mfr-ak-interactive:174614
