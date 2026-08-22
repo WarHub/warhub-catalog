@@ -1,0 +1,58 @@
+# Hand-authored. Written by no generator; read by resolve/resolver.py.
+#
+# BARCODES THIS CATALOG HAS PUBLISHED THAT NO SOURCE ATTESTS ANY MORE. Each is re-attached to the
+# record that carried it, in `additionalEans`, so it keeps resolving. "Anything published stays
+# addressable" and "a published id is a consumer contract" -- docs/OBJECTIVES.md 3.
+#
+# WHY THE RESOLVER CANNOT DO THIS BY ITSELF. `resolve/corroborate.py` builds `additionalEans` from
+# the barcodes some observation currently asserts, and the evidence ledger keeps only the LATEST
+# observation per key (`EvidenceStore.upsert` replaces a record wholesale). So when a source
+# silently CHANGES the barcode on a handle it already had, the previous value does not become a
+# loser to be retained -- it leaves the ledger entirely, and the resolver has nothing to retain.
+# That is the one way a published barcode can still disappear, and it is what happened below.
+#
+# WHY THIS IS NOT A KEY IN overrides.yaml. Same reason set-refs.yaml is not: `classify --apply`
+# rewrites overrides.yaml from a two-key literal via plain PyYAML, which cannot round-trip a
+# comment. Per-entity keys now survive that rewrite, but the EVIDENCE below would not, and an
+# entry here is worth nothing without it. A machine-owned file and a hand-authored key cannot
+# share a path.
+#
+# THE BAR FOR AN ENTRY IS DELIBERATELY HIGH. This is not "every barcode we ever saw" -- a value
+# that was never published is not a contract with anyone, and OBJECTIVES 1 still says the
+# genuinely bad or invalid may be dropped. An entry requires that the barcode was PUBLISHED (in
+# `data/catalog/products/`, and therefore in a release) and that nothing now attests it. Measured
+# 2026-08-22 across the whole catalog: exactly two barcodes have ever met that description, out of
+# 14,295 published. The retention machinery works; these are its only two escapes.
+
+retained:
+  # WYRD'S OWN STORE CHANGED THE BARCODE ON A HANDLE IT ALREADY HAD, and the value it replaced had
+  # been our published primary for four weeks.
+  #
+  # The history, from `git log -S` over data/catalog/products/wyrd-games.yaml:
+  #
+  #   before 7eff4a7   ean 0812152031975, eanConfidence: CONFLICTED. Both barcodes were live,
+  #                    competing assertions on the same product code and the resolver said so.
+  #   at 7eff4a7       "live manufacturer barcode is authoritative for the primary EAN"
+  #                    (2026-07-23) promoted mfr-wyrd-store's 0812152032354 to primary and marked
+  #                    it CONFIRMED, correctly retaining 0812152031975 in additionalEans. Published
+  #                    that way in every release from v2026.7.23 to v2026.8.21.
+  #   at 98fa5f9       mfr-wyrd-store now reports 0812152031975 on the same handle. 0812152032354
+  #                    is asserted by NOTHING -- not the manufacturer, not ret-goblingaming, not
+  #                    ret-gamenerdz, not legacy-catalog, not either barcode-db -- so it left the
+  #                    ledger and additionalEans came back empty. A published, confirmed barcode
+  #                    disappeared.
+  #
+  # WHY RETAINED RATHER THAN DROPPED. Both values carry a valid UPC-A/EAN-13 check digit and both
+  # sit in Wyrd's own GS1 range, so neither is malformed; the OBJECTIVES 1 carve-out for "the
+  # genuinely bad or invalid" does not reach them. Whatever made Wyrd's store show 0812152032354 --
+  # a real short-lived box, or their own listing error -- we published it as this product's
+  # confirmed barcode for four weeks, and anyone who stored it in that window is holding a
+  # reference this catalog is supposed to answer. Retaining it in `additionalEans` says exactly the
+  # true thing: this record also answers to that barcode. It makes no claim about current retail
+  # packaging -- that is what the primary `ean` is for.
+  #
+  # This does NOT re-open the conflict. The primary stays the value every source now agrees on.
+  wyrd-games/WYR23306:
+    - '0812152032354'
+  wyrd-games/WYR30402:
+    - '0813856015322'

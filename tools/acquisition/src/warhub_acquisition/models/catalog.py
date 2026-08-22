@@ -182,3 +182,31 @@ class SetRefs(BaseModel):
     # the manufacturer fixes its own prose, the entry is stale and must be deleted, not left to
     # rot), and the corrected code must name exactly one committed paint.
     setRefs: dict[str, dict[str, str]] = Field(default_factory=dict)
+
+
+class RetainedEans(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    # BARCODES THIS CATALOG PUBLISHED THAT NO SOURCE ATTESTS ANY MORE: {product id: [ean, ...]}.
+    # Re-attached to that record's `additionalEans` at resolve time so they keep resolving
+    # (docs/OBJECTIVES.md 3: anything published stays addressable).
+    #
+    # THE HOLE IT PLUGS is narrow and real. `resolve/corroborate.py` builds `additionalEans` out of
+    # the barcodes some observation currently asserts, and the ledger keeps only the LATEST
+    # observation per key -- `EvidenceStore.upsert` replaces a record wholesale. So a source that
+    # silently CHANGES the barcode on a handle it already had does not leave a loser to retain; the
+    # old value leaves the evidence entirely and there is nothing for the resolver to keep. That is
+    # the one path by which a published barcode can still vanish, and it is the only one measured:
+    # 2026-08-22, across every barcode the catalog has ever published (14,295 at 98fa5f9), exactly
+    # two have disappeared, both by this route.
+    #
+    # STATED, NEVER DERIVED, and in its own hand-authored file (data/catalog/retained-eans.yaml,
+    # DataPaths.retained_eans) for the same reason SetRefs has one: overrides.yaml is rebuilt by
+    # `classify --apply` through plain PyYAML, which cannot round-trip a comment, and an entry here
+    # is worthless without the evidence beside it. A generator must not add entries -- "this
+    # barcode was published once" is a fact about our own releases that a human checks against
+    # git history, not something to infer from the current tree.
+    #
+    # ADDITIVE ONLY. Retention can add a barcode to `additionalEans`; it can never change a primary
+    # `ean`, never remove anything, and never resurrect a retracted record. A retained value that
+    # some source starts asserting again is simply already there, and de-duplicated.
+    retained: dict[str, list[str]] = Field(default_factory=dict)
