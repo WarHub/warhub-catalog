@@ -435,6 +435,77 @@ jobs:
             done
           done
 
+      # A SOURCE THAT REPORTED NOTHING THIS RUN MUST NOT LOSE GROUND. This job checks out `main`,
+      # and `peter-evans/create-pull-request` rebuilds catalog/acquisition from that checkout every
+      # run -- so a source with no artifact does not merely stand still, it is REVERTED to whatever
+      # main holds, and the previous run's unmerged harvest for it disappears with the force-push.
+      # Nothing anywhere said so: the artifact download tolerates a missing artifact by design (see
+      # the step above), the merge loop simply has nothing to copy, and the PR body reads like any
+      # other night.
+      #
+      # THAT IS NOT A HYPOTHETICAL FAILURE MODE. On 2026-08-21 the group-D job was cancelled after
+      # ret-radaddel's own harvest had finished; the run uploaded no artifact, this job carried
+      # main's copy forward, and the 11,785-observation state that had never been merged survived
+      # only as a dangling commit that `git gc` would have collected. It had to be recovered by
+      # hand from the reflog (PR #151).
+      #
+      # SO: for every source the branch knows about that produced no artifact this run, take the
+      # BRANCH's copy rather than main's. A source that did report keeps its artifact untouched --
+      # that file is this run's own work and is strictly newer. A source neither side has is left
+      # alone. On a nightly the weekly-only groups (E, F, G) legitimately land here, which is why
+      # this reports rather than fails; the failure call is made in the final gate, from
+      # needs.acquire.result, where a CANCELLED group can be told apart from a skipped one.
+      #
+      # ONE PATH PER `git checkout`, deliberately: `git checkout <ref> -- a b` is all-or-nothing,
+      # so a single source missing from the branch would silently restore NONE of the others.
+      # `|| true` on the fetch keeps the first run after a merge working -- delete-branch: true
+      # removes catalog/acquisition when the PR lands, so its absence is the normal steady state,
+      # not an error.
+      - name: Carry over evidence for sources that reported nothing this run
+        id: carryover
+        run: |
+          shopt -s nullglob
+          harvested=""
+          for src_dir in artifacts/acquire-data-*/evidence/*/; do
+            harvested="$harvested $(basename "$src_dir")"
+          done
+          echo "Harvested this run:${harvested:- (none)}"
+
+          if ! git fetch --no-tags --depth=1 origin catalog/acquisition 2>/dev/null; then
+            echo "No catalog/acquisition branch to carry over from (normal right after a merge)."
+            echo "carried=" >> "$GITHUB_OUTPUT"
+            : > _carryover.txt
+            exit 0
+          fi
+
+          # REPORT ONLY WHAT WAS ACTUALLY RESCUED. Every source that did not run this cycle is
+          # taken from the branch, but for most of them the branch's copy IS main's copy and the
+          # checkout is a no-op -- legacy-catalog and seed-curated never run at all, and the
+          # weekly-only groups sit unchanged six nights in seven. Listing those would put ~9 names
+          # in the PR body every single night and train a reader to skip the section. Diffing
+          # against HEAD (this job checked out main) narrows it to the sources whose state came
+          # from an unmerged previous run -- which is exactly the set that would have been
+          # reverted, and is empty on a healthy night.
+          carried=""
+          for src in $(git ls-tree --name-only FETCH_HEAD data/evidence/products/ | sed 's|.*/||'); do
+            case " $harvested " in
+              *" $src "*) continue ;;
+            esac
+            git checkout FETCH_HEAD -- "data/evidence/products/$src"
+            if ! git diff --quiet HEAD -- "data/evidence/products/$src"; then
+              carried="$carried $src"
+            fi
+          done
+
+          carried="${carried# }"
+          echo "carried=$carried" >> "$GITHUB_OUTPUT"
+          if [ -n "$carried" ]; then
+            printf '%s\n' $carried > _carryover.txt
+            echo "::warning::No evidence artifact this run for:$carried. Their files were carried over from catalog/acquisition instead of reverting to main. Expected for the weekly-only groups (E, F, G) on a nightly run; anything else means a group did not complete."
+          else
+            : > _carryover.txt
+          fi
+
       # KNOWN GAP: `acquire` overwrites data/review/acquisition-health.md with only its own run's
       # rows, and each matrix job runs a disjoint source set. Since matrix jobs can't share a
       # single working tree, the combined health state is regenerated here by concatenating each
@@ -631,6 +702,18 @@ jobs:
               echo "No confirmed-EAN changes detected."
             fi
             echo
+            echo "### Sources carried over"
+            echo
+            if [ -s _carryover.txt ]; then
+              echo "These sources uploaded no evidence artifact this run, so their files were taken from the previous run's \`catalog/acquisition\` rather than reverting to \`main\`:"
+              echo
+              sed 's/^/- `/; s/$/`/' _carryover.txt
+              echo
+              echo "On a nightly run the weekly-only groups (E: \`arc-*\`, F: \`bdb-*\`, G: \`mfr-gw-trade\`) belong here. Any other source means its acquire group did not complete -- check the Acquire jobs."
+            else
+              echo "None -- every source the branch knows about reported evidence this run."
+            fi
+            echo
             echo "### Data-integrity tests"
             echo
             if [ "${{ steps.datatests.outputs.exit_code }}" = "0" ] && [ "${{ steps.datadrift.outputs.drift }}" = "0" ]; then
@@ -705,6 +788,18 @@ jobs:
 
           if [ "$guard_exit" != "0" ] && [ "$guard_exit" != "5" ]; then
             echo "::error::Confirmed-EAN guard report exited $guard_exit (expected 0 or 5) -- possible crash. See the job log for details."
+            crashed=1
+          fi
+
+          # A CANCELLED ACQUIRE GROUP IS AN INCIDENT, not a quiet gap. Exit 4 (a genuine source
+          # failure) already paints its own Acquire job red and still uploads its artifact, so
+          # nothing is lost there and this job has no need to repeat the alarm. A CANCELLED job
+          # uploads nothing at all -- and until the carryover step above existed, that silently
+          # reverted its sources to main's copy while every check stayed green. The carryover now
+          # holds the data; this makes the event itself visible in the one place a maintainer is
+          # certain to look before merging.
+          if [ "${{ needs.acquire.result }}" = "cancelled" ]; then
+            echo "::error::At least one acquire group was CANCELLED (timeout, runner loss, or a manual/concurrency cancel). Its sources uploaded no evidence and were carried over from catalog/acquisition -- see 'Sources carried over' in the PR body. This run harvested nothing for them."
             crashed=1
           fi
 
