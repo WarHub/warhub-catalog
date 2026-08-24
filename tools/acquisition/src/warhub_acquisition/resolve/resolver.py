@@ -1,11 +1,13 @@
 """Pure resolver: evidence + taxonomy + matches + overrides -> canonical catalog."""
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Mapping
 
 from warhub_acquisition.ean import canonical_ean
 from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
-from warhub_acquisition.models.descriptor import load_descriptors
+from warhub_acquisition.models.descriptor import SourceDescriptor, load_descriptors
+from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve import crossover
 from warhub_acquisition.resolve.attributes import apply_overrides, resolve_attributes
 from warhub_acquisition.resolve.corroborate import find_shared_eans, resolve_ean
@@ -98,6 +100,115 @@ def _load_mappings(directory: Path) -> dict[str, dict]:
     return {path.stem: (read_yaml(path) or {}) for path in sorted(directory.glob("*.yaml"))}
 
 
+@dataclass(frozen=True)
+class ProductObservations:
+    """What the PRODUCT catalog is built from, plus the receipts for what was left out.
+
+    ONE SELECTION, TWO READERS, and that is the entire reason this is a function. `resolve_catalog`
+    builds the catalog from `observations`; `classify/queue.py` re-joins the SAME list to recover
+    each entity's raw per-source hints, which the resolved CanonicalProduct does not keep. If the
+    two selections differ at all, the queue derives entity ids the catalog does not contain.
+
+    THAT IS NOT HYPOTHETICAL. The queue used to join every observation in the store, paint sources
+    included, and `army-painter/CP3001` -- a spray primer the product catalog publishes from
+    mfr-warlord-store plus two retailers -- came back from that join as `army-painter/CP3001S`,
+    because mfr-armypainter's paint row (sku CP3001S, sharing barcode 5713799300118) rejoined the
+    entity and its code won the identity ordering. `build_queue` then raised "has no matching
+    evidence" for a product plainly sitting in data/catalog/products/army-painter.yaml. The bug was
+    invisible for as long as it was because ci.yml runs pytest only on `tools/**` changes and this
+    test is not in the Data CI subset, so a data-only merge could turn it red and stay green.
+    """
+
+    observations: list[Observation]
+    crossover_conflicts: list[dict]
+    # Rows from `catalog: products` sources only, counted separately from `observations` ON
+    # PURPOSE -- see the wipe guard in resolve_catalog.
+    product_source_count: int
+
+
+def select_product_observations(
+    evidence: Mapping[str, Mapping[str, Observation]],
+    descriptors: Mapping[str, SourceDescriptor],
+    taxonomy: Taxonomy,
+) -> ProductObservations:
+    """Which stored observations feed the product catalog, and under what category stamp.
+
+    Paint sources share the evidence layout but feed the PAINT catalog (see SourceDescriptor
+    .catalog and scripts/gen_paint_harvest.py). Their observations are skipped here rather than
+    stored elsewhere, so the acquire runner, cursors and health reporting stay uniform.
+
+    ...except for the boxed multi-pot SETS among them, which are products (maintainer decision
+    2026-08-05) and once reached NEITHER catalog: dropped here, and gated out of every bridge in
+    gen_paint_harvest.py. `crossoverToProducts` is each paint source's declaration of which of its
+    rows those are; `crossover.matches` is the same evaluator the bridges refuse with, so the two
+    catalogs partition the source instead of both guessing. Measured 2026-08-11 across the six
+    declaring sources: 562 rows selected (302 ak, 115 reaper, 69 gsw, 49 armypainter, 21 monument,
+    6 scale75), 530 admitted. Not all of them are SETS: 16 of ak's 302 stamp `hobby-auxiliary` off
+    a per-clause override (crossover.py::category_for).
+    """
+    observations: list[Observation] = []
+    crossover_conflicts: list[dict] = []
+    product_source_count = 0
+    for source_id, source in evidence.items():
+        descriptor = descriptors[source_id]
+        if descriptor.catalog == "products":
+            observations.extend(source.values())
+            product_source_count += len(source)
+            continue
+        rule = descriptor.crossoverToProducts
+        if rule is None:
+            continue
+        spec = rule.model_dump()
+        for observation in source.values():
+            stamp = crossover.category_for(observation.model_dump(), spec)
+            if stamp is None:
+                continue
+            # IDENTITY FLOOR. A record crossing catalogs must be addressable by a product code or
+            # a barcode, or its entity id falls back to a slug of the store's TITLE -- which a
+            # retitle silently orphans, minting a second entity and stranding the first. That is
+            # the identity instability the archival-identity decision exists to prevent, so an
+            # unaddressable row is surfaced as a conflict for a human rather than published as a
+            # name slug. Measured 2026-08-11: 32 of 562, every one mfr-ak-interactive (which
+            # publishes no barcode anywhere) with a SKU its codePattern does not match.
+            #
+            # THE REFUSAL IS TYPED BY THE STAMP THE ROW WOULD HAVE CARRIED, not by the word "set".
+            # A per-clause `category` means one source can cross two kinds of thing (crossover.py
+            # ::category_for), so the fixed `set-without-identity` this line used to emit filed 3
+            # of those 32 -- AKABT111/112/113, the odourless / matt-effect / fast-dry thinners,
+            # which the `category_for` call above stamps `hobby-auxiliary` -- under a type that
+            # says BOXED SET. A maintainer triaging that list was reading "set" and finding a
+            # bottle of thinner.
+            #
+            # DERIVED, not a second key, and the reason is the conflicts sort in resolve_catalog:
+            # `str(sorted(c.items()))` orders each record's items BY KEY NAME, and of the five keys
+            # here (`key` < `name` < `sku` < `source` < `type`) `key` comes first and is unique per
+            # row, so the sort string is decided before `type` is ever reached. Measured 2026-08-11
+            # over the committed 90-row conflicts.yaml: retyping moves 0 of 90 rows, while adding a
+            # sibling `category:` key -- which would sort FIRST, ahead of `key` -- moves 33 of 90
+            # and buries a 3-row correction in a 33-row reshuffle.
+            has_code = taxonomy.normalize_code(observation.manufacturer, observation.sku) is not None
+            if not has_code and canonical_ean(observation.ean) is None:
+                crossover_conflicts.append(
+                    {
+                        "type": f"{stamp}-without-identity",
+                        "source": source_id,
+                        "key": observation.key,
+                        "sku": observation.sku,
+                        "name": observation.name,
+                    }
+                )
+                continue
+            # The category stamp is the ONLY mutation. `category` is folded from hints
+            # (resolve/attributes.py), and 448 of the 562 selected rows carry `hints.category:
+            # "paint"` -- publishing a 12-pot box under that is the same structural lie commit
+            # 6b3c930 fixed on the paint side (re-measured 2026-08-11; it was 431 of 545 on
+            # 2026-08-05, before the AK sweep widened this source).
+            observations.append(
+                observation.model_copy(update={"hints": {**observation.hints, "category": stamp}})
+            )
+    return ProductObservations(observations, crossover_conflicts, product_source_count)
+
+
 def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
@@ -138,79 +249,12 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
             seen.add(node)
             node = matches.supersessions[node]
 
-    # Paint sources share the evidence layout but feed the PAINT catalog (see SourceDescriptor
-    # .catalog and scripts/gen_paint_harvest.py). Their observations are skipped here rather than
-    # stored elsewhere, so the acquire runner, cursors and health reporting stay uniform.
-    #
-    # ...except for the boxed multi-pot SETS among them, which are products (maintainer decision
-    # 2026-08-05) and until now reached NEITHER catalog: dropped here, and gated out of every
-    # bridge in gen_paint_harvest.py. `crossoverToProducts` is each paint source's declaration of
-    # which of its rows those are; `crossover.matches` is the same evaluator the bridges refuse
-    # with, so the two catalogs partition the source instead of both guessing. Measured 2026-08-11
-    # across the six declaring sources: 562 rows selected (302 ak, 115 reaper, 69 gsw, 49
-    # armypainter, 21 monument, 6 scale75), 530 admitted. Not all of them are SETS: 16 of ak's 302
-    # stamp `hobby-auxiliary` off a per-clause override (crossover.py::category_for).
-    observations = []
-    crossover_conflicts: list[dict] = []
-    # Counted separately from `observations` ON PURPOSE -- see the wipe guard below.
-    product_source_observations = 0
-    for source_id, source in evidence.items():
-        descriptor = descriptors[source_id]
-        if descriptor.catalog == "products":
-            observations.extend(source.values())
-            product_source_observations += len(source)
-            continue
-        rule = descriptor.crossoverToProducts
-        if rule is None:
-            continue
-        spec = rule.model_dump()
-        for observation in source.values():
-            stamp = crossover.category_for(observation.model_dump(), spec)
-            if stamp is None:
-                continue
-            # IDENTITY FLOOR. A record crossing catalogs must be addressable by a product code or
-            # a barcode, or its entity id falls back to a slug of the store's TITLE -- which a
-            # retitle silently orphans, minting a second entity and stranding the first. That is
-            # the identity instability the archival-identity decision exists to prevent, so an
-            # unaddressable row is surfaced as a conflict for a human rather than published as a
-            # name slug. Measured 2026-08-11: 32 of 562, every one mfr-ak-interactive (which
-            # publishes no barcode anywhere) with a SKU its codePattern does not match.
-            #
-            # THE REFUSAL IS TYPED BY THE STAMP THE ROW WOULD HAVE CARRIED, not by the word "set".
-            # A per-clause `category` means one source can cross two kinds of thing (crossover.py
-            # ::category_for), so the fixed `set-without-identity` this line used to emit filed 3
-            # of those 32 -- AKABT111/112/113, the odourless / matt-effect / fast-dry thinners,
-            # which the `category_for` call above stamps `hobby-auxiliary` -- under a type that
-            # says BOXED SET. A maintainer triaging that list was reading "set" and finding a
-            # bottle of thinner.
-            #
-            # DERIVED, not a second key, and the reason is the sort at the bottom of this function:
-            # `str(sorted(c.items()))` orders each record's items BY KEY NAME, and of the five keys
-            # here (`key` < `name` < `sku` < `source` < `type`) `key` comes first and is unique per
-            # row, so the sort string is decided before `type` is ever reached. Measured 2026-08-11
-            # over the committed 90-row conflicts.yaml: retyping moves 0 of 90 rows, while adding a
-            # sibling `category:` key -- which would sort FIRST, ahead of `key` -- moves 33 of 90
-            # and buries a 3-row correction in a 33-row reshuffle.
-            has_code = taxonomy.normalize_code(observation.manufacturer, observation.sku) is not None
-            if not has_code and canonical_ean(observation.ean) is None:
-                crossover_conflicts.append(
-                    {
-                        "type": f"{stamp}-without-identity",
-                        "source": source_id,
-                        "key": observation.key,
-                        "sku": observation.sku,
-                        "name": observation.name,
-                    }
-                )
-                continue
-            # The category stamp is the ONLY mutation. `category` is folded from hints
-            # (resolve/attributes.py), and 448 of the 562 selected rows carry `hints.category:
-            # "paint"` -- publishing a 12-pot box under that is the same structural lie commit
-            # 6b3c930 fixed on the paint side (re-measured 2026-08-11; it was 431 of 545 on
-            # 2026-08-05, before the AK sweep widened this source).
-            observations.append(
-                observation.model_copy(update={"hints": {**observation.hints, "category": stamp}})
-            )
+    # Which stored observations feed THIS catalog (paint sources contribute only their boxed
+    # sets, and only under a category stamp) -- shared with classify/queue.py, which must join an
+    # identical set or derive entity ids this catalog does not have. See ProductObservations.
+    selected = select_product_observations(evidence, descriptors, taxonomy)
+    observations = selected.observations
+    crossover_conflicts = selected.crossover_conflicts
 
     # The wipe guard asks about PRODUCT-SOURCE evidence specifically, not about `observations`.
     # Crossover broke the old `if not observations` form: a handful of boxed sets from a paint
@@ -219,7 +263,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     # manufacturers, and then let the stale-file sweep below unlink every real product file.
     # Reproduced on the repo's own resolver fixtures before this fix: dropping mfr-gw and
     # ret-goblin evidence raised no exception and took games-workshop.yaml with it.
-    if not product_source_observations and any(paths.catalog_products.glob("*.yaml")):
+    if not selected.product_source_count and any(paths.catalog_products.glob("*.yaml")):
         raise ValueError("no evidence loaded but catalog files exist; refusing to wipe the catalog")
 
     joined = join_observations(observations, taxonomy, kinds, matches)
