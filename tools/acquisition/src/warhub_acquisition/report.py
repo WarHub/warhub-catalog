@@ -11,6 +11,12 @@ from warhub_acquisition.yamlio import load_yaml, read_yaml
 # directory from the data root the same way it derives the repo root.
 PAINT_BRANDS_SUBDIR = ("paints", "brands")
 
+#: `categoryBasis` values that mean NOBODY SAID ANYTHING. Named as a set rather than derived by
+#: excluding `stated`, so that adding a basis is a deliberate act on both sides: a new one counts
+#: as evidence only because it is absent here, which is a decision someone has to make rather than
+#: a default they can fall into. See categorize/decide.py for the bases this stage adds.
+UNDECIDED_BASES = frozenset({"guessed", "default"})
+
 
 def _paint_brands_dir(paths: DataPaths) -> Path:
     return paths.root.joinpath(*PAINT_BRANDS_SUBDIR)
@@ -93,16 +99,22 @@ def build_report(paths: DataPaths) -> str:
         lines += ["", "## Paint coverage", "", "| brand | paints | barcodes under EAN guard |", "|---|---|---|"]
         lines += [f"| {brand} | {paints} | {barcodes} |" for brand, paints, barcodes in brand_rows]
         lines.append(f"| **total** | {sum(r[1] for r in brand_rows)} | **{len(catalog_barcodes)}** |")
-    # THE NUMBER THIS SECTION EXISTS FOR is the `guessed`+`default` share, not the category split.
+    # THE NUMBER THIS SECTION EXISTS FOR is the undecided share, not the category split.
     # `category` is the only published product field with a fallback behind it, so a regression is
     # silent by construction -- every product still has a value, it is just not about that product.
     # Printing the basis every run puts that share in the nightly PR body, where it is supposed to
     # fall as the categorize work lands; a jump back up is the signal that something stopped
-    # deciding. `default` is counted apart from `guessed` because they are undecided for different
-    # reasons (see models/catalog.py::categoryBasis), and together apart from `stated` because
-    # that is the only one backed by evidence.
+    # deciding.
+    #
+    # A BASIS IS EITHER EVIDENCE OR IT IS NOT, and the split is exactly `UNDECIDED_BASES`. Two of
+    # them mean nobody said anything -- `guessed` is our own fallback, `default` is an upstream
+    # pipeline's blanket fill (models/catalog.py::categoryBasis) -- and everything else traces to
+    # something: `stated` to a source's claim about this product, `mapped` to that source's own
+    # published taxonomy through a committed rule table, `paint-barcode` to the paint catalog
+    # holding this barcode. Listing the undecided set rather than testing `!= "stated"` is what
+    # keeps a NEW basis from silently counting as evidence on the day someone adds one.
     if category_rows:
-        undecided = sum(n for (_, basis), n in category_rows.items() if basis != "stated")
+        undecided = sum(n for (_, basis), n in category_rows.items() if basis in UNDECIDED_BASES)
         total_rows = sum(category_rows.values())
         lines += [
             "", "## Product categories", "",

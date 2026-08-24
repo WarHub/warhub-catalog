@@ -1,0 +1,101 @@
+source: ret-goblingaming
+reason: >-
+  goblingaming.com's Shopify `product_type` is a pure FORMAT taxonomy -- 31 distinct values over
+  7,275 observations, and not one of them names a game system or a brand (those live in `tags` and
+  `vendor`). That is unusual and it is why this store is mapped first: most Shopify product_type
+  fields answer the game-line question instead, which says nothing about what the thing IS. Counts
+  are from data/evidence/products/ret-goblingaming/observations.jsonl on 2026-08-25.
+
+
+  FOUR VALUES ARE DELIBERATELY LEFT UNMAPPED, and they are the interesting part of this file.
+  `Aerosols` (38) straddles the boundary categories.yaml itself flags as the thinnest in the
+  vocabulary -- a coloured spray is `paint`, a colourless undercoat is `hobby-auxiliary`, and the
+  shelf holds both. `Advent Calendars` (3) and `Expansions` (2) name a sales format whose contents
+  decide the answer. Guessing any of them would put a wrong value where an honest "undecided" is
+  more useful; they stay in the review file's worklist until something better decides them.
+
+
+  `Paint Technical/Effects` (139) IS mapped, to `paint`, and it is the closest call here: GW's
+  Technical range is mostly coloured effects but also contains Lahmian Medium, which is colourless
+  and belongs in `hobby-auxiliary` by the stated boundary. The store's own claim wins until a human
+  moves it (OBJECTIVES 5), and the colourless-medium adjudication is already an open item on the
+  vocabulary itself rather than something this table should pre-empt.
+
+clauses:
+  - category: miniatures
+    hintEquals: {productType: Miniatures}
+
+  # A starter set feeds a wider game system, so it is (miniatures, set) rather than `board-game` --
+  # categories.yaml's board-game boundary says exactly this. Both spellings are live in the store.
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Starter Sets}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Starter Set}
+
+  - category: paint
+    hintEquals: {productType: Paints}
+  - category: paint
+    hintEquals: {productType: Airbrush Paints}
+  - category: paint
+    hintEquals: {productType: Paint Technical/Effects}
+    note: see the header -- the store's claim, not an adjudication of the colourless boundary
+  - category: paint
+    hintEquals: {productType: Paint Marker}
+    note: a marker deposits colour, which is the test categories.yaml sets for `paint`
+  - category: paint-set
+    packaging: set
+    hintEquals: {productType: Paint Sets}
+
+  - category: terrain
+    hintEquals: {productType: Scenery}
+
+  - category: book
+    hintEquals: {productType: Rules Supplements}
+  - category: book
+    hintEquals: {productType: Novels}
+  - category: book
+    hintEquals: {productType: Magazines}
+  - category: book
+    hintEquals: {productType: RPG Books}
+
+  # Used to BUILD and FINISH: brushes, basing, tools, decals, magnets, storage.
+  - category: hobby-auxiliary
+    hintEquals: {productType: Brushes}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Basing Materials}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Bases}
+    note: a blank base is a component of the hobby, not a model -- categories.yaml `miniatures`
+  - category: hobby-auxiliary
+    hintEquals: {productType: Hobby Tools}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Decals}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Painting Accessories}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Magnets}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Model Cases}
+    note: >-
+      storage is neither building nor playing; `hobby-auxiliary` is the nearest home the vocabulary
+      offers and 4 rows do not justify an eleventh category
+
+  # Used to PLAY: dice, tokens, mats, cards.
+  - category: game-accessory
+    hintEquals: {productType: Gaming Accessories}
+  - category: game-accessory
+    hintEquals: {productType: Dice}
+  - category: game-accessory
+    hintEquals: {productType: Dice Accessories}
+  - category: game-accessory
+    hintEquals: {productType: Tokens}
+  - category: game-accessory
+    hintEquals: {productType: Game Mats}
+    note: a play surface, not modelled scenery -- categories.yaml `terrain` boundary
+  - category: game-accessory
+    hintEquals: {productType: Roleplaying Game Accessories}
+
+  - category: board-game
+    hintEquals: {productType: Board Games}

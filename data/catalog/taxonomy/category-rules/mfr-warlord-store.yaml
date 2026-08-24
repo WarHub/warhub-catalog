@@ -1,0 +1,141 @@
+source: mfr-warlord-store
+reason: >-
+  store.warlordgames.com's `product_type` carries TWO axes in one field and only one of them is
+  answerable here. About half its 70 values name a game line -- `Bolt Action` (1,188), `Black
+  Powder` (401), `Hail Caesar` (261) -- which says nothing about what the product IS; those are
+  left to the gameSystem mapping in data/catalog/mappings/mfr-warlord-store.yaml and are not
+  clauses here. The other half names a MATERIAL AND PACKAGING format -- `Loose Metal` (245),
+  `Box - Metal` (83), `blister - resin/metal` (36) -- and every one of those is a miniature,
+  whatever it is a miniature FOR. Counts from
+  data/evidence/products/mfr-warlord-store/observations.jsonl on 2026-08-25.
+
+
+  THE MATERIAL VALUES ARE MAPPED TO `miniatures` AND NOT TO A PACKAGING. "Box - Plastic" is
+  Warlord's word for how the thing ships, and it is tempting to read `Box -> set` and
+  `Loose/Blister -> single` straight off it. That inference does not hold in either direction: a
+  single large model ships in a box, and a blister routinely holds three infantry. Packaging is a
+  separate axis with its own evidence, and a table that filled it from a shelf label would make
+  60% of the catalog's unknown packaging look answered when it is not. Only the four values that
+  literally NAME a packaging set one.
+
+
+  CASING AND TYPOS ARE MAPPED AS THE STORE WROTE THEM -- `Paint set` beside `Paint Set`, `bundle`
+  and `Bunde` beside `Bundle`, `decals` beside `Decals`. `hintEquals` is exact, and normalising
+  here would be this file quietly claiming the store wrote something it did not. They cost one
+  line each.
+
+
+  FIVE VALUES ARE NOT PRODUCT CATEGORIES AT ALL and are deliberately absent: `Free` (19),
+  `Loyalty` (13), `No Discount Codes` (5), `Exclude` (2) and `Archive` (3) are merchandising
+  states. `Accessory` (42) is absent for the opposite reason -- it is a real category and far too
+  vague to place, since it covers dice, flags, tools and mats alike.
+
+clauses:
+  # --- paint -----------------------------------------------------------------------------------
+  - category: paint
+    hintEquals: {productType: Paint Pot}
+  - category: paint
+    hintEquals: {productType: Paint Pen}
+  - category: paint
+    hintEquals: {productType: Paint}
+  - category: paint
+    hintEquals: {productType: Spray Paint}
+    note: >-
+      Warlord resells The Army Painter's Colour Primers, which are sold AS colours -- a coloured
+      spray is `paint` by the categories.yaml boundary, colourless undercoat would not be
+  - category: paint-set
+    packaging: set
+    hintEquals: {productType: Paint Set}
+  - category: paint-set
+    packaging: set
+    hintEquals: {productType: Paint set}
+
+  # --- miniatures: every material/packaging value the store uses -------------------------------
+  - category: miniatures
+    hintEquals: {productType: Loose Metal}
+  - category: miniatures
+    hintEquals: {productType: Loose - Metal}
+  - category: miniatures
+    hintEquals: {productType: Loose Resin}
+  - category: miniatures
+    hintEquals: {productType: Loose plastic}
+  - category: miniatures
+    hintEquals: {productType: Loose Plastic}
+  - category: miniatures
+    hintEquals: {productType: Loose R+M}
+  - category: miniatures
+    hintEquals: {productType: Loose - R+M}
+  - category: miniatures
+    hintEquals: {productType: loose P+M+R}
+  - category: miniatures
+    hintEquals: {productType: Box - Metal}
+  - category: miniatures
+    hintEquals: {productType: Box - Plastic}
+  - category: miniatures
+    hintEquals: {productType: Box - R+M}
+  - category: miniatures
+    hintEquals: {productType: Box - P+M}
+  - category: miniatures
+    hintEquals: {productType: Box - Plastic/Resin/Metal}
+  - category: miniatures
+    hintEquals: {productType: blister - resin/metal}
+  - category: miniatures
+    hintEquals: {productType: Blister - Resin}
+  - category: miniatures
+    hintEquals: {productType: Blister - Plastic}
+  - category: miniatures
+    hintEquals: {productType: Blister - wood}
+  - category: miniatures
+    hintEquals: {productType: plastic/metal/resin}
+  - category: miniatures
+    hintEquals: {productType: Plastic Sprues}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Starter Set}
+
+  # --- the rest ---------------------------------------------------------------------------------
+  - category: terrain
+    hintEquals: {productType: Terrain}
+  - category: book
+    hintEquals: {productType: Book}
+  - category: book
+    hintEquals: {productType: Rules & Books}
+
+  - category: hobby-auxiliary
+    hintEquals: {productType: Brushes}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Basing}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Bases}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Hobby}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Hobby Set}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Decals}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Decal}
+  - category: hobby-auxiliary
+    hintEquals: {productType: decals}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Flag}
+    note: Warlord's flags are printed sheets to fit to a model, not merchandise
+
+  - category: game-accessory
+    hintEquals: {productType: Dice}
+  - category: game-accessory
+    hintEquals: {productType: Gaming mat}
+
+  # --- packaging only: the value names the FORM and says nothing about the contents -------------
+  - packaging: digital
+    hintEquals: {productType: Digital}
+    note: >-
+      no category: the store's digital shelf holds rules PDFs and gift vouchers alike, and the
+      form is the only thing this value actually establishes
+  - packaging: bundle
+    hintEquals: {productType: Bundle}
+  - packaging: bundle
+    hintEquals: {productType: bundle}
+  - packaging: bundle
+    hintEquals: {productType: Bunde}
+    note: the store's own typo, 2 rows -- mapped as written because hintEquals is exact

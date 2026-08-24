@@ -113,6 +113,33 @@ def test_category_basis_leads_with_the_share_that_rests_on_nothing(tmp_path: Pat
     assert "| paint | stated | 1 |" in report
 
 
+def test_a_basis_the_categorize_stage_writes_counts_as_evidence(tmp_path: Path) -> None:
+    """The undecided set is NAMED (report.UNDECIDED_BASES), not derived by excluding `stated`.
+
+    Under the old `!= "stated"` form every basis the categorize stage adds would have counted as
+    "rests on no evidence", so landing that stage would have moved the headline number not at all
+    while 8,073 products became decided -- a metric that cannot see the work it exists to track.
+    Naming the undecided pair instead means a NEW basis counts as evidence only because someone
+    left it out of that set, which is a decision rather than a default."""
+    paths = DataPaths(tmp_path)
+    def product(pid: str, category: str, basis: str) -> dict:
+        return {"id": pid, "name": pid, "manufacturer": "vallejo", "category": category,
+                "categoryBasis": basis, "status": "current", "firstSeen": "2026-07-01"}
+    write_yaml(
+        paths.catalog_products / "vallejo.yaml",
+        {"manufacturer": "vallejo", "products": [
+            product("vallejo/1", "paint", "mapped"),
+            product("vallejo/2", "paint", "paint-barcode"),
+            product("vallejo/3", "miniatures", "guessed"),
+            product("vallejo/4", "miniatures", "default"),
+        ]},
+    )
+    report = build_report(paths)
+    assert "**2 of 4 (50.0%) rest on no evidence**" in report
+    assert "| paint | mapped | 1 |" in report
+    assert "| paint | paint-barcode | 1 |" in report
+
+
 def test_category_section_is_absent_without_a_product_catalog(tmp_path: Path) -> None:
     paths = DataPaths(tmp_path)
     write_yaml(

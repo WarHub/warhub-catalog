@@ -175,6 +175,24 @@ jobs:
           set -e
           cat ../../_resolve.txt
 
+      # NOT OPTIONAL, AND NOT DECORATION. `resolve` above rewrites every product file from
+      # evidence, which resets `category` to the fallback for anything no source stated. Without
+      # this step a classification run -- which is about gameSystem and faction and has nothing to
+      # do with categories -- would silently publish 8,073 products as guessed `miniatures` that
+      # the committed rule tables place correctly. `resolve` and `categorize` are one pipeline;
+      # anywhere the first runs, the second must follow. Exit 2 (disagreements) is review
+      # material, same convention as resolve's own conflicts.
+      - name: Categorize products
+        id: categorize
+        if: github.event.inputs.mode == 'classify'
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data categorize --data ../../data > ../../_categorize.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_categorize.txt
+
       - name: Coverage report
         id: report
         if: github.event.inputs.mode == 'classify'
