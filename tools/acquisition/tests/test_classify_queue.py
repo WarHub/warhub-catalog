@@ -187,6 +187,98 @@ def test_cli_emit_queue_writes_review_file(tmp_path: Path, capsys) -> None:
     ]
 
 
+def test_a_paint_row_the_product_catalog_excludes_never_reaches_the_queues_join(tmp_path: Path) -> None:
+    r"""The queue must join EXACTLY what the resolver joined -- shape taken from the real bug.
+
+    `army-painter/CP3001` (Matt Black spray primer) is published from mfr-warlord-store plus two
+    retailers. mfr-armypainter is a `catalog: paints` source whose row for the same can carries the
+    variant code CP3001S and the same barcode 5713799300118, and it does NOT cross into products
+    (one can is not a boxed set), so the resolver never sees it. The queue used to flatten the whole
+    evidence store instead: the paint row rejoined the entity by barcode, and since `_priority`
+    breaks a kind tie on the observation KEY, `mfr-armypainter:...` sorted ahead of
+    `mfr-warlord-store:...` and CP3001S became the entity id -- so build_queue raised "has no
+    matching evidence" for a product sitting in the catalog.
+
+    Asserting only that it no longer raises would pass for the wrong reason (any change that made
+    the paint row lose the tie would also stop the raise), so this pins the two things the shared
+    selection actually guarantees: the id the catalog published, and the absence of the excluded
+    row's hints from the queue item.
+    """
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.taxonomy / "manufacturers.yaml",
+        {"manufacturers": [{
+            "slug": "army-painter", "name": "The Army Painter",
+            "codePattern": r"CP\d{4}[A-Z]?", "gs1Prefixes": ["5713799"],
+        }]},
+    )
+    write_yaml(paths.taxonomy / "game-systems.yaml", {"gameSystems": []})
+    write_yaml(paths.taxonomy / "factions.yaml", {"factions": []})
+
+    write_yaml(paths.sources / "mfr-warlord-store.yaml",
+               {"id": "mfr-warlord-store", "kind": "manufacturer", "strategy": "shopify"})
+    write_yaml(paths.sources / "ret-tistaminis.yaml",
+               {"id": "ret-tistaminis", "kind": "retailer", "strategy": "shopify"})
+    # A paint source that DOES declare a crossover -- so what excludes this row is the clause not
+    # matching it, not the source lacking a rule entirely.
+    write_yaml(
+        paths.sources / "mfr-armypainter.yaml",
+        {
+            "id": "mfr-armypainter", "kind": "manufacturer", "strategy": "shopify-paints",
+            "catalog": "paints",
+            "crossoverToProducts": {
+                "category": "paint-set",
+                "reason": "boxed multi-pot sets are products; single cans are not",
+                "anyOf": [{"hintContainsAny": {"tags": ["paint-set"]}}],
+            },
+        },
+    )
+
+    store = paths.evidence_products / "mfr-warlord-store" / "observations.jsonl"
+    store.parent.mkdir(parents=True)
+    store.write_text(
+        _line({
+            "key": "mfr-warlord-store:matt-black-base-primer-spray",
+            "name": "Matt Black base primer spray", "manufacturer": "army-painter",
+            "sku": "CP3001", "ean": "2540101130018", "hints": {"productType": "Spray Paint"},
+            "firstSeen": "2026-08-01", "lastSeen": "2026-08-22", "extractor": "shopify@1",
+        }),
+        encoding="utf-8", newline="\n",
+    )
+    retailer = paths.evidence_products / "ret-tistaminis" / "observations.jsonl"
+    retailer.parent.mkdir(parents=True)
+    retailer.write_text(
+        _line({
+            "key": "ret-tistaminis:army-painter-colour-primer-matte-black-spray",
+            "name": "Army Painter Colour Primer - Matte Black Spray",
+            "manufacturer": "army-painter", "sku": "CP3001", "ean": "5713799300118",
+            "firstSeen": "2026-08-01", "lastSeen": "2026-08-22", "extractor": "shopify@1",
+        }),
+        encoding="utf-8", newline="\n",
+    )
+    paint = paths.evidence_products / "mfr-armypainter" / "observations.jsonl"
+    paint.parent.mkdir(parents=True)
+    paint.write_text(
+        _line({
+            "key": "mfr-armypainter:colour-primers-colour-primer-matt-black-cp3001s",
+            "name": "Colour Primer: Matt Black", "manufacturer": "army-painter",
+            "sku": "CP3001S", "ean": "5713799300118",
+            # `tags` deliberately misses the crossover clause: one can is not a boxed set.
+            "hints": {"tags": ["colour-primers"], "paintOnly": "yes"},
+            "firstSeen": "2026-08-01", "lastSeen": "2026-08-22", "extractor": "shopify-paints@1",
+        }),
+        encoding="utf-8", newline="\n",
+    )
+
+    catalog = resolve_catalog(paths)
+    assert [product.id for product in catalog["army-painter"]] == ["army-painter/CP3001"]
+
+    queue = build_queue(paths)
+    assert [item["entity"] for item in queue] == ["army-painter/CP3001"]
+    # The excluded row contributed nothing -- not its hints, and not its identity.
+    assert queue[0]["hints"] == ["productType=Spray Paint"]
+
+
 # --- real committed data ---------------------------------------------------------------------
 # Uses a repo-root fixture rather than a package-relative one (see tests/test_repo_data.py):
 # this package can be built/tested outside the monorepo (sdist), where ../../../../data does

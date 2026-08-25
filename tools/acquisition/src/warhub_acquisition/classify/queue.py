@@ -11,7 +11,7 @@ from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.descriptor import load_descriptors
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.join import Matches, join_observations
-from warhub_acquisition.resolve.resolver import DataPaths
+from warhub_acquisition.resolve.resolver import DataPaths, select_product_observations
 from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.yamlio import read_yaml
 
@@ -77,13 +77,20 @@ def _joined_entities(paths: DataPaths) -> dict[str, list[Observation]]:
     resolve_catalog does not expose joined members itself (it only returns finished
     CanonicalProducts and writes conflicts.yaml) -- so the join is repeated here rather than
     duplicating queue-building into resolver.py.
+
+    REPEATING THE JOIN MEANS REPEATING ITS INPUT, and that is what `select_product_observations`
+    is for. This function used to flatten the whole evidence store instead, which silently added
+    the paint-source rows the product catalog deliberately excludes; the extra members changed
+    which product code won the identity ordering, so the join produced ids the catalog does not
+    have and `build_queue` raised on a product that exists. See ProductObservations for the
+    measured case (`army-painter/CP3001` -> `army-painter/CP3001S`).
     """
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
     evidence = EvidenceStore(paths.evidence_products).load_all()
-    observations = [observation for source in evidence.values() for observation in source.values()]
-    joined = join_observations(observations, taxonomy, kinds, _load_matches(paths))
+    selected = select_product_observations(evidence, descriptors, taxonomy)
+    joined = join_observations(selected.observations, taxonomy, kinds, _load_matches(paths))
     return joined.entities
 
 
