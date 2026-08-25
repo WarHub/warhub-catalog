@@ -2395,7 +2395,6 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 99.39
     priceUsd: 100.0
     url: https://www.manticgames.com/armada/trident-realm/bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2023/03/Untitled-design.png
@@ -2406,7 +2405,6 @@ products:
       - Trident Realm Leviathan
     evidence:
       - legacy-catalog:mantic-games/armada/general/trident-realm-complete-fleet-bundle
-      - mfr-manticgames:444990
   - id: mantic-games/MGARB101
     name: Basilean Starter Fleet
     manufacturer: mantic-games
@@ -4017,7 +4015,7 @@ products:
     categoryBasis: default
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 42.5
     priceUsd: 42.5
@@ -9657,6 +9655,21 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/siege-rules-beta.webp
     evidence:
       - mfr-manticgames:554805
+  - id: mantic-games/MGDG265
+    name: Blades of Samarik (Standalone Novel) – eBook
+    manufacturer: mantic-games
+    productCode: MGDG265
+    sku: MGDG265
+    category: book
+    categoryBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-08-25'
+    priceGbp: 7.5
+    url: https://www.manticgames.com/kingsofwar/fiction/blades-of-samarik-ebook/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/siege-of-samarik-book-cover-mockup.webp
+    evidence:
+      - mfr-manticgames:555926
   - id: mantic-games/MGDS01
     name: The Dwarf King’s Quest Boxed Game
     manufacturer: mantic-games
@@ -16489,6 +16502,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/halo-flashpoint/general/halo-flashpoint-paint-set
       - mfr-manticgames:492293
+      - ret-gamenerdz:/halo-flashpoint-paint-set-preorder
       - ret-tistaminis:halo-flashpoint-paint-set1
   - id: mantic-games/MGHA106
     name: UNSC Firebase Deluxe Gaming Mat
@@ -17826,7 +17840,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 30.0
     url: https://www.manticgames.com/hellboy/limited-edition-holiday-hellboy/
@@ -23753,6 +23767,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     priceUsd: 12.5
+    priceEur: 8.9
     url: https://www.manticgames.com/kings-of-war/kings-of-war-artefact-and-spell-cards/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2022/09/KoW-Magic-and-Artefact-cards.webp
     description: |-
@@ -23763,6 +23778,7 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/artefact-and-spell-cards-discontinued
       - mfr-manticgames:429968
       - ret-radaddel:/artefact-spell-cards
+      - ret-radaddel:artefact-spell-cards
   - id: mantic-games/MGKWM119
     name: Sands of Ahmun 2-Player Starter Set DISCONTINUED
     manufacturer: mantic-games
@@ -38490,8 +38506,8 @@ products:
     ean: '5060469660080'
     eanConfidence: provisional
     gameSystem: walking-dead-all-out-war
-    category: miniatures
-    categoryBasis: guessed
+    category: game-accessory
+    categoryBasis: mapped
     status: current
     firstSeen: '2026-07-13'
     url: https://www.gamenerdz.com/the-walking-dead-all-out-war-atlanta-suburbs-deluxe-gaming-mat
@@ -38546,8 +38562,8 @@ products:
     ean: '5060469661070'
     eanConfidence: provisional
     gameSystem: walking-dead-all-out-war
-    category: miniatures
-    categoryBasis: guessed
+    category: game-accessory
+    categoryBasis: mapped
     status: current
     firstSeen: '2026-07-13'
     url: https://www.gamenerdz.com/the-walking-dead-all-out-war-greene-farm-deluxe-gaming-mat
@@ -38561,8 +38577,8 @@ products:
     ean: '5060469661087'
     eanConfidence: provisional
     gameSystem: walking-dead-all-out-war
-    category: miniatures
-    categoryBasis: guessed
+    category: game-accessory
+    categoryBasis: mapped
     status: current
     firstSeen: '2026-07-13'
     url: https://www.gamenerdz.com/the-walking-dead-all-out-war-the-prison-deluxe-gaming-mat
@@ -55451,20 +55467,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-rulebook-espanol
       - mfr-manticgames:361405
-  - id: mantic-games/artefact-spell-cards
-    name: Artefact & Spell Cards
-    manufacturer: mantic-games
-    sku: '125625'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 8.9
-    url: https://radaddel.de/products/artefact-spell-cards
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125625-artefact-spell-cards-mgkwm118-1.webp?v=1781207144
-    evidence:
-      - ret-radaddel:artefact-spell-cards
   - id: mantic-games/asterian-nemrath-mantic-direct
     name: Asterian Nem’Rath (Mantic Direct)
     manufacturer: mantic-games
@@ -61151,9 +61153,9 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
-    priceGbp: 80.38
+    priceGbp: 54.99
     url: https://www.manticgames.com/advent-calendars/hellboy-calendar-holiday-hellboy-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/hellboy-advent-calendar-and-holiday-hellboy-bundle.webp
     evidence:
@@ -64541,6 +64543,20 @@ products:
     evidence:
       - legacy-catalog:mantic-games/deadzone/general/thorn-the-progenitor-15-points
       - mfr-manticgames:22198
+  - id: mantic-games/trident-realm-complete-fleet-bundle-discontinued
+    name: Trident Realm Complete Fleet Bundle (DISCONTINUED)
+    manufacturer: mantic-games
+    sku: BUNDLE
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 99.39
+    url: https://www.manticgames.com/armada/trident-realm/bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2023/03/Untitled-design.png
+    evidence:
+      - mfr-manticgames:444990
   - id: mantic-games/trident-realm-riverguard-two-handed-weapons-upgrade-pack
     name: Trident Realm Riverguard Two-Handed Weapons Upgrade Pack
     manufacturer: mantic-games
