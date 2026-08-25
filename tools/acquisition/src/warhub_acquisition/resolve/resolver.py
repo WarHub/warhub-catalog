@@ -5,7 +5,7 @@ from typing import Mapping
 
 from warhub_acquisition.ean import canonical_ean
 from warhub_acquisition.evidence.store import EvidenceStore
-from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
+from warhub_acquisition.models.catalog import CanonicalProduct, Overrides, RetainedEans
 from warhub_acquisition.models.descriptor import SourceDescriptor, load_descriptors
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve import crossover
@@ -61,6 +61,14 @@ class DataPaths:
         (models/catalog.py::SetRefs). Separate from `overrides` because classify/apply.py rewrites
         overrides.yaml wholesale and would delete a hand-authored key -- as it did, 2026-08-11."""
         return self.root / "catalog" / "set-refs.yaml"
+
+    @property
+    def retained_eans(self) -> Path:
+        """Barcodes this catalog published that no source attests any more (models/catalog.py
+        ::RetainedEans). Hand-authored, like set_refs and for the same reason: overrides.yaml is
+        rebuilt by `classify --apply` through plain PyYAML and cannot keep the evidence beside an
+        entry."""
+        return self.root / "catalog" / "retained-eans.yaml"
 
     @property
     def conflicts(self) -> Path:
@@ -225,6 +233,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
 
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     overrides: Overrides = _load_optional(paths.overrides, Overrides, Overrides())
+    retained: RetainedEans = _load_optional(paths.retained_eans, RetainedEans, RetainedEans())
 
     retracted = set(overrides.retract)
     for alias_target in matches.aliases.values():
@@ -318,6 +327,15 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         # Stamped before apply_overrides so a hand override can still correct a link.
         record.supersededBy = superseded_by.get(entity)
         record.supersedes = sorted(supersedes.get(entity, []))
+        # Re-attach any barcode this catalog published that no source attests any more. BEFORE
+        # apply_overrides, so a hand override still has the last word, and additive only: it can
+        # add to `additionalEans` and can never touch the primary `ean`. See RetainedEans for the
+        # ledger hole this plugs -- a source that CHANGES a barcode on a handle it already had
+        # leaves no loser for corroborate.py to keep, because upsert replaced the observation
+        # whole. Retracted entities are already skipped above, so this cannot resurrect one.
+        keep = [e for e in retained.retained.get(record.id, []) if e != record.ean]
+        if keep:
+            record.additionalEans = sorted({*record.additionalEans, *keep})
         product = apply_overrides(record, overrides)
         # AFTER overrides, so a hand-written `category:` in overrides.yaml is held to the same
         # vocabulary as a resolved one -- a typo there would otherwise mint an undeclared value
