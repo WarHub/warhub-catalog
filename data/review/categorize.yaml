@@ -1,15 +1,18 @@
 summary:
-  products: 30771
-  undecided: 16725
+  products: 30224
+  undecided: 16361
   byBasis:
-    default: 7053
-    guessed: 9672
-    lexicon: 2710
-    mapped: 9312
-    paint-barcode: 70
+    default: 7055
+    guessed: 9306
+    lexicon: 2568
+    mapped: 9320
+    paint-barcode: 21
     stated: 1954
-  decidedThisRun: 12092
+  decidedThisRun: 11909
 conflicts:
+  - entity: atomic-mass-games/star-wars-legion-legion-attack-dice-pack
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=game-accessory; ret-goblingaming=miniatures'
   - entity: corvus-belli/aristeia-advanced-tactics-deck
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=game-accessory'
@@ -115,7 +118,28 @@ conflicts:
   - entity: vallejo/foam-effects-32ml-diorama-effects
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/grey-sand-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
   - entity: vallejo/mediterranean-blue-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/pacific-blue-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/rough-grey-pumice-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/still-water-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/transparent-water-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/white-pumice-200ml-diorama-effects
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/white-stone-paste-200ml-diorama-effects
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
   - entity: warlord-games/403013012
@@ -151,11 +175,11 @@ unmapped:
     - value: hierarchy.lvl1=The Horus Heresy > Loyalist Legiones Astartes
       wouldDecide: 151
     - value: hierarchy.lvl1=Other Games > Necromunda
-      wouldDecide: 89
+      wouldDecide: 88
     - value: hierarchy.lvl1=Middle-Earth > Unit Type
-      wouldDecide: 76
+      wouldDecide: 82
     - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
-      wouldDecide: 74
+      wouldDecide: 76
     - value: hierarchy.lvl1=The Horus Heresy > Vehicles
       wouldDecide: 73
     - value: hierarchy.lvl1=The Horus Heresy > Accessories
@@ -167,19 +191,21 @@ unmapped:
     - value: hierarchy.lvl1=The Horus Heresy > Mechanicum
       wouldDecide: 42
     - value: hierarchy.lvl1=Warhammer 40,000 > Armies of the Imperium
-      wouldDecide: 40
+      wouldDecide: 41
     - value: hierarchy.lvl1=The Old World > Unit Type
       wouldDecide: 40
     - value: hierarchy.lvl1=Warhammer 40,000 > Armies of Chaos
       wouldDecide: 37
-    - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Good
-      wouldDecide: 26
-    - value: hierarchy.lvl1=Warhammer 40,000 > Xenos Armies
-      wouldDecide: 24
     - value: hierarchy.lvl1=Age of Sigmar > Unit Type
-      wouldDecide: 21
+      wouldDecide: 33
+    - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Good
+      wouldDecide: 32
+    - value: hierarchy.lvl1=Warhammer 40,000 > Xenos Armies
+      wouldDecide: 25
     - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Evil
       wouldDecide: 20
+    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Chaos
+      wouldDecide: 18
     - value: hierarchy.lvl1=Middle-Earth > The Hobbit™ - Good
       wouldDecide: 17
     - value: hierarchy.lvl1=The Horus Heresy > Forces of The Emperor
@@ -192,19 +218,17 @@ unmapped:
       wouldDecide: 8
     - value: hierarchy.lvl1=The Horus Heresy > Legiones Astartes
       wouldDecide: 8
-    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Chaos
-      wouldDecide: 7
     - value: hierarchy.lvl1=Other Games > Legions Imperialis
       wouldDecide: 6
     - value: hierarchy.lvl1=The Horus Heresy > Armies of the Warmaster
       wouldDecide: 5
+    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Death
+      wouldDecide: 4
     - value: hierarchy.lvl1=Other Games > Adeptus Titanicus
       wouldDecide: 4
     - value: hierarchy.lvl1=Warhammer 40,000 > Space Marines
       wouldDecide: 3
     - value: hierarchy.lvl1=Warhammer 40,000 > Terrain
-      wouldDecide: 3
-    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Death
       wouldDecide: 3
     - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Destruction
       wouldDecide: 3
@@ -512,25 +536,25 @@ unmapped:
       wouldDecide: 8
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 2558
+      wouldDecide: 2551
     - value: tags=us
-      wouldDecide: 2554
+      wouldDecide: 2547
     - value: vendor=Warlord Games
-      wouldDecide: 2542
+      wouldDecide: 2544
     - value: tags=over-10
-      wouldDecide: 1958
+      wouldDecide: 1957
     - value: tags=metal
       wouldDecide: 1660
     - value: tags=warlord-games
       wouldDecide: 934
     - value: tags=bolt-action
-      wouldDecide: 916
+      wouldDecide: 918
     - value: productType=Bolt Action
-      wouldDecide: 871
+      wouldDecide: 873
     - value: tags=blister
       wouldDecide: 629
     - value: tags=under-10
-      wouldDecide: 567
+      wouldDecide: 561
     - value: tags=infantry
       wouldDecide: 508
     - value: tags=direct
@@ -538,29 +562,29 @@ unmapped:
     - value: tags=resin
       wouldDecide: 457
     - value: tags=plastic
-      wouldDecide: 409
+      wouldDecide: 411
     - value: tags=british
-      wouldDecide: 379
+      wouldDecide: 381
     - value: tags=black-powder
       wouldDecide: 378
     - value: tags=platoon-rifle
-      wouldDecide: 371
+      wouldDecide: 373
     - value: tags=deal
       wouldDecide: 359
     - value: productType=Black Powder
       wouldDecide: 341
     - value: tags=german
-      wouldDecide: 308
+      wouldDecide: 310
     - value: tags=unit-all-vehicles
-      wouldDecide: 291
+      wouldDecide: 293
     - value: tags=warlord-resin
       wouldDecide: 280
-    - value: tags=trade-web
-      wouldDecide: 268
     - value: tags=box-set
-      wouldDecide: 267
+      wouldDecide: 269
     - value: tags=hail-caesar
       wouldDecide: 261
+    - value: tags=trade-web
+      wouldDecide: 260
     - value: tags=german-army
       wouldDecide: 255
     - value: tags=pike-shotte
@@ -573,31 +597,31 @@ unmapped:
       wouldDecide: 233
     - value: productType=Pike & Shotte
       wouldDecide: 232
+    - value: tags=support-teams
+      wouldDecide: 224
     - value: tags=platoon-heavy-weapon
       wouldDecide: 223
-    - value: tags=support-teams
-      wouldDecide: 222
     - value: tags=cavalry
       wouldDecide: 214
     - value: tags=unit-armoured-vehicle
-      wouldDecide: 212
+      wouldDecide: 214
     - value: tags=platoon-reconnaissance
       wouldDecide: 208
+    - value: tags=vehicle
+      wouldDecide: 193
     - value: tags=Vessel
       wouldDecide: 193
-    - value: tags=vehicle
-      wouldDecide: 191
     - value: tags=napoleonic-wars-1789-1815
       wouldDecide: 191
     - value: tags=include
       wouldDecide: 184
   mfr-warmachine:
     - value: tags=digitalproduct
-      wouldDecide: 23
+      wouldDecide: 24
     - value: productType=Digital Download
       wouldDecide: 14
     - value: vendor=Warmachine
-      wouldDecide: 12
+      wouldDecide: 13
     - value: tags=5e
       wouldDecide: 12
     - value: tags=SFG Exclusive
@@ -605,13 +629,13 @@ unmapped:
     - value: vendor=Iron Kingdoms
       wouldDecide: 12
     - value: tags=free-resource
-      wouldDecide: 11
+      wouldDecide: 12
     - value: productType=Free Resource
-      wouldDecide: 9
+      wouldDecide: 10
     - value: tags=no-stock-label
-      wouldDecide: 9
+      wouldDecide: 10
     - value: tags=build-instructions
-      wouldDecide: 6
+      wouldDecide: 7
     - value: tags=wm-starters
       wouldDecide: 2
     - value: productType=Wargame
@@ -647,45 +671,51 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 569
+      wouldDecide: 717
     - value: breadcrumbs=Miniatures
-      wouldDecide: 561
+      wouldDecide: 709
     - value: breadcrumbs=Infinity
-      wouldDecide: 235
+      wouldDecide: 216
     - value: breadcrumbs=Kings of War
       wouldDecide: 94
     - value: breadcrumbs=Marvel Crisis Protocol
       wouldDecide: 83
     - value: breadcrumbs=Malifaux
       wouldDecide: 79
-    - value: breadcrumbs=Panoceania
-      wouldDecide: 30
-    - value: breadcrumbs=Nomads
-      wouldDecide: 28
+    - value: breadcrumbs=Games Workshop
+      wouldDecide: 71
+    - value: breadcrumbs=Warhammer 40K
+      wouldDecide: 66
     - value: breadcrumbs=More Miniatures
-      wouldDecide: 28
+      wouldDecide: 57
+    - value: breadcrumbs=Warcrow
+      wouldDecide: 56
     - value: breadcrumbs=Star Wars Legion
-      wouldDecide: 26
+      wouldDecide: 36
+    - value: 'breadcrumbs=Walking Dead: All Out War'
+      wouldDecide: 29
+    - value: breadcrumbs=Nomads
+      wouldDecide: 27
+    - value: breadcrumbs=Panoceania
+      wouldDecide: 27
     - value: breadcrumbs=Yu Jing
-      wouldDecide: 25
+      wouldDecide: 24
     - value: breadcrumbs=Ariadna
-      wouldDecide: 22
+      wouldDecide: 21
     - value: breadcrumbs=Godtear
       wouldDecide: 21
-    - value: breadcrumbs=Combined Army
-      wouldDecide: 18
     - value: breadcrumbs=Haqqislam
-      wouldDecide: 18
-    - value: breadcrumbs=Aleph
-      wouldDecide: 14
-    - value: breadcrumbs=NA2
+      wouldDecide: 16
+    - value: breadcrumbs=Combined Army
+      wouldDecide: 15
+    - value: breadcrumbs=Star Wars Shatterpoint
       wouldDecide: 13
-    - value: breadcrumbs=Terrain & Accessories
+    - value: breadcrumbs=Aleph
       wouldDecide: 12
-    - value: breadcrumbs=Games Workshop
+    - value: breadcrumbs=NA2
+      wouldDecide: 12
+    - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 8
-    - value: breadcrumbs=Warcrow
-      wouldDecide: 4
     - value: breadcrumbs=Supplies
       wouldDecide: 4
     - value: breadcrumbs=Citadel Accessories & Supplies
@@ -693,8 +723,6 @@ unmapped:
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
     - value: breadcrumbs=O-12
-      wouldDecide: 3
-    - value: breadcrumbs=Warhammer 40K
       wouldDecide: 3
     - value: breadcrumbs=Warhammer Age of Sigmar
       wouldDecide: 2
@@ -722,19 +750,29 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Cabal - Affiliation Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Earth''s Mightiest Core Set'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Immortal Hulk'
-      wouldDecide: 1
   ret-goblingaming:
     - value: tags=Tabletop Games
-      wouldDecide: 6
+      wouldDecide: 8
     - value: vendor=Mantic Games
       wouldDecide: 5
+    - value: tags=Stock Coming
+      wouldDecide: 3
     - value: productType=Advent Calendars
       wouldDecide: 3
     - value: tags=Board Games
       wouldDecide: 3
+    - value: productType=Model Bases
+      wouldDecide: 2
+    - value: tags=Accessories
+      wouldDecide: 2
+    - value: tags=Basing
+      wouldDecide: 2
+    - value: tags=Games Workshop
+      wouldDecide: 2
+    - value: tags=Other
+      wouldDecide: 2
+    - value: vendor=Games Workshop
+      wouldDecide: 2
     - value: productType=Expansions
       wouldDecide: 2
     - value: tags=Sci-fi
@@ -748,8 +786,6 @@ unmapped:
     - value: tags=Aerosols
       wouldDecide: 1
     - value: tags=Paint & Hobby
-      wouldDecide: 1
-    - value: tags=Stock Coming
       wouldDecide: 1
     - value: vendor=The Army Painter
       wouldDecide: 1
@@ -765,6 +801,87 @@ unmapped:
       wouldDecide: 1
     - value: vendor=Warlord Games
       wouldDecide: 1
+  ret-radaddel:
+    - value: tags=Games Workshop
+      wouldDecide: 999
+    - value: vendor=Games Workshop
+      wouldDecide: 999
+    - value: tags=AK-Interactive
+      wouldDecide: 884
+    - value: vendor=AK-Interactive
+      wouldDecide: 884
+    - value: tags=Vallejo
+      wouldDecide: 695
+    - value: vendor=Vallejo
+      wouldDecide: 695
+    - value: tags=Warlord Games
+      wouldDecide: 410
+    - value: vendor=Warlord Games
+      wouldDecide: 410
+    - value: tags=The Army Painter
+      wouldDecide: 388
+    - value: vendor=The Army Painter
+      wouldDecide: 388
+    - value: tags=Vallejo Model Air
+      wouldDecide: 235
+    - value: tags=Warpaints Fanatic
+      wouldDecide: 128
+    - value: tags=Middle-Earth - Good
+      wouldDecide: 100
+    - value: tags=AK-Effekte & Weatherings
+      wouldDecide: 98
+    - value: tags=EFFEKTE & WEATHERINGS*
+      wouldDecide: 97
+    - value: tags=Atomic Mass Games
+      wouldDecide: 95
+    - value: vendor=Atomic Mass Games
+      wouldDecide: 95
+    - value: tags=Vallejo Game Color
+      wouldDecide: 94
+    - value: tags=Summer Sale
+      wouldDecide: 86
+    - value: tags=AK-ZUBEHÖR*
+      wouldDecide: 85
+    - value: tags=AK Werkzeuge
+      wouldDecide: 85
+    - value: tags=WARPAINTS FANATIC ACRYLICS*
+      wouldDecide: 83
+    - value: tags=Neuheiten Games Workshop
+      wouldDecide: 77
+    - value: tags=001-106 GAME COLOR*
+      wouldDecide: 75
+    - value: tags=Middle-Earth - Evil
+      wouldDecide: 72
+    - value: tags=Black Friday
+      wouldDecide: 71
+    - value: tags=Speedpaint
+      wouldDecide: 71
+    - value: tags=AK-Zubehör
+      wouldDecide: 69
+    - value: tags=Black Library Englisch
+      wouldDecide: 63
+    - value: tags=Neuheiten Farben und Zubehör
+      wouldDecide: 61
+    - value: tags=Vallejo Xpress Color
+      wouldDecide: 60
+    - value: tags=XPRESS COLOR*
+      wouldDecide: 52
+    - value: tags=AoS Grundboxen und Regelbücher
+      wouldDecide: 51
+    - value: tags=Vallejo Game Air
+      wouldDecide: 51
+    - value: tags=AoS Zubehör
+      wouldDecide: 50
+    - value: tags=BA Deutschland
+      wouldDecide: 50
+    - value: tags=Black Library Deutsch
+      wouldDecide: 49
+    - value: tags=AK-Interactive Pinsel
+      wouldDecide: 48
+    - value: tags=AK-Weathering Pencils
+      wouldDecide: 48
+    - value: tags=AK-PINSEL*
+      wouldDecide: 47
   ret-tistaminis:
     - value: tags=Bolt Action
       wouldDecide: 192
@@ -784,16 +901,16 @@ unmapped:
       wouldDecide: 92
     - value: vendor=Monument Hobbies
       wouldDecide: 79
-    - value: vendor=GW-LOCAL
-      wouldDecide: 69
     - value: vendor=GW-OOP
       wouldDecide: 68
     - value: productType=Paints & Supplies
       wouldDecide: 67
+    - value: vendor=GW-LOCAL
+      wouldDecide: 66
     - value: vendor=Green Stuff World
       wouldDecide: 59
     - value: vendor=GW-Local
-      wouldDecide: 49
+      wouldDecide: 48
     - value: tags=Dark Ages
       wouldDecide: 48
     - value: tags=Victory at Sea
@@ -810,41 +927,41 @@ unmapped:
       wouldDecide: 31
     - value: tags=Green Stuff World Supplies
       wouldDecide: 30
-    - value: tags=Amazon
-      wouldDecide: 28
     - value: tags=Italians
       wouldDecide: 28
-    - value: tags=Black Library
+    - value: tags=Amazon
       wouldDecide: 25
     - value: tags=French
       wouldDecide: 25
-    - value: tags=Gamesworkshop
-      wouldDecide: 23
+    - value: tags=Black Library
+      wouldDecide: 24
     - value: tags=Victory at Sea British
       wouldDecide: 23
+    - value: tags=Gamesworkshop
+      wouldDecide: 22
     - value: tags=Romans
       wouldDecide: 21
     - value: tags=Ancients
       wouldDecide: 21
-    - value: vendor=GW-WEB
-      wouldDecide: 19
     - value: tags=Americans
       wouldDecide: 19
     - value: tags=GW Accessories
       wouldDecide: 18
     - value: tags=Space Marines
       wouldDecide: 18
+    - value: vendor=GW-WEB
+      wouldDecide: 18
     - value: tags=Green Stuff World Other
       wouldDecide: 18
     - value: tags=Victory at Sea German
       wouldDecide: 18
+    - value: tags=Orks
+      wouldDecide: 15
     - value: productType=Miniatures - Plastic
       wouldDecide: 14
     - value: tags=warhammer preorder
       wouldDecide: 14
     - value: tags=Black Powder
-      wouldDecide: 14
-    - value: tags=Soviet
       wouldDecide: 14
   seed-curated:
     - value: productType=single_kit

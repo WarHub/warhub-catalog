@@ -246,17 +246,19 @@ products:
     manufacturer: vallejo
     sku: VAL71262
     ean: '8429551712620'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/airbrush-flow-improver
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/airbrush-flow-improver-17ml-auxiliary-products-mod.jpg?v=1560799808
     evidence:
       - ret-goblingaming:airbrush-flow-improver
+      - ret-radaddel:auxiliary-airbrush-flow-improver-18-ml
   - id: vallejo/airbrush-flow-improver-200ml-auxiliaries
     name: Airbrush Flow Improver 200ml - Auxiliaries
     manufacturer: vallejo
@@ -277,10 +279,12 @@ products:
     name: Airbrush Flow Improver 32ml
     manufacturer: vallejo
     sku: VAL71362
+    ean: '8429551713627'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceGbp: 2.63
     url: https://www.goblingaming.co.uk/products/vallejo-model-air-airbrush-flow-improver-32ml
@@ -291,6 +295,8 @@ products:
     name: Airbrush Flow Improver -Model Air  60ml
     manufacturer: vallejo
     sku: VAL71462
+    ean: '8429551714624'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -306,17 +312,19 @@ products:
     manufacturer: vallejo
     sku: VAL71261
     ean: '8429551712613'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/model-air-thinners-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/airbrush-thinner-17ml-model-air-game-air-acrylic-t.jpg?v=1560797852
     evidence:
       - ret-goblingaming:model-air-thinners-17ml
+      - ret-radaddel:auxiliary-airbrush-thinner-18-ml
   - id: vallejo/airbrush-thinner-200ml-auxiliaries
     name: Airbrush Thinner 200ml - Auxiliaries
     manufacturer: vallejo
@@ -718,230 +726,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-diorama-fx-water-texture-26204.png?v=1717594834
     evidence:
       - ret-goblingaming:atlantic-blue
-  - id: vallejo/auxiliary-airbrush-flow-improver-18-ml
-    name: Auxiliary Airbrush Flow Improver 18 ml
-    manufacturer: vallejo
-    sku: '128821'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-airbrush-flow-improver-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128821-auxiliary-airbrush-flow-improver-18-ml-71262-1.webp?v=1781212314
-    evidence:
-      - ret-radaddel:auxiliary-airbrush-flow-improver-18-ml
-  - id: vallejo/auxiliary-airbrush-thinner-18-ml
-    name: Auxiliary Airbrush Thinner 18 ml
-    manufacturer: vallejo
-    sku: '128820'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-airbrush-thinner-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128820-auxiliary-airbrush-thinner-18-ml-71261-1.webp?v=1781212312
-    evidence:
-      - ret-radaddel:auxiliary-airbrush-thinner-18-ml
-  - id: vallejo/auxiliary-chipping-medium-18-ml
-    name: Auxiliary Chipping Medium 18 ml
-    manufacturer: vallejo
-    sku: '128824'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-chipping-medium-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128824-auxiliary-chipping-medium-18-ml-73214-1.webp?v=1781212319
-    evidence:
-      - ret-radaddel:auxiliary-chipping-medium-18-ml
-  - id: vallejo/auxiliary-decal-fix-18-ml
-    name: Auxiliary Decal Fix 18 ml
-    manufacturer: vallejo
-    sku: '128823'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.65
-    url: https://radaddel.de/products/auxiliary-decal-fix-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128823-auxiliary-decal-fix-18-ml-73213-1.webp?v=1781212317
-    evidence:
-      - ret-radaddel:auxiliary-decal-fix-18-ml
-  - id: vallejo/auxiliary-decal-softener-18-ml
-    name: Auxiliary Decal Softener 18 ml
-    manufacturer: vallejo
-    sku: '128822'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-decal-softener-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128822-auxiliary-decal-softener-18-ml-73212-1.webp?v=1781212316
-    evidence:
-      - ret-radaddel:auxiliary-decal-softener-18-ml
-  - id: vallejo/auxiliary-drying-retarder-18-ml
-    name: Auxiliary Drying Retarder 18 ml
-    manufacturer: vallejo
-    sku: '128615'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-drying-retarder-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128615-auxiliary-drying-retarder-18-ml-70597-1.webp?v=1781211955
-    evidence:
-      - ret-radaddel:auxiliary-drying-retarder-18-ml
-  - id: vallejo/auxiliary-glaze-medium-18-ml
-    name: Auxiliary Glaze Medium 18 ml
-    manufacturer: vallejo
-    sku: '128614'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-glaze-medium-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128614-auxiliary-glaze-medium-18-ml-70596-1.webp?v=1781211953
-    evidence:
-      - ret-radaddel:auxiliary-glaze-medium-18-ml
-  - id: vallejo/auxiliary-gloss-medium-18-ml
-    name: Auxiliary Gloss Medium 18 ml
-    manufacturer: vallejo
-    sku: '128606'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-gloss-medium-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128606-auxiliary-gloss-medium-18-ml-70470-1.webp?v=1781211939
-    evidence:
-      - ret-radaddel:auxiliary-gloss-medium-18-ml
-  - id: vallejo/auxiliary-liquid-mask-18-ml
-    name: Auxiliary Liquid Mask 18 ml
-    manufacturer: vallejo
-    sku: '128611'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-liquid-mask-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128611-auxiliary-liquid-mask-18-ml-70523-1.webp?v=1781211948
-    evidence:
-      - ret-radaddel:auxiliary-liquid-mask-18-ml
-  - id: vallejo/auxiliary-matte-medium-18-ml
-    name: Auxiliary Matte Medium 18 ml
-    manufacturer: vallejo
-    sku: '128613'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-matte-medium-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128613-auxiliary-matte-medium-18-ml-70540-1.webp?v=1781211951
-    evidence:
-      - ret-radaddel:auxiliary-matte-medium-18-ml
-  - id: vallejo/auxiliary-metal-medium-18-ml
-    name: Auxiliary Metal Medium 18 ml
-    manufacturer: vallejo
-    sku: '128609'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-metal-medium-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128609-auxiliary-metal-medium-18-ml-70521-1.webp?v=1781211944
-    evidence:
-      - ret-radaddel:auxiliary-metal-medium-18-ml
-  - id: vallejo/auxiliary-permanent-gloss-varnish-18-ml
-    name: Auxiliary Permanent Gloss Varnish 18 ml
-    manufacturer: vallejo
-    sku: '128607'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-permanent-gloss-varnish-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128607-auxiliary-permanent-gloss-varnish-18-ml-70510-1.webp?v=1781211941
-    evidence:
-      - ret-radaddel:auxiliary-permanent-gloss-varnish-18-ml
-  - id: vallejo/auxiliary-permanent-mat-varnish-18-ml
-    name: Auxiliary Permanent Mat Varnish 18 ml
-    manufacturer: vallejo
-    sku: '128608'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.65
-    url: https://radaddel.de/products/auxiliary-permanent-mat-varnish-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128608-auxiliary-permanent-mat-varnish-18-ml-70520-1.webp?v=1781211943
-    evidence:
-      - ret-radaddel:auxiliary-permanent-mat-varnish-18-ml
-  - id: vallejo/auxiliary-permanent-satin-varnish-18-ml
-    name: Auxiliary Permanent Satin Varnish 18 ml
-    manufacturer: vallejo
-    sku: '128610'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-permanent-satin-varnish-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128610-auxiliary-permanent-satin-varnish-18-ml-70522-1.webp?v=1781211946
-    evidence:
-      - ret-radaddel:auxiliary-permanent-satin-varnish-18-ml
-  - id: vallejo/auxiliary-plastic-putty-18-ml
-    name: Auxiliary Plastic Putty 18 ml
-    manufacturer: vallejo
-    sku: '128605'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.65
-    url: https://radaddel.de/products/auxiliary-plastic-putty-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128605-auxiliary-plastic-putty-18-ml-70400-1.webp?v=1781211936
-    evidence:
-      - ret-radaddel:auxiliary-plastic-putty-18-ml
-  - id: vallejo/auxiliary-thinner-18-ml
-    name: Auxiliary Thinner 18 ml
-    manufacturer: vallejo
-    sku: '128612'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/auxiliary-thinner-18-ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128612-auxiliary-thinner-18-ml-70524-1.webp?v=1781211949
-    evidence:
-      - ret-radaddel:auxiliary-thinner-18-ml
   - id: vallejo/av-blender-flat-angled-synthetic-brush-large
     name: AV Blender - Flat Angled Synthetic Brush (Large)
     manufacturer: vallejo
@@ -1650,6 +1434,8 @@ products:
     name: AV Vallejo Game Color Set - Auxilliary Set (x8)
     manufacturer: vallejo
     sku: VAL73999
+    ean: '8429551739993'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -2093,6 +1879,8 @@ products:
     name: Black 18ml - Primer
     manufacturer: vallejo
     sku: VAL70602
+    ean: '8429551706025'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -2107,6 +1895,8 @@ products:
     name: Black 200ml - Primer
     manufacturer: vallejo
     sku: VAL74602
+    ean: '8429551746021'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -2137,6 +1927,8 @@ products:
     name: Black 60ml - Primer
     manufacturer: vallejo
     sku: VAL73602
+    ean: '8429551736022'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -2328,8 +2120,10 @@ products:
     name: Black Splash Mud
     manufacturer: vallejo
     sku: '127201'
-    category: miniatures
-    categoryBasis: guessed
+    ean: '8429551738064'
+    eanConfidence: provisional
+    category: paint
+    categoryBasis: paint-barcode
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
@@ -2338,20 +2132,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127201-black-splash-mud-73806-1.webp?v=1781209501
     evidence:
       - ret-radaddel:black-splash-mud
-  - id: vallejo/black-thick-mud
-    name: Black Thick Mud
-    manufacturer: vallejo
-    sku: '127207'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 5.05
-    url: https://radaddel.de/products/black-thick-mud
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127207-black-thick-mud-73812-1.webp?v=1781209511
-    evidence:
-      - ret-radaddel:black-thick-mud
   - id: vallejo/black-violet-18ml-model-colour
     name: Black Violet 18ml - Model Colour
     manufacturer: vallejo
@@ -2418,6 +2198,8 @@ products:
     name: Black Wash Diorama Effects - Washes
     manufacturer: vallejo
     sku: VAL73301
+    ean: '8429551733014'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -2874,20 +2656,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/brown-earth-200ml-diorama-effects-acrylic-scenery.jpg?v=1560797904
     evidence:
       - ret-goblingaming:brown-earth
-  - id: vallejo/brown-engine-soot
-    name: Brown Engine Soot
-    manufacturer: vallejo
-    sku: '127213'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 5.05
-    url: https://radaddel.de/products/brown-engine-soot
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127213-brown-engine-soot-73818-1.webp?v=1781209521
-    evidence:
-      - ret-radaddel:brown-engine-soot
   - id: vallejo/brown-engine-soot-matt-17ml-mecha-colour
     name: Brown Engine Soot (Matt) 17ml - Mecha Colour
     manufacturer: vallejo
@@ -2984,34 +2752,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-model-color-70876-newIC.jpg?v=1727794816
     evidence:
       - ret-goblingaming:brown-sand
-  - id: vallejo/brown-splash-mud
-    name: Brown Splash Mud
-    manufacturer: vallejo
-    sku: '127200'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 5.05
-    url: https://radaddel.de/products/brown-splash-mud
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127200-brown-splash-mud-73805-1.webp?v=1781209499
-    evidence:
-      - ret-radaddel:brown-splash-mud
-  - id: vallejo/brown-thick-mud
-    name: Brown Thick Mud
-    manufacturer: vallejo
-    sku: '127206'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 5.05
-    url: https://radaddel.de/products/brown-thick-mud
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127206-brown-thick-mud-73811-1.webp?v=1781209510
-    evidence:
-      - ret-radaddel:brown-thick-mud
   - id: vallejo/brown-violet-rlm81-17ml-model-air
     name: Brown Violet RLM81 17ml - Model Air
     manufacturer: vallejo
@@ -3064,6 +2804,8 @@ products:
     name: Brush Cleaner (Alcohol) 85ml
     manufacturer: vallejo
     sku: VAL28900
+    ean: '8429551289009'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -3078,6 +2820,8 @@ products:
     name: Brush Restorer 85ml
     manufacturer: vallejo
     sku: VAL28890
+    ean: '8429551288903'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -3099,7 +2843,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/bs-dark-earth-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/bs-dark-earth-brown-17ml-model-air-water-based-acr_7a750e4c-c3f6-41e1-9930-7ee1d30551ed.jpg?v=1560802567
     evidence:
@@ -3738,16 +3482,20 @@ products:
     name: Chipping Medium - Auxiliaries
     manufacturer: vallejo
     sku: VAL73214
+    ean: '8429551732147'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/vallejo-chipping-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/original-7.jpg?v=1574784600
     evidence:
       - ret-goblingaming:vallejo-chipping-medium
+      - ret-radaddel:auxiliary-chipping-medium-18-ml
   - id: vallejo/chocolate-brown-18ml-model-colour
     name: Chocolate Brown 18ml - Model Colour
     manufacturer: vallejo
@@ -3768,6 +3516,8 @@ products:
     name: Chrome 32ml - Metal Colour
     manufacturer: vallejo
     sku: VAL77707
+    ean: '8429551777070'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -4554,6 +4304,8 @@ products:
     name: Dark Red 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70946
+    ean: '8429551709460'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -4836,6 +4588,8 @@ products:
     name: Dead White 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72001
+    ean: '8429551720014'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -4866,30 +4620,38 @@ products:
     name: Decal Fix 17ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL73213
+    ean: '8429551732130'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.65
     url: https://www.goblingaming.co.uk/products/vallejo-decal-fix-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/val73213z.jpg?v=1560797167
     evidence:
       - ret-goblingaming:vallejo-decal-fix-17ml
+      - ret-radaddel:auxiliary-decal-fix-18-ml
   - id: vallejo/decal-medium-17ml-auxiliaries
     name: Decal Medium 17ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL73212
+    ean: '8429551732123'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/vallejo-decal-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/val73212z.jpg?v=1560797161
     evidence:
       - ret-goblingaming:vallejo-decal-medium
+      - ret-radaddel:auxiliary-decal-softener-18-ml
   - id: vallejo/deck-tan-17ml-model-colour
     name: Deck Tan 17ml - Model Colour
     manufacturer: vallejo
@@ -5098,6 +4860,8 @@ products:
     name: Desert Tan Base 17ml - Primer
     manufacturer: vallejo
     sku: VAL70613
+    ean: '8429551706131'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -5112,6 +4876,8 @@ products:
     name: Desert Tan Base 60ml - Primer
     manufacturer: vallejo
     sku: VAL73613
+    ean: '8429551736138'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -5181,7 +4947,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 11.89
+    priceGbp: 15.29
     url: https://www.goblingaming.co.uk/products/diamond-file-set-100mm-5pc
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-hobby-tools-set-of-5-mini-diamond-files-T03004.jpg?v=1754558524
     evidence:
@@ -5317,7 +5083,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-duck-egg-green
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/duck-egg-green-17ml-model-air-acrylic-paint-droppe.jpg?v=1560797672
     evidence:
@@ -5390,6 +5156,8 @@ products:
     name: Earth Green (Early) 17ml - Primer
     manufacturer: vallejo
     sku: VAL70611
+    ean: '8429551706117'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6088,9 +5856,9 @@ products:
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 4.27
+    priceGbp: 5.49
     url: https://www.goblingaming.co.uk/products/flat-rounded-tweezers-120mm
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-hobby-tools-flat-rounded-stainless-steel-tweezers-120mm-T12007.jpg?v=1754494701
     evidence:
@@ -6267,7 +6035,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-fluorescent-red
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/fluorescent-red-17ml-model-air-acrylic-paint-dropp_7cbf04d7-a7f1-4947-bae0-d753a02926f5.jpg?v=1560797775
     evidence:
@@ -6403,6 +6171,8 @@ products:
     name: Game Air 18ml - Abyssal Turquoise
     manufacturer: vallejo
     sku: VAL76120
+    ean: '8429551761208'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6417,6 +6187,8 @@ products:
     name: Game Air 18ml - Angel Green
     manufacturer: vallejo
     sku: VAL76123
+    ean: '8429551761239'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6431,6 +6203,8 @@ products:
     name: Game Air 18ml - Athena Skin
     manufacturer: vallejo
     sku: VAL76107
+    ean: '8429551761079'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6445,6 +6219,8 @@ products:
     name: Game Air 18ml - Barbarian Skin
     manufacturer: vallejo
     sku: VAL76071
+    ean: '8429551760713'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6459,6 +6235,8 @@ products:
     name: Game Air 18ml - Bile Green
     manufacturer: vallejo
     sku: VAL76122
+    ean: '8429551761222'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6473,6 +6251,8 @@ products:
     name: Game Air 18ml - Bronze Brown
     manufacturer: vallejo
     sku: VAL76036
+    ean: '8429551760362'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6487,6 +6267,8 @@ products:
     name: Game Air 18ml - Camouflage Green
     manufacturer: vallejo
     sku: VAL76031
+    ean: '8429551760317'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6501,6 +6283,8 @@ products:
     name: Game Air 18ml - Dark Green
     manufacturer: vallejo
     sku: VAL76028
+    ean: '8429551760287'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6515,6 +6299,8 @@ products:
     name: Game Air 18ml - Ghost Green
     manufacturer: vallejo
     sku: VAL76121
+    ean: '8429551761215'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6529,6 +6315,8 @@ products:
     name: Game Air 18ml - Grunge Brown
     manufacturer: vallejo
     sku: VAL76115
+    ean: '8429551761154'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6543,6 +6331,8 @@ products:
     name: Game Air 18ml - Jade Green
     manufacturer: vallejo
     sku: VAL76026
+    ean: '8429551760263'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6557,6 +6347,8 @@ products:
     name: Game Air 18ml - Lustful Purple
     manufacturer: vallejo
     sku: VAL76114
+    ean: '8429551761147'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6571,6 +6363,8 @@ products:
     name: Game Air 18ml - Midnight Purple
     manufacturer: vallejo
     sku: VAL76116
+    ean: '8429551761161'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6585,6 +6379,8 @@ products:
     name: Game Air 18ml - Neutral Grey
     manufacturer: vallejo
     sku: VAL76050
+    ean: '8429551760508'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6599,6 +6395,8 @@ products:
     name: Game Air 18ml - Night Blue
     manufacturer: vallejo
     sku: VAL76019
+    ean: '8429551760195'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6613,6 +6411,8 @@ products:
     name: Game Air 18ml - Nocturnal Red
     manufacturer: vallejo
     sku: VAL76111
+    ean: '8429551761116'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6627,6 +6427,8 @@ products:
     name: Game Air 18ml - Rosy Flesh
     manufacturer: vallejo
     sku: VAL76100
+    ean: '8429551761000'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6641,6 +6443,8 @@ products:
     name: Game Air 18ml - Royal Purple
     manufacturer: vallejo
     sku: VAL76016
+    ean: '8429551760164'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6655,6 +6459,8 @@ products:
     name: Game Air 18ml - Scorpy Green
     manufacturer: vallejo
     sku: VAL76032
+    ean: '8429551760324'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6669,6 +6475,8 @@ products:
     name: Game Air 18ml - Scurvy Green
     manufacturer: vallejo
     sku: VAL76027
+    ean: '8429551760270'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6683,6 +6491,8 @@ products:
     name: Game Air 18ml - Sunrise Blue
     manufacturer: vallejo
     sku: VAL76118
+    ean: '8429551761185'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6697,6 +6507,8 @@ products:
     name: Game Air 18ml - Toxic Yellow
     manufacturer: vallejo
     sku: VAL76109
+    ean: '8429551761093'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -6711,6 +6523,8 @@ products:
     name: Game Air 18ml - Turquoise
     manufacturer: vallejo
     sku: VAL76024
+    ean: '8429551760249'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7458,7 +7272,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.55
     url: https://radaddel.de/products/game-color-066-parasite-brown
@@ -7469,6 +7283,8 @@ products:
     name: Game Color Abyssal Turquoise 17ml
     manufacturer: vallejo
     sku: VAL72120
+    ean: '8429551721202'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7483,6 +7299,8 @@ products:
     name: Game Color Alien Purple 17ml
     manufacturer: vallejo
     sku: VAL72076
+    ean: '8429551720762'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7497,6 +7315,8 @@ products:
     name: Game Color Angel Green 17ml
     manufacturer: vallejo
     sku: VAL72123
+    ean: '8429551721233'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7511,6 +7331,8 @@ products:
     name: Game Color Anthea Skin 17ml
     manufacturer: vallejo
     sku: VAL72107
+    ean: '8429551721073'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7525,6 +7347,8 @@ products:
     name: Game Color Aquamarine 17ml
     manufacturer: vallejo
     sku: VAL72119
+    ean: '8429551721196'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7539,6 +7363,8 @@ products:
     name: Game Color Barbarian Skin 17ml
     manufacturer: vallejo
     sku: VAL72071
+    ean: '8429551720717'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7553,6 +7379,8 @@ products:
     name: Game Color Bile Green 17ml
     manufacturer: vallejo
     sku: VAL72122
+    ean: '8429551721226'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7567,6 +7395,8 @@ products:
     name: Game Color Deep Magenta 17ml
     manufacturer: vallejo
     sku: VAL72113
+    ean: '8429551721134'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7581,6 +7411,8 @@ products:
     name: Game Color Elfic Blue 17ml
     manufacturer: vallejo
     sku: VAL72117
+    ean: '8429551721172'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7595,6 +7427,8 @@ products:
     name: Game Color Evil Red 17ml
     manufacturer: vallejo
     sku: VAL72112
+    ean: '8429551721127'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7609,6 +7443,8 @@ products:
     name: Game Color Fluorescent Blue 17ml
     manufacturer: vallejo
     sku: VAL72160
+    ean: '8429551721608'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7623,6 +7459,8 @@ products:
     name: Game Color Fluorescent Cold Green 17ml
     manufacturer: vallejo
     sku: VAL72161
+    ean: '8429551721615'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7637,6 +7475,8 @@ products:
     name: Game Color Fluorescent Magenta 17ml
     manufacturer: vallejo
     sku: VAL72158
+    ean: '8429551721585'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7651,6 +7491,8 @@ products:
     name: Game Color Fluorescent Orange 17ml
     manufacturer: vallejo
     sku: VAL72156
+    ean: '8429551721561'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7665,6 +7507,8 @@ products:
     name: Game Color Fluorescent Red 17ml
     manufacturer: vallejo
     sku: VAL72157
+    ean: '8429551721578'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7679,6 +7523,8 @@ products:
     name: Game Color Fluorescent Violet 17ml
     manufacturer: vallejo
     sku: VAL72159
+    ean: '8429551721592'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7693,6 +7539,8 @@ products:
     name: Game Color  Game Ink - Dark Turquoise 17ml
     manufacturer: vallejo
     sku: VAL72084
+    ean: '8429551720847'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7707,6 +7555,8 @@ products:
     name: Game Color  Game Ink - Magenta 17ml
     manufacturer: vallejo
     sku: VAL72083
+    ean: '8429551720830'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7721,6 +7571,8 @@ products:
     name: Game Color  Game Ink - White 17ml
     manufacturer: vallejo
     sku: VAL72082
+    ean: '8429551720823'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7735,6 +7587,8 @@ products:
     name: Game Color Ghost Green 17ml
     manufacturer: vallejo
     sku: VAL72121
+    ean: '8429551721219'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7749,6 +7603,8 @@ products:
     name: Game Color Gorgon Brown 17ml
     manufacturer: vallejo
     sku: VAL72124
+    ean: '8429551721240'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7763,6 +7619,8 @@ products:
     name: Game Color Grunge Brown 17ml
     manufacturer: vallejo
     sku: VAL72115
+    ean: '8429551721158'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -7836,7 +7694,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.6
     url: https://radaddel.de/products/game-color-ink-087-wash-sepia-shade
@@ -7852,7 +7710,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.6
+    priceEur: 2.65
     url: https://radaddel.de/products/game-color-ink-088-wash-black-shade
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/105966-game-color-ink-088-wash-black-shade-73201-1.webp?v=1781188191
     evidence:
@@ -7894,7 +7752,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.6
+    priceEur: 2.65
     url: https://radaddel.de/products/game-color-ink-112-red
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/100536-game-color-ink-112-red-72086-1.webp?v=1781187831
     evidence:
@@ -7987,6 +7845,8 @@ products:
     name: Game Color Lustful Purple 17ml
     manufacturer: vallejo
     sku: VAL72114
+    ean: '8429551721141'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8001,6 +7861,8 @@ products:
     name: Game Color Midnight Purple 17ml
     manufacturer: vallejo
     sku: VAL72116
+    ean: '8429551721165'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8015,6 +7877,8 @@ products:
     name: Game Color Nocturnal Red 17ml
     manufacturer: vallejo
     sku: VAL72111
+    ean: '8429551721110'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8029,6 +7893,8 @@ products:
     name: Game Color Polyurethane Gloss Varnish 17ml
     manufacturer: vallejo
     sku: VAL72650
+    ean: '8429551726504'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8043,6 +7909,8 @@ products:
     name: Game Color Polyurethane Matt Varnish 17ml
     manufacturer: vallejo
     sku: VAL72651
+    ean: '8429551726511'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8057,6 +7925,8 @@ products:
     name: Game Color Polyurethane Satin Varnish 17ml
     manufacturer: vallejo
     sku: VAL72652
+    ean: '8429551726528'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8071,6 +7941,8 @@ products:
     name: Game Color Polyurethane Ultra Matt Varnish 17ml
     manufacturer: vallejo
     sku: VAL72653
+    ean: '8429551726535'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8230,7 +8102,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 41.65
+    priceEur: 41.45
     url: https://radaddel.de/products/game-color-set-specialist-1
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128985-game-color-set-specialist-72188-1.webp?v=1784580661
     evidence:
@@ -8239,6 +8111,8 @@ products:
     name: Game Color Special FX - Acid 17ml
     manufacturer: vallejo
     sku: VAL72607
+    ean: '8429551726078'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8253,6 +8127,8 @@ products:
     name: Game Color Special FX - Bile 17ml
     manufacturer: vallejo
     sku: VAL72606
+    ean: '8429551726061'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8281,6 +8157,8 @@ products:
     name: Game Color Special FX - Demon Blood 17ml
     manufacturer: vallejo
     sku: VAL72603
+    ean: '8429551726030'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8295,6 +8173,8 @@ products:
     name: Game Color Special FX - Fresh Blood 17ml
     manufacturer: vallejo
     sku: VAL72601
+    ean: '8429551726016'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8309,6 +8189,8 @@ products:
     name: Game Color Special FX - Frost 17ml
     manufacturer: vallejo
     sku: VAL72604
+    ean: '8429551726047'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8337,6 +8219,8 @@ products:
     name: Game Color Special FX - Green Rust 17ml
     manufacturer: vallejo
     sku: VAL72605
+    ean: '8429551726054'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8351,6 +8235,8 @@ products:
     name: Game Color Special FX - Moss and Lichen 17ml
     manufacturer: vallejo
     sku: VAL72611
+    ean: '8429551726115'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8365,6 +8251,8 @@ products:
     name: Game Color Special FX - Rust 17ml
     manufacturer: vallejo
     sku: VAL72609
+    ean: '8429551726092'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8379,6 +8267,8 @@ products:
     name: Game Color Special FX - Thick Blood 17ml
     manufacturer: vallejo
     sku: VAL72602
+    ean: '8429551726023'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8393,6 +8283,8 @@ products:
     name: Game Color Special FX - Vomit 17ml
     manufacturer: vallejo
     sku: VAL72600
+    ean: '8429551726009'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8407,6 +8299,8 @@ products:
     name: Game Color Succubus Skin 17ml
     manufacturer: vallejo
     sku: VAL72108
+    ean: '8429551721080'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8421,6 +8315,8 @@ products:
     name: Game Color Sunrise Blue 17ml
     manufacturer: vallejo
     sku: VAL72118
+    ean: '8429551721189'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8435,6 +8331,8 @@ products:
     name: Game Color Sunset Orange 17ml
     manufacturer: vallejo
     sku: VAL72110
+    ean: '8429551721103'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8449,6 +8347,8 @@ products:
     name: Game Color Toxic Yellow 17ml
     manufacturer: vallejo
     sku: VAL72109
+    ean: '8429551721097'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8463,6 +8363,8 @@ products:
     name: Game Color  Wash - Violet 17ml
     manufacturer: vallejo
     sku: VAL73209
+    ean: '8429551732093'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8477,6 +8379,8 @@ products:
     name: Game Color  Wash - Yellow 17ml
     manufacturer: vallejo
     sku: VAL73208
+    ean: '8429551732086'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8568,6 +8472,8 @@ products:
     name: German Dark Yellow 17ml - Primer
     manufacturer: vallejo
     sku: VAL70604
+    ean: '8429551706049'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8582,6 +8488,8 @@ products:
     name: German Dark Yellow 60ml - Primer
     manufacturer: vallejo
     sku: VAL73604
+    ean: '8429551736046'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8644,6 +8552,8 @@ products:
     name: German Green Brown 17ml - Primer
     manufacturer: vallejo
     sku: VAL70606
+    ean: '8429551706063'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8658,6 +8568,8 @@ products:
     name: German Green Brown 60ml - Primer
     manufacturer: vallejo
     sku: VAL73606
+    ean: '8429551736060'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8720,6 +8632,8 @@ products:
     name: German Panzer Grey 17ml - Primer
     manufacturer: vallejo
     sku: VAL70603
+    ean: '8429551706032'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8734,6 +8648,8 @@ products:
     name: German Panzer Grey 60ml- Primer
     manufacturer: vallejo
     sku: VAL73603
+    ean: '8429551736039'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8764,6 +8680,8 @@ products:
     name: German Red Brown 17ml - Primer
     manufacturer: vallejo
     sku: VAL70605
+    ean: '8429551706056'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8778,6 +8696,8 @@ products:
     name: German Red Brown 60ml - Primer
     manufacturer: vallejo
     sku: VAL73605
+    ean: '8429551736053'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -8869,17 +8789,19 @@ products:
     manufacturer: vallejo
     sku: VAL70596
     ean: '8429551705967'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/glaze-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-auxiliaries-glaze-medium-70596.png?v=1717672357
     evidence:
       - ret-goblingaming:glaze-medium
+      - ret-radaddel:auxiliary-glaze-medium-18-ml
   - id: vallejo/glorious-gold-17ml-game-colour
     name: Glorious Gold 17ml - Game Colour
     manufacturer: vallejo
@@ -8949,17 +8871,19 @@ products:
     manufacturer: vallejo
     sku: VAL70470
     ean: '8429551704700'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 1.78
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/glossy-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/val470z.jpg?v=1560797261
     evidence:
       - ret-goblingaming:glossy-medium
+      - ret-radaddel:auxiliary-gloss-medium-18-ml
   - id: vallejo/gloss-metal-varnish-32ml-auxiliaries
     name: Gloss Metal Varnish 32ml - Auxiliaries
     manufacturer: vallejo
@@ -8981,17 +8905,19 @@ products:
     manufacturer: vallejo
     sku: VAL70510
     ean: '8429551705103'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/glossy-varnish
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/varnish-gloss-17ml-acrylic-paint-vallejo.jpg?v=1560797260
     evidence:
       - ret-goblingaming:glossy-varnish
+      - ret-radaddel:auxiliary-permanent-gloss-varnish-18-ml
   - id: vallejo/gloss-varnish-17ml-mecha-colour
     name: Gloss Varnish 17ml - Mecha Colour
     manufacturer: vallejo
@@ -9243,7 +9169,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.79
+    priceGbp: 3.59
     url: https://www.goblingaming.co.uk/products/granite-grey-0-2-0-6mm-diorama-effects
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-diorama-fx-landscape-textures-26307.jpg?v=1754654149
     evidence:
@@ -9445,7 +9371,9 @@ products:
     manufacturer: vallejo
     sku: VAL70886
     ean: '8429551708869'
-    eanConfidence: provisional
+    eanConfidence: conflicted
+    additionalEans:
+      - '8429551709712'
     category: paint
     categoryBasis: mapped
     status: current
@@ -9557,6 +9485,8 @@ products:
     name: Green Yellow 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70881
+    ean: '8429551708814'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -9578,7 +9508,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-green-zinc-chromate
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/green-zinc-chromate-17ml-model-air-acrylic-paint-d.jpg?v=1560797792
     evidence:
@@ -9619,6 +9549,8 @@ products:
     name: Grey 17ml - Primer
     manufacturer: vallejo
     sku: VAL70601
+    ean: '8429551706018'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -9633,6 +9565,8 @@ products:
     name: Grey 200ml - Primer
     manufacturer: vallejo
     sku: VAL74601
+    ean: '8429551746014'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -9663,6 +9597,8 @@ products:
     name: Grey 60ml - Primer
     manufacturer: vallejo
     sku: VAL73601
+    ean: '8429551736015'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -9851,6 +9787,8 @@ products:
     name: Grey Sand 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26215
+    ean: '8429551262156'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -9937,7 +9875,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/mecha-color-gunmetal
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/mecha-color-vallejo-gunmetal-69058.jpg?v=1727452834
     evidence:
@@ -10186,6 +10124,8 @@ products:
     name: IDF Israel Sand Grey 200ml - Primer
     manufacturer: vallejo
     sku: VAL74614
+    ean: '8429551746144'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -10200,6 +10140,8 @@ products:
     name: IDF Israeli Sand Grey 17ml - Primer
     manufacturer: vallejo
     sku: VAL70614
+    ean: '8429551706148'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -10214,6 +10156,8 @@ products:
     name: IDF Israeli Sand Grey 60ml - Primer
     manufacturer: vallejo
     sku: VAL73614
+    ean: '8429551736145'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -10324,6 +10268,8 @@ products:
     name: IJA Kare-Kusa.Iro / Parched Grass (late) 60ml - Primer
     manufacturer: vallejo
     sku: VAL73610
+    ean: '8429551736107'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -10402,6 +10348,8 @@ products:
     name: IJA Tsuchi-Kusa.Iro / Earth Green (early) 60ml - Primer
     manufacturer: vallejo
     sku: VAL73611
+    ean: '8429551736114'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -10803,7 +10751,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.78
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-yellow-lazure-rlm-05
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/model-air-vallejo-rlm05-ivory-71106.jpg?v=1574171951
     evidence:
@@ -11677,17 +11625,19 @@ products:
     manufacturer: vallejo
     sku: VAL70523
     ean: '8429551705233'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/liquid-mask
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/liquid-mask-17ml-acrylic-paint-vallejo.jpg?v=1560797266
     evidence:
       - ret-goblingaming:liquid-mask
+      - ret-radaddel:auxiliary-liquid-mask-18-ml
   - id: vallejo/liquid-mask-32ml-auxiliaries
     name: Liquid Mask 32ml - Auxiliaries
     manufacturer: vallejo
@@ -11708,6 +11658,8 @@ products:
     name: Liquid Silver 35ml - Model Colour
     manufacturer: vallejo
     sku: VAL70790
+    ean: '8429551707909'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -11835,9 +11787,9 @@ products:
     category: paint
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/mecha-color-magenta
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/mecha-color-vallejo-magenta-69010.jpg?v=1727779377
     evidence:
@@ -11991,6 +11943,8 @@ products:
     name: Mahogany Ink 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70828
+    ean: '8429551708289'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -12070,33 +12024,37 @@ products:
     manufacturer: vallejo
     sku: VAL70520
     ean: '8429551705202'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.65
     url: https://www.goblingaming.co.uk/products/matt-varnish
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-auxiliaries-matt-varnish-70520.png?v=1717671774
     evidence:
       - ret-goblingaming:matt-varnish
+      - ret-radaddel:auxiliary-permanent-mat-varnish-18-ml
   - id: vallejo/matte-medium-18ml-auxiliaries
     name: Matte Medium 18ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL70540
     ean: '8429551705400'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/matte-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-auxiliaries-matt-base-70540.png?v=1717672237
     evidence:
       - ret-goblingaming:matte-medium
+      - ret-radaddel:auxiliary-matte-medium-18-ml
   - id: vallejo/mediterranean-blue-200ml-diorama-effects
     name: Mediterranean Blue 200ml - Diorama Effects
     manufacturer: vallejo
@@ -12266,7 +12224,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/medium-olive
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-model-color-70850-newIC.jpg?v=1760972100
     evidence:
@@ -12282,7 +12240,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-medium-sea-grey
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/medium-sea-grey-17ml-model-air-acrylic-paint-dropp.jpg?v=1560797731
     evidence:
@@ -12382,7 +12340,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 7.9
     url: https://radaddel.de/products/metal-color-dark-aluminium
@@ -12505,6 +12463,8 @@ products:
     name: Metal Color Liquid Gold Set (4)
     manufacturer: vallejo
     sku: VAL70199
+    ean: '8429551701990'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -12605,17 +12565,19 @@ products:
     manufacturer: vallejo
     sku: VAL70521
     ean: '8429551705219'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/metal-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/metal-medium-auxiliary-products-17ml-acrylic-mediu.jpg?v=1560797260
     evidence:
       - ret-goblingaming:metal-medium
+      - ret-radaddel:auxiliary-metal-medium-18-ml
   - id: vallejo/metallic-black-60ml-premium-colour
     name: Metallic Black 60ml - Premium Colour
     manufacturer: vallejo
@@ -13592,7 +13554,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.45
     url: https://radaddel.de/products/model-air-045-cement-grey
@@ -13606,7 +13568,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-air-046-pale-blue-grey
@@ -13620,7 +13582,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-air-047-grey
@@ -13732,7 +13694,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.45
     url: https://radaddel.de/products/model-air-055-black-grey-rlm66
@@ -13746,7 +13708,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-air-056-panzer-dark-gray
@@ -13914,7 +13876,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-air-072-gun-metal
@@ -14628,7 +14590,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-air-126-idf-green
@@ -16546,7 +16508,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 4.65
     url: https://radaddel.de/products/model-color-black-wash-518
@@ -16728,7 +16690,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-color-buff-18-ml-123
@@ -16770,7 +16732,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-color-camouflage-black-green-18-ml-109
@@ -16840,7 +16802,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-color-cavalry-brown-18-ml-162
@@ -17218,7 +17180,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.45
     url: https://radaddel.de/products/model-color-dark-vermillion-18-ml-38
@@ -17512,7 +17474,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 2.45
     url: https://radaddel.de/products/model-color-flat-green-18-ml-88
@@ -17962,7 +17924,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 4.85
+    priceEur: 4.65
     url: https://radaddel.de/products/model-color-grey-wash-516
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/123395-model-color-grey-wash-516-76516-1.webp?v=1781200662
     evidence:
@@ -18058,7 +18020,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-color-infantry-blue-18-ml-63
@@ -18158,7 +18120,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 4.7
+    priceEur: 4.5
     url: https://radaddel.de/products/model-color-kupfer-copper-35-ml-797
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/120830-model-color-kupfer-copper-35-ml-797-70797-1.webp?v=1781196270
     evidence:
@@ -19514,7 +19476,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/model-color-vermilion-18-ml-32
@@ -19572,7 +19534,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 4.7
+    priceEur: 4.5
     url: https://radaddel.de/products/model-color-weissgold-white-gold-35-ml-796
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/120829-model-color-weissgold-white-gold-35-ml-796-70796-1.webp?v=1781196267
     evidence:
@@ -19981,6 +19943,8 @@ products:
     name: Nato Green 17ml - Primer
     manufacturer: vallejo
     sku: VAL70612
+    ean: '8429551706124'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -19995,6 +19959,8 @@ products:
     name: Nato Green 60ml - Primer
     manufacturer: vallejo
     sku: VAL73612
+    ean: '8429551736121'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20087,6 +20053,8 @@ products:
     name: Night Blue 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72019
+    ean: '8429551720199'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20129,6 +20097,8 @@ products:
     name: Ocean Gray 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71273
+    ean: '8429551712736'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20150,7 +20120,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-ochre
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/ochre-17ml-model-air-acrylic-paint-dropper-bottle.jpg?v=1560797706
     evidence:
@@ -20159,6 +20129,8 @@ products:
     name: Ochre Brown 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70856
+    ean: '8429551708562'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20189,6 +20161,8 @@ products:
     name: Off White 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72101
+    ean: '8429551721011'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20219,6 +20193,8 @@ products:
     name: Off-White 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71270
+    ean: '8429551712705'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20233,6 +20209,8 @@ products:
     name: Offwhite 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70820
+    ean: '8429551708203'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20293,6 +20271,8 @@ products:
     name: Oiled Earth Wash 35ml - Vallejo
     manufacturer: vallejo
     sku: VAL76521
+    ean: '8429551765213'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20355,6 +20335,8 @@ products:
     name: Old Gold 35ml - Metal Colour
     manufacturer: vallejo
     sku: VAL70792
+    ean: '8429551707923'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20385,6 +20367,8 @@ products:
     name: Old Rose 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70944
+    ean: '8429551709446'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20413,6 +20397,8 @@ products:
     name: Olive Brown 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70889
+    ean: '8429551708890'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20475,6 +20461,8 @@ products:
     name: Olive Green 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70967
+    ean: '8429551709675'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20489,6 +20477,8 @@ products:
     name: Olive Green RLM80 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71265
+    ean: '8429551712651'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20503,6 +20493,8 @@ products:
     name: Olive Green Wash 35ml - Vallejo
     manufacturer: vallejo
     sku: VAL76519
+    ean: '8429551765190'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20533,6 +20525,8 @@ products:
     name: Olive Grey 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70888
+    ean: '8429551708883'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20579,6 +20573,8 @@ products:
     name: Orange 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62004
+    ean: '8429551620048'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20593,6 +20589,8 @@ products:
     name: Orange Brown 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70981
+    ean: '8429551709811'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20607,6 +20605,8 @@ products:
     name: Orange Color Set 4x - Game Colour
     manufacturer: vallejo
     sku: VAL72381
+    ean: '8429551723817'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20621,6 +20621,8 @@ products:
     name: Orange Fire 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72008
+    ean: '8429551720083'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20635,6 +20637,8 @@ products:
     name: Orange Fire 18ml - Game Air
     manufacturer: vallejo
     sku: VAL76008
+    ean: '8429551760089'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20665,6 +20669,8 @@ products:
     name: Orange Fluorescent 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62033
+    ean: '8429551620338'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20725,6 +20731,8 @@ products:
     name: Oxford Blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70807
+    ean: '8429551708074'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20739,6 +20747,8 @@ products:
     name: Pacific Blue 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26203
+    ean: '8429551262033'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -20797,6 +20807,8 @@ products:
     name: Pale Blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70906
+    ean: '8429551709064'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20843,6 +20855,8 @@ products:
     name: Pale Flesh 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72003
+    ean: '8429551720038'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20857,6 +20871,8 @@ products:
     name: Pale Flesh 18ml - Game Air
     manufacturer: vallejo
     sku: VAL76003
+    ean: '8429551760034'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20903,6 +20919,8 @@ products:
     name: Pale Grey blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70907
+    ean: '8429551709071'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -20917,6 +20935,8 @@ products:
     name: Pale Sand 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70837
+    ean: '8429551708371'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21174,7 +21194,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.65
+    priceEur: 2.25
     url: https://radaddel.de/products/panzer-aces-038-highlight-german-i-feldgrau-17-ml
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/120874-panzer-aces-038-highlight-german-i-feldgrau-17-ml-70338-1.webp?v=1787250647
     evidence:
@@ -21286,6 +21306,8 @@ products:
     name: Parasite Brown 17ml - Game Air
     manufacturer: vallejo
     sku: VAL76042
+    ean: '8429551760423'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21300,6 +21322,8 @@ products:
     name: Parasite Brown 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72042
+    ean: '8429551720427'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21314,6 +21338,8 @@ products:
     name: Parched Grass (Late) 17ml - Primer
     manufacturer: vallejo
     sku: VAL70610
+    ean: '8429551706100'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21328,6 +21354,8 @@ products:
     name: Park Green Flat 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70969
+    ean: '8429551709699'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21342,6 +21370,8 @@ products:
     name: Pastel Blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70901
+    ean: '8429551709019'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21356,6 +21386,8 @@ products:
     name: Pastel Green 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70885
+    ean: '8429551708852'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21430,6 +21462,8 @@ products:
     name: Pick & Place Double Ended Tool
     manufacturer: vallejo
     sku: VALT12005
+    ean: '8429551930499'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21444,6 +21478,8 @@ products:
     name: Pigment Binder 35ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL26233
+    ean: '8429551262330'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21474,6 +21510,8 @@ products:
     name: Pink 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70958
+    ean: '8429551709583'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21488,6 +21526,8 @@ products:
     name: Pipettes Medium Size x 12 (1ml) 
     manufacturer: vallejo
     sku: VAL26004
+    ean: '8429551260046'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21516,6 +21556,8 @@ products:
     name: Plague Brown 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72039
+    ean: '8429551720397'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21530,6 +21572,8 @@ products:
     name: Plastic Modelling Tool Set
     manufacturer: vallejo
     sku: VALT11001
+    ean: '8429551930291'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21544,6 +21588,8 @@ products:
     name: Plastic Models Preparation Tool Kit
     manufacturer: vallejo
     sku: VALT11002
+    ean: '8429551930550'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21558,20 +21604,26 @@ products:
     name: Plastic Putty 18ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL70400
+    ean: '8429551704007'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.65
     url: https://www.goblingaming.co.uk/products/plastic-putty
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-auxiliaries-plastic-putty-70400.png?v=1717671516
     evidence:
       - ret-goblingaming:plastic-putty
+      - ret-radaddel:auxiliary-plastic-putty-18-ml
   - id: vallejo/polished-gold-18ml-game-colour
     name: Polished Gold 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72055
+    ean: '8429551720557'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21586,6 +21638,8 @@ products:
     name: Precision Masking Tape 18mm x 18m
     manufacturer: vallejo
     sku: VALT07001
+    ean: '8429551930208'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21600,6 +21654,8 @@ products:
     name: Precision Masking Tape 3mm x 18m Twin Pack
     manufacturer: vallejo
     sku: VALT07004
+    ean: '8429551930239'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21614,6 +21670,8 @@ products:
     name: Precision Masking Tape 6mm x 18m
     manufacturer: vallejo
     sku: VALT07005
+    ean: '8429551930246'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -21660,6 +21718,8 @@ products:
     name: Prussian Blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70965
+    ean: '8429551709651'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21722,6 +21782,8 @@ products:
     name: Purple 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70959
+    ean: '8429551709590'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21811,7 +21873,9 @@ products:
     manufacturer: vallejo
     sku: VAL71102
     ean: '8429551711029'
-    eanConfidence: provisional
+    eanConfidence: conflicted
+    additionalEans:
+      - '8429551712699'
     category: paint
     categoryBasis: mapped
     status: current
@@ -21827,6 +21891,8 @@ products:
     name: Red 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70926
+    ean: '8429551709262'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21841,6 +21907,8 @@ products:
     name: Red Colour Set 4x - Game Colour
     manufacturer: vallejo
     sku: VAL72377
+    ean: '7429534722685'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21855,6 +21923,8 @@ products:
     name: Red Gold 35ml - Metal Colour
     manufacturer: vallejo
     sku: VAL70794
+    ean: '8429551707947'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21869,6 +21939,8 @@ products:
     name: Red Ink 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72086
+    ean: '8429551720861'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21883,6 +21955,8 @@ products:
     name: Red Leather 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70818
+    ean: '8429551708180'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21897,6 +21971,8 @@ products:
     name: Red Shade Wash 18ml
     manufacturer: vallejo
     sku: VAL73206
+    ean: '8429551732062'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21911,6 +21987,8 @@ products:
     name: Reducer 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62066
+    ean: '8429551620666'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21925,6 +22003,8 @@ products:
     name: Refractive Green 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70890
+    ean: '8429551708906'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21939,6 +22019,8 @@ products:
     name: Retarder 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62065
+    ean: '8429551620659'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21954,21 +22036,25 @@ products:
     manufacturer: vallejo
     sku: VAL70597
     ean: '8429551705974'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.07
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/drying-retarder
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-auxiliaries-retarder-medium-70597.png?v=1717672535
     evidence:
       - ret-goblingaming:drying-retarder
+      - ret-radaddel:auxiliary-drying-retarder-18-ml
   - id: vallejo/rich-gold-35ml-metal-colour
     name: Rich Gold 35ml - Metal Colour
     manufacturer: vallejo
     sku: VAL70793
+    ean: '8429551707930'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21983,6 +22069,8 @@ products:
     name: River Water 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26224
+    ean: '8429551262248'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -21997,6 +22085,8 @@ products:
     name: Rosy Flesh 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72100
+    ean: '8429551721004'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22011,6 +22101,8 @@ products:
     name: Rough Grey Pumice 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26213
+    ean: '8429551262132'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -22025,6 +22117,8 @@ products:
     name: Royal Blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70809
+    ean: '8429551708098'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22039,6 +22133,8 @@ products:
     name: Royal Purple 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72016
+    ean: '8429551720168'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22053,6 +22149,8 @@ products:
     name: Royal Purple 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70810
+    ean: '8429551708104'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22067,6 +22165,8 @@ products:
     name: Russian AF Blue 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71333
+    ean: '8429551713337'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22081,6 +22181,8 @@ products:
     name: Russian AF Dark Green 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71347
+    ean: '8429551713474'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22095,6 +22197,8 @@ products:
     name: Russian AF Grey Blue 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71338
+    ean: '8429551713382'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22109,6 +22213,8 @@ products:
     name: Russian AF Grey N.3 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71339
+    ean: '8429551713399'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22123,6 +22229,8 @@ products:
     name: Russian AF Grey N.4 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71346
+    ean: '8429551713467'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22137,6 +22245,8 @@ products:
     name: Russian AF Grey N.7 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71343
+    ean: '8429551713436'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22151,6 +22261,8 @@ products:
     name: Russian AF Grey N.8 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71345
+    ean: '8429551713450'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22165,6 +22277,8 @@ products:
     name: Russian AF Grey Protective Coat 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71344
+    ean: '8429551713443'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22179,6 +22293,8 @@ products:
     name: Russian AF Light Blue 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71342
+    ean: '8429551713429'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22209,6 +22325,8 @@ products:
     name: Russian Green 4BO 17ml - Primer
     manufacturer: vallejo
     sku: VAL70609
+    ean: '8429551706094'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22223,6 +22341,8 @@ products:
     name: Russian Green 60ml - Primer
     manufacturer: vallejo
     sku: VAL73609
+    ean: '8429551736091'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22251,6 +22371,8 @@ products:
     name: Russian Tank Crew II 17ml - Panzer Aces
     manufacturer: vallejo
     sku: VAL326
+    ean: '8429551703260'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22293,6 +22415,8 @@ products:
     name: Russian Uniform WWII 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70924
+    ean: '8429551709248'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22323,6 +22447,8 @@ products:
     name: Rust & Corrosion Set 8x - Model Colour
     manufacturer: vallejo
     sku: VAL70262
+    ean: '8429551702621'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22400,6 +22526,8 @@ products:
     name: Rust Wash 35ml - Vallejo
     manufacturer: vallejo
     sku: VAL76506
+    ean: '8429551765060'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22414,6 +22542,8 @@ products:
     name: Saddle Brown 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70940
+    ean: '8429551709408'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22428,6 +22558,8 @@ products:
     name: Salmon Rose 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70835
+    ean: '8429551708357'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22442,6 +22574,8 @@ products:
     name: Sand Beige 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71244
+    ean: '8429551712446'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22504,6 +22638,8 @@ products:
     name: Sand Yellow 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70916
+    ean: '8429551709163'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22518,6 +22654,8 @@ products:
     name: Sand Yellow RLM79 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71278
+    ean: '8429551712781'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22548,6 +22686,8 @@ products:
     name: Sandy Paste Hail Caesar - Diorama Effects
     manufacturer: vallejo
     sku: VAL26232
+    ean: '8429551262323'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -22562,6 +22702,8 @@ products:
     name: Satin Polyurethane Varnish  60ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL26652
+    ean: '8429551266529'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22576,16 +22718,20 @@ products:
     name: Satin Varnish 17ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL70522
+    ean: '8429551705226'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/satin-varnish
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/varnish-satin-17ml-acrylic-paint-vallejo_edd6ae3c-f328-407a-8811-9be1f49d96f1.jpg?v=1560797266
     evidence:
       - ret-goblingaming:satin-varnish
+      - ret-radaddel:auxiliary-permanent-satin-varnish-18-ml
   - id: vallejo/satin-varnish-17ml-mecha-colour
     name: Satin Varnish 17ml - Mecha Colour
     manufacturer: vallejo
@@ -22606,6 +22752,8 @@ products:
     name: Satin Varnish 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62063
+    ean: '8429551620635'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22620,6 +22768,8 @@ products:
     name: Scarlet 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70817
+    ean: '8429551708173'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22634,6 +22784,8 @@ products:
     name: Scarlet Blood 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72106
+    ean: '8429551721066'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22648,6 +22800,8 @@ products:
     name: Scarlet Fluorescent 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62034
+    ean: '8429551620345'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22667,7 +22821,7 @@ products:
     category: paint
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceGbp: 2.07
     url: https://www.goblingaming.co.uk/products/model-air-scarlet-red
@@ -22694,6 +22848,8 @@ products:
     name: Scarlet Red 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72012
+    ean: '8429551720120'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22708,6 +22864,8 @@ products:
     name: Sci-Fi Paint Set 12x - Game Colour
     manufacturer: vallejo
     sku: VAL72313
+    ean: '8429551723138'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22722,6 +22880,8 @@ products:
     name: Scriber
     manufacturer: vallejo
     sku: VALT10001
+    ean: '8429551930284'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -22736,6 +22896,8 @@ products:
     name: Scrofulous Brown 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72038
+    ean: '8429551720380'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22750,6 +22912,8 @@ products:
     name: Scurvy Green 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72027
+    ean: '8429551720274'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22764,6 +22928,8 @@ products:
     name: Seaplane Gray 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71314
+    ean: '8429551713146'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22794,6 +22960,8 @@ products:
     name: Sepia 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62018
+    ean: '8429551620185'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22808,6 +22976,8 @@ products:
     name: Sepia Ink 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72091
+    ean: '8429551720915'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22822,6 +22992,8 @@ products:
     name: Sepia Wash 17ml - Game Wash
     manufacturer: vallejo
     sku: VAL73200
+    ean: '8429551732000'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22836,6 +23008,8 @@ products:
     name: Sepia Wash 200ml - Washes
     manufacturer: vallejo
     sku: VAL73300
+    ean: '8429551733007'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22850,6 +23024,8 @@ products:
     name: Sick Green 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72029
+    ean: '8429551720298'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22880,6 +23056,8 @@ products:
     name: Silver 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72052
+    ean: '8429551720526'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22926,6 +23104,8 @@ products:
     name: Silver 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62048
+    ean: '8429551620482'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22940,6 +23120,8 @@ products:
     name: Silver Grey 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70883
+    ean: '8429551708838'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -22977,7 +23159,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-skin-tone
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/skin-tone-17ml-model-air-acrylic-paint-dropper-bot.jpg?v=1560797762
     evidence:
@@ -23016,6 +23198,8 @@ products:
     name: Skin Wash Ink 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72093
+    ean: '8429551720939'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23030,12 +23214,14 @@ products:
     name: Sky Blue 17ml
     manufacturer: vallejo
     sku: VAL71306
+    ean: '8429551713061'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/sky-blue-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/sky-blue-17ml-model-air-water-based-acrylic-airbru.jpg?v=1560802539
     evidence:
@@ -23060,6 +23246,8 @@ products:
     name: Sky Blue 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70961
+    ean: '8429551709613'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23074,6 +23262,8 @@ products:
     name: Sky Grey 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70989
+    ean: '8429551709897'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23088,6 +23278,8 @@ products:
     name: Sky Type S 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71302
+    ean: '8429551713023'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23102,6 +23294,8 @@ products:
     name: Smoke Ink 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70939
+    ean: '8429551709392'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23146,6 +23340,8 @@ products:
     name: Sombre Grey 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72048
+    ean: '8429551720489'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23163,7 +23359,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 5.0
     url: https://radaddel.de/products/soviet-numbers-wwii
@@ -23202,6 +23398,8 @@ products:
     name: Space Dust Paint Set - Colour Shifters
     manufacturer: vallejo
     sku: VAL77091
+    ean: '8429551770910'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -23231,12 +23429,14 @@ products:
     name: Spin Top Pin Vice Double Ended
     manufacturer: vallejo
     sku: VALT09001
+    ean: '8429551930277'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 8.23
+    priceGbp: 10.58
     url: https://www.goblingaming.co.uk/products/pin-vice
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-hobby-tools-spin-top-pin-vice-double-ended-T09001-1.jpg?v=1754495703
     evidence:
@@ -23273,6 +23473,8 @@ products:
     name: Spray Can Trigger Grip
     manufacturer: vallejo
     sku: VALT13001
+    ean: '8429551930543'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -23287,6 +23489,8 @@ products:
     name: Sprue Cutter
     manufacturer: vallejo
     sku: VALT08001
+    ean: '8429551930260'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -23317,6 +23521,8 @@ products:
     name: Squid Pink 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72013
+    ean: '8429551720137'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23331,6 +23537,8 @@ products:
     name: Squidmar Dark Future Paint Set 12x
     manufacturer: vallejo
     sku: VAL72202
+    ean: '8429551722025'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23345,6 +23553,8 @@ products:
     name: Squidmar Essential Paint Set 12x
     manufacturer: vallejo
     sku: VAL72201
+    ean: '8429551722018'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23359,6 +23569,8 @@ products:
     name: Squidmar Fantasy Paint Set 12x
     manufacturer: vallejo
     sku: VAL72203
+    ean: '8429551722032'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23373,6 +23585,8 @@ products:
     name: Stainless Steel Carvers
     manufacturer: vallejo
     sku: VALT02002
+    ean: '8429551930086'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -23433,6 +23647,8 @@ products:
     name: Steel 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62051
+    ean: '8429551620512'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23463,6 +23679,8 @@ products:
     name: Steel Grey 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72102
+    ean: '8429551721028'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23493,6 +23711,8 @@ products:
     name: Steel Rule 150mm
     manufacturer: vallejo
     sku: VALT15003
+    ean: '8429551930475'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -23507,6 +23727,8 @@ products:
     name: Still water 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26230
+    ean: '8429551262309'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -23521,6 +23743,8 @@ products:
     name: Still Water 35ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26235
+    ean: '8429551262354'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -23551,6 +23775,8 @@ products:
     name: Stone Grey 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70884
+    ean: '8429551708845'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23565,6 +23791,8 @@ products:
     name: Stonewall Grey 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72049
+    ean: '8429551720496'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23653,6 +23881,8 @@ products:
     name: Sun Yellow 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72006
+    ean: '8429551720069'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23683,6 +23913,8 @@ products:
     name: Sunny Skin Tone 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70845
+    ean: '8429551708456'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23697,6 +23929,8 @@ products:
     name: Sunset Red 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70802
+    ean: '8429551708029'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23828,7 +24062,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 6.15
+    priceEur: 5.95
     url: https://radaddel.de/products/surface-primer-grey-60ml
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127179-surface-primer-grey-60ml-73601-1.webp?v=1781209466
     evidence:
@@ -23949,6 +24183,8 @@ products:
     name: Swamp Water 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26220
+    ean: '8429551262200'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -23979,6 +24215,8 @@ products:
     name: Tan 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72066
+    ean: '8429551720663'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -24009,6 +24247,8 @@ products:
     name: Tan Earth 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70874
+    ean: '8429551708746'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -24039,6 +24279,8 @@ products:
     name: Terrain Fixer - Diorama Effects
     manufacturer: vallejo
     sku: VAL26322
+    ean: '8429551263221'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -24053,20 +24295,26 @@ products:
     name: Thinner 18ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL70524
+    ean: '8429551705240'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 2.66
+    priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/thinner
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-auxiliaries-thinner-medium-70524.png?v=1717671975
     evidence:
       - ret-goblingaming:thinner
+      - ret-radaddel:auxiliary-thinner-18-ml
   - id: vallejo/tinny-tin-18ml-game-colour
     name: Tinny Tin 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72060
+    ean: '8429551720601'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -24300,7 +24548,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.45
+    priceEur: 3.6
     url: https://radaddel.de/products/tmm-airbrush-obsidian-black-18ml-180
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133363-tmm-airbrush-obsidian-black-18ml-180-77180-1.webp?v=1784586693
     evidence:
@@ -24384,7 +24632,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.5
+    priceEur: 3.6
     url: https://radaddel.de/products/tmm-airbrush-ultramarine-blue-18ml-170
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133353-tmm-airbrush-ultramarine-blue-18ml-170-77170-1.webp?v=1784586649
     evidence:
@@ -24452,7 +24700,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.5
     url: https://radaddel.de/products/tmm-base-arcane-gold-18ml-137
@@ -24466,7 +24714,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/tmm-base-beetle-green-18ml-133
@@ -24566,7 +24814,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.45
+    priceEur: 3.5
     url: https://radaddel.de/products/tmm-base-imperial-gold-18ml-123
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133306-tmm-base-imperial-gold-18ml-123-77123-1.webp?v=1784586442
     evidence:
@@ -24606,7 +24854,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/tmm-base-ruby-red-18ml-126
@@ -24634,7 +24882,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 3.5
     url: https://radaddel.de/products/tmm-base-sapphire-blue-18ml-131
@@ -24648,7 +24896,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.5
     url: https://radaddel.de/products/tmm-base-sterling-silver-18ml-121
@@ -24776,7 +25024,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.45
+    priceEur: 3.5
     url: https://radaddel.de/products/tmm-light-celestial-violet-18ml-109
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133292-tmm-light-celestial-violet-18ml-109-77109-1.webp?v=1784586380
     evidence:
@@ -24914,7 +25162,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/tmm-light-rusty-metal-18ml-118
@@ -24942,7 +25190,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/tmm-light-sterling-silver-18ml-101
@@ -25040,7 +25288,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 13.3
     url: https://radaddel.de/products/tmm-paint-set-ruby-red
@@ -25054,7 +25302,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 13.3
     url: https://radaddel.de/products/tmm-paint-set-sapphire-blue
@@ -25112,7 +25360,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.45
+    priceEur: 3.6
     url: https://radaddel.de/products/tmm-shade-amethyst-purple-18ml-148
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133331-tmm-shade-amethyst-purple-18ml-148-77148-1.webp?v=1784586553
     evidence:
@@ -25334,7 +25582,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/tmm-shade-sterling-silver-18ml-141
@@ -25373,6 +25621,8 @@ products:
     name: Transparent Water 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26201
+    ean: '8429551262019'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -25387,6 +25637,8 @@ products:
     name: Tropical Water 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26223
+    ean: '8429551262231'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25433,6 +25685,8 @@ products:
     name: Turquoise 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70966
+    ean: '8429551709668'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25447,6 +25701,8 @@ products:
     name: Tyre Black 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71315
+    ean: '8429551713153'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25491,6 +25747,8 @@ products:
     name: UK Bronze Green 17ml - Primer
     manufacturer: vallejo
     sku: VAL70607
+    ean: '8429551706070'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25505,6 +25763,8 @@ products:
     name: UK Bronze Green 60ml - Primer
     manufacturer: vallejo
     sku: VAL73607
+    ean: '8429551736077'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25519,6 +25779,8 @@ products:
     name: UK BSC 64 Portland Stone 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71288
+    ean: '8429551712880'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25533,12 +25795,14 @@ products:
     name: UK Light Mud 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71284
+    ean: '8429551712842'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 2.07
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/uk-light-mud-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/uk-light-mud-17ml-model-air-water-based-acrylic-ai.jpg?v=1560802510
     evidence:
@@ -25547,12 +25811,14 @@ products:
     name: UK Light Stone 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71143
+    ean: '8429551711432'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.78
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/uk-light-stone-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/uk-light-stone-17ml-model-air-water-based-acrylic.jpg?v=1560802456
     evidence:
@@ -25561,6 +25827,8 @@ products:
     name: Ultramarine 17ml - Primer
     manufacturer: vallejo
     sku: VAL70625
+    ean: '8429551706254'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25575,6 +25843,8 @@ products:
     name: Ultramarine Blue 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72022
+    ean: '8429551720229'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25605,6 +25875,8 @@ products:
     name: Umber Shade Wash 18ml - Game Wash
     manufacturer: vallejo
     sku: VAL73203
+    ean: '8429551732031'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25619,6 +25891,8 @@ products:
     name: Underside Blue (Faded) 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71332
+    ean: '8429551713320'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25633,6 +25907,8 @@ products:
     name: Uniform Green 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70922
+    ean: '8429551709224'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25647,6 +25923,8 @@ products:
     name: US Dark Green 17ml
     manufacturer: vallejo
     sku: VAL71289
+    ean: '8429551712897'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25661,6 +25939,8 @@ products:
     name: US Dark Green 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70893
+    ean: '8429551708937'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25691,6 +25971,8 @@ products:
     name: US Desert Armour 686 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71122
+    ean: '8429551711227'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25705,6 +25987,8 @@ products:
     name: US Desert Sand (FS30279) 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71140
+    ean: '8429551711401'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25719,6 +26003,8 @@ products:
     name: US Earth Brown 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71290
+    ean: '8429551712903'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25733,6 +26019,8 @@ products:
     name: US Earth Red 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71293
+    ean: '8429551712934'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25747,6 +26035,8 @@ products:
     name: US Earth Yellow 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71291
+    ean: '8429551712910'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25761,6 +26051,8 @@ products:
     name: US Field Drab 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70873
+    ean: '8429551708739'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25775,6 +26067,8 @@ products:
     name: US Field Drab (FS30118) 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71139
+    ean: '8429551711395'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25805,6 +26099,8 @@ products:
     name: US Forest Green 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71294
+    ean: '8429551712941'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25826,7 +26122,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.78
+    priceGbp: 2.66
     url: https://www.goblingaming.co.uk/products/model-air-us-interior-yellow
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/us-interior-yellow-17ml-model-air-acrylic-paint-dr.jpg?v=1560797810
     evidence:
@@ -25835,6 +26131,8 @@ products:
     name: US Light Green (FS34151) 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71137
+    ean: '8429551711371'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25849,6 +26147,8 @@ products:
     name: US Loam 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71292
+    ean: '8429551712927'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25863,6 +26163,8 @@ products:
     name: US Olive Drab 17ml - Primer
     manufacturer: vallejo
     sku: VAL70608
+    ean: '8429551706087'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25877,6 +26179,8 @@ products:
     name: US Olive Drab 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70887
+    ean: '8429551708876'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25891,6 +26195,8 @@ products:
     name: US Olive Drab 60ml - Primer
     manufacturer: vallejo
     sku: VAL73608
+    ean: '8429551736084'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25921,6 +26227,8 @@ products:
     name: US Sand (FS30277) 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71138
+    ean: '8429551711388'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -25951,6 +26259,8 @@ products:
     name: USAAF Light Grey 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71296
+    ean: '8429551712965'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26029,6 +26339,8 @@ products:
     name: USAF Light Gray 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71276
+    ean: '8429551712767'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26073,6 +26385,8 @@ products:
     name: USAF Medium Gray 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71275
+    ean: '8429551712750'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26087,6 +26401,8 @@ products:
     name: USAF Tan 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71348
+    ean: '8429551713481'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26101,6 +26417,8 @@ products:
     name: USN Light Ghost Grey 17ml - Primer
     manufacturer: vallejo
     sku: VAL70615
+    ean: '8429551706155'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26115,6 +26433,8 @@ products:
     name: USN Light Ghost Grey 60ml - Primer
     manufacturer: vallejo
     sku: VAL73615
+    ean: '8429551736152'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26129,6 +26449,8 @@ products:
     name: USN Sea Blue 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71295
+    ean: '8429551712958'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26143,6 +26465,8 @@ products:
     name: Utility Paint Set WWII & WWIII
     manufacturer: vallejo
     sku: '70201'
+    ean: '8429551702010'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -26301,7 +26625,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
     priceEur: 15.4
     url: https://radaddel.de/products/vallejo-airbrush-cleaning-pot-26005
@@ -26424,6 +26748,8 @@ products:
     name: Vallejo Black Thick Mud - Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26812
+    ean: '8429551268127'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26438,6 +26764,8 @@ products:
     name: Vallejo Brown Iron Oxide 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73108
+    ean: '8429551731089'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26452,6 +26780,8 @@ products:
     name: Vallejo Brown Thick Mud- Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26811
+    ean: '8429551268110'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26466,6 +26796,8 @@ products:
     name: Vallejo Burnt Sienna 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73106
+    ean: '8429551731065'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26480,6 +26812,8 @@ products:
     name: Vallejo Burnt Umber 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73110
+    ean: '8429551731102'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26494,6 +26828,8 @@ products:
     name: Vallejo Carbon Smoke 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73116
+    ean: '8429551731164'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26508,6 +26844,8 @@ products:
     name: Vallejo Chrome Oxide Green 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73112
+    ean: '8429551731126'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26564,6 +26902,8 @@ products:
     name: Vallejo Dark Red Ochre 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73107
+    ean: '8429551731072'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26578,6 +26918,8 @@ products:
     name: Vallejo Dark Slate Grey 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73114
+    ean: '8429551731140'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26592,6 +26934,8 @@ products:
     name: Vallejo Dark Steel 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73123
+    ean: '8429551731232'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26606,6 +26950,8 @@ products:
     name: Vallejo Dark Yellow Ochre 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73103
+    ean: '8429551731034'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26620,6 +26966,8 @@ products:
     name: Vallejo Desert Dust 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73121
+    ean: '8429551731218'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26634,6 +26982,8 @@ products:
     name: Vallejo European Earth 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73119
+    ean: '8429551731195'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26648,6 +26998,8 @@ products:
     name: Vallejo European Thick Mud - Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26807
+    ean: '8429551268073'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26662,6 +27014,8 @@ products:
     name: Vallejo Faded Olive Green 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73122
+    ean: '8429551731225'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -26735,7 +27089,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 11.6
     url: https://radaddel.de/products/vallejo-fantasy-color-primer-dark-green
@@ -26989,7 +27343,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.55
+    priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-004-bonewhite
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/108657-vallejo-game-color-004-bonewhite-72034-1.webp?v=1781188591
     evidence:
@@ -27171,7 +27525,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.55
+    priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-017-sunset-orange
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/124590-vallejo-game-color-017-sunset-orange-72110-1.webp?v=1781203869
     evidence:
@@ -27253,7 +27607,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.55
     url: https://radaddel.de/products/vallejo-game-color-023-gory-red
@@ -27365,7 +27719,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.55
     url: https://radaddel.de/products/vallejo-game-color-031-hexed-lichen
@@ -27717,7 +28071,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.55
+    priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-056-camouflage-green
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125766-vallejo-game-color-056-camouflage-green-72031-1.webp?v=1781207263
     evidence:
@@ -27815,7 +28169,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.55
+    priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-064-leather-brown
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125774-vallejo-game-color-064-leather-brown-72040-1.webp?v=1781207277
     evidence:
@@ -27897,7 +28251,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.55
     url: https://radaddel.de/products/vallejo-game-color-071-charred-brown
@@ -27939,7 +28293,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.55
     url: https://radaddel.de/products/vallejo-game-color-074-steel-grey
@@ -28037,7 +28391,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.6
     url: https://radaddel.de/products/vallejo-game-color-101-fluo-yellow
@@ -28051,7 +28405,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.6
     url: https://radaddel.de/products/vallejo-game-color-102-fluorescent-orange
@@ -28079,7 +28433,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.6
     url: https://radaddel.de/products/vallejo-game-color-104-fluorescent-magenta
@@ -28107,7 +28461,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.6
     url: https://radaddel.de/products/vallejo-game-color-106-fluorescent-blue
@@ -28121,7 +28475,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.6
     url: https://radaddel.de/products/vallejo-game-color-107-fluo-green
@@ -28163,9 +28517,9 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.6
+    priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-122-chainmail-silver
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125787-vallejo-game-color-122-chainmail-silver-72053-1.webp?v=1781207299
     evidence:
@@ -28263,7 +28617,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 2.6
+    priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-129-tinny-tin
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125794-vallejo-game-color-129-tinny-tin-72060-1.webp?v=1781207309
     evidence:
@@ -28275,7 +28629,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 2.65
     url: https://radaddel.de/products/vallejo-game-color-133-polyurethane-gloss-varnish
@@ -28594,6 +28948,8 @@ products:
     name: Vallejo Gloss Medium 60ml
     manufacturer: vallejo
     sku: VAL73470
+    ean: '8429551734707'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28608,6 +28964,8 @@ products:
     name: Vallejo Green Earth 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73111
+    ean: '8429551731119'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28622,6 +28980,8 @@ products:
     name: Vallejo Industrial Thick Mud -Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26809
+    ean: '8429551268097'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28653,7 +29013,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 11.6
     url: https://radaddel.de/products/vallejo-infantry-color-primer-german-field-grey
@@ -28692,6 +29052,8 @@ products:
     name: Vallejo Light Brown Thick Mud -Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26810
+    ean: '8429551268103'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28706,6 +29068,8 @@ products:
     name: Vallejo Light Sienna 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73104
+    ean: '8429551731041'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28720,6 +29084,8 @@ products:
     name: Vallejo Light Slate Grey 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73113
+    ean: '8429551731133'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28734,6 +29100,8 @@ products:
     name: Vallejo Light Yellow Ochre 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73102
+    ean: '8429551731027'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28765,6 +29133,8 @@ products:
     name: Vallejo Medium - Glaze 60ml
     manufacturer: vallejo
     sku: VAL73596
+    ean: '8429551735964'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28779,6 +29149,8 @@ products:
     name: Vallejo Medium - Matte 60ml
     manufacturer: vallejo
     sku: VAL73540
+    ean: '8429551735407'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28793,6 +29165,8 @@ products:
     name: Vallejo Medium - Retarder 60ml
     manufacturer: vallejo
     sku: VAL73597
+    ean: '8429551735971'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28807,6 +29181,8 @@ products:
     name: Vallejo Medium - Thinner 60ml
     manufacturer: vallejo
     sku: VAL73524
+    ean: '8429551735247'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28905,6 +29281,8 @@ products:
     name: Vallejo Natural Iron Oxide 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73115
+    ean: '8429551731157'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28919,6 +29297,8 @@ products:
     name: Vallejo Natural Sienna 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73105
+    ean: '8429551731058'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28933,6 +29313,8 @@ products:
     name: Vallejo Natural Umber 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73109
+    ean: '8429551731096'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28947,6 +29329,8 @@ products:
     name: Vallejo New Rust 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73118
+    ean: '8429551731188'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28961,6 +29345,8 @@ products:
     name: Vallejo Old Rust 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73120
+    ean: '8429551731201'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -28978,7 +29364,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/vallejo-pigmente-brown-iron-oxide
@@ -29034,7 +29420,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.6
     url: https://radaddel.de/products/vallejo-pigmente-chrome-oxide-green
@@ -29048,7 +29434,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.45
     url: https://radaddel.de/products/vallejo-pigmente-dark-red-ochre
@@ -29274,7 +29660,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.55
+    priceEur: 3.6
     url: https://radaddel.de/products/vallejo-pigmente-rust
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127292-vallejo-pigmente-rust-73117-1.webp?v=1781209607
     evidence:
@@ -29311,6 +29697,8 @@ products:
     name: Vallejo Polyurethane - Varnish Matte 200ml
     manufacturer: vallejo
     sku: VAL27651
+    ean: '8429551276511'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -29325,6 +29713,8 @@ products:
     name: Vallejo Polyurethane - Varnish Satin 200ml
     manufacturer: vallejo
     sku: VAL27652
+    ean: '8429551276528'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -29353,6 +29743,8 @@ products:
     name: Vallejo  Russian Thick Mud -Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26808
+    ean: '8429551268080'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -29367,6 +29759,8 @@ products:
     name: Vallejo Rust 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73117
+    ean: '8429551731171'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -29409,6 +29803,8 @@ products:
     name: Vallejo Snow - Weathering Effects 200ml
     manufacturer: vallejo
     sku: VAL26820
+    ean: '8429551268202'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -29428,7 +29824,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.3
+    priceEur: 3.35
     url: https://radaddel.de/products/vallejo-surface-primer-black-18-ml
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126272-vallejo-surface-primer-black-18-ml-70602-1.webp?v=1781208218
     evidence:
@@ -29442,7 +29838,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 12.7
+    priceEur: 12.9
     url: https://radaddel.de/products/vallejo-surface-primer-black-200-ml-74602
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/124700-vallejo-surface-primer-black-200-ml-74602-74602-1.webp?v=1781203993
     evidence:
@@ -29468,7 +29864,7 @@ products:
     category: paint
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 3.3
     url: https://radaddel.de/products/vallejo-surface-primer-chainmail-silver-18-ml
@@ -29762,7 +30158,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 10.45
     url: https://radaddel.de/products/vallejo-textur-black-lava-asphalt
@@ -29832,7 +30228,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 10.45
     url: https://radaddel.de/products/vallejo-textur-desert-sand
@@ -29890,7 +30286,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 12.45
+    priceEur: 12.65
     url: https://radaddel.de/products/vallejo-textur-light-brown-thick-mud
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127039-vallejo-textur-light-brown-thick-mud-26810-1.webp?v=1781209344
     evidence:
@@ -29944,7 +30340,7 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceEur: 12.45
     url: https://radaddel.de/products/vallejo-textur-snow
@@ -29969,6 +30365,8 @@ products:
     name: Vallejo Titanium White 35ml - Pigments
     manufacturer: vallejo
     sku: VAL73101
+    ean: '8429551731010'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30366,7 +30764,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 3.35
+    priceEur: 3.4
     url: https://radaddel.de/products/vallejo-xpress-color-159-black-lotus
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/124628-vallejo-xpress-color-159-black-lotus-72423-1.webp?v=1781203929
     evidence:
@@ -30403,6 +30801,8 @@ products:
     name: Vallejo Xpress Color - Armor Green 18ml
     manufacturer: vallejo
     sku: VAL72466
+    ean: '8429551724661'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30431,6 +30831,8 @@ products:
     name: Vallejo Xpress Color - Bag of Bones 18ml
     manufacturer: vallejo
     sku: VAL72450
+    ean: '8429551724500'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30459,6 +30861,8 @@ products:
     name: Vallejo Xpress Color - Battledress Brown 18ml
     manufacturer: vallejo
     sku: VAL72473
+    ean: '8429551724739'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30487,6 +30891,8 @@ products:
     name: Vallejo Xpress Color - Camouflage Green 18ml
     manufacturer: vallejo
     sku: VAL72467
+    ean: '8429551724678'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30515,6 +30921,8 @@ products:
     name: Vallejo Xpress Color - Chameleon Orange 18ml
     manufacturer: vallejo
     sku: VAL72455
+    ean: '8429551724555'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30543,6 +30951,8 @@ products:
     name: Vallejo Xpress Color - Commando Green 18ml
     manufacturer: vallejo
     sku: VAL72468
+    ean: '8429551724685'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30571,6 +30981,8 @@ products:
     name: Vallejo Xpress Color - Demonic Skin 18ml
     manufacturer: vallejo
     sku: VAL72458
+    ean: '8429551724586'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30599,6 +31011,8 @@ products:
     name: Vallejo Xpress Color - Desert Ochre 18ml
     manufacturer: vallejo
     sku: VAL72454
+    ean: '8429551724548'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30641,6 +31055,8 @@ products:
     name: Vallejo Xpress Color - Fairy Skin 18ml
     manufacturer: vallejo
     sku: VAL72457
+    ean: '8429551724579'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30669,6 +31085,8 @@ products:
     name: Vallejo Xpress Color - Fluid Pink 18ml
     manufacturer: vallejo
     sku: VAL72459
+    ean: '8429551724593'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30697,6 +31115,8 @@ products:
     name: Vallejo Xpress Color - Forest Green 18ml
     manufacturer: vallejo
     sku: VAL72465
+    ean: '8429551724654'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30725,6 +31145,8 @@ products:
     name: Vallejo Xpress Color - Greasy Black 18ml
     manufacturer: vallejo
     sku: VAL72476
+    ean: '8429551724760'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30781,6 +31203,8 @@ products:
     name: Vallejo Xpress Color - Iceberg Grey 18ml
     manufacturer: vallejo
     sku: VAL72463
+    ean: '8429551724630'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30795,6 +31219,8 @@ products:
     name: Vallejo Xpress Color - Intense - Dreadnought Yellow 18ml
     manufacturer: vallejo
     sku: VAL72477
+    ean: '8429551724777'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30809,6 +31235,8 @@ products:
     name: Vallejo Xpress Color - Intense - Heretic Turquoise 18ml
     manufacturer: vallejo
     sku: VAL72481
+    ean: '8429551724814'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30823,6 +31251,8 @@ products:
     name: Vallejo Xpress Color - Intense - Hospitallier Black 18ml
     manufacturer: vallejo
     sku: VAL72484
+    ean: '8429551724845'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30837,6 +31267,8 @@ products:
     name: Vallejo Xpress Color - Intense - Legacy Blue 18ml
     manufacturer: vallejo
     sku: VAL72480
+    ean: '8429551724807'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30851,6 +31283,8 @@ products:
     name: Vallejo Xpress Color - Intense - Monastic Green 18ml
     manufacturer: vallejo
     sku: VAL72482
+    ean: '8429551724821'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30865,6 +31299,8 @@ products:
     name: Vallejo Xpress Color - Intense - Phoenix Orange 18ml
     manufacturer: vallejo
     sku: VAL72478
+    ean: '8429551724784'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30879,6 +31315,8 @@ products:
     name: Vallejo Xpress Color - Intense - Seraph Red 18ml
     manufacturer: vallejo
     sku: VAL72479
+    ean: '8429551724791'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30893,6 +31331,8 @@ products:
     name: Vallejo Xpress Color - Intense - Viking Grey 18ml
     manufacturer: vallejo
     sku: VAL72483
+    ean: '8429551724838'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30921,6 +31361,8 @@ products:
     name: Vallejo Xpress Color - Khaki Drill 18ml
     manufacturer: vallejo
     sku: VAL72451
+    ean: '8429551724517'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30949,6 +31391,8 @@ products:
     name: Vallejo Xpress Color - Landser Grey 18ml
     manufacturer: vallejo
     sku: VAL72469
+    ean: '8429551724692'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -30991,6 +31435,8 @@ products:
     name: Vallejo Xpress Color - Mahogany 18ml
     manufacturer: vallejo
     sku: VAL72472
+    ean: '8429551724722'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31019,6 +31465,8 @@ products:
     name: Vallejo Xpress Color - Military Yellow 18ml
     manufacturer: vallejo
     sku: VAL72453
+    ean: '8429551724531'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31061,6 +31509,8 @@ products:
     name: Vallejo Xpress Color - Muddy Ground 18ml
     manufacturer: vallejo
     sku: VAL72475
+    ean: '8429551724753'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31089,6 +31539,8 @@ products:
     name: Vallejo Xpress Color - Mummy White 18ml
     manufacturer: vallejo
     sku: VAL72449
+    ean: '8429551724494'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31131,6 +31583,8 @@ products:
     name: Vallejo Xpress Color - Rotten Flesh 18ml
     manufacturer: vallejo
     sku: VAL72452
+    ean: '8429551724524'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31173,6 +31627,8 @@ products:
     name: Vallejo Xpress Color - Starship Steel 18ml
     manufacturer: vallejo
     sku: VAL72462
+    ean: '8429551724623'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31201,6 +31657,8 @@ products:
     name: Vallejo Xpress Color - Tanned Skin 18ml
     manufacturer: vallejo
     sku: VAL72471
+    ean: '8429551724715'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31229,6 +31687,8 @@ products:
     name: Vallejo Xpress Color - Twilight Rose 18ml
     manufacturer: vallejo
     sku: VAL72460
+    ean: '8429551724609'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31257,6 +31717,8 @@ products:
     name: Vallejo Xpress Color - Vampiric Purple 18ml
     manufacturer: vallejo
     sku: VAL72461
+    ean: '8429551724616'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31299,6 +31761,8 @@ products:
     name: Vallejo Xpress Color - Wagram Blue 18ml
     manufacturer: vallejo
     sku: VAL72464
+    ean: '8429551724647'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31327,6 +31791,8 @@ products:
     name: Vallejo Xpress Color - Wicked Purple 18ml
     manufacturer: vallejo
     sku: VAL72456
+    ean: '8429551724562'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31355,6 +31821,8 @@ products:
     name: Vallejo Xpress Color - Willow Bark 18ml
     manufacturer: vallejo
     sku: VAL72474
+    ean: '8429551724746'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31383,6 +31851,8 @@ products:
     name: Vallejo Xpress Color - Zombie Flesh 18ml
     manufacturer: vallejo
     sku: VAL72470
+    ean: '8429551724708'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31397,6 +31867,8 @@ products:
     name: Varnish Gloss 200ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL27650
+    ean: '8429551276504'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31411,6 +31883,8 @@ products:
     name: Varnish Gloss 60ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL26650
+    ean: '8429551266505'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31425,6 +31899,8 @@ products:
     name: Varnish Matte 60ml - Auxiliaries
     manufacturer: vallejo
     sku: VAL26651
+    ean: '8429551266512'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31439,6 +31915,8 @@ products:
     name: Verdigris 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72096
+    ean: '8429551720960'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31453,6 +31931,8 @@ products:
     name: Vermillion 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70909
+    ean: '8429551709095'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31495,6 +31975,8 @@ products:
     name: Violet 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70960
+    ean: '8429551709606'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31523,6 +32005,8 @@ products:
     name: Violet Ink 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72087
+    ean: '8429551720878'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31537,6 +32021,8 @@ products:
     name: Violet Red 17ml - Model Colour
     manufacturer: vallejo
     sku: VAL70812
+    ean: '8429551708128'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31551,6 +32037,8 @@ products:
     name: Vulcan Black 0.1-0.6mm - Diorama Effects
     manufacturer: vallejo
     sku: VAL26316
+    ean: '8429551263160'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31565,6 +32053,8 @@ products:
     name: Vulcan Black 0.1-2mm - Diorama Effects
     manufacturer: vallejo
     sku: VAL26317
+    ean: '8429551263177'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31579,6 +32069,8 @@ products:
     name: Vulcan Black 2-5mm - Diorama Effects
     manufacturer: vallejo
     sku: VAL26318
+    ean: '8429551263184'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31609,6 +32101,8 @@ products:
     name: Warlord Purple 18ml - Game Colour
     manufacturer: vallejo
     sku: VAL72014
+    ean: '8429551720144'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31639,6 +32133,8 @@ products:
     name: Warm Orange 0.1-0.6mm - Diorama Effects
     manufacturer: vallejo
     sku: VAL26319
+    ean: '8429551263191'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31653,6 +32149,8 @@ products:
     name: Warm Orange 0.1-1mm - Diorama Effects
     manufacturer: vallejo
     sku: VAL26320
+    ean: '8429551263207'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31667,6 +32165,8 @@ products:
     name: Warm Orange 1-2mm - Diorama Effects
     manufacturer: vallejo
     sku: VAL26321
+    ean: '8429551263214'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31709,6 +32209,8 @@ products:
     name: Weathering Effects 40ml - Black Splash Mud
     manufacturer: vallejo
     sku: VAL73806
+    ean: '8429551738088'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31723,62 +32225,81 @@ products:
     name: Weathering Effects 40ml - Black Thick Mud
     manufacturer: vallejo
     sku: VAL73812
+    ean: '8429551738125'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 4.95
+    priceEur: 5.05
     url: https://www.goblingaming.co.uk/products/vallejo-weathering-effects-40ml-black-thick-mud
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/val73812-weathering-effects-thick-mud-black-40ml-3004807-1600.jpg?v=1706795216
     evidence:
       - ret-goblingaming:vallejo-weathering-effects-40ml-black-thick-mud
+      - ret-radaddel:black-thick-mud
   - id: vallejo/weathering-effects-40ml-brown-engine-soot
     name: Weathering Effects 40ml - Brown Engine Soot
     manufacturer: vallejo
     sku: VAL73818
+    ean: '8429551738187'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 4.95
+    priceEur: 5.05
     url: https://www.goblingaming.co.uk/products/vallejo-weathering-effects-40ml-brown-engine-soot
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/val73818-weathering-effects-engine-brown-engine-soot-40ml-3004813-600.jpg?v=1706794027
     evidence:
       - ret-goblingaming:vallejo-weathering-effects-40ml-brown-engine-soot
+      - ret-radaddel:brown-engine-soot
   - id: vallejo/weathering-effects-40ml-brown-splash-mud
     name: Weathering Effects 40ml - Brown Splash Mud
     manufacturer: vallejo
     sku: VAL73805
+    ean: '8429551738057'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 4.95
+    priceEur: 5.05
     url: https://www.goblingaming.co.uk/products/vallejo-weathering-effects-40ml-brown-splash-mud
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/val73805-weathering-effects-splash-mud-brown-40ml-3004800-1600.jpg?v=1707231251
     evidence:
       - ret-goblingaming:vallejo-weathering-effects-40ml-brown-splash-mud
+      - ret-goblingaming:vallejo-weathering-effects-40ml-light-brown-splash-mud
+      - ret-radaddel:brown-splash-mud
   - id: vallejo/weathering-effects-40ml-brown-thick-mud
     name: Weathering Effects 40ml - Brown Thick Mud
     manufacturer: vallejo
     sku: VAL73811
+    ean: '8429551738118'
+    eanConfidence: confirmed
     category: paint
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 4.95
+    priceEur: 5.05
     url: https://www.goblingaming.co.uk/products/vallejo-weathering-effects-40ml-brown-thick-mud
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/val73811-weathering-effects-thick-mud-brown-40ml-3004806-1600.jpg?v=1706795300
     evidence:
       - ret-goblingaming:vallejo-weathering-effects-40ml-brown-thick-mud
+      - ret-radaddel:brown-thick-mud
   - id: vallejo/weathering-effects-40ml-crushed-grass
     name: Weathering Effects 40ml - Crushed Grass
     manufacturer: vallejo
     sku: VAL73825
+    ean: '8429551738255'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31793,6 +32314,8 @@ products:
     name: Weathering Effects 40ml - Diesel Stain
     manufacturer: vallejo
     sku: VAL73816
+    ean: '8429551738163'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31807,6 +32330,8 @@ products:
     name: Weathering Effects 40ml - Engine Grime
     manufacturer: vallejo
     sku: VAL73815
+    ean: '8429551738156'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31821,6 +32346,8 @@ products:
     name: Weathering Effects 40ml - European Splash Mud
     manufacturer: vallejo
     sku: VAL73801
+    ean: '8429551738019'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31835,6 +32362,8 @@ products:
     name: Weathering Effects 40ml - Fuel Stains
     manufacturer: vallejo
     sku: VAL73814
+    ean: '8429551738149'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31849,6 +32378,8 @@ products:
     name: Weathering Effects 40ml - Industrial Thick Mud
     manufacturer: vallejo
     sku: VAL73809
+    ean: '8429551738095'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31859,24 +32390,12 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/1g7lA1QLlNsf9uzSDycog5jS7k0BNbTs.jpg?v=1706796153
     evidence:
       - ret-goblingaming:vallejo-weathering-effects-40ml-industrial-thick-mud
-  - id: vallejo/weathering-effects-40ml-light-brown-splash-mud
-    name: Weathering Effects 40ml - Light Brown Splash Mud
-    manufacturer: vallejo
-    sku: VAL73804
-    category: paint
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 4.95
-    url: https://www.goblingaming.co.uk/products/vallejo-weathering-effects-40ml-light-brown-splash-mud
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vallejo-weathering-effects-light-brown-splash-mud-73804_87888490-f7e3-468d-9995-ddf3031a0cbe.jpg?v=1707231223
-    evidence:
-      - ret-goblingaming:vallejo-weathering-effects-40ml-light-brown-splash-mud
   - id: vallejo/weathering-effects-40ml-light-brown-thick-mud
     name: Weathering Effects 40ml - Light Brown Thick Mud
     manufacturer: vallejo
     sku: VAL73810
+    ean: '8429551738101'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31891,6 +32410,8 @@ products:
     name: Weathering Effects 40ml - Moss and Lichen Effect
     manufacturer: vallejo
     sku: VAL73827
+    ean: '8429551738279'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31905,6 +32426,8 @@ products:
     name: Weathering Effects 40ml - Mud and Grass Effect
     manufacturer: vallejo
     sku: VAL73826
+    ean: '8429551738262'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31919,6 +32442,8 @@ products:
     name: Weathering Effects 40ml - Oil Stains
     manufacturer: vallejo
     sku: VAL73813
+    ean: '8429551738132'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31933,6 +32458,8 @@ products:
     name: Weathering Effects 40ml - Petrol Spills
     manufacturer: vallejo
     sku: VAL73817
+    ean: '8429551738170'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31947,6 +32474,8 @@ products:
     name: Weathering Effects 40ml - Rainmarks
     manufacturer: vallejo
     sku: VAL73819
+    ean: '8429551738194'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31961,6 +32490,8 @@ products:
     name: Weathering Effects 40ml - Russian Splash Mud
     manufacturer: vallejo
     sku: VAL73802
+    ean: '8429551738026'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31975,6 +32506,8 @@ products:
     name: Weathering Effects 40ml - Rust Texture
     manufacturer: vallejo
     sku: VAL73821
+    ean: '8429551738217'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -31989,6 +32522,8 @@ products:
     name: Weathering Effects 40ml - Slimy Grime Dark
     manufacturer: vallejo
     sku: VAL73822
+    ean: '8429551738224'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32003,6 +32538,8 @@ products:
     name: Weathering Effects 40ml - Slimy Grime Light
     manufacturer: vallejo
     sku: VAL73823
+    ean: '8429551738231'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32017,6 +32554,8 @@ products:
     name: Weathering Effects 40ml - Snow
     manufacturer: vallejo
     sku: VAL73820
+    ean: '8429551738200'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32031,6 +32570,8 @@ products:
     name: Weathering Effects 40ml - Streaking Grime
     manufacturer: vallejo
     sku: VAL73824
+    ean: '8429551738248'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32045,6 +32586,8 @@ products:
     name: Weathering Effects 40ml - Wet Effects
     manufacturer: vallejo
     sku: VAL73828
+    ean: '8429551738286'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32089,6 +32632,8 @@ products:
     name: White 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70951
+    ean: '8429551709514'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32103,6 +32648,8 @@ products:
     name: White 18ml - Primer
     manufacturer: vallejo
     sku: VAL70600
+    ean: '8429551706001'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32117,6 +32664,8 @@ products:
     name: White 200ml - Primer
     manufacturer: vallejo
     sku: VAL74600
+    ean: '8429551746007'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32131,6 +32680,8 @@ products:
     name: White 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62001
+    ean: '8429551620017'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32145,6 +32696,8 @@ products:
     name: White 60ml - Primer
     manufacturer: vallejo
     sku: VAL73600
+    ean: '8429551736008'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32175,6 +32728,8 @@ products:
     name: White Gold 35ml - Metal Colour
     manufacturer: vallejo
     sku: VAL70796
+    ean: '8429551707961'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32221,6 +32776,8 @@ products:
     name: White Grey 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70993
+    ean: '8429551709934'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32251,6 +32808,8 @@ products:
     name: White Primer 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62061
+    ean: '8429551620611'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32265,6 +32824,8 @@ products:
     name: White Pumice 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26212
+    ean: '8429551262125'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32279,6 +32840,8 @@ products:
     name: White Stone Paste 200ml - Diorama Effects
     manufacturer: vallejo
     sku: VAL26211
+    ean: '8429551262118'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32293,6 +32856,8 @@ products:
     name: White Wash 35ml - Vallejo
     manufacturer: vallejo
     sku: VAL76501
+    ean: '8429551765015'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32307,6 +32872,8 @@ products:
     name: Wild Tuft - Autumn, Medium
     manufacturer: vallejo
     sku: VALSC409
+    ean: '8429551986076'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32321,6 +32888,8 @@ products:
     name: Wild Tuft - Autumn, XL
     manufacturer: vallejo
     sku: VALSC423
+    ean: '8429551986212'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32335,6 +32904,8 @@ products:
     name: Wild Tuft - Beige, Large
     manufacturer: vallejo
     sku: VALSC420
+    ean: '8429551986182'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32349,6 +32920,8 @@ products:
     name: Wild Tuft - Beige, Medium
     manufacturer: vallejo
     sku: VALSC408
+    ean: '8429551986069'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32363,6 +32936,8 @@ products:
     name: Wild Tuft - Beige, Small
     manufacturer: vallejo
     sku: VALSC403
+    ean: '8429551986014'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32377,6 +32952,8 @@ products:
     name: Wild Tuft - Beige, XL
     manufacturer: vallejo
     sku: VALSC429
+    ean: '8429551986274'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32391,6 +32968,8 @@ products:
     name: Wild Tuft - Brown, Medium
     manufacturer: vallejo
     sku: VALSC411
+    ean: '8429551986090'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32405,6 +32984,8 @@ products:
     name: Wild Tuft - Burned, Large
     manufacturer: vallejo
     sku: VALSC414
+    ean: '8429551986120'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32419,6 +33000,8 @@ products:
     name: Wild Tuft - Dark Moss, Small
     manufacturer: vallejo
     sku: VALSC402
+    ean: '8429551986007'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32433,6 +33016,8 @@ products:
     name: Wild Tuft - Dense Beige, Large
     manufacturer: vallejo
     sku: VALSC412
+    ean: '8429551986106'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32447,6 +33032,8 @@ products:
     name: Wild Tuft - Dense Green, Large
     manufacturer: vallejo
     sku: VALSC413
+    ean: '8429551986113'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32461,6 +33048,8 @@ products:
     name: Wild Tuft - Dry Green, Large
     manufacturer: vallejo
     sku: VALSC415
+    ean: '8429551986137'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32475,6 +33064,8 @@ products:
     name: Wild Tuft - Dry Green, Small
     manufacturer: vallejo
     sku: VALSC401
+    ean: '8429551985994'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32489,6 +33080,8 @@ products:
     name: Wild Tuft - Dry Green, XL
     manufacturer: vallejo
     sku: VALSC424
+    ean: '8429551986229'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32503,6 +33096,8 @@ products:
     name: Wild Tuft - Dry, Large
     manufacturer: vallejo
     sku: VALSC419
+    ean: '8429551986175'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32517,6 +33112,8 @@ products:
     name: Wild Tuft - Dry, XL
     manufacturer: vallejo
     sku: VALSC425
+    ean: '8429551986236'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32531,6 +33128,8 @@ products:
     name: Wild Tuft - Green, Medium
     manufacturer: vallejo
     sku: VALSC406
+    ean: '8429551986045'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32545,6 +33144,8 @@ products:
     name: Wild Tuft - Light Brown, Large
     manufacturer: vallejo
     sku: VALSC418
+    ean: '8429551986168'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32559,6 +33160,8 @@ products:
     name: Wild Tuft - Light Green, Large
     manufacturer: vallejo
     sku: VALSC417
+    ean: '8429551986151'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32573,6 +33176,8 @@ products:
     name: Wild Tuft - Light Green, Medium
     manufacturer: vallejo
     sku: VALSC407
+    ean: '8429551986052'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32587,6 +33192,8 @@ products:
     name: Wild Tuft - Light Green, XL
     manufacturer: vallejo
     sku: VALSC426
+    ean: '8429551986243'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32601,6 +33208,8 @@ products:
     name: Wild Tuft - Mixed Green, Large
     manufacturer: vallejo
     sku: VALSC416
+    ean: '8429551986144'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32615,6 +33224,8 @@ products:
     name: Wild Tuft - Strong Green, XL
     manufacturer: vallejo
     sku: VALSC427
+    ean: '8429551986250'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32629,6 +33240,8 @@ products:
     name: Wild Tuft - Swamp, Medium
     manufacturer: vallejo
     sku: VALSC405
+    ean: '8429551986038'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32643,6 +33256,8 @@ products:
     name: Wild Tuft - Swamp, XL
     manufacturer: vallejo
     sku: VALSC422
+    ean: '8429551986205'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32657,6 +33272,8 @@ products:
     name: Wild Tuft - Wild Moss, Small
     manufacturer: vallejo
     sku: VALSC404
+    ean: '8429551986021'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32671,6 +33288,8 @@ products:
     name: Wild Tuft - Winter, Medium
     manufacturer: vallejo
     sku: VALSC410
+    ean: '8429551986083'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32685,6 +33304,8 @@ products:
     name: Wild Tuft - Winter, XL
     manufacturer: vallejo
     sku: VALSC421
+    ean: '8429551986199'
+    eanConfidence: provisional
     category: hobby-auxiliary
     categoryBasis: mapped
     status: current
@@ -32699,6 +33320,8 @@ products:
     name: Wolf Grey 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72047
+    ean: '8429551720472'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32713,6 +33336,8 @@ products:
     name: Wolf Grey 18ml - Game Air
     manufacturer: vallejo
     sku: VAL76047
+    ean: '8429551760478'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32743,6 +33368,8 @@ products:
     name: Wood & Leather Paint Set - Model Colour
     manufacturer: vallejo
     sku: VAL70182
+    ean: '8429551701822'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32786,6 +33413,8 @@ products:
     name: WWII American Armour & Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70203'
+    ean: '8429551702034'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32817,6 +33446,8 @@ products:
     name: WWII British Armour & Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70204'
+    ean: '8429551702041'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32832,6 +33463,8 @@ products:
     name: WWII German Armour - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70205'
+    ean: '8429551702058'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32847,6 +33480,8 @@ products:
     name: WWII German Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70206'
+    ean: '8429551702065'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32862,6 +33497,8 @@ products:
     name: WWII German Waffen-SS - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70207'
+    ean: '8429551702072'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32877,6 +33514,8 @@ products:
     name: WWII Soviet Armour & Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70202'
+    ean: '8429551702027'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32892,6 +33531,8 @@ products:
     name: WWIII American Armour & Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70220'
+    ean: '8429551702201'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32907,6 +33548,8 @@ products:
     name: WWIII British Armour & Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70222'
+    ean: '8429551702225'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32922,6 +33565,8 @@ products:
     name: WWIII Soviet Armour & Infantry - Vallejo Paint Set
     manufacturer: vallejo
     sku: '70221'
+    ean: '8429551702218'
+    eanConfidence: provisional
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -32937,6 +33582,8 @@ products:
     name: Xpress Color Black Lotus 18ml
     manufacturer: vallejo
     sku: VAL72423
+    ean: '8429551724234'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32951,6 +33598,8 @@ products:
     name: Xpress Color Cardinal Purple 18ml
     manufacturer: vallejo
     sku: VAL72408
+    ean: '8429551724081'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32965,6 +33614,8 @@ products:
     name: Xpress Color Caribbean Turquoise 18ml
     manufacturer: vallejo
     sku: VAL72414
+    ean: '8429551724142'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32979,6 +33630,8 @@ products:
     name: Xpress Color Copper Brown 18ml
     manufacturer: vallejo
     sku: VAL72421
+    ean: '8429551724210'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -32993,6 +33646,8 @@ products:
     name: Xpress Color Deep Purple 18ml
     manufacturer: vallejo
     sku: VAL72409
+    ean: '8429551724098'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33007,6 +33662,8 @@ products:
     name: Xpress Color Dwarf Skin 18ml
     manufacturer: vallejo
     sku: VAL72402
+    ean: '8429551724029'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33021,6 +33678,8 @@ products:
     name: Xpress Color Gloomy Violet 18ml
     manufacturer: vallejo
     sku: VAL72410
+    ean: '8429551724104'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33035,6 +33694,8 @@ products:
     name: Xpress Color Imperial Yellow 18ml
     manufacturer: vallejo
     sku: VAL72403
+    ean: '8429551724036'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33049,6 +33710,8 @@ products:
     name: Xpress Color Lizard Green 18ml
     manufacturer: vallejo
     sku: VAL72418
+    ean: '8429551724180'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33063,6 +33726,8 @@ products:
     name: Xpress Color Martian Orange 18ml
     manufacturer: vallejo
     sku: VAL72405
+    ean: '8429551724050'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33077,6 +33742,8 @@ products:
     name: Xpress Color Mystic Blue 18ml
     manufacturer: vallejo
     sku: VAL72411
+    ean: '8429551724111'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33091,6 +33758,8 @@ products:
     name: Xpress Color Nuclear Yellow 18ml
     manufacturer: vallejo
     sku: VAL72404
+    ean: '8429551724043'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33105,6 +33774,8 @@ products:
     name: Xpress Color Omega Blue 18ml
     manufacturer: vallejo
     sku: VAL72413
+    ean: '8429551724135'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33119,6 +33790,8 @@ products:
     name: Xpress Color Orc Skin 18ml
     manufacturer: vallejo
     sku: VAL72415
+    ean: '8429551724159'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33133,6 +33806,8 @@ products:
     name: Xpress Color Plague Green 18ml
     manufacturer: vallejo
     sku: VAL72419
+    ean: '8429551724197'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33147,6 +33822,8 @@ products:
     name: Xpress Color Plasma Red 18ml
     manufacturer: vallejo
     sku: VAL72406
+    ean: '8429551724067'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33161,6 +33838,8 @@ products:
     name: Xpress Color Snake Green 18ml
     manufacturer: vallejo
     sku: VAL72417
+    ean: '8429551724173'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33175,6 +33854,8 @@ products:
     name: Xpress Color Space Grey 18ml
     manufacturer: vallejo
     sku: VAL72422
+    ean: '8429551724227'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33189,6 +33870,8 @@ products:
     name: Xpress Color Storm Blue 18ml
     manufacturer: vallejo
     sku: VAL72412
+    ean: '8429551724128'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33203,6 +33886,8 @@ products:
     name: Xpress Color Templar White 18ml
     manufacturer: vallejo
     sku: VAL72401
+    ean: '8429551724012'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33217,6 +33902,8 @@ products:
     name: Xpress Color Troll Green 18ml
     manufacturer: vallejo
     sku: VAL72416
+    ean: '8429551724166'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33231,6 +33918,8 @@ products:
     name: Xpress Color Velvet Red 18ml
     manufacturer: vallejo
     sku: VAL72407
+    ean: '8429551724074'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33245,6 +33934,8 @@ products:
     name: Xpress Color Wasteland Brown 18ml
     manufacturer: vallejo
     sku: VAL72420
+    ean: '8429551724203'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33259,6 +33950,8 @@ products:
     name: Xpress Color Xpress Medium 18ml
     manufacturer: vallejo
     sku: VAL72448
+    ean: '8429551724487'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33289,6 +33982,8 @@ products:
     name: Yellow Brown 17ml - Model Air
     manufacturer: vallejo
     sku: VAL71246
+    ean: '8429551712460'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33303,6 +33998,8 @@ products:
     name: Yellow Color Set 4x - Game Colour
     manufacturer: vallejo
     sku: VAL72378
+    ean: '8429551723787'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33333,6 +34030,8 @@ products:
     name: Yellow Fluorescent 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62031
+    ean: '8429551620314'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33347,6 +34046,8 @@ products:
     name: Yellow Green 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70954
+    ean: '8429551709545'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33361,6 +34062,8 @@ products:
     name: Yellow Ink 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72085
+    ean: '8429551720854'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33391,6 +34094,8 @@ products:
     name: Yellow Ochre 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70913
+    ean: '8429551709132'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33405,6 +34110,8 @@ products:
     name: Yellow Ochre 60ml - Premium Colour
     manufacturer: vallejo
     sku: VAL62015
+    ean: '8429551620154'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33419,6 +34126,8 @@ products:
     name: Yellow Olive 17ml - Game Colour
     manufacturer: vallejo
     sku: VAL72064
+    ean: '8429551720649'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current
@@ -33449,6 +34158,8 @@ products:
     name: Yellow Olive 18ml - Model Colour
     manufacturer: vallejo
     sku: VAL70892
+    ean: '8429551708920'
+    eanConfidence: provisional
     category: paint
     categoryBasis: mapped
     status: current

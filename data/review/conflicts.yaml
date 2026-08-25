@@ -650,6 +650,26 @@ conflicts:
       - ean: '5060924984799'
         sources:
           - ret-goblingaming
+  - type: ean-mismatch
+    entity: vallejo/green-grey-18ml-model-colour
+    chosen: '8429551708869'
+    assertions:
+      - ean: '8429551708869'
+        sources:
+          - ret-goblingaming
+      - ean: '8429551709712'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: vallejo/red-17ml-model-air
+    chosen: '8429551711029'
+    assertions:
+      - ean: '8429551711029'
+        sources:
+          - ret-goblingaming
+      - ean: '8429551712699'
+        sources:
+          - ret-goblingaming
   - type: supersession-stale-code
     key: ret-goblingaming:age-of-sigmar-stormcast-eternals-paint-set
     ean: '5011921219322'
@@ -742,13 +762,6 @@ conflicts:
     manufacturer: games-workshop
   - type: ambiguous-join
     keys:
-      - ret-goblingaming:the-army-painter-speedpaint-most-wanted-set-2-0-paint-set
-    name: Speedpaint Most Wanted Set 2.0
-    candidates:
-      - army-painter/WP8060
-      - army-painter/WP8060P
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:speedpaint-most-wanted-set-2-0
     name: Speedpaint Most Wanted Set 2.0
     candidates:
@@ -782,13 +795,6 @@ conflicts:
     candidates:
       - games-workshop/60010199059
       - games-workshop/60010199079
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:anvils-of-the-heldenhammer-the-ancients
-    name: 'Anvils of the Heldenhammer: The Ancients'
-    candidates:
-      - games-workshop/60040281301
-      - games-workshop/60100281329
   - type: ambiguous-join
     keys:
       - ret-radaddel:disciples-of-tzeentch-warscroll-cards-englisch
@@ -833,14 +839,6 @@ conflicts:
       - games-workshop/99122701002
   - type: ambiguous-join
     keys:
-      - ret-radaddel:blood-angels-sanguinary-priest
-    name: 'Blood Angels: Sanguinary Priest'
-    candidates:
-      - games-workshop/99070101008
-      - games-workshop/99070101068
-      - games-workshop/99120101415
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:space-wolves-iron-priest
     name: 'Space Wolves: Iron Priest'
     candidates:
@@ -853,13 +851,6 @@ conflicts:
     candidates:
       - games-workshop/99070101019
       - games-workshop/99070101066
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blood-angels-chaplain-with-jump-pack
-    name: 'Blood Angels: Chaplain with Jump Pack'
-    candidates:
-      - games-workshop/99070101034
-      - games-workshop/99070101070
   - type: ambiguous-join
     keys:
       - ret-radaddel:space-wolves-primaris-upgrades
@@ -1120,14 +1111,6 @@ conflicts:
       - games-workshop/99120101441
   - type: ambiguous-join
     keys:
-      - ret-radaddel:blood-angels-sanguinary-guard
-    name: 'Blood Angels: Sanguinary Guard'
-    candidates:
-      - games-workshop/99120101121
-      - games-workshop/99120101356
-      - games-workshop/99120101413
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:space-marines-centurion-assault-squad
     name: 'Space Marines: Centurion-Assault Squad'
     candidates:
@@ -1220,13 +1203,6 @@ conflicts:
       - games-workshop/99120101293
   - type: ambiguous-join
     keys:
-      - ret-radaddel:blood-angels-mephiston-lord-of-death
-    name: 'Blood Angels: Mephiston Lord of Death'
-    candidates:
-      - games-workshop/99120101266
-      - games-workshop/99120101358
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:space-marines-terminator-squad
     name: 'Space Marines: Terminator Squad'
     candidates:
@@ -1246,13 +1222,6 @@ conflicts:
     candidates:
       - games-workshop/99120101347
       - games-workshop/99120101433
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:black-templars-emperor-s-champion
-    name: 'Black Templars: Emperor''s Champion'
-    candidates:
-      - games-workshop/99120101366
-      - games-workshop/99120101485
   - type: ambiguous-join
     keys:
       - ret-radaddel:chaos-space-marines-possessed
@@ -1381,54 +1350,11 @@ conflicts:
       - games-workshop/99120103099
   - type: ambiguous-join
     keys:
-      - ret-radaddel:astra-militarum-valkyrie
-    name: 'Astra Militarum: Valkyrie'
+      - ret-radaddel:orks-warbikers
+    name: 'Orks: Warbikers'
     candidates:
-      - games-workshop/99120105038
-      - games-workshop/99120105113
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:astra-militarum-chimera
-    name: 'Astra Militarum: Chimera'
-    candidates:
-      - games-workshop/99120105046
-      - games-workshop/99120105114
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:astra-militarum-baneblade-1
-    name: 'Astra Militarum: Baneblade'
-    candidates:
-      - games-workshop/99120105076
-      - games-workshop/99120105107
-      - games-workshop/99120105157
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:astra-militarum-cadian-command-squad
-    name: 'Astra Militarum: Cadian Command Squad'
-    candidates:
-      - games-workshop/99120105078
-      - games-workshop/99120105102
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:astra-militarum-leman-russ-battle-tank
-    name: 'Astra Militarum: Leman Russ Battle Tank'
-    candidates:
-      - games-workshop/99120105081
-      - games-workshop/99120105111
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:astra-militarum-sentinel
-    name: 'Astra Militarum: Sentinel'
-    candidates:
-      - games-workshop/99120105083
-      - games-workshop/99120105103
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:astra-militarum-cadian-shock-troops
-    name: 'Astra Militarum: Cadian Shock Troops'
-    candidates:
-      - games-workshop/99120105089
-      - games-workshop/99120105101
+      - games-workshop/99120103096
+      - games-workshop/99120103138
   - type: ambiguous-join
     keys:
       - ret-radaddel:kill-team-kasrkin
@@ -1662,13 +1588,6 @@ conflicts:
     candidates:
       - games-workshop/99120201135
       - games-workshop/99120201210
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blades-of-khorne-blood-warriors
-    name: 'Blades of Khorne: Blood Warriors'
-    candidates:
-      - games-workshop/99120201155
-      - games-workshop/99120201246
   - type: ambiguous-join
     keys:
       - ret-radaddel:sylvaneth-alarielle-the-everqueen
@@ -2062,34 +1981,6 @@ conflicts:
       - games-workshop/99120599109
   - type: ambiguous-join
     keys:
-      - ret-radaddel:blood-bowl-chaos-chosen-team
-    name: 'Blood Bowl: Chaos Chosen Team'
-    candidates:
-      - games-workshop/99120901001
-      - games-workshop/99120901004
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blood-bowl-crud-creek-nosepickers-team
-    name: 'Blood Bowl: Crud Creek Nosepickers Team'
-    candidates:
-      - games-workshop/99120909004
-      - games-workshop/99120909008
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blood-bowl-troll
-    name: 'Blood Bowl: Troll'
-    candidates:
-      - games-workshop/99120999002
-      - games-workshop/99120999013
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blood-bowl-minotaur
-    name: 'Blood Bowl: Minotaur'
-    candidates:
-      - games-workshop/99120999022
-      - games-workshop/99850999013
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:warriors-of-chaos-chaos-warriors
     name: 'Warriors of Chaos: Chaos Warriors'
     candidates:
@@ -2130,27 +2021,6 @@ conflicts:
     candidates:
       - games-workshop/99123043004
       - games-workshop/99853008194
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blades-of-khorne-bloodthirster
-    name: 'Blades of Khorne: Bloodthirster'
-    candidates:
-      - games-workshop/99129915072
-      - games-workshop/99129915086
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blades-of-khorne-bloodletters
-    name: 'Blades of Khorne: Bloodletters'
-    candidates:
-      - games-workshop/99129915073
-      - games-workshop/99129915090
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:blades-of-khorne-skulltaker
-    name: 'Blades of Khorne: Skulltaker'
-    candidates:
-      - games-workshop/99129915075
-      - games-workshop/99129915087
   - type: ambiguous-join
     keys:
       - ret-radaddel:citadel-crusade-figure-case
@@ -2197,16 +2067,21 @@ conflicts:
   - type: ean-shared
     ean: '5713799503601'
     entities:
+      - army-painter/army-painter-sculpting-tools
       - army-painter/sculpting-tools
+      - army-painter/sculpting-tools-hobby-tools
       - warlord-games/TL5036
   - type: cross-manufacturer-ean
     ean: '5713799503601'
     keys:
       - legacy-catalog:warlord-games/bolt-action/general/sculpting-tools
       - mfr-warlord-store:sculpting-tools
+      - ret-goblingaming:sculpting-tools
+      - ret-radaddel:army-painter-sculpting-tools
   - type: ean-shared
     ean: '5713799503809'
     entities:
+      - army-painter/army-painter-miniature-and-model-magnets
       - army-painter/miniature-model-magnets
       - army-painter/model-magnets-hobby-tools
       - warlord-games/TL5038
@@ -2216,6 +2091,17 @@ conflicts:
       - legacy-catalog:warlord-games/bolt-action/general/miniature-model-magnets
       - mfr-warlord-store:miniature-model-magnets
       - ret-goblingaming:model-magnets
+      - ret-radaddel:army-painter-miniature-and-model-magnets
+  - type: ean-shared
+    ean: '5713799700901'
+    entities:
+      - army-painter/army-painter-wargamer-brush-small-drybrush
+      - warlord-games/BR7009
+  - type: cross-manufacturer-ean
+    ean: '5713799700901'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/small-drybrush
+      - ret-radaddel:army-painter-wargamer-brush-small-drybrush
   - type: ean-shared
     ean: '5713799808201'
     entities:
@@ -2225,6 +2111,7 @@ conflicts:
     ean: '5713799808201'
     keys:
       - mfr-warlord-store:warpaints-fanatic-world-war-ii-american-paint-set
+      - ret-goblingaming:world-war-ii-american-paint-set-warpaints-fanatic
       - ret-tistaminis:ww2-american-paint-set
   - type: ean-shared
     ean: '5713799808300'
@@ -2235,6 +2122,7 @@ conflicts:
     ean: '5713799808300'
     keys:
       - mfr-warlord-store:warpaints-fanatic-world-war-ii-german-paint-set
+      - ret-goblingaming:world-war-ii-german-paint-set-warpaints-fanatic
       - ret-tistaminis:ww2-german-paint-set
   - type: ean-shared
     ean: '5713799808409'
@@ -2245,6 +2133,7 @@ conflicts:
     ean: '5713799808409'
     keys:
       - mfr-warlord-store:warpaints-fanatic-world-war-ii-british-paint-set
+      - ret-goblingaming:world-war-ii-british-paint-set-warpaints-fanatic
       - ret-tistaminis:ww2-british-paint-set
   - type: ean-shared
     ean: '8435568306844'
@@ -2257,6 +2146,16 @@ conflicts:
       - legacy-catalog:warlord-games/bolt-action/general/matt-varnish-100-ml
       - ret-goblingaming:matt-varnish-100-ml-3rd-gen-acrylic-ak-paint-ak11237
   - type: ean-shared
+    ean: '8435568306851'
+    entities:
+      - ak-interactive/AK11238
+      - warlord-games/AK11238
+  - type: cross-manufacturer-ean
+    ean: '8435568306851'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/satin-varnish-100-ml
+      - ret-goblingaming:satin-varnish-100ml-3rd-gen-acrylic-ak-paint-ak11238
+  - type: ean-shared
     ean: '8435568306868'
     entities:
       - ak-interactive/AK11239
@@ -2267,14 +2166,26 @@ conflicts:
       - legacy-catalog:warlord-games/bolt-action/general/gloss-varnish-100-ml-3gen
       - ret-goblingaming:gloss-varnish-100-ml-3rd-gen-acrylic-ak-paint-ak11239
   - type: ean-shared
+    ean: '8435568331341'
+    entities:
+      - ak-interactive/AK11252
+      - warlord-games/AK11252
+  - type: cross-manufacturer-ean
+    ean: '8435568331341'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/ultra-matte-varnish-100-ml
+      - ret-goblingaming:ultra-matt-varnish-ak-3rd-gen-100ml
+  - type: ean-shared
     ean: '8435568338678'
     entities:
       - ak-interactive/ak-playmarkers-animal-green
+      - ak-interactive/playmarkers-animal-green-ak-playmarkers
       - warlord-games/AKM014
   - type: cross-manufacturer-ean
     ean: '8435568338678'
     keys:
       - legacy-catalog:warlord-games/bolt-action/general/animal-green-playmarker
+      - ret-goblingaming:playmarkers-animal-green-ak-playmarkers
       - ret-radaddel:ak-playmarkers-animal-green
   - type: paint-set-without-identity
     source: mfr-ak-interactive
