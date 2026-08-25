@@ -6,12 +6,14 @@ from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve import crossover
 
+from .lexicon import Lexicon
 from .rules import CategoryClause, SourceRules
 
 #: What decided a category, in the order this module tries them. Published on the record as
 #: `categoryBasis` alongside the resolver's own `stated`/`default`/`guessed`.
 MAPPED = "mapped"
 PAINT_BARCODE = "paint-barcode"
+LEXICON = "lexicon"
 
 
 @dataclass(frozen=True)
@@ -82,6 +84,8 @@ def decide(
     rules: Mapping[str, SourceRules],
     barcodes: Sequence[str],
     paint_barcodes: frozenset[str],
+    name: str = "",
+    lexicon: Lexicon | None = None,
 ) -> tuple[Decision | None, list[Conflict]]:
     """The decision for one undecided product, and anything a maintainer should look at.
 
@@ -94,6 +98,11 @@ def decide(
          one product by the party that sells it, while this is an inference drawn ACROSS the two
          catalogs. The weaker claim must not overrule the product pipeline's own evidence -- that
          is also the rule that keeps the two pipelines' CI from deadlocking (data-ci.yml header).
+      3. `lexicon` -- the published NAME matches a cross-source pattern. Last, because the first
+         two are statements about this product and this is an inference from how it is written.
+         It exists for the sources that publish no taxonomy at all: mfr-gw-trade is the sole
+         source for 3,330 undecided products and carries only a stock-section code, but its rows
+         are named `CODEX: SPACE WOLVES (HB) (FRANCAIS)`.
 
     A disagreement between the two is reported rather than silently resolved: it usually means a
     single pot is filed under a set's word, or a medium is filed as a paint, and both are worth a
@@ -152,5 +161,15 @@ def decide(
                     f"the paint catalog publishes this barcode, but {decision.why} says "
                     f"{decision.category}",
                 )
+            )
+
+    if lexicon is not None and (decision is None or decision.category is None):
+        entry = lexicon.match(name)
+        if entry is not None:
+            decision = Decision(
+                entry.category,
+                decision.packaging if decision else None,
+                LEXICON,
+                f"name matches /{entry.nameMatches}/",
             )
     return decision, conflicts

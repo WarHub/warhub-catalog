@@ -30,6 +30,7 @@ from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 from .decide import Conflict, Decision, _clause_hit, _signal, decide, flatten_hints
+from .lexicon import load_lexicon
 from .paints import load_paint_barcodes
 from .rules import SourceRules, load_category_rules
 
@@ -37,10 +38,23 @@ from .rules import SourceRules, load_category_rules
 #: and outranks any table; anything an override set is a maintainer's decision. Neither is touched.
 REPLACEABLE = frozenset({"guessed", "default"})
 
-#: Hint keys that carry a store's own taxonomy. Only these are counted in the unmapped ranking --
+#: Hint keys that carry a source's own taxonomy. Only these are counted in the unmapped ranking --
 #: `description` and `quantity` are facts about a product, not filing categories, and listing them
 #: would bury the values a rule could actually use.
-TAXONOMY_HINTS = ("productType", "categories", "tags", "breadcrumbs", "hierarchy.lvl1", "vendor")
+#:
+#: `tradeCategory` was MISSING from this tuple until 2026-08-25, and the omission mattered:
+#: mfr-gw-trade is the sole source for 3,330 undecided products, carries no Shopify-style taxonomy
+#: at all, and therefore reported an EMPTY worklist -- the largest single block of undecided
+#: products in the catalog looked like a source with nothing to offer. It carries 227 distinct
+#: tradeCategory values over 3,016 rows.
+#:
+#: `sscCode` is deliberately still absent. GW's stock-section code is 4,160 distinct values over
+#: 6,822 rows -- a near-unique-per-product identifier, not a taxonomy -- and listing it would put
+#: 40 rows of noise at the top of that source's worklist and push the values a rule could use off
+#: the end.
+TAXONOMY_HINTS = (
+    "productType", "categories", "tags", "breadcrumbs", "hierarchy.lvl1", "vendor", "tradeCategory",
+)
 
 #: How many unmapped values to list per source. The tail is a long one (ret-radaddel alone carries
 #: 7,281 distinct tags) and a file nobody opens is not a worklist.
@@ -102,10 +116,13 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
     rules = load_category_rules(paths.category_rules)
     vocabulary = load_vocabulary(paths.taxonomy)
     paint_barcodes = load_paint_barcodes(paths.paints)
+    lexicon = load_lexicon(paths.taxonomy)
     joined = joined_evidence(paths)
 
     # Validate the TABLES, not just their output: a clause naming an undeclared category that
     # happens to match nothing today would sit undetected until the day a store adds that value.
+    for index, entry in enumerate(lexicon.entries if lexicon else []):
+        vocabulary.check(entry.category, None, f"category-lexicon entry {index}")
     for table in rules.values():
         for index, clause in enumerate(table.clauses):
             vocabulary.check(clause.category, clause.packaging, f"{table.source} clause {index}")
@@ -138,7 +155,8 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 outcome.considered += 1
                 members = joined.entities.get(record.id) or []
                 decision, conflicts = decide(
-                    record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes
+                    record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes,
+                    record.name, lexicon,
                 )
                 outcome.conflicts.extend(conflicts)
                 if decision is not None and decision.category is not None:

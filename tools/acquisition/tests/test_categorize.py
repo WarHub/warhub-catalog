@@ -12,6 +12,7 @@ import pytest
 import yaml
 
 from warhub_acquisition.categorize.decide import decide, flatten_hints
+from warhub_acquisition.categorize.lexicon import Lexicon, LexiconEntry, load_lexicon
 from warhub_acquisition.categorize.paints import load_paint_barcodes
 from warhub_acquisition.categorize.rules import (
     CategoryClause,
@@ -419,6 +420,78 @@ def test_a_table_for_a_paint_source_is_refused(tmp_path: Path) -> None:
         categorize(paths)
 
 
+# --- the name lexicon -------------------------------------------------------------------------
+
+
+def test_a_lexicon_pattern_that_does_not_compile_is_rejected() -> None:
+    with pytest.raises(ValueError, match="does not compile"):
+        LexiconEntry(nameMatches="(unclosed", category="book", measured="n/a")
+
+
+def test_a_lexicon_entry_must_carry_its_measurement() -> None:
+    """Required here, unlike a rule table's optional `note`. A lexicon entry is the weakest signal
+    the stage acts on and the easiest to write carelessly, so the number that justified it belongs
+    in the file rather than in a commit message nobody will find."""
+    with pytest.raises(ValueError, match="measured"):
+        LexiconEntry(nameMatches="x", category="book")
+
+
+def test_lexicon_order_decides() -> None:
+    """First match wins, so a narrow pattern goes first. This is the real case: `INDEX CARDS: DARK
+    ANGELS` is a deck of reference cards, and the `INDEX` pattern would otherwise call 146 of them
+    books -- categories.yaml puts reference cards in `game-accessory`, "played with, not read"."""
+    lexicon = Lexicon(
+        reason="test",
+        entries=[
+            LexiconEntry(nameMatches=r"\bINDEX CARDS\b", category="game-accessory", measured="n/a"),
+            LexiconEntry(nameMatches=r"^\s*(CODEX|INDEX)\b", category="book", measured="n/a"),
+        ],
+    )
+    assert lexicon.match("INDEX CARDS: DARK ANGELS (ENG)").category == "game-accessory"
+    assert lexicon.match("INDEX: ADEPTA SORORITAS").category == "book"
+    assert lexicon.match("Some Space Marines") is None
+
+
+def test_the_lexicon_runs_only_when_nothing_stronger_did(tmp_path: Path) -> None:
+    """LAST, and only on products still resting on a fallback. A store's filing and the paint
+    catalog's barcode are statements about the product; a name pattern is an inference from how it
+    is written, so it may not overrule either."""
+    members = [_observation("ret-a:1", "ret-a", name="Big Brush 30ml", hints={"productType": "Bits"})]
+    rules = _rules(**{"ret-a": [{"category": "hobby-auxiliary", "hintEquals": {"productType": "Bits"}}]})
+    lexicon = Lexicon(
+        reason="test",
+        entries=[LexiconEntry(nameMatches=r"\b\d+\s?ML\b", category="paint", measured="n/a")],
+    )
+    kinds = {"ret-a": "retailer"}
+
+    mapped, _ = decide("e", members, kinds, rules, [], frozenset(), "Big Brush 30ml", lexicon)
+    assert (mapped.category, mapped.basis) == ("hobby-auxiliary", "mapped")
+
+    by_barcode, _ = decide("e", members, kinds, {}, ["7"], frozenset({"7"}), "Big Brush 30ml", lexicon)
+    assert (by_barcode.category, by_barcode.basis) == ("paint", "paint-barcode")
+
+    by_name, _ = decide("e", members, kinds, {}, [], frozenset(), "Big Brush 30ml", lexicon)
+    assert (by_name.category, by_name.basis) == ("paint", "lexicon")
+    assert by_name.why == r"name matches /\b\d+\s?ML\b/"
+
+
+def test_a_lexicon_entry_naming_an_undeclared_category_fails_the_run(tmp_path: Path) -> None:
+    paths = _seed(tmp_path)
+    write_yaml(
+        paths.taxonomy / "category-lexicon.yaml",
+        {"reason": "typo", "entries": [
+            {"nameMatches": "Mystery", "category": "mystery-box", "measured": "n/a"}]},
+    )
+    with pytest.raises(ValueError, match="not declared"):
+        categorize(paths)
+
+
+def test_a_missing_lexicon_is_not_an_error(tmp_path: Path) -> None:
+    paths = _seed(tmp_path)
+    assert load_lexicon(paths.taxonomy) is None
+    assert categorize(paths).decided == 2
+
+
 # --- the committed tables ---------------------------------------------------------------------
 
 
@@ -435,6 +508,15 @@ def test_every_committed_rule_file_names_a_real_source_and_declared_values() -> 
     )
     categories = {entry["slug"] for entry in vocabulary["categories"]}
     packagings = {entry["slug"] for entry in vocabulary["packaging"]}
+
+    lexicon_path = REPO_ROOT / "data/catalog/taxonomy/category-lexicon.yaml"
+    if lexicon_path.exists():
+        lexicon = load_lexicon(REPO_ROOT / "data/catalog/taxonomy")
+        assert lexicon.entries, "the lexicon exists but holds no entry"
+        for entry in lexicon.entries:
+            assert entry.category in categories, (
+                f"lexicon: category {entry.category!r} is not declared in categories.yaml"
+            )
 
     tables = load_category_rules(rules_dir)
     assert tables, "the rules directory exists but holds no table"

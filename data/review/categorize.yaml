@@ -1,13 +1,14 @@
 summary:
   products: 30771
-  undecided: 19442
+  undecided: 16725
   byBasis:
-    default: 7317
-    guessed: 12125
-    mapped: 9305
+    default: 7053
+    guessed: 9672
+    lexicon: 2710
+    mapped: 9312
     paint-barcode: 70
     stated: 1954
-  decidedThisRun: 9375
+  decidedThisRun: 12092
 conflicts:
   - entity: corvus-belli/aristeia-advanced-tactics-deck
     type: category-disagreement
@@ -219,87 +220,168 @@ unmapped:
       wouldDecide: 1
     - value: hierarchy.lvl1=Age of Sigmar > Ways to Play
       wouldDecide: 1
+  mfr-gw-trade:
+    - value: tradeCategory=E:B200a
+      wouldDecide: 146
+    - value: tradeCategory=E:B200b
+      wouldDecide: 95
+    - value: tradeCategory=BS:F
+      wouldDecide: 75
+    - value: tradeCategory=E:BL
+      wouldDecide: 23
+    - value: tradeCategory=40K - Generic
+      wouldDecide: 14
+    - value: tradeCategory=40K - Space Marines - Generic
+      wouldDecide: 13
+    - value: tradeCategory=AOS - Generic
+      wouldDecide: 11
+    - value: tradeCategory=WH Underworlds - Generic
+      wouldDecide: 8
+    - value: tradeCategory=40K - Xenos - Orks
+      wouldDecide: 8
+    - value: tradeCategory=Necromunda - Generic
+      wouldDecide: 8
+    - value: tradeCategory=AOS - Destruction - Gloomspite Gitz
+      wouldDecide: 7
+    - value: tradeCategory=Kill Team - Generic
+      wouldDecide: 6
+    - value: tradeCategory=AOS - Death - Nighthaunt
+      wouldDecide: 6
+    - value: tradeCategory=BS:A
+      wouldDecide: 6
+    - value: tradeCategory=AOS - Destruction - Ogor Mawtribes
+      wouldDecide: 3
+    - value: tradeCategory=Old World - Generic
+      wouldDecide: 3
+    - value: tradeCategory=AOS - Chaos - Hedonites Of Slaanesh
+      wouldDecide: 3
+    - value: tradeCategory=AOS - Chaos - Skaven
+      wouldDecide: 3
+    - value: tradeCategory=Chaos Daemons - Khorne
+      wouldDecide: 3
+    - value: tradeCategory=AOS - Death - Soulblight Gravelords
+      wouldDecide: 3
+    - value: tradeCategory=E:P210
+      wouldDecide: 3
+    - value: tradeCategory=AOS - Order - Cities Of Sigmar
+      wouldDecide: 2
+    - value: tradeCategory=AOS - Order - Stormcast Eternals
+      wouldDecide: 2
+    - value: tradeCategory=40K - Imperium - Astra Militarum
+      wouldDecide: 2
+    - value: tradeCategory=40K - Imperium - Adepta Sororitas
+      wouldDecide: 2
+    - value: tradeCategory=40K - Xenos - T'au Empire
+      wouldDecide: 2
+    - value: tradeCategory=40K - Imperium - Adeptus Custodes
+      wouldDecide: 2
+    - value: tradeCategory=E:P360
+      wouldDecide: 2
+    - value: tradeCategory=Brush - Shade
+      wouldDecide: 2
+    - value: tradeCategory=Brush - Dry
+      wouldDecide: 2
+    - value: tradeCategory=Hobby - Build - Basing Material
+      wouldDecide: 2
+    - value: tradeCategory=WH Quest - AOS
+      wouldDecide: 1
+    - value: tradeCategory=Old World - Grand Cathay
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Chaos - Disciples Of Tzeentch
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Chaos - Maggotkin Of Nurgle
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Order - Sylvaneth
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Order - Fyreslayers
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Death - Flesh-Eater Courts
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Order - Seraphon
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Order - Lumineth Realmlords
+      wouldDecide: 1
   mfr-manticgames:
     - value: categories=kings-of-war
       wouldDecide: 151
     - value: categories=vallejo
-      wouldDecide: 119
-    - value: categories=deals-fantasy
       wouldDecide: 97
+    - value: categories=deals-fantasy
+      wouldDecide: 95
     - value: categories=all-out-war-singles
       wouldDecide: 77
     - value: categories=dreadball
       wouldDecide: 74
-    - value: categories=painting-modelling
-      wouldDecide: 72
-    - value: categories=army-painter
-      wouldDecide: 65
     - value: categories=deadzone
-      wouldDecide: 63
+      wouldDecide: 62
+    - value: categories=painting-modelling
+      wouldDecide: 61
+    - value: categories=army-painter
+      wouldDecide: 60
     - value: categories=basilean
       wouldDecide: 47
     - value: categories=mantic-points-shop
       wouldDecide: 45
     - value: categories=tournaments
-      wouldDecide: 44
+      wouldDecide: 43
     - value: categories=kings-of-war-undead
       wouldDecide: 36
-    - value: categories=deals-and-offers
-      wouldDecide: 36
-    - value: categories=fantasy
-      wouldDecide: 36
     - value: categories=orc-miniatures
-      wouldDecide: 35
-    - value: categories=forces-of-nature
       wouldDecide: 35
     - value: categories=northern-alliance-kings-of-war
       wouldDecide: 35
     - value: categories=ogre-miniatures
       wouldDecide: 35
     - value: categories=dwarfs-miniatures
-      wouldDecide: 34
-    - value: categories=trident-realm-of-neritica
       wouldDecide: 33
-    - value: categories=accessories-army-painter
-      wouldDecide: 32
-    - value: categories=getting-started-kings-of-war
-      wouldDecide: 30
-    - value: categories=firefight-forge-fathers
-      wouldDecide: 30
+    - value: categories=forces-of-nature
+      wouldDecide: 33
+    - value: categories=deals-and-offers
+      wouldDecide: 33
+    - value: categories=trident-realm-of-neritica
+      wouldDecide: 31
     - value: categories=forces-of-the-abyss
       wouldDecide: 30
-    - value: categories=accessories-kings-of-war
+    - value: categories=getting-started-kings-of-war
       wouldDecide: 29
     - value: categories=salamanders
       wouldDecide: 29
-    - value: categories=goblin-miniatures
-      wouldDecide: 29
     - value: categories=abyssal-dwarf
       wouldDecide: 29
-    - value: categories=nightstalkers
+    - value: categories=firefight-forge-fathers
       wouldDecide: 29
-    - value: categories=firefight-asterians
+    - value: categories=accessories-army-painter
       wouldDecide: 28
-    - value: categories=kings-of-war-fiction
+    - value: categories=nightstalkers
+      wouldDecide: 28
+    - value: categories=goblin-miniatures
+      wouldDecide: 28
+    - value: categories=firefight-asterians
       wouldDecide: 27
-    - value: categories=forge-fathers
-      wouldDecide: 27
+    - value: categories=fantasy
+      wouldDecide: 26
+    - value: categories=accessories-kings-of-war
+      wouldDecide: 25
     - value: categories=teams
       wouldDecide: 25
-    - value: categories=halfling-miniatures
-      wouldDecide: 25
-    - value: categories=effects-and-texture
+    - value: categories=forge-fathers
       wouldDecide: 25
     - value: categories=books-kings-of-war
       wouldDecide: 24
-    - value: categories=elves
-      wouldDecide: 24
-    - value: categories=firefight-enforcers
-      wouldDecide: 24
-    - value: categories=xirkaali
-      wouldDecide: 24
-    - value: categories=dungeon-saga
+    - value: categories=halfling-miniatures
       wouldDecide: 23
+    - value: categories=dungeon-saga
+      wouldDecide: 22
+    - value: categories=firefight-enforcers
+      wouldDecide: 22
+    - value: categories=firefight-marauders
+      wouldDecide: 22
+    - value: categories=xirkaali
+      wouldDecide: 22
+    - value: categories=elves
+      wouldDecide: 21
+    - value: categories=firefight
+      wouldDecide: 21
   mfr-para-bellum:
     - value: categories=conquest
       wouldDecide: 322
@@ -430,25 +512,25 @@ unmapped:
       wouldDecide: 8
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 2566
+      wouldDecide: 2558
     - value: tags=us
-      wouldDecide: 2562
+      wouldDecide: 2554
     - value: vendor=Warlord Games
-      wouldDecide: 2550
+      wouldDecide: 2542
     - value: tags=over-10
-      wouldDecide: 1963
+      wouldDecide: 1958
     - value: tags=metal
-      wouldDecide: 1661
+      wouldDecide: 1660
     - value: tags=warlord-games
       wouldDecide: 934
     - value: tags=bolt-action
-      wouldDecide: 917
+      wouldDecide: 916
     - value: productType=Bolt Action
       wouldDecide: 871
     - value: tags=blister
-      wouldDecide: 634
+      wouldDecide: 629
     - value: tags=under-10
-      wouldDecide: 568
+      wouldDecide: 567
     - value: tags=infantry
       wouldDecide: 508
     - value: tags=direct
@@ -511,46 +593,30 @@ unmapped:
       wouldDecide: 184
   mfr-warmachine:
     - value: tags=digitalproduct
-      wouldDecide: 24
-    - value: vendor=Warmachine
-      wouldDecide: 14
+      wouldDecide: 23
     - value: productType=Digital Download
       wouldDecide: 14
+    - value: vendor=Warmachine
+      wouldDecide: 12
     - value: tags=5e
       wouldDecide: 12
     - value: tags=SFG Exclusive
       wouldDecide: 12
     - value: vendor=Iron Kingdoms
       wouldDecide: 12
-    - value: tags=no-stock-label
-      wouldDecide: 11
     - value: tags=free-resource
       wouldDecide: 11
     - value: productType=Free Resource
       wouldDecide: 9
+    - value: tags=no-stock-label
+      wouldDecide: 9
     - value: tags=build-instructions
       wouldDecide: 6
     - value: tags=wm-starters
-      wouldDecide: 3
-    - value: productType=Wargame
       wouldDecide: 2
+    - value: productType=Wargame
+      wouldDecide: 1
     - value: tags=WM-OP-KIT
-      wouldDecide: 1
-    - value: tags=Game_Iron Kingdoms
-      wouldDecide: 1
-    - value: tags=IsBook
-      wouldDecide: 1
-    - value: tags=gifts-for-collectors
-      wouldDecide: 1
-    - value: tags=gifts-for-competitive-players
-      wouldDecide: 1
-    - value: tags=gifts-for-new-players
-      wouldDecide: 1
-    - value: tags=gifts-for-story-lovers
-      wouldDecide: 1
-    - value: tags=gifts-under-50
-      wouldDecide: 1
-    - value: productType=Product
       wouldDecide: 1
   mfr-wyrd-store:
     - value: tags=NOPE
@@ -581,17 +647,17 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 589
+      wouldDecide: 569
     - value: breadcrumbs=Miniatures
-      wouldDecide: 579
+      wouldDecide: 561
     - value: breadcrumbs=Infinity
-      wouldDecide: 238
+      wouldDecide: 235
     - value: breadcrumbs=Kings of War
-      wouldDecide: 96
+      wouldDecide: 94
     - value: breadcrumbs=Marvel Crisis Protocol
-      wouldDecide: 92
-    - value: breadcrumbs=Malifaux
       wouldDecide: 83
+    - value: breadcrumbs=Malifaux
+      wouldDecide: 79
     - value: breadcrumbs=Panoceania
       wouldDecide: 30
     - value: breadcrumbs=Nomads
@@ -612,17 +678,17 @@ unmapped:
       wouldDecide: 18
     - value: breadcrumbs=Aleph
       wouldDecide: 14
-    - value: breadcrumbs=Terrain & Accessories
-      wouldDecide: 13
     - value: breadcrumbs=NA2
       wouldDecide: 13
+    - value: breadcrumbs=Terrain & Accessories
+      wouldDecide: 12
     - value: breadcrumbs=Games Workshop
       wouldDecide: 8
-    - value: breadcrumbs=Supplies
-      wouldDecide: 6
-    - value: breadcrumbs=Citadel Accessories & Supplies
-      wouldDecide: 6
     - value: breadcrumbs=Warcrow
+      wouldDecide: 4
+    - value: breadcrumbs=Supplies
+      wouldDecide: 4
+    - value: breadcrumbs=Citadel Accessories & Supplies
       wouldDecide: 4
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
@@ -704,81 +770,81 @@ unmapped:
       wouldDecide: 192
     - value: vendor=Warlord-BLISTER
       wouldDecide: 186
-    - value: vendor=Monument Hobbies
-      wouldDecide: 154
     - value: vendor=Warlord Games
-      wouldDecide: 153
+      wouldDecide: 150
     - value: tags=Hail Caesar
       wouldDecide: 148
     - value: vendor=Reaper Miniatures
       wouldDecide: 110
     - value: vendor=Warlord-WEB
       wouldDecide: 107
-    - value: vendor=GW-LOCAL
-      wouldDecide: 99
     - value: tags=Reaper Miniatures
       wouldDecide: 98
     - value: vendor=Mantic
       wouldDecide: 92
+    - value: vendor=Monument Hobbies
+      wouldDecide: 79
+    - value: vendor=GW-LOCAL
+      wouldDecide: 69
     - value: vendor=GW-OOP
-      wouldDecide: 72
+      wouldDecide: 68
     - value: productType=Paints & Supplies
       wouldDecide: 67
     - value: vendor=Green Stuff World
-      wouldDecide: 65
+      wouldDecide: 59
     - value: vendor=GW-Local
-      wouldDecide: 63
-    - value: tags=Green Stuff World
       wouldDecide: 49
     - value: tags=Dark Ages
       wouldDecide: 48
     - value: tags=Victory at Sea
       wouldDecide: 47
+    - value: tags=Green Stuff World
+      wouldDecide: 44
     - value: tags=Kings of War
       wouldDecide: 43
-    - value: tags=Amazon
-      wouldDecide: 35
-    - value: tags=Green Stuff World Supplies
-      wouldDecide: 34
     - value: tags=Enemies of Rome
       wouldDecide: 34
     - value: tags=German
       wouldDecide: 33
     - value: tags=British
       wouldDecide: 31
+    - value: tags=Green Stuff World Supplies
+      wouldDecide: 30
+    - value: tags=Amazon
+      wouldDecide: 28
     - value: tags=Italians
       wouldDecide: 28
     - value: tags=Black Library
-      wouldDecide: 27
-    - value: tags=Gamesworkshop
       wouldDecide: 25
     - value: tags=French
       wouldDecide: 25
-    - value: tags=GW Accessories
-      wouldDecide: 23
-    - value: tags=Space Marines
+    - value: tags=Gamesworkshop
       wouldDecide: 23
     - value: tags=Victory at Sea British
       wouldDecide: 23
-    - value: vendor=GW-WEB
-      wouldDecide: 22
     - value: tags=Romans
       wouldDecide: 21
     - value: tags=Ancients
       wouldDecide: 21
-    - value: tags=Green Stuff World Other
+    - value: vendor=GW-WEB
       wouldDecide: 19
     - value: tags=Americans
       wouldDecide: 19
+    - value: tags=GW Accessories
+      wouldDecide: 18
+    - value: tags=Space Marines
+      wouldDecide: 18
+    - value: tags=Green Stuff World Other
+      wouldDecide: 18
     - value: tags=Victory at Sea German
       wouldDecide: 18
-    - value: tags=warhammer preorder
-      wouldDecide: 17
-    - value: tags=Rules & Supplements
-      wouldDecide: 16
-    - value: tags=Kill Team
-      wouldDecide: 14
     - value: productType=Miniatures - Plastic
+      wouldDecide: 14
+    - value: tags=warhammer preorder
+      wouldDecide: 14
+    - value: tags=Black Powder
+      wouldDecide: 14
+    - value: tags=Soviet
       wouldDecide: 14
   seed-curated:
     - value: productType=single_kit

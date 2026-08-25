@@ -45,24 +45,31 @@ class CanonicalProduct(BaseModel):
     #   mapped         categorize/decide.py -- a committed rule table over the taxonomy the selling
     #                  store itself published for this product.
     #   paint-barcode  categorize/decide.py -- the paint catalog publishes this product's barcode.
+    #   lexicon        categorize/decide.py -- the published NAME matches a cross-source pattern
+    #                  (data/catalog/taxonomy/category-lexicon.yaml). Weakest of the three, tried
+    #                  last, and the only one available to a source that publishes no taxonomy at
+    #                  all -- mfr-gw-trade carries nothing but a stock-section code and names like
+    #                  `CODEX: SPACE WOLVES (HB) (FRANCAIS)`.
     #
     # `default` and `guessed` both mean UNDECIDED and are the pair report.py counts (UNDECIDED_BASES).
     # They are kept apart because a `default` row came in from an import whose own evidence could
     # re-decide it, while a `guessed` row never had anything.
     #
-    # MEASURED, on the tree this stage first ran against (30,771 products, 2026-08-25):
+    # MEASURED, over 30,771 products on 2026-08-25:
     #
     #                   before categorize   after
-    #   undecided            28,817 (93.6%)   20,744 (67.4%)
-    #   of which guessed     16,735           12,641
-    #   of which default     12,082            8,103
+    #   undecided            28,817 (93.6%)   16,725 (54.4%)
+    #   of which guessed     16,735            9,672
+    #   of which default     12,082            7,053
     #
-    # and 3,783 products stopped claiming to be miniatures -- 2,478 of them paints.
+    # and 7,199 products stopped claiming to be miniatures -- 4,286 paints, 1,092 books, 887 dice
+    # and cards, 277 terrain, 85 merch, 52 board games, 9 event tickets.
     #
-    # NOT PUBLISHED YET, deliberately. The value set is still growing (a name lexicon and a
-    # manufacturer code-class table are the next two), and publishing a field whose vocabulary is
-    # about to change would churn the consumer contract repeatedly for one feature. It lives in the
-    # archive now, where it is free to evolve, and gets published once stable.
+    # NOT PUBLISHED YET, deliberately. The value set is still growing -- a manufacturer code-class
+    # table is the next one, measured at 100% purity for GW's `60040`/`60100`/`60030` (books) and
+    # `99189` (paints) -- and publishing a field whose vocabulary is about to change would churn
+    # the consumer contract repeatedly for one feature. It lives in the archive now, where it is
+    # free to evolve, and gets published once stable.
     categoryBasis: str | None = None
     packaging: str | None = None
     quantity: int | None = None

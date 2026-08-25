@@ -56,6 +56,15 @@ clauses:
   - category: terrain
     hintEquals: {productType: Scenery}
 
+  # BEFORE `Rules Supplements`, which is where Goblin Gaming files Kill Team's datacard decks
+  # alongside its actual supplements. A `mapped` decision outranks the name lexicon, so the
+  # lexicon's own datacards entry cannot correct this one -- the narrow clause has to live here.
+  # data/catalog/taxonomy/category-lexicon.yaml carries the canonical pattern and the reasoning;
+  # this is the same rule applied one layer earlier, for the ~8 rows the shelf mislabels.
+  - category: game-accessory
+    nameMatches: '\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b'
+    note: reference cards are played with, not read -- categories.yaml `book` boundary
+
   - category: book
     hintEquals: {productType: Rules Supplements}
   - category: book

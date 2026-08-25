@@ -1,0 +1,91 @@
+reason: >-
+  What a product's own NAME says, when no source publishes a taxonomy that says it. This is the
+  last thing the categorize stage tries and the weakest signal it acts on -- a store's per-product
+  filing and the paint catalog's barcode are both statements about the product, while a name
+  pattern is an inference from how the product is written.
+
+
+  IT EXISTS FOR THE SOURCES THAT PUBLISH NOTHING ELSE. mfr-gw-trade is the sole source for 3,330
+  undecided products and carries only a stock-section code (4,160 distinct values over 6,822 rows
+  -- an identifier, not a taxonomy) and a shipping-box code. What it does carry is names:
+  `CODEX: SPACE WOLVES (HB) (FRANCAIS)`, `B: KHORNE RED 12ML JUC X6`, `WHITE DWARF 521 (FEB-26)`.
+
+
+  EVERY ENTRY CARRIES ITS MEASUREMENT and that field is required, unlike a rule table's optional
+  note. `measured` is: how many still-undecided products the pattern reaches, and how it scored
+  against the products some OTHER evidence had already decided. Re-derive with
+  scripts/measure_category_rules.py. Figures below are from 2026-08-25 over 30,771 products.
+
+
+  THE COLOURLESS AGENTS ARE DELIBERATELY ABSENT, and this is the judgement in the file most worth
+  understanding. `\bVARNISH\b`, `\bTHINNER\b`, `\bRETARDER\b`, `\bMEDIUM\b` and `\bFLOW IMPROVER\b`
+  all look like obvious `hobby-auxiliary` entries by the boundary categories.yaml draws -- colour
+  is the test, and none of them deposit any. Measured, they score 0%, 23%, 0%, 14% and 0%: the
+  committed evidence overwhelmingly calls them `paint` already. That is not the patterns being
+  wrong, it is the boundary being UNDER ADJUDICATION -- categories.yaml says so in as many words,
+  records that GW's Lahmian Medium publishes `paint` while AK's identical thinners publish
+  `hobby-auxiliary`, and states that a source's own claim wins until a human moves it. A lexicon
+  entry here would settle that quietly, in the direction of a rule nobody agreed to. So the `ML`
+  pattern below will call a 60ml thinner a paint, exactly as the stated evidence already does, and
+  the boundary stays where a human can see it. `\bMEDIUM\b` is additionally a trap: 75 of its 125
+  controls are paints whose COLOUR NAME contains the word (Medium Sea Grey, Medium Blue).
+
+entries:
+  # `event` earns its place in the vocabulary here. categories.yaml added it provisionally with a
+  # note that it must justify itself or be deleted; these are the products that justify it, and all
+  # nine are genuine ticket rows (Mantic Open Day, Clash of Kings, Adepticon, Warmachine Nationals).
+  - nameMatches: '\bTICKET\b'
+    category: event
+    measured: >-
+      reaches 9 undecided; no independently-decided control exists (nothing in the catalog is
+      stated `event`), so this rests on reading all nine names rather than on a score
+
+  # BEFORE the book patterns, and that ordering is the whole reason this entry exists. `INDEX
+  # CARDS: DARK ANGELS (ENG)` is a deck of reference cards, and the entry below matches `INDEX` at
+  # the start of a name; without this line 146 card decks published as `book`. categories.yaml
+  # settles it in as many words -- "Reference CARDS (datacards, stat cards) are `game-accessory`
+  # -- they are played with, not read."
+  - nameMatches: '\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b'
+    category: game-accessory
+    measured: >-
+      reaches 146 undecided; of 92 controls 25 agree and 67 say `book` -- but every one of those
+      67 is this stage's OWN earlier output (the `INDEX` entry below, and goblingaming's `Rules
+      Supplements` shelf), not independent evidence. Judged on the vocabulary's explicit text
+      rather than on that number; found by reading a sample of what the `INDEX` entry decided
+
+  - nameMatches: '^\s*(CODEX|BATTLETOME|INDEX)\b'
+    category: book
+    measured: reaches 311 undecided; 45 controls, 45 agree (100%)
+  - nameMatches: '\bWHITE DWARF\b'
+    category: book
+    measured: reaches 143 undecided; 8 controls, 8 agree (100%)
+  - nameMatches: '\b(RULEBOOK|RULES MANUAL|CORE BOOK|ARMY BOOK|NOVEL|OMNIBUS|ANTHOLOGY)\b'
+    category: book
+    measured: reaches 143 undecided; 134 controls, 134 agree (100%)
+
+  - nameMatches: '\b(T-SHIRT|HOODIE|MUG|POSTER|KEYRING|PIN BADGE|TOTE BAG)\b'
+    category: merch
+    measured: reaches 27 undecided; 37 controls, 37 agree (100%)
+
+  - nameMatches: '\bOBJECTIVE MARKERS?\b'
+    category: game-accessory
+    measured: reaches 5 undecided; 1 control, 1 agrees
+  - nameMatches: '\bDICE\b'
+    category: game-accessory
+    measured: >-
+      reaches 348 undecided; 95 controls, 89 agree (94%) -- the six misses are 3 miniatures and 2
+      merch rows whose names contain the word
+
+  - nameMatches: '\bTERRAIN\b'
+    category: terrain
+    measured: reaches 37 undecided; 116 controls, 113 agree (97%)
+
+  # LAST, because it is the broadest. A volume in the name is how essentially every paint in this
+  # catalog is written, and the misses are the contested colourless agents discussed in the header
+  # plus basing materials sold by volume.
+  - nameMatches: '\b\d+\s?ML\b'
+    category: paint
+    measured: >-
+      reaches 1,550 undecided; 2,489 controls, 2,437 agree (98%) -- the 52 misses are 29 basing
+      materials legacy-catalog states as `terrain` and 23 thinners/cleaners/glues, i.e. the
+      colourless boundary this file deliberately does not decide

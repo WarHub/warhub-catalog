@@ -144,17 +144,21 @@ data/
 2. **`categorize`** runs immediately after every `resolve`, in the same job, and decides what a
    product IS. `resolve` sets `category` from a source's own claim where one exists and falls back
    to `miniatures` otherwise, recording which happened in `categoryBasis`; `categorize` then
-   replaces the fallbacks -- and only the fallbacks -- from two kinds of evidence the resolver
-   does not read. The first is each store's own taxonomy, stored verbatim at harvest time and
-   mapped by a committed table per source under
-   `data/catalog/taxonomy/category-rules/<source>.yaml`. The second is the paint catalog's
-   barcodes, read live from `data/paints/` rather than through an index, so a paint that gained a
-   barcode last night cannot keep yesterday's guess. A store's filing about one product outranks
-   the cross-catalog inference; where the two disagree the product keeps the store's answer and
-   the disagreement is written to `data/review/categorize.yaml` for a human, alongside the ranked
-   list of raw store values that would decide the most still-undecided products. **Anywhere
-   `resolve` runs, `categorize` must run after it** -- `resolve` rewrites every product file, so a
-   run that skips it republishes decided products as guesses.
+   replaces the fallbacks -- and only the fallbacks -- from three kinds of evidence the resolver
+   does not read, in this order. First, each store's own taxonomy, stored verbatim at harvest time
+   and mapped by a committed table per source under
+   `data/catalog/taxonomy/category-rules/<source>.yaml`. Second, the paint catalog's barcodes,
+   read live from `data/paints/` rather than through an index, so a paint that gained a barcode
+   last night cannot keep yesterday's guess. Third, the product's own name, against a cross-source
+   lexicon (`data/catalog/taxonomy/category-lexicon.yaml`) -- weakest, and the only signal
+   available for a source that publishes no taxonomy at all. A store's filing about one product
+   outranks the cross-catalog inference, which outranks the name; where the first two disagree the
+   product keeps the store's answer and the disagreement is written to
+   `data/review/categorize.yaml` for a human, alongside the ranked list of raw store values that
+   would decide the most still-undecided products. Every rule carries the measurement that
+   justified it, re-derivable with `scripts/measure_category_rules.py`. **Anywhere `resolve` runs,
+   `categorize` must run after it** -- `resolve` rewrites every product file, so a run that skips
+   it republishes decided products as guesses.
 3. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
    duplicate-entity adjudication go through **`classify.yml`**, a **`workflow_dispatch`-only**
    workflow (never scheduled — LLM spend stays human-triggered) with a `mode` input:
