@@ -173,6 +173,48 @@ def test_repo_matches_and_overrides_parse_when_present() -> None:
         SetRefs.model_validate(read_yaml(paths.set_refs))
 
 
+def test_every_published_product_is_reachable_from_the_evidence_it_was_built_from() -> None:
+    """THE INVARIANT TWO STAGES SILENTLY DEPEND ON, asserted over the committed data.
+
+    `resolve_catalog` returns finished records and keeps none of the raw per-source hints, so
+    `classify/queue.py` and `categorize/stage.py` both replay the join to recover an entity's
+    members and then look each published product up by id. Every id must be on both sides or the
+    stage is quietly working on a different catalog than the one that is published: the queue
+    raises, and categorize reaches NO rule table for the products it cannot find -- which looks
+    exactly like a store that publishes no taxonomy.
+
+    It has already been false once. The nightly merge #35 left `build_queue` raising on
+    `army-painter/CP3001`, because the queue joined every observation in the store where the
+    resolver joins only product sources plus the paint rows that cross over, and the extra members
+    changed which product code won the identity ordering (`select_product_observations` is now the
+    single selection both use). That was caught by a test which happened to cover only
+    null-gameSystem products; this covers all 30,771.
+
+    Cheap enough to be worth the coverage: it replays a join the suite already performs elsewhere
+    and compares two id sets.
+    """
+    paths = _require_repo_data()
+    if not paths.catalog_products.exists():
+        pytest.skip("data/catalog/products/ not present")
+    from warhub_acquisition.resolve.resolver import joined_evidence
+
+    published = {
+        record["id"]
+        for path in sorted(paths.catalog_products.glob("*.yaml"))
+        for record in (read_yaml(path) or {}).get("products") or []
+    }
+    joined = set(joined_evidence(paths).entities)
+    assert not (published - joined), (
+        f"{len(published - joined)} published products have no joined evidence under their own id, "
+        f"e.g. {sorted(published - joined)[:5]}. Re-resolve, or check that every replay of the "
+        f"join goes through select_product_observations."
+    )
+    assert not (joined - published), (
+        f"{len(joined - published)} joined entities are not published, e.g. "
+        f"{sorted(joined - published)[:5]}. Committed catalog is stale -- run `warhub-data resolve`."
+    )
+
+
 def test_every_paint_source_reaches_the_paint_catalog() -> None:
     """A harvested paint source that no bridge reads is evidence nobody consumes.
 

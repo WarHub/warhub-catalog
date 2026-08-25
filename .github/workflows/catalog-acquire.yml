@@ -551,6 +551,28 @@ jobs:
           set -e
           cat ../../_resolve.txt
 
+      # ALWAYS AFTER `resolve`, ALWAYS BEFORE `report`. `resolve` rewrites every product file from
+      # evidence, which resets `category` to the fallback for anything no source stated; this stage
+      # is what puts the decided values back, from the committed rule tables and the paint catalog.
+      # A run that resolves and does not categorize publishes 8,073 products as guessed miniatures
+      # that the tables can place -- so the two are one pipeline, not two optional steps. `report`
+      # follows so the coverage table in the PR body describes the tree that is about to be
+      # committed rather than the intermediate one.
+      #
+      # Exit 2 = disagreements found, and it is REVIEW MATERIAL, not a failure -- the same
+      # convention `resolve` uses for its own conflicts. Two stores disagreeing about what a
+      # product is says something true about the stores; stopping the catalog for it would be
+      # refusing to publish a fact. The findings land in data/review/categorize.yaml.
+      - name: Categorize products
+        id: categorize
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run warhub-data categorize --data ../../data > ../../_categorize.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat ../../_categorize.txt
+
       - name: Coverage report
         id: report
         working-directory: tools/acquisition
@@ -682,6 +704,17 @@ jobs:
               echo "> :warning: \`resolve\` exited ${{ steps.resolve.outputs.exit_code }} (expected 0 or 2)."
             fi
             echo
+            echo "### Categorize"
+            echo
+            cat _categorize.txt
+            if [ "${{ steps.categorize.outputs.exit_code }}" = "2" ]; then
+              echo
+              echo "> Disagreements found -- see \`data/review/categorize.yaml\`; review material, not a failure."
+            elif [ "${{ steps.categorize.outputs.exit_code }}" != "0" ]; then
+              echo
+              echo "> :warning: \`categorize\` exited ${{ steps.categorize.outputs.exit_code }} (expected 0 or 2)."
+            fi
+            echo
             echo "### Coverage report"
             echo
             cat _report.txt
@@ -754,9 +787,10 @@ jobs:
       #      but never actually read anywhere. Now any unexpected exit code fails the job loudly.
       #   2. the confirmed-EAN guard's own exit-5 "hits found" case, unchanged in substance from
       #      before, just folded into this single combined check.
-      - name: Fail job on unexpected resolve/report/guard exit codes or failing data tests
+      - name: Fail job on unexpected resolve/categorize/report/guard exit codes or failing data tests
         run: |
           resolve_exit="${{ steps.resolve.outputs.exit_code }}"
+          categorize_exit="${{ steps.categorize.outputs.exit_code }}"
           report_exit="${{ steps.report.outputs.exit_code }}"
           guard_exit="${{ steps.guard.outputs.exit_code }}"
           datatests_exit="${{ steps.datatests.outputs.exit_code }}"
@@ -780,6 +814,15 @@ jobs:
 
           if [ "$resolve_exit" != "0" ] && [ "$resolve_exit" != "2" ]; then
             echo "::error::resolve exited $resolve_exit (expected 0 or 2) -- possible crash, possibly mid-write. See the sticky PR body / job log for details."
+            crashed=1
+          fi
+
+          # Same contract as resolve: {0, 2}. An undeclared category in a rule table, or a table
+          # naming a source that does not exist, raises rather than publishing a value nobody
+          # defined -- and a mid-write crash there leaves the catalog half-categorized, which is
+          # exactly the state that must not reach a PR body reading "clean".
+          if [ "$categorize_exit" != "0" ] && [ "$categorize_exit" != "2" ]; then
+            echo "::error::categorize exited $categorize_exit (expected 0 or 2) -- possible crash, possibly mid-write. See the sticky PR body / job log for details."
             crashed=1
           fi
 

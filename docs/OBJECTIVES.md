@@ -26,8 +26,10 @@ source's provenance, never from the fact of overlap.
 
 **5. Evidence is the truth; the catalog is derived.** A source's claim stays that source's claim.
 Conflicts and refusals are recorded, never guessed — a number that hides what it could not decide
-is worse than one that admits it.
-— `README.md` "Pipeline"; `tools/acquisition/scripts/gen_set_contents.py`
+is worse than one that admits it. Where a field has a fallback behind it, the record says so, so
+the guess can be counted instead of assumed away.
+— `README.md` "Pipeline"; `tools/acquisition/scripts/gen_set_contents.py`;
+`CanonicalProduct.categoryBasis` and the `categorize` stage that shrinks it
 
 **6. Take politely; publish only what we may.** Honour robots and per-source rate limits. Source
 terms bind what may be published at all — unreleased product information and wholesale pricing stay

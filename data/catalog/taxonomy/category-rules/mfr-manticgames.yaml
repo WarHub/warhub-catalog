@@ -1,0 +1,50 @@
+source: mfr-manticgames
+reason: >-
+  manticgames.com is WooCommerce and emits its category SLUGS, 197 distinct over 2,278 rows. Only
+  a minority answer the format question: `kings-of-war` (157), `deadzone` (69), `dreadball` (76)
+  and the ~120 faction slugs (`basilean`, `nightstalkers`, `forge-fathers`) name a game line or an
+  army, and a game line contains rulebooks, dice and terrain as readily as models. Counts from
+  data/evidence/products/mfr-manticgames/observations.jsonl on 2026-08-25.
+
+
+  THE BRAND SLUGS ARE NOT CATEGORIES EITHER, and they are the trap this file exists to avoid.
+  `army-painter` (219) and `vallejo` (152) are the two largest slugs after `painting-modelling`,
+  and it is tempting to read them as "paint" because both companies make paint. Mantic resells
+  their brushes, tools, primers and basing materials under the same slug. The slug says WHO MADE
+  IT; `paint` (158), `game-color` and `colour-forge` say what it is.
+
+
+  `painting-modelling` (244) IS UNMAPPED for the same reason: it is the department that CONTAINS
+  the paint slugs and the tool slugs alike, so a product carrying it and nothing narrower has told
+  us only that it is hobby-related. The narrow slugs are ordered first here so a product in both
+  is decided by the narrow one.
+
+
+  The `*-terrain-crate` family is the one place a game line does answer the question -- TerrainCrate
+  is a terrain product line, not a game, so every slug naming it is terrain by construction.
+
+clauses:
+  # --- paint: the slugs that name a paint RANGE, not a manufacturer ------------------------------
+  - category: paint
+    hintContainsAny: {categories: [paint]}
+  - category: paint
+    hintContainsAny: {categories: [game-color]}
+    note: Vallejo's Game Color range
+  - category: paint
+    hintContainsAny: {categories: [colour-forge]}
+    note: Mantic's own paint range
+
+  # --- terrain: TerrainCrate is a product line whose whole content is terrain --------------------
+  #
+  # `terraincrate-battlefields` (37) IS DELIBERATELY ABSENT from this list, and it is the one slug
+  # here that names a shelf rather than a product line. Mantic's Battlefields range is neoprene
+  # gaming mats, and categories.yaml is explicit that a neoprene playmat is `game-accessory` -- "it
+  # is a play surface, not modelled scenery". Including it put `6ft x 4ft Jungle Neoprene Gaming
+  # Mat` under `terrain`, which is how it was found.
+  - category: terrain
+    hintContainsAny:
+      categories:
+        - terrain-crate
+        - modern-terrain-crate
+        - terrain-sci-fi-terrain-crate
+        - featured-products-terrain-crate

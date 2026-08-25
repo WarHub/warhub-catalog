@@ -1,0 +1,34 @@
+source: mfr-steamforged
+reason: >-
+  steamforged.com files 246 of its 598 observations under 9 `product_type` values. The store's
+  catalogue is unusual for this repo -- roughly half of what it lists is not a physical good at
+  all: `Free Resource` (92) and `Digital Download` (22) are PDFs and print-and-play files, which
+  is why `digital` is the packaging value this source exercises hardest. Counts from
+  data/evidence/products/mfr-steamforged/observations.jsonl on 2026-08-25.
+
+
+  `Expansion` (23) IS UNMAPPED and it is the interesting one. Steamforged sells both board-game
+  expansions (a box of cards and tokens) and miniature expansions for Godtear and Guild Ball under
+  the same word, and nothing in the row separates them. Guessing would put ~23 products in the
+  wrong half of the vocabulary's clearest boundary; leaving it keeps them in the review file's
+  worklist where a `vendor` or name rule can decide them later. `Product` (8) says nothing.
+
+clauses:
+  - category: miniatures
+    hintEquals: {productType: Miniatures}
+  - category: board-game
+    hintEquals: {productType: Board Game}
+  - category: board-game
+    hintEquals: {productType: Card Game}
+  - category: book
+    hintEquals: {productType: Roleplaying Game}
+    note: Steamforged's RPG line is the Dark Souls / Elden Ring rulebooks
+  - category: game-accessory
+    hintEquals: {productType: Accessories}
+  - packaging: digital
+    hintEquals: {productType: Digital Download}
+  - packaging: digital
+    hintEquals: {productType: Free Resource}
+    note: >-
+      no category: the free shelf carries rules PDFs, print-and-play sheets and reference cards
+      together, and only the form is certain

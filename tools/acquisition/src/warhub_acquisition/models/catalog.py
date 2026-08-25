@@ -33,23 +33,43 @@ class CanonicalProduct(BaseModel):
     #
     # `category` is the only published product field with a fallback behind it, so a wrong value
     # there is invisible by construction: every product has one, it just is not necessarily about
-    # that product. Measured on catalog/acquisition (fc3ff62), 2026-08-21, over 30,747 products:
+    # that product. The values, and who writes each:
     #
-    #   stated   1,954  ( 6.4%)  a source asserted it (paint 1,594, terrain 148, paint-set 114,
-    #                            book 98)
-    #   default 12,082  (39.3%)  legacy-catalog's `miniatures` fill won the fold -- an upstream
-    #                            pipeline's placeholder, not a claim (SourceDescriptor.defaultHints)
-    #   guessed 16,711  (54.4%)  nothing said anything; resolve/attributes.py wrote `miniatures`
+    #   stated         resolve/attributes.py -- a source asserted this category for this product.
+    #   default        resolve/attributes.py -- the winning source emits this exact value as a
+    #                  pipeline FILL rather than a claim (SourceDescriptor.defaultHints). Today
+    #                  that is legacy-catalog's blanket `miniatures`, which is `kind: curated` and
+    #                  so outranks every manufacturer and retailer.
+    #   guessed        resolve/attributes.py -- nothing said anything and the fallback wrote
+    #                  `miniatures`.
+    #   mapped         categorize/decide.py -- a committed rule table over the taxonomy the selling
+    #                  store itself published for this product.
+    #   paint-barcode  categorize/decide.py -- the paint catalog publishes this product's barcode.
+    #   lexicon        categorize/decide.py -- the published NAME matches a cross-source pattern
+    #                  (data/catalog/taxonomy/category-lexicon.yaml). Weakest of the three, tried
+    #                  last, and the only one available to a source that publishes no taxonomy at
+    #                  all -- mfr-gw-trade carries nothing but a stock-section code and names like
+    #                  `CODEX: SPACE WOLVES (HB) (FRANCAIS)`.
     #
-    # So 93.6% of the catalog's categories rest on no evidence at all. Both `default` and `guessed`
-    # mean UNDECIDED; they differ only in who wrote the placeholder, and that distinction is worth
-    # keeping because a `default` row came in from an import whose own evidence could re-decide it,
-    # while a `guessed` row never had anything.
+    # `default` and `guessed` both mean UNDECIDED and are the pair report.py counts (UNDECIDED_BASES).
+    # They are kept apart because a `default` row came in from an import whose own evidence could
+    # re-decide it, while a `guessed` row never had anything.
     #
-    # NOT PUBLISHED YET, deliberately. The value set grows when the categorize stage lands (`mapped`
-    # from a source's raw taxonomy, `derived` from a rule, `llm`, `curated`), and publishing a field
-    # whose vocabulary is about to change would churn the consumer contract twice for one feature.
-    # It lives in the archive now, where it is free to evolve, and gets published once stable.
+    # MEASURED, over 30,771 products on 2026-08-25:
+    #
+    #                   before categorize   after
+    #   undecided            28,817 (93.6%)   16,725 (54.4%)
+    #   of which guessed     16,735            9,672
+    #   of which default     12,082            7,053
+    #
+    # and 7,199 products stopped claiming to be miniatures -- 4,286 paints, 1,092 books, 887 dice
+    # and cards, 277 terrain, 85 merch, 52 board games, 9 event tickets.
+    #
+    # NOT PUBLISHED YET, deliberately. The value set is still growing -- a manufacturer code-class
+    # table is the next one, measured at 100% purity for GW's `60040`/`60100`/`60030` (books) and
+    # `99189` (paints) -- and publishing a field whose vocabulary is about to change would churn
+    # the consumer contract repeatedly for one feature. It lives in the archive now, where it is
+    # free to evolve, and gets published once stable.
     categoryBasis: str | None = None
     packaging: str | None = None
     quantity: int | None = None

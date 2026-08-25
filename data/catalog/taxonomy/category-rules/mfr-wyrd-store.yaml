@@ -1,0 +1,176 @@
+source: mfr-wyrd-store
+reason: >-
+  wyrd-games.net files 618 observations under 62 `product_type` values, and unusually its values
+  are game line AND format at once -- "Malifaux Miniatures", "The Other Side Fate Deck",
+  "Vagrantsong Apparel". The format half is what is read here; the game-line half already has a
+  home in data/catalog/mappings/mfr-wyrd-store.yaml. Because the two are fused, every clause is an
+  exact value and the table is long rather than clever: 47 of the 62 values, covering 604 of the
+  618 rows. Counts from data/evidence/products/mfr-wyrd-store/observations.jsonl on 2026-08-25.
+
+
+  IT IS THE ONLY SOURCE THAT EXERCISES `merch`, and that is what makes it worth mapping in full
+  despite its size. Wyrd sells apparel, patches, keychains, plush toys, posters, jigsaw puzzles
+  and colouring books beside its miniatures; under the old fallback every one of them published as
+  `miniatures`. A vocabulary value with no source behind it is a value nobody can check.
+
+
+  A BOX OF MINIATURES IS `miniatures`, WHATEVER WYRD CALLS THE BOX. "Malifaux Core Box", "Keyword
+  Box", "Iconic Box", "Versatile Box", "Faction Pack", "Starter Box", "Unit Box", "Character Box",
+  "Titan Box", "Allegiance Box" are all crews of models; `packaging` is where the box-ness belongs
+  and categories.yaml says so explicitly ("a model kit stays `miniatures` however many models are
+  in the box -- count and form are the `packaging` axis, not this one"). They are mapped to
+  (miniatures, set), which is the one packaging inference this file makes and it makes it only
+  where the value literally contains the word.
+
+
+  UNMAPPED: "Product" and "Wargame" say nothing; "Vagrantsong Iconic", "Malifaux Rotten Harvest
+  Limited Edition" and "Vagrantsong Expansion" name an edition rather than a thing; "Gift Card"
+  is neither a good nor an event.
+
+clauses:
+  # --- miniatures, loose and boxed ---------------------------------------------------------------
+  - category: miniatures
+    hintEquals: {productType: Malifaux Miniatures}
+  - category: miniatures
+    hintEquals: {productType: Malifaux Classics}
+  - category: miniatures
+    hintEquals: {productType: Malifaux and The Other Side Miniatures}
+  - category: miniatures
+    hintEquals: {productType: The Other Side Miniatures}
+  - category: miniatures
+    hintEquals: {productType: Through the Breach Miniatures}
+  - category: miniatures
+    hintEquals: {productType: Vagrantsong Miniatures}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Malifaux Core Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Malifaux Keyword Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Malifaux Iconic Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Malifaux Versatile Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Malifaux Starter Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: Malifaux Faction Pack}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: The Other Side Unit Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: The Other Side Character Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: The Other Side Titan Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: The Other Side Allegiance Box}
+  - category: miniatures
+    packaging: set
+    hintEquals: {productType: The Other Side Starter Box}
+
+  # --- terrain and hobby ---------------------------------------------------------------------------
+  - category: terrain
+    hintEquals: {productType: Wyrdscapes Terrain}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Bases & Accessories}
+  - category: hobby-auxiliary
+    hintEquals: {productType: The Other Side Bases & Accessories}
+  - category: paint-set
+    packaging: set
+    hintEquals: {productType: Miniature Paint Set}
+
+  # --- read ---------------------------------------------------------------------------------------
+  - category: book
+    hintEquals: {productType: Malifaux Faction Book}
+  - category: book
+    hintEquals: {productType: Malifaux Book}
+  - category: book
+    hintEquals: {productType: Malifaux Rules Manual}
+  - category: book
+    hintEquals: {productType: The Other Side Rulebook}
+  - category: book
+    hintEquals: {productType: The Other Side Expansion Book}
+  - category: book
+    hintEquals: {productType: Through the Breach Penny Dreadful}
+  - category: book
+    hintEquals: {productType: Through the Breach Expansion Book}
+  - category: book
+    hintEquals: {productType: Through the Breach Core Rulebook}
+  - category: book
+    hintEquals: {productType: Vagrantsong Rulebook}
+  - category: book
+    hintEquals: {productType: Evil Baby Orphanage Book}
+  - category: book
+    hintEquals: {productType: Coloring Book}
+    note: >-
+      a colouring book's content is not text, but categories.yaml puts art books under `book` and
+      splitting a 2-row shelf off from that would be a distinction no consumer could use
+  - category: book
+    packaging: digital
+    hintEquals: {productType: Digital PDF}
+
+  # --- played with --------------------------------------------------------------------------------
+  - category: game-accessory
+    hintEquals: {productType: Malifaux Fate Deck}
+  - category: game-accessory
+    hintEquals: {productType: The Other Side Fate Deck}
+  - category: game-accessory
+    hintEquals: {productType: Evil Baby Orphanage Fate Deck}
+  - category: game-accessory
+    hintEquals: {productType: Strategy & Scheme Deck}
+  - category: game-accessory
+    hintEquals: {productType: Through the Breach Spell Deck}
+  - category: game-accessory
+    hintEquals: {productType: Card Game Accessory}
+  - category: game-accessory
+    hintEquals: {productType: Vagrantsong Accessory}
+
+  # --- standalone games ---------------------------------------------------------------------------
+  - category: board-game
+    hintEquals: {productType: Board Game}
+  - category: board-game
+    hintEquals: {productType: Vagrantsong Board Game}
+  - category: board-game
+    hintEquals: {productType: Board Game Expansion}
+  - category: board-game
+    hintEquals: {productType: Vagrantsong Scenario Expansion}
+  - category: board-game
+    hintEquals: {productType: Card Game}
+  - category: board-game
+    hintEquals: {productType: Party Card Game}
+  - category: board-game
+    hintEquals: {productType: Tile Game}
+
+  # --- merchandise --------------------------------------------------------------------------------
+  - category: merch
+    hintEquals: {productType: Apparel}
+  - category: merch
+    hintEquals: {productType: Malifaux Apparel}
+  - category: merch
+    hintEquals: {productType: The Other Side Apparel}
+  - category: merch
+    hintEquals: {productType: Vagrantsong Apparel}
+  - category: merch
+    hintEquals: {productType: The Other Side Patch}
+  - category: merch
+    hintEquals: {productType: Poster}
+  - category: merch
+    hintEquals: {productType: Keychain}
+  - category: merch
+    hintEquals: {productType: Plush}
+  - category: merch
+    hintEquals: {productType: Vagrantsong Plush}
+  - category: merch
+    hintEquals: {productType: Jigsaw Puzzle}
+
+  # --- form only ----------------------------------------------------------------------------------
+  - packaging: digital
+    hintEquals: {productType: Digital STL}
+    note: an STL is a file of a model; the FORM is certain, the thing it prints to is not

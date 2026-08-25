@@ -90,13 +90,13 @@ a release tag for a frozen snapshot.
 tools/
   WarHub.PaintCatalog.Tool/      # parses paint lists, computes Delta-E -> data/paints YAML
   WarHub.Catalog.Publish/        # bundles data/ YAML -> dist/ JSON (the published catalog)
-  acquisition/                   # python: acquire/migrate/resolve/report
+  acquisition/                   # python: acquire/migrate/resolve/categorize/report
 data/
   evidence/                      # source of truth: per-source observations (evidence ledger)
   catalog/                       # source of truth: resolved canonical catalog (products/, taxonomy/)
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
-  catalog-acquire.yml            # nightly + weekly deep-sweep: harvest live sources -> evidence -> resolve -> sticky PR
+  catalog-acquire.yml            # nightly + weekly deep-sweep: harvest live sources -> evidence -> resolve -> categorize -> sticky PR
   classify.yml                   # manual (workflow_dispatch only): LLM classify / join-adjudication -> sticky PR
   paint-catalog-update.yml       # weekly: regenerate paint data + equivalences (PR)
   catalog-publish.yml            # on catalog/paint data change: bundle -> Release + Pages
@@ -111,7 +111,7 @@ data/
    and does a **weekly deep sweep** (Saturdays, 02:00 UTC, or `workflow_dispatch` with
    `mode: weekly`): a
    job matrix harvests each live source group into `data/evidence/`, then an integrate job
-   merges the evidence, runs `resolve`/`report`/`report --ean-guard`, and opens or updates a
+   merges the evidence, runs `resolve`/`categorize`/`report`/`report --ean-guard`, and opens or updates a
    sticky PR (`catalog/acquisition`) with the combined health report, coverage table, and any
    confirmed-EAN guard findings. It supersedes the legacy `product-catalog-update.yml` /
    `product-catalog-enrich.yml` generation workflows. The health report carries a per-source
@@ -141,7 +141,25 @@ data/
    exactly what the parser reads (never the raw workbook, so wholesale `Trade Price`/`Cost` columns
    stay out of git) and future-dated rows are dropped before it is written, since GW's Trade Terms
    make unreleased product information confidential.
-2. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
+2. **`categorize`** runs immediately after every `resolve`, in the same job, and decides what a
+   product IS. `resolve` sets `category` from a source's own claim where one exists and falls back
+   to `miniatures` otherwise, recording which happened in `categoryBasis`; `categorize` then
+   replaces the fallbacks -- and only the fallbacks -- from three kinds of evidence the resolver
+   does not read, in this order. First, each store's own taxonomy, stored verbatim at harvest time
+   and mapped by a committed table per source under
+   `data/catalog/taxonomy/category-rules/<source>.yaml`. Second, the paint catalog's barcodes,
+   read live from `data/paints/` rather than through an index, so a paint that gained a barcode
+   last night cannot keep yesterday's guess. Third, the product's own name, against a cross-source
+   lexicon (`data/catalog/taxonomy/category-lexicon.yaml`) -- weakest, and the only signal
+   available for a source that publishes no taxonomy at all. A store's filing about one product
+   outranks the cross-catalog inference, which outranks the name; where the first two disagree the
+   product keeps the store's answer and the disagreement is written to
+   `data/review/categorize.yaml` for a human, alongside the ranked list of raw store values that
+   would decide the most still-undecided products. Every rule carries the measurement that
+   justified it, re-derivable with `scripts/measure_category_rules.py`. **Anywhere `resolve` runs,
+   `categorize` must run after it** -- `resolve` rewrites every product file, so a run that skips
+   it republishes decided products as guesses.
+3. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
    duplicate-entity adjudication go through **`classify.yml`**, a **`workflow_dispatch`-only**
    workflow (never scheduled — LLM spend stays human-triggered) with a `mode` input:
    `classify` builds the review queue, sends it to an Anthropic model for `gameSystem`/`faction`
@@ -162,7 +180,7 @@ data/
    safe to declare and writes `data/review/supersession-proposals.yaml`, whose `readyToPromote`
    block pastes straight into `matches.yaml`'s `supersessions:`. Like the join proposer it never
    edits `matches.yaml` itself.
-3. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
+4. Merging a data PR triggers **`catalog-publish.yml`**, which runs the publisher — reading
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
    then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only
    watches `data/catalog/**` and `data/paints/**`, so evidence-only churn never mints a release.

@@ -1,0 +1,43 @@
+source: ret-gamenerdz
+reason: >-
+  gamenerdz.com publishes a schema.org breadcrumb trail, captured whole (PR #147) rather than as a
+  single leaf, and the trail is a DEPARTMENT path: `Home > Miniatures > Infinity > Nomads >
+  <product>`. Counts over the 2,471 rows carrying breadcrumbs, from
+  data/evidence/products/ret-gamenerdz/observations.jsonl on 2026-08-25.
+
+
+  THIS FILE IS ALMOST ENTIRELY REFUSALS, and that is the finding rather than a shortcoming.
+  Measured with scripts/measure_category_rules.py against products a MANUFACTURER independently
+  states a category for, gamenerdz's departments are not format axes at all:
+
+    Miniatures (1,260 rows)  22 checkable products, 22 of them WRONG -- 8 Halo terrain sets,
+                             Mantic terrain packs, 25/40/55mm scenery bases, a Kings of War
+                             rulebook. The department is "things for miniatures games".
+    Supplies (334)           25 checkable, 22 of them GW paint six-packs. It contains paint.
+    Terrain & Accessories    15 checkable, 5 of them hobby-auxiliary. It spans two categories in
+      (23)                   its own name, which is the same reason mfr-para-bellum's
+                             `accessories-merchandise-more` is refused there.
+
+  Only `Paint and Crafting` survives: 220 checkable products, 220 agree.
+
+
+  DROPPING `Miniatures` COSTS NOTHING IN ACCURACY, which is the argument for dropping rather than
+  keeping a 16%-wrong rule. The resolver's fallback already writes `miniatures` for anything no
+  source decides, so a clause predicting `miniatures` adds no answer -- it adds only the CLAIM that
+  the answer is evidence-backed. A claim that is wrong one time in six is worse than the honest
+  `guessed` it would replace, and the whole point of `categoryBasis` is that the two can be told
+  apart. A clause predicting anything else does add an answer, and is worth keeping at a lower bar.
+
+clauses:
+  - category: paint
+    hintContainsAny: {breadcrumbs: [Paint and Crafting]}
+    note: 220 of 220 checkable products agree; the only gamenerdz crumb that survived measurement
+  - category: board-game
+    hintContainsAny: {breadcrumbs: [Board Games]}
+  - category: board-game
+    hintContainsAny: {breadcrumbs: [Boxed Games]}
+  - category: game-accessory
+    hintContainsAny: {breadcrumbs: [Playmats]}
+    note: a play surface, not modelled scenery -- categories.yaml `terrain` boundary
+  - category: game-accessory
+    hintContainsAny: {breadcrumbs: [Dice]}

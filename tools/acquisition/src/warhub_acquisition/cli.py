@@ -259,6 +259,25 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
 
+    categorize_sub = subparsers.add_parser(
+        "categorize",
+        description=(
+            "Decide `category` for products the resolver could only guess, from the taxonomy "
+            "their own sources publish (data/catalog/taxonomy/category-rules/<source>.yaml) and "
+            "from the paint catalog's barcodes. Runs AFTER `resolve` and rewrites the records it "
+            "improves; it never touches a category a source stated or an override set. Writes "
+            "data/review/categorize.yaml, whose `unmapped` section ranks the raw store values "
+            "that would decide the most still-undecided products -- that ranking is the worklist "
+            "for extending the tables."
+        ),
+    )
+    categorize_sub.add_argument("--data", type=Path, default=Path("data"))
+    categorize_sub.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Compute and report, write nothing -- measure a rule table before committing it.",
+    )
+
     migrate = subparsers.add_parser("migrate")
     migrate.add_argument("--data", type=Path, default=Path("data"))
     migrate.add_argument("--legacy-dir", type=Path, default=Path("data/products/manufacturers"))
@@ -316,6 +335,25 @@ def main(argv: list[str] | None = None) -> int:
         conflicts = read_yaml(paths.conflicts)["conflicts"]
         print(f"resolved {total} products across {len(catalog)} manufacturers; {len(conflicts)} conflicts")
         return 2 if conflicts else 0
+
+    if args.command == "categorize":
+        from warhub_acquisition.categorize.stage import REPLACEABLE, categorize
+
+        outcome = categorize(paths, apply=not args.dry_run)
+        detail = ", ".join(f"{basis}={count}" for basis, count in sorted(outcome.by_basis.items()))
+        total = sum(outcome.catalog_basis.values())
+        undecided = sum(outcome.catalog_basis[basis] for basis in REPLACEABLE)
+        share = f"{100 * undecided / total:.1f}%" if total else "n/a"
+        print(
+            f"{'would decide' if args.dry_run else 'decided'} {outcome.decided} of "
+            f"{outcome.considered} replaceable ({detail or 'none'}); "
+            f"catalog: {undecided} of {total} ({share}) still rest on no evidence; "
+            f"{len(outcome.conflicts)} conflicts"
+        )
+        # Conflicts are REVIEW MATERIAL, not a failure -- exactly as `resolve` treats its own
+        # (exit 2). A disagreement between two stores about what a product is says something true
+        # about the stores; failing the nightly over it would stop the catalog for a fact.
+        return 2 if outcome.conflicts else 0
 
     if args.command == "migrate":
         from warhub_acquisition.migrate.runner import run_migration

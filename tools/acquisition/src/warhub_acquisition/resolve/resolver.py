@@ -78,6 +78,24 @@ class DataPaths:
     def classifications(self) -> Path:
         return self.root / "catalog" / "classifications" / "products.yaml"
 
+    @property
+    def paints(self) -> Path:
+        """The PAINT catalog's archive. Not an input to `resolve` -- nothing in this module reads
+        it, deliberately, so the resolver stays a function of the product pipeline's own inputs.
+        It lives here because `categorize` (a separate stage, run after resolve) does read it, and
+        a second DataPaths would be a second place for a path to drift."""
+        return self.root / "paints"
+
+    @property
+    def category_rules(self) -> Path:
+        """Per-source category tables, one file per source id (categorize/rules.py)."""
+        return self.root / "catalog" / "taxonomy" / "category-rules"
+
+    @property
+    def categorize_review(self) -> Path:
+        """What `categorize` decided, what it could not, and what disagreed."""
+        return self.root / "review" / "categorize.yaml"
+
 
 def _load_optional(path: Path, model: type, default: object) -> object:
     if path.exists():
@@ -215,6 +233,40 @@ def select_product_observations(
                 observation.model_copy(update={"hints": {**observation.hints, "category": stamp}})
             )
     return ProductObservations(observations, crossover_conflicts, product_source_count)
+
+
+@dataclass(frozen=True)
+class JoinedEvidence:
+    """The resolver's join, replayed for a stage that needs each entity's MEMBERS.
+
+    Two stages need what `resolve_catalog` does not return: `classify/queue.py` wants the raw
+    per-source hints an entity was built from, and `categorize/stage.py` wants the same in order
+    to read the stores' taxonomy. A resolved CanonicalProduct keeps only a handful of folded
+    fields, so the join is replayed rather than the catalog being re-parsed.
+
+    REPLAYING THE JOIN MEANS REPLAYING ITS INPUT. That is what `select_product_observations` is
+    for and why this helper exists at all: a caller that assembles the observation list itself
+    silently gets a different one, and a different one yields entity ids the catalog does not have
+    (see ProductObservations for the measured case). One function, so there is nothing to keep in
+    step.
+    """
+
+    entities: dict[str, list[Observation]]
+    taxonomy: Taxonomy
+    kinds: dict[str, str]
+    descriptors: dict[str, SourceDescriptor]
+
+
+def joined_evidence(paths: DataPaths) -> JoinedEvidence:
+    """Re-run evidence + taxonomy + matches -> entity -> members, exactly as `resolve` does."""
+    taxonomy = Taxonomy.load(paths.taxonomy)
+    descriptors = load_descriptors(paths.sources)
+    kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
+    evidence = EvidenceStore(paths.evidence_products).load_all()
+    selected = select_product_observations(evidence, descriptors, taxonomy)
+    matches: Matches = _load_optional(paths.matches, Matches, Matches())
+    joined = join_observations(selected.observations, taxonomy, kinds, matches)
+    return JoinedEvidence(joined.entities, taxonomy, kinds, descriptors)
 
 
 def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:

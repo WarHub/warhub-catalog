@@ -7,12 +7,9 @@ the catalog) awaiting an OPTIONAL gameSystem/faction decision, with enough conte
 import html as html_lib
 import re
 
-from warhub_acquisition.evidence.store import EvidenceStore
-from warhub_acquisition.models.descriptor import load_descriptors
 from warhub_acquisition.models.observation import Observation
-from warhub_acquisition.resolve.join import Matches, join_observations
-from warhub_acquisition.resolve.resolver import DataPaths, select_product_observations
-from warhub_acquisition.taxonomy import Taxonomy, load_labels
+from warhub_acquisition.resolve.resolver import DataPaths, joined_evidence
+from warhub_acquisition.taxonomy import load_labels
 from warhub_acquisition.yamlio import read_yaml
 
 _DESCRIPTION_LIMIT = 300
@@ -61,37 +58,6 @@ def _prompt_description(raw: object) -> str:
 
 def _first(values: list[object | None]) -> object | None:
     return next((value for value in values if value is not None), None)
-
-
-def _load_matches(paths: DataPaths) -> Matches:
-    if paths.matches.exists():
-        return Matches.model_validate(read_yaml(paths.matches))
-    return Matches()
-
-
-def _joined_entities(paths: DataPaths) -> dict[str, list[Observation]]:
-    """Re-run the resolver's join step (evidence + taxonomy + matches -> entity -> members) so a
-    null-gameSystem entity's full member-observation set is available. The resolved
-    CanonicalProduct only keeps a handful of folded hint fields (category/packaging/quantity/
-    description), not the raw per-source hints dict this queue's "hints" field needs, and
-    resolve_catalog does not expose joined members itself (it only returns finished
-    CanonicalProducts and writes conflicts.yaml) -- so the join is repeated here rather than
-    duplicating queue-building into resolver.py.
-
-    REPEATING THE JOIN MEANS REPEATING ITS INPUT, and that is what `select_product_observations`
-    is for. This function used to flatten the whole evidence store instead, which silently added
-    the paint-source rows the product catalog deliberately excludes; the extra members changed
-    which product code won the identity ordering, so the join produced ids the catalog does not
-    have and `build_queue` raised on a product that exists. See ProductObservations for the
-    measured case (`army-painter/CP3001` -> `army-painter/CP3001S`).
-    """
-    taxonomy = Taxonomy.load(paths.taxonomy)
-    descriptors = load_descriptors(paths.sources)
-    kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
-    evidence = EvidenceStore(paths.evidence_products).load_all()
-    selected = select_product_observations(evidence, descriptors, taxonomy)
-    joined = join_observations(selected.observations, taxonomy, kinds, _load_matches(paths))
-    return joined.entities
 
 
 def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
@@ -148,7 +114,7 @@ def build_queue(paths: DataPaths) -> list[dict]:
     if not unclassified:
         return []
 
-    entities = _joined_entities(paths)
+    entities = joined_evidence(paths).entities
     game_system_labels, faction_labels = load_labels(paths.taxonomy)
     # a single shared dict, reused by reference in every item: yamlio's dump_yaml aliases
     # repeated-identity nodes, so this real-world-sized (~47 gameSystems / ~140 factions) block
