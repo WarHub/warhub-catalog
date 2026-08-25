@@ -1,0 +1,36 @@
+source: mfr-para-bellum
+reason: >-
+  para-bellum-games.com emits 30 WooCommerce category slugs over 406 rows, and all but a handful
+  name the game (`conquest`, 390), an army (`hundred-kingdoms`, `dweghom`, `nords`, ...), or a
+  merchandising state (`offers`, `pre-orders`, `new-releases`, `limited-editions`). Those decide
+  nothing: a faction slug sits on that faction's rulebook as readily as on its regiments. Counts
+  from data/evidence/products/mfr-para-bellum/observations.jsonl on 2026-08-25.
+
+
+  SIX SLUGS DO ANSWER THE QUESTION, and this file is only those six. It is a small table on
+  purpose -- the alternative reading, that `conquest` means miniatures because Conquest is a
+  miniatures game, would put the rulebooks, the art prints and the gift cards there too.
+
+
+  `start-here` (55) is the notable refusal: it is Conquest's starter shelf and holds two-player
+  starter boxes AND the rulebook AND dice. `accessories-merchandise-more` (52) is refused for the
+  same reason, one level worse -- it spans three of this vocabulary's categories in its own name.
+
+clauses:
+  - category: book
+    hintContainsAny: {categories: [books]}
+  - category: book
+    hintContainsAny: {categories: [lore-campaigns]}
+    note: Para Bellum's lore and campaign shelf is supplements, not models
+  - category: terrain
+    hintContainsAny: {categories: [stl-terrain]}
+    packaging: digital
+  - category: merch
+    hintContainsAny: {categories: [apparel]}
+  - category: merch
+    hintContainsAny: {categories: [art-prints]}
+  - category: game-accessory
+    hintContainsAny: {categories: [accessories]}
+    note: >-
+      the bare `accessories` slug (40), NOT `accessories-merchandise-more` (52), which spans three
+      categories in its own name and is deliberately absent

@@ -337,15 +337,18 @@ def main(argv: list[str] | None = None) -> int:
         return 2 if conflicts else 0
 
     if args.command == "categorize":
-        from warhub_acquisition.categorize.stage import categorize
+        from warhub_acquisition.categorize.stage import REPLACEABLE, categorize
 
         outcome = categorize(paths, apply=not args.dry_run)
-        undecided = outcome.considered - outcome.decided
         detail = ", ".join(f"{basis}={count}" for basis, count in sorted(outcome.by_basis.items()))
+        total = sum(outcome.catalog_basis.values())
+        undecided = sum(outcome.catalog_basis[basis] for basis in REPLACEABLE)
+        share = f"{100 * undecided / total:.1f}%" if total else "n/a"
         print(
             f"{'would decide' if args.dry_run else 'decided'} {outcome.decided} of "
-            f"{outcome.considered} undecided products ({detail or 'none'}); "
-            f"{undecided} still undecided; {len(outcome.conflicts)} conflicts"
+            f"{outcome.considered} replaceable ({detail or 'none'}); "
+            f"catalog: {undecided} of {total} ({share}) still rest on no evidence; "
+            f"{len(outcome.conflicts)} conflicts"
         )
         # Conflicts are REVIEW MATERIAL, not a failure -- exactly as `resolve` treats its own
         # (exit 2). A disagreement between two stores about what a product is says something true

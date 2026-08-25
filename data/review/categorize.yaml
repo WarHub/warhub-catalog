@@ -1,11 +1,101 @@
 summary:
-  considered: 28817
-  decided: 8073
-  undecided: 20744
+  products: 30771
+  undecided: 19442
   byBasis:
-    mapped: 8003
+    default: 7317
+    guessed: 12125
+    mapped: 9305
     paint-barcode: 70
+    stated: 1954
+  decidedThisRun: 9375
 conflicts:
+  - entity: corvus-belli/aristeia-advanced-tactics-deck
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=game-accessory'
+  - entity: corvus-belli/aristeia-gata-filibusteira
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: corvus-belli/double-trouble
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: corvus-belli/legendary-bahadurs
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: games-workshop/60040399016
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
+  - entity: games-workshop/99199999047
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999048
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999049
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999050
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999051
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999053
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999054
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999056
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999057
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999058
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999060
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999061
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99199999068
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99219999035
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999066
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999112
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999116
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999117
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999118
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999119
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999120
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99239999122
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/citadel-brush-x-large-base
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/citadel-small-base-brush
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: vallejo/atlantic-blue-200ml-diorama-effects
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
@@ -42,6 +132,13 @@ conflicts:
   - entity: warlord-games/482010003
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
+  - entity: wyrd-games/WYR40004
+    type: category-disagreement
+    detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'
+  - entity: wyrd-games/WYR40007
+    type: category-disagreement
+    detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'
+deadClauses: []
 unmapped:
   mfr-gw-algolia:
     - value: hierarchy.lvl1=The Horus Heresy > Force Organisation
@@ -123,32 +220,24 @@ unmapped:
     - value: hierarchy.lvl1=Age of Sigmar > Ways to Play
       wouldDecide: 1
   mfr-manticgames:
-    - value: categories=painting-modelling
-      wouldDecide: 243
-    - value: categories=army-painter
-      wouldDecide: 219
-    - value: categories=paint
-      wouldDecide: 157
-    - value: categories=vallejo
-      wouldDecide: 152
     - value: categories=kings-of-war
       wouldDecide: 151
+    - value: categories=vallejo
+      wouldDecide: 119
     - value: categories=deals-fantasy
       wouldDecide: 97
     - value: categories=all-out-war-singles
       wouldDecide: 77
     - value: categories=dreadball
       wouldDecide: 74
-    - value: categories=colour-forge
+    - value: categories=painting-modelling
+      wouldDecide: 72
+    - value: categories=army-painter
       wouldDecide: 65
     - value: categories=deadzone
       wouldDecide: 63
-    - value: categories=modern-terrain-crate
-      wouldDecide: 53
     - value: categories=basilean
       wouldDecide: 47
-    - value: categories=fantasy
-      wouldDecide: 46
     - value: categories=mantic-points-shop
       wouldDecide: 45
     - value: categories=tournaments
@@ -156,6 +245,8 @@ unmapped:
     - value: categories=kings-of-war-undead
       wouldDecide: 36
     - value: categories=deals-and-offers
+      wouldDecide: 36
+    - value: categories=fantasy
       wouldDecide: 36
     - value: categories=orc-miniatures
       wouldDecide: 35
@@ -168,8 +259,6 @@ unmapped:
     - value: categories=dwarfs-miniatures
       wouldDecide: 34
     - value: categories=trident-realm-of-neritica
-      wouldDecide: 33
-    - value: categories=game-color
       wouldDecide: 33
     - value: categories=accessories-army-painter
       wouldDecide: 32
@@ -195,154 +284,150 @@ unmapped:
       wouldDecide: 27
     - value: categories=forge-fathers
       wouldDecide: 27
-    - value: categories=dungeon-saga
-      wouldDecide: 26
     - value: categories=teams
       wouldDecide: 25
     - value: categories=halfling-miniatures
       wouldDecide: 25
     - value: categories=effects-and-texture
       wouldDecide: 25
+    - value: categories=books-kings-of-war
+      wouldDecide: 24
+    - value: categories=elves
+      wouldDecide: 24
+    - value: categories=firefight-enforcers
+      wouldDecide: 24
+    - value: categories=xirkaali
+      wouldDecide: 24
+    - value: categories=dungeon-saga
+      wouldDecide: 23
   mfr-para-bellum:
     - value: categories=conquest
-      wouldDecide: 381
+      wouldDecide: 322
     - value: categories=factions
-      wouldDecide: 361
+      wouldDecide: 317
     - value: categories=offers
-      wouldDecide: 67
-    - value: categories=hundred-kingdoms
       wouldDecide: 54
-    - value: categories=start-here
-      wouldDecide: 53
-    - value: categories=accessories-merchandise-more
-      wouldDecide: 51
+    - value: categories=hundred-kingdoms
+      wouldDecide: 46
     - value: categories=new-upcoming
-      wouldDecide: 48
+      wouldDecide: 37
+    - value: categories=start-here
+      wouldDecide: 37
     - value: categories=dweghom
-      wouldDecide: 41
-    - value: categories=nords
-      wouldDecide: 40
-    - value: categories=accessories
-      wouldDecide: 39
-    - value: categories=spires
-      wouldDecide: 38
-    - value: categories=wadrhun
       wouldDecide: 36
-    - value: categories=city-states
+    - value: categories=nords
       wouldDecide: 35
+    - value: categories=spires
+      wouldDecide: 33
+    - value: categories=wadrhun
+      wouldDecide: 32
     - value: categories=old-dominion
-      wouldDecide: 35
-    - value: categories=sorcerer-kings
+      wouldDecide: 31
+    - value: categories=city-states
       wouldDecide: 30
-    - value: categories=pre-orders
-      wouldDecide: 29
+    - value: categories=sorcerer-kings
+      wouldDecide: 26
     - value: categories=yoroni
-      wouldDecide: 29
+      wouldDecide: 24
     - value: categories=weaver-courts
-      wouldDecide: 28
+      wouldDecide: 24
     - value: categories=first-blood
-      wouldDecide: 22
-    - value: categories=limited-editions
       wouldDecide: 21
+    - value: categories=pre-orders
+      wouldDecide: 18
     - value: categories=new-releases
       wouldDecide: 18
-    - value: categories=lore-campaigns
+    - value: categories=limited-editions
       wouldDecide: 16
     - value: categories=2000pt-armies
       wouldDecide: 10
     - value: categories=the-last-argument-of-kings
       wouldDecide: 8
     - value: categories=erp
-      wouldDecide: 6
-    - value: categories=art-prints
-      wouldDecide: 5
-    - value: categories=apparel
-      wouldDecide: 5
-    - value: categories=books
-      wouldDecide: 2
+      wouldDecide: 3
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
   mfr-steamforged:
     - value: tags=digitalproduct
-      wouldDecide: 111
-    - value: vendor=Guild Ball
-      wouldDecide: 101
+      wouldDecide: 110
     - value: tags=free-resource
       wouldDecide: 86
     - value: productType=Free Resource
       wouldDecide: 85
-    - value: tags=available_gb
-      wouldDecide: 83
-    - value: tags=available_us
-      wouldDecide: 82
-    - value: tags=available_eu
-      wouldDecide: 81
-    - value: tags=Players_2
-      wouldDecide: 70
     - value: vendor=Godtear
-      wouldDecide: 67
-    - value: tags=GenCon2025
-      wouldDecide: 66
-    - value: tags=GenCon2025-EU
-      wouldDecide: 66
-    - value: tags=GenCon2025-US
-      wouldDecide: 66
-    - value: tags=5e
-      wouldDecide: 65
-    - value: tags=BlackFriday2025-EU
-      wouldDecide: 65
-    - value: tags=BlackFriday2025-US
-      wouldDecide: 65
-    - value: tags=Type_Core Game
-      wouldDecide: 64
-    - value: tags=black-friday-2024
-      wouldDecide: 59
-    - value: tags=Type_Expansion
-      wouldDecide: 57
-    - value: vendor=Epic Encounters
-      wouldDecide: 57
-    - value: tags=shop3d
-      wouldDecide: 56
-    - value: tags=Game_Epic Encounters
-      wouldDecide: 54
-    - value: tags=SFG Exclusive
-      wouldDecide: 54
-    - value: tags=Game_Guild Ball
-      wouldDecide: 53
-    - value: tags=summer-sale-2026-uk
-      wouldDecide: 52
-    - value: productType=Miniatures
+      wouldDecide: 62
+    - value: vendor=Guild Ball
       wouldDecide: 51
-    - value: tags=Type_Miniature
-      wouldDecide: 49
-    - value: tags=miniatures
-      wouldDecide: 49
-    - value: tags=summer-sale-2026-us
-      wouldDecide: 46
-    - value: tags=Ages_14+
-      wouldDecide: 46
-    - value: productType=Roleplaying Game
+    - value: tags=available_gb
       wouldDecide: 43
-    - value: tags=Players_3
-      wouldDecide: 43
-    - value: tags=Players_4
-      wouldDecide: 43
-    - value: tags=summer-sale-2026-eu
-      wouldDecide: 43
-    - value: tags=Playing Time_120-360 Minutes
+    - value: tags=available_eu
+      wouldDecide: 42
+    - value: tags=available_us
+      wouldDecide: 42
+    - value: tags=Players_2
       wouldDecide: 41
-    - value: tags=BlackFriday2025-EU-60pc
+    - value: tags=Type_Expansion
       wouldDecide: 39
-    - value: tags=BlackFriday2025-UK
-      wouldDecide: 39
-    - value: tags=BlackFriday2025-UK-60pc
-      wouldDecide: 39
-    - value: tags=BlackFriday2025-US-60pc
-      wouldDecide: 39
-    - value: tags=gifts-for-story-lovers
-      wouldDecide: 38
+    - value: vendor=Epic Encounters
+      wouldDecide: 25
+    - value: productType=Expansion
+      wouldDecide: 22
+    - value: tags=Game_Godtear
+      wouldDecide: 22
+    - value: tags=GenCon2025
+      wouldDecide: 22
+    - value: tags=GenCon2025-EU
+      wouldDecide: 22
+    - value: tags=GenCon2025-US
+      wouldDecide: 22
+    - value: productType=Digital Download
+      wouldDecide: 22
+    - value: tags=5e
+      wouldDecide: 22
     - value: tags=Ages_11+
-      wouldDecide: 37
+      wouldDecide: 22
+    - value: tags=Game_Epic Encounters
+      wouldDecide: 22
+    - value: tags=gifts-under-20
+      wouldDecide: 22
+    - value: tags=Ages_14+
+      wouldDecide: 21
+    - value: tags=BlackFriday2025-EU
+      wouldDecide: 21
+    - value: tags=BlackFriday2025-EU-80pc
+      wouldDecide: 21
+    - value: tags=BlackFriday2025-US
+      wouldDecide: 21
+    - value: tags=BlackFriday2025-US-80pc
+      wouldDecide: 21
+    - value: tags=Playing Time_45-60 Minutes
+      wouldDecide: 21
+    - value: tags=black-friday-2024
+      wouldDecide: 21
+    - value: tags=Players_3
+      wouldDecide: 20
+    - value: tags=Players_4
+      wouldDecide: 20
+    - value: tags=Playing Time_120-360 Minutes
+      wouldDecide: 20
+    - value: tags=Type_Core Game
+      wouldDecide: 20
+    - value: tags=GDT_gift
+      wouldDecide: 16
+    - value: tags=Godtear_champ_blackFriday
+      wouldDecide: 16
+    - value: tags=summer-sale-2026-eu
+      wouldDecide: 14
+    - value: tags=summer-sale-2026-us
+      wouldDecide: 14
+    - value: tags=summer-sale-2026-uk
+      wouldDecide: 13
+    - value: tags=gifts-for-story-lovers
+      wouldDecide: 11
+    - value: tags=SFG Exclusive
+      wouldDecide: 9
+    - value: productType=Product
+      wouldDecide: 8
   mfr-warlord-store:
     - value: tags=eu
       wouldDecide: 2566
@@ -425,204 +510,102 @@ unmapped:
     - value: tags=include
       wouldDecide: 184
   mfr-warmachine:
-    - value: vendor=Warmachine
-      wouldDecide: 362
-    - value: tags=no-stock-label
-      wouldDecide: 360
-    - value: productType=Miniatures
-      wouldDecide: 348
-    - value: tags=SFG Exclusive
-      wouldDecide: 244
-    - value: tags=launch_date_notification
-      wouldDecide: 96
-    - value: tags=warmachine-southern-kriels
-      wouldDecide: 51
-    - value: tags=updated
-      wouldDecide: 49
-    - value: tags=mmf-titanforge-royalty
-      wouldDecide: 49
-    - value: tags=warmachine-dusk
-      wouldDecide: 45
-    - value: tags=warmachine-cygnar
-      wouldDecide: 42
-    - value: tags=Warmachine-southern-kriels-brinebloods
-      wouldDecide: 34
-    - value: tags=warmachine-house-kallyss
-      wouldDecide: 31
-    - value: tags=warmachine-storm-legion
-      wouldDecide: 30
-    - value: tags=warmachine-khador
-      wouldDecide: 30
-    - value: tags=warmachine-old-umbrey
-      wouldDecide: 30
-    - value: tags=warmachine-sea-raiders
-      wouldDecide: 30
-    - value: tags=warmachine-khymaera
-      wouldDecide: 27
-    - value: tags=warmachine-kithguard
-      wouldDecide: 27
-    - value: vendor=Iron Kingdoms
-      wouldDecide: 25
-    - value: tags=warmachine-cryx-necrofactorium
-      wouldDecide: 24
     - value: tags=digitalproduct
       wouldDecide: 24
-    - value: tags=gifts-for-hobby-painters
-      wouldDecide: 23
-    - value: tags=warmachine-gravediggers
-      wouldDecide: 23
-    - value: tags=warmachine-crucible-guard
-      wouldDecide: 23
-    - value: tags=warmachine-crucibleguard
-      wouldDecide: 23
-    - value: tags=bestseller
-      wouldDecide: 22
-    - value: tags=warmachine-dark-operations
-      wouldDecide: 22
-    - value: tags=wm-starters
-      wouldDecide: 21
-    - value: tags=new
-      wouldDecide: 21
-    - value: tags=warmachine-mercenary
-      wouldDecide: 21
-    - value: tags=gifts-for-competitive-players
-      wouldDecide: 18
-    - value: tags=warmachine-fane-of-nyrro
-      wouldDecide: 17
-    - value: tags=gifts-under-150
-      wouldDecide: 14
-    - value: tags=gifts-for-story-lovers
+    - value: vendor=Warmachine
       wouldDecide: 14
     - value: productType=Digital Download
       wouldDecide: 14
-    - value: productType=Roleplaying Game
-      wouldDecide: 13
-    - value: tags=IsBook
-      wouldDecide: 13
     - value: tags=5e
       wouldDecide: 12
+    - value: tags=SFG Exclusive
+      wouldDecide: 12
+    - value: vendor=Iron Kingdoms
+      wouldDecide: 12
+    - value: tags=no-stock-label
+      wouldDecide: 11
     - value: tags=free-resource
       wouldDecide: 11
-    - value: tags=remove
-      wouldDecide: 10
+    - value: productType=Free Resource
+      wouldDecide: 9
+    - value: tags=build-instructions
+      wouldDecide: 6
+    - value: tags=wm-starters
+      wouldDecide: 3
+    - value: productType=Wargame
+      wouldDecide: 2
+    - value: tags=WM-OP-KIT
+      wouldDecide: 1
+    - value: tags=Game_Iron Kingdoms
+      wouldDecide: 1
+    - value: tags=IsBook
+      wouldDecide: 1
+    - value: tags=gifts-for-collectors
+      wouldDecide: 1
+    - value: tags=gifts-for-competitive-players
+      wouldDecide: 1
+    - value: tags=gifts-for-new-players
+      wouldDecide: 1
+    - value: tags=gifts-for-story-lovers
+      wouldDecide: 1
+    - value: tags=gifts-under-50
+      wouldDecide: 1
+    - value: productType=Product
+      wouldDecide: 1
   mfr-wyrd-store:
-    - value: vendor=Wyrd Miniatures - Online Store
-      wouldDecide: 233
-    - value: vendor=Wyrd
-      wouldDecide: 153
     - value: tags=NOPE
-      wouldDecide: 150
-    - value: tags=Malifaux
-      wouldDecide: 110
-    - value: tags=M3E
-      wouldDecide: 89
-    - value: productType=Malifaux Classics
-      wouldDecide: 79
-    - value: tags=Classics
-      wouldDecide: 79
-    - value: productType=Malifaux Miniatures
-      wouldDecide: 73
-    - value: tags=The Other Side
-      wouldDecide: 71
-    - value: tags=Bases & Accessories
-      wouldDecide: 48
-    - value: tags=ToS
-      wouldDecide: 40
-    - value: tags=Apparel
-      wouldDecide: 27
-    - value: tags=Ten Thunders
-      wouldDecide: 25
+      wouldDecide: 6
+    - value: vendor=Wyrd Miniatures - Online Store
+      wouldDecide: 6
+    - value: productType=Digital STL
+      wouldDecide: 5
+    - value: tags=STL
+      wouldDecide: 5
+    - value: productType=Vagrantsong Expansion
+      wouldDecide: 2
+    - value: tags=B&C
+      wouldDecide: 2
     - value: tags=Board & Card Games
-      wouldDecide: 23
-    - value: productType=Bases & Accessories
-      wouldDecide: 22
-    - value: tags=board game
-      wouldDecide: 21
-    - value: tags=Outcast
-      wouldDecide: 21
-    - value: productType=The Other Side Unit Box
-      wouldDecide: 20
-    - value: productType=Wyrdscapes Terrain
-      wouldDecide: 19
-    - value: tags=Wyrdscape
-      wouldDecide: 19
-    - value: tags=Neverborn
-      wouldDecide: 18
-    - value: tags=Bayou
-      wouldDecide: 18
-    - value: tags=Arcanist
-      wouldDecide: 17
-    - value: tags=Resurrectionists
-      wouldDecide: 17
-    - value: tags=Book
-      wouldDecide: 17
-    - value: tags=Malifaux Bases & Accessories
-      wouldDecide: 15
+      wouldDecide: 2
+    - value: tags=VSGC
+      wouldDecide: 2
     - value: tags=Vagrantsong
-      wouldDecide: 15
-    - value: tags=RPG
-      wouldDecide: 15
-    - value: tags=Through the Breach
-      wouldDecide: 15
-    - value: productType=The Other Side Character Box
-      wouldDecide: 15
-    - value: productType=Vagrantsong Apparel
-      wouldDecide: 14
-    - value: tags=Explorer
-      wouldDecide: 14
-    - value: productType=Malifaux Core Box
-      wouldDecide: 14
-    - value: tags=Fate Deck
-      wouldDecide: 13
-    - value: tags=Guild
-      wouldDecide: 13
-    - value: tags=M4E
-      wouldDecide: 13
-    - value: tags=ToS-Unit
-      wouldDecide: 12
-    - value: tags=Discount
-      wouldDecide: 11
-    - value: tags=Abyssinia
-      wouldDecide: 11
-    - value: tags=King's Empire
-      wouldDecide: 11
+      wouldDecide: 2
+    - value: tags=board game
+      wouldDecide: 2
+    - value: vendor=Wyrd
+      wouldDecide: 2
+    - value: productType=Gift Card
+      wouldDecide: 1
+    - value: tags=gift card
+      wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 787
+      wouldDecide: 589
     - value: breadcrumbs=Miniatures
-      wouldDecide: 658
+      wouldDecide: 579
     - value: breadcrumbs=Infinity
       wouldDecide: 238
-    - value: breadcrumbs=Malifaux
-      wouldDecide: 149
     - value: breadcrumbs=Kings of War
       wouldDecide: 96
     - value: breadcrumbs=Marvel Crisis Protocol
       wouldDecide: 92
-    - value: breadcrumbs=Supplies
-      wouldDecide: 57
-    - value: breadcrumbs=Paint and Crafting
-      wouldDecide: 49
-    - value: breadcrumbs=Roleplaying
-      wouldDecide: 38
-    - value: breadcrumbs=5th Edition Fantasy
-      wouldDecide: 38
-    - value: breadcrumbs=Board Games
-      wouldDecide: 32
-    - value: breadcrumbs=More Miniatures
-      wouldDecide: 31
+    - value: breadcrumbs=Malifaux
+      wouldDecide: 83
     - value: breadcrumbs=Panoceania
       wouldDecide: 30
     - value: breadcrumbs=Nomads
+      wouldDecide: 28
+    - value: breadcrumbs=More Miniatures
       wouldDecide: 28
     - value: breadcrumbs=Star Wars Legion
       wouldDecide: 26
     - value: breadcrumbs=Yu Jing
       wouldDecide: 25
-    - value: breadcrumbs=Godtear
-      wouldDecide: 24
     - value: breadcrumbs=Ariadna
       wouldDecide: 22
+    - value: breadcrumbs=Godtear
+      wouldDecide: 21
     - value: breadcrumbs=Combined Army
       wouldDecide: 18
     - value: breadcrumbs=Haqqislam
@@ -634,9 +617,9 @@ unmapped:
     - value: breadcrumbs=NA2
       wouldDecide: 13
     - value: breadcrumbs=Games Workshop
-      wouldDecide: 9
-    - value: breadcrumbs=Warmachine
-      wouldDecide: 7
+      wouldDecide: 8
+    - value: breadcrumbs=Supplies
+      wouldDecide: 6
     - value: breadcrumbs=Citadel Accessories & Supplies
       wouldDecide: 6
     - value: breadcrumbs=Warcrow
@@ -647,11 +630,13 @@ unmapped:
       wouldDecide: 3
     - value: breadcrumbs=Warhammer 40K
       wouldDecide: 3
-    - value: breadcrumbs=Playmats
-      wouldDecide: 2
     - value: breadcrumbs=Warhammer Age of Sigmar
       wouldDecide: 2
     - value: breadcrumbs=Limited
+      wouldDecide: 2
+    - value: breadcrumbs=Roleplaying
+      wouldDecide: 2
+    - value: breadcrumbs=5th Edition Fantasy
       wouldDecide: 2
     - value: 'breadcrumbs=Marvel Crisis Protocol: Heimdall & Skurge'
       wouldDecide: 1
@@ -666,6 +651,14 @@ unmapped:
     - value: 'breadcrumbs=Marvel Crisis Protocol: Uncanny X-Men - Affiliation Pack'
       wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Brotherhood of Mutants - Affiliation Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Avengers - Affiliation Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Cabal - Affiliation Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Earth''s Mightiest Core Set'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Immortal Hulk'
       wouldDecide: 1
   ret-goblingaming:
     - value: tags=Tabletop Games
@@ -722,11 +715,11 @@ unmapped:
     - value: vendor=Warlord-WEB
       wouldDecide: 107
     - value: vendor=GW-LOCAL
-      wouldDecide: 100
+      wouldDecide: 99
     - value: tags=Reaper Miniatures
       wouldDecide: 98
     - value: vendor=Mantic
-      wouldDecide: 97
+      wouldDecide: 92
     - value: vendor=GW-OOP
       wouldDecide: 72
     - value: productType=Paints & Supplies
@@ -743,12 +736,8 @@ unmapped:
       wouldDecide: 47
     - value: tags=Kings of War
       wouldDecide: 43
-    - value: vendor=Wyrd
-      wouldDecide: 42
-    - value: tags=Malifaux
-      wouldDecide: 37
     - value: tags=Amazon
-      wouldDecide: 36
+      wouldDecide: 35
     - value: tags=Green Stuff World Supplies
       wouldDecide: 34
     - value: tags=Enemies of Rome
@@ -766,7 +755,7 @@ unmapped:
     - value: tags=French
       wouldDecide: 25
     - value: tags=GW Accessories
-      wouldDecide: 24
+      wouldDecide: 23
     - value: tags=Space Marines
       wouldDecide: 23
     - value: tags=Victory at Sea British
@@ -787,6 +776,10 @@ unmapped:
       wouldDecide: 17
     - value: tags=Rules & Supplements
       wouldDecide: 16
+    - value: tags=Kill Team
+      wouldDecide: 14
+    - value: productType=Miniatures - Plastic
+      wouldDecide: 14
   seed-curated:
     - value: productType=single_kit
       wouldDecide: 6

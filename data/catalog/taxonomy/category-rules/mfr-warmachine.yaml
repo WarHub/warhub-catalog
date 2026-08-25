@@ -1,0 +1,32 @@
+source: mfr-warmachine
+reason: >-
+  warmachine.gg files 609 observations under 7 `product_type` values and every one of them answers
+  the format question -- this is the cleanest taxonomy of any source in the repo. `Paint: paint`
+  already exists in data/catalog/mappings/mfr-warmachine.yaml and is applied at ACQUIRE time, which
+  is why 222 of these rows already carry a `category` hint; the rest of the vocabulary was dropped
+  on the floor. Counts from data/evidence/products/mfr-warmachine/observations.jsonl on 2026-08-25.
+
+
+  `Paint` is restated here rather than left to the acquire-time map. The two do not conflict -- a
+  row with a stated category is `stated` and this stage never reaches it -- but a rule that exists
+  in only one of the two places is a rule that stops applying the moment the other is retired, and
+  the acquire-time category map is the thing this stage is meant to replace.
+
+
+  `Product` (1) and `Wargame` (2) are unmapped: neither says anything.
+
+clauses:
+  - category: miniatures
+    hintEquals: {productType: Miniatures}
+  - category: paint
+    hintEquals: {productType: Paint}
+  - category: book
+    hintEquals: {productType: Roleplaying Game}
+    note: warmachine.gg's RPG shelf is the Iron Kingdoms rulebooks
+  - packaging: digital
+    hintEquals: {productType: Digital Download}
+    note: >-
+      no category: the shelf holds rules PDFs and STL files alike, and the form is all this value
+      actually establishes
+  - packaging: digital
+    hintEquals: {productType: Free Resource}

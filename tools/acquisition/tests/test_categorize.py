@@ -351,11 +351,72 @@ def test_the_worklist_counts_only_products_that_are_still_undecided(tmp_path: Pa
     review = read_yaml(paths.categorize_review)
 
     assert review["summary"] == {
-        "considered": 3, "decided": 2, "undecided": 1,
-        "byBasis": {"mapped": 1, "paint-barcode": 1},
+        "products": 4, "undecided": 1, "decidedThisRun": 2,
+        "byBasis": {"guessed": 1, "mapped": 1, "paint-barcode": 1, "stated": 1},
     }
     values = {row["value"] for row in review["unmapped"]["ret-shop"]}
     assert values == {"productType=Unlabelled"}  # the decided rows' values are absent
+    assert review["deadClauses"] == []
+
+
+def test_the_summary_survives_a_second_run(tmp_path: Path) -> None:
+    """Running twice is a no-op the second time -- the first left nothing replaceable -- so a
+    report phrased as "decided N this run" would read 0 for a perfectly healthy catalog. The
+    catalog figures have to be the ones that mean something, or the section trains a reader to
+    ignore it."""
+    paths = _seed(tmp_path)
+    categorize(paths)
+    first = read_yaml(paths.categorize_review)["summary"]
+    outcome = categorize(paths)
+    second = read_yaml(paths.categorize_review)["summary"]
+
+    assert outcome.decided == 0 and second["decidedThisRun"] == 0
+    assert {k: v for k, v in first.items() if k != "decidedThisRun"} == {
+        k: v for k, v in second.items() if k != "decidedThisRun"
+    }
+
+
+def test_a_dead_clause_is_reported(tmp_path: Path) -> None:
+    """A clause matching NO observation is nearly always a typo -- `hintEquals` is exact and a
+    store's value can differ by a case or a stray space ("Paint set" beside "Paint Set" at
+    Warlord, both real). Nothing announces it: a table with a broken line and a store with no
+    taxonomy produce identical output. Counted over ALL evidence, not over what this run decided,
+    because otherwise every clause looks dead once the catalog is already categorized -- which is
+    exactly when someone reads the file."""
+    paths = _seed(tmp_path)
+    write_yaml(
+        paths.category_rules / "ret-shop.yaml",
+        {
+            "source": "ret-shop", "reason": "one live clause and one typo",
+            "clauses": [
+                {"category": "hobby-auxiliary", "hintEquals": {"productType": "Brushes"}},
+                {"category": "paint", "hintEquals": {"productType": "brushes"}},
+            ],
+        },
+    )
+    categorize(paths)
+    assert read_yaml(paths.categorize_review)["deadClauses"] == ["ret-shop productType=brushes"]
+
+
+def test_a_table_for_a_paint_source_is_refused(tmp_path: Path) -> None:
+    """DEAD BY CONSTRUCTION, and it took two committed tables to notice.
+    `select_product_observations` admits a `catalog: paints` source's rows only where
+    `crossoverToProducts` selects them, and every selected row arrives with a category already
+    stamped -- so it is `stated` and this stage never reaches it. Tables for mfr-monument and
+    mfr-turbodork were written and committed before the dead-clause report showed all fourteen of
+    their clauses matching nothing."""
+    paths = _seed(tmp_path)
+    write_yaml(
+        paths.sources / "mfr-pots.yaml",
+        {"id": "mfr-pots", "kind": "manufacturer", "strategy": "shopify-paints", "catalog": "paints"},
+    )
+    write_yaml(
+        paths.category_rules / "mfr-pots.yaml",
+        {"source": "mfr-pots", "reason": "looks useful, cannot fire",
+         "clauses": [{"category": "paint", "hintEquals": {"productType": "Paint"}}]},
+    )
+    with pytest.raises(ValueError, match="can never fire"):
+        categorize(paths)
 
 
 # --- the committed tables ---------------------------------------------------------------------

@@ -43,7 +43,12 @@ clauses:
     note: see the header -- the store's claim, not an adjudication of the colourless boundary
   - category: paint
     hintEquals: {productType: Paint Marker}
-    note: a marker deposits colour, which is the test categories.yaml sets for `paint`
+    note: >-
+      a marker deposits colour, which is the test categories.yaml sets for `paint`. KNOWN
+      IMPRECISION: the shelf also holds marker SETS -- all 4 checkable products
+      (army-painter/SM8001P-SM8004P, the Speedpaint Marker sets) are stated `paint-set` by the
+      manufacturer, and this clause would say `paint`. It costs nothing today because a stated
+      category outranks this stage entirely, and there is no discriminator in the row to narrow on
   - category: paint-set
     packaging: set
     hintEquals: {productType: Paint Sets}
