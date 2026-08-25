@@ -1,80 +1,54 @@
 name: Data CI
 
-# Runs the data-integrity tests on changes under data/**. Until this file existed they ran
+# Runs the Python test suite on changes under data/**. Until this file existed the data tests ran
 # NOWHERE for such a change: ci.yml gates BOTH of its jobs on one workflow-level `paths:` list
 # (tools/**, Directory.Build.props, Directory.Packages.props, WarHub.Catalog.slnx, global.json,
 # .github/workflows/ci.yml) and data/** is absent from it, while ci.yml's `uv run pytest` was the
 # only one in any workflow -- `git grep -n pytest -- .github/` returned exactly one line before
-# this file existed, and returns this file too once it does. So a pull request touching only data/
-# ran ZERO tests and went green by default. PR #111 is what that looks like in practice: a
-# `classify --apply` run deleted a hand-authored block from data/catalog/overrides.yaml and
-# nothing in CI objected.
+# this file existed. So a pull request touching only data/ ran ZERO tests and went green by
+# default. PR #111 is what that looks like in practice: a `classify --apply` run deleted a
+# hand-authored block from data/catalog/overrides.yaml and nothing in CI objected.
 #
-# WHY A SECOND WORKFLOW RATHER THAN ADDING 'data/**' TO ci.yml's FILTER. That filter is a budget,
-# not an oversight. ci.yml restores, builds and tests the whole .NET solution AND runs the full
-# pytest suite (~15 min; its build job carries timeout-minutes: 15). Every nightly
-# catalog-acquire.yml PR and every paint-catalog-update.yml PR touches data/**, so widening the
-# filter would put that whole suite -- including a .NET build that no YAML file can affect -- on
-# several automated data PRs a week. This workflow runs the two data-facing test files and
-# nothing else.
+# IT RUNS THE WHOLE SUITE, and it used to run a hand-listed subset. The list was the bug. Its
+# membership rule was stated here in prose -- "every test file whose subject is COMMITTED DATA
+# rather than code ... add a file here the moment one is written, or the net is hung only halfway
+# and the gap is invisible because the job still goes green" -- and prose does not enforce itself.
+# Measured 2026-08-25 on the tree at 98fa5f9: the list named 7 of the 27 test files that read
+# committed data, so 20 files' worth of data-facing assertions ran on no data PR at all.
 #
-# WHAT IT COVERS. Every test file whose subject is COMMITTED DATA rather than code, which is the
-# membership rule -- add a file here the moment one is written, or the net is hung only halfway
-# and the gap is invisible because the job still goes green.
+# THE GAP CAUGHT A REAL REGRESSION AND HID IT. tests/test_classify_queue.py asserts that every
+# null-gameSystem product in the resolved catalog can be found in the evidence it was resolved
+# from. The nightly merge #35 made that false -- `build_queue` re-joined a different observation
+# set than the resolver did, so it derived `army-painter/CP3001S` for a product published as
+# `army-painter/CP3001` -- and the file was not on the list, so every check on that PR was green
+# and main was left red. It was found by running the full suite by hand, days later.
 #
-#   tests/test_repo_data.py        the YAML-1.2 scalar-retype guard, the within-brand barcode
-#                                  double-hold guard, the crossover declaration/compile/
-#                                  no-double-publish checks, the paint-bridge gate check, the
-#                                  retract-key silent-no-op guard, the setRefs correction guard.
-#   tests/test_set_contents.py     the boxed-set relation's invariants: no ref silently dropped,
-#                                  no quantity invented, every member naming exactly one committed
-#                                  paint, and the byte-compare proving the committed relation is
-#                                  reproducible from committed inputs.
-#   tests/test_paint_repro.py      data/paints/harvest/*.yaml and barcodes/citadel-colour.yaml
-#                                  pinned to the evidence they project.
-#   tests/test_paint_equivalences.py  no equivalence naming a paint the archive no longer holds,
-#                                  under the archive key AND the publisher's own key.
-#   tests/test_paint_harvest_gsw_names.py  every renaming addition carries its alias, and no alias
-#                                  erases an archived hex on rename.
-#   tests/test_paint_volume_gsw.py the volume-override block is exactly the records no constant can
-#                                  reach, and no override smuggles in a barcode.
-#   tests/test_vocabulary.py       every `category`/`packaging` value the committed catalog uses is
-#                                  declared in data/catalog/taxonomy/categories.yaml, and every
-#                                  legacy value names a real migration target. The resolver enforces
-#                                  this too, but only on a run someone performs -- a hand-edited
-#                                  override or a new crossover stamp would otherwise sit unnoticed
-#                                  until the next nightly.
+# WHAT IT COSTS, which is the trade the old list was buying. ci.yml's Python job measures ~10 min
+# for the full suite on this runner (10m11s, run 32563899011); the seven-file job measured 2m42s.
+# So this is ~7 extra minutes on the handful of automated data PRs a week that trigger it, against
+# a class of failure that is invisible by construction. Nothing here builds the .NET solution --
+# that stays in ci.yml, gated on tools/**, because no YAML file can affect it.
 #
-# THE LAST TWO WERE ADDED 2026-08-14 AFTER RUNNING NOWHERE ON THE CHANGE THEY POLICE. Their subject
-# is data/paints/overrides.yaml -- aliases, hex erasure, volume assertions -- so the membership rule
-# above always covered them, but they sat only in ci.yml, which filters to tools/**. An overrides
-# edit that touches no code therefore reached neither workflow. PR #133 in this stack is exactly
-# that shape: seven files, all under data/, adding 92 aliases and 6 hex corrections, with both alias
-# guards silent. They cost this job ~78s.
+# `-m 'not live'` comes from pyproject.toml's addopts, so the network tests stay out without
+# being named here.
 #
-# The next two matter here more than anywhere: a nightly catalog-acquire PR landing a new GW trade
-# workbook can make the committed Citadel barcode file non-reproducible, and a local regeneration
-# run without --equivalences (the documented procedure) can strand an equivalence ref. Both commit
-# with `add-paths: data*`, so this workflow is the ONLY one their PRs trigger -- under ci.yml those
-# two files are reachable only from a tools/** change, which such a PR never makes. Not one of
-# these was reachable from a data-only change before this file existed.
+# ONE RULE FOR WHAT MAY BE ASSERTED, and it is load-bearing now that both pipelines' tests run on
+# both pipelines' PRs: a test must never require the PRODUCT catalog and the PAINT catalog to
+# agree. Neither PR can fix such a failure -- paint-catalog-update.yml never runs `resolve`, so
+# product data is frozen on its PRs, and catalog-acquire.yml never writes data/paints. A test of
+# that shape is red on one side with no available correction. PR #143 was exactly that and was
+# closed unmerged. Cross-catalog invariants belong in a stage that owns both inputs, not in a
+# PR-triggered test.
 #
-# RUNTIME. The two-file version of this job measured 2m9s on this runner for 25 tests (2026-08-11,
-# the first real run, PR #112 triggering it on itself). The four-file version measures 2m41s for 29
-# tests on the Windows dev box, against 3m49s and 4m38s there for the two-file one -- so the extra
-# two gates cost well under a minute and the runner should stay near the 2m mark. The six-file
-# version adds 29 more tests measured at 78s on the same dev box. Everything here
-# is I/O-bound: ~150 committed YAML files, one of them 9 MB, walked several times over, plus a
-# subprocess regeneration of the set-contents relation and an in-process one of the harvest -- the
-# kind of work a Linux runner does markedly faster than NTFS, which is the whole 2x. Replace the
-# runner figure once the six-file job has a few real runs. timeout-minutes below stays well above
-# it on purpose: it is a runaway backstop, not a performance budget, and both regenerations grow
-# with the data.
+# A PR touching data/** AND tools/** runs the suite twice, once here and once in ci.yml. That is
+# deliberate: the alternative is deselecting these from ci.yml, which would let a tools-only
+# change break a data guard silently -- the mirror image of the hole this workflow closes.
 #
-# A PR touching data/** AND tools/** runs these tests twice, once here and once inside
-# ci.yml's full suite. That is deliberate: the alternative is deselecting them from ci.yml, which
-# would let a tools-only change break a data guard silently -- the mirror image of the hole this
-# workflow closes.
+# catalog-acquire.yml runs the same command inside its integrate job, for a reason this workflow
+# cannot cover: the runs THIS file queues for the sticky bot PRs sit at `action_required` awaiting
+# manual approval and are never executed (six-plus on catalog/acquisition, 2026-08-13 to 08-18,
+# 0s each). Running it in the job that writes the data removes the approval from the loop. Both
+# call plain `pytest` now, so there is no longer a list to keep in sync between them.
 
 on:
   push:
@@ -99,7 +73,7 @@ jobs:
   data-integrity:
     name: Data integrity tests
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: tools/acquisition
@@ -107,7 +81,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
       - run: uv sync --locked
-      - run: uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py tests/test_vocabulary.py -q
+      - run: uv run pytest -q
 
       # THE TESTS WRITE INTO THE CHECKOUT. tests/test_set_contents.py:138 runs
       # scripts/gen_set_contents.py as a subprocess with cwd=REPO_ROOT, so the run rewrites

@@ -595,11 +595,15 @@ jobs:
       # cover. Running the files HERE removes the approval from the loop entirely: the job that
       # writes the data validates it, in the same job, before anyone is asked to merge it.
       #
-      # THE FILE LIST IS data-ci.yml's, VERBATIM, and must stay in sync with it -- that file's
-      # header states the membership rule ("every test file whose subject is COMMITTED DATA
-      # rather than code ... add a file here the moment one is written"). Two lists is the cost
-      # of covering both paths; a file added to one and not the other leaves exactly the
-      # half-hung net the rule warns about.
+      # THERE IS NO LONGER A FILE LIST TO KEEP IN SYNC. Both paths run plain `pytest`. The two
+      # copies of a hand-picked list were the previous arrangement, and this comment used to end
+      # "a file added to one and not the other leaves exactly the half-hung net the rule warns
+      # about" -- which is what happened: tests/test_classify_queue.py was on neither list, the
+      # nightly merge #35 turned it red, and every check stayed green. Measured 2026-08-25, the
+      # list named 7 of the 27 test files that read committed data. data-ci.yml's header carries
+      # the cost measurement (~10 min for the suite against 2m42s for the seven files) and the one
+      # rule this arrangement needs: no test may require the product catalog and the paint catalog
+      # to agree, because neither pipeline's PR can fix such a failure.
       #
       # data-ci.yml STAYS AS IT IS. It is now the net for HUMAN pull requests touching data/**
       # (and for paint-catalog-update.yml's PRs, which this workflow never touches). Narrowing it
@@ -613,19 +617,17 @@ jobs:
       # fail-after-PR property -- a failing run still opens/updates a sticky PR carrying its own
       # findings -- while the job still goes red in Checks.
       #
-      # RUNTIME, on a real runner rather than an extrapolation -- data-ci.yml's header asks for
-      # exactly this ("Replace the runner figure once the six-file job has a few real runs").
-      # The six-file job measured 2m42s on ubuntu-latest, on the Data CI run this stack's own
-      # PR #140 triggered. For comparison, the same six files against catalog/acquisition's tree
-      # (e84a60b) took 6m09s for 64 tests on a Windows dev box with zero data/ drift -- the ~2.3x
-      # is NTFS, as that header predicts. So ~3 min here, against this job's timeout-minutes: 120
-      # and a nightly that already runs 1h50m.
+      # RUNTIME, on a real runner rather than an extrapolation. The seven-file job measured 2m42s
+      # on ubuntu-latest; the full suite measures ~10 min there (10m11s, ci.yml run 32563899011),
+      # and 13m47s for the 20 previously-unlisted files alone on a Windows dev box -- the ~2.3x is
+      # NTFS. So ~10 min here, against this job's timeout-minutes: 120 and a nightly that already
+      # runs 1h50m. Cheap for a run that has just rewritten every product file in the repo.
       - name: Data-integrity tests
         id: datatests
         working-directory: tools/acquisition
         run: |
           set +e
-          uv run pytest tests/test_repo_data.py tests/test_set_contents.py tests/test_paint_repro.py tests/test_paint_equivalences.py tests/test_paint_harvest_gsw_names.py tests/test_paint_volume_gsw.py tests/test_vocabulary.py -q
+          uv run pytest -q
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           set -e
 
@@ -717,7 +719,7 @@ jobs:
             echo "### Data-integrity tests"
             echo
             if [ "${{ steps.datatests.outputs.exit_code }}" = "0" ] && [ "${{ steps.datadrift.outputs.drift }}" = "0" ]; then
-              echo "Passed on this run's own tree -- the same six files \`data-ci.yml\` runs, executed here so the job that writes the data validates it."
+              echo "Passed on this run's own tree -- the full suite, the same command \`data-ci.yml\` runs, executed here so the job that writes the data validates it."
             else
               echo ":rotating_light: **FAILED on this run's own data.** Do not merge until this is understood."
               echo
