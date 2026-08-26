@@ -86,3 +86,19 @@ def test_ak_interactive_codes_its_letter_prefixed_families_but_not_the_range_pag
     for sku in ("AK 3G RANGE AFV", "AK 3G RANGE FIG", "AK 3G RANGE AIR", "AK 3G RANGE GENERIC",
                 "RANGE AKAD"):
         assert taxonomy.normalize_code("ak-interactive", sku) is None, sku
+
+
+def test_army_painter_codes_its_tool_and_brush_prefixes() -> None:
+    """TL/BR reach the PRODUCT catalog from legacy-catalog and from retailers, whatever the paint
+    crossover selects, and there the pattern decides whether the record gets a product code or a
+    slug of somebody's shop title. `codeStrip`/`-EN` handling still applies, and the range prefixes
+    keep working.
+    """
+    taxonomy = Taxonomy.load(Path(__file__).resolve().parents[3] / "data" / "catalog" / "taxonomy")
+    for sku in ("TL5034", "TL5057", "TL5063P", "BR7003", "BR7009", "BR7017",
+                "WP8082", "BNDL212"):
+        assert taxonomy.normalize_code("army-painter", sku) == sku, sku
+    # A retailer's variant suffix is NOT an Army Painter article number.
+    assert taxonomy.normalize_code("army-painter", "TL5034-SINGLE") is None
+    # Still the one row left uncoded on purpose rather than widening further to chase it.
+    assert taxonomy.normalize_code("army-painter", "75005") is None

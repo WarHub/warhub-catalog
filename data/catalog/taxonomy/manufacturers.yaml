@@ -142,12 +142,30 @@ manufacturers:
     name: The Army Painter
     # BNDL added 2026-08-05 for the boxed sets crossing into the product catalog
     # (mfr-armypainter.yaml crossoverToProducts): thearmypainter.com numbers its bundles
-    # BNDL212/224/230, outside the range prefixes. Codes 48 of the 49 selected sets. TL/BR were
-    # considered and rejected -- they are the BRUSH set prefixes, which that block vetoes anyway,
-    # and adding them measures 52 of 56 rather than the 55 an earlier estimate claimed. The last
+    # BNDL212/224/230, outside the range prefixes. Codes 48 of the 49 selected sets. The last
     # uncoded row is 75005 "D&D Undead Paint Set"; left as a name slug rather than widening
     # further to chase one row.
-    codePattern: '(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-Z]?|BNDL\d{3,4}'
+    #
+    # TL/BR ADDED 2026-08-26, REVERSING THE NOTE THAT STOOD HERE. It said "TL/BR were considered
+    # and rejected -- they are the BRUSH set prefixes, which that block vetoes anyway, and adding
+    # them measures 52 of 56 rather than the 55 an earlier estimate claimed." Both halves are about
+    # the CROSSOVER SELECTION -- which of this paint source's rows get pulled into the product
+    # catalog as boxed sets -- and that is a different code path from `Taxonomy.normalize_code`.
+    # TL and BR rows reach the product catalog anyway, from `legacy-catalog` and from retailers who
+    # stock Army Painter tools and brushes, and for those the pattern decides whether the record
+    # gets a product code or a slug of somebody's shop title.
+    #
+    # Measured 2026-08-26 over the resolved catalog: 47 published ids are replaced by 46, every one
+    # of them under army-painter, and the swap is name-slug -> article number
+    # (`army-painter/hobby-knife` -> `army-painter/TL5034`, `army-painter/basecoating-brush` ->
+    # `army-painter/BR7003`). 47 for 46 because two slugs that were separate records collapse onto
+    # one code. No conflict count moves -- this fixes identity, not disagreement -- and
+    # `report --ean-guard` reports 0 lost, every barcode following its record to the coded id.
+    #
+    # `(-[A-Z0-9]+)?` is deliberately NOT appended to this alternative, unlike ak-interactive's:
+    # measured both ways, it changes nothing here (same 47/46), and leaving it off keeps a
+    # retailer's variant suffix out of Army Painter's article numbers.
+    codePattern: '(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-Z]?|BNDL\d{3,4}|(TL|BR)\d{4}[A-Z]?'
     # EAN 5713799314009 observed live on thearmypainter.com variant barcode (Warpaints
     # Fanatic: Moldy Wine, WP3140P) -> GS1 Denmark company prefix.
     gs1Prefixes: ['5713799']
