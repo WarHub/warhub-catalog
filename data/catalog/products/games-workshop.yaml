@@ -63426,7 +63426,7 @@ products:
       - ret-radaddel:/soulblight-gravelords-wight-king
       - ret-radaddel:soulblight-gravelords-wight-king
   - id: games-workshop/99070207021
-    name: Mortisan Boneshaper
+    name: OSSIARCH BONEREAPERS MORTISAN BONESHAPER
     manufacturer: games-workshop
     productCode: '99070207021'
     sku: '99070207021'
@@ -63436,23 +63436,14 @@ products:
     gameSystem: age-of-sigmar
     faction: grand-alliance-death
     category: miniatures
-    categoryBasis: default
-    packaging: single
+    categoryBasis: guessed
     status: current
     availability: in_stock
-    firstSeen: '2026-07-07'
-    priceGbp: 20.5
+    firstSeen: '2026-07-13'
     priceEur: 21.3
-    url: https://www.warhammer.com/en-GB/shop/Ossiarch-Bonereapers-Mortisan-Boneshaper-2019
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070207010_OBRMortisanBoneshaper01.jpg
-    description: |-
-      The Boneshaper's art is that of creation, not destruction. Though their ossified talons can rake through flesh, and though they can summon a gale of sharp bone splinters at will, they focus their efforts on regenerating the Ossiarch regiments around them.
-
-      Posed upon a giant skull, midway through creating a new bone construct, the Mortisan Boneshaper is an impressive model. Not only can it cast a lethal shard-storm of broken bones, but it can also repair nearby Ossiarch Bonereapers units.
-
-      This 10-part plastic kit makes one Mortisan Boneshaper and comes supplied with a 32mm Citadel round base.
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ossiarch-bonereapers-mortisan-boneshaper
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/120563-ossiarch-bonereapers-mortisan-boneshaper-99120207208-1.webp?v=1785547437
     evidence:
-      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/mortisan-boneshaper
       - mfr-gw-trade:99070207021
       - ret-gamenerdz:/warhammer-age-of-sigmar-ossiarch-bonereapers-mortisan-boneshaper
       - ret-radaddel:/ossiarch-bonereapers-mortisan-boneshaper
@@ -88296,6 +88287,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120108082
+  - id: games-workshop/99120108083
+    name: 'KILL TEAM: ELUCIDIAN STARSTRIDERS'
+    manufacturer: games-workshop
+    productCode: '99120108083'
+    sku: '99120108083'
+    ean: '5011921180998'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: discontinued
+    firstSeen: '2026-07-23'
+    url: https://www.goblingaming.co.uk/products/kill-team-elucidian-starstriders
+    evidence:
+      - arc-goblingaming:/products/kill-team-elucidian-starstriders
+      - mfr-gw-trade:99120108083
   - id: games-workshop/99120108084
     name: 'ADEPTA SORORITAS: SANCTORUM GUARD'
     manufacturer: games-workshop
@@ -89042,8 +89048,6 @@ products:
     sku: '99120108113'
     ean: '5011921236336'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921180998'
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -89065,10 +89069,8 @@ products:
 
       These miniatures are supplied unpainted and require assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
-      - arc-goblingaming:/products/kill-team-elucidian-starstriders
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/rogue-trader-entourage-and-voidsmen-at-arms
       - mfr-gw-algolia:P-187740-99120108113
-      - mfr-gw-trade:99120108083
       - mfr-gw-trade:99120108113
       - ret-goblingaming:kill-team-elucidian-starstriders
       - ret-tistaminis:imperial-agents-rogue-trader-entourage
@@ -97984,6 +97986,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120201065
+  - id: games-workshop/99120201066
+    name: START COLLECTING! GOREBLADE WARBAND
+    manufacturer: games-workshop
+    productCode: '99120201066'
+    sku: '99120201066'
+    ean: '5011921079964'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120201066
   - id: games-workshop/99120201070
     name: Warhammer Age of Sigmar Skirmish (eBook)
     manufacturer: games-workshop
@@ -98492,6 +98507,24 @@ products:
       - mfr-gw-trade:99120201112
       - ret-gamenerdz:/warhammer-age-of-sigmar-endless-spells-disciples-of-tzeentch
       - ret-goblingaming:endless-spells-disciples-of-tzeentch
+  - id: games-workshop/99120201114
+    name: 'WARCRY: THE JADE OBELISK'
+    manufacturer: games-workshop
+    productCode: '99120201114'
+    sku: '99120201114'
+    ean: '5011921139521'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceCad: 78.0
+    url: https://tistaminis.com/products/warcry-the-jade-obelisk
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_42767f3f-e9cf-4120-8cc2-4feedf2cbacb.jpg?v=1760205212
+    evidence:
+      - mfr-gw-trade:99120201114
+      - ret-tistaminis:warcry-the-jade-obelisk
   - id: games-workshop/99120201116
     name: 'BROKEN REALMS: GRESH''S IRON REAPERS'
     manufacturer: games-workshop
@@ -100677,8 +100710,6 @@ products:
     sku: '99120201215'
     ean: '5011921252923'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921079964'
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
@@ -100712,7 +100743,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/goreblade-warband
       - mfr-gw-algolia:P-221159-99120201215
-      - mfr-gw-trade:99120201066
       - mfr-gw-trade:99120201215
       - ret-goblingaming:blades-of-khorne-goreblade-warband
       - ret-tistaminis:warhammer-khorne-bloodbound-goreblade-warband-start-collecting-new
@@ -101220,8 +101250,6 @@ products:
     sku: '99120201253'
     ean: '5011921261017'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921139521'
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
@@ -101231,7 +101259,6 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 38.0
-    priceCad: 78.0
     url: https://www.warhammer.com/en-GB/shop/disciples-of-tzeentch-the-jade-obelisk-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010299038_WCSunderedFateJadeObeliskLead.jpg
     description: |-
@@ -101255,10 +101282,8 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/jade-obelisk
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/jade-obelisk-2
       - mfr-gw-algolia:P-221477-99120201253
-      - mfr-gw-trade:99120201114
       - mfr-gw-trade:99120201253
       - ret-goblingaming:age-of-sigmar-warcry-the-jade-obelisk-warband
-      - ret-tistaminis:warcry-the-jade-obelisk
   - id: games-workshop/99120201254
     name: 'SLAVES/DARKNESS: URKHAN THE DARK WARDEN'
     manufacturer: games-workshop
@@ -104126,6 +104151,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120205056
+  - id: games-workshop/99120205057
+    name: 'WARCRY FYRESLAYERS: VULKYN FLAMESEEKERS'
+    manufacturer: games-workshop
+    productCode: '99120205057'
+    sku: '99120205057'
+    ean: '5011921201471'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120205057
   - id: games-workshop/99120205059
     name: 'GROMBRINDAL: THE WHITE DWARF (ISSUE 500)'
     manufacturer: games-workshop
@@ -104391,8 +104429,6 @@ products:
     sku: '99120205083'
     ean: '5011921261437'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921201471'
     gameSystem: age-of-sigmar
     faction: grand-alliance-order
     category: miniatures
@@ -104426,7 +104462,6 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/vulkyn-flameseekers
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/vulkyn-flameseekers-2
       - mfr-gw-algolia:P-221456-99120205083
-      - mfr-gw-trade:99120205057
       - mfr-gw-trade:99120205083
       - ret-goblingaming:warcry-fyreslayers-vulkyn-flameseekers-warband
       - ret-tistaminis:warcry-fyreslayers-vulkyn-flameseekers
@@ -107237,6 +107272,19 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120207130
+  - id: games-workshop/99120207131
+    name: 'WARCRY: ASKURGAN TRUEBLADES'
+    manufacturer: games-workshop
+    productCode: '99120207131'
+    sku: '99120207131'
+    ean: '5011921182121'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120207131
   - id: games-workshop/99120207135
     name: 'NIGHTHAUNT: LEGION OF GRIEF'
     manufacturer: games-workshop
@@ -109289,15 +109337,24 @@ products:
       - games-workshop/99070207010
       - games-workshop/99070207021
     gameSystem: age-of-sigmar
+    faction: grand-alliance-death
     category: miniatures
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-07-13'
+    firstSeen: '2026-07-07'
     priceGbp: 20.5
     url: https://www.warhammer.com/en-GB/shop/Ossiarch-Bonereapers-Mortisan-Boneshaper-2019
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070207010_OBRMortisanBoneshaper01.jpg
+    description: |-
+      The Boneshaper's art is that of creation, not destruction. Though their ossified talons can rake through flesh, and though they can summon a gale of sharp bone splinters at will, they focus their efforts on regenerating the Ossiarch regiments around them.
+
+      Posed upon a giant skull, midway through creating a new bone construct, the Mortisan Boneshaper is an impressive model. Not only can it cast a lethal shard-storm of broken bones, but it can also repair nearby Ossiarch Bonereapers units.
+
+      This 10-part plastic kit makes one Mortisan Boneshaper and comes supplied with a 32mm Citadel round base.
     evidence:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/mortisan-boneshaper
       - mfr-gw-algolia:prod4300289-99120207208
       - mfr-gw-trade:99120207208
       - ret-goblingaming:ossiarch-bonereapers-mortisan-boneshaper
@@ -110013,8 +110070,6 @@ products:
     sku: '99120207248'
     ean: '5011921261444'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921182121'
     gameSystem: other-games
     faction: grand-alliance-death
     category: miniatures
@@ -110046,7 +110101,6 @@ products:
       - legacy-catalog:games-workshop/other-games/grand-alliance-death/askurgan-trueblades
       - legacy-catalog:games-workshop/other-games/grand-alliance-death/askurgan-trueblades-2
       - mfr-gw-algolia:P-221458-99120207248
-      - mfr-gw-trade:99120207131
       - mfr-gw-trade:99120207248
       - ret-goblingaming:age-of-sigmar-warcry-askurgan-trueblades
       - ret-tistaminis:warcry-askurgan-trueblades
@@ -112175,7 +112229,7 @@ products:
     evidence:
       - mfr-gw-trade:99120209098
   - id: games-workshop/99120209100
-    name: Boingrot Bounderz
+    name: GLOOMSPITE GITZ SQUIG HOPPERS
     manufacturer: games-workshop
     productCode: '99120209100'
     sku: '99120209100'
@@ -112185,26 +112239,12 @@ products:
     gameSystem: age-of-sigmar
     faction: grand-alliance-destruction
     category: miniatures
-    categoryBasis: default
-    packaging: single
+    categoryBasis: guessed
     status: current
-    availability: in_stock
-    firstSeen: '2026-07-07'
-    priceGbp: 38.0
-    url: https://www.warhammer.com/en-GB/shop/boingrot-bounderz-2023
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120209152_GloomspiteGitzBoungrotBounderzRegimentREPACKAGED1.jpg
-    description: |-
-      Boingrot Bounderz are the proud 'veterans' of the Moonclan squig riders – grots who have managed to survive more than a single, violent battle atop their bouncing beast. Clad in rusty iron loon helms, these delusional show-offs skewer enemies with wickedly pointed pokin’ lances.
-
-      This multipart plastic kit builds 10 Boingrot Bounderz, battle-tested bouncing grot lancers. These fang-filled fighters are packed with character, and the kit offers loads of interchangeable components to make the unit your own – including squig heads, squig tongues, loon helms, armoured bodies, and pokin' lances – meaning no two models need look alike, even in the biggest squiggly stampede. The kit also includes a particularly impressive loon helm and an armoured squig head for a Bounder Boss to lead the unit.
-
-      This kit can alternatively build 10 Squig Hoppers, grots who trade armour and spears for even more bounce.
-
-      This kit comprises 140 plastic components, and comes with 10x Citadel 32mm Round Bases. These miniatures are supplied unpainted and require assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
+    firstSeen: '2026-07-13'
+    url: https://wargameportal.com/products/boingrot-bounderz
     evidence:
       - arc-wargameportal:/products/boingrot-bounderz
-      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/boingrot-bounderz
-      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/squig-hoppers
       - mfr-gw-trade:99120209100
   - id: games-workshop/99120209101
     name: GLOOMSPITE GITZ DANKHOLD TROGGOTH
@@ -112465,6 +112505,19 @@ products:
     evidence:
       - mfr-gw-trade:99120209115
       - ret-tistaminis:gloomspite-gitz-trugg-the-troggoth-king
+  - id: games-workshop/99120209116
+    name: 'ORRUK WARCLANS: KRULEBOYZ MONSTA-KILLAZ'
+    manufacturer: games-workshop
+    productCode: '99120209116'
+    sku: '99120209116'
+    ean: '5011921201495'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120209116
   - id: games-workshop/99120209118
     name: 'GLOOMSPITE GITZ: GROTMAS GITZ'
     manufacturer: games-workshop
@@ -113271,7 +113324,7 @@ products:
       - mfr-gw-trade:99120209151
       - ret-goblingaming:mangler-squigs
   - id: games-workshop/99120209152
-    name: Squig Hoppers
+    name: Boingrot Bounderz
     manufacturer: games-workshop
     productCode: '99120209152'
     sku: '99120209152'
@@ -113280,15 +113333,27 @@ products:
     supersedes:
       - games-workshop/99120209100
     gameSystem: age-of-sigmar
+    faction: grand-alliance-destruction
     category: miniatures
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-07-13'
+    firstSeen: '2026-07-07'
     priceGbp: 38.0
-    url: https://www.warhammer.com/en-GB/shop/Gloomspite-Gitz-Squig-Hoppers-2019
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120209152_GloomspiteGitzSQUIGHOPPERSRegimentREPACKAGED1.jpg
+    url: https://www.warhammer.com/en-GB/shop/boingrot-bounderz-2023
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120209152_GloomspiteGitzBoungrotBounderzRegimentREPACKAGED1.jpg
+    description: |-
+      Boingrot Bounderz are the proud 'veterans' of the Moonclan squig riders – grots who have managed to survive more than a single, violent battle atop their bouncing beast. Clad in rusty iron loon helms, these delusional show-offs skewer enemies with wickedly pointed pokin’ lances.
+
+      This multipart plastic kit builds 10 Boingrot Bounderz, battle-tested bouncing grot lancers. These fang-filled fighters are packed with character, and the kit offers loads of interchangeable components to make the unit your own – including squig heads, squig tongues, loon helms, armoured bodies, and pokin' lances – meaning no two models need look alike, even in the biggest squiggly stampede. The kit also includes a particularly impressive loon helm and an armoured squig head for a Bounder Boss to lead the unit.
+
+      This kit can alternatively build 10 Squig Hoppers, grots who trade armour and spears for even more bounce.
+
+      This kit comprises 140 plastic components, and comes with 10x Citadel 32mm Round Bases. These miniatures are supplied unpainted and require assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/boingrot-bounderz
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/squig-hoppers
       - mfr-gw-algolia:prod4100203-99120209152
       - mfr-gw-algolia:prod5080150-99120209152
       - mfr-gw-trade:99120209152
@@ -113447,8 +113512,6 @@ products:
     sku: '99120209158'
     ean: '5011921261420'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921201495'
     gameSystem: age-of-sigmar
     faction: grand-alliance-destruction
     category: miniatures
@@ -113482,7 +113545,6 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/monsta-killaz
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/monsta-killaz-2
       - mfr-gw-algolia:P-221454-99120209158
-      - mfr-gw-trade:99120209116
       - mfr-gw-trade:99120209158
       - ret-goblingaming:orruk-warclans-monsta-killaz
   - id: games-workshop/99120210023
@@ -119564,6 +119626,21 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120299062
+  - id: games-workshop/99120299063
+    name: 'SONS OF BEHEMAT: MANCRUSHER GARGANTS'
+    manufacturer: games-workshop
+    productCode: '99120299063'
+    sku: '99120299063'
+    ean: '5011921133901'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-mancrusher-gargants
+    evidence:
+      - mfr-gw-trade:99120299063
+      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-mancrusher-gargants
   - id: games-workshop/99120299064
     name: 'AGE OF SIGMAR: AZYRITE SHATTERED PLAZA'
     manufacturer: games-workshop
@@ -119851,8 +119928,6 @@ products:
     sku: '99120299088'
     ean: '5011921177806'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921133901'
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
@@ -119877,9 +119952,7 @@ products:
       - mfr-gw-algolia:prod5000329-99120299088
       - mfr-gw-algolia:prod5000408-99120299088
       - mfr-gw-algolia:prod5000409-99120299088
-      - mfr-gw-trade:99120299063
       - mfr-gw-trade:99120299088
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-mancrusher-gargants
       - ret-goblingaming:mancrusher-gargants-sons-of-behemat-age-of-sigmar-99120299063
   - id: games-workshop/99120299096
     name: Saviours of Cinderfall
@@ -121991,6 +122064,19 @@ products:
       - ret-goblingaming:necromunda-escher-cutters
       - ret-radaddel:/necromunda-escher-cutters
       - ret-radaddel:necromunda-escher-cutters
+  - id: games-workshop/99120599047
+    name: 'THATOS PATTERN: PLATFORMS & WALKWAYS'
+    manufacturer: games-workshop
+    productCode: '99120599047'
+    sku: '99120599047'
+    ean: '5011921176939'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120599047
   - id: games-workshop/99120599048
     name: 'THATOS PATTERN: EXTENDED HAB MODULE'
     manufacturer: games-workshop
@@ -122073,8 +122159,6 @@ products:
     sku: '99120599051'
     ean: '5011921176953'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921176939'
     gameSystem: other-games
     faction: necromunda
     category: terrain
@@ -122103,7 +122187,6 @@ products:
     evidence:
       - legacy-catalog:games-workshop/other-games/necromunda/thatos-pattern-platforms-walkways
       - mfr-gw-algolia:prod4900240-99120599051
-      - mfr-gw-trade:99120599047
       - mfr-gw-trade:99120599051
       - ret-goblingaming:necromunda-ash-wastes-thatos-pattern-platforms-walkways
       - ret-radaddel:/necromunda-thatos-pattern-platform-and-walkways
