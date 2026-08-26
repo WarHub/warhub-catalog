@@ -172,7 +172,13 @@ def _parked_entity_contexts(paths: DataPaths) -> dict[str, EntityContext]:
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
     evidence = EvidenceStore(paths.evidence_products).load_all()
     observations = [observation for source in evidence.values() for observation in source.values()]
-    joined = join_observations(observations, taxonomy, kinds, _load_matches(paths))
+    joined = join_observations(
+        observations,
+        taxonomy,
+        kinds,
+        _load_matches(paths),
+        {sid: d.skuIsListingId for sid, d in descriptors.items()},
+    )
 
     contexts: dict[str, EntityContext] = {}
     for entity in parked_ids:

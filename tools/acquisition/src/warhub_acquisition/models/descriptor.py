@@ -211,6 +211,22 @@ class SourceDescriptor(BaseModel):
     # confidence, and `join.py`'s identity ordering), and legacy's curated standing is correct in
     # all four of the others.
     staleFields: list[str] = Field(default_factory=list)
+    # This source's `sku` is its own LISTING id: two of its observations carrying the same sku are
+    # one store listing, and `resolve/join.py` unions them. Off by default.
+    #
+    # WHY THIS IS A DECLARATION AND NOT A GLOBAL RULE. A source's observation KEY is a function of
+    # its strategy -- a sitemap path under `sitemap-structured-data`, a handle under `shopify` --
+    # so changing a source's strategy re-keys every listing it has. `EvidenceStore.upsert` is
+    # keyed per observation and a `full_sweep=False` source never prunes, so both generations sit
+    # in the ledger and the store is represented twice; the later generation starts life with no
+    # barcode and joins nothing. The store's own article number is the identity that survives that,
+    # but only where the store actually keys on it -- an article number a store recycles across
+    # products would fabricate one product out of two, which is why this is opt-in and why
+    # `join.py` still refuses any group whose members disagree about the barcode.
+    #
+    # It is about the SOURCE's own rows only. It never joins across sources; two stores using the
+    # same number for different things is the normal case, not a claim about anything.
+    skuIsListingId: bool = False
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.

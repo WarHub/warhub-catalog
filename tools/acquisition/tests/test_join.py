@@ -444,3 +444,79 @@ def test_supersession_naming_no_resolved_entity_is_reported() -> None:
             "missing": ["games-workshop/99120110001"],
         }
     ]
+
+
+def test_sku_is_listing_id_reattaches_a_source_that_re_keyed_itself() -> None:
+    # A source that changes strategy re-keys every listing it has -- a sitemap path becomes a
+    # shopify handle -- and nothing prunes the old generation, so the store is in the ledger twice.
+    # The newer copy typically has no barcode yet (the shopify budget rations the detail fetch), so
+    # it is anchorless and founds an entity named after the shop's own title. The store's own
+    # article number is the identity that survives the re-key.
+    members = [
+        obs("mfr-gw:kit", sku="99120101234", ean="5011921000012", name="A Kit"),
+        obs("ret-radaddel:/a-kit", sku="119157", ean="5011921000012", name="A Kit"),
+        obs("ret-radaddel:a-kit", sku="119157", name="A Kit von Games Workshop"),
+    ]
+    result = join_observations(members, TAXONOMY, KINDS, Matches(), {"ret-radaddel": True})
+    assert list(result.entities) == ["games-workshop/99120101234"]
+    assert not result.ambiguous
+
+    # Without the declaration the anchorless row stays its own name-slug entity.
+    off = join_observations(members, TAXONOMY, KINDS, Matches())
+    assert sorted(off.entities) == [
+        "games-workshop/99120101234",
+        "games-workshop/a-kit-von-games-workshop",
+    ]
+
+
+def test_sku_group_disagreeing_on_the_barcode_is_reported_not_joined() -> None:
+    # A store that recycles an article number across products is not one listing, and unioning it
+    # would fabricate a product. The guard runs per group on every resolve rather than trusting the
+    # descriptor's claim.
+    members = [
+        obs("ret-radaddel:/first", sku="119157", ean="5011921000012", name="First"),
+        obs("ret-radaddel:second", sku="119157", ean="5011921000036", name="Second"),
+    ]
+    result = join_observations(members, TAXONOMY, KINDS, Matches(), {"ret-radaddel": True})
+    assert sorted(result.entities) == ["games-workshop/first", "games-workshop/second"]
+    assert result.ambiguous == [
+        {
+            "type": "sku-group-ean-conflict",
+            "source": "ret-radaddel",
+            "sku": "119157",
+            "keys": ["ret-radaddel:/first", "ret-radaddel:second"],
+            "eans": ["5011921000012", "5011921000036"],
+        }
+    ]
+
+
+def test_sku_grouping_never_reaches_across_sources() -> None:
+    # Two stores using the same house number for different things is the normal case, not a claim.
+    members = [
+        obs("ret-radaddel:a", sku="119157", name="A Thing"),
+        obs("ret-goblin:b", sku="119157", name="Another Thing"),
+    ]
+    result = join_observations(
+        members, TAXONOMY, KINDS, Matches(), {"ret-radaddel": True, "ret-goblin": True}
+    )
+    assert sorted(result.entities) == ["games-workshop/a-thing", "games-workshop/another-thing"]
+    assert not result.ambiguous
+
+
+def test_sku_grouping_cannot_re_merge_a_declared_supersession() -> None:
+    # A declared pair is bridged by a store listing both sides under ONE article number. The two
+    # sides have different barcodes by definition, so the group's own barcode guard refuses it
+    # before the union barrier is ever consulted -- which is why that barrier has never fired on
+    # this pass. Both are kept: the guard is what makes the claim `skuIsListingId` makes checkable,
+    # and routing the union through `barred` costs nothing if a future group reaches it another way.
+    matches = Matches(supersessions={"games-workshop/99120101234": "games-workshop/99120105678"})
+    members = [
+        obs("mfr-gw:retired", sku="99120101234", ean="5011921000012", name="Old Kit"),
+        obs("mfr-gw:current", sku="99120105678", ean="5011921000036", name="Old Kit"),
+        obs("ret-radaddel:/bridge", sku="119157", ean="5011921000012", name="Old Kit"),
+        obs("ret-radaddel:bridge", sku="119157", ean="5011921000036", name="Old Kit"),
+    ]
+    result = join_observations(members, TAXONOMY, KINDS, matches, {"ret-radaddel": True})
+    assert "games-workshop/99120101234" in result.entities
+    assert "games-workshop/99120105678" in result.entities
+    assert [c["type"] for c in result.ambiguous] == ["sku-group-ean-conflict"]

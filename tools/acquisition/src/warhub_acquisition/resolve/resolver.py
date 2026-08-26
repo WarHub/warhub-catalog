@@ -265,7 +265,8 @@ def joined_evidence(paths: DataPaths) -> JoinedEvidence:
     evidence = EvidenceStore(paths.evidence_products).load_all()
     selected = select_product_observations(evidence, descriptors, taxonomy)
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
-    joined = join_observations(selected.observations, taxonomy, kinds, matches)
+    sku_ids = {sid: d.skuIsListingId for sid, d in descriptors.items()}
+    joined = join_observations(selected.observations, taxonomy, kinds, matches, sku_ids)
     return JoinedEvidence(joined.entities, taxonomy, kinds, descriptors)
 
 
@@ -327,7 +328,8 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     if not selected.product_source_count and any(paths.catalog_products.glob("*.yaml")):
         raise ValueError("no evidence loaded but catalog files exist; refusing to wipe the catalog")
 
-    joined = join_observations(observations, taxonomy, kinds, matches)
+    sku_ids = {sid: d.skuIsListingId for sid, d in descriptors.items()}
+    joined = join_observations(observations, taxonomy, kinds, matches, sku_ids)
 
     conflicts: list[dict] = list(joined.ambiguous) + crossover_conflicts
     ean_resolutions = {}

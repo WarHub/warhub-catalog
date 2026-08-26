@@ -37,6 +37,38 @@ joins:
   'mfr-warlord-store:germania-hail-caesar-supplement-copy': warlord-games/109910007
   'mfr-warlord-store:hail-caesar-age-of-bronze-supplement-copy': warlord-games/109910010
   'mfr-warlord-store:hail-caesar-rulebook-spanish-language-richard-i-the-lionheart-special-figure': warlord-games/101010004SP
+  # --- `ambiguous-join` adjudications, 2026-08-26 ------------------------------------------------
+  # Each of these is a listing with no product code and no barcode whose name slug matches two or
+  # more coded entities under one manufacturer, so `resolve/join.py`'s name-join pass refuses to
+  # pick and the row founds an entity named after the shop's own title. The four below are the ones
+  # some OTHER field of the SAME listing decides. The eight that nothing decides are left as
+  # conflicts on purpose, with their reasons recorded under `ambiguous-join, DELIBERATELY LEFT`
+  # at the end of this file -- guessing one would publish a price and a stock level against the
+  # wrong box.
+  #
+  # This store's own sku IS the product code, with a store suffix `normalize_code` does not strip
+  # (it strips `-EN` only). `60220599003` is a real published GW code, and the listing's
+  # `hints.tags` independently carry the bare string "OLD". The competing candidate `60050599005`
+  # is the one the NAME matches -- a name is marketing text and a code is an identifier, and this
+  # store publishes exactly one Orlock Gang Tactics Cards page, so there is no second listing the
+  # code could belong to.
+  'ret-goblingaming:necromunda-orlock-gang-tactics-cards-old': games-workshop/60220599003
+  # THE SAME STORE ALREADY HAS THE OTHER CANDIDATE, ANCHORED BY A BARCODE. `ret-tistaminis:
+  # warhammer-40000-introductory-set` (no suffix) carries ean 5011921199280, which is
+  # 60010199059's own primary, so that page is not in question. This `-1` page is the store's
+  # second listing of the title -- different tags (Orks vs Tyranids), different availability,
+  # different image -- and the remaining candidate is 60010199079. A Shopify `-1` handle is NOT
+  # by itself evidence of a distinct product (the `-copy` pages above are one product each); what
+  # decides it here is that the first page is already spoken for by a barcode.
+  'ret-tistaminis:warhammer-40000-introductory-set-1': games-workshop/60010199079
+  # Same shape, within radaddel: article 129886 is live in this store's CURRENT generation and
+  # already resolves onto 99122701005, so article 136605 is a second, distinct article and the
+  # remaining candidate is 99122701019.
+  'ret-radaddel:warriors-of-chaos-chaos-knights-1': games-workshop/99122701019
+  # Same shape: article 133518 is live in the current generation and already resolves onto
+  # 99120599109 (Palanite Enforcer Weapons & Upgrades), so article 132807 is the other one --
+  # 99120599079, the discontinued Necromunda: Enforcer Weapons & Upgrades.
+  'ret-radaddel:necromunda-enforcer-weapons-upgrades': games-workshop/99120599079
 aliases: {}
 # `{retired entity id: current entity id}`. BOTH records are published: the retired one keeps its
 # own productCode, its own primary `ean`, its own name/firstSeen and gains `supersededBy`; the
@@ -916,3 +948,37 @@ reassignCodes:
   # army set into the Zodgrod entity. Correct this listing to Zodgrod's real code so the army set
   # (60010103001, barcode 5011921138395) splits back out into its own product.
   'ret-goblingaming:new-games-workshop-zodgrod-wortsnagga-orks': '99120103074'
+
+# --- `ambiguous-join`, DELIBERATELY LEFT (2026-08-26) -------------------------------------------
+# Eight rows in data/review/conflicts.yaml that a human looked at and chose to keep as conflicts.
+# In each, the listing has no code and no barcode of its own, and nothing else about it picks a
+# side. Joining one anyway would put a live price, a stock level and a shop URL onto a box that is
+# not the one being sold, which is a worse published fact than an open conflict (OBJECTIVES 5).
+# Each clears itself the moment the source publishes a barcode for the listing -- for the six
+# radaddel rows that is the nightly `shopify` detail-fetch budget walking onto the handle.
+#
+#   ret-radaddel:speedpaint-most-wanted-set-2-0        army-painter/WP8060 | /WP8060P
+#     The two candidates are probably one product (Army Painter's `P` suffix), and neither carries
+#     a radaddel assertion. Decide the WP8060/WP8060P duplicate first; this row follows from it.
+#   ret-radaddel:chaos-space-marines-raptors-1         .../99120102163 | /99120102259
+#   ret-radaddel:warriors-of-chaos-chaos-warriors      .../99122701003 | /99122701018
+#   ret-radaddel:ogor-mawtribes-ironguts               .../99120213027 | /99120213041
+#     Each names an older code that a radaddel article DOES resolve onto -- but that article is
+#     only in the store's PREVIOUS key generation and is absent from the current one, so the store
+#     may have re-numbered the same box rather than added a second one. That is exactly the
+#     distinction the sibling entries above turn on, and here it is unavailable.
+#   ret-radaddel:ogor-mawtribes-butcher                .../99120213047 | /99810213002
+#   ret-radaddel:legiones-astartes-mkiv-tactical-squad .../99123001024 | /99123001085
+#     No radaddel assertion on EITHER candidate, in either generation.
+#   arc-wargameportal:/products/chaos-warriors         four candidates
+#     Its sku `83-06` is GW's own SS Code and narrows four candidates to two (99120201047 and
+#     99120201131 both carry sscCode 83-06; 99122701003 is 08-07 and 99122701018 is 08-21). It
+#     does not separate the discontinued 047 from the current 131, and an archive capture asserts
+#     nothing about which was on the shelf.
+#   arc-wargameportal:/products/arcane-ruins           .../99122799001 | /99129999003
+#     No sku at all, no barcode, and neither candidate carries an SS Code.
+#
+# NOT USED AS EVIDENCE ANYWHERE ABOVE: the shop's own image filename. Several of these listings
+# embed a GW product code in the CDN asset name -- e.g. the radaddel 40k Starter Set row's image is
+# `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
+# itself, and this repo has been wrong that way before.

@@ -39,3 +39,24 @@ contract:
     # Measured on the same run over all 7,691 attributed observations: name 1.000, sku 1.000.
     name: 1.0
     sku: 0.8
+
+# THIS STORE'S ARTICLE NUMBER IS ITS LISTING ID -- see SourceDescriptor.skuIsListingId.
+#
+# WHY IT IS SET HERE AND NOWHERE ELSE. This source changed strategy on 2026-08-21
+# (`sitemap-structured-data` -> `shopify`, the port the `contract` block above documents), and the
+# key shape changed with it: 4,095 observations are still keyed `ret-radaddel:/<path>` from the
+# old extractor, 7,709 are keyed `ret-radaddel:<handle>` from the new one. Nothing prunes the old
+# generation, so 3,820 listings are in the ledger twice.
+#
+# The two generations differ in exactly the way that matters here: the old one carries a barcode on
+# 3,614 of 4,095 rows, the new one on 1,959 of 7,709, because `shopify` budgets the per-handle
+# detail fetch and accumulates barcodes over nights. So the newer copy of a listing is typically
+# anchorless -- no code (this store's sku is a 6-digit house number that matches no manufacturer's
+# codePattern; measured: 0 of 11,804 rows normalize to a product code) and no barcode -- and it
+# founds an entity of its own under a slug of the German shop title.
+#
+# WHAT SAYS THE TWO GENERATIONS ARE THE SAME LISTING. Measured 2026-08-26 over the committed
+# evidence: 3,819 sku groups, and of the 638 where BOTH generations carry a barcode, 638 agree and
+# 0 disagree. No group disagrees on the manufacturer either. That is the bijection this flag
+# asserts, and `join.py` re-checks it per group on every run rather than trusting this comment.
+skuIsListingId: true

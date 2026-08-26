@@ -1,14 +1,14 @@
 summary:
-  products: 30224
-  undecided: 16361
+  products: 29122
+  undecided: 15405
   byBasis:
     default: 7055
-    guessed: 9306
-    lexicon: 2568
+    guessed: 8350
+    lexicon: 2422
     mapped: 9320
     paint-barcode: 21
     stated: 1954
-  decidedThisRun: 11909
+  decidedThisRun: 11763
 conflicts:
   - entity: atomic-mass-games/star-wars-legion-legion-attack-dice-pack
     type: category-disagreement
@@ -28,6 +28,9 @@ conflicts:
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
+  - entity: games-workshop/99199999043
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: games-workshop/99199999047
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -95,9 +98,6 @@ conflicts:
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: games-workshop/citadel-brush-x-large-base
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/citadel-small-base-brush
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: vallejo/atlantic-blue-200ml-diorama-effects
@@ -802,10 +802,6 @@ unmapped:
     - value: vendor=Warlord Games
       wouldDecide: 1
   ret-radaddel:
-    - value: tags=Games Workshop
-      wouldDecide: 999
-    - value: vendor=Games Workshop
-      wouldDecide: 999
     - value: tags=AK-Interactive
       wouldDecide: 884
     - value: vendor=AK-Interactive
@@ -814,66 +810,62 @@ unmapped:
       wouldDecide: 695
     - value: vendor=Vallejo
       wouldDecide: 695
-    - value: tags=Warlord Games
-      wouldDecide: 410
-    - value: vendor=Warlord Games
-      wouldDecide: 410
+    - value: tags=Games Workshop
+      wouldDecide: 544
+    - value: vendor=Games Workshop
+      wouldDecide: 544
     - value: tags=The Army Painter
       wouldDecide: 388
     - value: vendor=The Army Painter
       wouldDecide: 388
+    - value: tags=Warlord Games
+      wouldDecide: 274
+    - value: vendor=Warlord Games
+      wouldDecide: 274
     - value: tags=Vallejo Model Air
       wouldDecide: 235
     - value: tags=Warpaints Fanatic
       wouldDecide: 128
-    - value: tags=Middle-Earth - Good
-      wouldDecide: 100
+    - value: tags=Atomic Mass Games
+      wouldDecide: 103
+    - value: vendor=Atomic Mass Games
+      wouldDecide: 103
     - value: tags=AK-Effekte & Weatherings
       wouldDecide: 98
     - value: tags=EFFEKTE & WEATHERINGS*
       wouldDecide: 97
-    - value: tags=Atomic Mass Games
-      wouldDecide: 95
-    - value: vendor=Atomic Mass Games
-      wouldDecide: 95
     - value: tags=Vallejo Game Color
       wouldDecide: 94
-    - value: tags=Summer Sale
-      wouldDecide: 86
+    - value: tags=Middle-Earth - Good
+      wouldDecide: 88
     - value: tags=AK-ZUBEHÖR*
       wouldDecide: 85
     - value: tags=AK Werkzeuge
       wouldDecide: 85
     - value: tags=WARPAINTS FANATIC ACRYLICS*
       wouldDecide: 83
-    - value: tags=Neuheiten Games Workshop
-      wouldDecide: 77
     - value: tags=001-106 GAME COLOR*
       wouldDecide: 75
-    - value: tags=Middle-Earth - Evil
-      wouldDecide: 72
     - value: tags=Black Friday
       wouldDecide: 71
     - value: tags=Speedpaint
       wouldDecide: 71
     - value: tags=AK-Zubehör
       wouldDecide: 69
-    - value: tags=Black Library Englisch
-      wouldDecide: 63
+    - value: tags=Summer Sale
+      wouldDecide: 66
+    - value: tags=Neuheiten Games Workshop
+      wouldDecide: 62
     - value: tags=Neuheiten Farben und Zubehör
       wouldDecide: 61
     - value: tags=Vallejo Xpress Color
       wouldDecide: 60
     - value: tags=XPRESS COLOR*
       wouldDecide: 52
-    - value: tags=AoS Grundboxen und Regelbücher
+    - value: tags=Middle-Earth - Evil
       wouldDecide: 51
     - value: tags=Vallejo Game Air
       wouldDecide: 51
-    - value: tags=AoS Zubehör
-      wouldDecide: 50
-    - value: tags=BA Deutschland
-      wouldDecide: 50
     - value: tags=Black Library Deutsch
       wouldDecide: 49
     - value: tags=AK-Interactive Pinsel
@@ -882,6 +874,14 @@ unmapped:
       wouldDecide: 48
     - value: tags=AK-PINSEL*
       wouldDecide: 47
+    - value: tags=CMON
+      wouldDecide: 47
+    - value: vendor=CMON
+      wouldDecide: 47
+    - value: tags=AoS Zubehör
+      wouldDecide: 46
+    - value: tags=MODEL AIR 300-350*
+      wouldDecide: 46
   ret-tistaminis:
     - value: tags=Bolt Action
       wouldDecide: 192
@@ -902,11 +902,11 @@ unmapped:
     - value: vendor=Monument Hobbies
       wouldDecide: 79
     - value: vendor=GW-OOP
-      wouldDecide: 68
+      wouldDecide: 67
     - value: productType=Paints & Supplies
       wouldDecide: 67
     - value: vendor=GW-LOCAL
-      wouldDecide: 66
+      wouldDecide: 65
     - value: vendor=Green Stuff World
       wouldDecide: 59
     - value: vendor=GW-Local
@@ -929,35 +929,35 @@ unmapped:
       wouldDecide: 30
     - value: tags=Italians
       wouldDecide: 28
-    - value: tags=Amazon
-      wouldDecide: 25
     - value: tags=French
       wouldDecide: 25
+    - value: tags=Amazon
+      wouldDecide: 24
     - value: tags=Black Library
       wouldDecide: 24
     - value: tags=Victory at Sea British
       wouldDecide: 23
     - value: tags=Gamesworkshop
-      wouldDecide: 22
+      wouldDecide: 21
     - value: tags=Romans
       wouldDecide: 21
     - value: tags=Ancients
       wouldDecide: 21
     - value: tags=Americans
       wouldDecide: 19
-    - value: tags=GW Accessories
-      wouldDecide: 18
-    - value: tags=Space Marines
-      wouldDecide: 18
     - value: vendor=GW-WEB
       wouldDecide: 18
     - value: tags=Green Stuff World Other
       wouldDecide: 18
     - value: tags=Victory at Sea German
       wouldDecide: 18
-    - value: tags=Orks
-      wouldDecide: 15
+    - value: tags=GW Accessories
+      wouldDecide: 17
+    - value: tags=Space Marines
+      wouldDecide: 17
     - value: productType=Miniatures - Plastic
+      wouldDecide: 14
+    - value: tags=Orks
       wouldDecide: 14
     - value: tags=warhammer preorder
       wouldDecide: 14
