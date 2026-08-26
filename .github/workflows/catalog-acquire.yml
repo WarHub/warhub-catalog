@@ -481,11 +481,16 @@ jobs:
           # REPORT ONLY WHAT WAS ACTUALLY RESCUED. Every source that did not run this cycle is
           # taken from the branch, but for most of them the branch's copy IS main's copy and the
           # checkout is a no-op -- legacy-catalog and seed-curated never run at all, and the
-          # weekly-only groups sit unchanged six nights in seven. Listing those would put ~9 names
-          # in the PR body every single night and train a reader to skip the section. Diffing
-          # against HEAD (this job checked out main) narrows it to the sources whose state came
-          # from an unmerged previous run -- which is exactly the set that would have been
+          # weekly-only groups sit unchanged six nights in seven. Listing those would put a dozen
+          # or more names in the PR body every single night and train a reader to skip the section.
+          # Diffing against HEAD (this job checked out main) narrows it to the sources whose state
+          # came from an unmerged previous run -- which is exactly the set that would have been
           # reverted, and is empty on a healthy night.
+          #
+          # MEASURED on the first live run (2026-08-25, run 32840153264): 12 sources harvested,
+          # the other 19 reported nothing, and the rescued set was correctly EMPTY. That run is
+          # also what caught the wording below -- the empty case used to read "every source the
+          # branch knows about reported evidence this run", which 19 sources had just disproved.
           carried=""
           for src in $(git ls-tree --name-only FETCH_HEAD data/evidence/products/ | sed 's|.*/||'); do
             case " $harvested " in
@@ -746,7 +751,7 @@ jobs:
               echo
               echo "On a nightly run the weekly-only groups (E: \`arc-*\`, F: \`bdb-*\`, G: \`mfr-gw-trade\`) belong here. Any other source means its acquire group did not complete -- check the Acquire jobs."
             else
-              echo "None -- every source the branch knows about reported evidence this run."
+              echo "None -- no source needed rescuing. Sources that did not run this cycle (the weekly-only groups on a nightly, plus the static imports) held the same evidence on \`main\` as on the branch, so carrying them over changed nothing."
             fi
             echo
             echo "### Data-integrity tests"
