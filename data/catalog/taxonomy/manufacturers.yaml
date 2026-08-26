@@ -94,7 +94,49 @@ manufacturers:
     vendorNames: [Vallejo, Acrylicos Vallejo, AV]
   - slug: ak-interactive
     name: AK Interactive
-    codePattern: '(AK|RC|ABT)\s?\d{2,5}[A-Z]?(-[A-Z0-9]+)?'
+    # WIDENED 2026-08-26 BY PREFIX, and that distinction is the whole point. The old pattern
+    # `(AK|RC|ABT)\s?\d{2,5}[A-Z]?(-[A-Z0-9]+)?` codes 1,094 of this source's 1,253 observations.
+    # The 159 it misses are not a ragged edge: they are whole product FAMILIES whose article
+    # numbers carry a longer letter prefix -- AKABT (69 rows, the Abteilung 502 oils), AKAD (48,
+    # Artistic Dense acrylics), ABTP (15) and ABTPF (3, pigments), AKG (14, gouaches), AKPACK (4,
+    # signature bundles). Every family fails 100%, singles and sets alike. 32 of those rows reach
+    # the product catalog through `crossoverToProducts` and the resolver's identity floor then
+    # refuses them -- ak-interactive.com publishes no barcode anywhere, so a row whose sku will not
+    # normalize has no addressable identity at all and would publish under a slug of the shop's
+    # title. They are conflicts.yaml's `paint-set-without-identity` and
+    # `hobby-auxiliary-without-identity` rows, including the AKABT111/112/113 thinners.
+    #
+    # THE SOURCE DESCRIPTOR SAYS THIS CANNOT BE FIXED THIS WAY, and it is right about one shape of
+    # widening and wrong about the other. `mfr-ak-interactive.yaml` says "a pattern loose enough to
+    # swallow the item numbers would code the range strings too". Measured over the committed
+    # evidence, both shapes:
+    #
+    #   loosen the TRAILING letters  `(AK|RC|ABT)\s?\d{1,5}[A-Z]*...`
+    #       codes 1,099 of 1,253 -- and codes 4 of the 5 range strings, because after
+    #       space-stripping `AK 3G RANGE AFV` is `AK` + `3` + `GRANGEAFV`. The warning holds.
+    #   extend the PREFIX (this change)
+    #       codes 1,247 of 1,253 -- and codes 0 of the 5 range strings, because `AK3GRANGEAFV`
+    #       still has letters after its digit run and `RANGEAKAD` has no digit run at all.
+    #
+    # So the five freehand range strings stay refused, which is correct: "AK 3G RANGE AFV",
+    # "AK 3G RANGE FIG", "AK 3G RANGE AIR", "AK 3G RANGE GENERIC" and "RANGE AKAD" are the shop's
+    # own range pages, not product identities, and the descriptor already says so. They are the
+    # only SKUs in the whole 1,253-row file that contain a space.
+    #
+    # ENUMERATED RATHER THAN `AK[A-Z]*`, which measures identically (1,247 of 1,253) but would code
+    # any future letter salad this source ships.
+    #
+    # `AKM`/`AKMQ` ARE DELIBERATELY ABSENT although they are real AK prefixes (the playmarker
+    # lines). This source observes none of them -- they arrive only from `ret-goblingaming` and
+    # `legacy-catalog` -- and goblingaming states them with its own variant suffix, so admitting
+    # them codes 67 entities as `ak-interactive/AKM002-SINGLE`: a RETAILER'S variant marker
+    # published as AK's article number, which trades one unstable id for another. Measured both
+    # ways: with AKM the identity-floor refusals go 32 -> 5 and 124 published ids are replaced by
+    # 150; without it the refusals go 32 -> 5 just the same, and 1 id is replaced by 27. Same
+    # outcome for the thing this change is for, a hundredth of the churn. The cost is that
+    # `ak-interactive/animal-green-playmarker` keeps its title slug and the AKM014 product code
+    # stays dropped.
+    codePattern: '(AKABT|AKAD|AKPACK|AKG|AK|ABTPF|ABTP|ABT|RC)\s?\d{1,5}[A-Z]?(-[A-Z0-9]+)?'
     vendorNames: [AK Interactive, AK-Interactive]
   - slug: army-painter
     name: The Army Painter

@@ -1133,3 +1133,31 @@ reassignCodes:
 # pass correctly killed as a metal-to-resin re-sculpt rather than a repackaging. A lineage claim
 # publishes; it needs the register or a per-item verification, and it should land as its own change
 # with that evidence rather than riding along here.
+
+# --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
+# 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a
+# problem. Each names an observation whose listed sku is one side of a supersession declared above
+# while its barcode belongs to the other side, and resolve/join.py places it by BARCODE and drops
+# the stale code. That is the behaviour the archival split depends on -- it is what puts a
+# retailer's live price and url on the record a shopper can actually buy and leaves the other
+# record attested by its own archived manufacturer evidence -- so the count moves with the number
+# of DECLARED pairs a bridging retailer still lists, not with anything being wrong.
+#
+# Every one of the 15 is a pair declared in this file, and the 28 entities involved are all
+# present in data/catalog/products/games-workshop.yaml with `supersedes`/`supersededBy` written on
+# both sides. No barcode among them is duplicated or lost.
+#
+# ONE THING WORTH KNOWING BEFORE READING THE LIST, because the field name invites the wrong
+# reading: `barcode_code` is NOT "the surviving side". `pair_owner` in resolve/join.py is built
+# from `kind: manufacturer` observations only, so `barcode_code` is whichever side GW's own trade
+# sheet exclusively asserts that barcode under, and the declared direction never enters. Three of
+# the 15 therefore re-home onto the declared RETIRED record: Mortisan Boneshaper
+# (99120207208 listed, 99070207021 owns the barcode; declared 99070207021 -> 99120207208) and the
+# two Boingrot Bounderz / Squig Hoppers rows (99120209152 listed, 99120209100 owns it; declared
+# 99120209100 -> 99120209152). That is correct under the ownership rule -- a barcode a MANUFACTURER
+# asserts under code C is C's -- and both of those retired codes are `archived: false` in GW's
+# China Order Form, i.e. still live. It does mean a curated row's name and url land on the retired
+# record, which is how `games-workshop/99120209100` comes to publish as "Boingrot Bounderz" when no
+# GW source calls that code anything but "GLOOMSPITE GITZ SQUIG HOPPERS". That is a separate defect
+# in resolve/attributes.py's `foreign` set (it guards `sku` and not the descriptive fields) and it
+# wants its own change with its own measurement, not a supersession edit.
