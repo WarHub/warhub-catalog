@@ -9153,13 +9153,15 @@ products:
     packaging: set
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 58.0
+    priceCad: 70.0
     url: https://store.warlordgames.com/products/warpaints-fanatic-world-war-ii-american-paint-set
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/WP8082_-_PROMO_01.jpg?v=1743694768
     evidence:
       - mfr-warlord-store:warpaints-fanatic-world-war-ii-american-paint-set
       - ret-goblingaming:world-war-ii-american-paint-set-warpaints-fanatic
+      - ret-tistaminis:ww2-american-paint-set
   - id: army-painter/WP8083
     name: 'Warpaints Fanatic: World War II German Paint Set'
     manufacturer: army-painter
@@ -9172,13 +9174,15 @@ products:
     packaging: set
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 58.0
+    priceCad: 70.0
     url: https://store.warlordgames.com/products/warpaints-fanatic-world-war-ii-german-paint-set
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/WP8083-PROMO01.jpg?v=1743700769
     evidence:
       - mfr-warlord-store:warpaints-fanatic-world-war-ii-german-paint-set
       - ret-goblingaming:world-war-ii-german-paint-set-warpaints-fanatic
+      - ret-tistaminis:ww2-german-paint-set
   - id: army-painter/WP8084
     name: 'Warpaints Fanatic: World War II British Paint Set'
     manufacturer: army-painter
@@ -9191,13 +9195,15 @@ products:
     packaging: set
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 58.0
+    priceCad: 70.0
     url: https://store.warlordgames.com/products/warpaints-fanatic-world-war-ii-british-paint-set
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/WP8084-PROMO01.jpg?v=1743699581
     evidence:
       - mfr-warlord-store:warpaints-fanatic-world-war-ii-british-paint-set
       - ret-goblingaming:world-war-ii-british-paint-set-warpaints-fanatic
+      - ret-tistaminis:ww2-british-paint-set
   - id: army-painter/WP8088P
     name: 'Flexible Triad PLUS+: Deep Greens'
     manufacturer: army-painter
@@ -9606,22 +9612,6 @@ products:
     evidence:
       - ret-radaddel:army-painter-hydro-pack-wargamers-edition
       - ret-tistaminis:army-painter-hydro-pack-wargamers-edition
-  - id: army-painter/army-painter-miniature-and-model-magnets
-    name: Army Painter - Miniature and Model Magnets
-    manufacturer: army-painter
-    sku: '119427'
-    ean: '5713799503809'
-    eanConfidence: provisional
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 10.8
-    url: https://radaddel.de/products/army-painter-miniature-and-model-magnets
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119427-army-painter-miniature-and-model-magnets-ap-tl5038-1.webp?v=1781194367
-    evidence:
-      - ret-radaddel:army-painter-miniature-and-model-magnets
   - id: army-painter/army-painter-quickshade-soft-tone
     name: Army Painter - Quickshade, Soft Tone
     manufacturer: army-painter
@@ -9654,38 +9644,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/102376-army-painter-quickshade-strong-tone-ap-qs1002-1.webp?v=1781187910
     evidence:
       - ret-radaddel:army-painter-quickshade-strong-tone
-  - id: army-painter/army-painter-sculpting-tools
-    name: Army Painter - Sculpting Tools
-    manufacturer: army-painter
-    sku: '119425'
-    ean: '5713799503601'
-    eanConfidence: provisional
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 11.65
-    url: https://radaddel.de/products/army-painter-sculpting-tools
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119425-army-painter-sculpting-tools-ap-tl5036-1.webp?v=1787250285
-    evidence:
-      - ret-radaddel:army-painter-sculpting-tools
-  - id: army-painter/army-painter-wargamer-brush-small-drybrush
-    name: Army Painter - Wargamer Brush - Small Drybrush
-    manufacturer: army-painter
-    sku: '105346'
-    ean: '5713799700901'
-    eanConfidence: provisional
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 5.9
-    url: https://radaddel.de/products/army-painter-wargamer-brush-small-drybrush
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/105346-army-painter-wargamer-brush-small-drybrush-ap-br7009-1.webp?v=1781188140
-    evidence:
-      - ret-radaddel:army-painter-wargamer-brush-small-drybrush
   - id: army-painter/army-painter-wet-palette
     name: Army Painter Wet Palette
     manufacturer: army-painter
@@ -14287,6 +14245,26 @@ products:
     evidence:
       - ret-goblingaming:kobold-skin-warpaint-air
       - ret-radaddel:air-warpaint-kobold-skin-104
+  - id: army-painter/kolinsky-masterclass-brush
+    name: Kolinsky Masterclass Brush
+    manufacturer: army-painter
+    sku: BR7017
+    ean: '5713799701700'
+    eanConfidence: confirmed
+    gameSystem: bolt-action
+    faction: general
+    category: miniatures
+    categoryBasis: default
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 10.3
+    url: https://store.warlordgames.com/products/kolinsky-masterclass-brush
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/image_7634.jpg?v=1575565736
+    description: This brush is as good as it comes. The finest Kolinsky hair is used to make this handmade brush into a work of art. Needle like point ensures maximum accuracy and the triangular handle gives 100% control.
+    evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/kolinsky-masterclass-brush
   - id: army-painter/kraken-lavender-fanatic-wp
     name: Kraken Lavender Fanatic WP
     manufacturer: army-painter
@@ -14307,16 +14285,23 @@ products:
     sku: BR7010
     ean: '4019769336066'
     eanConfidence: confirmed
+    additionalEans:
+      - '5713799701007'
+    gameSystem: bolt-action
+    faction: general
     category: hobby-auxiliary
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-21'
+    firstSeen: '2026-07-07'
     priceGbp: 5.5
     priceEur: 5.9
     url: https://store.warlordgames.com/products/large-drybrush
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/br7010_large_drybrush-a.jpg?v=1575565738
+    description: Ideal for drybrushing large areas of fur, chainmail, etc
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/large-drybrush
       - mfr-warlord-store:large-drybrush
       - ret-radaddel:army-painter-wargamer-brush-large-drybrush
   - id: army-painter/lava-orange-fanatic-wp
@@ -14927,16 +14912,30 @@ products:
     sku: TL5038
     ean: '5713799503809'
     eanConfidence: confirmed
-    category: miniatures
-    categoryBasis: guessed
+    gameSystem: bolt-action
+    faction: general
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-07'
     priceGbp: 11.25
+    priceEur: 10.8
     url: https://store.warlordgames.com/products/miniature-model-magnets
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/TL5038_MINIATURE_MODEL_MAGNETS_1.jpg?v=1575566923
+    description: |-
+      These supercharged rare-earth magnets are very high grade & strength \(N52\), enabling you to do complex conversions or simply magnetise different weapons to your models.
+
+      - Super Strong Rare-Earth Magnets
+      - Perfect for chaning weapons
+      - Multiple sizes for any task
+      - 80 x 3mm & 20 x 5mm
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/miniature-model-magnets
       - mfr-warlord-store:miniature-model-magnets
+      - ret-goblingaming:model-magnets
+      - ret-radaddel:army-painter-miniature-and-model-magnets
   - id: army-painter/mithril-fanatic-metallic
     name: Mithril Fanatic Metallic
     manufacturer: army-painter
@@ -14984,22 +14983,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127864-mocca-skin-fanatic-wp-ap-wp3159-1.webp?v=1781210830
     evidence:
       - ret-radaddel:mocca-skin-fanatic-wp
-  - id: army-painter/model-magnets-hobby-tools
-    name: Model Magnets - Hobby Tools
-    manufacturer: army-painter
-    sku: APTL5038
-    ean: '5713799503809'
-    eanConfidence: provisional
-    category: hobby-auxiliary
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 10.13
-    url: https://www.goblingaming.co.uk/products/model-magnets
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/neodymium-magnets-100-pieces-the-army-painter-d.jpg?v=1560806778
-    evidence:
-      - ret-goblingaming:model-magnets
   - id: army-painter/moldy-wine-fanatic-wp
     name: Moldy Wine Fanatic WP
     manufacturer: army-painter
@@ -16872,32 +16855,29 @@ products:
     sku: TL5036
     ean: '5713799503601'
     eanConfidence: confirmed
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 12.15
-    url: https://store.warlordgames.com/products/sculpting-tools
-    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/TL5036_SCULPTING_TOOLS_1.jpg?v=1575566922
-    evidence:
-      - mfr-warlord-store:sculpting-tools
-  - id: army-painter/sculpting-tools-hobby-tools
-    name: Sculpting Tools - Hobby Tools
-    manufacturer: army-painter
-    sku: APTL5036
-    ean: '5713799503601'
-    eanConfidence: provisional
+    gameSystem: bolt-action
+    faction: general
     category: hobby-auxiliary
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 10.8
-    url: https://www.goblingaming.co.uk/products/sculpting-tools
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/sculpting-tools-modelling-2019-the-army-painter-e.jpg?v=1560806970
+    firstSeen: '2026-07-07'
+    priceGbp: 12.15
+    priceEur: 11.65
+    url: https://store.warlordgames.com/products/sculpting-tools
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/TL5036_SCULPTING_TOOLS_1.jpg?v=1575566922
+    description: |-
+      These sculpting tools, when used in conjunction with Green Stuff, offer the modelling hobbyist a range of different shapes for any sculpting project.
+
+      - Customise your miniatures
+      - 3 different tool - 6 different tips
+      - Perfect for Green Stuff
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/sculpting-tools
+      - mfr-warlord-store:sculpting-tools
       - ret-goblingaming:sculpting-tools
+      - ret-radaddel:army-painter-sculpting-tools
   - id: army-painter/self-healing-cutting-mat
     name: Self-healing Cutting Mat
     manufacturer: army-painter
@@ -17061,16 +17041,25 @@ products:
     sku: BR7009
     ean: '4019769336042'
     eanConfidence: confirmed
+    additionalEans:
+      - '5713799700901'
+    gameSystem: bolt-action
+    faction: general
     category: hobby-auxiliary
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-07'
     priceGbp: 5.1
+    priceEur: 5.9
     url: https://store.warlordgames.com/products/small-drybrush
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/small-drybrush-_2_-934-p.jpg?v=1575565738
+    description: Ideal for drybrushing small areas of fur, chainmail, etc.
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/small-drybrush
       - mfr-warlord-store:small-drybrush
+      - ret-radaddel:army-painter-wargamer-brush-small-drybrush
   - id: army-painter/soft-tone-250ml-army-painter
     name: Soft Tone 250ml - Army Painter
     manufacturer: army-painter

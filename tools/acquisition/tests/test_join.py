@@ -520,3 +520,72 @@ def test_sku_grouping_cannot_re_merge_a_declared_supersession() -> None:
     assert "games-workshop/99120101234" in result.entities
     assert "games-workshop/99120105678" in result.entities
     assert [c["type"] for c in result.ambiguous] == ["sku-group-ean-conflict"]
+
+
+def test_reassign_manufacturer_moves_a_reseller_row_to_the_real_maker() -> None:
+    # A store's catalogue filed someone else's accessory under the store's own brand. Both sides
+    # already exist, each holding the same barcode, so the catalog publishes the item twice and
+    # reports a cross-manufacturer-ean it cannot resolve on its own.
+    kinds = {**KINDS, "legacy": "curated", "mfr-ak": "manufacturer"}
+    taxonomy = Taxonomy(
+        {
+            "warlord-games": Manufacturer(
+                slug="warlord-games", name="Warlord Games", codePattern=r"[A-Z0-9]{6,}"
+            ),
+            "ak-interactive": Manufacturer(
+                slug="ak-interactive", name="AK Interactive", codePattern=r"AK\d{2,5}"
+            ),
+        }
+    )
+    members = [
+        obs("legacy:varnish", sku="AK11237", ean="5011921000012", manufacturer="warlord-games"),
+        obs("mfr-ak:varnish", sku="AK11237", ean="5011921000012", manufacturer="ak-interactive"),
+    ]
+    before = join_observations(members, taxonomy, kinds, Matches())
+    assert sorted(before.entities) == ["ak-interactive/AK11237", "warlord-games/AK11237"]
+    assert [c["type"] for c in before.ambiguous] == ["cross-manufacturer-ean"]
+
+    after = join_observations(
+        members,
+        taxonomy,
+        kinds,
+        Matches(reassignManufacturer={"legacy:varnish": "ak-interactive"}),
+    )
+    assert list(after.entities) == ["ak-interactive/AK11237"]
+    assert not after.ambiguous
+
+
+def test_reject_eans_unfuses_two_products_a_wrong_barcode_merged() -> None:
+    # One source put product A's barcode on product B, and the (manufacturer, ean) union fused
+    # them: B's product code stopped existing. Rejecting that one assertion splits them back apart
+    # and leaves everything else the source said intact.
+    members = [
+        obs("mfr-gw:pot", sku="99120100001", ean="5011921000012", name="Desert Sand"),
+        obs("legacy:terrain", sku="99120100002", ean="5011921000012", name="Normandy Wall"),
+        obs("ret-goblin:terrain", sku="99120100002", ean="5011921000036", name="Normandy Wall"),
+    ]
+    before = join_observations(members, TAXONOMY, KINDS, Matches())
+    # One record, and the pot's own code has stopped existing -- the curated row names the fusion.
+    assert list(before.entities) == ["games-workshop/99120100002"]
+
+    after = join_observations(
+        members,
+        TAXONOMY,
+        KINDS,
+        Matches(rejectEans={"legacy:terrain": ["5011921000012"]}),
+    )
+    assert sorted(after.entities) == ["games-workshop/99120100001", "games-workshop/99120100002"]
+    # The rejection is scoped to the barcode named: the row keeps its code, name and everything else.
+    terrain = after.entities["games-workshop/99120100002"]
+    assert sorted(m.key for m in terrain) == ["legacy:terrain", "ret-goblin:terrain"]
+    assert next(m for m in terrain if m.key == "legacy:terrain").sku == "99120100002"
+
+
+def test_reject_eans_ignores_a_barcode_the_observation_does_not_assert() -> None:
+    # A stale entry must not blank a barcode the source has since corrected to something else.
+    members = [obs("legacy:thing", sku="99120100002", ean="5011921000036", name="Thing")]
+    result = join_observations(
+        members, TAXONOMY, KINDS, Matches(rejectEans={"legacy:thing": ["5011921000012"]})
+    )
+    assert list(result.entities) == ["games-workshop/99120100002"]
+    assert result.entities["games-workshop/99120100002"][0].ean == "5011921000036"
