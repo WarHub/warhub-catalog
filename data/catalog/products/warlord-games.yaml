@@ -172,7 +172,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 88.0
-    priceEur: 84.75
+    priceEur: 93.25
     priceCad: 162.0
     url: https://store.warlordgames.com/products/caesars-gallic-wars-hail-caesar-starter-set
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/101510003-Caesar_s-Gallic-Wars-Hail-Caesar-starter-set2.jpg?v=1669309467
@@ -254,6 +254,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 93.0
+    priceEur: 89.55
     priceCad: 171.0
     url: https://store.warlordgames.com/products/hail-caesar-celt-starter-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/102011501-Hail-Caesar-Celt-Starter-Army2.jpg?v=1669309470
@@ -276,6 +277,7 @@ products:
       - mfr-warlord-store:hail-caesar-celt-starter-army
       - ret-goblingaming:celt-starter-army
       - ret-radaddel:/gallic-celt-starter-army
+      - ret-radaddel:gallic-celt-starter-army
       - ret-tistaminis:hail-caesar-celt-starter-army-2023-new
   - id: warlord-games/102011801
     name: Ancient British Warriors
@@ -7316,6 +7318,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 70.0
+    priceEur: 67.15
     url: https://store.warlordgames.com/products/hail-caesar-epic-battles-celt-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/112010008_HailCaesarEpicBattles_CeltArmy01.jpg?v=1737471505
     description: |-
@@ -7352,6 +7355,7 @@ products:
       - legacy-catalog:warlord-games/epic-hail-caesar/general/hail-caesar-epic-battles-celt-army
       - mfr-warlord-store:hail-caesar-epic-battles-celt-army
       - ret-radaddel:/epic-hail-caesar-celt-army
+      - ret-radaddel:epic-hail-caesar-celt-army
   - id: warlord-games/112411401
     name: 'Hail Caesar Epic Battles: Republican Roman commanders'
     manufacturer: warlord-games
@@ -7443,6 +7447,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.5
+    priceEur: 28.75
     url: https://store.warlordgames.com/products/hail-caesar-epic-battles-battlefield-vignettes
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/112411403-Hail-Caesar-Epic-Battles-Battlefield-Vignettes1.jpg?v=1726754555
     description: |-
@@ -7463,6 +7468,7 @@ products:
       - legacy-catalog:warlord-games/epic-hail-caesar/general/hail-caesar-epic-battles-battlefield-vignettes
       - mfr-warlord-store:hail-caesar-epic-battles-battlefield-vignettes
       - ret-radaddel:/epic-battles-battlefield-vignettes
+      - ret-radaddel:epic-battles-battlefield-vignettes
   - id: warlord-games/112411404
     name: 'Hail Caesar Epic Battles: Roman Generals Headquarters'
     manufacturer: warlord-games
@@ -7709,6 +7715,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 15.0
+    priceEur: 14.35
     url: https://store.warlordgames.com/products/hail-caesar-epic-battles-ballista-stone-thrower
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/113212205_HCEpicBattles_Ballistastone-thrower01.jpg?v=1726758667
     description: |-
@@ -7725,6 +7732,7 @@ products:
       - legacy-catalog:warlord-games/epic-hail-caesar/general/hail-caesar-epic-battles-ballista-stone-thrower
       - mfr-warlord-store:hail-caesar-epic-battles-ballista-stone-thrower
       - ret-radaddel:/epic-battles-ballista-stone-thrower
+      - ret-radaddel:epic-battles-ballista-stone-thrower
   - id: warlord-games/113212206
     name: 'Hail Caesar Epic Battles: Incendiary Swine'
     manufacturer: warlord-games
@@ -8500,11 +8508,13 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
+    priceEur: 24.0
     priceCad: 38.7
     url: https://www.radaddel.de/death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/download_e9be9576-4263-4c25-8a9b-cf5acfa7b2d3.jpg?v=1760456158
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132342-death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch-201016001-1.webp?v=1781220497
     evidence:
       - ret-radaddel:/death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch
+      - ret-radaddel:death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch
       - ret-tistaminis:pike-shotte-death-the-landsknecht-the-italian-wars-supplement-book
   - id: warlord-games/202012001
     name: Imperialist Infantry Regiment boxed set
@@ -11562,7 +11572,6 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 7.25
-    priceEur: 4.95
     url: https://store.warlordgames.com/products/christian-iv-of-denmark
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/205002007_TYW_ChristianIVofDenmark01.jpg?v=1718896966
     description: |-
@@ -11578,7 +11587,6 @@ products:
     evidence:
       - legacy-catalog:warlord-games/pike-and-shotte/general/christian-iv-of-denmark
       - mfr-warlord-store:christian-iv-of-denmark
-      - ret-radaddel:christian-iv-of-denmark
   - id: warlord-games/205002008
     name: Louis de Bourbon
     manufacturer: warlord-games
@@ -12844,6 +12852,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.0
+    priceEur: 18.95
     url: https://store.warlordgames.com/products/pike-shotte-epic-battles-rulebook
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/2110000001_Pike_ShotteEpicBattlesrulebook01.jpg?v=1701859196
     description: |-
@@ -12861,6 +12870,7 @@ products:
       - mfr-warlord-store:pike-shotte-epic-battles-rulebook
       - ret-goblingaming:warlord-games-historical-pike-shotte-epic-battles-rulebook
       - ret-radaddel:/epic-pike-shotte-rulebook-englisch
+      - ret-radaddel:epic-pike-shotte-rulebook-englisch
   - id: warlord-games/2120100001
     name: Pike & Shotte Epic Battles - Highland Clansmen
     manufacturer: warlord-games
@@ -15301,6 +15311,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
+    priceEur: 22.45
     url: https://store.warlordgames.com/products/field-artillery-and-army-commanders
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/302013401-AWI-Artillery-a.jpg?v=1575566622
     description: |-
@@ -15324,6 +15335,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/american/field-artillery-and-army-commanders
       - mfr-warlord-store:field-artillery-and-army-commanders
       - ret-radaddel:/field-artillery
+      - ret-radaddel:field-artillery
   - id: warlord-games/302013402
     name: Colonial Militia Men (Plastic Box)
     manufacturer: warlord-games
@@ -15377,7 +15389,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.5
-    priceEur: 24.85
+    priceEur: 23.65
     url: https://store.warlordgames.com/products/crimean-war-russian-line-infantry
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/302013801_CrimeanWarRussianLineInfantry01.jpg?v=1575566999
     description: |-
@@ -16150,6 +16162,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
+    priceEur: 24.05
     url: https://store.warlordgames.com/products/rogerss-rangers
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/302213805_French-Indian-War_Roger_s-Rangers_product_picture.png?v=1575566961
     description: |-
@@ -16166,6 +16179,7 @@ products:
       - legacy-catalog:warlord-games/black-powder/french/rogers-s-rangers
       - mfr-warlord-store:rogerss-rangers
       - ret-radaddel:/french-indian-war-rogers-s-rangers
+      - ret-radaddel:french-indian-war-rogerss-rangers
   - id: warlord-games/302213806
     name: Colonial Provincial Regiment
     manufacturer: warlord-games
@@ -18944,6 +18958,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
+    priceEur: 25.55
     url: https://store.warlordgames.com/products/highlanders
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/303013209_BPDaBGBritHighlandersBox.jpg?v=1575566963
     description: |-
@@ -18954,6 +18969,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/french/highlanders
       - mfr-warlord-store:highlanders
       - ret-radaddel:/fiw-highlanders
+      - ret-radaddel:fiw-highlanders
   - id: warlord-games/303013210
     name: 'French Indian War: Highlander Grenadiers'
     manufacturer: warlord-games
@@ -21182,6 +21198,7 @@ products:
       - ret-radaddel:/acw-confederate-general-and-staff-a
       - ret-radaddel:/confederate-officers-advancing-foot-mounted
       - ret-radaddel:acw-confederate-general-and-staff-a
+      - ret-radaddel:confederate-officers-advancing-foot-mounted
   - id: warlord-games/303214066
     name: Confederate Officers advancing (foot & mounted) A
     manufacturer: warlord-games
@@ -21223,6 +21240,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 9.0
+    priceEur: 9.65
     url: https://store.warlordgames.com/products/confederate-officers-advancing-foot-mounted-b
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/303214067_Confederate_Officers_advancing_foot_and_mounted_B_1.jpg?v=1719416237
     description: |-
@@ -21235,6 +21253,7 @@ products:
       - legacy-catalog:warlord-games/black-powder/american/confederate-officers-advancing-foot-mounted-b
       - mfr-warlord-store:confederate-officers-advancing-foot-mounted-b
       - ret-radaddel:/confederate-officers-advancing-b-foot-mounted
+      - ret-radaddel:confederate-officers-advancing-b-foot-mounted
   - id: warlord-games/303214070
     name: 'Soldier of Fortune 007: Soldier of Misfortune (Union Stretcher Party)'
     manufacturer: warlord-games
@@ -21433,7 +21452,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 18.0
-    priceEur: 18.9
+    priceEur: 17.15
     priceCad: 33.3
     url: https://store.warlordgames.com/products/napoleonic-prussian-foot-artillery-with-6-or-12-pdr-1813-15
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/305001831_NapoleonicPrussianFootArtillery6-pd-or12-pdr_1813-15_01.jpg?v=1724924592
@@ -23864,7 +23883,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.0
-    priceEur: 23.5
+    priceEur: 23.85
     url: https://store.warlordgames.com/products/blood-on-the-nile-sudan-black-powder-supplement
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/309910012_BP_BloodontheNile_specialminiature01.jpg?v=1660049833
     description: |-
@@ -27324,6 +27343,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 30.5
+    priceEur: 29.15
     url: https://store.warlordgames.com/products/black-powder-epic-battles-british-highlanders-riflemen
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/312001004_BPEpicBritishHighlandersRiflemen01.jpg?v=1642764333
     description: |-
@@ -27350,6 +27370,7 @@ products:
       - mfr-warlord-store:black-powder-epic-battles-british-highlanders-riflemen
       - ret-goblingaming:black-powder-epic-battles-british-highlanders-riflemen
       - ret-radaddel:/epic-battles-british-highlanders-riflemen
+      - ret-radaddel:epic-battles-british-highlanders-riflemen
   - id: warlord-games/312001801
     name: 'Black Powder Epic Battles - Waterloo: Prussian Infantry Brigade'
     manufacturer: warlord-games
@@ -27575,6 +27596,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 30.5
+    priceEur: 29.15
     url: https://store.warlordgames.com/products/black-powder-epic-battles-french-middle-old-guard
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/312002004_BPEpicFrenchMiddleOldGuard01.jpg?v=1642763809
     description: |-
@@ -27600,6 +27622,7 @@ products:
       - mfr-warlord-store:black-powder-epic-battles-french-middle-old-guard
       - ret-goblingaming:black-powder-epic-battles-french-middle-old-guard
       - ret-radaddel:/epic-battles-french-middle-old-guard
+      - ret-radaddel:epic-battles-french-middle-old-guard
   - id: warlord-games/312004001
     name: Black Powder Epic Battles - American Civil War Union Cavalry & Zouaves Brigade
     manufacturer: warlord-games
@@ -28325,6 +28348,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 31.0
+    priceEur: 29.55
     priceCad: 42.5
     url: https://store.warlordgames.com/products/black-powder-epic-battles-revolution-hessians-allies-brigade
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/312403407_BPEpicBattles_Revolution__HessianAlliesBrigade01_e300d499-35db-425d-aeec-aadad3d8e8c3.jpg?v=1746633717
@@ -28357,6 +28381,7 @@ products:
       - mfr-warlord-store:black-powder-epic-battles-revolution-hessians-allies-brigade
       - ret-goblingaming:hessians-allies-brigade-revolution
       - ret-radaddel:/epic-battles-revolution-hessians-allies-brigade
+      - ret-radaddel:epic-battles-revolution-hessians-allies-brigade
       - ret-tistaminis:black-powder-epic-battles-revolution-hessians-allies-brigade
   - id: warlord-games/312414002
     name: 'Epic Battles: ACW Confederate Brigade'
@@ -29772,6 +29797,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.0
+    priceEur: 21.15
     url: https://store.warlordgames.com/products/black-powder-epic-battles-rivers-scenery-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/318810004_Black-Powder-Epic-Battles---Rivers-Scenery-Pack2.jpg?v=1635865991
     description: |-
@@ -29785,6 +29811,7 @@ products:
       - mfr-warlord-store:black-powder-epic-battles-rivers-scenery-pack
       - ret-goblingaming:warlord-games-black-powder-epic-battles-rivers-scenery-pack
       - ret-radaddel:/epic-battles-rivers-scenery-pack
+      - ret-radaddel:epic-battles-rivers-scenery-pack
   - id: warlord-games/318810005
     name: Black Powder & Epic Battles - Roads Scenery pack
     manufacturer: warlord-games
@@ -29801,6 +29828,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.0
+    priceEur: 21.15
     url: https://store.warlordgames.com/products/black-powder-epic-battles-roads-scenery-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/318810005_Black-Powder-Epic-Battles---Roads-Scenery-Pack2.jpg?v=1635866707
     description: |-
@@ -29814,6 +29842,7 @@ products:
       - mfr-warlord-store:black-powder-epic-battles-roads-scenery-pack
       - ret-goblingaming:warlord-games-black-powder-epic-battles-roads-scenery-pack
       - ret-radaddel:/epic-battles-roads-scenery-pack
+      - ret-radaddel:epic-battles-roads-scenery-pack
   - id: warlord-games/318810006
     name: 'Black Powder Epic Battles - Waterloo: Papelotte Farm Scenery Pack'
     manufacturer: warlord-games
@@ -31570,6 +31599,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
+    priceEur: 23.95
     url: https://store.warlordgames.com/products/churchill-tank-plastic
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402011002-Churchill-desert-a_1b997bcb-eb7b-403f-9bcc-a884d387fea0.jpg?v=1575566451
     description: |-
@@ -31597,6 +31627,7 @@ products:
       - mfr-warlord-store:churchill-tank-plastic
       - ret-goblingaming:churchill-infantry-tank
       - ret-radaddel:/churchill-infantry-tank
+      - ret-radaddel:churchill-infantry-tank
   - id: warlord-games/402011003
     name: Cromwell Cruiser Tank
     manufacturer: warlord-games
@@ -34002,6 +34033,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
+    priceEur: 35.55
     priceCad: 65.2
     url: https://store.warlordgames.com/products/fallschirmjager-winter-platoon
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402012102_Fallschirmjager_winter_platoon01.jpg?v=1724239463
@@ -34024,6 +34056,7 @@ products:
       - mfr-warlord-store:fallschirmjager-winter-platoon
       - ret-goblingaming:german-fallschirmjager-winter-platoon
       - ret-radaddel:/fallschirmjaeger-platoon-winter
+      - ret-radaddel:fallschirmjager-platoon-winter
       - ret-tistaminis:bolt-action-german-fallschirmj-ger-winter
   - id: warlord-games/402012103
     name: The Reich's Praetorians - Waffen-SS Starter Army
@@ -34141,7 +34174,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.0
-    priceEur: 21.15
+    priceEur: 22.75
     url: https://store.warlordgames.com/products/m3-stuart
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402013002-M3-Stuart-a.jpg?v=1575566487
     description: |-
@@ -35592,7 +35625,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 104.0
-    priceEur: 109.95
+    priceEur: 99.95
     url: https://store.warlordgames.com/products/italian-army-blackshirts-starter-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402015804-Italian-Army-_-Blackshirts-starter-army1.jpg?v=1663845746
     description: |-
@@ -35671,7 +35704,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.0
-    priceEur: 23.3
+    priceEur: 22.95
     priceCad: 38.7
     url: https://store.warlordgames.com/products/autoblinda-ab41-43-armoured-car
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402015806_AB41-43armouredcar01.jpg?v=1747842971
@@ -35843,6 +35876,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
+    priceEur: 23.95
     url: https://store.warlordgames.com/products/chi-ha-japanese-tank
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402016002_Chi-Hamediumtank.jpg?v=1770648863
     description: |-
@@ -35868,6 +35902,7 @@ products:
       - mfr-warlord-store:chi-ha-japanese-tank
       - ret-goblingaming:chi-ha-japanese-tank
       - ret-radaddel:/chi-ha-medium-tank
+      - ret-radaddel:chi-ha-medium-tank
   - id: warlord-games/402016003
     name: Japanese Army Infantry Platoon
     manufacturer: warlord-games
@@ -35993,7 +36028,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
-    priceEur: 23.95
+    priceEur: 25.75
     url: https://store.warlordgames.com/products/carro-armato-semovente
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402018005_Carro-ArmatoM1301.jpg?v=1600960169
     description: |-
@@ -36137,6 +36172,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 59.0
+    priceEur: 56.75
     url: https://store.warlordgames.com/products/dads-army-home-guard-platoon
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-BI-06-Dads-Army-box-front.jpg?v=1575566020
     description: |-
@@ -36152,6 +36188,7 @@ products:
       - mfr-warlord-store:dads-army-home-guard-platoon
       - ret-goblingaming:dads-army
       - ret-radaddel:/dad-s-army
+      - ret-radaddel:dads-army
   - id: warlord-games/402211005
     name: BEF Infantry Section
     manufacturer: warlord-games
@@ -36285,7 +36322,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
-    priceEur: 27.05
+    priceEur: 28.35
     url: https://store.warlordgames.com/products/bef-support-group
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402211010_BEFSupportGroup03.jpg?v=1581612243
     description: |-
@@ -36910,7 +36947,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
-    priceEur: 28.35
+    priceEur: 29.9
     url: https://store.warlordgames.com/products/afrika-korps-support-group
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402212005_AfrikaKorpsSupportGroup01.jpg?v=1652681254
     description: |-
@@ -37097,7 +37134,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 17.05
+    priceEur: 24.2
     url: https://store.warlordgames.com/products/panzer-lehr-squad
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402212010_PanzerLehrSquad04.jpg?v=1626049933
     description: |-
@@ -37251,7 +37288,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 16.0
-    priceEur: 15.15
+    priceEur: 16.7
     priceCad: 27.5
     url: https://store.warlordgames.com/products/blitzkrieg-german-weapons-teams
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402212015_BlitzkriegGermanweaponsteams01.jpg?v=1690991793
@@ -37369,7 +37406,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 25.55
+    priceEur: 24.35
     url: https://store.warlordgames.com/products/chindit-section-1
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402212104-Chindit-Section-01.jpg?v=1575566626
     description: |-
@@ -37487,7 +37524,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
-    priceEur: 31.2
+    priceEur: 28.35
     url: https://store.warlordgames.com/products/waffen-ss-support-group
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402212107_Waffen-SS_Support_Group_box_front.jpg?v=1575566997
     description: |-
@@ -38063,7 +38100,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 24.35
+    priceEur: 25.45
     url: https://store.warlordgames.com/products/us-paratrooper-squad-1
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402213101-US-Paratrooper-Squad-a.jpg?v=1575566764
     description: |-
@@ -38105,7 +38142,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 23.7
+    priceEur: 24.05
     url: https://store.warlordgames.com/products/us-airborne-squad-winter
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402213102-US-Airborne-Squad-_Winter_-box-front.jpg?v=1575566778
     description: |-
@@ -38585,7 +38622,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 27.9
+    priceEur: 25.55
     url: https://store.warlordgames.com/products/soviet-assault-engineers-squad
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402214003-Soviet-Assault-Engineers-Squad_box-front.jpg?v=1575566952
     description: |-
@@ -38614,7 +38651,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
-    priceEur: 28.35
+    priceEur: 28.45
     url: https://store.warlordgames.com/products/soviet-army-support-group
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402214004_Soviet_Army_Support_Group_GW3_RTE.jpg?v=1575566954
     description: |-
@@ -39031,7 +39068,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 19.1
+    priceEur: 24.05
     url: https://store.warlordgames.com/products/french-resistance-squad
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402215502_FrenchResistanceSquad01_d9ab790e-e22f-4823-9907-91434ae7877a.jpg?v=1626049873
     description: |-
@@ -39519,7 +39556,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 24.05
+    priceEur: 20.4
     url: https://store.warlordgames.com/products/italian-x-arditi-section
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402215806_ItalianXArditisection01.jpg?v=1733839547
     description: |-
@@ -41735,7 +41772,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 32.0
-    priceEur: 32.9
+    priceEur: 30.75
     url: https://store.warlordgames.com/products/m7-priest-self-propelled-gun
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402413004_M7Priestself-propelledgun01.jpg?v=1693840496
     description: |-
@@ -41902,7 +41939,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
-    priceEur: 31.95
+    priceEur: 33.9
     priceCad: 60.0
     url: https://store.warlordgames.com/products/m15-multiple-gun-motor-carriage
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402413010_M15MultipleGunMotorCarriage_01.jpg?v=1745503655
@@ -42298,7 +42335,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 30.0
-    priceEur: 31.65
+    priceEur: 28.75
     url: https://store.warlordgames.com/products/japanese-type-4-ho-ro-self-propelled-gun
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402416004_Ho-Ro_assault_gun1.jpg?v=1701275585
     description: |-
@@ -43219,7 +43256,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 104.0
-    priceEur: 77.15
+    priceEur: 90.3
     priceCad: 184.0
     url: https://store.warlordgames.com/products/fallschirmjager-winter-starter-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402612102_Fallschirmjager_winter_starterarmy01.jpg?v=1730984431
@@ -50840,7 +50877,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
-    priceEur: 22.05
+    priceEur: 32.95
     priceCad: 67.7
     url: https://store.warlordgames.com/products/us-airborne-winter-heavy-weapons-platoon
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403019923_USAirborne_winter_HeavyWeaponPlatoon01.jpg?v=1730913416
@@ -50876,7 +50913,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 11.5
-    priceEur: 10.6
+    priceEur: 11.95
     priceCad: 21.23
     url: https://store.warlordgames.com/products/us-airborne-winter-hq
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403019924_USAirborne_winter_HQ01.jpg?v=1730997402
@@ -52637,6 +52674,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 24.0
+    priceEur: 23.15
     url: https://store.warlordgames.com/products/winter-fallschirmjager-pak-40
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403212106_Fallschirmjager_winter_Pak-40_01.jpg?v=1734957149
     description: |-
@@ -52655,6 +52693,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/german/winter-fallschirmjager-pak-40
       - mfr-warlord-store:winter-fallschirmjager-pak-40
       - ret-radaddel:/fallschirmjaeger-pak-40-winter
+      - ret-radaddel:fallschirmjager-pak-40-winter
   - id: warlord-games/403213001
     name: US Army Jeep with 30 Cal MMG
     manufacturer: warlord-games
@@ -53116,7 +53155,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.0
-    priceEur: 12.25
+    priceEur: 11.55
     priceCad: 23.0
     url: https://store.warlordgames.com/products/soviet-infantry-hq
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403214003_SovietInfantryHQ01.jpg?v=1754045448
@@ -53356,7 +53395,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.0
-    priceEur: 12.75
+    priceEur: 11.55
     priceCad: 21.0
     url: https://store.warlordgames.com/products/soviet-naval-brigade-hq
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403214009_SovietNavalBrigadeHQ01.jpg?v=1770811442
@@ -57004,10 +57043,10 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.0
-    priceEur: 11.55
+    priceEur: 12.45
     url: https://store.warlordgames.com/products/bolt-action-german-balkenkreuz-d6-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/408402001-BA-German-Balkenkreuz-D6-pack-_16_-01.jpg?v=1575566673
     description: This dice pack contains 16 white drab dice with black inscriptions, with the famous Balkenkreuz symbol replacing the 6 on the die!
@@ -57031,7 +57070,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.0
     priceEur: 11.55
@@ -61728,7 +61767,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 28.0
-    priceEur: 29.45
+    priceEur: 33.45
     priceCad: 44.2
     url: https://store.warlordgames.com/products/armies-of-the-commonwealth-with-havildar-umrao-singh-vc
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/409912601_ArmiesoftheCommonwealthwithHavildarSinghbookminiature01.jpg?v=1776943091
@@ -62108,7 +62147,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 69.0
-    priceEur: 66.35
+    priceEur: 72.9
     url: https://store.warlordgames.com/products/us-airborne-starter-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/US-Airborne-Starter-Army-Box-LID-RGB-300-DPI.jpg?v=1575566919
     description: |-
@@ -73879,6 +73918,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
+    priceEur: 28.15
     url: https://store.warlordgames.com/products/warlords-of-erehwon-daimyo-retinue
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/692015001_WOE_Daimyo-_-retinue3.jpg?v=1605888199
     description: |-
@@ -73892,6 +73932,7 @@ products:
       - mfr-warlord-store:warlords-of-erehwon-daimyo-retinue
       - ret-goblingaming:daimyo-retinue-warlords-of-erehwon-692015001
       - ret-radaddel:/daimyo-retinue
+      - ret-radaddel:daimyo-retinue
   - id: warlord-games/692215002
     name: 'Warlords of Erehwon: Bandits & Brigands'
     manufacturer: warlord-games
@@ -80434,6 +80475,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 62.0
+    priceEur: 65.1
     url: https://store.warlordgames.com/products/blood-red-skies-the-battle-of-midway-starter-set
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/771510003_BBRSBattleofMidwaystarterset05_534e0223-566d-4506-98af-64cd5b4c4e09.jpg?v=1630506090
     description: |-
@@ -80472,6 +80514,7 @@ products:
       - mfr-warlord-store:blood-red-skies-the-battle-of-midway-starter-set
       - ret-goblingaming:the-battle-of-midway-starter-set-blood-red-skies-warlord-games
       - ret-radaddel:/combined-arms
+      - ret-radaddel:combined-arms
   - id: warlord-games/772011001
     name: Blood Red Skies British Spitfire - Squadron New
     manufacturer: warlord-games
@@ -80948,6 +80991,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 14.5
+    priceEur: 15.35
     url: https://store.warlordgames.com/products/blood-red-skies-us-ace-pilot-pappy-boyington
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/772211007-US-Ace-Pilot-_Pappy_-Boyington1.jpg?v=1659971057
     description: |-
@@ -80960,6 +81004,7 @@ products:
       - legacy-catalog:warlord-games/blood-red-skies/general/blood-red-skies-us-ace-pilot-pappy-boyington
       - mfr-warlord-store:blood-red-skies-us-ace-pilot-pappy-boyington
       - ret-radaddel:/f4u-corsair-ace-pappy-boyington
+      - ret-radaddel:f4u-corsair-ace-pappy-boyington
   - id: warlord-games/772211008
     name: 'Blood Red Skies: US Ace Pilot Philip Kirkwood'
     manufacturer: warlord-games
@@ -80976,6 +81021,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 14.5
+    priceEur: 14.6
     url: https://store.warlordgames.com/products/blood-red-skies-us-ace-pilot-philip-kirkwood
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/772211008-US-Ace-Pilot-Phillip-Kirkwood1.jpg?v=1659971291
     description: |-
@@ -80988,6 +81034,7 @@ products:
       - legacy-catalog:warlord-games/blood-red-skies/general/blood-red-skies-us-ace-pilot-philip-kirkwood
       - mfr-warlord-store:blood-red-skies-us-ace-pilot-philip-kirkwood
       - ret-radaddel:/f4u-corsair-ace-philipp-kirkwood
+      - ret-radaddel:f4u-corsair-ace-philipp-kirkwood
   - id: warlord-games/772211012
     name: Curtiss P-40 Warhawk squadron
     manufacturer: warlord-games
@@ -85183,7 +85230,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.0
-    priceEur: 116.15
+    priceEur: 105.55
     url: https://store.warlordgames.com/products/us-navy-fleet
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/782611002_Cruel_Seas_US_Navy_Fleet.jpg?v=1575566886
     description: |-
@@ -91910,7 +91957,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 20.0
-    priceEur: 20.6
+    priceEur: 19.15
     url: https://store.warlordgames.com/products/ruined-farmhouse-2
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/802010004_Ruined_Farmhouse_box_front.jpg?v=1575566725
     description: |-
@@ -91974,6 +92021,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 32.0
+    priceEur: 38.35
     url: https://store.warlordgames.com/products/church-italeri
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/802010006-Church-_Italeri_-01.jpg?v=1600954500
     description: |-
@@ -91993,6 +92041,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/general/church-italeri
       - ret-goblingaming:church-78246701
       - ret-radaddel:/church
+      - ret-radaddel:church
   - id: warlord-games/805100005
     name: Large Chemical Containers
     manufacturer: warlord-games
@@ -92287,7 +92336,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 16.0
-    priceEur: 19.15
+    priceEur: 20.9
     url: https://store.warlordgames.com/products/coastal-defence-bunker
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/842010002-Coastal-Defence-Bunker-box-front_1000.72dpi.jpg?v=1575566777
     description: |-
@@ -93075,9 +93124,10 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.99
+    priceEur: 3.0
     priceCad: 10.0
     url: https://store.warlordgames.com/products/battlefields-basing-dead-2mm-static-grass-180ml
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/849110017-Dead-Static-Grass-_2mm_-180ml-tub.jpg?v=1689089315
@@ -93086,6 +93136,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/general/battlefields-basing-dead-2mm-static-grass-180ml
       - legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-townhouse-2
       - ret-radaddel:/dead-2mm-static-grass-180ml
+      - ret-radaddel:dead-2mm-static-grass-180ml
       - ret-tistaminis:battlefields-basing-dead-2mm-static-grass-180ml
       - ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-townhouse-2-prepainted
   - id: warlord-games/849110018
@@ -93269,9 +93320,10 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.99
+    priceEur: 3.0
     priceCad: 10.0
     url: https://store.warlordgames.com/products/battlefields-basing-desert-sand-180ml
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/849110025-Desert-Sand-180ml-tub.jpg?v=1689178036
@@ -93280,6 +93332,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/general/battlefields-basing-desert-sand-180ml
       - legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-walls-with-gate-high
       - ret-radaddel:/desert-sand-180ml
+      - ret-radaddel:desert-sand-180ml
       - ret-tistaminis:battlefields-basing-desert-sand-180ml
       - ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-wall-with-gate-high-prepainted
   - id: warlord-games/849110026
@@ -93604,6 +93657,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 3.99
+    priceEur: 3.0
     url: https://store.warlordgames.com/products/battlefields-basing-fine-model-sand-180ml
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/849110039-Fine-Model-Sand-180ml.jpg?v=1695207480
     description: The Battlefields and Basing range, from War World Scenics, is perfect for lending your battlefields, or your miniatures' bases, a sprinkling of colour, texture and a heightened sense of realism.
@@ -93611,6 +93665,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/general/battlefields-basing-fine-model-sand-180ml
       - ret-goblingaming:warlord-games-battlefields-basing-fine-model-sand-180ml-tub
       - ret-radaddel:/fine-model-sand-180ml
+      - ret-radaddel:fine-model-sand-180ml
   - id: warlord-games/849110040
     name: 'Battlefields & Basing: Large Grey Stones (180ml)'
     manufacturer: warlord-games
@@ -122942,7 +122997,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.0
-    priceEur: 15.45
+    priceEur: 14.35
     url: https://store.warlordgames.com/products/anti-tank-obstacles-plastic-box-set
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WG-TER-39-Anti-Tank-Obstacles-b_grande_grande_14fd8552-8dbe-44c5-a801-4c495154b2d8.jpg?v=1575893649
     description: |-
@@ -126520,12 +126575,14 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 20.0
+    priceEur: 20.5
     url: https://www.goblingaming.co.uk/products/empires-in-flames
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/supplement-empires-in-flames-softback-bolt-action.jpg?v=1560792735
     evidence:
       - arc-tistaminis:/products/bolt-action-empire-in-flames-new
       - ret-goblingaming:empires-in-flames
       - ret-radaddel:/empires-in-flames-englisch
+      - ret-radaddel:empires-in-flames-englisch
   - id: warlord-games/WGB-14
     name: Duel in the Sun - Bolt Action
     manufacturer: warlord-games
@@ -126540,12 +126597,14 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 20.0
+    priceEur: 22.75
     url: https://www.goblingaming.co.uk/products/duel-in-the-sun
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/supplement-duel-in-the-sun-softback-bolt-action-wa.jpg?v=1560792735
     evidence:
       - arc-tistaminis:/products/bolt-action-duel-in-the-sun-new
       - ret-goblingaming:duel-in-the-sun
       - ret-radaddel:/duel-in-the-sun-englisch
+      - ret-radaddel:duel-in-the-sun-englisch
   - id: warlord-games/WGB-AA-23K
     name: US Airborne 57mm anti-tank gun
     manufacturer: warlord-games
@@ -129557,6 +129616,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 42.0
+    priceEur: 37.4
     url: https://store.warlordgames.com/products/churchill-crocodile-flamethrowing-tank
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/wgb-bi-118-crocodile-a.jpg?v=1575565768
     description: |-
@@ -129573,6 +129633,7 @@ products:
       - legacy-catalog:warlord-games/bolt-action/british/churchill-crocodile-flamethrowing-tank
       - mfr-warlord-store:churchill-crocodile-flamethrowing-tank
       - ret-radaddel:/churchill-crocodile
+      - ret-radaddel:churchill-crocodile
   - id: warlord-games/WGB-BI-121
     name: Flying Standard 10' "Tilly"
     manufacturer: warlord-games
@@ -132850,6 +132911,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
+    priceEur: 35.55
     url: https://store.warlordgames.com/products/fallschirmjager-plastic-box
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Fallschirmjagerplatoon_RTE_3D_box_render.png?v=1768315852
     description: |-
@@ -132868,6 +132930,7 @@ products:
       - mfr-warlord-store:fallschirmjager-plastic-box
       - ret-goblingaming:fallschirmjager-german-paratroopers
       - ret-radaddel:/fallschirmjaeger
+      - ret-radaddel:fallschirmjager
   - id: warlord-games/WGB-FN-02
     name: Finnish Rifle Squad
     manufacturer: warlord-games
@@ -132884,6 +132947,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
+    priceEur: 25.45
     url: https://store.warlordgames.com/products/finnish-rifle-squad
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-FN-02_Finnish_Infantry_Squad_front_cover.jpg?v=1575566232
     description: |-
@@ -132908,6 +132972,7 @@ products:
       - mfr-warlord-store:finnish-rifle-squad
       - ret-goblingaming:finnish-infantry-9
       - ret-radaddel:/finnish-infantry-squad
+      - ret-radaddel:finnish-infantry-squad
   - id: warlord-games/WGB-FN-101
     name: Finnish T-26-E Vickers 6-tonner with 45mm gun
     manufacturer: warlord-games
@@ -143140,6 +143205,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.5
+    priceEur: 26.35
     url: https://store.warlordgames.com/products/greeks-classical-greek-hoplites
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Later_Greek_hoplites_3D_box_render_copy.png?v=1765968730
     description: |-
@@ -143153,6 +143219,7 @@ products:
       - mfr-warlord-store:greeks-classical-greek-hoplites
       - ret-goblingaming:classical-greek-phalanx
       - ret-radaddel:/classical-greek-phalanx
+      - ret-radaddel:classical-greek-phalanx
   - id: warlord-games/WGH-GR-27
     name: 'Greeks: Greek Slingers'
     manufacturer: warlord-games
@@ -145794,6 +145861,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
+    priceEur: 35.5
     url: https://store.warlordgames.com/products/95th-rifles-chosen-men
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGN-BR-04-Chosen-Men-a_59900482-e569-483d-a7c5-b95d620c3794.jpg?v=1575566085
     description: |-
@@ -145812,6 +145880,7 @@ products:
       - mfr-warlord-store:95th-rifles-chosen-men
       - ret-goblingaming:british-95th-rifles-chosen-men
       - ret-radaddel:/chosen-men
+      - ret-radaddel:chosen-men
   - id: warlord-games/WGN-BR-12
     name: Napoleonic British Line Infantry (Waterloo campaign)
     manufacturer: warlord-games
@@ -146437,7 +146506,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.5
-    priceEur: 26.35
+    priceEur: 27.9
     url: https://store.warlordgames.com/products/napoleonic-french-line-infantry-24
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGN-FR-09-French-Line-Infantry-a.jpg?v=1575566140
     description: |-
@@ -162568,34 +162637,6 @@ products:
       Products may vary from those shown.
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/chestnut-tree-19-5cm
-  - id: warlord-games/chi-ha-medium-tank
-    name: Chi-Ha Medium Tank
-    manufacturer: warlord-games
-    sku: '117031'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 25.75
-    url: https://radaddel.de/products/chi-ha-medium-tank
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/117031-chi-ha-medium-tank-402016002-1.webp?v=1781192079
-    evidence:
-      - ret-radaddel:chi-ha-medium-tank
-  - id: warlord-games/chosen-men
-    name: Chosen Men
-    manufacturer: warlord-games
-    sku: '113500'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 35.5
-    url: https://radaddel.de/products/chosen-men
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/113500-chosen-men-wgn-br-04-1.webp?v=1781190261
-    evidence:
-      - ret-radaddel:chosen-men
   - id: warlord-games/christian-iv-of-denmark-von-warlord-games
     name: Christian IV of Denmark von Warlord Games
     manufacturer: warlord-games
@@ -162605,80 +162646,14 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceEur: 4.95
     url: https://www.radaddel.de/christian-iv-of-denmark
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/129264-christian-iv-of-denmark-205002007-1.webp?v=1781213686
     evidence:
       - ret-radaddel:/christian-iv-of-denmark
-  - id: warlord-games/church
-    name: Church
-    manufacturer: warlord-games
-    sku: '118857'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 38.35
-    url: https://radaddel.de/products/church
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/118857-church-802010006-1.webp?v=1781193268
-    evidence:
-      - ret-radaddel:church
-  - id: warlord-games/churchill-crocodile
-    name: Churchill Crocodile
-    manufacturer: warlord-games
-    sku: '132447'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 37.4
-    url: https://radaddel.de/products/churchill-crocodile
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132447-churchill-crocodile-402611003-1.webp?v=1781220829
-    evidence:
-      - ret-radaddel:churchill-crocodile
-  - id: warlord-games/churchill-infantry-tank
-    name: Churchill Infantry Tank
-    manufacturer: warlord-games
-    sku: '116126'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 23.95
-    url: https://radaddel.de/products/churchill-infantry-tank
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/116126-churchill-infantry-tank-402011002-1.webp?v=1781191609
-    evidence:
-      - ret-radaddel:churchill-infantry-tank
-  - id: warlord-games/classical-greek-phalanx
-    name: Classical Greek Phalanx
-    manufacturer: warlord-games
-    sku: '111156'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 26.35
-    url: https://radaddel.de/products/classical-greek-phalanx
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111156-classical-greek-phalanx-wgh-gr-03-1.webp?v=1781189147
-    evidence:
-      - ret-radaddel:classical-greek-phalanx
-  - id: warlord-games/combined-arms
-    name: Combined Arms
-    manufacturer: warlord-games
-    sku: '123444'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 65.1
-    url: https://radaddel.de/products/combined-arms
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/123444-combined-arms-401010014-1.webp?v=1781200761
-    evidence:
-      - ret-radaddel:combined-arms
+      - ret-radaddel:christian-iv-of-denmark
   - id: warlord-games/community-house
     name: Community House
     manufacturer: warlord-games
@@ -162700,34 +162675,6 @@ products:
       Laser cut 2mm MDF with Laser etched detail, removable roof and interior detail. Kit supplied unassembled and unpainted. Measures approx. L210xW300xH130
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/community-house
-  - id: warlord-games/confederate-officers-advancing-b-foot-mounted
-    name: Confederate Officers Advancing B (Foot & Mounted)
-    manufacturer: warlord-games
-    sku: '129268'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 9.65
-    url: https://radaddel.de/products/confederate-officers-advancing-b-foot-mounted
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/129268-confederate-officers-advancing-b-foot-mounted-303214067-1.webp?v=1781213692
-    evidence:
-      - ret-radaddel:confederate-officers-advancing-b-foot-mounted
-  - id: warlord-games/confederate-officers-advancing-foot-mounted
-    name: Confederate Officers Advancing (Foot & Mounted)
-    manufacturer: warlord-games
-    sku: '128970'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 9.65
-    url: https://radaddel.de/products/confederate-officers-advancing-foot-mounted
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128970-confederate-officers-advancing-foot-mounted-303214066-1.webp?v=1781212684
-    evidence:
-      - ret-radaddel:confederate-officers-advancing-foot-mounted
   - id: warlord-games/corner-terrace-house
     name: Corner Terrace House
     manufacturer: warlord-games
@@ -162861,34 +162808,6 @@ products:
       Kit supplied unassembled and unpainted, gluing required on some parts.
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/curve-point-pack-track
-  - id: warlord-games/dad-s-army
-    name: Dad's Army
-    manufacturer: warlord-games
-    sku: '112613'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 56.75
-    url: https://radaddel.de/products/dads-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/112613-dads-army-402211004-1.webp?v=1781189790
-    evidence:
-      - ret-radaddel:dads-army
-  - id: warlord-games/daimyo-retinue
-    name: Daimyo & Retinue
-    manufacturer: warlord-games
-    sku: '121813'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 28.15
-    url: https://radaddel.de/products/daimyo-retinue
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/121813-daimyo-retinue-692015001-1.webp?v=1781197780
-    evidence:
-      - ret-radaddel:daimyo-retinue
   - id: warlord-games/damaged-compound-and-house-set
     name: Damaged Compound and House Set
     manufacturer: warlord-games
@@ -162995,34 +162914,6 @@ products:
       Supplied unpainted and unassembled. This product comes with sixteen 20x20mm bases, two 20x100mm bases, two 20x40mm bases and two 40x40mm bases from Renedra.
     evidence:
       - legacy-catalog:warlord-games/hail-caesar/general/dark-ages-warriors
-  - id: warlord-games/dead-2mm-static-grass-180ml
-    name: Dead 2mm Static Grass (180ml)
-    manufacturer: warlord-games
-    sku: '126387'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 3.0
-    url: https://radaddel.de/products/dead-2mm-static-grass-180ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126387-dead-2mm-static-grass-180ml-849110017-1.webp?v=1781208361
-    evidence:
-      - ret-radaddel:dead-2mm-static-grass-180ml
-  - id: warlord-games/death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch
-    name: Death & The Landsknecht (The Italian Wars) Pike & Shotte Supplement (englisch)
-    manufacturer: warlord-games
-    sku: '132342'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 24.0
-    url: https://radaddel.de/products/death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132342-death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch-201016001-1.webp?v=1781220497
-    evidence:
-      - ret-radaddel:death-the-landsknecht-the-italian-wars-pike-shotte-supplement-englisch
   - id: warlord-games/deciduous-trees-5cm-9cm-20-assorted-trees
     name: Deciduous Trees (5cm - 9cm) – 20 assorted trees
     manufacturer: warlord-games
@@ -163044,20 +162935,6 @@ products:
       Products may vary from those shown.
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/deciduous-trees-5cm-9cm-20-assorted-trees
-  - id: warlord-games/desert-sand-180ml
-    name: Desert Sand (180ml)
-    manufacturer: warlord-games
-    sku: '126395'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 3.0
-    url: https://radaddel.de/products/desert-sand-180ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126395-desert-sand-180ml-849110025-1.webp?v=1781208372
-    evidence:
-      - ret-radaddel:desert-sand-180ml
   - id: warlord-games/destroyed-european-townhouse-scenery-set
     name: Destroyed European Townhouse Scenery Set
     manufacturer: warlord-games
@@ -163951,20 +163828,6 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/dragon-house
-  - id: warlord-games/duel-in-the-sun-englisch
-    name: Duel in the Sun (englisch)
-    manufacturer: warlord-games
-    sku: '115383'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 22.75
-    url: https://radaddel.de/products/duel-in-the-sun-englisch
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115383-duel-in-the-sun-englisch-wgb-14-1.webp?v=1781191112
-    evidence:
-      - ret-radaddel:duel-in-the-sun-englisch
   - id: warlord-games/dunkers-church
     name: Dunkers Church
     manufacturer: warlord-games
@@ -164173,20 +164036,6 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/french/elite-companies-french-infantry-1807-14
-  - id: warlord-games/empires-in-flames-englisch
-    name: Empires In Flames (englisch)
-    manufacturer: warlord-games
-    sku: '114938'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 20.5
-    url: https://radaddel.de/products/empires-in-flames-englisch
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/114938-empires-in-flames-englisch-wgb-13-1.webp?v=1781190805
-    evidence:
-      - ret-radaddel:empires-in-flames-englisch
   - id: warlord-games/end-of-terrace-cafe
     name: End of Terrace Cafe
     manufacturer: warlord-games
@@ -164586,132 +164435,6 @@ products:
     url: https://www.radaddel.de/epic-battles-acw-union-brigade
     evidence:
       - ret-radaddel:/epic-battles-acw-union-brigade
-  - id: warlord-games/epic-battles-ballista-stone-thrower
-    name: 'Epic Battles: Ballista Stone-Thrower'
-    manufacturer: warlord-games
-    sku: '129899'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 14.35
-    url: https://radaddel.de/products/epic-battles-ballista-stone-thrower
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/129899-epic-battles-ballista-stone-thrower-113212205-1.webp?v=1781215140
-    evidence:
-      - ret-radaddel:epic-battles-ballista-stone-thrower
-  - id: warlord-games/epic-battles-battlefield-vignettes
-    name: 'Epic Battles: Battlefield Vignettes'
-    manufacturer: warlord-games
-    sku: '129898'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 28.75
-    url: https://radaddel.de/products/epic-battles-battlefield-vignettes
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/129898-epic-battles-battlefield-vignettes-112411403-1.webp?v=1781215136
-    evidence:
-      - ret-radaddel:epic-battles-battlefield-vignettes
-  - id: warlord-games/epic-battles-british-highlanders-riflemen
-    name: 'Epic Battles: British Highlanders & Riflemen'
-    manufacturer: warlord-games
-    sku: '123382'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 29.15
-    url: https://radaddel.de/products/epic-battles-british-highlanders-riflemen
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/123382-epic-battles-british-highlanders-riflemen-312001004-1.webp?v=1781200630
-    evidence:
-      - ret-radaddel:epic-battles-british-highlanders-riflemen
-  - id: warlord-games/epic-battles-french-middle-old-guard
-    name: 'Epic Battles: French Middle & Old Guard'
-    manufacturer: warlord-games
-    sku: '123383'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 29.15
-    url: https://radaddel.de/products/epic-battles-french-middle-old-guard
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/123383-epic-battles-french-middle-old-guard-312002004-1.webp?v=1781200638
-    evidence:
-      - ret-radaddel:epic-battles-french-middle-old-guard
-  - id: warlord-games/epic-battles-revolution-hessians-allies-brigade
-    name: 'Epic Battles: Revolution! - Hessians & Allies Brigade'
-    manufacturer: warlord-games
-    sku: '131838'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 29.55
-    url: https://radaddel.de/products/epic-battles-revolution-hessians-allies-brigade
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/131838-epic-battles-revolution-hessians-allies-brigade-312403407-1.webp?v=1781219347
-    evidence:
-      - ret-radaddel:epic-battles-revolution-hessians-allies-brigade
-  - id: warlord-games/epic-battles-rivers-scenery-pack
-    name: Epic Battles - Rivers Scenery Pack
-    manufacturer: warlord-games
-    sku: '123166'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 21.15
-    url: https://radaddel.de/products/epic-battles-rivers-scenery-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/123166-epic-battles-rivers-scenery-pack-318810004-1.webp?v=1781200056
-    evidence:
-      - ret-radaddel:epic-battles-rivers-scenery-pack
-  - id: warlord-games/epic-battles-roads-scenery-pack
-    name: Epic Battles - Roads Scenery Pack
-    manufacturer: warlord-games
-    sku: '123167'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 21.15
-    url: https://radaddel.de/products/epic-battles-roads-scenery-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/123167-epic-battles-roads-scenery-pack-318810005-1.webp?v=1781200060
-    evidence:
-      - ret-radaddel:epic-battles-roads-scenery-pack
-  - id: warlord-games/epic-hail-caesar-celt-army
-    name: Epic Hail Caesar Celt Army
-    manufacturer: warlord-games
-    sku: '131517'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 67.15
-    url: https://radaddel.de/products/epic-hail-caesar-celt-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/131517-epic-hail-caesar-celt-army-112010008-1.webp?v=1781218555
-    evidence:
-      - ret-radaddel:epic-hail-caesar-celt-army
-  - id: warlord-games/epic-pike-shotte-rulebook-englisch
-    name: Epic Pike & Shotte Rulebook (englisch)
-    manufacturer: warlord-games
-    sku: '127696'
-    category: book
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 18.95
-    url: https://radaddel.de/products/epic-pike-shotte-rulebook-englisch
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127696-epic-pike-shotte-rulebook-englisch-2110000001-1.webp?v=1781210128
-    evidence:
-      - ret-radaddel:epic-pike-shotte-rulebook-englisch
   - id: warlord-games/european-street-scenery-set
     name: European Street Scenery Set
     manufacturer: warlord-games
@@ -164762,34 +164485,6 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/european-timber-frame-scenery-set
-  - id: warlord-games/f4u-corsair-ace-pappy-boyington
-    name: 'F4U Corsair Ace: ''Pappy'' Boyington'
-    manufacturer: warlord-games
-    sku: '119879'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 15.35
-    url: https://radaddel.de/products/f4u-corsair-ace-pappy-boyington
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119879-f4u-corsair-ace-pappy-boyington-772211007-1.webp?v=1781195403
-    evidence:
-      - ret-radaddel:f4u-corsair-ace-pappy-boyington
-  - id: warlord-games/f4u-corsair-ace-philipp-kirkwood
-    name: 'F4U Corsair Ace: Philipp Kirkwood'
-    manufacturer: warlord-games
-    sku: '119880'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 14.6
-    url: https://radaddel.de/products/f4u-corsair-ace-philipp-kirkwood
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119880-f4u-corsair-ace-philipp-kirkwood-772211008-1.webp?v=1781195404
-    evidence:
-      - ret-radaddel:f4u-corsair-ace-philipp-kirkwood
   - id: warlord-games/f6f-hellcat-squadron
     name: F6F Hellcat Squadron
     manufacturer: warlord-games
@@ -164842,48 +164537,6 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/factory-scenery-set
-  - id: warlord-games/fallschirmjager
-    name: Fallschirmjäger
-    manufacturer: warlord-games
-    sku: '114937'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 35.55
-    url: https://radaddel.de/products/fallschirmjager
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/114937-fallschirmjager-wgb-fj-02-1.webp?v=1781190796
-    evidence:
-      - ret-radaddel:fallschirmjager
-  - id: warlord-games/fallschirmjager-pak-40-winter
-    name: Fallschirmjäger PaK 40 (Winter)
-    manufacturer: warlord-games
-    sku: '131029'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 23.15
-    url: https://radaddel.de/products/fallschirmjager-pak-40-winter
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/131029-fallschirmjager-pak-40-winter-403212106-1.webp?v=1781217693
-    evidence:
-      - ret-radaddel:fallschirmjager-pak-40-winter
-  - id: warlord-games/fallschirmjager-platoon-winter
-    name: Fallschirmjäger Platoon (Winter)
-    manufacturer: warlord-games
-    sku: '130056'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 35.55
-    url: https://radaddel.de/products/fallschirmjager-platoon-winter
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/130056-fallschirmjager-platoon-winter-402012102-1.webp?v=1784582460
-    evidence:
-      - ret-radaddel:fallschirmjager-platoon-winter
   - id: warlord-games/fallschirmjager-winter-hq-von-warlord-games
     name: Fallschirmjäger (Winter) HQ von Warlord Games
     manufacturer: warlord-games
@@ -164946,6 +164599,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 19.0
+    priceEur: 19.45
     url: https://store.warlordgames.com/products/farmyard-animals
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/EIEIO-Farmyard_Animals_PW01_RTE_box_front_RGB.jpg?v=1575566870
     description: |-
@@ -164971,19 +164625,6 @@ products:
       - mfr-warlord-store:farmyard-animals
       - ret-goblingaming:farmyard-animals
       - ret-radaddel:/farmyard-animals-set
-  - id: warlord-games/farmyard-animals-set
-    name: Farmyard Animals Set
-    manufacturer: warlord-games
-    sku: '119006'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 18.35
-    url: https://radaddel.de/products/farmyard-animals-set
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119006-farmyard-animals-set-eieio-1.webp?v=1781193316
-    evidence:
       - ret-radaddel:farmyard-animals-set
   - id: warlord-games/festung-europa-new-release-bundle
     name: Festung Europa New Release Bundle
@@ -165058,48 +164699,6 @@ products:
     url: https://www.radaddel.de/fiat-626-medium-truck
     evidence:
       - ret-radaddel:/fiat-626-medium-truck
-  - id: warlord-games/field-artillery
-    name: Field Artillery
-    manufacturer: warlord-games
-    sku: '115368'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 22.45
-    url: https://radaddel.de/products/field-artillery
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115368-field-artillery-302013401-1.webp?v=1781191042
-    evidence:
-      - ret-radaddel:field-artillery
-  - id: warlord-games/fine-model-sand-180ml
-    name: Fine Model Sand (180ml)
-    manufacturer: warlord-games
-    sku: '127014'
-    category: paint
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 3.0
-    url: https://radaddel.de/products/fine-model-sand-180ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127014-fine-model-sand-180ml-849110039-1.webp?v=1781209301
-    evidence:
-      - ret-radaddel:fine-model-sand-180ml
-  - id: warlord-games/finnish-infantry-squad
-    name: Finnish Infantry Squad
-    manufacturer: warlord-games
-    sku: '115329'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 25.45
-    url: https://radaddel.de/products/finnish-infantry-squad
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115329-finnish-infantry-squad-wgb-fn-02-1.webp?v=1781191014
-    evidence:
-      - ret-radaddel:finnish-infantry-squad
   - id: warlord-games/fir-trees-4cm-8cm-set-of-4-trees
     name: Fir Trees (4cm-8cm) - set of 4 trees
     manufacturer: warlord-games
@@ -165142,34 +164741,6 @@ products:
       Products may vary from those shown.
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/fir-trees-5cm-14cm-x-20-assorted-trees
-  - id: warlord-games/fiw-highlanders
-    name: 'FIW: Highlanders'
-    manufacturer: warlord-games
-    sku: '119839'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 25.55
-    url: https://radaddel.de/products/fiw-highlanders
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119839-fiw-highlanders-303013209-1.webp?v=1787250466
-    evidence:
-      - ret-radaddel:fiw-highlanders
-  - id: warlord-games/flakpanzer-iv-wirbelwind
-    name: Flakpanzer IV Wirbelwind
-    manufacturer: warlord-games
-    sku: '117455'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 30.75
-    url: https://radaddel.de/products/flakpanzer-iv-wirbelwind
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/117455-flakpanzer-iv-wirbelwind-405112002-1.webp?v=1781192365
-    evidence:
-      - ret-radaddel:flakpanzer-iv-wirbelwind
   - id: warlord-games/flakpanzer-iv-wirbelwind-von-warlord-games
     name: Flakpanzer IV Wirbelwind von Warlord Games
     manufacturer: warlord-games
@@ -165179,10 +164750,14 @@ products:
     category: miniatures
     categoryBasis: guessed
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceEur: 30.75
     url: https://www.radaddel.de/flakpanzer-iv-wirbelwind
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/117455-flakpanzer-iv-wirbelwind-405112002-1.webp?v=1781192365
     evidence:
       - ret-radaddel:/flakpanzer-iv-wirbelwind
+      - ret-radaddel:flakpanzer-iv-wirbelwind
   - id: warlord-games/flatbed-wagon
     name: Flatbed Wagon
     manufacturer: warlord-games
@@ -165408,20 +164983,6 @@ products:
       *Model supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/freeway-scenery-set
-  - id: warlord-games/french-indian-war-rogers-s-rangers
-    name: 'French Indian War: Rogers''s Rangers'
-    manufacturer: warlord-games
-    sku: '130532'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 24.05
-    url: https://radaddel.de/products/french-indian-war-rogerss-rangers
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/130532-french-indian-war-rogerss-rangers-302213805-1.webp?v=1781216452
-    evidence:
-      - ret-radaddel:french-indian-war-rogerss-rangers
   - id: warlord-games/french-resistance-squad-von-warlord-games
     name: French Resistance Squad von Warlord Games
     manufacturer: warlord-games
@@ -165490,20 +165051,6 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/gabion-redoubt-set
-  - id: warlord-games/gallic-celt-starter-army
-    name: Gallic Celt Starter Army
-    manufacturer: warlord-games
-    sku: '124748'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 89.55
-    url: https://radaddel.de/products/gallic-celt-starter-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/124748-gallic-celt-starter-army-102011501-1.webp?v=1781204165
-    evidence:
-      - ret-radaddel:gallic-celt-starter-army
   - id: warlord-games/geisha-cart
     name: Geisha Cart
     manufacturer: warlord-games
@@ -168266,7 +167813,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 59.15
+    priceEur: 59.05
     url: https://radaddel.de/products/matilda-ii-tank-troop
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119394-matilda-ii-tank-troop-402011016-1.webp?v=1781194233
     evidence:
@@ -168754,7 +168301,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 26.35
+    priceEur: 27.9
     url: https://radaddel.de/products/napoleonic-late-french-line-infantry
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/113305-napoleonic-late-french-line-infantry-wgn-fr-10-1.webp?v=1781190151
     evidence:
@@ -171260,7 +170807,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 23.95
+    priceEur: 25.75
     url: https://radaddel.de/products/sherman-firefly-vc
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115924-sherman-firefly-vc-402011005-1.webp?v=1781191453
     evidence:
@@ -171851,7 +171398,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 27.5
+    priceEur: 28.5
     url: https://radaddel.de/products/soviet-yakovlev-yak-1-squadron
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/118075-soviet-yakovlev-yak-1-squadron-772211019-1.webp?v=1781192775
     evidence:
@@ -172156,7 +171703,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceEur: 33.15
+    priceEur: 35.9
     url: https://radaddel.de/products/stug-iii-ausf-d-assault-gun
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126818-stug-iii-ausf_-d-assault-gun-402412003-1.webp?v=1781208928
     evidence:
@@ -174302,7 +173849,7 @@ products:
     categoryBasis: default
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 5.99
     priceCad: 12.0
@@ -176625,7 +176172,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-21'
-    priceEur: 28.75
+    priceEur: 31.65
     url: https://radaddel.de/products/zis-30-tank-destroyer
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/121386-zis-30-tank-destroyer-402414004-1.webp?v=1781197186
     evidence:

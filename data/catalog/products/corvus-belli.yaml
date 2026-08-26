@@ -733,21 +733,6 @@ products:
       - legacy-catalog:corvus-belli/infinity/general/agent-dukash-multi-rifle
       - ret-gamenerdz:/infinity-code-one-combined-army-agent-dukash-multi-rifle
       - ret-goblingaming:agent-dukash-multi-rifle-combined-army
-  - id: corvus-belli/aggressor-warcrow
-    name: Aggressor - Warcrow
-    manufacturer: corvus-belli
-    sku: WW02003-0013
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 37.91
-    url: https://www.goblingaming.co.uk/products/aggressor-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Warcrow-Aggressors.jpg?v=1735316737
-    evidence:
-      - ret-goblingaming:aggressor-warcrow
   - id: corvus-belli/aida-swanson-submachine-gun
     name: Aïda Swanson (Submachine gun)
     manufacturer: corvus-belli
@@ -894,38 +879,6 @@ products:
       - legacy-catalog:corvus-belli/infinity/aleph/aleph-operations-action-pack
       - ret-gamenerdz:/infinity-aleph-operations-action-pack
       - ret-goblingaming:infinity-aleph-operations-action-pack
-  - id: corvus-belli/aleph-posthumans
-    name: Aleph Posthumans
-    manufacturer: corvus-belli
-    sku: 280887-1111
-    gameSystem: infinity
-    faction: aleph
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 42.16
-    url: https://www.goblingaming.co.uk/products/posthumans-1
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/280887-1111Posthumansbox.webp?v=1735316992
-    evidence:
-      - ret-goblingaming:posthumans-1
-  - id: corvus-belli/aleph-steel-phalanx-action-pack
-    name: Aleph Steel Phalanx Action Pack
-    manufacturer: corvus-belli
-    sku: 280888-1149
-    gameSystem: infinity
-    faction: aleph
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 75.86
-    url: https://www.goblingaming.co.uk/products/steel-phanlax-action-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/280888_1149_cover_a6c1.jpg?v=1735555952
-    evidence:
-      - ret-goblingaming:steel-phanlax-action-pack
   - id: corvus-belli/aleph-support-pack
     name: ALEPH Support Pack
     manufacturer: corvus-belli
@@ -995,8 +948,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 84.99
     url: https://store.corvusbelli.com/en/boardgames/aristeia/all-in-one-aristeia-core-prime-time-bundle
@@ -1188,8 +1141,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 10.0
     url: https://store.corvusbelli.com/en/boardgames/aristeia/aristeia-advanced-tactics-decks
@@ -1276,8 +1229,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 60.0
     url: https://store.corvusbelli.com/en/boardgames/aristeia/aristeia-core
@@ -1354,8 +1307,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 24.95
     url: https://store.corvusbelli.com/en/boardgames/aristeia/aristeia-loadout-bag-insert
@@ -1442,15 +1395,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBPV58
     ean: '2800000001179'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: aristeia
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 14.88
     url: https://www.gamenerdz.com/aristeia-padre-inquisidor-mendoza
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/padre-inquisidor-mendoza-preorder-exclusive-miniature-1.png?v=1615345648
     evidence:
       - ret-gamenerdz:/aristeia-padre-inquisidor-mendoza
+      - ret-goblingaming:padre-inquisitor-mendoza-panoceania
   - id: corvus-belli/aristeia-parvati-victorian-automata
     name: Aristeia! Parvati Victorian Automata
     manufacturer: corvus-belli
@@ -1876,21 +1833,6 @@ products:
       - mfr-corvus-belli:infinity:betrayal-characters-pack
       - ret-gamenerdz:/infinity-betrayal-characters-pack
       - ret-goblingaming:betrayal-characters-pack-infinity-the-game-280034-0837
-  - id: corvus-belli/beyond-the-song-of-the-dormant-warcrow
-    name: Beyond The Song of the Dormant - Warcrow
-    manufacturer: corvus-belli
-    sku: WW10006-0033
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 47.73
-    url: https://www.goblingaming.co.uk/products/beyond-the-song-of-the-dormant-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW10006-0033BeyondTheSongoftheDormantbox.webp?v=1752075508
-    evidence:
-      - ret-goblingaming:beyond-the-song-of-the-dormant-warcrow
   - id: corvus-belli/bit-and-kiss-hacker
     name: Bit and KISS! (Hacker)
     manufacturer: corvus-belli
@@ -1937,98 +1879,6 @@ products:
       - mfr-corvus-belli:infinity:bixie-jade-champion
       - ret-gamenerdz:/infinity-yu-jing-bixie-the-jade-champion
       - ret-goblingaming:infinity-yu-jing-bixie-the-jade-champion
-  - id: corvus-belli/black-legion-arquebusiers-warcrow
-    name: Black Legion Arquebusiers - Warcrow
-    manufacturer: corvus-belli
-    sku: WW02005-0017
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 39.61
-    url: https://www.goblingaming.co.uk/products/black-legion-arquebusiers-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02005_0017_cover_3a7f.jpg?v=1739289180
-    evidence:
-      - ret-goblingaming:black-legion-arquebusiers-warcrow
-  - id: corvus-belli/black-legion-bucklermen-warcrow
-    name: Black Legion Bucklermen - Warcrow
-    manufacturer: corvus-belli
-    sku: WW02004-0015
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 37.61
-    url: https://www.goblingaming.co.uk/products/black-legion-bucklermen-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02004_0015_cover_2c6c.jpg?v=1736770614
-    evidence:
-      - ret-goblingaming:black-legion-bucklermen-warcrow
-  - id: corvus-belli/black-legion-supports-warcrow
-    name: Black Legion Supports - Warcrow
-    manufacturer: corvus-belli
-    sku: WW02006-0019
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.33
-    url: https://www.goblingaming.co.uk/products/black-legion-supports-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02006_0019_cover_3fee.jpg?v=1739289973
-    evidence:
-      - ret-goblingaming:black-legion-supports-warcrow
-  - id: corvus-belli/blue-wolf-mongol-cavalry-tag-pack-yu-jing
-    name: Blue Wolf Mongol Cavalry TAG Pack - Yu Jing
-    manufacturer: corvus-belli
-    sku: 281353-1158
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 33.99
-    url: https://www.goblingaming.co.uk/products/blue-wolf-mongol-cavalry-tag-pack-yu-jing
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281353_1158_cover_3263.jpg?v=1748010318
-    evidence:
-      - ret-goblingaming:blue-wolf-mongol-cavalry-tag-pack-yu-jing
-  - id: corvus-belli/booster-pack-alpha-jsa
-    name: Booster Pack Alpha - JSA
-    manufacturer: corvus-belli
-    sku: 281712-1161
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.5
-    url: https://www.goblingaming.co.uk/products/booster-pack-alpha-jsa
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281712_1161_cover_8849.jpg?v=1748011873
-    evidence:
-      - ret-goblingaming:booster-pack-alpha-jsa
-  - id: corvus-belli/booster-pack-alpha-panoceania
-    name: Booster Pack Alpha - Panoceania
-    manufacturer: corvus-belli
-    sku: 281248-1160
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.5
-    url: https://www.goblingaming.co.uk/products/booster-pack-alpha-panoceania
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281248_1160_cover_206f.jpg?v=1748012472
-    evidence:
-      - ret-goblingaming:booster-pack-alpha-panoceania
   - id: corvus-belli/brawlers
     name: Brawlers
     manufacturer: corvus-belli
@@ -2754,21 +2604,6 @@ products:
       - mfr-corvus-belli:infinity:dire-foes-14-blocking-zone
       - ret-gamenerdz:/infinity-dire-foes-mission-pack-14-blocking-zone
       - ret-goblingaming:infinity-o12-nomads-dire-foes-mission-pack-14-blocking-zone
-  - id: corvus-belli/dire-foes-mission-pack-15-barrenlands
-    name: 'Dire Foes Mission Pack 15: Barrenlands'
-    manufacturer: corvus-belli
-    sku: 280058-1135
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 36.98
-    url: https://www.goblingaming.co.uk/products/dire-foes-mission-pack-15-barrenlands
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/dire-foes-mission-pack-15-barrenlands-4.webp?v=1751988782
-    evidence:
-      - ret-goblingaming:dire-foes-mission-pack-15-barrenlands
   - id: corvus-belli/district-5-catwalk
     name: District 5 Catwalk
     manufacturer: corvus-belli
@@ -2885,22 +2720,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281639_1195_cover_8ea8.avif?v=1784554331
     evidence:
       - ret-goblingaming:drakios-team-achilles-dragon-combined-army
-  - id: corvus-belli/drummers-mobile-support-section-panoceania
-    name: Drummers, Mobile Support Section - Panoceania
-    manufacturer: corvus-belli
-    sku: 281247-1151
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 34.85
-    url: https://www.goblingaming.co.uk/products/drummers-mobile-support-section-panoceania
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281247_1151_cover_ef24.jpg?v=1748011779
-    evidence:
-      - ret-goblingaming:drummers-mobile-support-section-panoceania
   - id: corvus-belli/druze-shock-teams
     name: Druze Shock Teams
     manufacturer: corvus-belli
@@ -3085,20 +2904,6 @@ products:
       - mfr-corvus-belli:infinity:father-lucien-sforza
       - ret-gamenerdz:/infinity-na2-father-lucien-sforza-authorized-bounty-hunter
       - ret-goblingaming:infinity-na2-father-lucien-sforza-authorized-bounty-hunter-2023
-  - id: corvus-belli/feiquan-imperial-tactical-wing
-    name: Feiquan Imperial Tactical Wing
-    manufacturer: corvus-belli
-    sku: 281359-1193
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 46.96
-    url: https://www.goblingaming.co.uk/products/feiquan-imperial-tactical-wing
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281359_1193_cover_2421.avif?v=1761750799
-    evidence:
-      - ret-goblingaming:feiquan-imperial-tactical-wing
   - id: corvus-belli/feudom-archers-warcrow
     name: Feudom Archers - Warcrow
     manufacturer: corvus-belli
@@ -3131,21 +2936,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05009_0075_cover_37c6.avif?v=1782307319
     evidence:
       - ret-goblingaming:feudom-knights
-  - id: corvus-belli/feudom-officers-warcrow
-    name: Feudom Officers - Warcrow
-    manufacturer: corvus-belli
-    sku: WW05002-0045
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.8
-    url: https://www.goblingaming.co.uk/products/feudom-officers-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05002_0045_cover_7ca1.avif?v=1761751414
-    evidence:
-      - ret-goblingaming:feudom-officers-warcrow
   - id: corvus-belli/fiddler-aristeia-s-ex-toymaker
     name: Fiddler, Aristeia!`s ex-toymaker
     manufacturer: corvus-belli
@@ -3303,21 +3093,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281553_1249_cover_6894_1.avif?v=1787583137
     evidence:
       - ret-goblingaming:gecko-squadron-nomads
-  - id: corvus-belli/genevieve-countess-of-silem-warcrow
-    name: Genevieve, Countess of Silem - Warcrow
-    manufacturer: corvus-belli
-    sku: WW05003-0047
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 18.44
-    url: https://www.goblingaming.co.uk/products/genevieve-countess-of-silem-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05003_0047_cover_2e69.avif?v=1761751475
-    evidence:
-      - ret-goblingaming:genevieve-countess-of-silem-warcrow
   - id: corvus-belli/gitmalu-the-perfect-one-warcrow
     name: Gitmalu, the Perfect One - Warcrow
     manufacturer: corvus-belli
@@ -3333,22 +3108,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Gitmalu_the_Perfect_One_-_Warcrow.avif?v=1772635332
     evidence:
       - ret-goblingaming:gitmalu-the-perfect-one-warcrow
-  - id: corvus-belli/go-pod-nomads
-    name: Go-Pod Nomads
-    manufacturer: corvus-belli
-    sku: 281543-1166
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 48.11
-    url: https://www.goblingaming.co.uk/products/go-pod-nomads
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/go-pods-3.webp?v=1751990077
-    evidence:
-      - ret-goblingaming:go-pod-nomads
   - id: corvus-belli/greif-operators-2-breaker-pistols
     name: Greif Operators (2 Breaker Pistols)
     manufacturer: corvus-belli
@@ -3387,21 +3146,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW03002_0024_cover_b7e2.avif?v=1772636006
     evidence:
       - ret-goblingaming:grove-curtailers-warcrow
-  - id: corvus-belli/guardians-of-the-mounds-warcrow
-    name: Guardians of the Mounds - Warcrow
-    manufacturer: corvus-belli
-    sku: WW05001-0042
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 39.86
-    url: https://www.goblingaming.co.uk/products/guardians-of-the-mounds-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05001_0042_cover_a7c6.avif?v=1761750735
-    evidence:
-      - ret-goblingaming:guardians-of-the-mounds-warcrow
   - id: corvus-belli/guijia-squadron-tag
     name: Gūijiă Squadron (TAG)
     manufacturer: corvus-belli
@@ -3591,38 +3335,6 @@ products:
       - legacy-catalog:corvus-belli/infinity/general/hassassin-ayyar-viral-pistols
       - ret-gamenerdz:/infinity-haqqislam-hassassins-ayyar-viral-pistols
       - ret-goblingaming:hassassin-ayyr-viral-pistols
-  - id: corvus-belli/hassassin-bahram-action-pack
-    name: Hassassin Bahram Action Pack
-    manufacturer: corvus-belli
-    sku: 281427-1150
-    gameSystem: infinity
-    faction: haqqislam
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 80.07
-    url: https://www.goblingaming.co.uk/products/hassassin-bahram-action-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281427_1150_cover_42e0.jpg?v=1739358322
-    evidence:
-      - ret-goblingaming:hassassin-bahram-action-pack
-  - id: corvus-belli/hassassin-bahram-expansion-pack-beta
-    name: Hassassin Bahram Expansion Pack Beta
-    manufacturer: corvus-belli
-    sku: 281429-1185
-    gameSystem: infinity
-    faction: haqqislam
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 36.34
-    url: https://www.goblingaming.co.uk/products/hassassin-bahram-expansion-pack-beta
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281429_1185_cover_aaf2.avif?v=1761750529
-    evidence:
-      - ret-goblingaming:hassassin-bahram-expansion-pack-beta
   - id: corvus-belli/hassassin-expansion-pack-alpha
     name: Hassassin Expansion Pack Alpha
     manufacturer: corvus-belli
@@ -3827,52 +3539,6 @@ products:
       - legacy-catalog:corvus-belli/aristeia/general/human-fate
       - mfr-corvus-belli:aristeia:human-fate
       - ret-gamenerdz:/aristeia-human-fate-box
-  - id: corvus-belli/husks-warcrow
-    name: Husks - Warcrow
-    manufacturer: corvus-belli
-    sku: WW04002-0040
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 39.86
-    url: https://www.goblingaming.co.uk/products/husks-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW04002_0040_cover_9c31.avif?v=1761750563
-    evidence:
-      - ret-goblingaming:husks-warcrow
-  - id: corvus-belli/ice-archers-warcrow
-    name: Ice Archers - Warcrow
-    manufacturer: corvus-belli
-    sku: WW01005-0016
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 39.61
-    url: https://www.goblingaming.co.uk/products/ice-archers-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW01005_0016_cover_e47c.jpg?v=1739289002
-    evidence:
-      - ret-goblingaming:ice-archers-warcrow
-  - id: corvus-belli/iguana-squadron-nomads
-    name: Iguana Squadron - Nomads
-    manufacturer: corvus-belli
-    sku: 281547-1176
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 46.24
-    url: https://www.goblingaming.co.uk/products/iguana-squadron-nomads
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281547_1176_cover_3cfe.jpg?v=1752075621
-    evidence:
-      - ret-goblingaming:iguana-squadron-nomads
   - id: corvus-belli/illuminatrix-thematic-rule
     name: Illuminatrix Thematic rule
     manufacturer: corvus-belli
@@ -3891,37 +3557,6 @@ products:
     evidence:
       - legacy-catalog:corvus-belli/infinity/general/illuminatrix-thematic-rule
       - mfr-corvus-belli:infinity:illuminatrix-thematic-rule
-  - id: corvus-belli/imperial-service-expansion-pack-alpha-yu-jing
-    name: Imperial Service Expansion Pack Alpha - Yu Jing
-    manufacturer: corvus-belli
-    sku: 281352-1155
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 41.64
-    url: https://www.goblingaming.co.uk/products/imperial-service-expansion-pack-alpha-yu-jing
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281352_1155_cover_a856.jpg?v=1748012972
-    evidence:
-      - ret-goblingaming:imperial-service-expansion-pack-alpha-yu-jing
-  - id: corvus-belli/imperial-service-expansion-pack-beta
-    name: Imperial Service Expansion Pack Beta
-    manufacturer: corvus-belli
-    sku: 281354-1164
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.23
-    url: https://www.goblingaming.co.uk/products/imperial-service-expansion-pack-beta
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/imperial-service-expansion-pack-beta-5.webp?v=1751989830
-    evidence:
-      - ret-goblingaming:imperial-service-expansion-pack-beta
   - id: corvus-belli/infinity-25mm-scenery-bases-zeta-series-10
     name: 'Infinity: 25mm Scenery Bases, Zeta Series (10)'
     manufacturer: corvus-belli
@@ -4335,16 +3970,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB280887
     ean: '8436607712473'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: aleph
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 42.16
     url: https://www.gamenerdz.com/infinity-aleph-posthumans-2024
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/280887-1111Posthumansbox.webp?v=1735316992
     evidence:
       - ret-gamenerdz:/infinity-aleph-posthumans-2024
+      - ret-goblingaming:posthumans-1
   - id: corvus-belli/infinity-aleph-posthumans-2g-proxies
     name: 'Infinity: Aleph Posthumans, 2G Proxies'
     manufacturer: corvus-belli
@@ -4919,16 +4558,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281138
     ean: '8436607712466'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: ariadna
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 46.33
     url: https://www.gamenerdz.com/infinity-ariadna-kibervolk-patrol
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281138_1110_cover_60c7.jpg?v=1735316836
     evidence:
       - ret-gamenerdz:/infinity-ariadna-kibervolk-patrol
+      - ret-goblingaming:kibervolk-patrol
   - id: corvus-belli/infinity-ariadna-marauders-5307th-composite-ranger-unit
     name: 'Infinity: Ariadna Marauders 5307th Composite Ranger Unit'
     manufacturer: corvus-belli
@@ -5032,16 +4675,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281139
     ean: '8436607713326'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: ariadna
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 36.54
     url: https://www.gamenerdz.com/infinity-ariadna-tak-expansion-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281139_1156_cover_ca13.jpg?v=1748010090
     evidence:
       - ret-gamenerdz:/infinity-ariadna-tak-expansion-pack-alpha
+      - ret-goblingaming:tak-expansion-pack-alpha-ariadna
   - id: corvus-belli/infinity-ariadna-tankhunters
     name: 'Infinity: Ariadna Tankhunters'
     manufacturer: corvus-belli
@@ -5187,16 +4834,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281140
     ean: '8436607713449'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: ariadna
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 32.64
     url: https://www.gamenerdz.com/infinity-ariadna-vystrel-mobile-artillery-regiment
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vystrel-mobile-artillery-regiment-3.webp?v=1751989479
     evidence:
       - ret-gamenerdz:/infinity-ariadna-vystrel-mobile-artillery-regiment
+      - ret-goblingaming:vystrel-mobile-artillery-regiment
   - id: corvus-belli/infinity-ariadna-william-wallace-exp-ccw
     name: 'Infinity: Ariadna William Wallace (EXP CCW)'
     manufacturer: corvus-belli
@@ -5551,20 +5202,16 @@ products:
     manufacturer: corvus-belli
     sku: CVB281604
     ean: '2816040008351'
-    eanConfidence: confirmed
+    eanConfidence: provisional
     gameSystem: infinity
     faction: combined-army
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: guessed
     status: current
-    availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 26.95
     url: https://www.gamenerdz.com/infinity-code-one-combined-army-support-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/combined-army-support-pack-5.png?v=1744974630
     evidence:
       - ret-gamenerdz:/infinity-code-one-combined-army-support-pack
-      - ret-goblingaming:combined-army-support-pack-2020-repack
   - id: corvus-belli/infinity-code-one-dire-foes-mission-pack-beta-void-tango
     name: 'Infinity: Code One - Dire Foes Mission Pack Beta - Void Tango'
     manufacturer: corvus-belli
@@ -6393,16 +6040,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281637
     ean: '8436607713951'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: combined-army
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 40.37
     url: https://www.gamenerdz.com/infinity-combined-army-juggernauts-armored-assault-brigade-multi-hmg
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281637_1188_cover_d5e4.avif?v=1761751079
     evidence:
       - ret-gamenerdz:/infinity-combined-army-juggernauts-armored-assault-brigade-multi-hmg
+      - ret-goblingaming:juggernauts-armored-assault-brigade-multi-hmg
   - id: corvus-belli/infinity-combined-army-kornak-gazarot-morat-superior-warrior-officer-mk12
     name: 'Infinity: Combined Army Kornak Gazarot Morat Superior Warrior-Officer (MK12)'
     manufacturer: corvus-belli
@@ -6520,16 +6171,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281636
     ean: '8436607713944'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: combined-army
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 73.36
     url: https://www.gamenerdz.com/infinity-combined-army-next-wave-action-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281636_1187_cover_f9eb.avif?v=1761751033
     evidence:
       - ret-gamenerdz:/infinity-combined-army-next-wave-action-pack
+      - ret-goblingaming:next-wave-action-pack
   - id: corvus-belli/infinity-combined-army-next-wave-expansion-pack-alpha
     name: 'Infinity: Combined Army - Next Wave Expansion Pack Alpha'
     manufacturer: corvus-belli
@@ -6592,10 +6247,12 @@ products:
     url: https://www.gamenerdz.com/infinity-combined-army-oznat-morat-hunting-regiment-vulkan-shotgun
     evidence:
       - ret-gamenerdz:/infinity-combined-army-oznat-morat-hunting-regiment-vulkan-shotgun
-  - id: corvus-belli/infinity-combined-army-paint-set-harbinger-paramedic-exclusive
-    name: Infinity Combined Army Paint Set - Harbinger Paramedic Exclusive
+  - id: corvus-belli/infinity-combined-army-paint-set-w-harbinger-paramedic-exclusive-miniature
+    name: 'Infinity: Combined Army - Paint Set w/ Harbinger Paramedic Exclusive Miniature'
     manufacturer: corvus-belli
-    sku: 281638-1189
+    sku: CVB281638
+    ean: '8436607713975'
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: combined-army
     category: paint-set
@@ -6605,25 +6262,11 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 33.03
-    url: https://www.goblingaming.co.uk/products/infinity-combined-army-paint-set-harbinger-paramedic-exclusive
+    url: https://www.gamenerdz.com/infinity-combined-army-paint-set-w-harbinger-paramedic-exclusive-miniature
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281638_1189_cover_6594.avif?v=1761751180
     evidence:
-      - ret-goblingaming:infinity-combined-army-paint-set-harbinger-paramedic-exclusive
-  - id: corvus-belli/infinity-combined-army-paint-set-w-harbinger-paramedic-exclusive-miniature
-    name: 'Infinity: Combined Army - Paint Set w/ Harbinger Paramedic Exclusive Miniature'
-    manufacturer: corvus-belli
-    sku: CVB281638
-    ean: '8436607713975'
-    eanConfidence: provisional
-    gameSystem: infinity
-    faction: combined-army
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-combined-army-paint-set-w-harbinger-paramedic-exclusive-miniature
-    evidence:
       - ret-gamenerdz:/infinity-combined-army-paint-set-w-harbinger-paramedic-exclusive-miniature
+      - ret-goblingaming:infinity-combined-army-paint-set-harbinger-paramedic-exclusive
   - id: corvus-belli/infinity-combined-army-raicho-pilot-scindron-ancillary-remote-unit-ca-tag-pilot-set
     name: 'Infinity: Combined Army Raicho Pilot & Scindron Ancillary Remote Unit (CA TAG Pilot Set)'
     manufacturer: corvus-belli
@@ -6920,6 +6563,20 @@ products:
     evidence:
       - ret-gamenerdz:/infinity-combined-army-stingers-security-tactical-unit
       - ret-goblingaming:stingers-security-tactical-unit
+  - id: corvus-belli/infinity-combined-army-support-pack-2020-repack-281604-0835
+    name: Infinity Combined Army Support Pack (2020 Repack) - 281604-0835
+    manufacturer: corvus-belli
+    sku: 281604-0835
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 26.95
+    url: https://www.goblingaming.co.uk/products/combined-army-support-pack-2020-repack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/combined-army-support-pack-5.png?v=1744974630
+    evidence:
+      - ret-goblingaming:combined-army-support-pack-2020-repack
   - id: corvus-belli/infinity-combined-army-suryats-assault-heavy-infantry
     name: 'Infinity: Combined Army Suryats, Assault Heavy Infantry'
     manufacturer: corvus-belli
@@ -7131,15 +6788,19 @@ products:
     manufacturer: corvus-belli
     sku: CVB280058
     ean: '8436607712886'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 36.98
     url: https://www.gamenerdz.com/infinity-dire-foes-dire-foes-mission-pack-15-barrenlands-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/dire-foes-mission-pack-15-barrenlands-4.webp?v=1751988782
     evidence:
       - ret-gamenerdz:/infinity-dire-foes-dire-foes-mission-pack-15-barrenlands-preorder
+      - ret-goblingaming:dire-foes-mission-pack-15-barrenlands
   - id: corvus-belli/infinity-dire-foes-mission-pack-1-train-rescue
     name: 'Infinity: Dire Foes Mission Pack 1 - Train Rescue'
     manufacturer: corvus-belli
@@ -7452,15 +7113,19 @@ products:
     manufacturer: corvus-belli
     sku: CVB281712
     ean: '8436607713364'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.5
     url: https://www.gamenerdz.com/infinity-essentials-jsa-booster-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281712_1161_cover_8849.jpg?v=1748011873
     evidence:
       - ret-gamenerdz:/infinity-essentials-jsa-booster-pack-alpha
+      - ret-goblingaming:booster-pack-alpha-jsa
   - id: corvus-belli/infinity-essentials-jsa-jsa-aibot-remotes-pack
     name: 'Infinity: Essentials - JSA - JSA Aibot Remotes Pack'
     manufacturer: corvus-belli
@@ -7484,15 +7149,19 @@ products:
     manufacturer: corvus-belli
     sku: CVB281714
     ean: '8436607713494'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 17.21
     url: https://www.gamenerdz.com/infinity-essentials-jsa-jsa-hero-shinobu-kitsune-monofilament-ccw
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/jsa-hero-shinobu-kitsune-5.webp?v=1751989947
     evidence:
       - ret-gamenerdz:/infinity-essentials-jsa-jsa-hero-shinobu-kitsune-monofilament-ccw
+      - ret-goblingaming:jsa-hero-shinobu-kitsune-monofilament-ccw
   - id: corvus-belli/infinity-essentials-jsa-o-yoroi-kidobutai-tag-pack
     name: 'Infinity: Essentials - JSA O-Yoroi Kidobutai TAG Pack'
     manufacturer: corvus-belli
@@ -7529,16 +7198,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281544
     ean: '8436607713500'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.8
     url: https://www.gamenerdz.com/infinity-essentials-nomads-nomads-booster-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/nomads-booster-pack-alpha-4.webp?v=1752048955
     evidence:
       - ret-gamenerdz:/infinity-essentials-nomads-nomads-booster-pack-alpha
+      - ret-goblingaming:nomads-booster-pack-alpha
   - id: corvus-belli/infinity-essentials-nomads-nomads-hero-wolfgang-amadeus-wolff
     name: 'Infinity: Essentials - Nomads - Nomads Hero, Wolfgang Amadeus Wolff'
     manufacturer: corvus-belli
@@ -7559,31 +7232,39 @@ products:
     manufacturer: corvus-belli
     sku: CVB281540
     ean: '8436607713050'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.33
     url: https://www.gamenerdz.com/infinity-essentials-nomads-nomads-support-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281540_1144_cover_f75a.jpg?v=1739358465
     evidence:
       - ret-gamenerdz:/infinity-essentials-nomads-nomads-support-pack
+      - ret-goblingaming:nomads-support-pack
   - id: corvus-belli/infinity-essentials-nomads-nomads-szalamandra-squadron-tag-pack
     name: 'Infinity: Essentials - Nomads - Nomads Szalamandra Squadron TAG Pack'
     manufacturer: corvus-belli
     sku: CVB281542
     ean: '8436607713371'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.74
     url: https://www.gamenerdz.com/infinity-essentials-nomads-nomads-szalamandra-squadron-tag-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281542_1159_cover_fd7e.jpg?v=1748011688
     evidence:
       - ret-gamenerdz:/infinity-essentials-nomads-nomads-szalamandra-squadron-tag-pack
+      - ret-goblingaming:szalamandra-squadron-tag-pack-nomads
   - id: corvus-belli/infinity-essentials-nomads-zonds-remotes-pack
     name: 'Infinity: Essentials - Nomads Zonds Remotes Pack'
     manufacturer: corvus-belli
@@ -7608,50 +7289,64 @@ products:
     manufacturer: corvus-belli
     sku: CVB281248
     ean: '8436607713357'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.5
     url: https://www.gamenerdz.com/infinity-essentials-panoceania-panoceania-booster-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281248_1160_cover_206f.jpg?v=1748012472
     evidence:
       - ret-gamenerdz:/infinity-essentials-panoceania-panoceania-booster-pack-alpha
+      - ret-goblingaming:booster-pack-alpha-panoceania
   - id: corvus-belli/infinity-essentials-panoceania-panoceania-dronbot-remotes-pack
     name: 'Infinity: Essentials - PanOceania - PanOceania Dronbot Remotes Pack'
     manufacturer: corvus-belli
     sku: CVB2812431128
     ean: '8436607712794'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 27.88
     url: https://www.gamenerdz.com/infinity-essentials-panoceania-panoceania-dronbot-remotes-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281243_1128_cover_5c83.jpg?v=1739291353
     evidence:
       - ret-gamenerdz:/infinity-essentials-panoceania-panoceania-dronbot-remotes-pack
+      - ret-goblingaming:panoceania-dronbot-remotes-pack
   - id: corvus-belli/infinity-essentials-panoceania-panoceania-hero-jeanne-d-arc-2-0-mobility-armor
     name: 'Infinity: Essentials - PanOceania - PanOceania Hero, Jeanne d''Arc 2.0 (Mobility Armor)'
     manufacturer: corvus-belli
     sku: CVB281250
     ean: '8436607713487'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 17.21
     url: https://www.gamenerdz.com/infinity-essentials-panoceania-panoceania-hero-jeanne-d-arc-2-0-mobility-armor
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/panoceania-hero-jeanne-d-arc-2-0-mobility-armor-3.webp?v=1751989663
     evidence:
       - ret-gamenerdz:/infinity-essentials-panoceania-panoceania-hero-jeanne-d-arc-2-0-mobility-armor
-  - id: corvus-belli/infinity-essentials-start-here
-    name: Infinity Essentials Start Here
+      - ret-goblingaming:panoceania-hero-jeanne-darc-2-0-mobility-armor
+  - id: corvus-belli/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
+    name: 'Infinity: Essentials Start Here - JSA & Panoceania 2-Player Starter Set'
     manufacturer: corvus-belli
-    sku: 280057-1115
+    sku: CVB280059
+    ean: '8436607712534'
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
     categoryBasis: mapped
@@ -7660,24 +7355,11 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 37.91
-    url: https://www.goblingaming.co.uk/products/infinity-essentials-start-here
+    url: https://www.gamenerdz.com/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/essentials-start-here-10.webp?v=1735317126
     evidence:
-      - ret-goblingaming:infinity-essentials-start-here
-  - id: corvus-belli/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
-    name: 'Infinity: Essentials Start Here - JSA & Panoceania 2-Player Starter Set'
-    manufacturer: corvus-belli
-    sku: CVB280059
-    ean: '8436607712534'
-    eanConfidence: provisional
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
-    evidence:
       - ret-gamenerdz:/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
+      - ret-goblingaming:infinity-essentials-start-here
   - id: corvus-belli/infinity-essentials-start-here-nomads-aleph-preorder
     name: 'Infinity: Essentials Start Here - Nomads & Aleph (PREORDER)'
     manufacturer: corvus-belli
@@ -7732,31 +7414,39 @@ products:
     manufacturer: corvus-belli
     sku: CVB281353
     ean: '8436607713340'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 33.99
     url: https://www.gamenerdz.com/infinity-essentials-yu-jing-yu-jing-blue-wolf-mongol-cavalry-tag-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281353_1158_cover_3263.jpg?v=1748010318
     evidence:
       - ret-gamenerdz:/infinity-essentials-yu-jing-yu-jing-blue-wolf-mongol-cavalry-tag-pack
+      - ret-goblingaming:blue-wolf-mongol-cavalry-tag-pack-yu-jing
   - id: corvus-belli/infinity-essentials-yu-jing-yu-jing-booster-pack-alpha
     name: 'Infinity: Essentials - Yu Jing - Yu Jing Booster Pack Alpha'
     manufacturer: corvus-belli
     sku: CVB281355
     ean: '8436607713470'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.8
     url: https://www.gamenerdz.com/infinity-essentials-yu-jing-yu-jing-booster-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/yu-jing-booster-pack-alpha-4.webp?v=1751990299
     evidence:
       - ret-gamenerdz:/infinity-essentials-yu-jing-yu-jing-booster-pack-alpha
+      - ret-goblingaming:yu-jing-booster-pack-alpha
   - id: corvus-belli/infinity-essentials-yu-jing-yu-jing-hero-lei-gong-invincibles-lord-of-thunder
     name: 'Infinity: Essentials - Yu Jing - Yu Jing Hero, Lei Gong, Invincibles Lord of Thunder'
     manufacturer: corvus-belli
@@ -7993,31 +7683,39 @@ products:
     manufacturer: corvus-belli
     sku: CVB281427
     ean: '8436607713197'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: haqqislam
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 80.07
     url: https://www.gamenerdz.com/infinity-haqqislam-hassassin-bahram-action-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281427_1150_cover_42e0.jpg?v=1739358322
     evidence:
       - ret-gamenerdz:/infinity-haqqislam-hassassin-bahram-action-pack
+      - ret-goblingaming:hassassin-bahram-action-pack
   - id: corvus-belli/infinity-haqqislam-hassassin-bahram-expansion-pack-beta
     name: 'Infinity: Haqqislam - Hassassin Bahram Expansion Pack Beta'
     manufacturer: corvus-belli
     sku: CVB281429
     ean: '8436607713876'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: haqqislam
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 36.34
     url: https://www.gamenerdz.com/infinity-haqqislam-hassassin-bahram-expansion-pack-beta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281429_1185_cover_aaf2.avif?v=1761750529
     evidence:
       - ret-gamenerdz:/infinity-haqqislam-hassassin-bahram-expansion-pack-beta
+      - ret-goblingaming:hassassin-bahram-expansion-pack-beta
   - id: corvus-belli/infinity-haqqislam-hassassin-bahram-sectorial-army-starter-pack
     name: 'Infinity Haqqislam: Hassassin Bahram Sectorial Army Starter Pack'
     manufacturer: corvus-belli
@@ -8796,10 +8494,12 @@ products:
     url: https://www.gamenerdz.com/infinity-jsa-ninjas-multi-sniper-hacker-preorder
     evidence:
       - ret-gamenerdz:/infinity-jsa-ninjas-multi-sniper-hacker-preorder
-  - id: corvus-belli/infinity-jsa-paint-set-keisotsu-paramedic-exclusive
-    name: Infinity JSA Paint Set Keisotsu Paramedic Exclusive
+  - id: corvus-belli/infinity-jsa-paint-set-w-exclusive-miniature
+    name: 'Infinity: JSA - Paint Set w/Exclusive Miniature'
     manufacturer: corvus-belli
-    sku: 281713-1163
+    sku: CVB281713
+    ean: '8436607713425'
+    eanConfidence: confirmed
     gameSystem: infinity
     category: paint-set
     categoryBasis: mapped
@@ -8808,24 +8508,11 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 38.25
-    url: https://www.goblingaming.co.uk/products/infinity-jsa-paint-set-keisotsu-paramedic-exclusive
+    url: https://www.gamenerdz.com/infinity-jsa-paint-set-w-exclusive-miniature
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281713_1163_cover_fc9f.jpg?v=1739359361
     evidence:
-      - ret-goblingaming:infinity-jsa-paint-set-keisotsu-paramedic-exclusive
-  - id: corvus-belli/infinity-jsa-paint-set-w-exclusive-miniature
-    name: 'Infinity: JSA - Paint Set w/Exclusive Miniature'
-    manufacturer: corvus-belli
-    sku: CVB281713
-    ean: '8436607713425'
-    eanConfidence: provisional
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-jsa-paint-set-w-exclusive-miniature
-    evidence:
       - ret-gamenerdz:/infinity-jsa-paint-set-w-exclusive-miniature
+      - ret-goblingaming:infinity-jsa-paint-set-keisotsu-paramedic-exclusive
   - id: corvus-belli/infinity-jsa-reinforcements-pack-alpha
     name: 'Infinity: JSA - Reinforcements Pack Alpha'
     manufacturer: corvus-belli
@@ -8863,29 +8550,37 @@ products:
     manufacturer: corvus-belli
     sku: CVB281704
     ean: '8436607712718'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.4
     url: https://www.gamenerdz.com/infinity-jsa-shindenbutai-expansion-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/shindenbutai-expansion-pack-alpha-1.webp?v=1735556239
     evidence:
       - ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-alpha
+      - ret-goblingaming:shindenbutai-expansion-pack-alpha
   - id: corvus-belli/infinity-jsa-shindenbutai-expansion-pack-beta
     name: 'Infinity: JSA - Shindenbutai Expansion Pack Beta'
     manufacturer: corvus-belli
     sku: CVB281705-1126
     ean: '8436607712770'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.4
     url: https://www.gamenerdz.com/infinity-jsa-shindenbutai-expansion-pack-beta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281705_1126_cover_476e.jpg?v=1739290535
     evidence:
       - ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-beta
+      - ret-goblingaming:shindenbutai-expansion-pack-beta
   - id: corvus-belli/infinity-jsa-shindenbutai-expansion-pack-delta
     name: 'Infinity: JSA - Shindenbutai Expansion Pack Delta'
     manufacturer: corvus-belli
@@ -8909,29 +8604,37 @@ products:
     manufacturer: corvus-belli
     sku: CVB281707
     ean: '8436607712879'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 36.3
     url: https://www.gamenerdz.com/infinity-jsa-shindenbutai-expansion-pack-gamma
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281707_1134_cover_fbc1.jpg?v=1739359081
     evidence:
       - ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-gamma
+      - ret-goblingaming:shindenbutai-expansion-pack-gamma
   - id: corvus-belli/infinity-jsa-support-pack
     name: 'Infinity: JSA Support Pack'
     manufacturer: corvus-belli
     sku: CVB281708
     ean: '8436607712916'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.25
     url: https://www.gamenerdz.com/infinity-jsa-support-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281708_1138_cover_95dd.jpg?v=1739291231
     evidence:
       - ret-gamenerdz:/infinity-jsa-support-pack
+      - ret-goblingaming:jsa-support-pack-2025
   - id: corvus-belli/infinity-jsa-yamabushi-chain-rifle-panzerfaust
     name: 'Infinity: JSA - Yamabushi (Chain Rifle, Panzerfaust)'
     manufacturer: corvus-belli
@@ -9354,16 +9057,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB280781
     ean: '8436607713333'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: combined-army
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 21.24
     url: https://www.gamenerdz.com/infinity-na2-krakot-renegades-2-smg-chest-mine
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/280781_1157_cover_b848.jpg?v=1748010203
     evidence:
       - ret-gamenerdz:/infinity-na2-krakot-renegades-2-smg-chest-mine
+      - ret-goblingaming:krakot-renegades-2-smg-chest-mine-combined-army
   - id: corvus-belli/infinity-na2-kriigel-agents-submachine-gun
     name: 'Infinity: NA2 Kriigel Agents (Submachine Gun)'
     manufacturer: corvus-belli
@@ -9441,15 +9148,19 @@ products:
     manufacturer: corvus-belli
     sku: CVB280782
     ean: '8436607713463'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 51.55
     url: https://www.gamenerdz.com/infinity-na2-scarface-cordelia-mercenary-tag-team
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/scarface-and-cordelia-mercenary-armored-team-3.webp?v=1751990244
     evidence:
       - ret-gamenerdz:/infinity-na2-scarface-cordelia-mercenary-tag-team
+      - ret-goblingaming:scarface-mercenary-tag-team-na2
   - id: corvus-belli/infinity-na2-taagma-schemers-viral-sniper-rifle
     name: 'Infinity: NA2 Taagma Schemers (Viral Sniper Rifle)'
     manufacturer: corvus-belli
@@ -9648,16 +9359,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281538
     ean: '8436607712817'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 71.61
     url: https://www.gamenerdz.com/infinity-nomads-action-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281538_1130_cover_69dd.jpg?v=1739360637
     evidence:
       - ret-gamenerdz:/infinity-nomads-action-pack
+      - ret-goblingaming:nomads-action-pack-2025
   - id: corvus-belli/infinity-nomads-alguaciles-4-light-gl-multi-sniper-rifle-hmg-ml
     name: 'Infinity: Nomads Alguaciles (4) (Light GL, MULTI Sniper Rifle, HMG, ML)'
     manufacturer: corvus-belli
@@ -9807,16 +9522,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281543
     ean: '8436607713456'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 48.11
     url: https://www.gamenerdz.com/infinity-nomads-go-pod
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/go-pods-3.webp?v=1751990077
     evidence:
       - ret-gamenerdz:/infinity-nomads-go-pod
+      - ret-goblingaming:go-pod-nomads
   - id: corvus-belli/infinity-nomads-hellcats-hacker-boarding-shotgun
     name: 'Infinity Nomads: Hellcats Hacker Boarding Shotgun'
     manufacturer: corvus-belli
@@ -9843,7 +9562,7 @@ products:
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -9854,6 +9573,7 @@ products:
       - ret-gamenerdz:/infinity-nomads-iguana-squadron
       - ret-gamenerdz:/infinity-nomads-iguana-squadron-fs0m
       - ret-goblingaming:iguana-squadron
+      - ret-goblingaming:iguana-squadron-nomads
   - id: corvus-belli/infinity-nomads-intruder-corregidor-assault-commando-hmg
     name: 'Infinity: Nomads - Intruder, Corregidor Assault Commando (HMG)'
     manufacturer: corvus-belli
@@ -10023,10 +9743,12 @@ products:
     url: https://www.gamenerdz.com/infinity-nomads-moran-maasai-hunters-old
     evidence:
       - ret-gamenerdz:/infinity-nomads-moran-maasai-hunters-old
-  - id: corvus-belli/infinity-nomads-paint-set-alguacil-paramedic-exclusive
-    name: Infinity Nomads Paint Set Alguacil Paramedic Exclusive
+  - id: corvus-belli/infinity-nomads-paint-set-w-alguacil-paramedic-exclusive-miniature
+    name: 'Infinity: Nomads - Paint Set w/ Alguacil Paramedic Exclusive Miniature'
     manufacturer: corvus-belli
-    sku: 281546-1175
+    sku: CVB281546
+    ean: '8436607713739'
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: paint-set
@@ -10036,25 +9758,11 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 33.07
-    url: https://www.goblingaming.co.uk/products/infinity-nomads-paint-set-alguacil-paramedic-exclusive
+    url: https://www.gamenerdz.com/infinity-nomads-paint-set-w-alguacil-paramedic-exclusive-miniature
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/127337_0.jpg?v=1752075256
     evidence:
-      - ret-goblingaming:infinity-nomads-paint-set-alguacil-paramedic-exclusive
-  - id: corvus-belli/infinity-nomads-paint-set-w-alguacil-paramedic-exclusive-miniature
-    name: 'Infinity: Nomads - Paint Set w/ Alguacil Paramedic Exclusive Miniature'
-    manufacturer: corvus-belli
-    sku: CVB281546
-    ean: '8436607713739'
-    eanConfidence: provisional
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-nomads-paint-set-w-alguacil-paramedic-exclusive-miniature
-    evidence:
       - ret-gamenerdz:/infinity-nomads-paint-set-w-alguacil-paramedic-exclusive-miniature
+      - ret-goblingaming:infinity-nomads-paint-set-alguacil-paramedic-exclusive
   - id: corvus-belli/infinity-nomads-paint-set-w-exclusive-miniature
     name: 'Infinity: Nomads - Paint Set w/ Exclusive Miniature'
     manufacturer: corvus-belli
@@ -10387,16 +10095,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281541
     ean: '8436607713128'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: nomads
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 26.6
     url: https://www.gamenerdz.com/infinity-nomads-tunguska-triggermen
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281541_1146_cover_d5ea.avif?v=1761750688
     evidence:
       - ret-gamenerdz:/infinity-nomads-tunguska-triggermen
+      - ret-goblingaming:tunguska-triggermen
   - id: corvus-belli/infinity-nomads-vortex-spec-ops
     name: 'Infinity: Nomads Vortex Spec-Ops'
     manufacturer: corvus-belli
@@ -10602,33 +10314,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB282033
     ean: '8436607712701'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: o-12
     category: miniatures
-    categoryBasis: guessed
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-o-12-jamie-arantes-netdroid-rover
-    evidence:
-      - ret-gamenerdz:/infinity-o-12-jamie-arantes-netdroid-rover
-  - id: corvus-belli/infinity-o-12-paint-set-kappa-missile-launcher-exclusive
-    name: Infinity O-12 Paint Set Kappa Missile Launcher Exclusive
-    manufacturer: corvus-belli
-    sku: 282036-1186
-    gameSystem: infinity
-    faction: o-12
-    category: paint-set
     categoryBasis: mapped
-    packaging: set
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 30.48
-    url: https://www.goblingaming.co.uk/products/infinity-o-12-paint-set-kappa-missile-launcher-exclusive
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/282036_1186_cover_96c1.avif?v=1761750903
+    priceGbp: 15.17
+    url: https://www.gamenerdz.com/infinity-o-12-jamie-arantes-netdroid-rover
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/282033_1121_cover_7ede.jpg?v=1735317365
     evidence:
-      - ret-goblingaming:infinity-o-12-paint-set-kappa-missile-launcher-exclusive
+      - ret-gamenerdz:/infinity-o-12-jamie-arantes-netdroid-rover
+      - ret-goblingaming:jamie-arantes-netdroid-rover
   - id: corvus-belli/infinity-o-12-paint-set-w-exclusive-miniature
     name: 'Infinity: O-12 - Paint Set w/ Exclusive Miniature'
     manufacturer: corvus-belli
@@ -10649,16 +10348,21 @@ products:
     manufacturer: corvus-belli
     sku: CVB282036
     ean: '8436607713937'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: o-12
-    category: miniatures
-    categoryBasis: guessed
+    category: paint-set
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 30.48
     url: https://www.gamenerdz.com/infinity-o-12-paint-set-w-kappa-missile-launcher-exclusive-miniature
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/282036_1186_cover_96c1.avif?v=1761750903
     evidence:
       - ret-gamenerdz:/infinity-o-12-paint-set-w-kappa-missile-launcher-exclusive-miniature
+      - ret-goblingaming:infinity-o-12-paint-set-kappa-missile-launcher-exclusive
   - id: corvus-belli/infinity-o-12-psi-cops-multi-marksman-rifle
     name: 'Infinity: O-12 - PSI-COps (Multi Marksman Rifle)'
     manufacturer: corvus-belli
@@ -10698,16 +10402,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB282034
     ean: '8436607712862'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: o-12
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 22.82
     url: https://www.gamenerdz.com/infinity-o-12-tinker-zetbot-remote
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/282034_1133_cover_5b23.jpg?v=1739359576
     evidence:
       - ret-gamenerdz:/infinity-o-12-tinker-zetbot-remote
+      - ret-goblingaming:tinker-and-zetbot-remote
   - id: corvus-belli/infinity-o-12-torchlight-brigade-expansion-pack-alpha
     name: 'Infinity: O-12 - Torchlight Brigade Expansion Pack Alpha'
     manufacturer: corvus-belli
@@ -10732,16 +10440,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB282032
     ean: '8436607712497'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: o-12
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 39.61
     url: https://www.gamenerdz.com/infinity-o-12-torchlight-brigade-expansion-pack-beta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/torchlight-expansion-pack-beta-5_1.webp?v=1735317094
     evidence:
       - ret-gamenerdz:/infinity-o-12-torchlight-brigade-expansion-pack-beta
+      - ret-goblingaming:torchlight-brig-expansion-pack-beta
   - id: corvus-belli/infinity-o-yoroi-kidobutai-tag
     name: 'Infinity: O-Yoroi Kidobutai (TAG)'
     manufacturer: corvus-belli
@@ -11091,16 +10803,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281247
     ean: '8436607713210'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 34.85
     url: https://www.gamenerdz.com/infinity-panoceania-drummers-mobile-support-section
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281247_1151_cover_ef24.jpg?v=1748011779
     evidence:
       - ret-gamenerdz:/infinity-panoceania-drummers-mobile-support-section
+      - ret-goblingaming:drummers-mobile-support-section-panoceania
   - id: corvus-belli/infinity-panoceania-echo-bravo-fast-intervention-unit-light-rocket-launcher
     name: 'Infinity: PanOceania - Echo Bravo, Fast Intervention Unit (Light Rocket Launcher)'
     manufacturer: corvus-belli
@@ -11215,16 +10931,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281251
     ean: '8436607713777'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.62
     url: https://www.gamenerdz.com/infinity-panoceania-jotums
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281251_1177_cover_7009.jpg?v=1752075697
     evidence:
       - ret-gamenerdz:/infinity-panoceania-jotums
+      - ret-goblingaming:jotums-panoceana
   - id: corvus-belli/infinity-panoceania-jotums-multi-hmg-heavy-flamethrower-d-e-p
     name: 'Infinity: PanOceania Jotums (MULTI HMG + Heavy Flamethrower, D.E.P.)'
     manufacturer: corvus-belli
@@ -11249,14 +10969,18 @@ products:
     manufacturer: corvus-belli
     sku: CVB281240
     ean: '8436607712688'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.4
     url: https://www.gamenerdz.com/infinity-panoceania-kestrel-expansion-pack-alpha-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/kestrel-expansion-pack-alpha-5.webp?v=1735317216
     evidence:
       - ret-gamenerdz:/infinity-panoceania-kestrel-expansion-pack-alpha-preorder
+      - ret-goblingaming:kestrel-expansion-pack-alpha
   - id: corvus-belli/infinity-panoceania-kestrel-expansion-pack-beta
     name: 'Infinity: PanOceania - Kestrel Expansion Pack Beta'
     manufacturer: corvus-belli
@@ -11300,16 +11024,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB2812431131
     ean: '8436607712848'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 29.71
     url: https://www.gamenerdz.com/infinity-panoceania-kestrel-expansion-pack-gamma
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281243_1131_gal_img_01_ef88_1.jpg?v=1739353775
     evidence:
       - ret-gamenerdz:/infinity-panoceania-kestrel-expansion-pack-gamma
+      - ret-goblingaming:kestrel-expansion-pack-gamma
   - id: corvus-belli/infinity-panoceania-knight-of-montesa
     name: 'Infinity: Panoceania - Knight of Montesa'
     manufacturer: corvus-belli
@@ -11454,46 +11182,59 @@ products:
     manufacturer: corvus-belli
     sku: CVB281249
     ean: '8436607713418'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
-    category: miniatures
-    categoryBasis: guessed
+    category: paint-set
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 29.25
     url: https://www.gamenerdz.com/infinity-panoceania-paint-set-w-exclusive-miniature-1
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281249_1162_cover_e73f.jpg?v=1739358180
     evidence:
       - ret-gamenerdz:/infinity-panoceania-paint-set-w-exclusive-miniature-1
+      - ret-goblingaming:infinity-panocenia-paint-set-fusilier-paramedic-exclusive
   - id: corvus-belli/infinity-panoceania-panoceania-army-pack
     name: 'Infinity: PanOceania - PanOceania Army Pack'
     manufacturer: corvus-belli
     sku: CVB281242
     ean: '8436607712725'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 54.78
     url: https://www.gamenerdz.com/infinity-panoceania-panoceania-army-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/essentials-panoceania-army-pack-9.webp?v=1735317178
     evidence:
       - ret-gamenerdz:/infinity-panoceania-panoceania-army-pack
+      - ret-goblingaming:panoceania-army-pack
   - id: corvus-belli/infinity-panoceania-redeye-close-air-support-squad-spitfire-chain-rifle-blitzen
     name: 'Infinity: PanOceania - Redeye Close Air Support Squad (Spitfire, Chain Rifle, Blitzen)'
     manufacturer: corvus-belli
     sku: CVB281241
     ean: '8436607712695'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 46.33
     url: https://www.gamenerdz.com/infinity-panoceania-redeye-close-air-support-squad-spitfire-chain-rifle-blitzen-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281241_1120_cover_860b.jpg?v=1748007582
     evidence:
       - ret-gamenerdz:/infinity-panoceania-redeye-close-air-support-squad-spitfire-chain-rifle-blitzen-preorder
+      - ret-goblingaming:redeye-spitfire-chain-rifle-blitzen-panoceania
   - id: corvus-belli/infinity-panoceania-squalo-armored-heavy-lancers-of-the-armored-cavalry
     name: 'Infinity: PanOceania Squalo. Armored Heavy Lancers of the Armored Cavalry'
     manufacturer: corvus-belli
@@ -11514,16 +11255,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281245
     ean: '8436607712909'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: panoceania
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.25
     url: https://www.gamenerdz.com/infinity-panoceania-support-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281245_1137_gal_img_01_eccc_1.jpg?v=1739290317
     evidence:
       - ret-gamenerdz:/infinity-panoceania-support-pack
+      - ret-goblingaming:panoceania-support-pack
   - id: corvus-belli/infinity-panoceania-svalarheima-nisses-hacker-hmg
     name: 'Infinity: PanOceania Svalarheima Nisses (Hacker, HMG)'
     manufacturer: corvus-belli
@@ -11599,23 +11344,6 @@ products:
     url: https://www.gamenerdz.com/infinity-panoceania-zulu-cobra-special-recon-intervention-group-hacker
     evidence:
       - ret-gamenerdz:/infinity-panoceania-zulu-cobra-special-recon-intervention-group-hacker
-  - id: corvus-belli/infinity-panocenia-paint-set-fusilier-paramedic-exclusive
-    name: Infinity Panocenia Paint Set Fusilier Paramedic Exclusive
-    manufacturer: corvus-belli
-    sku: 281249-1162
-    gameSystem: infinity
-    faction: panoceania
-    category: paint-set
-    categoryBasis: mapped
-    packaging: set
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 29.25
-    url: https://www.goblingaming.co.uk/products/infinity-panocenia-paint-set-fusilier-paramedic-exclusive
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281249_1162_cover_e73f.jpg?v=1739358180
-    evidence:
-      - ret-goblingaming:infinity-panocenia-paint-set-fusilier-paramedic-exclusive
   - id: corvus-belli/infinity-raveneye-graphic-novel-on-sale
     name: 'Infinity: Raveneye Graphic Novel (On Sale)'
     manufacturer: corvus-belli
@@ -11908,8 +11636,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 18.45
     url: https://store.corvusbelli.com/en/wargames/infinity/infinity-templates-3-green
@@ -12230,16 +11958,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281346
     ean: '8436607712787'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 71.61
     url: https://www.gamenerdz.com/infinity-yu-jing-action-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281346_1127_cover_3838.jpg?v=1739360504
     evidence:
       - ret-gamenerdz:/infinity-yu-jing-action-pack
+      - ret-goblingaming:yu-jing-action-pack
   - id: corvus-belli/infinity-yu-jing-celestial-guards
     name: 'Infinity: Yu Jing - Celestial Guards'
     manufacturer: corvus-belli
@@ -12290,16 +12022,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281359
     ean: '8436607714071'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 46.96
     url: https://www.gamenerdz.com/infinity-yu-jing-feiquan-imperial-tactical-wing
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281359_1193_cover_2421.avif?v=1761750799
     evidence:
       - ret-gamenerdz:/infinity-yu-jing-feiquan-imperial-tactical-wing
+      - ret-goblingaming:feiquan-imperial-tactical-wing
   - id: corvus-belli/infinity-yu-jing-gui-feng-spec-ops
     name: 'Infinity: Yu Jing - Gui Feng Spec-Ops'
     manufacturer: corvus-belli
@@ -12478,31 +12214,39 @@ products:
     manufacturer: corvus-belli
     sku: CVB281352
     ean: '8436607713319'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 41.64
     url: https://www.gamenerdz.com/infinity-yu-jing-imperial-service-expansion-pack-alpha
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281352_1155_cover_a856.jpg?v=1748012972
     evidence:
       - ret-gamenerdz:/infinity-yu-jing-imperial-service-expansion-pack-alpha
+      - ret-goblingaming:imperial-service-expansion-pack-alpha-yu-jing
   - id: corvus-belli/infinity-yu-jing-imperial-service-expansion-pack-beta
     name: 'Infinity: Yu Jing - Imperial Service Expansion Pack Beta'
     manufacturer: corvus-belli
     sku: CVB281354
     ean: '8436607713432'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.23
     url: https://www.gamenerdz.com/infinity-yu-jing-imperial-service-expansion-pack-beta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/imperial-service-expansion-pack-beta-5.webp?v=1751989830
     evidence:
       - ret-gamenerdz:/infinity-yu-jing-imperial-service-expansion-pack-beta
+      - ret-goblingaming:imperial-service-expansion-pack-beta
   - id: corvus-belli/infinity-yu-jing-imperial-service-expansion-pack-delta
     name: 'Infinity: Yu Jing - Imperial Service Expansion Pack Delta'
     manufacturer: corvus-belli
@@ -12754,20 +12498,7 @@ products:
     manufacturer: corvus-belli
     sku: CVB281357
     ean: '8436607713722'
-    eanConfidence: provisional
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-yu-jing-paint-set-w-zhanshi-paramedic-exclusive-miniature
-    evidence:
-      - ret-gamenerdz:/infinity-yu-jing-paint-set-w-zhanshi-paramedic-exclusive-miniature
-  - id: corvus-belli/infinity-yu-jing-paint-set-zhanshi-paramedic-exclusive
-    name: Infinity Yu Jing Paint Set Zhanshi Paramedic Exclusive
-    manufacturer: corvus-belli
-    sku: 281357-1174
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: paint-set
@@ -12777,9 +12508,10 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 33.07
-    url: https://www.goblingaming.co.uk/products/infinity-yu-jing-paint-set-zhanshi-paramedic-exclusive
+    url: https://www.gamenerdz.com/infinity-yu-jing-paint-set-w-zhanshi-paramedic-exclusive-miniature
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/127340_0.jpg?v=1752075362
     evidence:
+      - ret-gamenerdz:/infinity-yu-jing-paint-set-w-zhanshi-paramedic-exclusive-miniature
       - ret-goblingaming:infinity-yu-jing-paint-set-zhanshi-paramedic-exclusive
   - id: corvus-belli/infinity-yu-jing-shaolin-warrior-monk-da-ccw
     name: 'Infinity: Yu Jing - Shaolin Warrior Monk (DA CCW)'
@@ -12904,16 +12636,20 @@ products:
     manufacturer: corvus-belli
     sku: CVB281351
     ean: '8436607713227'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: yu-jing
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 35.4
     url: https://www.gamenerdz.com/infinity-yu-jing-white-banner-expansion-pack-beta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281351_1152_cover_433f.jpg?v=1739290432
     evidence:
       - ret-gamenerdz:/infinity-yu-jing-white-banner-expansion-pack-beta
+      - ret-goblingaming:white-banner-expansion-pack-beta
   - id: corvus-belli/infinity-yu-jing-wu-ming-assault-corps
     name: 'Infinity: Yu Jing Wu Ming Assault Corps'
     manufacturer: corvus-belli
@@ -13159,38 +12895,6 @@ products:
       - mfr-corvus-belli:infinity:its-objectives-pack-alpha
       - ret-gamenerdz:/infinity-its-infinity-tournament-system-objectives-pack-alpha
       - ret-goblingaming:its-objectives-pack-alpha-infinity-the-game
-  - id: corvus-belli/jamie-arantes-netdroid-rover-o-12
-    name: Jamie Arantes, Netdroid Rover - O-12
-    manufacturer: corvus-belli
-    sku: 282033-1121
-    gameSystem: infinity
-    faction: o-12
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 15.17
-    url: https://www.goblingaming.co.uk/products/jamie-arantes-netdroid-rover
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/282033_1121_cover_7ede.jpg?v=1735317365
-    evidence:
-      - ret-goblingaming:jamie-arantes-netdroid-rover
-  - id: corvus-belli/jotums-panoceana
-    name: Jotums - PanOceana
-    manufacturer: corvus-belli
-    sku: 281251-1177
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.62
-    url: https://www.goblingaming.co.uk/products/jotums-panoceana
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281251_1177_cover_7009.jpg?v=1752075697
-    evidence:
-      - ret-goblingaming:jotums-panoceana
   - id: corvus-belli/jsa-army-pack
     name: JSA Army Pack
     manufacturer: corvus-belli
@@ -13230,70 +12934,6 @@ products:
       - mfr-corvus-belli:infinity:jsa-expansion-pack-alpha
       - ret-gamenerdz:/infinity-na2-jsa-jsa-expansion-pack-alpha
       - ret-goblingaming:infinity-na2-jsa-expansion-pack-alpha
-  - id: corvus-belli/jsa-hero-shinobu-kitsune-monofilament-ccw
-    name: JSA hero, Shinobu Kitsune (Monofilament CCW)
-    manufacturer: corvus-belli
-    sku: 281714-1170
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 17.21
-    url: https://www.goblingaming.co.uk/products/jsa-hero-shinobu-kitsune-monofilament-ccw
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/jsa-hero-shinobu-kitsune-5.webp?v=1751989947
-    evidence:
-      - ret-goblingaming:jsa-hero-shinobu-kitsune-monofilament-ccw
-  - id: corvus-belli/jsa-shindenbutai-expansion-pack-alpha
-    name: JSA Shindenbutai Expansion Pack Alpha
-    manufacturer: corvus-belli
-    sku: 281704-1122
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.4
-    url: https://www.goblingaming.co.uk/products/shindenbutai-expansion-pack-alpha
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/shindenbutai-expansion-pack-alpha-1.webp?v=1735556239
-    evidence:
-      - ret-goblingaming:shindenbutai-expansion-pack-alpha
-  - id: corvus-belli/jsa-support-pack-2025
-    name: JSA Support Pack (2025)
-    manufacturer: corvus-belli
-    sku: 281708-1138
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.25
-    url: https://www.goblingaming.co.uk/products/jsa-support-pack-2025
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281708_1138_cover_95dd.jpg?v=1739291231
-    evidence:
-      - ret-goblingaming:jsa-support-pack-2025
-  - id: corvus-belli/juggernauts-armored-assault-brigade-multi-hmg
-    name: Juggernauts, Armored Assault Brigade (MULTI HMG)
-    manufacturer: corvus-belli
-    sku: 281637-1188
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 40.37
-    url: https://www.goblingaming.co.uk/products/juggernauts-armored-assault-brigade-multi-hmg
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281637_1188_cover_d5e4.avif?v=1761751079
-    evidence:
-      - ret-goblingaming:juggernauts-armored-assault-brigade-multi-hmg
   - id: corvus-belli/jujak-regiment
     name: Jujak Regiment
     manufacturer: corvus-belli
@@ -13409,37 +13049,6 @@ products:
       - mfr-corvus-belli:infinity:kazak-spetsnazs
       - ret-gamenerdz:/infinity-ariadna-kazak-spetsnazs
       - ret-goblingaming:kazak-spetsnazs
-  - id: corvus-belli/kestrel-expansion-pack-alpha-panoceania
-    name: Kestrel Expansion Pack Alpha - Panoceania
-    manufacturer: corvus-belli
-    sku: 281240-1119
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.4
-    url: https://www.goblingaming.co.uk/products/kestrel-expansion-pack-alpha
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/kestrel-expansion-pack-alpha-5.webp?v=1735317216
-    evidence:
-      - ret-goblingaming:kestrel-expansion-pack-alpha
-  - id: corvus-belli/kestrel-expansion-pack-gamma
-    name: Kestrel Expansion Pack Gamma
-    manufacturer: corvus-belli
-    sku: 281243-1131
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 29.71
-    url: https://www.goblingaming.co.uk/products/kestrel-expansion-pack-gamma
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281243_1131_gal_img_01_ef88_1.jpg?v=1739353775
-    evidence:
-      - ret-goblingaming:kestrel-expansion-pack-gamma
   - id: corvus-belli/khawarijs
     name: Khawarijs
     manufacturer: corvus-belli
@@ -13463,22 +13072,6 @@ products:
       - mfr-corvus-belli:infinity:khawarijs
       - ret-gamenerdz:/infinity-haqqislam-khawarijs
       - ret-goblingaming:khawarijs
-  - id: corvus-belli/kibervolk-patrol
-    name: Kibervolk Patrol
-    manufacturer: corvus-belli
-    sku: 281138-1110
-    gameSystem: infinity
-    faction: ariadna
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 46.33
-    url: https://www.goblingaming.co.uk/products/kibervolk-patrol
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281138_1110_cover_60c7.jpg?v=1735316836
-    evidence:
-      - ret-goblingaming:kibervolk-patrol
   - id: corvus-belli/knight-of-montesa-red-fury
     name: Knight of Montesa (Red Fury)
     manufacturer: corvus-belli
@@ -13594,22 +13187,6 @@ products:
       - mfr-corvus-belli:infinity:kosmoflot-support-pack
       - ret-gamenerdz:/infinity-ariadna-kosmoflot-support-pack
       - ret-goblingaming:kosmoflot-support-pack
-  - id: corvus-belli/krakot-renegades-2-smg-chest-mine-combined-army
-    name: Krakot Renegades (2 SMG, Chest Mine) - Combined Army
-    manufacturer: corvus-belli
-    sku: 280781-1157
-    gameSystem: infinity
-    faction: combined-army
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 21.24
-    url: https://www.goblingaming.co.uk/products/krakot-renegades-2-smg-chest-mine-combined-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/280781_1157_cover_b848.jpg?v=1748010203
-    evidence:
-      - ret-goblingaming:krakot-renegades-2-smg-chest-mine-combined-army
   - id: corvus-belli/kuang-shi-yu-jing
     name: Kuang Shi - Yu Jing
     manufacturer: corvus-belli
@@ -13751,8 +13328,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 9.95
     url: https://store.corvusbelli.com/en/wargames/infinity/marcadores-infiltracion-y-suplantacion
@@ -13769,8 +13346,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 11.95
     url: https://store.corvusbelli.com/en/wargames/infinity/marcadores-metaquimica
@@ -14261,36 +13838,6 @@ products:
       - mfr-corvus-belli:infinity:motorized-bounty-hunters-boarding-shotgun
       - ret-gamenerdz:/infinity-na2-motorized-bounty-hunters-boarding-shotgun
       - ret-goblingaming:motorized-bounty-hunters-boarding-shotgun-na2
-  - id: corvus-belli/mounted-hetman-warcrow
-    name: Mounted Hetman - Warcrow
-    manufacturer: corvus-belli
-    sku: WW02010-0031
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 38.25
-    url: https://www.goblingaming.co.uk/products/mounted-hetman-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02010_0031_cover_3737.jpg?v=1748010514
-    evidence:
-      - ret-goblingaming:mounted-hetman-warcrow
-  - id: corvus-belli/mounted-wrathmane-warcrow
-    name: Mounted Wrathmane - Warcrow
-    manufacturer: corvus-belli
-    sku: WW01010-0030
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 38.68
-    url: https://www.goblingaming.co.uk/products/mounted-wrathmane
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/mounted-wrathmane-3.webp?v=1752048713
-    evidence:
-      - ret-goblingaming:mounted-wrathmane
   - id: corvus-belli/mounthaven-militia-mounthaven
     name: Mounthaven Militia - Mounthaven
     manufacturer: corvus-belli
@@ -14458,35 +14005,6 @@ products:
       - mfr-corvus-belli:infinity:namurr-heavy-pistol-ccw
       - ret-gamenerdz:/infinity-haqqislam-namurr-active-response-unit-heavy-pistol-e-m-ccw
       - ret-goblingaming:namurr-active-response-unit-heavy-pistol-em-ccw
-  - id: corvus-belli/neakail-oen-fhiahra-warcrow
-    name: Neakail Oen Fhiahra - Warcrow
-    manufacturer: corvus-belli
-    sku: WW03004-0025
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 21.51
-    url: https://www.goblingaming.co.uk/products/neakail-oen-fhiahra
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW03004-0025NeakailOenFhiahrabox.webp?v=1752048860
-    evidence:
-      - ret-goblingaming:neakail-oen-fhiahra
-  - id: corvus-belli/next-wave-action-pack
-    name: Next Wave Action Pack
-    manufacturer: corvus-belli
-    sku: 281636-1187
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 73.36
-    url: https://www.goblingaming.co.uk/products/next-wave-action-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281636_1187_cover_f9eb.avif?v=1761751033
-    evidence:
-      - ret-goblingaming:next-wave-action-pack
   - id: corvus-belli/next-wave-expasion-pack-beta-combined-army
     name: Next Wave Expasion Pack Beta -  Combined Army
     manufacturer: corvus-belli
@@ -14611,22 +14129,6 @@ products:
     evidence:
       - legacy-catalog:corvus-belli/infinity/general/nomad-crew-deck-round-55mm-x2
       - mfr-corvus-belli:infinity:nomad-crew-deck-round-55mm-x2
-  - id: corvus-belli/nomads-action-pack-2025
-    name: Nomads Action Pack (2025)
-    manufacturer: corvus-belli
-    sku: 281538-1130
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 71.61
-    url: https://www.goblingaming.co.uk/products/nomads-action-pack-2025
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281538_1130_cover_69dd.jpg?v=1739360637
-    evidence:
-      - ret-goblingaming:nomads-action-pack-2025
   - id: corvus-belli/nomads-army-pack
     name: Nomads Army Pack
     manufacturer: corvus-belli
@@ -14645,53 +14147,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281550_1241_cover_a558.avif?v=1781884480
     evidence:
       - ret-goblingaming:nomads-army-pack
-  - id: corvus-belli/nomads-booster-pack-alpha
-    name: Nomads Booster Pack Alpha
-    manufacturer: corvus-belli
-    sku: 281544-1171
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.8
-    url: https://www.goblingaming.co.uk/products/nomads-booster-pack-alpha
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/nomads-booster-pack-alpha-4.webp?v=1752048955
-    evidence:
-      - ret-goblingaming:nomads-booster-pack-alpha
-  - id: corvus-belli/nomads-support-pack
-    name: Nomads Support Pack
-    manufacturer: corvus-belli
-    sku: 281540-1144
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.33
-    url: https://www.goblingaming.co.uk/products/nomads-support-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281540_1144_cover_f75a.jpg?v=1739358465
-    evidence:
-      - ret-goblingaming:nomads-support-pack
-  - id: corvus-belli/northern-tribes-action-pack-warcrow
-    name: Northern Tribes Action Pack - Warcrow
-    manufacturer: corvus-belli
-    sku: WW01012-0054
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 73.65
-    url: https://www.goblingaming.co.uk/products/northern-tribes-action-pack-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/northern-tribes-action-pack.jpg?v=1761751376
-    evidence:
-      - ret-goblingaming:northern-tribes-action-pack-warcrow
   - id: corvus-belli/nyoka-assault-troops
     name: Nyoka Assault Troops
     manufacturer: corvus-belli
@@ -14933,21 +14388,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/280894_1228_cover_cd57.avif?v=1784217384
     evidence:
       - ret-goblingaming:optimate-agent-maximus-aleph
-  - id: corvus-belli/orc-hunter-warcrow
-    name: Orc Hunter - Warcrow
-    manufacturer: corvus-belli
-    sku: WW01004-0014
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 27.04
-    url: https://www.goblingaming.co.uk/products/orc-hunter-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Warcrow-OrcHunters.jpg?v=1735316703
-    evidence:
-      - ret-goblingaming:orc-hunter-warcrow
   - id: corvus-belli/orc-troops
     name: Orc Troops
     manufacturer: corvus-belli
@@ -15002,8 +14442,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 41.95
     url: https://store.corvusbelli.com/en/wargames/infinity/pack-deluxe-operation-coldfront
@@ -15020,8 +14460,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 39.95
     url: https://store.corvusbelli.com/en/wargames/infinity/pack-deluxe-operation-icestorm
@@ -15038,8 +14478,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 41.95
     url: https://store.corvusbelli.com/en/wargames/infinity/pack-deluxe-operation-red-veil
@@ -15047,54 +14487,6 @@ products:
     evidence:
       - legacy-catalog:corvus-belli/infinity/general/pack-deluxe-operation-red-veil
       - mfr-corvus-belli:infinity:pack-deluxe-operation-red-veil
-  - id: corvus-belli/padre-inquisitor-mendoza-panoceania
-    name: Padre Inquisitor Mendoza - Panoceania
-    manufacturer: corvus-belli
-    sku: PV58
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 14.88
-    url: https://www.goblingaming.co.uk/products/padre-inquisitor-mendoza-panoceania
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/padre-inquisidor-mendoza-preorder-exclusive-miniature-1.png?v=1615345648
-    evidence:
-      - ret-goblingaming:padre-inquisitor-mendoza-panoceania
-  - id: corvus-belli/panoceania-army-pack
-    name: PanOceania Army Pack
-    manufacturer: corvus-belli
-    sku: 281242-1123
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 54.78
-    url: https://www.goblingaming.co.uk/products/panoceania-army-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/essentials-panoceania-army-pack-9.webp?v=1735317178
-    evidence:
-      - ret-goblingaming:panoceania-army-pack
-  - id: corvus-belli/panoceania-dronbot-remotes-pack
-    name: PanOceania Dronbot Remotes Pack
-    manufacturer: corvus-belli
-    sku: 281243-1128
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 27.88
-    url: https://www.goblingaming.co.uk/products/panoceania-dronbot-remotes-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281243_1128_cover_5c83.jpg?v=1739291353
-    evidence:
-      - ret-goblingaming:panoceania-dronbot-remotes-pack
   - id: corvus-belli/panoceania-headquarters-pack
     name: PanOceania Headquarters Pack
     manufacturer: corvus-belli
@@ -15118,38 +14510,6 @@ products:
       - mfr-corvus-belli:infinity:panoceania-headquarters-pack
       - ret-gamenerdz:/infinity-panoceania-headquarters-pack
       - ret-goblingaming:panoceania-headquarters-pack-infinity-the-game-corvus-belli
-  - id: corvus-belli/panoceania-hero-jeanne-d-arc-2-0-mobility-armor
-    name: PanOceania Hero, Jeanne d'Arc 2.0 (Mobility Armor)
-    manufacturer: corvus-belli
-    sku: 281250-1169
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 17.21
-    url: https://www.goblingaming.co.uk/products/panoceania-hero-jeanne-darc-2-0-mobility-armor
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/panoceania-hero-jeanne-d-arc-2-0-mobility-armor-3.webp?v=1751989663
-    evidence:
-      - ret-goblingaming:panoceania-hero-jeanne-darc-2-0-mobility-armor
-  - id: corvus-belli/panoceania-support-pack
-    name: PanOceania Support Pack
-    manufacturer: corvus-belli
-    sku: 281245-1137
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.25
-    url: https://www.goblingaming.co.uk/products/panoceania-support-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281245_1137_gal_img_01_eccc_1.jpg?v=1739290317
-    evidence:
-      - ret-goblingaming:panoceania-support-pack
   - id: corvus-belli/patchers-structural-response-team
     name: Patchers, Structural Response Team
     manufacturer: corvus-belli
@@ -15318,8 +14678,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 14.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-building-holoads-6-prepainted
@@ -15336,8 +14696,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 14.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-containers-3-prepainted-grey-red
@@ -15354,8 +14714,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 24.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-cubicle-2-prepainted-grey
@@ -15372,8 +14732,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 14.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-food-booths-1-3-prepainted-grey
@@ -15390,8 +14750,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 14.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-food-booths-2-3-prepainted-grey
@@ -15408,8 +14768,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 14.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-newsstands-3-prepainted-grey
@@ -15426,8 +14786,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 44.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-objective-room-mark-3-1-prepainted-grey
@@ -15444,8 +14804,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 19.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-objective-room-roof-1-prepainted-grey
@@ -15462,8 +14822,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 29.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-post-1-prepainted-grey
@@ -15480,8 +14840,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: out_of_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 29.95
     url: https://store.corvusbelli.com/en/wargames/infinity/precinct-sigma-sentry-towers-2-prepainted-grey
@@ -15498,8 +14858,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 35.0
     url: https://store.corvusbelli.com/en/boardgames/aristeia/prime-time-multiplayer-expansion
@@ -15637,22 +14997,6 @@ products:
       - mfr-corvus-belli:infinity:aleph-remotes-pack
       - ret-gamenerdz:/infinity-codeone-aleph-remotes-pack
       - ret-goblingaming:aleph-remotes-pack-2022-repack
-  - id: corvus-belli/redeye-spitfire-chain-rifle-blitzen-panoceania
-    name: Redeye (Spitfire, Chain Rifle, Blitzen) - Panoceania
-    manufacturer: corvus-belli
-    sku: 281241-1120
-    gameSystem: infinity
-    faction: panoceania
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 46.33
-    url: https://www.goblingaming.co.uk/products/redeye-spitfire-chain-rifle-blitzen-panoceania
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281241_1120_cover_860b.jpg?v=1748007582
-    evidence:
-      - ret-goblingaming:redeye-spitfire-chain-rifle-blitzen-panoceania
   - id: corvus-belli/reinf-azra-il-spitfire-ap
     name: Reinf. Azra'il (Spitfire AP)
     manufacturer: corvus-belli
@@ -16081,21 +15425,6 @@ products:
       - mfr-corvus-belli:infinity:roadbots-highway-patrol
       - ret-gamenerdz:/infinity-o-12-roadbots-highway-patrol
       - ret-goblingaming:corvus-belli-infinity-o12-roadbots-highway-patrol
-  - id: corvus-belli/rock-troll-warcrow
-    name: Rock Troll - Warcrow
-    manufacturer: corvus-belli
-    sku: WW01011-0036
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 57.59
-    url: https://www.goblingaming.co.uk/products/rock-troll-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW01011_0036_cover_b0d2.avif?v=1761750451
-    evidence:
-      - ret-goblingaming:rock-troll-warcrow
   - id: corvus-belli/roger-van-zant
     name: Roger Van Zant
     manufacturer: corvus-belli
@@ -16223,36 +15552,6 @@ products:
       - mfr-corvus-belli:infinity:salyut-zonds-evo-repeater-combi-rifle
       - ret-gamenerdz:/infinity-nomads-salyut-zonds-evo-repeater-combi-rifle
       - ret-goblingaming:salyut-zonds-evo-repeater-combi-rifle
-  - id: corvus-belli/samara-dithean-divergent-warcrow
-    name: Samara Dìthean, Divergent - Warcrow
-    manufacturer: corvus-belli
-    sku: WW04004-0046
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 18.44
-    url: https://www.goblingaming.co.uk/products/samara-dithean-divergent-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW04004_0046_cover_c3de.avif?v=1761751506
-    evidence:
-      - ret-goblingaming:samara-dithean-divergent-warcrow
-  - id: corvus-belli/scarface-mercenary-tag-team-na2
-    name: Scarface. Mercenary TAG Team NA2
-    manufacturer: corvus-belli
-    sku: 280782-1167
-    gameSystem: infinity
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 51.55
-    url: https://www.goblingaming.co.uk/products/scarface-mercenary-tag-team-na2
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/scarface-and-cordelia-mercenary-armored-team-3.webp?v=1751990244
-    evidence:
-      - ret-goblingaming:scarface-mercenary-tag-team-na2
   - id: corvus-belli/scots-guard
     name: Scots Guard
     manufacturer: corvus-belli
@@ -16519,34 +15818,6 @@ products:
       - mfr-corvus-belli:infinity:shasvastii-sphinx
       - ret-gamenerdz:/infinity-code-one-combined-army-shasvastii-special-armored-corp-sphinx
       - ret-goblingaming:shasvastii-special-armored-corp-sphinx-tag-combined-army-infinity-the-game-281606-0847
-  - id: corvus-belli/shindenbutai-expansion-pack-beta
-    name: Shindenbutai Expansion Pack Beta
-    manufacturer: corvus-belli
-    sku: 281705-1126
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.4
-    url: https://www.goblingaming.co.uk/products/shindenbutai-expansion-pack-beta
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281705_1126_cover_476e.jpg?v=1739290535
-    evidence:
-      - ret-goblingaming:shindenbutai-expansion-pack-beta
-  - id: corvus-belli/shindenbutai-expansion-pack-gamma
-    name: Shindenbutai Expansion Pack Gamma
-    manufacturer: corvus-belli
-    sku: 281707-1134
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 36.3
-    url: https://www.goblingaming.co.uk/products/shindenbutai-expansion-pack-gamma
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281707_1134_cover_fbc1.jpg?v=1739359081
-    evidence:
-      - ret-goblingaming:shindenbutai-expansion-pack-gamma
   - id: corvus-belli/smoke-and-mirrors
     name: Smoke and Mirrors
     manufacturer: corvus-belli
@@ -16612,21 +15883,6 @@ products:
       - legacy-catalog:corvus-belli/infinity/general/speculo-killer-boarding-shotgun
       - ret-gamenerdz:/infinity-combined-army-speculo-killer-boarding-shotgun
       - ret-goblingaming:speculo-killer-boarding-shotgun
-  - id: corvus-belli/sprigs-warcrow
-    name: Sprigs - Warcrow
-    manufacturer: corvus-belli
-    sku: WW03007-0037
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 33.15
-    url: https://www.goblingaming.co.uk/products/sprigs-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW03007_0037_cover_982d.avif?v=1761751215
-    evidence:
-      - ret-goblingaming:sprigs-warcrow
   - id: corvus-belli/sputniks
     name: Sputniks
     manufacturer: corvus-belli
@@ -16705,11 +15961,12 @@ products:
     gameSystem: infinity
     faction: aleph
     category: miniatures
-    categoryBasis: default
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: current
     firstSeen: '2026-07-07'
+    priceGbp: 75.86
     priceEur: 92.5
     url: https://store.corvusbelli.com/en/wargames/infinity/steel-phalanx-action-pack
     imageUrl: https://store.corvusbelli.com/media/catalog/product/steel-phalanx-action-pack.png
@@ -16717,6 +15974,7 @@ products:
       - legacy-catalog:corvus-belli/infinity/aleph/steel-phalanx-action-pack
       - mfr-corvus-belli:infinity:steel-phalanx-action-pack
       - ret-gamenerdz:/infinity-aleph-steel-phalanx-action-pack
+      - ret-goblingaming:steel-phanlax-action-pack
   - id: corvus-belli/steel-phalanx-expansion-pack-alpha
     name: Steel Phalanx Expansion Pack Alpha
     manufacturer: corvus-belli
@@ -16881,21 +16139,6 @@ products:
     evidence:
       - legacy-catalog:corvus-belli/infinity/general/svalarheimas-outpost-round-55mm-x2
       - mfr-corvus-belli:infinity:svalarheima-s-outpost-round-55mm-x2
-  - id: corvus-belli/syena-wardens-warcrow
-    name: Syena Wardens - Warcrow
-    manufacturer: corvus-belli
-    sku: WW03005-0032
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 38.68
-    url: https://www.goblingaming.co.uk/products/syena-wardens-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/syena-wardens-5.webp?v=1751990379
-    evidence:
-      - ret-goblingaming:syena-wardens-warcrow
   - id: corvus-belli/syenann-action-pack-warcrow
     name: Syenann Action Pack - Warcrow
     manufacturer: corvus-belli
@@ -16941,22 +16184,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW03008_0055_cover_9463.avif?v=1765292937
     evidence:
       - ret-goblingaming:syenann-supports-warcrow
-  - id: corvus-belli/szalamandra-squadron-tag-pack-nomads
-    name: Szalamandra Squadron TAG Pack - Nomads
-    manufacturer: corvus-belli
-    sku: 281542-1159
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.74
-    url: https://www.goblingaming.co.uk/products/szalamandra-squadron-tag-pack-nomads
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281542_1159_cover_fd7e.jpg?v=1748011688
-    evidence:
-      - ret-goblingaming:szalamandra-squadron-tag-pack-nomads
   - id: corvus-belli/taigha-creatures
     name: Taigha Creatures
     manufacturer: corvus-belli
@@ -16980,22 +16207,6 @@ products:
       - mfr-corvus-belli:infinity:taigha-creatures
       - ret-gamenerdz:/infinity-combined-army-taigha-creatures
       - ret-goblingaming:taigha-creatures-corvus-belli-infinity
-  - id: corvus-belli/tak-expansion-pack-alpha-ariadna
-    name: TAK Expansion Pack Alpha - Ariadna
-    manufacturer: corvus-belli
-    sku: 281139-1156
-    gameSystem: infinity
-    faction: ariadna
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 36.54
-    url: https://www.goblingaming.co.uk/products/tak-expansion-pack-alpha-ariadna
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281139_1156_cover_ca13.jpg?v=1748010090
-    evidence:
-      - ret-goblingaming:tak-expansion-pack-alpha-ariadna
   - id: corvus-belli/tankhunters-autocannon
     name: TankHunters (Autocannon)
     manufacturer: corvus-belli
@@ -17404,20 +16615,6 @@ products:
       - mfr-corvus-belli:infinity:tikbalangs-armored-chasseurs-regiment
       - ret-gamenerdz:/infinity-panoceania-tikbalangs-armored-chasseurs-regiment
       - ret-goblingaming:tikbalangs-armored-chasseurs-regiment
-  - id: corvus-belli/tinker-and-zetbot-remote
-    name: Tinker and Zetbot Remote
-    manufacturer: corvus-belli
-    sku: 282034-1133
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 22.82
-    url: https://www.goblingaming.co.uk/products/tinker-and-zetbot-remote
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/282034_1133_cover_5b23.jpg?v=1739359576
-    evidence:
-      - ret-goblingaming:tinker-and-zetbot-remote
   - id: corvus-belli/tomcats
     name: Tomcats
     manufacturer: corvus-belli
@@ -17441,20 +16638,6 @@ products:
       - mfr-corvus-belli:infinity:tomcats
       - ret-gamenerdz:/infinity-nomads-tomcats
       - ret-goblingaming:nomads-tomcats-2022-repack-infinity-the-game
-  - id: corvus-belli/torchlight-brig-expansion-pack-beta
-    name: Torchlight Brig. Expansion Pack Beta
-    manufacturer: corvus-belli
-    sku: 282032-1113
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 39.61
-    url: https://www.goblingaming.co.uk/products/torchlight-brig-expansion-pack-beta
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/torchlight-expansion-pack-beta-5_1.webp?v=1735317094
-    evidence:
-      - ret-goblingaming:torchlight-brig-expansion-pack-beta
   - id: corvus-belli/traktor-muls-regiment-of-artillery-and-support
     name: Traktor Muls. Regiment of Artillery and Support
     manufacturer: corvus-belli
@@ -17570,22 +16753,6 @@ products:
       - mfr-corvus-belli:infinity:tunguska-sectorial-starter-pack
       - ret-gamenerdz:/infinity-nomads-tunguska-jurisdictional-command-nomads-sectorial-starter-pack
       - ret-goblingaming:tunguska-jurisdictional-command-nomads-sectorial-p
-  - id: corvus-belli/tunguska-triggermen
-    name: Tunguska Triggermen
-    manufacturer: corvus-belli
-    sku: 281541-1146
-    gameSystem: infinity
-    faction: nomads
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 26.6
-    url: https://www.goblingaming.co.uk/products/tunguska-triggermen
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281541_1146_cover_d5ea.avif?v=1761750688
-    evidence:
-      - ret-goblingaming:tunguska-triggermen
   - id: corvus-belli/unrelenting-warcrow
     name: Unrelenting - Warcrow
     manufacturer: corvus-belli
@@ -17612,8 +16779,8 @@ products:
     category: miniatures
     categoryBasis: default
     packaging: single
-    status: current
-    availability: current
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 4.95
     url: https://store.corvusbelli.com/en/wargames/infinity/urban-fight-bases-round-55mm
@@ -17702,21 +16869,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/PV85_cover_b55e.avif?v=1772638288
     evidence:
       - ret-goblingaming:varangian-guard-convention-exclusive-edition
-  - id: corvus-belli/varank-supports-warcrow
-    name: Varank Supports - Warcrow
-    manufacturer: corvus-belli
-    sku: WW01006-0018
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 29.54
-    url: https://www.goblingaming.co.uk/products/varank-supports-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW01006_0018_cover_f789.jpg?v=1739289391
-    evidence:
-      - ret-goblingaming:varank-supports-warcrow
   - id: corvus-belli/vargar-maximum-security-team
     name: Vargar Maximum Security Team
     manufacturer: corvus-belli
@@ -17740,20 +16892,6 @@ products:
       - mfr-corvus-belli:infinity:vargar-maximum-security-team
       - ret-gamenerdz:/infinity-panoceania-vargar-maximum-security-team
       - ret-goblingaming:infinity-the-game-panoceania-vargar-maximum-security-team
-  - id: corvus-belli/vystrel-mobile-artillery-regiment
-    name: Vystrel Mobile Artillery Regiment
-    manufacturer: corvus-belli
-    sku: 281140-1165
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 32.64
-    url: https://www.goblingaming.co.uk/products/vystrel-mobile-artillery-regiment
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/vystrel-mobile-artillery-regiment-3.webp?v=1751989479
-    evidence:
-      - ret-goblingaming:vystrel-mobile-artillery-regiment
   - id: corvus-belli/war-rig-warcrow
     name: War Rig - Warcrow
     manufacturer: corvus-belli
@@ -18010,15 +17148,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW10006
     ean: '8436607713692'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 47.73
     url: https://www.gamenerdz.com/warcrow-beyond-the-song-of-the-dormant
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW10006-0033BeyondTheSongoftheDormantbox.webp?v=1752075508
     evidence:
       - ret-gamenerdz:/warcrow-beyond-the-song-of-the-dormant
+      - ret-goblingaming:beyond-the-song-of-the-dormant-warcrow
   - id: corvus-belli/warcrow-beyond-winds-from-the-north-battlepack-expansion
     name: 'Warcrow: Beyond Winds from the North - Battlepack Expansion'
     manufacturer: corvus-belli
@@ -18070,29 +17212,37 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW05003
     ean: '8436607713654'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 18.44
     url: https://www.gamenerdz.com/warcrow-feudom-genevieve-countess-of-silem
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05003_0047_cover_2e69.avif?v=1761751475
     evidence:
       - ret-gamenerdz:/warcrow-feudom-genevieve-countess-of-silem
+      - ret-goblingaming:genevieve-countess-of-silem-warcrow
   - id: corvus-belli/warcrow-feudom-guardians-of-the-mounds
     name: 'Warcrow: Feudom - Guardians of the Mounds'
     manufacturer: corvus-belli
     sku: CVBWW05001
     ean: '8436607713609'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 39.86
     url: https://www.gamenerdz.com/warcrow-feudom-guardians-of-the-mounds
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05001_0042_cover_a7c6.avif?v=1761750735
     evidence:
       - ret-gamenerdz:/warcrow-feudom-guardians-of-the-mounds
+      - ret-goblingaming:guardians-of-the-mounds-warcrow
   - id: corvus-belli/warcrow-feudom-guisarmiers
     name: 'Warcrow: Feudom - Guisarmiers'
     manufacturer: corvus-belli
@@ -18146,15 +17296,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW05002
     ean: '8436607713647'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.8
     url: https://www.gamenerdz.com/warcrow-feudom-officers
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW05002_0045_cover_7ca1.avif?v=1761751414
     evidence:
       - ret-gamenerdz:/warcrow-feudom-officers
+      - ret-goblingaming:feudom-officers-warcrow
   - id: corvus-belli/warcrow-feudom-pierre-besson-grand-magister
     name: 'Warcrow: Feudom - Pierre Besson, Grand Magister'
     manufacturer: corvus-belli
@@ -18268,15 +17422,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW02003
     ean: '8436607712565'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 37.91
     url: https://www.gamenerdz.com/warcrow-hegemony-aggressors
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Warcrow-Aggressors.jpg?v=1735316737
     evidence:
       - ret-gamenerdz:/warcrow-hegemony-aggressors
+      - ret-goblingaming:aggressor-warcrow
   - id: corvus-belli/warcrow-hegemony-black-angels
     name: 'Warcrow: Hegemony - Black Angels'
     manufacturer: corvus-belli
@@ -18300,29 +17458,37 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW02005
     ean: '8436607712824'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 39.61
     url: https://www.gamenerdz.com/warcrow-hegemony-black-legion-arquebusiers
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02005_0017_cover_3a7f.jpg?v=1739289180
     evidence:
       - ret-gamenerdz:/warcrow-hegemony-black-legion-arquebusiers
+      - ret-goblingaming:black-legion-arquebusiers-warcrow
   - id: corvus-belli/warcrow-hegemony-black-legion-bucklermen
     name: 'Warcrow: Hegemony - Black Legion Bucklermen'
     manufacturer: corvus-belli
     sku: CVBWW02004
     ean: '8436607712749'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 37.61
     url: https://www.gamenerdz.com/warcrow-hegemony-black-legion-bucklermen
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02004_0015_cover_2c6c.jpg?v=1736770614
     evidence:
       - ret-gamenerdz:/warcrow-hegemony-black-legion-bucklermen
+      - ret-goblingaming:black-legion-bucklermen-warcrow
   - id: corvus-belli/warcrow-hegemony-black-legion-hetman-exclusive
     name: 'Warcrow: Hegemony - Black Legion Hetman Exclusive'
     manufacturer: corvus-belli
@@ -18342,15 +17508,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW02006
     ean: '8436607712930'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.33
     url: https://www.gamenerdz.com/warcrow-hegemony-black-legion-supports
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02006_0019_cover_3fee.jpg?v=1739289973
     evidence:
       - ret-gamenerdz:/warcrow-hegemony-black-legion-supports
+      - ret-goblingaming:black-legion-supports-warcrow
   - id: corvus-belli/warcrow-hegemony-bulwarks
     name: 'Warcrow: Hegemony - Bulwarks'
     manufacturer: corvus-belli
@@ -18386,15 +17556,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW020100031
     ean: '8436607713395'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 38.25
     url: https://www.gamenerdz.com/warcrow-hegemony-mounted-hetman
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW02010_0031_cover_3737.jpg?v=1748010514
     evidence:
       - ret-gamenerdz:/warcrow-hegemony-mounted-hetman
+      - ret-goblingaming:mounted-hetman-warcrow
   - id: corvus-belli/warcrow-hegemony-of-embersig-black-legion-officers
     name: 'Warcrow: Hegemony of Embersig - Black Legion Officers'
     manufacturer: corvus-belli
@@ -18599,15 +17773,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW01012
     ean: '8436607714002'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 73.65
     url: https://www.gamenerdz.com/warcrow-northern-tribes-action-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/northern-tribes-action-pack.jpg?v=1761751376
     evidence:
       - ret-gamenerdz:/warcrow-northern-tribes-action-pack
+      - ret-goblingaming:northern-tribes-action-pack-warcrow
   - id: corvus-belli/warcrow-northern-tribes-ahlwardt-ice-bear-exclusive-edition
     name: 'Warcrow: Northern Tribes - Ahlwardt Ice Bear (Exclusive Edition)'
     manufacturer: corvus-belli
@@ -18663,43 +17841,55 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW01005
     ean: '8436607712831'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 39.61
     url: https://www.gamenerdz.com/warcrow-northern-tribes-ice-archers
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW01005_0016_cover_e47c.jpg?v=1739289002
     evidence:
       - ret-gamenerdz:/warcrow-northern-tribes-ice-archers
+      - ret-goblingaming:ice-archers-warcrow
   - id: corvus-belli/warcrow-northern-tribes-mounted-wrathmane
     name: 'Warcrow: Northern Tribes - Mounted Wrathmane'
     manufacturer: corvus-belli
     sku: CVBWW010100030
     ean: '8436607713401'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 38.68
     url: https://www.gamenerdz.com/warcrow-northern-tribes-mounted-wrathmane
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/mounted-wrathmane-3.webp?v=1752048713
     evidence:
       - ret-gamenerdz:/warcrow-northern-tribes-mounted-wrathmane
+      - ret-goblingaming:mounted-wrathmane
   - id: corvus-belli/warcrow-northern-tribes-orc-hunters
     name: 'Warcrow: Northern Tribes - Orc Hunters'
     manufacturer: corvus-belli
     sku: CVBWW01004
     ean: '8436607712756'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 27.04
     url: https://www.gamenerdz.com/warcrow-northern-tribes-orc-hunters
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Warcrow-OrcHunters.jpg?v=1735316703
     evidence:
       - ret-gamenerdz:/warcrow-northern-tribes-orc-hunters
+      - ret-goblingaming:orc-hunter-warcrow
   - id: corvus-belli/warcrow-northern-tribes-orc-officers
     name: 'Warcrow: Northern Tribes - Orc Officers'
     manufacturer: corvus-belli
@@ -18741,15 +17931,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW01011
     ean: '8436607713586'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 57.59
     url: https://www.gamenerdz.com/warcrow-northern-tribes-rock-troll
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW01011_0036_cover_b0d2.avif?v=1761750451
     evidence:
       - ret-gamenerdz:/warcrow-northern-tribes-rock-troll
+      - ret-goblingaming:rock-troll-warcrow
   - id: corvus-belli/warcrow-northern-tribes-tundra-marauders
     name: 'Warcrow: Northern Tribes - Tundra Marauders'
     manufacturer: corvus-belli
@@ -18773,15 +17967,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW01006
     ean: '8436607712947'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 29.54
     url: https://www.gamenerdz.com/warcrow-northern-tribes-varank-supports
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW01006_0018_cover_f789.jpg?v=1739289391
     evidence:
       - ret-gamenerdz:/warcrow-northern-tribes-varank-supports
+      - ret-goblingaming:varank-supports-warcrow
   - id: corvus-belli/warcrow-northern-tribes-warg-riders
     name: 'Warcrow: Northern Tribes - Warg Riders'
     manufacturer: corvus-belli
@@ -18926,15 +18124,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW03004
     ean: '8436607713548'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 21.51
     url: https://www.gamenerdz.com/warcrow-syenann-neakail-oen-fhiahra
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW03004-0025NeakailOenFhiahrabox.webp?v=1752048860
     evidence:
       - ret-gamenerdz:/warcrow-syenann-neakail-oen-fhiahra
+      - ret-goblingaming:neakail-oen-fhiahra
   - id: corvus-belli/warcrow-syenann-protectors-of-the-forest
     name: 'Warcrow: Syenann - Protectors of the Forest'
     manufacturer: corvus-belli
@@ -18954,15 +18156,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW03007
     ean: '8436607713616'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 33.15
     url: https://www.gamenerdz.com/warcrow-syenann-sprigs
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW03007_0037_cover_982d.avif?v=1761751215
     evidence:
       - ret-gamenerdz:/warcrow-syenann-sprigs
+      - ret-goblingaming:sprigs-warcrow
   - id: corvus-belli/warcrow-syenann-supports
     name: 'Warcrow: Syenann - Supports'
     manufacturer: corvus-belli
@@ -18982,15 +18188,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW03005
     ean: '8436607713555'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 38.68
     url: https://www.gamenerdz.com/warcrow-syenann-syena-wardens
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/syena-wardens-5.webp?v=1751990379
     evidence:
       - ret-gamenerdz:/warcrow-syenann-syena-wardens
+      - ret-goblingaming:syena-wardens-warcrow
   - id: corvus-belli/warcrow-syenann-syenann-officers
     name: 'Warcrow: Syenann - Syenann Officers'
     manufacturer: corvus-belli
@@ -19112,15 +18322,19 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW04002
     ean: '8436607713593'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 39.86
     url: https://www.gamenerdz.com/warcrow-yaldabaoth-husks
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW04002_0040_cover_9c31.avif?v=1761750563
     evidence:
       - ret-gamenerdz:/warcrow-yaldabaoth-husks
+      - ret-goblingaming:husks-warcrow
   - id: corvus-belli/warcrow-yaldabaoth-intact
     name: 'Warcrow: Yaldabaoth - Intact'
     manufacturer: corvus-belli
@@ -19216,29 +18430,37 @@ products:
     manufacturer: corvus-belli
     sku: CVBWW04003
     ean: '8436607713623'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 25.8
     url: https://www.gamenerdz.com/warcrow-yaldabaoth-officers
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW04003_0044_cover_37bf.avif?v=1761751444
     evidence:
       - ret-gamenerdz:/warcrow-yaldabaoth-officers
+      - ret-goblingaming:yaldabaoth-officers-warcrow
   - id: corvus-belli/warcrow-yaldabaoth-samara-dithean-divergent
     name: 'Warcrow: Yaldabaoth - Samara Dithean, Divergent'
     manufacturer: corvus-belli
     sku: CVBWW04004
     ean: '8436607713630'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystem: warcrow
     category: miniatures
-    categoryBasis: guessed
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
+    priceGbp: 18.44
     url: https://www.gamenerdz.com/warcrow-yaldabaoth-samara-dithean-divergent
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW04004_0046_cover_c3de.avif?v=1761751506
     evidence:
       - ret-gamenerdz:/warcrow-yaldabaoth-samara-dithean-divergent
+      - ret-goblingaming:samara-dithean-divergent-warcrow
   - id: corvus-belli/warcrow-yaldabaoth-supports
     name: 'Warcrow: Yaldabaoth Supports'
     manufacturer: corvus-belli
@@ -19278,20 +18500,6 @@ products:
       - legacy-catalog:corvus-belli/infinity/general/white-banner-action-pack
       - mfr-corvus-belli:infinity:white-banner-action-pack
       - ret-gamenerdz:/infinity-codeone-yu-jing-action-pack
-  - id: corvus-belli/white-banner-expansion-pack-beta
-    name: White Banner Expansion Pack Beta
-    manufacturer: corvus-belli
-    sku: 281351-1152
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.4
-    url: https://www.goblingaming.co.uk/products/white-banner-expansion-pack-beta
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281351_1152_cover_433f.jpg?v=1739290432
-    evidence:
-      - ret-goblingaming:white-banner-expansion-pack-beta
   - id: corvus-belli/winds-from-the-north
     name: Winds from the North
     manufacturer: corvus-belli
@@ -19415,21 +18623,6 @@ products:
       - mfr-corvus-belli:infinity:yadu-troops
       - ret-gamenerdz:/infinity-aleph-yadu-troops
       - ret-goblingaming:yadu-troops
-  - id: corvus-belli/yaldabaoth-officers-warcrow
-    name: Yaldabaoth Officers - Warcrow
-    manufacturer: corvus-belli
-    sku: WW04003-0044
-    gameSystem: warcrow
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.8
-    url: https://www.goblingaming.co.uk/products/yaldabaoth-officers-warcrow
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WW04003_0044_cover_37bf.avif?v=1761751444
-    evidence:
-      - ret-goblingaming:yaldabaoth-officers-warcrow
   - id: corvus-belli/yan-huo-invincibles-hmc
     name: Yān Huǒ Invincibles (HMC)
     manufacturer: corvus-belli
@@ -19566,38 +18759,6 @@ products:
       - mfr-corvus-belli:infinity:yojimbo-mercenary-sword
       - ret-gamenerdz:/infinity-yojimbo-mercenary-sword
       - ret-goblingaming:yojimbo-mercenary-sword
-  - id: corvus-belli/yu-jing-action-pack
-    name: Yu Jing Action Pack
-    manufacturer: corvus-belli
-    sku: 281346-1127
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 71.61
-    url: https://www.goblingaming.co.uk/products/yu-jing-action-pack
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281346_1127_cover_3838.jpg?v=1739360504
-    evidence:
-      - ret-goblingaming:yu-jing-action-pack
-  - id: corvus-belli/yu-jing-booster-pack-alpha
-    name: Yu Jing Booster Pack Alpha
-    manufacturer: corvus-belli
-    sku: 281355-1168
-    gameSystem: infinity
-    faction: yu-jing
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 25.8
-    url: https://www.goblingaming.co.uk/products/yu-jing-booster-pack-alpha
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/yu-jing-booster-pack-alpha-4.webp?v=1751990299
-    evidence:
-      - ret-goblingaming:yu-jing-booster-pack-alpha
   - id: corvus-belli/yu-jing-support-pack
     name: Yu Jing Support Pack
     manufacturer: corvus-belli

@@ -3582,11 +3582,8 @@ products:
     manufacturer: mantic-games
     productCode: MGARM114
     sku: MGARM114
-    ean: '5060924982320'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060924982306'
-      - '9781911516507'
+    ean: '5060924982306'
+    eanConfidence: confirmed
     gameSystem: armada
     faction: general
     category: terrain
@@ -3595,7 +3592,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 25.0
+    priceGbp: 60.0
     priceUsd: 60.0
     priceCad: 75.0
     url: https://www.manticgames.com/armada/expansions/armada-scenery-pack-fantasy-terrain/
@@ -3614,15 +3611,8 @@ products:
       ******
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-scenery-pack-fantasy-terrain
-      - legacy-catalog:mantic-games/armada/general/armada-sea-monsters
-      - legacy-catalog:mantic-games/armada/general/armada-seas-of-dread
-      - mfr-manticgames:449870
       - mfr-manticgames:449884
-      - mfr-manticgames:449902
-      - ret-goblingaming:kings-of-war-armada-seas-of-dread-rulebook
       - ret-tistaminis:mantic-armada-scenery-pack-fantasy-terrain
-      - ret-tistaminis:mantic-armada-sea-monsters
-      - ret-tistaminis:mantic-armada-seas-of-dread-book
   - id: mantic-games/MGARM115
     name: Armada Scenery Pack – Fortifications
     manufacturer: mantic-games
@@ -3684,6 +3674,52 @@ products:
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-essentials-bundle
       - mfr-manticgames:444081
+  - id: mantic-games/MGARM301
+    name: Armada Sea Monsters
+    manufacturer: mantic-games
+    productCode: MGARM301
+    sku: MGARM301
+    ean: '5060924982320'
+    eanConfidence: conflicted
+    additionalEans:
+      - '9781911516507'
+    gameSystem: armada
+    faction: general
+    category: book
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 25.0
+    priceUsd: 40.0
+    priceCad: 55.0
+    url: https://www.manticgames.com/armada/expansions/armada-sea-monsters/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2023/04/MGARM301-Sea-Monsters-Contents.webp
+    description: |-
+      2 x Resin Merfolk
+
+      1 x Resin Hydra
+
+      1 x Resin Sea Serpent
+
+      1 x Resin Enraged Narwhal
+
+      2 x MDF 30x30mm Base
+
+      1 x MDF 100x30mm Base
+
+      1 x MDF 70x30mm Base
+
+      1 x MDF 125x30mm Base
+    evidence:
+      - legacy-catalog:mantic-games/armada/general/armada-sea-monsters
+      - legacy-catalog:mantic-games/armada/general/armada-seas-of-dread
+      - mfr-manticgames:449870
+      - mfr-manticgames:449902
+      - ret-goblingaming:kings-of-war-armada-seas-of-dread-rulebook
+      - ret-tistaminis:mantic-armada-sea-monsters
+      - ret-tistaminis:mantic-armada-seas-of-dread-book
   - id: mantic-games/MGARM517
     name: Seas of Dread, Terrain and Sea Monsters Bundle
     manufacturer: mantic-games
@@ -4632,7 +4668,7 @@ products:
       - legacy-catalog:mantic-games/armada/general/twilight-kin-fliers-pack
       - mfr-manticgames:359272
   - id: mantic-games/MGBBM101
-    name: 'Bar Room Brawl™: The Fantasy Advent Calendar Board Game'
+    name: 'Bar Room Brawl™: Advent Calendar Game (3-4 Players, Ages 14+)'
     manufacturer: mantic-games
     productCode: MGBBM101
     sku: MGBBM101
@@ -13284,18 +13320,18 @@ products:
       - legacy-catalog:mantic-games/halo-flashpoint/general/halo-flashpoint-hq-learning-tournament-discontinued
       - mfr-manticgames:483453
   - id: mantic-games/MGEV042
-    name: Un-boxing day (Sunday 28th December 2025)
+    name: Un-boxing day (Sunday 27th December 2026)
     manufacturer: mantic-games
     productCode: MGEV042
     sku: MGEV042
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 8.0
     url: https://www.manticgames.com/events/open-days/un-boxing-day/
-    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/07/un-boxing-day.webp
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/07/unboxing-day.png
     evidence:
       - mfr-manticgames:483444
   - id: mantic-games/MGEV043
@@ -13843,6 +13879,21 @@ products:
     evidence:
       - legacy-catalog:mantic-games/halo-flashpoint/general/hq-halo-flashpoint-tournament-echo-2026-sunday-18th-october-2026
       - mfr-manticgames:540886
+  - id: mantic-games/MGEV089
+    name: 'HQ Halo: Flashpoint tournament Foxtrott 2026 (Sunday 22nd November 2026)'
+    manufacturer: mantic-games
+    productCode: MGEV089
+    sku: MGEV089
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: in_stock
+    firstSeen: '2026-08-26'
+    priceGbp: 15.0
+    url: https://www.manticgames.com/tournaments/hq-halo-flashpoint-tournament-foxtrott-2026-sunday-22nd-november-2026/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/hq-halo-flashpoint-tournament-foxtrot-2026.png
+    evidence:
+      - mfr-manticgames:540888
   - id: mantic-games/MGEV092
     name: Mantic Open Day 2026 – 7th November 2026
     manufacturer: mantic-games
@@ -18061,7 +18112,7 @@ products:
     evidence:
       - mfr-manticgames:157489
   - id: mantic-games/MGHCM101
-    name: 'Deep Space Pest Control™: The Sci-Fi Advent Calendar Board Game'
+    name: 'Deep Space Pest Control™: Advent Calendar Game (1-2 Players, Ages 14+)'
     manufacturer: mantic-games
     productCode: MGHCM101
     sku: MGHCM101
@@ -18079,7 +18130,7 @@ products:
       - mfr-manticgames:484712
       - ret-goblingaming:deep-space-pest-control-advent-calendar
   - id: mantic-games/MGHCM102
-    name: 'Worms™: The Advent Calendar Board Game'
+    name: 'Worms™: Advent Calendar Game (2-4 Players, Ages 10+)'
     manufacturer: mantic-games
     productCode: MGHCM102
     sku: MGHCM102
@@ -18120,7 +18171,7 @@ products:
       - mfr-manticgames:529464
       - ret-goblingaming:the-walking-dead-advent-calendar
   - id: mantic-games/MGHCM104
-    name: 'TerrainCrate™: Fantasy Dungeon Scenery Advent Calendar'
+    name: 'TerrainCrate™: Fantasy Scenery Advent Calendar (Ages 14+)'
     manufacturer: mantic-games
     productCode: MGHCM104
     sku: MGHCM104
@@ -18135,7 +18186,7 @@ products:
     evidence:
       - mfr-manticgames:529465
   - id: mantic-games/MGHCM106
-    name: 'TerrainCrate™: Classic Fantasy Miniatures Advent Calendar'
+    name: 'TerrainCrate™: Fantasy Miniatures Advent Calendar (Ages 14+)'
     manufacturer: mantic-games
     productCode: MGHCM106
     sku: MGHCM106
@@ -18152,7 +18203,7 @@ products:
     evidence:
       - mfr-manticgames:555069
   - id: mantic-games/MGHCM107
-    name: 'Hellboy™: The Advent Calendar Board Game'
+    name: 'Hellboy™: Advent Calendar Game (2-4 Players, Ages 10+)'
     manufacturer: mantic-games
     productCode: MGHCM107
     sku: MGHCM107
@@ -20131,6 +20182,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 75.0
     priceUsd: 75.0
+    priceEur: 40.2
     url: https://www.manticgames.com/kings-of-war/elves/elf-army-2017/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/03/6522.1.368.368.FFFFFF.0.jpeg
     description: |-
@@ -20155,6 +20207,7 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-army-discontinued
       - mfr-manticgames:1369
       - ret-radaddel:/elf-army
+      - ret-radaddel:elf-army
   - id: mantic-games/MGKWE111
     name: Elf Mega Army DISCONTINUED
     manufacturer: mantic-games
@@ -20172,6 +20225,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 115.0
     priceUsd: 115.0
+    priceEur: 64.7
     url: https://www.manticgames.com/kings-of-war/elves/elf-mega-army/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Elf-Mega-Army.jpeg
     description: |-
@@ -20182,6 +20236,7 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-mega-army-discontinued
       - mfr-manticgames:1370
       - ret-radaddel:/elf-mega-army
+      - ret-radaddel:elf-mega-army
   - id: mantic-games/MGKWE202
     name: Elf Lord on Drakon
     manufacturer: mantic-games
@@ -23561,6 +23616,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceUsd: 25.0
+    priceEur: 20.8
     url: https://www.manticgames.com/kings-of-war/accessories/kings-of-war-tokens-arc-template/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2020/09/tokens-background.jpg
     description: |-
@@ -23577,6 +23633,7 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/kings-of-war-game-token-set-arc-template-discontinued
       - mfr-manticgames:297203
       - ret-radaddel:/game-token-set-arc-template
+      - ret-radaddel:game-token-set-arc-template
   - id: mantic-games/MGKWM109
     name: Halpi’s Rift Campaign Book
     manufacturer: mantic-games
@@ -24010,6 +24067,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceUsd: 10.0
+    priceEur: 21.4
     url: https://www.manticgames.com/kings-of-war/clash-of-kings-2025/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/clash-of-kings-2025-isolated-square.webp
     description: '- 1 x Clash of Kings 2025 Edition Softback Book'
@@ -24019,6 +24077,7 @@ products:
       - mfr-manticgames:485315
       - mfr-manticgames:489096
       - ret-radaddel:/clash-of-kings-2025
+      - ret-radaddel:clash-of-kings-2025
   - id: mantic-games/MGKWM126
     name: Kings of War Command Dice DISCONTINUED
     manufacturer: mantic-games
@@ -24592,6 +24651,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 75.0
     priceUsd: 75.0
+    priceEur: 40.2
     url: https://www.manticgames.com/kings-of-war/forces-of-nature/forces-of-nature-army/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/03/Forces-of-Nature-Army-Isolated.png
     description: |-
@@ -24617,6 +24677,7 @@ products:
       - mfr-manticgames:1405
       - ret-gamenerdz:/kings-of-war-forces-of-nature-army-set
       - ret-radaddel:/forces-of-nature-army
+      - ret-radaddel:forces-of-nature-army
   - id: mantic-games/MGKWN103
     name: Forces of Nature Ambush Starter Set DISCONTINUED
     manufacturer: mantic-games
@@ -24634,6 +24695,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 35.0
     priceUsd: 35.0
+    priceEur: 17.9
     priceCad: 46.0
     url: https://www.manticgames.com/kings-of-war/forces-of-nature/ambush-starter-set/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2023/12/force-of-nature-ambush-set.webp
@@ -24656,6 +24718,7 @@ products:
       - mfr-manticgames:468678
       - ret-goblingaming:kings-of-war-nature-ambush-starter-set
       - ret-radaddel:/forces-of-nature-ambush-starter-set
+      - ret-radaddel:forces-of-nature-ambush-starter-set
       - ret-tistaminis:kings-of-war-nature-ambush-starter-set
   - id: mantic-games/MGKWN104
     name: Forces of Nature Battalion
@@ -37972,8 +38035,10 @@ products:
     manufacturer: mantic-games
     productCode: MGWD162
     sku: MGWD162
-    ean: '5060924983648'
-    eanConfidence: confirmed
+    ean: '5060924984386'
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060924983648'
     gameSystem: walking-dead-all-out-war
     faction: general
     category: miniatures
@@ -56274,20 +56339,6 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/03/void-talon-web-bundle.webp
     evidence:
       - mfr-manticgames:494737
-  - id: mantic-games/clash-of-kings-2025
-    name: Clash of Kings 2025
-    manufacturer: mantic-games
-    sku: '129827'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 21.4
-    url: https://radaddel.de/products/clash-of-kings-2025
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/129827-clash-of-kings-2025-mgkwm125-1.webp?v=1781215015
-    evidence:
-      - ret-radaddel:clash-of-kings-2025
   - id: mantic-games/clash-of-kings-doubles-ticket-2020
     name: CLASH OF KINGS DOUBLES TICKET 2020
     manufacturer: mantic-games
@@ -58609,7 +58660,7 @@ products:
     categoryBasis: default
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 35.0
     priceCad: 52.0
@@ -58833,6 +58884,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 30.0
+    priceEur: 22.6
     url: https://www.manticgames.com/kings-of-war/dwarfs/ironwatch-regiment/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/04/ironwatch.jpg
     description: |-
@@ -58843,6 +58895,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/dwarf-ironwatch
       - ret-radaddel:/dwarf-ironwatch-regiment
+      - ret-radaddel:dwarf-ironwatch-regiment
   - id: mantic-games/dwarf-ironwatch-horde
     name: Dwarf Ironwatch Horde
     manufacturer: mantic-games
@@ -58867,12 +58920,10 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 30.0
-    priceEur: 22.6
     url: https://www.manticgames.com/kings-of-war/dwarfs/ironwatch-regiment/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/04/ironwatch.jpg
     evidence:
       - mfr-manticgames:1352
-      - ret-radaddel:dwarf-ironwatch-regiment
   - id: mantic-games/dwarf-king
     name: Dwarf King
     manufacturer: mantic-games
@@ -58952,20 +59003,6 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/03/dwarf-warrior-shieldbreakers-kings-of-war-28mm-miniautres.webp
     evidence:
       - mfr-manticgames:1365
-  - id: mantic-games/elf-army
-    name: Elf Army
-    manufacturer: mantic-games
-    sku: '117816'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 40.2
-    url: https://radaddel.de/products/elf-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/117816-elf-army-mgkwe110-1.webp?v=1787250010
-    evidence:
-      - ret-radaddel:elf-army
   - id: mantic-games/elf-bolt-thrower
     name: Elf Bolt Thrower
     manufacturer: mantic-games
@@ -59030,20 +59067,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-bowmen-command-sprue-10-figures-mantic-direct
       - mfr-manticgames:22238
-  - id: mantic-games/elf-bowmen-regiment
-    name: Elf Bowmen Regiment
-    manufacturer: mantic-games
-    sku: '106850'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 20.8
-    url: https://radaddel.de/products/elf-bowmen-regiment
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/106850-elf-bowmen-regiment-mgkwe21-1-1.webp?v=1781188286
-    evidence:
-      - ret-radaddel:elf-bowmen-regiment
   - id: mantic-games/elf-complete-fleet-bundle-discontinued
     name: Elf Complete Fleet Bundle (DISCONTINUED)
     manufacturer: mantic-games
@@ -59098,6 +59121,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 30.0
+    priceEur: 20.8
     url: https://www.manticgames.com/kings-of-war/elves/elf-bowmen-regiment/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Elf-Bowmen-Regiment.jpeg
     description: |-
@@ -59109,6 +59133,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-kindred-archers
       - ret-radaddel:/elf-bowmen-regiment
+      - ret-radaddel:elf-bowmen-regiment
   - id: mantic-games/elf-kindred-archers-horde
     name: Elf Kindred Archers Horde
     manufacturer: mantic-games
@@ -59204,20 +59229,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-king-discontinued
       - mfr-manticgames:1379
-  - id: mantic-games/elf-mega-army
-    name: Elf Mega Army
-    manufacturer: mantic-games
-    sku: '125561'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 64.7
-    url: https://radaddel.de/products/elf-mega-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125561-elf-mega-army-mgkwe111-1.webp?v=1781207132
-    evidence:
-      - ret-radaddel:elf-mega-army
   - id: mantic-games/elf-palace-guard-command-upgrade-pack-discontinued
     name: Elf Palace Guard Command Upgrade Pack DISCONTINUED
     manufacturer: mantic-games
@@ -59265,6 +59276,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 27.5
     priceUsd: 27.5
+    priceEur: 15.7
     url: https://www.manticgames.com/kings-of-war/elves/elf-palace-guard-regiment/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Elf-Palace-Guard1.jpeg
     description: |-
@@ -59280,19 +59292,6 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-palace-guard-discontinued
       - mfr-manticgames:1388
       - ret-radaddel:/elf-palace-guard-regiment
-  - id: mantic-games/elf-palace-guard-regiment
-    name: Elf Palace Guard Regiment
-    manufacturer: mantic-games
-    sku: '112315'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-08-21'
-    priceEur: 15.7
-    url: https://radaddel.de/products/elf-palace-guard-regiment
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/112315-elf-palace-guard-regiment-mgkwe26-1-1.webp?v=1781189653
-    evidence:
       - ret-radaddel:elf-palace-guard-regiment
   - id: mantic-games/elf-prince-discontinued
     name: Elf Prince DISCONTINUED
@@ -59333,20 +59332,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-sabre-toothed-hunting-cat-discontinued
       - mfr-manticgames:1378
-  - id: mantic-games/elf-spearmen-regiment
-    name: Elf Spearmen Regiment
-    manufacturer: mantic-games
-    sku: '106843'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 14.5
-    url: https://radaddel.de/products/elf-spearmen-regiment
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/106843-elf-spearmen-regiment-mgkwe22-1-1.webp?v=1781188280
-    evidence:
-      - ret-radaddel:elf-spearmen-regiment
   - id: mantic-games/elf-stormwind-cavalry
     name: Elf Stormwind Cavalry
     manufacturer: mantic-games
@@ -59426,6 +59411,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 30.0
+    priceEur: 14.5
     url: https://www.manticgames.com/kings-of-war/elves/elf-spearmen-regiment/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Elves-Spearmen-Regiment1.jpeg
     description: |-
@@ -59438,6 +59424,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/elf-tallspears
       - ret-radaddel:/elf-spearmen-regiment
+      - ret-radaddel:elf-spearmen-regiment
   - id: mantic-games/elohi-troop
     name: Elohi Troop
     manufacturer: mantic-games
@@ -60096,34 +60083,6 @@ products:
       - 20mm plastic bases
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/force-of-the-abyss-gargoyles
-  - id: mantic-games/forces-of-nature-ambush-starter-set
-    name: Forces of Nature Ambush Starter Set
-    manufacturer: mantic-games
-    sku: '127677'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 17.9
-    url: https://radaddel.de/products/forces-of-nature-ambush-starter-set
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127677-forces-of-nature-ambush-starter-set-mgkwn103-1.webp?v=1781210107
-    evidence:
-      - ret-radaddel:forces-of-nature-ambush-starter-set
-  - id: mantic-games/forces-of-nature-army
-    name: Forces Of Nature Army
-    manufacturer: mantic-games
-    sku: '115701'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 40.2
-    url: https://radaddel.de/products/forces-of-nature-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115701-forces-of-nature-army-mgkwn101-1.webp?v=1781191255
-    evidence:
-      - ret-radaddel:forces-of-nature-army
   - id: mantic-games/forces-of-nature-character-avatar-of-the-green-lady-discontinued
     name: 'Forces of Nature Character: Avatar of the Green Lady DISCONTINUED'
     manufacturer: mantic-games
@@ -60476,20 +60435,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/dreadball/general/galactic-tour-expansion
       - mfr-manticgames:1185
-  - id: mantic-games/game-token-set-arc-template
-    name: Game Token Set  & Arc Template
-    manufacturer: mantic-games
-    sku: '125621'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 20.8
-    url: https://radaddel.de/products/game-token-set-arc-template
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125621-game-token-set-arc-template-mgkwm108-1.webp?v=1781207140
-    evidence:
-      - ret-radaddel:game-token-set-arc-template
   - id: mantic-games/gaming-hall-grand-re-opening
     name: Gaming Hall Grand Re-opening!
     manufacturer: mantic-games

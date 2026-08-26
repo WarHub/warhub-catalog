@@ -1,14 +1,14 @@
 summary:
-  products: 30224
-  undecided: 16361
+  products: 29791
+  undecided: 15953
   byBasis:
-    default: 7055
-    guessed: 9306
-    lexicon: 2568
-    mapped: 9320
-    paint-barcode: 21
+    default: 7048
+    guessed: 8905
+    lexicon: 2518
+    mapped: 9344
+    paint-barcode: 22
     stated: 1954
-  decidedThisRun: 11909
+  decidedThisRun: 11884
 conflicts:
   - entity: atomic-mass-games/star-wars-legion-legion-attack-dice-pack
     type: category-disagreement
@@ -28,6 +28,12 @@ conflicts:
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
+  - entity: games-workshop/99120207175
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: games-workshop/99199999043
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: games-workshop/99199999047
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -70,6 +76,9 @@ conflicts:
   - entity: games-workshop/99219999035
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99229999192
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: games-workshop/99239999066
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -95,9 +104,6 @@ conflicts:
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: games-workshop/citadel-brush-x-large-base
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/citadel-small-base-brush
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: vallejo/atlantic-blue-200ml-diorama-effects
@@ -179,7 +185,7 @@ unmapped:
     - value: hierarchy.lvl1=Middle-Earth > Unit Type
       wouldDecide: 82
     - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
-      wouldDecide: 76
+      wouldDecide: 78
     - value: hierarchy.lvl1=The Horus Heresy > Vehicles
       wouldDecide: 73
     - value: hierarchy.lvl1=The Horus Heresy > Accessories
@@ -188,10 +194,10 @@ unmapped:
       wouldDecide: 64
     - value: hierarchy.lvl1=The Old World > Armies of the Old World
       wouldDecide: 47
+    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of the Imperium
+      wouldDecide: 43
     - value: hierarchy.lvl1=The Horus Heresy > Mechanicum
       wouldDecide: 42
-    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of the Imperium
-      wouldDecide: 41
     - value: hierarchy.lvl1=The Old World > Unit Type
       wouldDecide: 40
     - value: hierarchy.lvl1=Warhammer 40,000 > Armies of Chaos
@@ -281,6 +287,8 @@ unmapped:
       wouldDecide: 3
     - value: tradeCategory=AOS - Chaos - Skaven
       wouldDecide: 3
+    - value: tradeCategory=40K - Imperium - Adepta Sororitas
+      wouldDecide: 3
     - value: tradeCategory=Chaos Daemons - Khorne
       wouldDecide: 3
     - value: tradeCategory=AOS - Death - Soulblight Gravelords
@@ -292,8 +300,6 @@ unmapped:
     - value: tradeCategory=AOS - Order - Stormcast Eternals
       wouldDecide: 2
     - value: tradeCategory=40K - Imperium - Astra Militarum
-      wouldDecide: 2
-    - value: tradeCategory=40K - Imperium - Adepta Sororitas
       wouldDecide: 2
     - value: tradeCategory=40K - Xenos - T'au Empire
       wouldDecide: 2
@@ -347,7 +353,7 @@ unmapped:
     - value: categories=mantic-points-shop
       wouldDecide: 45
     - value: categories=tournaments
-      wouldDecide: 43
+      wouldDecide: 44
     - value: categories=kings-of-war-undead
       wouldDecide: 36
     - value: categories=orc-miniatures
@@ -671,60 +677,60 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 717
+      wouldDecide: 833
     - value: breadcrumbs=Miniatures
-      wouldDecide: 709
+      wouldDecide: 823
+    - value: breadcrumbs=Games Workshop
+      wouldDecide: 263
     - value: breadcrumbs=Infinity
-      wouldDecide: 216
+      wouldDecide: 165
+    - value: breadcrumbs=Warhammer Age of Sigmar
+      wouldDecide: 146
+    - value: breadcrumbs=Warhammer 40K
+      wouldDecide: 114
     - value: breadcrumbs=Kings of War
       wouldDecide: 94
     - value: breadcrumbs=Marvel Crisis Protocol
-      wouldDecide: 83
+      wouldDecide: 84
     - value: breadcrumbs=Malifaux
       wouldDecide: 79
-    - value: breadcrumbs=Games Workshop
-      wouldDecide: 71
-    - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 66
     - value: breadcrumbs=More Miniatures
       wouldDecide: 57
     - value: breadcrumbs=Warcrow
-      wouldDecide: 56
+      wouldDecide: 35
     - value: breadcrumbs=Star Wars Legion
-      wouldDecide: 36
+      wouldDecide: 30
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 29
-    - value: breadcrumbs=Nomads
-      wouldDecide: 27
-    - value: breadcrumbs=Panoceania
-      wouldDecide: 27
-    - value: breadcrumbs=Yu Jing
-      wouldDecide: 24
-    - value: breadcrumbs=Ariadna
-      wouldDecide: 21
     - value: breadcrumbs=Godtear
       wouldDecide: 21
-    - value: breadcrumbs=Haqqislam
+    - value: breadcrumbs=Nomads
+      wouldDecide: 19
+    - value: breadcrumbs=Ariadna
+      wouldDecide: 18
+    - value: breadcrumbs=Yu Jing
       wouldDecide: 16
-    - value: breadcrumbs=Combined Army
-      wouldDecide: 15
+    - value: breadcrumbs=Panoceania
+      wouldDecide: 16
+    - value: breadcrumbs=Haqqislam
+      wouldDecide: 14
     - value: breadcrumbs=Star Wars Shatterpoint
-      wouldDecide: 13
+      wouldDecide: 12
+    - value: breadcrumbs=Combined Army
+      wouldDecide: 12
     - value: breadcrumbs=Aleph
-      wouldDecide: 12
+      wouldDecide: 11
     - value: breadcrumbs=NA2
-      wouldDecide: 12
+      wouldDecide: 10
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 8
     - value: breadcrumbs=Supplies
-      wouldDecide: 4
+      wouldDecide: 5
     - value: breadcrumbs=Citadel Accessories & Supplies
-      wouldDecide: 4
+      wouldDecide: 5
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
-    - value: breadcrumbs=O-12
-      wouldDecide: 3
-    - value: breadcrumbs=Warhammer Age of Sigmar
+    - value: breadcrumbs=Preorders
       wouldDecide: 2
     - value: breadcrumbs=Limited
       wouldDecide: 2
@@ -803,76 +809,70 @@ unmapped:
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Games Workshop
-      wouldDecide: 999
+      wouldDecide: 891
     - value: vendor=Games Workshop
-      wouldDecide: 999
+      wouldDecide: 891
     - value: tags=AK-Interactive
-      wouldDecide: 884
+      wouldDecide: 885
     - value: vendor=AK-Interactive
-      wouldDecide: 884
+      wouldDecide: 885
     - value: tags=Vallejo
-      wouldDecide: 695
+      wouldDecide: 618
     - value: vendor=Vallejo
-      wouldDecide: 695
+      wouldDecide: 618
     - value: tags=Warlord Games
-      wouldDecide: 410
+      wouldDecide: 387
     - value: vendor=Warlord Games
-      wouldDecide: 410
+      wouldDecide: 387
     - value: tags=The Army Painter
-      wouldDecide: 388
+      wouldDecide: 308
     - value: vendor=The Army Painter
-      wouldDecide: 388
+      wouldDecide: 308
     - value: tags=Vallejo Model Air
       wouldDecide: 235
-    - value: tags=Warpaints Fanatic
-      wouldDecide: 128
-    - value: tags=Middle-Earth - Good
-      wouldDecide: 100
     - value: tags=AK-Effekte & Weatherings
+      wouldDecide: 98
+    - value: tags=Middle-Earth - Good
       wouldDecide: 98
     - value: tags=EFFEKTE & WEATHERINGS*
       wouldDecide: 97
+    - value: tags=Warpaints Fanatic
+      wouldDecide: 96
     - value: tags=Atomic Mass Games
-      wouldDecide: 95
-    - value: vendor=Atomic Mass Games
-      wouldDecide: 95
-    - value: tags=Vallejo Game Color
       wouldDecide: 94
-    - value: tags=Summer Sale
-      wouldDecide: 86
+    - value: vendor=Atomic Mass Games
+      wouldDecide: 94
+    - value: tags=Vallejo Game Color
+      wouldDecide: 93
     - value: tags=AK-ZUBEHÖR*
       wouldDecide: 85
     - value: tags=AK Werkzeuge
       wouldDecide: 85
-    - value: tags=WARPAINTS FANATIC ACRYLICS*
-      wouldDecide: 83
+    - value: tags=Summer Sale
+      wouldDecide: 76
     - value: tags=Neuheiten Games Workshop
-      wouldDecide: 77
+      wouldDecide: 74
     - value: tags=001-106 GAME COLOR*
-      wouldDecide: 75
-    - value: tags=Middle-Earth - Evil
-      wouldDecide: 72
-    - value: tags=Black Friday
-      wouldDecide: 71
-    - value: tags=Speedpaint
-      wouldDecide: 71
+      wouldDecide: 74
     - value: tags=AK-Zubehör
       wouldDecide: 69
-    - value: tags=Black Library Englisch
+    - value: tags=Middle-Earth - Evil
+      wouldDecide: 69
+    - value: tags=WARPAINTS FANATIC ACRYLICS*
       wouldDecide: 63
     - value: tags=Neuheiten Farben und Zubehör
       wouldDecide: 61
+    - value: tags=Black Friday
+      wouldDecide: 60
+    - value: tags=Speedpaint
+      wouldDecide: 60
     - value: tags=Vallejo Xpress Color
       wouldDecide: 60
+    - value: tags=Black Library Englisch
+      wouldDecide: 55
     - value: tags=XPRESS COLOR*
       wouldDecide: 52
     - value: tags=AoS Grundboxen und Regelbücher
-      wouldDecide: 51
-    - value: tags=Vallejo Game Air
-      wouldDecide: 51
-    - value: tags=AoS Zubehör
-      wouldDecide: 50
-    - value: tags=BA Deutschland
       wouldDecide: 50
     - value: tags=Black Library Deutsch
       wouldDecide: 49
@@ -880,7 +880,13 @@ unmapped:
       wouldDecide: 48
     - value: tags=AK-Weathering Pencils
       wouldDecide: 48
+    - value: tags=BA Deutschland
+      wouldDecide: 48
     - value: tags=AK-PINSEL*
+      wouldDecide: 47
+    - value: tags=CMON
+      wouldDecide: 47
+    - value: vendor=CMON
       wouldDecide: 47
   ret-tistaminis:
     - value: tags=Bolt Action
@@ -906,11 +912,11 @@ unmapped:
     - value: productType=Paints & Supplies
       wouldDecide: 67
     - value: vendor=GW-LOCAL
-      wouldDecide: 66
+      wouldDecide: 65
     - value: vendor=Green Stuff World
       wouldDecide: 59
     - value: vendor=GW-Local
-      wouldDecide: 48
+      wouldDecide: 49
     - value: tags=Dark Ages
       wouldDecide: 48
     - value: tags=Victory at Sea
@@ -929,10 +935,10 @@ unmapped:
       wouldDecide: 30
     - value: tags=Italians
       wouldDecide: 28
-    - value: tags=Amazon
-      wouldDecide: 25
     - value: tags=French
       wouldDecide: 25
+    - value: tags=Amazon
+      wouldDecide: 24
     - value: tags=Black Library
       wouldDecide: 24
     - value: tags=Victory at Sea British
@@ -945,19 +951,19 @@ unmapped:
       wouldDecide: 21
     - value: tags=Americans
       wouldDecide: 19
-    - value: tags=GW Accessories
-      wouldDecide: 18
-    - value: tags=Space Marines
-      wouldDecide: 18
     - value: vendor=GW-WEB
       wouldDecide: 18
     - value: tags=Green Stuff World Other
       wouldDecide: 18
     - value: tags=Victory at Sea German
       wouldDecide: 18
-    - value: tags=Orks
-      wouldDecide: 15
+    - value: tags=GW Accessories
+      wouldDecide: 17
+    - value: tags=Space Marines
+      wouldDecide: 17
     - value: productType=Miniatures - Plastic
+      wouldDecide: 14
+    - value: tags=Orks
       wouldDecide: 14
     - value: tags=warhammer preorder
       wouldDecide: 14

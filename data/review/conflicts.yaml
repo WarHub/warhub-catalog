@@ -127,6 +127,7 @@ conflicts:
       - ean: '8436607713784'
         sources:
           - ret-gamenerdz
+          - ret-goblingaming
   - type: ean-mismatch
     entity: corvus-belli/infinity-combined-army-malignos-hacker
     chosen: '2816150009224'
@@ -227,21 +228,6 @@ conflicts:
           - ret-goblingaming
           - ret-radaddel
       - ean: '5011921256266'
-        sources:
-          - mfr-gw-trade
-  - type: ean-mismatch
-    entity: games-workshop/99070108012
-    chosen: '5011921183616'
-    assertions:
-      - ean: '5011921183616'
-        sources:
-          - legacy-catalog
-          - mfr-gw-trade
-          - ret-gamenerdz
-          - ret-goblingaming
-          - ret-radaddel
-          - ret-tistaminis
-      - ean: '5011921256204'
         sources:
           - mfr-gw-trade
   - type: ean-mismatch
@@ -626,12 +612,9 @@ conflicts:
         sources:
           - ret-tistaminis
   - type: ean-mismatch
-    entity: mantic-games/MGARM114
+    entity: mantic-games/MGARM301
     chosen: '5060924982320'
     assertions:
-      - ean: '5060924982306'
-        sources:
-          - legacy-catalog
       - ean: '5060924982320'
         sources:
           - legacy-catalog
@@ -648,6 +631,16 @@ conflicts:
         sources:
           - legacy-catalog
       - ean: '5060924984799'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: mantic-games/MGWD162
+    chosen: '5060924984386'
+    assertions:
+      - ean: '5060924983648'
+        sources:
+          - legacy-catalog
+      - ean: '5060924984386'
         sources:
           - ret-goblingaming
   - type: ean-mismatch
@@ -790,27 +783,6 @@ conflicts:
       - games-workshop/60010199079
   - type: ambiguous-join
     keys:
-      - ret-tistaminis:warhammer-40000-introductory-set-1
-    name: 'WARHAMMER 40000: INTRODUCTORY SET'
-    candidates:
-      - games-workshop/60010199059
-      - games-workshop/60010199079
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:disciples-of-tzeentch-warscroll-cards-englisch
-    name: 'Disciples of Tzeentch: Warscroll Cards (englisch)'
-    candidates:
-      - games-workshop/60050201004
-      - games-workshop/60050201014
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:disciples-of-tzeentch-warscroll-cards-englisch-1
-    name: 'Disciples of Tzeentch: Warscroll Cards (englisch)'
-    candidates:
-      - games-workshop/60050201004
-      - games-workshop/60050201014
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:ossiarch-bonereapers-warscroll-cards-englisch
     name: 'Ossiarch Bonereapers: Warscroll Cards (englisch)'
     candidates:
@@ -909,69 +881,6 @@ conflicts:
       - games-workshop/99120101482
   - type: ambiguous-join
     keys:
-      - ret-radaddel:death-guard-foul-blightspawn
-    name: 'Death Guard: Foul Blightspawn'
-    candidates:
-      - games-workshop/99070102002
-      - games-workshop/99070102017
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-scribbus-wretch-the-tallyman
-    name: 'Death Guard: Scribbus Wretch the Tallyman'
-    candidates:
-      - games-workshop/99070102003
-      - games-workshop/99070102018
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-nauseous-rotbone
-    name: 'Death Guard: Nauseous Rotbone'
-    candidates:
-      - games-workshop/99070102004
-      - games-workshop/99070102019
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-biologus-putrifier
-    name: 'Death Guard: Biologus Putrifier'
-    candidates:
-      - games-workshop/99070102005
-      - games-workshop/99070102020
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-plague-marine-icon-bearer
-    name: 'Death Guard: Plague Marine Icon Bearer'
-    candidates:
-      - games-workshop/99070102006
-      - games-workshop/99070102021
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-plague-marine-champion
-    name: 'Death Guard: Plague Marine Champion'
-    candidates:
-      - games-workshop/99070102007
-      - games-workshop/99070102022
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-master-of-executions
-    name: 'Chaos Space Marines: Master of Executions'
-    candidates:
-      - games-workshop/99070102013
-      - games-workshop/99070102024
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-sorcerer
-    name: 'Chaos Space Marines: Sorcerer'
-    candidates:
-      - games-workshop/99070102015
-      - games-workshop/99070102026
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-chaos-lord
-    name: 'Chaos Space Marines: Chaos Lord'
-    candidates:
-      - games-workshop/99070102025
-      - games-workshop/99120102192
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:grey-knights-grand-master-voldus
     name: 'Grey Knights: Grand Master Voldus'
     candidates:
@@ -980,26 +889,11 @@ conflicts:
       - games-workshop/99120107024
   - type: ambiguous-join
     keys:
-      - ret-radaddel:deathwatch-upgrades
-    name: 'Deathwatch: Upgrades'
-    candidates:
-      - games-workshop/99070109001
-      - games-workshop/99070109007
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:necrons-cryptek
     name: 'Necrons: Cryptek'
     candidates:
       - games-workshop/99070110002
       - games-workshop/99070110005
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:drukhari-archon
-    name: 'Drukhari: Archon'
-    candidates:
-      - games-workshop/99070112004
-      - games-workshop/99070112007
-      - games-workshop/99120112060
   - type: ambiguous-join
     keys:
       - ret-radaddel:skaven-warlock-bombardier
@@ -1014,13 +908,6 @@ conflicts:
     candidates:
       - games-workshop/99070206007
       - games-workshop/99120206065
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:flesh-eater-courts-abhorrant-archregent
-    name: 'Flesh-Eater Courts: Abhorrant Archregent'
-    candidates:
-      - games-workshop/99070207009
-      - games-workshop/99070207024
   - type: ambiguous-join
     keys:
       - ret-radaddel:ossiarch-bonereapers-mortisan-boneshaper
@@ -1154,13 +1041,6 @@ conflicts:
       - games-workshop/99120101390
   - type: ambiguous-join
     keys:
-      - ret-radaddel:dark-angels-ravenwing-command-squad
-    name: 'Dark Angels: Ravenwing Command Squad'
-    candidates:
-      - games-workshop/99120101238
-      - games-workshop/99120101361
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:space-marines-razorback
     name: 'Space Marines: Razorback'
     candidates:
@@ -1224,13 +1104,6 @@ conflicts:
       - games-workshop/99120101433
   - type: ambiguous-join
     keys:
-      - ret-radaddel:chaos-space-marines-possessed
-    name: 'Chaos Space Marines: Possessed'
-    candidates:
-      - games-workshop/99120102056
-      - games-workshop/99120102140
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:thousand-sons-rubric-marines
     name: 'Thousand Sons: Rubric Marines'
     candidates:
@@ -1257,76 +1130,6 @@ conflicts:
     candidates:
       - games-workshop/99120102067
       - games-workshop/99120102134
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-deathshroud-bodyguard
-    name: 'Death Guard: Deathshroud Bodyguard'
-    candidates:
-      - games-workshop/99120102073
-      - games-workshop/99120102123
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-blightlord-terminators
-    name: 'Death Guard: Blightlord Terminators'
-    candidates:
-      - games-workshop/99120102074
-      - games-workshop/99120102124
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-plagueburst-crawler
-    name: 'Death Guard: Plagueburst Crawler'
-    candidates:
-      - games-workshop/99120102075
-      - games-workshop/99120102125
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-foetid-bloat-drone
-    name: 'Death Guard: Foetid Bloat Drone'
-    candidates:
-      - games-workshop/99120102077
-      - games-workshop/99120102127
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-plague-marines
-    name: 'Death Guard: Plague Marines'
-    candidates:
-      - games-workshop/99120102078
-      - games-workshop/99120102128
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:death-guard-myphitic-blight-hauler
-    name: 'Death Guard: Myphitic Blight-Hauler'
-    candidates:
-      - games-workshop/99120102080
-      - games-workshop/99120102112
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-dark-apostle
-    name: 'Chaos Space Marines: Dark Apostle'
-    candidates:
-      - games-workshop/99120102099
-      - games-workshop/99120102173
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-fabius-bile
-    name: 'Chaos Space Marines: Fabius Bile'
-    candidates:
-      - games-workshop/99120102113
-      - games-workshop/99120102176
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-raptors-1
-    name: 'Chaos Space Marines: Raptors'
-    candidates:
-      - games-workshop/99120102163
-      - games-workshop/99120102259
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:chaos-space-marines-legionaries
-    name: 'Chaos Space Marines: Legionaries'
-    candidates:
-      - games-workshop/99120102172
-      - games-workshop/99120102218
   - type: ambiguous-join
     keys:
       - ret-radaddel:kill-team-fellgor-ravagers
@@ -1420,13 +1223,6 @@ conflicts:
       - games-workshop/99120108110
   - type: ambiguous-join
     keys:
-      - ret-radaddel:deathwatch-corvus-blackstar
-    name: 'Deathwatch: Corvus Blackstar'
-    candidates:
-      - games-workshop/99120109002
-      - games-workshop/99120109016
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:necrons-canoptek-wraiths
     name: 'Necrons: Canoptek Wraiths'
     candidates:
@@ -1439,41 +1235,6 @@ conflicts:
     candidates:
       - games-workshop/99120110038
       - games-workshop/99120110065
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:drukhari-wyches
-    name: 'Drukhari: Wyches'
-    candidates:
-      - games-workshop/99120112008
-      - games-workshop/99120112044
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:drukhari-scourges
-    name: 'Drukhari: Scourges'
-    candidates:
-      - games-workshop/99120112029
-      - games-workshop/99120112047
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:drukhari-talos
-    name: 'Drukhari: Talos'
-    candidates:
-      - games-workshop/99120112030
-      - games-workshop/99120112048
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:drukhari-venom
-    name: 'Drukhari: Venom'
-    candidates:
-      - games-workshop/99120112031
-      - games-workshop/99120112049
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:drukhari-incubi
-    name: 'Drukhari: Incubi'
-    candidates:
-      - games-workshop/99120112041
-      - games-workshop/99120112051
   - type: ambiguous-join
     keys:
       - ret-radaddel:kill-team-hand-of-the-archon
@@ -1511,13 +1272,6 @@ conflicts:
       - games-workshop/99120114003
   - type: ambiguous-join
     keys:
-      - ret-radaddel:genestealer-cults-broodcoven
-    name: 'Genestealer Cults: Broodcoven'
-    candidates:
-      - games-workshop/99120117001
-      - games-workshop/99120117017
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:genestealer-cults-goliath
     name: 'Genestealer Cults: Goliath'
     candidates:
@@ -1532,32 +1286,11 @@ conflicts:
       - games-workshop/99120117020
   - type: ambiguous-join
     keys:
-      - ret-radaddel:genestealer-cults-aberrants
-    name: 'Genestealer Cults: Aberrants'
-    candidates:
-      - games-workshop/99120117012
-      - games-workshop/99120117022
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:genestealer-cults-jackal-alphus
     name: 'Genestealer Cults: Jackal Alphus'
     candidates:
       - games-workshop/99120117013
       - games-workshop/99120117023
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:genestealer-cults-atalan-jackals
-    name: 'Genestealer Cults: Atalan Jackals'
-    candidates:
-      - games-workshop/99120117014
-      - games-workshop/99120117024
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:genestealer-cults-achilles-ridgerunner
-    name: 'Genestealer Cults: Achilles Ridgerunner'
-    candidates:
-      - games-workshop/99120117015
-      - games-workshop/99120117025
   - type: ambiguous-join
     keys:
       - ret-radaddel:kill-team-hearthkyn-salvagers
@@ -1611,13 +1344,6 @@ conflicts:
       - games-workshop/99120204042
   - type: ambiguous-join
     keys:
-      - ret-radaddel:fyreslayers-vulkite-berzerkers
-    name: 'Fyreslayers: Vulkite Berzerkers'
-    candidates:
-      - games-workshop/99120205015
-      - games-workshop/99120205045
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:kharadron-overlords-arkanaut-company
     name: 'Kharadron Overlords: Arkanaut Company'
     candidates:
@@ -1652,13 +1378,6 @@ conflicts:
       - games-workshop/99120207030
       - games-workshop/99120207116
       - games-workshop/99120207228
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:flesh-eater-courts-crypt-ghouls
-    name: 'Flesh-Eater Courts: Crypt Ghouls'
-    candidates:
-      - games-workshop/99120207032
-      - games-workshop/99120207171
   - type: ambiguous-join
     keys:
       - ret-radaddel:nighthaunt-black-coach
@@ -1894,20 +1613,6 @@ conflicts:
       - games-workshop/99120210058
   - type: ambiguous-join
     keys:
-      - ret-radaddel:daughters-of-khaine-morathi
-    name: 'Daughters of Khaine: Morathi'
-    candidates:
-      - games-workshop/99120212015
-      - games-workshop/99120212031
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:daughters-of-khaine-witch-aelves
-    name: 'Daughters of Khaine: Witch Aelves'
-    candidates:
-      - games-workshop/99120212020
-      - games-workshop/99120212034
-  - type: ambiguous-join
-    keys:
       - ret-radaddel:ogor-mawtribes-ironguts
     name: 'Ogor Mawtribes: Ironguts'
     candidates:
@@ -2021,13 +1726,6 @@ conflicts:
     candidates:
       - games-workshop/99123043004
       - games-workshop/99853008194
-  - type: ambiguous-join
-    keys:
-      - ret-radaddel:citadel-crusade-figure-case
-    name: 'Citadel: Crusade Figure Case'
-    candidates:
-      - games-workshop/99239999076
-      - games-workshop/99239999130
   - type: ambiguous-join
     keys:
       - ret-radaddel:to-kill-a-king-english-civil-war-supplement
