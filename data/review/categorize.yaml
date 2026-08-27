@@ -1,14 +1,14 @@
 summary:
-  products: 29036
-  undecided: 15272
+  products: 29042
+  undecided: 15277
   byBasis:
-    default: 7050
-    guessed: 8222
+    default: 7051
+    guessed: 8226
     lexicon: 2409
-    mapped: 9353
+    mapped: 9354
     paint-barcode: 21
     stated: 1981
-  decidedThisRun: 11783
+  decidedThisRun: 11784
 conflicts:
   - entity: atomic-mass-games/SWQ131
     type: category-disagreement
@@ -186,10 +186,10 @@ unmapped:
       wouldDecide: 42
     - value: hierarchy.lvl1=The Horus Heresy > Mechanicum
       wouldDecide: 42
+    - value: hierarchy.lvl1=Age of Sigmar > Unit Type
+      wouldDecide: 40
     - value: hierarchy.lvl1=The Old World > Unit Type
       wouldDecide: 40
-    - value: hierarchy.lvl1=Age of Sigmar > Unit Type
-      wouldDecide: 38
     - value: hierarchy.lvl1=Warhammer 40,000 > Armies of Chaos
       wouldDecide: 38
     - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Good
@@ -209,7 +209,7 @@ unmapped:
     - value: hierarchy.lvl1=Other Games > Warcry
       wouldDecide: 11
     - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Order
-      wouldDecide: 8
+      wouldDecide: 10
     - value: hierarchy.lvl1=The Horus Heresy > Legiones Astartes
       wouldDecide: 8
     - value: hierarchy.lvl1=Warhammer 40,000 > Space Marines
@@ -530,13 +530,13 @@ unmapped:
       wouldDecide: 8
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 2557
+      wouldDecide: 2558
     - value: tags=us
-      wouldDecide: 2553
+      wouldDecide: 2554
     - value: vendor=Warlord Games
-      wouldDecide: 2553
+      wouldDecide: 2554
     - value: tags=over-10
-      wouldDecide: 1958
+      wouldDecide: 1959
     - value: tags=metal
       wouldDecide: 1664
     - value: tags=warlord-games
@@ -578,13 +578,13 @@ unmapped:
     - value: tags=trade-web
       wouldDecide: 264
     - value: tags=hail-caesar
-      wouldDecide: 262
+      wouldDecide: 263
     - value: tags=german-army
       wouldDecide: 255
     - value: tags=pike-shotte
       wouldDecide: 252
     - value: productType=Hail Caesar
-      wouldDecide: 249
+      wouldDecide: 250
     - value: tags=platoon-armoured
       wouldDecide: 247
     - value: tags=platoon-artillery

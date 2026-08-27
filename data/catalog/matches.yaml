@@ -119,6 +119,17 @@ reassignManufacturer:
   'ret-tistaminis:ww2-british-paint-set': army-painter
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  # THE SIXTH, AND THE ONLY ONE WHERE OWNERSHIP IS GENUINELY UNKNOWN. Mantic asserts 5060924988162
+  # for BOTH MGVAF202 (Vanguard Centaur Chief) and MGKWN208 (Kings of War Centaur Chief) -- the
+  # same shape as Warlord's Rift Dice, but with no third source to outvote it: Mantic publishes no
+  # barcodes on its own site (checked 2026-08-27, `sku` and no GTIN in its JSON-LD) and a web
+  # search surfaced no listing carrying this value. It may even be correct -- one sculpt sold under
+  # two range codes can legitimately share a barcode, as Warlord's Armies of the United States ISBN
+  # does. What is NOT tenable is the two products being one record. `ret-gamenerdz` gives MGVAF202
+  # its own 5060469664040, so rejecting the duplicate from THAT side splits them while leaving each
+  # code a barcode some source attests and losing nothing. Which of the two Mantic meant is still
+  # open; a harvest that ever publishes a barcode will settle it.
+  'mfr-manticgames:20610': ['5060924988162']
   # --- THE LAST FUSIONS THE WIDER CODE COVERAGE MADE VISIBLE (5 rows, 2026-08-27) --------------
   # Once Vallejo, Corvus Belli and Atomic Mass had real codes, the catalog-wide test for a fused
   # record became answerable: an entity holding two UNRELATED codes AND two barcodes. There are 16,
@@ -1395,6 +1406,30 @@ supersessions:
   # live state.
   games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
+  # --- THE LAST SIX FUSED RECORDS (2026-08-27) -------------------------------------------------
+  # Five are one shape: `legacy-catalog` carries ANOTHER code's barcode, and because a second
+  # source asserts that barcode under its real code, the wrong value wins its own code's vote and
+  # the automated consensus test cannot see it. Each name is identical on both codes -- these are
+  # re-codes and book/bundle pairs, not different products with different names -- so the name
+  # cannot discriminate and the standing rule applies unopposed: the barcode identifies the box,
+  # the SKU is a catalogue number. Moving the row splits the records without asserting lineage.
+  #
+  # Claws of Karanak: GW's trade sheet calls 99120201148 "WARCRY: CLAWS OF KARANAK" (5011921182114)
+  # and 99120201247 "BLADES OF KHORNE: CLAWS OF KARANAK" (5011921259533) -- two releases of one
+  # sculpt. legacy has the Warcry barcode on the Blades code.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/claws-of-karanak': '99120201148'
+  # Volturnos / Akhelian King is one dual-build kit re-coded 99120219017 -> 99120219028; the trade
+  # sheet gives each code its own barcode and three rows carry the retired code's.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/akhelian-king': '99120219017'
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/volturnos-high-king-of-the-deep': '99120219017'
+  'ret-goblingaming:volturnos-high-king-of-the-deep': '99120219017'
+  # Three Warlord books where the ISBN belongs to the plain book and legacy hung it on the
+  # code Warlord's own store gives a different barcode: Hail Caesar Army Lists (101010003 per
+  # ret-goblingaming), Glory Hallelujah! (WG-BP009 per ret-goblingaming), Iron Coffins
+  # (481010002 per ret-tistaminis -- the same book/bundle split as Armies of the United States).
+  'legacy-catalog:warlord-games/hail-caesar/german/hail-caesar-army-lists-biblical-to-early-medieval-supplement': '101010003'
+  'legacy-catalog:warlord-games/bolt-action/american/glory-hallelujah': 'WG-BP009'
+  'legacy-catalog:warlord-games/achtung-panzer/british/iron-coffins-achtung-panzer-supplement-with-stanley-christopherson-special-miniature': '481010002'
   # --- RE-CODE BRIDGES: RIGHT BARCODE, STALE CATALOGUE NUMBER (5 rows, 2026-08-27) -------------
   # Each is a retailer listing the CURRENT product code while scanning the RETIRED code's barcode.
   # Both codes carry the same product name -- it is the same product re-coded -- so the name cannot
