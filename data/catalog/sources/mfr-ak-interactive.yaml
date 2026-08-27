@@ -76,13 +76,23 @@ crossoverToProducts:
     store title. THE CONFLICT TYPE CARRIES THE STAMP THE ROW WOULD HAVE WORN, so they arrive
     as `paint-set-without-identity` AND `hobby-auxiliary-without-identity` -- not all of them
     are sets, and a maintainer triaging the list should not have to open the store page to
-    find that out. They are of three kinds: real item numbers for boxed sets (the AKABT3xx
-    and AKAD10x colour sets, the AKG gouache sets, the AKPACK bundles, AKABT1000);
-    freehand RANGE STRINGS which are not product identities at all ("AK 3G RANGE
-    AFV/AIR/FIG/GENERIC", "RANGE AKAD"); and the AKABT11x thinners, which the
-    `hobby-auxiliary` clause below claims and which are not boxed sets and never were.
-    Deliberately NOT fixed by widening the codePattern: a pattern loose enough to swallow the
-    item numbers would code the range strings too.
+    find that out.
+    THE CODEPATTERN WAS WIDENED 2026-08-26 AND MOST OF THEM NOW CROSS. What stood here --
+    "Deliberately NOT fixed by widening the codePattern: a pattern loose enough to swallow the
+    item numbers would code the range strings too" -- is true of one shape of widening and false
+    of the other, and the shape it is false about is the one that was needed. Loosening the
+    TRAILING letters does code the range strings (`AK 3G RANGE AFV` space-strips to `AK` + `3` +
+    `GRANGEAFV`); extending the PREFIX does not, because those strings still have letters after
+    their digit run and `RANGE AKAD` has no digit run at all. See the measurement recorded on
+    ak-interactive in data/catalog/taxonomy/manufacturers.yaml. The AKABT/AKAD/AKG/AKPACK item
+    numbers and the AKABT11x thinners are article numbers in families this source ships by the
+    dozen, and they are now coded and crossing.
+    WHAT STILL DOES NOT CROSS is the third kind, and it should not: the freehand RANGE STRINGS
+    ("AK 3G RANGE AFV/AIR/FIG/GENERIC", "RANGE AKAD"), which are not product identities. They
+    are the only skus in this source that contain a space, they are shop range pages rather than
+    boxes, and the identity floor refusing them is the correct outcome rather than a gap. They
+    remain in conflicts.yaml as `paint-set-without-identity` -- five rows a human has looked at
+    and decided to keep.
     KINDS, NOT MEMBERS, and for the same reason the counts came out of this field: the
     enumeration that stood here was the exact membership from before the `hobby-auxiliary`
     clause below was added to this same block, and it went stale in that very commit -- it
@@ -122,13 +132,14 @@ crossoverToProducts:
     # already crossing: every row it selects crosses BECAUSE of it. Widening the word list widens
     # the catalog, not just a stamp.
     #
-    # ADMITS 13 OF THE 16, not all of them. AKABT111/112/113 are selected here and then REFUSED by
-    # the resolver's identity floor -- their skus do not match this manufacturer's codePattern and
-    # AK publishes no barcode -- so they reach neither catalog and surface as
-    # `hobby-auxiliary-without-identity` in review/conflicts.yaml. Measured 2026-08-11:
-    # data/catalog/products/ak-interactive.yaml holds 13 `category: hobby-auxiliary` products
-    # against this clause's 16 selections. Widening the word list can therefore also widen
-    # conflicts.yaml rather than the catalog, which is the cheaper failure but still a cost.
+    # IT ADMITS ALL 16 SINCE 2026-08-26, and it did not before. AKABT111/112/113 -- the odourless,
+    # matt-effect and fast-dry thinners -- were selected here and then REFUSED by the resolver's
+    # identity floor, because their skus did not match this manufacturer's codePattern and AK
+    # publishes no barcode, so they reached neither catalog and sat in review/conflicts.yaml as
+    # `hobby-auxiliary-without-identity`. Widening the codePattern by prefix gave all three a
+    # product code (see the block above and taxonomy/manufacturers.yaml). Widening the WORD LIST
+    # below is still not free: a row it selects whose sku this manufacturer's codePattern cannot
+    # read widens conflicts.yaml rather than the catalog, which is the cheaper failure but a cost.
     #
     # The word list is deliberately narrow and anchored: BURNISHING and MICROFILLER name processes,
     # THINNER/CLEANER name solvents, and `\bFLUID\b` is a whole word so it cannot catch a colour

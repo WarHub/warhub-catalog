@@ -67,3 +67,22 @@ def test_duplicate_vendor_name_raises(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="Shared Vendor|shared vendor"):
         Taxonomy.load(tmp_path)
+
+
+def test_ak_interactive_codes_its_letter_prefixed_families_but_not_the_range_pages() -> None:
+    """The committed pattern, against the two things it has to get right at once.
+
+    AK's article numbers carry a longer letter prefix than `AK` on whole families -- the Abteilung
+    502 oils, the Artistic Dense acrylics, the gouaches, the signature packs -- and those rows
+    cross into the product catalog, where a sku that will not normalize has no identity at all
+    (AK publishes no barcode anywhere). The shop's freehand RANGE strings must keep failing: they
+    are range pages, not boxes. A pattern that loosens the TRAILING letters instead of extending
+    the prefix codes the range strings too, which is what this pins against.
+    """
+    taxonomy = Taxonomy.load(Path(__file__).resolve().parents[3] / "data" / "catalog" / "taxonomy")
+    for sku in ("AK11237", "AKABT301", "AKABT111", "AKAD102", "AKG25", "AKPACK74", "ABTP044",
+                "ABTPF611", "ABT1001", "RC001"):
+        assert taxonomy.normalize_code("ak-interactive", sku) == sku, sku
+    for sku in ("AK 3G RANGE AFV", "AK 3G RANGE FIG", "AK 3G RANGE AIR", "AK 3G RANGE GENERIC",
+                "RANGE AKAD"):
+        assert taxonomy.normalize_code("ak-interactive", sku) is None, sku
