@@ -139,6 +139,54 @@ rejectEans:
   # barcode is absorbed as "a retired version of this Warlord product" and stamped `confirmed`.
   # The test never looks at the GS1 prefix, which is the signal that would have caught it.
   'ret-tistaminis:bolt-action-italian-paracadutisti-weapons-team': ['5011921171835']
+  # --- A BACKFILL ITS OWN NAMED SOURCE NO LONGER AGREES WITH (17 rows, 2026-08-26) --------------
+  #
+  # `legacy-catalog` did not observe most of its barcodes: 5,281 of its rows carry a
+  # `hints.eanSource` naming the SHOP the value was backfilled from, and for 3,001 of those the
+  # shop still says the same thing today. The 17 below are rows where it does not -- and where
+  # GW's own trade sheet independently says the value belongs to a DIFFERENT code of GW's, while
+  # giving this row's code a different barcode. Both signals had to agree for an entry to be here;
+  # the intersection is what makes it a mis-filing rather than a repackaging (a repackaging shows
+  # up as the SAME code gaining a new barcode, not as a barcode that is another code's primary).
+  #
+  # WHAT IT COST. The (manufacturer, ean) union in resolve/join.py fuses the two codes, so eight
+  # real GW products had no record of their own -- 99120108083, 99120201066, 99120201114,
+  # 99120205057, 99120207131, 99120209116, 99120299063, 99120599047 -- and three of the fusions
+  # additionally re-homed a curated row onto the wrong side of a declared supersession, which is
+  # how `games-workshop/99120209100` came to publish as "Boingrot Bounderz" when no GW source
+  # calls that code anything but GLOOMSPITE GITZ SQUIG HOPPERS.
+  #
+  # NOTHING IS DROPPED. Every rejected value is GW's own primary for GW's own other code, so it
+  # publishes there instead of here -- `report --ean-guard` reports 0 lost. Re-derive the whole
+  # set by joining `legacy-catalog`'s `hints.eanSource` against that shop's current evidence and
+  # intersecting with the manufacturer's own (code -> ean) map.
+  # 5011921133901 is 99120299063's per GW's trade sheet; GW gives 99120299088 5011921177806, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/chaos-gargant': ['5011921133901']
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/mancrusher-gargant': ['5011921133901']
+  'legacy-catalog:games-workshop/age-of-sigmar/race/aleguzzler-gargant': ['5011921133901']
+  # 5011921079964 is 99120201066's per GW's trade sheet; GW gives 99120201215 5011921252923, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/goreblade-warband': ['5011921079964']
+  # 5011921139521 is 99120201114's per GW's trade sheet; GW gives 99120201253 5011921261017, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/jade-obelisk': ['5011921139521']
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/jade-obelisk-2': ['5011921139521']
+  # 5011921204281 is 99070207021's per GW's trade sheet; GW gives 99120207208 5011921254668, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/mortisan-boneshaper': ['5011921204281']
+  # 5011921170241 is 99120209100's per GW's trade sheet; GW gives 99120209152 5011921256891, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/boingrot-bounderz': ['5011921170241']
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/squig-hoppers': ['5011921170241']
+  # 5011921201495 is 99120209116's per GW's trade sheet; GW gives 99120209158 5011921261420, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/monsta-killaz': ['5011921201495']
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/monsta-killaz-2': ['5011921201495']
+  # 5011921201471 is 99120205057's per GW's trade sheet; GW gives 99120205083 5011921261437, and so does goblingaming today.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/vulkyn-flameseekers': ['5011921201471']
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/vulkyn-flameseekers-2': ['5011921201471']
+  # 5011921182121 is 99120207131's per GW's trade sheet; GW gives 99120207248 5011921261444, and so does goblingaming today.
+  'legacy-catalog:games-workshop/other-games/grand-alliance-death/askurgan-trueblades': ['5011921182121']
+  'legacy-catalog:games-workshop/other-games/grand-alliance-death/askurgan-trueblades-2': ['5011921182121']
+  # 5011921176939 is 99120599047's per GW's trade sheet; GW gives 99120599051 5011921176953, and so does goblingaming today.
+  'legacy-catalog:games-workshop/other-games/necromunda/thatos-pattern-platforms-walkways': ['5011921176939']
+  # 5011921180998 is 99120108083's per GW's trade sheet; GW gives 99120108113 5011921236336, and so does goblingaming today.
+  'legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/rogue-trader-entourage-and-voidsmen-at-arms': ['5011921180998']
   # TWELVE MDF TERRAIN PIECES WERE WEARING TWELVE TUBS OF BASING MATERIAL'S BARCODES, and the
   # (manufacturer, ean) union in resolve/join.py fused each pair into one record: `warlord-games/
   # 849110025` currently publishes as "Battlefields & Basing: Desert Sand (180ml)" with the WW2

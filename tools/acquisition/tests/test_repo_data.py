@@ -1363,3 +1363,142 @@ def test_a_setref_correction_in_a_sources_zero_padded_vocabulary_still_resolves(
         "in the second case every reaper correction a maintainer writes in the source's own "
         "vocabulary now silently fails"
     )
+
+
+def _canonical(raw: object) -> str | None:
+    from warhub_acquisition.ean import canonical_ean
+
+    return canonical_ean(raw if isinstance(raw, str) else None)
+
+
+def _observations(paths: DataPaths, source_id: str) -> list[dict]:
+    path = paths.evidence_products / source_id / "observations.jsonl"
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+
+def test_no_backfilled_barcode_survives_that_its_own_source_and_the_maker_both_contradict() -> None:
+    """THE TRIPWIRE FOR THE NEXT MIS-FILED BACKFILL, over the committed evidence.
+
+    `legacy-catalog` did not observe most of its barcodes: 5,281 of its rows carry a
+    `hints.eanSource` naming the shop the value came from. When that shop LATER states a different
+    barcode for the same product code, the backfill is either stale or was never that product's --
+    and when GW's own trade sheet independently says the value belongs to a DIFFERENT code of its
+    own while giving this code a different barcode, it is the second. That combination fuses two
+    real products into one record through `resolve/join.py`'s (manufacturer, ean) union, and the
+    losing code stops existing; it cost eight GW products their records before 2026-08-26.
+
+    Neither signal alone is enough and the test deliberately requires both. A shop that merely
+    re-stocked with a newer box shows the SAME code gaining a new barcode, which is a repackaging
+    and must stay; only a value the maker assigns to another of its own codes is a mis-filing.
+
+    Entries in `matches.yaml`'s `rejectEans` are the adjudicated ones and are excluded, so this
+    fails only on something new.
+    """
+    paths = _require_repo_data()
+    if not paths.evidence_products.exists():
+        pytest.skip("no evidence in this checkout")
+    taxonomy = Taxonomy.load(paths.taxonomy)
+    descriptors = load_descriptors(paths.sources)
+    rejected = {
+        key: {_canonical(e) for e in eans}
+        for key, eans in Matches.model_validate(read_yaml(paths.matches)).rejectEans.items()
+    }
+
+    def coded_eans(source_id: str) -> dict[tuple[str, str], set[str]]:
+        index: dict[tuple[str, str], set[str]] = {}
+        for observation in _observations(paths, source_id):
+            code = taxonomy.normalize_code(observation.get("manufacturer") or "", observation.get("sku"))
+            ean = _canonical(observation.get("ean"))
+            if code and ean:
+                index.setdefault((observation["manufacturer"], code), set()).add(ean)
+        return index
+
+    # `eanSource` records the host WITHOUT a `www.` prefix that the descriptor's baseUrl may carry
+    # ("shopify:goblingaming.co.uk" against "https://www.goblingaming.co.uk"), so both sides are
+    # normalized. Getting this wrong makes the whole test pass vacuously -- see the paired
+    # `..._is_not_vacuous` test below, which is what stops that happening again.
+    def _host(url: str) -> str:
+        return url.split("//", 1)[-1].rstrip("/").removeprefix("www.")
+
+    shops = {
+        f"shopify:{_host(descriptor.baseUrl)}": source_id
+        for source_id, descriptor in descriptors.items()
+        if descriptor.baseUrl and descriptor.kind == "retailer"
+    }
+    shop_codes = {source_id: coded_eans(source_id) for source_id in set(shops.values())}
+    maker_code_eans: dict[tuple[str, str], set[str]] = {}
+    maker_ean_codes: dict[tuple[str, str], set[str]] = {}
+    for source_id, descriptor in descriptors.items():
+        if descriptor.kind != "manufacturer":
+            continue
+        for (manufacturer, code), eans in coded_eans(source_id).items():
+            maker_code_eans.setdefault((manufacturer, code), set()).update(eans)
+            for ean in eans:
+                maker_ean_codes.setdefault((manufacturer, ean), set()).add(code)
+
+    offenders = []
+    for observation in _observations(paths, "legacy-catalog"):
+        source = (observation.get("hints") or {}).get("eanSource")
+        ean = _canonical(observation.get("ean"))
+        code = taxonomy.normalize_code(observation.get("manufacturer") or "", observation.get("sku"))
+        if not (source and ean and code) or ean in rejected.get(observation["key"], ()):
+            continue
+        shop = shops.get(f"shopify:{_host(source.split(':', 1)[-1])}" if ":" in source else source)
+        live = shop_codes.get(shop, {}).get((observation["manufacturer"], code)) if shop else None
+        if not live or ean in live:
+            continue
+        owners = maker_ean_codes.get((observation["manufacturer"], ean))
+        mine = maker_code_eans.get((observation["manufacturer"], code))
+        if owners and code not in owners and mine and ean not in mine:
+            offenders.append(f"{observation['key']}: {code} carries {ean}, which {source} now "
+                             f"gives to {sorted(mine)} and the maker gives to {sorted(owners)}")
+    assert not offenders, (
+        "legacy barcode contradicted by BOTH its own named shop and the manufacturer -- it fuses "
+        "two products into one record. Adjudicate in matches.yaml `rejectEans`:\n  "
+        + "\n  ".join(sorted(offenders))
+    )
+
+
+def test_the_backfill_tripwire_is_not_vacuous() -> None:
+    """The test above passed for the wrong reason on its first draft.
+
+    Its shop lookup keyed `eanSource` ("shopify:goblingaming.co.uk") against the descriptor's
+    `baseUrl` host ("www.goblingaming.co.uk"), so nothing ever matched and it asserted over an
+    empty set. A test whose only observable behaviour is "passes" cannot tell you which of those it
+    is doing, so this pins that the machinery still reaches real rows: `legacy-catalog` must have
+    barcodes whose named shop is a source this repo tracks, and adjudicated `rejectEans` entries
+    must be among them.
+    """
+    paths = _require_repo_data()
+    if not paths.evidence_products.exists():
+        pytest.skip("no evidence in this checkout")
+    descriptors = load_descriptors(paths.sources)
+    hosts = {
+        f"shopify:{d.baseUrl.split('//', 1)[-1].rstrip('/').removeprefix('www.')}"
+        for d in descriptors.values()
+        if d.baseUrl and d.kind == "retailer"
+    }
+    rows = _observations(paths, "legacy-catalog")
+    matched = [
+        o for o in rows
+        if (s := (o.get("hints") or {}).get("eanSource"))
+        and f"shopify:{s.split(':', 1)[-1].removeprefix('www.')}" in hosts
+    ]
+    assert len(matched) > 1000, (
+        f"only {len(matched)} legacy rows name a tracked shop as their barcode's source; the "
+        "eanSource-to-descriptor host mapping is broken and the tripwire above proves nothing"
+    )
+    # Not every adjudicated row is visible here -- the MDF terrain block names flipsidegaming.com,
+    # which this repo does not harvest, so the tripwire cannot check those and they were settled on
+    # the manufacturer signal alone. What must hold is that the ones it CAN see, it does see.
+    rejected = set(Matches.model_validate(read_yaml(paths.matches)).rejectEans)
+    by_key = {o["key"]: o for o in _observations(paths, "legacy-catalog")}
+    visible = {
+        key for key in rejected
+        if (o := by_key.get(key))
+        and (s := (o.get("hints") or {}).get("eanSource"))
+        and f"shopify:{s.split(':', 1)[-1].removeprefix('www.')}" in hosts
+    }
+    assert visible, "no adjudicated rejectEans row is reachable by the tripwire's own lookup"
+    assert visible <= {o["key"] for o in matched}, sorted(visible - {o["key"] for o in matched})
