@@ -64,8 +64,10 @@ def join_observations(
     taxonomy: Taxonomy,
     kinds: dict[str, str],
     matches: Matches,
+    sku_is_listing_id: dict[str, bool] | None = None,
 ) -> JoinResult:
     result = JoinResult()
+    sku_is_listing_id = sku_is_listing_id or {}
     ordered = sorted(observations, key=lambda o: _priority(o, kinds))
 
     # barcode-db observations must never MINT an entity -- they exist only to corroborate an
@@ -257,6 +259,57 @@ def join_observations(
                     ).update({anchor, observation.key})
             else:
                 ean_conflicts.add(ean)
+
+    # --- per-source listing identity: one store article number is one store listing -------------
+    # For a source that declares `skuIsListingId`, two of ITS OWN observations carrying the same
+    # non-empty `sku` are the same listing re-keyed, and are unioned as such. This runs AFTER the
+    # code/ean unions above so it attaches an anchorless member to whatever its twin already
+    # anchored on, rather than founding a group of its own.
+    #
+    # WHY A SOURCE NEEDS THIS. A source's observation key is a function of its strategy -- a
+    # sitemap path under `sitemap-structured-data`, a handle under `shopify` -- so changing a
+    # source's strategy re-keys every listing it has. `EvidenceStore.upsert` is keyed per
+    # observation and a `full_sweep=False` source never prunes, so both generations stay in the
+    # ledger and the store is represented twice. The store's own article number is the one
+    # identity that survives the change.
+    #
+    # THE GUARD IS THE POINT, and it is why this is opt-in per source rather than a global rule.
+    # A group whose members assert MORE THAN ONE distinct barcode is not one listing -- it is a
+    # store reusing an article number, and unioning it would fabricate a product. Such a group is
+    # reported and left alone. Measured 2026-08-26 over all 31 evidence sources: 4,323 groups of
+    # >= 2 observations share a sku, and exactly 3 disagree on the barcode (2 `arc-tistaminis`,
+    # 1 `arc-wargameportal`) -- none of which has an anchorless member, so none of them is a group
+    # this pass would otherwise change. Nothing anywhere disagrees on the normalized product code
+    # or on the manufacturer.
+    sku_groups: dict[tuple[str, str], list[Observation]] = {}
+    for observation in attributed:
+        if not observation.sku or not sku_is_listing_id.get(observation.source_id):
+            continue
+        sku_groups.setdefault((observation.source_id, observation.sku), []).append(observation)
+    for (source_id, sku), members in sorted(sku_groups.items()):
+        if len(members) < 2:
+            continue
+        distinct_eans = {eans[m.key] for m in members} - {None}
+        if len(distinct_eans) > 1:
+            result.ambiguous.append(
+                {
+                    "type": "sku-group-ean-conflict",
+                    "source": source_id,
+                    "sku": sku,
+                    "keys": sorted(m.key for m in members),
+                    "eans": sorted(distinct_eans),
+                }
+            )
+            continue
+        anchor = min(members, key=lambda m: _priority(m, kinds)).key
+        for member in members:
+            pair = barred(anchor, member.key, member.manufacturer)
+            if pair is None:
+                union(anchor, member.key)
+            else:
+                blocked_bridges.setdefault((member.manufacturer, pair[0], pair[1]), set()).update(
+                    {anchor, member.key}
+                )
 
     for (manufacturer, retired_code, surviving_code), keys in sorted(blocked_bridges.items()):
         result.ambiguous.append(
