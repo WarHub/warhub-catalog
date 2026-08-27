@@ -1,14 +1,14 @@
 summary:
-  products: 29150
-  undecided: 15411
+  products: 29195
+  undecided: 15431
   byBasis:
-    default: 7059
-    guessed: 8352
+    default: 7068
+    guessed: 8363
     lexicon: 2418
-    mapped: 9319
+    mapped: 9344
     paint-barcode: 21
     stated: 1981
-  decidedThisRun: 11758
+  decidedThisRun: 11783
 conflicts:
   - entity: atomic-mass-games/star-wars-legion-legion-attack-dice-pack
     type: category-disagreement
@@ -150,7 +150,7 @@ conflicts:
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
   - entity: warlord-games/452011205
     type: category-disagreement
-    detail: 'retailer: ret-goblingaming=book; ret-goblingaming=miniatures; ret-goblingaming=miniatures; ret-goblingaming=miniatures; ret-goblingaming=miniatures'
+    detail: 'retailer: ret-goblingaming=book; ret-goblingaming=miniatures'
   - entity: warlord-games/482010002
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
@@ -158,9 +158,6 @@ conflicts:
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
   - entity: wyrd-games/WYR40004
-    type: category-disagreement
-    detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'
-  - entity: wyrd-games/WYR40007
     type: category-disagreement
     detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'
 deadClauses: []
@@ -176,10 +173,10 @@ unmapped:
       wouldDecide: 151
     - value: hierarchy.lvl1=Other Games > Necromunda
       wouldDecide: 88
+    - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
+      wouldDecide: 83
     - value: hierarchy.lvl1=Middle-Earth > Unit Type
       wouldDecide: 82
-    - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
-      wouldDecide: 76
     - value: hierarchy.lvl1=The Horus Heresy > Vehicles
       wouldDecide: 73
     - value: hierarchy.lvl1=The Horus Heresy > Accessories
@@ -188,24 +185,24 @@ unmapped:
       wouldDecide: 64
     - value: hierarchy.lvl1=The Old World > Armies of the Old World
       wouldDecide: 47
+    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of the Imperium
+      wouldDecide: 42
     - value: hierarchy.lvl1=The Horus Heresy > Mechanicum
       wouldDecide: 42
-    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of the Imperium
-      wouldDecide: 41
     - value: hierarchy.lvl1=The Old World > Unit Type
       wouldDecide: 40
     - value: hierarchy.lvl1=Warhammer 40,000 > Armies of Chaos
       wouldDecide: 37
     - value: hierarchy.lvl1=Age of Sigmar > Unit Type
-      wouldDecide: 33
+      wouldDecide: 34
     - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Good
       wouldDecide: 32
     - value: hierarchy.lvl1=Warhammer 40,000 > Xenos Armies
-      wouldDecide: 25
+      wouldDecide: 27
     - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Evil
       wouldDecide: 20
     - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Chaos
-      wouldDecide: 18
+      wouldDecide: 19
     - value: hierarchy.lvl1=Middle-Earth > The Hobbit™ - Good
       wouldDecide: 17
     - value: hierarchy.lvl1=The Horus Heresy > Forces of The Emperor
@@ -213,11 +210,13 @@ unmapped:
     - value: hierarchy.lvl1=Middle-Earth > The Hobbit™ - Evil
       wouldDecide: 12
     - value: hierarchy.lvl1=Other Games > Warcry
-      wouldDecide: 10
+      wouldDecide: 11
     - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Order
       wouldDecide: 8
     - value: hierarchy.lvl1=The Horus Heresy > Legiones Astartes
       wouldDecide: 8
+    - value: hierarchy.lvl1=Warhammer 40,000 > Space Marines
+      wouldDecide: 7
     - value: hierarchy.lvl1=Other Games > Legions Imperialis
       wouldDecide: 6
     - value: hierarchy.lvl1=The Horus Heresy > Armies of the Warmaster
@@ -226,8 +225,6 @@ unmapped:
       wouldDecide: 4
     - value: hierarchy.lvl1=Other Games > Adeptus Titanicus
       wouldDecide: 4
-    - value: hierarchy.lvl1=Warhammer 40,000 > Space Marines
-      wouldDecide: 3
     - value: hierarchy.lvl1=Warhammer 40,000 > Terrain
       wouldDecide: 3
     - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Destruction
@@ -248,7 +245,7 @@ unmapped:
     - value: tradeCategory=E:B200a
       wouldDecide: 146
     - value: tradeCategory=E:B200b
-      wouldDecide: 95
+      wouldDecide: 96
     - value: tradeCategory=BS:F
       wouldDecide: 75
     - value: tradeCategory=E:BL
@@ -283,6 +280,8 @@ unmapped:
       wouldDecide: 3
     - value: tradeCategory=Chaos Daemons - Khorne
       wouldDecide: 3
+    - value: tradeCategory=40K - Imperium - Adepta Sororitas
+      wouldDecide: 3
     - value: tradeCategory=AOS - Death - Soulblight Gravelords
       wouldDecide: 3
     - value: tradeCategory=E:P210
@@ -292,8 +291,6 @@ unmapped:
     - value: tradeCategory=AOS - Order - Stormcast Eternals
       wouldDecide: 2
     - value: tradeCategory=40K - Imperium - Astra Militarum
-      wouldDecide: 2
-    - value: tradeCategory=40K - Imperium - Adepta Sororitas
       wouldDecide: 2
     - value: tradeCategory=40K - Xenos - T'au Empire
       wouldDecide: 2
@@ -536,27 +533,27 @@ unmapped:
       wouldDecide: 8
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 2548
+      wouldDecide: 2555
     - value: tags=us
-      wouldDecide: 2544
+      wouldDecide: 2551
     - value: vendor=Warlord Games
-      wouldDecide: 2544
+      wouldDecide: 2551
     - value: tags=over-10
-      wouldDecide: 1954
+      wouldDecide: 1956
     - value: tags=metal
-      wouldDecide: 1660
+      wouldDecide: 1663
     - value: tags=warlord-games
-      wouldDecide: 934
+      wouldDecide: 935
     - value: tags=bolt-action
-      wouldDecide: 918
+      wouldDecide: 923
     - value: productType=Bolt Action
-      wouldDecide: 873
+      wouldDecide: 878
     - value: tags=blister
-      wouldDecide: 629
+      wouldDecide: 634
     - value: tags=under-10
-      wouldDecide: 561
+      wouldDecide: 565
     - value: tags=infantry
-      wouldDecide: 508
+      wouldDecide: 510
     - value: tags=direct
       wouldDecide: 484
     - value: tags=resin
@@ -566,39 +563,39 @@ unmapped:
     - value: tags=british
       wouldDecide: 381
     - value: tags=black-powder
-      wouldDecide: 378
+      wouldDecide: 379
     - value: tags=platoon-rifle
-      wouldDecide: 373
+      wouldDecide: 376
     - value: tags=deal
       wouldDecide: 359
     - value: productType=Black Powder
-      wouldDecide: 341
+      wouldDecide: 342
     - value: tags=german
       wouldDecide: 310
     - value: tags=unit-all-vehicles
       wouldDecide: 293
     - value: tags=warlord-resin
-      wouldDecide: 280
+      wouldDecide: 285
     - value: tags=box-set
-      wouldDecide: 269
-    - value: tags=hail-caesar
-      wouldDecide: 261
+      wouldDecide: 270
     - value: tags=trade-web
-      wouldDecide: 257
+      wouldDecide: 263
+    - value: tags=hail-caesar
+      wouldDecide: 262
     - value: tags=german-army
       wouldDecide: 255
     - value: tags=pike-shotte
       wouldDecide: 252
     - value: productType=Hail Caesar
-      wouldDecide: 248
+      wouldDecide: 249
     - value: tags=platoon-armoured
       wouldDecide: 247
     - value: tags=platoon-artillery
-      wouldDecide: 233
+      wouldDecide: 234
     - value: productType=Pike & Shotte
       wouldDecide: 232
     - value: tags=support-teams
-      wouldDecide: 224
+      wouldDecide: 229
     - value: tags=platoon-heavy-weapon
       wouldDecide: 223
     - value: tags=cavalry
@@ -612,9 +609,9 @@ unmapped:
     - value: tags=Vessel
       wouldDecide: 193
     - value: tags=napoleonic-wars-1789-1815
-      wouldDecide: 191
+      wouldDecide: 192
     - value: tags=include
-      wouldDecide: 184
+      wouldDecide: 185
   mfr-warmachine:
     - value: tags=digitalproduct
       wouldDecide: 24
@@ -811,17 +808,17 @@ unmapped:
     - value: vendor=Vallejo
       wouldDecide: 695
     - value: tags=Games Workshop
-      wouldDecide: 544
+      wouldDecide: 545
     - value: vendor=Games Workshop
-      wouldDecide: 544
+      wouldDecide: 545
     - value: tags=The Army Painter
       wouldDecide: 385
     - value: vendor=The Army Painter
       wouldDecide: 385
     - value: tags=Warlord Games
-      wouldDecide: 274
+      wouldDecide: 280
     - value: vendor=Warlord Games
-      wouldDecide: 274
+      wouldDecide: 280
     - value: tags=Vallejo Model Air
       wouldDecide: 235
     - value: tags=Warpaints Fanatic
@@ -884,13 +881,13 @@ unmapped:
       wouldDecide: 46
   ret-tistaminis:
     - value: tags=Bolt Action
-      wouldDecide: 192
+      wouldDecide: 197
     - value: vendor=Warlord-BLISTER
       wouldDecide: 186
     - value: vendor=Warlord Games
-      wouldDecide: 150
+      wouldDecide: 156
     - value: tags=Hail Caesar
-      wouldDecide: 148
+      wouldDecide: 149
     - value: vendor=Warlord-WEB
       wouldDecide: 118
     - value: vendor=Reaper Miniatures
@@ -920,7 +917,7 @@ unmapped:
     - value: tags=Kings of War
       wouldDecide: 43
     - value: tags=Enemies of Rome
-      wouldDecide: 34
+      wouldDecide: 35
     - value: tags=German
       wouldDecide: 33
     - value: tags=British
@@ -947,6 +944,8 @@ unmapped:
       wouldDecide: 19
     - value: tags=Americans
       wouldDecide: 19
+    - value: tags=Soviet
+      wouldDecide: 19
     - value: vendor=GW-WEB
       wouldDecide: 18
     - value: tags=Green Stuff World Other
@@ -960,8 +959,6 @@ unmapped:
     - value: productType=Miniatures - Plastic
       wouldDecide: 14
     - value: tags=Orks
-      wouldDecide: 14
-    - value: tags=warhammer preorder
       wouldDecide: 14
   seed-curated:
     - value: productType=single_kit

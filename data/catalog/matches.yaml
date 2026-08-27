@@ -119,6 +119,202 @@ reassignManufacturer:
   'ret-tistaminis:ww2-british-paint-set': army-painter
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  #
+  # --- THE SAME DEFECT OUTSIDE `ean-mismatch` (8 rows, 2026-08-27) -----------------------------
+  # A fused entity only raises `ean-mismatch` when the members end up disagreeing about the
+  # barcode; where the wrong barcode is the only one on the record it fuses just as silently and
+  # reports nothing. `test_no_new_entity_fuses_two_products_the_maker_itself_tells_apart` finds
+  # both, and these eight were invisible until it did. Same bar as above: the maker separates the
+  # two codes cleanly, and the row's own NAME matches the maker's name for the row's code.
+  #   'Black Powder Napoleonic Wars 1789-1815 Napoleonic Portuguese Line ' is coded WGN-PO-01 (the maker agrees) but carries
+  #   5060572501348, which the maker gives to 402012009 'Puma\xa0Sd.Kfz 234/2 Armoured Car'.
+  'arc-tistaminis:/products/black-powder-napoleonic-wars-1789-1815-napoleonic-portuguese-line-infantry-new': ['5060572501348']
+  #   'Bolt Action Australian Independent Commando Section New - 40221120' is coded 402211202 (the maker agrees) but carries
+  #   5060393707387, which the maker gives to 402215001 'Australian Jungle Division infantry sect'.
+  'arc-tistaminis:/products/bolt-action-australian-independent-commando-section-new-402211202': ['5060393707387']
+  #   'Natal Native Contingent Regiment' is coded 302014602 (the maker agrees) but carries
+  #   5060393706472, which the maker gives to 302014604 'Unmarried Zulu Impi'.
+  'legacy-catalog:warlord-games/bolt-action/general/natal-native-contingent-regiment': ['5060393706472']
+  #   'Vagrantsong: Fool’s Gold – Bonus Scenario' is coded WYR11602 (the maker agrees) but carries
+  #   0812152034167, which the maker gives to WYR11604 'Vagrantsong: Hide Yourself Away (Fox Sis'.
+  'legacy-catalog:wyrd-games/malifaux/general/vagrantsong-fools-gold-bonus-scenario': ['0812152034167']
+  #   'Basotho Calvary' is coded WYR40152 (the maker agrees) but carries
+  #   0812152030220, which the maker gives to WYR40156 'The Other Side: Electrocutioners'.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/basotho-calvary': ['0812152030220']
+  #   "King's Empire Fate Deck" is coded WYR40007 (the maker agrees) but carries
+  #   0812152030091, which the maker gives to WYR40106 'The Other Side: South Wales Borderers'.
+  'legacy-catalog:wyrd-games/the-other-side/kings-empire/king-s-empire-fate-deck': ['0812152030091']
+  #   'Blades of Khorne Claws of Karanak' is coded 99120201247 (the maker agrees) but carries
+  #   5011921182114, which the maker gives to 99120201148 'WARCRY: CLAWS OF KARANAK'.
+  'ret-goblingaming:blades-of-khorne-claws-of-karanak': ['5011921182114']
+  #   'Black Powder Napoleonic French Voltigeurs Skirmishing New' is coded WGN-FR-37 (the maker agrees) but carries
+  #   5060200848272, which the maker gives to WG-D6-33 '30 Red D6 (10mm)'.
+  'ret-tistaminis:black-powder-napoleonic-french-voltigeurs-skirmishing-new': ['5060200848272']
+  # --- ONE BARCODE ON THE WRONG ROW, TWENTY TIMES OVER (35 rows, 2026-08-27) -------------------
+  #
+  # `resolve/join.py` unions by (manufacturer, ean), so a single barcode written against the wrong
+  # product code does not just publish a wrong number -- it FUSES the two products into one record
+  # and the loser stops existing. 25 `ean-mismatch` entities held more than one product code that
+  # way, 76 codes in 25 records; `warlord-games/403205802` alone held nine.
+  #
+  # HOW EACH ONE WAS DECIDED, and the first answer was wrong. The repo's standing rule is that a
+  # barcode beats a SKU for identity (`supersession-stale-code` re-homing rests on it), so the
+  # obvious reading is "the code went stale, move the row to the barcode's owner". Measured against
+  # the makers' own product NAMES, that is backwards for this population: in 35 of the 41 candidate
+  # rows the row's name matches what the maker calls the row's OWN code, and matches nothing about
+  # the barcode's owner. The rule only holds where the SKU is a lister's catalogue number going
+  # stale across a re-code; here the SKU is right and the barcode is the typo.
+  #
+  # THE TWO SHAPES, both visible in the data rather than assumed:
+  #   * one barcode stamped across MANY of a source's own rows -- `ret-tistaminis` put
+  #     5060917997539 (Italian Paracadutisti platoon commanders) on nine correctly-named,
+  #     correctly-coded Bolt Action items;
+  #   * a barcode column shifted by one -- `legacy-catalog`'s five Blood Red Skies aces each carry
+  #     the NEXT ace's barcode, every name matching its own code at similarity 1.0.
+  #
+  # NOTHING IS DROPPED: every rejected value is the maker's own primary for the maker's own other
+  # code, so it publishes there instead of here. `report --ean-guard` reports 0 lost.
+  #
+  # SIX CANDIDATE ROWS ARE DELIBERATELY NOT HERE -- the GW re-code pairs (Salamanders / Imperial
+  # Fists Primaris Upgrades, Ministorum Priest with Vindictor, Master Lazarus) and Egyptian
+  # Archers, where BOTH codes carry the same product name, so the name cannot discriminate and the
+  # row is the ordinary "retailer lists the old code with the current barcode" shape. Those want a
+  # verified supersession, not a rejection; see the `ean-mismatch, DELIBERATELY LEFT` note.
+  #
+  # games-workshop/99120101190: 1 row(s) from seed-curated.
+  #   'Intercessors' is coded 99120101190 (the maker agrees) but carries
+  #   5011921142439, which the maker gives to 99120101314 'SPACE MARINES ASSAULT SQUAD'.
+  'seed-curated:games-workshop/intercessors': ['5011921142439']
+  #
+  # games-workshop/99120101329: 1 row(s) from ret-goblingaming.
+  #   'Ultramarines Chief Librarian Tigurius' is coded 99120101254 (the maker agrees) but carries
+  #   5011921142583, which the maker gives to 99120101329 'Chief Librarian Tigurius'.
+  'ret-goblingaming:ultramarines-chief-librarian-tigurius': ['5011921142583']
+  #
+  # games-workshop/99120117019: 1 row(s) from ret-goblingaming.
+  #   'Genestealer Cults Acolyte Hybrids' is coded 99120117003 (the maker agrees) but carries
+  #   5011921171934, which the maker gives to 99120117019 'Acolyte Hybrids'.
+  'ret-goblingaming:genestealer-cults-acolyte-hybrids': ['5011921171934']
+  #
+  # steamforged-games/SFEE-LL005: 1 row(s) from legacy-catalog.
+  #   'Epic Encounters: Swamp of the Hydra' is coded SFEE-005 (the maker agrees) but carries
+  #   5060453697184, which the maker gives to SFEE-LL005 'Epic Encounters: Local Legends - Bat Demon ('.
+  'legacy-catalog:steamforged-games/epic-encounters/general/epic-encounters-swamp-of-the-hydra': ['5060453697184']
+  #
+  # warlord-games/112010004: 1 row(s) from ret-tistaminis.
+  #   'Hail Caesar Arthurian Knights' is coded 103013220 (the maker agrees) but carries
+  #   5060917993111, which the maker gives to 112010004 'Hail Caesar Epic Battles: Republican Roman d'.
+  'ret-tistaminis:hail-caesar-arthurian-knights': ['5060917993111']
+  #
+  # warlord-games/302011002: 3 row(s) from arc-tistaminis, ret-goblingaming.
+  #   'Black Powder Napoleonic Wars 1789-1815  British Union Brigade Cava' is coded 302011002 (the maker agrees) but carries
+  #   5060393707929, which the maker gives to 302012501 'Prussian Landwehr regiment 1813-1815'.
+  'arc-tistaminis:/products/black-powder-napoleonic-wars-1789-1815-british-union-brigade-cavalry-new': ['5060393707929']
+  #   'Bolt Action German\tSd.Kfz 251/10 ausf D (3.7mm Pak) Half Track New' is coded 402012013 (the maker agrees) but carries
+  #   5060393706267, which the maker gives to 302011002 'British Union Brigade'.
+  'arc-tistaminis:/products/bolt-action-german-sd-kfz-251-10-ausf-d-3-7mm-pak-half-track-new': ['5060393706267']
+  #   'Sd.Kfz 251/10 ausf D Half Track - German Army' is coded 402012013 (the maker agrees) but carries
+  #   5060393706267, which the maker gives to 302011002 'British Union Brigade'.
+  'ret-goblingaming:sdkfz-251-10-ausf-d-37mm-pak-half-track': ['5060393706267']
+  #
+  # warlord-games/403205802: 7 row(s) from ret-tistaminis.
+  #   'Bolt Action Cross of Iron - German Grenadiers starter army' is coded 402012011 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-cross-of-iron-german-grenadiers-starter-army': ['5060917997539']
+  #   'Bolt Action German Pak 40 anti-tank gun (plastic)' is coded 402012057 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-german-pak-40-anti-tank-gun-plastic': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade anti-tank rifle team' is coded 403214011 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-anti-tank-rifle-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade forward observer team' is coded 403214010 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-forward-observer-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade medium mortar team' is coded 403214014 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-medium-mortar-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade ‘Tank Hunters’ anti-tank team' is coded 403214012 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-tank-hunters-anti-tank-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade weapon teams' is coded 402414007 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-weapon-teams': ['5060917997539']
+  #
+  # warlord-games/452010405: 1 row(s) from ret-tistaminis.
+  #   'Konflikt 47 Linebacker Jump Walker' is coded 452010403 (the maker agrees) but carries
+  #   5060917996259, which the maker gives to 452010405 "Konflikt '47 United States Starter Army".
+  'ret-tistaminis:konflikt-47-linebacker-jump-walker': ['5060917996259']
+  #
+  # warlord-games/452011205: 3 row(s) from ret-goblingaming.
+  #   "Empire of Japan Ghost Warriors Infantry Squad - Konflikt '47" is coded 452011205 (the maker agrees) but carries
+  #   5060917999175, which the maker gives to 452011208 "Konflikt '47 Ghost Infiltration Platoon".
+  'ret-goblingaming:empire-of-japan-ghost-warriors-infantry-squad-konflikt-47': ['5060917999175']
+  #   "Ghost Infiltrator Platoon - Konflikt '47" is coded 452011208 (the maker agrees) but carries
+  #   5060917998956, which the maker gives to 452011206 "Konflikt '47 Kimura Tadaaki, Scourge of the ".
+  'ret-goblingaming:ghost-infiltrator-platoon-konflikt-47': ['5060917998956']
+  #   "Kimura Tadaaki, Scourge of the Spirit Realm - Konflikt '47" is coded 452011206 (the maker agrees) but carries
+  #   5060917998925, which the maker gives to 452010406 "Konflikt '47 'Slammer' Samuels, The First Pa".
+  'ret-goblingaming:tadaaki-kimura-scourge-of-the-spirit-realm-konflikt-47': ['5060917998925']
+  #
+  # warlord-games/772012008: 5 row(s) from legacy-catalog.
+  #   "'Pick' Pickard (Mosquito)" is coded 772012008 (the maker agrees) but carries
+  #   5060572501560, which the maker gives to 772012007 'Witold Urbanowicz (Hurricane)'.
+  'legacy-catalog:warlord-games/blood-red-skies/british/pick-pickard-mosquito': ['5060572501560']
+  #   'Douglas Bader (Hurricane)' is coded 772012005 (the maker agrees) but carries
+  #   5060572501553, which the maker gives to 772212006 'Johnny Johnson (Spitfire)'.
+  'legacy-catalog:warlord-games/blood-red-skies/general/douglas-bader-hurricane': ['5060572501553']
+  #   "Fw 190 Ace: 'Pips' Priller" is coded 772012016 (the maker agrees) but carries
+  #   5060572501546, which the maker gives to 772012005 'Douglas Bader (Hurricane)'.
+  'legacy-catalog:warlord-games/blood-red-skies/general/fw-190-ace-pips-priller': ['5060572501546']
+  #   'Johnny Johnson (Spitfire)' is coded 772212006 (the maker agrees) but carries
+  #   5060572501577, which the maker gives to 772012008 "'Pick' Pickard (Mosquito)".
+  'legacy-catalog:warlord-games/blood-red-skies/general/johnny-johnson-spitfire': ['5060572501577']
+  #   'Witold Urbanowicz (Hurricane)' is coded 772012007 (the maker agrees) but carries
+  #   5060572502345, which the maker gives to 772012016 "Fw 190 Ace: 'Pips' Priller".
+  'legacy-catalog:warlord-games/blood-red-skies/general/witold-urbanowicz-hurricane': ['5060572502345']
+  #
+  # warlord-games/WGB-PI-23: 1 row(s) from ret-tistaminis.
+  #   'Bolt Action Polish Army Wz.30 MMG Team New' is coded WGB-PI-24 (the maker agrees) but carries
+  #   5060200849590, which the maker gives to WGB-PI-23 'Polish Army cavalrymen'.
+  'ret-tistaminis:bolt-action-polish-army-wz-30-mmg-team': ['5060200849590']
+  #
+  # wyrd-games/WYR40157: 1 row(s) from legacy-catalog.
+  #   'Steel Legion' is coded WYR40153 (the maker agrees) but carries
+  #   0812152030237, which the maker gives to WYR40157 'The Other Side: Mechanized Infantry'.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/steel-legion': ['0812152030237']
+  #
+  # wyrd-games/WYR40162: 2 row(s) from legacy-catalog.
+  #   'Marauder' is coded WYR40162 (the maker agrees) but carries
+  #   0812152030305, which the maker gives to WYR40202 'The Other Side: Karkinoi'.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/marauder': ['0812152030305']
+  #   'Karkinoi' is coded WYR40202 (the maker agrees) but carries
+  #   0812152030404, which the maker gives to WYR40212 'The Other Side: Striped Skulkers'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/karkinoi': ['0812152030404']
+  #
+  # wyrd-games/WYR40207: 6 row(s) from legacy-catalog.
+  #   'Horomatangi' is coded WYR40207 (the maker agrees) but carries
+  #   0812152030435, which the maker gives to WYR40253 'The Other Side: The Warped'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/horomatangi': ['0812152030435']
+  #   'Raving Madman' is coded WYR40259 (the maker agrees) but carries
+  #   0812152030534, which the maker gives to WYR40262 'The Other Side: Immolated Rhino'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/raving-madman': ['0812152030534']
+  #   'Stalking Portals' is coded WYR40252 (the maker agrees) but carries
+  #   0812152030534, which the maker gives to WYR40262 'The Other Side: Immolated Rhino'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/stalking-portals': ['0812152030534']
+  #   'The Warped' is coded WYR40253 (the maker agrees) but carries
+  #   0812152030534, which the maker gives to WYR40262 'The Other Side: Immolated Rhino'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/the-warped': ['0812152030534']
+  #   'Armored Whelks' is coded WYR40203 (the maker agrees) but carries
+  #   0812152030411, which the maker gives to WYR40213 'The Other Side: Devouring Eel'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/armored-whelks': ['0812152030411']
+  #   'Devouring Eel' is coded WYR40213 (the maker agrees) but carries
+  #   0812152030503, which the maker gives to WYR40259 'The Other Side: Raving Madman'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/devouring-eel': ['0812152030503']
+  #
+  # wyrd-games/WYR40256: 1 row(s) from legacy-catalog.
+  #   'Egg Clutch' is coded WYR40210 (the maker agrees) but carries
+  #   0812152030473, which the maker gives to WYR40256 'The Other Side: Doomseekers'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/egg-clutch': ['0812152030473']
   # ONE STORE PUT A GAMES WORKSHOP BARCODE ON A WARLORD BOX, and the catalog published it as that
   # box's confirmed alternate barcode. `5011921171835` is GENESTEALER CULTS: BIOPHAGUS: Games
   # Workshop's own trade sheet asserts it under GW code 99070117012 (`mfr-gw-trade:99070117012`),
@@ -1102,6 +1298,59 @@ supersessions:
   # live state.
   games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
+  #
+  # --- WARCRY WARBANDS SOLD UNDER TWO GW CODES (3 rows, 2026-08-27) ---------------------------
+  # Found by the same test. Here the NAME does discriminate and it points the other way: GW sells
+  # these warbands under both an army code and a WARCRY code, the rows say Warcry, and their
+  # barcodes are the Warcry code's. Placed by barcode, which the name independently agrees with.
+  #   'Rotmire Creed' listed as 99120201252 'MAGGOTKIN OF NURGLE: ROTMIRE CREED'
+  #   but scans 5011921179039, which the maker assigns to 99120201145 'WARCRY: ROTMIRE CREED'.
+  'legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed': '99120201145'
+  #   'Rotmire Creed' listed as 99120201252 'MAGGOTKIN OF NURGLE: ROTMIRE CREED'
+  #   but scans 5011921179039, which the maker assigns to 99120201145 'WARCRY: ROTMIRE CREED'.
+  'legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed-2': '99120201145'
+  #   'Warcry: Rotmire Creed' listed as 99120201252 'MAGGOTKIN OF NURGLE: ROTMIRE CREED'
+  #   but scans 5011921179039, which the maker assigns to 99120201145 'WARCRY: ROTMIRE CREED'.
+  'ret-goblingaming:age-of-sigmar-warcry-rotmire-creed-warband-games-workshop': '99120201145'
+  # --- THE OTHER HALF OF THE FUSED ENTITIES (6 rows, 2026-08-27) --------------------------------
+  #
+  # Same damage as the `rejectEans` block above -- two products in one record -- and the OPPOSITE
+  # answer, for a reason that is in the data rather than in a preference. There the maker's own
+  # product NAMES said the row's code was right and its barcode was a typo. In these five entities
+  # the two codes carry the SAME product name, so the name cannot discriminate at all
+  # (`Salamanders Primaris Upgrades and Transfers` sits on both 99070101051 and 99120101465;
+  # `Egyptian archers` on both WGH-CEM-06 and WGH-CEM-23). With the name silent, the repo's
+  # standing rule applies unopposed: the barcode identifies the box in hand, the SKU is the
+  # lister's catalogue number and it goes stale across a re-code -- the same rule
+  # `supersession-stale-code` re-homing already rests on.
+  #
+  # So each row is placed on the code its BARCODE belongs to, which is the code the manufacturer's
+  # own trade row assigns that barcode. The shop re-catalogued to the maker's newer number while
+  # still holding the older box.
+  #
+  # THIS ASSERTS NO LINEAGE, and that is deliberate. Four of the five look like GW re-codes and
+  # would be `supersessions` if the register said so -- it does not: neither trade row carries a
+  # `hints.supersedes` naming the other. `reassignCodes` splits the records without claiming one
+  # replaced the other, which is the smaller and checkable claim. If a later harvest brings the
+  # register rows in, these become supersession candidates with the split already correct.
+  # 'Salamanders Primaris Upgrades & Transfers'
+  #   listed as 99120101465 but scans 5011921140855, which the maker assigns to 99070101051.
+  'ret-goblingaming:salamanders-primaris-upgrades-transfers': '99070101051'
+  # 'Imperial Fists Primaris Upgrades & Transfers'
+  #   listed as 99120101479 but scans 5011921155170, which the maker assigns to 99070101075.
+  'ret-goblingaming:imperial-fists-primaris-upgrades-transfers': '99070101075'
+  # 'Adepta Sororitas Ministorum Priest With Vindictor'
+  #   listed as 99120108138 but scans 5011921183616, which the maker assigns to 99070108012.
+  'ret-goblingaming:warhammer-40k-adepta-sororitas-ministorum-priest-with-vindictor': '99070108012'
+  # 'Dark Angels Master Lazarus'
+  #   listed as 99120101484 but scans 5011921153022, which the maker assigns to 99120101362.
+  'ret-goblingaming:dark-angels-master-lazarus': '99120101362'
+  # 'Egyptian Archers'
+  #   listed as WGH-CEM-06 but scans 5060200849385, which the maker assigns to WGH-CEM-23.
+  'legacy-catalog:warlord-games/bolt-action/general/egyptian-archers-2': 'WGH-CEM-23'
+  # 'Egyptian Archers - Hail Caesar'
+  #   listed as WGH-CEM-06 but scans 5060200849385, which the maker assigns to WGH-CEM-23.
+  'ret-goblingaming:egyptian-archers': 'WGH-CEM-23'
   # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
   # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole
   # army set into the Zodgrod entity. Correct this listing to Zodgrod's real code so the army set
@@ -1142,45 +1391,46 @@ reassignCodes:
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
 
-# --- `ean-mismatch`, DELIBERATELY LEFT (2026-08-26) ---------------------------------------------
-# 35 rows in data/review/conflicts.yaml. Every losing barcode in all 35 is retained in its own
+# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27) ----------------------------------
+# 16 rows in data/review/conflicts.yaml, down from 35. Every losing barcode is retained in its own
 # record's `additionalEans` and the record is stamped `eanConfidence: conflicted`, so nothing is
 # lost and nothing is silently asserted -- `report --ean-guard` reports 0 lost against them. They
 # are a true record of sources disagreeing, which is what the type is for.
 #
-# BUT 25 OF THE 35 ARE ALSO SOMETHING WORSE, AND IT SHOULD BE ON THE RECORD RATHER THAN INFERRED
-# LATER: the entity holds MORE THAN ONE product code, i.e. two or more real products published as
-# one record with the other codes' ids gone. `warlord-games/403205802` holds nine (402012011,
-# 402012057, 402414007, 403205802, 403214010, 403214011, 403214012, 403214014, 403414002);
-# `wyrd-games/WYR40207` holds seven; `warlord-games/452011205`, `/452610003` and `/772012008` hold
-# five each; `steamforged-games/SFEE-LL005` four; `warlord-games/302011002`, `/452010405`,
-# `mantic-games/MGARM114`, `wyrd-games/WYR40162` three each; the remaining 15 hold two.
+# TEN OF THE 16 ARE NOW JUST THAT: one product, two sources, two barcodes, nothing fused. The four
+# Corvus Belli rows, two Vallejo, the AMG AT-ST, the GW paints+tools set, `warlord-games/H00133`
+# and `mantic-games/MGWD173`. They want nothing but the conflict they already have.
+#
+# SIX STILL HOLD MORE THAN ONE PRODUCT CODE -- two or more real products published as one record
+# with the other codes' ids gone. That was 25 entities and 76 codes before the `rejectEans` and
+# `reassignCodes` blocks above; these six are the residue that neither the makers' names nor the
+# makers' code-to-barcode map can settle, and each is a different reason:
+#
+#   warlord-games/452610003  (452600002, 452600003, 452610002, 452610003, 452610004)
+#   warlord-games/452600605  (402615803, 452600605)
+#     THE MANUFACTURER'S OWN STORE reuses one barcode across several of its own codes --
+#     5060917996914 sits on Rift Dice Green, Grey AND Red. There is no higher authority to appeal
+#     to: the source that would settle it is the one making the claim.
+#   mantic-games/MGARM114    (MGARM113, MGARM114, MGARM301)
+#     NO MANUFACTURER EVIDENCE AT ALL for any of the three codes -- only curated and retailer rows,
+#     which is what put them together in the first place.
+#   warlord-games/4099300010 (401013001, 4099300010)
+#   warlord-games/452011205  (451010005, 452011205)
+#   wyrd-games/WYR23729      (WYR23727, WYR23729)
+#     THE MAKER COVERS ONLY ONE SIDE. It states a barcode for one code and says nothing about the
+#     other, so "which code owns this barcode" has no answer from the party that assigns them.
 #
 # Re-derive the split with `joined_evidence()` over the resolved catalog: for each `ean-mismatch`
-# entity, collect `taxonomy.normalize_code(member.manufacturer, member.sku)` across its members and
-# count the distinct non-null values. 25 have more than one; the other 10 -- the four Corvus Belli
-# rows, two Vallejo, the AMG AT-ST, the GW paints+tools set, `warlord-games/H00133` and
-# `mantic-games/MGWD173` -- are a genuine disagreement about ONE product's barcode and want nothing
-# but the conflict they already have.
+# entity collect `taxonomy.normalize_code(member.manufacturer, member.sku)` across its members and
+# count the distinct non-null values. Six have more than one.
 #
-# WHY THEY ARE NOT FIXED HERE. Splitting a fused family needs a per-member ruling on which barcode
-# belongs to which code, and in these the sources contradict each other rather than one being
-# demonstrably wrong: in `772012008` and `452011205` two sources hold the SAME SET of barcodes
-# permuted across the codes, and in `452610003` and `452600605` it is the MANUFACTURER'S OWN store
-# that repeats one barcode across a variant family. That is the opposite of the terrain block
-# above, where a third product's independent claim settled it. Guessing here would publish a
-# barcode against the wrong box, which is the failure this whole file exists to prevent.
-#
-# SEVEN OF THE 25 ARE GW RE-CODES and look like `supersessions` candidates -- 99120117019/
-# 99120117003, 99070101051/99120101465, 99120101362/99120101484, 99070101075/99120101479,
-# 99070108012/99120108138 all share an SS Code across the pair, which is GW's own identity for a
-# product across a re-code. They are NOT declared here because GW's register does not assert the
-# lineage (neither trade row carries a `hints.supersedes` naming the other), and SS-code equality
-# alone is not the bar this repo has used: `99120101329`/`99120101254` is in the same list with
-# 55-22 against 48-100, and that pair is Chief Librarian Tigurius, whose join a previous verify
-# pass correctly killed as a metal-to-resin re-sculpt rather than a repackaging. A lineage claim
-# publishes; it needs the register or a per-item verification, and it should land as its own change
-# with that evidence rather than riding along here.
+# THE GW RE-CODE PAIRS THAT USED TO BE LISTED HERE ARE GONE -- 99070101051/99120101465,
+# 99070101075/99120101479, 99070108012/99120108138, 99120101362/99120101484 and Egyptian Archers
+# are split by `reassignCodes` above. They are still NOT declared as `supersessions`: splitting the
+# records needed only the barcode, while asserting that one replaced the other needs GW's register,
+# and the register does not say it. `99120101329`/`99120101254` is the reason that distinction is
+# kept -- that pair is Chief Librarian Tigurius, whose join a previous verify pass correctly killed
+# as a metal-to-resin re-sculpt rather than a repackaging.
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
 # 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a

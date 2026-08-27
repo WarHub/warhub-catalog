@@ -18615,8 +18615,6 @@ products:
     sku: WYR40007
     ean: '0812152030022'
     eanConfidence: confirmed
-    additionalEans:
-      - '0812152030091'
     gameSystem: the-other-side
     faction: kings-empire
     category: game-accessory
@@ -18634,9 +18632,7 @@ products:
       The Fate Deck gives players control over their Companies in the form of the Control Hand. Cards in your Control Hand can be used to replace flipped cards, ensuring that the actions you want to succeed won’t fail at a critical moment. Say farewell to all those rolled 1s!
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/kings-empire/king-s-empire-fate-deck
-      - legacy-catalog:wyrd-games/the-other-side/kings-empire/south-wales-borderers
       - mfr-wyrd-store:kings-empire-fate-deck-1
-      - mfr-wyrd-store:south-wales-borderers
       - ret-gamenerdz:/the-other-side-kings-empire-fate-deck
   - id: wyrd-games/WYR40008
     name: Abyssinia Fate Deck
@@ -19004,6 +19000,37 @@ products:
       - legacy-catalog:wyrd-games/the-other-side/kings-empire/grenadiers
       - mfr-wyrd-store:grenadiers
       - ret-gamenerdz:/the-other-side-kings-empire-grenadiers
+  - id: wyrd-games/WYR40106
+    name: South Wales Borderers
+    manufacturer: wyrd-games
+    productCode: WYR40106
+    sku: WYR40106
+    ean: '0812152030091'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: kings-empire
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 45.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/south-wales-borderers
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_SouthWalesBorderers_Front.jpg?v=1602517032
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** South Wales Borderers \[10 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/kings-empire/south-wales-borderers
+      - mfr-wyrd-store:south-wales-borderers
   - id: wyrd-games/WYR40107
     name: King's Hand
     manufacturer: wyrd-games
@@ -19310,8 +19337,6 @@ products:
     sku: WYR40152
     ean: '0812152030183'
     eanConfidence: confirmed
-    additionalEans:
-      - '0812152030220'
     gameSystem: the-other-side
     faction: abyssinia
     category: miniatures
@@ -19320,7 +19345,6 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 34.85
     priceUsd: 55.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/bosotho-cavalry
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_BasothoCavalry_Front.jpg?v=1605519250
@@ -19336,12 +19360,40 @@ products:
       - **Unit :** Basotho Cavalry \[6 models\]
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/abyssinia/basotho-calvary
-      - legacy-catalog:wyrd-games/the-other-side/abyssinia/electrocutioners
       - mfr-wyrd-store:bosotho-cavalry
-      - mfr-wyrd-store:electrocutioners
       - ret-gamenerdz:/the-other-side-abyssinia-basotho-cavalry
-      - ret-gamenerdz:/the-other-side-abyssinia-electrocutioners
-      - ret-goblingaming:electrocutioners
+  - id: wyrd-games/WYR40153
+    name: Steel Legion
+    manufacturer: wyrd-games
+    productCode: WYR40153
+    sku: WYR40153
+    ean: '0812152030190'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: abyssinia
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 75.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/steel-legion
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_SteelLegion_Front.jpg?v=1602517061
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Steel Legion \[7 models - 6 Steel Legion, 1 Cutter\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/abyssinia/steel-legion
+      - mfr-wyrd-store:steel-legion
+      - ret-gamenerdz:/the-other-side-abyssinia-steel-legion
   - id: wyrd-games/WYR40154
     name: Crow Runners
     manufacturer: wyrd-games
@@ -19408,15 +19460,47 @@ products:
       - mfr-wyrd-store:mehal-sefari-1
       - ret-gamenerdz:/the-other-side-abyssinia-mehal-sefari
       - ret-goblingaming:mehal-sefari-unit
+  - id: wyrd-games/WYR40156
+    name: Electrocutioners
+    manufacturer: wyrd-games
+    productCode: WYR40156
+    sku: WYR40156
+    ean: '0812152030220'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: abyssinia
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 34.85
+    priceUsd: 45.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/electrocutioners
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_Electrocutioners_Front.jpg?v=1602517037
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Electrocutioners \[9 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/abyssinia/electrocutioners
+      - mfr-wyrd-store:electrocutioners
+      - ret-gamenerdz:/the-other-side-abyssinia-electrocutioners
+      - ret-goblingaming:electrocutioners
   - id: wyrd-games/WYR40157
     name: Mechanized Infantry
     manufacturer: wyrd-games
     productCode: WYR40157
     sku: WYR40157
     ean: '0812152030237'
-    eanConfidence: conflicted
-    additionalEans:
-      - '0812152030190'
+    eanConfidence: confirmed
     gameSystem: the-other-side
     faction: abyssinia
     category: miniatures
@@ -19440,11 +19524,8 @@ products:
       - **Unit :** Mechanized Infantry \[7 models - 6 Infantry, 1 Walker\]
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/abyssinia/mechanized-infantry
-      - legacy-catalog:wyrd-games/the-other-side/abyssinia/steel-legion
       - mfr-wyrd-store:mechanized-infantry
-      - mfr-wyrd-store:steel-legion
       - ret-gamenerdz:/the-other-side-abyssinia-mechanized-infantry
-      - ret-gamenerdz:/the-other-side-abyssinia-steel-legion
   - id: wyrd-games/WYR40158
     name: Dreadnought
     manufacturer: wyrd-games
@@ -19604,10 +19685,7 @@ products:
     productCode: WYR40162
     sku: WYR40162
     ean: '0812152030282'
-    eanConfidence: conflicted
-    additionalEans:
-      - '0812152030305'
-      - '0812152030404'
+    eanConfidence: confirmed
     gameSystem: the-other-side
     faction: abyssinia
     category: miniatures
@@ -19631,14 +19709,8 @@ products:
       - **Unit :** Marauder \[1 model\]
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/abyssinia/marauder
-      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/karkinoi
-      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/striped-skulkers
-      - mfr-wyrd-store:karkinoi
       - mfr-wyrd-store:maurader
-      - mfr-wyrd-store:striped-skulkers
       - ret-gamenerdz:/the-other-side-abyssinia-marauder
-      - ret-gamenerdz:/the-other-side-gibbering-hordes-karkinoi
-      - ret-gamenerdz:/the-other-side-gibbering-hordes-striped-skulkers
   - id: wyrd-games/WYR4017
     name: 'Malifaux Classics: Young Nephilim (2 Pack)'
     manufacturer: wyrd-games
@@ -19698,6 +19770,70 @@ products:
       - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/gibbering-hordes-allegiance-box
       - mfr-wyrd-store:gibbering-hordes-allegiance-box
       - ret-gamenerdz:/the-other-side-gibbering-hordes-allegiance-box-storm-siren
+  - id: wyrd-games/WYR40202
+    name: Karkinoi
+    manufacturer: wyrd-games
+    productCode: WYR40202
+    sku: WYR40202
+    ean: '0812152030305'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: gibbering-hordes
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 55.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/karkinoi
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_Karkinoi_Front.jpg?v=1602517062
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Karkinoi \[9 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/karkinoi
+      - mfr-wyrd-store:karkinoi
+      - ret-gamenerdz:/the-other-side-gibbering-hordes-karkinoi
+  - id: wyrd-games/WYR40203
+    name: Armored Whelks
+    manufacturer: wyrd-games
+    productCode: WYR40203
+    sku: WYR40203
+    ean: '0812152030312'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: gibbering-hordes
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 55.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/armored-whelks
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_ArmoredWhelks_Front.jpg?v=1602517042
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Armored Whelks \[6 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/armored-whelks
+      - mfr-wyrd-store:armored-whelks
+      - ret-gamenerdz:/the-other-side-gibbering-hordes-armored-whelks
   - id: wyrd-games/WYR40204
     name: Speckled Crawlers
     manufacturer: wyrd-games
@@ -19799,14 +19935,7 @@ products:
     productCode: WYR40207
     sku: WYR40207
     ean: '0812152030350'
-    eanConfidence: conflicted
-    additionalEans:
-      - '0812152030312'
-      - '0812152030411'
-      - '0812152030435'
-      - '0812152030442'
-      - '0812152030503'
-      - '0812152030534'
+    eanConfidence: confirmed
     gameSystem: the-other-side
     faction: cult-of-the-burning-man
     category: miniatures
@@ -19815,8 +19944,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 42.5
-    priceUsd: 55.0
+    priceUsd: 50.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/horomatangi
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Titan_Box_Horomatangi_Front.jpg?v=1602517059
     description: |-
@@ -19833,24 +19961,8 @@ products:
       - **Titan :** Horomatangi \[1 model\]
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/horomatangi
-      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/immolated-rhino
-      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/raving-madman
-      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/stalking-portals
-      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/the-warped
-      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/armored-whelks
-      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/devouring-eel
-      - mfr-wyrd-store:armored-whelks
-      - mfr-wyrd-store:devouring-eel
       - mfr-wyrd-store:horomatangi
-      - mfr-wyrd-store:immolated-rhino
-      - mfr-wyrd-store:raving-madman
-      - mfr-wyrd-store:stalking-portals
-      - mfr-wyrd-store:the-warped
       - ret-gamenerdz:/the-other-side-cult-of-the-burning-man-gibbering-hordes-horomatangi
-      - ret-gamenerdz:/the-other-side-cult-of-the-burning-man-stalking-portals
-      - ret-gamenerdz:/the-other-side-cult-of-the-burning-man-the-warped
-      - ret-gamenerdz:/the-other-side-gibbering-hordes-armored-whelks
-      - ret-goblingaming:stalking-portals
   - id: wyrd-games/WYR40208
     name: Alpha Crawler
     manufacturer: wyrd-games
@@ -19939,6 +20051,37 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-hooded-rider
       - mfr-wyrd-store:wyr4021
+  - id: wyrd-games/WYR40210
+    name: Egg Clutch
+    manufacturer: wyrd-games
+    productCode: WYR40210
+    sku: WYR40210
+    ean: '0812152030381'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: gibbering-hordes
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 15.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/egg-clutch
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Wyrd_TOS_Box_EggClutch_Front.jpg?v=1602517044
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Egg Clutch \[1 model\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/egg-clutch
+      - mfr-wyrd-store:egg-clutch
   - id: wyrd-games/WYR40211
     name: Morphling
     manufacturer: wyrd-games
@@ -19970,6 +20113,69 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/morphling
       - mfr-wyrd-store:morphling
+  - id: wyrd-games/WYR40212
+    name: Striped Skulkers
+    manufacturer: wyrd-games
+    productCode: WYR40212
+    sku: WYR40212
+    ean: '0812152030404'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: gibbering-hordes
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 50.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/striped-skulkers
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_StripedSkulkers_Front.jpg?v=1602517058
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Striped Skulkers \[9 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/striped-skulkers
+      - mfr-wyrd-store:striped-skulkers
+      - ret-gamenerdz:/the-other-side-gibbering-hordes-striped-skulkers
+  - id: wyrd-games/WYR40213
+    name: Devouring Eel
+    manufacturer: wyrd-games
+    productCode: WYR40213
+    sku: WYR40213
+    ean: '0812152030411'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: gibbering-hordes
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/devouring-eel
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Wyrd_TOS_Box_DevouringEel_Front.jpg?v=1602517046
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Devouring Eel \[1 model\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/devouring-eel
+      - mfr-wyrd-store:devouring-eel
   - id: wyrd-games/WYR40251
     name: Cult of the Burning Man Allegiance Box
     manufacturer: wyrd-games
@@ -20003,6 +20209,72 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/cult-of-the-burning-man-allegiance-box
       - mfr-wyrd-store:cult-of-the-burning-man-allegiance-box
+  - id: wyrd-games/WYR40252
+    name: Stalking Portals
+    manufacturer: wyrd-games
+    productCode: WYR40252
+    sku: WYR40252
+    ean: '0812152030442'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: cult-of-the-burning-man
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 42.5
+    priceUsd: 55.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/stalking-portals
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_StalkingPortals_Front.jpg?v=1602517048
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Stalking Portals \[6 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/stalking-portals
+      - mfr-wyrd-store:stalking-portals
+      - ret-gamenerdz:/the-other-side-cult-of-the-burning-man-stalking-portals
+      - ret-goblingaming:stalking-portals
+  - id: wyrd-games/WYR40253
+    name: The Warped
+    manufacturer: wyrd-games
+    productCode: WYR40253
+    sku: WYR40253
+    ean: '0812152030435'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: cult-of-the-burning-man
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 45.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/the-warped
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_TheWarped_Front.jpg?v=1602517057
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** The Warped \[9 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/the-warped
+      - mfr-wyrd-store:the-warped
+      - ret-gamenerdz:/the-other-side-cult-of-the-burning-man-the-warped
   - id: wyrd-games/WYR40254
     name: ECB Black Ops
     manufacturer: wyrd-games
@@ -20072,9 +20344,7 @@ products:
     productCode: WYR40256
     sku: WYR40256
     ean: '0812152030473'
-    eanConfidence: conflicted
-    additionalEans:
-      - '0812152030381'
+    eanConfidence: confirmed
     gameSystem: the-other-side
     faction: cult-of-the-burning-man
     category: miniatures
@@ -20098,9 +20368,7 @@ products:
       - **Unit :** Doomseekers \[9 models\]
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/doomseekers
-      - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/egg-clutch
       - mfr-wyrd-store:doomseekers
-      - mfr-wyrd-store:egg-clutch
   - id: wyrd-games/WYR40257
     name: Twisted Horrors
     manufacturer: wyrd-games
@@ -20163,6 +20431,37 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/goryshche
       - mfr-wyrd-store:gorysche
+  - id: wyrd-games/WYR40259
+    name: Raving Madman
+    manufacturer: wyrd-games
+    productCode: WYR40259
+    sku: WYR40259
+    ean: '0812152030503'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: cult-of-the-burning-man
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 12.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/raving-madman
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Wyrd_TOS_Box_RavingMadman_Front.jpg?v=1602517051
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      Adjunct models enhance a unit's capabilities on the battlefield and provide additional effects to strengthen the power of whatever units they are a part of, often enhancing an Allegiance's play style.
+
+      **Contains**
+
+      - **Adjunct Model :** Raving Madman \[1 model\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/raving-madman
+      - mfr-wyrd-store:raving-madman
   - id: wyrd-games/WYR40260
     name: Fenton Brahms
     manufacturer: wyrd-games
@@ -20226,6 +20525,37 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/breachling
       - mfr-wyrd-store:breachling
+  - id: wyrd-games/WYR40262
+    name: Immolated Rhino
+    manufacturer: wyrd-games
+    productCode: WYR40262
+    sku: WYR40262
+    ean: '0812152030534'
+    eanConfidence: confirmed
+    gameSystem: the-other-side
+    faction: cult-of-the-burning-man
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/immolated-rhino
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Wyrd_TOS_Box_ImmolatedRhino_Front.jpg?v=1602517052
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Immolated Rhino \[1 model\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/immolated-rhino
+      - mfr-wyrd-store:immolated-rhino
   - id: wyrd-games/WYR40301
     name: Samantha Thrace
     manufacturer: wyrd-games
