@@ -31248,6 +31248,25 @@ products:
     url: https://tistaminis.com/products/bolt-action-armies-of-germany-new
     evidence:
       - arc-tistaminis:/products/bolt-action-armies-of-germany-new
+  - id: warlord-games/401013001
+    name: Armies of the United States Book - Bolt Action
+    manufacturer: warlord-games
+    productCode: '401013001'
+    sku: '401013001'
+    ean: '5060917994545'
+    eanConfidence: provisional
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 20.0
+    priceCad: 38.7
+    url: https://www.goblingaming.co.uk/products/armies-of-the-united-states-book-bolt-action
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/401013001_ArmiesoftheUnitedStates_2025_01.jpg?v=1742572232
+    evidence:
+      - ret-goblingaming:armies-of-the-united-states-book-bolt-action
+      - ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025
   - id: warlord-games/401017401
     name: Fortress Budapest Campaign Book - Bolt Action
     manufacturer: warlord-games
@@ -44101,6 +44120,26 @@ products:
       - ret-radaddel:/lions-of-the-folgore-italian-paracadutisti-starter-army
       - ret-radaddel:lions-of-the-folgore-italian-paracadutisti-starter-army
       - ret-tistaminis:bolt-action-lions-of-the-folgore-italian-paracadutisti-starter-army
+  - id: warlord-games/402615803
+    name: P40 medium tank
+    manufacturer: warlord-games
+    productCode: '402615803'
+    sku: '402615803'
+    ean: '5060917999298'
+    eanConfidence: provisional
+    gameSystem: bolt-action
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 35.5
+    priceCad: 63.0
+    url: https://store.warlordgames.com/products/p40-medium-tank
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402615803_P40mediumtank01.jpg?v=1782916102
+    evidence:
+      - mfr-warlord-store:p40-medium-tank
+      - ret-tistaminis:bolt-action-german-p40-medium-tank
   - id: warlord-games/402616001
     name: Japanese Starter Army - Bolt Action
     manufacturer: warlord-games
@@ -62994,20 +63033,17 @@ products:
     productCode: '4099300010'
     sku: '4099300010'
     ean: '9781472863874'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060917994545'
+    eanConfidence: confirmed
     gameSystem: bolt-action
     faction: general
-    category: book
-    categoryBasis: mapped
+    category: miniatures
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
     priceEur: 29.45
-    priceCad: 38.7
     url: https://store.warlordgames.com/products/armies-of-the-united-states-third-edition-with-james-jake-mcniece-special-figure
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/401013001_ArmiesoftheUnitedStates_2025_01.jpg?v=1737631745
     description: |-
@@ -63025,10 +63061,8 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/armies-of-the-united-states-third-edition-with-james-jake-mcniece-special-figure
       - mfr-warlord-store:armies-of-the-united-states-third-edition-with-james-jake-mcniece-special-figure
-      - ret-goblingaming:armies-of-the-united-states-book-bolt-action
       - ret-radaddel:/armies-of-the-united-states-third-edition-englisch
       - ret-radaddel:armies-of-the-united-states-third-edition-englisch
-      - ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025
   - id: warlord-games/409930011
     name: 'Bolt Action: Third Edition Rulebook (German) with Francis S. Currey special miniature'
     manufacturer: warlord-games
@@ -63300,6 +63334,25 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/general/konflikt-47-united-states-decal-sheet-100-x100
       - mfr-warlord-store:konflikt-47-united-states-decal-sheet-100-x100
+  - id: warlord-games/451010005
+    name: Invasion Amerika - Konflikt '47
+    manufacturer: warlord-games
+    productCode: '451010005'
+    sku: '451010005'
+    ean: '9781915319258'
+    eanConfidence: provisional
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 24.0
+    priceCad: 53.05
+    url: https://www.goblingaming.co.uk/products/invasion-amerika-konflikt-47
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/459910012_Konflikt-_47--Invasion-Amerika-_-Book-miniature.webp?v=1780317642
+    evidence:
+      - ret-goblingaming:invasion-amerika-konflikt-47
+      - ret-tistaminis:konflikt-47-invasion-amerika
   - id: warlord-games/451011601
     name: 'Bolt Action: Konflikt ''47 - Defiance Book New'
     manufacturer: warlord-games
@@ -64064,9 +64117,7 @@ products:
     productCode: '452011205'
     sku: '452011205'
     ean: '5060917998949'
-    eanConfidence: conflicted
-    additionalEans:
-      - '9781915319258'
+    eanConfidence: confirmed
     gameSystem: konflikt-47
     category: miniatures
     categoryBasis: mapped
@@ -64081,11 +64132,9 @@ products:
     evidence:
       - mfr-warlord-store:konflikt-47-empire-of-japan-ghost-attack-infantry
       - ret-goblingaming:empire-of-japan-ghost-warriors-infantry-squad-konflikt-47
-      - ret-goblingaming:invasion-amerika-konflikt-47
       - ret-radaddel:/konflikt-47-empire-of-japan-ghost-warriors-infantry-squad
       - ret-radaddel:konflikt-47-empire-of-japan-ghost-warriors-infantry-squad
       - ret-tistaminis:konflikt-47-empire-of-japan-ghost-attack-infantry-plastic
-      - ret-tistaminis:konflikt-47-invasion-amerika
   - id: warlord-games/452011206
     name: Konflikt '47 Kimura Tadaaki, Scourge of the Spirit Realm
     manufacturer: warlord-games
@@ -66205,9 +66254,7 @@ products:
     productCode: '452600605'
     sku: '452600605'
     ean: '5060917997751'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060917999298'
+    eanConfidence: confirmed
     gameSystem: konflikt-47
     category: miniatures
     categoryBasis: mapped
@@ -66216,16 +66263,13 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 38.0
     priceEur: 40.0
-    priceCad: 63.0
     url: https://store.warlordgames.com/products/konflikt-47-humber-armoured-car-mk-vii
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452600605_MKVIIHumberArmouredCar01.jpg?v=1778676803
     evidence:
       - mfr-warlord-store:konflikt-47-humber-armoured-car-mk-vii
-      - mfr-warlord-store:p40-medium-tank
       - ret-goblingaming:humber-armoured-car-mk-vii-konflikt-47
       - ret-radaddel:/konflikt-47-british-commonwealth-humber-armoured-car-mk-vii
       - ret-radaddel:konflikt-47-british-commonwealth-humber-armoured-car-mk-vii
-      - ret-tistaminis:bolt-action-german-p40-medium-tank
   - id: warlord-games/452600801
     name: Kazak Light Walker
     manufacturer: warlord-games
@@ -66355,16 +66399,45 @@ products:
       - ret-radaddel:/konflikt-47-empire-of-japan-type-7-sasori-light-walker
       - ret-radaddel:konflikt-47-empire-of-japan-type-7-sasori-light-walker
       - ret-tistaminis:konflikt-47-type-7-sasori-light-walker
+  - id: warlord-games/452610002
+    name: Konflikt '47 Rift Dice - Grey
+    manufacturer: warlord-games
+    productCode: '452610002'
+    sku: '452610002'
+    ean: '5060917996587'
+    eanConfidence: confirmed
+    gameSystem: konflikt-47
+    faction: british
+    category: game-accessory
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 18.0
+    priceCad: 32.05
+    url: https://store.warlordgames.com/products/konflikt-47-rift-dice-grey
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452610002_Konflikt47RiftDiceGemDiceGrey_e1b5d7a9-5045-42f4-9c8c-c23f869396b9.jpg?v=1755856251
+    description: |-
+      Unleash Rift power on the battlefield with these *Konflikt '47* Rift Dice!
+
+      The Rift mechanic drives *Konflikt '47*, representing the unstable energy that fuels strange technologies and creatures. These Rift Dice help you track that energy during battle—an essential tool for every *Konflikt '47* player using Rift-powered units.
+
+      You will need a Rift Die for each Rift Unit, plus each Rift Weapon upgrade in your army. Some Heroes are particularly attuned to the energies of the Rifts, and can bring several Rift Dice to the table singlehandedly!
+
+      This box contains 12 *Konflikt ’47* Rift Dice.
+    evidence:
+      - legacy-catalog:warlord-games/konflikt-47/british/konflikt-47-rift-dice-grey
+      - mfr-warlord-store:konflikt-47-rift-dice-grey
+      - ret-goblingaming:grey-rift-dice-konflikt-47
+      - ret-tistaminis:konflikt-47-rift-dice-grey
   - id: warlord-games/452610003
     name: Konflikt '47 Rift Dice - Green
     manufacturer: warlord-games
     productCode: '452610003'
     sku: '452610003'
-    ean: '5060917996914'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060917996587'
-      - '5060917996907'
+    ean: '5060917996907'
+    eanConfidence: confirmed
     gameSystem: konflikt-47
     faction: british
     category: game-accessory
@@ -66388,22 +66461,47 @@ products:
       This box contains 12 *Konflikt ’47* Rift Dice.
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/british/konflikt-47-rift-dice-green
-      - legacy-catalog:warlord-games/konflikt-47/british/konflikt-47-rift-dice-grey
-      - legacy-catalog:warlord-games/konflikt-47/british/konflikt-47-rift-dice-red
       - mfr-warlord-store:konflikt-47-rift-dice-green
-      - mfr-warlord-store:konflikt-47-rift-dice-grey
-      - mfr-warlord-store:konflikt-47-rift-dice-red
       - ret-goblingaming:green-rift-dice-konflikt-47
-      - ret-goblingaming:grey-rift-dice-konflikt-47
-      - ret-goblingaming:red-rift-dice-konflikt-47
       - ret-radaddel:/konflikt-47-rift-dice-green
+      - ret-radaddel:konflikt-47-rift-dice-green
+      - ret-tistaminis:konflikt-47-rift-dice-green
+  - id: warlord-games/452610004
+    name: Konflikt '47 Rift Dice - Red
+    manufacturer: warlord-games
+    productCode: '452610004'
+    sku: '452610004'
+    ean: '5060917996914'
+    eanConfidence: confirmed
+    gameSystem: konflikt-47
+    faction: british
+    category: game-accessory
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 18.0
+    priceEur: 17.15
+    priceCad: 32.05
+    url: https://store.warlordgames.com/products/konflikt-47-rift-dice-red
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452610004_Konflikt47RiftDiceGemDiceRed_16996f81-8b99-47b8-a16d-003f788b9e7c.jpg?v=1755856342
+    description: |-
+      Unleash Rift power on the battlefield with these *Konflikt '47* Rift Dice!
+
+      The Rift mechanic drives *Konflikt '47*, representing the unstable energy that fuels strange technologies and creatures. These Rift Dice help you track that energy during battle—an essential tool for every *Konflikt '47* player using Rift-powered units.
+
+      You will need a Rift Die for each Rift Unit, plus each Rift Weapon upgrade in your army. Some Heroes are particularly attuned to the energies of the Rifts, and can bring several Rift Dice to the table singlehandedly!
+
+      This box contains 12 *Konflikt ’47* Rift Dice.
+    evidence:
+      - legacy-catalog:warlord-games/konflikt-47/british/konflikt-47-rift-dice-red
+      - mfr-warlord-store:konflikt-47-rift-dice-red
+      - ret-goblingaming:red-rift-dice-konflikt-47
       - ret-radaddel:/konflikt-47-rift-dice-grey
       - ret-radaddel:/konflikt-47-rift-dice-red
-      - ret-radaddel:konflikt-47-rift-dice-green
       - ret-radaddel:konflikt-47-rift-dice-grey
       - ret-radaddel:konflikt-47-rift-dice-red
-      - ret-tistaminis:konflikt-47-rift-dice-green
-      - ret-tistaminis:konflikt-47-rift-dice-grey
       - ret-tistaminis:konflikt-47-rift-dice-red
   - id: warlord-games/452610005
     name: Konflikt '47 Rift Dice - Yellow

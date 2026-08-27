@@ -120,6 +120,63 @@ reassignManufacturer:
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
   #
+  # --- THE SIX THE LEDGER ALONE COULD NOT SETTLE (8 rows, 2026-08-27) --------------------------
+  #
+  # These were recorded as undecidable when the fused entities were split, on the grounds that the
+  # MAKER's own code-to-barcode map was not a clean bijection. That test was too narrow: it asked
+  # only whether one source could settle it, and never asked whether the sources AGREE. All six
+  # resolve on a cross-source count, and in two of them it is the manufacturer that is wrong.
+  #
+  # VERIFIED AGAINST THE LIVE STORES 2026-08-27, because "the maker is wrong" is a claim that has
+  # to survive the obvious objection that our copy of its data is stale. It is not stale --
+  # store.warlordgames.com serves these today, `updated_at` 2026-08-27:
+  #     452610003 Rift Dice Green => 5060917996914
+  #     452610002 Rift Dice Grey  => 5060917996914
+  #     452610004 Rift Dice Red   => 5060917996914     <- one barcode, three products
+  #     452600605 Humber Armoured Car MK VII => 5060917997751
+  #     402615803 P40 medium tank            => 5060917997751     <- one barcode, two products
+  # A re-harvest reproduces the error exactly; it is upstream, and correcting it here is the only
+  # way. Mantic was checked the same way: manticgames.com publishes `sku` and NO barcode at all
+  # (no GTIN in its JSON-LD), so nothing new can arrive from there either.
+  #
+  # RIFT DICE. Warlord gives all three colours the Red dice's barcode. `legacy-catalog`,
+  # `ret-goblingaming` and `ret-tistaminis` independently agree on the real mapping -- Green
+  # 5060917996907, Grey 5060917996587, Red 5060917996914 -- so the maker is outvoted 3-1 on the two
+  # it gets wrong and corroborated 4-0 on the one it gets right. Only the two wrong rows are here.
+  'mfr-warlord-store:konflikt-47-rift-dice-green': ['5060917996914']
+  'mfr-warlord-store:konflikt-47-rift-dice-grey': ['5060917996914']
+  # HUMBER vs P40. Same shape: Warlord puts 5060917997751 on both. `ret-goblingaming` corroborates
+  # it for the Humber, nothing corroborates it for the P40, and `ret-tistaminis` gives the P40 its
+  # own 5060917999298. The tank keeps a single-source barcode, so it publishes `provisional` -- the
+  # right admission, and better than a tank filed as an armoured car.
+  'mfr-warlord-store:p40-medium-tank': ['5060917997751']
+  # MANTIC ARMADA. `ret-tistaminis` stamps 5060924982320 on all three -- Seas of Dread, the Scenery
+  # Pack and Sea Monsters. `legacy-catalog` maps them apart (5060924982306 / 5060924982320 /
+  # 9781911516507) and `ret-goblingaming` corroborates the Seas of Dread ISBN, so tistaminis is the
+  # copy-paste and only its two wrong rows are rejected; the one it gets right stays.
+  'ret-tistaminis:mantic-armada-seas-of-dread-book': ['5060924982320']
+  'ret-tistaminis:mantic-armada-scenery-pack-fantasy-terrain': ['5060924982320']
+  # ARMIES OF THE UNITED STATES, and this one is NOT a typo -- it is a barcode two products share
+  # by the maker's own choice, so the entry says which record keeps it and why.
+  # 9781472863874 is the ISBN of the BOOK (openlibrary.org: "Bolt Action: Armies of the United
+  # States, Third Edition", Warlord Games / Peter Dennis, Bloomsbury, 2025, 112pp), and Warlord
+  # sells a book+figure bundle under 4099300010 carrying that same ISBN -- verified on their store
+  # today. The two ARE different products: Warlord's own catalogue proves 401013001 is the book's
+  # code, because its eBook edition is sku `401013001_eBook`. `ret-goblingaming` gives the plain
+  # book its own Warlord barcode, 5060917994545. So the split follows the maker's own assignment:
+  # the ISBN stays on the record Warlord puts it on, and the book takes the barcode a retailer
+  # scanned off it. Nothing is lost either way -- the ISBN is still published, on 4099300010.
+  'ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025': ['9781472863874']
+  # INVASION AMERIKA is a rulebook. `ret-goblingaming` gave it the Ghost Attack Infantry's barcode,
+  # which Warlord's own store and `ret-tistaminis` both assign to 452011205; tistaminis gives the
+  # book 9781915319258, an ISBN in Warlord's own 978-1-915319 publisher range.
+  'ret-goblingaming:invasion-amerika-konflikt-47': ['5060917998949']
+  # SILENT STRIKE. 0812152032309 is Lords of War's, asserted by Wyrd's own store plus legacy and
+  # two retailers; `ret-goblingaming` also hung it on WYR23727. Wyrd no longer lists Silent Strike
+  # at all (checked 2026-08-27), so its only remaining barcode is `ret-gamenerdz`'s UPC-A
+  # 812152031753 and the record publishes `provisional`.
+  'ret-goblingaming:ten-thunders-silent-strike': ['0812152032309']
+  #
   # --- THE SAME DEFECT OUTSIDE `ean-mismatch` (8 rows, 2026-08-27) -----------------------------
   # A fused entity only raises `ean-mismatch` when the members end up disagreeing about the
   # barcode; where the wrong barcode is the only one on the record it fuses just as silently and
@@ -1391,46 +1448,27 @@ reassignCodes:
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
 
-# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27) ----------------------------------
-# 16 rows in data/review/conflicts.yaml, down from 35. Every losing barcode is retained in its own
-# record's `additionalEans` and the record is stamped `eanConfidence: conflicted`, so nothing is
-# lost and nothing is silently asserted -- `report --ean-guard` reports 0 lost against them. They
-# are a true record of sources disagreeing, which is what the type is for.
+# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, second pass) ---------------------
+# 10 rows in data/review/conflicts.yaml, down from 46 when this adjudication started. Every losing
+# barcode is retained in its own record's `additionalEans` and the record is stamped
+# `eanConfidence: conflicted`, so nothing is lost and nothing is silently asserted --
+# `report --ean-guard` reports 0 lost against them.
 #
-# TEN OF THE 16 ARE NOW JUST THAT: one product, two sources, two barcodes, nothing fused. The four
-# Corvus Belli rows, two Vallejo, the AMG AT-ST, the GW paints+tools set, `warlord-games/H00133`
-# and `mantic-games/MGWD173`. They want nothing but the conflict they already have.
+# ALL TEN ARE NOW SINGLE-CODE ENTITIES: one product, two or more sources, more than one barcode.
+# That is exactly what the type is for, and there is nothing further to do with them without an
+# external scan of the box. The four Corvus Belli rows, two Vallejo, the AMG AT-ST, the GW
+# paints+tools set, `warlord-games/H00133` and `mantic-games/MGWD173`.
 #
-# SIX STILL HOLD MORE THAN ONE PRODUCT CODE -- two or more real products published as one record
-# with the other codes' ids gone. That was 25 entities and 76 codes before the `rejectEans` and
-# `reassignCodes` blocks above; these six are the residue that neither the makers' names nor the
-# makers' code-to-barcode map can settle, and each is a different reason:
-#
-#   warlord-games/452610003  (452600002, 452600003, 452610002, 452610003, 452610004)
-#   warlord-games/452600605  (402615803, 452600605)
-#     THE MANUFACTURER'S OWN STORE reuses one barcode across several of its own codes --
-#     5060917996914 sits on Rift Dice Green, Grey AND Red. There is no higher authority to appeal
-#     to: the source that would settle it is the one making the claim.
-#   mantic-games/MGARM114    (MGARM113, MGARM114, MGARM301)
-#     NO MANUFACTURER EVIDENCE AT ALL for any of the three codes -- only curated and retailer rows,
-#     which is what put them together in the first place.
-#   warlord-games/4099300010 (401013001, 4099300010)
-#   warlord-games/452011205  (451010005, 452011205)
-#   wyrd-games/WYR23729      (WYR23727, WYR23729)
-#     THE MAKER COVERS ONLY ONE SIDE. It states a barcode for one code and says nothing about the
-#     other, so "which code owns this barcode" has no answer from the party that assigns them.
-#
-# Re-derive the split with `joined_evidence()` over the resolved catalog: for each `ean-mismatch`
+# NO ENTITY HOLDS MORE THAN ONE PRODUCT CODE ANY MORE -- that was 25 entities and 76 codes, and it
+# is 0. Re-derive with `joined_evidence()` over the resolved catalog: for each `ean-mismatch`
 # entity collect `taxonomy.normalize_code(member.manufacturer, member.sku)` across its members and
-# count the distinct non-null values. Six have more than one.
+# count the distinct non-null values.
 #
-# THE GW RE-CODE PAIRS THAT USED TO BE LISTED HERE ARE GONE -- 99070101051/99120101465,
-# 99070101075/99120101479, 99070108012/99120108138, 99120101362/99120101484 and Egyptian Archers
-# are split by `reassignCodes` above. They are still NOT declared as `supersessions`: splitting the
-# records needed only the barcode, while asserting that one replaced the other needs GW's register,
-# and the register does not say it. `99120101329`/`99120101254` is the reason that distinction is
-# kept -- that pair is Chief Librarian Tigurius, whose join a previous verify pass correctly killed
-# as a metal-to-resin re-sculpt rather than a repackaging.
+# THE GW RE-CODE PAIRS are split by `reassignCodes` above and still NOT declared as
+# `supersessions`: splitting the records needed only the barcode, while asserting that one replaced
+# the other needs GW's register, and the register does not say it. `99120101329`/`99120101254` is
+# why that distinction is kept -- that pair is Chief Librarian Tigurius, whose join a previous
+# verify pass correctly killed as a metal-to-resin re-sculpt rather than a repackaging.
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
 # 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a

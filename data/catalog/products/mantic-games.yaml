@@ -3577,16 +3577,42 @@ products:
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-taster-set
       - mfr-manticgames:425740
+  - id: mantic-games/MGARM113
+    name: 'Armada: Seas of Dread'
+    manufacturer: mantic-games
+    productCode: MGARM113
+    sku: MGARM113
+    ean: '9781911516507'
+    eanConfidence: confirmed
+    gameSystem: armada
+    faction: general
+    category: book
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 25.0
+    priceUsd: 10.0
+    priceCad: 40.0
+    url: https://www.manticgames.com/armada/expansions/seas-of-dread/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2023/04/MGARM113-Seas-of-Dread-book-mockup_1.webp
+    description: |-
+      1 x Softback Seas of Dread Book
+
+      ***This book requires a copy of ARMADA to play. Miniatures not included.***
+    evidence:
+      - legacy-catalog:mantic-games/armada/general/armada-seas-of-dread
+      - mfr-manticgames:449870
+      - ret-goblingaming:kings-of-war-armada-seas-of-dread-rulebook
+      - ret-tistaminis:mantic-armada-seas-of-dread-book
   - id: mantic-games/MGARM114
     name: Armada Scenery Pack – Fantasy Terrain
     manufacturer: mantic-games
     productCode: MGARM114
     sku: MGARM114
-    ean: '5060924982320'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060924982306'
-      - '9781911516507'
+    ean: '5060924982306'
+    eanConfidence: confirmed
     gameSystem: armada
     faction: general
     category: terrain
@@ -3595,7 +3621,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 25.0
+    priceGbp: 60.0
     priceUsd: 60.0
     priceCad: 75.0
     url: https://www.manticgames.com/armada/expansions/armada-scenery-pack-fantasy-terrain/
@@ -3614,15 +3640,8 @@ products:
       ******
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-scenery-pack-fantasy-terrain
-      - legacy-catalog:mantic-games/armada/general/armada-sea-monsters
-      - legacy-catalog:mantic-games/armada/general/armada-seas-of-dread
-      - mfr-manticgames:449870
       - mfr-manticgames:449884
-      - mfr-manticgames:449902
-      - ret-goblingaming:kings-of-war-armada-seas-of-dread-rulebook
       - ret-tistaminis:mantic-armada-scenery-pack-fantasy-terrain
-      - ret-tistaminis:mantic-armada-sea-monsters
-      - ret-tistaminis:mantic-armada-seas-of-dread-book
   - id: mantic-games/MGARM115
     name: Armada Scenery Pack – Fortifications
     manufacturer: mantic-games
@@ -3684,6 +3703,46 @@ products:
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-essentials-bundle
       - mfr-manticgames:444081
+  - id: mantic-games/MGARM301
+    name: Armada Sea Monsters
+    manufacturer: mantic-games
+    productCode: MGARM301
+    sku: MGARM301
+    ean: '5060924982320'
+    eanConfidence: confirmed
+    gameSystem: armada
+    faction: general
+    category: miniatures
+    categoryBasis: default
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 40.0
+    priceUsd: 40.0
+    priceCad: 55.0
+    url: https://www.manticgames.com/armada/expansions/armada-sea-monsters/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2023/04/MGARM301-Sea-Monsters-Contents.webp
+    description: |-
+      2 x Resin Merfolk
+
+      1 x Resin Hydra
+
+      1 x Resin Sea Serpent
+
+      1 x Resin Enraged Narwhal
+
+      2 x MDF 30x30mm Base
+
+      1 x MDF 100x30mm Base
+
+      1 x MDF 70x30mm Base
+
+      1 x MDF 125x30mm Base
+    evidence:
+      - legacy-catalog:mantic-games/armada/general/armada-sea-monsters
+      - mfr-manticgames:449902
+      - ret-tistaminis:mantic-armada-sea-monsters
   - id: mantic-games/MGARM517
     name: Seas of Dread, Terrain and Sea Monsters Bundle
     manufacturer: mantic-games
