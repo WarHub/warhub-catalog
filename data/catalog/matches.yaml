@@ -119,6 +119,46 @@ reassignManufacturer:
   'ret-tistaminis:ww2-british-paint-set': army-painter
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  # --- THE LAST FUSIONS THE WIDER CODE COVERAGE MADE VISIBLE (5 rows, 2026-08-27) --------------
+  # Once Vallejo, Corvus Belli and Atomic Mass had real codes, the catalog-wide test for a fused
+  # record became answerable: an entity holding two UNRELATED codes AND two barcodes. There are 16,
+  # and these five are the ones where a source's barcode contradicts the code its own name backs.
+  # Three are the manufacturer's own store getting it wrong and being outvoted by everyone else,
+  # which is the same shape as the Rift Dice.
+  'legacy-catalog:warlord-games/bolt-action/british/humber-mk-ii-iv-armoured-car': ['5060917990653']
+  'mfr-manticgames:474732': ['5060924987080']
+  'mfr-manticgames:499623': ['5060924985475']
+  'mfr-warlord-store:blitzkrieg-early-war-german-army': ['5060200846780']
+  'ret-tistaminis:is-2-heavy-tank-2025': ['5060393705819']
+  # --- WHAT THE WIDENED CODE PATTERNS EXPOSED (5 rows, 2026-08-27) -----------------------------
+  # Giving Vallejo, Corvus Belli and Atomic Mass real product codes turned name-slug collisions
+  # into ordinary code-anchored records, and left exactly eight entities holding two unrelated
+  # codes. Five are a wrong barcode; two are a wrong code (see reassignCodes); one is below.
+  #
+  # VALLEJO PROVES ITSELF. The taxonomy already records that a Vallejo EAN is `8429551` + the
+  # 5-digit code + a check digit -- the paint tool computes them that way. Measured over every
+  # Vallejo observation carrying both: 1,050 of 1,056 obey it. Of the six that do not, two are
+  # books with real ISBNs, one is a malformed value that collides with nothing, and these three
+  # are a barcode that encodes a DIFFERENT Vallejo code -- which is what fused them.
+  'ret-goblingaming:model-air-grey-violet': ['8429551712590']                     # encodes 71259, row is 71128
+  'ret-goblingaming:vallejo-weathering-effects-40ml-black-splash-mud': ['8429551738088']   # encodes 73808, row is 73806
+  'ret-goblingaming:vallejo-weathering-effects-40ml-light-brown-splash-mud': ['8429551738057'] # encodes 73805, row is 73804
+  # ARC TROOPERS was re-coded SWL70 -> SWQ133 and `legacy-catalog` carries the OLD barcode on the
+  # NEW code, fusing the two. `ret-gamenerdz` gives SWQ133 its own 0841333133788, so rejecting the
+  # stale value leaves both codes standing with a barcode each.
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/arc-troopers': ['0764563786985']
+  # THE ONE BARCODE THAT BELONGS TO NEITHER PRODUCT. `legacy-catalog` put 0144329993091 on BOTH the
+  # Star Wars: Legion Core Set (SWL01) and the Clone Wars Core Set (SWL44), and no other source
+  # knows either product. Its GS1 prefix is 014432, which matches nothing in this catalog -- Atomic
+  # Mass and Fantasy Flight both publish under 0841333 (359 products, 100%). Looked up 2026-08-27
+  # across several independent retail listings: SWL01 is 0841333104436 and SWL44 is 0841333109202,
+  # so the published value is neither. It is rejected from the SWL01 row only, which splits the two
+  # records while leaving the value published on SWL44 exactly where it has been since the original
+  # legacy migration (`git log -S 0144329993091` -> 8797654) -- this repo does not drop a barcode it
+  # has published. The two real UPCs are recorded here rather than injected: they came from the web,
+  # not from a source in the ledger, and evidence is the truth here (OBJECTIVES 5). A harvest that
+  # observes them will correct both records on its own.
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/star-wars-legion-core-set': ['0144329993091']
   #
   # --- THE SIX THE LEDGER ALONE COULD NOT SETTLE (8 rows, 2026-08-27) --------------------------
   #
@@ -1355,6 +1395,29 @@ supersessions:
   # live state.
   games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
+  # --- RE-CODE BRIDGES: RIGHT BARCODE, STALE CATALOGUE NUMBER (5 rows, 2026-08-27) -------------
+  # Each is a retailer listing the CURRENT product code while scanning the RETIRED code's barcode.
+  # Both codes carry the same product name -- it is the same product re-coded -- so the name cannot
+  # discriminate and the repo's standing rule applies unopposed: the barcode identifies the box in
+  # hand, the SKU is the lister's catalogue number and it goes stale across a re-code. Moving the
+  # row splits the two records WITHOUT asserting that one supersedes the other; that is a separate
+  # claim needing GW's own register, which does not make it.
+  'ret-goblingaming:karanak-the-hound-of-vengeance': '99079915006'
+  'ret-goblingaming:lord-of-blight': '99070201029'
+  'ret-goblingaming:nurgle-rotbringers-lord-of-plagues': '99070201028'
+  'ret-goblingaming:rotbringer-sorcerer-age-of-sigmar-2021': '99070201027'
+  'ret-goblingaming:vagrantsong-seance-scenario-pack': 'WYR11604'
+  # --- WRONG CODE, RIGHT BARCODE (2 rows, 2026-08-27) ------------------------------------------
+  # The mirror of the block above: here the barcode is corroborated and the SKU is the typo, so the
+  # row moves rather than losing its barcode.
+  #
+  # Corvus Belli's in-house barcodes encode the code (820 of its observations start with their own
+  # 6 digits). This row's sku says 281118 while its barcode says 280760 AND its name says Varangian
+  # Guard, which `ret-gamenerdz` independently codes 280760. Two signals against the sku.
+  'ret-goblingaming:varangian-guard-submachine-gun-infinity-the-game': '280760'
+  # A doubled letter: `WCAA06P03` appears exactly once against five `WCA…` Warcrow codes from the
+  # same store, same barcode and same product name as goblingaming's `WCA06P03`.
+  'ret-gamenerdz:/warcrow-frost-dice-set': 'WCA06P03'
   #
   # --- WARCRY WARBANDS SOLD UNDER TWO GW CODES (3 rows, 2026-08-27) ---------------------------
   # Found by the same test. Here the NAME does discriminate and it points the other way: GW sells

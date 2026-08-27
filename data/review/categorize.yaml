@@ -1,30 +1,30 @@
 summary:
-  products: 29203
-  undecided: 15434
+  products: 29036
+  undecided: 15272
   byBasis:
-    default: 7070
-    guessed: 8364
-    lexicon: 2418
-    mapped: 9349
+    default: 7050
+    guessed: 8222
+    lexicon: 2409
+    mapped: 9353
     paint-barcode: 21
     stated: 1981
-  decidedThisRun: 11788
+  decidedThisRun: 11783
 conflicts:
-  - entity: atomic-mass-games/star-wars-legion-legion-attack-dice-pack
+  - entity: atomic-mass-games/SWQ131
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=game-accessory; ret-goblingaming=miniatures'
-  - entity: corvus-belli/aristeia-advanced-tactics-deck
+  - entity: corvus-belli/CBARI24
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: corvus-belli/CBARI25
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: corvus-belli/CBARI36
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
+  - entity: corvus-belli/CBARI38
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=game-accessory'
-  - entity: corvus-belli/aristeia-gata-filibusteira
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
-  - entity: corvus-belli/double-trouble
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
-  - entity: corvus-belli/legendary-bahadurs
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures'
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
@@ -100,46 +100,46 @@ conflicts:
   - entity: games-workshop/citadel-brush-x-large-base
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: vallejo/atlantic-blue-200ml-diorama-effects
+  - entity: vallejo/26201
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/black-lava-200ml-diorama-effects
+  - entity: vallejo/26202
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/brown-earth-paste-200ml-diorama-effects
+  - entity: vallejo/26203
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/dark-earth-paste-200ml-diorama-effects
+  - entity: vallejo/26204
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/desert-sand-paste-200ml-diorama-effects
+  - entity: vallejo/26211
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/foam-effects-32ml-diorama-effects
+  - entity: vallejo/26212
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/grey-sand-200ml-diorama-effects
+  - entity: vallejo/26213
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/mediterranean-blue-200ml-diorama-effects
+  - entity: vallejo/26214
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/pacific-blue-200ml-diorama-effects
+  - entity: vallejo/26215
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/rough-grey-pumice-200ml-diorama-effects
+  - entity: vallejo/26217
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/still-water-200ml-diorama-effects
+  - entity: vallejo/26218
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/transparent-water-200ml-diorama-effects
+  - entity: vallejo/26219
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/white-pumice-200ml-diorama-effects
+  - entity: vallejo/26230
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/white-stone-paste-200ml-diorama-effects
+  - entity: vallejo/26231
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
   - entity: warlord-games/403013012
@@ -171,7 +171,7 @@ unmapped:
     - value: hierarchy.lvl1=Other Games > Necromunda
       wouldDecide: 88
     - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
-      wouldDecide: 83
+      wouldDecide: 84
     - value: hierarchy.lvl1=Middle-Earth > Unit Type
       wouldDecide: 82
     - value: hierarchy.lvl1=The Horus Heresy > Vehicles
@@ -188,18 +188,18 @@ unmapped:
       wouldDecide: 42
     - value: hierarchy.lvl1=The Old World > Unit Type
       wouldDecide: 40
-    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of Chaos
-      wouldDecide: 37
     - value: hierarchy.lvl1=Age of Sigmar > Unit Type
-      wouldDecide: 34
+      wouldDecide: 38
+    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of Chaos
+      wouldDecide: 38
     - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Good
       wouldDecide: 32
     - value: hierarchy.lvl1=Warhammer 40,000 > Xenos Armies
       wouldDecide: 27
+    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Chaos
+      wouldDecide: 23
     - value: hierarchy.lvl1=Middle-Earth > The Lord of the Rings™ - Evil
       wouldDecide: 20
-    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Chaos
-      wouldDecide: 19
     - value: hierarchy.lvl1=Middle-Earth > The Hobbit™ - Good
       wouldDecide: 17
     - value: hierarchy.lvl1=The Horus Heresy > Forces of The Emperor
@@ -273,6 +273,8 @@ unmapped:
       wouldDecide: 3
     - value: tradeCategory=AOS - Chaos - Hedonites Of Slaanesh
       wouldDecide: 3
+    - value: tradeCategory=AOS - Chaos - Maggotkin Of Nurgle
+      wouldDecide: 3
     - value: tradeCategory=AOS - Chaos - Skaven
       wouldDecide: 3
     - value: tradeCategory=Chaos Daemons - Khorne
@@ -306,8 +308,6 @@ unmapped:
     - value: tradeCategory=Old World - Grand Cathay
       wouldDecide: 1
     - value: tradeCategory=AOS - Chaos - Disciples Of Tzeentch
-      wouldDecide: 1
-    - value: tradeCategory=AOS - Chaos - Maggotkin Of Nurgle
       wouldDecide: 1
     - value: tradeCategory=AOS - Order - Sylvaneth
       wouldDecide: 1
@@ -665,15 +665,15 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 717
+      wouldDecide: 639
     - value: breadcrumbs=Miniatures
-      wouldDecide: 709
+      wouldDecide: 632
     - value: breadcrumbs=Infinity
-      wouldDecide: 216
+      wouldDecide: 150
     - value: breadcrumbs=Kings of War
-      wouldDecide: 94
+      wouldDecide: 95
     - value: breadcrumbs=Marvel Crisis Protocol
-      wouldDecide: 83
+      wouldDecide: 84
     - value: breadcrumbs=Malifaux
       wouldDecide: 79
     - value: breadcrumbs=Games Workshop
@@ -683,41 +683,39 @@ unmapped:
     - value: breadcrumbs=More Miniatures
       wouldDecide: 57
     - value: breadcrumbs=Warcrow
-      wouldDecide: 56
-    - value: breadcrumbs=Star Wars Legion
-      wouldDecide: 36
+      wouldDecide: 55
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 29
-    - value: breadcrumbs=Nomads
-      wouldDecide: 27
-    - value: breadcrumbs=Panoceania
-      wouldDecide: 27
-    - value: breadcrumbs=Yu Jing
-      wouldDecide: 24
-    - value: breadcrumbs=Ariadna
-      wouldDecide: 21
+    - value: breadcrumbs=Star Wars Legion
+      wouldDecide: 26
     - value: breadcrumbs=Godtear
       wouldDecide: 21
-    - value: breadcrumbs=Haqqislam
+    - value: breadcrumbs=Panoceania
+      wouldDecide: 18
+    - value: breadcrumbs=Ariadna
+      wouldDecide: 18
+    - value: breadcrumbs=Nomads
       wouldDecide: 16
-    - value: breadcrumbs=Combined Army
-      wouldDecide: 15
-    - value: breadcrumbs=Star Wars Shatterpoint
+    - value: breadcrumbs=Haqqislam
+      wouldDecide: 14
+    - value: breadcrumbs=Yu Jing
       wouldDecide: 13
-    - value: breadcrumbs=Aleph
-      wouldDecide: 12
+    - value: breadcrumbs=Star Wars Shatterpoint
+      wouldDecide: 11
+    - value: breadcrumbs=Combined Army
+      wouldDecide: 10
     - value: breadcrumbs=NA2
-      wouldDecide: 12
-    - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 8
+    - value: breadcrumbs=Aleph
+      wouldDecide: 7
+    - value: breadcrumbs=Terrain & Accessories
+      wouldDecide: 6
     - value: breadcrumbs=Supplies
       wouldDecide: 4
     - value: breadcrumbs=Citadel Accessories & Supplies
       wouldDecide: 4
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
-    - value: breadcrumbs=O-12
-      wouldDecide: 3
     - value: breadcrumbs=Warhammer Age of Sigmar
       wouldDecide: 2
     - value: breadcrumbs=Limited
@@ -726,23 +724,25 @@ unmapped:
       wouldDecide: 2
     - value: breadcrumbs=5th Edition Fantasy
       wouldDecide: 2
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Movement & Range Tool Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: War of Kings - Character and Crisis Card Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Mojo Ball Scenario Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel: Crisis Protocol - Operation - Zero Tolerance Character & Crisis Card Pack'
+      wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Heimdall & Skurge'
       wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Emma Frost and Psylocke'
       wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Apocalypse - Character Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Weapon X & Maverick - Character Pack'
+      wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Bishop & Nightcrawler'
       wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Klaw & M''Baku'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Squirrel Girl & Gwenpool'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Uncanny X-Men - Affiliation Pack'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Brotherhood of Mutants - Affiliation Pack'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Avengers - Affiliation Pack'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Cabal - Affiliation Pack'
       wouldDecide: 1
   ret-goblingaming:
     - value: tags=Tabletop Games
@@ -805,9 +805,9 @@ unmapped:
     - value: vendor=Vallejo
       wouldDecide: 695
     - value: tags=Games Workshop
-      wouldDecide: 545
+      wouldDecide: 548
     - value: vendor=Games Workshop
-      wouldDecide: 545
+      wouldDecide: 548
     - value: tags=The Army Painter
       wouldDecide: 385
     - value: vendor=The Army Painter
@@ -820,10 +820,6 @@ unmapped:
       wouldDecide: 235
     - value: tags=Warpaints Fanatic
       wouldDecide: 128
-    - value: tags=Atomic Mass Games
-      wouldDecide: 103
-    - value: vendor=Atomic Mass Games
-      wouldDecide: 103
     - value: tags=AK-Effekte & Weatherings
       wouldDecide: 98
     - value: tags=EFFEKTE & WEATHERINGS*
@@ -838,6 +834,10 @@ unmapped:
       wouldDecide: 85
     - value: tags=WARPAINTS FANATIC ACRYLICS*
       wouldDecide: 83
+    - value: tags=Atomic Mass Games
+      wouldDecide: 78
+    - value: vendor=Atomic Mass Games
+      wouldDecide: 78
     - value: tags=001-106 GAME COLOR*
       wouldDecide: 75
     - value: tags=Black Friday
@@ -961,6 +961,6 @@ unmapped:
     - value: productType=single_kit
       wouldDecide: 6
     - value: productType=starter_set
-      wouldDecide: 3
+      wouldDecide: 2
     - value: productType=character
       wouldDecide: 1

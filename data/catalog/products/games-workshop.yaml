@@ -62550,6 +62550,61 @@ products:
       - ret-goblingaming:hedonites-of-slaanesh-lord-of-pain
       - ret-radaddel:/hedonites-of-slaanesh-lord-of-pain
       - ret-radaddel:hedonites-of-slaanesh-lord-of-pain
+  - id: games-workshop/99070201027
+    name: 'MAGGOTKIN OF NURGLE: ROTBRINGER SORCERER'
+    manufacturer: games-workshop
+    productCode: '99070201027'
+    sku: '99070201027'
+    ean: '5011921995462'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 18.28
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2021_12_99070201027_RotbringerSorcererStock.jpg?v=1639182598
+    evidence:
+      - mfr-gw-trade:99070201027
+      - ret-gamenerdz:/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
+      - ret-goblingaming:rotbringer-sorcerer-age-of-sigmar-2021
+  - id: games-workshop/99070201028
+    name: 'MAGGOTKIN OF NURGLE: LORD OF PLAGUES'
+    manufacturer: games-workshop
+    productCode: '99070201028'
+    sku: '99070201028'
+    ean: '5011921170326'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 10.84
+    url: https://www.goblingaming.co.uk/products/nurgle-rotbringers-lord-of-plagues
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_03_EB200a-83-32-99070201028-MaggotkinLordofPlagues.jpg?v=1682346529
+    evidence:
+      - mfr-gw-trade:99070201028
+      - ret-goblingaming:nurgle-rotbringers-lord-of-plagues
+  - id: games-workshop/99070201029
+    name: 'MAGGOTKIN OF NURGLE: LORD OF BLIGHTS'
+    manufacturer: games-workshop
+    productCode: '99070201029'
+    sku: '99070201029'
+    ean: '5011921170333'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 15.38
+    url: https://www.goblingaming.co.uk/products/lord-of-blight
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/lord-of-blight-nurgle-putrid-blight-kings-age-of-s.jpg?v=1560801727
+    evidence:
+      - mfr-gw-trade:99070201029
+      - ret-goblingaming:lord-of-blight
   - id: games-workshop/99070201030
     name: Tzaangor Shaman
     manufacturer: games-workshop
@@ -64446,6 +64501,27 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99079915005
+  - id: games-workshop/99079915006
+    name: KARANAK THE HOUND OF VENGEANCE
+    manufacturer: games-workshop
+    productCode: '99079915006'
+    sku: '99079915006'
+    ean: '5011921113187'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 22.95
+    priceEur: 32.4
+    url: https://www.goblingaming.co.uk/products/karanak-the-hound-of-vengeance
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/demo_785bcccd-665e-4b1d-b113-1e4a47193641.jpg?v=1702391123
+    evidence:
+      - mfr-gw-trade:99079915006
+      - ret-goblingaming:karanak-the-hound-of-vengeance
+      - ret-radaddel:/blades-of-khorne-karanak-the-hound-of-vengeance
+      - ret-radaddel:daemons-of-khorne-karanak-the-hound-of-vengeance
   - id: games-workshop/99079915007
     name: 'DAEMONS OF SLAANESH: THE MASQUE'
     manufacturer: games-workshop
@@ -100945,12 +101021,10 @@ products:
     sku: '99120201220'
     ean: '5011921254781'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921995462'
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -100968,10 +101042,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/rotbringer-sorcerer
       - mfr-gw-algolia:prod4810197-99120201220
-      - mfr-gw-trade:99070201027
       - mfr-gw-trade:99120201220
-      - ret-gamenerdz:/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
-      - ret-goblingaming:rotbringer-sorcerer-age-of-sigmar-2021
       - ret-radaddel:/maggotkin-of-nurgle-rotbringer-sorcerer
       - ret-radaddel:maggotkin-of-nurgle-rotbringer-sorcerer
   - id: games-workshop/99120201221
@@ -100981,14 +101052,12 @@ products:
     sku: '99120201221'
     ean: '5011921254798'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921170326'
     supersedes:
       - games-workshop/99070201009
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -101004,9 +101073,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/lord-of-plagues
       - mfr-gw-algolia:prod2940185-99120201221
-      - mfr-gw-trade:99070201028
       - mfr-gw-trade:99120201221
-      - ret-goblingaming:nurgle-rotbringers-lord-of-plagues
       - ret-radaddel:/maggotkin-of-nurgle-lord-of-plagues
       - ret-radaddel:nurgle-rotbringers-lord-of-plagues
   - id: games-workshop/99120201222
@@ -101016,14 +101083,12 @@ products:
     sku: '99120201222'
     ean: '5011921254804'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921170333'
     supersedes:
       - games-workshop/99070201024
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -101041,9 +101106,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/lord-of-blights
       - mfr-gw-algolia:prod3700235-99120201222
-      - mfr-gw-trade:99070201029
       - mfr-gw-trade:99120201222
-      - ret-goblingaming:lord-of-blight
       - ret-radaddel:/maggotkin-of-nurgle-lord-of-blights
       - ret-radaddel:nurgle-rotbringers-lord-of-blights
   - id: games-workshop/99120201236
@@ -143525,18 +143588,15 @@ products:
     sku: '99129915081'
     ean: '5011921259083'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921113187'
     gameSystem: warhammer-40k
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
-    priceEur: 32.4
     url: https://www.warhammer.com/en-GB/shop/Karanak-the-Hound-of-Vengeance-2019
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99079915006_KaranakHoundofVengeance01.jpg
     description: |-
@@ -143551,11 +143611,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/grand-alliance-chaos/karanak
       - legacy-catalog:games-workshop/warhammer-40k/grand-alliance-chaos/karanak-2
       - mfr-gw-algolia:prod4150238-99129915081
-      - mfr-gw-trade:99079915006
       - mfr-gw-trade:99129915081
-      - ret-goblingaming:karanak-the-hound-of-vengeance
-      - ret-radaddel:/blades-of-khorne-karanak-the-hound-of-vengeance
-      - ret-radaddel:daemons-of-khorne-karanak-the-hound-of-vengeance
   - id: games-workshop/99129915082
     name: Poxbringer
     manufacturer: games-workshop

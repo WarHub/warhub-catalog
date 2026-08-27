@@ -1,58 +1,46 @@
 conflicts:
   - type: ean-mismatch
-    entity: atomic-mass-games/star-wars-legion-at-st-walker
-    chosen: '0841333134983'
+    entity: atomic-mass-games/CP269
+    chosen: '0841333131531'
     assertions:
-      - ean: '0841333122157'
+      - ean: '0763473697909'
         sources:
+          - legacy-catalog
+      - ean: '0841333131531'
+        sources:
+          - bdb-goupc
           - ret-gamenerdz
-      - ean: '0841333134983'
+  - type: ean-mismatch
+    entity: atomic-mass-games/SWQ144
+    chosen: '0841333131951'
+    assertions:
+      - ean: '0764538221565'
+        sources:
+          - legacy-catalog
+      - ean: '0841333131951'
         sources:
           - ret-gamenerdz
           - ret-goblingaming
   - type: ean-mismatch
-    entity: corvus-belli/infinity-haqqislam-bashi-bazouks-boarding-shotgun
-    chosen: '2804280001614'
+    entity: atomic-mass-games/SWQ15
+    chosen: '0841333130381'
     assertions:
-      - ean: '2804280001614'
+      - ean: '0764563147281'
         sources:
-          - ret-gamenerdz
-      - ean: '2804820005911'
+          - legacy-catalog
+      - ean: '0841333130381'
         sources:
           - ret-gamenerdz
   - type: ean-mismatch
-    entity: corvus-belli/infinity-nomads-iguana-squadron
-    chosen: '2805650004389'
+    entity: atomic-mass-games/SWL98
+    chosen: '0841333118488'
     assertions:
-      - ean: '2805650004389'
+      - ean: '0841333118488'
         sources:
           - ret-gamenerdz
-          - ret-goblingaming
-      - ean: '8436607713784'
+      - ean: '0925453755058'
         sources:
-          - ret-gamenerdz
-  - type: ean-mismatch
-    entity: corvus-belli/infinity-combined-army-malignos-hacker
-    chosen: '2816150009224'
-    assertions:
-      - ean: '2806480003559'
-        sources:
-          - ret-gamenerdz
-      - ean: '2816150009224'
-        sources:
-          - ret-gamenerdz
-          - ret-goblingaming
-  - type: ean-mismatch
-    entity: corvus-belli/infinity-combined-army-daturazi-witch-soldiers
-    chosen: '8436607710622'
-    assertions:
-      - ean: '2806600004640'
-        sources:
-          - ret-gamenerdz
-      - ean: '8436607710622'
-        sources:
-          - ret-gamenerdz
-          - ret-goblingaming
+          - legacy-catalog
   - type: ean-mismatch
     entity: games-workshop/warhammer-40-000-paints-tools-set
     chosen: '5011921196951'
@@ -84,25 +72,39 @@ conflicts:
         sources:
           - ret-goblingaming
   - type: ean-mismatch
-    entity: vallejo/green-grey-18ml-model-colour
-    chosen: '8429551708869'
+    entity: corvus-belli/281131
+    chosen: '8436607710936'
     assertions:
-      - ean: '8429551708869'
+      - ean: '8436607710936'
         sources:
+          - legacy-catalog
+          - ret-gamenerdz
           - ret-goblingaming
-      - ean: '8429551709712'
+      - ean: '8436607711209'
         sources:
+          - ret-gamenerdz
           - ret-goblingaming
   - type: ean-mismatch
-    entity: vallejo/red-17ml-model-air
-    chosen: '8429551711029'
+    entity: corvus-belli/281242
+    chosen: '8436607712763'
     assertions:
-      - ean: '8429551711029'
+      - ean: '8436607712725'
         sources:
-          - ret-goblingaming
-      - ean: '8429551712699'
+          - ret-gamenerdz
+      - ean: '8436607712763'
         sources:
+          - ret-gamenerdz
           - ret-goblingaming
+  - type: ean-mismatch
+    entity: corvus-belli/281705
+    chosen: '8436607712732'
+    assertions:
+      - ean: '8436607712732'
+        sources:
+          - ret-gamenerdz
+      - ean: '8436607712770'
+        sources:
+          - ret-gamenerdz
   - type: supersession-stale-code
     key: ret-goblingaming:age-of-sigmar-stormcast-eternals-paint-set
     ean: '5011921219322'
@@ -182,6 +184,22 @@ conflicts:
     candidates:
       - army-painter/WP8060
       - army-painter/WP8060P
+  - type: ambiguous-join
+    keys:
+      - ret-radaddel:/star-wars-legion-range-troopers
+      - ret-radaddel:star-wars-legion-range-troopers
+    name: 'Star Wars: Legion – Range Troopers'
+    candidates:
+      - atomic-mass-games/SWL117
+      - atomic-mass-games/SWQ89
+  - type: ambiguous-join
+    keys:
+      - ret-radaddel:/star-wars-legion-at-st-walker
+      - ret-radaddel:star-wars-legion-at-st-walker
+    name: 'Star Wars: Legion – AT-ST Walker von Atomic Mass Games'
+    candidates:
+      - atomic-mass-games/SWL138
+      - atomic-mass-games/SWQ10
   - type: ambiguous-join
     keys:
       - ret-radaddel:chaos-space-marines-raptors-1
