@@ -1905,16 +1905,24 @@ products:
     productCode: AK11237
     sku: AK11237
     ean: '8435568306844'
-    eanConfidence: provisional
+    eanConfidence: confirmed
+    gameSystem: bolt-action
+    faction: general
     category: paint
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-07'
     priceGbp: 7.46
     url: https://store.warlordgames.com/products/matt-varnish-100-ml-3gen
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK11237.jpg?v=1773327097
+    description: |-
+      A high quality matte varnish in a 100ml bottle which can be applied with a brush or an airbrush to achieve a dead flat finish on any surface.
+
+      Acrylic Matte Varnish formulated for maximum airbrush performance. Water soluble, odourless, and non-toxic. Shake before each use. Dries completely in 12 hours.
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/matt-varnish-100-ml
       - mfr-warlord-store:matt-varnish-100-ml-3gen
       - ret-goblingaming:matt-varnish-100-ml-3rd-gen-acrylic-ak-paint-ak11237
   - id: ak-interactive/AK11238
@@ -1923,16 +1931,24 @@ products:
     productCode: AK11238
     sku: AK11238
     ean: '8435568306851'
-    eanConfidence: provisional
+    eanConfidence: confirmed
+    gameSystem: bolt-action
+    faction: general
     category: paint
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-07'
     priceGbp: 7.46
     url: https://store.warlordgames.com/products/satin-varnish-100-ml-3gen
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK11238.jpg?v=1773327254
+    description: |-
+      A high quality satin varnish in a 100ml bottle which can be applied with a brush or an airbrush to achieve a satin finish on any surface.
+
+      Acrylic Satin Varnish formulated for maximum airbrush performance. Water soluble, odourless, and non-toxic. Shake before each use. Dries completely in 12 hours.
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/satin-varnish-100-ml
       - mfr-warlord-store:satin-varnish-100-ml-3gen
       - ret-goblingaming:satin-varnish-100ml-3rd-gen-acrylic-ak-paint-ak11238
   - id: ak-interactive/AK11239
@@ -1941,17 +1957,25 @@ products:
     productCode: AK11239
     sku: AK11239
     ean: '8435568306868'
-    eanConfidence: provisional
+    eanConfidence: confirmed
+    gameSystem: bolt-action
+    faction: general
     category: paint
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-21'
+    firstSeen: '2026-07-07'
     priceGbp: 7.46
     priceEur: 7.9
     url: https://store.warlordgames.com/products/gloss-varnish-100-ml-3gen
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK11239.jpg?v=1773327512
+    description: |-
+      A high quality glossy varnish in a 100ml bottle which can be applied with a brush or an airbrush to achieve a glossy finish on any surface.
+
+      Acrylic Glossy Varnish formulated for maximum airbrush performance. Water soluble, odourless, and non-toxic. Shake before each use. Dries completely in 12 hours.
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/gloss-varnish-100-ml-3gen
       - mfr-warlord-store:gloss-varnish-100-ml-3gen
       - ret-goblingaming:gloss-varnish-100-ml-3rd-gen-acrylic-ak-paint-ak11239
       - ret-radaddel:gloss-varnish-100-ml-3gen
@@ -2014,16 +2038,32 @@ products:
     productCode: AK11252
     sku: AK11252
     ean: '8435568331341'
-    eanConfidence: provisional
+    eanConfidence: confirmed
+    gameSystem: bolt-action
+    faction: general
     category: paint
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-07'
     priceGbp: 7.46
     url: https://store.warlordgames.com/products/ultra-matt-varnish-100-ml
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK11252.jpg?v=1773327663
+    description: |-
+      AK's star varnish in a **100ml** format.
+
+      AK was the first brand to bring out an ultra-matte varnish on the market and it is still the highest quality varnish available.
+
+      This high quality ultra **matte** varnish can be applied by brush or airbrush to achieve a perfect matte finish on any surface.
+
+      Soluble in water, odourless and non-toxic.
+
+      Shake before using.
+
+      Complete drying in 12 hours.
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/ultra-matte-varnish-100-ml
       - mfr-warlord-store:ultra-matt-varnish-100-ml
       - ret-goblingaming:ultra-matt-varnish-ak-3rd-gen-100ml
   - id: ak-interactive/AK11274
@@ -23206,22 +23246,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115029-ak-pigmente-white-ashes-97-ak142-1.webp?v=1781190822
     evidence:
       - ret-radaddel:ak-pigmente-white-ashes-97
-  - id: ak-interactive/ak-playmarkers-animal-green
-    name: AK Playmarkers Animal Green
-    manufacturer: ak-interactive
-    sku: '131733'
-    ean: '8435568338678'
-    eanConfidence: provisional
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.55
-    url: https://radaddel.de/products/ak-playmarkers-animal-green
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/131733-ak-playmarkers-animal-green-akm014-1.webp?v=1781219164
-    evidence:
-      - ret-radaddel:ak-playmarkers-animal-green
   - id: ak-interactive/ak-plier-cutting-tool
     name: AK Plier Cutting Tool
     manufacturer: ak-interactive
@@ -28994,16 +29018,29 @@ products:
     name: Animal Green - Playmarker
     manufacturer: ak-interactive
     sku: AKM014
+    ean: '8435568338678'
+    eanConfidence: confirmed
+    gameSystem: bolt-action
+    faction: general
     category: paint
     categoryBasis: mapped
+    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-07'
     priceGbp: 2.55
+    priceEur: 2.55
     url: https://store.warlordgames.com/products/animal-green-playmarker
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AKM014_01-scaled.jpg?v=1756399444
+    description: |-
+      The easiest and fastest way to paint and add colour to your miniatures, Playmarkers are perfect for adding precise spots of colour such as for camouflage schemes. Fast drying with excellent adhesion and compatible with blending and weathering effects, Playmarkers can be used with plastic, resin and metal miniatures.
+
+      \*It is recommended to prime in white to take full advantage of the paint’s qualities.
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/animal-green-playmarker
       - mfr-warlord-store:animal-green-playmarker
+      - ret-goblingaming:playmarkers-animal-green-ak-playmarkers
+      - ret-radaddel:ak-playmarkers-animal-green
   - id: ak-interactive/anodized-violet-ak-3rd-gen-17ml
     name: Anodized Violet  - AK 3rd Gen 17ml
     manufacturer: ak-interactive
@@ -39143,22 +39180,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/127493-plastic-cement-standard-density-200ml-refill-ak12003-b-1.webp?v=1781209885
     evidence:
       - ret-radaddel:plastic-cement-standard-density-200ml-refill
-  - id: ak-interactive/playmarkers-animal-green-ak-playmarkers
-    name: 'Playmarkers: Animal Green - AK Playmarkers'
-    manufacturer: ak-interactive
-    sku: AKM014-SINGLE
-    ean: '8435568338678'
-    eanConfidence: provisional
-    category: paint
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 1.82
-    url: https://www.goblingaming.co.uk/products/playmarkers-animal-green-ak-playmarkers
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM014.jpg?v=1745848163
-    evidence:
-      - ret-goblingaming:playmarkers-animal-green-ak-playmarkers
   - id: ak-interactive/playmarkers-black-ak-playmarkers
     name: 'Playmarkers: Black - AK Playmarkers'
     manufacturer: ak-interactive

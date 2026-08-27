@@ -69,6 +69,117 @@ joins:
   # 99120599109 (Palanite Enforcer Weapons & Upgrades), so article 132807 is the other one --
   # 99120599079, the discontinued Necromunda: Enforcer Weapons & Upgrades.
   'ret-radaddel:necromunda-enforcer-weapons-upgrades': games-workshop/99120599079
+# `{observation key: correct manufacturer slug}` -- see Matches.reassignManufacturer in
+# resolve/join.py for what this is and what the bar for an entry is.
+#
+# ALL THIRTEEN ENTRIES ARE ONE DEFECT, MEASURED 2026-08-26. A wargame store's catalogue filed
+# somebody else's hobby accessory under the store's own brand, and the catalog believed it. Every
+# one of them raised BOTH a `cross-manufacturer-ean` and an `ean-shared` conflict, because the real
+# manufacturer's own entity for the same item already existed and already held the same barcode.
+#
+# THE EVIDENCE IS THE GS1 COMPANY PREFIX PLUS THE ITEM'S OWN MANUFACTURER, and both are in this
+# repo. Over the published catalog, primary barcodes only: prefix 5713799 holds 657 products, 649
+# army-painter and 8 warlord-games; prefix 8435568 holds 907, 902 ak-interactive and 5
+# warlord-games. The minorities are exactly the ids below. Warlord's own ranges (5060917, 584
+# products) are 100% clean in the other direction, so this is not Warlord sharing a prefix.
+# And Warlord's OWN STORE sells these same items and attributes every one of them to Army Painter
+# or AK Interactive in its Shopify `vendor` field (`mfr-warlord-store:sculpting-tools`,
+# `:miniature-model-magnets`, `:warpaints-fanatic-world-war-ii-*-paint-set`, ...).
+#
+# WHERE THE WRONG ANSWER CAME FROM. Eleven are `legacy-catalog`, whose manufacturer IS the path the
+# old .NET pipeline filed the record under -- `migrate/legacy.py` builds the observation key prefix
+# and the `manufacturer` field from the same `manufacturerSlug` string, so a record under
+# `warlord-games/bolt-action/general/` is attributed to Warlord by construction, with nothing
+# anywhere in the row claiming Warlord made it. Three are `ret-tistaminis`, whose Shopify `vendor`
+# on the Army Painter WWII paint sets literally reads "Warlord Games"; this was predicted three
+# weeks before it happened, in `data/catalog/sources/mfr-armypainter.yaml`, naming these exact
+# three barcodes and these exact three ids.
+#
+# NOT USED AS EVIDENCE: any of these records' own url slugs or image filenames.
+reassignManufacturer:
+  # AK Interactive 3rd-gen varnishes and playmarkers. GS1 8435568.
+  'legacy-catalog:warlord-games/bolt-action/general/matt-varnish-100-ml': ak-interactive
+  'legacy-catalog:warlord-games/bolt-action/general/satin-varnish-100-ml': ak-interactive
+  'legacy-catalog:warlord-games/bolt-action/general/gloss-varnish-100-ml-3gen': ak-interactive
+  'legacy-catalog:warlord-games/bolt-action/general/ultra-matte-varnish-100-ml': ak-interactive
+  'legacy-catalog:warlord-games/bolt-action/general/animal-green-playmarker': ak-interactive
+  # Army Painter tools and brushes. GS1 5713799.
+  'legacy-catalog:warlord-games/bolt-action/general/sculpting-tools': army-painter
+  'legacy-catalog:warlord-games/bolt-action/general/miniature-model-magnets': army-painter
+  'legacy-catalog:warlord-games/bolt-action/general/small-drybrush': army-painter
+  # The same legacy path, same GS1 prefix, but no army-painter twin exists yet so these two raise
+  # no conflict today. They are the identical defect and are corrected with their siblings rather
+  # than left to surface as a conflict the next time an Army Painter harvest reaches them.
+  'legacy-catalog:warlord-games/bolt-action/general/large-drybrush': army-painter
+  'legacy-catalog:warlord-games/bolt-action/general/kolinsky-masterclass-brush': army-painter
+  # Army Painter Warpaints Fanatic WWII sets, sold through Warlord and vendored "Warlord Games".
+  # The Army Painter's own store asserts all three barcodes under WP8082P/WP8083P/WP8084P.
+  'ret-tistaminis:ww2-american-paint-set': army-painter
+  'ret-tistaminis:ww2-german-paint-set': army-painter
+  'ret-tistaminis:ww2-british-paint-set': army-painter
+# `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
+rejectEans:
+  # ONE STORE PUT A GAMES WORKSHOP BARCODE ON A WARLORD BOX, and the catalog published it as that
+  # box's confirmed alternate barcode. `5011921171835` is GENESTEALER CULTS: BIOPHAGUS: Games
+  # Workshop's own trade sheet asserts it under GW code 99070117012 (`mfr-gw-trade:99070117012`),
+  # with an explicit `hints.supersedes` naming the barcode it replaced (5011921110988, 2021-11-29),
+  # and `ret-goblingaming`, `legacy-catalog` and an `arc-wargameportal` capture keyed on GW's own
+  # SS Code 51-44 all agree. Prefix 5011921 holds 6,309 published products and 6,309 of them are
+  # games-workshop -- this is the single exception in the whole range.
+  #
+  # The Warlord side is contradicted by Warlord. `mfr-warlord-store:italian-paracadutisti-weapons-
+  # teams` -- Warlord's own store, same sku 402215810 -- says `5060917991070`, as do
+  # `ret-goblingaming` and `legacy-catalog`; 5060917 holds 584 published products, all Warlord.
+  # Only this one tistaminis row says otherwise, and its ten neighbouring Italian Paracadutisti
+  # rows in the same file all carry 5060917 barcodes.
+  #
+  # WHY THE EXISTING GUARD DID NOT CATCH IT. `resolve/corroborate.py`'s `bridged` test asks whether
+  # a losing barcode was ever carried on the SURVIVING product code. This row carries the CORRECT
+  # Warlord sku alongside the wrong barcode, so the test passes, `bridged` is empty, and the GW
+  # barcode is absorbed as "a retired version of this Warlord product" and stamped `confirmed`.
+  # The test never looks at the GS1 prefix, which is the signal that would have caught it.
+  'ret-tistaminis:bolt-action-italian-paracadutisti-weapons-team': ['5011921171835']
+  # TWELVE MDF TERRAIN PIECES WERE WEARING TWELVE TUBS OF BASING MATERIAL'S BARCODES, and the
+  # (manufacturer, ean) union in resolve/join.py fused each pair into one record: `warlord-games/
+  # 849110025` currently publishes as "Battlefields & Basing: Desert Sand (180ml)" with the WW2
+  # Normandy high Wall with Gate folded into it, and `warlord-games/H00134` does not exist.
+  #
+  # THE BLOCK IS CONTIGUOUS AND THE ERROR IS LOCALISED. Every `H001xx` legacy row carries
+  # `hints.eanSource: shopify:flipsidegaming.com` -- the barcode is a BACKFILL from a third-party
+  # shop, not from Warlord. For H00123-H00134 that backfill landed on `5060917992xxx`; for every
+  # other H001 row that has a barcode at all (H00158, H00159, H00161, H00162, H00192, H00193) it
+  # landed on `5907652xxxxx` and agrees with `ret-tistaminis` exactly, 6 of 6. So legacy's H001
+  # barcodes are normally right and this is a bounded run of 12, not a systematic disagreement.
+  #
+  # WHICH SIDE IS WRONG, WITHOUT GUESSING. Each rejected value is ALREADY the confirmed primary of
+  # a different published product in this catalog, independently asserted there by legacy AND
+  # ret-tistaminis AND (for several) ret-radaddel: 5060917992091 is 849110025 Desert Sand,
+  # 5060917992213 is 849110014 Spring 2mm Static Grass, and so on through the block. One barcode
+  # cannot be two products, and the terrain has its own: `ret-tistaminis` gives each of these 12
+  # skus a `5907652…` value, the prefix all 34 MDF-terrain observations in the ledger use and that
+  # nothing else in the catalog uses. Sequence is not the argument -- the independent claim on the
+  # other product is.
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-cafe': ['5060917992213']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-restaurant': ['5060917992220']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-townhouse-1': ['5060917992237']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-townhouse-2': ['5060917992244']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-townhouse-3': ['5060917992251']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-large-brick-shed': ['5060917992183']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-small-sheds-with-dovecote': ['5060917992190']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-large-tin-shed': ['5060917992206']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-garage-with-petrol-station': ['5060917992169']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-church': ['5060917992176']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-walls-with-gate-high': ['5060917992091']
+  #
+  # THE THIRTEENTH ROW OF THE BLOCK IS DELIBERATELY NOT HERE. `…pre-painted-ww2-normandy-walls-
+  # with-gate-low` (H00133) carries `5060917992084`, which is the same mistake -- but that value is
+  # claimed by NOTHING else in the catalog (there is no published `849110024`), so it fuses no two
+  # products and rejecting it would only delete a barcode this repo published as H00133's confirmed
+  # primary in every release from v2026.7.13 to v2026.8.25.2 (`git log -S 5060917992084 --
+  # data/catalog/products/`). The resolver already does the right thing there unaided: it makes
+  # ret-tistaminis's live `5907652563592` the primary and keeps `5060917992084` in
+  # `additionalEans`, and files the disagreement as an `ean-mismatch` -- which is a true record of
+  # the evidence and costs nothing. Left alone on purpose.
 aliases: {}
 # `{retired entity id: current entity id}`. BOTH records are published: the retired one keeps its
 # own productCode, its own primary `ean`, its own name/firstSeen and gains `supersededBy`; the
@@ -982,3 +1093,43 @@ reassignCodes:
 # embed a GW product code in the CDN asset name -- e.g. the radaddel 40k Starter Set row's image is
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
+
+# --- `ean-mismatch`, DELIBERATELY LEFT (2026-08-26) ---------------------------------------------
+# 35 rows in data/review/conflicts.yaml. Every losing barcode in all 35 is retained in its own
+# record's `additionalEans` and the record is stamped `eanConfidence: conflicted`, so nothing is
+# lost and nothing is silently asserted -- `report --ean-guard` reports 0 lost against them. They
+# are a true record of sources disagreeing, which is what the type is for.
+#
+# BUT 25 OF THE 35 ARE ALSO SOMETHING WORSE, AND IT SHOULD BE ON THE RECORD RATHER THAN INFERRED
+# LATER: the entity holds MORE THAN ONE product code, i.e. two or more real products published as
+# one record with the other codes' ids gone. `warlord-games/403205802` holds nine (402012011,
+# 402012057, 402414007, 403205802, 403214010, 403214011, 403214012, 403214014, 403414002);
+# `wyrd-games/WYR40207` holds seven; `warlord-games/452011205`, `/452610003` and `/772012008` hold
+# five each; `steamforged-games/SFEE-LL005` four; `warlord-games/302011002`, `/452010405`,
+# `mantic-games/MGARM114`, `wyrd-games/WYR40162` three each; the remaining 15 hold two.
+#
+# Re-derive the split with `joined_evidence()` over the resolved catalog: for each `ean-mismatch`
+# entity, collect `taxonomy.normalize_code(member.manufacturer, member.sku)` across its members and
+# count the distinct non-null values. 25 have more than one; the other 10 -- the four Corvus Belli
+# rows, two Vallejo, the AMG AT-ST, the GW paints+tools set, `warlord-games/H00133` and
+# `mantic-games/MGWD173` -- are a genuine disagreement about ONE product's barcode and want nothing
+# but the conflict they already have.
+#
+# WHY THEY ARE NOT FIXED HERE. Splitting a fused family needs a per-member ruling on which barcode
+# belongs to which code, and in these the sources contradict each other rather than one being
+# demonstrably wrong: in `772012008` and `452011205` two sources hold the SAME SET of barcodes
+# permuted across the codes, and in `452610003` and `452600605` it is the MANUFACTURER'S OWN store
+# that repeats one barcode across a variant family. That is the opposite of the terrain block
+# above, where a third product's independent claim settled it. Guessing here would publish a
+# barcode against the wrong box, which is the failure this whole file exists to prevent.
+#
+# SEVEN OF THE 25 ARE GW RE-CODES and look like `supersessions` candidates -- 99120117019/
+# 99120117003, 99070101051/99120101465, 99120101362/99120101484, 99070101075/99120101479,
+# 99070108012/99120108138 all share an SS Code across the pair, which is GW's own identity for a
+# product across a re-code. They are NOT declared here because GW's register does not assert the
+# lineage (neither trade row carries a `hints.supersedes` naming the other), and SS-code equality
+# alone is not the bar this repo has used: `99120101329`/`99120101254` is in the same list with
+# 55-22 against 48-100, and that pair is Chief Librarian Tigurius, whose join a previous verify
+# pass correctly killed as a metal-to-resin re-sculpt rather than a repackaging. A lineage claim
+# publishes; it needs the register or a per-item verification, and it should land as its own change
+# with that evidence rather than riding along here.

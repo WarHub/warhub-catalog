@@ -30,6 +30,34 @@ class Matches(BaseModel):
     # mis-code (e.g. a single-miniature listing tagged with an army-set's code); it is not a general
     # re-slotting tool. See resolve/join.py where `code` is computed.
     reassignCodes: dict[str, str] = Field(default_factory=dict)
+    # Hand corrections for a single observation attributed to the WRONG MANUFACTURER, mapping
+    # observation key -> the correct manufacturer slug. Applied before anything else in
+    # `join_observations`, so the corrected row groups, names and publishes as that manufacturer's.
+    #
+    # WHY A SOURCE GETS THIS WRONG. Manufacturer attribution is per-source machinery, and two of the
+    # shapes in use here cannot see who makes a thing at all: `legacy-catalog` takes it from the
+    # PATH the old .NET pipeline filed a record under (`migrate/legacy.py` builds the key prefix and
+    # the manufacturer from the same `manufacturerSlug` field), and a Shopify `vendor` string is
+    # whatever the STORE typed. Both answer "whose shelf was this on", which is the same as "who
+    # made it" right up until a store resells someone else's accessory.
+    #
+    # This is not a re-slotting tool and it is not for a judgement call. The bar is that the item's
+    # OWN manufacturer, or its GS1 company prefix, says otherwise -- and the entry says which.
+    reassignManufacturer: dict[str, str] = Field(default_factory=dict)
+    # Barcodes a source asserted on ONE listing that are demonstrably not that product's, mapping
+    # observation key -> the barcodes to disbelieve. The observation keeps everything else it says.
+    #
+    # WHY THIS CANNOT BE LEFT TO THE CONFLICT. A barcode is an identity, so a wrong one does two
+    # things a wrong price never does: it MERGES two unrelated products through
+    # `resolve/join.py`'s (manufacturer, ean) union, and it publishes -- a loser lands in
+    # `additionalEans` and the record then answers to a barcode belonging to something else.
+    # Recording the disagreement in conflicts.yaml leaves both of those in the published catalog.
+    #
+    # THE BAR IS THE SAME AS reassignManufacturer's, and deliberately high: the item's OWN
+    # manufacturer must assert a different barcode for it, or the GS1 company prefix must belong to
+    # someone else. "Two sources disagree" is NOT enough -- that is what `ean-mismatch` is for, and
+    # a genuine repackaging looks exactly like it. An entry says which of the two it is.
+    rejectEans: dict[str, list[str]] = Field(default_factory=dict)
 
 
 @dataclass
@@ -68,6 +96,25 @@ def join_observations(
 ) -> JoinResult:
     result = JoinResult()
     sku_is_listing_id = sku_is_listing_id or {}
+    # Hand corrections to WHAT AN OBSERVATION SAYS come first, so every later step -- grouping, the
+    # cross-manufacturer-ean check, `group_entity_id`, and the members `resolve_attributes` and
+    # `corroborate` fold -- sees one answer. The evidence file is never rewritten: a source's claim
+    # stays that source's claim (OBJECTIVES 5), and the correction lives in matches.yaml where it
+    # is reviewable next to its reason.
+    if matches.reassignManufacturer or matches.rejectEans:
+        corrected_observations = []
+        for observation in observations:
+            update: dict[str, object] = {}
+            manufacturer = matches.reassignManufacturer.get(observation.key)
+            if manufacturer:
+                update["manufacturer"] = manufacturer
+            rejected = matches.rejectEans.get(observation.key)
+            if rejected and canonical_ean(observation.ean) in {canonical_ean(e) for e in rejected}:
+                update["ean"] = None
+            corrected_observations.append(
+                observation.model_copy(update=update) if update else observation
+            )
+        observations = corrected_observations
     ordered = sorted(observations, key=lambda o: _priority(o, kinds))
 
     # barcode-db observations must never MINT an entity -- they exist only to corroborate an
