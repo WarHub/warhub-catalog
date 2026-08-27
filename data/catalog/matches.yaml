@@ -27,6 +27,65 @@
 # change, an edition-content change, or a premium/limited-variant line make them DISTINCT products
 # with no lineage at all.
 joins:
+  # --- THE TWO ARCHIVE CAPTURES (2026-08-27) ---------------------------------------------------
+  # wargameportal.com is an `archive` source, so its rows are point-in-time captures with no
+  # barcode. Both captures are recent (archiveTimestamp 2025-05-21 and 2025-10-06) and the site is
+  # still live and still selling both items, so its current pages are usable corroboration -- with
+  # the caveat that a shop can change what sits at a URL, which is why neither ruling rests on the
+  # page alone.
+  #
+  # ARCANE RUINS. The competing records are `99122799001` (current, barcode, filed by legacy under
+  # the-old-world/scenery, stocked by three retailers) and `99129999003` (discontinued, NO barcode,
+  # known only from one archived GW webstore page, and sitting in GW's `9999` placeholder range).
+  # The live page describes a Warhammer: The Old World terrain kit -- obelisk, arches, columns, 55
+  # components -- and the capture postdates The Old World's launch.
+  'arc-wargameportal:/products/arcane-ruins': games-workshop/99122799001
+  # CHAOS WARRIORS, and here the shop's own shelf label is wrong while its components are right.
+  # The capture carries sku `83-06`, which is GW's SS Code, and only two of the four candidates
+  # have it: 99120201047 and 99120201131. That alone eliminates the two Warhammer: The Old World
+  # codes (SS Codes 08-07 and 08-21) -- even though the live page files the product under "The Old
+  # World / Warriors of Chaos". The page's own description settles which is right and contradicts
+  # its own label: "10 Chaos Warriors ... 97 plastic components ... 10x Citadel 32mm ROUND Bases".
+  # Round bases are Age of Sigmar; The Old World kit is ranked on squares. Between the two
+  # Slaves to Darkness codes, 99120201047 is discontinued and 99120201131 is current and already
+  # carries radaddel and gamenerdz listings, and the shop was actively listing this in 2025-10.
+  #
+  # A SHOP'S CATEGORY IS A SHELF, NOT A CLAIM ABOUT THE PRODUCT -- the same thing that put Army
+  # Painter tools under `warlord-games` two layers down.
+  'arc-wargameportal:/products/chaos-warriors': games-workshop/99120201131
+  # --- `ambiguous-join` SETTLED FROM THE SHOP'S OWN BARCODE (8 rows, 2026-08-27) ---------------
+  # Each is a `ret-radaddel` listing with no product code and no barcode IN THE LEDGER, whose name
+  # matches two coded entities -- so `resolve/join.py` refuses to pick and the row founds an entity
+  # named after the German shop title. The earlier note said these clear themselves once the
+  # nightly's `shopify` detail-fetch budget reaches the handle. It has not yet, but the shop already
+  # publishes the answer: radaddel.de is a Shopify store and `/products/<handle>.json` carries the
+  # variant barcode. Read 2026-08-27, one request per handle:
+  #
+  #   speedpaint-most-wanted-set-2-0        5713799806009
+  #   chaos-space-marines-raptors-1         5011921273355
+  #   legiones-astartes-mkiv-tactical-squad 5011921266753
+  #   ogor-mawtribes-butcher                5011921266906
+  #   ogor-mawtribes-ironguts               5011921266876
+  #   warriors-of-chaos-chaos-warriors      5011921266920
+  #   star-wars-legion-at-st-walker         841333134983
+  #   star-wars-legion-range-troopers       841333134754
+  #
+  # Every one of those is already a published product's confirmed primary here, so the join states
+  # only WHICH entity the listing belongs to -- no barcode is invented, and the value will arrive in
+  # the ledger on its own when the budget reaches the handle, at which point these become no-ops.
+  #
+  # SEVEN LAND ON A NAME CANDIDATE. THE EIGHTH REFUTES THE NAME, which is the reason not to settle
+  # this family by picking between the candidates: `ogor-mawtribes-butcher` scans as 5011921266906,
+  # which is `games-workshop/99120213044` -- GW's own catalogue calls that kit "Cleavers/Gutseers"
+  # and it is neither candidate. The shop names it for one of the two units it builds.
+  'ret-radaddel:speedpaint-most-wanted-set-2-0': army-painter/WP8060P
+  'ret-radaddel:chaos-space-marines-raptors-1': games-workshop/99120102259
+  'ret-radaddel:legiones-astartes-mkiv-tactical-squad': games-workshop/99123001085
+  'ret-radaddel:ogor-mawtribes-butcher': games-workshop/99120213044
+  'ret-radaddel:ogor-mawtribes-ironguts': games-workshop/99120213041
+  'ret-radaddel:warriors-of-chaos-chaos-warriors': games-workshop/99122701018
+  'ret-radaddel:/star-wars-legion-at-st-walker': atomic-mass-games/SWQ10
+  'ret-radaddel:/star-wars-legion-range-troopers': atomic-mass-games/SWQ89
   # Archived GW webstore page for the Baneblade carrying that store's own SKU (60100181151) rather
   # than the multi-build kit's code. A store SKU on a dead page is not product-code lineage, and no
   # barcode is at stake, so this stays a fold.
@@ -1546,27 +1605,38 @@ reassignCodes:
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
 
-# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, second pass) ---------------------
-# 10 rows in data/review/conflicts.yaml, down from 46 when this adjudication started. Every losing
-# barcode is retained in its own record's `additionalEans` and the record is stamped
-# `eanConfidence: conflicted`, so nothing is lost and nothing is silently asserted --
-# `report --ean-guard` reports 0 lost against them.
+# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, third pass) ----------------------
+# 10 rows, down from 46. NO entity in the catalog holds two products any more, so every one of
+# these is one product about which sources disagree -- which is what the type is for. Each loser is
+# retained in its own record's `additionalEans` and the record is stamped `conflicted`;
+# `report --ean-guard` reports 0 lost against them. What follows is why each is CORRECT rather than
+# unfinished, because "needs an external scan" was the wrong answer and it is worth not repeating.
 #
-# ALL TEN ARE NOW SINGLE-CODE ENTITIES: one product, two or more sources, more than one barcode.
-# That is exactly what the type is for, and there is nothing further to do with them without an
-# external scan of the box. The four Corvus Belli rows, two Vallejo, the AMG AT-ST, the GW
-# paints+tools set, `warlord-games/H00133` and `mantic-games/MGWD173`.
+# FOUR ATOMIC MASS ROWS ARE A CURATED SOURCE'S JUNK BARCODE, and the measurement says so plainly.
+# Across every atomic-mass-games observation carrying a barcode, prefix 0841333 has 670 from FIVE
+# independent sources (ret-gamenerdz, legacy-catalog, ret-goblingaming and both barcode databases).
+# Every other prefix -- 0765490, 0765674, 0764563, 0763473, 0198913, 0765495, 0925453, 0167940,
+# 0764538 -- is `legacy-catalog` ALONE, 22 observations in total, none corroborated by anything.
+# CP269, SWQ144, SWQ15 and SWL98 are four of those 22. The resolver already does the right thing:
+# it makes the corroborated 0841333 value the primary and keeps legacy's in `additionalEans`.
+# They are NOT rejected, and that is deliberate -- each is currently PUBLISHED in additionalEans,
+# so rejecting it would delete a barcode this catalog has shipped, to fix nothing that is broken.
 #
-# NO ENTITY HOLDS MORE THAN ONE PRODUCT CODE ANY MORE -- that was 25 entities and 76 codes, and it
-# is 0. Re-derive with `joined_evidence()` over the resolved catalog: for each `ean-mismatch`
-# entity collect `taxonomy.normalize_code(member.manufacturer, member.sku)` across its members and
-# count the distinct non-null values.
+# `games-workshop/warhammer-40-000-paints-tools-set` IS two real products -- radaddel articles
+# 126289 (5011921196951) and 135801 (5011921260256) are two different GW paint+tools sets. They
+# cannot be split: NO source gives either one a product code. GW's own trade sheet does not carry
+# either barcode (checked across the whole ledger; only ret-radaddel asserts them), so both records
+# would fall back to a slug of the same shop title and re-merge on the id. A GW harvest that picks
+# up either barcode separates them on its own.
 #
-# THE GW RE-CODE PAIRS are split by `reassignCodes` above and still NOT declared as
-# `supersessions`: splitting the records needed only the barcode, while asserting that one replaced
-# the other needs GW's register, and the register does not say it. `99120101329`/`99120101254` is
-# why that distinction is kept -- that pair is Chief Librarian Tigurius, whose join a previous
-# verify pass correctly killed as a metal-to-resin re-sculpt rather than a repackaging.
+# `warlord-games/H00133` -- legacy has a Battlefields & Basing pot's barcode (5060917992084) on the
+# Normandy Wall. It is the 13th row of the block corrected under rejectEans, left out on purpose:
+# nothing else in the catalog holds that value, so rejecting it deletes a barcode published since
+# the original legacy migration and fuses nothing in return.
+#
+# THE REMAINING THREE -- `mantic-games/MGWD173`, `corvus-belli/281131`, and the fourth AMG row --
+# are one source against one source with no third to break the tie, and the makers publish no
+# barcode to check against (manticgames.com carries `sku` and no GTIN at all, verified 2026-08-27).
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
 # 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a

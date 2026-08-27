@@ -6032,11 +6032,14 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 50.99
+    priceEur: 50.95
     url: https://www.gamenerdz.com/star-wars-legion-at-st-walker-5vvt
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/c2d14b9f-df05-6276-7af8-8719c2661bbf.jpg?v=1767111853
     evidence:
       - ret-gamenerdz:/star-wars-legion-at-st-walker-5vvt
       - ret-goblingaming:at-st-walker
+      - ret-radaddel:/star-wars-legion-at-st-walker
+      - ret-radaddel:star-wars-legion-at-st-walker
   - id: atomic-mass-games/SWQ101
     name: 'Star Wars: Legion - Sun Fac & Poggle the Lesser'
     manufacturer: atomic-mass-games
@@ -8057,11 +8060,14 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 42.49
+    priceEur: 38.45
     url: https://www.gamenerdz.com/star-wars-legion-range-troopers-hn9w
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ89_1.webp?v=1779980925
     evidence:
       - ret-gamenerdz:/star-wars-legion-range-troopers-hn9w
       - ret-goblingaming:range-troopers-star-wars-legion
+      - ret-radaddel:/star-wars-legion-range-troopers
+      - ret-radaddel:star-wars-legion-range-troopers
   - id: atomic-mass-games/SWQ90
     name: 'Star Wars: Legion - The Bad Batch (2nd Edition)'
     manufacturer: atomic-mass-games
@@ -9054,21 +9060,6 @@ products:
     evidence:
       - ret-radaddel:/star-wars-legion-arc-troopers
       - ret-radaddel:star-wars-legion-arc-troopers
-  - id: atomic-mass-games/star-wars-legion-at-st-walker-von-atomic-mass-games
-    name: 'Star Wars: Legion – AT-ST Walker von Atomic Mass Games'
-    manufacturer: atomic-mass-games
-    sku: '134093'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 50.95
-    url: https://www.radaddel.de/star-wars-legion-at-st-walker
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/134093-star-wars-legion-at-st-walker-amgd1248-1.webp?v=1781230014
-    evidence:
-      - ret-radaddel:/star-wars-legion-at-st-walker
-      - ret-radaddel:star-wars-legion-at-st-walker
   - id: atomic-mass-games/star-wars-legion-attack-dice-pack
     name: 'Star Wars: Legion - Attack Dice Pack'
     manufacturer: atomic-mass-games
@@ -9617,22 +9608,6 @@ products:
     evidence:
       - ret-radaddel:/star-wars-legion-r2-d2-c-3po
       - ret-radaddel:star-wars-legion-r2-d2-c-3po
-  - id: atomic-mass-games/star-wars-legion-range-troopers
-    name: 'Star Wars: Legion – Range Troopers'
-    manufacturer: atomic-mass-games
-    sku: '134128'
-    gameSystem: star-wars-legion
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 38.45
-    url: https://www.radaddel.de/star-wars-legion-range-troopers
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/134128-star-wars-legion-range-troopers-amgd1259-1.webp?v=1781230088
-    evidence:
-      - ret-radaddel:/star-wars-legion-range-troopers
-      - ret-radaddel:star-wars-legion-range-troopers
   - id: atomic-mass-games/star-wars-legion-rebel-alliance-card-pack-englisch
     name: 'Star Wars: Legion - Rebel Alliance Card Pack (englisch)'
     manufacturer: atomic-mass-games
