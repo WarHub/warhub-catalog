@@ -59,6 +59,7 @@ def resolve_ean(
     miss_threshold: int = 3,
     surviving_code: str | None = None,
     member_codes: dict[str, str | None] | None = None,
+    preferred: str | None = None,
 ) -> EanResolution:
     assertions: dict[str, dict[str, str]] = {}  # ean -> {source_id: kind}
     asserted_by: dict[str, set[str]] = {}       # ean -> {observation key, ...}
@@ -93,6 +94,18 @@ def resolve_ean(
 
     if not assertions:
         return EanResolution(None, None, [])
+
+    # A maintainer has adjudicated this entity's barcode disagreement (matches.yaml `preferEans`).
+    # It wins over every rule below, which is the whole point -- those rules rank the SOURCES, and
+    # an entry here is made on evidence about the VALUE. It never invents: a preference the members
+    # do not assert is ignored here and failed in tests/test_repo_data.py, so a stale entry cannot
+    # quietly rewrite a barcode. The losers stay in `additional` and the confidence stays
+    # `conflicted`; only the conflicts.yaml row goes, because it has now been looked at.
+    preferred = canonical_ean(preferred) if preferred else None
+    if preferred is not None and preferred in assertions:
+        losers = sorted(e for e in assertions if e != preferred)
+        confidence = "conflicted" if losers else _confidence(assertions[preferred])
+        return EanResolution(preferred, confidence, [], losers)
 
     def strength(ean: str) -> tuple[int, int, int, int, str]:
         # Primary-selection ordering, best (smallest) first:

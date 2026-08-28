@@ -423,7 +423,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         superseded = frozenset(
             m.key for m in members if code is not None and member_codes[m.key] in folded_codes
         )
-        ean = resolve_ean(entity, members, kinds, superseded, surviving_code=code, member_codes=member_codes)
+        ean = resolve_ean(
+            entity, members, kinds, superseded, surviving_code=code, member_codes=member_codes,
+            preferred=matches.preferEans.get(entity),
+        )
         ean_resolutions[entity] = ean
         conflicts.extend(ean.conflicts)
         record = resolve_attributes(

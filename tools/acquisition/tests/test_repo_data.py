@@ -1665,3 +1665,47 @@ def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_g
                 f"{entity}: {ean} is declared withdrawn but the catalog publishes it again "
                 f"(on {published[ean]}) -- drop the entry rather than leave a standing permission"
             )
+
+
+def test_every_preferred_ean_is_one_the_entity_actually_asserts_and_is_published() -> None:
+    """THE FABRICATION GUARD FOR matches.yaml `preferEans`. The mechanism sets a record's PRIMARY
+    barcode by hand, so the one thing it must never become is a way to write a barcode into the
+    catalog that no source ever stated. Two ways that goes wrong, and this fails on both:
+
+      * the preferred value is not among the barcodes the entity's own evidence asserts -- a typo
+        or a value taken from a web page and never checked against the ledger, which is exactly the
+        mistake the MGWD173 note records having made once already;
+      * the entry stops taking effect (the entity is gone, or the record publishes something else),
+        leaving a hand adjudication that silently does nothing.
+    """
+    from warhub_acquisition.ean import canonical_ean
+    from warhub_acquisition.resolve.resolver import joined_evidence
+
+    paths = _require_repo_data()
+    if not paths.matches.exists():
+        pytest.skip("data/catalog/matches.yaml not present")
+    matches = Matches.model_validate(read_yaml(paths.matches))
+    if not matches.preferEans:
+        pytest.skip("no preferEans entries")
+    by_id = {
+        product["id"]: product
+        for path in sorted(paths.catalog_products.glob("*.yaml"))
+        for product in (read_yaml(path) or {}).get("products") or []
+    }
+    entities = joined_evidence(paths).entities
+    asserted = {
+        entity: {e for e in (canonical_ean(m.ean) for m in members) if e}
+        for entity, members in entities.items()
+    }
+    for entity, ean in matches.preferEans.items():
+        assert entity in by_id, f"preferEans names {entity!r}, which the catalog no longer has"
+        assert ean in asserted.get(entity, set()), (
+            f"preferEans {entity} -> {ean} is not a barcode this entity's evidence asserts "
+            f"(it asserts {sorted(asserted.get(entity, set()))}) -- a preference may choose among "
+            f"the evidence, never invent"
+        )
+        assert by_id[entity].get("ean") == ean, (
+            f"preferEans {entity} -> {ean} but the record publishes "
+            f"{by_id[entity].get('ean')!r} -- the entry is not taking effect"
+        )
+

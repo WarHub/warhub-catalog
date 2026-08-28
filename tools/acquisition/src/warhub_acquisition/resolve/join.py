@@ -58,6 +58,23 @@ class Matches(BaseModel):
     # someone else. "Two sources disagree" is NOT enough -- that is what `ean-mismatch` is for, and
     # a genuine repackaging looks exactly like it. An entry says which of the two it is.
     rejectEans: dict[str, list[str]] = Field(default_factory=dict)
+    # Which of an entity's competing barcodes is the PRIMARY, mapping entity id -> the ean. For the
+    # case `rejectEans` deliberately refuses: two sources disagree, and the loser cannot be shown to
+    # be something else, so it must stay published -- but the automatic choice is still wrong.
+    #
+    # WHY AN AUTOMATIC RULE CANNOT GET THESE RIGHT. With no live MANUFACTURER barcode to be
+    # authoritative, `resolve/corroborate.py` falls back to `strength`, which ranks by how live and
+    # how numerous the ASSERTING SOURCES are. That is a proxy for freshness, and it knows nothing
+    # about the barcode itself -- so a single well-fed retailer outranks a curated import even where
+    # the import's value is the one that fits the manufacturer's own allocation.
+    #
+    # THE BAR IS EVIDENCE ABOUT THE VALUE, not about who says it, and the entry says what that
+    # evidence is. This does NOT delete the loser: it keeps every competing barcode in
+    # `additionalEans` and leaves `eanConfidence: conflicted`, because the sources really do
+    # disagree. It removes only the conflicts.yaml row, which means "a human still has to look at
+    # this" and stops being true once one has. An entry naming an ean the entity's own evidence
+    # never asserts is a fabrication, and tests/test_repo_data.py fails on it.
+    preferEans: dict[str, str] = Field(default_factory=dict)
 
 
 @dataclass
