@@ -156,10 +156,9 @@ manufacturers:
     #       codes 1,247 of 1,253 -- and codes 0 of the 5 range strings, because `AK3GRANGEAFV`
     #       still has letters after its digit run and `RANGEAKAD` has no digit run at all.
     #
-    # So the five freehand range strings stay refused, which is correct: "AK 3G RANGE AFV",
-    # "AK 3G RANGE FIG", "AK 3G RANGE AIR", "AK 3G RANGE GENERIC" and "RANGE AKAD" are the shop's
-    # own range pages, not product identities, and the descriptor already says so. They are the
-    # only SKUs in the whole 1,253-row file that contain a space.
+    # The five freehand range strings were left refused on that basis until 2026-08-27, when the
+    # maker's own product pages showed them to be boxed products with skus -- see the RANGE
+    # alternative below. They are still the only SKUs in the whole 1,253-row file with a space.
     #
     # ENUMERATED RATHER THAN `AK[A-Z]*`, which measures identically (1,247 of 1,253) but would code
     # any future letter salad this source ships.
@@ -174,7 +173,23 @@ manufacturers:
     # outcome for the thing this change is for, a hundredth of the churn. The cost is that
     # `ak-interactive/animal-green-playmarker` keeps its title slug and the AKM014 product code
     # stays dropped.
-    codePattern: '(AKABT|AKAD|AKPACK|AKG|AK|ABTPF|ABTP|ABT|RC)\s?\d{1,5}[A-Z]?(-[A-Z0-9]+)?'
+    # THE `RANGE` ALTERNATIVE, ADDED 2026-08-27, REVERSES A REFUSAL THIS FILE ARGUED FOR. Five AK
+    # skus contain a space and were left uncoded on the grounds that they are "shop range pages,
+    # not product identities". ak-interactive.com says otherwise: /product/3gen-afv-full-range/
+    # publishes `SKU: AK 3G RANGE AFV`, price 220,00 EUR, "80 colors in total", 8kg, shipped in one
+    # 50x35x33cm box. That is a boxed product with the maker's own article number, and the identity
+    # floor exists to stop a record being named after a shop's TITLE -- which a maker's sku is not.
+    #
+    # `normalize_code` strips spaces before matching, so the sku becomes `AK3GRANGEAFV` and the id
+    # becomes `ak-interactive/AK3GRANGEAFV`: stable across a retitle, which is the whole point.
+    # IT ENUMERATES THE TWO RANGE FAMILIES ON PURPOSE, against this file's own "KINDS, NOT MEMBERS"
+    # rule, because the kind-level version is demonstrably unsafe: `[A-Z0-9]*RANGE[A-Z0-9]*` also
+    # matches a shop TITLE -- "3GEN AFV Series Full Range" space-strips to `3GENAFVSERIESFULLRANGE`
+    # and would become a product code. That is precisely the failure the identity floor exists to
+    # prevent, so the looser form trades the bug it fixes for the bug it was guarding against.
+    # `test_ak_interactive_codes_its_letter_prefixed_families_but_not_the_range_pages` pins both
+    # halves: the five skus code to themselves, and two title-shaped strings still refuse.
+    codePattern: '(AKABT|AKAD|AKPACK|AKG|AK|ABTPF|ABTP|ABT|RC)\s?\d{1,5}[A-Z]?(-[A-Z0-9]+)?|AK3GRANGE[A-Z]+|RANGEAKAD'
     vendorNames: [AK Interactive, AK-Interactive]
   - slug: army-painter
     name: The Army Painter

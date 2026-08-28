@@ -75,16 +75,31 @@ def test_ak_interactive_codes_its_letter_prefixed_families_but_not_the_range_pag
     AK's article numbers carry a longer letter prefix than `AK` on whole families -- the Abteilung
     502 oils, the Artistic Dense acrylics, the gouaches, the signature packs -- and those rows
     cross into the product catalog, where a sku that will not normalize has no identity at all
-    (AK publishes no barcode anywhere). The shop's freehand RANGE strings must keep failing: they
-    are range pages, not boxes. A pattern that loosens the TRAILING letters instead of extending
-    the prefix codes the range strings too, which is what this pins against.
+    (AK publishes no barcode anywhere).
+
+    THE FIVE `RANGE` SKUS ARE CODED TOO, and that reverses what this test asserted when it was
+    written. They were treated as shop range pages rather than products; ak-interactive.com
+    publishes `SKU: AK 3G RANGE AFV` on a 220 EUR, 8kg, 80-paint boxed set, so they are products
+    with the maker's own article number. Spaces are stripped before matching, so the id is
+    `ak-interactive/AK3GRANGEAFV` -- a maker's sku, not a shop's title, which is what the identity
+    floor is actually protecting against.
+
+    What must STILL fail is a pattern that loosens the TRAILING letters rather than extending the
+    prefix: that one codes `AK 3G RANGE AFV` as `AK` + `3` + `GRANGEAFV`, i.e. by accident and with
+    the wrong code. The two lower blocks pin the difference.
     """
     taxonomy = Taxonomy.load(Path(__file__).resolve().parents[3] / "data" / "catalog" / "taxonomy")
     for sku in ("AK11237", "AKABT301", "AKABT111", "AKAD102", "AKG25", "AKPACK74", "ABTP044",
                 "ABTPF611", "ABT1001", "RC001"):
         assert taxonomy.normalize_code("ak-interactive", sku) == sku, sku
-    for sku in ("AK 3G RANGE AFV", "AK 3G RANGE FIG", "AK 3G RANGE AIR", "AK 3G RANGE GENERIC",
-                "RANGE AKAD"):
+    # The maker's range skus code to themselves with the spaces removed -- never to a truncation.
+    for sku, code in (("AK 3G RANGE AFV", "AK3GRANGEAFV"), ("AK 3G RANGE FIG", "AK3GRANGEFIG"),
+                      ("AK 3G RANGE AIR", "AK3GRANGEAIR"),
+                      ("AK 3G RANGE GENERIC", "AK3GRANGEGENERIC"),
+                      ("RANGE AKAD", "RANGEAKAD")):
+        assert taxonomy.normalize_code("ak-interactive", sku) == code, sku
+    # A shop title must still be refused: the floor is about titles, not about spaces.
+    for sku in ("3GEN AFV Series Full Range", "Full Range of AFV colours"):
         assert taxonomy.normalize_code("ak-interactive", sku) is None, sku
 
 
