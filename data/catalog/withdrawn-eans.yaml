@@ -1,0 +1,70 @@
+# Hand-authored. Written by no generator; read by `report --ean-guard` (report.py::check_ean_guard).
+#
+# BARCODES THIS CATALOG PUBLISHED THAT ARE NOT THIS PRODUCT'S. The exact inverse of
+# retained-eans.yaml, and it exists for the case that file cannot reach: the guard refuses to let a
+# published barcode disappear, which is the regression it was built to catch -- but it could not
+# tell a value LOST from one deliberately WITHDRAWN. While that was true, a barcode the evidence
+# had disproved could not be removed at all: correcting the catalog and passing CI were mutually
+# exclusive. An entry here says the removal was a decision, and names the evidence for it.
+#
+# THE BAR IS OBJECTIVES 1's "genuinely bad or invalid", and it is deliberately high. "It looks
+# wrong" does not clear it, and neither does "only one source says so" -- that is what
+# `ean-mismatch` is for, and a record with a contested barcode should keep BOTH and stay
+# `conflicted`. What clears it is evidence that the value IS SOMETHING ELSE: it belongs to a
+# different, named product, or a reseller minted it rather than the manufacturer.
+#
+# REMOVING IS ALL AN ENTRY DOES. Nothing here adds a barcode anywhere. Where the value belongs to
+# another product this catalog holds, the fix is that product's own evidence carrying it, not a
+# hand re-homing. The removal itself is done in matches.yaml `rejectEans`; this file only tells the
+# guard the removal was deliberate, so the two stay separable.
+
+withdrawn:
+  # --- FOUR ATOMIC MASS ROWS, ALL THE SAME MECHANISM (verified on the web 2026-08-27) -----------
+  # `legacy-catalog` is the only source for any of these four values, and each sits on a GS1 prefix
+  # nothing else in this catalog ever uses for Atomic Mass. Measured across every atomic-mass-games
+  # observation carrying a barcode: prefix 0841333 has 670 from FIVE independent sources (both
+  # barcode databases included); the nine other prefixes are legacy ALONE, 22 observations.
+  #
+  # The web says what those 22 are. Every one of these four resolves, in UPCitemdb only, to a
+  # SINGLE-MERCHANT Walmart.com record captured in late 2022 with an Amazon-style pipe-delimited
+  # title -- and in one case with the brand field recorded as "Homaz", a Walmart marketplace seller
+  # rather than the manufacturer. They are reseller-minted GTINs attached to OLDER products, and
+  # three of the four name a different product outright. The surviving primary on each record is
+  # confirmed by Asmodee UK, Atomic Mass's own trade arm.
+  #
+  # CP269 is the 2025 Dice Pack (Asmodee UK: AMGCP269 / 841333131531). 0763473697909 is a 2022
+  # Walmart record for the EARLIER Dice Pack, CP02 / FFGMSG02, whose real barcode is 841333108687.
+  atomic-mass-games/CP269:
+    - '0763473697909'
+  # SWQ144 is the 2025 "Upgrades Card Pack" (Asmodee UK: AMGSWQ144 / 841333131951). 0764538221565
+  # is the 2019 SWL51 "Upgrade Card Pack" -- singular, a different product -- real UPC
+  # 841333109271.
+  atomic-mass-games/SWQ144:
+    - '0764538221565'
+  # SWQ15 is Rebel Troopers (Asmodee UK: AMGSWQ15 / 841333130381, released 2025-05-16).
+  # 0764563147281 resolves in TWO barcode databases to "Star Wars Legion Rebel Troopers UPGRADE
+  # Expansion" -- SWL53, a different product -- real UPC 841333109516.
+  atomic-mass-games/SWQ15:
+    - '0764563147281'
+  # SWL98 is Din Djarin & Grogu (841333118488, corroborated by UPCitemdb across two merchants and
+  # several independent listings). 0925453755058 exists only as a Walmart record whose brand field
+  # is the seller's name, not Atomic Mass.
+  atomic-mass-games/SWL98:
+    - '0925453755058'
+  # --- THE THIRTEENTH ROW OF THE NORMANDY TERRAIN BLOCK ------------------------------------------
+  # `legacy-catalog` gave twelve prepainted WW2 Normandy MDF terrain pieces (H00123-H00134) a
+  # Battlefields & Basing TUB's barcode; those twelve are corrected in matches.yaml `rejectEans`,
+  # each proven by the tub independently holding the value. H00133 is the thirteenth and was left
+  # alone precisely because nothing else holds 5060917992084 -- so rejecting it would have deleted
+  # a published barcode, which until this file existed the guard could not accept.
+  #
+  # It is the same error: the value sits in the 5060917992xxx block that every one of those tubs
+  # occupies, while every H001xx barcode any other source states is 5907652xxxxxx, the prefix all
+  # 34 MDF-terrain observations use and nothing else in the catalog does. ret-tistaminis gives
+  # H00133 its own 5907652563592, which is now the published primary.
+  #
+  # WHAT WOULD REVERSE THIS: the tub it belongs to is 849110024, which this catalog does not hold.
+  # If a harvest ever brings that product in carrying 5060917992084, this entry becomes wrong and
+  # the barcode should live there instead.
+  warlord-games/H00133:
+    - '5060917992084'

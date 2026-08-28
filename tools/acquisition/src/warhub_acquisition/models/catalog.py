@@ -204,6 +204,35 @@ class SetRefs(BaseModel):
     setRefs: dict[str, dict[str, str]] = Field(default_factory=dict)
 
 
+class WithdrawnEans(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    # BARCODES THIS CATALOG PUBLISHED THAT ARE NOT THIS PRODUCT'S: {product id: [ean, ...]}.
+    # The exact inverse of RetainedEans below, and it exists for the case that one cannot reach.
+    #
+    # `report --ean-guard` refuses to let a published barcode disappear -- rightly, since that is
+    # the regression it was built to catch. But the guard cannot tell a barcode LOST from one
+    # deliberately WITHDRAWN, so while it was the only voice, a value the evidence had disproved
+    # could not be removed: correcting the catalog and passing CI were mutually exclusive. Every
+    # entry here is a barcode a maintainer has established belongs to something else, and the guard
+    # reports it as `withdrawn` instead of `lost`.
+    #
+    # THE BAR IS OBJECTIVES 1's "genuinely bad or invalid", which is deliberately high and which
+    # "it looks wrong" does not clear. What clears it is evidence that the value IS SOMETHING ELSE:
+    # it belongs to a different, named product, or it was minted by a reseller rather than the
+    # manufacturer. A barcode that is merely uncorroborated stays published and stays `conflicted`
+    # -- that is what `ean-mismatch` is for, and a thin case belongs there, not here.
+    #
+    # WITHDRAWING IS NOT RE-HOMING. If the value belongs to another product IN this catalog, the
+    # fix is to let that product's own evidence carry it, not to move it by hand -- nothing here
+    # adds a barcode anywhere. An entry only ever removes.
+    #
+    # HAND-AUTHORED, in its own file (data/catalog/withdrawn-eans.yaml, DataPaths.withdrawn_eans),
+    # for the same reason RetainedEans and SetRefs have theirs: `classify --apply` rewrites
+    # overrides.yaml through plain PyYAML and cannot round-trip a comment, and an entry here is
+    # worth nothing without the evidence beside it.
+    withdrawn: dict[str, list[str]] = Field(default_factory=dict)
+
+
 class RetainedEans(BaseModel):
     model_config = ConfigDict(extra="forbid")
     # BARCODES THIS CATALOG PUBLISHED THAT NO SOURCE ATTESTS ANY MORE: {product id: [ean, ...]}.

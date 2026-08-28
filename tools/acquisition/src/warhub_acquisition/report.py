@@ -3,6 +3,7 @@ import subprocess
 from pathlib import Path
 
 from warhub_acquisition.evidence.store import EvidenceStore
+from warhub_acquisition.models.catalog import WithdrawnEans
 from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.yamlio import load_yaml, read_yaml
 
@@ -327,8 +328,17 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
             if product.get("productCode"):
                 working_codes.add(product["productCode"])
 
+    # Declared withdrawals: {entity id: {ean}}. A barcode listed here for the entity that held it
+    # is allowed to disappear -- the guard reports it instead of failing. See WithdrawnEans for the
+    # bar an entry has to clear; nothing derives entries, a human writes them with the evidence.
+    withdrawn_declared: dict[str, set[str]] = {}
+    if paths.withdrawn_eans.exists():
+        declared = WithdrawnEans.model_validate(read_yaml(paths.withdrawn_eans))
+        withdrawn_declared = {entity: set(eans) for entity, eans in declared.withdrawn.items()}
+
     lost: list[dict] = []
     repackaged: list[dict] = []
+    withdrawn: list[dict] = []
     # Non-fatal visibility buckets. The confirmed-only guard above is silent about two real losses:
     # a PROVISIONAL primary that vanishes catalog-wide, and a productCode that vanishes catalog-wide
     # (today a repackaging join folds an old code away and nothing notices). Both are REPORTED but
@@ -367,6 +377,8 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
                 if holders:
                     finding["retained_in"] = holders
                     repackaged.append(finding)
+                elif barcode in withdrawn_declared.get(entity_id, ()):
+                    withdrawn.append(finding)
                 else:
                     lost.append(finding)
 
@@ -398,6 +410,7 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
     return {
         "lost": lost,
         "repackaged": repackaged,
+        "withdrawn": withdrawn,
         "dropped_provisional": dropped_provisional,
         "dropped_codes": dropped_codes,
         "paint_lost": paint_lost,
@@ -411,6 +424,10 @@ def render_ean_guard_section(findings: dict[str, list[dict]]) -> str:
     if findings["lost"]:
         lines += ["", "## Confirmed-EAN changes", ""]
         for finding in sorted(findings["lost"], key=order):
+            lines.append(f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']}")
+    if findings.get("withdrawn"):
+        lines += ["", "## Confirmed-EAN withdrawn (declared in withdrawn-eans.yaml, not a loss)", ""]
+        for finding in sorted(findings["withdrawn"], key=order):
             lines.append(f"- {finding['entity']}: {finding['previous_ean']} -> {finding['new_ean']}")
     if findings["repackaged"]:
         lines += ["", "## Confirmed-EAN repackaging (retained in additionalEans)", ""]

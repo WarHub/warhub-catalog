@@ -27,6 +27,65 @@
 # change, an edition-content change, or a premium/limited-variant line make them DISTINCT products
 # with no lineage at all.
 joins:
+  # --- THE TWO ARCHIVE CAPTURES (2026-08-27) ---------------------------------------------------
+  # wargameportal.com is an `archive` source, so its rows are point-in-time captures with no
+  # barcode. Both captures are recent (archiveTimestamp 2025-05-21 and 2025-10-06) and the site is
+  # still live and still selling both items, so its current pages are usable corroboration -- with
+  # the caveat that a shop can change what sits at a URL, which is why neither ruling rests on the
+  # page alone.
+  #
+  # ARCANE RUINS. The competing records are `99122799001` (current, barcode, filed by legacy under
+  # the-old-world/scenery, stocked by three retailers) and `99129999003` (discontinued, NO barcode,
+  # known only from one archived GW webstore page, and sitting in GW's `9999` placeholder range).
+  # The live page describes a Warhammer: The Old World terrain kit -- obelisk, arches, columns, 55
+  # components -- and the capture postdates The Old World's launch.
+  'arc-wargameportal:/products/arcane-ruins': games-workshop/99122799001
+  # CHAOS WARRIORS, and here the shop's own shelf label is wrong while its components are right.
+  # The capture carries sku `83-06`, which is GW's SS Code, and only two of the four candidates
+  # have it: 99120201047 and 99120201131. That alone eliminates the two Warhammer: The Old World
+  # codes (SS Codes 08-07 and 08-21) -- even though the live page files the product under "The Old
+  # World / Warriors of Chaos". The page's own description settles which is right and contradicts
+  # its own label: "10 Chaos Warriors ... 97 plastic components ... 10x Citadel 32mm ROUND Bases".
+  # Round bases are Age of Sigmar; The Old World kit is ranked on squares. Between the two
+  # Slaves to Darkness codes, 99120201047 is discontinued and 99120201131 is current and already
+  # carries radaddel and gamenerdz listings, and the shop was actively listing this in 2025-10.
+  #
+  # A SHOP'S CATEGORY IS A SHELF, NOT A CLAIM ABOUT THE PRODUCT -- the same thing that put Army
+  # Painter tools under `warlord-games` two layers down.
+  'arc-wargameportal:/products/chaos-warriors': games-workshop/99120201131
+  # --- `ambiguous-join` SETTLED FROM THE SHOP'S OWN BARCODE (8 rows, 2026-08-27) ---------------
+  # Each is a `ret-radaddel` listing with no product code and no barcode IN THE LEDGER, whose name
+  # matches two coded entities -- so `resolve/join.py` refuses to pick and the row founds an entity
+  # named after the German shop title. The earlier note said these clear themselves once the
+  # nightly's `shopify` detail-fetch budget reaches the handle. It has not yet, but the shop already
+  # publishes the answer: radaddel.de is a Shopify store and `/products/<handle>.json` carries the
+  # variant barcode. Read 2026-08-27, one request per handle:
+  #
+  #   speedpaint-most-wanted-set-2-0        5713799806009
+  #   chaos-space-marines-raptors-1         5011921273355
+  #   legiones-astartes-mkiv-tactical-squad 5011921266753
+  #   ogor-mawtribes-butcher                5011921266906
+  #   ogor-mawtribes-ironguts               5011921266876
+  #   warriors-of-chaos-chaos-warriors      5011921266920
+  #   star-wars-legion-at-st-walker         841333134983
+  #   star-wars-legion-range-troopers       841333134754
+  #
+  # Every one of those is already a published product's confirmed primary here, so the join states
+  # only WHICH entity the listing belongs to -- no barcode is invented, and the value will arrive in
+  # the ledger on its own when the budget reaches the handle, at which point these become no-ops.
+  #
+  # SEVEN LAND ON A NAME CANDIDATE. THE EIGHTH REFUTES THE NAME, which is the reason not to settle
+  # this family by picking between the candidates: `ogor-mawtribes-butcher` scans as 5011921266906,
+  # which is `games-workshop/99120213044` -- GW's own catalogue calls that kit "Cleavers/Gutseers"
+  # and it is neither candidate. The shop names it for one of the two units it builds.
+  'ret-radaddel:speedpaint-most-wanted-set-2-0': army-painter/WP8060P
+  'ret-radaddel:chaos-space-marines-raptors-1': games-workshop/99120102259
+  'ret-radaddel:legiones-astartes-mkiv-tactical-squad': games-workshop/99123001085
+  'ret-radaddel:ogor-mawtribes-butcher': games-workshop/99120213044
+  'ret-radaddel:ogor-mawtribes-ironguts': games-workshop/99120213041
+  'ret-radaddel:warriors-of-chaos-chaos-warriors': games-workshop/99122701018
+  'ret-radaddel:/star-wars-legion-at-st-walker': atomic-mass-games/SWQ10
+  'ret-radaddel:/star-wars-legion-range-troopers': atomic-mass-games/SWQ89
   # Archived GW webstore page for the Baneblade carrying that store's own SKU (60100181151) rather
   # than the multi-build kit's code. A store SKU on a dead page is not product-code lineage, and no
   # barcode is at stake, so this stays a fold.
@@ -119,6 +178,322 @@ reassignManufacturer:
   'ret-tistaminis:ww2-british-paint-set': army-painter
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  # --- FIVE VALUES THE WEB DISPROVED (2026-08-27) ----------------------------------------------
+  # Each is DECLARED in data/catalog/withdrawn-eans.yaml, which carries the evidence per row and is
+  # what lets `report --ean-guard` accept the removal instead of calling it a loss. Four are
+  # reseller-minted Walmart GTINs `legacy-catalog` hung on Atomic Mass products -- three of them
+  # provably the barcode of a DIFFERENT, older product (CP02, SWL51, SWL53) -- against primaries
+  # that Asmodee UK, Atomic Mass's own trade arm, confirms. The fifth is the thirteenth row of the
+  # Normandy MDF terrain block whose other twelve are corrected above.
+  'legacy-catalog:atomic-mass-games/marvel-crisis-protocol/general/dice-pack': ['0763473697909']
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/upgrade-card-pack': ['0764538221565']
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/rebel-troopers': ['0764563147281']
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/din-djarin-and-grogu': ['0925453755058']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-walls-with-gate-low': ['5060917992084']
+  # THE SIXTH, AND THE ONLY ONE WHERE OWNERSHIP IS GENUINELY UNKNOWN. Mantic asserts 5060924988162
+  # for BOTH MGVAF202 (Vanguard Centaur Chief) and MGKWN208 (Kings of War Centaur Chief) -- the
+  # same shape as Warlord's Rift Dice, but with no third source to outvote it: Mantic publishes no
+  # barcodes on its own site (checked 2026-08-27, `sku` and no GTIN in its JSON-LD) and a web
+  # search surfaced no listing carrying this value. It may even be correct -- one sculpt sold under
+  # two range codes can legitimately share a barcode, as Warlord's Armies of the United States ISBN
+  # does. What is NOT tenable is the two products being one record. `ret-gamenerdz` gives MGVAF202
+  # its own 5060469664040, so rejecting the duplicate from THAT side splits them while leaving each
+  # code a barcode some source attests and losing nothing. Which of the two Mantic meant is still
+  # open; a harvest that ever publishes a barcode will settle it.
+  'mfr-manticgames:20610': ['5060924988162']
+  # --- THE LAST FUSIONS THE WIDER CODE COVERAGE MADE VISIBLE (5 rows, 2026-08-27) --------------
+  # Once Vallejo, Corvus Belli and Atomic Mass had real codes, the catalog-wide test for a fused
+  # record became answerable: an entity holding two UNRELATED codes AND two barcodes. There are 16,
+  # and these five are the ones where a source's barcode contradicts the code its own name backs.
+  # Three are the manufacturer's own store getting it wrong and being outvoted by everyone else,
+  # which is the same shape as the Rift Dice.
+  'legacy-catalog:warlord-games/bolt-action/british/humber-mk-ii-iv-armoured-car': ['5060917990653']
+  'mfr-manticgames:474732': ['5060924987080']
+  'mfr-manticgames:499623': ['5060924985475']
+  'mfr-warlord-store:blitzkrieg-early-war-german-army': ['5060200846780']
+  'ret-tistaminis:is-2-heavy-tank-2025': ['5060393705819']
+  # --- WHAT THE WIDENED CODE PATTERNS EXPOSED (5 rows, 2026-08-27) -----------------------------
+  # Giving Vallejo, Corvus Belli and Atomic Mass real product codes turned name-slug collisions
+  # into ordinary code-anchored records, and left exactly eight entities holding two unrelated
+  # codes. Five are a wrong barcode; two are a wrong code (see reassignCodes); one is below.
+  #
+  # VALLEJO PROVES ITSELF. The taxonomy already records that a Vallejo EAN is `8429551` + the
+  # 5-digit code + a check digit -- the paint tool computes them that way. Measured over every
+  # Vallejo observation carrying both: 1,050 of 1,056 obey it. Of the six that do not, two are
+  # books with real ISBNs, one is a malformed value that collides with nothing, and these three
+  # are a barcode that encodes a DIFFERENT Vallejo code -- which is what fused them.
+  'ret-goblingaming:model-air-grey-violet': ['8429551712590']                     # encodes 71259, row is 71128
+  'ret-goblingaming:vallejo-weathering-effects-40ml-black-splash-mud': ['8429551738088']   # encodes 73808, row is 73806
+  'ret-goblingaming:vallejo-weathering-effects-40ml-light-brown-splash-mud': ['8429551738057'] # encodes 73805, row is 73804
+  # ARC TROOPERS was re-coded SWL70 -> SWQ133 and `legacy-catalog` carries the OLD barcode on the
+  # NEW code, fusing the two. `ret-gamenerdz` gives SWQ133 its own 0841333133788, so rejecting the
+  # stale value leaves both codes standing with a barcode each.
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/arc-troopers': ['0764563786985']
+  # THE ONE BARCODE THAT BELONGS TO NEITHER PRODUCT. `legacy-catalog` put 0144329993091 on BOTH the
+  # Star Wars: Legion Core Set (SWL01) and the Clone Wars Core Set (SWL44), and no other source
+  # knows either product. Its GS1 prefix is 014432, which matches nothing in this catalog -- Atomic
+  # Mass and Fantasy Flight both publish under 0841333 (359 products, 100%). Looked up 2026-08-27
+  # across several independent retail listings: SWL01 is 0841333104436 and SWL44 is 0841333109202,
+  # so the published value is neither. It is rejected from the SWL01 row only, which splits the two
+  # records while leaving the value published on SWL44 exactly where it has been since the original
+  # legacy migration (`git log -S 0144329993091` -> 8797654) -- this repo does not drop a barcode it
+  # has published. The two real UPCs are recorded here rather than injected: they came from the web,
+  # not from a source in the ledger, and evidence is the truth here (OBJECTIVES 5). A harvest that
+  # observes them will correct both records on its own.
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/star-wars-legion-core-set': ['0144329993091']
+  #
+  # --- THE SIX THE LEDGER ALONE COULD NOT SETTLE (8 rows, 2026-08-27) --------------------------
+  #
+  # These were recorded as undecidable when the fused entities were split, on the grounds that the
+  # MAKER's own code-to-barcode map was not a clean bijection. That test was too narrow: it asked
+  # only whether one source could settle it, and never asked whether the sources AGREE. All six
+  # resolve on a cross-source count, and in two of them it is the manufacturer that is wrong.
+  #
+  # VERIFIED AGAINST THE LIVE STORES 2026-08-27, because "the maker is wrong" is a claim that has
+  # to survive the obvious objection that our copy of its data is stale. It is not stale --
+  # store.warlordgames.com serves these today, `updated_at` 2026-08-27:
+  #     452610003 Rift Dice Green => 5060917996914
+  #     452610002 Rift Dice Grey  => 5060917996914
+  #     452610004 Rift Dice Red   => 5060917996914     <- one barcode, three products
+  #     452600605 Humber Armoured Car MK VII => 5060917997751
+  #     402615803 P40 medium tank            => 5060917997751     <- one barcode, two products
+  # A re-harvest reproduces the error exactly; it is upstream, and correcting it here is the only
+  # way. Mantic was checked the same way: manticgames.com publishes `sku` and NO barcode at all
+  # (no GTIN in its JSON-LD), so nothing new can arrive from there either.
+  #
+  # RIFT DICE. Warlord gives all three colours the Red dice's barcode. `legacy-catalog`,
+  # `ret-goblingaming` and `ret-tistaminis` independently agree on the real mapping -- Green
+  # 5060917996907, Grey 5060917996587, Red 5060917996914 -- so the maker is outvoted 3-1 on the two
+  # it gets wrong and corroborated 4-0 on the one it gets right. Only the two wrong rows are here.
+  'mfr-warlord-store:konflikt-47-rift-dice-green': ['5060917996914']
+  'mfr-warlord-store:konflikt-47-rift-dice-grey': ['5060917996914']
+  # HUMBER vs P40. Same shape: Warlord puts 5060917997751 on both. `ret-goblingaming` corroborates
+  # it for the Humber, nothing corroborates it for the P40, and `ret-tistaminis` gives the P40 its
+  # own 5060917999298. The tank keeps a single-source barcode, so it publishes `provisional` -- the
+  # right admission, and better than a tank filed as an armoured car.
+  'mfr-warlord-store:p40-medium-tank': ['5060917997751']
+  # MANTIC ARMADA. `ret-tistaminis` stamps 5060924982320 on all three -- Seas of Dread, the Scenery
+  # Pack and Sea Monsters. `legacy-catalog` maps them apart (5060924982306 / 5060924982320 /
+  # 9781911516507) and `ret-goblingaming` corroborates the Seas of Dread ISBN, so tistaminis is the
+  # copy-paste and only its two wrong rows are rejected; the one it gets right stays.
+  'ret-tistaminis:mantic-armada-seas-of-dread-book': ['5060924982320']
+  'ret-tistaminis:mantic-armada-scenery-pack-fantasy-terrain': ['5060924982320']
+  # ARMIES OF THE UNITED STATES, and this one is NOT a typo -- it is a barcode two products share
+  # by the maker's own choice, so the entry says which record keeps it and why.
+  # 9781472863874 is the ISBN of the BOOK (openlibrary.org: "Bolt Action: Armies of the United
+  # States, Third Edition", Warlord Games / Peter Dennis, Bloomsbury, 2025, 112pp), and Warlord
+  # sells a book+figure bundle under 4099300010 carrying that same ISBN -- verified on their store
+  # today. The two ARE different products: Warlord's own catalogue proves 401013001 is the book's
+  # code, because its eBook edition is sku `401013001_eBook`. `ret-goblingaming` gives the plain
+  # book its own Warlord barcode, 5060917994545. So the split follows the maker's own assignment:
+  # the ISBN stays on the record Warlord puts it on, and the book takes the barcode a retailer
+  # scanned off it. Nothing is lost either way -- the ISBN is still published, on 4099300010.
+  'ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025': ['9781472863874']
+  # INVASION AMERIKA is a rulebook. `ret-goblingaming` gave it the Ghost Attack Infantry's barcode,
+  # which Warlord's own store and `ret-tistaminis` both assign to 452011205; tistaminis gives the
+  # book 9781915319258, an ISBN in Warlord's own 978-1-915319 publisher range.
+  'ret-goblingaming:invasion-amerika-konflikt-47': ['5060917998949']
+  # SILENT STRIKE. 0812152032309 is Lords of War's, asserted by Wyrd's own store plus legacy and
+  # two retailers; `ret-goblingaming` also hung it on WYR23727. Wyrd no longer lists Silent Strike
+  # at all (checked 2026-08-27), so its only remaining barcode is `ret-gamenerdz`'s UPC-A
+  # 812152031753 and the record publishes `provisional`.
+  'ret-goblingaming:ten-thunders-silent-strike': ['0812152032309']
+  #
+  # --- THE SAME DEFECT OUTSIDE `ean-mismatch` (8 rows, 2026-08-27) -----------------------------
+  # A fused entity only raises `ean-mismatch` when the members end up disagreeing about the
+  # barcode; where the wrong barcode is the only one on the record it fuses just as silently and
+  # reports nothing. `test_no_new_entity_fuses_two_products_the_maker_itself_tells_apart` finds
+  # both, and these eight were invisible until it did. Same bar as above: the maker separates the
+  # two codes cleanly, and the row's own NAME matches the maker's name for the row's code.
+  #   'Black Powder Napoleonic Wars 1789-1815 Napoleonic Portuguese Line ' is coded WGN-PO-01 (the maker agrees) but carries
+  #   5060572501348, which the maker gives to 402012009 'Puma\xa0Sd.Kfz 234/2 Armoured Car'.
+  'arc-tistaminis:/products/black-powder-napoleonic-wars-1789-1815-napoleonic-portuguese-line-infantry-new': ['5060572501348']
+  #   'Bolt Action Australian Independent Commando Section New - 40221120' is coded 402211202 (the maker agrees) but carries
+  #   5060393707387, which the maker gives to 402215001 'Australian Jungle Division infantry sect'.
+  'arc-tistaminis:/products/bolt-action-australian-independent-commando-section-new-402211202': ['5060393707387']
+  #   'Natal Native Contingent Regiment' is coded 302014602 (the maker agrees) but carries
+  #   5060393706472, which the maker gives to 302014604 'Unmarried Zulu Impi'.
+  'legacy-catalog:warlord-games/bolt-action/general/natal-native-contingent-regiment': ['5060393706472']
+  #   'Vagrantsong: Fool’s Gold – Bonus Scenario' is coded WYR11602 (the maker agrees) but carries
+  #   0812152034167, which the maker gives to WYR11604 'Vagrantsong: Hide Yourself Away (Fox Sis'.
+  'legacy-catalog:wyrd-games/malifaux/general/vagrantsong-fools-gold-bonus-scenario': ['0812152034167']
+  #   'Basotho Calvary' is coded WYR40152 (the maker agrees) but carries
+  #   0812152030220, which the maker gives to WYR40156 'The Other Side: Electrocutioners'.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/basotho-calvary': ['0812152030220']
+  #   "King's Empire Fate Deck" is coded WYR40007 (the maker agrees) but carries
+  #   0812152030091, which the maker gives to WYR40106 'The Other Side: South Wales Borderers'.
+  'legacy-catalog:wyrd-games/the-other-side/kings-empire/king-s-empire-fate-deck': ['0812152030091']
+  #   'Blades of Khorne Claws of Karanak' is coded 99120201247 (the maker agrees) but carries
+  #   5011921182114, which the maker gives to 99120201148 'WARCRY: CLAWS OF KARANAK'.
+  'ret-goblingaming:blades-of-khorne-claws-of-karanak': ['5011921182114']
+  #   'Black Powder Napoleonic French Voltigeurs Skirmishing New' is coded WGN-FR-37 (the maker agrees) but carries
+  #   5060200848272, which the maker gives to WG-D6-33 '30 Red D6 (10mm)'.
+  'ret-tistaminis:black-powder-napoleonic-french-voltigeurs-skirmishing-new': ['5060200848272']
+  # --- ONE BARCODE ON THE WRONG ROW, TWENTY TIMES OVER (35 rows, 2026-08-27) -------------------
+  #
+  # `resolve/join.py` unions by (manufacturer, ean), so a single barcode written against the wrong
+  # product code does not just publish a wrong number -- it FUSES the two products into one record
+  # and the loser stops existing. 25 `ean-mismatch` entities held more than one product code that
+  # way, 76 codes in 25 records; `warlord-games/403205802` alone held nine.
+  #
+  # HOW EACH ONE WAS DECIDED, and the first answer was wrong. The repo's standing rule is that a
+  # barcode beats a SKU for identity (`supersession-stale-code` re-homing rests on it), so the
+  # obvious reading is "the code went stale, move the row to the barcode's owner". Measured against
+  # the makers' own product NAMES, that is backwards for this population: in 35 of the 41 candidate
+  # rows the row's name matches what the maker calls the row's OWN code, and matches nothing about
+  # the barcode's owner. The rule only holds where the SKU is a lister's catalogue number going
+  # stale across a re-code; here the SKU is right and the barcode is the typo.
+  #
+  # THE TWO SHAPES, both visible in the data rather than assumed:
+  #   * one barcode stamped across MANY of a source's own rows -- `ret-tistaminis` put
+  #     5060917997539 (Italian Paracadutisti platoon commanders) on nine correctly-named,
+  #     correctly-coded Bolt Action items;
+  #   * a barcode column shifted by one -- `legacy-catalog`'s five Blood Red Skies aces each carry
+  #     the NEXT ace's barcode, every name matching its own code at similarity 1.0.
+  #
+  # NOTHING IS DROPPED: every rejected value is the maker's own primary for the maker's own other
+  # code, so it publishes there instead of here. `report --ean-guard` reports 0 lost.
+  #
+  # SIX CANDIDATE ROWS ARE DELIBERATELY NOT HERE -- the GW re-code pairs (Salamanders / Imperial
+  # Fists Primaris Upgrades, Ministorum Priest with Vindictor, Master Lazarus) and Egyptian
+  # Archers, where BOTH codes carry the same product name, so the name cannot discriminate and the
+  # row is the ordinary "retailer lists the old code with the current barcode" shape. Those want a
+  # verified supersession, not a rejection; see the `ean-mismatch, DELIBERATELY LEFT` note.
+  #
+  # games-workshop/99120101190: 1 row(s) from seed-curated.
+  #   'Intercessors' is coded 99120101190 (the maker agrees) but carries
+  #   5011921142439, which the maker gives to 99120101314 'SPACE MARINES ASSAULT SQUAD'.
+  'seed-curated:games-workshop/intercessors': ['5011921142439']
+  #
+  # games-workshop/99120101329: 1 row(s) from ret-goblingaming.
+  #   'Ultramarines Chief Librarian Tigurius' is coded 99120101254 (the maker agrees) but carries
+  #   5011921142583, which the maker gives to 99120101329 'Chief Librarian Tigurius'.
+  'ret-goblingaming:ultramarines-chief-librarian-tigurius': ['5011921142583']
+  #
+  # games-workshop/99120117019: 1 row(s) from ret-goblingaming.
+  #   'Genestealer Cults Acolyte Hybrids' is coded 99120117003 (the maker agrees) but carries
+  #   5011921171934, which the maker gives to 99120117019 'Acolyte Hybrids'.
+  'ret-goblingaming:genestealer-cults-acolyte-hybrids': ['5011921171934']
+  #
+  # steamforged-games/SFEE-LL005: 1 row(s) from legacy-catalog.
+  #   'Epic Encounters: Swamp of the Hydra' is coded SFEE-005 (the maker agrees) but carries
+  #   5060453697184, which the maker gives to SFEE-LL005 'Epic Encounters: Local Legends - Bat Demon ('.
+  'legacy-catalog:steamforged-games/epic-encounters/general/epic-encounters-swamp-of-the-hydra': ['5060453697184']
+  #
+  # warlord-games/112010004: 1 row(s) from ret-tistaminis.
+  #   'Hail Caesar Arthurian Knights' is coded 103013220 (the maker agrees) but carries
+  #   5060917993111, which the maker gives to 112010004 'Hail Caesar Epic Battles: Republican Roman d'.
+  'ret-tistaminis:hail-caesar-arthurian-knights': ['5060917993111']
+  #
+  # warlord-games/302011002: 3 row(s) from arc-tistaminis, ret-goblingaming.
+  #   'Black Powder Napoleonic Wars 1789-1815  British Union Brigade Cava' is coded 302011002 (the maker agrees) but carries
+  #   5060393707929, which the maker gives to 302012501 'Prussian Landwehr regiment 1813-1815'.
+  'arc-tistaminis:/products/black-powder-napoleonic-wars-1789-1815-british-union-brigade-cavalry-new': ['5060393707929']
+  #   'Bolt Action German\tSd.Kfz 251/10 ausf D (3.7mm Pak) Half Track New' is coded 402012013 (the maker agrees) but carries
+  #   5060393706267, which the maker gives to 302011002 'British Union Brigade'.
+  'arc-tistaminis:/products/bolt-action-german-sd-kfz-251-10-ausf-d-3-7mm-pak-half-track-new': ['5060393706267']
+  #   'Sd.Kfz 251/10 ausf D Half Track - German Army' is coded 402012013 (the maker agrees) but carries
+  #   5060393706267, which the maker gives to 302011002 'British Union Brigade'.
+  'ret-goblingaming:sdkfz-251-10-ausf-d-37mm-pak-half-track': ['5060393706267']
+  #
+  # warlord-games/403205802: 7 row(s) from ret-tistaminis.
+  #   'Bolt Action Cross of Iron - German Grenadiers starter army' is coded 402012011 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-cross-of-iron-german-grenadiers-starter-army': ['5060917997539']
+  #   'Bolt Action German Pak 40 anti-tank gun (plastic)' is coded 402012057 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-german-pak-40-anti-tank-gun-plastic': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade anti-tank rifle team' is coded 403214011 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-anti-tank-rifle-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade forward observer team' is coded 403214010 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-forward-observer-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade medium mortar team' is coded 403214014 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-medium-mortar-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade ‘Tank Hunters’ anti-tank team' is coded 403214012 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-tank-hunters-anti-tank-team': ['5060917997539']
+  #   'Bolt Action Soviet Naval Brigade weapon teams' is coded 402414007 (the maker agrees) but carries
+  #   5060917997539, which the maker gives to 403205802 'Italian Paracadutisti platoon commanders'.
+  'ret-tistaminis:bolt-action-soviet-naval-brigade-weapon-teams': ['5060917997539']
+  #
+  # warlord-games/452010405: 1 row(s) from ret-tistaminis.
+  #   'Konflikt 47 Linebacker Jump Walker' is coded 452010403 (the maker agrees) but carries
+  #   5060917996259, which the maker gives to 452010405 "Konflikt '47 United States Starter Army".
+  'ret-tistaminis:konflikt-47-linebacker-jump-walker': ['5060917996259']
+  #
+  # warlord-games/452011205: 3 row(s) from ret-goblingaming.
+  #   "Empire of Japan Ghost Warriors Infantry Squad - Konflikt '47" is coded 452011205 (the maker agrees) but carries
+  #   5060917999175, which the maker gives to 452011208 "Konflikt '47 Ghost Infiltration Platoon".
+  'ret-goblingaming:empire-of-japan-ghost-warriors-infantry-squad-konflikt-47': ['5060917999175']
+  #   "Ghost Infiltrator Platoon - Konflikt '47" is coded 452011208 (the maker agrees) but carries
+  #   5060917998956, which the maker gives to 452011206 "Konflikt '47 Kimura Tadaaki, Scourge of the ".
+  'ret-goblingaming:ghost-infiltrator-platoon-konflikt-47': ['5060917998956']
+  #   "Kimura Tadaaki, Scourge of the Spirit Realm - Konflikt '47" is coded 452011206 (the maker agrees) but carries
+  #   5060917998925, which the maker gives to 452010406 "Konflikt '47 'Slammer' Samuels, The First Pa".
+  'ret-goblingaming:tadaaki-kimura-scourge-of-the-spirit-realm-konflikt-47': ['5060917998925']
+  #
+  # warlord-games/772012008: 5 row(s) from legacy-catalog.
+  #   "'Pick' Pickard (Mosquito)" is coded 772012008 (the maker agrees) but carries
+  #   5060572501560, which the maker gives to 772012007 'Witold Urbanowicz (Hurricane)'.
+  'legacy-catalog:warlord-games/blood-red-skies/british/pick-pickard-mosquito': ['5060572501560']
+  #   'Douglas Bader (Hurricane)' is coded 772012005 (the maker agrees) but carries
+  #   5060572501553, which the maker gives to 772212006 'Johnny Johnson (Spitfire)'.
+  'legacy-catalog:warlord-games/blood-red-skies/general/douglas-bader-hurricane': ['5060572501553']
+  #   "Fw 190 Ace: 'Pips' Priller" is coded 772012016 (the maker agrees) but carries
+  #   5060572501546, which the maker gives to 772012005 'Douglas Bader (Hurricane)'.
+  'legacy-catalog:warlord-games/blood-red-skies/general/fw-190-ace-pips-priller': ['5060572501546']
+  #   'Johnny Johnson (Spitfire)' is coded 772212006 (the maker agrees) but carries
+  #   5060572501577, which the maker gives to 772012008 "'Pick' Pickard (Mosquito)".
+  'legacy-catalog:warlord-games/blood-red-skies/general/johnny-johnson-spitfire': ['5060572501577']
+  #   'Witold Urbanowicz (Hurricane)' is coded 772012007 (the maker agrees) but carries
+  #   5060572502345, which the maker gives to 772012016 "Fw 190 Ace: 'Pips' Priller".
+  'legacy-catalog:warlord-games/blood-red-skies/general/witold-urbanowicz-hurricane': ['5060572502345']
+  #
+  # warlord-games/WGB-PI-23: 1 row(s) from ret-tistaminis.
+  #   'Bolt Action Polish Army Wz.30 MMG Team New' is coded WGB-PI-24 (the maker agrees) but carries
+  #   5060200849590, which the maker gives to WGB-PI-23 'Polish Army cavalrymen'.
+  'ret-tistaminis:bolt-action-polish-army-wz-30-mmg-team': ['5060200849590']
+  #
+  # wyrd-games/WYR40157: 1 row(s) from legacy-catalog.
+  #   'Steel Legion' is coded WYR40153 (the maker agrees) but carries
+  #   0812152030237, which the maker gives to WYR40157 'The Other Side: Mechanized Infantry'.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/steel-legion': ['0812152030237']
+  #
+  # wyrd-games/WYR40162: 2 row(s) from legacy-catalog.
+  #   'Marauder' is coded WYR40162 (the maker agrees) but carries
+  #   0812152030305, which the maker gives to WYR40202 'The Other Side: Karkinoi'.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/marauder': ['0812152030305']
+  #   'Karkinoi' is coded WYR40202 (the maker agrees) but carries
+  #   0812152030404, which the maker gives to WYR40212 'The Other Side: Striped Skulkers'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/karkinoi': ['0812152030404']
+  #
+  # wyrd-games/WYR40207: 6 row(s) from legacy-catalog.
+  #   'Horomatangi' is coded WYR40207 (the maker agrees) but carries
+  #   0812152030435, which the maker gives to WYR40253 'The Other Side: The Warped'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/horomatangi': ['0812152030435']
+  #   'Raving Madman' is coded WYR40259 (the maker agrees) but carries
+  #   0812152030534, which the maker gives to WYR40262 'The Other Side: Immolated Rhino'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/raving-madman': ['0812152030534']
+  #   'Stalking Portals' is coded WYR40252 (the maker agrees) but carries
+  #   0812152030534, which the maker gives to WYR40262 'The Other Side: Immolated Rhino'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/stalking-portals': ['0812152030534']
+  #   'The Warped' is coded WYR40253 (the maker agrees) but carries
+  #   0812152030534, which the maker gives to WYR40262 'The Other Side: Immolated Rhino'.
+  'legacy-catalog:wyrd-games/the-other-side/cult-of-the-burning-man/the-warped': ['0812152030534']
+  #   'Armored Whelks' is coded WYR40203 (the maker agrees) but carries
+  #   0812152030411, which the maker gives to WYR40213 'The Other Side: Devouring Eel'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/armored-whelks': ['0812152030411']
+  #   'Devouring Eel' is coded WYR40213 (the maker agrees) but carries
+  #   0812152030503, which the maker gives to WYR40259 'The Other Side: Raving Madman'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/devouring-eel': ['0812152030503']
+  #
+  # wyrd-games/WYR40256: 1 row(s) from legacy-catalog.
+  #   'Egg Clutch' is coded WYR40210 (the maker agrees) but carries
+  #   0812152030473, which the maker gives to WYR40256 'The Other Side: Doomseekers'.
+  'legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/egg-clutch': ['0812152030473']
   # ONE STORE PUT A GAMES WORKSHOP BARCODE ON A WARLORD BOX, and the catalog published it as that
   # box's confirmed alternate barcode. `5011921171835` is GENESTEALER CULTS: BIOPHAGUS: Games
   # Workshop's own trade sheet asserts it under GW code 99070117012 (`mfr-gw-trade:99070117012`),
@@ -1102,6 +1477,148 @@ supersessions:
   # live state.
   games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
+  # --- TWO GW PAINTS + TOOLS SETS, THREE YEARS APART (2026-08-27) ------------------------------
+  # `games-workshop/warhammer-40-000-paints-tools-set` was ONE record holding two products, because
+  # radaddel articles 126289 and 135801 both carry that exact title and neither had a product code
+  # for the resolver to tell them apart -- GW's own trade sheet carries neither barcode.
+  #
+  # They are two editions. 5011921196951 is the 2023 European multi-language set (JB-Spielwaren
+  # pairs that EAN with GW code 54170199001 and the title "WARHAMMER 40K PAINTS+TOOLS
+  # GER/FRE/ITA/DUT/CZ/SLV"; Ultrajeux lists its 2023 paint contents). 5011921260256 is the 2026
+  # set, released July 2026, with a completely different paint list. Coding the 2023 article splits
+  # them; the 2026 one keeps its barcode identity, since no trade listing exposes an 11-digit code
+  # for it yet -- retailers carry only `60-12`.
+  'ret-radaddel:/warhammer-40.000-paints-tools-set': '54170199001'
+  'ret-radaddel:warhammer-40-000-paints-tools-set': '54170199001'
+  # --- CORVUS BELLI'S SUFFIX IS PART OF THE IDENTITY ON SIX BASES (9 rows, 2026-08-27) ---------
+  # `corvus-belli`'s codePattern names `(?P<code>\d{6})` as the identity and drops a trailing
+  # `-NNNN`, because Corvus writes the same product both ways and 338 of the 340 bases that appear
+  # in both forms carry the SAME barcode on both -- so the bare form is a truncation, not a
+  # different product. That is right for 788 of its 794 bases.
+  #
+  # ON SIX IT IS WRONG, and measured: those bases carry MORE THAN ONE distinct suffix, and in all
+  # six the suffixes are different products -- `281131-1018` is the Kosmoflot Support Pack while
+  # `281131-1038` is the 1st Highlander S.A.S. Stripping fuses them.
+  #
+  # NOT STRIPPING IS NOT THE ANSWER, and that was measured too rather than assumed: keeping the
+  # suffix splits 49 pairs that ARE one product (a bare row with no barcode, plus its suffixed
+  # twin, e.g. `280058` and `280058-1135` both "Dire Foes Mission Pack 15: Barrenlands"). It fixes
+  # 6 and breaks 49. The rule stays, and the six exceptions are corrected here by hand -- which is
+  # what a per-observation override is for. Only the MINORITY product on each base is moved, so the
+  # majority keeps the bare id and nothing else shifts.
+  'ret-gamenerdz:/infinity-ariadna-1st-highlander-s-a-s-chain-rifle': '281131-1038'
+  'ret-goblingaming:1st-highlander-s-a-s-chain-rifle': '281131-1038'
+  'ret-gamenerdz:/infinity-panoceania-kestrel-expansion-pack-beta': '281242-1125'
+  'ret-goblingaming:kestrel-expansion-pack-beta': '281242-1125'
+  'ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-beta': '281705-1126'
+  'ret-goblingaming:shindenbutai-expansion-pack-beta': '281705-1126'
+  # 281243 has no bare row at all and no barcode on either side: two goblingaming listings for two
+  # different packs, so BOTH move rather than one keeping a base neither is more entitled to.
+  'ret-goblingaming:panoceania-dronbot-remotes-pack': '281243-1128'
+  'ret-goblingaming:kestrel-expansion-pack-gamma': '281243-1131'
+  # Operation Kaldstrom is the odd one on 280034; the Betrayal Characters Pack rows (three sources
+  # plus a bare gamenerdz row carrying the same barcode) keep the base.
+  'seed-curated:corvus-belli/operation-kaldstrom': '280034-0878'
+  # --- THE LAST SIX FUSED RECORDS (2026-08-27) -------------------------------------------------
+  # Five are one shape: `legacy-catalog` carries ANOTHER code's barcode, and because a second
+  # source asserts that barcode under its real code, the wrong value wins its own code's vote and
+  # the automated consensus test cannot see it. Each name is identical on both codes -- these are
+  # re-codes and book/bundle pairs, not different products with different names -- so the name
+  # cannot discriminate and the standing rule applies unopposed: the barcode identifies the box,
+  # the SKU is a catalogue number. Moving the row splits the records without asserting lineage.
+  #
+  # Claws of Karanak: GW's trade sheet calls 99120201148 "WARCRY: CLAWS OF KARANAK" (5011921182114)
+  # and 99120201247 "BLADES OF KHORNE: CLAWS OF KARANAK" (5011921259533) -- two releases of one
+  # sculpt. legacy has the Warcry barcode on the Blades code.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/claws-of-karanak': '99120201148'
+  # Volturnos / Akhelian King is one dual-build kit re-coded 99120219017 -> 99120219028; the trade
+  # sheet gives each code its own barcode and three rows carry the retired code's.
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/akhelian-king': '99120219017'
+  'legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/volturnos-high-king-of-the-deep': '99120219017'
+  'ret-goblingaming:volturnos-high-king-of-the-deep': '99120219017'
+  # Three Warlord books where the ISBN belongs to the plain book and legacy hung it on the
+  # code Warlord's own store gives a different barcode: Hail Caesar Army Lists (101010003 per
+  # ret-goblingaming), Glory Hallelujah! (WG-BP009 per ret-goblingaming), Iron Coffins
+  # (481010002 per ret-tistaminis -- the same book/bundle split as Armies of the United States).
+  'legacy-catalog:warlord-games/hail-caesar/german/hail-caesar-army-lists-biblical-to-early-medieval-supplement': '101010003'
+  'legacy-catalog:warlord-games/bolt-action/american/glory-hallelujah': 'WG-BP009'
+  'legacy-catalog:warlord-games/achtung-panzer/british/iron-coffins-achtung-panzer-supplement-with-stanley-christopherson-special-miniature': '481010002'
+  # --- RE-CODE BRIDGES: RIGHT BARCODE, STALE CATALOGUE NUMBER (5 rows, 2026-08-27) -------------
+  # Each is a retailer listing the CURRENT product code while scanning the RETIRED code's barcode.
+  # Both codes carry the same product name -- it is the same product re-coded -- so the name cannot
+  # discriminate and the repo's standing rule applies unopposed: the barcode identifies the box in
+  # hand, the SKU is the lister's catalogue number and it goes stale across a re-code. Moving the
+  # row splits the two records WITHOUT asserting that one supersedes the other; that is a separate
+  # claim needing GW's own register, which does not make it.
+  'ret-goblingaming:karanak-the-hound-of-vengeance': '99079915006'
+  'ret-goblingaming:lord-of-blight': '99070201029'
+  'ret-goblingaming:nurgle-rotbringers-lord-of-plagues': '99070201028'
+  'ret-goblingaming:rotbringer-sorcerer-age-of-sigmar-2021': '99070201027'
+  'ret-goblingaming:vagrantsong-seance-scenario-pack': 'WYR11604'
+  # --- WRONG CODE, RIGHT BARCODE (2 rows, 2026-08-27) ------------------------------------------
+  # The mirror of the block above: here the barcode is corroborated and the SKU is the typo, so the
+  # row moves rather than losing its barcode.
+  #
+  # Corvus Belli's in-house barcodes encode the code (820 of its observations start with their own
+  # 6 digits). This row's sku says 281118 while its barcode says 280760 AND its name says Varangian
+  # Guard, which `ret-gamenerdz` independently codes 280760. Two signals against the sku.
+  'ret-goblingaming:varangian-guard-submachine-gun-infinity-the-game': '280760'
+  # A doubled letter: `WCAA06P03` appears exactly once against five `WCA…` Warcrow codes from the
+  # same store, same barcode and same product name as goblingaming's `WCA06P03`.
+  'ret-gamenerdz:/warcrow-frost-dice-set': 'WCA06P03'
+  #
+  # --- WARCRY WARBANDS SOLD UNDER TWO GW CODES (3 rows, 2026-08-27) ---------------------------
+  # Found by the same test. Here the NAME does discriminate and it points the other way: GW sells
+  # these warbands under both an army code and a WARCRY code, the rows say Warcry, and their
+  # barcodes are the Warcry code's. Placed by barcode, which the name independently agrees with.
+  #   'Rotmire Creed' listed as 99120201252 'MAGGOTKIN OF NURGLE: ROTMIRE CREED'
+  #   but scans 5011921179039, which the maker assigns to 99120201145 'WARCRY: ROTMIRE CREED'.
+  'legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed': '99120201145'
+  #   'Rotmire Creed' listed as 99120201252 'MAGGOTKIN OF NURGLE: ROTMIRE CREED'
+  #   but scans 5011921179039, which the maker assigns to 99120201145 'WARCRY: ROTMIRE CREED'.
+  'legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed-2': '99120201145'
+  #   'Warcry: Rotmire Creed' listed as 99120201252 'MAGGOTKIN OF NURGLE: ROTMIRE CREED'
+  #   but scans 5011921179039, which the maker assigns to 99120201145 'WARCRY: ROTMIRE CREED'.
+  'ret-goblingaming:age-of-sigmar-warcry-rotmire-creed-warband-games-workshop': '99120201145'
+  # --- THE OTHER HALF OF THE FUSED ENTITIES (6 rows, 2026-08-27) --------------------------------
+  #
+  # Same damage as the `rejectEans` block above -- two products in one record -- and the OPPOSITE
+  # answer, for a reason that is in the data rather than in a preference. There the maker's own
+  # product NAMES said the row's code was right and its barcode was a typo. In these five entities
+  # the two codes carry the SAME product name, so the name cannot discriminate at all
+  # (`Salamanders Primaris Upgrades and Transfers` sits on both 99070101051 and 99120101465;
+  # `Egyptian archers` on both WGH-CEM-06 and WGH-CEM-23). With the name silent, the repo's
+  # standing rule applies unopposed: the barcode identifies the box in hand, the SKU is the
+  # lister's catalogue number and it goes stale across a re-code -- the same rule
+  # `supersession-stale-code` re-homing already rests on.
+  #
+  # So each row is placed on the code its BARCODE belongs to, which is the code the manufacturer's
+  # own trade row assigns that barcode. The shop re-catalogued to the maker's newer number while
+  # still holding the older box.
+  #
+  # THIS ASSERTS NO LINEAGE, and that is deliberate. Four of the five look like GW re-codes and
+  # would be `supersessions` if the register said so -- it does not: neither trade row carries a
+  # `hints.supersedes` naming the other. `reassignCodes` splits the records without claiming one
+  # replaced the other, which is the smaller and checkable claim. If a later harvest brings the
+  # register rows in, these become supersession candidates with the split already correct.
+  # 'Salamanders Primaris Upgrades & Transfers'
+  #   listed as 99120101465 but scans 5011921140855, which the maker assigns to 99070101051.
+  'ret-goblingaming:salamanders-primaris-upgrades-transfers': '99070101051'
+  # 'Imperial Fists Primaris Upgrades & Transfers'
+  #   listed as 99120101479 but scans 5011921155170, which the maker assigns to 99070101075.
+  'ret-goblingaming:imperial-fists-primaris-upgrades-transfers': '99070101075'
+  # 'Adepta Sororitas Ministorum Priest With Vindictor'
+  #   listed as 99120108138 but scans 5011921183616, which the maker assigns to 99070108012.
+  'ret-goblingaming:warhammer-40k-adepta-sororitas-ministorum-priest-with-vindictor': '99070108012'
+  # 'Dark Angels Master Lazarus'
+  #   listed as 99120101484 but scans 5011921153022, which the maker assigns to 99120101362.
+  'ret-goblingaming:dark-angels-master-lazarus': '99120101362'
+  # 'Egyptian Archers'
+  #   listed as WGH-CEM-06 but scans 5060200849385, which the maker assigns to WGH-CEM-23.
+  'legacy-catalog:warlord-games/bolt-action/general/egyptian-archers-2': 'WGH-CEM-23'
+  # 'Egyptian Archers - Hail Caesar'
+  #   listed as WGH-CEM-06 but scans 5060200849385, which the maker assigns to WGH-CEM-23.
+  'ret-goblingaming:egyptian-archers': 'WGH-CEM-23'
   # Goblin Gaming listed the single Zodgrod Wortsnagga miniature under the Beast Snagga Orks ARMY
   # SET code 60010103001 (its EAN is Zodgrod's, 5011921128327). That mis-code bridged the whole
   # army set into the Zodgrod entity. Correct this listing to Zodgrod's real code so the army set
@@ -1142,45 +1659,30 @@ reassignCodes:
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
 
-# --- `ean-mismatch`, DELIBERATELY LEFT (2026-08-26) ---------------------------------------------
-# 35 rows in data/review/conflicts.yaml. Every losing barcode in all 35 is retained in its own
-# record's `additionalEans` and the record is stamped `eanConfidence: conflicted`, so nothing is
-# lost and nothing is silently asserted -- `report --ean-guard` reports 0 lost against them. They
-# are a true record of sources disagreeing, which is what the type is for.
+# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, fourth pass) --------------------
+# ONE row, down from 46: `mantic-games/MGWD173`, The Walking Dead Events Deck (2024).
+# `legacy-catalog` says 5060924983624, `ret-goblingaming` says 5060924984799. The record publishes
+# the second as its primary and keeps the first in `additionalEans`, stamped `conflicted`.
 #
-# BUT 25 OF THE 35 ARE ALSO SOMETHING WORSE, AND IT SHOULD BE ON THE RECORD RATHER THAN INFERRED
-# LATER: the entity holds MORE THAN ONE product code, i.e. two or more real products published as
-# one record with the other codes' ids gone. `warlord-games/403205802` holds nine (402012011,
-# 402012057, 402414007, 403205802, 403214010, 403214011, 403214012, 403214014, 403414002);
-# `wyrd-games/WYR40207` holds seven; `warlord-games/452011205`, `/452610003` and `/772012008` hold
-# five each; `steamforged-games/SFEE-LL005` four; `warlord-games/302011002`, `/452010405`,
-# `mantic-games/MGARM114`, `wyrd-games/WYR40162` three each; the remaining 15 hold two.
+# IT IS NOT WITHDRAWN, AND THE REASON IS THE BAR RATHER THAN THE EVIDENCE BEING ABSENT. Researched
+# on the web 2026-08-27, and the corroborated value is fairly clearly 5060924984799: a distributor
+# feed binds it to the MPN inside the SKU itself (`BFI-5060924984799-MGWD173`, machine-readable,
+# not a url slug), and the sibling wave allocates gaplessly and monotonically in MPN order --
+# MGWD172 Equipment Booster 5060924984782, MGWD173 5060924984799, MGWD174 Essentials 5060924984805.
+# The rival traces to ONE distributor's catalogue plus two mirrors of that same feed, and its block
+# runs BACKWARDS against MPN order, which reads as in-house numbering rather than a manufacturer
+# allocating a range.
 #
-# Re-derive the split with `joined_evidence()` over the resolved catalog: for each `ean-mismatch`
-# entity, collect `taxonomy.normalize_code(member.manufacturer, member.sku)` across its members and
-# count the distinct non-null values. 25 have more than one; the other 10 -- the four Corvus Belli
-# rows, two Vallejo, the AMG AT-ST, the GW paints+tools set, `warlord-games/H00133` and
-# `mantic-games/MGWD173` -- are a genuine disagreement about ONE product's barcode and want nothing
-# but the conflict they already have.
+# But BOTH values sit on Mantic's own GS1 prefix 5060924, so the prefix test -- which is what
+# settled every other row -- cannot speak here. Neither appears in any barcode database, and
+# manticgames.com publishes no barcodes at all, so nothing first-party can be cited. That is
+# suggestive, not conclusive, and `withdrawn-eans.yaml` deliberately does not accept suggestive:
+# deleting a published barcode on "the other one is better attested" is exactly the reasoning
+# OBJECTIVES 1 rules out. The record already publishes the better-attested value as its primary,
+# and says out loud that the sources disagree, which is true.
 #
-# WHY THEY ARE NOT FIXED HERE. Splitting a fused family needs a per-member ruling on which barcode
-# belongs to which code, and in these the sources contradict each other rather than one being
-# demonstrably wrong: in `772012008` and `452011205` two sources hold the SAME SET of barcodes
-# permuted across the codes, and in `452610003` and `452600605` it is the MANUFACTURER'S OWN store
-# that repeats one barcode across a variant family. That is the opposite of the terrain block
-# above, where a third product's independent claim settled it. Guessing here would publish a
-# barcode against the wrong box, which is the failure this whole file exists to prevent.
-#
-# SEVEN OF THE 25 ARE GW RE-CODES and look like `supersessions` candidates -- 99120117019/
-# 99120117003, 99070101051/99120101465, 99120101362/99120101484, 99070101075/99120101479,
-# 99070108012/99120108138 all share an SS Code across the pair, which is GW's own identity for a
-# product across a re-code. They are NOT declared here because GW's register does not assert the
-# lineage (neither trade row carries a `hints.supersedes` naming the other), and SS-code equality
-# alone is not the bar this repo has used: `99120101329`/`99120101254` is in the same list with
-# 55-22 against 48-100, and that pair is Chief Librarian Tigurius, whose join a previous verify
-# pass correctly killed as a metal-to-resin re-sculpt rather than a repackaging. A lineage claim
-# publishes; it needs the register or a per-item verification, and it should land as its own change
-# with that evidence rather than riding along here.
+# WHAT WOULD SETTLE IT: Blackfire's own B2B catalogue (login-walled), or any Mantic-published
+# barcode for MGWD173. Either turns this into a withdrawal or confirms both values are real.
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
 # 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a

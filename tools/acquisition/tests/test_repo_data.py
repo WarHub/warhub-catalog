@@ -1502,3 +1502,166 @@ def test_the_backfill_tripwire_is_not_vacuous() -> None:
     }
     assert visible, "no adjudicated rejectEans row is reachable by the tripwire's own lookup"
     assert visible <= {o["key"] for o in matched}, sorted(visible - {o["key"] for o in matched})
+
+
+def test_no_new_entity_fuses_two_products_the_maker_itself_tells_apart() -> None:
+    """THE TRIPWIRE FOR THE NEXT MIS-FILED BARCODE, over the committed evidence.
+
+    `resolve/join.py` unions by (manufacturer, ean), so one barcode written against the wrong
+    product code does not merely publish a wrong number -- it FUSES two products into one record
+    and the loser's id stops existing. 25 `ean-mismatch` entities were in that state on
+    2026-08-27, holding 76 product codes between them, plus 34 more rows that fused silently
+    because the record ended up with no barcode to disagree about.
+
+    IT FAILS ONLY WHERE THE EVIDENCE DECIDES, which is the same bar the committed adjudications
+    were held to -- a test that flags what a human then cannot act on is noise:
+
+      * the maker must separate the two codes cleanly (one barcode each, one code each), and
+      * the barcode's owner must have no record of its own (i.e. this really is a fusion), and
+      * the two codes must not be a VARIANT-SUFFIX PAIR -- `CP3020` against `CP3020S` is one
+        Army Painter primer written two ways, not two products, and 14 rows look exactly like a
+        fusion until you notice that, and
+      * something must actually pick a side: either the source stamps that one barcode across
+        several of its own codes (a copy-paste, so the barcode is wrong), or the maker's own
+        product NAMES separate the candidates by a clear margin.
+
+    Where the names are equally close to both codes the row is left alone deliberately: that is
+    the shape of a genuine re-code, where both codes carry the same product name and only the
+    manufacturer's register can say which box the lister has.
+    """
+    paths = _require_repo_data()
+    if not paths.evidence_products.exists():
+        pytest.skip("no evidence in this checkout")
+    taxonomy = Taxonomy.load(paths.taxonomy)
+    descriptors = load_descriptors(paths.sources)
+    products = {
+        product["id"]
+        for path in sorted(paths.catalog_products.glob("*.yaml"))
+        for product in (read_yaml(path) or {}).get("products", [])
+    }
+    if not products:
+        pytest.skip("catalog not resolved in this checkout")
+    # Rows already adjudicated in matches.yaml are settled -- the evidence still says what it
+    # said, and that is the point: a source's claim stays that source's claim (OBJECTIVES 5) and
+    # the correction lives here, so this must fail only on something NEW.
+    matches = Matches.model_validate(read_yaml(paths.matches))
+    settled = {
+        key: {_canonical(e) for e in eans} for key, eans in matches.rejectEans.items()
+    }
+    reassigned = set(matches.reassignCodes)
+
+    code_eans: dict[tuple[str, str], set[str]] = {}
+    ean_codes: dict[tuple[str, str], set[str]] = {}
+    maker_name: dict[tuple[str, str], str] = {}
+    others: list[dict] = []
+    for source_id, descriptor in descriptors.items():
+        for observation in _observations(paths, source_id):
+            code = taxonomy.normalize_code(observation.get("manufacturer") or "", observation.get("sku"))
+            ean = _canonical(observation.get("ean"))
+            if not (code and ean):
+                continue
+            key = (observation["manufacturer"], code)
+            if descriptor.kind == "manufacturer":
+                code_eans.setdefault(key, set()).add(ean)
+                ean_codes.setdefault((observation["manufacturer"], ean), set()).add(code)
+                maker_name.setdefault(key, observation.get("name"))
+            else:
+                others.append({**observation, "_code": code, "_ean": ean, "_src": source_id})
+
+    def words(text: object) -> set[str]:
+        return set(re.sub(r"[^a-z0-9 ]", " ", str(text or "").lower()).split())
+
+    def overlap(a: object, b: object) -> float:
+        left, right = words(a), words(b)
+        return len(left & right) / len(left | right) if left and right else 0.0
+
+    stamped: dict[tuple[str, str, str], set[str]] = {}
+    for row in others:
+        stamped.setdefault((row["_src"], row["manufacturer"], row["_ean"]), set()).add(row["_code"])
+
+    offenders = []
+    for row in others:
+        manufacturer, code, ean = row["manufacturer"], row["_code"], row["_ean"]
+        if ean in settled.get(row["key"], ()) or row["key"] in reassigned:
+            continue
+        mine = code_eans.get((manufacturer, code))
+        owners = ean_codes.get((manufacturer, ean))
+        if not (mine and owners) or len(mine) != 1 or len(owners) != 1:
+            continue
+        owner = next(iter(owners))
+        if owner == code or ean in mine or f"{manufacturer}/{owner}" in products:
+            continue
+        if owner.startswith(code) or code.startswith(owner):
+            continue  # variant-suffix spelling of one product
+        copy_pasted = len(stamped[(row["_src"], manufacturer, ean)]) > 1
+        to_code = overlap(row.get("name"), maker_name.get((manufacturer, code)))
+        to_owner = overlap(row.get("name"), maker_name.get((manufacturer, owner)))
+        if not (copy_pasted or abs(to_code - to_owner) >= 0.2):
+            continue  # nothing separates them; a re-code looks exactly like this
+        verdict = "rejectEans" if copy_pasted or to_code > to_owner else "reassignCodes"
+        offenders.append(
+            f"{row['key']}: coded {code} but carries {ean}, which the maker gives to {owner} "
+            f"(and {manufacturer}/{owner} has no record) -- adjudicate with {verdict}"
+        )
+    assert not offenders, (
+        "a barcode filed against the wrong code has fused two products the manufacturer tells "
+        "apart, and the evidence says which side is wrong:\n  " + "\n  ".join(sorted(offenders))
+    )
+
+
+def test_the_fused_entity_tripwire_is_not_vacuous() -> None:
+    """Same reason as `test_the_backfill_tripwire_is_not_vacuous`: the test above can only pass.
+
+    It pins that the machinery still reaches real rows -- the makers' code-to-barcode maps are
+    populated, non-manufacturer rows carry codes those maps know, and the committed adjudications
+    in `rejectEans`/`reassignCodes` name rows that exist.
+    """
+    paths = _require_repo_data()
+    if not paths.evidence_products.exists():
+        pytest.skip("no evidence in this checkout")
+    taxonomy = Taxonomy.load(paths.taxonomy)
+    descriptors = load_descriptors(paths.sources)
+    maker_pairs = 0
+    for source_id, descriptor in descriptors.items():
+        if descriptor.kind != "manufacturer":
+            continue
+        for observation in _observations(paths, source_id):
+            code = taxonomy.normalize_code(observation.get("manufacturer") or "", observation.get("sku"))
+            if code and _canonical(observation.get("ean")):
+                maker_pairs += 1
+    assert maker_pairs > 5000, f"only {maker_pairs} maker code+barcode pairs; the map is not loading"
+    matches = Matches.model_validate(read_yaml(paths.matches))
+    known = {o["key"] for sid in descriptors for o in _observations(paths, sid)}
+    dangling = sorted((set(matches.rejectEans) | set(matches.reassignCodes)) - known)
+    assert not dangling, f"adjudication names observations that do not exist: {dangling}"
+
+
+def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_gone() -> None:
+    """THE DEAD-ENTRY GUARD FOR withdrawn-eans.yaml, and the reason it matters more than for its
+    counterpart: an entry here is a standing permission for a barcode to be missing. If the value
+    comes back -- a source re-asserts it, or a harvest brings in the product it really belongs to --
+    the permission silently keeps covering a loss nobody is watching for any more. So an entry must
+    name a record the catalog still has, and the barcode must genuinely be absent from the whole
+    catalog; a stale one is removed rather than left standing.
+    """
+    paths = _require_repo_data()
+    if not paths.withdrawn_eans.exists():
+        pytest.skip("data/catalog/withdrawn-eans.yaml not present")
+    from warhub_acquisition.models.catalog import WithdrawnEans
+
+    declared = WithdrawnEans.model_validate(read_yaml(paths.withdrawn_eans))
+    by_id: dict[str, dict] = {}
+    published: dict[str, list[str]] = {}
+    for path in sorted(paths.catalog_products.glob("*.yaml")):
+        for product in (read_yaml(path) or {}).get("products") or []:
+            by_id[product["id"]] = product
+            for barcode in [product.get("ean"), *(product.get("additionalEans") or [])]:
+                if barcode:
+                    published.setdefault(barcode, []).append(product["id"])
+    for entity, eans in declared.withdrawn.items():
+        assert entity in by_id, f"withdrawn-eans.yaml names {entity!r}, which the catalog no longer has"
+        for ean in eans:
+            assert ean not in published, (
+                f"{entity}: {ean} is declared withdrawn but the catalog publishes it again "
+                f"(on {published[ean]}) -- drop the entry rather than leave a standing permission"
+            )

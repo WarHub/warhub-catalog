@@ -767,3 +767,55 @@ def test_an_untouched_brand_file_produces_no_finding(tmp_path: Path, capsys) -> 
 
     assert exit_code == 0
     assert "Paint-EAN" not in out
+
+
+def _vanishing_barcode(tmp_path: Path) -> tuple[Path, DataPaths]:
+    """A confirmed barcode present at HEAD and gone from the working tree -- the guard's own
+    definition of a loss. What differs between the two tests below is only the declaration."""
+    repo_root = tmp_path / "repo"
+    paths = _init_repo(repo_root)
+    _write_catalog(paths, [{"id": "games-workshop/A1", "name": "A", "manufacturer": "games-workshop",
+                            "ean": "5011921000012", "eanConfidence": "confirmed",
+                            "additionalEans": ["5011921000036"]}])
+    _commit(repo_root, "published with both barcodes")
+    _write_catalog(paths, [{"id": "games-workshop/A1", "name": "A", "manufacturer": "games-workshop",
+                            "ean": "5011921000012", "eanConfidence": "confirmed"}])
+    return repo_root, paths
+
+
+def test_an_undeclared_vanishing_barcode_is_still_lost(tmp_path: Path, capsys) -> None:
+    """The guard's whole purpose, unchanged: nothing about declared withdrawals may soften it."""
+    _, paths = _vanishing_barcode(tmp_path)
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+
+    assert exit_code == 5
+    assert "5011921000036" in capsys.readouterr().out
+
+
+def test_a_declared_withdrawal_is_reported_and_passes(tmp_path: Path, capsys) -> None:
+    """The case the guard could not express before. A barcode a maintainer has established belongs
+    to something else has to be removable -- while `lost` was the only verdict, correcting the
+    catalog and passing CI were mutually exclusive. It is REPORTED, never silent.
+    """
+    _, paths = _vanishing_barcode(tmp_path)
+    write_yaml(paths.withdrawn_eans, {"withdrawn": {"games-workshop/A1": ["5011921000036"]}})
+
+    exit_code = main(["report", "--data", str(paths.root), "--ean-guard"])
+    out = capsys.readouterr().out
+
+    assert exit_code == 0
+    assert "Confirmed-EAN withdrawn" in out
+    assert "5011921000036" in out
+
+
+def test_a_withdrawal_declared_for_a_different_record_does_not_excuse_the_loss(
+    tmp_path: Path, capsys
+) -> None:
+    """The declaration is per RECORD, not a global allowlist: withdrawing a barcode from one product
+    must not quietly permit the same value disappearing from another."""
+    _, paths = _vanishing_barcode(tmp_path)
+    write_yaml(paths.withdrawn_eans, {"withdrawn": {"games-workshop/SOMETHING-ELSE": ["5011921000036"]}})
+
+    assert main(["report", "--data", str(paths.root), "--ean-guard"]) == 5
+    assert "5011921000036" in capsys.readouterr().out

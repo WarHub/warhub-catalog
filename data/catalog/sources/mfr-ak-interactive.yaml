@@ -87,12 +87,12 @@ crossoverToProducts:
     ak-interactive in data/catalog/taxonomy/manufacturers.yaml. The AKABT/AKAD/AKG/AKPACK item
     numbers and the AKABT11x thinners are article numbers in families this source ships by the
     dozen, and they are now coded and crossing.
-    WHAT STILL DOES NOT CROSS is the third kind, and it should not: the freehand RANGE STRINGS
-    ("AK 3G RANGE AFV/AIR/FIG/GENERIC", "RANGE AKAD"), which are not product identities. They
-    are the only skus in this source that contain a space, they are shop range pages rather than
-    boxes, and the identity floor refusing them is the correct outcome rather than a gap. They
-    remain in conflicts.yaml as `paint-set-without-identity` -- five rows a human has looked at
-    and decided to keep.
+    ALL OF THEM CROSS SINCE 2026-08-27, including the five freehand RANGE strings this field used
+    to call "not product identities at all". That was inherited prose, and the maker's own pages
+    contradict it: ak-interactive.com/product/3gen-afv-full-range/ publishes `SKU: AK 3G RANGE AFV`
+    on a single boxed product -- 220,00 EUR, 80 colours, 8kg, one 50x35x33cm carton. A maker's sku
+    is not a shop title, and the identity floor is there to stop a record being named after a
+    TITLE. They are coded on their own skus (spaces stripped) and the refusal list is now empty.
     KINDS, NOT MEMBERS, and for the same reason the counts came out of this field: the
     enumeration that stood here was the exact membership from before the `hobby-auxiliary`
     clause below was added to this same block, and it went stale in that very commit -- it

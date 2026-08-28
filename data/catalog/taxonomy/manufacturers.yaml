@@ -15,7 +15,22 @@ manufacturers:
     vendorNames: [Games Workshop, Citadel, Forge World, GW-Local, GW-Web, GW-OOP]
   - slug: atomic-mass-games
     name: Atomic Mass Games
-    codePattern: '(SWL|SWP|SWM|CP|AMG)[A-Z]?\d+[A-Z]*'
+    # WIDENED 2026-08-27. The old pattern allowed ONE letter between the range prefix and the
+    # digits, so it read `AMGP1` but not `AMGSWQ102` -- and `SWQ` is Atomic Mass's largest current
+    # range. Measured: 258 of 1,169 observations coded before, 794 after. The rest are
+    # `ret-radaddel` house numbers (340, all 6 digits, correctly left alone).
+    #
+    # `AMG` moves into codeStrip because it is a STORE prefix, not a range prefix -- gamenerdz
+    # writes `AMGMCP21` for what legacy writes `MCP21`. The trailing `[A-Z]*` sits OUTSIDE the named
+    # group so a language/edition letter does not mint a second code.
+    #
+    # `FFG` IS DELIBERATELY NOT STRIPPED, and that was measured rather than assumed. Fantasy Flight
+    # numbered the Marvel Crisis Protocol range `MSG07` where Atomic Mass numbers it `CP07`; the two
+    # are the same product and share a barcode. Stripping `FFG` codes the old row as `MSG07`, which
+    # fuses it with `CP07` and costs one of the two codes. Left unstripped, `FFGMSG07` normalizes to
+    # nothing and joins by barcode exactly as it did before -- one record, the AMG code, no loss.
+    codePattern: '(?P<code>[A-Z]{2,4}\d+)[A-Z]*'
+    codeStrip: [AMG]
     vendorNames: [Atomic Mass Games]
   - slug: cmon
     name: CMON
@@ -23,8 +38,18 @@ manufacturers:
     vendorNames: [CMON, Cool Mini or Not]
   - slug: corvus-belli
     name: Corvus Belli
-    codePattern: '\d{6}'
-    codeStrip: [COR]
+    # WIDENED 2026-08-27, and the named group is the point. Corvus Belli's own SKU is a 6-digit
+    # code optionally followed by a 4-digit suffix -- `280873` and `280873-0990` are the same
+    # product -- and 405 of its 794 codes appear BOTH ways across the sources here. Matching both
+    # as distinct codes would split 405 products; refusing the suffixed form would drop most of the
+    # corpus, since `mfr-corvus-belli` writes 231 of its 298 rows suffixed. `(?P<code>...)` names
+    # the part that is the identity, and `normalize_code` returns that.
+    #
+    # The second branch covers the lettered ranges the same stores use (`CBARI23`, `WW20009-0073`,
+    # `GGB-DBR25`). `CVB` joins `COR` in codeStrip: it is `ret-gamenerdz`'s house prefix on 874
+    # rows. Measured: 51 of 2,116 observations coded before, 2,024 after.
+    codePattern: '(?P<code>\d{6})(-\d{4})?|(?P<lettered>[A-Z]{2,4}[A-Z0-9-]*\d{2,})'
+    codeStrip: [COR, CVB]
     vendorNames: [Corvus Belli]
   - slug: mantic-games
     name: Mantic Games
@@ -87,7 +112,20 @@ manufacturers:
   # docs/research/2026-07-23-paint-manufacturer-harvest-design.md) ---
   - slug: vallejo
     name: Vallejo
-    codePattern: '\d{2}\.\d{3}'
+    # `\d{5}` AND `VAL` STRIPPED, ADDED 2026-08-27, because the dotted form alone matched NOTHING
+    # that reaches the product catalog. Vallejo prints its codes as `70.886`, but no source in this
+    # repo writes them that way: `ret-goblingaming` says `VAL70886` (1,201 rows) or bare `70886`
+    # (10), and `mfr-vallejo` -- which is `catalog: paints` and never reaches this resolver anyway
+    # -- says `71282`. Measured before this change: 0 of 2,295 vallejo product observations
+    # normalized to a code, so every one of the 2,270 published Vallejo products was a slug of some
+    # shop's title. That is what fused `vallejo/green-grey-18ml-model-colour` -- two DIFFERENT
+    # paints, 70886 and 70971, that one retailer happens to name identically.
+    #
+    # `\d{5}` cannot swallow a shop's house number here: `ret-radaddel` numbers its Vallejo listings
+    # 6 digits (1,084 of 1,084 measured), so they stay uncoded, which is correct -- they are
+    # radaddel's numbers, not Vallejo's.
+    codePattern: '\d{2}\.\d{3}|\d{5}'
+    codeStrip: [VAL]
     # GS1 prefix verified by the paint tool's EanComputer (computed Vallejo EANs are
     # 8429551 + code digits + check digit).
     gs1Prefixes: ['8429551']
@@ -118,10 +156,9 @@ manufacturers:
     #       codes 1,247 of 1,253 -- and codes 0 of the 5 range strings, because `AK3GRANGEAFV`
     #       still has letters after its digit run and `RANGEAKAD` has no digit run at all.
     #
-    # So the five freehand range strings stay refused, which is correct: "AK 3G RANGE AFV",
-    # "AK 3G RANGE FIG", "AK 3G RANGE AIR", "AK 3G RANGE GENERIC" and "RANGE AKAD" are the shop's
-    # own range pages, not product identities, and the descriptor already says so. They are the
-    # only SKUs in the whole 1,253-row file that contain a space.
+    # The five freehand range strings were left refused on that basis until 2026-08-27, when the
+    # maker's own product pages showed them to be boxed products with skus -- see the RANGE
+    # alternative below. They are still the only SKUs in the whole 1,253-row file with a space.
     #
     # ENUMERATED RATHER THAN `AK[A-Z]*`, which measures identically (1,247 of 1,253) but would code
     # any future letter salad this source ships.
@@ -136,7 +173,23 @@ manufacturers:
     # outcome for the thing this change is for, a hundredth of the churn. The cost is that
     # `ak-interactive/animal-green-playmarker` keeps its title slug and the AKM014 product code
     # stays dropped.
-    codePattern: '(AKABT|AKAD|AKPACK|AKG|AK|ABTPF|ABTP|ABT|RC)\s?\d{1,5}[A-Z]?(-[A-Z0-9]+)?'
+    # THE `RANGE` ALTERNATIVE, ADDED 2026-08-27, REVERSES A REFUSAL THIS FILE ARGUED FOR. Five AK
+    # skus contain a space and were left uncoded on the grounds that they are "shop range pages,
+    # not product identities". ak-interactive.com says otherwise: /product/3gen-afv-full-range/
+    # publishes `SKU: AK 3G RANGE AFV`, price 220,00 EUR, "80 colors in total", 8kg, shipped in one
+    # 50x35x33cm box. That is a boxed product with the maker's own article number, and the identity
+    # floor exists to stop a record being named after a shop's TITLE -- which a maker's sku is not.
+    #
+    # `normalize_code` strips spaces before matching, so the sku becomes `AK3GRANGEAFV` and the id
+    # becomes `ak-interactive/AK3GRANGEAFV`: stable across a retitle, which is the whole point.
+    # IT ENUMERATES THE TWO RANGE FAMILIES ON PURPOSE, against this file's own "KINDS, NOT MEMBERS"
+    # rule, because the kind-level version is demonstrably unsafe: `[A-Z0-9]*RANGE[A-Z0-9]*` also
+    # matches a shop TITLE -- "3GEN AFV Series Full Range" space-strips to `3GENAFVSERIESFULLRANGE`
+    # and would become a product code. That is precisely the failure the identity floor exists to
+    # prevent, so the looser form trades the bug it fixes for the bug it was guarding against.
+    # `test_ak_interactive_codes_its_letter_prefixed_families_but_not_the_range_pages` pins both
+    # halves: the five skus code to themselves, and two title-shaped strings still refuse.
+    codePattern: '(AKABT|AKAD|AKPACK|AKG|AK|ABTPF|ABTP|ABT|RC)\s?\d{1,5}[A-Z]?(-[A-Z0-9]+)?|AK3GRANGE[A-Z]+|RANGEAKAD'
     vendorNames: [AK Interactive, AK-Interactive]
   - slug: army-painter
     name: The Army Painter

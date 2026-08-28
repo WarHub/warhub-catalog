@@ -19423,6 +19423,23 @@ products:
     evidence:
       - arc-tistaminis:/products/age-of-sigmar-paints-tools
       - mfr-gw-trade:53170299003
+  - id: games-workshop/54170199001
+    name: 'Warhammer 40.000: Paints + Tools Set'
+    manufacturer: games-workshop
+    sku: '126289'
+    ean: '5011921196951'
+    eanConfidence: provisional
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceEur: 28.7
+    url: https://www.radaddel.de/warhammer-40.000-paints-tools-set
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126289-warhammer-40_000-paints-tools-set-54170199001-1.webp?v=1781208222
+    evidence:
+      - ret-radaddel:/warhammer-40.000-paints-tools-set
+      - ret-radaddel:warhammer-40-000-paints-tools-set
   - id: games-workshop/54170206001
     name: AOS SKAVEN + PAINT SET GER/FRE/ITA/DUT
     manufacturer: games-workshop
@@ -58284,9 +58301,7 @@ products:
     productCode: '99070101051'
     sku: '99070101051'
     ean: '5011921140855'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921256037'
+    eanConfidence: confirmed
     supersedes:
       - games-workshop/99070101044
     gameSystem: warhammer-40k
@@ -58321,9 +58336,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/salamanders-primaris-upgrades-and-transfers
       - mfr-gw-algolia:prod4530143-99070101051
-      - mfr-gw-algolia:prod4530143-99120101465
       - mfr-gw-trade:99070101051
-      - mfr-gw-trade:99120101465
       - ret-gamenerdz:/warhammer-40k-salamanders-primaris-upgrades-transfers
       - ret-goblingaming:salamanders-primaris-upgrades-transfers
       - ret-radaddel:/salamanders-primaris-upgrades-transfers
@@ -58955,9 +58968,7 @@ products:
     productCode: '99070101075'
     sku: '99070101075'
     ean: '5011921155170'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921256266'
+    eanConfidence: confirmed
     supersedes:
       - games-workshop/99070101043
     gameSystem: warhammer-40k
@@ -59003,9 +59014,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/imperial-fists-primaris-upgrades-and-transfers
       - mfr-gw-algolia:prod4510300-99070101075
-      - mfr-gw-algolia:prod4510300-99120101479
       - mfr-gw-trade:99070101075
-      - mfr-gw-trade:99120101479
       - ret-gamenerdz:/warhammer-40k-imperial-fists-primaris-upgrades-transfers
       - ret-goblingaming:imperial-fists-primaris-upgrades-transfers
       - ret-radaddel:/imperial-fists-primaris-upgrades-transfers
@@ -60445,9 +60454,7 @@ products:
     productCode: '99070108012'
     sku: '99070108012'
     ean: '5011921183616'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921256204'
+    eanConfidence: confirmed
     gameSystem: warhammer-40k
     faction: armies-of-the-imperium
     category: miniatures
@@ -60470,9 +60477,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/ministorum-priest-with-vindictor
       - mfr-gw-algolia:P-181577-99070108012
-      - mfr-gw-algolia:P-181577-99120108138
       - mfr-gw-trade:99070108012
-      - mfr-gw-trade:99120108138
       - ret-gamenerdz:/warhammer-40k-adepta-sororitas-ministorum-priest-with-vindictor
       - ret-goblingaming:warhammer-40k-adepta-sororitas-ministorum-priest-with-vindictor
       - ret-radaddel:/adepta-sororitas-ministorum-priest-with-vindictor
@@ -62562,6 +62567,61 @@ products:
       - ret-goblingaming:hedonites-of-slaanesh-lord-of-pain
       - ret-radaddel:/hedonites-of-slaanesh-lord-of-pain
       - ret-radaddel:hedonites-of-slaanesh-lord-of-pain
+  - id: games-workshop/99070201027
+    name: 'MAGGOTKIN OF NURGLE: ROTBRINGER SORCERER'
+    manufacturer: games-workshop
+    productCode: '99070201027'
+    sku: '99070201027'
+    ean: '5011921995462'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 18.28
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2021_12_99070201027_RotbringerSorcererStock.jpg?v=1639182598
+    evidence:
+      - mfr-gw-trade:99070201027
+      - ret-gamenerdz:/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
+      - ret-goblingaming:rotbringer-sorcerer-age-of-sigmar-2021
+  - id: games-workshop/99070201028
+    name: 'MAGGOTKIN OF NURGLE: LORD OF PLAGUES'
+    manufacturer: games-workshop
+    productCode: '99070201028'
+    sku: '99070201028'
+    ean: '5011921170326'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 10.84
+    url: https://www.goblingaming.co.uk/products/nurgle-rotbringers-lord-of-plagues
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_03_EB200a-83-32-99070201028-MaggotkinLordofPlagues.jpg?v=1682346529
+    evidence:
+      - mfr-gw-trade:99070201028
+      - ret-goblingaming:nurgle-rotbringers-lord-of-plagues
+  - id: games-workshop/99070201029
+    name: 'MAGGOTKIN OF NURGLE: LORD OF BLIGHTS'
+    manufacturer: games-workshop
+    productCode: '99070201029'
+    sku: '99070201029'
+    ean: '5011921170333'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 15.38
+    url: https://www.goblingaming.co.uk/products/lord-of-blight
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/lord-of-blight-nurgle-putrid-blight-kings-age-of-s.jpg?v=1560801727
+    evidence:
+      - mfr-gw-trade:99070201029
+      - ret-goblingaming:lord-of-blight
   - id: games-workshop/99070201030
     name: Tzaangor Shaman
     manufacturer: games-workshop
@@ -64458,6 +64518,27 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99079915005
+  - id: games-workshop/99079915006
+    name: KARANAK THE HOUND OF VENGEANCE
+    manufacturer: games-workshop
+    productCode: '99079915006'
+    sku: '99079915006'
+    ean: '5011921113187'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 22.95
+    priceEur: 32.4
+    url: https://www.goblingaming.co.uk/products/karanak-the-hound-of-vengeance
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/demo_785bcccd-665e-4b1d-b113-1e4a47193641.jpg?v=1702391123
+    evidence:
+      - mfr-gw-trade:99079915006
+      - ret-goblingaming:karanak-the-hound-of-vengeance
+      - ret-radaddel:/blades-of-khorne-karanak-the-hound-of-vengeance
+      - ret-radaddel:daemons-of-khorne-karanak-the-hound-of-vengeance
   - id: games-workshop/99079915007
     name: 'DAEMONS OF SLAANESH: THE MASQUE'
     manufacturer: games-workshop
@@ -67996,10 +68077,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120101190'
     sku: '99120101190'
-    ean: '5011921142439'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921086184'
+    ean: '5011921086184'
+    eanConfidence: confirmed
     supersedes:
       - games-workshop/99120101212
     supersededBy: games-workshop/99120101309
@@ -68016,7 +68095,6 @@ products:
     url: https://www.games-workshop.com/en-GB/space-marines-primaris-intercessors-2020
     evidence:
       - mfr-gw-trade:99120101190
-      - mfr-gw-trade:99120101314
       - seed-curated:games-workshop/intercessors
   - id: games-workshop/99120101191
     name: SM PRIMARIS REDEMPTOR DREADNOUGHT
@@ -68381,6 +68459,24 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101252
+  - id: games-workshop/99120101254
+    name: ULTRAMARINES CHIEF LIBRARIAN TIGURIUS
+    manufacturer: games-workshop
+    productCode: '99120101254'
+    sku: '99120101254'
+    ean: '5011921119776'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 28.03
+    url: https://www.goblingaming.co.uk/products/ultramarines-chief-librarian-tigurius
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/um-chief-librarian-2019.jpg?v=1565807309
+    evidence:
+      - mfr-gw-trade:99120101254
+      - ret-goblingaming:ultramarines-chief-librarian-tigurius
   - id: games-workshop/99120101255
     name: WHITE SCARS KOR'SARRO KHAN
     manufacturer: games-workshop
@@ -69648,6 +69744,19 @@ products:
       - ret-goblingaming:space-marine-centurion-devastator-squad
       - ret-radaddel:/space-marines-centurion-assault-squad
       - ret-radaddel:space-marines-centurion-assault-squad
+  - id: games-workshop/99120101314
+    name: SPACE MARINES ASSAULT SQUAD
+    manufacturer: games-workshop
+    productCode: '99120101314'
+    sku: '99120101314'
+    ean: '5011921142439'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: guessed
+    status: discontinued
+    firstSeen: '2026-07-23'
+    evidence:
+      - mfr-gw-trade:99120101314
   - id: games-workshop/99120101315
     name: Stormhawk Interceptor
     manufacturer: games-workshop
@@ -70128,13 +70237,11 @@ products:
     productCode: '99120101329'
     sku: '99120101329'
     ean: '5011921142583'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921119776'
+    eanConfidence: confirmed
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -70153,10 +70260,8 @@ products:
       - arc-wargameportal:/products/chief-librarian-tigurius-1
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/chief-librarian-tigurius
       - mfr-gw-algolia:prod4530181-99120101329
-      - mfr-gw-trade:99120101254
       - mfr-gw-trade:99120101329
       - ret-gamenerdz:/warhammer-40k-ultramarines-chief-librarian-tigurius
-      - ret-goblingaming:ultramarines-chief-librarian-tigurius
       - ret-radaddel:/ultramarines-chief-librarian-tigurius
       - ret-radaddel:ultramarines-chief-librarian-tigurius
   - id: games-workshop/99120101330
@@ -70899,9 +71004,7 @@ products:
     productCode: '99120101362'
     sku: '99120101362'
     ean: '5011921153022'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921256440'
+    eanConfidence: confirmed
     gameSystem: warhammer-40k
     faction: space-marines
     category: miniatures
@@ -70925,9 +71028,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/master-lazarus
       - mfr-gw-algolia:prod4580260-99120101362
-      - mfr-gw-algolia:prod4580260-99120101484
       - mfr-gw-trade:99120101362
-      - mfr-gw-trade:99120101484
       - ret-goblingaming:dark-angels-master-lazarus
       - ret-radaddel:/dark-angels-master-lazarus
       - ret-radaddel:dark-angels-master-lazarus
@@ -73955,6 +74056,26 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120101463
+  - id: games-workshop/99120101465
+    name: Salamanders Primaris Upgrades and Transfers
+    manufacturer: games-workshop
+    productCode: '99120101465'
+    sku: '99120101465'
+    ean: '5011921256037'
+    eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: space-marines
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-30'
+    priceGbp: 18.5
+    url: https://www.warhammer.com/en-GB/shop/Salamanders-Primaris-Upgrades-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101044_SALPrimarisUpgrades01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4530143-99120101465
+      - mfr-gw-trade:99120101465
   - id: games-workshop/99120101467
     name: 'SPACE MARINES: LIEUTENANT/PHOBOS ARMOUR'
     manufacturer: games-workshop
@@ -74062,6 +74183,26 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120101474
+  - id: games-workshop/99120101479
+    name: Imperial Fists Primaris Upgrades and Transfers
+    manufacturer: games-workshop
+    productCode: '99120101479'
+    sku: '99120101479'
+    ean: '5011921256266'
+    eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: space-marines
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: in_stock
+    firstSeen: '2026-08-22'
+    priceGbp: 18.5
+    url: https://www.warhammer.com/en-GB/shop/Imperial-Fists-Primaris-Upgrades-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101043_IFPrimarisUpgrades01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4510300-99120101479
+      - mfr-gw-trade:99120101479
   - id: games-workshop/99120101480
     name: 'SPACE MARINES: ANCIENT'
     manufacturer: games-workshop
@@ -74107,6 +74248,26 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120101482
+  - id: games-workshop/99120101484
+    name: Master Lazarus
+    manufacturer: games-workshop
+    productCode: '99120101484'
+    sku: '99120101484'
+    ean: '5011921256440'
+    eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: space-marines
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: in_stock
+    firstSeen: '2026-08-01'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/Dark-Angels-Master-Lazarus-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101267_MasterLazarus01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4580260-99120101484
+      - mfr-gw-trade:99120101484
   - id: games-workshop/99120101485
     name: 'BLACK TEMPLARS: EMPEROR''S CHAMPION'
     manufacturer: games-workshop
@@ -78540,8 +78701,9 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 38.5
+    priceEur: 40.0
     priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-raptors-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102259_ChaosSpaceMarinesRaptors01.jpg
@@ -78550,6 +78712,7 @@ products:
       - mfr-gw-trade:99120102259
       - ret-gamenerdz:/warhammer-40k-chaos-space-marines-raptors-11th-edition
       - ret-goblingaming:chaos-space-marines-raptors
+      - ret-radaddel:chaos-space-marines-raptors-1
       - ret-tistaminis:chaos-space-marines-raptors
   - id: games-workshop/99120102260
     name: 'WORLD EATERS B/FORCE: KHORNE DAEMONKIN'
@@ -89407,6 +89570,26 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108011_ASMinistorumPriest01.jpg
     evidence:
       - mfr-gw-algolia:P-187771-99120108137
+  - id: games-workshop/99120108138
+    name: Ministorum Priest with Vindictor
+    manufacturer: games-workshop
+    productCode: '99120108138'
+    sku: '99120108138'
+    ean: '5011921256204'
+    eanConfidence: confirmed
+    gameSystem: warhammer-40k
+    faction: general
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-30'
+    priceGbp: 23.0
+    url: https://www.warhammer.com/en-GB/shop/adepta-sororitas-ministorum-priest-with-vindicator-2024
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108012_ASMinistorumPriestWithVindictor01.jpg
+    evidence:
+      - mfr-gw-algolia:P-181577-99120108138
+      - mfr-gw-trade:99120108138
   - id: games-workshop/99120108143
     name: Dialogus
     manufacturer: games-workshop
@@ -94694,6 +94877,25 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120117002
+  - id: games-workshop/99120117003
+    name: GENESTEALER CULTS ACOLYTE HYBRIDS
+    manufacturer: games-workshop
+    productCode: '99120117003'
+    sku: '99120117003'
+    ean: '5011921077267'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 25.08
+    url: https://www.gamenerdz.com/warhammer-40k-genestealer-cults-acolyte-hybrids
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_11_EB200b-51-51-99120117019-GenestealerCultsAcolyteHybrids.jpg?v=1682338126
+    evidence:
+      - mfr-gw-trade:99120117003
+      - ret-gamenerdz:/warhammer-40k-genestealer-cults-acolyte-hybrids
+      - ret-goblingaming:genestealer-cults-acolyte-hybrids
   - id: games-workshop/99120117004
     name: GENESTEALER CULTS NEOPHYTE HYBRIDS
     manufacturer: games-workshop
@@ -94890,13 +95092,11 @@ products:
     productCode: '99120117019'
     sku: '99120117019'
     ean: '5011921171934'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921077267'
+    eanConfidence: confirmed
     gameSystem: warhammer-40k
     faction: genestealer-cults
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -94916,10 +95116,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/genestealer-cults/hybrid-metamorphs
       - mfr-gw-algolia:prod3290206-99120117019
       - mfr-gw-algolia:prod3290211-99120117019
-      - mfr-gw-trade:99120117003
       - mfr-gw-trade:99120117019
-      - ret-gamenerdz:/warhammer-40k-genestealer-cults-acolyte-hybrids
-      - ret-goblingaming:genestealer-cults-acolyte-hybrids
   - id: games-workshop/99120117020
     name: Neophyte Hybrids
     manufacturer: games-workshop
@@ -98869,6 +99066,7 @@ products:
 
       This kit comprises 97 plastic components, and is supplied with 10x Citadel 32mm Round Bases. These miniatures are supplied unassembled and unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-wargameportal:/products/chaos-warriors
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/chaos-warriors
       - mfr-gw-algolia:prod5030216-99120201131
       - mfr-gw-trade:99120201131
@@ -99139,6 +99337,44 @@ products:
       - ret-goblingaming:tzeentch-arcanites-tzaangors
       - ret-radaddel:/disciples-of-tzeentch-tzaangors
       - ret-radaddel:disciples-of-tzeentch-tzaangors
+  - id: games-workshop/99120201145
+    name: Rotmire Creed
+    manufacturer: games-workshop
+    productCode: '99120201145'
+    sku: '99120201145'
+    ean: '5011921179039'
+    eanConfidence: confirmed
+    gameSystem: other-games
+    faction: grand-alliance-chaos
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 36.1
+    url: https://www.warhammer.com/en-GB/shop/maggotkin-of-nurgle-rotmire-creed-2025
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120201145_RotmireCreed2.jpg
+    description: |-
+      The Rotmire Creed are artisans of virology, relentless in their pursuit of the perfect plague. A swamp-dwelling cult that worships Nurgle in his aspect as Lord Leech, their blowpipe darts and cruel barbs are daubed with deadly alchemical contagions. Once unleashed, these diseases spread quickly through the ranks of their enemies – a testament to their infectious craft.
+
+      This multipart plastic kit builds 10 Rotmire Creed cultists, alchemists and poisoners for your Maggotkin of Nurgle armies in games of Warhammer Age of Sigmar. These lowly mortals have perfected the art of infecting their targets from a distance, offering you new vectors of contagion. When used wisely, they can disrupt enemy plans and weaken tough units.
+
+      These miniatures can also be used as a warband in games of Warcry using free rules, downloadable from the Warhammer Community website.
+
+      **Contents:**
+      – 1x Witherlord
+      – 1x Bloated One, armed with raker-claws or a raker-claw and hooked net
+      – 2x Carrion Catchers, each armed with a snatcher-hook or impaler
+      – 6x Mirefolk Outcasts, each armed with bilewood weapons or a bilewood weapon and shield
+
+      This kit comprises 71 plastic components, 2x Citadel 32mm Round Bases, 6x Citadel 25mm Round Bases, and 2x Citadel 28.5mm Round Bases. These miniatures require assembly and are supplied unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
+    evidence:
+      - legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed
+      - legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed-2
+      - mfr-gw-trade:99120201145
+      - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-rotmire-creed
+      - ret-goblingaming:age-of-sigmar-warcry-rotmire-creed-warband-games-workshop
   - id: games-workshop/99120201146
     name: 'VANGUARD: HEDONITES OF SLAANESH'
     manufacturer: games-workshop
@@ -99172,6 +99408,43 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120201147
+  - id: games-workshop/99120201148
+    name: Claws of Karanak
+    manufacturer: games-workshop
+    productCode: '99120201148'
+    sku: '99120201148'
+    ean: '5011921182114'
+    eanConfidence: confirmed
+    gameSystem: age-of-sigmar
+    faction: grand-alliance-chaos
+    category: miniatures
+    categoryBasis: default
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 38.0
+    url: https://www.warhammer.com/en-GB/shop/blades-of-khorne-claws-of-karanak-2025
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010299039_Bloodhunt4.jpg
+    description: |-
+      The Claws of Karanak venerate the Flesh Hounds of Khorne, taking on an aspect of the daemons' bloodthirsty nature as they hunt the enemies of the Blood God and hack them to shreds in horrific displays of brutality.
+
+      This multipart plastic kit builds the Claws of Karanak, eight cultists for your Blades of Khorne armies in games of Warhammer Age of Sigmar. These savage warriors seek to emulate the pure rage of the daemonic Flesh Hounds of Khorne, making them an effective unit to send to the front lines. With their speed and brutal weaponry, they are ideal for disrupting your opponent's plans.
+
+      These miniatures can also be used as a warband in Warcry using free rules, downloadable from the Warhammer Community website.
+
+      **Contents:**
+      – 1x Packlord
+      – 1x Hound of Wrath
+      – 2x Brutalisers, each armed with shredder blades or a shredder blade and meat hook
+      – 4x Blood Whelps, each armed with a barb-spear or claw-flail
+
+      The Packlord, Brutalisers, and Blood Whelps each have a choice of two different heads, making it easy to customise your Karanak-worshipping warriors.
+
+      The kit comprises 62 plastic components, 1x Citadel 60mm Oval Base, 4x Citadel 28mm Round Bases, 1x Citadel 40mm Round Base, and 2x Citadel 32mm Round Bases. These miniatures require assembly and are supplied unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
+    evidence:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/claws-of-karanak
+      - mfr-gw-trade:99120201148
   - id: games-workshop/99120201150
     name: Curseling, Eye of Tzeentch
     manufacturer: games-workshop
@@ -100805,12 +101078,10 @@ products:
     sku: '99120201220'
     ean: '5011921254781'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921995462'
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -100828,10 +101099,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/rotbringer-sorcerer
       - mfr-gw-algolia:prod4810197-99120201220
-      - mfr-gw-trade:99070201027
       - mfr-gw-trade:99120201220
-      - ret-gamenerdz:/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
-      - ret-goblingaming:rotbringer-sorcerer-age-of-sigmar-2021
       - ret-radaddel:/maggotkin-of-nurgle-rotbringer-sorcerer
       - ret-radaddel:maggotkin-of-nurgle-rotbringer-sorcerer
   - id: games-workshop/99120201221
@@ -100841,14 +101109,12 @@ products:
     sku: '99120201221'
     ean: '5011921254798'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921170326'
     supersedes:
       - games-workshop/99070201009
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -100864,9 +101130,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/lord-of-plagues
       - mfr-gw-algolia:prod2940185-99120201221
-      - mfr-gw-trade:99070201028
       - mfr-gw-trade:99120201221
-      - ret-goblingaming:nurgle-rotbringers-lord-of-plagues
       - ret-radaddel:/maggotkin-of-nurgle-lord-of-plagues
       - ret-radaddel:nurgle-rotbringers-lord-of-plagues
   - id: games-workshop/99120201222
@@ -100876,14 +101140,12 @@ products:
     sku: '99120201222'
     ean: '5011921254804'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921170333'
     supersedes:
       - games-workshop/99070201024
     gameSystem: age-of-sigmar
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
@@ -100901,9 +101163,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/lord-of-blights
       - mfr-gw-algolia:prod3700235-99120201222
-      - mfr-gw-trade:99070201029
       - mfr-gw-trade:99120201222
-      - ret-goblingaming:lord-of-blight
       - ret-radaddel:/maggotkin-of-nurgle-lord-of-blights
       - ret-radaddel:nurgle-rotbringers-lord-of-blights
   - id: games-workshop/99120201236
@@ -101069,39 +101329,18 @@ products:
     sku: '99120201247'
     ean: '5011921259533'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921182114'
     gameSystem: age-of-sigmar
     category: miniatures
     categoryBasis: mapped
-    packaging: single
     status: current
     availability: in_stock
-    firstSeen: '2026-07-07'
+    firstSeen: '2026-07-13'
     priceGbp: 38.0
     priceCad: 74.0
     url: https://www.warhammer.com/en-GB/shop/blades-of-khorne-claws-of-karanak-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010299039_Bloodhunt4.jpg
-    description: |-
-      The Claws of Karanak venerate the Flesh Hounds of Khorne, taking on an aspect of the daemons' bloodthirsty nature as they hunt the enemies of the Blood God and hack them to shreds in horrific displays of brutality.
-
-      This multipart plastic kit builds the Claws of Karanak, eight cultists for your Blades of Khorne armies in games of Warhammer Age of Sigmar. These savage warriors seek to emulate the pure rage of the daemonic Flesh Hounds of Khorne, making them an effective unit to send to the front lines. With their speed and brutal weaponry, they are ideal for disrupting your opponent's plans.
-
-      These miniatures can also be used as a warband in Warcry using free rules, downloadable from the Warhammer Community website.
-
-      **Contents:**
-      – 1x Packlord
-      – 1x Hound of Wrath
-      – 2x Brutalisers, each armed with shredder blades or a shredder blade and meat hook
-      – 4x Blood Whelps, each armed with a barb-spear or claw-flail
-
-      The Packlord, Brutalisers, and Blood Whelps each have a choice of two different heads, making it easy to customise your Karanak-worshipping warriors.
-
-      The kit comprises 62 plastic components, 1x Citadel 60mm Oval Base, 4x Citadel 28mm Round Bases, 1x Citadel 40mm Round Base, and 2x Citadel 32mm Round Bases. These miniatures require assembly and are supplied unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
-      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/claws-of-karanak
       - mfr-gw-algolia:P-221161-99120201247
-      - mfr-gw-trade:99120201148
       - mfr-gw-trade:99120201247
       - ret-goblingaming:blades-of-khorne-claws-of-karanak
       - ret-tistaminis:warcry-claws-of-karanak
@@ -101208,41 +101447,18 @@ products:
     sku: '99120201252'
     ean: '5011921261024'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921179039'
     gameSystem: other-games
-    faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
-    packaging: single
+    categoryBasis: guessed
     status: current
     availability: in_stock
-    firstSeen: '2026-07-07'
+    firstSeen: '2026-07-13'
     priceGbp: 38.0
     url: https://www.warhammer.com/en-GB/shop/maggotkin-of-nurgle-rotmire-creed-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120201145_RotmireCreed2.jpg
-    description: |-
-      The Rotmire Creed are artisans of virology, relentless in their pursuit of the perfect plague. A swamp-dwelling cult that worships Nurgle in his aspect as Lord Leech, their blowpipe darts and cruel barbs are daubed with deadly alchemical contagions. Once unleashed, these diseases spread quickly through the ranks of their enemies – a testament to their infectious craft.
-
-      This multipart plastic kit builds 10 Rotmire Creed cultists, alchemists and poisoners for your Maggotkin of Nurgle armies in games of Warhammer Age of Sigmar. These lowly mortals have perfected the art of infecting their targets from a distance, offering you new vectors of contagion. When used wisely, they can disrupt enemy plans and weaken tough units.
-
-      These miniatures can also be used as a warband in games of Warcry using free rules, downloadable from the Warhammer Community website.
-
-      **Contents:**
-      – 1x Witherlord
-      – 1x Bloated One, armed with raker-claws or a raker-claw and hooked net
-      – 2x Carrion Catchers, each armed with a snatcher-hook or impaler
-      – 6x Mirefolk Outcasts, each armed with bilewood weapons or a bilewood weapon and shield
-
-      This kit comprises 71 plastic components, 2x Citadel 32mm Round Bases, 6x Citadel 25mm Round Bases, and 2x Citadel 28.5mm Round Bases. These miniatures require assembly and are supplied unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
-      - legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed
-      - legacy-catalog:games-workshop/other-games/grand-alliance-chaos/rotmire-creed-2
       - mfr-gw-algolia:P-221472-99120201252
-      - mfr-gw-trade:99120201145
       - mfr-gw-trade:99120201252
-      - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-rotmire-creed
-      - ret-goblingaming:age-of-sigmar-warcry-rotmire-creed-warband-games-workshop
   - id: games-workshop/99120201253
     name: Jade Obelisk
     manufacturer: games-workshop
@@ -116504,8 +116720,9 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 37.5
+    priceEur: 41.0
     priceCad: 63.75
     url: https://www.warhammer.com/en-GB/shop/ogor-mawtribes-ironguts-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120213041_OgorMawtribesIronguts01.jpg
@@ -116513,6 +116730,7 @@ products:
       - mfr-gw-algolia:P-257269-99120213041
       - ret-gamenerdz:/warhammer-age-of-sigmar-ogor-mawtribes-ironguts-4th-edition-preorder
       - ret-goblingaming:ogor-mawtribes-ironguts
+      - ret-radaddel:ogor-mawtribes-ironguts
       - ret-tistaminis:ogor-mawtribes-ironguts-pre-order
   - id: games-workshop/99120213042
     name: Maulbeast Raiders/Cavalry
@@ -116572,8 +116790,9 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 37.5
+    priceEur: 40.1
     priceCad: 63.75
     url: https://www.warhammer.com/en-GB/shop/ogor-mawtribes-cleavers-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120213044_OgorMawtribesCleavers01.jpg
@@ -116581,6 +116800,7 @@ products:
       - mfr-gw-algolia:P-257266-99120213044
       - ret-gamenerdz:/warhammer-age-of-sigmar-ogor-mawtribes-cleavers-gutseers-preorder
       - ret-goblingaming:ogor-mawtribes-cleavers
+      - ret-radaddel:ogor-mawtribes-butcher
       - ret-tistaminis:ogor-mawtribes-cleavers-pre-order
   - id: games-workshop/99120213045
     name: Hunters with Sabrefangs
@@ -118769,6 +118989,38 @@ products:
     evidence:
       - mfr-gw-trade:99120219016
       - ret-gamenerdz:/warhammer-age-of-sigmar-vanguard-idoneth-deepkin
+  - id: games-workshop/99120219017
+    name: Akhelian King
+    manufacturer: games-workshop
+    productCode: '99120219017'
+    sku: '99120219017'
+    ean: '5011921173563'
+    eanConfidence: confirmed
+    gameSystem: age-of-sigmar
+    faction: grand-alliance-order
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 28.5
+    priceEur: 41.0
+    url: https://www.warhammer.com/en-GB/shop/Akhelian-King-2018
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120219004_Volturnos02.jpg
+    description: |-
+      Whether directing a raid for souls upon a coastline or heading the defence of an underground stronghold, the Akhelian Kings are the mightiest warriors of the Idoneth. They are the military leaders whose commands and personal heroics will determine the difference between victory and defeat. He must be swift and strong, able to best any of his comrades in single combat. Yet martial skill is not enough to make an aelf lord, for a king is first and foremost a leader. To repel an attacking sea monster, thwart a tide of ravenous voracudas or defeat an army upon a field of battle, an Akhelian King’s mind must be as deft as his swordplay. He must make tactical decisions without hesitation, and possess the ability to inspire his troops, pressing any advantage or rallying his warriors should any advantage falter.
+
+      This multi-part plastic kit contains the components necessary to assemble an Akhelian King. Very much prepared for war, he wears splendid, heavy plate armour – of particular note are the leg and shoulder coverings, which extend far further than his actual shoulders, providing support for the enormous, wide cloak which billows outward and downward, featuring Idoneth symbols at the edges. The Akhelian King has several weapon options – in his right hand he can carry either a bladed polearm or a greatsword, and in his left a king’s shield or falchion. There are 3 head options – these feature different crests, a transverse sail, parallel sail and fish net are included, above an aggressive-looking closed-face helm. He rides a Deepmare – an massive, scaled creature with a single piercing horn, whose forelegs end in huge talons and whose rear half splits into 3 powerful tails. An aelven waystone is included as an atmospheric piece of detail for the base.
+
+      This kit comes as 45 components, and is supplied with a Citadel 60mm Round base. The kit can optionally be used to assemble Volturnos, High King of the Deep.
+    evidence:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/akhelian-king
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/volturnos-high-king-of-the-deep
+      - mfr-gw-trade:99120219017
+      - ret-goblingaming:volturnos-high-king-of-the-deep
+      - ret-radaddel:/idoneth-deepkin-volturnos-high-king-of-the-deep
+      - ret-radaddel:idoneth-deepkin-volturnos-high-king-of-the-deep
   - id: games-workshop/99120219018
     name: 'IDONETH DEEPKIN: EIDOLON OF MATHLANN'
     manufacturer: games-workshop
@@ -118983,44 +119235,27 @@ products:
       - mfr-gw-trade:99120219027
       - ret-goblingaming:akhelian-leviadon
   - id: games-workshop/99120219028
-    name: Akhelian King
+    name: Volturnos, High King of the Deep
     manufacturer: games-workshop
     productCode: '99120219028'
     sku: '99120219028'
     ean: '5011921229499'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921173563'
     supersedes:
       - games-workshop/99120219004
     gameSystem: age-of-sigmar
-    faction: grand-alliance-order
     category: miniatures
-    categoryBasis: mapped
-    packaging: single
+    categoryBasis: guessed
     status: current
     availability: in_stock
-    firstSeen: '2026-07-07'
+    firstSeen: '2026-07-13'
     priceGbp: 38.0
-    priceEur: 41.0
-    url: https://www.warhammer.com/en-GB/shop/Akhelian-King-2018
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120219004_Volturnos02.jpg
-    description: |-
-      Whether directing a raid for souls upon a coastline or heading the defence of an underground stronghold, the Akhelian Kings are the mightiest warriors of the Idoneth. They are the military leaders whose commands and personal heroics will determine the difference between victory and defeat. He must be swift and strong, able to best any of his comrades in single combat. Yet martial skill is not enough to make an aelf lord, for a king is first and foremost a leader. To repel an attacking sea monster, thwart a tide of ravenous voracudas or defeat an army upon a field of battle, an Akhelian King’s mind must be as deft as his swordplay. He must make tactical decisions without hesitation, and possess the ability to inspire his troops, pressing any advantage or rallying his warriors should any advantage falter.
-
-      This multi-part plastic kit contains the components necessary to assemble an Akhelian King. Very much prepared for war, he wears splendid, heavy plate armour – of particular note are the leg and shoulder coverings, which extend far further than his actual shoulders, providing support for the enormous, wide cloak which billows outward and downward, featuring Idoneth symbols at the edges. The Akhelian King has several weapon options – in his right hand he can carry either a bladed polearm or a greatsword, and in his left a king’s shield or falchion. There are 3 head options – these feature different crests, a transverse sail, parallel sail and fish net are included, above an aggressive-looking closed-face helm. He rides a Deepmare – an massive, scaled creature with a single piercing horn, whose forelegs end in huge talons and whose rear half splits into 3 powerful tails. An aelven waystone is included as an atmospheric piece of detail for the base.
-
-      This kit comes as 45 components, and is supplied with a Citadel 60mm Round base. The kit can optionally be used to assemble Volturnos, High King of the Deep.
+    url: https://www.warhammer.com/en-GB/shop/Volturnos-High-King-Of-The-Deep-2018
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120219004_Volturnos01.jpg
     evidence:
-      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/akhelian-king
-      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/volturnos-high-king-of-the-deep
       - mfr-gw-algolia:prod3810181-99120219028
       - mfr-gw-algolia:prod3810188-99120219028
-      - mfr-gw-trade:99120219017
       - mfr-gw-trade:99120219028
-      - ret-goblingaming:volturnos-high-king-of-the-deep
-      - ret-radaddel:/idoneth-deepkin-volturnos-high-king-of-the-deep
-      - ret-radaddel:idoneth-deepkin-volturnos-high-king-of-the-deep
   - id: games-workshop/99120219029
     name: Eidolon of Mathlann – Aspect of the Sea
     manufacturer: games-workshop
@@ -133443,8 +133678,9 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 54.5
+    priceEur: 57.3
     priceCad: 91.8
     url: https://www.warhammer.com/en-GB/shop/warriors-of-chaos-chaos-warriors-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122701018_ChaosWarriors1a.jpg
@@ -133453,6 +133689,7 @@ products:
       - mfr-gw-trade:99122701018
       - ret-gamenerdz:/warhammer-the-old-world-warriors-of-chaos-chaos-warriors-2026
       - ret-goblingaming:warriors-of-chaos-chaos-warriors
+      - ret-radaddel:warriors-of-chaos-chaos-warriors
       - ret-tistaminis:warriors-of-chaos-chaos-warriors-pre-order
   - id: games-workshop/99122701019
     name: Chaos Knights
@@ -137342,6 +137579,7 @@ products:
 
       These miniatures are supplied unassembled and unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-wargameportal:/products/arcane-ruins
       - legacy-catalog:games-workshop/the-old-world/scenery/arcane-ruins
       - mfr-gw-algolia:P-188278-99122799001
       - mfr-gw-trade:99122799001
@@ -140176,8 +140414,9 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 54.5
+    priceEur: 56.0
     priceCad: 91.8
     url: https://www.warhammer.com/en-GB/shop/legiones-astartes-mk4-tactical-squad-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123001085_LegionAstartesMKIVTacticalSquad1.jpg
@@ -140186,6 +140425,7 @@ products:
       - mfr-gw-trade:99123001085
       - ret-gamenerdz:/warhammer-the-horus-heresy-legiones-astartes-mkiv-tactical-squad
       - ret-goblingaming:legiones-astartes-mkiv-tactical-squad
+      - ret-radaddel:legiones-astartes-mkiv-tactical-squad
       - ret-tistaminis:legiones-astartes-mkiv-tactical-squad
   - id: games-workshop/99123001086
     name: MkIV Assault Squad
@@ -143408,18 +143648,15 @@ products:
     sku: '99129915081'
     ean: '5011921259083'
     eanConfidence: confirmed
-    additionalEans:
-      - '5011921113187'
     gameSystem: warhammer-40k
     faction: grand-alliance-chaos
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: default
     packaging: single
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
-    priceEur: 32.4
     url: https://www.warhammer.com/en-GB/shop/Karanak-the-Hound-of-Vengeance-2019
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99079915006_KaranakHoundofVengeance01.jpg
     description: |-
@@ -143434,11 +143671,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/grand-alliance-chaos/karanak
       - legacy-catalog:games-workshop/warhammer-40k/grand-alliance-chaos/karanak-2
       - mfr-gw-algolia:prod4150238-99129915081
-      - mfr-gw-trade:99079915006
       - mfr-gw-trade:99129915081
-      - ret-goblingaming:karanak-the-hound-of-vengeance
-      - ret-radaddel:/blades-of-khorne-karanak-the-hound-of-vengeance
-      - ret-radaddel:daemons-of-khorne-karanak-the-hound-of-vengeance
   - id: games-workshop/99129915082
     name: Poxbringer
     manufacturer: games-workshop
@@ -185731,16 +185964,6 @@ products:
     evidence:
       - ret-radaddel:/aragorn-the-black-gate-lotr-good
       - ret-radaddel:aragorn-the-black-gate-lotr-good
-  - id: games-workshop/arcane-ruins
-    name: Arcane Ruins
-    manufacturer: games-workshop
-    category: miniatures
-    categoryBasis: guessed
-    status: discontinued
-    firstSeen: '2026-07-13'
-    url: https://wargameportal.com/products/arcane-ruins
-    evidence:
-      - arc-wargameportal:/products/arcane-ruins
   - id: games-workshop/armageddon-zeit-des-feuers-deutsch
     name: 'Armageddon: Zeit des Feuers (deutsch)'
     manufacturer: games-workshop
@@ -186290,20 +186513,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/chaos-space-marines-fellgor-ravagers-games-workshop-radaddel.webp?v=1785551657
     evidence:
       - ret-radaddel:chaos-space-marines-fellgor-ravagers
-  - id: games-workshop/chaos-space-marines-raptors
-    name: 'Chaos Space Marines: Raptors'
-    manufacturer: games-workshop
-    sku: '136567'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 40.0
-    url: https://radaddel.de/products/chaos-space-marines-raptors-1
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/chaos-space-marines-raptors-games-workshop-radaddel.webp?v=1785551738
-    evidence:
-      - ret-radaddel:chaos-space-marines-raptors-1
   - id: games-workshop/chaos-space-marines-world-eater-terminator-azrakh-the-annihilator-new
     name: Chaos Space Marines World Eater Terminator Azrakh the Annihilator New
     manufacturer: games-workshop
@@ -186322,19 +186531,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/61z85LRGfvL._AC_SL1500.jpg?v=1760277215
     evidence:
       - ret-tistaminis:chaos-space-marines-world-eater-terminator-azrakh-the-annihilator
-  - id: games-workshop/chaos-warriors
-    name: Chaos Warriors
-    manufacturer: games-workshop
-    sku: 83-06
-    gameSystem: the-old-world
-    faction: warriors-of-chaos
-    category: miniatures
-    categoryBasis: guessed
-    status: discontinued
-    firstSeen: '2026-07-13'
-    url: https://wargameportal.com/products/chaos-warriors
-    evidence:
-      - arc-wargameportal:/products/chaos-warriors
   - id: games-workshop/cirdan-and-erestor-lotr-good-von-games-workshop
     name: Cirdan and Erestor (LOTR - Good) von Games Workshop
     manufacturer: games-workshop
@@ -189968,20 +190164,6 @@ products:
     evidence:
       - ret-radaddel:/legiones-astartes-mkii-veteran-squad-with-disintegrators
       - ret-radaddel:legiones-astartes-mkii-veteran-squad-with-disintegrators
-  - id: games-workshop/legiones-astartes-mkiv-tactical-squad
-    name: 'Legiones Astartes: MkIV Tactical Squad'
-    manufacturer: games-workshop
-    sku: '136580'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 56.0
-    url: https://radaddel.de/products/legiones-astartes-mkiv-tactical-squad
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/legiones-astartes-mkiv-tactical-squad-games-workshop-radaddel.webp?v=1785551581
-    evidence:
-      - ret-radaddel:legiones-astartes-mkiv-tactical-squad
   - id: games-workshop/legiones-astartes-spartan-prometheus-assault-tank
     name: 'Legiones Astartes: Spartan Prometheus Assault Tank'
     manufacturer: games-workshop
@@ -190854,20 +191036,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/ogor-mawtribes-battletome-englisch-games-workshop-radaddel.webp?v=1786756382
     evidence:
       - ret-radaddel:ogor-mawtribes-battletome-englisch
-  - id: games-workshop/ogor-mawtribes-butcher
-    name: 'Ogor Mawtribes: Butcher'
-    manufacturer: games-workshop
-    sku: '136629'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 40.1
-    url: https://radaddel.de/products/ogor-mawtribes-butcher
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/ogor-mawtribes-butcher-games-workshop-radaddel.webp?v=1786756298
-    evidence:
-      - ret-radaddel:ogor-mawtribes-butcher
   - id: games-workshop/ogor-mawtribes-cleavers-gutseers
     name: 'Ogor Mawtribes: Cleavers/Gutseers'
     manufacturer: games-workshop
@@ -190896,20 +191064,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/ogor-mawtribes-dice-set-games-workshop-radaddel.webp?v=1786756395
     evidence:
       - ret-radaddel:ogor-mawtribes-dice-set
-  - id: games-workshop/ogor-mawtribes-ironguts
-    name: 'Ogor Mawtribes: Ironguts'
-    manufacturer: games-workshop
-    sku: '136624'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 41.0
-    url: https://radaddel.de/products/ogor-mawtribes-ironguts
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/ogor-mawtribes-ironguts-games-workshop-radaddel.webp?v=1786756358
-    evidence:
-      - ret-radaddel:ogor-mawtribes-ironguts
   - id: games-workshop/ogor-mawtribes-kriegsbuch-deutsch
     name: 'Ogor Mawtribes: Kriegsbuch (deutsch)'
     manufacturer: games-workshop
@@ -192630,22 +192784,18 @@ products:
     name: 'Warhammer 40.000: Paints + Tools Set'
     manufacturer: games-workshop
     sku: '135801'
-    ean: '5011921196951'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5011921260256'
+    ean: '5011921260256'
+    eanConfidence: provisional
     category: miniatures
     categoryBasis: guessed
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceEur: 28.7
     url: https://www.radaddel.de/detail/index/sArticle/24425
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126289-warhammer-40_000-paints-tools-set-54170199001-1.webp?v=1781208222
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135801-warhammer-40_000-paints-tools-set-54170199002-1.webp?v=1785550460
     evidence:
       - ret-radaddel:/detail/index/sArticle/24425
-      - ret-radaddel:/warhammer-40.000-paints-tools-set
-      - ret-radaddel:warhammer-40-000-paints-tools-set
       - ret-radaddel:warhammer-40-000-paints-tools-set-1
   - id: games-workshop/warhammer-40-000-space-marines-paint-set
     name: WARHAMMER 40,000 SPACE MARINES PAINT SET
@@ -194110,20 +194260,6 @@ products:
     evidence:
       - ret-radaddel:/warriors-of-arnor-warband-lotr-good
       - ret-radaddel:warriors-of-arnor-warband-lotr-good
-  - id: games-workshop/warriors-of-chaos-chaos-warriors
-    name: 'Warriors of Chaos: Chaos Warriors'
-    manufacturer: games-workshop
-    sku: '136606'
-    category: miniatures
-    categoryBasis: guessed
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 57.3
-    url: https://radaddel.de/products/warriors-of-chaos-chaos-warriors
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/warriors-of-chaos-chaos-warriors-games-workshop-radaddel.webp?v=1786151284
-    evidence:
-      - ret-radaddel:warriors-of-chaos-chaos-warriors
   - id: games-workshop/warriors-of-dale-hobbit-good-von-games-workshop
     name: Warriors of Dale (Hobbit - Good) von Games Workshop
     manufacturer: games-workshop

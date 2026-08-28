@@ -48,7 +48,22 @@ class Taxonomy:
         for prefix in spec.codeStrip:
             code = code.removeprefix(prefix.upper())
         code = code.removesuffix("-EN")
-        return code if re.fullmatch(spec.codePattern, code, flags=re.IGNORECASE) else None
+        match = re.fullmatch(spec.codePattern, code, flags=re.IGNORECASE)
+        if match is None:
+            return None
+        # A NAMED GROUP DECLARES THE CANONICAL CODE, and without one the whole match is the code
+        # (which is every pattern that predates this). It exists because some manufacturers' own
+        # SKU carries a suffix that is not part of the identity: Corvus Belli writes the same
+        # product as `280873` and as `280873-0990`, and 405 of its 794 codes appear BOTH ways
+        # across the sources this repo harvests. Matching both forms as distinct codes would split
+        # 405 products in two; refusing the suffixed form would drop most of the corpus. Neither is
+        # what a `codeStrip` prefix list can express, because the suffix is a pattern rather than a
+        # literal -- so the pattern names the part that IS the code.
+        #
+        # Only the FIRST non-empty named group is read, so a pattern with alternatives gives each
+        # branch its own name and the branch that matched wins.
+        named = [value for value in match.groupdict().values() if value]
+        return named[0] if named else code
 
 
 def load_labels(taxonomy_dir: Path) -> tuple[dict[str, str], dict[str, str]]:
