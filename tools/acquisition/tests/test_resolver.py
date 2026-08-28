@@ -520,8 +520,12 @@ def test_supersession_publishes_both_records_and_moves_the_retired_barcode(tmp_p
     assert current.supersededBy is None
     assert current.url == "https://goblin/widget"  # the re-homed retailer's live listing
 
-    # the barcode-vs-stale-SKU disagreement is reported, and nothing else is
-    assert [c["type"] for c in read_yaml(paths.conflicts)["conflicts"]] == ["supersession-stale-code"]
+    # THE RE-HOMING IS REPORTED, BUT NOT AS A CONFLICT. It is a placement the resolver made on its
+    # own and cannot be argued with by editing data, so it goes to rehomed.yaml and leaves the
+    # working set empty -- which is the whole point: `conflicts.yaml` is a set of open questions,
+    # and a run whose only finding is a re-homing is a clean run.
+    assert read_yaml(paths.conflicts)["conflicts"] == []
+    assert [c["type"] for c in read_yaml(paths.rehomed)["rehomed"]] == ["supersession-stale-code"]
 
     # both link keys are omitted entirely where they are empty, so every other record is unchanged
     written = read_yaml(paths.catalog_products / "games-workshop.yaml")["products"]
@@ -777,3 +781,47 @@ def test_crossover_rows_alone_do_not_satisfy_the_wipe_guard(tmp_path: Path) -> N
     with pytest.raises(ValueError, match="refusing to wipe"):
         resolve_catalog(paths)
     assert (paths.catalog_products / "games-workshop.yaml").exists()
+
+
+def _minimal_catalog(paths: DataPaths, observations: str) -> None:
+    write_yaml(
+        paths.taxonomy / "manufacturers.yaml",
+        {"manufacturers": [{"slug": "games-workshop", "name": "Games Workshop",
+                            "codePattern": r"\d{11}", "codeStrip": [],
+                            "gs1Prefixes": ["5011921"], "vendorNames": []}]},
+    )
+    write_yaml(paths.sources / "mfr-gw.yaml", {"id": "mfr-gw", "kind": "manufacturer", "strategy": "algolia"})
+    path = paths.evidence_products / "mfr-gw" / "observations.jsonl"
+    path.parent.mkdir(parents=True)
+    path.write_text(observations, encoding="utf-8", newline="\n")
+
+
+def test_a_run_with_nothing_to_report_still_writes_an_empty_rehomed_file(tmp_path: Path) -> None:
+    """A stale artifact is worse than an empty one: yesterday's re-homings left on disk would be
+    read as today's. Both review files are rewritten every run, whether or not they have rows.
+    """
+    paths = DataPaths(tmp_path)
+    _minimal_catalog(paths, json.dumps({
+        "key": "mfr-gw:widget", "name": "Widget", "manufacturer": "games-workshop",
+        "sku": "99120110001", "ean": "5011921062164", "firstSeen": "2026-07-07",
+        "lastSeen": "2026-07-07", "extractor": "test@1"}) + "\n")
+
+    resolve_catalog(paths)
+
+    assert paths.rehomed.exists()
+    assert read_yaml(paths.rehomed) == {"rehomed": []}
+    assert read_yaml(paths.conflicts) == {"conflicts": []}
+
+
+def test_a_stale_rehomed_file_is_replaced_rather_than_appended_to(tmp_path: Path) -> None:
+    """The pairing of the test above: a file left from an earlier run must not survive a clean one."""
+    paths = DataPaths(tmp_path)
+    _minimal_catalog(paths, json.dumps({
+        "key": "mfr-gw:widget", "name": "Widget", "manufacturer": "games-workshop",
+        "sku": "99120110001", "ean": "5011921062164", "firstSeen": "2026-07-07",
+        "lastSeen": "2026-07-07", "extractor": "test@1"}) + "\n")
+    write_yaml(paths.rehomed, {"rehomed": [{"type": "supersession-stale-code", "key": "gone:row"}]})
+
+    resolve_catalog(paths)
+
+    assert read_yaml(paths.rehomed) == {"rehomed": []}

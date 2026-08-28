@@ -333,7 +333,15 @@ def main(argv: list[str] | None = None) -> int:
         catalog = resolve_catalog(paths)
         total = sum(len(records) for records in catalog.values())
         conflicts = read_yaml(paths.conflicts)["conflicts"]
-        print(f"resolved {total} products across {len(catalog)} manufacturers; {len(conflicts)} conflicts")
+        # `rehomed` is reported but never gates the exit code: those rows are placements the
+        # resolver already made, not review material, and a run whose only findings are those is a
+        # clean run. See DataPaths.rehomed.
+        rehomed = (read_yaml(paths.rehomed) or {}).get("rehomed") or []
+        rehomed_note = f"; {len(rehomed)} re-homed" if rehomed else ""
+        print(
+            f"resolved {total} products across {len(catalog)} manufacturers; "
+            f"{len(conflicts)} conflicts{rehomed_note}"
+        )
         return 2 if conflicts else 0
 
     if args.command == "categorize":
