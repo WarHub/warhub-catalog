@@ -251,3 +251,58 @@ def test_additional_ean_colliding_with_another_entitys_primary_reported() -> Non
             "additionalIn": ["b"],
         }
     ]
+
+
+# --- matches.yaml `preferEans`: a maintainer adjudicating a barcode disagreement ----------------
+# The automatic ranking is a proxy for freshness and knows nothing about the barcode itself, so a
+# well-fed retailer outranks a curated import even where the import holds the right value. These
+# pin what an adjudication may and may not do.
+
+def test_a_preferred_ean_wins_over_the_automatic_ranking() -> None:
+    # ret-a is live, so `strength` would rank it first; the preference overrules that.
+    members = [obs("legacy:1", "5060924983624"), obs("ret-a:1", "5060924984799")]
+    assert resolve_ean("e", members, {**KINDS, "legacy": "legacy"}).ean == "5060924984799"
+    resolution = resolve_ean("e", members, {**KINDS, "legacy": "legacy"}, preferred="5060924983624")
+    assert resolution.ean == "5060924983624"
+
+
+def test_a_preference_keeps_the_loser_published_and_stays_conflicted() -> None:
+    """It adjudicates WHICH is primary; it never deletes. The rival stays in `additionalEans` and
+    the record keeps saying the sources disagree, because they do."""
+    members = [obs("legacy:1", "5060924983624"), obs("ret-a:1", "5060924984799")]
+    resolution = resolve_ean("e", members, {**KINDS, "legacy": "legacy"}, preferred="5060924983624")
+    assert resolution.additional == ["5060924984799"]
+    assert resolution.confidence == "conflicted"
+
+
+def test_a_preference_clears_the_conflict_row() -> None:
+    """conflicts.yaml means "a human still has to look at this", which stops being true once one
+    has. The `conflicted` confidence carries the disagreement instead."""
+    members = [obs("legacy:1", "5060924983624"), obs("ret-a:1", "5060924984799")]
+    assert resolve_ean("e", members, {**KINDS, "legacy": "legacy"}).conflicts != []
+    assert resolve_ean(
+        "e", members, {**KINDS, "legacy": "legacy"}, preferred="5060924983624"
+    ).conflicts == []
+
+
+def test_a_preference_the_evidence_does_not_assert_is_ignored() -> None:
+    """A preference may choose among the evidence, never invent -- so a value no member states has
+    no effect here at all, and tests/test_repo_data.py fails on it rather than letting it stand."""
+    members = [obs("legacy:1", "5060924983624"), obs("ret-a:1", "5060924984799")]
+    resolution = resolve_ean(
+        "e", members, {**KINDS, "legacy": "legacy"}, preferred="5060924999996"
+    )
+    assert resolution.ean == "5060924984799"      # unchanged from the automatic ranking
+    assert resolution.conflicts != []             # and the conflict is still raised
+
+
+def test_a_preference_on_an_undisputed_barcode_does_not_force_conflicted() -> None:
+    """With nothing to adjudicate there is no disagreement to report, so the confidence is whatever
+    the evidence earns -- an entry must not make a clean record look disputed."""
+    resolution = resolve_ean(
+        "e", [obs("mfr-w:1", "5060393709671")], KINDS, preferred="5060393709671"
+    )
+    assert resolution.ean == "5060393709671"
+    assert resolution.confidence == "confirmed"
+    assert resolution.additional == []
+

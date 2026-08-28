@@ -1659,30 +1659,41 @@ reassignCodes:
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
 
-# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, fourth pass) --------------------
-# ONE row, down from 46: `mantic-games/MGWD173`, The Walking Dead Events Deck (2024).
-# `legacy-catalog` says 5060924983624, `ret-goblingaming` says 5060924984799. The record publishes
-# the second as its primary and keeps the first in `additionalEans`, stamped `conflicted`.
+# --- `ean-mismatch`, ADJUDICATED 2026-08-28 (fifth pass) ---------------------------------------
+# NONE LEFT. The last row was `mantic-games/MGWD173`, The Walking Dead Events Deck (2024), and the
+# note that stood here said it could not be settled without Blackfire's login-walled B2B catalogue.
+# That was wrong, and it was wrong because it looked for a better SOURCE instead of looking at the
+# VALUES. Mantic's own allocation settles it, out of this repo's own ledger:
 #
-# IT IS NOT WITHDRAWN, AND THE REASON IS THE BAR RATHER THAN THE EVIDENCE BEING ABSENT. Researched
-# on the web 2026-08-27, and the corroborated value is fairly clearly 5060924984799: a distributor
-# feed binds it to the MPN inside the SKU itself (`BFI-5060924984799-MGWD173`, machine-readable,
-# not a url slug), and the sibling wave allocates gaplessly and monotonically in MPN order --
-# MGWD172 Equipment Booster 5060924984782, MGWD173 5060924984799, MGWD174 Essentials 5060924984805.
-# The rival traces to ONE distributor's catalogue plus two mirrors of that same feed, and its block
-# runs BACKWARDS against MPN order, which reads as in-house numbering rather than a manufacturer
-# allocating a range.
+#     MGWD174  5060924983617   item 98361   The Walking Dead Essentials Set
+#     MGWD173  5060924983624   item 98362   <- the disputed value
+#     MGWD172  5060924983631   item 98363   The Walking Dead Supply and Item Deck 2024
+#     MGWD162  5060924983648   item 98364   The Walking Dead Collectors Set 2024
 #
-# But BOTH values sit on Mantic's own GS1 prefix 5060924, so the prefix test -- which is what
-# settled every other row -- cannot speak here. Neither appears in any barcode database, and
-# manticgames.com publishes no barcodes at all, so nothing first-party can be cited. That is
-# suggestive, not conclusive, and `withdrawn-eans.yaml` deliberately does not accept suggestive:
-# deleting a published barcode on "the other one is better attested" is exactly the reasoning
-# OBJECTIVES 1 rules out. The record already publishes the better-attested value as its primary,
-# and says out loud that the sources disagree, which is true.
+# Four CONSECUTIVE item numbers for four members of the same 2024 Walking Dead release, and the
+# disputed value is the one that lands in its own wave's slot. `ret-goblingaming` -- the source
+# asserting the RIVAL value here -- independently confirms MGWD162 = 5060924983648, so the block is
+# not a `legacy-catalog` artefact: the disagreeing source corroborates the run one seat away.
+# legion-distribution.com (a French distributor) states MGWD173 = 5060924983624 in its manufacturer-
+# reference field, which is a second, independent, machine-readable binding.
 #
-# WHAT WOULD SETTLE IT: Blackfire's own B2B catalogue (login-walled), or any Mantic-published
-# barcode for MGWD173. Either turns this into a withdrawal or confirms both values are real.
+# THE RIVAL HAS NO SUCH STRUCTURE. 5060924984799 is the ONLY Walking Dead barcode anywhere in the
+# 5060924984xxx block; its 40 neighbours in this ledger are Deadzone, Firefight, Kings of War
+# Armada, TerrainCrate and Hellboy, and the nearest is 116 item numbers away. Its web attestations
+# trace to ONE distributor feed -- gamedungeon.se carries it under the composite sku
+# `BFI-5060924984799-MGWD173`, where `BFI` is Blackfire.
+#
+# WHY THIS IS `preferEans` AND NOT `rejectEans`. 5060924984799 is not shown to be something else,
+# and this catalog has published it; it may well be a later printing, since Mantic allocates
+# chronologically ACROSS product lines rather than per line. So it stays in `additionalEans` and
+# the record stays `eanConfidence: conflicted`, which is true. Only the primary changes.
+#
+# WHAT I GOT WRONG BEFORE, recorded because the shape recurs: I argued this the other way from a
+# "gapless allocation 172/173/174" of 5060924984782/984799/984805. Those two neighbour values are
+# asserted by NO observation in this ledger -- I had taken them from a distributor listing and never
+# checked them against the evidence. The real neighbours are the block above.
+preferEans:
+  mantic-games/MGWD173: '5060924983624'
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
 # 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a
