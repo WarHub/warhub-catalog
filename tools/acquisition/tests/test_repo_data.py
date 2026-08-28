@@ -1394,21 +1394,35 @@ def test_no_backfilled_barcode_survives_that_its_own_source_and_the_maker_both_c
 
     Entries in `matches.yaml`'s `rejectEans` are the adjudicated ones and are excluded, so this
     fails only on something new.
+
+    CODES ARE THE EFFECTIVE ONES, i.e. `reassignCodes` applied, exactly as `resolve/join.py`
+    computes them. Rejecting the barcode is only ONE of the two ways to adjudicate this shape: when
+    the row's barcode is right and its SKU is what is wrong, the fix is to MOVE the row to the code
+    the barcode belongs to, and rejecting the value there would throw away a correct barcode. Read
+    from the raw sku this test could not see that fix and kept failing on a row already adjudicated
+    -- which is how it behaved on the 2026-08-27 and 2026-08-28 nightlies, on GW's two Claws of
+    Karanak releases (`99120201148` Warcry / `99120201247` Blades of Khorne).
     """
     paths = _require_repo_data()
     if not paths.evidence_products.exists():
         pytest.skip("no evidence in this checkout")
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
+    matches = Matches.model_validate(read_yaml(paths.matches))
     rejected = {
-        key: {_canonical(e) for e in eans}
-        for key, eans in Matches.model_validate(read_yaml(paths.matches)).rejectEans.items()
+        key: {_canonical(e) for e in eans} for key, eans in matches.rejectEans.items()
     }
+
+    def effective_code(observation: dict) -> str | None:
+        # Same precedence as resolve/join.py: a hand reassignment wins over the parsed sku.
+        return matches.reassignCodes.get(observation["key"]) or taxonomy.normalize_code(
+            observation.get("manufacturer") or "", observation.get("sku")
+        )
 
     def coded_eans(source_id: str) -> dict[tuple[str, str], set[str]]:
         index: dict[tuple[str, str], set[str]] = {}
         for observation in _observations(paths, source_id):
-            code = taxonomy.normalize_code(observation.get("manufacturer") or "", observation.get("sku"))
+            code = effective_code(observation)
             ean = _canonical(observation.get("ean"))
             if code and ean:
                 index.setdefault((observation["manufacturer"], code), set()).add(ean)
@@ -1441,7 +1455,7 @@ def test_no_backfilled_barcode_survives_that_its_own_source_and_the_maker_both_c
     for observation in _observations(paths, "legacy-catalog"):
         source = (observation.get("hints") or {}).get("eanSource")
         ean = _canonical(observation.get("ean"))
-        code = taxonomy.normalize_code(observation.get("manufacturer") or "", observation.get("sku"))
+        code = effective_code(observation)
         if not (source and ean and code) or ean in rejected.get(observation["key"], ()):
             continue
         shop = shops.get(f"shopify:{_host(source.split(':', 1)[-1])}" if ":" in source else source)
