@@ -247,8 +247,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 75.0
-    priceUsd: 99.95
+    priceGbp: 48.88
     priceEur: 59.5
     url: https://store.corvusbelli.com/en/wargames/infinity/betrayal-characters-pack
     imageUrl: https://store.corvusbelli.com/media/catalog/product/betrayal-characters-pack.png
@@ -257,6 +256,19 @@ products:
       - mfr-corvus-belli:infinity:betrayal-characters-pack
       - ret-gamenerdz:/infinity-betrayal-characters-pack
       - ret-goblingaming:betrayal-characters-pack-infinity-the-game-280034-0837
+  - id: corvus-belli/280034-0878
+    name: Operation Kaldstrom
+    manufacturer: corvus-belli
+    sku: 280034-0878
+    gameSystem: infinity
+    faction: panoceania
+    category: miniatures
+    categoryBasis: guessed
+    status: current
+    firstSeen: '2026-07-12'
+    priceGbp: 75.0
+    priceUsd: 99.95
+    evidence:
       - seed-curated:corvus-belli/operation-kaldstrom
   - id: corvus-belli/280035
     name: 'Infinity: Code One - Dire Foes Mission Pack Beta - Void Tango'
@@ -7497,9 +7509,7 @@ products:
     productCode: '281131'
     sku: 281131-1018
     ean: '8436607710936'
-    eanConfidence: conflicted
-    additionalEans:
-      - '8436607711209'
+    eanConfidence: confirmed
     gameSystem: infinity
     faction: general
     category: miniatures
@@ -7508,17 +7518,32 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 12.41
+    priceGbp: 40.46
     priceEur: 49.5
     url: https://store.corvusbelli.com/en/wargames/infinity/kosmoflot-support-pack
     imageUrl: https://store.corvusbelli.com/media/catalog/product/kosmoflot-support-pack.png
     evidence:
       - legacy-catalog:corvus-belli/infinity/general/kosmoflot-support-pack
       - mfr-corvus-belli:infinity:kosmoflot-support-pack
-      - ret-gamenerdz:/infinity-ariadna-1st-highlander-s-a-s-chain-rifle
       - ret-gamenerdz:/infinity-ariadna-kosmoflot-support-pack
-      - ret-goblingaming:1st-highlander-s-a-s-chain-rifle
       - ret-goblingaming:kosmoflot-support-pack
+  - id: corvus-belli/281131-1038
+    name: 'Infinity: Ariadna - 1st Highlander S.A.S. (Chain Rifle)'
+    manufacturer: corvus-belli
+    sku: CVB281131-1038
+    ean: '8436607711209'
+    eanConfidence: confirmed
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 12.41
+    url: https://www.gamenerdz.com/infinity-ariadna-1st-highlander-s-a-s-chain-rifle
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281131_1038_cover_76b0.avif?v=1772637822
+    evidence:
+      - ret-gamenerdz:/infinity-ariadna-1st-highlander-s-a-s-chain-rifle
+      - ret-goblingaming:1st-highlander-s-a-s-chain-rifle
   - id: corvus-belli/281132
     name: Highlander Cateran (T2 Sniper Rifle)
     manufacturer: corvus-belli
@@ -8448,14 +8473,29 @@ products:
       - ret-gamenerdz:/infinity-panoceania-redeye-close-air-support-squad-spitfire-chain-rifle-blitzen-preorder
       - ret-goblingaming:redeye-spitfire-chain-rifle-blitzen-panoceania
   - id: corvus-belli/281242
-    name: 'Infinity: PanOceania - Kestrel Expansion Pack Beta'
+    name: 'Infinity: PanOceania - PanOceania Army Pack'
     manufacturer: corvus-belli
     productCode: '281242'
+    sku: CVB281242
+    ean: '8436607712725'
+    eanConfidence: provisional
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 54.78
+    url: https://www.gamenerdz.com/infinity-panoceania-panoceania-army-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/essentials-panoceania-army-pack-9.webp?v=1735317178
+    evidence:
+      - ret-gamenerdz:/infinity-panoceania-panoceania-army-pack
+      - ret-goblingaming:panoceania-army-pack
+  - id: corvus-belli/281242-1125
+    name: 'Infinity: PanOceania - Kestrel Expansion Pack Beta'
+    manufacturer: corvus-belli
     sku: CVB281242-1125
     ean: '8436607712763'
-    eanConfidence: conflicted
-    additionalEans:
-      - '8436607712725'
+    eanConfidence: confirmed
     category: miniatures
     categoryBasis: mapped
     status: current
@@ -8466,13 +8506,24 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281242_1125_cover_87c1.jpg?v=1739290142
     evidence:
       - ret-gamenerdz:/infinity-panoceania-kestrel-expansion-pack-beta
-      - ret-gamenerdz:/infinity-panoceania-panoceania-army-pack
       - ret-goblingaming:kestrel-expansion-pack-beta
-      - ret-goblingaming:panoceania-army-pack
-  - id: corvus-belli/281243
+  - id: corvus-belli/281243-1128
+    name: PanOceania Dronbot Remotes Pack
+    manufacturer: corvus-belli
+    sku: 281243-1128
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 27.88
+    url: https://www.goblingaming.co.uk/products/panoceania-dronbot-remotes-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281243_1128_cover_5c83.jpg?v=1739291353
+    evidence:
+      - ret-goblingaming:panoceania-dronbot-remotes-pack
+  - id: corvus-belli/281243-1131
     name: Kestrel Expansion Pack Gamma
     manufacturer: corvus-belli
-    productCode: '281243'
     sku: 281243-1131
     category: miniatures
     categoryBasis: mapped
@@ -8484,7 +8535,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281243_1131_gal_img_01_ef88_1.jpg?v=1739353775
     evidence:
       - ret-goblingaming:kestrel-expansion-pack-gamma
-      - ret-goblingaming:panoceania-dronbot-remotes-pack
   - id: corvus-belli/281244
     name: 'Infinity: PanOceania - Dr. Priya Harper, Archeo-raider (Plasma Carbine)'
     manufacturer: corvus-belli
@@ -12507,9 +12557,7 @@ products:
     productCode: '281705'
     sku: CVB281705
     ean: '8436607712732'
-    eanConfidence: conflicted
-    additionalEans:
-      - '8436607712770'
+    eanConfidence: provisional
     category: miniatures
     categoryBasis: mapped
     status: current
@@ -12520,8 +12568,23 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/jsa-army-pack-9.webp?v=1735317310
     evidence:
       - ret-gamenerdz:/infinity-jsa-jsa-army-pack
-      - ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-beta
       - ret-goblingaming:jsa-army-pack
+  - id: corvus-belli/281705-1126
+    name: 'Infinity: JSA - Shindenbutai Expansion Pack Beta'
+    manufacturer: corvus-belli
+    sku: CVB281705-1126
+    ean: '8436607712770'
+    eanConfidence: provisional
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 35.4
+    url: https://www.gamenerdz.com/infinity-jsa-shindenbutai-expansion-pack-beta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/281705_1126_cover_476e.jpg?v=1739290535
+    evidence:
+      - ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-beta
       - ret-goblingaming:shindenbutai-expansion-pack-beta
   - id: corvus-belli/281706
     name: 'Infinity: Essentials - JSA - JSA Aibot Remotes Pack'

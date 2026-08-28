@@ -178,6 +178,18 @@ reassignManufacturer:
   'ret-tistaminis:ww2-british-paint-set': army-painter
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  # --- FIVE VALUES THE WEB DISPROVED (2026-08-27) ----------------------------------------------
+  # Each is DECLARED in data/catalog/withdrawn-eans.yaml, which carries the evidence per row and is
+  # what lets `report --ean-guard` accept the removal instead of calling it a loss. Four are
+  # reseller-minted Walmart GTINs `legacy-catalog` hung on Atomic Mass products -- three of them
+  # provably the barcode of a DIFFERENT, older product (CP02, SWL51, SWL53) -- against primaries
+  # that Asmodee UK, Atomic Mass's own trade arm, confirms. The fifth is the thirteenth row of the
+  # Normandy MDF terrain block whose other twelve are corrected above.
+  'legacy-catalog:atomic-mass-games/marvel-crisis-protocol/general/dice-pack': ['0763473697909']
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/upgrade-card-pack': ['0764538221565']
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/rebel-troopers': ['0764563147281']
+  'legacy-catalog:atomic-mass-games/star-wars-legion/general/din-djarin-and-grogu': ['0925453755058']
+  'legacy-catalog:warlord-games/bolt-action/general/pre-painted-ww2-normandy-walls-with-gate-low': ['5060917992084']
   # THE SIXTH, AND THE ONLY ONE WHERE OWNERSHIP IS GENUINELY UNKNOWN. Mantic asserts 5060924988162
   # for BOTH MGVAF202 (Vanguard Centaur Chief) and MGKWN208 (Kings of War Centaur Chief) -- the
   # same shape as Warlord's Rift Dice, but with no third source to outvote it: Mantic publishes no
@@ -1465,6 +1477,48 @@ supersessions:
   # live state.
   games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
+  # --- TWO GW PAINTS + TOOLS SETS, THREE YEARS APART (2026-08-27) ------------------------------
+  # `games-workshop/warhammer-40-000-paints-tools-set` was ONE record holding two products, because
+  # radaddel articles 126289 and 135801 both carry that exact title and neither had a product code
+  # for the resolver to tell them apart -- GW's own trade sheet carries neither barcode.
+  #
+  # They are two editions. 5011921196951 is the 2023 European multi-language set (JB-Spielwaren
+  # pairs that EAN with GW code 54170199001 and the title "WARHAMMER 40K PAINTS+TOOLS
+  # GER/FRE/ITA/DUT/CZ/SLV"; Ultrajeux lists its 2023 paint contents). 5011921260256 is the 2026
+  # set, released July 2026, with a completely different paint list. Coding the 2023 article splits
+  # them; the 2026 one keeps its barcode identity, since no trade listing exposes an 11-digit code
+  # for it yet -- retailers carry only `60-12`.
+  'ret-radaddel:/warhammer-40.000-paints-tools-set': '54170199001'
+  'ret-radaddel:warhammer-40-000-paints-tools-set': '54170199001'
+  # --- CORVUS BELLI'S SUFFIX IS PART OF THE IDENTITY ON SIX BASES (9 rows, 2026-08-27) ---------
+  # `corvus-belli`'s codePattern names `(?P<code>\d{6})` as the identity and drops a trailing
+  # `-NNNN`, because Corvus writes the same product both ways and 338 of the 340 bases that appear
+  # in both forms carry the SAME barcode on both -- so the bare form is a truncation, not a
+  # different product. That is right for 788 of its 794 bases.
+  #
+  # ON SIX IT IS WRONG, and measured: those bases carry MORE THAN ONE distinct suffix, and in all
+  # six the suffixes are different products -- `281131-1018` is the Kosmoflot Support Pack while
+  # `281131-1038` is the 1st Highlander S.A.S. Stripping fuses them.
+  #
+  # NOT STRIPPING IS NOT THE ANSWER, and that was measured too rather than assumed: keeping the
+  # suffix splits 49 pairs that ARE one product (a bare row with no barcode, plus its suffixed
+  # twin, e.g. `280058` and `280058-1135` both "Dire Foes Mission Pack 15: Barrenlands"). It fixes
+  # 6 and breaks 49. The rule stays, and the six exceptions are corrected here by hand -- which is
+  # what a per-observation override is for. Only the MINORITY product on each base is moved, so the
+  # majority keeps the bare id and nothing else shifts.
+  'ret-gamenerdz:/infinity-ariadna-1st-highlander-s-a-s-chain-rifle': '281131-1038'
+  'ret-goblingaming:1st-highlander-s-a-s-chain-rifle': '281131-1038'
+  'ret-gamenerdz:/infinity-panoceania-kestrel-expansion-pack-beta': '281242-1125'
+  'ret-goblingaming:kestrel-expansion-pack-beta': '281242-1125'
+  'ret-gamenerdz:/infinity-jsa-shindenbutai-expansion-pack-beta': '281705-1126'
+  'ret-goblingaming:shindenbutai-expansion-pack-beta': '281705-1126'
+  # 281243 has no bare row at all and no barcode on either side: two goblingaming listings for two
+  # different packs, so BOTH move rather than one keeping a base neither is more entitled to.
+  'ret-goblingaming:panoceania-dronbot-remotes-pack': '281243-1128'
+  'ret-goblingaming:kestrel-expansion-pack-gamma': '281243-1131'
+  # Operation Kaldstrom is the odd one on 280034; the Betrayal Characters Pack rows (three sources
+  # plus a bare gamenerdz row carrying the same barcode) keep the base.
+  'seed-curated:corvus-belli/operation-kaldstrom': '280034-0878'
   # --- THE LAST SIX FUSED RECORDS (2026-08-27) -------------------------------------------------
   # Five are one shape: `legacy-catalog` carries ANOTHER code's barcode, and because a second
   # source asserts that barcode under its real code, the wrong value wins its own code's vote and
@@ -1605,38 +1659,30 @@ reassignCodes:
 # `...-starter-set-englisch-60010199082-1.webp`. That is the record under suspicion describing
 # itself, and this repo has been wrong that way before.
 
-# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, third pass) ----------------------
-# 10 rows, down from 46. NO entity in the catalog holds two products any more, so every one of
-# these is one product about which sources disagree -- which is what the type is for. Each loser is
-# retained in its own record's `additionalEans` and the record is stamped `conflicted`;
-# `report --ean-guard` reports 0 lost against them. What follows is why each is CORRECT rather than
-# unfinished, because "needs an external scan" was the wrong answer and it is worth not repeating.
+# --- `ean-mismatch`, DELIBERATELY LEFT (rewritten 2026-08-27, fourth pass) --------------------
+# ONE row, down from 46: `mantic-games/MGWD173`, The Walking Dead Events Deck (2024).
+# `legacy-catalog` says 5060924983624, `ret-goblingaming` says 5060924984799. The record publishes
+# the second as its primary and keeps the first in `additionalEans`, stamped `conflicted`.
 #
-# FOUR ATOMIC MASS ROWS ARE A CURATED SOURCE'S JUNK BARCODE, and the measurement says so plainly.
-# Across every atomic-mass-games observation carrying a barcode, prefix 0841333 has 670 from FIVE
-# independent sources (ret-gamenerdz, legacy-catalog, ret-goblingaming and both barcode databases).
-# Every other prefix -- 0765490, 0765674, 0764563, 0763473, 0198913, 0765495, 0925453, 0167940,
-# 0764538 -- is `legacy-catalog` ALONE, 22 observations in total, none corroborated by anything.
-# CP269, SWQ144, SWQ15 and SWL98 are four of those 22. The resolver already does the right thing:
-# it makes the corroborated 0841333 value the primary and keeps legacy's in `additionalEans`.
-# They are NOT rejected, and that is deliberate -- each is currently PUBLISHED in additionalEans,
-# so rejecting it would delete a barcode this catalog has shipped, to fix nothing that is broken.
+# IT IS NOT WITHDRAWN, AND THE REASON IS THE BAR RATHER THAN THE EVIDENCE BEING ABSENT. Researched
+# on the web 2026-08-27, and the corroborated value is fairly clearly 5060924984799: a distributor
+# feed binds it to the MPN inside the SKU itself (`BFI-5060924984799-MGWD173`, machine-readable,
+# not a url slug), and the sibling wave allocates gaplessly and monotonically in MPN order --
+# MGWD172 Equipment Booster 5060924984782, MGWD173 5060924984799, MGWD174 Essentials 5060924984805.
+# The rival traces to ONE distributor's catalogue plus two mirrors of that same feed, and its block
+# runs BACKWARDS against MPN order, which reads as in-house numbering rather than a manufacturer
+# allocating a range.
 #
-# `games-workshop/warhammer-40-000-paints-tools-set` IS two real products -- radaddel articles
-# 126289 (5011921196951) and 135801 (5011921260256) are two different GW paint+tools sets. They
-# cannot be split: NO source gives either one a product code. GW's own trade sheet does not carry
-# either barcode (checked across the whole ledger; only ret-radaddel asserts them), so both records
-# would fall back to a slug of the same shop title and re-merge on the id. A GW harvest that picks
-# up either barcode separates them on its own.
+# But BOTH values sit on Mantic's own GS1 prefix 5060924, so the prefix test -- which is what
+# settled every other row -- cannot speak here. Neither appears in any barcode database, and
+# manticgames.com publishes no barcodes at all, so nothing first-party can be cited. That is
+# suggestive, not conclusive, and `withdrawn-eans.yaml` deliberately does not accept suggestive:
+# deleting a published barcode on "the other one is better attested" is exactly the reasoning
+# OBJECTIVES 1 rules out. The record already publishes the better-attested value as its primary,
+# and says out loud that the sources disagree, which is true.
 #
-# `warlord-games/H00133` -- legacy has a Battlefields & Basing pot's barcode (5060917992084) on the
-# Normandy Wall. It is the 13th row of the block corrected under rejectEans, left out on purpose:
-# nothing else in the catalog holds that value, so rejecting it deletes a barcode published since
-# the original legacy migration and fuses nothing in return.
-#
-# THE REMAINING THREE -- `mantic-games/MGWD173`, `corvus-belli/281131`, and the fourth AMG row --
-# are one source against one source with no third to break the tie, and the makers publish no
-# barcode to check against (manticgames.com carries `sku` and no GTIN at all, verified 2026-08-27).
+# WHAT WOULD SETTLE IT: Blackfire's own B2B catalogue (login-walled), or any Mantic-published
+# barcode for MGWD173. Either turns this into a withdrawal or confirms both values are real.
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
 # 15 rows in data/review/conflicts.yaml, and all 15 are a MECHANISM REPORTING ITSELF rather than a

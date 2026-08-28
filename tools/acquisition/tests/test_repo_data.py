@@ -1634,3 +1634,34 @@ def test_the_fused_entity_tripwire_is_not_vacuous() -> None:
     known = {o["key"] for sid in descriptors for o in _observations(paths, sid)}
     dangling = sorted((set(matches.rejectEans) | set(matches.reassignCodes)) - known)
     assert not dangling, f"adjudication names observations that do not exist: {dangling}"
+
+
+def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_gone() -> None:
+    """THE DEAD-ENTRY GUARD FOR withdrawn-eans.yaml, and the reason it matters more than for its
+    counterpart: an entry here is a standing permission for a barcode to be missing. If the value
+    comes back -- a source re-asserts it, or a harvest brings in the product it really belongs to --
+    the permission silently keeps covering a loss nobody is watching for any more. So an entry must
+    name a record the catalog still has, and the barcode must genuinely be absent from the whole
+    catalog; a stale one is removed rather than left standing.
+    """
+    paths = _require_repo_data()
+    if not paths.withdrawn_eans.exists():
+        pytest.skip("data/catalog/withdrawn-eans.yaml not present")
+    from warhub_acquisition.models.catalog import WithdrawnEans
+
+    declared = WithdrawnEans.model_validate(read_yaml(paths.withdrawn_eans))
+    by_id: dict[str, dict] = {}
+    published: dict[str, list[str]] = {}
+    for path in sorted(paths.catalog_products.glob("*.yaml")):
+        for product in (read_yaml(path) or {}).get("products") or []:
+            by_id[product["id"]] = product
+            for barcode in [product.get("ean"), *(product.get("additionalEans") or [])]:
+                if barcode:
+                    published.setdefault(barcode, []).append(product["id"])
+    for entity, eans in declared.withdrawn.items():
+        assert entity in by_id, f"withdrawn-eans.yaml names {entity!r}, which the catalog no longer has"
+        for ean in eans:
+            assert ean not in published, (
+                f"{entity}: {ean} is declared withdrawn but the catalog publishes it again "
+                f"(on {published[ean]}) -- drop the entry rather than leave a standing permission"
+            )

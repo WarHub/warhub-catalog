@@ -71,6 +71,14 @@ class DataPaths:
         return self.root / "catalog" / "retained-eans.yaml"
 
     @property
+    def withdrawn_eans(self) -> Path:
+        """Published barcodes a maintainer has established are NOT this product's
+        (models/catalog.py::WithdrawnEans). Read by `report --ean-guard`, not by the resolver:
+        removing the value is `matches.yaml`'s job, and this file only tells the guard the removal
+        was deliberate. Hand-authored, like retained_eans and for the same reason."""
+        return self.root / "catalog" / "withdrawn-eans.yaml"
+
+    @property
     def conflicts(self) -> Path:
         return self.root / "review" / "conflicts.yaml"
 
