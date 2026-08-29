@@ -36,6 +36,15 @@ permissions:
   contents: write
   pull-requests: write
 
+# The weekly cron and a manual dispatch can otherwise overlap, and two concurrent runs both
+# force-reset `catalog/paint-update` (peter-evans/create-pull-request rebuilds its branch from the
+# checkout every run) or race each other's `git push` on main in direct-push mode. Serialized, not
+# cancelled: a half-finished regeneration is worth less than a slightly stale one, and the tool
+# run costs real time. Every other workflow in this repo already had a concurrency group.
+concurrency:
+  group: paint-catalog-update
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -43,10 +52,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # global.json, not a floating '10.x' + quality:preview -- see catalog-publish.yml for the
+      # same change and why: the pin is rollForward: latestFeature, which does not cross feature
+      # bands, so a floating preview install eventually lands an SDK global.json rejects.
       - uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '10.x'
-          dotnet-quality: 'preview'
+          global-json-file: global.json
 
       - uses: astral-sh/setup-uv@v7
 
@@ -74,19 +85,48 @@ jobs:
       - name: Regenerate manufacturer paint harvest files
         run: uv run --with pyyaml python tools/acquisition/scripts/gen_paint_harvest.py
 
+      # DISPATCH INPUTS ARRIVE THROUGH env:, NEVER INLINE, and the argument list is an array
+      # rather than a string fed to `eval`. GitHub substitutes ${{ }} textually before bash parses
+      # the script, so an inlined free-text input is CODE, not an argument -- and this step then
+      # `eval`-ed the result, inside a job holding contents: write that can push to main. A brand
+      # of `x'; curl ... | sh; '` ran as written. Every other workflow here already routed inputs
+      # through env: and said so; this was the one holdout. An array expanded as "${args[@]}"
+      # needs neither eval nor hand-quoting.
+      #
+      # On the weekly schedule github.event.inputs is null, so each variable arrives empty and the
+      # fallbacks below restore the dispatch defaults.
       - name: Run paint catalog tool
+        env:
+          SAMPLE: ${{ github.event.inputs.sample }}
+          BRAND: ${{ github.event.inputs.brand }}
+          SCRAPE: ${{ github.event.inputs.scrape }}
         run: |
-          ARGS="--source /tmp/miniature-paints/paints --output data/paints"
-          ARGS="$ARGS --overrides data/paints/overrides.yaml --equivalences"
-          ARGS="$ARGS --barcodes data/paints/barcodes/citadel-colour.yaml"
-          ARGS="$ARGS --harvest data/paints/harvest"
-          # Swatch files are generated ON DEMAND by gen_paint_swatches.py (network + human
-          # contact-sheet review) and consumed committed-only here, like the harvest files.
-          ARGS="$ARGS --swatches data/paints/swatches"
-          ARGS="$ARGS --sample ${{ github.event.inputs.sample || '0' }} --verbose"
-          [ -n "${{ github.event.inputs.brand }}" ] && ARGS="$ARGS --brand '${{ github.event.inputs.brand }}'"
-          [ "${{ github.event.inputs.scrape || 'true' }}" = "true" ] && ARGS="$ARGS --scrape"
-          eval dotnet run --project tools/WarHub.PaintCatalog.Tool -c Release -- $ARGS
+          SAMPLE="${SAMPLE:-0}"
+          # Validated rather than trusted: --sample reaches a .NET arg parser, and "fail here with
+          # a readable message" beats "fail 40 lines into a tool run with a parse error".
+          case "$SAMPLE" in
+            ''|*[!0-9]*)
+              echo "::error::sample must be a non-negative integer (0 = all); got '$SAMPLE'."
+              exit 1 ;;
+          esac
+
+          args=(
+            --source /tmp/miniature-paints/paints
+            --output data/paints
+            --overrides data/paints/overrides.yaml
+            --equivalences
+            --barcodes data/paints/barcodes/citadel-colour.yaml
+            --harvest data/paints/harvest
+            # Swatch files are generated ON DEMAND by gen_paint_swatches.py (network + human
+            # contact-sheet review) and consumed committed-only here, like the harvest files.
+            --swatches data/paints/swatches
+            --sample "$SAMPLE"
+            --verbose
+          )
+          [ -n "$BRAND" ] && args+=( --brand "$BRAND" )
+          [ "${SCRAPE:-true}" = "true" ] && args+=( --scrape )
+
+          dotnet run --project tools/WarHub.PaintCatalog.Tool -c Release -- "${args[@]}"
 
       # THE paint-side enforcement point for the barcode regression gate. This workflow is the only
       # one that writes data/paints/brands/*.yaml, so it is the only place the paint half of
@@ -99,6 +139,8 @@ jobs:
       # human WITH the findings attached, so the PR is created first and the job is failed at the
       # end (same shape as catalog-acquire.yml's guard). Exit 5 = a barcode HEAD attests is now
       # held by no record at all; exit 0 with a section = a barcode merely changed role or brand.
+      # THE DIRECT-PUSH PATH IS THE EXCEPTION and is gated before the push instead -- see
+      # "Gate direct push on the paint-EAN guard" below for why fail-after cannot work there.
       - name: Paint-EAN guard report
         id: guard
         working-directory: tools/acquisition
@@ -146,31 +188,82 @@ jobs:
           git diff --cached --stat -- data/paints | tail -30 >> "$GITHUB_STEP_SUMMARY" || true
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           git reset -q HEAD
+          # The guard findings go to the run summary as well as the PR body. In direct-push mode
+          # there is no PR to carry them, and the summary is then the only durable place a
+          # reviewer can read what the guard saw.
+          if [ -s _guard_section.txt ]; then
+            echo "### Paint-EAN guard findings" >> "$GITHUB_STEP_SUMMARY"
+            cat _guard_section.txt >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # THE GUARD IS ADJUDICATED BEFORE THE PUSH ON THIS PATH, not after it. "Open the PR first,
+      # fail the job after" is safe precisely because a PR is reviewable: nothing has reached main
+      # and a human still stands between the finding and the catalog. A PUSH has no such property.
+      # By the time the final gate at the bottom of this job ran, main already held the regression
+      # AND catalog-publish.yml had fired on it -- its paths include data/paints/** -- cutting an
+      # immutable Release and deploying Pages for a barcode this catalog attested and can no longer
+      # scan. Failing afterwards annotates a fact that can no longer be changed. So on the
+      # direct-push path the guard decides here, before anything leaves the runner, and the
+      # findings are in the run summary written by the step above.
+      - name: Gate direct push on the paint-EAN guard
+        if: github.event.inputs.direct-push == 'true'
+        run: |
+          guard_exit="${{ steps.guard.outputs.exit_code }}"
+          if [ "$guard_exit" = "5" ]; then
+            echo "::error::Paint-EAN guard: a barcode attested at HEAD is held by no paint record. REFUSING to push straight to main -- see 'Paint-EAN guard findings' in the run summary, and re-run without direct-push to get a reviewable PR."
+            exit 1
+          fi
+          if [ "$guard_exit" != "0" ]; then
+            echo "::error::Paint-EAN guard exited $guard_exit (expected 0 or 5) -- possible crash. REFUSING to push straight to main on an unverified guard result."
+            exit 1
+          fi
+
+      # Minted here, immediately before the two steps that write to the repository, because an
+      # installation token expires 60 minutes after it is issued and this job allows 30 minutes for
+      # the tool run alone. See .github/actions/bot-token for why the app identity is what makes
+      # the PR below actually run its checks instead of parking them at `action_required`.
+      - name: Mint warhub-bot token
+        id: bot
+        uses: ./.github/actions/bot-token
+        with:
+          client-id: ${{ vars.WARHUB_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.WARHUB_BOT_PRIVATE_KEY }}
 
       - name: Create or update sticky PR
         if: github.event.inputs.direct-push != 'true'
         uses: peter-evans/create-pull-request@v8
         with:
+          token: ${{ steps.bot.outputs.token }}
           add-paths: data/paints
           branch: catalog/paint-update
           base: main
           title: 'Update paint catalog data'
           body-path: pr-body.md
           commit-message: 'Update paint catalog data'
-          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
-          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          committer: ${{ steps.bot.outputs.committer }}
+          author: ${{ steps.bot.outputs.committer }}
           delete-branch: true
 
       - name: Direct push
         if: github.event.inputs.direct-push == 'true'
+        env:
+          TOKEN: ${{ steps.bot.outputs.token }}
+          COMMITTER: ${{ steps.bot.outputs.committer }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          name="${COMMITTER%% <*}"
+          email="${COMMITTER##*<}"; email="${email%>}"
+          git config user.name "$name"
+          git config user.email "$email"
           git add -A data/paints
           git diff --cached --quiet || git commit -m "Update paint catalog data"
-          git push
+          # Pushed over an explicit token URL rather than the credentials actions/checkout
+          # persisted, which are GITHUB_TOKEN: a push made with GITHUB_TOKEN cannot start a
+          # workflow run, so catalog-publish.yml would never fire for a direct push and the
+          # release would silently not happen. The token is masked in the log.
+          git push "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
 
-      # Last, so the PR above already carries the findings. Two distinct failures, kept separate:
+      # Last, so the PR above already carries the findings. The direct-push path never reaches
+      # here on a hit -- it is gated before the push instead. Two distinct failures, kept separate:
       # an exit code we do not recognise means the guard itself broke (a crash reads as "clean" if
       # you only test for 5), while exit 5 means it worked and found a lost barcode.
       - name: Fail job on paint-EAN guard hits

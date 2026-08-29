@@ -52,7 +52,8 @@ jobs:
   classify:
     name: Classify (${{ github.event.inputs.mode }})
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 60 was sized for the LLM pass alone; the data-integrity suite below adds ~10 min.
+    timeout-minutes: 90
     permissions:
       contents: write
       pull-requests: write
@@ -204,6 +205,75 @@ jobs:
           set -e
           cat ../../_report.txt
 
+      # THE DATA-INTEGRITY NET, ON THE OTHER PATH THAT WRITES THE CATALOG. catalog-acquire.yml
+      # gained this in its integrate job for a reason that applies here word for word: the sticky
+      # bot PRs are where the net was needed and the one place it never ran, because a PR opened
+      # with GITHUB_TOKEN starts no workflow runs. That half is now fixed by the app token minted
+      # below -- data-ci.yml will genuinely execute on this branch. This step is the other half,
+      # and it is not redundant with it: it judges the tree BEFORE the branch is written, it puts
+      # the verdict in the PR body a reviewer is already reading, and it does not depend on any
+      # trigger firing. classify mode runs `resolve` and `categorize`, which rewrite every product
+      # file in the repo -- exactly the blast radius that produced the #111 incident.
+      #
+      # RUNS IN BOTH MODES. propose-joins writes data/review/join-proposals.yaml rather than the
+      # catalog, but it still commits data, and "the job that writes the data validates it" does
+      # not have a mode exemption.
+      #
+      # `set +e` + captured exit code is this job's existing idiom: the step always succeeds and
+      # the code is adjudicated in the combined gate at the end, AFTER the PR exists, so a failing
+      # run still opens a sticky PR carrying its own findings.
+      - name: Snapshot the data tree before the tests
+        id: pretree
+        run: |
+          git add -A data
+          echo "tree=$(git write-tree)" >> "$GITHUB_OUTPUT"
+          git reset -q
+
+      - name: Data-integrity tests
+        id: datatests
+        working-directory: tools/acquisition
+        run: |
+          set +e
+          uv run pytest -q
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+
+      # tests/test_set_contents.py:138 regenerates data/catalog/set-contents/*.yaml in place, and
+      # the sticky PR below commits with `add-paths: data`, so anything the suite leaves behind
+      # would ride into the PR as an unexplained data change. Compared against the pre-test tree
+      # rather than HEAD because this job has already rewritten data/ on purpose. See
+      # catalog-acquire.yml's copy of this step for the full reasoning; the mechanics are identical.
+      - name: Check the data tests did not rewrite committed data
+        id: datadrift
+        if: always()
+        run: |
+          pre="${{ steps.pretree.outputs.tree }}"
+          # No snapshot means no way to separate the tests' writes from this job's own output, and
+          # `git diff` against an empty rev would just crash the step. Report drift rather than
+          # guessing: the snapshot step only fails if git itself did, which is not a state in which
+          # to auto-commit data.
+          if [ -z "$pre" ]; then
+            echo "::error::No pre-test tree snapshot was recorded, so the tests' writes cannot be told apart from this run's own pipeline output. Treating as drift."
+            echo "drift=1" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git add -A data
+          post="$(git write-tree)"
+          if [ "$pre" = "$post" ]; then
+            git reset -q
+            echo "drift=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "::error::The data tests wrote into data/. If the test step above PASSED, a committed generated file is stale for this run's catalog: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit it. If that step FAILED or crashed, this is most likely fallout from a half-finished regeneration -- fix that failure first."
+          git --no-pager diff --stat "$pre" "$post"
+          git --no-pager diff "$pre" "$post"
+          git read-tree "$pre"
+          git checkout -- data
+          git clean -fdq data
+          git reset -q
+          echo "drift=1" >> "$GITHUB_OUTPUT"
+
       - name: Build PR body
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -251,6 +321,17 @@ jobs:
                 echo "> :warning: \`resolve\` exited ${{ steps.resolve.outputs.exit_code }} (expected 0 or 2)."
               fi
               echo
+              echo "### Categorize"
+              echo
+              cat _categorize.txt
+              if [ "${{ steps.categorize.outputs.exit_code }}" = "2" ]; then
+                echo
+                echo "> Disagreements found -- see \`data/review/categorize.yaml\`; review material, not a failure."
+              elif [ "${{ steps.categorize.outputs.exit_code }}" != "0" ]; then
+                echo
+                echo "> :warning: \`categorize\` exited ${{ steps.categorize.outputs.exit_code }} (expected 0 or 2)."
+              fi
+              echo
               echo "### Coverage report"
               echo
               cat _report.txt
@@ -271,19 +352,46 @@ jobs:
               echo
               echo "> This workflow never edits \`matches.yaml\`. Promoting a proposed join is a manual, spot-checked human/controller step."
             fi
+            echo
+            echo "### Data-integrity tests"
+            echo
+            if [ "${{ steps.datatests.outputs.exit_code }}" = "0" ] && [ "${{ steps.datadrift.outputs.drift }}" = "0" ]; then
+              echo "Passed on this run's own tree -- the full suite, the same command \`data-ci.yml\` runs, executed here so the job that writes the data validates it."
+            else
+              echo ":rotating_light: **FAILED on this run's own data.** Do not merge until this is understood."
+              echo
+              if [ "${{ steps.datatests.outputs.exit_code }}" != "0" ]; then
+                echo "- \`pytest\` exited ${{ steps.datatests.outputs.exit_code }} -- see the job log for the failing assertions."
+              fi
+              if [ "${{ steps.datadrift.outputs.drift }}" = "1" ]; then
+                echo "- The tests wrote into \`data/\` -- the job log lists the exact paths. If they touched \`data/catalog/set-contents\`, the committed relation is stale for this catalog: regenerate with \`uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py\` and commit it."
+              fi
+            fi
           } > tools/acquisition/pr-body.md
+
+      # See .github/actions/bot-token: a pull request opened with GITHUB_TOKEN cannot start a
+      # workflow run, so every check on this branch parked at `action_required` and never ran.
+      # Minted immediately before the PR step because an installation token lives 60 minutes and
+      # the LLM pass above can spend most of this job's budget on its own.
+      - name: Mint warhub-bot token
+        id: bot
+        uses: ./.github/actions/bot-token
+        with:
+          client-id: ${{ vars.WARHUB_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.WARHUB_BOT_PRIVATE_KEY }}
 
       - name: Create or update sticky PR
         uses: peter-evans/create-pull-request@v8
         with:
+          token: ${{ steps.bot.outputs.token }}
           add-paths: data
           branch: ${{ steps.branch.outputs.name }}
           base: main
           title: "${{ github.event.inputs.mode == 'propose-joins' && 'Classification: proposed joins' || 'Classification update' }}"
           body-path: tools/acquisition/pr-body.md
           commit-message: 'Classification update (${{ github.event.inputs.mode }})'
-          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
-          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          committer: ${{ steps.bot.outputs.committer }}
+          author: ${{ steps.bot.outputs.committer }}
           delete-branch: true
 
       # Mirrors catalog-acquire.yml's fail-after-PR pattern: the sticky PR is always
@@ -300,6 +408,7 @@ jobs:
             llm_exit="${{ steps.llm.outputs.exit_code }}"
             apply_exit="${{ steps.apply.outputs.exit_code }}"
             resolve_exit="${{ steps.resolve.outputs.exit_code }}"
+            categorize_exit="${{ steps.categorize.outputs.exit_code }}"
             report_exit="${{ steps.report.outputs.exit_code }}"
 
             if [ "$emit_queue_exit" != "0" ]; then
@@ -318,6 +427,16 @@ jobs:
               echo "::error::resolve exited $resolve_exit (expected 0 or 2) -- possible crash, possibly mid-write. See the sticky PR body / job log for details."
               crashed=1
             fi
+            # categorize was captured into an output that NOTHING read: not this gate, not the PR
+            # body. Its own step comment calls it "NOT OPTIONAL, AND NOT DECORATION" -- resolve has
+            # just reset every product's category to the fallback and categorize is what puts the
+            # decided values back -- so a crash here published 8,073 products as guessed
+            # `miniatures` behind a green check and a PR body that read clean. Contract {0, 2}, the
+            # same as resolve: 2 is disagreements, which are review material.
+            if [ "$categorize_exit" != "0" ] && [ "$categorize_exit" != "2" ]; then
+              echo "::error::categorize exited $categorize_exit (expected 0 or 2) -- possible crash, possibly mid-write, leaving the catalog half-categorized. See the sticky PR body / job log for details."
+              crashed=1
+            fi
             if [ "$report_exit" != "0" ]; then
               echo "::error::report (coverage) exited $report_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
               crashed=1
@@ -328,6 +447,19 @@ jobs:
               echo "::error::classify --propose-joins exited $joins_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
               crashed=1
             fi
+          fi
+
+          # Both modes. Adjudicated here rather than by letting pytest fail on its own, for the
+          # reason this whole step exists: the sticky PR must carry the findings -- the PR body
+          # reports the test result too -- before the job is marked failed.
+          datatests_exit="${{ steps.datatests.outputs.exit_code }}"
+          if [ "$datatests_exit" != "0" ]; then
+            echo "::error::Data-integrity tests failed (pytest exited $datatests_exit) on this run's own data. See the sticky PR body / job log."
+            crashed=1
+          fi
+          if [ "${{ steps.datadrift.outputs.drift }}" = "1" ]; then
+            echo "::error::The data-integrity tests wrote into data/ -- a committed generated file is stale for this run's catalog. See the sticky PR body / job log."
+            crashed=1
           fi
 
           if [ "$crashed" = "1" ]; then

@@ -63,6 +63,10 @@ jobs:
   python:
     name: Python tests
     runs-on: ubuntu-latest
+    # The suite measures ~10 min on this runner (10m11s, run 32563899011). Bounded like every
+    # other job in this repo rather than inheriting the 360-minute default, so a hung test takes
+    # a quarter-hour of runner time instead of six hours.
+    timeout-minutes: 25
     defaults:
       run:
         working-directory: tools/acquisition
