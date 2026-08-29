@@ -24,7 +24,10 @@ name: Nightly Acquisition
 #   group G:  mfr-gw-trade -- WEEKLY ONLY, UNCAPPED (empty budget). The GW trade sheets are a
 #             cumulative register, not a paginated store: the strategy's `budget` slices the
 #             WORKBOOK list (`workbooks[:budget]`), and cutting it could drop the flagship
-#             InsertDelete file, so it must never be budgeted. A full sweep is ~36 workbooks at
+#             InsertDelete file, so it must never be budgeted. Enforced by `neverBudget: true` in
+#             the matrix, not by prose: until that flag existed the `budget` dispatch input reached
+#             this group like any other, and because gw_trade_sheets.py:829 slices on
+#             `is not None`, a dispatch of `budget: 0` swept ZERO workbooks and still exited 0. A full sweep is ~36 workbooks at
 #             the descriptor's rps 0.125 (~35 min) -- its own group so that pacing runs in
 #             parallel with the others and keeps its own 120-min timeout.
 #
@@ -85,7 +88,7 @@ on:
         required: false
         type: string
       budget:
-        description: 'Override budget for every group (empty = per-group default; never applies to group F -- see roster comment above)'
+        description: 'Override budget for every group (empty = per-group default; never applies to groups F or G, whose budgets are fixed by their source quotas -- see roster comment above)'
         required: false
         type: string
       mode:
@@ -129,6 +132,7 @@ jobs:
             budget: 2000
             weeklyBudget: ''
             weeklyOnly: false
+            neverBudget: false
             startupDelay: 0
           # mfr-warmachine (warmachine.gg) joins A2 rather than opening a group of its own: it is
           # the other half of a store split, so it belongs beside the source it split FROM, and
@@ -143,36 +147,42 @@ jobs:
             budget: 1000
             weeklyBudget: ''
             weeklyOnly: false
+            neverBudget: false
             startupDelay: 60
           - group: B
             sources: mfr-gw-algolia mfr-manticgames mfr-para-bellum mfr-corvus-belli
             budget: 3000
             weeklyBudget: ''
             weeklyOnly: false
+            neverBudget: false
             startupDelay: 120
           - group: C
             sources: ret-goblingaming ret-tistaminis
             budget: 1500
             weeklyBudget: ''
             weeklyOnly: false
+            neverBudget: false
             startupDelay: 180
           - group: D
             sources: ret-radaddel ret-gamenerdz
             budget: 1000
             weeklyBudget: 2500
             weeklyOnly: false
+            neverBudget: false
             startupDelay: 240
           - group: E
             sources: arc-goblingaming arc-gw-webstore
             budget: 500
             weeklyBudget: ''
             weeklyOnly: true
+            neverBudget: false
             startupDelay: 300
           - group: F
             sources: bdb-upcitemdb bdb-goupc
             budget: 0
             weeklyBudget: ''
             weeklyOnly: true
+            neverBudget: true
             startupDelay: 360
           # Empty budget = UNCAPPED (see the roster comment): the trade register must sweep every
           # workbook, never a `workbooks[:budget]` slice. The acquire step omits --budget when it's
@@ -182,6 +192,7 @@ jobs:
             budget: ''
             weeklyBudget: ''
             weeklyOnly: true
+            neverBudget: true
             startupDelay: 420
     defaults:
       run:
@@ -204,6 +215,7 @@ jobs:
           GROUP_BUDGET: ${{ matrix.budget }}
           GROUP_WEEKLY_BUDGET: ${{ matrix.weeklyBudget }}
           GROUP_WEEKLY_ONLY: ${{ matrix.weeklyOnly }}
+          GROUP_NEVER_BUDGET: ${{ matrix.neverBudget }}
           EVENT_NAME: ${{ github.event_name }}
           SCHEDULE_EXPR: ${{ github.event.schedule }}
           DISPATCH_MODE: ${{ github.event.inputs.mode }}
@@ -245,7 +257,21 @@ jobs:
             RUN_SOURCES="$GROUP_SOURCES"
           fi
 
-          if [ -n "$OVERRIDE_BUDGET" ]; then
+          # A GROUP WITH A FIXED QUOTA IGNORES THE DISPATCH OVERRIDE. Both such groups' limits are
+          # stated as invariants at the top of this file -- group F because upcitemdb's trial quota
+          # is ~100 requests/day, group G because the trade register must sweep every workbook -- and
+          # both were previously enforced only by whoever typed the dispatch. F survived by accident:
+          # its branch of the acquire step hardcodes per-source budgets and never reads $BUDGET. G had
+          # nothing. `budget` reached mfr-gw-trade like any other group, and since the strategy slices
+          # `workbooks[:budget]` on `is not None` (gw_trade_sheets.py:829), a dispatch of `budget: 0`
+          # harvested ZERO workbooks and exited 0 -- a silent no-op run of the one source that must
+          # always sweep everything. The flag makes the roster comment enforceable instead of advisory.
+          if [ "$GROUP_NEVER_BUDGET" = "true" ]; then
+            BUDGET="$GROUP_BUDGET"
+            if [ -n "$OVERRIDE_BUDGET" ]; then
+              echo "::notice::Group $GROUP: ignoring the dispatch budget override ($OVERRIDE_BUDGET) -- this group's budget is fixed by its source quotas."
+            fi
+          elif [ -n "$OVERRIDE_BUDGET" ]; then
             BUDGET="$OVERRIDE_BUDGET"
           elif [ "$MODE" = "weekly" ] && [ -n "$GROUP_WEEKLY_BUDGET" ]; then
             BUDGET="$GROUP_WEEKLY_BUDGET"
@@ -333,8 +359,16 @@ jobs:
                   ;;
               esac
             done
-            if [ "$ran_any" = "1" ]; then
-              { for f in ../../_health-F-*.md; do cat "$f"; echo; echo "---"; echo; done; } > ../../data/review/acquisition-health.md
+            # REBUILD ONLY IF A STASH SURVIVED. With nullglob on, an empty glob runs the loop body
+            # zero times while the redirect still fires, truncating a TRACKED file to nothing -- and
+            # that empty health report then travels through the artifact into the combined report and
+            # the PR body. `ran_any` alone does not cover it: a source can be selected and still leave
+            # no stash, by crashing before its first write.
+            stashes=( ../../_health-F-*.md )
+            if [ "${#stashes[@]}" -gt 0 ]; then
+              { for f in "${stashes[@]}"; do cat "$f"; echo; echo "---"; echo; done; } > ../../data/review/acquisition-health.md
+            elif [ "$ran_any" = "1" ]; then
+              echo "::warning::Group F: ran but produced no health report -- every selected source crashed before writing one. Leaving the committed acquisition-health.md as it was."
             fi
             [ "$crashed" = "0" ] || exit 4
           else
@@ -514,7 +548,7 @@ jobs:
       # KNOWN GAP: `acquire` overwrites data/review/acquisition-health.md with only its own run's
       # rows, and each matrix job runs a disjoint source set. Since matrix jobs can't share a
       # single working tree, the combined health state is regenerated here by concatenating each
-      # group's staged health file (deterministic group-letter order A1-F) rather than by rerunning
+      # group's staged health file (deterministic group-letter order A1-G) rather than by rerunning
       # `acquire` (which would require live network access again, defeating the point).
       - name: Combine health reports
         run: |
@@ -522,12 +556,12 @@ jobs:
           mkdir -p data/review
           # Bash glob results are lexicographically sorted, so this naturally comes out in group
           # order (health-A1.md < health-A2.md < health-B.md < health-C.md < health-D.md <
-          # health-E.md < health-F.md).
+          # health-E.md < health-F.md < health-G.md).
           health_files=(artifacts/acquire-data-*/health-*.md)
           {
             echo "# Acquisition health (combined)"
             echo
-            echo "_Run $(date -u +%F) -- combined per-group reports, group order A1-F._"
+            echo "_Run $(date -u +%F) -- combined per-group reports, group order A1-G._"
             if [ "${#health_files[@]}" -eq 0 ]; then
               echo
               echo "_No matrix group reported a health file this run (no sources were selected)._"
@@ -649,6 +683,21 @@ jobs:
       # and 13m47s for the 20 previously-unlisted files alone on a Windows dev box -- the ~2.3x is
       # NTFS. So ~10 min here, against this job's timeout-minutes: 120 and a nightly that already
       # runs 1h50m. Cheap for a run that has just rewritten every product file in the repo.
+      # SNAPSHOT THE TREE THE TESTS ARE ABOUT TO JUDGE. The drift check below compares against
+      # this hash, not against HEAD, because by now this job has rewritten most of data/ on purpose
+      # -- the evidence merge, the carryover, resolve, categorize -- so "differs from HEAD" is the
+      # normal state here and says nothing at all about what pytest did. A tree hash taken
+      # immediately before the suite isolates exactly the pytest delta and nothing else.
+      #
+      # The index is staged and immediately reset, so every step after this one sees the same clean
+      # index it always did; git write-tree needs the staging, nothing else does.
+      - name: Snapshot the data tree before the tests
+        id: pretree
+        run: |
+          git add -A data
+          echo "tree=$(git write-tree)" >> "$GITHUB_OUTPUT"
+          git reset -q
+
       - name: Data-integrity tests
         id: datatests
         working-directory: tools/acquisition
@@ -663,13 +712,23 @@ jobs:
       # carries information (data-ci.yml:106-134 explains why the byte-compare inside the test
       # cannot see a file the generator CREATES, only ones that already existed).
       #
-      # Here that state is also a HAZARD the PR-path net does not have: the next step commits
-      # with `add-paths: data`, so anything pytest left behind would ride into the sticky PR as
-      # an unexplained data change. So this restores it. Restoring is safe precisely because
-      # nothing else in this pipeline writes that directory -- `resolve` never touches
-      # set-contents (it cannot reach contentSkus' paint side at all; see
-      # resolve/set_refs.py:16-20), so HEAD's copy is the correct pre-test state and the run's
-      # own output is untouched.
+      # Here that state is also a HAZARD the PR-path net does not have: the next step commits with
+      # `add-paths: data`, so anything pytest leaves behind rides into the sticky PR as an
+      # unexplained data change. So this restores it.
+      #
+      # IT WATCHES ALL OF data/, NOT JUST set-contents. The narrow version could only ever
+      # rediscover the write we already knew about: the suite is 27 files that read committed data,
+      # any of them may grow a fixture or a subprocess that writes, and on THIS path -- the one that
+      # auto-commits with no human between the write and the branch -- an unnoticed write is a
+      # committed one. A plain `git status -- data` cannot express that here, because the job's own
+      # legitimate output already fills the directory; the pre/post tree hashes are what make a
+      # whole-directory check meaningful inside a job that rewrites the directory itself.
+      #
+      # RESTORING IS EXACT, not approximate: `read-tree` puts the index back to the pre-test state,
+      # `checkout -- data` replays it into the worktree, and `clean -fdq data` drops the files
+      # pytest CREATED -- which are exactly the ones absent from that tree, so the pipeline's own
+      # new files (staged into the snapshot) survive untouched. `clean` without -x leaves ignored
+      # files alone. The closing `reset -q` hands the next step the clean index it expects.
       #
       # Drift is still reported and still fails the job, via the combined gate below -- a stale
       # committed relation is a real finding. Measured on catalog/acquisition's tree 2026-08-18:
@@ -678,17 +737,32 @@ jobs:
         id: datadrift
         if: always()
         run: |
-          drift="$(git status --porcelain -- data/catalog/set-contents)"
-          if [ -n "$drift" ]; then
-            echo "::error::The data tests rewrote data/catalog/set-contents. If the test step above PASSED, the committed relation is stale for this run's catalog: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit it. If that step FAILED, this is most likely fallout from a half-finished regeneration -- fix the failure first."
-            echo "$drift"
-            git --no-pager diff -- data/catalog/set-contents
-            git checkout -- data/catalog/set-contents
-            git clean -fdq data/catalog/set-contents
+          pre="${{ steps.pretree.outputs.tree }}"
+          # No snapshot means no way to separate the tests' writes from this job's own output, and
+          # `git diff` against an empty rev would just crash the step. Report drift rather than
+          # guessing: the snapshot step only fails if git itself did, which is not a state in which
+          # to auto-commit data.
+          if [ -z "$pre" ]; then
+            echo "::error::No pre-test tree snapshot was recorded, so the tests' writes cannot be told apart from this run's own pipeline output. Treating as drift."
             echo "drift=1" >> "$GITHUB_OUTPUT"
-          else
-            echo "drift=0" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          git add -A data
+          post="$(git write-tree)"
+          if [ "$pre" = "$post" ]; then
+            git reset -q
+            echo "drift=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "::error::The data tests wrote into data/. If the test step above PASSED, a committed generated file is stale for this run's catalog: regenerate with 'uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py' and commit it. If that step FAILED or crashed, this is most likely fallout from a half-finished regeneration -- fix that failure first. The paths below are the tests' writes ONLY; this run's own pipeline output is excluded by construction."
+          git --no-pager diff --stat "$pre" "$post"
+          git --no-pager diff "$pre" "$post"
+          git read-tree "$pre"
+          git checkout -- data
+          git clean -fdq data
+          git reset -q
+          echo "drift=1" >> "$GITHUB_OUTPUT"
 
       - name: Build PR body
         run: |
@@ -765,22 +839,36 @@ jobs:
                 echo "- \`pytest\` exited ${{ steps.datatests.outputs.exit_code }} -- see the job log for the failing assertions."
               fi
               if [ "${{ steps.datadrift.outputs.drift }}" = "1" ]; then
-                echo "- The tests rewrote \`data/catalog/set-contents\` -- the committed relation is stale for this catalog. Regenerate with \`uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py\` and commit it."
+                echo "- The tests wrote into \`data/\` -- the job log lists the exact paths. If they touched \`data/catalog/set-contents\`, the committed relation is stale for this catalog: regenerate with \`uv run --with pyyaml python tools/acquisition/scripts/gen_set_contents.py\` and commit it. Anywhere else means a test has started writing somewhere new, which this run reverted rather than committed."
               fi
             fi
           } > pr-body.md
 
+      # Minted HERE, at the end of a job that allows 120 minutes and routinely spends most of
+      # them, because an installation token expires 60 minutes after it is issued. Everything above
+      # this point reads the repository with GITHUB_TOKEN, which needs no app identity and cannot
+      # go stale mid-job. See .github/actions/bot-token for why the app identity matters at all: a
+      # pull request opened with GITHUB_TOKEN cannot start a workflow run, which is why every check
+      # on this very branch sat at `action_required` and was never executed.
+      - name: Mint warhub-bot token
+        id: bot
+        uses: ./.github/actions/bot-token
+        with:
+          client-id: ${{ vars.WARHUB_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.WARHUB_BOT_PRIVATE_KEY }}
+
       - name: Create or update sticky PR
         uses: peter-evans/create-pull-request@v8
         with:
+          token: ${{ steps.bot.outputs.token }}
           add-paths: data
           branch: catalog/acquisition
           base: main
           title: 'Nightly acquisition update'
           body-path: pr-body.md
           commit-message: 'Nightly acquisition data update'
-          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
-          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          committer: ${{ steps.bot.outputs.committer }}
+          author: ${{ steps.bot.outputs.committer }}
           delete-branch: true
 
       # Runs AFTER the PR step (mirrors the ean-guard's original fail-after-PR pattern) so a
@@ -831,8 +919,13 @@ jobs:
             crashed=1
           fi
 
-          if [ "$report_exit" != "0" ] && [ "$report_exit" != "5" ]; then
-            echo "::error::report (coverage) exited $report_exit (expected 0 or 5) -- possible crash. See the sticky PR body / job log for details."
+          # {0} only, not {0,5}. The coverage step runs `report` WITHOUT --ean-guard, and
+          # cli.py:392-403 sets exit 5 exclusively inside the `if args.ean_guard:` branch -- so a 5
+          # from that invocation is an anomaly, and tolerating it here meant the one code that
+          # cannot legitimately occur was the one code that passed. The guard's own step, below,
+          # is where {0,5} belongs.
+          if [ "$report_exit" != "0" ]; then
+            echo "::error::report (coverage) exited $report_exit (expected 0) -- possible crash. See the sticky PR body / job log for details."
             crashed=1
           fi
 

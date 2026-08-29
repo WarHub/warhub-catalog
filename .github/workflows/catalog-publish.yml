@@ -21,7 +21,8 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # 20 was sized for bundle + release only; the data-integrity gate below adds ~10 min.
+    timeout-minutes: 45
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -30,17 +31,55 @@ jobs:
         with:
           fetch-depth: 0   # need tags for same-day version suffixing
 
+      # global.json, not a floating '10.x' + quality:preview. global.json pins 10.0.201 with
+      # rollForward: latestFeature, which does NOT cross feature bands -- so the moment the latest
+      # 10.x preview is a 10.0.3xx, a floating install lands an SDK global.json rejects and every
+      # `dotnet` invocation below fails with "compatible SDK not found". ci.yml has always resolved
+      # the SDK from the pin; this makes the publish path agree with the path that gates merges.
       - uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '10.x'
-          dotnet-quality: 'preview'
+          global-json-file: global.json
+
+      - uses: astral-sh/setup-uv@v7
+
+      # THE RELEASE IS IMMUTABLE AND THE PUBLISHED IDS ARE A CONSUMER CONTRACT (docs/OBJECTIVES.md),
+      # so it is gated on the data actually passing its own tests. Until this step existed, nothing
+      # sequenced publishing against testing: data-ci.yml triggers on the same push to main and runs
+      # CONCURRENTLY with this job, so a hand-authored push straight to main could cut a Release and
+      # deploy Pages before its test run had finished -- and an immutable release cannot be recalled
+      # the way a red check on a PR can be fixed. The bot paths are already covered twice over
+      # (in-job in catalog-acquire.yml/classify.yml, and on the PR now that those PRs are opened with
+      # an app token and therefore actually run checks); this covers the one path that has neither.
+      - name: Data-integrity tests
+        working-directory: tools/acquisition
+        run: |
+          uv sync --locked
+          uv run pytest -q
+
+      # tests/test_set_contents.py:138 regenerates data/catalog/set-contents/*.yaml in place (see
+      # data-ci.yml's header). Here that would be bundled INTO the release, so the tree is restored
+      # to HEAD before anything reads it. Drift itself is data-ci.yml's finding to report, on the
+      # change that introduced it; this job's job is to publish HEAD, not the post-test tree.
+      - name: Restore any tree state the tests rewrote
+        run: |
+          git checkout -- data/catalog/set-contents
+          git clean -fdq data/catalog/set-contents
 
       - name: Compute version
         id: ver
         run: |
           base="$(date -u +%Y.%-m.%-d)"
-          existing="$(git tag -l "v$base" "v$base.*" | wc -l)"
-          if [ "$existing" -eq 0 ]; then version="$base"; else version="$base.$((existing + 1))"; fi
+          # PROBE FOR A FREE TAG, don't count the taken ones. Counting assumes the day's tags form
+          # an unbroken run, so one deleted tag makes the count point at a tag that still exists:
+          # with v$base deleted and v$base.2 kept, the count is 1 and the next version recomputes
+          # to v$base.2 -- a duplicate, and `gh release create` fails on it. Absence cannot collide.
+          if ! git rev-parse -q --verify "refs/tags/v$base" >/dev/null; then
+            version="$base"
+          else
+            n=2
+            while git rev-parse -q --verify "refs/tags/v$base.$n" >/dev/null; do n=$((n + 1)); done
+            version="$base.$n"
+          fi
           echo "version=$version"       >> "$GITHUB_OUTPUT"
           echo "tag=v$version"          >> "$GITHUB_OUTPUT"
 

@@ -1,0 +1,97 @@
+name: WarHub bot token
+description: >-
+  Mint a warhub-bot GitHub App installation token for writing branches and opening pull requests,
+  and resolve the git committer identity that matches it. Falls back to GITHUB_TOKEN, loudly, when
+  the app is not configured.
+
+# WHY AN APP TOKEN AT ALL. A pull request opened with GITHUB_TOKEN cannot start another workflow
+# run -- GitHub's loop-prevention rule -- which is why every check on the sticky bot PRs sat at
+# `action_required` and was never executed (six-plus on catalog/acquisition, 2026-08-13 to 08-18,
+# 0s each; see data-ci.yml's header). The data-integrity net existed and did not run on the two
+# PRs that most needed it. An installation access token is NOT GITHUB_TOKEN, so branches pushed
+# and pull requests opened with it trigger `push`/`pull_request` workflows normally and nobody has
+# to click "approve this run".
+#
+# WHY IT IS A LOCAL COMPOSITE ACTION. Three workflows open sticky PRs (catalog-acquire.yml,
+# classify.yml, paint-catalog-update.yml) and a fourth pushes directly. Inlining the mint + the
+# fallback + the identity lookup four times would put four copies of this reasoning in the tree,
+# and the first divergence between them would be silent.
+#
+# WHERE TO CALL IT: immediately before the step that writes to the repository, never at the top of
+# the job. An installation token expires 60 minutes after it is minted, and these jobs run far
+# longer than that -- catalog-acquire's integrate job allows 120 minutes and spends ~10 of them on
+# the test suite alone. A token taken at checkout time can be dead by the time the PR is opened.
+# Reading the repository does not need this action: `actions/checkout` uses GITHUB_TOKEN and that
+# is fine.
+
+inputs:
+  client-id:
+    description: 'GitHub App client ID. Pass vars.WARHUB_BOT_CLIENT_ID.'
+    required: false
+    default: ''
+  private-key:
+    description: 'GitHub App private key. Pass secrets.WARHUB_BOT_PRIVATE_KEY.'
+    required: false
+    default: ''
+
+outputs:
+  token:
+    description: 'Installation access token, or github.token when the app is not configured.'
+    value: ${{ steps.app.outputs.token || github.token }}
+  committer:
+    description: 'The account the token acts as, as a git identity: "Name <email>".'
+    value: ${{ steps.identity.outputs.committer }}
+  kind:
+    description: '"app" when an installation token was minted, "github-token" when it fell back.'
+    value: ${{ steps.identity.outputs.kind }}
+
+runs:
+  using: composite
+  steps:
+    # SKIPPED, NOT FAILED, when the app is not configured. `secrets` is not an available context in
+    # a step `if:`, so callers pass the key in as an input and the emptiness test happens here. A
+    # missing secret must not take the nightly down: the run still produces its data and still opens
+    # its PR, exactly as it did before this action existed, and the identity step below says so in
+    # an annotation. Same convention as the acquire job's DEGRADED exit 3 -- never paint a run red
+    # for a missing environment when the work itself succeeded.
+    - id: app
+      if: inputs.client-id != '' && inputs.private-key != ''
+      uses: actions/create-github-app-token@v3
+      with:
+        client-id: ${{ inputs.client-id }}
+        private-key: ${{ inputs.private-key }}
+        # Least privilege: this action exists to write a branch and open a PR. Requesting a subset
+        # of what the app holds is always allowed; requesting more than it holds is an error.
+        permission-contents: write
+        permission-pull-requests: write
+
+    # The committer identity is DERIVED from the token, not hardcoded, so switching which app the
+    # variables point at cannot leave commits attributed to the wrong bot. The numeric-id form of
+    # the noreply address is what links a commit to the bot account on github.com; without it the
+    # commits show as an unlinked name. A lookup failure is therefore a real (if minor) degradation
+    # and is annotated rather than swallowed -- but it never fails the step, because a transient
+    # api.github.com blip must not be able to stop a nightly from opening its PR.
+    - id: identity
+      shell: bash
+      env:
+        APP_SLUG: ${{ steps.app.outputs.app-slug }}
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        if [ -z "$APP_SLUG" ]; then
+          echo "::warning::No warhub-bot app token: WARHUB_BOT_CLIENT_ID and/or WARHUB_BOT_PRIVATE_KEY are not configured for this repository. Falling back to GITHUB_TOKEN -- the run still works, but the pull request it opens will NOT start any workflow runs (data-ci.yml will sit at 'action_required' awaiting manual approval). Add the WARHUB_BOT_PRIVATE_KEY secret to fix that."
+          echo "kind=github-token" >> "$GITHUB_OUTPUT"
+          echo "committer=github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        bot_id="$(gh api "users/${APP_SLUG}%5Bbot%5D" --jq .id 2>/dev/null || true)"
+        if [ -z "$bot_id" ]; then
+          echo "::warning::Minted a ${APP_SLUG} installation token but could not resolve the numeric user id for ${APP_SLUG}[bot]. Commits will carry the name but will not link to the bot account."
+          echo "kind=app" >> "$GITHUB_OUTPUT"
+          echo "committer=${APP_SLUG}[bot] <${APP_SLUG}[bot]@users.noreply.github.com>" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        echo "::notice::Acting as ${APP_SLUG}[bot] via a GitHub App installation token; the pull request this run opens will trigger workflows normally."
+        echo "kind=app" >> "$GITHUB_OUTPUT"
+        echo "committer=${APP_SLUG}[bot] <${bot_id}+${APP_SLUG}[bot]@users.noreply.github.com>" >> "$GITHUB_OUTPUT"
