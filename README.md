@@ -217,3 +217,5 @@ public swatch sources. For source-data terms see `data/paints/LICENSE` (paints) 
 `data/evidence/products/legacy-catalog/LICENSE` (the legacy product catalog that seeded the
 evidence ledger) — both MIT, matching this repo's [LICENSE](LICENSE); tooling is under this
 repo's [LICENSE](LICENSE).
+
+<!-- ci gate probe: delete with this branch -->
