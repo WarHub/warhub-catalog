@@ -79,6 +79,12 @@ on:
 
 permissions:
   contents: read
+  # The `changes` job below asks the API for the pull request's file list. On a PUBLIC repository
+  # `contents: read` happens to be enough, which is why this was not noticed; on a private one the
+  # call 404s, the job fails, and because the gate reports its dependencies faithfully BOTH required
+  # checks then fail -- every pull request blocked, from a repository visibility change that has
+  # nothing to do with CI. One line, so the gate does not depend on the repo staying public.
+  pull-requests: read
 
 concurrency:
   group: data-ci-${{ github.ref }}
