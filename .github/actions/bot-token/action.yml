@@ -26,11 +26,11 @@ description: >-
 
 inputs:
   client-id:
-    description: 'GitHub App client ID. Pass vars.WARHUB_BOT_CLIENT_ID.'
+    description: 'GitHub App client ID. Pass vars.WARHUB_BOT_APP_CLIENT_ID.'
     required: false
     default: ''
   private-key:
-    description: 'GitHub App private key. Pass secrets.WARHUB_BOT_PRIVATE_KEY.'
+    description: 'GitHub App private key. Pass secrets.WARHUB_BOT_APP_PRIVATE_KEY.'
     required: false
     default: ''
 
@@ -78,7 +78,7 @@ runs:
         GH_TOKEN: ${{ github.token }}
       run: |
         if [ -z "$APP_SLUG" ]; then
-          echo "::warning::No warhub-bot app token: WARHUB_BOT_CLIENT_ID and/or WARHUB_BOT_PRIVATE_KEY are not configured for this repository. Falling back to GITHUB_TOKEN -- the run still works, but the pull request it opens will NOT start any workflow runs (data-ci.yml will sit at 'action_required' awaiting manual approval). Add the WARHUB_BOT_PRIVATE_KEY secret to fix that."
+          echo "::warning::No warhub-bot app token: WARHUB_BOT_APP_CLIENT_ID and/or WARHUB_BOT_APP_PRIVATE_KEY are not configured for this repository. Falling back to GITHUB_TOKEN -- the run still works, but the pull request it opens will NOT start any workflow runs (data-ci.yml will sit at 'action_required' awaiting manual approval). Add the WARHUB_BOT_APP_PRIVATE_KEY secret to fix that."
           echo "kind=github-token" >> "$GITHUB_OUTPUT"
           echo "committer=github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" >> "$GITHUB_OUTPUT"
           exit 0
