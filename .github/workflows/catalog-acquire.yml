@@ -854,8 +854,8 @@ jobs:
         id: bot
         uses: ./.github/actions/bot-token
         with:
-          client-id: ${{ vars.WARHUB_BOT_CLIENT_ID }}
-          private-key: ${{ secrets.WARHUB_BOT_PRIVATE_KEY }}
+          client-id: ${{ vars.WARHUB_BOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.WARHUB_BOT_APP_PRIVATE_KEY }}
 
       - name: Create or update sticky PR
         uses: peter-evans/create-pull-request@v8
