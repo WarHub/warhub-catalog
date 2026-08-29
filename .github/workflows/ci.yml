@@ -3,6 +3,21 @@ name: CI
 # Builds and tests the .NET tooling under tools/. Runs on every PR and main push that
 # touches source, so regressions (incl. dependency bumps) are caught before merge.
 
+# ONE REQUIRED CHECK PER WORKFLOW, and it is the gate job at the bottom, not the work jobs.
+# Requiring `build-test` and `Python tests` by name would couple the branch ruleset to job names
+# -- rename a job and the ruleset silently waits forever for a check nobody reports. The gate is a
+# stable name that aggregates: it fails if any job it needs failed or was cancelled, and passes
+# when they succeeded or were correctly skipped.
+#
+# WHICH IS WHY `pull_request` NO LONGER CARRIES A `paths:` FILTER. A required status check that
+# never reports does not fail open, it DEADLOCKS: the pull request sits at "Expected -- waiting for
+# status to be reported" and can never merge. Measured 2026-08-29 on the two open bot PRs, #169
+# (catalog/acquisition) and #152 (catalog/paint-update): both touch data/** only, both had ZERO
+# check runs, and this workflow's old `paths:` list excludes data/ -- so requiring anything from it
+# would have made every nightly, paint and classify PR permanently unmergeable. The workflow now
+# always triggers on a pull request, and the `changes` job decides whether the expensive jobs run.
+# `push` keeps its filter: nothing requires a status check there.
+
 on:
   push:
     branches: [main]
@@ -13,14 +28,8 @@ on:
       - 'WarHub.Catalog.slnx'
       - 'global.json'
       - '.github/workflows/ci.yml'
+  # No `paths:` here on purpose -- see the gate note below.
   pull_request:
-    paths:
-      - 'tools/**'
-      - 'Directory.Build.props'
-      - 'Directory.Packages.props'
-      - 'WarHub.Catalog.slnx'
-      - 'global.json'
-      - '.github/workflows/ci.yml'
   workflow_dispatch:
 
 permissions:
@@ -30,8 +39,44 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+
 jobs:
+  # Cheap and checkout-free: the PR files API answers "does this change touch anything this
+  # workflow tests" in a second or two, where a fetch-depth: 0 clone of this repo to run `git diff`
+  # would cost far more than the answer is worth. On push/dispatch there is no PR to inspect and
+  # the workflow's own `paths:` filter has already decided, so the answer is always yes.
+  changes:
+    name: Detect relevant changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      relevant: ${{ steps.check.outputs.relevant }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ "$EVENT" != "pull_request" ]; then
+            echo "relevant=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          relevant=false
+          while IFS= read -r f; do
+            case "$f" in
+              tools/*|Directory.Build.props|Directory.Packages.props|WarHub.Catalog.slnx|global.json|.github/workflows/ci.yml)
+                relevant=true
+                break ;;
+            esac
+          done <<< "$(gh api "repos/$REPO/pulls/$PR/files" --paginate --jq '.[].filename')"
+          echo "relevant=$relevant" >> "$GITHUB_OUTPUT"
+          echo "::notice::Relevant to CI: $relevant"
+
   build-test:
+    needs: changes
+    if: needs.changes.outputs.relevant == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -62,6 +107,8 @@ jobs:
 
   python:
     name: Python tests
+    needs: changes
+    if: needs.changes.outputs.relevant == 'true'
     runs-on: ubuntu-latest
     # The suite measures ~10 min on this runner (10m11s, run 32563899011). Bounded like every
     # other job in this repo rather than inheriting the 360-minute default, so a hung test takes
@@ -75,3 +122,26 @@ jobs:
       - uses: astral-sh/setup-uv@v7
       - run: uv sync --locked
       - run: uv run pytest -v
+
+  # THE REQUIRED CHECK. `if: always()` so it reports whatever happened above -- without it a
+  # failed dependency would SKIP this job, and a skipped required check reads as satisfied, which
+  # is the exact opposite of a gate. skipped and success both pass (a job correctly not run is not
+  # a failure); failure and cancelled do not.
+  gate:
+    name: CI gate
+    needs: [changes, build-test, python]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Merge job results
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          echo "$RESULTS" | jq -r 'to_entries[] | "  \(.key): \(.value.result)"'
+          bad="$(echo "$RESULTS" | jq -r '[to_entries[] | select(.value.result == "failure" or .value.result == "cancelled") | .key] | join(", ")')"
+          if [ -n "$bad" ]; then
+            echo "::error::CI gate: these jobs did not pass -- $bad"
+            exit 1
+          fi
+          echo "CI gate: green (skipped jobs are not failures)."

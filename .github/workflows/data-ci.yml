@@ -1,9 +1,10 @@
 name: Data CI
 
 # Runs the Python test suite on changes under data/**. Until this file existed the data tests ran
-# NOWHERE for such a change: ci.yml gates BOTH of its jobs on one workflow-level `paths:` list
+# NOWHERE for such a change: ci.yml gated BOTH of its jobs on one workflow-level `paths:` list
 # (tools/**, Directory.Build.props, Directory.Packages.props, WarHub.Catalog.slnx, global.json,
-# .github/workflows/ci.yml) and data/** is absent from it, while ci.yml's `uv run pytest` was the
+# .github/workflows/ci.yml) with data/** absent from it -- ci.yml now filters per job instead, for
+# the gate reason below, but the list it filters on is the same one. Meanwhile ci.yml's pytest was the
 # only one in any workflow -- `git grep -n pytest -- .github/` returned exactly one line before
 # this file existed. So a pull request touching only data/ ran ZERO tests and went green by
 # default. PR #111 is what that looks like in practice: a `classify --apply` run deleted a
@@ -50,16 +51,30 @@ name: Data CI
 # 0s each). Running it in the job that writes the data removes the approval from the loop. Both
 # call plain `pytest` now, so there is no longer a list to keep in sync between them.
 
+# ONE REQUIRED CHECK PER WORKFLOW, and it is the gate job at the bottom, not the work jobs.
+# Requiring `Data integrity tests` by name would couple the branch ruleset to job names
+# -- rename a job and the ruleset silently waits forever for a check nobody reports. The gate is a
+# stable name that aggregates: it fails if any job it needs failed or was cancelled, and passes
+# when they succeeded or were correctly skipped.
+#
+# WHICH IS WHY `pull_request` NO LONGER CARRIES A `paths:` FILTER. A required status check that
+# never reports does not fail open, it DEADLOCKS: the pull request sits at "Expected -- waiting
+# for status to be reported" and can never merge. A tools-only pull request touches no data/ at
+# all, so with the old filter this workflow would never have reported on one, and requiring it
+# would have made every such PR permanently unmergeable -- the mirror image of what requiring
+# ci.yml would have done to the data-only bot PRs (measured 2026-08-29 on #169 and #152: both
+# data/** only, both with zero check runs). The workflow now always triggers on a pull request,
+# and the `changes` job decides whether the expensive job actually runs. `push` keeps its filter:
+# nothing requires a status check there.
+
 on:
   push:
     branches: [main]
     paths:
       - 'data/**'
       - '.github/workflows/data-ci.yml'
+  # No `paths:` here on purpose -- see the gate note below.
   pull_request:
-    paths:
-      - 'data/**'
-      - '.github/workflows/data-ci.yml'
   workflow_dispatch:
 
 permissions:
@@ -69,9 +84,41 @@ concurrency:
   group: data-ci-${{ github.ref }}
   cancel-in-progress: true
 
+
 jobs:
+  changes:
+    name: Detect relevant changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      relevant: ${{ steps.check.outputs.relevant }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ "$EVENT" != "pull_request" ]; then
+            echo "relevant=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          relevant=false
+          while IFS= read -r f; do
+            case "$f" in
+              data/*|.github/workflows/data-ci.yml)
+                relevant=true
+                break ;;
+            esac
+          done <<< "$(gh api "repos/$REPO/pulls/$PR/files" --paginate --jq '.[].filename')"
+          echo "relevant=$relevant" >> "$GITHUB_OUTPUT"
+          echo "::notice::Relevant to Data CI: $relevant"
+
   data-integrity:
     name: Data integrity tests
+    needs: changes
+    if: needs.changes.outputs.relevant == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     defaults:
@@ -122,3 +169,26 @@ jobs:
             git --no-pager diff -- data
             exit 1
           fi
+
+  # THE REQUIRED CHECK -- see the gate note in this file's header. `if: always()` so it reports
+  # whatever happened above: without it a failed dependency would SKIP this job, and a skipped
+  # required check reads as satisfied, which is the exact opposite of a gate. skipped and success
+  # both pass (a job correctly not run is not a failure); failure and cancelled do not.
+  gate:
+    name: Data CI gate
+    needs: [changes, data-integrity]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Merge job results
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          echo "$RESULTS" | jq -r 'to_entries[] | "  \(.key): \(.value.result)"'
+          bad="$(echo "$RESULTS" | jq -r '[to_entries[] | select(.value.result == "failure" or .value.result == "cancelled") | .key] | join(", ")')"
+          if [ -n "$bad" ]; then
+            echo "::error::Data CI gate: these jobs did not pass -- $bad"
+            exit 1
+          fi
+          echo "Data CI gate: green (skipped jobs are not failures)."
