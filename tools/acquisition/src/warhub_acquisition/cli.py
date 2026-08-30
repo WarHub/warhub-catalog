@@ -1,4 +1,4 @@
-"""warhub-data CLI: resolve, report, migrate, acquire, classify."""
+"""warhub-data CLI: resolve, report, acquire, categorize, classify."""
 import argparse
 import datetime
 import os
@@ -6,7 +6,6 @@ import sys
 from pathlib import Path
 
 from warhub_acquisition.classify.llm import DEFAULT_BUDGET, DEFAULT_MODEL
-from warhub_acquisition.migrate.verify import verify_migration
 from warhub_acquisition.report import build_report, check_ean_guard, render_ean_guard_section
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
 from warhub_acquisition.yamlio import read_yaml, write_yaml
@@ -278,12 +277,6 @@ def main(argv: list[str] | None = None) -> int:
         help="Compute and report, write nothing -- measure a rule table before committing it.",
     )
 
-    migrate = subparsers.add_parser("migrate")
-    migrate.add_argument("--data", type=Path, default=Path("data"))
-    migrate.add_argument("--legacy-dir", type=Path, default=Path("data/products/manufacturers"))
-    migrate.add_argument("--seed-dir", type=Path, default=Path("data/products/seed"))
-    migrate.add_argument("--report", type=Path, default=None)
-
     acquire = subparsers.add_parser("acquire")
     acquire.add_argument("--data", type=Path, default=Path("data"))
     acquire.add_argument("--source", action="append", default=None)
@@ -362,25 +355,6 @@ def main(argv: list[str] | None = None) -> int:
         # (exit 2). A disagreement between two stores about what a product is says something true
         # about the stores; failing the nightly over it would stop the catalog for a fact.
         return 2 if outcome.conflicts else 0
-
-    if args.command == "migrate":
-        from warhub_acquisition.migrate.runner import run_migration
-
-        summary = run_migration(paths, args.legacy_dir, args.seed_dir)
-        print(
-            f"migrated {summary.legacy_count} legacy + {summary.seed_count} seed observations; "
-            f"{len(summary.key_collisions)} key collisions; {len(summary.invalid_records)} invalid records"
-        )
-        violations, report = verify_migration(paths, summary)
-        report_path = args.report or (args.data / "review" / "migration-report.md")
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        report_path.write_text(report, encoding="utf-8", newline="\n")
-        if violations:
-            for violation in violations:
-                print(f"VIOLATION: {violation}")
-            return 3
-        print("verification: OK")
-        return 0
 
     if args.command == "acquire":
         return _run_acquire(args, paths)
