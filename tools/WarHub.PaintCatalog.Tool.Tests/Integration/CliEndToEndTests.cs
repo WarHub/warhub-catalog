@@ -132,4 +132,48 @@ public class CliEndToEndTests
                 Directory.Delete(root, recursive: true);
         }
     }
+
+    /// <summary>
+    /// The ledger is per-run operational state and warhub-catalog commits it OUTSIDE data/paints/,
+    /// because catalog-publish.yml triggers on that tree and the ledger churns ~8.4k lines a week
+    /// with no catalog change behind it. --liveness is what makes that possible, so it is asserted
+    /// here on both halves: the ledger appears where the flag points, and NOT at the default
+    /// sidecar path -- a silently-ignored flag would still leave a passing "it exists" check on
+    /// the default location.
+    /// </summary>
+    [Fact]
+    public async Task RunAsync_LivenessOption_WritesLedgerOutsideTheOutputDirectory()
+    {
+        string root = Path.Combine(Path.GetTempPath(), $"paint-cli-liveness-{Guid.NewGuid():N}");
+        string srcDir = Path.Combine(root, "src");
+        string outDir = Path.Combine(root, "out");
+        string ledgerFile = Path.Combine(root, "state", "paint-liveness.yaml");
+        Directory.CreateDirectory(srcDir);
+
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(srcDir, "Vallejo.md"), VallejoSample);
+
+            int exit = await PaintCatalogApp.RunAsync(
+                ["--source", srcDir, "--output", outDir, "--liveness", ledgerFile]);
+
+            Assert.Equal(0, exit);
+            Assert.True(File.Exists(Path.Combine(outDir, "brands", "vallejo.yaml")));
+
+            // Written where the flag points, directory and all -- the committed layout relies on
+            // that for a fresh checkout, and for any run whose state/ dir does not exist yet.
+            Assert.True(File.Exists(ledgerFile), $"Expected liveness ledger at {ledgerFile}");
+            Assert.Contains("vallejo/", await File.ReadAllTextAsync(ledgerFile));
+
+            // ...and NOT at the default, which in this repository is the path under the trigger.
+            Assert.False(
+                File.Exists(Path.Combine(outDir, "_liveness.yaml")),
+                "--liveness was ignored: the ledger was still written beside --output.");
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+                Directory.Delete(root, recursive: true);
+        }
+    }
 }

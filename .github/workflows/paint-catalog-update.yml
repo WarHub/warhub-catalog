@@ -120,6 +120,13 @@ jobs:
             # Swatch files are generated ON DEMAND by gen_paint_swatches.py (network + human
             # contact-sheet review) and consumed committed-only here, like the harvest files.
             --swatches data/paints/swatches
+            # OUTSIDE data/paints/** ON PURPOSE. The ledger is per-run operational state, not
+            # catalog data, and catalog-publish.yml triggers on data/paints/** -- so while it
+            # lived there, a week in which NOTHING about any paint changed still rewrote ~8.4k
+            # of its lines, merged, and cut an immutable Release plus a Pages deploy for a
+            # byte-identical catalog. The product side already stated the rule this restores:
+            # "evidence-only churn never mints a release" (README, pipeline step 4).
+            --liveness data/state/paint-liveness.yaml
             --sample "$SAMPLE"
             --verbose
           )
@@ -182,10 +189,10 @@ jobs:
 
       - name: Summary
         run: |
-          git add -A data/paints
+          git add -A data/paints data/state/paint-liveness.yaml
           echo "### 🎨 Paint Catalog Update" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
-          git diff --cached --stat -- data/paints | tail -30 >> "$GITHUB_STEP_SUMMARY" || true
+          git diff --cached --stat -- data/paints data/state/paint-liveness.yaml | tail -30 >> "$GITHUB_STEP_SUMMARY" || true
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           git reset -q HEAD
           # The guard findings go to the run summary as well as the PR body. In direct-push mode
@@ -234,7 +241,9 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.bot.outputs.token }}
-          add-paths: data/paints
+          add-paths: |
+            data/paints
+            data/state/paint-liveness.yaml
           branch: catalog/paint-update
           base: main
           title: 'Update paint catalog data'
@@ -254,7 +263,7 @@ jobs:
           email="${COMMITTER##*<}"; email="${email%>}"
           git config user.name "$name"
           git config user.email "$email"
-          git add -A data/paints
+          git add -A data/paints data/state/paint-liveness.yaml
           git diff --cached --quiet || git commit -m "Update paint catalog data"
           # Pushed over an explicit token URL rather than the credentials actions/checkout
           # persisted, which are GITHUB_TOKEN: a push made with GITHUB_TOKEN cannot start a

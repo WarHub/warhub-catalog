@@ -84,6 +84,12 @@ public static class PaintMigrator
             return 0;
 
         var deserializer = CatalogSerializer.CreateDeserializer();
+        // Seeded beside the brand files it is derived from, unchanged: this is the historical
+        // one-time migration and it must keep describing the layout it actually ran against
+        // (completed 2026-07-07; PaintMigratorTests pins the shape). The LIVE ledger has since
+        // moved out of data/paints/ -- PaintCatalogApp's --liveness, pointed at
+        // data/state/paint-liveness.yaml by paint-catalog-update.yml -- so re-running this against
+        // data/paints would seed a second, ignored ledger there. .gitignore keeps it uncommittable.
         string ledgerPath = Path.Combine(dataDir, "_liveness.yaml");
         LivenessLedger ledger = await LedgerStore.LoadAsync(ledgerPath, ct);
 
