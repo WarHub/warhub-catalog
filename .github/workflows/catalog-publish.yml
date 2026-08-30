@@ -59,8 +59,8 @@ jobs:
       # CONCURRENTLY with this job, so a hand-authored push straight to main could cut a Release and
       # deploy Pages before its test run had finished -- and an immutable release cannot be recalled
       # the way a red check on a PR can be fixed. The bot paths are already covered twice over
-      # (in-job in catalog-acquire.yml/classify.yml, and on the PR now that those PRs are opened with
-      # an app token and therefore actually run checks); this covers the one path that has neither.
+      # (in-job in catalog-acquire.yml, and on the PR now that those PRs are opened with an app
+      # token and therefore actually run checks); this covers the one path that has neither.
       - name: Data-integrity tests
         working-directory: tools/acquisition
         run: |

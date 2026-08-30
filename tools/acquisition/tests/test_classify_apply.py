@@ -73,8 +73,8 @@ def test_apply_never_touches_the_hand_authored_set_refs_file(tmp_path: Path) -> 
     write_yaml is plain PyYAML -- so any hand-authored key it does not know about is deleted, with
     its comments, and the command still exits 0. That is exactly what happened to `setRefs` on
     2026-08-11: one `classify --apply` dropped 22 lines, 19 of them the evidence for a maintainer's
-    typo correction, and nothing went red (classify.yml commits `data/**`; ci.yml runs pytest on
-    `tools/**` only). The fix was to move the key to its own file, so this test asserts the
+    typo correction, and nothing went red (the classification run committed all of `data/`; ci.yml
+    ran pytest on `tools/**` only). The fix was to move the key to its own file, so this test asserts the
     property that fix bought: set-refs.yaml is BYTE-IDENTICAL across a run. If it fails, apply.py
     has learned to write a file it must never write.
     """
