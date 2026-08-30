@@ -6,7 +6,18 @@ name: Publish Catalog
 on:
   push:
     branches: [main]
-    paths: ['data/catalog/**', 'data/paints/**']
+    # NEGATIONS COME LAST. GitHub evaluates a `paths:` list in order and the LAST pattern that
+    # matches decides, so `!data/paints/README.md` only excludes anything while it sits AFTER
+    # the `data/paints/**` that admits it; put it first and the later wildcard re-admits the file
+    # and the exclusion is silently inert.
+    #
+    # data/paints/README.md is prose for maintainers -- it reaches no consumer, no schema and no
+    # dist/ document. Before this line, a typo fix in it cut an immutable Release and deployed
+    # Pages for a catalog byte-identical to the one already published.
+    paths:
+      - 'data/catalog/**'
+      - 'data/paints/**'
+      - '!data/paints/README.md'
   workflow_dispatch:
 
 permissions:
