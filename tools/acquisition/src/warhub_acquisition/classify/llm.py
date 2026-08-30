@@ -11,6 +11,31 @@ unchanged: `compute_input_hash` hashes the ENTIRE queue item -- including `candi
 taxonomy change that adds/removes a candidate slug naturally invalidates the cache entry (new
 decision space = new hash = re-queried), with no separate versioning scheme required.
 
+THE KEY IS THE INPUT, NOT THE ANSWER, AND NOT THE MODEL. `model` is recorded on every entry but
+is NOT hashed, so `--model` alone never re-queries anything -- a re-run under a different model
+reads the old model's verdicts straight out of the cache. Deliberate (a wave is priced on its
+inputs, not on which model happened to answer), and the thing to know before assuming a model
+change re-decides the queue: to actually re-ask, the queue item has to change.
+
+IT GROWS WITHOUT BOUND, BY DESIGN. `append_cache_lines` only ever appends, and a re-keyed item
+leaves its old line behind forever -- `load_cache` dicts by `inputHash`, so an orphaned hash is
+simply never looked up again. Measured 2026-08-31: 6,223 lines / 1.7 MB, 6,223 distinct hashes
+over 6,039 distinct entities -- i.e. 184 entities whose queue item changed at some point and now
+carry a dead line each. The live queue is 7,055 items, so a full fresh wave appends about that
+many more.
+
+PRUNING, IF IT IS EVER WANTED: wholesale truncation is SAFE FOR THE CATALOG and expensive in the
+only currency this file saves. Nothing downstream reads it except this module; every ACCEPTED
+decision (confidence >= ACCEPT_THRESHOLD) is also materialized into
+`data/catalog/classifications/products.yaml`, which `_write_classifications` MERGES into and
+never removes from -- and the cache-hit branch below re-materializes accepted decisions on every
+run, so a truncated cache cannot un-publish anything. What is lost is the negative record, which
+lives nowhere else: measured 2026-08-31, 2,373 `unknown` rows and 74 classified-but-below-
+threshold rows -- 2,447 items that would be re-asked, at full price, to be told the same thing.
+So: safe, but it buys disk back with budget. Selective pruning (dropping only hashes absent from
+the current queue) is the cheaper form and needs no new machinery -- the orphans are exactly the
+lines whose `inputHash` no `compute_input_hash` over today's queue reproduces.
+
 Batching, hashing, cache read/append, response parsing, and the SDK call wrapper are shared with
 `classify/joins.py` (Task 6) via `classify/_llm_common.py` -- see that module's docstring. This
 module owns only the classification-specific decision space: the candidate-validated prompt, the
