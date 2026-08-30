@@ -39,7 +39,8 @@ scope:
   # URLs was 100% genuine wargaming-miniatures products (0% junk); across ALL types only 30 of the
   # 5,455 total matches (0.55%) are non-product category/brand pages (harmless -- they just fail
   # extraction and count extraction_failed, matching existing 7/3,171 behavior under the old
-  # filter). See task-2-report.md for the full term-derivation method and measurement script.
+  # filter). See docs/superpowers/reports/task-2-report.md for the full term-derivation method
+  # and measurement script.
   urlInclude: '(?i)(warhammer|citadel|forge-world|age-of-sigmar|horus-heresy|the-old-world|warlord-games|bolt-action|black-powder|hail-caesar|cruel-seas|victory-at-sea|blood-red-skies|konflikt-47|warlords-of-erehwon|gates-of-antares|spqr|judge-dredd|achtung-panzer|black-seas|pike-and-shotte|epic-black-powder|epic-hail-caesar|epic-pike-and-shotte|stargrave|mantic-games|kings-of-war|deadzone|dreadball|walking-dead-all-out-war|halo-flashpoint|dungeon-saga|infinity|aristeia|warcrow|wyrd|malifaux|the-other-side|steamforged|warmachine|guild-ball|godtear|epic-encounters|atomic-mass|marvel-crisis-protocol|star-wars-legion|star-wars-armada|star-wars-shatterpoint|star-wars-x-wing|cmon|asoiaf|para-bellum|last-argument-of-kings)'
   currency: usd
 politeness:
