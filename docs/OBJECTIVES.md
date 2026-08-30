@@ -6,12 +6,23 @@ authority** — if this page and the code disagree, the code is right and this p
 **1. Archive every release, ever.** "Discontinuations, limited runs, site drops, and manufacturer
 closures must never remove data." We backfix or add; we drop only the genuinely bad or invalid, and
 "it looked redundant" has never qualified. Stale beats deleted.
-— `docs/superpowers/specs/2026-07-07-catalog-storage-model-design.md`
+— stated in `docs/superpowers/specs/2026-07-07-catalog-storage-model-design.md` and carried
+forward by `docs/superpowers/specs/2026-07-12-data-acquisition-rewrite-design.md`, which replaced
+that spec's acquisition half five days later and kept its principles; enforced by
+`EvidenceStore.drop`, the store's ONLY deletion path and narrowed to a descriptor's declared
+`excludeKeys` — anything else that stops being observed decays through `mark_missed` /
+`missStreak` instead; and on the paint side by `CatalogReconciler`, which moves a record's
+`status` and never drops it
 
 **2. A file changes only when a fact changes.** A record not seen this run is kept, not dropped.
 Identical input gives byte-identical output. A contract floor is never lowered to make a job green:
 a drop is a claim about the world, and it gets evidence or the run fails.
-— same spec
+— same two specs — "the resolver is deterministic (same evidence → byte-identical catalog)";
+enforced by `yamlio.dump_yaml`, the one writer every YAML path in the Python pipeline goes
+through (stable key order, forced quoting, no reflow); by the wipe guard in `resolve_catalog`,
+which refuses to publish when no product-source evidence loaded but catalog files exist; and by
+`_check_contract`, where a fresh count below the descriptor's `minCount` raises rather than
+writes
 
 **3. Anything published stays addressable.** A decade-old barcode still resolves, and its record
 says what replaced it. Re-home a barcode before retracting whatever held it. A published id is a
