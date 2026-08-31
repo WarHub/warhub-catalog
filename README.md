@@ -97,7 +97,6 @@ data/
   paints/                        # source of truth: brands/*.yaml, equivalences.yaml, overrides.yaml
 .github/workflows/
   catalog-acquire.yml            # nightly + weekly deep-sweep: harvest live sources -> evidence -> resolve -> categorize -> sticky PR
-  classify.yml                   # manual (workflow_dispatch only): LLM classify / join-adjudication -> sticky PR
   paint-catalog-update.yml       # weekly: regenerate paint data + equivalences (PR)
   catalog-publish.yml            # on catalog/paint data change: bundle -> Release + Pages
 ```
@@ -160,20 +159,34 @@ data/
    `categorize` must run after it** -- `resolve` rewrites every product file, so a run that skips
    it republishes decided products as guesses.
 3. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
-   duplicate-entity adjudication go through **`classify.yml`**, a **`workflow_dispatch`-only**
-   workflow (never scheduled — LLM spend stays human-triggered) with a `mode` input:
-   `classify` builds the review queue, sends it to an Anthropic model for `gameSystem`/`faction`
-   decisions, applies accepted decisions to `data/catalog/overrides.yaml`, then re-runs
-   `resolve`/`report`; `propose-joins` finds suspected duplicate-entity pairs (shared EAN /
-   normalized name / legacy-code match) and sends them to the model for a same-product verdict,
+   duplicate-entity adjudication go through **`warhub-data classify`**, driven **locally, by
+   hand**. There is no workflow: LLM spend stays human-triggered, and a classification wave is a
+   campaign a person runs and reviews, not something a schedule starts.
+   `scripts/classify_local.py` is the driver. It swaps the one SDK surface the committed pipeline
+   calls (`client.messages.create`) for the locally-installed, account-billed `claude` CLI — same
+   prompts, same batching, same cache, same thresholds, same provenance, and no
+   `ANTHROPIC_API_KEY` anywhere. A full classify wave, from `tools/acquisition`:
+
+   ```bash
+   uv run warhub-data classify --data ../../data --emit-queue
+   uv run --no-sync python scripts/classify_local.py \
+       --data ../../data --run-date "$(date -u +%F)" --mode classify --budget 500
+   uv run warhub-data classify --data ../../data --apply
+   uv run warhub-data resolve   --data ../../data
+   uv run warhub-data categorize --data ../../data
+   ```
+
+   `--emit-queue` writes `data/review/classification-queue.yaml`; the driver sends it in batches
+   and writes accepted decisions to `data/catalog/classifications/products.yaml`; `--apply` merges
+   those into `data/catalog/overrides.yaml`. **None of the classify verbs re-run `resolve`
+   themselves** — a decision is invisible on the published catalog until `resolve` runs, and
+   `categorize` must follow `resolve` for the reason step 2 gives.
+   `--mode propose-joins` is the other wave: it finds suspected duplicate-entity pairs (shared
+   EAN / normalized name / legacy-code match) and asks the model for a same-product verdict,
    writing `data/review/join-proposals.yaml` for human/controller review only — it never edits
-   `data/catalog/matches.yaml` itself; promoting a proposed join stays a manual step. Each mode
-   opens or updates its OWN mode-suffixed sticky PR branch — `classify` uses
-   `catalog/classification`, `propose-joins` uses `catalog/classification-joins` — kept separate
-   (from each other and from `catalog/acquisition`) so a propose-joins dispatch's
-   force-reset-from-`main` PR step can never clobber an unmerged classify-mode PR, or vice versa.
-   **Requires the `ANTHROPIC_API_KEY` repository secret** — the workflow fails fast with a clear
-   error if it isn't configured, before spending any budget.
+   `data/catalog/matches.yaml`, and promoting a proposed join stays a manual step.
+   The SDK path is still there (`warhub-data classify --llm` / `--propose-joins`, which want
+   `ANTHROPIC_API_KEY`); nothing in this repository has ever run a classification wave that way.
    `warhub-data classify --propose-supersessions` is the lineage counterpart and needs **no** LLM
    and no key: the manufacturer's own re-coding register asserts that two product codes are the
    same product, so nothing needs adjudicating. It classifies each asserted edge by whether it is
@@ -188,11 +201,13 @@ data/
    reaches no consumer, and the paint liveness ledger at `data/state/paint-liveness.yaml`,
    because per-run operational state would otherwise cut a Release every week on its own.
 
-Both `catalog-acquire.yml` and `classify.yml` use **sticky PRs** (one persistent branch each,
-updated in place rather than opened fresh every run): cursor/queue progress from a given run only
-actually lands in `data/` — and so only becomes visible to the *next* run — once that sticky PR is
-merged. An unmerged sticky PR means the next scheduled/dispatched run still starts from the
-previously-merged state, not from what's sitting in the open PR.
+`catalog-acquire.yml` uses a **sticky PR** (one persistent branch, updated in place rather than
+opened fresh every run): cursor progress from a given run only actually lands in `data/` — and so
+only becomes visible to the *next* run — once that sticky PR is merged. An unmerged sticky PR
+means the next scheduled run still starts from the previously-merged state, not from what's
+sitting in the open PR. The same is true of a local classification wave for a different reason:
+its output is an ordinary working-tree change, and the next `--emit-queue` reads the tree it is
+run against.
 
 ## Build locally
 

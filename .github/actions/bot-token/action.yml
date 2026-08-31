@@ -12,10 +12,10 @@ description: >-
 # and pull requests opened with it trigger `push`/`pull_request` workflows normally and nobody has
 # to click "approve this run".
 #
-# WHY IT IS A LOCAL COMPOSITE ACTION. Three workflows open sticky PRs (catalog-acquire.yml,
-# classify.yml, paint-catalog-update.yml) and a fourth pushes directly. Inlining the mint + the
-# fallback + the identity lookup four times would put four copies of this reasoning in the tree,
-# and the first divergence between them would be silent.
+# WHY IT IS A LOCAL COMPOSITE ACTION. Two workflows open sticky PRs (catalog-acquire.yml,
+# paint-catalog-update.yml) and paint-catalog-update's direct-push path pushes with it as well.
+# Inlining the mint + the fallback + the identity lookup at each site would put three copies of
+# this reasoning in the tree, and the first divergence between them would be silent.
 #
 # WHERE TO CALL IT: immediately before the step that writes to the repository, never at the top of
 # the job. An installation token expires 60 minutes after it is minted, and these jobs run far

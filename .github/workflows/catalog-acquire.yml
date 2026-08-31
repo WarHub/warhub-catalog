@@ -71,8 +71,9 @@ name: Nightly Acquisition
 # every group is always listed in `strategy.matrix.include`, and weekly-only groups instead get
 # `run_sources` forced empty (same "ran=false" skip path already used for an empty dispatch
 # override) whenever the derived MODE isn't "weekly". LLM spend (classification) stays entirely
-# out of this workflow -- see classify.yml, which is workflow_dispatch-only and never runs on a
-# schedule.
+# out of this workflow -- and out of every workflow. Classification waves are run by hand through
+# `tools/acquisition/scripts/classify_local.py` (see README, pipeline step 3), so no schedule can
+# start one.
 
 on:
   schedule:

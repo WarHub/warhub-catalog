@@ -4,9 +4,9 @@
 # rewrites overrides.yaml WHOLESALE from a two-key dict it builds by hand
 # (classify/apply.py::apply_classifications), and write_yaml is plain PyYAML, which cannot
 # round-trip a comment -- so one `warhub-data classify --apply` deleted this block (22 lines, 19
-# of them the evidence below) and exited 0. Nothing caught it: classify.yml commits with
-# `add-paths: data`, ci.yml runs pytest on `tools/**` only, and the guard test skips when the key
-# is absent, so it went vacuous rather than red. A machine-owned file and a hand-authored key
+# of them the evidence below) and exited 0. Nothing caught it: the classification run committed
+# all of `data/`, ci.yml ran pytest on `tools/**` only, and the guard test skips when the key is
+# absent, so it went vacuous rather than red. A machine-owned file and a hand-authored key
 # cannot share a path. Re-adding `setRefs:` to overrides.yaml is now a loud ValidationError
 # (Overrides is extra="forbid") rather than a silent deletion.
 

@@ -6,10 +6,12 @@ The committed pipeline (classify/llm.py, classify/joins.py) talks to one SDK sur
 locally-installed `claude` CLI in print mode instead of calling the Anthropic API -- same
 prompts, same batching, same cache, same thresholds, same provenance, no ANTHROPIC_API_KEY.
 
-Intended for controller-run one-off waves on a developer machine (the account-billed `claude`
-CLI must be installed and authenticated). The scheduled classify.yml workflow keeps using the
-SDK path with the repo secret; this script exists because local one-off campaigns are the
-project's primary coverage instrument.
+THIS IS THE MECHANISM OF RECORD, not a convenience wrapper. Every classification wave this
+catalog has ever run went through here, on a developer machine, with the account-billed `claude`
+CLI installed and authenticated. A `classify.yml` workflow existed alongside it and was never
+dispatched once (0 runs, GitHub API, 2026-08-31) -- the ANTHROPIC_API_KEY it failed fast on was
+never configured -- so it was deleted rather than left standing as a second, untried path.
+`warhub-data classify --llm` / `--propose-joins` still take the SDK route if a key is ever set.
 
 Usage (from tools/acquisition):
     uv run --no-sync python scripts/classify_local.py --data ../../data \
