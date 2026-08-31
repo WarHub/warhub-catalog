@@ -592,9 +592,9 @@ jobs:
           cat ../../_resolve.txt
 
       # ALWAYS AFTER `resolve`, ALWAYS BEFORE `report`. `resolve` rewrites every product file from
-      # evidence, which resets `category` to the fallback for anything no source stated; this stage
-      # is what puts the decided values back, from the committed rule tables and the paint catalog.
-      # A run that resolves and does not categorize publishes 8,073 products as guessed miniatures
+      # evidence and leaves `category` ABSENT for anything no source stated; this stage is what
+      # puts the decided values back, from the committed rule tables and the paint catalog. A run
+      # that resolves and does not categorize publishes 11,759 products with no category at all
       # that the tables can place -- so the two are one pipeline, not two optional steps. `report`
       # follows so the coverage table in the PR body describes the tree that is about to be
       # committed rather than the intermediate one.

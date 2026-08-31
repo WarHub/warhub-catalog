@@ -36,9 +36,14 @@ from .lexicon import load_lexicon
 from .paints import load_paint_barcodes
 from .rules import SourceRules, load_category_rules
 
-#: The two bases this stage is allowed to replace. `stated` is a source's claim about one product
-#: and outranks any table; anything an override set is a maintainer's decision. Neither is touched.
-REPLACEABLE = frozenset({"guessed", "default"})
+#: The one basis this stage is allowed to replace: the record has no category at all. `stated` is
+#: a source's claim about one product and outranks any table; anything an override set is a
+#: maintainer's decision. Neither is touched.
+#:
+#: It used to be the PAIR `{guessed, default}` -- the resolver's own `miniatures` fallback and an
+#: upstream pipeline's blanket fill. Both were values that meant "nobody said", and collapsing them
+#: into an absent category is what let this set shrink to one member.
+REPLACEABLE = frozenset({"unknown"})
 
 #: The gameSystem bases this stage may recompute. Both are DERIVED -- they say what happened
 #: when nothing supplied a value -- so re-deriving them against a freshly decided category is
@@ -209,8 +214,8 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 touched = True
             # THE GAME-SYSTEM BASIS IS SETTLED HERE, NOT IN `resolve`, because it is a question
             # about the CATEGORY and `resolve` does not yet know the answer to that one. A paint
-            # pot leaves the resolver as `miniatures`/`guessed` -- the fallback fires precisely
-            # because nothing had decided -- and only this stage turns it into `paint`. Deciding
+            # pot leaves the resolver with NO category at all -- nothing had decided -- and only
+            # this stage turns it into `paint`. Deciding
             # `not-applicable` upstream therefore asked the question one pass too early and got
             # `unknown` for 4,189 products that are plainly hobby supplies.
             #

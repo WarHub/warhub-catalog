@@ -10,7 +10,7 @@ from .lexicon import Lexicon
 from .rules import CategoryClause, SourceRules
 
 #: What decided a category, in the order this module tries them. Published on the record as
-#: `categoryBasis` alongside the resolver's own `stated`/`default`/`guessed`.
+#: `categoryBasis` alongside the resolver's own `stated` and `unknown`.
 MAPPED = "mapped"
 #: The manufacturer's own product code, through a committed manufacturer table. Ranked BELOW a
 #: store's explicit filing of this product and ABOVE the name lexicon: a numbering scheme is a

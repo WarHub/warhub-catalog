@@ -40,7 +40,12 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(2)] public required string Name { get; init; }
     [JsonPropertyOrder(3)] public string? GameSystem { get; init; }
     [JsonPropertyOrder(4)] public string? Faction { get; init; }
-    [JsonPropertyOrder(5)] public required string Category { get; init; }
+    // Nullable, and the publisher no longer substitutes anything for it. A product whose category
+    // nothing ever stated publishes `category: null` -- the same treatment `gameSystem` gets, for
+    // the same reason: a filled-in `miniatures` is indistinguishable from a stated one, so the
+    // consumer cannot tell the catalog's knowledge from its default. See
+    // models/catalog.py::categoryBasis.
+    [JsonPropertyOrder(5)] public string? Category { get; init; }
     [JsonPropertyOrder(6)] public required string Status { get; init; }
     [JsonPropertyOrder(7)] public required string Availability { get; init; }
     [JsonPropertyOrder(8)] public int Quantity { get; init; }

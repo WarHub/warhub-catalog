@@ -86,30 +86,27 @@ def test_malformed_paint_brand_file_raises_value_error_naming_the_file(tmp_path:
 
 
 def test_category_basis_leads_with_the_share_that_rests_on_nothing(tmp_path: Path) -> None:
-    """The section exists for ONE number: how much of `category` is not evidence. `category` is the
-    only published product field with a fallback behind it, so a regression there is silent --
-    every product keeps a value, it is just not about that product. Measured on
-    catalog/acquisition (fc3ff62): 28,793 of 30,747 (93.6%) are `default` or `guessed`.
-
-    `default` and `guessed` are counted together against `stated` (both mean undecided) and printed
-    apart from each other (they are undecided for different reasons)."""
+    """The section exists for ONE number: how much of `category` is not evidence. There is now
+    exactly one basis that means "nobody said" -- `unknown`, which comes with no category at all --
+    where there used to be a pair (`guessed`, `default`) that both carried a plausible `miniatures`
+    the catalog was publishing as though it were evidence."""
     paths = DataPaths(tmp_path)
-    def product(pid: str, category: str, basis: str) -> dict:
+    def product(pid: str, category: str | None, basis: str) -> dict:
         return {"id": pid, "name": pid, "manufacturer": "vallejo", "category": category,
                 "categoryBasis": basis, "status": "current", "firstSeen": "2026-07-01"}
     write_yaml(
         paths.catalog_products / "vallejo.yaml",
         {"manufacturer": "vallejo", "products": [
             product("vallejo/1", "paint", "stated"),
-            product("vallejo/2", "miniatures", "default"),
-            product("vallejo/3", "miniatures", "guessed"),
-            product("vallejo/4", "miniatures", "guessed"),
+            product("vallejo/2", None, "unknown"),
+            product("vallejo/3", None, "unknown"),
+            product("vallejo/4", "miniatures", "mapped"),
         ]},
     )
     report = build_report(paths)
     assert "## Product categories" in report
-    assert "**3 of 4 (75.0%) rest on no evidence**" in report
-    assert "| miniatures | guessed | 2 |" in report
+    assert "**2 of 4 (50.0%) rest on no evidence**" in report
+    assert "| (none) | unknown | 2 |" in report
     assert "| paint | stated | 1 |" in report
 
 
@@ -122,7 +119,7 @@ def test_a_basis_the_categorize_stage_writes_counts_as_evidence(tmp_path: Path) 
     Naming the undecided pair instead means a NEW basis counts as evidence only because someone
     left it out of that set, which is a decision rather than a default."""
     paths = DataPaths(tmp_path)
-    def product(pid: str, category: str, basis: str) -> dict:
+    def product(pid: str, category: str | None, basis: str) -> dict:
         return {"id": pid, "name": pid, "manufacturer": "vallejo", "category": category,
                 "categoryBasis": basis, "status": "current", "firstSeen": "2026-07-01"}
     write_yaml(
@@ -130,8 +127,8 @@ def test_a_basis_the_categorize_stage_writes_counts_as_evidence(tmp_path: Path) 
         {"manufacturer": "vallejo", "products": [
             product("vallejo/1", "paint", "mapped"),
             product("vallejo/2", "paint", "paint-barcode"),
-            product("vallejo/3", "miniatures", "guessed"),
-            product("vallejo/4", "miniatures", "default"),
+            product("vallejo/3", None, "unknown"),
+            product("vallejo/4", None, "unknown"),
         ]},
     )
     report = build_report(paths)

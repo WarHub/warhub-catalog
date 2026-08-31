@@ -141,10 +141,10 @@ data/
    stay out of git) and future-dated rows are dropped before it is written, since GW's Trade Terms
    make unreleased product information confidential.
 2. **`categorize`** runs immediately after every `resolve`, in the same job, and decides what a
-   product IS. `resolve` sets `category` from a source's own claim where one exists and falls back
-   to `miniatures` otherwise, recording which happened in `categoryBasis`; `categorize` then
-   replaces the fallbacks -- and only the fallbacks -- from three kinds of evidence the resolver
-   does not read, in this order. First, each store's own taxonomy, stored verbatim at harvest time
+   product IS. `resolve` sets `category` from a source's own claim where one exists and leaves it
+   ABSENT otherwise (`categoryBasis: unknown`) -- it guesses nothing; `categorize` then fills the
+   absent ones -- and only those -- from three kinds of evidence the resolver does not read, in
+   this order. First, each store's own taxonomy, stored verbatim at harvest time
    and mapped by a committed table per source under
    `data/catalog/taxonomy/category-rules/<source>.yaml`. Second, the paint catalog's barcodes,
    read live from `data/paints/` rather than through an index, so a paint that gained a barcode

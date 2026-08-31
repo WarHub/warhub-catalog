@@ -180,8 +180,11 @@ class SourceDescriptor(BaseModel):
     # bury that fact in a branch; declared here it sits next to the source it describes, and the
     # next curated import that ships a default says so in its own descriptor.
     #
-    # It marks provenance. It does NOT suppress the value -- doing that is a data change, and it
-    # belongs in its own PR with its own before/after measurement.
+    # IT SUPPRESSES THE VALUE. A hint listed here never enters the attribute fold at all
+    # (resolve/attributes.py::_claimed), so a lower-ranked source's real assertion is no longer
+    # discarded behind a higher-ranked source's fill, and the record ends up with no category
+    # rather than with a plausible one nobody made. This used to only MARK provenance, leaving the
+    # fill in the field under `categoryBasis: default`; that basis is gone with the behaviour.
     defaultHints: dict[str, str] = Field(default_factory=dict)
     # Fields whose value this source carries as a FROZEN SNAPSHOT, not as a current claim. For
     # these fields only, this source sorts LAST in the attribute fold -- behind every other member

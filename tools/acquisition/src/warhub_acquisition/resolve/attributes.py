@@ -84,12 +84,24 @@ def resolve_attributes(
             return ordered
         return sorted(ordered, key=lambda m: name in stale.get(m.source_id, frozenset()))
 
+    # A HINT A SOURCE DECLARES AS ITS OWN FILL IS NOT A CLAIM ABOUT THIS PRODUCT, so it never
+    # enters the fold. `SourceDescriptor.defaultHints` names those values; until now it only
+    # LABELLED them after the fact, which left the fill winning the fold and a lower-ranked
+    # source's real assertion discarded behind it.
+    defaults = default_hints or {}
+
+    def _claimed(member: Observation, name: str) -> object | None:
+        value = member.hints.get(name)
+        if value is not None and defaults.get(member.source_id, {}).get(name) == value:
+            return None
+        return value
+
     fields: dict[str, object] = {}
     for name in _DIRECT_FIELDS:
         eligible = [m for m in _for(name) if name != "sku" or m.key not in foreign]
         fields[name] = _first([getattr(member, name) for member in eligible])
     for name in _HINT_FIELDS:
-        fields[name] = _first([member.hints.get(name) for member in _for(name)])
+        fields[name] = _first([_claimed(member, name) for member in _for(name)])
 
     # A source asserted it for this product. Recorded rather than inferred later, because by the
     # time anything downstream sees the record, a value folded from a hint and one written by a
@@ -156,31 +168,12 @@ def resolve_attributes(
     if fields["contentSkus"] is not None:
         fields.setdefault("contentSkusFrom", "stated")
 
-    # `category` is the only field here with a FALLBACK behind it, which makes a wrong value
-    # invisible: every product has one either way. `categoryBasis` records which of three things
-    # actually happened, so the guess can be counted instead of assumed away. It changes no
-    # category value -- see models/catalog.py::categoryBasis for the measured split.
-    #
-    #   stated  -- some source asserted this category.
-    #   default -- the winning source emits this exact value as a pipeline FILL, not a claim
-    #              (SourceDescriptor.defaultHints). `legacy-catalog` is `kind: curated`, so its
-    #              `miniatures` fill outranks every manufacturer and retailer and decides 12,082
-    #              products; 357 of those are plainly wrong on their own name.
-    #   guessed -- nothing said anything and the line below wrote `miniatures`.
+    # NOTHING IS GUESSED HERE ANY MORE. `category` used to fall back to `miniatures` whenever no
+    # source spoke, which put a value on every product and so made a wrong one invisible -- the
+    # exact defect `gameSystem` was cured of one change earlier. A category nothing asserted is
+    # now absent, and `unknown` says so. `categorize` is what fills it from a rule table.
     fields.setdefault("category", None)
-    if fields["category"] is None:
-        fields["category"] = "miniatures"
-        fields["categoryBasis"] = "guessed"
-    else:
-        stated_by = next(
-            (m for m in ordered if m.hints.get("category") == fields["category"]), None
-        )
-        filled = (
-            stated_by is not None
-            and (default_hints or {}).get(stated_by.source_id, {}).get("category")
-            == fields["category"]
-        )
-        fields["categoryBasis"] = "default" if filled else "stated"
+    fields["categoryBasis"] = "unknown" if fields["category"] is None else "stated"
 
     curated_status = _first(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]

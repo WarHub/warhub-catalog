@@ -45,7 +45,7 @@
         "name": { "type": "string" },
         "gameSystem": { "type": ["string", "null"] },
         "faction": { "type": "string" },
-        "category": { "type": "string" },
+        "category": { "type": ["string", "null"] },
         "status": { "type": "string" },
         "availability": { "type": "string" },
         "quantity": { "type": "integer", "minimum": 1 },
