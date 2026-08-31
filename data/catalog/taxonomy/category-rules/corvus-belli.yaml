@@ -24,6 +24,42 @@ reason: >-
   is currently unclassified, so no other signal in the corpus reaches them at all.
 
 clauses:
+  # --- WHAT THE THING IS, from the same code blocks -------------------------------------------
+  # Corvus Belli's numbering answers the category question in four places, and its own source
+  # publishes NO category hint at all -- `mfr-corvus-belli` emits `gameSystem` and `faction` and
+  # nothing else -- so these clauses reach products no source table can. Each is a full name-read
+  # of the block rather than a purity figure: nothing in the catalog independently states
+  # `terrain`, `hobby-auxiliary` or `game-accessory` for a Corvus Belli product.
+  - codeMatches: '^H00\d'
+    category: terrain
+    note: >-
+      12 products, all prepainted scenery -- Precinct Sigma Building Holoads / Containers /
+      Cubicle / Newsstands / Objective Room / Sentry Towers, District 5 Catwalk
+  - codeMatches: '^GGB-'
+    category: hobby-auxiliary
+    note: >-
+      9 scenic base sets -- `Dunes of Bourak (Round 25mm x8)`, `Nomad Crew Deck (Round 40mm x4)`.
+      categories.yaml: "Bases sold on their own are `hobby-auxiliary`, not `miniatures`"
+  - codeMatches: '^BAI\d'
+    category: game-accessory
+    note: 8 Command Consoles -- army-list reference dashboards, played with rather than read
+  - codeMatches: '^2?286\d{3}'
+    category: game-accessory
+    note: 3 card decks -- Classified Objectives, Operations
+
+  # THE 285xxx BLOCK IS NOT HERE, and the reason is a contradiction in the catalog rather than a
+  # gap in the code. It is entirely scenery and bases, but it splits across two categories --
+  # `2850(5[7-9]|6[0-2]|6[7-9]|8[6-7])` are Scenery Packs and `28505[1-4]` / `28506[4-6]` are
+  # bases -- and the catalog already disagrees with itself inside it: `285071-285090 <n>mm Scenery
+  # Bases, <Greek> Series` publish `terrain` while the identical `285091-285093 ... Zeta Series`
+  # publish `hobby-auxiliary`. The same split repeats in Warcrow's `WW2000x` block. That wants a
+  # human adjudication of the boundary, not a rule that picks a side quietly.
+  #
+  # `28[89]xxx` LOOKS like the book block (`Human Sphere N3`, `Third Offensive (Hardcover)`,
+  # `N4 Core Rules`) and is contaminated 6-to-4 by `288100 INFINITY AFTERMATH: Limited Edition`
+  # and `288303 Infinity: Endsong`. A name pattern would be the safer form if it is wanted.
+
+  # --- WHICH GAME ------------------------------------------------------------------------------
   # Aristeia! first -- it shares the Infinity code block and the Infinity retailer shelf.
   - codeMatches: '^(CBARI|ARI\d)'
     gameSystems: [aristeia]
