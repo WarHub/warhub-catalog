@@ -37,7 +37,7 @@
         "catalog": { "enum": ["product", "paint"] },
         "id": {
           "type": "string",
-          "description": "The record's id in its catalog: manufacturer/code for products, brand-slug/paint-slug for paints. Paint ids are stable within a release but not yet across releases (positional -N suffixes move with the data), which is why the link is published per build rather than assumed."
+          "description": "The record's id in its catalog: manufacturer/code for products, brand-slug/paint-slug for paints. A paint id is derived from the paint's own identity, so it does not move when unrelated records are added; the link is still published per build rather than left to be assumed, because whether a name collides inside its brand -- and so whether its id is bare or qualified -- is not visible from any single record."
         }
       }
     },

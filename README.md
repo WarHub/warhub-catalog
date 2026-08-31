@@ -31,8 +31,16 @@ products/by-system/<system>.json       # just one game system (e.g. star-wars-le
 paints.json                            # every paint, equivalents embedded
 paints/index.json                      # list of brand partitions
 paints/by-brand/<brand>.json           # just one brand (e.g. citadel-colour)
+barcodes.json                          # every barcode -> the record(s) carrying it
+set-contents.json                      # boxed set -> the paints inside it
 schema/*.json                          # JSON Schemas for every document kind
 ```
+
+The last two are relations rather than catalogs: they join the two id spaces on a key neither
+side owns. Scan a box, resolve the barcode through `barcodes.json` to a product id, look that id
+up in `set-contents.json`, and follow each member's `paintId` into `paints.json` for the colour.
+Read `contentSkusFrom` before treating a member list as the whole box — only one of its three
+values means the source published an exhaustive list.
 
 Take the **whole** catalog or just the **slice** you need — a Star Wars Legion app can
 fetch one game-system file; a painter can fetch only the brands they own.
@@ -44,7 +52,8 @@ Every document carries a self-describing envelope plus its payload:
 ```jsonc
 {
   "schemaVersion": "1.1",
-  "kind": "paint-catalog",             // or *-partition, product-catalog, index, manifest
+  "kind": "paint-catalog",             // or *-partition, product-catalog, index, manifest,
+                                       // barcode-index, set-contents
   "version": "2026.7.4",
   "generatedAt": "2026-07-04T05:00:00Z",
   "gitCommit": "abc1234",
@@ -79,6 +88,14 @@ Every document carries a self-describing envelope plus its payload:
   — `id` is the stable global key (`brand-slug/paint-slug`); `equivalents` reference other
   paints' ids and are stored **bidirectionally**. Colour equivalence is precomputed here, so
   clients need no colour math.
+
+- **Set contents**: `{ <productId>: { name, contentSkusFrom, members: [{ paintId, ref, quantity?, resolvedBy?, statedName? }], unresolved?: [{ ref, reason }] } }`
+  — keyed by product id, so a consumer holding a product does one lookup. `paintId` is attached
+  by the publisher because it cannot be derived from the upstream data: a paint id gains a
+  content-derived qualifying suffix when its name collides inside its brand, which is a property
+  of the whole brand file. `ref` is the manufacturer's own code, verbatim, and may differ from the
+  resolved paint's `productCode`. A code that names no paint appears under `unresolved` with the
+  reason rather than being dropped, so a partly-resolved box is never mistaken for a smaller one.
 
 The authoritative contract is the JSON Schema set under `schema/` (also validated on every build).
 

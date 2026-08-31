@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://warhub.github.io/warhub-catalog/schema/set-contents.json",
+  "title": "WarHub Boxed Set Contents",
+  "description": "What is inside each boxed set: a product that contains paints, mapped to the paint records it contains. Keyed by product id, so a consumer holding a product does one lookup -- scan a box, resolve the barcode through barcodes.json to a product id, look that id up here, and follow each member's paintId into paints.json for the colour. Only products whose source states their contents appear; a product absent from this document is not a product known to contain nothing. READ contentSkusFrom BEFORE TREATING A MEMBER LIST AS COMPLETE: only one of its three values means the source published an exhaustive list.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "version", "generatedAt", "counts", "source", "sets"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "kind": { "const": "set-contents" },
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "gitCommit": { "type": "string" },
+    "counts": {
+      "type": "object",
+      "description": "sets (boxed sets published), refs (every content code that reached this relation), members (refs resolved to a paint id), paints (distinct paints reachable through it), unresolved (refs carrying a reason instead of a paint), unresolvedAtPublish (the subset of those refused by this build rather than upstream -- normally 0; a non-zero value means the paint catalog and the relation were built from different data). members + unresolved == refs always.",
+      "additionalProperties": { "type": "integer" }
+    },
+    "source": { "$ref": "#/$defs/source" },
+    "sets": {
+      "type": "object",
+      "description": "Keyed by product id, exactly as published in products.json -- manufacturer casing preserved, not camelCased and not normalized.",
+      "propertyNames": { "pattern": "^[a-z0-9-]+/[A-Za-z0-9-]+$" },
+      "additionalProperties": { "$ref": "#/$defs/set" }
+    }
+  },
+  "$defs": {
+    "set": {
+      "type": "object",
+      "required": ["name", "contentSkusFrom", "members"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A review label copied off the product record, so this document is readable on its own. The product record is authoritative; never join on this."
+        },
+        "contentSkusFrom": {
+          "description": "HOW THE SOURCE STATED ITS CONTENTS, and therefore how much the member list is worth. These are three different claims and are kept apart deliberately -- flattening them would misstate the weaker ones. 'stated': the source published a machine-readable contents array, which is exhaustive by construction -- this IS the box. 'description': the codes were read out of the source's own prose, which is editorial and NOT guaranteed exhaustive -- treat the member list as a LOWER BOUND on the box, since a page may state a colour count in words and enumerate only some of them. 'sku': the source published no list at all; the membership is derived from its own code scheme, where a multi-unit case pack's code plus a suffix is the single pot it holds. A 'sku' set therefore has exactly ONE member and is exhaustive in colours while saying nothing about multiplicity -- a Pack of 6 contains six of that one paint, and the pack size lives in `name`, not in `quantity`.",
+          "enum": ["stated", "description", "sku"]
+        },
+        "members": {
+          "type": "array",
+          "description": "The paints in this box, in the order the source lists them. Always present; empty when no ref resolved.",
+          "items": { "$ref": "#/$defs/member" }
+        },
+        "unresolved": {
+          "type": "array",
+          "description": "Content codes that could NOT be turned into a paint, published with their reason rather than dropped, so a partially-resolved box is never mistaken for a smaller one. Omitted entirely when every ref resolved.",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/unresolved" }
+        }
+      }
+    },
+    "member": {
+      "type": "object",
+      "required": ["paintId", "ref"],
+      "properties": {
+        "paintId": {
+          "type": "string",
+          "description": "The paint record in paints.json, brand-slug/paint-slug. This is the link, and it is attached here at publish time because it cannot be derived from the other fields: an id gains a content-derived qualifying suffix when its name collides inside its brand, which is a property of the whole brand file rather than of this row. The paint's brand and product code are deliberately not repeated on this record -- follow the id."
+        },
+        "ref": {
+          "type": "string",
+          "description": "The manufacturer's OWN code for this item, verbatim from the source and before any normalization -- the audit link back to the product's content list. It may differ from the resolved paint's productCode: a source that zero-pads prints '09030' for the paint stored as '9030'."
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "How many of this item the source states the box contains. ABSENT MEANS THE SOURCE DID NOT SAY -- it does not mean one. No source in this catalog states a count today, so this key is currently present on no member."
+        },
+        "resolvedBy": {
+          "description": "Present only when the printed ref did NOT identify this paint on its own, naming what settled it instead. Absent -- the overwhelming majority -- means the code resolved directly. 'statedName': the set listed one code twice and the name printed beside the second occurrence identified the paint. 'correction': a human declared, in a reviewed committed file scoped to this one product, that the manufacturer mistyped a code in its own contents list. In both cases `ref` still carries what the source printed, so the repair is visible rather than laundered.",
+          "enum": ["statedName", "correction"]
+        },
+        "statedName": {
+          "type": "string",
+          "description": "The paint name the source printed beside the ref, carried alongside resolvedBy: statedName as the evidence for that resolution."
+        }
+      }
+    },
+    "unresolved": {
+      "type": "object",
+      "required": ["ref", "reason"],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "description": "The content code, verbatim, that names no paint this release publishes."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why it was refused, in prose. HUMAN TEXT, NOT A STABLE VOCABULARY -- the wording is written for whoever will fix the underlying gap and may change without a schema version. A consumer should key on a ref being in this array at all, never on matching this string."
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["repo"],
+      "properties": {
+        "repo": { "type": "string" },
+        "release": {
+          "type": "object",
+          "required": ["tag", "url"],
+          "properties": { "tag": { "type": "string" }, "url": { "type": "string" } }
+        },
+        "pageUrl": { "type": "string" }
+      }
+    }
+  }
+}

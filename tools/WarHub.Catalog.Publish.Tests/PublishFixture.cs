@@ -12,6 +12,10 @@ namespace WarHub.Catalog.Publish.Tests;
 ///   5011921142378 -- paint citadel/mephiston-red only, no product side
 /// so alpha links to TWO paints (plural on both sides), mephiston-red links to nothing, and
 /// test-mfg/beta carries no barcode at all.
+///
+/// The boxed-set relation is arranged to exercise all three contents claims and both refusal
+/// paths: alpha is `stated` with a quantity, a statedName resolution and one upstream refusal,
+/// beta is `description` with a refusal, gamma is `sku` with the single member that shape has.
 /// </summary>
 public sealed class PublishFixture : IDisposable
 {
@@ -55,6 +59,77 @@ public sealed class PublishFixture : IDisposable
                 status: discontinued
                 availability: out_of_stock
                 firstSeen: '2026-07-07'
+              - id: test-mfg/gamma
+                name: Gamma Powder (Pack of 6)
+                manufacturer: test-mfg
+                productCode: GAMMA
+                gameSystems:
+                  - test-system
+                faction: general
+                category: paint
+                status: current
+                availability: in_stock
+                firstSeen: '2026-07-07'
+            """);
+
+        // The boxed-set relation, in the shape gen_set_contents.py emits: one file per
+        // manufacturer, one top-level key, a counts block the publisher re-derives and checks.
+        // All three `from` values appear, because they are three different claims and the
+        // document keeps them apart. `ref` is deliberately unlike the resolved productCode on the
+        // first member ('0C1' -> 'C1') to prove the source's own string survives publication.
+        WriteFile(Path.Combine(catalog, "set-contents", "test-mfg.yaml"), """
+            test-mfg:
+              counts:
+                sets: 3
+                refs: 7
+                members: 5
+                unresolved: 2
+                quantified: 1
+              sets:
+                test-mfg/alpha:
+                  name: Alpha Box
+                  brand: citadel, vallejo
+                  from: stated
+                  members:
+                    - ref: '0C1'
+                      brand: citadel
+                      paint: Abaddon Black|Base
+                      productCode: C1
+                      quantity: 2
+                    - ref: V1
+                      brand: vallejo
+                      paint: Black|Model Color
+                      productCode: V1
+                    - ref: C2
+                      brand: citadel
+                      paint: Mephiston Red|Base
+                      productCode: C2
+                      resolvedBy: statedName
+                      statedName: MEPHISTON RED
+                  unresolved:
+                    - ref: NOSUCH
+                      reason: no paint in brand(s) 'citadel' carries this product code
+                test-mfg/beta:
+                  name: Beta Box
+                  brand: citadel
+                  from: description
+                  members:
+                    - ref: C3
+                      brand: citadel
+                      paint: Ghost Ash|Technical
+                      productCode: C3
+                  unresolved:
+                    - ref: AMBIG
+                      reason: 2 paints in brand(s) 'citadel' carry this product code
+                test-mfg/gamma:
+                  name: Gamma Powder (Pack of 6)
+                  brand: citadel
+                  from: sku
+                  members:
+                    - ref: GAMMA-S
+                      brand: citadel
+                      paint: Weathering Powder Rust|Weathering
+                      productCode: WP1
             """);
 
         WriteFile(Path.Combine(catalog, "taxonomy", "game-systems.yaml"), """

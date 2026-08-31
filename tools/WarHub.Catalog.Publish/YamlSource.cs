@@ -67,6 +67,44 @@ internal static class YamlSource
     }
 
     /// <summary>
+    /// Loads the boxed-set relation from <c>{catalogDir}/set-contents/*.yaml</c> (not recursive),
+    /// merging every manufacturer block into one map keyed by manufacturer slug.
+    ///
+    /// The directory is OPTIONAL -- a catalog with no boxed sets, and every fixture that does not
+    /// exercise them, publishes an empty relation rather than failing. A duplicate manufacturer
+    /// key across two files throws instead of letting one file silently win: the generator writes
+    /// exactly one file per manufacturer, so a collision means the tree has been hand-edited.
+    /// </summary>
+    public static IReadOnlyDictionary<string, CanonicalSetContentsFile> LoadSetContents(string catalogDir)
+    {
+        var merged = new Dictionary<string, CanonicalSetContentsFile>(StringComparer.Ordinal);
+        string dir = Path.Combine(catalogDir, "set-contents");
+        if (!Directory.Exists(dir))
+        {
+            return merged;
+        }
+
+        foreach (string file in Directory
+            .EnumerateFiles(dir, "*.yaml", SearchOption.TopDirectoryOnly)
+            .OrderBy(f => f, StringComparer.Ordinal))
+        {
+            var blocks = Deserializer.Deserialize<Dictionary<string, CanonicalSetContentsFile>>(
+                File.ReadAllText(file));
+            foreach ((string manufacturer, CanonicalSetContentsFile block) in blocks ?? [])
+            {
+                if (!merged.TryAdd(manufacturer, block))
+                {
+                    throw new InvalidOperationException(
+                        $"set-contents: manufacturer '{manufacturer}' is declared in more than one file "
+                        + $"(seen again in {Path.GetFileName(file)})");
+                }
+            }
+        }
+
+        return merged;
+    }
+
+    /// <summary>
     /// Loads the game-system and faction slug-to-label maps from
     /// <c>{catalogDir}/taxonomy/game-systems.yaml</c> and <c>taxonomy/factions.yaml</c>.
     /// A missing file yields an empty map for that dimension.
