@@ -48,6 +48,18 @@ internal static class PaintCatalogApp
             Description = "Directory of generated manufacturer harvest files (data/paints/harvest)"
         };
 
+        // The liveness ledger is OPERATIONAL STATE, not catalog data: ~25.7k lines of per-source and
+        // per-record lastSeen/missStreak that a weekly run rewrites wholesale (measured on the last
+        // full run, 5de6ee5: 8,383 lines replaced by 8,383 lines, and nothing else in the tree
+        // changed at all). Where it LANDS is therefore a property of the repository consuming this
+        // tool, not of the tool -- in warhub-catalog it must sit outside the paths catalog-publish.yml
+        // watches, or that churn alone cuts an immutable Release. The tool itself keeps its
+        // self-contained default of a sidecar beside its own --output.
+        Option<FileInfo?> livenessOption = new("--liveness")
+        {
+            Description = "Path to the liveness ledger file (default: <output>/_liveness.yaml)"
+        };
+
         Option<DirectoryInfo?> swatchesOption = new("--swatches")
         {
             Description = "Directory of generated swatch-extraction files (data/paints/swatches)"
@@ -87,6 +99,7 @@ internal static class PaintCatalogApp
             barcodesOption,
             harvestOption,
             swatchesOption,
+            livenessOption,
             sampleOption,
             brandOption,
             equivalencesOption,
@@ -102,6 +115,7 @@ internal static class PaintCatalogApp
             FileInfo? barcodes = parseResult.GetValue(barcodesOption);
             DirectoryInfo? harvest = parseResult.GetValue(harvestOption);
             DirectoryInfo? swatchesDir = parseResult.GetValue(swatchesOption);
+            FileInfo? livenessFile = parseResult.GetValue(livenessOption);
             int sample = parseResult.GetValue(sampleOption);
             string? brandFilter = parseResult.GetValue(brandOption);
             bool generateEquivalences = parseResult.GetValue(equivalencesOption);
@@ -152,7 +166,7 @@ internal static class PaintCatalogApp
                 StringComparer.OrdinalIgnoreCase);
 
             string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
-            string ledgerPath = Path.Combine(outputDir, "_liveness.yaml");
+            string ledgerPath = livenessFile?.FullName ?? Path.Combine(outputDir, "_liveness.yaml");
             LivenessLedger ledger = await LedgerStore.LoadAsync(ledgerPath, cancellationToken);
 
             // Only a full, unsampled run may drive the liveness ledger. A --sample run is not

@@ -657,7 +657,7 @@ aliases:
 # Nothing else in data/paints refers to them: 0 hits in equivalences.yaml (an empty hex is excluded
 # from equivalence matching), 0 in swatches/*.yaml, 0 in the `additions:`/`aliases:`/field-override
 # sections of this file, and 0 as any record's `supersedes`/`supersededBy` -- nor does any of the 20
-# declare lineage of its own. Their 20 `_liveness.yaml` entries (all `lastSeen: '2026-07-24'`,
+# declare lineage of its own. Their 20 `paint-liveness.yaml` entries (all `lastSeen: '2026-07-24'`,
 # `missStreak: 0`) become orphans the moment they leave `reconciled.Records`, and
 # LedgerMaintenance.PruneOrphans deletes them -- but ONLY on a FULL run (PaintCatalogApp.cs:452
 # `fullRun = authoritativeRun && brandFilter is empty`, :579). A `--brand` or `--sample` run
@@ -1173,7 +1173,7 @@ retract:
     # composite-matches at CatalogReconciler.cs:60, and its key is therefore in `consumed`
     # (:38-46). Step 3 refuses any alias whose canonical target is consumed (:84), so the alias is
     # skipped and the addition mints the duplicate anyway. Measured, not reasoned: all three keys
-    # carry `lastSeen: '2026-08-06', missStreak: 0` in data/paints/_liveness.yaml, which is the
+    # carry `lastSeen: '2026-08-06', missStreak: 0` in data/state/paint-liveness.yaml, which is the
     # ledger saying `fresh` contained them on the last authoritative run. `retract:` is the only
     # mechanism that answers a record the source keeps re-supplying -- it suppresses on INPUT
     # (:52-55) as well as on output.
@@ -1300,7 +1300,7 @@ retract:
     # seven come from Arcturus, which paint-catalog-update.yml:58-59 re-clones every run, so each
     # is in `fresh` under its own key, composite-matches at CatalogReconciler.cs:60 and lands in
     # `consumed` (:38-46); step 3 refuses a consumed target (:84) and the alias is skipped
-    # silently. All 7 carry `lastSeen: '2026-08-06', missStreak: 0` in data/paints/_liveness.yaml,
+    # silently. All 7 carry `lastSeen: '2026-08-06', missStreak: 0` in data/state/paint-liveness.yaml,
     # which is the ledger saying `fresh` held them on the last authoritative run. Only `retract:`
     # suppresses on INPUT (:52-55) as well as output, which is what a re-cloned source demands.
     #
@@ -1319,7 +1319,7 @@ retract:
     #     51 counterparts is also matched by a `Fluorescent` twin. equivalences.yaml is computed
     #     PRE-reconciliation, so the 7 will also linger in it as unresolvable refs after the run,
     #     exactly as 240dc3d's three still do. That persistence is not the retraction failing.
-    #   - `_liveness.yaml` rows for the 7 become orphans pruned only on a FULL run
+    #   - `paint-liveness.yaml` rows for the 7 become orphans pruned only on a FULL run
     #     (`fullRun = authoritativeRun && brandFilter empty`, PaintCatalogApp.cs:452, :579).
     #
     # THE GUARD IS BLIND HERE AND ITS GREEN IS VACUOUS. `_check_paints` keys holders on

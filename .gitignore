@@ -14,3 +14,10 @@ Thumbs.db
 
 # Playwright browsers download marker
 .playwright/
+
+# The paint tool's liveness ledger is committed at data/state/paint-liveness.yaml, passed with
+# --liveness by paint-catalog-update.yml. A local run that omits the flag falls back to the tool's
+# own default of a sidecar beside --output, which for `--output data/paints` is this path -- and
+# committing it there would put ~25.7k lines of per-run churn back under catalog-publish.yml's
+# trigger, which is exactly what moving it out was for.
+/data/paints/_liveness.yaml

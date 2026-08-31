@@ -184,8 +184,9 @@ data/
    `data/catalog` for products and `data/paints` for paints — to build the `dist/` JSON tree,
    then publishes it as a versioned Release **and** to GitHub Pages. The publish trigger only
    watches `data/catalog/**` and `data/paints/**`, so evidence-only churn never mints a release.
-   `data/paints/README.md` is excluded from it: prose for maintainers reaches no consumer, and
-   a typo fix in it should not cut an immutable Release.
+   Two things sit outside it on purpose: `data/paints/README.md`, because prose for maintainers
+   reaches no consumer, and the paint liveness ledger at `data/state/paint-liveness.yaml`,
+   because per-run operational state would otherwise cut a Release every week on its own.
 
 Both `catalog-acquire.yml` and `classify.yml` use **sticky PRs** (one persistent branch each,
 updated in place rather than opened fresh every run): cursor/queue progress from a given run only
