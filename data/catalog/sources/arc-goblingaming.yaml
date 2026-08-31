@@ -30,7 +30,8 @@ contract:
   minCount: 0
   maxDropPct: 30
   requiredFieldRates:
-    # Live-verified 2026-07-13 (task-2-report.md): the real captured Goblin Gaming Shopify page
-    # carries JSON-LD gtin13 -- this is the probe doc's confirmed "archived Shopify retailers are
-    # the primary archived-EAN source" pattern. 0.5 floor pending full-harvest evidence.
+    # Live-verified 2026-07-13 (docs/superpowers/reports/task-2-report.md): the real captured
+    # Goblin Gaming Shopify page carries JSON-LD gtin13 -- this is the probe doc's confirmed
+    # "archived Shopify retailers are the primary archived-EAN source" pattern. 0.5 floor
+    # pending full-harvest evidence.
     ean: 0.5
