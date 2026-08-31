@@ -83,6 +83,12 @@ gameSystems:
     label: Necromunda
   - slug: other-games
     label: Other Games
+    # A BUCKET, NOT A CLAIM. Games Workshop's own storefront files everything outside its three
+    # flagship systems here, and this catalog inherited that. A rule that names WHICH game a
+    # product belongs to therefore REFINES this value rather than contradicting it, and is allowed
+    # to replace it -- see categorize/stage.py::_apply_game_system. Nothing else in this file is a
+    # catch-all, and nothing else may become one without the same explicit marker.
+    catchAll: true
   - slug: overdrive
     label: OverDrive
   - slug: pike-and-shotte

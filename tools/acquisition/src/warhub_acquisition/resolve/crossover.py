@@ -26,10 +26,23 @@ import re
 from typing import Mapping
 
 
-def clause_matches(name: str, hints: Mapping[str, object], clause: Mapping) -> bool:
-    """One CrossoverClause against one observation's name + hints (see models/descriptor.py)."""
+def clause_matches(
+    name: str, hints: Mapping[str, object], clause: Mapping, code: str = ""
+) -> bool:
+    """One clause against one observation's name + hints, or a product's name + code.
+
+    `code` is the product's own identifier, and it is a SIGNAL rather than a label: a
+    manufacturer that numbers its range systematically has already answered questions its store
+    pages only imply. Games Workshop's 11-digit code carries the game system in digits 5-6 and the
+    faction in 7-8; Atomic Mass Games prefixes Star Wars Legion with `SWL` and Shatterpoint with
+    `SWP`. Matching it with a plain regex rather than a segment grammar is deliberate -- `^\\d{4}02`
+    says "digits 5-6 are 02" perfectly well, and a bespoke {slice: [4,6]} syntax would be a second
+    thing to learn for no expressive gain.
+    """
     if clause.get("nameMatches"):
         return re.search(clause["nameMatches"], name or "", re.IGNORECASE) is not None
+    if clause.get("codeMatches"):
+        return re.search(clause["codeMatches"], code or "", re.IGNORECASE) is not None
     if clause.get("hintEquals"):
         return all(hints.get(key) == value for key, value in clause["hintEquals"].items())
     if clause.get("hintContainsAny"):

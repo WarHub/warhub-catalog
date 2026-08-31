@@ -27,7 +27,7 @@ from warhub_acquisition.models.catalog import CanonicalProduct
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.attributes import complete_game_system_basis
 from warhub_acquisition.resolve.resolver import DataPaths, _dump_product, joined_evidence
-from warhub_acquisition.taxonomy import load_labels
+from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
@@ -84,6 +84,9 @@ class Outcome:
     #: `catalog_basis`; `unknown` here is the real size of the classification problem, and it is
     #: the number `classify --emit-queue` turns into a queue.
     game_system_basis: Counter = field(default_factory=Counter)
+    #: Products this RUN gave a gameSystem, and by which rung.
+    game_system_decided: int = 0
+    by_game_system_basis: Counter = field(default_factory=Counter)
     #: `{"<source> <signal>": observations matched}`, counted over ALL evidence rather than over
     #: the products this run decided. Counting the run instead made every clause look dead the
     #: moment the catalog was already categorized, which is exactly when someone would read it.
@@ -134,15 +137,26 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
     # happens to match nothing today would sit undetected until the day a store adds that value.
     for index, entry in enumerate(lexicon.entries if lexicon else []):
         vocabulary.check(entry.category, None, f"category-lexicon entry {index}")
+    manufacturers = set(Taxonomy.load(paths.taxonomy).manufacturers)
     for table in rules.values():
         for index, clause in enumerate(table.clauses):
-            vocabulary.check(clause.category, clause.packaging, f"{table.source} clause {index}")
+            vocabulary.check(clause.category, clause.packaging, f"{table.scope} clause {index}")
         # A TABLE FOR A PAINT SOURCE IS DEAD BY CONSTRUCTION, and it took two of them to notice.
         # `select_product_observations` admits a `catalog: paints` source's rows only where
         # `crossoverToProducts` selects them, and every row it selects arrives with a category
         # already STAMPED by the crossover -- so it is `stated`, and this stage never reaches it.
         # Tables for mfr-monument and mfr-turbodork were written, reviewed and committed before
         # the dead-clause report showed all fourteen of their clauses matching nothing at all.
+        # A MANUFACTURER TABLE IS SCOPED TO A MAKER, NOT A FEED, so it is held to the
+        # manufacturer taxonomy instead -- same guard, different register: a table naming something
+        # that does not exist can never fire, and a silent no-op table is indistinguishable from a
+        # store that publishes no taxonomy.
+        if table.manufacturer is not None:
+            if table.manufacturer not in manufacturers:
+                raise ValueError(
+                    f"{table.manufacturer}: rules name a manufacturer with no taxonomy entry"
+                )
+            continue
         descriptor = joined.descriptors.get(table.source)
         if descriptor is None:
             raise ValueError(f"{table.source}: category rules name a source with no descriptor")
@@ -154,6 +168,7 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             )
 
     system_labels, _ = load_labels(paths.taxonomy)
+    catch_alls = _load_catch_alls(paths.taxonomy)
     outcome = Outcome(clause_hits=_count_clause_hits(joined.entities, rules))
     if not paths.catalog_products.exists():
         return outcome
@@ -163,12 +178,23 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
         records = [CanonicalProduct.model_validate(row) for row in document.get("products") or []]
         touched = False
         for record in records:
+            game_system_decision = None
+            if record.categoryBasis not in REPLACEABLE:
+                # The category is settled, but the game system may not be. Ask anyway -- the two
+                # are different questions and a product decided on one can be open on the other.
+                game_system_decision, extra = decide(
+                    record.id, joined.entities.get(record.id) or [], joined.kinds, rules,
+                    _barcodes(record), paint_barcodes, record.name, lexicon,
+                    manufacturer=record.manufacturer, code=record.productCode or record.sku,
+                )
+                outcome.conflicts.extend(extra)
             if record.categoryBasis in REPLACEABLE:
                 outcome.considered += 1
                 members = joined.entities.get(record.id) or []
                 decision, conflicts = decide(
                     record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes,
                     record.name, lexicon,
+                    manufacturer=record.manufacturer, code=record.productCode or record.sku,
                 )
                 outcome.conflicts.extend(conflicts)
                 if decision is not None and decision.category is not None:
@@ -178,6 +204,9 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                     touched = True
                 else:
                     _count_unmapped(outcome, members)
+                game_system_decision = decision
+            if _apply_game_system(record, game_system_decision, outcome, catch_alls):
+                touched = True
             # THE GAME-SYSTEM BASIS IS SETTLED HERE, NOT IN `resolve`, because it is a question
             # about the CATEGORY and `resolve` does not yet know the answer to that one. A paint
             # pot leaves the resolver as `miniatures`/`guessed` -- the fallback fires precisely
@@ -207,6 +236,55 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
     if apply:
         _write_review(paths.categorize_review, outcome, rules)
     return outcome
+
+
+def _load_catch_alls(taxonomy_dir) -> frozenset[str]:
+    """Slugs declared `catchAll: true` -- buckets rather than claims. Read from the taxonomy so
+    the set is reviewable data, not a constant compiled into this stage."""
+    data = read_yaml(taxonomy_dir / "game-systems.yaml") or {}
+    return frozenset(
+        e["slug"] for e in data.get("gameSystems") or [] if e.get("catchAll")
+    )
+
+
+def _apply_game_system(
+    record: CanonicalProduct, decision, outcome: "Outcome", catch_alls: frozenset[str]
+) -> bool:
+    """Fill a gameSystem the evidence never supplied, or report a disagreement. Never overwrite.
+
+    THE RULE ONLY EVER FILLS A HOLE. Where a source already stated a system and a rule disagrees,
+    the disagreement is RECORDED and nothing changes -- OBJECTIVES value 5, and the only defensible
+    treatment of `legacy-catalog`, which states a gameSystem for 12,395 of 12,395 products it
+    touches and is therefore never silent about being unsure. Measured 2026-08-31, where it and a
+    live source both state one they agree 99.9% (Warlord) and 97.4% (GW); the wrong labels are
+    concentrated where nothing can corroborate it, and a rule that silently overwrote 2,800 records
+    on that inference would be trading a known-good 99.9% for an unreviewed guess.
+    """
+    if decision is None or not decision.gameSystem:
+        return False
+    # REFINING A BUCKET IS NOT OVERWRITING A CLAIM. `other-games` is Games Workshop's own shelf
+    # for everything outside its flagship systems, and this catalog inherited it wholesale -- 593
+    # products, spanning six games GW's product codes name individually. A rule that says which one
+    # is strictly more informative and contradicts nothing, so it replaces the bucket. Only slugs
+    # explicitly marked `catchAll` in the taxonomy qualify.
+    if record.gameSystemBasis == "unknown" or record.gameSystem in catch_alls:
+        record.gameSystem = decision.gameSystem
+        record.gameSystemBasis = decision.game_system_basis
+        if decision.faction and not record.faction:
+            record.faction = decision.faction
+        outcome.game_system_decided += 1
+        outcome.by_game_system_basis[decision.game_system_basis or "?"] += 1
+        return True
+    if record.gameSystem and record.gameSystem != decision.gameSystem:
+        outcome.conflicts.append(
+            Conflict(
+                record.id,
+                "gameSystem-disagreement",
+                f"catalog says {record.gameSystem} ({record.gameSystemBasis}); "
+                f"{decision.why} says {decision.gameSystem}",
+            )
+        )
+    return False
 
 
 def _stamp(record: CanonicalProduct, decision: Decision) -> None:

@@ -19,7 +19,8 @@ from pydantic import BaseModel, ConfigDict, model_validator
 
 from warhub_acquisition.yamlio import read_yaml
 
-_FORMS = ("nameMatches", "hintEquals", "hintContainsAny")
+_FORMS = ("nameMatches", "codeMatches", "hintEquals", "hintContainsAny")
+_OUTPUTS = ("category", "packaging", "gameSystem", "faction")
 
 
 class CategoryClause(BaseModel):
@@ -35,6 +36,11 @@ class CategoryClause(BaseModel):
     # Regex against the observation's own name, case-insensitive. The escape hatch for a store
     # whose taxonomy does not separate what a rule needs -- use it last, and prefer a store field.
     nameMatches: str | None = None
+    # Regex against the PRODUCT's own code. A manufacturer that numbers its range systematically
+    # has already answered questions its store pages only imply: `^\d{4}02` reads "GW code digits
+    # 5-6 are 02", i.e. Age of Sigmar. Only meaningful in a manufacturer table (see SourceRules),
+    # because a code belongs to the product rather than to whoever is selling it.
+    codeMatches: str | None = None
     # Scalar hint == value. Dotted keys reach into a nested hint: `hierarchy.lvl1` is how GW's
     # Algolia levels are addressed (see decide.py::flatten_hints).
     hintEquals: dict[str, str] | None = None
@@ -43,6 +49,11 @@ class CategoryClause(BaseModel):
 
     category: str | None = None
     packaging: str | None = None
+    # A clause may decide any dimension the same signal settles. A store shelf that says
+    # `Miniatures/Infinity/Yu Jing` answers three questions at once, and splitting it across three
+    # tables keyed on the same value would be three chances to disagree with itself.
+    gameSystem: str | None = None
+    faction: str | None = None
 
     # Free text, and the only field here that is for humans. A clause that maps a store's word to
     # one of ours is a judgement, and the next person to read it needs the judgement, not just its
@@ -58,8 +69,6 @@ class CategoryClause(BaseModel):
                 f"a category clause must set exactly one NON-EMPTY of {'/'.join(_FORMS)}, "
                 f"got {forms or ['none']}"
             )
-        if not self.category and not self.packaging:
-            raise ValueError("a category clause must set `category`, `packaging`, or both")
         return self
 
 
@@ -69,16 +78,55 @@ class SourceRules(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    source: str
+    # EXACTLY ONE SCOPE. `source` tables are evaluated against that store's own observations --
+    # its shelves, its tags, its words about this product. `manufacturer` tables are evaluated
+    # against the PRODUCT (its name and its code), because a maker's numbering scheme is a fact
+    # about the thing rather than about whoever is reselling it.
+    source: str | None = None
+    manufacturer: str | None = None
     # Why this table's author believed the mapping, in the repo's usual measured style. Required,
     # because a table of 70 bare `word: slug` pairs is exactly the artefact nobody can later audit.
     reason: str
+    # Vetoes, evaluated FIRST and unconditionally -- a vetoed product can never be rescued by a
+    # later clause. Same shape and same semantics as a crossover descriptor's `noneOf`
+    # (resolve/crossover.py::matched_clause), deliberately: this is the repo's existing way to say
+    # "not these, whatever else you concluded", and a second spelling would be a trap.
+    #
+    # It is how a table REFUSES. Games Workshop's Forge World codes span two game systems and its
+    # Black Library codes name a novel's setting rather than the kit's, so both must decide nothing
+    # -- and saying so costs one clause, where a rule that quietly returned the segment's system
+    # would be wrong on every one of them.
+    noneOf: list[CategoryClause] = []
     clauses: list[CategoryClause]
+
+    @property
+    def scope(self) -> str:
+        return self.source or self.manufacturer or "?"
 
     @model_validator(mode="after")
     def _non_empty(self) -> "SourceRules":
+        if bool(self.source) == bool(self.manufacturer):
+            raise ValueError(f"{self.scope}: a rule file must name exactly one of source/manufacturer")
         if not self.clauses:
-            raise ValueError(f"{self.source}: a rule file with no clauses decides nothing")
+            raise ValueError(f"{self.scope}: a rule file with no clauses decides nothing")
+        # A DECIDING clause must decide something; a VETO must not. The check lives here rather
+        # than on the clause because the two lists want opposite answers from the same type.
+        for clause in self.clauses:
+            if not any(getattr(clause, name) for name in _OUTPUTS):
+                raise ValueError(
+                    f"{self.scope}: a clause must decide at least one of {'/'.join(_OUTPUTS)}"
+                )
+        for clause in self.noneOf:
+            if any(getattr(clause, name) for name in _OUTPUTS):
+                raise ValueError(
+                    f"{self.scope}: a `noneOf` veto must decide nothing -- it exists to say the "
+                    "signal is present and settles nothing"
+                )
+        if self.manufacturer is None and any(c.codeMatches for c in [*self.clauses, *self.noneOf]):
+            raise ValueError(
+                f"{self.source}: `codeMatches` reads the PRODUCT's code, which a source table does "
+                "not own -- put it in a manufacturer table"
+            )
         return self
 
 
@@ -95,9 +143,9 @@ def load_category_rules(directory: Path) -> dict[str, SourceRules]:
     rules: dict[str, SourceRules] = {}
     for path in sorted(directory.glob("*.yaml")):
         table = SourceRules.model_validate(read_yaml(path))
-        if table.source != path.stem:
+        if table.scope != path.stem:
             raise ValueError(
-                f"{path.name} declares source {table.source!r}; the filename must match the id"
+                f"{path.name} declares scope {table.scope!r}; the filename must match the id"
             )
-        rules[table.source] = table
+        rules[table.scope] = table
     return rules

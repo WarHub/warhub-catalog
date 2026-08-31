@@ -1,0 +1,110 @@
+manufacturer: games-workshop
+reason: >-
+  GAMES WORKSHOP NUMBERS ITS ENTIRE RANGE, and the number says which game a product belongs to.
+  An 11-digit GW code is `d12 d34 d56 d78 serial`: d12 is the language/regional pack (60 English,
+  01 French, 15 Chinese, 99 language-neutral), d34 is the product type (12 plastic kit, 03 codex,
+  10 Black Library paperback, 18 paint pot, 24 White Dwarf, 85/86 Forge World), d56 is the GAME
+  SYSTEM and d78 is the FACTION. Decoded and measured 2026-08-31 over the committed catalog.
+
+
+  d56 alone predicts gameSystem at 95.2% over 4,076 independently-classified products, against
+  44.2% for d34 and 53.6% for d78 -- so the signal is specifically there and not a coincidence of
+  correlated digits. The clauses below take it from 95.2% to 99.89% by naming the four families
+  that account for every disagreement, and the veto block is where three of them live.
+
+
+  WHY THIS TABLE IS ALLOWED TO EXIST AT ALL: none of it is inference about what GW meant. The
+  segments are GW's own filing, recovered from GW's own identifiers, and every mapping below is
+  checked against products whose gameSystem was stated INDEPENDENTLY of the code -- by
+  legacy-catalog or the Algolia store feed. LLM-labelled products were excluded from that
+  measurement entirely; 1,195 GW products carry a Haiku label and grading a code rule against a
+  guess would prove nothing.
+
+
+  SIX SEGMENTS BECAME REAL SLUGS. Necromunda (05), Warhammer Underworlds (07), Blood Bowl (09),
+  Aeronautica Imperialis (18), Legions Imperialis (26) and Adeptus Titanicus (03) were all filed
+  as `other-games` before, because the taxonomy had no word for them -- the catalog was less
+  specific than the manufacturer. See taxonomy/game-systems.yaml.
+
+# Vetoes first and unconditionally. Each is a family where the code CANNOT settle the question,
+# and a rule that answered anyway would be confidently wrong rather than silent.
+noneOf:
+  # FORGE WORLD kits are made for more than one system and GW's own data says so: d34 85/86 spans
+  # Horus Heresy and Warhammer 40,000 in both directions. Vetoing costs NOTHING -- all 670 such
+  # products already carry a value, so no coverage is lost and 21 errors go.
+  - codeMatches: '^\d{2}8[56]'
+    note: Forge World, legitimately dual-system
+
+  # BLACK LIBRARY: d78 81 is a novel, and d56 then carries the SETTING of the fiction rather than a
+  # game the product belongs to. 430 of them sit under d56 01, where the split between Warhammer
+  # 40,000 and Horus Heresy is the book's period and no field encodes it -- measured 86.3%, which
+  # is not deterministic. The ones whose segment is unambiguous are recovered by a clause below.
+  - codeMatches: '^\d{6}81'
+    note: Black Library, setting is not the game
+
+  # KITS GW SELLS INTO TWO SYSTEMS AT ONCE (Custodes, Knights, Titans, Chaos). These seven
+  # (d56,d78) pairs are where the stated evidence itself splits; refusing 266 products removes the
+  # last 17 disagreements and is what takes the ladder to 99.89%.
+  - codeMatches: '^\d{4}30(08|43)'
+    note: Horus Heresy kits also sold for Warhammer 40,000
+  - codeMatches: '^\d{4}01(08|17)'
+    note: 40k kits also sold for Horus Heresy
+  - codeMatches: '^\d{2}12(01)99'
+    note: 40k plastic kits with a generic faction segment
+  - codeMatches: '^\d{2}1202(01|07|13)'
+    note: Age of Sigmar plastic kits also sold into Warcry / Old World
+
+clauses:
+  # KILL TEAM has no segment of its own -- it lives inside 01 and 02 -- so it is claimed by name,
+  # BEFORE the segment clauses. Until `kill-team` existed this had to be a veto, because the only
+  # honest options were "call it 40k" (wrong for the ones GW files under other-games) or "skip it".
+  # A slug turns 189 skipped products into decided ones. `K/T` and `WHU`-style contractions are
+  # GW's own abbreviations on trade rows.
+  - nameMatches: '\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b'
+    gameSystem: kill-team
+
+  # A LEGION TRANSFER SHEET is Horus Heresy even though it sits in the 40k segment: d34 51 is the
+  # transfer-sheet product type and the Legion sheets are period-specific.
+  - codeMatches: '^\d{2}5101'
+    gameSystem: horus-heresy
+
+  # d56 == 99 IS NOT A GAME SEGMENT. It is what GW uses for things that belong to no game: paints
+  # (d34 18), paint sets (17), brushes (19), sprays (20), glue (21), bases and dice (22), tools and
+  # cases (23). Measured: 1,193 products, 1,149 of them unclassified. The 44 that carried a value
+  # were all LLM guesses and all wrong -- `CONTRAST: ASURMEN BLUE` had even acquired the faction
+  # `aeldari` from the colour's name. These decide a CATEGORY and deliberately no game system.
+  - codeMatches: '^\d{2}(17|18)99'
+    category: paint
+  - codeMatches: '^\d{2}2099'
+    category: paint
+  - codeMatches: '^\d{2}(19|21|22|23)99'
+    category: hobby-auxiliary
+  # WHITE DWARF is a magazine, in every segment. 131 products, every name `WHITE DWARF <n> (...)`.
+  - codeMatches: '^\d{2}24'
+    category: book
+
+  # The segments themselves. Every one of these is 100% pure against independently-stated evidence
+  # once the vetoes above have run; the two that are not (01 at 92.4% and 30 at 94.0% raw) are
+  # carried there by the veto block rather than by a lower bar.
+  - codeMatches: '^\d{4}01'
+    gameSystem: warhammer-40k
+  - codeMatches: '^\d{4}02'
+    gameSystem: age-of-sigmar
+  - codeMatches: '^\d{4}03'
+    gameSystem: adeptus-titanicus
+  - codeMatches: '^\d{4}05'
+    gameSystem: necromunda
+  - codeMatches: '^\d{4}07'
+    gameSystem: warhammer-underworlds
+  - codeMatches: '^\d{4}09'
+    gameSystem: blood-bowl
+  - codeMatches: '^\d{4}14'
+    gameSystem: middle-earth
+  - codeMatches: '^\d{4}18'
+    gameSystem: aeronautica-imperialis
+  - codeMatches: '^\d{4}26'
+    gameSystem: legions-imperialis
+  - codeMatches: '^\d{4}27'
+    gameSystem: the-old-world
+  - codeMatches: '^\d{4}30'
+    gameSystem: horus-heresy

@@ -1,0 +1,44 @@
+manufacturer: atomic-mass-games
+reason: >-
+  ATOMIC MASS GAMES PREFIXES EVERY PRODUCT CODE WITH ITS GAME. `SWL107` is Star Wars: Legion,
+  `SWP100` is Shatterpoint, `CP191` is Marvel: Crisis Protocol. Measured 2026-08-31 against every
+  AMG product whose gameSystem is stated independently of the code: 336 of 336, 100.00%, with 84
+  currently-unclassified products filled.
+
+
+  IT IS CORROBORATED BY AN INDEPENDENT SIGNAL RATHER THAN ASSUMED. GameNerdz shelves 280 of these
+  products under its own `Miniatures/<game>` breadcrumb; the code and the retailer agree on 278,
+  and on the 2 they disagree the retailer is wrong and the catalog already says so -- `CP191 Adam
+  Warlock, Moondragon & Quasar` and `CP224 X-Force Affiliation Pack` are shelved under Star Wars
+  Legion and are plainly Marvel. Two independent signals agreeing on 278 is why this table is a
+  measurement rather than a guess.
+
+
+  `SWQ` is the quiet win: 64 of the 84 fills, 44/44 pure, and every one of its unclassified
+  products is literally named `Star Wars: Legion - ...`. `SWZ` (X-Wing) and `SWM` (Armada) are
+  mapped for completeness -- both are fully classified today and fill nothing, but a table that
+  omitted them would silently start guessing the day a new one is acquired.
+
+clauses:
+  # Longest prefixes first: `CPE` and `CP` share a stem, and first-match-wins would let the short
+  # one swallow the long one.
+  - codeMatches: '^MCP\d'
+    gameSystem: marvel-crisis-protocol
+  - codeMatches: '^MCA\d'
+    gameSystem: marvel-crisis-protocol
+  - codeMatches: '^CPE\d'
+    gameSystem: marvel-crisis-protocol
+  - codeMatches: '^CP\d'
+    gameSystem: marvel-crisis-protocol
+  - codeMatches: '^CA\d'
+    gameSystem: marvel-crisis-protocol
+  - codeMatches: '^SWL\d'
+    gameSystem: star-wars-legion
+  - codeMatches: '^SWQ\d'
+    gameSystem: star-wars-legion
+  - codeMatches: '^SWP\d'
+    gameSystem: star-wars-shatterpoint
+  - codeMatches: '^SWZ\d'
+    gameSystem: star-wars-x-wing
+  - codeMatches: '^SWM\d'
+    gameSystem: star-wars-armada
