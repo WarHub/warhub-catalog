@@ -112,6 +112,28 @@ def load_cache(path: Path, model: type[_CacheEntryT]) -> dict[str, _CacheEntryT]
     return cache
 
 
+def cache_reachability(items: list[dict], cache: dict[str, BaseModel]) -> tuple[int, int]:
+    """How much of `cache` today's queue can still reach: `(reachable, orphaned)`.
+
+    A cache entry is only worth its disk if some CURRENT item hashes to its key, and nothing
+    reported that until this function existed. The counts that were reported instead -- lines,
+    distinct hashes, distinct entities -- cannot detect the failure this measures: a cache can
+    hold a line per entity, one line each, no duplicates at all, and still answer nothing.
+
+    That is not hypothetical. Measured 2026-08-31, all 6,223 classification cache lines were
+    unreachable, and had been since the 2026-08-10 queue rebuild, because `compute_input_hash`
+    hashes the WHOLE item including the shared `candidates` block (queue.py builds one and reuses
+    it by reference for every item). One faction slug leaving one game system's observed list
+    re-keys the entire corpus. That is the intended semantics -- a changed decision space is a new
+    question -- but it is a cliff, and a cliff nobody can see is one everybody walks off: the wave
+    that would have re-asked 6,223 items at full price to be told what the file already knew was
+    priced as if the cache still worked.
+    """
+    live = {compute_input_hash(item) for item in items}
+    reachable = sum(1 for input_hash in cache if input_hash in live)
+    return reachable, len(cache) - reachable
+
+
 def append_cache_lines(path: Path, entries: list[BaseModel]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8", newline="\n") as handle:
@@ -128,6 +150,23 @@ def batch_pending(pending: list, batch_size: int, budget: int) -> list[list]:
     """Slice `pending` into `batch_size`-sized batches, capped at the first `budget` batches --
     `budget` counts REQUESTS (batches), not items. Items beyond the cap are simply left out of the
     result (uncached, unqueried) for a future run to pick up.
+
+    THE CAP IS POSITIONAL, SO THE QUEUE'S ORDER DECIDES WHAT A PARTIAL BUDGET BUYS, and that order
+    is entity id -- which means alphabetical by manufacturer, a sequence chosen for determinism and
+    carrying no relation whatever to where the answers are. A budget is not spread across the
+    corpus; it is spent from the front of the alphabet until it runs out.
+
+    For the classification queue that is actively perverse, measured 2026-08-31 over 14,265 items:
+    the first 176 batches are entirely `ak-interactive` (2,409) and `army-painter` (1,119), two
+    brands that are 99.6-99.8% paint and hobby supplies, where a null gameSystem is the CORRECT
+    answer and the model will rightly say `unknown`. `games-workshop` -- 5,077 items and the
+    largest real yield in the file -- does not begin until batch 229. So a budget under ~230 buys
+    almost nothing but confirmation, and one under ~483 never finishes GW.
+
+    Left positional rather than "fixed" by sorting on some yield heuristic: which manufacturer is
+    worth asking about is a judgement, it changes as the catalog grows, and burying it here would
+    make the spend depend on a guess nobody reviewed. The operator picks the budget; this docstring
+    exists so they can pick it knowing what the front of the queue is.
     """
     batches = [pending[i : i + batch_size] for i in range(0, len(pending), batch_size)]
     return batches[:budget]

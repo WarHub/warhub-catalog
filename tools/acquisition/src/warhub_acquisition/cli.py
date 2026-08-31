@@ -205,6 +205,12 @@ def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
             queue_path = paths.root / "review" / "classification-queue.yaml"
             write_yaml(queue_path, {"queue": queue})
             print(f"wrote {len(queue)} queue items to {queue_path}")
+            # What a wave over this queue would actually cost, reported at the last free moment
+            # before anyone starts the driver. Queue length is not the price -- the price is the
+            # part the cache cannot answer, and the two have silently diverged before.
+            from warhub_acquisition.classify.llm import describe_cache_coverage
+
+            print(describe_cache_coverage(paths, queue))
             return 0
 
         if args.llm:
