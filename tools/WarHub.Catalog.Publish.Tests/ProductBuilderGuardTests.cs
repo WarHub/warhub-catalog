@@ -6,9 +6,10 @@ namespace WarHub.Catalog.Publish.Tests;
 /// <summary>
 /// ProductBuilder must fail loudly (not silently drop or default) when a canonical product
 /// references taxonomy that isn't there -- these are data-integrity bugs (a bad slug, a
-/// missing faction label) that should stop the build, not produce a quietly wrong catalog. A
-/// null gameSystem is NOT one of these -- it is a valid, expected state (a product genuinely
-/// belonging to no game system) and must publish, not throw.
+/// missing faction label) that should stop the build, not produce a quietly wrong catalog. An
+/// EMPTY gameSystems is NOT one of these -- it is a valid, expected state (a product genuinely
+/// belonging to no game system) and must publish, not throw. Neither is a product belonging to
+/// SEVERAL, which lands in several partitions and in the consolidated document exactly once.
 /// </summary>
 public sealed class ProductBuilderGuardTests
 {
@@ -46,7 +47,7 @@ public sealed class ProductBuilderGuardTests
             Name = "Mystery Box",
             Manufacturer = "test-mfg",
             Status = "current",
-            GameSystem = null,
+            GameSystems = [],
         };
 
         (CatalogWriter writer, string dist) = WriterWithDist();
@@ -79,7 +80,7 @@ public sealed class ProductBuilderGuardTests
             Ean = "5060924985581",
             EanConfidence = "confirmed",
             AdditionalEans = ["5060469664330"],
-            GameSystem = null,
+            GameSystems = [],
         };
 
         (CatalogWriter writer, string dist) = WriterWithDist();
@@ -104,7 +105,7 @@ public sealed class ProductBuilderGuardTests
             Status = "current",
             Ean = "5060924985581",
             AdditionalEans = null,
-            GameSystem = null,
+            GameSystems = [],
         };
 
         (CatalogWriter writer, string dist) = WriterWithDist();
@@ -131,7 +132,7 @@ public sealed class ProductBuilderGuardTests
             Ean = "5011921062164",
             EanConfidence = "confirmed",
             SupersededBy = "games-workshop/99120204035",
-            GameSystem = null,
+            GameSystems = [],
         };
         var current = new CanonicalProduct
         {
@@ -142,7 +143,7 @@ public sealed class ProductBuilderGuardTests
             Ean = "5011921179398",
             EanConfidence = "confirmed",
             Supersedes = ["games-workshop/99120204012"],
-            GameSystem = null,
+            GameSystems = [],
         };
 
         (CatalogWriter writer, string dist) = WriterWithDist();
@@ -180,7 +181,7 @@ public sealed class ProductBuilderGuardTests
             Name = "Mystery Box",
             Manufacturer = "test-mfg",
             Status = "current",
-            GameSystem = "no-such-system",
+            GameSystems = ["no-such-system"],
         };
 
         var ex = Assert.Throws<InvalidOperationException>(
@@ -202,7 +203,7 @@ public sealed class ProductBuilderGuardTests
             Name = "Mystery Box",
             Manufacturer = "test-mfg",
             Status = "current",
-            GameSystem = "warhammer-40k",
+            GameSystems = ["warhammer-40k"],
             Faction = "no-such-faction",
         };
 
@@ -212,4 +213,76 @@ public sealed class ProductBuilderGuardTests
         Assert.Contains("no-such-faction", ex.Message, StringComparison.Ordinal);
         Assert.Contains("test-mfg/unmapped-faction", ex.Message, StringComparison.Ordinal);
     }
+
+    [Fact]
+    public void A_product_in_two_systems_lands_in_both_partitions_and_the_catalog_once()
+    {
+        // THE INVARIANT THAT STOPPED BEING ONE NUMBER. `products.json` used to be built by
+        // concatenating the partitions, which was correct only while every product had at most one
+        // game system. GW's own store shelves 183 products under two, so that concatenation would
+        // now publish each of them twice -- with the same id, in the same document.
+        var labels = new TaxonomyLabels(
+            new Dictionary<string, string>
+            {
+                ["warhammer-40k"] = "Warhammer 40,000",
+                ["horus-heresy"] = "The Horus Heresy",
+            },
+            new Dictionary<string, string>());
+        var dual = new CanonicalProduct
+        {
+            Id = "test-mfg/dual",
+            Name = "Custodian Guard",
+            Manufacturer = "test-mfg",
+            Status = "current",
+            GameSystems = ["horus-heresy", "warhammer-40k"],
+        };
+        var single = new CanonicalProduct
+        {
+            Id = "test-mfg/single",
+            Name = "Aggressors",
+            Manufacturer = "test-mfg",
+            Status = "current",
+            GameSystems = ["warhammer-40k"],
+        };
+
+        (CatalogWriter writer, string dist) = WriterWithDist();
+        int total = ProductBuilder.Build([CatalogOf2(dual, single)], labels, Prov(), writer);
+
+        Assert.Equal(2, total);
+        using JsonDocument all = JsonDocument.Parse(File.ReadAllText(Path.Combine(dist, "products.json")));
+        string[] ids = [.. all.RootElement.GetProperty("products").EnumerateArray()
+            .Select(p => p.GetProperty("id").GetString()!)];
+        Assert.Equal(["test-mfg/dual", "test-mfg/single"], [.. ids.Order(StringComparer.Ordinal)]);
+
+        // ...and it names both systems, by LABEL, in slug order.
+        JsonElement published = all.RootElement.GetProperty("products").EnumerateArray()
+            .Single(p => p.GetProperty("id").GetString() == "test-mfg/dual");
+        Assert.Equal(
+            ["The Horus Heresy", "Warhammer 40,000"],
+            [.. published.GetProperty("gameSystems").EnumerateArray().Select(v => v.GetString()!)]);
+
+        Assert.Equal(["test-mfg/dual"], PartitionIds(dist, "horus-heresy"));
+        Assert.Equal(["test-mfg/dual", "test-mfg/single"], PartitionIds(dist, "warhammer-40k"));
+
+        // The index totals the PRODUCTS, not the partition rows -- those now sum to more.
+        using JsonDocument index = JsonDocument.Parse(
+            File.ReadAllText(Path.Combine(dist, "products", "index.json")));
+        Assert.Equal(2, index.RootElement.GetProperty("total").GetInt32());
+        Assert.Equal(3, index.RootElement.GetProperty("partitions").EnumerateArray()
+            .Sum(p => p.GetProperty("records").GetInt32()));
+    }
+
+    private static string[] PartitionIds(string dist, string key)
+    {
+        using JsonDocument doc = JsonDocument.Parse(
+            File.ReadAllText(Path.Combine(dist, "products", "by-system", key + ".json")));
+        return [.. doc.RootElement.GetProperty("products").EnumerateArray()
+            .Select(p => p.GetProperty("id").GetString()!).Order(StringComparer.Ordinal)];
+    }
+
+    private static CanonicalProductCatalog CatalogOf2(params CanonicalProduct[] products) => new()
+    {
+        Manufacturer = products[0].Manufacturer,
+        Products = [.. products],
+    };
 }

@@ -296,7 +296,7 @@ def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
     """The catalog files are rewritten wholesale, so the guard is that a rewrite is a no-op for
     every field this stage does not decide -- ids included.
 
-    `gameSystemBasis` is the fourth, and it is here rather than in `resolve` because it is a
+    `gameSystemsBasis` is the fourth, and it is here rather than in `resolve` because it is a
     question ABOUT the category: whether a game system applies to this product at all. `resolve`
     cannot answer it, because at that point a paint pot has no category at all -- nothing had
     decided yet. Settling it upstream asked one pass
@@ -314,7 +314,7 @@ def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
         for key in set(before[pid]) | set(after[pid])
         if before[pid].get(key) != after[pid].get(key)
     }
-    assert changed <= {"category", "categoryBasis", "packaging", "gameSystemBasis"}
+    assert changed <= {"category", "categoryBasis", "packaging", "gameSystemsBasis"}
 
 
 def test_packaging_is_filled_only_where_the_record_had_none(tmp_path: Path) -> None:
@@ -569,8 +569,9 @@ def test_every_committed_rule_file_names_a_real_source_and_declared_values() -> 
             # A rule may not mint a game system or faction the taxonomy has never heard of --
             # the same guard the category vocabulary has always had, extended to the dimensions
             # a clause can now decide.
-            assert clause.gameSystem is None or clause.gameSystem in systems, (
-                f"{scope}: gameSystem {clause.gameSystem!r} is not declared in game-systems.yaml"
+            unknown = [s for s in clause.gameSystems if s not in systems]
+            assert not unknown, (
+                f"{scope}: gameSystems {unknown!r} are not declared in game-systems.yaml"
             )
             assert clause.faction is None or clause.faction in factions, (
                 f"{scope}: faction {clause.faction!r} is not declared in factions.yaml"
@@ -593,23 +594,23 @@ def test_a_clause_must_decide_something_and_a_veto_must_decide_nothing() -> None
     with pytest.raises(ValidationError, match="must decide nothing"):
         SourceRules.model_validate(_table(
             manufacturer="m",
-            clauses=[{"codeMatches": "^X", "gameSystem": "g"}],
-            noneOf=[{"codeMatches": "^Y", "gameSystem": "g"}]))
+            clauses=[{"codeMatches": "^X", "gameSystems": ["g"]}],
+            noneOf=[{"codeMatches": "^Y", "gameSystems": ["g"]}]))
 
 
 def test_a_table_names_exactly_one_scope() -> None:
     with pytest.raises(ValidationError, match="exactly one of source/manufacturer"):
-        SourceRules.model_validate(_table(clauses=[{"codeMatches": "^X", "gameSystem": "g"}]))
+        SourceRules.model_validate(_table(clauses=[{"codeMatches": "^X", "gameSystems": ["g"]}]))
     with pytest.raises(ValidationError, match="exactly one of source/manufacturer"):
         SourceRules.model_validate(_table(
-            source="s", manufacturer="m", clauses=[{"nameMatches": "x", "gameSystem": "g"}]))
+            source="s", manufacturer="m", clauses=[{"nameMatches": "x", "gameSystems": ["g"]}]))
 
 
 def test_a_source_table_may_not_read_the_products_code() -> None:
     """A code belongs to the product; a source table only ever speaks for one store's own words."""
     with pytest.raises(ValidationError, match="does not own"):
         SourceRules.model_validate(_table(
-            source="ret-x", clauses=[{"codeMatches": "^X", "gameSystem": "g"}]))
+            source="ret-x", clauses=[{"codeMatches": "^X", "gameSystems": ["g"]}]))
 
 
 def test_code_clauses_match_the_product_code_not_the_name() -> None:
@@ -621,3 +622,85 @@ def test_code_clauses_match_the_product_code_not_the_name() -> None:
     assert not clause_matches("", {}, clause, "99120199039")
     # The name is not consulted, so a product merely *called* something cannot spoof a code rule.
     assert not clause_matches("99120299039", {}, clause, "")
+
+
+def test_a_clause_answering_another_question_no_longer_swallows_the_category() -> None:
+    """ONE SCAN PER AXIS. `mfr-b` files this product's GAME and says nothing about what it is;
+    `ret-a` says what it is. Under the old single scan the higher-kind source matched first and
+    the product came out with no category at all -- measured on the committed data, that was
+    happening to 83 products, 80 of them ret-goblingaming rows blocked by mfr-manticgames."""
+    members = [
+        _observation("ret-a:1", "ret-a", hints={"productType": "Paints"}),
+        _observation("mfr-b:1", "mfr-b", hints={"productType": "Kings of War"}),
+    ]
+    rules = _rules(
+        **{
+            "ret-a": [{"category": "paint", "hintEquals": {"productType": "Paints"}}],
+            "mfr-b": [{"gameSystems": ["kings-of-war"], "hintEquals": {"productType": "Kings of War"}}],
+        }
+    )
+    decision, _ = decide(
+        "e", members, {"ret-a": "retailer", "mfr-b": "manufacturer"}, rules, [], frozenset()
+    )
+    assert (decision.category, decision.basis) == ("paint", "mapped")
+    assert decision.gameSystems == ("kings-of-war",)
+
+
+def test_a_packaging_only_clause_writes_its_packaging() -> None:
+    """A table that settled only `packaging` used to write nothing at all, because the stage
+    gated the write on the category. Five committed clauses did exactly that."""
+    members = [_observation("ret-a:1", "ret-a", hints={"productType": "Digital"})]
+    rules = _rules(**{"ret-a": [{"packaging": "digital", "hintEquals": {"productType": "Digital"}}]})
+    decision, _ = decide("e", members, {"ret-a": "retailer"}, rules, [], frozenset())
+    assert decision is not None
+    assert (decision.category, decision.packaging) == (None, "digital")
+
+
+def test_a_veto_silences_only_the_axes_it_names() -> None:
+    """GW's Forge World veto is about the GAME -- the code names a production line that supplies
+    six systems. It was also suppressing a `miniatures` answer that is 99.8% pure on the same
+    products, because a veto used to stop the whole table."""
+    rules = {
+        "gw": SourceRules(
+            manufacturer="gw",
+            reason="test",
+            noneOf=[CategoryClause(codeMatches=r"^\d{2}8[56]", blocks=["gameSystems"])],
+            clauses=[
+                CategoryClause(codeMatches=r"^\d{2}8[56]", category="miniatures"),
+                CategoryClause(codeMatches=r"^\d{4}30", gameSystems=["horus-heresy"]),
+            ],
+        )
+    }
+    decision, _ = decide(
+        "e", [], {}, rules, [], frozenset(), name="Astraeus", manufacturer="gw", code="99860112345",
+    )
+    assert (decision.category, decision.basis) == ("miniatures", "code")
+    assert decision.gameSystems == ()
+
+
+def test_a_veto_with_no_blocks_still_silences_everything() -> None:
+    rules = {
+        "gw": SourceRules(
+            manufacturer="gw",
+            reason="test",
+            noneOf=[CategoryClause(codeMatches=r"^\d{2}8[56]")],
+            clauses=[CategoryClause(codeMatches=r"^\d{2}8[56]", category="miniatures")],
+        )
+    }
+    decision, _ = decide(
+        "e", [], {}, rules, [], frozenset(), name="Astraeus", manufacturer="gw", code="99860112345",
+    )
+    assert decision is None
+
+
+def test_a_veto_may_only_name_real_axes() -> None:
+    with pytest.raises(ValidationError, match="not axes"):
+        SourceRules.model_validate(_table(source="ret-x",
+            clauses=[{"nameMatches": "x", "category": "paint"}],
+            noneOf=[{"nameMatches": "y", "blocks": ["gameSystem"]}]))
+
+
+def test_a_deciding_clause_may_not_block() -> None:
+    with pytest.raises(ValidationError, match="for `noneOf` vetoes"):
+        SourceRules.model_validate(_table(source="ret-x",
+            clauses=[{"nameMatches": "x", "category": "paint", "blocks": ["faction"]}]))

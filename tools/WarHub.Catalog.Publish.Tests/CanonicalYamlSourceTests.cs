@@ -23,7 +23,8 @@ public class CanonicalYamlSourceTests
                   - '5011921194506'
                 supersedes:
                   - test-mfg/99120110076
-                gameSystem: test-system
+                gameSystems:
+                  - test-system
                 faction: necrons
                 category: miniatures
                 quantity: 11
@@ -61,7 +62,7 @@ public class CanonicalYamlSourceTests
         Assert.Equal(["5011921194506"], product.AdditionalEans);
         Assert.Equal(["test-mfg/99120110076"], product.Supersedes);
         Assert.Equal(11, product.Quantity);
-        Assert.Equal("test-system", product.GameSystem);
+        Assert.Equal(["test-system"], product.GameSystems);
         Assert.Equal(76.5m, product.PriceGbp);
     }
 

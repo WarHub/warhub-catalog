@@ -17,8 +17,11 @@ from warhub_acquisition.resolve.set_refs import (
 # `_first` takes the highest-priority source's list WHOLE. That is deliberate -- see
 # CanonicalProduct.contentSkus. Unioning two sources' contents claims would assert a box neither
 # of them describes.
+# `gameSystem` is NOT here. Every other field in this tuple folds first-wins to a single value;
+# game systems fold to a LIST -- of at most one element here; see below -- and the two rules
+# cannot share a loop.
 _HINT_FIELDS = (
-    "gameSystem", "faction", "category", "packaging", "quantity", "volumeMl", "weightG",
+    "faction", "category", "packaging", "quantity", "volumeMl", "weightG",
     "description", "contentSkus",
 )
 _DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur", "priceCad")
@@ -103,12 +106,39 @@ def resolve_attributes(
     for name in _HINT_FIELDS:
         fields[name] = _first([_claimed(member, name) for member in _for(name)])
 
+    # A SOURCE ROW NAMES ONE GAME, AND SO DOES THIS FOLD. Measured 2026-09-01 over all 19,904
+    # observations carrying a `gameSystem` hint -- legacy-catalog, mfr-gw-algolia,
+    # mfr-warlord-store, mfr-corvus-belli, mfr-para-bellum, seed-curated -- exactly ZERO carry more
+    # than one value. No source has ever asserted dual membership in this field, so there is
+    # nothing here to widen, and the list this writes is empty or a single element.
+    #
+    # TAKING ONE SOURCE'S SEVERAL ROWS AS A JOINT CLAIM IS WRONG, which is worth recording because
+    # it looks right and was briefly implemented here. 19 products have one source whose rows
+    # disagree, and not one of them is a listing that names two games. They are two other things:
+    #
+    #   * ONE PRODUCT CODE COVERING SEVERAL LISTINGS -- `Custodian Guard`, `Shield-Captain` and
+    #     `Vexilus Praetor` share a code and the entity holds all three rows. The dual membership
+    #     is real there, but it is the JOIN saying so, not the source.
+    #   * A BAD JOIN. `M24 Chaffee, US light tank` and `Germanic command` both carry EAN
+    #     5060200844311 on the Warlord store, so one entity holds both rows -- and folding them
+    #     jointly published a WWII tank as a Hail Caesar product. 3 of the 9 products that rule
+    #     produced were false in exactly that way, and its own description names Achtung Panzer!
+    #     as the second game, which is not what it published.
+    #
+    # THE HONEST SIGNAL IS THE TAXONOMY, and `categorize` is where it is read: GW's Algolia rows
+    # carry a `hierarchy` whose `lvl0` is a LIST (94 products name two systems once the
+    # `Other Games` catch-all is discounted) and Mantic shelves 114 products under both Deadzone
+    # and Firefight. Those are claims about a product; this is a fold over rows that may not
+    # describe the same one.
+    stated_system = _first([_claimed(member, "gameSystem") for member in _for("gameSystem")])
+    fields["gameSystems"] = [str(stated_system)] if stated_system is not None else []
+
     # A source asserted it for this product. Recorded rather than inferred later, because by the
     # time anything downstream sees the record, a value folded from a hint and one written by a
     # rule table are indistinguishable -- which is how 1,819 LLM guesses came to sit in the same
     # field as 12,802 source claims with nothing to tell them apart.
-    if fields["gameSystem"] is not None:
-        fields["gameSystemBasis"] = "stated"
+    if fields["gameSystems"]:
+        fields["gameSystemsBasis"] = "stated"
 
     # Fallback classification from a source's raw category taxonomy (today only mfr-gw-trade's
     # `tradeCategory`, mapped in data/catalog/mappings/<source>.yaml). Applied ONLY when no source
@@ -116,7 +146,7 @@ def resolve_attributes(
     # the GW trade ingest's China Order Form rows) that would otherwise publish gameSystem: null.
     # `ordered` already puts higher-priority/surviving sources first, so the first member whose
     # source maps its tradeCategory to a system wins; faction is taken from that same mapping.
-    if fields["gameSystem"] is None and category_maps:
+    if not fields["gameSystems"] and category_maps:
         for member in ordered:
             trade_category = member.hints.get("tradeCategory")
             mapping = category_maps.get(member.source_id) if trade_category else None
@@ -125,8 +155,8 @@ def resolve_attributes(
             prefix = str(trade_category).split(" - ", 1)[0]
             system = (mapping.get("gameSystem") or {}).get(prefix)
             if system:
-                fields["gameSystem"] = system
-                fields["gameSystemBasis"] = "mapped"
+                fields["gameSystems"] = [system]
+                fields["gameSystemsBasis"] = "mapped"
                 if fields["faction"] is None:
                     fields["faction"] = (mapping.get("faction") or {}).get(str(trade_category))
                 break
@@ -228,8 +258,8 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
     # revalidate the merged record so an unknown key or wrong-typed value in
     # human-edited overrides.yaml fails loudly instead of being dropped
     merged = CanonicalProduct.model_validate({**product.model_dump(), **patch})
-    if patch.get("gameSystem") is not None:
-        merged.gameSystemBasis = "override"
+    if patch.get("gameSystems") is not None:
+        merged.gameSystemsBasis = "override"
     return merged
 
 
@@ -250,13 +280,17 @@ def apply_classification(
     anything else. A human override still outranks it, because `apply_overrides` still runs after.
     """
     decision = decisions.get(product.id)
-    if not decision or product.gameSystem is not None:
+    if not decision or product.gameSystems or not decision.get("gameSystem"):
         return product
+    # THE DECISION FILE STAYS SCALAR and is not migrated, because its scalar shape is its contract:
+    # the prompt tells the model to "pick EXACTLY ONE slug", so a record there is one answer to one
+    # question. Wrapping it here says that plainly; rewriting 3,182 cached decisions into
+    # single-element lists would only make a guess look like a measurement of membership.
     return product.model_copy(
         update={
-            "gameSystem": decision.get("gameSystem"),
+            "gameSystems": [str(decision["gameSystem"])],
             "faction": product.faction or decision.get("faction"),
-            "gameSystemBasis": accepted,
+            "gameSystemsBasis": accepted,
         }
     )
 
@@ -268,16 +302,16 @@ def apply_classification(
 _NO_GAME_SYSTEM_CATEGORIES = frozenset({"paint", "paint-set", "hobby-auxiliary"})
 
 
-def complete_game_system_basis(
+def complete_game_systems_basis(
     product: CanonicalProduct, system_labels: dict[str, str]
 ) -> CanonicalProduct:
-    """Split a null `gameSystem` into the two different facts it was carrying.
+    """Split an EMPTY `gameSystems` into the two different facts it was carrying.
 
     `not-applicable` -- a hobby product, and nothing is missing.
     `unknown`        -- a game product this pipeline failed to classify.
 
     THE PREDICATE IS SAFE BY CONSTRUCTION, not by accuracy: it is only ever consulted when
-    `gameSystem` is ALREADY null, so it cannot erase a value anything else established. That
+    `gameSystems` is ALREADY empty, so it cannot erase a value anything else established. That
     matters, because the obvious formulation -- "category is paint, therefore no game system" --
     is measurably wrong: 411 products carry both, and they are real. `Infinity: JSA Paint Set` is
     a paint set AND an Infinity product; a faction transfer sheet is hobby-auxiliary AND belongs
@@ -288,13 +322,13 @@ def complete_game_system_basis(
     is a boxed product for a game. The separator is whether the record is a single colour, and
     the test for that is the source's own words -- a volume, a multipack count, or `spray`.
     """
-    if product.gameSystem is not None:
+    if product.gameSystems:
         return product
     if product.category not in _NO_GAME_SYSTEM_CATEGORIES or _names_a_game_system(
         product.name, system_labels
     ):
-        return product.model_copy(update={"gameSystemBasis": "unknown"})
-    return product.model_copy(update={"gameSystemBasis": "not-applicable"})
+        return product.model_copy(update={"gameSystemsBasis": "unknown"})
+    return product.model_copy(update={"gameSystemsBasis": "not-applicable"})
 
 
 _COLOUR_RECORD = re.compile(r"\d+\s*ml\b|\(\s*\d+\s*[- ]?pack\s*\)|\bx\s?\d+\b|\bspray\b", re.IGNORECASE)

@@ -15,12 +15,12 @@ declared vocabulary (data/catalog/taxonomy/categories.yaml) so a typo cannot inv
 """
 from pathlib import Path
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from warhub_acquisition.yamlio import read_yaml
 
 _FORMS = ("nameMatches", "codeMatches", "hintEquals", "hintContainsAny")
-_OUTPUTS = ("category", "packaging", "gameSystem", "faction")
+_OUTPUTS = ("category", "packaging", "gameSystems", "faction")
 
 
 class CategoryClause(BaseModel):
@@ -52,8 +52,26 @@ class CategoryClause(BaseModel):
     # A clause may decide any dimension the same signal settles. A store shelf that says
     # `Miniatures/Infinity/Yu Jing` answers three questions at once, and splitting it across three
     # tables keyed on the same value would be three chances to disagree with itself.
-    gameSystem: str | None = None
+    #
+    # `gameSystems` IS A LIST AND IT ACCUMULATES, unlike every other output here. A store shelves
+    # one product under several games -- GW's own store shelves 183 of them (`Cerastus Knight
+    # Castigator` under The Horus Heresy and Warhammer 40,000) -- so the clauses that match are the
+    # source's whole claim, not a race the first one wins. The scalar outputs stay first-match:
+    # a product is one thing, and two clauses naming different categories is a disagreement.
+    gameSystems: list[str] = Field(default_factory=list)
     faction: str | None = None
+
+    # WHICH AXES THIS VETO SILENCES -- `noneOf` entries only. A veto says "the signal is present
+    # and settles nothing", and until now that meant nothing about ANY axis, which was measurably
+    # too broad: Games Workshop's four code vetoes exist because `d34=85/86` (Forge World) and
+    # `d78=81` (Black Library) do not determine the GAME, and they were also blocking every
+    # category rule from reaching those 1,635 products -- even though Forge World is 99.8%
+    # `miniatures` and Black Library 99.0% `book` against independent evidence. Naming the axis is
+    # what lets one table refuse the question it cannot answer and still answer the one it can.
+    #
+    # Empty means ALL axes, which is the semantics `resolve/crossover.py`'s `noneOf` has and the
+    # right default for a signal an author judged unusable outright.
+    blocks: list[str] = Field(default_factory=list)
 
     # Free text, and the only field here that is for humans. A clause that maps a store's word to
     # one of ours is a judgement, and the next person to read it needs the judgement, not just its
@@ -121,6 +139,18 @@ class SourceRules(BaseModel):
                 raise ValueError(
                     f"{self.scope}: a `noneOf` veto must decide nothing -- it exists to say the "
                     "signal is present and settles nothing"
+                )
+            unknown = [axis for axis in clause.blocks if axis not in _OUTPUTS]
+            if unknown:
+                raise ValueError(
+                    f"{self.scope}: a veto's `blocks` names {unknown}, which are not axes; "
+                    f"choose from {'/'.join(_OUTPUTS)}"
+                )
+        for clause in self.clauses:
+            if clause.blocks:
+                raise ValueError(
+                    f"{self.scope}: `blocks` is for `noneOf` vetoes -- a deciding clause silences "
+                    "nothing"
                 )
         if self.manufacturer is None and any(c.codeMatches for c in [*self.clauses, *self.noneOf]):
             raise ValueError(

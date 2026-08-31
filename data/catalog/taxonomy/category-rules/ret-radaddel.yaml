@@ -12,28 +12,28 @@ clauses:
   #
   # THESE REACH PRODUCTS NOTHING ELSE DOES. 67 Atomic Mass Games rows carry no product code and no
   # other retailer's taxonomy; this tag is their only signal.
-  - gameSystem: star-wars-legion
+  - gameSystems: [star-wars-legion]
     hintContainsAny:
       tags: ['Galaktische Republik SWL', 'Rebellenallianz SWL', 'Grundspiel und Zubehör SWL',
              'Separatisten SWL', 'Imperium SWL', 'Söldner SWL', 'Schattenkollektiv SWL']
-  - gameSystem: star-wars-shatterpoint
+  - gameSystems: [star-wars-shatterpoint]
     hintContainsAny:
       tags: ['Star Wars Shatterpoint']
-  - gameSystem: marvel-crisis-protocol
+  - gameSystems: [marvel-crisis-protocol]
     hintContainsAny:
       tags: ['Marvel Crisis Protocol']
-  - gameSystem: konflikt-47
+  - gameSystems: [konflikt-47]
     hintContainsAny:
       tags: ['K47', 'Konflikt 47']
-  - gameSystem: blood-red-skies
+  - gameSystems: [blood-red-skies]
     hintContainsAny:
       tags: ['Geschwader', 'Fliegerasse', 'Grundspiel und Zubehör BRS']
-  - gameSystem: achtung-panzer
+  - gameSystems: [achtung-panzer]
     hintContainsAny:
       tags: ['Achtung Panzer!']
-  - gameSystem: halo-flashpoint
+  - gameSystems: [halo-flashpoint]
     hintContainsAny:
       tags: ['HALO FLASHPOINT']
-  - gameSystem: walking-dead-all-out-war
+  - gameSystems: [walking-dead-all-out-war]
     hintContainsAny:
       tags: ['The Walking Dead']

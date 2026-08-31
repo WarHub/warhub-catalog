@@ -35,13 +35,13 @@ clauses:
   # Steamforged runs one storefront for several games and stamps each row with the line it belongs
   # to. Measured 2026-08-31: 550 of 550. `P3 Paints` and `Iron Kingdoms` are deliberately absent --
   # the first is paint (no game system applies) and the second is an RPG whose products are books.
-  - gameSystem: warmachine
+  - gameSystems: [warmachine]
     hintEquals: {vendor: Warmachine}
-  - gameSystem: guild-ball
+  - gameSystems: [guild-ball]
     hintEquals: {vendor: Guild Ball}
-  - gameSystem: godtear
+  - gameSystems: [godtear]
     hintEquals: {vendor: Godtear}
-  - gameSystem: epic-encounters
+  - gameSystems: [epic-encounters]
     hintEquals: {vendor: Epic Encounters}
-  - gameSystem: epic-encounters
+  - gameSystems: [epic-encounters]
     hintEquals: {vendor: 'Epic Encounters: Local Legends'}

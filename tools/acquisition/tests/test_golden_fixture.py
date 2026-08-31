@@ -189,7 +189,7 @@ def test_golden_fixture_matches_committed_output(tmp_path: Path) -> None:
         "games-workshop/boarding-patrol-death-guard",
     ]
     painting_handle = next(p for p in catalog["games-workshop"] if p.id == "games-workshop/60040199014")
-    assert painting_handle.gameSystem is None
+    assert painting_handle.gameSystems == []
 
     generated = _generated_files(paths)
 
