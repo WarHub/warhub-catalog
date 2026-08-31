@@ -29,6 +29,38 @@ confidence, written to `data/review/join-proposals.yaml`. The cache
 `classification-cache.jsonl`: a classification decision and a join verdict are different input
 spaces and must never be confused or invalidate one another.
 
+THE KEY is `compute_input_hash` over the WHOLE candidate item -- both entity contexts, the
+manufacturer, `matchedRules`, and the `pairId` -- which includes each side's `evidence` (its
+sorted observation keys) even though `_item_for_prompt` strips `evidence` before the model sees
+it. So a pair is re-queried when a new source starts observing either side, or a source re-keys,
+with the prompt byte-identical to last time. The model is recorded and NOT hashed, so `--model`
+alone re-queries nothing.
+
+IT GROWS WITHOUT BOUND, BY DESIGN, and re-keyed pairs leave dead lines behind exactly as the
+classification cache does. Measured 2026-08-31 it is small -- 80 lines / 20 KB for 71 candidate
+pairs -- because the candidate set is small, not because anything prunes it.
+
+PRUNING IS NOT SAFE HERE, and this is where it differs from `classification-cache.jsonl`
+(whose docstring says its own truncation is safe). Two reasons, both load-bearing:
+
+  1. `join-proposals.yaml` IS REBUILT WHOLESALE FROM THIS FILE on every run. The loop at the
+     bottom of `run_join_proposals` skips any candidate with no `decided` entry, so a pair that
+     is neither cached nor queried this run is simply ABSENT from the written file. Truncate the
+     cache and the next run publishes only what its budget paid for: at DEFAULT_BATCH_SIZE 20,
+     restoring today's 71 pairs in one run takes a budget of at least 4 requests. A smaller run
+     silently shrinks the review artifact a human is working from.
+  2. IT CARRIES CORRECTIONS THAT EXIST NOWHERE ELSE. Appending a second line under an existing
+     `inputHash` is how a verdict gets overruled -- `load_cache` keys by hash and takes the last
+     line, so the later entry wins. That is not hypothetical: 9 of the 80 lines are a 2026-07-23
+     re-judgement of pairs first answered on 2026-07-13, each turning `same-product` (0.8-0.85,
+     and therefore `acceptedCandidate: true`, i.e. offered to a human to paste into
+     `matches.yaml`) into `different-product` at 1.0. Truncating loses all nine and the next run
+     re-buys the model's original wrong answer to a byte-identical prompt.
+
+If it must be pruned anyway: drop only hashes that `compute_input_hash` over today's
+`generate_candidates` output does not reproduce, and do it immediately before a run whose budget
+covers every current candidate.
+
 PROMOTION IS OUT OF SCOPE FOR THIS MODULE. `classify --propose-joins` NEVER edits
 `data/catalog/matches.yaml`. See the `join-proposals.yaml` header comment this module writes: a
 human (or the controller, with spot-check gates like Task 5's LLM classification waves) must

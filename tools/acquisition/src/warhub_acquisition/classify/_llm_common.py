@@ -95,6 +95,11 @@ def parse_response(text: str, ids: list[str], id_key: str = "entity") -> dict[st
 
 
 def load_cache(path: Path, model: type[_CacheEntryT]) -> dict[str, _CacheEntryT]:
+    """Read the append-only cache into a dict keyed by `inputHash`. LAST LINE WINS: a second entry
+    under an existing hash overrules the first, which is the only way to overrule a decision
+    without changing its input, and is used as such (see `joins.py`'s cache-horizon note). Both
+    callers' docstrings state what their file costs to prune; the rules are not the same.
+    """
     cache: dict[str, _CacheEntryT] = {}
     if not path.exists():
         return cache
