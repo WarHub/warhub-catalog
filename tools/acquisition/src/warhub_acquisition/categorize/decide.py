@@ -139,6 +139,7 @@ def decide(
     """
     conflicts: list[Conflict] = []
     hits: list[tuple[Observation, CategoryClause]] = []
+    system_hits: list[tuple[Observation, CategoryClause]] = []
     for member in _ordered(members, kinds):
         table = rules.get(member.source_id)
         if table is None or table.manufacturer is not None:
@@ -148,6 +149,15 @@ def decide(
         for clause in table.clauses:
             if _clause_hit(member, clause):
                 hits.append((member, clause))
+                break
+        # AND SEPARATELY, THE FIRST CLAUSE THAT NAMES A GAME. A table is ordered for its category
+        # decision -- narrow shelf labels first -- and one store answers both questions from
+        # different rows of the same taxonomy: goblingaming's `productType` says what a thing IS
+        # and its `tags` say which game it is for. Taking only the first match overall would let
+        # whichever question the table answers earlier silently veto the other.
+        for clause in table.clauses:
+            if clause.gameSystem and _clause_hit(member, clause):
+                system_hits.append((member, clause))
                 break
 
     # The manufacturer's own table, evaluated ONCE against the product rather than per observation,
@@ -184,7 +194,7 @@ def decide(
     # questions, and taking the category from one and the game system from the other is the whole
     # reason a clause may decide either.
     game_system = faction = game_system_basis = game_system_why = None
-    for member, clause in hits:
+    for member, clause in system_hits:
         if clause.gameSystem and not game_system:
             game_system, game_system_basis = clause.gameSystem, MAPPED
             game_system_why = f"{member.source_id} {_signal(clause)}"

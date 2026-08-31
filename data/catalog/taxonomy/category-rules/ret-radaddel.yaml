@@ -1,0 +1,39 @@
+source: ret-radaddel
+reason: >-
+  radaddel.de tags every product with the RANGE it belongs to, and a range belongs to one
+  game. The tags are a flat mix of the vendor name, the product code repeated, sale
+  collections and one or more range names, so only the range values are mapped here and
+  everything else is ignored rather than guessed at.
+clauses:
+  # --- which GAME, from a German retailer's range tags -------------------------------------------
+  # radaddel.de tags each product with the range it belongs to, and the ranges are game-specific.
+  # Measured 2026-08-31 against independently-stated products: 59 of 59 for Atomic Mass Games and
+  # 655 of 657 across the Warlord ranges. Only ranges that map to exactly one game are here.
+  #
+  # THESE REACH PRODUCTS NOTHING ELSE DOES. 67 Atomic Mass Games rows carry no product code and no
+  # other retailer's taxonomy; this tag is their only signal.
+  - gameSystem: star-wars-legion
+    hintContainsAny:
+      tags: ['Galaktische Republik SWL', 'Rebellenallianz SWL', 'Grundspiel und Zubehör SWL',
+             'Separatisten SWL', 'Imperium SWL', 'Söldner SWL', 'Schattenkollektiv SWL']
+  - gameSystem: star-wars-shatterpoint
+    hintContainsAny:
+      tags: ['Star Wars Shatterpoint']
+  - gameSystem: marvel-crisis-protocol
+    hintContainsAny:
+      tags: ['Marvel Crisis Protocol']
+  - gameSystem: konflikt-47
+    hintContainsAny:
+      tags: ['K47', 'Konflikt 47']
+  - gameSystem: blood-red-skies
+    hintContainsAny:
+      tags: ['Geschwader', 'Fliegerasse', 'Grundspiel und Zubehör BRS']
+  - gameSystem: achtung-panzer
+    hintContainsAny:
+      tags: ['Achtung Panzer!']
+  - gameSystem: halo-flashpoint
+    hintContainsAny:
+      tags: ['HALO FLASHPOINT']
+  - gameSystem: walking-dead-all-out-war
+    hintContainsAny:
+      tags: ['The Walking Dead']

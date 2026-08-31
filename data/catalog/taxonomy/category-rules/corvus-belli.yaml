@@ -1,0 +1,37 @@
+manufacturer: corvus-belli
+reason: >-
+  CORVUS BELLI RANGES ITS CODES BY GAME. Infinity is the 28xxxx block plus the `GGB`/`BAI`/`WHP`
+  supplement prefixes; Warcrow is `WW`/`PW`/`WCA`; Aristeia! is `CBARI`/`ARI<digit>`. Measured
+  2026-08-31 against every Corvus Belli product whose gameSystem is stated independently of the
+  code: 285 of 286 standalone, and 286 of 286 once the Aristeia clause below runs first.
+
+
+  ARISTEIA IS FIRST BECAUSE THE RETAILERS GET IT WRONG. GameNerdz shelves nine Aristeia! products
+  under its `Miniatures/Infinity` breadcrumb -- they are a different game -- and `285054` "30mm
+  Bases" is an Aristeia item sitting inside the Infinity 28xxxx code range. Clause order is what
+  fixes both, which is why no retailer breadcrumb table is added for this manufacturer: a table
+  keyed on `Infinity` would fire on those nine before this one could correct them, and would score
+  100% while doing it, because the products it damages are the ones with nothing to grade against.
+
+
+  A NAME CONTAINING "ARISTEIA" IS NOT AN ARISTEIA PRODUCT. `280721 Miyamoto Mushashi Aristeia!
+  outfit`, `280724 Major Lunah, Ex-Aristeia! Sniper` and `280770 Fiddler, Aristeia!'s ex-toymaker`
+  are Infinity miniatures with Aristeia-flavoured names, and the catalog says so. That is why this
+  table matches on the CODE and never on the name.
+
+
+  Warcrow's 132 products are the whole reason the `WW`/`PW`/`WCA` clause exists: every one of them
+  is currently unclassified, so no other signal in the corpus reaches them at all.
+
+clauses:
+  # Aristeia! first -- it shares the Infinity code block and the Infinity retailer shelf.
+  - codeMatches: '^(CBARI|ARI\d)'
+    gameSystem: aristeia
+  - codeMatches: '^285054$'
+    gameSystem: aristeia
+  - codeMatches: '^(WW|PW|WCA)'
+    gameSystem: warcrow
+  - codeMatches: '^28\d{4}'
+    gameSystem: infinity
+  - codeMatches: '^(GGB|BAI|WHP)'
+    gameSystem: infinity

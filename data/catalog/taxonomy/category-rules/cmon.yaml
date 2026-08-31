@@ -1,0 +1,24 @@
+manufacturer: cmon
+reason: >-
+  CMON NAMES A SONG OF ICE AND FIRE PRODUCTS BY THEIR HOUSE. Every miniature in the line is titled
+  `<House>: <unit>` -- `Baratheon: Halberdiers`, `Stark: Sworn Swords` -- and measured 2026-08-31
+  that pattern is 141 of 141 correct against independently-stated products. It is what reaches the
+  60 German-language rows ret-radaddel carries (`Baratheon: Halberdiers (Hellebardiere von Haus
+  Baratheon)`), which have no productLine hint at all.
+
+
+  THE COLON IS LOAD-BEARING. A looser variant allowing a space (`Bolton Flayed Men`) measures the
+  same 146/146 but reaches no additional product, so the stricter form is kept: house names are
+  ordinary English words and `Neutral` or `Free Folk` without the colon would eventually collide
+  with something.
+
+
+  CMON'S OTHER 22 PRODUCT LINES HAVE NO SLUG and are deliberately not mapped -- Massive Darkness,
+  Marvel United, Zombicide, Wrath of Kings and the rest are board games this taxonomy does not
+  name. `mfr-cmon.yaml`'s scaffold comment concluded that no line matched a taxonomy label
+  exactly; that was right for 22 of the 24 and wrong for the two ASOIAF ones, which differ from
+  the label only in punctuation and a subtitle.
+
+clauses:
+  - nameMatches: '^(Baratheon|Bolton|Brotherhood without Banners|Free Folk|Greyjoy|Lannister|Martell|Neutral|Night.?s Watch|Stark|Targaryen|Nachtwache)\s*:'
+    gameSystem: asoiaf
