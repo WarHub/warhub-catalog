@@ -90,7 +90,7 @@ a release tag for a frozen snapshot.
 tools/
   WarHub.PaintCatalog.Tool/      # parses paint lists, computes Delta-E -> data/paints YAML
   WarHub.Catalog.Publish/        # bundles data/ YAML -> dist/ JSON (the published catalog)
-  acquisition/                   # python: acquire/migrate/resolve/categorize/report
+  acquisition/                   # python: acquire/resolve/categorize/classify/report
 data/
   evidence/                      # source of truth: per-source observations (evidence ledger)
   catalog/                       # source of truth: resolved canonical catalog (products/, taxonomy/)

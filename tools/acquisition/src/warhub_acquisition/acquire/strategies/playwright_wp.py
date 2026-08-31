@@ -68,7 +68,8 @@ name, `"A Song of Ice & Fire: TMG"`, differs from the existing `asoiaf` label `"
 Fire"` by both the ampersand and a `": TMG"` suffix). `data/catalog/mappings/mfr-cmon.yaml` is
 therefore a correctly-empty scaffold, exactly like `mfr-manticgames.yaml`'s -- never guessed. A
 product whose line has NO mapping entry gets `hints["productLine"] = <raw line name>` instead (a
-raw, non-taxonomy hint key, same precedent as `migrate/legacy.py`'s `legacyProductCode`): the
+raw, non-taxonomy hint key, same precedent as the `legacyProductCode` the one-time legacy
+migration left on its observations and `classify/joins.py` still reads): the
 classification queue (`classify/queue.py::_raw_hints`) surfaces any hint key other than
 gameSystem/faction/description verbatim to a human/LLM classifier, so this is exactly how CMON's
 real line names ("Zombicide", "Massive Darkness", ...) become available for a *future* manual
