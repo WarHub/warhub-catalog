@@ -704,3 +704,98 @@ def test_a_deciding_clause_may_not_block() -> None:
     with pytest.raises(ValidationError, match="for `noneOf` vetoes"):
         SourceRules.model_validate(_table(source="ret-x",
             clauses=[{"nameMatches": "x", "category": "paint", "blocks": ["faction"]}]))
+
+
+# --- a rule may EXTEND a claim on a set-valued field, never contradict one ----------------------
+
+
+def _record(**kw):
+    from warhub_acquisition.models.catalog import CanonicalProduct
+    base = dict(id="m/1", name="Forge Father Squad", manufacturer="m", status="current",
+                firstSeen="2026-07-01")
+    return CanonicalProduct(**{**base, **kw})
+
+
+def _decision(*systems):
+    from warhub_acquisition.categorize.decide import Decision
+    return Decision(category=None, packaging=None, basis="", why="",
+                    gameSystems=tuple(systems), game_systems_basis="mapped",
+                    game_systems_why="mfr-m categories~firefight-forge-fathers")
+
+
+def _outcome():
+    from warhub_acquisition.categorize.stage import Outcome
+    return Outcome()
+
+
+def test_a_rule_adds_a_membership_the_source_could_not_state() -> None:
+    """MANTIC SELLS ONE BOX INTO TWO GAMES. legacy-catalog had to pick one and picked `deadzone`;
+    the store's own shelves say Deadzone AND Firefight. Adding the second contradicts nothing --
+    the rule's set contains everything the catalog already claims."""
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystems=["deadzone"], gameSystemsBasis="stated")
+    outcome = _outcome()
+    assert _apply_game_systems(record, _decision("deadzone", "firefight"), outcome, frozenset())
+    assert record.gameSystems == ["deadzone", "firefight"]
+    assert outcome.conflicts == []
+
+
+def test_a_rule_that_would_drop_a_stated_system_is_reported_instead() -> None:
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystems=["deadzone"], gameSystemsBasis="stated")
+    outcome = _outcome()
+    assert not _apply_game_systems(record, _decision("firefight"), outcome, frozenset())
+    assert record.gameSystems == ["deadzone"]
+    assert [c.kind for c in outcome.conflicts] == ["gameSystem-disagreement"]
+
+
+def test_an_empty_list_is_filled_by_the_same_containment_test() -> None:
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystemsBasis="unknown")
+    outcome = _outcome()
+    assert _apply_game_systems(record, _decision("firefight"), outcome, frozenset())
+    assert (record.gameSystems, record.gameSystemsBasis) == (["firefight"], "mapped")
+
+
+def test_a_maintainers_decision_is_never_extended() -> None:
+    """The 78 Kill Team entries in overrides.yaml are a decision that those products are
+    `kill-team` AND NOT `warhammer-40k`. Extending the set would quietly undo it."""
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystems=["kill-team"], gameSystemsBasis="override")
+    outcome = _outcome()
+    assert not _apply_game_systems(
+        record, _decision("kill-team", "warhammer-40k"), outcome, frozenset())
+    assert record.gameSystems == ["kill-team"]
+    assert [c.kind for c in outcome.conflicts] == ["gameSystem-disagreement"]
+
+
+def test_a_catch_all_is_replaced_rather_than_extended() -> None:
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystems=["other-games"], gameSystemsBasis="stated")
+    outcome = _outcome()
+    assert _apply_game_systems(record, _decision("necromunda"), outcome, frozenset({"other-games"}))
+    assert record.gameSystems == ["necromunda"]
+
+
+def test_a_catch_all_beside_a_real_claim_is_not_replaced() -> None:
+    """Refining `[other-games]` is informative; replacing `[warhammer-40k, other-games]` would drop
+    a real claim to gain a guess."""
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystems=["other-games", "warhammer-40k"], gameSystemsBasis="stated")
+    outcome = _outcome()
+    assert not _apply_game_systems(
+        record, _decision("necromunda"), outcome, frozenset({"other-games"}))
+    assert record.gameSystems == ["other-games", "warhammer-40k"]
+
+
+def test_a_rule_that_merely_agrees_does_not_demote_the_basis() -> None:
+    """AGREEMENT IS NOT AN EXTENSION. A table naming exactly what a source already stated must
+    leave the record alone -- rewriting it would set `gameSystemsBasis: mapped` and lose the fact
+    that a source said it. Measured when the test read `<=` instead of `<`: 4,242 products
+    silently traded `stated` provenance for a rule that agreed with them."""
+    from warhub_acquisition.categorize.stage import _apply_game_systems
+    record = _record(gameSystems=["firefight"], gameSystemsBasis="stated")
+    outcome = _outcome()
+    assert not _apply_game_systems(record, _decision("firefight"), outcome, frozenset())
+    assert (record.gameSystems, record.gameSystemsBasis) == (["firefight"], "stated")
+    assert outcome.conflicts == []

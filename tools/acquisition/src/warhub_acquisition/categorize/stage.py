@@ -45,6 +45,10 @@ from .rules import SourceRules, load_category_rules
 #: into an absent category is what let this set shrink to one member.
 REPLACEABLE = frozenset({"unknown"})
 
+#: Bases that record a HUMAN's decision about one product. A rule may neither replace nor extend
+#: them -- see `_apply_game_systems`.
+_MAINTAINER_DECIDED = frozenset({"override"})
+
 #: The gameSystem bases this stage may recompute. Both are DERIVED -- they say what happened
 #: when nothing supplied a value -- so re-deriving them against a freshly decided category is
 #: the whole point. `stated`, `mapped` and `override` trace to a claim and are never touched.
@@ -324,15 +328,52 @@ def _apply_game_systems(
     if decision is None or not decision.gameSystems:
         return False
     proposed = list(decision.gameSystems)
-    # REFINING A BUCKET IS NOT OVERWRITING A CLAIM. `other-games` is Games Workshop's own shelf
-    # for everything outside its flagship systems, and this catalog inherited it wholesale -- 593
-    # products, spanning six games GW's product codes name individually. A rule that says which one
-    # is strictly more informative and contradicts nothing, so it replaces the bucket. Only slugs
-    # explicitly marked `catchAll` in the taxonomy qualify, and ALL of the record's current values
-    # must be such buckets -- refining `[other-games]` is informative, but replacing
-    # `[warhammer-40k, other-games]` would drop a real claim to gain a guess.
     settled = set(record.gameSystems)
-    if record.gameSystemsBasis == "unknown" or (settled and settled <= catch_alls):
+
+    # THE TEST IS CONTAINMENT, and on a set-valued field that one test covers what used to be two
+    # separate cases plus the one that mattered most.
+    #
+    #   settled is EMPTY      -- nothing decided; the rule fills it. (`set() <= anything`.)
+    #   settled is a SUBSET   -- the rule ADDS a membership and contradicts none. Mantic sells one
+    #                            Forge Father squad box into both Deadzone and Firefight;
+    #                            legacy-catalog had to pick one and picked `deadzone`, so the rule
+    #                            saying `[deadzone, firefight]` is strictly more informative about
+    #                            the same product. Under a scalar field there was no such thing as
+    #                            extending a claim, which is why the rule used to be "fill a hole
+    #                            or report"; on a list there is, and refusing it left 114 products
+    #                            asserting half of what their manufacturer says.
+    #   otherwise             -- the rule drops or replaces something the catalog states. That is a
+    #                            disagreement and is reported, never applied.
+    #
+    # REFINING A CATCH-ALL IS THE ONE CASE CONTAINMENT DOES NOT COVER, because it REPLACES rather
+    # than extends. `other-games` is Games Workshop's own shelf for everything outside its flagship
+    # systems and this catalog inherited it wholesale -- 593 products spanning six games GW's own
+    # codes name individually. Only slugs explicitly marked `catchAll` qualify, and ALL of the
+    # record's current values must be such buckets: refining `[other-games]` is informative, but
+    # replacing `[warhammer-40k, other-games]` would drop a real claim to gain a guess.
+    #
+    # EXTENDING IS A RATCHET, and the pipeline is what makes that safe. Once a rule has added a
+    # system, NARROWING that rule cannot take it back -- the record's list is no longer a subset of
+    # what the table now proposes, so the next run reports a disagreement and leaves the value
+    # alone. That is correct for a stage that must never overwrite a claim, and it is harmless
+    # because `resolve` always precedes `categorize` (.github/workflows/catalog-acquire.yml) and
+    # rebuilds `gameSystems` from evidence first. Running this stage ALONE after narrowing a table
+    # will not undo the wider value; run `resolve` first.
+    #
+    # A MAINTAINER'S DECISION IS NEVER EXTENDED. `override` is the one basis that means a person
+    # weighed this exact product, and the 78 Kill Team entries in overrides.yaml are precisely a
+    # decision that those products are `kill-team` AND NOT `warhammer-40k`. A rule proposing both
+    # would quietly undo it.
+    # STRICTLY MORE, or nothing. An exact agreement is NOT an extension: rewriting the record
+    # because a table happens to name what a source already stated would demote its basis from
+    # `stated` to `mapped` and lose the fact that a source said it. Measured when this read
+    # `<=`: 4,242 products silently lost `stated` provenance to a rule that agreed with them.
+    extends = (
+        (not settled or settled < set(proposed))
+        and record.gameSystemsBasis not in _MAINTAINER_DECIDED
+    )
+    refines = bool(settled) and settled <= catch_alls
+    if extends or refines:
         record.gameSystems = proposed
         record.gameSystemsBasis = decision.game_systems_basis
         if decision.faction and not record.faction:

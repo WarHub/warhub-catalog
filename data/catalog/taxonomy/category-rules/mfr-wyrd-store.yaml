@@ -23,9 +23,16 @@ reason: >-
   where the value literally contains the word.
 
 
-  UNMAPPED: "Product" and "Wargame" say nothing; "Vagrantsong Iconic", "Malifaux Rotten Harvest
-  Limited Edition" and "Vagrantsong Expansion" name an edition rather than a thing; "Gift Card"
-  is neither a good nor an event.
+  UNMAPPED: "Product" and "Wargame" say nothing; "Vagrantsong Iconic" names an edition rather than
+  a thing; "Gift Card" is neither a good nor an event.
+
+
+  TWO OF THOSE REFUSALS ARE NOW REVERSED, because the words were judged rather than the shelves.
+  "Malifaux Rotten Harvest Limited Edition" does name an edition -- and all six of its rows read
+  `Limited Edition - Rotten Harvest <title>`, Wyrd's annual alternative-sculpt MINIATURE line.
+  "Vagrantsong Expansion" is the same board game this table already maps under
+  "Vagrantsong Scenario Expansion" and "Vagrantsong Board Game". A word that says nothing and a
+  shelf that holds one kind of thing are different problems.
 
 clauses:
   # --- miniatures, loose and boxed ---------------------------------------------------------------
@@ -170,10 +177,22 @@ clauses:
   - category: merch
     hintEquals: {productType: Jigsaw Puzzle}
 
-  # --- form only ----------------------------------------------------------------------------------
-  - packaging: digital
+  - category: miniatures
+    hintEquals: {productType: Malifaux Rotten Harvest Limited Edition}
+    note: 6 rows, every one `Limited Edition - Rotten Harvest <title>`
+  - category: board-game
+    hintEquals: {productType: Vagrantsong Expansion}
+    note: 2 rows of the game this table already maps twice over
+
+  # --- digital models -------------------------------------------------------------------------
+  # This clause wrote NOTHING until the stage stopped gating on the category: `packaging`-only
+  # decisions were skipped entirely. Of its 5 rows, 3 are model files and 2 are a booklight and
+  # base inserts -- so the category is the majority reading rather than a certainty, and it is the
+  # form that was always safe.
+  - category: miniatures
+    packaging: digital
     hintEquals: {productType: Digital STL}
-    note: an STL is a file of a model; the FORM is certain, the thing it prints to is not
+    note: 5 rows, 3 of them model files
 
   # --- which GAME, from the store's own brand tags -----------------------------------------------
   # Measured 2026-08-31: 475 of 475. THE OTHER SIDE IS TESTED FIRST and that ordering is the whole

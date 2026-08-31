@@ -1,0 +1,85 @@
+source: ret-tistaminis
+reason: >-
+  A STORE WITH 3,716 OBSERVATIONS AND NO TABLE AT ALL until now. tistaminis tags every listing with
+  the RANGE it belongs to and files a minority under a `productType`; between them they answer the
+  category question for 114 products nothing else in the catalog reaches, 79 of which are Monument
+  Hobbies colours that join no barcode and so were invisible to the paint-barcode rung.
+
+
+  ITS `vendor` IS A SOURCING CHANNEL, NOT A TAXONOMY, and that is why most of this store is not
+  mapped here. `GW-LOCAL` alone spans miniatures 459 / book 145 / game-accessory 78 / terrain 10 /
+  hobby-auxiliary 7 -- it says where the stock came from. The one exception is
+  `Monument Hobbies`, which is a brand whose entire catalogue is paint, and it is used for the 12
+  rows that carry no productType.
+
+
+  DELIBERATELY ABSENT, with the measurement: `Warlord-BLISTER` (185 undecided) and
+  `Reaper Miniatures` (109 undecided) are both ~100% miniatures by a full name-read, and both are
+  left out. `Warlord-BLISTER` names a FORMAT and would be worth having for `packaging: single`
+  alone, but the store's blister/web/local split is a purchasing convention that no other source
+  corroborates. `Reaper Miniatures` names a BRAND, and Reaper's own catalogue includes 300+ Master
+  Series paints on 9xxx codes that this store could stock tomorrow -- the clause would be right
+  today and silently wrong the week that happened.
+
+
+  Measured 2026-09-01 against products decided by evidence this store did not supply.
+
+clauses:
+  # PAINT. 67 products under this shelf, every one a Monument Hobbies colour record; 18 of them
+  # appear in `data/paints/brands/monument-pro-acryl.yaml` under the same productCode (AMP-002,
+  # AMP-004, ...) and the remaining 49 are the MPA-S Signature and MPA-F Fluorescent ranges, colour
+  # names one and all. NONE joins by barcode, which is why the paint catalog could not reach them.
+  # Known residue: `MPAP-013/017 Brush-On White/Black - PRIME` are primers, 2 of 67.
+  - category: paint
+    hintEquals:
+      productType: 'Paints & Supplies'
+    note: 67 products, all Monument Hobbies colours
+  - category: paint
+    hintEquals:
+      vendor: 'Monument Hobbies'
+    note: the 12 rows of the same population that carry no productType
+  - category: paint
+    hintContainsAny:
+      tags: ['Army Painter Paints', 'Speedpaint', 'Green Stuff World Paints']
+    note: 363 products, 361 of which another source already calls paint
+
+  # PAINT SETS. `packaging: set` is what the shelf name asserts; 23 of the 26 already publish
+  # `paint-set` from other evidence.
+  - category: paint-set
+    packaging: set
+    hintContainsAny:
+      tags: ['Paint Sets', 'Army Painter Paint Sets']
+
+  # BOOKS. Black Library is Games Workshop's fiction imprint; all 24 undecided members read
+  # `... (HB)` / `... (PB)` / `THE ART OF WARHAMMER 40000`, and 78 of the 103 products carrying the
+  # tag already publish `book`.
+  - category: book
+    hintContainsAny:
+      tags: ['Black Library']
+    note: 24 products
+
+  # TERRAIN. `Other Terrain` is 18 Warlord pre-painted Normandy buildings plus
+  # `Waterloo La Belle Alliance`. Corroborated sideways: the sibling `Warlord Games Other` shelf
+  # grades 15/15 terrain against independent evidence.
+  - category: terrain
+    hintContainsAny:
+      tags: ['Other Terrain', 'Terrain Crate', 'TerrainCrate', 'Terrain']
+    note: 23 products; 26 of the 30 TerrainCrate rows already publish terrain
+
+  # HOBBY AUXILIARY. Both shelves are single-purpose and 24 of 24 already agree.
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['Army Painter Brushes', 'Army Painter Tufts']
+
+  # ---------------------------------------------------------------------------------------------
+  # NO gameSystem CLAUSES, and it is worth saying why rather than leaving a gap. This store's game
+  # tags are excellent -- `Victory at Sea` 94/94, `Old World` 396/396, `Konflikt` 53/53,
+  # `Warhammer Lord of the Rings` 137/137 -- and they would decide NOTHING, because every product
+  # they reach already carries a system from its own manufacturer. The 421 tistaminis products
+  # that lack one sit under `Reaper Miniatures`, `Green Stuff World`, `Black Library` and `Amazon`,
+  # where the tag names a brand or a sales channel and no game at all.
+  #
+  # Its faction and period tags are genuinely contaminated and stay out: `Hail Caesar` grades
+  # 284/363 (51 bolt-action, 26 epic-hail-caesar), `Space Marines` 77 warhammer-40k against 15
+  # horus-heresy, and `Kill Team` would contradict 54 independently-stated values rather than fill
+  # a hole.

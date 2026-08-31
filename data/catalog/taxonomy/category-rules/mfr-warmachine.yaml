@@ -23,13 +23,27 @@ clauses:
   - category: book
     hintEquals: {productType: Roleplaying Game}
     note: warmachine.gg's RPG shelf is the Iron Kingdoms rulebooks
-  - packaging: digital
+  # BOTH DIGITAL SHELVES ARE TEXT, and both used to write nothing at all -- a clause that set only
+  # `packaging` was skipped by the stage, so 24 products matched a committed rule and kept no value
+  # from it. The old note said `Digital Download` "holds rules PDFs and STL files alike"; measured
+  # 2026-09-01, there is not one STL on it. 12 of its 14 rows are `Iron Kingdoms: <title> (PDF)`,
+  # the RPG rulebooks this table's own `Roleplaying Game` clause already calls books, and they line
+  # up one-for-one with `vendor: Iron Kingdoms`. The other two are the Warmachine quick-start and
+  # rules-only PDFs.
+  - category: book
+    packaging: digital
     hintEquals: {productType: Digital Download}
-    note: >-
-      no category: the shelf holds rules PDFs and STL files alike, and the form is all this value
-      actually establishes
-  - packaging: digital
+    note: 14 rows, 12 of them the PDF twin of a printed Iron Kingdoms book
+
+  # `Free Resource` is a judgement rather than a measurement, and it is recorded as one: 8 of its
+  # 10 rows are `... Build Instructions`, which the vocabulary has no real home for, and the other
+  # two are a tournament pack and a lore PDF. Every one is a text document, so `book` is the
+  # least-wrong value available -- if `hobby-auxiliary` ever grows an instructions boundary, this
+  # is the clause to revisit.
+  - category: book
+    packaging: digital
     hintEquals: {productType: Free Resource}
+    note: 10 rows, 8 of them build instructions
 
   # --- which GAME, from the storefront's own vendor field ----------------------------------------
   # Steamforged runs one storefront for several games and stamps each row with the line it belongs

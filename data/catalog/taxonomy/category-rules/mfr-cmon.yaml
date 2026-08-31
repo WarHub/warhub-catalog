@@ -1,0 +1,107 @@
+source: mfr-cmon
+reason: >-
+  EVERY ONE OF CMON'S 387 PRODUCTS IS UNDECIDED, and its `productLine` hint decides most of them.
+  24 distinct values over 264 of 320 rows, and it is the cleanest small taxonomy in the catalog:
+  each value is a game TITLE, and every row under it is that title's base game or a named
+  expansion of it.
+
+
+  IT WAS INVISIBLE. `mfr-cmon` appears nowhere in `data/review/categorize.yaml`'s `unmapped`
+  worklist despite being 387-for-387 undecided, because `productLine` was not in
+  `categorize/stage.py::TAXONOMY_HINTS` -- the same omission that hid `tradeCategory` until
+  2026-08-25 and made the largest block of undecided products look like a source with nothing to
+  offer.
+
+
+  THERE IS NO CONTROL FOR `board-game`. Nothing in the catalog states that category for any
+  product, so these clauses cannot be graded the way a paint clause can. What stands behind them
+  is a read of all 72 names -- `Munchkin Dungeon: Cthulhu`, `Bloodborne: The Board Game - Chalice
+  Dungeon`, `Marvel Zombies: Clash of the Sinister Six` -- against the boundary categories.yaml
+  draws in as many words: "A standalone title that happens to contain miniatures is `board-game`."
+  That is the same standing the lexicon's own entries have, and it is stated here rather than
+  implied.
+
+
+  THE 56 ROWS WITH NO `productLine` ARE NOT REACHABLE and are left alone: `Dune: War for Arrakis`,
+  `God of War: The Board Game`, `Ethnos`, `XenoShyft`, `Stranger Things: Upside Down`. Almost all
+  are board games, but there is no pattern to match -- only 56 individual titles, which is a
+  name-lexicon question rather than a taxonomy one.
+
+clauses:
+  # --- board games: a standalone title, whatever is in the box ---------------------------------
+  - category: board-game
+    hintEquals: {productLine: Massive Darkness}
+  - category: board-game
+    hintEquals: {productLine: Marvel United}
+  - category: board-game
+    hintEquals: {productLine: 'Marvel Zombies: A Zombicide Game'}
+  - category: board-game
+    hintEquals: {productLine: 'Bloodborne: The Board Game'}
+  - category: board-game
+    hintEquals: {productLine: 'Bloodborne: The Card Game'}
+  - category: board-game
+    hintEquals: {productLine: Munchkin Dungeon}
+  - category: board-game
+    hintEquals: {productLine: The Grizzled}
+  - category: board-game
+    hintEquals: {productLine: Trudvang Legends}
+  - category: board-game
+    hintEquals: {productLine: Zombicide}
+  - category: board-game
+    hintEquals: {productLine: 'Collect!'}
+  - category: board-game
+    hintEquals: {productLine: 'Cyberpunk 2077: Gangs of Night City'}
+  - category: board-game
+    hintEquals: {productLine: DCeased}
+  - category: board-game
+    hintEquals: {productLine: Gizmos}
+  - category: board-game
+    hintEquals: {productLine: 'MAYHEM SYSTEM'}
+  - category: board-game
+    hintEquals: {productLine: 'The World of SMOG'}
+  - category: board-game
+    hintEquals: {productLine: 'Twilight Imperium'}
+  - category: board-game
+    hintEquals: {productLine: 'Modern Art'}
+  - category: board-game
+    hintEquals: {productLine: 'The Dead Keep'}
+
+  # --- miniatures lines -------------------------------------------------------------------------
+  # A Song of Ice and Fire is CMON's one miniatures game with a taxonomy slug, and this shelf is
+  # the largest single decision available anywhere in the residue: 165 products, every one a
+  # Faction Pack, Attachment or unit box. The gameSystem is corroborated independently -- 137 of
+  # 137 against products another source classified -- and the category rests on the same name-read
+  # as the board games, over all 165. NOTE THE EN-DASH in the Tactics line; it is not a hyphen.
+  - category: miniatures
+    gameSystems: [asoiaf]
+    hintEquals: {productLine: 'A Song of Ice & Fire: TMG'}
+    note: 165 products; gameSystem 137/137 against independent evidence
+  - category: miniatures
+    gameSystems: [asoiaf]
+    hintEquals: {productLine: 'A Song of Ice and Fire: Tactics – A Tabletop Skirmish Game'}
+    note: 5 products; en-dash, not a hyphen
+  - category: miniatures
+    hintEquals: {productLine: 'Dark Age'}
+    note: 9 warband boxes
+  - category: miniatures
+    hintEquals: {productLine: 'Wrath of Kings'}
+    note: 6 starter boxes -- Goritsi, Hadross, Nasier
+
+  # --- books ------------------------------------------------------------------------------------
+  # `Broken Compass` is an RPG line: `Adventure Journal`, `Golden Age - Season 1`. One of its six
+  # rows is a `Narrator Accessory Kit`, which is the known residue.
+  - category: book
+    hintEquals: {productLine: 'Broken Compass'}
+    note: 6 rows, 5 of them books
+  - category: book
+    hintEquals: {productLine: "Assassin's Creed Roleplaying Game"}
+    note: >-
+      1 row, the Animus Handbook core rules. The apostrophe in the productLine value is U+2019,
+      not an ASCII quote
+
+  # NO gameSystem CLAUSES BEYOND ASOIAF, and the reason is a taxonomy gap rather than a data one.
+  # 22 of CMON's 24 product lines name a game `game-systems.yaml` has no word for -- Zombicide,
+  # Marvel United, Massive Darkness, Bloodborne, Munchkin Dungeon, Trudvang Legends, Twilight
+  # Imperium, Wrath of Kings, Dark Age and the rest. Minting 22 slugs is a taxonomy decision with
+  # its own review; deciding their CATEGORY does not require it, which is why this file answers one
+  # question and not the other.
