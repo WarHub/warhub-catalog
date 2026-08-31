@@ -618,3 +618,73 @@ def test_hint_fields_can_be_declared_stale_too() -> None:
         KINDS, NO_EAN, None, stale_fields={"legacy-catalog": ["description"]},
     )
     assert product.description == "current blurb"
+
+
+# --- gameSystemBasis -------------------------------------------------------------------------
+#
+# A null gameSystem was carrying two facts that need opposite responses: a hobby product that will
+# never have one, and a game product nobody has classified. Only the second is a question.
+
+from warhub_acquisition.resolve.attributes import (  # noqa: E402
+    apply_classification,
+    complete_game_system_basis,
+)
+
+_LABELS = {"warhammer-40k": "Warhammer 40,000", "infinity": "Infinity", "bolt-action": "Bolt Action"}
+
+
+def _product(**kwargs) -> CanonicalProduct:
+    base = dict(
+        id="mfr/x", name="A Thing", manufacturer="mfr", status="current", firstSeen="2026-01-01"
+    )
+    return CanonicalProduct.model_validate({**base, **kwargs})
+
+
+def test_a_hobby_product_with_no_game_system_is_not_applicable_rather_than_unknown() -> None:
+    settled = complete_game_system_basis(_product(name="Abaddon Black 12ml", category="paint"), _LABELS)
+    assert settled.gameSystemBasis == "not-applicable"
+
+
+def test_a_game_product_with_no_game_system_stays_unknown() -> None:
+    settled = complete_game_system_basis(_product(name="Some Squad", category="miniatures"), _LABELS)
+    assert settled.gameSystemBasis == "unknown"
+
+
+def test_the_predicate_can_never_erase_a_game_system_anything_established() -> None:
+    """It is only ever consulted where gameSystem is ALREADY null, which is what makes it safe.
+
+    The obvious formulation -- "category is paint, therefore no game system" -- is measurably
+    wrong: 411 products carry both, and they are real.
+    """
+    themed = _product(name="Infinity: JSA Paint Set", category="paint-set", gameSystem="infinity")
+    assert complete_game_system_basis(themed, _LABELS) is themed
+
+
+def test_a_hobby_product_named_for_a_game_is_a_question_not_a_dismissal() -> None:
+    # `Infinity: JSA Paint Set` with no stated system must not be written off as not-applicable --
+    # it is a themed boxed product and somebody should decide.
+    settled = complete_game_system_basis(_product(name="Infinity: JSA Paint Set", category="paint-set"), _LABELS)
+    assert settled.gameSystemBasis == "unknown"
+
+
+def test_a_colour_named_after_a_faction_is_still_a_colour() -> None:
+    """The one judgement in the predicate. `CONTRAST: BLACK LEGION (18ML)` names a 40k faction and
+    is a pot of paint; a prior classification wave called 34 near-identical records 40k products."""
+    for name in (
+        "Warhammer 40,000 Contrast Paint 18ml",
+        "SQUIG ORANGE (6-PACK) 12ML Warhammer 40,000",
+        "Warhammer 40,000 Spray",
+    ):
+        settled = complete_game_system_basis(_product(name=name, category="paint"), _LABELS)
+        assert settled.gameSystemBasis == "not-applicable", name
+
+
+def test_a_classification_fills_a_hole_and_can_never_overrule_a_source() -> None:
+    decisions = {"mfr/x": {"gameSystem": "warhammer-40k", "faction": None}}
+
+    stated = _product(gameSystem="bolt-action", gameSystemBasis="stated")
+    assert apply_classification(stated, decisions).gameSystem == "bolt-action"
+
+    empty = _product()
+    filled = apply_classification(empty, decisions)
+    assert (filled.gameSystem, filled.gameSystemBasis) == ("warhammer-40k", "classified")

@@ -196,7 +196,6 @@ def _run_classify_propose_joins(args: argparse.Namespace, paths: DataPaths) -> i
 
 
 def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
-    from warhub_acquisition.classify.apply import apply_classifications
     from warhub_acquisition.classify.queue import build_queue
 
     try:
@@ -234,12 +233,7 @@ def _run_classify(args: argparse.Namespace, paths: DataPaths) -> int:
             )
             return 0
 
-        count = apply_classifications(paths)
-        print(
-            f"applied {count} classification{'s' if count != 1 else ''} to catalog/overrides.yaml; "
-            "run `warhub-data resolve` to un-park the classified entities"
-        )
-        return 0
+        raise AssertionError("unreachable: classify requires one mode flag")
     except ValueError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
@@ -299,9 +293,10 @@ def main(argv: list[str] | None = None) -> int:
             "Classification pipeline for published products with a null gameSystem (optional -- "
             "these publish as-is, but a decision here gives one a gameSystem/faction). "
             "--emit-queue writes data/review/classification-queue.yaml for a classifier "
-            "(human or LLM) to work through; --apply reads committed decisions from "
-            "data/catalog/classifications/products.yaml and merges them into "
-            "data/catalog/overrides.yaml. --llm sends the emitted queue to an Anthropic model for "
+            "(human or LLM) to work through; decisions land in "
+            "data/catalog/classifications/products.yaml, which `resolve` reads directly -- there "
+            "is no longer an --apply step, and no copy of a machine guess in overrides.yaml. "
+            "--llm sends the emitted queue to an Anthropic model for "
             "gameSystem/faction decisions. --propose-joins deterministically finds suspected "
             "duplicate-entity pairs (shared EAN / normalized name / legacy-code-to-sku match), "
             "sends each to an Anthropic model for a same-product verdict, and writes "
@@ -314,7 +309,6 @@ def main(argv: list[str] | None = None) -> int:
     classify.add_argument("--data", type=Path, default=Path("data"))
     classify_mode = classify.add_mutually_exclusive_group(required=True)
     classify_mode.add_argument("--emit-queue", action="store_true")
-    classify_mode.add_argument("--apply", action="store_true")
     classify_mode.add_argument("--llm", action="store_true")
     classify_mode.add_argument("--propose-joins", action="store_true")
     classify_mode.add_argument("--propose-supersessions", action="store_true")

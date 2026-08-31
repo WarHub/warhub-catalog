@@ -284,9 +284,16 @@ def test_the_stage_decides_guesses_and_leaves_claims_alone(tmp_path: Path) -> No
     assert after["games-workshop/MYST1"]["categoryBasis"] == "guessed"
 
 
-def test_the_stage_changes_only_the_three_fields_it_owns(tmp_path: Path) -> None:
+def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
     """The catalog files are rewritten wholesale, so the guard is that a rewrite is a no-op for
-    every field this stage does not decide -- ids included."""
+    every field this stage does not decide -- ids included.
+
+    `gameSystemBasis` is the fourth, and it is here rather than in `resolve` because it is a
+    question ABOUT the category: whether a game system applies to this product at all. `resolve`
+    cannot answer it, because at that point a paint pot is still `miniatures`/`guessed` -- the
+    fallback fired precisely because nothing had decided yet. Settling it upstream asked one pass
+    too early and returned `unknown` for 4,189 products that are plainly hobby supplies.
+    """
     paths = _seed(tmp_path)
     before = _catalog(paths)
     categorize(paths)
@@ -299,7 +306,7 @@ def test_the_stage_changes_only_the_three_fields_it_owns(tmp_path: Path) -> None
         for key in set(before[pid]) | set(after[pid])
         if before[pid].get(key) != after[pid].get(key)
     }
-    assert changed <= {"category", "categoryBasis", "packaging"}
+    assert changed <= {"category", "categoryBasis", "packaging", "gameSystemBasis"}
 
 
 def test_packaging_is_filled_only_where_the_record_had_none(tmp_path: Path) -> None:

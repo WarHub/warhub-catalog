@@ -1,4 +1,6 @@
 """Fold an entity's observations into one canonical record; derive lifecycle."""
+import re
+
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
 from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
@@ -89,6 +91,13 @@ def resolve_attributes(
     for name in _HINT_FIELDS:
         fields[name] = _first([member.hints.get(name) for member in _for(name)])
 
+    # A source asserted it for this product. Recorded rather than inferred later, because by the
+    # time anything downstream sees the record, a value folded from a hint and one written by a
+    # rule table are indistinguishable -- which is how 1,819 LLM guesses came to sit in the same
+    # field as 12,802 source claims with nothing to tell them apart.
+    if fields["gameSystem"] is not None:
+        fields["gameSystemBasis"] = "stated"
+
     # Fallback classification from a source's raw category taxonomy (today only mfr-gw-trade's
     # `tradeCategory`, mapped in data/catalog/mappings/<source>.yaml). Applied ONLY when no source
     # supplied a gameSystem directly, and it never overrides one -- it fills the products (chiefly
@@ -105,6 +114,7 @@ def resolve_attributes(
             system = (mapping.get("gameSystem") or {}).get(prefix)
             if system:
                 fields["gameSystem"] = system
+                fields["gameSystemBasis"] = "mapped"
                 if fields["faction"] is None:
                     fields["faction"] = (mapping.get("faction") or {}).get(str(trade_category))
                 break
@@ -224,4 +234,86 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
         return product
     # revalidate the merged record so an unknown key or wrong-typed value in
     # human-edited overrides.yaml fails loudly instead of being dropped
-    return CanonicalProduct.model_validate({**product.model_dump(), **patch})
+    merged = CanonicalProduct.model_validate({**product.model_dump(), **patch})
+    if patch.get("gameSystem") is not None:
+        merged.gameSystemBasis = "override"
+    return merged
+
+
+def apply_classification(
+    product: CanonicalProduct, decisions: dict[str, dict], accepted: str = "classified"
+) -> CanonicalProduct:
+    """Apply an LLM classification, and ONLY where the evidence said nothing.
+
+    THIS USED TO BE AN OVERRIDE, and that was the defect. `classify --apply` merged its decisions
+    into data/catalog/overrides.yaml -- the file whose whole purpose is a human's judgement
+    outranking every source -- and `apply_overrides` runs last, so a Haiku label beat the
+    manufacturer that contradicted it. Measured 2026-08-31: 3,182 decisions, all `decidedBy: llm`,
+    1,819 of them deciding a published record. Among them `SQUIG ORANGE (6-PACK) 12ML` ->
+    the-old-world and `CONTRAST: BLACK LEGION` -> warhammer-40k: a colour is not a game product,
+    and no source ever said it was.
+
+    A guess is now what it always was, ranked accordingly: it fills a hole and can never fill
+    anything else. A human override still outranks it, because `apply_overrides` still runs after.
+    """
+    decision = decisions.get(product.id)
+    if not decision or product.gameSystem is not None:
+        return product
+    return product.model_copy(
+        update={
+            "gameSystem": decision.get("gameSystem"),
+            "faction": product.faction or decision.get("faction"),
+            "gameSystemBasis": accepted,
+        }
+    )
+
+
+#: Categories for which a game system is a category error rather than a missing value. A pot of
+#: paint belongs to no game system and never will; saying `unknown` about it invites a classifier
+#: to keep asking. `terrain` and `book` are deliberately NOT here -- a Necromunda bulkhead and a
+#: Space Marines codex both belong to a system.
+_NO_GAME_SYSTEM_CATEGORIES = frozenset({"paint", "paint-set", "hobby-auxiliary"})
+
+
+def complete_game_system_basis(
+    product: CanonicalProduct, system_labels: dict[str, str]
+) -> CanonicalProduct:
+    """Split a null `gameSystem` into the two different facts it was carrying.
+
+    `not-applicable` -- a hobby product, and nothing is missing.
+    `unknown`        -- a game product this pipeline failed to classify.
+
+    THE PREDICATE IS SAFE BY CONSTRUCTION, not by accuracy: it is only ever consulted when
+    `gameSystem` is ALREADY null, so it cannot erase a value anything else established. That
+    matters, because the obvious formulation -- "category is paint, therefore no game system" --
+    is measurably wrong: 411 products carry both, and they are real. `Infinity: JSA Paint Set` is
+    a paint set AND an Infinity product; a faction transfer sheet is hobby-auxiliary AND belongs
+    to its army.
+
+    A NAMED COLOUR IS STILL A COLOUR, which is the one judgement encoded here. `CONTRAST: BLACK
+    LEGION (18ML)` names a 40k faction and is a pot of paint; `Warhammer 40,000: Paints + Tools`
+    is a boxed product for a game. The separator is whether the record is a single colour, and
+    the test for that is the source's own words -- a volume, a multipack count, or `spray`.
+    """
+    if product.gameSystem is not None:
+        return product
+    if product.category not in _NO_GAME_SYSTEM_CATEGORIES or _names_a_game_system(
+        product.name, system_labels
+    ):
+        return product.model_copy(update={"gameSystemBasis": "unknown"})
+    return product.model_copy(update={"gameSystemBasis": "not-applicable"})
+
+
+_COLOUR_RECORD = re.compile(r"\d+\s*ml\b|\(\s*\d+\s*[- ]?pack\s*\)|\bx\s?\d+\b|\bspray\b", re.IGNORECASE)
+
+
+def _names_a_game_system(name: str, system_labels: dict[str, str]) -> bool:
+    """True when the product's own name names a game system AND the record is not a single colour.
+
+    Driven by the taxonomy's labels rather than a hand-listed set of game names, so a system added
+    to `game-systems.yaml` is recognised here the same day.
+    """
+    text = (name or "").lower()
+    if not any(label.lower() in text for label in system_labels.values() if len(label) > 3):
+        return False
+    return _COLOUR_RECORD.search(text) is None
