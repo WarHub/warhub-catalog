@@ -108,14 +108,18 @@ def test_a_code_in_flowing_prose_is_not_a_member() -> None:
 
 
 def test_a_repeated_code_survives_to_be_refused() -> None:
-    """warlord-games/AK17522 lists AK17068 twice: "OLD GOLD" (archive-confirmed) and "COLD STEEL"
+    """ak-interactive/AK17522 lists AK17068 twice: "OLD GOLD" (archive-confirmed) and "COLD STEEL"
     (which the archive holds at AK17070) -- a typo in AK's copy. De-duplicating here would drop
-    Cold Steel with no trace; keeping the repeat lets gen_set_contents.py refuse it by name."""
+    Cold Steel with no trace; keeping the repeat lets gen_set_contents.py refuse it by name.
+
+    THE ID USED TO READ `warlord-games/AK17522` and the set is the same set: it is an AK
+    Interactive paint set that Warlord's store resells, and the frozen legacy import filed it
+    under the shop it came off. See SourceDescriptor.manufacturerIsShelf."""
     derived = _derived_from_committed_products()
-    refs = derived["warlord-games/AK17522"]
+    refs = derived["ak-interactive/AK17522"]
     assert refs == ["AK17065", "AK17066", "AK17067", "AK17068", "AK17069", "AK17068"]
     names = {code: name for code, name, _qty in
-             enumerated_members(_description_of("warlord-games/AK17522"))}
+             enumerated_members(_description_of("ak-interactive/AK17522"))}
     assert names["AK17068"] == "COLD STEEL"  # last-wins in a dict; both lines were parsed
 
 

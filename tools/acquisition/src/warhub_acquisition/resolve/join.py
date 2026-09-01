@@ -104,25 +104,88 @@ def _priority(observation: Observation, kinds: dict[str, str]) -> tuple[int, str
     return (KIND_PRIORITY.get(kinds.get(observation.source_id, "barcode-db"), 9), observation.key)
 
 
+def _listing_url(observation: Observation) -> str | None:
+    """One page on one storefront. Query strings and a trailing slash are not part of it."""
+    if not observation.url:
+        return None
+    return str(observation.url).split("?")[0].split("#")[0].rstrip("/").lower() or None
+
+
+def _shelf_manufacturer_corrections(
+    observations: list[Observation], manufacturer_is_shelf: dict[str, bool]
+) -> tuple[dict[str, str], list[dict]]:
+    """`{observation key: the maker}` for rows whose manufacturer is the shelf they sat on.
+
+    A source that declares `manufacturerIsShelf` filed the row by where it found it. Any other
+    source observing the SAME product URL read that page's own vendor field, so it is the one
+    saying who made the thing. See SourceDescriptor.manufacturerIsShelf.
+
+    A URL whose non-shelf rows disagree AMONG THEMSELVES corrects nothing: two stores could
+    describe one page differently only by one of them being wrong, and this is not the place to
+    guess which."""
+    if not any(manufacturer_is_shelf.values()):
+        return {}, []
+    shelf_rows: dict[str, list[Observation]] = {}
+    stated: dict[str, set[str]] = {}
+    for observation in observations:
+        url = _listing_url(observation)
+        if url is None or not observation.manufacturer:
+            continue
+        if manufacturer_is_shelf.get(observation.source_id):
+            shelf_rows.setdefault(url, []).append(observation)
+        else:
+            stated.setdefault(url, set()).add(observation.manufacturer)
+    corrections: dict[str, str] = {}
+    reports: list[dict] = []
+    for url, rows in sorted(shelf_rows.items()):
+        makers = stated.get(url) or set()
+        if len(makers) != 1:
+            continue
+        maker = next(iter(makers))
+        for observation in rows:
+            if observation.manufacturer == maker:
+                continue
+            corrections[observation.key] = maker
+            reports.append(
+                {
+                    "type": "shelf-manufacturer-corrected",
+                    "key": observation.key,
+                    "name": observation.name,
+                    "shelf": observation.manufacturer,
+                    "maker": maker,
+                    "url": url,
+                }
+            )
+    return corrections, reports
+
+
 def join_observations(
     observations: list[Observation],
     taxonomy: Taxonomy,
     kinds: dict[str, str],
     matches: Matches,
     sku_is_listing_id: dict[str, bool] | None = None,
+    manufacturer_is_shelf: dict[str, bool] | None = None,
 ) -> JoinResult:
     result = JoinResult()
     sku_is_listing_id = sku_is_listing_id or {}
+    derived_manufacturers, shelf_reports = _shelf_manufacturer_corrections(
+        observations, manufacturer_is_shelf or {}
+    )
+    result.ambiguous.extend(shelf_reports)
     # Hand corrections to WHAT AN OBSERVATION SAYS come first, so every later step -- grouping, the
     # cross-manufacturer-ean check, `group_entity_id`, and the members `resolve_attributes` and
     # `corroborate` fold -- sees one answer. The evidence file is never rewritten: a source's claim
     # stays that source's claim (OBJECTIVES 5), and the correction lives in matches.yaml where it
     # is reviewable next to its reason.
-    if matches.reassignManufacturer or matches.rejectEans:
+    if matches.reassignManufacturer or matches.rejectEans or derived_manufacturers:
         corrected_observations = []
         for observation in observations:
             update: dict[str, object] = {}
-            manufacturer = matches.reassignManufacturer.get(observation.key)
+            # A hand correction names one row and its reason, so it outranks the derivation.
+            manufacturer = matches.reassignManufacturer.get(
+                observation.key
+            ) or derived_manufacturers.get(observation.key)
             if manufacturer:
                 update["manufacturer"] = manufacturer
             rejected = matches.rejectEans.get(observation.key)

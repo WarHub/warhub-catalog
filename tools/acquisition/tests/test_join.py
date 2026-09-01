@@ -555,6 +555,109 @@ def test_reassign_manufacturer_moves_a_reseller_row_to_the_real_maker() -> None:
     assert not after.ambiguous
 
 
+RESELLER_TAXONOMY = Taxonomy(
+    {
+        "warlord-games": Manufacturer(
+            slug="warlord-games", name="Warlord Games", codePattern=r"[A-Z0-9]{6,}"
+        ),
+        "army-painter": Manufacturer(
+            slug="army-painter", name="The Army Painter", codePattern=r"[A-Z]{2}\d{2,5}"
+        ),
+        "ak-interactive": Manufacturer(
+            slug="ak-interactive", name="AK Interactive", codePattern=r"AK\d{2,5}"
+        ),
+    }
+)
+RESELLER_KINDS = {"legacy": "curated", "mfr-store": "manufacturer"}
+SHELF = {"legacy": True}
+STORE_PAGE = "https://store.warlordgames.com/products/speedpaint-grim-black"
+
+
+def test_shelf_manufacturer_defers_to_the_vendor_named_on_the_same_page() -> None:
+    # The curated import filed the row by the PATH it scraped it from, so a paint the reseller
+    # stocks reads `warlord-games`. The store's own scrape of that same page reads Shopify's
+    # `vendor`, which says who made it. Neither row carries a barcode -- nothing could ever have
+    # fused them -- so the disagreement publishes one product twice.
+    members = [
+        obs("legacy:speedpaint", sku="WP2001", manufacturer="warlord-games", url=STORE_PAGE),
+        obs("mfr-store:speedpaint", sku="WP2001", manufacturer="army-painter", url=STORE_PAGE),
+    ]
+    before = join_observations(members, RESELLER_TAXONOMY, RESELLER_KINDS, Matches())
+    assert sorted(before.entities) == ["army-painter/WP2001", "warlord-games/WP2001"]
+
+    after = join_observations(members, RESELLER_TAXONOMY, RESELLER_KINDS, Matches(), None, SHELF)
+    assert list(after.entities) == ["army-painter/WP2001"]
+    assert [c["type"] for c in after.ambiguous] == ["shelf-manufacturer-corrected"]
+    assert after.ambiguous[0]["shelf"] == "warlord-games"
+    assert after.ambiguous[0]["maker"] == "army-painter"
+
+
+def test_shelf_manufacturer_matches_one_page_not_one_query_string() -> None:
+    # A URL identifies a listing, and a tracking parameter, a fragment or a trailing slash does
+    # not make it a different one. Without this the correction misses the row it is for.
+    members = [
+        obs("legacy:varnish", sku="AK11237", manufacturer="warlord-games", url=STORE_PAGE + "/"),
+        obs(
+            "mfr-store:varnish",
+            sku="AK11237",
+            manufacturer="ak-interactive",
+            url=STORE_PAGE + "?variant=42#reviews",
+        ),
+    ]
+    result = join_observations(members, RESELLER_TAXONOMY, RESELLER_KINDS, Matches(), None, SHELF)
+    assert list(result.entities) == ["ak-interactive/AK11237"]
+
+
+def test_shelf_manufacturer_leaves_a_page_only_the_shelf_source_has_seen() -> None:
+    # Warlord's own products come off the same import by the same path. Nothing else names the
+    # page, so there is nothing to defer to and the shelf's answer stands -- which is the answer
+    # for the several thousand rows where the shelf IS the maker.
+    members = [
+        obs(
+            "legacy:tank",
+            sku="WGB123456",
+            manufacturer="warlord-games",
+            url="https://store.warlordgames.com/products/cromwell",
+        )
+    ]
+    result = join_observations(members, RESELLER_TAXONOMY, RESELLER_KINDS, Matches(), None, SHELF)
+    assert list(result.entities) == ["warlord-games/WGB123456"]
+    assert not result.ambiguous
+
+
+def test_shelf_manufacturer_refuses_a_page_two_other_sources_disagree_about() -> None:
+    # Two sources reading the same page cannot both be right about who made the thing, and
+    # picking one of them here would be a guess. The shelf keeps its answer and the pair stays
+    # visible as the ordinary cross-source disagreement it is.
+    members = [
+        obs("legacy:varnish", sku="AK11237", manufacturer="warlord-games", url=STORE_PAGE),
+        obs("mfr-store:varnish", sku="AK11237", manufacturer="ak-interactive", url=STORE_PAGE),
+        obs("ret-goblin:varnish", sku="AK11237", manufacturer="army-painter", url=STORE_PAGE),
+    ]
+    kinds = {**RESELLER_KINDS, "ret-goblin": "retailer"}
+    result = join_observations(members, RESELLER_TAXONOMY, kinds, Matches(), None, SHELF)
+    assert "warlord-games/AK11237" in result.entities
+    assert not [c for c in result.ambiguous if c["type"] == "shelf-manufacturer-corrected"]
+
+
+def test_hand_reassignment_outranks_the_derived_shelf_correction() -> None:
+    # A maintainer naming one observation and its reason beats a rule that read a store's vendor
+    # field, because the store can be wrong about a brand it resells and matches.yaml says why.
+    members = [
+        obs("legacy:varnish", sku="AK11237", manufacturer="warlord-games", url=STORE_PAGE),
+        obs("mfr-store:varnish", sku="AK11237", manufacturer="army-painter", url=STORE_PAGE),
+    ]
+    result = join_observations(
+        members,
+        RESELLER_TAXONOMY,
+        RESELLER_KINDS,
+        Matches(reassignManufacturer={"legacy:varnish": "ak-interactive"}),
+        None,
+        SHELF,
+    )
+    assert sorted(result.entities) == ["ak-interactive/AK11237", "army-painter/AK11237"]
+
+
 def test_reject_eans_unfuses_two_products_a_wrong_barcode_merged() -> None:
     # One source put product A's barcode on product B, and the (manufacturer, ean) union fused
     # them: B's product code stopped existing. Rejecting that one assertion splits them back apart
