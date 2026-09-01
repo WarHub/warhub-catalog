@@ -25,10 +25,57 @@ reason: >-
   line each.
 
 
-  FIVE VALUES ARE NOT PRODUCT CATEGORIES AT ALL and are deliberately absent: `Free` (19),
-  `Loyalty` (13), `No Discount Codes` (5), `Exclude` (2) and `Archive` (3) are merchandising
-  states. `Accessory` (42) is absent for the opposite reason -- it is a real category and far too
-  vague to place, since it covers dice, flags, tools and mats alike.
+  FOUR VALUES ARE NOT PRODUCT CATEGORIES AT ALL and are deliberately absent: `Loyalty` (13),
+  `No Discount Codes` (5), `Exclude` (2) and `Archive` (3) are merchandising states. `Accessory`
+  (42) is absent for the opposite reason -- it is a real category and far too vague to place,
+  since it covers dice, flags, tools and mats alike; its 42 rows split into 16 tools, 6 wet
+  palettes, 13 Black Seas sails and rigging, 3 templates and a mug, and the tag clauses below
+  reach 22 of them correctly while the shelf itself stays silent.
+
+
+  `productType` REACHES ONLY HALF THE STORE. It is present on 4,856 rows, but around half of
+  those name a game rather than a format, so the table above decides ~2,400 products and leaves
+  ~2,556 undecided. THE TAGS REACH THE REST. Warlord tags every product with its troop type, its
+  unit role, its material and its period -- 850 distinct values, a mean of 13 per row -- and the
+  troop and role families are as clean a `miniatures` signal as this catalog has.
+
+
+  MEASURED 2026-09-01 against an independent statement built four ways and never from this store:
+  another manufacturer's own `category` hint for its own goods, `ret-goblingaming`'s productType
+  shelf through its own committed table, `legacy-catalog`'s category where it is NOT the declared
+  `miniatures` fill, and the paint catalog's barcodes. The base rate over the 1,110 graded store
+  products is miniatures 52.0% / paint 33.6% / hobby-auxiliary 5.5% / book 5.1%, so a `miniatures`
+  rule has to beat 52%, not 0%.
+
+    troop-type family        519/524 = 99.0%     reach 1,887
+    unit and platoon role    293/301 = 97.3%     reach   826
+    book family               57/57  = 100%      reach   167
+    hobby family              40/41  = 97.6%     reach    72
+    material: blister         65/65  = 100%      reach   634
+    material: metal          245/249 = 98.4%     reach 1,660
+    material: warlord-resinplus 29/29 = 100%     reach    71
+
+
+  CLAUSE ORDER IS LOAD-BEARING AND MEASURED. 77 products carry BOTH a troop tag and a book tag,
+  and 46 of those are books by name -- `Bolt Action Campaign: Tough Gut`, `Operation Market Garden
+  PDF`. If the miniatures clauses ran first they would take all 77. The book and hobby clauses
+  therefore precede every miniatures clause.
+
+
+  TWO MATERIAL TAGS ARE DECLINED WITH THEIR NUMBERS RATHER THAN OMITTED SILENTLY: `box-set` (390
+  graded, 91.5%, reach 270) and `warlord-resin` (144, 92.4%, reach 285). Their impurity is books
+  and terrain that also carry the tag, so running them after the book and hobby clauses would
+  raise those figures -- but by how much is not measured, and an unmeasured 91.5% is not a basis
+  for 555 claims. `sprue` (198 products) and `loose-item` (144) have a graded set of TWO each and
+  are not evidence at all.
+
+
+  AND THE TAGS THAT LOOK LIKE SIGNALS AND ARE ARTEFACTS, recorded so they are not tried again:
+  `under-10` reads 86.5% paint and `over-10` 79.9% miniatures -- they are PRICE BANDS, and paint
+  is the cheap half of the catalog. `0424` reads 98.6% paint, `0723` 98.5%, `0319` 95.2%
+  hobby-auxiliary: every date-shaped tag is a RELEASE WEEK and reads as whatever launched that
+  week. `eu` and `us` read 51.9% and 52.0%, which is the base rate exactly -- they are market
+  flags. `deal` and `perfect-present` are promotions. None of these is mapped and none should be.
 
 clauses:
   # --- paint -----------------------------------------------------------------------------------
@@ -127,11 +174,71 @@ clauses:
     hintEquals: {productType: Gaming mat}
 
   # --- packaging only: the value names the FORM and says nothing about the contents -------------
-  - packaging: digital
+  # THE DIGITAL SHELF IS TEXT, and the old note here -- "rules PDFs and gift vouchers alike" --
+  # is no longer true of the data: there is not one gift voucher left on it. All 25 rows are text
+  # PDFs (16 rulebooks and supplements, 4 painting guides), 4 of 4 graded say `book`, and every
+  # one carries the `pdf` or `digital` tag.
+  - category: book
+    packaging: digital
     hintEquals: {productType: Digital}
+    note: 25 rows; graded 4/4
+  - category: book
+    packaging: digital
+    hintEquals: {productType: Free}
     note: >-
-      no category: the store's digital shelf holds rules PDFs and gift vouchers alike, and the
-      form is the only thing this value actually establishes
+      19 rows, every name ending in PDF / FAQ / Errata / download and every one carrying both the
+      `pdf` and `digital` tags. It was absent as a "merchandising state", which the word is and
+      the shelf is not.
+  # ===========================================================================================
+  # THE TAGS. Everything above reads `productType`; from here down the signal is `tags`, which is
+  # what reaches the ~2,556 products whose productType names a game instead of a format.
+  #
+  # BOOKS AND HOBBY GOODS FIRST -- see the ordering note in the header.
+  #
+  # `Reduced Rate VAT` is the cleanest of the book tags and worth its odd looks: it is a UK fiscal
+  # class, books are zero- or reduced-rated, and only 3 of its 64 products also carry a troop tag.
+  # `rules-books` is 57/57. The bare `book` tag is deliberately NOT here -- 25 of its 89 products
+  # also carry a troop tag and are army bundles that merely CONTAIN a book (`Rattenkrieg - German
+  # Veteran Starter Army with Armies of Germany`), and none of those 25 is in the graded set, so
+  # its 40/40 overstates by an estimated 20%.
+  - category: book
+    hintContainsAny:
+      tags: ['rules-books', 'Reduced Rate VAT']
+    note: 57/57 and 39/39 against independent evidence; reach 162
+  - category: book
+    packaging: digital
+    hintContainsAny:
+      tags: ['pdf', 'ebook']
+    note: 16/16 and 2/2; the form is in the tag as well as the category
+
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['bases-basing', 'hobby-equipment', 'hobby-tools', 'Hobby Supplies']
+    note: 40 of 41 graded; the one miss is a single hobby-equipment row
+
+  # MODELS. Two families, both of which describe the MODEL rather than the box: what kind of troop
+  # it is, and what role it plays in a list. Neither can be anything but a miniature.
+  - category: miniatures
+    hintContainsAny:
+      tags: ['infantry', 'infantry-squad', 'infantry-squads-teams', 'cavalry', 'vehicle', 'tank',
+             'command', 'hq', 'Artillery', 'artillery-war-machines', 'plane', 'squadron', 'Vessel',
+             'support-teams', 'anti-tank-guns', 'anti-aircraft-guns',
+             'armoured-cars-recce-vehicles', 'transports-tows', 'self-propelled-guns', 'walker']
+    note: 519 of 524 graded, 99.0%; reach 1,887
+  - category: miniatures
+    hintContainsAny:
+      tags: ['platoon-rifle', 'platoon-armoured', 'platoon-artillery', 'platoon-heavy-weapon',
+             'platoon-reconnaissance', 'platoon-engineer', 'unit-all-vehicles',
+             'unit-armoured-vehicle', 'unit-infantry', 'unit-command', 'unit-anti-tank',
+             'unit-mortars', 'unit-mmg', 'unit-medic', 'unit-observer', 'unit-transport',
+             'unit-transports', 'unit-anti-aircraft', 'unit-artillery', 'unit-flamethrowers',
+             'unit-snipers']
+    note: 293 of 301 graded, 97.3%; reach 826
+  - category: miniatures
+    hintContainsAny:
+      tags: ['blister', 'metal', 'warlord-resinplus']
+    note: 65/65, 245/249 and 29/29; the material tags that survived grading
+
   - packaging: bundle
     hintEquals: {productType: Bundle}
   - packaging: bundle

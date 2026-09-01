@@ -1,14 +1,14 @@
 summary:
   products: 29043
-  undecided: 9261
+  undecided: 6893
   byBasis:
     code: 3684
     lexicon: 583
-    mapped: 13517
+    mapped: 15885
     paint-barcode: 12
     stated: 1986
-    unknown: 9261
-  decidedThisRun: 17796
+    unknown: 6893
+  decidedThisRun: 2368
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -632,85 +632,85 @@ unmapped:
       wouldDecide: 1
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 2554
-    - value: vendor=Warlord Games
-      wouldDecide: 2552
+      wouldDecide: 178
     - value: tags=us
-      wouldDecide: 2550
+      wouldDecide: 178
+    - value: vendor=Warlord Games
+      wouldDecide: 177
     - value: tags=over-10
-      wouldDecide: 1955
-    - value: tags=metal
-      wouldDecide: 1662
-    - value: tags=warlord-games
-      wouldDecide: 935
-    - value: tags=bolt-action
-      wouldDecide: 925
-    - value: productType=Bolt Action
-      wouldDecide: 880
-    - value: tags=blister
-      wouldDecide: 634
+      wouldDecide: 104
     - value: tags=under-10
-      wouldDecide: 565
-    - value: tags=infantry
-      wouldDecide: 510
-    - value: tags=direct
-      wouldDecide: 483
-    - value: tags=resin
-      wouldDecide: 458
-    - value: tags=plastic
-      wouldDecide: 410
-    - value: tags=british
-      wouldDecide: 379
-    - value: tags=black-powder
-      wouldDecide: 377
-    - value: tags=platoon-rifle
-      wouldDecide: 376
+      wouldDecide: 69
     - value: tags=deal
-      wouldDecide: 358
+      wouldDecide: 59
+    - value: tags=plastic
+      wouldDecide: 51
+    - value: tags=accessory
+      wouldDecide: 44
+    - value: tags=EPIC
+      wouldDecide: 35
+    - value: tags=Epic-Battles
+      wouldDecide: 35
+    - value: tags=black-powder
+      wouldDecide: 33
+    - value: tags=warlord-games
+      wouldDecide: 30
+    - value: tags=blood-red-skies
+      wouldDecide: 30
+    - value: tags=new-year-new-army
+      wouldDecide: 30
+    - value: productType=Blood Red Skies
+      wouldDecide: 29
     - value: productType=Black Powder
-      wouldDecide: 342
-    - value: tags=german
-      wouldDecide: 310
-    - value: tags=unit-all-vehicles
-      wouldDecide: 294
+      wouldDecide: 28
+    - value: tags=decals
+      wouldDecide: 27
+    - value: tags=sprue
+      wouldDecide: 26
+    - value: tags=0122
+      wouldDecide: 26
     - value: tags=warlord-resin
-      wouldDecide: 285
-    - value: tags=box-set
-      wouldDecide: 271
-    - value: tags=hail-caesar
-      wouldDecide: 263
+      wouldDecide: 24
     - value: tags=trade-web
-      wouldDecide: 261
-    - value: tags=german-army
-      wouldDecide: 255
+      wouldDecide: 22
+    - value: tags=direct
+      wouldDecide: 20
+    - value: tags=bolt-action
+      wouldDecide: 19
+    - value: tags=black-seas
+      wouldDecide: 19
+    - value: tags=british
+      wouldDecide: 18
+    - value: productType=Bolt Action
+      wouldDecide: 18
+    - value: tags=terrain
+      wouldDecide: 17
+    - value: productType=Accessory
+      wouldDecide: 16
+    - value: tags=mdf
+      wouldDecide: 15
+    - value: tags=gaming-equipment
+      wouldDecide: 14
+    - value: tags=box-set
+      wouldDecide: 13
+    - value: tags=resin
+      wouldDecide: 13
+    - value: tags=loose-item
+      wouldDecide: 13
+    - value: tags=raf
+      wouldDecide: 13
+    - value: tags=extras
+      wouldDecide: 13
+    - value: productType=Epic Pike & Shotte
+      wouldDecide: 12
+    - value: tags=epic-pike-shotte
+      wouldDecide: 12
     - value: tags=pike-shotte
-      wouldDecide: 252
-    - value: productType=Hail Caesar
-      wouldDecide: 250
-    - value: tags=platoon-armoured
-      wouldDecide: 247
-    - value: tags=platoon-artillery
-      wouldDecide: 234
-    - value: productType=Pike & Shotte
-      wouldDecide: 232
-    - value: tags=support-teams
-      wouldDecide: 229
-    - value: tags=platoon-heavy-weapon
-      wouldDecide: 223
-    - value: tags=cavalry
-      wouldDecide: 214
-    - value: tags=unit-armoured-vehicle
-      wouldDecide: 214
-    - value: tags=platoon-reconnaissance
-      wouldDecide: 208
-    - value: tags=vehicle
-      wouldDecide: 193
-    - value: tags=Vessel
-      wouldDecide: 193
-    - value: tags=napoleonic-wars-1789-1815
-      wouldDecide: 190
-    - value: tags=include
-      wouldDecide: 185
+      wouldDecide: 11
+    - value: tags=terrain-scatter
+      wouldDecide: 11
+    - value: tags=epicacw
+      wouldDecide: 11
   mfr-warmachine:
     - value: productType=Wargame
       wouldDecide: 1
@@ -828,14 +828,14 @@ unmapped:
     - value: vendor=The Army Painter
       wouldDecide: 1
   ret-radaddel:
-    - value: tags=Warlord Games
-      wouldDecide: 281
-    - value: vendor=Warlord Games
-      wouldDecide: 281
     - value: tags=Games Workshop
       wouldDecide: 274
     - value: vendor=Games Workshop
       wouldDecide: 274
+    - value: tags=Warlord Games
+      wouldDecide: 89
+    - value: vendor=Warlord Games
+      wouldDecide: 89
     - value: tags=Middle-Earth - Good
       wouldDecide: 88
     - value: tags=Atomic Mass Games
@@ -866,29 +866,19 @@ unmapped:
       wouldDecide: 32
     - value: vendor=AK-Interactive
       wouldDecide: 32
-    - value: tags=BA Deutschland
-      wouldDecide: 30
     - value: tags=Vallejo Hobby Spray Paint
       wouldDecide: 28
     - value: tags=ABTEILUNG 502*
       wouldDecide: 27
     - value: tags=Grundspiel und Zubehör SWL
       wouldDecide: 25
-    - value: tags=DEUTSCHLAND*
-      wouldDecide: 25
-    - value: tags=Boxen Pike & Shotte
-      wouldDecide: 22
     - value: tags=Star Wars Shatterpoint
       wouldDecide: 21
     - value: tags=Galaktische Republik SWL
       wouldDecide: 20
-    - value: tags=BA USA
-      wouldDecide: 19
     - value: tags=Grundiersprays Army Painter
       wouldDecide: 18
     - value: tags=Warpaints Fanatic Effects
-      wouldDecide: 17
-    - value: tags=BA GB und Commonwealth
       wouldDecide: 17
     - value: tags=BA Würfel
       wouldDecide: 17
@@ -896,31 +886,31 @@ unmapped:
       wouldDecide: 17
     - value: tags=Minas Tirith
       wouldDecide: 16
-    - value: tags=USA*
-      wouldDecide: 16
-    - value: tags=Starter & Zubehör Konflikt 47
-      wouldDecide: 16
-    - value: tags=GB UND COMMONWEALTH*
-      wouldDecide: 15
-    - value: tags=BA Sowjetunion
-      wouldDecide: 15
-    - value: tags=SOWJETUNION*
-      wouldDecide: 15
-    - value: tags=Fliegerasse
-      wouldDecide: 15
+    - value: tags=40k Grundboxen und Regelbücher
+      wouldDecide: 14
+    - value: tags=Rebellenallianz SWL
+      wouldDecide: 13
+    - value: tags=Orks
+      wouldDecide: 13
+    - value: tags=Separatisten SWL
+      wouldDecide: 12
+    - value: tags=Rivendell / Bruchtal
+      wouldDecide: 12
+    - value: tags=Isengard
+      wouldDecide: 12
+    - value: tags=VALLEJO TEXTUREN*
+      wouldDecide: 12
+    - value: tags=Decals & Gelände
+      wouldDecide: 12
+    - value: tags=Nighthaunt
+      wouldDecide: 11
+    - value: tags=Mordor
+      wouldDecide: 11
+    - value: tags=ASIF Startersets und Zubehör
+      wouldDecide: 10
   ret-tistaminis:
-    - value: tags=Bolt Action
-      wouldDecide: 193
-    - value: vendor=Warlord-BLISTER
-      wouldDecide: 186
-    - value: vendor=Warlord Games
-      wouldDecide: 157
-    - value: tags=Hail Caesar
-      wouldDecide: 149
     - value: vendor=Reaper Miniatures
       wouldDecide: 110
-    - value: vendor=Warlord-WEB
-      wouldDecide: 100
     - value: tags=Reaper Miniatures
       wouldDecide: 98
     - value: vendor=Mantic
@@ -929,41 +919,17 @@ unmapped:
       wouldDecide: 57
     - value: vendor=GW-OOP
       wouldDecide: 53
-    - value: tags=Dark Ages
-      wouldDecide: 48
-    - value: tags=Victory at Sea
-      wouldDecide: 47
     - value: tags=Kings of War
       wouldDecide: 43
     - value: tags=Green Stuff World
       wouldDecide: 42
-    - value: tags=Enemies of Rome
-      wouldDecide: 35
-    - value: tags=German
-      wouldDecide: 34
     - value: vendor=GW-LOCAL
       wouldDecide: 32
-    - value: tags=British
-      wouldDecide: 31
     - value: tags=Green Stuff World Supplies
       wouldDecide: 30
-    - value: tags=Italians
-      wouldDecide: 28
-    - value: tags=French
-      wouldDecide: 25
-    - value: tags=Victory at Sea British
-      wouldDecide: 23
-    - value: tags=Romans
-      wouldDecide: 21
-    - value: tags=Ancients
-      wouldDecide: 21
-    - value: tags=Americans
-      wouldDecide: 19
-    - value: tags=Soviet
-      wouldDecide: 19
+    - value: vendor=Warlord Games
+      wouldDecide: 26
     - value: tags=Green Stuff World Other
-      wouldDecide: 18
-    - value: tags=Victory at Sea German
       wouldDecide: 18
     - value: tags=Amazon
       wouldDecide: 16
@@ -971,17 +937,11 @@ unmapped:
       wouldDecide: 15
     - value: tags=Orks
       wouldDecide: 14
-    - value: tags=Black Powder
-      wouldDecide: 14
     - value: productType=Miniatures - Plastic
       wouldDecide: 13
     - value: tags=Gamesworkshop
       wouldDecide: 13
     - value: tags=Space Marines
-      wouldDecide: 12
-    - value: tags=Pike & Shotte
-      wouldDecide: 12
-    - value: tags=Soviets
       wouldDecide: 12
     - value: vendor=Wyrd
       wouldDecide: 12
@@ -989,6 +949,46 @@ unmapped:
       wouldDecide: 11
     - value: tags=Malifaux
       wouldDecide: 11
+    - value: tags=warhammer preorder
+      wouldDecide: 10
+    - value: tags=Nightstalkers
+      wouldDecide: 10
+    - value: tags=Twilight Kin
+      wouldDecide: 10
+    - value: tags=GW Accessories
+      wouldDecide: 9
+    - value: tags=Bolt Action
+      wouldDecide: 9
+    - value: tags=KOW Armada
+      wouldDecide: 8
+    - value: tags=Wargames Illustrated
+      wouldDecide: 8
+    - value: tags=Warhammer
+      wouldDecide: 7
+    - value: productType=Toys & Hobbies:Games:Miniatures, War Games:Warhammer:Warhammer 40K:40K Miniatures
+      wouldDecide: 6
+    - value: tags=Firefight
+      wouldDecide: 6
+    - value: tags=Northern Alliance
+      wouldDecide: 6
+    - value: tags=Chaos Space Marines
+      wouldDecide: 5
+    - value: tags=40k Terrain
+      wouldDecide: 5
+    - value: tags=Warhammer Lord of the Rings
+      wouldDecide: 5
+    - value: tags=Old World
+      wouldDecide: 5
+    - value: productType=Tabletop Games & Accessories
+      wouldDecide: 5
+    - value: tags=Epic Warpath
+      wouldDecide: 5
+    - value: tags=KOW Other
+      wouldDecide: 5
+    - value: tags=Skaven
+      wouldDecide: 4
+    - value: tags=Stormcast Eternals
+      wouldDecide: 4
   seed-curated:
     - value: productType=single_kit
       wouldDecide: 6
