@@ -14,6 +14,36 @@ strategy: none
 # packaging data the catalog has -- no live source has ever emitted a packaging hint.
 defaultHints:
   category: miniatures
+  # ...AND `gameSystem: bolt-action` FOR THE SAME REASON, one field over. This import files every
+  # Warlord product under `warlord-games/<game>/<faction>/<slug>`, and `bolt-action` is the bucket
+  # it used when it did not know: 3,865 of the 5,854 Warlord rows carry it.
+  #
+  # MEASURED 2026-09-01, three ways, and it fails all three:
+  #
+  #   CORROBORATION -- only 1,118 of the 3,865 are confirmed by a live source. 999 have a store
+  #   listing whose productType names a FORMAT rather than a game, and 1,751 have no live listing
+  #   at all.
+  #
+  #   THE PRODUCT'S OWN NAME -- Bolt Action is a World War Two game. At least 219 of the
+  #   uncorroborated ones are named for another period entirely: `Ancient British Warriors`,
+  #   `Saxon Ceorls`, `Viking Hirdmen`, `Early Imperial Romans: Veterans`, `Soldier of Fortune:
+  #   Hannibal Barca`. That is a FLOOR -- it counts only names carrying an unmistakable period
+  #   word -- and against it just 2 of the 1,118 corroborated products read wrong, one of which
+  #   (`Centurion Mk III`) is a WWII tank the test misreads.
+  #
+  #   THE STORE'S OWN TAGS -- 675 are contradicted by a single game tag on the store listing.
+  #
+  # ITS OTHER VALUES ARE NOT FILLS and are untouched: `black-powder` agrees with the store 401 of
+  # 401, `hail-caesar` 251 of 253. Only this one bucket is over-applied, so only this one value is
+  # declared.
+  #
+  # SUPPRESSING IT LOSES NOTHING THAT WAS EVIDENCE. Where a live source corroborates the label,
+  # that source supplies it and the record keeps the value with `gameSystemsBasis: stated`. What
+  # goes is the label on the products nothing else spoke about -- which is exactly where it was
+  # never a claim. `mfr-warlord-store.yaml` then refills them from the store's own game tags,
+  # which could not be graded until now: every measurement of those tags was against THIS value,
+  # so `GoA` scored 39/39 "bolt-action" while being verbatim Gates of Antares products.
+  gameSystem: bolt-action
 # FROZEN SNAPSHOT FIELDS. `strategy: none` -- this source is never re-observed, so its missStreak
 # never moves and its stock and price values are whatever they were on import day. Being
 # `kind: curated` they currently outrank every live manufacturer and retailer, which for these two
