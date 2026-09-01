@@ -1,0 +1,47 @@
+manufacturer: wyrd-games
+reason: >-
+  WYRD'S NUMBERING SEPARATES MODELS FROM THE SYSTEM BLOCK BY MAGNITUDE: within each range, the low
+  hundred is rulebooks, Fate Decks and bases, and everything above it is models. `WYR23001-032` is
+  the Malifaux core rulebook, seven faction books and eight themed Fate Decks; `WYR23100+` is
+  every miniature crew and single in Third Edition.
+
+
+  THE STORE CANNOT REACH THESE PRODUCTS. `mfr-wyrd-store` reaches only 90 of the 202 undecided,
+  and EXACTLY ONE of those carries a `productType` -- these are products the Wyrd store no longer
+  lists. `ret-gamenerdz` reaches 78 more through the `Miniatures` department its own table
+  correctly refuses. The code is what is left.
+
+
+  MEASURED 2026-09-01 against products decided by other evidence on the same blocks: 244 of 244
+  for `WYR23[1-9]`, 67 of 67 for `WYR40[1-9]`, 12 of 12 for `WYR20[1-9]`, 11 of 11 for the base
+  range. Every non-miniature in those ranges sits in the low hundred the clauses exclude.
+
+clauses:
+  - codeMatches: '^WYR23[1-9]'
+    category: miniatures
+    note: 89 fills; 244/244. Malifaux Third Edition crews and singles
+  - codeMatches: '^WYR21\d'
+    category: miniatures
+    note: >-
+      65 fills; 6/6. The Limited Edition and Nightmare Edition alternative-sculpt line -- the same
+      population whose `Rotten Harvest` sibling `mfr-wyrd-store.yaml` un-refused. 71 products,
+      zero non-miniature.
+  - codeMatches: '^WYR20[1-9]'
+    category: miniatures
+    note: 12 fills; 12/12
+  - codeMatches: '^WYR40013-'
+    category: hobby-auxiliary
+    note: 11 fills; 11/11 -- the lipped-base range, `WYR40013-A` through `-K`
+  - codeMatches: '^WYR40[1-9]'
+    category: miniatures
+    note: 1 fill; 67/67 -- The Other Side
+
+  # NOT REACHED (24): the `WYR230xx` and `WYR400xx` system blocks themselves (13), two Malifaux
+  # buildings, a gift card this catalog already refuses, and six Classics singles on short codes.
+  #
+  # A DEFECT THIS TABLE CANNOT FIX, recorded here because it is the largest wrong thing about
+  # Wyrd's data: 30 Vagrantsong products publish `gameSystems: [malifaux]` with basis `stated`,
+  # because `legacy-catalog` keys them `wyrd-games/malifaux/general/vagrantsong-...`. Vagrantsong
+  # is a standalone co-operative board game with its own productType family in the Wyrd store and
+  # no Malifaux tag. `stated` outranks every table, so this needs an override or a descriptor
+  # change, not a rule.

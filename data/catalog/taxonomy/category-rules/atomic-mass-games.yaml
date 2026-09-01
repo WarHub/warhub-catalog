@@ -20,6 +20,28 @@ reason: >-
   omitted them would silently start guessing the day a new one is acquired.
 
 clauses:
+  # THE CODE ANSWERS THE FORMAT QUESTION TOO -- but only after the names have taken the exceptions
+  # out, and that ordering is the whole finding. AMG's terrain is INTERLEAVED THROUGH the model
+  # numbering (`CP14`, `CP44`, `CP95`, `CP178-180`, `CPE05`, `SWP02/17/18/60`, `SWQ137`), so the
+  # prefix cannot separate it -- the raw code block grades 130/169 = 77%. Every one of those
+  # products is named `... Terrain Pack` or `... Terrain Collection`, and with the name clauses
+  # ahead of it the same block grades 128 of 128 against `ret-goblingaming`'s productType.
+  #
+  # AMG'S OWN STORE IS NOT A SOURCE HERE. The undecided products are reached by `legacy-catalog`
+  # (224), `ret-gamenerdz`'s `Miniatures` department (121, which its table refuses) and
+  # `ret-radaddel` tags (76).
+  - nameMatches: '\bTerrain\b'
+    category: terrain
+    note: >-
+      20/21, and it adds a BASIS rather than an answer -- the name lexicon already reaches all of
+      them. It is here so the model clause below cannot take them.
+  - nameMatches: '\b(Card Pack|Card Collection|Kartenset|Dice Pack|Measuring Tools|Movement Tools|Mission Pack|Battle Deck|Conversion Kit)\b'
+    category: game-accessory
+    note: 21 fills; 24/25
+  - codeMatches: '^(CPE|MCP|MCA|CP|CA|SWL|SWQ|SWP|SWZ|SWM)\d'
+    category: miniatures
+    note: 242 fills; 128/128 against ret-goblingaming, once the name clauses above have run
+
   # Longest prefixes first: `CPE` and `CP` share a stem, and first-match-wins would let the short
   # one swallow the long one.
   - codeMatches: '^MCP\d'
@@ -32,6 +54,10 @@ clauses:
     gameSystems: [marvel-crisis-protocol]
   - codeMatches: '^CA\d'
     gameSystems: [marvel-crisis-protocol]
+    category: game-accessory
+    note: >-
+      all 6 read `Card Pack 2022/2023`, `War of Kings Crisis Card Pack`, `Operation - Zero
+      Tolerance Character & Crisis Card Pack`. The category was never set on this block.
   - codeMatches: '^SWL\d'
     gameSystems: [star-wars-legion]
   - codeMatches: '^SWQ\d'

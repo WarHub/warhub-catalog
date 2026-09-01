@@ -19,9 +19,19 @@ reason: >-
 clauses:
   - category: book
     hintContainsAny: {categories: [books]}
+  # `lore-campaigns` IS NOT A BOOK SHELF, and this clause was publishing named character
+  # MINIATURES as books -- 11 of its 16 rows. `PBCS710 Persenia the Gorgon (Aristarch)`,
+  # `PBOD711 Andronicus the Firebringer (Archimandrite)`, `PBW7350 Ragodosh, the Stone Face King
+  # (Hold Raegh)`: every one is `<Character Name> (<Unit Profile>)`, the same shape as
+  # `PBCS709 Andromarchos (Officer)` which the shelf does not hold. Para Bellum files a
+  # campaign's tie-in character beside the campaign that introduced it.
+  #
+  # The 5 genuine campaign books are the ones with a code in the lore block, so the clause is
+  # narrowed to it rather than deleted: `PBW10x`/`PBW11x` -- The Stone Face, Fanning the Fire,
+  # Ashes and Faith, The Vale of Tears, Battle of Nepenthe.
   - category: book
-    hintContainsAny: {categories: [lore-campaigns]}
-    note: Para Bellum's lore and campaign shelf is supplements, not models
+    nameMatches: '\bLore Campaign\b'
+    note: 5 rows; the shelf itself holds 11 character miniatures beside them
   - category: terrain
     hintContainsAny: {categories: [stl-terrain]}
     packaging: digital

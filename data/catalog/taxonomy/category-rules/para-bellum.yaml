@@ -1,0 +1,47 @@
+manufacturer: para-bellum
+reason: >-
+  PARA BELLUM'S SOURCE STATES A GAME FOR EVERY PRODUCT AND A CATEGORY FOR NONE. All 428 of its
+  products publish `conquest`; 349 publish no category at all. `mfr-para-bellum.yaml` maps six of
+  its 30 shelf slugs and refuses the ten faction slugs on a measured 11-16% non-miniature rate --
+  that refusal is right and this table does not disturb it. What it reads instead is the product
+  code, which nobody had looked at.
+
+
+  THE SCHEME IS `PB` + A FACTION OR RANGE KEY + a number, and the number block says what the thing
+  is. `PBW22x`/`PBW33x`/`PBW44x`/`PBW90x` are the four original factions' regiments; `PBW7[1-5]x`
+  are named characters; `PBW6[01]x` are Starters and First Blood warbands; `PBW8x` is the
+  accessory block. The five newer factions get their own two-letter keys.
+
+
+  MEASURED 2026-09-01 by a full name read of every block -- 122 names in `PB(OD|CS|SK|WC|YR)`, 79
+  in `PBW(22|33|44|90)`, 45 in `PBW6[01]`. One flagged, and it is still a miniature (`PBYR308
+  Yoroni 2026 Starter Set`). `PBW8x` is the only block with a real control: 24 of 24 against
+  independently-decided products.
+
+clauses:
+  - codeMatches: '^PB(OD|CS|SK|WC|YR)\d'
+    category: miniatures
+    note: >-
+      117 fills. Old Dominion, City States, Sorcerer Kings, Weaver Courts, Yoroni -- `Legionnaires
+      (Dual Kit)`, `Hoplites`, `Kern Skirmishers`, `Oni Ayakashi`.
+  - codeMatches: '^PBW(22|33|44|90)\d'
+    category: miniatures
+    note: 79 fills -- Hundred Kingdoms, Dweghom, Nords and W'adrhun regiments
+  - codeMatches: '^PBW7[1-5]\d'
+    category: miniatures
+    note: 67 fills -- named characters, `<Name> (<Unit Profile>)`
+  - codeMatches: '^PBW6[01]\d'
+    category: miniatures
+    packaging: set
+    note: 45 fills -- Starters and First Blood warbands, which name their own form
+  - codeMatches: '^PBW8\d'
+    category: game-accessory
+    note: 2 fills; 24/24 -- army cards, bases and stands, objective markers
+
+  # NOT REACHED (39): `PBW1[01]\d` (29) mixes lore campaigns, art prints and one-off promos;
+  # `PBW6[56]\d` (6) mixes dice, mystery packs and `Battle Ready Terrain`; and 4 products carry no
+  # code at all.
+  #
+  # `first-blood` and `the-last-argument-of-kings` are Conquest's skirmish and mass-battle
+  # rulesets, and NO SLUG IS MINTED for either: all 428 products already publish `conquest`, so a
+  # slug would decide zero undecided products. Same arithmetic as Mantic's Vanguard.

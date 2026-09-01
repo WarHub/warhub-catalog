@@ -1,0 +1,34 @@
+manufacturer: reaper
+reason: >-
+  REAPER'S CATALOGUE HERE IS EXACTLY 115 PAINT SETS AND 109 MINIATURES, and the 109 were undecided
+  on both axes for two unrelated reasons. They are reached by `ret-tistaminis` alone -- vendor and
+  tag `Reaper Miniatures`, names like `Reaper Miniatures  Goblin Raiders (6)` -- and there is no
+  `mfr-reaper` product row for any of them, because that source is paint-only.
+
+
+  `ret-tistaminis.yaml` REFUSES `vendor: Reaper Miniatures` AND IS RIGHT TO: "the clause would be
+  right today and silently wrong the week" Reaper's 300+ Master Series paints appear in that
+  store. THE NEW EVIDENCE IS THAT THE CODE FAMILIES ARE DISJOINT and the catalog already proves
+  it: every one of the 115 paint sets carries `08xxx` or `09xxx`, and every one of the 109
+  miniatures carries `7xxx`, `30xxx`, `77xxx` or `80xxx`. A code clause is immune to exactly the
+  failure the vendor clause would have -- a Reaper paint stocked tomorrow arrives on `09xxx` and
+  does not match.
+
+
+  ONE CAVEAT A MAINTAINER SHOULD KNOW: the four-digit `7xxx` values are the STORE's own SKUs, not
+  Reaper's (`7039 Reaper Miniatures Dire Wolves (2) (02415)` carries the real code in
+  parentheses). They are anchored and four-digit so they cannot collide with Reaper's five-digit
+  numbering, but they are a retailer artefact in a manufacturer table. Dropping them still fills
+  46 on pure Reaper numbering.
+
+
+  THEIR GAME SYSTEMS WILL NEVER BE DECIDED, and that is the right answer rather than a gap. Reaper
+  Bones are generic roleplaying miniatures belonging to no system. `miniatures` is deliberately
+  not in `_NO_GAME_SYSTEM_CATEGORIES` -- a Necromunda bulkhead and a Space Marines codex both
+  belong to a system -- so these 109 stay `gameSystemsBasis: unknown` permanently. The vocabulary
+  has no value for "a model that belongs to no game" and `other-games` would be a lie.
+
+clauses:
+  - codeMatches: '^(7\d{3}|30\d{3}|77\d{3}|80\d{3})$'
+    category: miniatures
+    note: 109 fills, the whole undecided population

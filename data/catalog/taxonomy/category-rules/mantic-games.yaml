@@ -1,0 +1,102 @@
+manufacturer: mantic-games
+reason: >-
+  MANTIC NUMBERS ITS RANGE `MG` + TWO LETTERS FOR THE GAME + ONE OR TWO FOR THE FACTION + a
+  number, and the faction letters are model kits. `MGKWO301` is a Kings of War Orc box; `MGDZA102`
+  a Deadzone Asterian one. This is the same shape `corvus-belli.yaml` already reads, and it
+  answers the format question for a population the store's shelves cannot.
+
+
+  THE SHELVES CANNOT REACH THESE PRODUCTS, and not for the reason it looks like. 1,035 of the
+  1,559 undecided Mantic products DO carry a `categories` hint -- the shelf that reaches them is a
+  faction or game-line shelf (`kings-of-war` 141, `all-out-war-singles` 77, `deadzone` 52,
+  `basilean` 37), which `mfr-manticgames.yaml` correctly refuses to read as a format. The other
+  524 are DISCONTINUED products the WooCommerce store no longer lists, so they carry no shelf at
+  all. Neither population is reachable by a source table, and both carry a product code.
+
+
+  `M` IS THE SYSTEM BLOCK AND IS VETOED THROUGHOUT. Within each game, `MG<game>M<n>` is Mantic's
+  miscellaneous shelf -- rulebooks in four languages, dice, mats, tokens, movement trays,
+  two-player starter sets, a novel. `MGKWM04` is the Kings of War rulebook, not a Kings of War
+  unit. Two exceptions are load-bearing and are why the negative lookaheads differ per block:
+  `MGDZMN101/102/103` are Matsudan MINIATURES (hence `(?!M\d)`, not `(?!M)`), and `MGDB` is
+  inverted -- `MGDBM*` is the DreadBall TEAM block and gets its own positive clause.
+
+
+  MEASURED 2026-09-01. No source in this catalog independently states `miniatures`, so the
+  `miniatures` clauses are graded two ways: against the decisions `mfr-manticgames.yaml` itself
+  reached on the same code blocks from a different signal (216 of 216 agree), and against a full
+  name read of every block -- 483 `MGKW` names, 79 `MGWP`, 65 `MGDZ`, 63 `MGFF`, 61 `MGAR`, 53
+  `MGVA`, 16 `MGEW`. Two names were flagged in all of that and both are still miniatures
+  (`Twilight Kin One-Click Ultimate Bundle`, `Trident Realm Complete Fleet Bundle`).
+
+clauses:
+  - codeMatches: '^MGKW(?!M\d|TC)[A-Z]'
+    category: miniatures
+    note: 403 fills; 80/80 against the shelf table. `TC` excluded -- TerrainCrate is not a KoW army
+  - codeMatches: '^MGWEWD\d'
+    category: miniatures
+    note: 80 fills -- Mantic Direct's Walking Dead block
+  - codeMatches: '^MGWP(?!M)[A-Z]'
+    category: miniatures
+    note: 61 fills; 18/18
+  - codeMatches: '^MGAR(?!M)[A-Z]'
+    category: miniatures
+    note: 56 fills; 4/4
+  - codeMatches: '^MGDZ(?!M\d)[A-Z]'
+    category: miniatures
+    note: 41 fills; 27/27. `(?!M\d)` not `(?!M)` -- MGDZMN* is the Matsudan range
+  - codeMatches: '^MGFF(?!M)[A-Z]'
+    category: miniatures
+    note: 31 fills; 32/32
+  - codeMatches: '^KSEW(?!M)[A-Z]'
+    category: miniatures
+    note: 15 fills -- the Epic Warpath Kickstarter block
+  - codeMatches: '^MGWEVA\d'
+    category: miniatures
+    note: 12 fills; 8/8
+  - codeMatches: '^MGEW(?!M)[A-Z]'
+    category: miniatures
+    note: 8 fills; 8/8
+  - codeMatches: '^MGVA(?!M)[A-Z]'
+    category: miniatures
+    note: 3 fills; 50/50
+  - codeMatches: '^MGDBM\d'
+    category: miniatures
+    note: >-
+      3 fills; 20/21. INVERTED from every other block: for DreadBall, `M` is the team block rather
+      than the system one.
+
+  - codeMatches: '^MGDG'
+    category: book
+    packaging: digital
+    note: 75 fills; 109/115. Mantic's digital range -- rulebooks, FAQs, rosters, scenario packs
+  - codeMatches: '^VAL72\d'
+    category: paint
+    note: 82/82 -- Vallejo Game Color, resold under Mantic's own numbering
+  - codeMatches: '^MGEV'
+    category: event
+    note: 17 fills; 50/51. Every name is a tournament, open day or playtest day
+  - codeMatches: '^BF\d'
+    category: hobby-auxiliary
+    note: >-
+      17 fills, no control. Army Painter Battlefields, resold: tufts, static grass, snow, razor
+      wire, rocks. All 17 names read.
+
+  # WHAT THIS TABLE CANNOT REACH, so the next person does not re-run the search:
+  #
+  #   `BUNDLE` (93) -- the sku is literally the string BUNDLE, and the contents are genuinely
+  #   heterogeneous: `Epic Warpath XL Terrain Bundle`, `The Raging Void & 4th Edition Rulebook
+  #   Bundle`, `Undead Ghouls Horde`. Nothing in the row narrows it.
+  #
+  #   `MGWD` (82) -- The Walking Dead has NO sub-scheme. Terrain at 010-023, minis at 0201-0205,
+  #   books at 027/029/175, card decks at 173/203/206, paint at 204/210, all interleaved.
+  #
+  #   `MGWE` (~170) -- Mantic Direct. A fifth are `... Bundle` and the bundles split across
+  #   categories (`MGWEKW110` is books, `MGWEDZ501` terrain).
+  #
+  #   `MG<game>M` (~60) -- the system blocks this table vetoes. That is the residue by
+  #   construction, and it is the right residue: a shelf holding a rulebook, a dice set, a
+  #   movement tray and a gaming mat cannot be one category.
+  #
+  #   `MGTC`/`KSTC` TerrainCrate -- 140 of 180 terrain, 17 miniatures, 15 game-accessory. NOT a
+  #   blanket terrain block, and only 6 fills were available anyway.

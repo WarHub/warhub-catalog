@@ -59,6 +59,42 @@ clauses:
   # `N4 Core Rules`) and is contaminated 6-to-4 by `288100 INFINITY AFTERMATH: Limited Edition`
   # and `288303 Infinity: Endsong`. A name pattern would be the safer form if it is wanted.
 
+  # THE BIG BLOCKS, which this file mapped around rather than through. `28[012]xxx` is the whole
+  # Infinity model range and `WW0[1-6]` the whole Warcrow one -- between them 376 of the 480
+  # undecided products, reached by nothing else: 456 of those are `ret-gamenerdz`-only and 280 of
+  # them carry no taxonomy hint whatsoever. `mfr-corvus-belli` emits `gameSystem` and `faction`
+  # and no category at all.
+  #
+  # THE NAME CLAUSES ABOVE MUST RUN FIRST, and the measurement says why: the `28[012]` block grades
+  # 396/403 against ret-goblingaming's productType, and ALL SEVEN exceptions are the six
+  # `... Paint Set w/ Exclusive Miniature` products and `280045 ITS Objectives Pack Alpha`. Taken
+  # after them it is 396 of 396. A full name read of the 337 fills flagged one: `280547 Nomads
+  # Reverend Custodiers (Hacker, Combi Rifle + Marker)`, where "Marker" is a weapon loadout.
+  - nameMatches: '\bPaint Set\b'
+    category: paint-set
+    packaging: set
+    note: 5 fills; 6/6
+  - nameMatches: '\bObjectives? Pack\b'
+    category: game-accessory
+    note: 1/1 -- runs ahead of the model block, which it sits inside
+  - codeMatches: '^28[012]\d{3}$'
+    category: miniatures
+    note: 337 fills; 396/396 once the two clauses above have run
+  - codeMatches: '^WW0[1-6]'
+    category: miniatures
+    note: 39 fills; 66/66
+  - codeMatches: '^P[VW]\d'
+    category: miniatures
+    note: >-
+      22 fills; 4/4. The pre-order and exclusive-miniature block -- `PV` Infinity, `PW` Warcrow,
+      every name an `... Exclusive Edition` or a character.
+  - codeMatches: '^WHP-'
+    category: book
+    note: >-
+      5 fills, no control. The Infinity novels -- `Airaghardt`, `By Fire and Sword`, `Downfall`,
+      `Team Zed: Shell Game`, `Death Song`. Their existing `infinity` gameSystem clause is right:
+      each novel has one setting, and it is Infinity's.
+
   # --- WHICH GAME ------------------------------------------------------------------------------
   # Aristeia! first -- it shares the Infinity code block and the Infinity retailer shelf.
   - codeMatches: '^(CBARI|ARI\d)'
