@@ -1,16 +1,19 @@
 summary:
-  products: 28271
-  undecided: 2893
+  products: 27237
+  undecided: 2715
   byBasis:
-    code: 6631
-    lexicon: 385
-    mapped: 16374
+    code: 6618
+    lexicon: 339
+    mapped: 15577
     paint-barcode: 9
     stated: 1979
-    unknown: 2893
-  decidedThisRun: 23399
+    unknown: 2715
+  decidedThisRun: 22543
 conflicts:
   - entity: ak-interactive/AK11500
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary'
+  - entity: ak-interactive/AK9511
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary'
   - entity: army-painter/AW8003P
@@ -103,9 +106,45 @@ conflicts:
   - entity: games-workshop/99120199138
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120201111
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120201112
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120204024
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
   - entity: games-workshop/99120205059
     type: gameSystem-disagreement
     detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
+  - entity: games-workshop/99120206029
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120207053
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120207071
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120207082
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120209061
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120210034
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120212026
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120218032
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
+  - entity: games-workshop/99120299059
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=game-accessory'
   - entity: games-workshop/99122799001
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=miniatures; ret-tistaminis=terrain'
@@ -256,6 +295,18 @@ conflicts:
   - entity: mantic-games/terraincrate-6x4-fantastic-fantasy-battle-mat
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain'
+  - entity: monument-hobbies/MPA-SET-BASE
+    type: category-disagreement
+    detail: 'retailer: ret-radaddel=paint-set; ret-tistaminis=paint'
+  - entity: monument-hobbies/MPA-SET-F01
+    type: category-disagreement
+    detail: 'retailer: ret-radaddel=paint-set; ret-tistaminis=paint'
+  - entity: monument-hobbies/MPA-SET-MET
+    type: category-disagreement
+    detail: 'retailer: ret-radaddel=paint-set; ret-tistaminis=paint'
+  - entity: monument-hobbies/MPA-SET-S06
+    type: category-disagreement
+    detail: 'retailer: ret-radaddel=paint-set; ret-tistaminis=paint'
   - entity: vallejo/26201
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
@@ -298,6 +349,18 @@ conflicts:
   - entity: vallejo/26231
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: vallejo/28890
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
+  - entity: vallejo/28900
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
+  - entity: vallejo/70258
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
+  - entity: vallejo/72192
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
   - entity: warlord-games/105010001
     type: gameSystem-disagreement
     detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
@@ -703,40 +766,36 @@ unmapped:
     - value: vendor=The Army Painter
       wouldDecide: 1
   ret-radaddel:
-    - value: tags=Games Workshop
-      wouldDecide: 222
-    - value: vendor=Games Workshop
-      wouldDecide: 222
     - value: tags=Warlord Games
-      wouldDecide: 89
+      wouldDecide: 91
     - value: vendor=Warlord Games
-      wouldDecide: 89
-    - value: tags=Middle-Earth - Good
-      wouldDecide: 88
-    - value: tags=Vallejo
-      wouldDecide: 61
-    - value: vendor=Vallejo
-      wouldDecide: 61
-    - value: tags=Middle-Earth - Evil
-      wouldDecide: 51
+      wouldDecide: 91
+    - value: tags=Games Workshop
+      wouldDecide: 71
+    - value: vendor=Games Workshop
+      wouldDecide: 71
     - value: tags=Atomic Mass Games
       wouldDecide: 50
     - value: vendor=Atomic Mass Games
       wouldDecide: 50
-    - value: tags=Neuheiten Games Workshop
-      wouldDecide: 40
+    - value: tags=Vallejo
+      wouldDecide: 42
+    - value: vendor=Vallejo
+      wouldDecide: 42
     - value: tags=The Army Painter
       wouldDecide: 38
     - value: vendor=The Army Painter
       wouldDecide: 38
-    - value: tags=AK-Interactive
-      wouldDecide: 32
-    - value: vendor=AK-Interactive
-      wouldDecide: 32
+    - value: tags=Neuheiten Games Workshop
+      wouldDecide: 30
     - value: tags=Vallejo Hobby Spray Paint
       wouldDecide: 28
-    - value: tags=ABTEILUNG 502*
+    - value: tags=AK-Interactive
       wouldDecide: 27
+    - value: vendor=AK-Interactive
+      wouldDecide: 27
+    - value: tags=ABTEILUNG 502*
+      wouldDecide: 23
     - value: tags=Grundiersprays Army Painter
       wouldDecide: 18
     - value: tags=Galaktische Republik SWL
@@ -747,42 +806,46 @@ unmapped:
       wouldDecide: 17
     - value: tags=WÜRFEL
       wouldDecide: 17
-    - value: tags=Minas Tirith
-      wouldDecide: 15
     - value: tags=40k Grundboxen und Regelbücher
       wouldDecide: 14
     - value: tags=Star Wars Shatterpoint
-      wouldDecide: 12
-    - value: tags=Rivendell / Bruchtal
-      wouldDecide: 12
-    - value: tags=Isengard
-      wouldDecide: 12
-    - value: tags=Mantic Games
-      wouldDecide: 12
-    - value: vendor=Mantic Games
-      wouldDecide: 12
-    - value: tags=VALLEJO TEXTUREN*
       wouldDecide: 12
     - value: tags=Decals & Gelände
       wouldDecide: 12
     - value: tags=Grundspiel und Zubehör SWL
       wouldDecide: 11
-    - value: tags=Mordor
-      wouldDecide: 11
     - value: tags=Separatisten SWL
       wouldDecide: 10
     - value: tags=Rebellenallianz SWL
       wouldDecide: 10
-    - value: tags=Shire / Auenland
-      wouldDecide: 10
     - value: tags=Orks
       wouldDecide: 10
+    - value: tags=Mantic Games
+      wouldDecide: 10
+    - value: vendor=Mantic Games
+      wouldDecide: 10
     - value: tags=AoS Grundboxen und Regelbücher
-      wouldDecide: 9
-    - value: tags=Angmar
-      wouldDecide: 9
-    - value: tags=Fellowship / Gefährten
-      wouldDecide: 9
+      wouldDecide: 8
+    - value: tags=Summer Sale
+      wouldDecide: 8
+    - value: tags=Starter & Zubehör Konflikt 47
+      wouldDecide: 8
+    - value: tags=GRUNDIERSPRAYS AP*
+      wouldDecide: 7
+    - value: tags=40K Zubehör
+      wouldDecide: 7
+    - value: tags=Citadel Farbsets
+      wouldDecide: 6
+    - value: tags=Space Marines
+      wouldDecide: 6
+    - value: tags=VALLEJO HOBBY SPRAY PAINT*
+      wouldDecide: 6
+    - value: tags=Vallejo Texturen
+      wouldDecide: 6
+    - value: tags=ToW Bücher & Zubehör
+      wouldDecide: 5
+    - value: tags=DECALS & GELÄNDE*
+      wouldDecide: 5
   ret-tistaminis:
     - value: vendor=GW-OOP
       wouldDecide: 30

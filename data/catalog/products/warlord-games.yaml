@@ -41976,7 +41976,6 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 23.05
     url: https://store.warlordgames.com/products/san-marco-marines-infantry-section
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402215802_SanMarcoMarinesInfantrySection1.jpg?v=1663849829
     description: |-
@@ -41991,8 +41990,6 @@ products:
       - legacy-catalog:warlord-games/bolt-action/italian/san-marco-marines-infantry-section
       - mfr-warlord-store:san-marco-marines-infantry-section
       - ret-goblingaming:warlord-games-bolt-action-italian-san-marco-marines-infantry-section
-      - ret-radaddel:/san-marco-marines-infantry-section
-      - ret-radaddel:san-marco-marines-infantry-section
   - id: warlord-games/402215803
     name: Italian Colonial Troops Infantry Squad
     manufacturer: warlord-games
@@ -42011,7 +42008,6 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
-    priceEur: 19.1
     url: https://store.warlordgames.com/products/italian-colonial-troops-infantry-squad
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402215803_ItalianColonialTroopsInfantrysquad01.jpg?v=1665688566
     description: |-
@@ -42026,8 +42022,6 @@ products:
       - legacy-catalog:warlord-games/bolt-action/italian/italian-colonial-troops-infantry-squad
       - mfr-warlord-store:italian-colonial-troops-infantry-squad
       - ret-goblingaming:warlord-games-bolt-action-italian-colonial-troops-infantry-squad
-      - ret-radaddel:/italian-colonial-troops-infantry-squad
-      - ret-radaddel:italian-colonial-troops-infantry-squad
   - id: warlord-games/402215804
     name: Italian Army Guastatori Destruction Group
     manufacturer: warlord-games
@@ -71906,7 +71900,6 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 9.0
-    priceEur: 14.45
     url: https://store.warlordgames.com/products/konflikt-47-mdf-hero-stat-trackers
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/458900007_Konflikt_47MDFHeroStatTrackers01.jpg?v=1764327736
     description: |-
@@ -71919,8 +71912,6 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/general/konflikt-47-mdf-hero-stat-trackers
-      - ret-radaddel:/konflikt-47-mdf-hero-stat-trackers
-      - ret-radaddel:konflikt-47-mdf-hero-stat-trackers
   - id: warlord-games/458900008
     name: Konflikt '47 MDF Rift Unit Pin Markers
     manufacturer: warlord-games
@@ -114526,6 +114517,27 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/british/into-the-valley-of-death-bundle
       - mfr-warlord-store:into-the-valley-of-death-bundle
+  - id: warlord-games/WARLORDGAMES
+    name: Italian Colonial Troops Infantry squad
+    manufacturer: warlord-games
+    sku: '124419'
+    gameSystemsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceEur: 19.1
+    url: https://www.radaddel.de/italian-colonial-troops-infantry-squad
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/124419-italian-colonial-troops-infantry-squad-402215803-1.webp?v=1781203785
+    evidence:
+      - ret-radaddel:/italian-colonial-troops-infantry-squad
+      - ret-radaddel:/konflikt-47-mdf-hero-stat-trackers
+      - ret-radaddel:/san-marco-marines-infantry-section
+      - ret-radaddel:/stars-and-stripes-us-army-starter-army
+      - ret-radaddel:italian-colonial-troops-infantry-squad
+      - ret-radaddel:konflikt-47-mdf-hero-stat-trackers
+      - ret-radaddel:san-marco-marines-infantry-section
+      - ret-radaddel:stars-and-stripes-us-army-starter-army
   - id: warlord-games/WATERLOO-BRITISHBUNDLE01-NEW
     name: 'Black Powder Epic Battles: Waterloo British Starter Bundle'
     manufacturer: warlord-games
@@ -158861,21 +158873,6 @@ products:
     description: Laser cut 2mm MDF with Laser etched detail. Kit supplied unassembled and unpainted. Measures approx. L80xW50xH60mm
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/stagecoach
-  - id: warlord-games/stars-and-stripes-us-army-starter-army
-    name: Stars and Stripes US Army Starter Army
-    manufacturer: warlord-games
-    sku: '135793'
-    gameSystemsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 112.45
-    url: https://www.radaddel.de/stars-and-stripes-us-army-starter-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135793-stars-and-stripes-us-army-starter-army-402013056-1.webp?v=1785549414
-    evidence:
-      - ret-radaddel:/stars-and-stripes-us-army-starter-army
-      - ret-radaddel:stars-and-stripes-us-army-starter-army
   - id: warlord-games/statue-plinths
     name: Statue Plinths
     manufacturer: warlord-games

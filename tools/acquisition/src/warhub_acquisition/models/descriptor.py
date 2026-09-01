@@ -259,6 +259,34 @@ class SourceDescriptor(BaseModel):
     # not a list anyone maintains, and because the correction is derivable -- the store says who
     # made it, on the very page the other row is quoting.
     manufacturerIsShelf: bool = False
+    # The hint under which this source publishes THE MANUFACTURER'S OWN ARTICLE NUMBER, for a
+    # source whose `sku` is its own house number. Where the sku does not normalize to a product
+    # code and exactly one value under this hint does, that value is the code.
+    #
+    # WHY A SHOP'S NUMBER IS NOT THE PRODUCT'S. `ret-radaddel` numbers every listing it carries
+    # with a six-digit house number -- 5,511 Games Workshop rows read `129011`, `135478`, `126289`
+    # -- and no manufacturer's `codePattern` matches those, so the row has no code and publishes
+    # under a slug of the shop's own German title. The same shop puts the REAL number in its tag
+    # list: `135478` carries `99120108120`, `AK9600-02` sits beside `AK-Interactive`. Measured
+    # 2026-09-01 over the 11,804 attributed radaddel rows, 4,376 carry exactly one tag that
+    # normalizes under the row's own manufacturer, across eight manufacturers -- 1,897 GW, 1,405
+    # AK Interactive, 788 Vallejo, 172 Monument, and the rest.
+    #
+    # IT IS AN IDENTITY FIX, NOT A LABEL. 1,779 of those rows are ALREADY in the product their tag
+    # names, joined by barcode or by name, which is the control: where the code can be checked it
+    # is right. The other 1,253 sit in a SECOND record -- `ak-interactive/acrylic-thinner` beside
+    # `ak-interactive/AK712`, `vallejo/model-air-097-medium-gunship-gray` beside `vallejo/71097` --
+    # one product published twice because one of the two rows could not say which product it was.
+    #
+    # EXACTLY ONE, OR NOTHING. 948 Warlord rows match two or more tags, because that manufacturer's
+    # `codePattern` is deliberately permissive (`[A-Z0-9-]{6,}`) and a shop's tag list is full of
+    # words. An ambiguous row keeps no code at all, exactly as it has until now: a wrong code
+    # MERGES two products, so the failure mode of guessing is worse than the failure mode of
+    # staying silent.
+    #
+    # THE SKU STILL WINS WHERE IT NORMALIZES. This never overrides a source's own code, only
+    # supplies one where the source had none.
+    codeFromHint: str | None = None
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.
