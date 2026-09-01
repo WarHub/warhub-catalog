@@ -161,7 +161,102 @@ clauses:
   # decide exactly ONE currently-undecided product, and `kings-of-war` on a Vanguard warband box
   # is true rather than a lie. Same arithmetic refused `first-blood` for Para Bellum.
 
-  # WHAT THIS TABLE CANNOT REACH, so the next person does not re-run the search:
+  # ===========================================================================================
+  # WHAT THE THING IS, BY NAME -- because for Mantic the code cannot say and the store's shelves
+  # will not. `mfr-manticgames` emits 197 WooCommerce category slugs over 2,826 rows, and they are
+  # game and FACTION slugs: `basilean`, `firefight-enforcers`, `xirkaali`, `walking-dead-
+  # collections`. A faction contains a rulebook, a dice pack and a regiment alike, so those slugs
+  # answer WHICH GAME (which `mfr-manticgames.yaml` already reads them for) and not what the thing
+  # is. Measured over the 705 products still undecided: the largest slug reaching any of them is
+  # `kings-of-war` with 73, at 62.5% purity.
+  #
+  # THE CODE CANNOT SAY EITHER, and that was measured before this was written. Mantic's own
+  # numbering does carry a product-kind digit block inside a prefix family -- `MGKW*` 1xx army
+  # boxes, 2xx heroes, 3xx regiments, 4xx large models, 5xx bundles -- but it does not survive
+  # contact with the web-exclusive line: `MGWEKW 1xx` holds `Kings of War Third Edition: Gamers
+  # Bundle` and `Limited Edition 10th Anniversary Dice` next to the single resin characters, and
+  # the whole `MGWE*` block grades 40-60% against independent evidence. 93 products carry the
+  # literal string `BUNDLE` as their sku, which is WooCommerce's placeholder for a bundle product
+  # and not an identifier at all.
+  #
+  # SO THE NAME IS WHAT IS LEFT, and Mantic writes very consistent ones. THE CONTROL IS RETAILER
+  # SHELVES AND legacy-catalog's NON-FILL CLAIMS ONLY -- 325 Mantic products -- never
+  # `mfr-manticgames.yaml`'s own output, which is the table these clauses sit beside.
+
+  # SCENERY FIRST, because it is the one word that defeats the unit-name clause below: `The
+  # Walking Dead Scenery Booster` and `Battlezones - Connector Booster Pack - Terrain Crate` are
+  # the only two products in the control that clause gets wrong, and both say so in their names.
+  - nameMatches: '\b(scenery|terrain ?crate|terraincrate|battlezones)\b'
+    category: terrain
+    note: 0 undecided of its own; control 16, 100%. It runs for the veto, not the fill.
+
+  # THINGS READ. Mantic's book vocabulary, and it does not overlap its model vocabulary at all.
+  - nameMatches: '\b(rulebook|rules|sourcebook|compendium|supplement|companion|almanac|novel|fiction|journal|mission book|gm screen|scenario book|hardback|softcover)\b'
+    category: book
+    note: 16 undecided; control 42, 100%
+
+  # THINGS USED TO BUILD AND FINISH. No control exists -- nothing independent has decided any of
+  # the eight -- and none is needed: `Army Painter Plastic Glue`, `Battlefields Basing Glue`,
+  # `Army Painter Super Glue`, `Mantic Tape Measure`, `THE ARMY PAINTER RangeFinder Tape Measure`,
+  # `Magic Super Glue Activator`, `Colour Forge Precision Glue Application Tips`, `Colour Forge
+  # Super Glue Thick`. All eight names were read.
+  - nameMatches: '\b(glue|brush(es)?|tape measure|clipper|hobby file|sanding|magnet)\b'
+    category: hobby-auxiliary
+    note: 8 undecided; no control, full name read
+
+  # A BARE BASE IS A COMPONENT AND A MOVEMENT TRAY IS PLAYED WITH, which is the split
+  # categories.yaml draws and the one Games Workshop's own d34 22 block already follows here.
+  # Five base sets against eight trays, no control, all thirteen names read.
+  - nameMatches: '\b(bases? set|modular plastic base|acrylic bases)\b'
+    category: hobby-auxiliary
+    note: 5 undecided; no control, full name read
+  - nameMatches: '\bmovement tray\b'
+    category: game-accessory
+    note: 8 undecided; no control, full name read
+
+  # A GAMING MAT BELONGS TO NO GAME and is not scenery -- the same call `mfr-manticgames.yaml`
+  # already makes for its `neoprene-game-mats` shelf, reached here by name for the rows that shelf
+  # does not carry.
+  - nameMatches: '\b(battle ?mat|game ?mat|play ?mat|gaming mat|neoprene)\b'
+    category: game-accessory
+    note: 7 undecided; control 1
+
+  # THE UNIT NAMES, AND THEY ARE THE BIGGEST SINGLE ANSWER IN THIS FILE. Kings of War's official
+  # unit sizes are Troop, Regiment, Horde and Legion; DreadBall sells Teams and Boosters; Deadzone
+  # and Firefight sell Squads, Warbands, Companies and Spearheads. Every one of those words names
+  # a quantity of MODELS, and none of them appears on a Mantic book, deck or accessory -- which is
+  # what the control says: 57 of 59, and both misses are the Scenery/TerrainCrate rows the veto
+  # above takes first.
+  - nameMatches: '\b(troop|regiment|horde|legion|booster|team|squad|warband|company|brigade|spearhead|army|battalion|starter set)\b'
+    category: miniatures
+    note: 163 undecided; control 59, 96.6% before the scenery clause above, 59/59 after
+
+  # SPRUES, FRAMES AND THE MANTIC DIRECT PACKS. A sprue is a model however it is sold, and
+  # `hero pack` / `command pack` / `upgrade pack` are Mantic Direct's names for single resin
+  # figures and the parts that go with them.
+  - nameMatches: '\b(sprue|frame|command pack|hero pack|upgrade pack)\b'
+    category: miniatures
+    note: 54 undecided; control 2
+
+  # HOW IT IS PACKAGED. `packaging` is additive-only, so this fills a form the record does not have
+  # and contradicts nothing. 93 of these products carry `BUNDLE` as their sku because that is what
+  # WooCommerce writes for a bundle product; the rest say it in their own titles.
+  - nameMatches: '\bbundle\b'
+    packaging: bundle
+    note: 145 undecided products name themselves a bundle
+
+  # WHAT THIS TABLE CANNOT REACH, so the next person does not re-run the search. The name clauses
+  # above took the residue from 705 products to 459; the blocks below are what is left, and each
+  # figure is the population, not the remainder.
+  #
+  #   THE CODE BLOCKS WERE RE-TESTED 2026-09-01 AND STILL DO NOT ANSWER IT, now against a control
+  #   built only from retailer shelves and legacy's non-fill claims (325 Mantic products).
+  #   `MGWE<game>` + a digit block -- the shape Mantic's own Direct line documents, 1xx single
+  #   resin figures and 5xx bundles -- reaches 103 undecided and grades 0 of 3: `MGWEAR001` is an
+  #   MDF ship card tray and `MGWEAR501` a launch bundle, both inside the supposed model block.
+  #   `MGWD1xx` grades 3 of 5. `MGC*` (2nd-edition codes, 23 products) and `MGDS\d\d` (Dungeon
+  #   Saga boxed games, 18) have a control of ZERO and are left alone rather than filled on a
+  #   reading of the prefix alone.
   #
   #   `BUNDLE` (93) -- the sku is literally the string BUNDLE, and the contents are genuinely
   #   heterogeneous: `Epic Warpath XL Terrain Bundle`, `The Raging Void & 4th Edition Rulebook
