@@ -1,0 +1,16 @@
+manufacturer: wargames-illustrated
+reason: >-
+  A MONTHLY MAGAZINE, ONE RECORD PER ISSUE. Warlord's store carries the current run and files it
+  under the non-taxonomy product type `No Discount Codes`, so 20 of the 24 issues here were decided
+  by name and four were not -- `WI425`, `WI446`, `WI458`, `WI460`, whose titles spell "Issue" or
+  "Edition" differently enough to miss the lexicon.
+
+
+  A MAGAZINE ISSUE BELONGS TO NO GAME SYSTEM, and this is one of the few places that is a positive
+  statement rather than a gap: Wargames Illustrated covers historical wargaming generally. The
+  catalog has no value for that, so these stay `gameSystemsBasis: unknown` rather than being given
+  a slug they would not deserve -- the same answer `reaper.yaml` records for Bones.
+clauses:
+  - codeMatches: '^WI\d{3}$'
+    category: book
+    note: 4 undecided; control 20, 100%

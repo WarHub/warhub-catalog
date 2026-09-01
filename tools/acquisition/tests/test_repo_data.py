@@ -1664,6 +1664,12 @@ def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_g
     from warhub_acquisition.models.catalog import WithdrawnEans
 
     declared = WithdrawnEans.model_validate(read_yaml(paths.withdrawn_eans))
+    # An entry is keyed by the id the RELEASE published, because that is what `report --ean-guard`
+    # looks it up by; a record whose manufacturer attribution has since been corrected carries the
+    # rename in matches.yaml `aliases`, so resolve through it before asking whether it still exists.
+    aliases: dict[str, str] = {}
+    if paths.matches.exists():
+        aliases = (read_yaml(paths.matches) or {}).get("aliases") or {}
     by_id: dict[str, dict] = {}
     published: dict[str, list[str]] = {}
     for path in sorted(paths.catalog_products.glob("*.yaml")):
@@ -1673,7 +1679,11 @@ def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_g
                 if barcode:
                     published.setdefault(barcode, []).append(product["id"])
     for entity, eans in declared.withdrawn.items():
-        assert entity in by_id, f"withdrawn-eans.yaml names {entity!r}, which the catalog no longer has"
+        current = aliases.get(entity, entity)
+        assert current in by_id, (
+            f"withdrawn-eans.yaml names {entity!r}, which the catalog no longer has "
+            f"(and matches.yaml aliases does not rename it)"
+        )
         for ean in eans:
             assert ean not in published, (
                 f"{entity}: {ean} is declared withdrawn but the catalog publishes it again "

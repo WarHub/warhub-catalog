@@ -1,0 +1,16 @@
+manufacturer: perry-miniatures
+reason: >-
+  ALAN AND MICHAEL PERRY'S OWN COMPANY, 33 products here, all off Warlord's webstore. 28 are
+  already `miniatures`; the five left divide two ways and the code says which.
+
+
+  `RPB` IS THE PLASTIC BUILDING RANGE and the only part of Perry's catalogue that is not figures:
+  `Medieval Cottage (1300-1700) plastic boxed set`, `North American Farmhouse 1750-1900`,
+  `North American Store 1800-1900`. Everything else is 28mm historical infantry and cavalry.
+clauses:
+  - codeMatches: '^RPB'
+    category: terrain
+    note: 3 undecided; no control, all three names read
+  - codeMatches: '^[A-Z]{2,6}\s?\d'
+    category: miniatures
+    note: 2 undecided; control 28, 100%

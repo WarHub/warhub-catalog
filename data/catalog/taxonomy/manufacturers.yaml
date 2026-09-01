@@ -99,7 +99,39 @@ manufacturers:
     # -- by far the largest unmapped tracked-brand vendor string found. Confirmed by
     # product sample: titles/skus are Warlord Games lines (Hail Caesar sku WGH-IR-22,
     # Bolt Action sku WGB-RI-130).
-    vendorNames: [Warlord Games, Warlord-BLISTER, Warlord-WEB]
+    #
+    # THE OTHER EIGHT STRINGS WERE MEASURED OFF THE STORE ITSELF, 2026-09-01, by paging
+    # store.warlordgames.com/products.json (5,892 products, 44 distinct vendor strings). A vendor
+    # this file does not know is not a product filed elsewhere -- `shopify.py` counts it
+    # `skipped_unknown_vendor` and DROPS THE ROW -- so every string below was 100% absent from the
+    # live evidence while the products themselves sat in the catalog off the frozen legacy import.
+    #
+    # `Warlord Games - web exclusive` (107), `Warlord Games Ltd` (2) -- the store's own label
+    # variants. Nothing to decide; they were simply unlisted.
+    #
+    # `Skytrex` (145) + `Warlord Games/Skytrex` (32) -- Skytrex Ltd of Loughborough, which Warlord
+    # ACQUIRED in November 2020 and runs as a sister company. This is the same call the top of this
+    # file already makes for Citadel and Forge World: a wholly-owned brand is its parent's. Half
+    # the range carries Warlord's own 9-digit numbering (`408800045 Bolt Action Objective Marker
+    # Set - Great Britain`) and half carries Skytrex's (`GABIONS01`, `OTT02`), which is what a
+    # subsidiary looks like mid-absorption and is not a reason to split it out.
+    #
+    # `War World Scenics` (28) and `Playmats.eu` (4) -- suppliers, not brands, and the SKU says so:
+    # every one of the 32 rows carries a Warlord 9-digit code, and the 28 static-grass tubs are
+    # Warlord's own `Battlefields & Basing` range ("from War World Scenics", in Warlord's copy).
+    # The vendor field names who manufactured it; the product is Warlord's.
+    #
+    # `Wargames Factory` (9) -- the US plastics company behind the Saxon Fyrd and Numidian sprues.
+    # It stopped trading between 2016 and 2019 and Warlord, its exclusive distributor since 2016,
+    # has held and modified the tooling since; 8 of the 9 rows carry Warlord's numbering.
+    #
+    # `ITALERI` (9) -- co-branded rather than resold. Italeri S.p.A. tools the 1:56 Bolt Action
+    # vehicles under agreement with Warlord, who packages and numbers them (`402013057 M24 Chaffee
+    # Light Tank`). Italeri's OWN kits are not in this catalog, so the string means the Warlord
+    # product every time it appears here.
+    vendorNames: [Warlord Games, Warlord-BLISTER, Warlord-WEB, 'Warlord Games - web exclusive',
+                  Warlord Games Ltd, Skytrex, 'Warlord Games/Skytrex', War World Scenics,
+                  Playmats.eu, Wargames Factory, ITALERI]
   - slug: wyrd-games
     name: Wyrd Games
     codePattern: 'WYR\d+[A-Z ]*'
@@ -108,6 +140,143 @@ manufacturers:
     # "Wyrd", 2 "Wyrd Games", 1 "Wyrd Miniatures", 1 "WYRD - PROMO") -- all the same company's
     # own catalog, no other vendor observed. See task-6-report.md.
     vendorNames: [Wyrd Games, Wyrd Miniatures, Wyrd, 'Wyrd Miniatures - Online Store', 'WYRD - PROMO']
+  # --- Brands Warlord Games RESELLS on its own webstore -------------------------------------------
+  #
+  # WHY THEY ARE HERE AND NOT UNDER `warlord-games`. store.warlordgames.com is a shop as well as a
+  # manufacturer's site, and 1,012 of its 5,892 products are somebody else's -- measured 2026-09-01
+  # off its own `products.json`. Every one of those products is ALREADY IN THIS CATALOG, filed
+  # under `warlord-games`, because the frozen legacy import took the manufacturer from the path it
+  # scraped (`warlord-games/<game>/<faction>/<slug>`) and had no other answer available. Naming the
+  # vendor here does not add a product; it moves one that is already published to the company that
+  # made it, through `SourceDescriptor.manufacturerIsShelf`.
+  #
+  # NONE OF THESE IMPLIES A HARVEST. A manufacturer entry is an identity, not a source: `reaper`
+  # has stood here for months with its products arriving from one retailer. What an entry buys is
+  # that `T510C` publishes as `sarissa-precision/T510C` rather than as a Warlord product, and that
+  # the store's own `product_type` -- `Terrain`, `Bases`, `Basing`, `Rules & Books`, `Paint Pen` --
+  # reaches the record at all.
+  #
+  # THE LINE BETWEEN THIS BLOCK AND THE EIGHT STRINGS ADDED TO `warlord-games` ABOVE IS THE PRODUCT
+  # CODE. A supplier whose output ships under Warlord's numbering and a Warlord range name is
+  # making Warlord's product; a company whose own article numbers are on the box is making its own.
+  # The codes below are all the second kind.
+  #
+  # THE LONG TAIL IS DELIBERATELY LEFT UNMAPPED: 14 vendor strings carrying one product each, plus
+  # `Freesia Enterprise Ltd` (13), `Dave Taylor` (18), `Shaggy Dog` (5), `Tabletop Workshop` (6),
+  # `4Ground` (2) and `Gripping Beast` (4) which ARE mapped below because their ranges are coherent
+  # and coded. The singletons include a model shop (`HANNANTS`), a magnet supplier
+  # (`First4magnets`) and several one-off resales; each would be a manufacturer entry for one
+  # record, and they stay where they are -- which changes nothing about them, since that is where
+  # they already are.
+  - slug: sarissa-precision
+    name: Sarissa Precision
+    # 329 products, the largest third-party range on the store and the reason this block exists.
+    # Laser-cut MDF terrain, 15mm and 28mm, sold across eight letter series that the catalog had
+    # filed as Warlord product codes: `T` Rome/ancients, `M` North American and ACW, `J` Dark Ages,
+    # `L` English timber-framed, `K` Pacific, `N` WWII North-West Europe, `B` feudal Japan AND
+    # acrylic bases, `R0xx` armoured trains. Sarissa Precision Limited (company 08421922, Langley
+    # Mill) is independent -- no acquisition; it also cuts to order for other companies, which is
+    # why a few of its rows carry a Warlord code and stay uncoded here.
+    #
+    # THE PATTERN REQUIRES A LETTER, and that is what keeps Warlord's own numbering out: the six
+    # rows on this vendor carrying a 9-digit Warlord code (`409913015 US LCVP Landing Craft`) are
+    # Warlord products Sarissa cut, and an all-digit code must not become a Sarissa identity.
+    codePattern: '(?=[A-Z0-9_-]*[A-Z])[A-Z0-9][A-Z0-9_-]{2,}'
+    vendorNames: [Sarissa, 'Warlord Games/Sarrisa']
+  - slug: north-star-military-figures
+    name: North Star Military Figures
+    # 97 products. Nottingham; makes and sells the plastic and metal ranges for three Osprey Games
+    # titles -- `FGV`/`FGAP` Frostgrave, `OAKP` Oathmark, `SGVP` Stargrave. OSPREY IS NOT THE
+    # MANUFACTURER: it publishes the rulebooks, North Star makes the figures, and a catalog that
+    # recorded the publisher would be wrong about every box.
+    codePattern: '[A-Z]{2,4}\d{2,4}'
+    vendorNames: [Northstar, North Star Military Figures]
+  - slug: micro-art-studio
+    name: Micro Art Studio
+    # 69 products, all `H00xxx`: pre-painted HDF terrain licensed for Bolt Action, made in Gdynia.
+    #
+    # FIVE DIGITS, NOT THREE, AND THE WIDTH IS LOAD-BEARING. Sarissa numbers its Waterloo buildings
+    # `H003`-`H008` (La Belle Alliance, Hougoumont, La Haye Sainte) on the same letter. Keying on
+    # the letter alone would hand one company's buildings to the other.
+    codePattern: 'H\d{5}|[A-Z]{2,}BUNDLE'
+    vendorNames: [Micro Art Studio]
+  - slug: renedra
+    name: Renedra
+    # 37 products: injection-moulded plastic bases and terrain kits. Renedra also tools for Perry,
+    # North Star and Warlord themselves, so the same caution as Sarissa applies -- what is recorded
+    # here is the range Renedra sells under its own name and numbers `REN-*`, `RN*` or by object
+    # (`BARFENCE`, `GRAVES2`, `PICKETFENCE`).
+    codePattern: '(?=[A-Z0-9_-]*[A-Z])[A-Z0-9][A-Z0-9_-]{2,}'
+    vendorNames: [Renedra]
+  - slug: perry-miniatures
+    name: Perry Miniatures
+    # 33 products. Alan and Michael Perry's own company; 28mm historical metal and plastic. The
+    # codes carry a space in eight of them (`ACW 120`, `BH 90-BRIG`), which is why the class here
+    # is wider than the others.
+    codePattern: '(?=[A-Z0-9 _-]*[A-Z])[A-Z][A-Z0-9 _-]{2,}'
+    vendorNames: [Perry Miniatures]
+  - slug: hornby-hobbies
+    name: Hornby Hobbies
+    # 35 products under THREE vendor strings, and they are one company: Hornby Hobbies Ltd bought
+    # Humbrol and Airfix in 2006 and still owns both. Splitting them would put `A06014 Heinkel He111
+    # P-2` and `AV0014 Weathering Powder Smoke` under different manufacturers for no reason a
+    # consumer would recognise.
+    #
+    # `R7xxx` (Hornby model-railway scenic trees) is the range that made this necessary: it shares
+    # the letter `R` with Sarissa's armoured-train series `R001`-`R034`, and the four-digit width
+    # separates them exactly as `H` separates Micro Art Studio from Sarissa above.
+    codePattern: 'R7\d{3}|A[0-9A-Z]\d{4}[A-Z]?'
+    vendorNames: [Hornby, Humbrol, Airfix]
+  - slug: freesia-enterprise
+    name: Freesia Enterprise
+    # 13 products, all `FEPT*`: the Paint Tamer brush range, handmade in Japan. Freesia is also The
+    # Army Painter's Japanese distributor, which is not what these rows are -- Paint Tamer is
+    # Freesia's own brand.
+    codePattern: 'FEPT[A-Z0-9]*'
+    vendorNames: [Freesia Enterprise Ltd, Freesia Enterprise]
+  - slug: dave-taylor-miniatures
+    name: Dave Taylor Miniatures
+    # 18 products: self-published hobby art books (`THE ART OF...` volumes, `28 Collected`). 16 of
+    # the 18 are numbered by ISBN-13 and two by the imprint's own `DTM` code, so the pattern takes
+    # both. An ISBN is a real product code for a book and the right identity to publish under.
+    codePattern: '97[89]\d{10}|DTM\d+'
+    vendorNames: [Dave Taylor, Dave Taylor Miniatures]
+  - slug: shaggy-dog-publishing
+    name: Shaggy Dog Publishing
+    # 5 products: `Talking Miniatures` and `The Stuff of Legends`, ISBN-numbered, with signed
+    # editions carrying a suffix on the same ISBN. Founded by Warlord's John Stallard PERSONALLY,
+    # which is not the same thing as Warlord owning it -- unlike Skytrex above, so it is separate.
+    codePattern: '97[89]\d{10}[A-Z]*|SOLTM'
+    vendorNames: [Shaggy Dog, Shaggy Dog Publishing]
+  - slug: tabletop-workshop
+    name: Tabletop Workshop
+    # 6 products, `28MED*`: hard-plastic modular 28mm medieval buildings.
+    codePattern: '28[A-Z]{3,}'
+    vendorNames: [Tabletop Workshop]
+  - slug: gamers-grass
+    name: GamersGrass
+    # 6 products, `GGLP-*`: the Laser Plants range. Portuguese, Torres Vedras.
+    codePattern: 'GG[A-Z]*-[A-Z0-9]+'
+    vendorNames: [Gamers Grass, GamersGrass]
+  - slug: four-ground
+    name: 4Ground
+    # 2 products, `28S-WAW-*`: pre-painted laser-cut MDF. 4Ground Publishing ceased trading in 2022
+    # and the range continues through a sister company, which is exactly the case OBJECTIVES 1
+    # exists for -- a closure never removes data.
+    codePattern: '\d{2}[A-Z]-[A-Z]{2,4}-\d+'
+    vendorNames: [4Ground, Four Ground]
+  - slug: gripping-beast
+    name: Gripping Beast
+    # 4 products, `GBP*` plus one `CONQUEST1` bundle: Dark Ages plastics.
+    codePattern: '(?=[A-Z0-9]*[A-Z])[A-Z]{2,}[A-Z0-9]*\d'
+    vendorNames: [Gripping Beast]
+  - slug: wargames-illustrated
+    name: Wargames Illustrated
+    # 20 products, `WI4xx`: single print issues of the monthly magazine, which Warlord's store
+    # files under the non-taxonomy product type `No Discount Codes`. A magazine issue is a `book`
+    # in this catalog's vocabulary and belongs to no game system.
+    codePattern: 'WI\d{3}'
+    vendorNames: [Wargames Illustrated]
   # --- Paint manufacturers (paint harvest sources; see
   # docs/research/2026-07-23-paint-manufacturer-harvest-design.md) ---
   - slug: vallejo

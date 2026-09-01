@@ -176,8 +176,79 @@ reassignManufacturer:
   'ret-tistaminis:ww2-american-paint-set': army-painter
   'ret-tistaminis:ww2-german-paint-set': army-painter
   'ret-tistaminis:ww2-british-paint-set': army-painter
+  # --- MICRO ART STUDIO'S NORMANDY TERRAIN, AS A RETAILER SEES IT (18 rows, 2026-09-01) --------
+  # `ret-tistaminis` tags these `Warlord-WEB` (one is `Warlord Games`), which is that store's own
+  # brand-format convention and means it bought them from Warlord. Warlord resells them; Micro Art
+  # Studio of Gdynia makes them, and three independent things say so: Warlord's OWN store names
+  # the vendor `Micro Art Studio` on the same pages, the article numbers are Micro Art's `H00xxx`
+  # range, and the barcodes are `59076525xxxxx` -- GS1 prefix 590, Poland. That is the bar this
+  # list sets, met three ways.
+  #
+  # WHY A HAND LIST AND NOT A RULE. `SourceDescriptor.manufacturerIsShelf` fixes this shape
+  # automatically where the two sources name the SAME URL, which is how the 781 Army Painter and
+  # AK Interactive rows on Warlord's own store were corrected. A third-party retailer has its own
+  # URLs, so nothing links its row to the page that knows the vendor. Measured over the whole
+  # catalog after the Warlord vendor mapping: these 18 are the ONLY products left carrying one
+  # product code under two manufacturers, so the list is complete and stays short.
+  'ret-tistaminis:bolt-action-pre-painted-wwii-normandy-coach-house-with': micro-art-studio  # H00161 Coach House with Chicken Coop
+  'ret-tistaminis:bolt-action-pre-painted-wwii-normandy-cowshed': micro-art-studio  # H00159 Cowshed
+  'ret-tistaminis:bolt-action-pre-painted-wwii-normandy-farmhouse': micro-art-studio  # H00157 Farmhouse
+  'ret-tistaminis:bolt-action-pre-painted-wwii-normandy-high-stone-wall': micro-art-studio  # H00162 High Stone Wall with Gate
+  'ret-tistaminis:bolt-action-pre-painted-wwii-normandy-homestead-with-o': micro-art-studio  # H00158 Homestead with Outbuildings
+  'ret-tistaminis:bolt-action-pre-painted-wwii-normandy-stable-with-dove': micro-art-studio  # H00160 Stable with Dovecote
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-cafe-prepainted': micro-art-studio  # H00123 Cafe
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-church-prepainted': micro-art-studio  # H00132 Church
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-garage-with-petrol-station-prepainted': micro-art-studio  # H00131 Garage with Petrol Station
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-large-brick-shed-prepainted': micro-art-studio  # H00128 Large Brick Shed
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-large-tin-shed-prepainted': micro-art-studio  # H00130 Large Tin Shed
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-restaurant-prepainted': micro-art-studio  # H00124 Restaurant
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-small-sheds-with-dovecote-prepainted': micro-art-studio  # H00129 Small Sheds with Dovecote
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-townhouse-1-prepainted': micro-art-studio  # H00125 Townhouse 1
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-townhouse-2-prepainted': micro-art-studio  # H00126 Townhouse 2
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-townhouse-3-prepainted': micro-art-studio  # H00127 Townhouse 3
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-wall-with-gate-high-prepainted': micro-art-studio  # H00134 Wall with Gate (high)
+  'ret-tistaminis:warlord-games-mdf-terrain-ww2-normandy-wall-with-gate-low-prepainted': micro-art-studio  # H00133 Wall with Gate (low)
+
+  # --- WARGAMES ILLUSTRATED, AS A RETAILER SEES IT (11 rows, 2026-09-01) --------------------
+  # Same shape as the Micro Art Studio block above and the same three-way bar: Warlord's own
+  # store names the vendor `Wargames Illustrated` on these very issues, the article numbers are
+  # the magazine's own `WI4xx`, and the publisher is a magazine house rather than a games
+  # company. `ret-tistaminis` tags them `Warlord Games` / `Warlord-WEB`, which is where it
+  # bought them.
+  #
+  # WITHOUT THIS THEY WOULD SPLIT RATHER THAN MERGE. `WI432` is five characters and Warlord's
+  # `codePattern` needs six, so a row attributed to Warlord cannot carry a product code at all
+  # and founds a record under a slug of the shop's title. Until now they joined the right record
+  # by BARCODE -- and that barcode is an ISSN, which `ean.py` stopped believing in this same
+  # change because it is the same thirteen digits on every issue ever printed.
+  'ret-tistaminis:wargames-illustrated-august-2026-issue-464': wargames-illustrated  # WI464 Wargames Illustrated August 2026 Issue 464
+  'ret-tistaminis:wargames-illustrated-issue-448-april-2025': wargames-illustrated  # WI448 Wargames Illustrated Issue 448 - APRIL 2025
+  'ret-tistaminis:wargames-illustrated-issue-456-december-2025': wargames-illustrated  # WI456 Wargames Illustrated Issue 456 - December 20
+  'ret-tistaminis:wargames-illustrated-issue-458-febuary-2026': wargames-illustrated  # WI458 Wargames Illustrated Issue 458, Febuary 2026
+  'ret-tistaminis:wargames-illustrated-issue-460-april-2026': wargames-illustrated  # WI460 Wargames Illustrated Issue 460, April 2026
+  'ret-tistaminis:wargames-illustrated-septmeber-2025-issue-453': wargames-illustrated  # WI453 Wargames Illustrated Septmeber 2025, Issue 4
+  'ret-tistaminis:wargames-illustrated-wi425-may-edition': wargames-illustrated  # WI425 Wargames Illustrated WI425 May Edition New
+  'ret-tistaminis:wargames-illustrated-wi440-august-2024': wargames-illustrated  # WI440 Wargames Illustrated WI440 August 2024
+  'ret-tistaminis:wargames-illustrated-wi442-october-2024-edition': wargames-illustrated  # WI442 Wargames Illustrated WI442 October 2024 Edit
+  'ret-tistaminis:wargames-illustrated-wi445-january-edition': wargames-illustrated  # WI445 Wargames Illustrated WI445 January Edition
+  'ret-tistaminis:wargames-illustrated-wi446-february-2025-edition': wargames-illustrated  # WI446 Wargames Illustrated WI446 February 2025 Edi
+
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  # --- TWO KONFLIKT '47 DICE BAGS A RE-CODE LEFT BEHIND (2026-09-01) --------------------------
+  # `ret-tistaminis` lists these under Warlord's OLD codes `458900601` and `458901201` while
+  # carrying the barcodes `5060917996464` and `5060917996488` -- and Warlord's own store, freshly
+  # harvested, now gives those two barcodes to `452600603` and `452601203`. The store also gives
+  # `458900601` and `458901201` barcodes of their own (`...996518`, `...996532`), so both sides
+  # are attested and neither record is lost; what was wrong was one row holding both.
+  #
+  # THE MAKER'S OWN ROW IS THE EVIDENCE, which is the bar this list sets, and the repo's standing
+  # rule decides the direction: a shop's catalogue number goes stale across a re-code while the
+  # barcode identifies the box, so the retailer's row is placed by ITS barcode and the stale
+  # value is the one disbelieved.
+  'ret-tistaminis:konflikt-47-british-commonwealth-dice-bag': ['5060917996464']
+  'ret-tistaminis:konflikt-47-empire-of-japan-dice-bag': ['5060917996488']
+
   # --- FIVE VALUES THE WEB DISPROVED (2026-08-27) ----------------------------------------------
   # Each is DECLARED in data/catalog/withdrawn-eans.yaml, which carries the evidence per row and is
   # what lets `report --ean-guard` accept the removal instead of calling it a loss. Four are
@@ -603,7 +674,18 @@ rejectEans:
   # ret-tistaminis's live `5907652563592` the primary and keeps `5060917992084` in
   # `additionalEans`, and files the disagreement as an `ean-mismatch` -- which is a true record of
   # the evidence and costs nothing. Left alone on purpose.
-aliases: {}
+# `{id a release published: the id that record has now}`. Read by `resolve/join.py` when it names
+# a group, when it resolves a forced-join target and when it reads a declared supersession, and by
+# the withdrawn-eans staleness test. An entry does NOT move anything: it records that a rename
+# happened, so a pointer written against the old spelling still lands.
+aliases:
+  # TWO RECORDS THAT CHANGED MANUFACTURER, 2026-09-01, and nothing else about them changed. Warlord
+  # Games resells Micro Art Studio's pre-painted Normandy terrain and Wargames Illustrated's
+  # magazine; the frozen import filed both under the shop it scraped them from, and the store's own
+  # vendor field says who makes them. Both are here because `withdrawn-eans.yaml` names them under
+  # the id the last release carried.
+  warlord-games/H00133: micro-art-studio/H00133
+  warlord-games/wargames-illustrated-wi432-december-2023-edition: wargames-illustrated/WI432
 # `{retired entity id: current entity id}`. BOTH records are published: the retired one keeps its
 # own productCode, its own primary `ean`, its own name/firstSeen and gains `supersededBy`; the
 # current one gains `supersedes`. Migrated out of `joins` (2026-07-30) -- every entry here used to

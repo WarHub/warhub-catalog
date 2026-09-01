@@ -1,0 +1,16 @@
+manufacturer: micro-art-studio
+reason: >-
+  MICRO ART STUDIO'S WHOLE PRESENCE IN THIS CATALOG IS ONE RANGE: 69 pre-painted HDF buildings for
+  Bolt Action, licensed by Warlord and numbered `H00xxx`. 60 of them are already `terrain` from
+  the store's own shelf; the 9 left are the rows that shelf types under the GAME (`Bolt Action`)
+  rather than the format, and they are `Pre-Painted WW2 Ruin 1/2/3`, `Winter Ruin 1/2/3`,
+  `Normandy Ruined Large House 1/2` and `Normandy Stable with Dovecote`.
+
+
+  THE FIVE DIGITS ARE LOAD-BEARING, not decoration. Sarissa Precision numbers its Waterloo
+  buildings `H003`-`H008` on the same letter -- La Belle Alliance, Hougoumont, La Haye Sainte --
+  and keying on `H` alone would hand one company's range to the other.
+clauses:
+  - codeMatches: '^H\d{5}$'
+    category: terrain
+    note: 9 undecided; control 60, 100%

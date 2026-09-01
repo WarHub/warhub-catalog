@@ -167,8 +167,27 @@ clauses:
     hintEquals: {productType: Starter Set}
 
   # --- the rest ---------------------------------------------------------------------------------
+  # THREE SPELLINGS OF ONE SHELF, and they are not a tidy-up: they were 92 undecided products.
+  # This store types its `product_type` by hand and the third-party terrain arrived under
+  # `terrain` (75), `MDF terrrain` (17, with the typo) and `MDF` (2) rather than under the
+  # `Terrain` the table already knew. Every one of the 94 is a Sarissa Precision or Skytrex
+  # laser-cut building, fence or scenery pack.
   - category: terrain
     hintEquals: {productType: Terrain}
+  - category: terrain
+    hintEquals: {productType: terrain}
+  - category: terrain
+    hintEquals: {productType: 'MDF terrrain'}
+  - category: terrain
+    hintEquals: {productType: MDF}
+  - category: terrain
+    hintEquals: {productType: 'Loose Wood'}
+    note: 6 rows, all laser-cut MDF scenery sold as loose parts
+  - category: miniatures
+    hintEquals: {productType: Box}
+    note: 4 North Star plastic boxed sets; the store's short form of `Box - Plastic` above
+  - category: hobby-auxiliary
+    hintEquals: {productType: 'Hobby Supplies'}
   - category: book
     hintEquals: {productType: Book}
   - category: book

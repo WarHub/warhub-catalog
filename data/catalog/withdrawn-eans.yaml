@@ -17,6 +17,13 @@
 # another product this catalog holds, the fix is that product's own evidence carrying it, not a
 # hand re-homing. The removal itself is done in matches.yaml `rejectEans`; this file only tells the
 # guard the removal was deliberate, so the two stay separable.
+#
+# AN ENTRY IS KEYED BY THE ID THE RELEASE PUBLISHED, not by the id the record has today, and
+# the two can differ: `report --ean-guard` reads HEAD's published catalog and asks what became
+# of each barcode it finds there, so a key renamed since would match nothing and the
+# withdrawal would read as a loss. Where a record HAS moved -- a manufacturer attribution
+# corrected, say -- matches.yaml's `aliases` carries the old id to the new one, and the
+# staleness test resolves through it.
 
 withdrawn:
   # --- FOUR ATOMIC MASS ROWS, ALL THE SAME MECHANISM (verified on the web 2026-08-27) -----------
@@ -68,3 +75,25 @@ withdrawn:
   # the barcode should live there instead.
   warlord-games/H00133:
     - '5060917992084'
+  # --- THE MAGAZINE BARCODES, WHICH ARE ISSNs (2026-09-01) ------------------------------------
+  # `9770957644169` is not Wargames Illustrated issue 432's barcode. It is Wargames Illustrated's
+  # ISSN, and the GS1 prefix says so: `977` is the serial-publication range, and every issue of a
+  # periodical carries the SAME thirteen digits -- what separates them is a 2- or 5-digit add-on
+  # printed beside the barcode that no source here records.
+  #
+  # THE EVIDENCE IS THE VALUE'S OWN STRUCTURE, not a disagreement between sources, which is why it
+  # clears this file's bar: the number belongs to the SERIES and this catalog was publishing it as
+  # one issue's identity. It was fusing them accordingly -- `ean-shared` across ten Wargames
+  # Illustrated records and both White Dwarf runs. `ean.py::canonical_ean` now refuses the whole
+  # `977` range (`978`/`979`, ISBN, identify one title and are untouched).
+  #
+  # NO ISSUE LOSES AN IDENTITY IT HAD. Each is addressable by its own article number --
+  # `wargames-illustrated/WI432` -- which is what it publishes under now.
+  warlord-games/wargames-illustrated-wi432-december-2023-edition:
+    - '9770957644169'
+  # The two White Dwarf values are the same finding and are listed for the record; the guard
+  # already treats them as visibility-only because they were `provisional` rather than confirmed.
+  games-workshop/white-dwarf-518-nov-25:
+    - '9772658712031'
+  games-workshop/white-dwarf-issue-516-sept-2026-space-marines-special-issue:
+    - '9772658712024'
