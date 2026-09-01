@@ -63,15 +63,33 @@ noneOf:
   - codeMatches: '^\d{4}30(08|43)\d{3}$'
     blocks: [gameSystems]
     note: mixed Horus Heresy / Warhammer 40,000 segment, 56 vs 21
-  - codeMatches: '^\d{4}01(08|17)\d{3}$'
-    blocks: [gameSystems]
-    note: mixed Warhammer 40,000 / Horus Heresy segment, 105 vs 5
   - codeMatches: '^\d{2}12(01)99\d{3}$'
     blocks: [gameSystems]
     note: 40k plastic kits with a generic faction segment
-  - codeMatches: '^\d{2}1202(01|07|13)\d{3}$'
-    blocks: [gameSystems]
-    note: Age of Sigmar plastic kits also sold into Warcry / Old World
+
+  # TWO VETOES THAT STOOD HERE ARE GONE, AND THE PARAGRAPH ABOVE IS WHY THEY WERE WRONG. It says
+  # these classes are heterogeneous rather than dual -- a real distinction, and the right call for
+  # Forge World, whose 670 products split six ways. It is not the right call for these two, and
+  # re-measuring them the way `gameSystems` being a LIST makes possible is what showed it.
+  #
+  # `0108/0117` (Adeptus Custodes / Imperial Knights, 302 products, 146 of them undecided). The
+  # old note read "105 vs 5". Measured 2026-09-01 over every source EXCEPT the trade sheet this
+  # table decodes: 92 products where the sources agree, and they agree on `warhammer-40k` 92 times
+  # against `other-games` once. The disagreements are 10, and 7 of them are the same disagreement
+  # -- `Custodian Guard`, `Prosecutor Squad`, `Custodian Wardens` carry BOTH `horus-heresy` and
+  # `warhammer-40k`, because the Custodes plastics are sold into both games. That is not a segment
+  # the code cannot resolve; it is a segment whose products belong to two games, which is the thing
+  # a list can now say and a scalar could not.
+  #
+  # `1202(01|07|13)` (Age of Sigmar plastic kits, 360 products, 112 undecided). Same measurement:
+  # 197 agree on `age-of-sigmar`, 3 on `other-games`, 2 on `warhammer-40k`, and 4 disagree --
+  # `Skull Altar`, `Tzaangors`, `Spearhead: Blades of Khorne` carrying age-of-sigmar AND
+  # warhammer-40k. 97.5% is not a segment that fails to name a game.
+  #
+  # NEITHER NEEDS A NEW CLAUSE. `^\d{4}01\d{5}$ -> warhammer-40k` and `^\d{4}02\d{5}$ ->
+  # age-of-sigmar` already cover both blocks; the vetoes were the only thing stopping them. And
+  # the manufacturer rung fires only on an empty field, so the 11 dual-membership products keep
+  # what their sources say and the 258 that say nothing gain the segment's answer.
 
 clauses:
   # =============================================================================================
@@ -174,6 +192,22 @@ clauses:
     category: game-accessory
     note: 11 undecided; control 2/2
 
+  # THE THREE THINGS THE d34 22 BLOCK CANNOT SAY FOR ITSELF, and they are named products rather
+  # than a class. `03` is excluded from that clause because the segment is mostly Adeptus
+  # Titanicus WEAPON SETS (control 4 miniatures against 2 game-accessory), and `18` because of
+  # Aeronautica base packs -- but each holds a small run of cards or boards that is unambiguous by
+  # name. Reaching them here costs the segments nothing.
+  - nameMatches: '\bSTRATAGEM CARDS?\b|\bCOMMAND TERMINAL\b|\bAREA OF ENGAGEMENT\b|\bA\.O\.E\b'
+    category: game-accessory
+    note: 6 undecided; all Adeptus Titanicus card packs and Aeronautica board sets
+
+  # A BASING SET IS NOT A BUNDLE OF MODELS, and this runs ahead of the `9902` clause below for
+  # exactly one product: `Athel Loren Basing Set` is the single name in GW's whole web-bundle
+  # segment that the segment gets wrong.
+  - nameMatches: '\bBASING SET\b'
+    category: hobby-auxiliary
+    note: 1 undecided; categories.yaml puts basing materials with the components
+
   # THE PAINT RANGE NAMES, which is how a Citadel colour is recognised now that the paint segment
   # clause is anchored to eleven digits and no longer matches a barcode by accident. 237 GW
   # products, 231 of them already publishing `paint` from other evidence and NONE contradicted.
@@ -188,14 +222,28 @@ clauses:
   - codeMatches: '^\d{2}05\d{7}$'
     category: game-accessory
     note: 560 products; control 102, 99.0%
+  # 70 IS THE OBJECTIVE-SET TYPE -- `OBJECTIVE SET: PARIAH NEXUS`, `CHAPTER APPROVED: OBJECTIVES
+  # SET 2025-26`. Nine products, one of which another source already calls `game-accessory`, and
+  # `category-lexicon.yaml` already reaches the plural form by name.
+  - codeMatches: '^\d{2}70\d{7}$'
+    category: game-accessory
+    note: 2 undecided; control 1, 100%
 
   # d34 22 is dice, tokens, movement trays and objective markers -- EXCEPT where d56 says
-  # otherwise, and the exceptions are exactly where it breaks: 99 is bases and water pots (already
-  # `hobby-auxiliary` by the clause below), 03 Titan weapon sets, 09 Blood Bowl pitches, 18 and 26
-  # base packs. Raw purity is 50%; with those five excluded it is 24 of 24.
-  - codeMatches: '^\d{2}22(?!99|03|09|18|26)\d{7}$'
+  # otherwise: 99 is bases and water pots (already `hobby-auxiliary` by the clause below), 03 Titan
+  # weapon sets, 18 and 26 base packs. Raw purity is 50%; with those four excluded it is 50 of 52.
+  #
+  # `09` WAS ON THAT LIST AND SHOULD NOT HAVE BEEN. The note said "09 Blood Bowl pitches", which is
+  # what the segment holds -- and a Blood Bowl pitch is a printed play surface, which is what
+  # `game-accessory` is. Measured 2026-09-01 over the whole segment: 49 products, control 28, of
+  # which 26 say `game-accessory` and 2 say `terrain`. The two dissenters are pitches shelved as
+  # scenery by one store, against 26 that are not, and the 21 products the exclusion was leaving
+  # undecided are `BLOOD BOWL: NURGLE TEAM PITCH & DUGOUTS`, `BB HEAD COACH'S RULES &
+  # ACCESSORIES PACK`, `BLOOD BOWL: NURGLE TEAM CARD PACK` -- a pitch, a rules-and-tokens pack and
+  # a card deck.
+  - codeMatches: '^\d{2}22(?!99|03|18|26)\d{7}$'
     category: game-accessory
-    note: 66 products; control 24, 100%
+    note: 87 products; control 52, 96.2%
 
   # THINGS READ. Three separate book types, measured separately because they are separate ranges:
   # 04 hardbacks and campaign supplements, 10 Black Library paperbacks, 03 codexes and battletomes.
@@ -234,6 +282,36 @@ clauses:
   - codeMatches: '^\d{2}(06|11|80|81)\d{7}$'
     category: miniatures
     note: 167 single-model kits; control 457, 99.8%
+  # 55 IS A FORGE WORLD WEAPON-OPTION TYPE and 14 a single Orks kit -- three products between them,
+  # no control, and the names are unambiguous: `Legio Custodes Telemon Arachnus Storm Cannon`,
+  # `Telemon Heavy Dreadnought Iliastus Accelerator Culverin`, `Badrukk's Flash Gitz`. Named here
+  # rather than in overrides.yaml because they are a segment, not a correction.
+  - codeMatches: '^\d{2}(14|55)\d{7}$'
+    category: miniatures
+    note: 3 products; no control
+
+  # GW'S WEB-BUNDLE SEGMENT SPLITS ON ITS FIRST TWO DIGITS, which the `d34 02` packaging clause
+  # below deliberately did not use: it says only `packaging: bundle` because "a bundle of codexes
+  # and a bundle of kits are not the same thing, and the 51 products divide between them with no
+  # signal to say which". There is a signal, and it is in the code. `99` is the model prefix and
+  # `60` the publications one, exactly as everywhere else in GW's numbering: all 37 `9902` names
+  # are army formations (`1st Company Task Force`, `Anti-air Defence Force`, `Adeptus Mechanicus
+  # Army`, `Arjac's Shieldbrothers`), while all 14 `6002` names are collections of books and
+  # starter material (`Adeptus Mechanicus Codex Collection`, `Warhammer Age of Sigmar Rules
+  # (English PDF)`).
+  #
+  # d78 99 IS EXCLUDED and that is where the mixing actually lives: the generic-faction bundles are
+  # `Warhammer 40,000 Battle Mat & Scenery Collection` (game-accessory), `Void Field Generatorum`
+  # (terrain), `How to Paint Citadel Miniatures: Tau Empire (EPUB)` (book), `Artificer Brush
+  # Collection` (hobby-auxiliary) and two paint bundles. Excluding it costs 2 real model bundles
+  # (`Aeldari Bladehost`, `Athelorn Avengers`) and buys 11 products this clause would be wrong
+  # about. The `60` half is left undecided: 14 products, and `Astra Militarum Starter Collection`
+  # is models while `Adeptus Mechanicus Codex Collection` is books, on the same four digits.
+  - codeMatches: '^9902\d{2}(?!99)\d{5}$'
+    category: miniatures
+    note: >-
+      24 web bundles of models; control 0 -- nothing in this catalog states `miniatures` for a GW
+      product, so this rests on a full name read of all 37 rows in the `9902` block
 
   # d34 12, THE PLASTIC-KIT TYPE, AND THE LAST CATEGORY CLAUSE IN THE FILE. It was refused once,
   # at 95.5% against a control of 3,028, because its 4.5% residue is terrain the code cannot
@@ -257,6 +335,34 @@ clauses:
   - codeMatches: '^\d{2}12\d{7}$'
     category: miniatures
     note: 1,067 undecided after the carve-outs; 18 known wrong on a full name read of all 1,076
+
+  # d34 17 IS THE PAINT-BUNDLE TYPE, and its 73 products are the same handful of boxes repeated
+  # once per language market -- `AOS SKAVEN + PAINT SET` exists under d12 52, 53, 54, 55, 57 and
+  # 99. The names are `<faction> + PAINTS`, `<faction> PAINT SET+` and `PAINTS + TOOLS`.
+  #
+  # d56 99 IS EXCLUDED BECAUSE IT IS ALREADY DECIDED, further down: `^\d{2}(17|18)99\d{5}$` reaches
+  # the seven `CITADEL COLOUR: <range> PAINT SET` boxes and calls them `paint`. That clause sits
+  # after this one in the file and first-match-wins would otherwise hand them a different answer.
+  # Whether `paint` is right for a seven-pot assortment is a real question and this is not the
+  # change that should settle it.
+  #
+  # `paint-set` IS WHAT THE EVIDENCE SAYS, and the tension is worth naming: several of these boxes
+  # contain a MODEL as well as paints, and categories.yaml defines `paint-set` as "a boxed
+  # assortment of DIFFERENT paints sold as one unit". Seven of the eight independently-decided rows
+  # in the segment say `paint-set` anyway (`Warhammer 40000 Orks + Paints`, `AOS S/E + PAINT SET`,
+  # `TYRANID PAINT SET+`); the eighth is `Warhammer 40000 Paints + Tools` shelved
+  # `hobby-auxiliary` by one store while another shelves the identical `AOS PAINTS+TOOLS` as
+  # `paint-set`. That is the two stores disagreeing, not a signal.
+  - nameMatches: '^\s*GETTING STARTED WITH\b'
+    category: miniatures
+    note: >-
+      2 undecided (the Chinese-market rows); control 2, 100% -- the English rows of the same two
+      products. GW's `Getting Started with...` is a magazine sold with a model, and both stores
+      that filed it called it the model.
+  - codeMatches: '^\d{2}17(?!99)\d{7}$'
+    category: paint-set
+    packaging: set
+    note: 54 products; control 8, 87.5%
 
   # ---------------------------------------------------------------------------------------------
   # HOW MANY, AND ARE THEY THE SAME THING. `packaging` is additive-only, so these fill a form the
