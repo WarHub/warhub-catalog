@@ -1,14 +1,14 @@
 summary:
   products: 27237
-  undecided: 2354
+  undecided: 2211
   byBasis:
-    code: 6979
+    code: 7122
     lexicon: 339
     mapped: 15577
     paint-barcode: 9
     stated: 1979
-    unknown: 2354
-  decidedThisRun: 246
+    unknown: 2211
+  decidedThisRun: 143
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -580,46 +580,42 @@ unmapped:
       wouldDecide: 1
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 178
+      wouldDecide: 151
     - value: tags=us
-      wouldDecide: 178
+      wouldDecide: 151
     - value: vendor=Warlord Games
-      wouldDecide: 177
+      wouldDecide: 150
     - value: tags=over-10
-      wouldDecide: 104
+      wouldDecide: 79
     - value: tags=under-10
-      wouldDecide: 69
+      wouldDecide: 67
     - value: tags=deal
       wouldDecide: 59
     - value: tags=plastic
-      wouldDecide: 51
+      wouldDecide: 46
     - value: tags=accessory
-      wouldDecide: 44
-    - value: tags=EPIC
-      wouldDecide: 35
-    - value: tags=Epic-Battles
-      wouldDecide: 35
-    - value: tags=black-powder
-      wouldDecide: 33
-    - value: tags=warlord-games
-      wouldDecide: 30
-    - value: tags=blood-red-skies
-      wouldDecide: 30
+      wouldDecide: 43
     - value: tags=new-year-new-army
       wouldDecide: 30
-    - value: productType=Blood Red Skies
-      wouldDecide: 29
-    - value: productType=Black Powder
-      wouldDecide: 28
+    - value: tags=black-powder
+      wouldDecide: 27
     - value: tags=decals
+      wouldDecide: 27
+    - value: productType=Blood Red Skies
+      wouldDecide: 27
+    - value: tags=blood-red-skies
       wouldDecide: 27
     - value: tags=sprue
       wouldDecide: 26
     - value: tags=0122
       wouldDecide: 26
-    - value: tags=warlord-resin
-      wouldDecide: 24
-    - value: tags=trade-web
+    - value: productType=Black Powder
+      wouldDecide: 25
+    - value: tags=warlord-games
+      wouldDecide: 25
+    - value: tags=EPIC
+      wouldDecide: 22
+    - value: tags=Epic-Battles
       wouldDecide: 22
     - value: tags=direct
       wouldDecide: 20
@@ -627,38 +623,42 @@ unmapped:
       wouldDecide: 19
     - value: tags=black-seas
       wouldDecide: 19
-    - value: tags=british
-      wouldDecide: 18
     - value: productType=Bolt Action
       wouldDecide: 18
-    - value: tags=terrain
-      wouldDecide: 17
     - value: productType=Accessory
+      wouldDecide: 16
+    - value: tags=british
       wouldDecide: 16
     - value: tags=mdf
       wouldDecide: 15
+    - value: tags=trade-web
+      wouldDecide: 14
     - value: tags=gaming-equipment
       wouldDecide: 14
-    - value: tags=box-set
-      wouldDecide: 13
-    - value: tags=resin
-      wouldDecide: 13
-    - value: tags=loose-item
-      wouldDecide: 13
-    - value: tags=raf
-      wouldDecide: 13
     - value: tags=extras
       wouldDecide: 13
     - value: productType=Epic Pike & Shotte
       wouldDecide: 12
     - value: tags=epic-pike-shotte
       wouldDecide: 12
+    - value: tags=warlord-resin
+      wouldDecide: 12
     - value: tags=pike-shotte
       wouldDecide: 11
-    - value: tags=terrain-scatter
+    - value: tags=terrain
       wouldDecide: 11
-    - value: tags=epicacw
+    - value: tags=raf
       wouldDecide: 11
+    - value: tags=0319
+      wouldDecide: 11
+    - value: productType=Bundle
+      wouldDecide: 11
+    - value: tags=loose-item
+      wouldDecide: 10
+    - value: tags=Luftwaffe
+      wouldDecide: 10
+    - value: tags=perfect-present
+      wouldDecide: 9
   mfr-warmachine:
     - value: productType=Wargame
       wouldDecide: 1
@@ -769,9 +769,9 @@ unmapped:
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games
-      wouldDecide: 91
+      wouldDecide: 79
     - value: vendor=Warlord Games
-      wouldDecide: 91
+      wouldDecide: 79
     - value: tags=Games Workshop
       wouldDecide: 67
     - value: vendor=Games Workshop
@@ -824,13 +824,13 @@ unmapped:
       wouldDecide: 10
     - value: tags=AoS Grundboxen und Regelbücher
       wouldDecide: 8
-    - value: tags=Summer Sale
-      wouldDecide: 8
     - value: tags=Starter & Zubehör Konflikt 47
       wouldDecide: 8
     - value: tags=GRUNDIERSPRAYS AP*
       wouldDecide: 7
     - value: tags=40K Zubehör
+      wouldDecide: 7
+    - value: tags=Summer Sale
       wouldDecide: 7
     - value: tags=Mantic Games
       wouldDecide: 7
@@ -851,10 +851,10 @@ unmapped:
   ret-tistaminis:
     - value: vendor=GW-OOP
       wouldDecide: 28
-    - value: vendor=Warlord Games
-      wouldDecide: 26
     - value: vendor=GW-LOCAL
       wouldDecide: 17
+    - value: vendor=Warlord Games
+      wouldDecide: 15
     - value: tags=Amazon
       wouldDecide: 14
     - value: tags=Orks
@@ -864,8 +864,6 @@ unmapped:
     - value: tags=Gamesworkshop
       wouldDecide: 9
     - value: vendor=Green Stuff World
-      wouldDecide: 9
-    - value: tags=Bolt Action
       wouldDecide: 9
     - value: tags=Wargames Illustrated
       wouldDecide: 8
@@ -879,6 +877,8 @@ unmapped:
       wouldDecide: 7
     - value: productType=Miniatures - Plastic
       wouldDecide: 5
+    - value: tags=Bolt Action
+      wouldDecide: 5
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
     - value: tags=Space Marines
@@ -886,8 +886,6 @@ unmapped:
     - value: tags=Warhammer Lord of the Rings
       wouldDecide: 4
     - value: tags=40k Terrain
-      wouldDecide: 4
-    - value: tags=Achtung Panzer
       wouldDecide: 4
     - value: productType=Toys & Hobbies:Games:Miniatures, War Games:Warhammer:Warhammer 40K:40K Miniatures
       wouldDecide: 3
@@ -919,8 +917,6 @@ unmapped:
       wouldDecide: 2
     - value: tags=Sale
       wouldDecide: 2
-    - value: tags=Rules & Supplements
-      wouldDecide: 2
     - value: tags=Necromunda
       wouldDecide: 2
     - value: tags=Bloodbowl
@@ -929,6 +925,10 @@ unmapped:
       wouldDecide: 2
     - value: tags=Nightstalkers
       wouldDecide: 2
+    - value: tags=Achtung Panzer
+      wouldDecide: 2
+    - value: tags=Army Painter
+      wouldDecide: 1
   seed-curated:
     - value: productType=starter_set
       wouldDecide: 1
