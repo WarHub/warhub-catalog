@@ -80,6 +80,25 @@ entries:
     category: terrain
     measured: reaches 37 undecided; 116 controls, 113 agree (97%)
 
+  # A PRIMER DEPOSITS COLOUR, which is the test categories.yaml sets for `paint` in as many words,
+  # and every product this reaches says the colour in its own name: `Colour Primer Alien Purple`,
+  # `Vallejo Fantasy Color Primer Goblin Green`, `AFV Color Primer Panzer Yellow`, `Basic Primer
+  # Black`. It is NOT one of the colourless agents this file's header refuses to adjudicate -- a
+  # varnish, thinner or medium adds no pigment and a primer is nothing but pigment.
+  #
+  # THE `COLLECTION` GUARD IS LOAD-BEARING AND WAS FOUND BY READING, not by the score. Warlord
+  # sells `Pike & Shotte Epic Battles - Thirty Years' War Primer Collection` and an English Civil
+  # Wars twin, where "primer" is the OTHER English sense -- a beginner's introduction -- and the
+  # products are miniatures starter sets. Two of the bare pattern's 54 hits, and both are the only
+  # two ways it was wrong.
+  - nameMatches: '\bPRIMER\b(?!\s+COLLECTION)'
+    category: paint
+    measured: >-
+      reaches 52 undecided; 5 controls, 5 agree (100%). The control is thin because these are
+      almost all `ret-radaddel` rows that nothing else stocks, so what stands behind it as much as
+      the score is a read of all 52 names -- 49 Army Painter and Vallejo colour primers, 3 Warlord
+      Colour Primer sprays
+
   # LAST, because it is the broadest. A volume in the name is how essentially every paint in this
   # catalog is written, and the misses are the contested colourless agents discussed in the header
   # plus basing materials sold by volume.
