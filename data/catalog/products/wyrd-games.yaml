@@ -19888,8 +19888,6 @@ products:
     manufacturer: wyrd-games
     productCode: WYR40004
     sku: WYR40004
-    ean: '0812152030060'
-    eanConfidence: confirmed
     gameSystems:
       - the-other-side
     faction: abyssinia
@@ -19909,10 +19907,7 @@ products:
       The Fate Deck gives players control over their Companies in the form of the Control Hand. Cards in your Control Hand can be used to replace flipped cards, ensuring that the actions you want to succeed won’t fail at a critical moment. Say farewell to all those rolled 1s!
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/abyssinia/earth-fate-deck
-      - legacy-catalog:wyrd-games/the-other-side/kings-empire/royal-rifle-corps
       - mfr-wyrd-store:copy-of-poker-fate-deck-earth
-      - mfr-wyrd-store:royal-rifle-corps
-      - ret-gamenerdz:/the-other-side-kings-empire-royal-rifle-corps
   - id: wyrd-games/WYR40005
     name: Gibbering Hordes Fate Deck
     manufacturer: wyrd-games
@@ -20322,6 +20317,40 @@ products:
       - legacy-catalog:wyrd-games/the-other-side/kings-empire/infiltrators
       - mfr-wyrd-store:infiltrators
       - ret-gamenerdz:/the-other-side-kings-empire-infiltrators
+  - id: wyrd-games/WYR40103
+    name: Royal Rifle Corps
+    manufacturer: wyrd-games
+    productCode: WYR40103
+    sku: WYR40103
+    ean: '0812152030060'
+    eanConfidence: confirmed
+    gameSystems:
+      - the-other-side
+    faction: kings-empire
+    gameSystemsBasis: stated
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 45.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/royal-rifle-corps
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/TOS_Unit_Box_RoyalRifleCorps_Front.jpg?v=1602517031
+    description: |-
+      **Magic, steampunk, monsters, and soldiers collide to make the battlefields of The Other Side action-packed. In order to get you into the action sooner, every model in The Other Side comes preassembled!**
+
+      The models in The Other Side are 32mm scale with high levels of detail, allowing painters plenty of opportunities to paint their Champions, Squads, and Titans in whatever way they wish.
+
+      This is a single box containing a single unit for The Other Side, providing a player with additional versatility and options when building a Company in The Other Side. Unit boxes are a player's primary way of expanding their Company.
+
+      **Contains**
+
+      - **Unit :** Royal Rifle Corps \[9 models\]
+    evidence:
+      - legacy-catalog:wyrd-games/the-other-side/kings-empire/royal-rifle-corps
+      - mfr-wyrd-store:royal-rifle-corps
+      - ret-gamenerdz:/the-other-side-kings-empire-royal-rifle-corps
   - id: wyrd-games/WYR40104
     name: Empire Dragoons
     manufacturer: wyrd-games
