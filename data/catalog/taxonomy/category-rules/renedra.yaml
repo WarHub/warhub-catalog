@@ -1,0 +1,16 @@
+manufacturer: renedra
+reason: >-
+  RENEDRA MOULDS PLASTIC BASES AND TERRAIN, and sells both under its own names. 31 of its 37
+  products here are already `terrain` and 4 `hobby-auxiliary` (the base packs); the two left are
+  `Mud Brick House` and `Mud Brick House & Accessory sprue 1`, which the `RN` house-and-hut series
+  numbers alongside the log cabin, the church and the palisade this catalog already files as
+  terrain.
+
+
+  THE BASE PACKS ARE DELIBERATELY NOT TOUCHED. `REN-20x20`, `REN-40x40`, `REN-100x50` are bare
+  bases, which categories.yaml puts with the components rather than with the models, and they are
+  already decided that way.
+clauses:
+  - codeMatches: '^RNMB'
+    category: terrain
+    note: 2 undecided; control 31 across the RN series, 100%

@@ -1,0 +1,15 @@
+manufacturer: north-star-military-figures
+reason: >-
+  NORTH STAR MAKES THE PLASTICS AND METALS FOR THREE OSPREY GAMES TITLES, and numbers each range
+  for itself: `FGV`/`FGVP`/`FGX` Frostgrave, `OAKP` Oathmark, `SGVP` Stargrave. All 96 of its
+  products here come off Warlord's webstore, which resells them.
+
+
+  OSPREY IS NOT THE MANUFACTURER AND `BP` IS WHERE THAT SHOWS. Osprey publishes the rulebooks and
+  North Star makes the figures; the two `BP17xx` rows are books carrying real Bloomsbury ISBNs
+  (`9781472833044`, `9781472834683`) and they are already `book`, so the model clause below is
+  written to leave them alone rather than to reach them.
+clauses:
+  - codeMatches: '^(FGVP?|FGX|OAKP|SGVP)\d+$'
+    category: miniatures
+    note: 10 undecided; control 77, 100%

@@ -1,0 +1,25 @@
+manufacturer: sarissa-precision
+reason: >-
+  SARISSA PRECISION CUTS MDF TERRAIN, and 264 of the 329 products it has in this catalog are
+  already `terrain` from Warlord's own shelf. The 29 left are the rows that shelf types under a
+  GAME (`Beyond The Gates Of Antares`, `Black Powder`, `Epic Hail Caesar`) instead of a format, and
+  they belong to two series the rest of which is already decided.
+
+
+  THE SERIES ARE THE EVIDENCE, not the company. Sarissa also cuts acrylic BASES (`B25A_R`,
+  `B40x30A_O`, already `hobby-auxiliary`) and a handful of vehicles and rolling stock (`R001`-`R034`
+  armoured train carriages, already `miniatures`), so "everything Sarissa makes is terrain" is
+  false and this file does not say it. What it says is that two specific series are buildings:
+
+
+  `AG`/`GR`/`FB`/`I` are the Gates of Antares scenery lines -- `Algoryn Drop Fortress`, `Ghar
+  Block House`, `Freeborn Fountain Set`, `Hazard Strike Capsules` -- of which `I` is already 3 of
+  3 terrain. `M5xx` is the North American range and `M0xx` beside it is already 23 of 23 terrain:
+  `North American Cabin #1`, `Planked House with Porch`, `15MM North American Shack`.
+clauses:
+  - codeMatches: '^(AG|GR|FB|I)\d{2}$'
+    category: terrain
+    note: 12 undecided; control 3 on the `I` block, plus a full read of all 12 names
+  - codeMatches: '^M\d{3}$'
+    category: terrain
+    note: 17 undecided; control 23, 100%

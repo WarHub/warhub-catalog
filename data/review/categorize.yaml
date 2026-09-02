@@ -1,14 +1,14 @@
 summary:
-  products: 27237
-  undecided: 2211
+  products: 27300
+  undecided: 1502
   byBasis:
-    code: 7122
-    lexicon: 339
-    mapped: 15577
+    code: 7173
+    lexicon: 270
+    mapped: 16367
     paint-barcode: 9
     stated: 1979
-    unknown: 2211
-  decidedThisRun: 143
+    unknown: 1502
+  decidedThisRun: 23819
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -328,6 +328,9 @@ conflicts:
   - entity: monument-hobbies/MPA-SET-S06
     type: category-disagreement
     detail: 'retailer: ret-radaddel=paint-set; ret-tistaminis=paint'
+  - entity: sarissa-precision/T027
+    type: gameSystem-disagreement
+    detail: catalog says spqr (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
   - entity: vallejo/26201
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
@@ -394,12 +397,39 @@ conflicts:
   - entity: warlord-games/315120017
     type: gameSystem-disagreement
     detail: catalog says epic-black-powder (stated); mfr-warlord-store tags~epic-pike-shotte says epic-pike-and-shotte
+  - entity: warlord-games/402616017
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616018
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616019
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616020
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616021
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616022
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616023
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
+  - entity: warlord-games/402616024
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
   - entity: warlord-games/403013012
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
   - entity: warlord-games/403014015
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
+  - entity: warlord-games/408800049
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (classified); mfr-warlord-store tags~konflikt-47,Konflikt-47-10,K47-german,k47-USA,k47-british,k47-Japanese,k47-Soviet,k47-Italian says konflikt-47
   - entity: warlord-games/482010002
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
@@ -580,85 +610,85 @@ unmapped:
       wouldDecide: 1
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 151
+      wouldDecide: 227
     - value: tags=us
-      wouldDecide: 151
+      wouldDecide: 227
     - value: vendor=Warlord Games
       wouldDecide: 150
-    - value: tags=over-10
-      wouldDecide: 79
     - value: tags=under-10
+      wouldDecide: 122
+    - value: tags=over-10
+      wouldDecide: 101
+    - value: tags=mdf
+      wouldDecide: 77
+    - value: tags=bolt-action
       wouldDecide: 67
+    - value: productType=Bolt Action
+      wouldDecide: 66
+    - value: tags=gaming-equipment
+      wouldDecide: 64
     - value: tags=deal
-      wouldDecide: 59
+      wouldDecide: 60
+    - value: tags=loose-item
+      wouldDecide: 54
+    - value: tags=gaming-markers
+      wouldDecide: 54
     - value: tags=plastic
-      wouldDecide: 46
+      wouldDecide: 50
+    - value: tags=warlord-games-skytrex
+      wouldDecide: 49
     - value: tags=accessory
-      wouldDecide: 43
+      wouldDecide: 48
+    - value: vendor=Skytrex
+      wouldDecide: 47
+    - value: tags=bolt-action-armoury
+      wouldDecide: 36
+    - value: tags=black-powder
+      wouldDecide: 32
+    - value: tags=terrain
+      wouldDecide: 32
+    - value: tags=EPIC
+      wouldDecide: 32
+    - value: tags=Epic-Battles
+      wouldDecide: 32
     - value: tags=new-year-new-army
       wouldDecide: 30
-    - value: tags=black-powder
-      wouldDecide: 27
+    - value: tags=sprue
+      wouldDecide: 28
+    - value: tags=warlord-games
+      wouldDecide: 28
     - value: tags=decals
       wouldDecide: 27
     - value: productType=Blood Red Skies
       wouldDecide: 27
     - value: tags=blood-red-skies
       wouldDecide: 27
-    - value: tags=sprue
+    - value: productType=Black Powder
       wouldDecide: 26
     - value: tags=0122
       wouldDecide: 26
-    - value: productType=Black Powder
-      wouldDecide: 25
-    - value: tags=warlord-games
-      wouldDecide: 25
-    - value: tags=EPIC
+    - value: tags=british
       wouldDecide: 22
-    - value: tags=Epic-Battles
-      wouldDecide: 22
+    - value: tags=trade-web
+      wouldDecide: 21
+    - value: tags=terrain-building
+      wouldDecide: 20
     - value: tags=direct
       wouldDecide: 20
-    - value: tags=bolt-action
-      wouldDecide: 19
     - value: tags=black-seas
       wouldDecide: 19
-    - value: productType=Bolt Action
-      wouldDecide: 18
+    - value: tags=german
+      wouldDecide: 17
     - value: productType=Accessory
       wouldDecide: 16
-    - value: tags=british
+    - value: tags=0125
       wouldDecide: 16
-    - value: tags=mdf
-      wouldDecide: 15
-    - value: tags=trade-web
-      wouldDecide: 14
-    - value: tags=gaming-equipment
-      wouldDecide: 14
-    - value: tags=extras
-      wouldDecide: 13
-    - value: productType=Epic Pike & Shotte
-      wouldDecide: 12
-    - value: tags=epic-pike-shotte
-      wouldDecide: 12
-    - value: tags=warlord-resin
-      wouldDecide: 12
-    - value: tags=pike-shotte
-      wouldDecide: 11
-    - value: tags=terrain
-      wouldDecide: 11
-    - value: tags=raf
-      wouldDecide: 11
-    - value: tags=0319
-      wouldDecide: 11
-    - value: productType=Bundle
-      wouldDecide: 11
-    - value: tags=loose-item
-      wouldDecide: 10
-    - value: tags=Luftwaffe
-      wouldDecide: 10
     - value: tags=perfect-present
-      wouldDecide: 9
+      wouldDecide: 16
+    - value: vendor=Sarissa
+      wouldDecide: 14
+    - value: tags=usa
+      wouldDecide: 14
   mfr-warmachine:
     - value: productType=Wargame
       wouldDecide: 1
@@ -853,8 +883,6 @@ unmapped:
       wouldDecide: 28
     - value: vendor=GW-LOCAL
       wouldDecide: 17
-    - value: vendor=Warlord Games
-      wouldDecide: 15
     - value: tags=Amazon
       wouldDecide: 14
     - value: tags=Orks
@@ -865,8 +893,6 @@ unmapped:
       wouldDecide: 9
     - value: vendor=Green Stuff World
       wouldDecide: 9
-    - value: tags=Wargames Illustrated
-      wouldDecide: 8
     - value: vendor=GW-WEB
       wouldDecide: 7
     - value: tags=GW Accessories
@@ -877,7 +903,7 @@ unmapped:
       wouldDecide: 7
     - value: productType=Miniatures - Plastic
       wouldDecide: 5
-    - value: tags=Bolt Action
+    - value: vendor=Warlord Games
       wouldDecide: 5
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
@@ -886,6 +912,8 @@ unmapped:
     - value: tags=Warhammer Lord of the Rings
       wouldDecide: 4
     - value: tags=40k Terrain
+      wouldDecide: 4
+    - value: tags=Bolt Action
       wouldDecide: 4
     - value: productType=Toys & Hobbies:Games:Miniatures, War Games:Warhammer:Warhammer 40K:40K Miniatures
       wouldDecide: 3
@@ -928,6 +956,8 @@ unmapped:
     - value: tags=Achtung Panzer
       wouldDecide: 2
     - value: tags=Army Painter
+      wouldDecide: 1
+    - value: tags=Spray
       wouldDecide: 1
   seed-curated:
     - value: productType=starter_set
