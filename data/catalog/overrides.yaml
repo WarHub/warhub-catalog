@@ -18,6 +18,36 @@
 # maintainer moving a product between systems is exactly the thing overrides.yaml is for.
 retract: []
 products:
+  # THE MAINTAINER'S DECISIONS OF 2026-09-02, on the rows the adjudication refused to decide.
+  #   Aristeia! add-on packs are filed BY CONTENTS: a figure pack is miniatures (Gata's alternate
+  #   sculpt, Legendary Bahadurs, Double Trouble), a card deck is a game accessory (CBARI38, above),
+  #   and only the core box is a board game. Game Nerdz shelves them as board games, Goblin Gaming
+  #   as miniatures; the vocabulary's own words decide.
+  #   Seven discontinued figures from GW's 2014-15 webstore were made for Warhammer Fantasy
+  #   Battle, minted in game-systems.yaml for them; a classifier had said The Old World.
+  #   `2 x Imperial Knights: Renegade` is a 40k boxed game on GW's other-games shelf: both.
+  corvus-belli/CBARI24:
+    category: miniatures
+  corvus-belli/CBARI25:
+    category: miniatures
+  corvus-belli/CBARI36:
+    category: miniatures
+  games-workshop/99060209201:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/99060210117:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/99070204001:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/99800210009:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/99810201003:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/99810202008:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/99810209009:
+    gameSystems: [warhammer-fantasy-battle]
+  games-workshop/60020699002:
+    gameSystems: [other-games, warhammer-40k]
   # THE 2026-09-02 ADJUDICATION OF data/review/categorize.yaml, per product where no rule settles
   # the class. Evidence per row is in the PR that landed them; in one line each:
   #   AK11500 is a thinner and AK9511 wet-palette paper (radaddel's own tags say so); Vallejo 28890

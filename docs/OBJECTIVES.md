@@ -18,10 +18,15 @@ a drop is a claim about the world, and it gets evidence or the run fails.
 raises on a count below the descriptor's `minCount`
 
 **3. Anything published stays addressable.** A decade-old barcode still resolves, and its record
-says what replaced it. Re-home a barcode before retracting whatever held it. A published id is a
-consumer contract — removing one from `latest` breaks whoever stored it.
+says what replaced it. Re-home a barcode before retracting whatever held it. The BARCODE is the
+contract today: it is what a consumer stores and scans, and the guard refuses to let one vanish.
+A published id is not yet one — the catalog has no external consumers, and an id whose code half
+was a retailer's spelling of the maker's code is renamed to the maker's spelling rather than kept
+(2026-09-02, 255 ids). When consumers exist, an id rename needs an `aliases` entry and a publisher
+redirect, and this sentence changes.
 — `README.md`; `report --ean-guard`, which attests a confirmed primary `ean` or any
-`additionalEans` entry
+`additionalEans` entry; `matches.yaml` `aliases`, which records a rename for the pointers inside
+the repository
 
 **4. The two catalogs overlap on purpose.** A pot is legitimately a product *and* a paint; the
 barcode is the join, computed once at publish. What belongs in which catalog follows from a

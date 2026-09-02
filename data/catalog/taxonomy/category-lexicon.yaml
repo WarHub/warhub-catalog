@@ -101,6 +101,24 @@ entries:
     category: terrain
     measured: reaches 37 undecided; 116 controls, 113 agree (97%)
 
+  # A RULEBOOK, A CODEX OR A NOVEL IS A BOOK by its own name. The words are the ones makers put on the
+  # spine; `EBOOK`/`EPUB` are the digital editions categories.yaml files as `book` with digital
+  # packaging.
+  - nameMatches: '\b(RULEBOOK|SUPPLEMENT|CODEX|BATTLETOME|ARMY BOOK|CAMPAIGN BOOK|SOURCEBOOK|HANDBOOK|NOVEL|OMNIBUS|EBOOK|EPUB)\b'
+    category: book
+    measured: reaches 19 undecided; 670 controls, 666 agree (99.4%), 2026-09-02
+
+  # A CARD PACK IS PLAYED WITH, NOT READ -- categories.yaml's boundary for reference cards.
+  - nameMatches: '\bCARDS? (PACK|SET)\b'
+    category: game-accessory
+    measured: reaches 10 undecided; 56 controls, 55 agree (98.2%), 2026-09-02
+
+  # A SPRUE IS A FRAME OF MINIATURES, sold as one; Warlord lists 30 Epic Battles sprues nothing
+  # else placed. The cutter is the tool.
+  - nameMatches: '\bSPRUES?\b(?!\s*CUTTER)'
+    category: miniatures
+    measured: reaches 27 undecided; 155 controls, 150 agree (96.8%), 2026-09-02
+
   # GW NAMES ITS OWN POTS `Citadel <range> Paint: <colour>` and its sprays `Citadel Paint: <colour>
   # Spray`, and a retailer that lists them without a barcode (gamenerdz, 6 products) used to reach
   # `paint` only through that store's department crumb, which also filed its brushes as paint. The

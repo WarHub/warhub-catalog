@@ -1,21 +1,21 @@
 summary:
   products: 27261
-  undecided: 1397
+  undecided: 1338
   byBasis:
     code: 7107
-    lexicon: 352
+    lexicon: 408
     mapped: 16399
-    override: 10
+    override: 13
     paint-barcode: 17
     stated: 1979
-    unknown: 1397
-  decidedThisRun: 20047
+    unknown: 1338
+  decidedThisRun: 0
   gameSystemsByBasis:
-    classified: 1117
+    classified: 1109
     code: 4163
     mapped: 2594
     not-applicable: 7852
-    override: 93
+    override: 101
     setting: 960
     stated: 9131
     unknown: 1351
@@ -60,27 +60,6 @@ conflicts:
   - entity: army-painter/matt-anti-shine-varnish-warpaint-air
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: corvus-belli/CBARI24
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
-  - entity: corvus-belli/CBARI25
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
-  - entity: corvus-belli/CBARI36
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
-  - entity: games-workshop/60020699002
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (classified); games-workshop code~^\d{4}06\d{5}$ says other-games
-  - entity: games-workshop/99060209201
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
-  - entity: games-workshop/99060210117
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
-  - entity: games-workshop/99070204001
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
   - entity: games-workshop/99189956079
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
@@ -93,18 +72,6 @@ conflicts:
   - entity: games-workshop/99700199045
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain -- a tie, left to the code and name rungs'
-  - entity: games-workshop/99800210009
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
-  - entity: games-workshop/99810201003
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
-  - entity: games-workshop/99810202008
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
-  - entity: games-workshop/99810209009
-    type: gameSystem-disagreement
-    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
   - entity: green-stuff-world/green-stuff-world-gloss-varnish-60ml
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
@@ -512,41 +479,37 @@ unmapped:
       wouldDecide: 1
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 226
+      wouldDecide: 199
     - value: tags=us
-      wouldDecide: 226
+      wouldDecide: 199
     - value: vendor=Warlord Games
-      wouldDecide: 150
+      wouldDecide: 125
     - value: tags=under-10
-      wouldDecide: 122
+      wouldDecide: 103
     - value: tags=over-10
-      wouldDecide: 100
+      wouldDecide: 92
     - value: tags=mdf
       wouldDecide: 77
-    - value: tags=bolt-action
-      wouldDecide: 67
-    - value: productType=Bolt Action
-      wouldDecide: 66
     - value: tags=gaming-equipment
       wouldDecide: 64
     - value: tags=deal
       wouldDecide: 60
-    - value: tags=loose-item
-      wouldDecide: 54
+    - value: tags=bolt-action
+      wouldDecide: 57
+    - value: productType=Bolt Action
+      wouldDecide: 56
     - value: tags=gaming-markers
       wouldDecide: 54
-    - value: tags=plastic
-      wouldDecide: 50
+    - value: tags=loose-item
+      wouldDecide: 49
     - value: tags=warlord-games-skytrex
       wouldDecide: 49
-    - value: tags=accessory
-      wouldDecide: 48
     - value: vendor=Skytrex
       wouldDecide: 47
+    - value: tags=accessory
+      wouldDecide: 46
     - value: tags=bolt-action-armoury
       wouldDecide: 36
-    - value: tags=black-powder
-      wouldDecide: 32
     - value: tags=terrain
       wouldDecide: 32
     - value: tags=EPIC
@@ -555,9 +518,9 @@ unmapped:
       wouldDecide: 32
     - value: tags=new-year-new-army
       wouldDecide: 30
-    - value: tags=sprue
-      wouldDecide: 28
-    - value: tags=warlord-games
+    - value: tags=plastic
+      wouldDecide: 29
+    - value: tags=black-powder
       wouldDecide: 28
     - value: tags=decals
       wouldDecide: 27
@@ -565,21 +528,21 @@ unmapped:
       wouldDecide: 27
     - value: tags=blood-red-skies
       wouldDecide: 27
-    - value: productType=Black Powder
-      wouldDecide: 26
     - value: tags=0122
       wouldDecide: 26
-    - value: tags=british
-      wouldDecide: 22
-    - value: tags=trade-web
-      wouldDecide: 20
     - value: tags=terrain-building
+      wouldDecide: 20
+    - value: tags=british
       wouldDecide: 20
     - value: tags=direct
       wouldDecide: 20
+    - value: productType=Black Powder
+      wouldDecide: 19
     - value: tags=black-seas
       wouldDecide: 19
-    - value: tags=german
+    - value: tags=trade-web
+      wouldDecide: 18
+    - value: tags=warlord-games
       wouldDecide: 17
     - value: tags=perfect-present
       wouldDecide: 16
@@ -589,8 +552,12 @@ unmapped:
       wouldDecide: 15
     - value: vendor=Sarissa
       wouldDecide: 14
-    - value: tags=usa
+    - value: tags=german
       wouldDecide: 14
+    - value: tags=extras
+      wouldDecide: 13
+    - value: productType=Epic Pike & Shotte
+      wouldDecide: 12
   mfr-warmachine:
     - value: productType=Wargame
       wouldDecide: 1
@@ -609,7 +576,7 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 84
+      wouldDecide: 81
     - value: breadcrumbs=Miniatures
       wouldDecide: 77
     - value: breadcrumbs=Infinity
@@ -634,8 +601,6 @@ unmapped:
       wouldDecide: 4
     - value: breadcrumbs=Paint and Crafting
       wouldDecide: 4
-    - value: breadcrumbs=Board Games
-      wouldDecide: 3
     - value: breadcrumbs=Nomads
       wouldDecide: 2
     - value: breadcrumbs=Panoceania
@@ -668,12 +633,6 @@ unmapped:
       wouldDecide: 1
     - value: breadcrumbs=Aristeia! Parvati Victorian Automata
       wouldDecide: 1
-    - value: breadcrumbs=Aristeia! Gata 'Filibusteira'
-      wouldDecide: 1
-    - value: breadcrumbs=Aristeia! Legendary Bahadurs Expansion
-      wouldDecide: 1
-    - value: breadcrumbs=Aristeia! Double Trouble
-      wouldDecide: 1
     - value: breadcrumbs=Warcrow Adventures
       wouldDecide: 1
     - value: 'breadcrumbs=Warcrow Adventures: Deathclaws of the Dream'
@@ -688,26 +647,20 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Breakdown - Competition Pack ITS (Infinity Tournament System) Season 12'
       wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Endsong Bundle'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Essentials - PanOceania - PanOceania Dronbot Remotes Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13 - Special Tournament Pack'
+      wouldDecide: 1
   ret-goblingaming:
-    - value: tags=Stock Coming
-      wouldDecide: 5
-    - value: productType=Miniatures
-      wouldDecide: 3
-    - value: tags=OLD
-      wouldDecide: 3
-    - value: tags=Sci-fi
-      wouldDecide: 3
-    - value: tags=Tabletop Games
-      wouldDecide: 3
-    - value: vendor=Corvus Belli
-      wouldDecide: 3
     - value: tags=Paint & Hobby
       wouldDecide: 2
+    - value: tags=Stock Coming
+      wouldDecide: 2
     - value: vendor=The Army Painter
-      wouldDecide: 2
-    - value: tags=Sale
-      wouldDecide: 2
-    - value: tags=summersale2026
       wouldDecide: 2
     - value: productType=Airbrush Paints
       wouldDecide: 1
@@ -718,20 +671,20 @@ unmapped:
     - value: tags=Aerosols
       wouldDecide: 1
   ret-radaddel:
-    - value: tags=Games Workshop
-      wouldDecide: 67
-    - value: vendor=Games Workshop
-      wouldDecide: 67
     - value: tags=Warlord Games
       wouldDecide: 63
     - value: vendor=Warlord Games
       wouldDecide: 63
+    - value: tags=Games Workshop
+      wouldDecide: 52
+    - value: vendor=Games Workshop
+      wouldDecide: 52
     - value: tags=Atomic Mass Games
       wouldDecide: 50
     - value: vendor=Atomic Mass Games
       wouldDecide: 50
     - value: tags=Neuheiten Games Workshop
-      wouldDecide: 30
+      wouldDecide: 29
     - value: tags=AK-Interactive
       wouldDecide: 27
     - value: vendor=AK-Interactive
@@ -750,8 +703,6 @@ unmapped:
       wouldDecide: 17
     - value: tags=WÜRFEL
       wouldDecide: 17
-    - value: tags=40k Grundboxen und Regelbücher
-      wouldDecide: 14
     - value: tags=Star Wars Shatterpoint
       wouldDecide: 12
     - value: tags=Decals & Gelände
@@ -762,9 +713,9 @@ unmapped:
       wouldDecide: 10
     - value: tags=Rebellenallianz SWL
       wouldDecide: 10
+    - value: tags=40k Grundboxen und Regelbücher
+      wouldDecide: 9
     - value: tags=Orks
-      wouldDecide: 10
-    - value: tags=AoS Grundboxen und Regelbücher
       wouldDecide: 8
     - value: tags=40K Zubehör
       wouldDecide: 7
@@ -776,11 +727,13 @@ unmapped:
       wouldDecide: 7
     - value: tags=Starter & Zubehör Konflikt 47
       wouldDecide: 7
-    - value: tags=Space Marines
+    - value: tags=AoS Grundboxen und Regelbücher
       wouldDecide: 6
     - value: tags=Citadel Farbsets
       wouldDecide: 5
     - value: tags=ToW Bücher & Zubehör
+      wouldDecide: 5
+    - value: tags=Space Marines
       wouldDecide: 5
     - value: tags=Vallejo
       wouldDecide: 5
@@ -821,8 +774,6 @@ unmapped:
       wouldDecide: 7
     - value: vendor=GW-WEB
       wouldDecide: 6
-    - value: vendor=Warlord Games
-      wouldDecide: 5
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
     - value: tags=Space Marines
@@ -838,6 +789,8 @@ unmapped:
     - value: tags=Warhammer
       wouldDecide: 3
     - value: tags=Bolt Action
+      wouldDecide: 3
+    - value: vendor=Warlord Games
       wouldDecide: 3
     - value: tags=Blood Bowl
       wouldDecide: 2
@@ -867,8 +820,6 @@ unmapped:
       wouldDecide: 2
     - value: tags=Nightstalkers
       wouldDecide: 2
-    - value: tags=Achtung Panzer
-      wouldDecide: 2
     - value: tags=Army Painter
       wouldDecide: 1
     - value: tags=Spray
@@ -878,6 +829,8 @@ unmapped:
     - value: tags=AOS
       wouldDecide: 1
     - value: tags=Starter Sets
+      wouldDecide: 1
+    - value: tags=Skaven
       wouldDecide: 1
   seed-curated:
     - value: productType=starter_set
