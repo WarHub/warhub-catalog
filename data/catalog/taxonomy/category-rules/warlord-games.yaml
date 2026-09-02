@@ -1,0 +1,62 @@
+manufacturer: warlord-games
+reason: >-
+  WARLORD NUMBERS ITS OWN RANGE NINE DIGITS, AND DIGITS 3-4 ARE THE PRODUCT TYPE. 2,695 published
+  Warlord products carry a nine-digit code, and the pair at positions 3-4 behaves exactly the way
+  Games Workshop's d34 does: measured 2026-09-01 over every one of them, 24 distinct values, and
+  the ones this file names grade 96% against a control that never sees the code.
+
+
+  THE CONTROL IS THE ONE `mfr-warlord-store.yaml` ALREADY USES and is built the same way: a
+  manufacturer's own claim about its own goods, then another retailer's shelf
+  (`ret-goblingaming`'s productType), then `legacy-catalog`'s category where it is not the
+  `miniatures` fill that source declares in its descriptor, then the paint catalog's barcode.
+  Warlord's own store is deliberately excluded -- this file exists for the products that store
+  does not reach, and grading a code against the shelf that already decided them would prove
+  nothing.
+
+
+  WHAT THIS FILE IS FOR. `mfr-warlord-store.yaml` reads the store's `productType` and tags and
+  decides most of the catalog; what it cannot reach is the 1,525 products only the frozen
+  `legacy-catalog` import knows about -- discontinued lines, older editions, sprues sold on their
+  own. Those have a Warlord product code and nothing else, and the code is enough for the eight
+  model types below.
+
+
+  d34 = 88, 89, 96 AND 99 ARE DELIBERATELY ABSENT, and each fails differently. 88 is the scenery
+  and marker type and it holds both: `Black Powder Epic Battles: Waterloo - Hougoumont` beside
+  `Bolt Action MDF Unit Pin Markers`, terrain and game-accessory on the same two digits, split by
+  the GAME prefix rather than by the type (10 terrain / 3 miniatures over a control of 13, and the
+  48 undecided are mostly markers). 99 is the bundle type -- `Bolt Action: Third Edition Rulebook
+  (German) with miniature` and `US Army starter army` -- 24 book against 10 miniatures over 34,
+  which is a real split and not noise. 89 grades 2 of 2 `miniatures` while both undecided names
+  read `Konflikt '47 MDF Unit Pin Markers`, so the control is simply wrong there and two rows is
+  not enough to say which way. 96 is five decal sheets with no control at all.
+clauses:
+  # THE MODEL TYPES. Eight values, one clause, because they behave identically and splitting them
+  # would invite eight arguments about the same evidence. Per-value controls, all 2026-09-01:
+  #
+  #     20  n=271  control 204, 95.6%  (195 miniatures, 7 terrain, 2 game-accessory)
+  #     22  n=258  control 120, 100%
+  #     24  n=304  control  94,  93.6% (88 miniatures, 4 game-accessory, 2 terrain)
+  #     26  n= 94  control  43, 100%
+  #     30  n=529  control  45,  93.3% (42 miniatures, 2 game-accessory, 1 terrain)
+  #     32  n=135  control  22, 100%
+  #     50  n= 92  control   1, 100%
+  #     51  n=343  control  16, 100%
+  #
+  # 545 graded products, 96.1% overall, and the disagreements are the same shape in each: a
+  # scenery pack or a token set that shares a type with the models it is sold beside. The name
+  # clauses in `category-lexicon.yaml` (`\bTERRAIN\b`, `\bDICE\b`, `\bOBJECTIVE MARKERS?\b`) run
+  # after this table rather than before it, so they do not take those back -- which is the honest
+  # cost, stated: about 4% of what this clause fills is not a model.
+  - codeMatches: '^\d{2}(20|22|24|26|30|32|50|51)\d{5}$'
+    category: miniatures
+    note: 134 undecided; control 545, 96.1%
+
+  # THE RULEBOOK TYPE. 10 is where Warlord files a rules product on its own -- `Bolt Action Core
+  # Rule Book`, `Hail Caesar - Age of Bronze supplement`, `Black Powder II rulebook`. The type is
+  # small and completely clean, and it is distinct from 99, which is the same book sold WITH a
+  # miniature and splits accordingly.
+  - codeMatches: '^\d{2}10\d{5}$'
+    category: book
+    note: 6 undecided; control 35, 100%
