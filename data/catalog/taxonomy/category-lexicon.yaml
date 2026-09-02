@@ -80,6 +80,18 @@ entries:
     category: terrain
     measured: reaches 37 undecided; 116 controls, 113 agree (97%)
 
+  # GW NAMES ITS OWN POTS `Citadel <range> Paint: <colour>` and its sprays `Citadel Paint: <colour>
+  # Spray`, and a retailer that lists them without a barcode (gamenerdz, 6 products) used to reach
+  # `paint` only through that store's department crumb, which also filed its brushes as paint. The
+  # exclusions are the Citadel paint furniture -- `CITADEL PAINT BOX`, `CITADEL PAINT RACK` -- and
+  # the sets and bundles the `packaging` axis and `paint-set` exist for. `CITADEL` must come
+  # first: `How to Paint Citadel Miniatures` is a book.
+  - nameMatches: '\bCITADEL\b[^:]*\bPAINT\b(?!\s*(?:SET|BOX|RACK|BUNDLE|AND|&|\+))'
+    category: paint
+    measured: >-
+      reaches 6 undecided; 18 controls, 16 agree (89%) before the exclusions and 16 of 16 with
+      them -- the two were the Paint Box and the Paint Rack (2026-09-02).
+
   # A PRIMER DEPOSITS COLOUR, which is the test categories.yaml sets for `paint` in as many words,
   # and every product this reaches says the colour in its own name: `Colour Primer Alien Purple`,
   # `Vallejo Fantasy Color Primer Goblin Green`, `AFV Color Primer Panzer Yellow`, `Basic Primer

@@ -29,9 +29,12 @@ reason: >-
   apart. A clause predicting anything else does add an answer, and is worth keeping at a lower bar.
 
 clauses:
-  - category: paint
-    hintContainsAny: {breadcrumbs: [Paint and Crafting]}
-    note: 220 of 220 checkable products agree; the only gamenerdz crumb that survived measurement
+  # `Paint and Crafting` IS NOT MAPPED (removed 2026-09-02). It is the department, and its one
+  # sub-crumb is `Supplies` -- paints and brushes alike, 308 products. Filing the department as
+  # `paint` published 22 Citadel brushes, files, knives and painting handles as paint on this
+  # store's word against goblingaming's `hobby-auxiliary`, and 49 tool-named products catalog-wide
+  # rest on a department read. The store's other crumbs stay: each names a kind of thing. Paints
+  # this store alone lists reach `paint` through the paint catalog's barcodes and the name lexicon.
 
   # THE TWO BOARD-GAME CRUMBS NEED A GUARD, and it is the same shape as the DATACARDS exception
   # this store's own department structure forces elsewhere. `Board Games` holds
