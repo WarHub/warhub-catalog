@@ -26,12 +26,19 @@ public static class BrandArchiveWriter
         await File.WriteAllTextAsync(Path.Combine(brandsDir, $"{archive.BrandSlug}.yaml"), yaml, ct);
     }
 
-    public static async Task<IReadOnlyList<PaintRecord>> LoadAsync(string filePath, CancellationToken ct = default)
+    public static async Task<IReadOnlyList<PaintRecord>> LoadAsync(string filePath, CancellationToken ct = default) =>
+        (await LoadArchiveAsync(filePath, ct))?.Paints ?? [];
+
+    /// <summary>
+    /// The whole envelope, brand display name included -- what a run needs to classify the
+    /// records of a brand it did not produce (PaintCatalogApp's archive-only pass). Null when
+    /// the file is absent.
+    /// </summary>
+    public static async Task<BrandArchive?> LoadArchiveAsync(string filePath, CancellationToken ct = default)
     {
         if (!File.Exists(filePath))
-            return [];
+            return null;
         string yaml = await File.ReadAllTextAsync(filePath, ct);
-        BrandArchive? archive = CatalogSerializer.CreateDeserializer().Deserialize<BrandArchive>(yaml);
-        return archive?.Paints ?? [];
+        return CatalogSerializer.CreateDeserializer().Deserialize<BrandArchive>(yaml);
     }
 }

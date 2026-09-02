@@ -60,6 +60,22 @@ public class PaintRecordMapperTests
     }
 
     [Fact]
+    public void Role_SurvivesBothDirections()
+    {
+        // The archival record is what gets written and what the equivalence pass reads back
+        // through ToPaint; a role that fell off either hop would quietly reappear as absent.
+        PaintRecord r = PaintRecordMapper.ToRecord(P() with { Role = "varnish", Colourless = true });
+        Assert.Equal("varnish", r.Role);
+        Assert.True(r.Colourless);
+
+        Paint back = PaintRecordMapper.ToPaint(r);
+        Assert.Equal("varnish", back.Role);
+        Assert.True(back.Colourless);
+
+        Assert.Null(PaintRecordMapper.ToRecord(P()).Role);   // unstated stays unstated
+    }
+
+    [Fact]
     public void ToRecord_EmptyLineageAndPrice_StayNull_SoTheKeysAreOmitted()
     {
         PaintRecord r = PaintRecordMapper.ToRecord(P() with { Supersedes = [] });

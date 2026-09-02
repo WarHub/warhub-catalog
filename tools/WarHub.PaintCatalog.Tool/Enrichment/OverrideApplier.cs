@@ -56,6 +56,14 @@ public static class OverrideApplier
                 return p;
 
             bool colourless = (over.Colourless ?? p.Colourless) == true;
+            // A role outside the closed vocabulary is a typo in a hand-edited file, and a typo
+            // that silently published would be worse than a run that stopped: fail loudly here.
+            if (over.Role is not null && !RoleClassifier.Vocabulary.Contains(over.Role))
+            {
+                throw new InvalidOperationException(
+                    $"overrides.yaml {brandSlug} '{key}': role '{over.Role}' is not in the vocabulary "
+                    + $"({string.Join(", ", RoleClassifier.Roles)})");
+            }
             string newHex = over.Hex ?? p.Hex;
             int newR = p.R;
             int newG = p.G;
@@ -102,6 +110,9 @@ public static class OverrideApplier
                 G = colourless ? 0 : newG,
                 B = colourless ? 0 : newB,
                 Colourless = over.Colourless ?? p.Colourless,
+                // The classifier has already run (PaintCatalogApp enrichment chain), so this is
+                // the per-record last word over it. RoleInvariant checks the pair afterwards.
+                Role = over.Role ?? p.Role,
                 VolumeMl = contents.VolumeMl,
                 WeightG = contents.WeightG,
                 Packaging = contents.Container,
@@ -290,6 +301,15 @@ public record PaintOverride
     /// are what put mediums and varnishes into the colour-equivalence graph.
     /// </summary>
     public bool? Colourless { get; init; }
+
+    /// <summary>
+    /// States what this product is FOR -- see <see cref="Models.PaintRecord.Role"/> -- when the
+    /// <see cref="RoleClassifier"/> gets it wrong for one record. Must be a slug from
+    /// <see cref="RoleClassifier.Roles"/>; anything else fails the run. A varnish, medium or
+    /// cleaner declared here still needs <see cref="Colourless"/> beside it, or
+    /// <see cref="RoleInvariant"/> refuses the archive.
+    /// </summary>
+    public string? Role { get; init; }
 
     /// <summary>
     /// Corrected NAME, and with <see cref="Set"/> the last of the four identity components to get

@@ -236,10 +236,11 @@ internal static class PaintCatalogApp
                 // Enrich with volume/packaging
                 paints = paints.Select(p => VolumeEnricher.Enrich(p, brandInfo.DisplayName)).ToList();
 
-                // Enrich with paint type and finish
+                // Enrich with paint type, finish and role
                 paints = paints
                     .Select(p => PaintTypeClassifier.Enrich(p, brandInfo.DisplayName))
                     .Select(p => FinishClassifier.Enrich(p, brandInfo.DisplayName))
+                    .Select(p => RoleClassifier.Enrich(p, brandInfo.DisplayName))
                     .ToList();
 
                 // Enrich with Vallejo EAN
@@ -355,10 +356,11 @@ internal static class PaintCatalogApp
                         };
                     }).ToList();
 
-                    // Enrich with type and finish
+                    // Enrich with type, finish and role
                     scrapedPaints = scrapedPaints
                         .Select(p => PaintTypeClassifier.Enrich(p, scrapedBrand.DisplayName))
                         .Select(p => FinishClassifier.Enrich(p, scrapedBrand.DisplayName))
+                        .Select(p => RoleClassifier.Enrich(p, scrapedBrand.DisplayName))
                         .ToList();
 
                     // Apply overrides, then derive the reverse of every declared supersession.
@@ -475,6 +477,12 @@ internal static class PaintCatalogApp
             var reconciler = new CatalogReconciler<PaintRecord>(adapter);
             int totalPaints = 0;
 
+            // Every brand is finalized in memory first and written only once ALL of them have
+            // passed the role invariant (see RoleInvariant): a run that fails on the ninth brand
+            // must not leave the first eight rewritten behind it.
+            var violations = new List<string>();
+            var archives = new List<BrandArchive>();
+
             // A "full" run additionally requires no --brand filter — a filtered run only
             // touches one brand's source, so orphan GC under it would wrongly conclude that
             // every other, untouched brand's records are gone.
@@ -577,6 +585,11 @@ internal static class PaintCatalogApp
                     finalRecords = reconciled.Records.ToList();
                 }
 
+                // An archived record no source asserted this run never passed the enrichment
+                // chain, so it is stamped here from what it says about itself.
+                finalRecords = BackfillRoles(finalRecords, pending.Brand);
+                violations.AddRange(RoleInvariant.Violations(brandSlug, finalRecords));
+
                 var archive = new BrandArchive
                 {
                     Brand = pending.Brand,
@@ -586,7 +599,8 @@ internal static class PaintCatalogApp
                     Paints = finalRecords,
                 };
 
-                await BrandArchiveWriter.WriteAsync(archive, outputDir, cancellationToken);
+                // Not written yet -- see `archives` above.
+                archives.Add(archive);
                 totalPaints += finalRecords.Count;
 
                 // EQUIVALENCES MUST SEE THE ARCHIVE, NOT THE WORKING LIST. `allCatalogs` was built
@@ -615,6 +629,60 @@ internal static class PaintCatalogApp
 
                 if (verbose) Console.WriteLine($"  {brandSlug}: {finalRecords.Count} archived records ({fresh.Count} fresh this run)");
             }
+
+            // ARCHIVE-ONLY BRANDS. A brand no source produced this run -- two-thin-coats on any
+            // run without --scrape, any brand whose source is down -- still has an archive file,
+            // and the role facet and its invariant are properties of the ARCHIVE, not of which
+            // sources happened to run. So every brand file this run did not produce is loaded,
+            // backfilled and checked like the others, rewritten only when a record gained a role
+            // (byte-identical otherwise, so no churn), and handed to the equivalence pass -- which
+            // then sees the whole archive, as the comment above demands, rather than the subset
+            // this run scraped. A --brand run touches only its own file and skips this.
+            if (string.IsNullOrEmpty(brandFilter))
+            {
+                string brandsDir = Path.Combine(outputDir, "brands");
+                IEnumerable<string> brandFiles = Directory.Exists(brandsDir)
+                    ? Directory.GetFiles(brandsDir, "*.yaml").OrderBy(f => f, StringComparer.Ordinal)
+                    : [];
+                foreach (string file in brandFiles)
+                {
+                    string slug = Path.GetFileNameWithoutExtension(file);
+                    if (pendingBrands.ContainsKey(slug))
+                        continue;
+                    BrandArchive? archived = await BrandArchiveWriter.LoadArchiveAsync(file, cancellationToken);
+                    if (archived is null)
+                        continue;
+
+                    bool gained = archived.Paints.Any(p => string.IsNullOrWhiteSpace(p.Role));
+                    List<PaintRecord> records = BackfillRoles(archived.Paints, archived.Brand);
+                    violations.AddRange(RoleInvariant.Violations(slug, records));
+                    if (gained)
+                        archives.Add(archived with { Paints = records });
+
+                    allCatalogs.Add(new BrandCatalog
+                    {
+                        Brand = archived.Brand,
+                        BrandSlug = slug,
+                        PaintCount = records.Count,
+                        Paints = records.Select(PaintRecordMapper.ToPaint).ToList(),
+                    });
+
+                    if (verbose)
+                        Console.WriteLine($"  {slug}: {records.Count} archived records (not produced this run{(gained ? "; roles backfilled" : "")})");
+                }
+            }
+
+            // THE ROLE INVARIANT FAILS THE RUN, before a single file is written.
+            if (violations.Count > 0)
+            {
+                Console.Error.WriteLine($"Error: {violations.Count} record(s) break the role invariant; nothing was written.");
+                foreach (string violation in violations)
+                    Console.Error.WriteLine($"  {violation}");
+                return 1;
+            }
+
+            foreach (BrandArchive archive in archives)
+                await BrandArchiveWriter.WriteAsync(archive, outputDir, cancellationToken);
 
             // Write manifest
             var manifest = new Manifest
@@ -681,4 +749,18 @@ internal static class PaintCatalogApp
 
         return await rootCommand.Parse(args).InvokeAsync();
     }
+
+    /// <summary>
+    /// Stamps a role on every record that has none. A record the reconciler carried forward
+    /// unchanged -- one no source asserted this run -- never passed the enrichment chain, so its
+    /// role comes from the same classifier applied to what the record itself says. A record that
+    /// already carries one keeps it: an overridden role must survive its product vanishing from
+    /// the source, exactly as the colourless flag does.
+    /// </summary>
+    private static List<PaintRecord> BackfillRoles(IEnumerable<PaintRecord> records, string brandDisplayName) =>
+        records
+            .Select(r => string.IsNullOrWhiteSpace(r.Role)
+                ? r with { Role = RoleClassifier.Classify(brandDisplayName, r.Details.Set, r.Name) }
+                : r)
+            .ToList();
 }

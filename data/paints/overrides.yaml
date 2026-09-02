@@ -2,8 +2,9 @@
 # (--overrides). Every section is keyed by brand slug and read independently, so a mistake in one
 # section cannot silently disable another.
 #
-#   <brand-slug>:  "{Name}|{Set}" -> field overrides (productCode, hex, volumeMl, packaging, ean,
-#                  additionalEans, priceGbp/Usd/Eur/Cad, supersededBy)
+#   <brand-slug>:  "{Name}|{Set}" -> field overrides (name, set, productCode, hex, volumeMl,
+#                  weightG, packaging, ean, additionalEans, priceGbp/Usd/Eur/Cad, supersededBy,
+#                  isDiscontinued, soldSeparately, colourless, role)
 #
 
 #   additions:     <brand-slug> -> list of MINTED paints (name, set, productCode, ean, imageUrl,
@@ -700,6 +701,9 @@ aliases:
     Premium Airbrush Color|Reducer|62.066|: Premium Airbrush Color|Reducer|62.066|#FFFFFF
     Premium Airbrush Color|Retarder|62.065|: Premium Airbrush Color|Retarder|62.065|#FFFFFF
     Premium Airbrush Color|Satin Varnish|62.063|: Premium Airbrush Color|Satin Varnish|62.063|#FFFFFF
+    # The role invariant's two Vallejo additions (2026-09-02); pair with the brand section below.
+    Weathering FX|Wet Effects|73.828|: Weathering FX|Wet Effects|73.828|#BDBAA7
+    Xpress Color|Medium Xpress|72.448|: Xpress Color|Medium Xpress|72.448|#FFFBF8
   tamiya:
     # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
     # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
@@ -718,6 +722,9 @@ aliases:
     Tamiya Spray|Clear|TS-13|: Tamiya Spray|Clear|TS-13|#FFFFFF
     Tamiya Spray|Flat clear|TS-80|: Tamiya Spray|Flat clear|TS-80|#FFFFFF
     Tamiya Spray|Semi gloss clear|TS-79|: Tamiya Spray|Semi gloss clear|TS-79|#FFFFFF
+    # The role invariant's two Tamiya additions (2026-09-02); pair with the brand section below.
+    Lacquer Paint|Pearl clear|LP-49|: Lacquer Paint|Pearl clear|LP-49|#F7F9F8
+    Tamiya Spray|Pearl clear|TS-65|: Tamiya Spray|Pearl clear|TS-65|#E6E6CF
   scale75:
     # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
     # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
@@ -776,6 +783,8 @@ aliases:
     Mr Color|Flat Clear|182|: Mr Color|Flat Clear|182|#FFFFFF
     Mr Color|Semi-gloss Super Clear|181|: Mr Color|Semi-gloss Super Clear|181|#FFFFFF
     Mr Color|Super Clear Gray Tone|183|: Mr Color|Super Clear Gray Tone|183|#F5F7F7
+    # The role invariant's one Mr Hobby addition (2026-09-02); pairs with the brand section below.
+    Mr Color GX|Super Smooth Clear|GX114|: Mr Color GX|Super Smooth Clear|GX114|#DCDDDD
   monument-pro-acryl:
     # Paired with the `colourless: true` assertions in this brand's section below. Clearing a
     # stand-in hex MOVES the identity (`set|name|productCode|hex`), so without these the
@@ -2467,6 +2476,14 @@ ak-interactive:
   Varnish Satin|Primer (3rd Gen):
     colourless: true   # cleared #F5F6F8
 
+  # --- the role invariant (2026-09-02): a medium must say it has no colour ---------------------
+  # AK11268 is the catalyst brushed over the Iron Effect and Bronze Effect paints (AK11266/7) to
+  # oxidise them -- a clear liquid, diluted with water, that deposits nothing of its own. The
+  # RoleClassifier files it as a medium, and this is the flag that role requires. Hexless
+  # already, so no alias: the identity does not move.
+  Oxidizing Agent|Weathering Effects:
+    colourless: true
+
 ak-real-color:
   # --- colourless utility products (2026-08-13) ---
   Flat Varnish|Real Colors - Standard:
@@ -2534,6 +2551,12 @@ mr-hobby:
     colourless: true   # cleared #F5F7F7
   Super Clear III|Mr Color GX:
     colourless: true   # cleared #FFFFFF
+
+  # --- the role invariant (2026-09-02): a varnish must say it has no colour --------------------
+  # GX114 Super Smooth Clear (Flat) is the fluororesin flat clear that succeeded C182; the chart's
+  # #DCDDDD is the grey of a matt swatch, not a colour. Paired alias in `aliases:` above.
+  Super Smooth Clear|Mr Color GX:
+    colourless: true   # cleared #DCDDDD
 
 reaper:
   # --- colourless utility products (2026-08-13) ---
@@ -2670,6 +2693,16 @@ tamiya:
   Semi-gloss clear|Acrylics Mini Gloss:
     colourless: true   # cleared #FFFFFF
 
+  # --- the role invariant (2026-09-02): a varnish must say it has no colour --------------------
+  # LP-49 and TS-65 Pearl Clear are clear coats carrying pearl flake, applied over a base colour
+  # for a pearlescent finish -- the same kind of product as Green Stuff World's Chrome Clear
+  # Coat, flagged the same way. The two chart hexes are the sheen of the flake, not a colour.
+  # Paired aliases in `aliases:` above.
+  Pearl clear|Lacquer Paint:
+    colourless: true   # cleared #F7F9F8
+  Pearl clear|Tamiya Spray:
+    colourless: true   # cleared #E6E6CF
+
 vallejo:
   # --- colourless utility products (2026-08-13) ---
   Acrylic Gloss Spray Varnish|Auxiliaries:
@@ -2782,3 +2815,13 @@ vallejo:
     colourless: true
   Thinner Medium|Auxiliaries:
     colourless: true
+
+  # --- the role invariant (2026-09-02): a medium must say it has no colour ---------------------
+  # 72.448 is the Xpress Medium, sold beside the Xpress Colors to thin them and to make new shades
+  # (Vallejo's own words), which the chart lists as "Medium Xpress" with a #FFFBF8 stand-in.
+  # 73.828 Wet Effects is the transparent gloss medium of the Weathering FX range; its #BDBAA7 is
+  # the grey of a chart swatch with nothing to show. Paired aliases in `aliases:` above.
+  Medium Xpress|Xpress Color:
+    colourless: true   # cleared #FFFBF8
+  Wet Effects|Weathering FX:
+    colourless: true   # cleared #BDBAA7

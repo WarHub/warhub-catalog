@@ -172,6 +172,7 @@ public sealed class BarcodeIndexTests
         Id: id,
         Brand: id.Split('/')[0],
         Category: "paint",
+        Role: "colour",
         Range: null,
         Name: id,
         Hex: null,

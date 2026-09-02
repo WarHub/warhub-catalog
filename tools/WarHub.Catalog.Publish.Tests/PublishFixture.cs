@@ -154,6 +154,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: current
               availability: unknown
+              role: colour
               firstSeen: '2026-07-07'
               productCode: C1
               ean: '5011921142361'
@@ -171,6 +172,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: current
               availability: unknown
+              role: pigment
               firstSeen: '2026-07-07'
               productCode: WP1
               details:
@@ -185,6 +187,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: discontinued
               availability: out_of_stock
+              role: colour
               firstSeen: '2026-07-07'
               productCode: C2
               ean: '5011921142378'
@@ -200,6 +203,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: discontinued
               availability: out_of_stock
+              role: colour
               firstSeen: '2026-07-07'
               supersededBy: Hexwraith Flame|Contrast
               details:
@@ -214,6 +218,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: current
               availability: unknown
+              role: colour
               firstSeen: '2026-07-07'
               productCode: '99189960060'
               supersedes:
@@ -230,6 +235,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: discontinued
               availability: out_of_stock
+              role: texture
               firstSeen: '2026-07-07'
               productCode: C3
               supersededBy: Nothing At All|Contrast
@@ -253,6 +259,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: current
               availability: unknown
+              role: colour
               firstSeen: '2026-07-07'
               productCode: V1
               ean: '8429551724838'
@@ -273,6 +280,7 @@ public sealed class PublishFixture : IDisposable
               category: paint
               status: current
               availability: unknown
+              role: colour
               firstSeen: '2026-07-24'
               productCode: '77.703'
               details:

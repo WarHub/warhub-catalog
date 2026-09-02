@@ -584,4 +584,53 @@ public class OverrideApplierTests
             File.Delete(path);
         }
     }
+
+    /// <summary>
+    /// `role:` is the per-record last word over RoleClassifier, which has already run by the
+    /// time Apply does. It changes nothing else, and a record the block does not mention keeps
+    /// the classifier's answer.
+    /// </summary>
+    [Fact]
+    public void Apply_Role_OutranksTheClassifier_AndTouchesNothingElse()
+    {
+        IReadOnlyList<Paint> classified =
+            [SamplePaints[0] with { Role = "colour" }, SamplePaints[1] with { Role = "colour" }];
+        string path = WriteTempOverrides("citadel-colour:\n  Mephiston Red|Base:\n    role: tool\n");
+
+        try
+        {
+            IReadOnlyList<Paint> result = OverrideApplier.Apply(classified, "citadel-colour", path);
+
+            Assert.Equal("tool", result[0].Role);
+            Assert.Equal("#9A0E05", result[0].Hex);
+            Assert.Null(result[0].Colourless);
+            Assert.Equal("colour", result[1].Role);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    /// <summary>
+    /// The vocabulary is closed, and the file is hand-edited: a misspelled role must stop the
+    /// run rather than publish. Bind() would otherwise accept any string.
+    /// </summary>
+    [Fact]
+    public void Apply_RoleOutsideTheVocabulary_FailsTheRun()
+    {
+        string path = WriteTempOverrides("citadel-colour:\n  Mephiston Red|Base:\n    role: varnsh\n");
+
+        try
+        {
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => OverrideApplier.Apply(SamplePaints, "citadel-colour", path));
+            Assert.Contains("role 'varnsh' is not in the vocabulary", ex.Message);
+            Assert.Contains("Mephiston Red|Base", ex.Message);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
 }

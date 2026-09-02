@@ -26,6 +26,11 @@ internal sealed class PaintYaml
     /// <summary>`true` when the product has no colour at all (medium/thinner/varnish); null
     /// unstated. Nullable for the same reason as SoldSeparately above.</summary>
     public bool? Colourless { get; set; }
+    /// <summary>What the product is FOR: colour | primer | varnish | medium | cleaner | texture |
+    /// pigment | applicator | tool | basing | build. The paint tool stamps one on every archived
+    /// record and refuses to write an archive that lacks one; nullable here only because this is
+    /// a read shape and a hand-written fixture may omit it.</summary>
+    public string? Role { get; set; }
     public string? FirstSeen { get; set; }
     public string? ProductCode { get; set; }
     public string? Ean { get; set; }

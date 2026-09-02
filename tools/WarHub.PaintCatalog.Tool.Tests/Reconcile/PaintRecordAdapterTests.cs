@@ -41,6 +41,18 @@ public class PaintRecordAdapterTests
     }
 
     [Fact]
+    public void Merge_Role_FreshWins_SoARuleChangeReachesEveryLiveRecord()
+    {
+        // Derived every run: the archive said `colour` under an older rule, the classifier now
+        // says `varnish`, and the record must follow -- unlike FirstSeen, which is history.
+        PaintRecord merged = _a.Merge(R() with { Role = "colour" }, R() with { Role = "varnish" });
+        Assert.Equal("varnish", merged.Role);
+
+        // A fresh record carrying no role (never the tool's, but a caller's) keeps the archived one.
+        Assert.Equal("colour", _a.Merge(R() with { Role = "colour" }, R()).Role);
+    }
+
+    [Fact]
     public void Merge_RebarcodingKeepsTheDisplacedBarcode()
     {
         // EAN is not part of the identity key, so a fresh harvest carrying a DIFFERENT barcode

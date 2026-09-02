@@ -28,6 +28,11 @@
         },
         "brand": { "type": "string" },
         "category": { "type": "string" },
+        "role": {
+          "type": "string",
+          "enum": ["colour", "primer", "varnish", "medium", "cleaner", "texture", "pigment", "applicator", "tool", "basing", "build"],
+          "description": "WHAT THIS PRODUCT IS FOR. `category` is the constant `paint` for everything a maker's chart lists -- a liquid, paste, powder or aerosol sold inside a painting range, colour or not -- so this is the key that tells a varnish, thinner, primer, texture paste or pigment jar from a colour. `colour` deposits colour (its finer grain -- wash, contrast, metallic, spray -- stays in `type`/`finish` and is never repeated here); `primer` is undercoat, coloured or clear; `varnish` a clear coat of any sheen; `medium` goes into or under the paint (mixing/glaze mediums, thinners, retarders, flow improvers, flattening bases, masking fluids, decal solutions); `cleaner` does not go into the paint (airbrush/brush cleaners, restorers, strippers); `texture` is a paste, gel or ground with body; `pigment` a dry powder. `applicator`, `tool`, `basing` and `build` name hobby hardware a chart should never list but a harvest can. Present on every paint the archive publishes, and a `varnish`, `medium` or `cleaner` always carries `colourless: true` beside it -- the paint tool refuses to write an archive where either fails to hold."
+        },
         "range": { "type": "string" },
         "name": { "type": "string" },
         "hex": { "type": "string", "pattern": "^#[0-9a-f]{6}$" },
