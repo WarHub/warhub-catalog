@@ -20,6 +20,18 @@ scope:
   headless: false
 politeness:
   rps: 0.5
+# CMON's own placeholder page, published as the real `status: current` product
+# `cmon/demo-for-grid` until 2026-09-01. Name "Demo for grid", no sku, no barcode, no image, and
+# `mfr-cmon` is its only evidence -- the row exists to fill a slot in the site's product grid. The
+# key is the WordPress slug, which is what this source's observation keys are made of; if CMON ever
+# renames it the exclusion simply stops matching, and
+# `test_no_published_product_looks_like_a_store_test_artifact` is the tripwire for the next one.
+#
+# THAT TRIPWIRE DID NOT CATCH THIS ONE, and the reason is the reason `excludeKeys` takes exact keys
+# rather than a pattern: the test looks for names that read like a test entry, and "Demo for grid"
+# is a phrase a real product could plausibly carry. The list never guesses.
+excludeKeys:
+  - demo-2
 contract:
   # Evidence-based floor (0.85 x observed): live wp-sitemap-posts-products-1.xml, 2026-07-13
   # (fetched via an authenticated browser session -- Cloudflare walls this XML to curl/httpx too,
