@@ -1,5 +1,6 @@
 """Deterministic YAML serialization: stable order, safe quoting, literal blocks."""
 import re
+import time
 from pathlib import Path
 
 import yaml
@@ -69,7 +70,20 @@ def load_yaml(text: str) -> object:
 
 def write_yaml(path: Path, data: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(dump_yaml(data), encoding="utf-8", newline="\n")
+    text = dump_yaml(data)
+    # RETRIED ON `OSError: [Errno 22] Invalid argument`, which Windows raised three times on
+    # 2026-09-02 while this pipeline wrote a products file it had written cleanly a minute
+    # before -- each time on a different file, each time succeeding on the next attempt, and each
+    # time leaving the earlier files from the new run beside the later ones from the old. The
+    # cause was never found (no lock, no bad path); a short retry is what a transient error gets.
+    for attempt in range(4):
+        try:
+            path.write_text(text, encoding="utf-8", newline="\n")
+            return
+        except OSError as exc:
+            if attempt == 3 or getattr(exc, "errno", None) != 22:
+                raise
+            time.sleep(1.5)
 
 
 def read_yaml(path: Path) -> object:

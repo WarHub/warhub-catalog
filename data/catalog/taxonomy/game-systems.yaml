@@ -183,6 +183,14 @@ gameSystems:
   - slug: warhammer-40k
     label: Warhammer 40,000
     setting: warhammer-40k
+  # Games Workshop's rank-and-flank game in the Old World until 2015, when Age of Sigmar replaced
+  # it and The Old World (2024) later revived the setting. The catalog archives everything ever
+  # released, and seven discontinued figures from GW's 2014-15 webstore were made for this game
+  # and no other; a classifier had filed them under The Old World and GW's code segment would have
+  # put them in Age of Sigmar. Minted by maintainer decision, 2026-09-02.
+  - slug: warhammer-fantasy-battle
+    label: Warhammer Fantasy Battle
+    setting: old-world
   - slug: warhammer-underworlds
     label: Warhammer Underworlds
     setting: age-of-sigmar
