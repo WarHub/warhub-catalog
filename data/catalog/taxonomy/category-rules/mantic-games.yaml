@@ -148,8 +148,9 @@ clauses:
   # are load-bearing: the lookbehind keeps Epic Warpath out (a different game at a different
   # scale, not an edition), the lookahead keeps the universe compounds out. 15 false
   # disagreements before the guard, and every one of them a product of another Warpath game.
-  - codeMatches: '^MGWPM'
+  - codeMatches: '^MGWPM(?!103)'
     gameSystems: [warpath]
+    note: MGWPM103 is the Warpath FIREFIGHT rulebook, as the header says; the other 9 of the block are Warpath's own
   - nameMatches: '(?<!epic[ -])\bwarpath\b(?!\s*(?:firefight|deadzone|universe))'
     gameSystems: [warpath]
 

@@ -5271,13 +5271,11 @@ products:
     manufacturer: sarissa-precision
     productCode: N031
     sku: N031
-    gameSystems:
-      - gates-of-antares
     faction: general
-    gameSystemsBasis: mapped
+    gameSystemsBasis: override
     settings:
-      - antares
-    settingsBasis: derived
+      - world-war-two
+    settingsBasis: override
     category: terrain
     categoryBasis: mapped
     packaging: single

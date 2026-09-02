@@ -866,3 +866,13 @@ def test_a_generic_verdict_survives_the_membership_completion() -> None:
     assert (kept.gameSystemsBasis, kept.settingsBasis) == ("not-applicable", "not-applicable")
     silent = complete_membership_bases(verdict.model_copy(update={"gameSystemsBasis": "unknown", "settingsBasis": "unknown"}), {}, settings)
     assert (silent.gameSystemsBasis, silent.settingsBasis) == ("unknown", "unknown")
+
+
+def test_an_override_of_the_category_stamps_its_basis() -> None:
+    from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
+    from warhub_acquisition.resolve.attributes import apply_overrides
+
+    product = CanonicalProduct(id="vallejo/28890", name="Brush Restorer", manufacturer="vallejo",
+                               status="current", firstSeen="2026-07-01", category="paint", categoryBasis="mapped")
+    patched = apply_overrides(product, Overrides(products={"vallejo/28890": {"category": "hobby-auxiliary"}}))
+    assert (patched.category, patched.categoryBasis) == ("hobby-auxiliary", "override")

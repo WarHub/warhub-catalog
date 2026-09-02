@@ -31,7 +31,7 @@ from warhub_acquisition.taxonomy import Settings, Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
-from .decide import Conflict, _clause_hit, _product_hit, _signal, decide, flatten_hints
+from .decide import game_axis_vetoed, Conflict, _clause_hit, _product_hit, _signal, decide, flatten_hints
 from .lexicon import load_lexicon
 from .paints import load_paint_barcodes
 from .rules import AXES as _AXES, SourceRules, load_category_rules
@@ -254,7 +254,15 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 # (`_apply_game_systems`), and a catch-all is refined rather than united.
                 default_hints=default_hints, catch_alls=catch_alls,
             )
-            outcome.conflicts.extend(conflicts)
+            # A category split is reported only where the record could have changed: on a
+            # `stated` or `override` record the retailers' argument decides nothing, and 12 of the
+            # 53 rows open on 2026-09-02 were exactly that. A record a RULE decided (mapped, code,
+            # lexicon, paint-barcode) still reports, so a second run over this stage's own output
+            # writes the same rows as the first.
+            outcome.conflicts.extend(
+                c for c in conflicts
+                if c.kind != "category-disagreement" or record.categoryBasis not in ("stated", "override")
+            )
 
             # THE CATEGORY, and only where nothing has decided it. `stated` is a source's claim
             # about one product and outranks any table; anything an override set is a maintainer's
@@ -277,9 +285,12 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 record.packaging = decision.packaging
                 touched = True
 
-            if _apply_game_systems(record, decision, outcome, catch_alls):
+            vetoed_guess = record.gameSystemsBasis == "classified" and game_axis_vetoed(
+                rules, record.manufacturer, record.name, record.productCode or record.sku
+            )
+            if _apply_game_systems(record, decision, outcome, catch_alls, vetoed_guess):
                 touched = True
-            if _apply_settings(record, decision, outcome, settings_taxonomy):
+            if _apply_settings(record, decision, outcome, settings_taxonomy, catch_alls):
                 touched = True
             if _apply_generic(record, decision, outcome):
                 touched = True
@@ -326,7 +337,8 @@ def _load_catch_alls(taxonomy_dir) -> frozenset[str]:
 
 
 def _apply_game_systems(
-    record: CanonicalProduct, decision, outcome: "Outcome", catch_alls: frozenset[str]
+    record: CanonicalProduct, decision, outcome: "Outcome", catch_alls: frozenset[str],
+    vetoed_guess: bool = False,
 ) -> bool:
     """Fill game systems the evidence never supplied, or report a disagreement. Never overwrite.
 
@@ -351,8 +363,18 @@ def _apply_game_systems(
     overwriting is still right -- correcting 675 published values is a data change that belongs in
     its own review -- but the report is now expected to grow, not to stay near zero.
     """
+    # A GUESS WHERE THE MAKER'S TABLE SAYS NO GAME APPLIES IS CLEARED. Black Library's segment is
+    # vetoed for the game axis in games-workshop.yaml (a novel belongs to a setting, not a game),
+    # and 111 novels carried an LLM-guessed game there anyway, which then derived a setting and
+    # blocked the settings clause; two of the three Old World ones were in the wrong universe.
+    # Measured 2026-09-02. The clause that follows places them by setting.
+    cleared = False
+    if vetoed_guess and record.gameSystemsBasis == "classified":
+        record.gameSystems = []
+        record.gameSystemsBasis = "unknown"
+        cleared = True
     if decision is None or not decision.gameSystems:
-        return False
+        return cleared
     proposed = list(decision.gameSystems)
     settled = set(record.gameSystems)
     if settled == set(proposed) and record.gameSystemsBasis != "classified":
@@ -439,7 +461,8 @@ def _apply_game_systems(
 
 
 def _apply_settings(
-    record: CanonicalProduct, decision, outcome: "Outcome", settings: Settings
+    record: CanonicalProduct, decision, outcome: "Outcome", settings: Settings,
+    catch_alls: frozenset[str] = frozenset(),
 ) -> bool:
     """Place a product in a setting where nothing placed it in a game. Never overwrite.
 
@@ -452,7 +475,9 @@ def _apply_settings(
     if decision is None or not decision.settings:
         return False
     proposed = sorted(set(decision.settings))
-    if record.gameSystems:
+    # A catch-all-only list (`[other-games]`) places the product in no game and derives no
+    # setting; the clause speaks for it as it would for a novel.
+    if record.gameSystems and not set(record.gameSystems) <= catch_alls:
         derived = set(settings.for_games(record.gameSystems))
         if derived and not set(proposed) <= derived:
             outcome.conflicts.append(
