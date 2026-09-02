@@ -32,6 +32,18 @@ clauses:
   - category: paint
     hintContainsAny: {breadcrumbs: [Paint and Crafting]}
     note: 220 of 220 checkable products agree; the only gamenerdz crumb that survived measurement
+
+  # THE TWO BOARD-GAME CRUMBS NEED A GUARD, and it is the same shape as the DATACARDS exception
+  # this store's own department structure forces elsewhere. `Board Games` holds
+  # `Aristeia! 30mm Hexagonal Bases (10)`, `Aristeia! Advanced Tactics Deck` and
+  # `Godtear: Kailinn Champion Expansion`; `Boxed Games` holds `DATACARDS: CHAOS DAEMONS`, which
+  # category-lexicon.yaml explicitly calls a game-accessory. A department that sells a game also
+  # sells that game's bits, so the narrow name clauses run first.
+  - category: game-accessory
+    nameMatches: '\bDATA ?CARDS?\b'
+  - category: hobby-auxiliary
+    nameMatches: '\b\d+\s?MM\b.*\bBASES?\b'
+    note: bare bases sold under a game's own department -- categories.yaml `miniatures` boundary
   - category: board-game
     hintContainsAny: {breadcrumbs: [Board Games]}
   - category: board-game

@@ -3,19 +3,36 @@ reason: >-
   steamforged.com files 246 of its 598 observations under 9 `product_type` values. The store's
   catalogue is unusual for this repo -- roughly half of what it lists is not a physical good at
   all: `Free Resource` (92) and `Digital Download` (22) are PDFs and print-and-play files, which
-  is why `digital` is the packaging value this source exercises hardest. Counts from
-  data/evidence/products/mfr-steamforged/observations.jsonl on 2026-08-25.
+  is why `digital` is the packaging value this source exercises hardest.
 
 
-  `Expansion` (23) IS UNMAPPED and it is the interesting one. Steamforged sells both board-game
-  expansions (a box of cards and tokens) and miniature expansions for Godtear and Guild Ball under
-  the same word, and nothing in the row separates them. Guessing would put ~23 products in the
-  wrong half of the vocabulary's clearest boundary; leaving it keeps them in the review file's
-  worklist where a `vendor` or name rule can decide them later. `Product` (8) says nothing.
+  TWO OF ITS CLAUSES WROTE NOTHING FOR THREE WEEKS. `Digital Download` and `Free Resource` set
+  only `packaging`, and the stage wrote a decision only when it carried a category -- so 114
+  products matched a committed clause and kept no value from it. That is fixed in the stage; what
+  is fixed HERE is that both shelves do have a decidable category, and saying nothing about it was
+  never the right answer either.
+
+
+  `Expansion` WAS UNMAPPED ON A PREMISE THE DATA DOES NOT SUPPORT. The old note said Steamforged
+  "sells both board-game expansions and miniature expansions under the same word, and nothing in
+  the row separates them". Measured 2026-09-01: all 23 rows carry `vendor: Godtear`, 21 of them
+  are named `Godtear: <Champion> Champion Expansion`, and the gameSystem control is godtear 23/23.
+  There is no board-game expansion on that shelf. The one genuine exception is a neoprene mat,
+  which is taken by a narrower clause first -- the same shape ret-goblingaming.yaml uses for
+  DATACARDS.
 
 clauses:
+  # A PLAYMAT IS NOT A MINIATURE, and it is the single exception on the Expansion shelf.
+  # categories.yaml's `terrain` boundary settles it: a neoprene mat is a play surface.
+  - category: game-accessory
+    nameMatches: '\bNEOPRENE MAT\b'
+    note: SFGT-011, the one non-miniature under `Expansion`
+
   - category: miniatures
     hintEquals: {productType: Miniatures}
+  - category: miniatures
+    hintEquals: {productType: Expansion}
+    note: 23 rows, all vendor Godtear, 21 named `... Champion Expansion`; decides 21
   - category: board-game
     hintEquals: {productType: Board Game}
   - category: board-game
@@ -25,10 +42,28 @@ clauses:
     note: Steamforged's RPG line is the Dark Souls / Elden Ring rulebooks
   - category: game-accessory
     hintEquals: {productType: Accessories}
-  - packaging: digital
+
+  # DIGITAL. Both shelves are PDFs, and the category follows from what the PDF IS.
+  #
+  # `Digital Download` is corroborated per product rather than per shelf: all 22 rows are
+  # `Epic Encounters: <title> (PDF)` and every one of those titles has a PRINTED twin (`SFEE-0xx`)
+  # already publishing `book` through this table's own `Roleplaying Game` clause.
+  - category: book
+    packaging: digital
     hintEquals: {productType: Digital Download}
-  - packaging: digital
-    hintEquals: {productType: Free Resource}
+    note: 22 rows, each the PDF twin of a printed Epic Encounters title
+
+  # `Free Resource` splits cleanly on the name, and the split is the categories.yaml rule that
+  # reference cards are played with rather than read. 55 of the 85 undecided rows are
+  # `... Cards ... (PDF)` decks; the remaining 30 are lore, FAQs, errata and tournament rules.
+  - category: game-accessory
+    packaging: digital
+    nameMatches: '\bCARDS?\b.*\(PDF\)'
     note: >-
-      no category: the free shelf carries rules PDFs, print-and-play sheets and reference cards
-      together, and only the form is certain
+      ordered before the shelf clause so the card decks are taken first. Anchored on `(PDF)` as
+      well as the word, because a clause carries exactly one signal form and a bare CARDS pattern
+      would also reach the 355 rows this store files under no productType at all.
+  - category: book
+    packaging: digital
+    hintEquals: {productType: Free Resource}
+    note: the non-card remainder -- lore, FAQ, errata, beginner guides

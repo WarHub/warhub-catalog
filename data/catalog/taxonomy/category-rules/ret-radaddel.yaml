@@ -1,10 +1,226 @@
 source: ret-radaddel
 reason: >-
-  radaddel.de tags every product with the RANGE it belongs to, and a range belongs to one
-  game. The tags are a flat mix of the vendor name, the product code repeated, sale
-  collections and one or more range names, so only the range values are mapped here and
-  everything else is ignored rather than guessed at.
+  radaddel.de TAGS EVERY PRODUCT WITH THE RANGE IT BELONGS TO, and a paint range is a range of
+  paints. That is the whole of this table: the store does not publish a product-type taxonomy, but
+  its range shelves answer the category question completely for the manufacturers whose ranges are
+  colour ranges. It is the only source for 2,496 undecided products -- 882 AK-Interactive, 695
+  Vallejo, 384 Army Painter -- and neither AK nor Vallejo makes a single miniature.
+
+
+  THE 7,272 DISTINCT TAGS ARE 93% NOISE. 6,769 of them are the manufacturer's own product code
+  repeated once as a tag (`AK11207`, `AP-WP2048`), and 6,793 occur on exactly one row. Only 436
+  tags occur on three or more rows, and those are the taxonomy. A worklist ranked by raw tag count
+  is reading the codes.
+
+
+  THE TRAILING `*` IS A SECOND, PARALLEL TAXONOMY -- the store's primary collection assignment,
+  uppercased, usually with the vendor prefix stripped (`BA Deutschland` -> `DEUTSCHLAND*`). It is
+  literal text, not a wildcard. 132 values over 2,874 rows, at most one per row, and NEVER alone:
+  2,831 rows carry both a star tag and plain tags, 0 carry a star tag only. The two spellings
+  PARTITION the products rather than duplicating them -- `AK-ACRYLICS 3GEN*` sits on 214 products
+  and plain `AK-Acrylics 3GEN` on 42, with no overlap -- so every range needs BOTH entries or most
+  of it is lost. Where the star taxonomy splits a range more finely than the plain one (Vallejo's
+  `MODEL AIR nnn-nnn*` bands), both are listed.
+
+
+  MEASURED 2026-09-01. Against products decided by INDEPENDENT evidence -- another store's stated
+  category, another store's rule table, or the manufacturer code table, never this table and never
+  an LLM label -- the clauses below agree 828 of 838 (98.8%). The paint clauses are corroborated a
+  second way, by joining `data/paints/brands/*.yaml` on manufacturer product code or exact colour
+  name: 1,059 of the products these clauses call `paint` are records the paint catalog already
+  publishes as paints, and none of those is `colourless: true`.
+
+
+  IT ADJUDICATES A BOUNDARY THE LEXICON DELIBERATELY LEFT OPEN, and that is a decision rather than
+  a side effect. `category-lexicon.yaml`'s header says VARNISH/THINNER/RETARDER were left out
+  because the committed evidence called them `paint`, and that "a lexicon entry here would settle
+  that quietly, in the direction of a rule nobody agreed to". A `mapped` clause outranks the
+  lexicon, so the auxiliary shelves below DO settle it -- for 89 products where this table says
+  `hobby-auxiliary` and the lexicon's `\b\d+\s?ML\b` currently says `paint`. categories.yaml is
+  explicit that colour is the test and a colourless medium is `hobby-auxiliary`; that is the
+  direction taken, out loud.
+
 clauses:
+  # --- BRUSHES FIRST, and the order is load-bearing ---------------------------------------------
+  # AK files its Abteilung 502 brushes under the Abteilung 502 RANGE, so a range clause placed
+  # first would call seven brushes oil paints. Every brush shelf therefore precedes every range.
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['AK-Interactive Pinsel', 'AK-PINSEL*', 'The Army Painter Pinsel', 'PINSEL AP*']
+    note: Pinsel = brushes
+
+  # --- SETS BEFORE SINGLES, for the same reason ------------------------------------------------
+  # `Farbset` = colour set. A boxed set carries both its set shelf and its range shelf; the range
+  # clause would otherwise call it a single paint. 80 independently-STATED `paint-set` products
+  # grade these at 92 of 94.
+  - category: paint-set
+    packaging: set
+    hintContainsAny:
+      tags: ['AK-Farbsets', 'AK-FARBSETS*', 'AK-Real Colors Farbsets', 'AK-REAL COLORS FARBSETS*',
+             'AK-Weathering Sets', 'WEATHERING SETS*', 'Vallejo Farbsets', 'VALLEJO FARBSETS*',
+             'Farbsets Army Painter', 'FARBSETS AP*', 'Pro Acryl Farbsets', 'PRO ACRYL FARBSETS*']
+    note: Farbset = colour set; every member name ends in "Set"
+
+  # --- WHAT IS USED TO BUILD AND FINISH, before the colour ranges -------------------------------
+  # German glossary: Werkzeuge = tools, Zubehör = accessories, Kleber = glue, Malzubehör = painting
+  # accessories, Nasspaletten = wet palettes, Modelliermassen = putty, Schablonen = stencils,
+  # Magnete/Magnetfolie = magnets. Corroborated across vendors where controls exist:
+  # `Army Painter Werkzeuge` 16/16, `WERKZEUGE AP*` 9/9, `The Army Painter Pinsel` 8/8,
+  # `Kleber` 4/4, `Malzubehör` 4/4. The AK equivalents have no controls only because those
+  # products are radaddel-only, which is the reason this table exists.
+  #
+  # Reading all 97 members of `AK-ZUBEHÖR*`: scalpels, drill bits, sanding sponges, tweezers,
+  # pipettes, cutting mats, rulers, painting handles, masking tape, bases, brush-conditioning
+  # fluid, decal solutions, thinners, cleaners. Not one miniature.
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['AK Werkzeuge', 'AK-Zubehör', 'AK-ZUBEHÖR*', 'Army Painter Werkzeuge', 'WERKZEUGE AP*',
+             'Kleber', 'AK-GLUE RANGE*', 'Malzubehör', 'Modelliermassen', 'Masking Tapes',
+             'Magnetfolie', 'MAGNETE*', 'Nasspaletten', 'NASSPALETTEN*',
+             'Modular Workshop System', 'MODULAR WORKSHOP SYSTEM*',
+             'AK-Airbrush', 'AK-AIRBRUSH*', 'Airbrush Schablonen', 'Airbrush Schläuche',
+             'Airbrush Pistolen', 'Adapter und Kupplungen', 'AK-Stencils', 'VALLEJO STENCILS*',
+             'AK Bases']
+    note: tools, glue, magnets, airbrush hardware, stencils and bare bases
+
+  # BASING AND DIORAMA MATERIALS. AK's texture shelf is gravel, rocks, cork, lichen, resin water
+  # and ground pastes sold in 100/250 ml pots -- `Fine Gray Gravel 1-3 MM - 100ml`,
+  # `Terrains Asphalt - 250ml (Acryl)`. None is in the paint catalog. categories.yaml puts basing
+  # materials in `hobby-auxiliary` explicitly, and this clause corrects 53 products the lexicon's
+  # millilitre pattern currently calls `paint`.
+  #
+  # VALLEJO'S TEXTURE SHELF IS NOT THE SAME OBJECT and is deliberately absent: all 12
+  # `VALLEJO TEXTUREN*` products ARE in the paint catalog, as non-colourless `Diorama FX`, with
+  # colour names (`Textur Brown Earth`, `Desert Sand`). Two brands, one English word, two answers.
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['AK-Diorama Texturen', 'AK-DIORAMA SERIES*', 'AK-Diorama Vegetation',
+             'AK-Diorama Basing Bits', 'AK-DIORAMA BASING BITS*', 'AK-DIORAMA ZUBEHÖR*']
+    note: basing and diorama materials, not colour
+
+  # --- BOOKS ------------------------------------------------------------------------------------
+  # `Black Library Englisch` is the best-graded clause in this file: 109 of 110 against independent
+  # evidence. `Black Library Deutsch` is the identical shelf in German, 49 products nothing else in
+  # the catalog has ever touched. Note the BACKTICK (U+0060) in the AK compendium star tag.
+  - category: book
+    hintContainsAny:
+      tags: ['Black Library Englisch', 'Black Library Deutsch', 'AK-Kompendien & Bücher',
+             "AK-KOMPENDIEN/BÜCHER & DVD`S*"]
+    note: Bücher = books
+
+  # --- THINGS PLAYED WITH ----------------------------------------------------------------------
+  # `Zubehör` under a GAME shelf means something different from `Zubehör` under a paint brand:
+  # dice, tokens, templates and datacards. 22/22 and 27/30 against independent evidence. The three
+  # Kill Team misses are a terrain set and two character models on the accessories shelf.
+  - category: game-accessory
+    hintContainsAny:
+      tags: ['AoS Zubehör', 'Kill Team Zubehör', 'Citadel Würfel']
+    note: dice, tokens and cards filed under a game's accessories shelf
+
+  # --- COLOUR ----------------------------------------------------------------------------------
+  # PIGMENTS, WEATHERING EFFECTS, WASHES, PENCILS AND MARKERS ARE ALL `paint`, because
+  # categories.yaml's test is COLOUR and not application method. The paint catalog -- the artefact
+  # that defines `colourless` -- already carries all 23 `VALLEJO PIGMENTE*` products as `Pigment
+  # FX` records with hex values and no `colourless` flag, and carries `AK-Effekte & Weatherings`
+  # on 101 of its 119 members with zero colourless among them. `AK-Playmarkers` is AK's paint-MARKER
+  # range, not game markers: 43/43 `paint` by another store's table.
+  - category: paint
+    hintContainsAny:
+      tags:
+        # Vallejo -- plain range names
+        - 'Vallejo Model Air'
+        - 'Vallejo Model Color'
+        - 'Vallejo Game Color'
+        - 'Vallejo Game Air'
+        - 'Vallejo Xpress Color'
+        - 'Vallejo Metal Color'
+        - 'Vallejo True Metallic Metal'
+        - 'Vallejo Panzer Aces'
+        - 'Vallejo Game Color Inks und Wash'
+        - 'Vallejo Game Color Special FX'
+        - 'Vallejo Model Color Metallics'
+        - 'Vallejo Metallics Alkoholbasis'
+        - 'Game Color Extra Opaque'
+        - 'Model Color Weiss - Gelb - Rot'
+        - 'Model Color Braun'
+        - 'Model Color Gruen'
+        - 'Model Color Blau'
+        - 'Model Color Grau - Schwarz'
+        # Vallejo -- the star collection bands
+        - 'MODEL AIR 001-024*'
+        - 'MODEL AIR 025-048*'
+        - 'MODEL AIR 049-072*'
+        - 'MODEL AIR 073-099*'
+        - 'MODEL AIR 100-150*'
+        - 'MODEL AIR 244-299*'
+        - 'MODEL AIR 300-350*'
+        - 'MODEL COLOR WEISS - GELB - ROT*'
+        - 'MODEL COLOR BRAUN*'
+        - 'MODEL COLOR GRUEN*'
+        - 'MODEL COLOR BLAU*'
+        - 'MODEL COLOR GRAU - SCHWARZ*'
+        - 'MODEL COLOR METALLICS ACRYL*'
+        - '211-218 METALLICS ALKOHOLBASIS*'
+        - '001-106 GAME COLOR*'
+        - '140-155 EXTRA OPAQUE*'
+        - 'XPRESS COLOR*'
+        - 'GAME AIR FARBEN*'
+        - 'SPECIAL FX*'
+        - 'INKS UND WASHES*'
+        - 'VALLEJO METAL COLOR*'
+        - 'VALLEJO PANZER ACES*'
+        - 'VALLEJO PIGMENTE*'
+        - 'VALLEJO WEATHERING EFFECTS*'
+        - 'VALLEJO MODEL WASH*'
+        # AK-Interactive
+        - 'AK-Acrylics 3GEN'
+        - 'AK-ACRYLICS 3GEN*'
+        - 'AK-Real Colors Military'
+        - 'AK REAL COLORS MILITARY*'
+        - 'AK REAL COLORS CIVIL*'
+        - 'AK-Real Colors Standard'
+        - 'AK REAL COLORS STANDARD*'
+        - 'AK-Real Colors Markers'
+        - 'AK-REAL COLORS MARKERS*'
+        - 'AK-Quick GEN'
+        - 'AK-QUICK GEN*'
+        - 'AK-Quick GEN Markers'
+        - 'AK-QUICK GEN MARKERS*'
+        - 'AK-Effekte & Weatherings'
+        - 'EFFEKTE & WEATHERINGS*'
+        - 'AK-Weathering Pencils'
+        - 'WEATHERING PENCILS*'
+        - 'AK-Pigmente'
+        - 'AK-PIGMENTE*'
+        - 'AK-Dual Exo'
+        - 'AK-DUAL EXO*'
+        - 'AK-Dense Acrylics'
+        - 'AK-DENSE ACRYLICS*'
+        - 'AK-Inks'
+        - 'AK-INKS*'
+        - 'AK-Gouache'
+        - 'AK-GOUACHE*'
+        - 'AK-True Metal'
+        - 'AK-Deep Shades'
+        - 'AK-Playmarkers'
+        - 'AK-ÖLE & WASHES*'
+        - 'Abteilung 502'
+        # Army Painter and Monument
+        - 'Warpaints Fanatic'
+        - 'WARPAINTS FANATIC ACRYLICS*'
+        - 'Warpaints Fanatic Metallics'
+        - 'Warpaints Fanatic Washes'
+        - 'Air Warpaints'
+        - 'AIR WARPAINTS*'
+        - 'Speedpaint'
+        - 'Speedpaint Marker'
+        - 'SPEEDPAINT MARKER*'
+        - 'John Blanche Masterclass-Farben'
+        - 'JOHN BLANCHE*'
+        - 'Pro Acryl Farben'
+        - 'PRO ACRYL FARBEN*'
+    note: colour ranges; pigments, washes, effects, pencils and markers all deposit colour
+
   # --- which GAME, from a German retailer's range tags -------------------------------------------
   # radaddel.de tags each product with the range it belongs to, and the ranges are game-specific.
   # Measured 2026-08-31 against independently-stated products: 59 of 59 for Atomic Mass Games and
@@ -24,10 +240,10 @@ clauses:
       tags: ['Marvel Crisis Protocol']
   - gameSystems: [konflikt-47]
     hintContainsAny:
-      tags: ['K47', 'Konflikt 47']
+      tags: ['K47', 'Konflikt 47', 'STARTER & ZUBEHÖR KONFLIKT 47*']
   - gameSystems: [blood-red-skies]
     hintContainsAny:
-      tags: ['Geschwader', 'Fliegerasse', 'Grundspiel und Zubehör BRS']
+      tags: ['Geschwader', 'Fliegerasse', 'Grundspiel und Zubehör BRS', 'GESCHWADER*']
   - gameSystems: [achtung-panzer]
     hintContainsAny:
       tags: ['Achtung Panzer!']
@@ -37,3 +253,21 @@ clauses:
   - gameSystems: [walking-dead-all-out-war]
     hintContainsAny:
       tags: ['The Walking Dead']
+  - gameSystems: [victory-at-sea]
+    hintContainsAny:
+      tags: ['VICTORY AT SEA*']
+  - gameSystems: [black-seas]
+    hintContainsAny:
+      tags: ['BLACK SEAS*']
+  # MIDDLE-EARTH IS THE ONE REAL GAME-SYSTEM OPPORTUNITY HERE: 126 products carry no system at all.
+  # The apparent impurity is the GRADING SET, not the tag -- `Knights of Dol-Amroth (LOTR - Good)`
+  # is currently labelled `blood-bowl` and `Rangers of Middle-Earth (LOTR - Good)` `necromunda`,
+  # both `gameSystemBasis: code`, i.e. the GW code table mis-segmenting a Middle-earth product
+  # code. The radaddel tag is right in every one of those disagreements. It cannot fix them -- a
+  # rule only fills a hole -- so they will be REPORTED, which is what a maintainer needs to correct
+  # the code table.
+  - gameSystems: [middle-earth]
+    hintContainsAny:
+      tags: ['Middle-Earth - Good', 'Middle-Earth - Evil', 'Middle-Earth - Gelände',
+             'Minas Tirith', 'Rohan', 'Mordor', 'Barad-Dur', 'Isengard', 'Moria', 'Khazad-Dum',
+             'Erebor', 'Lothlorien', 'Angmar', 'Gundabad', 'Arnor', 'Harad']

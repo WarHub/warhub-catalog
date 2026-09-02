@@ -1,10 +1,10 @@
 source: mfr-manticgames
 reason: >-
-  manticgames.com is WooCommerce and emits its category SLUGS, 197 distinct over 2,278 rows. Only
+  manticgames.com is WooCommerce and emits its category SLUGS, 197 distinct over 2,279 rows. Only
   a minority answer the format question: `kings-of-war` (157), `deadzone` (69), `dreadball` (76)
   and the ~120 faction slugs (`basilean`, `nightstalkers`, `forge-fathers`) name a game line or an
   army, and a game line contains rulebooks, dice and terrain as readily as models. Counts from
-  data/evidence/products/mfr-manticgames/observations.jsonl on 2026-08-25.
+  data/evidence/products/mfr-manticgames/observations.jsonl.
 
 
   THE BRAND SLUGS ARE NOT CATEGORIES EITHER, and they are the trap this file exists to avoid.
@@ -20,11 +20,41 @@ reason: >-
   is decided by the narrow one.
 
 
-  The `*-terrain-crate` family is the one place a game line does answer the question -- TerrainCrate
-  is a terrain product line, not a game, so every slug naming it is terrain by construction.
+  THE CATEGORY GRADING SET FOR THIS SOURCE IS 63 PRODUCTS -- every one from `legacy-catalog` where
+  its value is not the declared `miniatures` fill (book 40, terrain 19, paint 4). No retailer
+  states a category for any Mantic product. So the category clauses below are argued from
+  categories.yaml's boundaries plus a read of every name on the shelf, and each note says which
+  names. The gameSystem clauses are a different matter: legacy states one for 1,214 Mantic
+  products and never saw this store's taxonomy, so those figures are real purities.
+
+# A NOVEL IS FILED UNDER EVERY FACTION THAT APPEARS IN IT, and that is why fiction has to be
+# silenced on the game axis before anything else runs. `Containment Protocols (Short Story
+# Anthology)` carries asterian + enforcers + forge-fathers + marauders + plague + rebs + veer-myn,
+# and `Pious (Basilean Navy, Book 1)` carries basilean + basileans-armada + orc-miniatures +
+# orcs-armada. Those shelves are perfectly good evidence about MINIATURES and say nothing about a
+# book: a novel has exactly one setting, which of Deadzone or Firefight it belongs to is not a
+# question with an answer, and a list must not be used to say "both" when the truth is "one,
+# unknown which". Same shape as Games Workshop's Black Library veto, same reason.
+#
+# `warpath-universe` (8 rows) and `kings-of-war-fiction` (28) are the two fiction shelves, and
+# every product that came out multi-valued and wrong carried one of them. The CATEGORY clauses
+# still see these products and still call them `book`; only the game axis is silenced.
+noneOf:
+  - hintContainsAny:
+      categories: [warpath-universe, kings-of-war-fiction]
+    blocks: [gameSystems]
+    note: fiction -- the factions in the story are not the games the book belongs to
 
 clauses:
   # --- paint: the slugs that name a paint RANGE, not a manufacturer ------------------------------
+  #
+  # The COLOUR-NAME slugs first. Mantic files each Vallejo Game Color pot under its own colour, and
+  # only 33 of those 82 rows also carry `game-color` -- so these are not redundant with the clause
+  # below, they reach 49 products it does not.
+  - category: paint
+    hintContainsAny:
+      categories: [green, brown, red, blue, flesh, yellow, white, purple, orange]
+    note: 82 rows, every one a Vallejo Game Color or Extra Opaque colour
   - category: paint
     hintContainsAny: {categories: [paint]}
   - category: paint
@@ -34,13 +64,55 @@ clauses:
     hintContainsAny: {categories: [colour-forge]}
     note: Mantic's own paint range
 
-  # --- terrain: TerrainCrate is a product line whose whole content is terrain --------------------
+  # A PAINT RANGE SLUG IS NOT A PAINT WHEN THE PRODUCT IS COLOURLESS. `medium` holds `Metal
+  # Medium`, `Thinner`, `Glaze Medium` and `Crackle Medium` -- all four, and categories.yaml is
+  # explicit that a medium is `hobby-auxiliary` however its maker files it. Ordered BEFORE the
+  # paint clauses would be wrong (they are narrower, not broader); it is here because a product
+  # carrying `medium` carries no other paint slug.
+  - category: hobby-auxiliary
+    hintContainsAny: {categories: [medium, varnish]}
+    note: 6 rows, all colourless -- the categories.yaml boundary, applied
+
+  # --- things used to build and finish ----------------------------------------------------------
+  - category: hobby-auxiliary
+    hintContainsAny:
+      categories: [brushes, tools, magnets, snow-sand, static-grass, cork-magnetic-sheets, glue,
+                   tools-colour-forge, bases]
+    note: brushes, wet palettes, cutting mats, green stuff, bare bases
+  - category: hobby-auxiliary
+    hintContainsAny: {categories: [effects-and-texture]}
+    note: 25 rows -- Still Water, Sandy Paste, Brush Restorer, Transparent Water
+
+  # --- things read ------------------------------------------------------------------------------
+  - category: book
+    hintContainsAny:
+      categories: [books, books-kings-of-war, books-dreadball, books-armada, books-dungeon-saga,
+                   kings-of-war-fiction]
+    note: 109 rows -- rulebooks, FAQs, campaign books and novels; the 40 legacy `book` products
+          are the only real control this source has and they agree
+
+  # --- things played with -----------------------------------------------------------------------
+  # categories.yaml's `terrain` boundary names this exception in as many words: a neoprene playmat
+  # is a play surface, not modelled scenery. It runs BEFORE the terrain clause so the mats are
+  # taken out of `terraincrate-battlefields` first -- which is what lets that shelf be mapped at
+  # all (see below).
+  - category: game-accessory
+    hintContainsAny: {categories: [neoprene-game-mats]}
+    note: 25 rows, every one a neoprene mat
+  - category: game-accessory
+    hintContainsAny: {categories: [tokens-gems]}
+
+  # --- terrain ----------------------------------------------------------------------------------
   #
-  # `terraincrate-battlefields` (37) IS DELIBERATELY ABSENT from this list, and it is the one slug
-  # here that names a shelf rather than a product line. Mantic's Battlefields range is neoprene
-  # gaming mats, and categories.yaml is explicit that a neoprene playmat is `game-accessory` -- "it
-  # is a play surface, not modelled scenery". Including it put `6ft x 4ft Jungle Neoprene Gaming
-  # Mat` under `terrain`, which is how it was found.
+  # `terraincrate-battlefields` WAS DELIBERATELY ABSENT, and that is now reversed. The exclusion
+  # was right about the failure it found -- `6ft x 4ft Jungle Neoprene Gaming Mat` had been filed
+  # as terrain -- but wrong about the shelf: its 37 rows are `MGTC1xx` modelled scenery
+  # (`Battlefield Walls | 28-32mm Scale Terrain`, `Fences, Barricades, and Hedges`,
+  # `Fantasy Town Centre`, `Military Campsite`), and every mat that motivated the exclusion also
+  # carries `neoprene-game-mats`, which the clause above now takes first. The shelf is terrain with
+  # a mat exception, not the reverse.
+  #
+  # `fantasy` is a terrain shelf despite its name: 61 of its 69 rows are `MGTC*` TerrainCrate.
   - category: terrain
     hintContainsAny:
       categories:
@@ -48,27 +120,152 @@ clauses:
         - modern-terrain-crate
         - terrain-sci-fi-terrain-crate
         - featured-products-terrain-crate
+        - terraincrate-battlefields
+        - terraincrate-dungeons
+        - sci-fi-modular-buildings
+        - terrain
+        - epic-warpath-terrain
+        - fantasy
 
-  # --- which GAME, from Mantic's own shop categories --------------------------------------------
-  # Measured 2026-08-31: 871 of 871 against independently-stated products. Only values that are
-  # 100% pure over at least three stated products are here; the exclusions below are the reason
-  # this table is short rather than the 236 values the store actually uses.
+  # --- board games ------------------------------------------------------------------------------
+  # categories.yaml: "A standalone title that happens to contain miniatures is `board-game`."
+  # Every row under these slugs is a named title or its expansion -- Jim Henson's Labyrinth,
+  # The Umbrella Academy, Worms, Hellboy: The Dice Game, Dungeon Saga Origins, Here's Negan.
+  - category: board-game
+    hintContainsAny:
+      categories: [game-night-board-game, dungeon-crawler-board-games, dice-games,
+                   dice-board-games, featured-dice-board-games, board-game-hellboy,
+                   tabletop-advent-calendars]
+    note: 49 rows; every advent calendar is named "... The Advent Calendar Board Game"
+
+  # --- tickets ----------------------------------------------------------------------------------
+  # THE ONLY REAL `event` SIGNAL IN THE CATALOG. `categories.yaml` predicted this value would be
+  # justified by a Warlord `Ticket` productType and a goblingaming `Local Events` shelf; the raw
+  # taxonomy capture has since landed and NEITHER of those values exists anywhere in the evidence.
+  # This one does: all 44 rows carry an `MGEV*` SKU -- `Clash of Kings 2023 Ticket`,
+  # `Death from the Void - A Firefight Tournament`, `Mantic Open Day 2024`. Two of the 44 are goods
+  # sold alongside (`Clash of Kings 2023 XL Goody Bag`).
+  - category: event
+    hintContainsAny: {categories: [tournaments]}
+    note: 44 rows, all MGEV* SKUs
+
+  # --- models -----------------------------------------------------------------------------------
+  - category: miniatures
+    hintContainsAny:
+      categories: [mantic-points-shop, 15-points, 10-points, teams, mvp, giants, mercenaries,
+                   deals-fantasy, 5e-compatible-dnd-miniatures]
+    note: 226 rows -- alternate-sculpt singles, DreadBall teams and MVPs, Kings of War kits
+
+  # =============================================================================================
+  # WHICH GAME. Measured against `legacy-catalog`, which states a system for 1,214 of these
+  # products and was imported years before this store taxonomy was harvested -- a clean control.
+  #
+  # DEADZONE AND FIREFIGHT SHARE A MODEL RANGE, AND THIS IS WHERE `gameSystems` EARNS ITS PLURAL.
+  # The two games are distinct -- their LINE shelves are 100% pure against legacy
+  # (`getting-started-deadzone` 33/33, `firefight-getting-started` 22/22, `firefight-army-deals`
+  # 14/14, `firefight-rules` 4/4) -- but every FACTION shelf in the sci-fi range grades near a coin
+  # flip, in both directions, with the sister game as the only contaminant:
+  #
+  #     firefight-enforcers      53.1% (firefight 17, deadzone 15)
+  #     firefight-gcps           54.2% (deadzone 13, firefight 11)
+  #     mazon-labs-firefight     55.0% (deadzone 11, firefight  9)
+  #     firefight-plague         55.2% (deadzone 16, firefight 13)
+  #     firefight-veer-myn       55.6% (firefight 10, deadzone  8)
+  #     firefight-asterians      57.1% (deadzone 20, firefight 15)
+  #     firefight-forge-fathers  59.3% (deadzone 16, firefight 11)
+  #     firefight-marauders      64.3% (firefight 18, deadzone 10)
+  #
+  # THE CONTROL RULES OUT A MEASUREMENT ARTEFACT: on the same grading set, by the same method, the
+  # FANTASY faction slugs are flawless -- kings-of-war 148/148, trident-realm-of-neritica 45/45,
+  # xirkaali 32/32, orc-miniatures 31/31, salamanders 29/29, halfling-miniatures 28/28. The
+  # impurity is not noise in the taxonomy; it is one model box being sold into two games, and 47
+  # rows carry a Deadzone shelf and a Firefight shelf at once. Under a single-valued field the
+  # honest options were to pick one and be wrong half the time, or to refuse 114 products.
+  #
+  # THIS IS THE CLAUSE THAT MADE THE FILL RULE GENERALISE. A rule used to be allowed to fill an
+  # empty field and nothing else, so where legacy had already picked one of the two -- which is
+  # most of them -- the clause could only report a disagreement, and 114 products went on
+  # asserting half of what their manufacturer says. On a set-valued field there IS a third
+  # possibility between filling and contradicting: the rule's set CONTAINS everything the catalog
+  # already claims, so adding the second game contradicts nothing. See
+  # `categorize/stage.py::_apply_game_systems` -- the test is containment, and it subsumes the
+  # empty case rather than sitting beside it.
+  - gameSystems: [deadzone, firefight]
+    hintContainsAny:
+      categories: [firefight-enforcers, firefight-gcps, firefight-plague, firefight-veer-myn,
+                   firefight-asterians, firefight-forge-fathers, firefight-marauders,
+                   mazon-labs-firefight, nightstalkers-firefight-factions,
+                   enforcers, plague, veer-myn, forge-fathers, gcps, marauders, asterian, rebs,
+                   nameless, mazon-labs]
+    note: the shared sci-fi model range -- FACTION shelves only, never an accessories shelf
+
+  # The LINE shelves, which are pure and single-valued.
+  - gameSystems: [deadzone]
+    hintContainsAny:
+      categories: [getting-started-deadzone, featured-products-deadzone, deadzone-mantic-points,
+                   deadonze-matsudan]
+  - gameSystems: [firefight]
+    hintContainsAny:
+      categories: [firefight-rules, firefight-getting-started, firefight-army-deals,
+                   featured-firefight]
+
   - gameSystems: [kings-of-war]
     hintContainsAny:
-      categories: [kings-of-war, kings-of-war-fiction, kings-of-war-undead, deals-fantasy,
+      categories: [kings-of-war, kings-of-war-undead, deals-fantasy,
                    dwarfs-miniatures, basilean, elves, abyssal-dwarf, northern-alliance-kings-of-war,
                    nightstalkers, orc-miniatures, salamanders, xirkaali, forces-of-nature,
-                   forces-of-the-abyss, goblin-miniatures, trident-realm-of-neritica, twilight-kin]
+                   forces-of-the-abyss, goblin-miniatures, trident-realm-of-neritica, twilight-kin,
+                   4th-edition-launch, getting-started-kings-of-war, empire-of-dust,
+                   army-deals-kings-of-war, kings-of-war-champions,
+                   books-kings-of-war, halfling-miniatures, ogre-miniatures, kings-of-war-mantic-points,
+                   kings-of-war-featured-products, riftforged-orcs]
+  - gameSystems: [dreadball]
+    hintContainsAny:
+      categories: [dreadball, teams, mvp, books-dreadball,
+                   featured-products-dreadball, getting-started-dreadball]
+    note: 165 graded, 100% except `dreadball` itself at 98.6%
+  - gameSystems: [armada]
+    hintContainsAny:
+      categories: [armada, getting-started-armada, books-armada, expansions-armada, orcs-armada,
+                   dwarfs-armada, basileans-armada, empire-of-dust-armada,
+                   twilight-kin-armada, na-varangur-armada, abyssal-dwarfs-armada, elves-armada,
+                   trident-realm-armada, salamanders-armada]
+    note: 108 graded, 100%
   - gameSystems: [halo-flashpoint]
     hintContainsAny:
       categories: [halo-flashpoint-latest-releases, halo-flashpoint-getting-started,
-                   halo-flashpoint-banished, unsc]
-  - gameSystems: [deadzone]
-    hintContainsAny:
-      categories: [getting-started-deadzone]
-  - gameSystems: [firefight]
-    hintContainsAny:
-      categories: [firefight-rules]
+                   halo-flashpoint-banished, unsc, halo-flashpoint,
+                   halo-flashpoint-accessories-terrain, halo-flashpoint-organised-play]
   - gameSystems: [walking-dead-all-out-war]
     hintContainsAny:
-      categories: [all-out-war-essentials, walking-dead-collections]
+      categories: [all-out-war-essentials, walking-dead-collections, all-out-war-singles]
+    note: 94 graded, 100%
+
+  # NEITHER AN ACCESSORIES SHELF NOR A FICTION SHELF DECIDES A GAME, and both exclusions were
+  # found by running the clauses and reading what came out multi-valued rather than by argument.
+  #
+  #   `Mantic Tape Measure` came out as armada + deadzone + firefight + kings-of-war, because it
+  #   sits on all four accessories shelves. Each of those is individually true -- it IS sold for
+  #   Kings of War -- and their union is false: a tape measure belongs to no game, and the honest
+  #   value for it is an empty list with `gameSystemsBasis: not-applicable`. An accessories shelf
+  #   says a thing is USED WITH a game, which is a different claim from membership, so
+  #   `accessories-kings-of-war` (23 graded, 100%), `accessories-dreadball` (14/14),
+  #   `armada-accessories` (5/5) and `accessories-firefight` are all out despite grading clean.
+  #
+  #   `Pious (Basilean Navy, Book 1) - eBook` came out as armada + kings-of-war, from
+  #   `kings-of-war-fiction` and `books-armada`. A novel has exactly ONE setting; which one is not
+  #   recorded anywhere, and that is the "exactly one, unknown which" case a list must never
+  #   model -- the same shape as GW's Black Library. `kings-of-war-fiction` decides `book` and
+  #   nothing else; `books-armada` stays, because an Armada rulebook is an Armada product.
+  #
+  # NOT MAPPED TO A GAME, with the measurement: `mantic-points-shop` grades 46.9% over 32 products
+  # (deadzone 15 / kings-of-war 11 / walking-dead 6), `tournaments` 38.2% over 34 (it is the
+  # `event` signal above, not a system one), `deals` 60% over 5, and `warpath-universe` 66.7% over
+  # 3 -- all fiction. These are shelves that cut across the range, and their impurity has none of
+  # the two-games-one-box signature the sci-fi factions have.
+  #
+  # TWO GAMES THIS TAXONOMY NAMES AND THE CATALOG CANNOT: `Warpath` (18 product names say it
+  # plainly; legacy has no such value and folds them into deadzone/firefight) and `Vanguard` (59
+  # MGVA* rows, folded into kings-of-war). Both are deliberate omissions rather than oversights --
+  # minting a slug for a retired game is a taxonomy decision, and it is recorded here so the next
+  # person meets the question rather than the silence.

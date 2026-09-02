@@ -81,6 +81,11 @@ clauses:
     hintEquals: {productType: Basing Materials}
   - category: hobby-auxiliary
     hintEquals: {productType: Bases}
+  - category: hobby-auxiliary
+    hintEquals: {productType: 'Model Bases'}
+    note: >-
+      the store uses both spellings for the same shelf -- `Bases` on 77 rows and `Model Bases` on
+      2, and only the first was mapped
     note: a blank base is a component of the hobby, not a model -- categories.yaml `miniatures`
   - category: hobby-auxiliary
     hintEquals: {productType: Hobby Tools}
