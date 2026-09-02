@@ -21,8 +21,10 @@ public sealed record CanonicalProduct
     public string? Ean { get; init; }
     public string? EanConfidence { get; init; }
     public List<string>? AdditionalEans { get; init; }   // extra barcodes of a repackaged product
+    public List<string>? AdditionalCodes { get; init; }  // the maker's other codes for this same box
     public List<string>? Supersedes { get; init; }       // retired product records this one replaces
     public string? SupersededBy { get; init; }           // the current record replacing this retired one
+    public string? BundleOf { get; init; }               // the product this web bundle contains
     // Every game this product belongs to, as slugs. A LIST because membership is one: GW's own
     // store shelves 183 products under two systems. `List<string>` and not `IReadOnlyList<string>`
     // deliberately -- YamlDotNet SERIALIZES the interface happily and has no node deserializer for

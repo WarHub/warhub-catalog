@@ -1,29 +1,29 @@
 summary:
-  products: 27246
-  undecided: 1431
+  products: 27262
+  undecided: 1413
   byBasis:
-    code: 7135
-    lexicon: 322
-    mapped: 16370
+    code: 7143
+    lexicon: 309
+    mapped: 16409
     paint-barcode: 9
     stated: 1979
-    unknown: 1431
-  decidedThisRun: 23836
+    unknown: 1413
+  decidedThisRun: 23870
   gameSystemsByBasis:
     classified: 1510
-    code: 3950
-    mapped: 2390
+    code: 3969
+    mapped: 2395
     not-applicable: 7380
     override: 78
     setting: 842
-    stated: 9180
-    unknown: 1916
+    stated: 9193
+    unknown: 1895
   settingsByBasis:
     code: 831
-    derived: 16989
+    derived: 17026
     mapped: 11
     not-applicable: 7451
-    unknown: 1964
+    unknown: 1943
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -451,12 +451,6 @@ conflicts:
   - entity: warlord-games/453210803
     type: gameSystem-disagreement
     detail: catalog says bolt-action (stated); warlord-games code~^45\d{7}$ says konflikt-47
-  - entity: warlord-games/482010002
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
-  - entity: warlord-games/482010003
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
   - entity: warlord-games/993019903
     type: gameSystem-disagreement
     detail: catalog says bolt-action (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
@@ -466,9 +460,6 @@ conflicts:
   - entity: warlord-games/WGP-BAA-02
     type: gameSystem-disagreement
     detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
-  - entity: warlord-games/WGR-ARMY2
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~napoleonic-wars-1789-1815,napoleonic-wars says black-powder
   - entity: wyrd-games/WYR40009
     type: gameSystem-disagreement
     detail: catalog says malifaux (stated); mfr-wyrd-store tags~The Other Side,ToS,ToS-Unit,ToS-Character,Abyssinia,King's Empire,Gibbering Hordes,Cult of the Burning Man says the-other-side
@@ -523,8 +514,6 @@ unmapped:
       wouldDecide: 8
     - value: categories=vallejo
       wouldDecide: 8
-    - value: categories=dungeon-saga
-      wouldDecide: 7
     - value: categories=halo-flashpoint-banished
       wouldDecide: 7
     - value: categories=northern-alliance-kings-of-war
@@ -545,6 +534,8 @@ unmapped:
       wouldDecide: 7
     - value: categories=halo-flashpoint-getting-started
       wouldDecide: 7
+    - value: categories=dungeon-saga
+      wouldDecide: 6
     - value: categories=4th-edition-launch
       wouldDecide: 6
     - value: categories=salamanders
@@ -815,14 +806,14 @@ unmapped:
     - value: vendor=The Army Painter
       wouldDecide: 1
   ret-radaddel:
-    - value: tags=Warlord Games
-      wouldDecide: 79
-    - value: vendor=Warlord Games
-      wouldDecide: 79
     - value: tags=Games Workshop
       wouldDecide: 67
     - value: vendor=Games Workshop
       wouldDecide: 67
+    - value: tags=Warlord Games
+      wouldDecide: 63
+    - value: vendor=Warlord Games
+      wouldDecide: 63
     - value: tags=Atomic Mass Games
       wouldDecide: 50
     - value: vendor=Atomic Mass Games
@@ -867,8 +858,6 @@ unmapped:
       wouldDecide: 10
     - value: tags=AoS Grundboxen und Regelbücher
       wouldDecide: 8
-    - value: tags=Starter & Zubehör Konflikt 47
-      wouldDecide: 8
     - value: tags=40K Zubehör
       wouldDecide: 7
     - value: tags=Summer Sale
@@ -876,6 +865,8 @@ unmapped:
     - value: tags=Mantic Games
       wouldDecide: 7
     - value: vendor=Mantic Games
+      wouldDecide: 7
+    - value: tags=Starter & Zubehör Konflikt 47
       wouldDecide: 7
     - value: tags=Space Marines
       wouldDecide: 6
@@ -887,14 +878,14 @@ unmapped:
       wouldDecide: 5
     - value: tags=DECALS & GELÄNDE*
       wouldDecide: 5
-    - value: tags=BA Sonstige Achsenmächte
-      wouldDecide: 5
     - value: tags=Ogor Mawtribes
-      wouldDecide: 4
-    - value: tags=BA Starter Bolt Action
       wouldDecide: 4
     - value: tags=Boxen Pike & Shotte
       wouldDecide: 4
+    - value: tags=AK-EINZELFARBEN*
+      wouldDecide: 3
+    - value: tags=AK-Hilfsmittel
+      wouldDecide: 3
   ret-tistaminis:
     - value: vendor=GW-OOP
       wouldDecide: 28

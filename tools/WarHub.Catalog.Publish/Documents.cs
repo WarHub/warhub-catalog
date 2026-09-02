@@ -37,6 +37,10 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(0)] public required string Manufacturer { get; init; }
     [JsonPropertyOrder(1)] public string? Ean { get; init; }
     [JsonPropertyOrder(1)] public IReadOnlyList<string>? AdditionalEans { get; init; }
+    // The maker's OTHER codes for this same box -- a re-code that kept the barcode, or a second
+    // store of the maker's numbering it differently. `productCode` stays the single canonical code;
+    // these still name the product. Null (omitted) for the single-code majority.
+    [JsonPropertyOrder(1)] public IReadOnlyList<string>? AdditionalCodes { get; init; }
     [JsonPropertyOrder(2)] public required string Name { get; init; }
     // LABELS, one per game system this product belongs to, in the canonical slug order the
     // resolver wrote. Null rather than `[]` when there are none, so a systemless product publishes
@@ -82,6 +86,10 @@ internal sealed record ProductRecord
     // unchanged, and a retired record's status is still whatever the evidence says it is.
     [JsonPropertyOrder(18)] public IReadOnlyList<string>? Supersedes { get; init; }
     [JsonPropertyOrder(19)] public string? SupersededBy { get; init; }
+    // The product this web bundle contains -- a maker's "rulebook with special miniature" listing
+    // that quotes the book's ISBN. The bundle publishes no barcode of the book's and points at it.
+    // Null (omitted) for everything that is not a declared bundle.
+    [JsonPropertyOrder(19)] public string? BundleOf { get; init; }
     // Cross-catalog seam: the paint records that share a barcode with this product. Plural
     // because neither side is 1:1 -- one colour ships as many SKUs, and a barcode can be
     // carried by more than one record on either side. Null (omitted) when there is no link.

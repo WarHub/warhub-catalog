@@ -1871,6 +1871,29 @@ products:
     evidence:
       - mfr-manticgames:551461
       - ret-tistaminis:epic-warpath-maven-iv-command-tank-single-resin-super-heavy
+  - id: mantic-games/KSEWF101
+    name: Epic Warpath Forge Father Reinforcements
+    manufacturer: mantic-games
+    productCode: KSEWF101
+    sku: KSEWF101
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 80.0
+    priceCad: 110.0
+    url: https://www.manticgames.com/epic-warpath/forge-fathers/reinforcements/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2025/08/forge-father-reinforcements-image-updated-version.webp
+    evidence:
+      - mfr-manticgames:520840
+      - ret-tistaminis:epic-warpath-forge-father-reinforcement-pack
   - id: mantic-games/KSEWF401
     name: Epic Warpath Forge Father Nidavellir Drop-Fortress
     manufacturer: mantic-games
@@ -2764,6 +2787,23 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2023/12/umbrella-academy-board-game-collectors-edition-contents.webp
     evidence:
       - mfr-manticgames:469486
+  - id: mantic-games/KSWO101
+    name: 'Worms™: The Board Game Collector’s Edition (DISCONTINUED)'
+    manufacturer: mantic-games
+    productCode: KSWO101
+    sku: KSWO101
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 135.0
+    url: https://www.manticgames.com/dice-board-games/worms-the-board-game/worms-collectors-edition/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/10/mantic-worms-the-boardgame-collectors-edition-contents-full.webp
+    evidence:
+      - mfr-manticgames:487743
   - id: mantic-games/KSWO105
     name: 'Worms™: The Board Game Deluxe Play Mat'
     manufacturer: mantic-games
@@ -10487,6 +10527,32 @@ products:
     evidence:
       - legacy-catalog:mantic-games/walking-dead-all-out-war/general/the-walking-dead-all-out-war-anthology-digital
       - mfr-manticgames:486378
+  - id: mantic-games/MGDG226
+    name: Clash of Kings 2025 Edition (Latest Rules Updates) – Digital – DISCONTINUED
+    manufacturer: mantic-games
+    productCode: MGDG226
+    sku: MGDG226
+    gameSystems:
+      - kings-of-war
+    faction: general
+    gameSystemsBasis: stated
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    packaging: single
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 20.0
+    priceUsd: 20.0
+    url: https://www.manticgames.com/kings-of-war/clash-of-kings-2025-digital/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/clash-of-kings-2025-isolated-square.webp
+    description: '- 1 x Clash of Kings 2025 Edition PDF Book'
+    evidence:
+      - legacy-catalog:mantic-games/kings-of-war/general/clash-of-kings-2025-edition-latest-rules-updates-digital-discontinued
+      - mfr-manticgames:489096
   - id: mantic-games/MGDG227
     name: The Final Rush (Dreadball, Book 2) – eBook
     manufacturer: mantic-games
@@ -11730,13 +11796,16 @@ products:
     manufacturer: mantic-games
     productCode: MGDS27
     sku: MGDS27
+    ean: '5060469660455'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -11745,6 +11814,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Dungeon-Critters.jpeg
     evidence:
       - mfr-manticgames:1263
+      - ret-gamenerdz:/dungeon-saga-dungeon-critters-pack
   - id: mantic-games/MGDS50
     name: 15 Mantic Points Legendary Mortibris
     manufacturer: mantic-games
@@ -14865,26 +14935,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/deadzone/general/mazon-labs-security-patrol-booster
       - mfr-manticgames:419602
-  - id: mantic-games/MGEMGDS27
-    name: 'Dungeon Saga: Dungeon Critters Pack'
-    manufacturer: mantic-games
-    productCode: MGEMGDS27
-    sku: MGEMGDS27
-    ean: '5060469660455'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-dungeon-critters-pack
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-dungeon-critters-pack
   - id: mantic-games/MGESS18
     name: Mantic Tape Measure *DISCONTINUED*
     manufacturer: mantic-games
@@ -16596,10 +16646,8 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/07/ewp-forge-father-hrungnir-magma-destroyer.webp
     evidence:
       - mfr-manticgames:520834
-      - mfr-manticgames:520840
       - ret-goblingaming:forge-father-hrungnir-magma-destroyer-epic-warpath
       - ret-tistaminis:epic-warpath-forge-father-hrungnir-magma-destroyer
-      - ret-tistaminis:epic-warpath-forge-father-reinforcement-pack
   - id: mantic-games/MGEWG101
     name: Epic Warpath GCPS Core Army
     manufacturer: mantic-games
@@ -26897,10 +26945,10 @@ products:
     manufacturer: mantic-games
     productCode: MGKWK301
     sku: MGKWK301
-    ean: '5060469660400'
+    ean: '5060469668413'
     eanConfidence: conflicted
     additionalEans:
-      - '5060469668413'
+      - '5060469660400'
     gameSystems:
       - kings-of-war
     faction: general
@@ -28732,9 +28780,7 @@ products:
     description: '- 1 x Clash of Kings 2025 Edition Softback Book'
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/clash-of-kings-2025-3rd-edition-book
-      - legacy-catalog:mantic-games/kings-of-war/general/clash-of-kings-2025-edition-latest-rules-updates-digital-discontinued
       - mfr-manticgames:485315
-      - mfr-manticgames:489096
       - ret-radaddel:/clash-of-kings-2025
       - ret-radaddel:clash-of-kings-2025
   - id: mantic-games/MGKWM126
@@ -29684,6 +29730,29 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/05/nature-avatar-of-the-father-isolated.webp
     evidence:
       - mfr-manticgames:547738
+  - id: mantic-games/MGKWN206
+    name: Forces of Nature Gladewalker Druid
+    manufacturer: mantic-games
+    productCode: MGKWN206
+    sku: MGKWN206
+    ean: '5060924988148'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 12.5
+    url: https://www.manticgames.com/kings-of-war/forces-of-nature/gladewalker-druid/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/05/nature-gladewalker-druid-2026-isolated.webp
+    evidence:
+      - mfr-manticgames:546557
   - id: mantic-games/MGKWN207
     name: Forces of Nature Tribal Chieftain
     manufacturer: mantic-games
@@ -32241,10 +32310,10 @@ products:
     manufacturer: mantic-games
     productCode: MGKWR204
     sku: MGKWR204
-    ean: '5060469660615'
+    ean: '5060469668222'
     eanConfidence: conflicted
     additionalEans:
-      - '5060469668222'
+      - '5060469660615'
     gameSystems:
       - kings-of-war
     faction: general
@@ -33047,10 +33116,10 @@ products:
     manufacturer: mantic-games
     productCode: MGKWR407
     sku: MGKWR407
-    ean: '5060924983860'
-    eanConfidence: conflicted
+    ean: '5060924987080'
+    eanConfidence: confirmed
     additionalEans:
-      - '5060924987080'
+      - '5060924983860'
     gameSystems:
       - kings-of-war
     faction: general
@@ -40859,8 +40928,6 @@ products:
     manufacturer: mantic-games
     productCode: MGVAF201
     sku: MGVAF201
-    ean: '5060924988148'
-    eanConfidence: confirmed
     gameSystems:
       - kings-of-war
     faction: general
@@ -40885,7 +40952,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/glade-walker-druid
       - mfr-manticgames:20609
-      - mfr-manticgames:546557
   - id: mantic-games/MGVAF202
     name: Centaur Chief
     manufacturer: mantic-games
@@ -56592,7 +56658,6 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/08/worms-retail-box-low-angle-left.webp
     evidence:
       - mfr-manticgames:484102
-      - mfr-manticgames:487743
   - id: mantic-games/MGWO103
     name: 'Worms™: The Board Game – 30th Anniversary Edition'
     manufacturer: mantic-games

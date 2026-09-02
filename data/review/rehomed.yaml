@@ -4,6 +4,11 @@
 # of conflicts.yaml because that file is a working set: each row there is something a human decides,
 # and deciding them all should empty it. These never could be emptied that way.
 #
+# `bundle-shared-barcode` -- a row filed under a DECLARED bundle's code (matches.yaml `bundles`)
+#   carries the barcode of the product inside it. resolve/join.py leaves the barcode with the
+#   component and drops it from the bundle's row, so two products stay two records and the barcode
+#   scans to the thing it is printed on. It lasts as long as the maker's page quotes it.
+#
 # `supersession-stale-code` -- a shop lists one of a DECLARED supersession pair by the RETIRED
 #   product code while the box it stocks scans as the CURRENT barcode. resolve/join.py places the
 #   listing by its BARCODE (the barcode identifies the box; a shop's SKU is its own catalogue
@@ -99,6 +104,206 @@ rehomed:
     listed_code: '99121808004'
     barcode_code: '99122608005'
     manufacturer: games-workshop
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/hail-caesar/general/caesar-s-gallic-wars-hail-caesar-supplement-defend-the-eagle-special-miniature
+    ean: '9781915319791'
+    bundle: warlord-games/101010010
+    component: warlord-games/101010007
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:caesars-gallic-wars-hail-caesar-supplement-defend-the-eagle-special-miniature
+    ean: '9781915319791'
+    bundle: warlord-games/101010010
+    component: warlord-games/101010007
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/hail-caesar/general/once-and-future-king-hail-caesar-supplement-with-agravain-special-miniature
+    ean: '9781911281962'
+    bundle: warlord-games/109913203
+    component: warlord-games/101010009
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:once-and-future-king-hail-caesar-supplement-with-agravain-special-miniature
+    ean: '9781911281962'
+    bundle: warlord-games/109913203
+    component: warlord-games/101010009
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/hail-caesar/general/hail-caesar-rulebook-2nd-edition-richard-i-the-lionheart-special-figure
+    ean: '9781915319975'
+    bundle: warlord-games/109930002
+    component: warlord-games/101010004
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:copy-of-hail-caesar-rulebook-2nd-edition-richard-i-the-lionheart-special-figure
+    ean: '9781915319975'
+    bundle: warlord-games/109930002
+    component: warlord-games/101010004
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/hail-caesar/general/the-pyrrhic-wars-hail-caesar-supplement-with-pyrrhus-on-foot-book-miniature
+    ean: '9781915319814'
+    bundle: warlord-games/109940001
+    component: warlord-games/101010008
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:the-pyrrhic-wars-hail-caesar-supplement-with-pyrrhus-on-foot-book-miniature
+    ean: '9781915319814'
+    bundle: warlord-games/109940001
+    component: warlord-games/101010008
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/pike-and-shotte/general/wars-of-the-samurai-pike-shotte-supplement-with-yasuke-the-black-samurai-special-miniature
+    ean: '9781915319630'
+    bundle: warlord-games/209914001
+    component: warlord-games/201014000
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:wars-of-the-samurai-pike-shotte-supplement-with-yasuke-the-black-samurai-special-miniature
+    ean: '9781915319630'
+    bundle: warlord-games/209914001
+    component: warlord-games/201014000
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:the-highest-throne-the-ottoman-wars-pike-shotte-supplement-with-kara-mustafa-pasha-book-miniature
+    ean: '9781915319302'
+    bundle: warlord-games/209915007
+    component: warlord-games/201015001
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/black-powder/french/a-clash-of-eagles
+    ean: '9781911281344'
+    bundle: warlord-games/309910005
+    component: warlord-games/301010002
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/general/black-powder-supplement-the-last-argument-of-kings
+    ean: '9780956358127'
+    bundle: warlord-games/309910011
+    component: warlord-games/WG-BP-002
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/general/blood-on-the-nile-sudan-black-powder-supplement
+    ean: '9780992661649'
+    bundle: warlord-games/309910012
+    component: warlord-games/WG-BP008
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:blood-on-the-nile-sudan-black-powder-supplement
+    ean: '9780992661649'
+    bundle: warlord-games/309910012
+    component: warlord-games/WG-BP008
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:black-powder-ii-rulebook-1
+    ean: '9781911281429'
+    bundle: warlord-games/309910019
+    component: warlord-games/301010003
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:dark-and-bloody-ground-black-powder-supplement
+    ean: '9780992661670'
+    bundle: warlord-games/309913204
+    component: warlord-games/301013801
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:into-the-valley-of-death-the-crimean-war-black-powder-supplement-with-the-trooper-special-miniature
+    ean: '9781915319470'
+    bundle: warlord-games/309913810
+    component: warlord-games/301013802
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/epic-black-powder/british/black-powder-epic-battles-revolution-with-george-washington-special-figure
+    ean: '5060917994699'
+    bundle: warlord-games/319913401
+    component: warlord-games/311513402
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/british/bolt-action-compendium-and-operation-rosselsprung-1944-special-figure
+    ean: '9781915319722'
+    bundle: warlord-games/409910065
+    component: warlord-games/401010052
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:bolt-action-compendium-and-operation-rosselsprung-1944-special-figure
+    ean: '9781915319722'
+    bundle: warlord-games/409910065
+    component: warlord-games/401010052
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/british/armies-of-great-britain-with-capt-john-henry-cound-brunt-vc-mc-special-miniature
+    ean: '9781472863911'
+    bundle: warlord-games/409911028
+    component: warlord-games/401011001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-great-britain-with-capt-john-henry-cound-brunt-vc-mc-special-miniature
+    ean: '9781472863911'
+    bundle: warlord-games/409911028
+    component: warlord-games/401011001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-germany-third-edition-with-josef-sepp-allerberger-special-figure
+    ean: '9781472863836'
+    bundle: warlord-games/409912058
+    component: warlord-games/401012002
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-the-commonwealth-with-havildar-umrao-singh-vc
+    ean: '9781472864079'
+    bundle: warlord-games/409912601
+    component: warlord-games/401011201
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/soviet/armies-of-the-soviet-union-third-edition-with-olga-kovalyova-special-miniature
+    ean: '9781472863973'
+    bundle: warlord-games/409914009
+    component: warlord-games/401014001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-the-soviet-union-third-edition-with-olga-kovalyova-special-miniature
+    ean: '9781472863973'
+    bundle: warlord-games/409914009
+    component: warlord-games/401014001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-italy-with-desert-lightning-book-miniature
+    ean: '9781472864031'
+    bundle: warlord-games/409915801
+    component: warlord-games/401015801
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/japanese/armies-of-imperial-japan-with-into-the-jungle-hiroo-onoda-book-miniature
+    ean: '9781472864017'
+    bundle: warlord-games/409916006
+    component: warlord-games/401016001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-imperial-japan-with-into-the-jungle-hiroo-onoda-book-miniature
+    ean: '9781472864017'
+    bundle: warlord-games/409916006
+    component: warlord-games/401016001
+  - type: bundle-shared-barcode
+    key: ret-tistaminis:bolt-action-armies-of-imperial-japan-with-into-the-jungle-hiroo-onoda-book-miniature
+    ean: '9781472864017'
+    bundle: warlord-games/409916006
+    component: warlord-games/401016001
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/bolt-action/general/armies-of-the-united-states-third-edition-with-james-jake-mcniece-special-figure
+    ean: '9781472863874'
+    bundle: warlord-games/4099300010
+    component: warlord-games/401013001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:armies-of-the-united-states-third-edition-with-james-jake-mcniece-special-figure
+    ean: '9781472863874'
+    bundle: warlord-games/4099300010
+    component: warlord-games/401013001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:konflikt-47-festung-europa-operation-touchdown-book-miniature
+    ean: '9781915319272'
+    bundle: warlord-games/459910001
+    component: warlord-games/451010004
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/konflikt-47/british/konflikt-47-rulebook-with-special-miniature
+    ean: '9781915319432'
+    bundle: warlord-games/459910010
+    component: warlord-games/451010003
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:konflikt-47-rulebook-with-special-miniature
+    ean: '9781915319432'
+    bundle: warlord-games/459910010
+    component: warlord-games/451010003
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:victory-at-sea-hardback-book
+    ean: '9781911281658'
+    bundle: warlord-games/741010003
+    component: warlord-games/741010001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:cruel-seas-starter-set
+    ean: '5060393709671'
+    bundle: warlord-games/789910004
+    component: warlord-games/781510001
+  - type: bundle-shared-barcode
+    key: legacy-catalog:warlord-games/black-seas/general/black-seas-rulebook
+    ean: '9781911281504'
+    bundle: warlord-games/799910002
+    component: warlord-games/791010001
+  - type: bundle-shared-barcode
+    key: mfr-warlord-store:master-commander-starter-set
+    ean: '5060572505155'
+    bundle: warlord-games/799910003
+    component: warlord-games/791510001
   - type: shelf-manufacturer-corrected
     key: legacy-catalog:warlord-games/black-powder/american/american-civil-war-battle-set
     name: American Civil War Battle Set

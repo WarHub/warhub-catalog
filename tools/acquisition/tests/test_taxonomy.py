@@ -120,3 +120,17 @@ def test_army_painter_codes_its_tool_and_brush_prefixes() -> None:
     assert taxonomy.normalize_code("army-painter", "TL5034-SINGLE") is None
     # Still the one row left uncoded on purpose rather than widening further to chase it.
     assert taxonomy.normalize_code("army-painter", "75005") is None
+
+
+def test_the_makers_own_suffixes_and_the_last_retailer_spellings_2026_09_02() -> None:
+    """Warlord's digital editions are the maker's own distinct codes; gamenerdz's `WLG` prefix, its
+    one un-padded Godtear number and its `MGE` prefix are spellings of the maker's codes."""
+    taxonomy = Taxonomy.load(Path(__file__).resolve().parents[3] / "data" / "catalog" / "taxonomy")
+    assert taxonomy.normalize_code("warlord-games", "401011001_PDF") == "401011001_PDF"
+    assert taxonomy.normalize_code("warlord-games", "401011001_eBook") == "401011001_EBOOK"
+    assert taxonomy.normalize_code("warlord-games", "311513402K") == "311513402"
+    assert taxonomy.normalize_code("warlord-games", "WLG502412005") == "502412005"
+    assert taxonomy.normalize_code("steamforged-games", "SFGGT-20") == "SFGT-020"
+    assert taxonomy.normalize_code("steamforged-games", "SFGT-020") == "SFGT-020"
+    assert taxonomy.normalize_code("mantic-games", "MGEMGWD108") == "MGWD108"
+    assert taxonomy.normalize_code("mantic-games", "MGEWF401") == "MGEWF401"

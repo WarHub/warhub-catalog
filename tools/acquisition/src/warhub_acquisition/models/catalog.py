@@ -19,6 +19,12 @@ class CanonicalProduct(BaseModel):
     # the published `ean` is unchanged for existing consumers. A confirmed barcode displaced
     # by a repackaging join lands here rather than being silently dropped (see resolve_ean).
     additionalEans: list[str] = Field(default_factory=list)
+    # THE MAKER'S OTHER CODES FOR THIS SAME BOX -- a re-code that kept the barcode (Warlord's
+    # 302412408 -> 302412504), or a second store of the maker's numbering the same product
+    # differently. Declared in matches.yaml `codeAliases`; the record's id and `productCode` are the
+    # canonical code, and these still name it. Distinct from `supersedes`, where the retired code
+    # had a barcode of its own and keeps a record of its own.
+    additionalCodes: list[str] = Field(default_factory=list)
     # Archival lineage, from matches.yaml `supersessions`. Both records are published: the retired
     # one keeps its own productCode/ean/name and points forward via `supersededBy`; the surviving
     # one lists its predecessors in `supersedes`. Deliberately NOT expressed as a `status` value --
@@ -26,6 +32,13 @@ class CanonicalProduct(BaseModel):
     # exclude exactly the archival records this is meant to keep reachable.
     supersedes: list[str] = Field(default_factory=list)
     supersededBy: str | None = None
+    # THE PRODUCT THIS WEB BUNDLE CONTAINS, as an entity id -- a link like `supersededBy`, declared
+    # in matches.yaml `bundles`. Warlord sells a rulebook and a web-only "rulebook with special
+    # miniature" under two codes and puts the book's ISBN on both; the bundle publishes no barcode
+    # of the book's and says which book it is. NOT `contentSkus`: that field is the input of the
+    # paint-set contents relation (data/catalog/set-contents/, joined against the paint archive),
+    # and a product code in it would be searched for as a paint.
+    bundleOf: str | None = None
     # WHICH GAMES THIS PRODUCT BELONGS TO. A LIST, because membership genuinely is one -- a
     # Custodes kit is played in both The Horus Heresy and Warhammer 40,000, a Tzeentch daemon kit
     # in both Age of Sigmar and Warhammer 40,000, and a Kill Team box is a Warhammer 40,000 product

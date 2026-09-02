@@ -77,6 +77,9 @@ manufacturers:
       - match: 'MGKW(VA[A-Z]\d.*)'
         replace: 'MG\1'
         reason: gamenerdz files Vanguard under Kings of War, `MGKWVAK102` for Mantic's `MGVAK102`; 3 rows
+      - match: 'MGE(MG[A-Z]+\d.*)'
+        replace: '\1'
+        reason: gamenerdz's `MGE` in front of a whole Mantic code (`MGEMGWD108`), 2 rows; not a strip, because `MGEWF401` is a real code
     vendorNames: [Mantic Games, Mantic]
   - slug: para-bellum
     name: Para Bellum
@@ -100,6 +103,9 @@ manufacturers:
       - match: 'SFSF-([A-Z]{2})(.*)'
         replace: 'SF\1-\2'
         reason: gamenerdz's doubled company prefix on the Warmachine range
+      - match: 'SF([A-Z]{2})-(\d{2})'
+        replace: 'SF\1-0\2'
+        reason: the maker zero-pads to three digits on every code; one gamenerdz row (`SFGGT-20`) did not
     # Steamforged tags vendor per in-house game line rather than by company name, and since
     # 2026-08 those lines are split across TWO of its own Shopify stores -- mfr-steamforged
     # (steamforged.com) and mfr-warmachine (warmachine.gg). One vendorNames list spans both: a
@@ -133,7 +139,12 @@ manufacturers:
     # on 89 store rows and the frozen import, `403011012` and `WGB-BI-35` on every retailer.
     # Measured 2026-09-02, the store carries NO pair of codes differing only by the `K`, so the
     # named groups leave it out and 31 published records stop holding two spellings of one code.
-    codePattern: '(?P<num>[0-9]{9,12})K?(-[0-9]{1,2})?|(?P<alpha>(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{5,}?)K?'
+    # A DIGITAL EDITION IS THE MAKER'S OWN DISTINCT CODE: the store writes `401011001_PDF` and
+    # `401011001_eBook` for the downloads of a print book (28 rows, 2026-09-02), and until the
+    # suffix was part of the identity those rows published under name slugs.
+    codePattern: '(?P<num>[0-9]{9,12}(?:_(?:PDF|EBOOK))?)K?(-[0-9]{1,2})?|(?P<alpha>(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{5,}?)K?'
+    # gamenerdz's house prefix on the maker's numeric codes (`WLG502412005`), 2 rows
+    codeStrip: [WLG]
     # Warlord-BLISTER / Warlord-WEB: tistaminis.com's brand-format tagging convention
     # (same pattern as GW-Local/GW-Web/GW-OOP above) for Warlord Games stock. Discovered
     # on a full 100-page live enumeration of tistaminis.com/products.json 2026-07-13
