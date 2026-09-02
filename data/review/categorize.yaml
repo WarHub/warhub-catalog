@@ -1,14 +1,14 @@
 summary:
   products: 29043
-  undecided: 5725
+  undecided: 5724
   byBasis:
     code: 4858
     lexicon: 571
-    mapped: 15891
+    mapped: 15892
     paint-barcode: 12
     stated: 1986
-    unknown: 5725
-  decidedThisRun: 21332
+    unknown: 5724
+  decidedThisRun: 0
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -94,6 +94,12 @@ conflicts:
   - entity: games-workshop/99120101170
     type: gameSystem-disagreement
     detail: catalog says horus-heresy (classified); games-workshop code~^\d{4}01\d{5}$ says warhammer-40k
+  - entity: games-workshop/99120101457
+    type: gameSystem-disagreement
+    detail: catalog says kill-team (code); mfr-gw-algolia hierarchy.lvl1~Warhammer 40,000 > Unit Type,Warhammer 40,000 > Xenos Armies,Warhammer 40,000 > Armies of the Imperium,Warhammer 40,000 > Armies of Chaos,Warhammer 40,000 > Space Marines,Warhammer 40,000 > Terrain,Warhammer 40,000 > Start Here,Warhammer 40,000 > Ways to Play says warhammer-40k
+  - entity: games-workshop/99120102182
+    type: gameSystem-disagreement
+    detail: catalog says kill-team (code); mfr-gw-algolia hierarchy.lvl1~Warhammer 40,000 > Unit Type,Warhammer 40,000 > Xenos Armies,Warhammer 40,000 > Armies of the Imperium,Warhammer 40,000 > Armies of Chaos,Warhammer 40,000 > Space Marines,Warhammer 40,000 > Terrain,Warhammer 40,000 > Start Here,Warhammer 40,000 > Ways to Play says warhammer-40k
   - entity: games-workshop/99120199129
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=terrain; ret-radaddel=game-accessory'
@@ -112,9 +118,6 @@ conflicts:
   - entity: games-workshop/99122799006
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=miniatures; ret-tistaminis=terrain'
-  - entity: games-workshop/99123001007
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (stated); games-workshop code~^\d{4}30\d{5}$ says horus-heresy
   - entity: games-workshop/99189950229
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b says hobby-auxiliary
@@ -327,6 +330,7 @@ conflicts:
     detail: catalog says malifaux (stated); mfr-wyrd-store tags~The Other Side,ToS,ToS-Unit,ToS-Character,Abyssinia,King's Empire,Gibbering Hordes,Cult of the Burning Man says the-other-side
 deadClauses:
   - mfr-cmon productLine=Assassin's Creed Roleplaying Game
+  - mfr-gw-algolia hierarchy.lvl1~Other Games > Aeronautica Imperialis
   - mfr-manticgames categories~game-color
   - mfr-manticgames categories~tokens-gems
   - mfr-warmachine vendor=Epic Encounters
@@ -337,33 +341,6 @@ deadClauses:
 unmapped:
   mfr-cmon:
     - value: productLine=Assassin’s Creed Roleplaying Game
-      wouldDecide: 1
-  mfr-gw-algolia:
-    - value: hierarchy.lvl0=Warhammer 40,000
-      wouldDecide: 1
-    - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
-      wouldDecide: 1
-    - value: hierarchy.lvl1=Warhammer 40,000 > Xenos Armies
-      wouldDecide: 1
-    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Imperial Armour
-      wouldDecide: 1
-    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Monster
-      wouldDecide: 1
-    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Titanic
-      wouldDecide: 1
-    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Walkers
-      wouldDecide: 1
-    - value: hierarchy.lvl2=Warhammer 40,000 > Xenos Armies > Aeldari
-      wouldDecide: 1
-    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > Aeldari > Imperial Armour
-      wouldDecide: 1
-    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > Aeldari > Monster
-      wouldDecide: 1
-    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > Aeldari > Titanic
-      wouldDecide: 1
-    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > Aeldari > Walker
-      wouldDecide: 1
-    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > Aeldari > Wraith Constructs
       wouldDecide: 1
   mfr-gw-trade:
     - value: tradeCategory=BS:F

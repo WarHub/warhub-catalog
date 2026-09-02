@@ -766,7 +766,12 @@ def test_a_maintainers_decision_is_never_extended() -> None:
     assert not _apply_game_systems(
         record, _decision("kill-team", "warhammer-40k"), outcome, frozenset())
     assert record.gameSystems == ["kill-team"]
-    assert [c.kind for c in outcome.conflicts] == ["gameSystem-disagreement"]
+    # ...AND IT IS NOT REPORTED EITHER. An override is the record that someone weighed this exact
+    # product, so a source contradicting it is the thing they decided against, not an open
+    # question. GW's own store shelves those Kill Team boxes under `Warhammer 40,000 > Unit Type`
+    # -- which is WHY the overrides exist -- and reporting that every night would be the review
+    # file arguing with a decision instead of surfacing one.
+    assert outcome.conflicts == []
 
 
 def test_a_catch_all_is_replaced_rather_than_extended() -> None:

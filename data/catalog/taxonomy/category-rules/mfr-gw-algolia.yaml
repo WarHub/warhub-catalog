@@ -1,0 +1,140 @@
+source: mfr-gw-algolia
+reason: >-
+  GAMES WORKSHOP'S OWN STORE SHELVES 183 PRODUCTS UNDER TWO GAME SYSTEMS, and this catalog has
+  been storing that and reading none of it. `hierarchy` is captured verbatim from GW's Algolia
+  index -- the strategy's own comment says "one product can sit under several branches" -- and its
+  `lvl1` is a closed vocabulary of 51 values shaped `<Game System> > <Section>`. Nothing has ever
+  had a rule table for it.
+
+
+  IT IS THE EVIDENCE THAT MADE `gameSystems` A LIST. `mfr-gw-algolia:prod3710168-99120108073`
+  (Custodian Guard) carries lvl1 `The Horus Heresy > Forces of The Emperor`, `The Horus Heresy >
+  Unit Type`, `Warhammer 40,000 > Armies of the Imperium` AND `Warhammer 40,000 > Unit Type`. Its
+  scalar `gameSystem` hint says only `warhammer-40k`, because
+  `acquire/strategies/algolia.py::_raw_game_system_and_faction` takes `lvl0[0]` -- the first
+  element of a LIST -- and drops the rest.
+
+
+  MEASURED 2026-09-01 against the 2,675 GW products carrying a hierarchy, through the stage's own
+  extends/refines rules:
+
+    refines a catch-all to a real slug      167   (necromunda 88, blood-bowl 64, kill-team 6, ...)
+    extends one system to two               187   (horus-heresy+40k 50, aos+40k 43, ...)
+    exact agreement, record untouched     2,302
+    DISAGREEMENTS                             0
+
+  Zero. This table never contradicts a value a source stated; it only says more than the scalar
+  projection could.
+
+
+  THE ACQUIRE-TIME MAPPING STAYS. `data/catalog/mappings/mfr-gw-algolia.yaml` emits the scalar
+  `gameSystem` hint on all 2,675 rows and the resolver folds it as `stated` -- a record that GW's
+  own store asserted it. Deleting it in favour of this table would move all 2,675 from `stated` to
+  `mapped` and lose that distinction, which is precisely the regression
+  `categorize/stage.py::_apply_game_systems` documents (4,242 products traded `stated` provenance
+  for a rule that agreed with them). Keeping both costs nothing, because this table's proposal is
+  a superset or an equal on every one of the 2,675.
+
+clauses:
+  # --- TERRAIN FIRST. `> Unit Type` co-occurs with almost everything, so the scenery sections
+  # must be read before it or they are never reached. Graded against ret-goblingaming and
+  # ret-tistaminis only: 54 terrain / 15 miniatures / 1 hobby-auxiliary over 70 -- and 8 of those
+  # 15 read as terrain by name (`Battlezone: Fronteris`, `Sacristan Forgeshrine`, `Bone-tithe
+  # Nexus`, `Realmshaper Engine`, `Bossrokk Tower`). This is the contested boundary the
+  # games-workshop.yaml terrain block also runs into, not a fault in the shelf.
+  - category: terrain
+    hintContainsAny:
+      hierarchy.lvl1: ['Warhammer 40,000 > Terrain', 'Age of Sigmar > Scenery',
+                       'The Old World > Scenery', 'Middle-Earth > Middle-earth™ Scenery']
+    note: >-
+      74 rows, 4 undecided. The `™` is literal in GW's data and the value will not match without
+      it.
+
+  # --- MODELS. `> Unit Type` and `> Force Organisation` are how GW files a kit, and this pairing
+  # is already one of the two controls the games-workshop.yaml header grades its code ladder
+  # against.
+  - category: miniatures
+    hintContainsAny:
+      hierarchy.lvl1: ['Warhammer 40,000 > Unit Type', 'Age of Sigmar > Unit Type',
+                       'The Horus Heresy > Unit Type', 'Middle-Earth > Unit Type',
+                       'The Old World > Unit Type', 'The Horus Heresy > Force Organisation']
+    note: 2,574 rows, 46 undecided
+
+  # NOT MAPPED TO `book`, and it is worth saying why since the value looks made for it.
+  # `Age of Sigmar > Game Rules` (17 rows) grades `miniatures` on ALL 17 against the independent
+  # control, and `The Horus Heresy > Rules & Army Books` (1 row) grades `game-accessory`. GW files
+  # boxed sets under Game Rules. A shelf named for rules that holds armies decides nothing here.
+
+  # ===========================================================================================
+  # WHICH GAME. `gameSystems` accumulates every matching clause of the winning source, which is
+  # exactly what a store shelving one product under two games needs.
+  - gameSystems: [warhammer-40k]
+    hintContainsAny:
+      hierarchy.lvl1: ['Warhammer 40,000 > Unit Type', 'Warhammer 40,000 > Xenos Armies',
+                       'Warhammer 40,000 > Armies of the Imperium',
+                       'Warhammer 40,000 > Armies of Chaos', 'Warhammer 40,000 > Space Marines',
+                       'Warhammer 40,000 > Terrain', 'Warhammer 40,000 > Start Here',
+                       'Warhammer 40,000 > Ways to Play']
+  - gameSystems: [age-of-sigmar]
+    hintContainsAny:
+      hierarchy.lvl1: ['Age of Sigmar > Unit Type', 'Age of Sigmar > Grand Alliance Order',
+                       'Age of Sigmar > Grand Alliance Chaos', 'Age of Sigmar > Grand Alliance Death',
+                       'Age of Sigmar > Grand Alliance Destruction', 'Age of Sigmar > Scenery',
+                       'Age of Sigmar > Start Here', 'Age of Sigmar > Ways to Play',
+                       'Age of Sigmar > Game Rules', 'Age of Sigmar > Race',
+                       'Age of Sigmar > Regiments of Renown']
+  - gameSystems: [horus-heresy]
+    hintContainsAny:
+      hierarchy.lvl1: ['The Horus Heresy > Force Organisation', 'The Horus Heresy > Unit Type',
+                       'The Horus Heresy > Traitor Legiones Astartes',
+                       'The Horus Heresy > Loyalist Legiones Astartes',
+                       'The Horus Heresy > Vehicles', 'The Horus Heresy > Accessories',
+                       'The Horus Heresy > Mechanicum', 'The Horus Heresy > Forces of The Emperor',
+                       'The Horus Heresy > Legiones Astartes',
+                       'The Horus Heresy > Armies of the Warmaster',
+                       'The Horus Heresy > Start Here', 'The Horus Heresy > Rules & Army Books']
+  - gameSystems: [middle-earth]
+    hintContainsAny:
+      hierarchy.lvl1: ['Middle-Earth > Unit Type', 'Middle-Earth > The Lord of the Rings™ - Good',
+                       'Middle-Earth > The Lord of the Rings™ - Evil',
+                       'Middle-Earth > The Hobbit™ - Good', 'Middle-Earth > The Hobbit™ - Evil',
+                       'Middle-Earth > The War of the Rohirrim™ - Good',
+                       'Middle-Earth > The War of the Rohirrim™ - Evil',
+                       'Middle-Earth > Middle-earth™ Scenery', 'Middle-Earth > Start Here']
+  - gameSystems: [the-old-world]
+    hintContainsAny:
+      hierarchy.lvl1: ['The Old World > Armies of the Old World', 'The Old World > Unit Type',
+                       'The Old World > Scenery']
+
+  # `Other Games` IS GW'S OWN CATCH-ALL SHELF, and each of these names the game it is hiding. This
+  # is where 167 of the refinements come from: a product currently sitting on `other-games` --
+  # which `game-systems.yaml` declares `catchAll: true` -- is replaced by the specific slug.
+  - gameSystems: [necromunda]
+    hintContainsAny: {hierarchy.lvl1: ['Other Games > Necromunda']}
+  - gameSystems: [legions-imperialis]
+    hintContainsAny: {hierarchy.lvl1: ['Other Games > Legions Imperialis']}
+  - gameSystems: [blood-bowl]
+    hintContainsAny: {hierarchy.lvl1: ['Other Games > Blood Bowl']}
+  - gameSystems: [adeptus-titanicus]
+    hintContainsAny: {hierarchy.lvl1: ['Other Games > Adeptus Titanicus']}
+  - gameSystems: [warhammer-underworlds]
+    hintContainsAny: {hierarchy.lvl1: ['Other Games > Warhammer Underworlds']}
+  - gameSystems: [aeronautica-imperialis]
+    hintContainsAny: {hierarchy.lvl1: ['Other Games > Aeronautica Imperialis']}
+
+  # TWO SHELVES ARE DELIBERATELY NOT MAPPED, and both refusals are about what a list would assert.
+  #
+  # `Other Games > Warcry` (23 rows): `game-systems.yaml` has no `warcry` slug. Mapping it to
+  # `other-games` would EXTEND 22 products from `[age-of-sigmar]` to `[age-of-sigmar,
+  # other-games]` -- adding a catch-all bucket beside a real claim, which is strictly worse than
+  # what they publish now. Mint the slug first or leave the value on the review worklist.
+  #
+  # `Other Games > Kill Team` (62 rows): it would extend 34 products from `[warhammer-40k]` to
+  # `[kill-team, warhammer-40k]`, and those products are `Primaris Redemptor Dreadnought`,
+  # `Helbrute`, `Foetid Bloat-drone` -- 40,000 kits GW cross-shelves because Kill Team players buy
+  # them. That is "playable in", not "belongs to", and it is the same distinction the accessories
+  # shelves failed at for Mantic and Warlord. The 78 `overrides.yaml` entries exist precisely to
+  # say `kill-team` AND NOT `warhammer-40k`; this shelf would quietly re-add the 40,000 those
+  # decisions removed. The 6 genuine refinements it would make (`Killzone: Gallowdark`,
+  # `Kill Team: Deathwatch`) are already claimed by the `\bKILL[ -]?TEAM\b` name clause in
+  # games-workshop.yaml.

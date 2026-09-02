@@ -381,6 +381,13 @@ def _apply_game_systems(
         outcome.game_system_decided += 1
         outcome.by_game_system_basis[decision.game_systems_basis or "?"] += 1
         return True
+    # A MAINTAINER'S DECISION ENDS THE QUESTION, so a source contradicting it is not review
+    # material -- it is the thing they decided against. GW's own store shelves Kill Team boxes
+    # under `Warhammer 40,000 > Unit Type`, which is exactly why the 78 `overrides.yaml` entries
+    # exist; reporting that disagreement every night, forever, would be the review file arguing
+    # with a decision instead of surfacing an open one.
+    if record.gameSystemsBasis in _MAINTAINER_DECIDED:
+        return False
     if settled and settled != set(proposed):
         outcome.conflicts.append(
             Conflict(
