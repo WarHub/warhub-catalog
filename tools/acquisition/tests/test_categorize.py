@@ -216,6 +216,66 @@ def test_nothing_matches_means_no_decision() -> None:
     assert decision is None and conflicts == []
 
 
+# --- the role axis ----------------------------------------------------------------------------
+
+
+def test_a_shelf_decides_the_role_and_an_archive_that_differs_is_reported() -> None:
+    """The archive's role sits below a shelf for the reason `paint-barcode` sits below it: it is
+    read across the two catalogs, and the product pipeline's own evidence stands. The disagreement
+    is a review row, not a silent override either way."""
+    members = [_observation("ret-a:1", "ret-a", hints={"productType": "Varnishes"})]
+    rules = _rules(**{"ret-a": [
+        {"category": "paint", "role": "varnish", "hintEquals": {"productType": "Varnishes"}}
+    ]})
+    decision, conflicts = decide(
+        "e", members, {"ret-a": "retailer"}, rules, ["4"], frozenset({"4"}), paint_roles={"4": "medium"}
+    )
+    assert (decision.category, decision.role, decision.role_basis) == ("paint", "varnish", "mapped")
+    assert [c.kind for c in conflicts] == ["role-disagreement"]
+    assert "the paint archive says medium" in conflicts[0].detail
+
+
+def test_the_archive_role_fills_where_no_shelf_spoke() -> None:
+    members = [_observation("ret-a:1", "ret-a", hints={"productType": "Whatever"})]
+    decision, conflicts = decide(
+        "e", members, {"ret-a": "retailer"}, {}, ["4"], frozenset({"4"}), paint_roles={"4": "medium"}
+    )
+    assert (decision.category, decision.basis) == ("paint", "paint-barcode")
+    assert (decision.role, decision.role_basis) == ("medium", "paint-archive")
+    assert conflicts == []
+
+
+def test_a_role_only_lexicon_entry_answers_its_own_axis_and_no_other() -> None:
+    """Per-axis matching: the varnish entry answers the role and is skipped for the category,
+    which the later brush entry answers. One entry per fact, never one entry swallowing both."""
+    lexicon = Lexicon(reason="test", entries=[
+        LexiconEntry(nameMatches=r"\bVARNISH\b", role="varnish", measured="test"),
+        LexiconEntry(nameMatches=r"\bBRUSH\b", category="hobby-auxiliary", measured="test"),
+    ])
+    members = [_observation("ret-a:1", "ret-a", name="Matt Varnish Brush")]
+    decision, _ = decide(
+        "e", members, {"ret-a": "retailer"}, {}, [], frozenset(), name="Matt Varnish Brush",
+        lexicon=lexicon,
+    )
+    assert (decision.category, decision.basis) == ("hobby-auxiliary", "lexicon")
+    assert (decision.role, decision.role_basis) == ("varnish", "lexicon")
+
+
+def test_a_lexicon_entry_must_decide_something() -> None:
+    with pytest.raises(ValueError, match="must decide a category, a role, or both"):
+        LexiconEntry(nameMatches="x", measured="m")
+
+
+def test_a_role_alone_is_still_a_decision() -> None:
+    """A role with no category is carried so the stage can write it on a record whose category a
+    source STATED -- the stage, not this function, knows the record's category."""
+    members = [_observation("ret-a:1", "ret-a", hints={"productType": "Whatever"})]
+    decision, _ = decide(
+        "e", members, {"ret-a": "retailer"}, {}, ["7"], frozenset(), paint_roles={"7": "primer"}
+    )
+    assert decision.category is None and (decision.role, decision.role_basis) == ("primer", "paint-archive")
+
+
 # --- the stage --------------------------------------------------------------------------------
 
 
@@ -306,7 +366,7 @@ def test_the_stage_decides_the_undecided_and_leaves_claims_alone(tmp_path: Path)
     assert after["games-workshop/MYST1"].get("category") is None
 
 
-def test_the_stage_changes_only_the_six_fields_it_owns(tmp_path: Path) -> None:
+def test_the_stage_changes_only_the_eight_fields_it_owns(tmp_path: Path) -> None:
     """The catalog files are rewritten wholesale, so the guard is that a rewrite is a no-op for
     every field this stage does not decide -- ids included.
 
@@ -315,7 +375,9 @@ def test_the_stage_changes_only_the_six_fields_it_owns(tmp_path: Path) -> None:
     cannot answer it, because at that point a paint pot has no category at all -- nothing had
     decided yet. Settling it upstream asked one pass
     too early and returned `unknown` for 4,189 products that are plainly hobby supplies.
-    `settings` and `settingsBasis` are the fifth and sixth, for the same reason.
+    `settings` and `settingsBasis` are the fifth and sixth, for the same reason; `role` and
+    `roleBasis` the seventh and eighth, for the same reason again -- whether a role applies is a
+    question about the category.
     """
     paths = _seed(tmp_path)
     before = _catalog(paths)
@@ -331,7 +393,84 @@ def test_the_stage_changes_only_the_six_fields_it_owns(tmp_path: Path) -> None:
     }
     assert changed <= {
         "category", "categoryBasis", "packaging", "gameSystemsBasis", "settings", "settingsBasis",
+        "role", "roleBasis",
     }
+
+
+def test_the_role_axis_is_answered_only_for_hobby_supplies(tmp_path: Path) -> None:
+    """Four records, four outcomes: a brush the shop's shelf gives a role (mapped), a pot the
+    archive gives one (paint-archive), a book whose observation matches the same Brushes clause
+    but whose stated category is not a hobby supply (no role, and no basis -- the axis does not
+    apply), and an undecided record (likewise)."""
+    paths = _seed(tmp_path)
+    write_yaml(
+        paths.paints / "brands" / "citadel.yaml",
+        {"paints": [{"name": "A Pot", "ean": "5011921194506", "role": "medium"}]},
+    )
+    write_yaml(
+        paths.category_rules / "ret-shop.yaml",
+        {
+            "source": "ret-shop",
+            "reason": "the shop's product_type is a format axis",
+            "clauses": [{"category": "hobby-auxiliary", "packaging": "single", "role": "applicator",
+                         "hintEquals": {"productType": "Brushes"}}],
+        },
+    )
+    outcome = categorize(paths)
+    after = _catalog(paths)
+    brush, pot, tome, mystery = (
+        after[f"games-workshop/{code}"] for code in ("BRUSH1", "POT1", "TOME1", "MYST1")
+    )
+    assert (brush["role"], brush["roleBasis"]) == ("applicator", "mapped")
+    assert (pot["role"], pot["roleBasis"]) == ("medium", "paint-archive")
+    assert "role" not in tome and "roleBasis" not in tome
+    assert "role" not in mystery and "roleBasis" not in mystery
+    assert outcome.role_basis == {"mapped": 1, "paint-archive": 1, "none": 2}
+    assert outcome.role_decided == 2
+    # Idempotent: a second run writes nothing and counts the same catalog.
+    again = categorize(paths)
+    assert again.role_decided == 0 and again.role_basis == outcome.role_basis
+
+
+def test_a_set_carries_no_role_and_an_override_keeps_its_own(tmp_path: Path) -> None:
+    """A box of pots answers through its members; a maintainer's role is not recomputed, and
+    neither is a source's own statement (`stated`, from a crossover stamp) -- whatever the
+    category, because a table's inference about a shelf does not overrule a word about the
+    product."""
+    paths = _seed(tmp_path)
+    path = paths.catalog_products / "games-workshop.yaml"
+    document = read_yaml(path)
+    for record in document["products"]:
+        if record["id"] == "games-workshop/BRUSH1":
+            record["packaging"] = "set"
+        if record["id"] == "games-workshop/POT1":
+            record["role"], record["roleBasis"] = "texture", "override"
+        if record["id"] == "games-workshop/TOME1":
+            record["role"], record["roleBasis"] = "cleaner", "stated"
+    write_yaml(path, document)
+    write_yaml(
+        paths.paints / "brands" / "citadel.yaml",
+        {"paints": [{"name": "A Pot", "ean": "5011921194506", "role": "medium"}]},
+    )
+    write_yaml(
+        paths.category_rules / "ret-shop.yaml",
+        {
+            "source": "ret-shop",
+            "reason": "the shop's product_type is a format axis",
+            "clauses": [{"category": "hobby-auxiliary", "role": "applicator",
+                         "hintEquals": {"productType": "Brushes"}}],
+        },
+    )
+    categorize(paths)
+    after = _catalog(paths)
+    assert after["games-workshop/BRUSH1"]["category"] == "hobby-auxiliary"
+    assert "role" not in after["games-workshop/BRUSH1"]
+    assert (after["games-workshop/POT1"]["role"], after["games-workshop/POT1"]["roleBasis"]) == (
+        "texture", "override",
+    )
+    assert (after["games-workshop/TOME1"]["role"], after["games-workshop/TOME1"]["roleBasis"]) == (
+        "cleaner", "stated",
+    )
 
 
 def test_packaging_is_filled_only_where_the_record_had_none(tmp_path: Path) -> None:
@@ -389,6 +528,7 @@ def test_the_worklist_counts_only_products_that_are_still_undecided(tmp_path: Pa
         # the brush and the pot belong to nothing; the codex and the mystery are open questions
         "gameSystemsByBasis": {"not-applicable": 2, "unknown": 2},
         "settingsByBasis": {"not-applicable": 2, "unknown": 2},
+            "rolesByBasis": {"none": 2, "unknown": 2},
     }
     values = {row["value"] for row in review["unmapped"]["ret-shop"]}
     assert values == {"productType=Unlabelled"}  # the decided rows' values are absent

@@ -39,3 +39,28 @@ def load_paint_barcodes(paints_root: Path) -> frozenset[str]:
                 if value:
                     codes.add(str(value))
     return frozenset(codes)
+
+
+def load_paint_roles(paints_root: Path) -> dict[str, str]:
+    """`{barcode: role}` over every committed paint that carries a `role`. Empty if absent.
+
+    THE SAME LIVE READ as the barcodes above, for the same reason, and it carries the archive's
+    third-axis answer (categories.yaml `roles`) to the product side: the archive decides a role per
+    record from the maker's range and name and holds it to the colourless invariant, so for a
+    product on one of its barcodes the archive is the maker's chart speaking. A record without a
+    `role` key contributes nothing -- the key arrives with the archive's own migration, and until
+    then this returns empty and the product side simply has no archive rung.
+    """
+    brands = paints_root / "brands"
+    if not brands.exists():
+        return {}
+    roles: dict[str, str] = {}
+    for path in sorted(brands.glob("*.yaml")):
+        for paint in (read_yaml(path) or {}).get("paints") or []:
+            role = paint.get("role")
+            if not role:
+                continue
+            for value in (paint.get("ean"), *(paint.get("additionalEans") or [])):
+                if value:
+                    roles[str(value)] = str(role)
+    return roles

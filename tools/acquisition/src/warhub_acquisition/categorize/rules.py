@@ -20,10 +20,10 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from warhub_acquisition.yamlio import read_yaml
 
 _FORMS = ("nameMatches", "codeMatches", "hintEquals", "hintContainsAny")
-_OUTPUTS = ("category", "packaging", "gameSystems", "settings", "faction", "generic")
+_OUTPUTS = ("category", "packaging", "gameSystems", "settings", "faction", "generic", "role")
 #: The axes a veto may name. `generic` is not among them: it is not a field a product carries but
 #: a statement about the two membership axes at once, and it is silenced by vetoing those.
-AXES = ("category", "packaging", "faction", "gameSystems", "settings")
+AXES = ("category", "packaging", "faction", "gameSystems", "settings", "role")
 
 
 class CategoryClause(BaseModel):
@@ -52,6 +52,11 @@ class CategoryClause(BaseModel):
 
     category: str | None = None
     packaging: str | None = None
+    # WHAT THE HOBBY SUPPLY IS FOR (categories.yaml axis 3): a shelf called Varnishes or Brushes
+    # answers it in the same breath as the category. First match wins per axis, like `category`,
+    # and the stage writes it only on `paint` and `hobby-auxiliary` records that are not sets --
+    # a clause on a shelf of paint SETS may name a role and the stage will discard it.
+    role: str | None = None
     # A clause may decide any dimension the same signal settles. A store shelf that says
     # `Miniatures/Infinity/Yu Jing` answers three questions at once, and splitting it across three
     # tables keyed on the same value would be three chances to disagree with itself.

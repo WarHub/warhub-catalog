@@ -345,10 +345,13 @@ def main(argv: list[str] | None = None) -> int:
         total = sum(outcome.catalog_basis.values())
         undecided = sum(outcome.catalog_basis[basis] for basis in REPLACEABLE)
         share = f"{100 * undecided / total:.1f}%" if total else "n/a"
+        roles = ", ".join(f"{basis}={count}" for basis, count in sorted(outcome.by_role_basis.items()))
         print(
             f"{'would decide' if args.dry_run else 'decided'} {outcome.decided} of "
             f"{outcome.considered} replaceable ({detail or 'none'}); "
             f"catalog: {undecided} of {total} ({share}) still rest on no evidence; "
+            f"roles: {outcome.role_decided} written ({roles or 'none'}), "
+            f"{outcome.role_basis.get('unknown', 0)} open; "
             f"{len(outcome.conflicts)} conflicts"
         )
         # Conflicts are REVIEW MATERIAL, not a failure -- exactly as `resolve` treats its own

@@ -1,5 +1,5 @@
 """One product's members + the rule tables + the paint archive -> one decision, with its receipt."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Mapping, Sequence
 
 from warhub_acquisition.models.descriptor import KIND_PRIORITY
@@ -17,6 +17,10 @@ MAPPED = "mapped"
 #: statement about the range, while a shelf is a statement about the product in front of you.
 CODE = "code"
 PAINT_BARCODE = "paint-barcode"
+#: The paint archive's own `role` for this product's barcode -- the ROLE axis's counterpart of
+#: `paint-barcode`, ranked the same way and for the same reason: below a shelf that filed this
+#: product, above its name.
+PAINT_ARCHIVE = "paint-archive"
 LEXICON = "lexicon"
 
 
@@ -52,6 +56,14 @@ class Decision:
     # united with) or a FILL from a code range. The stage lets a claim replace a `classified`
     # guess and lets a fill only fill a hole.
     game_systems_claimed: bool = False
+    #: THE ROLE AXIS (categories.yaml axis 3), with its own rung and receipt like the membership
+    #: axes. Computed for every product and written by the stage only where it applies -- `paint`
+    #: and `hobby-auxiliary`, never a set -- because the category a later rung settles is what
+    #: makes the question applicable, and this function must not decide from a category it may
+    #: still change.
+    role: str | None = None
+    role_basis: str | None = None
+    role_why: str | None = None
 
 
 @dataclass(frozen=True)
@@ -182,6 +194,7 @@ def decide(
     code: str | None = None,
     default_hints: Mapping[str, Mapping[str, object]] | None = None,
     catch_alls: frozenset[str] = frozenset(),
+    paint_roles: Mapping[str, str] | None = None,
 ) -> tuple[Decision | None, list[Conflict]]:
     """The decision for one undecided product, and anything a maintainer should look at.
 
@@ -208,6 +221,7 @@ def decide(
     hits: list[tuple[Observation, CategoryClause]] = []
     packaging_hits: list[tuple[Observation, CategoryClause]] = []
     faction_hits: list[tuple[Observation, CategoryClause]] = []
+    role_hits: list[tuple[Observation, CategoryClause]] = []
     system_claims: list[tuple[Observation, CategoryClause]] = []
     setting_claims: list[tuple[Observation, CategoryClause]] = []
     generic_hits: list[tuple[Observation, CategoryClause]] = []
@@ -241,7 +255,8 @@ def decide(
         # for -- so the axes must be read independently or whichever one the table happens to
         # answer earlier vetoes the rest.
         for axis, bucket in (
-            ("category", hits), ("packaging", packaging_hits), ("faction", faction_hits)
+            ("category", hits), ("packaging", packaging_hits), ("faction", faction_hits),
+            ("role", role_hits),
         ):
             if vetoed[axis]:
                 continue
@@ -550,6 +565,42 @@ def decide(
                 generic_why=generic_why,
                 game_systems_claimed=bool(claimed),
             )
+    # THE ROLE, by the category's own ladder and independent of it: a shelf that says Varnishes
+    # (mapped), the maker's range through its table (code), the paint archive's facet through the
+    # barcode (paint-archive), the name (lexicon). The archive is a statement about this exact pot
+    # by the maker's chart, yet it sits below a shelf for the reason `paint-barcode` does: it is
+    # read across the two catalogs, and the product pipeline's own evidence must not be overruled
+    # by it -- so a shelf that disagrees with it is reported, and the shelf stands.
+    role = role_basis = role_why = None
+    if role_hits:
+        member, clause = role_hits[0]
+        role, role_basis, role_why = clause.role, MAPPED, f"{member.source_id} {_signal(clause)}"
+    elif code_clauses["role"] is not None:
+        role_clause = code_clauses["role"]
+        role, role_basis, role_why = role_clause.role, CODE, f"{manufacturer} {_signal(role_clause)}"
+    archive_role = (
+        next((paint_roles[code] for code in barcodes if code in paint_roles), None)
+        if paint_roles else None
+    )
+    if archive_role is not None:
+        if role is None:
+            role, role_basis = archive_role, PAINT_ARCHIVE
+            role_why = "the paint archive's role for this barcode"
+        elif role != archive_role:
+            conflicts.append(
+                Conflict(
+                    entity, "role-disagreement",
+                    f"the paint archive says {archive_role}, but {role_why} says {role}",
+                )
+            )
+    if role is None and lexicon is not None:
+        entry = lexicon.match(name, "role")
+        if entry is not None:
+            role, role_basis, role_why = entry.role, LEXICON, f"name matches /{entry.nameMatches}/"
+    if role is not None:
+        if decision is None:
+            decision = Decision(category=None, packaging=None, basis="", why="")
+        decision = replace(decision, role=role, role_basis=role_basis, role_why=role_why)
     return decision, conflicts
 
 

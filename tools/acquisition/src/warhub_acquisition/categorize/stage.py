@@ -33,7 +33,7 @@ from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 from .decide import game_axis_vetoed, Conflict, _clause_hit, _product_hit, _signal, decide, flatten_hints
 from .lexicon import load_lexicon
-from .paints import load_paint_barcodes
+from .paints import load_paint_barcodes, load_paint_roles
 from .rules import AXES as _AXES, SourceRules, load_category_rules
 
 #: The one basis this stage is allowed to replace: the record has no category at all. `stated` is
@@ -118,6 +118,11 @@ class Outcome:
     #: the products this run decided. Counting the run instead made every clause look dead the
     #: moment the catalog was already categorized, which is exactly when someone would read it.
     clause_hits: Counter = field(default_factory=Counter)
+    #: The role axis, in the same two shapes as the membership axes: the whole catalog after this
+    #: run (`none` where the axis does not apply), and what this run itself wrote.
+    role_basis: Counter = field(default_factory=Counter)
+    role_decided: int = 0
+    by_role_basis: Counter = field(default_factory=Counter)
 
 
 def _barcodes(record: CanonicalProduct) -> list[str]:
@@ -183,17 +188,20 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
     rules = load_category_rules(paths.category_rules)
     vocabulary = load_vocabulary(paths.taxonomy)
     paint_barcodes = load_paint_barcodes(paths.paints)
+    paint_roles = load_paint_roles(paths.paints)
     lexicon = load_lexicon(paths.taxonomy)
     joined = joined_evidence(paths)
 
     # Validate the TABLES, not just their output: a clause naming an undeclared category that
     # happens to match nothing today would sit undetected until the day a store adds that value.
     for index, entry in enumerate(lexicon.entries if lexicon else []):
-        vocabulary.check(entry.category, None, f"category-lexicon entry {index}")
+        vocabulary.check(entry.category, None, f"category-lexicon entry {index}", role=entry.role)
     manufacturers = set(Taxonomy.load(paths.taxonomy).manufacturers)
     for table in rules.values():
         for index, clause in enumerate(table.clauses):
-            vocabulary.check(clause.category, clause.packaging, f"{table.scope} clause {index}")
+            vocabulary.check(
+                clause.category, clause.packaging, f"{table.scope} clause {index}", role=clause.role
+            )
         # A TABLE FOR A PAINT SOURCE IS DEAD BY CONSTRUCTION, and it took two of them to notice.
         # `select_product_observations` admits a `catalog: paints` source's rows only where
         # `crossoverToProducts` selects them, and every row it selects arrives with a category
@@ -259,6 +267,7 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 # as authoritative, instead of arguing with it. An override is never extended
                 # (`_apply_game_systems`), and a catch-all is refined rather than united.
                 default_hints=default_hints, catch_alls=catch_alls,
+                paint_roles=paint_roles,
             )
             # A category split is reported only where the record could have changed: on a
             # `stated` or `override` record the retailers' argument decides nothing, and 12 of the
@@ -289,6 +298,11 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             # Sets" is inferring it about a shelf.
             if decision is not None and decision.packaging and record.packaging is None:
                 record.packaging = decision.packaging
+                touched = True
+
+            # THE ROLE, after the category and the packaging because both are what make the
+            # question applicable -- see _apply_role.
+            if _apply_role(record, decision, outcome):
                 touched = True
 
             vetoed_guess = record.gameSystemsBasis == "classified" and game_axis_vetoed(
@@ -523,6 +537,43 @@ def _apply_settings(
     return False
 
 
+#: The categories the `role` axis applies to. Everything else -- and every set -- carries none: a
+#: miniature has no painting role, and a box of pots answers through its members (categories.yaml
+#: axis 3; maintainer decision, 2026-09-02).
+_ROLE_BEARING = frozenset({"paint", "hobby-auxiliary"})
+#: The role bases this stage never rewrites: a maintainer's word and a source's own statement.
+_ROLE_KEPT = frozenset({*_MAINTAINER_DECIDED, "stated"})
+
+
+def _apply_role(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:
+    """Write the role, or its absence, exactly as the category the record NOW carries allows.
+
+    RECOMPUTED EVERY RUN rather than filled once, unlike `packaging`. The category is what makes
+    the question applicable and the category can change under it: a record that gains `paint` from
+    a new rule table should gain its role the same night, and one an override moves to
+    `miniatures` should lose it. `override` alone survives -- a maintainer's word is not recomputed.
+    Where the axis applies and nothing answered, the basis says `unknown`, as `categoryBasis`
+    does; where it does not apply, both fields are absent, which is a different fact.
+
+    A `stated` role is kept too: it is a source's own word about this product (today only a
+    crossover clause stamps one -- resolve/crossover.py::role_for), and a table's inference about a
+    shelf does not overrule it, exactly as REPLACEABLE keeps a stated category.
+    """
+    if record.roleBasis in _ROLE_KEPT:
+        outcome.role_basis[record.roleBasis] += 1
+        return False
+    applicable = record.category in _ROLE_BEARING and record.packaging != "set"
+    role = decision.role if (decision is not None and applicable) else None
+    basis = (decision.role_basis if role else "unknown") if applicable else None
+    changed = (record.role, record.roleBasis) != (role, basis)
+    if changed and role:
+        outcome.role_decided += 1
+        outcome.by_role_basis[basis] += 1
+    record.role, record.roleBasis = role, basis
+    outcome.role_basis[basis or "none"] += 1
+    return changed
+
+
 def _apply_generic(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:
     """A clause said this product belongs to no game and no setting. Honour it only where nothing
     placed the product anywhere.
@@ -587,6 +638,10 @@ def _write_review(path: Path, outcome: Outcome, rules: Mapping[str, SourceRules]
                 # products a rule placed in a setting without a game.
                 "gameSystemsByBasis": dict(sorted(outcome.game_system_basis.items())),
                 "settingsByBasis": dict(sorted(outcome.settings_basis.items())),
+                # THE ROLE AXIS. `none` is the products the axis does not apply to (everything
+                # but a paint or a hobby auxiliary, and every set); `unknown` is the ones it
+                # applies to and nothing answered -- the role work's own undecided figure.
+                "rolesByBasis": dict(sorted(outcome.role_basis.items())),
             },
             "conflicts": [
                 {"entity": c.entity, "type": c.kind, "detail": c.detail}
