@@ -1,14 +1,14 @@
 summary:
   products: 27237
-  undecided: 2715
+  undecided: 2600
   byBasis:
-    code: 6618
+    code: 6733
     lexicon: 339
     mapped: 15577
     paint-barcode: 9
     stated: 1979
-    unknown: 2715
-  decidedThisRun: 22543
+    unknown: 2600
+  decidedThisRun: 0
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -70,12 +70,24 @@ conflicts:
   - entity: corvus-belli/WW20009
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=hobby-auxiliary; ret-goblingaming=terrain'
+  - entity: games-workshop/15050108015
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/15050108016
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/15050108017
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/60020699002
     type: gameSystem-disagreement
     detail: catalog says warhammer-40k (classified); games-workshop code~^\d{4}06\d{5}$ says other-games
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
+  - entity: games-workshop/60050117003
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/60100281202
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=book; ret-tistaminis=book'
@@ -97,6 +109,12 @@ conflicts:
   - entity: games-workshop/99120101170
     type: gameSystem-disagreement
     detail: catalog says horus-heresy (classified); games-workshop code~^\d{4}01\d{5}$ says warhammer-40k
+  - entity: games-workshop/99120108108
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99120108109
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/99120199129
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=terrain; ret-radaddel=game-accessory'
@@ -208,6 +226,9 @@ conflicts:
   - entity: games-workshop/99219999035
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99220108011
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/99239999066
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -407,6 +428,7 @@ conflicts:
     type: gameSystem-disagreement
     detail: catalog says malifaux (stated); mfr-wyrd-store tags~The Other Side,ToS,ToS-Unit,ToS-Character,Abyssinia,King's Empire,Gibbering Hordes,Cult of the Burning Man says the-other-side
 deadClauses:
+  - games-workshop code~^\d{2}70\d{2}81\d{3}$
   - mfr-cmon productLine=Assassin's Creed Roleplaying Game
   - mfr-gw-algolia hierarchy.lvl1~Other Games > Aeronautica Imperialis
   - mfr-manticgames categories~game-color
@@ -421,26 +443,6 @@ unmapped:
     - value: productLine=Assassin’s Creed Roleplaying Game
       wouldDecide: 1
   mfr-gw-trade:
-    - value: tradeCategory=BS:F
-      wouldDecide: 20
-    - value: tradeCategory=E:B200a
-      wouldDecide: 6
-    - value: tradeCategory=40K - Space Marines - Generic
-      wouldDecide: 3
-    - value: tradeCategory=40K - Xenos - Orks
-      wouldDecide: 2
-    - value: tradeCategory=40K - Generic
-      wouldDecide: 2
-    - value: tradeCategory=AOS - Chaos - Skaven
-      wouldDecide: 2
-    - value: tradeCategory=AOS - Order - Stormcast Eternals
-      wouldDecide: 2
-    - value: tradeCategory=AOS - Generic
-      wouldDecide: 1
-    - value: tradeCategory=200-49
-      wouldDecide: 1
-    - value: tradeCategory=200-55
-      wouldDecide: 1
     - value: tradeCategory=Sales Support - Other
       wouldDecide: 1
   mfr-manticgames:
@@ -771,9 +773,9 @@ unmapped:
     - value: vendor=Warlord Games
       wouldDecide: 91
     - value: tags=Games Workshop
-      wouldDecide: 71
+      wouldDecide: 67
     - value: vendor=Games Workshop
-      wouldDecide: 71
+      wouldDecide: 67
     - value: tags=Atomic Mass Games
       wouldDecide: 50
     - value: vendor=Atomic Mass Games
@@ -834,36 +836,34 @@ unmapped:
       wouldDecide: 7
     - value: tags=40K Zubehör
       wouldDecide: 7
-    - value: tags=Citadel Farbsets
-      wouldDecide: 6
     - value: tags=Space Marines
       wouldDecide: 6
     - value: tags=VALLEJO HOBBY SPRAY PAINT*
       wouldDecide: 6
     - value: tags=Vallejo Texturen
       wouldDecide: 6
+    - value: tags=Citadel Farbsets
+      wouldDecide: 5
     - value: tags=ToW Bücher & Zubehör
       wouldDecide: 5
     - value: tags=DECALS & GELÄNDE*
       wouldDecide: 5
   ret-tistaminis:
     - value: vendor=GW-OOP
-      wouldDecide: 30
+      wouldDecide: 28
     - value: vendor=Warlord Games
       wouldDecide: 26
     - value: vendor=GW-LOCAL
-      wouldDecide: 21
-    - value: tags=Amazon
-      wouldDecide: 16
+      wouldDecide: 17
     - value: vendor=Mantic
       wouldDecide: 15
-    - value: tags=Gamesworkshop
-      wouldDecide: 11
+    - value: tags=Amazon
+      wouldDecide: 14
     - value: tags=Orks
-      wouldDecide: 11
+      wouldDecide: 10
     - value: tags=warhammer preorder
       wouldDecide: 10
-    - value: tags=GW Accessories
+    - value: tags=Gamesworkshop
       wouldDecide: 9
     - value: vendor=Green Stuff World
       wouldDecide: 9
@@ -873,19 +873,17 @@ unmapped:
       wouldDecide: 8
     - value: vendor=GW-WEB
       wouldDecide: 7
+    - value: tags=GW Accessories
+      wouldDecide: 7
     - value: tags=Green Stuff World
       wouldDecide: 7
-    - value: productType=Tabletop Games & Accessories
-      wouldDecide: 5
     - value: productType=Miniatures - Plastic
-      wouldDecide: 5
-    - value: tags=Space Marines
       wouldDecide: 5
     - value: tags=KOW Other
       wouldDecide: 5
-    - value: tags=Blood Bowl
+    - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
-    - value: productType=Toys & Hobbies:Games:Miniatures, War Games:Warhammer:Warhammer 40K:40K Miniatures
+    - value: tags=Space Marines
       wouldDecide: 4
     - value: tags=Warhammer Lord of the Rings
       wouldDecide: 4
@@ -895,7 +893,7 @@ unmapped:
       wouldDecide: 4
     - value: tags=Achtung Panzer
       wouldDecide: 4
-    - value: tags=Stormcast Eternals
+    - value: productType=Toys & Hobbies:Games:Miniatures, War Games:Warhammer:Warhammer 40K:40K Miniatures
       wouldDecide: 3
     - value: tags=Horus Heresy
       wouldDecide: 3
@@ -903,13 +901,13 @@ unmapped:
       wouldDecide: 3
     - value: tags=Warhammer
       wouldDecide: 3
-    - value: tags=Skaven
+    - value: tags=Stormcast Eternals
+      wouldDecide: 2
+    - value: tags=Blood Bowl
       wouldDecide: 2
     - value: tags=Chaos Space Marines
       wouldDecide: 2
     - value: tags=Old World
-      wouldDecide: 2
-    - value: productType=Toys & Hobbies:Action Figures:Military & Adventure
       wouldDecide: 2
     - value: tags=HH Vehicle
       wouldDecide: 2
@@ -926,6 +924,10 @@ unmapped:
     - value: tags=Sale
       wouldDecide: 2
     - value: tags=Rules & Supplements
+      wouldDecide: 2
+    - value: tags=Necromunda
+      wouldDecide: 2
+    - value: tags=Bloodbowl
       wouldDecide: 2
   seed-curated:
     - value: productType=starter_set
