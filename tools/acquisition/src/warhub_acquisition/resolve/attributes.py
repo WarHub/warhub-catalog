@@ -367,10 +367,16 @@ def complete_membership_bases(
         basis = "unknown"
     else:
         basis = "not-applicable"
-    if product.gameSystemsBasis in DERIVED_BASES:
-        update["gameSystemsBasis"] = basis
-    if product.settingsBasis in DERIVED_BASES:
-        update["settingsBasis"] = basis
+    # A `not-applicable` ALREADY ON THE RECORD IS A VERDICT AND STAYS. The categorize stage writes
+    # it when a store's own shelf says the product belongs to no game (`generic`, e.g. Mantic's
+    # TerrainCrate shelf), and that is a claim about the product this predicate -- a guess from the
+    # category -- must not downgrade to `unknown`. Measured 2026-09-02: 18 TerrainCrate kits lost
+    # the verdict this way the moment a code-range fill stopped pre-empting it. The predicate can
+    # still set `not-applicable` where nothing spoke; it only never takes one away.
+    for name in ("gameSystemsBasis", "settingsBasis"):
+        current = getattr(product, name)
+        if current in DERIVED_BASES and current != "not-applicable":
+            update[name] = basis
     return product.model_copy(update=update) if update else product
 
 

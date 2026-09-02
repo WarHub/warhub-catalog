@@ -19,7 +19,10 @@
 # carry category=paint from the strategy).
 gameSystem:
   '40K': warhammer-40k
-  'KT': warhammer-40k
+  # `KT` is the trade sheet's short form of `Kill Team` (47 rows beside 13 spelled out), and it
+  # mapped to warhammer-40k from before `kill-team` was a slug -- which is how 78 datacard packs
+  # came to need overrides.yaml entries. Corrected 2026-09-02.
+  'KT': kill-team
   'AOS': age-of-sigmar
   'Old World': the-old-world
   'HH Astartes': horus-heresy

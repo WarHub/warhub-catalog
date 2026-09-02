@@ -48,6 +48,10 @@ class Decision:
     #: The product belongs to no game and no setting -- a clause said so, and this is the receipt.
     generic: bool = False
     generic_why: str | None = None
+    # Whether `gameSystems` is a CLAIM (a shelf, the product's own name, a stated value they
+    # united with) or a FILL from a code range. The stage lets a claim replace a `classified`
+    # guess and lets a fill only fill a hole.
+    game_systems_claimed: bool = False
 
 
 @dataclass(frozen=True)
@@ -107,6 +111,45 @@ def _vetoed(table: SourceRules, hit, axis: str) -> bool:
     )
 
 
+def _stated_game(
+    observation: Observation, default_hints: Mapping[str, Mapping[str, object]] | None
+) -> object | None:
+    """This observation's own `gameSystem` hint, unless it is its source's declared fill
+    (SourceDescriptor.defaultHints -- legacy-catalog's `bolt-action` bucket is not a claim)."""
+    value = (observation.hints or {}).get("gameSystem")
+    if value is None:
+        return None
+    if (default_hints or {}).get(observation.source_id, {}).get("gameSystem") == value:
+        return None
+    return value
+
+
+def _stated_game_systems(
+    members: Sequence[Observation],
+    kinds: Mapping[str, str],
+    default_hints: Mapping[str, Mapping[str, object]] | None,
+) -> set[str]:
+    """What the resolver folded as the record's stated game: the first member in kind order that
+    states one. One value or none, like the resolver's own fold."""
+    for member in _ordered(members, kinds):
+        value = _stated_game(member, default_hints)
+        if value is not None:
+            return {str(value)}
+    return set()
+
+
+def _states_one_of(
+    observation: Observation, systems: set[str],
+    default_hints: Mapping[str, Mapping[str, object]] | None = None,
+) -> bool:
+    """Whether this observation's own `gameSystem` hint names one of `systems`."""
+    value = _stated_game(observation, default_hints)
+    if value is None:
+        return False
+    values = value if isinstance(value, (list, tuple, set)) else [value]
+    return any(str(v) in systems for v in values)
+
+
 def _signal(clause: CategoryClause) -> str:
     if clause.hintEquals:
         return " ".join(f"{k}={v}" for k, v in sorted(clause.hintEquals.items()))
@@ -137,6 +180,8 @@ def decide(
     lexicon: Lexicon | None = None,
     manufacturer: str | None = None,
     code: str | None = None,
+    default_hints: Mapping[str, Mapping[str, object]] | None = None,
+    catch_alls: frozenset[str] = frozenset(),
 ) -> tuple[Decision | None, list[Conflict]]:
     """The decision for one undecided product, and anything a maintainer should look at.
 
@@ -233,6 +278,7 @@ def decide(
     # which is exactly Forge World and Black Library. `code_clause` is therefore a dict of the
     # first clause that answers each axis and survives that axis's vetoes.
     code_clauses: dict[str, CategoryClause | None] = dict.fromkeys((*AXES, "generic"))
+    name_system_clauses: list[CategoryClause] = []
     mtable = rules.get(manufacturer or "")
     if mtable is not None and mtable.manufacturer is not None and (code or name):
         for axis in AXES:
@@ -251,6 +297,13 @@ def decide(
             (c for c in mtable.clauses if c.generic and _product_hit(name, code or "", c)),
             None,
         )
+        # Every NAME clause that answers the game axis, for the union below; a code-range clause is
+        # a fill and is read through `code_clauses` only.
+        if name and not _vetoed(mtable, lambda clause: _product_hit(name, code or "", clause), "gameSystems"):
+            name_system_clauses = [
+                c for c in mtable.clauses
+                if c.gameSystems and c.nameMatches and _product_hit(name, code or "", c)
+            ]
 
     # SAME-KIND DISAGREEMENT ONLY. Two retailers filing a product differently is a real editorial
     # split worth a look; a manufacturer and a retailer disagreeing is what the kind ladder is FOR
@@ -300,14 +353,69 @@ def decide(
 
     game_systems: tuple[str, ...] = ()
     game_systems_basis = game_systems_why = None
+    claimed: set[str] = set()
+    whys: list[str] = []
+    claim_kind: int | None = None
     if system_claims:
         winner = system_claims[0][0].source_id
         won = [(m, c) for m, c in system_claims if m.source_id == winner]
-        game_systems = tuple(sorted({slug for _, c in won for slug in c.gameSystems}))
+        claimed |= {slug for _, c in won for slug in c.gameSystems}
+        whys.append(f"{winner} {'; '.join(sorted({_signal(c) for _, c in won}))}")
+        claim_kind = KIND_PRIORITY.get(kinds.get(winner, "barcode-db"), 9)
         game_systems_basis = MAPPED
-        signals = sorted({_signal(c) for _, c in won})
-        game_systems_why = f"{winner} {'; '.join(signals)}"
-    if not game_systems and code_clauses["gameSystems"] is not None:
+    # THE PRODUCT'S OWN NAME IS THE MAKER SPEAKING, and it is a claim beside the shelves, not a
+    # fill behind them. `Kill Team: Imperial Navy Breachers` is a Kill Team product whatever
+    # department a store files it under, so a NAME clause in the manufacturer's table joins the
+    # union at manufacturer rank. A CODE-RANGE clause stays a fill (below): GW's `02` range spans
+    # two settings across a decade, and a range can only say what a product PROBABLY is.
+    # Measured 2026-09-02: 8 products named for Kill Team stayed `warhammer-40k` because a shelf
+    # had spoken first and the name could only report against it.
+    if name_system_clauses:
+        claimed |= {slug for c in name_system_clauses for slug in c.gameSystems}
+        whys.append(f"{manufacturer} {'; '.join(sorted(_signal(c) for c in name_system_clauses))}")
+        claim_kind = min(KIND_PRIORITY["manufacturer"], claim_kind if claim_kind is not None else 9)
+        game_systems_basis = game_systems_basis or CODE
+    # A SOURCE'S WHOLE CLAIM IS ITS STATED GAME PLUS ITS SHELVES. Warlord's store types
+    # `productType: Bolt Action` on its Order Dice (the stated hint the resolver folded) and tags
+    # them `gates-of-antares` (a mapped clause); both are the same store's answer, and the dice are
+    # sold for both games. So where SOME source that stated the record's value is no more
+    # authoritative than the claim assembled here, the stated set joins the union and the stage
+    # extends the record instead of reporting a disagreement -- the store's own statement is part
+    # of the store's own claim, whoever else agreed with it. A claim ranked below EVERY source that
+    # stated the value still only reports: a manufacturer's shelf does not overrule a curated
+    # import's word, it argues with it in the review file. Measured 2026-09-02: 22 of the 46 open
+    # `gameSystem-disagreement` rows were one source contradicting itself this way (8 Order Dice,
+    # 5 scenery packs, 3 Kill Team boxes, ...).
+    #
+    # THE STATED VALUE IS RE-READ FROM THE MEMBERS HERE -- the first row in kind order carrying a
+    # `gameSystem` hint that is not its source's declared fill, the same fold resolve/attributes.py
+    # does -- and not taken from the record, so that a second run of this stage over its own output
+    # reaches the same union instead of reporting it as a disagreement (measured 2026-09-02: 431
+    # rows, every one the previous run's own extension). A catch-all (`other-games`) is left out of
+    # it: it says "one of these, unknown which", and a specific claim REFINES it in the stage
+    # rather than sitting beside it.
+    stated = {
+        slug for slug in _stated_game_systems(members, kinds, default_hints) if slug not in catch_alls
+    }
+    if claimed and stated and claim_kind is not None:
+        weakest_stater = max(
+            (
+                KIND_PRIORITY.get(kinds.get(m.source_id, "barcode-db"), 9)
+                for m in members
+                if _states_one_of(m, stated, default_hints)
+            ),
+            default=None,
+        )
+        if weakest_stater is not None and claim_kind <= weakest_stater:
+            claimed |= stated
+    if claimed:
+        game_systems = tuple(sorted(claimed))
+        game_systems_why = "; ".join(whys)
+    # A GENERIC VERDICT OUTRANKS A CODE-RANGE FILL AND NOT THE NAME. A store filing a product on
+    # its dice or terrain shelf has said it belongs to no game; a code range saying "this block is
+    # Bolt Action" is a probability and yields to that, but a name printed on the box does not --
+    # `Bolt Action Objective Marker Set` is a Bolt Action product on any shelf.
+    if not game_systems and not generic and code_clauses["gameSystems"] is not None:
         systems_clause = code_clauses["gameSystems"]
         game_systems = tuple(sorted(set(systems_clause.gameSystems)))
         game_systems_basis = CODE
@@ -354,6 +462,7 @@ def decide(
             settings_why=settings_why,
             generic=generic,
             generic_why=generic_why,
+            game_systems_claimed=bool(claimed),
         )
     elif code_clauses["category"] is not None:
         code_clause = code_clauses["category"]
@@ -371,6 +480,7 @@ def decide(
             settings_why=settings_why,
             generic=generic,
             generic_why=generic_why,
+            game_systems_claimed=bool(claimed),
         )
     elif packaging or game_systems or faction or settings or generic:
         # A DECISION WITH NO CATEGORY IS STILL A DECISION. Its `basis` describes the category rung
@@ -389,6 +499,7 @@ def decide(
             settings_why=settings_why,
             generic=generic,
             generic_why=generic_why,
+            game_systems_claimed=bool(claimed),
         )
 
     is_paint = any(code in paint_barcodes for code in barcodes)
@@ -400,6 +511,7 @@ def decide(
                 game_systems_basis=game_systems_basis, game_systems_why=game_systems_why,
                 settings=settings, settings_basis=settings_basis, settings_why=settings_why,
                 generic=generic, generic_why=generic_why,
+                game_systems_claimed=bool(claimed),
             )
         elif decision.category != "paint":
             conflicts.append(
@@ -423,5 +535,6 @@ def decide(
                 faction=faction,
                 game_systems_basis=game_systems_basis,
                 game_systems_why=game_systems_why,
+                game_systems_claimed=bool(claimed),
             )
     return decision, conflicts

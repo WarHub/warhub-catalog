@@ -916,3 +916,171 @@ def test_decide_carries_settings_and_generic_from_a_source_table() -> None:
     dice = [_observation("ret-x:2", "ret-x", hints={"productType": "Dice"})]
     decision, _ = decide("e", dice, {"ret-x": "retailer"}, rules, [], frozenset())
     assert decision.generic and decision.settings == ()
+
+
+# --- membership: the whole claim ---------------------------------------------------------------
+
+
+def test_the_winning_sources_own_stated_game_joins_its_shelf_claim() -> None:
+    """Warlord's store types `productType: Bolt Action` (the stated hint) and tags the same Order
+    Dice `gates-of-antares`. Both are one store's answer, so the claim is the union."""
+    members = [
+        _observation("mfr-w:dice", "mfr-w", manufacturer="warlord-games",
+                     hints={"gameSystem": "bolt-action", "tags": ["gates-of-antares"]}),
+    ]
+    rules = _rules(**{"mfr-w": [{"gameSystems": ["gates-of-antares"],
+                                 "hintContainsAny": {"tags": ["gates-of-antares"]}}]})
+    decision, conflicts = decide(
+        "e", members, {"mfr-w": "manufacturer"}, rules, [], frozenset(),
+        name="Order Dice - Jet Black", manufacturer="warlord-games",
+    )
+    assert decision.gameSystems == ("bolt-action", "gates-of-antares")
+    assert decision.game_systems_basis == "mapped"
+    assert conflicts == []
+
+
+def test_a_lower_ranked_shelf_claim_does_not_join_a_curated_statement() -> None:
+    """The frozen import (curated) says Deadzone; the maker's own store shelves it under DreadBall.
+    The maker's claim is assembled WITHOUT the curated value, so the stage reports rather than
+    extends -- a manufacturer's shelf argues with a curated word, it does not overrule it."""
+    members = [
+        _observation("legacy:chovar", "legacy", manufacturer="mantic-games",
+                     hints={"gameSystem": "deadzone"}),
+        _observation("mfr-m:chovar", "mfr-m", manufacturer="mantic-games",
+                     hints={"categories": ["dreadball"]}),
+    ]
+    rules = _rules(**{"mfr-m": [{"gameSystems": ["dreadball"],
+                                 "hintContainsAny": {"categories": ["dreadball"]}}]})
+    decision, _ = decide(
+        "e", members, {"legacy": "curated", "mfr-m": "manufacturer"}, rules, [], frozenset(),
+        name="Giant Chovar Psychozoan", manufacturer="mantic-games",
+    )
+    assert decision.gameSystems == ("dreadball",)
+
+
+def test_the_products_own_name_joins_a_shelf_claim_at_manufacturer_rank() -> None:
+    """GW's trade sheet files a Kill Team datacard pack under a 40k section; the product's own
+    name says Kill Team. The name is the maker speaking, so the claim is both -- and a code-range
+    clause in the same table stays a fill, consulted only when nothing else spoke."""
+    members = [
+        _observation("mfr-gw-trade:1", "mfr-gw-trade", hints={"tradeCategory": "40K - Generic"}),
+    ]
+    rules = _rules(**{"mfr-gw-trade": [{"gameSystems": ["warhammer-40k"],
+                                        "hintEquals": {"tradeCategory": "40K - Generic"}}]})
+    rules["games-workshop"] = SourceRules(
+        manufacturer="games-workshop", reason="test",
+        clauses=[
+            CategoryClause(gameSystems=["kill-team"], nameMatches=r"\bK/T\b"),
+            CategoryClause(gameSystems=["horus-heresy"], codeMatches=r"^1505"),
+        ],
+    )
+    decision, _ = decide(
+        "e", members, {"mfr-gw-trade": "manufacturer"}, rules, [], frozenset(),
+        name="K/T DATACARDS: BROOD BROTHERS", manufacturer="games-workshop", code="15050117003",
+    )
+    assert decision.gameSystems == ("kill-team", "warhammer-40k")
+    assert decision.game_systems_basis == "mapped"
+    assert "games-workshop name~" in decision.game_systems_why
+
+    # nothing shelved it: the name alone decides, and the code range is not reached
+    alone, _ = decide(
+        "e", members, {"mfr-gw-trade": "manufacturer"}, {"games-workshop": rules["games-workshop"]},
+        [], frozenset(), name="K/T DATACARDS: BROOD BROTHERS", manufacturer="games-workshop",
+        code="15050117003",
+    )
+    assert (alone.gameSystems, alone.game_systems_basis) == (("kill-team",), "code")
+
+    # a generic verdict from the shelf outranks the code-range fill, and not the name: the shelf
+    # says the product belongs to no game, a range says what the block probably is, and the name
+    # is printed on the box
+    generic_rules = _rules(**{"mfr-gw-trade": [{"generic": True,
+                                                "hintEquals": {"tradeCategory": "40K - Generic"}}]})
+    generic_rules["games-workshop"] = rules["games-workshop"]
+    named, _ = decide(
+        "e", members, {"mfr-gw-trade": "manufacturer"}, generic_rules, [], frozenset(),
+        name="K/T DATACARDS: BROOD BROTHERS", manufacturer="games-workshop", code="15050117003",
+    )
+    assert named.generic and named.gameSystems == ("kill-team",)
+    generic_rules["games-workshop"] = SourceRules(
+        manufacturer="games-workshop", reason="test",
+        clauses=[CategoryClause(gameSystems=["horus-heresy"], codeMatches=r"^1505")],
+    )
+    silent, _ = decide(
+        "e", members, {"mfr-gw-trade": "manufacturer"}, generic_rules, [], frozenset(),
+        name="DATACARDS: BROOD BROTHERS", manufacturer="games-workshop", code="15050117003",
+    )
+    assert silent.generic and silent.gameSystems == ()
+
+
+def test_a_sources_declared_fill_is_not_a_statement_and_a_catch_all_is_refined_not_united() -> None:
+    """legacy-catalog's `bolt-action` is its fill bucket (SourceDescriptor.defaultHints), so it
+    joins no union and outranks nothing; and GW's `other-games` is a catch-all, so a specific
+    shelf refines it rather than sitting beside it."""
+    members = [
+        _observation("legacy:1", "legacy", manufacturer="warlord-games", hints={"gameSystem": "bolt-action"}),
+        _observation("mfr-w:1", "mfr-w", manufacturer="warlord-games", hints={"tags": ["hail-caesar"]}),
+    ]
+    rules = _rules(**{"mfr-w": [{"gameSystems": ["hail-caesar"], "hintContainsAny": {"tags": ["hail-caesar"]}}]})
+    kinds = {"legacy": "curated", "mfr-w": "manufacturer"}
+    filled, _ = decide("e", members, kinds, rules, [], frozenset(), name="Oxen", manufacturer="warlord-games",
+                       default_hints={"legacy": {"gameSystem": "bolt-action"}})
+    assert filled.gameSystems == ("hail-caesar",)
+    # without the declaration the curated word is a statement; it outranks the shelf, so no union
+    claimed, _ = decide("e", members, kinds, rules, [], frozenset(), name="Oxen", manufacturer="warlord-games")
+    assert claimed.gameSystems == ("hail-caesar",)
+
+    members = [_observation("mfr-gw:1", "mfr-gw", hints={"gameSystem": "other-games", "lvl1": "Kill Team"})]
+    rules = _rules(**{"mfr-gw": [{"gameSystems": ["kill-team"], "hintEquals": {"lvl1": "Kill Team"}}]})
+    refined, _ = decide("e", members, {"mfr-gw": "manufacturer"}, rules, [], frozenset(),
+                        name="Kill Team: X", manufacturer="games-workshop", catch_alls=frozenset({"other-games"}))
+    assert refined.gameSystems == ("kill-team",)
+    united, _ = decide("e", members, {"mfr-gw": "manufacturer"}, rules, [], frozenset(),
+                       name="Kill Team: X", manufacturer="games-workshop")
+    assert united.gameSystems == ("kill-team", "other-games")
+
+
+def test_a_claim_replaces_a_classified_guess_and_a_code_range_alone_does_not() -> None:
+    """`classified` means a classifier guessed where nothing spoke. A shelf or the product's own
+    name is something speaking, so it replaces the guess (keeping the maker's code range); a code
+    range alone only reports against it, because a range can be wrong across a decade."""
+    from warhub_acquisition.categorize.stage import Outcome, _apply_game_systems
+    from warhub_acquisition.models.catalog import CanonicalProduct
+
+    def record(games, basis):
+        return CanonicalProduct(
+            id="mantic-games/MGKWRK302", name="Ratkin Clawshots", manufacturer="mantic-games",
+            status="current", firstSeen="2026-07-01", gameSystems=games, gameSystemsBasis=basis,
+        )
+
+    members = [_observation("mfr-m:1", "mfr-m", manufacturer="mantic-games",
+                            hints={"categories": ["firefight-plague"]})]
+    rules = _rules(**{"mfr-m": [{"gameSystems": ["deadzone", "firefight"],
+                                 "hintContainsAny": {"categories": ["firefight-plague"]}}]})
+    rules["mantic-games"] = SourceRules(
+        manufacturer="mantic-games", reason="test",
+        clauses=[CategoryClause(gameSystems=["kings-of-war"], codeMatches=r"^MGKW")],
+    )
+    shelf, _ = decide("e", members, {"mfr-m": "manufacturer"}, rules, [], frozenset(),
+                      name="Ratkin Clawshots", manufacturer="mantic-games", code="MGKWRK302")
+    assert shelf.game_systems_claimed
+    guessed = record(["kings-of-war"], "classified")
+    assert _apply_game_systems(guessed, shelf, Outcome(), frozenset())
+    assert (guessed.gameSystems, guessed.gameSystemsBasis) == (["deadzone", "firefight"], "mapped")
+    # and the same decision against its own output finds nothing to do -- the stage is idempotent
+    assert not _apply_game_systems(guessed, shelf, Outcome(), frozenset())
+
+    # the same shelf against a STATED value of a higher kind still only reports
+    stated = record(["kings-of-war"], "stated")
+    outcome = Outcome()
+    assert not _apply_game_systems(stated, shelf, outcome, frozenset())
+    assert [c.kind for c in outcome.conflicts] == ["gameSystem-disagreement"]
+
+    # a code range alone: a fill, not a claim -- the guess stands and the range is reported
+    range_only, _ = decide("e", [], {}, {"mantic-games": rules["mantic-games"]}, [], frozenset(),
+                           name="Ratkin Clawshots", manufacturer="mantic-games", code="MGKWRK302")
+    assert not range_only.game_systems_claimed and range_only.gameSystems == ("kings-of-war",)
+    guessed = record(["deadzone"], "classified")
+    outcome = Outcome()
+    assert not _apply_game_systems(guessed, range_only, outcome, frozenset())
+    assert guessed.gameSystems == ["deadzone"]
+    assert [c.kind for c in outcome.conflicts] == ["gameSystem-disagreement"]

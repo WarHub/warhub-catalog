@@ -18,6 +18,24 @@
 # maintainer moving a product between systems is exactly the thing overrides.yaml is for.
 retract: []
 products:
+  # FIVE PRODUCTS THE FROZEN IMPORT FILED UNDER THE WRONG GAME, 2026-09-02, each contradicted by
+  # the maker's own store and by the product's own name, and left in place by the rule that a
+  # manufacturer's shelf argues with a curated statement rather than overruling it. A person
+  # looked: the Chovar is a DreadBall MVP (Mantic's own shelf), the Warpath team bases are Warpath
+  # (the name and Mantic's code), the Black Seas Thematic Bundle is Black Seas (Warlord's tag and
+  # the name), the American War of Independence starter is Black Powder (Warlord's Napoleonic-wars
+  # tag; Bolt Action is the import's fill bucket), and The Other Side tokens are The Other Side
+  # (the name and Wyrd's tags).
+  mantic-games/giant-chovar-psychozoan:
+    gameSystems: [dreadball]
+  mantic-games/MGWPM109:
+    gameSystems: [warpath]
+  warlord-games/BPDEALSEP05:
+    gameSystems: [black-seas]
+  warlord-games/WGR-ARMY2:
+    gameSystems: [black-powder]
+  wyrd-games/WYR40009:
+    gameSystems: [the-other-side]
   games-workshop/15050101024:
     gameSystems: [kill-team]   # was warhammer-40k (mapped) -- KILL TEAM DATACARDS: SCOUT SQUAD (CHN)
   games-workshop/15050102019:
