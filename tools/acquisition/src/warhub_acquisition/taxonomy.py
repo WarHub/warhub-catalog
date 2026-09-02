@@ -115,9 +115,14 @@ class Settings:
         labels: dict[str, str],
         of_game: dict[str, str],
         settingless: frozenset[str] = frozenset(),
+        catch_alls: frozenset[str] = frozenset(),
     ) -> None:
         self.labels = labels
         self.of_game = of_game
+        # Games declared `catchAll: true` in game-systems.yaml -- buckets rather than claims. A
+        # record holding only a catch-all has not been placed in a game (see
+        # resolve/attributes.py::complete_membership_bases and categorize/stage.py).
+        self.catch_alls = catch_alls
         # Games that belong to NO setting as a fact rather than as a gap -- Steamforged's Epic
         # Encounters are 5e-compatible boxes played in whatever campaign the buyer runs. A product
         # of such a game is `not-applicable` on the settings axis, where a product of a game this
@@ -133,11 +138,14 @@ class Settings:
                 labels[entry["slug"]] = entry["label"]
         of_game: dict[str, str] = {}
         settingless: set[str] = set()
+        catch_alls: set[str] = set()
         systems_path = taxonomy_dir / "game-systems.yaml"
         if systems_path.exists():
             for entry in (read_yaml(systems_path) or {}).get("gameSystems") or []:
                 if entry.get("settingless"):
                     settingless.add(entry["slug"])
+                if entry.get("catchAll"):
+                    catch_alls.add(entry["slug"])
                 setting = entry.get("setting")
                 if setting is None:
                     continue
@@ -147,7 +155,7 @@ class Settings:
                         f"which settings.yaml does not declare"
                     )
                 of_game[entry["slug"]] = setting
-        return cls(labels, of_game, frozenset(settingless))
+        return cls(labels, of_game, frozenset(settingless), frozenset(catch_alls))
 
     def for_games(self, game_systems: list[str]) -> list[str]:
         """The settings a list of games derives, sorted, without duplicates."""

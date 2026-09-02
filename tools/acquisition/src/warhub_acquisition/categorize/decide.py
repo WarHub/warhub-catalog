@@ -305,24 +305,32 @@ def decide(
                 if c.gameSystems and c.nameMatches and _product_hit(name, code or "", c)
             ]
 
-    # SAME-KIND DISAGREEMENT ONLY. Two retailers filing a product differently is a real editorial
-    # split worth a look; a manufacturer and a retailer disagreeing is what the kind ladder is FOR
-    # and reporting it would bury the first kind under thousands of the second.
-    if hits:
-        by_kind: dict[str, set[str]] = {}
-        for member, clause in hits:
-            if clause.category:
-                by_kind.setdefault(kinds.get(member.source_id, "barcode-db"), set()).add(clause.category)
-        for kind, categories in sorted(by_kind.items()):
-            if len(categories) > 1:
-                sources = sorted(
-                    f"{m.source_id}={c.category}"
-                    for m, c in hits
-                    if c.category and kinds.get(m.source_id, "barcode-db") == kind
-                )
-                conflicts.append(
-                    Conflict(entity, "category-disagreement", f"{kind}: {'; '.join(sources)}")
-                )
+    # THE TOP KIND DECIDES, AND WITHIN IT THE VOTE. `hits` is in kind-then-key order, so the first
+    # hit's kind is the highest that answered; among that kind's sources the category most of them
+    # give wins. A TIE DECIDES NOTHING: it falls through to the code and name rungs below and is
+    # reported. Measured 2026-09-02 over the 77 same-kind splits then open: 7 were two retailers
+    # against one and every one had gone to the one because its id sorted first; 10 were 1:1 ties
+    # settled by the alphabet and the alphabet was wrong in all 10 (`Acrylic Thinner` paint,
+    # `Adeptus Titanicus: Traitor Legios` board-game).
+    #
+    # SAME-KIND DISAGREEMENT ONLY, AND ONLY THE KIND THAT DECIDES. Two retailers filing a product
+    # differently is a real editorial split worth a look; a manufacturer and a retailer disagreeing
+    # is what the kind ladder is FOR, and a split among retailers when a manufacturer's shelf
+    # decided is a row nobody can act on -- 21 of the 53 rows then open were exactly that.
+    top_kind = kinds.get(hits[0][0].source_id, "barcode-db") if hits else None
+    top = [(m, c) for m, c in hits if kinds.get(m.source_id, "barcode-db") == top_kind]
+    votes: dict[str, set[str]] = {}
+    for m, c in top:
+        votes.setdefault(c.category, set()).add(m.source_id)
+    most = max((len(v) for v in votes.values()), default=0)
+    leading = [category for category, voters in votes.items() if len(voters) == most]
+    tied = len(leading) > 1
+    if len(votes) > 1:
+        sources = sorted(f"{m.source_id}={c.category}" for m, c in top)
+        outcome = "a tie, left to the code and name rungs" if tied else f"decided {leading[0]}"
+        conflicts.append(
+            Conflict(entity, "category-disagreement", f"{top_kind}: {'; '.join(sources)} -- {outcome}")
+        )
 
     # ONE DIMENSION AT A TIME, first winner down the ladder. A store that files by format and a
     # manufacturer whose code names the game are not in competition -- they answer different
@@ -446,21 +454,8 @@ def decide(
         packaging = code_clauses["packaging"].packaging
 
     decision: Decision | None = None
-    if hits:
-        # THE TOP KIND DECIDES, AND WITHIN IT THE VOTE. `hits` is in kind-then-key order, so the
-        # first hit's kind is the highest that answered; among that kind's sources the category
-        # most of them give wins, and only a tie falls back to key order. Measured 2026-09-02: of
-        # 77 same-kind category disagreements 7 were two retailers against one, and every one of
-        # the seven had gone to the one because its id sorted first (`Historical: WWII Soviet
-        # Union Paint Set` published `paint` on goblingaming's word against radaddel's and
-        # tistaminis' `paint-set`).
-        top_kind = kinds.get(hits[0][0].source_id, "barcode-db")
-        top = [(m, c) for m, c in hits if kinds.get(m.source_id, "barcode-db") == top_kind]
-        votes: dict[str, set[str]] = {}
-        for m, c in top:
-            votes.setdefault(c.category, set()).add(m.source_id)
-        most = max(len(v) for v in votes.values())
-        member, clause = next((m, c) for m, c in top if len(votes[c.category]) == most)
+    if hits and not tied:
+        member, clause = next((m, c) for m, c in top if c.category == leading[0])
         decision = Decision(
             category=clause.category,
             packaging=packaging,
@@ -551,3 +546,15 @@ def decide(
                 game_systems_claimed=bool(claimed),
             )
     return decision, conflicts
+
+
+def game_axis_vetoed(
+    rules: Mapping[str, SourceRules], manufacturer: str | None, name: str, code: str | None
+) -> bool:
+    """Whether the manufacturer's table vetoes the game axis for this product -- Black Library's
+    segment, say. A classifier's guess there is a guess in a place the maker's own table says no
+    game applies; the stage asks this for `classified` records and clears the guess."""
+    table = rules.get(manufacturer or "")
+    if table is None or table.manufacturer is None or not (code or name):
+        return False
+    return _vetoed(table, lambda clause: _product_hit(name, code or "", clause), "gameSystems")

@@ -401,6 +401,12 @@ clauses:
   - codeMatches: '^\d{4}1481\d{3}$'
     settings: [middle-earth]
     note: 0 today; the segment exists and the mapping is the same shape
+  # THE 06 SEGMENT IS 40K-UNIVERSE BOXED GAMES filed under GW's `other-games` catch-all: Blackstone
+  # Fortress, Execution Force, Space Marine Adventures, Imperial Knights: Renegade. A catch-all
+  # places a product in no game, so this clause supplies the universe the way a novel's does; all
+  # 24 names read (2026-09-02).
+  - codeMatches: '^\d{4}06\d{5}$'
+    settings: [warhammer-40k]
 
   # WHITE DWARF BELONGS TO NO ONE SETTING. d34 24 is the magazine, and an issue covers every game
   # GW publishes; placing it in a universe would be false in the same way placing a bag of dice

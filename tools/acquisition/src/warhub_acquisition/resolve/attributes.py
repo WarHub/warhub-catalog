@@ -259,6 +259,8 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
     # revalidate the merged record so an unknown key or wrong-typed value in
     # human-edited overrides.yaml fails loudly instead of being dropped
     merged = CanonicalProduct.model_validate({**product.model_dump(), **patch})
+    if patch.get("category") is not None:
+        merged.categoryBasis = "override"
     if patch.get("gameSystems") is not None:
         merged.gameSystemsBasis = "override"
     if patch.get("settings") is not None:
@@ -346,7 +348,13 @@ def complete_membership_bases(
     to add to it.
     """
     update: dict[str, object] = {}
-    if product.gameSystems:
+    # A CATCH-ALL IS NOT A PLACEMENT. `other-games` is GW's own shelf for everything outside its
+    # flagship systems; a record holding only that has not been placed in any game, so its settings
+    # come from a clause (the 06 segment is 40k-universe boxed games, all 24 read) exactly as a
+    # novel's do, and the games it holds derive nothing. Measured 2026-09-02: 18 records with no
+    # setting and no way to one.
+    placing = [g for g in product.gameSystems if g not in settings.catch_alls]
+    if placing:
         if product.settingsBasis != "override":
             derived = settings.for_games(product.gameSystems)
             update["settings"] = derived
@@ -358,7 +366,7 @@ def complete_membership_bases(
                 update["settingsBasis"] = "unknown"
         return product.model_copy(update=update) if update else product
     if product.settings:
-        if product.gameSystemsBasis in DERIVED_BASES:
+        if not product.gameSystems and product.gameSystemsBasis in DERIVED_BASES:
             update["gameSystemsBasis"] = "setting"
         return product.model_copy(update=update) if update else product
     if product.category not in _NO_GAME_SYSTEM_CATEGORIES or _names_a_game_system(
@@ -374,6 +382,8 @@ def complete_membership_bases(
     # the verdict this way the moment a code-range fill stopped pre-empting it. The predicate can
     # still set `not-applicable` where nothing spoke; it only never takes one away.
     for name in ("gameSystemsBasis", "settingsBasis"):
+        if name == "gameSystemsBasis" and product.gameSystems:
+            continue  # a catch-all-only list keeps whatever basis put it there
         current = getattr(product, name)
         if current in DERIVED_BASES and current != "not-applicable":
             update[name] = basis

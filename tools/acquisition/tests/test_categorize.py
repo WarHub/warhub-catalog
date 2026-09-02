@@ -157,10 +157,11 @@ def test_two_sources_of_the_same_kind_disagreeing_is_reported() -> None:
     decision, conflicts = decide(
         "e", members, {"ret-a": "retailer", "ret-b": "retailer"}, rules, [], frozenset()
     )
-    assert decision.category == "hobby-auxiliary"  # deterministic: kind tie broken on the key
+    assert decision is None  # a 1:1 tie decides nothing (it used to go to the alphabet)
     assert [c.kind for c in conflicts] == ["category-disagreement"]
     assert "ret-a=hobby-auxiliary" in conflicts[0].detail
     assert "ret-b=paint" in conflicts[0].detail
+    assert conflicts[0].detail.endswith("a tie, left to the code and name rungs")
 
 
 def test_a_paint_barcode_decides_a_product_no_table_reached() -> None:
@@ -1111,3 +1112,91 @@ def test_two_sources_of_one_kind_outvote_a_third() -> None:
         "e", members, {"ret-a": "manufacturer", "ret-b": "retailer", "ret-c": "retailer"}, rules, [], frozenset()
     )
     assert decision.category == "paint"
+
+
+def test_a_same_kind_tie_decides_nothing_and_falls_through() -> None:
+    """Two retailers 1:1: the category is not the one whose id sorts first; it comes from the next
+    rung (the maker's code range here) and the split is reported as a tie."""
+    members = [
+        _observation("ret-a:1", "ret-a", hints={"productType": "Paints"}),
+        _observation("ret-b:1", "ret-b", hints={"productType": "Tools"}),
+    ]
+    rules = _rules(**{
+        "ret-a": [{"category": "paint", "hintEquals": {"productType": "Paints"}}],
+        "ret-b": [{"category": "hobby-auxiliary", "hintEquals": {"productType": "Tools"}}],
+    })
+    rules["games-workshop"] = SourceRules(
+        manufacturer="games-workshop", reason="test",
+        clauses=[CategoryClause(category="hobby-auxiliary", codeMatches=r"^9923")],
+    )
+    kinds = {"ret-a": "retailer", "ret-b": "retailer"}
+    decision, conflicts = decide("e", members, kinds, rules, [], frozenset(),
+                                 name="Citadel Tools: Knife", manufacturer="games-workshop", code="99239999117")
+    assert (decision.category, decision.basis) == ("hobby-auxiliary", "code")
+    assert [c.kind for c in conflicts] == ["category-disagreement"]
+    assert conflicts[0].detail.endswith("a tie, left to the code and name rungs")
+    # nothing below: undecided rather than a coin flip
+    none, _ = decide("e", members, kinds, rules, [], frozenset(), name="Citadel Tools: Knife")
+    assert none is None or none.category is None
+    # a majority still decides, and the report says who
+    members.append(_observation("ret-c:1", "ret-c", hints={"productType": "Tools"}))
+    rules["ret-c"] = _rules(**{"ret-c": [{"category": "hobby-auxiliary", "hintEquals": {"productType": "Tools"}}]})["ret-c"]
+    decision, conflicts = decide("e", members, {**kinds, "ret-c": "retailer"}, rules, [], frozenset(), name="Knife")
+    assert (decision.category, decision.why) == ("hobby-auxiliary", "ret-b productType=Tools")
+    assert conflicts[0].detail.endswith("decided hobby-auxiliary")
+
+
+def test_a_classified_guess_in_a_vetoed_segment_is_cleared_so_the_setting_can_place_it() -> None:
+    """Black Library's segment is vetoed for the game axis; a classifier's 40k guess there is
+    cleared and the settings clause places the novel in its universe."""
+    from warhub_acquisition.categorize.stage import Outcome, _apply_game_systems, _apply_settings
+    from warhub_acquisition.models.catalog import CanonicalProduct
+    from warhub_acquisition.taxonomy import Settings
+
+    rules = {"games-workshop": SourceRules(
+        manufacturer="games-workshop", reason="test",
+        noneOf=[CategoryClause(codeMatches=r"^\d{4}\d{2}81", blocks=["gameSystems"])],
+        clauses=[CategoryClause(settings=["old-world"], codeMatches=r"^\d{4}0981")],
+    )}
+    from warhub_acquisition.categorize.decide import game_axis_vetoed
+
+    decision, _ = decide("e", [], {}, rules, [], frozenset(), name="Gotrek", manufacturer="games-workshop",
+                         code="60040981001")
+    assert decision.settings == ("old-world",)
+    assert game_axis_vetoed(rules, "games-workshop", "Gotrek", "60040981001")
+    assert not game_axis_vetoed(rules, "games-workshop", "Gotrek", "99120100001")
+    record = CanonicalProduct(id="games-workshop/60040981001", name="Gotrek", manufacturer="games-workshop",
+                              status="current", firstSeen="2026-07-01", gameSystems=["warhammer-40k"],
+                              gameSystemsBasis="classified")
+    assert _apply_game_systems(record, decision, Outcome(), frozenset(), vetoed_guess=True)
+    assert record.gameSystems == [] and record.gameSystemsBasis == "unknown"
+    assert _apply_settings(record, decision, Outcome(), Settings({"old-world": "The Old World"}, {}))
+    assert record.settings == ["old-world"]
+    # a stated game in the same segment is left alone
+    stated = record.model_copy(update={"gameSystems": ["warhammer-40k"], "gameSystemsBasis": "stated"})
+    assert not _apply_game_systems(stated, decision, Outcome(), frozenset(), vetoed_guess=True)
+    assert stated.gameSystems == ["warhammer-40k"]
+
+
+def test_a_catch_all_only_game_list_does_not_block_a_settings_clause() -> None:
+    from warhub_acquisition.categorize.stage import Outcome, _apply_settings
+    from warhub_acquisition.models.catalog import CanonicalProduct
+    from warhub_acquisition.resolve.attributes import complete_membership_bases
+    from warhub_acquisition.taxonomy import Settings
+
+    settings = Settings({"warhammer-40k": "Warhammer 40,000"}, {}, frozenset(), frozenset({"other-games"}))
+    record = CanonicalProduct(id="games-workshop/60020699002", name="Imperial Knights: Renegade",
+                              manufacturer="games-workshop", status="current", firstSeen="2026-07-01",
+                              gameSystems=["other-games"], gameSystemsBasis="stated")
+    rules = {"games-workshop": SourceRules(manufacturer="games-workshop", reason="test",
+                                           clauses=[CategoryClause(settings=["warhammer-40k"], codeMatches=r"^\d{4}06")])}
+    decision, _ = decide("e", [], {}, rules, [], frozenset(), name="Renegade", manufacturer="games-workshop",
+                         code="60020699002")
+    assert _apply_settings(record, decision, Outcome(), settings, frozenset({"other-games"}))
+    assert record.settings == ["warhammer-40k"]
+    completed = complete_membership_bases(record, {}, settings)
+    assert completed.settings == ["warhammer-40k"] and completed.gameSystemsBasis == "stated"
+    # with a real game beside the catch-all, the games derive the setting as before
+    placed = record.model_copy(update={"gameSystems": ["kill-team", "other-games"]})
+    derived = complete_membership_bases(placed, {}, Settings({"warhammer-40k": "W"}, {"kill-team": "warhammer-40k"}, frozenset(), frozenset({"other-games"})))
+    assert (derived.settings, derived.settingsBasis) == (["warhammer-40k"], "derived")

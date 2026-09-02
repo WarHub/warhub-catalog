@@ -25,6 +25,15 @@ reason: >-
   Measured 2026-09-01 against products decided by evidence this store did not supply.
 
 clauses:
+  # PAINT SETS, BEFORE THE PAINT SHELVES: the four sets that carry both a range tag and a set
+  # tag are sets (2026-09-02), and WP8061/WP8113 carry the singular `Army Painter Paint Set`.
+  # `packaging: set` is what the shelf name asserts; 23 of the 26 already publish
+  # `paint-set` from other evidence.
+  - category: paint-set
+    packaging: set
+    hintContainsAny:
+      tags: ['Paint Sets', 'Army Painter Paint Sets', 'Army Painter Paint Set']
+
   # PAINT. 67 products under this shelf, every one a Monument Hobbies colour record; 18 of them
   # appear in `data/paints/brands/monument-pro-acryl.yaml` under the same productCode (AMP-002,
   # AMP-004, ...) and the remaining 49 are the MPA-S Signature and MPA-F Fluorescent ranges, colour
@@ -47,12 +56,6 @@ clauses:
       tags: ['Army Painter Paints', 'Speedpaint', 'Green Stuff World Paints']
     note: 363 products, 361 of which another source already calls paint
 
-  # PAINT SETS. `packaging: set` is what the shelf name asserts; 23 of the 26 already publish
-  # `paint-set` from other evidence.
-  - category: paint-set
-    packaging: set
-    hintContainsAny:
-      tags: ['Paint Sets', 'Army Painter Paint Sets']
 
   # BOOKS. Black Library is Games Workshop's fiction imprint; all 24 undecided members read
   # `... (HB)` / `... (PB)` / `THE ART OF WARHAMMER 40000`, and 78 of the 103 products carrying the
@@ -61,6 +64,12 @@ clauses:
     hintContainsAny:
       tags: ['Black Library']
     note: 24 products
+
+  # A PLAY SURFACE IS AN ACCESSORY (categories.yaml `terrain` boundary): the 12 `Gaming Mat` rows
+  # are 9 mats, 2 objective-template sets and 3 Halo mats nothing had placed (2026-09-02).
+  - category: game-accessory
+    hintContainsAny:
+      tags: ['Gaming Mat']
 
   # TERRAIN. `Other Terrain` is 18 Warlord pre-painted Normandy buildings plus
   # `Waterloo La Belle Alliance`. Corroborated sideways: the sibling `Warlord Games Other` shelf

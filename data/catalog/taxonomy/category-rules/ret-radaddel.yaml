@@ -49,19 +49,10 @@ clauses:
       tags: ['AK-Interactive Pinsel', 'AK-PINSEL*', 'The Army Painter Pinsel', 'PINSEL AP*']
     note: Pinsel = brushes
 
-  # --- SETS BEFORE SINGLES, for the same reason ------------------------------------------------
-  # `Farbset` = colour set. A boxed set carries both its set shelf and its range shelf; the range
-  # clause would otherwise call it a single paint. 80 independently-STATED `paint-set` products
-  # grade these at 92 of 94.
-  - category: paint-set
-    packaging: set
-    hintContainsAny:
-      tags: ['AK-Farbsets', 'AK-FARBSETS*', 'AK-Real Colors Farbsets', 'AK-REAL COLORS FARBSETS*',
-             'AK-Weathering Sets', 'WEATHERING SETS*', 'Vallejo Farbsets', 'VALLEJO FARBSETS*',
-             'Farbsets Army Painter', 'FARBSETS AP*', 'Pro Acryl Farbsets', 'PRO ACRYL FARBSETS*']
-    note: Farbset = colour set; every member name ends in "Set"
-
-  # --- WHAT IS USED TO BUILD AND FINISH, before the colour ranges -------------------------------
+  # --- WHAT IS USED TO BUILD AND FINISH, before the sets and the colour ranges -----------------
+  # BEFORE THE SETS, since 2026-09-02: the store files its two Vallejo brush cleaners in the
+  # `VALLEJO FARBSETS*` collection, and a tool is a tool whatever collection it sits in. Those two
+  # rows are the whole overlap between the tags below and the set tags.
   # German glossary: Werkzeuge = tools, Zubehör = accessories, Kleber = glue, Malzubehör = painting
   # accessories, Nasspaletten = wet palettes, Modelliermassen = putty, Schablonen = stencils,
   # Magnete/Magnetfolie = magnets. Corroborated across vendors where controls exist:
@@ -83,19 +74,37 @@ clauses:
              'AK Bases']
     note: tools, glue, magnets, airbrush hardware, stencils and bare bases
 
+  # --- SETS BEFORE SINGLES, for the same reason ------------------------------------------------
+  # `Farbset` = colour set. A boxed set carries both its set shelf and its range shelf; the range
+  # clause would otherwise call it a single paint. 80 independently-STATED `paint-set` products
+  # grade these at 92 of 94.
+  - category: paint-set
+    packaging: set
+    hintContainsAny:
+      tags: ['AK-Farbsets', 'AK-FARBSETS*', 'AK-Real Colors Farbsets', 'AK-REAL COLORS FARBSETS*',
+             'AK-Weathering Sets', 'WEATHERING SETS*', 'Vallejo Farbsets', 'VALLEJO FARBSETS*',
+             'Farbsets Army Painter', 'FARBSETS AP*', 'Pro Acryl Farbsets', 'PRO ACRYL FARBSETS*']
+    note: Farbset = colour set; every member name ends in "Set"
+
+
   # BASING AND DIORAMA MATERIALS. AK's texture shelf is gravel, rocks, cork, lichen, resin water
   # and ground pastes sold in 100/250 ml pots -- `Fine Gray Gravel 1-3 MM - 100ml`,
   # `Terrains Asphalt - 250ml (Acryl)`. None is in the paint catalog. categories.yaml puts basing
   # materials in `hobby-auxiliary` explicitly, and this clause corrects 53 products the lexicon's
   # millilitre pattern currently calls `paint`.
   #
-  # VALLEJO'S TEXTURE SHELF IS NOT THE SAME OBJECT and is deliberately absent: all 12
-  # `VALLEJO TEXTUREN*` products ARE in the paint catalog, as non-colourless `Diorama FX`, with
-  # colour names (`Textur Brown Earth`, `Desert Sand`). Two brands, one English word, two answers.
+  # VALLEJO'S TEXTURE SHELF IS THE SAME OBJECT after all (corrected 2026-09-02). It used to be
+  # absent because the paint catalog carries its 12 products as `Diorama FX` records with colour
+  # names -- but the paint catalog carries Vallejo's whole colour chart, and categories.yaml is
+  # explicit that a texture paste, a water gel or a pumice is a basing material whoever lists it.
+  # All 20 rows carrying the tag are textures and water effects (`Transparent Water (colorless)`,
+  # `Still Water Clear` in the store's own titles), and goblingaming's `Basing Materials` shelf
+  # files the same bottles the same way.
   - category: hobby-auxiliary
     hintContainsAny:
       tags: ['AK-Diorama Texturen', 'AK-DIORAMA SERIES*', 'AK-Diorama Vegetation',
-             'AK-Diorama Basing Bits', 'AK-DIORAMA BASING BITS*', 'AK-DIORAMA ZUBEHÖR*']
+             'AK-Diorama Basing Bits', 'AK-DIORAMA BASING BITS*', 'AK-DIORAMA ZUBEHÖR*',
+             'Vallejo Texturen', 'VALLEJO TEXTUREN*']
     note: basing and diorama materials, not colour
 
   # --- BOOKS ------------------------------------------------------------------------------------
@@ -107,6 +116,16 @@ clauses:
       tags: ['Black Library Englisch', 'Black Library Deutsch', 'AK-Kompendien & Bücher',
              "AK-KOMPENDIEN/BÜCHER & DVD`S*"]
     note: Bücher = books
+
+  # --- MODELS ON AN ACCESSORIES SHELF, decided first (2026-09-02) ------------------------------
+  # `Kill Team Truppen` (Truppen = troops) is 34 of 34 miniatures by name, 33 already published
+  # so; the 12 Endless Spells are plastic kits on the `AoS Zubehör` shelf beside 60 dice, card
+  # and marker packs.
+  - category: miniatures
+    hintContainsAny:
+      tags: ['Kill Team Truppen']
+  - category: miniatures
+    nameMatches: '\bENDLESS SPELLS?\b'
 
   # --- THINGS PLAYED WITH ----------------------------------------------------------------------
   # `Zubehör` under a GAME shelf means something different from `Zubehör` under a paint brand:

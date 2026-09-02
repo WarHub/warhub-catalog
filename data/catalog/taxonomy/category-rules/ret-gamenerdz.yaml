@@ -47,6 +47,9 @@ clauses:
   - category: hobby-auxiliary
     nameMatches: '\b\d+\s?MM\b.*\bBASES?\b'
     note: bare bases sold under a game's own department -- categories.yaml `miniatures` boundary
+  - category: book
+    nameMatches: '\b(HARDCOVER|HARDBACK|PAPERBACK)\b'
+    note: 2 of 2 on the Board/Boxed Games crumbs (Traitor Legios, Shadow & Iron), both ISBN-barcoded (2026-09-02)
   - category: board-game
     hintContainsAny: {breadcrumbs: [Board Games]}
   - category: board-game

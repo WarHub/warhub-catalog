@@ -22,6 +22,39 @@ reason: >-
   vocabulary itself rather than something this table should pre-empt.
 
 clauses:
+  # NARROW BEFORE BROAD, since 2026-09-02: a scan takes the first clause that answers the axis, so
+  # the name guards and the shelves a `Scenery` tag rides on come before `Miniatures`. Every
+  # number here is from the adjudication of that day's review rows.
+  - category: game-accessory
+    nameMatches: '\bDICE\b(?!\s+GAME)'
+    note: >-
+      Dice 61 + Dice Accessories 6 agree; 1 dice pack on the Miniatures shelf corrected, 3 untyped
+      dice packs decided; the lookahead keeps `Invincible The Dice Game` out
+  - category: hobby-auxiliary
+    nameMatches: '\b\d+\s?MM\b.*\bBASES?\b'
+    note: bases sold under a game's shelf are components (categories.yaml `miniatures`); 1 row, 0 collateral
+  - category: book
+    nameMatches: '\b(HARDCOVER|HARDBACK|PAPERBACK)\b|\((HB|PB)\)'
+    note: Novels 115 + Rules Supplements 2 agree; 9 untyped Black Library rows decided, 1 paperback on the Miniatures shelf corrected
+  - category: game-accessory
+    hintEquals: {productType: Game Mats}
+    note: a play surface, not modelled scenery -- categories.yaml `terrain` boundary
+  - category: hobby-auxiliary
+    hintEquals: {productType: Basing Materials}
+  - category: hobby-auxiliary
+    hintEquals: {productType: Bases}
+  - category: hobby-auxiliary
+    hintEquals: {productType: 'Model Bases'}
+    note: >-
+      the store uses both spellings for the same shelf -- `Bases` on 77 rows and `Model Bases` on
+      2, and only the first was mapped; a blank base is a component of the hobby, not a model
+      (categories.yaml `miniatures`)
+  - category: terrain
+    hintContainsAny: {tags: [Scenery]}
+    note: >-
+      9 rows on the Miniatures shelf carry it, 7 already terrain and 2 Civitas Imperialis buildings
+      wrongly miniatures; the mats/basing/bases shelves above carry it on 13/4/1 rows and decide first
+
   - category: miniatures
     hintEquals: {productType: Miniatures}
 
@@ -34,6 +67,23 @@ clauses:
     packaging: set
     hintEquals: {productType: Starter Set}
 
+  # COLOUR IS THE TEST (categories.yaml): the three paint shelves hold 75 colourless agents by
+  # name -- thinners, cleaners, varnishes, mediums, palette paper -- 44 of them flagged colourless
+  # in the paint catalog. The lookahead keeps the 25 `Medium <colour>` pots (Medium Sea Grey) in;
+  # the 10 `Medium Mortar/Artillery/Walker` rows sit on the Miniatures shelf, which decides first.
+  # Also reaches 3 Aerosols varnish sprays and one untyped brush.
+  - category: hobby-auxiliary
+    nameMatches: '\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK))'
+  # A TEXTURE PASTE IS A BASING MATERIAL whoever lists it (categories.yaml `hobby-auxiliary`):
+  # Vallejo's Diorama Effects range -- pumice, sand, earth, lava, water gels, foam -- was split by
+  # this store between `Basing Materials` (14) and the paint shelves (33); 47 of 47 by name.
+  - category: hobby-auxiliary
+    nameMatches: '\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b'
+  # A SET IS A SET on any shelf: 32 Vallejo sets filed under Paints/Airbrush Paints, named with
+  # their count (`Face & Skin Tones Set 16x`); 43 Paint Sets rows agree, 0 hits elsewhere.
+  - category: paint-set
+    packaging: set
+    nameMatches: '\bPAINT SET\b|\bSET\s*\d+\s?X\b'
   - category: paint
     hintEquals: {productType: Paints}
   - category: paint
@@ -78,16 +128,6 @@ clauses:
   - category: hobby-auxiliary
     hintEquals: {productType: Brushes}
   - category: hobby-auxiliary
-    hintEquals: {productType: Basing Materials}
-  - category: hobby-auxiliary
-    hintEquals: {productType: Bases}
-  - category: hobby-auxiliary
-    hintEquals: {productType: 'Model Bases'}
-    note: >-
-      the store uses both spellings for the same shelf -- `Bases` on 77 rows and `Model Bases` on
-      2, and only the first was mapped
-    note: a blank base is a component of the hobby, not a model -- categories.yaml `miniatures`
-  - category: hobby-auxiliary
     hintEquals: {productType: Hobby Tools}
   - category: hobby-auxiliary
     hintEquals: {productType: Decals}
@@ -110,9 +150,6 @@ clauses:
     hintEquals: {productType: Dice Accessories}
   - category: game-accessory
     hintEquals: {productType: Tokens}
-  - category: game-accessory
-    hintEquals: {productType: Game Mats}
-    note: a play surface, not modelled scenery -- categories.yaml `terrain` boundary
   - category: game-accessory
     hintEquals: {productType: Roleplaying Game Accessories}
 

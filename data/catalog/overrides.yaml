@@ -18,6 +18,65 @@
 # maintainer moving a product between systems is exactly the thing overrides.yaml is for.
 retract: []
 products:
+  # THE 2026-09-02 ADJUDICATION OF data/review/categorize.yaml, per product where no rule settles
+  # the class. Evidence per row is in the PR that landed them; in one line each:
+  #   AK11500 is a thinner and AK9511 wet-palette paper (radaddel's own tags say so); Vallejo 28890
+  #   and 28900 are brush restorer/cleaner, `colourless` in the paint catalog, and radaddel's
+  #   Farbsets collection is not a set; WP8112 is a ten-pot set Warlord's store typed `Paint Pot`;
+  #   WP8124/25 are ten- and twenty-pot sets goblingaming filed as paint and the maker's snapshot
+  #   predates; CBARI38 is a card deck; the two Maxx Darth pots are GSW's blackest-black acrylic
+  #   on a supplies shelf; the seven game rows follow the maker's own pages (an AoS painting guide,
+  #   a Tzeentch battalion, a Mortal Realms issue-500 dwarf, a Mark III box GW files as 40k, two
+  #   Mantic products Mantic sells into two games, a Konflikt '47 Open Day hero); and the three
+  #   setting rows are a 40k novel, an AoS anthology and a WWII radar station that belong to a
+  #   universe and to no game.
+  ak-interactive/AK11500:
+    category: hobby-auxiliary
+  ak-interactive/AK9511:
+    category: hobby-auxiliary
+  vallejo/28890:
+    category: hobby-auxiliary
+    packaging: single
+  vallejo/28900:
+    category: hobby-auxiliary
+    packaging: single
+  army-painter/WP8112:
+    category: paint-set
+  army-painter/WP8124:
+    category: paint-set
+  army-painter/WP8125:
+    category: paint-set
+  corvus-belli/CBARI38:
+    category: game-accessory
+  green-stuff-world/green-stuff-world-maxx-darth-black-paint-17-ml:
+    category: paint
+  green-stuff-world/green-stuff-world-maxx-darth-paint-60-ml:
+    category: paint
+  games-workshop/60630201016:
+    gameSystems: [age-of-sigmar]
+  games-workshop/99020201041:
+    gameSystems: [age-of-sigmar]
+  games-workshop/99120205059:
+    gameSystems: [age-of-sigmar]
+  games-workshop/99120101170:
+    gameSystems: [horus-heresy, warhammer-40k]
+  mantic-games/MGSS308:
+    gameSystems: [deadzone, star-saga]
+  mantic-games/marauder-raptor-warpath:
+    gameSystems: [deadzone, warpath]
+  warlord-games/453210803:
+    gameSystems: [konflikt-47]
+  games-workshop/60040181405:
+    gameSystems: []
+    faction: null
+    settings: [warhammer-40k]
+  games-workshop/60040281097:
+    gameSystems: []
+    faction: null
+    settings: [age-of-sigmar]
+  sarissa-precision/N031:
+    gameSystems: []
+    settings: [world-war-two]
   # FIVE PRODUCTS THE FROZEN IMPORT FILED UNDER THE WRONG GAME, 2026-09-02, each contradicted by
   # the maker's own store and by the product's own name, and left in place by the rule that a
   # manufacturer's shelf argues with a curated statement rather than overruling it. A person
