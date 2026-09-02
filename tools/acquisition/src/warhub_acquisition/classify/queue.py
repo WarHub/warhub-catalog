@@ -61,9 +61,19 @@ def _first(values: list[object | None]) -> object | None:
 
 
 def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
-    """Every product id in the RESOLVED catalog (data/catalog/products/*.yaml) whose gameSystem
-    is null. gameSystem is optional now -- the resolver publishes these products instead of
-    parking them -- but they still await an OPTIONAL classification decision.
+    """Every product in the RESOLVED catalog whose gameSystem is genuinely UNKNOWN.
+
+    SELECTS ON `gameSystemBasis`, NOT ON `gameSystem is None`, and the difference is most of the
+    queue. A null gameSystem carries two facts: a game product nobody has classified, and a pot of
+    paint that belongs to no game system and never will. The old test could not tell them apart, so
+    it enrolled both -- measured 2026-08-31, 5,870 of 14,265 queued products (41%) were paint,
+    paint sets and hobby auxiliaries whose correct answer is that the question does not apply.
+
+    That is not merely wasteful. `batch_pending` slices a budget POSITIONALLY over an
+    entity-id-ordered queue, so the first 176 batches of any partial wave were pure ak-interactive
+    and army-painter -- a classification campaign could spend its entire budget being told that
+    paint is paint, and report success. Selecting on the basis removes them at the source rather
+    than asking a model to rule them out one batch at a time.
     """
     if not paths.catalog_products.exists():
         return []
@@ -71,7 +81,7 @@ def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         data = read_yaml(path) or {}
         for record in data.get("products") or []:
-            if record.get("gameSystem") is None:
+            if record.get("gameSystemBasis") == "unknown":
                 ids.add(record["id"])
     return sorted(ids)
 

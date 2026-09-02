@@ -171,14 +171,18 @@ data/
    uv run warhub-data classify --data ../../data --emit-queue
    uv run --no-sync python scripts/classify_local.py \
        --data ../../data --run-date "$(date -u +%F)" --mode classify --budget 500
-   uv run warhub-data classify --data ../../data --apply
    uv run warhub-data resolve   --data ../../data
    uv run warhub-data categorize --data ../../data
    ```
 
    `--emit-queue` writes `data/review/classification-queue.yaml`; the driver sends it in batches
-   and writes accepted decisions to `data/catalog/classifications/products.yaml`; `--apply` merges
-   those into `data/catalog/overrides.yaml`.
+   and writes accepted decisions to `data/catalog/classifications/products.yaml`, which **`resolve`
+   reads directly**. There is no `--apply` step: a machine guess never enters
+   `data/catalog/overrides.yaml`, which is for human decisions that outrank every source. A
+   classification fills only what the evidence left empty and is recorded as
+   `gameSystemBasis: classified`, so it can never overrule a source that disagrees.
+   **The queue holds only `gameSystemBasis: unknown`** — products where the question applies and
+   nothing has answered it. A paint pot is `not-applicable` and is never queued.
    **`--emit-queue` also prices the wave before you start it**, reporting how many cache entries
    the new queue can still reach and how many requests a full wave therefore costs. Read that line:
    the price is the part the cache cannot answer, not the queue length, and the two diverge without

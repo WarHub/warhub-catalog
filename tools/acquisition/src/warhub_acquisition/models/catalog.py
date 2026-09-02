@@ -28,6 +28,34 @@ class CanonicalProduct(BaseModel):
     supersededBy: str | None = None
     gameSystem: str | None = None
     faction: str | None = None
+    # WHAT DECIDED `gameSystem` -- or, for most of the catalog, what decided that nothing did.
+    # Sibling of `categoryBasis` below and written for the same reason: a field with a fallback
+    # behind it hides its own failures, because every product ends up with a value either way.
+    # Here the fallback is `null`, which is worse than a wrong value, because `null` was carrying
+    # TWO facts that need opposite responses:
+    #
+    #   not-applicable  nothing is missing. A pot of Vallejo Model Color belongs to no game system
+    #                   and never will. 5,870 products, measured 2026-08-31.
+    #   unknown         a game product this pipeline failed to classify. 8,395 products.
+    #
+    # Conflating them is not a cosmetic problem. `classify --emit-queue` selected on
+    # `gameSystem is None`, so 41% of a 14,265-item LLM classification queue was paint waiting to
+    # be told it was paint -- and because the queue is sliced positionally, the first 176 batches
+    # of any partial wave were nothing else (see classify/_llm_common.py::batch_pending).
+    #
+    #   stated          a source asserted it for this product.
+    #   mapped          a committed rule table over the taxonomy that source itself published, or
+    #                   over the manufacturer's own structured product code.
+    #   classified      an LLM proposed it. RANKED BELOW EVIDENCE, which it was not before: a
+    #                   classification wave wrote its guesses into overrides.yaml, the file whose
+    #                   entire purpose is human decisions that outrank every source, so 1,819
+    #                   Haiku labels were deciding published records over the sources that
+    #                   contradicted them -- including `SQUIG ORANGE (6-PACK) 12ML -> the-old-world`.
+    #
+    # NOT PUBLISHED YET, for exactly the reason `categoryBasis` gives: the vocabulary is still
+    # moving, and churning a consumer contract for a field that is about to grow is the wrong
+    # trade. It lives in the archive until it settles.
+    gameSystemBasis: str | None = None
     category: str | None = None
     # WHAT DECIDED `category` -- the field that makes the guess countable.
     #

@@ -52,6 +52,7 @@ products:
     eanConfidence: provisional
     gameSystem: warhammer-40k
     faction: necrons
+    gameSystemBasis: stated
     category: miniatures
     categoryBasis: guessed
     status: current
@@ -367,8 +368,12 @@ def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_pat
     assert read_yaml(paths.conflicts) == {"conflicts": []}
     # documented invariant (holds by construction -- overrides apply post-identity): the patch
     # touched nothing but the two classification attributes
-    assert after.model_dump(exclude={"gameSystem", "faction"}) == before.model_dump(
-        exclude={"gameSystem", "faction"}
+    # `gameSystemBasis` moves with them: the override IS what decided the value, and recording
+    # which of `stated`/`mapped`/`classified`/`override` decided a gameSystem is the whole point of
+    # the field. Everything else must still be untouched.
+    assert after.gameSystemBasis == "override"
+    assert after.model_dump(exclude={"gameSystem", "faction", "gameSystemBasis"}) == before.model_dump(
+        exclude={"gameSystem", "faction", "gameSystemBasis"}
     )
 
 

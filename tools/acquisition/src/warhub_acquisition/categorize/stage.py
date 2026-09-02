@@ -25,7 +25,9 @@ from typing import Mapping, Sequence
 
 from warhub_acquisition.models.catalog import CanonicalProduct
 from warhub_acquisition.models.observation import Observation
+from warhub_acquisition.resolve.attributes import complete_game_system_basis
 from warhub_acquisition.resolve.resolver import DataPaths, _dump_product, joined_evidence
+from warhub_acquisition.taxonomy import load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
@@ -37,6 +39,11 @@ from .rules import SourceRules, load_category_rules
 #: The two bases this stage is allowed to replace. `stated` is a source's claim about one product
 #: and outranks any table; anything an override set is a maintainer's decision. Neither is touched.
 REPLACEABLE = frozenset({"guessed", "default"})
+
+#: The gameSystem bases this stage may recompute. Both are DERIVED -- they say what happened
+#: when nothing supplied a value -- so re-deriving them against a freshly decided category is
+#: the whole point. `stated`, `mapped` and `override` trace to a claim and are never touched.
+DERIVED_GAME_SYSTEM_BASES = frozenset({"unknown", "not-applicable", None})
 
 #: Hint keys that carry a source's own taxonomy. Only these are counted in the unmapped ranking --
 #: `description` and `quantity` are facts about a product, not filing categories, and listing them
@@ -73,6 +80,10 @@ class Outcome:
     #: `{basis: products}` over the WHOLE catalog after this run -- the figure that survives a
     #: re-run, and the one the report and the PR body quote.
     catalog_basis: Counter = field(default_factory=Counter)
+    #: `{gameSystemBasis: products}` over the whole catalog after this run. Sibling of
+    #: `catalog_basis`; `unknown` here is the real size of the classification problem, and it is
+    #: the number `classify --emit-queue` turns into a queue.
+    game_system_basis: Counter = field(default_factory=Counter)
     #: `{"<source> <signal>": observations matched}`, counted over ALL evidence rather than over
     #: the products this run decided. Counting the run instead made every clause look dead the
     #: moment the catalog was already categorized, which is exactly when someone would read it.
@@ -142,6 +153,7 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 f"`crossoverToProducts`, which stamps a category itself. Delete the table."
             )
 
+    system_labels, _ = load_labels(paths.taxonomy)
     outcome = Outcome(clause_hits=_count_clause_hits(joined.entities, rules))
     if not paths.catalog_products.exists():
         return outcome
@@ -166,7 +178,23 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                     touched = True
                 else:
                     _count_unmapped(outcome, members)
+            # THE GAME-SYSTEM BASIS IS SETTLED HERE, NOT IN `resolve`, because it is a question
+            # about the CATEGORY and `resolve` does not yet know the answer to that one. A paint
+            # pot leaves the resolver as `miniatures`/`guessed` -- the fallback fires precisely
+            # because nothing had decided -- and only this stage turns it into `paint`. Deciding
+            # `not-applicable` upstream therefore asked the question one pass too early and got
+            # `unknown` for 4,189 products that are plainly hobby supplies.
+            #
+            # Only the two DERIVED values are ever recomputed. `stated`, `mapped` and `override`
+            # trace to something and this stage has nothing to add to them -- the same rule
+            # REPLACEABLE states for categoryBasis, for the same reason.
+            if record.gameSystemBasis in DERIVED_GAME_SYSTEM_BASES:
+                settled = complete_game_system_basis(record, system_labels).gameSystemBasis
+                if settled != record.gameSystemBasis:
+                    record.gameSystemBasis = settled
+                    touched = True
             outcome.catalog_basis[record.categoryBasis or "none"] += 1
+            outcome.game_system_basis[record.gameSystemBasis or "none"] += 1
         if touched and apply:
             write_yaml(
                 path,

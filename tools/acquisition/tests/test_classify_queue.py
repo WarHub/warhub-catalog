@@ -163,6 +163,10 @@ def test_build_queue_missing_evidence_for_null_game_system_product_raises(tmp_pa
                     "manufacturer": "games-workshop",
                     "status": "current",
                     "firstSeen": "2026-01-01",
+                    # The queue's population is `gameSystemBasis: unknown`, not "gameSystem is
+                    # null" -- a record without the basis is one `resolve` never wrote, and this
+                    # test is about a QUEUED product whose evidence has gone missing.
+                    "gameSystemBasis": "unknown",
                 }
             ],
         },
@@ -295,19 +299,40 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
 
     queue = build_queue(paths)
 
-    # Self-consistency, not a literal: count of null-gameSystem products in the RESOLVED
-    # catalog changes with every committed `resolve` run. Note this is commonly 0 in this repo
-    # today -- gameSystem becoming optional is a code change, not a data migration; the
-    # committed data/catalog/products/*.yaml was last resolved under the old parking behavior,
-    # and stays that way until the controller re-runs `resolve` (out of scope here).
-    null_game_system = 0
+    # Self-consistency, not a literal: the figure moves with every committed `resolve` run.
+    #
+    # THE QUEUE IS NO LONGER "EVERY NULL gameSystem", and the gap between the two numbers is the
+    # point of the basis field. A null gameSystem is either a hobby product that will never have
+    # one or a game product nobody has classified; only the second is a question, and only the
+    # second belongs in a queue that spends money to answer questions. Measured 2026-08-31 over
+    # the committed catalog: 14,265 nulls, of which 5,885 not-applicable and 8,380 unknown.
+    counts = {"null": 0, "unknown": 0, "not-applicable": 0}
     if paths.catalog_products.exists():
         for path in paths.catalog_products.glob("*.yaml"):
             data = read_yaml(path) or {}
-            null_game_system += sum(
-                1 for p in (data.get("products") or []) if p.get("gameSystem") is None
-            )
-    assert len(queue) == null_game_system
+            for record in data.get("products") or []:
+                if record.get("gameSystem") is None:
+                    counts["null"] += 1
+                basis = record.get("gameSystemBasis")
+                if basis in counts:
+                    counts[basis] += 1
+    assert len(queue) == counts["unknown"]
+    # And the split is real rather than a rename: both halves are populated, and together they
+    # account for every null. A regression that reverted the selector would trip this.
+    assert counts["not-applicable"] > 0
+    assert counts["unknown"] + counts["not-applicable"] == counts["null"]
+
+    # NOTHING IN THE QUEUE IS A PRODUCT WHOSE QUESTION DOES NOT APPLY. Paint is the population
+    # that made this worth fixing: it was 41% of the queue and the first 176 batches of any
+    # partial wave.
+    resolved = {}
+    for path in paths.catalog_products.glob("*.yaml"):
+        for record in (read_yaml(path) or {}).get("products") or []:
+            resolved[record["id"]] = record
+    assert not [
+        item["entity"] for item in queue
+        if resolved[item["entity"]].get("gameSystemBasis") != "unknown"
+    ]
     for item in queue:
         assert item["name"]
         assert item["manufacturer"] in taxonomy.manufacturers

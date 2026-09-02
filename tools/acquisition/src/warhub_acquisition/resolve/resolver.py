@@ -9,10 +9,15 @@ from warhub_acquisition.models.catalog import CanonicalProduct, Overrides, Retai
 from warhub_acquisition.models.descriptor import SourceDescriptor, load_descriptors
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve import crossover
-from warhub_acquisition.resolve.attributes import apply_overrides, resolve_attributes
+from warhub_acquisition.resolve.attributes import (
+    apply_classification,
+    apply_overrides,
+    complete_game_system_basis,
+    resolve_attributes,
+)
 from warhub_acquisition.resolve.corroborate import find_shared_eans, resolve_ean
 from warhub_acquisition.resolve.join import Matches, join_observations
-from warhub_acquisition.taxonomy import Taxonomy
+from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import dump_yaml, read_yaml, write_yaml
 
@@ -329,6 +334,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     kinds = {sid: descriptor.kind for sid, descriptor in descriptors.items()}
     category_maps = _load_mappings(paths.mappings)
     vocabulary = load_vocabulary(paths.taxonomy)
+    system_labels, _ = load_labels(paths.taxonomy)
     default_hints = {sid: d.defaultHints for sid, d in descriptors.items() if d.defaultHints}
     stale_fields = {sid: d.staleFields for sid, d in descriptors.items() if d.staleFields}
 
@@ -339,6 +345,11 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
 
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     overrides: Overrides = _load_optional(paths.overrides, Overrides, Overrides())
+    # Read HERE rather than merged into overrides.yaml by `classify --apply`, which is how a
+    # machine guess came to outrank every source. See attributes.apply_classification.
+    classifications: dict[str, dict] = (
+        read_yaml(paths.classifications) or {} if paths.classifications.exists() else {}
+    )
     retained: RetainedEans = _load_optional(paths.retained_eans, RetainedEans, RetainedEans())
 
     retracted = set(overrides.retract)
@@ -446,15 +457,20 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         keep = [e for e in retained.retained.get(record.id, []) if e != record.ean]
         if keep:
             record.additionalEans = sorted({*record.additionalEans, *keep})
-        product = apply_overrides(record, overrides)
+        # EVIDENCE, THEN THE GUESS, THEN THE HUMAN. A classification only ever fills a hole the
+        # sources left; an override always wins, because it is the one thing here a person wrote.
+        product = apply_classification(record, classifications)
+        product = apply_overrides(product, overrides)
         # AFTER overrides, so a hand-written `category:` in overrides.yaml is held to the same
         # vocabulary as a resolved one -- a typo there would otherwise mint an undeclared value
         # straight into the published catalog, which is exactly how the six ad-hoc values got in.
         vocabulary.check(product.category, product.packaging, product.id)
         # gameSystem is OPTIONAL: a product genuinely belonging to no game system (a base, a
         # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
-        # gameSystem: null rather than being parked out of the catalog. classify/queue.py
-        # surfaces every such product from the resolved catalog for optional classification.
+        # gameSystem: null rather than being parked out of the catalog. Which of those it is --
+        # nothing to find, or nothing found yet -- is now recorded rather than left for every
+        # reader to re-derive, and classify/queue.py surfaces only the second kind.
+        product = complete_game_system_basis(product, system_labels)
         products.setdefault(product.manufacturer, []).append(product)
 
     conflicts.extend(find_shared_eans(ean_resolutions))
