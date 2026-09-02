@@ -4552,8 +4552,6 @@ products:
     manufacturer: para-bellum
     productCode: PBW6114
     sku: PBW6114
-    ean: '5213009018746'
-    eanConfidence: confirmed
     gameSystems:
       - conquest
     faction: hundred-kingdoms
@@ -4569,9 +4567,7 @@ products:
     imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2025/08/3976.jpg
     evidence:
       - legacy-catalog:para-bellum/conquest/hundred-kingdoms/march-of-the-faithful
-      - legacy-catalog:para-bellum/conquest/yoroni/genya-no-yokai-dual-kit
       - mfr-para-bellum:4226
-      - mfr-para-bellum:4242
   - id: para-bellum/PBW6129
     name: Hundred Kingdoms Warband 2026
     manufacturer: para-bellum
@@ -8995,6 +8991,29 @@ products:
     evidence:
       - legacy-catalog:para-bellum/conquest/yoroni/dai-yokai-dual-kit
       - mfr-para-bellum:4234
+  - id: para-bellum/PBYR402
+    name: Genya no Yokai (Dual Kit)
+    manufacturer: para-bellum
+    productCode: PBYR402
+    sku: PBYR402
+    ean: '5213009018746'
+    eanConfidence: confirmed
+    gameSystems:
+      - conquest
+    faction: yoroni
+    gameSystemsBasis: stated
+    category: miniatures
+    categoryBasis: code
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 139.99
+    url: https://eshop.para-bellum.com/product/genya-no-yokai-dual-kit-yoroni/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2025/08/4258.jpg
+    evidence:
+      - legacy-catalog:para-bellum/conquest/yoroni/genya-no-yokai-dual-kit
+      - mfr-para-bellum:4242
   - id: para-bellum/PBYR403
     name: Jorogumo Geisha (Dual Kit)
     manufacturer: para-bellum

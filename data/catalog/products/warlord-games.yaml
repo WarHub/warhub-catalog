@@ -10293,6 +10293,37 @@ products:
     evidence:
       - legacy-catalog:warlord-games/pike-and-shotte/italian/landsknechts-officers
       - mfr-warlord-store:landsknechts-officers
+  - id: warlord-games/203006004
+    name: Italian Wars Swiss Pikemen - 'At order'
+    manufacturer: warlord-games
+    productCode: '203006004'
+    sku: '203006004'
+    gameSystems:
+      - pike-and-shotte
+    faction: italian
+    gameSystemsBasis: stated
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 18.0
+    url: https://store.warlordgames.com/products/italian-wars-swiss-pikemen-at-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/203006004_SwisspikemenAtorder01.jpg?v=1749728743
+    description: |-
+      If you need mercenaries, look no further than the legendary Swiss Pikemen!
+
+      Hailing from the cantons of the Swiss Confederacy, Swiss mercenary pikemen were the primary originators of the vast mercenary revolution in infantry warfare which would go on to sweep Europe and usher in the era of *Pike & Shotte*. Combining impressive martial skill and discipline with fierce bravery and a willingness to go on the offensive in their massed pike columns, these men were for a time the predominant force on the continent. Fighting for many masters, their weapons and ostentatious clothing attracted many imitators, most famously the German *Landsknechts*.
+
+      This set gives you eight Swiss Pikemen with their weapons ‘at order’, a fantastic choice for any Italian Wars general to add to their army.
+
+      *Sculpted by Michael Percy. Studio miniatures painted by Steff Sorensen.*
+
+      *Models supplied unassembled and unpainted*
+    evidence:
+      - legacy-catalog:warlord-games/pike-and-shotte/italian/italian-wars-swiss-pikemen-at-order
+      - mfr-warlord-store:italian-wars-swiss-pikemen-at-order
   - id: warlord-games/203006005
     name: Italian Wars Swiss Pikemen - 'At the advance'
     manufacturer: warlord-games
@@ -44245,12 +44276,9 @@ products:
     manufacturer: warlord-games
     productCode: '402413003'
     sku: '402413003'
-    ean: '5060200844311'
-    eanConfidence: confirmed
     gameSystems:
       - achtung-panzer
       - bolt-action
-      - hail-caesar
     faction: british
     gameSystemsBasis: mapped
     category: miniatures
@@ -44259,9 +44287,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 7.25
-    priceEur: 27.95
-    priceCad: 16.0
+    priceGbp: 29.0
     url: https://store.warlordgames.com/products/m24-chaffee-us-light-tank-1
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402413003_M24Chaffeelighttank01.jpg?v=1693839565
     description: |-
@@ -44278,12 +44304,7 @@ products:
       *Note: Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/british/m24-chaffee-us-light-tank
-      - legacy-catalog:warlord-games/hail-caesar/german/germanic-command
-      - mfr-warlord-store:germanic-command
       - mfr-warlord-store:m24-chaffee-us-light-tank-1
-      - ret-radaddel:/m24-chaffee-us-light-tank
-      - ret-radaddel:m24-chaffee-us-light-tank
-      - ret-tistaminis:hail-caesar-germanic-tribes-germanic-command
   - id: warlord-games/402413004
     name: M7 Priest self-propelled gun
     manufacturer: warlord-games
@@ -50399,7 +50420,6 @@ products:
     evidence:
       - legacy-catalog:warlord-games/achtung-panzer/general/us-army-tank-crew
       - mfr-warlord-store:us-army-tank-crew
-      - ret-goblingaming:achtung-panzer-vital-intelligence-british-cards
       - ret-goblingaming:warlord-games-ww2-historical-achtung-panzer-us-army-tank-crew
       - ret-radaddel:/achtung-panzer-us-army-tank-crew
       - ret-radaddel:achtung-panzer-us-army-tank-crew
@@ -51242,7 +51262,6 @@ products:
     evidence:
       - legacy-catalog:warlord-games/achtung-panzer/soviet/soviet-army-tank-crew
       - mfr-warlord-store:soviet-army-tank-crew
-      - ret-goblingaming:achtung-panzer-vital-intelligence-german-cards
       - ret-goblingaming:warlord-games-ww2-historical-achtung-panzer-soviet-army-tank-crew
       - ret-tistaminis:achtung-panzer-soviet-army-tank-crew
   - id: warlord-games/403014016
@@ -55325,7 +55344,6 @@ products:
       - ret-radaddel:/italian-paracadutisti-platoon-commanders
       - ret-radaddel:italian-paracadutisti-platoon-commanders
       - ret-tistaminis:bolt-action-italia-paracadutisti-platoon-commanders
-      - ret-tistaminis:bolt-action-soviet-zis-3-divisional-gun-with-soviet-naval-brigade-crew
   - id: warlord-games/403205803
     name: Italian Paracadutisti HQ
     manufacturer: warlord-games
@@ -57403,6 +57421,21 @@ products:
       - ret-radaddel:/soviet-naval-brigade-medium-machine-gun-team
       - ret-radaddel:soviet-naval-brigade-medium-machine-gun-team
       - ret-tistaminis:soviet-naval-brigade-medium-machine-gun-team
+  - id: warlord-games/403414002
+    name: Bolt Action Soviet ZiS-3 Divisional gun with Soviet Naval Brigade crew
+    manufacturer: warlord-games
+    productCode: '403414002'
+    sku: '403414002'
+    gameSystemsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 42.55
+    url: https://tistaminis.com/products/bolt-action-soviet-zis-3-divisional-gun-with-soviet-naval-brigade-crew
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/403414002.webp?v=1777181778
+    evidence:
+      - ret-tistaminis:bolt-action-soviet-zis-3-divisional-gun-with-soviet-naval-brigade-crew
   - id: warlord-games/403414002K
     name: ZiS-3 DIvisional Gun with Soviet Naval Brigade Crew
     manufacturer: warlord-games
@@ -73214,6 +73247,22 @@ products:
     evidence:
       - legacy-catalog:warlord-games/achtung-panzer/british/achtung-panzer-vital-intelligence-great-britain
       - mfr-warlord-store:achtung-panzer-vital-intelligence-great-britain
+  - id: warlord-games/489910006CARDS
+    name: 'Achtung Panzer! Vital Intelligence: British Cards'
+    manufacturer: warlord-games
+    productCode: 489910006CARDS
+    sku: 489910006CARDS
+    gameSystemsBasis: unknown
+    category: game-accessory
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 12.0
+    url: https://www.goblingaming.co.uk/products/achtung-panzer-vital-intelligence-british-cards
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/489910006cards-1n.jpg?v=1740409006
+    evidence:
+      - ret-goblingaming:achtung-panzer-vital-intelligence-british-cards
   - id: warlord-games/489910007
     name: Achtung Panzer! Vital Intelligence - United States
     manufacturer: warlord-games
@@ -73319,6 +73368,22 @@ products:
     evidence:
       - legacy-catalog:warlord-games/achtung-panzer/german/achtung-panzer-vital-intelligence-germany
       - mfr-warlord-store:achtung-panzer-vital-intelligence-germany
+  - id: warlord-games/489910009CARDS
+    name: 'Achtung Panzer! Vital Intelligence: German Cards'
+    manufacturer: warlord-games
+    productCode: 489910009CARDS
+    sku: 489910009CARDS
+    gameSystemsBasis: unknown
+    category: game-accessory
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 12.0
+    url: https://www.goblingaming.co.uk/products/achtung-panzer-vital-intelligence-german-cards
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/489910009cards.jpg?v=1740408974
+    evidence:
+      - ret-goblingaming:achtung-panzer-vital-intelligence-german-cards
   - id: warlord-games/489910010
     name: Achtung Panzer! Rules, Cards & Tokens Supply Drop
     manufacturer: warlord-games
@@ -118139,7 +118204,7 @@ products:
     ean: '5060200849064'
     eanConfidence: confirmed
     gameSystems:
-      - pike-and-shotte
+      - bolt-action
     faction: german
     gameSystemsBasis: stated
     category: miniatures
@@ -118164,9 +118229,7 @@ products:
       *Note: Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/afrika-korps-5cm-pak-38-anti-tank-gun
-      - legacy-catalog:warlord-games/pike-and-shotte/italian/italian-wars-swiss-pikemen-at-order
       - mfr-warlord-store:afrika-korps-5cm-pak-38-anti-tank-gun
-      - mfr-warlord-store:italian-wars-swiss-pikemen-at-order
       - ret-goblingaming:afrika-korps-5cm-pak-38-anti-tank-gun
       - ret-radaddel:/afrika-korps-5cm-pak-38-anti-tank-gun
       - ret-radaddel:afrika-korps-5cm-pak-38-anti-tank-gun
@@ -134652,6 +134715,38 @@ products:
       - legacy-catalog:warlord-games/hail-caesar/german/germanic-archers
       - mfr-warlord-store:germanic-archers
       - ret-tistaminis:hail-caesar-germanic-tribes-germanic-archers
+  - id: warlord-games/WGH-GT-22
+    name: Germanic command
+    manufacturer: warlord-games
+    productCode: WGH-GT-22
+    sku: WGH-GT-22
+    ean: '5060200844311'
+    eanConfidence: confirmed
+    gameSystems:
+      - hail-caesar
+    faction: german
+    gameSystemsBasis: stated
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 7.25
+    priceEur: 27.95
+    priceCad: 16.0
+    url: https://store.warlordgames.com/products/germanic-command
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/wgh-gt-22-germanic-command-a.jpg?v=1575565925
+    description: |-
+      Pack contains 3 metal foot figures.
+
+      *Note: Models supplied unassembled and unpainted*
+    evidence:
+      - legacy-catalog:warlord-games/hail-caesar/german/germanic-command
+      - mfr-warlord-store:germanic-command
+      - ret-radaddel:/m24-chaffee-us-light-tank
+      - ret-radaddel:m24-chaffee-us-light-tank
+      - ret-tistaminis:hail-caesar-germanic-tribes-germanic-command
   - id: warlord-games/WGH-GT-23
     name: Germanic Fanatics
     manufacturer: warlord-games

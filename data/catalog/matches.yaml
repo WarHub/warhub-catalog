@@ -674,6 +674,62 @@ rejectEans:
   # ret-tistaminis's live `5907652563592` the primary and keeps `5060917992084` in
   # `additionalEans`, and files the disagreement as an `ean-mismatch` -- which is a true record of
   # the evidence and costs nothing. Left alone on purpose.
+  # --- EIGHT BARCODES THAT FUSE TWO UNRELATED PRODUCTS (2026-09-01) ----------------------------
+  # THE TEST WAS RUN OVER THE WHOLE CATALOG, not one manufacturer: an entity holding two product
+  # codes that are not spelling variants of each other, bridged by a barcode both codes claim.
+  # There are 341, and 333 of them are legitimate -- a re-code (`MGCKWR401` is Mantic's 2nd-edition
+  # number for `MGKWR401`), an edition suffix (`WGB-BI-35` / `WGB-BI-35K`), or a book and the
+  # book-plus-miniature bundle sharing an ISBN. These eight are the ones where the two names
+  # describe different things, found by ranking all 341 on how far apart their members' names are
+  # and reading down from the bottom.
+  #
+  # EACH IS DECIDED BY THE BARCODE'S OWN NEIGHBOURHOOD, not by counting sources. A manufacturer
+  # allocates barcodes in blocks that follow its product numbering, so the question "which code
+  # does this value belong to" has an arithmetic answer: look at what the codes on either side of
+  # the contested value are. That is evidence about the VALUE, which is the bar this list sets.
+  #
+  # M24 CHAFFEE vs GERMANIC COMMAND. `5060200844311` is claimed for `402413003` (a Bolt Action
+  # tank) and `WGH-GT-22` (a Hail Caesar command pack). `WGH-GT-21` carries `5060200844328` -- 17
+  # away -- and the rest of the `WGH-GT` block sits between `…842478` and `…843529`. `402413003`'s
+  # own siblings are all `50603937…` and `50609179…`, nowhere near. The tank's claim comes from the
+  # frozen import and from a DUPLICATED store listing (`…m24-chaffee-us-light-tank-1`).
+  'legacy-catalog:warlord-games/bolt-action/british/m24-chaffee-us-light-tank': ['5060200844311']
+  'mfr-warlord-store:m24-chaffee-us-light-tank-1': ['5060200844311']
+  # SWISS PIKEMEN vs THE PaK 38. `5060200849064` sits 311 from `WGB-AK-23` and 318 from
+  # `WGB-AK-22`; `203006004`'s own block is `50603937072…`. Warlord's own store is the one holding
+  # it wrong here, which is the same shape as the Rift Dice above -- a store row, not a trade row.
+  'mfr-warlord-store:italian-wars-swiss-pikemen-at-order': ['5060200849064']
+  # THE ACHTUNG PANZER CARD PACKS vs THE TANK CREWS. `5060917993067` and `5060917993081` are each
+  # claimed by a `403013012`/`403014015` tank crew AND by a `4899100xxCARDS` deck. Both families
+  # sit in the same barcode block, so the arithmetic does NOT discriminate -- what does is who
+  # says it: Warlord's own store, the frozen import and two retailers all put these values on the
+  # tank crews, while one retailer alone puts them on the card packs.
+  'ret-goblingaming:achtung-panzer-vital-intelligence-british-cards': ['5060917993067']
+  'ret-goblingaming:achtung-panzer-vital-intelligence-german-cards': ['5060917993081']
+  # PARACADUTISTI COMMANDERS vs THE ZiS-3. `5060917997539` is 17 from `403205803`, and `403414002`
+  # already has its own `5060917997171` (and its `K` twin `…997133`) 368 away.
+  'ret-tistaminis:bolt-action-soviet-zis-3-divisional-gun-with-soviet-naval-brigade-crew': ['5060917997539']
+  # MARCH OF THE FAITHFUL vs GENYA NO YOKAI. Para Bellum numbers `PBYR401` `5213009018739`, so
+  # `PBYR402` is `…018746`. `PBW6114`'s own `PBW` neighbours are scattered across the range and
+  # form no block. Both claims come from the same frozen import, so only the arithmetic decides.
+  'legacy-catalog:para-bellum/conquest/hundred-kingdoms/march-of-the-faithful': ['5213009018746']
+  # EARTH FATE DECK vs ROYAL RIFLE CORPS. `0812152030060` falls between `WYR40102` (`…030053`) and
+  # `WYR40104` (`…030077`) -- the `WYR401xx` block, which is `WYR40103`. The wrong claim carries
+  # its own tell: Wyrd's store row for it is handle `copy-of-poker-fate-deck-earth`, a duplicated
+  # listing that kept the source product's barcode.
+  'legacy-catalog:wyrd-games/the-other-side/abyssinia/earth-fate-deck': ['0812152030060']
+  'mfr-wyrd-store:copy-of-poker-fate-deck-earth': ['0812152030060']
+  # ARMADA EXTRA DICE vs BASILEAN SLOOP SQUADRONS. `MGARM101`-`105` run `…666402, 419, 433, 440`,
+  # so `MGARM106` is `…666457`; the `MGARB` block starts at `…666464`. This one is pure arithmetic
+  # and the cleanest of the eight.
+  'arc-tistaminis:/products/armada-basilean-sloop-squadrons-new': ['5060469666457']
+  'legacy-catalog:mantic-games/armada/general/basilean-sloop-squadrons': ['5060469666457']
+  #
+  # NO VALUE LEAVES THE CATALOG. Every one of the eight is rejected from ONE side only and stays
+  # published on the other, which is the whole point of splitting rather than deleting: the box a
+  # consumer scans still resolves, and it resolves to the right product. The losing code keeps its
+  # own record and, where nothing else asserts a barcode for it, keeps no barcode -- which is what
+  # OBJECTIVES 5 asks for over a value that is known to be somebody else's.
 # `{id a release published: the id that record has now}`. Read by `resolve/join.py` when it names
 # a group, when it resolves a forced-join target and when it reads a declared supersession, and by
 # the withdrawn-eans staleness test. An entry does NOT move anything: it records that a rename

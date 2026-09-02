@@ -1,14 +1,14 @@
 summary:
-  products: 27300
-  undecided: 1502
+  products: 27308
+  undecided: 1503
   byBasis:
-    code: 7173
+    code: 7175
     lexicon: 270
-    mapped: 16367
+    mapped: 16372
     paint-barcode: 9
     stated: 1979
-    unknown: 1502
-  decidedThisRun: 23819
+    unknown: 1503
+  decidedThisRun: 23826
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -421,12 +421,6 @@ conflicts:
   - entity: warlord-games/402616024
     type: gameSystem-disagreement
     detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/403013012
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
-  - entity: warlord-games/403014015
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
   - entity: warlord-games/408800049
     type: gameSystem-disagreement
     detail: catalog says bolt-action (classified); mfr-warlord-store tags~konflikt-47,Konflikt-47-10,K47-german,k47-USA,k47-british,k47-Japanese,k47-Soviet,k47-Italian says konflikt-47
@@ -442,18 +436,12 @@ conflicts:
   - entity: warlord-games/BPDEALSEP05
     type: gameSystem-disagreement
     detail: catalog says black-powder (stated); mfr-warlord-store tags~black-seas says black-seas
-  - entity: warlord-games/WGB-AK-21K
-    type: gameSystem-disagreement
-    detail: catalog says pike-and-shotte (stated); mfr-warlord-store tags~korean-war,blitzkrieg-germans,german-afrika-korps,german-waffen-ss,italian-army says bolt-action
   - entity: warlord-games/WGP-BAA-02
     type: gameSystem-disagreement
     detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
   - entity: warlord-games/WGR-ARMY2
     type: gameSystem-disagreement
     detail: catalog says bolt-action (stated); mfr-warlord-store tags~napoleonic-wars-1789-1815,napoleonic-wars says black-powder
-  - entity: wyrd-games/WYR40004
-    type: category-disagreement
-    detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'
   - entity: wyrd-games/WYR40009
     type: gameSystem-disagreement
     detail: catalog says malifaux (stated); mfr-wyrd-store tags~The Other Side,ToS,ToS-Unit,ToS-Character,Abyssinia,King's Empire,Gibbering Hordes,Cult of the Burning Man says the-other-side
@@ -901,9 +889,11 @@ unmapped:
       wouldDecide: 7
     - value: vendor=Mantic
       wouldDecide: 7
+    - value: vendor=Warlord Games
+      wouldDecide: 6
     - value: productType=Miniatures - Plastic
       wouldDecide: 5
-    - value: vendor=Warlord Games
+    - value: tags=Bolt Action
       wouldDecide: 5
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
@@ -912,8 +902,6 @@ unmapped:
     - value: tags=Warhammer Lord of the Rings
       wouldDecide: 4
     - value: tags=40k Terrain
-      wouldDecide: 4
-    - value: tags=Bolt Action
       wouldDecide: 4
     - value: productType=Toys & Hobbies:Games:Miniatures, War Games:Warhammer:Warhammer 40K:40K Miniatures
       wouldDecide: 3
@@ -953,11 +941,11 @@ unmapped:
       wouldDecide: 2
     - value: tags=Nightstalkers
       wouldDecide: 2
+    - value: tags=Soviet
+      wouldDecide: 2
     - value: tags=Achtung Panzer
       wouldDecide: 2
     - value: tags=Army Painter
-      wouldDecide: 1
-    - value: tags=Spray
       wouldDecide: 1
   seed-curated:
     - value: productType=starter_set
