@@ -104,6 +104,13 @@ def _priority(observation: Observation, kinds: dict[str, str]) -> tuple[int, str
     return (KIND_PRIORITY.get(kinds.get(observation.source_id, "barcode-db"), 9), observation.key)
 
 
+def _code_variants(a: str, b: str) -> bool:
+    """Two spellings of one code: equal once punctuation is dropped, or one a prefix of the other."""
+    x = "".join(ch for ch in a.upper() if ch.isalnum())
+    y = "".join(ch for ch in b.upper() if ch.isalnum())
+    return x.startswith(y) or y.startswith(x)
+
+
 def _listing_url(observation: Observation) -> str | None:
     """One page on one storefront. Query strings and a trailing slash are not part of it."""
     if not observation.url:
@@ -531,6 +538,34 @@ def join_observations(
     for ean in sorted(ean_conflicts):
         result.ambiguous.append(
             {"type": "cross-manufacturer-ean", "ean": ean, "keys": sorted(ean_claims[ean])}
+        )
+
+    # ONE RECORD, TWO OF THE MAKER'S OWN CODES. A group holding codes that are not spellings of
+    # each other is one of four things, and none of them is decidable here: the maker renumbered
+    # the product and the register does not know (a supersession nobody declared), the maker's own
+    # listings put one barcode on two products, a reseller's row bridged two products, or a bundle
+    # carries the barcode of the book inside it. Measured 2026-09-02: 56 such records, and until
+    # this row existed every one was invisible -- the catalog published one code and the other
+    # simply stopped being addressable. A spelling variant (one code contained in the other once
+    # punctuation is dropped -- `WGB-BI-35`/`WGB-BI-35K`, `280873`/`280873-0990`) is not reported;
+    # `codeRewrite` and the named groups in `codePattern` are where those get unified.
+    groups: dict[str, set[str]] = {}
+    for key, code in codes.items():
+        if code is not None:
+            groups.setdefault(uf.find(key), set()).add(code)
+    for root, group_code_set in sorted(groups.items()):
+        distinct = sorted(group_code_set)
+        if len(distinct) < 2 or all(
+            _code_variants(a, b) for i, a in enumerate(distinct) for b in distinct[i + 1:]
+        ):
+            continue
+        result.ambiguous.append(
+            {
+                "type": "multi-code-entity",
+                "manufacturer": next(o.manufacturer for o in attributed if uf.find(o.key) == root),
+                "codes": distinct,
+                "keys": sorted(o.key for o in attributed if uf.find(o.key) == root),
+            }
         )
 
     # provisional entity id per group

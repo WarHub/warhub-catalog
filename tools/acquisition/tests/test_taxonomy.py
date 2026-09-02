@@ -110,9 +110,12 @@ def test_army_painter_codes_its_tool_and_brush_prefixes() -> None:
     keep working.
     """
     taxonomy = Taxonomy.load(Path(__file__).resolve().parents[3] / "data" / "catalog" / "taxonomy")
-    for sku in ("TL5034", "TL5057", "TL5063P", "BR7003", "BR7009", "BR7017",
-                "WP8082", "BNDL212"):
+    for sku in ("TL5034", "TL5057", "BR7003", "BR7009", "BR7017", "WP8082", "BNDL212"):
         assert taxonomy.normalize_code("army-painter", sku) == sku, sku
+    # A trailing `P` is the maker's own store spelling of the same code (2026-09-02); any other
+    # trailing letter is a different product and stays.
+    assert taxonomy.normalize_code("army-painter", "TL5063P") == "TL5063"
+    assert taxonomy.normalize_code("army-painter", "GM1010C") == "GM1010C"
     # A retailer's variant suffix is NOT an Army Painter article number.
     assert taxonomy.normalize_code("army-painter", "TL5034-SINGLE") is None
     # Still the one row left uncoded on purpose rather than widening further to chase it.

@@ -78,7 +78,7 @@ joins:
   # this family by picking between the candidates: `ogor-mawtribes-butcher` scans as 5011921266906,
   # which is `games-workshop/99120213044` -- GW's own catalogue calls that kit "Cleavers/Gutseers"
   # and it is neither candidate. The shop names it for one of the two units it builds.
-  'ret-radaddel:speedpaint-most-wanted-set-2-0': army-painter/WP8060P
+  'ret-radaddel:speedpaint-most-wanted-set-2-0': army-painter/WP8060
   'ret-radaddel:chaos-space-marines-raptors-1': games-workshop/99120102259
   'ret-radaddel:legiones-astartes-mkiv-tactical-squad': games-workshop/99123001085
   'ret-radaddel:ogor-mawtribes-butcher': games-workshop/99120213044
@@ -1763,8 +1763,10 @@ reassignCodes:
   # (60010103001, barcode 5011921138395) splits back out into its own product.
   'ret-goblingaming:new-games-workshop-zodgrod-wortsnagga-orks': '99120103074'
 
-# --- `ambiguous-join`, DELIBERATELY LEFT (2026-08-26) -------------------------------------------
-# Eight rows in data/review/conflicts.yaml that a human looked at and chose to keep as conflicts.
+# --- `ambiguous-join`, LEFT 2026-08-26, THEN SETTLED THE SAME DAY (#168) -----------------------
+# Eight rows a human first chose to keep as conflicts, kept here as the record of why a NAME could
+# not decide them; the seven radaddel rows were then joined under `joins` above by the barcode each
+# listing scans, not by its name.
 # In each, the listing has no code and no barcode of its own, and nothing else about it picks a
 # side. Joining one anyway would put a live price, a stock level and a shop URL onto a box that is
 # not the one being sold, which is a worse published fact than an open conflict (OBJECTIVES 5).
@@ -1772,8 +1774,8 @@ reassignCodes:
 # radaddel rows that is the nightly `shopify` detail-fetch budget walking onto the handle.
 #
 #   ret-radaddel:speedpaint-most-wanted-set-2-0        army-painter/WP8060 | /WP8060P
-#     The two candidates are probably one product (Army Painter's `P` suffix), and neither carries
-#     a radaddel assertion. Decide the WP8060/WP8060P duplicate first; this row follows from it.
+#     The two candidates were one product: Army Painter's trailing `P` is the store's spelling of
+#     the code, unified in the manufacturer register on 2026-09-02, and the row joins WP8060.
 #   ret-radaddel:chaos-space-marines-raptors-1         .../99120102163 | /99120102259
 #   ret-radaddel:warriors-of-chaos-chaos-warriors      .../99122701003 | /99122701018
 #   ret-radaddel:ogor-mawtribes-ironguts               .../99120213027 | /99120213041

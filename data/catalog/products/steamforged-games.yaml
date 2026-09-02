@@ -1,5 +1,71 @@
 manufacturer: steamforged-games
 products:
+  - id: steamforged-games/SFBA-CC01-020
+    name: 'Guild Ball: (Brewer''s Guild) Token Set (Clearance)'
+    manufacturer: steamforged-games
+    productCode: SFBA-CC01-020
+    sku: SFGBACC01-020
+    ean: '5060453690284'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/guild-ball-brewers-guild-token-set-clearance
+    evidence:
+      - ret-gamenerdz:/guild-ball-brewers-guild-token-set-clearance
+  - id: steamforged-games/SFBA-CC01-025
+    name: 'Guild Ball: (Mortician''s Guild) Token Set (Clearance)'
+    manufacturer: steamforged-games
+    productCode: SFBA-CC01-025
+    sku: SFGBACC01-025
+    ean: '5060453690574'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/guild-ball-morticians-guild-token-set-clearance
+    evidence:
+      - ret-gamenerdz:/guild-ball-morticians-guild-token-set-clearance
+  - id: steamforged-games/SFBG-PD001
+    name: 'Guild Ball: Game Plan Deck 2025'
+    manufacturer: steamforged-games
+    productCode: SFBG-PD001
+    sku: SFGBGPD-001
+    ean: '5061060702940'
+    eanConfidence: confirmed
+    gameSystems:
+      - guild-ball
+    faction: general
+    gameSystemsBasis: stated
+    settings:
+      - guild-ball
+    settingsBasis: derived
+    category: board-game
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceUsd: 14.99
+    url: https://steamforged.com/products/guild-ball-game-plan-deck-2025
+    imageUrl: https://cdn.shopify.com/s/files/1/0602/0156/6449/files/GB_Game_Plan_Deck_2025_Box_Front.png?v=1745386029
+    description: |-
+      Fresh plays. New tricks. More ways to win.
+
+      Shake up your tactics with the Guild Ball 2025 Game Plan Deck — a brand new set of cards built to bring a whole new set of tactical tools to keep your opponents guessing and your momentum rolling.
+
+      This updated deck introduces all-new card effects to challenge your decision-making and shift the flow of momentum in exciting ways — rewarding smart predictions, shifting stat lines, and opening up explosive plays. Whether you're chasing goals or controlling the pitch, every card choice counts.
+
+      What’s in the box?
+
+      - 18 Game Plan cards
+    evidence:
+      - legacy-catalog:steamforged-games/guild-ball/general/guild-ball-game-plan-deck-2025
+      - mfr-steamforged:guild-ball-game-plan-deck-2025
   - id: steamforged-games/SFEE-001
     name: 'Epic Encounters: Lair of the Red Dragon'
     manufacturer: steamforged-games
@@ -765,6 +831,8 @@ products:
     sku: SFEE-019
     ean: '5060453696514'
     eanConfidence: confirmed
+    additionalEans:
+      - '5060453697078'
     gameSystems:
       - epic-encounters
     faction: general
@@ -796,6 +864,7 @@ products:
     evidence:
       - legacy-catalog:steamforged-games/epic-encounters/general/epic-encounters-camp-of-the-bandit-twins
       - mfr-steamforged:epic-encounters-camp-of-the-bandit-twins
+      - ret-gamenerdz:/epic-encounters-camp-of-the-bandit-twins-5e
   - id: steamforged-games/SFEE-020
     name: 'Epic Encounters: Cave of the Manticore'
     manufacturer: steamforged-games
@@ -803,6 +872,8 @@ products:
     sku: SFEE-020
     ean: '5060453696521'
     eanConfidence: confirmed
+    additionalEans:
+      - '5060453697085'
     gameSystems:
       - epic-encounters
     faction: general
@@ -834,6 +905,7 @@ products:
     evidence:
       - legacy-catalog:steamforged-games/epic-encounters/general/epic-encounters-cave-of-the-manticore
       - mfr-steamforged:epic-encounters-cave-of-the-manticore
+      - ret-gamenerdz:/epic-encounters-cave-of-the-manticore-5e
   - id: steamforged-games/SFEE-021
     name: 'Epic Encounters: Savannah of the Gnoll Pack'
     manufacturer: steamforged-games
@@ -1769,114 +1841,6 @@ products:
       - legacy-catalog:steamforged-games/epic-encounters/general/epic-encounters-local-legends-night-hag
       - mfr-steamforged:epic-encounters-local-legends-night-hag
       - ret-gamenerdz:/epic-encounters-local-legends-night-hag-encounter-5e
-  - id: steamforged-games/SFGBACC01-020
-    name: 'Guild Ball: (Brewer''s Guild) Token Set (Clearance)'
-    manufacturer: steamforged-games
-    productCode: SFGBACC01-020
-    sku: SFGBACC01-020
-    ean: '5060453690284'
-    eanConfidence: provisional
-    gameSystems:
-      - guild-ball
-    gameSystemsBasis: classified
-    settings:
-      - guild-ball
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/guild-ball-brewers-guild-token-set-clearance
-    evidence:
-      - ret-gamenerdz:/guild-ball-brewers-guild-token-set-clearance
-  - id: steamforged-games/SFGBACC01-025
-    name: 'Guild Ball: (Mortician''s Guild) Token Set (Clearance)'
-    manufacturer: steamforged-games
-    productCode: SFGBACC01-025
-    sku: SFGBACC01-025
-    ean: '5060453690574'
-    eanConfidence: provisional
-    gameSystems:
-      - guild-ball
-    gameSystemsBasis: classified
-    settings:
-      - guild-ball
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/guild-ball-morticians-guild-token-set-clearance
-    evidence:
-      - ret-gamenerdz:/guild-ball-morticians-guild-token-set-clearance
-  - id: steamforged-games/SFGBGPD-001
-    name: 'Guild Ball: Game Plan Deck 2025'
-    manufacturer: steamforged-games
-    productCode: SFGBGPD-001
-    sku: SFGBGPD-001
-    ean: '5061060702940'
-    eanConfidence: confirmed
-    gameSystems:
-      - guild-ball
-    faction: general
-    gameSystemsBasis: stated
-    settings:
-      - guild-ball
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    packaging: single
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-07'
-    priceUsd: 14.99
-    url: https://steamforged.com/products/guild-ball-game-plan-deck-2025
-    imageUrl: https://cdn.shopify.com/s/files/1/0602/0156/6449/files/GB_Game_Plan_Deck_2025_Box_Front.png?v=1745386029
-    description: |-
-      Fresh plays. New tricks. More ways to win.
-
-      Shake up your tactics with the Guild Ball 2025 Game Plan Deck — a brand new set of cards built to bring a whole new set of tactical tools to keep your opponents guessing and your momentum rolling.
-
-      This updated deck introduces all-new card effects to challenge your decision-making and shift the flow of momentum in exciting ways — rewarding smart predictions, shifting stat lines, and opening up explosive plays. Whether you're chasing goals or controlling the pitch, every card choice counts.
-
-      What’s in the box?
-
-      - 18 Game Plan cards
-    evidence:
-      - legacy-catalog:steamforged-games/guild-ball/general/guild-ball-game-plan-deck-2025
-      - mfr-steamforged:guild-ball-game-plan-deck-2025
-  - id: steamforged-games/SFGEE-019
-    name: 'Epic Encounters: Camp of the Bandit Twins (5E)'
-    manufacturer: steamforged-games
-    productCode: SFGEE-019
-    sku: SFGEE-019
-    ean: '5060453697078'
-    eanConfidence: provisional
-    gameSystems:
-      - epic-encounters
-    gameSystemsBasis: classified
-    settingsBasis: not-applicable
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/epic-encounters-camp-of-the-bandit-twins-5e
-    evidence:
-      - ret-gamenerdz:/epic-encounters-camp-of-the-bandit-twins-5e
-  - id: steamforged-games/SFGEE-020
-    name: 'Epic Encounters: Cave of the Manticore (5E)'
-    manufacturer: steamforged-games
-    productCode: SFGEE-020
-    sku: SFGEE-020
-    ean: '5060453697085'
-    eanConfidence: provisional
-    gameSystems:
-      - epic-encounters
-    gameSystemsBasis: classified
-    settingsBasis: not-applicable
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/epic-encounters-cave-of-the-manticore-5e
-    evidence:
-      - ret-gamenerdz:/epic-encounters-cave-of-the-manticore-5e
   - id: steamforged-games/SFGT-002
     name: 'Godtear: Raith''Marid Champion Expansion'
     manufacturer: steamforged-games

@@ -688,12 +688,8 @@ products:
     sku: KSTC243-1
     ean: '5060924986878'
     eanConfidence: confirmed
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: mapped
-    settings:
-      - pannithor
-    settingsBasis: derived
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -2786,84 +2782,6 @@ products:
     evidence:
       - mfr-manticgames:530434
       - mfr-manticgames:531834
-  - id: mantic-games/MANHA1021
-    name: 'Halo: Flashpoint Starter Set – Spartan Edition [Updated for 2026]'
-    manufacturer: mantic-games
-    productCode: MANHA1021
-    sku: MGHA102-1
-    ean: '5060924987578'
-    eanConfidence: confirmed
-    gameSystems:
-      - halo-flashpoint
-    gameSystemsBasis: classified
-    settings:
-      - halo
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 100.0
-    priceCad: 140.0
-    url: https://www.manticgames.com/halo-flashpoint/getting-started/spartan-edition-updated/
-    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/spartan-edition-updated-v3.webp
-    evidence:
-      - mfr-manticgames:548253
-      - ret-gamenerdz:/halo-flashpoint-starter-set-spartan-edition-updated-for-2026-preorder
-      - ret-tistaminis:halo-flashpoint-starter-set-spartan-edition-v1-5
-  - id: mantic-games/MANHAM203
-    name: 'Halo: Flashpoint - Unit Card Update Pack (PREORDER)'
-    manufacturer: mantic-games
-    productCode: MANHAM203
-    sku: MANHAM203
-    gameSystems:
-      - halo-flashpoint
-    gameSystemsBasis: classified
-    settings:
-      - halo
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/halo-flashpoint-unit-card-update-pack-preorder
-    evidence:
-      - ret-gamenerdz:/halo-flashpoint-unit-card-update-pack-preorder
-  - id: mantic-games/MANKWR211
-    name: 'Kings of War 4E: Trident Realm Hero Pack'
-    manufacturer: mantic-games
-    productCode: MANKWR211
-    sku: MANKWR211
-    ean: '5060924986823'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-4e-trident-realm-hero-pack
-    evidence:
-      - ret-gamenerdz:/kings-of-war-4e-trident-realm-hero-pack
-  - id: mantic-games/MANKWR407
-    name: 'Kings of War 4E: Trident Realm Coral Giant'
-    manufacturer: mantic-games
-    productCode: MANKWR407
-    sku: MANKWR407
-    ean: '5060924987080'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-4e-trident-realm-coral-giant
-    evidence:
-      - ret-gamenerdz:/kings-of-war-4e-trident-realm-coral-giant
   - id: mantic-games/MGAR504
     name: Trident Realm Complete Fleet Bundle
     manufacturer: mantic-games
@@ -5642,453 +5560,6 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/11/P1000296.jpg
     evidence:
       - mfr-manticgames:70964
-  - id: mantic-games/MGCDS02
-    name: 'Dungeon Saga: The Adventurer''s Companion'
-    manufacturer: mantic-games
-    productCode: MGCDS02
-    sku: MGCDS02
-    ean: '5060208864649'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-the-adventurers-companion
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-the-adventurers-companion
-  - id: mantic-games/MGCDS03
-    name: 'Dungeon Saga: The Return of Valandor Expansion'
-    manufacturer: mantic-games
-    productCode: MGCDS03
-    sku: MGCDS03
-    ean: '5060208864656'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-the-return-of-valandor-expansion
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-the-return-of-valandor-expansion
-  - id: mantic-games/MGCDS05
-    name: 'Dungeon Saga: The Infernal Crypts Expansion'
-    manufacturer: mantic-games
-    productCode: MGCDS05
-    sku: MGCDS05
-    ean: '5060208864977'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-the-infernal-crypts-expansion
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-the-infernal-crypts-expansion
-  - id: mantic-games/MGCDS06
-    name: 'Dungeon Saga: The Tyrant of Halpi Expansion'
-    manufacturer: mantic-games
-    productCode: MGCDS06
-    sku: MGCDS06
-    ean: '5060208865011'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-the-tyrant-of-halpi-expansion
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-the-tyrant-of-halpi-expansion
-  - id: mantic-games/MGCDS11
-    name: 'Dungeon Saga: Counter Upgrade Set'
-    manufacturer: mantic-games
-    productCode: MGCDS11
-    sku: MGCDS11
-    ean: '5060208865462'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-counter-upgrade-set
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-counter-upgrade-set
-  - id: mantic-games/MGCDS13
-    name: 'Dungeon Saga: Halls of Dolgarth Tile Pack'
-    manufacturer: mantic-games
-    productCode: MGCDS13
-    sku: MGCDS13
-    ean: '5060208868630'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-halls-of-dolgarth-tile-pack
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-halls-of-dolgarth-tile-pack
-  - id: mantic-games/MGCDS16
-    name: 'Dungeon Saga: Legendary Heroes of Dolgarth'
-    manufacturer: mantic-games
-    productCode: MGCDS16
-    sku: MGCDS16
-    ean: '5060208868036'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-legendary-heroes-of-dolgarth
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-legendary-heroes-of-dolgarth
-  - id: mantic-games/MGCDS18
-    name: 'Dungeon Saga: Denizens of the Abyss'
-    manufacturer: mantic-games
-    productCode: MGCDS18
-    sku: MGCDS18
-    ean: '5060208869446'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-denizens-of-the-abyss
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-denizens-of-the-abyss
-  - id: mantic-games/MGCDS20
-    name: 'Dungeon Saga: The Green Rage Miniature Set'
-    manufacturer: mantic-games
-    productCode: MGCDS20
-    sku: MGCDS20
-    ean: '5060208869507'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-the-green-rage-miniature-set
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-the-green-rage-miniature-set
-  - id: mantic-games/MGCDS24
-    name: 'Dungeon Saga: Legendary Heroes of Halpi'
-    manufacturer: mantic-games
-    productCode: MGCDS24
-    sku: MGCDS24
-    ean: '5060208869521'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-legendary-heroes-of-halpi
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-legendary-heroes-of-halpi
-  - id: mantic-games/MGCDS25
-    name: 'Dungeon Saga: Heroes of Kickstarter'
-    manufacturer: mantic-games
-    productCode: MGCDS25
-    sku: MGCDS25
-    ean: '5060208869538'
-    eanConfidence: provisional
-    gameSystems:
-      - dungeon-saga
-    gameSystemsBasis: code
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: board-game
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/dungeon-saga-heroes-of-kickstarter
-    evidence:
-      - ret-gamenerdz:/dungeon-saga-heroes-of-kickstarter
-  - id: mantic-games/MGCKW01
-    name: 'Kings of War: Rulebook 2nd Edition (Hardcover)'
-    manufacturer: mantic-games
-    productCode: MGCKW01
-    sku: MGCKW01
-    ean: '5060208868296'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: book
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-rulebook-2nd-edition-hardcover
-    evidence:
-      - ret-gamenerdz:/kings-of-war-rulebook-2nd-edition-hardcover
-  - id: mantic-games/MGCKW0103
-    name: 'Kings of War 2nd Edition: Orcs - Skulks'
-    manufacturer: mantic-games
-    productCode: MGCKW0103
-    sku: MGCKW0103
-    ean: '5060208868616'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-orcs-skulks
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-orcs-skulks
-  - id: mantic-games/MGCKW07
-    name: 'Kings of War 2nd Edition: Uncharted Empires'
-    manufacturer: mantic-games
-    productCode: MGCKW07
-    sku: MGCKW07
-    ean: '5060208868807'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-uncharted-empires
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-uncharted-empires
-  - id: mantic-games/MGCKW12
-    name: 'Kings Of War, 2nd Edition: Edge of the Abyss (Softcover)'
-    manufacturer: mantic-games
-    productCode: MGCKW12
-    sku: MGCKW12
-    ean: '5060469660943'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: book
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-edge-of-the-abyss-softcover
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-edge-of-the-abyss-softcover
-  - id: mantic-games/MGCKWG106
-    name: 'Kings Of War: Goblin Army'
-    manufacturer: mantic-games
-    productCode: MGCKWG106
-    sku: MGCKWG106
-    ean: '5060469661162'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-goblin-army
-    evidence:
-      - ret-gamenerdz:/kings-of-war-goblin-army
-  - id: mantic-games/MGCKWH104
-    name: 'Kings of War 2nd Edition: Ogre - Chariot Regiment'
-    manufacturer: mantic-games
-    productCode: MGCKWH104
-    sku: MGCKWH104
-    ean: '5060208868869'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-ogre-chariot-regiment
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-ogre-chariot-regiment
-  - id: mantic-games/MGCKWK301
-    name: 'Kings of War 2nd Edition: Abyssal Dwarf - Slave Orc Gore Riders'
-    manufacturer: mantic-games
-    productCode: MGCKWK301
-    sku: MGCKWK301
-    ean: '5060469660400'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-abyssal-dwarf-slave-orc-gore-riders
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-abyssal-dwarf-slave-orc-gore-riders
-  - id: mantic-games/MGCKWM06
-    name: Mantic Games Compendium 2016
-    manufacturer: mantic-games
-    productCode: MGCKWM06
-    sku: MGCKWM06
-    ean: '5060469660318'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: book
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/mantic-games-compendium-2016
-    evidence:
-      - ret-gamenerdz:/mantic-games-compendium-2016
-  - id: mantic-games/MGCKWR201
-    name: 'Kings of War 2nd Edition: Riverguard Captain'
-    manufacturer: mantic-games
-    productCode: MGCKWR201
-    sku: MGCKWR201
-    ean: '5060469660585'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-riverguard-captain
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-riverguard-captain
-  - id: mantic-games/MGCKWR204
-    name: 'Kings Of War, 2nd Edition: Naiad Wyrmrider Centurion'
-    manufacturer: mantic-games
-    productCode: MGCKWR204
-    sku: MGCKWR204
-    ean: '5060469660615'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-naiad-wyrmrider-centurion
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-naiad-wyrmrider-centurion
-  - id: mantic-games/MGCKWT202
-    name: 'Kings of War 2nd Edition: Empire Of Dust - Revenant Champion/Army Standard Bearer'
-    manufacturer: mantic-games
-    productCode: MGCKWT202
-    sku: MGCKWT202
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-empire-of-dust-revenant-champion-army-standard-bearer
-    evidence:
-      - ret-gamenerdz:/kings-of-war-2nd-edition-empire-of-dust-revenant-champion-army-standard-bearer
-  - id: mantic-games/MGCVAB102
-    name: 'Kings of War Vanguard: Basilean Warband Booster'
-    manufacturer: mantic-games
-    productCode: MGCVAB102
-    sku: MGCVAB102
-    ean: '5060469663678'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-vanguard-basilean-warband-booster
-    evidence:
-      - ret-gamenerdz:/kings-of-war-vanguard-basilean-warband-booster
   - id: mantic-games/MGDB201
     name: Magnetar Marvels
     manufacturer: mantic-games
@@ -11860,14 +11331,16 @@ products:
     manufacturer: mantic-games
     productCode: MGDS02
     sku: MGDS02
+    ean: '5060208864649'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    category: book
-    categoryBasis: code
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -11876,18 +11349,22 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/04/4453.1.1000.1000.FFFFFF.0.jpeg
     evidence:
       - mfr-manticgames:1252
+      - ret-gamenerdz:/dungeon-saga-the-adventurers-companion
   - id: mantic-games/MGDS03
     name: The Return of Valandor – DISCONTINUED
     manufacturer: mantic-games
     productCode: MGDS03
     sku: MGDS03
+    ean: '5060208864656'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -11896,6 +11373,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/04/MGDS03-Dungeon-Saga-The-Return-of-Valandor-16-34-51.jpg
     evidence:
       - mfr-manticgames:1249
+      - ret-gamenerdz:/dungeon-saga-the-return-of-valandor-expansion
   - id: mantic-games/MGDS04
     name: The Warlord of Galahir
     manufacturer: mantic-games
@@ -11921,13 +11399,16 @@ products:
     manufacturer: mantic-games
     productCode: MGDS05
     sku: MGDS05
+    ean: '5060208864977'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -11936,18 +11417,22 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/DS-Infernal-Crypts.jpeg
     evidence:
       - mfr-manticgames:1248
+      - ret-gamenerdz:/dungeon-saga-the-infernal-crypts-expansion
   - id: mantic-games/MGDS06
     name: The Tyrant of Halpi
     manufacturer: mantic-games
     productCode: MGDS06
     sku: MGDS06
+    ean: '5060208865011'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -11956,6 +11441,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/04/MGDS06-Dungeon-Saga-Tyrant-of-Halpi-e1476092378508.jpeg
     evidence:
       - mfr-manticgames:1250
+      - ret-gamenerdz:/dungeon-saga-the-tyrant-of-halpi-expansion
   - id: mantic-games/MGDS07
     name: 'Dungeon Saga: Eye of the Abyss (DISCONTINUED)'
     manufacturer: mantic-games
@@ -11980,6 +11466,25 @@ products:
     evidence:
       - mfr-manticgames:1253
       - ret-gamenerdz:/dungeon-saga-eye-of-the-abyss-expansion
+  - id: mantic-games/MGDS11
+    name: 'Dungeon Saga: Counter Upgrade Set'
+    manufacturer: mantic-games
+    productCode: MGDS11
+    sku: MGCDS11
+    ean: '5060208865462'
+    eanConfidence: provisional
+    gameSystems:
+      - dungeon-saga
+    gameSystemsBasis: code
+    settings:
+      - pannithor
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/dungeon-saga-counter-upgrade-set
+    evidence:
+      - ret-gamenerdz:/dungeon-saga-counter-upgrade-set
   - id: mantic-games/MGDS12
     name: Evil Dead Miniatures Set
     manufacturer: mantic-games
@@ -12000,11 +11505,13 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Evil-Dead-Miniatures-Set.jpeg
     evidence:
       - mfr-manticgames:1261
-  - id: mantic-games/MGDS16
-    name: Legendary Heroes of Dolgarth
+  - id: mantic-games/MGDS13
+    name: 'Dungeon Saga: Halls of Dolgarth Tile Pack'
     manufacturer: mantic-games
-    productCode: MGDS16
-    sku: MGDS16
+    productCode: MGDS13
+    sku: MGCDS13
+    ean: '5060208868630'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
@@ -12013,6 +11520,26 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/dungeon-saga-halls-of-dolgarth-tile-pack
+    evidence:
+      - ret-gamenerdz:/dungeon-saga-halls-of-dolgarth-tile-pack
+  - id: mantic-games/MGDS16
+    name: Legendary Heroes of Dolgarth
+    manufacturer: mantic-games
+    productCode: MGDS16
+    sku: MGDS16
+    ean: '5060208868036'
+    eanConfidence: provisional
+    gameSystems:
+      - dungeon-saga
+    gameSystemsBasis: code
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: board-game
+    categoryBasis: mapped
+    status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 20.0
@@ -12020,6 +11547,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Legendary-Heroes-of-Dolgarth-Miniatures-Set.jpeg
     evidence:
       - mfr-manticgames:1256
+      - ret-gamenerdz:/dungeon-saga-legendary-heroes-of-dolgarth
   - id: mantic-games/MGDS17
     name: 'Dungeon Saga: Heroes of Mantica'
     manufacturer: mantic-games
@@ -12045,13 +11573,16 @@ products:
     manufacturer: mantic-games
     productCode: MGDS18
     sku: MGDS18
+    ean: '5060208869446'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -12060,6 +11591,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Denizens-of-the-Abyss-Miniatures-Set.jpeg
     evidence:
       - mfr-manticgames:1260
+      - ret-gamenerdz:/dungeon-saga-denizens-of-the-abyss
   - id: mantic-games/MGDS19
     name: DISCONTINUED Legendary Heroes of the Crypts
     manufacturer: mantic-games
@@ -12088,13 +11620,16 @@ products:
     manufacturer: mantic-games
     productCode: MGDS20
     sku: MGDS20
+    ean: '5060208869507'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -12103,6 +11638,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Green-Rage-Miniature-Set.jpeg
     evidence:
       - mfr-manticgames:1262
+      - ret-gamenerdz:/dungeon-saga-the-green-rage-miniature-set
   - id: mantic-games/MGDS21
     name: DISCONTINUED Legendary Heroes of Galahir
     manufacturer: mantic-games
@@ -12151,13 +11687,16 @@ products:
     manufacturer: mantic-games
     productCode: MGDS24
     sku: MGDS24
+    ean: '5060208869521'
+    eanConfidence: provisional
     gameSystems:
       - dungeon-saga
     gameSystemsBasis: code
     settings:
       - pannithor
     settingsBasis: derived
-    categoryBasis: unknown
+    category: board-game
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
@@ -12165,6 +11704,27 @@ products:
     url: https://www.manticgames.com/dungeon-saga/miniatures/discontinued-legendary-heroes-of-halpi/
     evidence:
       - mfr-manticgames:1255
+      - ret-gamenerdz:/dungeon-saga-legendary-heroes-of-halpi
+  - id: mantic-games/MGDS25
+    name: 'Dungeon Saga: Heroes of Kickstarter'
+    manufacturer: mantic-games
+    productCode: MGDS25
+    sku: MGCDS25
+    ean: '5060208869538'
+    eanConfidence: provisional
+    gameSystems:
+      - dungeon-saga
+    gameSystemsBasis: code
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/dungeon-saga-heroes-of-kickstarter
+    evidence:
+      - ret-gamenerdz:/dungeon-saga-heroes-of-kickstarter
   - id: mantic-games/MGDS27
     name: Dungeon Critters
     manufacturer: mantic-games
@@ -20007,6 +19567,32 @@ products:
       - ret-gamenerdz:/halo-flashpoint-spartan-edition
       - ret-goblingaming:mantic-games-halo-flashpoint-spartan-edition-starter-set
       - ret-tistaminis:halo-flashpoint-spartan-edition
+  - id: mantic-games/MGHA1021
+    name: 'Halo: Flashpoint Starter Set – Spartan Edition [Updated for 2026]'
+    manufacturer: mantic-games
+    productCode: MGHA1021
+    sku: MGHA102-1
+    ean: '5060924987578'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 100.0
+    priceCad: 140.0
+    url: https://www.manticgames.com/halo-flashpoint/getting-started/spartan-edition-updated/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/spartan-edition-updated-v3.webp
+    evidence:
+      - mfr-manticgames:548253
+      - ret-gamenerdz:/halo-flashpoint-starter-set-spartan-edition-updated-for-2026-preorder
+      - ret-tistaminis:halo-flashpoint-starter-set-spartan-edition-v1-5
   - id: mantic-games/MGHA103
     name: 'Halo: Flashpoint Deluxe Buildable 3D Terrain Set'
     manufacturer: mantic-games
@@ -20864,6 +20450,7 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/halo-flashpoint-unit-card-update-pack-v2.webp
     evidence:
       - mfr-manticgames:548258
+      - ret-gamenerdz:/halo-flashpoint-unit-card-update-pack-preorder
       - ret-goblingaming:halo-flashpoint-unit-card-update-pack
       - ret-tistaminis:halo-flashpoint-unit-card-update-pack
   - id: mantic-games/MGHAM204
@@ -22180,6 +21767,37 @@ products:
     evidence:
       - mfr-manticgames:457489
       - ret-goblingaming:invincible-the-dice-game
+  - id: mantic-games/MGKW01
+    name: 'Kings of War: Rulebook 2nd Edition (Hardcover)'
+    manufacturer: mantic-games
+    productCode: MGKW01
+    sku: MGCKW01
+    ean: '5060208868296'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-rulebook-2nd-edition-hardcover
+    evidence:
+      - ret-gamenerdz:/kings-of-war-rulebook-2nd-edition-hardcover
+  - id: mantic-games/MGKW0103
+    name: 'Kings of War 2nd Edition: Orcs - Skulks'
+    manufacturer: mantic-games
+    productCode: MGKW0103
+    sku: MGCKW0103
+    ean: '5060208868616'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-orcs-skulks
+    evidence:
+      - ret-gamenerdz:/kings-of-war-2nd-edition-orcs-skulks
   - id: mantic-games/MGKW02
     name: 'Kings of War 2nd Edition: Deluxe Gamer''s Edition (Clearance)'
     manufacturer: mantic-games
@@ -22235,6 +21853,21 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/discontinued-multipurpose-damage-trackers
       - mfr-manticgames:1298
       - ret-gamenerdz:/kings-of-war-2nd-edition-wound-tracker
+  - id: mantic-games/MGKW07
+    name: 'Kings of War 2nd Edition: Uncharted Empires'
+    manufacturer: mantic-games
+    productCode: MGKW07
+    sku: MGCKW07
+    ean: '5060208868807'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-uncharted-empires
+    evidence:
+      - ret-gamenerdz:/kings-of-war-2nd-edition-uncharted-empires
   - id: mantic-games/MGKW09
     name: 'Kings of War: The Destiny of Kings'
     manufacturer: mantic-games
@@ -22288,6 +21921,22 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/forces-of-nature-druid
       - mfr-manticgames:45459
+  - id: mantic-games/MGKW12
+    name: 'Kings Of War, 2nd Edition: Edge of the Abyss (Softcover)'
+    manufacturer: mantic-games
+    productCode: MGKW12
+    sku: MGCKW12
+    ean: '5060469660943'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-edge-of-the-abyss-softcover
+    evidence:
+      - ret-gamenerdz:/kings-of-war-2nd-edition-edge-of-the-abyss-softcover
   - id: mantic-games/MGKW15
     name: Kings Of War Tactics Deck – DISCONTINUED
     manufacturer: mantic-games
@@ -24765,6 +24414,22 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/troll-bruiser-discontinued
       - mfr-manticgames:1484
       - ret-gamenerdz:/kings-of-war-2nd-edition-troll-bruiser
+  - id: mantic-games/MGKWG106
+    name: 'Kings Of War: Goblin Army'
+    manufacturer: mantic-games
+    productCode: MGKWG106
+    sku: MGCKWG106
+    ean: '5060469661162'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-goblin-army
+    evidence:
+      - ret-gamenerdz:/kings-of-war-goblin-army
   - id: mantic-games/MGKWG108
     name: Goblin Army DISCONTINUED
     manufacturer: mantic-games
@@ -25373,6 +25038,8 @@ products:
     manufacturer: mantic-games
     productCode: MGKWH104
     sku: MGKWH104
+    ean: '5060208868869'
+    eanConfidence: provisional
     gameSystems:
       - kings-of-war
     faction: general
@@ -25400,6 +25067,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/ogre-chariot-regiment-discontined
       - mfr-manticgames:1474
+      - ret-gamenerdz:/kings-of-war-2nd-edition-ogre-chariot-regiment
   - id: mantic-games/MGKWH106
     name: Goblin Biggit
     manufacturer: mantic-games
@@ -27229,8 +26897,10 @@ products:
     manufacturer: mantic-games
     productCode: MGKWK301
     sku: MGKWK301
-    ean: '5060469668413'
-    eanConfidence: confirmed
+    ean: '5060469660400'
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060469668413'
     gameSystems:
       - kings-of-war
     faction: general
@@ -27257,6 +26927,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/abyssal-dwarf-slave-orc-gore-riders-discontinued
       - mfr-manticgames:1289
+      - ret-gamenerdz:/kings-of-war-2nd-edition-abyssal-dwarf-slave-orc-gore-riders
   - id: mantic-games/MGKWK302
     name: Abyssal Dwarf Blacksouls / Decimators
     manufacturer: mantic-games
@@ -28299,6 +27970,22 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/20mm-small-movement-tray-pack-discontinued
       - mfr-manticgames:1297
+  - id: mantic-games/MGKWM06
+    name: Mantic Games Compendium 2016
+    manufacturer: mantic-games
+    productCode: MGKWM06
+    sku: MGCKWM06
+    ean: '5060469660318'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/mantic-games-compendium-2016
+    evidence:
+      - ret-gamenerdz:/mantic-games-compendium-2016
   - id: mantic-games/MGKWM07
     name: 50mm Movement Tray Pack – DISCONTINUED
     manufacturer: mantic-games
@@ -29465,12 +29152,8 @@ products:
     manufacturer: mantic-games
     productCode: MGKWM138
     sku: MGKWM138
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: mapped
-    settings:
-      - pannithor
-    settingsBasis: derived
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
     category: terrain
     categoryBasis: mapped
     status: current
@@ -32461,6 +32144,22 @@ products:
       - ret-gamenerdz:/kings-of-war-4e-trident-realm-battalion
       - ret-goblingaming:trident-realm-battalion-kings-of-war
       - ret-tistaminis:kings-of-war-trident-realm-battalion
+  - id: mantic-games/MGKWR201
+    name: 'Kings of War 2nd Edition: Riverguard Captain'
+    manufacturer: mantic-games
+    productCode: MGKWR201
+    sku: MGCKWR201
+    ean: '5060469660585'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-riverguard-captain
+    evidence:
+      - ret-gamenerdz:/kings-of-war-2nd-edition-riverguard-captain
   - id: mantic-games/MGKWR202
     name: Thuul Aquamage
     manufacturer: mantic-games
@@ -32542,8 +32241,10 @@ products:
     manufacturer: mantic-games
     productCode: MGKWR204
     sku: MGKWR204
-    ean: '5060469668222'
-    eanConfidence: confirmed
+    ean: '5060469660615'
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060469668222'
     gameSystems:
       - kings-of-war
     faction: general
@@ -32569,6 +32270,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/naiad-wyrmrider-centurion
       - mfr-manticgames:1510
+      - ret-gamenerdz:/kings-of-war-2nd-edition-naiad-wyrmrider-centurion
   - id: mantic-games/MGKWR205
     name: Trident Realm of Neritica Eckter, Placoderm Defender
     manufacturer: mantic-games
@@ -32773,6 +32475,22 @@ products:
       - mfr-manticgames:474736
       - ret-goblingaming:mantic-games-kings-of-war-trident-realm-dambuster-sentinel
       - ret-tistaminis:kings-of-war-dambuster-sentinel
+  - id: mantic-games/MGKWR211
+    name: 'Kings of War 4E: Trident Realm Hero Pack'
+    manufacturer: mantic-games
+    productCode: MGKWR211
+    sku: MANKWR211
+    ean: '5060924986823'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-4e-trident-realm-hero-pack
+    evidence:
+      - ret-gamenerdz:/kings-of-war-4e-trident-realm-hero-pack
   - id: mantic-games/MGKWR212
     name: Trident King
     manufacturer: mantic-games
@@ -33330,7 +33048,9 @@ products:
     productCode: MGKWR407
     sku: MGKWR407
     ean: '5060924983860'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060924987080'
     gameSystems:
       - kings-of-war
     faction: general
@@ -33355,6 +33075,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/trident-realm-coral-giant
       - mfr-manticgames:474732
+      - ret-gamenerdz:/kings-of-war-4e-trident-realm-coral-giant
       - ret-goblingaming:mantic-games-kings-of-war-trident-realm-coral-giant
       - ret-tistaminis:kings-of-war-coral-giant
   - id: mantic-games/MGKWR408
@@ -34443,6 +34164,20 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/empire-of-dust-high-priest-ahmunite-pharaoh
       - mfr-manticgames:1395
       - ret-goblingaming:empire-of-dust-ahmunite-pharaoh-cursed-high-priest
+  - id: mantic-games/MGKWT202
+    name: 'Kings of War 2nd Edition: Empire Of Dust - Revenant Champion/Army Standard Bearer'
+    manufacturer: mantic-games
+    productCode: MGKWT202
+    sku: MGCKWT202
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/kings-of-war-2nd-edition-empire-of-dust-revenant-champion-army-standard-bearer
+    evidence:
+      - ret-gamenerdz:/kings-of-war-2nd-edition-empire-of-dust-revenant-champion-army-standard-bearer
   - id: mantic-games/MGKWT203
     name: Empire of Dust Revenant Champion / Standard Bearer
     manufacturer: mantic-games
@@ -36083,26 +35818,6 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/twilight-kin-one-click-ultimate-bundle-discontinued
       - mfr-manticgames:461305
-  - id: mantic-games/MGKWVAK101
-    name: 'Kings of War: Vanguard - Abyssal Dwarf Warband Set'
-    manufacturer: mantic-games
-    productCode: MGKWVAK101
-    sku: MGKWVAK101
-    ean: '5060469665146'
-    eanConfidence: provisional
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: classified
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/kings-of-war-vanguard-abyssal-dwarf-warband-set
-    evidence:
-      - ret-gamenerdz:/kings-of-war-vanguard-abyssal-dwarf-warband-set
   - id: mantic-games/MGKWW201
     name: Magnilde Varangur Demon Hunter
     manufacturer: mantic-games
@@ -40145,12 +39860,8 @@ products:
     manufacturer: mantic-games
     productCode: MGTC238
     sku: MGTC238
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: mapped
-    settings:
-      - pannithor
-    settingsBasis: derived
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -40411,12 +40122,8 @@ products:
     sku: MGTC253
     ean: '5060924986557'
     eanConfidence: confirmed
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: mapped
-    settings:
-      - pannithor
-    settingsBasis: derived
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -40769,6 +40476,8 @@ products:
     manufacturer: mantic-games
     productCode: MGVAB102
     sku: MGVAB102
+    ean: '5060469663678'
+    eanConfidence: provisional
     gameSystems:
       - kings-of-war
     faction: general
@@ -40797,6 +40506,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/basilean-warband-booster
       - mfr-manticgames:1963
+      - ret-gamenerdz:/kings-of-war-vanguard-basilean-warband-booster
   - id: mantic-games/MGVAD101
     name: Dwarf Warband Set DISCONTINUED
     manufacturer: mantic-games
@@ -41569,6 +41279,8 @@ products:
     manufacturer: mantic-games
     productCode: MGVAK101
     sku: MGVAK101
+    ean: '5060469665146'
+    eanConfidence: provisional
     gameSystems:
       - kings-of-war
     faction: general
@@ -41597,6 +41309,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/abyssal-dwarf-warband-set-discontinued
       - mfr-manticgames:99582
+      - ret-gamenerdz:/kings-of-war-vanguard-abyssal-dwarf-warband-set
   - id: mantic-games/MGVAK102
     name: Abyssal Dwarf Warband Booster
     manufacturer: mantic-games
