@@ -16,13 +16,16 @@ namespace WarHub.Catalog.Publish;
 ///   * <c>paintIds</c> / <c>productIds</c> on the records, so a consumer that already holds a
 ///     record does not need a second fetch.
 ///
-/// Both are derived from the ids of THIS build. Paint ids carry positional <c>-N</c> suffixes
-/// wherever a brand/name slug collides across many such slug groups, and the position that
-/// decides <c>-2</c> from <c>-3</c> is a sort over the upstream YAML, so those suffixes MOVE
-/// when the data moves. A paint id is therefore stable within a release but NOT yet across
-/// releases. That is precisely why the link is EMITTED rather than left for a consumer to
-/// assume: it is internally consistent within one release, which is the strongest claim the
-/// current id scheme supports.
+/// Both are derived from the ids of THIS build, and the link is EMITTED rather than left for a
+/// consumer to reconstruct. That was once a statement about weak ids -- paint ids carried
+/// POSITIONAL <c>-N</c> suffixes that moved whenever the data moved, so a link was only
+/// trustworthy within one release. It is no longer: PaintBuilder step 2 derives a colliding id's
+/// suffix from the paint's own identity, so an id depends on nothing but the paint it names.
+///
+/// The link is still emitted, for a reason that outlives that fix: a consumer cannot compute it.
+/// Whether a name collides -- and therefore whether an id is bare or qualified -- is a property of
+/// the whole brand file, which no single record exposes. Same for the boxed-set relation, which
+/// leans on exactly this (see <see cref="SetContents"/>).
 ///
 /// Matching is on the canonical barcode string exactly as published. No normalization is
 /// invented here that the rest of the pipeline does not already do -- if two records disagree

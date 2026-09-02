@@ -10,7 +10,7 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     [Fact]
     public void Publishes_expected_counts()
     {
-        Assert.Equal(2, fx.Result.Products);
+        Assert.Equal(3, fx.Result.Products);
         Assert.Equal(8, fx.Result.Paints);  // 7 + the weight-sold Weathering Powder
     }
 
@@ -222,8 +222,8 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     {
         JsonElement pIndex = Doc("products/index.json");
         int pSum = pIndex.GetProperty("partitions").EnumerateArray().Sum(e => e.GetProperty("records").GetInt32());
-        Assert.Equal(2, pIndex.GetProperty("total").GetInt32());
-        Assert.Equal(2, pSum);
+        Assert.Equal(3, pIndex.GetProperty("total").GetInt32());
+        Assert.Equal(3, pSum);
 
         JsonElement xIndex = Doc("paints/index.json");
         int xSum = xIndex.GetProperty("partitions").EnumerateArray().Sum(e => e.GetProperty("records").GetInt32());
@@ -261,7 +261,8 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     [Fact]
     public void Schemas_are_published()
     {
-        foreach (string name in new[] { "manifest", "product-catalog", "paint-catalog", "index" })
+        foreach (string name in new[]
+                 { "manifest", "product-catalog", "paint-catalog", "index", "barcode-index", "set-contents" })
         {
             Assert.True(File.Exists(Path.Combine(fx.Dist, "schema", $"{name}.json")), $"schema/{name}.json missing");
         }

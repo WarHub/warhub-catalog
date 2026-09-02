@@ -71,6 +71,7 @@ root.SetAction(parseResult =>
 
     Console.WriteLine($"Published catalog {version}: {result.Products} products, {result.Paints} paints, "
         + $"{result.Barcodes} barcodes ({result.CrossCatalogBarcodes} in both catalogs), "
+        + $"{result.Sets} boxed sets ({result.SetMembers} paints inside them), "
         + $"{result.Files} files → {outDir}");
     return 0;
 });

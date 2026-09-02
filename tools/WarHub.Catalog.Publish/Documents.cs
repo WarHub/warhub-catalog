@@ -222,6 +222,83 @@ internal sealed class BarcodeIndexDocument
     [JsonPropertyOrder(8)] public required IReadOnlyDictionary<string, IReadOnlyList<BarcodeRef>> Barcodes { get; init; }
 }
 
+/// <summary>
+/// One paint inside a boxed set. <c>paintId</c> is the contract; everything else is the audit
+/// trail for how this row was reached.
+///
+/// Deliberately NOT carried: the member's brand and the resolved paint's product code. Both are
+/// on the paint record already, and the brand is literally the id's first segment -- restating
+/// them here would give one fact two published homes that can disagree. <c>ref</c> IS carried
+/// because it exists nowhere else: it is the manufacturer's own printed code, before the leading
+/// zeros were stripped ('09030' resolving to productCode '9030'), and it is the only link back to
+/// the <c>contentSkus</c> entry this member came from.
+/// </summary>
+internal sealed record SetMemberRecord(
+    [property: JsonPropertyOrder(1)] string PaintId,
+    [property: JsonPropertyOrder(2)] string Ref,
+    // How many the source states. ABSENT MEANS THE SOURCE DID NOT SAY -- not one unit. No source
+    // in this corpus states a count today (every file's counts.quantified is 0), so the key is
+    // currently emitted on no member at all; it is declared because the generator can already
+    // carry one and a consumer must not read the silence as "1".
+    [property: JsonPropertyOrder(3)] int? Quantity,
+    // Absent -- on 2,211 of 2,214 members -- means the printed code resolved to this paint on its
+    // own. Present means it did NOT, and names what settled it instead: `statedName` (the set
+    // listed one code twice and the name printed beside it picked the paint) or `correction` (a
+    // human declared in data/catalog/set-refs.yaml that the manufacturer mistyped its own code).
+    // Both keep `ref` verbatim, so the repair is visible rather than laundered.
+    [property: JsonPropertyOrder(4)] string? ResolvedBy,
+    [property: JsonPropertyOrder(5)] string? StatedName);
+
+/// <summary>
+/// A ref this relation could NOT turn into a paint, published rather than dropped -- a set that
+/// silently listed 7 of its 8 colours would be indistinguishable from one that really has 7.
+/// </summary>
+internal sealed record UnresolvedRef(
+    [property: JsonPropertyOrder(1)] string Ref,
+    [property: JsonPropertyOrder(2)] string Reason);
+
+/// <summary>
+/// What one boxed set contains. Keyed by product id in <see cref="SetContentsDocument.Sets"/>, so
+/// the id is not repeated here.
+/// </summary>
+internal sealed record SetRecord
+{
+    // A REVIEW LABEL off the product record, carried so a human reading this document alone can
+    // tell which box a row is. Never join on it -- the product record is authoritative.
+    [JsonPropertyOrder(1)] public required string Name { get; init; }
+    // stated | description | sku -- HOW MUCH THE CONTENTS CLAIM IS WORTH, and the one field here a
+    // consumer must not ignore. See the schema for what each value licenses.
+    [JsonPropertyOrder(2)] public required string ContentSkusFrom { get; init; }
+    // Always present, possibly empty -- like `equivalents` on a paint, and unlike the optional
+    // link arrays, because "this set resolved nothing" is a fact worth stating positively.
+    [JsonPropertyOrder(3)] public required IReadOnlyList<SetMemberRecord> Members { get; init; }
+    // Omitted, never [], when every ref resolved.
+    [JsonPropertyOrder(4)] public IReadOnlyList<UnresolvedRef>? Unresolved { get; init; }
+}
+
+/// <summary>
+/// What is inside each boxed set: the product records that contain paints, mapped to the paint
+/// records they contain. Keyed by product id so a consumer holding a product does one lookup.
+///
+/// This is the document that can only be built HERE. The upstream generator resolves each ref to
+/// a paint's identity ({Name}|{Set} plus productCode) but cannot name it, because paint ids are
+/// minted at publish time -- so a consumer given only the upstream file would have to rebuild the
+/// id-minting rules to use it. The publisher is the one component holding both sides at once.
+/// </summary>
+internal sealed class SetContentsDocument
+{
+    [JsonPropertyOrder(0)] public string SchemaVersion { get; init; } = SchemaInfo.SchemaVersion;
+    [JsonPropertyOrder(1)] public string Kind { get; init; } = "set-contents";
+    [JsonPropertyOrder(2)] public required string Version { get; init; }
+    [JsonPropertyOrder(3)] public required string GeneratedAt { get; init; }
+    [JsonPropertyOrder(4)] public string? GitCommit { get; init; }
+    [JsonPropertyOrder(6)] public required IReadOnlyDictionary<string, int> Counts { get; init; }
+    [JsonPropertyOrder(7)] public required SourceRef Source { get; init; }
+    // As on the barcode index, dictionary keys are NOT camelCased: DictionaryKeyPolicy is unset,
+    // so product ids pass through with their manufacturer's own casing (ak-interactive/AK1063).
+    [JsonPropertyOrder(8)] public required IReadOnlyDictionary<string, SetRecord> Sets { get; init; }
+}
+
 // `setting` is the universe or period this partition's game belongs to -- null on a paint index,
 // and null for a catch-all game bucket that belongs to none.
 /// <summary>A setting on the product index: the universe or period its game partitions belong to.</summary>
