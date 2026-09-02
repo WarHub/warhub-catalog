@@ -63,3 +63,23 @@ staleFields:
   - priceUsd
   - priceEur
   - priceCad
+# ...AND THE MANUFACTURER, which is the third field this import filled because it had to pick
+# something -- and the only one of the three that is an IDENTITY rather than a label.
+#
+# The old .NET pipeline filed every record under a path, `<manufacturer>/<game>/<faction>/<slug>`,
+# and the manufacturer it used is whose webstore the row came off. Warlord Games runs a
+# distribution arm, so store.warlordgames.com sells The Army Painter's paints and AK Interactive's
+# too, and this import filed all of them under `warlord-games`. `mfr-warlord-store` scrapes the
+# SAME PAGES and reads Shopify's `vendor` field, which says `Army Painter`.
+#
+# MEASURED 2026-09-01 over all 68,066 observations and all 48,441 distinct product URLs: exactly
+# 781 URLs carry a manufacturer disagreement, all 781 are this source against
+# `mfr-warlord-store` (447 army-painter, 334 ak-interactive), and all 781 agree on the SKU. There
+# is no counter-example -- no other pair of sources in this catalog disagrees about who made a
+# thing they both name by the same URL.
+#
+# IT PUBLISHED THEM TWICE. Manufacturer is the join's partition key, so 772 of the 781 are a second
+# product: `warlord-games/WP2001 Speedpaint Grim Black` next to `army-painter/WP2001 Speedpaint
+# Grim Black` -- same code, same name, same price, same image, one record per source. None of the
+# 772 carries a barcode, so nothing was ever going to fuse them.
+manufacturerIsShelf: true

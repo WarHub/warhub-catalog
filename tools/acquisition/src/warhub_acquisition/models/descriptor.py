@@ -230,6 +230,35 @@ class SourceDescriptor(BaseModel):
     # It is about the SOURCE's own rows only. It never joins across sources; two stores using the
     # same number for different things is the normal case, not a claim about anything.
     skuIsListingId: bool = False
+    # This source's `manufacturer` names the SHELF a row was filed under, not the company that made
+    # the thing. Where such a row shares a product URL with a row from a source that is not filed
+    # this way, `resolve/join.py` takes the other source's manufacturer before it groups anything.
+    #
+    # THE TWO ARE DIFFERENT MACHINERY AND ONLY ONE OF THEM CAN SEE THE MAKER. `legacy-catalog`
+    # derives its manufacturer from the PATH the old .NET pipeline filed a record under
+    # (`warlord-games/bolt-action/general/speedpaint-grim-black`), which is a statement about whose
+    # webstore the row was scraped from. `mfr-warlord-store` reads that same page's Shopify
+    # `vendor` field, which is the store naming the brand it is reselling. Warlord runs a
+    # distribution arm, so its store carries other companies' paints and tools, and on those rows
+    # the path says `warlord-games` while the page says `Army Painter`.
+    #
+    # THE SAME URL IS THE WHOLE BAR, and it is a strong one: one page on one storefront is one
+    # listing, so the two rows are not similar products, they are the same product. Measured
+    # 2026-09-01 across all 68,066 observations and all 48,441 distinct product URLs, exactly 781
+    # URLs carry a manufacturer disagreement and every one of them is this shape -- 447
+    # legacy=warlord-games against store=army-painter, 334 against store=ak-interactive. There is
+    # no counter-example anywhere in the catalog, and all 781 also agree on the SKU.
+    #
+    # WHAT IT FIXES IS IDENTITY, NOT A LABEL. Manufacturer is the join's partition key, so the
+    # disagreement published 772 of these twice -- `warlord-games/WP2001` next to
+    # `army-painter/WP2001`, same code, same name, same price, same image, one from each source.
+    # None of the 772 duplicates carried a barcode, so nothing was ever going to join them.
+    #
+    # `matches.reassignManufacturer` IS STILL THE TOOL FOR ONE ROW and still wins over this: a
+    # hand correction names a specific observation and its reason. This exists because 781 rows is
+    # not a list anyone maintains, and because the correction is derivable -- the store says who
+    # made it, on the very page the other row is quoting.
+    manufacturerIsShelf: bool = False
     # A carve-out from `catalog: paints` back into the product catalog -- see Crossover. Left None
     # by all product sources and by the paint sources that declare no carve-out; each records why
     # in a comment on its own descriptor.
