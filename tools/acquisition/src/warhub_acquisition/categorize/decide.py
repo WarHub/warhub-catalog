@@ -438,7 +438,7 @@ def decide(
         settings = tuple(sorted({slug for _, c in won for slug in c.settings}))
         settings_basis = MAPPED
         settings_why = f"{winner} {'; '.join(sorted({_signal(c) for _, c in won}))}"
-    if not settings and code_clauses["settings"] is not None:
+    if not settings and not generic and code_clauses["settings"] is not None:
         settings_clause = code_clauses["settings"]
         settings = tuple(sorted(set(settings_clause.settings)))
         settings_basis = CODE
@@ -543,6 +543,11 @@ def decide(
                 faction=faction,
                 game_systems_basis=game_systems_basis,
                 game_systems_why=game_systems_why,
+                settings=settings,
+                settings_basis=settings_basis,
+                settings_why=settings_why,
+                generic=generic,
+                generic_why=generic_why,
                 game_systems_claimed=bool(claimed),
             )
     return decision, conflicts

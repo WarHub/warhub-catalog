@@ -1200,3 +1200,22 @@ def test_a_catch_all_only_game_list_does_not_block_a_settings_clause() -> None:
     placed = record.model_copy(update={"gameSystems": ["kill-team", "other-games"]})
     derived = complete_membership_bases(placed, {}, Settings({"warhammer-40k": "W"}, {"kill-team": "warhammer-40k"}, frozenset(), frozenset({"other-games"})))
     assert (derived.settings, derived.settingsBasis) == (["warhammer-40k"], "derived")
+
+
+def test_an_override_is_never_refined_away_and_a_lexicon_decision_keeps_its_verdicts() -> None:
+    from warhub_acquisition.categorize.stage import Outcome, _apply_game_systems
+    from warhub_acquisition.models.catalog import CanonicalProduct
+    from warhub_acquisition.categorize.decide import Decision
+
+    record = CanonicalProduct(id="games-workshop/x", name="X", manufacturer="games-workshop", status="current",
+                              firstSeen="2026-07-01", gameSystems=["other-games"], gameSystemsBasis="override")
+    proposal = Decision(category=None, packaging=None, basis="", why="", gameSystems=("necromunda",),
+                        game_systems_basis="mapped", game_systems_claimed=True)
+    assert not _apply_game_systems(record, proposal, Outcome(), frozenset({"other-games"}))
+    assert record.gameSystems == ["other-games"]
+
+    members = [_observation("mfr-m:1", "mfr-m", hints={"categories": ["dice"]})]
+    rules = _rules(**{"mfr-m": [{"generic": True, "hintContainsAny": {"categories": ["dice"]}}]})
+    lex = Lexicon(reason="test", entries=[LexiconEntry(nameMatches=r"\bDICE\b", category="game-accessory", measured="test")])
+    decision, _ = decide("e", members, {"mfr-m": "manufacturer"}, rules, [], frozenset(), name="Bolt Action Dice", lexicon=lex)
+    assert (decision.category, decision.basis, decision.generic) == ("game-accessory", "lexicon", True)

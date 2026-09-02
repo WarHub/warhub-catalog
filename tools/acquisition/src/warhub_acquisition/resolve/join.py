@@ -462,9 +462,15 @@ def join_observations(
                     component_of[(manufacturer, bundle_code, ean)] = component_code
         # The row itself loses the barcode, the way `rejectEans` takes one away: the resolver's
         # barcode fold reads the observations, not this function's bookkeeping.
+        # STRIPPED BY LISTING TOO (review finding, 2026-09-02): the shared barcode was computed per
+        # listing but cut per row, so a radaddel listing whose newer row carries the bundle's code
+        # and whose older row carries the ISBN kept the ISBN on the older row, joined the book
+        # through it, and the listing union then fused bundle and book. Nothing in the ledger did
+        # this yet -- radaddel tags only plain codes today -- and the first listing tagged with a
+        # bundle code would have.
         stripped: list[Observation] = []
         for observation in attributed:
-            code, ean = codes[observation.key], eans[observation.key]
+            code, ean = listing_code(observation), eans[observation.key]
             component_code = (
                 component_of.get((observation.manufacturer, code, ean))
                 if code is not None and ean is not None
@@ -557,10 +563,13 @@ def join_observations(
         if root_a == root_b:
             return None  # already one group; nothing to bar and no union to report
         merged = group_codes.get(root_a, set()) | group_codes.get(root_b, set())
+        # A declared bundle pair is barred the same way a supersession pair is: two of the maker's
+        # codes that must never share a group, whatever bridge -- a shared barcode, a re-keyed
+        # listing -- offers to join them.
         return next(
             (
                 pair
-                for pair in barred_pairs.get(manufacturer, ())
+                for pair in (*barred_pairs.get(manufacturer, ()), *bundle_pairs.get(manufacturer, ()))
                 if pair[0] in merged and pair[1] in merged
             ),
             None,

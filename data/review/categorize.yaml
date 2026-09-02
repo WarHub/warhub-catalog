@@ -9,23 +9,23 @@ summary:
     paint-barcode: 17
     stated: 1979
     unknown: 1397
-  decidedThisRun: 0
+  decidedThisRun: 20047
   gameSystemsByBasis:
     classified: 1117
     code: 4163
     mapped: 2594
-    not-applicable: 7848
+    not-applicable: 7852
     override: 93
     setting: 960
     stated: 9131
-    unknown: 1355
+    unknown: 1351
   settingsByBasis:
     code: 849
     derived: 17094
     mapped: 11
-    not-applicable: 7919
+    not-applicable: 7923
     override: 3
-    unknown: 1385
+    unknown: 1381
 conflicts:
   - entity: ak-interactive/AK17080-SINGLE
     type: category-disagreement
@@ -362,7 +362,6 @@ deadClauses:
   - games-workshop code~^\d{4}1481\d{3}$
   - mfr-gw-algolia hierarchy.lvl1~Other Games > Aeronautica Imperialis
   - mfr-manticgames categories~game-color
-  - mfr-manticgames categories~terrain-crate,modern-terrain-crate,terrain-sci-fi-terrain-crate,featured-products-terrain-crate,terraincrate-battlefields,terraincrate-dungeons,sci-fi-modular-buildings,neoprene-game-mats,tournaments,hobby_gifts
   - mfr-manticgames categories~tokens-gems
   - mfr-warmachine vendor=Epic Encounters
   - 'mfr-warmachine vendor=Epic Encounters: Local Legends'
