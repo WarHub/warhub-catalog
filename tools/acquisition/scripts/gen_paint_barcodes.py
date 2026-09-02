@@ -54,7 +54,8 @@ TWO WORKBOOKS FEED THIS BRIDGE, and only one of them names the paint set:
 - `WH Colour Codes and Barcodes` (`Paint` sheet, 592 rows, the 2026 rebrand) — columns
   `New Individual barcode`, `New SKU`, `Original SKU`, `Range`, `SSC`. Its `Range` column holds
   merchandising codes (`BS:A` 260, `E:P360` 182, `E:P210` 112, `BS:F` 38), NOT the set, so these
-  rows are tagged only `hints.category: paint` and used to fall out of the gate entirely.
+  rows carry only the tab they sit on (`hints.sheets: [Paint]`) and used to fall out of the gate
+  entirely.
 
 Those 592 rows are re-codings of paints this file ALREADY carries: each `supersedes` the very
 product code sitting in the file today, under the SAME SSC and the SAME `volumeMl`. Air Abaddon
@@ -163,6 +164,14 @@ def is_paint_obs(o: dict) -> bool:
     return tc.startswith("paint") or tc.startswith("spray")
 
 
+#: The workbook tabs whose rows are paints -- the same four names the product side's
+#: data/catalog/taxonomy/category-rules/mfr-gw-trade.yaml maps to `paint` from `hints.sheets`.
+#: Until 2026-09-03 the harvester stamped `hints.category: paint` from them and this bridge read
+#: the stamp; the stamp moved into that table (a harvester's judgement is a `stated` claim no
+#: table can correct), and this bridge reads the tab names the harvester now records verbatim.
+_PAINT_SHEETS = frozenset({"paint", "paints", "spray", "sprays"})
+
+
 def is_rebrand_paint_obs(o: dict) -> bool:
     """A paint row the sheet TITLE calls paint but whose `Range` is a merchandising code.
 
@@ -171,7 +180,9 @@ def is_rebrand_paint_obs(o: dict) -> bool:
     only where the full SSC code has a set stated by a `is_paint_obs` row -- see the module
     docstring for why `Range` and the SSC prefix are both unsafe to infer from.
     """
-    return (o.get("hints") or {}).get("category") == "paint" and not is_paint_obs(o)
+    sheets = (o.get("hints") or {}).get("sheets") or []
+    on_paint_tab = any(str(s).strip().lower() in _PAINT_SHEETS for s in sheets)
+    return on_paint_tab and not is_paint_obs(o)
 
 
 def main() -> None:

@@ -380,28 +380,39 @@ def _volume_ml(size: object, name: str) -> int | None:
     return None
 
 
-def _paint_category(trade_category: str | None) -> str | None:
-    """`"paint"` when the trade range names a paint or spray, else None.
+def _row_hints(row: dict, sheet_title: str, name: str) -> dict[str, object]:
+    """The taxonomy a trade row carries, VERBATIM: its short code, its trade range, the sheet it
+    lives on, and its unit volume.
 
-    GW's trade range labels the product authoritatively: `Paint - WH Colour - Base`,
-    `Spray - Colour`, etc. NOTE `Paint Other - Painting Accessory` (water pots, painting handles,
-    palettes) is an accessory, not a paint -- matching `paint -` with the dash excludes it, as it
-    does brushes (`Brush - ...`), glue and tools.
+    NO CATEGORY IS STAMPED HERE, since 2026-09-02. Until then this function's predecessors wrote
+    `category: paint` for a `Paint -`/`Spray` range or a `Paint` sheet, which was a rule table
+    hidden inside a harvester: a source's own claim outranks every table downstream
+    (resolve/attributes.py), so the judgement could never be measured, argued with or corrected
+    where the other sources' judgements live. It now lives in
+    data/catalog/taxonomy/category-rules/mfr-gw-trade.yaml, keyed on exactly the two values this
+    function records. Measured at the move: 938 rows carried the stamp, 324 of them from the range
+    and 614 from the sheet, and the table decides every one the same way with basis `mapped`
+    instead of `stated`.
+
+    `sheets` IS A LIST because a product appears in several workbooks (the InsertDelete register,
+    the Trade Direct Range, the WH Colour rebrand file) and `_merge` unions list hints across them
+    -- the rebrand workbook's `Range` holds merchandising codes ("BS:A") and its tabs, `Paint` /
+    `Brushes` / `Hobby`, are the only taxonomy it has, so that tab must survive a merge with a row
+    from a workbook whose sheet is called `Sheet1`.
     """
-    tc = (trade_category or "").strip().lower()
-    return "paint" if tc.startswith("paint -") or tc.startswith("spray") else None
-
-
-def _sheet_paint_category(sheet_title: str) -> str | None:
-    """`"paint"` when the SHEET itself says its rows are paints, else None.
-
-    Only the WH Colour rebrand workbook needs this: it has no usable range column (its `Range`
-    holds merchandising codes like `BS:A`) and instead splits rows across `Paint` / `Brushes` /
-    `Hobby` tabs. Brushes and hobby tools are deliberately NOT paints -- the same distinction
-    `_paint_category` already draws for `Paint Other`/`Brush` ranges.
-    """
-    title = sheet_title.strip().lower()
-    return "paint" if title in ("paint", "paints", "spray", "sprays") else None
+    hints: dict[str, object] = {}
+    ssc = _first(row, "SS Code", "SSC", "New SS Code", "Short Code")
+    if ssc is not None:
+        hints["sscCode"] = str(ssc).strip()
+    category = _first(row, "Category (ENG)", "Range", "Trade range")
+    if category is not None:
+        hints["tradeCategory"] = str(category).strip()
+    if sheet_title and sheet_title.strip():
+        hints["sheets"] = [sheet_title.strip()]
+    volume = _volume_ml(_first(row, "SIZE"), name)
+    if volume is not None:
+        hints["volumeMl"] = volume
+    return hints
 
 
 def _code(value: object, known: frozenset[str] = frozenset()) -> str:
@@ -583,7 +594,7 @@ def _merge(existing: Observation, fresh: Observation) -> Observation:
       `None`. Where both are populated the earlier value is kept, so behaviour does not depend on
       filename sort order.
     - **`hints` merge**, so an SSC code from one sheet and a trade category from another both
-      survive.
+      survive -- and a LIST hint (`sheets`) is unioned, so every tab a product was seen on is kept.
 
     `archived` is deliberately NOT decided here -- see `_is_discontinued`. It cannot be a pairwise
     fold: the correct answer depends on which KIND of sheet each sighting came from, which a
@@ -594,7 +605,10 @@ def _merge(existing: Observation, fresh: Observation) -> Observation:
         if getattr(merged, field, None) is None:
             setattr(merged, field, getattr(fresh, field, None))
     for key, value in fresh.hints.items():
-        merged.hints.setdefault(key, value)
+        if isinstance(value, list) and isinstance(merged.hints.get(key), list):
+            merged.hints[key] = [*merged.hints[key], *(v for v in value if v not in merged.hints[key])]
+        else:
+            merged.hints.setdefault(key, value)
     return merged
 
 
@@ -881,29 +895,7 @@ def gw_trade_sheets_strategy(
 
         sku = _code(code, known)
         key = f"{descriptor.id}:{sku}"
-        hints: dict[str, object] = {}
-        ssc = _first(row, "SS Code", "SSC", "New SS Code", "Short Code")
-        if ssc is not None:
-            hints["sscCode"] = str(ssc).strip()
-        category = _first(row, "Category (ENG)", "Range", "Trade range")
-        if category is not None:
-            hints["tradeCategory"] = str(category).strip()
-            # A GW paint pot/spray is a paint, not a "miniature": tag the product
-            # category so it publishes as `paint` rather than the default.
-            paint_category = _paint_category(str(category))
-            if paint_category is not None:
-                hints["category"] = paint_category
-        # Fallback: the WH Colour rebrand workbook's `Range` column holds opaque
-        # merchandising codes ("BS:A"), so the category has to come from the SHEET the
-        # row lives on -- that workbook splits its rows into `Paint` / `Brushes` /
-        # `Hobby` tabs. Without this its 604 paints would publish as `miniatures`.
-        if "category" not in hints:
-            sheet_category = _sheet_paint_category(sheet_title)
-            if sheet_category is not None:
-                hints["category"] = sheet_category
-        volume = _volume_ml(_first(row, "SIZE"), str(name))
-        if volume is not None:
-            hints["volumeMl"] = volume
+        hints = _row_hints(row, sheet_title, str(name))
 
         # Re-coding lineage: this row says "old code -> this code". Recorded against
         # the SURVIVING key and resolved after the whole harvest (see below). A row

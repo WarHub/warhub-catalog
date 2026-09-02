@@ -18,7 +18,6 @@ from warhub_acquisition.acquire.client import FetchError
 from warhub_acquisition.acquire.strategies.gw_trade_sheets import (
     _clean_ean,
     _fetch_page,
-    _paint_category,
     _volume_ml,
     _is_discontinued,
     _merge,
@@ -170,24 +169,6 @@ def test_rows_skips_leading_banner_row():
     assert len(rows) == 1
     assert rows[0]["Barcode"] == "5011921199280"
     assert rows[0]["Code"] == "60010199059"
-
-
-@pytest.mark.parametrize(
-    "trade_category,expected",
-    [
-        ("Paint - WH Colour - Base", "paint"),
-        ("Paint - WH Colour - Contrast", "paint"),
-        ("Spray - Colour", "paint"),
-        ("Paint Other - Painting Accessory", None),  # water pots/handles are accessories, not paint
-        ("40K - Imperium - Astra Militarum", None),
-        ("Brush - Base", None),
-        ("Hobby - Build - Glue", None),
-        ("", None),
-        (None, None),
-    ],
-)
-def test_paint_category_tags_paints_and_sprays(trade_category, expected):
-    assert _paint_category(trade_category) == expected
 
 
 @pytest.mark.parametrize(
@@ -369,23 +350,29 @@ def test_wh_colour_rebrand_row_yields_new_sku_plus_its_predecessor():
     assert _predecessor(row, "2026-07-30") == ("99189960061", None, None, None)
 
 
-@pytest.mark.parametrize(
-    "title,expected",
-    [
-        ("Paint", "paint"),
-        ("paints", "paint"),
-        ("Brushes", None),   # a brush is not a paint -- same rule _paint_category applies
-        ("Hobby", None),
-        ("Deletions", None),
-    ],
-)
-def test_sheet_title_supplies_the_paint_category(title, expected):
-    """The WH Colour workbook's `Range` column holds merchandising codes ("BS:A"), so the paint
-    signal has to come from the sheet the row lives on -- otherwise its 592 paints publish as
-    `miniatures`."""
-    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _sheet_paint_category
+def test_row_hints_are_verbatim_and_carry_no_category_stamp():
+    """The judgement that a `Paint -` range or a `Paint` tab means `paint` lives in
+    data/catalog/taxonomy/category-rules/mfr-gw-trade.yaml since 2026-09-02, not here: a stamp
+    written by a harvester is a `stated` claim no table can correct. The strategy records what the
+    sheet says and nothing more."""
+    from warhub_acquisition.acquire.strategies.gw_trade_sheets import _row_hints
 
-    assert _sheet_paint_category(title) == expected
+    hints = _row_hints(
+        {"SSC": "27-19", "Range": "BS:A", "SIZE": "18ml"}, "Paint", "C:NIGHTHAUNT GLOOM 18ML ROW X6"
+    )
+    assert hints == {"sscCode": "27-19", "tradeCategory": "BS:A", "sheets": ["Paint"], "volumeMl": 18}
+    assert "category" not in _row_hints({"Trade range": "Paint - WH Colour - Base"}, "Sheet1", "X")
+    assert "sheets" not in _row_hints({"Trade range": "Spray - Colour"}, "  ", "X")
+
+
+def test_merge_unions_list_hints():
+    """A product seen on the rebrand workbook's `Paint` tab and on the Trade Direct `Sheet1` keeps
+    both tabs; scalar hints keep the first value as before."""
+    merged = _merge(
+        _obs(hints={"sheets": ["Sheet1"], "tradeCategory": "Paint - WH Colour - Base"}),
+        _obs(hints={"sheets": ["Paint", "Sheet1"], "tradeCategory": "BS:A"}),
+    )
+    assert merged.hints == {"sheets": ["Sheet1", "Paint"], "tradeCategory": "Paint - WH Colour - Base"}
 
 
 def test_cumulative_restatement_does_not_look_like_a_placeholder():

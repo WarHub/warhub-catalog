@@ -1,40 +1,40 @@
 summary:
-  products: 27261
+  products: 27262
   undecided: 1328
   byBasis:
-    code: 7107
+    code: 7088
     lexicon: 390
-    mapped: 16429
-    override: 13
+    mapped: 17386
+    override: 14
     paint-barcode: 15
-    stated: 1979
+    stated: 1041
     unknown: 1328
   decidedThisRun: 0
   gameSystemsByBasis:
-    classified: 1109
-    code: 4163
-    mapped: 2594
+    classified: 1113
+    code: 4187
+    mapped: 2568
     not-applicable: 7862
     override: 101
     setting: 960
     stated: 9131
-    unknown: 1341
+    unknown: 1340
   settingsByBasis:
     code: 849
-    derived: 17094
+    derived: 17096
     mapped: 11
     not-applicable: 7933
     override: 3
-    unknown: 1371
+    unknown: 1370
   rolesByBasis:
-    code: 93
+    code: 72
     lexicon: 183
-    mapped: 729
+    mapped: 1079
     none: 20346
-    override: 1
-    paint-archive: 2254
+    override: 2
+    paint-archive: 1958
     stated: 16
-    unknown: 3639
+    unknown: 3606
 conflicts:
   - entity: games-workshop/99700199045
     type: category-disagreement
@@ -99,7 +99,11 @@ deadClauses:
   - warlord-games code~^21\d{7}$
 unmapped:
   mfr-gw-trade:
-    - value: tradeCategory=Sales Support - Other
+    - value: sheets=Deletions
+      wouldDecide: 1
+    - value: sheets=Code Changes
+      wouldDecide: 1
+    - value: sheets=Insertions
       wouldDecide: 1
   mfr-manticgames:
     - value: categories=kings-of-war

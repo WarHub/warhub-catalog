@@ -29,17 +29,20 @@ def _bridge():
 
 
 def _stated(sku, ean, ssc, trade_category, name, volume_ml=12):
-    """A row from `Individual Barcodes`: its own `Range` names the set."""
+    """A row from `Individual Barcodes`: its own `Range` names the set. The harvester records the
+    range and the tab verbatim and stamps no category (since 2026-09-03; the judgement lives in
+    category-rules/mfr-gw-trade.yaml)."""
     return {"sku": sku, "ean": ean, "name": name,
             "hints": {"sscCode": ssc, "tradeCategory": trade_category,
-                      "category": "paint", "volumeMl": volume_ml}}
+                      "sheets": ["Paints"], "volumeMl": volume_ml}}
 
 
 def _rebrand(sku, ean, ssc, range_code, name, volume_ml=12):
-    """A row from `WH Colour Codes and Barcodes`: `Range` is a merchandising code, not a set."""
+    """A row from `WH Colour Codes and Barcodes`: `Range` is a merchandising code, not a set, and
+    the `Paint` tab it sits on is the only thing that says it is a paint."""
     return {"sku": sku, "ean": ean, "name": name,
             "hints": {"sscCode": ssc, "tradeCategory": range_code,
-                      "category": "paint", "volumeMl": volume_ml}}
+                      "sheets": ["Paint"], "volumeMl": volume_ml}}
 
 
 def _run(tmp_path, observations, paint_names):
@@ -177,12 +180,13 @@ def test_no_paint_row_in_the_committed_evidence_carries_a_price() -> None:
     evidence = REPO_ROOT / "data/evidence/products/mfr-gw-trade/observations.jsonl"
     if not evidence.exists():
         pytest.skip("no committed mfr-gw-trade evidence")
+    module = _bridge()
     priced = []
     for line in evidence.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         observation = json.loads(line)
-        if (observation.get("hints") or {}).get("category") != "paint":
+        if not (module.is_paint_obs(observation) or module.is_rebrand_paint_obs(observation)):
             continue
         for currency in ("priceGbp", "priceUsd", "priceEur", "priceCad"):
             if observation.get(currency) is not None:
