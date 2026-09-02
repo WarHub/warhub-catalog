@@ -13,8 +13,8 @@ offline because nothing says what values exist. Storing the store's taxonomy ver
 deciding here instead means a rule change is a re-run of this stage over data already in hand.
 
 WHAT IT MAY AND MAY NOT DO. It only ever fills a category the resolver could not source from
-evidence -- `categoryBasis: guessed` (our fallback) or `default` (an upstream pipeline's blanket
-fill). A `stated` category, and anything an override set, is left exactly as it is: a source that
-actually made a claim about one product outranks any table, and this stage exists to replace
-guesses, not claims.
+evidence at all -- `categoryBasis: unknown`, i.e. the record has none. A `stated` category, and
+anything an override set, is left exactly as it is: a source that actually made a claim about one
+product outranks any table, and this stage exists to answer open questions, not to re-answer
+settled ones.
 """

@@ -57,47 +57,36 @@ class CanonicalProduct(BaseModel):
     # trade. It lives in the archive until it settles.
     gameSystemBasis: str | None = None
     category: str | None = None
-    # WHAT DECIDED `category` -- the field that makes the guess countable.
+    # WHAT DECIDED `category` -- or, where it is null, that nothing did.
     #
-    # `category` is the only published product field with a fallback behind it, so a wrong value
-    # there is invisible by construction: every product has one, it just is not necessarily about
-    # that product. The values, and who writes each:
+    # THE FIELD NO LONGER HAS A FALLBACK BEHIND IT, and that is the whole shape of this pair.
+    # `category` used to default to `miniatures` whenever nothing spoke, which meant every product
+    # carried a value and a wrong one was invisible by construction. `gameSystemBasis` above was
+    # cured of exactly this a change earlier; the two now read the same way. The values, and who
+    # writes each:
     #
+    #   unknown        resolve/attributes.py -- no source asserted a category, so there is none.
+    #                  A source's own declared FILL (SourceDescriptor.defaultHints -- today
+    #                  legacy-catalog's blanket `miniatures`) never enters the fold at all, so it
+    #                  lands here rather than in a basis of its own.
     #   stated         resolve/attributes.py -- a source asserted this category for this product.
-    #   default        resolve/attributes.py -- the winning source emits this exact value as a
-    #                  pipeline FILL rather than a claim (SourceDescriptor.defaultHints). Today
-    #                  that is legacy-catalog's blanket `miniatures`, which is `kind: curated` and
-    #                  so outranks every manufacturer and retailer.
-    #   guessed        resolve/attributes.py -- nothing said anything and the fallback wrote
-    #                  `miniatures`.
     #   mapped         categorize/decide.py -- a committed rule table over the taxonomy the selling
     #                  store itself published for this product.
+    #   code           categorize/decide.py -- the manufacturer's own product code, through a
+    #                  committed manufacturer table.
     #   paint-barcode  categorize/decide.py -- the paint catalog publishes this product's barcode.
     #   lexicon        categorize/decide.py -- the published NAME matches a cross-source pattern
-    #                  (data/catalog/taxonomy/category-lexicon.yaml). Weakest of the three, tried
-    #                  last, and the only one available to a source that publishes no taxonomy at
-    #                  all -- mfr-gw-trade carries nothing but a stock-section code and names like
-    #                  `CODEX: SPACE WOLVES (HB) (FRANCAIS)`.
+    #                  (data/catalog/taxonomy/category-lexicon.yaml). Weakest rung, tried last, and
+    #                  the only one available to a source that publishes no taxonomy at all.
     #
-    # `default` and `guessed` both mean UNDECIDED and are the pair report.py counts (UNDECIDED_BASES).
-    # They are kept apart because a `default` row came in from an import whose own evidence could
-    # re-decide it, while a `guessed` row never had anything.
+    # `unknown` is the only value that means UNDECIDED, and it is what report.py counts
+    # (UNDECIDED_BASES). It replaced the pair `guessed`/`default`, which were two different
+    # accounts of the same fact -- nobody said -- kept apart only because one of them had a value
+    # attached that the catalog was publishing as though it were evidence.
     #
-    # MEASURED, over 30,771 products on 2026-08-25:
-    #
-    #                   before categorize   after
-    #   undecided            28,817 (93.6%)   16,725 (54.4%)
-    #   of which guessed     16,735            9,672
-    #   of which default     12,082            7,053
-    #
-    # and 7,199 products stopped claiming to be miniatures -- 4,286 paints, 1,092 books, 887 dice
-    # and cards, 277 terrain, 85 merch, 52 board games, 9 event tickets.
-    #
-    # NOT PUBLISHED YET, deliberately. The value set is still growing -- a manufacturer code-class
-    # table is the next one, measured at 100% purity for GW's `60040`/`60100`/`60030` (books) and
-    # `99189` (paints) -- and publishing a field whose vocabulary is about to change would churn
-    # the consumer contract repeatedly for one feature. It lives in the archive now, where it is
-    # free to evolve, and gets published once stable.
+    # NOT PUBLISHED YET, deliberately. The value set is still growing and publishing a field whose
+    # vocabulary is about to change would churn the consumer contract repeatedly for one feature.
+    # It lives in the archive now, where it is free to evolve, and gets published once stable.
     categoryBasis: str | None = None
     packaging: str | None = None
     quantity: int | None = None

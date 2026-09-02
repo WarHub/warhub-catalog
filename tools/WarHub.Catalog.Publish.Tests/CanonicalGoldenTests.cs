@@ -151,9 +151,25 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
     [Fact]
     public void Category_status_and_availability_surface_as_resolved()
     {
-        Assert.Equal("miniatures", Necrons.GetProperty("category").GetString());
         Assert.Equal("current", Necrons.GetProperty("status").GetString());
         Assert.Equal("in_stock", Necrons.GetProperty("availability").GetString());
+    }
+
+    [Fact]
+    public void An_unstated_category_publishes_as_null_rather_than_as_miniatures()
+    {
+        // THE END-TO-END PROOF THAT THE FALLBACK IS GONE, and it took both stacks to remove: the
+        // resolver used to write `miniatures` whenever no source spoke, and this publisher used to
+        // write it a second time (`p.Category ?? "miniatures"`) for anything that arrived null. A
+        // consumer therefore could not tell a stated category from a filled one on any product.
+        //
+        // Necrons: nothing in the fixture states a category, so the property is absent entirely --
+        // the same treatment `gameSystem` already gets one test above, since the writer omits
+        // nulls rather than emitting them.
+        // Painting Handle: mfr-gw-algolia states `hobby-auxiliary`, so it survives untouched --
+        // the point is that absence is published as absence, not that categories stopped flowing.
+        Assert.False(Necrons.TryGetProperty("category", out _));
+        Assert.Equal("hobby-auxiliary", PaintingHandle.GetProperty("category").GetString());
     }
 
     [Fact]

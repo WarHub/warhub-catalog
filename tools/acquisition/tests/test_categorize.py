@@ -206,8 +206,9 @@ def test_nothing_matches_means_no_decision() -> None:
 
 
 def _seed(tmp_path: Path) -> DataPaths:
-    """One entity per outcome: a guessed row a rule reaches, a guessed row nothing reaches, a
-    stated row a rule WOULD reach (and must not), and a guessed row only its barcode identifies."""
+    """One entity per outcome: an undecided row a rule reaches, an undecided row nothing reaches,
+    a stated row a rule WOULD reach (and must not), and an undecided row only its barcode
+    identifies."""
     paths = DataPaths(tmp_path)
     # A codePattern, so the fixture's entity ids are CODE-based like the real catalog's rather
     # than name slugs -- the stage looks records up by id, and a slug id would exercise a
@@ -267,7 +268,7 @@ def _catalog(paths: DataPaths) -> dict[str, dict]:
     }
 
 
-def test_the_stage_decides_guesses_and_leaves_claims_alone(tmp_path: Path) -> None:
+def test_the_stage_decides_the_undecided_and_leaves_claims_alone(tmp_path: Path) -> None:
     paths = _seed(tmp_path)
     before = _catalog(paths)
     assert before["games-workshop/TOME1"]["categoryBasis"] == "stated"
@@ -286,8 +287,9 @@ def test_the_stage_decides_guesses_and_leaves_claims_alone(tmp_path: Path) -> No
     # productType matches the Brushes clause, which is why the fixture gives it that value.
     assert after["games-workshop/TOME1"]["category"] == "book"
     assert after["games-workshop/TOME1"]["categoryBasis"] == "stated"
-    # Nothing reached it, so it keeps the honest guess rather than gaining a worse answer.
-    assert after["games-workshop/MYST1"]["categoryBasis"] == "guessed"
+    # Nothing reached it, so it stays honestly undecided rather than gaining a worse answer.
+    assert after["games-workshop/MYST1"]["categoryBasis"] == "unknown"
+    assert after["games-workshop/MYST1"].get("category") is None
 
 
 def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
@@ -296,8 +298,8 @@ def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
 
     `gameSystemBasis` is the fourth, and it is here rather than in `resolve` because it is a
     question ABOUT the category: whether a game system applies to this product at all. `resolve`
-    cannot answer it, because at that point a paint pot is still `miniatures`/`guessed` -- the
-    fallback fired precisely because nothing had decided yet. Settling it upstream asked one pass
+    cannot answer it, because at that point a paint pot has no category at all -- nothing had
+    decided yet. Settling it upstream asked one pass
     too early and returned `unknown` for 4,189 products that are plainly hobby supplies.
     """
     paths = _seed(tmp_path)
@@ -366,7 +368,7 @@ def test_the_worklist_counts_only_products_that_are_still_undecided(tmp_path: Pa
 
     assert review["summary"] == {
         "products": 4, "undecided": 1, "decidedThisRun": 2,
-        "byBasis": {"guessed": 1, "mapped": 1, "paint-barcode": 1, "stated": 1},
+        "byBasis": {"mapped": 1, "paint-barcode": 1, "stated": 1, "unknown": 1},
     }
     values = {row["value"] for row in review["unmapped"]["ret-shop"]}
     assert values == {"productType=Unlabelled"}  # the decided rows' values are absent

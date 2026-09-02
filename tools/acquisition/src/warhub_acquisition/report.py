@@ -16,7 +16,7 @@ PAINT_BRANDS_SUBDIR = ("paints", "brands")
 #: excluding `stated`, so that adding a basis is a deliberate act on both sides: a new one counts
 #: as evidence only because it is absent here, which is a decision someone has to make rather than
 #: a default they can fall into. See categorize/decide.py for the bases this stage adds.
-UNDECIDED_BASES = frozenset({"guessed", "default"})
+UNDECIDED_BASES = frozenset({"unknown"})
 
 
 def _paint_brands_dir(paths: DataPaths) -> Path:
@@ -107,20 +107,20 @@ def build_report(paths: DataPaths) -> str:
     # fall as the categorize work lands; a jump back up is the signal that something stopped
     # deciding.
     #
-    # A BASIS IS EITHER EVIDENCE OR IT IS NOT, and the split is exactly `UNDECIDED_BASES`. Two of
-    # them mean nobody said anything -- `guessed` is our own fallback, `default` is an upstream
-    # pipeline's blanket fill (models/catalog.py::categoryBasis) -- and everything else traces to
-    # something: `stated` to a source's claim about this product, `mapped` to that source's own
-    # published taxonomy through a committed rule table, `paint-barcode` to the paint catalog
-    # holding this barcode. Listing the undecided set rather than testing `!= "stated"` is what
-    # keeps a NEW basis from silently counting as evidence on the day someone adds one.
+    # A BASIS IS EITHER EVIDENCE OR IT IS NOT, and the split is exactly `UNDECIDED_BASES`. One
+    # value means nobody said anything -- `unknown`, i.e. no category at all
+    # (models/catalog.py::categoryBasis) -- and everything else traces to something: `stated` to a
+    # source's claim about this product, `mapped` to that source's own published taxonomy through
+    # a committed rule table, `paint-barcode` to the paint catalog holding this barcode. Listing
+    # the undecided set rather than testing `!= "stated"` is what keeps a NEW basis from silently
+    # counting as evidence on the day someone adds one.
     if category_rows:
         undecided = sum(n for (_, basis), n in category_rows.items() if basis in UNDECIDED_BASES)
         total_rows = sum(category_rows.values())
         lines += [
             "", "## Product categories", "",
             f"**{undecided} of {total_rows} ({100 * undecided / total_rows:.1f}%) rest on no "
-            f"evidence** -- `default` is an upstream pipeline's fill, `guessed` is our fallback.",
+            f"evidence** -- `unknown` means the record has no category, because nothing said one.",
             "", "| category | basis | products |", "|---|---|---|",
         ]
         lines += [

@@ -83,7 +83,7 @@ internal static class ProductBuilder
                     Name = p.Name,
                     GameSystem = gameSystemLabel,
                     Faction = factionLabel,
-                    Category = p.Category ?? "miniatures",
+                    Category = p.Category,
                     Status = p.Status,
                     Availability = p.Availability ?? "unknown",
                     Quantity = p.Quantity ?? 1,

@@ -38,7 +38,7 @@ def test_precedence_prefers_manufacturer_then_backfills() -> None:
     assert product.priceGbp == 76.5
     assert product.imageUrl == "https://ret/img.jpg"     # retailer backfills gaps
     assert product.gameSystem == "warhammer-40k"
-    assert product.category == "miniatures"              # default
+    assert product.category is None                      # nobody said, so there is none
     assert product.evidence == ["mfr-gw:necrons", "ret-a:necrons"]
 
 
@@ -386,19 +386,19 @@ def test_a_description_stating_no_membership_leaves_contents_unset() -> None:
     assert product.contentSkusFrom is None
 
 
-# --- categoryBasis: making the one guessed field countable --------------------------------------
+# --- categoryBasis: a category nothing asserted is absent ----------------------------------------
 #
-# `category` is the only published product field with a fallback behind it, so a wrong value there
-# is invisible -- every product has one either way. Measured on catalog/acquisition (fc3ff62):
-# stated 1,954 (6.4%), default 12,082 (39.3%), guessed 16,711 (54.4%). The basis changes no
-# category value; it records which of the three actually happened.
+# `category` used to fall back to `miniatures` whenever no source spoke, so every product carried a
+# value and a wrong one was invisible. It no longer does: absent is absent, and `unknown` says so.
+# A source's declared FILL (`SourceDescriptor.defaultHints`) never enters the fold at all, which is
+# the behaviour change these tests pin -- it used to be folded and then labelled `default`.
 
 LEGACY_DEFAULTS = {"legacy-catalog": {"category": "miniatures"}}
 
 
-def test_no_source_hint_is_recorded_as_guessed() -> None:
+def test_no_source_hint_leaves_the_category_absent() -> None:
     product = resolve_attributes("e", [obs("ret-a:x")], KINDS, NO_EAN, None)
-    assert (product.category, product.categoryBasis) == ("miniatures", "guessed")
+    assert (product.category, product.categoryBasis) == (None, "unknown")
 
 
 def test_a_real_source_claim_is_recorded_as_stated() -> None:
@@ -409,18 +409,36 @@ def test_a_real_source_claim_is_recorded_as_stated() -> None:
     assert (product.category, product.categoryBasis) == ("paint", "stated")
 
 
-def test_a_declared_pipeline_fill_is_recorded_as_default_not_stated() -> None:
+def test_a_declared_pipeline_fill_never_enters_the_fold() -> None:
     """`legacy-catalog` is `kind: curated` -- the TOP of KIND_PRIORITY -- and emits
     `category: miniatures` on 12,533 of its 12,799 observations. That is the old .NET pipeline's
-    fill, and because it outranks every manufacturer and retailer it decides 12,082 published
-    products, 357 of which a crude name regex shows are plainly wrong. Counting it as evidence is
-    what made the catalog look 54% guessed when it is 93.6% guessed."""
+    fill, not a claim about any product, so the record ends with NO category rather than with a
+    plausible one nobody made."""
     product = resolve_attributes(
         "e", [obs("legacy-catalog:x", hints={"category": "miniatures"})], KINDS, NO_EAN, None,
         default_hints=LEGACY_DEFAULTS,
     )
-    assert product.category == "miniatures"          # the VALUE is untouched
-    assert product.categoryBasis == "default"        # only the provenance is honest about it
+    assert (product.category, product.categoryBasis) == (None, "unknown")
+
+
+def test_a_fill_does_not_outrank_a_lower_ranked_source_claim() -> None:
+    """WHAT SUPPRESSION BUYS THAT LABELLING DID NOT -- stated as a property, because its population
+    is currently zero. legacy-catalog is `kind: curated` and outranks every manufacturer and
+    retailer, so while its fill still folded it would have beaten a real claim underneath it.
+
+    MEASURED 2026-09-01, and the honest number is 0: no product carries both legacy-catalog's
+    `miniatures` fill and another source's category. 12,130 products have the fill and nothing
+    else; the 1,986 with a real claim have no fill. So this fixes nothing in today's data and is
+    kept as a REGRESSION guard -- the two populations overlap the moment any source this catalog
+    already scrapes starts stating categories on rows legacy also holds, which is one descriptor
+    edit away."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:x", hints={"category": "miniatures"}),
+         obs("ret-a:x", hints={"category": "paint"})],
+        KINDS, NO_EAN, None, default_hints=LEGACY_DEFAULTS,
+    )
+    assert (product.category, product.categoryBasis) == ("paint", "stated")
 
 
 def test_the_same_source_stating_something_else_is_still_stated() -> None:
@@ -435,9 +453,7 @@ def test_the_same_source_stating_something_else_is_still_stated() -> None:
 
 
 def test_a_higher_priority_claim_beating_the_fill_is_stated() -> None:
-    """The fold is unchanged, so a curated fill still outranks a manufacturer claim -- that is the
-    defect Phase 4 addresses, not this one. What matters here is that when some OTHER source's
-    value does win, the basis follows the winner rather than the presence of a fill anywhere."""
+    """The kind ladder is unchanged where two sources both make real claims: curated still wins."""
     product = resolve_attributes(
         "e",
         [obs("legacy-catalog:x", hints={"category": "book"}),
@@ -447,13 +463,26 @@ def test_a_higher_priority_claim_beating_the_fill_is_stated() -> None:
     assert (product.category, product.categoryBasis) == ("book", "stated")
 
 
-def test_the_basis_is_inert_without_declared_defaults() -> None:
-    """Default call path unchanged: with no `defaultHints` every stated value reads `stated`, which
-    is what keeps every existing fixture and the golden test untouched by this feature."""
+def test_suppression_is_inert_without_declared_defaults() -> None:
+    """Default call path unchanged: with no `defaultHints` every stated value reads `stated`. A
+    source that declares nothing is unaffected by any of this."""
     product = resolve_attributes(
         "e", [obs("legacy-catalog:x", hints={"category": "miniatures"})], KINDS, NO_EAN, None,
     )
-    assert product.categoryBasis == "stated"
+    assert (product.category, product.categoryBasis) == ("miniatures", "stated")
+
+
+def test_a_declared_fill_is_suppressed_on_every_field_not_just_category() -> None:
+    """`defaultHints` is a dict of field -> value and always was; the suppression is general, so a
+    curated import that ships a blanket `packaging: single` gets the same treatment the day it
+    declares it. Nothing in the resolver names `category`."""
+    product = resolve_attributes(
+        "e", [obs("legacy-catalog:x", hints={"packaging": "single", "category": "terrain"})],
+        KINDS, NO_EAN, None,
+        default_hints={"legacy-catalog": {"packaging": "single"}},
+    )
+    assert product.packaging is None
+    assert (product.category, product.categoryBasis) == ("terrain", "stated")
 
 
 # --- raw captured taxonomy must stay OUT of the fold ---------------------------------------------

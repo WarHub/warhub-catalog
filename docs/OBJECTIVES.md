@@ -30,8 +30,8 @@ source's provenance, never from the fact of overlap.
 
 **5. Evidence is the truth; the catalog is derived.** A source's claim stays that source's claim.
 Conflicts and refusals are recorded, never guessed — a number that hides what it could not decide
-is worse than one that admits it. Where a field has a fallback behind it, the record says so, so
-the guess can be counted instead of assumed away.
+is worse than one that admits it. No published field has a fallback behind it: where nothing was
+asserted the record carries no value, and its basis says which of those two happened.
 — `README.md` "Pipeline"; `tools/acquisition/scripts/gen_set_contents.py`;
 `CanonicalProduct.categoryBasis` and the `categorize` stage that shrinks it
 
