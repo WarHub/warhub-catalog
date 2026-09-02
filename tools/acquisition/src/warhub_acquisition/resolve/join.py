@@ -75,12 +75,37 @@ class Matches(BaseModel):
     # this" and stops being true once one has. An entry naming an ean the entity's own evidence
     # never asserts is a fabrication, and tests/test_repo_data.py fails on it.
     preferEans: dict[str, str] = Field(default_factory=dict)
+    # TWO PRODUCTS THAT SHARE A BARCODE BY THE MAKER'S CHOICE: `{bundle id: the id of the product
+    # whose barcode the bundle's listing carries}`. Warlord's web store sells a rulebook and a
+    # web-only "rulebook with special miniature" listing as two products under two codes, and puts
+    # the BOOK's ISBN on both pages -- 30 pairs measured 2026-09-02. The barcode is printed on the
+    # book, so it is the book's: resolve/join.py leaves it with the component, drops it from every
+    # row filed under the bundle's code, and the two stay two records. The bundle's record links
+    # to the component in `bundleOf`. A barcode only the bundle's rows carry is the bundle's own
+    # and is untouched.
+    #
+    # NOT a supersession: nothing was retired, and the maker asserts the barcode under BOTH codes,
+    # so the ownership rule that decides a supersession pair (the code the manufacturer asserts a
+    # barcode under owns it) would hand the book's ISBN to the bundle.
+    bundles: dict[str, str] = Field(default_factory=dict)
+    # ONE PRODUCT, TWO OF THE MAKER'S OWN CODES, ONE BARCODE: `{alias id: canonical id}`. A re-code
+    # without a re-barcode -- Warlord's Belgian Carabiniers went 302412408 -> 302412504 on the same
+    # box, Steamforged's two Warmachine battlegroups carry a steamforged.com code and a
+    # warmachine.gg code. The resolver already builds ONE record for these (one barcode, one
+    # group); what it could not do was publish the second code, and `supersessions` cannot express
+    # it because there is no second barcode for the retired side to own. An alias code is read as
+    # the canonical one when a row is coded, and the record publishes it in `additionalCodes` so
+    # the old number still names the product.
+    codeAliases: dict[str, str] = Field(default_factory=dict)
 
 
 @dataclass
 class JoinResult:
     entities: dict[str, list[Observation]] = field(default_factory=dict)
     ambiguous: list[dict] = field(default_factory=list)
+    # Observation key -> the maker's OTHER code that row carried, read as the canonical one under
+    # `Matches.codeAliases`. The resolver publishes them as `additionalCodes`.
+    aliased_codes: dict[str, str] = field(default_factory=dict)
 
 
 class _UnionFind:
@@ -102,6 +127,23 @@ class _UnionFind:
 
 def _priority(observation: Observation, kinds: dict[str, str]) -> tuple[int, str]:
     return (KIND_PRIORITY.get(kinds.get(observation.source_id, "barcode-db"), 9), observation.key)
+
+
+def _code_pairs(
+    declared: dict[str, str], aliases: dict[str, str]
+) -> dict[str, list[tuple[str, str]]]:
+    """`{entity id: entity id}` as `{manufacturer: [(code, code), ...]}`, alias-resolved on both
+    sides. A pair whose sides name different manufacturers, or a name-slug rather than a code, is
+    inert here -- nothing can bridge it by code anyway."""
+    pairs: dict[str, list[tuple[str, str]]] = {}
+    for left, right in sorted(declared.items()):
+        left = aliases.get(left, left)
+        right = aliases.get(right, right)
+        left_manufacturer, _, left_code = left.partition("/")
+        right_manufacturer, _, right_code = right.partition("/")
+        if left_manufacturer == right_manufacturer and left_code and right_code and left_code != right_code:
+            pairs.setdefault(left_manufacturer, []).append((left_code, right_code))
+    return pairs
 
 
 def _code_variants(a: str, b: str) -> bool:
@@ -148,6 +190,7 @@ def _code_from_hint(
     taxonomy: Taxonomy,
     code_from_hint: dict[str, str],
     barcoded_listings: frozenset[str],
+    declared_codes: frozenset[tuple[str, str]] = frozenset(),
 ) -> str | None:
     """The manufacturer's article number, where the source publishes it beside its own number.
 
@@ -157,7 +200,27 @@ def _code_from_hint(
     hint = code_from_hint.get(observation.source_id)
     if hint is None or not observation.manufacturer:
         return None
-    if observation.key in barcoded_listings:
+    value = (observation.hints or {}).get(hint)
+    if value is None:
+        return None
+    values = value if isinstance(value, (list, tuple, set)) else [value]
+    # A TAG WITH A SPACE IN IT IS A SHELF NAME, NOT AN ARTICLE NUMBER. `normalize_code` drops
+    # spaces before it matches, so `Warlord Games` and `BA Deutschland` came out as `WARLORDGAMES`
+    # and `BADEUTSCHLAND` -- both shaped like Warlord's alpha codes -- and made every candidate set
+    # ambiguous. Measured 2026-09-02 on radaddel's 969 Warlord rows: 955 held more than one
+    # candidate and 14 exactly one; with the shelf names out, the article number is the only
+    # candidate on 870 of them (58 still hold two, e.g. a code beside `GoA`). No maker's article
+    # number contains whitespace.
+    candidates = {
+        code
+        for raw in values
+        if not any(ch.isspace() for ch in str(raw).strip())
+        and (code := taxonomy.normalize_code(observation.manufacturer, str(raw)))
+    }
+    if len(candidates) != 1:
+        return None
+    code = next(iter(candidates))
+    if observation.key in barcoded_listings and (observation.manufacturer, code) not in declared_codes:
         # A BARCODE IS ALREADY AN IDENTITY, AND A BETTER ONE. This repo's standing rule is that the
         # barcode identifies the box in hand while a lister's catalogue number goes stale across a
         # re-code -- the rule `supersession-stale-code` re-homing already rests on. A shop's tag is
@@ -178,17 +241,15 @@ def _code_from_hint(
         # into the current entity and `games-workshop/99120207086` -- a published id -- stopped
         # existing. The union barrier could not see it: the pair is declared against `99120207138`,
         # and the fusion happened onto a third code.
+        #
+        # THE ONE EXCEPTION IS A BARCODE DECLARED TO BELONG TO TWO PRODUCTS (`Matches.bundles`).
+        # There the barcode does NOT identify the box in hand -- a book and the web bundle that
+        # contains it scan the same -- so the tag is the only thing that says which of the two the
+        # listing is, and it is taken when it names either side of a declared pair. Measured
+        # 2026-09-02: four radaddel listings of plain rulebooks, each tagged with the book's code
+        # and carrying its ISBN, were fused into the bundle because the tag was silenced.
         return None
-    value = (observation.hints or {}).get(hint)
-    if value is None:
-        return None
-    values = value if isinstance(value, (list, tuple, set)) else [value]
-    candidates = {
-        code
-        for raw in values
-        if (code := taxonomy.normalize_code(observation.manufacturer, str(raw)))
-    }
-    return next(iter(candidates)) if len(candidates) == 1 else None
+    return code
 
 
 def _shelf_manufacturer_corrections(
@@ -300,6 +361,21 @@ def join_observations(
     # classify: unattributed (no manufacturer), unjoined barcode-db (ean matches no other
     # source's assertion for this manufacturer -- see above), degenerate (no code/EAN/forced-join
     # and empty name slug -- would otherwise form a bogus "manufacturer/" entity), else attributed.
+    # Declared pairs of the maker's OWN codes, both read the way the supersession barrier reads
+    # its pairs: entity ids resolved through `aliases`, reduced to two codes under one manufacturer.
+    bundle_pairs = _code_pairs(matches.bundles, matches.aliases)
+    declared_codes = frozenset(
+        (manufacturer, code)
+        for manufacturer, pairs in bundle_pairs.items()
+        for pair in pairs
+        for code in pair
+    )
+    alias_codes = {
+        (manufacturer, alias): canonical
+        for manufacturer, pairs in _code_pairs(matches.codeAliases, matches.aliases).items()
+        for alias, canonical in pairs
+    }
+
     attributed: list[Observation] = []
     codes: dict[str, str | None] = {}
     eans: dict[str, str | None] = {}
@@ -311,7 +387,14 @@ def join_observations(
             observation.manufacturer, observation.sku
         )
         if code is None:
-            code = _code_from_hint(observation, taxonomy, code_from_hint, barcoded_listings)
+            code = _code_from_hint(
+                observation, taxonomy, code_from_hint, barcoded_listings, declared_codes
+            )
+        # A DECLARED ALIAS IS READ AS THE CANONICAL CODE, and remembered: the row still said the
+        # other number, and the record publishes it (`additionalCodes`).
+        if code is not None and (observation.manufacturer, code) in alias_codes:
+            result.aliased_codes[observation.key] = code
+            code = alias_codes[(observation.manufacturer, code)]
         ean = canonical_ean(observation.ean)
         forced = matches.joins.get(observation.key)
         is_barcode_db = kinds.get(observation.source_id, "barcode-db") == "barcode-db"
@@ -337,6 +420,71 @@ def join_observations(
         codes[observation.key] = code
         eans[observation.key] = ean
         attributed.append(observation)
+
+    # --- declared bundles: the barcode both sides carry belongs to the component ----------------
+    # A barcode asserted under the bundle's code AND under the component's code is the component's
+    # (that is what the declaration says), so every row filed under the bundle's code loses it
+    # before the unions below -- the two never meet through it, and nothing re-homes: the row keeps
+    # the bundle's code, because that is what its store sells under it. A barcode the bundle's rows
+    # alone carry is the bundle's own. Reported per row, as a placement rather than a question.
+    if bundle_pairs:
+        # THE UNIT IS THE LISTING, as it is for `_code_from_hint`'s barcode guard: a source that
+        # declares `skuIsListingId` holds one listing as two rows, and radaddel's older copy
+        # carries the barcode while the newer one carries the tag that names the code. Read per
+        # row, the plain book's ISBN was never "asserted under the plain code" and the bundle kept
+        # it -- three of the 32 pairs, 2026-09-02. So a listing's barcode counts for the one code
+        # any of its rows carries.
+        listing_rows: dict[tuple[str, str], list[Observation]] = {}
+        for observation in attributed:
+            if observation.sku and sku_is_listing_id.get(observation.source_id):
+                listing_rows.setdefault((observation.source_id, observation.sku), []).append(observation)
+
+        def listing_code(observation: Observation) -> str | None:
+            code = codes[observation.key]
+            if code is not None:
+                return code
+            rows = listing_rows.get((observation.source_id, observation.sku or ""), ())
+            found = {codes[row.key] for row in rows} - {None}
+            return next(iter(found)) if len(found) == 1 else None
+
+        eans_by_code: dict[tuple[str, str], set[str]] = {}
+        for observation in attributed:
+            code, ean = listing_code(observation), eans[observation.key]
+            if code is not None and ean is not None:
+                eans_by_code.setdefault((observation.manufacturer, code), set()).add(ean)
+        component_of: dict[tuple[str, str, str], str] = {}
+        for manufacturer, pairs in bundle_pairs.items():
+            for bundle_code, component_code in pairs:
+                shared = eans_by_code.get((manufacturer, bundle_code), set()) & eans_by_code.get(
+                    (manufacturer, component_code), set()
+                )
+                for ean in shared:
+                    component_of[(manufacturer, bundle_code, ean)] = component_code
+        # The row itself loses the barcode, the way `rejectEans` takes one away: the resolver's
+        # barcode fold reads the observations, not this function's bookkeeping.
+        stripped: list[Observation] = []
+        for observation in attributed:
+            code, ean = codes[observation.key], eans[observation.key]
+            component_code = (
+                component_of.get((observation.manufacturer, code, ean))
+                if code is not None and ean is not None
+                else None
+            )
+            if component_code is None:
+                stripped.append(observation)
+                continue
+            result.ambiguous.append(
+                {
+                    "type": "bundle-shared-barcode",
+                    "key": observation.key,
+                    "ean": ean,
+                    "bundle": f"{observation.manufacturer}/{code}",
+                    "component": f"{observation.manufacturer}/{component_code}",
+                }
+            )
+            eans[observation.key] = None
+            stripped.append(observation.model_copy(update={"ean": None}))
+        attributed = stripped
 
     # --- declared supersessions: the two sides must never end up in one group -------------------
     # A pair is expressed as entity ids; both sides of every pair in use today are
@@ -715,6 +863,26 @@ def join_observations(
                     "surviving": surviving,
                     "missing": missing,
                 }
+            )
+
+    # The same for the other two declared relations: a bundle whose component (or bundle) resolves
+    # to no entity, and an alias whose canonical id does. An alias code that no row carries any
+    # more is inert rather than wrong and is not reported.
+    for bundle, component in sorted(matches.bundles.items()):
+        missing = sorted(
+            eid
+            for eid in (matches.aliases.get(bundle, bundle), matches.aliases.get(component, component))
+            if eid not in result.entities
+        )
+        if missing:
+            result.ambiguous.append(
+                {"type": "unresolved-bundle", "bundle": bundle, "component": component, "missing": missing}
+            )
+    for alias, canonical in sorted(matches.codeAliases.items()):
+        resolved = matches.aliases.get(canonical, canonical)
+        if resolved not in result.entities:
+            result.ambiguous.append(
+                {"type": "unresolved-code-alias", "alias": alias, "canonical": canonical}
             )
 
     return result

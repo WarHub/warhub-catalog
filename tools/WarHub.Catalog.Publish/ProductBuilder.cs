@@ -96,12 +96,19 @@ internal static class ProductBuilder
                     .Select(s => s!)
                     .ToList();
 
+                var extraCodes = (p.AdditionalCodes ?? [])
+                    .Select(c => c?.Trim())
+                    .Where(c => !string.IsNullOrEmpty(c))
+                    .Select(c => c!)
+                    .ToList();
+
                 var record = new ProductRecord
                 {
                     Id = p.Id,
                     Manufacturer = p.Manufacturer,
                     Ean = string.IsNullOrWhiteSpace(p.Ean) ? null : p.Ean.Trim(),
                     AdditionalEans = extraEans.Count > 0 ? extraEans : null,
+                    AdditionalCodes = extraCodes.Count > 0 ? extraCodes : null,
                     EanConfidence = p.EanConfidence,
                     PriceGbp = p.PriceGbp,
                     PriceUsd = p.PriceUsd,
@@ -122,6 +129,7 @@ internal static class ProductBuilder
                     ImageUrl = p.ImageUrl,
                     Supersedes = supersedes.Count > 0 ? supersedes : null,
                     SupersededBy = string.IsNullOrWhiteSpace(p.SupersededBy) ? null : p.SupersededBy.Trim(),
+                    BundleOf = string.IsNullOrWhiteSpace(p.BundleOf) ? null : p.BundleOf.Trim(),
                 };
 
                 // ONE AUTHORITATIVE LIST, and the partitions hold the same instances. Building

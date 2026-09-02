@@ -90,11 +90,12 @@ joins:
   # than the multi-build kit's code. A store SKU on a dead page is not product-code lineage, and no
   # barcode is at stake, so this stays a fold.
   'arc-gw-webstore:/en-GB/Baneblade': games-workshop/99120105107
-  # Warlord's store has literal duplicate ("-copy") pages for these three books, both sides LIVE.
-  # A CMS duplicate is one product record, not lineage -- splitting them would publish two current
-  # records for one book.
-  'mfr-warlord-store:germania-hail-caesar-supplement-copy': warlord-games/109910007
-  'mfr-warlord-store:hail-caesar-age-of-bronze-supplement-copy': warlord-games/109910010
+  # WARLORD'S "-copy" PAGES ARE NOT DUPLICATES (corrected 2026-09-02). Two of them used to be
+  # joined here as CMS duplicates of the page they were copied from. Measured: 4 of the store's 7
+  # `-copy` pages carry a DIFFERENT sku from their base page and are the plain product -- the base
+  # page is the web-only "with special miniature" bundle. `germania-hail-caesar-supplement-copy`
+  # (WGH-006) and `hail-caesar-age-of-bronze-supplement-copy` (101010002) are therefore declared
+  # under `bundles` below, as the component of 109910007 and 109910010 respectively.
   'mfr-warlord-store:hail-caesar-rulebook-spanish-language-richard-i-the-lionheart-special-figure': warlord-games/101010004SP
   # --- `ambiguous-join` adjudications, 2026-08-26 ------------------------------------------------
   # Each of these is a listing with no product code and no barcode whose name slug matches two or
@@ -117,7 +118,8 @@ joins:
   # 60010199059's own primary, so that page is not in question. This `-1` page is the store's
   # second listing of the title -- different tags (Orks vs Tyranids), different availability,
   # different image -- and the remaining candidate is 60010199079. A Shopify `-1` handle is NOT
-  # by itself evidence of a distinct product (the `-copy` pages above are one product each); what
+  # by itself evidence of a distinct product (a Warlord `-copy` page can be either -- see the note
+  # under `bundles` at the end of this file); what
   # decides it here is that the first page is already spoken for by a barcode.
   'ret-tistaminis:warhammer-40000-introductory-set-1': games-workshop/60010199079
   # Same shape, within radaddel: article 129886 is live in this store's CURRENT generation and
@@ -235,6 +237,74 @@ reassignManufacturer:
 
 # `{observation key: [barcodes to disbelieve]}` -- see Matches.rejectEans in resolve/join.py.
 rejectEans:
+  # --- WHAT THE `multi-code-entity` REPORT FOUND (2026-09-02) ---------------------------------
+  # resolve/join.py started reporting records that hold two of the maker's own codes; 56 rows,
+  # every one read against the ledger and the web the same day. Thirty are one cause -- Warlord's
+  # web bundle sharing the book's ISBN -- and are declared under `bundles`; seven are one product
+  # under two codes and are declared under `codeAliases`. The rest are these, each meeting this
+  # list's bar: the maker's own assignment, the ISBN registry, or the arithmetic of a barcode
+  # block the maker allocates in sequence.
+  #
+  # A DIGITAL EDITION CARRYING THE PRINT ISBN. The registry names the print edition (Osprey's
+  # 9781472836670 is the printed Korea supplement; the Korea ebook is 9781472836656), Warlord's
+  # own D-Day rows put the US Sector e-edition's number on the British & Canadian one (the B&C
+  # listing's text even says "focuses on the conflicts of the US Sector" -- a cloned page), the
+  # Festung Europa PDF and Mantic's Clash of Kings PDF quote their print books.
+  'legacy-catalog:warlord-games/bolt-action/british/digital-bolt-action-korea-supplement-ebook': ['9781472836670']
+  'mfr-warlord-store:digital-d-day-british-canadian-sector-campaign-book-pdf': ['9781472839060']
+  'mfr-warlord-store:digital-d-day-british-canadian-sector-campaign-book-e-book': ['9781472839077']
+  'mfr-warlord-store:digital-konflikt-47-festung-europa-pdf': ['9781915319272']
+  'mfr-manticgames:489096': ['9781911516552']
+  #
+  # ONE BARCODE ON TWO DISTINCT PRODUCTS IN ONE STORE'S OWN LISTINGS, decided by the block: the
+  # Hungarian tanks descend by code (405107405 -> ...993425, 405107404 -> ...993432, so ...993449
+  # is 405107403's, the Toldi); the D10 block is contiguous (31 Blue ...9651, 32 Red ...9668, 33
+  # White ...9675), so Purple and Brown copied Red's; Mantic's Worms Standard edition is
+  # ...983327 at Asmodee UK and the Collector's box is ...983334; Frostgrave Demons is
+  # 9781472897565 (meeplemart, and the frozen import) while Warlord's page copied Wizards';
+  # tistaminis gives both Norman command packs ...5902 and the block (103013314 -> ...5889) puts
+  # it on 316; Warlord's Desert Fox bundle is a `-copy` of the Desert Rats page and kept its
+  # barcode; two starter-army EXPANSION bundles carry the Continental Army starter's barcode and
+  # one the Peninsular starter's; the 3-figure Macedonian pack carries the 8-figure box's; and
+  # Mantic's metal Gladewalker Druid (MGVAF201, listing 20609) carries the barcode of the 2026
+  # resin one (MGKWN206), which sits in the 4E block (...988155 Chieftain, ...988162 Centaur).
+  'mfr-warlord-store:41m-turan-ii-medium-tank': ['5060917993449']
+  'mfr-warlord-store:purple-dice-d10': ['5060200849668']
+  'mfr-warlord-store:brown-dice-d10': ['5060200849668']
+  'mfr-manticgames:487743': ['5060924983327']
+  'mfr-warlord-store:frostgrave-demons': ['9781472897428']
+  'ret-tistaminis:hail-caesar-norman-unarmoured-cavalry-command': ['5060572505902']
+  'mfr-warlord-store:bolt-action-starter-set-gentlemans-war-desert-rats-bundle-copy': ['5060917995283']
+  'mfr-warlord-store:blitzkrieg-german-starter-army-expansion-set': ['5060393702467']
+  'mfr-warlord-store:napleonic-french-starter-army-expansion-set': ['5060393702467']
+  'legacy-catalog:warlord-games/bolt-action/british/napleonic-british-starter-army-expansion-set': ['5060393708469']
+  'legacy-catalog:warlord-games/hail-caesar/general/macedonian-companion-cavalry': ['5060393701903']
+  'mfr-manticgames:20609': ['5060924988148']
+  #
+  # A RESELLER'S ROW CARRYING ANOTHER PRODUCT'S BARCODE: goblingaming's Vital Intelligence card
+  # packs carry the tank forces' barcodes (Warlord, the import, tistaminis and goblingaming's own
+  # tank-force rows agree on those); tistaminis' Forge Father Reinforcement Pack (a Kickstarter
+  # code, KSEWF101, in its own block ...987226/...987233) carries the Hrungnir's; goblingaming
+  # re-listed the Ogor Mawtribes dice under the 2026 code 99220213005 keeping the 2019 barcode
+  # that GW's trade sheet assigns to 99220213003 (The Outpost gives 005 = 5011921274062 -- a
+  # `supersessions` entry follows once the trade sheet carries it).
+  'ret-goblingaming:achtung-panzer-vital-intelligence-soviet-cards': ['5060917992947']
+  'ret-goblingaming:achtung-panzer-vital-intelligence-us-cards': ['5060917992954']
+  'ret-tistaminis:epic-warpath-forge-father-reinforcement-pack': ['5060924986021']
+  'ret-goblingaming:age-of-sigmar-ogor-mawtribes-dice': ['5011921165988']
+  #
+  # RADADDEL QUOTES THE WEB BUNDLE'S OWN BARCODE ON ITS LISTING OF THE PLAIN PRODUCT. Its article
+  # tag names the plain code (WG-BP005, 481010002, 402610008 -- `codeFromHint`), its title is the
+  # plain title, and a web-only bundle is not something a reseller stocks; the barcode is the one
+  # Warlord's page for the bundle shows (Zulu! 5060200845752, Iron Coffins 5060917994958, the
+  # Desert Rats bundle 5060917995283), which the store assigned to the bundle beside the book's
+  # ISBN. The tag places the listing; the bundle's barcode on it is disbelieved, and stays the
+  # bundle's.
+  'ret-radaddel:/zulu': ['5060200845752']
+  'ret-radaddel:/iron-coffins-achtung-panzer-supplement-englisch': ['5060917994958']
+  'ret-radaddel:/a-gentleman-s-war-englisch': ['5060917995283']
+  'ret-radaddel:a-gentlemans-war-englisch': ['5060917995283']
+
   # --- TWO KONFLIKT '47 DICE BAGS A RE-CODE LEFT BEHIND (2026-09-01) --------------------------
   # `ret-tistaminis` lists these under Warlord's OLD codes `458900601` and `458901201` while
   # carrying the barcodes `5060917996464` and `5060917996488` -- and Warlord's own store, freshly
@@ -278,8 +348,15 @@ rejectEans:
   # and these five are the ones where a source's barcode contradicts the code its own name backs.
   # Three are the manufacturer's own store getting it wrong and being outvoted by everyone else,
   # which is the same shape as the Rift Dice.
+  #
+  # ONE OF THE FIVE IS GONE (2026-09-02): `'mfr-manticgames:474732': ['5060924987080']`, the Coral
+  # Giant. Its fusion partner was gamenerdz's `MANKWR407`, which the `codeRewrite` on Mantic's
+  # register now reads as the same code -- so there was never a second product, only a second
+  # generation: ...987080 sits in Mantic's 2026 4E block (...987073 Trident King, ...987097
+  # Halfling Ej Squadron) and ...983860 in the 2023 Trident block (...983853 R208, ...983877
+  # R408). Both are real, the maker's live value is primary by manufacturer authority, and the
+  # older one stays in `additionalEans`.
   'legacy-catalog:warlord-games/bolt-action/british/humber-mk-ii-iv-armoured-car': ['5060917990653']
-  'mfr-manticgames:474732': ['5060924987080']
   'mfr-manticgames:499623': ['5060924985475']
   'mfr-warlord-store:blitzkrieg-early-war-german-army': ['5060200846780']
   'ret-tistaminis:is-2-heavy-tank-2025': ['5060393705819']
@@ -1615,6 +1692,18 @@ supersessions:
   # live state.
   games-workshop/99120104067: games-workshop/99120104091
 reassignCodes:
+  # --- FOUR STALE OR MISTYPED CATALOGUE NUMBERS (2026-09-02, from the `multi-code-entity` report)
+  # tistaminis' "Rotten Harvest It's Alive!" row has sku WYR21432 and It's Alive's barcode
+  # 812152034464 (the import, gamenerdz, goblingaming and Wyrd's store agree); WYR21432 is Wyrd's
+  # separate LGS-promo "Dr. Frank N. Steen -- Even Wilder" listing. goblingaming lists the Farseer
+  # and the Raider under their 2010 codes with the CURRENT barcodes GW's trade sheet assigns to
+  # 99070104011 and 99120112046 -- a shop's catalogue number gone stale across a re-code, and no
+  # source attests the old codes as products. tistaminis dropped the S of Mantic's Nightstalkers
+  # prefix (MGKWNS308 on Mantic's own store and the import; no MGKWN308 anywhere else).
+  'ret-tistaminis:malifaux-limited-edition-rotten-harvest-it-s-alive': 'WYR21431'
+  'ret-goblingaming:eldar-farseer': '99070104011'
+  'ret-goblingaming:dark-eldar-raider': '99120112046'
+  'ret-tistaminis:kings-of-war-scarecrows-doppelgangers-regiment': 'MGKWNS308'
   # --- TWO GW PAINTS + TOOLS SETS, THREE YEARS APART (2026-08-27) ------------------------------
   # `games-workshop/warhammer-40-000-paints-tools-set` was ONE record holding two products, because
   # radaddel articles 126289 and 135801 both carry that exact title and neither had a product code
@@ -1834,6 +1923,18 @@ reassignCodes:
 # is weaker evidence than breadth (independent sellers in different countries), because one source
 # can produce structure by itself.
 preferEans:
+  # --- THREE TWO-BARCODE PRODUCTS A HUMAN LOOKED AT (2026-09-02) ------------------------------
+  # Armies of the United States (Third Edition): goblingaming gives Warlord's GTIN 5060917994545,
+  # tistaminis and radaddel the Osprey ISBN 9781472863874 that Warlord's own bundle page quotes
+  # for the book. Both are the same edition; the ISBN is the book's registry identity.
+  warlord-games/401013001: '9781472863874'
+  # Two discontinued Kings of War kits with a barcode per generation: gamenerdz's 2nd-edition
+  # listings carry the 2015 block (...660394 Dwarf Stone Priest, ...660400, ...660417 Elf War
+  # Chariots), the frozen import the later web-exclusive re-release block (...668406 MGWEB831,
+  # ...668413, ...668420 MGKWW201; ...668222 likewise). The later allocation is the last barcode
+  # each shipped under; the earlier stays in `additionalEans`.
+  mantic-games/MGKWK301: '5060469668413'
+  mantic-games/MGKWR204: '5060469668222'
   mantic-games/MGWD173: '5060924984799'
 
 # --- `supersession-stale-code`, DELIBERATELY LEFT (2026-08-26) ----------------------------------
@@ -1863,3 +1964,88 @@ preferEans:
 # GW source calls that code anything but "GLOOMSPITE GITZ SQUIG HOPPERS". That is a separate defect
 # in resolve/attributes.py's `foreign` set (it guards `sku` and not the descriptive fields) and it
 # wants its own change with its own measurement, not a supersession edit.
+
+# =================================================================================================
+# `{bundle entity id: the entity id of the product whose barcode the bundle's listing carries}`.
+# See resolve/join.py::Matches.bundles for the mechanism. THIRTY-TWO WEB BUNDLES, 2026-09-02, all
+# Warlord Games: the store sells a rulebook or supplement (the `XX10...` trade code, or an old
+# `WG-BP...` alpha code) and a web-only "with special miniature" listing of the same book (the
+# `XX99...` web range, the `includes-special-figure` tag), and puts the BOOK's ISBN on both pages.
+# Retailers (goblingaming, tistaminis, radaddel's tag) list the plain code; the store and the
+# frozen import list the bundle's. Until this section existed the two fused on the ISBN and the
+# catalog published the bundle -- `warlord-games/401011001`, Armies of Great Britain, did not
+# exist; `409911028`, the bundle with the Capt. Brunt figure, did.
+#
+# Evidence per pair is the same: both codes carry the one ISBN, the plain code is what every
+# retailer sells, the bundle page names the figure. Where a pair differs it says so. The three
+# starter-set bundles (Cruel Seas 789910004, Master & Commander 799910003, the Desert Rats bundle)
+# carry a GTIN rather than an ISBN, and the Desert Rats one is the one pair where the shared
+# barcode is attested for the component (the A Gentleman's War starter, 402610008) only by a
+# radaddel listing -- Warlord's own row for the starter gives 5060917995467 -- so the starter keeps
+# both. Iron Coffins' bundle (489910014) also has a barcode of its own (5060917994958) and keeps it.
+# Age of Bronze's ISBN (9781911281498) is asserted only under the bundle's code and therefore stays
+# there: the declaration moves a barcode only where both sides carry it.
+bundles:
+  warlord-games/109930002: warlord-games/101010004
+  warlord-games/101010010: warlord-games/101010007
+  warlord-games/109940001: warlord-games/101010008
+  warlord-games/109913203: warlord-games/101010009
+  warlord-games/109910007: warlord-games/WGH-006
+  warlord-games/109910010: warlord-games/101010002
+  warlord-games/209915007: warlord-games/201015001
+  warlord-games/209914001: warlord-games/201014000
+  warlord-games/309910005: warlord-games/301010002
+  warlord-games/309910019: warlord-games/301010003
+  warlord-games/309913204: warlord-games/301013801
+  warlord-games/309913810: warlord-games/301013802
+  warlord-games/309910011: warlord-games/WG-BP-002
+  warlord-games/309910012: warlord-games/WG-BP008
+  warlord-games/309910014: warlord-games/WG-BP005
+  warlord-games/319913401: warlord-games/311513402
+  warlord-games/409910065: warlord-games/401010052
+  warlord-games/409911028: warlord-games/401011001
+  warlord-games/409912601: warlord-games/401011201
+  warlord-games/409912058: warlord-games/401012002
+  warlord-games/4099300010: warlord-games/401013001
+  warlord-games/409914009: warlord-games/401014001
+  warlord-games/409915801: warlord-games/401015801
+  warlord-games/409916006: warlord-games/401016001
+  warlord-games/459910010: warlord-games/451010003
+  warlord-games/459910001: warlord-games/451010004
+  warlord-games/489910014: warlord-games/481010002
+  warlord-games/741010003: warlord-games/741010001
+  warlord-games/789910004: warlord-games/781510001
+  warlord-games/799910002: warlord-games/791010001
+  warlord-games/799910003: warlord-games/791510001
+  warlord-games/BAGWDESERTRATS: warlord-games/402610008
+
+# =================================================================================================
+# `{alias entity id: canonical entity id}` -- ONE PRODUCT, TWO OF THE MAKER'S OWN CODES, ONE
+# BARCODE. See resolve/join.py::Matches.codeAliases. The canonical id is the code the maker's live
+# store uses, except where noted; the alias publishes in `additionalCodes`.
+#
+# Belgian Carabiniers 1815: tistaminis (an archive capture and a listing created 2024-08) says
+#   302412408, Warlord's live store, the import, goblingaming, radaddel's tag and Wayland say
+#   302412504, one barcode 5060917990387 -- which immediately precedes 302412409's (...990394), so
+#   408 is the code the box was allocated under and 504 the maker's renumbering.
+# Konflikt '47 Rift Dice, Grey and Green: goblingaming and tistaminis say 4526000xx, Warlord's
+#   store and the import 4526100xx, barcodes identical per colour; the Red dice are 452610004
+#   everywhere, so the 4526000xx numbers are an earlier allocation of the same dice.
+# Black Powder Epic Battles: Revolution!: goblingaming's 311513401 is the 2024 set, tistaminis'
+#   311513402 the 250th Anniversary edition Warlord sells today (`311513402K`), one barcode
+#   5060917994699 and, by Warlord's own page, the same contents.
+# Two Warmachine battlegroups: steamforged.com (now 404), the import, gamenerdz and every web
+#   retailer say SFIK-CGN209 / SFIK-KDR210, warmachine.gg (live) says 385 / 386, same barcode,
+#   same name; only 2 of 315 barcode-matched pairs across the two stores disagree, so this is not
+#   a range renumbering. The trade code printed on the box stays canonical.
+# Ten Gauge Ten Gallons: Wyrd's own store SKU has a doubled 3 (WYR233639, copied by the import and
+#   tistaminis); every distributor writes WYR23639, Wyrd's five-digit scheme. The maker's spelling
+#   is kept as the alias rather than corrected away.
+codeAliases:
+  warlord-games/302412408: warlord-games/302412504
+  warlord-games/452600002: warlord-games/452610002
+  warlord-games/452600003: warlord-games/452610003
+  warlord-games/311513401: warlord-games/311513402
+  steamforged-games/SFIK-CGN385: steamforged-games/SFIK-CGN209
+  steamforged-games/SFIK-KDR386: steamforged-games/SFIK-KDR210
+  wyrd-games/WYR233639: wyrd-games/WYR23639

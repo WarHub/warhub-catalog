@@ -59,7 +59,7 @@ Every document carries a self-describing envelope plus its payload:
 }
 ```
 
-- **Product**: `{ id, manufacturer, ean?, additionalEans?, supersedes?, supersededBy?, name, gameSystems?, settings?, faction?, quantity, productCode?, url?, imageUrl? }`
+- **Product**: `{ id, manufacturer, ean?, additionalEans?, additionalCodes?, supersedes?, supersededBy?, bundleOf?, name, gameSystems?, settings?, faction?, quantity, productCode?, url?, imageUrl? }`
   — `id` is the stable global key (`manufacturer-slug/product-code-or-slug`) and, with
   `manufacturer`, is present on every product; both are what a cross-product link points at. `ean`
   is optional (not every product has a barcode). `additionalEans` is present only on a product
@@ -67,7 +67,11 @@ Every document carries a self-describing envelope plus its payload:
   barcode, and the extra barcodes are listed here so existing single-barcode consumers are
   unaffected. `supersedes` / `supersededBy` link the same product across **two product codes** (a
   re-code, a repackaging): both records are published, each keeping its own `productCode` and
-  `ean`, so a decade-old box still scans to a record and that record says what replaced it. The
+  `ean`, so a decade-old box still scans to a record and that record says what replaced it.
+  `additionalCodes` is the narrower case of a re-code that kept its barcode: one record, its
+  `productCode` the canonical number, the maker's other numbers for the same box listed here.
+  `bundleOf` links a maker's web-only bundle (a rulebook sold with a special miniature, under its
+  own code) to the product inside it; the bundle publishes no barcode of that product's. The
   relation is deliberately not encoded in `status` — a retired record's status is still whatever
   the evidence says, so existing `status` filters keep working unchanged. `counts.products`
   includes those archival records; `counts.currentProducts` is the subset nothing supersedes.

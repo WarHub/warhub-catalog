@@ -831,3 +831,68 @@ def test_a_stale_rehomed_file_is_replaced_rather_than_appended_to(tmp_path: Path
     resolve_catalog(paths)
 
     assert read_yaml(paths.rehomed) == {"rehomed": []}
+
+
+def test_a_bundle_and_a_code_alias_publish_as_the_declaration_says(tmp_path: Path) -> None:
+    """End to end for matches.yaml `bundles` and `codeAliases`: the book keeps its ISBN and the
+    bundle links to it in `bundleOf`; the re-coded box is one record under the canonical code
+    with the old code in `additionalCodes`; the placement lands in rehomed.yaml, not conflicts."""
+    paths = DataPaths(tmp_path)
+    write_yaml(
+        paths.taxonomy / "manufacturers.yaml",
+        {"manufacturers": [{"slug": "warlord-games", "name": "Warlord Games",
+                            "codePattern": r"\d{9}", "codeStrip": [],
+                            "gs1Prefixes": ["5060917"], "vendorNames": []}]},
+    )
+    write_yaml(paths.sources / "mfr-ws.yaml", {"id": "mfr-ws", "kind": "manufacturer", "strategy": "shopify"})
+    write_yaml(paths.sources / "ret-g.yaml", {"id": "ret-g", "kind": "retailer", "strategy": "shopify"})
+
+    def line(payload: dict) -> str:
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    mfr = paths.evidence_products / "mfr-ws" / "observations.jsonl"
+    mfr.parent.mkdir(parents=True)
+    mfr.write_text(
+        line({"key": "mfr-ws:bundle", "name": "Rulebook & Richard I figure", "manufacturer": "warlord-games",
+              "sku": "109930002", "ean": "9781915319975", "priceGbp": 35.0, "availability": "in_stock",
+              "firstSeen": "2026-07-01", "lastSeen": "2026-09-01", "extractor": "shopify@1"}) + "\n"
+        + line({"key": "mfr-ws:new", "name": "Belgian Carabiniers 1815", "manufacturer": "warlord-games",
+                "sku": "302412504", "ean": "5060917990387", "priceGbp": 30.0, "availability": "in_stock",
+                "firstSeen": "2026-07-01", "lastSeen": "2026-09-01", "extractor": "shopify@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    ret = paths.evidence_products / "ret-g" / "observations.jsonl"
+    ret.parent.mkdir(parents=True)
+    ret.write_text(
+        line({"key": "ret-g:plain", "name": "Rulebook", "manufacturer": "warlord-games",
+              "sku": "101010004", "ean": "9781915319975", "priceGbp": 25.0, "url": "https://g/rulebook",
+              "firstSeen": "2026-07-08", "lastSeen": "2026-09-01", "extractor": "shopify@1"}) + "\n"
+        + line({"key": "ret-g:old", "name": "Belgian Carabiniers 1815", "manufacturer": "warlord-games",
+                "sku": "302412408", "ean": "5060917990387", "priceGbp": 28.0,
+                "firstSeen": "2026-07-08", "lastSeen": "2026-09-01", "extractor": "shopify@1"}) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    write_yaml(paths.matches, {
+        "bundles": {"warlord-games/109930002": "warlord-games/101010004"},
+        "codeAliases": {"warlord-games/302412408": "warlord-games/302412504"},
+    })
+
+    catalog = resolve_catalog(paths)
+    by_id = {p.id: p for p in catalog["warlord-games"]}
+    assert sorted(by_id) == ["warlord-games/101010004", "warlord-games/109930002", "warlord-games/302412504"]
+
+    book, bundle, box = (by_id[i] for i in sorted(by_id))
+    assert book.ean == "9781915319975" and book.url == "https://g/rulebook"
+    assert bundle.ean is None and bundle.additionalEans == []
+    assert bundle.bundleOf == "warlord-games/101010004" and bundle.contentSkus is None
+    assert book.bundleOf is None
+    assert box.ean == "5060917990387" and box.productCode == "302412504"
+    assert box.additionalCodes == ["302412408"]
+
+    assert read_yaml(paths.conflicts)["conflicts"] == []
+    assert [c["type"] for c in read_yaml(paths.rehomed)["rehomed"]] == ["bundle-shared-barcode"]
+    written = {p["id"]: p for p in read_yaml(paths.catalog_products / "warlord-games.yaml")["products"]}
+    assert "additionalCodes" not in written["warlord-games/101010004"]
+    assert written["warlord-games/302412504"]["additionalCodes"] == ["302412408"]
+    assert written["warlord-games/109930002"]["bundleOf"] == "warlord-games/101010004"
+    assert "bundleOf" not in written["warlord-games/101010004"]

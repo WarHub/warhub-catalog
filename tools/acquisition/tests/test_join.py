@@ -859,3 +859,115 @@ def test_a_contained_spelling_is_a_variant_not_a_second_code() -> None:
     assert _code_variants("WGB-BI-35", "WGB-BI-35K")
     assert _code_variants("280873", "280873-0990")
     assert not _code_variants("MGVAF201", "MGKWN206")
+
+
+# --- declared bundles and code aliases ------------------------------------------------------------
+
+
+def test_a_declared_bundle_leaves_the_shared_barcode_with_the_component() -> None:
+    """Warlord sells a rulebook and a web-only 'rulebook with special miniature' under two codes and
+    puts the book's ISBN on both. Declared as a bundle, they are two records: the ISBN stays with
+    the book, the bundle's row loses it (a placement, reported in rehomed terms), and a barcode
+    only the bundle carries is its own."""
+    taxonomy = Taxonomy(
+        {"warlord-games": Manufacturer(slug="warlord-games", name="WG", codePattern=r"\d{9}")}
+    )
+    kinds = {"mfr-ws": "manufacturer", "ret-g": "retailer"}
+    rows = [
+        obs("mfr-ws:bundle", name="Rulebook & figure", sku="109930002", ean="9781915319975",
+            manufacturer="warlord-games"),
+        obs("ret-g:plain", name="Rulebook", sku="101010004", ean="9781915319975",
+            manufacturer="warlord-games"),
+        obs("mfr-ws:starter-bundle", name="Starter bundle", sku="789910004", ean="5060393709671",
+            manufacturer="warlord-games"),
+        obs("mfr-ws:starter-bundle-own", name="Starter bundle", sku="789910004", ean="5060393709688",
+            manufacturer="warlord-games"),
+        obs("ret-g:starter", name="Starter", sku="781510001", ean="5060393709671",
+            manufacturer="warlord-games"),
+    ]
+    matches = Matches(bundles={
+        "warlord-games/109930002": "warlord-games/101010004",
+        "warlord-games/789910004": "warlord-games/781510001",
+    })
+    result = join_observations(rows, taxonomy, kinds, matches)
+    assert sorted(result.entities) == [
+        "warlord-games/101010004", "warlord-games/109930002",
+        "warlord-games/781510001", "warlord-games/789910004",
+    ]
+    placements = [c for c in result.ambiguous if c["type"] == "bundle-shared-barcode"]
+    assert [(p["key"], p["ean"], p["component"]) for p in placements] == [
+        ("mfr-ws:bundle", "9781915319975", "warlord-games/101010004"),
+        ("mfr-ws:starter-bundle", "5060393709671", "warlord-games/781510001"),
+    ]
+    assert [c["type"] for c in result.ambiguous if c["type"] != "bundle-shared-barcode"] == []
+
+    # Undeclared, the same rows are one record per pair -- the fusion this section exists to end.
+    fused = join_observations(rows, taxonomy, kinds, Matches())
+    assert len(fused.entities) == 2
+
+
+def test_a_declared_bundle_whose_side_resolves_to_nothing_is_reported() -> None:
+    taxonomy = Taxonomy(
+        {"warlord-games": Manufacturer(slug="warlord-games", name="WG", codePattern=r"\d{9}")}
+    )
+    rows = [obs("mfr-ws:bundle", name="Bundle", sku="109930002", manufacturer="warlord-games")]
+    result = join_observations(
+        rows, taxonomy, {"mfr-ws": "manufacturer"},
+        Matches(bundles={"warlord-games/109930002": "warlord-games/101010004"}),
+    )
+    assert [c for c in result.ambiguous if c["type"] == "unresolved-bundle"] == [
+        {"type": "unresolved-bundle", "bundle": "warlord-games/109930002",
+         "component": "warlord-games/101010004", "missing": ["warlord-games/101010004"]}
+    ]
+
+
+def test_a_declared_code_alias_names_one_record_and_remembers_the_other_code() -> None:
+    """A re-code without a re-barcode: the rows already share a barcode and form one record; the
+    alias makes the record's id the canonical code whichever source ranks first, keeps the other
+    code on the row that carried it, and keeps the record out of the multi-code report."""
+    taxonomy = Taxonomy(
+        {"warlord-games": Manufacturer(slug="warlord-games", name="WG", codePattern=r"\d{9}")}
+    )
+    kinds = {"mfr-ws": "manufacturer", "ret-t": "retailer", "seed": "curated"}
+    rows = [
+        obs("seed:old", name="Carabiniers", sku="302412408", ean="5060917990387", manufacturer="warlord-games"),
+        obs("mfr-ws:new", name="Carabiniers", sku="302412504", ean="5060917990387", manufacturer="warlord-games"),
+        obs("ret-t:old", name="Carabiniers", sku="302412408", ean="5060917990387", manufacturer="warlord-games"),
+    ]
+    matches = Matches(codeAliases={"warlord-games/302412408": "warlord-games/302412504"})
+    result = join_observations(rows, taxonomy, kinds, matches)
+    assert list(result.entities) == ["warlord-games/302412504"]
+    assert result.aliased_codes == {"seed:old": "302412408", "ret-t:old": "302412408"}
+    assert not [c for c in result.ambiguous if c["type"] == "multi-code-entity"]
+    # without the alias the curated row's spelling names the record, and the report fires
+    plain = join_observations(rows, taxonomy, kinds, Matches())
+    assert list(plain.entities) == ["warlord-games/302412408"]
+    assert [c["codes"] for c in plain.ambiguous if c["type"] == "multi-code-entity"] == [["302412408", "302412504"]]
+
+
+def test_a_tag_naming_a_declared_bundle_side_is_taken_even_on_a_barcoded_listing() -> None:
+    """radaddel lists the plain rulebook with the book's ISBN and Warlord's code in a tag. The
+    barcode alone cannot say whether the listing is the book or the web bundle (both scan the
+    same), so the tag decides -- but only because the pair is declared; an undeclared tag on a
+    barcoded listing stays silenced."""
+    taxonomy = Taxonomy(
+        {"warlord-games": Manufacturer(slug="warlord-games", name="WG", codePattern=r"\d{9}")}
+    )
+    kinds = {"mfr-ws": "manufacturer", "ret-r": "retailer"}
+    rows = [
+        obs("mfr-ws:bundle", name="Rulebook & figure", sku="109930002", ean="9781915319975",
+            manufacturer="warlord-games"),
+        obs("ret-r:book", name="Rulebook", sku="124745", ean="9781915319975",
+            manufacturer="warlord-games", hints={"tags": ["101010004", "Warlord Games"]}),
+    ]
+    declared = join_observations(
+        rows, taxonomy, kinds,
+        Matches(bundles={"warlord-games/109930002": "warlord-games/101010004"}),
+        code_from_hint={"ret-r": "tags"},
+    )
+    assert sorted(declared.entities) == ["warlord-games/101010004", "warlord-games/109930002"]
+    assert [m.key for m in declared.entities["warlord-games/101010004"]] == ["ret-r:book"]
+    assert [c["type"] for c in declared.ambiguous] == ["bundle-shared-barcode"]
+
+    undeclared = join_observations(rows, taxonomy, kinds, Matches(), code_from_hint={"ret-r": "tags"})
+    assert list(undeclared.entities) == ["warlord-games/109930002"]

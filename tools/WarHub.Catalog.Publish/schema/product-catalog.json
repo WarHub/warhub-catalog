@@ -29,8 +29,18 @@
         "manufacturer": { "type": "string" },
         "ean": { "type": "string" },
         "additionalEans": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "additionalCodes": {
+          "type": "array",
+          "description": "The maker's other product codes for this same box (a re-code that kept the barcode). productCode stays the single canonical code. Omitted when there is none.",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
         "supersedes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "supersededBy": { "type": "string" },
+        "bundleOf": {
+          "type": "string",
+          "description": "The id of the product this web bundle contains -- a maker's 'with special miniature' listing that quotes the contained product's barcode. Omitted for everything else."
+        },
         "paintIds": {
           "type": "array",
           "description": "Paint records sharing a barcode with this product -- the same physical thing published in the paint catalog too. Omitted when there is none. See barcode-index.json; ids are stable within a release.",

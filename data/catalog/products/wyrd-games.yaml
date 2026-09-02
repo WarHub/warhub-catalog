@@ -5027,7 +5027,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
-    priceUsd: 25.0
+    priceUsd: 60.0
     priceCad: 60.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-rotten-harvest-its-alive
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR21431_RottenHarvest2023_ItsAlive_FRONT.png?v=1696521546
@@ -5049,11 +5049,31 @@ products:
       - Misfits x3 - Count as Undergraduates
     evidence:
       - legacy-catalog:wyrd-games/malifaux/resurrectionists/limited-edition-rotten-harvest-it-s-alive
-      - mfr-wyrd-store:limited-edition-its-alive-rotten-harvest-dr-frank-n-steen-even-wilder
       - mfr-wyrd-store:limited-edition-rotten-harvest-its-alive
       - ret-gamenerdz:/malifaux-3e-rotten-harvest-its-alive
       - ret-goblingaming:malifaux-resurrectionists-rotten-harvest-its-alive
       - ret-tistaminis:malifaux-limited-edition-rotten-harvest-it-s-alive
+  - id: wyrd-games/WYR21432
+    name: Limited Edition - Rotten Harvest Dr. Frank N. Steen - Even Wilder
+    manufacturer: wyrd-games
+    productCode: WYR21432
+    sku: WYR21432
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: classified
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-its-alive-rotten-harvest-dr-frank-n-steen-even-wilder
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2023_BF-Event_Graphic_FrankNSteen-EvenWilder.png?v=1700585477
+    evidence:
+      - mfr-wyrd-store:limited-edition-its-alive-rotten-harvest-dr-frank-n-steen-even-wilder
   - id: wyrd-games/WYR21434
     name: Nightmare Edition - Reap and Sow
     manufacturer: wyrd-games
@@ -9846,48 +9866,6 @@ products:
       - mfr-wyrd-store:factory-reset
       - ret-gamenerdz:/malifaux-3e-factory-reset
       - ret-tistaminis:malifaux-arcanist-factory-reset
-  - id: wyrd-games/WYR233639
-    name: Ten Gauge Ten Gallons
-    manufacturer: wyrd-games
-    productCode: WYR233639
-    sku: WYR233639
-    ean: '0812152034945'
-    eanConfidence: confirmed
-    gameSystems:
-      - malifaux
-    faction: bayou
-    gameSystemsBasis: stated
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    packaging: single
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-07'
-    priceGbp: 23.16
-    priceUsd: 30.0
-    priceCad: 35.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/ten-gauge-ten-gallons
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR23639-Ten-Gauge-Ten-Gallons_FRONT.png?v=1721308999
-    description: |-
-      Malifaux models are 32mm 'heroic' scale miniatures made of high-quality plastic. Will require some preparation and assembly.
-
-      **Faction: Bayou**
-
-      **Keyword: Big Hat, Tricksy**
-
-      **Contents:**
-
-      - Jebediah
-      - Habber-Dashers x3
-    evidence:
-      - legacy-catalog:wyrd-games/malifaux/bayou/ten-gauge-ten-gallons
-      - mfr-wyrd-store:ten-gauge-ten-gallons
-      - ret-gamenerdz:/malifaux-3e-ten-gauge-ten-gallons
-      - ret-goblingaming:wyrd-miniatures-malifaux-bayou-gremlins-ten-gauge-ten-gallons
-      - ret-tistaminis:malifaux-bayou-ten-guage-ten-gallons
   - id: wyrd-games/WYR23401
     name: 'Malifaux 3E: Dreamer Core Box'
     manufacturer: wyrd-games
@@ -13731,6 +13709,50 @@ products:
       - mfr-wyrd-store:seashells-by-the-swampshore
       - ret-gamenerdz:/malifaux-3e-seashells-by-the-swampshore
       - ret-tistaminis:malifaux-bayou-seashells-by-the-swampshore
+  - id: wyrd-games/WYR23639
+    name: Ten Gauge Ten Gallons
+    manufacturer: wyrd-games
+    productCode: WYR23639
+    sku: WYR23639
+    ean: '0812152034945'
+    eanConfidence: confirmed
+    additionalCodes:
+      - WYR233639
+    gameSystems:
+      - malifaux
+    faction: bayou
+    gameSystemsBasis: stated
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: single
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-07'
+    priceGbp: 23.16
+    priceUsd: 30.0
+    priceCad: 35.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/ten-gauge-ten-gallons
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR23639-Ten-Gauge-Ten-Gallons_FRONT.png?v=1721308999
+    description: |-
+      Malifaux models are 32mm 'heroic' scale miniatures made of high-quality plastic. Will require some preparation and assembly.
+
+      **Faction: Bayou**
+
+      **Keyword: Big Hat, Tricksy**
+
+      **Contents:**
+
+      - Jebediah
+      - Habber-Dashers x3
+    evidence:
+      - legacy-catalog:wyrd-games/malifaux/bayou/ten-gauge-ten-gallons
+      - mfr-wyrd-store:ten-gauge-ten-gallons
+      - ret-gamenerdz:/malifaux-3e-ten-gauge-ten-gallons
+      - ret-goblingaming:wyrd-miniatures-malifaux-bayou-gremlins-ten-gauge-ten-gallons
+      - ret-tistaminis:malifaux-bayou-ten-guage-ten-gallons
   - id: wyrd-games/WYR23640
     name: Toad-AL Power
     manufacturer: wyrd-games
