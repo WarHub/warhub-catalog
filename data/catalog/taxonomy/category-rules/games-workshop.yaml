@@ -43,7 +43,7 @@ noneOf:
   # FORGE WORLD is a production line, not a game: d34 85/86 spans six systems (counts above).
   # Vetoing the GAME costs nothing -- all 670 already carry one, so no coverage is lost and 21
   # errors go -- while the category is 99.8% `miniatures` on 410 independently-graded products.
-  - codeMatches: '^\d{2}8[56]'
+  - codeMatches: '^\d{2}8[56]\d{7}$'
     blocks: [gameSystems]
     note: Forge World spans six systems; the code says which line, not which game
 
@@ -51,7 +51,7 @@ noneOf:
   # game the product belongs to. 430 of them sit under d56 01, where the split between Warhammer
   # 40,000 and Horus Heresy is the book's period and no field encodes it -- measured 86.3%, which
   # is not deterministic. The ones whose segment is unambiguous are recovered by a clause below.
-  - codeMatches: '^\d{6}81'
+  - codeMatches: '^\d{6}81\d{3}$'
     blocks: [gameSystems]
     note: Black Library, setting is not the game
 
@@ -60,16 +60,16 @@ noneOf:
   # horus-heresy 56 / warhammer-40k 21, `0108/0117` grades warhammer-40k 105 / horus-heresy 5 /
   # other-games 3. Refusing 266 products removes the last 17 disagreements and is what takes the
   # ladder to 99.89%.
-  - codeMatches: '^\d{4}30(08|43)'
+  - codeMatches: '^\d{4}30(08|43)\d{3}$'
     blocks: [gameSystems]
     note: mixed Horus Heresy / Warhammer 40,000 segment, 56 vs 21
-  - codeMatches: '^\d{4}01(08|17)'
+  - codeMatches: '^\d{4}01(08|17)\d{3}$'
     blocks: [gameSystems]
     note: mixed Warhammer 40,000 / Horus Heresy segment, 105 vs 5
-  - codeMatches: '^\d{2}12(01)99'
+  - codeMatches: '^\d{2}12(01)99\d{3}$'
     blocks: [gameSystems]
     note: 40k plastic kits with a generic faction segment
-  - codeMatches: '^\d{2}1202(01|07|13)'
+  - codeMatches: '^\d{2}1202(01|07|13)\d{3}$'
     blocks: [gameSystems]
     note: Age of Sigmar plastic kits also sold into Warcry / Old World
 
@@ -87,10 +87,30 @@ clauses:
   # bases and painting handles alongside paint. Including it drops `d34=19 -> hobby-auxiliary`
   # from 100% to 54% purely because that store calls a drybrush a paint.
   #
-  # EVERY CLAUSE HERE IS ANCHORED TO ELEVEN DIGITS. `codeMatches` is an unanchored `re.search`,
-  # and 569 of the 9,262 GW codes are not GW codes at all -- 374 six-digit house numbers from a
-  # German retailer import, 54 thirteen-digit barcodes, and a tail. Without `\d{7}$` a clause on
-  # `^\d{2}05` would stamp `game-accessory` on `122353 Dark Angels: Datacards 9. Edition`.
+  # EVERY CLAUSE IN THIS FILE IS ANCHORED TO ELEVEN DIGITS, and the ones that were not were
+  # actively wrong. `codeMatches` is an unanchored `re.search`, and 603 of the 9,271 GW codes are
+  # not GW codes at all -- 345 six-digit house numbers from a German retailer import, 45 barcodes,
+  # 201 non-numeric retailer catalogue numbers. The category clauses added on 2026-09-01 were
+  # anchored from the start; THE GAME-SYSTEM SEGMENT CLAUSES BELOW WERE NOT, and they had been
+  # publishing nonsense on 31 products. At least 16 are unarguable:
+  #
+  #     136614 White Dwarf 527                        -> middle-earth
+  #     109102 Layer: Tau Light Ochre (12ml)          -> age-of-sigmar   (a pot of paint)
+  #     134105 Lumineth Realm-Lords: Schriftrollenkarten -> necromunda
+  #     135805 Warhammer 40.000: Intercessors + Paints  -> necromunda
+  #     128127 Horus Heresy: Sammelband 1             -> the-old-world
+  #     129507 Lazarus: Klinge Der Feindschaft (novel) -> warhammer-underworlds
+  #     134109 First Marshal (Hb) (novel)             -> blood-bowl
+  #
+  # The unanchored `^\d{2}24 -> book` was also stamping `book` on `132489 Legiones Astartes: MkII
+  # Veteran Squad`, a plastic kit. A six-digit shop number simply is not a GW product code, and a
+  # regex that reads its first four characters as a language and a product type is inventing one.
+  #
+  # THE COST IS 44 PAINTS THAT MATCHED BY ACCIDENT. `^\d{2}(17|18)99` was reaching 33 thirteen-digit
+  # barcodes whose leading digits happen to spell a paint segment, and `^\d{2}(19|21|22|23)99` 11
+  # more. They were right by coincidence, which is not a reason to keep a rule that cannot tell why.
+  # The `^(BASE|LAYER|SHADE|...)\s*:` name clause below reaches that population deliberately: 237
+  # GW products, 231 of which already publish `paint`, with zero contradicted.
   #
   # WHY THE CODE BEATS THE NAME LEXICON HERE, and it is not a preference. The 2,667 products
   # mfr-gw-trade is the sole source for are overwhelmingly not in English:
@@ -99,9 +119,67 @@ clauses:
 
   # NARROWEST FIRST. Bare bases sit inside the character and plastic-kit segments, and
   # categories.yaml is explicit that a base sold on its own is a component, not a model.
-  - nameMatches: '\b(BASES?|STEMS?)\b.*\b(SET|PACK|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b'
+  - nameMatches: '\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b'
     category: hobby-auxiliary
-    note: 13 products; control 46, 97.8%
+    note: >-
+      17 products; control 46, 97.8%. Widened from the original 13 to catch `LARGE BASE DETAIL
+      KIT`, `INDUSTRIAL BASES`, `WH40K HERO BASES` and `VOID WAR BASES` -- and it must stay AHEAD
+      of the SECTOR IMPERIALIS terrain clause below, which sells scenery and base kits off the
+      same shelf name.
+
+  # =============================================================================================
+  # TERRAIN, BY NAME, AND WHY IT HAS TO BE BY NAME. Terrain appears NOWHERE in GW's product code:
+  # a `Skull Altar` and a `Putrid Blightkings` box share d34 12 and sit in the same stock section.
+  # It is the one category the numbering cannot express, and it is why `d34=12` could not simply
+  # be read as `miniatures` until these clauses existed.
+  #
+  # THE RANGE NAMES ARE THE SIGNAL. GW sells its generic scenery under a handful of branded
+  # ranges, and those names are stable and specific. What this CANNOT reach is faction terrain
+  # named like a unit -- `Awakened Wyldwood`, `Skaven Gnawholes`, `Feculent Gnarlmaw`,
+  # `Bad Moon Loonshrine` -- and a name net over the known-terrain population recalls only 49% for
+  # exactly that reason. Those are named products, not a class, and `overrides.yaml` is their
+  # honest home.
+  #
+  # A NOTE ON THE CONTROLS, because they disagree with each other here. `ret-goblingaming` shelves
+  # `Bone-tithe Nexus`, `Realmshaper Engine`, `Bossrokk Tower` and `Hammerfall Bunker` under
+  # Miniatures while `mfr-gw-algolia` shelves them under Scenery. Part of GW's terrain/miniature
+  # boundary is genuinely contested by the people selling it, and no rule resolves that.
+  - nameMatches: '\bBATTLEZONE\b|\bB/Z(?:ONE)?\b'
+    category: terrain
+    note: 10 undecided; control 9/9
+  - nameMatches: '\bZONE\s+MORTALIS\b|\bTHATOS\s+PATTERN\b'
+    category: terrain
+    note: 6 undecided; control 11/13 -- the 2 misses are a Necromunda rulebook and a base set
+  - nameMatches: '\bDOMINION\s+(OF\s+)?SIGMAR\b|\bAZYRITE\b|\bREALMSCAPE\b|\bREALM\s+OF\s+BATTLE\b|\bRAVAGED\s+LANDS\b|\bETHERIC\s+VORTEX\b'
+    category: terrain
+    note: 9 undecided; thin control (1/1) but all 19 hits read terrain on a full name read
+  - nameMatches: '\b(ROHAN|GONDOR|DOL\s+GULDUR|LAKE-?TOWN|MINAS\s+TIRITH)\b.*\b(HOUSE|TOWER|WATCHTOWER|STRONGHOLD|MANSION|RUINS|PALISADE|FORTRESS)\b'
+    category: terrain
+    note: 8 undecided; control 7/7
+  - nameMatches: '\b(RUINS|RUINED)\b'
+    category: terrain
+    note: >-
+      8 undecided; control 10/10 over 21 hits. The SINGULAR `RUIN` is deliberately excluded --
+      `Varanguard Knights of Ruin` is a cavalry unit.
+  - nameMatches: '\bSECTOR\s+(IMPERIALIS|MECHANICUS)\b|\bS/MECHANICUS\b|\bS/IMPERIALIS\b'
+    category: terrain
+    note: 10 undecided; the BASES clause above takes the base kits off this shelf first
+  - nameMatches: '\bKILL\s?ZONE\s*:'
+    category: terrain
+    note: >-
+      7 undecided. The COLON is load-bearing: it selects the `Killzone: Gallowdark` terrain sets
+      and excludes `Killzone Upgrade: ...` and `Kill Team: Killzone Essentials`, which are not.
+
+  - nameMatches: '\bGAMING PACK\b'
+    category: game-accessory
+    note: 11 undecided; control 2/2
+
+  # THE PAINT RANGE NAMES, which is how a Citadel colour is recognised now that the paint segment
+  # clause is anchored to eleven digits and no longer matches a barcode by accident. 237 GW
+  # products, 231 of them already publishing `paint` from other evidence and NONE contradicted.
+  - nameMatches: '^\s*(BASE|LAYER|SHADE|DRY|AIR|CONTRAST|TECHNICAL|SPRAY|GLAZE|EDGE)\s*:'
+    category: paint
+    note: 6 undecided; 231/231 agreement with what other evidence already decided
 
   # THINGS PLAYED WITH. d34 05 is the card product type -- `DATACARDS:`, `INDEX CARDS:`,
   # `WARSCROLL CARDS:`, `PACK DE FACTION:`. 99.0% over a control of 102; both disagreements are
@@ -157,19 +235,28 @@ clauses:
     category: miniatures
     note: 167 single-model kits; control 457, 99.8%
 
-  # NOT HERE, AND THIS IS THE ONE JUDGEMENT WORTH ARGUING WITH: d34 12, the plastic-kit type.
-  # 1,165 undecided products, and the largest single block left in the catalog -- but it is 95.5%
-  # `miniatures` against a control of 3,028, and BOTH independent controls agree on the residue
-  # (goblingaming 4.3%, algolia 5.0%). The 122 misses are TERRAIN -- `Skull Altar`,
-  # `Awakened Wyldwood`, `Skaven Gnawholes`, `Battlezone: Manufactorum` -- and they are not
-  # code-separable: they spread across d56 01 and 02 and every d78. Terrain does not appear
-  # anywhere in GW's product code.
+  # d34 12, THE PLASTIC-KIT TYPE, AND THE LAST CATEGORY CLAUSE IN THE FILE. It was refused once,
+  # at 95.5% against a control of 3,028, because its 4.5% residue is terrain the code cannot
+  # separate. What changed is not the bar but the clauses ahead of it: with the terrain names and
+  # `GAMING PACK` taken out first, a full name read of ALL 1,076 remaining products puts the error
+  # at 18 -- 1.7% -- which is inside the band `d34=04 -> book` already runs at.
   #
-  # A 4.5% error rate would be the loosest claim in this repo, so the products stay undecided and
-  # the handle is recorded instead: `sscCode` section 64 is GW's terrain section, 83% pure on a
-  # control of 24, and would recover 39 of the 122. It cannot be written today because no clause
-  # form matches a PREFIX of a hint -- `hintEquals` is exact and `hintContainsAny` is exact
-  # membership. That is one clause form away, and it is the right next move on this table.
+  # THE EVIDENCE IS A NAME READ, NOT A CONTROL, and that is a weaker instrument said plainly.
+  # Nothing in this catalog independently states `miniatures` for a Games Workshop product, so
+  # there is nothing to grade against; what stands behind this clause is that every one of those
+  # 1,076 names was read. The block is 1,058/1,134 language-neutral `99...` codes, so they are
+  # English -- the multilingual argument that justifies the code over the name lexicon elsewhere
+  # in this file does NOT apply to this clause.
+  #
+  # THE 18 THAT REMAIN WRONG ARE NAMED PRODUCTS, NOT A CLASS: 10 terrain (`Noctilith Crown`,
+  # `Battle Sanctum`, `Aegis Defence Line`, `Herdstone`, `Balewind Vortex`, `Feculent Gnarlmaw`,
+  # `Fortress of Dol Guldur`, `Arcane Ruins`, `Tidewall Shieldline`, `Promethium Tanks`), 3
+  # transfer/base sheets, 1 eBook, 1 Underworlds lair, and 3 shop-floor dispensers that are not
+  # products at all. A rule cannot reach them; `overrides.yaml` can, one line each, and that is
+  # the honest home for a product-specific correction.
+  - codeMatches: '^\d{2}12\d{7}$'
+    category: miniatures
+    note: 1,067 undecided after the carve-outs; 18 known wrong on a full name read of all 1,076
 
   # ---------------------------------------------------------------------------------------------
   # HOW MANY, AND ARE THEY THE SAME THING. `packaging` is additive-only, so these fill a form the
@@ -208,7 +295,7 @@ clauses:
 
   # A LEGION TRANSFER SHEET is Horus Heresy even though it sits in the 40k segment: d34 51 is the
   # transfer-sheet product type and the Legion sheets are period-specific.
-  - codeMatches: '^\d{2}5101'
+  - codeMatches: '^\d{2}5101\d{5}$'
     gameSystems: [horus-heresy]
 
   # d56 == 99 IS NOT A GAME SEGMENT. It is what GW uses for things that belong to no game: paints
@@ -216,38 +303,81 @@ clauses:
   # cases (23). Measured: 1,193 products, 1,149 of them unclassified. The 44 that carried a value
   # were all LLM guesses and all wrong -- `CONTRAST: ASURMEN BLUE` had even acquired the faction
   # `aeldari` from the colour's name. These decide a CATEGORY and deliberately no game system.
-  - codeMatches: '^\d{2}(17|18)99'
+  - codeMatches: '^\d{2}(17|18)99\d{5}$'
     category: paint
-  - codeMatches: '^\d{2}2099'
+  - codeMatches: '^\d{2}2099\d{5}$'
     category: paint
-  - codeMatches: '^\d{2}(19|21|22|23)99'
+  - codeMatches: '^\d{2}(19|21|22|23)99\d{5}$'
     category: hobby-auxiliary
   # WHITE DWARF is a magazine, in every segment. 131 products, every name `WHITE DWARF <n> (...)`.
-  - codeMatches: '^\d{2}24'
+  - codeMatches: '^\d{2}24\d{7}$'
     category: book
+
+  # AUDIO IS STILL A BOOK. d34 68 is Black Library's audio line -- 21 products, every one an
+  # audiobook or audio drama (`HORUS HERESY: NIGHTFANE (AUDIOBOOK)`, `GOTREK: REALMSLAYER`,
+  # `Asurmen: The Darker Road (CD)`). No control exists; all 21 names were read.
+  #
+  # `categories.yaml` says `book` is "anything whose content is TEXT", which reads against this at
+  # first -- and its own boundary settles it the other way: "Digital editions are `book` with
+  # `packaging: digital`, NOT a separate category: an eBook codex is the same thing as the printed
+  # codex, differently delivered." That is describing the KIND OF WORK, not the substrate. An
+  # audiobook of `Nightfane` is the same work as the novel `Nightfane`. A separate `audiobook`
+  # value would repeat the axis collapse `paint-set` is the scar of, mixing what a thing IS with
+  # how it arrives, for a population thinner than `event`.
+  #
+  # `packaging` is deliberately left ABSENT rather than set to `digital`: 3 of the 21 are `(CD)`,
+  # which is a physical package, and GW's code does not say which are which. Minting an `audio`
+  # packaging value for 21 products is a vocabulary decision the evidence does not force.
+  - codeMatches: '^\d{2}68\d{7}$'
+    category: book
+    note: 21 products, all Black Library audio; no control, full name read
+
+  - codeMatches: '^\d{2}70\d{2}81\d{3}$'
+    category: merch
+    note: >-
+      6 products -- 2 poster maps, 3 bookmarks, `BLACK LIBRARY HORUS HERESY BOOK ENDS`. No
+      control; full name read. `categories.yaml` names posters and art prints under `merch`, and
+      a bookmark is not hobby equipment.
+
+  - codeMatches: '^\d{2}63\d{7}$'
+    category: book
+    note: >-
+      4 digital editions (`Apocalypse (Interactive iBook Edition)`, `Everchosen Painting Guide
+      (ePub)`). They already carry `packaging: digital` from the EBOOK/EPUB name clause; only the
+      category was missing.
 
   # The segments themselves. Every one of these is 100% pure against independently-stated evidence
   # once the vetoes above have run; the two that are not (01 at 92.4% and 30 at 94.0% raw) are
   # carried there by the veto block rather than by a lower bar.
-  - codeMatches: '^\d{4}01'
+  - codeMatches: '^\d{4}01\d{5}$'
     gameSystems: [warhammer-40k]
-  - codeMatches: '^\d{4}02'
+  - codeMatches: '^\d{4}02\d{5}$'
     gameSystems: [age-of-sigmar]
-  - codeMatches: '^\d{4}03'
+  - codeMatches: '^\d{4}03\d{5}$'
     gameSystems: [adeptus-titanicus]
-  - codeMatches: '^\d{4}05'
+  - codeMatches: '^\d{4}05\d{5}$'
     gameSystems: [necromunda]
-  - codeMatches: '^\d{4}07'
+  - codeMatches: '^\d{4}07\d{5}$'
     gameSystems: [warhammer-underworlds]
-  - codeMatches: '^\d{4}09'
+  - codeMatches: '^\d{4}09\d{5}$'
     gameSystems: [blood-bowl]
-  - codeMatches: '^\d{4}14'
+  - codeMatches: '^\d{4}14\d{5}$'
     gameSystems: [middle-earth]
-  - codeMatches: '^\d{4}18'
+  - codeMatches: '^\d{4}18\d{5}$'
     gameSystems: [aeronautica-imperialis]
-  - codeMatches: '^\d{4}26'
+  - codeMatches: '^\d{4}26\d{5}$'
     gameSystems: [legions-imperialis]
-  - codeMatches: '^\d{4}27'
+  - codeMatches: '^\d{4}27\d{5}$'
     gameSystems: [the-old-world]
-  - codeMatches: '^\d{4}30'
+  - codeMatches: '^\d{4}30\d{5}$'
     gameSystems: [horus-heresy]
+
+  # d56 06 IS A SEGMENT THIS TABLE NEVER MAPPED: 24 products, 18 with no game system at all --
+  # Blackstone Fortress (12), Space Marine Adventures, `Assassinorum: Execution Force`,
+  # `Warhammer Quest: Blackstone Fortress`. `data/catalog/mappings/mfr-gw-trade.yaml` already
+  # reads GW's own `WH Quest` range as `other-games`, and `other-games` is `catchAll: true`, so a
+  # later rule that can name the game refines this rather than fighting it. The Kill Team products
+  # in the segment keep `kill-team`: the name clause at the top of this file runs first.
+  - codeMatches: '^\d{4}06\d{5}$'
+    gameSystems: [other-games]
+    note: 18 undecided; no control, full name read of all 24
