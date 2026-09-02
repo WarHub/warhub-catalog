@@ -38,6 +38,10 @@ clauses:
     hintEquals:
       vendor: 'Monument Hobbies'
     note: the 12 rows of the same population that carry no productType
+  - category: miniatures
+    hintEquals:
+      productType: 'Miniatures - Plastic'
+    note: 12 of 12 graded miniatures (2026-09-02); decides 5
   - category: paint
     hintContainsAny:
       tags: ['Army Painter Paints', 'Speedpaint', 'Green Stuff World Paints']

@@ -1084,3 +1084,30 @@ def test_a_claim_replaces_a_classified_guess_and_a_code_range_alone_does_not() -
     assert not _apply_game_systems(guessed, range_only, outcome, frozenset())
     assert guessed.gameSystems == ["deadzone"]
     assert [c.kind for c in outcome.conflicts] == ["gameSystem-disagreement"]
+
+
+def test_two_sources_of_one_kind_outvote_a_third() -> None:
+    """Three retailers, two of them filing `paint-set` and one `paint`: the two decide, and the
+    split is still reported. Alphabetical order used to decide it."""
+    members = [
+        _observation("ret-a:1", "ret-a", hints={"productType": "Paints"}),
+        _observation("ret-b:1", "ret-b", hints={"productType": "Paint Sets"}),
+        _observation("ret-c:1", "ret-c", hints={"productType": "Sets"}),
+    ]
+    rules = _rules(
+        **{
+            "ret-a": [{"category": "paint", "hintEquals": {"productType": "Paints"}}],
+            "ret-b": [{"category": "paint-set", "hintEquals": {"productType": "Paint Sets"}}],
+            "ret-c": [{"category": "paint-set", "hintEquals": {"productType": "Sets"}}],
+        }
+    )
+    decision, conflicts = decide(
+        "e", members, {"ret-a": "retailer", "ret-b": "retailer", "ret-c": "retailer"}, rules, [], frozenset()
+    )
+    assert (decision.category, decision.why) == ("paint-set", "ret-b productType=Paint Sets")
+    assert [c.kind for c in conflicts] == ["category-disagreement"]
+    # a higher kind still outranks any vote below it
+    decision, _ = decide(
+        "e", members, {"ret-a": "manufacturer", "ret-b": "retailer", "ret-c": "retailer"}, rules, [], frozenset()
+    )
+    assert decision.category == "paint"

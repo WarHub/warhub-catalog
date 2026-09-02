@@ -447,7 +447,20 @@ def decide(
 
     decision: Decision | None = None
     if hits:
-        member, clause = hits[0]
+        # THE TOP KIND DECIDES, AND WITHIN IT THE VOTE. `hits` is in kind-then-key order, so the
+        # first hit's kind is the highest that answered; among that kind's sources the category
+        # most of them give wins, and only a tie falls back to key order. Measured 2026-09-02: of
+        # 77 same-kind category disagreements 7 were two retailers against one, and every one of
+        # the seven had gone to the one because its id sorted first (`Historical: WWII Soviet
+        # Union Paint Set` published `paint` on goblingaming's word against radaddel's and
+        # tistaminis' `paint-set`).
+        top_kind = kinds.get(hits[0][0].source_id, "barcode-db")
+        top = [(m, c) for m, c in hits if kinds.get(m.source_id, "barcode-db") == top_kind]
+        votes: dict[str, set[str]] = {}
+        for m, c in top:
+            votes.setdefault(c.category, set()).add(m.source_id)
+        most = max(len(v) for v in votes.values())
+        member, clause = next((m, c) for m, c in top if len(votes[c.category]) == most)
         decision = Decision(
             category=clause.category,
             packaging=packaging,

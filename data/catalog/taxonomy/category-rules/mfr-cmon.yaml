@@ -94,7 +94,8 @@ clauses:
     hintEquals: {productLine: 'Broken Compass'}
     note: 6 rows, 5 of them books
   - category: book
-    hintEquals: {productLine: "Assassin's Creed Roleplaying Game"}
+    hintEquals: {productLine: "Assassin’s Creed Roleplaying Game"}
+    note: the curly apostrophe is CMON's own; with a straight one the clause matched nothing (2026-09-02)
     note: >-
       1 row, the Animus Handbook core rules. The apostrophe in the productLine value is U+2019,
       not an ASCII quote

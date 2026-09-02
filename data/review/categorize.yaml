@@ -1,29 +1,29 @@
 summary:
   products: 27262
-  undecided: 1413
+  undecided: 1411
   byBasis:
     code: 7143
-    lexicon: 309
-    mapped: 16409
+    lexicon: 345
+    mapped: 16375
     paint-barcode: 9
     stated: 1979
-    unknown: 1413
-  decidedThisRun: 0
+    unknown: 1411
+  decidedThisRun: 23872
   gameSystemsByBasis:
     classified: 1241
     code: 4163
     mapped: 2595
-    not-applicable: 7844
+    not-applicable: 7842
     override: 83
     setting: 842
     stated: 9134
-    unknown: 1360
+    unknown: 1362
   settingsByBasis:
     code: 831
     derived: 17097
     mapped: 11
-    not-applicable: 7915
-    unknown: 1408
+    not-applicable: 7913
+    unknown: 1410
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -172,87 +172,6 @@ conflicts:
   - entity: games-workshop/99122799006
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=miniatures; ret-tistaminis=terrain'
-  - entity: games-workshop/99189950229
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b says hobby-auxiliary
-  - entity: games-workshop/99189950242
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b says hobby-auxiliary
-  - entity: games-workshop/99189950251
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b says hobby-auxiliary
-  - entity: games-workshop/99189950258
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b says hobby-auxiliary
-  - entity: games-workshop/99199999043
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999047
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999048
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999049
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999050
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999051
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999053
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999054
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999056
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999057
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999058
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999060
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999061
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99199999068
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99219999035
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999066
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999112
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999116
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999117
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999118
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999119
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999120
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99239999122
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: games-workshop/99700199045
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain'
@@ -268,9 +187,6 @@ conflicts:
   - entity: games-workshop/99810209009
     type: gameSystem-disagreement
     detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02\d{5}$ says age-of-sigmar
-  - entity: games-workshop/citadel-brush-x-large-base
-    type: category-disagreement
-    detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
   - entity: green-stuff-world/green-stuff-world-gloss-varnish-60ml
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
@@ -379,7 +295,6 @@ conflicts:
 deadClauses:
   - games-workshop code~^\d{2}70\d{2}81\d{3}$
   - games-workshop code~^\d{4}1481\d{3}$
-  - mfr-cmon productLine=Assassin's Creed Roleplaying Game
   - mfr-gw-algolia hierarchy.lvl1~Other Games > Aeronautica Imperialis
   - mfr-manticgames categories~game-color
   - mfr-manticgames categories~terrain-crate,modern-terrain-crate,terrain-sci-fi-terrain-crate,featured-products-terrain-crate,terraincrate-battlefields,terraincrate-dungeons,sci-fi-modular-buildings,neoprene-game-mats,tournaments,hobby_gifts
@@ -392,9 +307,6 @@ deadClauses:
   - warlord-games code~^11\d{7}$
   - warlord-games code~^21\d{7}$
 unmapped:
-  mfr-cmon:
-    - value: productLine=Assassin’s Creed Roleplaying Game
-      wouldDecide: 1
   mfr-gw-trade:
     - value: tradeCategory=Sales Support - Other
       wouldDecide: 1
@@ -630,7 +542,7 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 82
+      wouldDecide: 86
     - value: breadcrumbs=Miniatures
       wouldDecide: 82
     - value: breadcrumbs=Infinity
@@ -651,6 +563,10 @@ unmapped:
       wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
+    - value: breadcrumbs=Supplies
+      wouldDecide: 4
+    - value: breadcrumbs=Paint and Crafting
+      wouldDecide: 4
     - value: breadcrumbs=Nomads
       wouldDecide: 2
     - value: breadcrumbs=Panoceania
@@ -704,10 +620,6 @@ unmapped:
     - value: 'breadcrumbs=Infinity: Daedalus'' Fall (Hardcover) (Ding & Dent)'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Endsong Bundle'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Essentials - PanOceania - PanOceania Dronbot Remotes Pack'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13'
       wouldDecide: 1
   ret-goblingaming:
     - value: productType=Aerosols
@@ -803,36 +715,32 @@ unmapped:
       wouldDecide: 3
   ret-tistaminis:
     - value: vendor=GW-OOP
-      wouldDecide: 28
+      wouldDecide: 24
     - value: vendor=GW-LOCAL
-      wouldDecide: 17
+      wouldDecide: 18
     - value: tags=Amazon
-      wouldDecide: 14
+      wouldDecide: 15
     - value: tags=Orks
-      wouldDecide: 10
+      wouldDecide: 11
     - value: tags=warhammer preorder
       wouldDecide: 10
     - value: tags=Gamesworkshop
       wouldDecide: 9
     - value: vendor=Green Stuff World
       wouldDecide: 9
-    - value: vendor=GW-WEB
-      wouldDecide: 7
     - value: tags=GW Accessories
-      wouldDecide: 7
+      wouldDecide: 8
     - value: tags=Green Stuff World
       wouldDecide: 7
     - value: vendor=Mantic
       wouldDecide: 7
-    - value: productType=Miniatures - Plastic
-      wouldDecide: 5
+    - value: vendor=GW-WEB
+      wouldDecide: 6
     - value: vendor=Warlord Games
       wouldDecide: 5
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
     - value: tags=Space Marines
-      wouldDecide: 4
-    - value: tags=Warhammer Lord of the Rings
       wouldDecide: 4
     - value: tags=40k Terrain
       wouldDecide: 4
@@ -840,21 +748,19 @@ unmapped:
       wouldDecide: 3
     - value: tags=Horus Heresy
       wouldDecide: 3
-    - value: tags=Evil
+    - value: tags=Warhammer Lord of the Rings
       wouldDecide: 3
     - value: tags=Warhammer
       wouldDecide: 3
     - value: tags=Bolt Action
       wouldDecide: 3
-    - value: tags=Stormcast Eternals
-      wouldDecide: 2
     - value: tags=Blood Bowl
-      wouldDecide: 2
-    - value: tags=Chaos Space Marines
       wouldDecide: 2
     - value: tags=Old World
       wouldDecide: 2
     - value: tags=HH Vehicle
+      wouldDecide: 2
+    - value: tags=Evil
       wouldDecide: 2
     - value: tags=Orcs and Goblins
       wouldDecide: 2
@@ -881,6 +787,12 @@ unmapped:
     - value: tags=Army Painter
       wouldDecide: 1
     - value: tags=Spray
+      wouldDecide: 1
+    - value: vendor=Army Painter
+      wouldDecide: 1
+    - value: tags=AOS
+      wouldDecide: 1
+    - value: tags=Starter Sets
       wouldDecide: 1
   seed-curated:
     - value: productType=starter_set

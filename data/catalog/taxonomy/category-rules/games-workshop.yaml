@@ -140,7 +140,10 @@ clauses:
 
   # NARROWEST FIRST. Bare bases sit inside the character and plastic-kit segments, and
   # categories.yaml is explicit that a base sold on its own is a component, not a model.
-  - nameMatches: '\b(BASES?|STEMS?)\b.*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b'
+  # `BASE:` WITH A COLON IS THE CITADEL BASE PAINT RANGE -- `BASE: RHINOX HIDE (12ML) (6-PACK)` on
+  # the trade sheet -- and the lookahead keeps those 12 six-packs out (2026-09-02; they publish
+  # `paint` from the crossover, and the clause only reported against them).
+  - nameMatches: '\b(BASES?|STEMS?)\b(?!:).*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b(?!:)|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b'
     category: hobby-auxiliary
     note: >-
       17 products; control 46, 97.8%. Widened from the original 13 to catch `LARGE BASE DETAIL
