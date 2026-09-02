@@ -1,4 +1,4 @@
-"""The declared vocabularies for `category` and `packaging` (data/catalog/taxonomy/categories.yaml).
+"""The declared vocabularies for `category`, `packaging` and `role` (data/catalog/taxonomy/categories.yaml).
 
 Until this module existed both fields were bare `str | None` and nothing validated either, so a
 value could enter the published catalog from any of five unrelated mechanisms without anyone
@@ -41,6 +41,10 @@ class Vocabulary(BaseModel):
     schemaVersion: int = 1
     categories: list[VocabularyEntry] = Field(default_factory=list)
     packaging: list[VocabularyEntry] = Field(default_factory=list)
+    # AXIS 3, what a hobby supply is FOR (colour, primer, varnish, ... build). Declared 2026-09-02
+    # when `paint` was redrawn to "what a chart lists" and stopped being able to say whether a pot
+    # is a colour or the varnish over it. Validated exactly like the other two, for the same reason.
+    roles: list[VocabularyEntry] = Field(default_factory=list)
 
     @property
     def category_slugs(self) -> frozenset[str]:
@@ -50,8 +54,14 @@ class Vocabulary(BaseModel):
     def packaging_slugs(self) -> frozenset[str]:
         return frozenset(entry.slug for entry in self.packaging)
 
-    def check(self, category: str | None, packaging: str | None, product_id: str) -> None:
-        """Raise if either value is not declared. Absent is always fine -- see below."""
+    @property
+    def role_slugs(self) -> frozenset[str]:
+        return frozenset(entry.slug for entry in self.roles)
+
+    def check(
+        self, category: str | None, packaging: str | None, product_id: str, role: str | None = None
+    ) -> None:
+        """Raise if any value is not declared. Absent is always fine -- see below."""
         # None is NOT a violation. `packaging` is unknown for 60% of the catalog and `category`
         # becomes nullable the moment a categorize stage can say "undecided" honestly; a vocabulary
         # that forced a value would be re-inventing the fallback this whole effort exists to remove.
@@ -69,6 +79,11 @@ class Vocabulary(BaseModel):
             raise ValueError(
                 f"{product_id}: packaging {packaging!r} is not declared in "
                 f"data/catalog/taxonomy/categories.yaml (declared: {sorted(self.packaging_slugs)})"
+            )
+        if role is not None and self.role_slugs and role not in self.role_slugs:
+            raise ValueError(
+                f"{product_id}: role {role!r} is not declared in "
+                f"data/catalog/taxonomy/categories.yaml (declared: {sorted(self.role_slugs)})"
             )
 
 

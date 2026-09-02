@@ -261,6 +261,8 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
     merged = CanonicalProduct.model_validate({**product.model_dump(), **patch})
     if patch.get("category") is not None:
         merged.categoryBasis = "override"
+    if patch.get("role") is not None:
+        merged.roleBasis = "override"
     if patch.get("gameSystems") is not None:
         merged.gameSystemsBasis = "override"
     if patch.get("settings") is not None:
