@@ -1,14 +1,15 @@
 summary:
   products: 29043
-  undecided: 15269
+  undecided: 15216
   byBasis:
+    code: 178
     default: 7051
-    guessed: 8218
-    lexicon: 2409
+    guessed: 8165
+    lexicon: 2284
     mapped: 9358
     paint-barcode: 21
     stated: 1986
-  decidedThisRun: 11788
+  decidedThisRun: 11841
 conflicts:
   - entity: atomic-mass-games/SWQ131
     type: category-disagreement
@@ -25,9 +26,246 @@ conflicts:
   - entity: corvus-belli/CBARI38
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=game-accessory'
+  - entity: games-workshop/15050101024
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050102019
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050102023
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050102024
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050103005
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050105003
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050105005
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050105007
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050106004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050109003
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050112005
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050112006
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050113004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/15050116004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (mapped); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/60010199070
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/60030199043
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/60030199044
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/60030199045
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming productType=Rules Supplements says kill-team
+  - entity: games-workshop/60030199048
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming productType=Rules Supplements says kill-team
+  - entity: games-workshop/60040199123
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/60040199164
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
+  - entity: games-workshop/60050101023
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050101024
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050101025
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050102018
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050102019
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050102020
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050102021
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050102022
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050104004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/60050110004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050112005
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050112006
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050113004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050113005
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/60050113006
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050116004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050118003
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050118004
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming name~\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b says kill-team
+  - entity: games-workshop/60050199055
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/60050199060
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-goblingaming productType=Gaming Accessories says kill-team
+  - entity: games-workshop/60220699006
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/60630201016
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99020105050
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99020105051
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99020109002
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99020201041
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99060209201
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99060210117
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99070204001
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99120101170
+    type: gameSystem-disagreement
+    detail: catalog says horus-heresy (classified); games-workshop code~^\d{4}01 says warhammer-40k
+  - entity: games-workshop/99120101402
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99120101421
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99120101422
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120102145
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99120102208
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120102232
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120103123
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120104075
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99120104092
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
+  - entity: games-workshop/99120104105
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120105123
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120105132
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120105133
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120105153
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120106080
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120106083
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120110084
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120110086
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120112055
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120112058
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120113096
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120113102
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120114003
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120116048
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120118018
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120118023
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says kill-team
+  - entity: games-workshop/99120205059
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); name matches /\bWHITE DWARF\b/ says age-of-sigmar
+  - entity: games-workshop/99123001007
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); ret-goblingaming productType=Miniatures says horus-heresy
   - entity: games-workshop/99199999043
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -73,6 +311,18 @@ conflicts:
   - entity: games-workshop/99219999035
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99220101025
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-gamenerdz breadcrumbs~Dice says kill-team
+  - entity: games-workshop/99220104010
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-gamenerdz breadcrumbs~Dice says kill-team
+  - entity: games-workshop/99220114001
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-gamenerdz breadcrumbs~Dice says kill-team
+  - entity: games-workshop/99220199090
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); ret-gamenerdz breadcrumbs~Dice says kill-team
   - entity: games-workshop/99239999066
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -97,9 +347,30 @@ conflicts:
   - entity: games-workshop/99239999122
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/99800210009
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99810201003
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99810202008
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
+  - entity: games-workshop/99810209009
+    type: gameSystem-disagreement
+    detail: catalog says the-old-world (classified); games-workshop code~^\d{4}02 says age-of-sigmar
   - entity: games-workshop/citadel-brush-x-large-base
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: games-workshop/kill-team-datacards-farstalker-kinband
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/kill-team-datacards-novitiates
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); name matches /\b(INDEX CARDS|DATACARDS?|DATASHEET CARDS|STAT CARDS)\b/ says kill-team
+  - entity: games-workshop/warhammer-40k-kill-team-killzone-octarius
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: vallejo/26201
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
@@ -157,7 +428,34 @@ conflicts:
   - entity: wyrd-games/WYR40004
     type: category-disagreement
     detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'
-deadClauses: []
+deadClauses:
+  - atomic-mass-games code~^CA\d
+  - atomic-mass-games code~^CPE\d
+  - atomic-mass-games code~^CP\d
+  - atomic-mass-games code~^MCA\d
+  - atomic-mass-games code~^MCP\d
+  - atomic-mass-games code~^SWL\d
+  - atomic-mass-games code~^SWM\d
+  - atomic-mass-games code~^SWP\d
+  - atomic-mass-games code~^SWQ\d
+  - atomic-mass-games code~^SWZ\d
+  - games-workshop code~^\d{2}(17|18)99
+  - games-workshop code~^\d{2}(19|21|22|23)99
+  - games-workshop code~^\d{2}2099
+  - games-workshop code~^\d{2}24
+  - games-workshop code~^\d{2}5101
+  - games-workshop code~^\d{4}01
+  - games-workshop code~^\d{4}02
+  - games-workshop code~^\d{4}03
+  - games-workshop code~^\d{4}05
+  - games-workshop code~^\d{4}07
+  - games-workshop code~^\d{4}09
+  - games-workshop code~^\d{4}14
+  - games-workshop code~^\d{4}18
+  - games-workshop code~^\d{4}26
+  - games-workshop code~^\d{4}27
+  - games-workshop code~^\d{4}30
+  - games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b
 unmapped:
   mfr-gw-algolia:
     - value: hierarchy.lvl1=The Horus Heresy > Force Organisation
@@ -244,7 +542,7 @@ unmapped:
     - value: tradeCategory=E:B200b
       wouldDecide: 96
     - value: tradeCategory=BS:F
-      wouldDecide: 75
+      wouldDecide: 74
     - value: tradeCategory=E:BL
       wouldDecide: 23
     - value: tradeCategory=40K - Generic
@@ -265,8 +563,6 @@ unmapped:
       wouldDecide: 6
     - value: tradeCategory=AOS - Death - Nighthaunt
       wouldDecide: 6
-    - value: tradeCategory=BS:A
-      wouldDecide: 6
     - value: tradeCategory=AOS - Destruction - Ogor Mawtribes
       wouldDecide: 3
     - value: tradeCategory=Old World - Generic
@@ -283,8 +579,6 @@ unmapped:
       wouldDecide: 3
     - value: tradeCategory=AOS - Death - Soulblight Gravelords
       wouldDecide: 3
-    - value: tradeCategory=E:P210
-      wouldDecide: 3
     - value: tradeCategory=AOS - Order - Cities Of Sigmar
       wouldDecide: 2
     - value: tradeCategory=AOS - Order - Stormcast Eternals
@@ -294,14 +588,6 @@ unmapped:
     - value: tradeCategory=40K - Xenos - T'au Empire
       wouldDecide: 2
     - value: tradeCategory=40K - Imperium - Adeptus Custodes
-      wouldDecide: 2
-    - value: tradeCategory=E:P360
-      wouldDecide: 2
-    - value: tradeCategory=Brush - Shade
-      wouldDecide: 2
-    - value: tradeCategory=Brush - Dry
-      wouldDecide: 2
-    - value: tradeCategory=Hobby - Build - Basing Material
       wouldDecide: 2
     - value: tradeCategory=WH Quest - AOS
       wouldDecide: 1
@@ -318,6 +604,18 @@ unmapped:
     - value: tradeCategory=AOS - Order - Seraphon
       wouldDecide: 1
     - value: tradeCategory=AOS - Order - Lumineth Realmlords
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Order - Daughters Of Khaine
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Destruction - Sons Of Behemat
+      wouldDecide: 1
+    - value: tradeCategory=40-56
+      wouldDecide: 1
+    - value: tradeCategory=Necromunda - Goliath
+      wouldDecide: 1
+    - value: tradeCategory=Necromunda - Orlock
+      wouldDecide: 1
+    - value: tradeCategory=Necromunda - Squats
       wouldDecide: 1
   mfr-manticgames:
     - value: categories=kings-of-war
@@ -665,9 +963,9 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 639
+      wouldDecide: 633
     - value: breadcrumbs=Miniatures
-      wouldDecide: 632
+      wouldDecide: 630
     - value: breadcrumbs=Infinity
       wouldDecide: 150
     - value: breadcrumbs=Kings of War
@@ -677,7 +975,7 @@ unmapped:
     - value: breadcrumbs=Malifaux
       wouldDecide: 79
     - value: breadcrumbs=Games Workshop
-      wouldDecide: 71
+      wouldDecide: 69
     - value: breadcrumbs=Warhammer 40K
       wouldDecide: 66
     - value: breadcrumbs=More Miniatures
@@ -710,15 +1008,9 @@ unmapped:
       wouldDecide: 7
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 6
-    - value: breadcrumbs=Supplies
-      wouldDecide: 4
-    - value: breadcrumbs=Citadel Accessories & Supplies
-      wouldDecide: 4
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
     - value: breadcrumbs=Warhammer Age of Sigmar
-      wouldDecide: 2
-    - value: breadcrumbs=Limited
       wouldDecide: 2
     - value: breadcrumbs=Roleplaying
       wouldDecide: 2
@@ -743,6 +1035,12 @@ unmapped:
     - value: 'breadcrumbs=Marvel Crisis Protocol: Bishop & Nightcrawler'
       wouldDecide: 1
     - value: 'breadcrumbs=Marvel Crisis Protocol: Klaw & M''Baku'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Yondu & Nova - Character Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel: Crisis Protocol - Blue Marvel & Spectrum Character Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Marvel Crisis Protocol: Squirrel Girl & Gwenpool'
       wouldDecide: 1
   ret-goblingaming:
     - value: tags=Tabletop Games
@@ -805,9 +1103,9 @@ unmapped:
     - value: vendor=Vallejo
       wouldDecide: 695
     - value: tags=Games Workshop
-      wouldDecide: 543
+      wouldDecide: 535
     - value: vendor=Games Workshop
-      wouldDecide: 543
+      wouldDecide: 535
     - value: tags=The Army Painter
       wouldDecide: 384
     - value: vendor=The Army Painter

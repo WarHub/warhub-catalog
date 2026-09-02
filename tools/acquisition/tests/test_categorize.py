@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 import yaml
 
 from warhub_acquisition.categorize.decide import decide, flatten_hints
@@ -68,8 +69,13 @@ def test_a_clause_must_carry_exactly_one_signal() -> None:
 def test_a_clause_that_decides_nothing_is_rejected() -> None:
     """A clause with a signal and no outcome matches rows and then does nothing to them -- which
     reads, in a table of 40 lines, exactly like a store that stopped using that value."""
-    with pytest.raises(ValueError, match="category.*packaging"):
-        CategoryClause(hintEquals={"productType": "Paints"})
+    # Checked when the TABLE is built, not when the clause is: `noneOf` vetoes are the same type
+    # and must decide nothing, so the two lists want opposite answers from one class.
+    with pytest.raises(ValueError, match="decide at least one"):
+        SourceRules.model_validate({
+            "source": "ret-x", "reason": "measured",
+            "clauses": [{"hintEquals": {"productType": "Paints"}}],
+        })
 
 
 def test_a_packaging_only_clause_is_allowed() -> None:
@@ -527,12 +533,89 @@ def test_every_committed_rule_file_names_a_real_source_and_declared_values() -> 
 
     tables = load_category_rules(rules_dir)
     assert tables, "the rules directory exists but holds no table"
-    for source, table in tables.items():
-        assert (sources_dir / f"{source}.yaml").exists(), f"{source} has no source descriptor"
-        for clause in table.clauses:
+    systems = {
+        entry["slug"] for entry in yaml.safe_load(
+            (REPO_ROOT / "data/catalog/taxonomy/game-systems.yaml").read_text(encoding="utf-8")
+        )["gameSystems"]
+    }
+    factions = {
+        entry["slug"] for entry in yaml.safe_load(
+            (REPO_ROOT / "data/catalog/taxonomy/factions.yaml").read_text(encoding="utf-8")
+        )["factions"]
+    }
+    manufacturers = {
+        entry["slug"] for entry in yaml.safe_load(
+            (REPO_ROOT / "data/catalog/taxonomy/manufacturers.yaml").read_text(encoding="utf-8")
+        )["manufacturers"]
+    }
+    for scope, table in tables.items():
+        # A table is scoped to a FEED or to a MAKER, and each is held to its own register: a
+        # source must have a descriptor, a manufacturer must be in the taxonomy. Either way a
+        # table naming something that does not exist can never fire, and a dead table is
+        # indistinguishable from a store that publishes no taxonomy.
+        if table.manufacturer is not None:
+            assert scope in manufacturers, f"{scope} is not a declared manufacturer"
+        else:
+            assert (sources_dir / f"{scope}.yaml").exists(), f"{scope} has no source descriptor"
+        for clause in [*table.clauses, *table.noneOf]:
             assert clause.category is None or clause.category in categories, (
-                f"{source}: category {clause.category!r} is not declared in categories.yaml"
+                f"{scope}: category {clause.category!r} is not declared in categories.yaml"
             )
             assert clause.packaging is None or clause.packaging in packagings, (
-                f"{source}: packaging {clause.packaging!r} is not declared in categories.yaml"
+                f"{scope}: packaging {clause.packaging!r} is not declared in categories.yaml"
             )
+            # A rule may not mint a game system or faction the taxonomy has never heard of --
+            # the same guard the category vocabulary has always had, extended to the dimensions
+            # a clause can now decide.
+            assert clause.gameSystem is None or clause.gameSystem in systems, (
+                f"{scope}: gameSystem {clause.gameSystem!r} is not declared in game-systems.yaml"
+            )
+            assert clause.faction is None or clause.faction in factions, (
+                f"{scope}: faction {clause.faction!r} is not declared in factions.yaml"
+            )
+
+
+# --- manufacturer tables: a maker's own product code as a signal ------------------------------
+
+from warhub_acquisition.categorize.rules import SourceRules  # noqa: E402
+
+
+def _table(**kwargs) -> dict:
+    return {"reason": "measured", **kwargs}
+
+
+def test_a_clause_must_decide_something_and_a_veto_must_decide_nothing() -> None:
+    with pytest.raises(ValidationError, match="decide at least one"):
+        SourceRules.model_validate(_table(
+            manufacturer="m", clauses=[{"codeMatches": "^X", "note": "nothing"}]))
+    with pytest.raises(ValidationError, match="must decide nothing"):
+        SourceRules.model_validate(_table(
+            manufacturer="m",
+            clauses=[{"codeMatches": "^X", "gameSystem": "g"}],
+            noneOf=[{"codeMatches": "^Y", "gameSystem": "g"}]))
+
+
+def test_a_table_names_exactly_one_scope() -> None:
+    with pytest.raises(ValidationError, match="exactly one of source/manufacturer"):
+        SourceRules.model_validate(_table(clauses=[{"codeMatches": "^X", "gameSystem": "g"}]))
+    with pytest.raises(ValidationError, match="exactly one of source/manufacturer"):
+        SourceRules.model_validate(_table(
+            source="s", manufacturer="m", clauses=[{"nameMatches": "x", "gameSystem": "g"}]))
+
+
+def test_a_source_table_may_not_read_the_products_code() -> None:
+    """A code belongs to the product; a source table only ever speaks for one store's own words."""
+    with pytest.raises(ValidationError, match="does not own"):
+        SourceRules.model_validate(_table(
+            source="ret-x", clauses=[{"codeMatches": "^X", "gameSystem": "g"}]))
+
+
+def test_code_clauses_match_the_product_code_not_the_name() -> None:
+    from warhub_acquisition.resolve.crossover import clause_matches
+
+    clause = {"codeMatches": r"^\d{4}02"}
+    # GW digits 5-6 == 02 is Age of Sigmar.
+    assert clause_matches("", {}, clause, "99120299039")
+    assert not clause_matches("", {}, clause, "99120199039")
+    # The name is not consulted, so a product merely *called* something cannot spoof a code rule.
+    assert not clause_matches("99120299039", {}, clause, "")
