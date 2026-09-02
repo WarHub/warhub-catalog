@@ -76,22 +76,6 @@ entries:
       reaches 348 undecided; 95 controls, 89 agree (94%) -- the six misses are 3 miniatures and 2
       merch rows whose names contain the word
 
-  - nameMatches: '\bTERRAIN\b'
-    category: terrain
-    measured: reaches 37 undecided; 116 controls, 113 agree (97%)
-
-  # GW NAMES ITS OWN POTS `Citadel <range> Paint: <colour>` and its sprays `Citadel Paint: <colour>
-  # Spray`, and a retailer that lists them without a barcode (gamenerdz, 6 products) used to reach
-  # `paint` only through that store's department crumb, which also filed its brushes as paint. The
-  # exclusions are the Citadel paint furniture -- `CITADEL PAINT BOX`, `CITADEL PAINT RACK` -- and
-  # the sets and bundles the `packaging` axis and `paint-set` exist for. `CITADEL` must come
-  # first: `How to Paint Citadel Miniatures` is a book.
-  - nameMatches: '\bCITADEL\b[^:]*\bPAINT\b(?!\s*(?:SET|BOX|RACK|BUNDLE|AND|&|\+))'
-    category: paint
-    measured: >-
-      reaches 6 undecided; 18 controls, 16 agree (89%) before the exclusions and 16 of 16 with
-      them -- the two were the Paint Box and the Paint Rack (2026-09-02).
-
   # A PRIMER DEPOSITS COLOUR, which is the test categories.yaml sets for `paint` in as many words,
   # and every product this reaches says the colour in its own name: `Colour Primer Alien Purple`,
   # `Vallejo Fantasy Color Primer Goblin Green`, `AFV Color Primer Panzer Yellow`, `Basic Primer
@@ -110,6 +94,25 @@ entries:
       almost all `ret-radaddel` rows that nothing else stocks, so what stands behind it as much as
       the score is a read of all 52 names -- 49 Army Painter and Vallejo colour primers, 3 Warlord
       Colour Primer sprays
+  # ...AND BEFORE `TERRAIN`, since 2026-09-02: Army Painter's four `Gamemaster: ... Terrain
+  # Primer` sprays are primers.
+
+  - nameMatches: '\bTERRAIN\b'
+    category: terrain
+    measured: reaches 37 undecided; 116 controls, 113 agree (97%)
+
+  # GW NAMES ITS OWN POTS `Citadel <range> Paint: <colour>` and its sprays `Citadel Paint: <colour>
+  # Spray`, and a retailer that lists them without a barcode (gamenerdz, 6 products) used to reach
+  # `paint` only through that store's department crumb, which also filed its brushes as paint. The
+  # exclusions are the Citadel paint furniture -- `CITADEL PAINT BOX`, `CITADEL PAINT RACK` -- and
+  # the sets and bundles the `packaging` axis and `paint-set` exist for. `CITADEL` must come
+  # first: `How to Paint Citadel Miniatures` is a book.
+  - nameMatches: '\bCITADEL\b[^:]*\bPAINT\b(?!\s*(?:SET|BOX|RACK|BUNDLE|AND|&|\+))'
+    category: paint
+    measured: >-
+      reaches 6 undecided; 18 controls, 16 agree (89%) before the exclusions and 16 of 16 with
+      them -- the two were the Paint Box and the Paint Rack (2026-09-02).
+
 
   # LAST, because it is the broadest. A volume in the name is how essentially every paint in this
   # catalog is written, and the misses are the contested colourless agents discussed in the header

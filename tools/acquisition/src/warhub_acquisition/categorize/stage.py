@@ -150,7 +150,7 @@ def _count_clause_hits(
             table = rules.get(member.source_id)
             if table is None or table.manufacturer is not None:
                 continue
-            for axis in _AXES:
+            for axis in (*_AXES, "generic"):
                 for clause in table.clauses:
                     if getattr(clause, axis) and _clause_hit(member, clause):
                         hits[f"{member.source_id} {_signal(clause)}"] += 1
@@ -247,6 +247,12 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             decision, conflicts = decide(
                 record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes,
                 record.name, lexicon,
+                # THE FALLBACK TO `sku` IS LOAD-BEARING AND UNDECLARED (review finding, 2026-09-02):
+                # 224 records have no product code and hand the manufacturer's code clauses their
+                # retailer sku instead. Two tables rely on it -- reaper.yaml's four-digit ranges
+                # never match a normalized five-digit Reaper code, wyrd-games.yaml's `WYR40013-`
+                # only matches the hyphenated skus Wyrd's own pattern rejects -- and dropping it
+                # would cost 85 categories. Left as it is until those tables say what they read.
                 manufacturer=record.manufacturer, code=record.productCode or record.sku,
                 # So decide.py can re-read what the sources STATED (the resolver's fold, minus
                 # each source's declared fill) and unite it with the shelves of a source at least
@@ -422,7 +428,10 @@ def _apply_game_systems(
         (not settled or settled < set(proposed))
         and record.gameSystemsBasis not in _MAINTAINER_DECIDED
     )
-    refines = bool(settled) and settled <= catch_alls
+    refines = (
+        bool(settled) and settled <= catch_alls
+        and record.gameSystemsBasis not in _MAINTAINER_DECIDED
+    )
     # A GUESS YIELDS TO EVIDENCE. `classified` is the one basis that means "nothing said anything,
     # so a classifier guessed"; a shelf or the product's own name (decide.py's `claimed`) is
     # something saying something, and it replaces the guess. A code range ALONE does not: GW's

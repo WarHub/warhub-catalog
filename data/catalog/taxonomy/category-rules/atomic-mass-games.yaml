@@ -38,7 +38,10 @@ clauses:
   - nameMatches: '\b(Card Pack|Card Collection|Kartenset|Dice Pack|Measuring Tools|Movement Tools|Mission Pack|Battle Deck|Conversion Kit)\b'
     category: game-accessory
     note: 21 fills; 24/25
-  - codeMatches: '^(CPE|MCP|MCA|CP|CA|SWL|SWQ|SWP|SWZ|SWM)\d'
+  # `CA` IS NOT HERE (review finding, 2026-09-02): it is the card, tool and scenario block, and
+  # the `^CA\d -> game-accessory` clause below could never be reached while this one claimed it
+  # (CA11 Movement & Range Tool Pack and CA14 Mojo Ball Scenario Pack published as miniatures).
+  - codeMatches: '^(CPE|MCP|MCA|CP|SWL|SWQ|SWP|SWZ|SWM)\d'
     category: miniatures
     note: 242 fills; 128/128 against ret-goblingaming, once the name clauses above have run
 

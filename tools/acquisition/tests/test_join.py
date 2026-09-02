@@ -971,3 +971,33 @@ def test_a_tag_naming_a_declared_bundle_side_is_taken_even_on_a_barcoded_listing
 
     undeclared = join_observations(rows, taxonomy, kinds, Matches(), code_from_hint={"ret-r": "tags"})
     assert list(undeclared.entities) == ["warlord-games/109930002"]
+
+
+def test_a_re_keyed_listing_of_a_bundle_does_not_fuse_it_with_the_book() -> None:
+    """radaddel holds a listing twice: the older row carries the ISBN and no tag, the newer row the
+    tag and no barcode. When the tag names the BUNDLE, the older row's ISBN is the book's and must
+    be stripped from the listing as a whole, or the listing union fuses bundle and book (review
+    finding, 2026-09-02)."""
+    taxonomy = Taxonomy(
+        {"warlord-games": Manufacturer(slug="warlord-games", name="WG", codePattern=r"\d{9}")}
+    )
+    kinds = {"mfr-ws": "manufacturer", "ret-r": "retailer"}
+    rows = [
+        obs("mfr-ws:bundle", name="Rulebook & figure", sku="109930002", ean="9781915319975",
+            manufacturer="warlord-games"),
+        obs("mfr-ws:plain", name="Rulebook", sku="101010004", ean="9781915319975",
+            manufacturer="warlord-games"),
+        obs("ret-r:/x", name="Rulebook & figure", sku="124745", ean="9781915319975",
+            manufacturer="warlord-games"),
+        obs("ret-r:x", name="Rulebook & figure", sku="124745", manufacturer="warlord-games",
+            hints={"tags": ["109930002"]}),
+    ]
+    result = join_observations(
+        rows, taxonomy, kinds,
+        Matches(bundles={"warlord-games/109930002": "warlord-games/101010004"}),
+        sku_is_listing_id={"ret-r": True}, code_from_hint={"ret-r": "tags"},
+    )
+    assert sorted(result.entities) == ["warlord-games/101010004", "warlord-games/109930002"]
+    assert sorted(m.key for m in result.entities["warlord-games/109930002"]) == ["mfr-ws:bundle", "ret-r:/x", "ret-r:x"]
+    assert [m.key for m in result.entities["warlord-games/101010004"]] == ["mfr-ws:plain"]
+    assert not [c for c in result.ambiguous if c["type"] in ("multi-code-entity", "unresolved-bundle")]
