@@ -20,5 +20,16 @@ reason: >-
   the label only in punctuation and a subtitle.
 
 clauses:
+  # CARD UPDATES FIRST -- `Kartenaktualisierungen` is what ret-radaddel calls A Song of Ice and
+  # Fire's card-update packs, and they carry the same `<House>:` prefix as the models.
+  - nameMatches: '\bKartenaktualisierung'
+    category: game-accessory
+    note: >-
+      7 fills, no control; all 7 read "<House> - Kartenaktualisierungen von CMON"
+
   - nameMatches: '^(Baratheon|Bolton|Brotherhood without Banners|Free Folk|Greyjoy|Lannister|Martell|Neutral|Night.?s Watch|Stark|Targaryen|Nachtwache)\s*:'
     gameSystems: [asoiaf]
+    category: miniatures
+    note: >-
+      60 fills; 156/156. The clause already existed and decided only the GAME -- it never set a
+      category, so the 60 German ret-radaddel rows it reaches stayed undecided.

@@ -1,14 +1,14 @@
 summary:
   products: 29043
-  undecided: 5724
+  undecided: 3489
   byBasis:
-    code: 4858
-    lexicon: 571
-    mapped: 15892
-    paint-barcode: 12
+    code: 6631
+    lexicon: 539
+    mapped: 16389
+    paint-barcode: 9
     stated: 1986
-    unknown: 5724
-  decidedThisRun: 0
+    unknown: 3489
+  decidedThisRun: 23568
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -94,12 +94,6 @@ conflicts:
   - entity: games-workshop/99120101170
     type: gameSystem-disagreement
     detail: catalog says horus-heresy (classified); games-workshop code~^\d{4}01\d{5}$ says warhammer-40k
-  - entity: games-workshop/99120101457
-    type: gameSystem-disagreement
-    detail: catalog says kill-team (code); mfr-gw-algolia hierarchy.lvl1~Warhammer 40,000 > Unit Type,Warhammer 40,000 > Xenos Armies,Warhammer 40,000 > Armies of the Imperium,Warhammer 40,000 > Armies of Chaos,Warhammer 40,000 > Space Marines,Warhammer 40,000 > Terrain,Warhammer 40,000 > Start Here,Warhammer 40,000 > Ways to Play says warhammer-40k
-  - entity: games-workshop/99120102182
-    type: gameSystem-disagreement
-    detail: catalog says kill-team (code); mfr-gw-algolia hierarchy.lvl1~Warhammer 40,000 > Unit Type,Warhammer 40,000 > Xenos Armies,Warhammer 40,000 > Armies of the Imperium,Warhammer 40,000 > Armies of Chaos,Warhammer 40,000 > Space Marines,Warhammer 40,000 > Terrain,Warhammer 40,000 > Start Here,Warhammer 40,000 > Ways to Play says warhammer-40k
   - entity: games-workshop/99120199129
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=terrain; ret-radaddel=game-accessory'
@@ -217,6 +211,15 @@ conflicts:
   - entity: games-workshop/citadel-brush-x-large-base
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
+  - entity: green-stuff-world/green-stuff-world-gloss-varnish-60ml
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
+  - entity: green-stuff-world/green-stuff-world-maxx-darth-black-paint-17-ml
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
+  - entity: green-stuff-world/green-stuff-world-maxx-darth-paint-60-ml
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
   - entity: mantic-games/MGKWRK302
     type: gameSystem-disagreement
     detail: catalog says kings-of-war (classified); mfr-manticgames categories~firefight-enforcers,firefight-gcps,firefight-plague,firefight-veer-myn,firefight-asterians,firefight-forge-fathers,firefight-marauders,mazon-labs-firefight,nightstalkers-firefight-factions,enforcers,plague,veer-myn,forge-fathers,gcps,marauders,asterian,rebs,nameless,mazon-labs says deadzone+firefight
@@ -367,130 +370,112 @@ unmapped:
       wouldDecide: 1
   mfr-manticgames:
     - value: categories=kings-of-war
-      wouldDecide: 141
-    - value: categories=all-out-war-singles
-      wouldDecide: 77
+      wouldDecide: 73
     - value: categories=deadzone
-      wouldDecide: 52
-    - value: categories=vallejo
-      wouldDecide: 38
-    - value: categories=basilean
-      wouldDecide: 37
-    - value: categories=orc-miniatures
-      wouldDecide: 33
-    - value: categories=northern-alliance-kings-of-war
-      wouldDecide: 32
-    - value: categories=kings-of-war-undead
-      wouldDecide: 32
-    - value: categories=ogre-miniatures
-      wouldDecide: 31
-    - value: categories=firefight-forge-fathers
-      wouldDecide: 29
-    - value: categories=accessories-army-painter
-      wouldDecide: 28
-    - value: categories=army-painter
-      wouldDecide: 27
-    - value: categories=firefight-asterians
-      wouldDecide: 27
-    - value: categories=forces-of-nature
-      wouldDecide: 27
-    - value: categories=forces-of-the-abyss
-      wouldDecide: 27
-    - value: categories=nightstalkers
-      wouldDecide: 26
-    - value: categories=salamanders
-      wouldDecide: 26
-    - value: categories=dwarfs-miniatures
-      wouldDecide: 26
-    - value: categories=trident-realm-of-neritica
-      wouldDecide: 26
-    - value: categories=painting-modelling
-      wouldDecide: 25
-    - value: categories=forge-fathers
-      wouldDecide: 24
-    - value: categories=deals-and-offers
-      wouldDecide: 24
-    - value: categories=halfling-miniatures
-      wouldDecide: 23
-    - value: categories=firefight-enforcers
-      wouldDecide: 22
-    - value: categories=firefight-marauders
-      wouldDecide: 22
-    - value: categories=xirkaali
-      wouldDecide: 22
-    - value: categories=firefight
-      wouldDecide: 21
-    - value: categories=firefight-veer-myn
-      wouldDecide: 21
-    - value: categories=abyssal-dwarf
-      wouldDecide: 21
-    - value: categories=dungeon-saga
-      wouldDecide: 20
-    - value: categories=firefight-plague
-      wouldDecide: 20
-    - value: categories=veer-myn
       wouldDecide: 19
-    - value: categories=plague
+    - value: categories=deals-and-offers
       wouldDecide: 19
     - value: categories=accessories-kings-of-war
-      wouldDecide: 19
-    - value: categories=empire-of-dust
-      wouldDecide: 19
+      wouldDecide: 18
+    - value: categories=firefight-asterians
+      wouldDecide: 16
+    - value: categories=dungeon-saga
+      wouldDecide: 15
+    - value: categories=firefight-getting-started
+      wouldDecide: 15
+    - value: categories=walking-dead-collections
+      wouldDecide: 15
+    - value: categories=salamanders
+      wouldDecide: 14
+    - value: categories=dreadball
+      wouldDecide: 13
+    - value: categories=northern-alliance-kings-of-war
+      wouldDecide: 13
+    - value: categories=hellboy
+      wouldDecide: 12
+    - value: categories=firefight-enforcers
+      wouldDecide: 12
+    - value: categories=accessories-army-painter
+      wouldDecide: 11
+    - value: categories=halo-flashpoint-latest-releases
+      wouldDecide: 11
+    - value: categories=xirkaali
+      wouldDecide: 11
+    - value: categories=basilean
+      wouldDecide: 11
+    - value: categories=dwarfs-miniatures
+      wouldDecide: 11
+    - value: categories=army-painter
+      wouldDecide: 10
+    - value: categories=firefight-marauders
+      wouldDecide: 10
+    - value: categories=4th-edition-launch
+      wouldDecide: 10
+    - value: categories=ogre-miniatures
+      wouldDecide: 10
+    - value: categories=accessories-dreadball
+      wouldDecide: 9
+    - value: categories=firefight-forge-fathers
+      wouldDecide: 9
+    - value: categories=deadonze-matsudan
+      wouldDecide: 9
     - value: categories=elves
-      wouldDecide: 19
+      wouldDecide: 9
+    - value: categories=kings-of-war-undead
+      wouldDecide: 9
+    - value: categories=painting-modelling
+      wouldDecide: 8
+    - value: categories=halo-flashpoint-banished
+      wouldDecide: 8
+    - value: categories=halo-flashpoint-getting-started
+      wouldDecide: 8
+    - value: categories=firefight-gcps
+      wouldDecide: 8
+    - value: categories=firefight-veer-myn
+      wouldDecide: 8
+    - value: categories=firefight
+      wouldDecide: 8
+    - value: categories=firefight-plague
+      wouldDecide: 8
+    - value: categories=plague
+      wouldDecide: 8
     - value: categories=ratkin
-      wouldDecide: 19
+      wouldDecide: 8
+    - value: categories=vallejo
+      wouldDecide: 8
+    - value: categories=hellboy-rpg
+      wouldDecide: 7
+    - value: categories=veer-myn
+      wouldDecide: 7
     - value: categories=enforcers
-      wouldDecide: 18
-    - value: categories=goblin-miniatures
-      wouldDecide: 18
-    - value: categories=twilight-kin
-      wouldDecide: 18
+      wouldDecide: 7
   mfr-para-bellum:
     - value: categories=conquest
-      wouldDecide: 322
+      wouldDecide: 27
     - value: categories=factions
-      wouldDecide: 317
-    - value: categories=offers
-      wouldDecide: 54
-    - value: categories=hundred-kingdoms
-      wouldDecide: 46
-    - value: categories=new-upcoming
-      wouldDecide: 37
-    - value: categories=start-here
-      wouldDecide: 37
-    - value: categories=dweghom
-      wouldDecide: 36
-    - value: categories=nords
-      wouldDecide: 35
+      wouldDecide: 22
     - value: categories=spires
-      wouldDecide: 33
-    - value: categories=wadrhun
-      wouldDecide: 32
-    - value: categories=old-dominion
-      wouldDecide: 31
-    - value: categories=city-states
-      wouldDecide: 30
-    - value: categories=sorcerer-kings
-      wouldDecide: 26
-    - value: categories=yoroni
-      wouldDecide: 24
-    - value: categories=weaver-courts
-      wouldDecide: 24
-    - value: categories=first-blood
-      wouldDecide: 21
-    - value: categories=pre-orders
-      wouldDecide: 18
-    - value: categories=new-releases
-      wouldDecide: 18
+      wouldDecide: 19
     - value: categories=limited-editions
-      wouldDecide: 16
-    - value: categories=2000pt-armies
       wouldDecide: 10
-    - value: categories=the-last-argument-of-kings
-      wouldDecide: 8
-    - value: categories=erp
+    - value: categories=new-releases
+      wouldDecide: 5
+    - value: categories=new-upcoming
+      wouldDecide: 5
+    - value: categories=start-here
+      wouldDecide: 4
+    - value: categories=2000pt-armies
       wouldDecide: 3
+    - value: categories=yoroni
+      wouldDecide: 1
+    - value: categories=offers
+      wouldDecide: 1
+    - value: categories=hundred-kingdoms
+      wouldDecide: 1
+    - value: categories=dweghom
+      wouldDecide: 1
+    - value: categories=first-blood
+      wouldDecide: 1
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
   mfr-steamforged:
@@ -615,94 +600,86 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 531
+      wouldDecide: 126
     - value: breadcrumbs=Miniatures
-      wouldDecide: 529
+      wouldDecide: 124
     - value: breadcrumbs=Infinity
-      wouldDecide: 149
-    - value: breadcrumbs=Marvel Crisis Protocol
-      wouldDecide: 84
-    - value: breadcrumbs=Kings of War
-      wouldDecide: 82
-    - value: breadcrumbs=Malifaux
-      wouldDecide: 78
-    - value: breadcrumbs=Warcrow
-      wouldDecide: 51
+      wouldDecide: 35
     - value: breadcrumbs=More Miniatures
-      wouldDecide: 36
+      wouldDecide: 35
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 29
-    - value: breadcrumbs=Star Wars Legion
-      wouldDecide: 26
-    - value: breadcrumbs=Panoceania
-      wouldDecide: 18
-    - value: breadcrumbs=Ariadna
-      wouldDecide: 18
-    - value: breadcrumbs=Nomads
-      wouldDecide: 16
-    - value: breadcrumbs=Haqqislam
+    - value: breadcrumbs=Kings of War
+      wouldDecide: 20
+    - value: breadcrumbs=Malifaux
       wouldDecide: 14
-    - value: breadcrumbs=Yu Jing
-      wouldDecide: 13
-    - value: breadcrumbs=Star Wars Shatterpoint
-      wouldDecide: 11
-    - value: breadcrumbs=Combined Army
-      wouldDecide: 10
-    - value: breadcrumbs=NA2
+    - value: breadcrumbs=Warcrow
       wouldDecide: 8
     - value: breadcrumbs=Games Workshop
       wouldDecide: 8
-    - value: breadcrumbs=Aleph
-      wouldDecide: 7
     - value: breadcrumbs=Warhammer 40K
       wouldDecide: 7
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 6
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
+    - value: breadcrumbs=Nomads
+      wouldDecide: 2
+    - value: breadcrumbs=Panoceania
+      wouldDecide: 2
     - value: breadcrumbs=Roleplaying
       wouldDecide: 2
     - value: breadcrumbs=5th Edition Fantasy
       wouldDecide: 2
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Movement & Range Tool Pack'
+    - value: 'breadcrumbs=Infinity: Bases 25mm (20)'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: War of Kings - Character and Crisis Card Pack'
+    - value: 'breadcrumbs=Infinity: Navajo Outpost Scenery Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Mojo Ball Scenario Pack'
+    - value: 'breadcrumbs=Infinity: Salvora Governmental Complex Scenery Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel: Crisis Protocol - Operation - Zero Tolerance Character & Crisis Card Pack'
+    - value: 'breadcrumbs=Infinity: Code One - Kaldstrom Colonial Settlement Scenery Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Heimdall & Skurge'
+    - value: 'breadcrumbs=Infinity: Salvora Technopole Scenery Expansion Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Emma Frost and Psylocke'
+    - value: 'breadcrumbs=Infinity: Code One - Kaldstrom Scenery Expansion Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Apocalypse - Character Pack'
+    - value: 'breadcrumbs=Infinity: Akashi Site Scenery Pack'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Weapon X & Maverick - Character Pack'
+    - value: 'breadcrumbs=Infinity: Endsong'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Bishop & Nightcrawler'
+    - value: 'breadcrumbs=Infinity: Daedalus'' Fall (Hardcover)'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Klaw & M''Baku'
+    - value: 'breadcrumbs=Infinity: Uprising (Hardcover)'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Yondu & Nova - Character Pack'
+    - value: 'breadcrumbs=Infinity: Human Sphere N3'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel: Crisis Protocol - Blue Marvel & Spectrum Character Pack'
+    - value: breadcrumbs=Aristeia! AGL (Aristiea! Global League) - Bixie Edition
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Squirrel Girl & Gwenpool'
+    - value: breadcrumbs=Aristeia!
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Asgardians - Affliation Pack'
+    - value: breadcrumbs=Aristeia! Maximus 'Thermopylae'
       wouldDecide: 1
-    - value: 'breadcrumbs=Marvel Crisis Protocol: Uncanny X-Men - Affiliation Pack'
+    - value: breadcrumbs=Aristeia! Parvati Victorian Automata
+      wouldDecide: 1
+    - value: breadcrumbs=Warcrow Adventures
+      wouldDecide: 1
+    - value: 'breadcrumbs=Warcrow Adventures: Deathclaws of the Dream'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Warcrow Adventures: They Came From the Fog'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Warcrow Adventures: The Underground Rascals'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Warcrow: Beyond Winds from the North - Battlepack Expansion'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Warcrow: The Song of the Dormant - 2 Player Introductory Battle Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Warcrow: Beyond The Song of the Dormant'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Blast From the Past - ITS (Infinity Tournament System) Season 13'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Breakdown - Competition Pack ITS (Infinity Tournament System) Season 12'
       wouldDecide: 1
   ret-goblingaming:
-    - value: productType=Expansions
-      wouldDecide: 2
-    - value: tags=Sci-fi
-      wouldDecide: 2
-    - value: tags=Tabletop Games
-      wouldDecide: 2
-    - value: vendor=Mantic Games
-      wouldDecide: 2
     - value: productType=Aerosols
       wouldDecide: 1
     - value: tags=Aerosols
@@ -724,30 +701,22 @@ unmapped:
       wouldDecide: 89
     - value: tags=Middle-Earth - Good
       wouldDecide: 88
-    - value: tags=Atomic Mass Games
-      wouldDecide: 76
-    - value: vendor=Atomic Mass Games
-      wouldDecide: 76
     - value: tags=Vallejo
       wouldDecide: 61
     - value: vendor=Vallejo
       wouldDecide: 61
     - value: tags=Middle-Earth - Evil
       wouldDecide: 51
-    - value: tags=CMON
-      wouldDecide: 47
-    - value: vendor=CMON
-      wouldDecide: 47
+    - value: tags=Atomic Mass Games
+      wouldDecide: 50
+    - value: vendor=Atomic Mass Games
+      wouldDecide: 50
     - value: tags=Neuheiten Games Workshop
       wouldDecide: 40
     - value: tags=The Army Painter
       wouldDecide: 38
     - value: vendor=The Army Painter
       wouldDecide: 38
-    - value: tags=Mantic Games
-      wouldDecide: 36
-    - value: vendor=Mantic Games
-      wouldDecide: 36
     - value: tags=AK-Interactive
       wouldDecide: 32
     - value: vendor=AK-Interactive
@@ -756,13 +725,9 @@ unmapped:
       wouldDecide: 28
     - value: tags=ABTEILUNG 502*
       wouldDecide: 27
-    - value: tags=Grundspiel und Zubehör SWL
-      wouldDecide: 25
-    - value: tags=Star Wars Shatterpoint
-      wouldDecide: 21
-    - value: tags=Galaktische Republik SWL
-      wouldDecide: 20
     - value: tags=Grundiersprays Army Painter
+      wouldDecide: 18
+    - value: tags=Galaktische Republik SWL
       wouldDecide: 18
     - value: tags=Warpaints Fanatic Effects
       wouldDecide: 17
@@ -774,86 +739,72 @@ unmapped:
       wouldDecide: 15
     - value: tags=40k Grundboxen und Regelbücher
       wouldDecide: 14
-    - value: tags=Rebellenallianz SWL
-      wouldDecide: 13
-    - value: tags=Separatisten SWL
+    - value: tags=Star Wars Shatterpoint
       wouldDecide: 12
     - value: tags=Rivendell / Bruchtal
       wouldDecide: 12
     - value: tags=Isengard
       wouldDecide: 12
+    - value: tags=Mantic Games
+      wouldDecide: 12
+    - value: vendor=Mantic Games
+      wouldDecide: 12
     - value: tags=VALLEJO TEXTUREN*
       wouldDecide: 12
     - value: tags=Decals & Gelände
       wouldDecide: 12
+    - value: tags=Grundspiel und Zubehör SWL
+      wouldDecide: 11
     - value: tags=Mordor
       wouldDecide: 11
-    - value: tags=ASIF Startersets und Zubehör
+    - value: tags=Separatisten SWL
+      wouldDecide: 10
+    - value: tags=Rebellenallianz SWL
       wouldDecide: 10
     - value: tags=Shire / Auenland
       wouldDecide: 10
     - value: tags=Orks
       wouldDecide: 10
+    - value: tags=AoS Grundboxen und Regelbücher
+      wouldDecide: 9
+    - value: tags=Angmar
+      wouldDecide: 9
+    - value: tags=Fellowship / Gefährten
+      wouldDecide: 9
   ret-tistaminis:
-    - value: vendor=Reaper Miniatures
-      wouldDecide: 110
-    - value: tags=Reaper Miniatures
-      wouldDecide: 98
-    - value: vendor=Mantic
-      wouldDecide: 79
-    - value: vendor=Green Stuff World
-      wouldDecide: 57
-    - value: tags=Kings of War
-      wouldDecide: 43
-    - value: tags=Green Stuff World
-      wouldDecide: 42
     - value: vendor=GW-OOP
-      wouldDecide: 30
-    - value: tags=Green Stuff World Supplies
       wouldDecide: 30
     - value: vendor=Warlord Games
       wouldDecide: 26
     - value: vendor=GW-LOCAL
       wouldDecide: 21
-    - value: tags=Green Stuff World Other
-      wouldDecide: 18
     - value: tags=Amazon
       wouldDecide: 16
-    - value: vendor=Wyrd
-      wouldDecide: 12
+    - value: vendor=Mantic
+      wouldDecide: 15
     - value: tags=Gamesworkshop
       wouldDecide: 11
     - value: tags=Orks
       wouldDecide: 11
-    - value: tags=Malifaux
-      wouldDecide: 11
     - value: tags=warhammer preorder
-      wouldDecide: 10
-    - value: tags=Nightstalkers
-      wouldDecide: 10
-    - value: tags=Twilight Kin
       wouldDecide: 10
     - value: tags=GW Accessories
       wouldDecide: 9
+    - value: vendor=Green Stuff World
+      wouldDecide: 9
     - value: tags=Bolt Action
       wouldDecide: 9
-    - value: tags=KOW Armada
-      wouldDecide: 8
     - value: tags=Wargames Illustrated
       wouldDecide: 8
     - value: vendor=GW-WEB
       wouldDecide: 7
-    - value: tags=Firefight
-      wouldDecide: 6
-    - value: tags=Northern Alliance
-      wouldDecide: 6
+    - value: tags=Green Stuff World
+      wouldDecide: 7
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 5
     - value: productType=Miniatures - Plastic
       wouldDecide: 5
     - value: tags=Space Marines
-      wouldDecide: 5
-    - value: tags=Epic Warpath
       wouldDecide: 5
     - value: tags=KOW Other
       wouldDecide: 5
@@ -865,8 +816,6 @@ unmapped:
       wouldDecide: 4
     - value: tags=40k Terrain
       wouldDecide: 4
-    - value: tags=Basilean
-      wouldDecide: 4
     - value: tags=Pre-Order
       wouldDecide: 4
     - value: tags=Achtung Panzer
@@ -875,14 +824,34 @@ unmapped:
       wouldDecide: 3
     - value: tags=Horus Heresy
       wouldDecide: 3
-  seed-curated:
-    - value: productType=single_kit
+    - value: tags=Evil
       wouldDecide: 3
-    - value: productType=starter_set
+    - value: tags=Warhammer
+      wouldDecide: 3
+    - value: tags=Skaven
       wouldDecide: 2
-    - value: 'contents={''quantity'': 4, ''unitName'': ''Fusiliers''}'
-      wouldDecide: 1
-    - value: 'contents={''baseSize'': ''27mm'', ''quantity'': 12, ''unitName'': ''Force-Grown Drones''}'
-      wouldDecide: 1
-    - value: 'contents={''baseSize'': ''27mm'', ''quantity'': 12, ''unitName'': ''Militia''}'
+    - value: tags=Chaos Space Marines
+      wouldDecide: 2
+    - value: tags=Old World
+      wouldDecide: 2
+    - value: productType=Toys & Hobbies:Action Figures:Military & Adventure
+      wouldDecide: 2
+    - value: tags=HH Vehicle
+      wouldDecide: 2
+    - value: tags=Orcs and Goblins
+      wouldDecide: 2
+    - value: productType=Paints & Hobby Supplies
+      wouldDecide: 2
+    - value: productType=Collectible Figures
+      wouldDecide: 2
+    - value: tags=Action Figure
+      wouldDecide: 2
+    - value: tags=No Sale
+      wouldDecide: 2
+    - value: tags=Sale
+      wouldDecide: 2
+    - value: tags=Rules & Supplements
+      wouldDecide: 2
+  seed-curated:
+    - value: productType=starter_set
       wouldDecide: 1

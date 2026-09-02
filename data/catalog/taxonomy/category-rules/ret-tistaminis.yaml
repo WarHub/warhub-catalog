@@ -71,6 +71,32 @@ clauses:
     hintContainsAny:
       tags: ['Army Painter Brushes', 'Army Painter Tufts']
 
+  # GREEN STUFF WORLD'S SUPPLY SHELVES, and this store is their ONLY product-side source --
+  # `mfr-greenstuffworld` is a paints feed and not one of these 56 products appears among its 477
+  # rows, so this is not a join gap.
+  #
+  # DO NOT GRADE THESE TAGS: the grading set is biased the wrong way and scores them 0/14. The
+  # decided products under `Green Stuff World` are 13 paint out of 14, not because it is a paint
+  # shelf but because GSW's paints get decided by the paint-barcode rung, the lexicon and the
+  # already-mapped `Green Stuff World Paints` tag, while the SUPPLIES get decided by nothing at
+  # all. What stands behind this clause is a full read of all 56 names: 8 `Basing Sets`, 5
+  # waterslide decal sheets, 12 paint racks and organisers, 2 brush sets, glue cleaner, magnetic
+  # sheet, magnifying lamp and glasses, camouflage nets, resin skulls, silicone moulds, base
+  # adapters, an air compressor, a paint shaker.
+  #
+  # THE BROAD `Green Stuff World` TAG STAYS OUT -- it is the parent department and contains the
+  # paints. KNOWN RESIDUE, left undecided deliberately: three `Refillable paint pen` / `Refillable
+  # Marker` products. `ret-goblingaming.yaml` maps `Paint Marker` to `paint` because a marker
+  # deposits colour, but these are EMPTY refillable barrels, which is the same colourless boundary
+  # `categories.yaml` calls its thinnest.
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['Green Stuff World Supplies', 'Green Stuff World Other']
+    note: >-
+      47 rows, no control, full name read. Runs after the `Green Stuff World Paints` clause above.
+      Deciding these also settles 47 game systems for free: `hobby-auxiliary` is in
+      `_NO_GAME_SYSTEM_CATEGORIES`, so they become `not-applicable` rather than `unknown`.
+
   # ---------------------------------------------------------------------------------------------
   # NO gameSystem CLAUSES, and it is worth saying why rather than leaving a gap. This store's game
   # tags are excellent -- `Victory at Sea` 94/94, `Old World` 396/396, `Konflikt` 53/53,
