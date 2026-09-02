@@ -140,6 +140,12 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
         Assert.Equal("in_stock", alpha.GetProperty("availability").GetString());
         Assert.Equal("discontinued", beta.GetProperty("status").GetString());
         Assert.Equal("out_of_stock", beta.GetProperty("availability").GetString());
+        // The role axis: present on the hobby supply that carries one, absent -- not null -- on a
+        // miniature, and its archive-side basis never crosses into the published shape.
+        JsonElement gamma = products.EnumerateArray().First(p => p.GetProperty("name").GetString() == "Gamma Powder (Pack of 6)");
+        Assert.Equal("pigment", gamma.GetProperty("role").GetString());
+        Assert.False(alpha.TryGetProperty("role", out _));
+        Assert.False(gamma.TryGetProperty("roleBasis", out _));
     }
 
     [Fact]
