@@ -8,7 +8,7 @@ summary:
     paint-barcode: 9
     stated: 1986
     unknown: 3489
-  decidedThisRun: 23568
+  decidedThisRun: 0
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -226,6 +226,9 @@ conflicts:
   - entity: mantic-games/MGKWRK402
     type: gameSystem-disagreement
     detail: catalog says kings-of-war (classified); mfr-manticgames categories~firefight-enforcers,firefight-gcps,firefight-plague,firefight-veer-myn,firefight-asterians,firefight-forge-fathers,firefight-marauders,mazon-labs-firefight,nightstalkers-firefight-factions,enforcers,plague,veer-myn,forge-fathers,gcps,marauders,asterian,rebs,nameless,mazon-labs says deadzone+firefight
+  - entity: mantic-games/MGSS308
+    type: gameSystem-disagreement
+    detail: catalog says deadzone (stated); mantic-games code~^(MGSS|KSSS) says star-saga
   - entity: mantic-games/MGTC244
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain'
@@ -238,9 +241,18 @@ conflicts:
   - entity: mantic-games/MGTC248
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain'
+  - entity: mantic-games/MGWPM103
+    type: gameSystem-disagreement
+    detail: catalog says firefight (stated); mantic-games code~^MGWPM says warpath
+  - entity: mantic-games/MGWPM109
+    type: gameSystem-disagreement
+    detail: catalog says walking-dead-all-out-war (stated); mantic-games code~^MGWPM says warpath
   - entity: mantic-games/giant-chovar-psychozoan
     type: gameSystem-disagreement
     detail: catalog says deadzone (stated); mfr-manticgames categories~dreadball,teams,mvp,books-dreadball,featured-products-dreadball,getting-started-dreadball says dreadball
+  - entity: mantic-games/marauder-raptor-warpath
+    type: gameSystem-disagreement
+    detail: catalog says deadzone (stated); mantic-games name~(?<!epic[ -])\bwarpath\b(?!\s*(?:firefight|deadzone|universe)) says warpath
   - entity: mantic-games/terraincrate-6x4-fantastic-fantasy-battle-mat
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain'

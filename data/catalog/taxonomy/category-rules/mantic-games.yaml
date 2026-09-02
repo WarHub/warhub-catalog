@@ -82,6 +82,85 @@ clauses:
       17 fills, no control. Army Painter Battlefields, resold: tufts, static grass, snow, razor
       wire, rocks. All 17 names read.
 
+  # ===========================================================================================
+  # WHICH GAME. FIVE SLUGS WERE ALREADY DECLARED IN `game-systems.yaml` AND REACHED NOTHING --
+  # `epic-warpath`, `dungeon-saga`, `star-saga`, `hellboy` and `overdrive` have zero products
+  # catalog-wide. The products exist, across four sources; no rule ever named them. This is the
+  # cheapest decision in the residue: 197 products, and no taxonomy question to settle first.
+  #
+  # Each game is claimed three ways, because its products arrive from different places: Mantic's
+  # own code, the shelf `mfr-manticgames.yaml` files it under, and the product's name (which is
+  # what reaches the ret-goblingaming and ret-tistaminis rows, whose ids read
+  # `epic-warpath-asterian-core-army-pack`).
+  #
+  # THE `epic` GUARD IS LOAD-BEARING. `gameSystems` accumulates every matching clause, so a bare
+  # `\bwarpath\b` would hand every Epic Warpath product BOTH games. Epic Warpath is a separate
+  # game at a different scale, not an edition of Warpath, and the lookbehind says so.
+  - codeMatches: '^(MG|KS)EW'
+    gameSystems: [epic-warpath]
+  - nameMatches: '\bepic[ -]?warpath\b'
+    gameSystems: [epic-warpath]
+  - codeMatches: '^(MGDS|MGCD|KSDS)'
+    gameSystems: [dungeon-saga]
+  - nameMatches: '\bdungeon\s*saga\b'
+    gameSystems: [dungeon-saga]
+  - codeMatches: '^(MGHB|KSHB)'
+    gameSystems: [hellboy]
+  - nameMatches: '\bhellboy\b'
+    gameSystems: [hellboy]
+  - codeMatches: '^(MGSS|KSSS)'
+    gameSystems: [star-saga]
+  - nameMatches: '\bstar\s*saga\b'
+    gameSystems: [star-saga]
+  - codeMatches: '^MGOD'
+    gameSystems: [overdrive]
+  - nameMatches: '\boverdrive\b'
+    gameSystems: [overdrive]
+
+  # WARPATH IS A REAL, DISTINCT, RETIRED GAME, and the slug is minted here rather than folded.
+  # Mantic's own history says Warpath was its 28mm mass-battle sci-fi game through three editions
+  # and that "Firefight took over from Warpath at 28mm scale" in 2022. `legacy-catalog` had no word
+  # for it and filed its products under `deadzone` and `firefight` -- which is not simply wrong,
+  # because the MODELS are shared across all three and 50 of the 89 already publish
+  # `[deadzone, firefight]` correctly. What is wrong is the omission, and it is sharpest on the
+  # ten products that belong to Warpath ALONE: `Warpath: 2nd Edition Rulebook CLASSIC`,
+  # `Warpath: First Strike (Novel)`, `Warpath Plastic Counter Set`, `Warpath Command Dice`,
+  # `Warpath Objective Cards`, `Warpath: Operation Heracles Battle Set`.
+  #
+  # IT CLAIMS THE SYSTEM BLOCK ONLY -- `MGWPM*` -- AND NOT THE MODELS, which is the whole care
+  # required here. Warpath's rulebook, novel, counter set, command dice, objective cards and
+  # battle set belong to Warpath and nothing else. Its FACTION blocks are the shared sci-fi range,
+  # and 50 of those 89 products already correctly publish `[deadzone, firefight]`; a clause
+  # proposing `[warpath]` for them is not a superset of what they already say, so it would report
+  # 14 disagreements and change nothing.
+  #
+  # WHETHER THOSE MODELS ARE ALSO WARPATH PRODUCTS IS A REAL QUESTION AND IT IS LEFT OPEN. Mantic
+  # says the range is shared across the Warpath universe, which argues for
+  # `[deadzone, firefight, warpath]` on all 89 -- but that would assert a third membership for
+  # every model on the strength of a marketing sentence, including for products legacy files
+  # under one game alone. The evidence that settled Deadzone/Firefight was a per-shelf purity
+  # measurement against an independent control, and no such measurement exists for Warpath
+  # because no source shelves it. Recorded here rather than guessed.
+  # "WARPATH" NAMES BOTH THE GAME AND THE UNIVERSE, which is the same polysemy that made the bare
+  # `bolt-action` tag unusable for Warlord -- and on a list-valued field a polysemous token does
+  # not dilute an answer, it invents a membership. `Warpath: Firefight Rulebook` is a FIREFIGHT
+  # book; `Warpath Universe` covers Deadzone, Firefight and Epic Warpath alike. Both lookarounds
+  # are load-bearing: the lookbehind keeps Epic Warpath out (a different game at a different
+  # scale, not an edition), the lookahead keeps the universe compounds out. 15 false
+  # disagreements before the guard, and every one of them a product of another Warpath game.
+  - codeMatches: '^MGWPM'
+    gameSystems: [warpath]
+  - nameMatches: '(?<!epic[ -])\bwarpath\b(?!\s*(?:firefight|deadzone|universe))'
+    gameSystems: [warpath]
+
+  # VANGUARD IS DELIBERATELY NOT MINTED, and the arithmetic is the argument. Mantic calls it "the
+  # sister game to Kings of War"; it has its own rulebook but "uses the existing Kings of War
+  # miniature range", and its releases feed back into Kings of War through Clash of Kings. There
+  # is no Vanguard shelf in `mfr-manticgames` at all, so the only signals are the code and the
+  # name -- and 79 of its 80 products ALREADY publish `kings-of-war`. A `vanguard` slug would
+  # decide exactly ONE currently-undecided product, and `kings-of-war` on a Vanguard warband box
+  # is true rather than a lie. Same arithmetic refused `first-blood` for Para Bellum.
+
   # WHAT THIS TABLE CANNOT REACH, so the next person does not re-run the search:
   #
   #   `BUNDLE` (93) -- the sku is literally the string BUNDLE, and the contents are genuinely
