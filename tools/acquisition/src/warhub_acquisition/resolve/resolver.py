@@ -301,8 +301,9 @@ def joined_evidence(paths: DataPaths) -> JoinedEvidence:
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     sku_ids = {sid: d.skuIsListingId for sid, d in descriptors.items()}
     shelves = {sid: d.manufacturerIsShelf for sid, d in descriptors.items()}
+    hint_codes = {sid: d.codeFromHint for sid, d in descriptors.items() if d.codeFromHint}
     joined = join_observations(
-        selected.observations, taxonomy, kinds, matches, sku_ids, shelves
+        selected.observations, taxonomy, kinds, matches, sku_ids, shelves, hint_codes
     )
     return JoinedEvidence(joined.entities, taxonomy, kinds, descriptors)
 
@@ -404,7 +405,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
 
     sku_ids = {sid: d.skuIsListingId for sid, d in descriptors.items()}
     shelves = {sid: d.manufacturerIsShelf for sid, d in descriptors.items()}
-    joined = join_observations(observations, taxonomy, kinds, matches, sku_ids, shelves)
+    hint_codes = {sid: d.codeFromHint for sid, d in descriptors.items() if d.codeFromHint}
+    joined = join_observations(
+        observations, taxonomy, kinds, matches, sku_ids, shelves, hint_codes
+    )
 
     conflicts: list[dict] = list(joined.ambiguous) + crossover_conflicts
     ean_resolutions = {}

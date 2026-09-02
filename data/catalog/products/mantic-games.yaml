@@ -19356,6 +19356,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceUsd: 25.0
+    priceEur: 17.9
     priceCad: 40.0
     url: https://www.manticgames.com/halo-flashpoint/fireteam-hydra-spartans-pack/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/01/halo-flashpoint-fireteam-hydra-pack-coloured.webp
@@ -19367,6 +19368,7 @@ products:
       - mfr-manticgames:492302
       - ret-gamenerdz:/halo-flashpoint-fireteam-hydra
       - ret-goblingaming:halo-flashpoint-fireteam-hydra
+      - ret-radaddel:halo-flashpoint-unsc-fireteam-hydra
       - ret-tistaminis:halo-flashpoint-fireteam-hydra
   - id: mantic-games/MGHAU303
     name: Fireteam Phoenix – Show Special Limited Edition Fireteam
@@ -25937,6 +25939,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 0.0
     priceUsd: 0.0
+    priceEur: 24.1
     url: https://www.manticgames.com/kings-of-war/rules/kings-of-war-compendium/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2022/09/KoW-3-2022-book-mockup.webp
     description: |-
@@ -25946,6 +25949,8 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/kings-of-war-3rd-edition-compendium-current-core-rules-discontinued
       - mfr-manticgames:429881
+      - ret-radaddel:/kings-of-war-3rd-edition-2022-englisch
+      - ret-radaddel:kings-of-war-3rd-edition-2022-englisch
   - id: mantic-games/MGKWM118
     name: Artefact and Spell Cards DISCONTINUED
     manufacturer: mantic-games
@@ -28923,6 +28928,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceUsd: 25.0
+    priceEur: 19.3
     url: https://www.manticgames.com/kings-of-war/riftforged-orcs/ambarox/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2022/02/KoW-Riftforged-Ambarox-right-isolated.jpg
     description: |-
@@ -28931,6 +28937,8 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/riftforged-orc-ambarox
       - mfr-manticgames:397058
+      - ret-radaddel:/orc-ambarox
+      - ret-radaddel:orc-ambarox
   - id: mantic-games/MGKWO404
     name: Riftforged Orc Stormforged Shrine
     manufacturer: mantic-games
@@ -65761,20 +65769,6 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/unsc-faction-bundle-v2.webp
     evidence:
       - mfr-manticgames:548729
-  - id: mantic-games/halo-flashpoint-unsc-fireteam-hydra
-    name: 'Halo Flashpoint: UNSC Fireteam Hydra'
-    manufacturer: mantic-games
-    sku: '131801'
-    gameSystemsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 17.9
-    url: https://radaddel.de/products/halo-flashpoint-unsc-fireteam-hydra
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/131801-halo-flashpoint-unsc-fireteam-hydra-mghau302-1.webp?v=1781219311
-    evidence:
-      - ret-radaddel:halo-flashpoint-unsc-fireteam-hydra
   - id: mantic-games/hellboy-the-board-game
     name: Hellboy:The Board Game
     manufacturer: mantic-games
@@ -66101,21 +66095,6 @@ products:
     evidence:
       - ret-radaddel:/kings-of-war-3rd-edition-2022-deutsch
       - ret-radaddel:kings-of-war-3rd-edition-2022-deutsch
-  - id: mantic-games/kings-of-war-3rd-edition-2022-englisch
-    name: Kings Of War 3rd Edition (2022) (englisch)
-    manufacturer: mantic-games
-    sku: '125624'
-    gameSystemsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 24.1
-    url: https://www.radaddel.de/kings-of-war-3rd-edition-2022-englisch
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125624-kings-of-war-3rd-edition-2022-englisch-mgkwm117-1.webp?v=1781207142
-    evidence:
-      - ret-radaddel:/kings-of-war-3rd-edition-2022-englisch
-      - ret-radaddel:kings-of-war-3rd-edition-2022-englisch
   - id: mantic-games/kings-of-war-3rd-edition-ambush-rules-french-digital-discontinued
     name: Kings of War 3rd Edition Ambush Rules French Digital – DISCONTINUED
     manufacturer: mantic-games
@@ -67838,21 +67817,6 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/orbital-drop-bundle-v2.webp
     evidence:
       - mfr-manticgames:550937
-  - id: mantic-games/orc-ambarox-von-mantic-games
-    name: Orc Ambarox von Mantic Games
-    manufacturer: mantic-games
-    sku: '125649'
-    gameSystemsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 19.3
-    url: https://www.radaddel.de/orc-ambarox
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125649-orc-ambarox-mgkwo403-1.webp?v=1781207165
-    evidence:
-      - ret-radaddel:/orc-ambarox
-      - ret-radaddel:orc-ambarox
   - id: mantic-games/orc-ax-warriors-horde
     name: Orc Ax / Warriors Horde
     manufacturer: mantic-games

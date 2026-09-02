@@ -658,6 +658,77 @@ def test_hand_reassignment_outranks_the_derived_shelf_correction() -> None:
     assert sorted(result.entities) == ["ak-interactive/AK11237", "army-painter/AK11237"]
 
 
+HOUSE_KINDS = {**KINDS, "ret-shop": "retailer", "mfr-gw": "manufacturer"}
+HINT_CODES = {"ret-shop": "tags"}
+
+
+def test_a_shop_house_number_takes_the_makers_code_from_its_own_tags() -> None:
+    # The shop numbers its listings itself, so the row has no product code and founds a second
+    # record under a slug of its own title -- next to the record the manufacturer's code already
+    # names. The real number is in the shop's tag list, beside the brand.
+    members = [
+        obs("mfr-gw:patrol", sku="99120101234", name="Combat Patrol: Necrons"),
+        obs(
+            "ret-shop:patrol",
+            sku="129011",
+            name="Combat Patrol: Necrons (deutsch) von Games Workshop",
+            hints={"tags": ["Warhammer 40.000", "99120101234", "Necrons"]},
+        ),
+    ]
+    before = join_observations(members, TAXONOMY, HOUSE_KINDS, Matches())
+    assert len(before.entities) == 2
+
+    after = join_observations(
+        members, TAXONOMY, HOUSE_KINDS, Matches(), None, None, HINT_CODES
+    )
+    assert list(after.entities) == ["games-workshop/99120101234"]
+
+
+def test_two_tag_codes_are_no_code_at_all() -> None:
+    # A tag list is prose. Where more than one value normalizes, the row keeps no code -- a wrong
+    # code MERGES two products, so silence is the cheaper failure.
+    members = [
+        obs("mfr-gw:patrol", sku="99120101234", name="Combat Patrol: Necrons"),
+        obs(
+            "ret-shop:bundle",
+            sku="129012",
+            name="Necron Bundle",
+            hints={"tags": ["99120101234", "99120105678"]},
+        ),
+    ]
+    result = join_observations(
+        members, TAXONOMY, HOUSE_KINDS, Matches(), None, None, HINT_CODES
+    )
+    assert sorted(result.entities) == ["games-workshop/99120101234", "games-workshop/necron-bundle"]
+
+
+def test_the_sources_own_sku_still_wins_where_it_normalizes() -> None:
+    # This supplies a code the source did not have; it never overrides one the source did.
+    members = [
+        obs(
+            "ret-shop:patrol",
+            sku="99120105678",
+            name="Combat Patrol: Necrons",
+            hints={"tags": ["99120101234"]},
+        )
+    ]
+    result = join_observations(
+        members, TAXONOMY, HOUSE_KINDS, Matches(), None, None, HINT_CODES
+    )
+    assert list(result.entities) == ["games-workshop/99120105678"]
+
+
+def test_a_source_that_declares_no_hint_reads_no_tags() -> None:
+    # Every shop's tag list is full of words; only a source that says where its codes live is read.
+    members = [
+        obs("mfr-gw:patrol", sku="99120101234", name="Combat Patrol: Necrons"),
+        obs("ret-shop:patrol", sku="129011", name="Kampfpatrouille",
+            hints={"tags": ["99120101234"]}),
+    ]
+    result = join_observations(members, TAXONOMY, HOUSE_KINDS, Matches(), None, None, {})
+    assert len(result.entities) == 2
+
+
 def test_reject_eans_unfuses_two_products_a_wrong_barcode_merged() -> None:
     # One source put product A's barcode on product B, and the (manufacturer, ean) union fused
     # them: B's product code stopped existing. Rejecting that one assertion splits them back apart

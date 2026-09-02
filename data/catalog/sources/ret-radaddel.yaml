@@ -60,3 +60,25 @@ contract:
 # 0 disagree. No group disagrees on the manufacturer either. That is the bijection this flag
 # asserts, and `join.py` re-checks it per group on every run rather than trusting this comment.
 skuIsListingId: true
+
+# ...AND THE MANUFACTURER'S ARTICLE NUMBER IS IN ITS TAGS -- see SourceDescriptor.codeFromHint.
+#
+# The paragraph above ends "0 of 11,804 rows normalize to a product code", and that was read as a
+# fact about this store. It is a fact about the FIELD. radaddel puts the real number in its tag
+# list next to the brand: handle `adepta-sororitas-armageddon-battalion` has sku `135478` and tag
+# `99120108120`; `0-2-needle-nozzle-0-2-top-line` has sku `135142` and tags
+# `[AK-Airbrush, AK-Interactive, AK9600-02]`.
+#
+# MEASURED 2026-09-01 over the 11,804 attributed rows: 4,376 carry exactly one tag that normalizes
+# under that row's own manufacturer -- 1,897 games-workshop, 1,405 ak-interactive, 788 vallejo,
+# 172 monument-hobbies, 47 cmon, 35 mantic-games, 21 warlord-games, 11 atomic-mass-games. A
+# further 948 warlord rows match two or more tags and are left alone by the uniqueness rule.
+#
+# THE CONTROL IS THE 1,779 THAT ALREADY LANDED IN THE PRODUCT THEIR TAG NAMES, joined by barcode or
+# by name: where the code can be checked independently, it is right. The other 1,253 rows are in a
+# SECOND record for a product that already exists -- `vallejo/model-air-097-medium-gunship-gray`
+# beside `vallejo/71097`, `ak-interactive/acrylic-thinner` beside `ak-interactive/AK712` -- because
+# a row with no code and no barcode founds an entity under a slug of this shop's German title.
+# 24 of the 1,253 carry a barcode that disagrees with the target's; those surface as conflicts
+# rather than being merged silently, which is the join's existing behaviour and the right one.
+codeFromHint: tags

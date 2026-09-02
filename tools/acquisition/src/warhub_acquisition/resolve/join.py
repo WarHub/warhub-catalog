@@ -111,6 +111,79 @@ def _listing_url(observation: Observation) -> str | None:
     return str(observation.url).split("?")[0].split("#")[0].rstrip("/").lower() or None
 
 
+def _barcoded_listings(
+    observations: list[Observation],
+    code_from_hint: dict[str, str],
+    sku_is_listing_id: dict[str, bool],
+) -> frozenset[str]:
+    """Observation keys whose LISTING already has a barcode -- see `_code_from_hint`.
+
+    For a source that declares `skuIsListingId`, one store article number is one listing however
+    many of this source's rows carry it, so a barcode on any of them is a barcode on all of them.
+    """
+    keys: set[str] = set()
+    by_sku: dict[tuple[str, str], list[Observation]] = {}
+    for observation in observations:
+        if observation.source_id not in code_from_hint:
+            continue
+        if canonical_ean(observation.ean) is not None:
+            keys.add(observation.key)
+        if observation.sku and sku_is_listing_id.get(observation.source_id):
+            by_sku.setdefault((observation.source_id, observation.sku), []).append(observation)
+    for members in by_sku.values():
+        if any(canonical_ean(m.ean) is not None for m in members):
+            keys.update(m.key for m in members)
+    return frozenset(keys)
+
+
+def _code_from_hint(
+    observation: Observation,
+    taxonomy: Taxonomy,
+    code_from_hint: dict[str, str],
+    barcoded_listings: frozenset[str],
+) -> str | None:
+    """The manufacturer's article number, where the source publishes it beside its own number.
+
+    See SourceDescriptor.codeFromHint. Exactly one candidate or nothing: a shop's tag list is
+    prose, and a code that names the wrong product MERGES two records.
+    """
+    hint = code_from_hint.get(observation.source_id)
+    if hint is None or not observation.manufacturer:
+        return None
+    if observation.key in barcoded_listings:
+        # A BARCODE IS ALREADY AN IDENTITY, AND A BETTER ONE. This repo's standing rule is that the
+        # barcode identifies the box in hand while a lister's catalogue number goes stale across a
+        # re-code -- the rule `supersession-stale-code` re-homing already rests on. A shop's tag is
+        # exactly such a catalogue number, so where the LISTING carries both, the barcode decides
+        # and the tag adds nothing: a barcoded row already joins the entity its barcode belongs to.
+        #
+        # THE UNIT IS THE LISTING, NOT THE ROW, and that distinction is what the second measurement
+        # cost. `ret-radaddel` is mid-strategy-change and holds 3,820 listings twice (see
+        # `skuIsListingId` on its descriptor); the older copy usually has the barcode and the newer
+        # one usually does not. Guarding per ROW left the newer copy free to take the tag code,
+        # and `skuIsListingId` then re-attached its barcoded twin -- and the manufacturer row that
+        # twin anchors -- to whatever the tag named.
+        #
+        # WITHOUT THIS, DECLARED SUPERSESSION PAIRS COLLAPSED INTO ONE RECORD: 15 guarding
+        # nothing, 12 guarding only the row. `ret-radaddel:soulblight-gravelords-lauka-vai-...`
+        # tags GW's CURRENT code `99120207229` while its own older twin carries the RETIRED
+        # product's barcode `5011921138999`, so taking the tag pulled `mfr-gw-trade:99120207086`
+        # into the current entity and `games-workshop/99120207086` -- a published id -- stopped
+        # existing. The union barrier could not see it: the pair is declared against `99120207138`,
+        # and the fusion happened onto a third code.
+        return None
+    value = (observation.hints or {}).get(hint)
+    if value is None:
+        return None
+    values = value if isinstance(value, (list, tuple, set)) else [value]
+    candidates = {
+        code
+        for raw in values
+        if (code := taxonomy.normalize_code(observation.manufacturer, str(raw)))
+    }
+    return next(iter(candidates)) if len(candidates) == 1 else None
+
+
 def _shelf_manufacturer_corrections(
     observations: list[Observation], manufacturer_is_shelf: dict[str, bool]
 ) -> tuple[dict[str, str], list[dict]]:
@@ -166,9 +239,11 @@ def join_observations(
     matches: Matches,
     sku_is_listing_id: dict[str, bool] | None = None,
     manufacturer_is_shelf: dict[str, bool] | None = None,
+    code_from_hint: dict[str, str] | None = None,
 ) -> JoinResult:
     result = JoinResult()
     sku_is_listing_id = sku_is_listing_id or {}
+    code_from_hint = code_from_hint or {}
     derived_manufacturers, shelf_reports = _shelf_manufacturer_corrections(
         observations, manufacturer_is_shelf or {}
     )
@@ -195,6 +270,9 @@ def join_observations(
                 observation.model_copy(update=update) if update else observation
             )
         observations = corrected_observations
+    # AFTER the corrections, because `rejectEans` takes barcodes away and a listing whose only
+    # barcode was disbelieved has none.
+    barcoded_listings = _barcoded_listings(observations, code_from_hint, sku_is_listing_id)
     ordered = sorted(observations, key=lambda o: _priority(o, kinds))
 
     # barcode-db observations must never MINT an entity -- they exist only to corroborate an
@@ -225,6 +303,8 @@ def join_observations(
         code = matches.reassignCodes.get(observation.key) or taxonomy.normalize_code(
             observation.manufacturer, observation.sku
         )
+        if code is None:
+            code = _code_from_hint(observation, taxonomy, code_from_hint, barcoded_listings)
         ean = canonical_ean(observation.ean)
         forced = matches.joins.get(observation.key)
         is_barcode_db = kinds.get(observation.source_id, "barcode-db") == "barcode-db"
