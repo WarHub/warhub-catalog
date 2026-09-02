@@ -48,12 +48,35 @@ manufacturers:
     # The second branch covers the lettered ranges the same stores use (`CBARI23`, `WW20009-0073`,
     # `GGB-DBR25`). `CVB` joins `COR` in codeStrip: it is `ret-gamenerdz`'s house prefix on 874
     # rows. Measured: 51 of 2,116 observations coded before, 2,024 after.
-    codePattern: '(?P<code>\d{6})(-\d{4})?|(?P<lettered>[A-Z]{2,4}[A-Z0-9-]*\d{2,})'
+    #
+    # THE LETTERED BRANCH DROPS THE SAME SUFFIX THE NUMERIC ONE DOES, since 2026-09-02. It used to
+    # swallow it -- `WW01001-0006` (goblingaming) and `WW01001` (gamenerdz) were two codes and two
+    # records for one Warcrow box, 32 times over. The lazy quantifier and the optional group are
+    # what make `fullmatch` leave the suffix out of the named group.
+    codePattern: '(?P<code>\d{6})(-\d{4})?|(?P<lettered>[A-Z]{2,4}[A-Z0-9-]*?\d{2,})(-\d{4})?'
     codeStrip: [COR, CVB]
     vendorNames: [Corvus Belli]
   - slug: mantic-games
     name: Mantic Games
     codePattern: '[A-Z]{2,10}\d{2,6}[A-Z]*'
+    # TWO RETAILER SPELLINGS OF MANTIC'S OWN `MG` PREFIX, both from `ret-gamenerdz` and neither
+    # ever written by Mantic. Measured 2026-09-02: `MAN…` and `MGC…` appear on 0 of 1,993 rows from
+    # manticgames.com and 0 of 1,463 legacy rows, and 92 + 20 times on gamenerdz -- `MANKWR407` is
+    # `MGKWR407`, `MGCKWR401` is `MGKWR401`. `MGC` LOOKED LIKE AN EDITION MARKER and is not: the
+    # "Kings of War 2nd Edition" in gamenerdz's titles is its own labelling, and for the 8 pairs
+    # where it says "Regiment" against Mantic's "Troop", Mantic's own page URL and image still say
+    # `regiment` -- the page was renamed, the box and its barcode were not. Every one of the 112
+    # pairs shares a barcode with the `MG` row it stands for.
+    codeRewrite:
+      - match: 'MAN([A-Z]+\d.*)'
+        replace: 'MG\1'
+        reason: gamenerdz prefix swap, 92 rows, 0 on the maker's own store
+      - match: 'MGC([A-Z]+\d.*)'
+        replace: 'MG\1'
+        reason: gamenerdz prefix swap, 20 rows, 0 on the maker's own store
+      - match: 'MGKW(VA[A-Z]\d.*)'
+        replace: 'MG\1'
+        reason: gamenerdz files Vanguard under Kings of War, `MGKWVAK102` for Mantic's `MGVAK102`; 3 rows
     vendorNames: [Mantic Games, Mantic]
   - slug: para-bellum
     name: Para Bellum
@@ -62,6 +85,21 @@ manufacturers:
   - slug: steamforged-games
     name: Steamforged Games
     codePattern: 'SF[A-Z0-9-]+'
+    # `ret-gamenerdz` WRITES A COMPANY PREFIX STEAMFORGED DOES NOT USE. Steamforged numbers its
+    # ranges `SF` + line + `-` + number -- `SFGT-023` (Godtear), `SFIK-MER320` (Iron Kingdoms),
+    # `SFEE-012` (Epic Encounters) -- and gamenerdz writes `SFG` + line + number with no hyphen:
+    # `SFGGT023`, `SFGIKMER320`, `SFGEE012`. Its `SFGT` is SF+GT, not SFG+T. 132 pairs, every one
+    # sharing a barcode with the maker's row; the 24 Godtear pairs read differently only because
+    # gamenerdz names the champion and followers where Steamforged names the expansion.
+    # gamenerdz writes the same prefix three ways -- `SFGGT023`, `SFGGT-023` and, on the Warmachine
+    # range, `SFSF-IKCRX055` for the maker's `SFIK-CRX055` -- and one rewrite per shape covers them.
+    codeRewrite:
+      - match: 'SFG([A-Z]{2})([A-Z]*)-?(\d.*)'
+        replace: 'SF\1-\2\3'
+        reason: gamenerdz, 132 rows; the two-letter line code is what the maker hyphenates after
+      - match: 'SFSF-([A-Z]{2})(.*)'
+        replace: 'SF\1-\2'
+        reason: gamenerdz's doubled company prefix on the Warmachine range
     # Steamforged tags vendor per in-house game line rather than by company name, and since
     # 2026-08 those lines are split across TWO of its own Shopify stores -- mfr-steamforged
     # (steamforged.com) and mfr-warmachine (warmachine.gg). One vendorNames list spans both: a
@@ -91,7 +129,11 @@ manufacturers:
     vendorNames: [Steamforged Games, Steamforged, Warmachine, 'Warmachine (app subscribers only)', Guild Ball, Godtear, Epic Encounters, 'Epic Encounters: Local Legends', Iron Kingdoms, P3 Paints]
   - slug: warlord-games
     name: Warlord Games
-    codePattern: '[0-9]{9,12}(-[0-9]{1,2})?|(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{6,}'
+    # A TRAILING `K` IS WARLORD'S OWN STORE SPELLING, NOT A PRODUCT: `403011012K` and `WGB-BI-35K`
+    # on 89 store rows and the frozen import, `403011012` and `WGB-BI-35` on every retailer.
+    # Measured 2026-09-02, the store carries NO pair of codes differing only by the `K`, so the
+    # named groups leave it out and 31 published records stop holding two spellings of one code.
+    codePattern: '(?P<num>[0-9]{9,12})K?(-[0-9]{1,2})?|(?P<alpha>(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{5,}?)K?'
     # Warlord-BLISTER / Warlord-WEB: tistaminis.com's brand-format tagging convention
     # (same pattern as GW-Local/GW-Web/GW-OOP above) for Warlord Games stock. Discovered
     # on a full 100-page live enumeration of tistaminis.com/products.json 2026-07-13
@@ -387,7 +429,14 @@ manufacturers:
     # `(-[A-Z0-9]+)?` is deliberately NOT appended to this alternative, unlike ak-interactive's:
     # measured both ways, it changes nothing here (same 47/46), and leaving it off keeps a
     # retailer's variant suffix out of Army Painter's article numbers.
-    codePattern: '(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-Z]?|BNDL\d{3,4}|(TL|BR)\d{4}[A-Z]?'
+    #
+    # A TRAILING `P` IS A SPELLING AND EVERY OTHER TRAILING LETTER IS A PRODUCT, measured
+    # 2026-09-02 on thearmypainter.com's own rows: `WP8057P` is `WP8057` (689 rows carry the `P`,
+    # the frozen import and Warlord's store write it without), while `GM1010C` is the Combo and
+    # `…S` the Satin, each with a barcode of its own. So the named groups keep any letter but `P`,
+    # and the `P?` outside them is what the group leaves behind. 20 published records held both
+    # spellings before this.
+    codePattern: '(?P<paint>(WP|AW|CP|SM|GM|QS|BF|ST)\d{4}[A-OQ-Z]?)P?|(?P<bundle>BNDL\d{3,4})|(?P<tool>(TL|BR)\d{4}[A-OQ-Z]?)P?'
     # EAN 5713799314009 observed live on thearmypainter.com variant barcode (Warpaints
     # Fanatic: Moldy Wine, WP3140P) -> GS1 Denmark company prefix.
     gs1Prefixes: ['5713799']

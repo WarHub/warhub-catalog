@@ -7,12 +7,32 @@ from pydantic import BaseModel, ConfigDict, Field
 from warhub_acquisition.yamlio import read_yaml
 
 
+class CodeRewrite(BaseModel):
+    """One spelling of a code, rewritten to the maker's own. `match` is a regex anchored at both
+    ends and `replace` may use its groups (`re.sub` syntax). Applied after upper-casing and
+    `codeStrip`, before `codePattern`."""
+
+    model_config = ConfigDict(extra="forbid")
+    match: str
+    replace: str
+    # Why this spelling exists and who writes it -- required, because a rewrite is an identity
+    # decision and the next reader needs the measurement behind it, not just the regex.
+    reason: str
+
+
 class Manufacturer(BaseModel):
     model_config = ConfigDict(extra="forbid")
     slug: str
     name: str
     codePattern: str | None = None
     codeStrip: list[str] = Field(default_factory=list)
+    # A RETAILER'S SPELLING OF THE MAKER'S CODE, and the maker's spelling it stands for. `codeStrip`
+    # removes a store's house prefix; this is for the spellings a strip cannot express -- a prefix
+    # SWAPPED rather than added (`MANKWR407` for Mantic's `MGKWR407`), a hyphen dropped and a
+    # letter inserted (`SFGGT023` for Steamforged's `SFGT-023`). Measured 2026-09-02 over the whole
+    # catalog: 332 published records held two spellings of one code, and 61 products were
+    # published TWICE, once under each, because the spellings never met.
+    codeRewrite: list[CodeRewrite] = Field(default_factory=list)
     gs1Prefixes: list[str] = Field(default_factory=list)
     vendorNames: list[str] = Field(default_factory=list)
 
@@ -48,6 +68,8 @@ class Taxonomy:
         for prefix in spec.codeStrip:
             code = code.removeprefix(prefix.upper())
         code = code.removesuffix("-EN")
+        for rewrite in spec.codeRewrite:
+            code = re.sub(rf"^(?:{rewrite.match})$", rewrite.replace, code, count=1)
         match = re.fullmatch(spec.codePattern, code, flags=re.IGNORECASE)
         if match is None:
             return None

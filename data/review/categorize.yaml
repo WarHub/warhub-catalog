@@ -1,29 +1,29 @@
 summary:
-  products: 27308
-  undecided: 1451
+  products: 27246
+  undecided: 1431
   byBasis:
-    code: 7175
+    code: 7135
     lexicon: 322
-    mapped: 16372
+    mapped: 16370
     paint-barcode: 9
     stated: 1979
-    unknown: 1451
-  decidedThisRun: 0
+    unknown: 1431
+  decidedThisRun: 23836
   gameSystemsByBasis:
-    classified: 1537
-    code: 3997
-    mapped: 2393
-    not-applicable: 7381
+    classified: 1510
+    code: 3950
+    mapped: 2390
+    not-applicable: 7380
     override: 78
     setting: 842
-    stated: 9181
-    unknown: 1899
+    stated: 9180
+    unknown: 1916
   settingsByBasis:
     code: 831
-    derived: 17065
+    derived: 16989
     mapped: 11
-    not-applicable: 7454
-    unknown: 1947
+    not-applicable: 7451
+    unknown: 1964
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -31,19 +31,19 @@ conflicts:
   - entity: ak-interactive/AK9511
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary'
-  - entity: army-painter/AW8003P
+  - entity: army-painter/AW8003
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint-set; ret-radaddel=paint'
-  - entity: army-painter/SM8002P
+  - entity: army-painter/SM8002
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
-  - entity: army-painter/SM8004P
+  - entity: army-painter/SM8004
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
   - entity: army-painter/WP8059
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint-set; ret-radaddel=paint-set; ret-tistaminis=paint'
-  - entity: army-painter/WP8060P
+  - entity: army-painter/WP8060
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint-set; ret-radaddel=paint-set; ret-tistaminis=paint'
   - entity: army-painter/WP8061
@@ -55,10 +55,10 @@ conflicts:
   - entity: army-painter/WP8067
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint-set; ret-radaddel=paint-set; ret-tistaminis=paint'
-  - entity: army-painter/WP8112P
+  - entity: army-painter/WP8112
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set; ret-tistaminis=paint-set'
-  - entity: army-painter/WP8113P
+  - entity: army-painter/WP8113
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set; ret-tistaminis=paint-set'
   - entity: army-painter/WP8124
@@ -503,8 +503,6 @@ unmapped:
       wouldDecide: 15
     - value: categories=firefight-asterians
       wouldDecide: 15
-    - value: categories=dungeon-saga
-      wouldDecide: 14
     - value: categories=accessories-kings-of-war
       wouldDecide: 13
     - value: categories=firefight-getting-started
@@ -525,6 +523,8 @@ unmapped:
       wouldDecide: 8
     - value: categories=vallejo
       wouldDecide: 8
+    - value: categories=dungeon-saga
+      wouldDecide: 7
     - value: categories=halo-flashpoint-banished
       wouldDecide: 7
     - value: categories=northern-alliance-kings-of-war
@@ -569,9 +569,9 @@ unmapped:
       wouldDecide: 5
     - value: categories=expansions-armada
       wouldDecide: 4
-    - value: categories=expansions
-      wouldDecide: 4
     - value: categories=nightstalkers
+      wouldDecide: 4
+    - value: categories=mazon-labs
       wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
@@ -627,15 +627,15 @@ unmapped:
       wouldDecide: 1
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 227
+      wouldDecide: 226
     - value: tags=us
-      wouldDecide: 227
+      wouldDecide: 226
     - value: vendor=Warlord Games
       wouldDecide: 150
     - value: tags=under-10
       wouldDecide: 122
     - value: tags=over-10
-      wouldDecide: 101
+      wouldDecide: 100
     - value: tags=mdf
       wouldDecide: 77
     - value: tags=bolt-action
@@ -687,7 +687,7 @@ unmapped:
     - value: tags=british
       wouldDecide: 22
     - value: tags=trade-web
-      wouldDecide: 21
+      wouldDecide: 20
     - value: tags=terrain-building
       wouldDecide: 20
     - value: tags=direct
@@ -696,12 +696,12 @@ unmapped:
       wouldDecide: 19
     - value: tags=german
       wouldDecide: 17
-    - value: productType=Accessory
-      wouldDecide: 16
-    - value: tags=0125
-      wouldDecide: 16
     - value: tags=perfect-present
       wouldDecide: 16
+    - value: tags=0125
+      wouldDecide: 15
+    - value: productType=Accessory
+      wouldDecide: 15
     - value: vendor=Sarissa
       wouldDecide: 14
     - value: tags=usa
@@ -724,36 +724,32 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 91
+      wouldDecide: 82
     - value: breadcrumbs=Miniatures
-      wouldDecide: 89
+      wouldDecide: 82
     - value: breadcrumbs=Infinity
       wouldDecide: 35
     - value: breadcrumbs=Malifaux
       wouldDecide: 14
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
-    - value: breadcrumbs=Kings of War
-      wouldDecide: 10
-    - value: breadcrumbs=Warcrow
-      wouldDecide: 8
     - value: breadcrumbs=Games Workshop
       wouldDecide: 8
     - value: breadcrumbs=Warhammer 40K
       wouldDecide: 7
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 6
+    - value: breadcrumbs=Warcrow
+      wouldDecide: 6
+    - value: breadcrumbs=Kings of War
+      wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
-    - value: breadcrumbs=Halo Flashpoint
-      wouldDecide: 3
     - value: breadcrumbs=Nomads
       wouldDecide: 2
     - value: breadcrumbs=Panoceania
       wouldDecide: 2
-    - value: breadcrumbs=Roleplaying
-      wouldDecide: 2
-    - value: breadcrumbs=5th Edition Fantasy
+    - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 2
     - value: 'breadcrumbs=Infinity: Bases 25mm (20)'
       wouldDecide: 1
@@ -795,13 +791,17 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Warcrow: Beyond Winds from the North - Battlepack Expansion'
       wouldDecide: 1
-    - value: 'breadcrumbs=Warcrow: The Song of the Dormant - 2 Player Introductory Battle Pack'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Warcrow: Beyond The Song of the Dormant'
-      wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Blast From the Past - ITS (Infinity Tournament System) Season 13'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Breakdown - Competition Pack ITS (Infinity Tournament System) Season 12'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Daedalus'' Fall (Hardcover) (Ding & Dent)'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Endsong Bundle'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Essentials - PanOceania - PanOceania Dronbot Remotes Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13'
       wouldDecide: 1
   ret-goblingaming:
     - value: productType=Aerosols
@@ -918,11 +918,9 @@ unmapped:
       wouldDecide: 7
     - value: vendor=Mantic
       wouldDecide: 7
-    - value: vendor=Warlord Games
-      wouldDecide: 6
     - value: productType=Miniatures - Plastic
       wouldDecide: 5
-    - value: tags=Bolt Action
+    - value: vendor=Warlord Games
       wouldDecide: 5
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4
@@ -939,6 +937,8 @@ unmapped:
     - value: tags=Evil
       wouldDecide: 3
     - value: tags=Warhammer
+      wouldDecide: 3
+    - value: tags=Bolt Action
       wouldDecide: 3
     - value: tags=Stormcast Eternals
       wouldDecide: 2
@@ -970,11 +970,11 @@ unmapped:
       wouldDecide: 2
     - value: tags=Nightstalkers
       wouldDecide: 2
-    - value: tags=Soviet
-      wouldDecide: 2
     - value: tags=Achtung Panzer
       wouldDecide: 2
     - value: tags=Army Painter
+      wouldDecide: 1
+    - value: tags=Spray
       wouldDecide: 1
   seed-curated:
     - value: productType=starter_set

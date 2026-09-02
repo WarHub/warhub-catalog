@@ -763,3 +763,99 @@ def test_reject_eans_ignores_a_barcode_the_observation_does_not_assert() -> None
     )
     assert list(result.entities) == ["games-workshop/99120100002"]
     assert result.entities["games-workshop/99120100002"][0].ean == "5011921000036"
+
+
+# --- one code, two spellings ---------------------------------------------------------------------
+
+
+def test_a_code_rewrite_turns_a_retailers_spelling_into_the_makers() -> None:
+    """gamenerdz swaps Mantic's `MG` prefix for `MAN` and Steamforged's `SF<line>-` for
+    `SFG<line>`; both rows must land in the record the maker's own code names."""
+    taxonomy = Taxonomy(
+        {
+            "mantic-games": Manufacturer(
+                slug="mantic-games", name="Mantic", codePattern=r"[A-Z]{2,10}\d{2,6}[A-Z]*",
+                codeRewrite=[{"match": r"MAN([A-Z]+\d.*)", "replace": r"MG\1", "reason": "t"}],
+            ),
+            "steamforged-games": Manufacturer(
+                slug="steamforged-games", name="Steamforged", codePattern=r"SF[A-Z0-9-]+",
+                codeRewrite=[{"match": r"SFG([A-Z]{2})([A-Z]*)(\d.*)", "replace": r"SF\1-\2\3", "reason": "t"}],
+            ),
+        }
+    )
+    assert taxonomy.normalize_code("mantic-games", "MANKWR407") == "MGKWR407"
+    assert taxonomy.normalize_code("mantic-games", "MGKWR407") == "MGKWR407"
+    assert taxonomy.normalize_code("steamforged-games", "SFGGT023") == "SFGT-023"
+    assert taxonomy.normalize_code("steamforged-games", "SFGIKMER320") == "SFIK-MER320"
+    # the maker's own spelling is untouched, and a hyphen-less SF+line form is not mistaken for it
+    assert taxonomy.normalize_code("steamforged-games", "SFGT-023") == "SFGT-023"
+    assert taxonomy.normalize_code("steamforged-games", "SFGT023") == "SFGT023"
+
+
+def test_a_rewrite_must_say_why() -> None:
+    import pytest
+    from pydantic import ValidationError
+    with pytest.raises(ValidationError):
+        Manufacturer(slug="m", name="M", codeRewrite=[{"match": "X", "replace": "Y"}])
+
+
+def test_a_named_group_leaves_a_spelling_suffix_out_of_the_code() -> None:
+    """Army Painter's trailing `P` and Warlord's trailing `K` are the makers' own store spellings;
+    every other trailing letter on an Army Painter code is a different product."""
+    taxonomy = Taxonomy(
+        {
+            "army-painter": Manufacturer(
+                slug="army-painter", name="AP",
+                codePattern=r"(?P<paint>(WP|GM)\d{4}[A-OQ-Z]?)P?",
+            ),
+            "warlord-games": Manufacturer(
+                slug="warlord-games", name="WG",
+                codePattern=r"(?P<num>[0-9]{9,12})K?(-[0-9]{1,2})?|(?P<alpha>(?=[A-Z0-9-]*[A-Z])[A-Z0-9-]{5,}?)K?",
+            ),
+        }
+    )
+    assert taxonomy.normalize_code("army-painter", "WP8057P") == "WP8057"
+    assert taxonomy.normalize_code("army-painter", "WP8057") == "WP8057"
+    assert taxonomy.normalize_code("army-painter", "GM1010C") == "GM1010C"
+    assert taxonomy.normalize_code("warlord-games", "403011012K") == "403011012"
+    assert taxonomy.normalize_code("warlord-games", "WGB-BI-35K") == "WGB-BI-35"
+    assert taxonomy.normalize_code("warlord-games", "WGB-AK-21K") == "WGB-AK-21"
+
+
+def test_two_spellings_of_one_code_now_join_and_two_real_codes_are_reported() -> None:
+    """The record that used to hold `MANKWR407` beside `MGKWR407` is one record with one code;
+    a record holding two of the maker's OWN codes is reported, because that is a question --
+    a renumbering nobody declared, or two products on one barcode -- and it was invisible."""
+    taxonomy = Taxonomy(
+        {
+            "mantic-games": Manufacturer(
+                slug="mantic-games", name="Mantic", codePattern=r"[A-Z]{2,10}\d{2,6}[A-Z]*",
+                codeRewrite=[{"match": r"MAN([A-Z]+\d.*)", "replace": r"MG\1", "reason": "t"}],
+            )
+        }
+    )
+    kinds = {"mfr-m": "manufacturer", "ret-g": "retailer"}
+    spellings = [
+        obs("mfr-m:giant", sku="MGKWR407", ean="5060924982481", manufacturer="mantic-games"),
+        obs("ret-g:giant", sku="MANKWR407", ean="5060924982481", manufacturer="mantic-games"),
+    ]
+    result = join_observations(spellings, taxonomy, kinds, Matches())
+    assert list(result.entities) == ["mantic-games/MGKWR407"]
+    assert not [c for c in result.ambiguous if c["type"] == "multi-code-entity"]
+
+    two_codes = [
+        obs("mfr-m:druid-v", sku="MGVAF201", ean="5060924988148", manufacturer="mantic-games"),
+        obs("mfr-m:druid-k", sku="MGKWN206", ean="5060924988148", manufacturer="mantic-games"),
+    ]
+    result = join_observations(two_codes, taxonomy, kinds, Matches())
+    reports = [c for c in result.ambiguous if c["type"] == "multi-code-entity"]
+    assert len(reports) == 1
+    assert reports[0]["codes"] == ["MGKWN206", "MGVAF201"]
+    assert reports[0]["keys"] == ["mfr-m:druid-k", "mfr-m:druid-v"]
+
+
+def test_a_contained_spelling_is_a_variant_not_a_second_code() -> None:
+    from warhub_acquisition.resolve.join import _code_variants
+    assert _code_variants("WGB-BI-35", "WGB-BI-35K")
+    assert _code_variants("280873", "280873-0990")
+    assert not _code_variants("MGVAF201", "MGKWN206")
