@@ -8,7 +8,22 @@ summary:
     paint-barcode: 9
     stated: 1979
     unknown: 1451
-  decidedThisRun: 23878
+  decidedThisRun: 0
+  gameSystemsByBasis:
+    classified: 1537
+    code: 3997
+    mapped: 2393
+    not-applicable: 7381
+    override: 78
+    setting: 842
+    stated: 9181
+    unknown: 1899
+  settingsByBasis:
+    code: 831
+    derived: 17065
+    mapped: 11
+    not-applicable: 7454
+    unknown: 1947
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -82,6 +97,12 @@ conflicts:
   - entity: games-workshop/60020699002
     type: gameSystem-disagreement
     detail: catalog says warhammer-40k (classified); games-workshop code~^\d{4}06\d{5}$ says other-games
+  - entity: games-workshop/60040181405
+    type: setting-disagreement
+    detail: the games say old-world; games-workshop code~^\d{4}(01|05|18|30)81\d{3}$ says warhammer-40k
+  - entity: games-workshop/60040281097
+    type: setting-disagreement
+    detail: the games say old-world; games-workshop code~^\d{4}0281\d{3}$ says age-of-sigmar
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
@@ -328,6 +349,9 @@ conflicts:
   - entity: monument-hobbies/MPA-SET-S06
     type: category-disagreement
     detail: 'retailer: ret-radaddel=paint-set; ret-tistaminis=paint'
+  - entity: sarissa-precision/N031
+    type: setting-disagreement
+    detail: the games say antares; sarissa-precision code~^[NK]\d{3}$ says world-war-two
   - entity: sarissa-precision/T027
     type: gameSystem-disagreement
     detail: catalog says spqr (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
@@ -424,6 +448,9 @@ conflicts:
   - entity: warlord-games/408800049
     type: gameSystem-disagreement
     detail: catalog says bolt-action (classified); mfr-warlord-store tags~konflikt-47,Konflikt-47-10,K47-german,k47-USA,k47-british,k47-Japanese,k47-Soviet,k47-Italian says konflikt-47
+  - entity: warlord-games/453210803
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); warlord-games code~^45\d{7}$ says konflikt-47
   - entity: warlord-games/482010002
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
@@ -447,9 +474,11 @@ conflicts:
     detail: catalog says malifaux (stated); mfr-wyrd-store tags~The Other Side,ToS,ToS-Unit,ToS-Character,Abyssinia,King's Empire,Gibbering Hordes,Cult of the Burning Man says the-other-side
 deadClauses:
   - games-workshop code~^\d{2}70\d{2}81\d{3}$
+  - games-workshop code~^\d{4}1481\d{3}$
   - mfr-cmon productLine=Assassin's Creed Roleplaying Game
   - mfr-gw-algolia hierarchy.lvl1~Other Games > Aeronautica Imperialis
   - mfr-manticgames categories~game-color
+  - mfr-manticgames categories~terrain-crate,modern-terrain-crate,terrain-sci-fi-terrain-crate,featured-products-terrain-crate,terraincrate-battlefields,terraincrate-dungeons,sci-fi-modular-buildings,neoprene-game-mats,tournaments,hobby_gifts
   - mfr-manticgames categories~tokens-gems
   - mfr-warmachine vendor=Epic Encounters
   - 'mfr-warmachine vendor=Epic Encounters: Local Legends'

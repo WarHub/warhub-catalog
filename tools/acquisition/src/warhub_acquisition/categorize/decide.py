@@ -7,7 +7,7 @@ from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve import crossover
 
 from .lexicon import Lexicon
-from .rules import CategoryClause, SourceRules
+from .rules import AXES, CategoryClause, SourceRules
 
 #: What decided a category, in the order this module tries them. Published on the record as
 #: `categoryBasis` alongside the resolver's own `stated` and `unknown`.
@@ -40,6 +40,14 @@ class Decision:
     #: The receipt for the game systems specifically, which is a different sentence from `why`
     #: whenever a different rung supplied them.
     game_systems_why: str | None = None
+    #: Every SETTING this decision places the product in, accumulated like `gameSystems` and
+    #: carrying its own rung and receipt for the same reason.
+    settings: tuple[str, ...] = ()
+    settings_basis: str | None = None
+    settings_why: str | None = None
+    #: The product belongs to no game and no setting -- a clause said so, and this is the receipt.
+    generic: bool = False
+    generic_why: str | None = None
 
 
 @dataclass(frozen=True)
@@ -156,13 +164,15 @@ def decide(
     packaging_hits: list[tuple[Observation, CategoryClause]] = []
     faction_hits: list[tuple[Observation, CategoryClause]] = []
     system_claims: list[tuple[Observation, CategoryClause]] = []
+    setting_claims: list[tuple[Observation, CategoryClause]] = []
+    generic_hits: list[tuple[Observation, CategoryClause]] = []
     for member in _ordered(members, kinds):
         table = rules.get(member.source_id)
         if table is None or table.manufacturer is not None:
             continue
         vetoed = {
             axis: _vetoed(table, lambda clause: _clause_hit(member, clause), axis)
-            for axis in ("category", "packaging", "faction", "gameSystems")
+            for axis in AXES
         }
         # ONE SCAN PER OUTPUT AXIS, each taking the first clause that DECIDES THAT AXIS.
         #
@@ -194,23 +204,38 @@ def decide(
                 if getattr(clause, axis) and _clause_hit(member, clause):
                     bucket.append((member, clause))
                     break
+        # `generic` FIRST, AND IT IS THE WHOLE VERDICT. A shelf of dice or gaming mats carries every
+        # game tag the store can think of -- `D6 Dice - white (30)` is tagged black-powder,
+        # black-seas, bolt-action, hail-caesar and pike-shotte, each individually true and their
+        # union false. A table that files that shelf `generic` has answered the membership
+        # question for this source, and its game and setting clauses are not consulted: the
+        # alternative was a veto, which answers nothing and left the product `unknown`.
+        generic_clause = next(
+            (c for c in table.clauses if c.generic and _clause_hit(member, c)), None
+        )
+        if generic_clause is not None:
+            generic_hits.append((member, generic_clause))
+            continue
         # ...AND THE GAME AXIS TAKES EVERY MATCH, not the first. See the accumulation below.
         if not vetoed["gameSystems"]:
             for clause in table.clauses:
                 if clause.gameSystems and _clause_hit(member, clause):
                     system_claims.append((member, clause))
+        # The setting axis likewise.
+        if not vetoed["settings"]:
+            for clause in table.clauses:
+                if clause.settings and _clause_hit(member, clause):
+                    setting_claims.append((member, clause))
 
     # The manufacturer's own table, evaluated ONCE against the product rather than per observation,
     # because a product code belongs to the thing and not to whoever is reselling it.
     # PER AXIS HERE TOO, so one clause can supply the category while a veto silences the game --
     # which is exactly Forge World and Black Library. `code_clause` is therefore a dict of the
     # first clause that answers each axis and survives that axis's vetoes.
-    code_clauses: dict[str, CategoryClause | None] = dict.fromkeys(
-        ("category", "packaging", "faction", "gameSystems")
-    )
+    code_clauses: dict[str, CategoryClause | None] = dict.fromkeys((*AXES, "generic"))
     mtable = rules.get(manufacturer or "")
     if mtable is not None and mtable.manufacturer is not None and (code or name):
-        for axis in code_clauses:
+        for axis in AXES:
             if _vetoed(mtable, lambda clause: _product_hit(name, code or "", clause), axis):
                 continue
             code_clauses[axis] = next(
@@ -220,6 +245,12 @@ def decide(
                 ),
                 None,
             )
+        # A generic clause is a decision, not a veto, and it is read whatever the vetoes say: the
+        # author who wrote `generic: true` on a code block meant that block.
+        code_clauses["generic"] = next(
+            (c for c in mtable.clauses if c.generic and _product_hit(name, code or "", c)),
+            None,
+        )
 
     # SAME-KIND DISAGREEMENT ONLY. Two retailers filing a product differently is a real editorial
     # split worth a look; a manufacturer and a retailer disagreeing is what the kind ladder is FOR
@@ -253,6 +284,20 @@ def decide(
     # -- so every clause of that store that matched is part of its answer. Sources BELOW it on the
     # ladder are not merged in: two stores naming different games is a disagreement, and unioning
     # it would invent a membership neither of them claims.
+    # WHICH SOURCE SPEAKS FOR THE MEMBERSHIP AXES: the first, in kind order, that said anything at
+    # all -- a game, a setting, or that the product is generic. Its answer is the whole answer;
+    # sources below it on the ladder are not merged in.
+    rank = {m.source_id: i for i, m in reversed(list(enumerate(_ordered(members, kinds))))}
+    spoke = [m.source_id for m, _ in [*system_claims, *setting_claims, *generic_hits]]
+    winner_source = min(spoke, key=rank.__getitem__, default=None)
+    generic = any(m.source_id == winner_source for m, _ in generic_hits)
+    generic_why = None
+    if generic:
+        member, clause = next((m, c) for m, c in generic_hits if m.source_id == winner_source)
+        generic_why = f"{member.source_id} {_signal(clause)}"
+        system_claims = []
+        setting_claims = []
+
     game_systems: tuple[str, ...] = ()
     game_systems_basis = game_systems_why = None
     if system_claims:
@@ -267,6 +312,26 @@ def decide(
         game_systems = tuple(sorted(set(systems_clause.gameSystems)))
         game_systems_basis = CODE
         game_systems_why = f"{manufacturer} {_signal(systems_clause)}"
+
+    # THE SETTINGS, by the same two rungs and the same accumulation.
+    settings: tuple[str, ...] = ()
+    settings_basis = settings_why = None
+    if setting_claims:
+        winner = setting_claims[0][0].source_id
+        won = [(m, c) for m, c in setting_claims if m.source_id == winner]
+        settings = tuple(sorted({slug for _, c in won for slug in c.settings}))
+        settings_basis = MAPPED
+        settings_why = f"{winner} {'; '.join(sorted({_signal(c) for _, c in won}))}"
+    if not settings and code_clauses["settings"] is not None:
+        settings_clause = code_clauses["settings"]
+        settings = tuple(sorted(set(settings_clause.settings)))
+        settings_basis = CODE
+        settings_why = f"{manufacturer} {_signal(settings_clause)}"
+
+    # The manufacturer's own generic clause is the answer only where no rung placed the product
+    # anywhere -- a code table's game clause, if one matched, already said which.
+    if not generic and not game_systems and not settings and code_clauses["generic"] is not None:
+        generic, generic_why = True, f"{manufacturer} {_signal(code_clauses['generic'])}"
     if not faction and code_clauses["faction"] is not None:
         faction = code_clauses["faction"].faction
     if not packaging and code_clauses["packaging"] is not None:
@@ -284,6 +349,11 @@ def decide(
             faction=faction,
             game_systems_basis=game_systems_basis,
             game_systems_why=game_systems_why,
+            settings=settings,
+            settings_basis=settings_basis,
+            settings_why=settings_why,
+            generic=generic,
+            generic_why=generic_why,
         )
     elif code_clauses["category"] is not None:
         code_clause = code_clauses["category"]
@@ -296,8 +366,13 @@ def decide(
             faction=faction,
             game_systems_basis=game_systems_basis,
             game_systems_why=game_systems_why,
+            settings=settings,
+            settings_basis=settings_basis,
+            settings_why=settings_why,
+            generic=generic,
+            generic_why=generic_why,
         )
-    elif packaging or game_systems or faction:
+    elif packaging or game_systems or faction or settings or generic:
         # A DECISION WITH NO CATEGORY IS STILL A DECISION. Its `basis` describes the category rung
         # and there is none, so it says so; `_stamp` writes only the fields that are present.
         decision = Decision(
@@ -309,6 +384,11 @@ def decide(
             faction=faction,
             game_systems_basis=game_systems_basis,
             game_systems_why=game_systems_why,
+            settings=settings,
+            settings_basis=settings_basis,
+            settings_why=settings_why,
+            generic=generic,
+            generic_why=generic_why,
         )
 
     is_paint = any(code in paint_barcodes for code in barcodes)
@@ -318,6 +398,8 @@ def decide(
                 "paint", packaging, PAINT_BARCODE, "barcode published by the paint catalog",
                 gameSystems=game_systems, faction=faction,
                 game_systems_basis=game_systems_basis, game_systems_why=game_systems_why,
+                settings=settings, settings_basis=settings_basis, settings_why=settings_why,
+                generic=generic, generic_why=generic_why,
             )
         elif decision.category != "paint":
             conflicts.append(

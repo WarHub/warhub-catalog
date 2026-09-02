@@ -26,7 +26,7 @@ release, and lists every published file with its byte size and `sha256`.
 ```
 manifest.json                          # start here
 products.json                          # every product, one document
-products/index.json                    # list of game-system partitions
+products/index.json                    # list of game-system partitions, each naming its setting
 products/by-system/<system>.json       # just one game system (e.g. star-wars-legion)
 paints.json                            # every paint, equivalents embedded
 paints/index.json                      # list of brand partitions
@@ -59,7 +59,7 @@ Every document carries a self-describing envelope plus its payload:
 }
 ```
 
-- **Product**: `{ id, manufacturer, ean?, additionalEans?, supersedes?, supersededBy?, name, gameSystem?, faction?, quantity, productCode?, url?, imageUrl? }`
+- **Product**: `{ id, manufacturer, ean?, additionalEans?, supersedes?, supersededBy?, name, gameSystems?, settings?, faction?, quantity, productCode?, url?, imageUrl? }`
   — `id` is the stable global key (`manufacturer-slug/product-code-or-slug`) and, with
   `manufacturer`, is present on every product; both are what a cross-product link points at. `ean`
   is optional (not every product has a barcode). `additionalEans` is present only on a product

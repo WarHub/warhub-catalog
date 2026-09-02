@@ -12,12 +12,12 @@ from warhub_acquisition.resolve import crossover
 from warhub_acquisition.resolve.attributes import (
     apply_classification,
     apply_overrides,
-    complete_game_systems_basis,
+    complete_membership_bases,
     resolve_attributes,
 )
 from warhub_acquisition.resolve.corroborate import find_shared_eans, resolve_ean
 from warhub_acquisition.resolve.join import Matches, join_observations
-from warhub_acquisition.taxonomy import Taxonomy, load_labels
+from warhub_acquisition.taxonomy import Settings, Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import dump_yaml, read_yaml, write_yaml
 
@@ -137,12 +137,12 @@ def _load_optional(path: Path, model: type, default: object) -> object:
 
 
 def _dump_product(record: CanonicalProduct) -> dict:
-    # `additionalEans`, `supersedes` and `gameSystems` are empty for the vast majority; omit them
-    # entirely there so the published shape stays minimal (only repackaged/superseded entities
-    # carry the first two, and a hobby product belongs to no game at all). `supersededBy` is None
-    # there and exclude_none already drops it.
+    # `additionalEans`, `supersedes`, `gameSystems` and `settings` are empty for the vast majority;
+    # omit them entirely there so the published shape stays minimal (only repackaged/superseded
+    # entities carry the first two, and a hobby product belongs to no game and no universe).
+    # `supersededBy` is None there and exclude_none already drops it.
     data = record.model_dump(mode="json", exclude_none=True)
-    for optional_list in ("additionalEans", "supersedes", "gameSystems"):
+    for optional_list in ("additionalEans", "supersedes", "gameSystems", "settings"):
         if not data.get(optional_list):
             data.pop(optional_list, None)
     return data
@@ -346,6 +346,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     category_maps = _load_mappings(paths.mappings)
     vocabulary = load_vocabulary(paths.taxonomy)
     system_labels, _ = load_labels(paths.taxonomy)
+    settings = Settings.load(paths.taxonomy)
     default_hints = {sid: d.defaultHints for sid, d in descriptors.items() if d.defaultHints}
     stale_fields = {sid: d.staleFields for sid, d in descriptors.items() if d.staleFields}
 
@@ -484,8 +485,10 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with an EMPTY
         # list rather than being parked out of the catalog. Which of those it is -- nothing to
         # find, or nothing found yet -- is recorded rather than left for every reader to
-        # re-derive, and classify/queue.py surfaces only the second kind.
-        product = complete_game_systems_basis(product, system_labels)
+        # re-derive, and classify/queue.py surfaces only the second kind. The SETTINGS axis is
+        # settled in the same breath: derived from the games where there are any, and otherwise
+        # left to the categorize stage, which is where a rule can place a novel in a universe.
+        product = complete_membership_bases(product, system_labels, settings)
         products.setdefault(product.manufacturer, []).append(product)
 
     conflicts.extend(find_shared_eans(ean_resolutions))

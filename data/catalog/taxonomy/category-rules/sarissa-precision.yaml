@@ -23,3 +23,30 @@ clauses:
   - codeMatches: '^M\d{3}$'
     category: terrain
     note: 17 undecided; control 23, 100%
+
+  # WHICH PERIOD -- A BUILDING IS PLACED BY SETTING, NOT BY GAME. Sarissa cuts for a period and
+  # every game played in it: a Normandy terrace is a Bolt Action building and a Konflikt '47 one
+  # and an Achtung Panzer! one, and the honest value is the Second World War with no game named.
+  # Each series is one period by Sarissa's own naming (measured by reading every name in it,
+  # 2026-09-02): `N` North-West Europe and `K` the Pacific are WWII; `M` North America (ACW and
+  # the frontier), `G` the Victorian street (`Hansom Cab`, `Horse Drawn Bus`) and `D` the
+  # stagecoach are Horse and Musket; `T` is Rome. `L`, the English timber-framed range, spans
+  # Pike and Shot and Horse and Musket alike -- the same house stood through both -- and says so
+  # with two settings, which is what the list is for.
+  #
+  # NOT PLACED: `B` (feudal Japan -- a period this taxonomy has no setting for), `R` (railway
+  # rolling stock, which is period-agnostic), `H` and `I` (mixed).
+  - codeMatches: '^[NK]\d{3}$'
+    settings: [world-war-two]
+  - codeMatches: '^[MGD]\d{3}$'
+    settings: [horse-and-musket]
+  - codeMatches: '^L\d{3}$'
+    settings: [horse-and-musket, pike-and-shot]
+  - codeMatches: '^T\d{3}[A-Z]{0,2}$'
+    settings: [ancient-and-medieval]
+
+  # THE ANTARES SCENERY IS FACTION TERRAIN AND BELONGS TO THE GAME: an Algoryn drop fortress or a
+  # Ghar block house is a Beyond the Gates of Antares product the way a Necromunda bulkhead is a
+  # Necromunda one. The game derives the setting.
+  - codeMatches: '^(AG|GR|FB)\d{2}$'
+    gameSystems: [gates-of-antares]

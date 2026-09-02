@@ -306,7 +306,11 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
     # one or a game product nobody has classified; only the second is a question, and only the
     # second belongs in a queue that spends money to answer questions. Measured 2026-08-31 over
     # the committed catalog: 14,265 nulls, of which 5,885 not-applicable and 8,380 unknown.
-    counts = {"null": 0, "unknown": 0, "not-applicable": 0}
+    #
+    # THREE KINDS OF NULL SINCE THE SETTINGS AXIS (2026-09-02), not two: a product placed in a
+    # SETTING and deliberately in no one game -- a Black Library novel, a period terrain piece --
+    # has an empty `gameSystems` and reads `setting`, and it is not a question either.
+    counts = {"null": 0, "unknown": 0, "not-applicable": 0, "setting": 0}
     if paths.catalog_products.exists():
         for path in paths.catalog_products.glob("*.yaml"):
             data = read_yaml(path) or {}
@@ -317,10 +321,11 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
                 if basis in counts:
                     counts[basis] += 1
     assert len(queue) == counts["unknown"]
-    # And the split is real rather than a rename: both halves are populated, and together they
+    # And the split is real rather than a rename: every half is populated, and together they
     # account for every null. A regression that reverted the selector would trip this.
     assert counts["not-applicable"] > 0
-    assert counts["unknown"] + counts["not-applicable"] == counts["null"]
+    assert counts["setting"] > 0
+    assert counts["unknown"] + counts["not-applicable"] + counts["setting"] == counts["null"]
 
     # NOTHING IN THE QUEUE IS A PRODUCT WHOSE QUESTION DOES NOT APPLY. Paint is the population
     # that made this worth fixing: it was 41% of the queue and the first 176 batches of any

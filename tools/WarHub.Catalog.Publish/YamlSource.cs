@@ -76,7 +76,11 @@ internal static class YamlSource
         string taxonomy = Path.Combine(catalogDir, "taxonomy");
         var gameSystems = ReadLabelFile<GameSystemLabelsFile>(Path.Combine(taxonomy, "game-systems.yaml"))?.GameSystems;
         var factions = ReadLabelFile<FactionLabelsFile>(Path.Combine(taxonomy, "factions.yaml"))?.Factions;
-        return new TaxonomyLabels(ToLabelMap(gameSystems), ToLabelMap(factions));
+        var settings = ReadLabelFile<SettingLabelsFile>(Path.Combine(taxonomy, "settings.yaml"))?.Settings;
+        var settingOfGame = (gameSystems ?? [])
+            .Where(e => !string.IsNullOrEmpty(e.Setting))
+            .ToDictionary(e => e.Slug, e => e.Setting!);
+        return new TaxonomyLabels(ToLabelMap(gameSystems), ToLabelMap(factions), ToLabelMap(settings), settingOfGame);
     }
 
     private static T? ReadLabelFile<T>(string file)
@@ -86,22 +90,35 @@ internal static class YamlSource
             : default;
     }
 
-    private static IReadOnlyDictionary<string, string> ToLabelMap(List<LabelEntry>? entries)
+    private static IReadOnlyDictionary<string, string> ToLabelMap(IEnumerable<LabelEntry>? entries)
     {
         return entries is null
             ? new Dictionary<string, string>()
             : entries.ToDictionary(e => e.Slug, e => e.Label);
     }
 
-    private sealed record LabelEntry
+    private record LabelEntry
     {
         public required string Slug { get; init; }
         public required string Label { get; init; }
     }
 
+    // A game system's entry also names the SETTING it is played in (game-systems.yaml
+    // `setting:`); a catch-all bucket is the one entry allowed to name none.
+    private sealed record GameSystemEntry : LabelEntry
+    {
+        public string? Setting { get; init; }
+        public bool? CatchAll { get; init; }
+    }
+
+    private sealed record SettingLabelsFile
+    {
+        public required List<LabelEntry> Settings { get; init; }
+    }
+
     private sealed record GameSystemLabelsFile
     {
-        public required List<LabelEntry> GameSystems { get; init; }
+        public required List<GameSystemEntry> GameSystems { get; init; }
     }
 
     private sealed record FactionLabelsFile

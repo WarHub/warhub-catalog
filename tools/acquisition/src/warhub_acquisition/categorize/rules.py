@@ -20,7 +20,10 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from warhub_acquisition.yamlio import read_yaml
 
 _FORMS = ("nameMatches", "codeMatches", "hintEquals", "hintContainsAny")
-_OUTPUTS = ("category", "packaging", "gameSystems", "faction")
+_OUTPUTS = ("category", "packaging", "gameSystems", "settings", "faction", "generic")
+#: The axes a veto may name. `generic` is not among them: it is not a field a product carries but
+#: a statement about the two membership axes at once, and it is silenced by vetoing those.
+AXES = ("category", "packaging", "faction", "gameSystems", "settings")
 
 
 class CategoryClause(BaseModel):
@@ -59,7 +62,18 @@ class CategoryClause(BaseModel):
     # source's whole claim, not a race the first one wins. The scalar outputs stay first-match:
     # a product is one thing, and two clauses naming different categories is a disagreement.
     gameSystems: list[str] = Field(default_factory=list)
+    # THE SETTING, where the game cannot be named. Same shape and the same accumulation as
+    # `gameSystems`, and it exists for the products a game clause could never place honestly: a
+    # Black Library novel is set in Warhammer 40,000 and belongs to no game; a laser-cut Normandy
+    # farmhouse is a Second World War building however many WWII games it is sold for. For a
+    # product that HAS a game, its settings derive from the game and a clause here can only agree.
+    settings: list[str] = Field(default_factory=list)
     faction: str | None = None
+    # THIS PRODUCT BELONGS TO NO GAME AND NO SETTING, as a positive decision. A bag of dice, a
+    # neoprene mat, a modular fantasy terrain kit sold for any game: the honest answer on both
+    # membership axes is `not-applicable`, and until this existed a table could only VETO them --
+    # which leaves `unknown`, i.e. "not decided yet", about products that are decided.
+    generic: bool = False
 
     # WHICH AXES THIS VETO SILENCES -- `noneOf` entries only. A veto says "the signal is present
     # and settles nothing", and until now that meant nothing about ANY axis, which was measurably
@@ -140,11 +154,11 @@ class SourceRules(BaseModel):
                     f"{self.scope}: a `noneOf` veto must decide nothing -- it exists to say the "
                     "signal is present and settles nothing"
                 )
-            unknown = [axis for axis in clause.blocks if axis not in _OUTPUTS]
+            unknown = [axis for axis in clause.blocks if axis not in AXES]
             if unknown:
                 raise ValueError(
                     f"{self.scope}: a veto's `blocks` names {unknown}, which are not axes; "
-                    f"choose from {'/'.join(_OUTPUTS)}"
+                    f"choose from {'/'.join(AXES)}"
                 )
         for clause in self.clauses:
             if clause.blocks:

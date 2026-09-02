@@ -13,3 +13,18 @@ clauses:
   - codeMatches: '^(FGVP?|FGX|OAKP|SGVP)\d+$'
     category: miniatures
     note: 10 undecided; control 77, 100%
+
+  # WHICH GAME: the range prefix IS the game, and each game has its own setting in the taxonomy.
+  # `FGV`/`FGVP`/`FGX` and the `FGAP` pre-painted sets are Frostgrave, `OAKP` is Oathmark, `SGVP`
+  # is Stargrave. The two `BP` rows are Osprey rulebooks and are placed by name; every Stargrave
+  # product carries its code, so no name clause is needed for it.
+  - codeMatches: '^(FGVP?|FGX|FGAP)\d+$'
+    gameSystems: [frostgrave]
+  - codeMatches: '^OAKP\d+$'
+    gameSystems: [oathmark]
+  - codeMatches: '^SGVP\d+$'
+    gameSystems: [stargrave]
+  - nameMatches: '\bfrostgrave\b'
+    gameSystems: [frostgrave]
+  - nameMatches: '\boathmark\b'
+    gameSystems: [oathmark]

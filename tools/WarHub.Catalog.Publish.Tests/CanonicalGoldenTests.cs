@@ -131,6 +131,28 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
     }
 
     [Fact]
+    public void A_setting_resolves_to_its_label_and_is_omitted_where_there_is_none()
+    {
+        // Both kits derive their setting from their game; the painting handle belongs to no game
+        // and no universe, and the property is omitted rather than published as null or [] --
+        // the same treatment gameSystems gets.
+        Assert.Equal(["Warhammer 40,000"], Necrons.GetProperty("settings").EnumerateArray().Select(v => v.GetString()!));
+        Assert.Equal(["Warhammer 40,000"], DeathGuard.GetProperty("settings").EnumerateArray().Select(v => v.GetString()!));
+        Assert.False(PaintingHandle.TryGetProperty("settings", out _));
+    }
+
+    [Fact]
+    public void The_product_index_groups_its_partitions_by_setting()
+    {
+        JsonElement index = JsonDocument.Parse(File.ReadAllText(Path.Combine(fx.Dist, "products", "index.json"))).RootElement;
+        JsonElement partition = index.GetProperty("partitions").EnumerateArray().Single();
+        Assert.Equal("warhammer-40k", partition.GetProperty("setting").GetString());
+        JsonElement setting = index.GetProperty("settings").EnumerateArray().Single();
+        Assert.Equal("warhammer-40k", setting.GetProperty("key").GetString());
+        Assert.Equal("Warhammer 40,000", setting.GetProperty("label").GetString());
+    }
+
+    [Fact]
     public void Game_system_label_resolves_for_both_products()
     {
         Assert.Equal(["Warhammer 40,000"], Necrons.GetProperty("gameSystems").EnumerateArray().Select(v => v.GetString()!));

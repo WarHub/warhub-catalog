@@ -28,6 +28,11 @@ public sealed record CanonicalProduct
     // deliberately -- YamlDotNet SERIALIZES the interface happily and has no node deserializer for
     // it, so the read side would silently fail.
     public List<string> GameSystems { get; init; } = [];
+    // Every SETTING -- universe or period -- this product belongs to, as slugs. Derived from the
+    // games by the resolver for most of the catalog; stated directly for the products that belong
+    // to a setting and to no game (a novel, a building sold for a whole period). Same `List`
+    // reasoning as GameSystems.
+    public List<string> Settings { get; init; } = [];
     public string? Faction { get; init; }        // slug
     public string? Category { get; init; }
     public string? Packaging { get; init; }
@@ -63,4 +68,16 @@ public sealed record CanonicalProduct
 
 public sealed record TaxonomyLabels(
     IReadOnlyDictionary<string, string> GameSystems,
-    IReadOnlyDictionary<string, string> Factions);
+    IReadOnlyDictionary<string, string> Factions,
+    IReadOnlyDictionary<string, string> Settings,
+    // Which setting each game system belongs to (slug -> slug). Published on the partition
+    // index so a consumer can group the game partitions by universe without a second document.
+    IReadOnlyDictionary<string, string> SettingOfGameSystem)
+{
+    public TaxonomyLabels(
+        IReadOnlyDictionary<string, string> gameSystems,
+        IReadOnlyDictionary<string, string> factions)
+        : this(gameSystems, factions, new Dictionary<string, string>(), new Dictionary<string, string>())
+    {
+    }
+}

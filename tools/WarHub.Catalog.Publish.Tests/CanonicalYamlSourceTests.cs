@@ -40,6 +40,12 @@ public class CanonicalYamlSourceTests
             gameSystems:
               - slug: test-system
                 label: Test System
+                setting: test-setting
+            """);
+        File.WriteAllText(Path.Combine(root, "taxonomy", "settings.yaml"), """
+            settings:
+              - slug: test-setting
+                label: Test Setting
             """);
         File.WriteAllText(Path.Combine(root, "taxonomy", "factions.yaml"), """
             factions:
@@ -71,6 +77,8 @@ public class CanonicalYamlSourceTests
     {
         var labels = YamlSource.LoadTaxonomyLabels(WriteTempCatalog());
         Assert.Equal("Test System", labels.GameSystems["test-system"]);
+        Assert.Equal("test-setting", labels.SettingOfGameSystem["test-system"]);
+        Assert.Equal("Test Setting", labels.Settings["test-setting"]);
         Assert.Equal("Necrons", labels.Factions["necrons"]);
     }
 

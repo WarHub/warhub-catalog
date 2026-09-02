@@ -13,4 +13,8 @@ reason: >-
 clauses:
   - codeMatches: '^H\d{5}$'
     category: terrain
+    # Every one is a Second World War building, sold for Bolt Action and just as much a Konflikt
+    # '47 or Achtung Panzer! one -- placed by SETTING, not by game, which is what a period building
+    # is.
+    settings: [world-war-two]
     note: 9 undecided; control 60, 100%

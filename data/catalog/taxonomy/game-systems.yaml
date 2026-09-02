@@ -1,86 +1,135 @@
 gameSystems:
   - slug: achtung-panzer
     label: Achtung Panzer!
+    setting: world-war-two
   - slug: adeptus-titanicus
     label: Adeptus Titanicus
+    setting: warhammer-40k
   - slug: aeronautica-imperialis
     label: Aeronautica Imperialis
+    setting: warhammer-40k
   - slug: age-of-sigmar
     label: Age of Sigmar
+    setting: age-of-sigmar
   - slug: aristeia
     label: Aristeia!
+    setting: infinity-universe
   - slug: armada
     label: Armada
+    setting: pannithor
   - slug: asoiaf
     label: A Song of Ice and Fire
+    setting: a-song-of-ice-and-fire
   - slug: black-powder
     label: Black Powder
+    setting: horse-and-musket
   - slug: black-seas
     label: Black Seas
+    setting: horse-and-musket
   - slug: blood-bowl
     label: Blood Bowl
+    setting: old-world
   - slug: blood-red-skies
     label: Blood Red Skies
+    setting: world-war-two
   - slug: bolt-action
     label: Bolt Action
+    setting: world-war-two
   - slug: conquest
     label: Conquest
+    setting: ea
   - slug: cruel-seas
     label: Cruel Seas
+    setting: world-war-two
   - slug: deadzone
     label: Deadzone
+    setting: warpath-universe
   - slug: dreadball
     label: DreadBall
+    setting: warpath-universe
   - slug: dungeon-saga
     label: Dungeon Saga
+    setting: pannithor
   - slug: epic-black-powder
     label: Epic Black Powder
+    setting: horse-and-musket
   - slug: epic-encounters
     label: Epic Encounters
+    # 5e-compatible boxed encounters for whatever campaign the buyer runs -- no universe.
+    settingless: true
   - slug: epic-hail-caesar
     label: Epic Hail Caesar
+    setting: ancient-and-medieval
   - slug: epic-pike-and-shotte
     label: Epic Pike & Shotte
+    setting: pike-and-shot
   - slug: epic-warpath
     label: Epic Warpath
+    setting: warpath-universe
   - slug: firefight
     label: Firefight
+    setting: warpath-universe
+  - slug: frostgrave
+    label: Frostgrave
+    # Osprey Games' skirmish game in the frozen city of Felstad; North Star makes the figures.
+    setting: frostgrave
   - slug: gates-of-antares
     label: Beyond the Gates of Antares
+    setting: antares
   - slug: godtear
     label: Godtear
+    setting: godtear
   - slug: guild-ball
     label: Guild Ball
+    setting: guild-ball
   - slug: hail-caesar
     label: Hail Caesar
+    setting: ancient-and-medieval
   - slug: halo-flashpoint
     label: 'Halo: Flashpoint'
+    setting: halo
   - slug: hellboy
     label: 'Hellboy: The Board Game'
+    setting: hellboy
   - slug: horus-heresy
     label: Horus Heresy
+    setting: warhammer-40k
   - slug: infinity
     label: Infinity
+    setting: infinity-universe
   - slug: iron-kingdoms
     label: Iron Kingdoms
+    setting: iron-kingdoms
   - slug: judge-dredd
     label: Judge Dredd
+    setting: judge-dredd
   - slug: kill-team
     label: Kill Team
+    setting: warhammer-40k
   - slug: kings-of-war
     label: Kings of War
+    setting: pannithor
   - slug: konflikt-47
     label: Konflikt '47
+    setting: world-war-two
   - slug: legions-imperialis
     label: Legions Imperialis
+    setting: warhammer-40k
   - slug: malifaux
     label: Malifaux
+    setting: malifaux
   - slug: marvel-crisis-protocol
     label: Marvel Crisis Protocol
+    setting: marvel
   - slug: middle-earth
     label: Middle-earth
+    setting: middle-earth
   - slug: necromunda
     label: Necromunda
+    setting: warhammer-40k
+  - slug: oathmark
+    label: 'Oathmark: Battles of the Lost Age'
+    setting: oathmark
   - slug: other-games
     label: Other Games
     # A BUCKET, NOT A CLAIM. Games Workshop's own storefront files everything outside its three
@@ -91,39 +140,58 @@ gameSystems:
     catchAll: true
   - slug: overdrive
     label: OverDrive
+    setting: warpath-universe
   - slug: pike-and-shotte
     label: Pike & Shotte
+    setting: pike-and-shot
   - slug: spqr
     label: SPQR
+    setting: ancient-and-medieval
   - slug: star-saga
     label: Star Saga
+    setting: warpath-universe
   - slug: star-wars-armada
     label: Star Wars Armada
+    setting: star-wars
   - slug: star-wars-legion
     label: Star Wars Legion
+    setting: star-wars
   - slug: star-wars-shatterpoint
     label: Star Wars Shatterpoint
+    setting: star-wars
   - slug: star-wars-x-wing
     label: Star Wars X-Wing
+    setting: star-wars
   - slug: stargrave
     label: Stargrave
+    setting: ravaged-galaxy
   - slug: the-old-world
     label: The Old World
+    setting: old-world
   - slug: the-other-side
     label: The Other Side
+    setting: malifaux
   - slug: victory-at-sea
     label: Victory at Sea
+    setting: world-war-two
   - slug: walking-dead-all-out-war
     label: 'The Walking Dead: All Out War'
+    setting: the-walking-dead
   - slug: warcrow
     label: Warcrow
+    setting: lindwurm
   - slug: warhammer-40k
     label: Warhammer 40,000
+    setting: warhammer-40k
   - slug: warhammer-underworlds
     label: Warhammer Underworlds
+    setting: age-of-sigmar
   - slug: warlords-of-erehwon
     label: Warlords of Erehwon
+    setting: erehwon
   - slug: warmachine
     label: Warmachine
+    setting: iron-kingdoms
   - slug: warpath
     label: Warpath
+    setting: warpath-universe

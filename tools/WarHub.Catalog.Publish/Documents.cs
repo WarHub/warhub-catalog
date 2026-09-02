@@ -42,6 +42,10 @@ internal sealed record ProductRecord
     // resolver wrote. Null rather than `[]` when there are none, so a systemless product publishes
     // no property at all -- the same treatment `category` gets.
     [JsonPropertyOrder(3)] public IReadOnlyList<string>? GameSystems { get; init; }
+    // LABELS, one per SETTING -- the universe or period -- this product belongs to. For a product
+    // with game systems these are the settings those games are set in; a product with none can
+    // still carry one (a novel, a period terrain piece). Null when there are none, like the rest.
+    [JsonPropertyOrder(3)] public IReadOnlyList<string>? Settings { get; init; }
     [JsonPropertyOrder(4)] public string? Faction { get; init; }
     // Nullable, and the publisher no longer substitutes anything for it. A product whose category
     // nothing ever stated publishes `category: null` -- the same treatment `gameSystem` gets, for
@@ -210,7 +214,14 @@ internal sealed class BarcodeIndexDocument
     [JsonPropertyOrder(8)] public required IReadOnlyDictionary<string, IReadOnlyList<BarcodeRef>> Barcodes { get; init; }
 }
 
-internal sealed record IndexEntry(string Key, string Label, int Records, string File);
+// `setting` is the universe or period this partition's game belongs to -- null on a paint index,
+// and null for a catch-all game bucket that belongs to none.
+/// <summary>A setting on the product index: the universe or period its game partitions belong to.</summary>
+internal sealed record SettingEntry(
+    [property: JsonPropertyOrder(1)] string Key,
+    [property: JsonPropertyOrder(2)] string Label);
+
+internal sealed record IndexEntry(string Key, string Label, int Records, string File, string? Setting = null);
 
 internal sealed class IndexDocument
 {
@@ -221,6 +232,9 @@ internal sealed class IndexDocument
     [JsonPropertyOrder(4)] public required string PartitionType { get; init; } // gameSystem | brand
     [JsonPropertyOrder(5)] public required int Total { get; init; }
     [JsonPropertyOrder(6)] public required IReadOnlyList<IndexEntry> Partitions { get; init; }
+    // The settings the partitions above are grouped into, for a product index. Absent on a paint
+    // index, whose partitions are brands and belong to no universe.
+    [JsonPropertyOrder(7)] public IReadOnlyList<SettingEntry>? Settings { get; init; }
 }
 
 internal sealed record FileEntry(

@@ -50,7 +50,10 @@ noneOf:
   # BLACK LIBRARY: d78 81 is a novel, and d56 then carries the SETTING of the fiction rather than a
   # game the product belongs to. 430 of them sit under d56 01, where the split between Warhammer
   # 40,000 and Horus Heresy is the book's period and no field encodes it -- measured 86.3%, which
-  # is not deterministic. The ones whose segment is unambiguous are recovered by a clause below.
+  # is not deterministic. THE SETTING IS NOT VETOED, and that is the whole point of there being a
+  # settings axis: the segment that cannot say which GAME a novel belongs to says its universe
+  # exactly, and The Horus Heresy is an era of Warhammer 40,000 rather than a setting of its own.
+  # The `settings` clauses at the end of this file read it.
   - codeMatches: '^\d{6}81\d{3}$'
     blocks: [gameSystems]
     note: Black Library, setting is not the game
@@ -374,6 +377,34 @@ clauses:
   - nameMatches: '\((?!1[- ])\d{1,3}[- ]PACK\)|\bX\s?([2-9]|\d{2,3})\b'
     packaging: multipack
     note: 912 products, 875 of them a case of six identical pots
+
+  # =============================================================================================
+  # WHICH SETTING, where the game cannot be said. Read on the products the game vetoes above leave
+  # alone: 694 Black Library novels (d78 81), whose d56 names the universe the story is set in --
+  # 01 and 30 are Warhammer 40,000 and its Horus Heresy era (499), 02 Age of Sigmar (166), 05
+  # Necromunda's underhive (8), 27 The Old World and 09 Blood Bowl's parody of it (6), 18 the
+  # skies of the 41st millennium (1). Measured 2026-09-02 over every novel in the catalog. The
+  # 20 under d56 99 are the Warhammer Horror and Crime anthologies, which span settings, and they
+  # stay honestly unknown.
+  - codeMatches: '^\d{4}(01|05|18|30)81\d{3}$'
+    settings: [warhammer-40k]
+    note: 508 novels; a game is never proposed for them, so the game axis reads `setting`
+  - codeMatches: '^\d{4}0281\d{3}$'
+    settings: [age-of-sigmar]
+    note: 166 novels
+  - codeMatches: '^\d{4}(09|27)81\d{3}$'
+    settings: [old-world]
+    note: 6 novels
+  - codeMatches: '^\d{4}1481\d{3}$'
+    settings: [middle-earth]
+    note: 0 today; the segment exists and the mapping is the same shape
+
+  # WHITE DWARF BELONGS TO NO ONE SETTING. d34 24 is the magazine, and an issue covers every game
+  # GW publishes; placing it in a universe would be false in the same way placing a bag of dice
+  # in one would.
+  - codeMatches: '^\d{2}24\d{7}$'
+    generic: true
+    note: the magazine issues; `book` by the d34 clause above, no game and no setting by this one
 
   # d34 02 is GW's WEB BUNDLE section, and it is the cleanest packaging signal in the whole code:
   # `Angel's Wrath Intervention Force Web Bundle`, `Adeptus Mechanicus Codex Collection`,

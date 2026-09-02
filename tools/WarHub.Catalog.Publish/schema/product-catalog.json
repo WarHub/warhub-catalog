@@ -44,6 +44,12 @@
         "priceCad": { "type": "number" },
         "name": { "type": "string" },
         "gameSystems": { "type": ["array", "null"], "items": { "type": "string" } },
+        "settings": {
+          "type": "array",
+          "description": "Labels of the SETTINGS -- universes or historical periods -- this product belongs to. For a product with gameSystems these are the settings those games are set in (see products/index.json, where each partition names its setting); a product with no game system can still carry one: a Black Library novel is set in Warhammer 40,000 and belongs to no game, a laser-cut Normandy farmhouse is a Second World War building however many WWII games sell it. Omitted when there is none.",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
         "faction": { "type": "string" },
         "category": { "type": ["string", "null"] },
         "status": { "type": "string" },

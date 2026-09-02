@@ -2,6 +2,7 @@
 import re
 
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides
+from warhub_acquisition.taxonomy import Settings
 from warhub_acquisition.models.descriptor import KIND_PRIORITY
 from warhub_acquisition.models.observation import Observation
 from warhub_acquisition.resolve.corroborate import EanResolution
@@ -260,6 +261,8 @@ def apply_overrides(product: CanonicalProduct, overrides: Overrides) -> Canonica
     merged = CanonicalProduct.model_validate({**product.model_dump(), **patch})
     if patch.get("gameSystems") is not None:
         merged.gameSystemsBasis = "override"
+    if patch.get("settings") is not None:
+        merged.settingsBasis = "override"
     return merged
 
 
@@ -302,16 +305,32 @@ def apply_classification(
 _NO_GAME_SYSTEM_CATEGORIES = frozenset({"paint", "paint-set", "hobby-auxiliary"})
 
 
-def complete_game_systems_basis(
-    product: CanonicalProduct, system_labels: dict[str, str]
+#: The `gameSystemsBasis` / `settingsBasis` values this module is allowed to rewrite. Everything
+#: else -- `stated`, `mapped`, `code`, `classified`, `override` -- traces to something and is left
+#: exactly as it was. `setting` is here because it is derived from the settings axis and must
+#: follow it; `derived` because it follows the game axis.
+DERIVED_BASES = frozenset({"unknown", "not-applicable", "setting", "derived", None})
+
+
+def complete_membership_bases(
+    product: CanonicalProduct, system_labels: dict[str, str], settings: "Settings"
 ) -> CanonicalProduct:
-    """Split an EMPTY `gameSystems` into the two different facts it was carrying.
+    """Settle the two membership axes against each other, and name what an empty one means.
 
-    `not-applicable` -- a hobby product, and nothing is missing.
-    `unknown`        -- a game product this pipeline failed to classify.
+    THREE POSITIVE STATES AND ONE HOLE, and a product ends in exactly one of them:
 
-    THE PREDICATE IS SAFE BY CONSTRUCTION, not by accuracy: it is only ever consulted when
-    `gameSystems` is ALREADY empty, so it cannot erase a value anything else established. That
+      by game      `gameSystems` is non-empty. `settings` DERIVES from it -- each game names its
+                   setting in game-systems.yaml -- and `settingsBasis` says `derived`. A hand
+                   override of `settings` is the one thing that is not re-derived.
+      by setting   `gameSystems` is empty and `settings` is not: a novel, a building sold for a
+                   whole period. `gameSystemsBasis` says `setting` -- this product belongs to a
+                   setting and deliberately to no one game in it.
+      by nothing   both empty, and the category says why: a pot of paint belongs to no game and
+                   no universe. Both bases say `not-applicable`.
+      unknown      both empty and nothing said why. Both bases say `unknown`.
+
+    THE PREDICATE FOR THE LAST TWO IS SAFE BY CONSTRUCTION, not by accuracy: it is only consulted
+    when both lists are ALREADY empty, so it cannot erase a value anything else established. That
     matters, because the obvious formulation -- "category is paint, therefore no game system" --
     is measurably wrong: 411 products carry both, and they are real. `Infinity: JSA Paint Set` is
     a paint set AND an Infinity product; a faction transfer sheet is hobby-auxiliary AND belongs
@@ -321,14 +340,38 @@ def complete_game_systems_basis(
     LEGION (18ML)` names a 40k faction and is a pot of paint; `Warhammer 40,000: Paints + Tools`
     is a boxed product for a game. The separator is whether the record is a single colour, and
     the test for that is the source's own words -- a volume, a multipack count, or `spray`.
+
+    ONLY DERIVED BASES ARE EVER REWRITTEN (`DERIVED_BASES`). A `stated` game, a `mapped` setting
+    or an `override` on either axis is a fact someone established and this function has nothing
+    to add to it.
     """
+    update: dict[str, object] = {}
     if product.gameSystems:
-        return product
+        if product.settingsBasis != "override":
+            derived = settings.for_games(product.gameSystems)
+            update["settings"] = derived
+            if derived:
+                update["settingsBasis"] = "derived"
+            elif settings.all_settingless(product.gameSystems):
+                update["settingsBasis"] = "not-applicable"
+            else:
+                update["settingsBasis"] = "unknown"
+        return product.model_copy(update=update) if update else product
+    if product.settings:
+        if product.gameSystemsBasis in DERIVED_BASES:
+            update["gameSystemsBasis"] = "setting"
+        return product.model_copy(update=update) if update else product
     if product.category not in _NO_GAME_SYSTEM_CATEGORIES or _names_a_game_system(
         product.name, system_labels
     ):
-        return product.model_copy(update={"gameSystemsBasis": "unknown"})
-    return product.model_copy(update={"gameSystemsBasis": "not-applicable"})
+        basis = "unknown"
+    else:
+        basis = "not-applicable"
+    if product.gameSystemsBasis in DERIVED_BASES:
+        update["gameSystemsBasis"] = basis
+    if product.settingsBasis in DERIVED_BASES:
+        update["settingsBasis"] = basis
+    return product.model_copy(update=update) if update else product
 
 
 _COLOUR_RECORD = re.compile(r"\d+\s*ml\b|\(\s*\d+\s*[- ]?pack\s*\)|\bx\s?\d+\b|\bspray\b", re.IGNORECASE)

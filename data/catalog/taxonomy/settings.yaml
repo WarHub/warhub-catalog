@@ -1,0 +1,98 @@
+# THE SETTINGS: the fictional universe or the historical period a game is played in, one layer
+# above `game-systems.yaml`. Kill Team, Necromunda, The Horus Heresy and Warhammer 40,000 are four
+# games in one setting; Bolt Action, Konflikt '47 and Achtung Panzer! are three games in another.
+# Each game names its setting in game-systems.yaml (`setting:`), and a product's settings DERIVE
+# from its games -- see taxonomy.py::Settings and resolve/attributes.py::complete_membership_bases.
+#
+# WHY A SEPARATE AXIS. A Black Library novel is set in Warhammer 40,000 and belongs to no game; a
+# laser-cut Normandy farmhouse is a Second World War building however many WWII games sell it.
+# Until this file existed the only honest answer for either was `gameSystemsBasis: unknown`, which
+# reads as "not decided yet" about products that are decided. Now they are placed BY SETTING, with
+# `gameSystemsBasis: setting` saying so, and a bag of dice is placed by neither.
+#
+# HOW THE LIST WAS DRAWN (2026-09-02), against the publishers' own descriptions of their games.
+#
+# GAMES WORKSHOP names its settings itself. Its 2024-25 annual report describes "two primary
+# universes" and four settings -- Warhammer 40,000, The Horus Heresy, The Old World and Age of
+# Sigmar -- and its storefront's "Shop by Setting" menu adds Middle-earth. THE HORUS HERESY IS NOT A
+# SETTING HERE, and that is a decision rather than an oversight: GW describes it as "the prequel to
+# Warhammer 40,000, set 10,000 years previously" -- an era of one universe -- and the maintainer's
+# instruction was that Kill Team, The Horus Heresy and Warhammer 40,000 are one setting. Legions
+# Imperialis and Adeptus Titanicus go with it. Blood Bowl is filed in The Old World on GW's own
+# words ("an alternative version of Warhammer's Old World"), the one call in the GW block that
+# GW's storefront does not itself make.
+#
+# THE HISTORICAL PERIODS ARE DELIBERATELY COARSE, at the grain the GAMES are defined at. Black
+# Powder is 1700-1900 by Warlord's own definition and covers the Napoleonic Wars, the American
+# Civil War and the Anglo-Zulu War; Hail Caesar runs from 3000 BC to the early 13th century. Split
+# the periods finer and those games, plus Epic Black Powder, Black Seas and SPQR, all become
+# multi-setting for no gain -- Napoleonic, ACW and Punic are product-level facets, not universes.
+# The four are Ancient and Medieval (to c. 1500), Pike and Shot (c. 1500-1700), Horse and Musket
+# (1700-1900) and the Second World War.
+#
+# ONE SETTING PER GAME, and it is a scalar because no game in the taxonomy is played in two
+# universes. The two near-exceptions are Bolt Action and Blood Red Skies, whose Korea supplements
+# take them past 1945 with their own ranges; those boxes are a product-level fact (a hand override
+# on `settings`), not a second setting on the game. A game that belongs to no setting at all --
+# Steamforged's 5e-compatible Epic Encounters -- says `settingless: true` instead, so its products
+# read `not-applicable` rather than `unknown`. `other-games` is a catch-all bucket, not a game, and
+# names neither.
+settings:
+  - slug: a-song-of-ice-and-fire
+    label: A Song of Ice and Fire
+  - slug: age-of-sigmar
+    label: Age of Sigmar
+  - slug: ancient-and-medieval
+    label: Ancient and Medieval
+  - slug: antares
+    label: Antares
+  - slug: ea
+    label: Eä
+  - slug: erehwon
+    label: Erehwon
+  - slug: frostgrave
+    label: Frostgrave
+  - slug: godtear
+    label: Godtear
+  - slug: guild-ball
+    label: Guild Ball
+  - slug: halo
+    label: Halo
+  - slug: hellboy
+    label: Hellboy
+  - slug: horse-and-musket
+    label: Horse and Musket
+  - slug: infinity-universe
+    label: Infinity Universe
+  - slug: iron-kingdoms
+    label: Iron Kingdoms
+  - slug: judge-dredd
+    label: Judge Dredd
+  - slug: lindwurm
+    label: Lindwurm
+  - slug: malifaux
+    label: Malifaux
+  - slug: marvel
+    label: Marvel
+  - slug: middle-earth
+    label: Middle-earth
+  - slug: oathmark
+    label: Oathmark
+  - slug: old-world
+    label: The Old World
+  - slug: pannithor
+    label: Pannithor
+  - slug: pike-and-shot
+    label: Pike and Shot
+  - slug: ravaged-galaxy
+    label: Ravaged Galaxy
+  - slug: star-wars
+    label: Star Wars
+  - slug: the-walking-dead
+    label: The Walking Dead
+  - slug: warhammer-40k
+    label: 'Warhammer 40,000'
+  - slug: warpath-universe
+    label: Warpath Universe
+  - slug: world-war-two
+    label: Second World War

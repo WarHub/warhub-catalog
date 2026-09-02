@@ -13,4 +13,7 @@ reason: >-
 clauses:
   - codeMatches: '^WI\d{3}$'
     category: book
+    # A magazine about historical wargaming generally belongs to no game and no period, and now
+    # says so instead of reading as undecided -- see the reason above.
+    generic: true
     note: 4 undecided; control 20, 100%

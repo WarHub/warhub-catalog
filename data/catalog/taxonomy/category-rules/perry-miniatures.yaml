@@ -14,3 +14,10 @@ clauses:
   - codeMatches: '^[A-Z]{2,6}\s?\d'
     category: miniatures
     note: 2 undecided; control 28, 100%
+
+  # WHICH PERIOD. Perry's ranges are historical figures for any rules the buyer prefers, so they
+  # are placed by SETTING and no game: every name in the range says its war, and every war here is
+  # in the Horse and Musket period (1700-1900) -- the American Civil War, the Napoleonic Wars,
+  # the American War of Independence, the Franco-Prussian War.
+  - nameMatches: '\b(american civil war|napoleonic|war of independence|franco-prussian|hussars|continental infantry)\b'
+    settings: [horse-and-musket]
