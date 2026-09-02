@@ -3,12 +3,12 @@ summary:
   undecided: 6893
   byBasis:
     code: 3684
-    lexicon: 583
-    mapped: 15885
+    lexicon: 577
+    mapped: 15891
     paint-barcode: 12
     stated: 1986
     unknown: 6893
-  decidedThisRun: 2368
+  decidedThisRun: 20164
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -277,6 +277,18 @@ conflicts:
   - entity: vallejo/26231
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+  - entity: warlord-games/105010001
+    type: gameSystem-disagreement
+    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
+  - entity: warlord-games/302210001
+    type: gameSystem-disagreement
+    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
+  - entity: warlord-games/302210002
+    type: gameSystem-disagreement
+    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
+  - entity: warlord-games/315120017
+    type: gameSystem-disagreement
+    detail: catalog says epic-black-powder (stated); mfr-warlord-store tags~epic-pike-shotte says epic-pike-and-shotte
   - entity: warlord-games/403013012
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
@@ -289,15 +301,21 @@ conflicts:
   - entity: warlord-games/482010003
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-goblingaming=miniatures'
-  - entity: warlord-games/792011002
+  - entity: warlord-games/993019903
     type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); ret-radaddel tags~BLACK SEAS* says black-seas
-  - entity: warlord-games/792012002
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
+  - entity: warlord-games/BPDEALSEP05
     type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); ret-radaddel tags~BLACK SEAS* says black-seas
-  - entity: warlord-games/792013002
+    detail: catalog says black-powder (stated); mfr-warlord-store tags~black-seas says black-seas
+  - entity: warlord-games/WGB-AK-21K
     type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); ret-radaddel tags~BLACK SEAS* says black-seas
+    detail: catalog says pike-and-shotte (stated); mfr-warlord-store tags~korean-war,blitzkrieg-germans,german-afrika-korps,german-waffen-ss,italian-army says bolt-action
+  - entity: warlord-games/WGP-BAA-02
+    type: gameSystem-disagreement
+    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
+  - entity: warlord-games/WGR-ARMY2
+    type: gameSystem-disagreement
+    detail: catalog says bolt-action (stated); mfr-warlord-store tags~napoleonic-wars-1789-1815,napoleonic-wars says black-powder
   - entity: wyrd-games/WYR40004
     type: category-disagreement
     detail: 'manufacturer: mfr-wyrd-store=game-accessory; mfr-wyrd-store=miniatures'

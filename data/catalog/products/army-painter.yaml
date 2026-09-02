@@ -708,10 +708,8 @@ products:
     eanConfidence: confirmed
     additionalEans:
       - '5713799700901'
-    gameSystems:
-      - bolt-action
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -736,10 +734,8 @@ products:
     eanConfidence: confirmed
     additionalEans:
       - '5713799701007'
-    gameSystems:
-      - bolt-action
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -802,10 +798,8 @@ products:
     sku: BR7017
     ean: '5713799701700'
     eanConfidence: confirmed
-    gameSystems:
-      - bolt-action
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: unknown
     categoryBasis: unknown
     packaging: single
     status: current
@@ -2355,10 +2349,8 @@ products:
     sku: TL5036
     ean: '5713799503601'
     eanConfidence: confirmed
-    gameSystems:
-      - bolt-action
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -2408,10 +2400,8 @@ products:
     sku: TL5038
     ean: '5713799503809'
     eanConfidence: confirmed
-    gameSystems:
-      - bolt-action
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -10643,7 +10633,9 @@ products:
     sku: WP8083
     ean: '5713799808300'
     eanConfidence: confirmed
-    gameSystemsBasis: not-applicable
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: mapped
     category: paint-set
     categoryBasis: mapped
     packaging: set
@@ -11277,7 +11269,9 @@ products:
     name: Blitzkrieg German Paint Bundle
     manufacturer: army-painter
     sku: PAINTBUNDLE006
-    gameSystemsBasis: not-applicable
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: mapped
     category: paint-set
     categoryBasis: mapped
     packaging: set

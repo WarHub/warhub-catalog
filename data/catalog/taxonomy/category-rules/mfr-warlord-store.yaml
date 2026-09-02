@@ -77,6 +77,32 @@ reason: >-
   week. `eu` and `us` read 51.9% and 52.0%, which is the base rate exactly -- they are market
   flags. `deal` and `perfect-present` are promotions. None of these is mapped and none should be.
 
+# GENERIC GOODS BELONG TO NO GAME, and Warlord tags them with every game they can be used in.
+# `D6 Dice - white (30)` carries black-powder + black-seas + bolt-action + hail-caesar +
+# pike-shotte; `Grassland Playing Mat 6'x4'` carries four. Each tag is individually true -- the
+# dice ARE for Black Powder -- and their union is false, because a bag of dice is not a Black
+# Powder product. The honest value is an empty list with `gameSystemsBasis: not-applicable`, which
+# is what these shelves get once the game axis is silenced for them.
+#
+# Same finding as Mantic's accessories shelves, arrived at the same way: by running the clauses and
+# reading what came out with more than one game.
+noneOf:
+  - hintEquals: {productType: Dice}
+    blocks: [gameSystems]
+  - hintEquals: {productType: Gaming mat}
+    blocks: [gameSystems]
+  - hintEquals: {productType: Basing}
+    blocks: [gameSystems]
+  - hintEquals: {productType: Bases}
+    blocks: [gameSystems]
+  - hintEquals: {productType: Brushes}
+    blocks: [gameSystems]
+  - hintEquals: {productType: Hobby}
+    blocks: [gameSystems]
+  - hintEquals: {productType: Hobby Set}
+    blocks: [gameSystems]
+    note: tools, dice and mats -- sold for every game, belonging to none
+
 clauses:
   # --- paint -----------------------------------------------------------------------------------
   - category: paint
@@ -238,6 +264,94 @@ clauses:
     hintContainsAny:
       tags: ['blister', 'metal', 'warlord-resinplus']
     note: 65/65, 245/249 and 29/29; the material tags that survived grading
+
+  # ===========================================================================================
+  # WHICH GAME. These could not be written until `legacy-catalog` stopped asserting `bolt-action`
+  # for 3,865 Warlord products, because that value WAS the grading set: measured against it, the
+  # tag `GoA` scored 39 of 39 "bolt-action" while sitting on products named
+  # `Boromite Engineers` and `Tsan Ra Torus Squad`. The contamination was in the truth, not the
+  # tags.
+  #
+  # GRADED INSTEAD AGAINST THE STORE'S OWN `productType`, through
+  # data/catalog/mappings/mfr-warlord-store.yaml -- a different field of the same listing, and one
+  # that agrees with legacy 2,868 of 2,871 times inside the bucket where both speak. Figures below
+  # are (graded products, purity).
+  - gameSystems: [konflikt-47]
+    hintContainsAny:
+      tags: ['konflikt-47', 'Konflikt-47-10', 'K47-german', 'k47-USA', 'k47-british',
+             'k47-Japanese', 'k47-Soviet', 'k47-Italian']
+    note: 182/182 and 83/83
+  - gameSystems: [victory-at-sea]
+    hintContainsAny:
+      tags: ['victory-at-sea', 'aircraft-carriers', 'cruisers', 'battleships', 'destroyers']
+    note: 155/155
+  - gameSystems: [blood-red-skies]
+    hintContainsAny:
+      tags: ['blood-red-skies', 'ACE']
+    note: 138/138
+  - gameSystems: [black-seas]
+    hintContainsAny: {tags: ['black-seas']}
+    note: 90/90
+  - gameSystems: [cruel-seas]
+    hintContainsAny: {tags: ['cruel-seas']}
+    note: 33/33
+  - gameSystems: [gates-of-antares]
+    hintContainsAny:
+      tags: ['gates-of-antares', 'beyond-the-gates-of-antares', 'GoA', 'algoryn', 'boromite',
+             'ghar', 'isorian', 'concord', 'freeborn']
+    note: 83/83 and 123/123 -- the tags whose grading was inverted by the fill
+  - gameSystems: [warlords-of-erehwon]
+    hintContainsAny: {tags: ['warlords-of-erehwon']}
+    note: 9/9
+  - gameSystems: [epic-hail-caesar]
+    hintContainsAny: {tags: ['epic-hail-caesar']}
+    note: 36/36
+  - gameSystems: [epic-pike-and-shotte]
+    hintContainsAny: {tags: ['epic-pike-shotte']}
+    note: 46/47
+
+  # THE PERIOD TAGS. Warlord's historical games each own a period, and the period tag is a
+  # stronger signal than the game tag because it is applied consistently -- `black-powder` itself
+  # grades only 90.2% (its misses are Epic Black Powder), while its two period tags are perfect.
+  - gameSystems: [pike-and-shotte]
+    hintContainsAny:
+      tags: ['thirty-years-war-1618-1648', 'the-english-civil-wars-1642-1652']
+    note: 92/92 and 86/86
+  - gameSystems: [black-powder]
+    hintContainsAny: {tags: ['napoleonic-wars-1789-1815', 'napoleonic-wars']}
+    note: 186/186 and 94/94
+  - gameSystems: [hail-caesar]
+    hintContainsAny: {tags: ['hail-caesar', 'the-dark-ages']}
+    note: 257 graded 98.1%, and 71/71
+
+  # ACHTUNG PANZER IS PLAYED WITH BOLT ACTION KITS, and Warlord says so on the product page: the
+  # `M24 Chaffee` description reads "This vehicle can also be used in games of Achtung Panzer!,
+  # the game of close-quarters tank-on-tank combat". The tag grades 71.8% `bolt-action` against
+  # the store's own productType, and that is not impurity -- it is the same kit being sold into
+  # both, which is what a list is for. 124 rows.
+  - gameSystems: [achtung-panzer, bolt-action]
+    hintContainsAny: {tags: ['achtung-panzer', 'prepare-achtung-panzer']}
+    note: 117 graded, 71.8% bolt-action -- both, not either
+
+  # THE BARE `bolt-action` TAG IS A PERIOD, NOT A GAME, and it is deliberately absent. Warlord
+  # runs FIVE World War Two games -- Bolt Action, Achtung Panzer!, Victory at Sea, Cruel Seas and
+  # Blood Red Skies -- and tags the era on all of them, so `Victory at Sea - Type 1936A Destroyers`
+  # carries `bolt-action` beside `victory-at-sea` and `destroyers`. It grades 96.2% against the
+  # store's productType, and the 3.8% is not noise: it is every naval and air product in the WWII
+  # range. Because the game axis ACCUMULATES every matching clause of the winning source -- which
+  # is what lets Wyrd's `Malifaux Third Edition and The Other Side` products name both -- a
+  # polysemous tag does not merely dilute, it manufactures a second membership.
+  #
+  # NEITHER IS A PERIOD OR A CAMPAIGN. `D-Day`, `late-war` and `zone-winter` were tried and
+  # produce the same failure one step down: `80th D-Day anniversary Campaign Pack - Cruel Seas
+  # PDF` is a Cruel Seas product that carries `D-Day`, so the clause handed it Bolt Action too.
+  # What survives is the FORCE tags -- a nationality plus an army is a land-war formation, and
+  # Bolt Action is Warlord's land-war game. `korean-war` is a Bolt Action supplement by name.
+  - gameSystems: [bolt-action]
+    hintContainsAny:
+      tags: ['korean-war', 'blitzkrieg-germans', 'german-afrika-korps', 'german-waffen-ss',
+             'italian-army']
+    note: 92-155 graded each, 97.2-100%
 
   - packaging: bundle
     hintEquals: {productType: Bundle}
