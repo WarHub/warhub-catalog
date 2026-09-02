@@ -178,7 +178,14 @@ data/
 
    `--emit-queue` writes `data/review/classification-queue.yaml`; the driver sends it in batches
    and writes accepted decisions to `data/catalog/classifications/products.yaml`; `--apply` merges
-   those into `data/catalog/overrides.yaml`. **None of the classify verbs re-run `resolve`
+   those into `data/catalog/overrides.yaml`.
+   **`--emit-queue` also prices the wave before you start it**, reporting how many cache entries
+   the new queue can still reach and how many requests a full wave therefore costs. Read that line:
+   the price is the part the cache cannot answer, not the queue length, and the two diverge without
+   warning — `compute_input_hash` covers the shared `candidates` block, so a single slug entering
+   or leaving the taxonomy re-keys every item at once and orphans the whole file. Note also that
+   `--budget` caps **requests** and slices the queue **positionally**, in entity-id order: a
+   partial budget is spent from the front of the alphabet, not spread across the catalog. **None of the classify verbs re-run `resolve`
    themselves** — a decision is invisible on the published catalog until `resolve` runs, and
    `categorize` must follow `resolve` for the reason step 2 gives.
    `--mode propose-joins` is the other wave: it finds suspected duplicate-entity pairs (shared

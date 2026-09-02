@@ -675,3 +675,114 @@ def test_run_is_deterministic_given_identical_responses(tmp_path: Path) -> None:
 
     assert first == second
     assert list(first) == sorted(first)
+
+
+# --- cache reachability ----------------------------------------------------------------------
+#
+# The counts this repo reported before these existed (lines, distinct hashes, distinct entities)
+# cannot see the failure they measure: a cache with one line per entity and no duplicates at all
+# answered nothing for eight months and every reported number looked healthy.
+
+
+def test_reachability_counts_only_entries_todays_queue_can_actually_hit() -> None:
+    from warhub_acquisition.classify._llm_common import cache_reachability
+
+    items = [make_item(i) for i in range(3)]
+    cache = {compute_input_hash(items[0]): object(), compute_input_hash(items[1]): object(), "dead": object()}
+
+    reachable, orphaned = cache_reachability(items, cache)
+
+    assert (reachable, orphaned) == (2, 1)
+
+
+def test_one_candidate_slug_moving_orphans_the_entire_cache() -> None:
+    # The 2026-08-10 regression in miniature: `grand-alliance-order` left one game system's
+    # observed-faction list and every cached decision in the file died with it, including the
+    # ones about a game system the slug had nothing to do with.
+    from warhub_acquisition.classify._llm_common import cache_reachability
+
+    before = [make_item(i) for i in range(20)]
+    cache = {compute_input_hash(item): object() for item in before}
+
+    narrowed = {**CANDIDATES, "factions": {**CANDIDATES["factions"], "age-of-sigmar": ["skaven"]}}
+    after = [make_item(i, narrowed) for i in range(20)]
+
+    assert cache_reachability(before, cache) == (20, 0)
+    assert cache_reachability(after, cache) == (0, 20)
+
+
+def test_emit_queue_reports_what_a_wave_would_cost_before_anything_is_spent(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    paths = DataPaths(tmp_path)
+    seed_taxonomy(paths)
+    (paths.catalog_products).mkdir(parents=True, exist_ok=True)
+
+    items = [make_item(i) for i in range(3)]
+    write_queue(paths, items)
+    # One reachable entry, one keyed against a decision space that no longer exists.
+    cache_path = paths.root / "review" / "classification-cache.jsonl"
+    cache_path.write_text(
+        "\n".join(
+            json.dumps(
+                {
+                    "inputHash": h,
+                    "entity": "mfr/item-000",
+                    "decision": "unknown",
+                    "model": DEFAULT_MODEL,
+                    "date": "2026-07-13",
+                }
+            )
+            for h in (compute_input_hash(items[0]), "0" * 64)
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    from warhub_acquisition.classify.llm import describe_cache_coverage
+
+    line = describe_cache_coverage(paths, items)
+
+    assert "2 entries" in line
+    assert "1 reachable" in line
+    assert "1 orphaned" in line
+    # Price is the part the cache cannot answer, not the queue length.
+    assert "sends 2 items in 1 requests" in line
+    assert "WARNING" not in line
+
+
+def test_a_wave_the_cache_cannot_help_at_all_says_so_loudly(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    items = [make_item(i) for i in range(3)]
+    write_queue(paths, items)
+    (paths.root / "review" / "classification-cache.jsonl").write_text(
+        json.dumps(
+            {
+                "inputHash": "0" * 64,
+                "entity": "mfr/gone",
+                "decision": "unknown",
+                "model": DEFAULT_MODEL,
+                "date": "2026-07-13",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    from warhub_acquisition.classify.llm import describe_cache_coverage
+
+    line = describe_cache_coverage(paths, items)
+
+    assert "0 reachable" in line
+    assert "WARNING: the cache answers NOTHING" in line
+    assert "candidates" in line
+
+
+def test_empty_cache_reports_the_full_queue_as_the_price(tmp_path: Path) -> None:
+    paths = DataPaths(tmp_path)
+    items = [make_item(i) for i in range(3)]
+    write_queue(paths, items)
+
+    from warhub_acquisition.classify.llm import describe_cache_coverage
+
+    assert describe_cache_coverage(paths, items) == "cache: empty; a full wave sends all 3 items"

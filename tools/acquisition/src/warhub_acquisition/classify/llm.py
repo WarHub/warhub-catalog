@@ -19,22 +19,44 @@ change re-decides the queue: to actually re-ask, the queue item has to change.
 
 IT GROWS WITHOUT BOUND, BY DESIGN. `append_cache_lines` only ever appends, and a re-keyed item
 leaves its old line behind forever -- `load_cache` dicts by `inputHash`, so an orphaned hash is
-simply never looked up again. Measured 2026-08-31: 6,223 lines / 1.7 MB, 6,223 distinct hashes
-over 6,039 distinct entities -- i.e. 184 entities whose queue item changed at some point and now
-carry a dead line each. The live queue is 7,055 items, so a full fresh wave appends about that
-many more.
+simply never looked up again.
 
-PRUNING, IF IT IS EVER WANTED: wholesale truncation is SAFE FOR THE CATALOG and expensive in the
-only currency this file saves. Nothing downstream reads it except this module; every ACCEPTED
-decision (confidence >= ACCEPT_THRESHOLD) is also materialized into
+EVERY LINE IN IT IS CURRENTLY ORPHANED, and the previous version of this paragraph said the
+opposite because it measured the wrong thing. It reported "6,223 distinct hashes over 6,039
+distinct entities -- i.e. 184 entities whose queue item changed at some point and now carry a dead
+line each". That subtraction finds entities holding MORE THAN ONE line; it says nothing about
+whether any line is reachable, and a file with no duplicate entities at all can still answer
+nothing. Measured properly 2026-08-31, with `cache_reachability` over the live queue: 0 of 6,223
+lines are reachable. All 6,223 match the JULY queues exactly (2,997/2,997 at a82bf4c,
+3,889/3,889 at b85ff09) and none matches the 2026-08-10 rebuild (59c25cd) or anything since.
+
+WHAT KILLED IT WAS ONE FACTION SLUG. `compute_input_hash` hashes the whole item including
+`candidates`, and queue.py deliberately builds ONE candidates object shared by reference across
+every item -- so the decision space is part of every key, and a change to it re-keys the entire
+corpus at once. Between the July waves and the 2026-08-10 rebuild exactly one thing in it moved:
+`grand-alliance-order` left `other-games`'s observed-faction list. 47 game systems and 47 faction
+lists were otherwise identical. That one removal cost every cached decision in the file, including
+thousands about Warhammer 40,000 whose answer it could not possibly have changed.
+
+THE SEMANTICS ARE RIGHT AND THE SILENCE WAS THE BUG. A changed decision space genuinely is a new
+question, which is why there is no separate versioning scheme; the failure was that nothing
+reported the cliff, so the next wave would have been priced as though the cache still worked and
+would silently have paid full price for 6,223 answers it already had. `classify --emit-queue` now
+reports reachability every time it writes the queue, before anyone spends anything.
+
+PRUNING, IF IT IS EVER WANTED: wholesale truncation is SAFE FOR THE CATALOG and -- today, and only
+today -- costs nothing at all. Nothing downstream reads this file except this module; every
+ACCEPTED decision (confidence >= ACCEPT_THRESHOLD) is also materialized into
 `data/catalog/classifications/products.yaml`, which `_write_classifications` MERGES into and
 never removes from -- and the cache-hit branch below re-materializes accepted decisions on every
-run, so a truncated cache cannot un-publish anything. What is lost is the negative record, which
-lives nowhere else: measured 2026-08-31, 2,373 `unknown` rows and 74 classified-but-below-
-threshold rows -- 2,447 items that would be re-asked, at full price, to be told the same thing.
-So: safe, but it buys disk back with budget. Selective pruning (dropping only hashes absent from
-the current queue) is the cheaper form and needs no new machinery -- the orphans are exactly the
-lines whose `inputHash` no `compute_input_hash` over today's queue reproduces.
+run, so a truncated cache cannot un-publish anything. What truncation normally costs is the
+negative record, which lives nowhere else: 2,373 `unknown` rows and 74 classified-but-below-
+threshold rows, 2,447 items that would otherwise be re-asked to be told the same thing. Those rows
+are unreachable too, so they are already going to be re-asked; keeping them saves no budget and
+buys 1.7 MB of nothing. Selective pruning (dropping only hashes absent from the current queue) is
+normally the cheaper form and needs no new machinery -- but note what it does HERE: applied today
+it deletes the whole file, because that is exactly what "absent from the current queue" now means.
+The file is kept anyway, as the only record of what the July waves decided and refused.
 
 Batching, hashing, cache read/append, response parsing, and the SDK call wrapper are shared with
 `classify/joins.py` (Task 6) via `classify/_llm_common.py` -- see that module's docstring. This
@@ -54,6 +76,7 @@ from warhub_acquisition.classify._llm_common import (
     DEFAULT_MODEL,
     append_cache_lines,
     batch_pending,
+    cache_reachability,
     call_batch,
     compute_input_hash,
     extract_text,
@@ -74,6 +97,7 @@ __all__ = [
     "LlmRunSummary",
     "build_system_prompt",
     "compute_input_hash",
+    "describe_cache_coverage",
     "run_llm_classification",
 ]
 
@@ -214,6 +238,35 @@ def _decide(
 
 def _cache_path(paths: DataPaths):
     return paths.root / "review" / "classification-cache.jsonl"
+
+
+def describe_cache_coverage(paths: DataPaths, queue: list[dict]) -> str:
+    """One line for `--emit-queue` saying what a wave over `queue` would actually cost.
+
+    Printed at the moment the queue is written -- the last free moment before someone starts the
+    driver -- because every other signal arrives too late: `LlmRunSummary` reports cached-skips
+    when the spending is already done. A wave's price is `pending`, not queue length, and the two
+    diverge silently (see this module's cache note on the 2026-08-10 rebuild).
+    """
+    cache = load_cache(_cache_path(paths), CacheEntry)
+    if not cache:
+        return f"cache: empty; a full wave sends all {len(queue)} items"
+
+    reachable, orphaned = cache_reachability(queue, cache)
+    pending = len(queue) - reachable
+    requests = -(-pending // DEFAULT_BATCH_SIZE)  # ceil: budget counts requests, not items
+    line = (
+        f"cache: {len(cache)} entries, {reachable} reachable by this queue, {orphaned} orphaned; "
+        f"a full wave sends {pending} items in {requests} requests"
+    )
+    if reachable == 0:
+        line += (
+            "\nWARNING: the cache answers NOTHING for this queue. Every entry was keyed against a "
+            "different decision space -- compute_input_hash covers the shared `candidates` block, "
+            "so one slug entering or leaving the taxonomy re-keys every item at once. This wave "
+            "will pay full price for answers the cache may already hold under a dead key."
+        )
+    return line
 
 
 # --- classifications/products.yaml -----------------------------------------------------------
