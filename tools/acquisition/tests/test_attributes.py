@@ -37,7 +37,7 @@ def test_precedence_prefers_manufacturer_then_backfills() -> None:
     assert product.name == "Combat Patrol: Necrons"     # manufacturer wins
     assert product.priceGbp == 76.5
     assert product.imageUrl == "https://ret/img.jpg"     # retailer backfills gaps
-    assert product.gameSystem == "warhammer-40k"
+    assert product.gameSystems == ["warhammer-40k"]
     assert product.category is None                      # nobody said, so there is none
     assert product.evidence == ["mfr-gw:necrons", "ret-a:necrons"]
 
@@ -259,7 +259,7 @@ TRADE_MAPS = {
 def test_trade_category_fills_null_game_system_and_faction() -> None:
     members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": "40K - Xenos - Aeldari"})]
     product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120", category_maps=TRADE_MAPS)
-    assert product.gameSystem == "warhammer-40k"
+    assert product.gameSystems == ["warhammer-40k"]
     assert product.faction == "aeldari"
 
 
@@ -271,7 +271,7 @@ def test_trade_category_never_overrides_a_supplied_game_system() -> None:
         obs("mfr-gw-trade:99120", hints={"tradeCategory": "AOS - Order - Stormcast Eternals"}),
     ]
     product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, None, category_maps=TRADE_MAPS)
-    assert product.gameSystem == "warhammer-40k"
+    assert product.gameSystems == ["warhammer-40k"]
     assert product.faction == "necrons"
 
 
@@ -280,7 +280,7 @@ def test_trade_category_system_only_when_faction_unmapped() -> None:
     # rather than guess.
     members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": "40K - Generic"})]
     product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120", category_maps=TRADE_MAPS)
-    assert product.gameSystem == "warhammer-40k"
+    assert product.gameSystems == ["warhammer-40k"]
     assert product.faction is None
 
 
@@ -289,7 +289,7 @@ def test_trade_category_unmapped_prefix_classifies_nothing() -> None:
     for raw in ("Paint - WH Colour - Layer", "E:B200b", "Chaos Daemons - Khorne"):
         members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": raw})]
         product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120", category_maps=TRADE_MAPS)
-        assert product.gameSystem is None, raw
+        assert product.gameSystems == [], raw
         assert product.faction is None, raw
 
 
@@ -297,7 +297,7 @@ def test_trade_fallback_is_inert_without_category_maps() -> None:
     # The default call path (category_maps=None) must behave exactly as before this feature.
     members = [obs("mfr-gw-trade:99120", hints={"tradeCategory": "40K - Xenos - Aeldari"})]
     product = resolve_attributes("e", members, TRADE_KINDS, NO_EAN, "99120")
-    assert product.gameSystem is None
+    assert product.gameSystems == []
     assert product.faction is None
 
 
@@ -384,6 +384,69 @@ def test_a_description_stating_no_membership_leaves_contents_unset() -> None:
     )
     assert product.contentSkus is None
     assert product.contentSkusFrom is None
+
+
+# --- gameSystems: the FOLD stays single-valued, and the reason is measured ----------------------
+#
+# `gameSystems` is a list because a product can belong to several games, but NOT because this fold
+# ever produces several. Over all 19,904 observations that carry a `gameSystem` hint, zero carry
+# more than one value: no source has ever asserted dual membership in that field. The list is
+# filled to more than one element by `categorize`, from taxonomies that name games explicitly.
+
+
+def test_the_fold_writes_at_most_one_system() -> None:
+    product = resolve_attributes(
+        "e", [obs("mfr-gw:b", hints={"gameSystem": "warhammer-40k"})], KINDS, NO_EAN, None,
+    )
+    assert product.gameSystems == ["warhammer-40k"]
+    assert product.gameSystemsBasis == "stated"
+
+
+def test_two_sources_disagreeing_is_not_merged_into_membership() -> None:
+    """THE LINE BETWEEN A CLAIM AND A DISAGREEMENT. The kind ladder picks one voice; unioning
+    would turn every disagreement into a membership."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:a", hints={"gameSystem": "bolt-action"}),
+         obs("mfr-gw:b", hints={"gameSystem": "hail-caesar"})],
+        KINDS, NO_EAN, None,
+    )
+    assert product.gameSystems == ["bolt-action"]
+
+
+def test_one_sources_two_rows_are_not_a_joint_claim() -> None:
+    """THE RULE THAT WAS TRIED AND MEASURED WRONG. Taking the winning source's whole claim across
+    its rows looks like the honest reading of "legacy-catalog files Custodian Guard under both",
+    and it produced 9 products of which 3 were false: `M24 Chaffee, US light tank` and
+    `Germanic command` share EAN 5060200844311 on the Warlord store, so one entity holds both
+    rows, and the WWII tank published as a Hail Caesar product. A source's rows disagreeing is a
+    fact about the JOIN, not a claim about the product."""
+    product = resolve_attributes(
+        "e",
+        [obs("mfr-warlord:tank", hints={"gameSystem": "bolt-action"}),
+         obs("mfr-warlord:pikemen", hints={"gameSystem": "hail-caesar"})],
+        {"mfr-warlord": "manufacturer"}, NO_EAN, None,
+    )
+    # ONE value, whichever the key tiebreak picks. The property is that the second row does not
+    # join the first, not which of the two survives.
+    assert product.gameSystems == ["hail-caesar"]
+
+
+def test_the_winning_source_is_the_first_that_speaks_not_the_first_that_exists() -> None:
+    """A curated member with no gameSystem at all does not veto the manufacturer's claim -- the
+    ladder selects the highest-priority source that ASSERTS one."""
+    product = resolve_attributes(
+        "e",
+        [obs("legacy-catalog:a"), obs("mfr-gw:b", hints={"gameSystem": "warhammer-40k"})],
+        KINDS, NO_EAN, None,
+    )
+    assert product.gameSystems == ["warhammer-40k"]
+
+
+def test_no_source_speaking_leaves_the_list_empty() -> None:
+    product = resolve_attributes("e", [obs("ret-a:x")], KINDS, NO_EAN, None)
+    assert product.gameSystems == []
+    assert product.gameSystemsBasis is None    # `complete_game_systems_basis` settles it later
 
 
 # --- categoryBasis: a category nothing asserted is absent ----------------------------------------
@@ -649,14 +712,14 @@ def test_hint_fields_can_be_declared_stale_too() -> None:
     assert product.description == "current blurb"
 
 
-# --- gameSystemBasis -------------------------------------------------------------------------
+# --- gameSystemsBasis -------------------------------------------------------------------------
 #
 # A null gameSystem was carrying two facts that need opposite responses: a hobby product that will
 # never have one, and a game product nobody has classified. Only the second is a question.
 
 from warhub_acquisition.resolve.attributes import (  # noqa: E402
     apply_classification,
-    complete_game_system_basis,
+    complete_game_systems_basis,
 )
 
 _LABELS = {"warhammer-40k": "Warhammer 40,000", "infinity": "Infinity", "bolt-action": "Bolt Action"}
@@ -670,13 +733,13 @@ def _product(**kwargs) -> CanonicalProduct:
 
 
 def test_a_hobby_product_with_no_game_system_is_not_applicable_rather_than_unknown() -> None:
-    settled = complete_game_system_basis(_product(name="Abaddon Black 12ml", category="paint"), _LABELS)
-    assert settled.gameSystemBasis == "not-applicable"
+    settled = complete_game_systems_basis(_product(name="Abaddon Black 12ml", category="paint"), _LABELS)
+    assert settled.gameSystemsBasis == "not-applicable"
 
 
 def test_a_game_product_with_no_game_system_stays_unknown() -> None:
-    settled = complete_game_system_basis(_product(name="Some Squad", category="miniatures"), _LABELS)
-    assert settled.gameSystemBasis == "unknown"
+    settled = complete_game_systems_basis(_product(name="Some Squad", category="miniatures"), _LABELS)
+    assert settled.gameSystemsBasis == "unknown"
 
 
 def test_the_predicate_can_never_erase_a_game_system_anything_established() -> None:
@@ -685,15 +748,15 @@ def test_the_predicate_can_never_erase_a_game_system_anything_established() -> N
     The obvious formulation -- "category is paint, therefore no game system" -- is measurably
     wrong: 411 products carry both, and they are real.
     """
-    themed = _product(name="Infinity: JSA Paint Set", category="paint-set", gameSystem="infinity")
-    assert complete_game_system_basis(themed, _LABELS) is themed
+    themed = _product(name="Infinity: JSA Paint Set", category="paint-set", gameSystems=["infinity"])
+    assert complete_game_systems_basis(themed, _LABELS) is themed
 
 
 def test_a_hobby_product_named_for_a_game_is_a_question_not_a_dismissal() -> None:
     # `Infinity: JSA Paint Set` with no stated system must not be written off as not-applicable --
     # it is a themed boxed product and somebody should decide.
-    settled = complete_game_system_basis(_product(name="Infinity: JSA Paint Set", category="paint-set"), _LABELS)
-    assert settled.gameSystemBasis == "unknown"
+    settled = complete_game_systems_basis(_product(name="Infinity: JSA Paint Set", category="paint-set"), _LABELS)
+    assert settled.gameSystemsBasis == "unknown"
 
 
 def test_a_colour_named_after_a_faction_is_still_a_colour() -> None:
@@ -704,16 +767,16 @@ def test_a_colour_named_after_a_faction_is_still_a_colour() -> None:
         "SQUIG ORANGE (6-PACK) 12ML Warhammer 40,000",
         "Warhammer 40,000 Spray",
     ):
-        settled = complete_game_system_basis(_product(name=name, category="paint"), _LABELS)
-        assert settled.gameSystemBasis == "not-applicable", name
+        settled = complete_game_systems_basis(_product(name=name, category="paint"), _LABELS)
+        assert settled.gameSystemsBasis == "not-applicable", name
 
 
 def test_a_classification_fills_a_hole_and_can_never_overrule_a_source() -> None:
     decisions = {"mfr/x": {"gameSystem": "warhammer-40k", "faction": None}}
 
-    stated = _product(gameSystem="bolt-action", gameSystemBasis="stated")
-    assert apply_classification(stated, decisions).gameSystem == "bolt-action"
+    stated = _product(gameSystems=["bolt-action"], gameSystemsBasis="stated")
+    assert apply_classification(stated, decisions).gameSystems == ["bolt-action"]
 
     empty = _product()
     filled = apply_classification(empty, decisions)
-    assert (filled.gameSystem, filled.gameSystemBasis) == ("warhammer-40k", "classified")
+    assert (filled.gameSystems, filled.gameSystemsBasis) == (["warhammer-40k"], "classified")

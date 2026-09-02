@@ -50,9 +50,10 @@ products:
     sku: '99120110077'
     ean: '5011921194285'
     eanConfidence: provisional
-    gameSystem: warhammer-40k
+    gameSystems:
+      - warhammer-40k
     faction: necrons
-    gameSystemBasis: stated
+    gameSystemsBasis: stated
     categoryBasis: unknown
     status: current
     availability: in_stock
@@ -316,12 +317,12 @@ def test_null_game_system_entity_publishes_with_no_conflict(tmp_path: Path) -> N
     catalog = resolve_catalog(paths)
     products = {p.id: p for records in catalog.values() for p in records}
     assert "games-workshop/99999999999" in products
-    assert products["games-workshop/99999999999"].gameSystem is None
+    assert products["games-workshop/99999999999"].gameSystems == []
     assert read_yaml(paths.conflicts) == {"conflicts": []}
     # gameSystem: null is omitted (exclude_none), not written as an explicit null in the YAML
     data = read_yaml(paths.catalog_products / "games-workshop.yaml")
     record = next(p for p in data["products"] if p["id"] == "games-workshop/99999999999")
-    assert "gameSystem" not in record
+    assert "gameSystems" not in record
 
 
 def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_path: Path) -> None:
@@ -343,7 +344,7 @@ def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_pat
     before = resolve_catalog(paths)["games-workshop"][0]
     assert before.id == "games-workshop/99120110077"
     assert before.faction == "necrons"
-    assert before.gameSystem == "warhammer-40k"
+    assert before.gameSystems == ["warhammer-40k"]
     assert before.ean == "5011921194285"
     assert before.firstSeen == "2026-07-07"
 
@@ -353,7 +354,7 @@ def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_pat
         paths.overrides,
         {"retract": [], "products": {
             "games-workshop/99120110077": {
-                "gameSystem": "warhammer-age-of-sigmar", "faction": "stormcast-eternals"}}},
+                "gameSystems": ["warhammer-age-of-sigmar"], "faction": "stormcast-eternals"}}},
     )
 
     catalog = resolve_catalog(paths)
@@ -362,7 +363,7 @@ def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_pat
     after = products[0]
 
     # the patch landed -- these are the non-trivial assertions here
-    assert after.gameSystem == "warhammer-age-of-sigmar"
+    assert after.gameSystems == ["warhammer-age-of-sigmar"]
     assert after.faction == "stormcast-eternals"
     assert read_yaml(paths.conflicts) == {"conflicts": []}
     # documented invariant (holds by construction -- overrides apply post-identity): the patch
@@ -370,9 +371,9 @@ def test_reclassification_via_overrides_is_post_identity_attribute_patch(tmp_pat
     # `gameSystemBasis` moves with them: the override IS what decided the value, and recording
     # which of `stated`/`mapped`/`classified`/`override` decided a gameSystem is the whole point of
     # the field. Everything else must still be untouched.
-    assert after.gameSystemBasis == "override"
-    assert after.model_dump(exclude={"gameSystem", "faction", "gameSystemBasis"}) == before.model_dump(
-        exclude={"gameSystem", "faction", "gameSystemBasis"}
+    assert after.gameSystemsBasis == "override"
+    assert after.model_dump(exclude={"gameSystems", "faction", "gameSystemsBasis"}) == before.model_dump(
+        exclude={"gameSystems", "faction", "gameSystemsBasis"}
     )
 
 
@@ -414,7 +415,7 @@ def test_reclassification_via_changed_source_hint_preserves_identity(tmp_path: P
     after = products[0]
     assert after.id == before.id
     assert after.faction == "stormcast-eternals"
-    assert after.gameSystem == "warhammer-age-of-sigmar"
+    assert after.gameSystems == ["warhammer-age-of-sigmar"]
     assert after.ean == before.ean
     assert after.eanConfidence == before.eanConfidence
     assert after.firstSeen == before.firstSeen
@@ -458,7 +459,7 @@ def test_upsert_reobservation_with_changed_hint_clamps_first_seen(tmp_path: Path
     after = products[0]
     assert after.id == before.id
     assert after.faction == "stormcast-eternals"
-    assert after.gameSystem == "warhammer-age-of-sigmar"
+    assert after.gameSystems == ["warhammer-age-of-sigmar"]
     assert after.ean == before.ean
     assert after.eanConfidence == before.eanConfidence
     assert after.firstSeen == before.firstSeen == "2026-07-07"

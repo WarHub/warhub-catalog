@@ -12,7 +12,7 @@ from warhub_acquisition.resolve import crossover
 from warhub_acquisition.resolve.attributes import (
     apply_classification,
     apply_overrides,
-    complete_game_system_basis,
+    complete_game_systems_basis,
     resolve_attributes,
 )
 from warhub_acquisition.resolve.corroborate import find_shared_eans, resolve_ean
@@ -137,11 +137,12 @@ def _load_optional(path: Path, model: type, default: object) -> object:
 
 
 def _dump_product(record: CanonicalProduct) -> dict:
-    # `additionalEans`/`supersedes` are empty for the vast majority; omit them entirely there so
-    # the published shape is byte-identical for existing products (only repackaged/superseded
-    # entities carry them). `supersededBy` is None there and exclude_none already drops it.
+    # `additionalEans`, `supersedes` and `gameSystems` are empty for the vast majority; omit them
+    # entirely there so the published shape stays minimal (only repackaged/superseded entities
+    # carry the first two, and a hobby product belongs to no game at all). `supersededBy` is None
+    # there and exclude_none already drops it.
     data = record.model_dump(mode="json", exclude_none=True)
-    for optional_list in ("additionalEans", "supersedes"):
+    for optional_list in ("additionalEans", "supersedes", "gameSystems"):
         if not data.get(optional_list):
             data.pop(optional_list, None)
     return data
@@ -465,12 +466,12 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         # vocabulary as a resolved one -- a typo there would otherwise mint an undeclared value
         # straight into the published catalog, which is exactly how the six ad-hoc values got in.
         vocabulary.check(product.category, product.packaging, product.id)
-        # gameSystem is OPTIONAL: a product genuinely belonging to no game system (a base, a
-        # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with
-        # gameSystem: null rather than being parked out of the catalog. Which of those it is --
-        # nothing to find, or nothing found yet -- is now recorded rather than left for every
-        # reader to re-derive, and classify/queue.py surfaces only the second kind.
-        product = complete_game_system_basis(product, system_labels)
+        # gameSystems is OPTIONAL: a product genuinely belonging to no game system (a base, a
+        # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with an EMPTY
+        # list rather than being parked out of the catalog. Which of those it is -- nothing to
+        # find, or nothing found yet -- is recorded rather than left for every reader to
+        # re-derive, and classify/queue.py surfaces only the second kind.
+        product = complete_game_systems_basis(product, system_labels)
         products.setdefault(product.manufacturer, []).append(product)
 
     conflicts.extend(find_shared_eans(ean_resolutions))

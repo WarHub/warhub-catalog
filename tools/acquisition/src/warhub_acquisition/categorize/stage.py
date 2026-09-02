@@ -25,13 +25,13 @@ from typing import Mapping, Sequence
 
 from warhub_acquisition.models.catalog import CanonicalProduct
 from warhub_acquisition.models.observation import Observation
-from warhub_acquisition.resolve.attributes import complete_game_system_basis
+from warhub_acquisition.resolve.attributes import complete_game_systems_basis
 from warhub_acquisition.resolve.resolver import DataPaths, _dump_product, joined_evidence
 from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
-from .decide import Conflict, Decision, _clause_hit, _signal, decide, flatten_hints
+from .decide import Conflict, Decision, _clause_hit, _product_hit, _signal, decide, flatten_hints
 from .lexicon import load_lexicon
 from .paints import load_paint_barcodes
 from .rules import SourceRules, load_category_rules
@@ -50,26 +50,39 @@ REPLACEABLE = frozenset({"unknown"})
 #: the whole point. `stated`, `mapped` and `override` trace to a claim and are never touched.
 DERIVED_GAME_SYSTEM_BASES = frozenset({"unknown", "not-applicable", None})
 
-#: Hint keys that carry a source's own taxonomy. Only these are counted in the unmapped ranking --
-#: `description` and `quantity` are facts about a product, not filing categories, and listing them
-#: would bury the values a rule could actually use.
-#:
-#: `tradeCategory` was MISSING from this tuple until 2026-08-25, and the omission mattered:
-#: mfr-gw-trade is the sole source for 3,330 undecided products, carries no Shopify-style taxonomy
-#: at all, and therefore reported an EMPTY worklist -- the largest single block of undecided
-#: products in the catalog looked like a source with nothing to offer. It carries 227 distinct
-#: tradeCategory values over 3,016 rows.
-#:
-#: `sscCode` is deliberately still absent. GW's stock-section code is 4,160 distinct values over
-#: 6,822 rows -- a near-unique-per-product identifier, not a taxonomy -- and listing it would put
-#: 40 rows of noise at the top of that source's worklist and push the values a rule could use off
-#: the end.
-TAXONOMY_HINTS = (
-    "productType", "categories", "tags", "breadcrumbs", "hierarchy.lvl1", "vendor", "tradeCategory",
-)
+#: The output axes, in the order `decide` reads them. Named once because three different places
+#: must agree on what "an axis" is: the scan, the veto scoping, and the dead-clause count.
+_AXES = ("category", "packaging", "faction", "gameSystems")
 
-#: How many unmapped values to list per source. The tail is a long one (ret-radaddel alone carries
-#: 7,281 distinct tags) and a file nobody opens is not a worklist.
+#: Hint keys that are FACTS ABOUT A PRODUCT rather than a shelf it was filed on. Everything else
+#: is treated as taxonomy and counted in the unmapped ranking.
+#:
+#: THE LIST USED TO RUN THE OTHER WAY -- an allow-list of seven keys -- and the failure mode of
+#: that shape is silence. A source whose taxonomy key was not among the seven reported an EMPTY
+#: worklist, which is indistinguishable from a source that publishes no taxonomy at all. It
+#: happened twice: `tradeCategory` was missing until 2026-08-25, hiding the largest single block of
+#: undecided products in the catalog, and `productLine` was missing until 2026-09-01, hiding
+#: mfr-cmon -- 387 products, every one of them undecided, and 24 clean product-line values.
+#: Inverting it means a new source's taxonomy is visible the day it arrives and the maintenance
+#: burden falls on the keys we already know are not taxonomies.
+#:
+#: The claims are here because the resolver already folds them into published fields; re-listing
+#: them as unmapped vocabulary would rank things that are not work.
+NON_TAXONOMY_HINTS = frozenset({
+    # claims the resolver folds directly
+    "gameSystem", "faction", "category", "packaging", "quantity", "status", "description",
+    "contentSkus", "namedInSet", "namedOnlyInSets",
+    # measurements and identifiers
+    "volumeMl", "weightG", "grams", "ml", "reference", "sscCode", "legacyProductCode",
+    "supersedes", "retiredOn", "lineageDerived", "eanSource", "modified", "archiveTimestamp",
+})
+
+
+#: How many unmapped values to list per source. The tail is a long one and mostly identifiers
+#: rather than shelves -- 6,793 of ret-radaddel's 7,272 distinct "tags" are the product's own code,
+#: occurring exactly once -- so the ranking is what keeps them out: a value seen on one undecided
+#: product sorts below every real shelf and never reaches this cut. A file nobody opens is not a
+#: worklist.
 _UNMAPPED_LIMIT = 40
 
 
@@ -85,7 +98,7 @@ class Outcome:
     #: `{basis: products}` over the WHOLE catalog after this run -- the figure that survives a
     #: re-run, and the one the report and the PR body quote.
     catalog_basis: Counter = field(default_factory=Counter)
-    #: `{gameSystemBasis: products}` over the whole catalog after this run. Sibling of
+    #: `{gameSystemsBasis: products}` over the whole catalog after this run. Sibling of
     #: `catalog_basis`; `unknown` here is the real size of the classification problem, and it is
     #: the number `classify --emit-queue` turns into a queue.
     game_system_basis: Counter = field(default_factory=Counter)
@@ -111,18 +124,44 @@ def _count_clause_hits(
     can differ by a case or a stray space ("Paint set" beside "Paint Set" at Warlord, both real) --
     or a value the store has retired. Neither announces itself: a table with a broken line and a
     store with no taxonomy produce identical output.
+
+    SOURCE TABLES ONLY. A manufacturer table is keyed on the maker, not on a feed, and is evaluated
+    against the PRODUCT -- so looking it up by `member.source_id` never matches and reported every
+    one of its clauses as dead. 26 of the 42 entries in the last report were that, purely by
+    construction. `_count_manufacturer_hits` counts those against the records instead.
+
+    ONE COUNT PER AXIS, for the same reason `decide` scans per axis: a clause that answers a
+    different question from the one that matched first is live, and the single `break` reported
+    four working `mfr-warmachine vendor=...` clauses as dead because a `productType` clause was
+    ahead of them.
     """
     hits: Counter = Counter()
     for members in entities.values():
         for member in members:
             table = rules.get(member.source_id)
-            if table is None:
+            if table is None or table.manufacturer is not None:
                 continue
-            for clause in table.clauses:
-                if _clause_hit(member, clause):
-                    hits[f"{member.source_id} {_signal(clause)}"] += 1
-                    break
+            for axis in _AXES:
+                for clause in table.clauses:
+                    if getattr(clause, axis) and _clause_hit(member, clause):
+                        hits[f"{member.source_id} {_signal(clause)}"] += 1
+                        break
     return hits
+
+
+def _count_manufacturer_hits(
+    record: CanonicalProduct, rules: Mapping[str, SourceRules], hits: Counter
+) -> None:
+    """The same count for a manufacturer table, against one product's own name and code."""
+    table = rules.get(record.manufacturer or "")
+    if table is None or table.manufacturer is None:
+        return
+    code = record.productCode or record.sku or ""
+    for axis in _AXES:
+        for clause in table.clauses:
+            if getattr(clause, axis) and _product_hit(record.name, code, clause):
+                hits[f"{table.scope} {_signal(clause)}"] += 1
+                break
 
 
 def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
@@ -205,12 +244,16 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 if decision is not None and decision.category is not None:
                     outcome.decided += 1
                     outcome.by_basis[decision.basis] += 1
-                    _stamp(record, decision)
-                    touched = True
                 else:
                     _count_unmapped(outcome, members)
+                # STAMPED WHATEVER IT DECIDED. The counters above are about the CATEGORY, which is
+                # what `undecided` measures; the write is about every axis, because a table that
+                # settled only `packaging` still settled something. Gating the write on the
+                # category is how five committed clauses came to write nothing at all.
+                if decision is not None and _stamp(record, decision):
+                    touched = True
                 game_system_decision = decision
-            if _apply_game_system(record, game_system_decision, outcome, catch_alls):
+            if _apply_game_systems(record, game_system_decision, outcome, catch_alls):
                 touched = True
             # THE GAME-SYSTEM BASIS IS SETTLED HERE, NOT IN `resolve`, because it is a question
             # about the CATEGORY and `resolve` does not yet know the answer to that one. A paint
@@ -222,13 +265,14 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             # Only the two DERIVED values are ever recomputed. `stated`, `mapped` and `override`
             # trace to something and this stage has nothing to add to them -- the same rule
             # REPLACEABLE states for categoryBasis, for the same reason.
-            if record.gameSystemBasis in DERIVED_GAME_SYSTEM_BASES:
-                settled = complete_game_system_basis(record, system_labels).gameSystemBasis
-                if settled != record.gameSystemBasis:
-                    record.gameSystemBasis = settled
+            if record.gameSystemsBasis in DERIVED_GAME_SYSTEM_BASES:
+                basis = complete_game_systems_basis(record, system_labels).gameSystemsBasis
+                if basis != record.gameSystemsBasis:
+                    record.gameSystemsBasis = basis
                     touched = True
+            _count_manufacturer_hits(record, rules, outcome.clause_hits)
             outcome.catalog_basis[record.categoryBasis or "none"] += 1
-            outcome.game_system_basis[record.gameSystemBasis or "none"] += 1
+            outcome.game_system_basis[record.gameSystemsBasis or "none"] += 1
         if touched and apply:
             write_yaml(
                 path,
@@ -252,56 +296,73 @@ def _load_catch_alls(taxonomy_dir) -> frozenset[str]:
     )
 
 
-def _apply_game_system(
+def _apply_game_systems(
     record: CanonicalProduct, decision, outcome: "Outcome", catch_alls: frozenset[str]
 ) -> bool:
-    """Fill a gameSystem the evidence never supplied, or report a disagreement. Never overwrite.
+    """Fill game systems the evidence never supplied, or report a disagreement. Never overwrite.
 
     THE RULE ONLY EVER FILLS A HOLE. Where a source already stated a system and a rule disagrees,
     the disagreement is RECORDED and nothing changes -- OBJECTIVES value 5, and the only defensible
     treatment of `legacy-catalog`, which states a gameSystem for 12,395 of 12,395 products it
-    touches and is therefore never silent about being unsure. Measured 2026-08-31, where it and a
-    live source both state one they agree 99.9% (Warlord) and 97.4% (GW); the wrong labels are
-    concentrated where nothing can corroborate it, and a rule that silently overwrote 2,800 records
-    on that inference would be trading a known-good 99.9% for an unreviewed guess.
+    touches and is therefore never silent about being unsure.
+
+    ITS 99.9% AGREEMENT IS A BIASED FIGURE, and the bias runs the way that matters. Measured
+    2026-08-31 it agreed with live sources 99.9% (Warlord) and 97.4% (GW) -- but that measurement
+    can only be taken where a live source also states one, which for Warlord is exactly the 2,871
+    products whose store `productType` names a game. Outside that bucket (2026-09-01) 1,027 of
+    1,031 Warlord products are stamped `bolt-action`, and 675 of those are contradicted by the
+    store's own single game tag: `Viking Hirdmen` and `Boromite Engineers` are not Bolt Action.
+    So the fill IS there; the earlier number simply could not see it, because the products it is
+    wrong about are the ones nothing else spoke about. Recording the disagreement rather than
+    overwriting is still right -- correcting 675 published values is a data change that belongs in
+    its own review -- but the report is now expected to grow, not to stay near zero.
     """
-    if decision is None or not decision.gameSystem:
+    if decision is None or not decision.gameSystems:
         return False
+    proposed = list(decision.gameSystems)
     # REFINING A BUCKET IS NOT OVERWRITING A CLAIM. `other-games` is Games Workshop's own shelf
     # for everything outside its flagship systems, and this catalog inherited it wholesale -- 593
     # products, spanning six games GW's product codes name individually. A rule that says which one
     # is strictly more informative and contradicts nothing, so it replaces the bucket. Only slugs
-    # explicitly marked `catchAll` in the taxonomy qualify.
-    if record.gameSystemBasis == "unknown" or record.gameSystem in catch_alls:
-        record.gameSystem = decision.gameSystem
-        record.gameSystemBasis = decision.game_system_basis
+    # explicitly marked `catchAll` in the taxonomy qualify, and ALL of the record's current values
+    # must be such buckets -- refining `[other-games]` is informative, but replacing
+    # `[warhammer-40k, other-games]` would drop a real claim to gain a guess.
+    settled = set(record.gameSystems)
+    if record.gameSystemsBasis == "unknown" or (settled and settled <= catch_alls):
+        record.gameSystems = proposed
+        record.gameSystemsBasis = decision.game_systems_basis
         if decision.faction and not record.faction:
             record.faction = decision.faction
         outcome.game_system_decided += 1
-        outcome.by_game_system_basis[decision.game_system_basis or "?"] += 1
+        outcome.by_game_system_basis[decision.game_systems_basis or "?"] += 1
         return True
-    if record.gameSystem and record.gameSystem != decision.gameSystem:
+    if settled and settled != set(proposed):
         outcome.conflicts.append(
             Conflict(
                 record.id,
                 "gameSystem-disagreement",
-                f"catalog says {record.gameSystem} ({record.gameSystemBasis}); "
-                f"{decision.why} says {decision.gameSystem}",
+                f"catalog says {'+'.join(sorted(settled))} ({record.gameSystemsBasis}); "
+                f"{decision.game_systems_why or decision.why} says {'+'.join(proposed)}",
             )
         )
     return False
 
 
-def _stamp(record: CanonicalProduct, decision: Decision) -> None:
-    """The category and its basis, and packaging ONLY where the record had none.
+def _stamp(record: CanonicalProduct, decision: Decision) -> bool:
+    """Write the axes this decision settled; return whether anything changed.
 
     Packaging is deliberately additive-only. A source that stated `packaging` stated it about this
     product; a table that infers `set` from the word "Paint Sets" is inferring it about a shelf.
     """
-    record.category = decision.category
-    record.categoryBasis = decision.basis
+    changed = False
+    if decision.category is not None:
+        record.category = decision.category
+        record.categoryBasis = decision.basis
+        changed = True
     if decision.packaging and record.packaging is None:
         record.packaging = decision.packaging
+        changed = True
+    return changed
 
 
 def _count_unmapped(outcome: Outcome, members: Sequence[Observation]) -> None:
@@ -312,10 +373,8 @@ def _count_unmapped(outcome: Outcome, members: Sequence[Observation]) -> None:
     """
     for member in members:
         bucket = outcome.unmapped.setdefault(member.source_id, Counter())
-        flat = flatten_hints(member.hints)
-        for key in TAXONOMY_HINTS:
-            value = flat.get(key)
-            if value is None:
+        for key, value in flatten_hints(member.hints).items():
+            if value is None or key in NON_TAXONOMY_HINTS:
                 continue
             for item in value if isinstance(value, (list, tuple, set)) else [value]:
                 text = str(item)

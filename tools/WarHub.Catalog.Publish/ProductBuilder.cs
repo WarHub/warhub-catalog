@@ -3,11 +3,17 @@ namespace WarHub.Catalog.Publish;
 /// <summary>
 /// Turns the canonical per-manufacturer product YAML into the consolidated +
 /// per-game-system JSON documents. Every product is included; <c>ean</c> is optional, and so is
-/// <c>gameSystem</c> -- a product genuinely belonging to no game system (a base, a gaming mat, a
-/// paint/tool bundle, dice, an advent calendar, ...) has a null <c>GameSystem</c>. Such a
+/// <c>gameSystems</c> -- a product genuinely belonging to no game system (a base, a gaming mat, a
+/// paint/tool bundle, dice, an advent calendar, ...) has an EMPTY <c>GameSystems</c>. Such a
 /// product is published in <c>products.json</c> / <c>products/index.json</c> like everything
 /// else, but is excluded from every <c>products/by-system/*.json</c> partition -- it belongs to
 /// none of them.
+///
+/// A product may belong to SEVERAL systems, and then it appears in several partitions. The two
+/// invariants that follow are worth stating because they stopped being the same number: a record
+/// appears EXACTLY ONCE in <c>products.json</c>, and once in each partition it names. So the
+/// partition counts sum to at least the total and the index's <c>total</c> is the product count,
+/// not the sum of its partitions.
 /// </summary>
 internal static class ProductBuilder
 {
@@ -33,20 +39,28 @@ internal static class ProductBuilder
         TaxonomyLabels labels)
     {
         var partitions = new Dictionary<string, ProductPartitionData>(StringComparer.Ordinal);
-        var systemless = new List<ProductRecord>();
+        var all = new List<ProductRecord>();
         foreach (var catalog in catalogs)
         {
             foreach (var p in catalog.Products)
             {
-                string? gameSystemKey = null;
-                string? gameSystemLabel = null;
-                if (!string.IsNullOrEmpty(p.GameSystem))
+                // Slugs kept in the resolver's order (it writes them sorted), deduplicated, and
+                // every one resolved to a label before anything is built -- an unknown slug is a
+                // taxonomy fault and must fail the publish rather than produce a partition nobody
+                // can name.
+                var systemKeys = new List<string>();
+                var systemLabels = new List<string>();
+                foreach (var raw in p.GameSystems)
                 {
-                    gameSystemKey = Slug.Make(p.GameSystem);
-                    if (!labels.GameSystems.TryGetValue(gameSystemKey, out gameSystemLabel))
+                    if (string.IsNullOrWhiteSpace(raw)) continue;
+                    string key = Slug.Make(raw);
+                    if (systemKeys.Contains(key, StringComparer.Ordinal)) continue;
+                    if (!labels.GameSystems.TryGetValue(key, out string? label))
                     {
-                        throw new InvalidOperationException($"no label for game system slug '{gameSystemKey}' (product {p.Id})");
+                        throw new InvalidOperationException($"no label for game system slug '{key}' (product {p.Id})");
                     }
+                    systemKeys.Add(key);
+                    systemLabels.Add(label);
                 }
                 string? factionLabel = null;
                 if (!string.IsNullOrEmpty(p.Faction))
@@ -81,7 +95,7 @@ internal static class ProductBuilder
                     PriceEur = p.PriceEur,
                     PriceCad = p.PriceCad,
                     Name = p.Name,
-                    GameSystem = gameSystemLabel,
+                    GameSystems = systemLabels.Count > 0 ? systemLabels : null,
                     Faction = factionLabel,
                     Category = p.Category,
                     Status = p.Status,
@@ -96,17 +110,18 @@ internal static class ProductBuilder
                     SupersededBy = string.IsNullOrWhiteSpace(p.SupersededBy) ? null : p.SupersededBy.Trim(),
                 };
 
-                if (gameSystemKey is null)
+                // ONE AUTHORITATIVE LIST, and the partitions hold the same instances. Building
+                // the consolidated document by concatenating the partitions -- which is what this
+                // did -- publishes a two-system product twice the moment one exists.
+                all.Add(record);
+                for (int i = 0; i < systemKeys.Count; i++)
                 {
-                    systemless.Add(record);
-                    continue;
+                    if (!partitions.TryGetValue(systemKeys[i], out var data))
+                    {
+                        partitions[systemKeys[i]] = data = new ProductPartitionData(systemLabels[i], []);
+                    }
+                    data.Products.Add(record);
                 }
-
-                if (!partitions.TryGetValue(gameSystemKey, out var data))
-                {
-                    partitions[gameSystemKey] = data = new ProductPartitionData(gameSystemLabel!, []);
-                }
-                data.Products.Add(record);
             }
         }
 
@@ -121,10 +136,10 @@ internal static class ProductBuilder
         {
             data.Products.Sort(CompareProducts);
         }
-        systemless.Sort(CompareProducts);
+        all.Sort(CompareProducts);
 
         var orderedKeys = partitions.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
-        return new ProductAssembly(orderedKeys, partitions, systemless);
+        return new ProductAssembly(orderedKeys, partitions, all);
     }
 
     /// <summary>Writes the consolidated document, the per-game-system partitions and the index.</summary>
@@ -212,37 +227,43 @@ internal sealed record ProductPartitionData(string Label, List<ProductRecord> Pr
 internal sealed class ProductAssembly(
     List<string> orderedKeys,
     Dictionary<string, ProductPartitionData> partitions,
-    List<ProductRecord> systemless)
+    List<ProductRecord> all)
 {
     public IReadOnlyList<string> OrderedKeys => orderedKeys;
 
     public IReadOnlyDictionary<string, ProductPartitionData> Partitions => partitions;
 
     /// <summary>
-    /// Every record in consolidated order: each game system in key order, then the systemless
-    /// products (they have no partition key to order them alongside).
+    /// Every record exactly once, in name order. Held directly rather than derived by
+    /// concatenating the partitions: a product may belong to more than one game system, and
+    /// concatenation would publish it once per system.
     /// </summary>
-    public IEnumerable<ProductRecord> Records =>
-        orderedKeys.SelectMany(k => partitions[k].Products).Concat(systemless);
+    public IEnumerable<ProductRecord> Records => all;
 
     /// <summary>
     /// Rewrites every record in place, preserving order. Records are immutable, so a link pass
     /// replaces them rather than mutating them.
+    ///
+    /// <para>MAPPED ONCE PER PRODUCT, THEN DISTRIBUTED BY ID. The partitions hold the same
+    /// instances as <see cref="Records"/>, and a product in two systems is in three lists at
+    /// once; calling <paramref name="map"/> per list would run it two or three times for that
+    /// product and leave each list holding a different instance of the same content.</para>
     /// </summary>
     public void MapRecords(Func<ProductRecord, ProductRecord> map)
     {
+        var mapped = new Dictionary<string, ProductRecord>(all.Count, StringComparer.Ordinal);
+        for (int i = 0; i < all.Count; i++)
+        {
+            ProductRecord replacement = map(all[i]);
+            mapped[replacement.Id] = replacement;
+            all[i] = replacement;
+        }
         foreach (ProductPartitionData data in partitions.Values)
         {
-            Rewrite(data.Products, map);
-        }
-        Rewrite(systemless, map);
-    }
-
-    private static void Rewrite(List<ProductRecord> records, Func<ProductRecord, ProductRecord> map)
-    {
-        for (int i = 0; i < records.Count; i++)
-        {
-            records[i] = map(records[i]);
+            for (int i = 0; i < data.Products.Count; i++)
+            {
+                data.Products[i] = mapped[data.Products[i].Id];
+            }
         }
     }
 }

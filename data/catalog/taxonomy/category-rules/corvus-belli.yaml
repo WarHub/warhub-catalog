@@ -26,12 +26,12 @@ reason: >-
 clauses:
   # Aristeia! first -- it shares the Infinity code block and the Infinity retailer shelf.
   - codeMatches: '^(CBARI|ARI\d)'
-    gameSystem: aristeia
+    gameSystems: [aristeia]
   - codeMatches: '^285054$'
-    gameSystem: aristeia
+    gameSystems: [aristeia]
   - codeMatches: '^(WW|PW|WCA)'
-    gameSystem: warcrow
+    gameSystems: [warcrow]
   - codeMatches: '^28\d{4}'
-    gameSystem: infinity
+    gameSystems: [infinity]
   - codeMatches: '^(GGB|BAI|WHP)'
-    gameSystem: infinity
+    gameSystems: [infinity]

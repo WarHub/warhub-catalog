@@ -36,7 +36,8 @@ public sealed class PublishFixture : IDisposable
                 ean: '5011921142361'
                 additionalEans: ['8429551724838']
                 eanConfidence: provisional
-                gameSystem: test-system
+                gameSystems:
+                  - test-system
                 faction: general
                 category: miniatures
                 quantity: 2
@@ -47,7 +48,8 @@ public sealed class PublishFixture : IDisposable
                 name: Beta Box
                 manufacturer: test-mfg
                 sku: SKUB
-                gameSystem: test-system
+                gameSystems:
+                  - test-system
                 faction: general
                 category: miniatures
                 status: discontinued

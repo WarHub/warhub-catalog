@@ -43,7 +43,7 @@
         "priceEur": { "type": "number" },
         "priceCad": { "type": "number" },
         "name": { "type": "string" },
-        "gameSystem": { "type": ["string", "null"] },
+        "gameSystems": { "type": ["array", "null"], "items": { "type": "string" } },
         "faction": { "type": "string" },
         "category": { "type": ["string", "null"] },
         "status": { "type": "string" },

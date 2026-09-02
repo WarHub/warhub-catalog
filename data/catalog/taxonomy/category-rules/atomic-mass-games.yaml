@@ -23,22 +23,22 @@ clauses:
   # Longest prefixes first: `CPE` and `CP` share a stem, and first-match-wins would let the short
   # one swallow the long one.
   - codeMatches: '^MCP\d'
-    gameSystem: marvel-crisis-protocol
+    gameSystems: [marvel-crisis-protocol]
   - codeMatches: '^MCA\d'
-    gameSystem: marvel-crisis-protocol
+    gameSystems: [marvel-crisis-protocol]
   - codeMatches: '^CPE\d'
-    gameSystem: marvel-crisis-protocol
+    gameSystems: [marvel-crisis-protocol]
   - codeMatches: '^CP\d'
-    gameSystem: marvel-crisis-protocol
+    gameSystems: [marvel-crisis-protocol]
   - codeMatches: '^CA\d'
-    gameSystem: marvel-crisis-protocol
+    gameSystems: [marvel-crisis-protocol]
   - codeMatches: '^SWL\d'
-    gameSystem: star-wars-legion
+    gameSystems: [star-wars-legion]
   - codeMatches: '^SWQ\d'
-    gameSystem: star-wars-legion
+    gameSystems: [star-wars-legion]
   - codeMatches: '^SWP\d'
-    gameSystem: star-wars-shatterpoint
+    gameSystems: [star-wars-shatterpoint]
   - codeMatches: '^SWZ\d'
-    gameSystem: star-wars-x-wing
+    gameSystems: [star-wars-x-wing]
   - codeMatches: '^SWM\d'
-    gameSystem: star-wars-armada
+    gameSystems: [star-wars-armada]

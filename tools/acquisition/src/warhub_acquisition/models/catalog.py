@@ -26,9 +26,29 @@ class CanonicalProduct(BaseModel):
     # exclude exactly the archival records this is meant to keep reachable.
     supersedes: list[str] = Field(default_factory=list)
     supersededBy: str | None = None
-    gameSystem: str | None = None
+    # WHICH GAMES THIS PRODUCT BELONGS TO. A LIST, because membership genuinely is one -- a
+    # Custodes kit is played in both The Horus Heresy and Warhammer 40,000, a Tzeentch daemon kit
+    # in both Age of Sigmar and Warhammer 40,000, and a Kill Team box is a Warhammer 40,000 product
+    # as well as a Kill Team one. THE SOURCES ALREADY SAY SO and the scalar field was discarding
+    # it: `_first` took whichever row sorted first. Measured 2026-09-01, 19 products have a SINGLE
+    # source naming two systems (9 legacy-catalog, 8 mfr-gw-algolia, 2 mfr-warlord-store).
+    #
+    # AN EMPTY LIST IS NOT A SHORTER ANSWER, it is no answer, and `gameSystemsBasis` says which
+    # kind: `not-applicable` (a pot of paint) or `unknown` (a game product nothing classified).
+    #
+    # A LIST IS NOT THE MODEL FOR UNCERTAINTY, and that distinction decides more of this catalog
+    # than multi-membership does. A Black Library novel in GW's `01` segment is Warhammer 40,000 OR
+    # The Horus Heresy depending on the book's period -- exactly one, and no field records which.
+    # The same holds for every class `games-workshop.yaml` vetoes, and it was tempting to read
+    # those vetoes as dual-use populations a list would unlock. MEASURED, they are not: of the 670
+    # Forge World products carrying an independently-stated system, the split is horus-heresy 331 /
+    # other-games 169 / middle-earth 76 / warhammer-40k 47 / the-old-world 46 / age-of-sigmar 1.
+    # Forge World is a production line that makes kits for every GW game, so the class is
+    # HETEROGENEOUS -- each kit has one system and the code does not say which -- and writing both
+    # into a list would assert a membership no source claims. Those five vetoes stay vetoes.
+    gameSystems: list[str] = Field(default_factory=list)
     faction: str | None = None
-    # WHAT DECIDED `gameSystem` -- or, for most of the catalog, what decided that nothing did.
+    # WHAT DECIDED `gameSystems` -- or, for most of the catalog, what decided that nothing did.
     # Sibling of `categoryBasis` below and written for the same reason: a field with a fallback
     # behind it hides its own failures, because every product ends up with a value either way.
     # Here the fallback is `null`, which is worse than a wrong value, because `null` was carrying
@@ -55,7 +75,7 @@ class CanonicalProduct(BaseModel):
     # NOT PUBLISHED YET, for exactly the reason `categoryBasis` gives: the vocabulary is still
     # moving, and churning a consumer contract for a field that is about to grow is the wrong
     # trade. It lives in the archive until it settles.
-    gameSystemBasis: str | None = None
+    gameSystemsBasis: str | None = None
     category: str | None = None
     # WHAT DECIDED `category` -- or, where it is null, that nothing did.
     #

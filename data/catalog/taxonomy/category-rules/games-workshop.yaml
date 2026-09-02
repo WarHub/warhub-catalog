@@ -26,32 +26,51 @@ reason: >-
   as `other-games` before, because the taxonomy had no word for them -- the catalog was less
   specific than the manufacturer. See taxonomy/game-systems.yaml.
 
-# Vetoes first and unconditionally. Each is a family where the code CANNOT settle the question,
-# and a rule that answered anyway would be confidently wrong rather than silent.
+# Vetoes first, and each names the AXIS it silences. Every one of these is a family where the
+# code cannot settle WHICH GAME, and a rule that answered anyway would be confidently wrong rather
+# than silent -- but the same products' CATEGORY is not in doubt at all, and until `blocks` existed
+# these vetoes were suppressing that answer too, for 1,635 products.
+#
+# THEY ARE ABOUT UNCERTAINTY, NOT ABOUT DUAL MEMBERSHIP, and the difference decides whether a list
+# is the fix. Earlier notes here read as though these classes were products belonging to two games
+# at once, which `gameSystems` could now express. MEASURED 2026-09-01 against independently-stated
+# systems, they are not: they are HETEROGENEOUS classes, each product belonging to exactly one game
+# the code does not name. Forge World's 670 split horus-heresy 331 / other-games 169 /
+# middle-earth 76 / warhammer-40k 47 / the-old-world 46 / age-of-sigmar 1 -- it is a production
+# line that makes kits for every GW game, not a game. Writing two slugs into the list for these
+# would assert a membership no source claims.
 noneOf:
-  # FORGE WORLD kits are made for more than one system and GW's own data says so: d34 85/86 spans
-  # Horus Heresy and Warhammer 40,000 in both directions. Vetoing costs NOTHING -- all 670 such
-  # products already carry a value, so no coverage is lost and 21 errors go.
+  # FORGE WORLD is a production line, not a game: d34 85/86 spans six systems (counts above).
+  # Vetoing the GAME costs nothing -- all 670 already carry one, so no coverage is lost and 21
+  # errors go -- while the category is 99.8% `miniatures` on 410 independently-graded products.
   - codeMatches: '^\d{2}8[56]'
-    note: Forge World, legitimately dual-system
+    blocks: [gameSystems]
+    note: Forge World spans six systems; the code says which line, not which game
 
   # BLACK LIBRARY: d78 81 is a novel, and d56 then carries the SETTING of the fiction rather than a
   # game the product belongs to. 430 of them sit under d56 01, where the split between Warhammer
   # 40,000 and Horus Heresy is the book's period and no field encodes it -- measured 86.3%, which
   # is not deterministic. The ones whose segment is unambiguous are recovered by a clause below.
   - codeMatches: '^\d{6}81'
+    blocks: [gameSystems]
     note: Black Library, setting is not the game
 
-  # KITS GW SELLS INTO TWO SYSTEMS AT ONCE (Custodes, Knights, Titans, Chaos). These seven
-  # (d56,d78) pairs are where the stated evidence itself splits; refusing 266 products removes the
-  # last 17 disagreements and is what takes the ladder to 99.89%.
+  # SEGMENTS WHERE THE STATED EVIDENCE ITSELF SPLITS (Custodes, Knights, Titans, Chaos). These
+  # are the same shape as Forge World and not dual membership either: `3008/3043` grades
+  # horus-heresy 56 / warhammer-40k 21, `0108/0117` grades warhammer-40k 105 / horus-heresy 5 /
+  # other-games 3. Refusing 266 products removes the last 17 disagreements and is what takes the
+  # ladder to 99.89%.
   - codeMatches: '^\d{4}30(08|43)'
-    note: Horus Heresy kits also sold for Warhammer 40,000
+    blocks: [gameSystems]
+    note: mixed Horus Heresy / Warhammer 40,000 segment, 56 vs 21
   - codeMatches: '^\d{4}01(08|17)'
-    note: 40k kits also sold for Horus Heresy
+    blocks: [gameSystems]
+    note: mixed Warhammer 40,000 / Horus Heresy segment, 105 vs 5
   - codeMatches: '^\d{2}12(01)99'
+    blocks: [gameSystems]
     note: 40k plastic kits with a generic faction segment
   - codeMatches: '^\d{2}1202(01|07|13)'
+    blocks: [gameSystems]
     note: Age of Sigmar plastic kits also sold into Warcry / Old World
 
 clauses:
@@ -61,12 +80,12 @@ clauses:
   # A slug turns 189 skipped products into decided ones. `K/T` and `WHU`-style contractions are
   # GW's own abbreviations on trade rows.
   - nameMatches: '\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b'
-    gameSystem: kill-team
+    gameSystems: [kill-team]
 
   # A LEGION TRANSFER SHEET is Horus Heresy even though it sits in the 40k segment: d34 51 is the
   # transfer-sheet product type and the Legion sheets are period-specific.
   - codeMatches: '^\d{2}5101'
-    gameSystem: horus-heresy
+    gameSystems: [horus-heresy]
 
   # d56 == 99 IS NOT A GAME SEGMENT. It is what GW uses for things that belong to no game: paints
   # (d34 18), paint sets (17), brushes (19), sprays (20), glue (21), bases and dice (22), tools and
@@ -87,24 +106,24 @@ clauses:
   # once the vetoes above have run; the two that are not (01 at 92.4% and 30 at 94.0% raw) are
   # carried there by the veto block rather than by a lower bar.
   - codeMatches: '^\d{4}01'
-    gameSystem: warhammer-40k
+    gameSystems: [warhammer-40k]
   - codeMatches: '^\d{4}02'
-    gameSystem: age-of-sigmar
+    gameSystems: [age-of-sigmar]
   - codeMatches: '^\d{4}03'
-    gameSystem: adeptus-titanicus
+    gameSystems: [adeptus-titanicus]
   - codeMatches: '^\d{4}05'
-    gameSystem: necromunda
+    gameSystems: [necromunda]
   - codeMatches: '^\d{4}07'
-    gameSystem: warhammer-underworlds
+    gameSystems: [warhammer-underworlds]
   - codeMatches: '^\d{4}09'
-    gameSystem: blood-bowl
+    gameSystems: [blood-bowl]
   - codeMatches: '^\d{4}14'
-    gameSystem: middle-earth
+    gameSystems: [middle-earth]
   - codeMatches: '^\d{4}18'
-    gameSystem: aeronautica-imperialis
+    gameSystems: [aeronautica-imperialis]
   - codeMatches: '^\d{4}26'
-    gameSystem: legions-imperialis
+    gameSystems: [legions-imperialis]
   - codeMatches: '^\d{4}27'
-    gameSystem: the-old-world
+    gameSystems: [the-old-world]
   - codeMatches: '^\d{4}30'
-    gameSystem: horus-heresy
+    gameSystems: [horus-heresy]

@@ -163,10 +163,10 @@ def test_build_queue_missing_evidence_for_null_game_system_product_raises(tmp_pa
                     "manufacturer": "games-workshop",
                     "status": "current",
                     "firstSeen": "2026-01-01",
-                    # The queue's population is `gameSystemBasis: unknown`, not "gameSystem is
+                    # The queue's population is `gameSystemsBasis: unknown`, not "gameSystems is
                     # null" -- a record without the basis is one `resolve` never wrote, and this
                     # test is about a QUEUED product whose evidence has gone missing.
-                    "gameSystemBasis": "unknown",
+                    "gameSystemsBasis": "unknown",
                 }
             ],
         },
@@ -301,7 +301,7 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
 
     # Self-consistency, not a literal: the figure moves with every committed `resolve` run.
     #
-    # THE QUEUE IS NO LONGER "EVERY NULL gameSystem", and the gap between the two numbers is the
+    # THE QUEUE IS NO LONGER "EVERY EMPTY gameSystems", and the gap between the two numbers is the
     # point of the basis field. A null gameSystem is either a hobby product that will never have
     # one or a game product nobody has classified; only the second is a question, and only the
     # second belongs in a queue that spends money to answer questions. Measured 2026-08-31 over
@@ -311,9 +311,9 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
         for path in paths.catalog_products.glob("*.yaml"):
             data = read_yaml(path) or {}
             for record in data.get("products") or []:
-                if record.get("gameSystem") is None:
+                if not record.get("gameSystems"):
                     counts["null"] += 1
-                basis = record.get("gameSystemBasis")
+                basis = record.get("gameSystemsBasis")
                 if basis in counts:
                     counts[basis] += 1
     assert len(queue) == counts["unknown"]
@@ -331,7 +331,7 @@ def test_repo_build_queue_covers_all_null_game_system_products() -> None:
             resolved[record["id"]] = record
     assert not [
         item["entity"] for item in queue
-        if resolved[item["entity"]].get("gameSystemBasis") != "unknown"
+        if resolved[item["entity"]].get("gameSystemsBasis") != "unknown"
     ]
     for item in queue:
         assert item["name"]

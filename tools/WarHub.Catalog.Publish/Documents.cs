@@ -38,7 +38,10 @@ internal sealed record ProductRecord
     [JsonPropertyOrder(1)] public string? Ean { get; init; }
     [JsonPropertyOrder(1)] public IReadOnlyList<string>? AdditionalEans { get; init; }
     [JsonPropertyOrder(2)] public required string Name { get; init; }
-    [JsonPropertyOrder(3)] public string? GameSystem { get; init; }
+    // LABELS, one per game system this product belongs to, in the canonical slug order the
+    // resolver wrote. Null rather than `[]` when there are none, so a systemless product publishes
+    // no property at all -- the same treatment `category` gets.
+    [JsonPropertyOrder(3)] public IReadOnlyList<string>? GameSystems { get; init; }
     [JsonPropertyOrder(4)] public string? Faction { get; init; }
     // Nullable, and the publisher no longer substitutes anything for it. A product whose category
     // nothing ever stated publishes `category: null` -- the same treatment `gameSystem` gets, for

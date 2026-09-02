@@ -61,10 +61,10 @@ def _first(values: list[object | None]) -> object | None:
 
 
 def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
-    """Every product in the RESOLVED catalog whose gameSystem is genuinely UNKNOWN.
+    """Every product in the RESOLVED catalog whose game systems are genuinely UNKNOWN.
 
-    SELECTS ON `gameSystemBasis`, NOT ON `gameSystem is None`, and the difference is most of the
-    queue. A null gameSystem carries two facts: a game product nobody has classified, and a pot of
+    SELECTS ON `gameSystemsBasis`, NOT ON an empty `gameSystems`, and the difference is most of the
+    queue. An empty `gameSystems` carries two facts: a game product nobody has classified, and a pot of
     paint that belongs to no game system and never will. The old test could not tell them apart, so
     it enrolled both -- measured 2026-08-31, 5,870 of 14,265 queued products (41%) were paint,
     paint sets and hobby auxiliaries whose correct answer is that the question does not apply.
@@ -81,7 +81,7 @@ def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
     for path in sorted(paths.catalog_products.glob("*.yaml")):
         data = read_yaml(path) or {}
         for record in data.get("products") or []:
-            if record.get("gameSystemBasis") == "unknown":
+            if record.get("gameSystemsBasis") == "unknown":
                 ids.add(record["id"])
     return sorted(ids)
 
@@ -101,9 +101,13 @@ def _observed_factions_by_game_system(paths: DataPaths, known_factions: set[str]
         for path in sorted(paths.catalog_products.glob("*.yaml")):
             data = read_yaml(path) or {}
             for record in data.get("products") or []:
-                game_system = record.get("gameSystem")
                 faction = record.get("faction")
-                if game_system and faction and faction in known_factions:
+                if not faction or faction not in known_factions:
+                    continue
+                # A product in two games contributes its faction to BOTH candidate lists. That is
+                # the point of the pairing: the list answers "which factions has this game been
+                # seen with", and a dual-system kit has genuinely been seen with both.
+                for game_system in record.get("gameSystems") or []:
                     by_game_system.setdefault(game_system, set()).add(faction)
     return {game_system: sorted(factions) for game_system, factions in sorted(by_game_system.items())}
 
@@ -118,7 +122,7 @@ def _raw_hints(members: list[Observation]) -> list[str]:
 
 
 def build_queue(paths: DataPaths) -> list[dict]:
-    """One queue item per null-gameSystem product in the resolved catalog, sorted by entity id
+    """One queue item per unclassified product in the resolved catalog, sorted by entity id
     for determinism."""
     unclassified = _unclassified_entity_ids(paths)
     if not unclassified:

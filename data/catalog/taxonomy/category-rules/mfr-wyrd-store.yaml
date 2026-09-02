@@ -179,10 +179,10 @@ clauses:
   # Measured 2026-08-31: 475 of 475. THE OTHER SIDE IS TESTED FIRST and that ordering is the whole
   # rule: Wyrd sells `Malifaux and The Other Side` crossover products, and first-match-wins
   # resolves them to The Other Side, which is what the catalog says they are.
-  - gameSystem: the-other-side
+  - gameSystems: [the-other-side]
     hintContainsAny:
       tags: [The Other Side, ToS, ToS-Unit, ToS-Character, Abyssinia, King's Empire,
              Gibbering Hordes, Cult of the Burning Man]
-  - gameSystem: malifaux
+  - gameSystems: [malifaux]
     hintContainsAny:
       tags: [M3E, M4E, Malifaux, Classics, Versatile, Through the Breach]

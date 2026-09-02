@@ -22,11 +22,16 @@ measurement were wrong in ways worth recording, because each looks reasonable:
     book and paint, and manufacturers state paint and paint-set -- so a clause predicting
     `miniatures` scores 0% BY CONSTRUCTION and its number here means nothing.
 
-THE BAR IS NOT THE SAME FOR EVERY CLAUSE, for a reason that follows from the fallback. The
-resolver already writes `miniatures` for anything undecided, so a clause predicting `miniatures`
-adds no answer -- only the claim that the answer is evidence-backed. It has to be near-certain to
-be worth making. A clause predicting anything else replaces a value that is wrong whenever it
-fires, so it earns its place at a much lower purity.
+THE BAR USED TO DEPEND ON THE FALLBACK, AND THE FALLBACK IS GONE. While `resolve` wrote
+`miniatures` for anything undecided, a clause predicting `miniatures` added no answer -- only the
+claim that the answer was evidence-backed -- and so had to be near-certain to be worth making,
+while a clause predicting anything else replaced a value that was wrong whenever it fired and
+earned its place at a much lower purity.
+
+An undecided product now carries NO category at all, so both halves of that asymmetry are void: a
+`miniatures` clause supplies a real answer exactly like any other, and no clause is displacing a
+wrong value, because there is no value. Judge every clause by the same question -- is it right --
+and read the disagreements below rather than a threshold.
 
 A LOW SCORE IS NOT AUTOMATICALLY THE RULE'S FAULT. `Bases -> hobby-auxiliary` disagrees with 11
 products legacy-catalog states as `terrain`, and categories.yaml settles that one against

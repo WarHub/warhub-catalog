@@ -69,7 +69,7 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
         // catalog also bases, gaming mats, dice, advent calendars, ...) publishes in the
         // consolidated catalog with its confirmed ean, but gameSystem itself is omitted (never
         // written as a literal null), same as every other optional field in this schema.
-        Assert.False(PaintingHandle.TryGetProperty("gameSystem", out _));
+        Assert.False(PaintingHandle.TryGetProperty("gameSystems", out _));
         Assert.Equal("5011921194803", PaintingHandle.GetProperty("ean").GetString());
         Assert.Equal("confirmed", PaintingHandle.GetProperty("eanConfidence").GetString());
 
@@ -133,8 +133,8 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
     [Fact]
     public void Game_system_label_resolves_for_both_products()
     {
-        Assert.Equal("Warhammer 40,000", Necrons.GetProperty("gameSystem").GetString());
-        Assert.Equal("Warhammer 40,000", DeathGuard.GetProperty("gameSystem").GetString());
+        Assert.Equal(["Warhammer 40,000"], Necrons.GetProperty("gameSystems").EnumerateArray().Select(v => v.GetString()!));
+        Assert.Equal(["Warhammer 40,000"], DeathGuard.GetProperty("gameSystems").EnumerateArray().Select(v => v.GetString()!));
     }
 
     [Fact]

@@ -53,22 +53,22 @@ clauses:
   # Measured 2026-08-31: 871 of 871 against independently-stated products. Only values that are
   # 100% pure over at least three stated products are here; the exclusions below are the reason
   # this table is short rather than the 236 values the store actually uses.
-  - gameSystem: kings-of-war
+  - gameSystems: [kings-of-war]
     hintContainsAny:
       categories: [kings-of-war, kings-of-war-fiction, kings-of-war-undead, deals-fantasy,
                    dwarfs-miniatures, basilean, elves, abyssal-dwarf, northern-alliance-kings-of-war,
                    nightstalkers, orc-miniatures, salamanders, xirkaali, forces-of-nature,
                    forces-of-the-abyss, goblin-miniatures, trident-realm-of-neritica, twilight-kin]
-  - gameSystem: halo-flashpoint
+  - gameSystems: [halo-flashpoint]
     hintContainsAny:
       categories: [halo-flashpoint-latest-releases, halo-flashpoint-getting-started,
                    halo-flashpoint-banished, unsc]
-  - gameSystem: deadzone
+  - gameSystems: [deadzone]
     hintContainsAny:
       categories: [getting-started-deadzone]
-  - gameSystem: firefight
+  - gameSystems: [firefight]
     hintContainsAny:
       categories: [firefight-rules]
-  - gameSystem: walking-dead-all-out-war
+  - gameSystems: [walking-dead-all-out-war]
     hintContainsAny:
       categories: [all-out-war-essentials, walking-dead-collections]
