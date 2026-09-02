@@ -43,7 +43,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - hail-caesar
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - ancient-and-medieval
     settingsBasis: derived
@@ -1805,9 +1805,13 @@ products:
     manufacturer: warlord-games
     productCode: 1030000021-LOYALTY
     sku: 1030000021-loyalty
+    gameSystems:
+      - epic-hail-caesar
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
     categoryBasis: unknown
     packaging: single
     status: current
@@ -6028,7 +6032,7 @@ products:
     sku: '103214001'
     gameSystems:
       - hail-caesar
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - ancient-and-medieval
     settingsBasis: derived
@@ -6070,9 +6074,11 @@ products:
     sku: '105010001'
     gameSystems:
       - black-powder
+      - hail-caesar
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - ancient-and-medieval
       - horse-and-musket
     settingsBasis: derived
     category: miniatures
@@ -9822,7 +9828,7 @@ products:
     gameSystems:
       - spqr
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - ancient-and-medieval
     settingsBasis: derived
@@ -10026,7 +10032,7 @@ products:
     sku: '201010001'
     gameSystems:
       - pike-and-shotte
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - pike-and-shot
     settingsBasis: derived
@@ -10049,7 +10055,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - pike-and-shotte
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - pike-and-shot
     settingsBasis: derived
@@ -16469,8 +16475,9 @@ products:
     sku: '219910003'
     gameSystems:
       - epic-pike-and-shotte
+      - pike-and-shotte
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
       - pike-and-shot
     settingsBasis: derived
@@ -16945,7 +16952,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -18484,7 +18491,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - black-powder
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -18639,9 +18646,11 @@ products:
     sku: '302210001'
     gameSystems:
       - black-powder
+      - hail-caesar
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - ancient-and-medieval
       - horse-and-musket
     settingsBasis: derived
     category: miniatures
@@ -18667,9 +18676,11 @@ products:
     sku: '302210002'
     gameSystems:
       - black-powder
+      - hail-caesar
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - ancient-and-medieval
       - horse-and-musket
     settingsBasis: derived
     category: miniatures
@@ -19770,9 +19781,9 @@ products:
     ean: '5060572509405'
     eanConfidence: provisional
     gameSystems:
-      - black-powder
+      - epic-black-powder
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -24710,7 +24721,7 @@ products:
     sku: '303213801'
     gameSystems:
       - black-powder
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -31707,8 +31718,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -31741,8 +31753,9 @@ products:
     sku: 311010001_PDF
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -31868,8 +31881,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32024,8 +32038,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32073,9 +32088,13 @@ products:
     sku: '312001001'
     ean: '5060572509887'
     eanConfidence: confirmed
+    gameSystems:
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: single
@@ -32105,9 +32124,13 @@ products:
     sku: '312001002'
     ean: '5060572509894'
     eanConfidence: confirmed
+    gameSystems:
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: single
@@ -32138,9 +32161,13 @@ products:
     sku: '312001003'
     ean: '5060572509900'
     eanConfidence: confirmed
+    gameSystems:
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: single
@@ -32171,9 +32198,13 @@ products:
     sku: '312001004'
     ean: '5060917990400'
     eanConfidence: confirmed
+    gameSystems:
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: single
@@ -32218,8 +32249,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32262,8 +32294,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32306,8 +32339,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32505,8 +32539,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32545,8 +32580,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32585,8 +32621,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32635,8 +32672,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32761,8 +32799,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32805,8 +32844,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32956,8 +32996,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -32998,8 +33039,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -33461,8 +33503,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -33501,8 +33544,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -33545,8 +33589,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -33958,9 +34003,13 @@ products:
     manufacturer: warlord-games
     productCode: '315110001'
     sku: '315110001'
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     packaging: single
@@ -34279,9 +34328,13 @@ products:
     manufacturer: warlord-games
     productCode: '315114020'
     sku: '315114020'
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     packaging: single
@@ -34305,9 +34358,13 @@ products:
     manufacturer: warlord-games
     productCode: '315114021'
     sku: '315114021'
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     packaging: single
@@ -34331,9 +34388,13 @@ products:
     manufacturer: warlord-games
     productCode: '315114022'
     sku: '315114022'
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     packaging: single
@@ -34639,10 +34700,12 @@ products:
     sku: '315120017'
     gameSystems:
       - epic-black-powder
+      - epic-pike-and-shotte
     faction: british
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
       - horse-and-musket
+      - pike-and-shot
     settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
@@ -34885,9 +34948,13 @@ products:
     sku: '318810001'
     ean: '5060917990127'
     eanConfidence: confirmed
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -34919,9 +34986,13 @@ products:
     sku: '318810002'
     ean: '5060917990110'
     eanConfidence: confirmed
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -34951,8 +35022,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -34986,9 +35058,13 @@ products:
     sku: '318810004'
     ean: '5060917990134'
     eanConfidence: confirmed
+    gameSystems:
+      - black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -35018,9 +35094,13 @@ products:
     sku: '318810005'
     ean: '5060917990141'
     eanConfidence: confirmed
+    gameSystems:
+      - black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -35052,8 +35132,9 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35086,8 +35167,9 @@ products:
     sku: '318810007'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35203,9 +35285,13 @@ products:
     manufacturer: warlord-games
     productCode: '319904001'
     sku: '319904001'
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     categoryBasis: unknown
     packaging: single
     status: current
@@ -35285,8 +35371,9 @@ products:
     sku: '319910002'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: french
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35335,8 +35422,9 @@ products:
     sku: '319910003'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35387,8 +35475,9 @@ products:
     sku: '319910005'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35432,8 +35521,9 @@ products:
     sku: '319910006'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: french
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35478,8 +35568,9 @@ products:
     sku: '319910007'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35819,8 +35910,9 @@ products:
     sku: '319914010'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35855,8 +35947,9 @@ products:
     sku: '319914011'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35891,8 +35984,9 @@ products:
     sku: '319914012'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -35929,8 +36023,9 @@ products:
     sku: '319914013'
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -36001,7 +36096,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36021,7 +36116,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36046,7 +36141,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36070,7 +36165,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36094,7 +36189,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36118,7 +36213,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36141,7 +36236,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36165,7 +36260,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36211,7 +36306,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36231,7 +36326,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36255,7 +36350,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -36736,7 +36831,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -37064,7 +37159,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -37083,8 +37178,12 @@ products:
     name: Bolt Action 3rd Edition Regelbuch (deutsch)
     manufacturer: warlord-games
     sku: '132547'
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: out_of_stock
@@ -37104,7 +37203,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -37128,7 +37227,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -37819,7 +37918,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -39712,7 +39811,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -46588,7 +46687,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -46608,7 +46707,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -50211,7 +50310,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -51604,7 +51703,7 @@ products:
     gameSystems:
       - bolt-action
     faction: soviet
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -51881,7 +51980,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -52064,9 +52163,13 @@ products:
     manufacturer: warlord-games
     productCode: 402616008-LOYALTY
     sku: 402616008-Loyalty
+    gameSystems:
+      - bolt-action
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: lexicon
     packaging: single
@@ -52359,9 +52462,13 @@ products:
     sku: '402616017'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52387,9 +52494,13 @@ products:
     sku: '402616018'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52415,9 +52526,13 @@ products:
     sku: '402616019'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52443,9 +52558,13 @@ products:
     sku: '402616020'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52471,9 +52590,13 @@ products:
     sku: '402616021'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52499,9 +52622,13 @@ products:
     sku: '402616022'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52527,9 +52654,13 @@ products:
     sku: '402616023'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -52555,9 +52686,13 @@ products:
     sku: '402616024'
     gameSystems:
       - bolt-action
+      - gates-of-antares
+      - warlords-of-erehwon
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - antares
+      - erehwon
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -53422,7 +53557,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -54468,7 +54603,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -54523,7 +54658,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -54786,7 +54921,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -54844,7 +54979,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -55386,7 +55521,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -56892,7 +57027,7 @@ products:
     gameSystems:
       - bolt-action
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -58054,7 +58189,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -59114,7 +59249,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -61560,7 +61695,7 @@ products:
     gameSystems:
       - bolt-action
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -66123,7 +66258,7 @@ products:
     gameSystems:
       - bolt-action
     faction: hungarian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -67672,9 +67807,13 @@ products:
     manufacturer: warlord-games
     productCode: '4070000001'
     sku: '4070000001'
+    gameSystems:
+      - bolt-action
     faction: japanese
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -69268,6 +69407,7 @@ products:
     ean: '5060917999083'
     eanConfidence: confirmed
     gameSystems:
+      - bolt-action
       - konflikt-47
     gameSystemsBasis: mapped
     settings:
@@ -69291,6 +69431,7 @@ products:
     ean: '5060917999090'
     eanConfidence: confirmed
     gameSystems:
+      - bolt-action
       - konflikt-47
     gameSystemsBasis: mapped
     settings:
@@ -69314,6 +69455,7 @@ products:
     ean: '5060917999106'
     eanConfidence: confirmed
     gameSystems:
+      - bolt-action
       - konflikt-47
     gameSystemsBasis: mapped
     settings:
@@ -69337,6 +69479,7 @@ products:
     ean: '5060917999113'
     eanConfidence: confirmed
     gameSystems:
+      - bolt-action
       - konflikt-47
     gameSystemsBasis: mapped
     settings:
@@ -69361,7 +69504,8 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+      - konflikt-47
+    gameSystemsBasis: mapped
     settings:
       - world-war-two
     settingsBasis: derived
@@ -69388,6 +69532,7 @@ products:
     ean: '5060917999304'
     eanConfidence: confirmed
     gameSystems:
+      - bolt-action
       - konflikt-47
     gameSystemsBasis: mapped
     settings:
@@ -69470,13 +69615,9 @@ products:
     manufacturer: warlord-games
     productCode: '408911002'
     sku: '408911002'
-    gameSystems:
-      - bolt-action
     faction: british
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -69495,13 +69636,9 @@ products:
     manufacturer: warlord-games
     productCode: '408917501'
     sku: '408917501'
-    gameSystems:
-      - bolt-action
     faction: general
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -71901,13 +72038,9 @@ products:
     manufacturer: warlord-games
     productCode: '409901002'
     sku: '409901002'
-    gameSystems:
-      - bolt-action
     faction: british
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -71929,13 +72062,9 @@ products:
     manufacturer: warlord-games
     productCode: '409901101'
     sku: '409901101'
-    gameSystems:
-      - bolt-action
     faction: british
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -72160,13 +72289,9 @@ products:
     manufacturer: warlord-games
     productCode: '409904002'
     sku: '409904002'
-    gameSystems:
-      - bolt-action
     faction: soviet
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -72337,13 +72462,9 @@ products:
     manufacturer: warlord-games
     productCode: '409906001'
     sku: '409906001'
-    gameSystems:
-      - bolt-action
     faction: japanese
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -72403,13 +72524,9 @@ products:
     manufacturer: warlord-games
     productCode: '409908001'
     sku: '409908001'
-    gameSystems:
-      - bolt-action
     faction: italian
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -72635,7 +72752,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -74645,8 +74762,9 @@ products:
     ean: '9781472828798'
     eanConfidence: provisional
     gameSystems:
+      - bolt-action
       - konflikt-47
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -77336,9 +77454,10 @@ products:
     ean: '5060393708421'
     eanConfidence: provisional
     gameSystems:
+      - bolt-action
       - konflikt-47
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -81524,8 +81643,12 @@ products:
     manufacturer: warlord-games
     productCode: 489910006CARDS
     sku: 489910006CARDS
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - achtung-panzer
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -81579,8 +81702,12 @@ products:
     manufacturer: warlord-games
     productCode: 489910007CARDS
     sku: 489910007CARDS
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - achtung-panzer
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -81634,8 +81761,12 @@ products:
     manufacturer: warlord-games
     productCode: 489910008CARDS
     sku: 489910008CARDS
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - achtung-panzer
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -81689,8 +81820,12 @@ products:
     manufacturer: warlord-games
     productCode: 489910009CARDS
     sku: 489910009CARDS
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - achtung-panzer
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -89560,7 +89695,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - warlords-of-erehwon
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - erehwon
     settingsBasis: derived
@@ -95847,7 +95982,7 @@ products:
     gameSystems:
       - blood-red-skies
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -96460,7 +96595,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - blood-red-skies
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -109615,8 +109750,8 @@ products:
     productCode: '809710002'
     sku: '809710002'
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -109645,8 +109780,8 @@ products:
     productCode: '809710003'
     sku: '809710003'
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -109675,8 +109810,8 @@ products:
     productCode: '809710004'
     sku: '809710004'
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -109705,8 +109840,8 @@ products:
     productCode: '809710005'
     sku: '809710005'
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -110472,8 +110607,8 @@ products:
     ean: '5060917992213'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110500,8 +110635,8 @@ products:
     ean: '5060917992220'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110528,8 +110663,8 @@ products:
     ean: '5060917992237'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110553,8 +110688,8 @@ products:
     ean: '5060917992244'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110581,8 +110716,8 @@ products:
     ean: '5060917992251'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110609,8 +110744,8 @@ products:
     ean: '5060917992183'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110659,8 +110794,8 @@ products:
     ean: '5060917992206'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110685,8 +110820,8 @@ products:
     ean: '5060917992169'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110711,8 +110846,8 @@ products:
     ean: '5060917992176'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110737,8 +110872,8 @@ products:
     ean: '5060917992091'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110765,8 +110900,8 @@ products:
     ean: '5060917992107'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110793,8 +110928,8 @@ products:
     ean: '5060917992114'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110818,8 +110953,8 @@ products:
     ean: '5060917992121'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110846,8 +110981,8 @@ products:
     ean: '5060917992138'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110872,8 +111007,8 @@ products:
     ean: '5060917992145'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110900,8 +111035,8 @@ products:
     ean: '5060917992152'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110926,8 +111061,8 @@ products:
     ean: '5060917992336'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110950,8 +111085,8 @@ products:
     ean: '5060917992343'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -110975,8 +111110,8 @@ products:
     ean: '5060917992350'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111002,8 +111137,8 @@ products:
     ean: '5060917992367'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111029,8 +111164,8 @@ products:
     ean: '5060917992374'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111056,8 +111191,8 @@ products:
     ean: '5060917992381'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111081,8 +111216,8 @@ products:
     ean: '5060917992398'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111105,8 +111240,8 @@ products:
     ean: '5060917992404'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111132,8 +111267,8 @@ products:
     ean: '5060917992411'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111156,8 +111291,8 @@ products:
     ean: '5060917992428'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111183,8 +111318,8 @@ products:
     ean: '5060917992435'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111210,8 +111345,8 @@ products:
     ean: '5060917992442'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: terrain
     categoryBasis: stated
     packaging: single
@@ -111234,8 +111369,8 @@ products:
     manufacturer: warlord-games
     productCode: '8499000014'
     sku: '8499000014'
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     status: current
@@ -111528,9 +111663,11 @@ products:
     sku: '993019903'
     gameSystems:
       - bolt-action
+      - hail-caesar
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - ancient-and-medieval
       - world-war-two
     settingsBasis: derived
     category: miniatures
@@ -111643,8 +111780,8 @@ products:
     ean: '5060917991612'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -111667,7 +111804,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -111797,8 +111934,8 @@ products:
     ean: '5060917992824'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -111822,8 +111959,12 @@ products:
     sku: A1500
     ean: '5055286681349'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - blood-red-skies
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     status: discontinued
     firstSeen: '2026-07-13'
@@ -112188,8 +112329,12 @@ products:
     manufacturer: warlord-games
     productCode: AT740
     sku: AT740
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     status: discontinued
     firstSeen: '2026-07-13'
@@ -112285,8 +112430,12 @@ products:
     manufacturer: warlord-games
     productCode: AW923
     sku: AW923
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     status: discontinued
     firstSeen: '2026-07-13'
@@ -112298,8 +112447,12 @@ products:
     manufacturer: warlord-games
     productCode: AW927
     sku: AW927
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     status: discontinued
     firstSeen: '2026-07-13'
@@ -112817,7 +112970,7 @@ products:
     gameSystems:
       - bolt-action
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -112837,7 +112990,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -112856,7 +113009,7 @@ products:
     gameSystems:
       - bolt-action
     faction: soviet
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -112876,7 +113029,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -113147,9 +113300,9 @@ products:
     productCode: BPDEALSEP05
     sku: BPDealSep05
     gameSystems:
-      - black-powder
+      - black-seas
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: override
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -114486,9 +114639,13 @@ products:
     manufacturer: warlord-games
     productCode: ENP2001
     sku: ENP2001
+    gameSystems:
+      - judge-dredd
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - judge-dredd
+    settingsBasis: derived
     categoryBasis: unknown
     packaging: single
     status: current
@@ -114514,9 +114671,13 @@ products:
     manufacturer: warlord-games
     productCode: ENP2004
     sku: ENP2004
+    gameSystems:
+      - judge-dredd
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - judge-dredd
+    settingsBasis: derived
     categoryBasis: unknown
     packaging: single
     status: current
@@ -114546,8 +114707,9 @@ products:
     sku: EpicPrussiaAllIn
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -114654,8 +114816,9 @@ products:
     sku: EpicThreeArmyStart
     gameSystems:
       - black-powder
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -116831,9 +116994,11 @@ products:
     sku: NewYear28
     gameSystems:
       - bolt-action
+      - pike-and-shotte
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: code
     settings:
+      - pike-and-shot
       - world-war-two
     settingsBasis: derived
     categoryBasis: unknown
@@ -118077,9 +118242,13 @@ products:
     manufacturer: warlord-games
     productCode: SAFEBA01
     sku: SAFEBA01
+    gameSystems:
+      - bolt-action
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     packaging: box
     status: current
@@ -118641,9 +118810,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0014
     sku: SLC0014
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118665,9 +118838,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0015
     sku: SLC0015
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118689,9 +118866,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0016
     sku: SLC0016
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118713,9 +118894,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0017
     sku: SLC0017
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118737,9 +118922,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0018
     sku: SLC0018
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118761,9 +118950,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0019
     sku: SLC0019
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118785,9 +118978,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0020
     sku: SLC0020
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118809,9 +119006,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0021
     sku: SLC0021
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118833,9 +119034,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0022-MO
     sku: SLC0022-MO
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118859,9 +119064,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0023
     sku: SLC0023
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118883,9 +119092,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0024
     sku: SLC0024
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118907,9 +119120,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0025
     sku: SLC0025
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118931,9 +119148,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0026
     sku: SLC0026
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118955,9 +119176,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0027
     sku: SLC0027
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -118979,9 +119204,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0028
     sku: SLC0028
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -119003,9 +119232,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0029
     sku: SLC0029
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: single
@@ -119116,9 +119349,13 @@ products:
     manufacturer: warlord-games
     productCode: SLC0036
     sku: SLC0036
+    gameSystems:
+      - epic-black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: terrain
     categoryBasis: mapped
     packaging: box
@@ -120287,8 +120524,12 @@ products:
     manufacturer: warlord-games
     productCode: TANKSALOT26TICKET
     sku: TANKSALOT26TICKET
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: event
     categoryBasis: lexicon
     status: current
@@ -120402,7 +120643,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -120667,9 +120908,13 @@ products:
     manufacturer: warlord-games
     productCode: WATERLOO-BRITISHBUNDLE01-NEW
     sku: WATERLOO-BRITISHBUNDLE01-NEW
+    gameSystems:
+      - epic-black-powder
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: box
@@ -120700,9 +120945,13 @@ products:
     manufacturer: warlord-games
     productCode: WATERLOO-FRENCHBUNDLE01-NEW
     sku: WATERLOO-FRENCHBUNDLE01-NEW
+    gameSystems:
+      - epic-black-powder
     faction: french
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: box
@@ -120892,8 +121141,12 @@ products:
     sku: WG-BP-002
     ean: '9780956358127'
     eanConfidence: confirmed
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - black-powder
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     status: current
@@ -120916,7 +121169,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - black-powder
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -120935,9 +121188,13 @@ products:
     manufacturer: warlord-games
     productCode: WG-BP002-E
     sku: WG-BP002-e
+    gameSystems:
+      - black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     packaging: single
@@ -121045,7 +121302,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - black-powder
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -121068,9 +121325,13 @@ products:
     manufacturer: warlord-games
     productCode: WG-BP005-E
     sku: WG-BP005-e
+    gameSystems:
+      - black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     packaging: single
@@ -121101,7 +121362,7 @@ products:
     gameSystems:
       - black-powder
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - horse-and-musket
     settingsBasis: derived
@@ -121120,9 +121381,13 @@ products:
     manufacturer: warlord-games
     productCode: WG-BP006-E
     sku: WG-BP006-e
+    gameSystems:
+      - black-powder
     faction: american
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     packaging: single
@@ -121148,8 +121413,12 @@ products:
     sku: WG-BP008
     ean: '9780992661649'
     eanConfidence: confirmed
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - black-powder
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     status: current
@@ -121168,9 +121437,13 @@ products:
     manufacturer: warlord-games
     productCode: WG-BP008-E
     sku: WG-BP008-e
+    gameSystems:
+      - black-powder
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     packaging: single
@@ -121678,8 +121951,8 @@ products:
     ean: '5060200849651'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121701,8 +121974,8 @@ products:
     ean: '5060200849668'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121724,8 +121997,8 @@ products:
     ean: '5060200849675'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121747,8 +122020,8 @@ products:
     ean: '5060200849682'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121769,8 +122042,8 @@ products:
     productCode: WG-D10-35
     sku: WG-D10-35
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121790,8 +122063,8 @@ products:
     productCode: WG-D10-36
     sku: WG-D10-36
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121813,8 +122086,8 @@ products:
     ean: '5060200848258'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121839,8 +122112,8 @@ products:
     ean: '5060200848265'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121865,8 +122138,8 @@ products:
     ean: '5060200848272'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121891,8 +122164,8 @@ products:
     ean: '5060200848289'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121917,8 +122190,8 @@ products:
     ean: '5060200848296'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121943,8 +122216,8 @@ products:
     ean: '5060393700753'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121969,8 +122242,8 @@ products:
     ean: '5060917993180'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -121992,8 +122265,8 @@ products:
     ean: '5060917993197'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122015,8 +122288,8 @@ products:
     ean: '5060917993203'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122038,8 +122311,8 @@ products:
     ean: '5060917993210'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122061,8 +122334,8 @@ products:
     ean: '5060917993227'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122084,8 +122357,8 @@ products:
     ean: '5060917993234'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122107,8 +122380,8 @@ products:
     ean: '5060917993241'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122130,8 +122403,8 @@ products:
     ean: '5060917993258'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122151,8 +122424,8 @@ products:
     productCode: WG-D6-49
     sku: WG-D6-49
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122181,8 +122454,8 @@ products:
     ean: '5060917994323'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122211,8 +122484,8 @@ products:
     ean: '5060917994330'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -122241,8 +122514,8 @@ products:
     ean: '5060917994347'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -127680,7 +127953,7 @@ products:
     eanConfidence: provisional
     gameSystems:
       - gates-of-antares
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - antares
     settingsBasis: derived
@@ -128541,8 +128814,8 @@ products:
     ean: '5060393702504'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -128564,8 +128837,8 @@ products:
     ean: '5060393702498'
     eanConfidence: confirmed
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: game-accessory
     categoryBasis: mapped
     packaging: single
@@ -129718,8 +129991,12 @@ products:
     sku: WLGWGA-TEM-01
     ean: '5060393702672'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - gates-of-antares
+    gameSystemsBasis: code
+    settings:
+      - antares
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     firstSeen: '2026-07-13'
@@ -129736,7 +130013,7 @@ products:
     gameSystems:
       - bolt-action
     faction: french
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -129756,7 +130033,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -129775,7 +130052,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -129868,7 +130145,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -129915,7 +130192,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -130891,7 +131168,7 @@ products:
     gameSystems:
       - bolt-action
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -131430,7 +131707,7 @@ products:
     gameSystems:
       - bolt-action
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -132470,7 +132747,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -132498,7 +132775,7 @@ products:
     gameSystems:
       - bolt-action
     faction: american
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -132523,7 +132800,7 @@ products:
     gameSystems:
       - bolt-action
     faction: soviet
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -132564,7 +132841,7 @@ products:
     sku: WGB-BAG-05
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -132589,9 +132866,13 @@ products:
     sku: WGB-BAG-06
     ean: '5060917994149'
     eanConfidence: confirmed
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -132672,7 +132953,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -132694,9 +132975,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-BAG-14
     sku: WGB-BAG-14
+    gameSystems:
+      - bolt-action
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -132997,7 +133282,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -133051,7 +133336,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -135044,7 +135329,7 @@ products:
     gameSystems:
       - bolt-action
     faction: british
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -135691,9 +135976,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-009
     sku: WGB-DEC-009
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -135712,9 +136001,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-010
     sku: WGB-DEC-010
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -135733,9 +136026,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-011
     sku: WGB-DEC-011
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -135754,9 +136051,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-012
     sku: WGB-DEC-012
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -135800,9 +136101,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-014
     sku: WGB-DEC-014
+    gameSystems:
+      - bolt-action
     faction: soviet
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -135821,9 +136126,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-015
     sku: WGB-DEC-015
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -136044,9 +136353,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-028
     sku: WGB-DEC-028
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -136093,9 +136406,13 @@ products:
     manufacturer: warlord-games
     productCode: WGB-DEC-030
     sku: WGB-DEC-030
+    gameSystems:
+      - bolt-action
     faction: british
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: hobby-auxiliary
     categoryBasis: mapped
     packaging: single
@@ -137298,7 +137615,7 @@ products:
     gameSystems:
       - bolt-action
     faction: french
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -137923,7 +138240,7 @@ products:
     sku: WGB-HR01
     gameSystems:
       - bolt-action
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -137941,7 +138258,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138115,7 +138432,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138133,7 +138450,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138151,7 +138468,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138169,7 +138486,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138187,7 +138504,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138207,7 +138524,7 @@ products:
     gameSystems:
       - bolt-action
     faction: italian
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138819,7 +139136,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -138901,7 +139218,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -139114,7 +139431,7 @@ products:
     gameSystems:
       - bolt-action
     faction: japanese
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -139588,7 +139905,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -147115,7 +147432,7 @@ products:
     gameSystems:
       - bolt-action
     faction: german
-    gameSystemsBasis: classified
+    gameSystemsBasis: code
     settings:
       - world-war-two
     settingsBasis: derived
@@ -155223,9 +155540,13 @@ products:
     manufacturer: warlord-games
     productCode: WGP-002-E
     sku: WGP-002-e
+    gameSystems:
+      - pike-and-shotte
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - pike-and-shot
+    settingsBasis: derived
     category: book
     categoryBasis: mapped
     packaging: single
@@ -156330,9 +156651,11 @@ products:
     sku: WGP-BAA-02
     gameSystems:
       - black-powder
+      - hail-caesar
     faction: general
-    gameSystemsBasis: stated
+    gameSystemsBasis: mapped
     settings:
+      - ancient-and-medieval
       - horse-and-musket
     settingsBasis: derived
     category: miniatures
@@ -156762,9 +157085,13 @@ products:
     manufacturer: warlord-games
     productCode: WGP-EC-33-LOYALTY
     sku: WGP-EC-33-Loyalty
+    gameSystems:
+      - pike-and-shotte
     faction: general
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: code
+    settings:
+      - pike-and-shot
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: single
@@ -159167,9 +159494,13 @@ products:
     sku: WGR-ARMY2
     ean: '5060393702467'
     eanConfidence: confirmed
+    gameSystems:
+      - black-powder
     faction: american
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: override
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     packaging: starter
@@ -160617,8 +160948,12 @@ products:
     name: 'Achtung Panzer Card/Token Bundle: British (English)'
     manufacturer: warlord-games
     sku: '128955'
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - achtung-panzer
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     firstSeen: '2026-07-13'
@@ -160789,8 +161124,12 @@ products:
     sku: '135794'
     ean: '5060917999205'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - epic-black-powder
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: in_stock
@@ -160807,8 +161146,12 @@ products:
     sku: '118854'
     ean: '5060393704188'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - black-powder
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: in_stock
@@ -160825,8 +161168,12 @@ products:
     sku: '129499'
     ean: '9781472863805'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: book
     categoryBasis: lexicon
     status: current
@@ -160844,8 +161191,12 @@ products:
     sku: '111092'
     ean: '5060200846957'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: lexicon
     status: current
@@ -161148,8 +161499,12 @@ products:
     sku: '111802'
     ean: '9780956358196'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - hail-caesar
+    gameSystemsBasis: code
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: in_stock
@@ -161315,8 +161670,12 @@ products:
     sku: '133043'
     ean: '5060917996525'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
     category: game-accessory
     categoryBasis: lexicon
     status: current
@@ -161710,8 +162069,12 @@ products:
     sku: '121333'
     ean: '5060572505476'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - spqr
+    gameSystemsBasis: code
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     firstSeen: '2026-07-13'
@@ -161724,8 +162087,12 @@ products:
     sku: '120295'
     ean: '5060572504509'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - spqr
+    gameSystemsBasis: code
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: in_stock
@@ -161742,8 +162109,12 @@ products:
     sku: '120184'
     ean: '5060572504424'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - spqr
+    gameSystemsBasis: code
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     firstSeen: '2026-07-13'
@@ -161756,8 +162127,12 @@ products:
     sku: '120297'
     ean: '5060572504530'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - spqr
+    gameSystemsBasis: code
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     firstSeen: '2026-07-13'
@@ -161900,8 +162275,12 @@ products:
     sku: '119826'
     ean: '5060917990240'
     eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - black-powder
+    gameSystemsBasis: code
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: in_stock

@@ -223,6 +223,11 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
     system_labels, _ = load_labels(paths.taxonomy)
     settings_taxonomy = Settings.load(paths.taxonomy)
     catch_alls = _load_catch_alls(paths.taxonomy)
+    default_hints = {
+        sid: descriptor.defaultHints
+        for sid, descriptor in joined.descriptors.items()
+        if descriptor.defaultHints
+    }
     outcome = Outcome(clause_hits=_count_clause_hits(joined.entities, rules))
     if not paths.catalog_products.exists():
         return outcome
@@ -243,6 +248,11 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
                 record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes,
                 record.name, lexicon,
                 manufacturer=record.manufacturer, code=record.productCode or record.sku,
+                # So decide.py can re-read what the sources STATED (the resolver's fold, minus
+                # each source's declared fill) and unite it with the shelves of a source at least
+                # as authoritative, instead of arguing with it. An override is never extended
+                # (`_apply_game_systems`), and a catch-all is refined rather than united.
+                default_hints=default_hints, catch_alls=catch_alls,
             )
             outcome.conflicts.extend(conflicts)
 
@@ -325,6 +335,11 @@ def _apply_game_systems(
     treatment of `legacy-catalog`, which states a gameSystem for 12,395 of 12,395 products it
     touches and is therefore never silent about being unsure.
 
+    "DISAGREES" IS JUDGED AFTER decide.py HAS ASSEMBLED THE WHOLE CLAIM (2026-09-02): a claim from
+    a source at least as authoritative as the one that stated the record's value already carries
+    that value in its union, so it arrives here as an extension and passes the containment test
+    below. What still reports is a lower-ranked claim against a higher-ranked statement.
+
     ITS 99.9% AGREEMENT IS A BIASED FIGURE, and the bias runs the way that matters. Measured
     2026-08-31 it agreed with live sources 99.9% (Warlord) and 97.4% (GW) -- but that measurement
     can only be taken where a live source also states one, which for Warlord is exactly the 2,871
@@ -340,6 +355,8 @@ def _apply_game_systems(
         return False
     proposed = list(decision.gameSystems)
     settled = set(record.gameSystems)
+    if settled == set(proposed) and record.gameSystemsBasis != "classified":
+        return False
 
     # THE TEST IS CONTAINMENT, and on a set-valued field that one test covers what used to be two
     # separate cases plus the one that mattered most.
@@ -384,7 +401,17 @@ def _apply_game_systems(
         and record.gameSystemsBasis not in _MAINTAINER_DECIDED
     )
     refines = bool(settled) and settled <= catch_alls
-    if extends or refines:
+    # A GUESS YIELDS TO EVIDENCE. `classified` is the one basis that means "nothing said anything,
+    # so a classifier guessed"; a shelf or the product's own name (decide.py's `claimed`) is
+    # something saying something, and it replaces the guess. A code range ALONE does not: GW's
+    # `02` range spans two settings, and the classifier is right about `Alith Anar` where the
+    # range is not. The replacement is the claim as decide.py assembled it and nothing more, so
+    # the next run assembles the same value and finds nothing to do. Measured 2026-09-02: 4 rows
+    # where the guess was contradicted (two Kill Team products a classifier had filed as 40k, two
+    # Ratkin sculpts Mantic's own store shelves for Firefight) and 179 where a claim confirmed it
+    # and the basis becomes `mapped`.
+    replaces = record.gameSystemsBasis == "classified" and decision.game_systems_claimed
+    if extends or refines or replaces:
         record.gameSystems = proposed
         record.gameSystemsBasis = decision.game_systems_basis
         if decision.faction and not record.faction:

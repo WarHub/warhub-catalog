@@ -845,3 +845,24 @@ def test_overriding_the_settings_marks_the_basis() -> None:
     overrides = Overrides.model_validate({"products": {"mfr/x": {"settings": ["warhammer-40k"]}}})
     after = apply_overrides(_product(), overrides)
     assert (after.settings, after.settingsBasis) == (["warhammer-40k"], "override")
+
+
+def test_a_generic_verdict_survives_the_membership_completion() -> None:
+    """The categorize stage marks a TerrainCrate kit `not-applicable` because Mantic's own shelf
+    says it belongs to no game; the completion predicate, which only guesses from the category,
+    must keep that verdict rather than downgrade it to `unknown` -- while still saying `unknown`
+    where nothing spoke."""
+    from warhub_acquisition.models.catalog import CanonicalProduct
+    from warhub_acquisition.resolve.attributes import complete_membership_bases
+    from warhub_acquisition.taxonomy import Settings
+
+    settings = Settings({}, {}, frozenset())
+    verdict = CanonicalProduct(
+        id="mantic-games/MGSS304", name="Sci-Fi Terrain: Furniture", manufacturer="mantic-games",
+        status="current", firstSeen="2026-07-01",
+        category="terrain", gameSystemsBasis="not-applicable", settingsBasis="not-applicable",
+    )
+    kept = complete_membership_bases(verdict, {}, settings)
+    assert (kept.gameSystemsBasis, kept.settingsBasis) == ("not-applicable", "not-applicable")
+    silent = complete_membership_bases(verdict.model_copy(update={"gameSystemsBasis": "unknown", "settingsBasis": "unknown"}), {}, settings)
+    assert (silent.gameSystemsBasis, silent.settingsBasis) == ("unknown", "unknown")

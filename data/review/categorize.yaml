@@ -8,22 +8,22 @@ summary:
     paint-barcode: 9
     stated: 1979
     unknown: 1413
-  decidedThisRun: 23870
+  decidedThisRun: 0
   gameSystemsByBasis:
-    classified: 1510
-    code: 3969
-    mapped: 2395
-    not-applicable: 7380
-    override: 78
+    classified: 1241
+    code: 4163
+    mapped: 2595
+    not-applicable: 7844
+    override: 83
     setting: 842
-    stated: 9193
-    unknown: 1895
+    stated: 9134
+    unknown: 1360
   settingsByBasis:
     code: 831
-    derived: 17026
+    derived: 17097
     mapped: 11
-    not-applicable: 7451
-    unknown: 1943
+    not-applicable: 7915
+    unknown: 1408
 conflicts:
   - entity: ak-interactive/AK11500
     type: category-disagreement
@@ -85,15 +85,6 @@ conflicts:
   - entity: corvus-belli/WW20009
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=hobby-auxiliary; ret-goblingaming=terrain'
-  - entity: games-workshop/15050108015
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (mapped); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
-  - entity: games-workshop/15050108016
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (mapped); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
-  - entity: games-workshop/15050108017
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (mapped); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/60020699002
     type: gameSystem-disagreement
     detail: catalog says warhammer-40k (classified); games-workshop code~^\d{4}06\d{5}$ says other-games
@@ -106,9 +97,6 @@ conflicts:
   - entity: games-workshop/60040399016
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=book'
-  - entity: games-workshop/60050117003
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/60100281202
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=miniatures; ret-radaddel=book; ret-tistaminis=book'
@@ -130,12 +118,6 @@ conflicts:
   - entity: games-workshop/99120101170
     type: gameSystem-disagreement
     detail: catalog says horus-heresy (classified); games-workshop code~^\d{4}01\d{5}$ says warhammer-40k
-  - entity: games-workshop/99120108108
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (stated); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
-  - entity: games-workshop/99120108109
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (stated); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/99120199129
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=terrain; ret-radaddel=game-accessory'
@@ -247,9 +229,6 @@ conflicts:
   - entity: games-workshop/99219999035
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
-  - entity: games-workshop/99220108011
-    type: gameSystem-disagreement
-    detail: catalog says warhammer-40k (classified); games-workshop name~\bKILL[ -]?TEAM\b|\bKILLZONE\b|\bK/T\b|\bK/TEAM\b says kill-team
   - entity: games-workshop/99239999066
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -301,12 +280,6 @@ conflicts:
   - entity: green-stuff-world/green-stuff-world-maxx-darth-paint-60-ml
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
-  - entity: mantic-games/MGKWRK302
-    type: gameSystem-disagreement
-    detail: catalog says kings-of-war (classified); mfr-manticgames categories~firefight-enforcers,firefight-gcps,firefight-plague,firefight-veer-myn,firefight-asterians,firefight-forge-fathers,firefight-marauders,mazon-labs-firefight,nightstalkers-firefight-factions,enforcers,plague,veer-myn,forge-fathers,gcps,marauders,asterian,rebs,nameless,mazon-labs says deadzone+firefight
-  - entity: mantic-games/MGKWRK402
-    type: gameSystem-disagreement
-    detail: catalog says kings-of-war (classified); mfr-manticgames categories~firefight-enforcers,firefight-gcps,firefight-plague,firefight-veer-myn,firefight-asterians,firefight-forge-fathers,firefight-marauders,mazon-labs-firefight,nightstalkers-firefight-factions,enforcers,plague,veer-myn,forge-fathers,gcps,marauders,asterian,rebs,nameless,mazon-labs says deadzone+firefight
   - entity: mantic-games/MGSS308
     type: gameSystem-disagreement
     detail: catalog says deadzone (stated); mantic-games code~^(MGSS|KSSS) says star-saga
@@ -325,12 +298,6 @@ conflicts:
   - entity: mantic-games/MGWPM103
     type: gameSystem-disagreement
     detail: catalog says firefight (stated); mantic-games code~^MGWPM says warpath
-  - entity: mantic-games/MGWPM109
-    type: gameSystem-disagreement
-    detail: catalog says walking-dead-all-out-war (stated); mantic-games code~^MGWPM says warpath
-  - entity: mantic-games/giant-chovar-psychozoan
-    type: gameSystem-disagreement
-    detail: catalog says deadzone (stated); mfr-manticgames categories~dreadball,teams,mvp,books-dreadball,featured-products-dreadball,getting-started-dreadball says dreadball
   - entity: mantic-games/marauder-raptor-warpath
     type: gameSystem-disagreement
     detail: catalog says deadzone (stated); mantic-games name~(?<!epic[ -])\bwarpath\b(?!\s*(?:firefight|deadzone|universe)) says warpath
@@ -352,9 +319,6 @@ conflicts:
   - entity: sarissa-precision/N031
     type: setting-disagreement
     detail: the games say antares; sarissa-precision code~^[NK]\d{3}$ says world-war-two
-  - entity: sarissa-precision/T027
-    type: gameSystem-disagreement
-    detail: catalog says spqr (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
   - entity: vallejo/26201
     type: paint-barcode-vs-taxonomy
     detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
@@ -409,60 +373,9 @@ conflicts:
   - entity: vallejo/72192
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set'
-  - entity: warlord-games/105010001
-    type: gameSystem-disagreement
-    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
-  - entity: warlord-games/302210001
-    type: gameSystem-disagreement
-    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
-  - entity: warlord-games/302210002
-    type: gameSystem-disagreement
-    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
-  - entity: warlord-games/315120017
-    type: gameSystem-disagreement
-    detail: catalog says epic-black-powder (stated); mfr-warlord-store tags~epic-pike-shotte says epic-pike-and-shotte
-  - entity: warlord-games/402616017
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616018
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616019
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616020
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616021
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616022
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616023
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/402616024
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~gates-of-antares,beyond-the-gates-of-antares,GoA,algoryn,boromite,ghar,isorian,concord,freeborn; tags~warlords-of-erehwon says gates-of-antares+warlords-of-erehwon
-  - entity: warlord-games/408800049
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (classified); mfr-warlord-store tags~konflikt-47,Konflikt-47-10,K47-german,k47-USA,k47-british,k47-Japanese,k47-Soviet,k47-Italian says konflikt-47
   - entity: warlord-games/453210803
     type: gameSystem-disagreement
     detail: catalog says bolt-action (stated); warlord-games code~^45\d{7}$ says konflikt-47
-  - entity: warlord-games/993019903
-    type: gameSystem-disagreement
-    detail: catalog says bolt-action (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
-  - entity: warlord-games/BPDEALSEP05
-    type: gameSystem-disagreement
-    detail: catalog says black-powder (stated); mfr-warlord-store tags~black-seas says black-seas
-  - entity: warlord-games/WGP-BAA-02
-    type: gameSystem-disagreement
-    detail: catalog says black-powder (stated); mfr-warlord-store tags~hail-caesar,the-dark-ages says hail-caesar
-  - entity: wyrd-games/WYR40009
-    type: gameSystem-disagreement
-    detail: catalog says malifaux (stated); mfr-wyrd-store tags~The Other Side,ToS,ToS-Unit,ToS-Character,Abyssinia,King's Empire,Gibbering Hordes,Cult of the Burning Man says the-other-side
 deadClauses:
   - games-workshop code~^\d{2}70\d{2}81\d{3}$
   - games-workshop code~^\d{4}1481\d{3}$
@@ -476,6 +389,8 @@ deadClauses:
   - mfr-warmachine vendor=Godtear
   - mfr-warmachine vendor=Guild Ball
   - ret-radaddel tags~HALO FLASHPOINT
+  - warlord-games code~^11\d{7}$
+  - warlord-games code~^21\d{7}$
 unmapped:
   mfr-cmon:
     - value: productLine=Assassin’s Creed Roleplaying Game

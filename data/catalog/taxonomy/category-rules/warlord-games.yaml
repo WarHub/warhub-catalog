@@ -85,6 +85,53 @@ clauses:
   # ways) and decides nothing; `84`, `60`, `61`, `62` and `75` have no control at all -- `84` is
   # Warlord-coded Italeri terrain, the others are Doctor Who, Sláine, ABC Warriors and Project Z,
   # none of which this taxonomy has a word for.
+  # THE PRODUCT'S OWN NAME NAMES THE GAME, and it is a claim the stage unites with the store's
+  # shelves rather than a fill behind them (categorize/decide.py). Graded 2026-09-02 against the
+  # store's own `productType` game on every product whose name carries one of these: Bolt Action
+  # 122/122, Victory at Sea 155/155, Blood Red Skies 59/59, Black Seas 52/52, Konflikt '47 41/41,
+  # Achtung Panzer! 25/25, Cruel Seas 20/20, Warlords of Erehwon 8/8, Judge Dredd 5/5, SPQR 2/2,
+  # Epic Hail Caesar 37/37, Epic Pike & Shotte 45/45, Black Powder 15/15, Hail Caesar 27/28,
+  # Pike & Shotte 53/55. The Epic lines come first and the plain names refuse an `Epic` on either
+  # side, because `Black Powder Epic Battles: ...` is the Epic product. Epic Black Powder itself
+  # grades 61/93 -- the remaining 32 are boxes the store types `Black Powder` while naming them
+  # `Black Powder Epic Battles`, the same split its `31` code segment shows below, and the name is
+  # the product line. Reach: 28 Bolt Action, 31 Epic Black Powder and 25 other products no source
+  # had placed.
+  - nameMatches: '\bBLACK POWDER EPIC BATTLES\b'
+    gameSystems: [epic-black-powder]
+  - nameMatches: '\bHAIL CAESAR EPIC BATTLES\b'
+    gameSystems: [epic-hail-caesar]
+  - nameMatches: '\bPIKE\s*&\s*SHOTTE EPIC BATTLES\b'
+    gameSystems: [epic-pike-and-shotte]
+  - nameMatches: '(?<!EPIC )\bBLACK POWDER\b(?!\s*EPIC)'
+    gameSystems: [black-powder]
+  - nameMatches: '(?<!EPIC )\bHAIL CAESAR\b(?!\s*EPIC)'
+    gameSystems: [hail-caesar]
+  - nameMatches: '(?<!EPIC )\bPIKE\s*&\s*SHOTTE\b(?!\s*EPIC)'
+    gameSystems: [pike-and-shotte]
+  - nameMatches: '\bBOLT ACTION\b'
+    gameSystems: [bolt-action]
+  - nameMatches: '\bBLACK SEAS\b'
+    gameSystems: [black-seas]
+  - nameMatches: '\bCRUEL SEAS\b'
+    gameSystems: [cruel-seas]
+  - nameMatches: "\\bKONFLIKT\\s*'?47\\b"
+    gameSystems: [konflikt-47]
+  - nameMatches: '\bVICTORY AT SEA\b'
+    gameSystems: [victory-at-sea]
+  - nameMatches: '\bGATES OF ANTARES\b'
+    gameSystems: [gates-of-antares]
+  - nameMatches: '\bEREHWON\b'
+    gameSystems: [warlords-of-erehwon]
+  - nameMatches: '\bSPQR\b'
+    gameSystems: [spqr]
+  - nameMatches: '\bACHTUNG PANZER\b'
+    gameSystems: [achtung-panzer]
+  - nameMatches: '\bBLOOD RED SKIES\b'
+    gameSystems: [blood-red-skies]
+  - nameMatches: '\bJUDGE DREDD\b'
+    gameSystems: [judge-dredd]
+
   - codeMatches: '^10\d{7}$'
     gameSystems: [hail-caesar]
   - codeMatches: '^11\d{7}$'
