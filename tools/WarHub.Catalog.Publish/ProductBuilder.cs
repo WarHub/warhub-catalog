@@ -62,6 +62,19 @@ internal static class ProductBuilder
                     systemKeys.Add(key);
                     systemLabels.Add(label);
                 }
+                // Settings resolve the same way and fail the same way: a slug the taxonomy does
+                // not declare is a data fault, not a value to pass through.
+                var settingLabels = new List<string>();
+                foreach (var raw in p.Settings)
+                {
+                    if (string.IsNullOrWhiteSpace(raw)) continue;
+                    string key = Slug.Make(raw);
+                    if (!labels.Settings.TryGetValue(key, out string? label))
+                    {
+                        throw new InvalidOperationException($"no label for setting slug '{key}' (product {p.Id})");
+                    }
+                    if (!settingLabels.Contains(label, StringComparer.Ordinal)) settingLabels.Add(label);
+                }
                 string? factionLabel = null;
                 if (!string.IsNullOrEmpty(p.Faction))
                 {
@@ -96,6 +109,7 @@ internal static class ProductBuilder
                     PriceCad = p.PriceCad,
                     Name = p.Name,
                     GameSystems = systemLabels.Count > 0 ? systemLabels : null,
+                    Settings = settingLabels.Count > 0 ? settingLabels : null,
                     Faction = factionLabel,
                     Category = p.Category,
                     Status = p.Status,
@@ -139,7 +153,7 @@ internal static class ProductBuilder
         all.Sort(CompareProducts);
 
         var orderedKeys = partitions.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
-        return new ProductAssembly(orderedKeys, partitions, all);
+        return new ProductAssembly(orderedKeys, partitions, all, labels);
     }
 
     /// <summary>Writes the consolidated document, the per-game-system partitions and the index.</summary>
@@ -173,12 +187,26 @@ internal static class ProductBuilder
                 Products = allProducts,
             });
 
-        // Partitions + index
+        // Partitions + index. Each game partition also names the SETTING it belongs to, and the
+        // index lists the settings themselves, so a consumer can group the partitions by universe
+        // -- "everything in Warhammer 40,000" is Kill Team + Necromunda + The Horus Heresy + the
+        // flagship, and the index is where that grouping is published.
+        TaxonomyLabels labels = assembly.Labels;
         var indexEntries = new List<IndexEntry>();
+        var settingKeys = new SortedSet<string>(StringComparer.Ordinal);
         foreach (string key in orderedKeys)
         {
             ProductPartitionData data = partitions[key];
             string relPath = $"products/by-system/{key}.json";
+            string? settingKey = labels.SettingOfGameSystem.TryGetValue(key, out string? s) ? s : null;
+            if (settingKey is not null)
+            {
+                if (!labels.Settings.ContainsKey(settingKey))
+                {
+                    throw new InvalidOperationException($"game system '{key}' names setting '{settingKey}', which settings.yaml does not declare");
+                }
+                settingKeys.Add(settingKey);
+            }
             writer.Write(relPath, "product-catalog", "product-catalog-partition", key, data.Products.Count,
                 new ProductCatalogDocument
                 {
@@ -195,7 +223,7 @@ internal static class ProductBuilder
                     Source = prov.SourceFor(relPath),
                     Products = data.Products,
                 });
-            indexEntries.Add(new IndexEntry(key, data.Label, data.Products.Count, relPath));
+            indexEntries.Add(new IndexEntry(key, data.Label, data.Products.Count, relPath, settingKey));
         }
 
         writer.Write("products/index.json", "index", "product-index", null, total,
@@ -207,6 +235,9 @@ internal static class ProductBuilder
                 PartitionType = "gameSystem",
                 Total = total,
                 Partitions = indexEntries,
+                Settings = settingKeys.Count > 0
+                    ? settingKeys.Select(k => new SettingEntry(k, labels.Settings[k])).ToList()
+                    : null,
             });
 
         return total;
@@ -227,9 +258,13 @@ internal sealed record ProductPartitionData(string Label, List<ProductRecord> Pr
 internal sealed class ProductAssembly(
     List<string> orderedKeys,
     Dictionary<string, ProductPartitionData> partitions,
-    List<ProductRecord> all)
+    List<ProductRecord> all,
+    TaxonomyLabels labels)
 {
     public IReadOnlyList<string> OrderedKeys => orderedKeys;
+
+    /// <summary>The taxonomy the records were resolved against -- the index names settings from it.</summary>
+    public TaxonomyLabels Labels => labels;
 
     public IReadOnlyDictionary<string, ProductPartitionData> Partitions => partitions;
 

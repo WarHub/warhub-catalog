@@ -41,6 +41,14 @@ GAME_SYSTEMS_YAML = """\
 gameSystems:
   - slug: warhammer-40k
     label: Warhammer 40,000
+    setting: warhammer-40k
+"""
+
+# The setting the game is played in -- the layer above game-systems.yaml, also a static input.
+SETTINGS_YAML = """\
+settings:
+  - slug: warhammer-40k
+    label: Warhammer 40,000
 """
 
 FACTIONS_YAML = """\
@@ -73,6 +81,7 @@ def _seed(tmp_path: Path) -> DataPaths:
         },
     )
     (paths.taxonomy / "game-systems.yaml").write_text(GAME_SYSTEMS_YAML, encoding="utf-8", newline="\n")
+    (paths.taxonomy / "settings.yaml").write_text(SETTINGS_YAML, encoding="utf-8", newline="\n")
     (paths.taxonomy / "factions.yaml").write_text(FACTIONS_YAML, encoding="utf-8", newline="\n")
     # A category vocabulary, so this end-to-end fixture actually exercises the resolver's
     # validation. Without one `load_vocabulary` is permissive by design (absence must not break the
@@ -176,6 +185,7 @@ def _generated_files(paths: DataPaths) -> dict[str, Path]:
     return {
         "products/games-workshop.yaml": paths.catalog_products / "games-workshop.yaml",
         "taxonomy/game-systems.yaml": paths.taxonomy / "game-systems.yaml",
+        "taxonomy/settings.yaml": paths.taxonomy / "settings.yaml",
         "taxonomy/factions.yaml": paths.taxonomy / "factions.yaml",
     }
 

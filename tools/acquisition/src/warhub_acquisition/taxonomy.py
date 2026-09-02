@@ -66,6 +66,76 @@ class Taxonomy:
         return named[0] if named else code
 
 
+class Settings:
+    """The SETTINGS a game is set in, and which setting each game belongs to.
+
+    A setting is the fictional universe or the historical period a game is played in -- Warhammer
+    40,000, Age of Sigmar, Middle-earth, the Second World War -- and it is the layer ABOVE a game
+    system. Kill Team, Necromunda, The Horus Heresy and Warhammer 40,000 are four games in one
+    setting; Bolt Action, Konflikt '47 and Achtung Panzer! are three games in another.
+
+    WHY IT IS A SEPARATE AXIS AND NOT A WIDER GAME SLUG. A Black Library novel belongs to the
+    Warhammer 40,000 setting and to no game at all; a laser-cut Normandy farmhouse is sold for Bolt
+    Action and is just as much a Konflikt '47 building. Neither is a game membership, and stamping
+    a game on them was the choice this catalog used to face -- the Black Library rows were vetoed
+    for exactly that reason and stayed `unknown`. A product's game systems DERIVE its settings
+    (`resolve/attributes.py::complete_membership_bases`); a product with no game can still be
+    placed in a setting by a rule, and a product that belongs to nothing at all can say so.
+
+    ONE SETTING PER GAME. `game-systems.yaml` names each game's setting, and it is a scalar because
+    no game in the taxonomy is played in two universes -- measured against the publishers' own
+    descriptions when this was introduced (2026-09-02). A catch-all bucket (`catchAll: true`) is
+    the one entry allowed to name none: it is not a game.
+    """
+
+    def __init__(
+        self,
+        labels: dict[str, str],
+        of_game: dict[str, str],
+        settingless: frozenset[str] = frozenset(),
+    ) -> None:
+        self.labels = labels
+        self.of_game = of_game
+        # Games that belong to NO setting as a fact rather than as a gap -- Steamforged's Epic
+        # Encounters are 5e-compatible boxes played in whatever campaign the buyer runs. A product
+        # of such a game is `not-applicable` on the settings axis, where a product of a game this
+        # register simply has no entry for is `unknown`.
+        self.settingless = settingless
+
+    @classmethod
+    def load(cls, taxonomy_dir: Path) -> "Settings":
+        settings_path = taxonomy_dir / "settings.yaml"
+        labels: dict[str, str] = {}
+        if settings_path.exists():
+            for entry in (read_yaml(settings_path) or {}).get("settings") or []:
+                labels[entry["slug"]] = entry["label"]
+        of_game: dict[str, str] = {}
+        settingless: set[str] = set()
+        systems_path = taxonomy_dir / "game-systems.yaml"
+        if systems_path.exists():
+            for entry in (read_yaml(systems_path) or {}).get("gameSystems") or []:
+                if entry.get("settingless"):
+                    settingless.add(entry["slug"])
+                setting = entry.get("setting")
+                if setting is None:
+                    continue
+                if setting not in labels:
+                    raise ValueError(
+                        f"game-systems.yaml: {entry['slug']!r} names setting {setting!r}, "
+                        f"which settings.yaml does not declare"
+                    )
+                of_game[entry["slug"]] = setting
+        return cls(labels, of_game, frozenset(settingless))
+
+    def for_games(self, game_systems: list[str]) -> list[str]:
+        """The settings a list of games derives, sorted, without duplicates."""
+        return sorted({self.of_game[g] for g in game_systems if g in self.of_game})
+
+    def all_settingless(self, game_systems: list[str]) -> bool:
+        """True when every one of these games is declared to belong to no setting."""
+        return bool(game_systems) and all(g in self.settingless for g in game_systems)
+
+
 def load_labels(taxonomy_dir: Path) -> tuple[dict[str, str], dict[str, str]]:
     def read_map(path: Path, key: str) -> dict[str, str]:
         if not path.exists():

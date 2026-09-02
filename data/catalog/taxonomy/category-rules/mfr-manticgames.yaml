@@ -46,6 +46,27 @@ noneOf:
     note: fiction -- the factions in the story are not the games the book belongs to
 
 clauses:
+  # --- the two membership questions a game clause cannot answer --------------------------------
+  # FICTION HAS A UNIVERSE AND NO GAME. The two shelves vetoed above for the game axis name the
+  # setting exactly: Mantic files its novels under the universe they are set in, and `Pious
+  # (Basilean Navy, Book 1)` is a Pannithor story whether it is an Armada or a Kings of War one.
+  - settings: [warpath-universe]
+    hintContainsAny: {categories: [warpath-universe]}
+  - settings: [pannithor]
+    hintContainsAny: {categories: [kings-of-war-fiction]}
+
+  # TERRAINCRATE IS SOLD FOR ANY GAME AND BELONGS TO NONE -- Mantic's own pitch for the range --
+  # and so is a neoprene mat, a tournament ticket and a gift voucher. `generic` is the decision;
+  # it runs before this source's game clauses, so a TerrainCrate box cross-shelved under
+  # `kings-of-war` is still generic. The `accessories-<game>` shelves are deliberately NOT here:
+  # Kings of War spell cards and movement trays are Kings of War products, and those shelves are
+  # left alone exactly as the note at the end of this file argues.
+  - generic: true
+    hintContainsAny:
+      categories: [terrain-crate, modern-terrain-crate, terrain-sci-fi-terrain-crate,
+                   featured-products-terrain-crate, terraincrate-battlefields, terraincrate-dungeons,
+                   sci-fi-modular-buildings, neoprene-game-mats, tournaments, hobby_gifts]
+
   # --- paint: the slugs that name a paint RANGE, not a manufacturer ------------------------------
   #
   # The COLOUR-NAME slugs first. Mantic files each Vallejo Game Color pot under its own colour, and

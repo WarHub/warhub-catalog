@@ -60,3 +60,60 @@ clauses:
   - codeMatches: '^\d{2}10\d{5}$'
     category: book
     note: 6 undecided; control 35, 100%
+
+  # =============================================================================================
+  # WHICH GAME. THE LEADING PAIR OF A NINE-DIGIT WARLORD CODE IS THE GAME LINE, and it grades
+  # like a manufacturer's own filing because it is one. Measured 2026-09-02 against every product
+  # whose game a SOURCE stated -- the frozen import where it was not the `bolt-action` fill, and
+  # the store's own game tags -- 2,387 controls over 2,710 coded products:
+  #
+  #     10 hail-caesar          199, 99.0%       50 gates-of-antares     127, 100%
+  #     11 epic-hail-caesar      29, 100%        64/65 judge-dredd        20, 100%
+  #     15 spqr                   7, 100%        69/72 warlords-of-erehwon 59, 100%
+  #     20 pike-and-shotte      116, 100%        74 victory-at-sea       156, 100%
+  #     21 epic-pike-and-shotte  31, 100%        77 blood-red-skies      127, 100%
+  #     30 black-powder         285, 100%        78 cruel-seas           101, 100%
+  #     45 konflikt-47          165, 99.4%       79 black-seas            85, 100%
+  #
+  # `40` IS BOLT ACTION AND THE NUMBER NEEDS READING: 634 of its 756 controls say `bolt-action`
+  # alone and another 115 say `achtung-panzer` AND `bolt-action`, so Bolt Action is IN the
+  # membership 99.1% of the time and the clause proposes only that. `48` is the Achtung Panzer!
+  # line and its own control says both games, 24 of 25, so it proposes both. `72` is Mythic
+  # Americas, which runs on the Warlords of Erehwon rules and grades as that game 43 of 43.
+  #
+  # NOT HERE: `31` splits Epic Black Powder 54 / Black Powder 37 (the same Epic boxes filed both
+  # ways) and decides nothing; `84`, `60`, `61`, `62` and `75` have no control at all -- `84` is
+  # Warlord-coded Italeri terrain, the others are Doctor Who, Sláine, ABC Warriors and Project Z,
+  # none of which this taxonomy has a word for.
+  - codeMatches: '^10\d{7}$'
+    gameSystems: [hail-caesar]
+  - codeMatches: '^11\d{7}$'
+    gameSystems: [epic-hail-caesar]
+  - codeMatches: '^15\d{7}$'
+    gameSystems: [spqr]
+  - codeMatches: '^20\d{7}$'
+    gameSystems: [pike-and-shotte]
+  - codeMatches: '^21\d{7}$'
+    gameSystems: [epic-pike-and-shotte]
+  - codeMatches: '^30\d{7}$'
+    gameSystems: [black-powder]
+  - codeMatches: '^4[01]\d{7}$'
+    gameSystems: [bolt-action]
+  - codeMatches: '^45\d{7}$'
+    gameSystems: [konflikt-47]
+  - codeMatches: '^48\d{7}$'
+    gameSystems: [achtung-panzer, bolt-action]
+  - codeMatches: '^50\d{7}$'
+    gameSystems: [gates-of-antares]
+  - codeMatches: '^6[45]\d{7}$'
+    gameSystems: [judge-dredd]
+  - codeMatches: '^(69|72)\d{7}$'
+    gameSystems: [warlords-of-erehwon]
+  - codeMatches: '^74\d{7}$'
+    gameSystems: [victory-at-sea]
+  - codeMatches: '^77\d{7}$'
+    gameSystems: [blood-red-skies]
+  - codeMatches: '^78\d{7}$'
+    gameSystems: [cruel-seas]
+  - codeMatches: '^79\d{7}$'
+    gameSystems: [black-seas]

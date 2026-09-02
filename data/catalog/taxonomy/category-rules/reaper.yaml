@@ -31,4 +31,9 @@ reason: >-
 clauses:
   - codeMatches: '^(7\d{3}|30\d{3}|77\d{3}|80\d{3})$'
     category: miniatures
+    # ...AND THEY BELONG TO NO GAME AND NO SETTING, as a positive statement now that the vocabulary
+    # can make one: Bones and Dark Heaven are generic roleplaying figures, sold for whatever table
+    # the buyer plays at. The header above used to say they would stay `unknown` forever; `generic`
+    # is the answer it was missing.
+    generic: true
     note: 109 fills, the whole undecided population

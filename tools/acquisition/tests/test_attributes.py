@@ -719,10 +719,20 @@ def test_hint_fields_can_be_declared_stale_too() -> None:
 
 from warhub_acquisition.resolve.attributes import (  # noqa: E402
     apply_classification,
-    complete_game_systems_basis,
+    complete_membership_bases,
 )
+from warhub_acquisition.taxonomy import Settings  # noqa: E402
 
 _LABELS = {"warhammer-40k": "Warhammer 40,000", "infinity": "Infinity", "bolt-action": "Bolt Action"}
+_SETTINGS = Settings(
+    {"warhammer-40k": "Warhammer 40,000", "world-war-two": "Second World War"},
+    {"warhammer-40k": "warhammer-40k", "bolt-action": "world-war-two", "konflikt-47": "world-war-two"},
+    settingless=frozenset({"epic-encounters"}),
+)
+
+
+def complete_game_systems_basis(product, labels):
+    return complete_membership_bases(product, labels, _SETTINGS)
 
 
 def _product(**kwargs) -> CanonicalProduct:
@@ -748,8 +758,10 @@ def test_the_predicate_can_never_erase_a_game_system_anything_established() -> N
     The obvious formulation -- "category is paint, therefore no game system" -- is measurably
     wrong: 411 products carry both, and they are real.
     """
-    themed = _product(name="Infinity: JSA Paint Set", category="paint-set", gameSystems=["infinity"])
-    assert complete_game_systems_basis(themed, _LABELS) is themed
+    themed = _product(name="Infinity: JSA Paint Set", category="paint-set", gameSystems=["infinity"],
+                      gameSystemsBasis="stated")
+    settled = complete_game_systems_basis(themed, _LABELS)
+    assert (settled.gameSystems, settled.gameSystemsBasis) == (["infinity"], "stated")
 
 
 def test_a_hobby_product_named_for_a_game_is_a_question_not_a_dismissal() -> None:
@@ -780,3 +792,56 @@ def test_a_classification_fills_a_hole_and_can_never_overrule_a_source() -> None
     empty = _product()
     filled = apply_classification(empty, decisions)
     assert (filled.gameSystems, filled.gameSystemsBasis) == (["warhammer-40k"], "classified")
+
+
+# --- settings: the layer above the game --------------------------------------------------------
+
+
+def test_a_products_settings_derive_from_its_games() -> None:
+    """Two WWII games, one setting: the union of what each game names, without duplicates."""
+    product = _product(gameSystems=["bolt-action", "konflikt-47"], gameSystemsBasis="stated")
+    settled = complete_membership_bases(product, _LABELS, _SETTINGS)
+    assert (settled.settings, settled.settingsBasis) == (["world-war-two"], "derived")
+    assert settled.gameSystemsBasis == "stated"
+
+
+def test_a_game_the_taxonomy_places_in_no_setting_leaves_the_settings_unknown() -> None:
+    product = _product(gameSystems=["infinity"], gameSystemsBasis="stated")
+    settled = complete_membership_bases(product, _LABELS, _SETTINGS)
+    assert (settled.settings, settled.settingsBasis) == ([], "unknown")
+
+
+def test_a_game_declared_settingless_is_not_applicable_rather_than_unknown() -> None:
+    """A 5e-compatible encounter box is played in whatever campaign the buyer runs: no universe,
+    and nothing missing."""
+    product = _product(gameSystems=["epic-encounters"], gameSystemsBasis="stated")
+    settled = complete_membership_bases(product, _LABELS, _SETTINGS)
+    assert (settled.settings, settled.settingsBasis) == ([], "not-applicable")
+
+
+def test_a_product_placed_in_a_setting_but_no_game_says_so_on_the_game_axis() -> None:
+    """A Black Library novel: a rule placed it in Warhammer 40,000, nothing placed it in a game,
+    and that is not a hole -- `setting` on the game axis is the positive statement."""
+    product = _product(name="Horus Rising", category="book",
+                       settings=["warhammer-40k"], settingsBasis="code")
+    settled = complete_membership_bases(product, _LABELS, _SETTINGS)
+    assert settled.gameSystemsBasis == "setting"
+    assert (settled.settings, settled.settingsBasis) == (["warhammer-40k"], "code")
+
+
+def test_a_hand_override_of_the_settings_is_never_re_derived() -> None:
+    product = _product(gameSystems=["bolt-action"], gameSystemsBasis="stated",
+                       settings=["warhammer-40k"], settingsBasis="override")
+    settled = complete_membership_bases(product, _LABELS, _SETTINGS)
+    assert settled.settings == ["warhammer-40k"]
+
+
+def test_a_hobby_product_is_not_applicable_on_both_axes() -> None:
+    settled = complete_membership_bases(_product(name="Abaddon Black 12ml", category="paint"), _LABELS, _SETTINGS)
+    assert (settled.gameSystemsBasis, settled.settingsBasis) == ("not-applicable", "not-applicable")
+
+
+def test_overriding_the_settings_marks_the_basis() -> None:
+    overrides = Overrides.model_validate({"products": {"mfr/x": {"settings": ["warhammer-40k"]}}})
+    after = apply_overrides(_product(), overrides)
+    assert (after.settings, after.settingsBasis) == (["warhammer-40k"], "override")

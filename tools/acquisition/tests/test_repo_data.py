@@ -21,7 +21,7 @@ from warhub_acquisition.models.descriptor import load_descriptors
 from warhub_acquisition.resolve import crossover
 from warhub_acquisition.resolve.join import Matches
 from warhub_acquisition.resolve.resolver import DataPaths
-from warhub_acquisition.taxonomy import Taxonomy, load_labels
+from warhub_acquisition.taxonomy import Settings, Taxonomy, load_labels
 from warhub_acquisition.yamlio import read_yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -105,6 +105,25 @@ def test_repo_labels_load() -> None:
     game_systems, factions = load_labels(paths.taxonomy)
     assert game_systems
     assert factions
+
+
+def test_every_game_system_is_placed_in_a_setting_or_declared_settingless() -> None:
+    """A game either belongs to a universe/period or says in so many words that it has none; a
+    catch-all bucket is the one entry that may say neither. Silence would leave every product of
+    that game `settingsBasis: unknown` for a reason nobody wrote down."""
+    paths = _require_repo_data()
+    settings = Settings.load(paths.taxonomy)
+    assert settings.labels, "settings.yaml declares no settings"
+    for entry in yaml.safe_load((paths.taxonomy / "game-systems.yaml").read_text(encoding="utf-8"))["gameSystems"]:
+        if entry.get("catchAll"):
+            assert "setting" not in entry, f"{entry['slug']}: a catch-all bucket is not a game and names no setting"
+            continue
+        assert bool(entry.get("setting")) != bool(entry.get("settingless")), (
+            f"{entry['slug']}: name a `setting` or declare `settingless: true`, exactly one"
+        )
+    referenced = set(settings.of_game.values())
+    unused = set(settings.labels) - referenced
+    assert not unused, f"settings.yaml declares {sorted(unused)}, which no game system belongs to"
 
 
 def test_repo_source_descriptors_validate() -> None:

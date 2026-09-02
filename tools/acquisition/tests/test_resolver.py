@@ -54,6 +54,7 @@ products:
       - warhammer-40k
     faction: necrons
     gameSystemsBasis: stated
+    settingsBasis: unknown
     categoryBasis: unknown
     status: current
     availability: in_stock

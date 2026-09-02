@@ -292,7 +292,7 @@ def test_the_stage_decides_the_undecided_and_leaves_claims_alone(tmp_path: Path)
     assert after["games-workshop/MYST1"].get("category") is None
 
 
-def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
+def test_the_stage_changes_only_the_six_fields_it_owns(tmp_path: Path) -> None:
     """The catalog files are rewritten wholesale, so the guard is that a rewrite is a no-op for
     every field this stage does not decide -- ids included.
 
@@ -301,6 +301,7 @@ def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
     cannot answer it, because at that point a paint pot has no category at all -- nothing had
     decided yet. Settling it upstream asked one pass
     too early and returned `unknown` for 4,189 products that are plainly hobby supplies.
+    `settings` and `settingsBasis` are the fifth and sixth, for the same reason.
     """
     paths = _seed(tmp_path)
     before = _catalog(paths)
@@ -314,7 +315,9 @@ def test_the_stage_changes_only_the_four_fields_it_owns(tmp_path: Path) -> None:
         for key in set(before[pid]) | set(after[pid])
         if before[pid].get(key) != after[pid].get(key)
     }
-    assert changed <= {"category", "categoryBasis", "packaging", "gameSystemsBasis"}
+    assert changed <= {
+        "category", "categoryBasis", "packaging", "gameSystemsBasis", "settings", "settingsBasis",
+    }
 
 
 def test_packaging_is_filled_only_where_the_record_had_none(tmp_path: Path) -> None:
@@ -369,6 +372,9 @@ def test_the_worklist_counts_only_products_that_are_still_undecided(tmp_path: Pa
     assert review["summary"] == {
         "products": 4, "undecided": 1, "decidedThisRun": 2,
         "byBasis": {"mapped": 1, "paint-barcode": 1, "stated": 1, "unknown": 1},
+        # the brush and the pot belong to nothing; the codex and the mystery are open questions
+        "gameSystemsByBasis": {"not-applicable": 2, "unknown": 2},
+        "settingsByBasis": {"not-applicable": 2, "unknown": 2},
     }
     values = {row["value"] for row in review["unmapped"]["ret-shop"]}
     assert values == {"productType=Unlabelled"}  # the decided rows' values are absent
@@ -545,6 +551,10 @@ def test_every_committed_rule_file_names_a_real_source_and_declared_values() -> 
             (REPO_ROOT / "data/catalog/taxonomy/factions.yaml").read_text(encoding="utf-8")
         )["factions"]
     }
+    settings_path = REPO_ROOT / "data/catalog/taxonomy/settings.yaml"
+    settings = {
+        entry["slug"] for entry in yaml.safe_load(settings_path.read_text(encoding="utf-8"))["settings"]
+    } if settings_path.exists() else set()
     manufacturers = {
         entry["slug"] for entry in yaml.safe_load(
             (REPO_ROOT / "data/catalog/taxonomy/manufacturers.yaml").read_text(encoding="utf-8")
@@ -572,6 +582,10 @@ def test_every_committed_rule_file_names_a_real_source_and_declared_values() -> 
             unknown = [s for s in clause.gameSystems if s not in systems]
             assert not unknown, (
                 f"{scope}: gameSystems {unknown!r} are not declared in game-systems.yaml"
+            )
+            unknown = [s for s in clause.settings if s not in settings]
+            assert not unknown, (
+                f"{scope}: settings {unknown!r} are not declared in settings.yaml"
             )
             assert clause.faction is None or clause.faction in factions, (
                 f"{scope}: faction {clause.faction!r} is not declared in factions.yaml"
@@ -804,3 +818,101 @@ def test_a_rule_that_merely_agrees_does_not_demote_the_basis() -> None:
     assert not _apply_game_systems(record, _decision("firefight"), outcome, frozenset())
     assert (record.gameSystems, record.gameSystemsBasis) == (["firefight"], "stated")
     assert outcome.conflicts == []
+
+
+# --- the settings axis and `generic` ------------------------------------------------------------
+
+
+def _settings():
+    from warhub_acquisition.taxonomy import Settings
+    return Settings({"wwii": "Second World War", "w40k": "Warhammer 40,000"},
+                    {"bolt-action": "wwii", "warhammer-40k": "w40k"})
+
+
+def _setting_decision(*settings, generic=False):
+    from warhub_acquisition.categorize.decide import Decision
+    return Decision(category=None, packaging=None, basis="", why="",
+                    settings=tuple(settings), settings_basis="code",
+                    settings_why="games-workshop code~novel", generic=generic,
+                    generic_why="ret-shop productType=Dice" if generic else None)
+
+
+def test_a_settings_clause_places_a_product_no_game_clause_could() -> None:
+    """A novel: the code names its universe and no game, and the record says both."""
+    from warhub_acquisition.categorize.stage import _apply_settings
+    from warhub_acquisition.resolve.attributes import complete_membership_bases
+    record = _record(name="Horus Rising", category="book", gameSystemsBasis="unknown",
+                     settingsBasis="unknown")
+    outcome = _outcome()
+    assert _apply_settings(record, _setting_decision("w40k"), outcome, _settings())
+    assert (record.settings, record.settingsBasis) == (["w40k"], "code")
+    settled = complete_membership_bases(record, {}, _settings())
+    assert settled.gameSystemsBasis == "setting"
+
+
+def test_a_settings_clause_agreeing_with_the_derived_setting_changes_nothing() -> None:
+    from warhub_acquisition.categorize.stage import _apply_settings
+    record = _record(gameSystems=["bolt-action"], gameSystemsBasis="stated",
+                     settings=["wwii"], settingsBasis="derived")
+    outcome = _outcome()
+    assert not _apply_settings(record, _setting_decision("wwii"), outcome, _settings())
+    assert outcome.conflicts == []
+
+
+def test_a_settings_clause_contradicting_the_games_setting_is_reported() -> None:
+    from warhub_acquisition.categorize.stage import _apply_settings
+    record = _record(gameSystems=["bolt-action"], gameSystemsBasis="stated",
+                     settings=["wwii"], settingsBasis="derived")
+    outcome = _outcome()
+    assert not _apply_settings(record, _setting_decision("w40k"), outcome, _settings())
+    assert [c.kind for c in outcome.conflicts] == ["setting-disagreement"]
+    assert record.settings == ["wwii"]
+
+
+def test_generic_answers_both_axes_where_nothing_placed_the_product() -> None:
+    from warhub_acquisition.categorize.stage import _apply_generic
+    record = _record(name="D6 Dice - white (30)", category="game-accessory",
+                     gameSystemsBasis="unknown", settingsBasis="unknown")
+    outcome = _outcome()
+    assert _apply_generic(record, _setting_decision(generic=True), outcome)
+    assert (record.gameSystemsBasis, record.settingsBasis) == ("not-applicable", "not-applicable")
+
+
+def test_generic_against_a_stated_game_is_ignored_not_an_erasure_and_not_a_conflict() -> None:
+    """The weaker claim yields to the specific one, quietly: a product on a generic shelf that a
+    source also places in a game is that game's product, and saying so every night is not a
+    question for anyone."""
+    from warhub_acquisition.categorize.stage import _apply_generic
+    record = _record(gameSystems=["bolt-action"], gameSystemsBasis="stated")
+    outcome = _outcome()
+    assert not _apply_generic(record, _setting_decision(generic=True), outcome)
+    assert record.gameSystems == ["bolt-action"]
+    assert outcome.conflicts == []
+
+
+def test_a_generic_clause_is_a_decision_and_a_veto_may_not_name_it_as_an_axis() -> None:
+    from pydantic import ValidationError
+    SourceRules.model_validate(_table(source="ret-x",
+                                      clauses=[{"hintEquals": {"productType": "Dice"}, "generic": True}]))
+    with pytest.raises(ValidationError, match="not axes"):
+        SourceRules.model_validate(_table(
+            source="ret-x",
+            clauses=[{"hintEquals": {"productType": "Dice"}, "category": "game-accessory"}],
+            noneOf=[{"hintEquals": {"productType": "Mat"}, "blocks": ["generic"]}]))
+
+
+def test_decide_carries_settings_and_generic_from_a_source_table() -> None:
+    from warhub_acquisition.categorize.decide import decide
+    rules = {
+        "ret-x": SourceRules.model_validate(_table(source="ret-x", clauses=[
+            {"hintEquals": {"productType": "Novel"}, "settings": ["w40k"]},
+            {"hintEquals": {"productType": "Dice"}, "generic": True},
+        ])),
+    }
+    novel = [_observation("ret-x:1", "ret-x", hints={"productType": "Novel"})]
+    decision, _ = decide("e", novel, {"ret-x": "retailer"}, rules, [], frozenset())
+    assert (decision.settings, decision.settings_basis) == (("w40k",), "mapped")
+    assert not decision.generic
+    dice = [_observation("ret-x:2", "ret-x", hints={"productType": "Dice"})]
+    decision, _ = decide("e", dice, {"ret-x": "retailer"}, rules, [], frozenset())
+    assert decision.generic and decision.settings == ()

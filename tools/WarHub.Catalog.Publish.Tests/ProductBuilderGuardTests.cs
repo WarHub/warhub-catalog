@@ -39,6 +39,56 @@ public sealed class ProductBuilderGuardTests
     };
 
     [Fact]
+    public void An_undeclared_setting_slug_fails_the_build()
+    {
+        var product = new CanonicalProduct
+        {
+            Id = "test-mfg/novel",
+            Name = "A Novel",
+            Manufacturer = "test-mfg",
+            Status = "current",
+            GameSystems = [],
+            Settings = ["no-such-setting"],
+        };
+
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => ProductBuilder.Build([CatalogOf(product)], EmptyLabels, Prov(), Writer()));
+        Assert.Contains("no-such-setting", ex.Message);
+    }
+
+    [Fact]
+    public void A_product_placed_only_in_a_setting_publishes_it_and_joins_no_game_partition()
+    {
+        // A Black Library novel: a setting, no game. It is in the consolidated document with its
+        // setting label and in no by-system partition -- the same shape a system-less product has,
+        // plus the one fact this axis exists to carry.
+        var labels = new TaxonomyLabels(
+            new Dictionary<string, string>(),
+            new Dictionary<string, string>(),
+            new Dictionary<string, string> { ["warhammer-40k"] = "Warhammer 40,000" },
+            new Dictionary<string, string>());
+        var product = new CanonicalProduct
+        {
+            Id = "test-mfg/novel",
+            Name = "Horus Rising",
+            Manufacturer = "test-mfg",
+            Status = "current",
+            GameSystems = [],
+            Settings = ["warhammer-40k"],
+        };
+
+        (CatalogWriter writer, string dist) = WriterWithDist();
+        int total = ProductBuilder.Build([CatalogOf(product)], labels, Prov(), writer);
+
+        Assert.Equal(1, total);
+        Assert.DoesNotContain(writer.Files, f => f.Path.StartsWith("products/by-system/", StringComparison.Ordinal));
+        JsonElement published = JsonDocument.Parse(File.ReadAllText(Path.Combine(dist, "products.json")))
+            .RootElement.GetProperty("products").EnumerateArray().Single();
+        Assert.Equal(["Warhammer 40,000"], published.GetProperty("settings").EnumerateArray().Select(v => v.GetString()!));
+        Assert.False(published.TryGetProperty("gameSystems", out _));
+    }
+
+    [Fact]
     public void Null_game_system_publishes_and_is_excluded_from_by_system_partitions()
     {
         var product = new CanonicalProduct

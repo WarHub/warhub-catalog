@@ -25,16 +25,16 @@ from typing import Mapping, Sequence
 
 from warhub_acquisition.models.catalog import CanonicalProduct
 from warhub_acquisition.models.observation import Observation
-from warhub_acquisition.resolve.attributes import complete_game_systems_basis
+from warhub_acquisition.resolve.attributes import DERIVED_BASES, complete_membership_bases
 from warhub_acquisition.resolve.resolver import DataPaths, _dump_product, joined_evidence
-from warhub_acquisition.taxonomy import Taxonomy, load_labels
+from warhub_acquisition.taxonomy import Settings, Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
 from .decide import Conflict, _clause_hit, _product_hit, _signal, decide, flatten_hints
 from .lexicon import load_lexicon
 from .paints import load_paint_barcodes
-from .rules import SourceRules, load_category_rules
+from .rules import AXES as _AXES, SourceRules, load_category_rules
 
 #: The one basis this stage is allowed to replace: the record has no category at all. `stated` is
 #: a source's claim about one product and outranks any table; anything an override set is a
@@ -49,14 +49,14 @@ REPLACEABLE = frozenset({"unknown"})
 #: them -- see `_apply_game_systems`.
 _MAINTAINER_DECIDED = frozenset({"override"})
 
-#: The gameSystem bases this stage may recompute. Both are DERIVED -- they say what happened
-#: when nothing supplied a value -- so re-deriving them against a freshly decided category is
-#: the whole point. `stated`, `mapped` and `override` trace to a claim and are never touched.
-DERIVED_GAME_SYSTEM_BASES = frozenset({"unknown", "not-applicable", None})
+#: The membership bases this stage may recompute -- resolve/attributes.py::DERIVED_BASES,
+#: re-exported for the callers here. They are DERIVED: they say what happened when nothing
+#: supplied a value, so re-deriving them against a freshly decided category is the whole point.
+#: `stated`, `mapped` and `override` trace to a claim and are never touched.
+DERIVED_GAME_SYSTEM_BASES = DERIVED_BASES
 
-#: The output axes, in the order `decide` reads them. Named once because three different places
-#: must agree on what "an axis" is: the scan, the veto scoping, and the dead-clause count.
-_AXES = ("category", "packaging", "faction", "gameSystems")
+#: The output axes, in the order `decide` reads them -- rules.py::AXES, named once because the
+#: scan, the veto scoping and the dead-clause count must agree on what "an axis" is.
 
 #: Hint keys that are FACTS ABOUT A PRODUCT rather than a shelf it was filed on. Everything else
 #: is treated as taxonomy and counted in the unmapped ranking.
@@ -109,6 +109,11 @@ class Outcome:
     #: Products this RUN gave a gameSystem, and by which rung.
     game_system_decided: int = 0
     by_game_system_basis: Counter = field(default_factory=Counter)
+    #: The settings axis, in the same two shapes: the whole catalog after this run, and what
+    #: this run itself decided.
+    settings_basis: Counter = field(default_factory=Counter)
+    settings_decided: int = 0
+    by_settings_basis: Counter = field(default_factory=Counter)
     #: `{"<source> <signal>": observations matched}`, counted over ALL evidence rather than over
     #: the products this run decided. Counting the run instead made every clause look dead the
     #: moment the catalog was already categorized, which is exactly when someone would read it.
@@ -216,6 +221,7 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             )
 
     system_labels, _ = load_labels(paths.taxonomy)
+    settings_taxonomy = Settings.load(paths.taxonomy)
     catch_alls = _load_catch_alls(paths.taxonomy)
     outcome = Outcome(clause_hits=_count_clause_hits(joined.entities, rules))
     if not paths.catalog_products.exists():
@@ -263,24 +269,29 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
 
             if _apply_game_systems(record, decision, outcome, catch_alls):
                 touched = True
-            # THE GAME-SYSTEM BASIS IS SETTLED HERE, NOT IN `resolve`, because it is a question
+            if _apply_settings(record, decision, outcome, settings_taxonomy):
+                touched = True
+            if _apply_generic(record, decision, outcome):
+                touched = True
+            # THE MEMBERSHIP BASES ARE SETTLED HERE, NOT IN `resolve`, because they are questions
             # about the CATEGORY and `resolve` does not yet know the answer to that one. A paint
             # pot leaves the resolver with NO category at all -- nothing had decided -- and only
             # this stage turns it into `paint`. Deciding
             # `not-applicable` upstream therefore asked the question one pass too early and got
             # `unknown` for 4,189 products that are plainly hobby supplies.
             #
-            # Only the two DERIVED values are ever recomputed. `stated`, `mapped` and `override`
+            # Only the DERIVED values are ever recomputed. `stated`, `mapped` and `override`
             # trace to something and this stage has nothing to add to them -- the same rule
             # REPLACEABLE states for categoryBasis, for the same reason.
-            if record.gameSystemsBasis in DERIVED_GAME_SYSTEM_BASES:
-                basis = complete_game_systems_basis(record, system_labels).gameSystemsBasis
-                if basis != record.gameSystemsBasis:
-                    record.gameSystemsBasis = basis
+            completed = complete_membership_bases(record, system_labels, settings_taxonomy)
+            for name in ("gameSystemsBasis", "settings", "settingsBasis"):
+                if getattr(completed, name) != getattr(record, name):
+                    setattr(record, name, getattr(completed, name))
                     touched = True
             _count_manufacturer_hits(record, rules, outcome.clause_hits)
             outcome.catalog_basis[record.categoryBasis or "none"] += 1
             outcome.game_system_basis[record.gameSystemsBasis or "none"] += 1
+            outcome.settings_basis[record.settingsBasis or "none"] += 1
         if touched and apply:
             write_yaml(
                 path,
@@ -400,6 +411,85 @@ def _apply_game_systems(
     return False
 
 
+def _apply_settings(
+    record: CanonicalProduct, decision, outcome: "Outcome", settings: Settings
+) -> bool:
+    """Place a product in a setting where nothing placed it in a game. Never overwrite.
+
+    THE SAME CONTAINMENT TEST `_apply_game_systems` USES, with one more case in front of it: a
+    product that HAS games derives its settings from them, so a clause proposing settings for it
+    can only agree or disagree with that derivation. Agreement changes nothing; disagreement is
+    reported -- `Kings of War: Uncharted Empires` being filed in the Warhammer 40,000 setting by
+    some rule is exactly the sort of thing a maintainer should see.
+    """
+    if decision is None or not decision.settings:
+        return False
+    proposed = sorted(set(decision.settings))
+    if record.gameSystems:
+        derived = set(settings.for_games(record.gameSystems))
+        if derived and not set(proposed) <= derived:
+            outcome.conflicts.append(
+                Conflict(
+                    record.id,
+                    "setting-disagreement",
+                    f"the games say {'+'.join(sorted(derived))}; "
+                    f"{decision.settings_why} says {'+'.join(proposed)}",
+                )
+            )
+        return False
+    settled = set(record.settings)
+    extends = (
+        (not settled or settled < set(proposed))
+        and record.settingsBasis not in _MAINTAINER_DECIDED
+    )
+    if extends:
+        record.settings = proposed
+        record.settingsBasis = decision.settings_basis
+        outcome.settings_decided += 1
+        outcome.by_settings_basis[decision.settings_basis or "?"] += 1
+        return True
+    if record.settingsBasis in _MAINTAINER_DECIDED:
+        return False
+    if settled and settled != set(proposed):
+        outcome.conflicts.append(
+            Conflict(
+                record.id,
+                "setting-disagreement",
+                f"catalog says {'+'.join(sorted(settled))} ({record.settingsBasis}); "
+                f"{decision.settings_why} says {'+'.join(proposed)}",
+            )
+        )
+    return False
+
+
+def _apply_generic(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:
+    """A clause said this product belongs to no game and no setting. Honour it only where nothing
+    placed the product anywhere.
+
+    AGAINST A STATED MEMBERSHIP IT IS SILENT, NOT A CONFLICT, and that is a judgement about what
+    the two claims mean rather than about which is right. `generic` is the WEAKER statement: a
+    shelf saying "this is terrain" or "this is dice" is a claim about the product's kind, and a
+    source naming the game it is sold for is a claim about the product. When both exist the
+    specific one stands, and a report would say only that a product is on a generic shelf as
+    well -- measured 2026-09-02, 89 such rows on the first run, every one a Mantic product that
+    legacy-catalog names a game for and Mantic also cross-shelves under TerrainCrate or its
+    tournament calendar. Not one was a question.
+    """
+    if decision is None or not decision.generic:
+        return False
+    if record.gameSystems or record.settings:
+        return False
+    touched = False
+    for name in ("gameSystemsBasis", "settingsBasis"):
+        if getattr(record, name) in DERIVED_BASES and getattr(record, name) != "not-applicable":
+            setattr(record, name, "not-applicable")
+            touched = True
+    if touched:
+        outcome.settings_decided += 1
+        outcome.by_settings_basis["not-applicable"] += 1
+    return touched
+
+
 def _count_unmapped(outcome: Outcome, members: Sequence[Observation]) -> None:
     """Every raw taxonomy value on a product this stage could not decide, counted per source.
 
@@ -431,6 +521,11 @@ def _write_review(path: Path, outcome: Outcome, rules: Mapping[str, SourceRules]
                 # low `undecided` means the catalog was already categorized, not that anything is
                 # broken.
                 "decidedThisRun": outcome.decided,
+                # THE TWO MEMBERSHIP AXES, in the same shape. `unknown` on the game axis is the size
+                # of the classification problem; on the settings axis it is smaller by exactly the
+                # products a rule placed in a setting without a game.
+                "gameSystemsByBasis": dict(sorted(outcome.game_system_basis.items())),
+                "settingsByBasis": dict(sorted(outcome.settings_basis.items())),
             },
             "conflicts": [
                 {"entity": c.entity, "type": c.kind, "detail": c.detail}

@@ -81,29 +81,33 @@ reason: >-
 # `D6 Dice - white (30)` carries black-powder + black-seas + bolt-action + hail-caesar +
 # pike-shotte; `Grassland Playing Mat 6'x4'` carries four. Each tag is individually true -- the
 # dice ARE for Black Powder -- and their union is false, because a bag of dice is not a Black
-# Powder product. The honest value is an empty list with `gameSystemsBasis: not-applicable`, which
-# is what these shelves get once the game axis is silenced for them.
+# Powder product.
+#
+# THESE USED TO BE VETOES, AND A VETO WAS THE WRONG TOOL: it silenced the game axis, which left
+# the dice `gameSystemsBasis: unknown` -- "not decided yet" about a product that is decided. A
+# `generic` clause is the decision itself: no game and no setting, `not-applicable` on both axes.
+# The rule engine reads a source's generic clause BEFORE its game clauses, which is what keeps the
+# five game tags on the dice from being read at all.
 #
 # Same finding as Mantic's accessories shelves, arrived at the same way: by running the clauses and
 # reading what came out with more than one game.
-noneOf:
-  - hintEquals: {productType: Dice}
-    blocks: [gameSystems]
-  - hintEquals: {productType: Gaming mat}
-    blocks: [gameSystems]
-  - hintEquals: {productType: Basing}
-    blocks: [gameSystems]
-  - hintEquals: {productType: Bases}
-    blocks: [gameSystems]
-  - hintEquals: {productType: Brushes}
-    blocks: [gameSystems]
-  - hintEquals: {productType: Hobby}
-    blocks: [gameSystems]
-  - hintEquals: {productType: Hobby Set}
-    blocks: [gameSystems]
+clauses:
+  - generic: true
+    hintEquals: {productType: Dice}
+  - generic: true
+    hintEquals: {productType: Gaming mat}
+  - generic: true
+    hintEquals: {productType: Basing}
+  - generic: true
+    hintEquals: {productType: Bases}
+  - generic: true
+    hintEquals: {productType: Brushes}
+  - generic: true
+    hintEquals: {productType: Hobby}
+  - generic: true
+    hintEquals: {productType: Hobby Set}
     note: tools, dice and mats -- sold for every game, belonging to none
 
-clauses:
   # --- paint -----------------------------------------------------------------------------------
   - category: paint
     hintEquals: {productType: Paint Pot}

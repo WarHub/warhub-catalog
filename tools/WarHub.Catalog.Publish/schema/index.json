@@ -21,7 +21,23 @@
           "key": { "type": "string" },
           "label": { "type": "string" },
           "records": { "type": "integer", "minimum": 0 },
-          "file": { "type": "string" }
+          "file": { "type": "string" },
+          "setting": {
+            "type": "string",
+            "description": "For a product index: the key of the setting this partition's game system is set in (see `settings` below). Absent on a paint index, and on a game-system bucket that belongs to no one universe."
+          }
+        }
+      }
+    },
+    "settings": {
+      "type": "array",
+      "description": "For a product index: the settings -- universes and historical periods -- the game-system partitions group into. Kill Team, Necromunda, The Horus Heresy and Warhammer 40,000 are four partitions in one setting.",
+      "items": {
+        "type": "object",
+        "required": ["key", "label"],
+        "properties": {
+          "key": { "type": "string" },
+          "label": { "type": "string" }
         }
       }
     }

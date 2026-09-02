@@ -76,6 +76,30 @@ class CanonicalProduct(BaseModel):
     # moving, and churning a consumer contract for a field that is about to grow is the wrong
     # trade. It lives in the archive until it settles.
     gameSystemsBasis: str | None = None
+    # WHICH SETTINGS THIS PRODUCT BELONGS TO -- the universe or the period, one layer above the
+    # game. See taxonomy.py::Settings for what a setting is. Almost always DERIVED: every game in
+    # `gameSystems` names its setting in game-systems.yaml, and this is the union of those. It is a
+    # field of its own, rather than a lookup left to the reader, because of the products for which
+    # it is NOT derived: a novel belongs to a setting and to no game, and so does a building sold
+    # for a whole period. Those are the products the game axis could never place honestly.
+    settings: list[str] = Field(default_factory=list)
+    # WHAT DECIDED `settings`, in the same register as its two siblings:
+    #
+    #   derived         follows from `gameSystems` through game-systems.yaml. The common case.
+    #   stated/mapped/code/lexicon/override
+    #                   decided directly, by the same rungs those words mean elsewhere -- for a
+    #                   product with NO game: a Black Library novel's setting from GW's own code
+    #                   segment, a Sarissa Normandy building from its maker's range.
+    #   not-applicable  belongs to no setting and never will -- a pot of paint, a bag of dice, a
+    #                   generic terrain kit. Shared with `gameSystemsBasis`, which then reads the
+    #                   same, because "nothing" is one fact about both axes.
+    #   unknown         nothing decided.
+    #
+    # And the value it adds to `gameSystemsBasis` is `setting`: this product belongs to a setting
+    # and deliberately to no one game in it. That is the elasticity the two axes buy -- a product
+    # is placed by game (a codex), by setting (a novel, a period building) or by neither (paint),
+    # and each of the three is a positive statement rather than a hole.
+    settingsBasis: str | None = None
     category: str | None = None
     # WHAT DECIDED `category` -- or, where it is null, that nothing did.
     #

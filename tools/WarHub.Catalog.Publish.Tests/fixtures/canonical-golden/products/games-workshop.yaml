@@ -8,6 +8,7 @@ products:
     ean: '5011921194803'
     eanConfidence: confirmed
     gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
     category: hobby-auxiliary
     categoryBasis: stated
     status: current
@@ -27,6 +28,9 @@ products:
       - warhammer-40k
     faction: necrons
     gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
     categoryBasis: unknown
     quantity: 3
     status: current
@@ -46,6 +50,9 @@ products:
     gameSystems:
       - warhammer-40k
     gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
     categoryBasis: unknown
     status: current
     availability: in_stock
