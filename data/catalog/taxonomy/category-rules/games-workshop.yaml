@@ -74,6 +74,130 @@ noneOf:
     note: Age of Sigmar plastic kits also sold into Warcry / Old World
 
 clauses:
+  # =============================================================================================
+  # WHAT THE THING IS. d34 -- digits 3-4 -- is GW's PRODUCT TYPE, and it answers the category
+  # question as cleanly as d56 answers the game one. Measured 2026-09-01 against a control built
+  # from two sources that never see this code: `ret-goblingaming`'s productType shelf through its
+  # own committed table (the repo's only pure format taxonomy) and `mfr-gw-algolia`'s facet tree
+  # (`> Unit Type` / `> Force Organisation` -> miniatures, `> Game Rules` -> book, and so on).
+  # The two controls were checked against EACH OTHER first: 1,647 of 1,668 agree, 98.7%.
+  #
+  # `ret-gamenerdz` IS EXCLUDED FROM THE CONTROL, and the exclusion is load-bearing. Its one
+  # surviving clause maps a department called `Paint and Crafting`, which holds brushes, tools,
+  # bases and painting handles alongside paint. Including it drops `d34=19 -> hobby-auxiliary`
+  # from 100% to 54% purely because that store calls a drybrush a paint.
+  #
+  # EVERY CLAUSE HERE IS ANCHORED TO ELEVEN DIGITS. `codeMatches` is an unanchored `re.search`,
+  # and 569 of the 9,262 GW codes are not GW codes at all -- 374 six-digit house numbers from a
+  # German retailer import, 54 thirteen-digit barcodes, and a tail. Without `\d{7}$` a clause on
+  # `^\d{2}05` would stamp `game-accessory` on `122353 Dark Angels: Datacards 9. Edition`.
+  #
+  # WHY THE CODE BEATS THE NAME LEXICON HERE, and it is not a preference. The 2,667 products
+  # mfr-gw-trade is the sole source for are overwhelmingly not in English:
+  # `CARTES TECHNIQUES:`, `DATENBLATTKARTEN:`, `TOME DE BATAILLE:`, `SCHRIFTROLLENKARTEN:`,
+  # `TARJETAS DATOS:`. The lexicon's patterns are English by construction; a digit pair is not.
+
+  # NARROWEST FIRST. Bare bases sit inside the character and plastic-kit segments, and
+  # categories.yaml is explicit that a base sold on its own is a component, not a model.
+  - nameMatches: '\b(BASES?|STEMS?)\b.*\b(SET|PACK|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b'
+    category: hobby-auxiliary
+    note: 13 products; control 46, 97.8%
+
+  # THINGS PLAYED WITH. d34 05 is the card product type -- `DATACARDS:`, `INDEX CARDS:`,
+  # `WARSCROLL CARDS:`, `PACK DE FACTION:`. 99.0% over a control of 102; both disagreements are
+  # the control's, a datacard deck one store shelved `board-game` and a warscroll deck another
+  # shelved `miniatures`.
+  - codeMatches: '^\d{2}05\d{7}$'
+    category: game-accessory
+    note: 560 products; control 102, 99.0%
+
+  # d34 22 is dice, tokens, movement trays and objective markers -- EXCEPT where d56 says
+  # otherwise, and the exceptions are exactly where it breaks: 99 is bases and water pots (already
+  # `hobby-auxiliary` by the clause below), 03 Titan weapon sets, 09 Blood Bowl pitches, 18 and 26
+  # base packs. Raw purity is 50%; with those five excluded it is 24 of 24.
+  - codeMatches: '^\d{2}22(?!99|03|09|18|26)\d{7}$'
+    category: game-accessory
+    note: 66 products; control 24, 100%
+
+  # THINGS READ. Three separate book types, measured separately because they are separate ranges:
+  # 04 hardbacks and campaign supplements, 10 Black Library paperbacks, 03 codexes and battletomes.
+  - codeMatches: '^\d{2}04\d{7}$'
+    category: book
+    note: 543 products; control 109, 98.2% -- both misses are Adeptus Titanicus supplements
+  - codeMatches: '^\d{2}10\d{7}$'
+    category: book
+    note: 337 products; control 100, 99.0%
+  - codeMatches: '^\d{2}03\d{7}$'
+    category: book
+    note: 193 products; control 54, 100%
+
+  # THINGS USED TO BUILD AND FINISH. 51 is the transfer-sheet type (its Legion subset also decides
+  # a game system, further down); 19/21/23 are brushes, glue and tools. The existing paint clauses
+  # below reach these same types where d56 is 99; these two reach the rest.
+  - codeMatches: '^\d{2}51\d{7}$'
+    category: hobby-auxiliary
+    note: 8 products; control 29, 100%
+  - codeMatches: '^\d{2}(19|21|23)\d{7}$'
+    category: hobby-auxiliary
+    note: 4 products; control 25, 100%
+
+  # MODELS. 85/86 is Forge World -- vetoed above for the GAME, because the line supplies six of
+  # them, and 99.8% `miniatures` on a control of 410 regardless. That veto used to suppress this
+  # answer too; `blocks: [gameSystems]` is what lets both be true.
+  - codeMatches: '^\d{2}8[56]\d{7}$'
+    category: miniatures
+    note: 674 products; control 410, 99.8% -- the single miss is one terrain piece
+  - codeMatches: '^\d{2}01\d{7}$'
+    category: miniatures
+    note: 323 army and starter boxes; control 21, 100%
+  - codeMatches: '^\d{2}07\d{7}$'
+    category: miniatures
+    note: 118 character and upgrade kits; control 282, 100% once the BASES clause has run
+  - codeMatches: '^\d{2}(06|11|80|81)\d{7}$'
+    category: miniatures
+    note: 167 single-model kits; control 457, 99.8%
+
+  # NOT HERE, AND THIS IS THE ONE JUDGEMENT WORTH ARGUING WITH: d34 12, the plastic-kit type.
+  # 1,165 undecided products, and the largest single block left in the catalog -- but it is 95.5%
+  # `miniatures` against a control of 3,028, and BOTH independent controls agree on the residue
+  # (goblingaming 4.3%, algolia 5.0%). The 122 misses are TERRAIN -- `Skull Altar`,
+  # `Awakened Wyldwood`, `Skaven Gnawholes`, `Battlezone: Manufactorum` -- and they are not
+  # code-separable: they spread across d56 01 and 02 and every d78. Terrain does not appear
+  # anywhere in GW's product code.
+  #
+  # A 4.5% error rate would be the loosest claim in this repo, so the products stay undecided and
+  # the handle is recorded instead: `sscCode` section 64 is GW's terrain section, 83% pure on a
+  # control of 24, and would recover 39 of the 122. It cannot be written today because no clause
+  # form matches a PREFIX of a hint -- `hintEquals` is exact and `hintContainsAny` is exact
+  # membership. That is one clause form away, and it is the right next move on this table.
+
+  # ---------------------------------------------------------------------------------------------
+  # HOW MANY, AND ARE THEY THE SAME THING. `packaging` is additive-only, so these fill a form the
+  # record does not have and never contradict a source.
+  #
+  # GW's trade sheets are the dense population the vocabulary predicted: 912 products name a
+  # multiple in their own title, 887 of them paint. The `X1` guard is not decorative --
+  # `SPACE MARINE HEROES BLISTER PACK (X1)` is a single.
+  - nameMatches: '\((?!1[- ])\d{1,3}[- ]PACK\)|\bX\s?([2-9]|\d{2,3})\b'
+    packaging: multipack
+    note: 912 products, 875 of them a case of six identical pots
+
+  # d34 02 is GW's WEB BUNDLE section, and it is the cleanest packaging signal in the whole code:
+  # `Angel's Wrath Intervention Force Web Bundle`, `Adeptus Mechanicus Codex Collection`,
+  # `2 x Imperial Knights: Renegade`. categories.yaml's test for `bundle` -- the components are
+  # themselves products a shop sells alone -- holds for every name in it. The CATEGORY is
+  # deliberately absent: a bundle of codexes and a bundle of kits are not the same thing, and the
+  # 51 products divide between them with no signal to say which.
+  - codeMatches: '^\d{2}02\d{7}$'
+    packaging: bundle
+    note: 51 web bundles; the only population `bundle` has beyond legacy's 19
+
+  - nameMatches: '\b(EBOOK|EPUB|iBOOK|INTERACTIVE .{0,20}EDITION)\b|\(PDF\)'
+    packaging: digital
+    note: 8 products
+
+  # =============================================================================================
+  # WHICH GAME.
   # KILL TEAM has no segment of its own -- it lives inside 01 and 02 -- so it is claimed by name,
   # BEFORE the segment clauses. Until `kill-team` existed this had to be a veto, because the only
   # honest options were "call it 40k" (wrong for the ones GW files under other-games) or "skip it".

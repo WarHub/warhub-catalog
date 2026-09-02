@@ -31,7 +31,7 @@ from warhub_acquisition.taxonomy import Taxonomy, load_labels
 from warhub_acquisition.vocabulary import load_vocabulary
 from warhub_acquisition.yamlio import read_yaml, write_yaml
 
-from .decide import Conflict, Decision, _clause_hit, _product_hit, _signal, decide, flatten_hints
+from .decide import Conflict, _clause_hit, _product_hit, _signal, decide, flatten_hints
 from .lexicon import load_lexicon
 from .paints import load_paint_barcodes
 from .rules import SourceRules, load_category_rules
@@ -222,38 +222,42 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
         records = [CanonicalProduct.model_validate(row) for row in document.get("products") or []]
         touched = False
         for record in records:
-            game_system_decision = None
-            if record.categoryBasis not in REPLACEABLE:
-                # The category is settled, but the game system may not be. Ask anyway -- the two
-                # are different questions and a product decided on one can be open on the other.
-                game_system_decision, extra = decide(
-                    record.id, joined.entities.get(record.id) or [], joined.kinds, rules,
-                    _barcodes(record), paint_barcodes, record.name, lexicon,
-                    manufacturer=record.manufacturer, code=record.productCode or record.sku,
-                )
-                outcome.conflicts.extend(extra)
+            # ASKED ONCE, PER RECORD, WHATEVER IS ALREADY SETTLED. The axes are independent
+            # questions and a product decided on one can be open on the others -- a GW paint pot
+            # has a category from the paint catalog and no `packaging` at all, and its own name
+            # says `X6`. Asking only for records whose CATEGORY was replaceable is the last place
+            # the stage was still gating one axis on another; it left the 912 GW trade multipacks
+            # with no packaging while a committed clause matched every one of them.
+            members = joined.entities.get(record.id) or []
+            decision, conflicts = decide(
+                record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes,
+                record.name, lexicon,
+                manufacturer=record.manufacturer, code=record.productCode or record.sku,
+            )
+            outcome.conflicts.extend(conflicts)
+
+            # THE CATEGORY, and only where nothing has decided it. `stated` is a source's claim
+            # about one product and outranks any table; anything an override set is a maintainer's
+            # decision.
             if record.categoryBasis in REPLACEABLE:
                 outcome.considered += 1
-                members = joined.entities.get(record.id) or []
-                decision, conflicts = decide(
-                    record.id, members, joined.kinds, rules, _barcodes(record), paint_barcodes,
-                    record.name, lexicon,
-                    manufacturer=record.manufacturer, code=record.productCode or record.sku,
-                )
-                outcome.conflicts.extend(conflicts)
                 if decision is not None and decision.category is not None:
                     outcome.decided += 1
                     outcome.by_basis[decision.basis] += 1
+                    record.category = decision.category
+                    record.categoryBasis = decision.basis
+                    touched = True
                 else:
                     _count_unmapped(outcome, members)
-                # STAMPED WHATEVER IT DECIDED. The counters above are about the CATEGORY, which is
-                # what `undecided` measures; the write is about every axis, because a table that
-                # settled only `packaging` still settled something. Gating the write on the
-                # category is how five committed clauses came to write nothing at all.
-                if decision is not None and _stamp(record, decision):
-                    touched = True
-                game_system_decision = decision
-            if _apply_game_systems(record, game_system_decision, outcome, catch_alls):
+
+            # PACKAGING is additive-only and independent of all of that: a source that stated it
+            # stated it about this product, and a table that infers `set` from the words "Paint
+            # Sets" is inferring it about a shelf.
+            if decision is not None and decision.packaging and record.packaging is None:
+                record.packaging = decision.packaging
+                touched = True
+
+            if _apply_game_systems(record, decision, outcome, catch_alls):
                 touched = True
             # THE GAME-SYSTEM BASIS IS SETTLED HERE, NOT IN `resolve`, because it is a question
             # about the CATEGORY and `resolve` does not yet know the answer to that one. A paint
@@ -346,23 +350,6 @@ def _apply_game_systems(
             )
         )
     return False
-
-
-def _stamp(record: CanonicalProduct, decision: Decision) -> bool:
-    """Write the axes this decision settled; return whether anything changed.
-
-    Packaging is deliberately additive-only. A source that stated `packaging` stated it about this
-    product; a table that infers `set` from the word "Paint Sets" is inferring it about a shelf.
-    """
-    changed = False
-    if decision.category is not None:
-        record.category = decision.category
-        record.categoryBasis = decision.basis
-        changed = True
-    if decision.packaging and record.packaging is None:
-        record.packaging = decision.packaging
-        changed = True
-    return changed
 
 
 def _count_unmapped(outcome: Outcome, members: Sequence[Observation]) -> None:

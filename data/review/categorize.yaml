@@ -1,13 +1,13 @@
 summary:
   products: 29043
-  undecided: 15215
+  undecided: 12264
   byBasis:
-    code: 178
+    code: 3129
     lexicon: 2284
     mapped: 9359
     paint-barcode: 21
     stated: 1986
-    unknown: 15215
+    unknown: 12264
   decidedThisRun: 0
 conflicts:
   - entity: atomic-mass-games/SWQ131
@@ -52,6 +52,18 @@ conflicts:
   - entity: games-workshop/99123001007
     type: gameSystem-disagreement
     detail: catalog says warhammer-40k (stated); games-workshop code~^\d{4}30 says horus-heresy
+  - entity: games-workshop/99189950229
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b says hobby-auxiliary
+  - entity: games-workshop/99189950242
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b says hobby-auxiliary
+  - entity: games-workshop/99189950251
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b says hobby-auxiliary
+  - entity: games-workshop/99189950258
+    type: paint-barcode-vs-taxonomy
+    detail: the paint catalog publishes this barcode, but games-workshop name~\b(BASES?|STEMS?)\b.*\b(SET|PACK|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b says hobby-auxiliary
   - entity: games-workshop/99199999043
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=paint; ret-goblingaming=hobby-auxiliary'
@@ -269,131 +281,111 @@ unmapped:
     - value: productLine=The Dead Keep
       wouldDecide: 1
   mfr-gw-algolia:
-    - value: hierarchy.lvl0=The Horus Heresy
-      wouldDecide: 339
-    - value: hierarchy.lvl1=The Horus Heresy > Force Organisation
-      wouldDecide: 205
-    - value: hierarchy.lvl1=The Horus Heresy > Unit Type
-      wouldDecide: 195
-    - value: hierarchy.lvl0=Other Games
-      wouldDecide: 169
-    - value: hierarchy.lvl1=The Horus Heresy > Traitor Legiones Astartes
-      wouldDecide: 167
-    - value: hierarchy.lvl1=The Horus Heresy > Loyalist Legiones Astartes
-      wouldDecide: 151
-    - value: hierarchy.lvl2=The Horus Heresy > Unit Type > Infantry
-      wouldDecide: 142
-    - value: hierarchy.lvl2=The Horus Heresy > Unit Type > Characters
-      wouldDecide: 121
-    - value: hierarchy.lvl1=Other Games > Necromunda
-      wouldDecide: 88
+    - value: hierarchy.lvl0=Age of Sigmar
+      wouldDecide: 28
+    - value: hierarchy.lvl1=Age of Sigmar > Unit Type
+      wouldDecide: 28
     - value: hierarchy.lvl0=Warhammer 40,000
-      wouldDecide: 87
-    - value: hierarchy.lvl0=Middle-Earth
-      wouldDecide: 86
+      wouldDecide: 23
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Unit
+      wouldDecide: 22
     - value: hierarchy.lvl1=Warhammer 40,000 > Unit Type
-      wouldDecide: 84
-    - value: hierarchy.lvl1=Middle-Earth > Unit Type
-      wouldDecide: 82
-    - value: hierarchy.lvl1=The Horus Heresy > Vehicles
-      wouldDecide: 73
-    - value: hierarchy.lvl1=The Horus Heresy > Accessories
-      wouldDecide: 72
-    - value: hierarchy.lvl1=Other Games > Blood Bowl
-      wouldDecide: 64
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Sons of Horus
-      wouldDecide: 64
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Blood Angels
-      wouldDecide: 63
-    - value: hierarchy.lvl2=Other Games > Necromunda > Hired Guns
-      wouldDecide: 60
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > White Scars
-      wouldDecide: 59
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Emperor's Children
-      wouldDecide: 59
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Dark Angels
-      wouldDecide: 57
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Alpha Legion
-      wouldDecide: 57
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Word Bearers
-      wouldDecide: 57
-    - value: hierarchy.lvl2=Middle-Earth > Unit Type > Heroes
-      wouldDecide: 56
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Imperial Fists
-      wouldDecide: 56
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Night Lords
-      wouldDecide: 56
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Thousand Sons
-      wouldDecide: 56
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Space Wolves
-      wouldDecide: 55
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Death Guard
-      wouldDecide: 55
-    - value: hierarchy.lvl2=The Horus Heresy > Force Organisation > HQ
-      wouldDecide: 55
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Iron Hands
-      wouldDecide: 54
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Ultramarines
-      wouldDecide: 54
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > World Eaters
-      wouldDecide: 54
-    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Vehicle
-      wouldDecide: 54
-    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Titanic
-      wouldDecide: 53
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Raven Guard
-      wouldDecide: 52
-    - value: hierarchy.lvl2=The Horus Heresy > Traitor Legiones Astartes > Iron Warriors
-      wouldDecide: 52
-    - value: hierarchy.lvl2=The Horus Heresy > Loyalist Legiones Astartes > Salamanders
-      wouldDecide: 51
-    - value: hierarchy.lvl2=Other Games > Blood Bowl > Star Players
-      wouldDecide: 49
+      wouldDecide: 20
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Hero
+      wouldDecide: 15
+    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Infantry
+      wouldDecide: 14
+    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Character
+      wouldDecide: 13
+    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Chaos
+      wouldDecide: 12
+    - value: hierarchy.lvl0=Other Games
+      wouldDecide: 11
+    - value: hierarchy.lvl1=Other Games > Warcry
+      wouldDecide: 11
+    - value: hierarchy.lvl2=Other Games > Warcry > Warbands
+      wouldDecide: 11
+    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Order
+      wouldDecide: 9
+    - value: hierarchy.lvl1=Warhammer 40,000 > Xenos Armies
+      wouldDecide: 8
+    - value: hierarchy.lvl1=Warhammer 40,000 > Space Marines
+      wouldDecide: 5
+    - value: hierarchy.lvl2=Warhammer 40,000 > Space Marines > Unit Type
+      wouldDecide: 5
+    - value: hierarchy.lvl1=Warhammer 40,000 > Armies of the Imperium
+      wouldDecide: 5
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Cavalry
+      wouldDecide: 5
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Fly
+      wouldDecide: 5
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Wizard
+      wouldDecide: 5
+    - value: hierarchy.lvl2=Age of Sigmar > Grand Alliance Chaos > Maggotkin of Nurgle
+      wouldDecide: 5
+    - value: hierarchy.lvl2=Warhammer 40,000 > Armies of the Imperium > Adepta Sororitas
+      wouldDecide: 4
+    - value: hierarchy.lvl3=Age of Sigmar > Grand Alliance Chaos > Maggotkin of Nurgle > Infantry
+      wouldDecide: 4
+    - value: hierarchy.lvl3=Age of Sigmar > Grand Alliance Chaos > Maggotkin of Nurgle > Rotbringers
+      wouldDecide: 4
+    - value: hierarchy.lvl1=Age of Sigmar > Grand Alliance Death
+      wouldDecide: 4
+    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Epic Hero
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Psyker
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Warhammer 40,000 > Unit Type > Upgrades & Transfers
+      wouldDecide: 3
+    - value: hierarchy.lvl3=Warhammer 40,000 > Space Marines > Unit Type > Upgrades & Transfers
+      wouldDecide: 3
+    - value: hierarchy.lvl3=Warhammer 40,000 > Armies of the Imperium > Adepta Sororitas > Character
+      wouldDecide: 3
+    - value: hierarchy.lvl3=Warhammer 40,000 > Armies of the Imperium > Adepta Sororitas > Infantry
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Warhammer 40,000 > Xenos Armies > T'au Empire
+      wouldDecide: 3
+    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > T'au Empire > Character
+      wouldDecide: 3
+    - value: hierarchy.lvl3=Warhammer 40,000 > Xenos Armies > T'au Empire > Infantry
+      wouldDecide: 3
+    - value: hierarchy.lvl1=Warhammer 40,000 > Terrain
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Warhammer 40,000 > Terrain > Terrain Objectives
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Age of Sigmar > Grand Alliance Chaos > Slaves to Darkness
+      wouldDecide: 3
+    - value: hierarchy.lvl3=Age of Sigmar > Grand Alliance Chaos > Maggotkin of Nurgle > Hero
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Unique
+      wouldDecide: 3
+    - value: hierarchy.lvl2=Age of Sigmar > Unit Type > Beast
+      wouldDecide: 3
   mfr-gw-trade:
     - value: tradeCategory=E:B200a
-      wouldDecide: 146
+      wouldDecide: 120
     - value: tradeCategory=E:B200b
-      wouldDecide: 96
+      wouldDecide: 71
     - value: tradeCategory=BS:F
-      wouldDecide: 74
-    - value: tradeCategory=E:BL
-      wouldDecide: 23
-    - value: tradeCategory=40K - Generic
-      wouldDecide: 14
+      wouldDecide: 52
     - value: tradeCategory=40K - Space Marines - Generic
       wouldDecide: 13
-    - value: tradeCategory=AOS - Generic
-      wouldDecide: 11
-    - value: tradeCategory=WH Underworlds - Generic
-      wouldDecide: 8
     - value: tradeCategory=40K - Xenos - Orks
       wouldDecide: 8
-    - value: tradeCategory=Necromunda - Generic
-      wouldDecide: 8
-    - value: tradeCategory=AOS - Destruction - Gloomspite Gitz
-      wouldDecide: 7
-    - value: tradeCategory=Kill Team - Generic
-      wouldDecide: 6
     - value: tradeCategory=AOS - Death - Nighthaunt
       wouldDecide: 6
-    - value: tradeCategory=AOS - Destruction - Ogor Mawtribes
+    - value: tradeCategory=AOS - Destruction - Gloomspite Gitz
+      wouldDecide: 5
+    - value: tradeCategory=AOS - Generic
       wouldDecide: 3
-    - value: tradeCategory=Old World - Generic
-      wouldDecide: 3
-    - value: tradeCategory=AOS - Chaos - Hedonites Of Slaanesh
-      wouldDecide: 3
-    - value: tradeCategory=AOS - Chaos - Maggotkin Of Nurgle
+    - value: tradeCategory=40K - Generic
       wouldDecide: 3
     - value: tradeCategory=AOS - Chaos - Skaven
-      wouldDecide: 3
-    - value: tradeCategory=Chaos Daemons - Khorne
       wouldDecide: 3
     - value: tradeCategory=40K - Imperium - Adepta Sororitas
       wouldDecide: 3
     - value: tradeCategory=AOS - Death - Soulblight Gravelords
       wouldDecide: 3
-    - value: tradeCategory=AOS - Order - Cities Of Sigmar
-      wouldDecide: 2
     - value: tradeCategory=AOS - Order - Stormcast Eternals
       wouldDecide: 2
     - value: tradeCategory=40K - Imperium - Astra Militarum
@@ -402,33 +394,53 @@ unmapped:
       wouldDecide: 2
     - value: tradeCategory=40K - Imperium - Adeptus Custodes
       wouldDecide: 2
-    - value: tradeCategory=WH Quest - AOS
+    - value: tradeCategory=AOS - Chaos - Maggotkin Of Nurgle
+      wouldDecide: 2
+    - value: tradeCategory=Chaos Daemons - Khorne
+      wouldDecide: 2
+    - value: tradeCategory=Blind Box - Warhammer 40K
       wouldDecide: 1
-    - value: tradeCategory=Old World - Grand Cathay
+    - value: tradeCategory=200-49
       wouldDecide: 1
-    - value: tradeCategory=AOS - Chaos - Disciples Of Tzeentch
+    - value: tradeCategory=40K - Space Marines - Iron Hands
       wouldDecide: 1
-    - value: tradeCategory=AOS - Order - Sylvaneth
+    - value: tradeCategory=40K - Space Marines - Salamanders
       wouldDecide: 1
-    - value: tradeCategory=AOS - Order - Fyreslayers
+    - value: tradeCategory=40K - Space Marines - Imperial Fists
       wouldDecide: 1
-    - value: tradeCategory=AOS - Death - Flesh-Eater Courts
+    - value: tradeCategory=40K - Space Marines - Dark Angels
       wouldDecide: 1
-    - value: tradeCategory=AOS - Order - Seraphon
+    - value: tradeCategory=40K - Space Marines - Black Templars
       wouldDecide: 1
-    - value: tradeCategory=AOS - Order - Lumineth Realmlords
+    - value: tradeCategory=43-08
       wouldDecide: 1
-    - value: tradeCategory=AOS - Order - Daughters Of Khaine
+    - value: tradeCategory=43-37
       wouldDecide: 1
-    - value: tradeCategory=AOS - Destruction - Sons Of Behemat
+    - value: tradeCategory=43-70
       wouldDecide: 1
-    - value: tradeCategory=40-56
+    - value: tradeCategory=50-44
       wouldDecide: 1
-    - value: tradeCategory=Necromunda - Goliath
+    - value: tradeCategory=51-09
       wouldDecide: 1
-    - value: tradeCategory=Necromunda - Orlock
+    - value: tradeCategory=40K - Space Marines - Grey Knights
       wouldDecide: 1
-    - value: tradeCategory=Necromunda - Squats
+    - value: tradeCategory=40K - Imperium - Imperial Knights
+      wouldDecide: 1
+    - value: tradeCategory=40K - Xenos - Leagues Of Votann
+      wouldDecide: 1
+    - value: tradeCategory=E:P360
+      wouldDecide: 1
+    - value: tradeCategory=64-01
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Chaos - Blades Of Khorne
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Chaos - Hedonites Of Slaanesh
+      wouldDecide: 1
+    - value: tradeCategory=71-11
+      wouldDecide: 1
+    - value: tradeCategory=E:B200
+      wouldDecide: 1
+    - value: tradeCategory=AOS - Destruction - Ogor Mawtribes
       wouldDecide: 1
   mfr-manticgames:
     - value: categories=kings-of-war
@@ -776,25 +788,25 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 633
+      wouldDecide: 603
     - value: breadcrumbs=Miniatures
-      wouldDecide: 630
+      wouldDecide: 601
     - value: breadcrumbs=Infinity
-      wouldDecide: 150
+      wouldDecide: 149
     - value: breadcrumbs=Kings of War
       wouldDecide: 95
     - value: breadcrumbs=Marvel Crisis Protocol
       wouldDecide: 84
     - value: breadcrumbs=Malifaux
       wouldDecide: 79
-    - value: breadcrumbs=Games Workshop
-      wouldDecide: 69
-    - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 66
     - value: breadcrumbs=More Miniatures
       wouldDecide: 57
     - value: breadcrumbs=Warcrow
       wouldDecide: 55
+    - value: breadcrumbs=Games Workshop
+      wouldDecide: 41
+    - value: breadcrumbs=Warhammer 40K
+      wouldDecide: 38
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 29
     - value: breadcrumbs=Star Wars Legion
@@ -857,27 +869,13 @@ unmapped:
       wouldDecide: 1
   ret-goblingaming:
     - value: tags=Tabletop Games
-      wouldDecide: 7
+      wouldDecide: 5
     - value: vendor=Mantic Games
       wouldDecide: 5
-    - value: tags=Stock Coming
-      wouldDecide: 3
     - value: productType=Advent Calendars
       wouldDecide: 3
     - value: tags=Board Games
       wouldDecide: 3
-    - value: productType=Model Bases
-      wouldDecide: 2
-    - value: tags=Accessories
-      wouldDecide: 2
-    - value: tags=Basing
-      wouldDecide: 2
-    - value: tags=Games Workshop
-      wouldDecide: 2
-    - value: tags=Other
-      wouldDecide: 2
-    - value: vendor=Games Workshop
-      wouldDecide: 2
     - value: productType=Expansions
       wouldDecide: 2
     - value: tags=Sci-fi
@@ -891,6 +889,8 @@ unmapped:
     - value: tags=Aerosols
       wouldDecide: 1
     - value: tags=Paint & Hobby
+      wouldDecide: 1
+    - value: tags=Stock Coming
       wouldDecide: 1
     - value: vendor=The Army Painter
       wouldDecide: 1
@@ -909,14 +909,14 @@ unmapped:
       wouldDecide: 695
     - value: vendor=Vallejo
       wouldDecide: 695
-    - value: tags=Games Workshop
-      wouldDecide: 535
-    - value: vendor=Games Workshop
-      wouldDecide: 535
     - value: tags=The Army Painter
       wouldDecide: 384
     - value: vendor=The Army Painter
       wouldDecide: 384
+    - value: tags=Games Workshop
+      wouldDecide: 350
+    - value: vendor=Games Workshop
+      wouldDecide: 350
     - value: tags=Warlord Games
       wouldDecide: 281
     - value: vendor=Warlord Games
@@ -951,14 +951,12 @@ unmapped:
       wouldDecide: 71
     - value: tags=AK-Zubehör
       wouldDecide: 69
-    - value: tags=Summer Sale
-      wouldDecide: 66
     - value: tags=Neuheiten Farben und Zubehör
       wouldDecide: 61
     - value: tags=Vallejo Xpress Color
       wouldDecide: 60
     - value: tags=Neuheiten Games Workshop
-      wouldDecide: 57
+      wouldDecide: 56
     - value: tags=XPRESS COLOR*
       wouldDecide: 52
     - value: tags=Middle-Earth - Evil
@@ -977,10 +975,12 @@ unmapped:
       wouldDecide: 47
     - value: vendor=CMON
       wouldDecide: 47
-    - value: tags=AoS Zubehör
-      wouldDecide: 46
     - value: tags=MODEL AIR 300-350*
       wouldDecide: 46
+    - value: tags=AK-Kompendien & Bücher
+      wouldDecide: 45
+    - value: tags=AK-REAL COLORS MARKERS*
+      wouldDecide: 44
   ret-tistaminis:
     - value: tags=Bolt Action
       wouldDecide: 198
@@ -1000,16 +1000,12 @@ unmapped:
       wouldDecide: 93
     - value: vendor=Monument Hobbies
       wouldDecide: 79
-    - value: vendor=GW-OOP
-      wouldDecide: 67
     - value: productType=Paints & Supplies
       wouldDecide: 67
-    - value: vendor=GW-LOCAL
-      wouldDecide: 65
     - value: vendor=Green Stuff World
       wouldDecide: 59
-    - value: vendor=GW-Local
-      wouldDecide: 48
+    - value: vendor=GW-OOP
+      wouldDecide: 53
     - value: tags=Dark Ages
       wouldDecide: 48
     - value: tags=Victory at Sea
@@ -1018,6 +1014,8 @@ unmapped:
       wouldDecide: 44
     - value: tags=Kings of War
       wouldDecide: 43
+    - value: vendor=GW-LOCAL
+      wouldDecide: 39
     - value: tags=Enemies of Rome
       wouldDecide: 35
     - value: tags=German
@@ -1030,14 +1028,10 @@ unmapped:
       wouldDecide: 28
     - value: tags=French
       wouldDecide: 25
-    - value: tags=Amazon
-      wouldDecide: 24
-    - value: tags=Black Library
-      wouldDecide: 24
     - value: tags=Victory at Sea British
       wouldDecide: 23
-    - value: tags=Gamesworkshop
-      wouldDecide: 21
+    - value: tags=Amazon
+      wouldDecide: 22
     - value: tags=Romans
       wouldDecide: 21
     - value: tags=Ancients
@@ -1048,25 +1042,31 @@ unmapped:
       wouldDecide: 19
     - value: tags=Soviet
       wouldDecide: 19
-    - value: vendor=GW-WEB
-      wouldDecide: 18
     - value: tags=Green Stuff World Other
       wouldDecide: 18
     - value: tags=Victory at Sea German
       wouldDecide: 18
-    - value: tags=GW Accessories
-      wouldDecide: 17
-    - value: tags=Space Marines
-      wouldDecide: 17
-    - value: productType=Miniatures - Plastic
-      wouldDecide: 14
+    - value: vendor=GW-WEB
+      wouldDecide: 15
     - value: tags=Orks
       wouldDecide: 14
+    - value: tags=warhammer preorder
+      wouldDecide: 14
+    - value: tags=Black Powder
+      wouldDecide: 14
+    - value: productType=Miniatures - Plastic
+      wouldDecide: 13
+    - value: tags=Gamesworkshop
+      wouldDecide: 13
+    - value: tags=Warlord Games Other
+      wouldDecide: 13
+    - value: tags=Space Marines
+      wouldDecide: 12
   seed-curated:
     - value: productType=single_kit
       wouldDecide: 6
     - value: productType=starter_set
-      wouldDecide: 3
+      wouldDecide: 2
     - value: 'contents={''quantity'': 4, ''unitName'': ''Fusiliers''}'
       wouldDecide: 1
     - value: 'contents={''baseSize'': ''60mm'', ''quantity'': 1, ''unitName'': ''Roboute Guilliman''}'
