@@ -499,7 +499,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
         # AFTER overrides, so a hand-written `category:` in overrides.yaml is held to the same
         # vocabulary as a resolved one -- a typo there would otherwise mint an undeclared value
         # straight into the published catalog, which is exactly how the six ad-hoc values got in.
-        vocabulary.check(product.category, product.packaging, product.id)
+        vocabulary.check(product.category, product.packaging, product.id, role=product.role)
         # gameSystems is OPTIONAL: a product genuinely belonging to no game system (a base, a
         # gaming mat, a paint/tool bundle, dice, an advent calendar, ...) publishes with an EMPTY
         # list rather than being parked out of the catalog. Which of those it is -- nothing to

@@ -145,6 +145,21 @@ class CanonicalProduct(BaseModel):
     # vocabulary is about to change would churn the consumer contract repeatedly for one feature.
     # It lives in the archive now, where it is free to evolve, and gets published once stable.
     categoryBasis: str | None = None
+    # WHAT THIS HOBBY SUPPLY IS FOR -- axis 3 of categories.yaml (colour, primer, varnish, medium,
+    # cleaner, texture, pigment, applicator, tool, basing, build). Answerable only for `paint` and
+    # `hobby-auxiliary`, null everywhere else, and null on a set of any kind: the members carry
+    # their roles. Declared 2026-09-02 when `paint` stopped meaning "deposits colour" and started
+    # meaning "what a maker's chart lists" -- the old boundary had made `category` answer this
+    # question by mis-filing every varnish as an auxiliary.
+    #
+    # `roleBasis` reads exactly like `categoryBasis` (unknown / stated / mapped / code / lexicon /
+    # override), plus one rung of its own:
+    #
+    #   paint-archive  categorize -- the paint archive carries this product's barcode, and the
+    #                  archive record's own `role` (decided from the maker's range and name, and
+    #                  held to the colourless invariant there) is taken as this product's.
+    role: str | None = None
+    roleBasis: str | None = None
     packaging: str | None = None
     quantity: int | None = None
     volumeMl: int | None = None

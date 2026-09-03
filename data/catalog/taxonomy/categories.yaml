@@ -1,4 +1,4 @@
-# WHAT A PRODUCT IS, on two independent axes.
+# WHAT A PRODUCT IS, on three independent axes.
 #
 # Until this file existed neither axis was declared anywhere. `models/catalog.py` typed both
 # `category` and `packaging` as bare `str | None`, nothing validated either, and the values in use
@@ -8,12 +8,16 @@
 # publishes `paint` (its source says so), AK's thinner publishes `hobby-auxiliary` (a crossover
 # clause says so), and Vallejo's varnish publishes `miniatures` (nothing said anything).
 #
-# THE TWO AXES ARE INDEPENDENT AND BOTH ARE ALWAYS ANSWERABLE. `category` is WHAT THE THING IS;
-# `packaging` is WHAT FORM IT COMES IN. A boxed set of miniatures is (miniatures, set); a 6-pot
-# case of one paint is (paint, multipack); a PDF rulebook is (book, digital). Collapsing them --
-# which is what a single `category` carrying `paint-set` does -- forces a choice between saying
-# what a thing is and saying how many of it you get, and `paint-set` is the scar from having made
-# that choice once already. It stays published (see `paint-set` below); it is not repeated.
+# THE AXES ARE INDEPENDENT AND THE FIRST TWO ARE ALWAYS ANSWERABLE. `category` is WHAT THE THING
+# IS; `packaging` is WHAT FORM IT COMES IN; `role` (axis 3, below) is WHAT A HOBBY SUPPLY IS FOR,
+# and is answerable only for the two categories that are hobby supplies. A boxed set of miniatures
+# is (miniatures, set); a 6-pot case of one paint is (paint, multipack, colour); a pot of varnish
+# is (paint, single, varnish); a PDF rulebook is (book, digital). Collapsing axes -- which is what
+# a single `category` carrying `paint-set` does -- forces a choice between saying what a thing is
+# and saying how many of it you get, and `paint-set` is the scar from having made that choice once
+# already. It stays published (see `paint-set` below); it is not repeated. `role` exists because
+# the same collapse had happened a second time, quietly: until 2026-09-02 `paint` meant "deposits
+# colour", so a varnish had to be `hobby-auxiliary` for no better reason than not being a colour.
 #
 # NOTHING IN THIS FILE RE-VALUES ANY RECORD ON ITS OWN. It declares the vocabulary and gives every
 # value a boundary a human can apply. `status: current` values may be written by anything;
@@ -58,17 +62,28 @@ categories:
     label: Paint
     status: current
     definition: >-
-      A pot, bottle, dropper or spray whose purpose is to deposit colour. One colour per record.
+      Anything a maker's paint chart lists: a pot, bottle, dropper, jar, can or aerosol sold inside
+      a painting range, whether or not it deposits colour. One product per record; `role` (axis 3)
+      says what each is FOR -- colour, primer, varnish, medium, cleaner, texture or pigment.
     boundary: >-
-      COLOUR IS THE TEST. A medium, varnish, thinner, retarder, flow improver or masking fluid is
-      `hobby-auxiliary` even when its manufacturer sells it inside a paint range and even when the
-      paint catalog carries it -- `data/paints/brands/*.yaml` marks exactly these with
-      `colourless: true` (146 records, 102 of them barcoded). Today the catalog disagrees with
-      itself here: GW's Lahmian Medium publishes `paint` because mfr-gw-trade's Range column says
-      so, while AK's identical thinners publish `hobby-auxiliary` because a crossover clause says
-      so. This boundary is what the disagreement gets adjudicated against; it does not resolve it
-      by itself, and a source's own claim still wins until a human moves it (OBJECTIVES 5).
-    measured: 1,178 published; 1,594 rest on a source claim.
+      THE RANGE IS THE TEST, NOT THE COLOUR. Until 2026-09-02 this entry read "colour is the test"
+      and filed every colourless medium, varnish, thinner and cleaner under `hobby-auxiliary`, and
+      the catalog never agreed with itself about it: GW's Lahmian Medium published `paint` on its
+      maker's word while AK's identical thinners published `hobby-auxiliary` on a crossover stamp,
+      and 81 rows of data/review/categorize.yaml were the paint archive arguing with that
+      boundary. The maintainer redrew it: a painting recipe lists its mediums and varnishes beside
+      its colours, and the makers' own charts list them together. So a varnish, medium, thinner,
+      retarder, flow improver, masking fluid, cleaner, texture paste or pigment sold within a paint
+      range is `paint`, and the archive's `colourless` flag is a fact about the paint rather than a
+      reason to file it elsewhere. Brushes, glue, putty and bases from the same maker are
+      `hobby-auxiliary`: no chart lists them. Several different pots in one box are `paint-set`
+      (below) and carry `packaging: set`; several of the same pot are (paint, multipack).
+    measured: >-
+      5,517 published on 2026-09-02, 1,354 of them sharing a barcode with the paint archive. The
+      archive marks 146 of its 8,521 records `colourless` (102 barcoded) and 56 products sit on
+      those barcodes: 29 were `hobby-auxiliary` (27 by a store's shelf, 2 by override) and 27
+      `paint` (13 by a maker's word, 12 by a shelf, 2 by the barcode) -- the split this redrawing
+      ends.
 
   - slug: paint-set
     label: Paint set
@@ -115,14 +130,22 @@ categories:
     label: Hobby auxiliary
     status: current
     definition: >-
-      Things used to BUILD and FINISH models without being models or colour: brushes, clippers,
-      files, glue, greenstuff, basing materials, flock, tufts, decals and transfers, airbrush
-      hardware, and every colourless medium/varnish/thinner (see `paint`).
+      Things that BUILD, HOLD, APPLY and BASE without being models, colour, or anything a paint
+      chart lists: brushes, sponges, palettes, clippers, files, drills, knives, glue, greenstuff and
+      putty, plasticard, magnets, basing materials (flock, tufts, gravel, sand, blank bases),
+      decals and transfers, airbrush hardware, hobby lamps and mats. `role` (axis 3) says which:
+      applicator, tool, basing or build.
     boundary: >-
-      Primer and spray undercoat sit here rather than in `paint` when they are colourless or
-      purpose-built as undercoat; a coloured spray sold as a paint colour is `paint`. This is the
-      thinnest boundary in the file and the one most likely to need revisiting from real data.
-    measured: 13 published; 1,284 lexicon hits -- the largest gap of any value here.
+      A liquid, paste, powder or aerosol sold inside a paint range is `paint` whatever its colour
+      -- the primer, the varnish and the thinner all moved there on 2026-09-02 (see `paint`), which
+      is where this entry's old "thinnest boundary in the file" went. Basing PASTES in a pot
+      (texture paints) are `paint` with role `texture`; loose basing MATERIALS in a bag are
+      `hobby-auxiliary` with role `basing`. A wet palette is a tool, and so is the paper for it.
+    measured: >-
+      1,390 published on 2026-09-02. A name lexicon over them reads 274 as tools or brushes, 257
+      as basing materials, 92 as the thinners, mediums and varnishes this redrawing returns to
+      `paint`, 164 as sets, and places 557 nowhere -- mostly a store's whole hobby department
+      filed under one word, which the boundary flip that follows this vocabulary re-measures.
 
   - slug: game-accessory
     label: Game accessory
@@ -263,3 +286,158 @@ packaging:
     mapsTo: set
     definition: legacy-catalog's word for an entry-point box.
     measured: 88 published.
+
+# ---------------------------------------------------------------------------------------------
+# AXIS 3 -- `role`: what a hobby supply is FOR.
+#
+# `category` says a thing is `paint` or `hobby-auxiliary`; it cannot say whether the pot is a
+# colour or the varnish that goes over it, or whether the auxiliary is a brush or a bag of tufts.
+# Before this axis existed the vocabulary answered that question by MIS-FILING: a varnish was
+# `hobby-auxiliary` because it was not a colour, which made `category` carry two facts at once
+# (what a chart lists, and what deposits colour) and disagree with every maker's own chart. The
+# facts are separated the way `packaging` was separated from `category`: `category` says which
+# shelf the thing belongs to, `role` says what it does there.
+#
+# ONE VALUE PER PRODUCT, closed vocabulary, answerable ONLY for `paint` and `hobby-auxiliary`. A
+# miniature, a book and a set carry none: a set (`paint-set`, or anything with `packaging: set`)
+# is a container whose members carry their own roles, reachable through the set-contents relation,
+# and a role on the box would be a tie rule nobody asked for (maintainer decision, 2026-09-02).
+#
+# THE PAINT ARCHIVE CARRIES THE SAME FIELD with the same slugs, decided by the range and name of
+# each record, and there it is held to an invariant the tool enforces by failing its run: a
+# `varnish`, `medium` or `cleaner` must be `colourless: true`, and a `colourless` record must not
+# be a `colour`. Through the barcode join that gives the product side a role for every joined pot;
+# the rest are decided by a source's shelf, a maker's range or the product's name, and `roleBasis`
+# says which -- the same words `categoryBasis` uses, plus `paint-archive` for the join.
+#
+# THE FINER GRAIN OF A COLOUR -- wash, contrast, metallic, air -- IS NOT A ROLE. The paint archive
+# publishes it as `type` and `finish`, and stating it here too would give one fact two homes that
+# can disagree. If the product catalog ever carries it, it is a separate property derived from the
+# archive through the join (maintainer's direction, 2026-09-02), never more values on this axis.
+#
+# Populations are from the design measurement of 2026-09-02 (a crude name lexicon over the 5,517
+# `paint` and 1,390 `hobby-auxiliary` products, and over the 8,521 archive records), and are
+# orders of magnitude for the same reason the category figures are.
+roles:
+  - slug: colour
+    label: Colour
+    status: current
+    definition: >-
+      Deposits colour: base, layer, wash, shade, ink, glaze, contrast, dry, metallic and effect
+      paints, and coloured sprays. The archive's `type` and `finish` carry the finer grain.
+    boundary: >-
+      A coloured primer is `primer` -- its purpose decides, not its pigment. A tinted varnish is
+      still `varnish`; a coloured basing paste is `texture`. Sold in a box of several: no role.
+    measured: >-
+      About 4,000 of the `paint` products and 7,900 of the archive's records by name; the bulk of
+      both.
+
+  - slug: primer
+    label: Primer
+    status: current
+    definition: >-
+      Undercoat, coloured or clear: primer sprays, brush-on and airbrush primers, gesso,
+      microfiller, surface primers.
+    boundary: >-
+      A primer is `paint` however it is packaged -- an aerosol undercoat is (paint, single,
+      primer). The old vocabulary put a colourless undercoat in `hobby-auxiliary`; it does not.
+    measured: About 190 `paint` products and 74 archive records by name.
+
+  - slug: varnish
+    label: Varnish
+    status: current
+    definition: >-
+      A clear protective or finishing coat of any sheen: varnish, sealer, clear coat, clear lacquer,
+      'Ardcoat, Stormshield, Munitorum Varnish, Mr Hobby's Clear and Super Clear, Tamiya's Clear.
+    boundary: >-
+      Colourless by definition, and the archive's invariant says so. A tinted "smoke" clear is a
+      `colour`; a matting AGENT mixed into paint (Flat Base) is a `medium`.
+    measured: About 30 `paint` products, 26 more filed `hobby-auxiliary`, and 65 archive records.
+
+  - slug: medium
+    label: Medium
+    status: current
+    definition: >-
+      Goes into or under the paint to change how it behaves: mixing, glaze, contrast and wash
+      mediums, retarder, flow improver, stabilizer, thinner, reducer, flat and clear bases, pigment
+      binder, crackle, chipping, gel, textile, pearl and metal mediums, liquid mask and masking
+      fluid, decal fix and softener, terrain fixer.
+    boundary: >-
+      Colourless by definition. A thinner is a medium (it enters the paint); a cleaner is not (it
+      never does). The word MEDIUM in a colour name (Medium Sea Grey) is a colour.
+    measured: About 45 `paint` products, 66 more filed `hobby-auxiliary`, and 74 archive records.
+
+  - slug: cleaner
+    label: Cleaner
+    status: current
+    definition: >-
+      Never enters the paint: airbrush cleaner, brush cleaner and restorer, paint stripper.
+    boundary: >-
+      Colourless by definition. Sold inside a paint range (Vallejo Auxiliaries, Warpaints) it is
+      `paint`; a rag or a cleaning pot is `hobby-auxiliary` with role `tool`.
+    measured: A handful; the design lexicon folded them into its 45 thinner names.
+
+  - slug: texture
+    label: Texture
+    status: current
+    definition: >-
+      Pastes, gels and grounds sold in a pot for surfaces: texture paints, basing pastes
+      (Astrogranite, Stirland Mud), snow, mud and earth effects, water effects and still water,
+      crackle paste, pumice.
+    boundary: >-
+      In a pot, from a paint range: `paint`. Loose material in a bag -- sand, gravel, flock,
+      tufts -- is `hobby-auxiliary` with role `basing`.
+    measured: About 200 `paint` products and 320 archive records by name.
+
+  - slug: pigment
+    label: Pigment
+    status: current
+    definition: Dry pigments and weathering powders.
+    boundary: >-
+      A liquid "pigment toner" or a metallic "fairy dust" paint is a `colour`; a jar of powder is
+      a pigment.
+    measured: About 50 `paint` products and 35 archive records by name.
+
+  - slug: applicator
+    label: Applicator
+    status: current
+    definition: >-
+      Puts paint on: brushes, sponges, foam applicators, dotting tools, airbrushes.
+    boundary: >-
+      An airbrush COMPRESSOR, hose or needle is a `tool`; the airbrush itself applies paint. A
+      brush SET is (hobby-auxiliary, set) with no role.
+    measured: Most of the 274 tool-like names among `hobby-auxiliary` products.
+
+  - slug: tool
+    label: Tool
+    status: current
+    definition: >-
+      Cuts, holds, shapes and lights: clippers, knives, files, drills, tweezers, sculpting tools,
+      palettes and wet palettes, cutting mats, paint handles and holders, racks, lamps, magnifiers,
+      airbrush hardware, empty dropper bottles, mixing balls.
+    boundary: >-
+      A palette holds paint, it does not apply it; an empty bottle is a tool even when the paint
+      archive lists it beside the paints.
+    measured: The rest of the 274.
+
+  - slug: basing
+    label: Basing
+    status: current
+    definition: >-
+      Loose materials for a base or a diorama: flock, static grass, tufts, leaves, gravel, sand,
+      slate, snow flakes, cork, and blank bases of every size.
+    boundary: >-
+      A basing paste in a pot is `paint` with role `texture`; a bag of the dry stuff is here.
+      Bases included IN a kit are part of the kit (see `miniatures`).
+    measured: Most of the 257 texture-like names among `hobby-auxiliary` products.
+
+  - slug: build
+    label: Build
+    status: current
+    definition: >-
+      Joins and fills: plastic and super glue, PVA, putty and greenstuff, milliput, plasticard,
+      brass rod, magnets, pins, sprue goo, gap filler.
+    boundary: >-
+      Exists so that every `hobby-auxiliary` record answers "what is it for" (maintainer decision,
+      2026-09-02): a supply that neither applies, cuts, nor bases, builds. A sprue CUTTER is a tool.
+    measured: Not separated by the design lexicon; a population to measure when the rules land.

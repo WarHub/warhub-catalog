@@ -1,4 +1,5 @@
-"""data/catalog/taxonomy/categories.yaml: the declared vocabularies for `category` and `packaging`.
+"""data/catalog/taxonomy/categories.yaml: the declared vocabularies for `category`, `packaging`
+and `role`.
 
 The point of the file is that a value reaching the published catalog has been declared by a human
 somewhere. These tests hold the loader to that: it must reject what is not declared, accept what
@@ -27,12 +28,16 @@ def _vocab() -> Vocabulary:
                 {"slug": "single", "label": "Single"},
                 {"slug": "box", "label": "Box (legacy)", "status": "legacy", "mapsTo": "set"},
             ],
+            "roles": [
+                {"slug": "colour", "label": "Colour"},
+                {"slug": "varnish", "label": "Varnish"},
+            ],
         }
     )
 
 
-def test_a_declared_value_passes_on_both_axes() -> None:
-    _vocab().check("paint", "single", "vallejo/x")
+def test_a_declared_value_passes_on_every_axis() -> None:
+    _vocab().check("paint", "single", "vallejo/x", role="varnish")
 
 
 def test_an_undeclared_category_is_a_hard_error_naming_the_product_and_the_options() -> None:
@@ -48,6 +53,14 @@ def test_an_undeclared_category_is_a_hard_error_naming_the_product_and_the_optio
 def test_an_undeclared_packaging_is_a_hard_error_too() -> None:
     with pytest.raises(ValueError, match=r"packaging 'crate' is not declared"):
         _vocab().check("paint", "crate", "vallejo/x")
+
+
+def test_an_undeclared_role_is_a_hard_error_too() -> None:
+    """The third axis is held to the same bar as the first two: `role` is a closed vocabulary
+    and a value nobody declared would otherwise reach the published catalog from a rule table
+    typo or a hand-edited override."""
+    with pytest.raises(ValueError, match=r"vallejo/x: role 'thinner' is not declared"):
+        _vocab().check("paint", None, "vallejo/x", role="thinner")
 
 
 def test_absent_is_never_a_violation() -> None:
@@ -89,7 +102,10 @@ def test_the_committed_vocabulary_declares_every_value_the_catalog_actually_uses
     for path in sorted(products_dir.glob("*.yaml")):
         doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
         for product in doc.get("products") or []:
-            vocabulary.check(product.get("category"), product.get("packaging"), product["id"])
+            vocabulary.check(
+                product.get("category"), product.get("packaging"), product["id"],
+                role=product.get("role"),
+            )
 
 
 def test_every_legacy_value_names_a_current_target_and_every_entry_is_unique() -> None:
@@ -98,7 +114,11 @@ def test_every_legacy_value_names_a_current_target_and_every_entry_is_unique() -
     if not COMMITTED.exists():
         pytest.skip("data/catalog/taxonomy/categories.yaml not present")
     vocabulary = load_vocabulary(COMMITTED.parent)
-    for axis, entries in (("categories", vocabulary.categories), ("packaging", vocabulary.packaging)):
+    for axis, entries in (
+        ("categories", vocabulary.categories),
+        ("packaging", vocabulary.packaging),
+        ("roles", vocabulary.roles),
+    ):
         slugs = [entry.slug for entry in entries]
         assert len(slugs) == len(set(slugs)), f"{axis}: duplicate slug in {slugs}"
         current = {e.slug for e in entries if e.status != "legacy"}

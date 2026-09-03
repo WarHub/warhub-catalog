@@ -40,6 +40,19 @@ VOCABULARY = {
         {"slug": "set", "label": "Set"},
         {"slug": "digital", "label": "Digital"},
     ],
+    "roles": [
+        {"slug": "colour", "label": "Colour"},
+        {"slug": "primer", "label": "Primer"},
+        {"slug": "varnish", "label": "Varnish"},
+        {"slug": "medium", "label": "Medium"},
+        {"slug": "cleaner", "label": "Cleaner"},
+        {"slug": "texture", "label": "Texture"},
+        {"slug": "pigment", "label": "Pigment"},
+        {"slug": "applicator", "label": "Applicator"},
+        {"slug": "tool", "label": "Tool"},
+        {"slug": "basing", "label": "Basing"},
+        {"slug": "build", "label": "Build"},
+    ],
 }
 
 
