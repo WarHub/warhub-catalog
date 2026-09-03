@@ -370,6 +370,103 @@ public class CliEndToEndTests
         }
     }
 
+    /// <summary>
+    /// The invariant's advice -- declare the flag in overrides.yaml -- has to work for the
+    /// records it is most likely to name: those no source asserts. An archive-only brand's
+    /// `colourless:` and `role:` overrides land, the flag clears the stand-in hex in place, and
+    /// the archived history (firstSeen, code) survives the round trip.
+    /// </summary>
+    [Fact]
+    public async Task RunAsync_ArchiveOnlyBrands_TakeTheirOverrides()
+    {
+        string root = Path.Combine(Path.GetTempPath(), $"paint-cli-role-archive-ovr-{Guid.NewGuid():N}");
+        string srcDir = Path.Combine(root, "src");
+        string outDir = Path.Combine(root, "out");
+        string tamiyaFile = Path.Combine(outDir, "brands", "tamiya.yaml");
+        Directory.CreateDirectory(srcDir);
+        Directory.CreateDirectory(Path.Combine(outDir, "brands"));
+
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(srcDir, "Vallejo.md"), VallejoSample);
+            await File.WriteAllTextAsync(tamiyaFile, TamiyaArchive(clearIsFlagged: false));
+            string overridesPath = Path.Combine(root, "overrides.yaml");
+            await File.WriteAllTextAsync(overridesPath, """
+                tamiya:
+                  "Clear|Acrylics Mini Gloss":
+                    colourless: true
+                  "Flat red|Acrylics Mini Flat":
+                    role: primer
+                """);
+
+            int exit = await PaintCatalogApp.RunAsync(["--source", srcDir, "--output", outDir, "--overrides", overridesPath]);
+
+            Assert.Equal(0, exit);
+            string tamiyaYaml = await File.ReadAllTextAsync(tamiyaFile);
+            Assert.Equal("true", FieldOf(tamiyaYaml, "Clear", "colourless"));
+            Assert.Equal("varnish", FieldOf(tamiyaYaml, "Clear", "role"));
+            Assert.Equal("", FieldOf(tamiyaYaml, "Clear", "hex"));            // the stand-in cleared in place
+            Assert.Equal("2026-07-10", FieldOf(tamiyaYaml, "Clear", "firstSeen"));
+            Assert.Equal("X-22", FieldOf(tamiyaYaml, "Clear", "productCode"));
+            Assert.Equal("primer", FieldOf(tamiyaYaml, "Flat red", "role"));  // the override outranks the classifier
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+                Directory.Delete(root, recursive: true);
+        }
+    }
+
+    /// <summary>
+    /// The same reach inside a PRODUCED brand: a pot the source stopped listing is carried forward
+    /// by the reconciler without ever meeting the fresh-path override pass, so its overrides must
+    /// land on the archived side. Run 1 archives the varnish; run 2's source no longer lists it,
+    /// and the override written between the runs still reaches it, history intact.
+    /// </summary>
+    [Fact]
+    public async Task RunAsync_ARecordTheSourceStoppedListing_StillTakesItsOverrides()
+    {
+        string root = Path.Combine(Path.GetTempPath(), $"paint-cli-role-unseen-{Guid.NewGuid():N}");
+        string srcDir = Path.Combine(root, "src");
+        string outDir = Path.Combine(root, "out");
+        string overridesPath = Path.Combine(root, "overrides.yaml");
+        Directory.CreateDirectory(srcDir);
+
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(srcDir, "Vallejo.md"), VallejoWithVarnish);
+            await File.WriteAllTextAsync(overridesPath, """
+                vallejo:
+                  "Gloss Varnish|Auxiliaries":
+                    colourless: true
+                """);
+            Assert.Equal(0, await PaintCatalogApp.RunAsync(["--source", srcDir, "--output", outDir, "--overrides", overridesPath]));
+            string brandFile = Path.Combine(outDir, "brands", "vallejo.yaml");
+            string firstSeen = FieldOf(await File.ReadAllTextAsync(brandFile), "Gloss Varnish", "firstSeen")!;
+
+            // The source drops the varnish; the maintainer reclassifies it meanwhile.
+            await File.WriteAllTextAsync(Path.Combine(srcDir, "Vallejo.md"), VallejoSample);
+            await File.WriteAllTextAsync(overridesPath, """
+                vallejo:
+                  "Gloss Varnish|Auxiliaries":
+                    colourless: true
+                    role: cleaner
+                """);
+            Assert.Equal(0, await PaintCatalogApp.RunAsync(["--source", srcDir, "--output", outDir, "--overrides", overridesPath]));
+
+            string brandYaml = await File.ReadAllTextAsync(brandFile);
+            Assert.Equal("cleaner", FieldOf(brandYaml, "Gloss Varnish", "role"));
+            Assert.Equal("true", FieldOf(brandYaml, "Gloss Varnish", "colourless"));
+            Assert.Equal(firstSeen, FieldOf(brandYaml, "Gloss Varnish", "firstSeen"));   // append-only: history kept
+            Assert.Equal("colour", FieldOf(brandYaml, "Black", "role"));                   // the live records are untouched
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+                Directory.Delete(root, recursive: true);
+        }
+    }
+
     /// <summary>The value of a top-level or details key of the named paint in a written brand archive.</summary>
     private static string? FieldOf(string brandYaml, string paintName, string key)
     {

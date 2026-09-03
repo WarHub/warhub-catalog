@@ -533,6 +533,18 @@ internal static class PaintCatalogApp
 
                 ReconcileResult<PaintRecord> reconciled = reconciler.Reconcile(existing, fresh, mergedAliases, retracted, today);
 
+                // RECORDS NO SOURCE ASSERTED THIS RUN never passed the enrichment chain or the
+                // override pass -- both run on the fresh list -- and the reconciler carries them
+                // forward untouched. They are still part of the archive this run writes, so they
+                // get here what the archive can give them from what they say about themselves:
+                // a role from the classifier and the field overrides. Done BEFORE the ledger
+                // reads their identity keys, because an override that clears a stand-in hex
+                // moves the key, and the ledger must see the key that is actually written.
+                reconciled = reconciled with
+                {
+                    Records = FinishUnseen(reconciled, adapter, pending.Brand, brandSlug, overridesPath),
+                };
+
                 List<PaintRecord> finalRecords;
                 if (authoritativeRun)
                 {
@@ -585,9 +597,6 @@ internal static class PaintCatalogApp
                     finalRecords = reconciled.Records.ToList();
                 }
 
-                // An archived record no source asserted this run never passed the enrichment
-                // chain, so it is stamped here from what it says about itself.
-                finalRecords = BackfillRoles(finalRecords, pending.Brand);
                 violations.AddRange(RoleInvariant.Violations(brandSlug, finalRecords));
 
                 var archive = new BrandArchive
@@ -632,12 +641,15 @@ internal static class PaintCatalogApp
 
             // ARCHIVE-ONLY BRANDS. A brand no source produced this run -- two-thin-coats on any
             // run without --scrape, any brand whose source is down -- still has an archive file,
-            // and the role facet and its invariant are properties of the ARCHIVE, not of which
-            // sources happened to run. So every brand file this run did not produce is loaded,
-            // backfilled and checked like the others, rewritten only when a record gained a role
-            // (byte-identical otherwise, so no churn), and handed to the equivalence pass -- which
-            // then sees the whole archive, as the comment above demands, rather than the subset
-            // this run scraped. A --brand run touches only its own file and skips this.
+            // and the role facet, the field overrides and the invariant are properties of the
+            // ARCHIVE, not of which sources happened to run. So every brand file this run did not
+            // produce is loaded, given its roles and its overrides exactly as the unseen records
+            // of a produced brand are (FinishArchived), checked, rewritten (byte-identical when
+            // nothing changed, so no churn), and handed to the equivalence pass -- which then
+            // sees the whole archive, as the comment above demands, rather than the subset this
+            // run scraped. What it does NOT get is anything that needs the fresh path: minted
+            // `additions:`, and the `aliases:`/`retract:` the reconciler applies. A --brand run
+            // touches only its own file and skips this.
             if (string.IsNullOrEmpty(brandFilter))
             {
                 string brandsDir = Path.Combine(outputDir, "brands");
@@ -653,11 +665,9 @@ internal static class PaintCatalogApp
                     if (archived is null)
                         continue;
 
-                    bool gained = archived.Paints.Any(p => string.IsNullOrWhiteSpace(p.Role));
-                    List<PaintRecord> records = BackfillRoles(archived.Paints, archived.Brand);
+                    List<PaintRecord> records = FinishArchived(archived.Paints, archived.Brand, slug, overridesPath);
                     violations.AddRange(RoleInvariant.Violations(slug, records));
-                    if (gained)
-                        archives.Add(archived with { Paints = records });
+                    archives.Add(archived with { Paints = records });
 
                     allCatalogs.Add(new BrandCatalog
                     {
@@ -668,7 +678,7 @@ internal static class PaintCatalogApp
                     });
 
                     if (verbose)
-                        Console.WriteLine($"  {slug}: {records.Count} archived records (not produced this run{(gained ? "; roles backfilled" : "")})");
+                        Console.WriteLine($"  {slug}: {records.Count} archived records (not produced this run; roles and overrides applied)");
                 }
             }
 
@@ -751,16 +761,44 @@ internal static class PaintCatalogApp
     }
 
     /// <summary>
-    /// Stamps a role on every record that has none. A record the reconciler carried forward
-    /// unchanged -- one no source asserted this run -- never passed the enrichment chain, so its
-    /// role comes from the same classifier applied to what the record itself says. A record that
-    /// already carries one keeps it: an overridden role must survive its product vanishing from
-    /// the source, exactly as the colourless flag does.
+    /// The archive's own enrichment for records no source asserted this run: the role the
+    /// classifier derives from what each record says about itself, then the field overrides
+    /// (<see cref="OverrideApplier.ApplyToArchived"/>) -- the two steps the fresh path runs on a
+    /// produced record, in the same order. The role is RECOMPUTED rather than backfilled where
+    /// missing, so a rule change reaches these records exactly as it reaches live ones; an
+    /// overridden role does not need the stored value to survive, because the override itself is
+    /// re-applied right after.
     /// </summary>
-    private static List<PaintRecord> BackfillRoles(IEnumerable<PaintRecord> records, string brandDisplayName) =>
-        records
-            .Select(r => string.IsNullOrWhiteSpace(r.Role)
-                ? r with { Role = RoleClassifier.Classify(brandDisplayName, r.Details.Set, r.Name, r.ProductCode) }
-                : r)
+    private static List<PaintRecord> FinishArchived(
+        IReadOnlyList<PaintRecord> records, string brandDisplayName, string brandSlug, string? overridesPath)
+    {
+        List<PaintRecord> classified = records
+            .Select(r => r with { Role = RoleClassifier.Classify(brandDisplayName, r.Details.Set, r.Name, r.ProductCode) })
             .ToList();
+        return OverrideApplier.ApplyToArchived(classified, brandSlug, overridesPath).ToList();
+    }
+
+    /// <summary>
+    /// <see cref="FinishArchived"/> for the records of a produced brand that the reconciler
+    /// carried forward without a fresh match -- everything whose identity key is not in
+    /// <see cref="ReconcileResult{T}.SeenKeys"/> -- leaving the matched records, which already
+    /// passed the fresh path, exactly as reconciled. Order is preserved.
+    /// </summary>
+    private static List<PaintRecord> FinishUnseen(
+        ReconcileResult<PaintRecord> reconciled, PaintRecordAdapter adapter,
+        string brandDisplayName, string brandSlug, string? overridesPath)
+    {
+        List<PaintRecord> unseen = reconciled.Records
+            .Where(r => !reconciled.SeenKeys.Contains(adapter.IdentityKey(r)))
+            .ToList();
+        if (unseen.Count == 0)
+            return reconciled.Records.ToList();
+
+        List<PaintRecord> finished = FinishArchived(unseen, brandDisplayName, brandSlug, overridesPath);
+        var result = new List<PaintRecord>(reconciled.Records.Count);
+        int next = 0;
+        foreach (PaintRecord r in reconciled.Records)
+            result.Add(reconciled.SeenKeys.Contains(adapter.IdentityKey(r)) ? r : finished[next++]);
+        return result;
+    }
 }

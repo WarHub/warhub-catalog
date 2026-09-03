@@ -17,7 +17,7 @@ namespace WarHub.PaintCatalog.Tool.Enrichment;
 /// members (Vallejo's `Pigment FX`, AK's `Auxiliary (3rd Gen)`, Green Stuff World's `Varnish`),
 /// then a small set of name patterns decides the utilities scattered through colour ranges
 /// (Citadel's `Technical`, Tamiya's `Lacquer Paint`), and `colour` is the default -- because
-/// 8,097 of the 8,521 archived records (measured 2026-09-02) are colours, and a default that
+/// 8,084 of the 8,521 archived records (measured 2026-09-03) are colours, and a default that
 /// needs no evidence is the one that is right 95% of the time.
 ///
 /// THE TRAPS, every one of them measured before the rule that avoids it was written:
@@ -341,8 +341,8 @@ public static partial class RoleClassifier
     /// parenthetical or a size; or the noun leading (`Primer Black`, `One Shot Primer - Grey`,
     /// `Primer Surface White`). `Track Primer`, `Rotbraun Primer`, `Chromate Yellow Primer
     /// Fs33481`, `Red Primer Base` and `Wwi German Grey-green Primer` all fail: each is a colour
-    /// named after what it depicts. Measured 2026-09-02: 146 primers in all, 117 of them by a
-    /// range rule and the rest by this pattern.
+    /// named after what it depicts. Measured 2026-09-03: 151 primers in all -- 117 by a range
+    /// rule, 5 by Vallejo's code block, 29 by this pattern.
     /// </summary>
     [GeneratedRegex(
         @"^((matt|matte|gloss|satin|brush-?on|spray|surface|clear|black|white|grey|gray|red|pink|tan|green|blue|brown|bone|beige|sand|desert|yellow|olive|rust|ivory|cream|colou?r|foam|filler|fine|smelly|metal|plastic|resin|acrylic|airbrush|polyurethane|one shot|universal|oxide|chaos|dark|light|flesh|silver|gold|army|magnesium|aluminium)\s+)*(primer|gesso|undercoat|surfacer|microfiller)(\s*\(.*\))?(,?\s*\d+\s*(ml|gr|g))?$" +

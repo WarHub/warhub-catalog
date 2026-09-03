@@ -633,4 +633,82 @@ public class OverrideApplierTests
             File.Delete(path);
         }
     }
+
+    private static PaintRecord Archived(string name, string hex = "#FFFFFF", string status = "current",
+        string availability = "unknown", string? role = "colour") => new()
+    {
+        Name = name, Category = "paint", Status = status, Availability = availability,
+        FirstSeen = "2026-01-15", ProductCode = "X-22", Ean = "4950344000227", Role = role,
+        Details = new PaintDetails
+        {
+            Set = "Acrylics Mini Gloss", R = 255, G = 255, B = 255, Hex = hex,
+            VolumeMl = 10, Container = "jar", Type = "Standard", Finish = "Gloss",
+        },
+    };
+
+    /// <summary>
+    /// The archived path: the same overrides land on a record no source asserted, and the three
+    /// fields the working shape cannot hold -- firstSeen, status, availability -- come through
+    /// untouched. A colourless override clears the stand-in hex in place, exactly as on the
+    /// fresh path; a role override lands; a record the file does not mention is returned as is.
+    /// </summary>
+    [Fact]
+    public void ApplyToArchived_LandsTheFieldOverrides_AndKeepsWhatTheWorkingShapeCannotHold()
+    {
+        string path = WriteTempOverrides("""
+            tamiya:
+              "Clear|Acrylics Mini Gloss":
+                colourless: true
+              "Flat red|Acrylics Mini Gloss":
+                role: primer
+                volumeMl: 23
+              "Gone|Acrylics Mini Gloss":
+                isDiscontinued: true
+            """);
+
+        try
+        {
+            IReadOnlyList<PaintRecord> result = OverrideApplier.ApplyToArchived(
+            [
+                Archived("Clear", status: "suspected-discontinued", availability: "unknown", role: "varnish"),
+                Archived("Flat red", hex: "#B41E14"),
+                Archived("Gone", hex: "#010101"),
+                Archived("Untouched", hex: "#020202"),
+            ], "tamiya", path);
+
+            PaintRecord clear = result[0];
+            Assert.True(clear.Colourless);
+            Assert.Equal("", clear.Details.Hex);
+            Assert.Equal(0, clear.Details.R);
+            Assert.Equal("varnish", clear.Role);
+            Assert.Equal("2026-01-15", clear.FirstSeen);                    // never on the working shape
+            Assert.Equal("suspected-discontinued", clear.Status);           // would collapse to "discontinued" through the mapper
+            Assert.Equal("unknown", clear.Availability);
+
+            PaintRecord flatRed = result[1];
+            Assert.Equal("primer", flatRed.Role);
+            Assert.Equal(23, flatRed.Details.VolumeMl);
+            Assert.Equal("#B41E14", flatRed.Details.Hex);
+            Assert.Equal("2026-01-15", flatRed.FirstSeen);
+            Assert.Equal("current", flatRed.Status);
+
+            // The one override that legitimately rewrites status: the mapper's reading wins.
+            Assert.Equal("discontinued", result[2].Status);
+            Assert.Equal("out_of_stock", result[2].Availability);
+
+            Assert.Equal(Archived("Untouched", hex: "#020202"), result[3]);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
+    public void ApplyToArchived_WithoutAFile_ReturnsTheRecordsUntouched()
+    {
+        IReadOnlyList<PaintRecord> records = [Archived("Clear")];
+        Assert.Same(records, OverrideApplier.ApplyToArchived(records, "tamiya", null));
+        Assert.Same(records, OverrideApplier.ApplyToArchived(records, "tamiya", "/nonexistent/overrides.yaml"));
+    }
 }

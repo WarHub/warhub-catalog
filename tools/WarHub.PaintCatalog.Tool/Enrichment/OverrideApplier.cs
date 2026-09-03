@@ -1,5 +1,6 @@
 using WarHub.CatalogStore;
 using WarHub.PaintCatalog.Tool.Models;
+using WarHub.PaintCatalog.Tool.Reconcile;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -135,6 +136,54 @@ public static class OverrideApplier
                 SupersededBy = Blank(over.SupersededBy) ?? p.SupersededBy,
             };
         }).ToList();
+    }
+
+    /// <summary>
+    /// The same field overrides, for records the reconciler carries forward UNCHANGED -- every
+    /// record of a brand no source produced this run (two-thin-coats without --scrape), and any
+    /// pot a source stopped listing. <see cref="Apply"/> runs on the fresh working list before
+    /// reconciliation, so until this existed a `colourless:` or `role:` line for such a record
+    /// could never land, and the invariant's advice to declare one was advice that could not
+    /// work for exactly the records the archive keeps longest.
+    ///
+    /// Routed through <see cref="Apply"/> itself rather than re-implemented, so the two cannot
+    /// drift: each record is mapped to the working shape, overridden, and mapped back. That round
+    /// trip is lossless except for the three fields the working shape has no home for --
+    /// <c>firstSeen</c>, <c>status</c> and <c>availability</c> -- which are carried over from the
+    /// archived record, unless the override itself changed the discontinuation, in which case
+    /// the mapper's reading of it wins, exactly as it does on the fresh path. An override that
+    /// clears a stand-in hex or corrects a name moves the record's identity key IN PLACE here;
+    /// there is no fresh twin to stitch to, so no alias is needed, and the next run in which a
+    /// source produces the brand matches the corrected key directly.
+    ///
+    /// Only the FIELD overrides run here. `additions:` mint records that need the enrichment
+    /// chain and a first-seen stamp, and `aliases:`/`retract:` belong to the reconciler, so all
+    /// three still need a run in which a source produces the brand.
+    /// </summary>
+    public static IReadOnlyList<PaintRecord> ApplyToArchived(
+        IReadOnlyList<PaintRecord> records, string brandSlug, string? overridesPath)
+    {
+        if (records.Count == 0 || string.IsNullOrEmpty(overridesPath) || !File.Exists(overridesPath))
+            return records;
+
+        List<Paint> working = records.Select(PaintRecordMapper.ToPaint).ToList();
+        IReadOnlyList<Paint> applied = LinkSupersessions(Apply(working, brandSlug, overridesPath));
+
+        var result = new List<PaintRecord>(records.Count);
+        for (int i = 0; i < records.Count; i++)
+        {
+            PaintRecord archived = records[i];
+            PaintRecord mapped = PaintRecordMapper.ToRecord(applied[i]);
+            bool discontinuationChanged = applied[i].IsDiscontinued != working[i].IsDiscontinued;
+            result.Add(mapped with
+            {
+                FirstSeen = archived.FirstSeen,
+                Status = discontinuationChanged ? mapped.Status : archived.Status,
+                Availability = discontinuationChanged ? mapped.Availability : archived.Availability,
+            });
+        }
+
+        return result;
     }
 
     /// <summary>

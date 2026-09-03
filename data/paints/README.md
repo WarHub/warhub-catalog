@@ -77,7 +77,9 @@ unknown, which is what an empty hex means (`Models/PaintRecord.cs`).
 `tool`, `basing`, `build`) -- derived from range and name by `Enrichment/RoleClassifier.cs` and
 overridable per record in `overrides.yaml`. A varnish, medium or cleaner must also be
 `colourless: true`, and the tool refuses to write an archive where that does not hold
-(`Enrichment/RoleInvariant.cs`).
+(`Enrichment/RoleInvariant.cs`). Field overrides reach every archived record, whether or not a
+source produced its brand this run (`OverrideApplier.ApplyToArchived`); `additions:`, `aliases:`
+and `retract:` need a run in which one does.
 
 `equivalences.yaml` — cross-brand colour matches via CIEDE2000 Delta E:
 

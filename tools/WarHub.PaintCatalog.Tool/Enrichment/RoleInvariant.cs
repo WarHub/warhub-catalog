@@ -45,7 +45,7 @@ public static class RoleInvariant
             else if (RoleClassifier.ColourlessRoles.Contains(r.Role) && r.Colourless != true)
             {
                 violations.Add($"{where}: role {r.Role} requires `colourless: true` -- declare it in overrides.yaml "
-                    + "(with a paired alias if the record carries a stand-in hex), or fix the rule that classified it");
+                    + "(with a paired alias if a source still asserts the record under a stand-in hex), or fix the rule that classified it");
             }
             else if (r.Colourless == true && r.Role == RoleClassifier.Colour)
             {
