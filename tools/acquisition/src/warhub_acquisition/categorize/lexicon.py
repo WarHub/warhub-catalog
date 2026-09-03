@@ -15,6 +15,13 @@ EVERY PATTERN CARRIES ITS MEASUREMENT, and the file is where the measurement liv
 commit message, because the next person to add a pattern needs the bar rather than the result.
 Re-derive with scripts/measure_category_rules.py, which scores a rule against the products some
 other source independently decided.
+
+AN ENTRY ANSWERS ITS OWN AXES. Since the `role` axis (categories.yaml axis 3) exists, an entry may
+name a category, a role, or both, and the match is taken PER AXIS: the first entry that answers
+the category decides the category, the first that answers the role decides the role, and an entry
+that only names a role never blocks a later entry from naming the category. `\bVARNISH\b` is a
+varnish whatever shelf the product is on; whether it is `paint` is a different question, answered
+by the boundary in categories.yaml and measured separately.
 """
 import re
 from pathlib import Path
@@ -25,12 +32,13 @@ from warhub_acquisition.yamlio import read_yaml
 
 
 class LexiconEntry(BaseModel):
-    """One case-insensitive regex over the published name -> one category."""
+    """One case-insensitive regex over the published name -> a category, a role, or both."""
 
     model_config = ConfigDict(extra="forbid")
 
     nameMatches: str
-    category: str
+    category: str | None = None
+    role: str | None = None
     #: Required, unlike a rule table's optional `note`. A lexicon entry is the weakest signal this
     #: stage acts on and the easiest to write carelessly, so the number that justified it has to be
     #: in the file: how many undecided products it reaches, and how it scored against products
@@ -43,6 +51,10 @@ class LexiconEntry(BaseModel):
             re.compile(self.nameMatches)
         except re.error as exc:
             raise ValueError(f"lexicon pattern {self.nameMatches!r} does not compile: {exc}") from exc
+        if self.category is None and self.role is None:
+            raise ValueError(
+                f"lexicon pattern {self.nameMatches!r} must decide a category, a role, or both"
+            )
         return self
 
 
@@ -54,9 +66,11 @@ class Lexicon(BaseModel):
     #: crossover descriptors follow. Narrow patterns first.
     entries: list[LexiconEntry]
 
-    def match(self, name: str) -> LexiconEntry | None:
+    def match(self, name: str, axis: str = "category") -> LexiconEntry | None:
+        """The first entry that ANSWERS `axis` and matches -- an entry silent on the axis is
+        skipped, so a role-only entry never swallows the category question."""
         for entry in self.entries:
-            if re.search(entry.nameMatches, name or "", re.IGNORECASE):
+            if getattr(entry, axis) and re.search(entry.nameMatches, name or "", re.IGNORECASE):
                 return entry
         return None
 
