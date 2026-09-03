@@ -145,6 +145,7 @@ clauses:
   # `paint` from the crossover, and the clause only reported against them).
   - nameMatches: '\b(BASES?|STEMS?)\b(?!:).*\b(SET|PACK|KIT|DETAIL|\d+\s?MM)\b|\b\d+\s?MM\b.*\bBASES?\b(?!:)|\b(HERO|INDUSTRIAL|VOID WAR)\s+BASES?\b'
     category: hobby-auxiliary
+    role: basing
     note: >-
       17 products; control 46, 97.8%. Widened from the original 13 to catch `LARGE BASE DETAIL
       KIT`, `INDUSTRIAL BASES`, `WH40K HERO BASES` and `VOID WAR BASES` -- and it must stay AHEAD
@@ -212,6 +213,7 @@ clauses:
   # segment that the segment gets wrong.
   - nameMatches: '\bBASING SET\b'
     category: hobby-auxiliary
+    role: basing
     note: 1 undecided; categories.yaml puts basing materials with the components
 
   # THE PAINT RANGE NAMES, which is how a Citadel colour is recognised now that the paint segment
@@ -264,14 +266,28 @@ clauses:
     note: 193 products; control 54, 100%
 
   # THINGS USED TO BUILD AND FINISH. 51 is the transfer-sheet type (its Legion subset also decides
-  # a game system, further down); 19/21/23 are brushes, glue and tools. The existing paint clauses
-  # below reach these same types where d56 is 99; these two reach the rest.
+  # a game system, further down); 19 is brushes, 21 glue and green stuff, 23 tools and cases. The
+  # existing paint clauses below reach these same types where d56 is 99; these reach the rest,
+  # each with the role its type is (a transfer has none in the vocabulary).
   - codeMatches: '^\d{2}51\d{7}$'
     category: hobby-auxiliary
     note: 8 products; control 29, 100%
-  - codeMatches: '^\d{2}(19|21|23)\d{7}$'
+  - codeMatches: '^\d{2}19\d{7}$'
     category: hobby-auxiliary
-    note: 4 products; control 25, 100%
+    role: applicator
+    note: >-
+      38 products, every name a Citadel brush; no archive control
+  - codeMatches: '^\d{2}21\d{7}$'
+    category: hobby-auxiliary
+    role: build
+    note: >-
+      4 products: plastic glue and liquid green stuff
+  - codeMatches: '^\d{2}23\d{7}$'
+    category: hobby-auxiliary
+    role: tool
+    note: >-
+      35 products: tape measures, files, cutters, mould-line removers and carry cases (a case
+      holds)
 
   # MODELS. 85/86 is Forge World -- vetoed above for the GAME, because the line supplies six of
   # them, and 99.8% `miniatures` on a control of 410 regardless. That veto used to suppress this

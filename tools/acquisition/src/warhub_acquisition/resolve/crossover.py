@@ -106,3 +106,12 @@ def category_for(observation: Mapping, rule: Mapping | None) -> str | None:
     if clause is None:
         return None
     return str(clause.get("category") or (rule or {}).get("category") or "") or None
+
+
+def role_for(observation: Mapping, rule: Mapping | None) -> str | None:
+    """The matching clause's own `role`, or None -- a block never carries one (a block crosses
+    boxed sets, and a set has no role), so there is no fallback to the block here."""
+    clause = matched_clause(observation, rule)
+    if clause is None:
+        return None
+    return str(clause.get("role") or "") or None

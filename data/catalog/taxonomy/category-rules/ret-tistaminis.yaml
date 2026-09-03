@@ -81,8 +81,13 @@ clauses:
 
   # HOBBY AUXILIARY. Both shelves are single-purpose and 24 of 24 already agree.
   - category: hobby-auxiliary
+    role: applicator
     hintContainsAny:
-      tags: ['Army Painter Brushes', 'Army Painter Tufts']
+      tags: ['Army Painter Brushes']
+  - category: hobby-auxiliary
+    role: basing
+    hintContainsAny:
+      tags: ['Army Painter Tufts']
 
   # GREEN STUFF WORLD'S SUPPLY SHELVES, and this store is their ONLY product-side source --
   # `mfr-greenstuffworld` is a paints feed and not one of these 56 products appears among its 477
@@ -102,6 +107,19 @@ clauses:
   # Marker` products. `ret-goblingaming.yaml` maps `Paint Marker` to `paint` because a marker
   # deposits colour, but these are EMPTY refillable barrels, which is the same colourless boundary
   # `categories.yaml` calls its thinnest.
+  # A VARNISH IS PAINT with role `varnish` on any shelf (categories.yaml, since 2026-09-02); three
+  # GSW varnishes sat under `Supplies` and were review rows against the paint archive.
+  - category: paint
+    role: varnish
+    nameMatches: '\bVARNISH\b'
+    note: >-
+      5 archive controls, 5 agree: GSW's varnishes filed under Supplies
+  - category: paint
+    role: colour
+    nameMatches: '\bMAXX DARTH\b'
+    note: >-
+      2 rows, GSW's Maxx Darth super-black paint in 17 and 60 ml, tagged `Supplies` by the store
+      and published by the paint archive; the last two of the 81 archive-versus-shelf rows
   - category: hobby-auxiliary
     hintContainsAny:
       tags: ['Green Stuff World Supplies', 'Green Stuff World Other']

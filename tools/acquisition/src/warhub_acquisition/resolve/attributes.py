@@ -23,7 +23,7 @@ from warhub_acquisition.resolve.set_refs import (
 # cannot share a loop.
 _HINT_FIELDS = (
     "faction", "category", "packaging", "quantity", "volumeMl", "weightG",
-    "description", "contentSkus",
+    "description", "contentSkus", "role",
 )
 _DIRECT_FIELDS = ("name", "sku", "availability", "url", "imageUrl", "priceGbp", "priceUsd", "priceEur", "priceCad")
 
@@ -205,6 +205,12 @@ def resolve_attributes(
     # now absent, and `unknown` says so. `categorize` is what fills it from a rule table.
     fields.setdefault("category", None)
     fields["categoryBasis"] = "unknown" if fields["category"] is None else "stated"
+    # THE ROLE AXIS is stated only by a crossover stamp today (no store publishes one), and
+    # unlike the category it has no `unknown` here: whether the question applies at all depends
+    # on the category, which the categorize stage settles -- it writes `unknown` where it applies
+    # and nothing where it does not (categorize/stage.py::_apply_role).
+    if fields.get("role") is not None:
+        fields["roleBasis"] = "stated"
 
     curated_status = _first(
         [member.hints.get("status") for member in members if kinds.get(member.source_id) == "curated"]

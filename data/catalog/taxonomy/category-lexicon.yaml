@@ -17,19 +17,22 @@ reason: >-
   scripts/measure_category_rules.py. Figures below are from 2026-08-25 over 30,771 products.
 
 
-  THE COLOURLESS AGENTS ARE DELIBERATELY ABSENT, and this is the judgement in the file most worth
-  understanding. `\bVARNISH\b`, `\bTHINNER\b`, `\bRETARDER\b`, `\bMEDIUM\b` and `\bFLOW IMPROVER\b`
-  all look like obvious `hobby-auxiliary` entries by the boundary categories.yaml draws -- colour
-  is the test, and none of them deposit any. Measured, they score 0%, 23%, 0%, 14% and 0%: the
-  committed evidence overwhelmingly calls them `paint` already. That is not the patterns being
-  wrong, it is the boundary being UNDER ADJUDICATION -- categories.yaml says so in as many words,
-  records that GW's Lahmian Medium publishes `paint` while AK's identical thinners publish
-  `hobby-auxiliary`, and states that a source's own claim wins until a human moves it. A lexicon
-  entry here would settle that quietly, in the direction of a rule nobody agreed to. So the `ML`
-  pattern below will call a 60ml thinner a paint, exactly as the stated evidence already does, and
-  the boundary stays where a human can see it. `\bMEDIUM\b` is additionally a trap: 75 of its 125
-  controls are paints whose COLOUR NAME contains the word (Medium Sea Grey, Medium Blue).
+  THE COLOURLESS AGENTS WERE DELIBERATELY ABSENT until 2026-09-02, and the reason is worth keeping.
+  `\bVARNISH\b`, `\bTHINNER\b`, `\bRETARDER\b`, `\bMEDIUM\b` and `\bFLOW IMPROVER\b` looked like
+  obvious `hobby-auxiliary` entries by the boundary categories.yaml then drew (colour was the
+  test), and measured against the committed evidence they scored 0%, 23%, 0%, 14% and 0% -- the
+  sources overwhelmingly called them `paint` already. That was the boundary being wrong, not the
+  sources, and the maintainer redrew it: `paint` is what a maker's chart lists, colour or not, and
+  a `role` says what each pot is for. The entries now exist with the category the sources always
+  gave them and the role the name states, each measured against the paint archive's own roles
+  (scripts/measure_category_rules.py --axis role). `\bMEDIUM\b` remains a trap -- 75 of its 125
+  category controls were paints whose COLOUR NAME contains the word (Medium Sea Grey, Medium Blue)
+  -- so its entry carries the colour lookahead the goblingaming table uses.
 
+
+  AN ENTRY MAY NAME A ROLE ALONE. The match is per axis (lexicon.py), so a role-only entry never
+  blocks a category entry below it; it exists for the products whose category a shelf or a code
+  already decided and whose role nothing else names.
 entries:
   # `event` earns its place in the vocabulary here. categories.yaml added it provisionally with a
   # note that it must justify itself or be deleted; these are the products that justify it, and all
@@ -87,8 +90,12 @@ entries:
   # Wars twin, where "primer" is the OTHER English sense -- a beginner's introduction -- and the
   # products are miniatures starter sets. Two of the bare pattern's 54 hits, and both are the only
   # two ways it was wrong.
+  # The role `primer` on this entry, measured 2026-09-03: 47 archive controls, 41 agree, the six
+  # misses being Vallejo `<Colour> Primer` pots the archive read as colours at the time (an
+  # archive gap since closed); decided 116 roles nothing else had named.
   - nameMatches: '\bPRIMER\b(?!\s+COLLECTION)'
     category: paint
+    role: primer
     measured: >-
       reaches 52 undecided; 5 controls, 5 agree (100%). The control is thin because these are
       almost all `ret-radaddel` rows that nothing else stocks, so what stands behind it as much as
@@ -97,6 +104,39 @@ entries:
   # ...AND BEFORE `TERRAIN`, since 2026-09-02: Army Painter's four `Gamemaster: ... Terrain
   # Primer` sprays are primers.
 
+  # THE COLOURLESS AGENTS, since 2026-09-02 (see the header). Narrow first: a varnish is named
+  # before the mediums because `Gloss Varnish Medium` is a varnish; cleaners before mediums because
+  # `Airbrush Cleaner & Thinner` is a cleaner. `\bPIGMENT\b` is guarded against Army Painter's
+  # liquid `Pigment Toner` paints, AK's `Liquid Pigment` colours, and the binders and fixers,
+  # which are mediums.
+  - nameMatches: '\bVARNISH\b'
+    category: paint
+    role: varnish
+    measured: >-
+      19 archive controls, 19 agree (scripts/measure_category_rules.py --axis role,
+      2026-09-03); decided 29 roles nothing else had named
+  # `Stainless Steel Paint Brush Cleaner` is a jar (a tool) and `Cyanoacrylate Glue Cleaner` a
+  # debonder; both surfaced as role-category-mismatch rows and neither cleans paint.
+  - nameMatches: '(?<!PAINT BRUSH )(?<!GLUE )\b(CLEANER|RESTORER|STRIPPER)\b'
+    category: paint
+    role: cleaner
+    measured: >-
+      4 archive controls, 4 agree; decided 6
+  # QUALIFIER FIRST (second reader, 2026-09-03): `MEDIUM` alone is a size on brushes, pipettes,
+  # rocks and silicone tips and a colour word on a dozen pots; what makes it a medium is the word
+  # before it (Glaze, Mixing, Lahmian, Metallic ...) or Vallejo's `Medium - Retarder` form. The
+  # same pattern as Goblin Gaming's clause. FIXER is here because a pigment fixer is a medium.
+  - nameMatches: '\b(THINNER|RETARDER|FLOW IMPROVER|FLOW AID|MASKING FLUID|LIQUID MASK|FIXER|DECAL (FIX|SOFTENER|SOLUTION))\b|\b(GLAZE|GLAZING|MIXING|WASH|CONTRAST|LAHMIAN|CHIPPING|SPEEDPAINT|XPRESS|AIRBRUSH|GLOSS|MATT|MATTE|SATIN|METAL|METALLIC|PEARL|GEL|TEXTILE|CRACKLE|FLUID|TRANSPARENT|CLEAR|POURING|WEATHERING|ACRYLIC|FLOW|DRYING|CELL|EFFECTS?|WET|PAINTING|STABILI[SZ]ER)\s+MEDIUMS?\b|\bMEDIUM\s*[-:]\s*[A-Z]|\bMEDIUM\s+(XPRESS|RETARDER|GLAZE)\b|\bMEDIUMS?\s+\d+\s?ML\b'
+    category: paint
+    role: medium
+    measured: >-
+      27 archive controls, 27 agree; decided 39
+  - nameMatches: '(?<!LIQUID )\b(PIGMENTS?|WEATHERING POWDERS?)\b(?!\s+(TONER|BINDER|FIXER))'
+    category: paint
+    role: pigment
+    measured: >-
+      23 archive controls, 23 agree after the BINDER guard (Vallejo's Pigment Binder is a
+      medium); decided 25
   - nameMatches: '\bTERRAIN\b'
     category: terrain
     measured: reaches 37 undecided; 116 controls, 113 agree (97%)

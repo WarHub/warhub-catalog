@@ -45,6 +45,7 @@ clauses:
   - category: game-accessory
     nameMatches: '\bDATA ?CARDS?\b'
   - category: hobby-auxiliary
+    role: basing
     nameMatches: '\b\d+\s?MM\b.*\bBASES?\b'
     note: bare bases sold under a game's own department -- categories.yaml `miniatures` boundary
   - category: book

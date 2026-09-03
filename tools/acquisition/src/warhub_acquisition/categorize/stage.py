@@ -230,6 +230,16 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
 
     system_labels, _ = load_labels(paths.taxonomy)
     settings_taxonomy = Settings.load(paths.taxonomy)
+    # A SET BY ANY SPELLING. legacy-catalog still writes `box` and `starter`, which categories.yaml
+    # maps to `set`; a role must not land on those either.
+    set_like = frozenset(
+        {"set", *(e.slug for e in vocabulary.packaging if e.mapsTo == "set")}
+    )
+    # THE ARCHIVE'S ROLES ARE VALIDATED LIKE EVERY OTHER SOURCE OF ONE: the resolver checks what it
+    # wrote and this stage checks its tables, but an archive record's `role` reaches a product
+    # through the barcode with no check in between until this line.
+    for archive_role in sorted(set(paint_roles.values())):
+        vocabulary.check(None, None, "paint archive", role=archive_role)
     catch_alls = _load_catch_alls(paths.taxonomy)
     default_hints = {
         sid: descriptor.defaultHints
@@ -274,9 +284,16 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             # 53 rows open on 2026-09-02 were exactly that. A record a RULE decided (mapped, code,
             # lexicon, paint-barcode) still reports, so a second run over this stage's own output
             # writes the same rows as the first.
+            # The same rule for the role axis: a `role-disagreement` between a shelf and the
+            # archive is worth a look only where the shelf's answer is what the record carries. A
+            # maintainer's override or a source's own statement has already settled it.
+            # And a role disagreement about a record the axis does not apply to (a shelf and the
+            # archive arguing about a book's role) is a row nobody can act on.
+            role_applies = record.category in _ROLE_BEARING and record.packaging not in set_like
             outcome.conflicts.extend(
                 c for c in conflicts
-                if c.kind != "category-disagreement" or record.categoryBasis not in ("stated", "override")
+                if (c.kind != "category-disagreement" or record.categoryBasis not in ("stated", "override"))
+                and (c.kind != "role-disagreement" or (role_applies and record.roleBasis not in _ROLE_KEPT))
             )
 
             # THE CATEGORY, and only where nothing has decided it. `stated` is a source's claim
@@ -302,7 +319,7 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
 
             # THE ROLE, after the category and the packaging because both are what make the
             # question applicable -- see _apply_role.
-            if _apply_role(record, decision, outcome):
+            if _apply_role(record, decision, outcome, set_like):
                 touched = True
 
             vetoed_guess = record.gameSystemsBasis == "classified" and game_axis_vetoed(
@@ -541,11 +558,24 @@ def _apply_settings(
 #: miniature has no painting role, and a box of pots answers through its members (categories.yaml
 #: axis 3; maintainer decision, 2026-09-02).
 _ROLE_BEARING = frozenset({"paint", "hobby-auxiliary"})
+#: The roles that can only belong to the OTHER category. A pot of paint is never an applicator or
+#: a tool; a hobby auxiliary never deposits colour, primes, seals, thins, cleans, textures or
+#: pigments -- those are things a chart lists, and a chart-listed thing is `paint`. The rest
+#: (basing, build) sit on both sides, because the archive lists Vallejo's ballast jars, putty and
+#: bookbinding glue and categories.yaml says the range decides the category and the material the
+#: role. A record that crosses this line is a category error or a role error, and until 2026-09-03
+#: it published silently -- 36 of them, a colour-forge shelf here, a `MEDIUM`-sized brush there.
+_ROLES_NOT_FOR = {
+    "paint": frozenset({"applicator", "tool"}),
+    "hobby-auxiliary": frozenset({"colour", "primer", "varnish", "medium", "cleaner", "texture", "pigment"}),
+}
 #: The role bases this stage never rewrites: a maintainer's word and a source's own statement.
 _ROLE_KEPT = frozenset({*_MAINTAINER_DECIDED, "stated"})
 
 
-def _apply_role(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:
+def _apply_role(
+    record: CanonicalProduct, decision, outcome: "Outcome", set_like: frozenset[str] = frozenset({"set"})
+) -> bool:
     """Write the role, or its absence, exactly as the category the record NOW carries allows.
 
     RECOMPUTED EVERY RUN rather than filled once, unlike `packaging`. The category is what makes
@@ -561,8 +591,9 @@ def _apply_role(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:
     """
     if record.roleBasis in _ROLE_KEPT:
         outcome.role_basis[record.roleBasis] += 1
+        _report_crossing(record, record.role, record.roleBasis, outcome)
         return False
-    applicable = record.category in _ROLE_BEARING and record.packaging != "set"
+    applicable = record.category in _ROLE_BEARING and record.packaging not in set_like
     role = decision.role if (decision is not None and applicable) else None
     basis = (decision.role_basis if role else "unknown") if applicable else None
     changed = (record.role, record.roleBasis) != (role, basis)
@@ -571,7 +602,18 @@ def _apply_role(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:
         outcome.by_role_basis[basis] += 1
     record.role, record.roleBasis = role, basis
     outcome.role_basis[basis or "none"] += 1
+    _report_crossing(record, role, basis, outcome)
     return changed
+
+
+def _report_crossing(record: CanonicalProduct, role: str | None, basis: str | None, outcome: "Outcome") -> None:
+    """A role from the wrong side of the boundary is a review row, not a silent publication. The
+    role is still written: the answer may be that the CATEGORY is wrong, and a human reading the
+    row needs both halves to decide which."""
+    if role and role in _ROLES_NOT_FOR.get(record.category or "", frozenset()):
+        outcome.conflicts.append(
+            Conflict(record.id, "role-category-mismatch", f"{record.category} with role {role} ({basis})")
+        )
 
 
 def _apply_generic(record: CanonicalProduct, decision, outcome: "Outcome") -> bool:

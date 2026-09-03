@@ -64,7 +64,8 @@ categories:
     definition: >-
       Anything a maker's paint chart lists: a pot, bottle, dropper, jar, can or aerosol sold inside
       a painting range, whether or not it deposits colour. One product per record; `role` (axis 3)
-      says what each is FOR -- colour, primer, varnish, medium, cleaner, texture or pigment.
+      says what each is FOR -- colour, primer, varnish, medium, cleaner, texture or pigment, and,
+      for the jars of ballast and the putty a range lists beside its pots, basing or build.
     boundary: >-
       THE RANGE IS THE TEST, NOT THE COLOUR. Until 2026-09-02 this entry read "colour is the test"
       and filed every colourless medium, varnish, thinner and cleaner under `hobby-auxiliary`, and
@@ -428,7 +429,10 @@ roles:
       slate, snow flakes, cork, and blank bases of every size.
     boundary: >-
       A basing paste in a pot is `paint` with role `texture`; a bag of the dry stuff is here.
-      Bases included IN a kit are part of the kit (see `miniatures`).
+      Loose material a paint RANGE lists (Vallejo's Diorama Effects ballast jars, named by grain
+      size) is `paint` with role `basing`: the range decides the category, the material the role,
+      and the archive carries the jar either way. Bases included IN a kit are part of the kit
+      (see `miniatures`).
     measured: Most of the 257 texture-like names among `hobby-auxiliary` products.
 
   - slug: build
@@ -440,4 +444,6 @@ roles:
     boundary: >-
       Exists so that every `hobby-auxiliary` record answers "what is it for" (maintainer decision,
       2026-09-02): a supply that neither applies, cuts, nor bases, builds. A sprue CUTTER is a tool.
+      Sold inside a paint range and listed on its chart (Vallejo's Plastic Putty and Bookbinding
+      Glue), it is `paint` with role `build`, as the ballast jars are `paint` with role `basing`.
     measured: Not separated by the design lexicon; a population to measure when the rules land.

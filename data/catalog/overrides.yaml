@@ -48,8 +48,18 @@ products:
     gameSystems: [warhammer-fantasy-battle]
   games-workshop/60020699002:
     gameSystems: [other-games, warhammer-40k]
+  # VALLEJO 71.097 IS MEDIUM GUNSHIP GRAY, a Model Air colour: Vallejo's own page and Rad Addel
+  # say so, and its neighbours 71.090-71.096 are all colours. Goblin Gaming alone lists it as
+  # "Medium Grey Primer 17ml", and the primer name clause in its table -- right on the 40 primers
+  # it reaches -- takes the store's word over the paint archive's, as the ladder says a shelf
+  # must. The archive is right here; decided by override, 2026-09-03.
+  vallejo/71097:
+    role: colour
   # THE 2026-09-02 ADJUDICATION OF data/review/categorize.yaml, per product where no rule settles
-  # the class. Evidence per row is in the PR that landed them; in one line each:
+  # the class. Evidence per row is in the PR that landed them; in one line each. REVISED
+  # 2026-09-03 for the redrawn `paint` (what a chart lists): AK11500 the thinner and Vallejo's
+  # 28890 Brush Restorer and 28900 Brush Cleaner are paint now, with the roles the archive and
+  # the lexicon give them (medium, cleaner, cleaner); the override still settles the retailer tie.
   #   AK11500 is a thinner and AK9511 wet-palette paper (radaddel's own tags say so); Vallejo 28890
   #   and 28900 are brush restorer/cleaner, `colourless` in the paint catalog, and radaddel's
   #   Farbsets collection is not a set; WP8112 is a ten-pot set Warlord's store typed `Paint Pot`;
@@ -61,14 +71,14 @@ products:
   #   setting rows are a 40k novel, an AoS anthology and a WWII radar station that belong to a
   #   universe and to no game.
   ak-interactive/AK11500:
-    category: hobby-auxiliary
+    category: paint
   ak-interactive/AK9511:
     category: hobby-auxiliary
   vallejo/28890:
-    category: hobby-auxiliary
+    category: paint
     packaging: single
   vallejo/28900:
-    category: hobby-auxiliary
+    category: paint
     packaging: single
   army-painter/WP8112:
     category: paint-set

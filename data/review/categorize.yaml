@@ -1,332 +1,86 @@
 summary:
   products: 27261
-  undecided: 1338
+  undecided: 1328
   byBasis:
     code: 7107
-    lexicon: 408
-    mapped: 16399
+    lexicon: 390
+    mapped: 16429
     override: 13
-    paint-barcode: 17
+    paint-barcode: 15
     stated: 1979
-    unknown: 1338
+    unknown: 1328
   decidedThisRun: 0
   gameSystemsByBasis:
     classified: 1109
     code: 4163
     mapped: 2594
-    not-applicable: 7852
+    not-applicable: 7862
     override: 101
     setting: 960
     stated: 9131
-    unknown: 1351
+    unknown: 1341
   settingsByBasis:
     code: 849
     derived: 17094
     mapped: 11
-    not-applicable: 7923
+    not-applicable: 7933
     override: 3
-    unknown: 1381
+    unknown: 1371
   rolesByBasis:
-    none: 20356
-    unknown: 6905
+    code: 93
+    lexicon: 183
+    mapped: 729
+    none: 20346
+    override: 1
+    paint-archive: 2254
+    stated: 16
+    unknown: 3639
 conflicts:
-  - entity: ak-interactive/AK17080-SINGLE
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: ak-interactive/glaze-medium-ak-3rd-gen-17ml
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: ak-interactive/gloss-medium-ak-3rd-gen-17ml
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: ak-interactive/matte-medium-ak-3rd-gen-17ml
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: ak-interactive/metal-medium-ak-3rd-gen-17ml
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: ak-interactive/retarder-ak-3rd-gen-17ml
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: army-painter/aegis-suit-satin-varnish-warpaint-air
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: army-painter/airbrush-cleaner-warpaint-air
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: army-painter/airbrush-medium-100ml-acrylic-paint
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: army-painter/gloss-varnish-warpaint-air
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: army-painter/matt-anti-shine-varnish-warpaint-air
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: games-workshop/99189956079
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: games-workshop/99189956081
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: games-workshop/99209999107
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
   - entity: games-workshop/99700199045
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain -- a tie, left to the code and name rungs'
-  - entity: green-stuff-world/green-stuff-world-gloss-varnish-60ml
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
-  - entity: green-stuff-world/green-stuff-world-maxx-darth-black-paint-17-ml
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
-  - entity: green-stuff-world/green-stuff-world-maxx-darth-paint-60-ml
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-tistaminis tags~Green Stuff World Supplies,Green Stuff World Other says hobby-auxiliary
   - entity: vallejo/26201
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/26202
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26203
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26204
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26211
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26212
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/26213
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26214
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26215
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26217
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26218
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26219
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/26220
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26221
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26222
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26223
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26224
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26230
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/26231
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming productType=Basing Materials says hobby-auxiliary
-  - entity: vallejo/26301
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26302
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26303
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26304
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26305
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26306
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26307
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26308
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26309
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26310
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26311
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26312
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26313
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26314
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26315
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26316
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26317
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26318
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26319
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26321
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26322
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26807
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26808
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26809
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26810
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26811
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
   - entity: vallejo/26812
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/26820
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/28890
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/28900
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/62041
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/62062
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/62063
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/62064
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/62065
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/62067
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/69701
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/69702
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/69703
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70470
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70510
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70520
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70521
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70522
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70524
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70540
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70596
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/70597
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/71099
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/71261
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/71262
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/72448
     type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/73212
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/73214
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
-  - entity: vallejo/73301
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b says hobby-auxiliary
-  - entity: vallejo/73807
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/73808
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/73809
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/73810
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/73811
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/73812
-    type: category-disagreement
-    detail: 'retailer: ret-goblingaming=hobby-auxiliary; ret-radaddel=paint -- a tie, left to the code and name rungs'
-  - entity: vallejo/77657
-    type: paint-barcode-vs-taxonomy
-    detail: the paint catalog publishes this barcode, but ret-goblingaming name~\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK)) says hobby-auxiliary
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
 deadClauses:
   - games-workshop code~^\d{2}70\d{2}81\d{3}$
   - games-workshop code~^\d{4}1481\d{3}$
@@ -658,21 +412,6 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13 - Special Tournament Pack'
       wouldDecide: 1
-  ret-goblingaming:
-    - value: tags=Paint & Hobby
-      wouldDecide: 2
-    - value: tags=Stock Coming
-      wouldDecide: 2
-    - value: vendor=The Army Painter
-      wouldDecide: 2
-    - value: productType=Airbrush Paints
-      wouldDecide: 1
-    - value: tags=Paints
-      wouldDecide: 1
-    - value: productType=Aerosols
-      wouldDecide: 1
-    - value: tags=Aerosols
-      wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games
       wouldDecide: 63
@@ -689,23 +428,23 @@ unmapped:
     - value: tags=Neuheiten Games Workshop
       wouldDecide: 29
     - value: tags=AK-Interactive
-      wouldDecide: 27
+      wouldDecide: 24
     - value: vendor=AK-Interactive
-      wouldDecide: 27
+      wouldDecide: 24
     - value: tags=ABTEILUNG 502*
       wouldDecide: 23
-    - value: tags=The Army Painter
-      wouldDecide: 22
-    - value: vendor=The Army Painter
-      wouldDecide: 22
     - value: tags=Galaktische Republik SWL
       wouldDecide: 18
-    - value: tags=Warpaints Fanatic Effects
+    - value: tags=The Army Painter
+      wouldDecide: 17
+    - value: vendor=The Army Painter
       wouldDecide: 17
     - value: tags=BA Würfel
       wouldDecide: 17
     - value: tags=WÜRFEL
       wouldDecide: 17
+    - value: tags=Warpaints Fanatic Effects
+      wouldDecide: 14
     - value: tags=Star Wars Shatterpoint
       wouldDecide: 12
     - value: tags=Decals & Gelände
@@ -738,21 +477,21 @@ unmapped:
       wouldDecide: 5
     - value: tags=Space Marines
       wouldDecide: 5
-    - value: tags=Vallejo
-      wouldDecide: 5
-    - value: vendor=Vallejo
-      wouldDecide: 5
     - value: tags=DECALS & GELÄNDE*
       wouldDecide: 5
     - value: tags=Ogor Mawtribes
       wouldDecide: 4
     - value: tags=Boxen Pike & Shotte
       wouldDecide: 4
-    - value: tags=AK-EINZELFARBEN*
-      wouldDecide: 3
-    - value: tags=AK-Hilfsmittel
-      wouldDecide: 3
     - value: tags=Söldner SWL
+      wouldDecide: 3
+    - value: tags=Middle-Earth - Good
+      wouldDecide: 3
+    - value: tags=Necromunda Boxen und Bücher
+      wouldDecide: 3
+    - value: tags=KoW Regeln & Zubehör
+      wouldDecide: 3
+    - value: tags=BA Starter Bolt Action
       wouldDecide: 3
   ret-tistaminis:
     - value: vendor=GW-OOP

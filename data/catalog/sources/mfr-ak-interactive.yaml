@@ -109,46 +109,57 @@ crossoverToProducts:
   category: paint-set
   anyOf:
     # FIRST, because clause order decides the stamp where clauses overlap (crossover.py::
-    # matched_clause) and this one is the narrow case. AK sells auxiliary AGENTS out of the same
-    # paint categories the sweep now covers: thinners, burnishing fluids and the two chipping
-    # fluids the boxed sets enumerate (AK088 "Worn Effects Acrylic Fluid", AK089 "Heavy Effects
-    # Acrylic Fluid"). They are products -- AK sells them, sets contain them, someone holding one
-    # needs to identify it -- but they are not COLOURS, and the paint catalog is a catalog of
-    # colours. Crossing them keeps them addressable without asserting they are paint.
+    # matched_clause) and these are the narrow case. AK sells auxiliary AGENTS out of the same
+    # paint categories the sweep covers: thinners, cleaners, burnishing fluids, microfiller primer
+    # sprays and the two chipping fluids the boxed sets enumerate (AK088 "Worn Effects Acrylic
+    # Fluid", AK089 "Heavy Effects Acrylic Fluid"). They are products -- AK sells them, sets contain
+    # them, someone holding one needs to identify it -- and since 2026-09-02 they are `paint`:
+    # categories.yaml redrew that value to what a maker's chart lists, colour or not, and gave the
+    # thing a `role` to say what it is for. Until then these crossed as `hobby-auxiliary` ("not
+    # colours"), which was the boundary the redrawing ended. Three clauses rather than one because
+    # a clause stamps one role: a cleaner never enters the paint, a microfiller is an undercoat,
+    # and the rest go into or under it. `XTREME CLEANER & THINNER` takes the first that matches.
     #
-    # `category: hobby-auxiliary` rather than the block's `paint-set`: stamping an agent as a
-    # boxed set would be the same structural lie this block exists to fix, one level down.
+    # Neither clause's category is the block's `paint-set`: stamping an agent as a boxed set would
+    # be the same structural lie this block exists to fix, one level down.
     #
-    # IT APPLIES TO THE WHOLE SOURCE, NOT ONLY THE NEWLY SWEPT CATEGORIES, and that is the thing to
-    # know before touching the word list. It was added alongside the xtreme-metal-paints and
-    # paints-weathering-single sweep and most of its hits sit there (XTREME CLEANER & THINNER, the
-    # PRIMER AND MICROFILLER sprays, PHOTOETCH BURNISHING, Metal burnishing fluid, Wet/Worn/Heavy
-    # Effects Fluid) -- but a `nameMatches` clause is evaluated against EVERY row this source
-    # observes, so it also claims solvent-named rows from elsewhere in the catalogue: AKABT111 /
-    # AKABT112 / AKABT113 (odourless, matt-effect and fast-dry thinners), AK712, AK1566, ABT116 and
-    # AK1018. Those are auxiliaries and belong here, and NONE OF THE 16 ROWS THIS CLAUSE SELECTS
-    # MATCHES ANY OTHER CLAUSE IN THIS BLOCK (measured 2026-08-11 with crossover.clause_matches --
-    # 0 of 16, the swept-category hits included), so this clause is not restamping rows that were
-    # already crossing: every row it selects crosses BECAUSE of it. Widening the word list widens
-    # the catalog, not just a stamp.
+    # THEY APPLY TO THE WHOLE SOURCE, NOT ONLY THE NEWLY SWEPT CATEGORIES, and that is the thing to
+    # know before touching the word lists. The single clause they replace was added alongside the
+    # xtreme-metal-paints and paints-weathering-single sweep and most of its hits sat there (XTREME
+    # CLEANER & THINNER, the PRIMER AND MICROFILLER sprays, PHOTOETCH BURNISHING, Metal burnishing
+    # fluid, Wet/Worn/Heavy Effects Fluid) -- but a `nameMatches` clause is evaluated against
+    # EVERY row this source observes, so it also claims solvent-named rows from elsewhere in the
+    # catalogue: AKABT111 / AKABT112 / AKABT113 (odourless, matt-effect and fast-dry thinners),
+    # AK712, AK1566, ABT116 and AK1018. NONE OF THE 16 ROWS THESE CLAUSES SELECT MATCHES ANY OTHER
+    # CLAUSE IN THIS BLOCK (measured 2026-08-11 with crossover.clause_matches -- 0 of 16, the
+    # swept-category hits included), so they are not restamping rows that were already crossing:
+    # every row they select crosses BECAUSE of them. Widening a word list widens the catalog, not
+    # just a stamp.
     #
-    # IT ADMITS ALL 16 SINCE 2026-08-26, and it did not before. AKABT111/112/113 -- the odourless,
+    # THEY ADMIT ALL 16 SINCE 2026-08-26, and did not before. AKABT111/112/113 -- the odourless,
     # matt-effect and fast-dry thinners -- were selected here and then REFUSED by the resolver's
     # identity floor, because their skus did not match this manufacturer's codePattern and AK
     # publishes no barcode, so they reached neither catalog and sat in review/conflicts.yaml as
     # `hobby-auxiliary-without-identity`. Widening the codePattern by prefix gave all three a
-    # product code (see the block above and taxonomy/manufacturers.yaml). Widening the WORD LIST
+    # product code (see the block above and taxonomy/manufacturers.yaml). Widening a WORD LIST
     # below is still not free: a row it selects whose sku this manufacturer's codePattern cannot
     # read widens conflicts.yaml rather than the catalog, which is the cheaper failure but a cost.
     #
-    # The word list is deliberately narrow and anchored: BURNISHING and MICROFILLER name processes,
-    # THINNER/CLEANER name solvents, and `\bFLUID\b` is a whole word so it cannot catch a colour
-    # named e.g. "Fluid Blue" -- nor a weathering product named for its effect rather than its
-    # medium, which is why "MEDIUM RUST DEPOSITS" is NOT matched despite reading like one. No
-    # committed AK archive name matches the list at all. Re-derive both with
+    # The word lists are deliberately narrow and anchored: BURNISHING and MICROFILLER name
+    # processes, THINNER/CLEANER name solvents, and `\bFLUID\b` is a whole word so it cannot catch
+    # a colour named e.g. "Fluid Blue" -- nor a weathering product named for its effect rather than
+    # its medium, which is why "MEDIUM RUST DEPOSITS" is NOT matched despite reading like one. No
+    # committed AK archive name matches the lists at all. Re-derive both with
     # crossover.clause_matches over data/evidence/products/mfr-ak-interactive/observations.jsonl
     # and over the names in data/paints/brands/ak-interactive.yaml.
-    - nameMatches: '\b(THINNER|CLEANER|BURNISHING|MICROFILLER|FLUID)\b'
-      category: hobby-auxiliary
+    - nameMatches: '\bCLEANER\b'
+      category: paint
+      role: cleaner
+    - nameMatches: '\bMICROFILLER\b'
+      category: paint
+      role: primer
+    - nameMatches: '\b(THINNER|BURNISHING|FLUID)\b'
+      category: paint
+      role: medium
     - hintContainsAny: {categorySlugs: [3rd-set, paints-acrylics-sets, b2b-3gen-sets]}
     - nameMatches: '\b(SET|COLLECTION|FULL RANGE|BRIEFCASE|WOODEN BOX)\b'

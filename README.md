@@ -175,8 +175,11 @@ data/
    outranks the cross-catalog inference, which outranks the name; where the first two disagree the
    product keeps the store's answer and the disagreement is written to
    `data/review/categorize.yaml` for a human, alongside the ranked list of raw store values that
-   would decide the most still-undecided products. Every rule carries the measurement that
-   justified it, re-derivable with `scripts/measure_category_rules.py`. **Anywhere `resolve` runs,
+   would decide the most still-undecided products. The same pass answers the third axis, `role`
+   (what a paint or a hobby auxiliary is FOR -- `categories.yaml`), by the same ladder plus one
+   rung: the paint archive's own `role` for the product's barcode, ranked like its category
+   counterpart. Every rule carries the measurement that justified it, re-derivable with
+   `scripts/measure_category_rules.py` (`--axis role` grades role rules against the archive). **Anywhere `resolve` runs,
    `categorize` must run after it** -- `resolve` rewrites every product file, so a run that skips
    it republishes decided products as guesses.
 3. Entities the resolver can't auto-classify (no confident `gameSystem`) or that need
