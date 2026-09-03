@@ -70,6 +70,46 @@ public class BrandArchiveWriterTests
         }
     }
 
+    /// <summary>
+    /// `role` is a scalar, so the IReadOnlyList trap below cannot bite it -- but every new
+    /// top-level property still has to be proven to come back through LoadAsync, in its place
+    /// beside `colourless`, before the regeneration stamps it on 8,521 records.
+    /// </summary>
+    [Fact]
+    public async Task WriteThenLoad_RoundTripsRoleBesideColourless()
+    {
+        var archive = new BrandArchive
+        {
+            Brand = "Citadel",
+            BrandSlug = "citadel-colour",
+            Paints =
+            [
+                R("Abaddon Black") with { Role = "colour" },
+                R("'Ardcoat", hex: "", code: "0607", ean: "5011921027332") with { Colourless = true, Role = "varnish" },
+            ],
+        };
+        string dir = NewTempDir();
+        try
+        {
+            await BrandArchiveWriter.WriteAsync(archive, dir, default);
+            string filePath = Path.Combine(dir, "brands", "citadel-colour.yaml");
+            string yaml = (await File.ReadAllTextAsync(filePath)).Replace("\r\n", "\n");
+            Assert.Contains("  colourless: true\n  role: varnish\n  firstSeen:", yaml);
+            Assert.Contains("  availability: unknown\n  role: colour\n  firstSeen:", yaml);
+
+            IReadOnlyList<PaintRecord> loaded = await BrandArchiveWriter.LoadAsync(filePath, default);
+
+            Assert.Equal("colour", loaded.Single(p => p.Name == "Abaddon Black").Role);
+            PaintRecord varnish = loaded.Single(p => p.Name == "'Ardcoat");
+            Assert.Equal("varnish", varnish.Role);
+            Assert.True(varnish.Colourless);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
     [Fact]
     public async Task WriteThenLoad_RoundTripsListFields()
     {

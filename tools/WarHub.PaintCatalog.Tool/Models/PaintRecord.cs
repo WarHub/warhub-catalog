@@ -67,6 +67,29 @@ public record PaintRecord
     /// </summary>
     public bool? Colourless { get; init; }
 
+    /// <summary>
+    /// WHAT THE PRODUCT IS FOR. `category` is the constant `paint` for everything a maker's
+    /// chart lists -- colour or not, since 2026-09-02 -- so this is the key that tells a varnish
+    /// from a colour: `colour` (deposits colour; the finer grain stays in <see cref="PaintDetails.Type"/>
+    /// and <see cref="PaintDetails.Finish"/>), `primer`, `varnish`, `medium`, `cleaner`,
+    /// `texture`, `pigment`, and the hobby-hardware values a chart should never list but a
+    /// harvest can (`applicator`, `tool`, `basing`, `build`). The closed vocabulary lives in
+    /// <see cref="Enrichment.RoleClassifier"/>, which derives the value from brand, range and
+    /// name every run; a `role:` line in overrides.yaml outranks it per record.
+    ///
+    /// Sits beside <see cref="Colourless"/> because the two are one fact stated twice: a varnish,
+    /// medium or cleaner HAS no colour, so a record carrying one of those roles must carry the
+    /// flag, and a flagged record cannot be a `colour`. <see cref="Enrichment.RoleInvariant"/>
+    /// holds that over every record the tool writes and fails the run otherwise -- the flag is
+    /// what keeps the record out of the colour-equivalence graph, the role is what says why.
+    ///
+    /// Nullable in the type only because the working shape cannot promise a value before the
+    /// classifier has run; every archived record carries one, and the invariant treats a missing
+    /// role as a violation. A sibling field for the reason <see cref="SoldSeparately"/> is one:
+    /// a consumer that has never heard of it behaves as before.
+    /// </summary>
+    public string? Role { get; init; }
+
     /// <summary>Write-once, immutable.</summary>
     public string? FirstSeen { get; init; }
     public string? ProductCode { get; init; }

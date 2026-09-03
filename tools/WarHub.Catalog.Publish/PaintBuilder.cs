@@ -149,6 +149,7 @@ internal static class PaintBuilder
                     Id: id,
                     Brand: e.Brand,
                     Category: e.Paint.Category,
+                    Role: Trimmed(e.Paint.Role),
                     Range: string.IsNullOrWhiteSpace(e.Paint.Details.Set) ? null : e.Paint.Details.Set,
                     Name: e.Paint.Name,
                     Hex: NormalizeHex(e.Paint.Details.Hex),

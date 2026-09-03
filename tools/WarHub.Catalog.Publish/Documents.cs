@@ -108,6 +108,15 @@ internal sealed record PaintRecord(
     [property: JsonPropertyOrder(1)] string Id,
     [property: JsonPropertyOrder(2)] string Brand,
     [property: JsonPropertyOrder(3)] string Category,
+    // WHAT THE PRODUCT IS FOR: colour | primer | varnish | medium | cleaner | texture | pigment,
+    // plus applicator | tool | basing | build for the hardware a chart should never list. Since
+    // 2026-09-02 `category` is the constant `paint` for everything a maker's chart lists,
+    // colour or not, so this is the key that tells a varnish from a colour; a colour's finer
+    // grain (wash, contrast, metallic) stays in `type`/`finish` and is never repeated here.
+    // Emitted right after `category` because it is the other half of the same question; the
+    // same JsonPropertyOrder as `category` is deliberate -- ties keep declaration order, which
+    // `ean`/`additionalEans` below already rely on.
+    [property: JsonPropertyOrder(3)] string? Role,
     [property: JsonPropertyOrder(4)] string? Range,
     [property: JsonPropertyOrder(5)] string Name,
     // Null = colour not yet known (harvested additions await chart-swatch extraction); the

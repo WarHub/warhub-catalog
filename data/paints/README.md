@@ -50,6 +50,7 @@ paints:
     category: paint
     status: current          # current | suspected-discontinued | discontinued | delisted
     availability: unknown
+    role: colour             # what it is for -- see below
     firstSeen: '2026-07-10'
     productCode: '70.950'
     ean: '8429551709507'     # optional; additionalEans carries any others the pot is sold under
@@ -70,6 +71,15 @@ A record is never dropped. A paint that stops appearing in three consecutive ful
 if it comes back; either way it keeps its `firstSeen` and its barcode. `colourless: true` marks a
 medium or varnish: a record with no colour to match on, as opposed to one whose colour is merely
 unknown, which is what an empty hex means (`Models/PaintRecord.cs`).
+
+`role` says what the product is FOR -- `colour`, `primer`, `varnish`, `medium`, `cleaner`,
+`texture`, `pigment`, or the hobby-hardware values a chart should never list (`applicator`,
+`tool`, `basing`, `build`) -- derived from range and name by `Enrichment/RoleClassifier.cs` and
+overridable per record in `overrides.yaml`. A varnish, medium or cleaner must also be
+`colourless: true`, and the tool refuses to write an archive where that does not hold
+(`Enrichment/RoleInvariant.cs`). Field overrides reach every archived record, whether or not a
+source produced its brand this run (`OverrideApplier.ApplyToArchived`); `additions:`, `aliases:`
+and `retract:` need a run in which one does.
 
 `equivalences.yaml` — cross-brand colour matches via CIEDE2000 Delta E:
 

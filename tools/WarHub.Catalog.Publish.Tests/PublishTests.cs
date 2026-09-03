@@ -164,6 +164,25 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
     }
 
     [Fact]
+    public void Paint_role_is_published_right_after_category()
+    {
+        // `category` is the constant `paint` for everything a maker's chart lists, so `role` is
+        // the key that tells a pigment jar from a colour. It reaches the publisher through
+        // PaintSource.PaintYaml, whose deserializer ignores unmatched properties -- so a dropped
+        // property would publish nothing and fail no other test, the hop weightG is guarded
+        // against below.
+        var paints = Doc("paints.json").GetProperty("paints").EnumerateArray().ToList();
+        JsonElement abaddon = paints.Single(p => p.GetProperty("id").GetString() == "citadel/abaddon-black");
+        JsonElement powder = paints.Single(p => p.GetProperty("id").GetString() == "citadel/weathering-powder-rust");
+        Assert.Equal("colour", abaddon.GetProperty("role").GetString());
+        Assert.Equal("pigment", powder.GetProperty("role").GetString());
+
+        // Emitted right after `category`: the other half of the same question.
+        string[] keys = [.. abaddon.EnumerateObject().Select(p => p.Name)];
+        Assert.Equal(Array.IndexOf(keys, "category") + 1, Array.IndexOf(keys, "role"));
+    }
+
+    [Fact]
     public void Paint_surfaces_category_status_volume_container()
     {
         JsonElement paints = Doc("paints.json").GetProperty("paints");

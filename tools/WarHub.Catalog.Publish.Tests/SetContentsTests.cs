@@ -264,7 +264,7 @@ public sealed class SetContentsBuilderTests
     };
 
     private static PaintRecord Paint(string id, string name, string? range, string? code, string? hex = "#000000") =>
-        new(id, "Test", "paint", range, name, hex, null, null, null, null, null, code, null, null, null,
+        new(id, "Test", "paint", "colour", range, name, hex, null, null, null, null, null, code, null, null, null,
             null, null, null, null, "current", "unknown", null, null, null, null, []);
 
     private static CanonicalSet Set(string from, params CanonicalSetMember[] members) => new()

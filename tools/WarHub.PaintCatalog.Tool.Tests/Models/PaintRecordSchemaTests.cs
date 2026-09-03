@@ -18,9 +18,13 @@ public class PaintRecordSchemaTests
         // `Colourless` sits beside it for the same reason and reads as the same kind of fact --
         // what this product IS -- and, like SoldSeparately, is a sibling rather than a new value
         // inside an existing string field, so an unaware consumer is unaffected.
+        //
+        // `Role` sits right after `Colourless` because the two are one fact stated twice (a
+        // varnish, medium or cleaner has no colour) and RoleInvariant holds them together; a
+        // reader of the YAML meets the flag and its reason on adjacent lines.
         string[] expected =
         [
-            "Name", "Category", "Status", "Availability", "SoldSeparately", "Colourless", "FirstSeen",
+            "Name", "Category", "Status", "Availability", "SoldSeparately", "Colourless", "Role", "FirstSeen",
             "ProductCode", "Ean", "AdditionalEans", "ImageUrl", "PriceGbp", "PriceUsd", "PriceEur",
             "PriceCad", "Supersedes", "SupersededBy", "Details",
         ];

@@ -33,6 +33,13 @@ public record Paint
     public bool? Colourless { get; init; }
 
     /// <summary>
+    /// See PaintRecord.Role -- WHAT THE PRODUCT IS FOR, from the closed vocabulary in
+    /// <see cref="Enrichment.RoleClassifier"/>. Derived every run from brand, range and name, or
+    /// declared by a `role:` override; null only before the classifier has run.
+    /// </summary>
+    public string? Role { get; init; }
+
+    /// <summary>
     /// Paint type derived from brand and set classification.
     /// Examples: "Base", "Layer", "Shade", "Contrast", "Dry", "Air",
     /// "Technical", "Wash", "Speedpaint", "Glaze", "Standard".

@@ -70,6 +70,12 @@ public sealed class PaintRecordAdapter : ICatalogRecordAdapter<PaintRecord>
             // Declarative like SoldSeparately: it comes from the override block, so the FRESH
             // side is authoritative and a cleared block must clear the record.
             Colourless = fresh.Colourless,
+            // DERIVED every run by RoleClassifier from brand, range and name -- none of which
+            // change under a composite-key match -- or declared by a `role:` override, so fresh
+            // is authoritative whenever it says anything: a rule change must reach every live
+            // record. `Pick` rather than a bare assignment only so that a fresh record carrying
+            // no role at all (a unit test's, never the tool's) cannot blank an archived one.
+            Role = Pick(fresh.Role, existing.Role),
             Details = existing.Details with
             {
                 VolumeMl = contents.VolumeMl,
