@@ -258,14 +258,15 @@ def select_product_observations(
                     }
                 )
                 continue
-            # The category stamp is the ONLY mutation. `category` is folded from hints
-            # (resolve/attributes.py), and 448 of the 562 selected rows carry `hints.category:
-            # "paint"` -- publishing a 12-pot box under that is the same structural lie commit
-            # 6b3c930 fixed on the paint side (re-measured 2026-08-11; it was 431 of 545 on
-            # 2026-08-05, before the AK sweep widened this source).
-            observations.append(
-                observation.model_copy(update={"hints": {**observation.hints, "category": stamp}})
-            )
+            # The category stamp -- and the role, where the clause names one -- are the ONLY
+            # mutations. `category` is folded from hints (resolve/attributes.py), and 448 of the
+            # 562 selected rows carry `hints.category: "paint"` -- publishing a 12-pot box under
+            # that is the same structural lie commit 6b3c930 fixed on the paint side (re-measured
+            # 2026-08-11; it was 431 of 545 on 2026-08-05, before the AK sweep widened this
+            # source). `role` is folded the same way and lands as a `stated` role.
+            role = crossover.role_for(observation.model_dump(), spec)
+            hints = {**observation.hints, "category": stamp, **({"role": role} if role else {})}
+            observations.append(observation.model_copy(update={"hints": hints}))
     return ProductObservations(observations, crossover_conflicts, product_source_count)
 
 

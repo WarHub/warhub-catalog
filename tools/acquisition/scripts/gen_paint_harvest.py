@@ -239,7 +239,12 @@ def is_set(observation: dict, source_id: str) -> bool:
 # the 32 by name in data/review/conflicts.yaml. Recorded once, in the file that stays current.
 CROSSOVER_REASON = {
     "paint-set": "boxed set -- crosses to the product catalog",
-    "hobby-auxiliary": "auxiliary agent, not a colour -- claimed by the product catalog",
+    # AK's thinners, cleaners, microfillers and effect fluids. Until 2026-09-03 they crossed as
+    # `hobby-auxiliary` ("not a colour"); categories.yaml then redrew `paint` to what a maker's
+    # chart lists, colour or not, and they cross as `paint` with a `role`. They are still refused
+    # HERE, for the same reason as before: the archive is the chart's colours, and these are the
+    # agents sold beside them, addressable as products and not as archive records.
+    "paint": "auxiliary agent the maker sells beside its colours -- a product with a role, claimed by the product catalog",
 }
 
 

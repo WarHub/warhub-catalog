@@ -432,6 +432,66 @@ def test_the_role_axis_is_answered_only_for_hobby_supplies(tmp_path: Path) -> No
     assert again.role_decided == 0 and again.role_basis == outcome.role_basis
 
 
+def test_a_role_from_the_wrong_side_of_the_boundary_is_written_and_reported(tmp_path: Path) -> None:
+    """A brush on a shelf a table maps to `paint` gets role applicator from a name clause: the role
+    is still written -- the answer may be that the CATEGORY is wrong -- and the crossing is a
+    `role-category-mismatch` review row rather than a silent publication."""
+    paths = _seed(tmp_path)
+    write_yaml(
+        paths.category_rules / "ret-shop.yaml",
+        {
+            "source": "ret-shop",
+            "reason": "test",
+            "clauses": [{"category": "paint", "hintEquals": {"productType": "Brushes"}},
+                        {"role": "applicator", "nameMatches": r"\bBRUSH\b"}],
+        },
+    )
+    outcome = categorize(paths)
+    after = _catalog(paths)
+    brush = after["games-workshop/BRUSH1"]
+    assert (brush["category"], brush["role"]) == ("paint", "applicator")
+    rows = [c for c in outcome.conflicts if c.kind == "role-category-mismatch"]
+    assert [c.entity for c in rows] == ["games-workshop/BRUSH1"]
+    assert "paint with role applicator" in rows[0].detail
+
+
+def test_a_legacy_box_is_a_set_for_the_role_axis(tmp_path: Path) -> None:
+    """legacy-catalog still writes `packaging: box`, which categories.yaml maps to `set`; a role
+    must not land on it any more than on a `set`."""
+    paths = _seed(tmp_path)
+    vocabulary = dict(VOCABULARY)
+    vocabulary["packaging"] = [*VOCABULARY["packaging"],
+                               {"slug": "box", "label": "Box (legacy)", "status": "legacy", "mapsTo": "set"}]
+    write_yaml(paths.taxonomy / "categories.yaml", vocabulary)
+    path = paths.catalog_products / "games-workshop.yaml"
+    document = read_yaml(path)
+    for record in document["products"]:
+        if record["id"] == "games-workshop/BRUSH1":
+            record["packaging"] = "box"
+    write_yaml(path, document)
+    write_yaml(
+        paths.category_rules / "ret-shop.yaml",
+        {"source": "ret-shop", "reason": "test",
+         "clauses": [{"category": "hobby-auxiliary", "role": "applicator",
+                      "hintEquals": {"productType": "Brushes"}}]},
+    )
+    categorize(paths)
+    after = _catalog(paths)
+    assert "role" not in after["games-workshop/BRUSH1"] and "roleBasis" not in after["games-workshop/BRUSH1"]
+
+
+def test_an_archive_role_outside_the_vocabulary_fails_the_run(tmp_path: Path) -> None:
+    """The archive's role reaches a product through the barcode with no source table in between,
+    so the stage checks it against categories.yaml itself."""
+    paths = _seed(tmp_path)
+    write_yaml(
+        paths.paints / "brands" / "citadel.yaml",
+        {"paints": [{"name": "A Pot", "ean": "5011921194506", "role": "thinner"}]},
+    )
+    with pytest.raises(ValueError, match=r"paint archive: role 'thinner' is not declared"):
+        categorize(paths)
+
+
 def test_a_set_carries_no_role_and_an_override_keeps_its_own(tmp_path: Path) -> None:
     """A box of pots answers through its members; a maintainer's role is not recomputed, and
     neither is a source's own statement (`stated`, from a crossover stamp) -- whatever the
@@ -458,16 +518,20 @@ def test_a_set_carries_no_role_and_an_override_keeps_its_own(tmp_path: Path) -> 
             "source": "ret-shop",
             "reason": "the shop's product_type is a format axis",
             "clauses": [{"category": "hobby-auxiliary", "role": "applicator",
-                         "hintEquals": {"productType": "Brushes"}}],
+                         "hintEquals": {"productType": "Brushes"}},
+                        # A shelf that calls the pot a varnish, against the archive's medium.
+                        {"role": "varnish", "hintEquals": {"productType": "Unlabelled"}}],
         },
     )
-    categorize(paths)
+    outcome = categorize(paths)
     after = _catalog(paths)
     assert after["games-workshop/BRUSH1"]["category"] == "hobby-auxiliary"
     assert "role" not in after["games-workshop/BRUSH1"]
     assert (after["games-workshop/POT1"]["role"], after["games-workshop/POT1"]["roleBasis"]) == (
         "texture", "override",
     )
+    # The archive says medium and the override says texture: settled, so not a review row.
+    assert not [c for c in outcome.conflicts if c.kind == "role-disagreement"]
     assert (after["games-workshop/TOME1"]["role"], after["games-workshop/TOME1"]["roleBasis"]) == (
         "cleaner", "stated",
     )

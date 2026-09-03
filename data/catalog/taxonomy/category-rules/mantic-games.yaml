@@ -78,6 +78,7 @@ clauses:
     note: 17 fills; 50/51. Every name is a tournament, open day or playtest day
   - codeMatches: '^BF\d'
     category: hobby-auxiliary
+    role: basing
     note: >-
       17 fills, no control. Army Painter Battlefields, resold: tufts, static grass, snow, razor
       wire, rocks. All 17 names read.
@@ -201,15 +202,24 @@ clauses:
   # `Army Painter Super Glue`, `Mantic Tape Measure`, `THE ARMY PAINTER RangeFinder Tape Measure`,
   # `Magic Super Glue Activator`, `Colour Forge Precision Glue Application Tips`, `Colour Forge
   # Super Glue Thick`. All eight names were read.
-  - nameMatches: '\b(glue|brush(es)?|tape measure|clipper|hobby file|sanding|magnet)\b'
+  - nameMatches: '(?<!dry[ -])\bbrush(es)?\b(?![ -]on\b)'
     category: hobby-auxiliary
-    note: 8 undecided; no control, full name read
+    role: applicator
+    note: the lookarounds keep `Brush on Primer` and a `Dry Brush` paint out (second reader, 2026-09-03)
+  - nameMatches: '\b(glue|magnet)\b'
+    category: hobby-auxiliary
+    role: build
+  - nameMatches: '\b(tape measure|clipper|hobby file|sanding)\b'
+    category: hobby-auxiliary
+    role: tool
+    note: 8 undecided across the three; no control, full name read; one clause per role
 
   # A BARE BASE IS A COMPONENT AND A MOVEMENT TRAY IS PLAYED WITH, which is the split
   # categories.yaml draws and the one Games Workshop's own d34 22 block already follows here.
   # Five base sets against eight trays, no control, all thirteen names read.
   - nameMatches: '\b(bases? set|modular plastic base|acrylic bases)\b'
     category: hobby-auxiliary
+    role: basing
     note: 5 undecided; no control, full name read
   - nameMatches: '\bmovement tray\b'
     category: game-accessory

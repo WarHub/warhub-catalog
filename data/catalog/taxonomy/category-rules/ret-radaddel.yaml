@@ -63,6 +63,13 @@ clauses:
   # Reading all 97 members of `AK-ZUBEHÖR*`: scalpels, drill bits, sanding sponges, tweezers,
   # pipettes, cutting mats, rulers, painting handles, masking tape, bases, brush-conditioning
   # fluid, decal solutions, thinners, cleaners. Not one miniature.
+  # THE AGENTS ON THE AK DEPARTMENT SHELF ARE PAINT (categories.yaml since 2026-09-02): thinners,
+  # strippers, decal solutions, varnishes and cleaners sold inside AK's paint ranges, which the
+  # department clause below would file as auxiliaries. Category only; the lexicon names the role.
+  # `Stainless Steel Paint Brush Cleaner` is a jar, and stays a tool.
+  - category: paint
+    nameMatches: '\b(THINNER|STRIPPER|SOFTENER|VARNISH|FLOW IMPROVER|RETARDER|FIXER|DECAL (FIX|SOFTENER))\b|(?<!PAINT BRUSH )(?<!GLUE )\bCLEANER\b'
+    note: 14 radaddel-only AK products (second reader, 2026-09-03; AK118 Gravel and Sand Fixer added); no archive control, names read
   - category: hobby-auxiliary
     hintContainsAny:
       tags: ['AK Werkzeuge', 'AK-Zubehör', 'AK-ZUBEHÖR*', 'Army Painter Werkzeuge', 'WERKZEUGE AP*',

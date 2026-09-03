@@ -7,19 +7,28 @@ reason: >-
   are from data/evidence/products/ret-goblingaming/observations.jsonl on 2026-08-25.
 
 
-  FOUR VALUES ARE DELIBERATELY LEFT UNMAPPED, and they are the interesting part of this file.
-  `Aerosols` (38) straddles the boundary categories.yaml itself flags as the thinnest in the
-  vocabulary -- a coloured spray is `paint`, a colourless undercoat is `hobby-auxiliary`, and the
-  shelf holds both. `Advent Calendars` (3) and `Expansions` (2) name a sales format whose contents
-  decide the answer. Guessing any of them would put a wrong value where an honest "undecided" is
-  more useful; they stay in the review file's worklist until something better decides them.
+  THREE VALUES ARE DELIBERATELY LEFT UNMAPPED. `Advent Calendars` (3) and `Expansions` (2) name a
+  sales format whose contents decide the answer, and `Model Cases` is storage the vocabulary has no
+  role for. Guessing would put a wrong value where an honest "undecided" is more useful; they stay
+  in the review file's worklist until something better decides them. `Aerosols` (38) WAS a fourth,
+  left out while categories.yaml made colour the test for `paint` and the shelf held colour sprays
+  beside colourless undercoats; since 2026-09-02 a spray is `paint` whatever it holds (the range is
+  the test) and the shelf is mapped, its primers and varnishes named by the role clauses.
 
 
-  `Paint Technical/Effects` (139) IS mapped, to `paint`, and it is the closest call here: GW's
-  Technical range is mostly coloured effects but also contains Lahmian Medium, which is colourless
-  and belongs in `hobby-auxiliary` by the stated boundary. The store's own claim wins until a human
-  moves it (OBJECTIVES 5), and the colourless-medium adjudication is already an open item on the
-  vocabulary itself rather than something this table should pre-empt.
+  `Paint Technical/Effects` (139) is `paint`, and it stopped being a close call the same day: GW's
+  Technical range holds coloured effects beside Lahmian Medium, and both are paint now -- the
+  medium with role `medium`, which the paint archive supplies through the barcode.
+
+
+  THE ROLE CLAUSES (categories.yaml axis 3) are name patterns over the paint and hobby shelves,
+  ordered narrow first: a varnish, a primer, a cleaner, a medium, a texture paste. The archive's
+  own role for a barcoded pot ranks BELOW these (decide.py::PAINT_ARCHIVE), so where the two
+  disagree the review file says so and the name here stands. Measured 2026-09-03 against the archive's roles for the 2,397 products on its barcodes
+  (scripts/measure_category_rules.py --axis role): varnish 18/18, cleaner 4/4, medium 17/17,
+  ballast 20/20, texture 30/31, primer 40/46 -- the seven misses are Vallejo pots the archive
+  read as colours at the time, an archive gap reported as `role-disagreement` rather than a shelf
+  error, and one of them (71.097) turned out to be this store's own mislabel, fixed by override.
 
 clauses:
   # NARROW BEFORE BROAD, since 2026-09-02: a scan takes the first clause that answers the axis, so
@@ -31,6 +40,7 @@ clauses:
       Dice 61 + Dice Accessories 6 agree; 1 dice pack on the Miniatures shelf corrected, 3 untyped
       dice packs decided; the lookahead keeps `Invincible The Dice Game` out
   - category: hobby-auxiliary
+    role: basing
     nameMatches: '\b\d+\s?MM\b.*\bBASES?\b'
     note: bases sold under a game's shelf are components (categories.yaml `miniatures`); 1 row, 0 collateral
   - category: book
@@ -39,11 +49,41 @@ clauses:
   - category: game-accessory
     hintEquals: {productType: Game Mats}
     note: a play surface, not modelled scenery -- categories.yaml `terrain` boundary
+  # A TEXTURE PASTE IN A POT IS PAINT (categories.yaml `texture`), whichever shelf it sits on:
+  # Vallejo's Diorama Effects range -- pumice, sand, earth, lava, water gels, foam -- is split by
+  # this store between `Basing Materials` (14) and the paint shelves (33), and the paint archive
+  # carries every one. Until 2026-09-02 this clause filed them `hobby-auxiliary` and was 47 of the
+  # 81 rows the archive argued with; it now runs AHEAD of the basing shelf, which keeps its loose
+  # materials.
+  # Three things in the Diorama Effects range are not pastes, and the archive's roles said so:
+  # ballast jars named by grain size (`Granite Grey 0.5-2mm`) are loose basing material, Terrain
+  # Fixer is a medium, and the range's washes are colours. Narrow first.
+  - category: paint
+    role: basing
+    nameMatches: '\b\d+(\.\d+)?-\d+(\.\d+)?\s?MM\b.*\bDIORAMA EFFECTS\b'
+    note: 20 ballast jars; archive agrees 20/20
+  - category: paint
+    role: medium
+    nameMatches: '\bTERRAIN FIXER\b'
+    note: 1 row; archive agrees
+  - category: paint
+    role: colour
+    nameMatches: '\bWASH\b.*\bDIORAMA EFFECTS\b'
+    note: 1 row, `Black Wash Diorama Effects - Washes`; archive agrees
+  - category: paint
+    role: texture
+    nameMatches: '\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b'
+    note: >-
+      31 rows after the three guards above; archive agreed 30/31 at the time, the miss being 73810 Light
+      Brown Thick Mud, which the archive read as a colour until its own follow-up
   - category: hobby-auxiliary
+    role: basing
     hintEquals: {productType: Basing Materials}
   - category: hobby-auxiliary
+    role: basing
     hintEquals: {productType: Bases}
   - category: hobby-auxiliary
+    role: basing
     hintEquals: {productType: 'Model Bases'}
     note: >-
       the store uses both spellings for the same shelf -- `Bases` on 77 rows and `Model Bases` on
@@ -67,18 +107,47 @@ clauses:
     packaging: set
     hintEquals: {productType: Starter Set}
 
-  # COLOUR IS THE TEST (categories.yaml): the three paint shelves hold 75 colourless agents by
-  # name -- thinners, cleaners, varnishes, mediums, palette paper -- 44 of them flagged colourless
-  # in the paint catalog. The lookahead keeps the 25 `Medium <colour>` pots (Medium Sea Grey) in;
-  # the 10 `Medium Mortar/Artillery/Walker` rows sit on the Miniatures shelf, which decides first.
-  # Also reaches 3 Aerosols varnish sprays and one untyped brush.
+  # THE RANGE IS THE TEST (categories.yaml `paint`, since 2026-09-02): the paint shelves hold
+  # some 75 colourless agents by name -- thinners, cleaners, varnishes, mediums -- and every one is
+  # paint with a role. Until that day one clause here filed them all `hobby-auxiliary` ("colour is
+  # the test") and was 30 of the 81 rows the paint archive argued with. Four clauses now, because a
+  # clause names one role; the wet palette and its paper are the only things on the list that are
+  # not paint at all. The lookahead keeps the 25 `Medium <colour>` pots (Medium Sea Grey) out of
+  # `medium`; the 10 `Medium Mortar/Artillery/Walker` rows sit on the Miniatures shelf, which
+  # decides the category first and discards any role.
+  - category: paint
+    role: varnish
+    nameMatches: '\bVARNISH\b'
+    note: >-
+      18 archive controls, 18 agree; also reaches the Aerosol varnish sprays and the Base
+      Primer varnishes
+  - category: paint
+    role: cleaner
+    nameMatches: '(?<!PAINT BRUSH )(?<!GLUE )\b(CLEANER|RESTORER|STRIPPER)\b'
+    note: >-
+      4 archive controls, 4 agree
+  # QUALIFIER FIRST. `MEDIUM` alone is a size on this store's brushes and pipettes (`Dry Brush
+  # (Medium)`, `Pipettes Medium Size`) and a colour word on a dozen pots; a first draft guarded
+  # only the colours and filed nine brushes and a pipette pack as paint/medium (second reader,
+  # 2026-09-03). A medium is named by the word before it or by Vallejo's `Medium - Glaze` form.
+  - category: paint
+    role: medium
+    nameMatches: '\b(THINNER|RETARDER|FLOW IMPROVER|FLOW AID|MASKING FLUID|LIQUID MASK|FIXER|DECAL (FIX|SOFTENER|SOLUTION))\b|\b(GLAZE|GLAZING|MIXING|WASH|CONTRAST|LAHMIAN|CHIPPING|SPEEDPAINT|XPRESS|AIRBRUSH|GLOSS|MATT|MATTE|SATIN|METAL|METALLIC|PEARL|GEL|TEXTILE|CRACKLE|FLUID|TRANSPARENT|CLEAR|POURING|WEATHERING|ACRYLIC|FLOW|DRYING|CELL|EFFECTS?|WET|PAINTING|STABILI[SZ]ER)\s+MEDIUMS?\b|\bMEDIUM\s*[-:]\s*[A-Z]|\bMEDIUM\s+(XPRESS|RETARDER|GLAZE)\b|\bMEDIUMS?\s+\d+\s?ML\b'
+    note: >-
+      17 archive controls, 17 agree; the lookahead keeps the 25 `Medium <colour>` pots out
   - category: hobby-auxiliary
-    nameMatches: '\b(THINNER|CLEANER|RESTORER|VARNISH|RETARDER|FLOW IMPROVER|WET PALETTE|PALETTE PAPER|MASKING FLUID|STRIPPER)\b|\bMEDIUM\b(?!\s+(GREY|GRAY|BLUE|BROWN|GREEN|OLIVE|SEA|FLESH|SAND|RUST|ORANGE|YELLOW|SKIN|RED|TAN|OCHRE|VIOLET|PURPLE|PINK))'
-  # A TEXTURE PASTE IS A BASING MATERIAL whoever lists it (categories.yaml `hobby-auxiliary`):
-  # Vallejo's Diorama Effects range -- pumice, sand, earth, lava, water gels, foam -- was split by
-  # this store between `Basing Materials` (14) and the paint shelves (33); 47 of 47 by name.
-  - category: hobby-auxiliary
-    nameMatches: '\bDIORAMA EFFECTS\b|\bTHICK MUD\b|\bWEATHERING EFFECTS\s+200ML\b'
+    role: tool
+    nameMatches: '\b(WET PALETTE|PALETTE PAPER)\b'
+    note: >-
+      wet palettes and palette paper; no control, the archive lists no tools; names read
+  # A PRIMER IS PAINT WITH ROLE `primer`, coloured or not, and the name says so on every shelf it
+  # sits on (Aerosols, Paints, Airbrush Paints). Role only: the shelf decides the category.
+  - role: primer
+    nameMatches: '\bPRIMER\b(?!\s+COLLECTION)'
+    note: >-
+      46 archive controls, 40 agree; the six misses are Vallejo Mecha Colour and Model Air
+      `<Colour> Primer` pots the archive reads as colours, reported as role-disagreement --
+      the name stands
   # A SET IS A SET on any shelf: 32 Vallejo sets filed under Paints/Airbrush Paints, named with
   # their count (`Face & Skin Tones Set 16x`); 43 Paint Sets rows agree, 0 hits elsewhere.
   - category: paint-set
@@ -90,7 +159,13 @@ clauses:
     hintEquals: {productType: Airbrush Paints}
   - category: paint
     hintEquals: {productType: Paint Technical/Effects}
-    note: see the header -- the store's claim, not an adjudication of the colourless boundary
+    note: see the header -- coloured effects and Lahmian Medium alike, since the range is the test
+  - category: paint
+    hintEquals: {productType: Aerosols}
+    note: >-
+      38 rows, every one a spray: 18 Army Painter Colour Primers, 3 Base Primers (two of them
+      varnishes), 12 Citadel colour sprays, Munitorum Varnish Spray, 4 Army Painter colours. Held
+      out while colour was the test; the role clauses above name the primers and varnishes
   - category: paint
     hintEquals: {productType: Paint Marker}
     note: >-
@@ -124,16 +199,22 @@ clauses:
   - category: book
     hintEquals: {productType: RPG Books}
 
-  # Used to BUILD and FINISH: brushes, basing, tools, decals, magnets, storage.
+  # Used to BUILD and FINISH: brushes, basing, tools, decals, magnets, storage. The roles are the
+  # shelf's own words; decals have no role in the vocabulary and stay open.
   - category: hobby-auxiliary
+    role: applicator
     hintEquals: {productType: Brushes}
   - category: hobby-auxiliary
+    role: tool
     hintEquals: {productType: Hobby Tools}
   - category: hobby-auxiliary
     hintEquals: {productType: Decals}
   - category: hobby-auxiliary
+    role: tool
     hintEquals: {productType: Painting Accessories}
+    note: palettes, handles, water pots, racks -- things that hold
   - category: hobby-auxiliary
+    role: build
     hintEquals: {productType: Magnets}
   - category: hobby-auxiliary
     hintEquals: {productType: Model Cases}

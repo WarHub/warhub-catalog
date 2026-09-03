@@ -58,6 +58,11 @@ class CrossoverClause(BaseModel):
     # clause: a source that crosses one kind of thing needs one stamp. See
     # resolve/crossover.py::category_for for the case that needs two.
     category: str | None = None
+    # THE ROLE (categories.yaml axis 3) of the rows this clause selects, stamped beside the
+    # category and folded by the resolver as a `stated` role -- the paint source's own word about
+    # what it sells, exactly as the category stamp is. Only a clause carries one; a block does not,
+    # because a block crosses boxed SETS and a set has no role.
+    role: str | None = None
     # list hint intersects these values. EXACT value membership, never substring: Army Painter's
     # genuine airbrush paint sets carry the tag `Airbrush Warpaints`, which CONTAINS the substring
     # of the `brushset` exclusion but is not it (measured 2026-08-05, rows AW8001P-AW8004P).

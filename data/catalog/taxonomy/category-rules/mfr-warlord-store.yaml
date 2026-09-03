@@ -190,6 +190,12 @@ clauses:
   - category: miniatures
     hintEquals: {productType: Box}
     note: 4 North Star plastic boxed sets; the store's short form of `Box - Plastic` above
+  # HUMBROL'S WEATHERING POWDERS sit on the Hobby shelves and are paint with role pigment
+  # (second reader, 2026-09-03: nine `hornby-hobbies/AV00xx` records came out hobby-auxiliary).
+  - category: paint
+    role: pigment
+    nameMatches: '\bWEATHERING POWDERS?\b'
+    note: 9 rows, all Humbrol 45ml jars; no archive control, names read
   - category: hobby-auxiliary
     hintEquals: {productType: 'Hobby Supplies'}
   - category: book
@@ -198,10 +204,13 @@ clauses:
     hintEquals: {productType: Rules & Books}
 
   - category: hobby-auxiliary
+    role: applicator
     hintEquals: {productType: Brushes}
   - category: hobby-auxiliary
+    role: basing
     hintEquals: {productType: Basing}
   - category: hobby-auxiliary
+    role: basing
     hintEquals: {productType: Bases}
   - category: hobby-auxiliary
     hintEquals: {productType: Hobby}
@@ -261,9 +270,19 @@ clauses:
     note: 16/16 and 2/2; the form is in the tag as well as the category
 
   - category: hobby-auxiliary
+    role: basing
     hintContainsAny:
-      tags: ['bases-basing', 'hobby-equipment', 'hobby-tools', 'Hobby Supplies']
-    note: 40 of 41 graded; the one miss is a single hobby-equipment row
+      tags: ['bases-basing']
+  - category: hobby-auxiliary
+    role: tool
+    hintContainsAny:
+      tags: ['hobby-tools']
+  - category: hobby-auxiliary
+    hintContainsAny:
+      tags: ['hobby-equipment', 'Hobby Supplies']
+    note: >-
+      40 of 41 graded across the four tags; the one miss is a single hobby-equipment row. Split by
+      role on 2026-09-02: basing and tools name themselves, the other two tags are departments
 
   # MODELS. Two families, both of which describe the MODEL rather than the box: what kind of troop
   # it is, and what role it plays in a list. Neither can be anything but a miniature.

@@ -81,28 +81,63 @@ clauses:
   - category: paint
     hintContainsAny: {categories: [game-color]}
     note: Vallejo's Game Color range
+  # THE COLOUR FORGE TOOLS BEFORE THE COLOUR FORGE RANGE: `tools-colour-forge` rows also carry
+  # `colour-forge`, and the range clause took four mixing balls, pot holders and foamboard sheets as
+  # paint before the role made it visible (second reader, 2026-09-03). Narrow first.
+  - category: hobby-auxiliary
+    role: tool
+    hintContainsAny: {categories: [tools-colour-forge]}
+    note: 4 rows -- mixing balls, a pot holder, foamboard, green stuff in a case
   - category: paint
     hintContainsAny: {categories: [colour-forge]}
     note: Mantic's own paint range
 
-  # A PAINT RANGE SLUG IS NOT A PAINT WHEN THE PRODUCT IS COLOURLESS. `medium` holds `Metal
-  # Medium`, `Thinner`, `Glaze Medium` and `Crackle Medium` -- all four, and categories.yaml is
-  # explicit that a medium is `hobby-auxiliary` however its maker files it. Ordered BEFORE the
-  # paint clauses would be wrong (they are narrower, not broader); it is here because a product
-  # carrying `medium` carries no other paint slug.
-  - category: hobby-auxiliary
-    hintContainsAny: {categories: [medium, varnish]}
-    note: 6 rows, all colourless -- the categories.yaml boundary, applied
+  # A MEDIUM IS PAINT WITH ROLE `medium` (categories.yaml, since 2026-09-02: the range is the
+  # test, not the colour). `medium` holds `Metal Medium`, `Thinner`, `Glaze Medium` and `Crackle
+  # Medium`; `varnish` holds two. Until that day one clause filed all six `hobby-auxiliary`.
+  - category: paint
+    role: medium
+    hintContainsAny: {categories: [medium]}
+    note: 4 rows, all colourless, all mediums or thinners
+  - category: paint
+    role: varnish
+    hintContainsAny: {categories: [varnish]}
+    note: 2 rows
+  - category: paint
+    role: primer
+    hintContainsAny: {categories: [spray-primer-uk-only, primer]}
+    note: >-
+      6 rows (spray-primer-uk-only 4, primer 2); no archive control, names read
 
-  # --- things used to build and finish ----------------------------------------------------------
+  # --- things used to build and finish -- one clause per role ------------------------------------
   - category: hobby-auxiliary
-    hintContainsAny:
-      categories: [brushes, tools, magnets, snow-sand, static-grass, cork-magnetic-sheets, glue,
-                   tools-colour-forge, bases]
-    note: brushes, wet palettes, cutting mats, green stuff, bare bases
+    role: applicator
+    hintContainsAny: {categories: [brushes]}
+    note: brushes and brush sets
   - category: hobby-auxiliary
+    role: tool
+    hintContainsAny: {categories: [tools]}
+    note: wet palettes, cutting mats, clippers, files
+  - category: hobby-auxiliary
+    role: build
+    hintContainsAny: {categories: [magnets, cork-magnetic-sheets, glue]}
+    note: green stuff, glue, magnets and the sheets they stick to
+  - category: hobby-auxiliary
+    role: basing
+    hintContainsAny: {categories: [snow-sand, static-grass, bases]}
+    note: loose basing materials and bare bases
+  # A TEXTURE PASTE IN A POT IS PAINT with role `texture`; the one cleaner on the shelf is named
+  # first, because a clause carries one role.
+  - category: paint
+    role: cleaner
+    nameMatches: '\b(RESTORER|CLEANER)\b'
+    note: >-
+      1 row, Brush Restorer
+  - category: paint
+    role: texture
     hintContainsAny: {categories: [effects-and-texture]}
-    note: 25 rows -- Still Water, Sandy Paste, Brush Restorer, Transparent Water
+    note: >-
+      24 rows -- Still Water, Sandy Paste, Transparent Water; no archive control, names read
 
   # --- things read ------------------------------------------------------------------------------
   - category: book

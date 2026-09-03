@@ -29,7 +29,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 SCRIPT = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
 
 CROSSED = "boxed set -- crosses to the product catalog"
-AUX = "auxiliary agent, not a colour -- claimed by the product catalog"
+AUX = "auxiliary agent the maker sells beside its colours -- a product with a role, claimed by the product catalog"
 
 
 def _load():
@@ -108,7 +108,8 @@ def test_the_receipt_names_the_kind_the_clause_declared_not_always_a_set(evidenc
     crossover.py::category_for): boxed sets and auxiliary agents. The receipt was the fixed word
     "boxed set" for both, and this file is the ONLY place the paint side says why AK712 Acrylic
     Thinner is not a paint. Measured 2026-08-11 over data/paints/harvest/: 562 candidate rows carry
-    a crossover reason and 16 of them -- all AK -- are `hobby-auxiliary`.
+    a crossover reason and 16 of them -- all AK -- are agents, `hobby-auxiliary` then and `paint`
+    with a role since the 2026-09-03 boundary flip.
 
     Both rows below are real AK titles, and they run against the REAL descriptor (SOURCES_DIR is
     not redirected), so this pins the actual clause order too: "ODOURLESS THINNER" reaches the
