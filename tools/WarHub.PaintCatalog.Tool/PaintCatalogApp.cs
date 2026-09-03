@@ -760,7 +760,7 @@ internal static class PaintCatalogApp
     private static List<PaintRecord> BackfillRoles(IEnumerable<PaintRecord> records, string brandDisplayName) =>
         records
             .Select(r => string.IsNullOrWhiteSpace(r.Role)
-                ? r with { Role = RoleClassifier.Classify(brandDisplayName, r.Details.Set, r.Name) }
+                ? r with { Role = RoleClassifier.Classify(brandDisplayName, r.Details.Set, r.Name, r.ProductCode) }
                 : r)
             .ToList();
 }

@@ -51,12 +51,19 @@ public class RoleClassifierTests
     [InlineData("Vallejo", "Diorama FX", "Alkaline White 0.5-1 mm", "basing")]
     [InlineData("Vallejo", "Diorama FX", "Vulcan Black 2-5 mm", "basing")]
     [InlineData("Vallejo", "Weathering FX", "Brown Thick Mud", "texture")]
+    [InlineData("Vallejo", "Weathering FX", "Brown Splash Mud", "texture")]
+    [InlineData("Vallejo", "Weathering FX", "Light Brown Mud", "texture")]   // 73.810, the chart's name for Light Brown Thick Mud
+    [InlineData("Vallejo", "Weathering FX", "Mud and Grass", "texture")]
     [InlineData("Vallejo", "Weathering FX", "Crushed Grass", "texture")]
+    [InlineData("Vallejo", "Weathering FX", "Moss and Lichen", "texture")]
     [InlineData("Vallejo", "Weathering FX", "Rust Texture", "texture")]
     [InlineData("Vallejo", "Weathering FX", "Snow", "texture")]
     [InlineData("Vallejo", "Weathering FX", "Wet Effects", "medium")]
-    [InlineData("Vallejo", "Weathering FX", "Brown Splash Mud", "colour")]
     [InlineData("Vallejo", "Weathering FX", "Engine Grime", "colour")]
+    [InlineData("Vallejo", "Weathering FX", "Oil Stains", "colour")]
+    [InlineData("Vallejo", "Weathering FX", "Rain Marks", "colour")]
+    [InlineData("Vallejo", "Weathering FX", "Brown Engine Soot", "colour")]
+    [InlineData("Vallejo", "Weathering FX", "Slimy Grime Dark", "colour")]
     [InlineData("Scale75", "Soil Works", "City Dust", "pigment")]
     [InlineData("Scale75", "Soil Works", "Dust In Summertime", "pigment")]
     [InlineData("Scale75", "Soil Works", "Mid Ground / Earth", "pigment")]
@@ -67,6 +74,38 @@ public class RoleClassifierTests
     public void Classify_RangeDecidesItsMembers(string brand, string set, string name, string expected)
     {
         Assert.Equal(expected, RoleClassifier.Classify(brand, set, name));
+    }
+
+    /// <summary>
+    /// Vallejo's primer block is the one rule that reads a product code: the chart lists the five
+    /// Mecha primers as bare colour names under Mecha Color, where `Grey` at 70.641 is a primer
+    /// and `Grey` at 69.037 a colour. 71.097 stays a colour -- Vallejo names it Medium Gunship
+    /// Gray; one retailer's "Medium Grey Primer" is a mislabel, not a fact about the pot.
+    /// </summary>
+    [Theory]
+    [InlineData("Mecha Color", "White", "70.640", "primer")]
+    [InlineData("Mecha Color", "Grey", "70.641", "primer")]
+    [InlineData("Mecha Color", "Black", "70.642", "primer")]
+    [InlineData("Mecha Color", "Ivory", "70.643", "primer")]
+    [InlineData("Mecha Color", "Sand", "70.644", "primer")]
+    [InlineData("Mecha Color", "Grey", "69.037", "colour")]
+    [InlineData("Surface Primer", "Black", "70.602", "primer")]
+    [InlineData("Surface Primer", "White", "74.600", "primer")]
+    [InlineData("Surface Primer", "Grey", "73.601", "primer")]
+    [InlineData("Model Air", "Medium Gunship Gray", "71.097", "colour")]
+    [InlineData("Model Color", "Black", "70.950", "colour")]
+    [InlineData("Panzer Aces", "Track Primer", "70.304", "colour")]
+    [InlineData("Mecha Color", "White", null, "colour")]   // no code, no block: the name alone says nothing
+    public void Classify_VallejoPrimerBlock_DecidesByCode(string set, string name, string? code, string expected)
+    {
+        Assert.Equal(expected, RoleClassifier.Classify("Vallejo", set, name, code));
+    }
+
+    [Fact]
+    public void Enrich_PassesTheProductCode()
+    {
+        Paint primer = MakePaint("Mecha Color", "White") with { ProductCode = "70.640" };
+        Assert.Equal("primer", RoleClassifier.Enrich(primer, "Vallejo").Role);
     }
 
     /// <summary>The utilities scattered through colour ranges are found by name.</summary>

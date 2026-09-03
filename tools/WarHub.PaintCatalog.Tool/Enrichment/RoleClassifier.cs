@@ -77,21 +77,26 @@ public static partial class RoleClassifier
 
     /// <summary>Returns a new Paint with <see cref="Paint.Role"/> populated. Never null.</summary>
     public static Paint Enrich(Paint paint, string brandDisplayName) =>
-        paint with { Role = Classify(brandDisplayName, paint.Set, paint.Name) };
+        paint with { Role = Classify(brandDisplayName, paint.Set, paint.Name, paint.ProductCode) };
 
     /// <summary>
     /// Classifies by brand-and-range first, then by name, then `colour`. Always returns a value
     /// from <see cref="Roles"/>. Also used to backfill archived records a source no longer
     /// asserts, which is why it takes the bare strings rather than a <see cref="Paint"/>.
+    ///
+    /// The product code is read by exactly one rule (Vallejo's primer block) and is optional
+    /// because most brands' codes say nothing about kind; see <see cref="ClassifyVallejo"/> for
+    /// why a name cannot do that job there.
     /// </summary>
-    public static string Classify(string brandDisplayName, string set, string name)
+    public static string Classify(string brandDisplayName, string set, string name, string? productCode = null)
     {
         string cleanSet = Whitespace().Replace(StripDiscontinued(set), " ").Trim();
         string cleanName = name.Trim();
-        return ClassifyByBrand(brandDisplayName, cleanSet, cleanName) ?? ClassifyByName(cleanName);
+        return ClassifyByBrand(brandDisplayName, cleanSet, cleanName, productCode?.Trim() ?? "")
+            ?? ClassifyByName(cleanName);
     }
 
-    private static string? ClassifyByBrand(string brandDisplayName, string set, string name) => brandDisplayName switch
+    private static string? ClassifyByBrand(string brandDisplayName, string set, string name, string productCode) => brandDisplayName switch
     {
         "AK Interactive" => ClassifyAkInteractive(set, name),
         "AK Real Color" => ClassifyAkRealColor(name),
@@ -106,7 +111,7 @@ public static partial class RoleClassifier
         "Mr Hobby" => set == "Primary Color Pigments" ? Colour : null,
         "Reaper" => set == "Master Series Paints Core Colors Primer" ? Primer : null,
         "Scale75" => ClassifyScale75(set, name),
-        "Vallejo" => ClassifyVallejo(set, name),
+        "Vallejo" => ClassifyVallejo(set, name, productCode),
         "Warcolours" => set == "Paints for undercoating" ? Primer : Colour,
         _ => null,
     };
@@ -202,21 +207,43 @@ public static partial class RoleClassifier
     // 26 primers under colour names (`Black`, `German Dark Yellow`). `Diorama FX` is textures
     // (muds, waters, pumices, `Snow`) around one medium (`Terrain Fixer`) and 20 jars of loose
     // ballast sold by grain size (`Alkaline White 0.5-1 mm`) -- basing material the chart lists,
-    // given the honest role. `Weathering FX` is effect liquids (splash muds, grime, stains) that
-    // are colours, six thick muds, `Crushed Grass`, `Mud and Grass`, `Moss and Lichen`, `Rust
-    // Texture` and `Snow` that are textures, and `Wet Effects`, a transparent gloss medium.
-    // `Auxiliaries` (53) falls through to the name rules, which place all of it. Panzer Aces
-    // keeps `Track Primer` a colour; Special FX and Wash FX are colours (`Rust`, `Frost`, `Desert
-    // Dust`).
-    private static string? ClassifyVallejo(string set, string name) => set switch
+    // given the honest role. `Weathering FX` is muds of every consistency (six `Thick Mud`s, six
+    // `Splash Mud`s, `Light Brown Mud`, `Mud and Grass`), `Crushed Grass`, `Moss and Lichen`,
+    // `Rust Texture` and `Snow` -- 17 textures -- around ten effect liquids that are colours
+    // (`Engine Grime`, `Oil Stains`, `Petrol Spills`, `Rain Marks`, the two `Slimy Grime`s,
+    // `Streaking Grime`, `Brown Engine Soot`, `Diesel Stains`, `Fuel Stains`) and `Wet Effects`,
+    // a transparent gloss medium. `Auxiliaries` (53) falls through to the name rules, which
+    // place all of it. Panzer Aces keeps `Track Primer` a colour; Special FX and Wash FX are
+    // colours (`Rust`, `Frost`, `Desert Dust`).
+    //
+    // THE CODE BLOCK COMES FIRST, because Vallejo files five primers where no name can find
+    // them. Its numbering is systematic: 70.6xx is the primer block -- 70.600-70.632 are the
+    // Surface Primers, 70.640-70.644 the five Mecha primers (white, grey, black, ivory, sand),
+    // with 73.6xx and 74.6xx the same primers in 200 ml and 60 ml -- while 69.0xx is Mecha
+    // Color and 71.xxx Model Air. The chart lists the Mecha primers under the Mecha Color range
+    // as bare `White`, `Grey`, `Black`, `Ivory`, `Sand`, and the SAME name in the SAME range is
+    // a colour one row over: `Grey|Mecha Color` is the primer at 70.641 and the colour at
+    // 69.037. Measured 2026-09-03 over the archive: 30 records carry a 70.6xx code, 25 of them
+    // already `primer` by the Surface Primer range and the other 5 exactly these; no record
+    // carries a 73.6xx or 74.6xx code yet. Model Air 71.097 is NOT one of them: Vallejo's own
+    // page and Rad Addel both call it `Medium Gunship Gray` (FS 36118), and only one retailer
+    // lists it as a "Medium Grey Primer" -- a store's mislabel, which the code block correctly
+    // leaves a colour.
+    private static string? ClassifyVallejo(string set, string name, string productCode)
     {
-        "Pigment FX" => Pigment,
-        "Surface Primer" => Primer,
-        "Diorama FX" => Ballast().IsMatch(name) ? Basing : MediumName().IsMatch(name) ? Medium : Texture,
-        "Weathering FX" => MediumName().IsMatch(name) ? Medium : TextureName().IsMatch(name) ? Texture : Colour,
-        "Panzer Aces" or "Game Color Special FX" or "Wash FX" => Colour,
-        _ => null,
-    };
+        if (VallejoPrimerCode().IsMatch(productCode))
+            return Primer;
+
+        return set switch
+        {
+            "Pigment FX" => Pigment,
+            "Surface Primer" => Primer,
+            "Diorama FX" => Ballast().IsMatch(name) ? Basing : MediumName().IsMatch(name) ? Medium : Texture,
+            "Weathering FX" => MediumName().IsMatch(name) ? Medium : WeatheringFxTexture().IsMatch(name) ? Texture : Colour,
+            "Panzer Aces" or "Game Color Special FX" or "Wash FX" => Colour,
+            _ => null,
+        };
+    }
 
     /// <summary>
     /// The name rules, in precedence order. Cleaner before varnish before medium because
@@ -342,4 +369,20 @@ public static partial class RoleClassifier
     /// <summary>Loose stones sold by grain size: `Alkaline White 0.5-1 mm`, `Vulcan Black 2-5 mm`.</summary>
     [GeneratedRegex(@"\d(\.\d+)?\s*-\s*\d(\.\d+)?\s*mm$", RegexOptions.IgnoreCase | RegexOptions.Compiled)]
     private static partial Regex Ballast();
+
+    /// <summary>
+    /// Vallejo's primer block: 70.6xx (17 ml Surface Primers and the five Mecha primers), 73.6xx
+    /// (200 ml) and 74.6xx (60 ml). See <see cref="ClassifyVallejo"/> for why a code, not a name.
+    /// </summary>
+    [GeneratedRegex(@"^7[034]\.6\d\d$", RegexOptions.Compiled)]
+    private static partial Regex VallejoPrimerCode();
+
+    /// <summary>
+    /// What has body in Vallejo's Weathering FX: every mud (`Thick`, `Splash`, or plain `Light
+    /// Brown Mud`), grass, moss, snow and `Rust Texture`. Scoped to that range on purpose --
+    /// `Wet Mud` and `Desert Dust` are colours elsewhere -- and measured 2026-09-03: 17 of the
+    /// range's 28 records, the other 11 being effect liquids and the `Wet Effects` medium.
+    /// </summary>
+    [GeneratedRegex(@"\bmud\b|\bsnow\b|\bgrass\b|\bmoss\b|\btexture\b", RegexOptions.IgnoreCase | RegexOptions.Compiled)]
+    private static partial Regex WeatheringFxTexture();
 }
