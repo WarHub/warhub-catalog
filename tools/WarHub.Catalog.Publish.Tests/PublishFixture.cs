@@ -67,6 +67,8 @@ public sealed class PublishFixture : IDisposable
                   - test-system
                 faction: general
                 category: paint
+                role: pigment
+                roleBasis: lexicon
                 status: current
                 availability: in_stock
                 firstSeen: '2026-07-07'

@@ -37,6 +37,11 @@ public sealed record CanonicalProduct
     public List<string> Settings { get; init; } = [];
     public string? Faction { get; init; }        // slug
     public string? Category { get; init; }
+    // WHAT A HOBBY SUPPLY IS FOR -- categories.yaml axis 3 (colour, primer, varnish, medium,
+    // cleaner, texture, pigment, applicator, tool, basing, build). Null for everything that is not
+    // a paint or a hobby auxiliary, and for every set. `roleBasis` is deliberately not read: like
+    // `categoryBasis` it is archive-side provenance and not part of the published shape.
+    public string? Role { get; init; }
     public string? Packaging { get; init; }
     public int? Quantity { get; init; }
     public int? VolumeMl { get; init; }

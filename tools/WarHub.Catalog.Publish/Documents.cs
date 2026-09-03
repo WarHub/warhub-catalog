@@ -57,6 +57,14 @@ internal sealed record ProductRecord
     // consumer cannot tell the catalog's knowledge from its default. See
     // models/catalog.py::categoryBasis.
     [JsonPropertyOrder(5)] public string? Category { get; init; }
+    // WHAT A HOBBY SUPPLY IS FOR, beside the category that says which shelf it is on: a pot is
+    // `paint` and its role says colour, primer, varnish, medium, cleaner, texture or pigment; a
+    // hobby auxiliary's says applicator, tool, basing or build (categories.yaml axis 3). Null --
+    // omitted -- for everything the axis does not apply to and for every set, whose members carry
+    // their own roles through the set-contents relation. Published from the day the axis exists
+    // (maintainer decision, 2026-09-02) rather than held back the way `packaging` still is: the
+    // vocabulary was designed closed before the first record carried a value.
+    [JsonPropertyOrder(5)] public string? Role { get; init; }
     [JsonPropertyOrder(6)] public required string Status { get; init; }
     [JsonPropertyOrder(7)] public required string Availability { get; init; }
     [JsonPropertyOrder(8)] public int Quantity { get; init; }

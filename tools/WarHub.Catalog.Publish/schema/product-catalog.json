@@ -62,6 +62,11 @@
         },
         "faction": { "type": "string" },
         "category": { "type": ["string", "null"] },
+        "role": {
+          "type": "string",
+          "enum": ["colour", "primer", "varnish", "medium", "cleaner", "texture", "pigment", "applicator", "tool", "basing", "build"],
+          "description": "What a hobby supply is FOR (data/catalog/taxonomy/categories.yaml, axis 3). Present only on `paint` and `hobby-auxiliary` records that are not sets; a set's members carry their own roles through set-contents.json."
+        },
         "status": { "type": "string" },
         "availability": { "type": "string" },
         "quantity": { "type": "integer", "minimum": 1 },

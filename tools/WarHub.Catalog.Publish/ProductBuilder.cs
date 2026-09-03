@@ -119,6 +119,7 @@ internal static class ProductBuilder
                     Settings = settingLabels.Count > 0 ? settingLabels : null,
                     Faction = factionLabel,
                     Category = p.Category,
+                    Role = p.Role,
                     Status = p.Status,
                     Availability = p.Availability ?? "unknown",
                     Quantity = p.Quantity ?? 1,
