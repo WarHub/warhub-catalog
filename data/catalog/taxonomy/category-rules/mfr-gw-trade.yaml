@@ -1,0 +1,100 @@
+source: mfr-gw-trade
+reason: >-
+  Games Workshop's trade sheets carry two taxonomies and this table reads both. `tradeCategory` is
+  the workbook's own range column (`Paint - WH Colour - Base`, `Spray - Colour`, `Brush - Dry`,
+  `Hobby - Build - Glue`; 228 distinct values over 3,016 of 7,676 rows on 2026-09-02, most of them
+  game-line ranges this table leaves to the manufacturer's code table), and `sheets` is every tab
+  a row was seen on, which matters for one workbook: the WH Colour rebrand file's `Range` column
+  holds merchandising codes ("BS:A") and its tabs -- `Paint`, `Brushes`, `Hobby` -- are the only
+  taxonomy it has.
+
+
+  UNTIL 2026-09-02 THIS TABLE WAS A STAMP INSIDE THE HARVESTER. gw_trade_sheets.py wrote
+  `category: paint` for a `Paint -`/`Spray` range or a `Paint` tab, which made 938 products
+  `stated` paint by their maker -- true, and uncorrectable: a source's own claim outranks every
+  table, so the judgement could not be measured or argued with where every other source's lives.
+  Moved here by maintainer decision, the same rows decide the same way with basis `mapped`, and a
+  new range GW adds shows up in the review file's `unmapped` worklist instead of silently landing
+  nowhere. Values are enumerated rather than prefix-matched for the same reason: a value nobody
+  has read is a value nobody has mapped.
+
+
+  THE ROLES (categories.yaml axis 3) follow the range where the range is one thing: the six
+  colour ranges are colour, `Spray - Colour` is primer (an undercoat, as the archive and GW's own
+  copy say), a brush range is an applicator. `Technical`
+  and `Spray - Technical` are left without one -- Lahmian Medium, 'Ardcoat, Munitorum Varnish and
+  the texture paints share them -- and the paint archive supplies it through the barcode.
+
+clauses:
+  # --- what a chart lists: paint, with the role the range states --------------------------------
+  # NARROW FIRST: the Air range lists its thinner beside its colours and the Technical range its
+  # two mediums, so they are taken out before a range says `colour`. QUALIFIED, not bare: a first
+  # draft matched `\bMEDIUM\b` and, this table being manufacturer-ranked, filed 14 `MEDIUM SHADE
+  # BRUSH`-style brushes as paint over every shelf below it (second reader, 2026-09-03).
+  - category: paint
+    role: medium
+    nameMatches: '\bTHINNER\b|\b(LAHMIAN|CONTRAST) MEDIUM\b'
+    note: 9 rows -- Air Caste Thinner, Lahmian Medium, Contrast Medium in their pack sizes; archive agrees
+  - category: paint
+    role: colour
+    hintContainsAny:
+      tradeCategory: [Paint - WH Colour - Base, Paint - WH Colour - Layer, Paint - WH Colour - Shade,
+                      Paint - WH Colour - Contrast, Paint - WH Colour - Dry, Paint - WH Colour - Air]
+    note: 301 rows; every name a colour pot, mostly in `X6` trade cases (packaging is the name's job)
+  # A CITADEL SPRAY IS AN UNDERCOAT. GW sells the range as "basecoat and undercoat in one can",
+  # the paint archive files every Citadel spray `primer` from the maker's chart, and a first run
+  # of this table with `colour` here produced 22 `role-disagreement` rows against it -- the
+  # archive's reading of the maker's intent is the one to keep (categories.yaml `primer`: purpose
+  # decides, not pigment).
+  - category: paint
+    role: primer
+    hintEquals: {tradeCategory: Spray - Colour}
+    note: 22 rows, the Citadel colour sprays; archive agrees 22/22
+  - category: paint
+    hintContainsAny:
+      tradeCategory: [Paint - WH Colour - Technical, Spray - Technical]
+    note: 23 rows -- mediums, varnishes and textures beside coloured effects; the archive says which
+  - category: paint
+    hintContainsAny:
+      sheets: [Paint, Paints, Spray, Sprays]
+    note: >-
+      the rebrand workbook's paint tab, 614 rows; the tab is the only taxonomy that file has, and
+      a row that also appears in another workbook keeps it through the `sheets` union
+
+  # --- what builds, holds, applies and bases -----------------------------------------------------
+  - category: hobby-auxiliary
+    role: applicator
+    hintContainsAny:
+      tradeCategory: [Brush - Dry, Brush - Base, Brush - Shade, Brush - Layer, Brush - Artificer,
+                      Brush - Scenery, Brush - Texture, Brush - Glaze]
+    note: 26 rows, every one a Citadel brush
+  - category: hobby-auxiliary
+    role: applicator
+    hintContainsAny: {sheets: [Brushes]}
+    note: the rebrand workbook's brush tab
+  - category: hobby-auxiliary
+    role: tool
+    hintEquals: {tradeCategory: Paint Other - Painting Accessory}
+    note: 5 rows -- water pots, painting handles, palettes; things that hold
+  - category: hobby-auxiliary
+    role: build
+    hintEquals: {tradeCategory: Hobby - Build - Glue}
+  - category: hobby-auxiliary
+    role: tool
+    hintEquals: {tradeCategory: Hobby - Build - Tool}
+  - category: hobby-auxiliary
+    role: basing
+    hintContainsAny:
+      tradeCategory: [Hobby - Build - Basing Material, Hobby - Build - Bases & Stems]
+  - category: hobby-auxiliary
+    hintEquals: {tradeCategory: Hobby - Play - Figure Case}
+    note: storage; the vocabulary has no role for it
+  # THE REBRAND WORKBOOK'S `Hobby` TAB IS NOT MAPPED. It holds glue, tools and cases beside
+  # WARHAMMER DICE, and a manufacturer's word outranks every retailer's: mapped to
+  # `hobby-auxiliary` it took the dice off the game-accessory shelf three stores had filed them
+  # on (measured 2026-09-02). A tab that mixes what builds with what is played with is a
+  # department, and a department is not a category.
+
+  # --- what is played with -----------------------------------------------------------------------
+  - category: game-accessory
+    hintEquals: {tradeCategory: Hobby - Play - Gaming Accessory}

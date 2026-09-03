@@ -55,6 +55,15 @@ products:
   # must. The archive is right here; decided by override, 2026-09-03.
   vallejo/71097:
     role: colour
+  # CITADEL SKULLS is a bag of 340 skulls "for basing and decorating terrain" (GW's own copy), and
+  # GW's two feeds disagree about it at the same rank: the webstore shelves it under Terrain and
+  # Scenery, the trade sheet ranges it `Hobby - Build - Basing Material`. A tie decides nothing
+  # and the code segment (12, plastic kits) then called it a miniature, which neither feed said.
+  # categories.yaml is explicit that loose basing material is `hobby-auxiliary` with role
+  # `basing`; decided so here, 2026-09-02.
+  games-workshop/99129999012:
+    category: hobby-auxiliary
+    role: basing
   # THE 2026-09-02 ADJUDICATION OF data/review/categorize.yaml, per product where no rule settles
   # the class. Evidence per row is in the PR that landed them; in one line each. REVISED
   # 2026-09-03 for the redrawn `paint` (what a chart lists): AK11500 the thinner and Vallejo's
