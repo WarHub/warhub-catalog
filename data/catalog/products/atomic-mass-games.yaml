@@ -1472,6 +1472,26 @@ products:
       - bdb-goupc:0841333128326
       - legacy-catalog:atomic-mass-games/marvel-crisis-protocol/general/elsa-bloodstone-man-thing
       - ret-gamenerdz:/marvel-crisis-protocol-elsa-bloodstone-man-thing
+  - id: atomic-mass-games/CP187
+    name: 'Marvel: Crisis Protocol - Cosmic Motherlode - Terrain Pack'
+    manufacturer: atomic-mass-games
+    productCode: CP187
+    sku: AMGCP187
+    ean: '0841333131036'
+    eanConfidence: provisional
+    gameSystems:
+      - marvel-crisis-protocol
+    gameSystemsBasis: code
+    settings:
+      - marvel
+    settingsBasis: derived
+    category: terrain
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-09-06'
+    url: https://www.gamenerdz.com/marvel-crisis-protocol-cosmic-motherlode-terrain-pack
+    evidence:
+      - ret-gamenerdz:/marvel-crisis-protocol-cosmic-motherlode-terrain-pack
   - id: atomic-mass-games/CP191
     name: Adam Warlock, Moondragon, & Quasar
     manufacturer: atomic-mass-games
@@ -2804,9 +2824,9 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 14.99
+    priceGbp: 20.99
     url: https://www.atomicmassgames.com/character/ms-marvel/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2023/01/MicrosoftTeams-image-2-e1723019132745.webp);
     description: Kamala Khan was once a normal Pakistani-American girl in New Jersey who had an obsession with the career of Carol Danvers, a.k.a. Captain Marvel. When she was a teenager, a cloud of Terrigen Mists fell on the Jersey Shore, and she was accidentally exposed. When she awoke from Terrigenesis, Kamala discovered she had morphogenetic power that allowed her to alter her appearance, regenerate from injuries, elongate her body, and alter her mass at will. Out of respect for her hero, Kamala took up the mantle of Ms. Marvel. She adds her strength to groups of heroes like the Avengers and Champions, where her idealist attitude and encyclopedic knowledge of heroes comes in handy… not to mention the smackdown of her embiggened fists.
@@ -3626,7 +3646,7 @@ products:
       - ret-radaddel:/star-wars-legion-abgestuerzter-x-fluegler
       - ret-radaddel:star-wars-legion-abgesturzter-x-flugler
   - id: atomic-mass-games/MCA01
-    name: 'Marvel: Crisis Protocol - Alliances - Night of the Goblin (PREORDER)'
+    name: 'Marvel: Crisis Protocol - Alliances - Night of the Goblin'
     manufacturer: atomic-mass-games
     productCode: MCA01
     sku: AMGMCA01EN
@@ -3638,12 +3658,13 @@ products:
     settings:
       - marvel
     settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
+    category: board-game
+    categoryBasis: mapped
     status: current
     firstSeen: '2026-08-22'
-    url: https://www.gamenerdz.com/marvel-crisis-protocol-alliances-night-of-the-goblin-preorder
+    url: https://www.gamenerdz.com/marvel-crisis-protocol-alliances-night-of-the-goblin
     evidence:
+      - ret-gamenerdz:/marvel-crisis-protocol-alliances-night-of-the-goblin
       - ret-gamenerdz:/marvel-crisis-protocol-alliances-night-of-the-goblin-preorder
   - id: atomic-mass-games/MCP03
     name: 'Marvel: Crisis Protocol - S.H.I.E.L.D. Affiliation Pack'
@@ -3665,6 +3686,26 @@ products:
     url: https://www.gamenerdz.com/marvel-crisis-protocol-s-h-i-e-l-d-affiliation-pack
     evidence:
       - ret-gamenerdz:/marvel-crisis-protocol-s-h-i-e-l-d-affiliation-pack
+  - id: atomic-mass-games/MCP07
+    name: 'Marvel: Crisis Protocol - Onslaught Character Pack (PREORDER)'
+    manufacturer: atomic-mass-games
+    productCode: MCP07
+    sku: AMGMCP07
+    ean: '0841333136529'
+    eanConfidence: provisional
+    gameSystems:
+      - marvel-crisis-protocol
+    gameSystemsBasis: code
+    settings:
+      - marvel
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-09-06'
+    url: https://www.gamenerdz.com/marvel-crisis-protocol-onslaught-character-pack-preorder
+    evidence:
+      - ret-gamenerdz:/marvel-crisis-protocol-onslaught-character-pack-preorder
   - id: atomic-mass-games/MCP09
     name: 'Marvel: Crisis Protocol - Bastion, Nimrod & Omega Sentinel Character Pack'
     manufacturer: atomic-mass-games
@@ -3748,6 +3789,26 @@ products:
     evidence:
       - ret-gamenerdz:/marvel-crisis-protocol-uncanny-telepaths-telekinetics-character-pack
       - ret-gamenerdz:/marvel-crisis-protocol-uncanny-telepaths-telekinetics-character-pack-preorder
+  - id: atomic-mass-games/MCP15
+    name: 'Marvel: Crisis Protocol - Members of the Brotherhood Affiliation Pack (PREORDER)'
+    manufacturer: atomic-mass-games
+    productCode: MCP15
+    sku: AMGMCP15
+    ean: '0841333137908'
+    eanConfidence: provisional
+    gameSystems:
+      - marvel-crisis-protocol
+    gameSystemsBasis: code
+    settings:
+      - marvel
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-09-06'
+    url: https://www.gamenerdz.com/add-free-shipping-marvel-crisis-protocol-members-of-the-brotherhood-affiliation-pack-preorder
+    evidence:
+      - ret-gamenerdz:/add-free-shipping-marvel-crisis-protocol-members-of-the-brotherhood-affiliation-pack-preorder
   - id: atomic-mass-games/MCP19
     name: 'Marvel: Crisis Protocol - Winter Guard Affiliation Pack'
     manufacturer: atomic-mass-games
@@ -6103,7 +6164,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 42.49
-    priceEur: 37.95
+    priceEur: 36.5
     url: https://www.atomicmassgames.com/character/this-is-the-way-squad-pack/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     evidence:
@@ -6193,7 +6254,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 9.74
-    priceEur: 10.6
+    priceEur: 11.45
     url: https://www.atomicmassgames.com/character/shatterpoint-dice-pack/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'This pack contains 14 dice for *Star Wars*: Shatterpoint to supplement those found in the *Star Wars*: Shatterpoint Core Set.'
@@ -6394,7 +6455,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 50.99
-    priceEur: 47.95
+    priceEur: 45.85
     url: https://www.atomicmassgames.com/character/ee-chee-wa-maa-squad-pack/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'An iconic Rebel and her Ewok companions join *Star Wars*™: Shatterpoint in this new Squad Pack! Featuring both Leia Organa and Chief Chirpa as Primary Units, the Ewok Paploo as a Secondary Unit, and two Ewok Hunters wielding bows as Supporting Units, this pack gives players a variety of new options for creating Galactic Civil War-era squads. In addition to beautifully sculpted miniatures of these characters, this pack also includes all the Stat, Order, and Stance Cards players need to field them in battle.'
@@ -6634,7 +6695,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceEur: 43.7
     url: https://www.atomicmassgames.com/character/requesting-your-surrender-squad-pack/
@@ -6937,7 +6998,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.74
-    priceEur: 10.95
+    priceEur: 11.7
     url: https://www.atomicmassgames.com/character/first-contact-mission-pack/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'First Contact in any mission is the most pivotal and having the right team for the job leads to success. The First Contact Mission Pack #4 brings a new level of play to *Star Wars*™: Shatterpoint!'
@@ -7027,7 +7088,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceEur: 36.5
     url: https://www.atomicmassgames.com/character/this-is-rogue-one-squad-pack/
@@ -7116,7 +7177,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.49
-    priceEur: 36.95
+    priceEur: 36.5
     url: https://www.atomicmassgames.com/character/terror-from-below-squad-pack/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: Fueled by his ambition and desire for power, Riff Tamson brings the planet of Mon Cala into the Clone Wars. Conspiring with Quarren chieftain, Nossor Ri, these devious warriors in service to the Separatist Alliance manipulate events and thrust their unwitting foes into the fray.
@@ -7187,7 +7248,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 35.95
+    priceEur: 36.95
     url: https://www.gamenerdz.com/star-wars-shatterpoint-secure-the-future-squad-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135444-star-wars-shatterpoint-secure-the-future-squad-pack-amge1005-1.webp?v=1781231788
     evidence:
@@ -7260,7 +7321,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 72.24
-    priceEur: 79.85
+    priceEur: 74.35
     url: https://www.atomicmassgames.com/character/rebel-alliance-starter-set/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'Join the struggle against the Galactic Empire with the Rebel Alliance Starter Set. Lead the charge with the legendary Commander Luke Skywalker, brave Rebel Troopers, and fierce Wookiee Warriors. Take the fight to the Empire to restore peace and justice across the galaxy. Including everything you need to begin playing Star WarsTM: Legion, this box focuses on the Rebel Alliance core gameplay, featuring fast and light skirmish troops who are highly adaptable to multiple combat situations with 36 highly detailed miniatures in hard plastic.'
@@ -7291,7 +7352,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 72.24
-    priceEur: 79.95
+    priceEur: 77.45
     url: https://www.atomicmassgames.com/character/galactic-empire-starter-set/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'Rule the galaxy and harness the power of the dark side. Lead Darth Vader against the Rebellion with this ideal entry into the exciting miniatures action of *Star Wars*^TM^: Legion. The Galactic Empire Starter Set contains a 600-point Recon-level army and all the dice, templates, tools, and tokens a player needs to begin playing their first games of Star Wars: Legion. Join the ranks of the Galactic Empire and crush all who resist with the Galactic Empire Starter Set and embark on your Star Wars: Legion adventure in a galaxy far, far away!'
@@ -7319,7 +7380,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 16.9
+    priceEur: 15.9
     url: https://www.gamenerdz.com/star-wars-legion-essentials-kit
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132369-star-wars-legion-essentials-kit-amgd1217-1.webp?v=1781220586
     evidence:
@@ -7501,7 +7562,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.49
-    priceEur: 27.9
+    priceEur: 23.1
     url: https://www.atomicmassgames.com/character/customizable-imperial-officer-agent/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: The Empire’s vast armies are commanded and led by its uncompromising officers. Ruthless and cunning, each officer’s ambition fuels their desire to prove themselves by rooting out and eliminating any threat to Imperial rule. Imperial Officers bolster their forces and ensure a proper chain of command to an array of units, while Imperial Agents take a more active role on the front lines.
@@ -7530,7 +7591,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 50.99
-    priceEur: 50.95
+    priceEur: 47.7
     url: https://www.gamenerdz.com/star-wars-legion-at-st-walker-5vvt
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/c2d14b9f-df05-6276-7af8-8719c2661bbf.jpg?v=1767111853
     evidence:
@@ -7557,7 +7618,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 25.49
-    priceEur: 26.85
+    priceEur: 23.5
     url: https://www.gamenerdz.com/star-wars-legion-sun-fac-poggle-the-lesser
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ101_1.webp?v=1779981626
     evidence:
@@ -7616,7 +7677,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceEur: 23.05
+    priceEur: 23.0
     url: https://www.atomicmassgames.com/character/commander-darth-vader-general-veers/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: Darth Vader is the living embodiment of the Empire’s might. The mere presence of the Dark Lord of the Sith inspires terror in his foes and unquestioning submission in his allies. General Veers brings ironclad Imperial discipline and a tactical cunning to the Empire’s forces.
@@ -7739,7 +7800,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.49
-    priceEur: 23.05
+    priceEur: 23.45
     url: https://www.atomicmassgames.com/character/customizable-rebel-officer-agent/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: The Empire’s reach has driven people across the galaxy to pick up arms and fight back against Imperial oppression. The commanders and operatives of the Rebel Alliance rely on the hope and determination of themselves and the brave troops underneath their command to accomplish their objectives. With a shared cause, hard-earned experience, and a good blaster at the ready, the leaders of the Rebel Alliance are ready for any mission.
@@ -7936,7 +7997,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 50.99
-    priceEur: 46.0
+    priceEur: 47.55
     url: https://www.atomicmassgames.com/character/outer-rim-battles-terrain-pack/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'Amidst the explosion of artillery and the sound of blaster fire, cover is a trooper’s most valuable ally. Give your *Star Wars™*: Legion troopers more of what they need with this terrain pack which features ruins, rubble, and walls inspired by the great battles fought in a galaxy far, far away.'
@@ -7967,7 +8028,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.74
-    priceEur: 27.65
+    priceEur: 26.85
     url: https://www.atomicmassgames.com/character/swq138-outer-rim-outlaws/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: Once the galaxy’s most formidable bounty hunters have received a contract, they will stop at nothing to accomplish their mission. Equipped with iconic beskar armor and a deadly arsenal of weapons, their unmatched prowess puts their enemies to the test.
@@ -8039,6 +8100,29 @@ products:
       - ret-goblingaming:heroes-of-the-rebellion-star-wars-legion
       - ret-radaddel:/star-wars-legion-heroes-of-the-rebellion
       - ret-radaddel:star-wars-legion-heroes-of-the-rebellion
+  - id: atomic-mass-games/SWQ141
+    name: Jedi General on BARC Speeder - Star wars Legion
+    manufacturer: atomic-mass-games
+    productCode: SWQ141
+    sku: AMGSWQ141
+    ean: '0841333139049'
+    eanConfidence: provisional
+    gameSystems:
+      - star-wars-legion
+    gameSystemsBasis: code
+    settings:
+      - star-wars
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 55.24
+    url: https://www.goblingaming.co.uk/products/jedi-general-on-barc-speeder-star-wars-legion
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ141-image0_2000_1066x_ef4e8c77-57de-4448-831b-a4c96df709e1.webp?v=1787758779
+    evidence:
+      - ret-goblingaming:jedi-general-on-barc-speeder-star-wars-legion
   - id: atomic-mass-games/SWQ142
     name: 'Star Wars: Legion - R2D2 & C-3PO'
     manufacturer: atomic-mass-games
@@ -8075,7 +8159,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 50.99
     priceEur: 46.95
@@ -8157,7 +8241,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 106.24
     url: https://www.gamenerdz.com/star-wars-legion-blizzard-force-army-box-special-edition
@@ -8240,7 +8324,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 25.49
-    priceEur: 23.45
+    priceEur: 21.95
     url: https://www.gamenerdz.com/star-wars-legion-battle-deck-card-pack-ii
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Atomic_Mass_Games_Star_Wars_Legion_Battle_Deck_Card_Pack_II.webp?v=1780484072
     evidence:
@@ -8278,7 +8362,7 @@ products:
     productCode: SWQ154
     sku: AMGSWQ154
     ean: '0841333138462'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystems:
       - star-wars-legion
     gameSystemsBasis: code
@@ -8286,12 +8370,16 @@ products:
       - star-wars
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-25'
+    priceGbp: 42.49
     url: https://www.gamenerdz.com/add-free-shipping-star-wars-legion-b2-super-rocket-battle-droids-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ154-image0_2000_1066x_7d43b1f0-d2c4-4fcd-9764-7c1496b064b9.webp?v=1787757212
     evidence:
       - ret-gamenerdz:/add-free-shipping-star-wars-legion-b2-super-rocket-battle-droids-preorder
+      - ret-goblingaming:b2-super-battle-droid-rocket-troopers-star-wars-legion
   - id: atomic-mass-games/SWQ155
     name: Rebel Alliance Command Card Pack
     manufacturer: atomic-mass-games
@@ -8485,7 +8573,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 33.99
-    priceEur: 32.95
+    priceEur: 31.8
     url: https://www.gamenerdz.com/star-wars-legion-t-47-airspeeder
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ17_1.webp?v=1767112205
     evidence:
@@ -8541,7 +8629,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 72.24
-    priceEur: 72.95
+    priceEur: 79.95
     url: https://www.atomicmassgames.com/character/galactic-republic-starter-set/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: The Galactic Republic maintains order across a vast collection of star systems ranging from the Core Worlds to the Outer Rim Territories. These systems enjoyed many millennia of peace and prosperity while under the governance of the Galactic Senate. However, a schism between the systems grew which led to the creation of the Separatist Alliance. Now, the Galactic Republic must deploy its clone army in order to quell the Separatist uprising and return order to the Republic.
@@ -8570,7 +8658,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 33.99
-    priceEur: 27.45
+    priceEur: 26.0
     url: https://www.gamenerdz.com/star-wars-legion-imperial-specialists
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Atomic_Mass_Games_Star_Wars_Legion_Imperial_Specialists.webp?v=1780486661
     evidence:
@@ -9194,7 +9282,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.24
-    priceEur: 39.0
+    priceEur: 38.35
     url: https://www.atomicmassgames.com/character/b1-battle-droid-unit/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: What B1-series Battle Droids lack in durability and combat prowess they make up for in ease of production. The sheer number of droids the Separatist Alliance can produce has allowed them to strike quickly and decisively across the galaxy with overwhelming force.
@@ -9293,7 +9381,7 @@ products:
     productCode: SWQ34
     sku: AMGSWQ34
     ean: '0841333135263'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystems:
       - star-wars-legion
     gameSystemsBasis: code
@@ -9301,12 +9389,16 @@ products:
       - star-wars
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-25'
+    priceGbp: 25.49
     url: https://www.gamenerdz.com/star-wars-legion-fifth-brother-seventh-sister-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ34-image0_2000_1500x_376d0cd0-d842-47d8-b72f-f3d1c7e7211b.webp?v=1787757397
     evidence:
       - ret-gamenerdz:/star-wars-legion-fifth-brother-seventh-sister-preorder
+      - ret-goblingaming:fifth-brother-seventh-sister-star-wars-legion
   - id: atomic-mass-games/SWQ35
     name: B2 Battle Droids
     manufacturer: atomic-mass-games
@@ -9328,7 +9420,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.99
-    priceEur: 31.75
+    priceEur: 31.55
     url: https://www.atomicmassgames.com/character/b2-battle-droids/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'The B2 Super Battle Droids are the powerful shock troops of the Separatist army. Making their debut in *Star Wars*™: Episode II – Attack of the Clones, these iconic battle droids bring a formidable force to the tabletop in Star Wars™: Legion.'
@@ -9357,7 +9449,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 29.74
-    priceEur: 27.45
+    priceEur: 27.4
     url: https://www.gamenerdz.com/star-wars-legion-droidekas
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Atomic_Mass_Games_Star_Wars_Legion_Droidekas.webp?v=1780486804
     evidence:
@@ -9411,7 +9503,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 29.74
-    priceEur: 32.45
+    priceEur: 26.75
     url: https://www.gamenerdz.com/star-wars-legion-super-tactical-droid-commanders
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ38_1.webp?v=1767112785
     evidence:
@@ -9641,7 +9733,7 @@ products:
     productCode: SWQ49
     sku: AMGSWQ49
     ean: '0841333138479'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystems:
       - star-wars-legion
     gameSystemsBasis: code
@@ -9649,12 +9741,16 @@ products:
       - star-wars
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-25'
+    priceGbp: 46.74
     url: https://www.gamenerdz.com/add-free-shipping-star-wars-legion-leaders-of-the-separatist-alliance-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ49-image0_2000_2000x_c9e12625-d46e-414b-8976-793395a37049.webp?v=1787756941
     evidence:
       - ret-gamenerdz:/add-free-shipping-star-wars-legion-leaders-of-the-separatist-alliance-preorder
+      - ret-goblingaming:leaders-of-the-separatist-alliance-star-wars-legion
   - id: atomic-mass-games/SWQ50
     name: 'Star Wars: Legion - Rogues & Rebels'
     manufacturer: atomic-mass-games
@@ -9702,7 +9798,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 42.49
-    priceEur: 46.45
+    priceEur: 38.45
     url: https://www.gamenerdz.com/star-wars-legion-bx-series-droid-commandos
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ52_1.webp?v=1780485788
     evidence:
@@ -9729,7 +9825,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 33.99
-    priceEur: 32.95
+    priceEur: 31.8
     url: https://www.gamenerdz.com/star-wars-legion-imperial-special-forces
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ53_1.webp?v=1779981420
     evidence:
@@ -9764,6 +9860,29 @@ products:
       - ret-goblingaming:clan-wren-mandalorians-star-wars-legion
       - ret-radaddel:/star-wars-legion-clan-wren-mandalorians
       - ret-radaddel:star-wars-legion-clan-wren-mandalorians
+  - id: atomic-mass-games/SWQ57
+    name: Scoundrel Han & Chewie - Star Wars Legion
+    manufacturer: atomic-mass-games
+    productCode: SWQ57
+    sku: AMGSWQ57
+    ean: '0841333139056'
+    eanConfidence: provisional
+    gameSystems:
+      - star-wars-legion
+    gameSystemsBasis: code
+    settings:
+      - star-wars
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 29.74
+    url: https://www.goblingaming.co.uk/products/scoundrel-han-chewie-star-wars-legion
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ57-image0_2000_1066x_d8dd965d-f204-478c-8230-4513a5e14953.webp?v=1787757495
+    evidence:
+      - ret-goblingaming:scoundrel-han-chewie-star-wars-legion
   - id: atomic-mass-games/SWQ58
     name: 'Star Wars: Legion - IG-100 Magnaguards'
     manufacturer: atomic-mass-games
@@ -9834,7 +9953,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 25.49
-    priceEur: 23.35
+    priceEur: 23.45
     url: https://www.gamenerdz.com/star-wars-legion-dsd1-dwarf-spider-droid
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/Atomic_Mass_Games_Star_Wars_Legion_DSD1_Dwarf_Spider_Droid.webp?v=1780485694
     evidence:
@@ -9875,7 +9994,7 @@ products:
     productCode: SWQ66
     sku: AMGSWQ66
     ean: '0841333135171'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystems:
       - star-wars-legion
     gameSystemsBasis: code
@@ -9883,12 +10002,16 @@ products:
       - star-wars
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-25'
+    priceGbp: 29.74
     url: https://www.gamenerdz.com/star-wars-legion-stap-riders-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ66-image0_2000_1066x_1aa948d7-8e99-47cc-8522-914a8bf7c15d.webp?v=1787757592
     evidence:
       - ret-gamenerdz:/star-wars-legion-stap-riders-preorder
+      - ret-goblingaming:stap-riders-star-wars-legion
   - id: atomic-mass-games/SWQ69
     name: 'Star Wars: Legion - Mandalorian Super Commandos'
     manufacturer: atomic-mass-games
@@ -9916,6 +10039,31 @@ products:
       - ret-goblingaming:mandalorian-super-commandos-star-wars-legion
       - ret-radaddel:/star-wars-legion-mandalorian-super-commandos
       - ret-radaddel:star-wars-legion-mandalorian-super-commandos
+  - id: atomic-mass-games/SWQ70
+    name: |-
+      Pyke Syndicate Foot Soldiers
+       - Star wars Legion
+    manufacturer: atomic-mass-games
+    productCode: SWQ70
+    sku: AMGSWQ70
+    ean: '0841333135218'
+    eanConfidence: provisional
+    gameSystems:
+      - star-wars-legion
+    gameSystemsBasis: code
+    settings:
+      - star-wars
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 33.99
+    url: https://www.goblingaming.co.uk/products/pyke-syndicate-foot-soldiers-star-wars-legion
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ70-image0_2000_1066x_b7f1e033-3b3a-4373-864e-bd963c2fa351.webp?v=1787757678
+    evidence:
+      - ret-goblingaming:pyke-syndicate-foot-soldiers-star-wars-legion
   - id: atomic-mass-games/SWQ72
     name: Clone Commander Cody
     manufacturer: atomic-mass-games
@@ -9937,7 +10085,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.74
-    priceEur: 28.45
+    priceEur: 28.05
     url: https://www.atomicmassgames.com/character/clone-commander-cody/
     imageUrl: https://cdn.svc.asmodee.net/production-amgcom/uploads/image-converter/2022/06/SW_StarField.webp);
     description: 'Commander Cody joins the fight! SWQ72 brings Obi-Wan Kenobi’s trusted commander to the tabletop in *Star Wars*™: Legion. Fighting all through the Clone Wars, Commander Cody and his clones proved themselves time and time again, becoming some of the finest troops for the Galactic Republic.'
@@ -10161,12 +10309,12 @@ products:
       - ret-goblingaming:a-a5-speed-truck-star-wars-legion
       - ret-radaddel:/star-wars-legion-a-a5-speeder-truck
       - ret-radaddel:star-wars-legion-a-a5-speeder-truck
-  - id: atomic-mass-games/SWQ97
-    name: 'Star Wars: Legion - Infantry Support Platform (PREORDER)'
+  - id: atomic-mass-games/SWQ96
+    name: NR-N99 Persuader Class Tank Droid - Star Wars Legion
     manufacturer: atomic-mass-games
-    productCode: SWQ97
-    sku: AMGSWQ97
-    ean: '0841333135157'
+    productCode: SWQ96
+    sku: AMGSWQ96
+    ean: '0841333135133'
     eanConfidence: provisional
     gameSystems:
       - star-wars-legion
@@ -10175,12 +10323,42 @@ products:
       - star-wars
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
-    firstSeen: '2026-08-25'
-    url: https://www.gamenerdz.com/star-wars-legion-infantry-support-platform-preorder
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 59.49
+    url: https://www.goblingaming.co.uk/products/persuader-class-tank-droid-star-wars-legion
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ96_2000_Image0_1500x_0823b798-4a8f-41c3-aeaa-ab1b3cbe92e1.webp?v=1787756009
     evidence:
+      - ret-goblingaming:persuader-class-tank-droid-star-wars-legion
+  - id: atomic-mass-games/SWQ97
+    name: 'Star Wars: Legion - Infantry Support Platform'
+    manufacturer: atomic-mass-games
+    productCode: SWQ97
+    sku: AMGSWQ97
+    ean: '0841333135157'
+    eanConfidence: confirmed
+    gameSystems:
+      - star-wars-legion
+    gameSystemsBasis: mapped
+    settings:
+      - star-wars
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-08-21'
+    priceGbp: 38.24
+    priceEur: 36.45
+    url: https://www.gamenerdz.com/star-wars-legion-infantry-support-platform-phob
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/SWQ97-image0_2000_1066x_ddb44386-5916-4a4f-a7f4-b16e583dcab0.webp?v=1787757317
+    evidence:
+      - ret-gamenerdz:/star-wars-legion-infantry-support-platform-phob
       - ret-gamenerdz:/star-wars-legion-infantry-support-platform-preorder
+      - ret-goblingaming:infantry-support-platform-star-wars-legion
+      - ret-radaddel:star-wars-legion-infantry-support-platform
   - id: atomic-mass-games/SWQ98
     name: 'Star Wars: Legion - Imperial Probe Droids'
     manufacturer: atomic-mass-games
@@ -11352,7 +11530,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 42.45
+    priceEur: 42.1
     url: https://www.radaddel.de/star-wars-legion-arc-troopers
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132824-star-wars-legion-arc-troopers-amgd1242-1.webp?v=1781221640
     evidence:
@@ -11392,7 +11570,7 @@ products:
     category: game-accessory
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceEur: 18.95
     url: https://www.radaddel.de/star-wars-legion-aufwertungen-kartenset-ii
@@ -11451,9 +11629,9 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceEur: 96.45
+    priceEur: 95.85
     url: https://www.radaddel.de/star-wars-legion-blizzard-force-army-box
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135195-star-wars-legion-blizzard-force-army-box-amgd1268-1.webp?v=1781231039
     evidence:
@@ -11513,7 +11691,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceEur: 23.45
+    priceEur: 23.1
     url: https://www.radaddel.de/star-wars-legion-customizable-jedi-general-knight
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132825-star-wars-legion-customizable-jedi-general-knight-amgd1235-1.webp?v=1781221644
     evidence:
@@ -11554,7 +11732,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 12.85
+    priceEur: 12.95
     url: https://www.radaddel.de/star-wars-legion-defense-dice-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/130653-star-wars-legion-defense-dice-pack-amge1201-1.webp?v=1781216732
     evidence:
@@ -11654,7 +11832,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 12.5
+    priceEur: 12.65
     url: https://www.radaddel.de/star-wars-legion-galaktische-republik-kommandokarten-set
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132377-star-wars-legion-galaktische-republik-kommandokarten-set-amgd1227-1.webp?v=1781220611
     evidence:
@@ -11694,7 +11872,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceEur: 15.8
+    priceEur: 15.7
     url: https://www.radaddel.de/star-wars-legion-galaktisches-imperium-kommandokarten-set
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132376-star-wars-legion-galaktisches-imperium-kommandokarten-set-amgd1226-1.webp?v=1781220607
     evidence:
@@ -11794,7 +11972,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceEur: 46.95
+    priceEur: 38.45
     url: https://www.radaddel.de/star-wars-legion-hondo-ohnaka-and-weequay-pirates
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135198-star-wars-legion-hondo-ohnaka-and-weequay-pirates-amgd1273-1.webp?v=1781231018
     evidence:
@@ -11830,31 +12008,12 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 27.4
+    priceEur: 27.15
     url: https://www.radaddel.de/star-wars-legion-imperial-probe-droid
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135194-star-wars-legion-imperial-probe-droid-amgd1272-1.webp?v=1781231049
     evidence:
       - ret-radaddel:/star-wars-legion-imperial-probe-droid
       - ret-radaddel:star-wars-legion-imperial-probe-droid
-  - id: atomic-mass-games/star-wars-legion-infantry-support-platform
-    name: 'Star Wars: Legion - Infantry Support Platform'
-    manufacturer: atomic-mass-games
-    sku: '136642'
-    gameSystems:
-      - star-wars-legion
-    gameSystemsBasis: mapped
-    settings:
-      - star-wars
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 36.45
-    url: https://radaddel.de/products/star-wars-legion-infantry-support-platform
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/star-wars-legion-infantry-support-platform-atomic-mass-games-radaddel.webp?v=1786756159
-    evidence:
-      - ret-radaddel:star-wars-legion-infantry-support-platform
   - id: atomic-mass-games/star-wars-legion-leaders-of-the-separatist-alliance
     name: 'Star Wars: Legion - Leaders of the Separatist Alliance'
     manufacturer: atomic-mass-games
@@ -11948,7 +12107,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceEur: 34.95
+    priceEur: 34.45
     url: https://www.radaddel.de/star-wars-legion-mandalorian-leaders
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135461-star-wars-legion-mandalorian-leaders-amgd1288-1.webp?v=1781231879
     evidence:
@@ -11988,7 +12147,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 15.7
+    priceEur: 15.8
     url: https://www.radaddel.de/star-wars-legion-rebellen-allianz-kommandokarten-set
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132375-star-wars-legion-rebellen-allianz-kommandokarten-set-amgd1225-1.webp?v=1781220603
     evidence:
@@ -12008,7 +12167,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 20.7
+    priceEur: 20.95
     url: https://www.radaddel.de/star-wars-legion-rebellenallianz-einheitenkarten-set
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132371-star-wars-legion-rebellenallianz-einheitenkarten-set-amgd1219-1.webp?v=1781220593
     evidence:
@@ -12048,7 +12207,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 12.5
+    priceEur: 12.65
     url: https://www.radaddel.de/star-wars-legion-separatisten-allianz-kommandokarten-set
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132378-star-wars-legion-separatisten-allianz-kommandokarten-set-amgd1228-1.webp?v=1781220615
     evidence:
@@ -12069,7 +12228,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 15.8
+    priceEur: 16.85
     url: https://www.radaddel.de/star-wars-legion-soeldner-kartenset
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132370-star-wars-legion-soldner-kartenset-amgd1218-1.webp?v=1781220589
     evidence:
@@ -12230,7 +12389,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 119.85
+    priceEur: 119.65
     url: https://www.radaddel.de/star-wars-shatterpoint-grundspiel
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125084-star-wars-shatterpoint-grundspiel-amgd1001-1.webp?v=1781205060
     evidence:
@@ -12351,7 +12510,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceEur: 12.95
+    priceEur: 12.3
     url: https://www.radaddel.de/star-wars-shatterpoint-strategic-positions-mission-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/134129-star-wars-shatterpoint-strategic-positions-mission-pack-amge1004-1.webp?v=1781230086
     evidence:
@@ -12391,7 +12550,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceEur: 35.9
+    priceEur: 35.65
     url: https://www.radaddel.de/star-wars-shatterpoint-twice-the-pride-squad-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/125080-star-wars-shatterpoint-twice-the-pride-squad-pack-amgd1003-1.webp?v=1781205047
     evidence:

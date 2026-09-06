@@ -1,44 +1,62 @@
 summary:
-  products: 27262
-  undecided: 1328
+  products: 28360
+  undecided: 1779
   byBasis:
-    code: 7088
-    lexicon: 390
-    mapped: 17386
+    code: 7252
+    lexicon: 413
+    mapped: 17846
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1328
-  decidedThisRun: 0
+    unknown: 1779
+  decidedThisRun: 25526
   gameSystemsByBasis:
-    classified: 1113
-    code: 4187
-    mapped: 2568
-    not-applicable: 7862
+    classified: 1111
+    code: 4371
+    mapped: 2589
+    not-applicable: 8195
     override: 101
-    setting: 960
-    stated: 9131
-    unknown: 1340
+    setting: 1008
+    stated: 9149
+    unknown: 1836
   settingsByBasis:
-    code: 849
-    derived: 17096
+    code: 897
+    derived: 17317
     mapped: 11
-    not-applicable: 7933
+    not-applicable: 8266
     override: 3
-    unknown: 1370
+    unknown: 1866
   rolesByBasis:
-    code: 72
-    lexicon: 183
-    mapped: 1079
-    none: 20346
-    override: 2
-    paint-archive: 1958
+    code: 75
+    lexicon: 172
+    mapped: 1080
+    none: 21109
+    override: 1
+    paint-archive: 1957
     stated: 16
-    unknown: 3606
+    unknown: 3950
 conflicts:
+  - entity: army-painter/awakened-ancient-alloy-combat-se7ens
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set -- a tie, left to the code and name rungs'
+  - entity: army-painter/black-relic-armour-combat-se7ens
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set -- a tie, left to the code and name rungs'
+  - entity: army-painter/field-gear-green-combat-se7ens
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set -- a tie, left to the code and name rungs'
+  - entity: army-painter/purple-xenos-flesh-combat-se7ens
+    type: category-disagreement
+    detail: 'retailer: ret-goblingaming=paint; ret-radaddel=paint-set -- a tie, left to the code and name rungs'
+  - entity: games-workshop/60010399003
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
   - entity: games-workshop/99700199045
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain -- a tie, left to the code and name rungs'
+  - entity: mantic-games/KSWO105
+    type: category-disagreement
+    detail: 'manufacturer: mfr-manticgames=board-game; mfr-manticgames=game-accessory -- a tie, left to the code and name rungs'
   - entity: vallejo/26201
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
@@ -91,7 +109,6 @@ deadClauses:
   - 'mfr-warmachine vendor=Epic Encounters: Local Legends'
   - mfr-warmachine vendor=Godtear
   - mfr-warmachine vendor=Guild Ball
-  - ret-gamenerdz breadcrumbs~Boxed Games
   - ret-goblingaming productType=Dice Accessories
   - ret-goblingaming productType=Model Bases
   - ret-radaddel tags~HALO FLASHPOINT
@@ -108,13 +125,13 @@ unmapped:
   mfr-manticgames:
     - value: categories=kings-of-war
       wouldDecide: 36
-    - value: categories=deals-and-offers
-      wouldDecide: 19
     - value: categories=deadzone
       wouldDecide: 16
     - value: categories=walking-dead-collections
       wouldDecide: 15
     - value: categories=firefight-asterians
+      wouldDecide: 15
+    - value: categories=deals-and-offers
       wouldDecide: 15
     - value: categories=accessories-kings-of-war
       wouldDecide: 13
@@ -126,8 +143,6 @@ unmapped:
       wouldDecide: 10
     - value: categories=ogre-miniatures
       wouldDecide: 10
-    - value: categories=halo-flashpoint-latest-releases
-      wouldDecide: 10
     - value: categories=xirkaali
       wouldDecide: 9
     - value: categories=deadonze-matsudan
@@ -136,8 +151,6 @@ unmapped:
       wouldDecide: 8
     - value: categories=vallejo
       wouldDecide: 8
-    - value: categories=halo-flashpoint-banished
-      wouldDecide: 7
     - value: categories=northern-alliance-kings-of-war
       wouldDecide: 7
     - value: categories=firefight-gcps
@@ -153,8 +166,6 @@ unmapped:
     - value: categories=plague
       wouldDecide: 7
     - value: categories=firefight-marauders
-      wouldDecide: 7
-    - value: categories=halo-flashpoint-getting-started
       wouldDecide: 7
     - value: categories=dungeon-saga
       wouldDecide: 6
@@ -186,6 +197,12 @@ unmapped:
       wouldDecide: 4
     - value: categories=mazon-labs
       wouldDecide: 4
+    - value: categories=mazon-labs-firefight
+      wouldDecide: 4
+    - value: categories=enforcers
+      wouldDecide: 4
+    - value: categories=getting-started-dreadball
+      wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
       wouldDecide: 27
@@ -195,10 +212,6 @@ unmapped:
       wouldDecide: 19
     - value: categories=limited-editions
       wouldDecide: 10
-    - value: categories=new-releases
-      wouldDecide: 5
-    - value: categories=new-upcoming
-      wouldDecide: 5
     - value: categories=start-here
       wouldDecide: 4
     - value: categories=2000pt-armies
@@ -212,6 +225,10 @@ unmapped:
     - value: categories=dweghom
       wouldDecide: 1
     - value: categories=first-blood
+      wouldDecide: 1
+    - value: categories=new-releases
+      wouldDecide: 1
+    - value: categories=new-upcoming
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
@@ -246,7 +263,7 @@ unmapped:
     - value: vendor=Warlord Games
       wouldDecide: 125
     - value: tags=under-10
-      wouldDecide: 103
+      wouldDecide: 104
     - value: tags=over-10
       wouldDecide: 92
     - value: tags=mdf
@@ -256,11 +273,13 @@ unmapped:
     - value: tags=deal
       wouldDecide: 60
     - value: tags=bolt-action
-      wouldDecide: 57
+      wouldDecide: 58
     - value: productType=Bolt Action
       wouldDecide: 56
     - value: tags=gaming-markers
       wouldDecide: 54
+    - value: tags=sale-gamingaids-4for3
+      wouldDecide: 52
     - value: tags=loose-item
       wouldDecide: 49
     - value: tags=warlord-games-skytrex
@@ -272,7 +291,7 @@ unmapped:
     - value: tags=bolt-action-armoury
       wouldDecide: 36
     - value: tags=terrain
-      wouldDecide: 32
+      wouldDecide: 33
     - value: tags=EPIC
       wouldDecide: 32
     - value: tags=Epic-Battles
@@ -317,8 +336,6 @@ unmapped:
       wouldDecide: 14
     - value: tags=extras
       wouldDecide: 13
-    - value: productType=Epic Pike & Shotte
-      wouldDecide: 12
   mfr-warmachine:
     - value: productType=Wargame
       wouldDecide: 1
@@ -337,22 +354,24 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 81
+      wouldDecide: 100
     - value: breadcrumbs=Miniatures
-      wouldDecide: 77
+      wouldDecide: 95
     - value: breadcrumbs=Infinity
-      wouldDecide: 31
+      wouldDecide: 29
+    - value: breadcrumbs=Games Workshop
+      wouldDecide: 22
     - value: breadcrumbs=Malifaux
-      wouldDecide: 14
+      wouldDecide: 19
+    - value: breadcrumbs=Warhammer 40K
+      wouldDecide: 11
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
-    - value: breadcrumbs=Games Workshop
-      wouldDecide: 7
+    - value: breadcrumbs=Warhammer Age of Sigmar
+      wouldDecide: 10
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 6
     - value: breadcrumbs=Warcrow
-      wouldDecide: 6
-    - value: breadcrumbs=Warhammer 40K
       wouldDecide: 6
     - value: breadcrumbs=Kings of War
       wouldDecide: 6
@@ -363,8 +382,6 @@ unmapped:
     - value: breadcrumbs=Paint and Crafting
       wouldDecide: 4
     - value: breadcrumbs=Nomads
-      wouldDecide: 2
-    - value: breadcrumbs=Panoceania
       wouldDecide: 2
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 2
@@ -410,93 +427,104 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Endsong Bundle'
       wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Essentials - PanOceania - PanOceania Dronbot Remotes Pack'
-      wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13 - Special Tournament Pack'
       wouldDecide: 1
+    - value: 'breadcrumbs=Infinity ITS Book Season 9: Treason'
+      wouldDecide: 1
+  ret-goblingaming:
+    - value: productType=Paints
+      wouldDecide: 4
+    - value: tags=New Releases
+      wouldDecide: 4
+    - value: tags=Paint & Hobby
+      wouldDecide: 4
+    - value: tags=Paints
+      wouldDecide: 4
+    - value: vendor=The Army Painter
+      wouldDecide: 4
   ret-radaddel:
+    - value: tags=Gamers Grass
+      wouldDecide: 271
+    - value: vendor=Gamers Grass
+      wouldDecide: 271
     - value: tags=Warlord Games
-      wouldDecide: 63
+      wouldDecide: 69
     - value: vendor=Warlord Games
-      wouldDecide: 63
+      wouldDecide: 69
+    - value: tags=Playmats.eu
+      wouldDecide: 67
+    - value: vendor=Playmats.eu
+      wouldDecide: 67
     - value: tags=Games Workshop
-      wouldDecide: 52
+      wouldDecide: 54
     - value: vendor=Games Workshop
-      wouldDecide: 52
+      wouldDecide: 54
     - value: tags=Atomic Mass Games
-      wouldDecide: 50
+      wouldDecide: 49
     - value: vendor=Atomic Mass Games
-      wouldDecide: 50
+      wouldDecide: 49
+    - value: tags=Perry Miniatures
+      wouldDecide: 41
+    - value: vendor=Perry Miniatures
+      wouldDecide: 41
+    - value: tags=Perry Miniatures Figuren
+      wouldDecide: 38
+    - value: tags=2D Gelände
+      wouldDecide: 35
+    - value: tags=Playmats Gelände
+      wouldDecide: 35
+    - value: tags=PLAYMATS 2D GELÄNDE*
+      wouldDecide: 33
+    - value: tags=Spielplatten & Spielmatten
+      wouldDecide: 32
     - value: tags=Neuheiten Games Workshop
-      wouldDecide: 29
+      wouldDecide: 31
+    - value: tags=Micro Art Studio
+      wouldDecide: 26
+    - value: vendor=Micro Art Studio
+      wouldDecide: 26
+    - value: tags=18.-19.JAHRHUNDERT*
+      wouldDecide: 25
     - value: tags=AK-Interactive
       wouldDecide: 24
     - value: vendor=AK-Interactive
       wouldDecide: 24
+    - value: tags=Historische Gelände
+      wouldDecide: 24
     - value: tags=ABTEILUNG 502*
       wouldDecide: 23
-    - value: tags=Galaktische Republik SWL
-      wouldDecide: 18
+    - value: tags=FLOWERS AND SHRUBS*
+      wouldDecide: 21
+    - value: tags=Renedra
+      wouldDecide: 20
+    - value: vendor=Renedra
+      wouldDecide: 20
     - value: tags=The Army Painter
-      wouldDecide: 17
+      wouldDecide: 19
     - value: vendor=The Army Painter
+      wouldDecide: 19
+    - value: tags=Galaktische Republik SWL
+      wouldDecide: 17
+    - value: tags=Basing & Pigments
       wouldDecide: 17
     - value: tags=BA Würfel
       wouldDecide: 17
     - value: tags=WÜRFEL
       wouldDecide: 17
-    - value: tags=Warpaints Fanatic Effects
+    - value: tags=6mm Grass Tuft
+      wouldDecide: 16
+    - value: tags=HISTORISCHES GELÄNDE*
+      wouldDecide: 15
+    - value: tags=4-5mm Grass Tufts
       wouldDecide: 14
-    - value: tags=Star Wars Shatterpoint
-      wouldDecide: 12
-    - value: tags=Decals & Gelände
-      wouldDecide: 12
-    - value: tags=Grundspiel und Zubehör SWL
-      wouldDecide: 11
-    - value: tags=Separatisten SWL
-      wouldDecide: 10
-    - value: tags=Rebellenallianz SWL
-      wouldDecide: 10
-    - value: tags=40k Grundboxen und Regelbücher
-      wouldDecide: 9
-    - value: tags=Orks
-      wouldDecide: 8
-    - value: tags=40K Zubehör
-      wouldDecide: 7
-    - value: tags=Summer Sale
-      wouldDecide: 7
-    - value: tags=Mantic Games
-      wouldDecide: 7
-    - value: vendor=Mantic Games
-      wouldDecide: 7
-    - value: tags=Starter & Zubehör Konflikt 47
-      wouldDecide: 7
-    - value: tags=AoS Grundboxen und Regelbücher
-      wouldDecide: 6
-    - value: tags=Citadel Farbsets
-      wouldDecide: 5
-    - value: tags=ToW Bücher & Zubehör
-      wouldDecide: 5
-    - value: tags=Space Marines
-      wouldDecide: 5
-    - value: tags=DECALS & GELÄNDE*
-      wouldDecide: 5
-    - value: tags=Ogor Mawtribes
-      wouldDecide: 4
-    - value: tags=Boxen Pike & Shotte
-      wouldDecide: 4
-    - value: tags=Söldner SWL
-      wouldDecide: 3
-    - value: tags=Middle-Earth - Good
-      wouldDecide: 3
-    - value: tags=Necromunda Boxen und Bücher
-      wouldDecide: 3
-    - value: tags=KoW Regeln & Zubehör
-      wouldDecide: 3
-    - value: tags=BA Starter Bolt Action
-      wouldDecide: 3
+    - value: tags=6MM GRASS TUFTS*
+      wouldDecide: 14
+    - value: tags=URBAN BASES*
+      wouldDecide: 14
+    - value: tags=Urban Warfare Bases
+      wouldDecide: 14
   ret-tistaminis:
     - value: vendor=GW-OOP
       wouldDecide: 24
