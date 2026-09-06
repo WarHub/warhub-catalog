@@ -1,5 +1,62 @@
 manufacturer: perry-miniatures
 products:
+  - id: perry-miniatures/ACW01
+    name: American Civil War Infantry
+    manufacturer: perry-miniatures
+    productCode: ACW01
+    sku: ACW01
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-civil-war-infantry-36-plastic-figures-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/ACW-1-1.jpg?v=1654097979
+    evidence:
+      - ret-goblingaming:american-civil-war-infantry-36-plastic-figures-perry-miniatures-historical
+  - id: perry-miniatures/ACW02
+    name: American Civil War Cavalry
+    manufacturer: perry-miniatures
+    productCode: ACW02
+    sku: ACW02
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-civil-war-cavalry-12-plastic-figures-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/ACW-2-1.jpg?v=1654097652
+    evidence:
+      - ret-goblingaming:american-civil-war-cavalry-12-plastic-figures-perry-miniatures-historical
+  - id: perry-miniatures/ACW115
+    name: American Civil War Union Infantry 1861-65
+    manufacturer: perry-miniatures
+    productCode: ACW115
+    sku: ACW115
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-civil-war-union-infantry-1861-65-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/Union20box20cover20600-1.jpg?v=1654098119
+    evidence:
+      - ret-goblingaming:american-civil-war-union-infantry-1861-65-perry-miniatures-historical
   - id: perry-miniatures/ACW120
     name: American Civil War Union Infantry in sack coats skirmishing 1861-65
     manufacturer: perry-miniatures
@@ -28,6 +85,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/american/american-civil-war-union-infantry-in-sack-coats-skirmishing-1861-65
       - mfr-warlord-store:american-civil-war-union-infantry-in-sack-coats-skirmishing-1861-65
+      - ret-goblingaming:american-civil-war-union-infantry-in-sack-coats-skirmishing-1861-65-perry-miniatures-historical
   - id: perry-miniatures/ACW2
     name: 'American Civil War: Cavalry (1861-1865) plastic boxed set'
     manufacturer: perry-miniatures
@@ -62,6 +120,63 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/american/american-civil-war-cavalry-1861-1865-plastic-boxed-set
       - mfr-warlord-store:american-civil-war-cavalry-plastic-boxed-set-1861-1865
+  - id: perry-miniatures/ACW70
+    name: American Civil War Zouaves
+    manufacturer: perry-miniatures
+    productCode: ACW70
+    sku: ACW70
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-civil-war-zouaves-42-plastic-figures-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/ACW_70-1.jpg?v=1654099238
+    evidence:
+      - ret-goblingaming:american-civil-war-zouaves-42-plastic-figures-perry-miniatures-historical
+  - id: perry-miniatures/ACW80
+    name: American Civil War Confederate Infantry 1861-65
+    manufacturer: perry-miniatures
+    productCode: ACW80
+    sku: ACW80
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-civil-war-confederate-infantry-1861-65-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/confed-box-cover-small.jpg?v=1654097868
+    evidence:
+      - ret-goblingaming:american-civil-war-confederate-infantry-1861-65-perry-miniatures-historical
+  - id: perry-miniatures/ACW90
+    name: American Civil War Artillery
+    manufacturer: perry-miniatures
+    productCode: ACW90
+    sku: ACW90
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-civil-war-artillery-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/Box-cover-for-ACW-90-small.jpg?v=1654097490
+    evidence:
+      - ret-goblingaming:american-civil-war-artillery-perry-miniatures-historical
   - id: perry-miniatures/ACWBIG
     name: American Civil War Battle Set
     manufacturer: perry-miniatures
@@ -95,6 +210,25 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/american/american-civil-war-battle-set
       - mfr-warlord-store:new-american-civil-war-battle-set
+  - id: perry-miniatures/AN100
+    name: Austrian Napoleonic Hussars 1805-1815
+    manufacturer: perry-miniatures
+    productCode: AN100
+    sku: AN100
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/austrian-hussars-1805-1815-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/AN-100-cover.jpg?v=1654163866
+    evidence:
+      - ret-goblingaming:austrian-hussars-1805-1815-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/AN40
     name: 'Napoleonic Wars: Austrian Infantry 1809-1815'
     manufacturer: perry-miniatures
@@ -125,6 +259,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/napoleonic-wars-austrian-infantry-1809-1815
       - mfr-warlord-store:napoleonic-wars-napoleonic-austrian-infantry-1809-1815
+      - ret-goblingaming:austrian-infantry-1809-1815-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/AN80
     name: Austrian Napoleonic Cavalry
     manufacturer: perry-miniatures
@@ -159,6 +294,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/general/austrian-napoleonic-cavalry
       - mfr-warlord-store:austrian-napoleonic-cavalry
+      - ret-goblingaming:austrian-cavalry-1798-1815-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/AO40
     name: English Army 1415-1429
     manufacturer: perry-miniatures
@@ -178,6 +314,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
+    priceEur: 26.05
     url: https://store.warlordgames.com/products/english-army-1415-1429
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/EnglishArmy_cover.jpg?v=1575566094
     description: |-
@@ -197,6 +334,8 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/english-army-1415-1429
       - mfr-warlord-store:english-army-1415-1429
+      - ret-goblingaming:the-english-army-1415-1429-perry-miniatures-historical-war-of-the-roses
+      - ret-radaddel:english-army-1415-1429
   - id: perry-miniatures/AO50
     name: Agincourt French Infantry
     manufacturer: perry-miniatures
@@ -229,6 +368,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/agincourt-french-infantry
       - mfr-warlord-store:agincourt-french-infantry
+      - ret-goblingaming:agincourt-french-infantry-perry-miniatures-historical-war-of-the-roses
   - id: perry-miniatures/AO60
     name: Agincourt Foot Knights
     manufacturer: perry-miniatures
@@ -259,6 +399,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/agincourt-foot-knights
       - mfr-warlord-store:agincourt-foot-knights
+      - ret-goblingaming:agincourt-foot-knights-perry-miniatures-historical-war-of-the-roses
   - id: perry-miniatures/AO70
     name: Mounted Agincourt Knights 1415-29
     manufacturer: perry-miniatures
@@ -287,6 +428,26 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/mounted-agincourt-knights-1415-29
       - mfr-warlord-store:mounted-agincourt-knights-1415-29
+      - ret-goblingaming:agincourt-mounted-knights-perry-miniatures-historical-war-of-the-roses
+  - id: perry-miniatures/AW200
+    name: American War of Independence British Infantry 1775-1783
+    manufacturer: perry-miniatures
+    productCode: AW200
+    sku: AW200
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/american-war-of-independence-british-infantry-1775-1783-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/box-cover.jpg?v=1657792781
+    evidence:
+      - ret-goblingaming:american-war-of-independence-british-infantry-1775-1783-perry-miniatures-historical
   - id: perry-miniatures/AW250
     name: American War of Independence Continental Infantry 1776-1783
     manufacturer: perry-miniatures
@@ -315,6 +476,64 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/american/american-war-of-independence-continental-infantry-1776-1783
       - mfr-warlord-store:american-war-of-independence-continental-infantry-1776-1783
+      - ret-goblingaming:american-war-of-independence-continental-infantry-1776-1783-perry-miniatures-historical
+  - id: perry-miniatures/BB1
+    name: American Civil War - Battle in a Box
+    manufacturer: perry-miniatures
+    productCode: BB1
+    sku: BB1
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 80.75
+    url: https://www.goblingaming.co.uk/products/american-civil-war-battle-in-a-box-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/box-cover-small-700.jpg?v=1654097239
+    evidence:
+      - ret-goblingaming:american-civil-war-battle-in-a-box-perry-miniatures-historical
+  - id: perry-miniatures/BB2
+    name: 'Travel Battle: The Complete Table-Top Wargame in a Box'
+    manufacturer: perry-miniatures
+    productCode: BB2
+    sku: BB2
+    ean: '0797776591039'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 49.5
+    url: https://www.goblingaming.co.uk/products/travel-battle-the-complete-table-top-wargame-in-a-box-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/Box_and_contents_550-1.jpg?v=1657792318
+    evidence:
+      - ret-goblingaming:travel-battle-the-complete-table-top-wargame-in-a-box-perry-miniatures-historical
+  - id: perry-miniatures/BH1
+    name: British Napoleonic Infantry
+    manufacturer: perry-miniatures
+    productCode: BH1
+    sku: BH1
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/british-infantry-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/BH-1-2.jpg?v=1657793138
+    evidence:
+      - ret-goblingaming:british-infantry-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/BH80
     name: 'Napoleonic Wars: British Hussars 1808-1815'
     manufacturer: perry-miniatures
@@ -328,7 +547,7 @@ products:
       - horse-and-musket
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -347,6 +566,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/british/napoleonic-wars-british-hussars-1808-1815
       - mfr-warlord-store:napoleonic-wars-british-hussars-1789-1815
+      - ret-goblingaming:british-hussars-1808-1815-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/BH90
     name: Napoleonic British Light Dragoons 1808-1815
     manufacturer: perry-miniatures
@@ -366,6 +586,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
+    priceEur: 26.05
     url: https://store.warlordgames.com/products/napoleonic-british-light-dragoons-1808-1815
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/Lt_Dragoon_box_cover.jpg?v=1575566183
     description: |-
@@ -381,6 +602,8 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/british/napoleonic-british-light-dragoons-1808-1815
       - mfr-warlord-store:napoleonic-british-light-dragoons-1808-1815
+      - ret-goblingaming:british-light-dragoons-1808-15-perry-miniatures-historical
+      - ret-radaddel:napoleonic-british-light-dragoons-1808-1815
   - id: perry-miniatures/BH90-BRIG
     name: Napoleonic British Light Dragoons 1808-1815 Brigade (2 boxes)
     manufacturer: perry-miniatures
@@ -417,6 +640,23 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/british/napoleonic-british-light-dragoons-1808-1815-brigade-2-boxes
       - mfr-warlord-store:napoleonic-british-light-dragoons-1808-1815-brigade
+  - id: perry-miniatures/FN100
+    name: French Line Infantry 1812-1815
+    manufacturer: perry-miniatures
+    productCode: FN100
+    sku: FN100
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/french-line-infantry-1812-1815-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/FN-100.jpg?v=1657795731
+    evidence:
+      - ret-goblingaming:french-line-infantry-1812-1815-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/FN120
     name: 'Napoleonic Wars: French Heavy Cavalry 1812-1815'
     manufacturer: perry-miniatures
@@ -445,6 +685,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/french/napoleonic-wars-french-heavy-cavalry-1812-1815
       - mfr-warlord-store:napoleonic-wars-french-heavy-cavalry-1812-1815
+      - ret-goblingaming:french-heavy-cavalry-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/FN130
     name: 'Napoleonic Wars: French Dragoons 1812-1815'
     manufacturer: perry-miniatures
@@ -475,6 +716,64 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/french/napoleonic-wars-french-dragoons-1812-1815
       - mfr-warlord-store:napoleonic-wars-french-dragoons-1812-1815
+      - ret-goblingaming:french-dragoons-perry-miniatures-historical-napoleonic-wars
+  - id: perry-miniatures/FN140
+    name: French Napoleonic Hussars
+    manufacturer: perry-miniatures
+    productCode: FN140
+    sku: FN140
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/french-hussars-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/fn_140.jpg?v=1657796060
+    evidence:
+      - ret-goblingaming:french-hussars-perry-miniatures-historical-napoleonic-wars
+  - id: perry-miniatures/FN230
+    name: French Napoleonic Line Chasseurs a Cheval 1808-1815
+    manufacturer: perry-miniatures
+    productCode: FN230
+    sku: FN230
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/french-line-chasseurs-a-cheval-1808-1815-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/box-2-small.jpg?v=1657796285
+    evidence:
+      - ret-goblingaming:french-line-chasseurs-a-cheval-1808-1815-perry-miniatures-historical-napoleonic-wars
+  - id: perry-miniatures/FN250
+    name: French Napoleonic Infantry Battalion 1807-14
+    manufacturer: perry-miniatures
+    productCode: FN250
+    sku: FN250
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/french-infantry-battalion-1807-14-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/battlaion-box-FN-250-small.jpg?v=1657796177
+    evidence:
+      - ret-goblingaming:french-infantry-battalion-1807-14-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/FN260
     name: Elite Companies, French infantry 1807-14
     manufacturer: perry-miniatures
@@ -503,6 +802,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/french/elite-companies-french-infantry-1807-14
       - mfr-warlord-store:elite-companies-french-infantry-1807-14
+      - ret-goblingaming:elite-companies-french-infantry-1807-14-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/FRE1
     name: Franco-Prussian War French Infantry advancing
     manufacturer: perry-miniatures
@@ -559,6 +859,656 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/french/franco-prussian-war-french-infantry-firing-line
       - mfr-warlord-store:franco-prussian-war-french-infantry-firing-line
+  - id: perry-miniatures/GWW1
+    name: Afrikakorps 1941-1943
+    manufacturer: perry-miniatures
+    productCode: GWW1
+    sku: GWW1
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/afrikakorps-1941-1943-perry-miniatures-historical-world-war-2
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/0292-PM-AfrikaKorps-45mm.jpg?v=1654096475
+    evidence:
+      - ret-goblingaming:afrikakorps-1941-1943-perry-miniatures-historical-world-war-2
+  - id: perry-miniatures/PM-ACW001
+    name: American Civil War Infantry
+    manufacturer: perry-miniatures
+    sku: '111487'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/american-civil-war-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111487-american-civil-war-infantry-pm-acw001-1.webp?v=1781189261
+    evidence:
+      - ret-radaddel:american-civil-war-infantry
+  - id: perry-miniatures/PM-ACW002
+    name: American Civil War Cavalry
+    manufacturer: perry-miniatures
+    sku: '111488'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.15
+    url: https://radaddel.de/products/american-civil-war-cavalry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111488-american-civil-war-cavalry-pm-acw002-1.webp?v=1781189265
+    evidence:
+      - ret-radaddel:american-civil-war-cavalry
+  - id: perry-miniatures/PM-ACW070
+    name: American Civil War Zouaves
+    manufacturer: perry-miniatures
+    sku: '111489'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 23.5
+    url: https://radaddel.de/products/american-civil-war-zouaves
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111489-american-civil-war-zouaves-pm-acw070-1.webp?v=1781189269
+    evidence:
+      - ret-radaddel:american-civil-war-zouaves
+  - id: perry-miniatures/PM-ACW080
+    name: American Civil War Confederate Infantry
+    manufacturer: perry-miniatures
+    sku: '111481'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/american-civil-war-confederate-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111481-american-civil-war-confederate-infantry-pm-acw080-1.webp?v=1781189253
+    evidence:
+      - ret-radaddel:american-civil-war-confederate-infantry
+  - id: perry-miniatures/PM-ACW090
+    name: American Civil War Artillery
+    manufacturer: perry-miniatures
+    sku: '112596'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/american-civil-war-artillery
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/112596-american-civil-war-artillery-pm-acw090-1.webp?v=1781189779
+    evidence:
+      - ret-radaddel:american-civil-war-artillery
+  - id: perry-miniatures/PM-ACW115
+    name: American Civil War Union Infantry 1861-65
+    manufacturer: perry-miniatures
+    sku: '116444'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/american-civil-war-union-infantry-1861-65
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/116444-american-civil-war-union-infantry-1861-65-pm-acw115-1.webp?v=1781191684
+    evidence:
+      - ret-radaddel:american-civil-war-union-infantry-1861-65
+  - id: perry-miniatures/PM-ACW120
+    name: American Civil War Union Infantry in sack coats Skirmishing 1861-65
+    manufacturer: perry-miniatures
+    sku: '116538'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/american-civil-war-union-infantry-in-sack-coats-skirmishing-1861-65
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/116538-american-civil-war-union-infantry-in-sack-coats-skirmishing-1861-65-pm-acw120-1.webp?v=1781191727
+    evidence:
+      - ret-radaddel:american-civil-war-union-infantry-in-sack-coats-skirmishing-1861-65
+  - id: perry-miniatures/PM-AN100
+    name: Napoleonic Austrian Hussars 1805-15
+    manufacturer: perry-miniatures
+    sku: '122881'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/napoleonic-austrian-hussars-1805-15
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/122881-napoleonic-austrian-hussars-1805-15-pm-an100-1.webp?v=1781199577
+    evidence:
+      - ret-radaddel:napoleonic-austrian-hussars-1805-15
+  - id: perry-miniatures/PM-AN80
+    name: Napoleonic Austrian 'German' Cavalry 1798-1815
+    manufacturer: perry-miniatures
+    sku: '121788'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/napoleonic-austrian-german-cavalry-1798-1815
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/121788-napoleonic-austrian-german-cavalry-1798-1815-pm-an80-1.webp?v=1781197748
+    evidence:
+      - ret-radaddel:napoleonic-austrian-german-cavalry-1798-1815
+  - id: perry-miniatures/PM-AO50
+    name: Agincourt French Infantry 1415-1429
+    manufacturer: perry-miniatures
+    sku: '115483'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/agincourt-french-infantry-1415-1429
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115483-agincourt-french-infantry-1415-1429-pm-ao50-1.webp?v=1781191167
+    evidence:
+      - ret-radaddel:agincourt-french-infantry-1415-1429
+  - id: perry-miniatures/PM-AO60
+    name: Agincourt Foot Knights 1415-1429
+    manufacturer: perry-miniatures
+    sku: '115451'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/agincourt-foot-knights-1415-1429
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115451-agincourt-foot-knights-1415-1429-pm-ao60-1.webp?v=1781191160
+    evidence:
+      - ret-radaddel:agincourt-foot-knights-1415-1429
+  - id: perry-miniatures/PM-AO70
+    name: Agincourt Mounted Knights 1415-1429
+    manufacturer: perry-miniatures
+    sku: '119194'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/agincourt-mounted-knights-1415-1429
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119194-agincourt-mounted-knights-1415-1429-pm-ao70-1.webp?v=1781193508
+    evidence:
+      - ret-radaddel:agincourt-mounted-knights-1415-1429
+  - id: perry-miniatures/PM-AW250
+    name: American War of Independence Continental Infantry 1776-1783
+    manufacturer: perry-miniatures
+    sku: '112915'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/american-war-of-independence-continental-infantry-1776-1783
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/112915-american-war-of-independence-continental-infantry-1776-1783-pm-aw250-1.webp?v=1781189899
+    evidence:
+      - ret-radaddel:american-war-of-independence-continental-infantry-1776-1783
+  - id: perry-miniatures/PM-BH001
+    name: Napoleonic British Line Infantry
+    manufacturer: perry-miniatures
+    sku: '111493'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 25.05
+    url: https://radaddel.de/products/napoleonic-british-line-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111493-napoleonic-british-line-infantry-pm-bh001-1.webp?v=1781189307
+    evidence:
+      - ret-radaddel:napoleonic-british-line-infantry
+  - id: perry-miniatures/PM-BH080
+    name: Napoleonic British Hussars
+    manufacturer: perry-miniatures
+    sku: '111494'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 25.05
+    url: https://radaddel.de/products/napoleonic-british-hussars
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111494-napoleonic-british-hussars-pm-bh080-1.webp?v=1781189315
+    evidence:
+      - ret-radaddel:napoleonic-british-hussars
+  - id: perry-miniatures/PM-FN100
+    name: Napoleonic French Line Infantry 1812-1815
+    manufacturer: perry-miniatures
+    sku: '111497'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/napoleonic-french-line-infantry-1812-1815
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111497-napoleonic-french-line-infantry-1812-1815-pm-fn100-1.webp?v=1781189341
+    evidence:
+      - ret-radaddel:napoleonic-french-line-infantry-1812-1815
+  - id: perry-miniatures/PM-FN120
+    name: Napoleonic French Heavy Cavalry 1812-1815
+    manufacturer: perry-miniatures
+    sku: '111498'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 25.05
+    url: https://radaddel.de/products/napoleonic-french-heavy-cavalry-1812-1815
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111498-napoleonic-french-heavy-cavalry-1812-1815-pm-fn120-1.webp?v=1781189347
+    evidence:
+      - ret-radaddel:napoleonic-french-heavy-cavalry-1812-1815
+  - id: perry-miniatures/PM-FN140
+    name: Napolenic French Hussars 1792-1815
+    manufacturer: perry-miniatures
+    sku: '111500'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 27.7
+    url: https://radaddel.de/products/napolenic-french-hussars-1792-1815
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111500-napolenic-french-hussars-1792-1815-pm-fn140-1.webp?v=1781189362
+    evidence:
+      - ret-radaddel:napolenic-french-hussars-1792-1815
+  - id: perry-miniatures/PM-FN230
+    name: French Line Chasseurs a Cheval 1808-15
+    manufacturer: perry-miniatures
+    sku: '122221'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/french-line-chasseurs-a-cheval-1808-15
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/122221-french-line-chasseurs-a-cheval-1808-15-pm-fn230-1.webp?v=1781198437
+    evidence:
+      - ret-radaddel:french-line-chasseurs-a-cheval-1808-15
+  - id: perry-miniatures/PM-FN250
+    name: French Napoleonic Infantry Battalion 1807-14
+    manufacturer: perry-miniatures
+    sku: '121076'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.15
+    url: https://radaddel.de/products/french-napoleonic-infantry-battalion-1807-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/121076-french-napoleonic-infantry-battalion-1807-14-pm-fn250-1.webp?v=1787250705
+    evidence:
+      - ret-radaddel:french-napoleonic-infantry-battalion-1807-14
+  - id: perry-miniatures/PM-FN260
+    name: Elite Companies French Infantry 1807-14
+    manufacturer: perry-miniatures
+    sku: '121077'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/elite-companies-french-infantry-1807-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/121077-elite-companies-french-infantry-1807-14-pm-fn260-1.webp?v=1787250706
+    evidence:
+      - ret-radaddel:elite-companies-french-infantry-1807-14
+  - id: perry-miniatures/PM-GWW01
+    name: Afrikakorps, German Infantry 1941-43
+    manufacturer: perry-miniatures
+    sku: '112006'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/afrikakorps-german-infantry-1941-43
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/112006-afrikakorps-german-infantry-1941-43-pm-gww01-1.webp?v=1781189546
+    evidence:
+      - ret-radaddel:afrikakorps-german-infantry-1941-43
+  - id: perry-miniatures/PM-PN01
+    name: Napoleonic Prussian Line Infantry 1813-1815
+    manufacturer: perry-miniatures
+    sku: '111496'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/napoleonic-prussian-line-infantry-1813-1815
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111496-napoleonic-prussian-line-infantry-1813-1815-pm-pn01-1.webp?v=1781189335
+    evidence:
+      - ret-radaddel:napoleonic-prussian-line-infantry-1813-1815
+  - id: perry-miniatures/PM-RN20
+    name: Russian Napoleonic Infantry 1809-14
+    manufacturer: perry-miniatures
+    sku: '122222'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/russian-napoleonic-infantry-1809-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/122222-russian-napoleonic-infantry-1809-14-pm-rn20-1.webp?v=1781198439
+    evidence:
+      - ret-radaddel:russian-napoleonic-infantry-1809-14
+  - id: perry-miniatures/PM-RPB1
+    name: North American Farmhouse 1750-1900
+    manufacturer: perry-miniatures
+    sku: '111502'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 18.6
+    url: https://radaddel.de/products/north-american-farmhouse-1750-1900
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111502-north-american-farmhouse-1750-1900-pm-rpb1-1.webp?v=1781189374
+    evidence:
+      - ret-radaddel:north-american-farmhouse-1750-1900
+  - id: perry-miniatures/PM-RPB2
+    name: North American Store 1800-1900
+    manufacturer: perry-miniatures
+    sku: '111503'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 18.6
+    url: https://radaddel.de/products/north-american-store-1800-1900
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111503-north-american-store-1800-1900-pm-rpb2-1.webp?v=1781189379
+    evidence:
+      - ret-radaddel:north-american-store-1800-1900
+  - id: perry-miniatures/PM-SA30
+    name: Mahdist Ansar
+    manufacturer: perry-miniatures
+    sku: '112415'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 23.5
+    url: https://radaddel.de/products/mahdist-ansar
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/112415-mahdist-ansar-pm-sa30-1.webp?v=1781189704
+    evidence:
+      - ret-radaddel:mahdist-ansar
+  - id: perry-miniatures/PM-US01
+    name: US Infantry 1942-45
+    manufacturer: perry-miniatures
+    sku: '119706'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/us-infantry-1942-45
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119706-us-infantry-1942-45-pm-us01-1.webp?v=1781195207
+    evidence:
+      - ret-radaddel:us-infantry-1942-45
+  - id: perry-miniatures/PM-VLW01
+    name: British Infantry (Afghanistan and Sudan) 1877-1885
+    manufacturer: perry-miniatures
+    sku: '115727'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/british-infantry-afghanistan-and-sudan-1877-1885
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/115727-british-infantry-afghanistan-and-sudan-1877-1885-pm-vlw01-1.webp?v=1781191286
+    evidence:
+      - ret-radaddel:british-infantry-afghanistan-and-sudan-1877-1885
+  - id: perry-miniatures/PM-VLW20
+    name: British Zulu War Infantry
+    manufacturer: perry-miniatures
+    sku: '117005'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/british-zulu-war-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/117005-british-zulu-war-infantry-pm-vlw20-1.webp?v=1781192065
+    evidence:
+      - ret-radaddel:british-zulu-war-infantry
+  - id: perry-miniatures/PM-VLW41
+    name: Zulus
+    manufacturer: perry-miniatures
+    sku: '122223'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/zulus
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/122223-zulus-pm-vlw41-1.webp?v=1781198442
+    evidence:
+      - ret-radaddel:zulus
+  - id: perry-miniatures/PM-VLW80
+    name: Afghan Tribesmen
+    manufacturer: perry-miniatures
+    sku: '122224'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/afghan-tribesmen
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/122224-afghan-tribesmen-pm-vlw80-1.webp?v=1781198444
+    evidence:
+      - ret-radaddel:afghan-tribesmen
+  - id: perry-miniatures/PM-WG-RPB3
+    name: Medieval Cottage 1300-1700
+    manufacturer: perry-miniatures
+    sku: '111501'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 21.96
+    url: https://radaddel.de/products/medieval-cottage-1300-1700
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111501-medieval-cottage-1300-1700-pm-wg-rpb3-1.webp?v=1781189370
+    evidence:
+      - ret-radaddel:medieval-cottage-1300-1700
+  - id: perry-miniatures/PM-WR40
+    name: Mounted Men at Arms
+    manufacturer: perry-miniatures
+    sku: '111492'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/mounted-men-at-arms
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111492-mounted-men-at-arms-pm-wr40-1.webp?v=1781189300
+    evidence:
+      - ret-radaddel:mounted-men-at-arms
+  - id: perry-miniatures/PM-WR50
+    name: Foot Knights 1450-1500
+    manufacturer: perry-miniatures
+    sku: '113483'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.45
+    url: https://radaddel.de/products/foot-knights-1450-1500
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/113483-foot-knights-1450-1500-pm-wr50-1.webp?v=1781190235
+    evidence:
+      - ret-radaddel:foot-knights-1450-1500
+  - id: perry-miniatures/PM-WR60
+    name: 'Wars of the Roses: Light Cavalry (1450-1500)'
+    manufacturer: perry-miniatures
+    sku: '114403'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceEur: 28.0
+    url: https://radaddel.de/products/wars-of-the-roses-light-cavalry-1450-1500
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/114403-wars-of-the-roses-light-cavalry-1450-1500-pm-wr60-1.webp?v=1781190631
+    evidence:
+      - ret-radaddel:wars-of-the-roses-light-cavalry-1450-1500
+  - id: perry-miniatures/PMDOW1
+    name: Napoleonic Duchy of Warsaw Infantry Battalion 1807-14
+    manufacturer: perry-miniatures
+    productCode: PMDOW1
+    sku: PMDOW1
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/napoleonic-duchy-of-warsaw-infantry-battalion-1807-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/DOW-1-cover-small.jpg?v=1708350323
+    evidence:
+      - ret-goblingaming:napoleonic-duchy-of-warsaw-infantry-battalion-1807-14
+  - id: perry-miniatures/PMDOW2
+    name: Napoleonic Duchy of Warsaw Infantry, Elite Companies 1807-14
+    manufacturer: perry-miniatures
+    productCode: PMDOW2
+    sku: PMDOW2
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/napoleonic-duchy-of-warsaw-infantry-elite-companies-1807-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/DOW-2-cover-small.jpg?v=1708351308
+    evidence:
+      - ret-goblingaming:napoleonic-duchy-of-warsaw-infantry-elite-companies-1807-14
+  - id: perry-miniatures/PN01
+    name: Napoleonic Prussian Line Infantry 1813-1815
+    manufacturer: perry-miniatures
+    productCode: PN01
+    sku: PN01
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/prussian-line-infantry-1813-1815-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/Pn_1-2.jpg?v=1657802012
+    evidence:
+      - ret-goblingaming:prussian-line-infantry-1813-1815-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/PN1
     name: 'Napoleonic Wars: Prussian Line Infantry 1813-1815'
     manufacturer: perry-miniatures
@@ -621,6 +1571,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/general/prussian-infantry-advancing
       - mfr-warlord-store:prussian-infantry-advancing
+      - ret-goblingaming:franco-prussian-war-1870-1871-prussian-infantry-advancing-perry-miniatures-historical
   - id: perry-miniatures/PRU2
     name: Prussian Infantry skirmishing
     manufacturer: perry-miniatures
@@ -653,6 +1604,58 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/general/prussian-infantry-skirmishing
       - mfr-warlord-store:prussian-infantry-skirmishing
+      - ret-goblingaming:franco-prussian-war-1870-1871-prussian-infantry-skirmishing-perry-miniatures-historical
+  - id: perry-miniatures/RBB1
+    name: North American Farm House
+    manufacturer: perry-miniatures
+    productCode: RBB1
+    sku: RBB1
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: terrain
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 15.3
+    url: https://www.goblingaming.co.uk/products/american-house-perry-miniatures-historical-american-civil-war
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/rpb-1.jpg?v=1654161635
+    evidence:
+      - ret-goblingaming:american-house-perry-miniatures-historical-american-civil-war
+  - id: perry-miniatures/RBB2
+    name: North American Store
+    manufacturer: perry-miniatures
+    productCode: RBB2
+    sku: RBB2
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: terrain
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 15.3
+    url: https://www.goblingaming.co.uk/products/american-store-perry-miniatures-historical-american-civil-war
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/rpb2.jpg?v=1654161408
+    evidence:
+      - ret-goblingaming:american-store-perry-miniatures-historical-american-civil-war
+  - id: perry-miniatures/RBB3
+    name: Medieval Cottage 1300-1700
+    manufacturer: perry-miniatures
+    productCode: RBB3
+    sku: RBB3
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 17.0
+    url: https://www.goblingaming.co.uk/products/medieval-cottage-1300-1700-perry-miniatures-historical-war-of-the-roses
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/0237-PM-Cottage.jpg?v=1657800955
+    evidence:
+      - ret-goblingaming:medieval-cottage-1300-1700-perry-miniatures-historical-war-of-the-roses
   - id: perry-miniatures/RN105
     name: Russian Napoleonic Uhlans 1812-14
     manufacturer: perry-miniatures
@@ -685,6 +1688,25 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/general/russian-napoleonic-uhlans-1812-14
       - mfr-warlord-store:russian-napoleonic-uhlans-1812-14
+  - id: perry-miniatures/RN20
+    name: Russian Napoleonic Infantry 1809-1814
+    manufacturer: perry-miniatures
+    productCode: RN20
+    sku: RN20
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/russian-infantry-1809-1814-perry-miniatures-historical-napoleonic-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/Russian-box-cover-small.jpg?v=1654164905
+    evidence:
+      - ret-goblingaming:russian-infantry-1809-1814-perry-miniatures-historical-napoleonic-wars
   - id: perry-miniatures/RPB-3
     name: Medieval Cottage (1300-1700) plastic boxed set
     manufacturer: perry-miniatures
@@ -803,6 +1825,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/general/allied-cavalry-prussian-and-russian-napoleonic-dragoons-1812-15
       - mfr-warlord-store:allied-cavalry-prussian-and-russian-napoleonic-dragoons-1812-15
+      - ret-goblingaming:allied-cavalry-1812-1815
   - id: perry-miniatures/SA30
     name: 'Mahdist Revolt: Mahdist Ansar (1884) plastic boxed set'
     manufacturer: perry-miniatures
@@ -831,6 +1854,24 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/mahdist-revolt-mahdist-ansar-1884-plastic-boxed-set
       - mfr-warlord-store:mahdist-revolt-plastic-mahdist-ansar-1884
+      - ret-goblingaming:sudanese-tribesmen-1881-1885-perry-miniatures-historical-victorias-little-wars
+  - id: perry-miniatures/US1
+    name: US Infantry 1942-45
+    manufacturer: perry-miniatures
+    productCode: US1
+    sku: US1
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 21.0
+    url: https://www.goblingaming.co.uk/products/us-infantry-1942-45-perry-miniatures-historical-world-war-2
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/IMG_1541-scaled.jpg?v=1654157234
+    evidence:
+      - ret-goblingaming:us-infantry-1942-45-perry-miniatures-historical-world-war-2
   - id: perry-miniatures/VLW1
     name: British Infantry (Afghanistan and Sudan) 1877-1885
     manufacturer: perry-miniatures
@@ -855,6 +1896,75 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/british-infantry-afghanistan-and-sudan-1877-1885
       - mfr-warlord-store:perry-british-infantry-afghanistan-and-sudan-1877-1885
+      - ret-goblingaming:british-infantry-afghanistan-sudan-1877-1885-perry-miniatures-historical-victorias-little-wars
+  - id: perry-miniatures/VLW20
+    name: British Infantry (Zulu War) 1877 - 1881
+    manufacturer: perry-miniatures
+    productCode: VLW20
+    sku: VLW20
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/british-infantry-zulu-war-1877-1881-perry-miniatures-historical-victorias-little-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/0560-PM-BritishZuluInfantry-scaled.jpg?v=1654158896
+    evidence:
+      - ret-goblingaming:british-infantry-zulu-war-1877-1881-perry-miniatures-historical-victorias-little-wars
+  - id: perry-miniatures/VLW41
+    name: Zulus!
+    manufacturer: perry-miniatures
+    productCode: VLW41
+    sku: VLW41
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 21.0
+    url: https://www.goblingaming.co.uk/products/zulus-perry-miniatures-historical-victorias-little-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/Zulu-box-front-1-scaled.jpg?v=1654158045
+    evidence:
+      - ret-goblingaming:zulus-perry-miniatures-historical-victorias-little-wars
+  - id: perry-miniatures/VLW80
+    name: Afghan Tribesmen 1800-1900
+    manufacturer: perry-miniatures
+    productCode: VLW80
+    sku: VLW80
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/afghan-tribesmen-1800-1900-perry-miniatures-historical-victorias-little-wars
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/pre-order-1.jpg?v=1654096228
+    evidence:
+      - ret-goblingaming:afghan-tribesmen-1800-1900-perry-miniatures-historical-victorias-little-wars
+  - id: perry-miniatures/WR01
+    name: Wars of the Roses Infantry 1455-1487
+    manufacturer: perry-miniatures
+    productCode: WR01
+    sku: WR01
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/wars-of-the-roses-infantry-1455-1487-perry-miniatures-historical
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/WotR-box-small.jpg?v=1657792218
+    evidence:
+      - ret-goblingaming:wars-of-the-roses-infantry-1455-1487-perry-miniatures-historical
   - id: perry-miniatures/WR1
     name: 'Wars of the Roses: Infantry (1455-1487) plastic boxed set'
     manufacturer: perry-miniatures
@@ -915,6 +2025,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/wars-of-the-roses-mercenaries-european-infantry-1450-1500-plastic-boxed-set
       - mfr-warlord-store:dark-ages-mercenaries-european-infantry-1450-1500
+      - ret-goblingaming:mercenaries-european-infantry-1450-1500-perry-miniatures-historical-war-of-the-roses
   - id: perry-miniatures/WR40
     name: 'Wars of the Roses:  Mounted Men-at-Arms (1450-1500) plastic boxed set'
     manufacturer: perry-miniatures
@@ -945,6 +2056,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/wars-of-the-roses-mounted-men-at-arms-1450-1500-plastic-boxed-set
       - mfr-warlord-store:mounted-men-at-arms-1450-1500-plastic-boxed-set
+      - ret-goblingaming:mounted-men-at-arms-1450-1500-perry-miniatures-historical-war-of-the-roses
   - id: perry-miniatures/WR50
     name: Foot Knights 1450-1500
     manufacturer: perry-miniatures
@@ -975,6 +2087,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/foot-knights-1450-1500
       - mfr-warlord-store:foot-knights-1450-1500
+      - ret-goblingaming:foot-knights-1450-1500-perry-miniatures-historical-war-of-the-roses
   - id: perry-miniatures/WR60
     name: 'Wars of the Roses: Light Cavalry (1450-1500) plastic boxed set'
     manufacturer: perry-miniatures
@@ -1003,3 +2116,102 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/wars-of-the-roses-light-cavalry-1450-1500-plastic-boxed-set
       - mfr-warlord-store:wars-of-the-roses-light-cavalry-1450-1500-plastic-boxed-set
+      - ret-goblingaming:light-cavalry-1450-1500-perry-miniatures-historical-war-of-the-roses
+  - id: perry-miniatures/WW1
+    name: British 8th Army "Desert Rats"
+    manufacturer: perry-miniatures
+    productCode: WW1
+    sku: WW1
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-06'
+    priceGbp: 23.8
+    url: https://www.goblingaming.co.uk/products/british-8th-army-desert-rats-perry-miniatures-historical-world-war-2
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/DR-box-cover.jpg?v=1654157403
+    evidence:
+      - ret-goblingaming:british-8th-army-desert-rats-perry-miniatures-historical-world-war-2
+  - id: perry-miniatures/desert-rats-1940-1943
+    name: Desert Rats 1940-1943
+    manufacturer: perry-miniatures
+    sku: '111479'
+    ean: '9780201379624'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 23.5
+    url: https://radaddel.de/products/desert-rats-1940-1943
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111479-desert-rats-1940-1943-pm-ww01-1.webp?v=1781189245
+    evidence:
+      - ret-radaddel:desert-rats-1940-1943
+  - id: perry-miniatures/mercenaries-european-infantry
+    name: Mercenaries' European Infantry
+    manufacturer: perry-miniatures
+    sku: '111491'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.15
+    url: https://radaddel.de/products/mercenaries-european-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111491-mercenaries-european-infantry-pm-wr20-1.webp?v=1781189285
+    evidence:
+      - ret-radaddel:mercenaries-european-infantry
+  - id: perry-miniatures/napoleonic-austrian-infantry
+    name: Napoleonic Austrian Infantry
+    manufacturer: perry-miniatures
+    sku: '111495'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.15
+    url: https://radaddel.de/products/napoleonic-austrian-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111495-napoleonic-austrian-infantry-pm-an40-1.webp?v=1781189326
+    evidence:
+      - ret-radaddel:napoleonic-austrian-infantry
+  - id: perry-miniatures/napoleonic-french-dragoons-1812-1815
+    name: Napoleonic French Dragoons 1812-1815
+    manufacturer: perry-miniatures
+    sku: '111499'
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.15
+    url: https://radaddel.de/products/napoleonic-french-dragoons-1812-1815
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111499-napoleonic-french-dragoons-1812-1815-pm-fn130-1.webp?v=1781189355
+    evidence:
+      - ret-radaddel:napoleonic-french-dragoons-1812-1815
+  - id: perry-miniatures/war-of-the-roses-infantry
+    name: War Of The Roses Infantry
+    manufacturer: perry-miniatures
+    sku: '111490'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-06'
+    priceEur: 29.15
+    url: https://radaddel.de/products/war-of-the-roses-infantry
+    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/111490-war-of-the-roses-infantry-pm-wr01-1.webp?v=1781189276
+    evidence:
+      - ret-radaddel:war-of-the-roses-infantry

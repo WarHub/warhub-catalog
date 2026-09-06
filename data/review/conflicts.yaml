@@ -1,1 +1,73 @@
-conflicts: []
+conflicts:
+  - type: ean-mismatch
+    entity: games-workshop/99070108012
+    chosen: '5011921183616'
+    assertions:
+      - ean: '5011921183616'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-radaddel
+          - ret-tistaminis
+      - ean: '5011921256204'
+        sources:
+          - mfr-gw-trade
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: steamforged-games/SFIK-KDR210
+    chosen: '5060453699959'
+    assertions:
+      - ean: '5060453699959'
+        sources:
+          - legacy-catalog
+          - mfr-steamforged
+          - mfr-warmachine
+          - ret-gamenerdz
+      - ean: '5061060704463'
+        sources:
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: mantic-games/MGWD162
+    chosen: '5060924984386'
+    assertions:
+      - ean: '5060924983648'
+        sources:
+          - legacy-catalog
+      - ean: '5060924984386'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: vallejo/green-grey-18ml-model-colour
+    chosen: '8429551708869'
+    assertions:
+      - ean: '8429551708869'
+        sources:
+          - ret-goblingaming
+      - ean: '8429551709712'
+        sources:
+          - ret-goblingaming
+  - type: multi-code-entity
+    manufacturer: corvus-belli
+    codes:
+      - '280057'
+      - '280059'
+    keys:
+      - ret-gamenerdz:/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
+      - ret-goblingaming:infinity-essentials-start-here
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108012'
+      - '99120108138'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/ministorum-priest-with-vindictor
+      - mfr-gw-algolia:P-181577-99070108012
+      - mfr-gw-algolia:P-181577-99120108138
+      - mfr-gw-trade:99070108012
+      - mfr-gw-trade:99120108138
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-ministorum-priest-with-vindictor
+      - ret-goblingaming:warhammer-40k-adepta-sororitas-ministorum-priest-with-vindictor
+      - ret-radaddel:/adepta-sororitas-ministorum-priest-with-vindictor
+      - ret-radaddel:adepta-sororitas-ministorum-priest-with-vindictor
+      - ret-tistaminis:adepta-sororitas-ministorum-priest-with-vindictor
