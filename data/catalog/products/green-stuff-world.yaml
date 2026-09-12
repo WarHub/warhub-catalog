@@ -296,14 +296,17 @@ products:
     settingsBasis: not-applicable
     category: paint-set
     categoryBasis: stated
+    packaging: set
     status: current
     availability: in_stock
     firstSeen: '2026-07-24'
     priceEur: 22.75
+    priceCad: 40.0
     url: https://www.greenstuffworld.com/en/chrome-paints/2625-paint-set-chrome.html
     imageUrl: https://www.greenstuffworld.com/26321-large_default/paint-set-chrome.jpg
     evidence:
       - mfr-greenstuffworld:2625
+      - ret-tistaminis:green-stuff-world-paint-set-chrome-new
   - id: green-stuff-world/10134
     name: Paint Set - Flaming Orange
     manufacturer: green-stuff-world
@@ -1329,7 +1332,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/blood-bowl-bases-32mm-with-skill-rings-new
@@ -1346,7 +1349,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/blood-bowl-bases-40mm-with-skill-rings-new
@@ -1420,13 +1423,992 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-army-transport-bag
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/army-transport-bag_24112228-062b-4bf6-a08e-ba5ad22c8ad1.jpg?v=1760226758
     evidence:
       - ret-tistaminis:green-stuff-world-army-transport-bag
+  - id: green-stuff-world/green-stuff-world-auxiliary-acrylic-thinner-240-ml
+    name: Green Stuff World Auxiliary ACRYLIC THINNER 240 ml
+    manufacturer: green-stuff-world
+    sku: 8436574504613ES
+    ean: '8436574504613'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 20.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-acrylic-thinner-240-ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_041e8bf2-6ac9-440d-a258-7c4c2c1c7050.jpg?v=1760167947
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-acrylic-thinner-240-ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-acrylic-thinner-60ml
+    name: Green Stuff World Auxiliary ACRYLIC THINNER 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574501063ES
+    ean: '8436574501063'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-acrylic-thinner-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ec97d4c9-4d2e-435a-847d-bd1399d70bd7.jpg?v=1760168025
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-acrylic-thinner-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-airbrush-cleaner-240ml
+    name: Green Stuff World Auxiliary Airbrush Cleaner 240ml
+    manufacturer: green-stuff-world
+    sku: 8436574504606ES
+    ean: '8436574504606'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: cleaner
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 20.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-airbrush-cleaner-240ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_5f631f31-759f-4cd1-858c-08ccdd447c10.jpg?v=1760168294
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-airbrush-cleaner-240ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-airbrush-cleaner-60ml
+    name: Green Stuff World Auxiliary Airbrush Cleaner 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574500783ES
+    ean: '8436574500783'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: cleaner
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-airbrush-cleaner-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ac3cd97d-865d-49c8-bebe-fae725b5ad6a.jpg?v=1760167969
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-airbrush-cleaner-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-airbrush-retarder-60ml
+    name: Green Stuff World Auxiliary Airbrush Retarder 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574502398ES
+    ean: '8436574502398'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-airbrush-retarder-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_9f123370-cc17-489f-b8b8-cd831f2c6eee.jpg?v=1760168124
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-airbrush-retarder-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-bile-effect
+    name: Green Stuff World Auxiliary Bile Effect
+    manufacturer: green-stuff-world
+    sku: 8436574507577ES
+    ean: '8436574507577'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-bile-effect
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_e19c82cb-b9b4-438b-9362-acea1fc8efbe.jpg?v=1760168054
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-bile-effect
+  - id: green-stuff-world/green-stuff-world-auxiliary-brush-repair-gel
+    name: Green Stuff World Auxiliary Brush Repair Gel
+    manufacturer: green-stuff-world
+    sku: 8436554368280ES
+    ean: '8436554368280'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-brush-repair-gel
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_5cee7f33-672a-4e5b-9d63-792a2a53de83.jpg?v=1760168032
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-brush-repair-gel
+  - id: green-stuff-world/green-stuff-world-auxiliary-brush-retarder-17ml
+    name: Green Stuff World Auxiliary Brush Retarder 17ml
+    manufacturer: green-stuff-world
+    sku: 8436574501087ES
+    ean: '8436574501087'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-brush-retarder-17ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_914066af-672f-4ad6-8dfa-86bf4ab38c6b.jpg?v=1760168120
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-brush-retarder-17ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-brush-soap-cleaner-and-preserver
+    name: Green Stuff World Auxiliary Brush Soap - Cleaner and Preserver
+    manufacturer: green-stuff-world
+    sku: 8436574506860ES
+    ean: '8436574506860'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: cleaner
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-brush-soap-cleaner-and-preserver
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_4140087f-5208-4342-a776-1aa192ac707c.jpg?v=1760168275
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-brush-soap-cleaner-and-preserver
+  - id: green-stuff-world/green-stuff-world-auxiliary-chipping-medium-weathering-and-scratches
+    name: Green Stuff World Auxiliary Chipping Medium - Weathering and Scratches
+    manufacturer: green-stuff-world
+    sku: 8436574502480ES
+    ean: '8436574502480'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-chipping-medium-weathering-and-scratches
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d6913e59-0175-40fb-904e-96efe9380080.jpg?v=1760167950
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-chipping-medium-weathering-and-scratches
+  - id: green-stuff-world/green-stuff-world-auxiliary-coagulated-blood
+    name: Green Stuff World Auxiliary Coagulated Blood
+    manufacturer: green-stuff-world
+    sku: 8436574500684ES
+    ean: '8436574500684'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-coagulated-blood
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_163bc988-3981-492f-bea2-cf7b63df6c9a.jpg?v=1760168098
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-coagulated-blood
+  - id: green-stuff-world/green-stuff-world-auxiliary-conductive-paint
+    name: Green Stuff World Auxiliary Conductive Paint
+    manufacturer: green-stuff-world
+    sku: 8436574504590ES
+    ean: '8436574504590'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 12.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-conductive-paint
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_124a80dd-a550-43a1-98d2-63cd0842f474.jpg?v=1760167943
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-conductive-paint
+  - id: green-stuff-world/green-stuff-world-auxiliary-crackle-paint-badlands-60ml
+    name: Green Stuff World Auxiliary Crackle Paint - Badlands 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574501773ES
+    ean: '8436574501773'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-crackle-paint-badlands-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_7f58f272-f4dc-4ee8-978a-843f679846cf.jpg?v=1760168083
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-crackle-paint-badlands-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-crackle-paint-martian-earth-60ml
+    name: Green Stuff World Auxiliary Crackle Paint - Martian Earth 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574501766ES
+    ean: '8436574501766'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-crackle-paint-martian-earth-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_033f863c-b1bc-4e4d-9515-6842d35db67c.jpg?v=1760168069
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-crackle-paint-martian-earth-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-crackle-paint-mojave-mudcrack-60ml
+    name: Green Stuff World Auxiliary Crackle Paint - Mojave Mudcrack 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574501780ES
+    ean: '8436574501780'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-crackle-paint-mojave-mudcrack-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_03b8a2dd-2aa6-472a-b560-ce5050b2e6c3.jpg?v=1760168065
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-crackle-paint-mojave-mudcrack-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-decal-fixer
+    name: Green Stuff World Auxiliary Decal Fixer
+    manufacturer: green-stuff-world
+    sku: 8436574501117ES
+    ean: '8436574501117'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-decal-fixer
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_4ded1145-c837-43e5-b4c4-01161ef1a912.jpg?v=1760167972
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-decal-fixer
+  - id: green-stuff-world/green-stuff-world-auxiliary-decal-softener
+    name: Green Stuff World Auxiliary Decal Softener
+    manufacturer: green-stuff-world
+    sku: 8436574501100ES
+    ean: '8436574501100'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-decal-softener
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_597a3744-10a4-425e-9a72-c7dd4e7d7218.jpg?v=1760167976
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-decal-softener
+  - id: green-stuff-world/green-stuff-world-auxiliary-dye-for-resins-black
+    name: Green Stuff World Auxiliary Dye for Resins BLACK
+    manufacturer: green-stuff-world
+    sku: 8436574507591ES
+    ean: '8436574507591'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-dye-for-resins-black
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_9c60404b-8ec1-4fe2-b81c-95cb5eb5bff7.jpg?v=1760168271
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-dye-for-resins-black
+  - id: green-stuff-world/green-stuff-world-auxiliary-dye-for-resins-blue
+    name: Green Stuff World Auxiliary Dye for Resins BLUE
+    manufacturer: green-stuff-world
+    sku: 8436574507607ES
+    ean: '8436574507607'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-dye-for-resins-blue
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_1c858c1c-c360-4cd8-920c-812eb31f8442.jpg?v=1760168267
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-dye-for-resins-blue
+  - id: green-stuff-world/green-stuff-world-auxiliary-dye-for-resins-green
+    name: Green Stuff World Auxiliary Dye for Resins GREEN
+    manufacturer: green-stuff-world
+    sku: 8436574507614ES
+    ean: '8436574507614'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-dye-for-resins-green
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_537cd669-dae6-4e98-86e5-035411d6e091.jpg?v=1760168264
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-dye-for-resins-green
+  - id: green-stuff-world/green-stuff-world-auxiliary-dye-for-resins-magenta
+    name: Green Stuff World Auxiliary Dye for Resins MAGENTA
+    manufacturer: green-stuff-world
+    sku: 8436574507645ES
+    ean: '8436574507645'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-dye-for-resins-magenta
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_12d94c93-3091-4c82-a53a-a2fcb133cf1c.jpg?v=1760168172
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-dye-for-resins-magenta
+  - id: green-stuff-world/green-stuff-world-auxiliary-dye-for-resins-red
+    name: Green Stuff World Auxiliary Dye for Resins RED
+    manufacturer: green-stuff-world
+    sku: 8436574507638ES
+    ean: '8436574507638'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-dye-for-resins-red
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_9ad3ed1d-c708-49a2-b2d4-51567d35a187.jpg?v=1760168245
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-dye-for-resins-red
+  - id: green-stuff-world/green-stuff-world-auxiliary-dye-for-resins-yellow
+    name: Green Stuff World Auxiliary Dye for Resins YELLOW
+    manufacturer: green-stuff-world
+    sku: 8436574507621ES
+    ean: '8436574507621'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-dye-for-resins-yellow
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_3956d4e4-ab3f-4dea-b8e0-ce10cca0cd5b.jpg?v=1760168249
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-dye-for-resins-yellow
+  - id: green-stuff-world/green-stuff-world-auxiliary-gloss-surface-primer-60ml-black
+    name: Green Stuff World Auxiliary Gloss Surface Primer 60ml - Black
+    manufacturer: green-stuff-world
+    sku: 8436574501025ES
+    ean: '8436574501025'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: primer
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-gloss-surface-primer-60ml-black
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_4cc7c0eb-6e7b-4fad-84f1-c917cbb9aff6.jpg?v=1760168028
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-gloss-surface-primer-60ml-black
+  - id: green-stuff-world/green-stuff-world-auxiliary-gloss-varnish
+    name: Green Stuff World Auxiliary Gloss Varnish
+    manufacturer: green-stuff-world
+    sku: 8436574501032ES
+    ean: '8436574501032'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: varnish
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-gloss-varnish
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d33aad84-fd8d-4258-9eec-97fa2183ffa9.jpg?v=1760167997
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-gloss-varnish
+  - id: green-stuff-world/green-stuff-world-auxiliary-holographic-paint
+    name: Green Stuff World Auxiliary Holographic Paint
+    manufacturer: green-stuff-world
+    sku: 8436574500325ES
+    ean: '8436574500325'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-holographic-paint
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_a91bfc61-1422-4f3a-b53b-034a3539bbf2.jpg?v=1760168062
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-holographic-paint
+  - id: green-stuff-world/green-stuff-world-auxiliary-liquid-frost
+    name: Green Stuff World Auxiliary Liquid Frost
+    manufacturer: green-stuff-world
+    sku: 8436574504767ES
+    ean: '8436574504767'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-liquid-frost
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_48c627db-215d-4c04-a0cb-d2db06441c02.jpg?v=1760168036
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-liquid-frost
+  - id: green-stuff-world/green-stuff-world-auxiliary-liquid-mask
+    name: Green Stuff World Auxiliary Liquid Mask
+    manufacturer: green-stuff-world
+    sku: 8436574501070ES
+    ean: '8436574501070'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-liquid-mask
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_eebe811d-46e0-4d88-b496-97374cec5d75.jpg?v=1760168000
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-liquid-mask
+  - id: green-stuff-world/green-stuff-world-auxiliary-master-medium
+    name: Green Stuff World Auxiliary Master Medium
+    manufacturer: green-stuff-world
+    sku: 8436574501056ES
+    ean: '8436574501056'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-master-medium
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_c5bb9615-d527-4038-bc1a-2c562d969392.jpg?v=1760167983
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-master-medium
+  - id: green-stuff-world/green-stuff-world-auxiliary-master-medium-60ml
+    name: Green Stuff World Auxiliary Master Medium 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574507706ES
+    ean: '8436574507706'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-master-medium-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_87f93fb3-399e-4989-9338-7b971abd439c.jpg?v=1760168157
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-master-medium-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-matt-surface-primer-60ml-black
+    name: Green Stuff World Auxiliary Matt Surface Primer 60ml - Black
+    manufacturer: green-stuff-world
+    sku: 8436574500998ES
+    ean: '8436574500998'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: primer
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-matt-surface-primer-60ml-black
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_c75ad811-7dee-4cdd-a99a-3dcf70c1928f.jpg?v=1760168010
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-matt-surface-primer-60ml-black
+  - id: green-stuff-world/green-stuff-world-auxiliary-matt-surface-primer-60ml-green
+    name: Green Stuff World Auxiliary Matt Surface Primer 60ml - Green
+    manufacturer: green-stuff-world
+    sku: 8436574502404ES
+    ean: '8436574502404'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: primer
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-matt-surface-primer-60ml-green
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_9d1ea699-def2-4512-98b4-83357e561662.jpg?v=1760168279
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-matt-surface-primer-60ml-green
+  - id: green-stuff-world/green-stuff-world-auxiliary-matt-surface-primer-60ml-grey
+    name: Green Stuff World Auxiliary Matt Surface Primer 60ml - Grey
+    manufacturer: green-stuff-world
+    sku: 8436574501018ES
+    ean: '8436574501018'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: primer
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-matt-surface-primer-60ml-grey
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_447d3e6e-cbe1-47ed-b980-fe20192207d1.jpg?v=1760168003
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-matt-surface-primer-60ml-grey
+  - id: green-stuff-world/green-stuff-world-auxiliary-matt-surface-primer-60ml-red
+    name: Green Stuff World Auxiliary Matt Surface Primer 60ml - Red
+    manufacturer: green-stuff-world
+    sku: 8436574502473ES
+    ean: '8436574502473'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: primer
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-matt-surface-primer-60ml-red
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_871f292f-45b9-40e0-8b52-42b9f19ba576.jpg?v=1760167954
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-matt-surface-primer-60ml-red
+  - id: green-stuff-world/green-stuff-world-auxiliary-matt-surface-primer-60ml-white
+    name: Green Stuff World Auxiliary Matt Surface Primer 60ml - White
+    manufacturer: green-stuff-world
+    sku: 8436574501001ES
+    ean: '8436574501001'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: primer
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-matt-surface-primer-60ml-white
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_1bbd1f3d-cf28-4ad2-9a48-fcb430f79d66.jpg?v=1760168007
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-matt-surface-primer-60ml-white
+  - id: green-stuff-world/green-stuff-world-auxiliary-maxx-matt-varnish-17ml-ultramate
+    name: Green Stuff World Auxiliary Maxx Matt Varnish 17ml - Ultramate
+    manufacturer: green-stuff-world
+    sku: 8436574509984ES
+    ean: '8436574509984'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: varnish
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-maxx-matt-varnish-ultramate
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_60b59896-b552-486b-a6dd-573c46860af9.jpg?v=1760168149
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-maxx-matt-varnish-ultramate
+  - id: green-stuff-world/green-stuff-world-auxiliary-maxx-matt-varnish-60ml-ultramate
+    name: Green Stuff World Auxiliary Maxx Matt Varnish 60ml - Ultramate
+    manufacturer: green-stuff-world
+    sku: 8436574509991ES
+    ean: '8436574509991'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: varnish
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-maxx-matt-varnish-60ml-ultramate
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_aad91f5b-6a03-45ea-a06a-22c8c9bca7a1.jpg?v=1760168128
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-maxx-matt-varnish-60ml-ultramate
+  - id: green-stuff-world/green-stuff-world-auxiliary-mud-effect
+    name: Green Stuff World Auxiliary Mud Effect
+    manufacturer: green-stuff-world
+    sku: 8436574501124ES
+    ean: '8436574501124'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 6.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-mud-effect
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_9032f9a6-5e51-47a7-8b44-e35572b842f2.jpg?v=1760168058
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-mud-effect
+  - id: green-stuff-world/green-stuff-world-auxiliary-ork-blood
+    name: Green Stuff World Auxiliary Ork Blood
+    manufacturer: green-stuff-world
+    sku: 8436574502497ES
+    ean: '8436574502497'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-ork-blood
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_8fbb6231-dbc4-462e-aa0d-07568b0808cf.jpg?v=1760168116
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-ork-blood
+  - id: green-stuff-world/green-stuff-world-auxiliary-oxidizer-17ml
+    name: Green Stuff World Auxiliary Oxidizer 17ml
+    manufacturer: green-stuff-world
+    sku: 8436574509243ES
+    ean: '8436574509243'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 6.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-oxidizer-17ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_5870f001-7935-435e-913f-8fa3646a3477.jpg?v=1760168142
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-oxidizer-17ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-paint-remover-240-ml
+    name: Green Stuff World Auxiliary Paint Remover 240 ml
+    manufacturer: green-stuff-world
+    sku: 8436574504620ES
+    ean: '8436574504620'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 20.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-paint-remover-240-ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_915ac1a2-04b2-41e7-b503-a6aaa137da16.jpg?v=1760167940
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-paint-remover-240-ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-pigment-fixer
+    name: Green Stuff World Auxiliary Pigment Fixer
+    manufacturer: green-stuff-world
+    sku: 8436574501131ES
+    ean: '8436574501131'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: medium
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 6.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-pigment-fixer
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_1d661d04-c534-4a38-bc11-11d6f523932f.jpg?v=1760167979
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-pigment-fixer
+  - id: green-stuff-world/green-stuff-world-auxiliary-repositionable-stencil-glue
+    name: Green Stuff World Auxiliary Repositionable Stencil Glue
+    manufacturer: green-stuff-world
+    sku: 8436574508949ES
+    ean: '8436574508949'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-repositionable-stencil-glue
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_6ddf3b96-ea1a-4812-9334-b52defb114db.jpg?v=1760168153
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-repositionable-stencil-glue
+  - id: green-stuff-world/green-stuff-world-auxiliary-spider-serum
+    name: Green Stuff World Auxiliary Spider Serum
+    manufacturer: green-stuff-world
+    sku: 8436574500158ES
+    ean: '8436574500158'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-spider-serum
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_3aa802d7-7b40-4873-b225-f2765fc14098.jpg?v=1760168095
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-spider-serum
+  - id: green-stuff-world/green-stuff-world-auxiliary-spider-serum-cleaner
+    name: Green Stuff World Auxiliary Spider Serum Cleaner
+    manufacturer: green-stuff-world
+    sku: 8436574500165ES
+    ean: '8436574500165'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: cleaner
+    roleBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-spider-serum-cleaner
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_c16cd6cc-c25a-4201-a804-837f4d8e3c24.jpg?v=1760168091
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-spider-serum-cleaner
+  - id: green-stuff-world/green-stuff-world-auxiliary-splash-gel-water-effect
+    name: Green Stuff World Auxiliary Splash Gel - Water Effect
+    manufacturer: green-stuff-world
+    sku: 8436574505443ES
+    ean: '8436574505443'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-splash-gel-water-effect
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_f5707bf9-2def-4e01-8a0b-78d28e9792ee.jpg?v=1760168087
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-splash-gel-water-effect
+  - id: green-stuff-world/green-stuff-world-auxiliary-true-blood
+    name: Green Stuff World Auxiliary True Blood
+    manufacturer: green-stuff-world
+    sku: 8436574500776ES
+    ean: '8436574500776'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-true-blood
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_a3363eb1-6304-4c58-8744-13c405856de2.jpg?v=1760168113
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-true-blood
+  - id: green-stuff-world/green-stuff-world-auxiliary-tuft-glue-60ml
+    name: Green Stuff World Auxiliary Tuft Glue 60ml
+    manufacturer: green-stuff-world
+    sku: 8436574508956ES
+    ean: '8436574508956'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-tuft-glue-60ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_94cc79e4-81cf-45d4-b246-ab2a54665429.jpg?v=1760168146
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-tuft-glue-60ml
+  - id: green-stuff-world/green-stuff-world-auxiliary-uv-resin-30ml-water-effect
+    name: Green Stuff World Auxiliary UV Resin 30ml - Water Effect
+    manufacturer: green-stuff-world
+    sku: 8436574503791ES
+    ean: '8436574503791'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 15.0
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-uv-resin-30ml-water-effect
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_edff56e0-24f9-43b8-8a3e-54ac843c3048.jpg?v=1760168297
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-uv-resin-30ml-water-effect
+  - id: green-stuff-world/green-stuff-world-auxiliary-vomit-effect
+    name: Green Stuff World Auxiliary Vomit Effect
+    manufacturer: green-stuff-world
+    sku: 8436574507584ES
+    ean: '8436574507584'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 4.5
+    url: https://tistaminis.com/products/green-stuff-world-auxiliary-vomit-effect
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_c578b8c6-b650-44c2-aae2-9d47bf4431c2.jpg?v=1760168039
+    evidence:
+      - ret-tistaminis:green-stuff-world-auxiliary-vomit-effect
   - id: green-stuff-world/green-stuff-world-basing-sets-aquatic
     name: Green Stuff World Basing Sets - Aquatic
     manufacturer: green-stuff-world
@@ -1477,7 +2459,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-avatar-world
@@ -1496,7 +2478,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-desert
@@ -1534,7 +2516,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-infestation
@@ -1553,7 +2535,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-swamp
@@ -1591,7 +2573,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-volcanic
@@ -1638,6 +2620,106 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646515076ES.jpg?v=1760242005
     evidence:
       - ret-tistaminis:green-stuff-world-blood-effects-prince-blood
+  - id: green-stuff-world/green-stuff-world-chrome-paint-antique-gold-17ml-new
+    name: Green Stuff World Chrome Paint - ANTIQUE GOLD 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510521ES
+    ean: '8435646510521'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-antique-gold-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_92883a04-270b-4a94-872f-f1107da6805a.jpg?v=1760213343
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-antique-gold-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-bronze-17ml-new
+    name: Green Stuff World Chrome Paint - BRONZE 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510507ES
+    ean: '8435646510507'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-bronze-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_7a56cd45-695c-49d1-9585-7463b8c2bcd7.jpg?v=1760213349
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-bronze-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-copper-17ml-new
+    name: Green Stuff World Chrome Paint - COPPER 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510545ES
+    ean: '8435646510545'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-copper-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_1da570c2-0113-4436-b0c1-ae951d360448.jpg?v=1760213326
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-copper-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-gold-17ml-new
+    name: Green Stuff World Chrome Paint - GOLD 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510514ES
+    ean: '8435646510514'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-gold-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_2de81490-5511-4411-84bd-61b53172573d.jpg?v=1760213345
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-gold-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-tinplate-17ml-new
+    name: Green Stuff World Chrome Paint - TINPLATE 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510538ES
+    ean: '8435646510538'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-tinplate-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_7d6e36da-0f95-46c9-aa4c-db5e8232effb.jpg?v=1760213329
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-tinplate-17ml-new
   - id: green-stuff-world/green-stuff-world-clear-objective-marker-kill-team-compatible
     name: "Green Stuff World\tClear Objective Marker Kill Team compatible"
     manufacturer: green-stuff-world
@@ -1695,6 +2777,25 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646508351ES-1.jpg?v=1760242016
     evidence:
       - ret-tistaminis:green-stuff-world-crackle-paint-winterfell-plains-60ml
+  - id: green-stuff-world/green-stuff-world-crunch-times-rat-attack-new
+    name: Green Stuff World Crunch Times - RAT ATTACK! New
+    manufacturer: green-stuff-world
+    sku: 8435646508672ES
+    ean: '8435646508672'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 25.0
+    url: https://tistaminis.com/products/green-stuff-world-crunch-times-rat-attack-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_7f6b5f31-6977-4931-94bf-cf5ebc051101.jpg?v=1760190904
+    evidence:
+      - ret-tistaminis:green-stuff-world-crunch-times-rat-attack-new
   - id: green-stuff-world/green-stuff-world-cyanoacrylate-glue-cleaner
     name: Green Stuff World Cyanoacrylate Glue Cleaner
     manufacturer: green-stuff-world
@@ -1753,6 +2854,225 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646515083ES.jpg?v=1760242008
     evidence:
       - ret-tistaminis:green-stuff-world-demon-blood-effect
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-blue-glacier-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - BLUE GLACIER DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510613ES
+    ean: '8435646510613'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-blue-glacier-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_e10a9aa1-5ff4-4d3e-b303-25b291b9c627.jpg?v=1760190305
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-blue-glacier-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-deep-black-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - DEEP BLACK DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510576ES
+    ean: '8435646510576'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-deep-black-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ab2cdb3f-ce50-48ad-8b27-a61b9925b92d.jpg?v=1760190318
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-deep-black-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-green-shark-skin-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - GREEN SHARK SKIN DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510651ES
+    ean: '8435646510651'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-green-shark-skin-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_434187a8-0040-4a9b-bbaa-94cf1bd771be.jpg?v=1760190329
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-green-shark-skin-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-grey-mist-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - GREY MIST DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510668ES
+    ean: '8435646510668'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-grey-mist-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d46ebf06-1727-4dc7-9200-636da88f6271.jpg?v=1760190325
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-grey-mist-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-morrow-purple-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - MORROW PURPLE DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510637ES
+    ean: '8435646510637'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-morrow-purple-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_71e138d9-1536-4c52-9cfd-3d74e51c143c.jpg?v=1760190302
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-morrow-purple-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-nude-skin-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - NUDE SKIN DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510606ES
+    ean: '8435646510606'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: lexicon
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-nude-skin-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_bcb2292a-e79b-4be0-b226-14791497bae5.jpg?v=1760190277
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-nude-skin-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-purple-vanity-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - PURPLE VANITY DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510644ES
+    ean: '8435646510644'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-purple-vanity-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_f6ca53c9-62e6-47c4-9565-13e0e3a083db.jpg?v=1760190275
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-purple-vanity-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-red-opulence-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - RED OPULENCE DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510675ES
+    ean: '8435646510675'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-red-opulence-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_bbbeb109-93ce-4748-acf0-9aa676bf9c31.jpg?v=1760190322
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-red-opulence-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-seraphim-flesh-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - SERAPHIM FLESH DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510590ES
+    ean: '8435646510590'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-seraphim-flesh-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_5cbb7baa-bdf4-4988-98db-789d3f58405f.jpg?v=1760190298
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-seraphim-flesh-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-violet-hint-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - VIOLET HINT DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510620ES
+    ean: '8435646510620'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-violet-hint-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ee8b7383-c650-4ce0-9c51-8d5b19c7fb4b.jpg?v=1760190294
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-violet-hint-dip-new
+  - id: green-stuff-world/green-stuff-world-dipping-ink-60-ml-yellow-submarine-dip-new
+    name: Green Stuff World Dipping Ink 60 ml - YELLOW SUBMARINE DIP New
+    manufacturer: green-stuff-world
+    sku: 8435646510583ES
+    ean: '8435646510583'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 9.99
+    url: https://tistaminis.com/products/green-stuff-world-dipping-ink-60-ml-yellow-submarine-dip-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ba66ee13-c916-4843-ba49-45ddd0afaf7b.jpg?v=1760190290
+    evidence:
+      - ret-tistaminis:green-stuff-world-dipping-ink-60-ml-yellow-submarine-dip-new
   - id: green-stuff-world/green-stuff-world-dungeon-dnd-coins
     name: "Green Stuff World\tDungeon DND Coins"
     manufacturer: green-stuff-world
@@ -1765,7 +3085,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-dungeon-dnd-coins
@@ -1821,13 +3141,89 @@ products:
     role: varnish
     roleBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 12.0
     url: https://tistaminis.com/products/green-stuff-world-gloss-varnish-60ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646502472ES.jpg?v=1760249531
     evidence:
       - ret-tistaminis:green-stuff-world-gloss-varnish-60ml
+  - id: green-stuff-world/green-stuff-world-hobby-arch-led-lamp-darth-black-new
+    name: Green Stuff World Hobby Arch LED Lamp - Darth Black New
+    manufacturer: green-stuff-world
+    sku: 8435646505602ES
+    ean: '8435646505602'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 100.0
+    url: https://tistaminis.com/products/green-stuff-world-hobby-arch-led-lamp-darth-black-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_61820e08-87e5-429f-969d-f19c38d70e78.jpg?v=1760186401
+    evidence:
+      - ret-tistaminis:green-stuff-world-hobby-arch-led-lamp-darth-black-new
+  - id: green-stuff-world/green-stuff-world-hobby-arch-led-lamp-faded-white-new
+    name: Green Stuff World Hobby Arch LED Lamp - Faded White New
+    manufacturer: green-stuff-world
+    sku: 8435646505619ES
+    ean: '8435646505619'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 100.0
+    url: https://tistaminis.com/products/green-stuff-world-hobby-arch-led-lamp-faded-white-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d37ce487-8085-4885-9460-0ee91a5737cb.jpg?v=1760186408
+    evidence:
+      - ret-tistaminis:green-stuff-world-hobby-arch-led-lamp-faded-white-new
+  - id: green-stuff-world/green-stuff-world-hobby-carving-set-new
+    name: Green Stuff World Hobby Carving Set New
+    manufacturer: green-stuff-world
+    sku: 8436574508963ES
+    ean: '8436574508963'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 30.0
+    url: https://tistaminis.com/products/green-stuff-world-hobby-carving-set-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_1b2d8dcd-06a9-41e1-bd68-f1bdd9067fb0.jpg?v=1760186385
+    evidence:
+      - ret-tistaminis:green-stuff-world-hobby-carving-set-new
+  - id: green-stuff-world/green-stuff-world-horror-heads-nightmare-new
+    name: Green Stuff World Horror Heads - NIGHTMARE New
+    manufacturer: green-stuff-world
+    sku: 8435646511993ES
+    ean: '8435646511993'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 12.0
+    url: https://tistaminis.com/products/green-stuff-world-horror-heads-nightmare-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_b377556c-2b6e-4882-b9c1-90c1a89fd1d2.jpg?v=1760190918
+    evidence:
+      - ret-tistaminis:green-stuff-world-horror-heads-nightmare-new
   - id: green-stuff-world/green-stuff-world-intensity-ink-osl-white
     name: Green Stuff World Intensity Ink OSL WHITE
     manufacturer: green-stuff-world
@@ -1841,7 +3237,7 @@ products:
     role: colour
     roleBasis: paint-archive
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 4.5
     url: https://tistaminis.com/products/green-stuff-world-intensity-ink-osl-white
@@ -1860,7 +3256,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 14.0
     url: https://tistaminis.com/products/green-stuff-world-magnetic-sheet-combo-self-adhesive
@@ -1879,7 +3275,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 50.0
     url: https://tistaminis.com/products/green-stuff-world-magnifying-desk-lamp-faded-white
@@ -1896,7 +3292,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/green-stuff-world-magnifying-glasses-for-hobbies
@@ -1916,7 +3312,7 @@ products:
     role: colour
     roleBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 11.0
     url: https://tistaminis.com/products/green-stuff-world-maxx-darth-black-paint-17-ml
@@ -1936,7 +3332,7 @@ products:
     role: colour
     roleBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 26.0
     url: https://tistaminis.com/products/green-stuff-world-maxx-darth-paint-60-ml
@@ -1994,7 +3390,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 50.0
     url: https://tistaminis.com/products/green-stuff-world-mdf-vertical-rack-with-drawers
@@ -2081,6 +3477,466 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8436574509281ES.jpg?v=1772931471
     evidence:
       - ret-tistaminis:green-stuff-world-metallics-kingsfall-gold
+  - id: green-stuff-world/green-stuff-world-metallics-metal-filters-gold-interference
+    name: Green Stuff World Metallics Metal Filters - Gold Interference
+    manufacturer: green-stuff-world
+    sku: 8436574509458ES
+    ean: '8436574509458'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metal-filters-gold-interference
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_65c90d90-07ed-4537-a4a7-fbacc292ddd3.jpg?v=1760167826
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metal-filters-gold-interference
+  - id: green-stuff-world/green-stuff-world-metallics-metal-filters-green-interference
+    name: Green Stuff World Metallics Metal Filters - Green Interference
+    manufacturer: green-stuff-world
+    sku: 8436574509441ES
+    ean: '8436574509441'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metal-filters-green-interference
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_838d8f09-0eea-4054-bbab-7972ab56960a.jpg?v=1760167822
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metal-filters-green-interference
+  - id: green-stuff-world/green-stuff-world-metallics-metal-filters-purple-interference
+    name: Green Stuff World Metallics Metal Filters - Purple Interference
+    manufacturer: green-stuff-world
+    sku: 8436574509427ES
+    ean: '8436574509427'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metal-filters-purple-interference
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_68e4218d-8269-4fd2-8b5a-d35c2bdbf745.jpg?v=1760167805
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metal-filters-purple-interference
+  - id: green-stuff-world/green-stuff-world-metallics-metal-filters-red-interference
+    name: Green Stuff World Metallics Metal Filters - Red Interference
+    manufacturer: green-stuff-world
+    sku: 8436574509465ES
+    ean: '8436574509465'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metal-filters-red-interference
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_cca5fd08-97b9-4545-a281-3ab4bc8c1323.jpg?v=1760167829
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metal-filters-red-interference
+  - id: green-stuff-world/green-stuff-world-metallics-metal-filters-turquoise-interference
+    name: Green Stuff World Metallics Metal Filters - Turquoise Interference
+    manufacturer: green-stuff-world
+    sku: 8436574509434ES
+    ean: '8436574509434'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metal-filters-turquoise-interference
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_826b430c-2e2b-4316-a6c7-c8691be05ba1.jpg?v=1760167809
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metal-filters-turquoise-interference
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-anthrax-metal
+    name: Green Stuff World Metallics Metallic Paint ANTHRAX METAL
+    manufacturer: green-stuff-world
+    sku: 8436574502213ES
+    ean: '8436574502213'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-anthrax-metal
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_3d2391af-9533-46e5-a613-beb4aac0dd71.jpg?v=1760167887
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-anthrax-metal
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-antique-gold
+    name: Green Stuff World Metallics Metallic Paint ANTIQUE GOLD
+    manufacturer: green-stuff-world
+    sku: 8436574502305ES
+    ean: '8436574502305'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-antique-gold
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_9f4f8da9-387c-40b5-8d5c-974b51792899.jpg?v=1760167855
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-antique-gold
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-aqua-turquoise
+    name: Green Stuff World Metallics Metallic Paint AQUA TURQUOISE
+    manufacturer: green-stuff-world
+    sku: 8436574502350ES
+    ean: '8436574502350'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-aqua-turquoise
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ea0b5a0e-15ea-4917-8265-195780788485.jpg?v=1760167926
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-aqua-turquoise
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-caesar-red
+    name: Green Stuff World Metallics Metallic Paint CAESAR RED
+    manufacturer: green-stuff-world
+    sku: 8436574502336ES
+    ean: '8436574502336'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-caesar-red
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_ec5f19b2-f9ba-44da-961c-6aaa925b8967.jpg?v=1760167863
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-caesar-red
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-dark-elder-bronze
+    name: Green Stuff World Metallics Metallic Paint DARK ELDER BRONZE
+    manufacturer: green-stuff-world
+    sku: 8436574502251ES
+    ean: '8436574502251'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-dark-elder-bronze
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_51499c39-5728-4ab7-acd5-585c23b08593.jpg?v=1760167894
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-dark-elder-bronze
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-el-dorado
+    name: Green Stuff World Metallics Metallic Paint El Dorado
+    manufacturer: green-stuff-world
+    sku: 8436574502299ES
+    ean: '8436574502299'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/metallic-paint-el-dorado-gold.jpg?v=1760169406
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-gladius-bronze
+    name: Green Stuff World Metallics Metallic Paint GLADIUS BRONZE
+    manufacturer: green-stuff-world
+    sku: 8436574502268ES
+    ean: '8436574502268'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-gladius-bronze
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_8fa671ed-553b-4660-a4da-1430d3025253.jpg?v=1760167859
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-gladius-bronze
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-gunmetal-grey
+    name: Green Stuff World Metallics Metallic Paint GUNMETAL GREY
+    manufacturer: green-stuff-world
+    sku: 8436574502190ES
+    ean: '8436574502190'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-gunmetal-grey
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_f2c96438-f3d6-47a6-8262-4745e2093350.jpg?v=1760167880
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-gunmetal-grey
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-mystic-white
+    name: Green Stuff World Metallics Metallic Paint MYSTIC WHITE
+    manufacturer: green-stuff-world
+    sku: 8436574502220ES
+    ean: '8436574502220'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-mystic-white
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_57c91941-8c0e-437f-a4d7-cb9b06865aef.jpg?v=1760167923
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-mystic-white
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-neptunus-blue
+    name: Green Stuff World Metallics Metallic Paint NEPTUNUS BLUE
+    manufacturer: green-stuff-world
+    sku: 8436574502312ES
+    ean: '8436574502312'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-neptunus-blue
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_93b516e3-97ec-417e-bacd-fe92575fccc5.jpg?v=1760167890
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-neptunus-blue
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-orchid-purple
+    name: Green Stuff World Metallics Metallic Paint ORCHID PURPLE
+    manufacturer: green-stuff-world
+    sku: 8436574502367ES
+    ean: '8436574502367'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-orchid-purple
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_6c2e8f23-c50d-4f7b-95d8-7ce47d8889d7.jpg?v=1760167837
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-orchid-purple
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-persian-violet
+    name: Green Stuff World Metallics Metallic Paint PERSIAN VIOLET
+    manufacturer: green-stuff-world
+    sku: 8436574502343ES
+    ean: '8436574502343'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-persian-violet
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_af853757-20ff-48b1-96d1-70538574e1d2.jpg?v=1760167833
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-persian-violet
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-quicksilver
+    name: Green Stuff World Metallics Metallic Paint QUICKSILVER
+    manufacturer: green-stuff-world
+    sku: 8436574502206ES
+    ean: '8436574502206'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-quicksilver
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_579bc974-8bec-4667-ada8-8a35493f0093.jpg?v=1760167886
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-quicksilver
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-sharkfin-blue
+    name: Green Stuff World Metallics Metallic Paint SHARKFIN BLUE
+    manufacturer: green-stuff-world
+    sku: 8436574502237ES
+    ean: '8436574502237'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-sharkfin-blue
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_deaa7962-9054-40d7-b755-7bac7049a090.jpg?v=1760167915
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-sharkfin-blue
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-shiny-gold
+    name: Green Stuff World Metallics Metallic Paint SHINY GOLD
+    manufacturer: green-stuff-world
+    sku: 8436574502282ES
+    ean: '8436574502282'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-shiny-gold
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_18d522c5-3ddf-4923-beb5-897ec736836f.jpg?v=1760167852
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-shiny-gold
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-sirenscale-green
+    name: Green Stuff World Metallics Metallic Paint SIRENSCALE GREEN
+    manufacturer: green-stuff-world
+    sku: 8436574502329ES
+    ean: '8436574502329'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-sirenscale-green
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d86cb9b8-a9b2-461f-b8a0-7c1521320e0c.jpg?v=1760167866
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-sirenscale-green
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-steampunk-copper
+    name: Green Stuff World Metallics Metallic Paint STEAMPUNK COPPER
+    manufacturer: green-stuff-world
+    sku: 8436574502275ES
+    ean: '8436574502275'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-steampunk-copper
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_257477bc-1da1-44ee-ad5c-0a9daea19a50.jpg?v=1760167918
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-steampunk-copper
+  - id: green-stuff-world/green-stuff-world-metallics-metallic-paint-tinmetal-grey
+    name: Green Stuff World Metallics Metallic Paint TINMETAL GREY
+    manufacturer: green-stuff-world
+    sku: 8436574502244ES
+    ean: '8436574502244'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: paint-barcode
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 5.25
+    url: https://tistaminis.com/products/green-stuff-world-metallics-metallic-paint-tinmetal-grey
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_08061277-b632-440f-9163-07032a7122a9.jpg?v=1760167911
+    evidence:
+      - ret-tistaminis:green-stuff-world-metallics-metallic-paint-tinmetal-grey
   - id: green-stuff-world/green-stuff-world-metallics-purple-passion
     name: Green Stuff World Metallics Purple Passion
     manufacturer: green-stuff-world
@@ -2113,7 +3969,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 18.0
     url: https://tistaminis.com/products/green-stuff-world-miniature-camouflage-nets-green-1-35
@@ -2132,7 +3988,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 18.0
     url: https://tistaminis.com/products/green-stuff-world-miniature-camouflage-nets-khaki-1-35
@@ -2208,7 +4064,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/green-stuff-world-modular-paint-rack-vertical-17ml
@@ -2227,7 +4083,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/green-stuff-world-modular-paint-rack-vertical-30ml
@@ -2322,7 +4178,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 25.0
     url: https://tistaminis.com/products/green-stuff-world-multipurpose-open-rack
@@ -2451,7 +4307,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 27.0
     url: https://tistaminis.com/products/green-stuff-world-refillable-paint-pen-0-5-pack-x6
@@ -2470,7 +4326,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 25.0
     url: https://tistaminis.com/products/green-stuff-world-refillable-paint-pen-0-7-pack-x6
@@ -2489,7 +4345,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 12.0
     url: https://tistaminis.com/products/green-stuff-world-resin-bits-armory-bullet-casings
@@ -2508,7 +4364,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 9.0
     url: https://tistaminis.com/products/green-stuff-world-round-to-square-base-adapter-40mm
@@ -2534,6 +4390,25 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646529059ES7.jpg?v=1772929194
     evidence:
       - ret-tistaminis:green-stuff-world-silicone-molds-sandbags
+  - id: green-stuff-world/green-stuff-world-silicone-moulds-graveyard-new
+    name: Green Stuff World Silicone Moulds - GRAVEYARD New
+    manufacturer: green-stuff-world
+    sku: 8435646504728ES
+    ean: '8435646504728'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 40.0
+    url: https://tistaminis.com/products/green-stuff-world-silicone-moulds-graveyard-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_b3d10641-4af4-4af5-bcd8-4c9cd76d5c14.jpg?v=1760190403
+    evidence:
+      - ret-tistaminis:green-stuff-world-silicone-moulds-graveyard-new
   - id: green-stuff-world/green-stuff-world-starter-brush-set-new
     name: Green Stuff World Starter Brush Set New
     manufacturer: green-stuff-world
@@ -2553,6 +4428,25 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646511443ES-1.jpg?v=1760254058
     evidence:
       - ret-tistaminis:green-stuff-world-starter-brush-set
+  - id: green-stuff-world/green-stuff-world-streamer-support-set-for-arch-led-lamp-new
+    name: Green Stuff World Streamer Support Set for Arch LED Lamp New
+    manufacturer: green-stuff-world
+    sku: 8435646507163ES
+    ean: '8435646507163'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 25.0
+    url: https://tistaminis.com/products/green-stuff-world-streamer-support-set-for-arch-led-lamp-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d2ae5bd6-bd12-4de3-bf20-7b39abafcb26.jpg?v=1760186651
+    evidence:
+      - ret-tistaminis:green-stuff-world-streamer-support-set-for-arch-led-lamp-new
   - id: green-stuff-world/green-stuff-world-tape-12-inches
     name: Green Stuff World Tape 12 Inches
     manufacturer: green-stuff-world
@@ -2570,6 +4464,44 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8436554365029ES.jpg?v=1778502086
     evidence:
       - ret-tistaminis:green-stuff-world-tape-12-inches
+  - id: green-stuff-world/green-stuff-world-texture-plate-lizard-skin-new
+    name: Green Stuff World Texture Plate - Lizard Skin New
+    manufacturer: green-stuff-world
+    sku: 8436554368754ES
+    ean: '8436554368754'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 25.0
+    url: https://tistaminis.com/products/green-stuff-world-texture-plate-lizard-skin-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_e787cd41-5de0-4de1-bfd2-2dac8c493ec1.jpg?v=1760186426
+    evidence:
+      - ret-tistaminis:green-stuff-world-texture-plate-lizard-skin-new
+  - id: green-stuff-world/green-stuff-world-texture-plate-scales-new
+    name: Green Stuff World Texture Plate - Scales New
+    manufacturer: green-stuff-world
+    sku: 8436554368730ES
+    ean: '8436554368730'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 25.0
+    url: https://tistaminis.com/products/green-stuff-world-texture-plate-scales-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_281c3083-de63-4531-8e55-e970ec9767a3.jpg?v=1760186430
+    evidence:
+      - ret-tistaminis:green-stuff-world-texture-plate-scales-new
   - id: green-stuff-world/green-stuff-world-vertical-paint-brush-organizer-new
     name: Green Stuff World Vertical paint brush organizer New
     manufacturer: green-stuff-world
@@ -2582,7 +4514,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 25.0
     url: https://tistaminis.com/products/green-stuff-world-vertical-paint-brush-organizer
@@ -2601,7 +4533,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 20.0
     url: https://tistaminis.com/products/green-stuff-world-vertical-paint-organizer-17ml-lite
@@ -2639,7 +4571,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-water-slide-decals-pin-ups
@@ -2658,7 +4590,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-waterslide-decals-only-numbers
@@ -2677,7 +4609,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 22.0
     url: https://tistaminis.com/products/green-stuff-world-waterslide-decals-orcs

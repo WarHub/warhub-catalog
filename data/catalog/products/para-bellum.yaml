@@ -225,7 +225,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 64.99
     url: https://eshop.para-bellum.com/product/city-states-minotaur-thyreans-dual-kit/
@@ -1109,6 +1109,50 @@ products:
     evidence:
       - legacy-catalog:para-bellum/conquest/old-dominion/buccephaloi
       - mfr-para-bellum:1625
+  - id: para-bellum/PBOD305
+    name: Tainted Heralds (Dual Kit)
+    manufacturer: para-bellum
+    productCode: PBOD305
+    sku: PBOD305
+    gameSystems:
+      - conquest
+    faction: old-dominion
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceUsd: 64.99
+    url: https://eshop.para-bellum.com/product/tainted-heralds/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/08/PBOD305_Tainted_Heralds_OldDominion_Models_D_Eshop-copy.jpg
+    evidence:
+      - mfr-para-bellum:25041
+  - id: para-bellum/PBOD306
+    name: Fallen Angels (Dual Kit)
+    manufacturer: para-bellum
+    productCode: PBOD306
+    sku: PBOD306
+    gameSystems:
+      - conquest
+    faction: old-dominion
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceUsd: 64.99
+    url: https://eshop.para-bellum.com/product/fallen-angels/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/08/PBOD306_Fallen_Angels_OldDominion_Models_D_Eshop-copy.jpg
+    evidence:
+      - mfr-para-bellum:25042
   - id: para-bellum/PBOD401
     name: Fallen Divinity
     manufacturer: para-bellum
@@ -1721,6 +1765,50 @@ products:
     imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/03/PBSK306_Marid_Lancers_Models_D_Eshop-copy-1.jpg
     evidence:
       - mfr-para-bellum:22582
+  - id: para-bellum/PBSK307
+    name: Eternal Ikons (Dual Kit)
+    manufacturer: para-bellum
+    productCode: PBSK307
+    sku: PBSK307
+    gameSystems:
+      - conquest
+    faction: sorcerer-kings
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceUsd: 64.99
+    url: https://eshop.para-bellum.com/product/eternal-ikons-dual-kit/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/08/PBSK307_Eternal_Ikons_Models_D_Eshop-copy.jpg
+    evidence:
+      - mfr-para-bellum:25043
+  - id: para-bellum/PBSK308
+    name: Eternal Destroyers (Dual Kit)
+    manufacturer: para-bellum
+    productCode: PBSK308
+    sku: PBSK308
+    gameSystems:
+      - conquest
+    faction: sorcerer-kings
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceUsd: 64.99
+    url: https://eshop.para-bellum.com/product/eternal-destroyers-dual-kit/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/08/PBSK308_Eternal_Destroyers_Models_B_Eshop-copy.jpg
+    evidence:
+      - mfr-para-bellum:25044
   - id: para-bellum/PBSK401
     name: Rakshasa Ravanar (Dual kit)
     manufacturer: para-bellum
@@ -2508,8 +2596,8 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     packaging: single
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceUsd: 199.99
     url: https://eshop.para-bellum.com/product/two-player-starter-set-yoroni-vs-wadrhun/
@@ -3794,7 +3882,7 @@ products:
       - legacy-catalog:para-bellum/conquest/hundred-kingdoms/trebuchet-monster-kit
       - mfr-para-bellum:22216
   - id: para-bellum/PBW2243
-    name: Order Martyrs of St Lazarus (Dual Kit)
+    name: Martyrs of St Lazarus (Dual Kit)
     manufacturer: para-bellum
     productCode: PBW2243
     sku: PBW2243
@@ -4949,8 +5037,8 @@ products:
     category: miniatures
     categoryBasis: code
     packaging: single
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceUsd: 499.99
     url: https://eshop.para-bellum.com/product/heralds-of-hazlia-2000pt-army-old-dominion/
@@ -5099,8 +5187,8 @@ products:
     category: miniatures
     categoryBasis: code
     packaging: single
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceUsd: 159.99
     url: https://eshop.para-bellum.com/product/old-dominion-2025-supercharged-starter-set/
@@ -5577,8 +5665,8 @@ products:
     category: miniatures
     categoryBasis: code
     packaging: set
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-13'
     priceUsd: 879.99
     url: https://eshop.para-bellum.com/product/stampede/
@@ -5715,7 +5803,7 @@ products:
     categoryBasis: code
     packaging: set
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceUsd: 69.99
     url: https://eshop.para-bellum.com/product/wadrhun-reinforcement-set/
@@ -5860,6 +5948,52 @@ products:
     imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/07/PBW6173_HundredKingdom_OnePlayerStarter_TheOrders_Contents.jpg
     evidence:
       - mfr-para-bellum:24752
+  - id: para-bellum/PBW6174
+    name: Sorcerer Kings 2026 Starter
+    manufacturer: para-bellum
+    productCode: PBW6174
+    sku: PBW6174
+    gameSystems:
+      - conquest
+    faction: sorcerer-kings
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceUsd: 159.99
+    url: https://eshop.para-bellum.com/product/sorcerer-kings-2026-starter/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/08/PBW6174_SorcererKings_OnePlayerStarter_2026_Contents_Eshop-copy.jpg
+    evidence:
+      - mfr-para-bellum:25045
+  - id: para-bellum/PBW6187
+    name: 'Might of the Orders: Warband of Legend'
+    manufacturer: para-bellum
+    productCode: PBW6187
+    sku: PBW6187
+    gameSystems:
+      - conquest
+    faction: hundred-kingdoms
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceUsd: 69.99
+    url: https://eshop.para-bellum.com/product/might-of-the-orders-warband-of-legend/
+    imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2026/09/PBW6187_HundredKingdom_MightoftheOrders_FirstBlood_Contents_Eshop-copy.jpg
+    evidence:
+      - mfr-para-bellum:25208
   - id: para-bellum/PBW6548
     name: Conquest Iconic Art Print Bundle!
     manufacturer: para-bellum
@@ -10563,8 +10697,8 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     packaging: single
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceUsd: 17.99
     url: https://eshop.para-bellum.com/product/erlik-s-hobbies-bases-slate/

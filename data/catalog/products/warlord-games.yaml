@@ -13583,6 +13583,8 @@ products:
     manufacturer: warlord-games
     productCode: '203414006'
     sku: '203414006'
+    ean: '5060917994552'
+    eanConfidence: confirmed
     gameSystems:
       - pike-and-shotte
     faction: general
@@ -19386,6 +19388,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 28.35
+    priceCad: 50.0
     url: https://store.warlordgames.com/products/napoleonic-belgian-line-infantry-march-attack
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/302412409_NapoleonicBelgianLineInfantrymarchattack01.jpg?v=1659618053
     description: |-
@@ -19402,6 +19405,7 @@ products:
       - ret-goblingaming:warlord-games-black-powder-napoleonic-belgian-line-infantry-march-attack
       - ret-radaddel:/napoleonic-belgian-line-infantry-march-attack
       - ret-radaddel:napoleonic-belgian-line-infantry-march-attack
+      - ret-tistaminis:black-powder-epic-battles-napoleonic-belgian-line-infantry-march-attack-new
   - id: warlord-games/302412410
     name: Napoleonic Belgian Line Infantry firing
     manufacturer: warlord-games
@@ -24444,6 +24448,8 @@ products:
     manufacturer: warlord-games
     productCode: '303203401'
     sku: '303203401'
+    ean: '5060917994729'
+    eanConfidence: confirmed
     gameSystems:
       - black-powder
     faction: general
@@ -24509,6 +24515,8 @@ products:
     manufacturer: warlord-games
     productCode: '303203801'
     sku: '303203801'
+    ean: '5060917995535'
+    eanConfidence: confirmed
     gameSystems:
       - black-powder
     faction: british
@@ -28141,7 +28149,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 25.0
     url: https://store.warlordgames.com/products/glory-hallelujah-acw-supplement
@@ -36297,7 +36305,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.0
+    priceGbp: 20.0
     url: https://www.goblingaming.co.uk/products/campaign-overlord-supplement
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/campaign-overlord-supplement-bolt-action-warlord-g.jpg?v=1560808571
     evidence:
@@ -36968,9 +36976,7 @@ products:
     productCode: '401013001'
     sku: '401013001'
     ean: '9781472863874'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060917994545'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     gameSystemsBasis: code
@@ -37080,6 +37086,27 @@ products:
       - ret-radaddel:/bolt-action-armies-of-the-soviet-union-englisch
       - ret-radaddel:bolt-action-armies-of-the-soviet-union-englisch
       - ret-tistaminis:bolt-action-armies-of-the-soviet-union
+  - id: warlord-games/401015501
+    name: Bolt Action Armies of France Nov 2026 Pre-Order
+    manufacturer: warlord-games
+    productCode: '401015501'
+    sku: '401015501'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceCad: 37.6
+    url: https://tistaminis.com/products/bolt-action-armies-of-france
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/401015501.jpg?v=1788691224
+    evidence:
+      - ret-tistaminis:bolt-action-armies-of-france
   - id: warlord-games/401015801
     name: Armies of Italy - Bolt Action
     manufacturer: warlord-games
@@ -37098,7 +37125,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 16.8
+    priceGbp: 22.4
     priceEur: 29.45
     priceCad: 44.2
     url: https://www.goblingaming.co.uk/products/armies-of-italy-bolt-action
@@ -41685,10 +41712,12 @@ products:
     availability: in_stock
     firstSeen: '2026-09-01'
     priceGbp: 25.0
+    priceCad: 37.3
     url: https://store.warlordgames.com/products/m24-chaffee-light-tank
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402013057_M24ChaffeeLightTank01.jpg?v=1786575471
     evidence:
       - mfr-warlord-store:m24-chaffee-light-tank
+      - ret-tistaminis:bolt-action-american-m24-chaffee-light-tank-plastic
   - id: warlord-games/402013101
     name: US Airborne plastic boxed set
     manufacturer: warlord-games
@@ -42471,10 +42500,12 @@ products:
     availability: in_stock
     firstSeen: '2026-09-01'
     priceGbp: 37.0
+    priceCad: 65.2
     url: https://store.warlordgames.com/products/french-foreign-legion-platoon
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402015505_FrenchForeignLegionInfantryplatoon01_80af2dca-e4b9-4137-8368-7209291ba6cc.jpg?v=1787913328
     evidence:
       - mfr-warlord-store:french-foreign-legion-platoon
+      - ret-tistaminis:bolt-action-french-foreign-legion-infantry-platoon
   - id: warlord-games/402015506
     name: French Army Heavy Weapons platoon
     manufacturer: warlord-games
@@ -42494,10 +42525,12 @@ products:
     availability: in_stock
     firstSeen: '2026-09-01'
     priceGbp: 30.0
+    priceCad: 53.05
     url: https://store.warlordgames.com/products/french-army-heavy-weapons-platoon
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402015506_FrenchArmyHeavyWeaponsplatoon01.jpg?v=1787577472
     evidence:
       - mfr-warlord-store:french-army-heavy-weapons-platoon
+      - ret-tistaminis:bolt-action-french-army-heavy-weapons-platoon
   - id: warlord-games/402015507
     name: French Army 75mm Light Artillery
     manufacturer: warlord-games
@@ -42517,10 +42550,12 @@ products:
     availability: in_stock
     firstSeen: '2026-09-01'
     priceGbp: 20.0
+    priceCad: 35.35
     url: https://store.warlordgames.com/products/french-army-75mm-light-artillery-1
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402015507_FrenchArmy75mmLightArtillery01.jpg?v=1787586190
     evidence:
       - mfr-warlord-store:french-army-75mm-light-artillery-1
+      - ret-tistaminis:bolt-action-french-army-75mm-light-artillery-n
   - id: warlord-games/402015508
     name: Hold The Line! - French Starter Army
     manufacturer: warlord-games
@@ -42540,10 +42575,12 @@ products:
     availability: in_stock
     firstSeen: '2026-09-01'
     priceGbp: 104.0
+    priceCad: 183.43
     url: https://store.warlordgames.com/products/hold-the-line-french-starter-army
-    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402015508_HoldtheLine__-Frenchstarterarmy01.jpg?v=1787829759
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402015508_HoldtheLine__-Frenchstarterarmy01_219d73c2-53f1-4515-b731-7ce4ad2dca96.jpg?v=1788445977
     evidence:
       - mfr-warlord-store:hold-the-line-french-starter-army
+      - ret-tistaminis:bolt-action-hold-the-line-french-starter-army
   - id: warlord-games/402015801
     name: Italian Army & Blackshirts
     manufacturer: warlord-games
@@ -42619,6 +42656,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 35.55
+    priceCad: 67.7
     url: https://store.warlordgames.com/products/bolt-action-italian-bersaglieri
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402015802-Italian-Bersaglieri1.jpg?v=1666787053
     description: |-
@@ -42639,6 +42677,7 @@ products:
       - ret-goblingaming:warlord-games-bolt-action-italian-bersaglieri-infantry
       - ret-radaddel:/italian-bersaglieri-plastic-boxed-set
       - ret-radaddel:italian-bersaglieri-plastic-boxed-set
+      - ret-tistaminis:bolt-action-italian-bersaglieri-new
   - id: warlord-games/402015803
     name: Italian Alpini Mountain Troops
     manufacturer: warlord-games
@@ -42711,6 +42750,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 104.0
     priceEur: 109.95
+    priceCad: 160.0
     url: https://store.warlordgames.com/products/italian-army-blackshirts-starter-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402015804-Italian-Army-_-Blackshirts-starter-army1.jpg?v=1663845746
     description: |-
@@ -42734,6 +42774,7 @@ products:
       - ret-goblingaming:italian-army-blackshirts-starter-army
       - ret-radaddel:/italian-army-blackshirts-starter-army
       - ret-radaddel:italian-army-blackshirts-starter-army
+      - ret-tistaminis:bolt-action-italian-italian-army-blackshirts-starter-army
   - id: warlord-games/402015805
     name: 'Bolt Action: Italian Bersaglieri Starter Army'
     manufacturer: warlord-games
@@ -42756,6 +42797,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 104.0
     priceEur: 99.95
+    priceCad: 160.0
     url: https://store.warlordgames.com/products/bolt-action-italian-bersaglieri-starter-army
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402015805-Italian-Bersaglieri-starter-army1.jpg?v=1663849117
     description: |-
@@ -42778,6 +42820,7 @@ products:
       - ret-goblingaming:warlord-games-bolt-action-italian-bersaglieri-starter-army
       - ret-radaddel:/italian-bersaglieri-starter-army
       - ret-radaddel:italian-bersaglieri-starter-army
+      - ret-tistaminis:bolt-action-italian-italian-bersaglieri-starter-army
   - id: warlord-games/402015806
     name: Autoblinda AB41/43 Armoured Car
     manufacturer: warlord-games
@@ -43099,10 +43142,12 @@ products:
     availability: in_stock
     firstSeen: '2026-08-22'
     priceGbp: 25.0
+    priceCad: 37.3
     url: https://store.warlordgames.com/products/chi-nu-medium-tank
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402016004_Chi-NuMediumTank01.jpg?v=1786575160
     evidence:
       - mfr-warlord-store:chi-nu-medium-tank
+      - ret-tistaminis:bolt-action-japanese-chi-nu-medium-tank
   - id: warlord-games/402018004
     name: Carro Armato M13 Platoon
     manufacturer: warlord-games
@@ -47026,6 +47071,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 26.5
     priceEur: 23.05
+    priceCad: 48.78
     url: https://store.warlordgames.com/products/san-marco-marines-infantry-section
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402215802_SanMarcoMarinesInfantrySection1.jpg?v=1663849829
     description: |-
@@ -47042,6 +47088,7 @@ products:
       - ret-goblingaming:warlord-games-bolt-action-italian-san-marco-marines-infantry-section
       - ret-radaddel:/san-marco-marines-infantry-section
       - ret-radaddel:san-marco-marines-infantry-section
+      - ret-tistaminis:bolt-action-italian-san-marco-marines-infantry-section
   - id: warlord-games/402215803
     name: Italian Colonial Troops Infantry Squad
     manufacturer: warlord-games
@@ -47064,6 +47111,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 26.5
     priceEur: 19.1
+    priceCad: 48.78
     url: https://store.warlordgames.com/products/italian-colonial-troops-infantry-squad
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402215803_ItalianColonialTroopsInfantrysquad01.jpg?v=1665688566
     description: |-
@@ -47080,6 +47128,7 @@ products:
       - ret-goblingaming:warlord-games-bolt-action-italian-colonial-troops-infantry-squad
       - ret-radaddel:/italian-colonial-troops-infantry-squad
       - ret-radaddel:italian-colonial-troops-infantry-squad
+      - ret-tistaminis:bolt-action-italian-italian-colonial-troops-infantry-squad
   - id: warlord-games/402215804
     name: Italian Army Guastatori Destruction Group
     manufacturer: warlord-games
@@ -47191,6 +47240,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 26.5
     priceEur: 24.05
+    priceCad: 48.78
     url: https://store.warlordgames.com/products/italian-x-arditi-section
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402215806_ItalianXArditisection01.jpg?v=1733839547
     description: |-
@@ -47207,6 +47257,7 @@ products:
       - ret-goblingaming:warlord-games-bolt-action-italian-x-arditi-section
       - ret-radaddel:/italian-x-arditi-section
       - ret-radaddel:italian-x-arditi-section
+      - ret-tistaminis:bolt-action-italian-italian-x-arditi-section
   - id: warlord-games/402215807
     name: Italian Paracadutisti support group
     manufacturer: warlord-games
@@ -47275,6 +47326,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 28.35
+    priceCad: 53.93
     url: https://store.warlordgames.com/products/bolt-action-italian-bersaglieri-support-group
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/402215808-Italian-Bersaglieri-support-group1.jpg?v=1663849528
     description: |-
@@ -47297,6 +47349,7 @@ products:
       - ret-goblingaming:warlord-games-bolt-action-italian-bersaglieri-support-group
       - ret-radaddel:/italian-bersaglieri-support-group
       - ret-radaddel:italian-bersaglieri-support-group
+      - ret-tistaminis:bolt-action-italian-italian-bersaglieri-support-group
   - id: warlord-games/402215809
     name: Italian Bersaglieri Weapons Teams
     manufacturer: warlord-games
@@ -49725,6 +49778,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 32.0
     priceEur: 32.9
+    priceCad: 55.08
     url: https://store.warlordgames.com/products/m7-priest-self-propelled-gun
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/402413004_M7Priestself-propelledgun01.jpg?v=1693840496
     description: |-
@@ -49742,6 +49796,7 @@ products:
       - mfr-warlord-store:m7-priest-self-propelled-gun
       - ret-radaddel:/m7-priest-self-propelled-gun
       - ret-radaddel:m7-priest-self-propelled-gun
+      - ret-tistaminis:bolt-action-allied-m7-priest-self-propelled-gun-new
   - id: warlord-games/402413005
     name: US/Allied LVT-4 "Buffalo" Amtrac
     manufacturer: warlord-games
@@ -50274,7 +50329,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 24.5
     priceEur: 25.35
@@ -53917,6 +53972,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 19.0
     priceEur: 18.35
+    priceCad: 35.01
     url: https://store.warlordgames.com/products/8th-army-2-pounder-atg
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/403011012-8th-Army-2-pounder-ATG1.jpg?v=1665431289
     description: |-
@@ -53934,6 +53990,7 @@ products:
       - ret-goblingaming:8th-army-2-pounder-anti-tank-gun
       - ret-radaddel:/8th-army-2-pounder-anti-tank-gun
       - ret-radaddel:8th-army-2-pounder-anti-tank-gun
+      - ret-tistaminis:bolt-action-british-8th-army-2-pounder-atg-new
   - id: warlord-games/403011019
     name: 8th Army 6 pounder ATG
     manufacturer: warlord-games
@@ -53956,6 +54013,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 19.0
     priceEur: 18.35
+    priceCad: 35.0
     url: https://store.warlordgames.com/products/8th-army-6-pounder-atg
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/403011019_8thArmy6-pdrATG01.jpg?v=1665431366
     description: |-
@@ -53972,6 +54030,7 @@ products:
       - ret-goblingaming:8th-army-6-pounder
       - ret-radaddel:/8th-army-6-pounder-atg
       - ret-radaddel:8th-army-6-pounder-atg
+      - ret-tistaminis:bolt-action-british-8th-army-6-pounder-atg-new
   - id: warlord-games/403011024
     name: British Army 5.5 inch Howitzer (Late War)
     manufacturer: warlord-games
@@ -55715,6 +55774,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 19.0
     priceEur: 18.35
+    priceCad: 35.0
     url: https://store.warlordgames.com/products/afrika-korps-pak-36-light-anti-tank-gun
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/403012028_AfrikaKorpsPaK3601.jpg?v=1665431461
     description: |-
@@ -55731,6 +55791,7 @@ products:
       - mfr-warlord-store:afrika-korps-pak-36-light-anti-tank-gun
       - ret-radaddel:/afrika-korps-pak-36-light-anti-tank-gun
       - ret-radaddel:afrika-korps-pak-36-light-anti-tank-gun
+      - ret-tistaminis:bolt-action-german-afrika-korps-pak-36-light-anti-tank-gun-new
   - id: warlord-games/403012029
     name: Afrika Korps LeFH 18 10.5cm medium artillery
     manufacturer: warlord-games
@@ -55738,6 +55799,8 @@ products:
     sku: 403012029K
     ean: '5060917992077'
     eanConfidence: confirmed
+    additionalEans:
+      - '5060572502161'
     gameSystems:
       - bolt-action
     faction: german
@@ -55752,6 +55815,8 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
+    priceEur: 26.95
+    priceCad: 49.0
     url: https://store.warlordgames.com/products/afrika-korps-lefh-18-10-5cm-medium-artillery
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/403012029_AfrikaKorpsLefh18howitzer01.jpg?v=1575566921
     description: |-
@@ -55769,6 +55834,9 @@ products:
       - legacy-catalog:warlord-games/bolt-action/german/afrika-korps-lefh-18-10-5cm-medium-artillery
       - mfr-warlord-store:afrika-korps-lefh-18-10-5cm-medium-artillery
       - ret-goblingaming:afrika-korps-lefh-18-105cm-medium-artillery
+      - ret-radaddel:/afrika-korps-lefh-18-10.5cm-medium-artillery
+      - ret-radaddel:afrika-korps-lefh-18-10-5cm-medium-artillery
+      - ret-tistaminis:bolt-action-german-afrika-korps-lefh-18-10-5cm-medium-artillery-new
   - id: warlord-games/403012030
     name: Afrika Korps 2cm Flak 38
     manufacturer: warlord-games
@@ -55907,6 +55975,8 @@ products:
     manufacturer: warlord-games
     productCode: '403012036'
     sku: '403012036'
+    ean: '5060917998901'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     gameSystemsBasis: code
@@ -58889,7 +58959,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 24.0
     priceCad: 46.0
@@ -62414,6 +62484,8 @@ products:
     manufacturer: warlord-games
     productCode: '403212013'
     sku: '403212013'
+    ean: '5060917997270'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -62982,6 +63054,8 @@ products:
     manufacturer: warlord-games
     productCode: '403213106'
     sku: '403213106'
+    ean: '5060917995832'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -63030,6 +63104,8 @@ products:
     manufacturer: warlord-games
     productCode: 403213107X
     sku: 403213107X
+    ean: '5060917995849'
+    eanConfidence: confirmed
     faction: general
     gameSystemsBasis: unknown
     settingsBasis: unknown
@@ -63338,6 +63414,8 @@ products:
     manufacturer: warlord-games
     productCode: '403214007'
     sku: '403214007'
+    ean: '5060917997034'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -63677,6 +63755,8 @@ products:
     manufacturer: warlord-games
     productCode: '403216003'
     sku: '403216003'
+    ean: '5060917997386'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -63876,6 +63956,8 @@ products:
     manufacturer: warlord-games
     productCode: '403411002'
     sku: '403411002'
+    ean: '5060917994545'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -64522,6 +64604,8 @@ products:
     manufacturer: warlord-games
     productCode: '405008501'
     sku: '405008501'
+    ean: '5060572509993'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -64536,6 +64620,8 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
+    priceEur: 21.55
+    priceCad: 37.0
     url: https://store.warlordgames.com/products/mongolian-cavalry-troop
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/405008501_MongolianCavalryTroop_01.jpg?v=1662488565
     description: |-
@@ -64545,6 +64631,9 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/mongolian-cavalry-troop
       - mfr-warlord-store:mongolian-cavalry-troop
+      - ret-radaddel:/mongolian-cavalry-troop
+      - ret-radaddel:mongolian-cavalry-troop
+      - ret-tistaminis:bolt-action-mongolian-cavalry-troop-new
   - id: warlord-games/405011003
     name: 'Soldier of Fortune 001: SAS Heroes - David Stirling, The Phantom Major'
     manufacturer: warlord-games
@@ -65862,6 +65951,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 35.5
+    priceCad: 70.0
     url: https://store.warlordgames.com/products/lvta-4-75mm-amtank
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/405103003_LVTA4_75mmAMT01.jpg?v=1626049448
     description: |-
@@ -65879,6 +65969,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/lvt-a-4-75mm-amtank
       - mfr-warlord-store:lvta-4-75mm-amtank
+      - ret-tistaminis:bolt-action-american-lvta-4-75mm-amtank-new
   - id: warlord-games/405103004
     name: LVT(A)-1  37mm AMTANK
     manufacturer: warlord-games
@@ -74490,10 +74581,10 @@ products:
       - ret-radaddel:konflikt-47-mini-rulebook-a5-englisch
       - ret-tistaminis:konflikt-47-mini-rulebook
   - id: warlord-games/4120000003
-    name: ‘SLAMMER’ SAMUELS United States Paragon Trooper
+    name: ‘SLAMMER’ SAMUELS United States Paragon Trooper - Medals Reward
     manufacturer: warlord-games
     productCode: '4120000003'
-    sku: '4120000003'
+    sku: '6792616607824'
     gameSystems:
       - konflikt-47
     faction: general
@@ -74508,8 +74599,8 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 7.0
-    url: https://store.warlordgames.com/products/slammer-samuels-united-states-paragon-trooper
-    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Konflikt_47_-_USA_-_Slammer_Samuels_Paragon_Trooper-1.png?v=1760707431
+    url: https://store.warlordgames.com/products/the-heavy-infantryman-medals-reward
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/image_1.png?v=1749635046
     description: |-
       Captain Harris ‘Slammer’ Samuels volunteered for the US Paragon programme after earning the Silver Star as a young officer in Tunisia. A natural leader and gifted tactician, Samuels was a obvious choice for the Paragon programme and passed all the entry tests easily. The programme’s genetic enhancement worked flawlessly and Samuels quickly mastered the Rift-tech weaponry provided to him, so much so that he has been issued an experimental Heavy Tesla Rifle that is not yet in service with the rest of the programme.
 
@@ -74517,8 +74608,10 @@ products:
 
       *Models supplied unassembled and unpainted*
     evidence:
+      - legacy-catalog:warlord-games/bolt-action/general/slammer-samuels-united-states-paragon-trooper-medals-reward
       - legacy-catalog:warlord-games/konflikt-47/general/slammer-samuels-united-states-paragon-trooper
       - mfr-warlord-store:slammer-samuels-united-states-paragon-trooper
+      - mfr-warlord-store:the-heavy-infantryman-medals-reward
   - id: warlord-games/412218501
     name: 'Korean War: Chinese PVA Infantry Squad'
     manufacturer: warlord-games
@@ -75417,6 +75510,29 @@ products:
       - ret-radaddel:/konflikt-47-united-states-slammer-samuels
       - ret-radaddel:konflikt-47-united-states-slammer-samuels
       - ret-tistaminis:konflikt-47-slammer-samuels-the-first-paragon
+  - id: warlord-games/452010410
+    name: Konflikt '47 United States Rapid Deployment Force
+    manufacturer: warlord-games
+    productCode: '452010410'
+    sku: '452010410'
+    ean: '5060917999557'
+    eanConfidence: confirmed
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 110.0
+    url: https://store.warlordgames.com/products/konflikt-47-united-states-rapid-deployment-force
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452010410_UnitedStatesRapidDeploymentForce01.jpg?v=1788957634
+    evidence:
+      - mfr-warlord-store:konflikt-47-united-states-rapid-deployment-force
   - id: warlord-games/452010601
     name: Churchill Meteor
     manufacturer: warlord-games
@@ -75573,6 +75689,29 @@ products:
       - ret-radaddel:/konflikt-47-british-commonwealth-automated-infantry-platoon
       - ret-radaddel:konflikt-47-british-commonwealth-automated-infantry-platoon
       - ret-tistaminis:konflikt-47-automated-infantry-platoon
+  - id: warlord-games/452010607
+    name: Konflikt '47 British Commonwealth Automated Battalion
+    manufacturer: warlord-games
+    productCode: '452010607'
+    sku: '452010607'
+    ean: '5060917999540'
+    eanConfidence: confirmed
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 110.0
+    url: https://store.warlordgames.com/products/konflikt-47-british-commonwealth-automated-battalion
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452010607_K47_BritishCommonwealthStarterArmy_2026_01.jpg?v=1788957473
+    evidence:
+      - mfr-warlord-store:konflikt-47-british-commonwealth-automated-battalion
   - id: warlord-games/452010801
     name: Ursus Infantry Squad
     manufacturer: warlord-games
@@ -75631,6 +75770,52 @@ products:
       - ret-radaddel:/konflikt-47-soviet-bloc-ursus-infantry-squad-with-mauls
       - ret-radaddel:konflikt-47-soviet-bloc-ursus-infantry-squad-with-mauls
       - ret-tistaminis:konflikt-47-ursus-infantry-squad-with-mauls
+  - id: warlord-games/452010807
+    name: Konflikt '47 Soviet Bloc Elite Operational Group
+    manufacturer: warlord-games
+    productCode: '452010807'
+    sku: '452010807'
+    ean: '5060917999564'
+    eanConfidence: confirmed
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 110.0
+    url: https://store.warlordgames.com/products/konflikt-47-soviet-bloc-elite-operational-group
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452010807_K47_SovietBlocStarterArmy_2026_01.jpg?v=1789123554
+    evidence:
+      - mfr-warlord-store:konflikt-47-soviet-bloc-elite-operational-group
+  - id: warlord-games/452011201
+    name: Konflikt '47 Empire of Japan Long Range Penetration Group
+    manufacturer: warlord-games
+    productCode: '452011201'
+    sku: '452011201'
+    ean: '5060917999533'
+    eanConfidence: confirmed
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 110.0
+    url: https://store.warlordgames.com/products/konflikt-47-empire-of-japan-long-range-penetration-group
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452011201_K47_EmpireofJapanLongRangePenetrationGroup_01.jpg?v=1788955374
+    evidence:
+      - mfr-warlord-store:konflikt-47-empire-of-japan-long-range-penetration-group
   - id: warlord-games/452011204
     name: Chi-Ha medium tank with compression turret
     manufacturer: warlord-games
@@ -75982,6 +76167,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/soviet/guards-mk-ii-armoured-infantry
       - mfr-warlord-store:guards-mk-ii-armoured-infantry
+      - ret-goblingaming:guards-mkii-armoured-infantry-konflikt-47
       - ret-radaddel:/konflikt-47-guards-mk-ii-armoured-infantry
       - ret-radaddel:konflikt-47-guards-mk-ii-armoured-infantry
       - ret-tistaminis:konflikt-47-guards-mk-ii-armoured-infantry-2025-reformat
@@ -77865,6 +78051,29 @@ products:
       - ret-radaddel:/konflikt-47-axis-heuschrecke-locust-medium-panzermech
       - ret-radaddel:konflikt-47-axis-heuschrecke-locust-medium-panzermech
       - ret-tistaminis:konflikt-47-heuschrecke-locust-medium-panzermech
+  - id: warlord-games/452600203
+    name: Konflikt '47 Axis Sonderkampfgruppe
+    manufacturer: warlord-games
+    productCode: '452600203'
+    sku: '452600203'
+    ean: '5060917999243'
+    eanConfidence: confirmed
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 110.0
+    url: https://store.warlordgames.com/products/konflikt-47-axis-sonderkampfgruppe
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/452600203_K47_AxisSonderkampfgruppe01.jpg?v=1788957801
+    evidence:
+      - mfr-warlord-store:konflikt-47-axis-sonderkampfgruppe
   - id: warlord-games/452600401
     name: Kodiak Close Assault Walker
     manufacturer: warlord-games
@@ -78083,6 +78292,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/british/hornet-medium-walker
       - mfr-warlord-store:hornet-medium-walker
+      - ret-goblingaming:hornet-medium-walker-konflikt-47
       - ret-radaddel:/konflikt-47-hornet-medium-walker
       - ret-radaddel:konflikt-47-hornet-medium-walker
       - ret-tistaminis:konflikt-47-hornet-medium-walker-2025-reformat
@@ -78122,6 +78332,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/british/merlin-heavy-walker
       - mfr-warlord-store:merlin-heavy-walker
+      - ret-goblingaming:merlin-heavy-walker-konflikt-47
       - ret-radaddel:/konflikt-47-merlin-heavy-walker
       - ret-radaddel:konflikt-47-merlin-heavy-walker
       - ret-tistaminis:konflikt-47-merlin-heavy-walker-2025-reformat
@@ -78222,6 +78433,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/british/guardian-light-walker
       - mfr-warlord-store:guardian-light-walker
+      - ret-goblingaming:guardian-light-walker-konflikt-47
       - ret-radaddel:/konflikt-47-guardian-light-walker
       - ret-radaddel:konflikt-47-guardian-light-walker
       - ret-tistaminis:konflikt-47-guardian-light-walker-2025-reformat
@@ -78286,6 +78498,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/soviet/kazak-light-walker
       - mfr-warlord-store:kazak-light-walker
+      - ret-goblingaming:kazak-light-walker-konflikt-47
       - ret-radaddel:/konflikt-47-kazak-light-walker
       - ret-radaddel:konflikt-47-kazak-light-walker
       - ret-tistaminis:konflikt-47-kazak-light-walker-2025-reformat
@@ -78323,6 +78536,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/soviet/mahmot-heavy-walker
       - mfr-warlord-store:mahmot-heavy-walker
+      - ret-goblingaming:mahmot-heavy-walker-konflikt-47
       - ret-radaddel:/konflikt-47-mammoth-heavy-walker
       - ret-radaddel:konflikt-47-mammoth-heavy-walker
       - ret-tistaminis:konflikt-47-mahmot-heavy-walker-2025-reformat
@@ -78360,6 +78574,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/japanese/inago-medium-walker
       - mfr-warlord-store:inago-medium-walker
+      - ret-goblingaming:inago-medium-walker-konflikt-47
       - ret-radaddel:/konflikt-47-inago-medium-walker
       - ret-radaddel:konflikt-47-inago-medium-walker
       - ret-tistaminis:konflikt-47-inago-medium-walker-2025-reformat-of-the-japanese-locust
@@ -79370,6 +79585,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/british/cerberus-squad-1
       - mfr-warlord-store:cerberus-squad-1
+      - ret-goblingaming:cerberus-squad-konflikt-47
       - ret-radaddel:/konflikt-47-cerberus-squad-1
       - ret-radaddel:konflikt-47-cerberus-squad-1
       - ret-tistaminis:konflikt-47-cerberus-squad-1-2025-reformat
@@ -80713,8 +80929,10 @@ products:
     manufacturer: warlord-games
     productCode: '458900801'
     sku: '458900801'
-    ean: '5060917996471'
-    eanConfidence: provisional
+    ean: '5060917996525'
+    eanConfidence: confirmed
+    additionalEans:
+      - '5060917996471'
     gameSystems:
       - konflikt-47
     faction: soviet
@@ -80729,6 +80947,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 20.0
+    priceEur: 19.15
     priceCad: 35.35
     url: https://store.warlordgames.com/products/soviet-bloc-dice-bag
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/458900801_Soviet-Bloc-Dice-bag.jpg?v=1758894299
@@ -80736,6 +80955,8 @@ products:
     evidence:
       - legacy-catalog:warlord-games/konflikt-47/soviet/soviet-bloc-dice-bag
       - mfr-warlord-store:soviet-bloc-dice-bag
+      - ret-radaddel:/konflikt-47-soviet-bloc-dice-bag
+      - ret-radaddel:konflikt-47-soviet-bloc-dice-bag
       - ret-tistaminis:konflikt-47-soviet-bloc-dice-bag
   - id: warlord-games/458901201
     name: Empire of Japan Dice bag
@@ -86946,7 +87167,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 45.0
+    priceGbp: 60.0
     url: https://www.goblingaming.co.uk/products/warlord-games-2000ad-abc-warriors-increase-the-peace-starter-game
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/ScreenShot2023-11-22at09.52.41.png?v=1700646891
     evidence:
@@ -88742,7 +88963,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 12.5
+    priceGbp: 20.0
     url: https://store.warlordgames.com/products/mythic-americas-warlords-of-erehwon-rulebook
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/721010001MythicAmericasRulebook.jpg?v=1600886221
     description: |-
@@ -88888,7 +89109,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 13.25
+    priceGbp: 21.2
     url: https://store.warlordgames.com/products/tlalocan-bound-dead
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/722211002_MA_TlalocanBoundDead01.jpg?v=1626049845
     description: |-
@@ -88986,7 +89207,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 21.75
+    priceGbp: 34.8
     url: https://store.warlordgames.com/products/tlalocan-bound-marauders
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/722211005_MA_TlalocanBoundMarauders01.jpg?v=1626049854
     description: |-
@@ -89082,9 +89303,9 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 11.5
+    priceGbp: 18.4
     url: https://store.warlordgames.com/products/tlalocan-high-priest
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/722211008-Mythic-Americas-Tlalocan-High-Priest1.jpg?v=1651224124
     description: |-
@@ -89118,7 +89339,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 13.25
+    priceGbp: 21.2
     url: https://store.warlordgames.com/products/antisuyu-archers
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/722212001_MA_AntisuyuArchers01.jpg?v=1651224044
     description: |-
@@ -89152,7 +89373,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 32.0
+    priceGbp: 51.2
     url: https://store.warlordgames.com/products/condor-riders
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/722212002_IncaCondorRiders01.jpg?v=1651223906
     description: |-
@@ -89781,7 +90002,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 26.5
+    priceGbp: 42.4
     url: https://store.warlordgames.com/products/ayar
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/723011005_MA_Ayar01_f7be3fbb-67af-4f8f-b7a2-72a68640d86f.jpg?v=1651231500
     description: |-
@@ -89910,7 +90131,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 13.8
+    priceGbp: 18.4
     url: https://store.warlordgames.com/products/inca-oracle
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/723012004_MA_IncaOracle01.jpg?v=1624014715
     description: |-
@@ -90096,7 +90317,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 21.75
+    priceGbp: 34.8
     url: https://store.warlordgames.com/products/sachem-warlord-on-war-eagle
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/723014005_SachemWarlordonWarEagle01.jpg?v=1626049850
     description: |-
@@ -90497,7 +90718,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     url: https://store.warlordgames.com/products/victory-at-sea-hardback-book
@@ -108791,7 +109012,7 @@ products:
     roleBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 7.0
     url: https://store.warlordgames.com/products/black-seas-frigate-sea-bases-x3
@@ -109834,6 +110055,7 @@ products:
       *Models supplied unassembled and unpainted, basing materials not included.*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/palm-trees
+      - mfr-warlord-store:palm-trees
   - id: warlord-games/809710002
     name: Grassland Gaming Mat 6’x4’/183x122cm
     manufacturer: warlord-games
@@ -113736,7 +113958,7 @@ products:
     categoryBasis: unknown
     packaging: box
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 181.5
     url: https://store.warlordgames.com/products/start-collecting-imperial-rome
@@ -116555,6 +116777,48 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/blood-red-skies/soviet/mig-alley-foam-insert
+  - id: warlord-games/MTMP-401012002ES
+    name: Ejércitos de Alemanía 3a Edición
+    manufacturer: warlord-games
+    productCode: MTMP-401012002ES
+    sku: MTMP-401012002ES
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 28.0
+    url: https://store.warlordgames.com/products/ejercitos-de-alemania-3a-edicion
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/EjercitosdeAlemania3aEdicion01.jpg?v=1788444985
+    evidence:
+      - mfr-warlord-store:ejercitos-de-alemania-3a-edicion
+  - id: warlord-games/MTMP-401013001ES
+    name: Ejércitos de Estados Unidos 3a Edición
+    manufacturer: warlord-games
+    productCode: MTMP-401013001ES
+    sku: MTMP-401013001ES
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 28.0
+    url: https://store.warlordgames.com/products/ejercitos-de-estados-unidos-3a-edicion
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/EjercitosdeEstadosUnidos3aEdicion01.jpg?v=1788445139
+    evidence:
+      - mfr-warlord-store:ejercitos-de-estados-unidos-3a-edicion
   - id: warlord-games/NEWYEAR01
     name: 'Start Collecting: German Army'
     manufacturer: warlord-games
@@ -120684,6 +120948,26 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/K_47TowerSOW.jpg?v=1787051644
     evidence:
       - mfr-warlord-store:konflikt-47-area-51-point-defence-fortifications-stl-3d-print-file-print-at-home
+  - id: warlord-games/STLK4703
+    name: NYC Wrecked Barricade Free STL - 3D print file - print at home
+    manufacturer: warlord-games
+    productCode: STLK4703
+    sku: STLK4703
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-12'
+    priceGbp: 0.0
+    url: https://store.warlordgames.com/products/nyc-wrecked-barricade-free-stl-3d-print-file-print-at-home
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/EonsofBattle-USResistance-1.jpg?v=1788449206
+    evidence:
+      - mfr-warlord-store:nyc-wrecked-barricade-free-stl-3d-print-file-print-at-home
   - id: warlord-games/TANKSALOT26TICKET
     name: Tanks a Lot! 2026 Bolt Action Tournament Ticket
     manufacturer: warlord-games
@@ -121156,7 +121440,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.75
     url: https://store.warlordgames.com/products/25mm-round-slotted-bases-20
@@ -122341,7 +122625,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.75
     priceEur: 5.05
@@ -130325,7 +130609,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 12.5
+    priceGbp: 20.0
     url: https://www.goblingaming.co.uk/products/germany-strikes
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/supplement-germany-strikes-softback-bolt-action-wa.jpg?v=1560792730
     evidence:
@@ -131913,6 +132197,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 19.0
     priceEur: 18.35
+    priceCad: 35.0
     url: https://store.warlordgames.com/products/afrika-korps-5cm-pak-38-anti-tank-gun
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-AK-21-Afrika-Korps-5cm-PaK-38-anti-tank-gun-1.jpg?v=1665431610
     description: |-
@@ -131931,6 +132216,7 @@ products:
       - ret-goblingaming:afrika-korps-5cm-pak-38-anti-tank-gun
       - ret-radaddel:/afrika-korps-5cm-pak-38-anti-tank-gun
       - ret-radaddel:afrika-korps-5cm-pak-38-anti-tank-gun
+      - ret-tistaminis:bolt-action-german-afrika-korps-5cm-pak38-anti-tank-gun-new
   - id: warlord-games/WGB-AK-22
     name: Afrika Korps Kradschutzen motorcycle
     manufacturer: warlord-games
@@ -131992,6 +132278,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 15.0
     priceEur: 14.35
+    priceCad: 26.0
     url: https://store.warlordgames.com/products/afrika-korps-kradschutzen-motorcycle-and-sidecar
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-AK-23-Afrika-Korps-motorcycle-_-sidecar-a.jpg?v=1575566010
     description: |-
@@ -132008,6 +132295,7 @@ products:
       - ret-goblingaming:afrika-korps-kradschutzen-motorcycle-and-sidecar
       - ret-radaddel:/afrika-korps-kradschuetzen-mit-beiwagen
       - ret-radaddel:afrika-korps-kradschutzen-mit-beiwagen
+      - ret-tistaminis:bolt-action-german-afrika-korps-kradschutzen-motorcycle-sidecar-new
   - id: warlord-games/WGB-AM-21
     name: USMC M1917 MMG team
     manufacturer: warlord-games
@@ -140652,6 +140940,8 @@ products:
     sku: WGB-LSS-02
     ean: '5060200846506'
     eanConfidence: confirmed
+    additionalEans:
+      - '5060393701194'
     gameSystems:
       - bolt-action
     faction: german
@@ -140666,12 +140956,14 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 7.25
+    priceCad: 22.0
     url: https://store.warlordgames.com/products/waffen-ss-forward-observer-team-1943-45
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-LSS-02-Waffen-SS-FOO-a.jpg?v=1575566079
     description: '*Note: Models supplied unassembled and unpainted*'
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/waffen-ss-forward-observer-team-1943-45
       - mfr-warlord-store:waffen-ss-forward-observer-team-1943-45
+      - ret-tistaminis:bolt-action-german-waffen-ss-forward-observer-team-1943-45-new
   - id: warlord-games/WGB-LSS-03
     name: Waffen-SS Squad - Late (1943-45)
     manufacturer: warlord-games
@@ -140734,6 +141026,8 @@ products:
     sku: WGB-LSS-04
     ean: '5060200846520'
     eanConfidence: confirmed
+    additionalEans:
+      - '0602008465203'
     gameSystems:
       - bolt-action
     faction: german
@@ -140748,6 +141042,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 11.5
+    priceCad: 25.0
     url: https://store.warlordgames.com/products/waffen-ss-mg42-mmg-team-firing-1943-45
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-LSS-04A-SS-MMG-team-firing-a.jpg?v=1575566047
     description: |-
@@ -140773,6 +141068,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/waffen-ss-mg42-mmg-team-firing-1943-45
       - mfr-warlord-store:waffen-ss-mg42-mmg-team-firing-1943-45
+      - ret-tistaminis:bolt-action-german-waffen-ss-mg42-mmg-team-new
   - id: warlord-games/WGB-LSS-04B
     name: Waffen-SS MG42 MMG team redeploying (1943-45)
     manufacturer: warlord-games
@@ -140849,9 +141145,10 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 11.5
+    priceCad: 25.0
     url: https://store.warlordgames.com/products/waffen-ss-81mm-medium-mortar-team-1943-45
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WGB-LSS-06-SS-81mm-mortar-a.jpg?v=1575566046
     description: |-
@@ -140868,6 +141165,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/waffen-ss-81mm-medium-mortar-team-1943-45
       - mfr-warlord-store:waffen-ss-81mm-medium-mortar-team-1943-45
+      - ret-tistaminis:bolt-action-german-waffen-ss-81mm-medium-mortar-team-1943-45-new
   - id: warlord-games/WGB-LSS-08
     name: Waffen-SS 10.5cm LeFH 18/40 medium artillery (1943-45)
     manufacturer: warlord-games
@@ -154148,6 +154446,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 9.0
+    priceCad: 20.0
     url: https://store.warlordgames.com/products/mounted-napoleonic-french-infantry-colonels
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/wgn-fr-24-infantry-colonels-a_1.jpg?v=1575565884
     description: |-
@@ -154157,6 +154456,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/french/mounted-napoleonic-french-infantry-colonels
       - mfr-warlord-store:mounted-napoleonic-french-infantry-colonels
+      - ret-tistaminis:black-powder-mounted-napoleonic-french-infantry-colonels-new
   - id: warlord-games/WGN-FR-25
     name: Napolenic French Casualties
     manufacturer: warlord-games
@@ -161169,24 +161469,6 @@ products:
     url: https://www.radaddel.de/achtung-panzer-card-token-bundle-british-english
     evidence:
       - ret-radaddel:/achtung-panzer-card-token-bundle-british-english
-  - id: warlord-games/afrika-korps-lefh-18-10-5cm-medium-artillery
-    name: Afrika Korps LeFH 18 10.5cm Medium Artillery
-    manufacturer: warlord-games
-    sku: '119489'
-    ean: '5060572502161'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 26.95
-    url: https://www.radaddel.de/afrika-korps-lefh-18-10.5cm-medium-artillery
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/119489-afrika-korps-lefh-18-10_5cm-medium-artillery-403012029-1.webp?v=1781194832
-    evidence:
-      - ret-radaddel:/afrika-korps-lefh-18-10.5cm-medium-artillery
-      - ret-radaddel:afrika-korps-lefh-18-10-5cm-medium-artillery
   - id: warlord-games/age-of-caesar-english-von-warlord-games
     name: Age of Caesar (English) von Warlord Games
     manufacturer: warlord-games
@@ -161875,29 +162157,6 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/king-s-colours-4-royalist
       - mfr-warlord-store:kc04-royalists
-  - id: warlord-games/konflikt-47-soviet-bloc-dice-bag-von-warlord-games
-    name: Konflikt '47 Soviet Bloc Dice Bag von Warlord Games
-    manufacturer: warlord-games
-    sku: '133043'
-    ean: '5060917996525'
-    eanConfidence: provisional
-    gameSystems:
-      - konflikt-47
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
-    category: game-accessory
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 19.15
-    url: https://www.radaddel.de/konflikt-47-soviet-bloc-dice-bag
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133043-konflikt-47-soviet-bloc-dice-bag-458900801-1.webp?v=1781221905
-    evidence:
-      - ret-radaddel:/konflikt-47-soviet-bloc-dice-bag
-      - ret-radaddel:konflikt-47-soviet-bloc-dice-bag
   - id: warlord-games/lord-astley-von-warlord-games
     name: Lord Astley von Warlord Games
     manufacturer: warlord-games
@@ -162050,24 +162309,6 @@ products:
       Michael Farnworth is a painter and modeller who has written many painting guides for small wargame companies. He is also a production engineer and has worked on military apparel and backpacks. This book brings together his love of history with the methodology of an engineer to explain techniques in easy-to-understand steps.
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/modelling-and-painting-world-war-ii-german-military-figures
-  - id: warlord-games/mongolian-cavalry-troop-von-warlord-games
-    name: Mongolian Cavalry Troop von Warlord Games
-    manufacturer: warlord-games
-    sku: '124362'
-    ean: '5060572509993'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 21.55
-    url: https://www.radaddel.de/mongolian-cavalry-troop
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/124362-mongolian-cavalry-troop-405008501-1.webp?v=1781203727
-    evidence:
-      - ret-radaddel:/mongolian-cavalry-troop
-      - ret-radaddel:mongolian-cavalry-troop
   - id: warlord-games/nachtzehrer-armoured-walker-platoon
     name: Nachtzehrer Armoured Walker Platoon
     manufacturer: warlord-games
@@ -162246,34 +162487,6 @@ products:
     evidence:
       - ret-radaddel:/sir-william-waller
       - ret-radaddel:sir-william-waller
-  - id: warlord-games/slammer-samuels-united-states-paragon-trooper-medals-reward
-    name: ‘SLAMMER’ SAMUELS United States Paragon Trooper - Medals Reward
-    manufacturer: warlord-games
-    sku: '6792616607824'
-    gameSystems:
-      - konflikt-47
-    faction: general
-    gameSystemsBasis: mapped
-    settings:
-      - world-war-two
-    settingsBasis: derived
-    categoryBasis: unknown
-    packaging: single
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-07'
-    priceGbp: 65.0
-    url: https://store.warlordgames.com/products/the-heavy-infantryman-medals-reward
-    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/image_1.png?v=1749635046
-    description: |-
-      Captain Harris ‘Slammer’ Samuels volunteered for the US Paragon programme after earning the Silver Star as a young officer in Tunisia. A natural leader and gifted tactician, Samuels was a obvious choice for the Paragon programme and passed all the entry tests easily. The programme’s genetic enhancement worked flawlessly and Samuels quickly mastered the Rift-tech weaponry provided to him, so much so that he has been issued an experimental Heavy Tesla Rifle that is not yet in service with the rest of the programme.
-
-      Samuels is an inspiring giant of a man, leading from the front and getting those around him to live up to standards he sets
-
-      *Models supplied unassembled and unpainted*
-    evidence:
-      - legacy-catalog:warlord-games/bolt-action/general/slammer-samuels-united-states-paragon-trooper-medals-reward
-      - mfr-warlord-store:the-heavy-infantryman-medals-reward
   - id: warlord-games/spqr-dacian-nobles-von-warlord-games
     name: 'SPQR: Dacian Nobles von Warlord Games'
     manufacturer: warlord-games
