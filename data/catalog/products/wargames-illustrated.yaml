@@ -503,7 +503,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 1.0
     priceCad: 12.0
@@ -978,6 +978,23 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/wargames-illustrated-wi451-july-2025-edition
       - mfr-warlord-store:wargames-illustrated-wi451-july-2025-edition
+  - id: wargames-illustrated/WI452
+    name: Wargames Illustrated August 2025, Issue 452
+    manufacturer: wargames-illustrated
+    productCode: WI452
+    sku: WI452
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: book
+    categoryBasis: code
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 12.0
+    url: https://tistaminis.com/products/wargames-illustrated-august-2025-issue-452
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/WI452.webp?v=1760478752
+    evidence:
+      - ret-tistaminis:wargames-illustrated-august-2025-issue-452
   - id: wargames-illustrated/WI453
     name: Wargames Illustrated WI453 September 2025 Edition
     manufacturer: wargames-illustrated
@@ -1453,3 +1470,18 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Wi465-Cover.jpg?v=1787834313
     evidence:
       - mfr-warlord-store:wargames-illustrated-wi465-september-2026-edition
+  - id: wargames-illustrated/wargames-illustrated-may-2026-wargames-illustrated-461
+    name: Wargames Illustrated May 2026, Wargames Illustrated 461
+    manufacturer: wargames-illustrated
+    sku: WGI461
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-09-12'
+    priceCad: 12.0
+    url: https://tistaminis.com/products/wargames-illustrated-may-2026-wargames-illustrated-461
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/WGI461.png?v=1777147325
+    evidence:
+      - ret-tistaminis:wargames-illustrated-may-2026-wargames-illustrated-461

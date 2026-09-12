@@ -1,1 +1,109 @@
-conflicts: []
+conflicts:
+  - type: ean-mismatch
+    entity: games-workshop/60010199079
+    chosen: '5011921260379'
+    assertions:
+      - ean: '5011921260379'
+        sources:
+          - bdb-goupc
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921260430'
+        sources:
+          - ret-gamenerdz
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: steamforged-games/SFIK-KDR210
+    chosen: '5060453699959'
+    assertions:
+      - ean: '5060453699959'
+        sources:
+          - legacy-catalog
+          - mfr-steamforged
+          - mfr-warmachine
+          - ret-gamenerdz
+      - ean: '5061060704463'
+        sources:
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: mantic-games/MGWD162
+    chosen: '5060924984386'
+    assertions:
+      - ean: '5060924983648'
+        sources:
+          - legacy-catalog
+      - ean: '5060924984386'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: vallejo/green-grey-18ml-model-colour
+    chosen: '8429551708869'
+    assertions:
+      - ean: '8429551708869'
+        sources:
+          - ret-goblingaming
+      - ean: '8429551709712'
+        sources:
+          - ret-goblingaming
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-mek-pre-order
+    name: 'ORKS: MEK'
+    candidates:
+      - games-workshop/99070103004
+      - games-workshop/99120103140
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-trukk-pre-order
+    name: 'ORKS: TRUKK'
+    candidates:
+      - games-workshop/99120103083
+      - games-workshop/99120103139
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-boyz-pre-order
+    name: 'ORKS: BOYZ'
+    candidates:
+      - games-workshop/99120103091
+      - games-workshop/99120103136
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-warbikers-pre-order
+    name: 'ORKS: WARBIKERS'
+    candidates:
+      - games-workshop/99120103096
+      - games-workshop/99120103138
+  - type: ambiguous-join
+    keys:
+      - arc-wargameportal:/products/alchemite-warforger
+    name: Alchemite Warforger
+    candidates:
+      - games-workshop/99120202039
+      - games-workshop/99120202069
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:warhammer-40000-orks-dice-pre-order
+    name: 'WARHAMMER 40000: ORKS DICE'
+    candidates:
+      - games-workshop/99220103005
+      - games-workshop/99220103007
+      - games-workshop/99220103009
+  - type: multi-code-entity
+    manufacturer: corvus-belli
+    codes:
+      - '280057'
+      - '280059'
+    keys:
+      - ret-gamenerdz:/infinity-essentials-start-here-jsa-panoceania-2-player-starter-set
+      - ret-goblingaming:infinity-essentials-start-here
+  - type: multi-code-entity
+    manufacturer: mantic-games
+    codes:
+      - MGKW17
+      - MGKWNS304
+    keys:
+      - legacy-catalog:mantic-games/kings-of-war/general/kings-of-war-3rd-edition-uncharted-empires-discontinued
+      - mfr-manticgames:70656
+      - mfr-manticgames:85414
+      - ret-tistaminis:kings-of-war-nightstalker-phantoms-troop-new
