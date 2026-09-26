@@ -1,1 +1,238 @@
-conflicts: []
+conflicts:
+  - type: ean-mismatch
+    entity: games-workshop/99070101055
+    chosen: '5011921142095'
+    assertions:
+      - ean: '5011921142095'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256099'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99070101063
+    chosen: '5011921145997'
+    assertions:
+      - ean: '5011921145997'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256211'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99070108010
+    chosen: '5011921163106'
+    assertions:
+      - ean: '5011921163106'
+        sources:
+          - arc-tistaminis
+          - arc-wargameportal
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921272495'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120108076
+    chosen: '5011921172047'
+    assertions:
+      - ean: '5011921172047'
+        sources:
+          - arc-wargameportal
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921272501'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120207156
+    chosen: '5011921204076'
+    assertions:
+      - ean: '5011921204076'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-tistaminis
+      - ean: '5011921261475'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: steamforged-games/SFIK-KDR210
+    chosen: '5060453699959'
+    assertions:
+      - ean: '5060453699959'
+        sources:
+          - legacy-catalog
+          - mfr-steamforged
+          - mfr-warmachine
+          - ret-gamenerdz
+      - ean: '5061060704463'
+        sources:
+          - ret-gamenerdz
+  - type: ean-mismatch
+    entity: mantic-games/MGWD162
+    chosen: '5060924984386'
+    assertions:
+      - ean: '5060924983648'
+        sources:
+          - legacy-catalog
+      - ean: '5060924984386'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: vallejo/green-grey-18ml-model-colour
+    chosen: '8429551708869'
+    assertions:
+      - ean: '8429551708869'
+        sources:
+          - ret-goblingaming
+      - ean: '8429551709712'
+        sources:
+          - ret-goblingaming
+  - type: ambiguous-join
+    keys:
+      - arc-wargameportal:/products/alchemite-warforger
+    name: Alchemite Warforger
+    candidates:
+      - games-workshop/99120202039
+      - games-workshop/99120202069
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070101055'
+      - '99120101468'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-librarian-in-phobos-armour
+      - mfr-gw-algolia:prod4510313-99070101055
+      - mfr-gw-algolia:prod4510313-99120101468
+      - mfr-gw-trade:99070101055
+      - mfr-gw-trade:99120101468
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian-in-phobos-armour
+      - ret-goblingaming:space-marine-primaris-librarian-in-phobos-armour
+      - ret-radaddel:/space-marines-primaris-librarian-in-phobos-armour
+      - ret-radaddel:space-marines-primaris-librarian-in-phobos-armour
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070101063'
+      - '99120101474'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-librarian
+      - mfr-gw-algolia:prod4530142-99070101063
+      - mfr-gw-algolia:prod4530142-99120101474
+      - mfr-gw-trade:99070101063
+      - mfr-gw-trade:99120101474
+      - ret-goblingaming:space-marines-primaris-librarian
+      - ret-radaddel:/space-marines-primaris-librarian
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070104012'
+      - '99120104122'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/aeldari/farseer-skyrunner
+      - legacy-catalog:games-workshop/warhammer-40k/aeldari/warlock-skyrunner
+      - mfr-gw-algolia:prod3650295-99070104012
+      - mfr-gw-algolia:prod3650295-99120104122
+      - mfr-gw-algolia:prod3660120-99070104012
+      - mfr-gw-algolia:prod3660120-99120104122
+      - mfr-gw-trade:99070104012
+      - ret-gamenerdz:/warhammer-40k-aeldari-farseer-skyrunner
+      - ret-goblingaming:eldar-farseer-skyrunner
+      - ret-radaddel:/aeldari-farseer-skyrunner
+      - ret-radaddel:aeldari-farseer-skyrunner
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108009'
+      - '99120108135'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/imagifier
+      - mfr-gw-algolia:prod4400126-99070108009
+      - mfr-gw-algolia:prod4400126-99120108135
+      - mfr-gw-trade:99070108009
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-imagifier-10th-edition
+      - ret-goblingaming:adepta-sororitas-imagifier
+      - ret-radaddel:/adepta-sororitas-imagifier
+      - ret-radaddel:adepta-sororitas-imagifier
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108010'
+      - '99120143001'
+    keys:
+      - arc-tistaminis:/products/adeptus-custodes-blade-champion
+      - arc-wargameportal:/products/blade-champion
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/blade-champion
+      - mfr-gw-algolia:prod4920184-99070108010
+      - mfr-gw-algolia:prod4920184-99120143001
+      - mfr-gw-trade:99070108010
+      - mfr-gw-trade:99120143001
+      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-blade-champion
+      - ret-goblingaming:adeptus-custodes-blade-champion-warhammer-40k-games-workshop
+      - ret-radaddel:/adeptus-custodes-blade-champion
+      - ret-radaddel:adeptus-custodes-blade-champion
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120108076'
+      - '99120143002'
+    keys:
+      - arc-wargameportal:/products/captain-general-trajann-valoris
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/captain-general-trajann-valoris
+      - mfr-gw-algolia:prod3700244-99120108076
+      - mfr-gw-algolia:prod3700244-99120143002
+      - mfr-gw-trade:99120108076
+      - mfr-gw-trade:99120143002
+      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-captain-general-trajann-valoris
+      - ret-goblingaming:trajann-valoris
+      - ret-radaddel:/adeptus-custodes-trajann-valoris
+      - ret-radaddel:adeptus-custodes-trajann-valoris
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120207156'
+      - '99120207249'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-pyregheists
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-pyregheists-2
+      - mfr-gw-algolia:P-184001-99120207156
+      - mfr-gw-algolia:P-221468-99120207249
+      - mfr-gw-trade:99120207156
+      - mfr-gw-trade:99120207249
+      - ret-goblingaming:warcry-pyregheists
+      - ret-tistaminis:warcry-pyregheists
+  - type: multi-code-entity
+    manufacturer: wyrd-games
+    codes:
+      - WYR24507
+      - WYR24508
+    keys:
+      - legacy-catalog:wyrd-games/malifaux/outcasts/malifaux-fourth-edition-captain-zipp-dread-pirate
+      - mfr-wyrd-store:malifaux-fourth-edition-captain-zipp-dread-pirate
+      - ret-goblingaming:captain-zipp-dread-pirate-4th-edition-bayou
+      - ret-tistaminis:malifaux-outcasts-captain-zipp-dread-pirate
+  - type: multi-code-entity
+    manufacturer: wyrd-games
+    codes:
+      - WYR24701
+      - WYR24702
+    keys:
+      - mfr-wyrd-store:malifaux-fourth-edition-asami-tanaka-shintaku
+      - ret-gamenerdz:/malifaux-4e-asami-tanaka-shintaku
+      - ret-goblingaming:asami-tanaka-shintaku-4th-edition-ten-thunders
+      - ret-tistaminis:malifaux-ten-thunders-asami-tanaka-shintaku
