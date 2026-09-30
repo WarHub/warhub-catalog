@@ -17,6 +17,8 @@ from pathlib import Path
 import pytest
 import yaml
 
+from warhub_acquisition.resolve.layout import iter_products
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SCRIPT = REPO_ROOT / "tools/acquisition/scripts/gen_set_contents.py"
 RELATION_DIR = REPO_ROOT / "data/catalog/set-contents"
@@ -59,10 +61,9 @@ def test_the_relation_covers_exactly_the_products_that_state_contents() -> None:
     """Cross-checked against the SOURCE of the refs, not just internal consistency: every product
     carrying `contentSkus` must appear, with the same number of refs it declares."""
     declared: dict[str, list[str]] = {}
-    for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
-        for product in (_load(path).get("products") or []):
-            if product.get("contentSkus"):
-                declared[product["id"]] = product["contentSkus"]
+    for product in iter_products(PRODUCTS_DIR):
+        if product.get("contentSkus"):
+            declared[product["id"]] = product["contentSkus"]
 
     seen: dict[str, int] = {}
     for path in _require():
@@ -200,9 +201,8 @@ def test_a_description_derived_set_is_still_reproducible_from_that_description()
     from warhub_acquisition.resolve.set_refs import content_skus_from_description
 
     descriptions: dict[str, str | None] = {}
-    for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
-        for product in (_load(path).get("products") or []):
-            descriptions[product["id"]] = product.get("description")
+    for product in iter_products(PRODUCTS_DIR):
+        descriptions[product["id"]] = product.get("description")
 
     for path in _require():
         for block in _load(path).values():

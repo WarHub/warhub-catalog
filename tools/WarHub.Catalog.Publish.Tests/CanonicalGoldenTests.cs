@@ -24,17 +24,17 @@ public sealed class CanonicalGoldenFixture : IDisposable
         string catalogDir = Path.Combine(AppContext.BaseDirectory, "fixtures", "canonical-golden");
         string paintsDir = Path.Combine(Root, "paints"); // deliberately never created: zero paints
 
-        var prov = new Provenance
-        {
-            Version = "golden-test",
-            GeneratedAt = "2026-07-12T00:00:00Z",
-            GitCommit = "cafefeed",
-            Repo = "WarHub/warhub-catalog",
-        };
-
         string schemaDir = Path.Combine(AppContext.BaseDirectory, "schema");
-        Result = Publisher.Run(new PublishOptions(catalogDir, paintsDir, Dist, schemaDir, prov));
+        Result = Publisher.Run(new PublishOptions(catalogDir, paintsDir, Dist, schemaDir, Provenance));
     }
+
+    internal static Provenance Provenance { get; } = new()
+    {
+        Version = "golden-test",
+        GeneratedAt = "2026-07-12T00:00:00Z",
+        GitCommit = "cafefeed",
+        Repo = "WarHub/warhub-catalog",
+    };
 
     public JsonElement Products =>
         JsonDocument.Parse(File.ReadAllText(Path.Combine(Dist, "products.json"))).RootElement.GetProperty("products");
@@ -60,6 +60,29 @@ public sealed class CanonicalGoldenTests(CanonicalGoldenFixture fx) : IClassFixt
     public void All_three_products_are_published()
     {
         Assert.Equal(3, fx.Result.Products);
+    }
+
+    [Fact]
+    public void The_sharded_twin_publishes_a_byte_identical_dist()
+    {
+        // fixtures/canonical-golden-sharded is the same three products as the resolver writes them
+        // sharded, one file each (test_golden_fixture.py). YamlSource merges them back in id order,
+        // so every published file -- the SQLite included -- must match the single-file publish.
+        string sharded = Path.Combine(fx.Root, "dist-sharded");
+        Publisher.Run(new PublishOptions(
+            Path.Combine(AppContext.BaseDirectory, "fixtures", "canonical-golden-sharded"),
+            Path.Combine(fx.Root, "paints"), sharded,
+            Path.Combine(AppContext.BaseDirectory, "schema"), CanonicalGoldenFixture.Provenance));
+
+        static Dictionary<string, string> Tree(string root) => Directory
+            .EnumerateFiles(root, "*", SearchOption.AllDirectories)
+            .ToDictionary(
+                f => Path.GetRelativePath(root, f).Replace('\\', '/'),
+                f => Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(f))));
+
+        Assert.Equal(3, Directory.GetFiles(
+            Path.Combine(AppContext.BaseDirectory, "fixtures", "canonical-golden-sharded", "products"), "*.yaml").Length);
+        Assert.Equal(Tree(fx.Dist), Tree(sharded));
     }
 
     [Fact]

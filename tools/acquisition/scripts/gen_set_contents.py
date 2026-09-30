@@ -77,9 +77,10 @@ OUT_DIR = REPO / "data/catalog/set-contents"
 SET_REFS = REPO / "data/catalog/set-refs.yaml"
 
 # Same pure-pyyaml sys.path bootstrap gen_paint_harvest.py documents at length: this script runs
-# as `uv run --with pyyaml python ...` in CI, and both modules below import only stdlib + yaml.
+# as `uv run --with pyyaml python ...` in CI, and the modules below import only stdlib + yaml.
 sys.path.insert(0, str(REPO / "tools/acquisition/src"))
 from warhub_acquisition.paints.catalog import Catalog  # noqa: E402
+from warhub_acquisition.resolve.layout import read_catalog  # noqa: E402
 from warhub_acquisition.resolve.set_refs import enumerated_members  # noqa: E402
 from warhub_acquisition.yamlio import dump_yaml  # noqa: E402
 
@@ -590,10 +591,9 @@ def main() -> None:
     written: set[str] = set()
     refused: list[str] = []
 
-    for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
-        manufacturer = path.stem
-        catalog_doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        products = [p for p in (catalog_doc.get("products") or []) if p.get("contentSkus")]
+    # By MANUFACTURER, not by file: a sharded manufacturer's files are merged back into one list.
+    for manufacturer, records in read_catalog(PRODUCTS_DIR).items():
+        products = [p for p in records if p.get("contentSkus")]
         if not products:
             continue
         brands = MANUFACTURER_BRANDS.get(manufacturer)

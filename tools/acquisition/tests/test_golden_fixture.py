@@ -17,6 +17,12 @@ directly by ``CanonicalGoldenTests.cs`` on the .NET side. This test regenerates 
 three files from the fixed in-code catalog below via the real resolver path and asserts
 byte-equality with what's committed -- drift fails CI with instructions to regenerate.
 
+The SHARDED twin (``fixtures/canonical-golden-sharded/``) is the same catalog written with the
+layout thresholds lowered until each of the three products has a shard of its own
+(resolve/layout.py). ``CanonicalGoldenTests.cs`` publishes both and asserts the two dist/ trees
+are byte-identical: the proof that the .NET loader merges shards back into exactly what the one
+file held.
+
 Regenerate (after a deliberate, reviewed change) with:
     REGEN_GOLDEN=1 uv run pytest -q tests/test_golden_fixture.py
 """
@@ -24,6 +30,7 @@ import json
 import os
 from pathlib import Path
 
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
 from warhub_acquisition.yamlio import write_yaml
 
@@ -33,6 +40,7 @@ FIXTURE_DIR = (
     / "fixtures"
     / "canonical-golden"
 )
+SHARDED_FIXTURE_DIR = FIXTURE_DIR.with_name("canonical-golden-sharded")
 
 # Static taxonomy label files: inputs to the resolver, not derived from evidence, so
 # they're just the fixed content itself (copied verbatim into the tmp catalog and
@@ -183,11 +191,42 @@ def _seed(tmp_path: Path) -> DataPaths:
 
 def _generated_files(paths: DataPaths) -> dict[str, Path]:
     return {
-        "products/games-workshop.yaml": paths.catalog_products / "games-workshop.yaml",
+        **{f"products/{p.name}": p for p in layout.product_files(paths.catalog_products)},
         "taxonomy/game-systems.yaml": paths.taxonomy / "game-systems.yaml",
         "taxonomy/settings.yaml": paths.taxonomy / "settings.yaml",
         "taxonomy/factions.yaml": paths.taxonomy / "factions.yaml",
     }
+
+
+def _matches_committed(generated: dict[str, Path], fixture_dir: Path) -> None:
+    if os.environ.get("REGEN_GOLDEN") == "1":
+        for stale in layout.product_files(fixture_dir / "products"):
+            stale.unlink()
+        for rel, src in generated.items():
+            dst = fixture_dir / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
+        return
+
+    committed_products = {f"products/{p.name}" for p in layout.product_files(fixture_dir / "products")}
+    assert committed_products == {rel for rel in generated if rel.startswith("products/")}, (
+        f"{fixture_dir} holds different product files than the resolver writes. Regenerate with:\n"
+        "    REGEN_GOLDEN=1 uv run pytest -q tests/test_golden_fixture.py"
+    )
+    for rel, src in generated.items():
+        committed = fixture_dir / rel
+        assert committed.exists(), (
+            f"golden fixture {committed} is missing. Regenerate with:\n"
+            "    REGEN_GOLDEN=1 uv run pytest -q tests/test_golden_fixture.py"
+        )
+        actual = src.read_text(encoding="utf-8")
+        expected = committed.read_text(encoding="utf-8")
+        assert actual == expected, (
+            f"{rel} drifted from the committed golden fixture at {committed}.\n"
+            "If this drift is an intentional, reviewed writer-format change, regenerate with:\n"
+            "    REGEN_GOLDEN=1 uv run pytest -q tests/test_golden_fixture.py\n"
+            f"then review and commit the diff under {fixture_dir}."
+        )
 
 
 def test_golden_fixture_matches_committed_output(tmp_path: Path) -> None:
@@ -201,27 +240,26 @@ def test_golden_fixture_matches_committed_output(tmp_path: Path) -> None:
     painting_handle = next(p for p in catalog["games-workshop"] if p.id == "games-workshop/60040199014")
     assert painting_handle.gameSystems == []
 
+    # Three products sit far under the shard threshold: the resolver writes the one file.
     generated = _generated_files(paths)
+    assert [rel for rel in generated if rel.startswith("products/")] == ["products/games-workshop.yaml"]
+    _matches_committed(generated, FIXTURE_DIR)
 
-    if os.environ.get("REGEN_GOLDEN") == "1":
-        for rel, src in generated.items():
-            dst = FIXTURE_DIR / rel
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
-        return
 
-    for rel, src in generated.items():
-        committed = FIXTURE_DIR / rel
-        assert committed.exists(), (
-            f"golden fixture {committed} is missing. Regenerate with:\n"
-            "    REGEN_GOLDEN=1 uv run pytest -q tests/test_golden_fixture.py"
-        )
-        actual = src.read_text(encoding="utf-8")
-        expected = committed.read_text(encoding="utf-8")
-        assert actual == expected, (
-            f"{rel} drifted from the committed golden fixture at {committed}.\n"
-            "If this drift is an intentional, reviewed writer-format change, regenerate with:\n"
-            "    REGEN_GOLDEN=1 uv run pytest -q tests/test_golden_fixture.py\n"
-            "then review and commit the diff under "
-            "tools/WarHub.Catalog.Publish.Tests/fixtures/canonical-golden/."
-        )
+def test_sharded_golden_fixture_matches_committed_output(tmp_path: Path, monkeypatch) -> None:
+    # The same catalog with the layout thresholds lowered until each of the three products
+    # (60040199014, 99120110052, boarding-patrol-death-guard) takes a shard: three records split
+    # the root, and each first character holds one.
+    monkeypatch.setattr(layout, "SHARD_ABOVE", 2)
+    monkeypatch.setattr(layout, "SPLIT_ABOVE", 1)
+    monkeypatch.setattr(layout, "OWN_FILE_ABOVE", 0)
+    paths = _seed(tmp_path)
+    resolve_catalog(paths)
+
+    generated = _generated_files(paths)
+    assert [rel for rel in generated if rel.startswith("products/")] == [
+        "products/games-workshop.6.yaml",
+        "products/games-workshop.9.yaml",
+        "products/games-workshop.b.yaml",
+    ]
+    _matches_committed(generated, SHARDED_FIXTURE_DIR)

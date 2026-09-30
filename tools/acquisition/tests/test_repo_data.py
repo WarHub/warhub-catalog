@@ -18,7 +18,7 @@ import yaml
 
 from warhub_acquisition.models.catalog import Overrides, SetRefs
 from warhub_acquisition.models.descriptor import load_descriptors
-from warhub_acquisition.resolve import crossover
+from warhub_acquisition.resolve import crossover, layout
 from warhub_acquisition.resolve.join import Matches
 from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.taxonomy import Settings, Taxonomy, load_labels
@@ -217,11 +217,7 @@ def test_every_published_product_is_reachable_from_the_evidence_it_was_built_fro
         pytest.skip("data/catalog/products/ not present")
     from warhub_acquisition.resolve.resolver import joined_evidence
 
-    published = {
-        record["id"]
-        for path in sorted(paths.catalog_products.glob("*.yaml"))
-        for record in (read_yaml(path) or {}).get("products") or []
-    }
+    published = {record["id"] for record in layout.iter_products(paths.catalog_products)}
     joined = set(joined_evidence(paths).entities)
     assert not (published - joined), (
         f"{len(published - joined)} published products have no joined evidence under their own id, "
@@ -1245,13 +1241,13 @@ def test_every_set_ref_correction_is_live_and_resolvable() -> None:
     if not corrections:
         pytest.skip("no setRefs corrections declared")
 
-    # Keyed by the products FILE STEM, because that is what gen_set_contents.py keys
-    # MANUFACTURER_BRANDS by. Splitting the product id on "/" would agree today and would be a
+    # Keyed by the manufacturer the products LAYOUT reads, because that is what gen_set_contents.py
+    # keys MANUFACTURER_BRANDS by. Splitting the product id on "/" would agree today and would be a
     # second spelling of the same fact -- the thing this test was just fixed for.
     products: dict[str, tuple[str, dict]] = {}
-    for path in sorted((REPO_DATA / "catalog" / "products").glob("*.yaml")):
-        for product in (read_yaml(path) or {}).get("products") or []:
-            products[str(product.get("id"))] = (path.stem, product)
+    for manufacturer, records in layout.read_catalog(REPO_DATA / "catalog" / "products").items():
+        for product in records:
+            products[str(product.get("id"))] = (manufacturer, product)
 
     stale, unresolvable = [], []
     for product_id, mapping in corrections.items():
@@ -1366,8 +1362,7 @@ def test_a_setref_correction_in_a_sources_zero_padded_vocabulary_still_resolves(
 
     refs = sorted({
         str(ref)
-        for product in (read_yaml(REPO_DATA / "catalog" / "products" / "reaper.yaml") or {})
-        .get("products") or []
+        for product in layout.read_catalog(REPO_DATA / "catalog" / "products")["reaper"]
         for ref in (product.get("contentSkus") or [])
     })
     padded = [ref for ref in refs if ref.startswith("0")]
@@ -1566,11 +1561,7 @@ def test_no_new_entity_fuses_two_products_the_maker_itself_tells_apart() -> None
         pytest.skip("no evidence in this checkout")
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
-    products = {
-        product["id"]
-        for path in sorted(paths.catalog_products.glob("*.yaml"))
-        for product in (read_yaml(path) or {}).get("products", [])
-    }
+    products = {product["id"] for product in layout.iter_products(paths.catalog_products)}
     if not products:
         pytest.skip("catalog not resolved in this checkout")
     # Rows already adjudicated in matches.yaml are settled -- the evidence still says what it
@@ -1746,12 +1737,11 @@ def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_g
         aliases = (read_yaml(paths.matches) or {}).get("aliases") or {}
     by_id: dict[str, dict] = {}
     published: dict[str, list[str]] = {}
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
-        for product in (read_yaml(path) or {}).get("products") or []:
-            by_id[product["id"]] = product
-            for barcode in [product.get("ean"), *(product.get("additionalEans") or [])]:
-                if barcode:
-                    published.setdefault(barcode, []).append(product["id"])
+    for product in layout.iter_products(paths.catalog_products):
+        by_id[product["id"]] = product
+        for barcode in [product.get("ean"), *(product.get("additionalEans") or [])]:
+            if barcode:
+                published.setdefault(barcode, []).append(product["id"])
     for entity, eans in declared.withdrawn.items():
         current = aliases.get(entity, entity)
         assert current in by_id, (
@@ -1785,11 +1775,7 @@ def test_every_preferred_ean_is_one_the_entity_actually_asserts_and_is_published
     matches = Matches.model_validate(read_yaml(paths.matches))
     if not matches.preferEans:
         pytest.skip("no preferEans entries")
-    by_id = {
-        product["id"]: product
-        for path in sorted(paths.catalog_products.glob("*.yaml"))
-        for product in (read_yaml(path) or {}).get("products") or []
-    }
+    by_id = {product["id"]: product for product in layout.iter_products(paths.catalog_products)}
     entities = joined_evidence(paths).entities
     asserted = {
         entity: {e for e in (canonical_ean(m.ean) for m in members) if e}

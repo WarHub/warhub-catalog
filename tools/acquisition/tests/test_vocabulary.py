@@ -9,8 +9,8 @@ missing value is honest, and forcing one would re-invent the fallback the whole 
 from pathlib import Path
 
 import pytest
-import yaml
 
+from warhub_acquisition.resolve.layout import iter_products
 from warhub_acquisition.vocabulary import Vocabulary, load_vocabulary
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -99,13 +99,11 @@ def test_the_committed_vocabulary_declares_every_value_the_catalog_actually_uses
     products_dir = REPO_ROOT / "data/catalog/products"
     if not products_dir.exists():
         pytest.skip("data/catalog/products/ not present")
-    for path in sorted(products_dir.glob("*.yaml")):
-        doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        for product in doc.get("products") or []:
-            vocabulary.check(
-                product.get("category"), product.get("packaging"), product["id"],
-                role=product.get("role"),
-            )
+    for product in iter_products(products_dir):
+        vocabulary.check(
+            product.get("category"), product.get("packaging"), product["id"],
+            role=product.get("role"),
+        )
 
 
 def test_every_legacy_value_names_a_current_target_and_every_entry_is_unique() -> None:

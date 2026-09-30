@@ -12,8 +12,8 @@ from pathlib import Path
 import re
 
 import pytest
-import yaml
 
+from warhub_acquisition.resolve.layout import iter_products, read_catalog
 from warhub_acquisition.resolve.set_refs import content_skus_from_description, enumerated_members
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -24,12 +24,10 @@ def _derived_from_committed_products() -> dict[str, list[str]]:
     if not PRODUCTS_DIR.exists():
         pytest.skip("data/catalog/products/ not present")
     derived: dict[str, list[str]] = {}
-    for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
-        doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        for product in doc.get("products") or []:
-            refs = content_skus_from_description(product.get("description"))
-            if refs:
-                derived[product["id"]] = refs
+    for product in iter_products(PRODUCTS_DIR):
+        refs = content_skus_from_description(product.get("description"))
+        if refs:
+            derived[product["id"]] = refs
     return derived
 
 
@@ -159,8 +157,7 @@ def test_a_code_glued_to_its_name_is_not_split() -> None:
 
 def _description_of(product_id: str) -> str:
     manufacturer = product_id.split("/")[0]
-    doc = yaml.safe_load((PRODUCTS_DIR / f"{manufacturer}.yaml").read_text(encoding="utf-8"))
-    return next(p["description"] for p in doc["products"] if p["id"] == product_id)
+    return next(p["description"] for p in read_catalog(PRODUCTS_DIR)[manufacturer] if p["id"] == product_id)
 
 
 # --- Shapes only the LIVE payload has. Captured 2026-08-07 from ---------------------------------

@@ -25,6 +25,7 @@ from typing import Mapping, Sequence
 
 from warhub_acquisition.models.catalog import CanonicalProduct
 from warhub_acquisition.models.observation import Observation
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.resolve.attributes import DERIVED_BASES, complete_membership_bases
 from warhub_acquisition.resolve.resolver import DataPaths, _dump_product, joined_evidence
 from warhub_acquisition.taxonomy import Settings, Taxonomy, load_labels
@@ -250,7 +251,8 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
     if not paths.catalog_products.exists():
         return outcome
 
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
+    # FILE BY FILE, shards included: each is rewritten in place, so the resolver's layout stands.
+    for path in layout.product_files(paths.catalog_products):
         document = read_yaml(path) or {}
         records = [CanonicalProduct.model_validate(row) for row in document.get("products") or []]
         touched = False
@@ -354,7 +356,7 @@ def categorize(paths: DataPaths, apply: bool = True) -> Outcome:
             write_yaml(
                 path,
                 {
-                    "manufacturer": document.get("manufacturer") or path.stem,
+                    "manufacturer": document.get("manufacturer") or layout.manufacturer_of(path),
                     "products": [_dump_product(record) for record in records],
                 },
             )
@@ -700,10 +702,14 @@ def _write_review(path: Path, outcome: Outcome, rules: Mapping[str, SourceRules]
                 if f"{source} {_signal(clause)}" not in outcome.clause_hits
             ),
             # Ranked worklist: the raw values that would decide the most still-undecided products.
+            # A tie is broken by the value, not by `most_common`'s first-counted order: that order
+            # is the order the product files were read, and which file holds a record is layout,
+            # not data (resolve/layout.py). Sharding warlord-games swapped the last two entries of
+            # one source's list, both at 12, until this ordered them.
             "unmapped": {
                 source: [
                     {"value": value, "wouldDecide": count}
-                    for value, count in counter.most_common(_UNMAPPED_LIMIT)
+                    for value, count in sorted(counter.items(), key=lambda vc: (-vc[1], vc[0]))[:_UNMAPPED_LIMIT]
                 ]
                 for source, counter in sorted(outcome.unmapped.items())
                 if counter

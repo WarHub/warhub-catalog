@@ -44,6 +44,8 @@ from pathlib import Path
 import pytest
 import yaml
 
+from warhub_acquisition.resolve.layout import read_catalog
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SCRIPT = REPO_ROOT / "tools/acquisition/scripts/gen_paint_harvest.py"
 OBSERVATIONS = REPO_ROOT / "data/evidence/products/mfr-greenstuffworld/observations.jsonl"
@@ -128,13 +130,12 @@ def _holders():
                 holders[str(record["ean"])].add((brand, "primary"))
             for extra in record.get("additionalEans") or []:
                 holders[str(extra)].add((brand, "additional"))
-    if PRODUCTS_DIR.exists():
-        for path in sorted(PRODUCTS_DIR.glob("*.yaml")):
-            for product in _yaml(path).get("products") or []:
-                if product.get("ean"):
-                    holders[str(product["ean"])].add((f"products/{path.stem}", "product"))
-                for extra in product.get("additionalEans") or []:
-                    holders[str(extra)].add((f"products/{path.stem}", "product"))
+    for manufacturer, products in read_catalog(PRODUCTS_DIR).items():
+        for product in products:
+            if product.get("ean"):
+                holders[str(product["ean"])].add((f"products/{manufacturer}", "product"))
+            for extra in product.get("additionalEans") or []:
+                holders[str(extra)].add((f"products/{manufacturer}", "product"))
     return holders
 
 

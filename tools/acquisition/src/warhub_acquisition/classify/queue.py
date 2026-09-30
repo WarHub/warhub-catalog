@@ -8,9 +8,9 @@ import html as html_lib
 import re
 
 from warhub_acquisition.models.observation import Observation
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.resolve.resolver import DataPaths, joined_evidence
 from warhub_acquisition.taxonomy import load_labels
-from warhub_acquisition.yamlio import read_yaml
 
 _DESCRIPTION_LIMIT = 300
 # gameSystem/faction are excluded here because a null-gameSystem entity's members typically
@@ -78,11 +78,9 @@ def _unclassified_entity_ids(paths: DataPaths) -> list[str]:
     if not paths.catalog_products.exists():
         return []
     ids: set[str] = set()
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
-        data = read_yaml(path) or {}
-        for record in data.get("products") or []:
-            if record.get("gameSystemsBasis") == "unknown":
-                ids.add(record["id"])
+    for record in layout.iter_products(paths.catalog_products):
+        if record.get("gameSystemsBasis") == "unknown":
+            ids.add(record["id"])
     return sorted(ids)
 
 
@@ -97,18 +95,15 @@ def _observed_factions_by_game_system(paths: DataPaths, known_factions: set[str]
     misleading "these are all valid" signal.
     """
     by_game_system: dict[str, set[str]] = {}
-    if paths.catalog_products.exists():
-        for path in sorted(paths.catalog_products.glob("*.yaml")):
-            data = read_yaml(path) or {}
-            for record in data.get("products") or []:
-                faction = record.get("faction")
-                if not faction or faction not in known_factions:
-                    continue
-                # A product in two games contributes its faction to BOTH candidate lists. That is
-                # the point of the pairing: the list answers "which factions has this game been
-                # seen with", and a dual-system kit has genuinely been seen with both.
-                for game_system in record.get("gameSystems") or []:
-                    by_game_system.setdefault(game_system, set()).add(faction)
+    for record in layout.iter_products(paths.catalog_products):
+        faction = record.get("faction")
+        if not faction or faction not in known_factions:
+            continue
+        # A product in two games contributes its faction to BOTH candidate lists. That is the
+        # point of the pairing: the list answers "which factions has this game been seen with",
+        # and a dual-system kit has genuinely been seen with both.
+        for game_system in record.get("gameSystems") or []:
+            by_game_system.setdefault(game_system, set()).add(faction)
     return {game_system: sorted(factions) for game_system, factions in sorted(by_game_system.items())}
 
 
