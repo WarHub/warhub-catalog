@@ -12,8 +12,8 @@ documentation:
 ## How work lands
 
 - Every change is a pull request. A session pushes and opens it, and the maintainer merges it. A
-  session never merges, closes or approves a PR, a bot's PR included, unless the maintainer names
-  that PR in chat.
+  session never merges, closes or approves a PR, or enables auto-merge on one, a bot's PR
+  included, unless the maintainer names that PR in chat.
 - Work in more than one step lands as a stack, one layer per PR, built with the `gh stack`
   extension (`gh extension install github/gh-stack`). The maintainer merges a stack as a single
   operation with `gh stack merge <stack> --squash --yes`. Never hand off "merge bottom-up".
@@ -53,6 +53,11 @@ documentation:
 one run's output, force-pushed. Nothing accumulates on them, except that catalog-acquire.yml
 takes evidence for sources that did not run from the branch.
 
+An acquisition run that pushes first withdraws any earlier auto-merge on its PR. It enables
+auto-merge again only if the run ends fully green and the PR was built on the current `main`. A
+run that stops before pushing leaves the PR as it was. The paint PR is always merged by the
+maintainer.
+
 - Never commit to either branch, rebase it, press "Update branch" on it, or resolve its conflicts.
   To refresh one, re-run its workflow: `gh workflow run catalog-acquire.yml --ref main -f
   mode=nightly` (about 2 h) or `gh workflow run paint-catalog-update.yml --ref main`. Leave the
@@ -61,6 +66,9 @@ takes evidence for sources that did not run from the branch.
   bot PRs.** A bot PR built before that merge holds files derived from inputs `main` no longer
   has. It will either conflict, and resolving the conflict in the branch's favour reverts the
   merge, or merge cleanly and land a tree that no `resolve` produced. Re-run its workflow instead.
+  An acquisition PR built before the merge does not auto-merge (its run checks that it was built
+  on the current `main`), but it stays open until the next run rebuilds it, and the paint PR stays
+  open until someone looks.
 
 ## Regenerating the paint catalog
 
