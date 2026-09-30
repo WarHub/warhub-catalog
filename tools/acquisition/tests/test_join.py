@@ -765,6 +765,61 @@ def test_reject_eans_ignores_a_barcode_the_observation_does_not_assert() -> None
     assert result.entities["games-workshop/99120100002"][0].ean == "5011921000036"
 
 
+def test_reject_eans_by_code_splits_a_listing_refiled_under_the_new_code() -> None:
+    # A store re-listed its page under the maker's NEW code and kept the OLD code's barcode, which
+    # the maker's register gives to the old code -- so the barcode union fuses the two products.
+    members = [
+        obs("mfr-gw:old", sku="99120100001", ean="5011921000012", name="Warcry: Hunters"),
+        obs("mfr-gw:new", sku="99120100002", ean="5011921000036", name="Seraphon: Hunters"),
+        obs("ret-goblin:hunters", sku="99120100002", ean="5011921000012", name="Seraphon Hunters"),
+    ]
+    assert len(join_observations(members, TAXONOMY, KINDS, Matches()).entities) == 1
+
+    matches = Matches(
+        rejectEansByCode={"ret-goblin": {"games-workshop/99120100002": ["5011921000012"]}}
+    )
+    after = join_observations(members, TAXONOMY, KINDS, matches)
+    assert sorted(after.entities) == ["games-workshop/99120100001", "games-workshop/99120100002"]
+    # Keyed by the code, it still names ONE store's listing: the row keeps its code and loses only
+    # the barcode, exactly as a listing-keyed `rejectEans` entry would leave it.
+    listing = next(
+        m for m in after.entities["games-workshop/99120100002"] if m.key == "ret-goblin:hunters"
+    )
+    assert listing.ean is None and listing.sku == "99120100002"
+
+
+def test_reject_eans_by_code_leaves_the_barcodes_own_code_and_other_sources_alone() -> None:
+    matches = Matches(
+        rejectEansByCode={"ret-goblin": {"games-workshop/99120100002": ["5011921000012"]}}
+    )
+    members = [
+        obs("mfr-gw:old", sku="99120100001", ean="5011921000012", name="Warcry: Hunters"),
+        # The same store's listing filed under the barcode's OWN code is right, and stays so --
+        # the ledger `main` holds before a store re-files a page looks exactly like this.
+        obs("ret-goblin:hunters", sku="99120100001", ean="5011921000012", name="Warcry Hunters"),
+        # Another store under the named code is a different listing, which nobody has looked at.
+        obs("ret-radaddel:hunters", sku="99120100002", ean="5011921000012", name="Hunters"),
+    ]
+    result = join_observations(members, TAXONOMY, KINDS, matches)
+    kept = {m.key: m.ean for group in result.entities.values() for m in group}
+    assert kept["ret-goblin:hunters"] == "5011921000012"
+    assert kept["ret-radaddel:hunters"] == "5011921000012"
+
+
+def test_reject_eans_by_code_reads_the_reassigned_code_first() -> None:
+    # Same precedence as grouping: a row moved by `reassignCodes` is filed under its new code.
+    members = [
+        obs("mfr-gw:old", sku="99120100001", ean="5011921000012", name="Warcry: Hunters"),
+        obs("ret-goblin:hunters", sku="99120100009", ean="5011921000012", name="Seraphon Hunters"),
+    ]
+    matches = Matches(
+        reassignCodes={"ret-goblin:hunters": "99120100002"},
+        rejectEansByCode={"ret-goblin": {"games-workshop/99120100002": ["5011921000012"]}},
+    )
+    result = join_observations(members, TAXONOMY, KINDS, matches)
+    assert sorted(result.entities) == ["games-workshop/99120100001", "games-workshop/99120100002"]
+
+
 # --- one code, two spellings ---------------------------------------------------------------------
 
 

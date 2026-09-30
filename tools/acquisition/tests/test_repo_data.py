@@ -1428,9 +1428,6 @@ def test_no_backfilled_barcode_survives_that_its_own_source_and_the_maker_both_c
     taxonomy = Taxonomy.load(paths.taxonomy)
     descriptors = load_descriptors(paths.sources)
     matches = Matches.model_validate(read_yaml(paths.matches))
-    rejected = {
-        key: {_canonical(e) for e in eans} for key, eans in matches.rejectEans.items()
-    }
 
     def effective_code(observation: dict) -> str | None:
         # Same precedence as resolve/join.py: a hand reassignment wins over the parsed sku.
@@ -1475,7 +1472,9 @@ def test_no_backfilled_barcode_survives_that_its_own_source_and_the_maker_both_c
         source = (observation.get("hints") or {}).get("eanSource")
         ean = _canonical(observation.get("ean"))
         code = effective_code(observation)
-        if not (source and ean and code) or ean in rejected.get(observation["key"], ()):
+        if not (source and ean and code) or ean in matches.rejected_eans(
+            observation["key"], "legacy-catalog", f"{observation['manufacturer']}/{code}"
+        ):
             continue
         shop = shops.get(f"shopify:{_host(source.split(':', 1)[-1])}" if ":" in source else source)
         live = shop_codes.get(shop, {}).get((observation["manufacturer"], code)) if shop else None
@@ -1576,11 +1575,10 @@ def test_no_new_entity_fuses_two_products_the_maker_itself_tells_apart() -> None
         pytest.skip("catalog not resolved in this checkout")
     # Rows already adjudicated in matches.yaml are settled -- the evidence still says what it
     # said, and that is the point: a source's claim stays that source's claim (OBJECTIVES 5) and
-    # the correction lives here, so this must fail only on something NEW.
+    # the correction lives here, so this must fail only on something NEW. A barcode counts as
+    # settled when `resolve/join.py` disbelieves it on that row: `Matches.rejected_eans` is the
+    # one reading of `rejectEans` and `rejectEansByCode` both of them use.
     matches = Matches.model_validate(read_yaml(paths.matches))
-    settled = {
-        key: {_canonical(e) for e in eans} for key, eans in matches.rejectEans.items()
-    }
     reassigned = set(matches.reassignCodes)
 
     code_eans: dict[tuple[str, str], set[str]] = {}
@@ -1615,7 +1613,9 @@ def test_no_new_entity_fuses_two_products_the_maker_itself_tells_apart() -> None
     offenders = []
     for row in others:
         manufacturer, code, ean = row["manufacturer"], row["_code"], row["_ean"]
-        if ean in settled.get(row["key"], ()) or row["key"] in reassigned:
+        if row["key"] in reassigned or ean in matches.rejected_eans(
+            row["key"], row["_src"], f"{manufacturer}/{code}"
+        ):
             continue
         mine = code_eans.get((manufacturer, code))
         owners = ean_codes.get((manufacturer, ean))
@@ -1667,6 +1667,61 @@ def test_the_fused_entity_tripwire_is_not_vacuous() -> None:
     known = {o["key"] for sid in descriptors for o in _observations(paths, sid)}
     dangling = sorted((set(matches.rejectEans) | set(matches.reassignCodes)) - known)
     assert not dangling, f"adjudication names observations that do not exist: {dangling}"
+
+
+def test_every_code_keyed_rejection_is_a_barcode_the_maker_gives_to_another_code() -> None:
+    """THE CHECK FOR matches.yaml `rejectEansByCode`, and it holds on every tree.
+
+    That map exists for a listing `main`'s ledger does not have yet, so the dangling-row check
+    above cannot apply to it: the row is on the nightly's branch only. What CAN be checked
+    anywhere is the rest of the entry, because it names only the maker's facts -- and that is
+    the whole of rejectEans's bar. So every entry must name a source this repo harvests, a code
+    the maker's own evidence gives a DIFFERENT barcode, and a barcode the maker's own evidence
+    gives to a DIFFERENT code. A typo in the source, the code or the barcode fails here, on
+    `main` as on the nightly's tree.
+    """
+    paths = _require_repo_data()
+    if not paths.evidence_products.exists():
+        pytest.skip("no evidence in this checkout")
+    matches = Matches.model_validate(read_yaml(paths.matches))
+    if not matches.rejectEansByCode:
+        pytest.skip("matches.yaml declares no rejectEansByCode entries")
+    taxonomy = Taxonomy.load(paths.taxonomy)
+    descriptors = load_descriptors(paths.sources)
+    code_eans: dict[tuple[str, str], set[str]] = {}
+    ean_codes: dict[tuple[str, str], set[str]] = {}
+    for source_id, descriptor in descriptors.items():
+        if descriptor.kind != "manufacturer":
+            continue
+        for observation in _observations(paths, source_id):
+            manufacturer = observation.get("manufacturer") or ""
+            code = taxonomy.normalize_code(manufacturer, observation.get("sku"))
+            ean = _canonical(observation.get("ean"))
+            if code and ean:
+                code_eans.setdefault((manufacturer, code), set()).add(ean)
+                ean_codes.setdefault((manufacturer, ean), set()).add(code)
+
+    problems = []
+    for source_id, by_entity in sorted(matches.rejectEansByCode.items()):
+        if source_id not in descriptors:
+            problems.append(f"{source_id}: no such source")
+        for entity, eans in sorted(by_entity.items()):
+            manufacturer, _, code = entity.partition("/")
+            own = code_eans.get((manufacturer, code), set())
+            if not own:
+                problems.append(f"{source_id} {entity}: the maker gives this code no barcode")
+            for raw in eans:
+                ean = _canonical(raw)
+                owners = ean_codes.get((manufacturer, ean), set()) if ean else set()
+                if ean is None:
+                    problems.append(f"{source_id} {entity}: {raw!r} is not a valid barcode")
+                elif ean in own or code in owners:
+                    problems.append(f"{source_id} {entity}: the maker gives {ean} to this code")
+                elif not owners:
+                    problems.append(f"{source_id} {entity}: the maker gives {ean} to no code")
+    assert not problems, "rejectEansByCode entries the maker's register does not bear out:\n  " + (
+        "\n  ".join(problems)
+    )
 
 
 def test_every_withdrawn_entry_names_a_real_record_and_the_barcode_is_actually_gone() -> None:
