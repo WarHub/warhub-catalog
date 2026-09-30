@@ -3,11 +3,12 @@
 # Each entry is an LLM same-product verdict for a candidate pair a deterministic rule
 # (matchedRules: ean / name / legacy-code) flagged as a SUSPECTED duplicate within one
 # manufacturer. This file is a REVIEW ARTIFACT ONLY -- `classify --propose-joins` NEVER edits
-# data/catalog/matches.yaml. A human (or the controller, with spot-check gates like Task 5's LLM
-# classification waves) must manually copy the entityA/entityB pair of any entry with
-# `acceptedCandidate: true` (verdict same-product, confidence >= 0.8) into matches.yaml's `joins`
-# map -- spot-checking, not blindly trusting the threshold -- then re-run `resolve` and
-# `report --ean-guard` (a join can change a confirmed EAN; guard findings are review items).
+# data/catalog/matches.yaml. A human promotes an entry with `acceptedCandidate: true` (verdict
+# same-product, confidence >= 0.8) by hand, spot-checking rather than trusting the threshold.
+# `joins` is keyed by OBSERVATION: copy one key from the `evidence` list of the side being folded
+# in, and map it to the other side's `entity` id (matches.yaml's header says which id survives).
+# Then re-run `resolve`, `categorize` and `report --ean-guard` (a join can change a confirmed
+# EAN; guard findings are review items).
 #
 # JOINABLE vs DISTINCT. A product genuinely REPACKAGED over time -- same contents, new box and
 # barcode -- IS joinable: the resolver carries multiple barcodes on one entity (the live one

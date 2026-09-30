@@ -1,9 +1,9 @@
 """LLM classification of the parked queue (Task 5): proposes gameSystem/faction decisions for
 `classify --emit-queue`'s output by batching queue items to an Anthropic model, validating every
 answer against the queue's own candidate lists, and writing accepted decisions to
-`data/catalog/classifications/products.yaml` -- the same file `classify --apply` (apply.py)
-consumes. This module never touches overrides.yaml directly; apply.py is the only write path
-there.
+`data/catalog/classifications/products.yaml`, which `resolve` reads directly
+(resolve/attributes.py::apply_classification). Nothing in this pipeline writes overrides.yaml;
+it holds human decisions only.
 
 Hash-keyed cache (`data/review/classification-cache.jsonl`, append-only, sorted-key JSON lines)
 guarantees an item is never re-queried while its inputs (including its candidate lists) are

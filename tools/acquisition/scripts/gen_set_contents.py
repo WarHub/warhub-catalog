@@ -44,8 +44,9 @@ in a committed file, scoped to one product, with the evidence beside it, that a 
 mistyped a code in its own prose. It is the same separation `overrides.yaml` draws everywhere else
 in this repo, and it is reviewable in a diff. The corrected code changes only what is LOOKED UP:
 `ref:` keeps the string the source printed and the member carries `resolvedBy: correction`, so
-nothing is laundered. It is a FILE OF ITS OWN and not a key in overrides.yaml because
-`classify --apply` rewrites that file wholesale and deleted this block once already (2026-08-11).
+nothing is laundered. It is a FILE OF ITS OWN and not a key in overrides.yaml because each kind
+of hand-authored decision keeps a file no tool rewrites; the since-removed `classify --apply`
+deleted this block, evidence and all, once already (2026-08-11).
 
 WHERE IT RUNS. Downstream of BOTH pipelines, which is the structural difference from its two
 siblings: they run BEFORE the C# paint tool because they FEED it, this one runs AFTER because it
@@ -236,7 +237,7 @@ HEADER = """\
 # what a source meant in order to make its own output look complete. A maintainer stating a fact in
 # a committed file and being reviewed on it is the same separation `overrides.yaml` draws
 # everywhere else in this repo. It lives in its own file rather than in overrides.yaml because
-# `classify --apply` rewrites that one wholesale and deleted the block once already (2026-08-11).
+# the since-removed `classify --apply` deleted the block from there once already (2026-08-11).
 # Measured 2026-08-11, one member in this whole relation carries it: ak-interactive/AK11781's
 # `AK111424` -> AK11424 (1 of 1,212 ak-interactive members; 0 of reaper's 802 and 0 of
 # warlord-games' 90). tests/test_repo_data.py::test_every_set_ref_correction_is_live_and_resolvable

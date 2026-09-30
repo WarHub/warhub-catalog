@@ -1,14 +1,12 @@
 # Hand-authored. Written by no generator; read by scripts/gen_set_contents.py.
 #
-# WHY THIS IS NOT A KEY IN overrides.yaml, where it lived until 2026-08-11. `classify --apply`
-# rewrites overrides.yaml WHOLESALE from a two-key dict it builds by hand
-# (classify/apply.py::apply_classifications), and write_yaml is plain PyYAML, which cannot
-# round-trip a comment -- so one `warhub-data classify --apply` deleted this block (22 lines, 19
-# of them the evidence below) and exited 0. Nothing caught it: the classification run committed
-# all of `data/`, ci.yml ran pytest on `tools/**` only, and the guard test skips when the key is
-# absent, so it went vacuous rather than red. A machine-owned file and a hand-authored key
-# cannot share a path. Re-adding `setRefs:` to overrides.yaml is now a loud ValidationError
-# (Overrides is extra="forbid") rather than a silent deletion.
+# WHY THIS IS NOT A KEY IN overrides.yaml, where it lived until 2026-08-11. A hand-authored
+# decision is worth nothing without the evidence beside it, and that evidence lives in comments,
+# which any tool that rewrites a file through PyYAML deletes. That is what happened here: the
+# since-removed `classify --apply` rebuilt overrides.yaml wholesale and deleted this block (22
+# lines, 19 of them the evidence below) while exiting 0, and nothing caught it. So each kind of
+# hand-authored decision keeps a file that no tool writes. Re-adding `setRefs:` to overrides.yaml
+# is a loud ValidationError (Overrides is extra="forbid").
 
 # Codes a manufacturer mistyped in its OWN contents prose: {product id: {stated ref: real code}}.
 # See models/catalog.py::SetRefs for why a human may state this and a generator may not.

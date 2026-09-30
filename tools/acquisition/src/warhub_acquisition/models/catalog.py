@@ -246,12 +246,12 @@ class CanonicalProduct(BaseModel):
 
 
 class Overrides(BaseModel):
-    # extra="forbid" is what makes this file MACHINE-OWNED safely. classify/apply.py rewrites
-    # overrides.yaml wholesale from a hand-built dict of exactly these two keys, so any third
-    # top-level key a human adds here is deleted on the next `classify --apply` -- silently, and
-    # with its comments, because write_yaml is plain PyYAML. `setRefs` lived here and was lost
-    # that way (see data/catalog/set-refs.yaml, 2026-08-11). Forbidding extras turns the next
-    # attempt into a ValidationError at load time instead of a quiet deletion at write time.
+    # extra="forbid" keeps this file to its two keys. Every other kind of hand-authored decision
+    # has a file of its own (set-refs.yaml, retained-eans.yaml, withdrawn-eans.yaml), because an
+    # entry is worth nothing without the evidence in its comments, and a tool that rewrites a
+    # file through PyYAML deletes comments. The since-removed `classify --apply` did exactly that
+    # to `setRefs` when it lived here (2026-08-11). A third top-level key is therefore a
+    # ValidationError at load time, not a key that quietly waits to be lost.
     model_config = ConfigDict(extra="forbid")
     retract: list[str] = Field(default_factory=list)
     products: dict[str, dict[str, object]] = Field(default_factory=dict)
@@ -264,9 +264,9 @@ class SetRefs(BaseModel):
     #
     # LIVES IN ITS OWN FILE, data/catalog/set-refs.yaml (DataPaths.set_refs), which no code in this
     # repo writes. It was a key in overrides.yaml until 2026-08-11, and that was a real defect
-    # rather than a tidiness complaint: classify/apply.py rebuilds overrides.yaml from a two-key
-    # literal, so one `warhub-data classify --apply` deleted the block and its 19 lines of evidence
-    # and exited 0. A hand-authored key cannot share a path with a generator's output.
+    # rather than a tidiness complaint: the since-removed `classify --apply` rebuilt that file from
+    # a two-key literal, deleted the block and its 19 lines of evidence, and exited 0. A
+    # hand-authored key never shares a path with anything a tool writes.
     #
     # WHY THIS IS NOT THE GENERATOR REWRITING THE SOURCE, which gen_set_contents.py's header
     # forbids in those words. That prohibition is on INFERENCE -- a generator that quietly repairs
@@ -316,9 +316,8 @@ class WithdrawnEans(BaseModel):
     # adds a barcode anywhere. An entry only ever removes.
     #
     # HAND-AUTHORED, in its own file (data/catalog/withdrawn-eans.yaml, DataPaths.withdrawn_eans),
-    # for the same reason RetainedEans and SetRefs have theirs: `classify --apply` rewrites
-    # overrides.yaml through plain PyYAML and cannot round-trip a comment, and an entry here is
-    # worth nothing without the evidence beside it.
+    # for the same reason RetainedEans and SetRefs have theirs: an entry here is worth nothing
+    # without the evidence in its comments, and no tool writes this file.
     withdrawn: dict[str, list[str]] = Field(default_factory=dict)
 
 
@@ -338,11 +337,10 @@ class RetainedEans(BaseModel):
     # two have disappeared, both by this route.
     #
     # STATED, NEVER DERIVED, and in its own hand-authored file (data/catalog/retained-eans.yaml,
-    # DataPaths.retained_eans) for the same reason SetRefs has one: overrides.yaml is rebuilt by
-    # `classify --apply` through plain PyYAML, which cannot round-trip a comment, and an entry here
-    # is worthless without the evidence beside it. A generator must not add entries -- "this
-    # barcode was published once" is a fact about our own releases that a human checks against
-    # git history, not something to infer from the current tree.
+    # DataPaths.retained_eans) for the same reason SetRefs has one: an entry here is worthless
+    # without the evidence in its comments, and no tool writes this file. A generator must not add
+    # entries -- "this barcode was published once" is a fact about our own releases that a human
+    # checks against git history, not something to infer from the current tree.
     #
     # ADDITIVE ONLY. Retention can add a barcode to `additionalEans`; it can never change a primary
     # `ean`, never remove anything, and never resurrect a retracted record. A retained value that

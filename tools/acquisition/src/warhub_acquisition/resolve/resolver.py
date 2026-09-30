@@ -63,16 +63,16 @@ class DataPaths:
     @property
     def set_refs(self) -> Path:
         """Maintainer-declared repairs for codes a manufacturer mistyped in its own contents prose
-        (models/catalog.py::SetRefs). Separate from `overrides` because classify/apply.py rewrites
-        overrides.yaml wholesale and would delete a hand-authored key -- as it did, 2026-08-11."""
+        (models/catalog.py::SetRefs). Separate from `overrides` because each kind of hand-authored
+        decision keeps a file no tool writes; the since-removed `classify --apply` deleted this
+        block from overrides.yaml on 2026-08-11."""
         return self.root / "catalog" / "set-refs.yaml"
 
     @property
     def retained_eans(self) -> Path:
         """Barcodes this catalog published that no source attests any more (models/catalog.py
-        ::RetainedEans). Hand-authored, like set_refs and for the same reason: overrides.yaml is
-        rebuilt by `classify --apply` through plain PyYAML and cannot keep the evidence beside an
-        entry."""
+        ::RetainedEans). Hand-authored, like set_refs and for the same reason: an entry is worth
+        nothing without the evidence in its comments, so it lives where no tool rewrites it."""
         return self.root / "catalog" / "retained-eans.yaml"
 
     @property
@@ -363,8 +363,9 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
 
     matches: Matches = _load_optional(paths.matches, Matches, Matches())
     overrides: Overrides = _load_optional(paths.overrides, Overrides, Overrides())
-    # Read HERE rather than merged into overrides.yaml by `classify --apply`, which is how a
-    # machine guess came to outrank every source. See attributes.apply_classification.
+    # Read HERE rather than merged into overrides.yaml, as the since-removed `classify --apply`
+    # did, which is how a machine guess came to outrank every source. See
+    # attributes.apply_classification.
     classifications: dict[str, dict] = (
         read_yaml(paths.classifications) or {} if paths.classifications.exists() else {}
     )
