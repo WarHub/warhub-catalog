@@ -320,19 +320,19 @@ public sealed class PublishFixture : IDisposable
                 tier: close
             """);
 
-        var prov = new Provenance
-        {
-            Version = "2026.7.4",
-            GeneratedAt = "2026-07-04T00:00:00Z",
-            GitCommit = "deadbeef",
-            Repo = "WarHub/warhub-catalog",
-            Release = new ReleaseRef("v2026.7.4", "https://github.com/WarHub/warhub-catalog/releases/tag/v2026.7.4"),
-            PageBaseUrl = "https://warhub.github.io/warhub-catalog",
-        };
-
         string schemaDir = Path.Combine(AppContext.BaseDirectory, "schema");
-        Result = Publisher.Run(new PublishOptions(catalog, paints, Dist, schemaDir, prov));
+        Result = Publisher.Run(new PublishOptions(catalog, paints, Dist, schemaDir, Provenance));
     }
+
+    internal static Provenance Provenance { get; } = new()
+    {
+        Version = "2026.7.4",
+        GeneratedAt = "2026-07-04T00:00:00Z",
+        GitCommit = "deadbeef",
+        Repo = "WarHub/warhub-catalog",
+        Release = new ReleaseRef("v2026.7.4", "https://github.com/WarHub/warhub-catalog/releases/tag/v2026.7.4"),
+        PageBaseUrl = "https://warhub.github.io/warhub-catalog",
+    };
 
     public string ReadDist(string relPath) => File.ReadAllText(Path.Combine(Dist, relPath.Replace('/', Path.DirectorySeparatorChar)));
 

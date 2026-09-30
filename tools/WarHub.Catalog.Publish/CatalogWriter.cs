@@ -28,6 +28,21 @@ internal sealed class CatalogWriter(string distRoot, SchemaValidator validator)
         _files.Add(new FileEntry(relPath, kind, partition, records, bytes.Length, sha));
     }
 
+    /// <summary>
+    /// Records a file that is not a JSON document -- <paramref name="write"/> is handed the full
+    /// path and produces it -- so it enters the manifest with a size and sha256 like every other.
+    /// </summary>
+    public void WriteFile(string relPath, string kind, Action<string> write)
+    {
+        string full = Path.Combine(distRoot, relPath.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(full)!);
+        write(full);
+
+        byte[] bytes = File.ReadAllBytes(full);
+        string sha = Convert.ToHexStringLower(SHA256.HashData(bytes));
+        _files.Add(new FileEntry(relPath, kind, null, null, bytes.Length, sha));
+    }
+
     /// <summary>Copies the authored JSON Schema files into <c>dist/schema/</c> and records them.</summary>
     public void CopySchemas(string schemaSourceDir)
     {

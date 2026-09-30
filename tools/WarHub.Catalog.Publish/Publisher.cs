@@ -11,7 +11,7 @@ internal sealed record PublishResult(
 /// <summary>
 /// Orchestrates a full publish: read source YAML, emit the dist/ JSON tree (consolidated
 /// + partitions + indexes + barcode index + set contents + schemas + manifest), validating every
-/// document as it is written.
+/// document as it is written, plus <c>catalog.sqlite</c>, the same records as SQL tables.
 ///
 /// Both catalogs are ASSEMBLED before either is WRITTEN. The two shapes are not independent: a
 /// Citadel pot is a SKU in one and a colour in the other, joined only by its barcode, and neither
@@ -61,6 +61,11 @@ internal static class Publisher
         const string setContentsPath = "set-contents.json";
         writer.Write(setContentsPath, "set-contents", "set-contents", null, setContents.Total,
             setContents.ToDocument(o.Prov, setContentsPath));
+
+        // The same records once more, as SQL tables. After the link pass, so its rows carry the
+        // paintIds/productIds the JSON does; derived output, read back by nothing here.
+        writer.WriteFile("catalog.sqlite", "sqlite", path => QueryDatabase.Write(
+            path, productAssembly.Records, paintAssembly.Records, barcodes, o.Prov));
 
         writer.CopySchemas(o.SchemaDir);
 
