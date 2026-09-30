@@ -74,6 +74,13 @@ name: Nightly Acquisition
 # out of this workflow -- and out of every workflow. Classification waves are run by hand through
 # `tools/acquisition/scripts/classify_local.py` (see README, pipeline step 3), so no schedule can
 # start one.
+#
+# THE STICKY PR MERGES ITSELF WHEN A RUN ENDS FULLY GREEN, and in no other case. The integrate job
+# withdraws any pending auto-merge before it pushes. As its last step, it re-enables auto-merge
+# (squash) only when every step and every acquire group succeeded AND the pushed head was built on
+# main's current tip. GitHub then merges once the required checks (`CI gate`, `Data CI gate`) pass
+# on that head. This applies to this workflow's PR alone: paint-catalog-update.yml's PR and every
+# human PR are merged by the maintainer.
 
 on:
   schedule:
@@ -858,7 +865,47 @@ jobs:
           client-id: ${{ vars.WARHUB_BOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.WARHUB_BOT_APP_PRIVATE_KEY }}
 
+      # AUTO-MERGE IS WITHDRAWN BEFORE THIS RUN PUSHES. Only this run's own verdict, in the last
+      # step of the job, can give it back. An earlier green run may have enabled it on a PR that
+      # has not merged yet (its Data CI red, or still running), and GitHub keeps auto-merge
+      # enabled across a push by a writer, so this run's force-push would otherwise inherit a green
+      # light it never earned. The runs that most need stopping are the ones the required checks
+      # cannot see. Data CI does not run `report --ean-guard`, so an EAN-guard hit fails this job
+      # while the PR's checks can still pass. A cancelled or failed acquire group behaves the same
+      # way.
+      #
+      # A FAILURE HERE STOPS THE JOB BEFORE THE PUSH, on purpose: an auto-merge that cannot be
+      # withdrawn must not be handed a fresh tree. The previous run's PR stays as that run left it.
+      # That costs the night's harvest (no later run reads this run's artifacts), so a transient
+      # API error gets two more tries first.
+      - name: Withdraw auto-merge from the previous run
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+        run: |
+          pending() {
+            gh pr list --repo "$GITHUB_REPOSITORY" --head catalog/acquisition --base main --state open \
+              --json number,autoMergeRequest --jq '.[] | select(.autoMergeRequest != null) | .number'
+          }
+          for attempt in 1 2 3; do
+            if pr="$(pending)"; then
+              if [ -z "$pr" ]; then
+                echo "No auto-merge pending on catalog/acquisition."
+                exit 0
+              fi
+              if gh pr merge "$pr" --repo "$GITHUB_REPOSITORY" --disable-auto; then
+                echo "::notice::Auto-merge withdrawn from #$pr. This run re-enables it only if it ends fully green."
+                exit 0
+              fi
+            fi
+            if [ "$attempt" != 3 ]; then
+              sleep 20
+            fi
+          done
+          echo "::error::Could not confirm auto-merge is off on catalog/acquisition after 3 attempts. Stopping before the push, so an earlier run's auto-merge cannot carry this run's tree."
+          exit 1
+
       - name: Create or update sticky PR
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.bot.outputs.token }}
@@ -954,4 +1001,94 @@ jobs:
           if [ "$guard_exit" = "5" ]; then
             echo "::error::Confirmed-EAN guard found hits this run -- see the sticky PR body and data/review for details. Failing job so this is loud in Checks."
             exit 5
+          fi
+
+      # AUTO-MERGE, ON THE FULLY GREEN PATH ONLY. This step runs only when every step above
+      # succeeded, so the combined gate just above found nothing, AND every acquire group
+      # succeeded. A group that exits 4 paints its own job and the run red, and the gate above
+      # deliberately does not repeat that alarm, so it is tested here.
+      #
+      # ONLY ON A HEAD BUILT ON TODAY'S MAIN. This job checked out main as it stood when the run was
+      # created, about two hours before this step, and create-pull-request built the branch on
+      # that commit. "Re-run jobs" reuses it too, however old. If anything merged to main since
+      # (the paint PR is the likeliest, since categorize reads data/paints), this head carries
+      # files derived from inputs main no longer has, and a clean textual merge would publish them.
+      # So the step compares the pushed head's parent with main's tip now. If they differ, it
+      # leaves the PR for the next run to rebuild.
+      #
+      # USUALLY A REQUEST, NOT A MERGE. GitHub merges once the required checks on the pushed head
+      # pass (`CI gate` and `Data CI gate`, repo ruleset 21797609), and never while one is failing
+      # or has not reported. If they have already passed, as on a run that pushed nothing new, gh
+      # merges at once, under the same server-side rules. --match-head-commit refuses either if the
+      # head is no longer the commit this run judged.
+      #
+      # THE APP TOKEN IS REQUIRED HERE, NOT MERELY PREFERRED. GitHub performs the squash on behalf
+      # of whoever enabled auto-merge. Enabled with GITHUB_TOKEN, the merge push starts no
+      # workflow, so catalog-publish.yml would never cut the release. On bot-token's fallback the
+      # PR's own checks never ran either, so this step says so and leaves the PR to the maintainer.
+      #
+      # A FAILED REQUEST IS A WARNING, NOT A RED RUN. By this point the run has already been judged
+      # green, and the job's colour is the data's verdict. A PR that could not be queued waits for
+      # the maintainer, exactly as every PR did before this step existed.
+      - name: Enable auto-merge on a fully green run
+        if: success() && needs.acquire.result == 'success'
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+          TOKEN_KIND: ${{ steps.bot.outputs.kind }}
+          PR: ${{ steps.cpr.outputs.pull-request-number }}
+          OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
+          HEAD_SHA: ${{ steps.cpr.outputs.pull-request-head-sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE_EXPR: ${{ github.event.schedule }}
+          DISPATCH_MODE: ${{ github.event.inputs.mode }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ "$TOKEN_KIND" != "app" ]; then
+            echo "::warning::Not enabling auto-merge: this run has no warhub-bot app token (see 'Mint warhub-bot token'). A merge enabled with GITHUB_TOKEN would not trigger catalog-publish.yml, and this PR's required checks never ran. The maintainer merges it by hand."
+            exit 0
+          fi
+          if [ -z "$PR" ] || [ "$OPERATION" = "closed" ]; then
+            echo "No open sticky PR (create-pull-request reported '${OPERATION:-nothing}'), so there is nothing to auto-merge."
+            exit 0
+          fi
+
+          # Anything but a full SHA counts as unknown, and unknown never matches, so a lookup that
+          # fails skips auto-merge rather than guessing. (On an API error gh prints the error body.)
+          built_on=""
+          if [ -n "$HEAD_SHA" ]; then
+            built_on="$(gh api "repos/$GITHUB_REPOSITORY/commits/$HEAD_SHA" --jq '.parents[0].sha' 2>/dev/null || true)"
+          fi
+          main_now="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha' 2>/dev/null || true)"
+          [[ "$built_on" =~ ^[0-9a-f]{40}$ ]] || built_on=""
+          [[ "$main_now" =~ ^[0-9a-f]{40}$ ]] || main_now=""
+          if [ -z "$built_on" ] || [ "$built_on" != "$main_now" ]; then
+            echo "::warning::Not enabling auto-merge: #$PR was built on '${built_on:-unknown}', and main is now '${main_now:-unknown}'. Something merged to main while this run was in flight, so the next run rebuilds the PR from it. Do not merge this one by hand."
+            exit 0
+          fi
+
+          # The same derivation as the acquire job's plan step, for the squash commit's subject.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$DISPATCH_MODE" = "weekly" ]; then
+            what="weekly acquisition sweep"
+          elif [ "$SCHEDULE_EXPR" = "0 2 * * 6" ]; then
+            what="weekly acquisition sweep"
+          else
+            what="nightly acquisition"
+          fi
+
+          # The PR body is the run's health report, and as the squash commit's body it stays in
+          # main's history after the next run overwrites the PR.
+          args=(--auto --squash --subject "catalog: $what, $(date -u +%F) (#$PR)")
+          if [ -n "$HEAD_SHA" ]; then
+            args+=(--match-head-commit "$HEAD_SHA")
+          fi
+          if [ -s pr-body.md ]; then
+            args+=(--body-file pr-body.md)
+          else
+            args+=(--body "Run: $RUN_URL")
+          fi
+
+          if gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" "${args[@]}"; then
+            echo "::notice::Auto-merge (squash) set on #$PR at ${HEAD_SHA:-its current head}: GitHub merges it once CI gate and Data CI gate pass on that commit, or has merged it already if they had."
+          else
+            echo "::warning::Could not enable auto-merge on #$PR (see the gh error above). This run is green; the PR waits for the maintainer."
           fi

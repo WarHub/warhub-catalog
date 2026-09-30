@@ -244,6 +244,11 @@ sitting in the open PR. The same is true of a local classification wave for a di
 its output is an ordinary working-tree change, and the next `--emit-queue` reads the tree it is
 run against.
 
+A run withdraws any earlier auto-merge on the sticky PR before it pushes. It enables auto-merge
+(squash) again only if it ends fully green and built the PR on `main`'s current tip, and the PR
+then merges itself once the required checks pass on it. Otherwise the PR waits for the maintainer
+or the next run. `paint-catalog-update.yml`'s PR is always merged by hand.
+
 ## Build locally
 
 Prerequisites: [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
