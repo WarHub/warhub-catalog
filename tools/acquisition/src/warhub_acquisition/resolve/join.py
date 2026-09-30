@@ -58,6 +58,23 @@ class Matches(BaseModel):
     # someone else. "Two sources disagree" is NOT enough -- that is what `ean-mismatch` is for, and
     # a genuine repackaging looks exactly like it. An entry says which of the two it is.
     rejectEans: dict[str, list[str]] = Field(default_factory=dict)
+    # `rejectEans` KEYED BY THE CODE A LISTING IS FILED UNDER, not by the listing:
+    # `{source_id: {entity id: [barcodes]}}`. Every row of that source whose own catalogue number
+    # (its `reassignCodes` entry, else the code parsed from its sku) names that entity disbelieves
+    # those barcodes. The bar and the effect are rejectEans's; only the key differs.
+    #
+    # WHY A SECOND KEY. A nightly harvest can surface a listing that `main`'s ledger has never
+    # seen, and its observation key then exists only on the bot branch -- which cannot merge while
+    # the fusion that listing causes is unadjudicated. An entry keyed by that observation names a
+    # row `main` does not have, and `test_the_fused_entity_tripwire_is_not_vacuous` rightly calls
+    # it dangling there. The entity id and the barcode are the MAKER's, and every tree holds the
+    # maker's register, so this key can be checked wherever it lands: the test for this map fails
+    # unless the maker gives the code another barcode and gives the barcode to another code.
+    #
+    # IT IS ALSO THE EXACT KEY FOR A LISTING THE STORE RE-FILED: it acts only while the store files
+    # a listing under that code. A listing that `main`'s ledger holds under the barcode's own code
+    # is right there, and a listing-keyed entry would disbelieve the barcode on it regardless.
+    rejectEansByCode: dict[str, dict[str, list[str]]] = Field(default_factory=dict)
     # Which of an entity's competing barcodes is the PRIMARY, mapping entity id -> the ean. For the
     # case `rejectEans` deliberately refuses: two sources disagree, and the loser cannot be shown to
     # be something else, so it must stay published -- but the automatic choice is still wrong.
@@ -97,6 +114,27 @@ class Matches(BaseModel):
     # the canonical one when a row is coded, and the record publishes it in `additionalCodes` so
     # the old number still names the product.
     codeAliases: dict[str, str] = Field(default_factory=dict)
+
+    def rejected_eans(self, key: str, source_id: str, filed_under: str | None) -> set[str]:
+        """The barcodes one row's claim is disbelieved on, canonical: its own `rejectEans` entry
+        plus its source's `rejectEansByCode` entry for the entity id it is filed under. The single
+        reading that `join_observations` and the repo-data tripwires share."""
+        values = list(self.rejectEans.get(key, ()))
+        if filed_under is not None:
+            values.extend(self.rejectEansByCode.get(source_id, {}).get(filed_under, ()))
+        return {ean for ean in map(canonical_ean, values) if ean is not None}
+
+
+def filed_under(
+    key: str, manufacturer: str | None, sku: str | None, taxonomy: Taxonomy, matches: Matches
+) -> str | None:
+    """The entity id a row is filed under by its own catalogue number -- its `reassignCodes`
+    entry, else the maker's code parsed from its sku -- which is what `rejectEansByCode` keys on.
+    None for a row with no manufacturer or no parseable code."""
+    if not manufacturer:
+        return None
+    code = matches.reassignCodes.get(key) or taxonomy.normalize_code(manufacturer, sku)
+    return f"{manufacturer}/{code}" if code else None
 
 
 @dataclass
@@ -321,7 +359,12 @@ def join_observations(
     # `corroborate` fold -- sees one answer. The evidence file is never rewritten: a source's claim
     # stays that source's claim (OBJECTIVES 5), and the correction lives in matches.yaml where it
     # is reviewable next to its reason.
-    if matches.reassignManufacturer or matches.rejectEans or derived_manufacturers:
+    if (
+        matches.reassignManufacturer
+        or matches.rejectEans
+        or matches.rejectEansByCode
+        or derived_manufacturers
+    ):
         corrected_observations = []
         for observation in observations:
             update: dict[str, object] = {}
@@ -331,8 +374,21 @@ def join_observations(
             ) or derived_manufacturers.get(observation.key)
             if manufacturer:
                 update["manufacturer"] = manufacturer
-            rejected = matches.rejectEans.get(observation.key)
-            if rejected and canonical_ean(observation.ean) in {canonical_ean(e) for e in rejected}:
+            # Read with the CORRECTED manufacturer, since that is the one the row groups under.
+            rejected = matches.rejected_eans(
+                observation.key,
+                observation.source_id,
+                filed_under(
+                    observation.key,
+                    manufacturer or observation.manufacturer,
+                    observation.sku,
+                    taxonomy,
+                    matches,
+                )
+                if observation.source_id in matches.rejectEansByCode
+                else None,
+            )
+            if rejected and canonical_ean(observation.ean) in rejected:
                 update["ean"] = None
             corrected_observations.append(
                 observation.model_copy(update=update) if update else observation

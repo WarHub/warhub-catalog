@@ -808,6 +808,61 @@ rejectEans:
   # consumer scans still resolves, and it resolves to the right product. The losing code keeps its
   # own record and, where nothing else asserts a barcode for it, keeps no barcode -- which is what
   # OBJECTIVES 5 asks for over a value that is known to be somebody else's.
+# `{source_id: {entity id: [barcodes to disbelieve]}}` -- rejectEans keyed by the code a listing is
+# filed under. See Matches.rejectEansByCode in resolve/join.py for when that key is the right one.
+rejectEansByCode:
+  # --- GOBLINGAMING RE-FILED FIVE GW LISTINGS UNDER THE NEW CODES AND KEPT THE OLD BARCODES ----
+  # (2026-09-30, found by that night's acquisition run, 36690070733.) Between the 2026-09-29 and
+  # 2026-09-30 harvests goblingaming rewrote five of its GW pages as the boxes GW sells now: new
+  # title, new sku, new price, and GW's own copy and image for the new box. The variant barcode is
+  # the one field it did not touch. `/products/<handle>.json`, read 2026-09-30 one request per
+  # handle, dates every page 2020-2024 (`created_at`), so none is a new page; three had been
+  # unpublished and came back on 2026-09-29 (`published_at`), which is why the ledger meets them
+  # for the first time. GW's trade sheet on each pair:
+  #
+  #   listing, as titled now                  filed under  barcode kept   GW gives it to
+  #   Seraphon Hunters of Huanchi             99120208049  5011921182060  99120208029 WARCRY: HUNTERS OF HUANCHI
+  #   Cities of Sigmar Wildercorps Hunters    99120202076  5011921203345  99120202051 WARCRY: WILDERCORPS HUNTERS
+  #   Disciples of Tzeentch Magister On Disc  99120201216  5011921135776  99129915057 MAGISTER ON DISC OF TZEENTCH
+  #   Skaven Plaguepack                       99120206062  5011921200238  60120706002 WHU: SKABBIKS PLAGUEPACK (ENG)
+  #   Slaves To Darkness Chaos Legionnaires   99120201251  5011921173785  99120201138 WARCRY: CHAOS LEGIONAIRES
+  #
+  # and each new code has a barcode of its own there (...261468, ...261536, ...253616, ...254408,
+  # ...261000), while every old code sits under Deletions.
+  #
+  # THE LISTING IS THE NEW BOX, SO THE BARCODE IS THE WRONG PART, not the sku. Title, sku and
+  # price moved together: the Wildercorps and Legionnaires pages read "Warcry ..." at 35.15 under
+  # the old codes on 2026-09-29 and now read the army names at 38.00 and 38.95, against GW's 38
+  # for the new boxes. The copy is GW's copy for the new box, and the "Stock Coming" a trade
+  # account orders today is the new box, because the old one is deleted. ret-tistaminis gives
+  # SKAVEN: PLAGUEPACK GW's own ...254408. The same store did the same to the Ogor Mawtribes dice
+  # (`rejectEans` above). Moving these rows to the old codes with `reassignCodes` instead would put
+  # a live price and a shop page on boxes GW no longer supplies.
+  #
+  # THE TRIPWIRE SUGGESTED `reassignCodes` FOR THE MAGISTER, and that is its word count rather than
+  # evidence: GW's trade sheet writes the new code "D/T: MAGISTER ON DISC OF TZEENTCH", so the
+  # store's spelled-out "Disciples of Tzeentch" scores nearer the old name. GW's own page for the
+  # new code is `disciples-of-tzeentch-magister-on-disc-of-tzeentch-2026`.
+  #
+  # NO PAIR IS ONE PRODUCT, so none is a `supersessions` link. GW's copy for its Warcry warband
+  # boxes (legacy-catalog carries it for the Teratic Cohort, the Pyregheists and others) lists an
+  # abilities card and fighter cards, and its copy for the three new army boxes
+  # says the Warcry rules are a free download. 60120706002 is the Warhammer Underworlds warband,
+  # a different product and not a regional edition: its code differs past the leading two digits.
+  # The magister's two codes may be one kit reboxed, and whether that is a lineage is for GW's
+  # register to show; this entry does not depend on it.
+  #
+  # KEYED BY CODE, not by listing, for the reason Matches.rejectEansByCode gives: three of these
+  # listings are in that nightly's ledger and not yet in `main`'s, and `main`'s holds the other two
+  # under the OLD codes with the old codes' own barcodes, which are right there. Every old code
+  # keeps its record and its barcode, which GW's trade sheet still asserts (so does gamenerdz,
+  # for the Huanchi, Legionnaires and magister barcodes), so no value leaves the catalog.
+  ret-goblingaming:
+    games-workshop/99120208049: ['5011921182060']
+    games-workshop/99120202076: ['5011921203345']
+    games-workshop/99120201216: ['5011921135776']
+    games-workshop/99120206062: ['5011921200238']
+    games-workshop/99120201251: ['5011921173785']
 # `{id a release published: the id that record has now}`. Read by `resolve/join.py` when it names
 # a group, when it resolves a forced-join target and when it reads a declared supersession, and by
 # the withdrawn-eans staleness test. An entry does NOT move anything: it records that a rename
