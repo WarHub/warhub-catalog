@@ -23,12 +23,22 @@ Colour Forge basing sands at 275 ml and only Fine Grit at 400 g. Miniature-hobby
 by jar volume. The change is worth making as a CONTRACT fix, not as a repair, and this module pins
 the population so nobody re-sizes the work on the old premise.
 
-THE MATCHING RULE HAS FOUR CLAUSES AND ALL OF THEM ARE LOAD-BEARING. The obvious `\\d+\\s?g\\b`
+THE MATCHING RULE HAS FIVE CLAUSES AND ALL OF THEM ARE LOAD-BEARING. The obvious `\\d+\\s?g\\b`
 is unusable in both directions at once: measured over all 31,076 catalog names it returns 11 hits
 of which 8 are junk (`Bf 109G Ace`, `2G Proxies`, `SIGNATURE SET - JOSEDAVINCI 3G`, ...) AND it
 misses both records that matter, because `250gr` has no word boundary after the `g`. `_MASS_RE`
 below plus `_mass_g` is the rule that survives every one of those; `TestTheRuleItself` keeps it
 honest against the named traps rather than trusting the count.
+
+THE FIFTH CLAUSE IS GRAMMAGE. From 2026-09-22 the nightly harvested Vallejo's wet-palette refill
+`30 sheets of Moisture Paper (60gr) 225x145 - Wet Palette`, which clauses (1)-(4) read as 60 g. A
+gram figure on paper is g/m², how heavy the stock is, not how much is in the pack: the product is
+sold by the sheet. The population pin below caught it, and the answer is the rule refusing it, not
+the pin admitting it. The tell is the MATERIAL -- `paper` or `sheet` as a whole word -- and not
+the `225x145` beside it: of the six palette-paper names in the corpus only this one states a
+size, so a size-keyed clause would admit the next one that states only its grammage. The rule
+lives here alone; nothing in the pipeline reads a mass out of a name (a product's `weightG` comes
+only from a `weightG` hint, and no source emits one -- see `TestTheGrossShippingWeightStaysOut`).
 
 TWO LEGITIMATE ARCHIVE STATES, the pattern test_paint_overrides_gsw_dips.py established and
 test_paint_volume_gsw.py reuses. Only the C# paint tool writes data/paints/brands/*.yaml and the
@@ -80,12 +90,18 @@ WEIGHT_SOLD_PRODUCTS = {
 # (2) the unit is not followed by any letter, accented ones included -- kills `Grün`, `Grit`;
 # (3) enforced separately in _mass_g: the token is terminal or bracket-closed -- kills
 #     `Bf 109G Ace`, `Messerschmitt Bf 109G squadron`;
-# (4) also in _mass_g: a BARE single-letter unit must be lowercase `g` -- kills `... 3G`.
+# (4) also in _mass_g: a BARE single-letter unit must be lowercase `g` -- kills `... 3G`;
+# (5) also in _mass_g: the name is not sheet stock, whose grams are grammage (g/m²) -- kills
+#     `30 sheets of Moisture Paper (60gr) 225x145`. Whole words, so `Paperback`, `Datasheet` and
+#     `Wallpaper` are not sheet stock.
 _MASS_RE = re.compile(r"(?<![A-Za-z0-9])(\d+)\s*(g|gr|gram|grams)(?![^\W\d_])", re.IGNORECASE)
+_SHEET_STOCK_RE = re.compile(r"\b(?:papers?|sheets?)\b", re.IGNORECASE)
 
 
 def _mass_g(name: str) -> int | None:
-    """Net mass in grams stated by a product NAME, or None. See the four clauses above."""
+    """Net mass in grams stated by a product NAME, or None. See the five clauses above."""
+    if _SHEET_STOCK_RE.search(name):  # clause (5): `60gr` on paper is g/m², not net contents
+        return None
     for match in _MASS_RE.finditer(name):
         unit = match.group(2)
         if len(unit) == 1 and unit != "g":  # clause (4): `3G` is a signature set, not 3 grams
@@ -165,8 +181,13 @@ class TestTheRuleItself:
         ("SIGNATURE SET – JOSEDAVINCI 3G", None),
         ("Ral 6007 Grün", None),
         ("Colour Forge Basing Sand – Fine Grit – 275ml", None),
+        # grammage: the real case, from the 2026-09-22..29 nightlies, then two constructed
+        # neighbours that fix the clause's shape (the corpus holds no second instance of either)
+        ("30 sheets of Moisture Paper (60gr) 225x145 - Wet Palette", None),
+        ("Wet Palette Paper Refills 60gr", None),  # no size: the paper is the tell, not the 225x145
+        ("Wallpaper Paste 125g", 125),  # still a mass: a whole word, and `Wallpaper` is not paper
     ])
-    def test_the_four_clauses_hold(self, name, expected):
+    def test_the_five_clauses_hold(self, name, expected):
         assert _mass_g(name) == expected
 
     def test_the_obvious_regex_is_wrong_in_both_directions(self):
@@ -194,7 +215,12 @@ class TestThePopulationIsWhatTheChangeWasSizedFor:
 
     def test_the_product_catalog_holds_exactly_the_three_known_rows(self):
         found = {p["id"]: _mass_g(p["name"]) for p in _products() if _mass_g(p["name"])}
-        assert found == WEIGHT_SOLD_PRODUCTS
+        assert found == WEIGHT_SOLD_PRODUCTS, (
+            "the weight-sold product population moved. A NEW row is either a product genuinely "
+            "sold by mass -- add it above -- or a gram figure that is not net contents (a model "
+            "designation, a paper's grammage) that `_mass_g` must learn to refuse; never the "
+            "second admitted as the first"
+        )
 
     def test_no_set_is_weight_sold_as_a_whole(self):
         """Why no VolumeTable row carries a WeightG and none should be added speculatively.
