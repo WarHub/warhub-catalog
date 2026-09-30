@@ -1,1 +1,21 @@
-conflicts: []
+conflicts:
+  - type: ean-mismatch
+    entity: steamforged-games/SFIK-KDR210
+    chosen: '5060453699959'
+    assertions:
+      - ean: '5060453699959'
+        sources:
+          - legacy-catalog
+          - mfr-steamforged
+          - mfr-warmachine
+          - ret-gamenerdz
+      - ean: '5061060704463'
+        sources:
+          - ret-gamenerdz
+  - type: ambiguous-join
+    keys:
+      - arc-wargameportal:/products/alchemite-warforger
+    name: Alchemite Warforger
+    candidates:
+      - games-workshop/99120202039
+      - games-workshop/99120202069
