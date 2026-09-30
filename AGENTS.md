@@ -7,6 +7,7 @@ documentation:
 - the values its data obeys (archive everything, keep every published barcode, refuse rather
   than guess): [docs/OBJECTIVES.md](docs/OBJECTIVES.md). Read it before changing what the catalog
   *contains*.
+- how to correct one data fact, and which file does it: [docs/adjudication.md](docs/adjudication.md)
 
 ## How work lands
 

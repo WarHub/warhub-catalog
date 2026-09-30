@@ -3,8 +3,9 @@
 # entity being folded in -> the surviving entity id it should merge into; `aliases` maps a
 # retired entity id -> its surviving replacement id; `supersessions` LINKS two entities that both
 # keep their own record. See resolve/join.py's docstring and data/review/join-proposals.yaml's
-# header for the promotion procedure. After editing, re-run `warhub-data resolve` then
-# `warhub-data report --ean-guard`.
+# header for the promotion procedure. After editing, re-run `warhub-data resolve`, then
+# `warhub-data categorize` (README, pipeline step 2), then `warhub-data report --ean-guard`.
+# Which map a symptom calls for, and each one's evidence bar: docs/adjudication.md.
 #
 # Note: the "surviving" id on the right of a JOIN isn't always the entity that was named as the
 # join's target when promoted from join-proposals.yaml -- resolve/join.py's own anchor-priority
