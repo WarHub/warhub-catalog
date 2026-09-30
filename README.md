@@ -130,6 +130,13 @@ data/
   catalog-publish.yml            # on catalog/paint data change: bundle -> Release + Pages
 ```
 
+`data/catalog/products/` holds one `<manufacturer>.yaml` per manufacturer. A manufacturer too big
+for one file is written as shards, `<manufacturer>.<code prefix>.yaml` plus `<manufacturer>._.yaml`
+for the codes no prefix claims, all in the same document shape. The resolver picks the file names
+by the rule in `tools/acquisition/src/warhub_acquisition/resolve/layout.py`. Every reader, Python
+and .NET, merges a sharded manufacturer back into one list in id order. Which file a record is in
+carries no meaning.
+
 ## Pipeline
 
 1. Product data flows through an **evidence ledger**: per-source observations under

@@ -33,6 +33,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>fixtures\canonical-golden\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Content>
+    <!-- The same catalog as the resolver writes it sharded (resolve/layout.py). -->
+    <Content Include="fixtures\canonical-golden-sharded\**\*.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>fixtures\canonical-golden-sharded\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

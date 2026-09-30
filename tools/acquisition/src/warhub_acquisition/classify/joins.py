@@ -93,6 +93,7 @@ from warhub_acquisition.classify._llm_common import (
 from warhub_acquisition.ean import canonical_ean
 from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.descriptor import load_descriptors
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.resolve.corroborate import resolve_ean
 from warhub_acquisition.resolve.identity import slugify
 from warhub_acquisition.resolve.join import Matches, join_observations
@@ -155,22 +156,20 @@ def _resolved_entity_contexts(paths: DataPaths) -> dict[str, EntityContext]:
     contexts: dict[str, EntityContext] = {}
     if not paths.catalog_products.exists():
         return contexts
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
-        data = read_yaml(path) or {}
-        for record in data.get("products") or []:
-            contexts[record["id"]] = EntityContext(
-                entity=record["id"],
-                manufacturer=record["manufacturer"],
-                name=record["name"],
-                sku=record.get("sku") or None,
-                # re-validate defensively -- catalog_products/*.yaml SHOULD only ever carry a
-                # GS1-validated ean (resolve_ean's job), but candidate generation must not trust
-                # an on-disk file blindly as the source of "validated" for rule (a).
-                ean=canonical_ean(record.get("ean")),
-                url=record.get("url"),
-                legacyProductCode=None,  # resolved CanonicalProduct records drop raw hints
-                evidence=sorted(record.get("evidence") or []),
-            )
+    for record in layout.iter_products(paths.catalog_products):
+        contexts[record["id"]] = EntityContext(
+            entity=record["id"],
+            manufacturer=record["manufacturer"],
+            name=record["name"],
+            sku=record.get("sku") or None,
+            # re-validate defensively -- catalog_products/*.yaml SHOULD only ever carry a
+            # GS1-validated ean (resolve_ean's job), but candidate generation must not trust
+            # an on-disk file blindly as the source of "validated" for rule (a).
+            ean=canonical_ean(record.get("ean")),
+            url=record.get("url"),
+            legacyProductCode=None,  # resolved CanonicalProduct records drop raw hints
+            evidence=sorted(record.get("evidence") or []),
+        )
     return contexts
 
 

@@ -63,8 +63,8 @@ from warhub_acquisition.categorize.paints import load_paint_roles  # noqa: E402
 from warhub_acquisition.categorize.rules import load_category_rules  # noqa: E402
 from warhub_acquisition.models.catalog import CanonicalProduct  # noqa: E402
 from warhub_acquisition.models.descriptor import load_descriptors  # noqa: E402
+from warhub_acquisition.resolve import layout  # noqa: E402
 from warhub_acquisition.resolve.resolver import DataPaths, joined_evidence  # noqa: E402
-from warhub_acquisition.yamlio import read_yaml  # noqa: E402
 
 
 def measure_roles(paths: DataPaths) -> int:
@@ -77,10 +77,7 @@ def measure_roles(paths: DataPaths) -> int:
         return 0
     joined = joined_evidence(paths)
 
-    products: list[CanonicalProduct] = []
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
-        for row in (read_yaml(path) or {}).get("products") or []:
-            products.append(CanonicalProduct.model_validate(row))
+    products = [CanonicalProduct.model_validate(row) for row in layout.iter_products(paths.catalog_products)]
     control = {
         p.id: next(archive[c] for c in (p.ean, *p.additionalEans) if c in archive)
         for p in products
@@ -164,16 +161,15 @@ def main() -> int:
     }
 
     control: dict[str, dict[str, str]] = {}
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
-        for row in (read_yaml(path) or {}).get("products") or []:
-            product = CanonicalProduct.model_validate(row)
-            said = {}
-            for member in joined.entities.get(product.id) or []:
-                value = member.hints.get("category")
-                if value and str(value) != defaults.get(member.source_id):
-                    said[member.source_id] = str(value)
-            if said:
-                control[product.id] = said
+    for row in layout.iter_products(paths.catalog_products):
+        product = CanonicalProduct.model_validate(row)
+        said = {}
+        for member in joined.entities.get(product.id) or []:
+            value = member.hints.get("category")
+            if value and str(value) != defaults.get(member.source_id):
+                said[member.source_id] = str(value)
+        if said:
+            control[product.id] = said
 
     mix = collections.Counter(v for said in control.values() for v in said.values())
     print(f"control: {len(control)} products with a stated (non-default) category")

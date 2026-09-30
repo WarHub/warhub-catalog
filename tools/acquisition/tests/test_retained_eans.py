@@ -15,6 +15,7 @@ import pytest
 import yaml
 
 from warhub_acquisition.models.catalog import RetainedEans
+from warhub_acquisition.resolve.layout import iter_products
 from warhub_acquisition.resolve.resolver import DataPaths, resolve_catalog
 from warhub_acquisition.yamlio import write_yaml
 
@@ -100,10 +101,7 @@ def test_every_committed_entry_still_names_a_real_product_and_is_actually_retain
     products_dir = REPO_ROOT / "data/catalog/products"
     if not products_dir.exists():
         pytest.skip("data/catalog/products/ not present")
-    by_id = {}
-    for path in sorted(products_dir.glob("*.yaml")):
-        for product in (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("products") or []:
-            by_id[product["id"]] = product
+    by_id = {product["id"]: product for product in iter_products(products_dir)}
     for entity, eans in entries.retained.items():
         assert entity in by_id, f"retained-eans.yaml names {entity!r}, which the catalog no longer has"
         record = by_id[entity]

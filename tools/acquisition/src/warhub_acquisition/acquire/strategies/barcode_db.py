@@ -107,8 +107,8 @@ from warhub_acquisition.acquire.client import FetchError, PoliteClient
 from warhub_acquisition.acquire.runner import STRATEGIES, AcquireContext, StrategyResult
 from warhub_acquisition.models.descriptor import SourceDescriptor
 from warhub_acquisition.models.observation import Observation
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.taxonomy import Taxonomy
-from warhub_acquisition.yamlio import read_yaml
 
 EXTRACTOR = "barcode-db@1"
 
@@ -185,19 +185,15 @@ def _select_provisional_candidates(catalog_dir: Path) -> list[tuple[str, str, st
     catalog written by `resolve/resolver.py`) directly -- this strategy's entire input is the
     OUTPUT of a prior resolve, not any source's raw listing."""
     candidates: list[tuple[str, str, str]] = []
-    if not catalog_dir.exists():
-        return candidates
-    for path in sorted(catalog_dir.glob("*.yaml")):
-        data = read_yaml(path) or {}
-        for product in data.get("products", []) or []:
-            if product.get("eanConfidence") != "provisional":
-                continue
-            entity_id = product.get("id")
-            ean = product.get("ean")
-            manufacturer = product.get("manufacturer")
-            if not entity_id or not ean or not manufacturer:
-                continue
-            candidates.append((str(entity_id), str(ean), str(manufacturer)))
+    for product in layout.iter_products(catalog_dir):
+        if product.get("eanConfidence") != "provisional":
+            continue
+        entity_id = product.get("id")
+        ean = product.get("ean")
+        manufacturer = product.get("manufacturer")
+        if not entity_id or not ean or not manufacturer:
+            continue
+        candidates.append((str(entity_id), str(ean), str(manufacturer)))
     candidates.sort(key=lambda c: c[0])
     return candidates
 

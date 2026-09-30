@@ -4,6 +4,7 @@ from pathlib import Path
 
 from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.catalog import WithdrawnEans
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.yamlio import load_yaml, read_yaml
 
@@ -59,13 +60,17 @@ def build_report(paths: DataPaths) -> str:
         "|---|---|---|---|---|---|",
     ]
     category_rows: dict[tuple[str, str], int] = {}
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
+    # One row per MANUFACTURER, not per file: a sharded manufacturer's files are summed first.
+    by_manufacturer: dict[str, list[dict]] = {}
+    for path in layout.product_files(paths.catalog_products):
         try:
             data = read_yaml(path)
             manufacturer = data["manufacturer"]
             products = data["products"]
         except Exception as exc:
             raise ValueError(f"malformed catalog file {path}: {exc}") from exc
+        by_manufacturer.setdefault(manufacturer, []).extend(products)
+    for manufacturer, products in sorted(by_manufacturer.items()):
         for product in products:
             key = (str(product.get("category") or "(none)"), str(product.get("categoryBasis") or "(none)"))
             category_rows[key] = category_rows.get(key, 0) + 1
@@ -253,10 +258,10 @@ def _check_paints(
             for barcode, role in _paint_barcodes(record):
                 working_holders.setdefault(barcode, set()).add((brand, role))
 
-    for path in sorted(products_dir.glob("*.yaml")):
-        for product in (read_yaml(path) or {}).get("products") or []:
+    for manufacturer, products in layout.read_catalog(products_dir).items():
+        for product in products:
             for barcode in _product_barcodes(product):
-                working_holders.setdefault(barcode, set()).add((f"products/{path.stem}", "product"))
+                working_holders.setdefault(barcode, set()).add((f"products/{manufacturer}", "product"))
 
     lost: list[dict] = []
     moved: list[dict] = []
@@ -317,7 +322,8 @@ def check_ean_guard(paths: DataPaths) -> dict[str, list[dict]]:
     working_holders: dict[str, set[str]] = {}
     working_codes: set[str] = set()
     category_rows: dict[tuple[str, str], int] = {}
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
+    # Every file, shards included, so a record that only changed files is still where HEAD had it.
+    for path in layout.product_files(paths.catalog_products):
         working = read_yaml(path) or {}
         for product in working.get("products", []):
             working_products[product["id"]] = product

@@ -45,25 +45,65 @@ internal static class YamlSource
             : null;
     }
 
-    /// <summary>Loads every canonical product catalog under <c>{catalogDir}/products/*.yaml</c> (not recursive).</summary>
+    /// <summary>
+    /// Loads the canonical product catalog under <c>{catalogDir}/products/*.yaml</c> (not recursive),
+    /// ONE CATALOG PER MANUFACTURER however many files hold it. The resolver writes a manufacturer
+    /// too big for one file as shards named <c>{manufacturer}.{prefix}.yaml</c>, each in the same
+    /// document shape (tools/acquisition/src/warhub_acquisition/resolve/layout.py). They are merged
+    /// back here with the products in id order, which is the order a single file holds them in. So
+    /// the records reach <see cref="ProductBuilder"/> in the same sequence whichever layout is on
+    /// disk, and the published documents are byte-identical across a relayout.
+    ///
+    /// A file whose <c>manufacturer:</c> is not its name up to the first dot, or an id held by two
+    /// files, throws. The resolver writes neither, so either one means the tree was edited by hand.
+    /// </summary>
     public static IEnumerable<CanonicalProductCatalog> LoadCanonicalCatalogs(string catalogDir)
     {
         string products = Path.Combine(catalogDir, "products");
         if (!Directory.Exists(products))
         {
-            yield break;
+            return [];
         }
 
+        // Manufacturers in the order their first file sorts, as they were read one file each.
+        var order = new List<string>();
+        var merged = new Dictionary<string, List<CanonicalProduct>>(StringComparer.Ordinal);
+        var heldBy = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (string file in Directory
             .EnumerateFiles(products, "*.yaml", SearchOption.TopDirectoryOnly)
             .OrderBy(f => f, StringComparer.Ordinal))
         {
             var catalog = Deserializer.Deserialize<CanonicalProductCatalog>(File.ReadAllText(file));
-            if (catalog is not null)
+            if (catalog is null)
             {
-                yield return catalog;
+                continue;
             }
+
+            string name = Path.GetFileName(file);
+            if (catalog.Manufacturer != name[..name.IndexOf('.')])
+            {
+                throw new InvalidOperationException($"{name} declares manufacturer '{catalog.Manufacturer}'");
+            }
+            foreach (CanonicalProduct p in catalog.Products)
+            {
+                if (!heldBy.TryAdd(p.Id, name))
+                {
+                    throw new InvalidOperationException($"{p.Id} is in both {heldBy[p.Id]} and {name}");
+                }
+            }
+            if (!merged.TryGetValue(catalog.Manufacturer, out List<CanonicalProduct>? records))
+            {
+                merged[catalog.Manufacturer] = records = [];
+                order.Add(catalog.Manufacturer);
+            }
+            records.AddRange(catalog.Products);
         }
+
+        return [.. order.Select(m => new CanonicalProductCatalog
+        {
+            Manufacturer = m,
+            Products = [.. merged[m].OrderBy(p => p.Id, StringComparer.Ordinal)],
+        })];
     }
 
     /// <summary>

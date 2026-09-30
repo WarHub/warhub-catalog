@@ -58,6 +58,7 @@ import yaml
 
 from warhub_acquisition.models.catalog import CanonicalProduct
 from warhub_acquisition.resolve.attributes import _HINT_FIELDS
+from warhub_acquisition.resolve.layout import iter_products
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PAINT_BRANDS = REPO_ROOT / "data/paints/brands"
@@ -135,8 +136,7 @@ def _paint_records():
 def _products():
     if not PRODUCTS.is_dir():
         pytest.skip("data/catalog/products not present")
-    return [product for path in sorted(PRODUCTS.glob("*.yaml"))
-            for product in _yaml(path).get("products") or []]
+    return list(iter_products(PRODUCTS))
 
 
 @cache

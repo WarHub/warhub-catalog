@@ -8,7 +8,7 @@ from warhub_acquisition.evidence.store import EvidenceStore
 from warhub_acquisition.models.catalog import CanonicalProduct, Overrides, RetainedEans
 from warhub_acquisition.models.descriptor import SourceDescriptor, load_descriptors
 from warhub_acquisition.models.observation import Observation
-from warhub_acquisition.resolve import crossover
+from warhub_acquisition.resolve import crossover, layout
 from warhub_acquisition.resolve.attributes import (
     apply_classification,
     apply_overrides,
@@ -408,7 +408,7 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     # manufacturers, and then let the stale-file sweep below unlink every real product file.
     # Reproduced on the repo's own resolver fixtures before this fix: dropping mfr-gw and
     # ret-goblin evidence raised no exception and took games-workshop.yaml with it.
-    if not selected.product_source_count and any(paths.catalog_products.glob("*.yaml")):
+    if not selected.product_source_count and layout.product_files(paths.catalog_products):
         raise ValueError("no evidence loaded but catalog files exist; refusing to wipe the catalog")
 
     sku_ids = {sid: d.skuIsListingId for sid, d in descriptors.items()}
@@ -518,15 +518,13 @@ def resolve_catalog(paths: DataPaths) -> dict[str, list[CanonicalProduct]]:
     produced = set()
     for manufacturer in sorted(products):
         records = sorted(products[manufacturer], key=lambda p: p.id)
-        write_yaml(
-            paths.catalog_products / f"{manufacturer}.yaml",
-            {
-                "manufacturer": manufacturer,
-                "products": [_dump_product(record) for record in records],
-            },
-        )
-        produced.add(f"{manufacturer}.yaml")
-    for stale in sorted(paths.catalog_products.glob("*.yaml")):
+        # One file, or shards for a manufacturer too big for one (layout.py decides which).
+        for name, shard in layout.shard(manufacturer, [_dump_product(r) for r in records]).items():
+            write_yaml(paths.catalog_products / name, {"manufacturer": manufacturer, "products": shard})
+            produced.add(name)
+    # The sweep is what retires a layout: a manufacturer that crosses into shards leaves its single
+    # file behind here, and a prefix that stops earning a shard leaves that shard.
+    for stale in layout.product_files(paths.catalog_products):
         if stale.name not in produced:
             stale.unlink()
 

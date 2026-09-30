@@ -48,6 +48,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from warhub_acquisition.evidence.store import EvidenceStore
+from warhub_acquisition.resolve import layout
 from warhub_acquisition.resolve.join import Matches
 from warhub_acquisition.resolve.resolver import DataPaths
 from warhub_acquisition.taxonomy import Taxonomy
@@ -180,14 +181,12 @@ def _catalog_index(paths: DataPaths) -> tuple[dict[str, str], dict[tuple[str, st
     by_key: dict[str, str] = {}
     by_code: dict[tuple[str, str], str] = {}
     records: dict[str, dict] = {}
-    for path in sorted(paths.catalog_products.glob("*.yaml")):
-        data = read_yaml(path) or {}
-        for product in data.get("products", []):
-            records[product["id"]] = product
-            for key in product.get("evidence") or []:
-                by_key[key] = product["id"]
-            if product.get("productCode"):
-                by_code[(product["manufacturer"], product["productCode"])] = product["id"]
+    for product in layout.iter_products(paths.catalog_products):
+        records[product["id"]] = product
+        for key in product.get("evidence") or []:
+            by_key[key] = product["id"]
+        if product.get("productCode"):
+            by_code[(product["manufacturer"], product["productCode"])] = product["id"]
     return by_key, by_code, records
 
 
