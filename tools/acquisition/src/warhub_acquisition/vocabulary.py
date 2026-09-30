@@ -7,8 +7,7 @@ declaring it meant something. That is how the catalog came to hold `paint`, `pai
 
 VALIDATION IS A HARD ERROR, not a warning. An undeclared category reaching `data/catalog/products/`
 is a value some consumer will filter on and no one has defined; failing the resolve is cheaper than
-publishing it and freezing it into the contract (docs/OBJECTIVES.md 3). The same posture
-`apply_classifications` takes for an unknown game system.
+publishing it and freezing it into the contract (docs/OBJECTIVES.md 3).
 
 `status: legacy` values validate exactly like `current` ones. They are what the catalog already
 holds, and refusing them would fail the resolve on today's committed data -- the migration to their

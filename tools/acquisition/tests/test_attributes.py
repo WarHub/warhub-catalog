@@ -86,9 +86,8 @@ def test_apply_overrides_replaces_fields() -> None:
 
 def test_apply_overrides_explicit_null_faction_clears_folded_value() -> None:
     # members_sorted() folds hints.faction == "necrons" onto the resolved product; an
-    # override patch with an explicit faction=None (as apply_classifications now always
-    # writes for a re-classification decision with no/null faction) must clear it rather
-    # than being ignored as a no-op falsy value.
+    # override patch with an explicit faction=None (a maintainer saying "no faction") must
+    # clear it rather than being ignored as a no-op falsy value.
     product = resolve_attributes("e", members_sorted(), KINDS, NO_EAN, None)
     assert product.faction == "necrons"
     overridden = apply_overrides(product, Overrides(products={"e": {"faction": None}}))

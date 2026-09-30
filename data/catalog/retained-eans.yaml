@@ -11,11 +11,10 @@
 # loser to be retained -- it leaves the ledger entirely, and the resolver has nothing to retain.
 # That is the one way a published barcode can still disappear, and it is what happened below.
 #
-# WHY THIS IS NOT A KEY IN overrides.yaml. Same reason set-refs.yaml is not: `classify --apply`
-# rewrites overrides.yaml from a two-key literal via plain PyYAML, which cannot round-trip a
-# comment. Per-entity keys now survive that rewrite, but the EVIDENCE below would not, and an
-# entry here is worth nothing without it. A machine-owned file and a hand-authored key cannot
-# share a path.
+# WHY THIS IS NOT A KEY IN overrides.yaml. The same reason set-refs.yaml is not. An entry here is
+# worth nothing without the EVIDENCE below, which lives in comments, and each kind of
+# hand-authored decision keeps a file that no tool rewrites. The since-removed
+# `classify --apply` once deleted a hand-authored block from overrides.yaml, comments and all.
 #
 # THE BAR FOR AN ENTRY IS DELIBERATELY HIGH. This is not "every barcode we ever saw" -- a value
 # that was never published is not a contract with anyone, and OBJECTIVES 1 still says the
