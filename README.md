@@ -33,6 +33,7 @@ paints/index.json                      # list of brand partitions
 paints/by-brand/<brand>.json           # just one brand (e.g. citadel-colour)
 barcodes.json                          # every barcode -> the record(s) carrying it
 set-contents.json                      # boxed set -> the paints inside it
+catalog.sqlite                         # products, paints and barcode links as SQL tables
 schema/*.json                          # JSON Schemas for every document kind
 ```
 
@@ -44,6 +45,13 @@ values means the source published an exhaustive list.
 
 Take the **whole** catalog or just the **slice** you need — a Star Wars Legion app can
 fetch one game-system file; a painter can fetch only the brands they own.
+
+`catalog.sqlite` holds the same records for querying rather than fetching. It has three tables.
+`products` and `paints` have one row per record, and their columns are the record's JSON
+properties with the same names. An array or object column holds the JSON the documents carry,
+which `json_each()` reads, and an absent property is `NULL`. `barcodes` has one row per
+(`barcode`, `catalog`, `id`) link in `barcodes.json`. A fourth table, `meta`, holds the version
+envelope. The file is derived from the JSON at publish time and is never an input to anything.
 
 ### Document shape
 

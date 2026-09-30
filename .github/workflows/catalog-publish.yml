@@ -120,6 +120,8 @@ jobs:
       # consumer had pinned. Measured 2026-08-31 over a full local publish, attaching them adds
       # 1.7 MB (barcodes.json 1.5 MB, set-contents.json 172 KB) beside the 20 MB of products.json
       # and paints.json already there -- and saves that consumer downloading the whole tarball.
+      # catalog.sqlite is the same records again as SQL tables, attached for the same reason: a
+      # pinned consumer who wants to query rather than fetch should not have to unpack the tarball.
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -128,7 +130,7 @@ jobs:
             --title "Catalog ${{ steps.ver.outputs.version }}" \
             --notes "Automated catalog build from ${GITHUB_SHA:0:7}. Fetch \`manifest.json\` first — it lists every file with size + sha256." \
             dist/manifest.json dist/products.json dist/paints.json \
-            dist/barcodes.json dist/set-contents.json \
+            dist/barcodes.json dist/set-contents.json dist/catalog.sqlite \
             "catalog-${{ steps.ver.outputs.version }}.tar.gz"
 
       - name: Upload Pages artifact

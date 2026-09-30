@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text.Json;
+using Microsoft.Data.Sqlite;
 
 namespace WarHub.Catalog.Publish.Tests;
 
@@ -270,6 +271,83 @@ public sealed class PublishTests(PublishFixture fx) : IClassFixture<PublishFixtu
             Assert.Equal(f.GetProperty("bytes").GetInt64(), bytes.Length);
             Assert.Equal(f.GetProperty("sha256").GetString(), Convert.ToHexStringLower(SHA256.HashData(bytes)));
         }
+    }
+
+    [Fact]
+    public void Query_database_holds_one_row_per_record_of_each_json_document()
+    {
+        JsonElement barcodes = Doc("barcodes.json").GetProperty("barcodes");
+        int barcodeLinks = barcodes.EnumerateObject().Sum(b => b.Value.GetArrayLength());
+
+        using var db = OpenQueryDatabase();
+        Assert.Equal(Doc("products.json").GetProperty("products").GetArrayLength(), Count(db, "SELECT count(*) FROM products"));
+        Assert.Equal(Doc("paints.json").GetProperty("paints").GetArrayLength(), Count(db, "SELECT count(*) FROM paints"));
+        Assert.Equal(barcodeLinks, Count(db, "SELECT count(*) FROM barcodes"));
+        Assert.Equal(barcodes.EnumerateObject().Count(), Count(db, "SELECT count(DISTINCT barcode) FROM barcodes"));
+        // The seam the barcode rows exist for: the fixture's two barcodes held by both catalogs.
+        Assert.Equal(Doc("manifest.json").GetProperty("counts").GetProperty("crossCatalogBarcodes").GetInt32(),
+            Count(db, "SELECT count(*) FROM (SELECT barcode FROM barcodes GROUP BY barcode HAVING count(DISTINCT catalog) = 2)"));
+    }
+
+    [Fact]
+    public void Query_database_columns_carry_the_published_values()
+    {
+        // Arrays are stored as the JSON the documents carry, and read back through json_each.
+        using var db = OpenQueryDatabase();
+        using var cmd = db.CreateCommand();
+        cmd.CommandText = """
+            SELECT p.ean, p.quantity, j.value
+            FROM products p, json_each(p.paintIds) j
+            WHERE p.id = 'test-mfg/alpha'
+            ORDER BY j.value
+            """;
+        using var reader = cmd.ExecuteReader();
+        var paintIds = new List<string>();
+        while (reader.Read())
+        {
+            Assert.Equal("5011921142361", reader.GetString(0));
+            Assert.Equal(2, reader.GetInt32(1));
+            paintIds.Add(reader.GetString(2));
+        }
+        Assert.Equal(["citadel/abaddon-black", "vallejo/black"], paintIds);
+        // An absent JSON property is NULL, not an empty string.
+        Assert.Equal(1, Count(db, "SELECT count(*) FROM products WHERE id = 'test-mfg/beta' AND ean IS NULL"));
+    }
+
+    [Fact]
+    public void Query_database_is_listed_in_the_manifest_and_is_reproducible()
+    {
+        JsonElement entry = Doc("manifest.json").GetProperty("files").EnumerateArray()
+            .Single(f => f.GetProperty("path").GetString() == "catalog.sqlite");
+        Assert.Equal("sqlite", entry.GetProperty("kind").GetString());
+
+        // A second publish of the same input into a fresh directory writes the same bytes, so the
+        // manifest's sha256 names the content rather than the run.
+        string again = Path.Combine(fx.Root, "dist-again");
+        Publisher.Run(new PublishOptions(
+            Path.Combine(fx.Root, "data", "catalog"), Path.Combine(fx.Root, "data", "paints"), again,
+            Path.Combine(AppContext.BaseDirectory, "schema"), PublishFixture.Provenance));
+        Assert.Equal(entry.GetProperty("sha256").GetString(),
+            Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(Path.Combine(again, "catalog.sqlite")))));
+    }
+
+    private SqliteConnection OpenQueryDatabase()
+    {
+        var db = new SqliteConnection(new SqliteConnectionStringBuilder
+        {
+            DataSource = Path.Combine(fx.Dist, "catalog.sqlite"),
+            Mode = SqliteOpenMode.ReadOnly,
+            Pooling = false,
+        }.ToString());
+        db.Open();
+        return db;
+    }
+
+    private static int Count(SqliteConnection db, string sql)
+    {
+        using var cmd = db.CreateCommand();
+        cmd.CommandText = sql;
+        return Convert.ToInt32(cmd.ExecuteScalar());
     }
 
     [Fact]
