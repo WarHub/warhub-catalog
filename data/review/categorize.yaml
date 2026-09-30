@@ -1,44 +1,53 @@
 summary:
-  products: 27262
-  undecided: 1328
+  products: 27379
+  undecided: 1365
   byBasis:
-    code: 7088
-    lexicon: 390
-    mapped: 17386
+    code: 7093
+    lexicon: 395
+    mapped: 17456
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1328
-  decidedThisRun: 0
+    unknown: 1365
+  decidedThisRun: 24959
   gameSystemsByBasis:
-    classified: 1113
-    code: 4187
-    mapped: 2568
-    not-applicable: 7862
+    classified: 1112
+    code: 4198
+    mapped: 2552
+    not-applicable: 7864
     override: 101
     setting: 960
-    stated: 9131
-    unknown: 1340
+    stated: 9190
+    unknown: 1402
   settingsByBasis:
     code: 849
-    derived: 17096
+    derived: 17149
     mapped: 11
-    not-applicable: 7933
+    not-applicable: 7935
     override: 3
-    unknown: 1370
+    unknown: 1432
   rolesByBasis:
     code: 72
     lexicon: 183
     mapped: 1079
-    none: 20346
+    none: 20461
     override: 2
     paint-archive: 1958
     stated: 16
-    unknown: 3606
+    unknown: 3608
 conflicts:
+  - entity: games-workshop/60010399003
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
+  - entity: games-workshop/60010799028
+    type: category-disagreement
+    detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
   - entity: games-workshop/99700199045
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=game-accessory; ret-tistaminis=terrain -- a tie, left to the code and name rungs'
+  - entity: mantic-games/KSWO105
+    type: category-disagreement
+    detail: 'manufacturer: mfr-manticgames=board-game; mfr-manticgames=game-accessory -- a tie, left to the code and name rungs'
   - entity: vallejo/26201
     type: category-disagreement
     detail: 'retailer: ret-goblingaming=paint; ret-radaddel=hobby-auxiliary -- a tie, left to the code and name rungs'
@@ -91,7 +100,6 @@ deadClauses:
   - 'mfr-warmachine vendor=Epic Encounters: Local Legends'
   - mfr-warmachine vendor=Godtear
   - mfr-warmachine vendor=Guild Ball
-  - ret-gamenerdz breadcrumbs~Boxed Games
   - ret-goblingaming productType=Dice Accessories
   - ret-goblingaming productType=Model Bases
   - ret-radaddel tags~HALO FLASHPOINT
@@ -108,13 +116,13 @@ unmapped:
   mfr-manticgames:
     - value: categories=kings-of-war
       wouldDecide: 36
-    - value: categories=deals-and-offers
-      wouldDecide: 19
     - value: categories=deadzone
       wouldDecide: 16
     - value: categories=walking-dead-collections
       wouldDecide: 15
     - value: categories=firefight-asterians
+      wouldDecide: 15
+    - value: categories=deals-and-offers
       wouldDecide: 15
     - value: categories=accessories-kings-of-war
       wouldDecide: 13
@@ -126,8 +134,6 @@ unmapped:
       wouldDecide: 10
     - value: categories=ogre-miniatures
       wouldDecide: 10
-    - value: categories=halo-flashpoint-latest-releases
-      wouldDecide: 10
     - value: categories=xirkaali
       wouldDecide: 9
     - value: categories=deadonze-matsudan
@@ -136,8 +142,6 @@ unmapped:
       wouldDecide: 8
     - value: categories=vallejo
       wouldDecide: 8
-    - value: categories=halo-flashpoint-banished
-      wouldDecide: 7
     - value: categories=northern-alliance-kings-of-war
       wouldDecide: 7
     - value: categories=firefight-gcps
@@ -153,8 +157,6 @@ unmapped:
     - value: categories=plague
       wouldDecide: 7
     - value: categories=firefight-marauders
-      wouldDecide: 7
-    - value: categories=halo-flashpoint-getting-started
       wouldDecide: 7
     - value: categories=dungeon-saga
       wouldDecide: 6
@@ -186,6 +188,12 @@ unmapped:
       wouldDecide: 4
     - value: categories=mazon-labs
       wouldDecide: 4
+    - value: categories=mazon-labs-firefight
+      wouldDecide: 4
+    - value: categories=enforcers
+      wouldDecide: 4
+    - value: categories=getting-started-dreadball
+      wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
       wouldDecide: 27
@@ -195,10 +203,6 @@ unmapped:
       wouldDecide: 19
     - value: categories=limited-editions
       wouldDecide: 10
-    - value: categories=new-releases
-      wouldDecide: 5
-    - value: categories=new-upcoming
-      wouldDecide: 5
     - value: categories=start-here
       wouldDecide: 4
     - value: categories=2000pt-armies
@@ -212,6 +216,10 @@ unmapped:
     - value: categories=dweghom
       wouldDecide: 1
     - value: categories=first-blood
+      wouldDecide: 1
+    - value: categories=new-releases
+      wouldDecide: 1
+    - value: categories=new-upcoming
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
@@ -337,34 +345,40 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 81
+      wouldDecide: 129
     - value: breadcrumbs=Miniatures
-      wouldDecide: 77
+      wouldDecide: 120
+    - value: breadcrumbs=Games Workshop
+      wouldDecide: 36
     - value: breadcrumbs=Infinity
-      wouldDecide: 31
+      wouldDecide: 35
+    - value: breadcrumbs=Warhammer 40K
+      wouldDecide: 21
     - value: breadcrumbs=Malifaux
+      wouldDecide: 19
+    - value: breadcrumbs=Warhammer Age of Sigmar
       wouldDecide: 14
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
-    - value: breadcrumbs=Games Workshop
-      wouldDecide: 7
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 6
     - value: breadcrumbs=Warcrow
-      wouldDecide: 6
-    - value: breadcrumbs=Warhammer 40K
       wouldDecide: 6
     - value: breadcrumbs=Kings of War
       wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
+    - value: breadcrumbs=Preorders
+      wouldDecide: 5
+    - value: breadcrumbs=Warmachine
+      wouldDecide: 5
     - value: breadcrumbs=Supplies
       wouldDecide: 4
     - value: breadcrumbs=Paint and Crafting
       wouldDecide: 4
-    - value: breadcrumbs=Nomads
-      wouldDecide: 2
     - value: breadcrumbs=Panoceania
+      wouldDecide: 3
+    - value: breadcrumbs=Nomads
       wouldDecide: 2
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 2
@@ -408,13 +422,7 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Breakdown - Competition Pack ITS (Infinity Tournament System) Season 12'
       wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Endsong Bundle'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Essentials - PanOceania - PanOceania Dronbot Remotes Pack'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Frozen Roads - ITS (Infinity Tournament System) Season 13 - Special Tournament Pack'
+    - value: breadcrumbs=Combined Army
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games
@@ -426,9 +434,9 @@ unmapped:
     - value: vendor=Games Workshop
       wouldDecide: 52
     - value: tags=Atomic Mass Games
-      wouldDecide: 50
+      wouldDecide: 46
     - value: vendor=Atomic Mass Games
-      wouldDecide: 50
+      wouldDecide: 46
     - value: tags=Neuheiten Games Workshop
       wouldDecide: 29
     - value: tags=AK-Interactive
@@ -437,8 +445,6 @@ unmapped:
       wouldDecide: 24
     - value: tags=ABTEILUNG 502*
       wouldDecide: 23
-    - value: tags=Galaktische Republik SWL
-      wouldDecide: 18
     - value: tags=The Army Painter
       wouldDecide: 17
     - value: vendor=The Army Painter
@@ -447,6 +453,8 @@ unmapped:
       wouldDecide: 17
     - value: tags=WÜRFEL
       wouldDecide: 17
+    - value: tags=Galaktische Republik SWL
+      wouldDecide: 16
     - value: tags=Warpaints Fanatic Effects
       wouldDecide: 14
     - value: tags=Star Wars Shatterpoint
@@ -455,12 +463,12 @@ unmapped:
       wouldDecide: 12
     - value: tags=Grundspiel und Zubehör SWL
       wouldDecide: 11
-    - value: tags=Separatisten SWL
-      wouldDecide: 10
     - value: tags=Rebellenallianz SWL
       wouldDecide: 10
     - value: tags=40k Grundboxen und Regelbücher
       wouldDecide: 9
+    - value: tags=Separatisten SWL
+      wouldDecide: 8
     - value: tags=Orks
       wouldDecide: 8
     - value: tags=40K Zubehör
