@@ -1,40 +1,40 @@
 summary:
-  products: 27380
-  undecided: 1366
+  products: 27385
+  undecided: 1372
   byBasis:
-    code: 7116
-    lexicon: 394
-    mapped: 17434
+    code: 7112
+    lexicon: 393
+    mapped: 17438
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1366
-  decidedThisRun: 24959
+    unknown: 1372
+  decidedThisRun: 24958
   gameSystemsByBasis:
-    classified: 1112
-    code: 4198
-    mapped: 2552
-    not-applicable: 7864
+    classified: 1113
+    code: 4197
+    mapped: 2549
+    not-applicable: 7863
     override: 101
     setting: 960
-    stated: 9191
-    unknown: 1402
+    stated: 9195
+    unknown: 1407
   settingsByBasis:
     code: 849
-    derived: 17150
+    derived: 17151
     mapped: 11
-    not-applicable: 7935
+    not-applicable: 7934
     override: 3
-    unknown: 1432
+    unknown: 1437
   rolesByBasis:
     code: 72
     lexicon: 183
     mapped: 1079
-    none: 20462
+    none: 20468
     override: 2
     paint-archive: 1958
     stated: 16
-    unknown: 3608
+    unknown: 3607
 conflicts:
   - entity: games-workshop/60010399003
     type: category-disagreement
@@ -474,13 +474,13 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 138
+      wouldDecide: 144
     - value: breadcrumbs=Miniatures
-      wouldDecide: 126
+      wouldDecide: 132
     - value: breadcrumbs=Games Workshop
       wouldDecide: 41
     - value: breadcrumbs=Infinity
-      wouldDecide: 35
+      wouldDecide: 41
     - value: breadcrumbs=Warhammer 40K
       wouldDecide: 21
     - value: breadcrumbs=Malifaux
@@ -489,11 +489,11 @@ unmapped:
       wouldDecide: 18
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
+    - value: breadcrumbs=Terrain & Accessories
+      wouldDecide: 11
     - value: breadcrumbs=Supplies
       wouldDecide: 7
     - value: breadcrumbs=Kings of War
-      wouldDecide: 6
-    - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
@@ -543,15 +543,15 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity ITS Book Season 9: Treason'
       wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: ''Decontaminated'' Tokens (6)'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: ''Infected'' Tokens (6)'
+      wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Akashi Site Scenery Pack'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Bases 25mm (20)'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Blast From the Past - ITS (Infinity Tournament System) Season 13'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Breakdown - Competition Pack ITS (Infinity Tournament System) Season 12'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Code One - Kaldstrom Colonial Settlement Scenery Pack'
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games

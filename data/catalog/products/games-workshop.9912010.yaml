@@ -7974,7 +7974,7 @@ products:
       - mfr-gw-algolia:prod4530143-99120101465
       - mfr-gw-trade:99120101465
   - id: games-workshop/99120101467
-    name: 'SPACE MARINES: LIEUTENANT/PHOBOS ARMOUR'
+    name: Lieutenant in Reiver Armour
     manufacturer: games-workshop
     productCode: '99120101467'
     sku: '99120101467'
@@ -7983,15 +7983,20 @@ products:
     gameSystems:
       - warhammer-40k
     faction: space-marines
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-22'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/Primaris-Lieutenant-In-Phobos-Armour-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101045_SMPrimarisLieutenantinPhobosArmour01.jpg
     evidence:
+      - mfr-gw-algolia:prod4530140-99120101467
       - mfr-gw-trade:99120101467
   - id: games-workshop/99120101468
     name: Librarian In Phobos Armour
@@ -8019,7 +8024,7 @@ products:
       - mfr-gw-algolia:prod4510313-99120101468
       - mfr-gw-trade:99120101468
   - id: games-workshop/99120101469
-    name: 'SPACE MARINES: CAPTAIN IN PHOBOS ARMOUR'
+    name: Captain in Phobos Armour
     manufacturer: games-workshop
     productCode: '99120101469'
     sku: '99120101469'
@@ -8028,15 +8033,20 @@ products:
     gameSystems:
       - warhammer-40k
     faction: space-marines
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-22'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/Primaris-Captain-In-Phobos-Armour-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101046_SMPrimarisCaptainPhobosArmour01.jpg
     evidence:
+      - mfr-gw-algolia:prod4510312-99120101469
       - mfr-gw-trade:99120101469
   - id: games-workshop/99120101470
     name: White Scars Primaris Upgrades & Transfers
@@ -8150,6 +8160,28 @@ products:
     evidence:
       - mfr-gw-algolia:prod4530142-99120101474
       - mfr-gw-trade:99120101474
+  - id: games-workshop/99120101475
+    name: Iron Priest
+    manufacturer: games-workshop
+    productCode: '99120101475'
+    sku: '99120101475'
+    gameSystems:
+      - warhammer-40k
+    faction: space-marines
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-02'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/Space-Wolves-Iron-Priest-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101018_SpaceWolvesIronPriest01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4550167-99120101475
   - id: games-workshop/99120101477
     name: Space Wolves Primaris Upgrades
     manufacturer: games-workshop
@@ -8198,7 +8230,7 @@ products:
       - mfr-gw-algolia:prod4510300-99120101479
       - mfr-gw-trade:99120101479
   - id: games-workshop/99120101480
-    name: 'SPACE MARINES: ANCIENT'
+    name: Ancient
     manufacturer: games-workshop
     productCode: '99120101480'
     sku: '99120101480'
@@ -8207,15 +8239,20 @@ products:
     gameSystems:
       - warhammer-40k
     faction: space-marines
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-22'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/space-marines-primaris-ancient-2022
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101076_SMPrimarisAncientLead.jpg
     evidence:
+      - mfr-gw-algolia:prod4850163-99120101480
       - mfr-gw-trade:99120101480
   - id: games-workshop/99120101481
     name: 'SPACE MARINES: CAPTAIN IN GRAVIS ARMOUR'
@@ -10067,7 +10104,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -14536,7 +14573,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -15707,7 +15744,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
@@ -16289,7 +16326,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 54.0
     priceEur: 54.9
@@ -23834,7 +23871,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     url: https://www.warhammer.com/en-GB/shop/Sister-Superior-Amalia-Novena-2019
