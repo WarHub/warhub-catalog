@@ -18962,6 +18962,26 @@ products:
     url: https://www.gamenerdz.com/infinity-daedalus-fall-hardcover-w-brawlers-promo-figure
     evidence:
       - ret-gamenerdz:/infinity-daedalus-fall-hardcover-w-brawlers-promo-figure
+  - id: corvus-belli/289003
+    name: 'Infinity: Third Offensive (Hardcover)'
+    manufacturer: corvus-belli
+    productCode: '289003'
+    sku: CVB289003
+    ean: '2890030000006'
+    eanConfidence: provisional
+    gameSystems:
+      - infinity
+    gameSystemsBasis: code
+    settings:
+      - infinity-universe
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/infinity-third-offensive-hardcover
+    evidence:
+      - ret-gamenerdz:/infinity-third-offensive-hardcover
   - id: corvus-belli/289103
     name: 'Infinity: Uprising (Hardcover)'
     manufacturer: corvus-belli
@@ -23101,8 +23121,8 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     packaging: single
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceEur: 12.95
     url: https://store.corvusbelli.com/en/wargames/infinity/illuminatrix-thematic-rule
@@ -23624,25 +23644,6 @@ products:
     evidence:
       - legacy-catalog:corvus-belli/infinity/general/infinity-templates-3-green
       - mfr-corvus-belli:infinity:infinity-templates-3-green
-  - id: corvus-belli/infinity-third-offensive-hardcover
-    name: 'Infinity: Third Offensive (Hardcover)'
-    manufacturer: corvus-belli
-    sku: CVB2289003
-    ean: '2890030000006'
-    eanConfidence: provisional
-    gameSystems:
-      - infinity
-    gameSystemsBasis: classified
-    settings:
-      - infinity-universe
-    settingsBasis: derived
-    category: book
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/infinity-third-offensive-hardcover
-    evidence:
-      - ret-gamenerdz:/infinity-third-offensive-hardcover
   - id: corvus-belli/infinity-thunderclap-its-infinity-tournament-system-season-14-special-tournament-pack
     name: 'Infinity: Thunderclap - ITS (Infinity Tournament System) Season 14 - Special Tournament Pack'
     manufacturer: corvus-belli

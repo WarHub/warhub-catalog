@@ -1986,7 +1986,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -5213,7 +5213,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -10861,7 +10861,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 110.0
     priceEur: 110.5
@@ -18772,6 +18772,27 @@ products:
     evidence:
       - mfr-gw-algolia:prod3650295-99120104122
       - mfr-gw-algolia:prod3660120-99120104122
+  - id: games-workshop/99120104143
+    name: Solitaire
+    manufacturer: games-workshop
+    productCode: '99120104143'
+    sku: '99120104143'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-04'
+    priceGbp: 20.0
+    url: https://www.warhammer.com/en-GB/shop/Solitaire
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070111003_Solitaire01.jpg
+    evidence:
+      - mfr-gw-algolia:prod2620122-99120104143
   - id: games-workshop/99120105014
     name: Catachan Heavy Weapons Squad
     manufacturer: games-workshop
