@@ -361,7 +361,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 110.5
+    priceGbp: 85.0
     url: https://www.manticgames.com/advent-calendars/2025-new-calendars-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/10/2025-advent-calendar-bundle-boxes-sold-out.webp
     evidence:
@@ -13215,7 +13215,7 @@ products:
     categoryBasis: lexicon
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 10.0
     priceUsd: 10.0
@@ -16601,7 +16601,7 @@ products:
       - legacy-catalog:mantic-games/halo-flashpoint/general/hq-halo-flashpoint-tournament-echo-2026-sunday-18th-october-2026
       - mfr-manticgames:540886
   - id: mantic-games/MGEV089
-    name: 'HQ Halo: Flashpoint tournament Foxtrott 2026 (Sunday 22nd November 2026)'
+    name: 'HQ Halo: Flashpoint tournament Foxtrott 2026 (Saturday 21st November 2026)'
     manufacturer: mantic-games
     productCode: MGEV089
     sku: MGEV089
@@ -16613,7 +16613,7 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 15.0
-    url: https://www.manticgames.com/tournaments/hq-halo-flashpoint-tournament-foxtrott-2026-sunday-22nd-november-2026/
+    url: https://www.manticgames.com/tournaments/hq-halo-flashpoint-tournament-foxtrott-2026-saturday-21st-november-2026/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/hq-halo-flashpoint-tournament-foxtrot-2026.png
     evidence:
       - mfr-manticgames:540888
@@ -16634,6 +16634,23 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/hq-open-day-2026.png
     evidence:
       - mfr-manticgames:540890
+  - id: mantic-games/MGEV093
+    name: 'Halo: Campaign Evolved – the Board Game Launch Event & Tournament (Saturday 5th December 2026)'
+    manufacturer: mantic-games
+    productCode: MGEV093
+    sku: MGEV093
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: event
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 5.0
+    url: https://www.manticgames.com/tournaments/halo-campaign-evolved-the-board-game-launch-event-tournament-saturday-5th-december-2026/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/campaign-evolved-launch-event-tournament-at-mantic-hq.png
+    evidence:
+      - mfr-manticgames:558389
   - id: mantic-games/MGEWA101
     name: Epic Warpath Asterian Core Army
     manufacturer: mantic-games
@@ -20146,6 +20163,29 @@ products:
       - ret-gamenerdz:/halo-flashpoint-zeta-halo-deluxe-gaming-mat-preorder
       - ret-goblingaming:halo-flashpoint-zeta-halo-deluxe-gaming-mat
       - ret-tistaminis:halo-flashpoint-zeta-halo-deluxe-gaming-mat
+  - id: mantic-games/MGHA115
+    name: 'Halo: Flashpoint Firebase Entrance Deluxe Gaming Mat [Early Access]'
+    manufacturer: mantic-games
+    productCode: MGHA115
+    sku: MGHA115
+    ean: '5060924988452'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 30.0
+    url: https://www.manticgames.com/halo-flashpoint/terrain/firebase-entrance-gaming-mat/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/unsc-firebase-entrance-gaming-mat.webp
+    evidence:
+      - mfr-manticgames:557046
   - id: mantic-games/MGHA117
     name: The Master Chief, Humanity’s Greatest Weapon
     manufacturer: mantic-games
@@ -20534,7 +20574,8 @@ products:
     settings:
       - halo
     settingsBasis: derived
-    categoryBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -20554,6 +20595,7 @@ products:
       - legacy-catalog:mantic-games/halo-flashpoint/general/sangheili-mercenaries
       - mfr-manticgames:499626
       - ret-gamenerdz:/halo-flashpoint-banished-sangheili-mercenaries
+      - ret-goblingaming:halo-flashpoint-sanghelli-mercenaries
       - ret-tistaminis:halo-flashpoint-sangheili-mercenaries
   - id: mantic-games/MGHAB303
     name: 'Halo: Flashpoint Banished Reinforcements'
@@ -20582,6 +20624,28 @@ products:
       - ret-gamenerdz:/halo-flashpoint-banished-reinforcements-preorder
       - ret-goblingaming:halo-flashpoint-banished-reinforcements
       - ret-tistaminis:halo-flashpoint-banished-reinforcements
+  - id: mantic-games/MGHAC101
+    name: Judgement – Covenant Faction Set
+    manufacturer: mantic-games
+    productCode: MGHAC101
+    sku: MGHAC101
+    ean: '5060924987318'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 100.0
+    url: https://www.manticgames.com/halo-flashpoint/covenant/judgement-faction-set/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/judgement-faction-box-contents-spread-v2.webp
+    evidence:
+      - mfr-manticgames:556228
   - id: mantic-games/MGHAM101
     name: 'Halo: Flashpoint Force Organizer Tray Pack'
     manufacturer: mantic-games
@@ -20642,6 +20706,71 @@ products:
       - ret-gamenerdz:/halo-flashpoint-new-mombasa-deluxe-gaming-mat
       - ret-goblingaming:halo-flashpoint-new-mombasa-deluxe-gaming-mat
       - ret-tistaminis:halo-flashpoint-mombasa-deluxe-gaming-mat
+  - id: mantic-games/MGHAM103
+    name: 'Halo: Campaign Evolved – The Board Game'
+    manufacturer: mantic-games
+    productCode: MGHAM103
+    sku: MGHAM103
+    ean: '5060924987301'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 39.0
+    url: https://www.manticgames.com/board-games/halo-campaign-evolved/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/halo-campaign-evolved-box-contents.webp
+    evidence:
+      - mfr-manticgames:557211
+  - id: mantic-games/MGHAM104
+    name: 'Halo: Flashpoint Deluxe 1-Player Acrylic Token Set'
+    manufacturer: mantic-games
+    productCode: MGHAM104
+    sku: MGHAM104
+    ean: '5060924988674'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/halo-flashpoint/accessories/deluxe-player-token-set-2026/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/2026-deluxe-one-player-acrylic-token-set.webp
+    evidence:
+      - mfr-manticgames:557681
+  - id: mantic-games/MGHAM202
+    name: 'Halo: Flashpoint ‘The Weapon’ Score Tracker'
+    manufacturer: mantic-games
+    productCode: MGHAM202
+    sku: MGHAM202
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 18.0
+    url: https://www.manticgames.com/halo-flashpoint/accessories/score-tracker/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/the-weapon-colourshot-5-incl-dice-explainer.webp
+    evidence:
+      - mfr-manticgames:557041
   - id: mantic-games/MGHAM203
     name: 'Halo: Flashpoint Unit Card Update Pack (v1.5)'
     manufacturer: mantic-games
@@ -20696,6 +20825,29 @@ products:
       - ret-gamenerdz:/halo-flashpoint-rulebook-starter-pack-preorder
       - ret-goblingaming:halo-flashpoint-game-rulebook-pack
       - ret-tistaminis:halo-flashpoint-game-rulebook-pack
+  - id: mantic-games/MGHAM205
+    name: UNSC Man Cannons Scenery Set
+    manufacturer: mantic-games
+    productCode: MGHAM205
+    sku: MGHAM205
+    ean: '5060924988391'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    category: terrain
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 18.0
+    url: https://www.manticgames.com/halo-flashpoint/terrain/man-cannons/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/02/halo-flashpoint-noble-team-scenery-unsc-man-cannon-pair-isolated-web-copy-2.webp
+    evidence:
+      - mfr-manticgames:557042
   - id: mantic-games/MGHAOP601
     name: 'Organised Event Play Kit #1'
     manufacturer: mantic-games
@@ -21197,6 +21349,28 @@ products:
       - ret-gamenerdz:/halo-flashpoint-fireteam-wolf-expansion
       - ret-goblingaming:halo-flashpoint-fireteam-wolf
       - ret-tistaminis:halo-flashpoint-fireteam-wolf
+  - id: mantic-games/MGHAU204
+    name: 'Halo: Flashpoint Sergeant Major Johnson [Special Issue]'
+    manufacturer: mantic-games
+    productCode: MGHAU204
+    sku: MGHAU204
+    ean: '5060924987295'
+    eanConfidence: confirmed
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 18.0
+    url: https://www.manticgames.com/halo-flashpoint/unsc/sergeant-major-johnson/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/sgt-major-johnson-front-isolated.webp
+    evidence:
+      - mfr-manticgames:556223
   - id: mantic-games/MGHAU301
     name: Fireteam Cerberus
     manufacturer: mantic-games
@@ -45402,8 +45576,10 @@ products:
     manufacturer: mantic-games
     productCode: MGWD162
     sku: MGWD162
-    ean: '5060924983648'
-    eanConfidence: confirmed
+    ean: '5060924984386'
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060924983648'
     gameSystems:
       - walking-dead-all-out-war
     faction: general
@@ -51873,7 +52049,7 @@ products:
     categoryBasis: unknown
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     priceUsd: 12.5
@@ -63512,7 +63688,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 2.0
     url: https://www.manticgames.com/painting-modeling/army-painter/paint/army-painter-warpaints-fur-brown/
@@ -71164,9 +71340,9 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 5.0
+    priceGbp: 8.0
     url: https://www.goblingaming.co.uk/products/elf-palace-guard-prince
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/elven-prince-elves-kings-of-war-fantasy-mantic-gam.jpg?v=1560795419
     evidence:
@@ -73009,6 +73185,66 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/banished-faction-bundle-v2.webp
     evidence:
       - mfr-manticgames:548730
+  - id: mantic-games/halo-flashpoint-covenant-battle-bundle
+    name: 'Halo: Flashpoint Covenant Battle Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 158.91
+    url: https://www.manticgames.com/halo-flashpoint/covenant/battle-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/covenant-battle-bundle-v2.webp
+    evidence:
+      - mfr-manticgames:557988
+  - id: mantic-games/halo-flashpoint-covenant-essentials-bundle
+    name: 'Halo: Flashpoint Covenant Essentials Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 137.2
+    url: https://www.manticgames.com/halo-flashpoint/covenant/essentials-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/covenant-essentials-bundle-v2.webp
+    evidence:
+      - mfr-manticgames:557986
+  - id: mantic-games/halo-flashpoint-the-great-journey-bundle
+    name: 'Halo: Flashpoint The Great Journey Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - halo-flashpoint
+    gameSystemsBasis: mapped
+    settings:
+      - halo
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 188.89
+    url: https://www.manticgames.com/halo-flashpoint/covenant/the-great-journey-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/the-great-journey-bundle-v2.webp
+    evidence:
+      - mfr-manticgames:557989
   - id: mantic-games/halo-flashpoint-ultimate-getting-started-bundle
     name: 'Halo: Flashpoint Ultimate Getting Started Bundle'
     manufacturer: mantic-games
@@ -73991,6 +74227,19 @@ products:
     url: https://www.gamenerdz.com/kings-of-war-rulebook-2nd-edition-hardcover-ding-dent
     evidence:
       - ret-gamenerdz:/kings-of-war-rulebook-2nd-edition-hardcover-ding-dent
+  - id: mantic-games/kings-of-war-rulebook-4th-edition-ding-dent
+    name: 'Kings of War: Rulebook (4th Edition) (Ding & Dent)'
+    manufacturer: mantic-games
+    sku: MANKWM131-DING
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: code
+    status: current
+    firstSeen: '2026-10-10'
+    url: https://www.gamenerdz.com/kings-of-war-4e-rulebook-ding-dent
+    evidence:
+      - ret-gamenerdz:/kings-of-war-4e-rulebook-ding-dent
   - id: mantic-games/kings-of-war-rulebook-4th-edition-signed-bundle-item
     name: Kings of War Rulebook – 4th Edition SIGNED BUNDLE ITEM
     manufacturer: mantic-games
@@ -76882,7 +77131,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 225.02
+    priceGbp: 173.36
     url: https://www.manticgames.com/tabletop-advent-calendars/all-in-bundle-2026/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/advent-calendars-all-in-bundle-2026-v2.webp
     evidence:
@@ -77044,7 +77293,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 66.66
+    priceGbp: 50.0
     url: https://www.manticgames.com/advent-calendar-games/terrain-crate-dungeons-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/terraincrate-dungeons-bundle.webp
     evidence:
@@ -77777,7 +78026,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 20.63
+    priceGbp: 28.13
     priceUsd: 40.0
     url: https://www.manticgames.com/kings-of-war/undead/skeleton-horde/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Skeleton-Horde.jpeg
@@ -78268,7 +78517,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 167.18
+    priceGbp: 109.99
     url: https://www.manticgames.com/worms/30th-deluxe-play-mat-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/worms-30th-anniversary-bundle.webp
     evidence:

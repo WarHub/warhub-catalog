@@ -324,7 +324,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -2486,7 +2486,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -3344,6 +3344,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120599086'
     sku: '99120599086'
+    ean: '5011921252794'
+    eanConfidence: provisional
     gameSystems:
       - necromunda
     gameSystemsBasis: mapped
@@ -3351,7 +3353,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -3360,11 +3362,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010599006_ENGNecromundaSkirmishGame2.jpg
     evidence:
       - mfr-gw-algolia:P-258465-99120599086
+      - ret-goblingaming:necromunda-escher-blades-of-the-matriarch
   - id: games-workshop/99120599087
     name: Escher Matriarchs & Phyrr Cats
     manufacturer: games-workshop
     productCode: '99120599087'
     sku: '99120599087'
+    ean: '5011921252800'
+    eanConfidence: provisional
     gameSystems:
       - necromunda
     gameSystemsBasis: mapped
@@ -3372,7 +3377,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-09-30'
@@ -3381,11 +3386,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120599087_EscherMatriarchsPhyrrCats1.jpg
     evidence:
       - mfr-gw-algolia:P-258466-99120599087
+      - ret-goblingaming:necromunda-escher-gang-matriarchs-phyrr-cats
   - id: games-workshop/99120599088
     name: Goliath Forge Smelters
     manufacturer: games-workshop
     productCode: '99120599088'
     sku: '99120599088'
+    ean: '5011921252817'
+    eanConfidence: provisional
     gameSystems:
       - necromunda
     gameSystemsBasis: mapped
@@ -3393,7 +3401,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -3402,11 +3410,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010599006_ENGNecromundaSkirmishGame3.jpg
     evidence:
       - mfr-gw-algolia:P-258463-99120599088
+      - ret-goblingaming:necromunda-goliath-forge-smelters
   - id: games-workshop/99120599089
     name: Goliath Forge Bosses & Sumpkrocs
     manufacturer: games-workshop
     productCode: '99120599089'
     sku: '99120599089'
+    ean: '5011921252824'
+    eanConfidence: provisional
     gameSystems:
       - necromunda
     gameSystemsBasis: mapped
@@ -3414,7 +3425,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -3423,6 +3434,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120599089_GoliathForgeBossesSumpkrocs1.jpg
     evidence:
       - mfr-gw-algolia:P-258464-99120599089
+      - ret-goblingaming:necromunda-goliath-forge-bosses-sumpkrocs
   - id: games-workshop/99120599090
     name: 'Warhammer Necromunda: Zone Mortalis Factoria Pipes'
     manufacturer: games-workshop
@@ -3822,7 +3834,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-25'
-    priceGbp: 4.75
+    priceGbp: 4.99
     url: https://www.goblingaming.co.uk/products/necromunda-50mm-bases
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/ProductImageComingSoon_50c73223-bb9d-432b-bd58-a6d0f0b78891.webp?v=1787587666
     evidence:
@@ -3847,7 +3859,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-25'
-    priceGbp: 4.75
+    priceGbp: 4.99
     url: https://www.goblingaming.co.uk/products/necromunda-28-5mm-bases
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/ProductImageComingSoon_564c9b08-ba4f-4d37-abd4-11519aa10044.webp?v=1787587663
     evidence:
@@ -4584,7 +4596,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 64.0
     priceEur: 65.5

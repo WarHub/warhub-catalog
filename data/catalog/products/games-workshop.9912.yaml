@@ -570,6 +570,8 @@ products:
     manufacturer: games-workshop
     productCode: '99121462036'
     sku: '99121462036'
+    ean: '5011921285341'
+    eanConfidence: provisional
     gameSystems:
       - middle-earth
     gameSystemsBasis: stated
@@ -577,7 +579,7 @@ products:
       - middle-earth
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -586,6 +588,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99121462036_MEDolGuldurBattlehost01.jpg
     evidence:
       - mfr-gw-algolia:P-259675-99121462036
+      - ret-goblingaming:forces-of-evil-dol-guldur-battlehost
   - id: games-workshop/99121463007
     name: Knights of Rivendell™
     manufacturer: games-workshop
@@ -889,6 +892,8 @@ products:
     manufacturer: games-workshop
     productCode: '99121463019'
     sku: '99121463019'
+    ean: '5011921285334'
+    eanConfidence: provisional
     gameSystems:
       - middle-earth
     gameSystemsBasis: stated
@@ -896,7 +901,7 @@ products:
       - middle-earth
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -905,6 +910,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99121463019_MEMirkwoodBattlehost01.jpg
     evidence:
       - mfr-gw-algolia:P-259674-99121463019
+      - ret-goblingaming:forces-of-good-mirkwood-battlehost
   - id: games-workshop/99121464015
     name: Knights of Minas Tirith™
     manufacturer: games-workshop
@@ -1429,7 +1435,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 24.0
     priceEur: 25.4
@@ -1970,6 +1976,8 @@ products:
     manufacturer: games-workshop
     productCode: '99121464049'
     sku: '99121464049'
+    ean: '5011921285327'
+    eanConfidence: provisional
     gameSystems:
       - middle-earth
     gameSystemsBasis: stated
@@ -1977,7 +1985,7 @@ products:
       - middle-earth
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -1986,6 +1994,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99121464049_MERohanBattlehost01.jpg
     evidence:
       - mfr-gw-algolia:P-259673-99121464049
+      - ret-goblingaming:forces-of-good-rohan-battlehost
   - id: games-workshop/99121465007
     name: Dwarf Warriors
     manufacturer: games-workshop
@@ -5912,7 +5921,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 108.0
@@ -8627,7 +8636,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -9552,7 +9561,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceCad: 98.0
@@ -9577,6 +9586,8 @@ products:
     manufacturer: games-workshop
     productCode: '99122702020'
     sku: '99122702020'
+    ean: '5011921274758'
+    eanConfidence: provisional
     gameSystems:
       - the-old-world
     faction: empire-of-man
@@ -9585,7 +9596,7 @@ products:
       - old-world
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -9594,6 +9605,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122702020_EmpireofManBattleMarchArmy1.jpg
     evidence:
       - mfr-gw-algolia:P-258085-99122702020
+      - ret-goblingaming:empire-of-man-battle-march-army
   - id: games-workshop/99122703001
     name: Lord on Royal Pegasus
     manufacturer: games-workshop
@@ -9972,7 +9984,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
@@ -10173,6 +10185,8 @@ products:
     manufacturer: games-workshop
     productCode: '99122704007'
     sku: '99122704007'
+    ean: '5011921279036'
+    eanConfidence: provisional
     gameSystems:
       - the-old-world
     gameSystemsBasis: stated
@@ -10180,7 +10194,7 @@ products:
       - old-world
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -10189,6 +10203,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122704007_WoodElfRealmsBattleMarchArmy1.jpg
     evidence:
       - mfr-gw-algolia:P-258087-99122704007
+      - ret-goblingaming:wood-elf-realms-battle-march-army
   - id: games-workshop/99122705001
     name: Dwarf Runesmith
     manufacturer: games-workshop
@@ -10547,7 +10562,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -11136,6 +11151,8 @@ products:
     manufacturer: games-workshop
     productCode: '99122709011'
     sku: '99122709011'
+    ean: '5011921274789'
+    eanConfidence: provisional
     gameSystems:
       - the-old-world
     faction: orc-and-goblin-tribes
@@ -11144,7 +11161,7 @@ products:
       - old-world
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -11153,6 +11170,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122709011_OrcGoblinTribesBattleMarchArmy1.jpg
     evidence:
       - mfr-gw-algolia:P-258089-99122709011
+      - ret-goblingaming:orc-goblin-tribes-battle-march-army
   - id: games-workshop/99122710001
     name: Lord on Dragon
     manufacturer: games-workshop
@@ -11171,7 +11189,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
@@ -11913,7 +11931,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceCad: 98.0
@@ -11929,12 +11947,15 @@ products:
       - legacy-catalog:games-workshop/the-old-world/high-elf-realms/flamespyre-phoenix
       - mfr-gw-algolia:P-208769-99122710019
       - mfr-gw-trade:99122710019
+      - ret-goblingaming:high-elves-flamespyre-frostheart-phoenix
       - ret-tistaminis:high-elf-realms-flamespyre-phoenix-pre-order
   - id: games-workshop/99122710020
     name: 'High Elf Realms: Battle March Army'
     manufacturer: games-workshop
     productCode: '99122710020'
     sku: '99122710020'
+    ean: '5011921274765'
+    eanConfidence: provisional
     gameSystems:
       - the-old-world
     faction: high-elf-realms
@@ -11943,7 +11964,7 @@ products:
       - old-world
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -11952,6 +11973,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122710020_HighElfRealmsBattleMarchArmy1.jpg
     evidence:
       - mfr-gw-algolia:P-258088-99122710020
+      - ret-goblingaming:high-elf-realms-battle-march-army
   - id: games-workshop/99122716001
     name: Beastman Shaman
     manufacturer: games-workshop
@@ -12289,6 +12311,8 @@ products:
     manufacturer: games-workshop
     productCode: '99122716009'
     sku: '99122716009'
+    ean: '5011921274772'
+    eanConfidence: provisional
     gameSystems:
       - the-old-world
     faction: beastman-brayherds
@@ -12297,7 +12321,7 @@ products:
       - old-world
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
@@ -12306,6 +12330,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122716009_BeastmanBrayherdsBattleMarchArmy1.jpg
     evidence:
       - mfr-gw-algolia:P-258086-99122716009
+      - ret-goblingaming:beastmen-brayherds-battle-march-army
   - id: games-workshop/99122717001
     name: Tomb King/Liche Priest on Necrolith Bone Dragon
     manufacturer: games-workshop
@@ -12622,7 +12647,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -13510,7 +13535,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceCad: 54.0
@@ -14346,7 +14371,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
     priceEur: 22.6
@@ -14999,7 +15024,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -15033,6 +15058,7 @@ products:
       - legacy-catalog:games-workshop/horus-heresy/legiones-astartes/legion-command-upgrade-set
       - mfr-gw-algolia:P-182032-99123001039
       - mfr-gw-trade:99123001039
+      - ret-goblingaming:legiones-astartes-legion-command-upgrade-set
   - id: games-workshop/99123001040
     name: 'HH: LEGIONES ASTARTES BATTLE GROUP'
     manufacturer: games-workshop
@@ -16215,7 +16241,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
@@ -16911,7 +16937,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 61.0
     priceEur: 62.2
@@ -17490,7 +17516,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 109.65
+    priceGbp: 113.9
     priceEur: 139.1
     priceCad: 221.0
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-knight-houses-cerastus-knight-lancer
@@ -18651,6 +18677,8 @@ products:
     manufacturer: games-workshop
     productCode: '99123043010'
     sku: '99123043010'
+    ean: '5011921267484'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18659,7 +18687,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: out_of_stock
     firstSeen: '2026-09-30'
@@ -18668,11 +18696,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043010_CustodesSupportBattleGroup01.jpg
     evidence:
       - mfr-gw-algolia:P-258090-99123043010
+      - ret-goblingaming:legio-custodes-support-battle-group
   - id: games-workshop/99123043011
     name: Aquilon Terminator Sodality
     manufacturer: games-workshop
     productCode: '99123043011'
     sku: '99123043011'
+    ean: '5011921267866'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18690,11 +18721,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043011_CustodesAquilonTerminatorSodality1.jpg
     evidence:
       - mfr-gw-algolia:P-260394-99123043011
+      - ret-goblingaming:adeptus-custodes-aquilon-terminator-sodality
   - id: games-workshop/99123043012
     name: Telemon Heavy Dreadnought
     manufacturer: games-workshop
     productCode: '99123043012'
     sku: '99123043012'
+    ean: '5011921267873'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18712,11 +18746,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043012_CustodesTelemonHeavyDreadnought1.jpg
     evidence:
       - mfr-gw-algolia:P-260398-99123043012
+      - ret-goblingaming:adeptus-custodes-telemon-heavy-dreadnought
   - id: games-workshop/99123043013
     name: Gyrfalcon Jetbike Sodality
     manufacturer: games-workshop
     productCode: '99123043013'
     sku: '99123043013'
+    ean: '5011921267880'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18734,11 +18771,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043013_THHCustodesGryfalconSodalityEXTRA.jpg
     evidence:
       - mfr-gw-algolia:P-260395-99123043013
+      - ret-goblingaming:adeptus-custodes-gyrfalcon-jetbike-sodality
   - id: games-workshop/99123043014
     name: Pallas Grav-Attack
     manufacturer: games-workshop
     productCode: '99123043014'
     sku: '99123043014'
+    ean: '5011921267897'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18756,11 +18796,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043014_CustodesPallasGravAttack1.jpg
     evidence:
       - mfr-gw-algolia:P-260399-99123043014
+      - ret-goblingaming:adeptus-custodes-pallas-grav-attack
   - id: games-workshop/99123043016
     name: Custodian Guard Sodality
     manufacturer: games-workshop
     productCode: '99123043016'
     sku: '99123043016'
+    ean: '5011921285785'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18778,11 +18821,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043016_CustodesCustodianGuard1.jpg
     evidence:
       - mfr-gw-algolia:P-260391-99123043016
+      - ret-goblingaming:adeptus-custodes-custodian-guard-sodality
   - id: games-workshop/99123043017
     name: Venatari Sodality
     manufacturer: games-workshop
     productCode: '99123043017'
     sku: '99123043017'
+    ean: '5011921285808'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18800,11 +18846,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043017_CustodesVenatariSodality1.jpg
     evidence:
       - mfr-gw-algolia:P-260393-99123043017
+      - ret-goblingaming:adeptus-custodes-venatari-sodality
   - id: games-workshop/99123043018
     name: Shield Captain
     manufacturer: games-workshop
     productCode: '99123043018'
     sku: '99123043018'
+    ean: '5011921285792'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18822,11 +18871,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043018_CustodesShieldCaptain1.jpg
     evidence:
       - mfr-gw-algolia:P-260390-99123043018
+      - ret-goblingaming:adeptus-custodes-shield-captain
   - id: games-workshop/99123043019
     name: Caladius Grav-Tank
     manufacturer: games-workshop
     productCode: '99123043019'
     sku: '99123043019'
+    ean: '5011921285822'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18844,11 +18896,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043019_CustodesCaladiusGravTank1.jpg
     evidence:
       - mfr-gw-algolia:P-260400-99123043019
+      - ret-goblingaming:adeptus-custodes-caladius-grav-tank
   - id: games-workshop/99123043020
     name: Caladius Annihilator Grav-Tank
     manufacturer: games-workshop
     productCode: '99123043020'
     sku: '99123043020'
+    ean: '5011921285860'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18866,11 +18921,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043020_CustodesCaladiusGravTankAnnihilator1.jpg
     evidence:
       - mfr-gw-algolia:P-260701-99123043020
+      - ret-goblingaming:adeptus-custodes-caladius-annihilator-grav-tank
   - id: games-workshop/99123043021
     name: Coronus Grav-carrier
     manufacturer: games-workshop
     productCode: '99123043021'
     sku: '99123043021'
+    ean: '5011921285853'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18888,11 +18946,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043021_CustodesCoronusGravCarrier1.jpg
     evidence:
       - mfr-gw-algolia:P-260702-99123043021
+      - ret-goblingaming:adeptus-custodes-coronus-grav-carrier
   - id: games-workshop/99123043022
     name: Sentinel Guard Sodality
     manufacturer: games-workshop
     productCode: '99123043022'
     sku: '99123043022'
+    ean: '5011921285815'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18910,11 +18971,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043022_CustodesSentinelGuard1.jpg
     evidence:
       - mfr-gw-algolia:P-260392-99123043022
+      - ret-goblingaming:adeptus-custodes-sentinel-guard-sodality
   - id: games-workshop/99123043023
     name: Custodian Dreadnought
     manufacturer: games-workshop
     productCode: '99123043023'
     sku: '99123043023'
+    ean: '5011921285839'
+    eanConfidence: provisional
     gameSystems:
       - horus-heresy
       - warhammer-40k
@@ -18932,6 +18996,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99123043023_CustodesCustodianDreadnought1.jpg
     evidence:
       - mfr-gw-algolia:P-260397-99123043023
+      - ret-goblingaming:adeptus-custodes-custodian-dreadnought
   - id: games-workshop/99123099001
     name: Age of Darkness Markers and Tokens
     manufacturer: games-workshop
@@ -20540,7 +20605,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
@@ -20957,7 +21022,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     url: https://www.warhammer.com/en-GB/shop/Skarbrand-Bloodthirster
@@ -21072,7 +21137,7 @@ products:
     role: basing
     roleBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 18.28
     url: https://www.gamenerdz.com/citadel-barbed-bracken
@@ -21094,7 +21159,7 @@ products:
     role: basing
     roleBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 18.28
     url: https://www.gamenerdz.com/citadel-creeping-vines

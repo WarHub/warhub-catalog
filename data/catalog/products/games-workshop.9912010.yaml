@@ -148,7 +148,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 61.0
     priceEur: 71.3
@@ -1363,16 +1363,11 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 28.03
-    url: https://www.goblingaming.co.uk/products/ultramarines-chief-librarian-tigurius
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/um-chief-librarian-2019.jpg?v=1565807309
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101254
-      - ret-goblingaming:ultramarines-chief-librarian-tigurius
   - id: games-workshop/99120101255
     name: WHITE SCARS KOR'SARRO KHAN
     manufacturer: games-workshop
@@ -2575,7 +2570,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -3508,6 +3503,7 @@ products:
       - mfr-gw-algolia:prod4530181-99120101329
       - mfr-gw-trade:99120101329
       - ret-gamenerdz:/warhammer-40k-ultramarines-chief-librarian-tigurius
+      - ret-goblingaming:ultramarines-chief-librarian-tigurius
       - ret-radaddel:/ultramarines-chief-librarian-tigurius
       - ret-radaddel:ultramarines-chief-librarian-tigurius
   - id: games-workshop/99120101330
@@ -5858,7 +5854,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -5970,7 +5966,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 19.56
+    priceGbp: 19.98
     priceEur: 24.2
     priceCad: 38.25
     url: https://www.gamenerdz.com/warhammer-40k-dark-angels-upgrades-transfers
@@ -6411,7 +6407,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
@@ -7888,7 +7884,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 19.6
+    priceGbp: 22.4
     priceCad: 46.75
     url: https://www.gamenerdz.com/warhammer-40k-ultramarines-ferren-areios
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_11_99120101460_BlackLibraryPromoMiniatureUltramarineCaptainFerrenAreios6.jpg?v=1763718627
@@ -7998,31 +7994,6 @@ products:
     evidence:
       - mfr-gw-algolia:prod4530140-99120101467
       - mfr-gw-trade:99120101467
-  - id: games-workshop/99120101468
-    name: Librarian In Phobos Armour
-    manufacturer: games-workshop
-    productCode: '99120101468'
-    sku: '99120101468'
-    ean: '5011921256099'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 26.0
-    url: https://www.warhammer.com/en-GB/shop/Primaris-Librarian-In-Phobos-Armour-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101046_SMPrimarisLibrarianPhobosArmour01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4510313-99120101468
-      - mfr-gw-trade:99120101468
   - id: games-workshop/99120101469
     name: Captain in Phobos Armour
     manufacturer: games-workshop
@@ -8048,28 +8019,6 @@ products:
     evidence:
       - mfr-gw-algolia:prod4510312-99120101469
       - mfr-gw-trade:99120101469
-  - id: games-workshop/99120101470
-    name: White Scars Primaris Upgrades & Transfers
-    manufacturer: games-workshop
-    productCode: '99120101470'
-    sku: '99120101470'
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 18.75
-    url: https://www.warhammer.com/en-GB/shop/White-Scar-Primaris-Upgrades-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101040_WSPrimarisUpgradesTransfers01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4510331-99120101470
   - id: games-workshop/99120101471
     name: 'SPACE MARINES: APOTHECARY'
     manufacturer: games-workshop
@@ -8135,31 +8084,6 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120101473
-  - id: games-workshop/99120101474
-    name: Librarian
-    manufacturer: games-workshop
-    productCode: '99120101474'
-    sku: '99120101474'
-    ean: '5011921256211'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 27.0
-    url: https://www.warhammer.com/en-GB/shop/Space-Marines-Primaris-Librarian-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101181_PrimarisLibrarian01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4530142-99120101474
-      - mfr-gw-trade:99120101474
   - id: games-workshop/99120101475
     name: Iron Priest
     manufacturer: games-workshop
@@ -8465,6 +8389,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120101494'
     sku: '99120101494'
+    ean: '5011921267514'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8482,11 +8408,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101494_SpaceMarinesEradicatorSquadWithHeavyBolters01.jpg
     evidence:
       - mfr-gw-algolia:P-259689-99120101494
+      - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
+      - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters-preorder
+      - ret-goblingaming:space-marines-eradicator-squad-with-heavy-bolters
   - id: games-workshop/99120101495
     name: Land Speeder
     manufacturer: games-workshop
     productCode: '99120101495'
     sku: '99120101495'
+    ean: '5011921267521'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8504,11 +8435,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101495_SpaceMarinesLandSpeeder01.jpg
     evidence:
       - mfr-gw-algolia:P-259688-99120101495
+      - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder
+      - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder-preorder
+      - ret-goblingaming:space-marines-land-speeder
   - id: games-workshop/99120101496
     name: Intercessor Squad
     manufacturer: games-workshop
     productCode: '99120101496'
     sku: '99120101496'
+    ean: '5011921267538'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8526,11 +8462,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101496_SpaceMarinesIntercessorSquad01.jpg
     evidence:
       - mfr-gw-algolia:P-259685-99120101496
+      - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad
+      - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad-preorder
+      - ret-goblingaming:space-marines-intercessor-squad
   - id: games-workshop/99120101497
     name: Vanguard Veteran Squad with Jump Packs
     manufacturer: games-workshop
     productCode: '99120101497'
     sku: '99120101497'
+    ean: '5011921267545'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8548,11 +8489,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101497_SpaceMarinesVanguardVeteransWithJumpPacks01.jpg
     evidence:
       - mfr-gw-algolia:P-259682-99120101497
+      - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
+      - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs-preorder
+      - ret-goblingaming:space-marines-vanguard-veteran-squad-with-jump-packs
   - id: games-workshop/99120101498
     name: Outrider Squad
     manufacturer: games-workshop
     productCode: '99120101498'
     sku: '99120101498'
+    ean: '5011921267552'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8570,11 +8516,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101498_SpaceMarinesOutriderSquad01.jpg
     evidence:
       - mfr-gw-algolia:P-259683-99120101498
+      - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad
+      - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad-preorder
+      - ret-goblingaming:space-marines-outrider-squad
   - id: games-workshop/99120101499
     name: Captain on Bike
     manufacturer: games-workshop
     productCode: '99120101499'
     sku: '99120101499'
+    ean: '5011921267569'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8592,11 +8543,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101499_SpaceMarinesCaptainOnBike01.jpg
     evidence:
       - mfr-gw-algolia:P-259684-99120101499
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike-preorder
+      - ret-goblingaming:space-marines-captain-on-bike
   - id: games-workshop/99120101500
     name: Kaius Konorius
     manufacturer: games-workshop
     productCode: '99120101500'
     sku: '99120101500'
+    ean: '5011921267576'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8614,11 +8570,16 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101500_SpaceMarinesKaiusKonorius01.jpg
     evidence:
       - mfr-gw-algolia:P-259686-99120101500
+      - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius
+      - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius-preorder
+      - ret-goblingaming:space-marines-kaius-konorius
   - id: games-workshop/99120101501
     name: Champions of Armageddon
     manufacturer: games-workshop
     productCode: '99120101501'
     sku: '99120101501'
+    ean: '5011921267583'
+    eanConfidence: provisional
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8636,11 +8597,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101501_SpaceMarinesChampionsOfArmageddon01.jpg
     evidence:
       - mfr-gw-algolia:P-259690-99120101501
+      - ret-goblingaming:space-marines-champions-of-armageddon
   - id: games-workshop/99120101517
     name: Rhino
     manufacturer: games-workshop
     productCode: '99120101517'
     sku: '99120101517'
+    ean: '5011921279074'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8658,6 +8622,9 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101517_SpaceMarinesRhino01.jpg
     evidence:
       - mfr-gw-algolia:P-259687-99120101517
+      - ret-gamenerdz:/warhammer-40k-space-marines-rhino
+      - ret-gamenerdz:/warhammer-40k-space-marines-rhino-preorder
+      - ret-goblingaming:space-marines-rhino
   - id: games-workshop/99120102005
     name: KHORNE BERZERKERS
     manufacturer: games-workshop
@@ -8773,7 +8740,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 125.0
     priceEur: 139.5
@@ -10358,7 +10325,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -10861,7 +10828,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 110.0
     priceEur: 110.5
@@ -11449,7 +11416,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -13079,7 +13046,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 89.25
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-night-lords-2026
@@ -14043,7 +14010,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     url: https://www.warhammer.com/en-GB/shop/Ork-Deff-Dread
@@ -14573,7 +14540,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -14649,7 +14616,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -14896,7 +14863,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 82.5
     priceEur: 83.1
@@ -15110,7 +15077,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -15422,7 +15389,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -16453,6 +16420,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120103137'
     sku: '99120103137'
+    ean: '5011921267071'
+    eanConfidence: provisional
     gameSystems:
       - warhammer-40k
     gameSystemsBasis: stated
@@ -16469,6 +16438,7 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103137_OrksArmageddonKommandKrew01.jpg
     evidence:
       - mfr-gw-algolia:P-257949-99120103137
+      - ret-goblingaming:orks-armageddon-kommand-krew
   - id: games-workshop/99120103138
     name: Warbikers
     manufacturer: games-workshop
@@ -18750,28 +18720,6 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104001_EldarFarseer01.jpg
     evidence:
       - mfr-gw-algolia:prod2240135-99120104121
-  - id: games-workshop/99120104122
-    name: Farseer Skyrunner
-    manufacturer: games-workshop
-    productCode: '99120104122'
-    sku: '99120104122'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-09-30'
-    priceGbp: 29.0
-    url: https://www.warhammer.com/en-GB/shop/Eldar-Farseer-Skyrunner-2017
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104002_ELDARFARSEERSKYRUNNER01.jpg
-    evidence:
-      - mfr-gw-algolia:prod3650295-99120104122
-      - mfr-gw-algolia:prod3660120-99120104122
   - id: games-workshop/99120104143
     name: Solitaire
     manufacturer: games-workshop
@@ -20305,7 +20253,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 42.0
     priceEur: 42.0
@@ -20668,7 +20616,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
@@ -22414,7 +22362,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceCad: 48.45
@@ -24526,6 +24474,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/dialogus
       - mfr-gw-algolia:prod4400128-99120108051
+      - mfr-gw-algolia:prod4400128-99120108143
       - mfr-gw-trade:99120108051
       - ret-gamenerdz:/warhammer-40k-adepta-sororitas-dialogus
       - ret-goblingaming:adepta-sororitas-dialogus
@@ -25364,7 +25313,9 @@ products:
     productCode: '99120108076'
     sku: '99120108076'
     ean: '5011921172047'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921272501'
     supersedes:
       - games-workshop/99120108012
     gameSystems:
@@ -25394,7 +25345,9 @@ products:
       - arc-wargameportal:/products/captain-general-trajann-valoris
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/captain-general-trajann-valoris
       - mfr-gw-algolia:prod3700244-99120108076
+      - mfr-gw-algolia:prod3700244-99120143002
       - mfr-gw-trade:99120108076
+      - mfr-gw-trade:99120143002
       - ret-gamenerdz:/warhammer-40k-adeptus-custodes-captain-general-trajann-valoris
       - ret-goblingaming:trajann-valoris
       - ret-radaddel:/adeptus-custodes-trajann-valoris
@@ -26952,69 +26905,6 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120108133
-  - id: games-workshop/99120108134
-    name: Sister Dogmata
-    manufacturer: games-workshop
-    productCode: '99120108134'
-    sku: '99120108134'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-09-30'
-    priceGbp: 26.0
-    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Sister-Dogmata-2021
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108008_SoBSisterDogmataLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4650189-99120108134
-  - id: games-workshop/99120108135
-    name: Imagifier
-    manufacturer: games-workshop
-    productCode: '99120108135'
-    sku: '99120108135'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-25'
-    priceGbp: 21.5
-    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Imagifier-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108006_SoBImagifierLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4400126-99120108135
-  - id: games-workshop/99120108137
-    name: Ministorum Priest
-    manufacturer: games-workshop
-    productCode: '99120108137'
-    sku: '99120108137'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 23.5
-    url: https://www.warhammer.com/en-GB/shop/adepta-sororitas-ministorum-priest-2024
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108011_ASMinistorumPriest01.jpg
-    evidence:
-      - mfr-gw-algolia:P-187771-99120108137
   - id: games-workshop/99120108138
     name: Ministorum Priest with Vindictor
     manufacturer: games-workshop
@@ -27039,27 +26929,6 @@ products:
     evidence:
       - mfr-gw-algolia:P-181577-99120108138
       - mfr-gw-trade:99120108138
-  - id: games-workshop/99120108143
-    name: Dialogus
-    manufacturer: games-workshop
-    productCode: '99120108143'
-    sku: '99120108143'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 29.0
-    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Dialogus-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108022_SoBDialogusLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4400128-99120108143
   - id: games-workshop/99120108144
     name: Hospitaller
     manufacturer: games-workshop

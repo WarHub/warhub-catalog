@@ -2484,7 +2484,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 42.0
     url: https://www.warhammer.com/en-GB/shop/Drukhari-Raider
@@ -3010,27 +3010,6 @@ products:
     evidence:
       - mfr-gw-trade:99120112061
       - ret-radaddel:/drukhari-the-maelstrom-battalion
-  - id: games-workshop/99120112062
-    name: Haemonculus
-    manufacturer: games-workshop
-    productCode: '99120112062'
-    sku: '99120112062'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-10-04'
-    priceGbp: 19.5
-    url: https://www.warhammer.com/en-GB/shop/Haemonculus-2017
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070112002_Haemonculus01.jpg
-    evidence:
-      - mfr-gw-algolia:prod3590121-99120112062
   - id: games-workshop/99120113028
     name: HAMMERHEAD GUNSHIP
     manufacturer: games-workshop
@@ -3984,7 +3963,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -4700,48 +4679,6 @@ products:
     evidence:
       - mfr-gw-algolia:prod3590123-99120113106
       - mfr-gw-trade:99120113106
-  - id: games-workshop/99120113107
-    name: Kroot Trail Shaper
-    manufacturer: games-workshop
-    productCode: '99120113107'
-    sku: '99120113107'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 23.5
-    url: https://www.warhammer.com/en-GB/shop/tau-empire-kroot-trail-shaper-2024
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070113007_KrootTrailShaper1.jpg
-    evidence:
-      - mfr-gw-algolia:P-178206-99120113107
-  - id: games-workshop/99120113108
-    name: Kroot Flesh Shaper
-    manufacturer: games-workshop
-    productCode: '99120113108'
-    sku: '99120113108'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 23.5
-    url: https://www.warhammer.com/en-GB/shop/tau-empire-kroot-flesh-shaper-2024
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070113008_KrootFleshShaper1.jpg
-    evidence:
-      - mfr-gw-algolia:P-178204-99120113108
   - id: games-workshop/99120113111
     name: 'T''AU EMPIRE: FARSIGHT CADRE'
     manufacturer: games-workshop
@@ -5593,7 +5530,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 55.0
     priceEur: 53.9
@@ -5859,7 +5796,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceCad: 45.05
@@ -6095,17 +6032,13 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: code
     status: current
-    availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 25.08
     url: https://www.gamenerdz.com/warhammer-40k-genestealer-cults-acolyte-hybrids
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_11_EB200b-51-51-99120117019-GenestealerCultsAcolyteHybrids.jpg?v=1682338126
     evidence:
       - mfr-gw-trade:99120117003
       - ret-gamenerdz:/warhammer-40k-genestealer-cults-acolyte-hybrids
-      - ret-goblingaming:genestealer-cults-acolyte-hybrids
   - id: games-workshop/99120117004
     name: GENESTEALER CULTS NEOPHYTE HYBRIDS
     manufacturer: games-workshop
@@ -6291,7 +6224,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -6391,6 +6324,7 @@ products:
       - mfr-gw-algolia:prod3290206-99120117019
       - mfr-gw-algolia:prod3290211-99120117019
       - mfr-gw-trade:99120117019
+      - ret-goblingaming:genestealer-cults-acolyte-hybrids
   - id: games-workshop/99120117020
     name: Neophyte Hybrids
     manufacturer: games-workshop
@@ -7468,7 +7402,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
@@ -7800,59 +7734,13 @@ products:
       - ret-radaddel:/leagues-of-votann-cthonian-prospect
       - ret-radaddel:leagues-of-votann-cthonian-prospect
       - ret-tistaminis:leagues-of-votann-cthonian-prospect-pre-order
-  - id: games-workshop/99120143001
-    name: Blade Champion
-    manufacturer: games-workshop
-    productCode: '99120143001'
-    sku: '99120143001'
-    ean: '5011921272495'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 29.0
-    url: https://www.warhammer.com/en-GB/shop/adeptus-custodes-blade-champion-2022
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108010_ACBladeChampionLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4920184-99120143001
-      - mfr-gw-trade:99120143001
-  - id: games-workshop/99120143002
-    name: Captain-General Trajann Valoris
-    manufacturer: games-workshop
-    productCode: '99120143002'
-    sku: '99120143002'
-    ean: '5011921272501'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 29.5
-    url: https://www.warhammer.com/en-GB/shop/Captain-general-Trajann-Valoris-2018
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108012_GeneralTrajannValoris01.jpg
-    evidence:
-      - mfr-gw-algolia:prod3700244-99120143002
-      - mfr-gw-trade:99120143002
   - id: games-workshop/99120143014
     name: 'Combat Patrol: Adeptus Custodes'
     manufacturer: games-workshop
     productCode: '99120143014'
     sku: '99120143014'
+    ean: '5011921275236'
+    eanConfidence: provisional
     gameSystems:
       - warhammer-40k
     gameSystemsBasis: stated
@@ -7869,6 +7757,8 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120143014_AdeptusCustodesCombatPatrol01.jpg
     evidence:
       - mfr-gw-algolia:P-260703-99120143014
+      - ret-goblingaming:combat-patrol-adeptus-custodes
+      - ret-goblingaming:combat-patrol-adeptus-custodes-first-restock
   - id: games-workshop/99120199015
     name: Aegis Defence Line
     manufacturer: games-workshop
@@ -7937,15 +7827,18 @@ products:
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: hobby-auxiliary
-    categoryBasis: code
+    categoryBasis: mapped
     role: basing
-    roleBasis: code
+    roleBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 27.0
-    url: https://www.radaddel.de/sector-imperialis-25mm-and-40mm-round-bases
+    url: https://www.goblingaming.co.uk/products/sector-imperialis-25-40mm-round-base-s
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/sector-imperialis-25-40mm-round-base-kit-92-pieces.jpg?v=1560791686
     evidence:
       - mfr-gw-trade:99120199040
+      - ret-goblingaming:sector-imperialis-25-40mm-round-base-s
       - ret-radaddel:/sector-imperialis-25mm-and-40mm-round-bases
   - id: games-workshop/99120199041
     name: 'S/IMPERIALIS: 60MM RD+75/90MM OVAL BASES'
@@ -8185,6 +8078,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/terrain/sector-mechanicus-sacristan-forgeshrine
       - mfr-gw-algolia:prod3840215-99120199066
       - mfr-gw-trade:99120199066
+      - ret-goblingaming:sacristan-forgeshrine
   - id: games-workshop/99120199067
     name: SECTOR IMPERIALIS BASILICANUM
     manufacturer: games-workshop
@@ -8664,6 +8558,7 @@ products:
       - mfr-gw-algolia:prod4890134-99120199099
       - mfr-gw-trade:99120199099
       - ret-gamenerdz:/warhammer-40k-battlezone-fronteris-vox-antenna-and-auspex-shrine
+      - ret-goblingaming:vox-antenna-auspex-shrine-battlezone-fronteris-warhammer-40k
       - ret-radaddel:/battlezone-fronteris-vox-antenna-and-auspex-shrine
   - id: games-workshop/99120199100
     name: 'Battlezone: Fronteris – Landing Pad'
@@ -8914,7 +8809,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     priceEur: 26.6
@@ -9034,7 +8929,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 20.8
+    priceGbp: 24.3
     priceCad: 45.05
     url: https://www.gamenerdz.com/warhammer-40k-boarding-actions-void-war-bases
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/TR-66-72-99120199097-VoidWarBases.jpg?v=1676045351

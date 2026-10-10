@@ -1,5 +1,141 @@
 conflicts:
   - type: ean-mismatch
+    entity: games-workshop/99811464108
+    chosen: '5011921238026'
+    assertions:
+      - ean: '5011921024605'
+        sources:
+          - mfr-gw-trade
+      - ean: '5011921238026'
+        sources:
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: games-workshop/99811462046
+    chosen: '5011921238088'
+    assertions:
+      - ean: '5011921037247'
+        sources:
+          - mfr-gw-trade
+      - ean: '5011921238088'
+        sources:
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-tistaminis
+  - type: ean-mismatch
+    entity: games-workshop/99070101055
+    chosen: '5011921142095'
+    assertions:
+      - ean: '5011921142095'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256099'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99070101063
+    chosen: '5011921145997'
+    assertions:
+      - ean: '5011921145997'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921256211'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99070108010
+    chosen: '5011921163106'
+    assertions:
+      - ean: '5011921163106'
+        sources:
+          - arc-tistaminis
+          - arc-wargameportal
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921272495'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120108076
+    chosen: '5011921172047'
+    assertions:
+      - ean: '5011921172047'
+        sources:
+          - arc-wargameportal
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-radaddel
+      - ean: '5011921272501'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120207136
+    chosen: '5011921195862'
+    assertions:
+      - ean: '5011921195862'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+      - ean: '5011921261505'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120207156
+    chosen: '5011921204076'
+    assertions:
+      - ean: '5011921204076'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-goblingaming
+          - ret-tistaminis
+      - ean: '5011921261475'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120204047
+    chosen: '5011921226665'
+    assertions:
+      - ean: '5011921226665'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-tistaminis
+      - ean: '5011921261529'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
+    entity: games-workshop/99120207184
+    chosen: '5011921226689'
+    assertions:
+      - ean: '5011921226689'
+        sources:
+          - legacy-catalog
+          - mfr-gw-trade
+          - ret-gamenerdz
+          - ret-goblingaming
+          - ret-tistaminis
+      - ean: '5011921261512'
+        sources:
+          - mfr-gw-trade
+  - type: ean-mismatch
     entity: steamforged-games/SFIK-KDR210
     chosen: '5060453699959'
     assertions:
@@ -12,6 +148,26 @@ conflicts:
       - ean: '5061060704463'
         sources:
           - ret-gamenerdz
+  - type: ean-mismatch
+    entity: mantic-games/MGWD162
+    chosen: '5060924984386'
+    assertions:
+      - ean: '5060924983648'
+        sources:
+          - legacy-catalog
+      - ean: '5060924984386'
+        sources:
+          - ret-goblingaming
+  - type: ean-mismatch
+    entity: vallejo/green-grey-18ml-model-colour
+    chosen: '8429551708869'
+    assertions:
+      - ean: '8429551708869'
+        sources:
+          - ret-goblingaming
+      - ean: '8429551709712'
+        sources:
+          - ret-goblingaming
   - type: ambiguous-join
     keys:
       - arc-wargameportal:/products/alchemite-warforger
@@ -19,12 +175,481 @@ conflicts:
     candidates:
       - games-workshop/99120202039
       - games-workshop/99120202069
+  - type: ambiguous-join
+    keys:
+      - ret-radaddel:ogor-mawtribes-tyrant
+    name: 'Ogor Mawtribes: Tyrant'
+    candidates:
+      - games-workshop/99120213022
+      - games-workshop/99120213039
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99061464199'
+      - '99061464224'
+    keys:
+      - legacy-catalog:games-workshop/middle-earth/heroes/lords-of-the-dunedaintm
+      - mfr-gw-algolia:P-188904-99061464224
+      - mfr-gw-trade:99061464224
+      - ret-goblingaming:forces-of-good-lords-of-the-dunedain
+      - ret-radaddel:/lords-of-the-dunedain-lotr-good
+      - ret-radaddel:lords-of-the-dunedain-lotr-good
+      - ret-tistaminis:middle-earth-strategy-battles-lords-of-the-dunedain
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070101055'
+      - '99120101468'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-librarian-in-phobos-armour
+      - mfr-gw-algolia:prod4510313-99070101055
+      - mfr-gw-algolia:prod4510313-99120101468
+      - mfr-gw-trade:99070101055
+      - mfr-gw-trade:99120101468
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian-in-phobos-armour
+      - ret-goblingaming:space-marine-primaris-librarian-in-phobos-armour
+      - ret-radaddel:/space-marines-primaris-librarian-in-phobos-armour
+      - ret-radaddel:space-marines-primaris-librarian-in-phobos-armour
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070101059'
+      - '99120101470'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/space-marines/white-scars-primaris-upgrades-transfers
+      - mfr-gw-algolia:prod4510331-99070101059
+      - mfr-gw-algolia:prod4510331-99120101470
+      - mfr-gw-trade:99070101059
+      - ret-gamenerdz:/warhammer-40k-white-scars-primaris-upgrades-transfers
+      - ret-goblingaming:white-scar-primaris-upgrades-transfers
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070101063'
+      - '99120101474'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-librarian
+      - mfr-gw-algolia:prod4530142-99070101063
+      - mfr-gw-algolia:prod4530142-99120101474
+      - mfr-gw-trade:99070101063
+      - mfr-gw-trade:99120101474
+      - ret-goblingaming:space-marines-primaris-librarian
+      - ret-radaddel:/space-marines-primaris-librarian
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070101080'
+      - '99120101483'
+    keys:
+      - mfr-gw-trade:99070101080
+      - ret-goblingaming:games-workshop-warhammer-40k-space-marine-lieutenant-with-storm-shield
+      - ret-tistaminis:warhammer-space-marines-lieutenant-with-storm-shield
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070104012'
+      - '99120104122'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/aeldari/farseer-skyrunner
+      - legacy-catalog:games-workshop/warhammer-40k/aeldari/warlock-skyrunner
+      - mfr-gw-algolia:prod3650295-99070104012
+      - mfr-gw-algolia:prod3650295-99120104122
+      - mfr-gw-algolia:prod3660120-99070104012
+      - mfr-gw-algolia:prod3660120-99120104122
+      - mfr-gw-trade:99070104012
+      - ret-gamenerdz:/warhammer-40k-aeldari-farseer-skyrunner
+      - ret-goblingaming:eldar-farseer-skyrunner
+      - ret-radaddel:/aeldari-farseer-skyrunner
+      - ret-radaddel:aeldari-farseer-skyrunner
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108008'
+      - '99120108134'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/sister-dogmata
+      - mfr-gw-algolia:prod4650189-99070108008
+      - mfr-gw-algolia:prod4650189-99120108134
+      - mfr-gw-trade:99070108008
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-sister-dogmata
+      - ret-goblingaming:sister-dogmata-adepta-sororitas
+      - ret-radaddel:/adepta-sororitas-sister-dogmata
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108009'
+      - '99120108135'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/imagifier
+      - mfr-gw-algolia:prod4400126-99070108009
+      - mfr-gw-algolia:prod4400126-99120108135
+      - mfr-gw-trade:99070108009
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-imagifier-10th-edition
+      - ret-goblingaming:adepta-sororitas-imagifier
+      - ret-radaddel:/adepta-sororitas-imagifier
+      - ret-radaddel:adepta-sororitas-imagifier
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108010'
+      - '99120143001'
+    keys:
+      - arc-tistaminis:/products/adeptus-custodes-blade-champion
+      - arc-wargameportal:/products/blade-champion
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/blade-champion
+      - mfr-gw-algolia:prod4920184-99070108010
+      - mfr-gw-algolia:prod4920184-99120143001
+      - mfr-gw-trade:99070108010
+      - mfr-gw-trade:99120143001
+      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-blade-champion
+      - ret-goblingaming:adeptus-custodes-blade-champion-warhammer-40k-games-workshop
+      - ret-radaddel:/adeptus-custodes-blade-champion
+      - ret-radaddel:adeptus-custodes-blade-champion
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070108011'
+      - '99120108137'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/ministorum-priest
+      - mfr-gw-algolia:P-187771-99070108011
+      - mfr-gw-algolia:P-187771-99120108137
+      - mfr-gw-trade:99070108011
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-ministorum-priest
+      - ret-goblingaming:adepta-sororitas-ministorum-priest
+      - ret-radaddel:/adepta-sororitas-ministorum-priest
+      - ret-radaddel:adepta-sororitas-ministorum-priest
+      - ret-tistaminis:adepta-sororitas-ministorum-priest
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070112005'
+      - '99120112062'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/drukhari/haemonculus
+      - mfr-gw-algolia:prod3590121-99070112005
+      - mfr-gw-algolia:prod3590121-99120112062
+      - mfr-gw-trade:99070112005
+      - ret-goblingaming:dark-eldar-haemonculus
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070113007'
+      - '99120113107'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/tau-empire/kroot-trail-shaper
+      - mfr-gw-algolia:P-178206-99070113007
+      - mfr-gw-algolia:P-178206-99120113107
+      - mfr-gw-trade:99070113007
+      - ret-gamenerdz:/warhammer-40k-tau-empire-kroot-trail-shaper
+      - ret-goblingaming:warhammer-40k-tau-empire-kroot-trail-shaper
+      - ret-radaddel:/tau-empire-kroot-trail-shaper
+      - ret-radaddel:tau-empire-kroot-trail-shaper
+      - ret-tistaminis:tau-empire-kroot-trail-shaper
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070113008'
+      - '99120113108'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/tau-empire/kroot-flesh-shaper
+      - mfr-gw-algolia:P-178204-99070113008
+      - mfr-gw-algolia:P-178204-99120113108
+      - mfr-gw-trade:99070113008
+      - ret-gamenerdz:/warhammer-40k-tau-empire-kroot-flesh-shaper
+      - ret-goblingaming:warhammer-40k-tau-empire-kroot-flesh-shaper
+      - ret-radaddel:/tau-empire-kroot-flesh-shaper
+      - ret-radaddel:tau-empire-kroot-flesh-shaper
+      - ret-tistaminis:tau-empire-kroot-flesh-shaper
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070201011'
+      - '99120201227'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/skullgrinder
+      - mfr-gw-algolia:prod2780343-99070201011
+      - mfr-gw-trade:99070201011
+      - ret-goblingaming:bloodbound-skullgrinder
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070201012'
+      - '99120201228'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/slaughterpriest
+      - mfr-gw-algolia:prod2780344-99070201012
+      - mfr-gw-trade:99070201012
+      - ret-goblingaming:bloodbound-slaughterpriest
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070201014'
+      - '99120201229'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/gaunt-summoner-on-disc-of-tzeentch
+      - mfr-gw-algolia:prod3030207-99070201014
+      - mfr-gw-trade:99070201014
+      - ret-goblingaming:arcanites-gaunt-summoner-on-disc
+      - ret-tistaminis:chaos-daemons-gaunt-summoner-on-disc
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070201019'
+      - '99120201230'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/magister
+      - mfr-gw-algolia:prod3430127-99070201019
+      - mfr-gw-trade:99070201019
+      - ret-goblingaming:arcanites-tzeentch-magister
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070201020'
+      - '99120201231'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/gaunt-summoner
+      - mfr-gw-algolia:prod3420155-99070201020
+      - mfr-gw-trade:99070201020
+      - ret-goblingaming:arcanites-gaunt-summoner
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070206002'
+      - '99120206066'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/clawlord
+      - mfr-gw-algolia:prod2670141-99070206002
+      - mfr-gw-trade:99070206002
+      - ret-goblingaming:skaven-warlord-92489155
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070212004'
+      - '99120212049'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/high-gladiatrix
+      - mfr-gw-algolia:prod4940184-99070212004
+      - mfr-gw-trade:99070212004
+      - ret-goblingaming:high-gladiatrix
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070218011'
+      - '99120218102'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/knight-questor
+      - mfr-gw-algolia:prod3330180-99070218011
+      - mfr-gw-algolia:prod3330180-99120218102
+      - mfr-gw-trade:99070218011
+      - ret-goblingaming:stormcast-eternals-knight-questor-92489248
+      - ret-tistaminis:warhammer-stormcast-eternals-knight-questor
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99070219005'
+      - '99120219035'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/isharann-soulscryer
+      - mfr-gw-algolia:P-219694-99120219035
+      - mfr-gw-trade:99070219005
+      - mfr-gw-trade:99120219035
+      - ret-gamenerdz:/warhammer-age-of-sigmar-idoneth-deepkin-isharann-soulscryer
+      - ret-goblingaming:isharann-soulscryer-idoneth-deepkin
+      - ret-radaddel:/idoneth-deepkin-isharann-soulscryer
+      - ret-radaddel:idoneth-deepkin-isharann-soulscryer
+      - ret-tistaminis:warhammer-idoneth-deepkin-isharann-soulscryer-new
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120108020'
+      - '99120108142'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/sister-superior-amalia-novena
+      - mfr-gw-algolia:prod4240157-99120108020
+      - mfr-gw-trade:99120108020
+      - ret-goblingaming:sister-superior-amalia-novena
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120108051'
+      - '99120108143'
+    keys:
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/dialogus
+      - mfr-gw-algolia:prod4400128-99120108051
+      - mfr-gw-algolia:prod4400128-99120108143
+      - mfr-gw-trade:99120108051
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-dialogus
+      - ret-goblingaming:adepta-sororitas-dialogus
+      - ret-radaddel:/adepta-sororitas-dialogus
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120108076'
+      - '99120143002'
+    keys:
+      - arc-wargameportal:/products/captain-general-trajann-valoris
+      - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/captain-general-trajann-valoris
+      - mfr-gw-algolia:prod3700244-99120108076
+      - mfr-gw-algolia:prod3700244-99120143002
+      - mfr-gw-trade:99120108076
+      - mfr-gw-trade:99120143002
+      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-captain-general-trajann-valoris
+      - ret-goblingaming:trajann-valoris
+      - ret-radaddel:/adeptus-custodes-trajann-valoris
+      - ret-radaddel:adeptus-custodes-trajann-valoris
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120204047'
+      - '99120204054'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/twistweald
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/twistweald-2
+      - mfr-gw-algolia:P-192707-99120204047
+      - mfr-gw-algolia:P-221478-99120204054
+      - mfr-gw-trade:99120204047
+      - mfr-gw-trade:99120204054
+      - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-twistweald
+      - ret-goblingaming:warcry-twistweald
+      - ret-tistaminis:warcry-twistweald
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120207136'
+      - '99120207250'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-royal-beastflayers
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-royal-beastflayers-2
+      - mfr-gw-algolia:prod5110225-99120207136
+      - mfr-gw-trade:99120207136
+      - mfr-gw-trade:99120207250
+      - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-royal-beastflayers
+      - ret-goblingaming:age-of-sigmar-warcry-flesh-eater-courts-royal-beastflayers-warband
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120207156'
+      - '99120207249'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-pyregheists
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-pyregheists-2
+      - mfr-gw-algolia:P-184001-99120207156
+      - mfr-gw-algolia:P-221468-99120207249
+      - mfr-gw-trade:99120207156
+      - mfr-gw-trade:99120207249
+      - ret-goblingaming:warcry-pyregheists
+      - ret-tistaminis:warcry-pyregheists
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120207184'
+      - '99120207251'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-teratic-cohort
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-teratic-cohort-2
+      - mfr-gw-algolia:P-192710-99120207184
+      - mfr-gw-algolia:P-221475-99120207251
+      - mfr-gw-trade:99120207184
+      - mfr-gw-trade:99120207251
+      - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-teratic-cohort
+      - ret-goblingaming:warcry-teratic-cohort
+      - ret-tistaminis:warcry-teratic-cohort
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120210061'
+      - '99120210069'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/warcry-ydrilan-riverblades
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/warcry-ydrilan-riverblades-2
+      - mfr-gw-algolia:P-184002-99120210061
+      - mfr-gw-algolia:P-221482-99120210069
+      - mfr-gw-trade:99120210061
+      - mfr-gw-trade:99120210069
+      - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-ydrilan-riverblades
+      - ret-goblingaming:warcry-ydrilan-riverblades
+      - ret-tistaminis:warcry-ydrilan-riverblades
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120218078'
+      - '99120218105'
+    keys:
+      - legacy-catalog:games-workshop/other-games/grand-alliance-order/questor-soulsworn
+      - legacy-catalog:games-workshop/other-games/grand-alliance-order/questor-soulsworn-2
+      - mfr-gw-algolia:P-221470-99120218105
+      - mfr-gw-trade:99120218078
+      - mfr-gw-trade:99120218105
+      - ret-goblingaming:age-of-sigmar-warcry-stormcast-eternals-questor-soulsworn-warband
+      - ret-tistaminis:warcry-questor-soulsworn-warband
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99120231005'
+      - '99120299088'
+    keys:
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/chaos-gargant
+      - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/mancrusher-gargant
+      - legacy-catalog:games-workshop/age-of-sigmar/race/aleguzzler-gargant
+      - mfr-gw-algolia:P-259009-99120231005
+      - mfr-gw-algolia:prod5000329-99120299088
+      - mfr-gw-algolia:prod5000408-99120299088
+      - mfr-gw-algolia:prod5000409-99120299088
+      - mfr-gw-trade:99120299088
+      - ret-goblingaming:mancrusher-gargants-sons-of-behemat-age-of-sigmar-99120299063
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99811462023'
+      - '99811462046'
+    keys:
+      - legacy-catalog:games-workshop/middle-earth/war-machine/mordortm-war-catapult
+      - mfr-gw-algolia:P-201874-99811462046
+      - mfr-gw-trade:99811462023
+      - mfr-gw-trade:99811462046
+      - ret-goblingaming:forces-of-evil-mordor-war-catapult
+      - ret-radaddel:/mordor-war-catapult-lotr-evil
+      - ret-radaddel:mordor-war-catapult-lotr-evil
+      - ret-tistaminis:lord-of-the-rings-mordor-war-catapult-pre-order
+  - type: multi-code-entity
+    manufacturer: games-workshop
+    codes:
+      - '99811464108'
+      - '99811499002'
+    keys:
+      - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/gondortm-battlecry-trebuchet
+      - mfr-gw-algolia:P-201862-99811464108
+      - mfr-gw-trade:99811464108
+      - mfr-gw-trade:99811499002
+      - ret-goblingaming:forces-of-good-gondor-battlecry-trebuchet
+      - ret-radaddel:/gondor-battlecry-trebuchet-lotr-good
+      - ret-radaddel:gondor-battlecry-trebuchet-lotr-good
+      - ret-tistaminis:lord-of-the-rings-gondor-battlecry-trebuchet-pre-order
   - type: multi-code-entity
     manufacturer: wyrd-games
     codes:
       - WYR24507
+      - WYR24508
       - WYR24602
     keys:
       - legacy-catalog:wyrd-games/malifaux/outcasts/malifaux-fourth-edition-captain-zipp-dread-pirate
       - mfr-wyrd-store:malifaux-fourth-edition-captain-zipp-dread-pirate
       - ret-gamenerdz:/malifaux-4e-captain-zipp-dread-pirate
+      - ret-goblingaming:captain-zipp-dread-pirate-4th-edition-bayou
+      - ret-tistaminis:malifaux-outcasts-captain-zipp-dread-pirate
+  - type: multi-code-entity
+    manufacturer: wyrd-games
+    codes:
+      - WYR24701
+      - WYR24702
+    keys:
+      - mfr-wyrd-store:malifaux-fourth-edition-asami-tanaka-shintaku
+      - ret-gamenerdz:/malifaux-4e-asami-tanaka-shintaku
+      - ret-goblingaming:asami-tanaka-shintaku-4th-edition-ten-thunders
+      - ret-tistaminis:malifaux-ten-thunders-asami-tanaka-shintaku
+  - type: unresolved-supersession
+    retired: games-workshop/99070219005
+    surviving: games-workshop/99070219008
+    missing:
+      - games-workshop/99070219005

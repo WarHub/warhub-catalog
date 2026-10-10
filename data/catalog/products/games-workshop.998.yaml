@@ -842,7 +842,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 31.85
@@ -1534,7 +1534,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     url: https://www.warhammer.com/en-GB/shop/Eisenhorn-2018
@@ -1818,26 +1818,6 @@ products:
       - ret-radaddel:/moria-goblin-commanders-lotr-evil
       - ret-radaddel:moria-goblin-commanders-lotr-evil
       - ret-tistaminis:warhammer-lord-of-the-rings-moria-goblin-commanders
-  - id: games-workshop/99811462023
-    name: MORDOR WAR CATAPULT
-    manufacturer: games-workshop
-    productCode: '99811462023'
-    sku: '99811462023'
-    ean: '5011921037247'
-    eanConfidence: confirmed
-    gameSystems:
-      - middle-earth
-    gameSystemsBasis: code
-    settings:
-      - middle-earth
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-23'
-    priceGbp: 42.5
-    evidence:
-      - mfr-gw-trade:99811462023
   - id: games-workshop/99811462032
     name: Azog™ (foot & mounted)
     manufacturer: games-workshop
@@ -1960,7 +1940,9 @@ products:
     productCode: '99811462046'
     sku: '99811462046'
     ean: '5011921238088'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921037247'
     gameSystems:
       - middle-earth
     faction: war-machine
@@ -1988,6 +1970,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/middle-earth/war-machine/mordortm-war-catapult
       - mfr-gw-algolia:P-201874-99811462046
+      - mfr-gw-trade:99811462023
       - mfr-gw-trade:99811462046
       - ret-goblingaming:forces-of-evil-mordor-war-catapult
       - ret-radaddel:/mordor-war-catapult-lotr-evil
@@ -2089,7 +2072,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 67.2
@@ -2130,7 +2113,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 49.4
@@ -2173,7 +2156,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 49.4
@@ -2457,7 +2440,9 @@ products:
     productCode: '99811464108'
     sku: '99811464108'
     ean: '5011921238026'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921024605'
     gameSystems:
       - middle-earth
     faction: the-lord-of-the-rings-good
@@ -2486,6 +2471,7 @@ products:
       - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/gondortm-battlecry-trebuchet
       - mfr-gw-algolia:P-201862-99811464108
       - mfr-gw-trade:99811464108
+      - mfr-gw-trade:99811499002
       - ret-goblingaming:forces-of-good-gondor-battlecry-trebuchet
       - ret-radaddel:/gondor-battlecry-trebuchet-lotr-good
       - ret-radaddel:gondor-battlecry-trebuchet-lotr-good
@@ -2601,7 +2587,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 39.35
@@ -2615,6 +2601,7 @@ products:
       - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-evil/the-dark-lord-saurontm
       - mfr-gw-algolia:prod1500537a-99811466002
       - mfr-gw-trade:99811466002
+      - ret-goblingaming:lord-of-the-rings-the-dark-lord-sauron
       - ret-radaddel:/dark-lord-sauron-lotr-evil
       - ret-radaddel:dark-lord-sauron-lotr-evil
   - id: games-workshop/99811466017
@@ -2779,26 +2766,6 @@ products:
       - ret-radaddel:/the-watcher-in-the-water-lotr-evil
       - ret-radaddel:the-watcher-in-the-water-lotr-evil
       - ret-tistaminis:lord-of-the-rings-the-watcher-in-the-water-pre-order
-  - id: games-workshop/99811499002
-    name: GONDOR BATTLECRY TREBUCHET
-    manufacturer: games-workshop
-    productCode: '99811499002'
-    sku: '99811499002'
-    ean: '5011921024605'
-    eanConfidence: confirmed
-    gameSystems:
-      - middle-earth
-    gameSystemsBasis: code
-    settings:
-      - middle-earth
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-23'
-    priceGbp: 42.5
-    evidence:
-      - mfr-gw-trade:99811499002
   - id: games-workshop/99811499003
     name: Mordor Troll Chieftain
     manufacturer: games-workshop
@@ -3259,7 +3226,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.5
     url: https://www.warhammer.com/en-GB/shop/Ortruum-8-8-Psi-Hound-2019
@@ -3828,7 +3795,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.5
     url: https://www.warhammer.com/en-GB/shop/necromunda-cawdor-sheen-birds-2021
@@ -5066,7 +5033,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     url: https://www.warhammer.com/en-GB/shop/necromunda-delaque-rogue-doc-and-gang-lookout-2023

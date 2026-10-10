@@ -1079,7 +1079,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 8.99
     priceEur: 12.0
@@ -1712,7 +1712,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 10.5
+    priceGbp: 13.5
     priceEur: 17.8
     url: https://www.goblingaming.co.uk/products/gaunts-ghosts-the-founding-omnibus
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/81IKUfFFygL.jpg?v=1644847856
@@ -2459,7 +2459,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 6.99
+    priceGbp: 8.99
     priceEur: 11.95
     priceCad: 18.69
     url: https://www.goblingaming.co.uk/products/morvenn-vahl-spear-of-faith-pb
@@ -2658,7 +2658,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 6.99
+    priceGbp: 8.99
     url: https://www.goblingaming.co.uk/products/da-red-gobbo-collection-paperback
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60100181527_BLDaRedGobboCollection2025.jpg?v=1761302489
     evidence:
@@ -3071,6 +3071,27 @@ products:
       - ret-radaddel:/legends-of-the-waaagh-an-ork-omnibus-englisch
       - ret-radaddel:legends-of-the-waaagh-an-ork-omnibus-englisch
       - ret-tistaminis:legends-of-the-waaagh-pb
+  - id: games-workshop/60100181544
+    name: Master Of Rites - Paperback
+    manufacturer: games-workshop
+    productCode: '60100181544'
+    sku: '60100181544'
+    ean: '9781836093022'
+    eanConfidence: provisional
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 8.49
+    url: https://www.goblingaming.co.uk/products/master-of-rites-pb
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60100181544_BLMasterOfRites2026.jpg?v=1789727237
+    evidence:
+      - ret-goblingaming:master-of-rites-pb
   - id: games-workshop/60100181545
     name: VETERANS OF THE FALL (PB)
     manufacturer: games-workshop
@@ -3323,7 +3344,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 8.49
+    priceGbp: 8.99
     priceEur: 12.2
     priceCad: 18.69
     url: https://www.goblingaming.co.uk/products/belisarius-cawl-archmagos-pb
@@ -3348,7 +3369,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 8.49
+    priceGbp: 8.99
     priceEur: 12.0
     url: https://www.goblingaming.co.uk/products/the-horus-heresy-false-gods-paperback
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_08_60100181555_BLTHHFalseGods2026.jpg?v=1786718319
@@ -3371,7 +3392,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 8.49
+    priceGbp: 8.99
     priceEur: 12.2
     priceCad: 18.69
     url: https://www.goblingaming.co.uk/products/the-relentless-dead-pb
@@ -3381,7 +3402,7 @@ products:
       - ret-radaddel:the-relentless-dead-pb-englisch
       - ret-tistaminis:the-relentless-dead-pb
   - id: games-workshop/60100181557
-    name: Demolisher (Pb)
+    name: Demolisher - Paperback
     manufacturer: games-workshop
     productCode: '60100181557'
     sku: '60100181557'
@@ -3396,13 +3417,97 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-25'
-    priceGbp: 8.49
+    priceGbp: 8.99
     priceEur: 12.1
     url: https://www.goblingaming.co.uk/products/demolisher-pb
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60100181557_BLDemolisher2026.jpg?v=1787325739
     evidence:
       - ret-goblingaming:demolisher-pb
       - ret-radaddel:demolisher-paperback-englisch
+  - id: games-workshop/60100181558
+    name: 'Astra Militarum: Auxilia - Paperback'
+    manufacturer: games-workshop
+    productCode: '60100181558'
+    sku: '60100181558'
+    ean: '9781836094630'
+    eanConfidence: provisional
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 8.49
+    url: https://www.goblingaming.co.uk/products/astra-militarum-auxilia-paperback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60100181558_BLAuxilia2026.jpg?v=1790934443
+    evidence:
+      - ret-goblingaming:astra-militarum-auxilia-paperback
+  - id: games-workshop/60100181559
+    name: Apostle - Paperback
+    manufacturer: games-workshop
+    productCode: '60100181559'
+    sku: '60100181559'
+    ean: '9781836094623'
+    eanConfidence: provisional
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 8.49
+    url: https://www.goblingaming.co.uk/products/apostle-paperback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60100181559_BLApostle2026.jpg?v=1790934542
+    evidence:
+      - ret-goblingaming:apostle-paperback
+  - id: games-workshop/60100181560
+    name: 'Dawn Of Fire: Crusade Of Vengeance'
+    manufacturer: games-workshop
+    productCode: '60100181560'
+    sku: '60100181560'
+    ean: '9781804076552'
+    eanConfidence: provisional
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 14.45
+    url: https://www.goblingaming.co.uk/products/dawn-of-fire-crusade-of-vengeance
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60100181560_BLDawnOfFireCrusadeOfVengeance2026.jpg?v=1789726940
+    evidence:
+      - ret-goblingaming:dawn-of-fire-crusade-of-vengeance
+  - id: games-workshop/60100181561
+    name: Dropsite Massacre - Paperback
+    manufacturer: games-workshop
+    productCode: '60100181561'
+    sku: '60100181561'
+    ean: '9781836094661'
+    eanConfidence: provisional
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 8.49
+    url: https://www.goblingaming.co.uk/products/dropsite-massacre-paperback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60100181561_BLDropsiteMassacre2026.jpg?v=1790933999
+    evidence:
+      - ret-goblingaming:dropsite-massacre-paperback
   - id: games-workshop/60100181599
     name: 'HORUS HERESY: THE MASTER OF MANKIND'
     manufacturer: games-workshop
@@ -5295,7 +5400,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 6.29
+    priceGbp: 8.09
     priceEur: 11.1
     url: https://www.goblingaming.co.uk/products/games-workshop-black-library-warhammer-40k-dark-imperium-godblight-pb-novel
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_08_60100181799_DarkImperiumGodblightENGPB.jpg?v=1660316152
@@ -5448,12 +5553,16 @@ products:
       - warhammer-40k
     settingsBasis: code
     category: book
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
     priceGbp: 8.99
+    url: https://www.goblingaming.co.uk/products/black-library-inferno-presentsthe-emperors-finest
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_11_60100181807_EmperorsFinestInfernoENGPBP.jpg?v=1667588385
     evidence:
       - mfr-gw-trade:60100181807
+      - ret-goblingaming:black-library-inferno-presentsthe-emperors-finest
   - id: games-workshop/60100181808
     name: LUPERCAL'S WAR PB (ENGLISH)
     manufacturer: games-workshop
@@ -8256,7 +8365,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 12.75
+    priceGbp: 13.5
     priceEur: 17.75
     priceCad: 21.25
     url: https://www.goblingaming.co.uk/products/witch-hunters-the-omnibus-paperback
@@ -8595,7 +8704,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 11.9
+    priceGbp: 15.3
     priceEur: 19.2
     priceCad: 25.5
     url: https://www.goblingaming.co.uk/products/the-old-world-the-rise-of-nagash-pb
@@ -8606,6 +8715,25 @@ products:
       - ret-radaddel:/the-old-world-the-rise-of-nagash-pb-englisch
       - ret-radaddel:the-old-world-the-rise-of-nagash-pb-englisch
       - ret-tistaminis:the-old-world-the-rise-of-nagash-pb-pre-order
+  - id: games-workshop/60102781006
+    name: The Sundering - Paperback
+    manufacturer: games-workshop
+    productCode: '60102781006'
+    sku: '60102781006'
+    gameSystemsBasis: setting
+    settings:
+      - old-world
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 14.45
+    url: https://www.goblingaming.co.uk/products/the-sundering-pb
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60102781006_BLSundering2026.jpg?v=1789727082
+    evidence:
+      - ret-goblingaming:the-sundering-pb
   - id: games-workshop/60109981006
     name: INFERNO! VOLUME 1 (PB)
     manufacturer: games-workshop
@@ -8985,7 +9113,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 36.12
+    priceGbp: 37.4
     priceEur: 45.0
     priceCad: 70.55
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-spearhead-sand-bone-gaming-pack
@@ -9016,7 +9144,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 37.6
+    priceGbp: 44.1
     priceEur: 50.4
     priceCad: 79.05
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-spearhead-city-of-ash-gaming-pack
@@ -9625,7 +9753,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 37.5
+    priceGbp: 42.5
     url: https://www.gamenerdz.com/warhammer-underworlds-nethermaze-rivals-of-harrowdeep
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_04_60120799003_ENGRivalsHarrowdeepStock.jpg?v=1650641038
     evidence:
@@ -9716,7 +9844,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 89.25
+    priceGbp: 92.65
     priceEur: 110.5
     url: https://www.goblingaming.co.uk/products/warhammer-40000-getting-started-with-space-marines
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/EB200a-6017010100360-52GettingStartedWithSpaceMarines-ENG.jpg?v=1783699990
@@ -9745,7 +9873,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 89.25
+    priceGbp: 92.65
     priceEur: 110.5
     url: https://www.goblingaming.co.uk/products/warhammer-40000-getting-started-with-orks
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/EB200a-6017010300260-53GettingStartedWithOrks-ENG.jpg?v=1783699983
