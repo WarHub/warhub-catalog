@@ -680,7 +680,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/afrika-korps-plastic-frame
@@ -773,7 +773,7 @@ products:
     categoryBasis: lexicon
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/german-veteran-infantry-sprue
@@ -787,6 +787,66 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/german-veteran-infantry-sprue
       - mfr-warlord-store:german-veteran-infantry-sprue
+  - id: warlord-games/4030100036
+    name: German Weapons Crew Frame
+    manufacturer: warlord-games
+    productCode: '4030100036'
+    sku: '4030100036'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/german-weapons-crew-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030100036GermanWeaponsCrewFrame.jpg?v=1789049961
+    evidence:
+      - mfr-warlord-store:german-weapons-crew-frame
+  - id: warlord-games/4030100037
+    name: German Heavy Weapons Frame
+    manufacturer: warlord-games
+    productCode: '4030100037'
+    sku: '4030100037'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/german-heavy-weapons-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030100037GermanHeavyWeaponsFrame.jpg?v=1789049737
+    evidence:
+      - mfr-warlord-store:german-heavy-weapons-frame
+  - id: warlord-games/4030100038
+    name: German Heer Pak 40 Anti-Tank Gun Frame
+    manufacturer: warlord-games
+    productCode: '4030100038'
+    sku: '4030100038'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 12.5
+    url: https://store.warlordgames.com/products/german-heer-pak-40-anti-tank-gun-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030100038GermanHeerPak40Anti-TankGunFrame.jpg?v=1789051476
+    evidence:
+      - mfr-warlord-store:german-heer-pak-40-anti-tank-gun-frame
   - id: warlord-games/403010010
     name: Bolt Action CSM Stanley Hollis VC Ltd Edition Miniature New
     manufacturer: warlord-games
@@ -3116,6 +3176,8 @@ products:
     manufacturer: warlord-games
     productCode: '403012036'
     sku: '403012036'
+    ean: '5060917998901'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     gameSystemsBasis: code
@@ -6861,7 +6923,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 14.5
     priceEur: 13.95
@@ -7931,6 +7993,66 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Studebaker_frames_bagged.png?v=1775127850
     evidence:
       - mfr-warlord-store:studebaker-frames-only
+  - id: warlord-games/4030200011
+    name: US Heavy Weapons Crew Frame
+    manufacturer: warlord-games
+    productCode: '4030200011'
+    sku: '4030200011'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/us-heavy-weapons-crew-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030200011USHeavyWeaponsCrewFrame.jpg?v=1789051842
+    evidence:
+      - mfr-warlord-store:us-heavy-weapons-crew-frame
+  - id: warlord-games/4030200012
+    name: US Heavy Weapons Frame
+    manufacturer: warlord-games
+    productCode: '4030200012'
+    sku: '4030200012'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/us-heavy-weapons-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030200012USHeavyWeaponsFrame.jpg?v=1789051949
+    evidence:
+      - mfr-warlord-store:us-heavy-weapons-frame
+  - id: warlord-games/4030200013
+    name: 57mm/6-PDR Anti Tank Gun
+    manufacturer: warlord-games
+    productCode: '4030200013'
+    sku: '4030200013'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 12.5
+    url: https://store.warlordgames.com/products/57mm-6-pdr-anti-tank-gun
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403020001357mm6-PDRAntiTankGun.jpg?v=1789051560
+    evidence:
+      - mfr-warlord-store:57mm-6-pdr-anti-tank-gun
   - id: warlord-games/4030210002
     name: US Airborne M42 frame (2025) Sprue
     manufacturer: warlord-games
@@ -8058,7 +8180,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/8th-army-desert-rats-frame
@@ -8164,6 +8286,46 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/british/british-canadian-infantry-winter-2025-sprue
       - mfr-warlord-store:british-canadian-infantry-winter-2025-sprue
+  - id: warlord-games/4030300018
+    name: British Weapons Crew Frame
+    manufacturer: warlord-games
+    productCode: '4030300018'
+    sku: '4030300018'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/british-weapons-crew-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030300018BritishWeaponsCrewFrame.jpg?v=1789051632
+    evidence:
+      - mfr-warlord-store:british-weapons-crew-frame
+  - id: warlord-games/4030300019
+    name: British Heavy Weapons Frame
+    manufacturer: warlord-games
+    productCode: '4030300019'
+    sku: '4030300019'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/british-heavy-weapons-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030300019BritishHeavyWeaponsFrame.jpg?v=1789051720
+    evidence:
+      - mfr-warlord-store:british-heavy-weapons-frame
   - id: warlord-games/4030310001
     name: British Airborne Sprue
     manufacturer: warlord-games
@@ -8180,7 +8342,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/british-airborne-plastics-frame
@@ -8282,7 +8444,7 @@ products:
     categoryBasis: lexicon
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/soviet-army-infantry-2025-sprue
@@ -9623,6 +9785,8 @@ products:
     manufacturer: warlord-games
     productCode: '403212013'
     sku: '403212013'
+    ean: '5060917997270'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -10191,6 +10355,8 @@ products:
     manufacturer: warlord-games
     productCode: '403213106'
     sku: '403213106'
+    ean: '5060917995832'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -10239,6 +10405,8 @@ products:
     manufacturer: warlord-games
     productCode: 403213107X
     sku: 403213107X
+    ean: '5060917995849'
+    eanConfidence: confirmed
     faction: general
     gameSystemsBasis: unknown
     settingsBasis: unknown
@@ -10547,6 +10715,8 @@ products:
     manufacturer: warlord-games
     productCode: '403214007'
     sku: '403214007'
+    ean: '5060917997034'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -10886,6 +11056,8 @@ products:
     manufacturer: warlord-games
     productCode: '403216003'
     sku: '403216003'
+    ean: '5060917997386'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -11085,6 +11257,8 @@ products:
     manufacturer: warlord-games
     productCode: '403411002'
     sku: '403411002'
+    ean: '5060917994545'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general

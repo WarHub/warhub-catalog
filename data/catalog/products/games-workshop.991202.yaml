@@ -150,7 +150,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     url: https://www.warhammer.com/en-GB/shop/Rotbringers-Bloab-Rotspawned
@@ -254,7 +254,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.5
     url: https://www.warhammer.com/en-GB/shop/Khorne-Bloodbound-Mighty-Skullcrushers
@@ -1849,17 +1849,13 @@ products:
       - age-of-sigmar
     settingsBasis: derived
     category: miniatures
-    categoryBasis: mapped
+    categoryBasis: code
     status: current
-    availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 35.15
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-warcry-chaos-legionnaires
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/ProductImageComingSoon_92e7065a-efe4-41f9-b6fd-bf85537c2cce.webp?v=1756287423
     evidence:
       - mfr-gw-trade:99120201138
       - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-chaos-legionnaires
-      - ret-goblingaming:warcry-chaos-legionaires-heart-of-ghur-games-workshop
   - id: games-workshop/99120201139
     name: 'WARCRY: DARKOATH SAVAGERS'
     manufacturer: games-workshop
@@ -2025,7 +2021,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 36.1
+    priceGbp: 38.95
     url: https://www.warhammer.com/en-GB/shop/maggotkin-of-nurgle-rotmire-creed-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120201145_RotmireCreed2.jpg
     description: |-
@@ -2232,7 +2228,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.5
     priceEur: 69.6
@@ -2721,7 +2717,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 72.5
     priceEur: 73.7
@@ -3523,7 +3519,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 42.75
+    priceGbp: 50.15
     priceEur: 60.6
     priceCad: 96.05
     url: https://www.warhammer.com/en-GB/shop/disciples-of-tzeentch-seekers-of-silver-2026
@@ -4001,6 +3997,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/magister-on-disc-of-tzeentch
       - mfr-gw-algolia:P-238589-99120201216
       - mfr-gw-trade:99120201216
+      - ret-goblingaming:magister-on-disc-of-tzeentch-disciples-of-tzeentch-age-of-sigmar-99129915057
   - id: games-workshop/99120201217
     name: 'MAGGOTKIN OF NURGLE: THE PUSTULES'
     manufacturer: games-workshop
@@ -4020,7 +4017,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 48.45
+    priceGbp: 50.15
     priceEur: 59.2
     priceCad: 96.05
     url: https://www.goblingaming.co.uk/products/maggotkin-of-nurgle-the-pustules
@@ -4458,6 +4455,7 @@ products:
     evidence:
       - mfr-gw-algolia:P-221460-99120201250
       - mfr-gw-trade:99120201250
+      - ret-goblingaming:warcry-centaurion-marshal-heart-of-ghur-games-workshop
   - id: games-workshop/99120201251
     name: Chaos Legionnaires
     manufacturer: games-workshop
@@ -4502,6 +4500,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/chaos-legionnaires-2
       - mfr-gw-algolia:P-221462-99120201251
       - mfr-gw-trade:99120201251
+      - ret-goblingaming:warcry-chaos-legionaires-heart-of-ghur-games-workshop
   - id: games-workshop/99120201252
     name: Rotmire Creed
     manufacturer: games-workshop
@@ -4607,7 +4606,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 95.0
     priceEur: 98.2
@@ -4753,7 +4752,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 131.75
+    priceGbp: 136.0
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-battleforce-disciples-of-tzeentch-warpflame-cavalcade
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/99120201262_DisciplesofTzeentchWarpflameCavalcade31.jpg?v=1770396636
     evidence:
@@ -5350,16 +5349,11 @@ products:
       - age-of-sigmar
     settingsBasis: derived
     category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 35.15
-    url: https://www.goblingaming.co.uk/products/age-of-sigmar-warcry-wildercorps-hunters
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/99120202051_WCWildercorpHunters05.jpg?v=1712332697
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120202051
-      - ret-goblingaming:age-of-sigmar-warcry-wildercorps-hunters
   - id: games-workshop/99120202052
     name: 'CITIES OF SIGMAR: NORGRIMM''S RUNE THRONG'
     manufacturer: games-workshop
@@ -5801,7 +5795,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 130.0
     priceEur: 130.9
@@ -5857,7 +5851,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 48.45
+    priceGbp: 50.15
     priceEur: 62.95
     priceCad: 96.05
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-regiments-of-renown-cities-of-sigmar-ven-denst-s-hounds
@@ -6006,6 +6000,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/wildercorps-hunters-2
       - mfr-gw-algolia:P-221480-99120202076
       - mfr-gw-trade:99120202076
+      - ret-goblingaming:age-of-sigmar-warcry-wildercorps-hunters
       - ret-tistaminis:warcry-wildercorps-hunters
   - id: games-workshop/99120204012
     name: SYLVANETH DRYADS
@@ -6785,7 +6780,9 @@ products:
     productCode: '99120204047'
     sku: '99120204047'
     ean: '5011921226665'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921261529'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-order
@@ -6823,7 +6820,9 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/twistweald
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/twistweald-2
       - mfr-gw-algolia:P-192707-99120204047
+      - mfr-gw-algolia:P-221478-99120204054
       - mfr-gw-trade:99120204047
+      - mfr-gw-trade:99120204054
       - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-twistweald
       - ret-goblingaming:warcry-twistweald
       - ret-tistaminis:warcry-twistweald
@@ -6996,30 +6995,6 @@ products:
       - ret-radaddel:/sylvaneth-outcast-spitegrove
       - ret-radaddel:sylvaneth-outcast-spitegrove
       - ret-tistaminis:sylvaneth-outcast-spitegrove-pre-order
-  - id: games-workshop/99120204054
-    name: Twistweald
-    manufacturer: games-workshop
-    productCode: '99120204054'
-    sku: '99120204054'
-    ean: '5011921261529'
-    eanConfidence: confirmed
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: stated
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-23'
-    priceGbp: 40.0
-    url: https://www.warhammer.com/en-GB/shop/sylvaneth-twistweald-2025
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60120299006_ENGWCBriarBone2.jpg
-    evidence:
-      - mfr-gw-algolia:P-221478-99120204054
-      - mfr-gw-trade:99120204054
   - id: games-workshop/99120204056
     name: 'Battleforce: Sylvaneth – Strongroot Grove'
     manufacturer: games-workshop
@@ -7736,7 +7711,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -8630,7 +8605,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 52.0
     url: https://www.warhammer.com/en-GB/shop/Pestilens-Plague-Furnace
@@ -9684,7 +9659,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceCad: 54.0
@@ -9700,6 +9675,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/plaguepack
       - mfr-gw-algolia:P-189590-99120206062
       - mfr-gw-trade:99120206062
+      - ret-goblingaming:skaven-plaguepack
       - ret-tistaminis:skaven-plaguepack
   - id: games-workshop/99120206065
     name: 'SKAVEN: WARLOCK GALVANEER'
@@ -9832,7 +9808,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 49.0
     url: https://www.warhammer.com/en-GB/shop/Coven-Throne
@@ -11959,7 +11935,9 @@ products:
     productCode: '99120207136'
     sku: '99120207136'
     ean: '5011921195862'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921261505'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-death
@@ -11999,6 +11977,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-royal-beastflayers-2
       - mfr-gw-algolia:prod5110225-99120207136
       - mfr-gw-trade:99120207136
+      - mfr-gw-trade:99120207250
       - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-royal-beastflayers
       - ret-goblingaming:age-of-sigmar-warcry-flesh-eater-courts-royal-beastflayers-warband
   - id: games-workshop/99120207137
@@ -12023,7 +12002,7 @@ products:
     evidence:
       - mfr-gw-trade:99120207137
   - id: games-workshop/99120207138
-    name: LAUKA VAI MOTHER OF NIGHTMARES
+    name: Vengorian Lord
     manufacturer: games-workshop
     productCode: '99120207138'
     sku: '99120207138'
@@ -12034,16 +12013,20 @@ products:
     supersededBy: games-workshop/99120207229
     gameSystems:
       - age-of-sigmar
-    faction: grand-alliance-death
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - age-of-sigmar
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
+    priceGbp: 44.5
+    url: https://www.warhammer.com/en-GB/shop/Vengorian-Lord-2021
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120207086_VangLordLead.jpg
     evidence:
+      - mfr-gw-algolia:prod4640259-99120207138
       - mfr-gw-trade:99120207138
   - id: games-workshop/99120207139
     name: 'SOULBLIGHT GRAVELORDS: RADUKAR THE BEAST'
@@ -12546,7 +12529,9 @@ products:
     productCode: '99120207156'
     sku: '99120207156'
     ean: '5011921204076'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921261475'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-death
@@ -12587,7 +12572,9 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-pyregheists
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-pyregheists-2
       - mfr-gw-algolia:P-184001-99120207156
+      - mfr-gw-algolia:P-221468-99120207249
       - mfr-gw-trade:99120207156
+      - mfr-gw-trade:99120207249
       - ret-goblingaming:warcry-pyregheists
       - ret-tistaminis:warcry-pyregheists
   - id: games-workshop/99120207157
@@ -13223,7 +13210,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -13468,7 +13455,9 @@ products:
     productCode: '99120207184'
     sku: '99120207184'
     ean: '5011921226689'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921261512'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-death
@@ -13511,7 +13500,9 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-teratic-cohort
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/warcry-teratic-cohort-2
       - mfr-gw-algolia:P-192710-99120207184
+      - mfr-gw-algolia:P-221475-99120207251
       - mfr-gw-trade:99120207184
+      - mfr-gw-trade:99120207251
       - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-teratic-cohort
       - ret-goblingaming:warcry-teratic-cohort
       - ret-tistaminis:warcry-teratic-cohort
@@ -13709,7 +13700,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 98.2
@@ -14378,6 +14369,7 @@ products:
     evidence:
       - mfr-gw-algolia:prod4380135-99120207218
       - mfr-gw-trade:99120207218
+      - ret-goblingaming:vokmortian-master-of-the-bone-tithe
   - id: games-workshop/99120207222
     name: Mortisan Soulreaper
     manufacturer: games-workshop
@@ -14544,7 +14536,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     url: https://www.warhammer.com/en-GB/shop/Soulblight-Gravelords-Fell-Bats-2021
@@ -14616,7 +14608,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     url: https://www.warhammer.com/en-GB/shop/Lauka-Vai-Mother-Of-Nightmares-2021
@@ -15228,74 +15220,6 @@ products:
       - mfr-gw-trade:99120207248
       - ret-goblingaming:age-of-sigmar-warcry-askurgan-trueblades
       - ret-tistaminis:warcry-askurgan-trueblades
-  - id: games-workshop/99120207249
-    name: Pyregheists
-    manufacturer: games-workshop
-    productCode: '99120207249'
-    sku: '99120207249'
-    ean: '5011921261475'
-    eanConfidence: confirmed
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: stated
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-23'
-    priceGbp: 39.5
-    url: https://www.warhammer.com/en-GB/shop/nighthaunt-pyregheists-2025
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60120299005_EngWCPyreAndFlood03.jpg
-    evidence:
-      - mfr-gw-algolia:P-221468-99120207249
-      - mfr-gw-trade:99120207249
-  - id: games-workshop/99120207250
-    name: 'FLESH-EATER COURTS: ROYAL BEASTFLAYERS'
-    manufacturer: games-workshop
-    productCode: '99120207250'
-    sku: '99120207250'
-    ean: '5011921261505'
-    eanConfidence: confirmed
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: code
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-23'
-    priceGbp: 35.5
-    evidence:
-      - mfr-gw-trade:99120207250
-  - id: games-workshop/99120207251
-    name: Teratic Cohort
-    manufacturer: games-workshop
-    productCode: '99120207251'
-    sku: '99120207251'
-    ean: '5011921261512'
-    eanConfidence: confirmed
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: stated
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-23'
-    priceGbp: 40.0
-    url: https://www.warhammer.com/en-GB/shop/ossiarch-bonereapers-teratic-cohort-2025
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60120299006_ENGWCBriarBone3.jpg
-    evidence:
-      - mfr-gw-algolia:P-221475-99120207251
-      - mfr-gw-trade:99120207251
   - id: games-workshop/99120207261
     name: 'Battleforce: Ossiarch Bonereapers – Null Myriad Phalanx'
     manufacturer: games-workshop
@@ -16225,7 +16149,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 77.34
+    priceGbp: 80.75
     priceEur: 98.2
     priceCad: 153.0
     url: https://www.warhammer.com/en-GB/shop/spearhead-seraphon-2024
@@ -16350,6 +16274,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/hunters-of-huanchi-2
       - mfr-gw-algolia:P-221466-99120208049
       - mfr-gw-trade:99120208049
+      - ret-goblingaming:age-of-sigmar-warcry-hunters-of-huanchi-warband
       - ret-tistaminis:warcry-hunters-of-huanchi
   - id: games-workshop/99120209009
     name: Spider Riders
@@ -17352,7 +17277,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -20355,6 +20280,8 @@ products:
     sku: '99120210061'
     ean: '5011921204069'
     eanConfidence: confirmed
+    additionalEans:
+      - '5011921261543'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-order
@@ -20363,7 +20290,7 @@ products:
       - age-of-sigmar
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -20396,8 +20323,11 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/warcry-ydrilan-riverblades
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/warcry-ydrilan-riverblades-2
       - mfr-gw-algolia:P-184002-99120210061
+      - mfr-gw-algolia:P-221482-99120210069
       - mfr-gw-trade:99120210061
+      - mfr-gw-trade:99120210069
       - ret-gamenerdz:/warhammer-age-of-sigmar-warcry-ydrilan-riverblades
+      - ret-goblingaming:warcry-ydrilan-riverblades
       - ret-tistaminis:warcry-ydrilan-riverblades
   - id: games-workshop/99120210062
     name: 'SPEARHEAD: LUMINETH REALM-LORDS'
@@ -20444,7 +20374,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 31.45
+    priceGbp: 31.88
     priceEur: 38.9
     priceCad: 59.5
     url: https://www.warhammer.com/en-GB/shop/lumineth-realm-lords-sigil-convocation-2026
@@ -20563,30 +20493,6 @@ products:
       - ret-radaddel:/lumineth-realm-lords-vanari-lord-regent
       - ret-radaddel:lumineth-realm-lords-vanari-lord-regent
       - ret-tistaminis:lumineth-realmlords-vanari-lord-regent-pre-order
-  - id: games-workshop/99120210069
-    name: Ydrilan Riverblades
-    manufacturer: games-workshop
-    productCode: '99120210069'
-    sku: '99120210069'
-    ean: '5011921261543'
-    eanConfidence: confirmed
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: stated
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-23'
-    priceGbp: 40.0
-    url: https://www.warhammer.com/en-GB/shop/lumineth-realm-lords-ydrilan-riverblades-2025
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60120299005_EngWCPyreAndFlood02.jpg
-    evidence:
-      - mfr-gw-algolia:P-221482-99120210069
-      - mfr-gw-trade:99120210069
   - id: games-workshop/99120210071
     name: 'Battleforce: Lumineth Realm-lords – Iliathan Warhost'
     manufacturer: games-workshop
@@ -20607,7 +20513,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 131.75
+    priceGbp: 136.0
     priceEur: 163.7
     priceCad: 255.0
     url: https://www.warhammer.com/en-GB/shop/lumineth-realmlords-iliathan-warhost-2026
@@ -22410,7 +22316,6 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
-    priceEur: 40.75
     url: https://www.warhammer.com/en-GB/shop/Ogor-Mawtribes-Tyrant-2020
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120213022_OMTyrant01.jpg
     description: |-
@@ -22423,8 +22328,6 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/tyrant
       - mfr-gw-algolia:prod4380141-99120213022
       - mfr-gw-trade:99120213022
-      - ret-goblingaming:ogor-mawtribes-tyrant
-      - ret-radaddel:ogor-mawtribes-tyrant
   - id: games-workshop/99120213023
     name: OGRE MAWTRIBES MEATGRINDER WARGLUTT
     manufacturer: games-workshop
@@ -22743,7 +22646,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 77.34
+    priceGbp: 80.75
     priceEur: 98.2
     priceCad: 153.0
     url: https://www.warhammer.com/en-GB/shop/spearhead-ogor-mawtribes-scrapglutt-2025
@@ -22800,6 +22703,7 @@ products:
     evidence:
       - mfr-gw-algolia:P-221464-99120213035
       - mfr-gw-trade:99120213035
+      - ret-goblingaming:age-of-sigmar-warcry-gorger-mawpack
       - ret-tistaminis:warcry-gorger-mawpack
   - id: games-workshop/99120213038
     name: 'Regiment of Renown: Okar''s Torrbad'
@@ -22837,6 +22741,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120213039'
     sku: '99120213039'
+    ean: '5011921266852'
+    eanConfidence: provisional
     gameSystems:
       - age-of-sigmar
     gameSystemsBasis: stated
@@ -22847,12 +22753,13 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 34.0
     url: https://www.warhammer.com/en-GB/shop/ogor-mawtribes-tyrant-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120213039_OgorMawtribesTyrant01.jpg
     evidence:
       - mfr-gw-algolia:P-257195-99120213039
+      - ret-goblingaming:ogor-mawtribes-tyrant
   - id: games-workshop/99120213040
     name: Gluttons
     manufacturer: games-workshop
@@ -23138,6 +23045,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120213049'
     sku: '99120213049'
+    ean: '5011921267163'
+    eanConfidence: provisional
     gameSystems:
       - age-of-sigmar
     gameSystemsBasis: stated
@@ -23148,12 +23057,15 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-08-21'
     priceGbp: 29.0
+    priceEur: 32.3
     url: https://www.warhammer.com/en-GB/shop/ogor-mawtribes-mantrapper-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120213049_OgorMawtribesMantrapper01.jpg
     evidence:
       - mfr-gw-algolia:P-257196-99120213049
+      - ret-goblingaming:ogor-mawtribes-mantrapper
+      - ret-radaddel:ogor-mawtribes-mantrapper
   - id: games-workshop/99120216009
     name: BRAYHERDS GORS
     manufacturer: games-workshop
@@ -24739,25 +24651,6 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120218077
-  - id: games-workshop/99120218078
-    name: 'WARCRY: QUESTOR SOULSWORN WARBAND'
-    manufacturer: games-workshop
-    productCode: '99120218078'
-    sku: '99120218078'
-    ean: '5011921195879'
-    eanConfidence: confirmed
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: code
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: discontinued
-    firstSeen: '2026-07-23'
-    evidence:
-      - mfr-gw-trade:99120218078
   - id: games-workshop/99120218080
     name: The Blacktalons
     manufacturer: games-workshop
@@ -24827,7 +24720,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 77.36
+    priceGbp: 80.75
     priceEur: 98.2
     priceCad: 180.0
     url: https://www.warhammer.com/en-GB/shop/spearhead-stormcast-eternals-2024
@@ -25423,27 +25316,6 @@ products:
       - mfr-gw-trade:99120218100
       - ret-goblingaming:stormcast-eternals-stormcoven
       - ret-tistaminis:stormcast-eternals-stormcoven
-  - id: games-workshop/99120218102
-    name: Knight-Questor
-    manufacturer: games-workshop
-    productCode: '99120218102'
-    sku: '99120218102'
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: stated
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-09-30'
-    priceGbp: 22.5
-    url: https://www.warhammer.com/en-GB/shop/knight-questor
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070218011_KnightQuestor01.jpg
-    evidence:
-      - mfr-gw-algolia:prod3330180-99120218102
   - id: games-workshop/99120218105
     name: Questor Soulsworn
     manufacturer: games-workshop
@@ -25451,6 +25323,8 @@ products:
     sku: '99120218105'
     ean: '5011921261482'
     eanConfidence: confirmed
+    additionalEans:
+      - '5011921195879'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-order
@@ -25485,7 +25359,9 @@ products:
       - legacy-catalog:games-workshop/other-games/grand-alliance-order/questor-soulsworn
       - legacy-catalog:games-workshop/other-games/grand-alliance-order/questor-soulsworn-2
       - mfr-gw-algolia:P-221470-99120218105
+      - mfr-gw-trade:99120218078
       - mfr-gw-trade:99120218105
+      - ret-goblingaming:age-of-sigmar-warcry-stormcast-eternals-questor-soulsworn-warband
       - ret-tistaminis:warcry-questor-soulsworn-warband
   - id: games-workshop/99120219004
     name: VOLTURNOS HIGH KING OF THE DEEP
@@ -25760,7 +25636,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 28.5
+    priceGbp: 33.58
     priceEur: 41.0
     url: https://www.warhammer.com/en-GB/shop/Akhelian-King-2018
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120219004_Volturnos02.jpg
@@ -26120,7 +25996,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     url: https://www.warhammer.com/en-GB/shop/Idoneth-Deepkin-Akhelian-Allopex-2018
@@ -26296,6 +26172,8 @@ products:
     sku: '99120219035'
     ean: '5011921250912'
     eanConfidence: confirmed
+    additionalEans:
+      - '5011921097463'
     gameSystems:
       - age-of-sigmar
     faction: grand-alliance-order
@@ -26323,7 +26201,10 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/isharann-soulscryer
       - mfr-gw-algolia:P-219694-99120219035
+      - mfr-gw-trade:99070219005
       - mfr-gw-trade:99120219035
+      - ret-gamenerdz:/warhammer-age-of-sigmar-idoneth-deepkin-isharann-soulscryer
+      - ret-goblingaming:isharann-soulscryer-idoneth-deepkin
       - ret-radaddel:/idoneth-deepkin-isharann-soulscryer
       - ret-radaddel:idoneth-deepkin-isharann-soulscryer
       - ret-tistaminis:warhammer-idoneth-deepkin-isharann-soulscryer-new
@@ -26332,6 +26213,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120231001'
     sku: '99120231001'
+    ean: '5011921274611'
+    eanConfidence: confirmed
     gameSystems:
       - age-of-sigmar
     gameSystemsBasis: stated
@@ -26348,11 +26231,15 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120231001_SonsofBehematMaMaegran01.jpg
     evidence:
       - mfr-gw-algolia:P-259006-99120231001
+      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
+      - ret-goblingaming:sons-of-behemat-ma-maegran-chooser-of-the-mighty
   - id: games-workshop/99120231002
     name: Boss-stompers
     manufacturer: games-workshop
     productCode: '99120231002'
     sku: '99120231002'
+    ean: '5011921274628'
+    eanConfidence: confirmed
     gameSystems:
       - age-of-sigmar
     gameSystemsBasis: stated
@@ -26369,27 +26256,8 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120231002_SonsofBehematBossstompers01.jpg
     evidence:
       - mfr-gw-algolia:P-259007-99120231002
-  - id: games-workshop/99120231005
-    name: Mancrusher Gargant
-    manufacturer: games-workshop
-    productCode: '99120231005'
-    sku: '99120231005'
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: stated
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-09-30'
-    priceGbp: 49.0
-    url: https://www.warhammer.com/en-GB/shop/sons-of-behemat-mancrusher-gargant-2026
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120299063_MancrusherGargantsSingle02.jpg
-    evidence:
-      - mfr-gw-algolia:P-259009-99120231005
+      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-boss-stompers
+      - ret-goblingaming:sons-of-behemat-boss-stompers
   - id: games-workshop/99120299011
     name: Aleguzzler Gargant
     manufacturer: games-workshop
@@ -26562,7 +26430,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 21.6
+    priceGbp: 26.1
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-hero-bases
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/bases-aos-hero-bases.jpg?v=1560791604
     evidence:
@@ -27267,7 +27135,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 47.0
+    priceGbp: 49.0
     url: https://www.warhammer.com/en-GB/shop/chaos-gargant-2022
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120299063_MancrusherGargantsSingle01.jpg
     description: |-
@@ -27280,6 +27148,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/chaos-gargant
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-destruction/mancrusher-gargant
       - legacy-catalog:games-workshop/age-of-sigmar/race/aleguzzler-gargant
+      - mfr-gw-algolia:P-259009-99120231005
       - mfr-gw-algolia:prod5000329-99120299088
       - mfr-gw-algolia:prod5000408-99120299088
       - mfr-gw-algolia:prod5000409-99120299088
@@ -27527,6 +27396,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120299128'
     sku: '99120299128'
+    ean: '5011921267422'
+    eanConfidence: confirmed
     gameSystems:
       - age-of-sigmar
     gameSystemsBasis: stated
@@ -27543,6 +27414,8 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120299128_SonsofBehematStomperTribe01.jpg
     evidence:
       - mfr-gw-algolia:P-259010-99120299128
+      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-stomper-tribe
+      - ret-goblingaming:sons-of-behemat-stomper-tribe
   - id: games-workshop/99120299134
     name: Domicile Shell
     manufacturer: games-workshop

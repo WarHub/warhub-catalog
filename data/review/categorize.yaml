@@ -1,40 +1,40 @@
 summary:
-  products: 27408
-  undecided: 1376
+  products: 28297
+  undecided: 1399
   byBasis:
-    code: 7112
-    lexicon: 397
-    mapped: 17453
+    code: 7086
+    lexicon: 382
+    mapped: 18360
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1376
-  decidedThisRun: 24977
+    unknown: 1399
+  decidedThisRun: 25843
   gameSystemsByBasis:
-    classified: 1112
-    code: 4198
-    mapped: 2561
-    not-applicable: 7863
+    classified: 1105
+    code: 4239
+    mapped: 2635
+    not-applicable: 8521
     override: 101
-    setting: 960
-    stated: 9198
-    unknown: 1415
+    setting: 988
+    stated: 9209
+    unknown: 1499
   settingsByBasis:
-    code: 849
-    derived: 17166
+    code: 877
+    derived: 17285
     mapped: 11
-    not-applicable: 7934
+    not-applicable: 8592
     override: 3
-    unknown: 1445
+    unknown: 1529
   rolesByBasis:
-    code: 72
-    lexicon: 183
-    mapped: 1079
-    none: 20491
+    code: 71
+    lexicon: 174
+    mapped: 1254
+    none: 20887
     override: 2
-    paint-archive: 1958
+    paint-archive: 1957
     stated: 16
-    unknown: 3607
+    unknown: 3936
 conflicts:
   - entity: games-workshop/60010399003
     type: category-disagreement
@@ -283,6 +283,8 @@ unmapped:
       wouldDecide: 7
     - value: categories=firefight-veer-myn
       wouldDecide: 7
+    - value: categories=halo-flashpoint-latest-releases
+      wouldDecide: 7
     - value: categories=northern-alliance-kings-of-war
       wouldDecide: 7
     - value: categories=plague
@@ -317,11 +319,9 @@ unmapped:
       wouldDecide: 4
     - value: categories=getting-started-dreadball
       wouldDecide: 4
-    - value: categories=mazon-labs
+    - value: categories=halo-flashpoint-accessories-terrain
       wouldDecide: 4
-    - value: categories=mazon-labs-firefight
-      wouldDecide: 4
-    - value: categories=nightstalkers
+    - value: categories=halo-flashpoint-covenant
       wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
@@ -377,47 +377,49 @@ unmapped:
       wouldDecide: 1
   mfr-warlord-store:
     - value: tags=eu
-      wouldDecide: 199
+      wouldDecide: 209
     - value: tags=us
-      wouldDecide: 199
+      wouldDecide: 209
     - value: vendor=Warlord Games
-      wouldDecide: 125
+      wouldDecide: 135
     - value: tags=under-10
-      wouldDecide: 103
+      wouldDecide: 111
     - value: tags=over-10
-      wouldDecide: 92
+      wouldDecide: 94
     - value: tags=mdf
       wouldDecide: 77
+    - value: tags=bolt-action
+      wouldDecide: 66
+    - value: productType=Bolt Action
+      wouldDecide: 64
     - value: tags=gaming-equipment
       wouldDecide: 64
     - value: tags=deal
       wouldDecide: 60
-    - value: tags=bolt-action
-      wouldDecide: 57
-    - value: productType=Bolt Action
-      wouldDecide: 56
+    - value: tags=loose-item
+      wouldDecide: 58
     - value: tags=gaming-markers
       wouldDecide: 54
-    - value: tags=loose-item
-      wouldDecide: 49
+    - value: tags=sale-gamingaids-4for3
+      wouldDecide: 52
     - value: tags=warlord-games-skytrex
       wouldDecide: 49
     - value: vendor=Skytrex
       wouldDecide: 47
     - value: tags=accessory
       wouldDecide: 46
+    - value: tags=plastic
+      wouldDecide: 37
     - value: tags=bolt-action-armoury
       wouldDecide: 36
+    - value: tags=terrain
+      wouldDecide: 33
     - value: tags=EPIC
       wouldDecide: 32
     - value: tags=Epic-Battles
       wouldDecide: 32
-    - value: tags=terrain
-      wouldDecide: 32
     - value: tags=new-year-new-army
       wouldDecide: 30
-    - value: tags=plastic
-      wouldDecide: 29
     - value: tags=black-powder
       wouldDecide: 28
     - value: productType=Blood Red Skies
@@ -429,7 +431,7 @@ unmapped:
     - value: tags=0122
       wouldDecide: 26
     - value: tags=british
-      wouldDecide: 20
+      wouldDecide: 23
     - value: tags=direct
       wouldDecide: 20
     - value: tags=terrain-building
@@ -440,6 +442,8 @@ unmapped:
       wouldDecide: 19
     - value: tags=trade-web
       wouldDecide: 18
+    - value: tags=german
+      wouldDecide: 17
     - value: tags=warlord-games
       wouldDecide: 17
     - value: tags=perfect-present
@@ -448,14 +452,10 @@ unmapped:
       wouldDecide: 15
     - value: tags=0125
       wouldDecide: 15
-    - value: tags=german
-      wouldDecide: 14
     - value: vendor=Sarissa
       wouldDecide: 14
     - value: tags=extras
       wouldDecide: 13
-    - value: productType=Epic Pike & Shotte
-      wouldDecide: 12
   mfr-warmachine:
     - value: productType=Wargame
       wouldDecide: 1
@@ -464,31 +464,59 @@ unmapped:
     - value: vendor=Warmachine
       wouldDecide: 1
   mfr-wyrd-store:
+    - value: productType=Board & Card Games
+      wouldDecide: 2
+    - value: tags=NOPE
+      wouldDecide: 2
+    - value: tags=WRLD
+      wouldDecide: 2
+    - value: vendor=Wyrd Miniatures
+      wouldDecide: 2
     - value: productType=Gift Card
       wouldDecide: 1
-    - value: tags=NOPE
+    - value: tags=50-Percent-Deposit
+      wouldDecide: 1
+    - value: tags=Case-Only
+      wouldDecide: 1
+    - value: tags=First Printing
+      wouldDecide: 1
+    - value: tags=Pre-Order
+      wouldDecide: 1
+    - value: tags=Pre-Purchase
+      wouldDecide: 1
+    - value: tags=Sailboat-Cube
+      wouldDecide: 1
+    - value: tags=Setup-Pending
+      wouldDecide: 1
+    - value: tags=WRLD-Presale
+      wouldDecide: 1
+    - value: tags=WRLD-Retailer-Preorder
       wouldDecide: 1
     - value: tags=gift card
+      wouldDecide: 1
+    - value: tags=wholesale
+      wouldDecide: 1
+    - value: tags=wholesale-only
       wouldDecide: 1
     - value: vendor=Wyrd Miniatures - Online Store
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 157
+      wouldDecide: 120
     - value: breadcrumbs=Miniatures
-      wouldDecide: 145
-    - value: breadcrumbs=Games Workshop
-      wouldDecide: 50
+      wouldDecide: 112
     - value: breadcrumbs=Infinity
       wouldDecide: 45
-    - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 30
-    - value: breadcrumbs=Malifaux
-      wouldDecide: 19
-    - value: breadcrumbs=Warhammer Age of Sigmar
-      wouldDecide: 18
+    - value: breadcrumbs=Games Workshop
+      wouldDecide: 27
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 15
+    - value: breadcrumbs=Malifaux
+      wouldDecide: 14
+    - value: breadcrumbs=Warhammer Age of Sigmar
+      wouldDecide: 13
+    - value: breadcrumbs=Warhammer 40K
+      wouldDecide: 12
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
     - value: breadcrumbs=Supplies
@@ -499,17 +527,11 @@ unmapped:
       wouldDecide: 6
     - value: breadcrumbs=Warcrow
       wouldDecide: 6
-    - value: breadcrumbs=Warmachine
-      wouldDecide: 6
-    - value: breadcrumbs=Preorders
-      wouldDecide: 5
     - value: breadcrumbs=Paint and Crafting
       wouldDecide: 4
     - value: breadcrumbs=Panoceania
       wouldDecide: 3
     - value: breadcrumbs=Citadel Accessories & Supplies
-      wouldDecide: 2
-    - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 2
     - value: breadcrumbs=Nomads
       wouldDecide: 2
@@ -537,7 +559,7 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Guild Ball: (Mortician''s Guild) Token Set (Clearance)'
       wouldDecide: 1
-    - value: 'breadcrumbs=Halo: Flashpoint - Banished Sangheili Mercenaries'
+    - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 1
     - value: 'breadcrumbs=Halo: Flashpoint - Force Organizer Pack'
       wouldDecide: 1
@@ -553,6 +575,27 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Blast From the Past - ITS (Infinity Tournament System) Season 13'
       wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Breakdown - Competition Pack ITS (Infinity Tournament System) Season 12'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Code One - Kaldstrom Colonial Settlement Scenery Pack'
+      wouldDecide: 1
+    - value: 'breadcrumbs=Infinity: Code One - Kaldstrom Scenery Expansion Pack'
+      wouldDecide: 1
+  ret-goblingaming:
+    - value: tags=Paint & Hobby
+      wouldDecide: 34
+    - value: vendor=Vallejo
+      wouldDecide: 34
+    - value: productType=Stencils
+      wouldDecide: 30
+    - value: tags=Tools
+      wouldDecide: 30
+    - value: productType=Airbrush
+      wouldDecide: 4
+    - value: tags=Airbrush
+      wouldDecide: 4
+    - value: tags=Paints
+      wouldDecide: 3
   ret-radaddel:
     - value: tags=Warlord Games
       wouldDecide: 63
@@ -653,9 +696,9 @@ unmapped:
       wouldDecide: 8
     - value: tags=Green Stuff World
       wouldDecide: 7
-    - value: vendor=Mantic
-      wouldDecide: 7
     - value: vendor=GW-WEB
+      wouldDecide: 6
+    - value: vendor=Mantic
       wouldDecide: 6
     - value: productType=Tabletop Games & Accessories
       wouldDecide: 4

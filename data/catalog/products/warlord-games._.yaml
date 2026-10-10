@@ -3551,6 +3551,8 @@ products:
     manufacturer: warlord-games
     productCode: '203414006'
     sku: '203414006'
+    ean: '5060917994552'
+    eanConfidence: confirmed
     gameSystems:
       - pike-and-shotte
     faction: general
@@ -11853,7 +11855,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 45.0
+    priceGbp: 60.0
     url: https://www.goblingaming.co.uk/products/warlord-games-2000ad-abc-warriors-increase-the-peace-starter-game
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/ScreenShot2023-11-22at09.52.41.png?v=1700646891
     evidence:
@@ -13856,6 +13858,7 @@ products:
       *Models supplied unassembled and unpainted, basing materials not included.*
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/palm-trees
+      - mfr-warlord-store:palm-trees
   - id: warlord-games/809710002
     name: Grassland Gaming Mat 6’x4’/183x122cm
     manufacturer: warlord-games
@@ -14744,7 +14747,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 12.5
+    priceGbp: 10.0
     priceEur: 11.55
     url: https://store.warlordgames.com/products/3-frames-of-25mm-bases
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/845200001-3-frames-of-25mm-bases.jpg?v=1575566627
@@ -15402,7 +15405,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.99
     priceEur: 3.0
@@ -15429,7 +15432,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.99
     url: https://store.warlordgames.com/products/battlefields-basing-large-grey-stones-180ml
@@ -15610,7 +15613,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 7.25
+    priceGbp: 3.75
     url: https://store.warlordgames.com/products/25mm-round-lip-bases-sprue
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WG-BASE-25-25mm-round-bases-a.jpg?v=1575566127
     description: 1 sprue of 25 x 25mm round bases
@@ -15633,7 +15636,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 7.25
+    priceGbp: 3.75
     url: https://store.warlordgames.com/products/25mm-50mm-round-lip-bases-sprue
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WG-BASE-28-25x50-round-bases-a.jpg?v=1575566134
     description: 1 sprue of 8 x 25mm x 50mm round lip bases
@@ -15656,7 +15659,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 5.75
+    priceGbp: 3.75
     url: https://store.warlordgames.com/products/40mm-round-bases-sprue
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/products/WG-BASE-26-40mm-round-bases-a.jpg?v=1575566133
     description: 1 sprue of 8 x 40mm round bases
@@ -19075,6 +19078,48 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/BlackPowderEpicBattlesZuluWarsThousandsof_emBundle.png?v=1784890041
     evidence:
       - mfr-warlord-store:black-powder-epic-battles-zulu-wars-thousands-of-em-bundle
+  - id: warlord-games/EPICZ03
+    name: 'Black Powder Epic Battles: Zulu - Artillery Bundle'
+    manufacturer: warlord-games
+    productCode: EPICZ03
+    sku: EPICZ03
+    gameSystems:
+      - epic-black-powder
+    gameSystemsBasis: stated
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 40.0
+    url: https://store.warlordgames.com/products/black-powder-epic-battles-zulu-artillery-bundle
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/BlackPowderEpicBattlesZulu-ArtilleryBundle.png?v=1791542833
+    evidence:
+      - mfr-warlord-store:black-powder-epic-battles-zulu-artillery-bundle
+  - id: warlord-games/EPICZ04
+    name: 'Black Powder Epic Battles: Zulu - Cavalry Bundle'
+    manufacturer: warlord-games
+    productCode: EPICZ04
+    sku: EPICZ04
+    gameSystems:
+      - epic-black-powder
+    gameSystemsBasis: stated
+    settings:
+      - horse-and-musket
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 67.0
+    url: https://store.warlordgames.com/products/black-powder-epic-battles-zulu-cavalry-bundle
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/BlackPowderEpicBattlesZulu-CavalryBundle.png?v=1791543276
+    evidence:
+      - mfr-warlord-store:black-powder-epic-battles-zulu-cavalry-bundle
   - id: warlord-games/EWBRITISHCORPS01
     name: 'British Army: Epic Waterloo Bundle'
     manufacturer: warlord-games
@@ -20577,6 +20622,48 @@ products:
       *Models supplied unassembled and unpainted*
     evidence:
       - legacy-catalog:warlord-games/blood-red-skies/soviet/mig-alley-foam-insert
+  - id: warlord-games/MTMP-401012002ES
+    name: Ejércitos de Alemanía 3a Edición
+    manufacturer: warlord-games
+    productCode: MTMP-401012002ES
+    sku: MTMP-401012002ES
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 28.0
+    url: https://store.warlordgames.com/products/ejercitos-de-alemania-3a-edicion
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/EjercitosdeAlemania3aEdicion01.jpg?v=1788444985
+    evidence:
+      - mfr-warlord-store:ejercitos-de-alemania-3a-edicion
+  - id: warlord-games/MTMP-401013001ES
+    name: Ejércitos de Estados Unidos 3a Edición
+    manufacturer: warlord-games
+    productCode: MTMP-401013001ES
+    sku: MTMP-401013001ES
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 28.0
+    url: https://store.warlordgames.com/products/ejercitos-de-estados-unidos-3a-edicion
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/EjercitosdeEstadosUnidos3aEdicion01.jpg?v=1788445139
+    evidence:
+      - mfr-warlord-store:ejercitos-de-estados-unidos-3a-edicion
   - id: warlord-games/NEWYEAR01
     name: 'Start Collecting: German Army'
     manufacturer: warlord-games
@@ -24706,6 +24793,26 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/K_47TowerSOW.jpg?v=1787051644
     evidence:
       - mfr-warlord-store:konflikt-47-area-51-point-defence-fortifications-stl-3d-print-file-print-at-home
+  - id: warlord-games/STLK4703
+    name: NYC Wrecked Barricade Free STL - 3D print file - print at home
+    manufacturer: warlord-games
+    productCode: STLK4703
+    sku: STLK4703
+    gameSystems:
+      - konflikt-47
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-10'
+    priceGbp: 0.0
+    url: https://store.warlordgames.com/products/nyc-wrecked-barricade-free-stl-3d-print-file-print-at-home
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/EonsofBattle-USResistance-1.jpg?v=1788449206
+    evidence:
+      - mfr-warlord-store:nyc-wrecked-barricade-free-stl-3d-print-file-print-at-home
   - id: warlord-games/TANKSALOT26TICKET
     name: Tanks a Lot! 2026 Bolt Action Tournament Ticket
     manufacturer: warlord-games
@@ -25930,29 +26037,6 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/king-s-colours-4-royalist
       - mfr-warlord-store:kc04-royalists
-  - id: warlord-games/konflikt-47-soviet-bloc-dice-bag-von-warlord-games
-    name: Konflikt '47 Soviet Bloc Dice Bag von Warlord Games
-    manufacturer: warlord-games
-    sku: '133043'
-    ean: '5060917996525'
-    eanConfidence: provisional
-    gameSystems:
-      - konflikt-47
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
-    category: game-accessory
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceEur: 19.15
-    url: https://www.radaddel.de/konflikt-47-soviet-bloc-dice-bag
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133043-konflikt-47-soviet-bloc-dice-bag-458900801-1.webp?v=1781221905
-    evidence:
-      - ret-radaddel:/konflikt-47-soviet-bloc-dice-bag
-      - ret-radaddel:konflikt-47-soviet-bloc-dice-bag
   - id: warlord-games/lord-astley-von-warlord-games
     name: Lord Astley von Warlord Games
     manufacturer: warlord-games
