@@ -2484,7 +2484,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 42.0
     url: https://www.warhammer.com/en-GB/shop/Drukhari-Raider
@@ -3310,7 +3310,7 @@ products:
     evidence:
       - mfr-gw-trade:99120113059
   - id: games-workshop/99120113060
-    name: TAU EMPIRE COMMANDER
+    name: T'au Empire Commander
     manufacturer: games-workshop
     productCode: '99120113060'
     sku: '99120113060'
@@ -3319,15 +3319,20 @@ products:
     supersededBy: games-workshop/99120113079
     gameSystems:
       - warhammer-40k
-    gameSystemsBasis: code
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
-    status: discontinued
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
+    priceGbp: 37.5
+    url: https://www.warhammer.com/en-GB/shop/Tau-Empire-Commander-2017
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120113037_TauEmpireCommanderColdStar01.jpg
     evidence:
+      - mfr-gw-algolia:prod3590135-99120113060
       - mfr-gw-trade:99120113060
   - id: games-workshop/99120113061
     name: TAU EMPIRE PATHFINDER TEAM
@@ -3984,7 +3989,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -5593,7 +5598,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 55.0
     priceEur: 53.9
@@ -5859,7 +5864,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceCad: 45.05
@@ -6041,6 +6046,27 @@ products:
       - ret-radaddel:/adeptus-mechanicus-hastarii
       - ret-radaddel:adeptus-mechanicus-hastarii
       - ret-tistaminis:adeptus-mechanicus-hastarii-pre-order
+  - id: games-workshop/99120116056
+    name: Technoarcheologist
+    manufacturer: games-workshop
+    productCode: '99120116056'
+    sku: '99120116056'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-12'
+    priceGbp: 22.5
+    url: https://www.warhammer.com/en-GB/shop/adeptus-mechanicus-technoarchaeologist-2022
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070116007_AMTechnoarchaeologist01.jpg
+    evidence:
+      - mfr-gw-algolia:prod5010193-99120116056
   - id: games-workshop/99120117001
     name: GENESTEALER CULTS BROODCOVEN
     manufacturer: games-workshop
@@ -6291,7 +6317,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -7468,7 +7494,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
@@ -8914,7 +8940,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     priceEur: 26.6

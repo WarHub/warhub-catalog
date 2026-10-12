@@ -150,7 +150,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     url: https://www.warhammer.com/en-GB/shop/Rotbringers-Bloab-Rotspawned
@@ -254,7 +254,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.5
     url: https://www.warhammer.com/en-GB/shop/Khorne-Bloodbound-Mighty-Skullcrushers
@@ -2232,7 +2232,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.5
     priceEur: 69.6
@@ -2721,7 +2721,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 72.5
     priceEur: 73.7
@@ -4607,7 +4607,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 95.0
     priceEur: 98.2
@@ -5801,7 +5801,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 130.0
     priceEur: 130.9
@@ -7736,7 +7736,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -8630,7 +8630,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 52.0
     url: https://www.warhammer.com/en-GB/shop/Pestilens-Plague-Furnace
@@ -9684,7 +9684,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceCad: 54.0
@@ -9832,7 +9832,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 49.0
     url: https://www.warhammer.com/en-GB/shop/Coven-Throne
@@ -12023,7 +12023,7 @@ products:
     evidence:
       - mfr-gw-trade:99120207137
   - id: games-workshop/99120207138
-    name: LAUKA VAI MOTHER OF NIGHTMARES
+    name: Vengorian Lord
     manufacturer: games-workshop
     productCode: '99120207138'
     sku: '99120207138'
@@ -12034,16 +12034,20 @@ products:
     supersededBy: games-workshop/99120207229
     gameSystems:
       - age-of-sigmar
-    faction: grand-alliance-death
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - age-of-sigmar
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
+    priceGbp: 44.5
+    url: https://www.warhammer.com/en-GB/shop/Vengorian-Lord-2021
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120207086_VangLordLead.jpg
     evidence:
+      - mfr-gw-algolia:prod4640259-99120207138
       - mfr-gw-trade:99120207138
   - id: games-workshop/99120207139
     name: 'SOULBLIGHT GRAVELORDS: RADUKAR THE BEAST'
@@ -13223,7 +13227,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -13709,7 +13713,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 98.2
@@ -14544,7 +14548,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     url: https://www.warhammer.com/en-GB/shop/Soulblight-Gravelords-Fell-Bats-2021
@@ -14616,7 +14620,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     url: https://www.warhammer.com/en-GB/shop/Lauka-Vai-Mother-Of-Nightmares-2021
@@ -17352,7 +17356,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -18423,7 +18427,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceCad: 74.0
@@ -26120,7 +26124,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     url: https://www.warhammer.com/en-GB/shop/Idoneth-Deepkin-Akhelian-Allopex-2018
