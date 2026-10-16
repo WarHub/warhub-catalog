@@ -7475,7 +7475,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -7596,7 +7596,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -7959,7 +7959,7 @@ products:
     evidence:
       - mfr-gw-trade:99070104005
   - id: games-workshop/99070104006
-    name: CRAFTWORLDS ELDRAD ULTHRAN
+    name: Eldrad Ulthran
     manufacturer: games-workshop
     productCode: '99070104006'
     sku: '99070104006'
@@ -7967,15 +7967,20 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
-    gameSystemsBasis: code
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
-    status: discontinued
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
+    priceGbp: 22.5
+    url: https://www.warhammer.com/en-GB/shop/Eldrad-Ulthran-2017
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104006_Eldrad01.jpg
     evidence:
+      - mfr-gw-algolia:prod3650164-99070104006
       - mfr-gw-trade:99070104006
   - id: games-workshop/99070104007
     name: CRAFTWORLDS SPIRITSEER
@@ -9375,7 +9380,7 @@ products:
       - ret-goblingaming:necron-royal-warden
       - ret-tistaminis:necrons-royal-warden
   - id: games-workshop/99070111001
-    name: HARLEQUIN DEATH JESTER
+    name: Death Jester
     manufacturer: games-workshop
     productCode: '99070111001'
     sku: '99070111001'
@@ -9384,15 +9389,20 @@ products:
     supersededBy: games-workshop/99070111004
     gameSystems:
       - warhammer-40k
-    gameSystemsBasis: code
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
-    status: discontinued
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
+    priceGbp: 19.0
+    url: https://www.warhammer.com/en-GB/shop/Harlequin-Death-Jester
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070111001_HarlequinDeathJester01.jpg
     evidence:
+      - mfr-gw-algolia:prod2620120-99070111001
       - mfr-gw-trade:99070111001
   - id: games-workshop/99070111002
     name: HARLEQUIN SHADOWSEER

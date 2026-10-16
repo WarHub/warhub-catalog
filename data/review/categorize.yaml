@@ -1,27 +1,27 @@
 summary:
-  products: 27457
-  undecided: 1448
+  products: 27465
+  undecided: 1449
   byBasis:
-    code: 7129
+    code: 7133
     lexicon: 397
-    mapped: 17413
+    mapped: 17416
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1448
-  decidedThisRun: 24954
+    unknown: 1449
+  decidedThisRun: 24961
   gameSystemsByBasis:
     classified: 1112
-    code: 4207
+    code: 4205
     mapped: 2571
     not-applicable: 7864
     override: 101
     setting: 960
-    stated: 9201
+    stated: 9211
     unknown: 1441
   settingsByBasis:
     code: 849
-    derived: 17188
+    derived: 17196
     mapped: 11
     not-applicable: 7935
     override: 3
@@ -30,7 +30,7 @@ summary:
     code: 72
     lexicon: 183
     mapped: 1079
-    none: 20540
+    none: 20548
     override: 2
     paint-archive: 1958
     stated: 16
@@ -325,20 +325,20 @@ unmapped:
       wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
-      wouldDecide: 28
+      wouldDecide: 29
     - value: categories=factions
-      wouldDecide: 22
+      wouldDecide: 23
     - value: categories=spires
       wouldDecide: 19
     - value: categories=limited-editions
       wouldDecide: 11
     - value: categories=start-here
-      wouldDecide: 4
+      wouldDecide: 5
     - value: categories=2000pt-armies
       wouldDecide: 3
-    - value: categories=new-releases
-      wouldDecide: 2
     - value: categories=new-upcoming
+      wouldDecide: 3
+    - value: categories=new-releases
       wouldDecide: 2
     - value: categories=dweghom
       wouldDecide: 1
@@ -349,6 +349,12 @@ unmapped:
     - value: categories=offers
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
+      wouldDecide: 1
+    - value: categories=pre-orders
+      wouldDecide: 1
+    - value: categories=the-last-argument-of-kings
+      wouldDecide: 1
+    - value: categories=wadrhun
       wouldDecide: 1
     - value: categories=yoroni
       wouldDecide: 1
