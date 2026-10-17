@@ -6843,7 +6843,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.2
@@ -7914,13 +7914,14 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 29.0
     url: https://www.warhammer.com/en-GB/shop/Captain-With-Master-crafted-Bolt-Rifle-2021
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101048_SMCaptainMasterCraftedBoltRifleLead.jpg
     evidence:
       - mfr-gw-algolia:prod4640273-99120101462
       - mfr-gw-trade:99120101462
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-w-master-crafted-heavy-bolt-rifle
   - id: games-workshop/99120101463
     name: Iron Hands Primaris Upgrades and Transfers
     manufacturer: games-workshop
@@ -8014,13 +8015,14 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 26.0
     url: https://www.warhammer.com/en-GB/shop/Primaris-Librarian-In-Phobos-Armour-2020
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101046_SMPrimarisLibrarianPhobosArmour01.jpg
     evidence:
       - mfr-gw-algolia:prod4510313-99120101468
       - mfr-gw-trade:99120101468
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian-in-phobos-armour
   - id: games-workshop/99120101469
     name: Captain in Phobos Armour
     manufacturer: games-workshop
@@ -24151,12 +24153,10 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-adepta-sororitas-engines-of-redemption
+    status: discontinued
+    firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120108035
-      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-engines-of-redemption
   - id: games-workshop/99120108036
     name: ADEPTA SORORITAS REPENTIA SQUAD
     manufacturer: games-workshop
@@ -24868,6 +24868,7 @@ products:
       - mfr-gw-algolia:prod4370259-99120108059
       - mfr-gw-algolia:prod4370391-99120108059
       - mfr-gw-trade:99120108059
+      - ret-gamenerdz:/warhammer-40k-adepta-sororitas-engines-of-redemption
       - ret-goblingaming:adepta-sororitas-penitent-engines
       - ret-radaddel:/adepta-sororitas-engines-of-redemption
       - ret-radaddel:adepta-sororitas-engines-of-redemption
@@ -25415,7 +25416,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/captain-general-trajann-valoris
       - mfr-gw-algolia:prod3700244-99120108076
       - mfr-gw-trade:99120108076
-      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-captain-general-trajann-valoris
       - ret-goblingaming:trajann-valoris
       - ret-radaddel:/adeptus-custodes-trajann-valoris
       - ret-radaddel:adeptus-custodes-trajann-valoris
