@@ -351,7 +351,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 110.0
     priceEur: 110.5
@@ -3584,7 +3584,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -6270,12 +6270,10 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-genestealer-cults-achilles-ridgerunner
+    status: discontinued
+    firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120117015
-      - ret-gamenerdz:/warhammer-40k-genestealer-cults-achilles-ridgerunner
   - id: games-workshop/99120117016
     name: 'COMBAT PATROL: GENESTEALER CULTS'
     manufacturer: games-workshop
@@ -6644,6 +6642,7 @@ products:
       - legacy-catalog:games-workshop/other-games/genestealer-cults/achilles-ridgerunner-2
       - mfr-gw-algolia:prod4140167-99120117025
       - mfr-gw-trade:99120117025
+      - ret-gamenerdz:/warhammer-40k-genestealer-cults-achilles-ridgerunner
       - ret-goblingaming:achilles-ridgerunner
       - ret-radaddel:/genestealer-cults-achilles-ridgerunner
       - ret-radaddel:genestealer-cults-achilles-ridgerunner
@@ -7867,13 +7866,14 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 29.5
     url: https://www.warhammer.com/en-GB/shop/Captain-general-Trajann-Valoris-2018
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108012_GeneralTrajannValoris01.jpg
     evidence:
       - mfr-gw-algolia:prod3700244-99120143002
       - mfr-gw-trade:99120143002
+      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-captain-general-trajann-valoris
   - id: games-workshop/99120143014
     name: 'Combat Patrol: Adeptus Custodes'
     manufacturer: games-workshop
@@ -7888,7 +7888,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-10-04'
     priceGbp: 109.0
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-adeptus-custodes-2026
@@ -8255,12 +8255,10 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-daemonifuge-ephrael-stern-kyganil
+    status: discontinued
+    firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120199073
-      - ret-gamenerdz:/warhammer-40k-daemonifuge-ephrael-stern-kyganil
   - id: games-workshop/99120199075
     name: 'COMMAND EDTN: BATTLEFIELD EXPANSION SET'
     manufacturer: games-workshop
