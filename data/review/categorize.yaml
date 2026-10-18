@@ -1,36 +1,36 @@
 summary:
-  products: 27465
-  undecided: 1449
+  products: 27470
+  undecided: 1452
   byBasis:
-    code: 7133
+    code: 7134
     lexicon: 397
-    mapped: 17416
+    mapped: 17417
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1449
-  decidedThisRun: 24961
+    unknown: 1452
+  decidedThisRun: 24963
   gameSystemsByBasis:
     classified: 1112
     code: 4205
-    mapped: 2571
+    mapped: 2570
     not-applicable: 7864
     override: 101
     setting: 960
-    stated: 9211
-    unknown: 1441
+    stated: 9215
+    unknown: 1443
   settingsByBasis:
     code: 849
-    derived: 17196
+    derived: 17199
     mapped: 11
     not-applicable: 7935
     override: 3
-    unknown: 1471
+    unknown: 1473
   rolesByBasis:
     code: 72
     lexicon: 183
     mapped: 1079
-    none: 20548
+    none: 20553
     override: 2
     paint-archive: 1958
     stated: 16
@@ -325,20 +325,26 @@ unmapped:
       wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
-      wouldDecide: 29
+      wouldDecide: 30
     - value: categories=factions
-      wouldDecide: 23
+      wouldDecide: 24
     - value: categories=spires
       wouldDecide: 19
     - value: categories=limited-editions
       wouldDecide: 11
     - value: categories=start-here
-      wouldDecide: 5
+      wouldDecide: 6
+    - value: categories=new-upcoming
+      wouldDecide: 4
     - value: categories=2000pt-armies
       wouldDecide: 3
-    - value: categories=new-upcoming
-      wouldDecide: 3
     - value: categories=new-releases
+      wouldDecide: 2
+    - value: categories=pre-orders
+      wouldDecide: 2
+    - value: categories=the-last-argument-of-kings
+      wouldDecide: 2
+    - value: categories=yoroni
       wouldDecide: 2
     - value: categories=dweghom
       wouldDecide: 1
@@ -350,13 +356,9 @@ unmapped:
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
-    - value: categories=pre-orders
-      wouldDecide: 1
-    - value: categories=the-last-argument-of-kings
-      wouldDecide: 1
     - value: categories=wadrhun
       wouldDecide: 1
-    - value: categories=yoroni
+    - value: categories=weaver-courts
       wouldDecide: 1
   mfr-steamforged:
     - value: vendor=Guild Ball
@@ -480,15 +482,15 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 164
+      wouldDecide: 166
     - value: breadcrumbs=Miniatures
-      wouldDecide: 152
+      wouldDecide: 154
     - value: breadcrumbs=Games Workshop
-      wouldDecide: 50
+      wouldDecide: 51
     - value: breadcrumbs=Infinity
       wouldDecide: 45
     - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 30
+      wouldDecide: 31
     - value: breadcrumbs=Malifaux
       wouldDecide: 19
     - value: breadcrumbs=Warhammer Age of Sigmar
@@ -518,6 +520,8 @@ unmapped:
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 2
     - value: breadcrumbs=Nomads
+      wouldDecide: 2
+    - value: breadcrumbs=Star Wars Legion
       wouldDecide: 2
     - value: breadcrumbs=Aleph
       wouldDecide: 1
@@ -556,8 +560,6 @@ unmapped:
     - value: 'breadcrumbs=Infinity: Akashi Site Scenery Pack'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: Bases 25mm (20)'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Blast From the Past - ITS (Infinity Tournament System) Season 13'
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games
