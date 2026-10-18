@@ -2466,7 +2466,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -4607,7 +4607,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 95.0
     priceEur: 98.2
@@ -4761,6 +4761,27 @@ products:
       - ret-gamenerdz:/warhammer-age-of-sigmar-battleforce-disciples-of-tzeentch-warpflame-cavalcade
       - ret-goblingaming:disciples-of-tzeentch-warpflame-cavalcade
       - ret-radaddel:/disciples-of-tzeentch-warpflame-cavalcade
+  - id: games-workshop/99120201269
+    name: Oath Fulfilled
+    manufacturer: games-workshop
+    productCode: '99120201269'
+    sku: '99120201269'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-18'
+    priceGbp: 25.0
+    url: https://www.warhammer.com/en-GB/shop/slaves-to-darkness-oath-fulfilled-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120201269_WarhammerDayPromoSlavestoDarknessOathFulfilled1.jpg
+    evidence:
+      - mfr-gw-algolia:P-260909-99120201269
   - id: games-workshop/99120202030
     name: Amber Battle Wizard on Imperial Griffon
     manufacturer: games-workshop
@@ -20687,7 +20708,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 96.0
@@ -22788,14 +22809,14 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - age-of-sigmar
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - age-of-sigmar
     settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 40.0
     priceCad: 78.0
@@ -27358,7 +27379,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 48.7
