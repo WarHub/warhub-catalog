@@ -13,11 +13,11 @@ summary:
   gameSystemsByBasis:
     classified: 1112
     code: 4205
-    mapped: 2570
+    mapped: 2568
     not-applicable: 7864
     override: 101
     setting: 960
-    stated: 9215
+    stated: 9217
     unknown: 1443
   settingsByBasis:
     code: 849
@@ -156,6 +156,9 @@ conflicts:
   - entity: games-workshop/99122710012
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'
+  - entity: games-workshop/99123001007
+    type: gameSystem-disagreement
+    detail: catalog says warhammer-40k (stated); mfr-gw-algolia hierarchy.lvl1~The Horus Heresy > Force Organisation,The Horus Heresy > Unit Type,The Horus Heresy > Traitor Legiones Astartes,The Horus Heresy > Loyalist Legiones Astartes,The Horus Heresy > Vehicles,The Horus Heresy > Accessories,The Horus Heresy > Mechanicum,The Horus Heresy > Forces of The Emperor,The Horus Heresy > Legiones Astartes,The Horus Heresy > Armies of the Warmaster,The Horus Heresy > Start Here,The Horus Heresy > Rules & Army Books says horus-heresy
   - entity: games-workshop/99123001010
     type: category-disagreement
     detail: 'retailer: ret-gamenerdz=board-game; ret-goblingaming=miniatures -- a tie, left to the code and name rungs'

@@ -8417,7 +8417,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.5
     url: https://www.warhammer.com/en-GB/shop/me-King-Brand-and-Bard2-Of-Dale-2021
@@ -10100,7 +10100,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 18.5
     url: https://www.warhammer.com/en-GB/shop/Leviathan-Cyclonic-Melta-Lance
@@ -15433,9 +15433,8 @@ products:
     sku: '99853008194'
     gameSystems:
       - horus-heresy
-      - warhammer-40k
     faction: characters
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
