@@ -228,7 +228,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 238.0
     url: https://tistaminis.com/products/tau-empire-army-set
@@ -695,7 +695,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceCad: 450.0
     url: https://tistaminis.com/products/warhammer-40000-leviathan
@@ -909,9 +909,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 59.07
+    priceGbp: 61.63
     priceEur: 73.7
-    priceCad: 114.75
+    priceCad: 121.55
     url: https://www.gamenerdz.com/warhammer-40k-kill-team-starter-set-kt24
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2024_10_60010199071_ENGKTStarterSet26.jpg?v=1729857522
     evidence:
@@ -1070,7 +1070,9 @@ products:
     productCode: '60010199079'
     sku: '60010199079'
     ean: '5011921260379'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921260430'
     gameSystems:
       - warhammer-40k
     gameSystemsBasis: mapped
@@ -1083,13 +1085,14 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 39.95
-    priceCad: 79.05
-    url: https://www.goblingaming.co.uk/products/warhammer-40000-introductory-set
+    priceGbp: 41.65
+    priceCad: 83.3
+    url: https://www.gamenerdz.com/warhammer-40k-introductory-set-2026
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/BSF-6001019907940-04Warhammer40000IntroductorySet-ENG.jpg?v=1783699965
     evidence:
       - bdb-goupc:5011921260379
       - mfr-gw-trade:60010199079
+      - ret-gamenerdz:/warhammer-40k-introductory-set-2026
       - ret-goblingaming:warhammer-40000-introductory-set
       - ret-radaddel:/detail/index/sArticle/24422
       - ret-tistaminis:warhammer-40000-introductory-set-1
@@ -1143,9 +1146,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 131.75
+    priceGbp: 136.0
     priceEur: 163.7
-    priceCad: 255.0
+    priceCad: 263.5
     url: https://www.gamenerdz.com/warhammer-40k-starter-set-2026
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/EB200b-6001019908240-05Warhammer40000StarterSet-ENG.jpg?v=1783699976
     evidence:
@@ -1252,6 +1255,29 @@ products:
       - mfr-gw-trade:60010202001
       - ret-gamenerdz:/warhammer-age-of-sigmar-cities-of-sigmar
       - ret-tistaminis:empire-cities-of-sigmar-army-set-new
+  - id: games-workshop/60010205001
+    name: Khazalite Holds Army Set
+    manufacturer: games-workshop
+    productCode: '60010205001'
+    sku: '60010205001'
+    ean: '5011921268047'
+    eanConfidence: provisional
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 100.0
+    url: https://www.goblingaming.co.uk/products/khazalite-holds-army-set
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60010205001_KhazaliteHoldsArmySet35.jpg?v=1792146435
+    evidence:
+      - ret-goblingaming:khazalite-holds-army-set
   - id: games-workshop/60010207002
     name: FLESH-EATER COURTS ARMY SET (ENG)
     manufacturer: games-workshop
@@ -1390,7 +1416,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 136.0
+    priceGbp: 140.25
     priceEur: 168.5
     priceCad: 283.5
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ogor-mawtribes-army-set
@@ -1400,6 +1426,32 @@ products:
       - ret-goblingaming:ogor-mawtribes-army-set
       - ret-radaddel:ogor-mawtribes-army-set-englisch
       - ret-tistaminis:ogor-mawtribes-army-set-pre-order
+  - id: games-workshop/60010231001
+    name: 'Warhammer Age of Sigmar: Sons of Behemat - Brawlers of Behemat'
+    manufacturer: games-workshop
+    productCode: '60010231001'
+    sku: GWS93-14
+    ean: '5011921274666'
+    eanConfidence: confirmed
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-30'
+    priceGbp: 165.75
+    priceCad: 318.75
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60010231001_ENGSonsOfBehematBrawlersOfBehemat01.jpg?v=1789116155
+    evidence:
+      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
+      - ret-goblingaming:age-of-sigmar-brawlers-of-behemat
+      - ret-tistaminis:age-of-sigmar-brawlers-of-behemat-pre-order
   - id: games-workshop/60010299006
     name: Warhammer Age of Sigmar Starter Set
     manufacturer: games-workshop
@@ -1883,7 +1935,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 140.0
     priceEur: 143.2
-    priceCad: 225.25
+    priceCad: 238.0
     url: https://www.warhammer.com/en-GB/shop/age-of-sigmar-ultimate-starter-set-2024-eng
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010299044_ENGAoSSpearheadStarterSetUPDATE1.jpg
     description: |-
@@ -1949,7 +2001,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 72.5
     priceEur: 73.7
-    priceCad: 114.75
+    priceCad: 121.55
     url: https://www.warhammer.com/en-GB/shop/age-of-sigmar-starter-set-2024-eng
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010299045_ENGAoSStarterSet1.jpg
     description: |-
@@ -2033,7 +2085,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 31.87
+    priceGbp: 37.4
     url: https://www.goblingaming.co.uk/products/age-of-sigmar-introductory-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60010299046_ENGAoSIntroductorySet15.jpg?v=1721990892
     evidence:
@@ -2059,7 +2111,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 113.9
+    priceGbp: 119.0
     priceEur: 148.85
     priceCad: 225.25
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-spearhead-city-of-ash
@@ -2091,7 +2143,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 97.75
+    priceGbp: 102.0
     priceEur: 122.8
     url: https://www.gamenerdz.com/adeptus-titanicus-the-horus-heresy
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/TR_60010399003_ATBoxedGame.jpg?v=1581153036
@@ -2249,8 +2301,8 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 78.4
-    priceCad: 168.3
+    priceGbp: 87.13
+    priceCad: 174.25
     url: https://www.goblingaming.co.uk/products/necromunda-skirmish-core-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60010599006_ENGNecromundaSkirmishGame1.jpg?v=1785489893
     evidence:
@@ -2712,9 +2764,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 59.07
+    priceGbp: 61.63
     priceEur: 73.7
-    priceCad: 114.75
+    priceCad: 121.55
     url: https://www.gamenerdz.com/warhammer-underworlds-embergard-core-game
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-34-0001-60010799027-WarhammerUnderworldsCoreGameEmbergard.jpg?v=1730474534
     evidence:
@@ -2744,9 +2796,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 44.2
+    priceGbp: 45.9
     priceEur: 54.9
-    priceCad: 85.0
+    priceCad: 88.4
     url: https://www.gamenerdz.com/warhammer-underworlds-spitewood-expansion-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60010799028_ENGWarhammerUnderworldsSpitewood20.jpg?v=1759508253
     evidence:
@@ -2775,7 +2827,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 136.0
+    priceGbp: 140.25
     priceEur: 164.9
     priceCad: 283.5
     url: https://www.gamenerdz.com/warhammer-quest-darkwater
@@ -2889,9 +2941,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 74.8
+    priceGbp: 78.2
     priceEur: 94.1
-    priceCad: 148.75
+    priceCad: 154.7
     url: https://www.goblingaming.co.uk/products/blood-bowl-third-season-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60010999014_ENGBloodBowlSeason3CoreGameBOX.jpg?v=1761932233
     evidence:
@@ -3003,9 +3055,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 105.0
+    priceGbp: 123.25
     priceEur: 147.3
-    priceCad: 238.0
+    priceCad: 246.5
     url: https://www.goblingaming.co.uk/products/war-of-the-rohirrim-battle-of-edoras
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60011499013_ENGWotRBattleEdoras29.jpg?v=1732900501
     evidence:
@@ -3074,7 +3126,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 134.0
     priceEur: 139.1
-    priceCad: 221.0
+    priceCad: 225.25
     url: https://www.warhammer.com/en-GB/shop/legions-imperialis-the-horus-heresy-eng-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60012699002_LICoreSet2.jpg
     description: |-
@@ -3285,9 +3337,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 127.5
+    priceGbp: 131.75
     priceEur: 155.5
-    priceCad: 246.5
+    priceCad: 255.0
     url: https://www.gamenerdz.com/warhammer-the-old-world-fantasy-battles-in-the-world-of-legend-core-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60012799001_ENGWHtOWCoreSet1.jpg?v=1783074040
     evidence:
@@ -3336,9 +3388,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 170.0
+    priceGbp: 174.25
     priceEur: 206.2
-    priceCad: 327.25
+    priceCad: 335.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-saturnine
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60013099002_ENGHorusHeresyAgeofDarknessSaturnine2ndEditionFirstWaveCoreGame1.jpg?v=1752246823
     evidence:
@@ -4006,9 +4058,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 19.35
+    priceGbp: 19.8
     priceEur: 24.0
-    priceCad: 35.28
+    priceCad: 36.55
     url: https://www.gamenerdz.com/warhammer-40k-blood-angels-codex-supplement-10e
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-41-01-60030101063-Warhammer40000CodexSupplementBloodAngels.jpg?v=1728062177
     evidence:
@@ -4037,9 +4089,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 19.35
+    priceGbp: 19.8
     priceEur: 21.6
-    priceCad: 35.28
+    priceCad: 36.55
     url: https://www.gamenerdz.com/warhammer-40k-space-wolves-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030101064_EngSWCodex01.jpg?v=1751041479
     evidence:
@@ -4070,7 +4122,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 19.35
     priceEur: 24.1
-    priceCad: 35.28
+    priceCad: 36.55
     url: https://www.gamenerdz.com/warhammer-40k-black-templars-codex-supplement-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030101065_ENGBlackTemplarsCodexHB1.jpg?v=1753466846
     evidence:
@@ -4080,6 +4132,33 @@ products:
       - ret-radaddel:/black-templars-codex-englisch
       - ret-radaddel:black-templars-codex-englisch
       - ret-tistaminis:codex-supplement-black-templars-pre-order
+  - id: games-workshop/60030101066
+    name: 'Warhammer 40K: Space Marines - Codex (11th Edition)'
+    manufacturer: games-workshop
+    productCode: '60030101066'
+    sku: GWS48-01-11E
+    ean: '9781804578544'
+    eanConfidence: confirmed
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-30'
+    priceGbp: 21.25
+    priceCad: 42.5
+    url: https://www.gamenerdz.com/warhammer-40k-space-marines-codex-11th-edition
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60030101066_ENGSpaceMarinesCodex1.jpg?v=1789728107
+    evidence:
+      - ret-gamenerdz:/warhammer-40k-space-marines-codex-11th-edition
+      - ret-gamenerdz:/warhammer-40k-space-marines-codex-11th-edition-preorder
+      - ret-goblingaming:codex-space-marines-english
+      - ret-tistaminis:codex-space-marines-pre-order
   - id: games-workshop/60030102019
     name: 'CODEX: THOUSAND SONS (HB) (ENG)'
     manufacturer: games-workshop
@@ -4318,9 +4397,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.goblingaming.co.uk/products/warhammer-40k-codex-chaos-space-marines-10th-edition-eng
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-43-01-60030102030-CodexChaosSpaceMarines.jpg?v=1715338030
     evidence:
@@ -4348,9 +4427,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-chaos-knights-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_06_60030102031_ENGChaosKnightsHBCodex1.jpg?v=1749222932
     evidence:
@@ -4379,9 +4458,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 40.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-death-guard-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_04_60030102032_EFGISDGCodex01.jpg?v=1745594056
     evidence:
@@ -4410,9 +4489,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-thousand-sons-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030102033_EngTSCodex01_1.jpg?v=1747403793
     evidence:
@@ -4441,9 +4520,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-world-eaters-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_04_60030102034_WorldEatersStdEdHBCodex1.jpg?v=1745593903
     evidence:
@@ -4472,9 +4551,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 35.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-emperor-s-children-codex
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030102035_ENGFREGERITASPAEmperorsChildrenStdEdHBCodex.jpg?v=1744444213
     evidence:
@@ -4571,7 +4650,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-25'
-    priceGbp: 21.25
+    priceGbp: 22.5
     priceEur: 29.0
     url: https://www.gamenerdz.com/warhammer-40k-orks-codex-softcover
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030103014_ENGOrksCodex01.jpg?v=1787325695
@@ -4642,9 +4721,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-aeldari-codex-10e
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030104013_AeldariHBStdEdCodex1.jpg?v=1737735852
     evidence:
@@ -4712,9 +4791,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-astra-militarum-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030105013_EngAMCodex01.jpg?v=1738946517
     evidence:
@@ -4784,9 +4863,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-tyranids-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030106010_ENGTYRCodex1.jpg?v=1693584060
     evidence:
@@ -4853,9 +4932,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.5
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-grey-knights-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030107008_INTGreyKnightsBattletome01.jpg?v=1753466829
     evidence:
@@ -5003,9 +5082,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-adeptus-custodes-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-01-14-60030108019-CodexAdeptusCustodes.jpg?v=1712933864
     evidence:
@@ -5035,9 +5114,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-adepta-sororitas-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030108020_EngASCodex01.jpg?v=1717775670
     evidence:
@@ -5067,9 +5146,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 26.6
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-imperial-agents
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030108021_ENGIACodex1.jpg?v=1723222156
     evidence:
@@ -5098,9 +5177,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-imperial-knights-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030108022_ENGImperialKnightsCodexHBSTDED1.jpg?v=1757090659
     evidence:
@@ -5186,9 +5265,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-necrons-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030110008_NECCodex1.jpg?v=1700843661
     evidence:
@@ -5277,9 +5356,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 32.3
+    priceGbp: 33.58
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-drukhari-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030112009_EFGISDRUCodex01.jpg?v=1758905164
     evidence:
@@ -5372,9 +5451,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-tau-empire-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-56-01-60030113014-CodexTauEmpire.jpg?v=1714141818
     evidence:
@@ -5478,9 +5557,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-adeptus-mechanicus-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030116008_ENGADMECHCodex01.jpg?v=1700843800
     evidence:
@@ -5554,9 +5633,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-codex-genestealer-cults-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030117005_ENGGSCCodex1.jpg?v=1717775720
     evidence:
@@ -5604,9 +5683,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-leagues-of-votann-codex-10th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030118002_engLOVCodex01.jpg?v=1754671996
     evidence:
@@ -5616,6 +5695,31 @@ products:
       - ret-radaddel:/leagues-of-votann-codex-englisch
       - ret-radaddel:leagues-of-votann-codex-englisch
       - ret-tistaminis:codex-leagues-of-votann-pre-order
+  - id: games-workshop/60030143001
+    name: 'Codex: Adeptus Custodes (11th Edition)'
+    manufacturer: games-workshop
+    productCode: '60030143001'
+    sku: '60030143001'
+    ean: '9781804578827'
+    eanConfidence: confirmed
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 21.25
+    priceCad: 42.5
+    url: https://www.goblingaming.co.uk/products/codex-adeptus-custodes-11th-edition
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60030143001_ENGAdeptusCustodesCodex01.jpg?v=1790934128
+    evidence:
+      - ret-goblingaming:codex-adeptus-custodes-11th-edition
+      - ret-tistaminis:codex-adeptus-custodes-pre-order
   - id: games-workshop/60030199043
     name: 'KILL TEAM CODEX: OCTARIUS (ENGLISH)'
     manufacturer: games-workshop
@@ -5680,7 +5784,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 16.5
+    priceGbp: 24.75
     url: https://www.gamenerdz.com/warhammer-40k-kill-team-nachmund-softcover
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/60010199045_ENGNachmundCodexLead.jpg?v=1657907391
     evidence:
@@ -5754,7 +5858,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 16.5
+    priceGbp: 24.75
     priceEur: 31.1
     url: https://www.goblingaming.co.uk/products/warhammer-40k-kill-team-codex-into-the-dark
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/TR-103-23-60030199048-KillTeamIntotheDark.jpg?v=1676045521
@@ -5999,9 +6103,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-slaves-to-darkness-chaos-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2024_11_60030201030_S2DBattletomeSTDED1.jpg?v=1732269750
     evidence:
@@ -6032,9 +6136,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.5
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-blades-of-khorne-chaos-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030201031_ENGBOKBattletome01.jpg?v=1752856838
     evidence:
@@ -6064,7 +6168,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 35.0
     priceCad: 62.9
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-maggotkin-of-nurgle-chaos-battletome-2026
@@ -6096,9 +6200,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-disciples-of-tzeentch-chaos-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030201033_ENGDoTHBBattletome1.jpg?v=1770396643
     evidence:
@@ -6126,9 +6230,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.goblingaming.co.uk/products/battletome-hedonites-of-slaanesh
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_06_60030201034_ENGHedonitesOfSlaaneshBattletome01.jpg?v=1781876766
     evidence:
@@ -6176,9 +6280,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 40.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-cities-of-sigmar-order-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030202006_ENGCoSigmarBattletomeSTDED1.jpg?v=1778867325
     evidence:
@@ -6270,9 +6374,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sylvaneth-order-battletome
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_60030204010_engSylvanethBattletome01.jpg?v=1774630539
     evidence:
@@ -6391,9 +6495,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 26.6
+    priceGbp: 35.55
     priceEur: 44.5
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-kharadron-overlords-order-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030205015_ENGKharadronOverlordsStdEdHBBattletome1.jpg?v=1752856725
     evidence:
@@ -6461,9 +6565,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-chaos-battletome-skaven-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-90-24-60030206009-AgeofSigmarSkavenBattletomeSkaven.jpg?v=1725641404
     evidence:
@@ -6684,9 +6788,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-soulblight-gravelords-death-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030207019_ENGSoulblightGravelordsBattletomeHB1.jpg?v=1746779342
     evidence:
@@ -6715,9 +6819,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-nighthaunt-death-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_08_60030207020_engNHBattletome01__2.jpg?v=1755269490
     evidence:
@@ -6745,9 +6849,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-flesh-eater-courts-death-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_08_60030207021_FlesheaterCourtsBattletomeHB1__2.jpg?v=1755269399
     evidence:
@@ -6776,9 +6880,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 40.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ossiarch-bonereapers-death-battletome-preorder
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_02_60030207022_engOssiarchBonereapersBattletome01.jpg?v=1771591106
     evidence:
@@ -6935,9 +7039,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 26.6
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-destruction-battletome-orruk-warclans-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030209014_ENGOWSTDEDBattletome1.jpg?v=1735913160
     evidence:
@@ -6967,9 +7071,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 35.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-destruction-battletome-gloomspite-gitz-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030209015_EngGSG01.jpg?v=1741381039
     evidence:
@@ -7072,7 +7176,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
     priceCad: 62.9
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-lumineth-realm-lords-order-battletome-4th-edition
@@ -7101,9 +7205,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 26.6
+    priceGbp: 35.55
     priceEur: 40.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-helsmiths-of-hashut-chaos-battletome
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030211001_EngHelsmithsOfHashutBattletome01.jpg?v=1760736334
     evidence:
@@ -7190,9 +7294,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 40.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-daughters-of-khaine-order-battletome-preorder
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_60030212010_engDaughtersOfKhaineBattletome01.jpg?v=1774630958
     evidence:
@@ -7264,7 +7368,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 32.3
+    priceGbp: 33.58
     priceEur: 44.35
     priceCad: 62.9
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ogor-mawtribes-destruction-battletome-4th-edition
@@ -7405,9 +7509,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.4
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-stormcast-eternals-order-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60030218008_EngSCEBattletome01.jpg?v=1728659696
     evidence:
@@ -7477,9 +7581,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 44.5
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-idoneth-deepkin-order-battletome-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_07_60030219003_EngIDBattletome01.jpg?v=1751619095
     evidence:
@@ -7489,6 +7593,32 @@ products:
       - ret-radaddel:/idoneth-deepkin-battletome-englisch
       - ret-radaddel:idoneth-deepkin-battletome-englisch
       - ret-tistaminis:battletome-idoneth-deepkin-pre-order
+  - id: games-workshop/60030231001
+    name: 'Warhammer Age of Sigmar: Destruction Battletome - Sons of Behemat (2026)'
+    manufacturer: games-workshop
+    productCode: '60030231001'
+    sku: GWS93-01-2026
+    ean: '9781804578643'
+    eanConfidence: confirmed
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-09-30'
+    priceGbp: 35.55
+    priceCad: 66.3
+    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60030231001_ENGSonsOfBehematBattletome01.jpg?v=1789116528
+    evidence:
+      - ret-gamenerdz:/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
+      - ret-goblingaming:battletome-sons-of-behemat
+      - ret-tistaminis:battletome-sons-of-behemat-pre-order
   - id: games-workshop/60030299003
     name: 'BATTLETOME: CITIES OF SIGMAR (HB) (ENG)'
     manufacturer: games-workshop
@@ -7594,9 +7724,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 22.75
+    priceGbp: 30.15
     priceEur: 29.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-liber-auxilia-solar-auxilia-army-book
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60033005001_ENGHorusHeresyLiberAuxiliaCodex1.jpg?v=1752246794
     evidence:
@@ -7624,9 +7754,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 29.25
+    priceGbp: 30.15
     priceEur: 29.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-liber-questoris-knights-and-titans-army-book
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60033008001_ENGHorusHeresyLiberQuestorisCodex1.jpg?v=1752246803
     evidence:
@@ -7655,9 +7785,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 29.25
+    priceGbp: 30.15
     priceEur: 29.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-liber-mechanicum-forces-of-the-taghmata-army-book
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60033016001_ENGHorusHeresyLiberMechanicumCodex1.jpg?v=1752246715
     evidence:

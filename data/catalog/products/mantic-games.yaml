@@ -5192,7 +5192,7 @@ products:
     firstSeen: '2026-07-13'
     priceCad: 22.0
     url: https://tistaminis.com/products/mantic-armada-trident-realm-tidal-terrors-booster
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/MGARR301.jpg?v=1760220954
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/Trident-Realm-Tidal-Terrors-box-mockup.png?v=1789177256
     evidence:
       - ret-tistaminis:mantic-armada-trident-realm-tidal-terrors-booster
   - id: mantic-games/MGARR401
@@ -20665,7 +20665,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 59.0
-    priceCad: 75.0
+    priceCad: 79.99
     url: https://www.manticgames.com/halo-flashpoint/banished/spartan-killers/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/spartan-killers-trio-isolated.webp
     evidence:
@@ -20731,7 +20731,8 @@ products:
     settings:
       - halo
     settingsBasis: derived
-    categoryBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -20751,6 +20752,7 @@ products:
       - legacy-catalog:mantic-games/halo-flashpoint/general/sangheili-mercenaries
       - mfr-manticgames:499626
       - ret-gamenerdz:/halo-flashpoint-banished-sangheili-mercenaries
+      - ret-goblingaming:halo-flashpoint-sanghelli-mercenaries
       - ret-tistaminis:halo-flashpoint-sangheili-mercenaries
   - id: mantic-games/MGHAB303
     name: 'Halo: Flashpoint Banished Reinforcements'
@@ -20771,7 +20773,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 50.0
-    priceCad: 76.0
+    priceCad: 79.99
     url: https://www.manticgames.com/halo-flashpoint/banished/reinforcements/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/banished-reinforcements-box-isolateds.webp
     evidence:
@@ -45740,8 +45742,10 @@ products:
     manufacturer: mantic-games
     productCode: MGWD162
     sku: MGWD162
-    ean: '5060924983648'
-    eanConfidence: confirmed
+    ean: '5060924984386'
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060924983648'
     gameSystems:
       - walking-dead-all-out-war
     faction: general
@@ -45753,7 +45757,7 @@ products:
     categoryBasis: mapped
     packaging: starter
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceUsd: 71.0
@@ -71532,7 +71536,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 5.0
+    priceGbp: 8.0
     url: https://www.goblingaming.co.uk/products/elf-palace-guard-prince
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/elven-prince-elves-kings-of-war-fantasy-mantic-gam.jpg?v=1560795419
     evidence:
@@ -77530,7 +77534,7 @@ products:
     category: game-accessory
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 90.0
     url: https://tistaminis.com/products/terraincrate-6x4-grim-battlefield-battle-mat2025
@@ -78294,7 +78298,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 20.63
+    priceGbp: 28.13
     priceUsd: 40.0
     url: https://www.manticgames.com/kings-of-war/undead/skeleton-horde/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Skeleton-Horde.jpeg
@@ -78785,7 +78789,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 109.99
+    priceGbp: 131.98
     url: https://www.manticgames.com/worms/30th-deluxe-play-mat-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/worms-30th-anniversary-bundle.webp
     evidence:

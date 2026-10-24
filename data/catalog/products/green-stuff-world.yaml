@@ -296,14 +296,17 @@ products:
     settingsBasis: not-applicable
     category: paint-set
     categoryBasis: stated
+    packaging: set
     status: current
     availability: in_stock
     firstSeen: '2026-07-24'
     priceEur: 22.75
+    priceCad: 40.0
     url: https://www.greenstuffworld.com/en/chrome-paints/2625-paint-set-chrome.html
     imageUrl: https://www.greenstuffworld.com/26321-large_default/paint-set-chrome.jpg
     evidence:
       - mfr-greenstuffworld:2625
+      - ret-tistaminis:green-stuff-world-paint-set-chrome-new
   - id: green-stuff-world/10134
     name: Paint Set - Flaming Orange
     manufacturer: green-stuff-world
@@ -1329,7 +1332,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/blood-bowl-bases-32mm-with-skill-rings-new
@@ -1346,7 +1349,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/blood-bowl-bases-40mm-with-skill-rings-new
@@ -1365,7 +1368,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 45.0
     url: https://tistaminis.com/products/green-stuff-world-1000x-battlefield-resin-skulls-1-48-1-35
@@ -1477,7 +1480,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-avatar-world
@@ -1496,7 +1499,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-desert
@@ -1534,7 +1537,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-infestation
@@ -1553,7 +1556,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-swamp
@@ -1572,7 +1575,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 80.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-toxic
@@ -1591,7 +1594,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 75.0
     url: https://tistaminis.com/products/green-stuff-world-basing-sets-volcanic
@@ -1638,6 +1641,106 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/8435646515076ES.jpg?v=1760242005
     evidence:
       - ret-tistaminis:green-stuff-world-blood-effects-prince-blood
+  - id: green-stuff-world/green-stuff-world-chrome-paint-antique-gold-17ml-new
+    name: Green Stuff World Chrome Paint - ANTIQUE GOLD 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510521ES
+    ean: '8435646510521'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-10-24'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-antique-gold-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_92883a04-270b-4a94-872f-f1107da6805a.jpg?v=1760213343
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-antique-gold-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-bronze-17ml-new
+    name: Green Stuff World Chrome Paint - BRONZE 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510507ES
+    ean: '8435646510507'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-bronze-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_7a56cd45-695c-49d1-9585-7463b8c2bcd7.jpg?v=1760213349
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-bronze-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-copper-17ml-new
+    name: Green Stuff World Chrome Paint - COPPER 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510545ES
+    ean: '8435646510545'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-10-24'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-copper-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_1da570c2-0113-4436-b0c1-ae951d360448.jpg?v=1760213326
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-copper-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-gold-17ml-new
+    name: Green Stuff World Chrome Paint - GOLD 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510514ES
+    ean: '8435646510514'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-10-24'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-gold-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_2de81490-5511-4411-84bd-61b53172573d.jpg?v=1760213345
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-gold-17ml-new
+  - id: green-stuff-world/green-stuff-world-chrome-paint-tinplate-17ml-new
+    name: Green Stuff World Chrome Paint - TINPLATE 17ml New
+    manufacturer: green-stuff-world
+    sku: 8435646510538ES
+    ean: '8435646510538'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    role: colour
+    roleBasis: paint-archive
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-10-24'
+    priceCad: 7.0
+    url: https://tistaminis.com/products/green-stuff-world-chrome-paint-tinplate-17ml-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_7d6e36da-0f95-46c9-aa4c-db5e8232effb.jpg?v=1760213329
+    evidence:
+      - ret-tistaminis:green-stuff-world-chrome-paint-tinplate-17ml-new
   - id: green-stuff-world/green-stuff-world-clear-objective-marker-kill-team-compatible
     name: "Green Stuff World\tClear Objective Marker Kill Team compatible"
     manufacturer: green-stuff-world
@@ -1688,7 +1791,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 9.0
     url: https://tistaminis.com/products/green-stuff-world-crackle-paint-winterfell-plains-60ml
@@ -1765,7 +1868,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-dungeon-dnd-coins
@@ -1821,7 +1924,7 @@ products:
     role: varnish
     roleBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 12.0
     url: https://tistaminis.com/products/green-stuff-world-gloss-varnish-60ml
@@ -1841,7 +1944,7 @@ products:
     role: colour
     roleBasis: paint-archive
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 4.5
     url: https://tistaminis.com/products/green-stuff-world-intensity-ink-osl-white
@@ -1879,7 +1982,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 50.0
     url: https://tistaminis.com/products/green-stuff-world-magnifying-desk-lamp-faded-white
@@ -1896,7 +1999,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/green-stuff-world-magnifying-glasses-for-hobbies
@@ -1916,7 +2019,7 @@ products:
     role: colour
     roleBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 11.0
     url: https://tistaminis.com/products/green-stuff-world-maxx-darth-black-paint-17-ml
@@ -1936,7 +2039,7 @@ products:
     role: colour
     roleBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 26.0
     url: https://tistaminis.com/products/green-stuff-world-maxx-darth-paint-60-ml
@@ -1955,7 +2058,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-mdf-multipurpose-rack-x4
@@ -1975,7 +2078,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-mdf-multipurpose-rack-x6
@@ -2113,7 +2216,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 18.0
     url: https://tistaminis.com/products/green-stuff-world-miniature-camouflage-nets-green-1-35
@@ -2132,7 +2235,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 18.0
     url: https://tistaminis.com/products/green-stuff-world-miniature-camouflage-nets-khaki-1-35
@@ -2151,7 +2254,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 9.0
     url: https://tistaminis.com/products/green-stuff-world-mixed-micro-glass-balls-0-5-1-5mm
@@ -2303,7 +2406,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 30.0
     url: https://tistaminis.com/products/green-stuff-world-multipurpose-open-rack-corner
@@ -2322,7 +2425,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 25.0
     url: https://tistaminis.com/products/green-stuff-world-multipurpose-open-rack
@@ -2396,7 +2499,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 45.0
     url: https://tistaminis.com/products/green-stuff-world-premium-dry-brush-set-blue-series
@@ -2432,7 +2535,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 3.75
     url: https://tistaminis.com/products/green-stuff-world-refillable-markers-x1-detail
@@ -2508,7 +2611,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 9.0
     url: https://tistaminis.com/products/green-stuff-world-round-to-square-base-adapter-40mm
@@ -2527,7 +2630,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceCad: 32.0
     url: https://tistaminis.com/products/green-stuff-world-silicone-molds-sandbags
@@ -2601,7 +2704,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 20.0
     url: https://tistaminis.com/products/green-stuff-world-vertical-paint-organizer-17ml-lite
@@ -2639,7 +2742,7 @@ products:
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 16.0
     url: https://tistaminis.com/products/green-stuff-world-water-slide-decals-pin-ups

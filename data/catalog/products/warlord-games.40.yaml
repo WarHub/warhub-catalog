@@ -212,7 +212,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.0
+    priceGbp: 20.0
     url: https://www.goblingaming.co.uk/products/campaign-overlord-supplement
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/campaign-overlord-supplement-bolt-action-warlord-g.jpg?v=1560808571
     evidence:
@@ -803,7 +803,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 20.0
+    priceGbp: 22.4
     priceEur: 27.95
     priceCad: 38.75
     url: https://www.goblingaming.co.uk/products/armies-of-germany-2025
@@ -877,36 +877,6 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/digital-armies-of-germany-third-edition-pdf
       - mfr-warlord-store:digital-armies-of-germany-third-edition-pdf
-  - id: warlord-games/401013001
-    name: Armies of the United States Book - Bolt Action
-    manufacturer: warlord-games
-    productCode: '401013001'
-    sku: '401013001'
-    ean: '9781472863874'
-    eanConfidence: conflicted
-    additionalEans:
-      - '5060917994545'
-    gameSystems:
-      - bolt-action
-    gameSystemsBasis: code
-    settings:
-      - world-war-two
-    settingsBasis: derived
-    category: book
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 20.0
-    priceEur: 29.45
-    priceCad: 38.7
-    url: https://www.goblingaming.co.uk/products/armies-of-the-united-states-book-bolt-action
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/401013001_ArmiesoftheUnitedStates_2025_01.jpg?v=1742572232
-    evidence:
-      - ret-goblingaming:armies-of-the-united-states-book-bolt-action
-      - ret-radaddel:/armies-of-the-united-states-third-edition-englisch
-      - ret-radaddel:armies-of-the-united-states-third-edition-englisch
-      - ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025
   - id: warlord-games/401013001_EBOOK
     name: 'Digital Armies of the United States: Third Edition eBook'
     manufacturer: warlord-games
@@ -995,6 +965,27 @@ products:
       - ret-radaddel:/bolt-action-armies-of-the-soviet-union-englisch
       - ret-radaddel:bolt-action-armies-of-the-soviet-union-englisch
       - ret-tistaminis:bolt-action-armies-of-the-soviet-union
+  - id: warlord-games/401015501
+    name: Bolt Action Armies of France Nov 2026 Pre-Order
+    manufacturer: warlord-games
+    productCode: '401015501'
+    sku: '401015501'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceCad: 37.6
+    url: https://tistaminis.com/products/bolt-action-armies-of-france
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/401015501.jpg?v=1788691224
+    evidence:
+      - ret-tistaminis:bolt-action-armies-of-france
   - id: warlord-games/401015801
     name: Armies of Italy - Bolt Action
     manufacturer: warlord-games
@@ -1013,7 +1004,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 16.8
+    priceGbp: 22.4
     priceEur: 29.45
     priceCad: 44.2
     url: https://www.goblingaming.co.uk/products/armies-of-italy-bolt-action
@@ -1085,7 +1076,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 20.0
+    priceGbp: 22.4
     priceEur: 29.95
     url: https://www.goblingaming.co.uk/products/armies-of-imperial-japan-bolt-action
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/409916006_ArmiesofImperialJapanwithIntotheJungle_s.jpg?v=1766248154
@@ -2809,7 +2800,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 69.0
     url: https://store.warlordgames.com/products/panzer-viii-maus-super-heavy-tank
@@ -7009,7 +7000,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 32.0
     url: https://store.warlordgames.com/products/sas-dice-bag-dice
@@ -11713,7 +11704,6 @@ products:
     manufacturer: warlord-games
     productCode: '4099300010'
     sku: '4099300010'
-    bundleOf: warlord-games/401013001
     gameSystems:
       - bolt-action
     faction: general

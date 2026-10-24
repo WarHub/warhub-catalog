@@ -1,5 +1,80 @@
 # Acquisition health (combined)
 
+_Run 2026-10-24 -- combined per-group reports, group order A1-G._
+
+---
+
+## Group A1
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| mfr-warlord-store | ok | False | 5865 | 0 | barcodes_found=1033, detail_fetch_errors=0, details_fetched=2000, enumeration_capped=0, enumeration_capped_by_400=0, fetched_pages=25, out_of_scope_vendor=0, products_seen=5882, skipped_unknown_vendor=17, unmapped_hints=8457 |
+
+## Unmapped hints
+
+- mfr-warlord-store: 8457
+
+---
+
+## Group A2
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| mfr-steamforged | ok | False | 246 | 0 | barcodes_found=127, detail_fetch_errors=1, details_fetched=248, enumeration_capped=0, enumeration_capped_by_400=0, excluded_keys=2, excluded_retracted=0, fetched_pages=4, out_of_scope_vendor=0, products_seen=587, skipped_unknown_vendor=339, unmapped_hints=490 |
+| mfr-warmachine | ok | False | 676 | 0 | barcodes_found=494, detail_fetch_errors=110, details_fetched=676, enumeration_capped=0, enumeration_capped_by_400=0, fetched_pages=4, out_of_scope_vendor=0, products_seen=680, skipped_unknown_vendor=4, unmapped_hints=1241 |
+| mfr-wyrd-store | ok | False | 620 | 0 | barcodes_found=544, detail_fetch_errors=0, details_fetched=620, enumeration_capped=0, enumeration_capped_by_400=0, fetched_pages=4, out_of_scope_vendor=0, products_seen=620, skipped_unknown_vendor=0, unmapped_hints=1240 |
+
+## Unmapped hints
+
+- mfr-steamforged: 490
+- mfr-warmachine: 1241
+- mfr-wyrd-store: 1240
+
+---
+
+## Group B
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| mfr-corvus-belli | ok | True | 257 | 42 | fetched_pages=23, products_seen=257, reported_total=257, skipped_missing_identifier=0, skipped_missing_name=0, skipped_unknown_vendor=0, unmapped_hints=0 |
+| mfr-gw-algolia | ok | True | 2853 | 217 | cross_slice_duplicates=195, fetched_pages=33, malformed_object_id=0, missing_game_system_facets=0, products_seen=2853, reported_nbhits=2853, skipped_missing_name=0, skipped_unknown_vendor=0, slices_over_pagination_cap=0, unmapped_hints=2445 |
+| mfr-manticgames | ok | False | 2844 | 0 | detail_fetch_errors=263, details_fetched=271, excluded_keys=1, excluded_retracted=0, fetched_pages=30, gtins_found=0, products_seen=2845, reported_total=2845, skipped_unknown_vendor=0, unmapped_hints=4432 |
+| mfr-para-bellum | ok | True | 419 | 11 | detail_fetch_errors=0, details_fetched=0, fetched_pages=6, gtins_found=0, products_seen=419, reported_total=419, skipped_unknown_vendor=0, unmapped_hints=87 |
+
+## Unmapped hints
+
+- mfr-gw-algolia: 2445
+- mfr-manticgames: 4432
+- mfr-para-bellum: 87
+
+---
+
+## Group C
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| ret-goblingaming | ok | False | 8249 | 0 | barcodes_found=1317, detail_fetch_errors=1, details_fetched=1500, enumeration_capped=0, enumeration_capped_by_400=0, fetched_pages=60, out_of_scope_vendor=0, products_seen=14636, skipped_unknown_vendor=6387, unmapped_hints=16496 |
+| ret-tistaminis | ok | False | 3864 | 0 | barcodes_found=1400, detail_fetch_errors=0, details_fetched=1500, enumeration_capped=1, enumeration_capped_by_400=0, fetched_pages=100, out_of_scope_vendor=0, products_seen=25000, skipped_unknown_vendor=21136, unmapped_hints=3827 |
+
+## Unmapped hints
+
+- ret-goblingaming: 16496
+- ret-tistaminis: 3827
+
+---
+
+## Group D
+
+# Acquisition health (combined)
+
 _Run 2026-10-23 -- combined per-group reports, group order A1-G._
 
 ---
@@ -68,3 +143,45 @@ _Run 2026-10-23 -- combined per-group reports, group order A1-G._
 |---|---|---|---|---|---|
 | ret-gamenerdz | ok | False | 705 | 0 | breadcrumbs_found=705, ean_source_bcdata=702, ean_source_jsonld=0, ean_source_microdata=0, eans_found=702, extraction_failed=11, fetch_errors=6, fetched_sitemaps=34, pages_fetched=1000, sitemap_urls_filtered=5023, sitemap_urls_total=267284, skipped_unknown_manufacturer=278 |
 | ret-radaddel | rate-limited |  |  |  | HTTP 429: failed to fetch /products.json (status=429) |
+
+---
+
+## Group E
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| arc-goblingaming | ok | False | 26 | 0 | cdx_pages_fetched=0, codes_found=0, eans_found=26, extraction_failed=471, fetch_errors=1, skipped_unknown_manufacturer=2, snapshots_fetched=500, urls_indexed=1435 |
+| arc-gw-webstore | rate-limited |  |  |  | HTTP 429: failed to fetch /cdx/search/cdx (status=429) |
+
+---
+
+## Group F
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| bdb-goupc | ok | False | 1 | 0 | corroborated=1, fetch_errors=20, mismatched_title=28, misses=1, queried=50, robots_crawl_delay_applied=10.0 |
+
+---
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| bdb-upcitemdb | ok | False | 0 | 0 | corroborated=0, fetch_errors=50, mismatched_title=12, misses=18, queried=80 |
+
+---
+
+
+---
+
+## Group G
+
+## Acquisition health
+
+| source | status | full sweep | observations | marked missed | stats |
+|---|---|---|---|---|---|
+| mfr-gw-trade | CONTRACT VIOLATION |  |  |  | field=ean, rate=0.9981884057971014, required=1.0, source=mfr-gw-trade, type=field-fill-rate |
