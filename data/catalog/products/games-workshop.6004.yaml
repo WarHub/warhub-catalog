@@ -1365,7 +1365,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.4
+    priceGbp: 19.8
     url: https://www.goblingaming.co.uk/products/minka-last-hells-last-hb
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040181372_BLHellsLast.jpg?v=1740157004
     evidence:
@@ -1774,7 +1774,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 29.75
     url: https://tistaminis.com/products/apostle-hb-pre-order
@@ -1796,7 +1796,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 34.0
     url: https://tistaminis.com/products/faith-and-fire-anniversary-edition-hb-pre-order
@@ -1910,7 +1910,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 20.0
     priceCad: 29.75
@@ -2043,9 +2043,9 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-25'
-    priceGbp: 21.25
+    priceGbp: 22.5
     priceEur: 28.1
     url: https://www.goblingaming.co.uk/products/ghazghkull-thraka-prophet-of-the-waaagh-illustrated
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040181443_BLGhazghkullThrakaProphetOfTheWaaagh01.jpg?v=1787325699
@@ -2228,6 +2228,29 @@ products:
       - ret-goblingaming:armageddon-season-of-fire-hb
       - ret-radaddel:/armageddon-season-of-fire-englisch
       - ret-tistaminis:armageddon-season-of-fire-hardback
+  - id: games-workshop/60040181456
+    name: 'Raldoron: Revenant - Hardback'
+    manufacturer: games-workshop
+    productCode: '60040181456'
+    sku: '60040181456'
+    ean: '9781836093817'
+    eanConfidence: confirmed
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 13.5
+    priceCad: 21.25
+    url: https://www.goblingaming.co.uk/products/raldoron-revenant-hb
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040181456_BLRaldoronRevenantENG2026.jpg?v=1787937242
+    evidence:
+      - ret-goblingaming:raldoron-revenant-hb
+      - ret-tistaminis:raldoron-revenant-hb-pre-order
   - id: games-workshop/60040181457
     name: 'Ciaphas Cain: For The Emperor - Illustrated Hardback'
     manufacturer: games-workshop
@@ -2268,7 +2291,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 22.0
     priceEur: 25.7
@@ -2370,7 +2393,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 18.7
+    priceGbp: 19.8
     priceEur: 25.7
     priceCad: 34.0
     url: https://www.goblingaming.co.uk/products/the-horus-heresy-saga-galaxy-in-flames-hardback
@@ -2379,8 +2402,31 @@ products:
       - ret-goblingaming:the-horus-heresy-saga-galaxy-in-flames-hardback
       - ret-radaddel:horus-heresy-galaxy-in-flames-hb-englisch
       - ret-tistaminis:thh-saga-galaxy-in-flames-hb-pre-order
+  - id: games-workshop/60040181469
+    name: Voice Of Command - Hardback
+    manufacturer: games-workshop
+    productCode: '60040181469'
+    sku: '60040181469'
+    ean: '9781836094555'
+    eanConfidence: confirmed
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 18.0
+    priceCad: 29.75
+    url: https://www.goblingaming.co.uk/products/voice-of-command-hardback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60040181469_BLVoiceOfCommand2026.jpg?v=1788515341
+    evidence:
+      - ret-goblingaming:voice-of-command-hardback
+      - ret-tistaminis:voice-of-command-hb
   - id: games-workshop/60040181472
-    name: 'Bjorn: The Fell-Handed (Hb)'
+    name: 'Bjorn: The Fell-Handed - Hardback'
     manufacturer: games-workshop
     productCode: '60040181472'
     sku: '60040181472'
@@ -2395,13 +2441,82 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-25'
-    priceGbp: 12.75
+    priceGbp: 13.5
     priceEur: 17.8
     url: https://www.goblingaming.co.uk/products/bjorn-the-fell-handed-hb
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040181472_BLBjornTheFelHanded2026.jpg?v=1787325742
     evidence:
       - ret-goblingaming:bjorn-the-fell-handed-hb
       - ret-radaddel:bjorn-the-fell-handed-hb-englisch
+  - id: games-workshop/60040181474
+    name: 'Blackheart: Claws Of The Maelstrom - Hardback'
+    manufacturer: games-workshop
+    productCode: '60040181474'
+    sku: '60040181474'
+    ean: '9781836094647'
+    eanConfidence: confirmed
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 18.0
+    priceCad: 29.75
+    url: https://www.goblingaming.co.uk/products/blackheart-claws-of-the-maelstrom-hardback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60040181474_BLBlackheartClawsOfTheMaelstrom2026.jpg?v=1788515281
+    evidence:
+      - ret-goblingaming:blackheart-claws-of-the-maelstrom-hardback
+      - ret-tistaminis:blackheart-claws-of-the-maelstrom-hb
+  - id: games-workshop/60040181476
+    name: Cold Covenant - Hardback
+    manufacturer: games-workshop
+    productCode: '60040181476'
+    sku: '60040181476'
+    ean: '9781836094654'
+    eanConfidence: confirmed
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 18.7
+    priceCad: 34.0
+    url: https://www.goblingaming.co.uk/products/cold-covenant-hardback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60040181476_BLColdCovenant2026.jpg?v=1790934179
+    evidence:
+      - ret-goblingaming:cold-covenant-hardback
+      - ret-tistaminis:cold-covenant-hb-pre-order
+  - id: games-workshop/60040181478
+    name: 'Helbrecht: Sin Of Hope - Hardback'
+    manufacturer: games-workshop
+    productCode: '60040181478'
+    sku: '60040181478'
+    ean: '9781836094685'
+    eanConfidence: confirmed
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 18.7
+    priceCad: 34.0
+    url: https://www.goblingaming.co.uk/products/helbrecht-sin-of-hope-hb
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60040181478_BLHelbrechtSinOfHope2026.jpg?v=1789726994
+    evidence:
+      - ret-goblingaming:helbrecht-sin-of-hope-hb
+      - ret-tistaminis:helbrecht-sin-of-hope-hb-pre-order
   - id: games-workshop/60040181484
     name: 'PRIMARCHS: FERRUS MANUS (HB)'
     manufacturer: games-workshop
@@ -2503,7 +2618,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 18.7
+    priceGbp: 19.8
     priceCad: 34.0
     url: https://www.goblingaming.co.uk/products/the-infinite-and-the-divine-hardback
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60040181504_BLTheInfiniteandTheDivine2026.jpg?v=1785488444
@@ -5280,9 +5395,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 38.25
+    priceGbp: 39.6
     priceEur: 48.9
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.gamenerdz.com/warhammer-40k-boarding-action
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040199175_EngWH40KBoardingActions01.jpg?v=1723222482
     evidence:
@@ -5311,9 +5426,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.65
+    priceGbp: 36.0
     priceEur: 44.4
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.gamenerdz.com/warhammer-40k-kill-team-core-book-2024
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040199176_ENGKTCoreBook2.jpg?v=1726851259
     evidence:
@@ -5369,7 +5484,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 62.9
     url: https://www.gamenerdz.com/warhammer-40k-crusade-armageddon-hardcover
@@ -5444,9 +5559,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 21.25
+    priceGbp: 22.1
     priceEur: 28.9
-    priceCad: 42.5
+    priceCad: 45.05
     url: https://www.gamenerdz.com/warhammer-40k-kill-team-nemesis-operatives
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_60040199186_engKTNemesisOperatives01.jpg?v=1778245004
     evidence:
@@ -5474,7 +5589,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 32.2
+    priceGbp: 41.4
     priceEur: 42.0
     priceCad: 76.5
     url: https://www.gamenerdz.com/warhammer-40k-eye-of-terror-reign-of-iron-war-for-the-cadian-gate
@@ -5504,7 +5619,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.5
+    priceGbp: 39.1
     priceEur: 42.0
     priceCad: 76.5
     url: https://www.gamenerdz.com/warhammer-40k-armageddon-the-return-of-yarrick-war-without-end-hardcover
@@ -5535,9 +5650,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 13.5
+    priceGbp: 13.95
     priceEur: 17.8
-    priceCad: 25.5
+    priceCad: 26.35
     url: https://www.gamenerdz.com/warhammer-40k-core-rules-11th-edition-softcover
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040199194_ENGArmageddonCoreRulesBook01.jpg?v=1781283133
     evidence:
@@ -5565,9 +5680,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 18.45
+    priceGbp: 19.35
     priceEur: 23.1
-    priceCad: 34.85
+    priceCad: 36.12
     url: https://www.gamenerdz.com/warhammer-40k-combat-patrol-companion-softcover
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_06_60040199201_ENGWH40kCombatPatrolCompanion1.jpg?v=1781260240
     evidence:
@@ -6108,7 +6223,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 14.0
+    priceGbp: 18.0
     priceEur: 20.0
     url: https://www.goblingaming.co.uk/products/queen-of-the-rose-throne-hardback
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040281092_BLQueenOfTheRoseThroneENG2025.jpg?v=1752856855
@@ -6195,9 +6310,9 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 18.7
+    priceGbp: 19.8
     priceEur: 25.7
     priceCad: 34.0
     url: https://www.goblingaming.co.uk/products/blood-of-the-godeater-hardback
@@ -6206,6 +6321,27 @@ products:
       - ret-goblingaming:blood-of-the-godeater-hardback
       - ret-radaddel:blood-of-the-godeater-hb-englisch
       - ret-tistaminis:blood-of-the-godeater-hb-pre-order
+  - id: games-workshop/60040281099
+    name: Shadow Of The Silver Wolf - Hardback
+    manufacturer: games-workshop
+    productCode: '60040281099'
+    sku: '60040281099'
+    ean: '9781836094692'
+    eanConfidence: provisional
+    gameSystemsBasis: setting
+    settings:
+      - age-of-sigmar
+    settingsBasis: code
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 17.0
+    url: https://www.goblingaming.co.uk/products/shadow-of-the-silver-wolf-hardback
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60040281099_BLShadowOfTheSilverWolf2026.jpg?v=1792146372
+    evidence:
+      - ret-goblingaming:shadow-of-the-silver-wolf-hardback
   - id: games-workshop/60040281223
     name: GODSBANE (HB)
     manufacturer: games-workshop
@@ -7368,7 +7504,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 16.5
+    priceGbp: 18.7
     priceEur: 16.1
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-warcry-warband-tome-rot-and-ruin
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/60040299128_EngWCRotandRuin01.jpg?v=1669391433
@@ -7396,7 +7532,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 26.6
+    priceGbp: 34.2
     url: https://www.goblingaming.co.uk/products/age-of-sigmar-path-to-glory
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040299130_AoSPathtoGloryRavagedCoastHBStdEdBook1.jpg?v=1735913093
     evidence:
@@ -7542,7 +7678,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.75
+    priceGbp: 22.05
     priceCad: 53.55
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-dawnbringers-book-iii-the-long-hunt
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040299142_EngAoSDawnbringersTheLongHunt01.jpg?v=1698394400
@@ -7655,7 +7791,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 40.05
+    priceGbp: 41.85
     priceEur: 40.3
     priceCad: 74.8
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-core-book-4th-edition-preorder
@@ -7761,9 +7897,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.2
+    priceGbp: 35.55
     priceEur: 40.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-path-to-glory-blighted-wilds
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040299161_engPathToGloryBlightedWildsBook01.jpg?v=1764350754
     evidence:
@@ -7791,9 +7927,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 25.9
+    priceGbp: 33.75
     priceEur: 42.2
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.goblingaming.co.uk/products/age-of-sigmar-generals-handbook-2026-2027
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_06_60040299162_ENGAgeOfSigmarGeneralsHandbook00.jpg?v=1781877157
     evidence:
@@ -7867,7 +8003,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 31.95
+    priceGbp: 33.3
     priceEur: 40.0
     url: https://www.goblingaming.co.uk/products/loyalist-legios-rules-supplement-en-adeptus-titanicus
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2021_04_TR-400-42-60040399014-AdeptusTitanicus-LoyalistLegiosENG.jpg?v=1631620811
@@ -7915,7 +8051,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 31.95
+    priceGbp: 33.3
     priceEur: 40.0
     url: https://www.gamenerdz.com/adeptus-titanicus-the-horus-heresy-traitor-legios-hardcover
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2021_10_60040399016_ATTraitorLegios01.jpg?v=1635541710
@@ -7945,9 +8081,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 36.0
+    priceGbp: 37.35
     priceEur: 45.8
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.gamenerdz.com/adeptus-titanicus-the-horus-heresy-campaign-compendium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/TR-400-47-60040399017-AdeptusTitanicusCampaignCompendium.jpg?v=1682094023
     evidence:
@@ -8601,8 +8737,8 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 27.63
-    priceCad: 54.4
+    priceGbp: 30.15
+    priceCad: 56.1
     url: https://www.goblingaming.co.uk/products/necromunda-skirmish-core-rulebook
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60040599048_ENGNecSkirmishCoreHBRulebook1.jpg?v=1785489770
     evidence:
@@ -8628,8 +8764,8 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 27.63
-    priceCad: 54.4
+    priceGbp: 30.15
+    priceCad: 56.1
     url: https://www.goblingaming.co.uk/products/necromunda-gangs-of-the-underhive
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60040599049_GangsoftheUnderhive1.jpg?v=1785489672
     evidence:
@@ -8655,14 +8791,64 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 27.63
-    priceCad: 54.4
+    priceGbp: 30.15
+    priceCad: 56.1
     url: https://www.goblingaming.co.uk/products/necromunda-gangs-of-the-outlands
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60040599050_GangsoftheOutlands1.jpg?v=1785489626
     evidence:
       - mfr-gw-trade:60040599050
       - ret-goblingaming:necromunda-gangs-of-the-outlands
       - ret-tistaminis:necromunda-gangs-of-the-outlands-pre-order
+  - id: games-workshop/60040599052
+    name: 'Underhive Journal: Escher House Of Blades'
+    manufacturer: games-workshop
+    productCode: '60040599052'
+    sku: '60040599052'
+    ean: '9781837792269'
+    eanConfidence: confirmed
+    gameSystems:
+      - necromunda
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 15.75
+    priceCad: 29.75
+    url: https://www.goblingaming.co.uk/products/underhive-journal-escher-house-of-blades
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60040599052_NecromundaUnderhiveJournalEscherHouseofBlades1.jpg?v=1788515540
+    evidence:
+      - ret-goblingaming:underhive-journal-escher-house-of-blades
+      - ret-tistaminis:necromunda-underhive-journal-escher-house-of-blades-pre-order
+  - id: games-workshop/60040599053
+    name: 'Underhive Journal: Goliath House Of Chains'
+    manufacturer: games-workshop
+    productCode: '60040599053'
+    sku: '60040599053'
+    ean: '9781837792634'
+    eanConfidence: confirmed
+    gameSystems:
+      - necromunda
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 15.75
+    priceCad: 29.75
+    url: https://www.goblingaming.co.uk/products/underhive-journal-goliath-house-of-chains
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_60040599053_NecromundaUnderhiveJournalGoliathHouseChains1.jpg?v=1788515470
+    evidence:
+      - ret-goblingaming:underhive-journal-goliath-house-of-chains
+      - ret-tistaminis:necromunda-underhive-journal-goliath-house-of-chains-pre-order
   - id: games-workshop/60040699002
     name: 'WH40K: KILL TEAM CORE MANUAL (ENGLISH)'
     manufacturer: games-workshop
@@ -8922,9 +9108,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 25.2
+    priceGbp: 33.3
     priceEur: 40.0
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.goblingaming.co.uk/products/blood-bowl-official-rulebook-3rd
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040999029_ENGBloodBowlSeason3Rulebook.jpg?v=1761932240
     evidence:
@@ -9095,9 +9281,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 9.35
+    priceGbp: 9.9
     priceEur: 11.05
-    priceCad: 17.85
+    priceCad: 18.7
     url: https://www.goblingaming.co.uk/products/blood-bowl-spike-issue-22
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60040999036_BloodBowlSpikeIssue2201.jpg?v=1786117824
     evidence:
@@ -9271,12 +9457,16 @@ products:
       - middle-earth
     settingsBasis: derived
     category: book
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-07-23'
     priceGbp: 20.5
+    url: https://www.goblingaming.co.uk/products/middle-earth-sbg-matched-play-guide
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/original_b08af50e-2860-4950-a02c-27e183d8d1d1.jpg?v=1790778164
     evidence:
       - mfr-gw-trade:60041499055
+      - ret-goblingaming:middle-earth-sbg-matched-play-guide
   - id: games-workshop/60041499056
     name: 'M-E SBG JOURNAL: THE TREACHERY OF GOLLUM'
     manufacturer: games-workshop
@@ -9295,9 +9485,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 15.4
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.goblingaming.co.uk/products/middle-earth-sbg-journal-the-treachery-of-gollum
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60041499056_MiddleEarthTreacheryOfGollumBook01.jpg?v=1768585735
     evidence:
@@ -9324,9 +9514,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 31.95
+    priceGbp: 33.3
     priceEur: 40.0
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.goblingaming.co.uk/products/middle-earth-strategy-battle-game-rules-manual
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60041499057_WotRRulebook1.jpg?v=1732900498
     evidence:
@@ -9353,9 +9543,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 36.0
+    priceGbp: 37.35
     priceEur: 45.8
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.goblingaming.co.uk/products/middle-earth-strategy-battle-game-armies-of-the-lord-of-the-rings
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60041499058_ArmiesoftheLordoftheRingsRulebook1.jpg?v=1732900490
     evidence:
@@ -9382,9 +9572,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 24.85
+    priceGbp: 33.3
     priceEur: 40.0
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.goblingaming.co.uk/products/middle-earth-strategy-battle-game-armies-of-the-hobbit
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60041499059_MEHoBBArmiesOfTheHobbitHBArmyBook01.jpg?v=1732900481
     evidence:
@@ -9411,9 +9601,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 31.95
+    priceGbp: 33.3
     priceEur: 40.0
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.goblingaming.co.uk/products/middle-earth-sbg-armies-of-middle-earth
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_05_60041499060_ArmiesofMiddleEarthHBRulebook1.jpg?v=1748595376
     evidence:
@@ -9440,9 +9630,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.goblingaming.co.uk/products/middle-earth-sbg-journal-the-war-of-the-rohirrim
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60041499061_WaroftheRohirrimJounalMiddleEarthHBRulebook1.jpg?v=1758304530
     evidence:
@@ -9469,9 +9659,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.goblingaming.co.uk/products/middle-earth-sbg-journal-burning-of-the-westfold
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60041499062_MEJournalBurningOfTheWestfold01.jpg?v=1783073774
     evidence:
@@ -9571,9 +9761,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 17.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-legions-imperialis-journal-strategia-the-ruin-of-the-salamanders-softcover
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042699003_LegionsImperialisJournalStrategiaRuinoftheSalamanders01.jpg?v=1764971230
     evidence:
@@ -9628,7 +9818,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.0
+    priceGbp: 39.43
     priceCad: 78.0
     url: https://www.goblingaming.co.uk/products/legions-imperialis-rulebook
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/demo_ac715fab-dcf3-4fe4-af89-3df212c541f3.jpg?v=1701777478
@@ -9654,9 +9844,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 28.0
+    priceGbp: 37.35
     priceEur: 45.8
-    priceCad: 63.75
+    priceCad: 68.85
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-legions-imperialis-liber-strategia
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042699007_LegionsImperialisLiberStrategiaHBBook1.jpg?v=1755881697
     evidence:
@@ -9685,9 +9875,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-the-razing-of-westerland
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_11_60042701001_WHtOWArcaneJournalRazingofWesterland1.jpg?v=1763718831
     evidence:
@@ -9716,9 +9906,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-kingdom-of-bretonnia
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-06-17-60042703001-WHTOWArcaneJournalKingdomofBretonnia.jpg?v=1704461655
     evidence:
@@ -9748,9 +9938,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-tomb-kings-of-khemri
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-07-02-60042717001-WHTOWArcaneJournalTombKingsofKhemri.jpg?v=1704461526
     evidence:
@@ -9779,9 +9969,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-the-war-of-settra-s-fury
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042717002_WarhammerOldWorldArcaneJournalWarofSettrasFuryBook1.jpg?v=1759508260
     evidence:
@@ -9810,9 +10000,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 17.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-armies-of-grand-cathay
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042720001_WHtOWArcaneJournalArmiesofGrandCathayRulebook01.jpg?v=1750422916
     evidence:
@@ -9841,9 +10031,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-dawn-of-the-storm-dragon
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042720002_WarhammerOldWorldArcaneJournalDawnoftheStormDragonSB1.jpg?v=1755881707
     evidence:
@@ -9872,9 +10062,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.5
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-the-breaching-of-the-great-bastion
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042720003_WHtOWArcaneJournalBreachingoftheGreatBastionENG1.jpg?v=1772184677
     evidence:
@@ -9921,7 +10111,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 33.37
     priceEur: 40.3
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.gamenerdz.com/warhammer-the-old-world-rulebook
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-05-02-60042799001-WarhammerTheOldWorldRuleBook.jpg?v=1704460995
     evidence:
@@ -9950,9 +10140,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 29.25
+    priceGbp: 30.15
     priceEur: 37.3
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-the-old-world-ravening-hordes
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-05-03-60042799003-WarhammerTheOldWorldRaveningHordes.jpg?v=1704461034
     evidence:
@@ -9980,9 +10170,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 29.25
+    priceGbp: 30.15
     priceEur: 37.3
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-the-old-world-forces-of-fantasy
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-05-04-60042799004-WarhammerTheOldWorldForcesofFantasy.jpg?v=1704461076
     evidence:
@@ -10011,9 +10201,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-empire-of-man
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2024_12_60042799006_EoMArcaneJournalSBBook01.jpg?v=1735316477
     evidence:
@@ -10042,9 +10232,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-orc-goblin-tribes
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042799008_OGTArcaneJournal01.jpg?v=1711118119
     evidence:
@@ -10073,9 +10263,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-dwarfen-mountain-holds
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2024_07_99122705009_DMHArcaneJournal1.jpg?v=1721380300
     evidence:
@@ -10105,9 +10295,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-warriors-of-chaos
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042799010_WoCArcaneJournal01.jpg?v=1725045635
     evidence:
@@ -10138,9 +10328,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-high-elf-realms
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_02_60042799011_HERArcaneJournal01.jpg?v=1739549584
     evidence:
@@ -10170,9 +10360,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-beastmen-brayherds-arcane-journal
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_05_60042799012_TOWJournalBeastmenBrayherds01_1.jpg?v=1748595894
     evidence:
@@ -10201,9 +10391,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-wood-elf-realms-arcane-journal
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042799013_WERArcaneJournal01.jpg?v=1747403813
     evidence:
@@ -10231,9 +10421,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 17.7
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-matched-play-guide
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042799015_WHtOWMatchedPlayGuide01.jpg?v=1750422949
     evidence:
@@ -10261,9 +10451,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-battle-march-general-s-companion
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_07_60042799018_WHtOWArcaneJournalBattleMarchGeneralsCompanionSoftbackBook1.jpg?v=1783074088
     evidence:
@@ -10292,8 +10482,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 42.28
+    priceGbp: 44.18
     priceEur: 51.0
+    priceCad: 88.0
     url: https://www.goblingaming.co.uk/products/warhammer-the-old-world-rulebook
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/original_320a6bb7-2f42-4441-bfa5-ba2bf2122b47.jpg?v=1784637402
     evidence:
@@ -10301,6 +10492,7 @@ products:
       - ret-goblingaming:warhammer-the-old-world-rulebook
       - ret-radaddel:/detail/index/sArticle/24420
       - ret-radaddel:the-old-world-rulebook-revised-1st-edition-englisch
+      - ret-tistaminis:warhammer-warhammer-the-old-world-rulebook-revised-1st-edition
   - id: games-workshop/60042799020
     name: 'ARCANE JOURNAL: THE MARCH OF CHAOS'
     manufacturer: games-workshop
@@ -10320,9 +10512,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 14.45
+    priceGbp: 15.75
     priceEur: 19.5
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-the-march-of-chaos
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60042799020_ENGWHtOWArcaneJournalBattleMarchSoftbackBook1.jpg?v=1786117851
     evidence:
@@ -10350,9 +10542,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.goblingaming.co.uk/products/journal-tactica-zone-mortalis
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043001001_HorusHeresyJournalTacticaZoneMortalis01.jpg?v=1782485190
     evidence:
@@ -10380,9 +10572,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.goblingaming.co.uk/products/journal-tactica-the-battle-of-tallarn-p1
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043005001_JOURNALTACTICABATTLEOFTALLARNPartOne1.jpg?v=1777651983
     evidence:
@@ -10410,9 +10602,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-journal-tactica-skitarii-the-steel-hand-of-mars
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043016001_HorusHeresyJournalTacticaSkitariiSteelHandofMarsBook01.jpg?v=1768585742
     evidence:
@@ -10422,6 +10614,27 @@ products:
       - ret-radaddel:/journal-tactica-skitarii-steel-hand-of-mars-englisch
       - ret-radaddel:journal-tactica-skitarii-steel-hand-of-mars-englisch
       - ret-tistaminis:journal-tactica-skitarii-steel-hand-of-mars-pre-order
+  - id: games-workshop/60043043001
+    name: 'Journal Tactica: Prospero Burns: Judgement Of Valdor'
+    manufacturer: games-workshop
+    productCode: '60043043001'
+    sku: '60043043001'
+    ean: '9781837791897'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 15.75
+    priceCad: 29.75
+    url: https://www.goblingaming.co.uk/products/journal-tactica-prospero-burns-judgement-of-valdor
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043043001_HorusHeresyJournalTacticaProsperoBurnsJudgementOfValdor01.jpg?v=1787937279
+    evidence:
+      - ret-goblingaming:journal-tactica-prospero-burns-judgement-of-valdor
+      - ret-tistaminis:journal-tactica-prospero-burns-judgement-of-valdor-pre-order
   - id: games-workshop/60043043002
     name: 'HORUS HERESY: LIBER CUSTODES (ENGLISH)'
     manufacturer: games-workshop
@@ -10441,9 +10654,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 29.25
+    priceGbp: 30.15
     priceEur: 29.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-liber-custodes-the-forces-of-the-emperor-army-book
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_60043043002_engHorusHeresyLiberCustodes01.jpg?v=1774029053
     evidence:
@@ -10623,9 +10836,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 40.05
+    priceGbp: 41.85
     priceEur: 40.3
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-age-of-darkness-rulebook-3rd-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043099013_ENGHorusHeresyAgeofDarknessRulebookHBSTDED1.jpg?v=1752246815
     evidence:
@@ -10654,9 +10867,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 40.05
+    priceGbp: 41.85
     priceEur: 46.0
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-liber-astartes-loyalist-legiones-astartes-army-book-3rd-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043099014_ENGHorusHeresyLiberAstartesCodex1.jpg?v=1752246799
     evidence:
@@ -10685,9 +10898,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 40.05
+    priceGbp: 41.85
     priceEur: 46.0
-    priceCad: 68.0
+    priceCad: 77.77
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-liber-hereticus-traitor-legiones-astartes-army-book-3rd-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043099015_ENGHorusHeresyLiberHereticusCodex1.jpg?v=1752246786
     evidence:
@@ -10716,9 +10929,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.05
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-journal-tactica-the-isstvan-v-dropsite-massacre-part-one
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043099016_HorusHeresyJournalTacticaIsstvanDropsiteMassacreBookPartOneENG1.jpg?v=1752246779
     evidence:
@@ -10747,9 +10960,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 19.6
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-journal-tactica-the-forges-of-saturn
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60043099017_HorusHeresyJournalTacticaForgesofSaturnRulebook1.jpg?v=1758304543
     evidence:
@@ -10777,9 +10990,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.3
+    priceGbp: 15.75
     priceEur: 18.8
-    priceCad: 28.9
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-journal-tactica-mailed-fist-legiones-astartes-super-heavy-tanks
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_60043099018_HorusHeresyMailedFistSuperheavyTanksOfTheLegionesAstartesJournal01.jpg?v=1774029065
     evidence:
@@ -10789,6 +11002,31 @@ products:
       - ret-radaddel:/journal-tactica-mailed-fist-legiones-astartes-super-heavy-tanks-englisch
       - ret-radaddel:journal-tactica-mailed-fist-legiones-astartes-super-heavy-tanks-englisch
       - ret-tistaminis:journal-tactica-mailed-fist-pre-order
+  - id: games-workshop/60043099021
+    name: 'Journal Tactica: The Battle for the Signus Cluster: Assault on Kol'
+    manufacturer: games-workshop
+    productCode: '60043099021'
+    sku: '60043099021'
+    ean: '9781837791958'
+    eanConfidence: confirmed
+    gameSystems:
+      - horus-heresy
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceGbp: 14.88
+    priceCad: 29.75
+    url: https://www.goblingaming.co.uk/products/journal-tactica-the-battle-for-the-signus-cluster-assault-on-kol
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_60043099021_HorusHeresyBattlefortheSignusClusterSB1.jpg?v=1790934260
+    evidence:
+      - ret-goblingaming:journal-tactica-the-battle-for-the-signus-cluster-assault-on-kol
+      - ret-tistaminis:journal-tactica-signus-cluster-assault-kol-pre-order
   - id: games-workshop/60049981044
     name: THE DEACON OF WOUNDS (HB)
     manufacturer: games-workshop

@@ -1199,7 +1199,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.75
     priceEur: 5.05
@@ -14315,6 +14315,22 @@ products:
     evidence:
       - legacy-catalog:warlord-games/warlords-of-erehwon/general/zindians-zombie-indians
       - mfr-warlord-store:zombie-indians
+  - id: warlord-games/WGI465
+    name: Wargames Illustrated, September 2026, Iss. 465
+    manufacturer: warlord-games
+    productCode: WGI465
+    sku: WGI465
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-24'
+    priceCad: 12.0
+    url: https://tistaminis.com/products/wargames-illustrated-september-2026-iss-465
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/WGI465.webp?v=1789955502
+    evidence:
+      - ret-tistaminis:wargames-illustrated-september-2026-iss-465
   - id: warlord-games/WGJ-BPC-01
     name: 'Jacobite Rebellion: Bonnie Prince Charlie 1745'
     manufacturer: warlord-games

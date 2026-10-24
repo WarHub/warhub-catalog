@@ -1361,16 +1361,11 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 28.03
-    url: https://www.goblingaming.co.uk/products/ultramarines-chief-librarian-tigurius
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/um-chief-librarian-2019.jpg?v=1565807309
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120101254
-      - ret-goblingaming:ultramarines-chief-librarian-tigurius
   - id: games-workshop/99120101255
     name: WHITE SCARS KOR'SARRO KHAN
     manufacturer: games-workshop
@@ -1984,7 +1979,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -2703,7 +2698,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 34.0
     priceEur: 42.2
@@ -3431,7 +3426,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -3506,6 +3501,7 @@ products:
       - mfr-gw-algolia:prod4530181-99120101329
       - mfr-gw-trade:99120101329
       - ret-gamenerdz:/warhammer-40k-ultramarines-chief-librarian-tigurius
+      - ret-goblingaming:ultramarines-chief-librarian-tigurius
       - ret-radaddel:/ultramarines-chief-librarian-tigurius
       - ret-radaddel:ultramarines-chief-librarian-tigurius
   - id: games-workshop/99120101330
@@ -4539,7 +4535,9 @@ products:
     productCode: '99120101366'
     sku: '99120101366'
     ean: '5011921162864'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921256457'
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -4566,7 +4564,9 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/emperor-s-champion
       - mfr-gw-algolia:prod4790158-99120101366
+      - mfr-gw-algolia:prod4790158-99120101485
       - mfr-gw-trade:99120101366
+      - mfr-gw-trade:99120101485
       - ret-gamenerdz:/warhammer-40k-black-templars-emperors-champion
       - ret-goblingaming:emperors-champion-black-templars-warhammer-40k
       - ret-radaddel:/black-templars-emperor-s-champion
@@ -4768,7 +4768,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 54.0
     priceEur: 54.9
-    priceCad: 85.0
+    priceCad: 88.4
     url: https://www.warhammer.com/en-GB/shop/space-marines-brutalis-dreadnought-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101371_SMBrutlisDread1.jpg
     description: |-
@@ -4897,7 +4897,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-desolation-squad-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101377_SMDesolationSquad2.jpg
     description: |-
@@ -4935,11 +4935,11 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.warhammer.com/en-GB/shop/dark-angels-lion-el-johnson-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101410_LionsRetinue1.jpg
     description: |-
@@ -4985,7 +4985,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/dark-angels-azrael-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101379_Azrael1.jpg
     description: |-
@@ -5093,7 +5093,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.9
-    priceCad: 45.05
+    priceCad: 45.9
     url: https://www.warhammer.com/en-GB/shop/space-marine-librarian-in-terminator-armour-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199057_LeviathanEXTRA3.jpg
     description: |-
@@ -5173,7 +5173,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/space-marines-company-heroes-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101389_SMCoHeroes2.jpg
     description: |-
@@ -5215,7 +5215,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/space-marines-sternguard-veteran-squad-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101390_SMSternguardVetSquad2.jpg
     description: |-
@@ -5257,7 +5257,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-infernus-squad-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199057_LeviathanEXTRA9.jpg
     description: |-
@@ -5297,7 +5297,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-jump-pack-intercessors-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101392_SMJumpPkIntercessors2.jpg
     description: |-
@@ -5339,7 +5339,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.warhammer.com/en-GB/shop/space-marines-ballistus-dreadnought-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101393_BallistusDreadnought1.jpg
     description: |-
@@ -5379,7 +5379,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/space-marines-captain-with-jump-pack-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101394_SMJumpPkCpt1.jpg
     description: |-
@@ -5420,7 +5420,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/blood-angels-commander-dante-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101395_BACommanderDante01.jpg
     description: |-
@@ -5491,7 +5491,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/space-marines-terminator-squad-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101398_SMTermSquad2.jpg
     description: |-
@@ -5533,7 +5533,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-chaplain-in-terminator-armour-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101399_SMChaplainTermArmour1.jpg
     description: |-
@@ -5574,7 +5574,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-captain-in-terminator-armour-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101400_SMCptTermArmour1.jpg
     description: |-
@@ -5688,7 +5688,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/dark-angels-asmodai-master-of-repentance-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101403_DAAsmodaiALT.jpg
     description: |-
@@ -5729,7 +5729,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/dark-angelsbelial-grand-master-of-the-deathwing-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101404_DABelialGrandMasteroftheDeathwing1.jpg
     description: |-
@@ -5770,7 +5770,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.5
     priceEur: 45.0
-    priceCad: 72.25
+    priceCad: 74.8
     url: https://www.warhammer.com/en-GB/shop/dark-angels-deathwing-knights-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010101006_EngDADeathwingAssault04.jpg
     description: |-
@@ -5812,7 +5812,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-dark-angels-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101406_DACP2.jpg
     description: |-
@@ -5860,7 +5860,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/dark-angels-inner-circle-companions-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101407_DAInnerCircleCompanions2.jpg
     description: |-
@@ -5897,7 +5897,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 375.0
     url: https://tistaminis.com/products/space-marines-spearhead-force
@@ -5968,9 +5968,9 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 19.56
+    priceGbp: 19.98
     priceEur: 24.2
-    priceCad: 38.25
+    priceCad: 39.95
     url: https://www.gamenerdz.com/warhammer-40k-dark-angels-upgrades-transfers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-44-24-99120101411-DarkAngelsUpgradesandTransfers.jpg?v=1708766795
     evidence:
@@ -6002,7 +6002,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-blood-angels-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101412_SMBACP1.jpg
     description: |-
@@ -6053,7 +6053,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/blood-angels-sanguinary-guard-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101413_BASanguinaryGuard01.jpg
     description: |-
@@ -6094,7 +6094,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/blood-angels-the-sanguinor-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101414_BATheSanguinor01.jpg
     description: |-
@@ -6135,7 +6135,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.9
-    priceCad: 45.05
+    priceCad: 45.9
     url: https://www.warhammer.com/en-GB/shop/blood-angels-sanguinary-priest-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101415_BASanguinaryPriest01.jpg
     description: |-
@@ -6176,7 +6176,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/blood-angels-captain-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101416_BACaptain01.jpg
     description: |-
@@ -6218,7 +6218,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 23.5
     priceEur: 24.2
-    priceCad: 38.25
+    priceCad: 39.95
     url: https://www.warhammer.com/en-GB/shop/blood-angels-upgrades-and-transfers-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101417_BAUpgradesAndTransfers01.jpg
     description: |-
@@ -6308,7 +6308,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/blood-angels-lemartes-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101418_BALemartes01.jpg
     description: |-
@@ -6349,7 +6349,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/blood-angels-astorath-the-grim-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101419_BAAstorathTheGrim01.jpg
     description: |-
@@ -6413,7 +6413,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
-    priceCad: 83.3
+    priceCad: 85.0
     url: https://www.warhammer.com/en-GB/shop/kill-team-scout-squad-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199064_KTSalvation3.jpg
     description: |-
@@ -6458,7 +6458,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 54.0
     priceEur: 54.9
-    priceCad: 85.0
+    priceCad: 88.4
     url: https://www.warhammer.com/en-GB/shop/space-marines-drop-pods-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101423_SpaceMarinesDropPods1.jpg
     description: |-
@@ -6528,7 +6528,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-space-wolves-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101426_SpaceWolvesCombatPatrol1.jpg
     description: |-
@@ -6605,7 +6605,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-black-templars-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101428_BlackTemplarsCombatPatrol1.jpg
     description: |-
@@ -6701,7 +6701,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40k-iron-hands-combat-patrol
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2025_10_99120101431_SpaceMarineIronHandsCombatPatrol08.png?v=1760159843
     evidence:
@@ -6728,7 +6728,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceEur: 114.85
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40k-white-scars-combat-patrol
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/132981-white-scars-combat-patrol-99120101432-1.webp?v=1781224180
     evidence:
@@ -6758,7 +6758,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 41.3
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/space-wolves-grey-hunters-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101433_SpaceWolvesGreyHuntersSquad1.jpg
     description: |-
@@ -6802,7 +6802,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 41.3
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/space-wolves-blood-claws-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101434_SpaceWolvesBloodClaws1.jpg
     description: |-
@@ -6847,7 +6847,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.2
-    priceCad: 45.05
+    priceCad: 45.9
     url: https://www.warhammer.com/en-GB/shop/space-wolves-wolf-priest-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101435_SpaceWolvesWolfPriest1.jpg
     description: |-
@@ -6887,7 +6887,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 27.6
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/space-wolves-wolf-guard-battle-leader-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101436_SpaceWolvesWolfGuardBattleLeader1.jpg
     description: |-
@@ -6927,7 +6927,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 44.1
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/space-wolves-wolf-guard-headtakers-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101437_SpaceWolvesWolfGuardHeadtakers1.jpg
     description: |-
@@ -6969,7 +6969,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 46.1
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.warhammer.com/en-GB/shop/space-wolves-logan-grimnar-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101438_SpaceWolvesLoganGrimnar1.jpg
     description: |-
@@ -7009,7 +7009,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 29.6
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/space-wolves-arjac-rockfist-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101439_SpaceWolvesArjacRockfist1.jpg
     description: |-
@@ -7050,7 +7050,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 29.6
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/space-wolves-njal-stormcaller-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101440_SpaceWolvesNjalStormcaller1.jpg
     description: |-
@@ -7090,7 +7090,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 44.1
-    priceCad: 68.0
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/space-wolves-wolf-guard-terminators-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101441_SpaceWolvesWolfGuardTerminators1.jpg
     description: |-
@@ -7134,7 +7134,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/black-templars-crusade-ancient-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101442_BlackTemplarsCrusadeAncient1Update.jpg
     description: |-
@@ -7174,7 +7174,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.9
-    priceCad: 45.05
+    priceCad: 45.9
     url: https://www.warhammer.com/en-GB/shop/black-templars-execrator-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101443_BlackTemplarsExecrator1Update.jpg
     description: |-
@@ -7214,7 +7214,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/salamanders-vulkan-hestan-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101444_SpaceMarinesSalamandersVulkanHestan1.jpg
     description: |-
@@ -7258,7 +7258,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/raven-guard-aethon-shaan-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101445_RavenGuardAethonShaan01.jpg
     description: |-
@@ -7300,7 +7300,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/imperial-fists-darnath-lysander-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101446_SpaceMarinesImperialFistsDarnathLysander1.jpg
     description: |-
@@ -7340,7 +7340,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/iron-hands-caanok-var-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101447_SpaceMarinesIronHandsCaanokVar01.jpg
     description: |-
@@ -7380,7 +7380,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 40.1
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/white-scars-suboden-khan-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101448_SPACEMARINESWhiteScarsSubodenKhan01.jpg
     description: |-
@@ -7448,7 +7448,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 35.5
     priceEur: 35.6
-    priceCad: 56.53
+    priceCad: 59.5
     url: https://www.warhammer.com/en-GB/shop/marneus-calgar-in-armour-of-antilochus-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101450_UltramarinesMarneusCalgarArmourAntilochus1.jpg
     description: |-
@@ -7490,7 +7490,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 23.5
     priceEur: 24.6
-    priceCad: 38.25
+    priceCad: 39.95
     url: https://www.warhammer.com/en-GB/shop/ultramarines-upgrades-and-transfers-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101451_SpaceMarineUltramarinesUpgradesTransfers1.jpg
     description: |-
@@ -7567,7 +7567,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 31.1
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/ultramarines-cato-sicarius-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101452_UltramarinesCatoSicarius1.jpg
     description: |-
@@ -7609,7 +7609,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/ultramarines-victrix-honour-guard-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101453_UltramarinesVictrixHonourGuard1.jpg
     description: |-
@@ -7649,7 +7649,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 44.1
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/space-marines-terminator-assault-squad-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101454_SPACEMARINESTerminatorAssaultSquad01.jpg
     description: |-
@@ -7705,7 +7705,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 29.6
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-ancient-in-terminator-armour-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101455_SPACEMARINESAncientInTerminatorArmour01.jpg
     description: |-
@@ -7765,7 +7765,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-wolf-scouts-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101457_KTWolfScouts01.jpg
     description: |-
@@ -7832,7 +7832,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 59.0
     priceEur: 60.6
-    priceCad: 96.05
+    priceCad: 99.45
     url: https://www.warhammer.com/en-GB/shop/captain-titus-and-the-wardens-of-ultramar-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101459_SpaceMarinesTitusWardens1.jpg
     description: |-
@@ -7886,7 +7886,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 19.6
+    priceGbp: 22.4
     priceCad: 46.75
     url: https://www.gamenerdz.com/warhammer-40k-ultramarines-ferren-areios
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_11_99120101460_BlackLibraryPromoMiniatureUltramarineCaptainFerrenAreios6.jpg?v=1763718627
@@ -7922,31 +7922,6 @@ products:
       - mfr-gw-algolia:prod4640273-99120101462
       - mfr-gw-trade:99120101462
       - ret-gamenerdz:/warhammer-40k-space-marines-captain-w-master-crafted-heavy-bolt-rifle
-  - id: games-workshop/99120101463
-    name: Iron Hands Primaris Upgrades and Transfers
-    manufacturer: games-workshop
-    productCode: '99120101463'
-    sku: '99120101463'
-    ean: '5011921255962'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 18.75
-    url: https://www.warhammer.com/en-GB/shop/Iron-Hands-Primaris-Upgrades-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101049_IHPrimarisUpgrades01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4510301-99120101463
-      - mfr-gw-trade:99120101463
   - id: games-workshop/99120101465
     name: Salamanders Primaris Upgrades and Transfers
     manufacturer: games-workshop
@@ -7997,32 +7972,6 @@ products:
     evidence:
       - mfr-gw-algolia:prod4530140-99120101467
       - mfr-gw-trade:99120101467
-  - id: games-workshop/99120101468
-    name: Librarian In Phobos Armour
-    manufacturer: games-workshop
-    productCode: '99120101468'
-    sku: '99120101468'
-    ean: '5011921256099'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 26.0
-    url: https://www.warhammer.com/en-GB/shop/Primaris-Librarian-In-Phobos-Armour-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101046_SMPrimarisLibrarianPhobosArmour01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4510313-99120101468
-      - mfr-gw-trade:99120101468
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian-in-phobos-armour
   - id: games-workshop/99120101469
     name: Captain in Phobos Armour
     manufacturer: games-workshop
@@ -8048,28 +7997,6 @@ products:
     evidence:
       - mfr-gw-algolia:prod4510312-99120101469
       - mfr-gw-trade:99120101469
-  - id: games-workshop/99120101470
-    name: White Scars Primaris Upgrades & Transfers
-    manufacturer: games-workshop
-    productCode: '99120101470'
-    sku: '99120101470'
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 18.75
-    url: https://www.warhammer.com/en-GB/shop/White-Scar-Primaris-Upgrades-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101040_WSPrimarisUpgradesTransfers01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4510331-99120101470
   - id: games-workshop/99120101471
     name: 'SPACE MARINES: APOTHECARY'
     manufacturer: games-workshop
@@ -8108,13 +8035,14 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-09-02'
+    firstSeen: '2026-07-13'
     priceGbp: 29.0
     url: https://www.warhammer.com/en-GB/shop/Space-Marine-Primaris-Captain-2020
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101179_PrimarisCaptain01.jpg
     evidence:
       - mfr-gw-algolia:prod4530191-99120101472
       - mfr-gw-trade:99120101472
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-captain
   - id: games-workshop/99120101473
     name: 'SPACE MARINES: CHAPLAIN'
     manufacturer: games-workshop
@@ -8135,32 +8063,6 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120101473
-  - id: games-workshop/99120101474
-    name: Librarian
-    manufacturer: games-workshop
-    productCode: '99120101474'
-    sku: '99120101474'
-    ean: '5011921256211'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 27.0
-    url: https://www.warhammer.com/en-GB/shop/Space-Marines-Primaris-Librarian-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101181_PrimarisLibrarian01.jpg
-    evidence:
-      - mfr-gw-algolia:prod4530142-99120101474
-      - mfr-gw-trade:99120101474
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian
   - id: games-workshop/99120101475
     name: Iron Priest
     manufacturer: games-workshop
@@ -8272,11 +8174,13 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
+    url: https://www.gamenerdz.com/warhammer-40k-space-marines-captain-in-gravis-armour
     evidence:
       - mfr-gw-trade:99120101481
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-in-gravis-armour
   - id: games-workshop/99120101482
-    name: 'Space Marines: Lieutenant'
+    name: Space Marines Lieutenant
     manufacturer: games-workshop
     productCode: '99120101482'
     sku: '99120101482'
@@ -8325,31 +8229,6 @@ products:
     evidence:
       - mfr-gw-algolia:prod4580260-99120101484
       - mfr-gw-trade:99120101484
-  - id: games-workshop/99120101485
-    name: Emperor's Champion
-    manufacturer: games-workshop
-    productCode: '99120101485'
-    sku: '99120101485'
-    ean: '5011921256457'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 29.0
-    url: https://www.warhammer.com/en-GB/shop/black-templars-emperors-champion-2021
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101366_EmperorsChampionLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4790158-99120101485
-      - mfr-gw-trade:99120101485
   - id: games-workshop/99120101488
     name: Space Marine Heads
     manufacturer: games-workshop
@@ -8441,7 +8320,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/space-marines-captain-with-jump-pack-and-relic-shield-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101492_SpaceMarinesCaptainwithJumpPackandRelicShield01.jpg
     description: |-
@@ -8466,6 +8345,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120101494'
     sku: '99120101494'
+    ean: '5011921267514'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8479,15 +8360,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 39.5
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-eradicator-squad-with-heavy-bolters-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101494_SpaceMarinesEradicatorSquadWithHeavyBolters01.jpg
     evidence:
       - mfr-gw-algolia:P-259689-99120101494
+      - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
+      - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters-preorder
+      - ret-goblingaming:space-marines-eradicator-squad-with-heavy-bolters
+      - ret-tistaminis:space-marine-eradicator-squad-with-heavy-bolters-pre-order
   - id: games-workshop/99120101495
     name: Land Speeder
     manufacturer: games-workshop
     productCode: '99120101495'
     sku: '99120101495'
+    ean: '5011921267521'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8501,15 +8389,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 41.0
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/space-marines-land-speeder-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101495_SpaceMarinesLandSpeeder01.jpg
     evidence:
       - mfr-gw-algolia:P-259688-99120101495
+      - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder
+      - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder-preorder
+      - ret-goblingaming:space-marines-land-speeder
+      - ret-tistaminis:space-marines-land-speeder-pre-order
   - id: games-workshop/99120101496
     name: Intercessor Squad
     manufacturer: games-workshop
     productCode: '99120101496'
     sku: '99120101496'
+    ean: '5011921267538'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8523,15 +8418,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 41.5
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/space-marines-intercessor-squad-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101496_SpaceMarinesIntercessorSquad01.jpg
     evidence:
       - mfr-gw-algolia:P-259685-99120101496
+      - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad
+      - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad-preorder
+      - ret-goblingaming:space-marines-intercessor-squad
+      - ret-tistaminis:space-marines-intercessor-squad-pre-order
   - id: games-workshop/99120101497
     name: Vanguard Veteran Squad with Jump Packs
     manufacturer: games-workshop
     productCode: '99120101497'
     sku: '99120101497'
+    ean: '5011921267545'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8545,15 +8447,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 41.5
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/space-marines-vanguard-veteran-squad-with-jump-packs-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101497_SpaceMarinesVanguardVeteransWithJumpPacks01.jpg
     evidence:
       - mfr-gw-algolia:P-259682-99120101497
+      - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
+      - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs-preorder
+      - ret-goblingaming:space-marines-vanguard-veteran-squad-with-jump-packs
+      - ret-tistaminis:space-marine-vanguard-veteran-squad-w-jump-packs-pre-order
   - id: games-workshop/99120101498
     name: Outrider Squad
     manufacturer: games-workshop
     productCode: '99120101498'
     sku: '99120101498'
+    ean: '5011921267552'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8567,15 +8476,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 42.0
+    priceCad: 69.7
     url: https://www.warhammer.com/en-GB/shop/space-marines-outrider-squad-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101498_SpaceMarinesOutriderSquad01.jpg
     evidence:
       - mfr-gw-algolia:P-259683-99120101498
+      - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad
+      - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad-preorder
+      - ret-goblingaming:space-marines-outrider-squad
+      - ret-tistaminis:space-marines-outrider-squad-pre-order
   - id: games-workshop/99120101499
     name: Captain on Bike
     manufacturer: games-workshop
     productCode: '99120101499'
     sku: '99120101499'
+    ean: '5011921267569'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8589,15 +8505,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 37.0
+    priceCad: 61.2
     url: https://www.warhammer.com/en-GB/shop/space-marines-captain-on-bike-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101499_SpaceMarinesCaptainOnBike01.jpg
     evidence:
       - mfr-gw-algolia:P-259684-99120101499
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike-preorder
+      - ret-goblingaming:space-marines-captain-on-bike
+      - ret-tistaminis:space-marines-captain-on-bike-pre-order
   - id: games-workshop/99120101500
     name: Kaius Konorius
     manufacturer: games-workshop
     productCode: '99120101500'
     sku: '99120101500'
+    ean: '5011921267576'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8611,15 +8534,22 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 30.0
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/space-marines-kaius-konorius-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101500_SpaceMarinesKaiusKonorius01.jpg
     evidence:
       - mfr-gw-algolia:P-259686-99120101500
+      - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius
+      - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius-preorder
+      - ret-goblingaming:space-marines-kaius-konorius
+      - ret-tistaminis:space-marines-kaius-konorius-pre-order
   - id: games-workshop/99120101501
     name: Champions of Armageddon
     manufacturer: games-workshop
     productCode: '99120101501'
     sku: '99120101501'
+    ean: '5011921267583'
+    eanConfidence: provisional
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8637,11 +8567,14 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101501_SpaceMarinesChampionsOfArmageddon01.jpg
     evidence:
       - mfr-gw-algolia:P-259690-99120101501
+      - ret-goblingaming:space-marines-champions-of-armageddon
   - id: games-workshop/99120101517
     name: Rhino
     manufacturer: games-workshop
     productCode: '99120101517'
     sku: '99120101517'
+    ean: '5011921279074'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     faction: space-marines
@@ -8655,10 +8588,15 @@ products:
     availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 37.5
+    priceCad: 63.75
     url: https://www.warhammer.com/en-GB/shop/space-marines-rhino-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101517_SpaceMarinesRhino01.jpg
     evidence:
       - mfr-gw-algolia:P-259687-99120101517
+      - ret-gamenerdz:/warhammer-40k-space-marines-rhino
+      - ret-gamenerdz:/warhammer-40k-space-marines-rhino-preorder
+      - ret-goblingaming:space-marines-rhino
+      - ret-tistaminis:space-marines-rhino-pre-order
   - id: games-workshop/99120102005
     name: KHORNE BERZERKERS
     manufacturer: games-workshop
@@ -10866,7 +10804,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 110.0
     priceEur: 110.5
-    priceCad: 178.5
+    priceCad: 187.0
     url: https://www.warhammer.com/en-GB/shop/world-eaters-angron-daemon-primarch-of-khorne-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102152_AngronDaemonPrimarch1.jpg
     description: |-
@@ -10911,7 +10849,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/world-eaters-khorne-berserkers-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102153_KhorneBerserkers1.jpg
     description: |-
@@ -10953,7 +10891,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/world-eaters-eightbound-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102154_WEEightbound2.jpg
     description: |-
@@ -10997,7 +10935,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/world-eaters-lord-invocatus-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102155_WELordInvocatus01.jpg
     description: |-
@@ -11041,7 +10979,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 36.9
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.warhammer.com/en-GB/shop/world-eaters-jakhals-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102156_WEJakhals015.jpg
     description: |-
@@ -11450,7 +11388,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -11798,7 +11736,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 67.0
     priceEur: 68.8
-    priceCad: 107.95
+    priceCad: 113.05
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-vashtorr-the-arkifane-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102180_CSMVashtorrTheArkifane01.jpg
     description: |-
@@ -11856,11 +11794,11 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 49.0
     priceEur: 50.4
-    priceCad: 79.05
+    priceCad: 83.3
     url: https://www.warhammer.com/en-GB/shop/kill-team-nemesis-claw-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102182_KTNemesisClaw1.jpg
     description: |-
@@ -12066,7 +12004,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-chaos-space-marines-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102190_CSMCP1.jpg
     description: |-
@@ -12162,7 +12100,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-chaos-lord-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102192_CSMLordPowerArmour1.jpg
     description: |-
@@ -12203,7 +12141,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-lord-with-jump-pack-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102193_CSMLordJumpPack1.jpg
     description: |-
@@ -12244,7 +12182,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-death-guard-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102194_DGCombatPatrol01.jpg
     description: |-
@@ -12297,7 +12235,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 170.0
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-thousand-sons-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102195_TSCombatPatrol01.jpg
     description: |-
@@ -12351,7 +12289,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-world-eaters-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102196_WorldEatersCombatPatrol1.jpg
     description: |-
@@ -12406,7 +12344,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 32.5
     priceEur: 33.6
-    priceCad: 53.55
+    priceCad: 54.4
     url: https://www.warhammer.com/en-GB/shop/thousand-sons-sekhetar-robots-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102197_ThousandSonsSekhetarRobotsVehicleSquad01.jpg
     description: |-
@@ -12446,7 +12384,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/death-guard-lord-of-poxes-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102198_ChaosSpaceMarineDeathGuardLordofPoxes1.jpg
     description: |-
@@ -12486,7 +12424,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/world-eaters-slaughter-bound-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102199_ChaosSpaceMarineWorldEatersSlaughterbound1.jpg
     description: |-
@@ -12526,7 +12464,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 110.0
     priceEur: 110.5
-    priceCad: 178.5
+    priceCad: 187.0
     url: https://www.warhammer.com/en-GB/shop/emperors-children-fulgrim-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102200_ECFulgrim01.jpg
     description: |-
@@ -12568,7 +12506,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/emperors-children-lucius-the-eternal-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102201_ECLuciusTheEternal01.jpg
     description: |-
@@ -12608,7 +12546,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/emperors-children-flawless-blades-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102202_ECFlawlessBlades01.jpg
     description: |-
@@ -12652,7 +12590,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.5
     priceEur: 45.0
-    priceCad: 72.25
+    priceCad: 74.8
     url: https://www.warhammer.com/en-GB/shop/emperors-children-tormentors-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102203_ECTormentors01.jpg
     description: |-
@@ -12698,7 +12636,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/emperors-children-noise-marines-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102204_ECNoiseMarines01.jpg
     description: |-
@@ -12742,7 +12680,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.9
-    priceCad: 45.05
+    priceCad: 45.9
     url: https://www.warhammer.com/en-GB/shop/emperors-children-lord-kakophonist-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102205_ECLordKakophonist01.jpg
     description: |-
@@ -12782,7 +12720,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/emperors-children-lord-exultant-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102206_ECLordExultant01.jpg
     description: |-
@@ -12822,7 +12760,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-emperors-children-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102207_ECCombatPatrol01.jpg
     description: |-
@@ -12875,7 +12813,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-goremongers-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102208_KillTeamGoremongers01.jpg
     description: |-
@@ -13139,6 +13077,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
+    priceCad: 70.55
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-legionaries-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102218_CSMLegionaries1.jpg
     description: |-
@@ -13180,6 +13119,7 @@ products:
       - ret-goblingaming:chaos-space-marines-legionaries
       - ret-radaddel:/chaos-space-marines-legionaries
       - ret-radaddel:chaos-space-marines-legionaries
+      - ret-tistaminis:chaos-space-marines-legionaries
   - id: games-workshop/99120102219
     name: Traitor Guardsmen Squad
     manufacturer: games-workshop
@@ -13291,7 +13231,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 94.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-red-corsairs-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102221_RedCorsairsCombatPatrol1.jpg
     description: |-
@@ -13347,7 +13287,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-red-corsairs-reave-captain-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102222_RedCorsairsReaveCaptain2.jpg
     description: |-
@@ -13387,7 +13327,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-red-corsairs-raiders-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102224_RedCorsairsRaiders2.jpg
     description: |-
@@ -13442,7 +13382,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 59.0
     priceEur: 60.6
-    priceCad: 96.05
+    priceCad: 99.45
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-huron-blackheart-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102225_ChaosSpaceMarinesHuronBlackheartMastersoftheMaelstrom1.jpg
     description: |-
@@ -13492,7 +13432,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 22.0
     priceEur: 22.1
-    priceCad: 35.28
+    priceCad: 36.55
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-red-corsairs-upgrades-and-transfers-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102226_RedCorsairsUpgradesTransfers1.jpg
     description: |-
@@ -13566,7 +13506,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 92.0
     priceEur: 94.1
-    priceCad: 148.75
+    priceCad: 154.7
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-defiler-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102229_CSMDefiler2.jpg
     evidence:
@@ -13597,7 +13537,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-mutilators-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102230_CSMMutilators1.jpg
     evidence:
@@ -13655,7 +13595,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 51.0
     priceEur: 52.4
-    priceCad: 83.3
+    priceCad: 85.0
     url: https://www.warhammer.com/en-GB/shop/kill-team-murderwing-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102232_MURDERWING1.jpg
     evidence:
@@ -13741,7 +13681,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-kravek-morne-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102251_CSMKravekMorne1.jpg
     evidence:
@@ -13772,7 +13712,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 165.0
     priceEur: 168.6
-    priceCad: 263.5
+    priceCad: 272.0
     url: https://www.warhammer.com/en-GB/shop/battleforce-chaos-space-marines-warband-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102252_ChaosSpaceMarineWarbandBattleforce1.jpg
     evidence:
@@ -13803,7 +13743,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 41.5
     priceEur: 41.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-fellgor-beastmen-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102258_ChaosSpaceMarinesFellgorBeastmen01.jpg
     evidence:
@@ -13833,7 +13773,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 40.0
     priceEur: 40.0
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/chaos-space-marines-raptors-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102259_ChaosSpaceMarinesRaptors01.jpg
     evidence:
@@ -15906,7 +15846,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/orks-boss-snikrot-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103114_Snikrot1.jpg
     description: |-
@@ -16070,7 +16010,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/orks-big-mek-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103120_ORKBigMek01.jpg
     description: |-
@@ -16154,7 +16094,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-wrecka-krew-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103123_ENGKTBrutalCunning3.jpg
     description: |-
@@ -16245,7 +16185,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 105.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/armageddon-battalion-orks-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103126_ArmageddonOrksBattalion1.jpg
     evidence:
@@ -16278,7 +16218,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 68.0
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/orks-kommandos-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103127_KT2Group2.jpg
     description: |-
@@ -16331,7 +16271,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 54.0
     priceEur: 54.9
-    priceCad: 85.0
+    priceCad: 88.4
     url: https://www.warhammer.com/en-GB/shop/orks-wazdakka-gutsmek-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103128_OrksWazdakkaGutsmek1.jpg
     evidence:
@@ -16362,6 +16302,7 @@ products:
     firstSeen: '2026-08-25'
     priceGbp: 27.0
     priceEur: 27.6
+    priceCad: 45.9
     url: https://www.warhammer.com/en-GB/shop/orks-weirdboy-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103133_OrksWeirdboy01.jpg
     evidence:
@@ -16369,6 +16310,7 @@ products:
       - ret-gamenerdz:/warhammer-40k-orks-weirdboy
       - ret-goblingaming:orks-weirdboy
       - ret-radaddel:orks-weirdboy
+      - ret-tistaminis:orks-weirdboy-pre-order
   - id: games-workshop/99120103134
     name: Big Mek Dakkarig
     manufacturer: games-workshop
@@ -16389,6 +16331,7 @@ products:
     firstSeen: '2026-08-25'
     priceGbp: 49.5
     priceEur: 51.2
+    priceCad: 83.3
     url: https://www.warhammer.com/en-GB/shop/orks-big-mek-dakkarig-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199080_ArmageddonCoreGame20.jpg
     evidence:
@@ -16396,6 +16339,7 @@ products:
       - ret-gamenerdz:/warhammer-40k-orks-big-mek-dakkarig
       - ret-goblingaming:orks-big-mek-dakkarig
       - ret-radaddel:orks-big-mek-dakkarig
+      - ret-tistaminis:orks-big-mek-dakkarig-pre-order
   - id: games-workshop/99120103135
     name: Wartrakk
     manufacturer: games-workshop
@@ -16416,6 +16360,7 @@ products:
     firstSeen: '2026-08-25'
     priceGbp: 41.5
     priceEur: 42.5
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/orks-wartrakk-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199080_ArmageddonCoreGame19.jpg
     evidence:
@@ -16423,6 +16368,7 @@ products:
       - ret-gamenerdz:/warhammer-40k-orks-wartrakk
       - ret-goblingaming:orks-wartrakk
       - ret-radaddel:orks-wartrakk
+      - ret-tistaminis:orks-wartrakk-pre-order
   - id: games-workshop/99120103136
     name: Boyz
     manufacturer: games-workshop
@@ -16454,6 +16400,8 @@ products:
     manufacturer: games-workshop
     productCode: '99120103137'
     sku: '99120103137'
+    ean: '5011921267071'
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     gameSystemsBasis: stated
@@ -16466,10 +16414,13 @@ products:
     availability: in_stock
     firstSeen: '2026-08-25'
     priceGbp: 63.0
+    priceCad: 122.0
     url: https://www.warhammer.com/en-GB/shop/orks-armageddon-kommand-krew-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103137_OrksArmageddonKommandKrew01.jpg
     evidence:
       - mfr-gw-algolia:P-257949-99120103137
+      - ret-goblingaming:orks-armageddon-kommand-krew
+      - ret-tistaminis:orks-armagedoon-kommand-krew
   - id: games-workshop/99120103138
     name: Warbikers
     manufacturer: games-workshop
@@ -16571,6 +16522,7 @@ products:
     firstSeen: '2026-08-25'
     priceGbp: 29.0
     priceEur: 29.6
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/orks-warboss-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103141_OrksWarboss01.jpg
     evidence:
@@ -16578,6 +16530,7 @@ products:
       - ret-gamenerdz:/warhammer-40k-orks-warboss
       - ret-goblingaming:orks-warboss
       - ret-radaddel:orks-warboss
+      - ret-tistaminis:orks-warboss-pre-order
   - id: games-workshop/99120103142
     name: Nazdreg
     manufacturer: games-workshop
@@ -16598,6 +16551,7 @@ products:
     firstSeen: '2026-08-25'
     priceGbp: 37.0
     priceEur: 38.1
+    priceCad: 61.2
     url: https://www.warhammer.com/en-GB/shop/orks-nazdreg-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103142_OrksNazdreg01.jpg
     evidence:
@@ -16605,6 +16559,7 @@ products:
       - ret-gamenerdz:/warhammer-40k-orks-nazdreg
       - ret-goblingaming:orks-nazdreg
       - ret-radaddel:orks-nazdreg
+      - ret-tistaminis:orks-nazdreg-pre-order
   - id: games-workshop/99120104015
     name: ELDAR VYPER JET BIKE
     manufacturer: games-workshop
@@ -17829,11 +17784,11 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/aeldari-asurmen-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104089_AELAsurmen01.jpg
     description: |-
@@ -17934,7 +17889,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 83.3
+    priceCad: 85.0
     url: https://tistaminis.com/products/kill-team-aeldari-blades-of-khaine
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2024_02_99120104092_KTAeldariBlades2.jpg?v=1760306844
     evidence:
@@ -17984,7 +17939,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-aeldari-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104097_AELCombatPatrol01.jpg
     description: |-
@@ -18038,7 +17993,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.0
     priceEur: 42.0
-    priceCad: 63.75
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/aeldari-swooping-hawks-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104098_AELSwoopingHawks01.jpg
     description: |-
@@ -18083,7 +18038,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/aeldari-phoenix-lord-baharroth-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104099_AELBaharroth01.jpg
     description: |-
@@ -18124,7 +18079,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.0
     priceEur: 42.0
-    priceCad: 63.75
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/aeldari-warp-spiders-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104100_AELWarpSpiders01.jpg
     description: |-
@@ -18169,7 +18124,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/aeldari-phoenix-lord-lhykhis-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104101_AELLhykhis01.jpg
     description: |-
@@ -18210,7 +18165,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.0
     priceEur: 42.0
-    priceCad: 63.75
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/aeldari-fire-dragons-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104102_AELFireDragons01.jpg
     description: |-
@@ -18255,7 +18210,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/aeldari-phoenix-lord-fuegan-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104103_AELFuegan01.jpg
     description: |-
@@ -18315,7 +18270,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
-    priceCad: 83.3
+    priceCad: 85.0
     url: https://www.warhammer.com/en-GB/shop/kill-team-blades-of-khaine-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104105_KTBladesKhaine2.jpg
     description: |-
@@ -18405,7 +18360,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 54.0
     priceEur: 54.9
-    priceCad: 85.0
+    priceCad: 88.4
     url: https://www.warhammer.com/en-GB/shop/aeldari-war-walkers-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104107_AELWarWalkers01.jpg
     description: |-
@@ -18480,7 +18435,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 105.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-aeldari-corsairs-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104110_AeldariCorsairsCombatPatrol01.jpg
     description: |-
@@ -18536,7 +18491,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 63.75
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/aeldari-corsair-skyreavers-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104111_AeldariCorsairSkyreavers01.jpg
     description: |-
@@ -18576,7 +18531,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/aeldari-vyper-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104112_AeldariVyper01.jpg
     description: |-
@@ -18620,7 +18575,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/aeldari-prince-yriel-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104113_AeldariPrinceYriel01.jpg
     description: |-
@@ -18660,7 +18615,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/aeldari-kharseth-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104114_AeldariKharseth01.jpg
     description: |-
@@ -18700,7 +18655,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/aeldari-corsair-voidreavers-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120104115_AeldariCorsairVoidreavers01.jpg
     description: |-
@@ -18772,28 +18727,6 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104001_EldarFarseer01.jpg
     evidence:
       - mfr-gw-algolia:prod2240135-99120104121
-  - id: games-workshop/99120104122
-    name: Farseer Skyrunner
-    manufacturer: games-workshop
-    productCode: '99120104122'
-    sku: '99120104122'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-09-30'
-    priceGbp: 29.0
-    url: https://www.warhammer.com/en-GB/shop/Eldar-Farseer-Skyrunner-2017
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104002_ELDARFARSEERSKYRUNNER01.jpg
-    evidence:
-      - mfr-gw-algolia:prod3650295-99120104122
-      - mfr-gw-algolia:prod3660120-99120104122
   - id: games-workshop/99120104143
     name: Solitaire
     manufacturer: games-workshop
@@ -19523,7 +19456,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-attilan-rough-riders-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105092_AMAttilanRoughRidersUpdate2.jpg
     description: |-
@@ -19607,7 +19540,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-lord-solar-leontus-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105095_AMLordSolarLeontus01.jpg
     description: |-
@@ -19648,7 +19581,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-lord-castellan-ursula-creed-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105096_AMLordCastellanUrsulaCreed01.jpg
     description: |-
@@ -19729,7 +19662,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 65.0
     priceEur: 67.6
-    priceCad: 106.25
+    priceCad: 110.5
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-rogal-dorn-battle-tank-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105098_AMRogalDornBattleTank01.jpg
     description: |-
@@ -19772,7 +19705,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     priceEur: 26.6
-    priceCad: 42.5
+    priceCad: 45.05
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-commissar-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105099_AMCommissar1.jpg
     description: |-
@@ -19813,7 +19746,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     priceEur: 26.6
-    priceCad: 42.5
+    priceCad: 45.05
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-cadian-castellan-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105100_CadianCastellan1.jpg
     description: |-
@@ -19857,7 +19790,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-cadian-shock-troops-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60020105008_CadianShockTroopsLead.jpg
     description: |-
@@ -19946,7 +19879,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-armoured-sentinel-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105103_AMSentinel01.jpg
     description: |-
@@ -19996,7 +19929,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 36.9
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-field-ordnance-battery-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105104_AMFieldOrdnanceBattery01.jpg
     description: |-
@@ -20041,7 +19974,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 23.5
     priceEur: 24.2
-    priceCad: 38.25
+    priceCad: 39.95
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-cadian-upgrades-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105106_CadianUpgrades2.jpg
     description: |-
@@ -20246,7 +20179,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.5
     priceEur: 45.0
-    priceCad: 72.25
+    priceCad: 74.8
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-leman-russ-battle-tank-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105111_AMLemanRussBattleTank01.jpg
     description: |-
@@ -20649,7 +20582,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-tempestus-aquilons-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105123_KTTempestusAquilons2.jpg
     description: |-
@@ -20694,7 +20627,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-astra-militarum-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105124_AstraMilitarumCombatPatrol1.jpg
     description: |-
@@ -20748,7 +20681,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-krieg-lord-marshal-dreir-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105125_AstraMilitarumKriegLordMarshalDreir1.jpg
     description: |-
@@ -20789,7 +20722,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-krieg-artillery-team-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105126_AstraMilitarumKriegArtilleryTeam1.jpg
     description: |-
@@ -20832,7 +20765,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-krieg-command-squad-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105127_AstraMilitarumKriegCommandSquad1.jpg
     description: |-
@@ -20877,7 +20810,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-death-riders-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105128_AstraMilitarumKriegDeathRidersSquad1.jpg
     description: |-
@@ -20922,7 +20855,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-krieg-combat-engineers-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105129_AstraMilitarumKriegCombatEngineersSquad1.jpg
     description: |-
@@ -20967,7 +20900,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-krieg-heavy-weapons-squad-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105130_AstraMilitarumKriegHeavyWeaponsSquad1.jpg
     description: |-
@@ -21038,7 +20971,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-ratlings-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105132_ENGKTBrutalCunning2.jpg
     description: |-
@@ -21144,7 +21077,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.3
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-death-korps-of-krieg-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105135_AstraMilitarumDeathKorpsKriegInfantrySquad1.jpg
     description: |-
@@ -21206,7 +21139,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 29.5
     priceEur: 31.1
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-commissar-yarrick-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105138_AstraMilitarumCommissarYarrick01.jpg
     evidence:
@@ -21237,7 +21170,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 40.0
     priceEur: 41.0
-    priceCad: 66.3
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-hippogriff-afv-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105139_AstraMilitarumHippogriffAFV1.jpg
     evidence:
@@ -21268,7 +21201,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 64.0
     priceEur: 65.5
-    priceCad: 103.7
+    priceCad: 107.1
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-commissar-graves-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105140_AstraMilitarumCommissarGraves1.jpg
     evidence:
@@ -21299,7 +21232,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-centaur-rsv-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105141_AstraMilitarumCentaurRSV1.jpg
     evidence:
@@ -21379,7 +21312,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 165.0
     priceEur: 168.6
-    priceCad: 263.5
+    priceCad: 272.0
     url: https://www.warhammer.com/en-GB/shop/battleforce-astra-militarum-platoon-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105151_AstraMilitarumPlatoonBattleforce1.jpg
     evidence:
@@ -21410,7 +21343,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 29.5
     priceEur: 32.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-ciaphas-cain-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105152_AstraMilitarumCiaphasCain1.jpg
     evidence:
@@ -21440,7 +21373,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 44.0
     priceEur: 44.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-spectre-squad-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105153_KillTeamSpectreSquad01.jpg
     evidence:
@@ -21470,7 +21403,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 41.5
     priceEur: 41.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-kasrkin-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105155_AstraMilitarumKasrkin01.jpg
     evidence:
@@ -21500,7 +21433,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 125.0
     priceEur: 124.0
-    priceCad: 204.0
+    priceCad: 212.5
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-baneblade-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105157_AMBanebladeLeadBaneblade.jpg
     evidence:
@@ -21523,7 +21456,7 @@ products:
     productCode: '99120105158'
     sku: '99120105158'
     ean: '5011921279067'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
     gameSystemsBasis: stated
@@ -21536,11 +21469,13 @@ products:
     availability: in_stock
     firstSeen: '2026-08-22'
     priceGbp: 21.0
+    priceCad: 40.0
     url: https://www.warhammer.com/en-GB/shop/astra-militarum-baneblade-sponsons-and-accessories-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120105158_AstraMilitarumBanebladeSponsonsAndAccesories01.jpg
     evidence:
       - mfr-gw-algolia:P-255561-99120105158
       - ret-goblingaming:astra-militarum-baneblade-sponsons-and-accessories
+      - ret-tistaminis:astra-militarum-baneblade-sponsons-accessories
   - id: games-workshop/99120106007
     name: TYRANID GENESTEALERS
     manufacturer: games-workshop
@@ -22480,7 +22415,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
-    priceCad: 124.1
+    priceCad: 129.2
     url: https://www.warhammer.com/en-GB/shop/tyranids-norn-assimilator-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106064_NornAssimilator1.jpg
     description: |-
@@ -22524,7 +22459,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/tyranids-biovore-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106065_Biovore1.jpg
     description: |-
@@ -22569,7 +22504,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
-    priceCad: 48.45
+    priceCad: 49.72
     url: https://www.warhammer.com/en-GB/shop/tyranids-termagants-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106066_Termagaunts2.jpg
     description: |-
@@ -22609,7 +22544,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/tyranids-deathleaper-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106067_Deathleaper1.jpg
     description: |-
@@ -22649,7 +22584,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 36.9
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.warhammer.com/en-GB/shop/tyranids-genestealers-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106068_Genestealers2.jpg
     description: |-
@@ -22689,7 +22624,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/tyranids-lictor-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106069_Lictor1.jpg
     description: |-
@@ -22731,7 +22666,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/tyranids-von-ryans-leapers-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199057_LeviathanEXTRA13.jpg
     description: |-
@@ -22771,7 +22706,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/tyranids-neurogaunts-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199057_LeviathanEXTRA16.jpg
     description: |-
@@ -22811,7 +22746,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/tyranids-neurolictor-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106072_Neurolictor1.jpg
     description: |-
@@ -22851,7 +22786,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
-    priceCad: 54.4
+    priceCad: 56.1
     url: https://www.warhammer.com/en-GB/shop/tyranids-hormagaunts-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106073_Hormagaunts2.jpg
     description: |-
@@ -23093,7 +23028,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-tyranid-assault-brood-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106081_TyranidAssaultBroodCombatPatrol1.jpg
     description: |-
@@ -23146,7 +23081,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 68.0
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-raveners-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106083_ENGKillTeamTyphonCoreGame3.jpg
     description: |-
@@ -23191,7 +23126,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/tyranid-prime-with-lash-whip-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106084_TyranidPrimewithLashWhip01.jpg
     description: |-
@@ -23248,7 +23183,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 165.0
     priceEur: 168.6
-    priceCad: 263.5
+    priceCad: 272.0
     url: https://www.warhammer.com/en-GB/shop/battleforce-tyranid-swarm-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120106086_TyranidSwarmBattleforce1.jpg
     evidence:
@@ -23531,7 +23466,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-grey-knights-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120107021_GreyKnightsCombatPatrol01Update.jpg
     description: |-
@@ -23606,7 +23541,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
-    priceCad: 83.3
+    priceCad: 85.0
     url: https://www.warhammer.com/en-GB/shop/grey-knights-grandmaster-in-nemesis-dreadknight-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120107023_GreyKnightsGrandmasterinNemesisDreadknightVehicle01.jpg
     description: |-
@@ -23636,31 +23571,6 @@ products:
       - ret-radaddel:/grey-knights-grand-master-in-nemesis-dreadknight
       - ret-radaddel:grey-knights-grand-master-in-nemesis-dreadknight
       - ret-tistaminis:grey-knights-grandmaster-in-nemesis-dreadknight
-  - id: games-workshop/99120107024
-    name: Grand Master Voldus
-    manufacturer: games-workshop
-    productCode: '99120107024'
-    sku: '99120107024'
-    ean: '5011921255924'
-    eanConfidence: confirmed
-    gameSystems:
-      - warhammer-40k
-    faction: space-marines
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 27.0
-    url: https://www.warhammer.com/en-GB/shop/Grey-Knights-Grand-Master-Voldus-2017
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070107001_GrandMasterVoldus01.jpg
-    evidence:
-      - mfr-gw-algolia:prod3530544-99120107024
-      - mfr-gw-trade:99120107024
   - id: games-workshop/99120108006
     name: ADEPTUS CUSTODES CUSTODIAN GUARD
     manufacturer: games-workshop
@@ -24546,6 +24456,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/dialogus
       - mfr-gw-algolia:prod4400128-99120108051
+      - mfr-gw-algolia:prod4400128-99120108143
       - mfr-gw-trade:99120108051
       - ret-gamenerdz:/warhammer-40k-adepta-sororitas-dialogus
       - ret-goblingaming:adepta-sororitas-dialogus
@@ -25385,7 +25296,9 @@ products:
     productCode: '99120108076'
     sku: '99120108076'
     ean: '5011921172047'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921272501'
     supersedes:
       - games-workshop/99120108012
     gameSystems:
@@ -25415,7 +25328,10 @@ products:
       - arc-wargameportal:/products/captain-general-trajann-valoris
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/captain-general-trajann-valoris
       - mfr-gw-algolia:prod3700244-99120108076
+      - mfr-gw-algolia:prod3700244-99120143002
       - mfr-gw-trade:99120108076
+      - mfr-gw-trade:99120143002
+      - ret-gamenerdz:/warhammer-40k-adeptus-custodes-captain-general-trajann-valoris
       - ret-goblingaming:trajann-valoris
       - ret-radaddel:/adeptus-custodes-trajann-valoris
       - ret-radaddel:adeptus-custodes-trajann-valoris
@@ -25902,7 +25818,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 105.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-adeptus-custodes-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108094_ACCombatPatrol01.jpg
     description: |-
@@ -26024,7 +25940,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.warhammer.com/en-GB/shop/adeptus-custodes-shield-captain-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108099_ACShieldCaptain01.jpg
     description: |-
@@ -26066,7 +25982,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-adepta-soritas-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108100_ASCombatPatrol01.jpg
     description: |-
@@ -26115,6 +26031,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/combat-patrol-imperial-agents-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108101_IACP1.jpg
     description: |-
@@ -26142,6 +26059,7 @@ products:
       - ret-goblingaming:combat-patrol-imperial-agents
       - ret-radaddel:/imperial-agents-combat-patrol
       - ret-radaddel:imperial-agents-combat-patrol
+      - ret-tistaminis:combat-patrol-imperial-agents
   - id: games-workshop/99120108102
     name: 'A/SORORITAS: CELESTIAN SACRESANT AVELINE'
     manufacturer: games-workshop
@@ -26183,7 +26101,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
-    priceCad: 47.6
+    priceCad: 49.3
     url: https://www.warhammer.com/en-GB/shop/adepta-sororitas-canoness-with-jump-pack-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108103_ASCanonessJumpPack1.jpg
     description: |-
@@ -26249,7 +26167,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 120.0
     priceEur: 122.8
-    priceCad: 195.5
+    priceCad: 204.0
     url: https://www.warhammer.com/en-GB/shop/imperial-knights-knight-questoris-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108105_IKKnightQuestorisLEADDefender.jpg
     description: |-
@@ -26488,7 +26406,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 37.5
     priceEur: 38.9
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.warhammer.com/en-GB/shop/kill-team-inquisitorial-agents-2024
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/60010199056_KT2AshesOfFaith02.jpg
     description: |-
@@ -26635,7 +26553,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-sanctifiers-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108116_KillTeamSanctifiers01.jpg
     description: |-
@@ -26725,7 +26643,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-deathwatch-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108119_KTDeathwatch01.jpg
     description: |-
@@ -26765,7 +26683,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 105.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/armageddon-battalion-adepta-sororitas-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108120_ArmageddonBattalionAdeptaSororitas01.jpg
     evidence:
@@ -26798,7 +26716,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
-    priceCad: 63.75
+    priceCad: 68.0
     url: https://www.warhammer.com/en-GB/shop/adepta-sororitas-sisters-novitiate-squad-2025
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108121_CalanathGroup1.jpg
     description: |-
@@ -26847,7 +26765,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 46.5
     priceEur: 47.1
-    priceCad: 74.8
+    priceCad: 77.77
     url: https://www.warhammer.com/en-GB/shop/adepta-sororitas-intranzia-fraye-dogmata-superior-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108122_AdeptaSororitasIntranziaFrayeDogmataSuperior1.jpg
     evidence:
@@ -26878,7 +26796,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 110.0
     priceEur: 114.6
-    priceCad: 178.5
+    priceCad: 187.0
     url: https://www.warhammer.com/en-GB/shop/imperial-knights-knight-destrier-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108123_KnightDestrierALT.jpg
     evidence:
@@ -26909,7 +26827,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 39.5
     priceEur: 41.0
-    priceCad: 63.75
+    priceCad: 66.3
     url: https://www.warhammer.com/en-GB/shop/imperial-agents-inquisitor-kroyle-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108124_ImperialAgentsInquisitorKroyleEXTRA.jpg
     evidence:
@@ -26941,7 +26859,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 44.0
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.warhammer.com/en-GB/shop/kill-team-celestian-insidiants-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108125_KTCelestianInsidiants01.jpg
     evidence:
@@ -26972,69 +26890,6 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120108133
-  - id: games-workshop/99120108134
-    name: Sister Dogmata
-    manufacturer: games-workshop
-    productCode: '99120108134'
-    sku: '99120108134'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-09-30'
-    priceGbp: 26.0
-    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Sister-Dogmata-2021
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108008_SoBSisterDogmataLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4650189-99120108134
-  - id: games-workshop/99120108135
-    name: Imagifier
-    manufacturer: games-workshop
-    productCode: '99120108135'
-    sku: '99120108135'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-25'
-    priceGbp: 21.5
-    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Imagifier-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108006_SoBImagifierLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4400126-99120108135
-  - id: games-workshop/99120108137
-    name: Ministorum Priest
-    manufacturer: games-workshop
-    productCode: '99120108137'
-    sku: '99120108137'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceGbp: 23.5
-    url: https://www.warhammer.com/en-GB/shop/adepta-sororitas-ministorum-priest-2024
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108011_ASMinistorumPriest01.jpg
-    evidence:
-      - mfr-gw-algolia:P-187771-99120108137
   - id: games-workshop/99120108138
     name: Ministorum Priest with Vindictor
     manufacturer: games-workshop
@@ -27059,27 +26914,6 @@ products:
     evidence:
       - mfr-gw-algolia:P-181577-99120108138
       - mfr-gw-trade:99120108138
-  - id: games-workshop/99120108143
-    name: Dialogus
-    manufacturer: games-workshop
-    productCode: '99120108143'
-    sku: '99120108143'
-    gameSystems:
-      - warhammer-40k
-    gameSystemsBasis: stated
-    settings:
-      - warhammer-40k
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceGbp: 29.0
-    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Dialogus-2020
-    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108022_SoBDialogusLead.jpg
-    evidence:
-      - mfr-gw-algolia:prod4400128-99120108143
   - id: games-workshop/99120108144
     name: Hospitaller
     manufacturer: games-workshop
@@ -27195,7 +27029,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 41.5
     priceEur: 41.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/imperial-agents-imperial-navy-breachers-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108152_ImperialNavyBreachers1.jpg
     evidence:
@@ -27225,7 +27059,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 41.5
     priceEur: 41.2
-    priceCad: 66.3
+    priceCad: 68.85
     url: https://www.warhammer.com/en-GB/shop/imperial-agents-exaction-squad-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108153_ImperialAgentsExactionSquad01.jpg
     evidence:
@@ -27408,7 +27242,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 105.0
     priceEur: 110.5
-    priceCad: 174.25
+    priceCad: 180.2
     url: https://www.warhammer.com/en-GB/shop/armageddon-battalion-deathwatch-2026
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120109017_ArmageddonBattalionDeathwatch01.jpg
     evidence:
