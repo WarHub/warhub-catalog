@@ -74,7 +74,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/m4-sherman-frames-only
@@ -179,7 +179,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/cromwell-frames-only
@@ -302,7 +302,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/panther-frames-only
@@ -323,7 +323,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/plastic-stug-frames-only
@@ -344,7 +344,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/tiger-i-frames-only
@@ -365,7 +365,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/m10-tank-destroyer-wolverine-frames-only
@@ -386,7 +386,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/m8-m20-greyhound-frames-only
@@ -407,7 +407,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/humber-armoured-car-mk-ii-iv-frames-only
@@ -606,7 +606,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/king-tiger-plastic-frames-only
@@ -627,7 +627,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/hetzer-plastic-frames-only
@@ -750,7 +750,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/sd-kfz-222-223-frames-only
@@ -773,7 +773,7 @@ products:
     categoryBasis: lexicon
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/german-veteran-infantry-sprue
@@ -787,6 +787,66 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/german/german-veteran-infantry-sprue
       - mfr-warlord-store:german-veteran-infantry-sprue
+  - id: warlord-games/4030100036
+    name: German Weapons Crew Frame
+    manufacturer: warlord-games
+    productCode: '4030100036'
+    sku: '4030100036'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/german-weapons-crew-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030100036GermanWeaponsCrewFrame.jpg?v=1789049961
+    evidence:
+      - mfr-warlord-store:german-weapons-crew-frame
+  - id: warlord-games/4030100037
+    name: German Heavy Weapons Frame
+    manufacturer: warlord-games
+    productCode: '4030100037'
+    sku: '4030100037'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/german-heavy-weapons-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030100037GermanHeavyWeaponsFrame.jpg?v=1789049737
+    evidence:
+      - mfr-warlord-store:german-heavy-weapons-frame
+  - id: warlord-games/4030100038
+    name: German Heer Pak 40 Anti-Tank Gun Frame
+    manufacturer: warlord-games
+    productCode: '4030100038'
+    sku: '4030100038'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 12.5
+    url: https://store.warlordgames.com/products/german-heer-pak-40-anti-tank-gun-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030100038GermanHeerPak40Anti-TankGunFrame.jpg?v=1789051476
+    evidence:
+      - mfr-warlord-store:german-heer-pak-40-anti-tank-gun-frame
   - id: warlord-games/403010010
     name: Bolt Action CSM Stanley Hollis VC Ltd Edition Miniature New
     manufacturer: warlord-games
@@ -3116,6 +3176,8 @@ products:
     manufacturer: warlord-games
     productCode: '403012036'
     sku: '403012036'
+    ean: '5060917998901'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     gameSystemsBasis: code
@@ -7822,7 +7884,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/m18-hellcat-frames-only
@@ -7875,7 +7937,7 @@ products:
     categoryBasis: lexicon
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/us-rangers-plastic-frame
@@ -7903,7 +7965,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/m3-lee-frames-only
@@ -7924,13 +7986,73 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/studebaker-frames-only
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Studebaker_frames_bagged.png?v=1775127850
     evidence:
       - mfr-warlord-store:studebaker-frames-only
+  - id: warlord-games/4030200011
+    name: US Heavy Weapons Crew Frame
+    manufacturer: warlord-games
+    productCode: '4030200011'
+    sku: '4030200011'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/us-heavy-weapons-crew-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030200011USHeavyWeaponsCrewFrame.jpg?v=1789051842
+    evidence:
+      - mfr-warlord-store:us-heavy-weapons-crew-frame
+  - id: warlord-games/4030200012
+    name: US Heavy Weapons Frame
+    manufacturer: warlord-games
+    productCode: '4030200012'
+    sku: '4030200012'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/us-heavy-weapons-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030200012USHeavyWeaponsFrame.jpg?v=1789051949
+    evidence:
+      - mfr-warlord-store:us-heavy-weapons-frame
+  - id: warlord-games/4030200013
+    name: 57mm/6-PDR Anti Tank Gun
+    manufacturer: warlord-games
+    productCode: '4030200013'
+    sku: '4030200013'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 12.5
+    url: https://store.warlordgames.com/products/57mm-6-pdr-anti-tank-gun
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403020001357mm6-PDRAntiTankGun.jpg?v=1789051560
+    evidence:
+      - mfr-warlord-store:57mm-6-pdr-anti-tank-gun
   - id: warlord-games/4030210002
     name: US Airborne M42 frame (2025) Sprue
     manufacturer: warlord-games
@@ -7947,7 +8069,7 @@ products:
     categoryBasis: lexicon
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 12.5
     url: https://store.warlordgames.com/products/us-airborne-m42-frame-2025-sprue
@@ -8035,7 +8157,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/churchill-frames-only
@@ -8164,6 +8286,46 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/british/british-canadian-infantry-winter-2025-sprue
       - mfr-warlord-store:british-canadian-infantry-winter-2025-sprue
+  - id: warlord-games/4030300018
+    name: British Weapons Crew Frame
+    manufacturer: warlord-games
+    productCode: '4030300018'
+    sku: '4030300018'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/british-weapons-crew-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030300018BritishWeaponsCrewFrame.jpg?v=1789051632
+    evidence:
+      - mfr-warlord-store:british-weapons-crew-frame
+  - id: warlord-games/4030300019
+    name: British Heavy Weapons Frame
+    manufacturer: warlord-games
+    productCode: '4030300019'
+    sku: '4030300019'
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: stated
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 9.0
+    url: https://store.warlordgames.com/products/british-heavy-weapons-frame
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/4030300019BritishHeavyWeaponsFrame.jpg?v=1789051720
+    evidence:
+      - mfr-warlord-store:british-heavy-weapons-frame
   - id: warlord-games/4030310001
     name: British Airborne Sprue
     manufacturer: warlord-games
@@ -8238,7 +8400,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/kv1-2-plastic-frames-only
@@ -8259,7 +8421,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/t34-85-frames-only
@@ -8310,7 +8472,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/katyusha-frames-only
@@ -8331,7 +8493,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/chi-ha-type-97-frames-only
@@ -8403,7 +8565,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/m13-40-semovente-plastic-frames-only
@@ -8540,7 +8702,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 12.0
     url: https://store.warlordgames.com/products/autoblinda-ab41-43-frames-only
@@ -9623,6 +9785,8 @@ products:
     manufacturer: warlord-games
     productCode: '403212013'
     sku: '403212013'
+    ean: '5060917997270'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -10191,6 +10355,8 @@ products:
     manufacturer: warlord-games
     productCode: '403213106'
     sku: '403213106'
+    ean: '5060917995832'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -10239,6 +10405,8 @@ products:
     manufacturer: warlord-games
     productCode: 403213107X
     sku: 403213107X
+    ean: '5060917995849'
+    eanConfidence: confirmed
     faction: general
     gameSystemsBasis: unknown
     settingsBasis: unknown
@@ -10547,6 +10715,8 @@ products:
     manufacturer: warlord-games
     productCode: '403214007'
     sku: '403214007'
+    ean: '5060917997034'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -10795,6 +10965,29 @@ products:
       - ret-radaddel:/soviet-naval-brigade-medium-mortar-team
       - ret-radaddel:soviet-naval-brigade-medium-mortar-team
       - ret-tistaminis:bolt-action-soviet-naval-brigade-medium-mortar-team
+  - id: warlord-games/403215502
+    name: 'Soldier of Fortune 40: ''La Miss'' (Susan Travers)'
+    manufacturer: warlord-games
+    productCode: '403215502'
+    sku: '403215502'
+    ean: '5060917999212'
+    eanConfidence: confirmed
+    gameSystems:
+      - bolt-action
+    gameSystemsBasis: code
+    settings:
+      - world-war-two
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 6.0
+    url: https://store.warlordgames.com/products/soldier-of-fortune-40-la-miss-susan-travers
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403215502_Soldier-of-Fortune-40_La_Miss_Susan_Travers01.jpg?v=1793202786
+    evidence:
+      - mfr-warlord-store:soldier-of-fortune-40-la-miss-susan-travers
   - id: warlord-games/403215801
     name: Italian Platoon Commanders
     manufacturer: warlord-games
@@ -10886,6 +11079,8 @@ products:
     manufacturer: warlord-games
     productCode: '403216003'
     sku: '403216003'
+    ean: '5060917997386'
+    eanConfidence: confirmed
     gameSystems:
       - bolt-action
     faction: general
@@ -11085,6 +11280,10 @@ products:
     manufacturer: warlord-games
     productCode: '403411002'
     sku: '403411002'
+    ean: '5060917994545'
+    eanConfidence: conflicted
+    additionalEans:
+      - '9781472863874'
     gameSystems:
       - bolt-action
     faction: general
@@ -11099,6 +11298,8 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 6.0
+    priceEur: 29.45
+    priceCad: 38.7
     url: https://store.warlordgames.com/products/soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/403411002_SoF22_LtGeneralSirAdrianCartondeWiartVC01.jpg?v=1745835117
     description: |-
@@ -11122,6 +11323,10 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
       - mfr-warlord-store:soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
+      - ret-goblingaming:armies-of-the-united-states-book-bolt-action
+      - ret-radaddel:/armies-of-the-united-states-third-edition-englisch
+      - ret-radaddel:armies-of-the-united-states-third-edition-englisch
+      - ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025
   - id: warlord-games/403412001
     name: Bolt Action Afrika Korps D6 pack
     manufacturer: warlord-games

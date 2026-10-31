@@ -457,7 +457,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 85.0
+    priceGbp: 110.5
     url: https://www.manticgames.com/advent-calendars/2025-new-calendars-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/10/2025-advent-calendar-bundle-boxes-sold-out.webp
     evidence:
@@ -2009,6 +2009,25 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2020/01/GL2014_SUPER_GLUE_1.jpg
     evidence:
       - mfr-manticgames:96014
+  - id: mantic-games/KSAC101
+    name: 'Assassin’s Creed™: Animus – Limited Collector’s Edition'
+    manufacturer: mantic-games
+    productCode: KSAC101
+    sku: KSAC101
+    ean: '5060924986977'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 175.0
+    url: https://www.manticgames.com/board-games/assassins-creed-animus-collectors-edition/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/assassins-creed-animus-the-board-game-collectors-edition-product-shot-contents-spread-full-size-square-crop.webp
+    evidence:
+      - mfr-manticgames:560685
   - id: mantic-games/KSDS101
     name: 'Dungeon Saga Origins: Legendary Edition'
     manufacturer: mantic-games
@@ -3097,6 +3116,25 @@ products:
     evidence:
       - mfr-manticgames:530434
       - mfr-manticgames:531834
+  - id: mantic-games/MGAC101
+    name: 'Assassin’s Creed™: Animus – Standard Edition'
+    manufacturer: mantic-games
+    productCode: MGAC101
+    sku: MGAC101
+    ean: '5060924986960'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceGbp: 40.0
+    url: https://www.manticgames.com/board-games/assassins-creed-animus/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/assassins-creed-animus-the-board-game-product-shot-box-contents-game-setup-full-size-square-crop.webp
+    evidence:
+      - mfr-manticgames:560684
   - id: mantic-games/MGAR504
     name: Trident Realm Complete Fleet Bundle
     manufacturer: mantic-games
@@ -5883,6 +5921,8 @@ products:
     manufacturer: mantic-games
     productCode: MGDB201
     sku: MGDB201
+    ean: '5060469666662'
+    eanConfidence: provisional
     gameSystems:
       - dreadball
     faction: general
@@ -20731,7 +20771,8 @@ products:
     settings:
       - halo
     settingsBasis: derived
-    categoryBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -20751,6 +20792,7 @@ products:
       - legacy-catalog:mantic-games/halo-flashpoint/general/sangheili-mercenaries
       - mfr-manticgames:499626
       - ret-gamenerdz:/halo-flashpoint-banished-sangheili-mercenaries
+      - ret-goblingaming:halo-flashpoint-sanghelli-mercenaries
       - ret-tistaminis:halo-flashpoint-sangheili-mercenaries
   - id: mantic-games/MGHAB303
     name: 'Halo: Flashpoint Banished Reinforcements'
@@ -20781,7 +20823,7 @@ products:
       - ret-goblingaming:halo-flashpoint-banished-reinforcements
       - ret-tistaminis:halo-flashpoint-banished-reinforcements
   - id: mantic-games/MGHAC101
-    name: Judgement – Covenant Faction Set
+    name: 'Halo: Flashpoint Judgement – Covenant Faction Set'
     manufacturer: mantic-games
     productCode: MGHAC101
     sku: MGHAC101
@@ -21176,7 +21218,7 @@ products:
     categoryBasis: unknown
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 75.0
     priceUsd: 75.0
@@ -30371,7 +30413,7 @@ products:
       - pannithor
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     packaging: single
     status: current
     availability: in_stock
@@ -30390,6 +30432,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/salamander-primes
       - mfr-manticgames:1413
+      - ret-goblingaming:forces-of-nature-salamander-regiment
   - id: mantic-games/MGKWN302
     name: Naiad Ensnarers / Naiad Heartpiercers / Ice Naiads Regiment
     manufacturer: mantic-games
@@ -45740,8 +45783,10 @@ products:
     manufacturer: mantic-games
     productCode: MGWD162
     sku: MGWD162
-    ean: '5060924983648'
-    eanConfidence: confirmed
+    ean: '5060924984386'
+    eanConfidence: conflicted
+    additionalEans:
+      - '5060924983648'
     gameSystems:
       - walking-dead-all-out-war
     faction: general
@@ -45753,7 +45798,7 @@ products:
     categoryBasis: mapped
     packaging: starter
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceUsd: 71.0
@@ -57139,7 +57184,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 50.0
     url: https://www.manticgames.com/worms-the-board-game/
-    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/08/worms-retail-box-low-angle-left.webp
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/08/worms-product-shot-2k-web.webp
     evidence:
       - mfr-manticgames:484102
   - id: mantic-games/MGWO103
@@ -57158,7 +57203,7 @@ products:
     firstSeen: '2026-08-22'
     priceGbp: 80.0
     url: https://www.manticgames.com/board-games/worms-30th-anniversary-edition/
-    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/07/worms-30th-low-angle-left-shot.webp
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/07/worms-30th-anniversary-full-contents-spread.webp
     evidence:
       - mfr-manticgames:552764
   - id: mantic-games/MGWPA101
@@ -61037,7 +61082,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 11.99
-    url: https://www.manticgames.com/games/%25product_cat%25/vellejo-weathering-effects-industrial-thick-mud-200ml/
+    url: https://www.manticgames.com/games/%product_cat%/vellejo-weathering-effects-industrial-thick-mud-200ml/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2021/04/diorama-effects-vallejo-industrial-thick-mud-26809.jpg
     evidence:
       - mfr-manticgames:333653
@@ -71532,7 +71577,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 5.0
+    priceGbp: 8.0
     url: https://www.goblingaming.co.uk/products/elf-palace-guard-prince
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/elven-prince-elves-kings-of-war-fantasy-mantic-gam.jpg?v=1560795419
     evidence:
@@ -71913,7 +71958,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 139.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/asterian/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/asterian-commander-bundle.webp
     evidence:
@@ -72017,7 +72062,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/enforcers/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/enforcer-commander-bundle.webp
     evidence:
@@ -72037,7 +72082,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/forge-fathers/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/forge-father-commander-bundle-new-version.webp
     evidence:
@@ -72057,7 +72102,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 162.0
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/gcps/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/gcps-commander-bundle.webp
     evidence:
@@ -72077,7 +72122,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/marauders/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/marauder-commanders-bundle.webp
     evidence:
@@ -72097,7 +72142,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 139.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/nameless/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/nameless-commander-bundle.webp
     evidence:
@@ -72117,7 +72162,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/plague/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/plague-commander-bundle.webp
     evidence:
@@ -72137,7 +72182,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 139.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/veer-myn/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/veer-myn-commander-bundle-v3.webp
     evidence:
@@ -73604,7 +73649,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 64.99
+    priceGbp: 96.45
     url: https://www.manticgames.com/tabletop-advent-calendars/hellboy-drinking-with-skeletons-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/hellboy-advent-calendar-and-drinking-with-skeletons-bundle.webp
     evidence:
@@ -73624,7 +73669,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-22'
-    priceGbp: 54.99
+    priceGbp: 80.38
     url: https://www.manticgames.com/advent-calendars/hellboy-calendar-holiday-hellboy-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/hellboy-advent-calendar-and-holiday-hellboy-bundle.webp
     evidence:
@@ -76800,7 +76845,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 60.0
+    priceGbp: 95.3
     priceUsd: 60.0
     url: https://www.manticgames.com/halo-flashpoint/recon-bundle-organised-play/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/06/recon-free-terrain-bundle.webp
@@ -77387,7 +77432,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 173.36
+    priceGbp: 225.02
     url: https://www.manticgames.com/tabletop-advent-calendars/all-in-bundle-2026/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/advent-calendars-all-in-bundle-2026-v2.webp
     evidence:
@@ -77657,7 +77702,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 69.0
+    priceGbp: 99.19
     url: https://www.manticgames.com/tabletop-advent-calendars/walking-dead-advent-calendar-eeny-meeny-miny-moe-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/the-walking-dead-eeny-meeny-miny-moe-bundle.webp
     evidence:
@@ -78294,7 +78339,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 20.63
+    priceGbp: 28.13
     priceUsd: 40.0
     url: https://www.manticgames.com/kings-of-war/undead/skeleton-horde/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2019/05/Skeleton-Horde.jpeg
@@ -78554,7 +78599,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 0.0
-    url: https://www.manticgames.com/games/%25product_cat%25/vallejo-stone-textures-red-oxide-paste-200ml/
+    url: https://www.manticgames.com/games/%product_cat%/vallejo-stone-textures-red-oxide-paste-200ml/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2021/04/red-oxide-paste-vallejo-26589-200ml.jpg
     evidence:
       - mfr-manticgames:333684
@@ -78769,7 +78814,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 84.99
+    priceGbp: 109.29
     url: https://www.manticgames.com/tabletop-advent-calendars/hellboy-walking-dead-worms-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/worms-the-walking-dead-hellboy-bundle.webp
     evidence:
@@ -78785,7 +78830,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 109.99
+    priceGbp: 167.18
     url: https://www.manticgames.com/worms/30th-deluxe-play-mat-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/worms-30th-anniversary-bundle.webp
     evidence:

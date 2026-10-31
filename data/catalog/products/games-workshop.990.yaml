@@ -2127,6 +2127,7 @@ products:
       - legacy-catalog:games-workshop/middle-earth/heroes/cirdantm-erestor
       - mfr-gw-algolia:P-188900-99061463054
       - mfr-gw-trade:99061463054
+      - ret-goblingaming:forces-of-good-cirdan-erestor
       - ret-radaddel:/cirdan-and-erestor-lotr-good
       - ret-radaddel:cirdan-and-erestor-lotr-good
       - ret-tistaminis:middle-earth-strategy-battles-cirdan-and-erestor
@@ -2657,6 +2658,7 @@ products:
       - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/warriors-of-the-fiefdoms
       - mfr-gw-algolia:prod4210148-99061464188
       - mfr-gw-trade:99061464188
+      - ret-goblingaming:warrior-of-the-fiefdoms
       - ret-goblingaming:warriror-of-the-fiefdoms
       - ret-radaddel:/warriors-of-the-fiefdoms-lotr-good
       - ret-radaddel:warriors-of-the-fiefdoms-lotr-good
@@ -2925,6 +2927,7 @@ products:
       - legacy-catalog:games-workshop/middle-earth/heroes/lords-of-the-dunedaintm
       - mfr-gw-algolia:P-188904-99061464224
       - mfr-gw-trade:99061464224
+      - ret-goblingaming:forces-of-good-lords-of-the-dunedain
       - ret-radaddel:/lords-of-the-dunedain-lotr-good
       - ret-radaddel:lords-of-the-dunedain-lotr-good
       - ret-tistaminis:middle-earth-strategy-battles-lords-of-the-dunedain
@@ -3144,7 +3147,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 32.5
     priceEur: 38.5
@@ -3634,6 +3637,7 @@ products:
       - legacy-catalog:games-workshop/middle-earth/the-lord-of-the-rings-good/army-of-the-dead-banner-bearer
       - mfr-gw-algolia:prod4210151-99061466045
       - mfr-gw-trade:99061466045
+      - ret-goblingaming:army-of-the-dead-banner-bearer
       - ret-radaddel:/army-of-the-dead-banner-bearer-lotr-good
       - ret-radaddel:army-of-the-dead-banner-bearer-lotr-good
       - ret-tistaminis:warhammer-lord-of-the-rings-army-of-the-dead-banner-bearer
@@ -5447,7 +5451,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.5
     url: https://www.warhammer.com/en-GB/shop/Blood-Angels-Terminator-Librarian-2014
@@ -5897,9 +5901,10 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
+    url: https://www.gamenerdz.com/old-warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
     evidence:
       - mfr-gw-trade:99070101045
+      - ret-gamenerdz:/old-warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
       - ret-gamenerdz:/warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
   - id: games-workshop/99070101046
     name: PRIMARIS LIBRARIAN IN PHOBOS ARMOUR
@@ -5985,7 +5990,9 @@ products:
     productCode: '99070101049'
     sku: '99070101049'
     ean: '5011921140800'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921255962'
     supersedes:
       - games-workshop/99070101042
     gameSystems:
@@ -6026,7 +6033,10 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/iron-hands-primaris-upgrades-and-transfers
       - mfr-gw-algolia:prod4510301-99070101049
+      - mfr-gw-algolia:prod4510301-99120101463
       - mfr-gw-trade:99070101049
+      - mfr-gw-trade:99120101463
+      - ret-gamenerdz:/old-warhammer-40k-iron-hands-primaris-upgrades-transfers
       - ret-gamenerdz:/warhammer-40k-iron-hands-primaris-upgrades-transfers
       - ret-goblingaming:iron-hands-primaris-upgrades-transfers
       - ret-radaddel:/iron-hands-primaris-upgrades-transfers
@@ -6241,7 +6251,9 @@ products:
     productCode: '99070101055'
     sku: '99070101055'
     ean: '5011921142095'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921256099'
     supersedes:
       - games-workshop/99070101046
     gameSystems:
@@ -6270,7 +6282,10 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-librarian-in-phobos-armour
       - mfr-gw-algolia:prod4510313-99070101055
+      - mfr-gw-algolia:prod4510313-99120101468
       - mfr-gw-trade:99070101055
+      - mfr-gw-trade:99120101468
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian-in-phobos-armour
       - ret-goblingaming:space-marine-primaris-librarian-in-phobos-armour
       - ret-radaddel:/space-marines-primaris-librarian-in-phobos-armour
       - ret-radaddel:space-marines-primaris-librarian-in-phobos-armour
@@ -6409,6 +6424,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/white-scars-primaris-upgrades-transfers
       - mfr-gw-algolia:prod4510331-99070101059
+      - mfr-gw-algolia:prod4510331-99120101470
       - mfr-gw-trade:99070101059
       - ret-gamenerdz:/warhammer-40k-white-scars-primaris-upgrades-transfers
       - ret-goblingaming:white-scar-primaris-upgrades-transfers
@@ -6490,7 +6506,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/space-marine-captain
       - mfr-gw-algolia:prod4530191-99070101061
       - mfr-gw-trade:99070101061
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-captain
       - ret-goblingaming:space-marines-primaris-captain
       - ret-radaddel:/space-marines-primaris-captain
       - ret-radaddel:space-marines-primaris-captain
@@ -6540,7 +6555,9 @@ products:
     productCode: '99070101063'
     sku: '99070101063'
     ean: '5011921145997'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921256211'
     supersedes:
       - games-workshop/99120101181
     gameSystems:
@@ -6570,7 +6587,10 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-librarian
       - mfr-gw-algolia:prod4530142-99070101063
+      - mfr-gw-algolia:prod4530142-99120101474
       - mfr-gw-trade:99070101063
+      - mfr-gw-trade:99120101474
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-librarian
       - ret-goblingaming:space-marines-primaris-librarian
       - ret-radaddel:/space-marines-primaris-librarian
   - id: games-workshop/99070101064
@@ -6970,7 +6990,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/ancient
       - mfr-gw-algolia:prod4850163-99070101076
       - mfr-gw-trade:99070101076
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-ancient
       - ret-goblingaming:warhammer-40k-space-marines-primaris-ancient
       - ret-radaddel:/space-marines-primaris-ancient
       - ret-radaddel:space-marines-primaris-ancient
@@ -7011,7 +7030,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/captain-in-gravis-armour
       - mfr-gw-algolia:prod4850164-99070101077
       - mfr-gw-trade:99070101077
-      - ret-gamenerdz:/warhammer-40k-space-marines-captain-in-gravis-armour
       - ret-goblingaming:warhammer-40k-space-marines-captain-in-gravis-armour
       - ret-radaddel:/space-marines-captain-in-gravis-armour
       - ret-radaddel:space-marines-captain-in-gravis-armour
@@ -7052,7 +7070,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/space-marines-lieutenant
       - mfr-gw-algolia:P-155988-99070101079
       - mfr-gw-trade:99070101079
-      - ret-gamenerdz:/warhammer-40k-space-marines-lieutenant
       - ret-goblingaming:warhammer-40000-space-marines-lieutenant
       - ret-radaddel:/space-marines-lieutenant
       - ret-radaddel:space-marines-lieutenant
@@ -7451,6 +7468,7 @@ products:
       - mfr-gw-trade:99070102018
       - ret-gamenerdz:/warhammer-40k-death-guard-scribbus-wretch-the-tallyman
       - ret-goblingaming:death-guard-scribbus-wretch
+      - ret-goblingaming:death-guard-tallyman
       - ret-radaddel:/death-guard-scribbus-wretch-the-tallyman
       - ret-radaddel:death-guard-scribbus-wretch-the-tallyman
   - id: games-workshop/99070102019
@@ -7488,9 +7506,11 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/plague-surgeon
       - mfr-gw-algolia:prod4580137-99070102019
+      - mfr-gw-algolia:prod4580137-99120102238
       - mfr-gw-trade:99070102019
       - ret-gamenerdz:/warhammer-40k-death-guard-nauseous-rotbone-the-plague-surgeon
       - ret-goblingaming:death-guard-nauseous-rotbone
+      - ret-goblingaming:death-guard-plague-surgeon
       - ret-radaddel:/death-guard-nauseous-rotbone
       - ret-radaddel:death-guard-nauseous-rotbone
   - id: games-workshop/99070102020
@@ -7609,6 +7629,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/chaos/plague-marine-champion
       - mfr-gw-algolia:prod4580310-99070102022
+      - mfr-gw-algolia:prod4580310-99120102241
       - mfr-gw-trade:99070102022
       - ret-gamenerdz:/warhammer-40k-death-guard-plague-marine-champion
       - ret-goblingaming:death-guard-plague-marine-champion
@@ -8033,6 +8054,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/aeldari/eldrad-ulthran
       - mfr-gw-algolia:prod3650164-99070104008
+      - mfr-gw-algolia:prod3650164-99120104118
       - mfr-gw-trade:99070104008
       - ret-gamenerdz:/warhammer-40k-aeldari-eldrad-ulthran
       - ret-goblingaming:eldrad-ulthran
@@ -8090,7 +8112,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
     priceCad: 42.5
@@ -8181,7 +8203,9 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/aeldari/farseer-skyrunner
       - legacy-catalog:games-workshop/warhammer-40k/aeldari/warlock-skyrunner
       - mfr-gw-algolia:prod3650295-99070104012
+      - mfr-gw-algolia:prod3650295-99120104122
       - mfr-gw-algolia:prod3660120-99070104012
+      - mfr-gw-algolia:prod3660120-99120104122
       - mfr-gw-trade:99070104012
       - ret-gamenerdz:/warhammer-40k-aeldari-farseer-skyrunner
       - ret-goblingaming:eldar-farseer-skyrunner
@@ -8352,7 +8376,9 @@ products:
     productCode: '99070107002'
     sku: '99070107002'
     ean: '5011921153749'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921255924'
     supersedes:
       - games-workshop/99070107001
     gameSystems:
@@ -8381,7 +8407,9 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/grand-master-voldus
       - mfr-gw-algolia:prod3530544-99070107002
+      - mfr-gw-algolia:prod3530544-99120107024
       - mfr-gw-trade:99070107002
+      - mfr-gw-trade:99120107024
       - ret-gamenerdz:/warhammer-40k-grey-knights-grand-master-voldus
       - ret-goblingaming:grey-knights-grand-master-voldus
       - ret-radaddel:/grey-knights-grand-master-voldus
@@ -8552,6 +8580,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/sister-dogmata
       - mfr-gw-algolia:prod4650189-99070108008
+      - mfr-gw-algolia:prod4650189-99120108134
       - mfr-gw-trade:99070108008
       - ret-gamenerdz:/warhammer-40k-adepta-sororitas-sister-dogmata
       - ret-goblingaming:sister-dogmata-adepta-sororitas
@@ -8591,6 +8620,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/imagifier
       - mfr-gw-algolia:prod4400126-99070108009
+      - mfr-gw-algolia:prod4400126-99120108135
       - mfr-gw-trade:99070108009
       - ret-gamenerdz:/warhammer-40k-adepta-sororitas-imagifier-10th-edition
       - ret-goblingaming:adepta-sororitas-imagifier
@@ -8602,7 +8632,9 @@ products:
     productCode: '99070108010'
     sku: '99070108010'
     ean: '5011921163106'
-    eanConfidence: confirmed
+    eanConfidence: conflicted
+    additionalEans:
+      - '5011921272495'
     gameSystems:
       - warhammer-40k
     faction: armies-of-the-imperium
@@ -8631,7 +8663,9 @@ products:
       - arc-wargameportal:/products/blade-champion
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/blade-champion
       - mfr-gw-algolia:prod4920184-99070108010
+      - mfr-gw-algolia:prod4920184-99120143001
       - mfr-gw-trade:99070108010
+      - mfr-gw-trade:99120143001
       - ret-gamenerdz:/warhammer-40k-adeptus-custodes-blade-champion
       - ret-goblingaming:adeptus-custodes-blade-champion-warhammer-40k-games-workshop
       - ret-radaddel:/adeptus-custodes-blade-champion
@@ -8670,6 +8704,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-the-imperium/ministorum-priest
       - mfr-gw-algolia:P-187771-99070108011
+      - mfr-gw-algolia:P-187771-99120108137
       - mfr-gw-trade:99070108011
       - ret-gamenerdz:/warhammer-40k-adepta-sororitas-ministorum-priest
       - ret-goblingaming:adepta-sororitas-ministorum-priest
@@ -8935,7 +8970,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -9494,6 +9529,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/aeldari/death-jester
       - mfr-gw-algolia:prod2620120-99070111004
+      - mfr-gw-algolia:prod2620120-99120104144
       - mfr-gw-trade:99070111004
       - ret-gamenerdz:/warhammer-40k-aeldari-death-jester
       - ret-goblingaming:harlequins-death-jester
@@ -9610,6 +9646,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/drukhari/haemonculus
       - mfr-gw-algolia:prod3590121-99070112005
+      - mfr-gw-algolia:prod3590121-99120112062
       - mfr-gw-trade:99070112005
       - ret-goblingaming:dark-eldar-haemonculus
   - id: games-workshop/99070112006
@@ -9882,6 +9919,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/tau-empire/kroot-trail-shaper
       - mfr-gw-algolia:P-178206-99070113007
+      - mfr-gw-algolia:P-178206-99120113107
       - mfr-gw-trade:99070113007
       - ret-gamenerdz:/warhammer-40k-tau-empire-kroot-trail-shaper
       - ret-goblingaming:warhammer-40k-tau-empire-kroot-trail-shaper
@@ -9922,6 +9960,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/tau-empire/kroot-flesh-shaper
       - mfr-gw-algolia:P-178204-99070113008
+      - mfr-gw-algolia:P-178204-99120113108
       - mfr-gw-trade:99070113008
       - ret-gamenerdz:/warhammer-40k-tau-empire-kroot-flesh-shaper
       - ret-goblingaming:warhammer-40k-tau-empire-kroot-flesh-shaper
@@ -10186,7 +10225,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     url: https://www.warhammer.com/en-GB/shop/acolyte-iconward-2016
@@ -11219,7 +11258,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 18.28
+    priceGbp: 19.55
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-maggotkin-of-nurgle-rotbringer-sorcerer
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2021_12_99070201027_RotbringerSorcererStock.jpg?v=1639182598
     evidence:
@@ -11244,7 +11283,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 10.84
+    priceGbp: 11.48
     url: https://www.goblingaming.co.uk/products/nurgle-rotbringers-lord-of-plagues
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/https___trade.games-workshop.com_assets_2022_03_EB200a-83-32-99070201028-MaggotkinLordofPlagues.jpg?v=1682346529
     evidence:
@@ -11268,7 +11307,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 15.38
+    priceGbp: 19.13
     url: https://www.goblingaming.co.uk/products/lord-of-blight
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/lord-of-blight-nurgle-putrid-blight-kings-age-of-s.jpg?v=1560801727
     evidence:
@@ -11738,6 +11777,7 @@ products:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/grimhold-exile
       - mfr-gw-algolia:P-161578-99070205015
       - mfr-gw-trade:99070205015
+      - ret-goblingaming:fyreslayers-grimhold-exile
       - ret-tistaminis:fyreslayers-grimhold-exile-pre-order
   - id: games-workshop/99070206002
     name: Clawlord
@@ -12442,7 +12482,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -12828,7 +12868,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.0
     url: https://www.warhammer.com/en-GB/shop/Lumineth-Realm-lords-Scinari-Calligrave-2021
@@ -13172,6 +13212,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/knight-questor
       - mfr-gw-algolia:prod3330180-99070218011
+      - mfr-gw-algolia:prod3330180-99120218102
       - mfr-gw-trade:99070218011
       - ret-goblingaming:stormcast-eternals-knight-questor-92489248
       - ret-tistaminis:warhammer-stormcast-eternals-knight-questor
@@ -13247,28 +13288,6 @@ products:
       - mfr-gw-algolia:prod3810254-99070219004
       - mfr-gw-trade:99070219004
       - ret-goblingaming:isharann-soulrender
-  - id: games-workshop/99070219005
-    name: 'IDONETH DEEPKIN: ISHARANN SOULSCRYER'
-    manufacturer: games-workshop
-    productCode: '99070219005'
-    sku: '99070219005'
-    ean: '5011921097463'
-    eanConfidence: confirmed
-    supersededBy: games-workshop/99070219008
-    gameSystems:
-      - age-of-sigmar
-    gameSystemsBasis: classified
-    settings:
-      - age-of-sigmar
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-idoneth-deepkin-isharann-soulscryer
-    evidence:
-      - mfr-gw-trade:99070219005
-      - ret-gamenerdz:/warhammer-age-of-sigmar-idoneth-deepkin-isharann-soulscryer
   - id: games-workshop/99070219006
     name: 'IDONETH DEEPKIN: ISHARANN TIDECASTER'
     manufacturer: games-workshop
@@ -13333,8 +13352,6 @@ products:
     sku: '99070219008'
     ean: '5011921173549'
     eanConfidence: confirmed
-    supersedes:
-      - games-workshop/99070219005
     gameSystems:
       - age-of-sigmar
     gameSystemsBasis: code
@@ -13459,7 +13476,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 4.5
+    priceGbp: 4.73
     priceEur: 5.4
     url: https://www.goblingaming.co.uk/products/necromunda-32mm-bases-x10
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/necromunda-underhive-32mm-bases-10-bases-games-wor.jpg?v=1560801175
@@ -13572,7 +13589,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 22.95
+    priceGbp: 27.55
     priceEur: 32.4
     url: https://www.goblingaming.co.uk/products/karanak-the-hound-of-vengeance
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/demo_785bcccd-665e-4b1d-b113-1e4a47193641.jpg?v=1702391123
@@ -13693,7 +13710,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 9.9
+    priceGbp: 10.35
     url: https://www.gamenerdz.com/citadel-mixed-base-pack-1
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/hobby-mixed-base-pack-1.jpg?v=1560791658
     evidence:
@@ -13716,7 +13733,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 9.45
+    priceGbp: 9.9
     url: https://www.gamenerdz.com/citadel-mixed-base-pack-2
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/products/hobby-mixed-base-pack-2.jpg?v=1560791664
     evidence:
@@ -13940,7 +13957,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 20.0
     priceEur: 23.1

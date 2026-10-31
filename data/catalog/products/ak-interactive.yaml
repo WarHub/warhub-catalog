@@ -3897,6 +3897,8 @@ products:
     manufacturer: ak-interactive
     productCode: AK11191
     sku: AK11191
+    ean: '8435568304246'
+    eanConfidence: confirmed
     faction: general
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
@@ -3908,6 +3910,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 2.69
+    priceEur: 2.7
     url: https://store.warlordgames.com/products/gold-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK11191_BOTE.jpg?v=1754671192
     description: |-
@@ -3917,6 +3920,8 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/gold-17ml
       - mfr-warlord-store:gold-17ml
+      - ret-goblingaming:gold-ak-3rd-gen-17ml
+      - ret-radaddel:ak-3gen-gold-17ml
   - id: ak-interactive/AK11193
     name: Rusty Gold 17ml
     manufacturer: ak-interactive
@@ -4226,7 +4231,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 5.59
+    priceGbp: 7.19
     priceEur: 7.45
     url: https://www.goblingaming.co.uk/products/white-primer-ak-3rd-gen-100ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11240.jpg?v=1753277548
@@ -6028,7 +6033,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 2.69
     url: https://store.warlordgames.com/products/new-iraqui-army-sand
@@ -6203,7 +6208,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 2.69
     url: https://store.warlordgames.com/products/russian-green-4bo
@@ -7128,7 +7133,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 2.69
     url: https://store.warlordgames.com/products/ocher-khaki
@@ -7503,7 +7508,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 2.69
     url: https://store.warlordgames.com/products/british-uniform-base
@@ -21933,7 +21938,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/pink-flesh-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17002_02_9c0f67df-3618-4edb-bde8-1cd91e135865.jpg?v=1753281620
     evidence:
@@ -22027,7 +22032,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/lavender-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17004_02.jpg?v=1753281715
     evidence:
@@ -22072,7 +22077,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/necromancer-purple-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17005_02.jpg?v=1753281771
     evidence:
@@ -22117,7 +22122,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/demon-purple-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17006_02.jpg?v=1753281822
     evidence:
@@ -22207,7 +22212,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/bile-yellow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17008_02.jpg?v=1753281945
     evidence:
@@ -22387,7 +22392,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/solar-yellow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17012_02.jpg?v=1753282145
     evidence:
@@ -22432,7 +22437,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/plague-yellow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17013_02.jpg?v=1753282203
     evidence:
@@ -22477,7 +22482,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/light-yellow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17014_02.jpg?v=1753282259
     evidence:
@@ -22567,7 +22572,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/spectral-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17016_02.jpg?v=1753282357
     evidence:
@@ -22612,7 +22617,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/space-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17017_02.jpg?v=1753282403
     evidence:
@@ -22702,7 +22707,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/space-dark-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17019_02.jpg?v=1753282518
     evidence:
@@ -22796,7 +22801,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/forest-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17021_02.jpg?v=1753282613
     evidence:
@@ -22841,7 +22846,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/rotten-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17022_02.jpg?v=1753282661
     evidence:
@@ -23295,7 +23300,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/dwarf-flesh-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17032_02.jpg?v=1753283143
     evidence:
@@ -23385,7 +23390,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/space-red-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17034_02.jpg?v=1753283366
     evidence:
@@ -23430,7 +23435,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/reddish-orange-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17035_02.jpg?v=1753283429
     evidence:
@@ -23475,7 +23480,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/vivid-flesh-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17036_02.jpg?v=1753283482
     evidence:
@@ -23565,7 +23570,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/night-blood-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17038_02.jpg?v=1753283583
     evidence:
@@ -23610,7 +23615,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/light-grey-shadow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17039_02.jpg?v=1753283640
     evidence:
@@ -23655,7 +23660,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/grey-shadow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17040_02.jpg?v=1753283688
     evidence:
@@ -23700,7 +23705,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/winter-grey-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17041_02.jpg?v=1753283732
     evidence:
@@ -23745,7 +23750,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/bluish-grey-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17042_02.jpg?v=1753283786
     evidence:
@@ -23839,7 +23844,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/strong-grey-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17044_02.jpg?v=1753283906
     evidence:
@@ -23929,7 +23934,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/dirty-grey-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17046_02.jpg?v=1753284033
     evidence:
@@ -23974,7 +23979,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/brown-black-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17047_02.jpg?v=1753284101
     evidence:
@@ -24301,7 +24306,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/orange-brown-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17054_02.jpg?v=1753284566
     evidence:
@@ -24391,7 +24396,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/reddish-flesh-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17056_02.jpg?v=1753284685
     evidence:
@@ -24571,7 +24576,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/light-leather-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17060_02.jpg?v=1753284892
     evidence:
@@ -24710,7 +24715,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/desert-yellow-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17063_02.jpg?v=1753285244
     evidence:
@@ -24845,7 +24850,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/copper-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17066_02.jpg?v=1753285493
     evidence:
@@ -25168,7 +25173,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/dark-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17073_02.jpg?v=1753285961
     evidence:
@@ -25213,7 +25218,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/us-olive-uniform-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17074_02.jpg?v=1753286011
     evidence:
@@ -25258,7 +25263,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/ochre-green-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17075_02.jpg?v=1753286037
     evidence:
@@ -25352,7 +25357,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/russian-uniform-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17077_02.jpg?v=1753286141
     evidence:
@@ -25397,7 +25402,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/russian-blue-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17078_02.jpg?v=1753286160
     evidence:
@@ -25442,7 +25447,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 1.75
+    priceGbp: 2.25
     url: https://www.goblingaming.co.uk/products/desert-sand-18ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17079_02.jpg?v=1753286217
     evidence:
@@ -25509,7 +25514,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 4.9
+    priceGbp: 6.3
     url: https://www.goblingaming.co.uk/products/medium-60ml-ak-quick-gen
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK17081.jpg?v=1753286270
     evidence:
@@ -26885,7 +26890,7 @@ products:
     roleBasis: lexicon
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 5.21
     priceEur: 5.55
@@ -27042,257 +27047,398 @@ products:
   - id: ak-interactive/AK19301
     name: Rotwood Brown Wash 18ml
     manufacturer: ak-interactive
-    sku: '133533'
+    productCode: AK19301
+    sku: AK19301
+    ean: '8435568354364'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/rotwood-brown-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133533-rotwood-brown-wash-18ml-ak19301-1.webp?v=1781228677
+    url: https://store.warlordgames.com/products/rotwood-brown-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19301-1.jpg?v=1792757492
     evidence:
+      - mfr-warlord-store:rotwood-brown-wash-18ml
       - ret-radaddel:rotwood-brown-wash-18ml
   - id: ak-interactive/AK19302
     name: Obsidian Holt Wash 18ml
     manufacturer: ak-interactive
-    sku: '133534'
+    productCode: AK19302
+    sku: AK19302
+    ean: '8435568354371'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/obsidian-holt-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133534-obsidian-holt-wash-18ml-ak19302-1.webp?v=1781228676
+    url: https://store.warlordgames.com/products/obsidian-holt-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19302-WEB.jpg?v=1792757908
     evidence:
+      - mfr-warlord-store:obsidian-holt-wash-18ml
       - ret-radaddel:obsidian-holt-wash-18ml
+  - id: ak-interactive/AK19303
+    name: Black Night Wash 18ml
+    manufacturer: ak-interactive
+    productCode: AK19303
+    sku: AK19303
+    ean: '8435568354388'
+    eanConfidence: confirmed
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-08-21'
+    priceGbp: 2.89
+    priceEur: 2.35
+    url: https://store.warlordgames.com/products/black-night-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19303.jpg?v=1792758426
+    evidence:
+      - mfr-warlord-store:black-night-wash-18ml
+      - ret-radaddel:black-night-wash-18ml
   - id: ak-interactive/AK19304
     name: Pure Grime Wash 18ml
     manufacturer: ak-interactive
-    sku: '133536'
+    productCode: AK19304
+    sku: AK19304
+    ean: '8435568354395'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/pure-grime-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133536-pure-grime-wash-18ml-ak19304-1.webp?v=1781228672
+    url: https://store.warlordgames.com/products/pure-grime-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19304.jpg?v=1792765924
     evidence:
+      - mfr-warlord-store:pure-grime-wash-18ml
       - ret-radaddel:pure-grime-wash-18ml
   - id: ak-interactive/AK19305
     name: Sepia Filth Wash 18ml
     manufacturer: ak-interactive
-    sku: '133537'
+    productCode: AK19305
+    sku: AK19305
+    ean: '8435568354401'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/sepia-filth-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133537-sepia-filth-wash-18ml-ak19305-1.webp?v=1781228671
+    url: https://store.warlordgames.com/products/sepia-filth-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19305.jpg?v=1792766307
     evidence:
+      - mfr-warlord-store:sepia-filth-wash-18ml
       - ret-radaddel:sepia-filth-wash-18ml
   - id: ak-interactive/AK19306
     name: Hazel Brown Wash 18ml
     manufacturer: ak-interactive
-    sku: '133538'
+    productCode: AK19306
+    sku: AK19306
+    ean: '8435568354418'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/hazel-brown-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133538-hazel-brown-wash-18ml-ak19306-1.webp?v=1781228669
+    url: https://store.warlordgames.com/products/hazel-brown-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19306.jpg?v=1792768734
     evidence:
+      - mfr-warlord-store:hazel-brown-wash-18ml
       - ret-radaddel:hazel-brown-wash-18ml
+  - id: ak-interactive/AK19307
+    name: Blue Moon Wash 18ml
+    manufacturer: ak-interactive
+    productCode: AK19307
+    sku: AK19307
+    ean: '8435568354425'
+    eanConfidence: confirmed
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-08-21'
+    priceGbp: 2.89
+    priceEur: 2.35
+    url: https://store.warlordgames.com/products/blue-moon-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19307.jpg?v=1792768896
+    evidence:
+      - mfr-warlord-store:blue-moon-wash-18ml
+      - ret-radaddel:blue-moon-wash-18ml
+  - id: ak-interactive/AK19308
+    name: Carmine Dawn Wash 18ml
+    manufacturer: ak-interactive
+    productCode: AK19308
+    sku: AK19308
+    ean: '8435568354432'
+    eanConfidence: confirmed
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-08-21'
+    priceGbp: 2.89
+    priceEur: 2.35
+    url: https://store.warlordgames.com/products/carmine-dawn-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19308.jpg?v=1792769034
+    evidence:
+      - mfr-warlord-store:carmine-dawn-wash-18ml
+      - ret-radaddel:carmine-dawn-wash-18ml
   - id: ak-interactive/AK19309
     name: Invocation Purple Wash 18ml
     manufacturer: ak-interactive
-    sku: '133541'
+    productCode: AK19309
+    sku: AK19309
+    ean: '8435568354449'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/invocation-purple-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133541-invocation-purple-wash-18ml-ak19309-1.webp?v=1781228664
+    url: https://store.warlordgames.com/products/invocation-purple-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19309.jpg?v=1792769444
     evidence:
+      - mfr-warlord-store:invocation-purple-wash-18ml
       - ret-radaddel:invocation-purple-wash-18ml
   - id: ak-interactive/AK19310
     name: Crimson Veil Wash 18ml
     manufacturer: ak-interactive
-    sku: '133542'
+    productCode: AK19310
+    sku: AK19310
+    ean: '8435568354456'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/crimson-veil-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133542-crimson-veil-wash-18ml-ak19310-1.webp?v=1781228663
+    url: https://store.warlordgames.com/products/crimson-veil-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19310.jpg?v=1793034864
     evidence:
+      - mfr-warlord-store:crimson-veil-wash-18ml
       - ret-radaddel:crimson-veil-wash-18ml
   - id: ak-interactive/AK19311
     name: Putrid Green Wash 18ml
     manufacturer: ak-interactive
-    sku: '133543'
+    productCode: AK19311
+    sku: AK19311
+    ean: '8435568354463'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/putrid-green-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133543-putrid-green-wash-18ml-ak19311-1.webp?v=1781228661
+    url: https://store.warlordgames.com/products/putrid-green-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19311.jpg?v=1793035214
     evidence:
+      - mfr-warlord-store:putrid-green-wash-18ml
       - ret-radaddel:putrid-green-wash-18ml
   - id: ak-interactive/AK19312
     name: Green Wash 18ml
     manufacturer: ak-interactive
-    sku: '133544'
+    productCode: AK19312
+    sku: AK19312
+    ean: '8435568354470'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/green-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133544-green-wash-18ml-ak19312-1.webp?v=1781228659
+    url: https://store.warlordgames.com/products/green-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19312.jpg?v=1793037640
     evidence:
+      - mfr-warlord-store:green-wash-18ml
       - ret-radaddel:green-wash-18ml
   - id: ak-interactive/AK19313
     name: Verdigris Wash 18ml
     manufacturer: ak-interactive
-    sku: '133545'
+    productCode: AK19313
+    sku: AK19313
+    ean: '8435568354487'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/verdigris-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133545-verdigris-wash-18ml-ak19313-1.webp?v=1781228657
+    url: https://store.warlordgames.com/products/verdigris-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19313.jpg?v=1793038669
     evidence:
+      - mfr-warlord-store:verdigris-wash-18ml
       - ret-radaddel:verdigris-wash-18ml
   - id: ak-interactive/AK19314
     name: Dark Grey Wash 18ml
     manufacturer: ak-interactive
-    sku: '133546'
+    productCode: AK19314
+    sku: AK19314
+    ean: '8435568354494'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/dark-grey-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133546-dark-grey-wash-18ml-ak19314-1.webp?v=1781228656
+    url: https://store.warlordgames.com/products/dark-grey-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19314.jpg?v=1793038827
     evidence:
+      - mfr-warlord-store:dark-grey-wash-18ml
       - ret-radaddel:dark-grey-wash-18ml
   - id: ak-interactive/AK19315
     name: Standard Rust Wash 18ml
     manufacturer: ak-interactive
-    sku: '133547'
+    productCode: AK19315
+    sku: AK19315
+    ean: '8435568354500'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/standard-rust-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133547-standard-rust-wash-18ml-ak19315-1.webp?v=1781228654
+    url: https://store.warlordgames.com/products/standard-rust-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19315.jpg?v=1793107315
     evidence:
+      - mfr-warlord-store:standard-rust-wash-18ml
       - ret-radaddel:standard-rust-wash-18ml
   - id: ak-interactive/AK19316
     name: Light Rust Wash 18ml
     manufacturer: ak-interactive
-    sku: '133548'
+    productCode: AK19316
+    sku: AK19316
+    ean: '8435568354517'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/light-rust-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133548-light-rust-wash-18ml-ak19316-1.webp?v=1781228652
+    url: https://store.warlordgames.com/products/light-rust-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19316.jpg?v=1793107624
     evidence:
+      - mfr-warlord-store:light-rust-wash-18ml
       - ret-radaddel:light-rust-wash-18ml
   - id: ak-interactive/AK19317
     name: Dirtveil Wash 18ml
     manufacturer: ak-interactive
-    sku: '133549'
+    productCode: AK19317
+    sku: AK19317
+    ean: '8435568354524'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.35
-    url: https://radaddel.de/products/dirtveil-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133549-dirtveil-wash-18ml-ak19317-1.webp?v=1781228651
+    url: https://store.warlordgames.com/products/dirtveil-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19317.jpg?v=1793107828
     evidence:
+      - mfr-warlord-store:dirtveil-wash-18ml
       - ret-radaddel:dirtveil-wash-18ml
   - id: ak-interactive/AK19318
     name: Woodgrain Wash 18ml
     manufacturer: ak-interactive
-    sku: '133550'
+    productCode: AK19318
+    sku: AK19318
+    ean: '8435568354531'
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
     categoryBasis: mapped
     roleBasis: unknown
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-21'
+    priceGbp: 2.89
     priceEur: 2.9
-    url: https://radaddel.de/products/woodgrain-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133550-woodgrain-wash-18ml-ak19318-1.webp?v=1781228649
+    url: https://store.warlordgames.com/products/woodgrain-wash-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/AK19318.jpg?v=1793108071
     evidence:
+      - mfr-warlord-store:woodgrain-wash-18ml
       - ret-radaddel:woodgrain-wash-18ml
   - id: ak-interactive/AK2031
     name: Landing Gear Dust (49)
@@ -32199,7 +32345,7 @@ products:
     role: tool
     roleBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceGbp: 3.24
     priceEur: 3.61
@@ -35159,7 +35305,7 @@ products:
     manufacturer: ak-interactive
     sku: '128279'
     ean: '8436535579469'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
@@ -35170,6 +35316,7 @@ products:
     url: https://radaddel.de/products/abteilung-502-light-grey
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128279-abteilung-502-light-grey-akabt170-1.webp?v=1781211481
     evidence:
+      - bdb-goupc:8436535579469
       - ret-radaddel:abteilung-502-light-grey
   - id: ak-interactive/abteilung-502-light-mud
     name: 'Abteilung 502: Light Mud'
@@ -35194,7 +35341,7 @@ products:
     manufacturer: ak-interactive
     sku: '128276'
     ean: '8436535579438'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
@@ -35205,6 +35352,7 @@ products:
     url: https://radaddel.de/products/abteilung-502-light-sand
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/128276-abteilung-502-light-sand-akabt155-1.webp?v=1781211479
     evidence:
+      - bdb-goupc:8436535579438
       - ret-radaddel:abteilung-502-light-sand
   - id: ak-interactive/abteilung-502-liquid-mask-100-ml
     name: 'Abteilung 502: Liquid Mask 100 ml'
@@ -35406,7 +35554,7 @@ products:
     manufacturer: ak-interactive
     sku: '129590'
     ean: '8435568344310'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: paint
@@ -35419,6 +35567,7 @@ products:
     url: https://radaddel.de/products/abteilung-502-orange
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/129590-abteilung-502-orange-akabt625-1.webp?v=1781214467
     evidence:
+      - bdb-goupc:8435568344310
       - ret-radaddel:abteilung-502-orange
   - id: ak-interactive/abteilung-502-paynes-grey
     name: 'Abteilung 502: Paynes Grey'
@@ -44893,7 +45042,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/amaranth-red-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11086_BOTE.jpg?v=1753196899
@@ -44914,7 +45063,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/amethyst-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11183_BOTE.jpg?v=1753269833
@@ -45002,7 +45151,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/anodized-violet-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11202_BOTE.jpg?v=1753271439
@@ -45063,7 +45212,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/aquatic-turquoise-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11170_BOTE.jpg?v=1753268652
@@ -45084,7 +45233,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/archaic-turquoise-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11172_BOTE.jpg?v=1753268798
@@ -45105,7 +45254,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/ash-grey-17ml-3rd-gen-acrylic-ak-paint-ak11024
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11024_BOTE.jpg?v=1753192444
@@ -45164,7 +45313,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/astral-beryllium-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11200_BOTE.jpg?v=1753271309
@@ -45492,7 +45641,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/beige-red-17ml-3rd-gen-acrylic-ak-paint-ak11064
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11064_BOTE.jpg?v=1753195282
@@ -45591,7 +45740,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/black-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11160_BOTE.jpg?v=1753267534
@@ -45617,25 +45766,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126311-black-night-deep-shade-30ml-ak13001-1.webp?v=1781208243
     evidence:
       - ret-radaddel:black-night-deep-shade-30ml
-  - id: ak-interactive/black-night-wash-18ml
-    name: Black Night Wash 18ml
-    manufacturer: ak-interactive
-    sku: '133535'
-    ean: '8435568354388'
-    eanConfidence: provisional
-    gameSystemsBasis: not-applicable
-    settingsBasis: not-applicable
-    category: paint
-    categoryBasis: mapped
-    roleBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.35
-    url: https://radaddel.de/products/black-night-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133535-black-night-wash-18ml-ak19303-1.webp?v=1781228674
-    evidence:
-      - ret-radaddel:black-night-wash-18ml
   - id: ak-interactive/black-pin-wash-35ml-36
     name: Black PIN WASH 35ml (36)
     manufacturer: ak-interactive
@@ -45891,7 +46021,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/blood-effects-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11260_secundaria.jpg?v=1753278478
@@ -46113,25 +46243,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126318-blue-moon-deep-shade-30ml-ak13008-1.webp?v=1781208255
     evidence:
       - ret-radaddel:blue-moon-deep-shade-30ml
-  - id: ak-interactive/blue-moon-wash-18ml
-    name: Blue Moon Wash 18ml
-    manufacturer: ak-interactive
-    sku: '133539'
-    ean: '8435568354425'
-    eanConfidence: provisional
-    gameSystemsBasis: not-applicable
-    settingsBasis: not-applicable
-    category: paint
-    categoryBasis: mapped
-    roleBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.35
-    url: https://radaddel.de/products/blue-moon-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133539-blue-moon-wash-18ml-ak19307-1.webp?v=1781228668
-    evidence:
-      - ret-radaddel:blue-moon-wash-18ml
   - id: ak-interactive/blue-pink-fantasy-bushes-1-35
     name: Blue Pink Fantasy Bushes 1/35
     manufacturer: ak-interactive
@@ -46244,7 +46355,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/bordeaux-red-17ml-3rd-gen-acrylic-ak-paint-ak11094
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11094_BOTE.jpg?v=1753197572
@@ -46386,7 +46497,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/brick-red-17ml-3rd-gen-acrylic-ak-paint-ak11093
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11093_BOTE.jpg?v=1753197494
@@ -46426,7 +46537,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/british-khaki-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11127_BOTE.jpg?v=1753262823
@@ -46447,7 +46558,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/bronze-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11196_BOTE.jpg?v=1753271014
@@ -46530,7 +46641,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.5
     url: https://www.goblingaming.co.uk/products/brown-rose-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11063_BOTE.jpg?v=1753195150
@@ -46631,7 +46742,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/burn-orange-17ml-3rd-gen-acrylic-ak-paint-ak11079
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11079_BOTE.jpg?v=1753196333
@@ -46694,7 +46805,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/burnt-umber-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11111_BOTE.jpg?v=1753259678
@@ -46753,7 +46864,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/cadmium-red-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11085_BOTE.jpg?v=1753196801
@@ -46909,7 +47020,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/carmine-17ml-3rd-gen-acrylic-ak-paint-ak11091
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11091_BOTE.jpg?v=1753197349
@@ -46935,25 +47046,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/126319-carmine-dawn-deep-shade-30ml-ak13009-1.webp?v=1781208256
     evidence:
       - ret-radaddel:carmine-dawn-deep-shade-30ml
-  - id: ak-interactive/carmine-dawn-wash-18ml
-    name: Carmine Dawn Wash 18ml
-    manufacturer: ak-interactive
-    sku: '133540'
-    ean: '8435568354432'
-    eanConfidence: provisional
-    gameSystemsBasis: not-applicable
-    settingsBasis: not-applicable
-    category: paint
-    categoryBasis: mapped
-    roleBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceEur: 2.35
-    url: https://radaddel.de/products/carmine-dawn-wash-18ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/133540-carmine-dawn-wash-18ml-ak19308-1.webp?v=1781228666
-    evidence:
-      - ret-radaddel:carmine-dawn-wash-18ml
   - id: ak-interactive/carnivorous-plants-basing-bits-27-teile
     name: Carnivorous Plants - Basing Bits (27 Teile)
     manufacturer: ak-interactive
@@ -47082,7 +47174,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/chipping-effects-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11262_secondary.jpg?v=1753278702
@@ -47103,7 +47195,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/chocolate-chipping-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11113_BOTE.jpg?v=1753259966
@@ -47124,7 +47216,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/clear-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11214_BOTE.jpg?v=1753276346
@@ -47145,7 +47237,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/clear-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11216_BOTE.jpg?v=1753276475
@@ -47166,7 +47258,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/clear-orange-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11218_BOTE.jpg?v=1753276618
@@ -47187,7 +47279,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/clear-red-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11213_BOTE.jpg?v=1753276265
@@ -47208,7 +47300,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.15
     url: https://www.goblingaming.co.uk/products/clear-smoke-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11215_BOTE.jpg?v=1753276409
@@ -47229,7 +47321,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/clear-yellow-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11217_BOTE.jpg?v=1753276542
@@ -47250,7 +47342,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/cobalt-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11201_BOTE.jpg?v=1753271373
@@ -47292,7 +47384,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/color-punch-beast-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11278.jpg?v=1753279697
@@ -47376,7 +47468,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/color-punch-greenskin-punch-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11274.jpg?v=1753279081
@@ -47418,7 +47510,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/color-punch-redskin-shadow-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11277_02_bote.jpg?v=1753279355
@@ -47439,7 +47531,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/color-punch-slime-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11274_15f5eadc-cbc9-4f6a-aaeb-945e22f1c14d.jpg?v=1753279157
@@ -47460,7 +47552,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/color-punch-sun-red-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11279.jpg?v=1753279783
@@ -47481,7 +47573,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/command-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11155_BOTE.jpg?v=1753267062
@@ -47700,7 +47792,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/cork-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11119_BOTE.jpg?v=1753261185
@@ -47776,7 +47868,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11181_BOTE.jpg?v=1753269689
@@ -47839,7 +47931,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-flesh-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11056_BOTE.jpg?v=1753194719
@@ -47860,7 +47952,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11146_BOTE.jpg?v=1753265986
@@ -47881,7 +47973,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-green-grey-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11133_BOTE.jpg?v=1753264283
@@ -47926,7 +48018,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-grey-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11022_BOTE.jpg?v=1753192300
@@ -47995,7 +48087,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-prussian-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11189_BOTE.jpg?v=1753270423
@@ -48016,7 +48108,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-rust-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11107_BOTE.jpg?v=1753259219
@@ -48037,7 +48129,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-sand-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11033_BOTE.jpg?v=1753193013
@@ -48079,7 +48171,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/dark-sea-grey-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11015_BOTE.jpg?v=1753191788
@@ -48204,7 +48296,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/deep-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11182_BOTE.jpg?v=1753269761
@@ -48225,7 +48317,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/deep-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11102_BOTE.jpg?v=1753198934
@@ -48246,7 +48338,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/deep-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11142_BOTE.jpg?v=1753265564
@@ -48267,7 +48359,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/deep-orange-17ml-3rd-gen-acrylic-ak-paint-ak11080
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11080_BOTE.jpg?v=1753196400
@@ -48288,7 +48380,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/deep-purple-17ml-3rd-gen-acrylic-ak-paint-ak11074
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11074_BOTE.jpg?v=1753195984
@@ -48330,7 +48422,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/deep-sky-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11176_BOTE.jpg?v=1753269250
@@ -48572,7 +48664,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/emerald-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11144_BOTE.jpg?v=1753265851
@@ -48593,7 +48685,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/emerald-metallic-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11204_BOTE.jpg?v=1753275247
@@ -48672,7 +48764,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/english-grey-17ml-3rd-gen-acrylic-ak-paint-ak11020
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11020_BOTE.jpg?v=1753192168
@@ -48710,7 +48802,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/extra-dark-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11153_BOTE.jpg?v=1753266874
@@ -48748,7 +48840,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/faded-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11135_BOTE.jpg?v=1753264453
@@ -48870,7 +48962,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/fluorescent-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11178_BOTE.jpg?v=1753269421
@@ -48891,7 +48983,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/fluorescent-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11129_BOTE.jpg?v=1753263741
@@ -49009,7 +49101,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/foundry-red-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11203_BOTE.jpg?v=1753275179
@@ -49046,7 +49138,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/french-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11166_BOTE.jpg?v=1753268046
@@ -49202,34 +49294,13 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/gloss-medium-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11235_BOTE.jpg?v=1753277048
     evidence:
       - ret-goblingaming:gloss-medium-ak-3rd-gen-17ml
       - ret-radaddel:ak-3gen-gloss-medium-17ml
-  - id: ak-interactive/gold-ak-3rd-gen-17ml
-    name: Gold  - AK 3rd Gen 17ml
-    manufacturer: ak-interactive
-    sku: AK11191+AC0-SINGLE
-    ean: '8435568304246'
-    eanConfidence: confirmed
-    gameSystemsBasis: not-applicable
-    settingsBasis: not-applicable
-    category: paint
-    categoryBasis: mapped
-    roleBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-21'
-    priceGbp: 2.6
-    priceEur: 2.7
-    url: https://www.goblingaming.co.uk/products/gold-ak-3rd-gen-17ml
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11191_BOTE.jpg?v=1753270589
-    evidence:
-      - ret-goblingaming:gold-ak-3rd-gen-17ml
-      - ret-radaddel:ak-3gen-gold-17ml
   - id: ak-interactive/gold-playmarker
     name: Gold - Playmarker
     manufacturer: ak-interactive
@@ -49289,7 +49360,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/golden-olive-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11139_BOTE.jpg?v=1753264777
@@ -49310,7 +49381,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.15
     url: https://www.goblingaming.co.uk/products/golden-yellow-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11041_BOTE.jpg?v=1753193631
@@ -49369,7 +49440,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/grass-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11140_BOTE.jpg?v=1753264850
@@ -49407,7 +49478,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/green-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11126_BOTE.jpg?v=1753262732
@@ -49428,7 +49499,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/green-grey-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11132_BOTE.jpg?v=1753264215
@@ -49449,7 +49520,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/green-ocher-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11122_BOTE.jpg?v=1753262337
@@ -49470,7 +49541,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.5
     url: https://www.goblingaming.co.uk/products/green-sky-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11134_BOTE.jpg?v=1753264382
@@ -49491,7 +49562,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/greenish-white-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11005_BOTE.jpg?v=1753191008
@@ -49512,7 +49583,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/grey-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11165_BOTE.jpg?v=1753267883
@@ -49554,7 +49625,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/grey-green-17ml-3rd-gen-acrylic-ak-paint-ak11016
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11016_BOTE.jpg?v=1753191849
@@ -49575,7 +49646,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.4
     url: https://www.goblingaming.co.uk/products/grim-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11112_BOTE.jpg?v=1753259837
@@ -49596,7 +49667,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/grimy-grey-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11008_BOTE.jpg?v=1753191162
@@ -49636,7 +49707,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 2.55
     url: https://store.warlordgames.com/products/gun-metal-playmarker
@@ -49662,7 +49733,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/gunship-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11150_BOTE.jpg?v=1753266246
@@ -49797,7 +49868,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/intense-pink-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11065_BOTE.jpg?v=1753195339
@@ -49818,7 +49889,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/interior-yellow-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11138_BOTE.jpg?v=1753264703
@@ -49839,7 +49910,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/intermediate-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11163_BOTE.jpg?v=1753267769
@@ -49936,7 +50007,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/japanese-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11123_BOTE.jpg?v=1753262450
@@ -50025,7 +50096,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/laser-magenta17ml-3rd-gen-acrylic-ak-paint-ak11066
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11066_BOTE.jpg?v=1753195428
@@ -50046,7 +50117,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/laser-yellow-17ml-3rd-gen-acrylic-ak-paint-ak11048
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11048_BOTE.jpg?v=1753194219
@@ -50067,7 +50138,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/lead-grey-17ml-3rd-gen-acrylic-ak-paint-ak11023
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11023_BOTE.jpg?v=1753192371
@@ -50150,7 +50221,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/lemon-yellow-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11047_BOTE.jpg?v=1753194141
@@ -50171,7 +50242,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.65
     url: https://www.goblingaming.co.uk/products/light-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11100_BOTE.jpg?v=1753198780
@@ -50303,7 +50374,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/light-orange-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11077_BOTE.jpg?v=1753196221
@@ -50365,7 +50436,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/light-prussian-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11186_BOTE.jpg?v=1753270180
@@ -50386,7 +50457,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/light-rust-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11105_BOTE.jpg?v=1753199176
@@ -50482,7 +50553,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/lilac-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11071_BOTE.jpg?v=1753195811
@@ -50503,7 +50574,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/lime-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11137_BOTE.jpg?v=1753264625
@@ -50524,7 +50595,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/lizard-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11145_BOTE.jpg?v=1753265919
@@ -50566,7 +50637,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/luminous-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11128_BOTE.jpg?v=1753263642
@@ -50629,7 +50700,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/mahogany-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11106_BOTE.jpg?v=1753199271
@@ -50667,7 +50738,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/matt-red-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11092_BOTE.jpg?v=1753197415
@@ -50744,7 +50815,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/medium-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11184_BOTE.jpg?v=1753269944
@@ -50810,7 +50881,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/medium-grey-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11010_BOTE.jpg?v=1753191422
@@ -50831,7 +50902,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/medium-olive-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11148_BOTE.jpg?v=1753266117
@@ -50852,7 +50923,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/medium-orange-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11078_BOTE.jpg?v=1753196271
@@ -50873,7 +50944,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/medium-rust-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11103_BOTE.jpg?v=1753199003
@@ -50915,7 +50986,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.75
     url: https://www.goblingaming.co.uk/products/medium-sea-grey-17ml-3rd-gen-acrylic-ak-paint-ak11014
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11014_BOTE.jpg?v=1753191750
@@ -50937,7 +51008,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/metal-medium-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11232_BOTE.jpg?v=1753276765
@@ -50958,7 +51029,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/metallic-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11199_BOTE.jpg?v=1753271247
@@ -50979,7 +51050,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/metallic-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11205_BOTE.jpg?v=1753275507
@@ -51000,7 +51071,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 1.95
     url: https://www.goblingaming.co.uk/products/middle-stone-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11124_BOTE.jpg?v=1753262532
@@ -51232,7 +51303,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/natural-steel-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11210_BOTE.jpg?v=1753275937
@@ -51291,7 +51362,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/ocean-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11173_BOTE.jpg?v=1753269018
@@ -51312,7 +51383,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/ocher-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11118_BOTE.jpg?v=1753260569
@@ -51333,7 +51404,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/ocher-orange-17ml-3rd-gen-acrylic-ak-paint-ak11099
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11099_BOTE.jpg?v=1753198692
@@ -51375,7 +51446,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/oily-steel-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11211_BOTE.jpg?v=1753276003
@@ -51497,7 +51568,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/oxford-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11188_BOTE.jpg?v=1753270356
@@ -51518,7 +51589,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pale-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11161_BOTE.jpg?v=1753267604
@@ -51618,7 +51689,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pastel-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11168_BOTE.jpg?v=1753268345
@@ -51639,7 +51710,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pastel-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11131_BOTE.jpg?v=1753263892
@@ -51660,7 +51731,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pastel-peach-17ml-3rd-gen-acrylic-ak-paint-ak11076
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11076_BOTE.jpg?v=1753196165
@@ -51702,7 +51773,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pastel-violet-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11069_BOTE.jpg?v=1753195667
@@ -51723,7 +51794,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pastel-yellow-17ml-3rd-gen-acrylic-ak-paint-ak11037
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11037_BOTE.jpg?v=1753193265
@@ -51768,7 +51839,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/pearl-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11206_BOTE.jpg?v=1753275577
@@ -52027,7 +52098,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 10.92
+    priceGbp: 14.04
     priceEur: 15.55
     url: https://www.goblingaming.co.uk/products/playmarkers-clothes-ornaments-set-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM103.jpg?v=1745844731
@@ -52111,7 +52182,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-dark-orange-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM020.jpg?v=1745847615
@@ -52132,7 +52203,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-dark-skin-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM008.jpg?v=1745848681
@@ -52363,7 +52434,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-light-orange-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM019.jpg?v=1745847674
@@ -52447,7 +52518,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-peach-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM017.jpg?v=1745847811
@@ -52468,7 +52539,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-pink-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM024.jpg?v=1745847344
@@ -52489,7 +52560,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-pink-skin-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM010.jpg?v=1745848542
@@ -52573,7 +52644,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 10.92
+    priceGbp: 14.04
     priceEur: 15.55
     url: https://www.goblingaming.co.uk/products/playmarkers-skeletons-zombies-set-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM102.jpg?v=1745844855
@@ -52825,7 +52896,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.55
     url: https://www.goblingaming.co.uk/products/playmarkers-zombie-skin-ak-playmarkers
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKM011.jpg?v=1745848474
@@ -52880,7 +52951,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/purple-17ml-3rd-gen-acrylic-ak-paint-ak11073
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11073_BOTE.jpg?v=1753195925
@@ -52942,7 +53013,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/purulent-yellow-17ml-3rd-gen-acrylic-ak-paint-ak11039
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11039_BOTE.jpg?v=1753193442
@@ -52980,7 +53051,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.9
     url: https://www.goblingaming.co.uk/products/quick-markers-bile-yellow
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ004_SINGLE_gal_img_01_447b.avif?v=1768234347
@@ -53064,7 +53135,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-desert-sand
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ033_SINGLE_gal_img_01_eecf.avif?v=1768234565
@@ -53148,7 +53219,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 9.03
+    priceGbp: 11.61
     priceEur: 13.65
     url: https://www.goblingaming.co.uk/products/quick-markers-goblins-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ108_cover_0a9d.avif?v=1768232348
@@ -53169,7 +53240,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-grey-shadow
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ018_SINGLE_gal_img_01_0d04.avif?v=1768234603
@@ -53316,7 +53387,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-leaf-green
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ031_SINGLE_gal_img_01_fed2.avif?v=1768234426
@@ -53358,7 +53429,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-light-leather
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ028_SINGLE_gal_img_01_52a2.avif?v=1768234581
@@ -53379,7 +53450,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-necromancer-purple
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ002_SINGLE_gal_img_01_93d5.avif?v=1768234614
@@ -53526,7 +53597,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-putrid-white
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ024_SINGLE_gal_img_01_7ad1.avif?v=1768234441
@@ -53547,7 +53618,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-reddish-flesh
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ025_SINGLE_gal_img_01_2cf4.avif?v=1768234448
@@ -53589,7 +53660,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 9.03
+    priceGbp: 11.61
     priceEur: 13.55
     url: https://www.goblingaming.co.uk/products/quick-markers-skeletons-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ110_cover_2437.avif?v=1768232491
@@ -53694,7 +53765,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-spectral-green
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ008_SINGLE_gal_img_01_b272.avif?v=1768234487
@@ -53715,7 +53786,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 9.03
+    priceGbp: 11.61
     priceEur: 14.7
     url: https://www.goblingaming.co.uk/products/quick-markers-star-plague-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ105_cover_76ba.avif?v=1768234100
@@ -53799,7 +53870,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-vampire-flesh
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ030_SINGLE_gal_img_01_9773.avif?v=1768234509
@@ -53862,7 +53933,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 1.82
+    priceGbp: 2.34
     priceEur: 2.35
     url: https://www.goblingaming.co.uk/products/quick-markers-white-shadow
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ019_SINGLE_gal_img_01_35e1.avif?v=1768234522
@@ -54790,7 +54861,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/reddish-grey-17ml-3rd-gen-acrylic-ak-paint-ak11017
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11017_BOTE.jpg?v=1753191967
@@ -54811,7 +54882,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/reflective-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11158_BOTE.jpg?v=1753267299
@@ -54833,7 +54904,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/retarder-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11231_BOTE.jpg?v=1753276702
@@ -54854,7 +54925,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/rock-grey-17ml-3rd-gen-acrylic-ak-paint-ak11007
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11007_BOTE.jpg?v=1753191099
@@ -54930,7 +55001,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/ruby-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11084_BOTE.jpg?v=1753196679
@@ -55014,7 +55085,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/saddle-brown-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11104_BOTE.jpg?v=1753199078
@@ -55056,7 +55127,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/salmon-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11061_BOTE.jpg?v=1753195033
@@ -55077,7 +55148,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/sand-yellow-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11035_BOTE.jpg?v=1753193125
@@ -55378,7 +55449,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.31
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/snow-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11174_BOTE.jpg?v=1753269092
@@ -55415,7 +55486,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/spectrum-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11162_BOTE.jpg?v=1753267691
@@ -55470,7 +55541,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/star-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11185_BOTE.jpg?v=1753270073
@@ -55491,7 +55562,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 28.11
+    priceGbp: 36.14
     priceEur: 42.2
     url: https://www.goblingaming.co.uk/products/starter-combo-quick-markers-3gen-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AKMQ111_cover_48e0.avif?v=1768234257
@@ -55614,7 +55685,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/strong-dark-blue-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11187_BOTE.jpg?v=1753270258
@@ -55635,7 +55706,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/sunny-skin-tone-17ml-ak-acrylic
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11055_BOTE.jpg?v=1753194664
@@ -55779,7 +55850,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/tan-yellow-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11116_BOTE.jpg?v=1753260309
@@ -55922,7 +55993,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/turquoise-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11171_BOTE.jpg?v=1753268718
@@ -56028,7 +56099,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/us-dark-green-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11157_BOTE.jpg?v=1753267217
@@ -56049,7 +56120,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/vampiric-flesh-17ml-3rd-gen-acrylic-ak-paint-ak11057
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11057_BOTE.jpg?v=1753194772
@@ -56108,7 +56179,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/violet-red-17ml-3rd-gen-acrylic-ak-paint-ak11075
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11075_BOTE.jpg?v=1753196070
@@ -56129,7 +56200,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/visceral-effects-ak-3rd-gen-17ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11261_secondary.jpg?v=1753278587
@@ -56761,7 +56832,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-21'
-    priceGbp: 2.02
+    priceGbp: 2.6
     priceEur: 2.7
     url: https://www.goblingaming.co.uk/products/yellow-17ml-3rd-gen-acrylic-ak-paint-ak11044
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AK11044_BOTE.jpg?v=1753193837

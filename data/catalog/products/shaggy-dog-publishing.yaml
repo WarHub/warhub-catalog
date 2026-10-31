@@ -5,6 +5,8 @@ products:
     manufacturer: shaggy-dog-publishing
     productCode: '9781739476007'
     sku: '9781739476007'
+    ean: '9781739476007'
+    eanConfidence: confirmed
     faction: general
     gameSystemsBasis: unknown
     settingsBasis: unknown
@@ -14,7 +16,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 60.0
+    priceGbp: 75.0
     url: https://store.warlordgames.com/products/talking-miniatures-standard-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/TakingMinis2covers_8cdf70c3-0985-44cf-8d79-3cd4edd9ac65.jpg?v=1687274807
     description: |-
@@ -35,29 +37,15 @@ products:
       - A 492-page softback book split into two volumes with a hardback slipcase.
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/talking-miniatures
-      - mfr-warlord-store:talking-miniatures-standard-edition
-  - id: shaggy-dog-publishing/9781739476007SIGNED
-    name: Talking Miniatures - Signed Copy
-    manufacturer: shaggy-dog-publishing
-    productCode: 9781739476007SIGNED
-    sku: 9781739476007SIGNED
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: book
-    categoryBasis: mapped
-    status: current
-    availability: in_stock
-    firstSeen: '2026-09-01'
-    priceGbp: 75.0
-    url: https://store.warlordgames.com/products/talking-miniatures-signed-copy
-    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/Talking_Miniatures1_d8589443-03c7-420a-a6e2-16846ebbfd4d.jpg?v=1787316727
-    evidence:
       - mfr-warlord-store:talking-miniatures-signed-copy
+      - mfr-warlord-store:talking-miniatures-standard-edition
   - id: shaggy-dog-publishing/9781739476038
     name: Stuff of Legends
     manufacturer: shaggy-dog-publishing
     productCode: '9781739476038'
     sku: '9781739476038'
+    ean: '9781739476038'
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     category: book
