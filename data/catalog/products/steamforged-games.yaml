@@ -963,7 +963,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 54.99
     url: https://steamforged.com/products/epic-encounters-rage-of-the-gnoll-warseeker
@@ -12825,6 +12825,28 @@ products:
       - legacy-catalog:steamforged-games/warmachine/general/warmachine-matched-play-kit-first-edition-organised-play
       - mfr-steamforged:wm-op-kit
       - mfr-warmachine:wm-op-kit
+  - id: steamforged-games/SFIK-OPK002
+    name: Warmachine - Matched Play Kit - Menoth Edition (Organised Play)
+    manufacturer: steamforged-games
+    productCode: SFIK-OPK002
+    sku: SFIK-OPK002
+    ean: '5061060707488'
+    eanConfidence: confirmed
+    gameSystems:
+      - warmachine
+    gameSystemsBasis: mapped
+    settings:
+      - iron-kingdoms
+    settingsBasis: derived
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-10-31'
+    priceUsd: 19.99
+    url: https://warmachine.gg/products/warmachine-matched-play-kit-menoth-edition-organised-play
+    imageUrl: https://cdn.shopify.com/s/files/1/0609/0863/4169/files/WM-ProductImage-OPKit-Menoth-Edition-2026-2.png?v=1793279203
+    evidence:
+      - mfr-warmachine:warmachine-matched-play-kit-menoth-edition-organised-play
   - id: steamforged-games/SFIK-ORG030
     name: 'Warmachine: Southern Kriels Brineblood Marauders Objectives Set'
     manufacturer: steamforged-games
