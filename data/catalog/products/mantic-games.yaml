@@ -2009,6 +2009,25 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2020/01/GL2014_SUPER_GLUE_1.jpg
     evidence:
       - mfr-manticgames:96014
+  - id: mantic-games/KSAC101
+    name: 'Assassin’s Creed™: Animus – Limited Collector’s Edition'
+    manufacturer: mantic-games
+    productCode: KSAC101
+    sku: KSAC101
+    ean: '5060924986977'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 175.0
+    url: https://www.manticgames.com/board-games/assassins-creed-animus-collectors-edition/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/assassins-creed-animus-the-board-game-collectors-edition-product-shot-contents-spread-full-size-square-crop.webp
+    evidence:
+      - mfr-manticgames:560685
   - id: mantic-games/KSDS101
     name: 'Dungeon Saga Origins: Legendary Edition'
     manufacturer: mantic-games
@@ -3097,6 +3116,25 @@ products:
     evidence:
       - mfr-manticgames:530434
       - mfr-manticgames:531834
+  - id: mantic-games/MGAC101
+    name: 'Assassin’s Creed™: Animus – Standard Edition'
+    manufacturer: mantic-games
+    productCode: MGAC101
+    sku: MGAC101
+    ean: '5060924986960'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: board-game
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 40.0
+    url: https://www.manticgames.com/board-games/assassins-creed-animus/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/assassins-creed-animus-the-board-game-product-shot-box-contents-game-setup-full-size-square-crop.webp
+    evidence:
+      - mfr-manticgames:560684
   - id: mantic-games/MGAR504
     name: Trident Realm Complete Fleet Bundle
     manufacturer: mantic-games
@@ -9970,7 +10008,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceUsd: 25.0
@@ -10111,7 +10149,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 0.0
     priceUsd: 0.0
@@ -10146,10 +10184,10 @@ products:
       - warpath-universe
     settingsBasis: derived
     category: book
-    categoryBasis: mapped
+    categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 0.0
     priceUsd: 0.0
@@ -10637,7 +10675,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceUsd: 25.0
@@ -11388,7 +11426,7 @@ products:
     evidence:
       - mfr-manticgames:540848
   - id: mantic-games/MGDG254
-    name: Deadzone – Latest FAQ & Errata
+    name: Deadzone – Latest FAQ & Errata (DISCONTINUED)
     manufacturer: mantic-games
     productCode: MGDG254
     sku: MGDG254
@@ -11399,10 +11437,10 @@ products:
       - warpath-universe
     settingsBasis: derived
     category: book
-    categoryBasis: mapped
+    categoryBasis: code
     packaging: digital
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 0.0
     url: https://www.manticgames.com/deadzone/books/deadzone-latest-errata/
@@ -11410,13 +11448,13 @@ products:
     evidence:
       - mfr-manticgames:542373
   - id: mantic-games/MGDG255
-    name: Firefight – Errata March 2026
+    name: Firefight – Errata March 2026 (DISCONTINUED)
     manufacturer: mantic-games
     productCode: MGDG255
     sku: MGDG255
     gameSystems:
       - firefight
-    gameSystemsBasis: mapped
+    gameSystemsBasis: classified
     settings:
       - warpath-universe
     settingsBasis: derived
@@ -11424,7 +11462,7 @@ products:
     categoryBasis: code
     packaging: digital
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 0.0
     url: https://www.manticgames.com/firefight/rules/faq-and-errata/
@@ -13205,9 +13243,8 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - deadzone
-      - firefight
     faction: general
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warpath-universe
     settingsBasis: derived
@@ -13215,7 +13252,7 @@ products:
     categoryBasis: code
     packaging: starter
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 100.0
     priceUsd: 100.0
@@ -13255,7 +13292,7 @@ products:
     categoryBasis: stated
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 32.5
     priceUsd: 32.5
@@ -13892,9 +13929,8 @@ products:
     sku: MGDZN102
     gameSystems:
       - deadzone
-      - firefight
     faction: general
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warpath-universe
     settingsBasis: derived
@@ -13946,9 +13982,8 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - deadzone
-      - firefight
     faction: general
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warpath-universe
     settingsBasis: derived
@@ -13977,6 +14012,30 @@ products:
     evidence:
       - legacy-catalog:mantic-games/deadzone/general/nameless-faction-booster
       - mfr-manticgames:22174
+  - id: mantic-games/MGDZN104
+    name: Deadzone Nameless Faction Starter
+    manufacturer: mantic-games
+    productCode: MGDZN104
+    sku: MGDZN104
+    ean: '5060924988636'
+    eanConfidence: confirmed
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 30.0
+    url: https://www.manticgames.com/deadzone/nameless/nameless-faction-starter/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/deadzone-nameless-faction-starter-isolateds.webp
+    evidence:
+      - mfr-manticgames:561680
   - id: mantic-games/MGDZN201
     name: Nameless Feromite
     manufacturer: mantic-games
@@ -13984,9 +14043,8 @@ products:
     sku: MGDZN201
     gameSystems:
       - deadzone
-      - firefight
     faction: general
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warpath-universe
     settingsBasis: derived
@@ -13994,7 +14052,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 15.0
     priceUsd: 15.0
@@ -16831,6 +16889,29 @@ products:
       - mfr-manticgames:520828
       - ret-goblingaming:asterian-core-army-pack-epic-warpath
       - ret-tistaminis:epic-warpath-asterian-core-army-pack
+  - id: mantic-games/MGEWA102
+    name: Epic Warpath Asterian Reserves
+    manufacturer: mantic-games
+    productCode: MGEWA102
+    sku: MGEWA102
+    ean: '5060924988643'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 45.0
+    url: https://www.manticgames.com/epic-warpath/asterians/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-asterian-battle-company.webp
+    evidence:
+      - mfr-manticgames:561250
   - id: mantic-games/MGEWA401
     name: Epic Warpath Asterian Cairn Command Centre
     manufacturer: mantic-games
@@ -16883,6 +16964,29 @@ products:
       - mfr-manticgames:520826
       - ret-goblingaming:enforcer-core-army-pack-epic-warpath
       - ret-tistaminis:epic-warpath-enforcer-core-army-pack
+  - id: mantic-games/MGEWE102
+    name: Epic Warpath Enforcer Reserves
+    manufacturer: mantic-games
+    productCode: MGEWE102
+    sku: MGEWE102
+    ean: '5060924988650'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 45.0
+    url: https://www.manticgames.com/epic-warpath/enforcers/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-enforcer-battle-company.webp
+    evidence:
+      - mfr-manticgames:561251
   - id: mantic-games/MGEWE401
     name: Epic Warpath Enforcer Drakon Cruiser
     manufacturer: mantic-games
@@ -16935,6 +17039,29 @@ products:
       - mfr-manticgames:520829
       - ret-goblingaming:forge-father-core-army-pack-epic-warpath
       - ret-tistaminis:epic-warpath-forge-father-core-army-pack
+  - id: mantic-games/MGEWF102
+    name: Epic Warpath Forge Father Reserves
+    manufacturer: mantic-games
+    productCode: MGEWF102
+    sku: MGEWF102
+    ean: '5060924988667'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 35.0
+    url: https://www.manticgames.com/epic-warpath/forge-fathers/armoured-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-forgefather-armoured-company.webp
+    evidence:
+      - mfr-manticgames:561252
   - id: mantic-games/MGEWF401
     name: Epic Warpath Forge Father Hrungnir Magma Destroyer
     manufacturer: mantic-games
@@ -16986,6 +17113,52 @@ products:
     evidence:
       - mfr-manticgames:526157
       - ret-tistaminis:epic-warpath-gcps-core-army-pack
+  - id: mantic-games/MGEWG102
+    name: Epic Warpath GCPS Reserves
+    manufacturer: mantic-games
+    productCode: MGEWG102
+    sku: MGEWG102
+    ean: '5060924988681'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 35.0
+    url: https://www.manticgames.com/epic-warpath/gcps/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-gcps-battle-company.webp
+    evidence:
+      - mfr-manticgames:561253
+  - id: mantic-games/MGEWG103
+    name: Epic Warpath GCPS Armoured Company
+    manufacturer: mantic-games
+    productCode: MGEWG103
+    sku: MGEWG103
+    ean: '5060924988698'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 45.0
+    url: https://www.manticgames.com/epic-warpath/gcps/armoured-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-gcps-armoured-company.webp
+    evidence:
+      - mfr-manticgames:561254
   - id: mantic-games/MGEWG401
     name: Epic Warpath GCPS Battlemech
     manufacturer: mantic-games
@@ -17187,6 +17360,29 @@ products:
     evidence:
       - mfr-manticgames:526160
       - ret-tistaminis:epic-warpath-nameless-core-army-pack
+  - id: mantic-games/MGEWN102
+    name: Epic Warpath Nameless Reserves
+    manufacturer: mantic-games
+    productCode: MGEWN102
+    sku: MGEWN102
+    ean: '5060924988711'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 45.0
+    url: https://www.manticgames.com/epic-warpath/nameless/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-nameless-battle-company.webp
+    evidence:
+      - mfr-manticgames:561256
   - id: mantic-games/MGEWN401
     name: Epic Warpath Nameless Latropod
     manufacturer: mantic-games
@@ -17235,6 +17431,29 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/ewp-marauders-core-army.webp
     evidence:
       - mfr-manticgames:542309
+  - id: mantic-games/MGEWO102
+    name: Epic Warpath Marauder Reserves
+    manufacturer: mantic-games
+    productCode: MGEWO102
+    sku: MGEWO102
+    ean: '5060924988704'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 45.0
+    url: https://www.manticgames.com/epic-warpath/marauders/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-marauder-battle-company.webp
+    evidence:
+      - mfr-manticgames:561255
   - id: mantic-games/MGEWO401
     name: Epic Warpath Marauder Wolfcrawler Mech
     manufacturer: mantic-games
@@ -17284,6 +17503,29 @@ products:
       - mfr-manticgames:520830
       - ret-goblingaming:plague-core-army-pack-epic-warpath
       - ret-tistaminis:epic-warpath-plague-core-army-pack
+  - id: mantic-games/MGEWP102
+    name: Epic Warpath Plague Reserves
+    manufacturer: mantic-games
+    productCode: MGEWP102
+    sku: MGEWP102
+    ean: '5060924988728'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 35.0
+    url: https://www.manticgames.com/epic-warpath/plague/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-plague-battle-company-v2.webp
+    evidence:
+      - mfr-manticgames:561257
   - id: mantic-games/MGEWP401
     name: Epic Warpath Plague Colossus
     manufacturer: mantic-games
@@ -17333,6 +17575,29 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/ewp-veer-myn-core-army.webp
     evidence:
       - mfr-manticgames:542306
+  - id: mantic-games/MGEWV102
+    name: Epic Warpath Veer-myn Reserves
+    manufacturer: mantic-games
+    productCode: MGEWV102
+    sku: MGEWV102
+    ean: '5060924988735'
+    eanConfidence: confirmed
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 45.0
+    url: https://www.manticgames.com/epic-warpath/veer-myn/battle-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epicwarpath-vm-battle-company.webp
+    evidence:
+      - mfr-manticgames:561258
   - id: mantic-games/MGEWV401
     name: Epic Warpath Veer-myn Technonest
     manufacturer: mantic-games
@@ -18927,7 +19192,7 @@ products:
     categoryBasis: mapped
     packaging: starter
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 100.0
     priceUsd: 100.0
@@ -19020,7 +19285,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 0.0
     priceUsd: 0.0
@@ -19030,6 +19295,180 @@ products:
     evidence:
       - legacy-catalog:mantic-games/firefight/general/firefight-getting-started-free-rules-printed-copy
       - mfr-manticgames:484279
+  - id: mantic-games/MGFFM110
+    name: 'Warpath Universe: Command Protocols – Rulebook & Expansion'
+    manufacturer: mantic-games
+    productCode: MGFFM110
+    sku: MGFFM110
+    ean: '9781911516699'
+    eanConfidence: confirmed
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 30.0
+    url: https://www.manticgames.com/firefight/rules/command-protocols-rulebook-expansion/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/warpath-universe-command-protocols-book.webp
+    evidence:
+      - mfr-manticgames:561666
+  - id: mantic-games/MGFFN102
+    name: Nameless Collector’s Box
+    manufacturer: mantic-games
+    productCode: MGFFN102
+    sku: MGFFN102
+    ean: '5060924988599'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 149.0
+    url: https://www.manticgames.com/firefight/nameless/nameless-collectors-box/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-nameless-collectors-box-contents.webp
+    evidence:
+      - mfr-manticgames:561667
+  - id: mantic-games/MGFFN201
+    name: Nameless Kuttinid
+    manufacturer: mantic-games
+    productCode: MGFFN201
+    sku: MGFFN201
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/firefight/nameless/kuttinid/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-nameless-kuttunid-isolated.webp
+    evidence:
+      - mfr-manticgames:561676
+  - id: mantic-games/MGFFN302
+    name: Nameless Exocites
+    manufacturer: mantic-games
+    productCode: MGFFN302
+    sku: MGFFN302
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/firefight/nameless/exocites/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-nameless-exocites-isolateds.webp
+    evidence:
+      - mfr-manticgames:561668
+  - id: mantic-games/MGFFN303
+    name: Nameless Magnumites
+    manufacturer: mantic-games
+    productCode: MGFFN303
+    sku: MGFFN303
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/firefight/nameless/nameless-magnumites/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-nameless-magnumites-isolated.webp
+    evidence:
+      - mfr-manticgames:561677
+  - id: mantic-games/MGFFN304
+    name: Nameless Feromites
+    manufacturer: mantic-games
+    productCode: MGFFN304
+    sku: MGFFN304
+    ean: '5060924988612'
+    eanConfidence: confirmed
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/firefight/nameless/feromites/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-nameless-feromites-isolateds.webp
+    evidence:
+      - mfr-manticgames:561678
+  - id: mantic-games/MGFFN305
+    name: Nameless Assassins
+    manufacturer: mantic-games
+    productCode: MGFFN305
+    sku: MGFFN305
+    ean: '5060924988629'
+    eanConfidence: confirmed
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/firefight/nameless/assassins/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-nameless-assassins-isolateds.webp
+    evidence:
+      - mfr-manticgames:561679
+  - id: mantic-games/MGFFN401
+    name: Nameless Phrakatid/Toxomite
+    manufacturer: mantic-games
+    productCode: MGFFN401
+    sku: MGFFN401
+    gameSystems:
+      - deadzone
+      - firefight
+    gameSystemsBasis: mapped
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 25.0
+    url: https://www.manticgames.com/firefight/nameless/phrakatid-toxomite/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/firefight-phrakatid-toxomite-isolated.webp
+    evidence:
+      - mfr-manticgames:561675
   - id: mantic-games/MGFFNS101
     name: Nightstalker Strike Force
     manufacturer: mantic-games
@@ -20781,7 +21220,7 @@ products:
       - ret-goblingaming:halo-flashpoint-banished-reinforcements
       - ret-tistaminis:halo-flashpoint-banished-reinforcements
   - id: mantic-games/MGHAC101
-    name: Judgement – Covenant Faction Set
+    name: 'Halo: Flashpoint Judgement – Covenant Faction Set'
     manufacturer: mantic-games
     productCode: MGHAC101
     sku: MGHAC101
@@ -21176,7 +21615,7 @@ products:
     categoryBasis: unknown
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 75.0
     priceUsd: 75.0
@@ -45753,7 +46192,7 @@ products:
     categoryBasis: mapped
     packaging: starter
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceUsd: 71.0
@@ -51812,7 +52251,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 93.37
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/nightstalkers/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-nightstalkers-strike-force-bundle-correct.webp
@@ -51847,7 +52286,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/enforcers/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-enforcers-strike-force-bundle-correct.webp
@@ -51881,7 +52320,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/enforcers/pathfinder-strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-enforcer-pathfinder-strike-force-bundle-correct.webp
@@ -51918,7 +52357,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/forge-fathers/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-forge-father-strike-force-bundle-correct.webp
@@ -51954,7 +52393,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/veer-myn/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-veer-myn-strike-force-bundle-correct.webp
@@ -51988,7 +52427,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/mazon-labs/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-mazon-labs-strike-force-bundle-correct.webp
@@ -52024,7 +52463,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/marauders/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-marauder-strike-force-bundle-correct.webp
@@ -52057,7 +52496,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/gcps/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-gcps-strike-force-bundle-correct.webp
@@ -52090,7 +52529,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 95.0
+    priceGbp: 94.99
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/plague/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-plague-strike-force-bundle-correct.webp
@@ -57139,7 +57578,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 50.0
     url: https://www.manticgames.com/worms-the-board-game/
-    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/08/worms-retail-box-low-angle-left.webp
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2024/08/worms-product-shot-2k-web.webp
     evidence:
       - mfr-manticgames:484102
   - id: mantic-games/MGWO103
@@ -57158,7 +57597,7 @@ products:
     firstSeen: '2026-08-22'
     priceGbp: 80.0
     url: https://www.manticgames.com/board-games/worms-30th-anniversary-edition/
-    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/07/worms-30th-low-angle-left-shot.webp
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/07/worms-30th-anniversary-full-contents-spread.webp
     evidence:
       - mfr-manticgames:552764
   - id: mantic-games/MGWPA101
@@ -61037,7 +61476,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 11.99
-    url: https://www.manticgames.com/games/%25product_cat%25/vellejo-weathering-effects-industrial-thick-mud-200ml/
+    url: https://www.manticgames.com/games/%product_cat%/vellejo-weathering-effects-industrial-thick-mud-200ml/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2021/04/diorama-effects-vallejo-industrial-thick-mud-26809.jpg
     evidence:
       - mfr-manticgames:333653
@@ -66784,7 +67223,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 60.0
+    priceGbp: 68.56
     url: https://www.manticgames.com/tabletop-advent-calendars/bar-room-brawl-deep-space-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/bar-room-brawl-deep-space-bundle.webp
     evidence:
@@ -71913,7 +72352,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 139.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/asterian/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/asterian-commander-bundle.webp
     evidence:
@@ -72017,7 +72456,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/enforcers/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/enforcer-commander-bundle.webp
     evidence:
@@ -72037,7 +72476,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/forge-fathers/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/forge-father-commander-bundle-new-version.webp
     evidence:
@@ -72057,7 +72496,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 162.0
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/gcps/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/gcps-commander-bundle.webp
     evidence:
@@ -72077,7 +72516,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/marauders/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/marauder-commanders-bundle.webp
     evidence:
@@ -72097,11 +72536,71 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 139.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/nameless/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/nameless-commander-bundle.webp
     evidence:
       - mfr-manticgames:543762
+  - id: mantic-games/epic-warpath-new-releases-bundle-all-factions
+    name: Epic Warpath New Releases Bundle | All Factions
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 324.99
+    url: https://www.manticgames.com/epic-warpath/winter-2026-all-in-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epic-warpath-q4-2026-all-new-bundle.webp
+    evidence:
+      - mfr-manticgames:561925
+  - id: mantic-games/epic-warpath-new-releases-bundle-asterians-enforcers-forge-fathers-plague
+    name: Epic Warpath New Releases Bundle | Asterians, Enforcers, Forge Fathers, Plague
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 149.0
+    url: https://www.manticgames.com/epic-warpath/winter-2026-bundle-1/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epic-warpath-q4-2026-bundle-1.webp
+    evidence:
+      - mfr-manticgames:561930
+  - id: mantic-games/epic-warpath-new-releases-bundle-gcps-marauders-nameless-veer-myn
+    name: Epic Warpath New Releases Bundle | GCPS, Marauders, Nameless, Veer-myn
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - epic-warpath
+    gameSystemsBasis: code
+    settings:
+      - warpath-universe
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 174.96
+    url: https://www.manticgames.com/epic-warpath/winter-2026-bundle-2/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/epic-warpath-q4-2026-bundle-2-v2.webp
+    evidence:
+      - mfr-manticgames:561931
   - id: mantic-games/epic-warpath-plague-commanders-bundle
     name: Epic Warpath Plague Commander’s Bundle
     manufacturer: mantic-games
@@ -72117,7 +72616,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 157.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/plague/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/04/plague-commander-bundle.webp
     evidence:
@@ -72137,7 +72636,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 139.5
+    priceGbp: 125.0
     url: https://www.manticgames.com/epic-warpath/veer-myn/commanders-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/veer-myn-commander-bundle-v3.webp
     evidence:
@@ -73604,7 +74103,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 64.99
+    priceGbp: 77.58
     url: https://www.manticgames.com/tabletop-advent-calendars/hellboy-drinking-with-skeletons-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/hellboy-advent-calendar-and-drinking-with-skeletons-bundle.webp
     evidence:
@@ -73624,7 +74123,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-08-22'
-    priceGbp: 54.99
+    priceGbp: 67.68
     url: https://www.manticgames.com/advent-calendars/hellboy-calendar-holiday-hellboy-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/hellboy-advent-calendar-and-holiday-hellboy-bundle.webp
     evidence:
@@ -75143,15 +75642,30 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/naiads-plastic-frame-mantic-direct
       - mfr-manticgames:1507
+  - id: mantic-games/nameless-all-in-bundle
+    name: Nameless All-In Bundle
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 200.0
+    url: https://www.manticgames.com/firefight/nameless/winter-2026-all-in-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/10/mega-web-bundle-nameless-one-click.webp
+    evidence:
+      - mfr-manticgames:561927
   - id: mantic-games/nameless-caratid
     name: Nameless Caratid
     manufacturer: mantic-games
     sku: '5543010102'
     gameSystems:
       - deadzone
-      - firefight
     faction: general
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warpath-universe
     settingsBasis: derived
@@ -75160,12 +75674,25 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 7.99
     priceUsd: 7.99
     url: https://www.manticgames.com/deadzone/nameless/resin-nameless-caratid/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2020/05/caratid.jpg
     evidence:
       - legacy-catalog:mantic-games/deadzone/general/nameless-caratid
+  - id: mantic-games/nameless-caratid-discontinued
+    name: Nameless Caratid (DISCONTINUED)
+    manufacturer: mantic-games
+    sku: '5543010102'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 7.99
+    url: https://www.manticgames.com/deadzone/nameless/resin-nameless-caratid/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2020/05/caratid.jpg
+    evidence:
       - mfr-manticgames:248562
   - id: mantic-games/nameless-d8-faction-dice-set-pink
     name: Nameless D8 Faction Dice Set – Pink
@@ -76800,7 +77327,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-07'
-    priceGbp: 60.0
+    priceGbp: 95.3
     priceUsd: 60.0
     url: https://www.manticgames.com/halo-flashpoint/recon-bundle-organised-play/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/06/recon-free-terrain-bundle.webp
@@ -77157,7 +77684,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 164.5
+    priceGbp: 224.0
     url: https://www.manticgames.com/deals-and-offers/big-sci-fi-skirmish-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/double-mat-terrain-deal-v2.webp
     evidence:
@@ -77387,7 +77914,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 173.36
+    priceGbp: 225.02
     url: https://www.manticgames.com/tabletop-advent-calendars/all-in-bundle-2026/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/advent-calendars-all-in-bundle-2026-v2.webp
     evidence:
@@ -77549,7 +78076,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-08-22'
-    priceGbp: 50.0
+    priceGbp: 66.66
     url: https://www.manticgames.com/advent-calendar-games/terrain-crate-dungeons-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/08/terraincrate-dungeons-bundle.webp
     evidence:
@@ -78554,7 +79081,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 0.0
-    url: https://www.manticgames.com/games/%25product_cat%25/vallejo-stone-textures-red-oxide-paste-200ml/
+    url: https://www.manticgames.com/games/%product_cat%/vallejo-stone-textures-red-oxide-paste-200ml/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2021/04/red-oxide-paste-vallejo-26589-200ml.jpg
     evidence:
       - mfr-manticgames:333684
@@ -78785,7 +79312,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-09-30'
-    priceGbp: 109.99
+    priceGbp: 167.18
     url: https://www.manticgames.com/worms/30th-deluxe-play-mat-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/09/worms-30th-anniversary-bundle.webp
     evidence:

@@ -427,7 +427,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -548,7 +548,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -2560,7 +2560,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -4604,7 +4604,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
@@ -6046,6 +6046,48 @@ products:
       - ret-radaddel:/adeptus-mechanicus-hastarii
       - ret-radaddel:adeptus-mechanicus-hastarii
       - ret-tistaminis:adeptus-mechanicus-hastarii-pre-order
+  - id: games-workshop/99120116053
+    name: Tech-Priest Enginseer
+    manufacturer: games-workshop
+    productCode: '99120116053'
+    sku: '99120116053'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/Astra-Militarum-Tech-Priest-Enginseer
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070105002_TechpriestEnginseer01.jpg
+    evidence:
+      - mfr-gw-algolia:prod3150382-99120116053
+  - id: games-workshop/99120116054
+    name: Tech-Priest Dominus
+    manufacturer: games-workshop
+    productCode: '99120116054'
+    sku: '99120116054'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/Ad-Mec-Tech-Priest-Dominus
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070116001_AdMechTechPriestDominus01.jpg
+    evidence:
+      - mfr-gw-algolia:prod2830167-99120116054
   - id: games-workshop/99120116056
     name: Technoarcheologist
     manufacturer: games-workshop
@@ -6916,7 +6958,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     url: https://www.warhammer.com/en-GB/shop/lov-grimnyr-2022
@@ -7165,7 +7207,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     url: https://www.warhammer.com/en-GB/shop/lov-kahl-2022
@@ -8825,12 +8867,10 @@ products:
     settingsBasis: unknown
     category: miniatures
     categoryBasis: code
-    status: current
+    status: discontinued
     firstSeen: '2026-07-23'
-    url: https://www.gamenerdz.com/warhammer-40k-kill-team-equipment-pack
     evidence:
       - mfr-gw-trade:99120199121
-      - ret-gamenerdz:/warhammer-40k-kill-team-equipment-pack
   - id: games-workshop/99120199129
     name: 'Killzone: Volkus'
     manufacturer: games-workshop
@@ -9197,7 +9237,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceCad: 83.0
@@ -9403,10 +9443,32 @@ products:
       - legacy-catalog:games-workshop/other-games/kill-team/kill-team-equipment-pack
       - mfr-gw-algolia:P-189764-99120199152
       - mfr-gw-trade:99120199152
+      - ret-gamenerdz:/warhammer-40k-kill-team-equipment-pack
       - ret-goblingaming:kill-team-upgrade-equipment-pack
       - ret-radaddel:/kill-team-equipment-pack
       - ret-radaddel:kill-team-equipment-pack
       - ret-tistaminis:kill-team-upgrade-equipment-pack
+  - id: games-workshop/99120199154
+    name: Battlefield Trophies
+    manufacturer: games-workshop
+    productCode: '99120199154'
+    sku: '99120199154'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: terrain
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/warhammer-40000-battlefield-trophies-2025
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120199131_WH40KBattlefieldTrophies1.jpg
+    evidence:
+      - mfr-gw-algolia:P-201839-99120199154
   - id: games-workshop/99120199155
     name: 'Battlefield Armageddon: Manufactorum Ruins'
     manufacturer: games-workshop

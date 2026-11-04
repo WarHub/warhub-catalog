@@ -868,9 +868,10 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marine-primaris-repulsor
+    url: https://www.gamenerdz.com/old-warhammer-40k-space-marine-primaris-repulsor
     evidence:
       - mfr-gw-trade:99120101192
+      - ret-gamenerdz:/old-warhammer-40k-space-marine-primaris-repulsor
       - ret-gamenerdz:/warhammer-40k-space-marine-primaris-repulsor
   - id: games-workshop/99120101193
     name: SPACE MARINES PRIMARIS INCEPTORS
@@ -1702,7 +1703,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 36.9
@@ -1984,7 +1985,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -2615,7 +2616,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -2815,6 +2816,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/primaris-repulsor
       - mfr-gw-algolia:prod4530194-99120101311
       - mfr-gw-trade:99120101311
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-repulsor
       - ret-goblingaming:space-marines-primaris-repulsor
       - ret-radaddel:/space-marines-repulsor
       - ret-radaddel:space-marines-repulsor
@@ -2838,7 +2840,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -3488,7 +3490,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
@@ -3528,7 +3530,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     url: https://www.warhammer.com/en-GB/shop/White-Scars-KorSarro-Khan-2020
@@ -5253,7 +5255,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -5375,7 +5377,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
@@ -5998,7 +6000,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
@@ -7296,7 +7298,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 30.0
     priceEur: 30.3
@@ -7787,6 +7789,7 @@ products:
       - legacy-catalog:games-workshop/other-games/space-marines/kill-team-wolf-scouts-2
       - mfr-gw-algolia:P-236763-99120101457
       - mfr-gw-trade:99120101457
+      - ret-gamenerdz:/warhammer-40k-kill-team-wolf-scouts
       - ret-goblingaming:kill-team-wolf-scouts
       - ret-radaddel:/kill-team-wolf-scouts
       - ret-radaddel:kill-team-wolf-scouts
@@ -8071,7 +8074,7 @@ products:
     evidence:
       - mfr-gw-algolia:prod4510331-99120101470
   - id: games-workshop/99120101471
-    name: 'SPACE MARINES: APOTHECARY'
+    name: Apothecary
     manufacturer: games-workshop
     productCode: '99120101471'
     sku: '99120101471'
@@ -8080,15 +8083,20 @@ products:
     gameSystems:
       - warhammer-40k
     faction: space-marines
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-22'
+    priceGbp: 27.0
+    url: https://www.warhammer.com/en-GB/shop/Space-Marines-Primaris-Apothecary-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101178_PrimarisApothecary01.jpg
     evidence:
+      - mfr-gw-algolia:prod4510249-99120101471
       - mfr-gw-trade:99120101471
   - id: games-workshop/99120101472
     name: Space Marine Captain
@@ -8108,15 +8116,16 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-09-02'
+    firstSeen: '2026-07-13'
     priceGbp: 29.0
     url: https://www.warhammer.com/en-GB/shop/Space-Marine-Primaris-Captain-2020
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101179_PrimarisCaptain01.jpg
     evidence:
       - mfr-gw-algolia:prod4530191-99120101472
       - mfr-gw-trade:99120101472
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-captain
   - id: games-workshop/99120101473
-    name: 'SPACE MARINES: CHAPLAIN'
+    name: Chaplain
     manufacturer: games-workshop
     productCode: '99120101473'
     sku: '99120101473'
@@ -8125,15 +8134,20 @@ products:
     gameSystems:
       - warhammer-40k
     faction: space-marines
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-08-22'
+    priceGbp: 27.0
+    url: https://www.warhammer.com/en-GB/shop/Space-Marines-Primaris-Chaplain-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101180_PrimarisChaplain01.jpg
     evidence:
+      - mfr-gw-algolia:prod4530148-99120101473
       - mfr-gw-trade:99120101473
   - id: games-workshop/99120101474
     name: Librarian
@@ -8248,15 +8262,16 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 29.0
     url: https://www.warhammer.com/en-GB/shop/space-marines-primaris-ancient-2022
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101076_SMPrimarisAncientLead.jpg
     evidence:
       - mfr-gw-algolia:prod4850163-99120101480
       - mfr-gw-trade:99120101480
+      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-ancient
   - id: games-workshop/99120101481
-    name: 'SPACE MARINES: CAPTAIN IN GRAVIS ARMOUR'
+    name: Captain in Gravis Armour
     manufacturer: games-workshop
     productCode: '99120101481'
     sku: '99120101481'
@@ -8265,18 +8280,24 @@ products:
     gameSystems:
       - warhammer-40k
     faction: space-marines
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/space-marines-captain-in-gravis-armour-2022
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101077_SMCPTGravisArmourLead.jpg
     evidence:
+      - mfr-gw-algolia:prod4850164-99120101481
       - mfr-gw-trade:99120101481
+      - ret-gamenerdz:/warhammer-40k-space-marines-captain-in-gravis-armour
   - id: games-workshop/99120101482
-    name: 'Space Marines: Lieutenant'
+    name: Space Marines Lieutenant
     manufacturer: games-workshop
     productCode: '99120101482'
     sku: '99120101482'
@@ -8293,13 +8314,14 @@ products:
     categoryBasis: mapped
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
+    firstSeen: '2026-07-13'
     priceGbp: 26.0
     url: https://www.warhammer.com/en-GB/shop/space-marines-lieutenant-2023
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070101079_SMLieutenant1.jpg
     evidence:
       - mfr-gw-algolia:P-155988-99120101482
       - mfr-gw-trade:99120101482
+      - ret-gamenerdz:/warhammer-40k-space-marines-lieutenant
   - id: games-workshop/99120101484
     name: Master Lazarus
     manufacturer: games-workshop
@@ -10359,7 +10381,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -10509,7 +10531,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -11411,7 +11433,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -11450,7 +11472,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -11927,7 +11949,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceEur: 28.3
@@ -12240,7 +12262,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
@@ -12871,7 +12893,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
@@ -13562,7 +13584,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 92.0
     priceEur: 94.1
@@ -13666,6 +13688,132 @@ products:
       - ret-radaddel:/kill-team-murderwing
       - ret-radaddel:kill-team-murderwing
       - ret-tistaminis:kill-team-murderwing-pre-order
+  - id: games-workshop/99120102234
+    name: Tzaangor Upgrade Pack
+    manufacturer: games-workshop
+    productCode: '99120102234'
+    sku: '99120102234'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 18.5
+    url: https://www.warhammer.com/en-GB/shop/Tzaangor-Upgrades-2018
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102068_ThousandSonsTzangors08.jpg
+    evidence:
+      - mfr-gw-algolia:prod3710208-99120102234
+  - id: games-workshop/99120102238
+    name: Plague Surgeon
+    manufacturer: games-workshop
+    productCode: '99120102238'
+    sku: '99120102238'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Death-Guard-Nauseous-Rotbone-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070102004_Rotbone01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4580137-99120102238
+  - id: games-workshop/99120102239
+    name: Biologus Putrifier
+    manufacturer: games-workshop
+    productCode: '99120102239'
+    sku: '99120102239'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Death-Guard-Biologus-Putrifier-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070102005_BiologusPutrifier01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4580131-99120102239
+  - id: games-workshop/99120102240
+    name: Icon Bearer
+    manufacturer: games-workshop
+    productCode: '99120102240'
+    sku: '99120102240'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Death-Guard-Plague-Marine-Icon-Bearer-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070102006_DGIconBearer01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4580311-99120102240
+  - id: games-workshop/99120102241
+    name: Plague Marine Champion
+    manufacturer: games-workshop
+    productCode: '99120102241'
+    sku: '99120102241'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Death-Guard-Plague-Marine-Champion-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070102007_DeathguardChampion01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4580310-99120102241
+  - id: games-workshop/99120102246
+    name: Typhus, Herald of the Plague God
+    manufacturer: games-workshop
+    productCode: '99120102246'
+    sku: '99120102246'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 29.5
+    url: https://www.warhammer.com/en-GB/shop/Death-Guard-Typhus-2020
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102076_DeathGuardTyphus01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4580140-99120102246
   - id: games-workshop/99120102249
     name: 'EMPEROR''S CHILDREN: BLISSBOUND WARBAND'
     manufacturer: games-workshop
@@ -14044,7 +14192,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     url: https://www.warhammer.com/en-GB/shop/Ork-Deff-Dread
@@ -14650,7 +14798,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -14944,7 +15092,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -15111,7 +15259,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -15153,7 +15301,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 59.0
     priceEur: 60.6
@@ -16066,7 +16214,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -16594,7 +16742,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-25'
     priceGbp: 37.0
     priceEur: 38.1
@@ -16605,6 +16753,27 @@ products:
       - ret-gamenerdz:/warhammer-40k-orks-nazdreg
       - ret-goblingaming:orks-nazdreg
       - ret-radaddel:orks-nazdreg
+  - id: games-workshop/99120103145
+    name: Da Red Gobbo's Squigmobile
+    manufacturer: games-workshop
+    productCode: '99120103145'
+    sku: '99120103145'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 29.5
+    url: https://www.warhammer.com/en-GB/shop/da-red-gobbos-squigmobile-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120103145_DaRedGobboSquigmobile2.jpg
+    evidence:
+      - mfr-gw-algolia:P-264606-99120103145
   - id: games-workshop/99120104015
     name: ELDAR VYPER JET BIKE
     manufacturer: games-workshop
@@ -17829,7 +17998,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
@@ -18751,6 +18920,27 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104003_ELDARAUTARCH01.jpg
     evidence:
       - mfr-gw-algolia:prod2810200-99120104117
+  - id: games-workshop/99120104118
+    name: Eldrad Ulthran
+    manufacturer: games-workshop
+    productCode: '99120104118'
+    sku: '99120104118'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/Eldrad-Ulthran-2017
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104006_Eldrad01.jpg
+    evidence:
+      - mfr-gw-algolia:prod3650164-99120104118
   - id: games-workshop/99120104121
     name: Farseer
     manufacturer: games-workshop
@@ -18794,6 +18984,27 @@ products:
     evidence:
       - mfr-gw-algolia:prod3650295-99120104122
       - mfr-gw-algolia:prod3660120-99120104122
+  - id: games-workshop/99120104123
+    name: Spiritseer
+    manufacturer: games-workshop
+    productCode: '99120104123'
+    sku: '99120104123'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Craftworlds-Spiritseer-2019
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070104007_Spiritseer01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4240206-99120104123
   - id: games-workshop/99120104143
     name: Solitaire
     manufacturer: games-workshop
@@ -18815,6 +19026,48 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070111003_Solitaire01.jpg
     evidence:
       - mfr-gw-algolia:prod2620122-99120104143
+  - id: games-workshop/99120104144
+    name: Death Jester
+    manufacturer: games-workshop
+    productCode: '99120104144'
+    sku: '99120104144'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Harlequin-Death-Jester
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070111001_HarlequinDeathJester01.jpg
+    evidence:
+      - mfr-gw-algolia:prod2620120-99120104144
+  - id: games-workshop/99120104145
+    name: Shadowseer
+    manufacturer: games-workshop
+    productCode: '99120104145'
+    sku: '99120104145'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 21.5
+    url: https://www.warhammer.com/en-GB/shop/Harlequin-Shadowseer
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070111005_AELShadowseerLead.jpg
+    evidence:
+      - mfr-gw-algolia:prod2620121-99120104145
   - id: games-workshop/99120105014
     name: Catachan Heavy Weapons Squad
     manufacturer: games-workshop
@@ -20037,7 +20290,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.5
     priceEur: 24.2
@@ -21496,7 +21749,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-21'
     priceGbp: 125.0
     priceEur: 124.0
@@ -22476,7 +22729,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -24375,7 +24628,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
@@ -24932,7 +25185,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -25304,7 +25557,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -25603,7 +25856,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 125.0
     priceEur: 122.8
@@ -26550,7 +26803,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 32.05
@@ -27059,6 +27312,27 @@ products:
     evidence:
       - mfr-gw-algolia:P-181577-99120108138
       - mfr-gw-trade:99120108138
+  - id: games-workshop/99120108142
+    name: Sister Superior Amalia Novena
+    manufacturer: games-workshop
+    productCode: '99120108142'
+    sku: '99120108142'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/Sister-Superior-Amalia-Novena-2019
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120108020_SisterAmaliaNovena01.jpg
+    evidence:
+      - mfr-gw-algolia:prod4240157-99120108142
   - id: games-workshop/99120108143
     name: Dialogus
     manufacturer: games-workshop

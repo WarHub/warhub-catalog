@@ -1,40 +1,40 @@
 summary:
-  products: 27541
-  undecided: 1441
+  products: 27759
+  undecided: 1459
   byBasis:
-    code: 7141
-    lexicon: 397
-    mapped: 17492
+    code: 7167
+    lexicon: 549
+    mapped: 17514
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1441
-  decidedThisRun: 25045
+    unknown: 1459
+  decidedThisRun: 25245
   gameSystemsByBasis:
-    classified: 1112
-    code: 4215
-    mapped: 2641
-    not-applicable: 7864
+    classified: 1114
+    code: 4227
+    mapped: 2647
+    not-applicable: 8016
     override: 101
     setting: 960
-    stated: 9218
-    unknown: 1430
+    stated: 9242
+    unknown: 1452
   settingsByBasis:
     code: 849
-    derived: 17283
+    derived: 17327
     mapped: 11
-    not-applicable: 7935
+    not-applicable: 8087
     override: 3
-    unknown: 1460
+    unknown: 1482
   rolesByBasis:
     code: 72
     lexicon: 183
     mapped: 1081
-    none: 20622
+    none: 20688
     override: 2
     paint-archive: 1958
     stated: 16
-    unknown: 3607
+    unknown: 3759
 conflicts:
   - entity: games-workshop/60010399003
     type: category-disagreement
@@ -260,6 +260,8 @@ unmapped:
       wouldDecide: 13
     - value: categories=firefight-getting-started
       wouldDecide: 12
+    - value: categories=warpath-universe-new-upcoming
+      wouldDecide: 12
     - value: categories=dreadball
       wouldDecide: 11
     - value: categories=hellboy
@@ -323,8 +325,6 @@ unmapped:
     - value: categories=getting-started-dreadball
       wouldDecide: 4
     - value: categories=halo-flashpoint-accessories-terrain
-      wouldDecide: 4
-    - value: categories=halo-flashpoint-covenant
       wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
@@ -485,19 +485,19 @@ unmapped:
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 157
+      wouldDecide: 170
     - value: breadcrumbs=Miniatures
-      wouldDecide: 148
+      wouldDecide: 161
     - value: breadcrumbs=Games Workshop
-      wouldDecide: 51
+      wouldDecide: 55
     - value: breadcrumbs=Infinity
-      wouldDecide: 46
+      wouldDecide: 51
     - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 31
+      wouldDecide: 32
     - value: breadcrumbs=Malifaux
       wouldDecide: 19
     - value: breadcrumbs=Warhammer Age of Sigmar
-      wouldDecide: 18
+      wouldDecide: 19
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 15
     - value: breadcrumbs=More Miniatures
@@ -508,24 +508,28 @@ unmapped:
       wouldDecide: 7
     - value: breadcrumbs=Kings of War
       wouldDecide: 6
+    - value: breadcrumbs=Star Wars Legion
+      wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
+    - value: breadcrumbs=Panoceania
+      wouldDecide: 5
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
     - value: breadcrumbs=Paint and Crafting
       wouldDecide: 4
-    - value: breadcrumbs=Panoceania
-      wouldDecide: 4
+    - value: breadcrumbs=Nomads
+      wouldDecide: 3
+    - value: breadcrumbs=Aleph
+      wouldDecide: 2
     - value: breadcrumbs=Citadel Accessories & Supplies
       wouldDecide: 2
-    - value: breadcrumbs=Nomads
+    - value: breadcrumbs=Combined Army
       wouldDecide: 2
     - value: breadcrumbs=Preorders
       wouldDecide: 2
-    - value: breadcrumbs=Star Wars Legion
+    - value: breadcrumbs=Yu Jing
       wouldDecide: 2
-    - value: breadcrumbs=Aleph
-      wouldDecide: 1
     - value: breadcrumbs=Aristeia!
       wouldDecide: 1
     - value: breadcrumbs=Aristeia! AGL (Aristiea! Global League) - Bixie Edition
@@ -537,8 +541,6 @@ unmapped:
     - value: 'breadcrumbs=Beyond the Gates of Antares: Templates "Clearance"'
       wouldDecide: 1
     - value: breadcrumbs=Card Sleeves
-      wouldDecide: 1
-    - value: breadcrumbs=Combined Army
       wouldDecide: 1
     - value: 'breadcrumbs=Dungeon Saga: Counter Upgrade Set'
       wouldDecide: 1
@@ -556,13 +558,11 @@ unmapped:
       wouldDecide: 1
     - value: 'breadcrumbs=Halo: Flashpoint - Sergeant Major Johnson (PREORDER)'
       wouldDecide: 1
+    - value: breadcrumbs=Horus Heresy
+      wouldDecide: 1
     - value: 'breadcrumbs=Infinity ITS Book Season 9: Treason'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity: ''Decontaminated'' Tokens (6)'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: ''Infected'' Tokens (6)'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: Akashi Site Scenery Pack'
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games
