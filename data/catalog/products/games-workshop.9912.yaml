@@ -499,7 +499,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 61.0
     priceEur: 62.2
@@ -1030,7 +1030,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -1131,7 +1131,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 40.3
@@ -1390,7 +1390,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
@@ -1913,6 +1913,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - middle-earth
+    faction: general
     gameSystemsBasis: stated
     settings:
       - middle-earth
@@ -2314,7 +2315,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -2697,7 +2698,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
@@ -7448,7 +7449,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 120.0
     priceEur: 122.8
@@ -7510,7 +7511,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 30.3
@@ -8401,7 +8402,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     url: https://www.warhammer.com/en-GB/shop/warriors-of-chaos-chaos-chariots-2024
@@ -8670,7 +8671,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -9049,7 +9050,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -9089,7 +9090,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -9265,7 +9266,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -9429,7 +9430,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     priceEur: 36.9
@@ -9971,7 +9972,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
@@ -10762,7 +10763,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -11334,7 +11335,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceCad: 107.0
@@ -12323,7 +12324,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.0
     priceEur: 68.8
@@ -12702,6 +12703,27 @@ products:
       - ret-radaddel:/khemri-liche-priests
       - ret-radaddel:khemri-liche-priests
       - ret-tistaminis:tomb-kings-of-khemri-liche-priests-pre-order
+  - id: games-workshop/99122717012
+    name: Host of Nehekhara Army Reinforcement Set
+    manufacturer: games-workshop
+    productCode: '99122717012'
+    sku: '99122717012'
+    gameSystems:
+      - the-old-world
+    gameSystemsBasis: stated
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 140.0
+    url: https://www.warhammer.com/en-GB/shop/host-of-nehekhara-army-reinforcement-set-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717012_TombKingsOfKhemriHostofNehekharaArmyReinforcement01.jpg
+    evidence:
+      - mfr-gw-algolia:P-264607-99122717012
   - id: games-workshop/99122720001
     name: Shugengan Lord on Great Spirit Longma
     manufacturer: games-workshop
@@ -12982,7 +13004,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 102.5
     priceEur: 106.4
@@ -13024,7 +13046,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 97.0
     priceEur: 98.2
@@ -13509,7 +13531,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceCad: 54.0
@@ -13970,7 +13992,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 30.5
     priceEur: 31.6
@@ -17413,7 +17435,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 120.0
     priceCad: 230.0
@@ -18725,7 +18747,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-10-04'
     priceGbp: 49.0
     url: https://www.warhammer.com/en-GB/shop/custodes-gyrfalcon-jetbike-sodality-2026
@@ -19000,7 +19022,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
     url: https://www.warhammer.com/en-GB/shop/Seekers-of-Slaanesh
@@ -19677,7 +19699,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     url: https://www.warhammer.com/en-GB/shop/Fiends-of-Slaanesh-2019
@@ -20542,7 +20564,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
@@ -20960,7 +20982,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     url: https://www.warhammer.com/en-GB/shop/Skarbrand-Bloodthirster

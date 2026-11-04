@@ -967,6 +967,52 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Aun-Shi-Tau-Ethereal
     evidence:
       - arc-gw-webstore:/en-GB/Aun-Shi-Tau-Ethereal
+  - id: games-workshop/99060201237
+    name: Fatemaster on Disc of Tzeentch
+    manufacturer: games-workshop
+    productCode: '99060201237'
+    sku: '99060201237'
+    gameSystems:
+      - age-of-sigmar
+      - warhammer-40k
+    gameSystemsBasis: mapped
+    settings:
+      - age-of-sigmar
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 41.0
+    url: https://www.warhammer.com/en-GB/shop/tzeentch-fatemaster-mto-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99060201238_TzeentchMTOFluxmasteronDisc.jpg
+    evidence:
+      - mfr-gw-algolia:P-264629-99060201237
+  - id: games-workshop/99060201238
+    name: Fluxmaster – Herald of Tzeentch on Disc
+    manufacturer: games-workshop
+    productCode: '99060201238'
+    sku: '99060201238'
+    gameSystems:
+      - age-of-sigmar
+      - warhammer-40k
+    gameSystemsBasis: mapped
+    settings:
+      - age-of-sigmar
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 41.0
+    url: https://www.warhammer.com/en-GB/shop/tzeentch-fluxmaster-mto-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99060201237_TzeentchMTOFatemasteronDisc.jpg
+    evidence:
+      - mfr-gw-algolia:P-264630-99060201238
   - id: games-workshop/99060205109
     name: JOSEPH BUGMAN - BANNER BEARER
     manufacturer: games-workshop
@@ -3144,7 +3190,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 32.5
     priceEur: 38.5
@@ -5447,7 +5493,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.5
     url: https://www.warhammer.com/en-GB/shop/Blood-Angels-Terminator-Librarian-2014
@@ -5897,9 +5943,10 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-13'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
+    url: https://www.gamenerdz.com/old-warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
     evidence:
       - mfr-gw-trade:99070101045
+      - ret-gamenerdz:/old-warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
       - ret-gamenerdz:/warhammer-40k-space-marines-primaris-lieutenant-in-reiver-armour
   - id: games-workshop/99070101046
     name: PRIMARIS LIBRARIAN IN PHOBOS ARMOUR
@@ -6027,6 +6074,7 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/iron-hands-primaris-upgrades-and-transfers
       - mfr-gw-algolia:prod4510301-99070101049
       - mfr-gw-trade:99070101049
+      - ret-gamenerdz:/old-warhammer-40k-iron-hands-primaris-upgrades-transfers
       - ret-gamenerdz:/warhammer-40k-iron-hands-primaris-upgrades-transfers
       - ret-goblingaming:iron-hands-primaris-upgrades-transfers
       - ret-radaddel:/iron-hands-primaris-upgrades-transfers
@@ -6490,7 +6538,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/space-marine-captain
       - mfr-gw-algolia:prod4530191-99070101061
       - mfr-gw-trade:99070101061
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-captain
       - ret-goblingaming:space-marines-primaris-captain
       - ret-radaddel:/space-marines-primaris-captain
       - ret-radaddel:space-marines-primaris-captain
@@ -6970,7 +7017,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/ancient
       - mfr-gw-algolia:prod4850163-99070101076
       - mfr-gw-trade:99070101076
-      - ret-gamenerdz:/warhammer-40k-space-marines-primaris-ancient
       - ret-goblingaming:warhammer-40k-space-marines-primaris-ancient
       - ret-radaddel:/space-marines-primaris-ancient
       - ret-radaddel:space-marines-primaris-ancient
@@ -7011,7 +7057,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/captain-in-gravis-armour
       - mfr-gw-algolia:prod4850164-99070101077
       - mfr-gw-trade:99070101077
-      - ret-gamenerdz:/warhammer-40k-space-marines-captain-in-gravis-armour
       - ret-goblingaming:warhammer-40k-space-marines-captain-in-gravis-armour
       - ret-radaddel:/space-marines-captain-in-gravis-armour
       - ret-radaddel:space-marines-captain-in-gravis-armour
@@ -7052,7 +7097,6 @@ products:
       - legacy-catalog:games-workshop/warhammer-40k/space-marines/space-marines-lieutenant
       - mfr-gw-algolia:P-155988-99070101079
       - mfr-gw-trade:99070101079
-      - ret-gamenerdz:/warhammer-40k-space-marines-lieutenant
       - ret-goblingaming:warhammer-40000-space-marines-lieutenant
       - ret-radaddel:/space-marines-lieutenant
       - ret-radaddel:space-marines-lieutenant
@@ -8090,7 +8134,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
     priceCad: 42.5
@@ -8935,7 +8979,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -10186,7 +10230,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     url: https://www.warhammer.com/en-GB/shop/acolyte-iconward-2016
@@ -10521,7 +10565,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
     url: https://www.warhammer.com/en-GB/shop/Genestealer-Cults-Magus-2019
@@ -12442,7 +12486,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -12479,7 +12523,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 13.25
     url: https://www.warhammer.com/en-GB/shop/Lizardmen-Saurus-Oldblood
@@ -12828,7 +12872,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 23.0
     url: https://www.warhammer.com/en-GB/shop/Lumineth-Realm-lords-Scinari-Calligrave-2021
@@ -13940,7 +13984,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 20.0
     priceEur: 23.1

@@ -1938,7 +1938,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.0
     priceEur: 68.8
@@ -2486,7 +2486,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -3416,7 +3416,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 33.5
     url: https://www.warhammer.com/en-GB/shop/necromunda-goliath-forge-bosses-and-sumpkrocs-2026
@@ -3746,6 +3746,69 @@ products:
       - ret-goblingaming:necromunda-delaque-underhive-crew
       - ret-radaddel:necromunda-delaque-underhive-crew
       - ret-tistaminis:necromunda-delaque-underhive-crew-pre-order
+  - id: games-workshop/99120599100
+    name: Orlock Road Warriors
+    manufacturer: games-workshop
+    productCode: '99120599100'
+    sku: '99120599100'
+    gameSystems:
+      - necromunda
+    gameSystemsBasis: mapped
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 33.5
+    url: https://www.warhammer.com/en-GB/shop/necromunda-orlock-road-warriors-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120599100_NecromundaOrlockRoadWarriors01.jpg
+    evidence:
+      - mfr-gw-algolia:P-264637-99120599100
+  - id: games-workshop/99120599101
+    name: Orlock Road Sergeants & Cyber-Mastiffs
+    manufacturer: games-workshop
+    productCode: '99120599101'
+    sku: '99120599101'
+    gameSystems:
+      - necromunda
+    gameSystemsBasis: mapped
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 33.5
+    url: https://www.warhammer.com/en-GB/shop/orlock-road-sergeants-and-cyber-mastiffs-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120599101_NecromundaOrlockRoadSergeantsCybermastiffs01.jpg
+    evidence:
+      - mfr-gw-algolia:P-264638-99120599101
+  - id: games-workshop/99120599102
+    name: Orlock Ogryn Minders
+    manufacturer: games-workshop
+    productCode: '99120599102'
+    sku: '99120599102'
+    gameSystems:
+      - necromunda
+    gameSystemsBasis: mapped
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-04'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/necromunda-orlock-ogryn-minders-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120599102_NecromundaOrlockOgrynMinders01.jpg
+    evidence:
+      - mfr-gw-algolia:P-264636-99120599102
   - id: games-workshop/99120599109
     name: Palanite Enforcer Weapons & Upgrades
     manufacturer: games-workshop
@@ -6657,7 +6720,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 16.0
     priceEur: 19.7
