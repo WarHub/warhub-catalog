@@ -169,29 +169,37 @@ products:
     manufacturer: games-workshop
     sku: GWS60-53
     ean: '5011921272945'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40-000-getting-started-with-orks
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200a-1017010300260-53GettingStartedWithOrks-CAN.jpg?v=1783729421
     evidence:
       - ret-gamenerdz:/warhammer-40-000-getting-started-with-orks
+      - ret-tistaminis:getting-started-with-orks
   - id: games-workshop/warhammer-40-000-getting-started-with-space-marines
     name: Warhammer 40,000 Getting Started with Space Marines
     manufacturer: games-workshop
     sku: GWS60-52
     ean: '5011921272709'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40-000-getting-started-with-space-marines
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200a-1017010100360-52GettingStartedWithSpaceMarines-CAN_5e664aca-4607-4b36-b979-e4976ffbfc9e.jpg?v=1783729421
     evidence:
       - ret-gamenerdz:/warhammer-40-000-getting-started-with-space-marines
+      - ret-tistaminis:getting-started-with-space-marines
   - id: games-workshop/warhammer-40-000-grundregeln-deutsch
     name: 'Warhammer 40.000: Grundregeln (deutsch)'
     manufacturer: games-workshop
@@ -390,8 +398,8 @@ products:
     url: https://www.radaddel.de/warhammer-40.000-ultimatives-starter-set-deutsch
     evidence:
       - ret-radaddel:/warhammer-40.000-ultimatives-starter-set-deutsch
-  - id: games-workshop/warhammer-40000-orks-dice-pre-order-wave-2
-    name: 'WARHAMMER 40000: ORKS DICE - PRE-ORDER (WAVE 2)'
+  - id: games-workshop/warhammer-40000-orks-dice
+    name: 'WARHAMMER 40000: ORKS DICE'
     manufacturer: games-workshop
     sku: 50-05
     gameSystemsBasis: unknown
@@ -399,7 +407,7 @@ products:
     category: game-accessory
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-25'
     priceCad: 34.85
     url: https://tistaminis.com/products/warhammer-40000-orks-dice-pre-order
@@ -792,20 +800,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-40k-imperium-nihilus-vigilus-defiant-hardcover
     evidence:
       - ret-gamenerdz:/warhammer-40k-imperium-nihilus-vigilus-defiant-hardcover
-  - id: games-workshop/warhammer-40k-introductory-set-2026
-    name: 'Warhammer 40K: Introductory Set (2026)'
-    manufacturer: games-workshop
-    sku: GWS40-04-2026
-    ean: '5011921260430'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-08-22'
-    url: https://www.gamenerdz.com/warhammer-40k-introductory-set-2026
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-introductory-set-2026
   - id: games-workshop/warhammer-40k-kill-team-killzone-octarius
     name: 'Warhammer 40K: Kill Team - Killzone Octarius'
     manufacturer: games-workshop
@@ -835,7 +829,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 38.25
+    priceCad: 39.95
     url: https://www.gamenerdz.com/warhammer-40k-orks-boyz-paints
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200a-5617010300160-05OrksPlusPaints-USACANJPN_caeca07a-5f16-490a-bf1c-fb3d7576aecf.jpg?v=1783729422
     evidence:
@@ -910,7 +904,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 46.75
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-40k-paints-tools-2026
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_BSF-5617019900260-12Warhammer40000PaintsPlusTools-USACANJPN_181c95a8-9921-411e-9280-6251039f5cfe.jpg?v=1783729421
     evidence:
@@ -1056,182 +1050,19 @@ products:
     manufacturer: games-workshop
     sku: GWS60-11-2026
     ean: '5011921260331'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 39.95
     url: https://www.gamenerdz.com/warhammer-40k-space-marine-intercessors-paints
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_BSF-5617010100260-11SpaceMarinesIntercessorsPlusPaints-USACANJPN.jpg?v=1783729421
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marine-intercessors-paints
-  - id: games-workshop/warhammer-40k-space-marines-captain-on-bike
-    name: 'Warhammer 40K: Space Marines - Captain on Bike'
-    manufacturer: games-workshop
-    sku: GWS48-113
-    ean: '5011921267569'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-captain-on-bike
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike
-      - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike-preorder
-  - id: games-workshop/warhammer-40k-space-marines-codex-11th-edition
-    name: 'Warhammer 40K: Space Marines - Codex (11th Edition)'
-    manufacturer: games-workshop
-    sku: GWS48-01-11E
-    ean: '9781804578544'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: book
-    categoryBasis: lexicon
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-codex-11th-edition
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-codex-11th-edition
-      - ret-gamenerdz:/warhammer-40k-space-marines-codex-11th-edition-preorder
-  - id: games-workshop/warhammer-40k-space-marines-command-pack
-    name: 'Warhammer 40K: Space Marines - Command Pack'
-    manufacturer: games-workshop
-    sku: GWS48-02-2026
-    ean: '5011921253869'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-command-pack
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-command-pack
-      - ret-gamenerdz:/warhammer-40k-space-marines-command-pack-preorder
-  - id: games-workshop/warhammer-40k-space-marines-dice-set-16ct
-    name: 'Warhammer 40K: Space Marines - Dice Set (16ct)'
-    manufacturer: games-workshop
-    sku: GWS48-111
-    ean: '5011921285235'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: game-accessory
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-dice-set-16ct
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-dice-set-16ct
-      - ret-gamenerdz:/warhammer-40k-space-marines-dice-set-16ct-preorder
-  - id: games-workshop/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
-    name: 'Warhammer 40K: Space Marines - Eradicator Squad with Heavy Bolters'
-    manufacturer: games-workshop
-    sku: GWS48-110
-    ean: '5011921267514'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
-      - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters-preorder
-  - id: games-workshop/warhammer-40k-space-marines-intercessor-squad
-    name: 'Warhammer 40K: Space Marines - Intercessor Squad'
-    manufacturer: games-workshop
-    sku: GWS48-115
-    ean: '5011921267538'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-intercessor-squad
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad
-      - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad-preorder
-  - id: games-workshop/warhammer-40k-space-marines-kaius-konorius
-    name: 'Warhammer 40K: Space Marines - Kaius Konorius'
-    manufacturer: games-workshop
-    sku: GWS55-77
-    ean: '5011921267576'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-kaius-konorius
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius
-      - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius-preorder
-  - id: games-workshop/warhammer-40k-space-marines-land-speeder
-    name: 'Warhammer 40K: Space Marines - Land Speeder'
-    manufacturer: games-workshop
-    sku: GWS48-107
-    ean: '5011921267521'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-land-speeder
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder
-      - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder-preorder
-  - id: games-workshop/warhammer-40k-space-marines-outrider-squad
-    name: 'Warhammer 40K: Space Marines - Outrider Squad'
-    manufacturer: games-workshop
-    sku: GWS48-112
-    ean: '5011921267552'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-outrider-squad
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad
-      - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad-preorder
-  - id: games-workshop/warhammer-40k-space-marines-rhino
-    name: 'Warhammer 40K: Space Marines - Rhino'
-    manufacturer: games-workshop
-    sku: GWS48-109
-    ean: '5011921279074'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-rhino
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-rhino
-      - ret-gamenerdz:/warhammer-40k-space-marines-rhino-preorder
-  - id: games-workshop/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
-    name: 'Warhammer 40K: Space Marines - Vanguard Veteran Squad with Jump Packs'
-    manufacturer: games-workshop
-    sku: GWS48-106
-    ean: '5011921267545'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
-      - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs-preorder
+      - ret-tistaminis:warhammer-space-marine-intercessors-paints
   - id: games-workshop/warhammer-40k-ultramarines-captain-uriel-ventris-black-library-celebration-2021
     name: 'Warhammer 40K: Ultramarines - Captain Uriel Ventris (Black Library Celebration 2021)'
     manufacturer: games-workshop
@@ -1263,9 +1094,9 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 46.75
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-age-of-sigmar-paints-tools
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2024_07_170299003_INTAoSPaintTools1.jpg?v=1760364398
     evidence:
@@ -1343,21 +1174,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-combat-gauge
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-combat-gauge
-  - id: games-workshop/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
-    name: 'Warhammer Age of Sigmar: Destruction Battletome - Sons of Behemat (2026)'
-    manufacturer: games-workshop
-    sku: GWS93-01-2026
-    ean: '9781804578643'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: book
-    categoryBasis: lexicon
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
   - id: games-workshop/warhammer-age-of-sigmar-dispossessed-ironbreakers
     name: 'Warhammer Age of Sigmar: Dispossessed Ironbreakers'
     manufacturer: games-workshop
@@ -1514,91 +1330,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-season-of-war-firestorm
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-season-of-war-firestorm
-  - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-boss-stompers
-    name: 'Warhammer Age of Sigmar: Sons of Behemat - Boss-Stompers'
-    manufacturer: games-workshop
-    sku: GWS93-12
-    ean: '5011921274628'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-boss-stompers
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-boss-stompers
-  - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
-    name: 'Warhammer Age of Sigmar: Sons of Behemat - Brawlers of Behemat'
-    manufacturer: games-workshop
-    sku: GWS93-14
-    ean: '5011921274666'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
-  - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-dice-set-16ct
-    name: 'Warhammer Age of Sigmar: Sons of Behemat - Dice Set (16ct)'
-    manufacturer: games-workshop
-    sku: GWS93-11
-    ean: '5011921285143'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: game-accessory
-    categoryBasis: mapped
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-dice-set-16ct-preorder
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-dice-set-16ct-preorder
-  - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
-    name: 'Warhammer Age of Sigmar: Sons of Behemat - Ma Maegran, Chooser of the Mighty'
-    manufacturer: games-workshop
-    sku: GWS93-15
-    ean: '5011921274611'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
-  - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-stomper-tribe
-    name: 'Warhammer Age of Sigmar: Sons of Behemat - Stomper Tribe'
-    manufacturer: games-workshop
-    sku: GWS93-13
-    ean: '5011921267422'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-stomper-tribe
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-stomper-tribe
-  - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-warscroll-cards
-    name: 'Warhammer Age of Sigmar: Sons of Behemat - Warscroll Cards'
-    manufacturer: games-workshop
-    sku: GWS93-04
-    ean: '5011921285501'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-warscroll-cards
-    evidence:
-      - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-warscroll-cards
   - id: games-workshop/warhammer-age-of-sigmar-stormcast-eternals-vanguard-hunters
     name: 'Warhammer Age of Sigmar: Stormcast Eternals - Vanguard-Hunters'
     manufacturer: games-workshop
@@ -1691,6 +1422,22 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-warscroll-cards-bonesplitterz
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-warscroll-cards-bonesplitterz
+  - id: games-workshop/warhammer-apocalypse-necron-datasheet-cards-new
+    name: Warhammer Apocalypse Necron Datasheet Cards New
+    manufacturer: games-workshop
+    sku: 49-24-60
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: game-accessory
+    categoryBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceCad: 20.0
+    url: https://tistaminis.com/products/warhammer-apocalypse-necron-datasheet-cards-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_92e3276a-641f-4ab8-b083-51af7736667b.jpg?v=1759927907
+    evidence:
+      - ret-tistaminis:warhammer-apocalypse-necron-datasheet-cards-new
   - id: games-workshop/warhammer-bandai-intercessor-figure-imperial-fists-new
     name: Warhammer Bandai Intercessor Figure - Imperial Fists New
     manufacturer: games-workshop
@@ -1752,6 +1499,20 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_d620343f-b8f2-4958-970a-1a00865f4d40.png?v=1760045358
     evidence:
       - ret-tistaminis:warhammer-broken-realms-belakor
+  - id: games-workshop/warhammer-colour-paint-layer-fulgurite-copper-12ml
+    name: 'Warhammer Colour Paint: Layer - Fulgurite Copper (12ml)'
+    manufacturer: games-workshop
+    sku: GWS22-74-2026
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: lexicon
+    roleBasis: unknown
+    status: current
+    firstSeen: '2026-11-07'
+    url: https://www.gamenerdz.com/warhammer-colour-paint-layer-fulgurite-copper-12ml
+    evidence:
+      - ret-gamenerdz:/warhammer-colour-paint-layer-fulgurite-copper-12ml
   - id: games-workshop/warhammer-colour-painting-handle-mk-3
     name: Warhammer Colour Painting Handle (Mk 3)
     manufacturer: games-workshop
@@ -1832,7 +1593,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 54.0
     url: https://tistaminis.com/products/warhammer-hedonites-of-slaanesh-thricefold-discord
@@ -1873,7 +1634,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.57
     url: https://www.goblingaming.co.uk/products/bloodreaver-flesh-12ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_BSA-22-92-99189951389-BLOODREAVERFLESH12MLROW.jpg?v=1774698623
     evidence:
@@ -1890,7 +1651,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.57
     url: https://www.goblingaming.co.uk/products/layer-deathclaw-brown
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_EP210-22-41-99189951339-DEATHCLAWBROWN12MLROW.jpg?v=1774700145
     evidence:
@@ -1909,7 +1670,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.57
     url: https://www.goblingaming.co.uk/products/layer-hashut-copper
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_EP210-22-63-99189951388-HASHUTCOPPER12MLROW.jpg?v=1774700535
     evidence:
@@ -1926,7 +1687,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.57
     url: https://www.goblingaming.co.uk/products/krieg-khaki-12ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_EP360-22-83-99189951379-KRIEGKHAKI12MLROW.jpg?v=1774704437
     evidence:
@@ -1943,7 +1704,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.57
     url: https://www.goblingaming.co.uk/products/lugganath-orange-12ml
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_EP210-22-85-99189951381-LUGGANATHORANGE12MLROW.jpg?v=1774700798
     evidence:
@@ -1960,7 +1721,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 3.33
+    priceGbp: 3.42
     url: https://www.goblingaming.co.uk/products/layer-skullcrusher-brass
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_EP210-22-73-99189951369-SKULLCRUSHERBRASS12MLROW.jpg?v=1774700716
     evidence:
@@ -1982,7 +1743,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.57
     url: https://www.goblingaming.co.uk/products/layer-tau-light-ochre
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_BSA-22-42-99189951340-TAULIGHTOCHRE12MLROW.jpg?v=1774697610
     evidence:
@@ -2004,25 +1765,11 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 2.48
+    priceGbp: 2.29
     url: https://www.goblingaming.co.uk/products/layer-ungor-flesh
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_EP360-22-39-99189951337-UNGORFLESH12MLROW.jpg?v=1774703897
     evidence:
       - ret-goblingaming:layer-ungor-flesh
-  - id: games-workshop/warhammer-necromunda-escher-blades-of-the-matriarch
-    name: 'Warhammer: Necromunda - Escher Blades of the Matriarch'
-    manufacturer: games-workshop
-    sku: GWS301-85
-    ean: '5011921252794'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-11-04'
-    url: https://www.gamenerdz.com/warhammer-necromunda-escher-blades-of-the-matriarch
-    evidence:
-      - ret-gamenerdz:/warhammer-necromunda-escher-blades-of-the-matriarch
   - id: games-workshop/warhammer-necromunda-goliath-gang-cards-new
     name: Warhammer Necromunda Goliath Gang Cards New
     manufacturer: games-workshop
@@ -2063,6 +1810,107 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/166614_in_1000x1000_54f99de9-4e75-467c-a7c9-e715bff50be2.jpg?v=1760016578
     evidence:
       - ret-tistaminis:warhammer-pnecromunda-van-saar-gang-tactics-cards-new
+  - id: games-workshop/warhammer-pro-tone-drybrush-large
+    name: 'Warhammer Pro: Tone Drybrush Large'
+    manufacturer: games-workshop
+    sku: '9919999911103'
+    ean: '5011921259472'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: applicator
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 11.93
+    priceCad: 22.1
+    url: https://www.goblingaming.co.uk/products/warhammer-pro-tone-drybrush-large
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_99199999111_WarhammerColourProBrushToneDryL1.png?v=1791538602
+    evidence:
+      - ret-goblingaming:warhammer-pro-tone-drybrush-large
+      - ret-tistaminis:warhammer-pro-tone-drybrush-large
+  - id: games-workshop/warhammer-pro-tone-drybrush-medium
+    name: 'Warhammer Pro: Tone Drybrush Medium'
+    manufacturer: games-workshop
+    sku: '9919999911003'
+    ean: '5011921259465'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: applicator
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 9.0
+    priceCad: 16.15
+    url: https://www.goblingaming.co.uk/products/warhammer-pro-tone-drybrush-medium
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_99199999110_WarhammerColourProBrushToneDryM1.jpg?v=1791538677
+    evidence:
+      - ret-goblingaming:warhammer-pro-tone-drybrush-medium
+      - ret-tistaminis:warhammer-pro-tone-drybrush-medium
+  - id: games-workshop/warhammer-pro-tone-drybrush-small
+    name: 'Warhammer Pro: Tone Drybrush Small'
+    manufacturer: games-workshop
+    sku: '9919999910903'
+    ean: '5011921259458'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: applicator
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 7.43
+    priceCad: 14.03
+    url: https://www.goblingaming.co.uk/products/warhammer-pro-tone-drybrush-small
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_99199999109_WarhammerColourProBrushToneDryS1.jpg?v=1791538860
+    evidence:
+      - ret-goblingaming:warhammer-pro-tone-drybrush-small
+      - ret-tistaminis:warhammer-pro-tone-drybrush-small
+  - id: games-workshop/warhammer-pro-tone-drybrush-x-small
+    name: 'Warhammer Pro: Tone Drybrush X-Small'
+    manufacturer: games-workshop
+    sku: '9919999910803'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: mapped
+    role: applicator
+    roleBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 7.2
+    url: https://www.goblingaming.co.uk/products/warhammer-pro-tone-drybrush-x-small
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_99199999108_WarhammerColourProBrushToneDryXS1.jpg?v=1791538941
+    evidence:
+      - ret-goblingaming:warhammer-pro-tone-drybrush-x-small
+  - id: games-workshop/warhammer-pro-tone-drybrush-x-sml
+    name: 'WARHAMMER PRO: TONE DRYBRUSH X-SML'
+    manufacturer: games-workshop
+    sku: 63-32
+    ean: '5011921259441'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceCad: 13.6
+    url: https://tistaminis.com/products/warhammer-pro-tone-drybrush-x-sml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99199999108_WarhammerColourProBrushToneDryXS1.jpg?v=1791598761
+    evidence:
+      - ret-tistaminis:warhammer-pro-tone-drybrush-x-sml
   - id: games-workshop/warhammer-raven-guard-dice-new
     name: Warhammer RAVEN GUARD DICE New
     manufacturer: games-workshop
@@ -2101,21 +1949,40 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_0b56005a-8908-4b8b-9541-9999e31cb89e.jpg?v=1759928867
     evidence:
       - ret-tistaminis:warhammer-runelord-brass-spray-paint-pre-order
-  - id: games-workshop/warhammer-space-marine-intercessors-paints
-    name: WARHAMMER SPACE MARINE INTERCESSORS +PAINTS
+  - id: games-workshop/warhammer-shade-fuegan-orange-18ml
+    name: 'Warhammer Shade: Fuegan Orange - 18ml'
     manufacturer: games-workshop
-    sku: 60-11
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    sku: '9918995308006'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 38.25
-    url: https://tistaminis.com/products/warhammer-space-marine-intercessors-paints
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_BSF-5617010100260-11SpaceMarinesIntercessorsPlusPaints-USACANJPN.jpg?v=1783729421
+    priceGbp: 4.41
+    url: https://www.goblingaming.co.uk/products/citadel-shade-fuegan-orange-18ml-paint-bottle
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_24-20-99189953080-S_FueganOrange18MlRow.jpg?v=1791881945
     evidence:
-      - ret-tistaminis:warhammer-space-marine-intercessors-paints
+      - ret-goblingaming:citadel-shade-fuegan-orange-18ml-paint-bottle
+  - id: games-workshop/warhammer-shade-tyran-blue-18ml
+    name: 'Warhammer Shade: Tyran Blue - 18ml'
+    manufacturer: games-workshop
+    sku: '9918995306606'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceGbp: 4.41
+    url: https://www.goblingaming.co.uk/products/citadel-shade-tyran-blue-18ml-paint-bottle
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_10_24-33-99189953066-S_TYRANBLUE18MLROW.jpg?v=1791818997
+    evidence:
+      - ret-goblingaming:citadel-shade-tyran-blue-18ml-paint-bottle
   - id: games-workshop/warhammer-synthetic-base-brush-large
     name: 'Warhammer: Synthetic Base Brush - Large'
     manufacturer: games-workshop
@@ -2129,7 +1996,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 4.95
+    priceGbp: 5.18
     url: https://www.goblingaming.co.uk/products/synthetic-base-brush-large
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_63-07-99199999101-BRUSHBASE_LARGE___1.png?v=1779190695
     evidence:
@@ -2147,7 +2014,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 5.85
+    priceGbp: 6.08
     url: https://www.goblingaming.co.uk/products/synthetic-base-brush-x-large
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_EP210-63-08-99199999102-BRUSHBASE_EXTRALARGE.png?v=1779189506
     evidence:
@@ -2155,7 +2022,7 @@ products:
   - id: games-workshop/warhammer-synthetic-drybrush-large
     name: 'Warhammer: Synthetic Drybrush - Large'
     manufacturer: games-workshop
-    sku: '9919999907803'
+    sku: '9919999910503'
     gameSystemsBasis: not-applicable
     settingsBasis: not-applicable
     category: hobby-auxiliary
@@ -2165,7 +2032,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 5.01
+    priceGbp: 5.85
     url: https://www.goblingaming.co.uk/products/synthetic-drybrush-large
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_EP210-63-11-99199999105-BRUSHDRY_LARGE_4b16962e-0c35-4681-b648-97c6d8234f23.png?v=1779189222
     evidence:
@@ -2183,7 +2050,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 4.5
+    priceGbp: 4.73
     url: https://www.goblingaming.co.uk/products/synthetic-drybrush-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_EP210-63-10-99199999104-BRUSHDRY_MEDIUM_8fc4b922-3edd-4bc2-a99e-a5f51d271b2e.png?v=1779189366
     evidence:
@@ -2201,7 +2068,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 4.28
+    priceGbp: 4.41
     url: https://www.goblingaming.co.uk/products/synthetic-drybrush-small
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_BSA-63-09-99199999103-BRUSHDRY_SMALL_3b203dca-00ef-4598-9add-e89c9f6c172b.jpg?v=1779189738
     evidence:
@@ -2219,7 +2086,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 3.83
+    priceGbp: 3.96
     url: https://www.goblingaming.co.uk/products/synthetic-layer-brush-medium
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_BSA-63-02-99199999095-BRUSHLAYER_MEDIUM_f463ef37-980f-4c38-a69a-516b61d85d17.jpg?v=1779190502
     evidence:
@@ -2237,7 +2104,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 3.6
+    priceGbp: 3.78
     url: https://www.goblingaming.co.uk/products/synthetic-layer-brush-small
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_BSA-63-01-99199999094-BRUSHLAYER_SMALL_41a9b5cb-e84b-435a-8d0d-1c451c5df708.jpg?v=1779190589
     evidence:
@@ -2272,6 +2139,44 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_BSA-63-03-99199999097-BRUSHSHADE_MEDIUM_7ff15f5c-d2af-4dc2-94b6-ce929ce4f64a.png?v=1779190253
     evidence:
       - ret-goblingaming:synthetic-shade-brush-medium
+  - id: games-workshop/warhammer-tech-pro-blending-medium-18ml
+    name: 'Warhammer Tech Pro: Blending Medium - 18ml'
+    manufacturer: games-workshop
+    sku: '9918995613506'
+    ean: '5011921264254'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 4.41
+    url: https://www.goblingaming.co.uk/products/warhammer-tech-pro-blending-medium-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-27-37-99189956135-TE_BLENDINGMEDIUM18MLROW.jpg?v=1790959044
+    evidence:
+      - ret-goblingaming:warhammer-tech-pro-blending-medium-18ml
+  - id: games-workshop/warhammer-tech-pro-shading-medium-18ml
+    name: 'Warhammer Tech Pro: Shading Medium - 18ml'
+    manufacturer: games-workshop
+    sku: '9918995613606'
+    ean: '5011921264261'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 4.41
+    url: https://www.goblingaming.co.uk/products/warhammer-tech-pro-shading-medium-18ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-27-40-99189956136-TE_SHADINGMEDIUM18MLROW.jpg?v=1790959079
+    evidence:
+      - ret-goblingaming:warhammer-tech-pro-shading-medium-18ml
   - id: games-workshop/warhammer-the-horus-heresy-imperial-fists-legion-cataphractii-with-chainfist-1-18-scale-action-figure
     name: 'Warhammer: The Horus Heresy: Imperial Fists - Legion Cataphractii with Chainfist - 1/18 Scale Action Figure'
     manufacturer: games-workshop
@@ -2291,20 +2196,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-imperial-fists-legion-cataphractii-with-chainfist-1-18-scale-action-figure
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-imperial-fists-legion-cataphractii-with-chainfist-1-18-scale-action-figure
-  - id: games-workshop/warhammer-the-horus-heresy-journal-tactica-prospero-burns-the-judgement-of-valdor
-    name: 'Warhammer The Horus Heresy: Journal Tactica - Prospero Burns – The Judgement of Valdor'
-    manufacturer: games-workshop
-    sku: GWS31-154
-    ean: '9781837791897'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-11-04'
-    url: https://www.gamenerdz.com/warhammer-the-horus-heresy-journal-tactica-prospero-burns-the-judgement-of-valdor
-    evidence:
-      - ret-gamenerdz:/warhammer-the-horus-heresy-journal-tactica-prospero-burns-the-judgement-of-valdor
   - id: games-workshop/warhammer-the-horus-heresy-mechanicum-dice-set
     name: 'Warhammer The Horus Heresy: Mechanicum Dice Set'
     manufacturer: games-workshop
@@ -2325,22 +2216,2643 @@ products:
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-mechanicum-dice-set
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-mechanicum-dice-set
-  - id: games-workshop/warhammer-the-old-world-rulebook-revised-1st-edition
-    name: Warhammer The Old World Rulebook Revised 1st Edition
+  - id: games-workshop/warhammer-tone-pro-blackstone-void-1-12ml
+    name: 'Warhammer Tone Pro: Blackstone Void 1 - 12ml'
     manufacturer: games-workshop
-    sku: 05-02-1
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: book
-    categoryBasis: lexicon
+    sku: '9918996126606'
+    ean: '5011921275878'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
     status: current
     availability: in_stock
-    firstSeen: '2026-08-22'
-    priceCad: 88.0
-    url: https://tistaminis.com/products/warhammer-warhammer-the-old-world-rulebook-revised-1st-edition
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/05-02_1.jpg?v=1785718369
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blackstone-void-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-121-99189961266-TN_BLACKSTONEVOID112MLROW.jpg?v=1790952749
     evidence:
-      - ret-tistaminis:warhammer-warhammer-the-old-world-rulebook-revised-1st-edition
+      - ret-goblingaming:warhammer-tone-pro-blackstone-void-1-12ml
+  - id: games-workshop/warhammer-tone-pro-blackstone-void-2-12ml
+    name: 'Warhammer Tone Pro: Blackstone Void 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996126706'
+    ean: '5011921275885'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blackstone-void-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-122-99189961267-TN_BLACKSTONEVOID212MLROW.jpg?v=1790952808
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blackstone-void-2-12ml
+  - id: games-workshop/warhammer-tone-pro-blackstone-void-3-12ml
+    name: 'Warhammer Tone Pro: Blackstone Void 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996126806'
+    ean: '5011921275892'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blackstone-void-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-123-99189961268-TN_BLACKSTONEVOID312MLROW.jpg?v=1790952925
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blackstone-void-3-12ml
+  - id: games-workshop/warhammer-tone-pro-blackstone-void-4-12ml
+    name: 'Warhammer Tone Pro: Blackstone Void 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996126906'
+    ean: '5011921275908'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blackstone-void-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-124-99189961269-TN_BLACKSTONEVOID412MLROW.jpg?v=1790952961
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blackstone-void-4-12ml
+  - id: games-workshop/warhammer-tone-pro-blackstone-void-5-12ml
+    name: 'Warhammer Tone Pro: Blackstone Void 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996127006'
+    ean: '5011921275915'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blackstone-void-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-125-99189961270-TN_BLACKSTONEVOID512MLROW.jpg?v=1790953073
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blackstone-void-5-12ml
+  - id: games-workshop/warhammer-tone-pro-bloodtoof-red-1-12ml
+    name: 'Warhammer Tone Pro: Bloodtoof Red 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996128106'
+    ean: '5011921275977'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bloodtoof-red-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-151-99189961281-TN_BLOODTOOFRED112MLROW.jpg?v=1790953418
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bloodtoof-red-1-12ml
+  - id: games-workshop/warhammer-tone-pro-bloodtoof-red-2-12ml
+    name: 'Warhammer Tone Pro: Bloodtoof Red 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996128206'
+    ean: '5011921275984'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bloodtoof-red-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-152-99189961282-TN_BLOODTOOFRED212MLROW.jpg?v=1790953465
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bloodtoof-red-2-12ml
+  - id: games-workshop/warhammer-tone-pro-bloodtoof-red-3-12ml
+    name: 'Warhammer Tone Pro: Bloodtoof Red 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996128306'
+    ean: '5011921275991'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bloodtoof-red-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-153-99189961283-TNBLOODTOOFRED312MLROW.jpg?v=1790953505
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bloodtoof-red-3-12ml
+  - id: games-workshop/warhammer-tone-pro-bloodtoof-red-4-12ml
+    name: 'Warhammer Tone Pro: Bloodtoof Red 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996128406'
+    ean: '5011921276004'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bloodtoof-red-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-154-99189961284-TNBLOODTOOFRED412MLROW.jpg?v=1790953555
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bloodtoof-red-4-12ml
+  - id: games-workshop/warhammer-tone-pro-bloodtoof-red-5-12ml
+    name: 'Warhammer Tone Pro: Bloodtoof Red 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996128506'
+    ean: '5011921276011'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bloodtoof-red-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-155-99189961285-TN_BLOODTOOFRED512MLROW.jpg?v=1790953601
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bloodtoof-red-5-12ml
+  - id: games-workshop/warhammer-tone-pro-blue-gorkshroom-1-12ml
+    name: 'Warhammer Tone Pro: Blue Gorkshroom 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138106'
+    ean: '5011921277704'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blue-gorkshroom-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-351-99189961381-TN_BLUEGORKSHROOM112MLROW.jpg?v=1790957511
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blue-gorkshroom-1-12ml
+  - id: games-workshop/warhammer-tone-pro-blue-gorkshroom-2-12ml
+    name: 'Warhammer Tone Pro: Blue Gorkshroom 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138206'
+    ean: '5011921277711'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blue-gorkshroom-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-352-99189961382-TN_BLUEGORKSHROOM212MLROW.jpg?v=1790957561
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blue-gorkshroom-2-12ml
+  - id: games-workshop/warhammer-tone-pro-blue-gorkshroom-3-12ml
+    name: 'Warhammer Tone Pro: Blue Gorkshroom 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138306'
+    ean: '5011921277728'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blue-gorkshroom-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-353-99189961383-TN_BLUEGORKSHROOM312MLROW.jpg?v=1790957596
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blue-gorkshroom-3-12ml
+  - id: games-workshop/warhammer-tone-pro-blue-gorkshroom-4-12ml
+    name: 'Warhammer Tone Pro: Blue Gorkshroom 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138406'
+    ean: '5011921277735'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blue-gorkshroom-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-354-99189961384-TN_BLUEGORKSHROOM412MLROW.jpg?v=1790957632
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blue-gorkshroom-4-12ml
+  - id: games-workshop/warhammer-tone-pro-blue-gorkshroom-5-12ml
+    name: 'Warhammer Tone Pro: Blue Gorkshroom 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138506'
+    ean: '5011921277742'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-blue-gorkshroom-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-355-99189961385-TN_BLUEGORKSHROOM512MLROW.jpg?v=1790957664
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-blue-gorkshroom-5-12ml
+  - id: games-workshop/warhammer-tone-pro-bundle-blackstone-void-1-5
+    name: 'Warhammer Tone Pro Bundle - Blackstone Void: 1-5'
+    manufacturer: games-workshop
+    sku: BlackstoneVoidBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-blackstone-void-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-BlackstoneVoid1-5.png?v=1792402354
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-blackstone-void-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-bloodtoof-red-1-5
+    name: 'Warhammer Tone Pro Bundle - Bloodtoof Red: 1-5'
+    manufacturer: games-workshop
+    sku: BloodtoofRedBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-bloodtoof-red-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-BloodtoofRed1-5.png?v=1792402431
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-bloodtoof-red-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-blue-gorkshroom-1-5
+    name: 'Warhammer Tone Pro Bundle - Blue Gorkshroom: 1-5'
+    manufacturer: games-workshop
+    sku: BlueGorkshroomBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-blue-gorkshroom-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-BlueGorkshroom1-5.png?v=1792402409
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-blue-gorkshroom-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-carmine-blades-1-5
+    name: 'Warhammer Tone Pro Bundle - Carmine Blades: 1-5'
+    manufacturer: games-workshop
+    sku: CarmineBladeBundle
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-carmine-blades-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-CarmineBlades1-5.png?v=1792402434
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-carmine-blades-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-carthalos-skin-1-5
+    name: 'Warhammer Tone Pro Bundle - Carthalos Skin: 1-5'
+    manufacturer: games-workshop
+    sku: CarthalosSkinBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-carthalos-skin-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-CarthalosSkin1-5.png?v=1792402338
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-carthalos-skin-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-celestine-skin-1-5
+    name: 'Warhammer Tone Pro Bundle - Celestine Skin: 1-5'
+    manufacturer: games-workshop
+    sku: CelestineSkinBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-celestine-skin-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-CelestineSkin1-5.png?v=1792402343
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-celestine-skin-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-chotec-orange-1-5
+    name: 'Warhammer Tone Pro Bundle - Chotec Orange: 1-5'
+    manufacturer: games-workshop
+    sku: ChotecOrangeBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-chotec-orange-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-ChotecOrange1-5.png?v=1792402359
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-chotec-orange-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-craventhrone-cloak-1-5
+    name: 'Warhammer Tone Pro Bundle - Craventhrone Cloak: 1-5'
+    manufacturer: games-workshop
+    sku: CraventhroneCloakBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-craventhrone-cloak-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-CraventhroneCloak1-5.png?v=1792402398
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-craventhrone-cloak-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-dataslate-grey-1-5
+    name: 'Warhammer Tone Pro Bundle - Dataslate Grey: 1-5'
+    manufacturer: games-workshop
+    sku: DataslateGreyBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-dataslate-grey-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-DataslateGrey1-5.png?v=1792402347
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-dataslate-grey-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-enrapturess-dusk-1-5
+    name: 'Warhammer Tone Pro Bundle - Enrapturess Dusk: 1-5'
+    manufacturer: games-workshop
+    sku: EnrapturessDuskBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-enrapturess-dusk-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-EnrapturessDusk1-5.png?v=1792402420
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-enrapturess-dusk-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-eye-of-terror-1-5
+    name: 'Warhammer Tone Pro Bundle - Eye of Terror: 1-5'
+    manufacturer: games-workshop
+    sku: EyeofTerrorBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-eye-of-terror-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-EyeofTerror1-5.png?v=1792402427
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-eye-of-terror-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-gnarlwood-1-5
+    name: 'Warhammer Tone Pro Bundle - Gnarlwood: 1-5'
+    manufacturer: games-workshop
+    sku: GnarlwoodBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-gnarlwood-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-Gnarlwood1-5.png?v=1792399867
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-gnarlwood-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-green-morkshroom-1-5
+    name: 'Warhammer Tone Pro Bundle - Green Morkshroom: 1-5'
+    manufacturer: games-workshop
+    sku: GreenMorkshroomBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-green-morkshroom-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-GreenMorkshroom1-5.png?v=1792402391
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-green-morkshroom-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-hawkshroud-yellow-1-5
+    name: 'Warhammer Tone Pro Bundle - Hawkshroud Yellow: 1-5'
+    manufacturer: games-workshop
+    sku: HawkshroudYellowBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-hawkshroud-yellow-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-HawkshroudYellow1-5.png?v=1792402367
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-hawkshroud-yellow-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-hierotek-green-1-5
+    name: 'Warhammer Tone Pro Bundle - Hierotek Green: 1-5'
+    manufacturer: games-workshop
+    sku: HierotekGreenBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-hierotek-green-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-HierotekGreen1-5.png?v=1792402388
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-hierotek-green-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-hive-fleet-purple-1-5
+    name: 'Warhammer Tone Pro Bundle - Hive Fleet Purple: 1-5'
+    manufacturer: games-workshop
+    sku: HiveFleetPurpleBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-hive-fleet-purple-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-HiveFleetPurple1-5.png?v=1792402423
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-hive-fleet-purple-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-kasrkin-green-1-5
+    name: 'Warhammer Tone Pro Bundle - Kasrkin Green: 1-5'
+    manufacturer: games-workshop
+    sku: KasrkinGreenBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-kasrkin-green-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-KasrkinGreen1-5.png?v=1792402383
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-kasrkin-green-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-khemri-sands-1-5
+    name: 'Warhammer Tone Pro Bundle - Khemri Sands: 1-5'
+    manufacturer: games-workshop
+    sku: KhemriSandsBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-khemri-sands-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-KhemriSands1-5.png?v=1792401993
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-khemri-sands-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-kruleboyz-green-1-5
+    name: 'Warhammer Tone Pro Bundle - Kruleboyz Green: 1-5'
+    manufacturer: games-workshop
+    sku: KruleboyzGreenBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-kruleboyz-green-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-KruleboyzGreen1-5.png?v=1792402377
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-kruleboyz-green-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-lustria-green-1-5
+    name: 'Warhammer Tone Pro Bundle - Lustria Green: 1-5'
+    manufacturer: games-workshop
+    sku: LustiaGreenBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-lustria-green-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-LustriaGreen1-5.png?v=1792402380
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-lustria-green-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-magnus-the-red-1-5
+    name: 'Warhammer Tone Pro Bundle - Magnus The Red: 1-5'
+    manufacturer: games-workshop
+    sku: MagnusTheRedBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-magnus-the-red-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-MagnustheRed1-5.png?v=1792402425
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-magnus-the-red-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-megaboss-yellow-1-5
+    name: 'Warhammer Tone Pro Bundle - Megaboss Yellow: 1-5'
+    manufacturer: games-workshop
+    sku: MegabossYellowBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-megaboss-yellow-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-MegabossYellow1-5.png?v=1792402370
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-megaboss-yellow-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-necrolith-bone-1-5
+    name: 'Warhammer Tone Pro Bundle - Necrolith Bone: 1-5'
+    manufacturer: games-workshop
+    sku: NecrolithBoneBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-necrolith-bone-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-NecrolithBone1-5.png?v=1792402131
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-necrolith-bone-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-plague-toad-venom-1-5
+    name: 'Warhammer Tone Pro Bundle - Plague Toad Venom: 1-5'
+    manufacturer: games-workshop
+    sku: PlagueToadVenomBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-plague-toad-venom-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-PlagueToadVenom1-5.png?v=1792402372
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-plague-toad-venom-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-scinari-blue-1-5
+    name: 'Warhammer Tone Pro Bundle - Scinari Blue: 1-5'
+    manufacturer: games-workshop
+    sku: ScinariBlueBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-scinari-blue-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-ScinariBlue1-5.png?v=1792402405
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-scinari-blue-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-seraphon-blue-1-5
+    name: 'Warhammer Tone Pro Bundle - Seraphon Blue: 1-5'
+    manufacturer: games-workshop
+    sku: SeraphonBlueBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-seraphon-blue-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-SeraphonBlue1-5.png?v=1792402395
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-seraphon-blue-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-shalaxi-violet-1-5
+    name: 'Warhammer Tone Pro Bundle - Shalaxi Violet: 1-5'
+    manufacturer: games-workshop
+    sku: ShalaxiVioletBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-shalaxi-violet-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-ShalaxiViolet1-5.png?v=1792402416
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-shalaxi-violet-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-stormwolf-blue-1-5
+    name: 'Warhammer Tone Pro Bundle - Stormwolf Blue: 1-5'
+    manufacturer: games-workshop
+    sku: StormwolfBlueBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-stormwolf-blue-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-StormwolfBlue1-5.png?v=1792402402
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-stormwolf-blue-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-ta-unar-ochre-1-5
+    name: 'Warhammer Tone Pro Bundle - Ta''unar Ochre: 1-5'
+    manufacturer: games-workshop
+    sku: TaunarOchreBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-taunar-ochre-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-TaunarOchre1-5.png?v=1792402362
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-taunar-ochre-1-5
+  - id: games-workshop/warhammer-tone-pro-bundle-ultramar-blue-1-5
+    name: 'Warhammer Tone Pro Bundle - Ultramar Blue: 1-5'
+    manufacturer: games-workshop
+    sku: UltramarBlueBundle
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 18.45
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-bundle-ultramar-blue-1-5
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WarhammerTonePro-UltramarBlue1-5.png?v=1792402413
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-bundle-ultramar-blue-1-5
+  - id: games-workshop/warhammer-tone-pro-carmine-blades-1-12ml
+    name: 'Warhammer Tone Pro: Carmine Blades 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996127606'
+    ean: '5011921275922'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carmine-blades-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-141-99189961276-TN_CARMINEBLADES112MLROW.jpg?v=1790953116
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carmine-blades-1-12ml
+  - id: games-workshop/warhammer-tone-pro-carmine-blades-2-12ml
+    name: 'Warhammer Tone Pro: Carmine Blades 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996127706'
+    ean: '5011921275939'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carmine-blades-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-142-99189961277-TN_CARMINEBLADES212MLROW.jpg?v=1790953209
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carmine-blades-2-12ml
+  - id: games-workshop/warhammer-tone-pro-carmine-blades-3-12ml
+    name: 'Warhammer Tone Pro: Carmine Blades 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996127806'
+    ean: '5011921275946'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carmine-blades-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-143-99189961278-TN_CARMINEBLADES312MLROW.jpg?v=1790953260
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carmine-blades-3-12ml
+  - id: games-workshop/warhammer-tone-pro-carmine-blades-4-12ml
+    name: 'Warhammer Tone Pro: Carmine Blades 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996127906'
+    ean: '5011921275953'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carmine-blades-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-144-99189961279-TN_CARMINEBLADES412MLROW.jpg?v=1790953333
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carmine-blades-4-12ml
+  - id: games-workshop/warhammer-tone-pro-carmine-blades-5-12ml
+    name: 'Warhammer Tone Pro: Carmine Blades 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996128006'
+    ean: '5011921275960'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carmine-blades-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-145-99189961280-TN_CARMINEBLADES512MLROW.jpg?v=1790953375
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carmine-blades-5-12ml
+  - id: games-workshop/warhammer-tone-pro-carthalos-skin-1-12ml
+    name: 'Warhammer Tone Pro: Carthalos Skin 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996124106'
+    ean: '5011921275724'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carthalos-skin-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-071-99189961241-TN_CARTHALOSSKIN112MLROW.jpg?v=1790951672
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carthalos-skin-1-12ml
+  - id: games-workshop/warhammer-tone-pro-carthalos-skin-2-12ml
+    name: 'Warhammer Tone Pro: Carthalos Skin 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996124206'
+    ean: '5011921275731'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carthalos-skin-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-072-99189961242-TN_CARTHALOSSKIN212MLROW.jpg?v=1790951726
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carthalos-skin-2-12ml
+  - id: games-workshop/warhammer-tone-pro-carthalos-skin-3-12ml
+    name: 'Warhammer Tone Pro: Carthalos Skin 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996124306'
+    ean: '5011921275748'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carthalos-skin-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-073-99189961243-TN_CARTHALOSSKIN312MLROW.jpg?v=1790951766
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carthalos-skin-3-12ml
+  - id: games-workshop/warhammer-tone-pro-carthalos-skin-4-12ml
+    name: 'Warhammer Tone Pro: Carthalos Skin 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996124406'
+    ean: '5011921275755'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carthalos-skin-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-074-99189961244-TN_CARTHALOSSKIN412MLROW.jpg?v=1790951809
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carthalos-skin-4-12ml
+  - id: games-workshop/warhammer-tone-pro-carthalos-skin-5-12ml
+    name: 'Warhammer Tone Pro: Carthalos Skin 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996124506'
+    ean: '5011921275762'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-carthalos-skin-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-075-99189961245-TN_CARTHALOSSKIN512MLROW.jpg?v=1790951851
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-carthalos-skin-5-12ml
+  - id: games-workshop/warhammer-tone-pro-celestine-skin-1-12ml
+    name: 'Warhammer Tone Pro: Celestine Skin 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125106'
+    ean: '5011921275779'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-celestine-skin-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-091-99189961251-TN_CELESTINESKIN112MLROW.jpg?v=1790951896
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-celestine-skin-1-12ml
+  - id: games-workshop/warhammer-tone-pro-celestine-skin-2-12ml
+    name: 'Warhammer Tone Pro: Celestine Skin 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125206'
+    ean: '5011921275786'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-celestine-skin-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-092-99189961252-TN_CELESTINESKIN212MLROW.jpg?v=1790951932
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-celestine-skin-2-12ml
+  - id: games-workshop/warhammer-tone-pro-celestine-skin-3-12ml
+    name: 'Warhammer Tone Pro: Celestine Skin 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125306'
+    ean: '5011921275793'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-celestine-skin-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-093-99189961253-TN_CELESTINESKIN312MLROW.jpg?v=1790952330
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-celestine-skin-3-12ml
+  - id: games-workshop/warhammer-tone-pro-celestine-skin-4-12ml
+    name: 'Warhammer Tone Pro: Celestine Skin 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125406'
+    ean: '5011921275809'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-celestine-skin-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-094-99189961254-TN_CELESTINESKIN412MLROW.jpg?v=1790952370
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-celestine-skin-4-12ml
+  - id: games-workshop/warhammer-tone-pro-celestine-skin-5-12ml
+    name: 'Warhammer Tone Pro: Celestine Skin 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125506'
+    ean: '5011921275816'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-celestine-skin-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-095-99189961255-TN_CELESTINESKIN512MLROW.jpg?v=1790952419
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-celestine-skin-5-12ml
+  - id: games-workshop/warhammer-tone-pro-chotec-orange-1-12ml
+    name: 'Warhammer Tone Pro: Chotec Orange 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129106'
+    ean: '5011921276028'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-chotec-orange-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-171-99189961291-TN_CHOTECORANGE112MLROW.jpg?v=1790953641
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-chotec-orange-1-12ml
+  - id: games-workshop/warhammer-tone-pro-chotec-orange-2-12ml
+    name: 'Warhammer Tone Pro: Chotec Orange 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129206'
+    ean: '5011921276035'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-chotec-orange-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-172-99189961292-TN_CHOTECORANGE212MLROW.jpg?v=1790953696
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-chotec-orange-2-12ml
+  - id: games-workshop/warhammer-tone-pro-chotec-orange-3-12ml
+    name: 'Warhammer Tone Pro: Chotec Orange 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129306'
+    ean: '5011921276042'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-chotec-orange-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-173-99189961293-TN_CHOTECORANGE312MLROW.jpg?v=1790953779
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-chotec-orange-3-12ml
+  - id: games-workshop/warhammer-tone-pro-chotec-orange-4-12ml
+    name: 'Warhammer Tone Pro: Chotec Orange 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129406'
+    ean: '5011921276059'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-chotec-orange-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-174-99189961294-TN_CHOTECORANGE412MLROW.jpg?v=1790953818
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-chotec-orange-4-12ml
+  - id: games-workshop/warhammer-tone-pro-chotec-orange-5-12ml
+    name: 'Warhammer Tone Pro: Chotec Orange 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129506'
+    ean: '5011921276066'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-chotec-orange-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-175-99189961295-TN_CHOTECORANGE512MLROW.jpg?v=1790953860
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-chotec-orange-5-12ml
+  - id: games-workshop/warhammer-tone-pro-craventhrone-cloak-1-12ml
+    name: 'Warhammer Tone Pro: Craventhrone Cloak 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996136106'
+    ean: '5011921277292'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-craventhrone-cloak-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-311-99189961361-TN_CRAVENTHRONECLOAK112MLROW.jpg?v=1790956863
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-craventhrone-cloak-1-12ml
+  - id: games-workshop/warhammer-tone-pro-craventhrone-cloak-2-12ml
+    name: 'Warhammer Tone Pro: Craventhrone Cloak 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996136206'
+    ean: '5011921277315'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-craventhrone-cloak-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-312-99189961362-TN_CRAVENTHRONECLOAK212MLROW.jpg?v=1790956908
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-craventhrone-cloak-2-12ml
+  - id: games-workshop/warhammer-tone-pro-craventhrone-cloak-3-12ml
+    name: 'Warhammer Tone Pro: Craventhrone Cloak 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996136306'
+    ean: '5011921277346'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-craventhrone-cloak-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-313-99189961363-TN_CRAVENTHRONECLOAK312MLROW.jpg?v=1790956943
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-craventhrone-cloak-3-12ml
+  - id: games-workshop/warhammer-tone-pro-craventhrone-cloak-4-12ml
+    name: 'Warhammer Tone Pro: Craventhrone Cloak 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996136406'
+    ean: '5011921277360'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-craventhrone-cloak-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-314-99189961364-TN_CRAVENTHRONECLOAK412MLROW.jpg?v=1790956977
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-craventhrone-cloak-4-12ml
+  - id: games-workshop/warhammer-tone-pro-craventhrone-cloak-5-12ml
+    name: 'Warhammer Tone Pro: Craventhrone Cloak 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996136506'
+    ean: '5011921277391'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-craventhrone-cloak-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-315-99189961365-TN_CRAVENTHRONECLOAK512MLROW.jpg?v=1790957010
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-craventhrone-cloak-5-12ml
+  - id: games-workshop/warhammer-tone-pro-dataslate-grey-1-12ml
+    name: 'Warhammer Tone Pro: Dataslate Grey 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125606'
+    ean: '5011921275823'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-dataslate-grey-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-101-99189961256-TN_DATASLATEGREY112MLROW.jpg?v=1790952470
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-dataslate-grey-1-12ml
+  - id: games-workshop/warhammer-tone-pro-dataslate-grey-2-12ml
+    name: 'Warhammer Tone Pro: Dataslate Grey 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125706'
+    ean: '5011921275830'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-dataslate-grey-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-102-99189961257-TN_DATASLATEGREY212MLROW.jpg?v=1790952518
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-dataslate-grey-2-12ml
+  - id: games-workshop/warhammer-tone-pro-dataslate-grey-3-12ml
+    name: 'Warhammer Tone Pro: Dataslate Grey 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125806'
+    ean: '5011921275847'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-dataslate-grey-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-103-99189961258-TN_DATASLATEGREY312MLROW.jpg?v=1790952563
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-dataslate-grey-3-12ml
+  - id: games-workshop/warhammer-tone-pro-dataslate-grey-4-12ml
+    name: 'Warhammer Tone Pro: Dataslate Grey 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996125906'
+    ean: '5011921275854'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-dataslate-grey-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-104-99189961259-TN_DATASLATEGREY412MLROW.jpg?v=1790952606
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-dataslate-grey-4-12ml
+  - id: games-workshop/warhammer-tone-pro-dataslate-grey-5-12ml
+    name: 'Warhammer Tone Pro: Dataslate Grey 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996126006'
+    ean: '5011921275861'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-dataslate-grey-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-105-99189961260-TN_DATASLATEGREY512MLROW.jpg?v=1790952656
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-dataslate-grey-5-12ml
+  - id: games-workshop/warhammer-tone-pro-enrapturess-dusk-1-12ml
+    name: 'Warhammer Tone Pro: Enrapturess Dusk 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139606'
+    ean: '5011921277858'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-enrapturess-dusk-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-381-99189961396-TN_ENRAPTURESSDUSK112MLROW.jpg?v=1790958275
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-enrapturess-dusk-1-12ml
+  - id: games-workshop/warhammer-tone-pro-enrapturess-dusk-2-12ml
+    name: 'Warhammer Tone Pro: Enrapturess Dusk 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139706'
+    ean: '5011921277865'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-enrapturess-dusk-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-382-99189961397-TN_ENRAPTURESSDUSK212MLROW.jpg?v=1790958310
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-enrapturess-dusk-2-12ml
+  - id: games-workshop/warhammer-tone-pro-enrapturess-dusk-3-12ml
+    name: 'Warhammer Tone Pro: Enrapturess Dusk 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139806'
+    ean: '5011921277872'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-enrapturess-dusk-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-383-99189961398-TN_ENRAPTURESSDUSK312MLROW.jpg?v=1790958349
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-enrapturess-dusk-3-12ml
+  - id: games-workshop/warhammer-tone-pro-enrapturess-dusk-4-12ml
+    name: 'Warhammer Tone Pro: Enrapturess Dusk 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139906'
+    ean: '5011921277889'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-enrapturess-dusk-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-384-99189961399-TN_ENRAPTURESSDUSK412MLROW.jpg?v=1790958387
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-enrapturess-dusk-4-12ml
+  - id: games-workshop/warhammer-tone-pro-enrapturess-dusk-5-12ml
+    name: 'Warhammer Tone Pro: Enrapturess Dusk 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140006'
+    ean: '5011921277896'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-enrapturess-dusk-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-385-99189961400-TN_ENRAPTURESSDUSK512MLROW.jpg?v=1790958421
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-enrapturess-dusk-5-12ml
+  - id: games-workshop/warhammer-tone-pro-eye-of-terror-1-12ml
+    name: 'Warhammer Tone Pro: Eye of Terror 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996141106'
+    ean: '5011921278008'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-eye-of-terror-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-411-99189961411-TN_EYEOFTERROR112MLROW.jpg?v=1790958857
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-eye-of-terror-1-12ml
+  - id: games-workshop/warhammer-tone-pro-eye-of-terror-2-12ml
+    name: 'Warhammer Tone Pro: Eye of Terror 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996141206'
+    ean: '5011921278015'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-eye-of-terror-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-412-99189961412-TN_EYEOFTERROR212MLROW.jpg?v=1790958889
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-eye-of-terror-2-12ml
+  - id: games-workshop/warhammer-tone-pro-eye-of-terror-3-12ml
+    name: 'Warhammer Tone Pro: Eye of Terror 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996141306'
+    ean: '5011921278022'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-eye-of-terror-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-413-99189961413-TN_EYEOFTERROR312MLROW.jpg?v=1790958921
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-eye-of-terror-3-12ml
+  - id: games-workshop/warhammer-tone-pro-eye-of-terror-4-12ml
+    name: 'Warhammer Tone Pro: Eye of Terror 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996141406'
+    ean: '5011921278039'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-eye-of-terror-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-414-99189961414-TN_EYEOFTERROR412MLROW.jpg?v=1790958962
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-eye-of-terror-4-12ml
+  - id: games-workshop/warhammer-tone-pro-eye-of-terror-5-12ml
+    name: 'Warhammer Tone Pro: Eye of Terror 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996141506'
+    ean: '5011921278053'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-eye-of-terror-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-415-99189961415-TN_EYEOFTERROR512MLROW.jpg?v=1790959005
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-eye-of-terror-5-12ml
+  - id: games-workshop/warhammer-tone-pro-gnarlwood-1-12ml
+    name: 'Warhammer Tone Pro: Gnarlwood 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996121606'
+    ean: '5011921275571'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-gnarlwood-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-021-99189961216-TN_GNARLWOOD112MLROW.jpg?v=1790950798
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-gnarlwood-1-12ml
+  - id: games-workshop/warhammer-tone-pro-gnarlwood-2-12ml
+    name: 'Warhammer Tone Pro: Gnarlwood 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996121706'
+    ean: '5011921275588'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-gnarlwood-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-022-99189961217-TN_GNARLWOOD212MLROW.jpg?v=1790950846
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-gnarlwood-2-12ml
+  - id: games-workshop/warhammer-tone-pro-gnarlwood-3-12ml
+    name: 'Warhammer Tone Pro: Gnarlwood 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996121806'
+    ean: '5011921275595'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-gnarlwood-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-023-99189961218-TN_GNARLWOOD312MLROW.jpg?v=1790950902
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-gnarlwood-3-12ml
+  - id: games-workshop/warhammer-tone-pro-gnarlwood-4-12ml
+    name: 'Warhammer Tone Pro: Gnarlwood 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996121906'
+    ean: '5011921275601'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-gnarlwood-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-024-99189961219-TN_GNARLWOOD412MLROW.jpg?v=1790950946
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-gnarlwood-4-12ml
+  - id: games-workshop/warhammer-tone-pro-gnarlwood-5-12ml
+    name: 'Warhammer Tone Pro: Gnarlwood 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996122006'
+    ean: '5011921275618'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-gnarlwood-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-025-99189961220-TN_GNARLWOOD512MLROW.jpg?v=1790951023
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-gnarlwood-5-12ml
+  - id: games-workshop/warhammer-tone-pro-green-morkshroom-1-12ml
+    name: 'Warhammer Tone Pro: Green Morkshroom 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134606'
+    ean: '5011921277063'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-green-morkshroom-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-281-99189961346-TN_GREENMORKSHROOM112MLROW.jpg?v=1790956305
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-green-morkshroom-1-12ml
+  - id: games-workshop/warhammer-tone-pro-green-morkshroom-2-12ml
+    name: 'Warhammer Tone Pro: Green Morkshroom 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134706'
+    ean: '5011921277087'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-green-morkshroom-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-282-99189961347-TN_GREENMORKSHROOM212MLROW.jpg?v=1790956354
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-green-morkshroom-2-12ml
+  - id: games-workshop/warhammer-tone-pro-green-morkshroom-3-12ml
+    name: 'Warhammer Tone Pro: Green Morkshroom 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134806'
+    ean: '5011921277117'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-green-morkshroom-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-283-99189961348-TN_GREENMORKSHROOM312MLROW.jpg?v=1790956409
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-green-morkshroom-3-12ml
+  - id: games-workshop/warhammer-tone-pro-green-morkshroom-4-12ml
+    name: 'Warhammer Tone Pro: Green Morkshroom 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134906'
+    ean: '5011921277131'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-green-morkshroom-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-284-99189961349-TN_GREENMORKSHROOM412MLROW.jpg?v=1790956517
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-green-morkshroom-4-12ml
+  - id: games-workshop/warhammer-tone-pro-green-morkshroom-5-12ml
+    name: 'Warhammer Tone Pro: Green Morkshroom 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996135006'
+    ean: '5011921277155'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-green-morkshroom-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-285-99189961350-TN_GREENMORKSHROOM512MLROW.jpg?v=1790956559
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-green-morkshroom-5-12ml
+  - id: games-workshop/warhammer-tone-pro-hawkshroud-yellow-1-12ml
+    name: 'Warhammer Tone Pro: Hawkshroud Yellow 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130106'
+    ean: '5011921276127'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hawkshroud-yellow-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-191-99189961301-TN_HAWKSHROUDYELLOW112MLROW.jpg?v=1790954371
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hawkshroud-yellow-1-12ml
+  - id: games-workshop/warhammer-tone-pro-hawkshroud-yellow-2-12ml
+    name: 'Warhammer Tone Pro: Hawkshroud Yellow 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130206'
+    ean: '5011921276134'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hawkshroud-yellow-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-192-99189961302-TN_HAWKSHROUDYELLOW212MLROW.jpg?v=1790954429
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hawkshroud-yellow-2-12ml
+  - id: games-workshop/warhammer-tone-pro-hawkshroud-yellow-3-12ml
+    name: 'Warhammer Tone Pro: Hawkshroud Yellow 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130306'
+    ean: '5011921276141'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hawkshroud-yellow-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-193-99189961303-TN_HAWKSHROUDYELLOW312MLROW.jpg?v=1790954477
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hawkshroud-yellow-3-12ml
+  - id: games-workshop/warhammer-tone-pro-hawkshroud-yellow-4-12ml
+    name: 'Warhammer Tone Pro: Hawkshroud Yellow 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130406'
+    ean: '5011921276158'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hawkshroud-yellow-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-194-99189961304-TN_HAWKSHROUDYELLOW412MLROW.jpg?v=1790954539
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hawkshroud-yellow-4-12ml
+  - id: games-workshop/warhammer-tone-pro-hawkshroud-yellow-5-12ml
+    name: 'Warhammer Tone Pro: Hawkshroud Yellow 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130506'
+    ean: '5011921276165'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hawkshroud-yellow-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-195-99189961305-TN_HAWKSHROUDYELLOW512MLROW.jpg?v=1790954582
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hawkshroud-yellow-5-12ml
+  - id: games-workshop/warhammer-tone-pro-hierotek-green-1-12ml
+    name: 'Warhammer Tone Pro: Hierotek Green 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134106'
+    ean: '5011921276943'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hierotek-green-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-271-99189961341-TN_HIEROTEKGREEN112MLROW.jpg?v=1790955899
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hierotek-green-1-12ml
+  - id: games-workshop/warhammer-tone-pro-hierotek-green-2-12ml
+    name: 'Warhammer Tone Pro: Hierotek Green 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134206'
+    ean: '5011921276974'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hierotek-green-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-272-99189961342-TN_HIEROTEKGREEN212MLROW.jpg?v=1790955942
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hierotek-green-2-12ml
+  - id: games-workshop/warhammer-tone-pro-hierotek-green-3-12ml
+    name: 'Warhammer Tone Pro: Hierotek Green 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134306'
+    ean: '5011921276998'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hierotek-green-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-273-99189961343-TN_HIEROTEKGREEN312MLROW.jpg?v=1790955979
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hierotek-green-3-12ml
+  - id: games-workshop/warhammer-tone-pro-hierotek-green-4-12ml
+    name: 'Warhammer Tone Pro: Hierotek Green 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134406'
+    ean: '5011921277018'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hierotek-green-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-274-99189961344-TN_HIEROTEKGREEN412MLROW.jpg?v=1790956048
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hierotek-green-4-12ml
+  - id: games-workshop/warhammer-tone-pro-hierotek-green-5-12ml
+    name: 'Warhammer Tone Pro: Hierotek Green 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134506'
+    ean: '5011921277032'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hierotek-green-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-275-99189961345-TN_HIEROTEKGREEN512MLROW.jpg?v=1790956147
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hierotek-green-5-12ml
+  - id: games-workshop/warhammer-tone-pro-hive-fleet-purple-1-12ml
+    name: 'Warhammer Tone Pro: Hive Fleet Purple 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140106'
+    ean: '5011921277902'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hive-fleet-purple-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-391-99189961401-TN_HIVEFLEETPURPLE112MLROW.jpg?v=1790958455
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hive-fleet-purple-1-12ml
+  - id: games-workshop/warhammer-tone-pro-hive-fleet-purple-2-12ml
+    name: 'Warhammer Tone Pro: Hive Fleet Purple 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140206'
+    ean: '5011921277919'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hive-fleet-purple-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-392-99189961402-TN_HIVEFLEETPURPLE212MLROW.jpg?v=1790958494
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hive-fleet-purple-2-12ml
+  - id: games-workshop/warhammer-tone-pro-hive-fleet-purple-3-12ml
+    name: 'Warhammer Tone Pro: Hive Fleet Purple 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140306'
+    ean: '5011921277926'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hive-fleet-purple-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-393-99189961403-TN_HIVEFLEETPURPLE312MLROW.jpg?v=1790958526
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hive-fleet-purple-3-12ml
+  - id: games-workshop/warhammer-tone-pro-hive-fleet-purple-4-12ml
+    name: 'Warhammer Tone Pro: Hive Fleet Purple 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140406'
+    ean: '5011921277933'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hive-fleet-purple-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-394-99189961404-TN_HIVEFLEETPURPLE412MLROW.jpg?v=1790958563
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hive-fleet-purple-4-12ml
+  - id: games-workshop/warhammer-tone-pro-hive-fleet-purple-5-12ml
+    name: 'Warhammer Tone Pro: Hive Fleet Purple 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140506'
+    ean: '5011921277940'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-hive-fleet-purple-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-395-99189961405-TN_HIVEFLEETPURPLE512MLROW.jpg?v=1790958602
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-hive-fleet-purple-5-12ml
+  - id: games-workshop/warhammer-tone-pro-kasrkin-green-1-12ml
+    name: 'Warhammer Tone Pro: Kasrkin Green 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133606'
+    ean: '5011921276370'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kasrkin-green-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-261-99189961336-TN_KASRKINGREEN112MLROW.jpg?v=1790955607
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kasrkin-green-1-12ml
+  - id: games-workshop/warhammer-tone-pro-kasrkin-green-2-12ml
+    name: 'Warhammer Tone Pro: Kasrkin Green 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133706'
+    ean: '5011921276387'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kasrkin-green-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-262-99189961337-TN_KASRKINGREEN212MLROW.jpg?v=1790955699
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kasrkin-green-2-12ml
+  - id: games-workshop/warhammer-tone-pro-kasrkin-green-3-12ml
+    name: 'Warhammer Tone Pro: Kasrkin Green 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133806'
+    ean: '5011921276394'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kasrkin-green-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-263-99189961338-TN_KASRKINGREEN312MLROW.jpg?v=1790955740
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kasrkin-green-3-12ml
+  - id: games-workshop/warhammer-tone-pro-kasrkin-green-4-12ml
+    name: 'Warhammer Tone Pro: Kasrkin Green 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133906'
+    ean: '5011921276400'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kasrkin-green-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-264-99189961339-TN_KASRKINGREEN412MLROW.jpg?v=1790955785
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kasrkin-green-4-12ml
+  - id: games-workshop/warhammer-tone-pro-kasrkin-green-5-12ml
+    name: 'Warhammer Tone Pro: Kasrkin Green 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996134006'
+    ean: '5011921276417'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kasrkin-green-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-265-99189961340-TN_KASRKINGREEN512MLROW.jpg?v=1790955838
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kasrkin-green-5-12ml
+  - id: games-workshop/warhammer-tone-pro-khemri-sands-1-12ml
+    name: 'Warhammer Tone Pro: Khemri Sands 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996122106'
+    ean: '5011921275625'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-khemri-sands-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-031-99189961221-TN_KHEMRISANDS112MLROW.jpg?v=1790951095
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-khemri-sands-1-12ml
+  - id: games-workshop/warhammer-tone-pro-khemri-sands-2-12ml
+    name: 'Warhammer Tone Pro: Khemri Sands 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996122206'
+    ean: '5011921275632'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-khemri-sands-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-032-99189961222-TN_KHEMRISANDS212MLROW.jpg?v=1790951144
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-khemri-sands-2-12ml
+  - id: games-workshop/warhammer-tone-pro-khemri-sands-3-12ml
+    name: 'Warhammer Tone Pro: Khemri Sands 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996122306'
+    ean: '5011921275649'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-khemri-sands-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-033-99189961223-TN_KHEMRISANDS312MLROW.jpg?v=1790951184
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-khemri-sands-3-12ml
+  - id: games-workshop/warhammer-tone-pro-khemri-sands-4-12ml
+    name: 'Warhammer Tone Pro: Khemri Sands 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996122406'
+    ean: '5011921275656'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-khemri-sands-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-034-99189961224-TN_KHEMRISANDS412MLROW.jpg?v=1790951255
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-khemri-sands-4-12ml
+  - id: games-workshop/warhammer-tone-pro-khemri-sands-5-12ml
+    name: 'Warhammer Tone Pro: Khemri Sands 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996122506'
+    ean: '5011921275663'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-khemri-sands-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-035-99189961225-TN_KHEMRISANDS512MLROW.jpg?v=1790951319
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-khemri-sands-5-12ml
+  - id: games-workshop/warhammer-tone-pro-kruleboyz-green-1-12ml
+    name: 'Warhammer Tone Pro: Kruleboyz Green 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131606'
+    ean: '5011921276271'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kruleboyz-green-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-221-99189961316-TN_KRULEBOYZGREEN112MLROW.jpg?v=1790955070
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kruleboyz-green-1-12ml
+  - id: games-workshop/warhammer-tone-pro-kruleboyz-green-2-12ml
+    name: 'Warhammer Tone Pro: Kruleboyz Green 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131706'
+    ean: '5011921276288'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kruleboyz-green-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-222-99189961317-TN_KRULEBOYZGREEN212MLROW.jpg?v=1790955121
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kruleboyz-green-2-12ml
+  - id: games-workshop/warhammer-tone-pro-kruleboyz-green-3-12ml
+    name: 'Warhammer Tone Pro: Kruleboyz Green 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131806'
+    ean: '5011921276295'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kruleboyz-green-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-223-99189961318-TN_KRULEBOYZGREEN312MLROW.jpg?v=1790955165
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kruleboyz-green-3-12ml
+  - id: games-workshop/warhammer-tone-pro-kruleboyz-green-4-12ml
+    name: 'Warhammer Tone Pro: Kruleboyz Green 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131906'
+    ean: '5011921276301'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kruleboyz-green-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-224-99189961319-TN_KRULEBOYZGREEN412MLROW.jpg?v=1790955312
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kruleboyz-green-4-12ml
+  - id: games-workshop/warhammer-tone-pro-kruleboyz-green-5-12ml
+    name: 'Warhammer Tone Pro: Kruleboyz Green 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996132006'
+    ean: '5011921276318'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-kruleboyz-green-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-225-99189961320-TN_KRULEBOYZGREEN512MLROW.jpg?v=1790955352
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-kruleboyz-green-5-12ml
+  - id: games-workshop/warhammer-tone-pro-lustria-green-1-12ml
+    name: 'Warhammer Tone Pro: Lustria Green 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133106'
+    ean: '5011921276325'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-lustria-green-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-251-99189961331-TN_LUSTRIAGREEN112MLROW.jpg?v=1790955399
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-lustria-green-1-12ml
+  - id: games-workshop/warhammer-tone-pro-lustria-green-2-12ml
+    name: 'Warhammer Tone Pro: Lustria Green 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133206'
+    ean: '5011921276332'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-lustria-green-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-252-99189961332-TN_LUSTRIAGREEN212MLROW.jpg?v=1790955442
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-lustria-green-2-12ml
+  - id: games-workshop/warhammer-tone-pro-lustria-green-3-12ml
+    name: 'Warhammer Tone Pro: Lustria Green 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133306'
+    ean: '5011921276349'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-lustria-green-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-253-99189961333-TN_LUSTRIAGREEN312MLROW.jpg?v=1790955474
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-lustria-green-3-12ml
+  - id: games-workshop/warhammer-tone-pro-lustria-green-4-12ml
+    name: 'Warhammer Tone Pro: Lustria Green 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133406'
+    ean: '5011921276356'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-lustria-green-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-254-99189961334-TN_LUSTRIAGREEN412MLROW.jpg?v=1790955524
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-lustria-green-4-12ml
+  - id: games-workshop/warhammer-tone-pro-lustria-green-5-12ml
+    name: 'Warhammer Tone Pro: Lustria Green 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996133506'
+    ean: '5011921276363'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-lustria-green-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-255-99189961335-TN_LUSTRIAGREEN512MLROW.jpg?v=1790955564
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-lustria-green-5-12ml
+  - id: games-workshop/warhammer-tone-pro-magnus-the-red-1-12ml
+    name: 'Warhammer Tone Pro: Magnus the Red 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140606'
+    ean: '5011921277957'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-magnus-the-red-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-401-99189961406-TN_MAGNUSTHERED112MLROW.jpg?v=1790958645
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-magnus-the-red-1-12ml
+  - id: games-workshop/warhammer-tone-pro-magnus-the-red-2-12ml
+    name: 'Warhammer Tone Pro: Magnus the Red 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140706'
+    ean: '5011921277964'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-magnus-the-red-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-402-99189961407-TN_MAGNUSTHERED212MLROW.jpg?v=1790958701
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-magnus-the-red-2-12ml
+  - id: games-workshop/warhammer-tone-pro-magnus-the-red-3-12ml
+    name: 'Warhammer Tone Pro: Magnus the Red 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140806'
+    ean: '5011921277971'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-magnus-the-red-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-403-99189961408-TN_MAGNUSTHERED312MLROW.jpg?v=1790958740
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-magnus-the-red-3-12ml
+  - id: games-workshop/warhammer-tone-pro-magnus-the-red-4-12ml
+    name: 'Warhammer Tone Pro: Magnus the Red 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996140906'
+    ean: '5011921277988'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-magnus-the-red-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-404-99189961409-TN_MAGNUSTHERED412MLROW.jpg?v=1790958777
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-magnus-the-red-4-12ml
+  - id: games-workshop/warhammer-tone-pro-magnus-the-red-5-12ml
+    name: 'Warhammer Tone Pro: Magnus the Red 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996141006'
+    ean: '5011921277995'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-magnus-the-red-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-405-99189961410-TN_MAGNUSTHERED512MLROW.jpg?v=1790958821
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-magnus-the-red-5-12ml
+  - id: games-workshop/warhammer-tone-pro-megaboss-yellow-1-12ml
+    name: 'Warhammer Tone Pro: Megaboss Yellow 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130606'
+    ean: '5011921276172'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-megaboss-yellow-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-201-99189961306-TN_MEGABOSSYELLOW112MLROW.jpg?v=1790954621
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-megaboss-yellow-1-12ml
+  - id: games-workshop/warhammer-tone-pro-megaboss-yellow-2-12ml
+    name: 'Warhammer Tone Pro: Megaboss Yellow 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130706'
+    ean: '5011921276189'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-megaboss-yellow-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-202-99189961307-TN_MEGABOSSYELLOW212MLROW.jpg?v=1790954660
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-megaboss-yellow-2-12ml
+  - id: games-workshop/warhammer-tone-pro-megaboss-yellow-3-12ml
+    name: 'Warhammer Tone Pro: Megaboss Yellow 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130806'
+    ean: '5011921276196'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-megaboss-yellow-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-203-99189961308-TN_MEGABOSSYELLOW312MLROW.jpg?v=1790954710
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-megaboss-yellow-3-12ml
+  - id: games-workshop/warhammer-tone-pro-megaboss-yellow-4-12ml
+    name: 'Warhammer Tone Pro: Megaboss Yellow 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130906'
+    ean: '5011921276202'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-megaboss-yellow-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-204-99189961309-TN_MEGABOSSYELLOW412MLROW.jpg?v=1790954754
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-megaboss-yellow-4-12ml
+  - id: games-workshop/warhammer-tone-pro-megaboss-yellow-5-12ml
+    name: 'Warhammer Tone Pro: Megaboss Yellow 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131006'
+    ean: '5011921276219'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-megaboss-yellow-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-205-99189961310-TN_MEGABOSSYELLOW512MLROW.jpg?v=1790954796
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-megaboss-yellow-5-12ml
+  - id: games-workshop/warhammer-tone-pro-necrolith-bone-1-12ml
+    name: 'Warhammer Tone Pro: Necrolith Bone 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996123106'
+    ean: '5011921275670'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-necrolith-bone-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-051-99189961231-TN_NECROLITHBONE112MLROW.jpg?v=1790951409
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-necrolith-bone-1-12ml
+  - id: games-workshop/warhammer-tone-pro-necrolith-bone-2-12ml
+    name: 'Warhammer Tone Pro: Necrolith Bone 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996123206'
+    ean: '5011921275687'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-necrolith-bone-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-052-99189961232-TN_NECROLITHBONE212MLROW.jpg?v=1790951480
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-necrolith-bone-2-12ml
+  - id: games-workshop/warhammer-tone-pro-necrolith-bone-3-12ml
+    name: 'Warhammer Tone Pro: Necrolith Bone 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996123306'
+    ean: '5011921275694'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-necrolith-bone-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-053-99189961233-TN_NECROLITHBONE312MLROW.jpg?v=1790951524
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-necrolith-bone-3-12ml
+  - id: games-workshop/warhammer-tone-pro-necrolith-bone-4-12ml
+    name: 'Warhammer Tone Pro: Necrolith Bone 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996123406'
+    ean: '5011921275700'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-necrolith-bone-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-054-99189961234-TN_NECROLITHBONE412MLROW.jpg?v=1790951588
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-necrolith-bone-4-12ml
+  - id: games-workshop/warhammer-tone-pro-necrolith-bone-5-12ml
+    name: 'Warhammer Tone Pro: Necrolith Bone 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996123506'
+    ean: '5011921275717'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-necrolith-bone-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-055-99189961235-TN_NECROLITHBONE512MLROW.jpg?v=1790951631
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-necrolith-bone-5-12ml
   - id: games-workshop/warhammer-tone-pro-paint-blackstone-void-1-12ml
     name: 'Warhammer Tone Pro Paint: Blackstone Void 1 (12ml)'
     manufacturer: games-workshop
@@ -4741,6 +7253,671 @@ products:
     url: https://www.gamenerdz.com/warhammer-tone-pro-paint-ultramar-blue-5-12ml
     evidence:
       - ret-gamenerdz:/warhammer-tone-pro-paint-ultramar-blue-5-12ml
+  - id: games-workshop/warhammer-tone-pro-plague-toad-venom-1-12ml
+    name: 'Warhammer Tone Pro: Plague Toad Venom 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131106'
+    ean: '5011921276226'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-plague-toad-venom-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-211-99189961311-TN_PLAGUETOADVENOM112MLROW.jpg?v=1790954835
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-plague-toad-venom-1-12ml
+  - id: games-workshop/warhammer-tone-pro-plague-toad-venom-2-12ml
+    name: 'Warhammer Tone Pro: Plague Toad Venom 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131206'
+    ean: '5011921276233'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-plague-toad-venom-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-212-99189961312-TN_PLAGUETOADVENOM212MLROW.jpg?v=1790954875
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-plague-toad-venom-2-12ml
+  - id: games-workshop/warhammer-tone-pro-plague-toad-venom-3-12ml
+    name: 'Warhammer Tone Pro: Plague Toad Venom 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131306'
+    ean: '5011921276240'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-plague-toad-venom-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-213-99189961313-TN_PLAGUETOADVENOM312MLROW.jpg?v=1790954931
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-plague-toad-venom-3-12ml
+  - id: games-workshop/warhammer-tone-pro-plague-toad-venom-4-12ml
+    name: 'Warhammer Tone Pro: Plague Toad Venom 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131406'
+    ean: '5011921276257'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-plague-toad-venom-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-214-99189961314-TN_PLAGUETOADVENOM412MLROW.jpg?v=1790954977
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-plague-toad-venom-4-12ml
+  - id: games-workshop/warhammer-tone-pro-plague-toad-venom-5-12ml
+    name: 'Warhammer Tone Pro: Plague Toad Venom 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996131506'
+    ean: '5011921276264'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-plague-toad-venom-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-215-99189961315-TN_PLAGUETOADVENOM512MLROW.jpg?v=1790955021
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-plague-toad-venom-5-12ml
+  - id: games-workshop/warhammer-tone-pro-scinari-blue-1-12ml
+    name: 'Warhammer Tone Pro: Scinari Blue 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137606'
+    ean: '5011921277575'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-scinari-blue-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-341-99189961376-TN_SCINARIBLUE112MLROW.jpg?v=1790957322
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-scinari-blue-1-12ml
+  - id: games-workshop/warhammer-tone-pro-scinari-blue-2-12ml
+    name: 'Warhammer Tone Pro: Scinari Blue 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137706'
+    ean: '5011921277599'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-scinari-blue-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-342-99189961377-TN_SCINARIBLUE212MLROW.jpg?v=1790957369
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-scinari-blue-2-12ml
+  - id: games-workshop/warhammer-tone-pro-scinari-blue-3-12ml
+    name: 'Warhammer Tone Pro: Scinari Blue 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137806'
+    ean: '5011921277629'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-scinari-blue-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-343-99189961378-TN_SCINARIBLUE312MLROW.jpg?v=1790957408
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-scinari-blue-3-12ml
+  - id: games-workshop/warhammer-tone-pro-scinari-blue-4-12ml
+    name: 'Warhammer Tone Pro: Scinari Blue 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137906'
+    ean: '5011921277650'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-scinari-blue-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-344-99189961379-TN_SCINARIBLUE412MLROW.jpg?v=1790957441
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-scinari-blue-4-12ml
+  - id: games-workshop/warhammer-tone-pro-scinari-blue-5-12ml
+    name: 'Warhammer Tone Pro: Scinari Blue 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138006'
+    ean: '5011921277681'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-scinari-blue-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-345-99189961380-TN_SCINARIBLUE512MLROW.jpg?v=1790957478
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-scinari-blue-5-12ml
+  - id: games-workshop/warhammer-tone-pro-seraphon-blue-1-12ml
+    name: 'Warhammer Tone Pro: Seraphon Blue 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996135606'
+    ean: '5011921277179'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-seraphon-blue-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-301-99189961356-TN_SERAPHONBLUE112MLROW.jpg?v=1790956640
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-seraphon-blue-1-12ml
+  - id: games-workshop/warhammer-tone-pro-seraphon-blue-2-12ml
+    name: 'Warhammer Tone Pro: Seraphon Blue 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996135706'
+    ean: '5011921277209'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-seraphon-blue-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-302-99189961357-TN_SERAPHONBLUE212MLROW.jpg?v=1790956681
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-seraphon-blue-2-12ml
+  - id: games-workshop/warhammer-tone-pro-seraphon-blue-3-12ml
+    name: 'Warhammer Tone Pro: Seraphon Blue 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996135806'
+    ean: '5011921277223'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-seraphon-blue-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-303-99189961358-TN_SERAPHONBLUE312MLROW.jpg?v=1790956718
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-seraphon-blue-3-12ml
+  - id: games-workshop/warhammer-tone-pro-seraphon-blue-4-12ml
+    name: 'Warhammer Tone Pro: Seraphon Blue 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996135906'
+    ean: '5011921277247'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-seraphon-blue-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-304-99189961359-TN_SERAPHONBLUE412MLROW.jpg?v=1790956775
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-seraphon-blue-4-12ml
+  - id: games-workshop/warhammer-tone-pro-seraphon-blue-5-12ml
+    name: 'Warhammer Tone Pro: Seraphon Blue 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996136006'
+    ean: '5011921277278'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-seraphon-blue-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-305-99189961360-TN_SERAPHONBLUE512MLROW.jpg?v=1790956816
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-seraphon-blue-5-12ml
+  - id: games-workshop/warhammer-tone-pro-shalaxi-violet-1-12ml
+    name: 'Warhammer Tone Pro: Shalaxi Violet 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139106'
+    ean: '5011921277803'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-shalaxi-violet-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-371-99189961391-TN_SHALAXIVIOLET112MLROW.jpg?v=1790958053
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-shalaxi-violet-1-12ml
+  - id: games-workshop/warhammer-tone-pro-shalaxi-violet-2-12ml
+    name: 'Warhammer Tone Pro: Shalaxi Violet 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139206'
+    ean: '5011921277810'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-shalaxi-violet-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-372-99189961392-TN_SHALAXIVIOLET212MLROW.jpg?v=1790958095
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-shalaxi-violet-2-12ml
+  - id: games-workshop/warhammer-tone-pro-shalaxi-violet-3-12ml
+    name: 'Warhammer Tone Pro: Shalaxi Violet 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139306'
+    ean: '5011921277827'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-shalaxi-violet-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-373-99189961393-TN_SHALAXIVIOLET312MLROW.jpg?v=1790958133
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-shalaxi-violet-3-12ml
+  - id: games-workshop/warhammer-tone-pro-shalaxi-violet-4-12ml
+    name: 'Warhammer Tone Pro: Shalaxi Violet 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139406'
+    ean: '5011921277834'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-shalaxi-violet-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-374-99189961394-TN_SHALAXIVIOLET412MLROW.jpg?v=1790958181
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-shalaxi-violet-4-12ml
+  - id: games-workshop/warhammer-tone-pro-shalaxi-violet-5-12ml
+    name: 'Warhammer Tone Pro: Shalaxi Violet 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139506'
+    ean: '5011921277841'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-shalaxi-violet-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-375-99189961395-TN_SHALAXIVIOLET512MLROW.jpg?v=1790958225
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-shalaxi-violet-5-12ml
+  - id: games-workshop/warhammer-tone-pro-stormwolf-blue-1-12ml
+    name: 'Warhammer Tone Pro: Stormwolf Blue 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137106'
+    ean: '5011921277414'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-stormwolf-blue-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-331-99189961371-TN_STORMWOLFBLUE112MLROW.jpg?v=1790957067
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-stormwolf-blue-1-12ml
+  - id: games-workshop/warhammer-tone-pro-stormwolf-blue-2-12ml
+    name: 'Warhammer Tone Pro: Stormwolf Blue 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137206'
+    ean: '5011921277438'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-stormwolf-blue-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-332-99189961372-TN_STORMWOLFBLUE212MLROW.jpg?v=1790957102
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-stormwolf-blue-2-12ml
+  - id: games-workshop/warhammer-tone-pro-stormwolf-blue-3-12ml
+    name: 'Warhammer Tone Pro: Stormwolf Blue 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137306'
+    ean: '5011921277469'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-stormwolf-blue-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-333-99189961373-TN_STORMWOLFBLUE312MLROW.jpg?v=1790957196
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-stormwolf-blue-3-12ml
+  - id: games-workshop/warhammer-tone-pro-stormwolf-blue-4-12ml
+    name: 'Warhammer Tone Pro: Stormwolf Blue 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137406'
+    ean: '5011921277483'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-stormwolf-blue-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-334-99189961374-TN_STORMWOLFBLUE412MLROW.jpg?v=1790957237
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-stormwolf-blue-4-12ml
+  - id: games-workshop/warhammer-tone-pro-stormwolf-blue-5-12ml
+    name: 'Warhammer Tone Pro: Stormwolf Blue 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996137506'
+    ean: '5011921277506'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-stormwolf-blue-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-335-99189961375-TN_STORMWOLFBLUE512MLROW.jpg?v=1790957274
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-stormwolf-blue-5-12ml
+  - id: games-workshop/warhammer-tone-pro-ta-unar-ochre-1-12ml
+    name: 'Warhammer Tone Pro: Ta''unar Ochre 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129606'
+    ean: '5011921276073'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-taunar-ochre-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-181-99189961296-TN_TA_UNAROCHRE112MLROW.jpg?v=1790953904
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-taunar-ochre-1-12ml
+  - id: games-workshop/warhammer-tone-pro-ta-unar-ochre-2-12ml
+    name: 'Warhammer Tone Pro: Ta''unar Ochre 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129706'
+    ean: '5011921276080'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-taunar-ochre-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-182-99189961297-TN_TA_UNAROCHRE212MLROW.jpg?v=1790953970
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-taunar-ochre-2-12ml
+  - id: games-workshop/warhammer-tone-pro-ta-unar-ochre-3-12ml
+    name: 'Warhammer Tone Pro: Ta''unar Ochre 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129806'
+    ean: '5011921276097'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-taunar-ochre-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-183-99189961298-TN_TA_UNAROCHRE312MLROW.jpg?v=1790954006
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-taunar-ochre-3-12ml
+  - id: games-workshop/warhammer-tone-pro-ta-unar-ochre-4-12ml
+    name: 'Warhammer Tone Pro: Ta''unar Ochre 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996129906'
+    ean: '5011921276103'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-taunar-ochre-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-184-99189961299-TN_TA_UNAROCHRE412MLROW.jpg?v=1790954049
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-taunar-ochre-4-12ml
+  - id: games-workshop/warhammer-tone-pro-ta-unar-ochre-5-12ml
+    name: 'Warhammer Tone Pro: Ta''unar Ochre 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996130006'
+    ean: '5011921276110'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-taunar-ochre-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-185-99189961300-TN_TA_UNAROCHRE512MLROW.jpg?v=1790954100
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-taunar-ochre-5-12ml
+  - id: games-workshop/warhammer-tone-pro-ultramar-blue-1-12ml
+    name: 'Warhammer Tone Pro: Ultramar Blue 1 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138606'
+    ean: '5011921277759'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-ultramar-blue-1-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-361-99189961386-TN_ULTRAMARBLUE112MLROW.jpg?v=1790957833
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-ultramar-blue-1-12ml
+  - id: games-workshop/warhammer-tone-pro-ultramar-blue-2-12ml
+    name: 'Warhammer Tone Pro: Ultramar Blue 2 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138706'
+    ean: '5011921277766'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-ultramar-blue-2-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-362-99189961387-TN_ULTRAMARBLUE212MLROW.jpg?v=1790957882
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-ultramar-blue-2-12ml
+  - id: games-workshop/warhammer-tone-pro-ultramar-blue-3-12ml
+    name: 'Warhammer Tone Pro: Ultramar Blue 3 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138806'
+    ean: '5011921277773'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-ultramar-blue-3-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-363-99189961388-TN_ULTRAMARBLUE312MLROW.jpg?v=1790957920
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-ultramar-blue-3-12ml
+  - id: games-workshop/warhammer-tone-pro-ultramar-blue-4-12ml
+    name: 'Warhammer Tone Pro: Ultramar Blue 4 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996138906'
+    ean: '5011921277780'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-ultramar-blue-4-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-364-99189961389-TN_ULTRAMARBLUE412MLROW.jpg?v=1790957972
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-ultramar-blue-4-12ml
+  - id: games-workshop/warhammer-tone-pro-ultramar-blue-5-12ml
+    name: 'Warhammer Tone Pro: Ultramar Blue 5 - 12ml'
+    manufacturer: games-workshop
+    sku: '9918996139006'
+    ean: '5011921277797'
+    eanConfidence: provisional
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: mapped
+    roleBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceGbp: 3.69
+    url: https://www.goblingaming.co.uk/products/warhammer-tone-pro-ultramar-blue-5-12ml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_09_T150-20-365-99189961390-TN_ULTRAMARBLUE512MLROW.jpg?v=1790958013
+    evidence:
+      - ret-goblingaming:warhammer-tone-pro-ultramar-blue-5-12ml
   - id: games-workshop/warhammer-tooth-and-claw
     name: Warhammer Tooth and Claw
     manufacturer: games-workshop
@@ -4859,6 +8036,22 @@ products:
     url: https://www.radaddel.de/wh-underworlds-arena-mortis-deutsch
     evidence:
       - ret-radaddel:/wh-underworlds-arena-mortis-deutsch
+  - id: games-workshop/whisperblade-hb-pre-order
+    name: WHISPERBLADE (HB) - PRE-ORDER
+    manufacturer: games-workshop
+    sku: BL3360
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-11-07'
+    priceCad: 29.75
+    url: https://tistaminis.com/products/whisperblade-hb-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_TR-BL3360-60040281100BlackLibraryWhisperbladeENG.jpg?v=1793415044
+    evidence:
+      - ret-tistaminis:whisperblade-hb-pre-order
   - id: games-workshop/white-dwarf-517-oct-25
     name: WHITE DWARF 517 (OCT-25)
     manufacturer: games-workshop
@@ -4929,8 +8122,8 @@ products:
     evidence:
       - ret-radaddel:/white-dwarf-522-mar-26-deutsch
       - ret-radaddel:white-dwarf-522-mar-26-deutsch
-  - id: games-workshop/white-dwarf-525
-    name: White Dwarf 525
+  - id: games-workshop/white-dwarf-525-cities-of-sigmar
+    name: White Dwarf 525 - Cities of Sigmar
     manufacturer: games-workshop
     sku: WD525
     gameSystemsBasis: unknown
@@ -4986,7 +8179,7 @@ products:
     category: book
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceCad: 15.3
     url: https://tistaminis.com/products/white-dwarf-526-jul-26-english
@@ -5041,6 +8234,22 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_08_60249999669_ENGWD52701.jpg?v=1786150706
     evidence:
       - ret-tistaminis:white-dwarf-527-aug-26-english-pre-order
+  - id: games-workshop/white-dwarf-528-sep-26-english
+    name: WHITE DWARF 528 (SEP-26) (ENGLISH)
+    manufacturer: games-workshop
+    sku: WD09-60-26
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-07'
+    priceCad: 15.3
+    url: https://tistaminis.com/products/white-dwarf-528-sep-26-english-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60249999670_ENGWD52801.jpg?v=1788571977
+    evidence:
+      - ret-tistaminis:white-dwarf-528-sep-26-english-pre-order
   - id: games-workshop/white-dwarf-issue-516-sept-2026-space-marines-special-issue
     name: White Dwarf Issue 516 (SEPT 2026) - Space Marines Special Issue!
     manufacturer: games-workshop
