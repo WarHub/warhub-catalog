@@ -1199,7 +1199,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 4.75
     priceEur: 5.05
@@ -9048,7 +9048,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 6.0
     url: https://store.warlordgames.com/products/orcs
@@ -12243,6 +12243,27 @@ products:
       - legacy-catalog:warlord-games/hail-caesar/general/early-imperial-romans-auxiliary-cavalry-with-spears
       - mfr-warlord-store:early-imperial-romans-auxiliary-cavalry-pack-with-spears
       - ret-tistaminis:hail-caesar-roman-auxiliary-cavalry-with-spears
+  - id: warlord-games/WGH-IR-37
+    name: Carroballista
+    manufacturer: warlord-games
+    productCode: WGH-IR-37
+    sku: WGH-IR-37
+    gameSystems:
+      - hail-caesar
+    gameSystemsBasis: stated
+    settings:
+      - ancient-and-medieval
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 22.5
+    url: https://store.warlordgames.com/products/carroballista
+    imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/WGH-IR-37_Carroballista-1.jpg?v=1793963534
+    evidence:
+      - mfr-warlord-store:carroballista
   - id: warlord-games/WGH-IR-38
     name: 'Early Imperial Romans: Civilians'
     manufacturer: warlord-games
@@ -21479,7 +21500,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 276.0
     url: https://store.warlordgames.com/products/liberty-or-death-american-war-of-independence-battle-set

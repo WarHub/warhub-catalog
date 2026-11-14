@@ -42,6 +42,82 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99110103152_OrksDeffDreadMTO2026.jpg
     evidence:
       - mfr-gw-algolia:P-260348-99110103152
+  - id: games-workshop/99110104112
+    name: Bonesinger
+    manufacturer: games-workshop
+    productCode: '99110104112'
+    sku: '99110104112'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 10.0
+    url: https://www.games-workshop.com/en-GB/Bonesinger-2017-mto
+    evidence:
+      - arc-gw-webstore:/en-GB/Bonesinger-2017-mto
+  - id: games-workshop/99110105165
+    name: Cadian Kasrkin
+    manufacturer: games-workshop
+    productCode: '99110105165'
+    sku: '99110105165'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.5
+    url: https://www.games-workshop.com/en-GB/Cadian-Kasrkin-2016
+    evidence:
+      - arc-gw-webstore:/en-GB/Cadian-Kasrkin-2016
+  - id: games-workshop/99110108104
+    name: Battle Sisters Squad
+    manufacturer: games-workshop
+    productCode: '99110108104'
+    sku: '99110108104'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 50.0
+    url: https://www.games-workshop.com/en-GB/Battle-Sisters-Squad
+    evidence:
+      - arc-gw-webstore:/en-GB/Battle-Sisters-Squad
+  - id: games-workshop/99110108109
+    name: Battle Sister Squad Upgrade
+    manufacturer: games-workshop
+    productCode: '99110108109'
+    sku: '99110108109'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Battle-Sisters-Squad-Upgrade
+    evidence:
+      - arc-gw-webstore:/en-GB/Battle-Sisters-Squad-Upgrade
   - id: games-workshop/99110201239
     name: Classic Greater Daemon of Tzeentch
     manufacturer: games-workshop
@@ -1412,7 +1488,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     priceCad: 54.0
@@ -1923,7 +1999,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 54.0
     priceCad: 100.0
@@ -2659,7 +2735,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 22.5
     priceCad: 42.5
@@ -3594,6 +3670,38 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99170299015
+  - id: games-workshop/99179999023
+    name: 'Citadel Scenery Paint Set: Blighted Tundra'
+    manufacturer: games-workshop
+    productCode: '99179999023'
+    sku: '99179999023'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: code
+    roleBasis: unknown
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.games-workshop.com/en-GB/Blighted-Tundra-Paint-Set
+    evidence:
+      - arc-gw-webstore:/en-GB/Blighted-Tundra-Paint-Set
+  - id: games-workshop/99179999027
+    name: Citadel Build + Paint Set
+    manufacturer: games-workshop
+    productCode: '99179999027'
+    sku: '99179999027'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: code
+    roleBasis: unknown
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Build-Paint-Set-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Build-Paint-Set-ENG
   - id: games-workshop/99179999037
     name: CITADEL BASING SET
     manufacturer: games-workshop
@@ -3708,6 +3816,57 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99179999045
+  - id: games-workshop/99199999026
+    name: Blue Black Paint Bundle
+    manufacturer: games-workshop
+    productCode: '99199999026'
+    sku: '99199999026'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: code
+    role: applicator
+    roleBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 12.0
+    url: http://www.games-workshop.com:80/en-GB/Blue-Black-Paint-Collection
+    evidence:
+      - arc-gw-webstore:/en-GB/Blue-Black-Paint-Collection
+  - id: games-workshop/99199999027
+    name: Bone Paint Collections
+    manufacturer: games-workshop
+    productCode: '99199999027'
+    sku: '99199999027'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: code
+    role: applicator
+    roleBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 12.0
+    url: http://www.games-workshop.com:80/en-GB/Bone-Paint-Collections
+    evidence:
+      - arc-gw-webstore:/en-GB/Bone-Paint-Collections
+  - id: games-workshop/99199999037
+    name: Blood Angels Paint Bundle
+    manufacturer: games-workshop
+    productCode: '99199999037'
+    sku: '99199999037'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: code
+    role: applicator
+    roleBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 14.0
+    url: http://www.games-workshop.com:80/en-GB/Blood-Angels-Paint-Drop
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Angels-Paint-Drop
   - id: games-workshop/99199999043
     name: CITADEL SMALL BASE BRUSH (3-PACK)
     manufacturer: games-workshop
@@ -4468,8 +4627,10 @@ products:
     roleBasis: mapped
     status: current
     firstSeen: '2026-07-30'
+    url: https://www.gamenerdz.com/warhammer-colour-base-brush-small
     evidence:
       - mfr-gw-trade:99199999096
+      - ret-gamenerdz:/warhammer-colour-base-brush-small
   - id: games-workshop/99199999097
     name: Warhammer Colour Shade Brush Medium
     manufacturer: games-workshop
@@ -4513,10 +4674,11 @@ products:
     availability: in_stock
     firstSeen: '2026-07-30'
     priceGbp: 6.08
-    url: https://www.goblingaming.co.uk/products/warhammer-colour-shade-brush-large
+    url: https://www.gamenerdz.com/warhammer-colour-shade-brush-large
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_05_EP360-63-04-99199999098-BRUSHSHADE_LARGE_b3929d47-cf05-474a-b359-367e3431ba98.png?v=1779188982
     evidence:
       - mfr-gw-trade:99199999098
+      - ret-gamenerdz:/warhammer-colour-shade-brush-large
       - ret-goblingaming:warhammer-colour-shade-brush-large
   - id: games-workshop/99199999100
     name: Warhammer Colour Base Brush Medium
