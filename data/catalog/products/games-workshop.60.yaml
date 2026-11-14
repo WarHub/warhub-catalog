@@ -833,6 +833,44 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:60220901003
+  - id: games-workshop/60220999001
+    name: 'Blood Bowl Special Play Cards: Hall of Fame Pack'
+    manufacturer: games-workshop
+    productCode: '60220999001'
+    sku: '60220999001'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: code
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 9.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-Cards-Hall-of-Fame-Pack-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-Cards-Hall-of-Fame-Pack-ENG
+  - id: games-workshop/60220999002
+    name: Blood Bowl Team Titans Special Play Card Pack
+    manufacturer: games-workshop
+    productCode: '60220999002'
+    sku: '60220999002'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: code
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 9.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-Cards-Team-Titans-Pack-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-Cards-Team-Titans-Pack-ENG
   - id: games-workshop/60220999006
     name: BB HEAD COACH'S RULES & ACCESSORIES PACK
     manufacturer: games-workshop
@@ -2092,6 +2130,25 @@ products:
     url: http://www.games-workshop.com/en-GB/Archaon-Painting-Guide-ePub
     evidence:
       - arc-gw-webstore:/en-GB/Archaon-Painting-Guide-ePub
+  - id: games-workshop/60630204011
+    name: 'Battletome: Sylvaneth (Digital)'
+    manufacturer: games-workshop
+    productCode: '60630204011'
+    sku: '60630204011'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 24.99
+    url: https://www.games-workshop.com/en-GB/Battletome-Sylvaneth-EPUB
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Sylvaneth-EPUB
   - id: games-workshop/60680181087
     name: 'Assassinorum: The Emperor''s Judgement (Audio)'
     manufacturer: games-workshop
@@ -2144,6 +2201,23 @@ products:
     url: https://www.games-workshop.com/en-GB/Agent-Of-The-Throne-part-1-audiobook-2017
     evidence:
       - arc-gw-webstore:/en-GB/Agent-Of-The-Throne-part-1-audiobook-2017
+  - id: games-workshop/60680181112
+    name: 'Blackshields: The False War (CD)'
+    manufacturer: games-workshop
+    productCode: '60680181112'
+    sku: '60680181112'
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 12.0
+    url: https://www.games-workshop.com/en-GB/Black-Shields-The-False-War-audiobook-2017
+    evidence:
+      - arc-gw-webstore:/en-GB/Black-Shields-The-False-War-audiobook-2017
   - id: games-workshop/60680181129
     name: HORUS HERESY AUDIO COLL. VOL 1 (AUDIOBK)
     manufacturer: games-workshop

@@ -12,6 +12,34 @@ conflicts:
       - ean: '5061060704463'
         sources:
           - ret-gamenerdz
+  - type: ean-mismatch
+    entity: warlord-games/403411002
+    chosen: '5060917994545'
+    assertions:
+      - ean: '5060917994545'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+      - ean: '9781472863874'
+        sources:
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/452610002
+    chosen: '5060917996587'
+    assertions:
+      - ean: '5060917996587'
+        sources:
+          - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
+      - ean: '5061106610369'
+        sources:
+          - mfr-warlord-store
+  - type: unresolved-bundle
+    bundle: warlord-games/4099300010
+    component: warlord-games/401013001
+    missing:
+      - warlord-games/401013001
   - type: ambiguous-join
     keys:
       - arc-wargameportal:/products/alchemite-warforger
@@ -19,6 +47,18 @@ conflicts:
     candidates:
       - games-workshop/99120202039
       - games-workshop/99120202069
+  - type: multi-code-entity
+    manufacturer: warlord-games
+    codes:
+      - '401013001'
+      - '403411002'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
+      - mfr-warlord-store:soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
+      - ret-goblingaming:armies-of-the-united-states-book-bolt-action
+      - ret-radaddel:/armies-of-the-united-states-third-edition-englisch
+      - ret-radaddel:armies-of-the-united-states-third-edition-englisch
+      - ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025
   - type: multi-code-entity
     manufacturer: wyrd-games
     codes:

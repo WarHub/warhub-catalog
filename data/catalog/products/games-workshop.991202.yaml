@@ -76,6 +76,25 @@ products:
       - mfr-gw-algolia:prod2210222-99120201021
       - mfr-gw-trade:99120201021
       - ret-goblingaming:chaos-space-marines-slaughterbrute
+  - id: games-workshop/99120201025
+    name: 'Maggoth Lord: Bloab Rotspawned'
+    manufacturer: games-workshop
+    productCode: '99120201025'
+    sku: '99120201025'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 46.0
+    url: http://www.games-workshop.com:80/en-GB/Bloab-Rotspawned
+    evidence:
+      - arc-gw-webstore:/en-GB/Bloab-Rotspawned
   - id: games-workshop/99120201036
     name: KHORNE BLOODBOUND BLOOD WARRIORS
     manufacturer: games-workshop
@@ -95,8 +114,10 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-13'
+    priceGbp: 19.99
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-khorne-bloodbound-blood-warriors
     evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Blades-of-Khorne-EPUB
       - mfr-gw-trade:99120201036
       - ret-gamenerdz:/warhammer-age-of-sigmar-khorne-bloodbound-blood-warriors
   - id: games-workshop/99120201037
@@ -254,7 +275,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.5
     url: https://www.warhammer.com/en-GB/shop/Khorne-Bloodbound-Mighty-Skullcrushers
@@ -312,6 +333,8 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-everchosen-archaon-exalted-grand-marshal-of-the-apocalypse
     evidence:
       - arc-gw-webstore:/en-GB/Archaon-The-Everchosen-2015
+      - arc-gw-webstore:/en-GB/Battletome-Everchosen-IPAD
+      - arc-gw-webstore:/en-GB/Battletome-Everchosen-ePub
       - mfr-gw-trade:99120201045
       - ret-gamenerdz:/warhammer-age-of-sigmar-everchosen-archaon-exalted-grand-marshal-of-the-apocalypse
   - id: games-workshop/99120201046
@@ -391,7 +414,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 31.5
     url: https://www.warhammer.com/en-GB/shop/Chaos-Chariot-2016
@@ -1373,7 +1396,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -1691,7 +1714,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceEur: 26.6
@@ -2600,7 +2623,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     url: https://www.warhammer.com/en-GB/shop/fomoroid-crusher-2022
@@ -3690,7 +3713,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 44.1
@@ -4183,6 +4206,48 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070201031_RealmgoreRitualist1.jpg
     evidence:
       - mfr-gw-algolia:prod5050232-99120201223
+  - id: games-workshop/99120201228
+    name: Slaughterpriest
+    manufacturer: games-workshop
+    productCode: '99120201228'
+    sku: '99120201228'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 24.0
+    url: https://www.warhammer.com/en-GB/shop/Khorne-Bloodbound-Slaughterpriest
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070201012_KhorneSlaughterpriest01.jpg
+    evidence:
+      - mfr-gw-algolia:prod2780344-99120201228
+  - id: games-workshop/99120201230
+    name: Magister
+    manufacturer: games-workshop
+    productCode: '99120201230'
+    sku: '99120201230'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 13.5
+    url: https://www.warhammer.com/en-GB/shop/Tzeentch-Arcanites-Magister
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070201019_TzeentchMagister01.jpg
+    evidence:
+      - mfr-gw-algolia:prod3430127-99120201230
   - id: games-workshop/99120201236
     name: Argent Shards
     manufacturer: games-workshop
@@ -4775,7 +4840,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-10-18'
     priceGbp: 25.0
     url: https://www.warhammer.com/en-GB/shop/slaves-to-darkness-oath-fulfilled-2026
@@ -5087,7 +5152,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceEur: 41.0
@@ -5637,7 +5702,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 25.0
     priceEur: 30.5
@@ -6028,6 +6093,101 @@ products:
       - mfr-gw-algolia:P-221480-99120202076
       - mfr-gw-trade:99120202076
       - ret-tistaminis:warcry-wildercorps-hunters
+  - id: games-workshop/99120203003
+    name: Knights Errant / Knights of the Realm
+    manufacturer: games-workshop
+    productCode: '99120203003'
+    sku: '99120203003'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: http://www.games-workshop.com:80/en-GB/Bretonnian-Knights-Errant-Knights-of-the-Realm
+    evidence:
+      - arc-gw-webstore:/en-GB/Bretonnian-Knights-Errant-Knights-of-the-Realm
+  - id: games-workshop/99120203004
+    name: Men-at-arms
+    manufacturer: games-workshop
+    productCode: '99120203004'
+    sku: '99120203004'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: http://www.games-workshop.com:80/en-GB/Bretonnian-Men-at-arms
+    evidence:
+      - arc-gw-webstore:/en-GB/Bretonnian-Men-at-arms
+  - id: games-workshop/99120203006
+    name: Peasant Bowmen
+    manufacturer: games-workshop
+    productCode: '99120203006'
+    sku: '99120203006'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: http://www.games-workshop.com:80/en-GB/Bretonnian-Peasant-Bowmen
+    evidence:
+      - arc-gw-webstore:/en-GB/Bretonnian-Peasant-Bowmen
+  - id: games-workshop/99120203009
+    name: Pegasus Knight
+    manufacturer: games-workshop
+    productCode: '99120203009'
+    sku: '99120203009'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 12.0
+    url: http://www.games-workshop.com:80/en-GB/Bretonnian-Pegasus-Knight
+    evidence:
+      - arc-gw-webstore:/en-GB/Bretonnian-Pegasus-Knight
+  - id: games-workshop/99120203010
+    name: Bretonnian Battalion
+    manufacturer: games-workshop
+    productCode: '99120203010'
+    sku: '99120203010'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 60.0
+    url: http://www.games-workshop.com:80/en-GB/Bretonnian-Battalion
+    evidence:
+      - arc-gw-webstore:/en-GB/Bretonnian-Battalion
   - id: games-workshop/99120204012
     name: SYLVANETH DRYADS
     manufacturer: games-workshop
@@ -7173,6 +7333,7 @@ products:
 
       This kit comprises 88 plastic components, and comes with a Citadel 120x92mm Oval Base and a 50mm ball and socket flying stem. This miniature is supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Kharadron-Overlords-EPUB
       - arc-wargameportal:/products/arkanaut-frigate
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/arkanaut-frigate
       - mfr-gw-algolia:prod3480263-99120205018
@@ -7277,6 +7438,7 @@ products:
 
       This kit comprises 46 plastic components, and comes with a Citadel 50mm Round Base and a 35mm ball and socket flying stem. This miniature is supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Brokk-Grungsson-Lord-Magnate-Barak-nar-2017
       - arc-wargameportal:/products/brokk-grungsson-lord-magnate-of-barak-nar
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-order/brokk-grungsson-lord-magnate-of-barak-nar
       - mfr-gw-algolia:prod3480382-99120205023
@@ -7453,7 +7615,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.0
     url: https://www.warhammer.com/en-GB/shop/Gotrek-Gurnisson-2019
@@ -8033,7 +8195,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 98.2
@@ -8396,6 +8558,48 @@ products:
       - ret-radaddel:/kharadron-overlords-zontari-endrin-dock
       - ret-radaddel:kharadron-overlords-zontari-endrin-dock
       - ret-tistaminis:kharadron-overlords-zontari-endrin-dock-pre-order
+  - id: games-workshop/99120205070
+    name: Grimhold Exile
+    manufacturer: games-workshop
+    productCode: '99120205070'
+    sku: '99120205070'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-grimhold-exile-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205056_FjorisFlamebearers1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265303-99120205070
+  - id: games-workshop/99120205077
+    name: Aetheric Navigator
+    manufacturer: games-workshop
+    productCode: '99120205077'
+    sku: '99120205077'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 22.5
+    url: https://www.warhammer.com/en-GB/shop/Kharadron-Overlords-Aetheric-navigator-2017
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070205010_Navigator01.jpg
+    evidence:
+      - mfr-gw-algolia:prod3480377-99120205077
   - id: games-workshop/99120205083
     name: Vulkyn Flameseekers
     manufacturer: games-workshop
@@ -8444,6 +8648,258 @@ products:
       - mfr-gw-trade:99120205083
       - ret-goblingaming:warcry-fyreslayers-vulkyn-flameseekers-warband
       - ret-tistaminis:warcry-fyreslayers-vulkyn-flameseekers
+  - id: games-workshop/99120205084
+    name: 'Spearhead: Khazalite Holds – Magmic Fyrd'
+    manufacturer: games-workshop
+    productCode: '99120205084'
+    sku: '99120205084'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 95.0
+    url: https://www.warhammer.com/en-GB/shop/spearhead-magmic-fyrd-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205084_MagmicFyrdSpearhead1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265314-99120205084
+  - id: games-workshop/99120205085
+    name: 'Regiment of Renown: Fjori''s Vengeance'
+    manufacturer: games-workshop
+    productCode: '99120205085'
+    sku: '99120205085'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 64.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-fjoris-vengeance-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205085_KhazaliteHoldsFjorisVengeance01.jpg
+    evidence:
+      - mfr-gw-algolia:P-265315-99120205085
+  - id: games-workshop/99120205086
+    name: Thrynn
+    manufacturer: games-workshop
+    productCode: '99120205086'
+    sku: '99120205086'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-thrynn-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205086_KhazaliteHoldsThrynn01.jpg
+    evidence:
+      - mfr-gw-algolia:P-265257-99120205086
+  - id: games-workshop/99120205087
+    name: Clanshields
+    manufacturer: games-workshop
+    productCode: '99120205087'
+    sku: '99120205087'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 35.5
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-clanshields-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205087_KhazaliteHoldsClanshields1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265307-99120205087
+  - id: games-workshop/99120205088
+    name: Gholems of Gazul / Gholems of Valaya
+    manufacturer: games-workshop
+    productCode: '99120205088'
+    sku: '99120205088'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 39.5
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-gholems-of-gazul-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205088_GholemsofGazul1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265312-99120205088
+  - id: games-workshop/99120205089
+    name: Oathkeeper Cannon / Stonebreaker Mortar
+    manufacturer: games-workshop
+    productCode: '99120205089'
+    sku: '99120205089'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 37.5
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-oathkeeper-cannon-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205089_KhazaliteHoldsOathkeeperCannon01a.jpg
+    evidence:
+      - mfr-gw-algolia:P-265308-99120205089
+  - id: games-workshop/99120205090
+    name: Hjulda Drakkblud
+    manufacturer: games-workshop
+    productCode: '99120205090'
+    sku: '99120205090'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-hjulda-drakkblud-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205090_HjuldaDrakkblud1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265301-99120205090
+  - id: games-workshop/99120205091
+    name: Runewright
+    manufacturer: games-workshop
+    productCode: '99120205091'
+    sku: '99120205091'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-runewright-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205091_KhazaliteHoldsRunewright1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265304-99120205091
+  - id: games-workshop/99120205092
+    name: High Kyng Valankrom / Thrynn on War Throne
+    manufacturer: games-workshop
+    productCode: '99120205092'
+    sku: '99120205092'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 88.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-high-kyng-valankrom-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205092_HighKyngValankrom1.jpg
+    evidence:
+      - mfr-gw-algolia:P-265310-99120205092
+  - id: games-workshop/99120205093
+    name: Clangunners
+    manufacturer: games-workshop
+    productCode: '99120205093'
+    sku: '99120205093'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 35.5
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-clangunners-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205093_KhazaliteHoldsClangunners01.jpg
+    evidence:
+      - mfr-gw-algolia:P-265306-99120205093
+  - id: games-workshop/99120205094
+    name: Valayan Guardians
+    manufacturer: games-workshop
+    productCode: '99120205094'
+    sku: '99120205094'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 29.5
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-valayan-guardians-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205094_KhazaliteHoldsValayanGuardians011.jpg
+    evidence:
+      - mfr-gw-algolia:P-265305-99120205094
+  - id: games-workshop/99120205095
+    name: Ormyr and Ashtongue
+    manufacturer: games-workshop
+    productCode: '99120205095'
+    sku: '99120205095'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-14'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/khazalite-holds-ormyr-and-ashtongue-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120205095_KhazaliteHoldsOrmyrandAshtongue01.jpg
+    evidence:
+      - mfr-gw-algolia:P-265302-99120205095
   - id: games-workshop/99120206002
     name: Night Runners
     manufacturer: games-workshop
@@ -8691,6 +9147,27 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99120206023
+  - id: games-workshop/99120206024
+    name: 'Battletome: Skaven Pestilens (eBook Edition)'
+    manufacturer: games-workshop
+    productCode: '99120206024'
+    sku: '99120206024'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    packaging: digital
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 14.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Skaven-Pestilens-EPUB
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Skaven-Pestilens-EPUB
+      - arc-gw-webstore:/en-GB/Battletome-Skaven-Pestilens-IPAD
   - id: games-workshop/99120206025
     name: START COLLECTING! SKAVEN PESTILENS
     manufacturer: games-workshop
@@ -9478,7 +9955,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 27.0
     priceEur: 27.9
@@ -9635,7 +10112,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 61.0
     priceEur: 62.2
@@ -9758,7 +10235,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 34.0
     priceEur: 35.6
@@ -10018,6 +10495,25 @@ products:
     evidence:
       - mfr-gw-trade:99120207033
       - ret-gamenerdz:/warhammer-age-of-sigmar-flesh-eater-courts-crypt-flayers-vargheists-crypt-horrors
+  - id: games-workshop/99120207034
+    name: 'Battletome: Flesh-Eater Courts (Tablet Edition)'
+    manufacturer: games-workshop
+    productCode: '99120207034'
+    sku: '99120207034'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 14.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Flesh-Eater-Courts-EPUB
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Flesh-Eater-Courts-EPUB
   - id: games-workshop/99120207035
     name: Abhorrant Ghoul King on Royal Terrorgheist
     manufacturer: games-workshop
@@ -12303,7 +12799,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -12718,7 +13214,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     url: https://www.warhammer.com/en-GB/shop/Ossiarch-Bonereapers-Gothizzar-Harvester-2019
@@ -13070,7 +13566,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.0
     priceEur: 41.0
@@ -13206,7 +13702,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 123.0
     priceEur: 122.8
@@ -13734,7 +14230,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 98.2
@@ -14325,7 +14821,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 13.5
     url: https://www.warhammer.com/en-GB/shop/Deathrattle-Wight-King-2018
@@ -14532,7 +15028,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     url: https://www.warhammer.com/en-GB/shop/Belladamma-Volga-First-Of-The-Vyrkos-2021
@@ -14569,7 +15065,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     url: https://www.warhammer.com/en-GB/shop/Soulblight-Gravelords-Fell-Bats-2021
@@ -14678,7 +15174,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 14.75
     url: https://www.warhammer.com/en-GB/shop/Etb-Nighthaunt-Myrmourn-Banshees-2018
@@ -15066,7 +15562,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     url: https://www.warhammer.com/en-GB/shop/Nighthaunt-Lady-Olynder-2018
@@ -15555,6 +16051,27 @@ products:
       - mfr-gw-algolia:prod2990168-99120208021
       - mfr-gw-trade:99120208021
       - ret-goblingaming:seraphon-terradon-riders
+  - id: games-workshop/99120208022
+    name: 'Battletome: Seraphon eBook'
+    manufacturer: games-workshop
+    productCode: '99120208022'
+    sku: '99120208022'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    packaging: digital
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 19.0
+    url: http://www.games-workshop.com/en-GB/Battletome-Seraphon-Epub
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Seraphon-Epub
+      - arc-gw-webstore:/en-GB/Battletome-Seraphon-iPad
   - id: games-workshop/99120208023
     name: START COLLECTING! SERAPHON
     manufacturer: games-workshop
@@ -15966,7 +16483,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -16411,6 +16928,25 @@ products:
       - mfr-gw-algolia:prod840899-99120209009
       - mfr-gw-trade:99120209009
       - ret-goblingaming:spiderfang-grots-spider-riders
+  - id: games-workshop/99120209015
+    name: Black Orcs
+    manufacturer: games-workshop
+    productCode: '99120209015'
+    sku: '99120209015'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Black-Orcs
+    evidence:
+      - arc-gw-webstore:/en-GB/Black-Orcs
   - id: games-workshop/99120209023
     name: Arachnarok Spider
     manufacturer: games-workshop
@@ -16448,7 +16984,10 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 19.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Ironjawz-Tablet
     evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Ironjawz-Tablet
       - mfr-gw-trade:99120209030
   - id: games-workshop/99120209031
     name: Gore-gruntas
@@ -16538,7 +17077,10 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 30.0
+    url: https://www.games-workshop.com/en-GB/Bonesplitterz-Savage-Boarboy-Maniaks
     evidence:
+      - arc-gw-webstore:/en-GB/Bonesplitterz-Savage-Boarboy-Maniaks
       - mfr-gw-trade:99120209035
   - id: games-workshop/99120209036
     name: BONESPLITTERZ SAVAGE ORRUKS
@@ -16558,7 +17100,11 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 30.0
+    url: https://www.games-workshop.com/en-GB/Bonesplitterz-Savage-Orruk-Arrowboys
     evidence:
+      - arc-gw-webstore:/en-GB/Bonesplitterz-Savage-Orruk-Arrowboys
+      - arc-gw-webstore:/en-GB/Bonesplitterz-Savage-Orruk-Morboys
       - mfr-gw-trade:99120209036
   - id: games-workshop/99120209037
     name: START COLLECTING! IRONJAWZ
@@ -17664,7 +18210,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 92.0
     priceEur: 94.1
@@ -18449,7 +18995,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 39.5
     priceCad: 74.0
@@ -19220,7 +19766,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.0
     url: https://www.warhammer.com/en-GB/shop/Gloomspte-Gitz-Loonboss-On-Giant-Cave-Squig-2020
@@ -19352,7 +19898,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 37.0
     url: https://www.warhammer.com/en-GB/shop/orruk-warclans-kruleboyz-monsta-killaz-2025
@@ -22817,7 +23363,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 40.0
     priceCad: 78.0
@@ -23180,6 +23726,122 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120213049_OgorMawtribesMantrapper01.jpg
     evidence:
       - mfr-gw-algolia:P-257196-99120213049
+  - id: games-workshop/99120216001
+    name: Gor Herd
+    manufacturer: games-workshop
+    productCode: '99120216001'
+    sku: '99120216001'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 15.0
+    url: http://www.games-workshop.com:80/en-GB/Beastmen-Gor-Herd
+    evidence:
+      - arc-gw-webstore:/en-GB/Beastmen-Gor-Herd
+  - id: games-workshop/99120216002
+    name: Ungor Herd
+    manufacturer: games-workshop
+    productCode: '99120216002'
+    sku: '99120216002'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 15.0
+    url: http://www.games-workshop.com:80/en-GB/Beastmen-Ungor-Herd
+    evidence:
+      - arc-gw-webstore:/en-GB/Beastmen-Ungor-Herd
+  - id: games-workshop/99120216003
+    name: Bestigor Herd
+    manufacturer: games-workshop
+    productCode: '99120216003'
+    sku: '99120216003'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Beastmen-Bestigor-Herd
+    evidence:
+      - arc-gw-webstore:/en-GB/Beastmen-Bestigor-Herd
+      - arc-gw-webstore:/en-GB/Bestigors
+  - id: games-workshop/99120216004
+    name: Minotaurs
+    manufacturer: games-workshop
+    productCode: '99120216004'
+    sku: '99120216004'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 28.0
+    url: http://www.games-workshop.com:80/en-GB/Beastmen-Minotaurs
+    evidence:
+      - arc-gw-webstore:/en-GB/Beastmen-Minotaurs
+  - id: games-workshop/99120216005
+    name: Beastmen Battalion
+    manufacturer: games-workshop
+    productCode: '99120216005'
+    sku: '99120216005'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 60.0
+    url: http://www.games-workshop.com:80/en-GB/Beastmen-Battalion
+    evidence:
+      - arc-gw-webstore:/en-GB/Beastmen-Battalion
+  - id: games-workshop/99120216006
+    name: Cygor
+    manufacturer: games-workshop
+    productCode: '99120216006'
+    sku: '99120216006'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 33.0
+    url: http://www.games-workshop.com:80/en-GB/Beastmen-Cygor
+    evidence:
+      - arc-gw-webstore:/en-GB/Beastmen-Cygor
+      - arc-gw-webstore:/en-GB/Beastmen-Ghorgon
   - id: games-workshop/99120216009
     name: BRAYHERDS GORS
     manufacturer: games-workshop
@@ -23463,9 +24125,12 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-13'
+    priceGbp: 14.0
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-stormcast-eternals-dracothian-guard-fulminators-tempestors-concussors-desolators
     evidence:
       - arc-goblingaming:/products/stormcast-eternals-dracothian-guard
+      - arc-gw-webstore:/en-GB/Battletome-Stormcast-Eternals-Extremis-EPUB
+      - arc-gw-webstore:/en-GB/Battletome-Stormcast-Eternals-Extremis-IPAD
       - mfr-gw-trade:99120218009
       - ret-gamenerdz:/warhammer-age-of-sigmar-stormcast-eternals-dracothian-guard-fulminators-tempestors-concussors-desolators
   - id: games-workshop/99120218013
@@ -24409,7 +25074,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 21.5
     priceEur: 21.3
@@ -25119,7 +25784,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -25391,7 +26056,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 52.0
     priceEur: 54.9
@@ -26435,6 +27100,25 @@ products:
     url: https://www.games-workshop.com/en-GB/Aleguzzler-Gargant
     evidence:
       - arc-gw-webstore:/en-GB/Aleguzzler-Gargant
+  - id: games-workshop/99120299027
+    name: 'Battletome: Dominion of Chaos (Tablet Edition)'
+    manufacturer: games-workshop
+    productCode: '99120299027'
+    sku: '99120299027'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 14.99
+    url: https://www.games-workshop.com/en-GB/Battletome-Dominion-of-Chaos-Tablet
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Dominion-of-Chaos-Tablet
   - id: games-workshop/99120299033
     name: 'AOS: SHATTERED DOMINION: 25 & 32MM ROUND'
     manufacturer: games-workshop
@@ -27003,7 +27687,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 54.0
     url: https://www.warhammer.com/en-GB/shop/Malign-Sorcery-Spells-2021
@@ -27180,7 +27864,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
