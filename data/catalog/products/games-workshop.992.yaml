@@ -401,6 +401,26 @@ products:
       - ret-goblingaming:plastic-glue
       - ret-radaddel:/citadel-plastic-glue
       - ret-radaddel:citadel-plastic-glue
+  - id: games-workshop/99220101005
+    name: Citadel I.D. Tag - Blood Angels
+    manufacturer: games-workshop
+    productCode: '99220101005'
+    sku: '99220101005'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 4.0
+    url: https://www.games-workshop.com/en-GB/Blood-Angel-Tag
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Angel-Tag
+      - arc-gw-webstore:/en-GB/Blood-Angels-Tag
   - id: games-workshop/99220101018
     name: IRON HANDS DICE SET
     manufacturer: games-workshop
@@ -4144,6 +4164,25 @@ products:
     url: https://www.games-workshop.com/en-GB/AOS-Battle-Mat-Khorne-Dominion
     evidence:
       - arc-gw-webstore:/en-GB/AOS-Battle-Mat-Khorne-Dominion
+  - id: games-workshop/99220299052
+    name: Warhammer Age of Sigmar Soulblight Necropolis Battle Mat
+    manufacturer: games-workshop
+    productCode: '99220299052'
+    sku: '99220299052'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 50.0
+    url: https://www.games-workshop.com/en-GB/Battle-Mat-Soulblight-Necropolis-2017
+    evidence:
+      - arc-gw-webstore:/en-GB/Battle-Mat-Soulblight-Necropolis-2017
   - id: games-workshop/99220299067
     name: 'REALM OF BATTLE: BLASTED HALLOWHEART'
     manufacturer: games-workshop
@@ -4789,7 +4828,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 18.75
     url: https://www.warhammer.com/en-GB/shop/Reaver-Titan-Weapons-Gatling-Laser-Blasters-2019
@@ -6014,6 +6053,44 @@ products:
       - ret-radaddel:/blood-bowl-tomb-kings-team-pitch-dugouts
       - ret-radaddel:blood-bowl-tomb-kings-team-pitch-dugouts
       - ret-tistaminis:blood-bowl-tomb-kings-team-pitch-dugouts-pre-order
+  - id: games-workshop/99220999001
+    name: 'Blood Bowl: Blood on the Snow'
+    manufacturer: games-workshop
+    productCode: '99220999001'
+    sku: '99220999001'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: code
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 18.0
+    url: https://www.games-workshop.com/en-GB/Blood-on-the-Snow
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-on-the-Snow
+  - id: games-workshop/99220999002
+    name: Skaven & Dwarf Pitch
+    manufacturer: games-workshop
+    productCode: '99220999002'
+    sku: '99220999002'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: code
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 24.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-Skaven-and-Dwarf-Pitch
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-Skaven-and-Dwarf-Pitch
   - id: games-workshop/99220999005
     name: BLOOD BOWL BASES PACK
     manufacturer: games-workshop
@@ -6786,7 +6863,7 @@ products:
     roleBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 6.25
     priceCad: 12.0
@@ -7533,6 +7610,24 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99229915015
+  - id: games-workshop/99229999041
+    name: 'Battle Missions: Death Worlds (Interactive iBook Edition)'
+    manufacturer: games-workshop
+    productCode: '99229999041'
+    sku: '99229999041'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: code
+    roleBasis: unknown
+    packaging: digital
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 4.0
+    url: http://www.games-workshop.com:80/en-GB/Battle-Missions-Death-Worlds-Interactive-iBook-Edition
+    evidence:
+      - arc-gw-webstore:/en-GB/Battle-Missions-Death-Worlds-Interactive-iBook-Edition
+      - arc-gw-webstore:/en-GB/Battlefield-Accessories-Set
   - id: games-workshop/99229999078
     name: 25MM ROUND CLOSED BASES
     manufacturer: games-workshop
@@ -7615,7 +7710,9 @@ products:
     status: current
     firstSeen: '2026-07-23'
     priceGbp: 3.25
+    url: http://www.games-workshop.com:80/en-GB/Bike-Bases
     evidence:
+      - arc-gw-webstore:/en-GB/Bike-Bases
       - mfr-gw-trade:99229999083
   - id: games-workshop/99229999087
     name: 60mm Titan Bases
@@ -8541,6 +8638,7 @@ products:
     url: https://www.games-workshop.com/en-GB/Age-of-Sigmar-Spire-of-Dawn-ENG
     evidence:
       - arc-gw-webstore:/en-GB/Age-of-Sigmar-Spire-of-Dawn-ENG
+      - arc-gw-webstore:/en-GB/Cadian-Heavy-Weapon-Team-2
       - mfr-gw-trade:99239999068
   - id: games-workshop/99239999069
     name: CITADEL MOULDLINE REMOVER

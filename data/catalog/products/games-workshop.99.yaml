@@ -39,6 +39,26 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99440199140
+  - id: games-workshop/99510101011
+    name: Blood Angels Transfer Sheet
+    manufacturer: games-workshop
+    productCode: '99510101011'
+    sku: '99510101011'
+    gameSystems:
+      - horus-heresy
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: hobby-auxiliary
+    categoryBasis: code
+    roleBasis: unknown
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 15.0
+    url: http://www.games-workshop.com:80/en-GB/Blood-Angels-Transfer-Sheet
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Angels-Transfer-Sheet
   - id: games-workshop/99510101115
     name: 'Legion Transfers: Salamanders'
     manufacturer: games-workshop
@@ -1102,6 +1122,21 @@ products:
       - ret-radaddel:/warhammer-40.000-terrain-area-set
       - ret-radaddel:warhammer-40-000-terrain-area-set
       - ret-tistaminis:warhammer-40000-terrain-area-set
+  - id: games-workshop/99709981006
+    name: Black Library Calendar 2018
+    manufacturer: games-workshop
+    productCode: '99709981006'
+    sku: '99709981006'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 10.0
+    url: https://www.games-workshop.com/en-GB/Black-Library-Calendar-2018
+    evidence:
+      - arc-gw-webstore:/en-GB/Black-Library-Calendar-2018
   - id: games-workshop/99709981018
     name: BLACK LIBRARY HORUS HERESY BOOK ENDS
     manufacturer: games-workshop

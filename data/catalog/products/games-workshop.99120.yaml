@@ -1569,7 +1569,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -3331,7 +3331,7 @@ products:
     category: game-accessory
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-22'
     priceGbp: 16.0
     url: https://www.warhammer.com/en-GB/shop/necromunda-conditions-and-status-markers-2026
@@ -3374,7 +3374,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-09-30'
     priceGbp: 33.5
     url: https://www.warhammer.com/en-GB/shop/necromunda-escher-gang-matriarchs-and-phyrr-cats-2026
@@ -3416,7 +3416,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-09-30'
     priceGbp: 33.5
     url: https://www.warhammer.com/en-GB/shop/necromunda-goliath-forge-bosses-and-sumpkrocs-2026
@@ -5145,7 +5145,10 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-23'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-The-Dwarf-Giants
     evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-The-Dwarf-Giants
       - mfr-gw-trade:99120905001
   - id: games-workshop/99120905002
     name: 'Dwarf Team: The Dwarf Giants'
@@ -5206,7 +5209,10 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-07-23'
+    priceGbp: 7.99
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-The-Rules-ePub-2017
     evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-The-Rules-ePub-2017
       - mfr-gw-trade:99120906001
   - id: games-workshop/99120906002
     name: Skaven Blood Bowl Team – Skavenblight Scramblers
@@ -5752,7 +5758,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 35.5
     priceEur: 35.6
@@ -6060,7 +6066,10 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 12.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-Ogre
     evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-Ogre
       - mfr-gw-trade:99120999001
   - id: games-workshop/99120999002
     name: BLOOD BOWL TROLL
@@ -6080,7 +6089,10 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 15.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-Troll
     evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-Troll
       - mfr-gw-trade:99120999002
   - id: games-workshop/99120999003
     name: THE ELFHEIM EAGLES BLOOD BOWL TEAM

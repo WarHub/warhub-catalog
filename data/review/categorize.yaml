@@ -1,40 +1,40 @@
 summary:
-  products: 27759
-  undecided: 1459
+  products: 28061
+  undecided: 1497
   byBasis:
-    code: 7167
-    lexicon: 549
-    mapped: 17514
+    code: 7370
+    lexicon: 552
+    mapped: 17572
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1459
-  decidedThisRun: 25245
+    unknown: 1497
+  decidedThisRun: 25509
   gameSystemsByBasis:
     classified: 1114
-    code: 4227
-    mapped: 2647
-    not-applicable: 8016
+    code: 4407
+    mapped: 2660
+    not-applicable: 8022
     override: 101
-    setting: 960
-    stated: 9242
-    unknown: 1452
+    setting: 968
+    stated: 9288
+    unknown: 1501
   settingsByBasis:
-    code: 849
-    derived: 17327
+    code: 857
+    derived: 17566
     mapped: 11
-    not-applicable: 8087
+    not-applicable: 8093
     override: 3
-    unknown: 1482
+    unknown: 1531
   rolesByBasis:
-    code: 72
+    code: 75
     lexicon: 183
     mapped: 1081
-    none: 20688
+    none: 20982
     override: 2
     paint-archive: 1958
     stated: 16
-    unknown: 3759
+    unknown: 3764
 conflicts:
   - entity: games-workshop/60010399003
     type: category-disagreement
@@ -259,7 +259,7 @@ unmapped:
     - value: categories=accessories-kings-of-war
       wouldDecide: 13
     - value: categories=firefight-getting-started
-      wouldDecide: 12
+      wouldDecide: 13
     - value: categories=warpath-universe-new-upcoming
       wouldDecide: 12
     - value: categories=dreadball
@@ -268,6 +268,8 @@ unmapped:
       wouldDecide: 10
     - value: categories=ogre-miniatures
       wouldDecide: 10
+    - value: categories=black-friday
+      wouldDecide: 9
     - value: categories=deadonze-matsudan
       wouldDecide: 9
     - value: categories=xirkaali
@@ -294,8 +296,6 @@ unmapped:
       wouldDecide: 7
     - value: categories=plague
       wouldDecide: 7
-    - value: categories=4th-edition-launch
-      wouldDecide: 6
     - value: categories=asterian
       wouldDecide: 6
     - value: categories=dungeon-saga
@@ -308,6 +308,8 @@ unmapped:
       wouldDecide: 6
     - value: categories=salamanders
       wouldDecide: 6
+    - value: categories=4th-edition-launch
+      wouldDecide: 5
     - value: categories=gcps
       wouldDecide: 5
     - value: categories=getting-started-kings-of-war
@@ -324,8 +326,6 @@ unmapped:
       wouldDecide: 4
     - value: categories=getting-started-dreadball
       wouldDecide: 4
-    - value: categories=halo-flashpoint-accessories-terrain
-      wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
       wouldDecide: 30
@@ -335,11 +335,19 @@ unmapped:
       wouldDecide: 19
     - value: categories=limited-editions
       wouldDecide: 11
+    - value: categories=brute-cavalry-sale
+      wouldDecide: 7
+    - value: categories=regiments-on-sale
+      wouldDecide: 6
     - value: categories=start-here
       wouldDecide: 6
+    - value: categories=monster-sale
+      wouldDecide: 5
     - value: categories=new-upcoming
       wouldDecide: 4
     - value: categories=2000pt-armies
+      wouldDecide: 3
+    - value: categories=sales
       wouldDecide: 3
     - value: categories=new-releases
       wouldDecide: 2
@@ -356,6 +364,8 @@ unmapped:
     - value: categories=hundred-kingdoms
       wouldDecide: 1
     - value: categories=offers
+      wouldDecide: 1
+    - value: categories=one-player-starter-sales
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
@@ -475,48 +485,80 @@ unmapped:
     - value: vendor=Warmachine
       wouldDecide: 1
   mfr-wyrd-store:
+    - value: productType=Board & Card Games
+      wouldDecide: 2
+    - value: tags=NOPE
+      wouldDecide: 2
+    - value: tags=WRLD
+      wouldDecide: 2
+    - value: vendor=Wyrd Miniatures
+      wouldDecide: 2
     - value: productType=Gift Card
       wouldDecide: 1
-    - value: tags=NOPE
+    - value: tags=50-Percent-Deposit
+      wouldDecide: 1
+    - value: tags=Case-Only
+      wouldDecide: 1
+    - value: tags=First Printing
+      wouldDecide: 1
+    - value: tags=Pre-Order
+      wouldDecide: 1
+    - value: tags=Pre-Purchase
+      wouldDecide: 1
+    - value: tags=Sailboat-Cube
+      wouldDecide: 1
+    - value: tags=Setup-Pending
+      wouldDecide: 1
+    - value: tags=WRLD-Presale
+      wouldDecide: 1
+    - value: tags=WRLD-Retailer-Preorder
       wouldDecide: 1
     - value: tags=gift card
+      wouldDecide: 1
+    - value: tags=wholesale
+      wouldDecide: 1
+    - value: tags=wholesale-only
       wouldDecide: 1
     - value: vendor=Wyrd Miniatures - Online Store
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 170
+      wouldDecide: 184
     - value: breadcrumbs=Miniatures
-      wouldDecide: 161
+      wouldDecide: 175
     - value: breadcrumbs=Games Workshop
-      wouldDecide: 55
+      wouldDecide: 74
     - value: breadcrumbs=Infinity
       wouldDecide: 51
     - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 32
-    - value: breadcrumbs=Malifaux
-      wouldDecide: 19
+      wouldDecide: 35
     - value: breadcrumbs=Warhammer Age of Sigmar
       wouldDecide: 19
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 15
+    - value: breadcrumbs=Malifaux
+      wouldDecide: 14
+    - value: breadcrumbs=Horus Heresy
+      wouldDecide: 12
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
+    - value: breadcrumbs=Supplies
+      wouldDecide: 8
     - value: breadcrumbs=Warcrow
       wouldDecide: 8
-    - value: breadcrumbs=Supplies
-      wouldDecide: 7
     - value: breadcrumbs=Kings of War
       wouldDecide: 6
     - value: breadcrumbs=Star Wars Legion
       wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
+    - value: breadcrumbs=Paint and Crafting
+      wouldDecide: 5
     - value: breadcrumbs=Panoceania
       wouldDecide: 5
+    - value: breadcrumbs=The Old World
+      wouldDecide: 5
     - value: breadcrumbs=Halo Flashpoint
-      wouldDecide: 4
-    - value: breadcrumbs=Paint and Crafting
       wouldDecide: 4
     - value: breadcrumbs=Nomads
       wouldDecide: 3
@@ -525,8 +567,6 @@ unmapped:
     - value: breadcrumbs=Citadel Accessories & Supplies
       wouldDecide: 2
     - value: breadcrumbs=Combined Army
-      wouldDecide: 2
-    - value: breadcrumbs=Preorders
       wouldDecide: 2
     - value: breadcrumbs=Yu Jing
       wouldDecide: 2
@@ -557,8 +597,6 @@ unmapped:
     - value: 'breadcrumbs=Halo: Flashpoint - Judgement Expansion (Covenant Faction Set) (PREORDER)'
       wouldDecide: 1
     - value: 'breadcrumbs=Halo: Flashpoint - Sergeant Major Johnson (PREORDER)'
-      wouldDecide: 1
-    - value: breadcrumbs=Horus Heresy
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity ITS Book Season 9: Treason'
       wouldDecide: 1

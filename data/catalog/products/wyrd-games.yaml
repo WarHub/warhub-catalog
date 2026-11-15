@@ -1189,7 +1189,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 12.5
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr11101
@@ -1949,7 +1949,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 32.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vagrantsong-deluxe-token-and-bindle-set
@@ -5696,7 +5696,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 13.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/m3e-fate-deck-bayou-theme
@@ -11489,10 +11489,10 @@ products:
       - malifaux
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 30.0
     priceCad: 35.0
@@ -11512,6 +11512,7 @@ products:
       - Ashen Core
     evidence:
       - legacy-catalog:wyrd-games/malifaux/outcasts/ashes-and-dust
+      - mfr-wyrd-store:ashes-and-dust
       - ret-gamenerdz:/malifaux-3e-ashes-dust
       - ret-tistaminis:malifaux-outcasts-ashes-and-dust
   - id: wyrd-games/WYR23511
@@ -16145,7 +16146,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 34.85
     priceUsd: 45.0
@@ -17049,7 +17050,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 40.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/behind-the-trigger
@@ -17092,7 +17093,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.99
     priceUsd: 35.0
@@ -17995,7 +17996,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 45.0
     priceCad: 47.0
@@ -18819,17 +18820,29 @@ products:
     evidence:
       - ret-goblingaming:brutal-fate-4th-edition-malifaux
   - id: wyrd-games/WYR24116
-    name: 'Malifaux 4E: Harrold Tull, Artillerist (PREORDER)'
+    name: 'Malifaux Fourth Edition: Harold Tull, Artillerist'
     manufacturer: wyrd-games
     productCode: WYR24116
     sku: WYR24116
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    ean: '0812152035881'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/malifaux-4e-harrold-tull-artillerist-preorder
+    priceUsd: 62.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-harold-tull-artillerist
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24116_Tull-Artillerist_Front.png?v=1784484780
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-harold-tull-artillerist
       - ret-gamenerdz:/malifaux-4e-harrold-tull-artillerist-preorder
   - id: wyrd-games/WYR24201
     name: 'Malifaux Fourth Edition: Seamus, The Last Breath'
@@ -19136,17 +19149,29 @@ products:
       - ret-goblingaming:yan-lo-the-spirit-walker-4th-edition
       - ret-tistaminis:malifaux-yan-lo-the-spirit-walker
   - id: wyrd-games/WYR24209
-    name: 'Malifaux 4E: Molly, Harbinger of Havoc (PREORDER)'
+    name: 'Malifaux Fourth Edition: Molly Squidpiddge, Harbinger of Havoc'
     manufacturer: wyrd-games
     productCode: WYR24209
     sku: WYR24209
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    ean: '0812152035959'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/malifaux-4e-molly-harbinger-of-havoc-preorder
+    priceUsd: 62.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-molly-squidpiddge-harbinger-of-havoc
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24209_Molly-Harbinger-of-Havoc_Front.png?v=1784484808
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-molly-squidpiddge-harbinger-of-havoc
       - ret-gamenerdz:/malifaux-4e-molly-harbinger-of-havoc-preorder
   - id: wyrd-games/WYR24211
     name: 'Malifaux Fourth Edition: Dead Rider'
@@ -19586,7 +19611,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 47.31
     priceUsd: 62.5
@@ -19635,7 +19660,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 23.55
     priceUsd: 31.5
@@ -19720,19 +19745,79 @@ products:
       - mfr-wyrd-store:malisaurus-rex-1
       - ret-gamenerdz:/malifaux-4e-malisaurus-rex-preorder
       - ret-goblingaming:malisaurus-rex-4th-edition-malifaux
+  - id: wyrd-games/WYR24416
+    name: 'Malifaux Fourth Edition: Kastore, Awakened'
+    manufacturer: wyrd-games
+    productCode: WYR24416
+    sku: WYR24416
+    ean: '0812152035911'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 62.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-kastore-awakened
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24416_Kastore-Awakened_Front.png?v=1784484948
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-kastore-awakened
   - id: wyrd-games/WYR24417
-    name: 'Malifaux 4E: Kasore, Fervent (PREORDER)'
+    name: 'Malifaux Fourth Edition: Kastore, Fervent'
     manufacturer: wyrd-games
     productCode: WYR24417
     sku: WYR24417
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    ean: '0812152035928'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/malifaux-4e-kasore-fervent-preorder
+    priceUsd: 65.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-kastore-fervent
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24417_Kastore-Fervent_Front.png?v=1784484939
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-kastore-fervent
       - ret-gamenerdz:/malifaux-4e-kasore-fervent-preorder
+  - id: wyrd-games/WYR24418
+    name: 'Malifaux Fourth Edition: Euripides, Hierophant'
+    manufacturer: wyrd-games
+    productCode: WYR24418
+    sku: WYR24418
+    ean: '0812152035935'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 67.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-euripides-hierophant
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24418_Euripides-Hierophant_Front.png?v=1784484973
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-euripides-hierophant
   - id: wyrd-games/WYR24501
     name: 'Malifaux Fourth Edition: Viktoria Chambers, Ashes and Blood'
     manufacturer: wyrd-games
@@ -19963,6 +20048,30 @@ products:
     evidence:
       - ret-goblingaming:captain-zipp-dread-pirate-4th-edition-bayou
       - ret-tistaminis:malifaux-outcasts-captain-zipp-dread-pirate
+  - id: wyrd-games/WYR24512
+    name: 'Malifaux Fourth Edition: Rusty Alyce, Trigger Happy'
+    manufacturer: wyrd-games
+    productCode: WYR24512
+    sku: WYR24512
+    ean: '0812152035980'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 57.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-rusty-alyce-trigger-happy
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24512_Rusty-Alyce-Trigger-Happy_Front.png?v=1784485002
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-rusty-alyce-trigger-happy
   - id: wyrd-games/WYR24513
     name: Hodgepodge Fate - 4th Edition - Malifaux
     manufacturer: wyrd-games
@@ -20128,6 +20237,30 @@ products:
       - ret-gamenerdz:/malifaux-4e-wong-the-wonderful
       - ret-goblingaming:wong-the-wonderful-4th-edition-bayou
       - ret-tistaminis:malifaux-bayou-wong-the-wonderful
+  - id: wyrd-games/WYR24612
+    name: 'Malifaux Fourth Edition: Som’er Teeth Jones, Bayou Boss'
+    manufacturer: wyrd-games
+    productCode: WYR24612
+    sku: WYR24612
+    ean: '0812152036000'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 60.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-som-er-teeth-jones-bayou-boss
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24612_Somer-Bayou-Boss_Front.png?v=1784485031
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-som-er-teeth-jones-bayou-boss
   - id: wyrd-games/WYR24613
     name: Lucky Fate - 4th Edition - Malifaux
     manufacturer: wyrd-games
@@ -20149,6 +20282,30 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WYR24613_cover_1d61.jpg?v=1778057488
     evidence:
       - ret-goblingaming:lucky-fate-4th-edition-malifaux
+  - id: wyrd-games/WYR24616
+    name: 'Malifaux Fourth Edition: Som’er Teeth Jones, Loot Monger'
+    manufacturer: wyrd-games
+    productCode: WYR24616
+    sku: WYR24616
+    ean: '0812152036017'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 60.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-som-er-teeth-jones-loot-monger
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24616_Somer-Loot-Monger_Front.png?v=1784485087
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-som-er-teeth-jones-loot-monger
   - id: wyrd-games/WYR24701
     name: Asami Tanaka, Shintaku - 4th Edition - Malifaux
     manufacturer: wyrd-games
@@ -20247,18 +20404,54 @@ products:
       - ret-goblingaming:jakob-lynch-wild-card-4th-edition-ten-thunders
       - ret-tistaminis:malifaux-ten-thunders-jakob-lynch-wild-card
   - id: wyrd-games/WYR24706
-    name: 'Malifaux 4E: Linh Ly, Bibliothecary (PREORDER)'
+    name: 'Malifaux Fourth Edition: Linh Ly, Bibliothecary'
     manufacturer: wyrd-games
     productCode: WYR24706
     sku: WYR24706
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    ean: '0812152036031'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/malifaux-4e-linh-ly-bibliothecary-preorder
+    priceUsd: 60.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-linh-ly-bibliothecary
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24706_Linh-Ly-Bibliothecary_Front.png?v=1784485163
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-linh-ly-bibliothecary
       - ret-gamenerdz:/malifaux-4e-linh-ly-bibliothecary-preorder
+  - id: wyrd-games/WYR24707
+    name: 'Malifaux Fourth Edition: Linh Ly, Storyteller'
+    manufacturer: wyrd-games
+    productCode: WYR24707
+    sku: WYR24707
+    ean: '0812152036048'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 67.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-linh-ly-storyteller
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24707_Linh-Ly-Storyteller_Front.png?v=1784485134
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-linh-ly-storyteller
   - id: wyrd-games/WYR24713
     name: 'Malifaux 4E: Shadow Fate (PREORDER)'
     manufacturer: wyrd-games
@@ -20282,17 +20475,29 @@ products:
       - ret-gamenerdz:/malifaux-4e-shadow-fate-preorder
       - ret-goblingaming:shadow-fate-4th-edition-malifaux
   - id: wyrd-games/WYR24802
-    name: 'Malifaux 4E: Lucas McCabe, Tomb Delver (PREORDER)'
+    name: 'Malifaux Fourth Edition: Lucas McCabe, Tomb Delver'
     manufacturer: wyrd-games
     productCode: WYR24802
     sku: WYR24802
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    ean: '0812152036055'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/malifaux-4e-lucas-mccabe-tomb-delver-preorder
+    priceUsd: 67.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-lucas-mccabe-tomb-delver
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24802_Lucas-McCabe-Tomb-Delver_Front.png?v=1784485122
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-lucas-mccabe-tomb-delver
       - ret-gamenerdz:/malifaux-4e-lucas-mccabe-tomb-delver-preorder
   - id: wyrd-games/WYR24803
     name: 'Malifaux Fourth Edition: Anya Lycarayen, The Resolute'
@@ -20360,7 +20565,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 43.52
     priceUsd: 57.5
@@ -20418,17 +20623,29 @@ products:
       - ret-goblingaming:nexus-heart-of-the-hive-4th-edition-explorers-society
       - ret-tistaminis:malifaux-explorers-society-nexus-heart-of-the-hive
   - id: wyrd-games/WYR24809
-    name: 'Malifaux 4E: Maxine Agassiz, The Renowned (PREORDER)'
+    name: 'Malifaux Fourth Edition: Maxine Agassiz, The Renowned'
     manufacturer: wyrd-games
     productCode: WYR24809
     sku: WYR24809
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
+    ean: '0812152036062'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
-    url: https://www.gamenerdz.com/malifaux-4e-maxine-agassiz-the-renowned-preorder
+    priceUsd: 60.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-maxine-agassiz-the-renowned
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24809_Maxine-Agassiz-The-Renowned_Front.png?v=1784485151
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-maxine-agassiz-the-renowned
       - ret-gamenerdz:/malifaux-4e-maxine-agassiz-the-renowned-preorder
   - id: wyrd-games/WYR24810
     name: 'Malifaux Fourth Edition: Maxine Agassiz, Monomaniacal'
@@ -20471,7 +20688,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 46.67
     priceUsd: 62.5
@@ -26125,7 +26342,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceUsd: 7.0
+    priceUsd: 10.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-graveyard-base-inserts-and-props-exclusive-stl-files
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_GenCon2024_Bases-Graveyard.jpg?v=1721751196
     description: |-
@@ -26193,7 +26410,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceUsd: 4.0
+    priceUsd: 6.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/booklights-x3-digital-stl
     description: |-
       Exclusive STL files for the Booklights, brought to you alongside the Through the Breach Augment. These three whimsical spirit companions are ready to drift from the Red Library straight onto your printer, perfect for adding atmosphere, table presence, or a little lurking magic to your games.
@@ -26231,6 +26448,72 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/booklights-x3-digital-stl
       - mfr-wyrd-store:booklights-x3-digital-stl
+  - id: wyrd-games/WYR90906
+    name: 'Malifaux Fourth Edition: Witches and Woes (Rotten Harvest STL)'
+    manufacturer: wyrd-games
+    productCode: WYR90906
+    sku: WYR90906
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: digital
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 28.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/witches-and-woes-rotten-harvest-digital-stl
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Witches-and-Woes-Rotten-Harvest-STL-Models-2026.webp?v=1790689291
+    evidence:
+      - mfr-wyrd-store:witches-and-woes-rotten-harvest-digital-stl
+  - id: wyrd-games/WYR90907
+    name: 'The Other Side: The Walking Widow (Digital STL)'
+    manufacturer: wyrd-games
+    productCode: WYR90907
+    sku: WYR90907
+    gameSystems:
+      - the-other-side
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: digital
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/the-walking-widow-the-other-side-digital-stl
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/the-walking-widow-the-other-side-digital-stl.jpg?v=1791318381
+    evidence:
+      - mfr-wyrd-store:the-walking-widow-the-other-side-digital-stl
+  - id: wyrd-games/WYR90908
+    name: 'Malifaux Fourth Edition: Winter Wonderland (Nightmare Edition STL)'
+    manufacturer: wyrd-games
+    productCode: WYR90908
+    sku: WYR90908
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: digital
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 28.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/winter-wonderland-digital-stl
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/M4E-Render-WW-Rasputina.jpg?v=1794336175
+    evidence:
+      - mfr-wyrd-store:winter-wonderland-digital-stl
   - id: wyrd-games/asian-ruins-30mm
     name: Asian Ruins 30mm
     manufacturer: wyrd-games
@@ -29041,6 +29324,24 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WaldosWeekly_11.25.2020_NewsImage.jpg?v=1607026782
     evidence:
       - mfr-wyrd-store:wyrd-webstore-waldo-gift-bucks
+  - id: wyrd-games/wrld-pre-purchase
+    name: WRLD - Pre-Purchase
+    manufacturer: wyrd-games
+    sku: WYR11701-PL
+    ean: '0813856019757'
+    eanConfidence: confirmed
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-15'
+    priceUsd: 47.2
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wrld-pre-purchase
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WRLD-Prepurchase-Game-20260930.jpg?v=1790776796
+    evidence:
+      - mfr-wyrd-store:wrld-pre-purchase
+      - mfr-wyrd-store:wrld-retailer-case-pre-order-with-sailboat-cube
   - id: wyrd-games/wyrd-webstore-waldo-gift-bucks
     name: Wyrd Webstore Waldo Gift Bucks!
     manufacturer: wyrd-games
