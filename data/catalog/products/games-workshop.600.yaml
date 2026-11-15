@@ -1,5 +1,24 @@
 manufacturer: games-workshop
 products:
+  - id: games-workshop/60010101002
+    name: 'The Horus Heresy: Burning of Prospero'
+    manufacturer: games-workshop
+    productCode: '60010101002'
+    sku: '60010101002'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 95.0
+    url: https://www.games-workshop.com/en-GB/Burning-of-Prospero-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Burning-of-Prospero-ENG
   - id: games-workshop/60010101003
     name: BLACK TEMPLARS ARMY SET (ENGLISH)
     manufacturer: games-workshop
@@ -2804,7 +2823,10 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 65.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-2016-ENG
     evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-2016-ENG
       - mfr-gw-trade:60010999003
   - id: games-workshop/60010999005
     name: 'BLOOD BOWL: SECOND SEASON EDITION (ENG)'
@@ -3368,6 +3390,63 @@ products:
     url: https://www.games-workshop.com/en-GB/Angels-of-Death-Psychic-Powers
     evidence:
       - arc-gw-webstore:/en-GB/Angels-of-Death-Psychic-Powers
+  - id: games-workshop/60020101011
+    name: 'The Horus Heresy: Burning of Prospero & Painting Guide'
+    manufacturer: games-workshop
+    productCode: '60020101011'
+    sku: '60020101011'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 101.0
+    url: https://www.games-workshop.com/en-GB/Burning-of-Prospero-and-Paint-Guide-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Burning-of-Prospero-and-Paint-Guide-ENG
+  - id: games-workshop/60020101012
+    name: 'The Horus Heresy: Burning of Prospero and Betrayal at Calth'
+    manufacturer: games-workshop
+    productCode: '60020101012'
+    sku: '60020101012'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 190.0
+    url: https://www.games-workshop.com/en-GB/Betrayal-at-Calth-and-Burning-of-Prospero-Bundle
+    evidence:
+      - arc-gw-webstore:/en-GB/Betrayal-at-Calth-and-Burning-of-Prospero-Bundle
+  - id: games-workshop/60020101015
+    name: Blood Angels Starter Collection
+    manufacturer: games-workshop
+    productCode: '60020101015'
+    sku: '60020101015'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 65.0
+    url: https://www.games-workshop.com/en-GB/Blood-Angels-Starter-Collection-ENG-2017
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Angels-Starter-Collection-ENG-2017
   - id: games-workshop/60020105004
     name: Astra Militarum Starter Collection
     manufacturer: games-workshop
@@ -3520,6 +3599,103 @@ products:
     url: https://www.games-workshop.com/en-GB/40K-Starter-bundle-ENG-2016
     evidence:
       - arc-gw-webstore:/en-GB/40K-Starter-bundle-ENG-2016
+  - id: games-workshop/60020199022
+    name: 'The Horus Heresy: Burning of Prospero and White Dwarf'
+    manufacturer: games-workshop
+    productCode: '60020199022'
+    sku: '60020199022'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: lexicon
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 100.0
+    url: https://www.games-workshop.com/en-GB/Burning-of-Prospero-and-White-Dwarf-November-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Burning-of-Prospero-and-White-Dwarf-November-ENG
+  - id: games-workshop/60020201005
+    name: 'Battletome: Everchosen and Archaon'
+    manufacturer: games-workshop
+    productCode: '60020201005'
+    sku: '60020201005'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: lexicon
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 135.0
+    url: http://www.games-workshop.com:80/en-GB/Battletome-and-Archaon-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-and-Archaon-ENG
+  - id: games-workshop/60020201014
+    name: Blades of Khorne Essentials
+    manufacturer: games-workshop
+    productCode: '60020201014'
+    sku: '60020201014'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 40.0
+    url: https://www.games-workshop.com/en-GB/Blades-of-Khorne-Essentials-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Blades-of-Khorne-Essentials-ENG
+  - id: games-workshop/60020201016
+    name: Mortals of Khorne Starter Collection
+    manufacturer: games-workshop
+    productCode: '60020201016'
+    sku: '60020201016'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 90.0
+    url: https://www.games-workshop.com/en-GB/Blades-of-Khorne-Mortal-Bundle
+    evidence:
+      - arc-gw-webstore:/en-GB/Blades-of-Khorne-Mortal-Bundle
+  - id: games-workshop/60020209002
+    name: Bonesplitterz New Releases
+    manufacturer: games-workshop
+    productCode: '60020209002'
+    sku: '60020209002'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 115.0
+    url: https://www.games-workshop.com/en-GB/Bonesplitterz-New-release-bundle-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Bonesplitterz-New-release-bundle-ENG
   - id: games-workshop/60020218001
     name: Warhammer Age of Sigmar Rules (English PDF)
     manufacturer: games-workshop
@@ -3617,6 +3793,82 @@ products:
     url: https://www.games-workshop.com/en-GB/2-x-Imperial-Knight-Renegade-ENG
     evidence:
       - arc-gw-webstore:/en-GB/2-x-Imperial-Knight-Renegade-ENG
+  - id: games-workshop/60020905001
+    name: Blood Bowl New Releases
+    manufacturer: games-workshop
+    productCode: '60020905001'
+    sku: '60020905001'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: code
+    settings:
+      - old-world
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 60.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-New-Releases-JAN-2017-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-New-Releases-JAN-2017-ENG
+  - id: games-workshop/60020999003
+    name: Blood Bowl & Death Zone Season One
+    manufacturer: games-workshop
+    productCode: '60020999003'
+    sku: '60020999003'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: code
+    settings:
+      - old-world
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 80.0
+    url: https://www.games-workshop.com/en-GB/Blood-Bowl-and-Death-Zone-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Bowl-and-Death-Zone-ENG
+  - id: games-workshop/60030101025
+    name: 'Codex: Blood Angels'
+    manufacturer: games-workshop
+    productCode: '60030101025'
+    sku: '60030101025'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 30.0
+    url: http://www.games-workshop.com:80/en-GB/Blood-Angels-Codex-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Blood-Angels-Codex-ENG
+  - id: games-workshop/60030101030
+    name: Books & Digital
+    manufacturer: games-workshop
+    productCode: '60030101030'
+    sku: '60030101030'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 35.0
+    url: http://www.games-workshop.com/en-GB/Books-Digital;jsessionid=F5FD07AFDA522AC6F22AE839088A2505
+    evidence:
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=F5FD07AFDA522AC6F22AE839088A2505
   - id: games-workshop/60030101034
     name: Angels of Death
     manufacturer: games-workshop
@@ -4080,6 +4332,25 @@ products:
       - ret-radaddel:/black-templars-codex-englisch
       - ret-radaddel:black-templars-codex-englisch
       - ret-tistaminis:codex-supplement-black-templars-pre-order
+  - id: games-workshop/60030102012
+    name: 'Black Legion: A Codex: Chaos Space Marines Supplement'
+    manufacturer: games-workshop
+    productCode: '60030102012'
+    sku: '60030102012'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Black-Legion-Supplement
+    evidence:
+      - arc-gw-webstore:/en-GB/Black-Legion-Supplement
   - id: games-workshop/60030102019
     name: 'CODEX: THOUSAND SONS (HB) (ENG)'
     manufacturer: games-workshop
@@ -4965,6 +5236,7 @@ products:
     evidence:
       - mfr-gw-trade:60030108016
       - ret-gamenerdz:/warhammer-40k-codex-adeptus-custodes-2022-hardcover
+      - ret-gamenerdz:/warhammer-40k-codex-adeptus-custodes-2022-hardcover-sale
   - id: games-workshop/60030108017
     name: 'CODEX: IMPERIAL KNIGHTS (ENG)'
     manufacturer: games-workshop
@@ -5422,6 +5694,31 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:60030115007
+  - id: games-workshop/60030116001
+    name: Books & Digital
+    manufacturer: games-workshop
+    productCode: '60030116001'
+    sku: '60030116001'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: http://www.games-workshop.com/en-GB/Books-Digital;jsessionid=46BF89B19882E3AD95F4D5756DE2E6D3
+    evidence:
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=46BF89B19882E3AD95F4D5756DE2E6D3
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=8C5D48F727BE624905DD9A64CCEAB003
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=B28A162C2C7BA892B501CFD772ACB4D0
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=C6D153087B24FE82E089CB504E1C7538
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=C904D31A0946AC0BD53294F4EAEC19CE
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=D0FB264AE0C1348AE65D76D7681DCC9B
+      - arc-gw-webstore:/en-GB/Books-Digital;jsessionid=F235F74A9B86663613E782A640530352
   - id: games-workshop/60030116005
     name: 'CODEX: ADEPTUS MECHANICUS (HB) (ENGLISH)'
     manufacturer: games-workshop
@@ -5765,6 +6062,101 @@ products:
       - ret-goblingaming:warhammer-40k-kill-team-codex-into-the-dark
       - ret-radaddel:/kill-team-into-the-dark-codex-englisch
       - ret-radaddel:kill-team-into-the-dark-codex-englisch
+  - id: games-workshop/60030201010
+    name: 'Battletome: Dominion of Chaos'
+    manufacturer: games-workshop
+    productCode: '60030201010'
+    sku: '60030201010'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Dominion-of-Chaos-hb-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Dominion-of-Chaos-hb-ENG
+  - id: games-workshop/60030201011
+    name: 'Battletome: Everchosen (Hardback)'
+    manufacturer: games-workshop
+    productCode: '60030201011'
+    sku: '60030201011'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 35.0
+    url: http://www.games-workshop.com/en-GB/Battletome-Everchosen-EN
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Everchosen-EN
+  - id: games-workshop/60030201013
+    name: 'Battletome: Blades of Khorne'
+    manufacturer: games-workshop
+    productCode: '60030201013'
+    sku: '60030201013'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Blades-of-Khorne-HB-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Blades-of-Khorne-HB-ENG
+  - id: games-workshop/60030201017
+    name: 'Battletome: Disciples of Tzeentch (Hardback)'
+    manufacturer: games-workshop
+    productCode: '60030201017'
+    sku: '60030201017'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Disciples-of-Tzeentch-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Disciples-of-Tzeentch-ENG
+  - id: games-workshop/60030201018
+    name: 'Battletome: Disciples of Tzeentch (Softback)'
+    manufacturer: games-workshop
+    productCode: '60030201018'
+    sku: '60030201018'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 15.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Disciples-of-Tzeentch-Softback-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Disciples-of-Tzeentch-Softback-ENG
   - id: games-workshop/60030201019
     name: 'BATTLETOME: MAGGOTKIN OF NURGLE (HB) ENG'
     manufacturer: games-workshop
@@ -6188,6 +6580,25 @@ products:
       - ret-radaddel:/cities-of-sigmar-battletome-englisch
       - ret-radaddel:cities-of-sigmar-battletome-englisch
       - ret-tistaminis:battletome-cities-of-sigmar-pre-order
+  - id: games-workshop/60030204006
+    name: 'Battletome: Sylvaneth'
+    manufacturer: games-workshop
+    productCode: '60030204006'
+    sku: '60030204006'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 30.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Sylvaneth-Hardback-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Sylvaneth-Hardback-ENG
   - id: games-workshop/60030204007
     name: Sylvaneth (SB) (EN)
     manufacturer: games-workshop
@@ -6282,6 +6693,26 @@ products:
       - ret-radaddel:/sylvaneth-battletome-englisch
       - ret-radaddel:sylvaneth-battletome-englisch
       - ret-tistaminis:battletome-sylvaneth-pre-order
+  - id: games-workshop/60030205007
+    name: 'Battletome: Fyreslayers'
+    manufacturer: games-workshop
+    productCode: '60030205007'
+    sku: '60030205007'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 30.0
+    url: http://www.games-workshop.com:80/en-GB/Battletome-Fyreslayers-EN
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Fyreslayers-EN
+      - arc-gw-webstore:/en-GB/Battletome-Fyreslayers-EN;jsessionid=DEEE7B491996FA424D6772F5F05EF0DD
   - id: games-workshop/60030205011
     name: 'BATTLETOME: FYRESLAYERS (HB) (ENGLISH)'
     manufacturer: games-workshop
@@ -6404,6 +6835,25 @@ products:
       - ret-radaddel:/kharadron-overlords-battletome-englisch
       - ret-radaddel:kharadron-overlords-battletome-englisch
       - ret-tistaminis:battletome-kharadron-overlords-pre-order
+  - id: games-workshop/60030206005
+    name: 'Battletome: Skaven Pestilens (Hardback)'
+    manufacturer: games-workshop
+    productCode: '60030206005'
+    sku: '60030206005'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Skaven-Pestilens-EN
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Skaven-Pestilens-EN
   - id: games-workshop/60030206007
     name: 'BATTLETOME: SKAVEN (HB) (ENGLISH)'
     manufacturer: games-workshop
@@ -6475,6 +6925,25 @@ products:
       - ret-radaddel:/skaven-battletome-englisch
       - ret-radaddel:skaven-battletome-englisch
       - ret-tistaminis:battletome-skaven-1
+  - id: games-workshop/60030207008
+    name: 'Battletome: Flesh-eater Courts'
+    manufacturer: games-workshop
+    productCode: '60030207008'
+    sku: '60030207008'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Flesh-Eater-Courts-EN
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Flesh-Eater-Courts-EN
   - id: games-workshop/60030207010
     name: 'BATTLETOME: LEGIONS OF NAGASH (HB) (ENG)'
     manufacturer: games-workshop
@@ -6788,6 +7257,25 @@ products:
       - ret-radaddel:/ossiarch-bonereapers-battletome-englisch
       - ret-radaddel:ossiarch-bonereapers-battletome-englisch
       - ret-tistaminis:battletome-ossiarch-bonereapers-eng-pre-order
+  - id: games-workshop/60030208006
+    name: 'Battletome: Seraphon'
+    manufacturer: games-workshop
+    productCode: '60030208006'
+    sku: '60030208006'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 30.0
+    url: http://www.games-workshop.com/en-GB/Battletome-Seraphon-EN
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Seraphon-EN
   - id: games-workshop/60030208008
     name: 'BATTLETOME: SERAPHON (HB) (ENGLISH)'
     manufacturer: games-workshop
@@ -6826,6 +7314,44 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:60030208009
+  - id: games-workshop/60030209006
+    name: 'Battletome: Ironjawz'
+    manufacturer: games-workshop
+    productCode: '60030209006'
+    sku: '60030209006'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Ironjawz-EN
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Ironjawz-EN
+  - id: games-workshop/60030209008
+    name: 'Battletome: Bonesplitterz'
+    manufacturer: games-workshop
+    productCode: '60030209008'
+    sku: '60030209008'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 20.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Bonesplitterz-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Bonesplitterz-ENG
   - id: games-workshop/60030209010
     name: 'BATTLETOME: GLOOMSPITE GITZ (HB) (ENG)'
     manufacturer: games-workshop
@@ -7323,6 +7849,25 @@ products:
       - ret-gamenerdz:/warhammer-age-of-sigmar-chaos-battletome-beasts-of-chaos
       - ret-radaddel:/beasts-of-chaos-battletome-3.-edition-englisch
       - ret-radaddel:beasts-of-chaos-battletome-3-edition-englisch
+  - id: games-workshop/60030218001
+    name: 'Battletome: Stormcast Eternals'
+    manufacturer: games-workshop
+    productCode: '60030218001'
+    sku: '60030218001'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 35.0
+    url: http://www.games-workshop.com:80/en-GB/Battletome-Stormcast-Eternals-ENG
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Stormcast-Eternals-ENG
   - id: games-workshop/60030218002
     name: Battletome Stormcast Eternals Extremis (HB) - Age Of Sigmar - 60030218002
     manufacturer: games-workshop
@@ -7341,10 +7886,31 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-13'
+    priceGbp: 20.0
     url: https://www.goblingaming.co.uk/products/bt-stormcast-eternals-extremis-hb-eng
     evidence:
       - arc-goblingaming:/products/bt-stormcast-eternals-extremis-hb-eng
+      - arc-gw-webstore:/en-GB/Battletome-Stormcast-Eternals-Extremis-EN
       - bdb-goupc:9781785810770
+  - id: games-workshop/60030218004
+    name: 'Battletome: Stormcast Eternals'
+    manufacturer: games-workshop
+    productCode: '60030218004'
+    sku: '60030218004'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-14'
+    priceGbp: 25.0
+    url: https://www.games-workshop.com/en-GB/Battletome-Stormcast-Eternals-ENG-HB-2017
+    evidence:
+      - arc-gw-webstore:/en-GB/Battletome-Stormcast-Eternals-ENG-HB-2017
   - id: games-workshop/60030218006
     name: 'BATTLETOME: STORMCAST ETERNALS (HB) ENG'
     manufacturer: games-workshop
