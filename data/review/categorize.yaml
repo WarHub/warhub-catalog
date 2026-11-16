@@ -1,20 +1,20 @@
 summary:
-  products: 28061
+  products: 28060
   undecided: 1497
   byBasis:
     code: 7370
-    lexicon: 552
+    lexicon: 551
     mapped: 17572
     override: 14
     paint-barcode: 15
     stated: 1041
     unknown: 1497
-  decidedThisRun: 25509
+  decidedThisRun: 25508
   gameSystemsByBasis:
     classified: 1114
     code: 4407
     mapped: 2660
-    not-applicable: 8022
+    not-applicable: 8021
     override: 101
     setting: 968
     stated: 9288
@@ -23,7 +23,7 @@ summary:
     code: 857
     derived: 17566
     mapped: 11
-    not-applicable: 8093
+    not-applicable: 8092
     override: 3
     unknown: 1531
   rolesByBasis:
@@ -34,7 +34,7 @@ summary:
     override: 2
     paint-archive: 1958
     stated: 16
-    unknown: 3764
+    unknown: 3763
 conflicts:
   - entity: games-workshop/60010399003
     type: category-disagreement
@@ -248,6 +248,8 @@ unmapped:
   mfr-manticgames:
     - value: categories=kings-of-war
       wouldDecide: 36
+    - value: categories=black-friday
+      wouldDecide: 21
     - value: categories=deadzone
       wouldDecide: 16
     - value: categories=deals-and-offers
@@ -268,8 +270,6 @@ unmapped:
       wouldDecide: 10
     - value: categories=ogre-miniatures
       wouldDecide: 10
-    - value: categories=black-friday
-      wouldDecide: 9
     - value: categories=deadonze-matsudan
       wouldDecide: 9
     - value: categories=xirkaali
