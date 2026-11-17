@@ -1,15 +1,15 @@
 summary:
-  products: 28060
-  undecided: 1497
+  products: 28069
+  undecided: 1498
   byBasis:
-    code: 7370
+    code: 7378
     lexicon: 551
     mapped: 17572
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1497
-  decidedThisRun: 25508
+    unknown: 1498
+  decidedThisRun: 25516
   gameSystemsByBasis:
     classified: 1114
     code: 4407
@@ -17,20 +17,20 @@ summary:
     not-applicable: 8021
     override: 101
     setting: 968
-    stated: 9288
-    unknown: 1501
+    stated: 9296
+    unknown: 1502
   settingsByBasis:
     code: 857
-    derived: 17566
+    derived: 17574
     mapped: 11
     not-applicable: 8092
     override: 3
-    unknown: 1531
+    unknown: 1532
   rolesByBasis:
     code: 75
     lexicon: 183
     mapped: 1081
-    none: 20982
+    none: 20991
     override: 2
     paint-archive: 1958
     stated: 16
@@ -328,35 +328,37 @@ unmapped:
       wouldDecide: 4
   mfr-para-bellum:
     - value: categories=conquest
-      wouldDecide: 30
+      wouldDecide: 31
     - value: categories=factions
-      wouldDecide: 24
+      wouldDecide: 25
     - value: categories=spires
       wouldDecide: 19
     - value: categories=limited-editions
       wouldDecide: 11
     - value: categories=brute-cavalry-sale
       wouldDecide: 7
-    - value: categories=regiments-on-sale
-      wouldDecide: 6
     - value: categories=start-here
+      wouldDecide: 7
+    - value: categories=regiments-on-sale
       wouldDecide: 6
     - value: categories=monster-sale
       wouldDecide: 5
     - value: categories=new-upcoming
-      wouldDecide: 4
+      wouldDecide: 5
     - value: categories=2000pt-armies
       wouldDecide: 3
-    - value: categories=sales
+    - value: categories=pre-orders
+      wouldDecide: 3
+    - value: categories=the-last-argument-of-kings
       wouldDecide: 3
     - value: categories=new-releases
       wouldDecide: 2
-    - value: categories=pre-orders
-      wouldDecide: 2
-    - value: categories=the-last-argument-of-kings
+    - value: categories=sales
       wouldDecide: 2
     - value: categories=yoroni
       wouldDecide: 2
+    - value: categories=city-states
+      wouldDecide: 1
     - value: categories=dweghom
       wouldDecide: 1
     - value: categories=first-blood
@@ -364,8 +366,6 @@ unmapped:
     - value: categories=hundred-kingdoms
       wouldDecide: 1
     - value: categories=offers
-      wouldDecide: 1
-    - value: categories=one-player-starter-sales
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
       wouldDecide: 1
