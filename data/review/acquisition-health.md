@@ -1,6 +1,6 @@
 # Acquisition health (combined)
 
-_Run 2026-11-16 -- combined per-group reports, group order A1-G._
+_Run 2026-11-17 -- combined per-group reports, group order A1-G._
 
 ---
 
@@ -33,15 +33,15 @@ _Run 2026-11-16 -- combined per-group reports, group order A1-G._
 | source | status | full sweep | observations | marked missed | stats |
 |---|---|---|---|---|---|
 | mfr-corvus-belli | ok | True | 256 | 43 | fetched_pages=23, products_seen=256, reported_total=256, skipped_missing_identifier=0, skipped_missing_name=0, skipped_unknown_vendor=0, unmapped_hints=0 |
-| mfr-gw-algolia | ok | True | 2891 | 254 | cross_slice_duplicates=196, fetched_pages=34, malformed_object_id=0, missing_game_system_facets=0, products_seen=2891, reported_nbhits=2891, skipped_missing_name=0, skipped_unknown_vendor=0, slices_over_pagination_cap=0, unmapped_hints=2475 |
-| mfr-manticgames | ok | False | 2888 | 0 | detail_fetch_errors=264, details_fetched=300, excluded_keys=1, excluded_retracted=0, fetched_pages=30, gtins_found=0, products_seen=2889, reported_total=2889, skipped_unknown_vendor=0, unmapped_hints=4488 |
-| mfr-para-bellum | ok | True | 417 | 14 | detail_fetch_errors=0, details_fetched=0, fetched_pages=6, gtins_found=0, products_seen=417, reported_total=417, skipped_unknown_vendor=0, unmapped_hints=85 |
+| mfr-gw-algolia | ok | True | 2891 | 254 | cross_slice_duplicates=196, fetched_pages=34, malformed_object_id=0, missing_game_system_facets=0, products_seen=2891, reported_nbhits=2891, skipped_missing_name=0, skipped_unknown_vendor=0, slices_over_pagination_cap=0, unmapped_hints=2473 |
+| mfr-manticgames | ok | False | 2888 | 0 | detail_fetch_errors=264, details_fetched=2675, excluded_keys=1, excluded_retracted=0, fetched_pages=30, gtins_found=0, products_seen=2889, reported_total=2889, skipped_unknown_vendor=0, unmapped_hints=4488 |
+| mfr-para-bellum | ok | True | 426 | 14 | detail_fetch_errors=0, details_fetched=0, fetched_pages=6, gtins_found=0, products_seen=426, reported_total=426, skipped_unknown_vendor=0, unmapped_hints=86 |
 
 ## Unmapped hints
 
-- mfr-gw-algolia: 2475
+- mfr-gw-algolia: 2473
 - mfr-manticgames: 4488
-- mfr-para-bellum: 85
+- mfr-para-bellum: 86
 
 ---
 
@@ -62,5 +62,5 @@ _Run 2026-11-16 -- combined per-group reports, group order A1-G._
 
 | source | status | full sweep | observations | marked missed | stats |
 |---|---|---|---|---|---|
-| ret-gamenerdz | ok | False | 742 | 0 | breadcrumbs_found=742, ean_source_bcdata=740, ean_source_jsonld=0, ean_source_microdata=0, eans_found=740, extraction_failed=8, fetch_errors=7, fetched_sitemaps=34, pages_fetched=1000, sitemap_urls_filtered=5105, sitemap_urls_total=268517, skipped_unknown_manufacturer=243 |
+| ret-gamenerdz | ok | False | 776 | 0 | breadcrumbs_found=776, ean_source_bcdata=762, ean_source_jsonld=0, ean_source_microdata=0, eans_found=762, extraction_failed=4, fetch_errors=7, fetched_sitemaps=34, pages_fetched=1000, sitemap_urls_filtered=5104, sitemap_urls_total=268524, skipped_unknown_manufacturer=213 |
 | ret-radaddel | rate-limited |  |  |  | HTTP 429: failed to fetch /products.json (status=429) |
