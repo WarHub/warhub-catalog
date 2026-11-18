@@ -6259,9 +6259,13 @@ products:
     manufacturer: para-bellum
     productCode: PBW6182
     sku: PBW6182
+    gameSystems:
+      - conquest
     faction: old-dominion
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystemsBasis: stated
+    settings:
+      - ea
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     packaging: set
