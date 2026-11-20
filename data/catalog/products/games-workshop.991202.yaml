@@ -471,7 +471,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     url: https://www.warhammer.com/en-GB/shop/Ogrid-Thaumaturge
@@ -619,7 +619,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     url: https://www.warhammer.com/en-GB/shop/Lord-of-Afflictions-2018
@@ -2255,7 +2255,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 67.5
     priceEur: 69.6
@@ -4672,7 +4672,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 95.0
     priceEur: 98.2
@@ -8258,7 +8258,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 98.2
@@ -9901,7 +9901,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 25.0
     priceEur: 26.6
@@ -10282,6 +10282,27 @@ products:
     firstSeen: '2026-08-22'
     evidence:
       - mfr-gw-trade:99120206065
+  - id: games-workshop/99120206066
+    name: Clawlord
+    manufacturer: games-workshop
+    productCode: '99120206066'
+    sku: '99120206066'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: stated
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-20'
+    priceGbp: 19.5
+    url: https://www.warhammer.com/en-GB/shop/Skaven-Warlord-2014
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070206002_SKAClawlordwithBanner01.jpg
+    evidence:
+      - mfr-gw-algolia:prod2670141-99120206066
   - id: games-workshop/99120206067
     name: Gutter Runners
     manufacturer: games-workshop
@@ -12862,7 +12883,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 77.5
     priceEur: 79.4
@@ -14393,6 +14414,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/cursed-sepulchre-nexus-of-grief
       - mfr-gw-algolia:P-214657-99120207193
+      - mfr-gw-algolia:P-267350-99120207193
       - mfr-gw-trade:99120207193
       - ret-gamenerdz:/warhammer-age-of-sigmar-soulblight-gravelords-cursed-sepulchre
       - ret-goblingaming:soulblight-gravelords-cursed-sepulchre
@@ -14685,6 +14707,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-death/liege-kavalos-on-war-chariot
       - mfr-gw-algolia:P-239648-99120207200
+      - mfr-gw-algolia:P-267340-99120207200
       - mfr-gw-trade:99120207200
       - ret-gamenerdz:/warhammer-age-of-sigmar-ossiarch-bonereapers-liege-kavalos-on-war-chariot
       - ret-goblingaming:ossiarch-bonereapers-liege-kavalos-on-war-chariot
@@ -21166,7 +21189,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 95.0
     priceEur: 90.0
@@ -21518,6 +21541,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/daemonsmith-ashen-elder
       - mfr-gw-algolia:P-230127-99120211005
+      - mfr-gw-algolia:P-267349-99120211005
       - mfr-gw-trade:99120211005
       - ret-gamenerdz:/warhammer-age-of-sigmar-helsmiths-of-hashut-daemonsmith
       - ret-goblingaming:helsmiths-of-hashut-daemonsmith
@@ -21562,6 +21586,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/deathshrieker-rocket-battery-tormentor-bombard
       - mfr-gw-algolia:P-230139-99120211006
+      - mfr-gw-algolia:P-267341-99120211006
       - mfr-gw-trade:99120211006
       - ret-gamenerdz:/warhammer-age-of-sigmar-helsmiths-of-hashut-deathshrieker-rocket-battery
       - ret-goblingaming:helsmiths-of-hashut-deathshrieker-rocket-battery
@@ -21606,6 +21631,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/age-of-sigmar/grand-alliance-chaos/bull-centaurs-annointed-sentinels
       - mfr-gw-algolia:P-230136-99120211007
+      - mfr-gw-algolia:P-267348-99120211007
       - mfr-gw-trade:99120211007
       - ret-gamenerdz:/warhammer-age-of-sigmar-helsmiths-of-hashut-bull-centaurs
       - ret-goblingaming:helsmiths-of-hashut-bull-centaurs
@@ -23523,7 +23549,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceGbp: 34.0
     url: https://www.warhammer.com/en-GB/shop/ogor-mawtribes-tyrant-2026
@@ -24338,7 +24364,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     url: https://www.warhammer.com/en-GB/shop/Stormcast-Eternals-Lord-Aquilor-2017

@@ -14,6 +14,13 @@ conflicts:
           - ret-gamenerdz
   - type: ambiguous-join
     keys:
+      - arc-wargameportal:/products/clawlord
+    name: Clawlord
+    candidates:
+      - games-workshop/99070206002
+      - games-workshop/99120206066
+  - type: ambiguous-join
+    keys:
       - arc-wargameportal:/products/alchemite-warforger
     name: Alchemite Warforger
     candidates:
