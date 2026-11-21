@@ -169,29 +169,37 @@ products:
     manufacturer: games-workshop
     sku: GWS60-53
     ean: '5011921272945'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40-000-getting-started-with-orks
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200a-1017010300260-53GettingStartedWithOrks-CAN.jpg?v=1783729421
     evidence:
       - ret-gamenerdz:/warhammer-40-000-getting-started-with-orks
+      - ret-tistaminis:getting-started-with-orks
   - id: games-workshop/warhammer-40-000-getting-started-with-space-marines
     name: Warhammer 40,000 Getting Started with Space Marines
     manufacturer: games-workshop
     sku: GWS60-52
     ean: '5011921272709'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40-000-getting-started-with-space-marines
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200a-1017010100360-52GettingStartedWithSpaceMarines-CAN_5e664aca-4607-4b36-b979-e4976ffbfc9e.jpg?v=1783729421
     evidence:
       - ret-gamenerdz:/warhammer-40-000-getting-started-with-space-marines
+      - ret-tistaminis:getting-started-with-space-marines
   - id: games-workshop/warhammer-40-000-grundregeln-deutsch
     name: 'Warhammer 40.000: Grundregeln (deutsch)'
     manufacturer: games-workshop
@@ -390,8 +398,8 @@ products:
     url: https://www.radaddel.de/warhammer-40.000-ultimatives-starter-set-deutsch
     evidence:
       - ret-radaddel:/warhammer-40.000-ultimatives-starter-set-deutsch
-  - id: games-workshop/warhammer-40000-orks-dice-pre-order-wave-2
-    name: 'WARHAMMER 40000: ORKS DICE - PRE-ORDER (WAVE 2)'
+  - id: games-workshop/warhammer-40000-orks-dice
+    name: 'WARHAMMER 40000: ORKS DICE'
     manufacturer: games-workshop
     sku: 50-05
     gameSystemsBasis: unknown
@@ -399,7 +407,7 @@ products:
     category: game-accessory
     categoryBasis: lexicon
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-25'
     priceCad: 34.85
     url: https://tistaminis.com/products/warhammer-40000-orks-dice-pre-order
@@ -411,29 +419,37 @@ products:
     manufacturer: games-workshop
     sku: GWS73-012
     ean: '5011921275236'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: out_of_stock
     firstSeen: '2026-11-15'
+    priceCad: 180.2
     url: https://www.gamenerdz.com/warhammer-40k-adeptus-custodes-combat-patrol-11th-edition
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99120143014_AdeptusCustodesCombatPatrol05.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-40k-adeptus-custodes-combat-patrol-11th-edition
+      - ret-tistaminis:combat-patrol-adeptus-custodes-pre-order
   - id: games-workshop/warhammer-40k-adeptus-custodes-command-pack
     name: 'Warhammer 40K: Adeptus Custodes - Command Pack'
     manufacturer: games-workshop
     sku: GWS01-15-2026
     ean: '5011921288915'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 36.55
     url: https://www.gamenerdz.com/warhammer-40k-adeptus-custodes-command-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_60050143001_ENGAdeptusCustodesCommandPack01.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-40k-adeptus-custodes-command-pack
+      - ret-tistaminis:command-pack-adeptus-custodes-pre-order
   - id: games-workshop/warhammer-40k-apocalypse
     name: 'Warhammer 40K: Apocalypse'
     manufacturer: games-workshop
@@ -641,6 +657,23 @@ products:
     url: https://www.gamenerdz.com/warhammer-40k-battle-journal
     evidence:
       - ret-gamenerdz:/warhammer-40k-battle-journal
+  - id: games-workshop/warhammer-40k-battlefields-armageddon
+    name: 'WARHAMMER 40K BATTLEFIELDS: ARMAGEDDON'
+    manufacturer: games-workshop
+    sku: 40-70
+    ean: '5011921274116'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-11-21'
+    priceCad: 403.75
+    url: https://tistaminis.com/products/warhammer-40k-battlefields-armageddon-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99120199167_BattlefieldsArmageddon15_1.jpg?v=1792203969
+    evidence:
+      - ret-tistaminis:warhammer-40k-battlefields-armageddon-pre-order
   - id: games-workshop/warhammer-40k-chaos-space-marines-datacards-2017
     name: 'Warhammer 40K: Chaos Space Marines Datacards (2017)'
     manufacturer: games-workshop
@@ -820,20 +853,6 @@ products:
     url: https://www.gamenerdz.com/warhammer-40k-imperium-nihilus-vigilus-defiant-hardcover
     evidence:
       - ret-gamenerdz:/warhammer-40k-imperium-nihilus-vigilus-defiant-hardcover
-  - id: games-workshop/warhammer-40k-introductory-set-2026
-    name: 'Warhammer 40K: Introductory Set (2026)'
-    manufacturer: games-workshop
-    sku: GWS40-04-2026
-    ean: '5011921260430'
-    eanConfidence: provisional
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    firstSeen: '2026-08-22'
-    url: https://www.gamenerdz.com/warhammer-40k-introductory-set-2026
-    evidence:
-      - ret-gamenerdz:/warhammer-40k-introductory-set-2026
   - id: games-workshop/warhammer-40k-kill-team-killzone-octarius
     name: 'Warhammer 40K: Kill Team - Killzone Octarius'
     manufacturer: games-workshop
@@ -863,7 +882,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 38.25
+    priceCad: 39.95
     url: https://www.gamenerdz.com/warhammer-40k-orks-boyz-paints
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_EB200a-5617010300160-05OrksPlusPaints-USACANJPN_caeca07a-5f16-490a-bf1c-fb3d7576aecf.jpg?v=1783729422
     evidence:
@@ -938,7 +957,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 46.75
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-40k-paints-tools-2026
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_BSF-5617019900260-12Warhammer40000PaintsPlusTools-USACANJPN_181c95a8-9921-411e-9280-6251039f5cfe.jpg?v=1783729421
     evidence:
@@ -1084,196 +1103,248 @@ products:
     manufacturer: games-workshop
     sku: GWS60-11-2026
     ean: '5011921260331'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    firstSeen: '2026-08-22'
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceCad: 39.95
     url: https://www.gamenerdz.com/warhammer-40k-space-marine-intercessors-paints
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_BSF-5617010100260-11SpaceMarinesIntercessorsPlusPaints-USACANJPN.jpg?v=1783729421
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marine-intercessors-paints
+      - ret-tistaminis:warhammer-space-marine-intercessors-paints
   - id: games-workshop/warhammer-40k-space-marines-captain-on-bike
     name: 'Warhammer 40K: Space Marines - Captain on Bike'
     manufacturer: games-workshop
     sku: GWS48-113
     ean: '5011921267569'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 61.2
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-captain-on-bike
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101499_SpaceMarinesCaptainOnBike07.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike
       - ret-gamenerdz:/warhammer-40k-space-marines-captain-on-bike-preorder
+      - ret-tistaminis:space-marines-captain-on-bike-pre-order
   - id: games-workshop/warhammer-40k-space-marines-codex-11th-edition
     name: 'Warhammer 40K: Space Marines - Codex (11th Edition)'
     manufacturer: games-workshop
     sku: GWS48-01-11E
     ean: '9781804578544'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     category: book
     categoryBasis: lexicon
     status: current
+    availability: out_of_stock
     firstSeen: '2026-09-30'
+    priceCad: 42.5
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-codex-11th-edition
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60030101066_ENGSpaceMarinesCodex1.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-codex-11th-edition
       - ret-gamenerdz:/warhammer-40k-space-marines-codex-11th-edition-preorder
+      - ret-tistaminis:codex-space-marines-pre-order
   - id: games-workshop/warhammer-40k-space-marines-command-pack
     name: 'Warhammer 40K: Space Marines - Command Pack'
     manufacturer: games-workshop
     sku: GWS48-02-2026
     ean: '5011921253869'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 36.55
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-command-pack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60050101028_ENGSpaceMarinesCommandPack1.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-command-pack
       - ret-gamenerdz:/warhammer-40k-space-marines-command-pack-preorder
+      - ret-tistaminis:command-pack-space-marines-pre-order
   - id: games-workshop/warhammer-40k-space-marines-dice-set-16ct
     name: 'Warhammer 40K: Space Marines - Dice Set (16ct)'
     manufacturer: games-workshop
     sku: GWS48-111
     ean: '5011921285235'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     category: game-accessory
     categoryBasis: mapped
     status: current
+    availability: out_of_stock
     firstSeen: '2026-09-30'
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-dice-set-16ct
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99220101041_SpaceMarinesDice2.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-dice-set-16ct
       - ret-gamenerdz:/warhammer-40k-space-marines-dice-set-16ct-preorder
+      - ret-tistaminis:warhammer-40000-space-marines-dice-pre-order
   - id: games-workshop/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
     name: 'Warhammer 40K: Space Marines - Eradicator Squad with Heavy Bolters'
     manufacturer: games-workshop
     sku: GWS48-110
     ean: '5011921267514'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101494_SpaceMarinesEradicatorSquadWithHeavyBolters06.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters
       - ret-gamenerdz:/warhammer-40k-space-marines-eradicator-squad-with-heavy-bolters-preorder
+      - ret-tistaminis:space-marine-eradicator-squad-with-heavy-bolters-pre-order
   - id: games-workshop/warhammer-40k-space-marines-intercessor-squad
     name: 'Warhammer 40K: Space Marines - Intercessor Squad'
     manufacturer: games-workshop
     sku: GWS48-115
     ean: '5011921267538'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 68.85
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-intercessor-squad
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101496_SpaceMarinesIntercessorSquad07_2e8f102d-7f49-410f-a9e3-8293c3da82d4.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad
       - ret-gamenerdz:/warhammer-40k-space-marines-intercessor-squad-preorder
+      - ret-tistaminis:space-marines-intercessor-squad-pre-order
   - id: games-workshop/warhammer-40k-space-marines-kaius-konorius
     name: 'Warhammer 40K: Space Marines - Kaius Konorius'
     manufacturer: games-workshop
     sku: GWS55-77
     ean: '5011921267576'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 49.3
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-kaius-konorius
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101500_SpaceMarinesKaiusKonorius06.jpg?v=1789782492
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius
       - ret-gamenerdz:/warhammer-40k-space-marines-kaius-konorius-preorder
+      - ret-tistaminis:space-marines-kaius-konorius-pre-order
   - id: games-workshop/warhammer-40k-space-marines-land-speeder
     name: 'Warhammer 40K: Space Marines - Land Speeder'
     manufacturer: games-workshop
     sku: GWS48-107
     ean: '5011921267521'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 68.0
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-land-speeder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101495_SpaceMarinesLandSpeeder05.jpg?v=1789782492
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder
       - ret-gamenerdz:/warhammer-40k-space-marines-land-speeder-preorder
+      - ret-tistaminis:space-marines-land-speeder-pre-order
   - id: games-workshop/warhammer-40k-space-marines-outrider-squad
     name: 'Warhammer 40K: Space Marines - Outrider Squad'
     manufacturer: games-workshop
     sku: GWS48-112
     ean: '5011921267552'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: out_of_stock
     firstSeen: '2026-09-30'
+    priceCad: 69.7
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-outrider-squad
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101498_SpaceMarinesOutriderSquad07_b1b27900-52ab-46ac-aea2-88ed18d952bd.jpg?v=1789782491
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad
       - ret-gamenerdz:/warhammer-40k-space-marines-outrider-squad-preorder
+      - ret-tistaminis:space-marines-outrider-squad-pre-order
   - id: games-workshop/warhammer-40k-space-marines-rhino
     name: 'Warhammer 40K: Space Marines - Rhino'
     manufacturer: games-workshop
     sku: GWS48-109
     ean: '5011921279074'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 63.75
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-rhino
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101517_SpaceMarinesRhino08.jpg?v=1789782492
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-rhino
       - ret-gamenerdz:/warhammer-40k-space-marines-rhino-preorder
+      - ret-tistaminis:space-marines-rhino-pre-order
   - id: games-workshop/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
     name: 'Warhammer 40K: Space Marines - Vanguard Veteran Squad with Jump Packs'
     manufacturer: games-workshop
     sku: GWS48-106
     ean: '5011921267545'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 68.85
     url: https://www.gamenerdz.com/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120101497_SpaceMarinesVanguardVeteransWithJumpPacks09.jpg?v=1789782492
     evidence:
       - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs
       - ret-gamenerdz:/warhammer-40k-space-marines-vanguard-veteran-squad-with-jump-packs-preorder
+      - ret-tistaminis:space-marine-vanguard-veteran-squad-w-jump-packs-pre-order
   - id: games-workshop/warhammer-40k-the-horus-heresy-custodes-shield-captain
     name: 'Warhammer 40K / The Horus Heresy: Custodes - Shield Captain'
     manufacturer: games-workshop
     sku: GWS77-06
     ean: '5011921285792'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 47.6
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-shield-captain
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043018_AdeptusCustodesSHIELDCAPTAINBOX.jpg?v=1790993497
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-shield-captain
+      - ret-tistaminis:custodes-shield-captain-pre-order
   - id: games-workshop/warhammer-40k-ultramarines-captain-uriel-ventris-black-library-celebration-2021
     name: 'Warhammer 40K: Ultramarines - Captain Uriel Ventris (Black Library Celebration 2021)'
     manufacturer: games-workshop
@@ -1307,7 +1378,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceCad: 46.75
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-age-of-sigmar-paints-tools
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2024_07_170299003_INTAoSPaintTools1.jpg?v=1760364398
     evidence:
@@ -1390,16 +1461,20 @@ products:
     manufacturer: games-workshop
     sku: GWS93-01-2026
     ean: '9781804578643'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     category: book
     categoryBasis: lexicon
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 66.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60030231001_ENGSonsOfBehematBattletome01.jpg?v=1789177257
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-destruction-battletome-sons-of-behemat-2026
+      - ret-tistaminis:battletome-sons-of-behemat-pre-order
   - id: games-workshop/warhammer-age-of-sigmar-dispossessed-ironbreakers
     name: 'Warhammer Age of Sigmar: Dispossessed Ironbreakers'
     manufacturer: games-workshop
@@ -1575,44 +1650,56 @@ products:
     manufacturer: games-workshop
     sku: GWS93-14
     ean: '5011921274666'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 318.75
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60010231001_ENGSonsOfBehematBrawlersOfBehemat01.jpg?v=1789177256
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-brawlers-of-behemat
+      - ret-tistaminis:age-of-sigmar-brawlers-of-behemat-pre-order
   - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-dice-set-16ct
     name: 'Warhammer Age of Sigmar: Sons of Behemat - Dice Set (16ct)'
     manufacturer: games-workshop
     sku: GWS93-11
     ean: '5011921285143'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     category: game-accessory
     categoryBasis: mapped
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-dice-set-16ct-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99220231001_SonsOfBehematDice02.jpg?v=1789177256
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-dice-set-16ct-preorder
+      - ret-tistaminis:age-of-sigmar-sons-of-behemat-dice-pre-order
   - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
     name: 'Warhammer Age of Sigmar: Sons of Behemat - Ma Maegran, Chooser of the Mighty'
     manufacturer: games-workshop
     sku: GWS93-15
     ean: '5011921274611'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 195.5
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120231001_SonsofBehematMaMaegran09.jpg?v=1789177256
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-ma-maegran-chooser-of-the-mighty
+      - ret-tistaminis:sons-of-behemat-ma-maegran-chooser-of-the-mighty-pre-order
   - id: games-workshop/warhammer-age-of-sigmar-sons-of-behemat-stomper-tribe
     name: 'Warhammer Age of Sigmar: Sons of Behemat - Stomper Tribe'
     manufacturer: games-workshop
@@ -1632,15 +1719,19 @@ products:
     manufacturer: games-workshop
     sku: GWS93-04
     ean: '5011921285501'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-09-30'
+    priceCad: 36.55
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sons-of-behemat-warscroll-cards
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60050231001_ENGSonsOfBehematWarscrollCards01.jpg?v=1789177256
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-sons-of-behemat-warscroll-cards
+      - ret-tistaminis:warscroll-cards-sons-of-behemat-pre-order
   - id: games-workshop/warhammer-age-of-sigmar-stormcast-eternals-vanguard-hunters
     name: 'Warhammer Age of Sigmar: Stormcast Eternals - Vanguard-Hunters'
     manufacturer: games-workshop
@@ -1733,6 +1824,22 @@ products:
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-warscroll-cards-bonesplitterz
     evidence:
       - ret-gamenerdz:/warhammer-age-of-sigmar-warscroll-cards-bonesplitterz
+  - id: games-workshop/warhammer-apocalypse-necron-datasheet-cards-new
+    name: Warhammer Apocalypse Necron Datasheet Cards New
+    manufacturer: games-workshop
+    sku: 49-24-60
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: game-accessory
+    categoryBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 20.0
+    url: https://tistaminis.com/products/warhammer-apocalypse-necron-datasheet-cards-new
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_92e3276a-641f-4ab8-b083-51af7736667b.jpg?v=1759927907
+    evidence:
+      - ret-tistaminis:warhammer-apocalypse-necron-datasheet-cards-new
   - id: games-workshop/warhammer-bandai-intercessor-figure-imperial-fists-new
     name: Warhammer Bandai Intercessor Figure - Imperial Fists New
     manufacturer: games-workshop
@@ -1831,15 +1938,19 @@ products:
     manufacturer: games-workshop
     sku: GWS50-83
     ean: '5011921272563'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: out_of_stock
     firstSeen: '2026-11-15'
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-commemorative-series-da-red-gobbo-s-squigmobile
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_TR-50-8399120103145DaRedGobboSquigmobile.jpg?v=1793847428
     evidence:
       - ret-gamenerdz:/warhammer-commemorative-series-da-red-gobbo-s-squigmobile
+      - ret-tistaminis:da-red-gobbos-squigmobile-pre-order
   - id: games-workshop/warhammer-commemorative-series-necrons-kamoteph-the-crooked
     name: Warhammer Commemorative Series - Necrons Kamoteph the Crooked
     manufacturer: games-workshop
@@ -1888,7 +1999,7 @@ products:
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceCad: 54.0
     url: https://tistaminis.com/products/warhammer-hedonites-of-slaanesh-thricefold-discord
@@ -2070,15 +2181,19 @@ products:
     manufacturer: games-workshop
     sku: GWS301-85
     ean: '5011921252794'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-04'
+    priceCad: 56.1
     url: https://www.gamenerdz.com/warhammer-necromunda-escher-blades-of-the-matriarch
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99120599086_EscherBladesoftheMatriarch7.jpg?v=1788571976
     evidence:
       - ret-gamenerdz:/warhammer-necromunda-escher-blades-of-the-matriarch
+      - ret-tistaminis:necromunda-escher-blades-of-the-matriarch
   - id: games-workshop/warhammer-necromunda-goliath-gang-cards-new
     name: Warhammer Necromunda Goliath Gang Cards New
     manufacturer: games-workshop
@@ -2119,6 +2234,74 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/166614_in_1000x1000_54f99de9-4e75-467c-a7c9-e715bff50be2.jpg?v=1760016578
     evidence:
       - ret-tistaminis:warhammer-pnecromunda-van-saar-gang-tactics-cards-new
+  - id: games-workshop/warhammer-pro-tone-drybrush-large
+    name: 'WARHAMMER PRO: TONE DRYBRUSH LARGE'
+    manufacturer: games-workshop
+    sku: 63-35
+    ean: '5011921259472'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 22.1
+    url: https://tistaminis.com/products/warhammer-pro-tone-drybrush-large
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99199999111_WarhammerColourProBrushToneDryL1.jpg?v=1791598760
+    evidence:
+      - ret-tistaminis:warhammer-pro-tone-drybrush-large
+  - id: games-workshop/warhammer-pro-tone-drybrush-medium
+    name: 'WARHAMMER PRO: TONE DRYBRUSH MEDIUM'
+    manufacturer: games-workshop
+    sku: 63-34
+    ean: '5011921259465'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 16.15
+    url: https://tistaminis.com/products/warhammer-pro-tone-drybrush-medium
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99199999110_WarhammerColourProBrushToneDryM1.jpg?v=1791598761
+    evidence:
+      - ret-tistaminis:warhammer-pro-tone-drybrush-medium
+  - id: games-workshop/warhammer-pro-tone-drybrush-small
+    name: 'WARHAMMER PRO: TONE DRYBRUSH SMALL'
+    manufacturer: games-workshop
+    sku: 63-33
+    ean: '5011921259458'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 14.03
+    url: https://tistaminis.com/products/warhammer-pro-tone-drybrush-small
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99199999109_WarhammerColourProBrushToneDryS1.jpg?v=1791598761
+    evidence:
+      - ret-tistaminis:warhammer-pro-tone-drybrush-small
+  - id: games-workshop/warhammer-pro-tone-drybrush-x-sml
+    name: 'WARHAMMER PRO: TONE DRYBRUSH X-SML'
+    manufacturer: games-workshop
+    sku: 63-32
+    ean: '5011921259441'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 13.6
+    url: https://tistaminis.com/products/warhammer-pro-tone-drybrush-x-sml
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99199999108_WarhammerColourProBrushToneDryXS1.jpg?v=1791598761
+    evidence:
+      - ret-tistaminis:warhammer-pro-tone-drybrush-x-sml
   - id: games-workshop/warhammer-pro-tools-drill
     name: 'Warhammer Pro Tools: Drill'
     manufacturer: games-workshop
@@ -2171,21 +2354,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/57_0b56005a-8908-4b8b-9541-9999e31cb89e.jpg?v=1759928867
     evidence:
       - ret-tistaminis:warhammer-runelord-brass-spray-paint-pre-order
-  - id: games-workshop/warhammer-space-marine-intercessors-paints
-    name: WARHAMMER SPACE MARINE INTERCESSORS +PAINTS
-    manufacturer: games-workshop
-    sku: 60-11
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    categoryBasis: unknown
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceCad: 38.25
-    url: https://tistaminis.com/products/warhammer-space-marine-intercessors-paints
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_07_BSF-5617010100260-11SpaceMarinesIntercessorsPlusPaints-USACANJPN.jpg?v=1783729421
-    evidence:
-      - ret-tistaminis:warhammer-space-marine-intercessors-paints
   - id: games-workshop/warhammer-synthetic-base-brush-large
     name: 'Warhammer: Synthetic Base Brush - Large'
     manufacturer: games-workshop
@@ -2347,141 +2515,181 @@ products:
     manufacturer: games-workshop
     sku: GWS77-10
     ean: '5011921285860'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 103.7
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-caladius-annihilator-grav-tank
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043020_AdeptusCustodesCaladiusAnnihilatorGravTankBOX.jpg?v=1790993497
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-caladius-annihilator-grav-tank
+      - ret-tistaminis:custodes-caladius-annihilator-grav-tank-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-caladius-grav-tank
     name: 'Warhammer The Horus Heresy: Custodes - Caladius Grav-Tank'
     manufacturer: games-workshop
     sku: GWS77-09
     ean: '5011921285822'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 103.7
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-caladius-grav-tank
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043019_AdeptusCustodesCaladiusGravTankBOX.jpg?v=1790993497
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-caladius-grav-tank
+      - ret-tistaminis:custodes-caladius-grav-tank-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-coronus-grav-carrier
     name: 'Warhammer The Horus Heresy: Custodes - Coronus Grav-Carrier'
     manufacturer: games-workshop
     sku: GWS77-11
     ean: '5011921285853'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 136.0
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-coronus-grav-carrier
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043021_AdeptusCustodesCoronusGravCarrierBOX.jpg?v=1790993497
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-coronus-grav-carrier
+      - ret-tistaminis:custodes-coronus-grav-carrier-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-custodian-dreadnought
     name: 'Warhammer The Horus Heresy: Custodes - Custodian Dreadnought'
     manufacturer: games-workshop
     sku: GWS77-08
     ean: '5011921285839'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: out_of_stock
     firstSeen: '2026-11-15'
+    priceCad: 83.3
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-custodian-dreadnought
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043023_AdeptusCustodesCustodianDreadnoughtBOX.jpg?v=1790993497
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-custodian-dreadnought
+      - ret-tistaminis:custodes-custodian-dreadnought-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-custodian-guard-sodality
     name: 'Warhammer The Horus Heresy: Custodes - Custodian Guard Sodality'
     manufacturer: games-workshop
     sku: GWS77-04
     ean: '5011921285785'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 77.78
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-custodian-guard-sodality
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043016_AdeptusCustodesCustodianGuardSodalityBOX.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-custodian-guard-sodality
+      - ret-tistaminis:custodes-custodian-guard-sodality-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-gyrfalcon-jetbike-sodality
     name: 'Warhammer The Horus Heresy: Custodes - Gyrfalcon Jetbike Sodality'
     manufacturer: games-workshop
     sku: GWS77-03
     ean: '5011921267880'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 83.3
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-gyrfalcon-jetbike-sodality
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043013_AdeptusCustodesGyrfalconJetbikeSodalityBOX.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-gyrfalcon-jetbike-sodality
+      - ret-tistaminis:custodes-gyrfalcon-jetbike-sodality-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-pallas-grav-attack
     name: 'Warhammer The Horus Heresy: Custodes - Pallas Grav-Attack'
     manufacturer: games-workshop
     sku: GWS77-01
     ean: '5011921267897'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 83.3
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-pallas-grav-attack
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043014_CustodesPallasGravAttackBOX.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-pallas-grav-attack
+      - ret-tistaminis:custodes-pallas-grav-attack-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-sentinel-guard-sodality
     name: 'Warhammer The Horus Heresy: Custodes - Sentinel Guard Sodality'
     manufacturer: games-workshop
     sku: GWS77-07
     ean: '5011921285815'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 77.78
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-sentinel-guard-sodality
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043022_AdeptusCustodesSentinelGuardSodalityBOX.jpg?v=1790993497
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-sentinel-guard-sodality
+      - ret-tistaminis:custodes-sentinel-guard-sodality-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-telemon-heavy-dreadnought
     name: 'Warhammer The Horus Heresy: Custodes - Telemon Heavy Dreadnought'
     manufacturer: games-workshop
     sku: GWS77-02
     ean: '5011921267873'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 119.0
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-telemon-heavy-dreadnought
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043012_AdeptusCustodesTelemonHeavyDreadnoughtBOX.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-telemon-heavy-dreadnought
+      - ret-tistaminis:custodes-telemon-heavy-dreadnought-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-custodes-venatari-sodality
     name: 'Warhammer The Horus Heresy: Custodes - Venatari Sodality'
     manufacturer: games-workshop
     sku: GWS77-05
     ean: '5011921285808'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 85.0
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-custodes-venatari-sodality
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_99123043017_AdeptusCustodesVenatariSodalityBOX.jpg?v=1790993498
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-custodes-venatari-sodality
+      - ret-tistaminis:custodes-venatari-sodality-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-imperial-fists-legion-cataphractii-with-chainfist-1-18-scale-action-figure
     name: 'Warhammer: The Horus Heresy: Imperial Fists - Legion Cataphractii with Chainfist - 1/18 Scale Action Figure'
     manufacturer: games-workshop
@@ -2506,15 +2714,19 @@ products:
     manufacturer: games-workshop
     sku: GWS31-154
     ean: '9781837791897'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-04'
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-journal-tactica-prospero-burns-the-judgement-of-valdor
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_08_60043043001_HorusHeresyJournalTacticaProsperoBurnsJudgementOfValdor01.jpg?v=1787966643
     evidence:
       - ret-gamenerdz:/warhammer-the-horus-heresy-journal-tactica-prospero-burns-the-judgement-of-valdor
+      - ret-tistaminis:journal-tactica-prospero-burns-judgement-of-valdor-pre-order
   - id: games-workshop/warhammer-the-horus-heresy-mechanicum-dice-set
     name: 'Warhammer The Horus Heresy: Mechanicum Dice Set'
     manufacturer: games-workshop
@@ -2540,102 +2752,110 @@ products:
     manufacturer: games-workshop
     sku: GWS07-16
     ean: '9781837792672'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: out_of_stock
     firstSeen: '2026-11-15'
+    priceCad: 29.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-arcane-journal-the-river-of-bones
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_TR-07-1660042799021WarhammertheOldWorldArcaneJournalRiverOfBones.jpg?v=1793068682
     evidence:
       - ret-gamenerdz:/warhammer-the-old-world-arcane-journal-the-river-of-bones
+      - ret-tistaminis:arcane-journal-the-river-of-bones-pre-order
   - id: games-workshop/warhammer-the-old-world-beastmen-brayherds-battle-march-army
     name: 'Warhammer: The Old World - Beastmen Brayherds - Battle March Army'
     manufacturer: games-workshop
     sku: GWS08-112
     ean: '5011921274772'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 174.25
     url: https://www.gamenerdz.com/warhammer-the-old-world-beastmen-brayherds-battle-march-army
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_08_99122716009_BeastmanBrayherdsBattleMarchArmyBOX.jpg?v=1787966644
     evidence:
       - ret-gamenerdz:/warhammer-the-old-world-beastmen-brayherds-battle-march-army
+      - ret-tistaminis:beastmen-brayherds-battle-march-army-pre-order
   - id: games-workshop/warhammer-the-old-world-high-elf-realms-battle-march-army
     name: 'Warhammer: The Old World - High Elf Realms - Battle March Army'
     manufacturer: games-workshop
     sku: GWS13-23
     ean: '5011921274765'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 174.25
     url: https://www.gamenerdz.com/warhammer-the-old-world-high-elf-realms-battle-march-army
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_08_99122710020_HighElfRealmsBattleMarchArmyBOX_bbdb5f93-6ad4-45f0-a146-c08e0ef3deb8.jpg?v=1787966644
     evidence:
       - ret-gamenerdz:/warhammer-the-old-world-high-elf-realms-battle-march-army
-  - id: games-workshop/warhammer-the-old-world-rulebook-revised-1st-edition
-    name: Warhammer The Old World Rulebook Revised 1st Edition
-    manufacturer: games-workshop
-    sku: 05-02-1
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
-    category: book
-    categoryBasis: lexicon
-    status: current
-    availability: in_stock
-    firstSeen: '2026-08-22'
-    priceCad: 88.0
-    url: https://tistaminis.com/products/warhammer-warhammer-the-old-world-rulebook-revised-1st-edition
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/05-02_1.jpg?v=1785718369
-    evidence:
-      - ret-tistaminis:warhammer-warhammer-the-old-world-rulebook-revised-1st-edition
+      - ret-tistaminis:high-elf-realms-battle-march-army-pre-order
   - id: games-workshop/warhammer-the-old-world-tomb-kings-of-khemri-dice-set-20ct
     name: 'Warhammer: The Old World - Tomb Kings of Khemri - Dice Set (20ct)'
     manufacturer: games-workshop
     sku: GWS07-07-2026
     ean: '5011921278497'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     category: game-accessory
     categoryBasis: lexicon
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-the-old-world-tomb-kings-of-khemri-dice-set-20ct-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_TR-07-0799222717002TombKingsofKhemriDice.jpg?v=1793761032
     evidence:
       - ret-gamenerdz:/warhammer-the-old-world-tomb-kings-of-khemri-dice-set-20ct-preorder
+      - ret-tistaminis:the-old-world-tomb-kings-of-khemri-dice-pre-order
   - id: games-workshop/warhammer-the-old-world-tomb-kings-of-khemri-host-of-nehekhara-army-reinforcement-set
     name: 'Warhammer: The Old World - Tomb Kings of Khemri - Host of Nehekhara Army Reinforcement Set'
     manufacturer: games-workshop
     sku: GWS07-23
     ean: '5011921253715'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: out_of_stock
     firstSeen: '2026-11-15'
+    priceCad: 233.75
     url: https://www.gamenerdz.com/warhammer-the-old-world-tomb-kings-of-khemri-host-of-nehekhara-army-reinforcement-set-preorder
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_TR-07-2399122717012TombKingsOfKhemriHostofNehekharaArmyReinforcementSet.jpg?v=1794279737
     evidence:
       - ret-gamenerdz:/warhammer-the-old-world-tomb-kings-of-khemri-host-of-nehekhara-army-reinforcement-set-preorder
+      - ret-tistaminis:host-of-nehekhara-army-reinforcement-set-pre-order
   - id: games-workshop/warhammer-the-old-world-wood-elf-realms-battle-march-army
     name: 'Warhammer: The Old World - Wood Elf Realms - Battle March Army'
     manufacturer: games-workshop
     sku: GWS13-110
     ean: '5011921279036'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystemsBasis: unknown
     settingsBasis: unknown
     categoryBasis: unknown
     status: current
+    availability: in_stock
     firstSeen: '2026-11-15'
+    priceCad: 119.0
     url: https://www.gamenerdz.com/warhammer-the-old-world-wood-elf-realms-battle-march-army
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_08_99122704007_WoodElfRealmsBattleMarchArmyBOX.jpg?v=1787966644
     evidence:
       - ret-gamenerdz:/warhammer-the-old-world-wood-elf-realms-battle-march-army
+      - ret-tistaminis:wood-elf-realms-battle-march-army-pre-order
   - id: games-workshop/warhammer-tone-pro-paint-blackstone-void-1-12ml
     name: 'Warhammer Tone Pro Paint: Blackstone Void 1 (12ml)'
     manufacturer: games-workshop
@@ -5154,6 +5374,24 @@ products:
     url: https://www.radaddel.de/wh-underworlds-arena-mortis-deutsch
     evidence:
       - ret-radaddel:/wh-underworlds-arena-mortis-deutsch
+  - id: games-workshop/whisperblade-hb-pre-order
+    name: WHISPERBLADE (HB) - PRE-ORDER
+    manufacturer: games-workshop
+    sku: BL3360
+    ean: '9781804076491'
+    eanConfidence: provisional
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-11-21'
+    priceCad: 29.75
+    url: https://tistaminis.com/products/whisperblade-hb-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_10_TR-BL3360-60040281100BlackLibraryWhisperbladeENG.jpg?v=1793415044
+    evidence:
+      - ret-tistaminis:whisperblade-hb-pre-order
   - id: games-workshop/white-dwarf-517-oct-25
     name: WHITE DWARF 517 (OCT-25)
     manufacturer: games-workshop
@@ -5224,8 +5462,8 @@ products:
     evidence:
       - ret-radaddel:/white-dwarf-522-mar-26-deutsch
       - ret-radaddel:white-dwarf-522-mar-26-deutsch
-  - id: games-workshop/white-dwarf-525
-    name: White Dwarf 525
+  - id: games-workshop/white-dwarf-525-cities-of-sigmar
+    name: White Dwarf 525 - Cities of Sigmar
     manufacturer: games-workshop
     sku: WD525
     gameSystemsBasis: unknown
@@ -5281,7 +5519,7 @@ products:
     category: book
     categoryBasis: lexicon
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceCad: 15.3
     url: https://tistaminis.com/products/white-dwarf-526-jul-26-english
@@ -5336,6 +5574,54 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_08_60249999669_ENGWD52701.jpg?v=1786150706
     evidence:
       - ret-tistaminis:white-dwarf-527-aug-26-english-pre-order
+  - id: games-workshop/white-dwarf-528-sep-26-english
+    name: WHITE DWARF 528 (SEP-26) (ENGLISH)
+    manufacturer: games-workshop
+    sku: WD09-60-26
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 15.3
+    url: https://tistaminis.com/products/white-dwarf-528-sep-26-english-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_60249999670_ENGWD52801.jpg?v=1788571977
+    evidence:
+      - ret-tistaminis:white-dwarf-528-sep-26-english-pre-order
+  - id: games-workshop/white-dwarf-529-oct-26
+    name: WHITE DWARF 529 (OCT-26)
+    manufacturer: games-workshop
+    sku: WD10-60-26
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: lexicon
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-11-21'
+    priceCad: 15.3
+    url: https://tistaminis.com/products/white-dwarf-529-oct-26-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/images_2dbf3808-241a-4abb-8141-306d9bfb7f90.jpg?v=1792794498
+    evidence:
+      - ret-tistaminis:white-dwarf-529-oct-26-pre-order
+  - id: games-workshop/white-dwarf-530-nov-26-english-pre-order
+    name: WHITE DWARF 530 (NOV-26) (ENGLISH) - PRE-ORDER
+    manufacturer: games-workshop
+    sku: WD11-60-26
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: lexicon
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 15.3
+    url: https://tistaminis.com/products/white-dwarf-530-nov-26-english-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/ChatGPTImageAug10_2026_04_20_03PM_700x700_36b3a031-d56b-475c-a132-8f2b19ab2709.webp?v=1794074493
+    evidence:
+      - ret-tistaminis:white-dwarf-530-nov-26-english-pre-order
   - id: games-workshop/white-dwarf-issue-516-sept-2026-space-marines-special-issue
     name: White Dwarf Issue 516 (SEPT 2026) - Space Marines Special Issue!
     manufacturer: games-workshop

@@ -382,7 +382,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceCad: 18.69
     url: https://tistaminis.com/products/shadow-of-the-eighth-pb
@@ -544,6 +544,23 @@ products:
     evidence:
       - arc-goblingaming:/products/horus-heresy-betrayer-a-format
       - mfr-gw-trade:60100181242
+  - id: games-workshop/60100181267
+    name: 'Ciaphas Cain: The Greater Good (Premium Paperback)'
+    manufacturer: games-workshop
+    productCode: '60100181267'
+    sku: '60100181267'
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 7.0
+    url: http://www.games-workshop.com:80/en-GB/Ciaphas-Cain-The-Greater-Good-Premium-Paperback
+    evidence:
+      - arc-gw-webstore:/en-GB/Ciaphas-Cain-The-Greater-Good-Premium-Paperback
   - id: games-workshop/60100181271
     name: 'HORUS HERESY: VULKAN LIVES (PB)'
     manufacturer: games-workshop
@@ -1557,6 +1574,23 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:60100181445
+  - id: games-workshop/60100181448
+    name: Calgar's Fury (Paperback)
+    manufacturer: games-workshop
+    productCode: '60100181448'
+    sku: '60100181448'
+    gameSystemsBasis: setting
+    settings:
+      - warhammer-40k
+    settingsBasis: code
+    category: book
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 8.99
+    url: https://www.games-workshop.com/en-GB/Calgars-Fury-pb-2017
+    evidence:
+      - arc-gw-webstore:/en-GB/Calgars-Fury-pb-2017
   - id: games-workshop/60100181450
     name: 'HORUS HERESY: THE SILENT WAR (PB)'
     manufacturer: games-workshop
@@ -3398,11 +3432,13 @@ products:
     firstSeen: '2026-08-25'
     priceGbp: 8.49
     priceEur: 12.1
+    priceCad: 18.69
     url: https://www.goblingaming.co.uk/products/demolisher-pb
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/60100181557_BLDemolisher2026.jpg?v=1787325739
     evidence:
       - ret-goblingaming:demolisher-pb
       - ret-radaddel:demolisher-paperback-englisch
+      - ret-tistaminis:demolisher-pb-pre-order
   - id: games-workshop/60100181599
     name: 'HORUS HERESY: THE MASTER OF MANKIND'
     manufacturer: games-workshop
@@ -8987,7 +9023,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 36.12
     priceEur: 45.0
-    priceCad: 70.55
+    priceCad: 73.95
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-spearhead-sand-bone-gaming-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_05_60120299008_EngAgeofSigmarSandandBoneGamingPack06.jpg?v=1748594991
     evidence:
@@ -9018,7 +9054,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 37.6
     priceEur: 50.4
-    priceCad: 79.05
+    priceCad: 83.3
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-spearhead-city-of-ash-gaming-pack
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_06_60120299009_ENGCityOfAshGamingPack08.jpg?v=1781877096
     evidence:
