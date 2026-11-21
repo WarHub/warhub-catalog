@@ -301,7 +301,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
     url: https://store.warlordgames.com/products/american-war-of-independence-continental-infantry-1776-1783
@@ -522,6 +522,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
+    priceCad: 42.0
     url: https://store.warlordgames.com/products/franco-prussian-war-french-infantry-advancing
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/1-2-600x399.jpg?v=1738603492
     description: |-
@@ -531,6 +532,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/french/franco-prussian-war-french-infantry-advancing
       - mfr-warlord-store:franco-prussian-war-french-infantry-advancing
+      - ret-tistaminis:perry-miniatures-franco-prussian-war-french-infantry-advancing
   - id: perry-miniatures/FRE2
     name: Franco-Prussian War French Infantry firing line
     manufacturer: perry-miniatures
@@ -550,6 +552,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
+    priceCad: 42.0
     url: https://store.warlordgames.com/products/franco-prussian-war-french-infantry-firing-line
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/1-3-600x399.jpg?v=1738603739
     description: |-
@@ -559,6 +562,45 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/french/franco-prussian-war-french-infantry-firing-line
       - mfr-warlord-store:franco-prussian-war-french-infantry-firing-line
+      - ret-tistaminis:perry-miniatures-franco-prussian-war-french-infantry-firing
+  - id: perry-miniatures/PMDOW1
+    name: Perry Miniatures Napoleonic Duchy of Warsaw Infantry Battalion 1807-14 New
+    manufacturer: perry-miniatures
+    productCode: PMDOW1
+    sku: PMDOW1
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 42.0
+    url: https://tistaminis.com/products/perry-miniatures-napoleonic-duchy-of-warsaw-infantry-battalion-1807-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/PMDOW1-1.jpg?v=1760328014
+    evidence:
+      - ret-tistaminis:perry-miniatures-napoleonic-duchy-of-warsaw-infantry-battalion-1807-14
+  - id: perry-miniatures/PMDOW2
+    name: Perry Miniatures Napoleonic Duchy of Warsaw Infantry, Elite Companies 1807-14 New
+    manufacturer: perry-miniatures
+    productCode: PMDOW2
+    sku: PMDOW2
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 42.0
+    url: https://tistaminis.com/products/perry-miniatures-napoleonic-duchy-of-warsaw-infantry-elite-companies-1807-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/PMDOW2-1.jpg?v=1760328020
+    evidence:
+      - ret-tistaminis:perry-miniatures-napoleonic-duchy-of-warsaw-infantry-elite-companies-1807-14
   - id: perry-miniatures/PN1
     name: 'Napoleonic Wars: Prussian Line Infantry 1813-1815'
     manufacturer: perry-miniatures
@@ -672,6 +714,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 28.0
+    priceCad: 42.0
     url: https://store.warlordgames.com/products/russian-napoleonic-uhlans-1812-14
     imageUrl: https://cdn.shopify.com/s/files/1/0255/0949/4864/files/1-600x396.jpg?v=1738771523
     description: |-
@@ -685,6 +728,7 @@ products:
     evidence:
       - legacy-catalog:warlord-games/black-powder/general/russian-napoleonic-uhlans-1812-14
       - mfr-warlord-store:russian-napoleonic-uhlans-1812-14
+      - ret-tistaminis:perry-miniatures-russian-napoleonic-uhlans-1812-1814
   - id: perry-miniatures/RPB-3
     name: Medieval Cottage (1300-1700) plastic boxed set
     manufacturer: perry-miniatures
@@ -831,6 +875,63 @@ products:
     evidence:
       - legacy-catalog:warlord-games/bolt-action/general/mahdist-revolt-mahdist-ansar-1884-plastic-boxed-set
       - mfr-warlord-store:mahdist-revolt-plastic-mahdist-ansar-1884
+  - id: perry-miniatures/SPA70
+    name: Perry Miniatures Spanish Napoleonic Infantry (1) 1808-11
+    manufacturer: perry-miniatures
+    productCode: SPA70
+    sku: SPA70
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 42.0
+    url: https://tistaminis.com/products/perry-miniatures-spanish-napoleonic-infantry-1-1808-11
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/spa70.1.jpg?v=1760455722
+    evidence:
+      - ret-tistaminis:perry-miniatures-spanish-napoleonic-infantry-1-1808-11
+  - id: perry-miniatures/SPA80
+    name: Perry Miniatures Spanish Napoleonic Infantry (2) Firing Line 1808-11
+    manufacturer: perry-miniatures
+    productCode: SPA80
+    sku: SPA80
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 42.0
+    url: https://tistaminis.com/products/perry-miniatures-spanish-napoleonic-infantry-2-firing-line-1808-11
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/SPA80.1.jpg?v=1760455728
+    evidence:
+      - ret-tistaminis:perry-miniatures-spanish-napoleonic-infantry-2-firing-line-1808-11
+  - id: perry-miniatures/SPA90
+    name: Perry Miniatures Spanish Napoleonic Guerrillas 1808-14
+    manufacturer: perry-miniatures
+    productCode: SPA90
+    sku: SPA90
+    gameSystemsBasis: setting
+    settings:
+      - horse-and-musket
+    settingsBasis: code
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-21'
+    priceCad: 50.0
+    url: https://tistaminis.com/products/perry-miniatures-spanish-napoleonic-guerrillas-1808-14
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/SPA90.jpg?v=1775683161
+    evidence:
+      - ret-tistaminis:perry-miniatures-spanish-napoleonic-guerrillas-1808-14
   - id: perry-miniatures/VLW1
     name: British Infantry (Afghanistan and Sudan) 1877-1885
     manufacturer: perry-miniatures
