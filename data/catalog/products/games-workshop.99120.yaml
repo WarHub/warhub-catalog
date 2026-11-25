@@ -3331,7 +3331,7 @@ products:
     category: game-accessory
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-08-22'
     priceGbp: 16.0
     url: https://www.warhammer.com/en-GB/shop/necromunda-conditions-and-status-markers-2026
@@ -3416,7 +3416,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-09-30'
     priceGbp: 33.5
     url: https://www.warhammer.com/en-GB/shop/necromunda-goliath-forge-bosses-and-sumpkrocs-2026
@@ -5740,6 +5740,27 @@ products:
       - ret-goblingaming:crud-creek-nosepickers-team-blood-bowl
       - ret-radaddel:/blood-bowl-crud-creek-nosepickers-team
       - ret-radaddel:blood-bowl-crud-creek-nosepickers-team
+  - id: games-workshop/99120909009
+    name: 'Night Goblin Blood Bowl Team: The Eight Peaks Loonatics'
+    manufacturer: games-workshop
+    productCode: '99120909009'
+    sku: '99120909009'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: mapped
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 35.5
+    url: https://www.warhammer.com/en-GB/shop/blood-bowl-night-goblin-team-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120909009_NightGoblinTeam1.jpg
+    evidence:
+      - mfr-gw-algolia:P-267327-99120909009
   - id: games-workshop/99120910001
     name: 'High Elf Blood Bowl Team: The Caledor Dragons'
     manufacturer: games-workshop
@@ -5758,7 +5779,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 35.5
     priceEur: 35.6
@@ -6821,3 +6842,24 @@ products:
       - ret-goblingaming:blood-bowl-morg-n-thorg
       - ret-radaddel:blood-bowl-morg-n-thorg
       - ret-tistaminis:blood-bowl-morg-n-thorg-pre-order
+  - id: games-workshop/99120999024
+    name: Ripper Bolgrot & Fungus The Loon
+    manufacturer: games-workshop
+    productCode: '99120999024'
+    sku: '99120999024'
+    gameSystems:
+      - blood-bowl
+    gameSystemsBasis: mapped
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/blood-bowl-ripper-bolgrot-and-fungus-the-loon-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120999024_RipperBolgrotFungusLoon1.jpg
+    evidence:
+      - mfr-gw-algolia:P-267328-99120999024

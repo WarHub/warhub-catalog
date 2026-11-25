@@ -8288,6 +8288,7 @@ products:
     evidence:
       - mfr-gw-algolia:prod4530143-99120101465
       - mfr-gw-trade:99120101465
+      - ret-gamenerdz:/warhammer-40k-salamanders-upgrades-transfers
   - id: games-workshop/99120101467
     name: Lieutenant in Reiver Armour
     manufacturer: games-workshop
@@ -9062,6 +9063,25 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120101517_SpaceMarinesRhino01.jpg
     evidence:
       - mfr-gw-algolia:P-259687-99120101517
+  - id: games-workshop/99120102003
+    name: Chaos Space Marines Bike
+    manufacturer: games-workshop
+    productCode: '99120102003'
+    sku: '99120102003'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 8.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Bike
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Bike
   - id: games-workshop/99120102005
     name: KHORNE BERZERKERS
     manufacturer: games-workshop
@@ -9080,7 +9100,10 @@ products:
     categoryBasis: code
     status: discontinued
     firstSeen: '2026-07-23'
+    priceGbp: 23.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Khorne-Berzerkers
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Khorne-Berzerkers
       - mfr-gw-trade:99120102005
   - id: games-workshop/99120102012
     name: Chaos Predator
@@ -9115,12 +9138,72 @@ products:
 
       This miniature is supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Predator
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/chaos-predator
       - mfr-gw-algolia:prod1090577-99120102012
       - mfr-gw-trade:99120102012
       - ret-goblingaming:chaos-space-marines-predator-tank
       - ret-radaddel:/chaos-space-marines-predator
       - ret-radaddel:chaos-space-marines-predator
+  - id: games-workshop/99120102013
+    name: Defiler
+    manufacturer: games-workshop
+    productCode: '99120102013'
+    sku: '99120102013'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 41.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Defiler
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Defiler
+  - id: games-workshop/99120102017
+    name: Chaos Space Marines Attack Squad
+    manufacturer: games-workshop
+    productCode: '99120102017'
+    sku: '99120102017'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 15.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Attack-Squad
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Attack-Squad
+  - id: games-workshop/99120102024
+    name: Chaos Space Marines Spawn
+    manufacturer: games-workshop
+    productCode: '99120102024'
+    sku: '99120102024'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Spawn
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Spawn
+      - arc-gw-webstore:/en-GB/Chaos-Spawn
+      - arc-gw-webstore:/en-GB/Chaos-Spawn;jsessionid=990F8D2D8FF56C098272176C94313087
   - id: games-workshop/99120102025
     name: Chaos Vindicator
     manufacturer: games-workshop
@@ -9152,6 +9235,7 @@ products:
 
       This miniature is supplied unassembled and unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Vindicator
       - arc-wargameportal:/products/chaos-vindicator
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/chaos-vindicator
       - mfr-gw-algolia:prod1090579-99120102025
@@ -9159,6 +9243,120 @@ products:
       - ret-goblingaming:chaos-space-marines-vindicator
       - ret-radaddel:/chaos-space-marines-vindicator
       - ret-radaddel:chaos-space-marines-vindicator
+  - id: games-workshop/99120102027
+    name: Chaos Space Marines (3 models)
+    manufacturer: games-workshop
+    productCode: '99120102027'
+    sku: '99120102027'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 6.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-3-models
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-3-models
+  - id: games-workshop/99120102029
+    name: Chaos Space Marines Tank Accessories
+    manufacturer: games-workshop
+    productCode: '99120102029'
+    sku: '99120102029'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 9.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Tank-Accessories
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Tank-Accessories
+  - id: games-workshop/99120102030
+    name: Chaos Space Marines Vehicle Accessories
+    manufacturer: games-workshop
+    productCode: '99120102030'
+    sku: '99120102030'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 9.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Vehicle-Accessories
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Vehicle-Accessories
+  - id: games-workshop/99120102033
+    name: Chaos Bastion
+    manufacturer: games-workshop
+    productCode: '99120102033'
+    sku: '99120102033'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 27.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Bastion
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Bastion
+  - id: games-workshop/99120102035
+    name: Cultists
+    manufacturer: games-workshop
+    productCode: '99120102035'
+    sku: '99120102035'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 6.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Cultists
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Cultists
+  - id: games-workshop/99120102037
+    name: Heldrake
+    manufacturer: games-workshop
+    productCode: '99120102037'
+    sku: '99120102037'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 45.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Heldrake
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Heldrake
   - id: games-workshop/99120102041
     name: Khorne Lord of Skulls
     manufacturer: games-workshop
@@ -9198,6 +9396,25 @@ products:
       - ret-goblingaming:chaos-space-marines-khorne-lord-of-skulls
       - ret-radaddel:/chaos-space-marines-khorne-lord-of-skulls
       - ret-radaddel:chaos-space-marines-khorne-lord-of-skulls
+  - id: games-workshop/99120102042
+    name: Chaos Space Marines Bikers
+    manufacturer: games-workshop
+    productCode: '99120102042'
+    sku: '99120102042'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 21.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Bikers
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Bikers
   - id: games-workshop/99120102043
     name: Helbrute
     manufacturer: games-workshop
@@ -9237,6 +9454,45 @@ products:
       - ret-goblingaming:chaos-space-marines-helbrute
       - ret-radaddel:/chaos-space-marines-hellbrute
       - ret-radaddel:chaos-space-marines-hellbrute
+  - id: games-workshop/99120102044
+    name: Chaos Rhino
+    manufacturer: games-workshop
+    productCode: '99120102044'
+    sku: '99120102044'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 23.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Rhino
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Rhino
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Rhino
+  - id: games-workshop/99120102045
+    name: Chaos Space Marines
+    manufacturer: games-workshop
+    productCode: '99120102045'
+    sku: '99120102045'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 23.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines
   - id: games-workshop/99120102046
     name: Chaos Space Marines Terminator Lord
     manufacturer: games-workshop
@@ -9256,6 +9512,86 @@ products:
     url: http://www.games-workshop.com:80/en-GB/CSM-Terminator-Lord
     evidence:
       - arc-gw-webstore:/en-GB/CSM-Terminator-Lord
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Terminator-Lord
+  - id: games-workshop/99120102047
+    name: Chaos Space Marines Terminators
+    manufacturer: games-workshop
+    productCode: '99120102047'
+    sku: '99120102047'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 28.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Terminators
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Terminators
+  - id: games-workshop/99120102048
+    name: Chaos Space Marine Attack Force
+    manufacturer: games-workshop
+    productCode: '99120102048'
+    sku: '99120102048'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 120.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marine-Attack-Force
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marine-Attack-Force
+  - id: games-workshop/99120102049
+    name: Forgefiend
+    manufacturer: games-workshop
+    productCode: '99120102049'
+    sku: '99120102049'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 41.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Forgefiend
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Forgefiend
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Forgefiend;jsessionid=0D2DCC0BD5B544EDB811A1636C28BFAC
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Maulerfiend
+  - id: games-workshop/99120102050
+    name: Raptors
+    manufacturer: games-workshop
+    productCode: '99120102050'
+    sku: '99120102050'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 21.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Space-Marines-Raptors
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Raptors
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Warp-Talons
   - id: games-workshop/99120102052
     name: Chaos Land Raider
     manufacturer: games-workshop
@@ -9289,6 +9625,7 @@ products:
 
       This kit comprises 147 plastic components. This miniature requires assembly and is supplied unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Land-Raider
       - arc-wargameportal:/products/chaos-land-raider
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/chaos-land-raider
       - mfr-gw-algolia:prod1090565-99120102052
@@ -9296,6 +9633,25 @@ products:
       - ret-goblingaming:chaos-space-marines-land-raider
       - ret-radaddel:/chaos-space-marines-chaos-land-raider
       - ret-radaddel:chaos-space-marines-chaos-land-raider
+  - id: games-workshop/99120102055
+    name: Chaos Space Marines
+    manufacturer: games-workshop
+    productCode: '99120102055'
+    sku: '99120102055'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 23.0
+    url: https://www.games-workshop.com/en-GB/Chaos-Space-Marines-Squad-2016
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Squad-2016
   - id: games-workshop/99120102056
     name: CHAOS SPACE MARINES POSSESSED
     manufacturer: games-workshop
@@ -9473,6 +9829,25 @@ products:
     firstSeen: '2026-07-30'
     evidence:
       - mfr-gw-trade:99120102067
+  - id: games-workshop/99120102069
+    name: Chaos Space Marines Chaos Desolator Squad
+    manufacturer: games-workshop
+    productCode: '99120102069'
+    sku: '99120102069'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 32.5
+    url: https://www.games-workshop.com/en-GB/Chaos-Space-Marines-Chaos-Desolator-Squad
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Space-Marines-Chaos-Desolator-Squad
   - id: games-workshop/99120102072
     name: 'MORTARION: DAEMON PRIMARCH OF NURGLE'
     manufacturer: games-workshop
@@ -11910,7 +12285,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -12700,7 +13075,7 @@ products:
     categoryBasis: mapped
     packaging: box
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 109.0
     priceEur: 110.5
@@ -14358,6 +14733,27 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102099_CSMDarkApostle01.jpg
     evidence:
       - mfr-gw-algolia:prod4170140-99120102247
+  - id: games-workshop/99120102248
+    name: Khârn the Betrayer
+    manufacturer: games-workshop
+    productCode: '99120102248'
+    sku: '99120102248'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: stated
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 29.0
+    url: https://www.warhammer.com/en-GB/shop/world-eaters-kharn-the-betrayer-2023
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99120102184_WEKharnTheBetrayer01.jpg
+    evidence:
+      - mfr-gw-algolia:prod5050234-99120102248
   - id: games-workshop/99120102249
     name: 'EMPEROR''S CHILDREN: BLISSBOUND WARBAND'
     manufacturer: games-workshop
@@ -15270,7 +15666,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 91.0
     priceEur: 94.1
@@ -15428,7 +15824,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
@@ -15849,7 +16245,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 46.5
     priceEur: 47.1
@@ -18470,7 +18866,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.5
     priceEur: 42.2
@@ -19411,6 +19807,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/warhammer-40k/aeldari/vyper-starfang
       - mfr-gw-algolia:P-240924-99120104112
+      - mfr-gw-algolia:P-267355-99120104112
       - mfr-gw-trade:99120104112
       - ret-gamenerdz:/warhammer-40k-aeldari-vyper
       - ret-goblingaming:aeldari-vyper
@@ -19562,8 +19959,8 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
-    status: suspected-discontinued
-    availability: unknown
+    status: current
+    availability: in_stock
     firstSeen: '2026-10-16'
     priceGbp: 20.5
     url: https://www.warhammer.com/en-GB/shop/Eldar-Autarch
@@ -20152,6 +20549,25 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Cadian-Defence-Force?
     evidence:
       - arc-gw-webstore:/en-GB/Cadian-Defence-Force
+  - id: games-workshop/99120105062
+    name: Catachan Heavy Weapon Team
+    manufacturer: games-workshop
+    productCode: '99120105062'
+    sku: '99120105062'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 9.0
+    url: http://www.games-workshop.com:80/en-GB/Catachan-Heavy-Weapon-Team
+    evidence:
+      - arc-gw-webstore:/en-GB/Catachan-Heavy-Weapon-Team
   - id: games-workshop/99120105064
     name: Leman Russ Tech-Command
     manufacturer: games-workshop
@@ -22718,6 +23134,7 @@ products:
 
       This kit comes supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Carnifex-Brood
       - arc-wargameportal:/products/carnifex-brood
       - legacy-catalog:games-workshop/warhammer-40k/tyranids/carnifex-brood
       - legacy-catalog:games-workshop/warhammer-40k/tyranids/old-one-eye-s-carnifex-brood
@@ -25360,7 +25777,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 51.0
     priceEur: 52.4
@@ -27937,7 +28354,7 @@ products:
       - ret-radaddel:kill-team-celestian-insidiants
       - ret-tistaminis:kill-team-celestian-insidiants-pre-order
   - id: games-workshop/99120108133
-    name: 'ADEPTA SORORITAS: PALATINE'
+    name: Palatine
     manufacturer: games-workshop
     productCode: '99120108133'
     sku: '99120108133'
@@ -27945,16 +28362,20 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
-    faction: armies-of-the-imperium
-    gameSystemsBasis: mapped
+    gameSystemsBasis: stated
     settings:
       - warhammer-40k
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
+    availability: out_of_stock
     firstSeen: '2026-08-22'
+    priceGbp: 26.0
+    url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Palatine-2021
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99070108007_PalatineLead.jpg
     evidence:
+      - mfr-gw-algolia:prod4650188-99120108133
       - mfr-gw-trade:99120108133
   - id: games-workshop/99120108134
     name: Sister Dogmata
@@ -27970,7 +28391,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-09-30'
     priceGbp: 26.0
     url: https://www.warhammer.com/en-GB/shop/Adepta-Sororitas-Sister-Dogmata-2021
@@ -28028,6 +28449,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - warhammer-40k
+    faction: general
     gameSystemsBasis: stated
     settings:
       - warhammer-40k

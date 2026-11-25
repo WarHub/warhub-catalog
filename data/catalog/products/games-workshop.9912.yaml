@@ -865,7 +865,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -958,7 +958,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -1429,7 +1429,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 24.0
     priceEur: 25.4
@@ -1466,7 +1466,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 29.5
     priceEur: 35.5
@@ -1913,7 +1913,6 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - middle-earth
-    faction: general
     gameSystemsBasis: stated
     settings:
       - middle-earth
@@ -2955,7 +2954,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 57.0
     priceEur: 57.3
@@ -4099,7 +4098,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -10548,7 +10547,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -10848,7 +10847,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 44.0
     priceEur: 45.0
@@ -11297,7 +11296,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 18.75
     priceEur: 18.9
@@ -12344,6 +12343,7 @@ products:
     evidence:
       - legacy-catalog:games-workshop/the-old-world/tomb-kings-of-khemri/tomb-king-liche-priest-on-necrolith-bone-dragon
       - mfr-gw-algolia:P-169349-99122717001
+      - mfr-gw-algolia:P-267351-99122717001
       - mfr-gw-trade:99122717001
       - ret-gamenerdz:/warhammer-the-old-world-tomb-kings-of-khemri-tomb-king-liche-priest-on-necrolith-bone-dragon
       - ret-goblingaming:warhammer-the-old-world-tomb-kings-of-khemri-tomb-king-on-necrolith-bone-dragon
@@ -12676,7 +12676,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 33.5
     priceEur: 34.4
@@ -12726,6 +12726,111 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717012_TombKingsOfKhemriHostofNehekharaArmyReinforcement01.jpg
     evidence:
       - mfr-gw-algolia:P-264607-99122717012
+  - id: games-workshop/99122717013
+    name: Skeleton Warriors
+    manufacturer: games-workshop
+    productCode: '99122717013'
+    sku: '99122717013'
+    gameSystems:
+      - the-old-world
+    gameSystemsBasis: stated
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 57.0
+    url: https://www.warhammer.com/en-GB/shop/tomb-kings-of-khemri-skeleton-warriors-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717013_TOWTombKingsofKhemriSkeletonWarriors01.jpg
+    evidence:
+      - mfr-gw-algolia:P-267321-99122717013
+  - id: games-workshop/99122717014
+    name: Skeleton Archers
+    manufacturer: games-workshop
+    productCode: '99122717014'
+    sku: '99122717014'
+    gameSystems:
+      - the-old-world
+    gameSystemsBasis: stated
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 57.0
+    url: https://www.warhammer.com/en-GB/shop/tomb-kings-of-khemri-skeleton-archers-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717014_TOWTombKingsofKhemriSkeletonArchers01.jpg
+    evidence:
+      - mfr-gw-algolia:P-267322-99122717014
+  - id: games-workshop/99122717015
+    name: Skeleton Horsemen / Skeleton Horse Archers
+    manufacturer: games-workshop
+    productCode: '99122717015'
+    sku: '99122717015'
+    gameSystems:
+      - the-old-world
+    gameSystemsBasis: stated
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 57.0
+    url: https://www.warhammer.com/en-GB/shop/tomb-kings-of-khemri-skeleton-horsemen-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717015_TOWTombKingsofKhemriSkeletonHorsemen01.jpg
+    evidence:
+      - mfr-gw-algolia:P-267323-99122717015
+  - id: games-workshop/99122717016
+    name: Skeleton Chariots
+    manufacturer: games-workshop
+    productCode: '99122717016'
+    sku: '99122717016'
+    gameSystems:
+      - the-old-world
+    gameSystemsBasis: stated
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 57.0
+    url: https://www.warhammer.com/en-GB/shop/tomb-kings-of-khemri-skeleton-chariots-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717016_TOWTombKingsofKhemriChariots01.jpg
+    evidence:
+      - mfr-gw-algolia:P-267324-99122717016
+  - id: games-workshop/99122717017
+    name: 'Tomb Kings of Khemri: Battle March Army'
+    manufacturer: games-workshop
+    productCode: '99122717017'
+    sku: '99122717017'
+    gameSystems:
+      - the-old-world
+    gameSystemsBasis: stated
+    settings:
+      - old-world
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceGbp: 112.5
+    url: https://www.warhammer.com/en-GB/shop/tomb-kings-of-khemri-battle-march-army-2026
+    imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99122717017_TOWTombKingsofKhemriBattleMarchArmy01.jpg
+    evidence:
+      - mfr-gw-algolia:P-267320-99122717017
   - id: games-workshop/99122720001
     name: Shugengan Lord on Great Spirit Longma
     manufacturer: games-workshop
@@ -17322,7 +17427,6 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - horus-heresy
-    faction: general
     gameSystemsBasis: stated
     settings:
       - warhammer-40k
@@ -18837,7 +18941,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-10-04'
     priceGbp: 46.5
     url: https://www.warhammer.com/en-GB/shop/custodes-custodian-guard-sodality-2026
@@ -19063,6 +19167,37 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Bloodletters-of-Khorne
     evidence:
       - arc-gw-webstore:/en-GB/Bloodletters-of-Khorne
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Bloodletters-of-Khorne
+  - id: games-workshop/99129915002
+    name: Daemonettes of Slaanesh
+    manufacturer: games-workshop
+    productCode: '99129915002'
+    sku: '99129915002'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 18.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Daemonettes-of-Slaanesh
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Daemonettes-of-Slaanesh
+  - id: games-workshop/99129915004
+    name: Daemon Prince
+    manufacturer: games-workshop
+    productCode: '99129915004'
+    sku: '99129915004'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Daemon-Prince
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Daemon-Prince
   - id: games-workshop/99129915005
     name: Seekers of Slaanesh
     manufacturer: games-workshop
@@ -19098,11 +19233,27 @@ products:
 
       This kit comprises 59 plastic components, and 5x Citadel 60mm Oval Bases. These miniatures require assembly and are supplied unpainted – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Seekers-of-Slaanesh
       - legacy-catalog:games-workshop/age-of-sigmar/armies-of-chaos/seekers-of-slaanesh
       - legacy-catalog:games-workshop/age-of-sigmar/armies-of-chaos/seekers-of-slaanesh-2
       - mfr-gw-algolia:prod2300147-99129915005
       - mfr-gw-trade:99129915005
       - ret-goblingaming:chaos-daemons-seekers-of-slaanesh
+  - id: games-workshop/99129915006
+    name: Pink Horrors of Tzeentch
+    manufacturer: games-workshop
+    productCode: '99129915006'
+    sku: '99129915006'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 18.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Pink-Horrors-of-Tzeentch
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Pink-Horrors-of-Tzeentch
   - id: games-workshop/99129915007
     name: Bloodcrushers of Khorne
     manufacturer: games-workshop
@@ -19118,6 +19269,53 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Bloodcrushers-of-Khorne
     evidence:
       - arc-gw-webstore:/en-GB/Bloodcrushers-of-Khorne
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Bloodcrushers-of-Khorne
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Bloodcrushers-of-Khorne;jsessionid=E73CBD62AA4C370D3B53CFCC41EFC1A3
+  - id: games-workshop/99129915008
+    name: Plaguebearers of Nurgle
+    manufacturer: games-workshop
+    productCode: '99129915008'
+    sku: '99129915008'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 18.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Plaguebearers-of-Nurgle
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Plaguebearers-of-Nurgle
+  - id: games-workshop/99129915009
+    name: Screamers of Tzeentch
+    manufacturer: games-workshop
+    productCode: '99129915009'
+    sku: '99129915009'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 18.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Screamers-of-Tzeentch-40k
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Screamers-of-Tzeentch-40k
+  - id: games-workshop/99129915010
+    name: Flamers of Tzeentch
+    manufacturer: games-workshop
+    productCode: '99129915010'
+    sku: '99129915010'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 12.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Flamers-of-Tzeentch
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Flamers-of-Tzeentch
   - id: games-workshop/99129915012
     name: Seeker Chariot
     manufacturer: games-workshop
@@ -19151,6 +19349,7 @@ products:
 
       The kit comprises 96 plastic components, and is supplied with a Citadel 120x92mm Oval Base. This miniature is supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Seeker-Chariot-of-Slaanesh
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/seeker-chariot
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/seeker-chariot-2
       - legacy-catalog:games-workshop/warhammer-40k/grand-alliance-chaos/hellflayer
@@ -19191,10 +19390,89 @@ products:
 
       This kit comprises 63 plastic components, and is supplied with a Citadel 160mm Round Base. This miniature is supplied unpainted and requires assembly – we recommend using Citadel Plastic Glue and Citadel Colour paints.
     evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Soul-Grinder
       - legacy-catalog:games-workshop/warhammer-40k/armies-of-chaos/soul-grinder
       - mfr-gw-algolia:prod2300148-99129915013
       - mfr-gw-trade:99129915013
       - ret-goblingaming:chaos-soul-grinder
+  - id: games-workshop/99129915014
+    name: Nurglings
+    manufacturer: games-workshop
+    productCode: '99129915014'
+    sku: '99129915014'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 15.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Nurglings
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Nurglings
+  - id: games-workshop/99129915015
+    name: Blood Throne of Khorne
+    manufacturer: games-workshop
+    productCode: '99129915015'
+    sku: '99129915015'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Blood-Throne-of-Khorne
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Blood-Throne-of-Khorne
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Skull-Cannon-of-Khorne
+  - id: games-workshop/99129915016
+    name: Burning Chariot of Tzeentch
+    manufacturer: games-workshop
+    productCode: '99129915016'
+    sku: '99129915016'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Burning-Chariot-of-Tzeentch
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Burning-Chariot-of-Tzeentch
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Herald-of-Tzeentch-on-Burning-Chariot-40k
+  - id: games-workshop/99129915017
+    name: Plague Drones of Nurgle
+    manufacturer: games-workshop
+    productCode: '99129915017'
+    sku: '99129915017'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 35.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Plague-Drones-of-Nurgle
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Plague-Drones-of-Nurgle
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Plague-Drones-of-Nurgle;jsessionid=CE1F54470C752C0CF88E68FB4F747142
+  - id: games-workshop/99129915018
+    name: Chaos Daemons Battalion / Battleforce
+    manufacturer: games-workshop
+    productCode: '99129915018'
+    sku: '99129915018'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 70.0
+    url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Battalion-Battleforce
+    evidence:
+      - arc-gw-webstore:/en-GB/Chaos-Daemons-Battalion-Battleforce
   - id: games-workshop/99129915019
     name: Blood Tide of Khorne
     manufacturer: games-workshop
@@ -21162,6 +21440,22 @@ products:
     imageUrl: https://www.warhammer.com/app/resources/catalog/product/920x950/99129915044_BeastofNurgle01.jpg
     evidence:
       - mfr-gw-algolia:prod3700246-99129915093
+  - id: games-workshop/99129999002
+    name: Citadel Wood
+    manufacturer: games-workshop
+    productCode: '99129999002'
+    sku: '99129999002'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-21'
+    priceGbp: 18.0
+    url: http://www.games-workshop.com:80/en-GB/Citadel-Wood
+    evidence:
+      - arc-gw-webstore:/en-GB/Citadel-Wood
+      - arc-gw-webstore:/en-GB/Citadel-Wood-AoS
   - id: games-workshop/99129999003
     name: Arcane Ruins
     manufacturer: games-workshop

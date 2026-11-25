@@ -47,7 +47,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 4.5
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr0018
@@ -75,7 +75,7 @@ products:
     roleBasis: unknown
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 4.5
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr0019
@@ -742,6 +742,29 @@ products:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-death-marshals-3-pack
       - mfr-wyrd-store:wyr1009
       - ret-gamenerdz:/malifaux-death-marshals
+  - id: wyrd-games/WYR1012
+    name: 'Malifaux Classics: The Executioner'
+    manufacturer: wyrd-games
+    productCode: WYR1012
+    sku: WYR1012
+    ean: '0813856010228'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr1012
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/1012-Executioner2.jpg?v=1617775539
+    evidence:
+      - mfr-wyrd-store:wyr1012
   - id: wyrd-games/WYR1014
     name: 'Malifaux Classics: Box Set - Sonnia, Witch Hunters'
     manufacturer: wyrd-games
@@ -801,6 +824,27 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-purifying-flame
       - mfr-wyrd-store:wyr1020
+  - id: wyrd-games/WYR1022
+    name: 'Malifaux Classics: Enslaved Nephilim'
+    manufacturer: wyrd-games
+    productCode: WYR1022
+    sku: WYR1022
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 7.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr1022
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR1022-Enslaved-Nephilim-Painted.jpg?v=1795565613
+    evidence:
+      - mfr-wyrd-store:wyr1022
   - id: wyrd-games/WYR1025
     name: 'Malifaux Classics: Guild Guard Captain'
     manufacturer: wyrd-games
@@ -981,6 +1025,73 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-mechanical-attendant
       - mfr-wyrd-store:wyr1037
+  - id: wyrd-games/WYR1039
+    name: 'Malifaux Classics: Alternate Sonnia'
+    manufacturer: wyrd-games
+    productCode: WYR1039
+    sku: WYR1039
+    ean: '0813856012710'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr1039
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/1039-AltSonnia.jpg?v=1617775542
+    evidence:
+      - mfr-wyrd-store:wyr1039
+  - id: wyrd-games/WYR1040
+    name: 'Malifaux Classics: Sonnia, Avatar of Conflagration'
+    manufacturer: wyrd-games
+    productCode: WYR1040
+    sku: WYR1040
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 50.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-classics-sonnia-avatar-of-conflagration
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/1040-AvatarSonnia1.jpg?v=1617775552
+    evidence:
+      - mfr-wyrd-store:malifaux-classics-sonnia-avatar-of-conflagration
+  - id: wyrd-games/WYR1041
+    name: 'Malifaux Classics: Alternate Perdita'
+    manufacturer: wyrd-games
+    productCode: WYR1041
+    sku: WYR1041
+    ean: '0813856012727'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr1041
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/1041-AltPerdita.jpg?v=1617775545
+    evidence:
+      - mfr-wyrd-store:wyr1041
   - id: wyrd-games/WYR1045
     name: 'Malifaux Classics: Justice, Avatar of Balance'
     manufacturer: wyrd-games
@@ -1025,10 +1136,11 @@ products:
     settings:
       - malifaux
     settingsBasis: derived
-    categoryBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 18.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr1049
@@ -2027,6 +2139,7 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/vagrantsong-game-of-life-and-death-poker-deck
       - mfr-wyrd-store:game-of-life-and-death
+      - mfr-wyrd-store:game-of-life-and-death-sca_clone_freegift
   - id: wyrd-games/WYR11624
     name: 'Vagrantsong: BOO! Bandana'
     manufacturer: wyrd-games
@@ -3202,6 +3315,29 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-box-set-molly-horrors
       - mfr-wyrd-store:wyr2041
+  - id: wyrd-games/WYR2042
+    name: 'Malifaux Classics: Alternate Nicodem'
+    manufacturer: wyrd-games
+    productCode: WYR2042
+    sku: WYR2042
+    ean: '0813856012833'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr2042
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2042-AltNicodem.jpg?v=1617775539
+    evidence:
+      - mfr-wyrd-store:wyr2042
   - id: wyrd-games/WYR2044
     name: 'Malifaux Classics: ALT Seamus'
     manufacturer: wyrd-games
@@ -3522,6 +3658,50 @@ products:
     url: https://www.gamenerdz.com/malifaux-outcasts-bandidos
     evidence:
       - ret-gamenerdz:/malifaux-outcasts-bandidos
+  - id: wyrd-games/WYR2055
+    name: 'Malifaux Classics: Jaakuna Ubume'
+    manufacturer: wyrd-games
+    productCode: WYR2055
+    sku: WYR2055
+    ean: '0813856013557'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 18.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr2055
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2055-JaakunaUbume.jpg?v=1617775539
+    evidence:
+      - mfr-wyrd-store:wyr2055
+  - id: wyrd-games/WYR2057
+    name: 'Malifaux Classics: Carrion Effigy'
+    manufacturer: wyrd-games
+    productCode: WYR2057
+    sku: WYR2057
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr2057
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR2057-Carrion-Effigy-Painted.jpg?v=1795565614
+    evidence:
+      - mfr-wyrd-store:wyr2057
   - id: wyrd-games/WYR2058
     name: 'Malifaux Classics: ALT McMourning'
     manufacturer: wyrd-games
@@ -3593,14 +3773,14 @@ products:
     evidence:
       - ret-goblingaming:iron-skeeters
   - id: wyrd-games/WYR21301
-    name: Limited Edition - Alternative Spit Hog
+    name: 'Malifaux Third Edition: Limited Edition - Alternative Spit Hog'
     manufacturer: wyrd-games
     productCode: WYR21301
     sku: WYR21301
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3636,17 +3816,14 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Alt-Reva.png?v=1669224794
     evidence:
       - mfr-wyrd-store:alternative-reva
-  - id: wyrd-games/WYR21307LNE
-    name: Nightmare Edition - Unicorn Vomit & Pixie Farts - Rocinante Benoit (Ulix)
+  - id: wyrd-games/WYR21305LE
+    name: 'Malifaux Third Edition: Limited Edition - Ross Jebsen - Alternative Slop Hauler'
     manufacturer: wyrd-games
-    productCode: WYR21307LNE
-    sku: WYR21307 LNE
-    ean: '0813856019436'
-    eanConfidence: confirmed
+    productCode: WYR21305LE
+    sku: WYR21305 LE
     gameSystems:
       - malifaux
-    faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3654,21 +3831,21 @@ products:
     categoryBasis: code
     status: current
     availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 75.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/nightmare-edition-ulix
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21092-UnicornVomitPixieFarts_NightmareBox_FRONT.png?v=1606247884
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-ross-jebsen
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_RossJebsen.png?v=1669225152
     evidence:
-      - mfr-wyrd-store:nightmare-edition-ulix
+      - mfr-wyrd-store:limited-edition-ross-jebsen
   - id: wyrd-games/WYR21309
-    name: Limited Edition - Amelia Bathory - Alternative Nicodem
+    name: 'Malifaux Third Edition: Limited Edition - Amelia Bathory - Alternative Nicodem (No Stat Cards)'
     manufacturer: wyrd-games
     productCode: WYR21309
     sku: WYR21309
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3682,15 +3859,36 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Alt-Nicodem_AmeliaBathory.png?v=1669224725
     evidence:
       - mfr-wyrd-store:limited-edition-alternative-nicodem
+  - id: wyrd-games/WYR21311LE
+    name: 'Malifaux Third Edition: Limited Edition - Vintage - Rasputina (No Stat Cards)'
+    manufacturer: wyrd-games
+    productCode: WYR21311LE
+    sku: WYR21311 LE
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-rasputina-1
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Rasputina_Vintage.png?v=1669229365
+    evidence:
+      - mfr-wyrd-store:vintage-rasputina-1
   - id: wyrd-games/WYR21312LE
-    name: Limited Edition - Vintage - Som'er Teeth
+    name: 'Malifaux Third Edition: Limited Edition - Vintage - Som''er Teeth'
     manufacturer: wyrd-games
     productCode: WYR21312LE
     sku: WYR21312 LE
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3727,14 +3925,14 @@ products:
     evidence:
       - mfr-wyrd-store:vintage-pandora-1
   - id: wyrd-games/WYR21314LE
-    name: Limited Edition - Vintage - Hamelin
+    name: 'Malifaux Third Edition: Limited Edition - Vintage - Hamelin'
     manufacturer: wyrd-games
     productCode: WYR21314LE
     sku: WYR21314 LE
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3748,81 +3946,15 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Hamelin_Vintage.png?v=1669229387
     evidence:
       - mfr-wyrd-store:vintage-hamelin-1
-  - id: wyrd-games/WYR21315LE
-    name: Limited Edition - Vintage - Sonnia Criid
-    manufacturer: wyrd-games
-    productCode: WYR21315LE
-    sku: WYR21315 LE
-    gameSystems:
-      - malifaux
-    faction: guild
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-sonnia-criid
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Sonnia_Vintage.png?v=1669225195
-    evidence:
-      - mfr-wyrd-store:vintage-sonnia-criid
-  - id: wyrd-games/WYR21316LE
-    name: Limited Edition - Vintage - McMourning
-    manufacturer: wyrd-games
-    productCode: WYR21316LE
-    sku: WYR21316 LE
-    gameSystems:
-      - malifaux
-    faction: resurrectionists
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-mcmourning-1
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_McMourning_Vintage.png?v=1669229348
-    evidence:
-      - mfr-wyrd-store:vintage-mcmourning-1
-  - id: wyrd-games/WYR21317LE
-    name: Limited Edition - Bishop
-    manufacturer: wyrd-games
-    productCode: WYR21317LE
-    sku: WYR21317 LE
-    gameSystems:
-      - malifaux
-    faction: guild
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-alternative-bishop
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_Bishop-Alt.png?v=1637346201
-    evidence:
-      - mfr-wyrd-store:limited-edition-alternative-bishop
   - id: wyrd-games/WYR21318LNE
-    name: Nightmare Edition - Cat Princess - Alternative Rat King
+    name: 'Malifaux Third Edition: Nightmare Edition - Cat Princess - Alternative Rat King'
     manufacturer: wyrd-games
     productCode: WYR21318LNE
     sku: WYR21318 LNE
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3837,14 +3969,14 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-cat-princess-translucent-green
   - id: wyrd-games/WYR21319LNE
-    name: Nightmare Edition - Cat Herders - Alternative Rat Catchers
+    name: 'Malifaux Third Edition: Nightmare Edition - Cat Herders - Alternative Rat Catchers'
     manufacturer: wyrd-games
     productCode: WYR21319LNE
     sku: WYR21319 LNE
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3859,7 +3991,7 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-cat-herders-translucent-green
   - id: wyrd-games/WYR21320LNE
-    name: Nightmare Edition - Curiosity Killed the Cat - Catelin Abernathy (Hamelin)
+    name: 'Malifaux Third Edition: Nightmare Edition - Curiosity Killed the Cat - Catelin Abernathy (Hamelin)'
     manufacturer: wyrd-games
     productCode: WYR21320LNE
     sku: WYR21320 LNE
@@ -3868,7 +4000,7 @@ products:
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3883,14 +4015,14 @@ products:
     evidence:
       - mfr-wyrd-store:curiosity-killed-the-cat-translucent-green
   - id: wyrd-games/WYR21323LE
-    name: Limited Edition - War Wabbit - Alternative Warpig
+    name: 'Malifaux Third Edition: Limited Edition - War Wabbit - Alternative Warpig (No Stat Cards)'
     manufacturer: wyrd-games
     productCode: WYR21323LE
     sku: WYR21323 LE
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3905,14 +4037,14 @@ products:
     evidence:
       - mfr-wyrd-store:special-edition-war-wabbit
   - id: wyrd-games/WYR21324LNE
-    name: Nightmare Edition - Dark Carnival - Mr. Cooper (Colette)
+    name: 'Malifaux Third Edition: Nightmare Edition - Dark Carnival - Mr. Cooper (Colette)'
     manufacturer: wyrd-games
     productCode: WYR21324LNE
     sku: WYR21324 LNE
     gameSystems:
       - malifaux
     faction: guild
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3926,39 +4058,15 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21032-DarkCarnival_NightmareBox_FRONT.png?v=1606247266
     evidence:
       - mfr-wyrd-store:nightmare-edition-dark-carnival
-  - id: wyrd-games/WYR21331LE
-    name: Limited Edition - Miss Feasance - Alternative Seamus
-    manufacturer: wyrd-games
-    productCode: WYR21331LE
-    sku: WYR21331 LE
-    ean: '0812152031524'
-    eanConfidence: confirmed
-    gameSystems:
-      - malifaux
-    faction: resurrectionists
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/miss-feasance
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_MissFeasance.png?v=1713282580
-    evidence:
-      - mfr-wyrd-store:miss-feasance
   - id: wyrd-games/WYR21336
-    name: Limited Edition - Swine Cursed
+    name: 'Malifaux Third Edition: Limited Edition - Swine Cursed'
     manufacturer: wyrd-games
     productCode: WYR21336
     sku: WYR21336
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3973,14 +4081,14 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-swine-cursed
   - id: wyrd-games/WYR21337
-    name: Limited Edition - Tanuki
+    name: 'Malifaux Third Edition: Limited Edition - Tanuki (No Stat Cards)'
     manufacturer: wyrd-games
     productCode: WYR21337
     sku: WYR21337
     gameSystems:
       - malifaux
     faction: ten-thunders
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -3995,14 +4103,14 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-tanuki
   - id: wyrd-games/WYR21338
-    name: Limited Edition - Burning Revelations - Kaeris Box Set
+    name: 'Malifaux Third Edition: Limited Edition - Burning Revelations - Kaeris Box Set'
     manufacturer: wyrd-games
     productCode: WYR21338
     sku: WYR21338
     gameSystems:
       - malifaux
     faction: arcanists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4017,14 +4125,14 @@ products:
     evidence:
       - mfr-wyrd-store:burning-revelations-orange-dayglow
   - id: wyrd-games/WYR21339
-    name: Limited Edition - Dark Debts - Jakob Lynch Box Set
+    name: 'Malifaux Limited Edition: Dark Debts, Jakob Lynch Box Set'
     manufacturer: wyrd-games
     productCode: WYR21339
     sku: WYR21339
     gameSystems:
       - malifaux
     faction: ten-thunders
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4038,8 +4146,31 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR20406-DarkDebts_FRONT_751b86c6-e6fe-458e-87d8-87c50c5f525b.png?v=1606247531
     evidence:
       - mfr-wyrd-store:dark-debts-purple
+  - id: wyrd-games/WYR21342
+    name: 'Malifaux Third Edition: Nightmare Edition - The Wild Ones - McCabe'
+    manufacturer: wyrd-games
+    productCode: WYR21342
+    sku: WYR21342
+    ean: '0813856017418'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 90.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/nightmare-edition-the-wild-ones
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21054-TheWildOnes_NightmareBox_FRONT_cf588012-6af2-4126-9bac-85a97c98f2e4.png?v=1607026777
+    evidence:
+      - mfr-wyrd-store:nightmare-edition-the-wild-ones
   - id: wyrd-games/WYR21343
-    name: Limited Edition - Guilty as Charged - Jack Daw Box Set - Yellow Translucent
+    name: 'Malifaux Third Edition: Limited Edition - Guilty as Charged - Jack Daw Box Set - Yellow Translucent'
     manufacturer: wyrd-games
     productCode: WYR21343
     sku: WYR21343
@@ -4048,7 +4179,7 @@ products:
     gameSystems:
       - malifaux
     faction: outcasts
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4063,13 +4194,13 @@ products:
     evidence:
       - mfr-wyrd-store:guilty-as-charged-jack-daw-box-set-translucent-yellow
   - id: wyrd-games/WYR21346
-    name: Limited Edition - Guard Sergeant
+    name: 'Malifaux Third Edition: Limited Edition - Guard Sergeant'
     manufacturer: wyrd-games
     productCode: WYR21346
     sku: WYR21346
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4084,13 +4215,13 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-alternative-guard-sergeant
   - id: wyrd-games/WYR21347
-    name: Limited Edition - Dr. Alexei Sokolov -Alternative Joss
+    name: 'Malifaux Third Edition: Limited Edition - Dr. Alexei Sokolov - Alternative Joss'
     manufacturer: wyrd-games
     productCode: WYR21347
     sku: WYR21347
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4104,37 +4235,15 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/EasterSale_Webstore_Graphic_AlexeiSokolov.png?v=1649690347
     evidence:
       - mfr-wyrd-store:alt-joss
-  - id: wyrd-games/WYR21348
-    name: Limited Edition - Santana Ortega, Alternative Santiago Ortega
-    manufacturer: wyrd-games
-    productCode: WYR21348
-    sku: WYR21348
-    gameSystems:
-      - malifaux
-    faction: guild
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-santana-ortega-alternative-santiago-ortega
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_SantanaOrtega.png?v=1680633430
-    evidence:
-      - mfr-wyrd-store:limited-edition-santana-ortega-alternative-santiago-ortega
   - id: wyrd-games/WYR21350
-    name: Limited Edition - Titania
+    name: 'Malifaux Third Edition: Limited Edition - Titania'
     manufacturer: wyrd-games
     productCode: WYR21350
     sku: WYR21350
     gameSystems:
       - malifaux
     faction: neverborn
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4148,37 +4257,15 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_Titania-Alt.png?v=1637351478
     evidence:
       - mfr-wyrd-store:limited-edition-titania
-  - id: wyrd-games/WYR21351
-    name: Limited Edition - Teddy - Purple Translucent
-    manufacturer: wyrd-games
-    productCode: WYR21351
-    sku: WYR21351
-    gameSystems:
-      - malifaux
-    faction: neverborn
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 20.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-miss-ery-translucent-purple
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Teddy.png?v=1669225219
-    evidence:
-      - mfr-wyrd-store:limited-edition-miss-ery-translucent-purple
   - id: wyrd-games/WYR21352
-    name: Limited Edition - Emeline Bellerose - Alternative Madam Sybelle
+    name: 'Malifaux Third Edition: Limited Edition - Emeline Bellerose - Alternative Madam Sybelle'
     manufacturer: wyrd-games
     productCode: WYR21352
     sku: WYR21352
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4193,14 +4280,14 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-victorian-lady-alternative-sybille
   - id: wyrd-games/WYR21356
-    name: Limited Edition - Killjoy - Purple Translucent
+    name: 'Malifaux Third Edition: Limited Edition - Killjoy - Purple Translucent'
     manufacturer: wyrd-games
     productCode: WYR21356
     sku: WYR21356
     gameSystems:
       - malifaux
     faction: neverborn
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4215,7 +4302,7 @@ products:
     evidence:
       - mfr-wyrd-store:killjoy-purple-translucent
   - id: wyrd-games/WYR21358
-    name: Limited Edition - Draugr
+    name: 'Malifaux Third Edition: Limited Edition - Draugr'
     manufacturer: wyrd-games
     productCode: WYR21358
     sku: WYR21358
@@ -4224,7 +4311,7 @@ products:
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4238,15 +4325,16 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/EasterSale_Webstore_Graphic_Draugr-Alt.png?v=1649690367
     evidence:
       - mfr-wyrd-store:copy-of-limited-edition-draugr
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-anne-thrope-alternative-ruffian
   - id: wyrd-games/WYR21359
-    name: Limited Edition - Alternative Lazarus
+    name: 'Malifaux Third Edition: Limited Edition - Alternative Lazarus'
     manufacturer: wyrd-games
     productCode: WYR21359
     sku: WYR21359
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4261,14 +4349,14 @@ products:
     evidence:
       - mfr-wyrd-store:alt-lazarus
   - id: wyrd-games/WYR21360
-    name: Limited Edition - Will o' the Wisps (3 Pack) - Aqua Translucent
+    name: 'Malifaux Third Edition: Limited Edition - Will o'' the Wisps (3 Pack) - Aqua Translucent'
     manufacturer: wyrd-games
     productCode: WYR21360
     sku: WYR21360
     gameSystems:
       - malifaux
     faction: neverborn
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4282,15 +4370,38 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_WillotheWisp.png?v=1669225312
     evidence:
       - mfr-wyrd-store:will-o-the-wisps-3-pack-blue-translucent
+  - id: wyrd-games/WYR21366
+    name: 'Malifaux Third Edition: Nightmare Edition - Herald of Obliteration - Tara'
+    manufacturer: wyrd-games
+    productCode: WYR21366
+    sku: WYR21366
+    ean: '0813856014585'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 80.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/herald-of-obliteration-nightmare-edition
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/HeraldofObliteration-NightmareEdition.jpg?v=1681408504
+    evidence:
+      - mfr-wyrd-store:herald-of-obliteration-nightmare-edition
   - id: wyrd-games/WYR21369
-    name: Limited Edition - Perdita
+    name: 'Malifaux Third Edition: Limited Edition - Perdita'
     manufacturer: wyrd-games
     productCode: WYR21369
     sku: WYR21369
     gameSystems:
       - malifaux
     faction: guild
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4305,14 +4416,14 @@ products:
     evidence:
       - mfr-wyrd-store:wyr21004
   - id: wyrd-games/WYR21370
-    name: Limited Edition - No Shelter Here - Pandora Box Set
+    name: 'Malifaux Third Edition: Limited Edition - No Shelter Here - Pandora Box Set'
     manufacturer: wyrd-games
     productCode: WYR21370
     sku: WYR21370
     gameSystems:
       - malifaux
     faction: neverborn
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4327,13 +4438,13 @@ products:
     evidence:
       - mfr-wyrd-store:no-shelter-here-green-dayglow
   - id: wyrd-games/WYR21375
-    name: Limited Edition - Johana - Alternative Johan
+    name: 'Malifaux Third Edition: Limited Edition - Johana - Alternative Johan'
     manufacturer: wyrd-games
     productCode: WYR21375
     sku: WYR21375
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4347,36 +4458,14 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_Johan-Alt.png?v=1637714397
     evidence:
       - mfr-wyrd-store:johana
-  - id: wyrd-games/WYR21377
-    name: Nightmare Edition - Whiskey Golem
-    manufacturer: wyrd-games
-    productCode: WYR21377
-    sku: WYR21377
-    gameSystems:
-      - malifaux
-    faction: bayou
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 50.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/nightmare-edition-whiskey-golem
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21015-NightmareWhiskeyGolem_FRONT.png?v=1606247238
-    evidence:
-      - mfr-wyrd-store:nightmare-edition-whiskey-golem
   - id: wyrd-games/WYR21378
-    name: Limited Edition - Bete Noire - Red Translucent
+    name: 'Malifaux Third Edition: Limited Edition - Bete Noire - Red Translucent'
     manufacturer: wyrd-games
     productCode: WYR21378
     sku: WYR21378
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4391,12 +4480,16 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-bete-noire-transparent-red
   - id: wyrd-games/WYR21379
-    name: Limited Edition - Francisco
+    name: 'Malifaux Third Edition: Limited Edition - Francisco'
     manufacturer: wyrd-games
     productCode: WYR21379
     sku: WYR21379
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     status: current
@@ -4408,13 +4501,13 @@ products:
     evidence:
       - mfr-wyrd-store:limited-francisco
   - id: wyrd-games/WYR21380
-    name: Limited Edition - Gremlin
+    name: 'Malifaux Third Edition: Limited Edition - Gremlin'
     manufacturer: wyrd-games
     productCode: WYR21380
     sku: WYR21380
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4429,14 +4522,14 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-gremlin
   - id: wyrd-games/WYR21381
-    name: Limited Edition - Mindless Zombie (5 Pack) - Green Translucent
+    name: 'Malifaux Third Edition: Limited Edition - Mindless Zombie (5 Pack) - Green Translucent'
     manufacturer: wyrd-games
     productCode: WYR21381
     sku: WYR21381
     gameSystems:
       - malifaux
     faction: resurrectionists
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4451,12 +4544,16 @@ products:
     evidence:
       - mfr-wyrd-store:mindless-zombie-5-pack-green-transparent
   - id: wyrd-games/WYR21382
-    name: Limited Edition - Performer - Alternative Showgirl
+    name: 'Malifaux Third Edition: Limited Edition - Performer - Alternative Showgirl'
     manufacturer: wyrd-games
     productCode: WYR21382
     sku: WYR21382
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     status: current
@@ -4468,13 +4565,13 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-performer
   - id: wyrd-games/WYR21383
-    name: Nightmare Edition - Hanging Trees
+    name: 'Malifaux Third Edition: Nightmare Edition - Hanging Trees'
     manufacturer: wyrd-games
     productCode: WYR21383
     sku: WYR21383
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4489,14 +4586,14 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-hanging-trees
   - id: wyrd-games/WYR21384
-    name: Limited Edition - Katanaka Sniper
+    name: 'Malifaux Third Edition: Limited Edition - Katanaka Sniper'
     manufacturer: wyrd-games
     productCode: WYR21384
     sku: WYR21384
     gameSystems:
       - malifaux
     faction: ten-thunders
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4511,13 +4608,13 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-katanaka-sniper
   - id: wyrd-games/WYR21386
-    name: Limited Edition - Vengeful Spirits - Kirai Box Set
+    name: 'Malifaux Third Edition: Limited Edition - Vengeful Spirits - Kirai Box Set (No Stat Cards)'
     manufacturer: wyrd-games
     productCode: WYR21386
     sku: WYR21386
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4532,13 +4629,13 @@ products:
     evidence:
       - mfr-wyrd-store:vengeful-spirits-lime-dayglow
   - id: wyrd-games/WYR21388
-    name: Limited Edition - Hide and Seek - Dreamer Box Set
+    name: 'Malifaux Third Edition: Limited Edition - Hide and Seek - Dreamer Box Set'
     manufacturer: wyrd-games
     productCode: WYR21388
     sku: WYR21388
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4553,13 +4650,13 @@ products:
     evidence:
       - mfr-wyrd-store:hide-and-seek-pink-dayglow
   - id: wyrd-games/WYR21393
-    name: Limited Edition - Witchling Stalkers -  Red Translucent
+    name: 'Malifaux Third Edition: Limited Edition - Witchling Stalkers - Red Translucent'
     manufacturer: wyrd-games
     productCode: WYR21393
     sku: WYR21393
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4574,14 +4671,14 @@ products:
     evidence:
       - mfr-wyrd-store:witchling-stalker-translucent-red
   - id: wyrd-games/WYR21394
-    name: Limited Edition - Bayou Gator
+    name: 'Malifaux Third Edition: Limited Edition - Bayou Gator'
     manufacturer: wyrd-games
     productCode: WYR21394
     sku: WYR21394
     gameSystems:
       - malifaux
     faction: bayou
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4596,13 +4693,13 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-bayou-gator
   - id: wyrd-games/WYR21395
-    name: Limited Edition - Witchling Handler
+    name: 'Malifaux Third Edition: Limited Edition - Witchling Handler'
     manufacturer: wyrd-games
     productCode: WYR21395
     sku: WYR21395
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4617,13 +4714,13 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-witchling-handler
   - id: wyrd-games/WYR21396
-    name: Limited Edition - Dr. Dufresne - Alternative McMourning
+    name: 'Malifaux Third Edition: Limited Edition - Dr. Dufresne - Alternative McMourning (No Stat Cards)'
     manufacturer: wyrd-games
     productCode: WYR21396
     sku: WYR21396
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4638,12 +4735,16 @@ products:
     evidence:
       - mfr-wyrd-store:f-limited-edition-barbaros
   - id: wyrd-games/WYR21397
-    name: Limited Edition - Firestarter
+    name: 'Malifaux Third Edition: Limited Edition - Firestarter'
     manufacturer: wyrd-games
     productCode: WYR21397
     sku: WYR21397
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     status: current
@@ -4673,13 +4774,13 @@ products:
     evidence:
       - ret-gamenerdz:/malifaux-3e-witches-woes-rotten-harvest-special-edition
   - id: wyrd-games/WYR21406
-    name: Limited Edition - Eggapult and Daredeviled Egg
+    name: 'Malifaux Third Edition: Limited Edition - Eggapult and Daredeviled Egg (No Stat Cards)'
     manufacturer: wyrd-games
     productCode: WYR21406
     sku: WYR21406
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4694,7 +4795,7 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-eggapult-and-daredeviled-egg
   - id: wyrd-games/WYR21407
-    name: Nightmare Edition - Blood in the Water - Abyssal Reavers (Mature Nephilim)
+    name: 'Malifaux Third Edition: Nightmare Edition - Blood in the Water - Abyssal Reavers (Mature Nephilim)'
     manufacturer: wyrd-games
     productCode: WYR21407
     sku: WYR21407
@@ -4702,7 +4803,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -4717,18 +4818,18 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-blood-in-the-water-abyssal-reavers-mature-nephilim
   - id: wyrd-games/WYR21409
-    name: 'Limited Edition - Witches and Woes: Rotten Harvest Baby Kade and Candy'
+    name: 'Malifaux Third Edition: Limited Edition - Witches and Woes: Rotten Harvest Baby Kade and Candy'
     manufacturer: wyrd-games
     productCode: WYR21409
     sku: WYR21409
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
@@ -4875,14 +4976,18 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-deepest-depths-adi-adara-nekima
   - id: wyrd-games/WYR21419
-    name: Nightmare Edition - The Fallen Kingdom
+    name: 'Malifaux Third Edition: Nightmare Edition - The Fallen Kingdom'
     manufacturer: wyrd-games
     productCode: WYR21419
     sku: WYR21419
     ean: '0812152034068'
     eanConfidence: confirmed
-    gameSystemsBasis: unknown
-    settingsBasis: unknown
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
     category: miniatures
     categoryBasis: code
     status: current
@@ -4894,7 +4999,7 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-the-fallen-kingdom-lord-galehault-hoffman
   - id: wyrd-games/WYR21420
-    name: Nightmare Edition - Legend Reforged
+    name: 'Malifaux Third Edition: Nightmare Edition - Legend Reforged'
     manufacturer: wyrd-games
     productCode: WYR21420
     sku: WYR21420
@@ -4902,7 +5007,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -5004,7 +5109,7 @@ products:
       - ret-gamenerdz:/malifaux-3e-dia-de-los-muertos-rotten-harvest-special-edition
       - ret-goblingaming:dia-de-los-muertos-rotten-harvest-special-edition-guild-malifaux
   - id: wyrd-games/WYR21423
-    name: Nightmare Edition - The Walking Fortress
+    name: 'Malifaux Third Edition: Nightmare Edition - The Walking Fortress'
     manufacturer: wyrd-games
     productCode: WYR21423
     sku: WYR21423
@@ -5012,7 +5117,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -5027,18 +5132,18 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-the-walking-fortress
   - id: wyrd-games/WYR21426
-    name: 'Limited Edition - Witches and Woes: Rotten Harvest Iggy'
+    name: 'Malifaux Third Edition: Limited Edition - Witches and Woes: Rotten Harvest Iggy'
     manufacturer: wyrd-games
     productCode: WYR21426
     sku: WYR21426
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
@@ -5095,18 +5200,18 @@ products:
       - ret-goblingaming:malifaux-resurrectionists-rotten-harvest-its-alive
       - ret-tistaminis:malifaux-limited-edition-rotten-harvest-it-s-alive
   - id: wyrd-games/WYR21432
-    name: Limited Edition - Rotten Harvest Dr. Frank N. Steen - Even Wilder
+    name: 'Malifaux Third Edition: Limited Edition - Rotten Harvest Dr. Frank N. Steen - Even Wilder'
     manufacturer: wyrd-games
     productCode: WYR21432
     sku: WYR21432
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
@@ -5116,7 +5221,7 @@ products:
     evidence:
       - mfr-wyrd-store:limited-edition-its-alive-rotten-harvest-dr-frank-n-steen-even-wilder
   - id: wyrd-games/WYR21434
-    name: Nightmare Edition - Reap and Sow
+    name: 'Malifaux Third Edition: Nightmare Edition - Reap and Sow'
     manufacturer: wyrd-games
     productCode: WYR21434
     sku: WYR21434
@@ -5124,7 +5229,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -5139,7 +5244,7 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-reap-and-sow
   - id: wyrd-games/WYR21435
-    name: Nightmare Edition - Crown and Thorn
+    name: 'Malifaux Third Edition: Nightmare Edition - Crown and Thorn'
     manufacturer: wyrd-games
     productCode: WYR21435
     sku: WYR21435
@@ -5147,7 +5252,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -5162,13 +5267,13 @@ products:
     evidence:
       - mfr-wyrd-store:nightmare-edition-crown-and-thorn
   - id: wyrd-games/WYR21441
-    name: Limited Edition - Alternative Alphonse LeBlanc
+    name: 'Malifaux Third Edition: Limited Edition - Alternative Alphonse LeBlanc'
     manufacturer: wyrd-games
     productCode: WYR21441
     sku: WYR21441
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -5182,27 +5287,6 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_Graphic_Alt-Alphonse.png?v=1711033436
     evidence:
       - mfr-wyrd-store:limited-edition-alternative-alphonse-leblanc
-  - id: wyrd-games/WYR21442
-    name: Limited Edition - Stab-It Rabbit
-    manufacturer: wyrd-games
-    productCode: WYR21442
-    sku: WYR21442
-    gameSystems:
-      - malifaux
-    gameSystemsBasis: classified
-    settings:
-      - malifaux
-    settingsBasis: derived
-    category: miniatures
-    categoryBasis: code
-    status: current
-    availability: in_stock
-    firstSeen: '2026-07-13'
-    priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-stab-it-rabbit
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_Graphic_Alt-TheLoneSwordsman.png?v=1711551089
-    evidence:
-      - mfr-wyrd-store:limited-edition-stab-it-rabbit
   - id: wyrd-games/WYR21443
     name: Limited Edition - Rotten Harvest Guise and Ghouls
     manufacturer: wyrd-games
@@ -5253,24 +5337,24 @@ products:
       - ret-goblingaming:wyrd-miniatures-malifaux-rotten-harvest-guise-and-ghouls
       - ret-tistaminis:malifaux-rotten-harvest-guise-and-ghouls
   - id: wyrd-games/WYR21444
-    name: Limited Edition - Rotten Harvest Juicebox - Alt Mortimer
+    name: 'Malifaux Third Edition: Limited Edition - Rotten Harvest Juicebox - Alternative Mortimer'
     manufacturer: wyrd-games
     productCode: WYR21444
     sku: WYR21444
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
     category: miniatures
-    categoryBasis: code
+    categoryBasis: mapped
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
     priceUsd: 18.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-witches-and-woes-rotten-harvest-iggy-copy
-    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Wyrd_M3E_Rotten-Harvest-Juicebox.jpg?v=1764167233
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_Graphic_Juicebox.png?v=1790698944
     evidence:
       - mfr-wyrd-store:limited-edition-witches-and-woes-rotten-harvest-iggy-copy
   - id: wyrd-games/WYR21501
@@ -5279,10 +5363,10 @@ products:
     productCode: WYR21501
     sku: WYR21501
     ean: '0812152035379'
-    eanConfidence: provisional
+    eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
@@ -5291,11 +5375,1147 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
+    priceUsd: 25.0
     priceCad: 25.0
-    url: https://tistaminis.com/products/malifaux-fourth-edition-miss-aligned
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/WYR21501.png?v=1760480947
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-miss-aligned
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_GenCon_Graphic_Miss-Aligned.png?v=1753715806
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-miss-aligned
       - ret-tistaminis:malifaux-fourth-edition-miss-aligned
+  - id: wyrd-games/WYR21502
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Bleed Neon'
+    manufacturer: wyrd-games
+    productCode: WYR21502
+    sku: WYR21502
+    ean: '0812152035362'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 70.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-bleed-neon
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR21502_M4E_Bleed-Neon_Front.png?v=1753715028
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-bleed-neon
+  - id: wyrd-games/WYR21503
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Desolate Drift'
+    manufacturer: wyrd-games
+    productCode: WYR21503
+    sku: WYR21503
+    ean: '0812152035560'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 70.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-desolate-drift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR21503_Desolate-Drift_Front.png?v=1764100577
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-desolate-drift
+  - id: wyrd-games/WYR21504
+    name: 'Malifaux Fourth Edition: Limited Edition - Chugga Chugga Waldo 2025'
+    manufacturer: wyrd-games
+    productCode: WYR21504
+    sku: WYR21504
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 20.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-chugga-chugga-waldo-2025
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_BF-Event_Graphic_Chugga-Chugga-Waldo.png?v=1764100795
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-chugga-chugga-waldo-2025
+  - id: wyrd-games/WYR21505
+    name: 'Malifaux Fourth Edition: Limited Edition - He-Kome - Alternative Shikome'
+    manufacturer: wyrd-games
+    productCode: WYR21505
+    sku: WYR21505
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-he-kome-alternative-shikome
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_He-kome.png?v=1637348282
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-he-kome-alternative-shikome
+  - id: wyrd-games/WYR21507
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Unicorn Vomit & Pixie Farts - Rocinante Benoit (Ulix)'
+    manufacturer: wyrd-games
+    productCode: WYR21507
+    sku: WYR21507
+    ean: '0813856019436'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 75.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-unicorn-vomit-pixie-farts-rocinante-benoit-ulix
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21092-UnicornVomitPixieFarts_NightmareBox_FRONT.png?v=1606247884
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-unicorn-vomit-pixie-farts-rocinante-benoit-ulix
+      - mfr-wyrd-store:nightmare-edition-ulix
+  - id: wyrd-games/WYR21509
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Terious - Alternative Death Marshal'
+    manufacturer: wyrd-games
+    productCode: WYR21509
+    sku: WYR21509
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 30.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-terious-alternative-death-marshal
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Alt-DeathMarshal-MissTerious.png?v=1669224641
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-terious-alternative-death-marshal
+  - id: wyrd-games/WYR21511
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Dark Carnival Coryphée'
+    manufacturer: wyrd-games
+    productCode: WYR21511
+    sku: WYR21511
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 35.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-dark-carnival-coryphee
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/DarkCarnivalCoryphee_FRONT.png?v=1606247531
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-dark-carnival-coryphee
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-dark-carnival-coryphee-sca_clone_freegift
+  - id: wyrd-games/WYR21512
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Brine and Bones - Mary Bonnet (Molly)'
+    manufacturer: wyrd-games
+    productCode: WYR21512
+    sku: WYR21512
+    ean: '0812152031531'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 75.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-brine-and-bones-mary-bonnet-molly
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/M3E_BrineandBones_NightmareBox.jpg?v=1606247907
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-brine-and-bones-mary-bonnet-molly
+  - id: wyrd-games/WYR21513
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Salty Seadevil - Alternative Rogue Necromancy'
+    manufacturer: wyrd-games
+    productCode: WYR21513
+    sku: WYR21513
+    ean: '0812152031524'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 35.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-salty-seadevil-alternative-rogue-necromancy
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-Easter-Event_Graphic_Salty-Seadevil.png?v=1775058052
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-salty-seadevil-alternative-rogue-necromancy
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-salty-seadevil-alternative-rogue-necromancy-sca_clone_freegift
+      - mfr-wyrd-store:miss-feasance
+  - id: wyrd-games/WYR21514
+    name: 'Malifaux Fourth Edition: Limited Edition Bah Humbug Waldo 2019'
+    manufacturer: wyrd-games
+    productCode: WYR21514
+    sku: WYR21514
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 20.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-bah-humbug-waldo-2019
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_BlackFriday_BahumbugWaldo_Graphic.png?v=1605803881
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-bah-humbug-waldo-2019
+      - mfr-wyrd-store:malifaux-fourth-edition-bah-humbug-waldo-2019-sca_clone_freegift
+  - id: wyrd-games/WYR21515
+    name: 'Malifaux Fourth Edition: Limited Edition - Silent Knight - Alternative Killjoy'
+    manufacturer: wyrd-games
+    productCode: WYR21515
+    sku: WYR21515
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 30.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-silent-knight-alternative-killjoy
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Alt-Killjoy.png?v=1669224694
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-silent-knight-alternative-killjoy
+  - id: wyrd-games/WYR21516
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Fire - Alternative Willie'
+    manufacturer: wyrd-games
+    productCode: WYR21516
+    sku: WYR21516
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-fire-alternative-willie
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_MissFire.png?v=1637351147
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-fire-alternative-willie
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-fire-alternative-willie-sca_clone_freegift
+  - id: wyrd-games/WYR21519
+    name: 'Malifaux Fourth Edition: Limited Edition - Kaeris'
+    manufacturer: wyrd-games
+    productCode: WYR21519
+    sku: WYR21519
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-kaeris
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_Kaeris-Alt.png?v=1637348341
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-kaeris
+  - id: wyrd-games/WYR21521
+    name: 'Malifaux Fourth Edition: Limited Edition - Sparkle Steed'
+    manufacturer: wyrd-games
+    productCode: WYR21521
+    sku: WYR21521
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-sparkle-steed
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_BlackFriday_SparkleSteed_Graphic.png?v=1606247659
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-sparkle-steed
+  - id: wyrd-games/WYR21522
+    name: 'Malifaux Fourth Edition: Limited Edition - Minicorns'
+    manufacturer: wyrd-games
+    productCode: WYR21522
+    sku: WYR21522
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-minicorns
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_BlackFriday_Minicorns_Graphic.png?v=1606247660
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-minicorns
+  - id: wyrd-games/WYR21523
+    name: 'Malifaux Fourth Edition: Limited Edition - Tricornus - Alternative The Sow'
+    manufacturer: wyrd-games
+    productCode: WYR21523
+    sku: WYR21523
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-tricornus-alternative-the-sow
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_Easter-Sale_Graphic_Tricornus.png?v=1744797347
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-tricornus-alternative-the-sow
+  - id: wyrd-games/WYR21524
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Guided - Alternative Fuhatsu'
+    manufacturer: wyrd-games
+    productCode: WYR21524
+    sku: WYR21524
+    ean: '0812152032828'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-guided-alternative-fuhatsu
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_MissGuided.png?v=1764105973
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-guided-alternative-fuhatsu
+  - id: wyrd-games/WYR21525
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Malifaux 1988 - Gumdrop (Mei Feng)'
+    manufacturer: wyrd-games
+    productCode: WYR21525
+    sku: WYR21525
+    ean: '0812152032835'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 75.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-malifaux-1988-gumdrop-mei-feng
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21403-Malifaux1988_NightmareBox_FRONT.png?v=1606247646
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-malifaux-1988-gumdrop-mei-feng
+  - id: wyrd-games/WYR21526
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Malifaux 1988 - Fat Cap - Alternative Metal Golem'
+    manufacturer: wyrd-games
+    productCode: WYR21526
+    sku: WYR21526
+    ean: '0812152033214'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 35.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-malifaux-1988-fat-cap-alternative-metal-golem
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21405-FatCap_FRONT.png?v=1606247662
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-malifaux-1988-fat-cap-alternative-metal-golem
+  - id: wyrd-games/WYR21527
+    name: 'Malifaux Fourth Edition: Limited Edition - Grumpus Waldo 2020'
+    manufacturer: wyrd-games
+    productCode: WYR21527
+    sku: WYR21527
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 20.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/grumpus-waldo-2020-copy
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_BlackFriday_GrumpusWaldo_Graphic.png?v=1605805622
+    evidence:
+      - mfr-wyrd-store:grumpus-waldo-2020-copy
+  - id: wyrd-games/WYR21528
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Hapen - Alternative Jakuuna Ubume'
+    manufacturer: wyrd-games
+    productCode: WYR21528
+    sku: WYR21528
+    ean: '0812152033313'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-hapen-alternative-jakuuna-ubume
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_GenCon2021_MissModel_Graphic.png?v=1631683521
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-hapen-alternative-jakuuna-ubume
+  - id: wyrd-games/WYR21529
+    name: 'Malifaux Fourth Edition: Limited Edition Bah Hum Rug Waldo 2021'
+    manufacturer: wyrd-games
+    productCode: WYR21529
+    sku: WYR21529
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-bah-hum-rug-waldo-2021-copy
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_BahHumRug.png?v=1637606787
+    evidence:
+      - mfr-wyrd-store:limited-edition-bah-hum-rug-waldo-2021-copy
+  - id: wyrd-games/WYR21530
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Tique - Alternative Carlos Vasquez'
+    manufacturer: wyrd-games
+    productCode: WYR21530
+    sku: WYR21530
+    ean: '0812152034051'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-tique-alternative-carlos-vasquez
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_GenCon2022_MissModel_Graphic.png?v=1659027604
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-tique-alternative-carlos-vasquez
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-tique-alternative-carlos-vasquez-sca_clone_freegift
+  - id: wyrd-games/WYR21531
+    name: 'Malifaux Fourth Edition: Limited Edition - Snow Much Mayhem Waldo 2022'
+    manufacturer: wyrd-games
+    productCode: WYR21531
+    sku: WYR21531
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 15.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-snow-much-mayhem-waldo-2022
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2022_BF-Event_Graphic_SnowMuchMayhemWaldo.png?v=1669050326
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-snow-much-mayhem-waldo-2022
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-snow-much-mayhem-waldo-2022-sca_clone_freegift
+  - id: wyrd-games/WYR21532
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Conduct - Alternative Arik Schöttemer'
+    manufacturer: wyrd-games
+    productCode: WYR21532
+    sku: WYR21532
+    ean: '0812152034495'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-conduct-alternative-arik-schottemer
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_GenCon2023_MissModel_Graphic.png?v=1713287346
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-conduct-alternative-arik-schottemer
+  - id: wyrd-games/WYR21533
+    name: 'Malifaux Fourth Edition: Limited Edition - Winona Finnigan, Alternative Winston Finnigan'
+    manufacturer: wyrd-games
+    productCode: WYR21533
+    sku: WYR21533
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-winona-finnigan-alternative-winston-finnigan
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2022_BF-Event_Graphic_Alt-WinstonFinnigan.png?v=1669048984
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-winona-finnigan-alternative-winston-finnigan
+  - id: wyrd-games/WYR21534
+    name: 'Malifaux Fourth Edition: Limited Edition - Fir-ocius, Alt Grootslang'
+    manufacturer: wyrd-games
+    productCode: WYR21534
+    sku: WYR21534
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 15.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-fir-ocius-alt-grootslang
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2022_BF-Event_Graphic_Alt-Grootslang.png?v=1669050531
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-fir-ocius-alt-grootslang
+  - id: wyrd-games/WYR21535
+    name: 'Malifaux Fourth Edition: Limited Edition - Ulric Volkov, Alternative Guild Lawyer'
+    manufacturer: wyrd-games
+    productCode: WYR21535
+    sku: WYR21535
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-ulric-volkov-alternative-guild-mage
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2022_BF-Event_Graphic_Alt-GuildSteward.png?v=1669048739
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-ulric-volkov-alternative-guild-mage
+  - id: wyrd-games/WYR21536
+    name: 'Malifaux Fourth Edition: Limited Edition - Alternative Daeva'
+    manufacturer: wyrd-games
+    productCode: WYR21536
+    sku: WYR21536
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-alternative-daeva
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2023_BF-Event_Graphic_Alt-Daeva.png?v=1700584936
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-alternative-daeva
+  - id: wyrd-games/WYR21537
+    name: 'Malifaux Fourth Edition: Limited Edition - Oh, Fudge Waldo 2024'
+    manufacturer: wyrd-games
+    productCode: WYR21537
+    sku: WYR21537
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 15.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-oh-fudge-waldo-2024
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2024_BF-Event_Graphic_Oh-Fudge-Waldo.png?v=1732715966
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-oh-fudge-waldo-2024
+  - id: wyrd-games/WYR21538
+    name: 'Malifaux Fourth Edition: Limited Edition - Alternative Pale Rider'
+    manufacturer: wyrd-games
+    productCode: WYR21538
+    sku: WYR21538
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 35.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-alternative-pale-rider
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2023_BF-Event_Graphic_Alt-PaleRider.png?v=1700584372
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-alternative-pale-rider
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-alternative-pale-rider-sca_clone_freegift
+  - id: wyrd-games/WYR21539
+    name: 'Malifaux Fourth Edition: Limited Edition - Alternative Executioner - Female'
+    manufacturer: wyrd-games
+    productCode: WYR21539
+    sku: WYR21539
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-alternative-executioner-female
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2023_BF-Event_Graphic_Alt-Executioner.png?v=1700585133
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-alternative-executioner-female
+  - id: wyrd-games/WYR21540
+    name: 'Malifaux Fourth Edition: Limited Edition - Alternative Doppelganger'
+    manufacturer: wyrd-games
+    productCode: WYR21540
+    sku: WYR21540
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-alternative-doppleganger
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2023_BF-Event_Graphic_Alt-Doppleganger.png?v=1700584676
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-alternative-doppleganger
+  - id: wyrd-games/WYR21541
+    name: Malifaux Fourth Edition - Limited Edition - He-namatsu - Alternative Hinamatsu
+    manufacturer: wyrd-games
+    productCode: WYR21541
+    sku: WYR21541
+    ean: '0812152034907'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-he-namatsu-alternative-hinamatsu
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/GenCon2024_Graphic_Henamatsu.png?v=1721322303
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-he-namatsu-alternative-hinamatsu
+  - id: wyrd-games/WYR21542
+    name: 'Malifaux Fourth Edition: Nightmare Edition - We''re All Mad Here'
+    manufacturer: wyrd-games
+    productCode: WYR21542
+    sku: WYR21542
+    ean: '0812152035003'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 55.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-were-all-mad-here
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR21447-Nightmare-2024-Were-All-Mad-Here_FRONT.png?v=1732716593
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-were-all-mad-here
+  - id: wyrd-games/WYR21543
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Off With Her Head'
+    manufacturer: wyrd-games
+    productCode: WYR21543
+    sku: WYR21543
+    ean: '0812152034860'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 65.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-off-with-her-head
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR21446-Off-With-Her-Head_FRONT.png?v=1721321447
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-off-with-her-head
+  - id: wyrd-games/WYR21544
+    name: 'Malifaux Fourth Edition: Limited Edition - The Eighth Mate - Alternative The First Mate'
+    manufacturer: wyrd-games
+    productCode: WYR21544
+    sku: WYR21544
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-the-eighth-mate-alternative-the-first-mate
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_Easter-Sale_Graphic_The-Eighth-Mate.png?v=1744797490
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-the-eighth-mate-alternative-the-first-mate
+  - id: wyrd-games/WYR21545
+    name: 'Malifaux Fourth Edition: Limited Edition - Maid in the Mist - Alternative Shōjō'
+    manufacturer: wyrd-games
+    productCode: WYR21545
+    sku: WYR21545
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-maid-in-the-mist-alternative-shojo
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_Easter-Sale_Graphic_Maid-in-the-Mist.png?v=1744797980
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-maid-in-the-mist-alternative-shojo
+  - id: wyrd-games/WYR21546
+    name: 'Malifaux Fourth Edition: Limited Edition - Mr. Invisible - Alternative Jin Baccara'
+    manufacturer: wyrd-games
+    productCode: WYR21546
+    sku: WYR21546
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-mr-invisible-alternative-jin-baccara
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_Easter-Sale_Graphic_Mr-Invisible.png?v=1744798149
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-mr-invisible-alternative-jin-baccara
+  - id: wyrd-games/WYR21550
+    name: 'Malifaux Fourth Edition: Limited Edition – Hippity & Hoppity'
+    manufacturer: wyrd-games
+    productCode: WYR21550
+    sku: WYR21550
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 40.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-hippity-hoppity
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-Easter-Event_Graphic_Hippity-Hoppity_9cd742dd-5d96-4855-9fbd-191749eaa576.png?v=1775052397
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-hippity-hoppity
+  - id: wyrd-games/WYR21551
+    name: 'Malifaux Fourth Edition: Wyrd Dice'
+    manufacturer: wyrd-games
+    productCode: WYR21551
+    sku: WYR21551
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-wyrd-dice
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-Easter-Event_Graphic_Dice.png?v=1775053229
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-wyrd-dice
+  - id: wyrd-games/WYR21552
+    name: 'Malifaux Fourth Edition: Limited Edition - Miss Tified - Alternative McTavish'
+    manufacturer: wyrd-games
+    productCode: WYR21552
+    sku: WYR21552
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-miss-tified-alternative-mctavish
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/malifaux-fourth-edition-miss-tified-2026-gen-con-art.png?v=1785160466
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-miss-tified-alternative-mctavish
+  - id: wyrd-games/WYR21562A
+    name: '» Malifaux Fourth Edition: Alternative Mr. Graves (Promotional Gift) (100% off)'
+    manufacturer: wyrd-games
+    productCode: WYR21562A
+    sku: WYR21562a
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/m4e-alternative-graves-promotional-gift-sca_clone_freegift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-BF-Event-Graphic-Mr-Graves-Alt.png?v=1795452445
+    evidence:
+      - mfr-wyrd-store:m4e-alternative-graves-promotional-gift-sca_clone_freegift
+  - id: wyrd-games/WYR21562B
+    name: '» Malifaux Fourth Edition: Alternative Mr. Tannen (Promotional Gift) (100% off)'
+    manufacturer: wyrd-games
+    productCode: WYR21562B
+    sku: WYR21562b
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/m4e-alternative-tannen-promotional-gift-sca_clone_freegift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-BF-Event-Graphic-Mr-Tannen-Alt.png?v=1795452450
+    evidence:
+      - mfr-wyrd-store:m4e-alternative-tannen-promotional-gift-sca_clone_freegift
+  - id: wyrd-games/WYR21563
+    name: '» Malifaux Fourth Edition: Alternative Rogue Necromancy (Promotional Gift) (100% off)'
+    manufacturer: wyrd-games
+    productCode: WYR21563
+    sku: WYR21563
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-alternative-rogue-necromancy-promotional-gift-sca_clone_freegift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-BF-Event-Graphic-Rogue-Necromancy-Alt.png?v=1795452454
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-alternative-rogue-necromancy-promotional-gift-sca_clone_freegift
+  - id: wyrd-games/WYR21564
+    name: '» Malifaux Fourth Edition: Alternative Lenny Jones (Promotional Gift) (100% off)'
+    manufacturer: wyrd-games
+    productCode: WYR21564
+    sku: WYR21564
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/m4e-alternative-lenny-jones-promotional-gift-sca_clone_freegift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-BF-Event-Graphic-Lenny-Alt.png?v=1795452441
+    evidence:
+      - mfr-wyrd-store:m4e-alternative-lenny-jones-promotional-gift-sca_clone_freegift
+  - id: wyrd-games/WYR21565
+    name: 'Malifaux Third Edition: Limited Edition - Vintage - Sonnia Criid'
+    manufacturer: wyrd-games
+    productCode: WYR21565
+    sku: WYR21565
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-sonnia-criid
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Sonnia_Vintage.png?v=1669225195
+    evidence:
+      - mfr-wyrd-store:vintage-sonnia-criid
+  - id: wyrd-games/WYR21569
+    name: 'Malifaux Third Edition: Limited Edition - Vintage - McMourning'
+    manufacturer: wyrd-games
+    productCode: WYR21569
+    sku: WYR21569
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-mcmourning-1
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_McMourning_Vintage.png?v=1669229348
+    evidence:
+      - mfr-wyrd-store:vintage-mcmourning-1
+  - id: wyrd-games/WYR21572
+    name: 'Malifaux Third Edition: Limited Edition - Stab-It Rabbit'
+    manufacturer: wyrd-games
+    productCode: WYR21572
+    sku: WYR21572
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-stab-it-rabbit
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_Graphic_Alt-TheLoneSwordsman.png?v=1711551089
+    evidence:
+      - mfr-wyrd-store:limited-edition-stab-it-rabbit
+  - id: wyrd-games/WYR21573
+    name: 'Malifaux Fourth Edition: Limited Edition - Teddy - Purple Translucent'
+    manufacturer: wyrd-games
+    productCode: WYR21573
+    sku: WYR21573
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 20.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-miss-ery-translucent-purple
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Teddy.png?v=1669225219
+    evidence:
+      - mfr-wyrd-store:limited-edition-miss-ery-translucent-purple
+  - id: wyrd-games/WYR21574
+    name: 'Malifaux Third Edition: Limited Edition - Bishop'
+    manufacturer: wyrd-games
+    productCode: WYR21574
+    sku: WYR21574
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-alternative-bishop
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_Bishop-Alt.png?v=1637346201
+    evidence:
+      - mfr-wyrd-store:limited-edition-alternative-bishop
+  - id: wyrd-games/WYR21575
+    name: 'Malifaux Third Edition: Limited Edition - Santana Ortega - Alternative Santiago Ortega'
+    manufacturer: wyrd-games
+    productCode: WYR21575
+    sku: WYR21575
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/limited-edition-santana-ortega-alternative-santiago-ortega
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_SantanaOrtega.png?v=1680633430
+    evidence:
+      - mfr-wyrd-store:limited-edition-santana-ortega-alternative-santiago-ortega
+  - id: wyrd-games/WYR21576
+    name: 'Malifaux Third Edition: Nightmare Edition - Whiskey Golem'
+    manufacturer: wyrd-games
+    productCode: WYR21576
+    sku: WYR21576
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-07-13'
+    priceUsd: 50.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/nightmare-edition-whiskey-golem
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21015-NightmareWhiskeyGolem_FRONT.png?v=1606247238
+    evidence:
+      - mfr-wyrd-store:nightmare-edition-whiskey-golem
   - id: wyrd-games/WYR23001
     name: 'Malifaux 3E: Core Rulebook'
     manufacturer: wyrd-games
@@ -6005,6 +7225,7 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/classic-fate-deck
       - mfr-wyrd-store:classic-fate-deck
+      - mfr-wyrd-store:through-the-breach-fate-deck-sca_clone_freegift
       - ret-gamenerdz:/malifaux-3e-classic-fate-deck
       - ret-tistaminis:malifaux-classic-fate-deck
   - id: wyrd-games/WYR23037
@@ -18836,6 +20057,30 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WYR24113_cover_5140.jpg?v=1778057129
     evidence:
       - ret-goblingaming:brutal-fate-4th-edition-malifaux
+  - id: wyrd-games/WYR24115
+    name: 'Malifaux Fourth Edition: Charles Hoffman, Inventor'
+    manufacturer: wyrd-games
+    productCode: WYR24115
+    sku: WYR24115
+    ean: '0812152035874'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 67.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-charles-hoffman-inventor
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24115_Hoffman-Inventor_Front.png?v=1784484795
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-charles-hoffman-inventor
   - id: wyrd-games/WYR24116
     name: 'Malifaux Fourth Edition: Harold Tull, Artillerist'
     manufacturer: wyrd-games
@@ -19245,6 +20490,30 @@ products:
       - mfr-wyrd-store:malifaux-fourth-edition-carrion-fate
       - ret-goblingaming:carrion-fate-4th-edition-malifaux
       - ret-tistaminis:malifauz-fourth-edition-carrion-fate
+  - id: wyrd-games/WYR24214
+    name: 'Malifaux Fourth Edition: Prof. Von Schtook, Admissions Executive'
+    manufacturer: wyrd-games
+    productCode: WYR24214
+    sku: WYR24214
+    ean: '0812152035942'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 57.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-prof-von-schtook-admissions-executive
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24214_Von-Schtook-Admissions-Executive_Front.png?v=1784484834
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-prof-von-schtook-admissions-executive
   - id: wyrd-games/WYR24303
     name: 'Malifaux Fourth Edition: Sandeep Desai, The Quiet Flame'
     manufacturer: wyrd-games
@@ -19639,6 +20908,30 @@ products:
       - mfr-wyrd-store:malifaux-fourth-edition-titania-autumn-queen
       - ret-goblingaming:titania-autumn-queen-4th-edition-neverborn
       - ret-tistaminis:malifaux-neverborn-titania-autumn-queen
+  - id: wyrd-games/WYR24409
+    name: 'Malifaux Fourth Edition: Nekima, Nephilim Queen'
+    manufacturer: wyrd-games
+    productCode: WYR24409
+    sku: WYR24409
+    ean: '0812152035904'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 62.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nekima-nephilim-queen
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24409_Nekima-Nephilim-Queen_Front.png?v=1784484840
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nekima-nephilim-queen
   - id: wyrd-games/WYR24410
     name: Nekima, Broodmother - 4th Edition - Malifaux
     manufacturer: wyrd-games
@@ -19677,7 +20970,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 23.55
     priceUsd: 31.5
@@ -20491,6 +21784,30 @@ products:
     evidence:
       - ret-gamenerdz:/malifaux-4e-shadow-fate-preorder
       - ret-goblingaming:shadow-fate-4th-edition-malifaux
+  - id: wyrd-games/WYR24801
+    name: 'Malifaux Fourth Edition: Lucas McCabe, Relic Hunter'
+    manufacturer: wyrd-games
+    productCode: WYR24801
+    sku: WYR24801
+    ean: '0812152035157'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    packaging: set
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 52.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-lucas-mccabe-relic-hunter
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Wyrd-Lucas-McCabe-Relic-Hunter-Front.png?v=1795036836
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-lucas-mccabe-relic-hunter
   - id: wyrd-games/WYR24802
     name: 'Malifaux Fourth Edition: Lucas McCabe, Tomb Delver'
     manufacturer: wyrd-games
@@ -20835,6 +22152,29 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-sabertooth-cerberus
       - mfr-wyrd-store:wyr3007
+  - id: wyrd-games/WYR3009
+    name: 'Malifaux Classics: Razorspine Rattler'
+    manufacturer: wyrd-games
+    productCode: WYR3009
+    sku: WYR3009
+    ean: '0813856010402'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 10.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr3009
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/3009-RazorspineRattler3.jpg?v=1617775539
+    evidence:
+      - mfr-wyrd-store:wyr3009
   - id: wyrd-games/WYR3010
     name: 'Malifaux Classics: Steamborg Executioner Class'
     manufacturer: wyrd-games
@@ -21795,10 +23135,11 @@ products:
     settings:
       - malifaux
     settingsBasis: derived
-    categoryBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 14.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr3037
@@ -22419,6 +23760,50 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/the-other-side-acrylic-tactic-token-set
       - mfr-wyrd-store:the-other-side-acrylic-tactic-token-set
+      - mfr-wyrd-store:the-other-side-acrylic-tactic-token-set-sca_clone_freegift
+  - id: wyrd-games/WYR4001
+    name: 'Malifaux Classics: Pandora, Bringer of Woe (Avatar Form)'
+    manufacturer: wyrd-games
+    productCode: WYR4001
+    sku: WYR4001
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 45.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr4001
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR4001-Pandora-Avatar-Painted.jpg?v=1795565613
+    evidence:
+      - mfr-wyrd-store:wyr4001
+  - id: wyrd-games/WYR40010
+    name: 'The Other Side: Foiled Command Fate Deck'
+    manufacturer: wyrd-games
+    productCode: WYR40010
+    sku: WYR40010
+    gameSystems:
+      - the-other-side
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 20.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/the-other-side-command-fate-deck-foiled
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2026-Easter-Event_Graphic_TOS-Fate-Deck_1.png?v=1775056680
+    evidence:
+      - mfr-wyrd-store:the-other-side-command-fate-deck-foiled
+      - mfr-wyrd-store:the-other-side-command-fate-deck-foiled-sca_clone_freegift
   - id: wyrd-games/WYR40012
     name: Court of Two vs. The Guild Starter Box
     manufacturer: wyrd-games
@@ -23102,6 +24487,27 @@ products:
       - legacy-catalog:wyrd-games/the-other-side/kings-empire/artillery-team
       - mfr-wyrd-store:artillery-team
       - ret-gamenerdz:/the-other-side-kings-empire-artillery-team
+  - id: wyrd-games/WYR40114
+    name: 'The Other Side: Special Edition Charles Edmonton'
+    manufacturer: wyrd-games
+    productCode: WYR40114
+    sku: WYR40114
+    gameSystems:
+      - the-other-side
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/alt-charles-edmonton
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_CharlesEdmonton-Alt.png?v=1680734829
+    evidence:
+      - mfr-wyrd-store:alt-charles-edmonton
   - id: wyrd-games/WYR4012
     name: 'Malifaux Classics: Sorrows (3 Pack)'
     manufacturer: wyrd-games
@@ -24181,6 +25587,29 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/the-other-side/gibbering-hordes/devouring-eel
       - mfr-wyrd-store:devouring-eel
+  - id: wyrd-games/WYR4025
+    name: 'Malifaux Classics: Primordial Magic'
+    manufacturer: wyrd-games
+    productCode: WYR4025
+    sku: WYR4025
+    ean: '0813856011690'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 9.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr4025
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/4025-PrimordialMagic.jpg?v=1617775540
+    evidence:
+      - mfr-wyrd-store:wyr4025
   - id: wyrd-games/WYR40251
     name: Cult of the Burning Man Allegiance Box
     manufacturer: wyrd-games
@@ -24665,6 +26094,27 @@ products:
       - legacy-catalog:wyrd-games/the-other-side/general/samantha-thrace
       - mfr-wyrd-store:samantha-thrace
       - ret-gamenerdz:/the-other-side-samantha-thrace
+  - id: wyrd-games/WYR40305
+    name: 'The Other Side: Limited Edition Samantha Thrace'
+    manufacturer: wyrd-games
+    productCode: WYR40305
+    sku: WYR40305
+    gameSystems:
+      - the-other-side
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/thrace
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_BlackFriday_Thrace_Graphic.png?v=1606247662
+    evidence:
+      - mfr-wyrd-store:thrace
   - id: wyrd-games/WYR40351
     name: Binh Nguyen
     manufacturer: wyrd-games
@@ -24709,6 +26159,27 @@ products:
       - legacy-catalog:wyrd-games/the-other-side/general/binh-nguyen
       - mfr-wyrd-store:binh-nguyen-1
       - ret-gamenerdz:/the-other-side-binh-nguyen
+  - id: wyrd-games/WYR40355
+    name: 'The Other Side: Limited Edition Binh Nguyen'
+    manufacturer: wyrd-games
+    productCode: WYR40355
+    sku: WYR40355
+    gameSystems:
+      - the-other-side
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/binh-nguyen
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_BlackFriday_Binh_Graphic.png?v=1606247663
+    evidence:
+      - mfr-wyrd-store:binh-nguyen
   - id: wyrd-games/WYR4039
     name: 'Malifaux Classics: Collodi'
     manufacturer: wyrd-games
@@ -24897,7 +26368,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceUsd: 16.5
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr4041
@@ -25064,6 +26535,27 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-spawn-mother
       - mfr-wyrd-store:wyr4054
+  - id: wyrd-games/WYR5001
+    name: 'Malifaux Classics: Bishop'
+    manufacturer: wyrd-games
+    productCode: WYR5001
+    sku: WYR5001
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 9.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-classics-bishop
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/5001-BISHOP2.jpg?v=1637758335
+    evidence:
+      - mfr-wyrd-store:malifaux-classics-bishop
   - id: wyrd-games/WYR5006
     name: 'Malifaux Classics: Hamelin'
     manufacturer: wyrd-games
@@ -25124,6 +26616,29 @@ products:
     evidence:
       - legacy-catalog:wyrd-games/malifaux/general/malifaux-classics-som-erteeth-jones
       - mfr-wyrd-store:wyr5016
+  - id: wyrd-games/WYR5017
+    name: 'Malifaux Classics: Som''er Teeth Jones, The Gremlins Box Set'
+    manufacturer: wyrd-games
+    productCode: WYR5017
+    sku: WYR5017
+    ean: '0813856011010'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 35.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr5017
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/5017-Gremlins-Som_erBox2.jpg?v=1617775550
+    evidence:
+      - mfr-wyrd-store:wyr5017
   - id: wyrd-games/WYR5020
     name: 'Malifaux Classics: Hollow Waif (2 Pack)'
     manufacturer: wyrd-games
@@ -25715,6 +27230,48 @@ products:
     url: https://www.gamenerdz.com/malifaux-rising-powers-expansion-rulebook
     evidence:
       - ret-gamenerdz:/malifaux-rising-powers-expansion-rulebook
+  - id: wyrd-games/WYR6015
+    name: 'Malifaux Classics: Twisting Fates'
+    manufacturer: wyrd-games
+    productCode: WYR6015
+    sku: WYR6015
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 7.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr6015
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/xctmpx69UoJ.png?v=1602513511
+    evidence:
+      - mfr-wyrd-store:wyr6015
+  - id: wyrd-games/WYR6019
+    name: 'Malifaux Classics: Storm of Shadows'
+    manufacturer: wyrd-games
+    productCode: WYR6019
+    sku: WYR6019
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 7.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr6019
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/xctmpzWDhD8.png?v=1602513513
+    evidence:
+      - mfr-wyrd-store:wyr6019
   - id: wyrd-games/WYR7006
     name: Puppet Coloring Book
     manufacturer: wyrd-games
@@ -27135,6 +28692,26 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/malifaux-fourth-edition-crumb-character-art.png?v=1785160437
     evidence:
       - mfr-wyrd-store:malifaux-fourth-edition-crumb-special-order
+  - id: wyrd-games/malifaux-fourth-edition-the-brass-bull-special-order
+    name: 'Malifaux Fourth Edition: The Brass Bull, Special Order'
+    manufacturer: wyrd-games
+    sku: WYR24803-SO
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 12.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-the-brass-bull-special-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/m4e-the-brass-bull-character-art.png?v=1795532848
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-the-brass-bull-special-order
   - id: wyrd-games/malifaux-fourth-edition-the-silent-catalogue-pdf
     name: 'Malifaux Fourth Edition: The Silent Catalogue (PDF)'
     manufacturer: wyrd-games
@@ -27475,6 +29052,20 @@ products:
       | Chest | 34-36 | 38-40 | 42-44 | 46-48 | 50-52 | 54-56 |
     evidence:
       - legacy-catalog:wyrd-games/malifaux/outcasts/outcast-t-shirt
+  - id: wyrd-games/random-waldo-keychain-promotional-gift-100-off
+    name: » Random Waldo Keychain (Promotional Gift) (100% off)
+    manufacturer: wyrd-games
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/random-waldo-keychain-promotional-gift-sca_clone_freegift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR90601_CursedKeychain_Rhukus.jpg?v=1690814884
+    evidence:
+      - mfr-wyrd-store:random-waldo-keychain-promotional-gift-sca_clone_freegift
   - id: wyrd-games/reduce-reuse-recycle-t-shirt
     name: Reduce Reuse Recycle T-Shirt
     manufacturer: wyrd-games
@@ -28584,6 +30175,35 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/womens-relaxed-t-shirt-black-front-63d140dc65d7b.png?v=1674658034
     evidence:
       - mfr-wyrd-store:vagrantsong-empress-womens-relaxed-t-shirt
+  - id: wyrd-games/vagrantsong-limited-edition-dc-miniature
+    name: 'Vagrantsong: Limited Edition DC Miniature'
+    manufacturer: wyrd-games
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vagrantsong-limited-edition-dc-miniature
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_BF-Event_Graphic_DC.png?v=1764110073
+    evidence:
+      - mfr-wyrd-store:vagrantsong-limited-edition-dc-miniature
+  - id: wyrd-games/vagrantsong-limited-edition-dc-miniature-100-off
+    name: '» Vagrantsong: Limited Edition DC Miniature (100% off)'
+    manufacturer: wyrd-games
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vagrantsong-limited-edition-dc-miniature-sca_clone_freegift
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/2025_BF-Event_Graphic_DC.png?v=1764110073
+    evidence:
+      - mfr-wyrd-store:vagrantsong-limited-edition-dc-miniature-sca_clone_freegift
   - id: wyrd-games/vagrantsong-logo-mens-classic-t-shirt
     name: 'Vagrantsong: Logo Men’s Classic T-Shirt'
     manufacturer: wyrd-games
@@ -29341,6 +30961,26 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WaldosWeekly_11.25.2020_NewsImage.jpg?v=1607026782
     evidence:
       - mfr-wyrd-store:wyrd-webstore-waldo-gift-bucks
+  - id: wyrd-games/waldo-s-26-plastic-bonanza
+    name: Waldo's $26 Plastic Bonanza!
+    manufacturer: wyrd-games
+    sku: WYRMSC96
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-25'
+    priceUsd: 26.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/waldos-26-plastic-bonanza
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/social.plastic.bonanza.2.jpg?v=1795474739
+    evidence:
+      - mfr-wyrd-store:waldos-26-plastic-bonanza
   - id: wyrd-games/wrld-pre-purchase
     name: WRLD - Pre-Purchase
     manufacturer: wyrd-games
