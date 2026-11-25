@@ -1,40 +1,40 @@
 summary:
-  products: 28092
-  undecided: 1500
+  products: 28473
+  undecided: 1534
   byBasis:
-    code: 7381
-    lexicon: 551
-    mapped: 17590
+    code: 7695
+    lexicon: 552
+    mapped: 17622
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1500
-  decidedThisRun: 25537
+    unknown: 1534
+  decidedThisRun: 25884
   gameSystemsByBasis:
-    classified: 1114
-    code: 4413
-    mapped: 2674
-    not-applicable: 8021
+    classified: 1059
+    code: 4558
+    mapped: 2806
+    not-applicable: 8102
     override: 101
-    setting: 968
-    stated: 9298
-    unknown: 1503
+    setting: 974
+    stated: 9302
+    unknown: 1571
   settingsByBasis:
-    code: 857
-    derived: 17596
+    code: 863
+    derived: 17822
     mapped: 11
-    not-applicable: 8092
+    not-applicable: 8173
     override: 3
-    unknown: 1533
+    unknown: 1601
   rolesByBasis:
-    code: 75
-    lexicon: 183
+    code: 101
+    lexicon: 184
     mapped: 1081
-    none: 21014
+    none: 21314
     override: 2
     paint-archive: 1958
     stated: 16
-    unknown: 3763
+    unknown: 3817
 conflicts:
   - entity: games-workshop/60010399003
     type: category-disagreement
@@ -491,6 +491,8 @@ unmapped:
       wouldDecide: 2
     - value: tags=WRLD
       wouldDecide: 2
+    - value: tags=bogos-gift
+      wouldDecide: 2
     - value: vendor=Wyrd Miniatures
       wouldDecide: 2
     - value: productType=Gift Card
@@ -519,45 +521,51 @@ unmapped:
       wouldDecide: 1
     - value: tags=wholesale-only
       wouldDecide: 1
+    - value: vendor=WYRD - PROMO
+      wouldDecide: 1
+    - value: vendor=Wyrd
+      wouldDecide: 1
     - value: vendor=Wyrd Miniatures - Online Store
       wouldDecide: 1
   ret-gamenerdz:
     - value: breadcrumbs=Home
-      wouldDecide: 184
+      wouldDecide: 205
     - value: breadcrumbs=Miniatures
-      wouldDecide: 175
+      wouldDecide: 184
     - value: breadcrumbs=Games Workshop
-      wouldDecide: 74
+      wouldDecide: 80
     - value: breadcrumbs=Infinity
-      wouldDecide: 51
+      wouldDecide: 52
     - value: breadcrumbs=Warhammer 40K
-      wouldDecide: 35
+      wouldDecide: 38
     - value: breadcrumbs=Warhammer Age of Sigmar
-      wouldDecide: 19
+      wouldDecide: 21
     - value: breadcrumbs=Terrain & Accessories
       wouldDecide: 15
     - value: breadcrumbs=Malifaux
+      wouldDecide: 14
+    - value: breadcrumbs=Supplies
       wouldDecide: 14
     - value: breadcrumbs=Horus Heresy
       wouldDecide: 12
     - value: breadcrumbs=More Miniatures
       wouldDecide: 11
-    - value: breadcrumbs=Supplies
-      wouldDecide: 8
+    - value: breadcrumbs=Paint and Crafting
+      wouldDecide: 11
     - value: breadcrumbs=Warcrow
-      wouldDecide: 8
+      wouldDecide: 10
+    - value: breadcrumbs=Preorders
+      wouldDecide: 7
     - value: breadcrumbs=Kings of War
+      wouldDecide: 6
+    - value: breadcrumbs=Panoceania
       wouldDecide: 6
     - value: breadcrumbs=Star Wars Legion
       wouldDecide: 6
+    - value: breadcrumbs=The Old World
+      wouldDecide: 6
     - value: 'breadcrumbs=Walking Dead: All Out War'
       wouldDecide: 6
-    - value: breadcrumbs=Paint and Crafting
-      wouldDecide: 5
-    - value: breadcrumbs=Panoceania
-      wouldDecide: 5
-    - value: breadcrumbs=The Old World
-      wouldDecide: 5
     - value: breadcrumbs=Halo Flashpoint
       wouldDecide: 4
     - value: breadcrumbs=Nomads
@@ -599,8 +607,6 @@ unmapped:
     - value: 'breadcrumbs=Halo: Flashpoint - Sergeant Major Johnson (PREORDER)'
       wouldDecide: 1
     - value: 'breadcrumbs=Infinity ITS Book Season 9: Treason'
-      wouldDecide: 1
-    - value: 'breadcrumbs=Infinity: ''Decontaminated'' Tokens (6)'
       wouldDecide: 1
   ret-radaddel:
     - value: tags=Warlord Games
