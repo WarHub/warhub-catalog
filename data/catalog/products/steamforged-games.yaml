@@ -11740,6 +11740,7 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0609/0863/4169/files/WM-ProductImage-Menoth-DefendersOfTheFlame-Box.png?v=1787827436
     evidence:
       - mfr-warmachine:warmachine-protectorate-of-menoth-covenant-of-the-flame-defenders-of-the-flame
+      - ret-gamenerdz:/warmachine-menoth-covenant-of-the-flame-defenders-of-the-flame
       - ret-gamenerdz:/warmachine-menoth-covenant-of-the-flame-defenders-of-the-flame-preorder
   - id: steamforged-games/SFIK-MEN545
     name: 'Warmachine: Protectorate of Menoth Covenant of the Flame - Flameguard Defenders'
@@ -12020,6 +12021,7 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0609/0863/4169/files/WM-ProductImage-Menoth-Warjack-Light-Box.png?v=1787829507
     evidence:
       - mfr-warmachine:warmachine-revenger-light-warjack
+      - ret-gamenerdz:/warmachine-menoth-covenant-of-the-flame-revenger-light-warjack
       - ret-gamenerdz:/warmachine-menoth-covenant-of-the-flame-revenger-light-warjack-preorder
   - id: steamforged-games/SFIK-MEN560
     name: 'Warmachine: Crusader Heavy Warjack'
@@ -12044,6 +12046,7 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0609/0863/4169/files/WM-ProductImage-Menoth-Warjack-Heavy-Box.png?v=1787829458
     evidence:
       - mfr-warmachine:warmachine-crusader-heavy-warjack
+      - ret-gamenerdz:/warmachine-menoth-covenant-of-the-flame-crusader-heavy-warjack
       - ret-gamenerdz:/warmachine-menoth-covenant-of-the-flame-crusader-heavy-warjack-preorder
   - id: steamforged-games/SFIK-MEN561
     name: 'Warmachine: Crusader Heavy Warjack Options'
@@ -13052,6 +13055,7 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0609/0863/4169/files/WM-ProductImage-Mercenary-BarlDunax.png?v=1787659148
     evidence:
       - mfr-warmachine:warmachine-captain-barl-demolisher-dunax-mercenary
+      - ret-gamenerdz:/warmachine-mercenary-captain-barl-demolisher-dunax
       - ret-gamenerdz:/warmachine-mercenary-captain-barl-demolisher-dunax-preorder
   - id: steamforged-games/SFIK-MER529
     name: 'Warmachine: Gwyn Faryll, the Misery of Merywyn'
@@ -14171,7 +14175,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 37.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-into-the-deep-wild
@@ -14190,7 +14194,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 29.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-into-the-wild-deep-wild-expeditions
@@ -14209,7 +14213,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 37.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-into-the-wild-monsternomicon-the-lost-pages
@@ -14228,7 +14232,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 4.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-a-strange-light-breaks
@@ -14247,7 +14251,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 19.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-an-echo-in-the-darkness
@@ -14285,7 +14289,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 37.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-nightmare-empire
@@ -14304,7 +14308,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 37.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-requiem-the-roleplaying-game
@@ -14323,7 +14327,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 34.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-scoundrels-guide-to-the-scharde-island
@@ -14361,7 +14365,7 @@ products:
     category: book
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-08-12'
     priceUsd: 19.99
     url: https://warmachine.gg/products/warmachine-rpg-iron-kingdoms-tales-from-the-blackwater-cantina
@@ -14416,6 +14420,23 @@ products:
       - mfr-steamforged:warmachine-core-book
       - mfr-warmachine:warmachine-core-book
       - ret-gamenerdz:/warmachine-core-book
+  - id: steamforged-games/SFIK-RPGBD2
+    name: Iron Kingdom's Strangelight Workshop Standard Bundle
+    manufacturer: steamforged-games
+    productCode: SFIK-RPGBD2
+    sku: SFIK-RPGBD2
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-27'
+    priceUsd: 75.0
+    url: https://warmachine.gg/products/iron-kingdoms-strangelight-workshop-standard-bundle
+    imageUrl: https://cdn.shopify.com/s/files/1/0609/0863/4169/files/WM-ProductImage-StrangelightWorkshopStandardBundle.png?v=1793725541
+    evidence:
+      - mfr-warmachine:iron-kingdoms-strangelight-workshop-standard-bundle
   - id: steamforged-games/SFIK-SKR121
     name: 'Warmachine: Southern Kriels Brineblood Core Expansion'
     manufacturer: steamforged-games

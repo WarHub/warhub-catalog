@@ -758,7 +758,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-11-25'
     priceUsd: 10.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr1012
@@ -3674,7 +3674,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-11-25'
     priceUsd: 18.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr2055
@@ -5421,7 +5421,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-11-25'
     priceUsd: 70.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-desolate-drift
@@ -5621,7 +5621,7 @@ products:
     category: miniatures
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-11-25'
     priceUsd: 30.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-silent-knight-alternative-killjoy
@@ -6370,7 +6370,7 @@ products:
     evidence:
       - mfr-wyrd-store:m4e-alternative-lenny-jones-promotional-gift-sca_clone_freegift
   - id: wyrd-games/WYR21565
-    name: 'Malifaux Third Edition: Limited Edition - Vintage - Sonnia Criid'
+    name: 'Malifaux Fourth Edition: Limited Edition - Vintage - Sonnia Criid'
     manufacturer: wyrd-games
     productCode: WYR21565
     sku: WYR21565
@@ -6386,12 +6386,13 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-sonnia-criid
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-vintage-sonnia-criid
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Sonnia_Vintage.png?v=1669225195
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-vintage-sonnia-criid
       - mfr-wyrd-store:vintage-sonnia-criid
   - id: wyrd-games/WYR21569
-    name: 'Malifaux Third Edition: Limited Edition - Vintage - McMourning'
+    name: 'Malifaux Fourth Edition: Limited Edition - Vintage - McMourning'
     manufacturer: wyrd-games
     productCode: WYR21569
     sku: WYR21569
@@ -6407,10 +6408,32 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceUsd: 25.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/vintage-mcmourning-1
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-vintage-mcmourning
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_McMourning_Vintage.png?v=1669229348
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-vintage-mcmourning
       - mfr-wyrd-store:vintage-mcmourning-1
+  - id: wyrd-games/WYR21570
+    name: 'Malifaux Fourth Edition: Limited Edition - Vintage - Pandora'
+    manufacturer: wyrd-games
+    productCode: WYR21570
+    sku: WYR21570
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: out_of_stock
+    firstSeen: '2026-11-27'
+    priceUsd: 25.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-limited-edition-vintage-pandora
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_Pandora_Vintage.png?v=1669225132
+    evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-vintage-pandora
   - id: wyrd-games/WYR21572
     name: 'Malifaux Third Edition: Limited Edition - Stab-It Rabbit'
     manufacturer: wyrd-games
@@ -6432,6 +6455,7 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Webstore_Graphic_Alt-TheLoneSwordsman.png?v=1711551089
     evidence:
       - mfr-wyrd-store:limited-edition-stab-it-rabbit
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-stab-it-rabbit
   - id: wyrd-games/WYR21573
     name: 'Malifaux Fourth Edition: Limited Edition - Teddy - Purple Translucent'
     manufacturer: wyrd-games
@@ -6474,6 +6498,7 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/2021_NGPW-Event_Graphic_Bishop-Alt.png?v=1637346201
     evidence:
       - mfr-wyrd-store:limited-edition-alternative-bishop
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-alternative-bishop
   - id: wyrd-games/WYR21575
     name: 'Malifaux Third Edition: Limited Edition - Santana Ortega - Alternative Santiago Ortega'
     manufacturer: wyrd-games
@@ -6495,8 +6520,9 @@ products:
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/Webstore_Graphic_SantanaOrtega.png?v=1680633430
     evidence:
       - mfr-wyrd-store:limited-edition-santana-ortega-alternative-santiago-ortega
+      - mfr-wyrd-store:malifaux-fourth-edition-limited-edition-santana-ortega-alternative-santiago-ortega
   - id: wyrd-games/WYR21576
-    name: 'Malifaux Third Edition: Nightmare Edition - Whiskey Golem'
+    name: 'Malifaux Fourth Edition: Nightmare Edition - Whiskey Golem'
     manufacturer: wyrd-games
     productCode: WYR21576
     sku: WYR21576
@@ -6512,9 +6538,10 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceUsd: 50.0
-    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/nightmare-edition-whiskey-golem
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nightmare-edition-whiskey-golem
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/WYR21015-NightmareWhiskeyGolem_FRONT.png?v=1606247238
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nightmare-edition-whiskey-golem
       - mfr-wyrd-store:nightmare-edition-whiskey-golem
   - id: wyrd-games/WYR23001
     name: 'Malifaux 3E: Core Rulebook'
@@ -6769,6 +6796,29 @@ products:
       - legacy-catalog:wyrd-games/malifaux/ten-thunders/ten-thunder-faction-book
       - mfr-wyrd-store:ten-thunder-faction-book
       - ret-gamenerdz:/malifaux-3e-ten-thunders-faction-book
+  - id: wyrd-games/WYR23019
+    name: 'Malifaux Third Edition: Gaining Grounds Pack - Season 1'
+    manufacturer: wyrd-games
+    productCode: WYR23019
+    sku: WYR23019
+    ean: '0812152032811'
+    eanConfidence: confirmed
+    gameSystems:
+      - malifaux
+    gameSystemsBasis: mapped
+    settings:
+      - malifaux
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-27'
+    priceUsd: 15.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/gaining-grounds-pack-season-1
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/products/blah.png?v=1602517675
+    evidence:
+      - mfr-wyrd-store:gaining-grounds-pack-season-1
   - id: wyrd-games/WYR23020
     name: M3E Fate Deck - Guild Theme
     manufacturer: wyrd-games
@@ -12730,7 +12780,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 30.0
     priceCad: 35.0
@@ -12830,7 +12880,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 40.0
     priceCad: 43.0
@@ -14264,7 +14314,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 40.59
     priceUsd: 52.5
@@ -14387,7 +14437,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 34.85
     priceUsd: 45.0
@@ -16146,7 +16196,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 35.91
     priceUsd: 46.5
@@ -16541,7 +16591,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 18.0
     priceCad: 24.0
@@ -18223,7 +18273,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 40.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/embrace-the-ember
@@ -18768,7 +18818,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 26.99
     priceUsd: 35.0
@@ -19906,7 +19956,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-07'
     priceGbp: 41.65
     priceUsd: 55.0
@@ -20933,25 +20983,30 @@ products:
     evidence:
       - mfr-wyrd-store:malifaux-fourth-edition-nekima-nephilim-queen
   - id: wyrd-games/WYR24410
-    name: Nekima, Broodmother - 4th Edition - Malifaux
+    name: 'Malifaux Fourth Edition: Nekima, Broodmother'
     manufacturer: wyrd-games
     productCode: WYR24410
     sku: WYR24410
+    ean: '0812152035720'
+    eanConfidence: confirmed
     gameSystems:
       - malifaux
-    gameSystemsBasis: classified
+    gameSystemsBasis: mapped
     settings:
       - malifaux
     settingsBasis: derived
     category: miniatures
     categoryBasis: mapped
+    packaging: set
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 50.41
-    url: https://www.goblingaming.co.uk/products/nekima-broodmother-4th-edition-malifaux
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/WYR24410_cover_32ba.jpg?v=1778057568
+    priceUsd: 67.5
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-nekima-broodmother
+    imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/WYR24410_Nekima-Broodmother_Front.png?v=1784484911
     evidence:
+      - mfr-wyrd-store:malifaux-fourth-edition-nekima-broodmother
       - ret-goblingaming:nekima-broodmother-4th-edition-malifaux
   - id: wyrd-games/WYR24411
     name: 'Malifaux Fourth Edition: Hooded Rider'
@@ -21803,7 +21858,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-11-25'
-    priceUsd: 52.5
+    priceUsd: 47.5
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-fourth-edition-lucas-mccabe-relic-hunter
     imageUrl: https://cdn.shopify.com/s/files/1/0825/4481/files/Wyrd-Lucas-McCabe-Relic-Hunter-Front.png?v=1795036836
     evidence:
@@ -21899,7 +21954,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 43.52
     priceUsd: 57.5
@@ -22022,7 +22077,7 @@ products:
     categoryBasis: mapped
     packaging: set
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 46.67
     priceUsd: 62.5
@@ -22168,7 +22223,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-11-25'
     priceUsd: 10.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr3009
@@ -23139,7 +23194,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 14.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr3037
@@ -25603,7 +25658,7 @@ products:
     category: miniatures
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-11-25'
     priceUsd: 9.5
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/wyr4025
@@ -26493,7 +26548,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 45.0
     url: https://giveusyourmoneypleasethankyou-wyrd.com/products/malifaux-classics-lilith-avatar-of-natures-malevolence
@@ -29052,6 +29107,20 @@ products:
       | Chest | 34-36 | 38-40 | 42-44 | 46-48 | 50-52 | 54-56 |
     evidence:
       - legacy-catalog:wyrd-games/malifaux/outcasts/outcast-t-shirt
+  - id: wyrd-games/random-holiday-waldo-wholesale-gift-100-off
+    name: » Random Holiday Waldo (Wholesale Gift) (100% off)
+    manufacturer: wyrd-games
+    sku: WH-HOLIDAY-WALDO-RANDOM
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-27'
+    priceUsd: 0.0
+    url: https://giveusyourmoneypleasethankyou-wyrd.com/products/random-holiday-waldo-wholesale-gift-sca_clone_freegift
+    evidence:
+      - mfr-wyrd-store:random-holiday-waldo-wholesale-gift-sca_clone_freegift
   - id: wyrd-games/random-waldo-keychain-promotional-gift-100-off
     name: » Random Waldo Keychain (Promotional Gift) (100% off)
     manufacturer: wyrd-games
