@@ -1,36 +1,36 @@
 summary:
-  products: 28473
-  undecided: 1534
+  products: 28480
+  undecided: 1538
   byBasis:
     code: 7695
     lexicon: 552
-    mapped: 17622
+    mapped: 17625
     override: 14
     paint-barcode: 15
     stated: 1041
-    unknown: 1534
-  decidedThisRun: 25884
+    unknown: 1538
+  decidedThisRun: 25887
   gameSystemsByBasis:
-    classified: 1059
+    classified: 1058
     code: 4558
     mapped: 2806
     not-applicable: 8102
     override: 101
     setting: 974
-    stated: 9302
-    unknown: 1571
+    stated: 9304
+    unknown: 1577
   settingsByBasis:
     code: 863
-    derived: 17822
+    derived: 17823
     mapped: 11
     not-applicable: 8173
     override: 3
-    unknown: 1601
+    unknown: 1607
   rolesByBasis:
     code: 101
     lexicon: 184
     mapped: 1081
-    none: 21314
+    none: 21321
     override: 2
     paint-archive: 1958
     stated: 16
@@ -252,8 +252,6 @@ unmapped:
       wouldDecide: 21
     - value: categories=deadzone
       wouldDecide: 16
-    - value: categories=deals-and-offers
-      wouldDecide: 15
     - value: categories=firefight-asterians
       wouldDecide: 15
     - value: categories=walking-dead-collections
@@ -266,17 +264,19 @@ unmapped:
       wouldDecide: 12
     - value: categories=dreadball
       wouldDecide: 11
-    - value: categories=hellboy
+    - value: categories=deals-and-offers
       wouldDecide: 10
-    - value: categories=ogre-miniatures
+    - value: categories=hellboy
       wouldDecide: 10
     - value: categories=deadonze-matsudan
       wouldDecide: 9
-    - value: categories=xirkaali
-      wouldDecide: 9
     - value: categories=accessories-dreadball
       wouldDecide: 8
+    - value: categories=ogre-miniatures
+      wouldDecide: 8
     - value: categories=vallejo
+      wouldDecide: 8
+    - value: categories=xirkaali
       wouldDecide: 8
     - value: categories=firefight-enforcers
       wouldDecide: 7
@@ -308,8 +308,6 @@ unmapped:
       wouldDecide: 6
     - value: categories=salamanders
       wouldDecide: 6
-    - value: categories=4th-edition-launch
-      wouldDecide: 5
     - value: categories=gcps
       wouldDecide: 5
     - value: categories=getting-started-kings-of-war
@@ -320,6 +318,8 @@ unmapped:
       wouldDecide: 5
     - value: categories=veer-myn
       wouldDecide: 5
+    - value: categories=4th-edition-launch
+      wouldDecide: 4
     - value: categories=enforcers
       wouldDecide: 4
     - value: categories=expansions-armada
@@ -345,14 +345,12 @@ unmapped:
       wouldDecide: 5
     - value: categories=new-upcoming
       wouldDecide: 5
+    - value: categories=new-releases
+      wouldDecide: 4
     - value: categories=2000pt-armies
-      wouldDecide: 3
-    - value: categories=pre-orders
       wouldDecide: 3
     - value: categories=the-last-argument-of-kings
       wouldDecide: 3
-    - value: categories=new-releases
-      wouldDecide: 2
     - value: categories=sales
       wouldDecide: 2
     - value: categories=yoroni
@@ -368,6 +366,8 @@ unmapped:
     - value: categories=offers
       wouldDecide: 1
     - value: categories=para-bellum-gift-cards
+      wouldDecide: 1
+    - value: categories=pre-orders
       wouldDecide: 1
     - value: categories=wadrhun
       wouldDecide: 1
@@ -485,13 +485,13 @@ unmapped:
     - value: vendor=Warmachine
       wouldDecide: 2
   mfr-wyrd-store:
+    - value: tags=bogos-gift
+      wouldDecide: 3
     - value: productType=Board & Card Games
       wouldDecide: 2
     - value: tags=NOPE
       wouldDecide: 2
     - value: tags=WRLD
-      wouldDecide: 2
-    - value: tags=bogos-gift
       wouldDecide: 2
     - value: vendor=Wyrd Miniatures
       wouldDecide: 2
@@ -524,6 +524,8 @@ unmapped:
     - value: vendor=WYRD - PROMO
       wouldDecide: 1
     - value: vendor=Wyrd
+      wouldDecide: 1
+    - value: vendor=Wyrd Games
       wouldDecide: 1
     - value: vendor=Wyrd Miniatures - Online Store
       wouldDecide: 1

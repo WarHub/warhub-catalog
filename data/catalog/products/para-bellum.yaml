@@ -491,7 +491,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 64.99
     url: https://eshop.para-bellum.com/product/flogobolon-dual-kit-city-states/
@@ -1303,7 +1303,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 139.99
     url: https://eshop.para-bellum.com/product/old-dominion-fallen-divinity-artisan-series/
@@ -2011,7 +2011,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 139.99
     url: https://eshop.para-bellum.com/product/mahut-sorcerer-kings/
@@ -2549,7 +2549,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 29.99
     url: https://eshop.para-bellum.com/product/conquest-iconic-art-print-the-nords-svarthgalm/
@@ -2599,8 +2599,8 @@ products:
     settingsBasis: derived
     categoryBasis: unknown
     packaging: single
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-07-07'
     priceUsd: 24.99
     url: https://eshop.para-bellum.com/product/murderous-fish-gnome-mystery-pack/
@@ -5395,6 +5395,7 @@ products:
     imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2025/08/4018.jpg
     evidence:
       - legacy-catalog:para-bellum/conquest/city-states/city-states-2025-starter
+      - mfr-para-bellum:4312
   - id: para-bellum/PBW6111
     name: Sorcerer Kings 2025 Starter
     manufacturer: para-bellum
@@ -6385,7 +6386,7 @@ products:
     categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 89.99
     url: https://eshop.para-bellum.com/product/conquest-iconic-art-print-bundle-gencon-special-offer/
@@ -6743,8 +6744,8 @@ products:
       - ea
     settingsBasis: derived
     categoryBasis: unknown
-    status: suspected-discontinued
-    availability: unknown
+    status: current
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceUsd: 24.99
     url: https://eshop.para-bellum.com/product/first-blood-fishgnome-john-fishtblood/
@@ -9343,16 +9344,17 @@ products:
       - ea
     settingsBasis: derived
     category: game-accessory
-    categoryBasis: code
+    categoryBasis: mapped
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceUsd: 16.99
     url: https://eshop.para-bellum.com/product/conquest-objective-markers/
     imageUrl: https://eshop.para-bellum.com/wp-content/uploads/2025/08/1159.jpg
     evidence:
       - legacy-catalog:para-bellum/conquest/hundred-kingdoms/conquest-objective-markers
+      - mfr-para-bellum:585
   - id: para-bellum/PBW8901
     name: Bases and Stands – Infantry
     manufacturer: para-bellum
