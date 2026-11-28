@@ -17,6 +17,22 @@ products:
     evidence:
       - arc-gw-webstore:/en-GB/Chaos-Black-Spray-UK
       - arc-gw-webstore:/en-GB/Chaos-Black-Spray-UK;jsessionid=D68F5F3AA02FFF7AE3E9820EE6F4DE21
+  - id: games-workshop/99209999041
+    name: Corax White Spray
+    manufacturer: games-workshop
+    productCode: '99209999041'
+    sku: '99209999041'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: code
+    roleBasis: unknown
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 10.0
+    url: http://www.games-workshop.com:80/en-GB/Corax-White-Spray-Global
+    evidence:
+      - arc-gw-webstore:/en-GB/Corax-White-Spray-Global
   - id: games-workshop/99209999042
     name: Chaos Black Spray
     manufacturer: games-workshop
@@ -645,6 +661,25 @@ products:
       - ret-goblingaming:plastic-glue
       - ret-radaddel:/citadel-plastic-glue
       - ret-radaddel:citadel-plastic-glue
+  - id: games-workshop/99220101002
+    name: Citadel I.D. Tag - Dark Angels
+    manufacturer: games-workshop
+    productCode: '99220101002'
+    sku: '99220101002'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 4.0
+    url: http://www.games-workshop.com:80/en-GB/Dark-Angel-Tag
+    evidence:
+      - arc-gw-webstore:/en-GB/Dark-Angel-Tag
   - id: games-workshop/99220101005
     name: Citadel I.D. Tag - Blood Angels
     manufacturer: games-workshop
@@ -665,6 +700,26 @@ products:
     evidence:
       - arc-gw-webstore:/en-GB/Blood-Angel-Tag
       - arc-gw-webstore:/en-GB/Blood-Angels-Tag
+  - id: games-workshop/99220101006
+    name: 'Codex: Deathwatch (Enhanced)'
+    manufacturer: games-workshop
+    productCode: '99220101006'
+    sku: '99220101006'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 29.99
+    url: https://www.games-workshop.com/en-GB/Codex-Deathwatch-IPAD-2016
+    evidence:
+      - arc-gw-webstore:/en-GB/Codex-Deathwatch-IPAD-2016
+      - arc-gw-webstore:/en-GB/Codex-Deathwatch-Tablet-2016
   - id: games-workshop/99220101018
     name: IRON HANDS DICE SET
     manufacturer: games-workshop
@@ -859,7 +914,7 @@ products:
     category: game-accessory
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 33.15
     url: https://www.gamenerdz.com/warhammer-40k-raven-guard-dice-set
@@ -953,10 +1008,15 @@ products:
     settingsBasis: derived
     category: game-accessory
     categoryBasis: code
-    status: discontinued
+    status: current
+    availability: out_of_stock
     firstSeen: '2026-07-23'
+    priceCad: 34.85
+    url: https://tistaminis.com/products/warhammer-40000-space-marines-dice-pre-order
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2026_09_99220101041_SpaceMarinesDice2.jpg?v=1789782491
     evidence:
       - mfr-gw-trade:99220101032
+      - ret-tistaminis:warhammer-40000-space-marines-dice-pre-order
   - id: games-workshop/99220101034
     name: 'WARHAMMER 40000: SPACE WOLVES DICE'
     manufacturer: games-workshop
@@ -1243,7 +1303,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: game-accessory
-    categoryBasis: mapped
+    categoryBasis: code
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
@@ -1355,7 +1415,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: game-accessory
-    categoryBasis: mapped
+    categoryBasis: code
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
@@ -1733,7 +1793,7 @@ products:
       - warhammer-40k
     settingsBasis: derived
     category: game-accessory
-    categoryBasis: mapped
+    categoryBasis: code
     status: current
     firstSeen: '2026-07-13'
     url: https://www.gamenerdz.com/warhammer-40k-astra-militarum-commissar-yarrick-dice-16
@@ -3396,7 +3456,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 17.55
     priceEur: 20.5
-    priceCad: 33.15
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-cities-of-sigmar-dice-set-16ct
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/99220202003_CoSDICE2.jpg?v=1778867293
     evidence:
@@ -3465,7 +3525,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 17.55
     priceEur: 20.5
-    priceCad: 33.15
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-sylvaneth-dice-set-16ct
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_99220204005_SylvanethDice2.jpg?v=1774630429
     evidence:
@@ -3841,7 +3901,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 15.6
     priceEur: 17.5
-    priceCad: 33.15
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-ossiarch-bonereapers-dice-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_02_99220207019_OssiarchBonereapersDice02.jpg?v=1771591014
     evidence:
@@ -4041,7 +4101,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceEur: 21.7
-    priceCad: 33.15
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-lumineth-realm-lords-dice-set-4th-edition
     imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/134124-lumineth-realm-lords-dice-set-99220210003-1.webp?v=1781230261
     evidence:
@@ -4114,7 +4174,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 17.55
-    priceCad: 33.15
+    priceCad: 34.85
     url: https://www.gamenerdz.com/warhammer-age-of-sigmar-daughters-of-khaine-dice-set-16ct
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_99220212005_DaughtersofKhaineDice2.jpg?v=1774630815
     evidence:
@@ -4407,6 +4467,25 @@ products:
     firstSeen: '2026-07-23'
     evidence:
       - mfr-gw-trade:99220299045
+  - id: games-workshop/99220299046
+    name: Combat Gauge
+    manufacturer: games-workshop
+    productCode: '99220299046'
+    sku: '99220299046'
+    gameSystems:
+      - age-of-sigmar
+    gameSystemsBasis: code
+    settings:
+      - age-of-sigmar
+    settingsBasis: derived
+    category: game-accessory
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 20.0
+    url: http://www.games-workshop.com:80/en-GB/Combat-Gauge
+    evidence:
+      - arc-gw-webstore:/en-GB/Combat-Gauge
   - id: games-workshop/99220299048
     name: Warhammer Age Of Sigmar Rangefinder
     manufacturer: games-workshop
@@ -6730,7 +6809,7 @@ products:
     firstSeen: '2026-08-21'
     priceGbp: 30.6
     priceEur: 36.9
-    priceCad: 59.5
+    priceCad: 61.2
     url: https://www.goblingaming.co.uk/products/blood-bowl-sevens-pitch-2026
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/99220999033_BloodBowlSevensPitch04.jpg?v=1786117833
     evidence:
@@ -7669,7 +7748,7 @@ products:
     category: game-accessory
     categoryBasis: code
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 45.05
     url: https://tistaminis.com/products/the-old-world-tomb-kings-of-khemri-dice
@@ -7677,6 +7756,7 @@ products:
     evidence:
       - mfr-gw-trade:99222717001
       - ret-tistaminis:the-old-world-tomb-kings-of-khemri-dice
+      - ret-tistaminis:the-old-world-tomb-kings-of-khemri-dice-pre-order
   - id: games-workshop/99222720001
     name: 'THE OLD WORLD: GRAND CATHAY DICE'
     manufacturer: games-workshop
@@ -7722,7 +7802,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 24.3
     priceEur: 28.3
-    priceCad: 45.9
+    priceCad: 47.6
     url: https://www.gamenerdz.com/warhammer-the-old-world-modular-movement-trays
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-05-10-99222799001-WarhammerTheOldWorldModularMovementTrays.jpg?v=1704461153
     evidence:
@@ -7750,7 +7830,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceCad: 45.05
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-the-old-world-dice-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/https___trade.games-workshop.com_assets_2024_01_TR-05-54-99222799002-WHTOWTheOldWorldDiceSet.jpg?v=1760301511
     evidence:
@@ -7866,7 +7946,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 24.75
     priceEur: 28.7
-    priceCad: 46.75
+    priceCad: 48.45
     url: https://www.gamenerdz.com/warhammer-the-horus-heresy-age-of-darkness-dice-set-20
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2025_07_99223099039_HorusHeresyAgeofDarknessDice3.jpg?v=1754037247
     evidence:
@@ -8661,6 +8741,22 @@ products:
       - arc-gw-webstore:/en-GB/170mm-Oval-Base
       - mfr-gw-trade:99229999136
       - ret-goblingaming:170mm-oval-base
+  - id: games-workshop/99229999139
+    name: Citadel I.D. Tag - Crusade Badge
+    manufacturer: games-workshop
+    productCode: '99229999139'
+    sku: '99229999139'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: hobby-auxiliary
+    categoryBasis: code
+    roleBasis: unknown
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 4.0
+    url: http://www.games-workshop.com:80/en-GB/Crusade-Badge-Tag
+    evidence:
+      - arc-gw-webstore:/en-GB/Crusade-Badge-Tag
   - id: games-workshop/99229999140
     name: CITADEL 32MM ROUND BASE SET (100-PACK)
     manufacturer: games-workshop
@@ -9698,6 +9794,7 @@ products:
     evidence:
       - arc-gw-webstore:/en-GB/Cadians-Paint-Drop
       - arc-gw-webstore:/en-GB/Citadel-Palette-Pad
+      - arc-gw-webstore:/en-GB/Daemonettes-Paint-Drop
   - id: games-workshop/99239999080
     name: Citadel Project Box
     manufacturer: games-workshop
@@ -10189,7 +10286,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 34.2
     priceEur: 41.0
-    priceCad: 62.9
+    priceCad: 64.6
     url: https://www.gamenerdz.com/citadel-stormvault-skirmish-case
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/TR-60-37-99239999124-StormvaultSkirmishCase.jpg?v=1697212540
     evidence:
@@ -10217,7 +10314,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 62.55
     priceEur: 73.7
-    priceCad: 114.75
+    priceCad: 119.0
     url: https://www.gamenerdz.com/warhammer-stormvault-combat-case
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2024_10_99239999126_StormvaultCombatCase4.jpg?v=1728659783
     evidence:
@@ -10244,7 +10341,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 3.6
-    priceCad: 6.8
+    priceCad: 7.05
     url: https://www.gamenerdz.com/warhammer-colour-painting-handle
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_99239999127_WarhammerColourPaintingHandleMKIII3.jpg?v=1774029075
     evidence:
@@ -10271,7 +10368,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 8.1
     priceEur: 10.8
-    priceCad: 15.3
+    priceCad: 15.55
     url: https://www.gamenerdz.com/warhammer-servo-skull-palette
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2024_10_99239999128_WarhammerServoSkullPalette2.jpg?v=1728659722
     evidence:
@@ -10349,7 +10446,7 @@ products:
     firstSeen: '2026-07-13'
     priceGbp: 11.25
     priceEur: 11.9
-    priceCad: 20.4
+    priceCad: 21.25
     url: https://www.gamenerdz.com/warhammer-colour-tool-set
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/https___trade.games-workshop.com_assets_2026_03_99239999141_WarhammerColourToolSet4.jpg?v=1774029056
     evidence:

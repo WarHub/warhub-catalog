@@ -12,6 +12,41 @@ conflicts:
       - ean: '5061060704463'
         sources:
           - ret-gamenerdz
+  - type: ean-mismatch
+    entity: warlord-games/403411002
+    chosen: '5060917994545'
+    assertions:
+      - ean: '5060917994545'
+        sources:
+          - mfr-warlord-store
+          - ret-goblingaming
+      - ean: '9781472863874'
+        sources:
+          - ret-radaddel
+  - type: ean-mismatch
+    entity: warlord-games/452610002
+    chosen: '5060917996587'
+    assertions:
+      - ean: '5060917996587'
+        sources:
+          - legacy-catalog
+          - ret-goblingaming
+          - ret-tistaminis
+      - ean: '5061106610369'
+        sources:
+          - mfr-warlord-store
+  - type: unresolved-bundle
+    bundle: warlord-games/4099300010
+    component: warlord-games/401013001
+    missing:
+      - warlord-games/401013001
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-mek-pre-order
+    name: 'ORKS: MEK'
+    candidates:
+      - games-workshop/99070103004
+      - games-workshop/99120103140
   - type: ambiguous-join
     keys:
       - arc-wargameportal:/products/clawlord
@@ -21,11 +56,59 @@ conflicts:
       - games-workshop/99120206066
   - type: ambiguous-join
     keys:
+      - ret-tistaminis:orks-trukk-pre-order
+    name: 'ORKS: TRUKK'
+    candidates:
+      - games-workshop/99120103083
+      - games-workshop/99120103139
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-boyz-pre-order
+    name: 'ORKS: BOYZ'
+    candidates:
+      - games-workshop/99120103091
+      - games-workshop/99120103136
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:orks-warbikers-pre-order
+    name: 'ORKS: WARBIKERS'
+    candidates:
+      - games-workshop/99120103096
+      - games-workshop/99120103138
+  - type: ambiguous-join
+    keys:
       - arc-wargameportal:/products/alchemite-warforger
     name: Alchemite Warforger
     candidates:
       - games-workshop/99120202039
       - games-workshop/99120202069
+  - type: ambiguous-join
+    keys:
+      - ret-tistaminis:warhammer-40000-orks-dice-pre-order
+    name: 'WARHAMMER 40000: ORKS DICE'
+    candidates:
+      - games-workshop/99220103005
+      - games-workshop/99220103007
+  - type: multi-code-entity
+    manufacturer: warlord-games
+    codes:
+      - '401013001'
+      - '403411002'
+    keys:
+      - legacy-catalog:warlord-games/bolt-action/general/soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
+      - mfr-warlord-store:soldier-of-fortune-22-frankly-i-had-enjoyed-the-war-lieutenant-general-sir-adrian-carton-de-wiart-vc
+      - ret-goblingaming:armies-of-the-united-states-book-bolt-action
+      - ret-radaddel:/armies-of-the-united-states-third-edition-englisch
+      - ret-radaddel:armies-of-the-united-states-third-edition-englisch
+      - ret-tistaminis:bolt-action-american-armies-of-the-united-states-2025
+  - type: multi-code-entity
+    manufacturer: warlord-games
+    codes:
+      - '401015501'
+      - '409915506'
+    keys:
+      - mfr-warlord-store:armies-of-frances-and-marie-pierre-koenig-book-miniature
+      - ret-tistaminis:bolt-action-armies-of-france
   - type: multi-code-entity
     manufacturer: wyrd-games
     codes:

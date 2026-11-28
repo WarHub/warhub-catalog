@@ -61,6 +61,25 @@ products:
     url: https://www.games-workshop.com/en-GB/Bonesinger-2017-mto
     evidence:
       - arc-gw-webstore:/en-GB/Bonesinger-2017-mto
+  - id: games-workshop/99110105133
+    name: Colonel Schaeffers Last Chancers
+    manufacturer: games-workshop
+    productCode: '99110105133'
+    sku: '99110105133'
+    gameSystems:
+      - warhammer-40k
+    gameSystemsBasis: code
+    settings:
+      - warhammer-40k
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 25.0
+    url: http://www.games-workshop.com:80/en-GB/Colonel-Schaeffers-Last-Chancers
+    evidence:
+      - arc-gw-webstore:/en-GB/Colonel-Schaeffers-Last-Chancers
   - id: games-workshop/99110105165
     name: Cadian Kasrkin
     manufacturer: games-workshop
@@ -211,8 +230,8 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-11-15'
     priceGbp: 33.5
     url: https://www.warhammer.com/en-GB/shop/middle-earth-classic-warg-riders-mto-2026
@@ -712,8 +731,8 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-11-15'
     priceGbp: 57.0
     url: https://www.warhammer.com/en-GB/shop/middle-earth-classic-easterling-warband-mto-2026
@@ -893,8 +912,8 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-11-15'
     priceGbp: 37.0
     url: https://www.warhammer.com/en-GB/shop/middle-earth-classic-mordor-troll-mto-2026
@@ -1100,8 +1119,8 @@ products:
     settingsBasis: derived
     category: miniatures
     categoryBasis: code
-    status: current
-    availability: in_stock
+    status: suspected-discontinued
+    availability: unknown
     firstSeen: '2026-11-15'
     priceGbp: 61.0
     url: https://www.warhammer.com/en-GB/shop/middle-earth-classic-ringwraith-on-fell-beast-mto-2026
@@ -3379,6 +3398,21 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Chaos-Daemons-Furies
     evidence:
       - arc-gw-webstore:/en-GB/Chaos-Daemons-Furies
+  - id: games-workshop/99119915052
+    name: Daemonettes on Steeds of Slaanesh
+    manufacturer: games-workshop
+    productCode: '99119915052'
+    sku: '99119915052'
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    category: miniatures
+    categoryBasis: code
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 27.5
+    url: https://www.games-workshop.com/en-GB/Daemonettes-on-Steeds-of-Slaanesh
+    evidence:
+      - arc-gw-webstore:/en-GB/Daemonettes-on-Steeds-of-Slaanesh
   - id: games-workshop/99119915054
     name: The Blue Scribes
     manufacturer: games-workshop
@@ -4254,6 +4288,22 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Caliban-Green-Water-Pot-and-Bitz-Box?
     evidence:
       - arc-gw-webstore:/en-GB/Caliban-Green-Water-Pot-and-Bitz-Box
+  - id: games-workshop/99179999022
+    name: 'Citadel Scenery Paint Set: Cursed Wastes'
+    manufacturer: games-workshop
+    productCode: '99179999022'
+    sku: '99179999022'
+    gameSystemsBasis: not-applicable
+    settingsBasis: not-applicable
+    category: paint
+    categoryBasis: code
+    roleBasis: unknown
+    status: discontinued
+    firstSeen: '2026-11-28'
+    priceGbp: 25.0
+    url: https://www.games-workshop.com/en-GB/Cursed-Wastes-Paint-Set
+    evidence:
+      - arc-gw-webstore:/en-GB/Cursed-Wastes-Paint-Set
   - id: games-workshop/99179999023
     name: 'Citadel Scenery Paint Set: Blighted Tundra'
     manufacturer: games-workshop
@@ -4521,6 +4571,7 @@ products:
     url: http://www.games-workshop.com:80/en-GB/Citadel-Basecoat-Brush
     evidence:
       - arc-gw-webstore:/en-GB/Citadel-Basecoat-Brush
+      - arc-gw-webstore:/en-GB/Dark-Angels-Paint-Drop
   - id: games-workshop/99199999030
     name: Large Brush
     manufacturer: games-workshop
