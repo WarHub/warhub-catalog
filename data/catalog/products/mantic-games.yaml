@@ -5230,7 +5230,7 @@ products:
     firstSeen: '2026-07-13'
     priceCad: 22.0
     url: https://tistaminis.com/products/mantic-armada-trident-realm-tidal-terrors-booster
-    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/products/MGARR301.jpg?v=1760220954
+    imageUrl: https://cdn.shopify.com/s/files/1/0022/6158/1926/files/Trident-Realm-Tidal-Terrors-box-mockup.png?v=1789177256
     evidence:
       - ret-tistaminis:mantic-armada-trident-realm-tidal-terrors-booster
   - id: mantic-games/MGARR401
@@ -21122,7 +21122,7 @@ products:
     availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 59.0
-    priceCad: 75.0
+    priceCad: 79.99
     url: https://www.manticgames.com/halo-flashpoint/banished/spartan-killers/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/spartan-killers-trio-isolated.webp
     evidence:
@@ -21228,7 +21228,7 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 50.0
-    priceCad: 76.0
+    priceCad: 79.99
     url: https://www.manticgames.com/halo-flashpoint/banished/reinforcements/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/banished-reinforcements-box-isolateds.webp
     evidence:
@@ -26309,6 +26309,7 @@ products:
     firstSeen: '2026-07-07'
     priceGbp: 42.5
     priceUsd: 42.5
+    priceCad: 70.0
     url: https://www.manticgames.com/kings-of-war-champions/arokamorra-company-box/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/06/kings-of-war-champions-arokamorra-company-contents.webp
     description: |-
@@ -26320,6 +26321,7 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/arokamorra-company-box
       - mfr-manticgames:518834
+      - ret-tistaminis:kings-of-war-champions-arokamorra-company-box
   - id: mantic-games/MGKWH113
     name: Ogre Battalion
     manufacturer: mantic-games
@@ -26703,6 +26705,29 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/kings-of-war-giant
       - mfr-manticgames:1478
+  - id: mantic-games/MGKWH402
+    name: Ogre Mammoth
+    manufacturer: mantic-games
+    productCode: MGKWH402
+    sku: MGKWH402
+    ean: '5060924988858'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 60.0
+    url: https://www.manticgames.com/kings-of-war/ogres/mammoth/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/ogres-mammoth-isolated-2.webp
+    evidence:
+      - mfr-manticgames:563230
   - id: mantic-games/MGKWHF101
     name: Halfling Army DISCONTINUED
     manufacturer: mantic-games
@@ -27878,6 +27903,29 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/abyssal-dwarf-mega-army
       - mfr-manticgames:109708
+  - id: mantic-games/MGKWK115
+    name: Dravak Dalken’s Company
+    manufacturer: mantic-games
+    productCode: MGKWK115
+    sku: MGKWK115
+    ean: '5060924988971'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 42.5
+    url: https://www.manticgames.com/kings-of-war-champions/dravak-dalkens-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarfs-champions-box.webp
+    evidence:
+      - mfr-manticgames:563240
   - id: mantic-games/MGKWK201
     name: Abyssal Dwarf Grotesque Champion
     manufacturer: mantic-games
@@ -27902,6 +27950,71 @@ products:
     evidence:
       - mfr-manticgames:109778
       - ret-gamenerdz:/kings-of-war-abyssal-dwarf-grotesque-champion
+  - id: mantic-games/MGKWK202
+    name: Abyssal Dwarf Great Winged Halfbreed
+    manufacturer: mantic-games
+    productCode: MGKWK202
+    sku: MGKWK202
+    ean: '5060924988810'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 50.0
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/great-winged-halfbreed-2026/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarfs-greater-winged-halfbreed-1.webp
+    evidence:
+      - mfr-manticgames:563226
+  - id: mantic-games/MGKWK203
+    name: Abyssal Dwarfs Dravak Dalken
+    manufacturer: mantic-games
+    productCode: MGKWK203
+    sku: MGKWK203
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 15.0
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/dravak-dalken/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/dravak-dalkan-isolated.webp
+    evidence:
+      - mfr-manticgames:564719
+  - id: mantic-games/MGKWK204
+    name: Abyssal Dwarf Halfbreed Lord
+    manufacturer: mantic-games
+    productCode: MGKWK204
+    sku: MGKWK204
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 15.0
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/halfbreed-lord/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarf-halfbreed-lord.webp
+    evidence:
+      - mfr-manticgames:564365
   - id: mantic-games/MGKWK301
     name: Abyssal Dwarf Slave Orc Gore Riders DISCONTINUED
     manufacturer: mantic-games
@@ -27970,6 +28083,52 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/abyssal-dwarf-blacksouls-decimators
       - mfr-manticgames:109714
+  - id: mantic-games/MGKWK303
+    name: Abyssal Dwarf Bastion Battlegroup
+    manufacturer: mantic-games
+    productCode: MGKWK303
+    sku: MGKWK303
+    ean: '5060924988803'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 50.0
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/bastion-battlegroup/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarf-bastion-battlegroup-isolated.webp
+    evidence:
+      - mfr-manticgames:563225
+  - id: mantic-games/MGKWK304
+    name: Abyssal Dwarf Infernox Berserkers
+    manufacturer: mantic-games
+    productCode: MGKWK304
+    sku: MGKWK304
+    ean: '5060924988834'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 22.5
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/infernox-berserkers/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarf-infernox-berskers-isolated.webp
+    evidence:
+      - mfr-manticgames:563228
   - id: mantic-games/MGKWK401
     name: Abyssal Dwarf Hellfane
     manufacturer: mantic-games
@@ -28039,6 +28198,52 @@ products:
       - ret-gamenerdz:/kings-of-war-abyssal-dwarf-grotesques-regiment
       - ret-radaddel:/abyssal-dwarf-grotesques-regiment
       - ret-radaddel:abyssal-dwarf-grotesques-regiment
+  - id: mantic-games/MGKWK403
+    name: Abyssal Dwarf War Engine Pack
+    manufacturer: mantic-games
+    productCode: MGKWK403
+    sku: MGKWK403
+    ean: '5060924988827'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 35.0
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/war-engine-pack/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarf-war-engines-isolated-all.webp
+    evidence:
+      - mfr-manticgames:563227
+  - id: mantic-games/MGKWK404
+    name: Abyssal Dwarf Desolator
+    manufacturer: mantic-games
+    productCode: MGKWK404
+    sku: MGKWK404
+    ean: '5060924988919'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 42.5
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/desolator/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarfs-desolator-isolated-1.webp
+    evidence:
+      - mfr-manticgames:563234
   - id: mantic-games/MGKWL101
     name: Northern Alliance Army (DISCONTINUED)
     manufacturer: mantic-games
@@ -28914,6 +29119,29 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/northern-alliance-cavern-dweller
       - mfr-manticgames:333910
+  - id: mantic-games/MGKWL407
+    name: Northern Alliance Mammoth
+    manufacturer: mantic-games
+    productCode: MGKWL407
+    sku: MGKWL407
+    ean: '5060924988841'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 60.0
+    url: https://www.manticgames.com/kings-of-war/northern-alliance/mammoth/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/northern-alliance-mammoth-isolated-1.webp
+    evidence:
+      - mfr-manticgames:563229
   - id: mantic-games/MGKWM04
     name: 25mm Large Movement Tray Pack – DISCONTINUED
     manufacturer: mantic-games
@@ -30359,6 +30587,30 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/05/kings-of-war-fracture-expansion-book.webp
     evidence:
       - mfr-manticgames:546541
+  - id: mantic-games/MGKWM145
+    name: Kings of War ARROGANCE (Hardback + Free PDF)
+    manufacturer: mantic-games
+    productCode: MGKWM145
+    sku: MGKWM145
+    ean: '5060924988797'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: book
+    categoryBasis: mapped
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 35.0
+    url: https://www.manticgames.com/kings-of-war/books/arrogance-hardback/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/kow-book-3-arrogance.webp
+    evidence:
+      - mfr-manticgames:563223
+      - mfr-manticgames:563224
   - id: mantic-games/MGKWM501
     name: Kings of War Mystery Battalion Box (Contents Worth £200+)
     manufacturer: mantic-games
@@ -33050,7 +33302,7 @@ products:
     categoryBasis: code
     packaging: single
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-07'
     priceGbp: 72.0
     priceUsd: 120.0
@@ -35135,6 +35387,29 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/empire-of-dust-ambush-starter-set-discontinued
       - mfr-manticgames:439661
       - ret-tistaminis:kings-of-war-empire-of-dust-ambush-starter-set
+  - id: mantic-games/MGKWT106
+    name: Naphet-Et-Ahem’s Company
+    manufacturer: mantic-games
+    productCode: MGKWT106
+    sku: MGKWT106
+    ean: '5060924988988'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 42.5
+    url: https://www.manticgames.com/kings-of-war-champions/naphet-et-ahems-company/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/empire-of-dust-champions-box.webp
+    evidence:
+      - mfr-manticgames:563241
   - id: mantic-games/MGKWT111
     name: Empire of Dust Mega Army – DISCONTINED
     manufacturer: mantic-games
@@ -35256,6 +35531,27 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/empire-of-dust-revenant-champion-standard-bearer
       - mfr-manticgames:1396
+  - id: mantic-games/MGKWT204
+    name: Empire of Dust Naphet-Et-Ahem
+    manufacturer: mantic-games
+    productCode: MGKWT204
+    sku: MGKWT204
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 15.0
+    url: https://www.manticgames.com/kings-of-war/empire-of-dust/naphet-et-ahem/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/naphet-at-ahem-isolated.webp
+    evidence:
+      - mfr-manticgames:564714
   - id: mantic-games/MGKWT301
     name: Empire of Dust Skeleton Regiment (CLASSIC)
     manufacturer: mantic-games
@@ -36605,6 +36901,29 @@ products:
     evidence:
       - legacy-catalog:mantic-games/kings-of-war/general/latheal-voidheart
       - mfr-manticgames:537172
+  - id: mantic-games/MGKWV205
+    name: Twilight Kin Command Pack
+    manufacturer: mantic-games
+    productCode: MGKWV205
+    sku: MGKWV205
+    ean: '5060924988926'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 37.5
+    url: https://www.manticgames.com/kings-of-war/twilight-kin/command-pack/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/twilight-kin-command-pack-renders-preview-v3.webp
+    evidence:
+      - mfr-manticgames:563235
   - id: mantic-games/MGKWV301
     name: Twilight Kin Corsair Voidwalkers / Fleetwardens Regiment
     manufacturer: mantic-games
@@ -36813,6 +37132,29 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/twilight-kin-goredrake
       - mfr-manticgames:461173
       - ret-tistaminis:kings-of-war-twilight-kin-gordrake
+  - id: mantic-games/MGKWV402
+    name: Twilight Kin Void Shard
+    manufacturer: mantic-games
+    productCode: MGKWV402
+    sku: MGKWV402
+    ean: '5060924988933'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 37.5
+    url: https://www.manticgames.com/kings-of-war/twilight-kin/void-shard/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/twilight-kin-voidshard-isolated-1.webp
+    evidence:
+      - mfr-manticgames:563236
   - id: mantic-games/MGKWV501
     name: Twilight Kin One-Click Ultimate Bundle DISCONTINUED
     manufacturer: mantic-games
@@ -37479,6 +37821,52 @@ products:
       - legacy-catalog:mantic-games/kings-of-war/general/yan-regiment
       - mfr-manticgames:533927
       - ret-gamenerdz:/kings-of-war-4e-yan-regiment
+  - id: mantic-games/MGKWX307
+    name: Xirkaali Yan Vayu Cavalry Regiment
+    manufacturer: mantic-games
+    productCode: MGKWX307
+    sku: MGKWX307
+    ean: '5060924988940'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 37.5
+    url: https://www.manticgames.com/kings-of-war/xirkaali/yan-vayu-cavalry/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/xirkaali-yan-vayu-cavalry-brotherhood-isolated.webp
+    evidence:
+      - mfr-manticgames:563237
+  - id: mantic-games/MGKWX308
+    name: Xirkaali Shaoquan Janissaries Troop
+    manufacturer: mantic-games
+    productCode: MGKWX308
+    sku: MGKWX308
+    ean: '5060924988964'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 40.0
+    url: https://www.manticgames.com/kings-of-war/xirkaali/shaoquan-janissaries/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/xirkaali-shaoquan-janissaries-isolated-2.webp
+    evidence:
+      - mfr-manticgames:563239
   - id: mantic-games/MGKWX401
     name: Xirkaali Gokluu Dragon
     manufacturer: mantic-games
@@ -37583,6 +37971,29 @@ products:
       - ret-gamenerdz:/kings-of-war-4e-xirkaali-war-engines
       - ret-goblingaming:xirkaali-war-engines-kings-of-war
       - ret-tistaminis:kings-of-war-xirkaali-war-engines
+  - id: mantic-games/MGKWX404
+    name: Xirkaali Yan Kite Rider
+    manufacturer: mantic-games
+    productCode: MGKWX404
+    sku: MGKWX404
+    ean: '5060924988957'
+    eanConfidence: confirmed
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 22.5
+    url: https://www.manticgames.com/kings-of-war/xirkaali/yan-kite-rider/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/xirkaali-kiterider-isolated-1.webp
+    evidence:
+      - mfr-manticgames:563238
   - id: mantic-games/MGLE101
     name: 'League of Infamy: The Board Game – DISCONTINUED'
     manufacturer: mantic-games
@@ -39775,7 +40186,7 @@ products:
     category: terrain
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceGbp: 15.0
     url: https://www.manticgames.com/terrain-crate/modern-terrain-crate/haunted-manor/
@@ -40945,7 +41356,7 @@ products:
     category: game-accessory
     categoryBasis: mapped
     status: current
-    availability: out_of_stock
+    availability: in_stock
     firstSeen: '2026-07-13'
     priceCad: 90.0
     url: https://tistaminis.com/products/terraincrate-6x4-snowfield-battle-mat
@@ -52375,7 +52786,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 94.99
+    priceGbp: 144.0
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/forge-fathers/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-forge-father-strike-force-bundle-correct.webp
@@ -52445,7 +52856,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-07'
-    priceGbp: 94.99
+    priceGbp: 116.67
     priceUsd: 95.0
     url: https://www.manticgames.com/firefight/mazon-labs/strike-force-deal/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2024/09/firefight-mazon-labs-strike-force-bundle-correct.webp
@@ -67132,6 +67543,108 @@ products:
     evidence:
       - legacy-catalog:mantic-games/armada/general/armada-rulebook-espanol
       - mfr-manticgames:361405
+  - id: mantic-games/arrogance-abyssal-dwarf-new-releases-bundle
+    name: 'Arrogance: Abyssal Dwarf New Releases Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 185.46
+    url: https://www.manticgames.com/kings-of-war/abyssal-dwarfs/arrogance-new-releases-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/abyssal-dwarfs-arrogance-bundle.webp
+    evidence:
+      - mfr-manticgames:565329
+  - id: mantic-games/arrogance-northern-alliance-new-army-bundle
+    name: 'Arrogance: Northern Alliance New Army Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 168.55
+    url: https://www.manticgames.com/kings-of-war/northern-alliance/arrogance-new-army-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/northern-alliance-arrogance-bundle-v2.webp
+    evidence:
+      - mfr-manticgames:565332
+  - id: mantic-games/arrogance-ogres-new-army-bundle
+    name: 'Arrogance: Ogres New Army Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    category: miniatures
+    categoryBasis: code
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 168.55
+    url: https://www.manticgames.com/kings-of-war/ogres/arrogance-new-army-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/ogres-arrogance-bundle-v2.webp
+    evidence:
+      - mfr-manticgames:565333
+  - id: mantic-games/arrogance-twilight-kin-new-releases-bundle
+    name: 'Arrogance: Twilight Kin New Releases Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 97.42
+    url: https://www.manticgames.com/kings-of-war/twilight-kin/arrogance-new-releases-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/twilight-kin-arrogance-bundle-v4.webp
+    evidence:
+      - mfr-manticgames:565330
+  - id: mantic-games/arrogance-xirkaali-new-releases-bundle
+    name: 'Arrogance: Xirkaali New Releases Bundle'
+    manufacturer: mantic-games
+    sku: BUNDLE
+    gameSystems:
+      - kings-of-war
+    gameSystemsBasis: mapped
+    settings:
+      - pannithor
+    settingsBasis: derived
+    categoryBasis: unknown
+    packaging: bundle
+    status: current
+    availability: in_stock
+    firstSeen: '2026-11-28'
+    priceGbp: 118.68
+    url: https://www.manticgames.com/kings-of-war/xirkaali/arrogance-new-releases-bundle/
+    imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/xirkaali-arrogance-bundle.webp
+    evidence:
+      - mfr-manticgames:565331
   - id: mantic-games/asterian-nemrath-mantic-direct
     name: Asterian Nem’Rath (Mantic Direct)
     manufacturer: mantic-games
@@ -70876,7 +71389,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 146.4
+    priceGbp: 120.0
     url: https://www.manticgames.com/dungeon-saga-origins/all-in-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/01/dungeon-saga-origins-all-in-bundle.webp
     evidence:
@@ -70897,7 +71410,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 72.96
+    priceGbp: 58.05
     url: https://www.manticgames.com/dungeon-saga-origins/all-new-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2025/01/dungeon-saga-origins-all-new-bundle.webp
     evidence:
@@ -72936,7 +73449,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-11-15'
-    priceGbp: 85.53
+    priceGbp: 130.0
     url: https://www.manticgames.com/black-friday/forge-fathers-black-friday-strike-force/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/forge-fathers-strike-force-deal-w-sticker.webp
     evidence:
@@ -72981,7 +73494,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-11-15'
-    priceGbp: 130.0
+    priceGbp: 103.64
     url: https://www.manticgames.com/black-friday/mazon-labs-black-friday-strike-force/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/mazon-labs-strike-force-deal-w-sticker.webp
     evidence:
@@ -74256,7 +74769,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 34.45
+    priceGbp: 29.9
     url: https://www.manticgames.com/hellboy/hellboy-the-roleplaying-game-limited-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2023/07/hellboy-rpg-bundle.png
     evidence:
@@ -74486,18 +74999,13 @@ products:
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/06/jiralhanae-fireteam-bundle-v2.webp
     evidence:
       - mfr-manticgames:550941
-  - id: mantic-games/kings-of-war-2-book-library-bundle
-    name: Kings of War 2-Book Library Bundle
+  - id: mantic-games/kings-of-war-2-book-library-bundle-discontinued
+    name: Kings of War 2-Book Library Bundle (DISCONTINUED)
     manufacturer: mantic-games
     sku: BUNDLE
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: mapped
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: book
-    categoryBasis: mapped
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
     packaging: bundle
     status: current
     availability: in_stock
@@ -74523,18 +75031,13 @@ products:
     url: https://www.gamenerdz.com/kings-of-war-2nd-edition-uncharted-empires-ding-dent
     evidence:
       - ret-gamenerdz:/kings-of-war-2nd-edition-uncharted-empires-ding-dent
-  - id: mantic-games/kings-of-war-3-book-library-bundle
-    name: Kings of War 3-Book Library Bundle
+  - id: mantic-games/kings-of-war-3-book-library-bundle-discontinued
+    name: Kings of War 3-Book Library Bundle (DISCONTINUED)
     manufacturer: mantic-games
     sku: BUNDLE
-    gameSystems:
-      - kings-of-war
-    gameSystemsBasis: mapped
-    settings:
-      - pannithor
-    settingsBasis: derived
-    category: book
-    categoryBasis: mapped
+    gameSystemsBasis: unknown
+    settingsBasis: unknown
+    categoryBasis: unknown
     packaging: bundle
     status: current
     availability: in_stock
@@ -74879,7 +75382,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-11-15'
-    priceGbp: 98.17
+    priceGbp: 155.0
     url: https://www.manticgames.com/black-friday/forces-of-nature-black-friday-battalion/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/forces-of-nature-battalion-deal-w-sticker.webp
     evidence:
@@ -74911,7 +75414,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-11-15'
-    priceGbp: 152.75
+    priceGbp: 99.13
     url: https://www.manticgames.com/black-friday/halflings-black-friday-battalion/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/halflings-batallion-deal-w-sticker.webp
     evidence:
@@ -75189,7 +75692,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-11-15'
-    priceGbp: 127.32
+    priceGbp: 97.8
     url: https://www.manticgames.com/black-friday/ogres-black-friday-battalion/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/11/ogres-batallion-deal-w-sticker.webp
     evidence:
@@ -77999,7 +78502,7 @@ products:
     status: current
     availability: out_of_stock
     firstSeen: '2026-07-13'
-    priceGbp: 164.5
+    priceGbp: 224.0
     url: https://www.manticgames.com/deals-and-offers/big-sci-fi-skirmish-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/03/double-mat-terrain-deal-v2.webp
     evidence:
@@ -78372,7 +78875,7 @@ products:
     category: game-accessory
     categoryBasis: mapped
     status: current
-    availability: in_stock
+    availability: out_of_stock
     firstSeen: '2026-07-13'
     priceCad: 90.0
     url: https://tistaminis.com/products/terraincrate-6x4-grim-battlefield-battle-mat2025
@@ -78427,7 +78930,7 @@ products:
     status: current
     availability: in_stock
     firstSeen: '2026-07-13'
-    priceGbp: 174.3
+    priceGbp: 271.32
     url: https://www.manticgames.com/kings-of-war/forces-of-nature/the-green-ladys-bundle/
     imageUrl: https://www.manticgames.com/wp-content/uploads/2026/05/green-ladys-bundle-v2.webp
     evidence:

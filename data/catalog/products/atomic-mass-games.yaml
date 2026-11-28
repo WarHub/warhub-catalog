@@ -8310,7 +8310,7 @@ products:
       - ret-radaddel:/star-wars-legion-heroes-of-the-rebellion
       - ret-radaddel:star-wars-legion-heroes-of-the-rebellion
   - id: atomic-mass-games/SWQ140
-    name: 'Star Wars: Legion - Guerilla Troopers (PREORDER)'
+    name: 'Star Wars: Legion - Guerilla Troopers'
     manufacturer: atomic-mass-games
     productCode: SWQ140
     sku: AMGSWQ140
@@ -8326,8 +8326,9 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-10-12'
-    url: https://www.gamenerdz.com/star-wars-legion-guerilla-troopers-preorder
+    url: https://www.gamenerdz.com/star-wars-legion-guerilla-troopers
     evidence:
+      - ret-gamenerdz:/star-wars-legion-guerilla-troopers
       - ret-gamenerdz:/star-wars-legion-guerilla-troopers-preorder
   - id: atomic-mass-games/SWQ141
     name: 'Star Wars: Legion - Jedi BARC Speeder (PREORDER)'
@@ -8857,7 +8858,7 @@ products:
       - ret-radaddel:/star-wars-legion-kashyyyk-wookie-warriors
       - ret-radaddel:star-wars-legion-kashyyyk-wookie-warriors
   - id: atomic-mass-games/SWQ182
-    name: 'Star Wars: Legion - 224th Armored Division Army Box (Special Edition) (PREORDER)'
+    name: 'Star Wars: Legion - 224th Armored Division Army Box (Special Edition)'
     manufacturer: atomic-mass-games
     productCode: SWQ182
     sku: AMGSWQ182
@@ -8873,8 +8874,9 @@ products:
     categoryBasis: code
     status: current
     firstSeen: '2026-10-12'
-    url: https://www.gamenerdz.com/star-wars-legion-224th-armored-division-army-box-special-edition-preorder
+    url: https://www.gamenerdz.com/star-wars-legion-224th-armored-division-army-box-special-edition
     evidence:
+      - ret-gamenerdz:/star-wars-legion-224th-armored-division-army-box-special-edition
       - ret-gamenerdz:/star-wars-legion-224th-armored-division-army-box-special-edition-preorder
   - id: atomic-mass-games/SWQ19
     name: Galactic Republic Starter Set
@@ -10568,7 +10570,7 @@ products:
       - ret-radaddel:/star-wars-legion-mandalorian-warriors
       - ret-radaddel:star-wars-legion-mandalorian-warriors
   - id: atomic-mass-games/SWQ82
-    name: 'Star Wars: Legion - Mandalorian Leaders (PREORDER)'
+    name: 'Star Wars: Legion - Mandalorian Leaders'
     manufacturer: atomic-mass-games
     productCode: SWQ82
     sku: AMGSWQ82
@@ -10576,7 +10578,7 @@ products:
     eanConfidence: confirmed
     gameSystems:
       - star-wars-legion
-    gameSystemsBasis: code
+    gameSystemsBasis: mapped
     settings:
       - star-wars
     settingsBasis: derived
@@ -10586,11 +10588,15 @@ products:
     availability: in_stock
     firstSeen: '2026-07-13'
     priceGbp: 38.24
-    url: https://www.gamenerdz.com/star-wars-legion-mandalorian-leaders-preorder
+    priceEur: 34.95
+    url: https://www.gamenerdz.com/star-wars-legion-mandalorian-leaders
     imageUrl: https://cdn.shopify.com/s/files/1/0022/1947/4990/files/AMGSWQ82_1.webp?v=1777369338
     evidence:
+      - ret-gamenerdz:/star-wars-legion-mandalorian-leaders
       - ret-gamenerdz:/star-wars-legion-mandalorian-leaders-preorder
       - ret-goblingaming:mandalorian-leaders-star-wars-legion
+      - ret-radaddel:/star-wars-legion-mandalorian-leaders
+      - ret-radaddel:star-wars-legion-mandalorian-leaders
   - id: atomic-mass-games/SWQ89
     name: 'Star Wars: Legion - Range Troopers'
     manufacturer: atomic-mass-games
@@ -12495,26 +12501,6 @@ products:
     url: https://www.gamenerdz.com/star-wars-legion-mandalorian-army-box-special-edition-ding-dent
     evidence:
       - ret-gamenerdz:/star-wars-legion-mandalorian-army-box-special-edition-ding-dent
-  - id: atomic-mass-games/star-wars-legion-mandalorian-leaders
-    name: 'Star Wars: Legion - Mandalorian Leaders'
-    manufacturer: atomic-mass-games
-    sku: '135461'
-    gameSystems:
-      - star-wars-legion
-    gameSystemsBasis: mapped
-    settings:
-      - star-wars
-    settingsBasis: derived
-    categoryBasis: unknown
-    status: current
-    availability: out_of_stock
-    firstSeen: '2026-07-13'
-    priceEur: 34.95
-    url: https://www.radaddel.de/star-wars-legion-mandalorian-leaders
-    imageUrl: https://cdn.shopify.com/s/files/1/0706/8699/8771/files/135461-star-wars-legion-mandalorian-leaders-amgd1288-1.webp?v=1781231879
-    evidence:
-      - ret-radaddel:/star-wars-legion-mandalorian-leaders
-      - ret-radaddel:star-wars-legion-mandalorian-leaders
   - id: atomic-mass-games/star-wars-legion-r2-d2-c-3po
     name: 'Star Wars: Legion – R2-D2 & C-3PO'
     manufacturer: atomic-mass-games
